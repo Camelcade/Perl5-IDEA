@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 
 /**
@@ -26,5 +26,5 @@ import com.perl5.lang.pod.lexer.PodElementTypes;
  */
 public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementTypes
 {
-	IElementType POD_BLOCK = new TemplateDataElementType("POD_BLOCK", PerlLanguage.INSTANCE, POD, POD_OUTER);
+	IElementType POD_BLOCK = new PodTemplatingElementType("POD_BLOCK", PerlLanguage.INSTANCE);
 }

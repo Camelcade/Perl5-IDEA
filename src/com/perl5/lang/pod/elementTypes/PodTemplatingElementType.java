@@ -39,5 +39,4 @@ public class PodTemplatingElementType extends TemplateDataElementType implements
 	{
 		return PodLanguage.INSTANCE;
 	}
-
 }

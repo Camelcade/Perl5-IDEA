@@ -116,7 +116,7 @@ public class PodLexer extends PodLexerGenerated
 
 		IElementType result = super.advance();
 		state = yystate();
-		if (state == LEX_COMMAND_WAITING && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE && result != POD_CODE ||
+		if (state == LEX_COMMAND_WAITING && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE && result != POD_CODE && result != POD_CUT ||
 				state == LEX_COMMAND_READY && result != TokenType.NEW_LINE_INDENT && result != TokenType.WHITE_SPACE && result != POD_NEWLINE && result != POD_CODE)
 		{
 			yybegin(YYINITIAL);
@@ -207,4 +207,18 @@ public class PodLexer extends PodLexerGenerated
 		return POD_CODE;
 	}
 
+	@Override
+	protected IElementType parseCutToken()
+	{
+		int tokenEnd = getTokenEnd();
+		int bufferEnd = getBufferEnd();
+		CharSequence buffer = getBuffer();
+
+		// this is a hack for joined tags from second psi tree, we may do this in separate lexer, to use it only in MultiPsi docs, but it's ok for now
+		if (!(tokenEnd < bufferEnd && buffer.charAt(tokenEnd) == '='))
+		{
+			yybegin(YYINITIAL);
+		}
+		return POD_CUT;
+	}
 }

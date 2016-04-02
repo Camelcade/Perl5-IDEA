@@ -35,6 +35,7 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 %{
 	protected abstract IElementType parseFallback();
 	protected abstract IElementType parseExample();
+	protected abstract IElementType parseCutToken();
 %}
 
 NEW_LINE = \r?\n
@@ -42,6 +43,7 @@ WHITE_SPACE     = [ \t\f]
 HARD_NEW_LINE = {NEW_LINE}({WHITE_SPACE}*{NEW_LINE})+
 NONSPACE = [^ \t\f\r\n]
 EXAMPLE = {WHITE_SPACE}+{NONSPACE}+
+TAG_NAME = [\w]
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." ([0-9][0-9_]*)?
@@ -73,8 +75,8 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 	"=end"			{yybegin(LEX_FORMAT_END);return POD_END;}
 	"=for"			{yybegin(LEX_FORMAT_LINE);return POD_FOR;}
 	"=encoding"		{yybegin(LEX_ENCODING);return POD_ENCODING;}
-	"=cut"			{yybegin(YYINITIAL);return POD_CUT;}
-	"="{NONSPACE}+ 	{yybegin(YYINITIAL);return POD_UNKNOWN;}
+	"=cut"			{return parseCutToken();}
+	"="{TAG_NAME}+ 	{yybegin(YYINITIAL);return POD_UNKNOWN;}
 	{EXAMPLE}		{return parseExample();}
 	{WHITE_SPACE}+ 	{yybegin(LEX_COMMAND_READY);return TokenType.WHITE_SPACE;}
 	{NONSPACE}		{yybegin(YYINITIAL);yypushback(yylength());}
