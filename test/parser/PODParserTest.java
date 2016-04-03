@@ -44,4 +44,9 @@ public class PODParserTest extends PerlParserTestBase
 		doTest("over_recovery", false);
 	}
 
+	public void testBeginRecovery()
+	{
+		doTest("begin_recovery", false);
+	}
+
 }

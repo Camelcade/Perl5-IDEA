@@ -169,19 +169,21 @@ item_section_title ::= section_title_body
 private section_title_body ::= pod_term* POD_NEWLINE*
 
 head1_section ::= POD_HEAD1 [ section_title [head1_section_content]] {pin=1}
-head1_section_content ::= head1_section_item*
+head1_section_content ::= head1_section_item *
 private head1_section_item ::= head2_section | head3_section | head4_section | any_level_item
 
+//private recover_pod_section ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4|POD_OVER|POD_CUT|POD_POD|POD_FOR|POD_BEGIN|POD_ENCODING|POD_UNKNOWN)
+
 head2_section ::= POD_HEAD2 [section_title [head2_section_content]] {pin=1}
-head2_section_content ::= head2_section_item*
+head2_section_content ::= head2_section_item *
 private head2_section_item ::= head3_section | head4_section | any_level_item
 
 head3_section ::= POD_HEAD3 [section_title [head3_section_content]] {pin=1}
-head3_section_content ::= head3_section_item*
+head3_section_content ::= head3_section_item *
 private head3_section_item ::= head4_section | any_level_item
 
 head4_section ::= POD_HEAD4 [section_title [head4_section_content]] {pin=1}
-head4_section_content ::= head4_section_item*
+head4_section_content ::= head4_section_item *
 private head4_section_item ::= any_level_item
 
 over_section ::= over_section_opener  over_section_content over_section_closer {pin=1}
@@ -200,7 +202,7 @@ private begin_section_opener ::= POD_BEGIN pod_section_format {pin=1}
 private begin_section_closer ::= POD_END pod_section_format POD_NEWLINE* {pin=1}
 pod_section_format ::= POD_COLON ? POD_FORMAT_NAME
 begin_section_content ::= POD_FORMATTED_BLOCK | {pod_term|POD_NEWLINE}* {recoverWhile=recover_begin_section}
-private recover_begin_section ::= !(<<eof>>|POD_END)
+private recover_begin_section ::= !(<<eof>>|POD_END|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
 for_section ::= POD_FOR pod_section_format for_section_content POD_NEWLINE *{pin=1}
 for_section_content ::=	POD_FORMATTED_BLOCK	| pod_term *
