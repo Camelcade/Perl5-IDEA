@@ -582,7 +582,6 @@
         <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
-        <quoteHandler fileType="POD file" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
         <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
         <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
@@ -592,6 +591,8 @@
         <lang.psiStructureViewFactory language="Perl5 POD"
                                       implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
         <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
+        <lang.findUsagesProvider language="Perl5 POD"
+                                 implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
         <!--POD settings end -->
 
 

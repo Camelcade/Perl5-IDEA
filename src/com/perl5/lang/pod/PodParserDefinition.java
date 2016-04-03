@@ -43,7 +43,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
 	public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
-
+	public static final TokenSet IDENTIFIERS = TokenSet.create(POD_IDENTIFIER);
 
 	public static final IFileElementType FILE = new PodFileElementType("Plain old document");
 
