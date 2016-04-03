@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.folding;
 
 import com.intellij.codeInsight.folding.CodeFoldingSettings;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.DumbAware;
@@ -29,7 +28,6 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -43,44 +41,12 @@ import java.util.List;
 /**
  * Created by hurricup on 20.05.2015.
  */
-public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementTypes, DumbAware
+public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlElementTypes, DumbAware
 {
 	public static final String PH_CODE_BLOCK = "{code block}";
 
 	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
 
-	/**
-	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
-	 *
-	 * @param element     root element for searching
-	 * @param startMargin beginning margin for collapsable block
-	 * @param endMargin   end margin for collapsable block
-	 * @return list of folding descriptors
-	 */
-	protected static void addDescriptorFor(
-			@NotNull List<FoldingDescriptor> result,
-			@NotNull Document document,
-			@NotNull PsiElement element,
-			int startMargin,
-			int endMargin,
-			int minLines
-	)
-	{
-		if (!(element.getParent() instanceof PerlNamespaceDefinition))
-		{
-
-			TextRange range = element.getTextRange();
-			int startOffset = range.getStartOffset() + startMargin;
-			int endOffset = range.getEndOffset() - endMargin;
-			int startLine = document.getLineNumber(startOffset);
-			int endLine = document.getLineNumber(endOffset);
-
-			if (endLine - startLine > minLines)
-			{
-				result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
-			}
-		}
-	}
 
 	@NotNull
 	@Override
@@ -286,47 +252,6 @@ public class PerlFoldingBuilder extends FoldingBuilderEx implements PerlElementT
 			}
 		}
 
-		return descriptors;
-	}
-
-	/**
-	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
-	 *
-	 * @param root        root element for searching
-	 * @param document    document for searching
-	 * @param c           PsiElement class to search for
-	 * @param startMargin beginning margin for collapsable block
-	 * @param endMargin   end margin for collapsable block
-	 * @param <T>         PsiElement subclass
-	 * @return list of folding descriptors
-	 */
-	protected <T extends PsiElement> List<FoldingDescriptor> getDescriptorsFor(
-			@NotNull PsiElement root,
-			@NotNull Document document,
-			Class<? extends T> c,
-			int startMargin,
-			int endMargin,
-			int minLines
-	)
-	{
-		List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
-
-		// Anon arrays
-		for (PsiElement block : PsiTreeUtil.findChildrenOfType(root, c))
-		{
-			if (!(block.getParent() instanceof PerlNamespaceDefinition))
-			{
-
-				TextRange range = block.getTextRange();
-				int startOffset = range.getStartOffset() + startMargin;
-				int endOffset = range.getEndOffset() - endMargin;
-				int startLine = document.getLineNumber(startOffset);
-				int endLine = document.getLineNumber(endOffset);
-
-				if (endLine - startLine > minLines)
-					descriptors.add(new FoldingDescriptor(block.getNode(), new TextRange(startOffset, endOffset)));
-			}
-		}
 		return descriptors;
 	}
 
