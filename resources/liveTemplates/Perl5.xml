@@ -25,8 +25,8 @@
     </template>
     <template name="sub" value="sub $NAME$ &#10;{&#10;    my ($ARGUMENTS$) = @_;&#10;    $END$&#10;}"
               description="new sub" toReformat="true" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="&quot;subname&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="ARGUMENTS" expression="&quot;$self&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
