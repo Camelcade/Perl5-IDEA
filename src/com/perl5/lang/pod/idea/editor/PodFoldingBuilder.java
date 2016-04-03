@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.idea.folding;
+package com.perl5.lang.pod.idea.editor;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingDescriptor;

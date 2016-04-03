@@ -588,9 +588,10 @@
         <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
 
         <lang.foldingBuilder language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.folding.PodFoldingBuilder"/>
+                             implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
         <lang.psiStructureViewFactory language="Perl5 POD"
                                       implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
+        <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
         <!--POD settings end -->
 
 
