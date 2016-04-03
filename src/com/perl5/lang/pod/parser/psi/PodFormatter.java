@@ -17,9 +17,8 @@
 package com.perl5.lang.pod.parser.psi;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 03.04.2016.
  */
-public interface PodFormatterX extends PodStubBasedSection, PodFormatter
+public interface PodFormatter
 {
-
 }

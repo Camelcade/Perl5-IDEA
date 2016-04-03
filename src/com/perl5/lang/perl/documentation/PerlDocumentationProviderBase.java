@@ -1,0 +1,90 @@
+/*
+ * Copyright 2016 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.perl5.lang.perl.documentation;
+
+import com.intellij.lang.documentation.AbstractDocumentationProvider;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.net.URLDecoder;
+
+/**
+ * Created by hurricup on 03.04.2016.
+ */
+public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider
+{
+	@Override
+	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
+	{
+		if (element instanceof PsiFile)
+		{
+			PsiFile podTree = ((PsiFile) element).getViewProvider().getPsi(PodLanguage.INSTANCE);
+
+			if (podTree != null)
+			{
+				return PerlDocUtil.renderPodFile((PodFileImpl) podTree);
+			}
+		}
+		if (element instanceof PodCompositeElement)
+		{
+			return PerlDocUtil.renderElement((PodCompositeElement) element);
+		}
+		return super.generateDoc(element, originalElement);
+	}
+
+
+	@Override
+	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
+	{
+		if (context instanceof PodCompositeElement || context instanceof PerlFile)
+		{
+			try
+			{
+				return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
+			} catch (Exception e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+		return super.getDocumentationElementForLink(psiManager, link, context);
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
+	{
+
+		if (contextElement instanceof PsiFile)
+		{
+			return ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+		}
+		else if (contextElement != null)
+		{
+			return getCustomDocumentationElement(editor, file, contextElement.getParent());
+		}
+
+		return null;
+	}
+}

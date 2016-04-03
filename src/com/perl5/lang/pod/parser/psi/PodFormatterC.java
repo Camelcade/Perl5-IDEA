@@ -19,6 +19,6 @@ package com.perl5.lang.pod.parser.psi;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFormatterC
+public interface PodFormatterC extends PodFormatter
 {
 }

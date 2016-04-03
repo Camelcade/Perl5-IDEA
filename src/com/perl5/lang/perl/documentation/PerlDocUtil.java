@@ -353,7 +353,7 @@ public class PerlDocUtil implements PerlElementTypes
 		return result.isEmpty() ? null : result.get(0);
 	}
 
-	protected static String renderPodFile(PodFileImpl file)
+	public static String renderPodFile(PodFileImpl file)
 	{
 		StringBuilder builder = new StringBuilder();
 
@@ -371,7 +371,7 @@ public class PerlDocUtil implements PerlElementTypes
 	}
 
 	@Nullable
-	protected static String renderElement(PodCompositeElement element)
+	public static String renderElement(PodCompositeElement element)
 	{
 		if (element == null)
 			return null;

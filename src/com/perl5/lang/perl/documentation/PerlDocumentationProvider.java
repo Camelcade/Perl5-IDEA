@@ -16,36 +16,27 @@
 
 package com.perl5.lang.perl.documentation;
 
-import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.net.URLDecoder;
-import java.util.List;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PerlDocumentationProvider extends AbstractDocumentationProvider implements PerlElementTypes, PerlElementPatterns
+public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns
 {
 	private static final TokenSet myForceAsOp = TokenSet.create(
 			RESERVED_Q,
@@ -91,59 +82,6 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 				);
 	}
 
-	@Override
-	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
-	{
-		if (element instanceof PsiFile)
-		{
-			PsiFile podTree = ((PsiFile) element).getViewProvider().getPsi(PodLanguage.INSTANCE);
-
-			if( podTree != null )
-			{
-				return PerlDocUtil.renderPodFile((PodFileImpl) podTree);
-			}
-		}
-		if (element instanceof PodCompositeElement)
-		{
-			return PerlDocUtil.renderElement((PodCompositeElement) element);
-		}
-		return super.generateDoc(element, originalElement);
-	}
-
-	@Nullable
-	@Override
-	public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement)
-	{
-		return super.getQuickNavigateInfo(element, originalElement);
-	}
-
-	@Override
-	public List<String> getUrlFor(PsiElement element, PsiElement originalElement)
-	{
-		return super.getUrlFor(element, originalElement);
-	}
-
-	@Override
-	public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element)
-	{
-		return super.getDocumentationElementForLookupItem(psiManager, object, element);
-	}
-
-	@Override
-	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
-	{
-		if (context instanceof PodCompositeElement || context instanceof PerlFile)
-		{
-			try
-			{
-				return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
-			} catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-		return super.getDocumentationElementForLink(psiManager, link, context);
-	}
 
 	@Nullable
 	@Override
@@ -199,14 +137,6 @@ public class PerlDocumentationProvider extends AbstractDocumentationProvider imp
 			{
 				return PerlDocUtil.resolveDocLink(packageName, contextElement);
 			}
-		}
-		else if (contextElement instanceof PsiFile)
-		{
-			return ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
-		}
-		else
-		{
-			return getCustomDocumentationElement(editor, file, contextElement.getParent());
 		}
 
 		return super.getCustomDocumentationElement(editor, file, contextElement);
