@@ -1,0 +1,22 @@
+POD file
+  PsiOverSectionImpl(PodElementType.OVER_SECTION)
+    PsiElement(PodTokenType.POD_OVER)('=over')
+    PsiElement(PodTokenType.POD_NEWLINE)('\n')
+    PsiOverSectionContentImpl(PodElementType.OVER_SECTION_CONTENT)
+      PsiItemSectionImpl(PodElementType.ITEM_SECTION)
+        PsiElement(PodTokenType.POD_ITEM)('=item')
+        PsiItemSectionTitleImpl(PodElementType.ITEM_SECTION_TITLE)
+          PsiElement(PodTokenType.POD_IDENTIFIER)('this')
+          PsiElement(PodTokenType.POD_IDENTIFIER)('is')
+          PsiElement(PodTokenType.POD_IDENTIFIER)('item')
+          PsiElement(PodTokenType.POD_NEWLINE)('\n')
+    PsiErrorElement:PodTokenType.POD_BACK expected, got '=head1'
+      <empty list>
+  PsiHead1SectionImpl(PodElementType.HEAD_1_SECTION)
+    PsiElement(PodTokenType.POD_HEAD1)('=head1')
+    PsiSectionTitleImpl(PodElementType.SECTION_TITLE)
+      PsiElement(PodTokenType.POD_IDENTIFIER)('this')
+      PsiElement(PodTokenType.POD_IDENTIFIER)('is')
+      PsiElement(PodTokenType.POD_IDENTIFIER)('header')
+    PsiHead1SectionContentImpl(PodElementType.HEAD_1_SECTION_CONTENT)
+      <empty list>

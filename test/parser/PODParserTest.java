@@ -39,4 +39,9 @@ public class PODParserTest extends PerlParserTestBase
 		doTest("hierarchy");
 	}
 
+	public void testOverRecovery()
+	{
+		doTest("over_recovery", false);
+	}
+
 }

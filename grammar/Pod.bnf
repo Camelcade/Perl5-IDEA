@@ -193,7 +193,7 @@ private over_section_item ::=
 	| any_level_item
 item_section ::= POD_ITEM [item_section_title [item_section_content]] {pin=1}
 item_section_content ::= any_level_item +
-private recover_over_section ::= !(<<eof>>|POD_BACK)
+private recover_over_section ::= !(<<eof>>|POD_BACK|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
 begin_section ::= begin_section_opener begin_section_content begin_section_closer  {pin=1}
 private begin_section_opener ::= POD_BEGIN pod_section_format {pin=1}
