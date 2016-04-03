@@ -96,9 +96,13 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 		{
 			return PerlDocUtil.getPerlVarDoc((PerlVariable) contextElement); // fixme try to search doc in package or declaration
 		}
-		if (elementType == REGEX_MODIFIER)
+		else if (elementType == REGEX_MODIFIER)
 		{
 			return PerlDocUtil.getRegexModifierDoc(contextElement);
+		}
+		else if (elementType == VERSION_ELEMENT)
+		{
+			return PerlDocUtil.resolveDocLink("perldata/\"Version Strings\"", contextElement);
 		}
 		else if (isFunc(contextElement))
 		{

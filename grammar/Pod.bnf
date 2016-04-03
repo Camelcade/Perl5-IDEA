@@ -143,6 +143,7 @@ private pod_file_item ::=
 	| head3_section
 	| head4_section
 	| any_level_item
+	| item_section
 }
 
 private any_level_item ::=
