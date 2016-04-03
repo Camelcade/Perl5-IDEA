@@ -43,7 +43,7 @@ WHITE_SPACE     = [ \t\f]
 HARD_NEW_LINE = {NEW_LINE}({WHITE_SPACE}*{NEW_LINE})+
 NONSPACE = [^ \t\f\r\n]
 EXAMPLE = {WHITE_SPACE}+{NONSPACE}+
-TAG_NAME = [\w]
+TAG_NAME = "=" [:jletterdigit:]+ 
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." ([0-9][0-9_]*)?
@@ -76,7 +76,7 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 	"=for"			{yybegin(LEX_FORMAT_LINE);return POD_FOR;}
 	"=encoding"		{yybegin(LEX_ENCODING);return POD_ENCODING;}
 	"=cut"			{return parseCutToken();}
-	"="{TAG_NAME}+ 	{yybegin(YYINITIAL);return POD_UNKNOWN;}
+	{TAG_NAME} 		{yybegin(YYINITIAL);return POD_UNKNOWN;}
 	{EXAMPLE}		{return parseExample();}
 	{WHITE_SPACE}+ 	{yybegin(LEX_COMMAND_READY);return TokenType.WHITE_SPACE;}
 	{NONSPACE}		{yybegin(YYINITIAL);yypushback(yylength());}
