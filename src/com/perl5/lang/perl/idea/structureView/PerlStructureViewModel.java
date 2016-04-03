@@ -62,13 +62,6 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
 		return FILTERS;
 	}
 
-	@NotNull
-	@Override
-	protected Class[] getSuitableClasses()
-	{
-		return super.getSuitableClasses();
-	}
-
 	@Override
 	public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement)
 	{

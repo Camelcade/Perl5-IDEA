@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodTitledSection extends PodSection, PodLinkTarget
+public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement
 {
 	/**
 	 * Returns section title
