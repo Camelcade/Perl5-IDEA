@@ -24,10 +24,11 @@ import com.intellij.lang.Language;
 public class PodLanguage extends Language
 {
 	public static final PodLanguage INSTANCE = new PodLanguage();
+	public static final String NAME = "Perl5 POD";
 
 	public PodLanguage()
 	{
-		super("Perl5 POD");
+		super(NAME);
 	}
 
 	@Override

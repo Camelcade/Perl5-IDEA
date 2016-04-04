@@ -1,0 +1,88 @@
+<!--
+  ~ Copyright 2016 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="Perl5 POD">
+    <template name="=head1" value="=head1 $TEXT$&#10;&#10;$END$&#10;" description="Header level 1" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=head2" value="=head2 $TEXT$&#10;&#10;$END$&#10;" description="Header level 2" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=head3" value="=head3 $TEXT$&#10;&#10;$END$&#10;" description="Header level 3" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=head4" value="=head4 $TEXT$&#10;&#10;$END$&#10;" description="Header level 4" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=over" value="=over $LEVEL$&#10;&#10;=item $END$&#10;&#10;=back&#10;" description="Items list"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="LEVEL" expression="&quot;1&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=begin" value="=begin $FORMAT$ &#10;&#10;$END$&#10;&#10;=end $FORMAT$&#10;"
+              description="Formatted block" toReformat="true" toShortenFQNames="true">
+        <variable name="FORMAT" expression="&quot;html&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=for" value="=for $FORMAT$ $END$ &#10;" description="Formatted item" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="FORMAT" expression="&quot;html&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=encoding" value="=encoding $ENCODING$ &#10;" description="Encoding" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="ENCODING" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="=item" value="=item $TEXT$ &#10;" description="List item" toReformat="true" toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;text&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="false"/>
+            <option name="POD_OVER_NOT_BULLETED" value="true"/>
+        </context>
+    </template>
+    <template name="=item *" value="=item *&#10;&#10;$END$ &#10;" description="Bulleted list item" toReformat="true"
+              toShortenFQNames="true">
+        <context>
+            <option name="POD_COMMAND" value="false"/>
+            <option name="POD_OVER_BULLETED" value="true"/>
+        </context>
+    </template>
+</templateSet>

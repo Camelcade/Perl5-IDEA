@@ -596,6 +596,16 @@
                                  implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
         <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
                                order="first"/>
+
+        <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
         <!--POD settings end -->
 
 

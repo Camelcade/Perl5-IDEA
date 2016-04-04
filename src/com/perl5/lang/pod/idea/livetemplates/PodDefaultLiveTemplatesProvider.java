@@ -14,30 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.idea.livetemplates;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 04.04.2016.
  */
-public interface PodOverSectionContent extends PsiElement, PodElementTypes
+public class PodDefaultLiveTemplatesProvider implements DefaultLiveTemplatesProvider
 {
-	/**
-	 * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
-	 *
-	 * @return true if list should be bulleted
-	 */
-	boolean isBulleted();
+	public static final String[] TEMPLATES = new String[]{
+			"/liveTemplates/Perl5POD"
+	};
 
-	/**
-	 * Returns first list item
-	 *
-	 * @return item or null if not any
-	 */
+	@Override
+	public String[] getDefaultLiveTemplateFiles()
+	{
+		return TEMPLATES;
+	}
+
 	@Nullable
-	PodSectionItem getFirstItem();
+	@Override
+	public String[] getHiddenLiveTemplateFiles()
+	{
+		return null;
+	}
 
 }

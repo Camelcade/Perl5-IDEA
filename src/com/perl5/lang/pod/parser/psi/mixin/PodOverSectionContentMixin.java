@@ -21,6 +21,7 @@ import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -39,10 +40,17 @@ public class PodOverSectionContentMixin extends PodCompositeElementMixin impleme
 	{
 		if (myIsBulleted == null)
 		{
-			PodSectionItem firstItem = findChildByClass(PodSectionItem.class);
+			PodSectionItem firstItem = getFirstItem();
 			myIsBulleted = firstItem != null && firstItem.isBulleted();
 		}
 		return myIsBulleted;
+	}
+
+	@Nullable
+	@Override
+	public PodSectionItem getFirstItem()
+	{
+		return findChildByClass(PodSectionItem.class);
 	}
 
 	@Override

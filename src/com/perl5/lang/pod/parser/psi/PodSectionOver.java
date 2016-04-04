@@ -16,9 +16,11 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionOver extends PodStructureElement
+public interface PodSectionOver extends PsiElement, PodStructureElement
 {
 }
