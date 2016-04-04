@@ -184,12 +184,13 @@ public class PerlDocUtil implements PerlElementTypes
 				else    // seek section
 				{
 					PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection());
-					PsiElement targetElement = searchPodElement(targetFile, pattern);
-					if (targetElement == null)
-					{
-						System.err.println("Unable to resolve: " + descriptor.getSection());
-					}
-					return targetElement;
+					return searchPodElement(targetFile, pattern);
+//					PsiElement targetElement = searchPodElement(targetFile, pattern);
+//					if (targetElement == null)
+//					{
+//						System.err.println("Unable to resolve: " + descriptor.getSection());
+//					}
+//					return targetElement;
 				}
 			}
 		}
@@ -320,8 +321,22 @@ public class PerlDocUtil implements PerlElementTypes
 	}
 
 	@Nullable
-	protected static PodCompositeElement searchPodElement(PsiFile psiFile, final PodDocumentPattern pattern)
+	protected static PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern)
 	{
+		if (psiFile == null)
+		{
+			return null;
+		}
+
+		if (psiFile.getLanguage() != PodLanguage.INSTANCE)
+		{
+			psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
+			if (psiFile == null)
+			{
+				return null;
+			}
+		}
+
 		final List<PodCompositeElement> result = new ArrayList<PodCompositeElement>();
 
 		PsiTreeUtil.processElements(psiFile, new PsiElementProcessor()

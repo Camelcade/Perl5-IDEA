@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlLanguage;
@@ -27,9 +28,12 @@ import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,7 +134,37 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 					result = PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement) contextElement).getName(), contextElement);
 				}
 
-				// fixme add some heuristic for current file if it's not pm ?
+				// not found or main::
+				if (result == null)
+				{
+					PsiElement target = null;
+
+					if (contextElement.getParent() instanceof PerlSubBase)
+					{
+						target = contextElement.getParent();
+					}
+					else
+					{
+						PsiReference reference = contextElement.getReference();
+						if (reference != null)
+						{
+							target = reference.resolve();
+						}
+					}
+
+					if (target != null)
+					{
+						PsiFile targetFile = target.getContainingFile();
+						if (targetFile != null)
+						{
+							PsiFile podFile = targetFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
+							if (podFile != null)
+							{
+								result = PerlDocUtil.searchPodElement(targetFile, PodDocumentPattern.headingAndItemPattern(subName));
+							}
+						}
+					}
+				}
 
 				if (result != null)
 				{
