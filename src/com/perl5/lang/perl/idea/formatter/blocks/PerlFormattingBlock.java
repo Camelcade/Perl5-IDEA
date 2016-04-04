@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
@@ -26,6 +27,7 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -241,6 +243,25 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			IElementType child1Type = child1Node.getElementType();
 			ASTNode child2Node = ((PerlFormattingBlock) child2).getNode();
 			IElementType child2Type = child2Node.getElementType();
+
+			// fix for number/concat
+			if (child2Type == OPERATOR_CONCAT)
+			{
+				ASTNode run = child1Node;
+				while (run instanceof CompositeElement)
+				{
+					run = run.getLastChildNode();
+				}
+
+				if (run != null)
+				{
+					IElementType runType = run.getElementType();
+					if (runType == NUMBER_SIMPLE || runType == NUMBER && StringUtil.endsWith(run.getText(), "."))
+					{
+						return Spacing.createSpacing(1, 1, 0, true, 1);
+					}
+				}
+			}
 
 			// LF after opening brace and before closing need to check if here-doc opener is in the line
 			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))

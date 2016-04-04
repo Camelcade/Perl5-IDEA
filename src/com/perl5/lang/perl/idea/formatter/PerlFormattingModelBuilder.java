@@ -49,7 +49,6 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.around(OPERATORS_RELATIONAL).spaceIf(settings.SPACE_AROUND_RELATIONAL_OPERATORS)
 				.around(OPERATORS_LOGICAL).spaceIf(settings.SPACE_AROUND_LOGICAL_OPERATORS)
 				.around(OPERATORS_BITWISE).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
-				.before(OPERATOR_CONCAT).spaces(1)    // temporary fix, see #1016
 				.around(OPERATORS_ADDITIVE).spaceIf(settings.SPACE_AROUND_ADDITIVE_OPERATORS)
 				.around(OPERATORS_MULTIPLICATIVE).spaceIf(settings.SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
 				.around(OPERATORS_SHIFT).spaceIf(settings.SPACE_AROUND_SHIFT_OPERATORS)
