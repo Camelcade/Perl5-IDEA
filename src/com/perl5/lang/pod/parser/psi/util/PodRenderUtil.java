@@ -113,15 +113,11 @@ public class PodRenderUtil implements PodElementTypes
 		PsiElement run = firstElement;
 		while (run != null)
 		{
-			if (run.getNode().getElementType() == POD_OUTER)
-			{
-				continue;
-			}
-			else if (run instanceof PodRenderableElement)
+			if (run instanceof PodRenderableElement)
 			{
 				((PodRenderableElement) run).renderElementAsText(builder, context);
 			}
-			else
+			else if (run.getNode().getElementType() != POD_OUTER)
 			{
 				String text = run.getText();
 				if (!StringUtil.equals(text, "\n"))
