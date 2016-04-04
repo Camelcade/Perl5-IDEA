@@ -100,6 +100,10 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 		{
 			return PerlDocUtil.getRegexModifierDoc(contextElement);
 		}
+		else if (elementType == REGEX_TOKEN)
+		{
+			return PerlDocUtil.resolveDocLink("perlretut", contextElement);
+		}
 		else if (elementType == VERSION_ELEMENT)
 		{
 			return PerlDocUtil.resolveDocLink("perldata/\"Version Strings\"", contextElement);
