@@ -133,11 +133,11 @@ public class PodLexer extends PodLexerGenerated
 		if (tokenStart < bufferEnd)
 		{
 			char currentChar = buffer.charAt(tokenStart);
-			if (Character.isLetterOrDigit(currentChar))
+			if (isIdentifierCharacter(currentChar))
 			{
 				int tokenEnd = getTokenEnd();
 
-				while (tokenEnd < bufferEnd && Character.isLetterOrDigit(buffer.charAt(tokenEnd)) && !isPodTag(buffer, tokenEnd, bufferEnd))
+				while (tokenEnd < bufferEnd && isIdentifierCharacter(buffer.charAt(tokenEnd)) && !isPodTag(buffer, tokenEnd, bufferEnd))
 				{
 					tokenEnd++;
 				}
@@ -151,6 +151,11 @@ public class PodLexer extends PodLexerGenerated
 			}
 		}
 		throw new RuntimeException("Can't be");
+	}
+
+	protected boolean isIdentifierCharacter(char myChar)
+	{
+		return myChar == '_' || Character.isLetterOrDigit(myChar);
 	}
 
 	protected boolean isPodTag(CharSequence buffer, int offset, int bufferEnd)
