@@ -1303,7 +1303,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			PsiBuilder.Marker m = b.mark();
 
+			if (targetToken == STRING_PACKAGE && b.rawLookup(1) == IDENTIFIER)    // we suppose it's Foo::Bar
+			{
+				b.advanceLexer();
+			}
 			b.advanceLexer();
+
 //			m.drop();
 			m.collapse(targetToken);
 

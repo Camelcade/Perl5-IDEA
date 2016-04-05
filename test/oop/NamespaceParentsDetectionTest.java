@@ -61,6 +61,11 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase
 		doTest("parent.pl", "Foo", new String[]{"superparent", "superparent2"});
 	}
 
+	public void testParentQQ()
+	{
+		doTest("parent_qq.pl", "Foo", new String[]{"superparent::duperparent"});
+	}
+
 	public void testMojoBase()
 	{
 		doTest("mojo_base.pl", "Foo", new String[]{"Mojo::Base"});
