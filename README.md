@@ -4,7 +4,7 @@
 
 Camelcade adds Perl5 support to any Java-based JetBrains product.
 
-Version 1.3 of Perl5 plugin for IntelliJ IDEA is available in [JetBrains repo](https://plugins.jetbrains.com/plugin/7796). Next version is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
+Version 1.4 of Perl5 plugin for IntelliJ IDEA is available in [JetBrains repo](https://plugins.jetbrains.com/plugin/7796). Next version is currently in development, and if you want to participate - you may fork or contact me via Skype: hurricup
 Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5-IDEA/wiki/Contribution-policy).
 
 [![Donate to support Project](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E)
