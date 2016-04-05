@@ -72,12 +72,18 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
 		}
 		else
 		{
-			builder.append("<dt>");
+			builder.append("<dt style=\"padding-bottom:4px;font-weight:bold;\">");
 			super.renderElementTitleAsHTML(builder, context);
 			builder.append("</dt>");
-			builder.append("<dd>");
-			super.renderElementContentAsHTML(builder, context);
-			builder.append("</dd>");
+
+			StringBuilder elementBuilder = new StringBuilder();
+			super.renderElementContentAsHTML(elementBuilder, context);
+			if (elementBuilder.length() > 0)
+			{
+				builder.append("<dd style=\"padding-top:6px;\">");
+				builder.append(elementBuilder);
+				builder.append("</dd>");
+			}
 		}
 	}
 

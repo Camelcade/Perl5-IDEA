@@ -50,6 +50,9 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
 		if (element instanceof PodCompositeElement)
 		{
 			return PerlDocUtil.renderElement((PodCompositeElement) element);
+//			String result = PerlDocUtil.renderElement((PodCompositeElement) element);
+//			System.err.println(result);
+//			return result;
 		}
 		return super.generateDoc(element, originalElement);
 	}

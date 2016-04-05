@@ -19,15 +19,15 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodSectionCodeWrapper;
+import com.perl5.lang.pod.parser.psi.PodSectionVerbatimParagraph;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionCodeWrapperMixin extends PodSectionMixin implements PodSectionCodeWrapper
+public class PodSectionVerbatimParagraphMixin extends PodSectionMixin implements PodSectionVerbatimParagraph
 {
-	public PodSectionCodeWrapperMixin(@NotNull ASTNode node)
+	public PodSectionVerbatimParagraphMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}
@@ -41,8 +41,8 @@ public class PodSectionCodeWrapperMixin extends PodSectionMixin implements PodSe
 	@Override
 	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-		builder.append("<pre style=\"padding-bottom: 10px;\"><code>");
+		builder.append("<div style=\"padding-bottom: 10px;\"><pre><code>"); //  style="padding-bottom: 10px;"
 		super.renderElementContentAsHTML(builder, context);
-		builder.append("</code></pre>");
+		builder.append("</code></pre></div>");
 	}
 }

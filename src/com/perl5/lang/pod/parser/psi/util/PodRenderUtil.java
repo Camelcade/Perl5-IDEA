@@ -83,6 +83,15 @@ public class PodRenderUtil implements PodElementTypes
 			}
 			run = run.getNextSibling();
 		}
+		trimBuilderNewlines(builder);
+	}
+
+	public static void trimBuilderNewlines(StringBuilder builder)
+	{
+		while (builder.length() > 0 && builder.charAt(builder.length() - 1) == '\n')
+		{
+			builder.deleteCharAt(builder.length() - 1);
+		}
 	}
 
 	public static String renderPsiElementAsText(@Nullable PsiElement element)

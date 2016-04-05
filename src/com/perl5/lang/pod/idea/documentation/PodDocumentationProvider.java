@@ -27,8 +27,8 @@ import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodFormatter;
 import com.perl5.lang.pod.parser.psi.PodSection;
-import com.perl5.lang.pod.parser.psi.PodSectionCodeWrapper;
 import com.perl5.lang.pod.parser.psi.PodSectionParagraph;
+import com.perl5.lang.pod.parser.psi.PodSectionVerbatimParagraph;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +63,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
 		{
 			return PerlDocUtil.resolveDocLink("perlpod/\"Ordinary Paragraph\"", contextElement);
 		}
-		else if (contextElement instanceof PodSectionCodeWrapper)
+		else if (contextElement instanceof PodSectionVerbatimParagraph)
 		{
 			return PerlDocUtil.resolveDocLink("perlpod/\"Verbatim Paragraph\"", contextElement);
 		}

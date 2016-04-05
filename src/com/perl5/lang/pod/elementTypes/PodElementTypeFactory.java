@@ -256,14 +256,14 @@ public class PodElementTypeFactory
 				}
 			};
 
-		if (name.equals("POD_CODE_WRAPPER"))
+		if (name.equals("POD_VERBATIM_PARAGRAPH"))
 			return new PodElementType(name)
 			{
 				@NotNull
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPodCodeWrapperImpl(node);
+					return new PsiPodVerbatimParagraphImpl(node);
 				}
 			};
 
@@ -409,6 +409,6 @@ public class PodElementTypeFactory
 					return new PsiUnknownSectionImpl(node);
 				}
 			};
-		throw new RuntimeException("Missing element");
+		throw new RuntimeException("Missing element: " + name);
 	}
 }

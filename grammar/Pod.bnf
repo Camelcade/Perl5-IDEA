@@ -29,7 +29,7 @@ limitations under the License.
   mixin("head3_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH3Mixin"
   mixin("head4_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH4Mixin"
   mixin("pod_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionParagraphMixin"
-  mixin("pod_code_wrapper")="com.perl5.lang.pod.parser.psi.mixin.PodSectionCodeWrapperMixin"
+  mixin("pod_verbatim_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionVerbatimParagraphMixin"
 
   mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOverMixin"
   mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContentMixin"
@@ -155,11 +155,11 @@ private any_level_item ::=
 	| unknown_section
 	| cut_section
 	| pod_paragraph
-	| pod_code_wrapper
+	| pod_verbatim_paragraph
 	| POD_NEWLINE+
 
 pod_paragraph ::= pod_paragraph_content
-pod_code_wrapper ::= POD_CODE
+pod_verbatim_paragraph ::= POD_CODE
 
 private pod_paragraph_content ::= pod_term+ POD_NEWLINE*
 
