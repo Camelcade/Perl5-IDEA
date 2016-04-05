@@ -41,6 +41,16 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase
 		doTest("isa_assign.pl", "Foo", new String[]{"superfoo1", "superbar1"});
 	}
 
+	public void testIsaAssignFullQualified()
+	{
+		doTest("isa_assign_fullqualified.pl", "Foo", new String[]{"superfoo1", "superbar1"});
+	}
+
+	public void testIsaAssignFullQualifiedOtherPackage()
+	{
+		doTest("isa_assing_fullqualified_other_package.pl", "Foo", new String[]{});
+	}
+
 	public void testIsaDeclare()
 	{
 		doTest("isa_declare.pl", "Foo", new String[]{"superfoo2", "superbar2"});

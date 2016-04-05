@@ -42,6 +42,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA.</li>
       <li>Fixed problem with package detection in qq string and it's consequences.</li>
       <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation.</li>
       <li>Fixed problem with occasional double <code>-></code> insertion on pre-formatting.</li>

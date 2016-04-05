@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
@@ -32,10 +33,7 @@ import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -181,7 +179,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 
 	protected ParentNamespacesNamesCollector getCollector()
 	{
-		return new ParentNamespacesNamesCollector(new ArrayList<String>());
+		return new ParentNamespacesNamesCollector(new ArrayList<String>(), getPackageName());
 	}
 
 	@Nullable
@@ -457,10 +455,12 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	{
 		private final List<String> parentNamespaces;
 		private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<PerlRuntimeParentsProvider>();
+		private final String myPackageName;
 
-		public ParentNamespacesNamesCollector(List<String> parentNamespaces)
+		public ParentNamespacesNamesCollector(List<String> parentNamespaces, String packageName)
 		{
 			this.parentNamespaces = parentNamespaces;
+			myPackageName = packageName;
 		}
 
 		@Override
@@ -482,10 +482,19 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			}
 			else if (ISA_ASSIGN_STATEMENT.accepts(element))
 			{
-				PsiElement rightSide = element.getFirstChild().getLastChild();
-				if (rightSide != null && rightSide.getFirstChild() != null)
+				PsiElement assignExpr = element.getFirstChild();
+				if (assignExpr instanceof PsiPerlAssignExpr)
 				{
-					runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(rightSide));
+					PsiPerlArrayVariable variable = PsiTreeUtil.findChildOfType(element, PsiPerlArrayVariable.class);
+
+					if (variable != null)
+					{
+						PerlNamespaceElement namespaceElement = variable.getNamespaceElement();
+						if (namespaceElement == null || StringUtil.equals(namespaceElement.getCanonicalName(), myPackageName))
+						{
+							runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
+						}
+					}
 				}
 			}
 

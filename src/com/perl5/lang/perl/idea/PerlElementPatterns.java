@@ -135,7 +135,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 			);
 
 	// @ISA = ()
-	PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@ISA");
+	PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class);
 	PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> ISA_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
 			.withChild(
 					psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(ISA_VARIABLE)
