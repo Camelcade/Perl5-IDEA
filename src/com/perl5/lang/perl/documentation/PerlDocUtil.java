@@ -244,12 +244,12 @@ public class PerlDocUtil implements PerlElementTypes
 			{
 				PodDocumentPattern pattern = PodDocumentPattern.itemPattern(text);
 
-				if (text.matches("$[123456789]"))
+				if (text.matches("\\$[123456789]"))
 				{
 					pattern.setItemPattern("$<digits>");
 				}
 
-				return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, PodDocumentPattern.itemPattern(text));
+				return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, pattern);
 			}
 		}
 
