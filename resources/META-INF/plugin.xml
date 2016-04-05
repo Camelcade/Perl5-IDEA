@@ -608,6 +608,10 @@
                 implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
+
+        <psi.referenceContributor language="Perl5 POD"
+                                  implementation="com.perl5.lang.pod.parser.psi.references.PodReferenceContributor"/>
+
         <!--POD settings end -->
 
 

@@ -43,6 +43,22 @@ import java.util.Set;
  */
 public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolver<PerlSubReference>
 {
+	public static void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
+	{
+		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
+			if (!target.isEquivalentTo(exclusion))
+				relatedItems.add(target);
+	}
+
 	@NotNull
 	@Override
 	public ResolveResult[] resolve(@NotNull PerlSubReference reference, boolean incompleteCode)
@@ -181,21 +197,5 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 		List<ResolveResult> result = reference.getResolveResults(relatedItems);
 
 		return result.toArray(new ResolveResult[result.size()]);
-	}
-
-	public void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
-	{
-		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
-			if (!target.isEquivalentTo(exclusion))
-				relatedItems.add(target);
 	}
 }

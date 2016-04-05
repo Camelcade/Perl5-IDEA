@@ -19,6 +19,7 @@ package com.perl5.lang.pod.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,18 @@ public class PodElementTypeFactory
 {
 	public static IElementType getTokenType(String debugName)
 	{
+		if (debugName.equals("POD_IDENTIFIER"))
+		{
+			return new PodTokenTypeEx(debugName)
+			{
+				@NotNull
+				@Override
+				public ASTNode createLeafNode(CharSequence leafText)
+				{
+					return new PodIdentifierImpl(this, leafText);
+				}
+			};
+		}
 		return new PodTokenType(debugName);
 	}
 

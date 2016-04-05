@@ -24,21 +24,30 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFile;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Created by hurricup on 27.03.2016.
  */
 public class PodFileUtil
 {
+	private static final Set<String> myClassLikeExtensions = new THashSet<String>(Arrays.asList(
+			PodFileType.EXTENSION,
+			PerlFileTypePackage.EXTENSION
+	));
+
 	@Nullable
 	public static String getPackageName(PodFile file)
 	{
 		VirtualFile virtualFile = file.getVirtualFile();
 		VirtualFile classRoot = PerlUtil.getFileClassRoot(file);
 
-		if (virtualFile != null)
+		if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension()))
 		{
 			if (classRoot == null)
 			{
