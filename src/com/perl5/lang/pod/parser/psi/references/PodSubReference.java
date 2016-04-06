@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.references;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
@@ -44,7 +45,7 @@ public class PodSubReference extends PsiPolyVariantReferenceBase<PsiElement>
 
 	public PodSubReference(PsiElement element)
 	{
-		super(element, element.getTextRange(), true);
+		super(element, new TextRange(0, element.getTextLength()), true);
 	}
 
 	@NotNull

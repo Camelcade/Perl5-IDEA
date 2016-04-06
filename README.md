@@ -9,14 +9,12 @@ Don't forget to read our [contribution policy](https://github.com/hurricup/Perl5
 
 [![Donate to support Project](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E)
 
-* [Camelcade twitter](https://twitter.com/CamelcadeIDE)
+* [Camelcade twitter](https://twitter.com/CamelcadeIDE) - here you may find links to the most recent dev builds
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
 * [Onion parsing comparision](http://evstigneev.com/onion_all.png)
 
 YourKit supports open source projects with its full-featured <a href="https://www.yourkit.com/java/profiler/index.jsp">Java Profiler</a>.
 
 [![Optimized using YourKit Java Profiler](https://www.yourkit.com/images/yklogo.png)](https://www.yourkit.com/java/profiler/index.jsp)
-
-[Download current dev build jar for IDEA](http://evstigneev.com/camelcade.jar)
 
 Wiki: https://github.com/hurricup/Perl5-IDEA/wiki
