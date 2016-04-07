@@ -382,7 +382,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 				{
 					return parsePackage();
 				}
-				return IDENTIFIER;
+				else
+				{
+					return parseBarewordMinus();
+				}
 			}
 		}
 		return TokenType.BAD_CHARACTER;

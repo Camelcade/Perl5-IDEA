@@ -41,6 +41,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest("constant");
 	}
 
+	public void testBareUtfString()
+	{
+		doTest("bare_utf_string");
+	}
+
 	public void testLazyParsing()
 	{
 		doTest("lazy_parsing");
