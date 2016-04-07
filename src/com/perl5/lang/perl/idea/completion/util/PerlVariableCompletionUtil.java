@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.completion.util;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -24,6 +25,7 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -56,37 +58,37 @@ public class PerlVariableCompletionUtil
 	static
 	{
 		for (String name : PerlScalarUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getScalarLookupElement(name).withBoldness(true));
+			BUILT_IN_SCALARS.add(getScalarLookupElement(name).withBoldness(true));
 
 		for (String name : PerlArrayUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getArrayElementLookupElement(name).withBoldness(true));
+			BUILT_IN_SCALARS.add(getArrayElementLookupElement(name).withBoldness(true));
 
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_SCALARS.add(PerlVariableCompletionUtil.getHashElementLookupElement(name).withBoldness(true));
+			BUILT_IN_SCALARS.add(getHashElementLookupElement(name).withBoldness(true));
 	}
 
 	// fill arrays
 	static
 	{
 		for (String name : PerlArrayUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getArrayLookupElement(name).withBoldness(true));
+			BUILT_IN_ARRAYS.add(getArrayLookupElement(name).withBoldness(true));
 
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getHashSliceElementLookupElement(name).withBoldness(true));
+			BUILT_IN_ARRAYS.add(getHashSliceElementLookupElement(name).withBoldness(true));
 	}
 
 	// fill arrays indexes
 	static
 	{
 		for (String name : PerlArrayUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(PerlVariableCompletionUtil.getArrayLookupElement(name).withBoldness(true));
+			BUILT_IN_ARRAYS.add(getArrayLookupElement(name).withBoldness(true));
 	}
 
 	// fill hashes
 	static
 	{
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_HASHES.add(PerlVariableCompletionUtil.getHashLookupElement(name).withBoldness(true));
+			BUILT_IN_HASHES.add(getHashLookupElement(name).withBoldness(true));
 	}
 
 	// fill globs
@@ -94,7 +96,7 @@ public class PerlVariableCompletionUtil
 	{
 		// built-in globs
 		for (String name : PerlGlobUtil.BUILT_IN)
-			BUILT_IN_GLOBS.add(PerlVariableCompletionUtil.getGlobLookupElement(name).withBoldness(true));
+			BUILT_IN_GLOBS.add(getGlobLookupElement(name).withBoldness(true));
 	}
 
 	public static LookupElementBuilder getScalarLookupElement(String name)
@@ -182,6 +184,12 @@ public class PerlVariableCompletionUtil
 		}
 	}
 
+	public static LookupElement setLexical(@NotNull LookupElement element)
+	{
+		element.putUserData(PerlCompletionWeighter.WEIGHT, 1);
+		return element;
+	}
+
 	public static void fillWithBuiltInVariables(PsiElement variableNameElement, @NotNull CompletionResultSet resultSet)
 	{
 		PsiElement perlVariable = variableNameElement.getParent();
@@ -218,15 +226,15 @@ public class PerlVariableCompletionUtil
 					{
 						if (variable.getActualType() == PerlVariableType.SCALAR)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(variableName));
+							resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
 						}
 						else if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(variableName));
+							resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
 						}
 						else if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(variableName));
+							resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
 						}
 					}
 				}
@@ -237,12 +245,12 @@ public class PerlVariableCompletionUtil
 					{
 						if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
+							resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
 
 						}
 						else if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getHashSliceElementLookupElement(variableName));
+							resultSet.addElement(setLexical(getHashSliceElementLookupElement(variableName)));
 						}
 					}
 				}
@@ -253,7 +261,7 @@ public class PerlVariableCompletionUtil
 					{
 						if (variable.getActualType() == PerlVariableType.ARRAY)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(variableName));
+							resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
 						}
 					}
 				}
@@ -264,7 +272,7 @@ public class PerlVariableCompletionUtil
 					{
 						if (variable.getActualType() == PerlVariableType.HASH)
 						{
-							resultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(variableName));
+							resultSet.addElement(setLexical(getHashLookupElement(variableName)));
 						}
 					}
 				}

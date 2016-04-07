@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea;
 import com.intellij.codeInsight.completion.CompletionLocation;
 import com.intellij.codeInsight.completion.CompletionWeigher;
 import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +29,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlCompletionWeighter extends CompletionWeigher
 {
+	public static final Key<Integer> WEIGHT = new Key<Integer>("WEIGHT");
+
 	@Override
 	public Comparable weigh(@NotNull LookupElement element, @NotNull CompletionLocation location)
 	{
-		if (!PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE))
+		if (PsiUtilCore.findLanguageFromElement(location.getCompletionParameters().getPosition()).isKindOf(PerlLanguage.INSTANCE))
 		{
-			return 0;
+			Integer weight = element.getUserData(WEIGHT);
+			return weight == null ? 0 : weight;
 		}
 
 		return 0;
