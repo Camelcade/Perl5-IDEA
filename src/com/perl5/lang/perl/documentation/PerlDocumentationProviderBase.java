@@ -26,6 +26,7 @@ import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,21 +42,17 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
 	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
 	{
 		String result = null;
-		if (element instanceof PsiFile)
+		if (element instanceof PodFile)
 		{
-			PsiFile podTree = ((PsiFile) element).getViewProvider().getPsi(PodLanguage.INSTANCE);
-
-			if (podTree != null)
+			result = PerlDocUtil.renderPodFile((PodFileImpl) element);
+			if (StringUtil.isEmpty(result))
 			{
-				result = PerlDocUtil.renderPodFile((PodFileImpl) podTree);
+				result = "Empty documenation section...";
 			}
 		}
-		if (element instanceof PodCompositeElement)
+		else if (element instanceof PodCompositeElement)
 		{
 			result = PerlDocUtil.renderElement((PodCompositeElement) element);
-//			String result = PerlDocUtil.renderElement((PodCompositeElement) element);
-//			System.err.println(result);
-//			return result;
 		}
 		return StringUtil.isEmpty(result) ? super.generateDoc(element, originalElement) : result;
 	}
