@@ -37,7 +37,7 @@ public class PerlNamesCache
 
 	public static Set<String> getSubsNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project))
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && areIndexesAvailable())
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlSubUtil.getDeclaredSubsNames(project));
@@ -48,6 +48,12 @@ public class PerlNamesCache
 		return KNOWN_SUBS;
 	}
 
+	// fixme this may be optimized using some hashset 
+	private static boolean areIndexesAvailable()
+	{
+		return PerlSubUtil.isSubDeclarationsIndexAvailable() && PerlSubUtil.isSubDefinitionsIndexAvailable() && PerlGlobUtil.isGlobsDefinitionsIndexAvailable();
+	}
+
 	public static boolean isTestMode()
 	{
 		final Application application = ApplicationManager.getApplication();
@@ -56,7 +62,7 @@ public class PerlNamesCache
 
 	public static Set<String> getPackagesNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project))
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && PerlPackageUtil.isPackageIndexAvailable())
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);

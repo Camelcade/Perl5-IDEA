@@ -261,6 +261,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return PerlStubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
+	public static boolean isPackageIndexAvailable()
+	{
+		return PerlStubIndex.getInstance().isIndexAvailable(PerlNamespaceDefinitionStubIndex.KEY);
+	}
+
 	/**
 	 * Processes all global packages names with specific processor
 	 *

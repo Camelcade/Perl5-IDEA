@@ -103,6 +103,11 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return PerlStubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
 	}
 
+	public static boolean isSubDefinitionsIndexAvailable()
+	{
+		return PerlStubIndex.getInstance().isIndexAvailable(PerlSubDefinitionsStubIndex.KEY);
+	}
+
 	/**
 	 * Returns list of defined subs names
 	 *
@@ -153,6 +158,11 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static Collection<String> getDeclaredSubsNames(Project project)
 	{
 		return PerlUtil.getIndexKeysWithoutInternals(PerlSubDeclarationStubIndex.KEY, project);
+	}
+
+	public static boolean isSubDeclarationsIndexAvailable()
+	{
+		return PerlStubIndex.getInstance().isIndexAvailable(PerlSubDeclarationStubIndex.KEY);
 	}
 
 	/**

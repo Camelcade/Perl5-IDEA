@@ -45,6 +45,18 @@ public class PerlIndexAccessValidator
 		}
 	}
 
+	public boolean isIndexAvailable(ID<?, ?> indexId)
+	{
+		final ID<?, ?> alreadyProcessingIndex = ourAlreadyProcessingIndices.get();
+		return alreadyProcessingIndex == null || alreadyProcessingIndex == indexId;
+	}
+
+	public void checkAndStartProcessingActivityForIndex(ID<?, ?> indexId)
+	{
+		checkAccessingIndexDuringOtherIndexProcessing(indexId);
+		startedProcessingActivityForIndex(indexId);
+	}
+
 	public void startedProcessingActivityForIndex(ID<?, ?> indexId)
 	{
 		ourAlreadyProcessingIndices.set(indexId);

@@ -89,4 +89,10 @@ public class PerlGlobUtil implements PerlElementTypes
 	{
 		return PerlStubIndex.getInstance().processAllKeys(PerlGlobsStubIndex.KEY, project, processor);
 	}
+
+	public static boolean isGlobsDefinitionsIndexAvailable()
+	{
+		return PerlStubIndex.getInstance().isIndexAvailable(PerlGlobsStubIndex.KEY);
+	}
 }
+

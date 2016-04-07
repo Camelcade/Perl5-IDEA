@@ -37,7 +37,7 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 {
 	private final PerlIndexAccessValidator myAccessValidator = new PerlIndexAccessValidator();
 
-	public static StubIndex getInstance()
+	public static PerlStubIndex getInstance()
 	{
 		return StubIndexHolder.ourInstance;
 	}
@@ -54,6 +54,11 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 
 	}
 
+	public <Key, Psi extends PsiElement> boolean isIndexAvailable(@NotNull StubIndexKey<Key, Psi> indexKey)
+	{
+		return myAccessValidator.isIndexAvailable(indexKey);
+	}
+
 	@NotNull
 	@Override
 	public String getComponentName()
@@ -64,26 +69,38 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 	@Override
 	public <Key, Psi extends PsiElement> Collection<Psi> get(@NotNull StubIndexKey<Key, Psi> indexKey, @NotNull Key key, @NotNull Project project, @Nullable GlobalSearchScope scope)
 	{
-		return StubIndex.getInstance().get(indexKey, key, project, scope);
+		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
+		Collection<Psi> psis = StubIndex.getInstance().get(indexKey, key, project, scope);
+		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		return psis;
 	}
 
 	@Override
 	public <Key, Psi extends PsiElement> boolean processElements(@NotNull StubIndexKey<Key, Psi> indexKey, @NotNull Key key, @NotNull Project project, @Nullable GlobalSearchScope scope, Class<Psi> requiredClass, @NotNull Processor<? super Psi> processor)
 	{
-		return StubIndex.getInstance().processElements(indexKey, key, project, scope, requiredClass, processor);
+		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
+		boolean b = StubIndex.getInstance().processElements(indexKey, key, project, scope, requiredClass, processor);
+		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		return b;
 	}
 
 	@NotNull
 	@Override
 	public <Key> Collection<Key> getAllKeys(@NotNull StubIndexKey<Key, ?> indexKey, @NotNull Project project)
 	{
-		return StubIndex.getInstance().getAllKeys(indexKey, project);
+		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
+		Collection<Key> allKeys = StubIndex.getInstance().getAllKeys(indexKey, project);
+		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		return allKeys;
 	}
 
 	@Override
 	public <K> boolean processAllKeys(@NotNull StubIndexKey<K, ?> indexKey, @NotNull Project project, Processor<K> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(indexKey, project, processor);
+		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
+		boolean b = StubIndex.getInstance().processAllKeys(indexKey, project, processor);
+		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		return b;
 	}
 
 	@Override
@@ -94,6 +111,7 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 
 	private static class StubIndexHolder
 	{
-		private static final StubIndex ourInstance = ApplicationManager.getApplication().getComponent(PerlStubIndex.class);
+		private static final PerlStubIndex ourInstance = ApplicationManager.getApplication().getComponent(PerlStubIndex.class);
 	}
+
 }
