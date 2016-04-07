@@ -70,18 +70,26 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 	public <Key, Psi extends PsiElement> Collection<Psi> get(@NotNull StubIndexKey<Key, Psi> indexKey, @NotNull Key key, @NotNull Project project, @Nullable GlobalSearchScope scope)
 	{
 		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
-		Collection<Psi> psis = StubIndex.getInstance().get(indexKey, key, project, scope);
-		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
-		return psis;
+		try
+		{
+			return StubIndex.getInstance().get(indexKey, key, project, scope);
+		} finally
+		{
+			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		}
 	}
 
 	@Override
 	public <Key, Psi extends PsiElement> boolean processElements(@NotNull StubIndexKey<Key, Psi> indexKey, @NotNull Key key, @NotNull Project project, @Nullable GlobalSearchScope scope, Class<Psi> requiredClass, @NotNull Processor<? super Psi> processor)
 	{
 		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
-		boolean b = StubIndex.getInstance().processElements(indexKey, key, project, scope, requiredClass, processor);
-		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
-		return b;
+		try
+		{
+			return StubIndex.getInstance().processElements(indexKey, key, project, scope, requiredClass, processor);
+		} finally
+		{
+			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		}
 	}
 
 	@NotNull
@@ -89,18 +97,26 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 	public <Key> Collection<Key> getAllKeys(@NotNull StubIndexKey<Key, ?> indexKey, @NotNull Project project)
 	{
 		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
-		Collection<Key> allKeys = StubIndex.getInstance().getAllKeys(indexKey, project);
-		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
-		return allKeys;
+		try
+		{
+			return StubIndex.getInstance().getAllKeys(indexKey, project);
+		} finally
+		{
+			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		}
 	}
 
 	@Override
 	public <K> boolean processAllKeys(@NotNull StubIndexKey<K, ?> indexKey, @NotNull Project project, Processor<K> processor)
 	{
 		myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
-		boolean b = StubIndex.getInstance().processAllKeys(indexKey, project, processor);
-		myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
-		return b;
+		try
+		{
+			return StubIndex.getInstance().processAllKeys(indexKey, project, processor);
+		} finally
+		{
+			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		}
 	}
 
 	@Override
