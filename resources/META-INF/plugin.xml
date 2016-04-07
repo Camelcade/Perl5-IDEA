@@ -43,6 +43,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Fixed multiple sub definitions inspection.</li>
       <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA.</li>
       <li>Fixed problem with package detection in qq string and it's consequences.</li>
       <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation.</li>
@@ -679,13 +680,6 @@
                          shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
-
-        <localInspection language="Mason2 Templating Language"
-                         shortName="SubMultipleDefinitions" displayName="Multiple sub definitions"
-                         groupName="Perl5: Mason2"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
-
 
         <localInspection language="Perl5"
                          shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
