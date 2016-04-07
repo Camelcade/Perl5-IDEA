@@ -366,6 +366,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 
 			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
 			PsiElement container = anchor.getParent();
+			int newOffset = anchor.getTextOffset() + anchor.getTextLength();
 
 			if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
 			{
@@ -373,7 +374,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			}
 
 			manager.commitDocument(document);
-			editor.getCaretModel().moveToOffset(anchor.getTextOffset() + anchor.getTextLength());
+			editor.getCaretModel().moveToOffset(newOffset);
 			editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
 		}
 	}

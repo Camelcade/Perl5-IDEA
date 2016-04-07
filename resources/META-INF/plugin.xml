@@ -43,6 +43,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Fixed scrolling problem on code generation.</li>
       <li>Fixed multiple sub definitions inspection.</li>
       <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA.</li>
       <li>Fixed problem with package detection in qq string and it's consequences.</li>
