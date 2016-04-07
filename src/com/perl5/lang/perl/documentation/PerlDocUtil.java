@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.tree.IElementType;
@@ -34,10 +31,8 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
-import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
@@ -100,7 +95,6 @@ public class PerlDocUtil implements PerlElementTypes
 		myVariablesRedirections.put("$VERSION", "perlobj/\"VERSION\"");
 	}
 
-	// fixme this shit must be refactored
 	@Nullable
 	public static PsiElement resolveDocLink(String link, PsiElement origin)
 	{
@@ -109,70 +103,11 @@ public class PerlDocUtil implements PerlElementTypes
 
 		if (descriptor != null)
 		{
-			PsiFile targetFile = origin.getContainingFile();
+			PsiFile targetFile = PodFileUtil.findPodOrPackagePsiByDescriptor(project, descriptor);
 
-			if (descriptor.getFileId() != null)
+			if (targetFile == null)
 			{
-				// seek file
-				String fileId = descriptor.getFileId();
-				targetFile = null;
-
-				if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
-				{
-					String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
-
-					for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
-					{
-						VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
-						if (targetVirtualFile != null)
-						{
-							if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
-							{
-								break;
-							}
-						}
-					}
-
-					if (targetFile == null) // pod not found, search for PM
-					{
-						String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
-
-						for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
-						{
-							VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
-							if (targetVirtualFile != null)
-							{
-								if ((targetFile = PsiManager.getInstance(project).findFile(targetVirtualFile)) != null)
-								{
-									if ((targetFile = targetFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
-									{
-										break;
-									}
-								}
-							}
-						}
-					}
-				}
-				else // top level file perl.*
-				{
-					fileId += "." + PodFileType.EXTENSION;
-
-					PsiFile[] psiFiles = FilenameIndex.getFilesByName(
-							origin.getProject(),
-							fileId,
-							PerlScopes.getProjectAndLibrariesScope(origin.getProject()));
-					if (psiFiles.length > 0)
-					{
-						targetFile = psiFiles[0];
-					}
-				}
-
-/*				// fixme invoked multiple times
-				if (targetFile == null)
-				{
-					Messages.showErrorDialog(project, "Unable to find pod file: " + fileId, "File Not Found");
-				}
-*/
+				targetFile = origin.getContainingFile();
 			}
 
 			if (targetFile != null)

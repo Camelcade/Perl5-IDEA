@@ -19,9 +19,11 @@ package com.perl5.lang.pod.parser.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlScopes;
@@ -29,6 +31,7 @@ import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,12 +41,11 @@ import java.util.List;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodSubReference extends PsiPolyVariantReferenceBase<PsiElement>
+public class PodSubReference extends PodReferenceBase<PodIdentifierImpl>
 {
-	public static final Object[] EMPTY_ARRAY = new Object[0];
 	protected static final ResolveCache.PolyVariantResolver<PodSubReference> RESOLVER = new PodSubReferenceResolver();
 
-	public PodSubReference(PsiElement element)
+	public PodSubReference(PodIdentifierImpl element)
 	{
 		super(element, new TextRange(0, element.getTextLength()), true);
 	}
@@ -58,20 +60,13 @@ public class PodSubReference extends PsiPolyVariantReferenceBase<PsiElement>
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		return (PsiElement) ((LeafPsiElement) myElement).replaceWithText(newElementName);
+		return (PsiElement) myElement.replaceWithText(newElementName);
 	}
 
 	@Override
 	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
 	{
 		return super.bindToElement(element);
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return EMPTY_ARRAY;
 	}
 
 	private static class PodSubReferenceResolver implements ResolveCache.PolyVariantResolver<PodSubReference>

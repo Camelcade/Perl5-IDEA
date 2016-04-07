@@ -175,7 +175,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 		else if (contextElement instanceof PerlNamespaceElement)
 		{
 			String packageName = ((PerlNamespaceElement) contextElement).getCanonicalName();
-			if (StringUtil.isNotEmpty(packageName))
+
+			if (StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE, packageName))
+			{
+				return PerlDocUtil.resolveDocLink("perlobj/Inheritance", contextElement);
+			}
+			else if (StringUtil.isNotEmpty(packageName))
 			{
 				return PerlDocUtil.resolveDocLink(packageName, contextElement);
 			}
