@@ -28,7 +28,6 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
  * Created by hurricup on 05.04.2016.
  */
 public interface PodElementPatterns extends PodElementTypes
-
 {
 	PsiElementPattern.Capture<PsiElement> SECTION_TITLE_IDENTIFIER =
 			psiElement(POD_IDENTIFIER).withParent(psiElement(PodSectionTitle.class));
