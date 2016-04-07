@@ -24,9 +24,9 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
+import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
@@ -77,7 +77,7 @@ public class Mason2Utils
 	public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath)
 	{
 		return new ArrayList<PerlNamespaceDefinition>(
-				StubIndex.getElements(
+				PerlStubIndex.getElements(
 						MasonNamespaceDefitnitionsStubIndex.KEY,
 						absolutePath,
 						project,

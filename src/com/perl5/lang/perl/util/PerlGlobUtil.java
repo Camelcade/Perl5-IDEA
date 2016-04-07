@@ -18,8 +18,8 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
+import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
@@ -64,7 +64,7 @@ public class PerlGlobUtil implements PerlElementTypes
 	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
+		return PerlStubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
 	}
 
 	/**
@@ -87,6 +87,6 @@ public class PerlGlobUtil implements PerlElementTypes
 	 */
 	public static boolean processDefinedGlobsNames(Project project, Processor<String> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlGlobsStubIndex.KEY, project, processor);
+		return PerlStubIndex.getInstance().processAllKeys(PerlGlobsStubIndex.KEY, project, processor);
 	}
 }

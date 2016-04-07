@@ -753,6 +753,9 @@
         <component>
             <implementation-class>com.perl5.lang.perl.idea.application.PerlParserExtensions</implementation-class>
         </component>
+        <component>
+            <implementation-class>com.perl5.compat.PerlStubIndex</implementation-class>
+        </component>
     </application-components>
 
     <project-components>

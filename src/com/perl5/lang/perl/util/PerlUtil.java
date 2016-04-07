@@ -21,8 +21,8 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
@@ -98,7 +98,7 @@ public class PerlUtil
 		final Set<String> result = new THashSet<String>();
 
 		// safe for getElements
-		StubIndex.getInstance().processAllKeys(key, project, new
+		PerlStubIndex.getInstance().processAllKeys(key, project, new
 				PerlInternalIndexKeysProcessor()
 				{
 					@Override
