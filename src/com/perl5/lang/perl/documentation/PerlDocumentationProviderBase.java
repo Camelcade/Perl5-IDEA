@@ -18,11 +18,13 @@ package com.perl5.lang.perl.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -38,23 +40,24 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
 	@Override
 	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
 	{
+		String result = null;
 		if (element instanceof PsiFile)
 		{
 			PsiFile podTree = ((PsiFile) element).getViewProvider().getPsi(PodLanguage.INSTANCE);
 
 			if (podTree != null)
 			{
-				return PerlDocUtil.renderPodFile((PodFileImpl) podTree);
+				result = PerlDocUtil.renderPodFile((PodFileImpl) podTree);
 			}
 		}
 		if (element instanceof PodCompositeElement)
 		{
-			return PerlDocUtil.renderElement((PodCompositeElement) element);
+			result = PerlDocUtil.renderElement((PodCompositeElement) element);
 //			String result = PerlDocUtil.renderElement((PodCompositeElement) element);
 //			System.err.println(result);
 //			return result;
 		}
-		return super.generateDoc(element, originalElement);
+		return StringUtil.isEmpty(result) ? super.generateDoc(element, originalElement) : result;
 	}
 
 
@@ -81,7 +84,14 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
 
 		if (contextElement instanceof PsiFile)
 		{
-			return ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+			PsiFile podFile = ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+
+			if (podFile != null && podFile.getChildren().length == 1 && podFile.getFirstChild().getNode().getElementType() == PodElementTypes.POD_OUTER)
+			{
+				return null;
+			}
+
+			return podFile;
 		}
 		else if (contextElement != null)
 		{
