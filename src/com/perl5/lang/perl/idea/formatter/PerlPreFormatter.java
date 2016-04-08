@@ -66,7 +66,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	protected static boolean isStringSimpleIdentifier(PerlString o)
 	{
 		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
-				PerlLexer.IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
+				PerlLexer.ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
 	}
 
 	protected static boolean isCommaArrowAhead(PsiElement o)
