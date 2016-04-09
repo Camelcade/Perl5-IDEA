@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
@@ -33,6 +34,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,6 +47,7 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
 			PerlLanguage.INSTANCE,
 			PodLanguage.INSTANCE
 	));
+	private boolean myActAsSingleFile = false;
 
 	public PerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
 	{
@@ -78,7 +82,14 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
 	@Override
 	public Set<Language> getLanguages()
 	{
-		return myLanguages;
+		if (myActAsSingleFile)
+		{
+			return Collections.singleton(getBaseLanguage());
+		}
+		else
+		{
+			return myLanguages;
+		}
 	}
 
 	@NotNull
@@ -101,5 +112,22 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
 		return PodLanguage.INSTANCE;
 	}
 
+	public void setActAsSingleFile(boolean myActAsSingleFile)
+	{
+		this.myActAsSingleFile = myActAsSingleFile;
+	}
 
+	@NotNull
+	@Override
+	public List<PsiFile> getAllFiles()
+	{
+		if (myActAsSingleFile)
+		{
+			return ContainerUtil.createMaybeSingletonList(getPsi(getBaseLanguage()));
+		}
+		else
+		{
+			return super.getAllFiles();
+		}
+	}
 }
