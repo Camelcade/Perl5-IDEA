@@ -309,6 +309,7 @@ limitations under the License.
 	extends(".*_signature_content")=sub_signature_content
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
+//    extends("glob_slot")=expr
     extends("string_list|number_constant")=expr
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
