@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
-
-import com.intellij.psi.PsiElement;
+package com.perl5.lang.perl.psi.utils;
 
 /**
- * Created by hurricup on 12.11.2015.
+ * Created by hurricup on 09.04.2016.
  */
-public class PerlRecursiveVisitor extends PerlVisitor
+public class PerlNamesCacheUpdateLock
 {
-	public StringBuilder log = new StringBuilder();
-	@Override
-	public void visitElement(PsiElement element)
+	private final static ThreadLocal<Boolean> myLock = new ThreadLocal<Boolean>();
+
+	public static boolean isLocked()
 	{
-//		log.append("Processing " + element + " at " + element.getNode().getStartOffset());
-		element.acceptChildren(this);
+		return myLock.get() != null;
+	}
+
+	public static void lock()
+	{
+		myLock.set(true);
+	}
+
+	public static void unlock()
+	{
+		myLock.set(null);
 	}
 }

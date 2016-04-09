@@ -23,6 +23,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.utils.PerlNamesCacheUpdateLock;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -45,9 +46,15 @@ public class HTMLMasonElementFactory
 
 	public static HTMLMasonFileImpl createFile(Project project, String text, FileType fileType)
 	{
-		String fileName = "file.dummy";
-		return (HTMLMasonFileImpl) PsiFileFactory.getInstance(project).
-				createFileFromText(fileName, fileType, text);
+		PerlNamesCacheUpdateLock.lock();
+		try
+		{
+			return (HTMLMasonFileImpl) PsiFileFactory.getInstance(project).
+					createFileFromText("file.dummy", fileType, text);
+		} finally
+		{
+			PerlNamesCacheUpdateLock.unlock();
+		}
 	}
 
 }

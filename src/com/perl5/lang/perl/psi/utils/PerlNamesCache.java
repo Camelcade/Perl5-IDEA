@@ -37,7 +37,7 @@ public class PerlNamesCache
 
 	public static Set<String> getSubsNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && areIndexesAvailable())
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && !PerlNamesCacheUpdateLock.isLocked() && areIndexesAvailable())
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlSubUtil.getDeclaredSubsNames(project));
@@ -62,7 +62,7 @@ public class PerlNamesCache
 
 	public static Set<String> getPackagesNamesSet(Project project, boolean reuseCache)
 	{
-		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && PerlPackageUtil.isPackageIndexAvailable())
+		if (!reuseCache && !isTestMode() && !DumbService.isDumb(project) && !PerlNamesCacheUpdateLock.isLocked() && PerlPackageUtil.isPackageIndexAvailable())
 		{
 			Set<String> newSet = new THashSet<String>();
 			newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
