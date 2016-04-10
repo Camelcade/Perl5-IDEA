@@ -62,7 +62,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	@Override
 	public Icon getIcon(int flags)
 	{
-		PsiFile baseFile = getViewProvider().getAllFiles().get(0);
+		PsiFile baseFile = getViewProvider().getStubBindingRoot();
 		return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
 	}
 

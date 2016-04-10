@@ -150,7 +150,8 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	@Override
 	public String getName()
 	{
-		return getTitleText();
+		PsiElement nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null : nameIdentifier.getText();
 	}
 
 	@Nullable
@@ -164,6 +165,6 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	@Override
 	public String getUsageViewShortNameLocation()
 	{
-		return getUsageViewLongNameLocation();
+		return getName();
 	}
 }

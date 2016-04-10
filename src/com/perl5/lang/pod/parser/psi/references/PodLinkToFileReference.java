@@ -104,7 +104,7 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 				List<ResolveResult> results = new ArrayList<ResolveResult>();
 				for (PsiFile targetFile : PodFileUtil.collectPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor))
 				{
-					results.add(new PsiElementResolveResult(targetFile.getViewProvider().getAllFiles().get(0)));
+					results.add(new PsiElementResolveResult(targetFile.getViewProvider().getStubBindingRoot()));
 				}
 				if (!results.isEmpty())
 				{

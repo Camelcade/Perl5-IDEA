@@ -36,6 +36,6 @@ public class PodRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, @Nullable PsiElement context)
 	{
-		return true;
+		return false;
 	}
 }

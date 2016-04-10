@@ -123,7 +123,7 @@
                    order="after PERL_SUBS_ANNOTATOR"/>
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
         <referencesSearch
-                implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferenceSearcher"/>
+                implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferencesSearcher"/>
         <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlHeredocReferenceSearcher"/>
 
         <psi.referenceContributor language="Perl5"
@@ -623,6 +623,10 @@
                          shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
                          enabledByDefault="true" level="ERROR"
                          implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
+        <localInspection language="Perl5 POD"
+                         shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
+                         enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
 
         <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5 POD"

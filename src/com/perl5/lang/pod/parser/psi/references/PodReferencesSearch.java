@@ -17,9 +17,12 @@
 package com.perl5.lang.pod.parser.psi.references;
 
 import com.intellij.openapi.application.QueryExecutorBase;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,15 +30,22 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PodReferencesSearch extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
 {
-	@Override
-	public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
+	public PodReferencesSearch()
 	{
-/*
-		PsiElement element = queryParameters.getElementToSearch();
-		if( element.getLanguage().isKindOf(PodLanguage.INSTANCE))
+		super(true);
+	}
+
+	@Override
+	public void processQuery(@NotNull final ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
+	{
+		final PsiElement element = queryParameters.getElementToSearch();
+		if (element instanceof PodTitledSection)
 		{
-			System.err.println(element);
+			final String textTitle = ((PodTitledSection) element).getTitleText();
+			if (StringUtil.isNotEmpty(textTitle))
+			{
+				queryParameters.getOptimizer().searchWord(textTitle, queryParameters.getEffectiveSearchScope(), true, element);
+			}
 		}
-*/
 	}
 }

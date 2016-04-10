@@ -27,9 +27,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.01.2016.
  */
-public class ClassAccessorReferenceSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
+public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
 {
-	public ClassAccessorReferenceSearcher()
+	public ClassAccessorReferencesSearcher()
 	{
 		super(true);
 	}

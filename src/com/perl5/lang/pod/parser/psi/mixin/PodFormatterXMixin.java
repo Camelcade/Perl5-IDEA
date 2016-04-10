@@ -69,6 +69,17 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
 	}
 
 
+	@Override
+	public String getName()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+		{
+			return nameIdentifier.getText();
+		}
+		return super.getName();
+	}
+
 	@Nullable
 	@Override
 	public PsiElement getNameIdentifier()
