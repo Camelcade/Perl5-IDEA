@@ -60,6 +60,7 @@ public class PodLinkDescriptor
 	@Nullable
 	public static PodLinkDescriptor getDescriptor(String link)
 	{
+		link = link.replace('\n', ' ');
 		PodLinkDescriptor descriptor = new PodLinkDescriptor(link);
 		Matcher m;
 		if ((m = URL_PATTERN.matcher(link)).matches())
