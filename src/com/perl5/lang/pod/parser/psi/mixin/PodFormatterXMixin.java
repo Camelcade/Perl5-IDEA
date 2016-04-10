@@ -19,10 +19,12 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,4 +68,48 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
 		return PodRenderUtil.getPodLinkForElement(this);
 	}
 
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getTitleBlock();
+	}
+
+	@Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
+		return this;
+	}
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: nameIdentifier.getTextOffset();
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewTypeLocation()
+	{
+		return "NYI Type location string for " + this;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewLongNameLocation()
+	{
+		return "NYI Long name location string for " + this;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewShortNameLocation()
+	{
+		return "NYI Short name location string for " + this;
+	}
 }

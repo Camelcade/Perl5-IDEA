@@ -103,7 +103,7 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 	@Override

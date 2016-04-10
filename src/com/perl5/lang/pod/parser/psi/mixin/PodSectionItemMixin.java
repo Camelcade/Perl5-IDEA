@@ -23,6 +23,7 @@ import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -87,5 +88,11 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
 		}
 	}
 
+	@Nullable
+	@Override
+	public String getUsageViewTypeLocation()
+	{
+		return "List Item";
+	}
 
 }

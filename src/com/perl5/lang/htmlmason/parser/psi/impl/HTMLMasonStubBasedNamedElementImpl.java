@@ -110,7 +110,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 

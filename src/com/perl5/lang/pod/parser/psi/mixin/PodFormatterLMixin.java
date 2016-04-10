@@ -29,6 +29,7 @@ import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToFileReference;
+import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -159,15 +160,25 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 			List<PsiReference> references = new ArrayList<PsiReference>();
 			final PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
 
-			// file reference
 			if (descriptor != null && !descriptor.isUrl())
 			{
+				int rangeOffset = myElement.getContentBlock().getStartOffsetInParent();
+
+				// file reference
 				TextRange fileRange = descriptor.getFileIdTextRangeInLink();
-				if (fileRange != null)
+				if (fileRange != null && !fileRange.isEmpty())
 				{
-					references.add(new PodLinkToFileReference(myElement, fileRange.shiftRight(myElement.getContentBlock().getStartOffsetInParent())));
+					references.add(new PodLinkToFileReference(myElement, fileRange.shiftRight(rangeOffset)));
+				}
+
+				// section reference
+				TextRange sectionRange = descriptor.getSectionTextRangeInLink();
+				if (sectionRange != null && !sectionRange.isEmpty())
+				{
+					references.add(new PodLinkToSectionReference(myElement, sectionRange.shiftRight(rangeOffset)));
 				}
 			}
+
 
 			references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(myElement)));
 

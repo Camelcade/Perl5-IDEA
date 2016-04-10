@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.idea.refactoring;
 
-import com.intellij.pom.PomTarget;
+import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.search.LocalSearchScope;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 10.04.2016.
  */
-public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget
+public class PodRefactoringSupportProvider extends RefactoringSupportProvider
 {
-	/**
-	 * Returns section title
-	 *
-	 * @return text representation of section
-	 */
-	@Nullable
-	String getTitleText();
+	@Override
+	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
+	{
+		return element.getUseScope() instanceof LocalSearchScope;
+	}
 
-	PsiElement getTitleBlock();
-
+	@Override
+	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, @Nullable PsiElement context)
+	{
+		return true;
+	}
 }

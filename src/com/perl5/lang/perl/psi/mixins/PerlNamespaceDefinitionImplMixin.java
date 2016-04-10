@@ -331,7 +331,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 	@Override

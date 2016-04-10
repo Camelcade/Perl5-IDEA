@@ -169,25 +169,27 @@ private pod_paragraph_content ::= pod_term+ POD_NEWLINE*
 
 pod_section ::= POD_POD
 
-section_title ::= section_title_body
-item_section_title ::= section_title_body
-private section_title_body ::= pod_term* POD_NEWLINE*
+private parse_section_title ::= section_title POD_NEWLINE*
+section_title ::= pod_term*
 
-head1_section ::= POD_HEAD1 [ section_title [head1_section_content]] {pin=1}
+private parse_item_section_title ::= item_section_title POD_NEWLINE*
+item_section_title ::= pod_term*
+
+head1_section ::= POD_HEAD1 [ parse_section_title [head1_section_content]] {pin=1}
 head1_section_content ::= head1_section_item *
 private head1_section_item ::= head2_section | head3_section | head4_section | any_level_item
 
 //private recover_pod_section ::= !(POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4|POD_OVER|POD_CUT|POD_POD|POD_FOR|POD_BEGIN|POD_ENCODING|POD_UNKNOWN)
 
-head2_section ::= POD_HEAD2 [section_title [head2_section_content]] {pin=1}
+head2_section ::= POD_HEAD2 [parse_section_title [head2_section_content]] {pin=1}
 head2_section_content ::= head2_section_item *
 private head2_section_item ::= head3_section | head4_section | any_level_item
 
-head3_section ::= POD_HEAD3 [section_title [head3_section_content]] {pin=1}
+head3_section ::= POD_HEAD3 [parse_section_title [head3_section_content]] {pin=1}
 head3_section_content ::= head3_section_item *
 private head3_section_item ::= head4_section | any_level_item
 
-head4_section ::= POD_HEAD4 [section_title [head4_section_content]] {pin=1}
+head4_section ::= POD_HEAD4 [parse_section_title [head4_section_content]] {pin=1}
 head4_section_content ::= head4_section_item *
 private head4_section_item ::= any_level_item
 
@@ -198,7 +200,7 @@ over_section_content ::= over_section_item* {recoverWhile=recover_over_section}
 private over_section_item ::=
  	item_section
 	| any_level_item
-item_section ::= POD_ITEM [item_section_title [item_section_content]] {pin=1}
+item_section ::= POD_ITEM [parse_item_section_title [item_section_content]] {pin=1}
 item_section_content ::= any_level_item +
 private recover_over_section ::= !(<<eof>>|POD_BACK|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
@@ -214,9 +216,9 @@ for_section_content ::=	POD_FORMATTED_BLOCK	| pod_term *
 
 encoding_section ::= POD_ENCODING POD_ENCODING_NAME POD_NEWLINE+ {pin=1}
 
-cut_section ::= POD_CUT [section_title] POD_NEWLINE* {pin=1}
+cut_section ::= POD_CUT [parse_section_title] POD_NEWLINE* {pin=1}
 
-unknown_section ::= POD_UNKNOWN [section_title [any_level_item*]] POD_NEWLINE*  {pin=1}
+unknown_section ::= POD_UNKNOWN [parse_section_title [any_level_item*]] POD_NEWLINE*  {pin=1}
 
 
 private pod_term ::=

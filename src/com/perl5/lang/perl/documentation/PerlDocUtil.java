@@ -256,7 +256,7 @@ public class PerlDocUtil implements PerlElementTypes
 	}
 
 	@Nullable
-	protected static PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern)
+	public static PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern)
 	{
 		if (psiFile == null)
 		{

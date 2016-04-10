@@ -14,26 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.parser.psi.references;
 
+import com.intellij.pom.PomDeclarationSearcher;
 import com.intellij.pom.PomTarget;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.util.Consumer;
+import com.perl5.lang.pod.parser.psi.PodSectionTitle;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 10.04.2016.
  */
-public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget
+public class PodPomDeclarationSearcher extends PomDeclarationSearcher
 {
-	/**
-	 * Returns section title
-	 *
-	 * @return text representation of section
-	 */
-	@Nullable
-	String getTitleText();
-
-	PsiElement getTitleBlock();
-
+	@Override
+	public void findDeclarationsAt(@NotNull PsiElement element, int offsetInElement, Consumer<PomTarget> consumer)
+	{
+		if (element.getParent() instanceof PodSectionTitle)
+		{
+			consumer.consume((PomTarget) element.getParent().getParent());
+		}
+	}
 }

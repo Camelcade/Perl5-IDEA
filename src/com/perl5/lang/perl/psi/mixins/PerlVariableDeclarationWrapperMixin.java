@@ -108,7 +108,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 	@Nullable

@@ -182,7 +182,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 }

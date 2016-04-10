@@ -14,14 +14,26 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi.manipulators;
+package com.perl5.lang.pod.idea.refactoring;
 
-import com.perl5.lang.perl.idea.manipulators.PerlTextContainerManipulator;
-import com.perl5.lang.pod.parser.psi.PodFormatterL;
+import com.intellij.lang.refactoring.NamesValidator;
+import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodFormatterLManipulator extends PerlTextContainerManipulator<PodFormatterL>
+public class PodNamesValidator implements NamesValidator
 {
+	@Override
+	public boolean isKeyword(@NotNull String name, Project project)
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isIdentifier(@NotNull String name, Project project)
+	{
+		return true;
+	}
 }

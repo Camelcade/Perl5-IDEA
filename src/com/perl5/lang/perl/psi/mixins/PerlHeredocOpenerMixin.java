@@ -70,7 +70,7 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 	@Nullable

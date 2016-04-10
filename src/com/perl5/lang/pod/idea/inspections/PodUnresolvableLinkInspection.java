@@ -24,13 +24,14 @@ import com.intellij.psi.PsiReference;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToFileReference;
+import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import com.perl5.lang.pod.psi.PsiPodFormatLink;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodUnresolvableFileInspection extends LocalInspectionTool
+public class PodUnresolvableLinkInspection extends LocalInspectionTool
 {
 	@NotNull
 	@Override
@@ -58,6 +59,18 @@ public class PodUnresolvableFileInspection extends LocalInspectionTool
 							}
 
 							error = "Can't find POD or PM file by: " + fileName;
+						}
+						else if (reference instanceof PodLinkToSectionReference)
+						{
+							String fileName = "UNKNONW";
+							PodLinkDescriptor descriptor = o.getLinkDescriptor();
+
+							if (descriptor != null && descriptor.getSection() != null)
+							{
+								fileName = descriptor.getSection();
+							}
+
+							error = "Can't find POD section: " + fileName;
 						}
 						else
 						{

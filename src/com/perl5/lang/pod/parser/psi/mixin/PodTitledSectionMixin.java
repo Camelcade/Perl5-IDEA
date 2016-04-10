@@ -17,13 +17,15 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +48,6 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	@Override
 	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
 	{
-
 		renderElementTitleAsHTML(builder, new PodRenderingContext());
 		super.renderElementAsHTML(builder, context);
 	}
@@ -100,14 +101,9 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	@Override
 	public String getPresentableText()
 	{
-		String filePresentableText = super.getPresentableText();
-
-		if (StringUtil.isNotEmpty(filePresentableText))
-		{
-			return filePresentableText + "/" + getTitleText();
-		}
 		return getTitleText();
 	}
+
 
 	@Nullable
 	@Override
@@ -121,5 +117,53 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	public String getPodLinkText()
 	{
 		return getTitleText();
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return getTitleBlock();
+	}
+
+	@Override
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier != null)
+		{
+			ElementManipulators.getManipulator(nameIdentifier).handleContentChange(nameIdentifier, name);
+		}
+		return this;
+	}
+
+	@Override
+	public int getTextOffset()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+
+		return nameIdentifier == null
+				? super.getTextOffset()
+				: nameIdentifier.getTextOffset();
+	}
+
+	@Override
+	public String getName()
+	{
+		return getTitleText();
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewLongNameLocation()
+	{
+		return getTitleText();
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewShortNameLocation()
+	{
+		return getUsageViewLongNameLocation();
 	}
 }

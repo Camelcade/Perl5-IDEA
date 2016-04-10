@@ -18,7 +18,10 @@ package com.perl5.lang.pod.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +40,7 @@ public class PodFindUsagesProvider implements FindUsagesProvider
 	@Override
 	public boolean canFindUsagesFor(@NotNull PsiElement psiElement)
 	{
-		return false;
+		return psiElement instanceof PodTitledSection;
 	}
 
 	@Nullable
@@ -51,20 +54,28 @@ public class PodFindUsagesProvider implements FindUsagesProvider
 	@Override
 	public String getType(@NotNull PsiElement element)
 	{
-		return "Unknown POD type";
+		return "Unknown POD type: " + element;
 	}
 
 	@NotNull
 	@Override
 	public String getDescriptiveName(@NotNull PsiElement element)
 	{
-		return "Unknown Pod descriptive name";
+		if (element instanceof ItemPresentation)
+		{
+			String name = ((ItemPresentation) element).getPresentableText();
+			if (StringUtil.isNotEmpty(name))
+			{
+				return name;
+			}
+		}
+		return "Unknown Pod descriptive name" + element;
 	}
 
 	@NotNull
 	@Override
 	public String getNodeText(@NotNull PsiElement element, boolean useFullName)
 	{
-		return "Unknown Pod node text";
+		return "Unknown Pod node text" + element;
 	}
 }

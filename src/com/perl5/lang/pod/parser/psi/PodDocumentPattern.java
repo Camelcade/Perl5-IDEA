@@ -20,6 +20,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -32,6 +33,7 @@ public class PodDocumentPattern
 	private Pattern myItemPattern;    // pattern to search items
 	private Pattern myHeadingPattern; // pattern to search headers
 	private String myIndexKey;    // index key to search. If both defined - first wins
+	private boolean exactMatch = false;    // set to true if need exact match, instead of startsWith
 
 	private PodDocumentPattern()
 	{
@@ -72,7 +74,11 @@ public class PodDocumentPattern
 			if (((PodSectionItem) element).getListLevel() < getListLevel())
 			{
 				String title = ((PodTitledSection) element).getTitleText();
-				return StringUtil.isNotEmpty(title) && getItemPattern().matcher(title).lookingAt();
+				if (StringUtil.isNotEmpty(title))
+				{
+					Matcher matcher = getItemPattern().matcher(title);
+					return exactMatch && matcher.matches() || matcher.lookingAt();
+				}
 			}
 		}
 		return false;
@@ -85,7 +91,11 @@ public class PodDocumentPattern
 			if (((PodTitledSection) element).getListLevel() < getListLevel())
 			{
 				String title = ((PodTitledSection) element).getTitleText();
-				return StringUtil.isNotEmpty(title) && getItemPattern().matcher(title).lookingAt();
+				if (StringUtil.isNotEmpty(title))
+				{
+					Matcher matcher = getHeadingPattern().matcher(title);
+					return exactMatch && matcher.matches() || matcher.lookingAt();
+				}
 			}
 		}
 		return false;
@@ -120,14 +130,14 @@ public class PodDocumentPattern
 		return myItemPattern;
 	}
 
-	public void setItemPattern(Pattern myItemPattern)
-	{
-		this.myItemPattern = myItemPattern;
-	}
-
 	public void setItemPattern(String itemPattern)
 	{
 		setItemPattern(StringUtil.isEmpty(itemPattern) ? null : Pattern.compile(Pattern.quote(itemPattern) + "(\\s|\\b|$)"));
+	}
+
+	public void setItemPattern(Pattern myItemPattern)
+	{
+		this.myItemPattern = myItemPattern;
 	}
 
 	public Pattern getHeadingPattern()
@@ -135,14 +145,14 @@ public class PodDocumentPattern
 		return myHeadingPattern;
 	}
 
-	public void setHeadingPattern(String pattern)
-	{
-		setHeadingPattern(StringUtil.isEmpty(pattern) ? null : Pattern.compile(Pattern.quote(pattern) + "(\\s|\\b|$)"));
-	}
-
 	public void setHeadingPattern(Pattern myHeadingPattern)
 	{
 		this.myHeadingPattern = myHeadingPattern;
+	}
+
+	public void setHeadingPattern(String pattern)
+	{
+		setHeadingPattern(StringUtil.isEmpty(pattern) ? null : Pattern.compile(Pattern.quote(pattern) + "(\\s|\\b|$)"));
 	}
 
 	public String getIndexKey()
@@ -153,6 +163,12 @@ public class PodDocumentPattern
 	public void setIndexKey(String myIndexkey)
 	{
 		this.myIndexKey = myIndexkey;
+	}
+
+	public PodDocumentPattern withExactMatch()
+	{
+		exactMatch = true;
+		return this;
 	}
 }
 

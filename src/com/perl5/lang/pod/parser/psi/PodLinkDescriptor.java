@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 public class PodLinkDescriptor
 {
 	private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
-	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"([^\"]*?)\"|(.*?)");
+	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"(.*?)\"|(.*?)");
 	private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\|)?");
 	private static final Pattern URL_PATTERN = Pattern.compile(
 			EXPLICIT_TITLE_PATTERN +

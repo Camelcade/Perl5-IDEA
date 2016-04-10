@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionH2;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -49,6 +50,13 @@ public class PodSectionH2Mixin extends PodTitledSectionMixin implements PodSecti
 	public int getHeadingLevel()
 	{
 		return 2;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewTypeLocation()
+	{
+		return "2nd Level Header";
 	}
 
 }

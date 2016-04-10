@@ -98,6 +98,13 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
 	@Override
 	public String getPresentableText()
 	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public String getLocationString()
+	{
 		PsiFile file = getContainingFile();
 		if (file != null)
 		{
@@ -116,13 +123,6 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
 
 	@Nullable
 	@Override
-	public String getLocationString()
-	{
-		return "Element location";
-	}
-
-	@Nullable
-	@Override
 	public Icon getIcon(boolean unused)
 	{
 		PsiFile file = getContainingFile();
@@ -133,5 +133,26 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
 	public int getHeadingLevel()
 	{
 		return 0;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewTypeLocation()
+	{
+		return "NYI Type location string for " + this;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewLongNameLocation()
+	{
+		return "NYI Long name location string for " + this;
+	}
+
+	@Nullable
+	@Override
+	public String getUsageViewShortNameLocation()
+	{
+		return "NYI Short name location string for " + this;
 	}
 }

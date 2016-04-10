@@ -62,7 +62,7 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 
 		return nameIdentifier == null
 				? super.getTextOffset()
-				: getNameIdentifier().getTextOffset();
+				: nameIdentifier.getTextOffset();
 	}
 
 	@Override

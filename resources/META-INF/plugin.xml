@@ -220,7 +220,6 @@
         <elementDescriptionProvider
                 implementation="com.perl5.lang.perl.parser.Class.Accessor.psi.ClassAccessorElementDescriptionProvider"/>
 
-
         <lang.refactoringSupport language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
@@ -599,8 +598,7 @@
         <lang.psiStructureViewFactory language="Perl5 POD"
                                       implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
         <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
-        <lang.findUsagesProvider language="Perl5 POD"
-                                 implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
+
         <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
                                order="first"/>
 
@@ -614,13 +612,24 @@
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
 
-        <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodFormatterL" order="first"
-                                 implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodFormatterLManipulator"/>
+        <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
+                                 implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 
         <localInspection language="Perl5 POD"
                          shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
                          enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableFileInspection"/>
+                         implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
+        <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
+        <lang.refactoringSupport language="Perl5 POD"
+                                 implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
+        <lang.namesValidator language="Perl5 POD"
+                             implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
+
+        <lang.findUsagesProvider language="Perl5 POD"
+                                 implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
+        <referencesSearch
+                implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
+        <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
 
         <!--POD settings end -->
 
