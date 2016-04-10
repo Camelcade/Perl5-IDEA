@@ -184,7 +184,7 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	@Override
 	public String getUsageViewTypeLocation()
 	{
-		return "NYI Type location string for " + this;
+		return "POD file";
 	}
 
 	@Nullable

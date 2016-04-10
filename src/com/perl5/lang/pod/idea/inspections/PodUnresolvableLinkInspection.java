@@ -20,6 +20,7 @@ import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
@@ -44,7 +45,7 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool
 			{
 				for (PsiReference reference : o.getReferences())
 				{
-					if (reference.resolve() == null)
+					if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference) reference).multiResolve(false).length == 0)
 					{
 						String error;
 

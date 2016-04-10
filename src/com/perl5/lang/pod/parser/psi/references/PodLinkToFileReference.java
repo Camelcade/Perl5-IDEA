@@ -62,6 +62,7 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 		if (descriptor != null)
 		{
 			String currentName = descriptor.getFileId();
+
 			if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))
 			{
 				String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);

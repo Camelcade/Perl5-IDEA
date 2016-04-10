@@ -34,7 +34,7 @@ public class PodLinkDescriptor
 	private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\|)?");
 	private static final Pattern URL_PATTERN = Pattern.compile(
 			EXPLICIT_TITLE_PATTERN +
-					"(\\A\\w+:[^:\\s]\\S*\\z)"
+					"(\\w+:[^:\\s]\\S*)"
 	);
 	private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
 			EXPLICIT_TITLE_PATTERN +    // title
