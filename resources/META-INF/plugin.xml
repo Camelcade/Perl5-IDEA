@@ -619,6 +619,11 @@
                          shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
                          enabledByDefault="true" level="WARNING"
                          implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
+        <localInspection language="Perl5 POD"
+                         shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
+                         enabledByDefault="true" level="ERROR"
+                         implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
+
         <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
         <lang.refactoringSupport language="Perl5 POD"
                                  implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
