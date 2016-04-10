@@ -21,10 +21,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
-import com.perl5.lang.pod.parser.psi.PodFormatterL;
-import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -52,7 +49,7 @@ public class PodLinkToSectionReference extends PodReferenceBase<PodFormatterL>
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		return super.handleElementRename(newElementName);
+		return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
 	}
 
 	private static class PodSectionReferenceResolver implements ResolveCache.PolyVariantResolver<PodLinkToSectionReference>

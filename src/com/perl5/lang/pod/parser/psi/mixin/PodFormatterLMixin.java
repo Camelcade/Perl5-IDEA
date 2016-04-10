@@ -21,6 +21,7 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
@@ -135,10 +136,14 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		@Override
 		protected PodLinkDescriptor compute()
 		{
-			String contentText = PodRenderUtil.renderPsiElementAsText(myFormatter.getContentBlock());
-			if (StringUtil.isNotEmpty(contentText))
+			PsiElement contentBlock = myFormatter.getContentBlock();
+			if (contentBlock != null)
 			{
-				return PodLinkDescriptor.getDescriptor(contentText);
+				String contentText = contentBlock.getText();
+				if (StringUtil.isNotEmpty(contentText))
+				{
+					return PodLinkDescriptor.getDescriptor(contentText);
+				}
 			}
 			return null;
 		}
@@ -162,20 +167,24 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 
 			if (descriptor != null && !descriptor.isUrl())
 			{
-				int rangeOffset = myElement.getContentBlock().getStartOffsetInParent();
-
-				// file reference
-				TextRange fileRange = descriptor.getFileIdTextRangeInLink();
-				if (fileRange != null && !fileRange.isEmpty())
+				PsiElement contentBlock = myElement.getContentBlock();
+				if (contentBlock != null)
 				{
-					references.add(new PodLinkToFileReference(myElement, fileRange.shiftRight(rangeOffset)));
-				}
+					int rangeOffset = contentBlock.getStartOffsetInParent();
 
-				// section reference
-				TextRange sectionRange = descriptor.getSectionTextRangeInLink();
-				if (sectionRange != null && !sectionRange.isEmpty())
-				{
-					references.add(new PodLinkToSectionReference(myElement, sectionRange.shiftRight(rangeOffset)));
+					// file reference
+					TextRange fileRange = descriptor.getFileIdTextRangeInLink();
+					if (fileRange != null && !fileRange.isEmpty())
+					{
+						references.add(new PodLinkToFileReference(myElement, fileRange.shiftRight(rangeOffset)));
+					}
+
+					// section reference
+					TextRange sectionRange = descriptor.getSectionTextRangeInLink();
+					if (sectionRange != null && !sectionRange.isEmpty())
+					{
+						references.add(new PodLinkToSectionReference(myElement, sectionRange.shiftRight(rangeOffset)));
+					}
 				}
 			}
 

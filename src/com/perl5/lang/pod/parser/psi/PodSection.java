@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -25,5 +26,6 @@ public interface PodSection extends PodCompositeElement
 {
 	boolean hasContent();
 
+	@Nullable
 	PsiElement getContentBlock();
 }
