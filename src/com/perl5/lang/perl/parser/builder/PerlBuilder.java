@@ -39,8 +39,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	private final PerlParserImpl perlParser;
 	protected Set<String> KNOWN_SUBS;
 	protected Set<String> KNOWN_PACKAGES;
-	protected boolean recoveringStatement = false;
-	protected int bracesLevel = 0;
+
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
 	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
@@ -130,37 +129,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	public boolean isKnownPackage(String packageName)
 	{
 		return KNOWN_PACKAGES.contains(PerlPackageUtil.getCanonicalPackageName(packageName));
-	}
-
-	public void startRecovery()
-	{
-		recoveringStatement = true;
-		bracesLevel = 0;
-	}
-
-	public void stopRecovery()
-	{
-		recoveringStatement = false;
-	}
-
-	public boolean isRecovering()
-	{
-		return recoveringStatement;
-	}
-
-	public int getBracesLevel()
-	{
-		return bracesLevel;
-	}
-
-	public void openBrace()
-	{
-		bracesLevel++;
-	}
-
-	public void closeBrace()
-	{
-		bracesLevel--;
 	}
 
 	public boolean isStringify()
