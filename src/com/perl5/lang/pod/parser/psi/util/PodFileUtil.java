@@ -31,7 +31,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +54,7 @@ public class PodFileUtil
 	));
 
 	@Nullable
-	public static String getPackageName(PodFile file)
+	public static String getPackageName(PsiFile file)
 	{
 		VirtualFile virtualFile = file.getVirtualFile();
 		VirtualFile classRoot = PerlUtil.getFileClassRoot(file);

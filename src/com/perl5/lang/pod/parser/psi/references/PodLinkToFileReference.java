@@ -70,8 +70,7 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 
 				return super.handleElementRename(newElementName);
 			}
-
-			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
+//			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
 		}
 		return myElement;
 	}
@@ -79,7 +78,15 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 	@Override
 	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
 	{
-		return super.bindToElement(element);
+		if (element instanceof PsiFile)
+		{
+			String newName = PodFileUtil.getPackageName((PsiFile) element);
+			if (StringUtil.isNotEmpty(newName))
+			{
+				return super.handleElementRename(newName);
+			}
+		}
+		return myElement;
 	}
 
 	private static class PodFileReferenceResolver implements ResolveCache.PolyVariantResolver<PodLinkToFileReference>
@@ -96,7 +103,7 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 				List<ResolveResult> results = new ArrayList<ResolveResult>();
 				for (PsiFile targetFile : PodFileUtil.collectPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor))
 				{
-					results.add(new PsiElementResolveResult(targetFile));
+					results.add(new PsiElementResolveResult(targetFile.getViewProvider().getAllFiles().get(0)));
 				}
 				if (!results.isEmpty())
 				{

@@ -135,11 +135,6 @@ public class PerlPsiUtil
 		{
 			PerlPsiUtil.renameElement(element, newPackageName);
 		}
-		else
-		{
-			System.err.println("Unhandled reference from: " + element + ": " + element.getText());
-		}
-		// todo handle string contents for require
 	}
 
 	@Nullable
