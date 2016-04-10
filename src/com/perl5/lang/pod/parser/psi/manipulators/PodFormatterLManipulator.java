@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.parser.psi.manipulators;
 
-import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.idea.manipulators.PerlTextContainerManipulator;
+import com.perl5.lang.pod.parser.psi.PodFormatterL;
 
 /**
- * Created by hurricup on 26.03.2016.
+ * Created by hurricup on 10.04.2016.
  */
-public interface PodFormatterL extends PsiElement, PodFormatter, PodSection
+public class PodFormatterLManipulator extends PerlTextContainerManipulator<PodFormatterL>
 {
-	@Nullable
-	PodLinkDescriptor getLinkDescriptor();
 }

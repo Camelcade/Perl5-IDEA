@@ -17,12 +17,24 @@
 package com.perl5.lang.pod.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFormatterL;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 07.04.2016.
@@ -46,7 +58,22 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
 	{
-		return super.handleElementRename(newElementName);
+		PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
+		if (descriptor != null)
+		{
+			String currentName = descriptor.getFileId();
+			if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))
+			{
+				String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+				nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
+				newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+
+				return super.handleElementRename(newElementName);
+			}
+
+			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
+		}
+		return myElement;
 	}
 
 	@Override
@@ -61,9 +88,24 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 		@Override
 		public ResolveResult[] resolve(@NotNull PodLinkToFileReference podLinkToFileReference, boolean incompleteCode)
 		{
+			PodFormatterL podLink = podLinkToFileReference.getElement();
+			PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
+			if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null)
+			{
+				List<ResolveResult> results = new ArrayList<ResolveResult>();
+				for (PsiFile targetFile : PodFileUtil.collectPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor))
+				{
+					results.add(new PsiElementResolveResult(targetFile));
+				}
+				if (!results.isEmpty())
+				{
+					// fixme this could be smarter and check file for target section
+					return results.toArray(new ResolveResult[results.size()]);
+				}
+			}
 
-			return new ResolveResult[0];
+			return ResolveResult.EMPTY_ARRAY;
 		}
 	}
 }

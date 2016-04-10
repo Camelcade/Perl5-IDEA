@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +47,9 @@ public class PodLinkDescriptor
 	private String myEnforcedFileId;
 	private String mySection;
 	private String myTitle;
+	private int myTitleOffset;
+	private int myFileIdOffset;
+	private int mySectionOffset;
 	private boolean myIsUrl;
 
 	private PodLinkDescriptor(String link)
@@ -60,30 +64,30 @@ public class PodLinkDescriptor
 		Matcher m;
 		if ((m = URL_PATTERN.matcher(link)).matches())
 		{
-			if (m.group(1) != null)
-				descriptor.setTitle(m.group(1));
-			else if (m.group(2) != null)
-				descriptor.setTitle(m.group(2));
+			descriptor.setTitle(m);
 
-			descriptor.setFileId(m.group(3));
+			descriptor.setFileId(m.group(3), m.start(3));
 			descriptor.setUrl(true);
 
 			return descriptor;
 		}
 		else if ((m = NAMED_ELEMENT_PATTERN.matcher(link)).matches())
 		{
-			if (m.group(1) != null)
-				descriptor.setTitle(m.group(1));
-			else if (m.group(2) != null)
-				descriptor.setTitle(m.group(2));
+			descriptor.setTitle(m);
 
 			if (m.group(3) != null)
-				descriptor.setFileId(m.group(3));
+			{
+				descriptor.setFileId(m.group(3), m.start(3));
+			}
 
 			if (m.group(4) != null)
-				descriptor.setSection(m.group(4));
+			{
+				descriptor.setSection(m.group(4), m.start(4));
+			}
 			else if (m.group(5) != null)
-				descriptor.setSection(m.group(5));
+			{
+				descriptor.setSection(m.group(5), m.start(5));
+			}
 
 			return descriptor;
 		}
@@ -102,9 +106,13 @@ public class PodLinkDescriptor
 		return myFileId;
 	}
 
-	public void setFileId(String myFileId)
+	public void setFileId(String fileId, int startOffset)
 	{
-		this.myFileId = StringUtil.isEmpty(myFileId) ? null : myFileId;
+		myFileId = StringUtil.isEmpty(fileId) ? null : fileId;
+		if (myFileId != null)
+		{
+			myFileIdOffset = startOffset;
+		}
 	}
 
 	public String getSection()
@@ -112,9 +120,13 @@ public class PodLinkDescriptor
 		return mySection;
 	}
 
-	public void setSection(String mySection)
+	public void setSection(String mySection, int startOffset)
 	{
 		this.mySection = StringUtil.isEmpty(mySection) ? null : mySection;
+		if (this.mySection != null)
+		{
+			mySectionOffset = startOffset;
+		}
 	}
 
 	public String getTitle()
@@ -122,9 +134,25 @@ public class PodLinkDescriptor
 		return myTitle == null ? getInferredTitle() : myTitle;
 	}
 
-	public void setTitle(String myTitle)
+	private void setTitle(Matcher m)
+	{
+		if (m.group(1) != null)
+		{
+			setTitle(m.group(1), m.start(1));
+		}
+		else if (m.group(2) != null)
+		{
+			setTitle(m.group(2), m.start(2));
+		}
+	}
+
+	public void setTitle(String myTitle, int startOffset)
 	{
 		this.myTitle = StringUtil.isEmpty(myTitle) ? null : myTitle;
+		if (this.myTitle != null)
+		{
+			myTitleOffset = startOffset;
+		}
 	}
 
 	protected String getInferredTitle()
@@ -191,5 +219,23 @@ public class PodLinkDescriptor
 	public void setEnforcedFileId(String myEnforcedFileId)
 	{
 		this.myEnforcedFileId = myEnforcedFileId;
+	}
+
+	@Nullable
+	public TextRange getTitleTextRangeInLink()
+	{
+		return myTitle == null ? null : new TextRange(myTitleOffset, myTitleOffset + myTitle.length());
+	}
+
+	@Nullable
+	public TextRange getFileIdTextRangeInLink()
+	{
+		return myFileId == null ? null : new TextRange(myFileIdOffset, myFileIdOffset + myFileId.length());
+	}
+
+	@Nullable
+	public TextRange getSectionTextRangeInLink()
+	{
+		return mySection == null ? null : new TextRange(mySectionOffset, mySectionOffset + mySection.length());
 	}
 }

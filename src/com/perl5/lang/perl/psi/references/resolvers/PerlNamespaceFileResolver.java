@@ -44,7 +44,7 @@ public class PerlNamespaceFileResolver implements ResolveCache.PolyVariantResolv
 		}
 
 		return targetFile == null
-				? new ResolveResult[0]
+				? ResolveResult.EMPTY_ARRAY
 				: new ResolveResult[]{new PsiElementResolveResult(targetFile)};
 	}
 }

@@ -54,7 +54,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 
 		if (variableContainer instanceof PerlVariableDeclarationWrapper) // it's a declaration
 		{
-			return new ResolveResult[0];
+			return ResolveResult.EMPTY_ARRAY;
 		}
 
 		PerlVariableDeclarationWrapper lexicalDeclaration = myVariable.getLexicalDeclaration();

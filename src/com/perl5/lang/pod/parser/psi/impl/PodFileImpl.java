@@ -23,6 +23,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFile;
@@ -61,7 +62,8 @@ public class PodFileImpl extends PsiFileBase implements PodFile
 	@Override
 	public Icon getIcon(int flags)
 	{
-		return super.getIcon(flags);
+		PsiFile baseFile = getViewProvider().getAllFiles().get(0);
+		return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
 	}
 
 	// fixme this is debugging method

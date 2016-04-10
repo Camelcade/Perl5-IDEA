@@ -47,6 +47,8 @@ import java.util.Set;
  */
 public class PodFileUtil
 {
+	public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
+
 	private static final Set<String> myClassLikeExtensions = new THashSet<String>(Arrays.asList(
 			PodFileType.EXTENSION,
 			PerlFileTypePackage.EXTENSION
@@ -69,7 +71,7 @@ public class PodFileUtil
 				String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
 				if (relativePath != null)
 				{
-					return StringUtil.join(relativePath.replaceAll(".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$", "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
+					return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
 				}
 			}
 		}

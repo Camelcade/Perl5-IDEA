@@ -101,7 +101,9 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 			else    // static resolution
 			{
 				if (expliclitPackageElement == null && subNameElement.isBuiltIn())
-					return new ResolveResult[0];
+				{
+					return ResolveResult.EMPTY_ARRAY;
+				}
 
 				if (Perl5Settings.getInstance(project).SIMPLE_MAIN_RESOLUTION && PerlPackageUtil.isMain(packageName))    // fixme this is a dirty hack until proper names resolution implemented
 				{
