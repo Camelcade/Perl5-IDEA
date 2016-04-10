@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 {
+  psiVisitorName="PodVisitorGenerated"
   elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypesGenerated"
 
   elementTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getElementType"
@@ -45,7 +46,10 @@ limitations under the License.
   mixin("pod_format_escape")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterEMixin"
   mixin("pod_format_file")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterFMixin"
   mixin("pod_format_italic")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterIMixin"
+
+  implements("pod_format_link")="com.perl5.lang.pod.parser.psi.PodFormatterL"
   mixin("pod_format_link")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterLMixin"
+
   mixin("pod_format_nbsp")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterSMixin"
   mixin("pod_format_index")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterXMixin"
   mixin("pod_format_null")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterZMixin"

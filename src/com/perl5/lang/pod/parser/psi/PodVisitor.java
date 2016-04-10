@@ -16,11 +16,20 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-import com.perl5.lang.pod.psi.PsiVisitor;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.pod.psi.PsiPodVisitorGenerated;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 27.03.2016.
  */
-public class PodVisitor extends PsiVisitor
+public class PodVisitor extends PsiPodVisitorGenerated
 {
+	@Override
+	public void visitElement(@NotNull PsiElement o)
+	{
+		// fixme no idea why generated visitor has recursion
+		ProgressIndicatorProvider.checkCanceled();
+	}
 }

@@ -617,6 +617,11 @@
         <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodFormatterL" order="first"
                                  implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodFormatterLManipulator"/>
 
+        <localInspection language="Perl5 POD"
+                         shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
+                         enabledByDefault="true" level="WARNING"
+                         implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableFileInspection"/>
+
         <!--POD settings end -->
 
 

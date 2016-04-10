@@ -147,9 +147,9 @@ public class PodRenderUtil implements PodElementTypes
 		}
 	}
 
-	public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor)
+	public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor, boolean isError)
 	{
-		return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle());
+		return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle(), isError);
 	}
 
 	public static String getHTMLPsiLink(@NotNull PodLinkTarget target)
@@ -173,6 +173,11 @@ public class PodRenderUtil implements PodElementTypes
 
 	public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text)
 	{
+		return getHTMLLink(link, isPsi, text, false);
+	}
+
+	public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text, boolean isError)
+	{
 		StringBuilder builder = new StringBuilder();
 
 		builder.append("<a href=\"");
@@ -187,7 +192,14 @@ public class PodRenderUtil implements PodElementTypes
 			builder.append(link);
 		}
 
-		builder.append("\">");
+		builder.append("\"");
+
+		if (isError)
+		{
+			builder.append(" style=\"color:red\"");
+		}
+
+		builder.append(">");
 		builder.append(text == null ? link : text);
 		builder.append("</a>");
 

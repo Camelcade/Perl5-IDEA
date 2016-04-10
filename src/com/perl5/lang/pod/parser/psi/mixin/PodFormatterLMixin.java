@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
@@ -42,6 +43,7 @@ import java.util.List;
 public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 {
 	private AtomicNotNullLazyValue<PsiReference[]> lazyReference;
+	private AtomicNullableLazyValue<PodLinkDescriptor> myLinkDescriptor;
 
 	public PodFormatterLMixin(@NotNull ASTNode node)
 	{
@@ -54,7 +56,7 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		String contentText = PodRenderUtil.renderPsiElementAsText(getContentBlock());
 		if (StringUtil.isNotEmpty(contentText))
 		{
-			PodLinkDescriptor descriptor = PodLinkDescriptor.getDescriptor(contentText);
+			PodLinkDescriptor descriptor = getLinkDescriptor();
 
 			if (descriptor != null)
 			{
@@ -66,7 +68,8 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 						descriptor.setEnforcedFileId(((PodLinkTarget) psiFile).getPodLink());
 					}
 				}
-				builder.append(PodRenderUtil.getHTMLLink(descriptor));
+
+				builder.append(PodRenderUtil.getHTMLLink(descriptor, !isResolvable()));
 			}
 			else    // fallback
 			{
@@ -75,16 +78,28 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		}
 	}
 
+	private boolean isResolvable()
+	{
+		for (PsiReference reference : getReferences())
+		{
+			if (reference.resolve() == null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Nullable
 	@Override
 	public PodLinkDescriptor getLinkDescriptor()
 	{
-		String contentText = PodRenderUtil.renderPsiElementAsText(getContentBlock());
-		if (StringUtil.isNotEmpty(contentText))
+		if (myLinkDescriptor == null)
 		{
-			return PodLinkDescriptor.getDescriptor(contentText);
+			myLinkDescriptor = new LazyPodLinkDescriptor(this);
 		}
-		return null;
+
+		return myLinkDescriptor.getValue();
 	}
 
 	@NotNull
@@ -103,6 +118,29 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 	{
 		super.subtreeChanged();
 		lazyReference = null;
+		myLinkDescriptor = null;
+	}
+
+	private static class LazyPodLinkDescriptor extends AtomicNullableLazyValue<PodLinkDescriptor>
+	{
+		private final PodFormatterL myFormatter;
+
+		public LazyPodLinkDescriptor(PodFormatterL myFormatter)
+		{
+			this.myFormatter = myFormatter;
+		}
+
+		@Nullable
+		@Override
+		protected PodLinkDescriptor compute()
+		{
+			String contentText = PodRenderUtil.renderPsiElementAsText(myFormatter.getContentBlock());
+			if (StringUtil.isNotEmpty(contentText))
+			{
+				return PodLinkDescriptor.getDescriptor(contentText);
+			}
+			return null;
+		}
 	}
 
 	private static class PodFormatterLLazyReference extends AtomicNotNullLazyValue<PsiReference[]>
