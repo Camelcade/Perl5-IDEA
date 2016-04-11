@@ -134,15 +134,8 @@ public class PerlElementFactory
 
 	public static PerlFileImpl createFile(Project project, String text, FileType fileType)
 	{
-		PerlNamesCacheUpdateLock.lock();
-		try
-		{
 			return (PerlFileImpl) PsiFileFactory.getInstance(project).
 					createFileFromText("file.dummy", fileType, text);
-		} finally
-		{
-			PerlNamesCacheUpdateLock.unlock();
-		}
 	}
 
 
