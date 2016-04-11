@@ -22,11 +22,12 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlTokenData;
-import com.perl5.lang.perl.psi.utils.PerlNamesCache;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import gnu.trove.THashSet;
 
 import java.util.Set;
 
@@ -72,8 +73,18 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
 	protected void initIndexes()
 	{
-		KNOWN_SUBS = PerlNamesCache.getSubsNamesSet(myProject, false);
-		KNOWN_PACKAGES = PerlNamesCache.getPackagesNamesSet(myProject, false);
+		PerlNamesCache component = myProject.getComponent(PerlNamesCache.class);
+
+		if (component == null)
+		{
+			KNOWN_SUBS = new THashSet<String>();
+			KNOWN_PACKAGES = new THashSet<String>();
+		}
+		else
+		{
+			KNOWN_SUBS = component.getSubsNamesSet();
+			KNOWN_PACKAGES = component.getPackagesNamesSet();
+		}
 	}
 
 	/**

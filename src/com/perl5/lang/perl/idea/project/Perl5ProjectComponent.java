@@ -77,5 +77,4 @@ public class Perl5ProjectComponent implements ProjectComponent
 		// called when project is being closed
 //		PsiManager.getInstance(myProject).removePsiTreeChangeListener(myPsiTreeChangeListener);
 	}
-
 }

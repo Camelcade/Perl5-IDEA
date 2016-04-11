@@ -29,7 +29,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.builder.PerlBuilderLight;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -205,30 +204,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
 
-//		if (!LIGHT_CONTAINERS.contains(root))
-//		{
-//		int length = 100;
-//			if (length > builder.getOriginalText().length())
-//				length = builder.getOriginalText().length();
-//			System.err.println("Adapting builder for " + root + " " + builder.getOriginalText().length() + " " + builder.getOriginalText().subSequence(0, length));
-//		}
-//		else
-//			System.err.println("Adapting safe builder for " + root + " " + builder.getOriginalText().length());
+		PerlBuilder perlBuilder = new PerlBuilder(builder, state, parser);
 
 		if (root == PARSABLE_STRING_USE_VARS)
 		{
-			PerlBuilder perlBuilder = new PerlBuilderLight(builder, state, parser);
 			perlBuilder.setUseVarsContent(true);
-			return perlBuilder;
 		}
-		if (LIGHT_CONTAINERS.contains(root))
-		{
-			return new PerlBuilderLight(builder, state, parser);
-		}
-		else
-		{
-			return new PerlBuilder(builder, state, parser);
-		}
+		return perlBuilder;
 	}
 
 	/**
