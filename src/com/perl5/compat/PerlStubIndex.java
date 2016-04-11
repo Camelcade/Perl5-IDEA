@@ -24,6 +24,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
+import com.intellij.util.indexing.IdFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +41,32 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 	public static PerlStubIndex getInstance()
 	{
 		return StubIndexHolder.ourInstance;
+	}
+
+	public static <Key, Psi extends PsiElement> Collection<Psi> getElements(@NotNull StubIndexKey<Key, Psi> indexKey,
+																			@NotNull Key key,
+																			@NotNull final Project project,
+																			@Nullable final GlobalSearchScope scope,
+																			@NotNull Class<Psi> requiredClass)
+	{
+		return getElements(indexKey, key, project, scope, null, requiredClass);
+	}
+
+	public static <Key, Psi extends PsiElement> Collection<Psi> getElements(@NotNull StubIndexKey<Key, Psi> indexKey,
+																			@NotNull Key key,
+																			@NotNull final Project project,
+																			@Nullable final GlobalSearchScope scope,
+																			@Nullable IdFilter idFilter,
+																			@NotNull Class<Psi> requiredClass)
+	{
+		getInstance().myAccessValidator.checkAndStartProcessingActivityForIndex(indexKey);
+		try
+		{
+			return StubIndex.getElements(indexKey, key, project, scope, idFilter, requiredClass);
+		} finally
+		{
+			getInstance().myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
+		}
 	}
 
 	@Override
