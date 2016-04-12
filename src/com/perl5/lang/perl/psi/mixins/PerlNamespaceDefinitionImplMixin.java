@@ -487,7 +487,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 				{
 					PsiPerlArrayVariable variable = PsiTreeUtil.findChildOfType(element, PsiPerlArrayVariable.class);
 
-					if (variable != null)
+					if (variable != null && StringUtil.equals("ISA", variable.getName()))
 					{
 						PerlNamespaceElement namespaceElement = variable.getNamespaceElement();
 						if (namespaceElement == null || StringUtil.equals(namespaceElement.getCanonicalName(), myPackageName))
