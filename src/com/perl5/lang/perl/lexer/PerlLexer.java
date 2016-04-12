@@ -559,13 +559,10 @@ public class PerlLexer extends PerlLexerGenerated
 		return processLexer(tokenLexer);
 	}
 
-	// fixme to make this work you must remove final in PerlParserGenerated manually.
 	@Override
-	public int yystate()
+	protected int getPreparsedLexicalState()
 	{
-		if (preparsedTokensList.size() > 0)
-			return LEX_PREPARSED_ITEMS;
-		return super.yystate();
+		return LEX_PREPARSED_ITEMS;
 	}
 
 	/**
@@ -1293,7 +1290,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public void reset(CharSequence buf, int start, int end, int initialState)
 	{
 		super.reset(buf, start, end, initialState);
-		resetInternals();
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 

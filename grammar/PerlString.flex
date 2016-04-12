@@ -75,6 +75,8 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 SIMPLE_SCALAR = "${" "^"? {BAREWORD_MINUS} "}"
 SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
+%state LEX_PREPARSED_ITEMS
+
 %%
 
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}

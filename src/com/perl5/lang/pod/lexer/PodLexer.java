@@ -45,7 +45,13 @@ public class PodLexer extends PodLexerGenerated
 	}
 
 	@Override
-	public IElementType advance() throws IOException
+	protected int getPreparsedLexicalState()
+	{
+		return LEX_PREPARSED_ITEMS;
+	}
+
+	@Override
+	public IElementType perlAdvance() throws IOException
 	{
 		int state = yystate();
 
@@ -56,7 +62,7 @@ public class PodLexer extends PodLexerGenerated
 			yybegin(YYINITIAL);
 			while (true)
 			{
-				IElementType result = super.advance();
+				IElementType result = super.perlAdvance();
 				if (result == null) // eof
 				{
 					if (tokenEnd > tokenStart)
@@ -88,7 +94,7 @@ public class PodLexer extends PodLexerGenerated
 			yybegin(YYINITIAL);
 			while (true)
 			{
-				IElementType result = super.advance();
+				IElementType result = super.perlAdvance();
 				if (result == null) // eof
 				{
 					if (tokenEnd > tokenStart)
@@ -114,7 +120,7 @@ public class PodLexer extends PodLexerGenerated
 			}
 		}
 
-		IElementType result = super.advance();
+		IElementType result = super.perlAdvance();
 		state = yystate();
 		if (state == LEX_COMMAND_WAITING && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE && result != POD_CODE && result != POD_CUT ||
 				state == LEX_COMMAND_READY && result != TokenType.NEW_LINE_INDENT && result != TokenType.WHITE_SPACE && result != POD_NEWLINE && result != POD_CODE)

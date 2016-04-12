@@ -21,9 +21,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Stack;
 import java.util.regex.Pattern;
 
 /**
@@ -53,10 +50,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					"(" +
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
-	public final Stack<Integer> stateStack = new Stack<Integer>();
-	public final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
-	protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();
-	protected int bufferStart;
 
 	// has identifier inside
 	public IElementType adjustAndParsePackage()
@@ -94,54 +87,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
 	public abstract IElementType parseBarewordMinus();
 
-	public abstract int getRealLexicalState();
-
-	public abstract CharSequence yytext();
-
-	public IElementType advance() throws IOException
-	{
-		IElementType tokenType = null;
-
-		if (preparsedTokensList.size() > 0)
-			tokenType = getPreParsedToken();
-		else
-			tokenType = perlAdvance();
-
-		if (tokenType != null)
-			registerToken(tokenType, yytext());
-
-		return tokenType;
-	}
-
-	public abstract IElementType perlAdvance() throws IOException;
-
-
-	/**
-	 * Reading tokens from parsed queue, setting start and end and returns them one by one
-	 *
-	 * @return token type or null if queue is empty
-	 */
-	public IElementType getPreParsedToken()
-	{
-		return restoreToken(preparsedTokensList.removeFirst());
-	}
-
-	private IElementType restoreToken(CustomToken token)
-	{
-		setTokenStart(token.getTokenStart());
-		setTokenEnd(token.getTokenEnd());
-		return token.getTokenType();
-	}
-
-	public void pushState()
-	{
-		stateStack.push(getRealLexicalState());
-	}
-
-	public void popState()
-	{
-		yybegin(stateStack.pop());
-	}
 
 	// only ::
 	public IElementType adjustAndParsePackageShort()
@@ -182,10 +127,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return PACKAGE_IDENTIFIER;
 	}
 
-	public PerlTokenHistory getTokenHistory()
-	{
-		return myTokenHistory;
-	}
 
 	// check that current token surrounded with braces
 	protected boolean isBraced()
@@ -193,174 +134,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE && getNextNonSpaceCharacter() == '}';
 	}
 
-	protected Character getNextSignificantCharacter()
-	{
-		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
-	}
-
-	protected int getNextSignificantCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-			if (currentChar == '#')
-			{
-				while (currentPosition < bufferEnd)
-				{
-					if (buffer.charAt(currentPosition) == '\n')
-						break;
-					currentPosition++;
-				}
-			}
-			else if (!Character.isWhitespace(currentChar))
-				return currentPosition;
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	protected char getNextCharacter()
-	{
-		return getSafeCharacterAt(getTokenEnd());
-	}
-
-	protected char getSafeCharacterAt(int offset)
-	{
-		if (offset < getBufferEnd())
-		{
-			return getBuffer().charAt(offset);
-		}
-		return 0;
-	}
-
-	protected int getNextNonSpaceCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			if (!Character.isWhitespace(buffer.charAt(currentPosition)))
-				return currentPosition;
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	protected char getNextNonSpaceCharacter()
-	{
-		return getNextNonSpaceCharacter(getTokenEnd());
-	}
-
-	protected char getNextNonSpaceCharacter(int nextPosition)
-	{
-		nextPosition = getNextNonSpaceCharacterPosition(nextPosition);
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : 0;    // not sure it's a good idea
-	}
-
-	public void registerToken(IElementType tokenType, CharSequence tokenText)
-	{
-		getTokenHistory().addToken(tokenType, tokenText);
-	}
-
-	// fixme this must be done using skeleton
-	public void resetInternals()
-	{
-		getTokenHistory().reset();
-		preparsedTokensList.clear();
-		stateStack.clear();
-		bufferStart = getTokenStart();
-	}
-
-	public int getBufferStart()
-	{
-		return bufferStart;
-	}
-
-	/**
-	 * Adds preparsed token to the queue with consistency control
-	 *
-	 * @param start     token start
-	 * @param end       token end
-	 * @param tokenType token type
-	 */
-	protected void pushPreparsedToken(int start, int end, IElementType tokenType)
-	{
-		pushPreparsedToken(getCustomToken(start, end, tokenType));
-	}
-
-	/**
-	 * Adds preparsed token to the beginning of the queue with consistency control
-	 *
-	 * @param start     token start
-	 * @param end       token end
-	 * @param tokenType token type
-	 */
-	protected void unshiftPreparsedToken(int start, int end, IElementType tokenType)
-	{
-		unshiftPreparsedToken(getCustomToken(start, end, tokenType));
-	}
-
-	/**
-	 * Adds preparsed token to the queue with consistency control
-	 *
-	 * @param token token to add
-	 */
-	protected void pushPreparsedToken(CustomToken token)
-	{
-		assert preparsedTokensList.size() == 0 ||
-				preparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
-				"Tokens size is " +
-						preparsedTokensList.size() +
-						" new token start is " +
-						token.getTokenStart() +
-						(preparsedTokensList.size() == 0 ? "" :
-								" last token end is " +
-										preparsedTokensList.getLast().getTokenEnd());
-
-		preparsedTokensList.add(token);
-	}
-
-	/**
-	 * Adds preparsed token to the queue with consistency control
-	 *
-	 * @param token token to add
-	 */
-	protected void unshiftPreparsedToken(CustomToken token)
-	{
-		assert preparsedTokensList.size() == 0 ||
-				preparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
-				"Tokens size is " +
-						preparsedTokensList.size() +
-						" new token end is " +
-						token.getTokenEnd() +
-						(preparsedTokensList.size() == 0 ? "" :
-								" first start end is " +
-										preparsedTokensList.getFirst().getTokenStart());
-
-		preparsedTokensList.addFirst(token);
-	}
-
-	/**
-	 * Helper for creating custom token object
-	 *
-	 * @param start     token start
-	 * @param end       token end
-	 * @param tokenType token type
-	 * @return custom token object
-	 */
-	protected CustomToken getCustomToken(int start, int end, IElementType tokenType)
-	{
-		return new CustomToken(start, end, tokenType);
-	}
 
 	protected IElementType lexBadCharacter()
 	{

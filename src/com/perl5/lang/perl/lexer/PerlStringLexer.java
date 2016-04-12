@@ -39,10 +39,9 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	}
 
 	@Override
-	public void reset(CharSequence buffer, int start, int end, int initialState)
+	protected int getPreparsedLexicalState()
 	{
-		super.reset(buffer, start, end, initialState);
-		resetInternals();
+		return LEX_PREPARSED_ITEMS;
 	}
 
 	@Override

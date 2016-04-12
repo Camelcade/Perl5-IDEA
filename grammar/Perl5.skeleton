@@ -57,6 +57,8 @@
   /** zzAtEOF == true <=> the scanner is at the EOF */
   private boolean zzAtEOF;
 
+	protected int bufferStart;
+
 --- user class code
 
 --- constructor declaration
@@ -77,14 +79,22 @@
     return getTokenStart() + yylength();
   }
 
+	protected int getBufferStart()
+	{
+		return bufferStart;
+	}
+
+
   public void reset(CharSequence buffer, int start, int end,int initialState){
     zzBuffer = buffer;
     zzBufferArray = com.intellij.util.text.CharArrayUtil.fromSequenceWithoutCopying(buffer);
-    zzCurrentPos = zzMarkedPos = zzStartRead = start;
+    bufferStart = zzCurrentPos = zzMarkedPos = zzStartRead = start;
     zzPushbackPos = 0;
     zzAtEOF  = false;
     zzAtBOL = true;
     zzEndRead = end;
+	resetInternals();
+
     yybegin(initialState);
   }
 
@@ -99,13 +109,6 @@
     return true;
   }
 
-
-  /**
-   * Returns the current lexical state.
-   */
-  public int yystate() {
-    return getRealLexicalState();
-  }
 
   /**
    * Returns the current lexical state.

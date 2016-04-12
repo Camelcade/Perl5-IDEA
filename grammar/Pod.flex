@@ -29,7 +29,7 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 %unicode
 %public
 
-%function advance
+%function perlAdvance
 %type IElementType
 
 %{
@@ -55,6 +55,7 @@ NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 
+%state LEX_PREPARSED_ITEMS
 %state LEX_COMMAND_READY, LEX_COMMAND_WAITING
 %xstate LEX_OVER, LEX_ENCODING
 %xstate LEX_FORMAT_BEGIN, LEX_FORMAT_END, LEX_FORMAT_LINE
