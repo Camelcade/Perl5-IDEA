@@ -83,29 +83,7 @@ public class PodFileUtil
 	}
 
 	@Nullable
-	public static PsiFile findPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor)
-	{
-		final PsiFile[] targetFile = new PsiFile[]{null};
-
-		PodFileUtil.processPodFilesByDescriptor(project, descriptor, new Processor<PsiFile>()
-		{
-			@Override
-			public boolean process(PsiFile psiFile)
-			{
-				if (psiFile != null && (psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
-				{
-					targetFile[0] = psiFile;
-					return false;
-				}
-				return true;
-			}
-		});
-		return targetFile[0];
-	}
-
-
-	@NotNull
-	public static List<PsiFile> collectPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor)
+	public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor)
 	{
 		final List<PsiFile> result = new ArrayList<PsiFile>();
 
@@ -114,15 +92,24 @@ public class PodFileUtil
 			@Override
 			public boolean process(PsiFile psiFile)
 			{
-				if (psiFile != null && (psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
+				if (psiFile != null)
 				{
-					result.add(psiFile);
+					if (psiFile.getFileType() == PodFileType.INSTANCE)
+					{
+						result.clear();
+						result.add(psiFile);
+						return false;
+					}
+					else if ((psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
+					{
+						result.add(psiFile);
+					}
 				}
 				return true;
 			}
 		});
 
-		return result;
+		return result.isEmpty() ? null : result.get(0);
 	}
 
 	public static void processPodFilesByDescriptor(Project project, PodLinkDescriptor descriptor, Processor<PsiFile> processor)

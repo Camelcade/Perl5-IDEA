@@ -103,7 +103,7 @@ public class PerlDocUtil implements PerlElementTypes
 
 		if (descriptor != null)
 		{
-			PsiFile targetFile = PodFileUtil.findPodOrPackagePsiByDescriptor(project, descriptor);
+			PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
 
 			if (targetFile == null)
 			{

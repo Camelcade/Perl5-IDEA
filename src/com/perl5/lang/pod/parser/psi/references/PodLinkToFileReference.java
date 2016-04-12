@@ -33,9 +33,6 @@ import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by hurricup on 07.04.2016.
  */
@@ -101,15 +98,10 @@ public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
 
 			if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null)
 			{
-				List<ResolveResult> results = new ArrayList<ResolveResult>();
-				for (PsiFile targetFile : PodFileUtil.collectPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor))
+				PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
+				if (targetFile != null)
 				{
-					results.add(new PsiElementResolveResult(targetFile.getViewProvider().getStubBindingRoot()));
-				}
-				if (!results.isEmpty())
-				{
-					// fixme this could be smarter and check file for target section
-					return results.toArray(new ResolveResult[results.size()]);
+					return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
 				}
 			}
 
