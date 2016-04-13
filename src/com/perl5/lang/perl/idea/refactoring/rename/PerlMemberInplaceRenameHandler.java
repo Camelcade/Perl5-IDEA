@@ -16,14 +16,19 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.lang.Language;
+import com.intellij.codeInsight.lookup.LookupManager;
+import com.intellij.lang.LanguageRefactoringSupport;
+import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
-import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
+import com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -41,7 +46,26 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler
 	@Override
 	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
 	{
-		Language fileLanguage = file.getViewProvider().getBaseLanguage();
-		return fileLanguage.isKindOf(PerlLanguage.INSTANCE) && super.isAvailable(element, editor, file);
+		return !(element instanceof PerlRenameUsagesSubstitutor) && isAvailableFromParent(element, editor, file);
 	}
+
+	// this is a copy-paste from parent class, because it's uses
+	protected boolean isAvailableFromParent(PsiElement element, Editor editor, PsiFile file)
+	{
+		PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());
+		if (nameSuggestionContext == null && editor.getCaretModel().getOffset() > 0)
+		{
+			nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+		}
+
+		if (element == null && LookupManager.getActiveLookup(editor) != null)
+		{
+			element = PsiTreeUtil.getParentOfType(nameSuggestionContext, PsiNamedElement.class);
+		}
+		final RefactoringSupportProvider
+				supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
+		return editor.getSettings().isVariableInplaceRenameEnabled()
+				&& supportProvider instanceof PerlRefactoringSupportProvider;
+	}
+
 }

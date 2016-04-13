@@ -46,7 +46,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
-		return !(element instanceof PerlRenameUsagesSubstitutor);
+		return false;
 	}
 
 	@Override
