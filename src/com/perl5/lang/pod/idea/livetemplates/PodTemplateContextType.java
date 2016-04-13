@@ -129,7 +129,7 @@ public abstract class PodTemplateContextType extends TemplateContextType
 				{
 					while (true)
 					{
-						if (prevElement == null)
+						if (prevElement == null || prevElement.getTextOffset() == 0)
 						{
 							return true;
 						}
