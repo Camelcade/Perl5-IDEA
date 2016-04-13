@@ -49,7 +49,7 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler
 		return !(element instanceof PerlRenameUsagesSubstitutor) && isAvailableFromParent(element, editor, file);
 	}
 
-	// this is a copy-paste from parent class, because it's uses
+	// this is a copy-paste from parent class, because it's uses RefactoringSupportProvider
 	protected boolean isAvailableFromParent(PsiElement element, Editor editor, PsiFile file)
 	{
 		PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());

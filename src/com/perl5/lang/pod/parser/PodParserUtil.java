@@ -29,51 +29,22 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 {
 	public static boolean parseTermParam(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == POD_ANGLE_LEFT)
+		if (consumeToken(b, POD_ANGLE_LEFT))
 		{
-			int openersNumber = 1;
-
-			int possibleOpenersNumber = openersNumber;
-			if (b.rawLookup(possibleOpenersNumber) == POD_ANGLE_LEFT) // check for multi-angle opener format
+			PsiBuilder.Marker m = null;
+			while (!b.eof())
 			{
-				//noinspection StatementWithEmptyBody
-				while (b.rawLookup(++possibleOpenersNumber) == POD_ANGLE_LEFT) ;
-
-				IElementType nextTokenType = b.rawLookup(possibleOpenersNumber);
-
-				if (nextTokenType == TokenType.WHITE_SPACE || nextTokenType == TokenType.NEW_LINE_INDENT)
-				{
-					openersNumber = possibleOpenersNumber;
-				}
-			}
-
-			PsiBuilder.Marker m = b.mark();
-			for (int i = 0; i < openersNumber; i++)
-			{
-				b.advanceLexer();
-			}
-			m.collapse(POD_ANGLE_LEFT);
-
-			m = null;
-			while (true)
-			{
-				if (atCloseAngles(b, openersNumber))
+				IElementType tokenType = b.getTokenType();
+				if (tokenType == POD_ANGLE_RIGHT)
 				{
 					if (m != null)
 					{
 						m.done(FORMATTING_SECTION_CONTENT);
 					}
-
-					m = b.mark();
-					while (openersNumber > 0)
-					{
-						b.advanceLexer();
-						openersNumber--;
-					}
-					m.collapse(POD_ANGLE_RIGHT);
+					b.advanceLexer();
 					break;
 				}
-				else if (b.getTokenType() == POD_NEWLINE || b.eof())
+				else if (tokenType == POD_NEWLINE )
 				{
 					if (m == null)
 					{
@@ -87,35 +58,15 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 				{
 					m = b.mark();
 				}
-				PodParser.pod_term(b, l);
+				if( !PodParser.pod_term(b, l))
+				{
+					m.error("Can't parse");
+					break;
+				}
 			}
 
 			return true;
 		}
-		return false;
-	}
-
-	private static boolean atCloseAngles(PsiBuilder b, int markersNumber)
-	{
-		IElementType currentTokenType = b.getTokenType();
-
-		if (currentTokenType == POD_ANGLE_RIGHT)
-		{
-			if (markersNumber == 1)
-			{
-				return true;
-			}
-			else if ((currentTokenType = b.rawLookup(-1)) == TokenType.WHITE_SPACE || currentTokenType == TokenType.NEW_LINE_INDENT)
-			{
-				for (int i = 1; i < markersNumber; i++)
-				{
-					if (b.rawLookup(i) != POD_ANGLE_RIGHT)
-						return false;
-				}
-				return true;
-			}
-		}
-
 		return false;
 	}
 

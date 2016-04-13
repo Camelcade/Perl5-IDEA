@@ -36,6 +36,8 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 	protected abstract IElementType parseFallback();
 	protected abstract IElementType parseExample();
 	protected abstract IElementType parseCutToken();
+	protected abstract IElementType parseFormatter(IElementType tokenType);
+	protected abstract IElementType parseCloseAngle();
 %}
 
 NEW_LINE = \r?\n
@@ -55,11 +57,10 @@ NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 
-%state LEX_PREPARSED_ITEMS
+%state LEX_PREPARSED_ITEMS, LEX_IN_ANGLES
 %state LEX_COMMAND_READY, LEX_COMMAND_WAITING
 %xstate LEX_OVER, LEX_ENCODING
 %xstate LEX_FORMAT_BEGIN, LEX_FORMAT_END, LEX_FORMAT_LINE
-%state LEX_CAPTURE_LINE, LEX_CAPTURE_BLOCK
 %%
 
 <LEX_COMMAND_WAITING>{
@@ -97,18 +98,9 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 
 <LEX_FORMAT_BEGIN,LEX_FORMAT_END,LEX_FORMAT_LINE>{
 	{WHITE_SPACE}+ 	{return TokenType.WHITE_SPACE;}
-	":"{NONSPACE}+	{yypushback(yylength()-1);yybegin(LEX_FORMAT_END);return POD_COLON;}
-	[^]				{yybegin(YYINITIAL);yypushback(yylength());}
-}
-
-<LEX_FORMAT_BEGIN>{
-	{NONSPACE}+		{yybegin(LEX_CAPTURE_BLOCK);return POD_FORMAT_NAME;}
-}
-<LEX_FORMAT_END>{
+	":"{NONSPACE}+	{yypushback(yylength()-1);return POD_COLON;}
 	{NONSPACE}+		{yybegin(YYINITIAL);return POD_FORMAT_NAME;}
-}
-<LEX_FORMAT_LINE>{
-	{NONSPACE}+		{yybegin(LEX_CAPTURE_LINE);return POD_FORMAT_NAME;}
+	[^]				{yybegin(YYINITIAL);yypushback(yylength());}
 }
 
 <LEX_COMMAND_READY>{
@@ -121,8 +113,7 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 }
 {NEW_LINE} {return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-"<" {return POD_ANGLE_LEFT;}
-">" {return POD_ANGLE_RIGHT;}
+">" {return parseCloseAngle();}
 "(" {return POD_PAREN_LEFT;}
 ")" {return POD_PAREN_RIGHT;}
 "{" {return POD_BRACE_LEFT;}
@@ -137,15 +128,15 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 "\"" {return POD_QUOTE_DOUBLE;}
 "'" {return POD_QUOTE_SINGLE;}
 "`" {return POD_QUOTE_TICK;}
-"I<" {yypushback(1);return POD_I;}
-"B<" {yypushback(1);return POD_B;}
-"C<" {yypushback(1);return POD_C;}
-"L<" {yypushback(1);return POD_L;}
-"E<" {yypushback(1);return POD_E;}
-"F<" {yypushback(1);return POD_F;}
-"S<" {yypushback(1);return POD_S;}
-"X<" {yypushback(1);return POD_X;}
-"Z<" {yypushback(1);return POD_Z;}
+"I<" {return parseFormatter(POD_I);}
+"B<" {return parseFormatter(POD_B);}
+"C<" {return parseFormatter(POD_C);}
+"L<" {return parseFormatter(POD_L);}
+"E<" {return parseFormatter(POD_E);}
+"F<" {return parseFormatter(POD_F);}
+"S<" {return parseFormatter(POD_S);}
+"X<" {return parseFormatter(POD_X);}
+"Z<" {return parseFormatter(POD_Z);}
 
 {NUMBER} 	{return POD_NUMBER;}
 

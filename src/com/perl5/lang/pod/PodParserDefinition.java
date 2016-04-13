@@ -29,6 +29,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.pod.elementTypes.PodFileElementType;
+import com.perl5.lang.pod.lexer.PodDebuggingLexerAdapter;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
@@ -51,7 +52,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PodLexerAdapter(project);
+		return new PodDebuggingLexerAdapter(project);
 	}
 
 	@NotNull
