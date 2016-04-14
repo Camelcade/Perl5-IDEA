@@ -22,6 +22,8 @@ import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by hurricup on 22.03.2016.
@@ -29,6 +31,8 @@ import java.io.Reader;
 @SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated
 {
+	private final List<Integer> myOpenedAngles = new LinkedList<Integer>();
+
 	public PodLexer(Reader in)
 	{
 		super(in);
@@ -45,6 +49,30 @@ public class PodLexer extends PodLexerGenerated
 	}
 
 	@Override
+	protected void resetInternals()
+	{
+		super.resetInternals();
+		myOpenedAngles.clear();
+	}
+
+	@Override
+	public IElementType advance() throws IOException
+	{
+		IElementType result = super.advance();
+		if (result == POD_NEWLINE)
+		{
+			myOpenedAngles.clear();
+		}
+		return result;
+	}
+
+	@Override
+	public int yystate()
+	{
+		return myOpenedAngles.isEmpty() ? super.yystate() : LEX_IN_ANGLES;
+	}
+
+	@Override
 	protected int getPreparsedLexicalState()
 	{
 		return LEX_PREPARSED_ITEMS;
@@ -53,80 +81,15 @@ public class PodLexer extends PodLexerGenerated
 	@Override
 	public IElementType perlAdvance() throws IOException
 	{
-		int state = yystate();
-
-		if (state == LEX_CAPTURE_BLOCK)
-		{
-			int tokenStart = getTokenEnd();
-			int tokenEnd = getTokenEnd();
-			yybegin(YYINITIAL);
-			while (true)
-			{
-				IElementType result = super.perlAdvance();
-				if (result == null) // eof
-				{
-					if (tokenEnd > tokenStart)
-					{
-						setTokenStart(tokenStart);
-						setTokenEnd(tokenEnd);
-						yybegin(YYINITIAL);
-						return POD_FORMATTED_BLOCK;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				else if (result == POD_END) // end
-				{
-					setTokenStart(tokenStart);
-					setTokenEnd(tokenEnd);
-					yybegin(LEX_COMMAND_WAITING);
-					return POD_FORMATTED_BLOCK;
-				}
-				tokenEnd = getTokenEnd();
-			}
-		}
-		else if (state == LEX_CAPTURE_LINE)
-		{
-			int tokenStart = getTokenEnd();
-			int tokenEnd = getTokenEnd();
-			yybegin(YYINITIAL);
-			while (true)
-			{
-				IElementType result = super.perlAdvance();
-				if (result == null) // eof
-				{
-					if (tokenEnd > tokenStart)
-					{
-						setTokenStart(tokenStart);
-						setTokenEnd(tokenEnd);
-						yybegin(YYINITIAL);
-						return POD_FORMATTED_BLOCK;
-					}
-					else
-					{
-						return null;
-					}
-				}
-				else if (result == POD_NEWLINE) // end
-				{
-					setTokenStart(tokenStart);
-					setTokenEnd(tokenEnd);
-					yybegin(YYINITIAL);
-					return POD_FORMATTED_BLOCK;
-				}
-				tokenEnd = getTokenEnd();
-			}
-		}
-
 		IElementType result = super.perlAdvance();
-		state = yystate();
+		int state = getRealLexicalState();
+
 		if (state == LEX_COMMAND_WAITING && result != TokenType.NEW_LINE_INDENT && result != POD_NEWLINE && result != POD_CODE && result != POD_CUT ||
 				state == LEX_COMMAND_READY && result != TokenType.NEW_LINE_INDENT && result != TokenType.WHITE_SPACE && result != POD_NEWLINE && result != POD_CODE)
 		{
 			yybegin(YYINITIAL);
 		}
+
 		return result;
 	}
 
@@ -231,5 +194,85 @@ public class PodLexer extends PodLexerGenerated
 			yybegin(YYINITIAL);
 		}
 		return POD_CUT;
+	}
+
+	@Override
+	protected IElementType parseFormatter(IElementType tokenType)
+	{
+		yypushback(1);
+		checkOpenAngle();
+		return tokenType;
+	}
+
+	/**
+	 * Pre-parses opening angles
+	 */
+	protected void checkOpenAngle()
+	{
+		int bufferEnd = getBufferEnd();
+		int tokenStart = getTokenEnd();
+		int run = tokenStart;
+		CharSequence buffer = getBuffer();
+
+		while (run < bufferEnd && buffer.charAt(run) == '<')
+		{
+			run++;
+		}
+
+		if (run > tokenStart) // got something
+		{
+			if (run == bufferEnd || run == tokenStart + 1 || Character.isWhitespace(buffer.charAt(run)))
+			{
+				pushPreparsedToken(tokenStart, run, POD_ANGLE_LEFT);
+				myOpenedAngles.add(run - tokenStart);
+			}
+			else
+			{
+				pushPreparsedToken(tokenStart, tokenStart + 1, POD_ANGLE_LEFT);
+				myOpenedAngles.add(1);
+			}
+		}
+
+	}
+
+	/**
+	 * Pre-parses closing angles
+	 */
+	protected IElementType parseCloseAngle()
+	{
+		if (myOpenedAngles.isEmpty())
+			return POD_SYMBOL;
+
+		int bufferEnd = getBufferEnd();
+		int tokenStart = getTokenStart();
+		int run = tokenStart;
+		CharSequence buffer = getBuffer();
+
+		int lastIndex = myOpenedAngles.size() - 1;
+		int anglesNumber = myOpenedAngles.get(lastIndex);
+
+		if (anglesNumber == 1)
+		{
+			myOpenedAngles.remove(lastIndex);
+			return POD_ANGLE_RIGHT;
+		}
+
+		int endOffset = tokenStart + anglesNumber;
+
+		if (tokenStart > 0 && Character.isWhitespace(buffer.charAt(tokenStart - 1)))
+		{
+			while (run < bufferEnd && run < endOffset && buffer.charAt(run) == '>')
+			{
+				run++;
+			}
+
+			if (run == endOffset)
+			{
+				setTokenEnd(run);
+				myOpenedAngles.remove(lastIndex);
+				return POD_ANGLE_RIGHT;
+			}
+		}
+		return POD_SYMBOL;
 	}
 }

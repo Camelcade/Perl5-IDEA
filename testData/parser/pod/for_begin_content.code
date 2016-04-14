@@ -1,0 +1,17 @@
+
+=for html <html>test</html>C<
+
+=for :html <html>test</html>C<
+
+=begin html
+
+<html>test</html>C<
+
+=end html
+
+=begin :html
+
+<html>test</html>C<
+
+=end html
+

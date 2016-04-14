@@ -18,8 +18,8 @@ package com.perl5.lang.pod.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 
 /**
@@ -29,51 +29,22 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 {
 	public static boolean parseTermParam(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == POD_ANGLE_LEFT)
+		if (consumeToken(b, POD_ANGLE_LEFT))
 		{
-			int openersNumber = 1;
-
-			int possibleOpenersNumber = openersNumber;
-			if (b.rawLookup(possibleOpenersNumber) == POD_ANGLE_LEFT) // check for multi-angle opener format
-			{
-				//noinspection StatementWithEmptyBody
-				while (b.rawLookup(++possibleOpenersNumber) == POD_ANGLE_LEFT) ;
-
-				IElementType nextTokenType = b.rawLookup(possibleOpenersNumber);
-
-				if (nextTokenType == TokenType.WHITE_SPACE || nextTokenType == TokenType.NEW_LINE_INDENT)
-				{
-					openersNumber = possibleOpenersNumber;
-				}
-			}
-
-			PsiBuilder.Marker m = b.mark();
-			for (int i = 0; i < openersNumber; i++)
-			{
-				b.advanceLexer();
-			}
-			m.collapse(POD_ANGLE_LEFT);
-
-			m = null;
+			PsiBuilder.Marker m = null;
 			while (true)
 			{
-				if (atCloseAngles(b, openersNumber))
+				IElementType tokenType = b.getTokenType();
+				if (tokenType == POD_ANGLE_RIGHT)
 				{
 					if (m != null)
 					{
 						m.done(FORMATTING_SECTION_CONTENT);
 					}
-
-					m = b.mark();
-					while (openersNumber > 0)
-					{
-						b.advanceLexer();
-						openersNumber--;
-					}
-					m.collapse(POD_ANGLE_RIGHT);
+					b.advanceLexer();
 					break;
 				}
-				else if (b.getTokenType() == POD_NEWLINE || b.eof())
+				else if (tokenType == POD_NEWLINE || tokenType == null)
 				{
 					if (m == null)
 					{
@@ -87,7 +58,11 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 				{
 					m = b.mark();
 				}
-				PodParser.pod_term(b, l);
+				if( !PodParser.pod_term(b, l))
+				{
+					m.error("Can't parse");
+					break;
+				}
 			}
 
 			return true;
@@ -95,28 +70,52 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 		return false;
 	}
 
-	private static boolean atCloseAngles(PsiBuilder b, int markersNumber)
+	public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType)
 	{
-		IElementType currentTokenType = b.getTokenType();
-
-		if (currentTokenType == POD_ANGLE_RIGHT)
+		if (b.getTokenType() == sourceType)
 		{
-			if (markersNumber == 1)
-			{
-				return true;
-			}
-			else if ((currentTokenType = b.rawLookup(-1)) == TokenType.WHITE_SPACE || currentTokenType == TokenType.NEW_LINE_INDENT)
-			{
-				for (int i = 1; i < markersNumber; i++)
-				{
-					if (b.rawLookup(i) != POD_ANGLE_RIGHT)
-						return false;
-				}
-				return true;
-			}
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(POD_INDENT_LEVEL);
+			return true;
 		}
-
 		return false;
 	}
 
+
+	public static boolean collapseNonSpaceTo(PsiBuilder b, int l, IElementType targetElement)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == POD_IDENTIFIER)
+		{
+			PsiBuilder.Marker m = b.mark();
+			while (!b.eof() && !PodParserDefinition.ALL_WHITE_SPACES.contains(b.rawLookup(1)))
+			{
+				b.advanceLexer();
+			}
+			b.advanceLexer();
+			m.collapse(targetElement);
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean parsePodSectionContent(PsiBuilder b, int l, IElementType stopToken, IElementType targetToken, String errorMessage)
+	{
+		PsiBuilder.Marker m = b.mark();
+		while (!b.eof() && b.getTokenType() != stopToken)
+		{
+			b.advanceLexer();
+		}
+
+		m.done(targetToken);
+
+		if (b.eof())
+		{
+			b.mark().error(errorMessage);
+		}
+
+		return true;
+	}
 }

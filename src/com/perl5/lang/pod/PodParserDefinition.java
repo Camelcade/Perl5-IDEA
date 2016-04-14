@@ -29,8 +29,8 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.pod.elementTypes.PodFileElementType;
+import com.perl5.lang.pod.lexer.PodDebuggingLexerAdapter;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +42,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 {
 
 	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
+	public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT, POD_NEWLINE);
 	public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
 	public static final TokenSet IDENTIFIERS = TokenSet.create(POD_IDENTIFIER);
 
@@ -51,7 +52,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PodLexerAdapter(project);
+		return new PodDebuggingLexerAdapter(project);
 	}
 
 	@NotNull
