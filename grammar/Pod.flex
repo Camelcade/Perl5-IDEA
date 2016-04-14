@@ -49,18 +49,14 @@ TAG_NAME = "=" [:jletterdigit:]+
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
 NUMBER_FLOAT = "." ([0-9][0-9_]*)?
-NUMBER_INT_SIMPLE = [0-9]+
 NUMBER_INT = [0-9][0-9_] *  {NUMBER_FLOAT}? {NUMBER_EXP}?
 NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
 NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
-NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 
 %state LEX_PREPARSED_ITEMS, LEX_IN_ANGLES
 %state LEX_COMMAND_READY, LEX_COMMAND_WAITING
-%xstate LEX_OVER, LEX_ENCODING
-%xstate LEX_FORMAT_BEGIN, LEX_FORMAT_END, LEX_FORMAT_LINE
 %%
 
 <LEX_COMMAND_WAITING>{
@@ -71,36 +67,16 @@ NUMBER_INDENT = {NUMBER_INT_SIMPLE}("."{NUMBER_INT_SIMPLE})?
 	"=head4"		{yybegin(YYINITIAL);return POD_HEAD4;}
 	"=item"			{yybegin(YYINITIAL);return POD_ITEM;}
 	"=back"			{yybegin(YYINITIAL);return POD_BACK;}
-
-	"=over"			{yybegin(LEX_OVER);return POD_OVER;}
-	"=begin"		{yybegin(LEX_FORMAT_BEGIN);return POD_BEGIN;}
-	"=end"			{yybegin(LEX_FORMAT_END);return POD_END;}
-	"=for"			{yybegin(LEX_FORMAT_LINE);return POD_FOR;}
-	"=encoding"		{yybegin(LEX_ENCODING);return POD_ENCODING;}
+	"=over"			{yybegin(YYINITIAL);return POD_OVER;}
+	"=begin"		{yybegin(YYINITIAL);return POD_BEGIN;}
+	"=end"			{yybegin(YYINITIAL);return POD_END;}
+	"=for"			{yybegin(YYINITIAL);return POD_FOR;}
+	"=encoding"		{yybegin(YYINITIAL);return POD_ENCODING;}
 	"=cut"			{return parseCutToken();}
 	{TAG_NAME} 		{yybegin(YYINITIAL);return POD_UNKNOWN;}
 	{EXAMPLE}		{return parseExample();}
 	{WHITE_SPACE}+ 	{yybegin(LEX_COMMAND_READY);return TokenType.WHITE_SPACE;}
 	{NONSPACE}		{yybegin(YYINITIAL);yypushback(yylength());}
-}
-
-<LEX_OVER>{
-	{WHITE_SPACE}+ 	{return TokenType.WHITE_SPACE;}
-	{NUMBER_INDENT} {yybegin(YYINITIAL);return POD_INDENT_LEVEL;}
-	[^]				{yybegin(YYINITIAL);yypushback(yylength());}
-}
-
-<LEX_ENCODING>{
-	{WHITE_SPACE}+ 	{return TokenType.WHITE_SPACE;}
-	{NONSPACE}+ {yybegin(YYINITIAL);return POD_ENCODING_NAME;}
-	[^]				{yybegin(YYINITIAL);yypushback(yylength());}
-}
-
-<LEX_FORMAT_BEGIN,LEX_FORMAT_END,LEX_FORMAT_LINE>{
-	{WHITE_SPACE}+ 	{return TokenType.WHITE_SPACE;}
-	":"{NONSPACE}+	{yypushback(yylength()-1);return POD_COLON;}
-	{NONSPACE}+		{yybegin(YYINITIAL);return POD_FORMAT_NAME;}
-	[^]				{yybegin(YYINITIAL);yypushback(yylength());}
 }
 
 <LEX_COMMAND_READY>{

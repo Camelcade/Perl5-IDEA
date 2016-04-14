@@ -18,8 +18,8 @@ package com.perl5.lang.pod.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 
 /**
@@ -32,7 +32,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 		if (consumeToken(b, POD_ANGLE_LEFT))
 		{
 			PsiBuilder.Marker m = null;
-			while (!b.eof())
+			while (true)
 			{
 				IElementType tokenType = b.getTokenType();
 				if (tokenType == POD_ANGLE_RIGHT)
@@ -44,7 +44,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 					b.advanceLexer();
 					break;
 				}
-				else if (tokenType == POD_NEWLINE )
+				else if (tokenType == POD_NEWLINE || tokenType == null)
 				{
 					if (m == null)
 					{
@@ -70,4 +70,52 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 		return false;
 	}
 
+	public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType)
+	{
+		if (b.getTokenType() == sourceType)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(POD_INDENT_LEVEL);
+			return true;
+		}
+		return false;
+	}
+
+
+	public static boolean collapseNonSpaceTo(PsiBuilder b, int l, IElementType targetElement)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == POD_IDENTIFIER)
+		{
+			PsiBuilder.Marker m = b.mark();
+			while (!b.eof() && !PodParserDefinition.ALL_WHITE_SPACES.contains(b.rawLookup(1)))
+			{
+				b.advanceLexer();
+			}
+			b.advanceLexer();
+			m.collapse(targetElement);
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean parsePodSectionContent(PsiBuilder b, int l, IElementType stopToken, IElementType targetToken, String errorMessage)
+	{
+		PsiBuilder.Marker m = b.mark();
+		while (!b.eof() && b.getTokenType() != stopToken)
+		{
+			b.advanceLexer();
+		}
+
+		m.done(targetToken);
+
+		if (b.eof())
+		{
+			b.mark().error(errorMessage);
+		}
+
+		return true;
+	}
 }

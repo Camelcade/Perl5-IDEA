@@ -269,6 +269,7 @@ public class PodLexer extends PodLexerGenerated
 			if (run == endOffset)
 			{
 				setTokenEnd(run);
+				myOpenedAngles.remove(lastIndex);
 				return POD_ANGLE_RIGHT;
 			}
 		}
