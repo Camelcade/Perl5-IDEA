@@ -106,7 +106,9 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 		PsiBuilder.Marker m = b.mark();
 		while (!b.eof() && b.getTokenType() != stopToken)
 		{
+//			PsiBuilder.Marker runMarker = b.mark();
 			b.advanceLexer();
+//			runMarker.collapse(POD_IDENTIFIER);
 		}
 
 		m.done(targetToken);

@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.04.2016.
  */
-public abstract class PodTemplateContextType extends TemplateContextType
+public abstract class PodTemplateContextType extends TemplateContextType implements PodElementTypes
 {
 
 	public PodTemplateContextType(@NotNull @NonNls String id, @NotNull String presentableName)
@@ -118,6 +118,13 @@ public abstract class PodTemplateContextType extends TemplateContextType
 			else
 			{
 				FileViewProvider viewProvider = element.getContainingFile().getViewProvider();
+
+				PsiElement currentElement = viewProvider.findElementAt(startOffset, PodLanguage.INSTANCE);
+				if (currentElement != null && currentElement.getNode().getElementType() == POD_CODE)
+				{
+					return false;
+				}
+
 				PsiElement prevElement = viewProvider.findElementAt(startOffset - 1, PodLanguage.INSTANCE);
 
 				if (prevElement != null && prevElement.getNode().getElementType() == PodElementTypes.POD_NEWLINE)
