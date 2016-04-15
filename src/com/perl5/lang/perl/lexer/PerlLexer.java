@@ -40,6 +40,7 @@ public class PerlLexer extends PerlLexerGenerated
 {
 	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
 	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_\\p{L}][_\\p{L}\\d]*");
 
 	// pattern for getting marker

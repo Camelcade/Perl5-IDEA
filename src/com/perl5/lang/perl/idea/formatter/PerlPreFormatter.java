@@ -60,7 +60,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	{
 		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
 				// we need this because lexer unable to properly parse utf
-				PerlLexer.BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
+				PerlLexer.ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
 	}
 
 	protected static boolean isStringSimpleIdentifier(PerlString o)
