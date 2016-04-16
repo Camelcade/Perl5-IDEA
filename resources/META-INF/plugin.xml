@@ -591,6 +591,7 @@
         <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
                                        implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
+        <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
         <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
         <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
         <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->

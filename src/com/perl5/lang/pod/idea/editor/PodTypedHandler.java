@@ -52,21 +52,22 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 			POD_Z
 	);
 
-	protected static void extendAngles(PsiElement formatterBlock)
+	protected int extendAngles(PsiElement formatterBlock)
 	{
+		int insertedChars = 0;
 		if (formatterBlock == null)
-			return;
+			return insertedChars;
 
 		PsiElement openAngles = formatterBlock.getFirstChild();
 		openAngles = openAngles == null ? null : openAngles.getNextSibling();
 
 		if (openAngles == null)
-			return;
+			return insertedChars;
 
 		PsiElement closeAngles = formatterBlock.getLastChild();
 
 		if (closeAngles == null)
-			return;
+			return insertedChars;
 
 		int currentLength = openAngles.getTextRange().getLength();
 		if (currentLength == 1) // need to check spacing
@@ -79,17 +80,21 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 			{
 				space = PodElementFactory.getSpace(formatterBlock.getProject());
 				formatterBlock.addAfter(space, openAngles);
+				openSpace = null;
+				insertedChars++;
 			}
-			if (!(closeSpace instanceof PsiWhiteSpace))
+			if (!(closeSpace instanceof PsiWhiteSpace) || closeSpace == openSpace)
 			{
 				if (space == null)
 					space = PodElementFactory.getSpace(formatterBlock.getProject());
 				formatterBlock.addBefore(space, closeAngles);
+				insertedChars++;
 			}
 		}
 
 		((LeafPsiElement) openAngles).replaceWithText(openAngles.getText() + "<");
 		((LeafPsiElement) closeAngles).replaceWithText(closeAngles.getText() + ">");
+		return insertedChars + 2;
 	}
 
 	@Override
@@ -127,18 +132,20 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 				int offset = caretModel.getOffset();
 				PsiElement element = file.findElementAt(offset);
 				IElementType elementType = element == null ? null : element.getNode().getElementType();
+				int extraOffset = 0;
 
 				if (elementType != POD_ANGLE_RIGHT)
 				{
 					offset--;
 					element = file.findElementAt(offset);
 					elementType = element == null ? null : element.getNode().getElementType();
+					extraOffset++;
 				}
 
 				if (elementType == POD_ANGLE_RIGHT)
 				{
 					//noinspection ConstantConditions
-					extendAngles(element.getParent());
+					caretModel.moveToOffset(offset + extendAngles(element.getParent()) + extraOffset);
 					return Result.STOP;
 				}
 			}
