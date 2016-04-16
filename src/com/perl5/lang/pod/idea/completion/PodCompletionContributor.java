@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser;
+package com.perl5.lang.pod.idea.completion;
 
-import com.intellij.patterns.PsiElementPattern;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.lexer.PodElementTypes;
-
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.perl5.lang.pod.parser.PodElementPatterns;
 
 /**
- * Created by hurricup on 05.04.2016.
+ * Created by hurricup on 16.04.2016.
  */
-public interface PodElementPatterns extends PodElementTypes
+public class PodCompletionContributor extends CompletionContributor implements PodElementPatterns
 {
-	PsiElementPattern.Capture<PsiElement> LINK_IDENTIFIER =
-			psiElement().withParent(psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
+	public PodCompletionContributor()
+	{
+		extend(
+				CompletionType.BASIC,
+				LINK_IDENTIFIER,
+				new PodLinkCompletionProvider()
+		);
+	}
 }

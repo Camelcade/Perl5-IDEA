@@ -67,12 +67,19 @@ public class PodFileUtil
 			}
 			else
 			{
-				String relativePath = VfsUtil.getRelativePath(virtualFile, classRoot);
-				if (relativePath != null)
-				{
-					return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
-				}
+				getPackageNameFromVirtualFile(virtualFile, classRoot);
 			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot)
+	{
+		String relativePath = VfsUtil.getRelativePath(file, classRoot);
+		if (relativePath != null)
+		{
+			return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
 		}
 		return null;
 	}

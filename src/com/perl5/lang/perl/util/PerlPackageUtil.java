@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
@@ -451,24 +452,40 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	public static void processPackageFilesForPsiElement(PsiElement element, final Processor<String> processor)
 	{
+		processFilesForPsiElement(
+				element,
+				new ClassRootVirtualFileProcessor()
+				{
+					@Override
+					public boolean process(VirtualFile file, VirtualFile classRoot)
+					{
+						String relativePath = VfsUtil.getRelativePath(file, classRoot);
+						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
+						return processor.process(packageName);
+					}
+				},
+				PerlFileTypePackage.INSTANCE)
+		;
+	}
+
+	public static void processFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType)
+	{
 		if (element != null)
 		{
 			VirtualFile[] classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
 
-			for (VirtualFile file : FileTypeIndex.getFiles(PerlFileTypePackage.INSTANCE, PerlScopes.getProjectAndLibrariesScope(element.getProject())))
+			for (VirtualFile file : FileTypeIndex.getFiles(fileType, PerlScopes.getProjectAndLibrariesScope(element.getProject())))
 			{
 				for (VirtualFile classRoot : classRoots)
 				{
 					if (VfsUtil.isAncestor(classRoot, file, true))
 					{
-						String relativePath = VfsUtil.getRelativePath(file, classRoot);
-						String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
-						processor.process(packageName);
+						if (!processor.process(file, classRoot))
+							return;
 					}
 				}
 			}
 		}
-
 	}
 
 	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull PsiFile file)
@@ -494,7 +511,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 		return new TextRange(startOffset, endOffset);
 	}
-
 
 	public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubBase> processor)
 	{
@@ -581,5 +597,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				}
 			}
 		}
+	}
+
+	public interface ClassRootVirtualFileProcessor
+	{
+		public boolean process(VirtualFile file, VirtualFile classRoot);
 	}
 }
