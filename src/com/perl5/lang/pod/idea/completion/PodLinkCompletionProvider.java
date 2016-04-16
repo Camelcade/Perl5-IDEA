@@ -25,7 +25,9 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
@@ -33,6 +35,11 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
+import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
+import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
+import com.perl5.lang.pod.parser.psi.PodSectionItem;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToFileReference;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
@@ -45,7 +52,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters>
+public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes
 {
 	protected static void addFilesCompletions(PsiPodFormatLink link, @NotNull final CompletionResultSet result)
 	{
@@ -94,9 +101,50 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 		});
 	}
 
-	protected static void addSectionsCompletions(@NotNull CompletionResultSet result, PsiReference[] linkReferences)
+	private static boolean atSectionPosition(PsiElement element)
 	{
+		if (element == null)
+			return false;
 
+		IElementType elementType = element.getNode().getElementType();
+
+		PsiElement prevElement = element.getPrevSibling();
+
+		if (elementType == POD_ANGLE_RIGHT && prevElement != null)
+			prevElement = prevElement.getLastChild();
+
+		IElementType prevElementType = prevElement == null ? null : prevElement.getNode().getElementType();
+
+		if (elementType == POD_ANGLE_RIGHT && prevElementType == POD_DIV)
+			return true;
+
+		PsiElement prevPrevElement = prevElement == null ? null : prevElement.getPrevSibling();
+		IElementType prevPrevElementType = prevPrevElement == null ? null : prevPrevElement.getNode().getElementType();
+
+		return elementType == POD_QUOTE_DOUBLE && prevElementType == POD_QUOTE_DOUBLE && prevPrevElementType == POD_DIV;
+	}
+
+	protected static void addSectionsCompletions(@NotNull final CompletionResultSet result, PsiFile targetFile)
+	{
+		if (targetFile != null)
+		{
+			targetFile.accept(new PodRecursiveVisitor()
+			{
+				@Override
+				public void visitTargetableSection(PodTitledSection o)
+				{
+					String title = o.getTitleText();
+					if (StringUtil.isNotEmpty(title))
+					{
+						if (!(o instanceof PodSectionItem) || o.getListLevel() < PodDocumentPattern.DEFAULT_MAX_LIST_LEVEL)
+						{
+							result.addElement(LookupElementBuilder.create(title).withIcon(PerlIcons.POD_FILE));
+						}
+					}
+					super.visitTargetableSection(o);
+				}
+			});
+		}
 	}
 
 	@Override
@@ -125,10 +173,18 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 				}
 				else if (reference instanceof PodLinkToSectionReference)
 				{
-					addSectionsCompletions(result, references);
+					addSectionsCompletions(result, psiPodFormatLink.getTargetFile());
 					return;
 				}
 			}
 		}
+
+		// checking for an empty section
+		if (atSectionPosition(element))
+		{
+			addSectionsCompletions(result, psiPodFormatLink.getTargetFile());
+		}
 	}
+
+
 }

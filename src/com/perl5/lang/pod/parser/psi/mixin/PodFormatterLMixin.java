@@ -104,6 +104,23 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		return myLinkDescriptor.getValue();
 	}
 
+	@Nullable
+	@Override
+	public PsiFile getTargetFile()
+	{
+		PsiReference[] references = getReferences();
+
+		for (PsiReference reference : references)
+		{
+			if (reference instanceof PodLinkToFileReference)
+			{
+				return (PsiFile) reference.resolve();
+			}
+		}
+
+		return getContainingFile();
+	}
+
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()

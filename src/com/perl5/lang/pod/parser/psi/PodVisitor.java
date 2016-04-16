@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.psi.PsiPodVisitorGenerated;
+import com.perl5.lang.pod.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,5 +31,40 @@ public class PodVisitor extends PsiPodVisitorGenerated
 	{
 		// fixme no idea why generated visitor has recursion
 		ProgressIndicatorProvider.checkCanceled();
+	}
+
+	@Override
+	public void visitItemSection(@NotNull PsiItemSection o)
+	{
+		visitTargetableSection(o);
+	}
+
+	public void visitTargetableSection(PodTitledSection o)
+	{
+		visitElement(o);
+	}
+
+	@Override
+	public void visitHead1Section(@NotNull PsiHead1Section o)
+	{
+		visitTargetableSection(o);
+	}
+
+	@Override
+	public void visitHead2Section(@NotNull PsiHead2Section o)
+	{
+		visitTargetableSection(o);
+	}
+
+	@Override
+	public void visitHead3Section(@NotNull PsiHead3Section o)
+	{
+		visitTargetableSection(o);
+	}
+
+	@Override
+	public void visitHead4Section(@NotNull PsiHead4Section o)
+	{
+		visitTargetableSection(o);
 	}
 }

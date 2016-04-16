@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.PsiElementProcessor;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -218,14 +217,12 @@ public class PerlDocUtil implements PerlElementTypes
 	{
 		final Project project = element.getProject();
 		String text = element.getText();
-		IElementType elementType = element.getNode().getElementType();
 
 		String redirect = myOperatorsRedirections.get(text);
 		if (redirect != null)
 		{
 			return resolveDocLink(redirect, element);
 		}
-
 
 		// fixme use map?
 		PodDocumentPattern pattern = PodDocumentPattern.indexPattern(text);

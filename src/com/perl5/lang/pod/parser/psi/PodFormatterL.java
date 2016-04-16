@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -26,4 +27,7 @@ public interface PodFormatterL extends PsiElement, PodFormatter, PodSection
 {
 	@Nullable
 	PodLinkDescriptor getLinkDescriptor();
+
+	@Nullable
+	PsiFile getTargetFile();
 }
