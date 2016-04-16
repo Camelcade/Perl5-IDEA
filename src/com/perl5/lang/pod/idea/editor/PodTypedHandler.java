@@ -20,16 +20,17 @@ import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.ex.EditorEx;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,33 +40,56 @@ import org.jetbrains.annotations.NotNull;
 public class PodTypedHandler extends TypedHandlerDelegate implements PodElementTypes
 {
 	private static final String POD_COMMANDS = "IBCLEFSXZ";
+	private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(
+			POD_I,
+			POD_B,
+			POD_C,
+			POD_L,
+			POD_E,
+			POD_F,
+			POD_S,
+			POD_X,
+			POD_Z
+	);
 
-	public static int getRightParentOffset(HighlighterIterator iterator)
+	protected static void extendAngles(PsiElement formatterBlock)
 	{
-		int lastRbraceOffset = -1;
-		int bracesCounter = 0;
-		for (; !iterator.atEnd(); iterator.advance())
-		{
-			final IElementType tokenType = iterator.getTokenType();
+		if (formatterBlock == null)
+			return;
 
-			if (tokenType == POD_ANGLE_RIGHT)
+		PsiElement openAngles = formatterBlock.getFirstChild();
+		openAngles = openAngles == null ? null : openAngles.getNextSibling();
+
+		if (openAngles == null)
+			return;
+
+		PsiElement closeAngles = formatterBlock.getLastChild();
+
+		if (closeAngles == null)
+			return;
+
+		int currentLength = openAngles.getTextRange().getLength();
+		if (currentLength == 1) // need to check spacing
+		{
+			PsiElement openSpace = openAngles.getNextSibling();
+			PsiElement closeSpace = openAngles.getPrevSibling();
+			PsiElement space = null;
+
+			if (!(openSpace instanceof PsiWhiteSpace))
 			{
-				if (bracesCounter > 0)
-				{
-					bracesCounter--;
-				}
-				else
-				{
-					return iterator.getStart();
-				}
+				space = PodElementFactory.getSpace(formatterBlock.getProject());
+				formatterBlock.addAfter(space, openAngles);
 			}
-			else if (tokenType == POD_ANGLE_LEFT)
+			if (!(closeSpace instanceof PsiWhiteSpace))
 			{
-				bracesCounter++;
+				if (space == null)
+					space = PodElementFactory.getSpace(formatterBlock.getProject());
+				formatterBlock.addBefore(space, closeAngles);
 			}
 		}
 
-		return lastRbraceOffset;
+		((LeafPsiElement) openAngles).replaceWithText(openAngles.getText() + "<");
+		((LeafPsiElement) closeAngles).replaceWithText(closeAngles.getText() + ">");
 	}
 
 	@Override
@@ -89,34 +113,32 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 						EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
 					}
 				}
-				else if (elementType == POD_ANGLE_LEFT)
+				else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType))
 				{
-					CharSequence fileText = file.getText();
-					EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
-					HighlighterIterator iterator = highlighter.createIterator(offset + 1);
-					int rightOffset = getRightParentOffset(iterator);
+					//noinspection ConstantConditions
+					extendAngles(element.getParent());
+					caretModel.moveToOffset(offset + 2);
+					return Result.STOP;
+				}
+			}
+			else if (c == '>')    // '>'
+			{
+				CaretModel caretModel = editor.getCaretModel();
+				int offset = caretModel.getOffset();
+				PsiElement element = file.findElementAt(offset);
+				IElementType elementType = element == null ? null : element.getNode().getElementType();
 
-					boolean hasSpaceAtStart = Character.isWhitespace(fileText.charAt(offset + 1));
+				if (elementType != POD_ANGLE_RIGHT)
+				{
+					offset--;
+					element = file.findElementAt(offset);
+					elementType = element == null ? null : element.getNode().getElementType();
+				}
 
-					if (rightOffset > 0)
-					{
-						int oldOffset = caretModel.getOffset();
-						caretModel.moveToOffset(rightOffset);
-						EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
-						if (!Character.isWhitespace(fileText.charAt(rightOffset - 1)))
-						{
-							EditorModificationUtil.insertStringAtCaret(editor, " ", false, false, 0);
-						}
-						caretModel.moveToOffset(oldOffset);
-					}
-					if (!hasSpaceAtStart)
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, "< ", false, true, 1);
-					}
-					else
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, "<", false, true, 1);
-					}
+				if (elementType == POD_ANGLE_RIGHT)
+				{
+					//noinspection ConstantConditions
+					extendAngles(element.getParent());
 					return Result.STOP;
 				}
 			}
@@ -129,4 +151,5 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 	{
 		return super.charTyped(c, project, editor, file);
 	}
+
 }

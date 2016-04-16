@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser.psi;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.PsiWhiteSpace;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 
@@ -33,6 +34,15 @@ public class PodElementFactory
 		PsiElement section = file.getFirstChild();
 		assert section instanceof PodSectionH1;
 		return ((PodSectionH1) section).getTitleText();
+	}
+
+	public static PsiElement getSpace(Project project)
+	{
+		PodFileImpl file = createFile(project, " ");
+		PsiElement space = file.getFirstChild();
+		assert space instanceof PsiWhiteSpace;
+		return space;
+
 	}
 
 	public static PodFileImpl createFile(Project project, String text)
