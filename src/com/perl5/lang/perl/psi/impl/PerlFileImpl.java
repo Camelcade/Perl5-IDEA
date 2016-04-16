@@ -578,4 +578,11 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		return getPodLink();
 	}
+
+
+	@Override
+	public byte[] getPerlContentInBytes()
+	{
+		return getText().getBytes(getVirtualFile().getCharset());
+	}
 }

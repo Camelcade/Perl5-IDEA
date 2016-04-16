@@ -55,6 +55,8 @@ public class PerlSettingsConfigurable implements Configurable
 
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
+	JCheckBox perlCriticCheckBox;
+	JCheckBox perlAnnotatorCheckBox;
 	JCheckBox allowInjectionWithInterpolation;
 
 	CollectionListModel<String> selfNamesModel;
@@ -101,6 +103,12 @@ public class PerlSettingsConfigurable implements Configurable
 
 		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
 		builder.addComponent(allowInjectionWithInterpolation);
+
+		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
+		builder.addComponent(perlCriticCheckBox);
+
+		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
+		builder.addComponent(perlAnnotatorCheckBox);
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
@@ -170,6 +178,8 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
 				mySettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
 				mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
+				mySettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
+				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -187,6 +197,8 @@ public class PerlSettingsConfigurable implements Configurable
 		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
 		mySettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
 		mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
+		mySettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
+		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -225,6 +237,8 @@ public class PerlSettingsConfigurable implements Configurable
 		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySettings.AUTOMATIC_HEREDOC_INJECTIONS);
 		allowInjectionWithInterpolation.setSelected(mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
+		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
+		perlAnnotatorCheckBox.setSelected(mySettings.PERL_ANNOTATOR_ENABLED);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -246,5 +260,7 @@ public class PerlSettingsConfigurable implements Configurable
 		selfNamesList = null;
 		autoInjectionCheckbox = null;
 		allowInjectionWithInterpolation = null;
+		perlAnnotatorCheckBox = null;
+		perlCriticCheckBox = null;
 	}
 }

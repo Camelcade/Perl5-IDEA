@@ -44,4 +44,11 @@ public class MojoliciousFileImpl extends PerlFileImpl
 	{
 		return MojoliciousFileType.INSTANCE;
 	}
+
+	@Override
+	public byte[] getPerlContentInBytes()
+	{
+		return null;
+	}
+
 }

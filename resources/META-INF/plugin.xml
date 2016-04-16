@@ -37,7 +37,8 @@
       <li>Basic pod support</li>
       <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package.</li>
       <li>Lexical vairables are now in top of autocompletion pop-up.</li>
-      <li>Scientifically  improved parser recovery on incomplete and incorrect statements</li>
+      <li>Significally improved parser recovery on incomplete and incorrect statements</li>
+      <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via .perlcriticrc file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings.</li>
       </ul>
      </p>
 
@@ -121,6 +122,9 @@
         <annotator language="Perl5"
                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
+        <externalAnnotator language="Perl5"
+                           implementationClass="com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator"/>
+
         <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
         <referencesSearch
                 implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferencesSearcher"/>

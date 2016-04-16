@@ -48,6 +48,8 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean SIMPLE_MAIN_RESOLUTION = true;
 	public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
 	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
+	public boolean PERL_CRITIC_ENABLED = false;
+	public boolean PERL_ANNOTATOR_ENABLED = false;
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;

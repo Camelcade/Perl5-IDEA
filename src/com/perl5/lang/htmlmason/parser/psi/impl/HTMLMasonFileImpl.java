@@ -701,6 +701,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
 	}
 
+	@Override
+	public byte[] getPerlContentInBytes()
+	{
+		return null;
+	}
+
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
 	{
 		protected HTMLMasonFlagsStatement myResult = null;
@@ -824,4 +830,5 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 			return myResult;
 		}
 	}
+
 }

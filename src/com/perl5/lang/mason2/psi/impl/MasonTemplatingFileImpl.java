@@ -51,4 +51,11 @@ public class MasonTemplatingFileImpl extends MasonFileImpl
 	{
 		return Mason2TemplatingCodeGeneratorImpl.INSTANCE;
 	}
+
+	@Override
+	public byte[] getPerlContentInBytes()
+	{
+		return null;
+	}
+
 }

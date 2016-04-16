@@ -45,4 +45,10 @@ public class EmbeddedPerlFileImpl extends PerlFileImpl
 	{
 		return EmbeddedPerlFileType.INSTANCE;
 	}
+
+	@Override
+	public byte[] getPerlContentInBytes()
+	{
+		return null;
+	}
 }

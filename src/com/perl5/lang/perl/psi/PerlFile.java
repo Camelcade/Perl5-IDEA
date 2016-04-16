@@ -115,4 +115,12 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @return override generator
 	 */
 	PerlCodeGenerator getCodeGenerator();
+
+	/**
+	 * Returns perl content with templating injections replaced with spaces
+	 *
+	 * @return bytes for external analysis/formatting
+	 */
+	@Nullable
+	byte[] getPerlContentInBytes();
 }
