@@ -16,12 +16,15 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.notification.*;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
+import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -67,6 +70,25 @@ public class Perl5ProjectComponent implements ProjectComponent
 	{
 		PerlStringCompletionUtil.HASH_INDEXES_CACHE.clear();
 		PerlStringCompletionUtil.HEREDOC_OPENERS_CACHE.clear();
+
+		PerlApplicationSettings settings = PerlApplicationSettings.getInstance();
+		if (settings.shouldShowAnnounce())
+		{
+			settings.setAnnounceShown();
+			NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
+			Notification notification = group.createNotification(
+					"Perl5 plugin updated to version " + PerlPluginUtil.getPluginVersion(),
+					"<p>Current release brings you POD support and context help (Ctrl+Q), alongside with many smaller fixes and improvements.</p><br/>" +
+							"<p>Full list of changes and fixes may be found on the <a href=\"https://plugins.jetbrains.com/plugin/7796\">Plugin's page</a> in JetBrains repository.</p><br/>" +
+							"<p>Don't hesitate to report bugs and request new features to <a href=\"https://github.com/hurricup/Perl5-IDEA/issues\">our tracker</a>.</p><br/>" +
+							"<p>If you find this plugin helpful, you can support it using <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E\">PayPal</a>.</p><br/>" +
+							"<p>Have a nice coding!</p><br/>",
+					NotificationType.INFORMATION,
+					new NotificationListener.UrlOpeningListener(false)
+			);
+			Notifications.Bus.notify(notification);
+		}
+
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);

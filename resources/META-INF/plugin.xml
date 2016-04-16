@@ -34,11 +34,12 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Basic pod support</li>
-      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package.</li>
-      <li>Lexical vairables are now in top of autocompletion pop-up.</li>
+      <li>POD support: live templates, completion, navigation and few useful inspections</li>
+      <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files</li>
+      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package</li>
+      <li>Lexical vairables are now in top of autocompletion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
-      <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via .perlcriticrc file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings.</li>
+      <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings.</li>
       </ul>
      </p>
 
@@ -136,6 +137,8 @@
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 
+        <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
+                            serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
         <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
                             serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
         <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"
