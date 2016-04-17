@@ -34,6 +34,7 @@ import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
@@ -56,6 +57,7 @@ public class PerlSettingsConfigurable implements Configurable
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
 	JCheckBox perlCriticCheckBox;
+	JCheckBox perlTryCatchCheckBox;
 	JCheckBox perlAnnotatorCheckBox;
 	JCheckBox allowInjectionWithInterpolation;
 
@@ -106,6 +108,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
 		builder.addComponent(perlCriticCheckBox);
+
+		perlTryCatchCheckBox = new JCheckBox("Enable TryCatch sytnax extension");
+		builder.addComponent(perlTryCatchCheckBox);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
 		builder.addComponent(perlAnnotatorCheckBox);
@@ -180,6 +185,7 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
 				mySettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
 				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
+				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -200,6 +206,9 @@ public class PerlSettingsConfigurable implements Configurable
 		mySettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
 		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
 
+		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
+		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
+
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
 
@@ -208,6 +217,11 @@ public class PerlSettingsConfigurable implements Configurable
 			applyMicroIdeSettings();
 		}
 		mySettings.settingsUpdated();
+
+		if (needReparse)
+		{
+			FileContentUtil.reparseOpenedFiles();
+		}
 	}
 
 	public void applyMicroIdeSettings()
@@ -239,6 +253,7 @@ public class PerlSettingsConfigurable implements Configurable
 		allowInjectionWithInterpolation.setSelected(mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
 		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
 		perlAnnotatorCheckBox.setSelected(mySettings.PERL_ANNOTATOR_ENABLED);
+		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -262,5 +277,6 @@ public class PerlSettingsConfigurable implements Configurable
 		allowInjectionWithInterpolation = null;
 		perlAnnotatorCheckBox = null;
 		perlCriticCheckBox = null;
+		perlTryCatchCheckBox = null;
 	}
 }

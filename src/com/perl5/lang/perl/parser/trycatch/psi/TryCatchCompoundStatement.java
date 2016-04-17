@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.elementTypes;
+package com.perl5.lang.perl.parser.trycatch.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 /**
- * Created by hurricup on 19.01.2016.
+ * Created by hurricup on 17.04.2016.
  */
-public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider
+public interface TryCatchCompoundStatement extends PerlCompositeElement, PerlLexicalScope
 {
-	public PerlElementTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlCompositeElementImpl(node);
-	}
 }

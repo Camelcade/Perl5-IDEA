@@ -50,6 +50,7 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
 	public boolean PERL_CRITIC_ENABLED = false;
 	public boolean PERL_ANNOTATOR_ENABLED = false;
+	public boolean PERL_TRY_CATCH_ENABLED = false;
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;

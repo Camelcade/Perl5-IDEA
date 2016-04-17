@@ -19,9 +19,7 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +29,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchPerlParserExtensionImpl extends PerlParserExtension implements PerlSwitchElementTypes, PerlElementTypes
+public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(

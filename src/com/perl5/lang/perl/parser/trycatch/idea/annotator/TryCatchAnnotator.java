@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.perlswitch.idea.annotator;
+package com.perl5.lang.perl.parser.trycatch.idea.annotator;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.annotators.PerlAnnotator;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
+import com.perl5.lang.perl.parser.TryCatchParserExtensionImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 22.01.2016.
+ * Created by hurricup on 17.04.2016.
  */
-public class PerlSwitchAnnotator extends PerlAnnotator
+public class TryCatchAnnotator extends PerlAnnotator
 {
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (PerlSwitchParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType()))
+		if (TryCatchParserExtensionImpl.getTokensSet().contains(element.getNode().getElementType()))
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
 
 	}
