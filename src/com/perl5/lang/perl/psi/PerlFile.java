@@ -123,4 +123,11 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 */
 	@Nullable
 	byte[] getPerlContentInBytes();
+
+	/**
+	 * Returns true if contents may be re-formatted with Perl::Tidy
+	 *
+	 * @return answer
+	 */
+	boolean isPerlTidyReformattable();
 }

@@ -51,4 +51,10 @@ public class EmbeddedPerlFileImpl extends PerlFileImpl
 	{
 		return null;
 	}
+
+	@Override
+	public boolean isPerlTidyReformattable()
+	{
+		return false;
+	}
 }

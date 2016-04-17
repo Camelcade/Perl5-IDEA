@@ -707,6 +707,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		return null;
 	}
 
+	@Override
+	public boolean isPerlTidyReformattable()
+	{
+		return false;
+	}
+
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
 	{
 		protected HTMLMasonFlagsStatement myResult = null;

@@ -828,6 +828,13 @@
     </project-components>
 
     <actions>
+        <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy" text="Re-format with Perl::Tidy">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+        </action>
+        
         <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>

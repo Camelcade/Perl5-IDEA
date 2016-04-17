@@ -585,4 +585,10 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	{
 		return getText().getBytes(getVirtualFile().getCharset());
 	}
+
+	@Override
+	public boolean isPerlTidyReformattable()
+	{
+		return true;
+	}
 }
