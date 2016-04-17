@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>You may now create package files with full-qualified names from <code>New Perl File</code> menu</li>
       <li>POD support: live templates, completion, navigation and few useful inspections</li>
       <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files</li>
       <li>TryCatch basic support. Currently <code>catch{}</code>, <code>catch($var){}</code> and <code>catch(Foo::Bar $var){}</code> are supported</li>

@@ -18,10 +18,16 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
+import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 26.08.2015.
@@ -29,6 +35,7 @@ import com.perl5.PerlIcons;
 public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware
 {
 	public static final String ACTION_TITLE = "New Perl5 file";
+	public static final String PACKAGE_TEMPLATE_NAME = "Perl5 package";
 
 	public PerlFileFromTemplateAction()
 	{
@@ -41,7 +48,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 	{
 		builder
 				.setTitle(ACTION_TITLE)
-				.addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
+				.addKind("Package", PerlIcons.PM_FILE, PACKAGE_TEMPLATE_NAME)
 				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
 				.addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
 				.addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
@@ -55,4 +62,19 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 		return "Create Perl5 file " + newName;
 	}
 
+	@Override
+	protected PsiFile createFileFromTemplate(String name, FileTemplate template, PsiDirectory dir)
+	{
+		if (StringUtil.equals(template.getName(), PACKAGE_TEMPLATE_NAME) && StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR))
+		{
+			final List<String> packageChunks = StringUtil.split(name, PerlPackageUtil.PACKAGE_SEPARATOR);
+			name = packageChunks.remove(packageChunks.size() - 1);
+			for (String packageChunk : packageChunks)
+			{
+				final PsiDirectory sub = dir.findSubdirectory(packageChunk);
+				dir = sub == null ? dir.createSubdirectory(packageChunk) : sub;
+			}
+		}
+		return super.createFileFromTemplate(name, template, dir);
+	}
 }
