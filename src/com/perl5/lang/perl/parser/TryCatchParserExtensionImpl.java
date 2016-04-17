@@ -132,15 +132,21 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		PerlParserUtil.mergePackageName(b, l);
-		boolean r = false;
-		if (r = PerlParserUtil.scalarDeclarationWrapper(b, l))
+		boolean pr = PerlParserUtil.mergePackageName(b, l);
+		boolean r = PerlParserUtil.scalarDeclarationWrapper(b, l);
+
+		if (r || pr)
 		{
 			m.done(CATCH_CONDITION);
 		}
 		else
 		{
-			m.error("Exception variable expected");
+			m.rollbackTo();
+		}
+
+		if (!r)
+		{
+			b.mark().error("Exception variable expected");
 		}
 
 		PsiBuilder.Marker errorMarker = null;
