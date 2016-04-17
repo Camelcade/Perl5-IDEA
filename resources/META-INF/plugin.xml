@@ -41,6 +41,7 @@
       <li>Lexical vairables are now in top of autocompletion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
       <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings.</li>
+      <li><code>Perl::Tidy</code> formatting is now available. All configuration must be done via <code>.perltidyrc</code> file in project root (see <a href="http://search.cpan.org/~shancock/Perl-Tidy/">Perl::Tidy</a> documentation). Again, there is no UI to configure settings for now.</li>
       </ul>
      </p>
 
