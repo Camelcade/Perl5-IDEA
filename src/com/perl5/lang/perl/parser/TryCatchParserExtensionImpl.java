@@ -155,7 +155,7 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 
 		if (errorMarker != null)
 		{
-			m.error("Close paren expected");
+			errorMarker.error("Close paren expected");
 		}
 
 		return r;

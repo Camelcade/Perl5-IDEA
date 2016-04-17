@@ -1,0 +1,10 @@
+try{
+    say 'Trying something';
+}
+catch{
+    say 'Catching';
+}
+catch(){
+    say 'Catching';
+}
+
