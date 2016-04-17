@@ -24,9 +24,10 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -105,6 +106,7 @@ public class PerlFormatWithPerlTidyAction extends AnAction
 
 			try
 			{
+				FileDocumentManager.getInstance().saveDocument(document);
 				byte[] sourceBytes = virtualFile.contentsToByteArray();
 				GeneralCommandLine perltidy = new GeneralCommandLine(SystemInfo.isWindows ? "perltidy.bat" : "perltidy", "-st", "-se").withWorkDirectory(file.getProject().getBasePath());
 
@@ -123,7 +125,7 @@ public class PerlFormatWithPerlTidyAction extends AnAction
 
 					if (stderrLines.isEmpty())
 					{
-						ApplicationManager.getApplication().runWriteAction(new Runnable()
+						WriteCommandAction.runWriteCommandAction(project, new Runnable()
 						{
 							@Override
 							public void run()
@@ -135,10 +137,12 @@ public class PerlFormatWithPerlTidyAction extends AnAction
 					}
 					else
 					{
-						for (String line : stderrLines)
-						{
-							System.err.println(line);
-						}
+						Notifications.Bus.notify(new Notification(
+								PERL_TIDY_GROUP,
+								"Perl::Tidy formatting error",
+								StringUtil.join(stderrLines, "<br>"),
+								NotificationType.ERROR
+						));
 
 					}
 				} catch (ExecutionException e)
