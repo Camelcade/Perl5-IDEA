@@ -107,7 +107,6 @@ public class PerlPackageCompletionUtil
 		{
 			result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
 		}
-
 	}
 
 	public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result)

@@ -16,6 +16,8 @@
 
 package completion;
 
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,6 +74,11 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 		checkClassCompletions("package_state");
 	}
 
+	public void testTryCatch()
+	{
+		Perl5Settings.getInstance(getProject()).PERL_TRY_CATCH_ENABLED = true;
+		checkClassCompletions("try_catch");
+	}
 
 	public void checkPackageAndVersionsCompletions(String fileName)
 	{

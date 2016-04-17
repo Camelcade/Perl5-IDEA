@@ -16,9 +16,13 @@
 
 package base;
 
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -28,8 +32,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
+import org.picocontainer.MutablePicoContainer;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,11 +48,33 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
 	private static final String END_FOLD = "</fold>";
 
+	public static Application getApplication()
+	{
+		return ApplicationManager.getApplication();
+	}
+
 	@Override
 	protected void setUp() throws Exception
 	{
 		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
 		super.setUp();
+		registerApplicationService(Perl5Settings.class, new Perl5Settings());
+	}
+
+	protected <T> void registerApplicationService(final Class<T> aClass, T object)
+	{
+		final MutablePicoContainer container = ((MutablePicoContainer) getApplication().getPicoContainer());
+		container.registerComponentImplementation(object, aClass);
+//		container.registerComponentInDisposer(serviceImplementation);
+
+		Disposer.register(getProject(), new Disposable()
+		{
+			@Override
+			public void dispose()
+			{
+				container.unregisterComponent(aClass.getName());
+			}
+		});
 	}
 
 	public void initWithFileAsScript(String filename)

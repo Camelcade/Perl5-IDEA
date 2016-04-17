@@ -1,0 +1,10 @@
+package Foo::Bar;
+
+package main;
+
+try{
+	say 'something';
+}
+catch(<caret>){
+
+}
