@@ -67,7 +67,7 @@ public class PodFileUtil
 			}
 			else
 			{
-				getPackageNameFromVirtualFile(virtualFile, classRoot);
+				return getPackageNameFromVirtualFile(virtualFile, classRoot);
 			}
 		}
 		return null;

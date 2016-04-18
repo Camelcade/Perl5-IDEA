@@ -34,7 +34,7 @@ public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementP
 		return element instanceof PerlSubDefinitionBase
 				|| element instanceof PerlSubDeclaration
 				|| element instanceof PerlGlobVariable
-				|| element instanceof PerlVariableDeclarationWrapper
+				|| element instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) element).isGlobalDeclaration()
 				;
 	}
 }

@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.*;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.pod.PodLanguage;
 
 import java.util.Map;
 
@@ -35,31 +35,54 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 	@Override
 	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
 	{
-		boolean globScanned = element instanceof PerlGlobVariable;
+		final String currentBaseName = ((PsiNameIdentifierOwner) element).getName();
 
-		for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll())
+		if (currentBaseName != null && StringUtil.isNotEmpty(newName))
 		{
-			if (reference instanceof PsiPolyVariantReference)
+			boolean globScanned = element instanceof PerlGlobVariable;
+
+			for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll())
 			{
-				for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
+				if (reference instanceof PsiPolyVariantReference)
 				{
-					PsiElement resolveResultElement = resolveResult.getElement();
-					if (!allRenames.containsKey(resolveResultElement))
+					for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
 					{
-						preparePsiElementRenaming(resolveResultElement, newName, allRenames);
-						if (!globScanned && resolveResultElement instanceof PerlGlobVariable)
+						PsiElement resolveResultElement = resolveResult.getElement();
+						if (!allRenames.containsKey(resolveResultElement))
 						{
-							globScanned = true;
-							prepareRenaming(resolveResultElement, newName, allRenames, scope);
+							allRenames.put(resolveResultElement, newName);
+							if (!globScanned && resolveResultElement instanceof PerlGlobVariable)
+							{
+								globScanned = true;
+								prepareRenaming(resolveResultElement, newName, allRenames, scope);
+							}
 						}
 					}
 				}
+				processDocReference(currentBaseName, newName, reference, allRenames);
 			}
 		}
 	}
 
-	public void preparePsiElementRenaming(PsiElement element, String newBaseName, Map<PsiElement, String> allRenames)
+	private void processDocReference(String currentBaseName, String newName, PsiReference reference, Map<PsiElement, String> allRenames)
 	{
-		allRenames.put(element, newBaseName);
+		PsiElement sourceElement = reference.getElement();
+		if (sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE))
+		{
+			PsiNameIdentifierOwner identifierOwner = PsiTreeUtil.getParentOfType(sourceElement, PsiNameIdentifierOwner.class);
+			if (identifierOwner != null)
+			{
+				PsiElement nameIdentifier = identifierOwner.getNameIdentifier();
+				if (nameIdentifier != null && nameIdentifier.getTextRange().contains(sourceElement.getTextRange()))
+				{
+					String currentName = identifierOwner.getName();
+					if (currentName != null)
+					{
+						String newSectionName = currentName.replace(currentBaseName, newName);
+						allRenames.put(identifierOwner, newSectionName);
+					}
+				}
+			}
+		}
 	}
 }
