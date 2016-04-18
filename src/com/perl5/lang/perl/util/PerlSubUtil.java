@@ -30,10 +30,12 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubInde
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
+import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -325,6 +327,58 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		else
 		{
 			return "(" + argumentListString + " [, " + optionalArgumentsString + "])";
+		}
+	}
+
+	@NotNull
+	public static List<PerlSubBase> getTopLevelSuperMethods(PerlSubBase subBase)
+	{
+		return collectSuperMethods(subBase, new THashSet<String>());
+	}
+
+	/**
+	 * Recursively collecting superMethods
+	 *
+	 * @param subBase        base method to search
+	 * @param classRecursion class recursion set
+	 * @return empty list if we've already been in this class, or list of topmost methods
+	 */
+	@NotNull
+	private static List<PerlSubBase> collectSuperMethods(PerlSubBase subBase, Set<String> classRecursion)
+	{
+		if (subBase == null)
+			return Collections.emptyList();
+
+		String packageName = subBase.getPackageName();
+
+		if (classRecursion.contains(packageName))
+			return Collections.emptyList();
+		classRecursion.add(packageName);
+
+		Collection<PsiElement> superMethods = PerlMro.resolveSub(
+				subBase.getProject(),
+				subBase.getPackageName(),
+				subBase.getSubName(),
+				true
+		);
+
+		if (superMethods.isEmpty())
+		{
+			return Collections.singletonList(subBase);
+		}
+		else
+		{
+			List<PerlSubBase> result = new ArrayList<PerlSubBase>();
+
+			for (PsiElement superMethod : superMethods)
+			{
+				if (superMethod instanceof PerlSubBase)
+				{
+					result.addAll(collectSuperMethods((PerlSubBase) superMethod, classRecursion));
+				}
+			}
+
+			return result;
 		}
 	}
 
