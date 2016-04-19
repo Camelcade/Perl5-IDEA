@@ -40,7 +40,7 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler
 	@Override
 	protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element, PsiNameIdentifierOwner elementToRename, Editor editor)
 	{
-		return new PerlMemberInplaceRenamer(elementToRename, elementToRename, editor);
+		return new PerlMemberInplaceRenamer(elementToRename, element, editor);
 	}
 
 	@Override

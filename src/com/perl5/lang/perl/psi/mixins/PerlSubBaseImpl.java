@@ -207,4 +207,9 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 				: nameIdentifier.getTextOffset();
 	}
 
+	@Override
+	public String toString()
+	{
+		return getCanonicalName();
+	}
 }
