@@ -23,16 +23,13 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.mro.PerlMro;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -86,39 +83,19 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 
 				if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
 				{
-					Collection<PsiElement> superMethods = PerlMro.resolveSub(
-							element.getProject(),
-							packageName,
-							subName,
-							true
-					);
-					if (superMethods.size() > 0)
+					PerlSubBase parentSub = PerlSubUtil.getDirectSuperMethod((PerlSubBase) element);
+
+					if (parentSub != null)
 					{
 						NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
 								.create(AllIcons.Gutter.OverridingMethod)
-								.setTargets(superMethods)
+								.setTarget(parentSub)
 								.setTooltipText("Overriding method");
 
 						result.add(builder.createLineMarkerInfo(nameIdentifier));
 					}
 
-
-					final List<PerlSubBase> overridingSubs = new ArrayList<PerlSubBase>();
-
-					PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubBase>()
-					{
-						@Override
-						public boolean process(PerlSubBase perlSubBase)
-						{
-							String subBaseName = perlSubBase.getSubName();
-							if (StringUtil.isNotEmpty(subBaseName) && subName.equals(subBaseName) && perlSubBase.isMethod())
-							{
-								overridingSubs.add(perlSubBase);
-								return false;
-							}
-							return true;
-						}
-					});
+					final List<PerlSubBase> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubBase) element, containingNamespace);
 
 					if (overridingSubs.size() > 0)
 					{

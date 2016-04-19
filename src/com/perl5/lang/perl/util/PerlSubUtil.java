@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
@@ -331,9 +333,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	}
 
 	@NotNull
-	public static List<PerlSubBase> getTopLevelSuperMethods(PerlSubBase subBase)
+	public static PerlSubBase getTopLevelSuperMethod(@NotNull PerlSubBase subBase)
 	{
-		return collectSuperMethods(subBase, new THashSet<String>());
+		return getTopLevelSuperMethod(subBase, new THashSet<String>());
 	}
 
 	/**
@@ -344,42 +346,96 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @return empty list if we've already been in this class, or list of topmost methods
 	 */
 	@NotNull
-	private static List<PerlSubBase> collectSuperMethods(PerlSubBase subBase, Set<String> classRecursion)
+	private static PerlSubBase getTopLevelSuperMethod(@NotNull PerlSubBase subBase, Set<String> classRecursion)
 	{
-		if (subBase == null)
-			return Collections.emptyList();
-
 		String packageName = subBase.getPackageName();
 
 		if (classRecursion.contains(packageName))
-			return Collections.emptyList();
+			return subBase;
+
 		classRecursion.add(packageName);
 
-		Collection<PsiElement> superMethods = PerlMro.resolveSub(
+		PerlSubBase directSuperMethod = getDirectSuperMethod(subBase);
+		return directSuperMethod == null ? subBase : getTopLevelSuperMethod(directSuperMethod, classRecursion);
+	}
+
+	@Nullable
+	public static PerlSubBase getDirectSuperMethod(PerlSubBase subBase)
+	{
+		if (!subBase.isMethod())
+			return null;
+
+		Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
 				subBase.getProject(),
 				subBase.getPackageName(),
 				subBase.getSubName(),
 				true
 		);
 
-		if (superMethods.isEmpty())
+		for (PsiElement resolveTarget : resolveTargets)
 		{
-			return Collections.singletonList(subBase);
-		}
-		else
-		{
-			List<PerlSubBase> result = new ArrayList<PerlSubBase>();
-
-			for (PsiElement superMethod : superMethods)
+			if (resolveTarget instanceof PerlSubBase)
 			{
-				if (superMethod instanceof PerlSubBase)
-				{
-					result.addAll(collectSuperMethods((PerlSubBase) superMethod, classRecursion));
-				}
+				return (PerlSubBase) resolveTarget;
 			}
-
-			return result;
 		}
+		return null;
+	}
+
+	@NotNull
+	public static List<PerlSubBase> collectOverridingSubs(PerlSubBase subBase)
+	{
+		return collectOverridingSubs(subBase, new THashSet<String>());
+	}
+
+	@NotNull
+	public static List<PerlSubBase> collectOverridingSubs(@NotNull PerlSubBase subBase, @NotNull Set<String> recursionSet)
+	{
+		List<PerlSubBase> result = new ArrayList<PerlSubBase>();
+		for (PerlSubBase directDescendant : getDirectOverridingSubs(subBase))
+		{
+			String packageName = directDescendant.getPackageName();
+			if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName))
+			{
+				recursionSet.add(packageName);
+				result.add(directDescendant);
+				result.addAll(collectOverridingSubs(directDescendant, recursionSet));
+			}
+		}
+
+		return result;
+	}
+
+	@NotNull
+	public static List<PerlSubBase> getDirectOverridingSubs(@NotNull PerlSubBase subBase)
+	{
+		PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(subBase, PerlNamespaceDefinition.class);
+
+		return containingNamespace == null ? Collections.<PerlSubBase>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
+	}
+
+	@NotNull
+	public static List<PerlSubBase> getDirectOverridingSubs(@NotNull final PerlSubBase subBase, @NotNull PerlNamespaceDefinition containingNamespace)
+	{
+		final List<PerlSubBase> overridingSubs = new ArrayList<PerlSubBase>();
+		final String subName = subBase.getSubName();
+
+		PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubBase>()
+		{
+			@Override
+			public boolean process(PerlSubBase overridingSub)
+			{
+				String overridingSubName = overridingSub.getSubName();
+				if (StringUtil.equals(overridingSubName, subName) && subBase == getDirectSuperMethod(overridingSub))
+				{
+					overridingSubs.add(overridingSub);
+					return false;
+				}
+				return true;
+			}
+		});
+
+		return overridingSubs;
 	}
 
 }

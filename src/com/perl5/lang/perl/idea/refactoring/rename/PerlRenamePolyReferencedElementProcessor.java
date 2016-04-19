@@ -16,28 +16,22 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.ide.IdeBundle;
-import com.intellij.ide.util.MemberChooser;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
-import com.intellij.ui.SpeedSearchComparator;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -77,7 +71,10 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 
 			if (element instanceof PerlSubBase && ((PerlSubBase) element).isMethod())
 			{
-				// collect submethods
+				for (PerlSubBase overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubBase) element))
+				{
+					allRenames.put(overridingSub, newName);
+				}
 			}
 		}
 	}
@@ -108,69 +105,28 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 	@Override
 	public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor)
 	{
-//		if (element instanceof PerlSubBase && ((PerlSubBase) element).isMethod())
-//		{
-//			return suggestSuperMethod((PerlSubBase) element);
-//		}
+		if (element instanceof PerlSubBase && ((PerlSubBase) element).isMethod())
+		{
+			return suggestSuperMethod((PerlSubBase) element);
+		}
 		return super.substituteElementToRename(element, editor);
 	}
 
-	private PsiElement suggestSuperMethod(PerlSubBase subBase)
+	@NotNull
+	private PsiElement suggestSuperMethod(@NotNull PerlSubBase subBase)
 	{
-		List<PerlSubBase> topLevelSuperMethods = PerlSubUtil.getTopLevelSuperMethods(subBase);
+		PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
 
-		if (topLevelSuperMethods.size() == 1 && topLevelSuperMethods.get(0).equals(subBase))
+		if (topLevelSuperMethod == subBase)
 			return subBase;
 
+		int dialogResult = Messages.showOkCancelDialog(
+				"This method overrides SUPER method: " + topLevelSuperMethod.getCanonicalName() + ".",
+				"Method Rename",
+				"Rename SUPER method",
+				"Rename this one",
+				PerlIcons.PERL_LANGUAGE_ICON);
 
-		List<PerlMethodMember> fullList = new ArrayList<PerlMethodMember>();
-		fullList.add(new PerlMethodMember(subBase));
-		for (PerlSubBase parentMethod : topLevelSuperMethods)
-		{
-			fullList.add(new PerlMethodMember(parentMethod));
-		}
-
-		// fixme not dry with PerlCodeGenerator
-		final MemberChooser<PerlMethodMember> chooser =
-				new MemberChooser<PerlMethodMember>(fullList.toArray(new PerlMethodMember[fullList.size()]), false, false, subBase.getProject())
-				{
-					@Override
-					protected SpeedSearchComparator getSpeedSearchComparator()
-					{
-						return new SpeedSearchComparator(false)
-						{
-							@Nullable
-							@Override
-							public Iterable<TextRange> matchingFragments(String pattern, String text)
-							{
-								return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
-							}
-						};
-					}
-
-					@Override
-					protected ShowContainersAction getShowContainersAction()
-					{
-						return new ShowContainersAction(IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
-					}
-				};
-
-		chooser.setTitle("Choose Method To Rename");
-		chooser.setCopyJavadocVisible(false);
-
-		chooser.show();
-		if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE)
-		{
-			return subBase;
-		}
-
-		List<PerlMethodMember> selectedElements = chooser.getSelectedElements();
-
-		if (selectedElements != null && selectedElements.size() > 0)
-		{
-			return selectedElements.get(0).getPsiElement();
-		}
-
-		return subBase;
+		return dialogResult == Messages.OK ? topLevelSuperMethod : subBase;
 	}
 }
