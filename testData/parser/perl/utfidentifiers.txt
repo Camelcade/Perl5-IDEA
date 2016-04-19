@@ -1,7 +1,7 @@
 Perl5
   PsiComment(PerlTokenType.COMMENT_LINE)('#!/usr/bin/perl')
   PsiComment(PerlTokenType.COMMENT_LINE)('# Этот исходник посвящается программистам 1с приходящим на собеседование')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+  main::обождать_пять_менут
     PsiElement(PerlTokenType.sub)('sub')
     PsiElement(PerlTokenType.SUB)('обождать_пять_менут')
     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -48,7 +48,7 @@ Perl5
             PsiElement(PerlTokenType.;)(';')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
       PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+  main::обождать_менуту
     PsiElement(PerlTokenType.sub)('sub')
     PsiElement(PerlTokenType.SUB)('обождать_менуту')
     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -125,25 +125,25 @@ Perl5
     PsiElement(PerlTokenType.PACKAGE)('Foo')
     PsiElement(PerlTokenType.;)(';')
     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      Foo::раздватри
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('раздватри')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
           PsiElement(PerlTokenType.LEFT_BRACE)('{')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      Foo::_раздватри
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('_раздватри')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
           PsiElement(PerlTokenType.LEFT_BRACE)('{')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      Foo::oneразд123ватри
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('oneразд123ватри')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
           PsiElement(PerlTokenType.LEFT_BRACE)('{')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      Foo::_разд123one_ватри
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('_разд123one_ватри')
         PsiPerlBlockImpl(PerlElementType.BLOCK)

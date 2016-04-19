@@ -6,7 +6,7 @@ Perl5
     PsiElement(PerlTokenType.PACKAGE)('раз::два::три')
     PsiElement(PerlTokenType.;)(';')
     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      раз::два::три::stub
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('stub')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -17,7 +17,7 @@ Perl5
         PsiElement(PerlTokenType.PACKAGE)('раз'два::три')
         PsiElement(PerlTokenType.;)(';')
         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+          раз::два::три::stub
             PsiElement(PerlTokenType.sub)('sub')
             PsiElement(PerlTokenType.SUB)('stub')
             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -28,7 +28,7 @@ Perl5
             PsiElement(PerlTokenType.PACKAGE)('раз'два'три')
             PsiElement(PerlTokenType.;)(';')
             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              раз::два::три::stub
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('stub')
                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -39,7 +39,7 @@ Perl5
                 PsiElement(PerlTokenType.PACKAGE)('раз::'два::::'три')
                 PsiElement(PerlTokenType.;)(';')
                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                  раз::::два::::::три::stub
                     PsiElement(PerlTokenType.sub)('sub')
                     PsiElement(PerlTokenType.SUB)('stub')
                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -50,7 +50,7 @@ Perl5
                     PsiElement(PerlTokenType.PACKAGE)('one::два::три')
                     PsiElement(PerlTokenType.;)(';')
                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                      one::два::три::stub
                         PsiElement(PerlTokenType.sub)('sub')
                         PsiElement(PerlTokenType.SUB)('stub')
                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -61,7 +61,7 @@ Perl5
                         PsiElement(PerlTokenType.PACKAGE)('one::два::three')
                         PsiElement(PerlTokenType.;)(';')
                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                          one::два::three::stub
                             PsiElement(PerlTokenType.sub)('sub')
                             PsiElement(PerlTokenType.SUB)('stub')
                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -72,7 +72,7 @@ Perl5
                             PsiElement(PerlTokenType.PACKAGE)('раз::two::три')
                             PsiElement(PerlTokenType.;)(';')
                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                              раз::two::три::stub
                                 PsiElement(PerlTokenType.sub)('sub')
                                 PsiElement(PerlTokenType.SUB)('stub')
                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -83,7 +83,7 @@ Perl5
                                 PsiElement(PerlTokenType.PACKAGE)('раз::два::three')
                                 PsiElement(PerlTokenType.;)(';')
                                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                  раз::два::three::stub
                                     PsiElement(PerlTokenType.sub)('sub')
                                     PsiElement(PerlTokenType.SUB)('stub')
                                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -94,7 +94,7 @@ Perl5
                                     PsiElement(PerlTokenType.PACKAGE)('раз::два::три::')
                                     PsiElement(PerlTokenType.;)(';')
                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                      раз::два::три::stub1
                                         PsiElement(PerlTokenType.sub)('sub')
                                         PsiElement(PerlTokenType.SUB)('stub1')
                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -105,7 +105,7 @@ Perl5
                                         PsiElement(PerlTokenType.PACKAGE)('раз'два::три::')
                                         PsiElement(PerlTokenType.;)(';')
                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                          раз::два::три::stub1
                                             PsiElement(PerlTokenType.sub)('sub')
                                             PsiElement(PerlTokenType.SUB)('stub1')
                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -116,7 +116,7 @@ Perl5
                                             PsiElement(PerlTokenType.PACKAGE)('раз'два'три::')
                                             PsiElement(PerlTokenType.;)(';')
                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                              раз::два::три::stub1
                                                 PsiElement(PerlTokenType.sub)('sub')
                                                 PsiElement(PerlTokenType.SUB)('stub1')
                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -127,7 +127,7 @@ Perl5
                                                 PsiElement(PerlTokenType.PACKAGE)('раз::'два::::'три::')
                                                 PsiElement(PerlTokenType.;)(';')
                                                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                  раз::::два::::::три::stub1
                                                     PsiElement(PerlTokenType.sub)('sub')
                                                     PsiElement(PerlTokenType.SUB)('stub1')
                                                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -138,7 +138,7 @@ Perl5
                                                     PsiElement(PerlTokenType.PACKAGE)('one::два::три::')
                                                     PsiElement(PerlTokenType.;)(';')
                                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                      one::два::три::stub1
                                                         PsiElement(PerlTokenType.sub)('sub')
                                                         PsiElement(PerlTokenType.SUB)('stub1')
                                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -149,7 +149,7 @@ Perl5
                                                         PsiElement(PerlTokenType.PACKAGE)('one::два::three::')
                                                         PsiElement(PerlTokenType.;)(';')
                                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                          one::два::three::stub1
                                                             PsiElement(PerlTokenType.sub)('sub')
                                                             PsiElement(PerlTokenType.SUB)('stub1')
                                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -160,7 +160,7 @@ Perl5
                                                             PsiElement(PerlTokenType.PACKAGE)('раз::two::три::')
                                                             PsiElement(PerlTokenType.;)(';')
                                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                              раз::two::три::stub1
                                                                 PsiElement(PerlTokenType.sub)('sub')
                                                                 PsiElement(PerlTokenType.SUB)('stub1')
                                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -176,7 +176,7 @@ Perl5
                                                                     PsiElement(PerlTokenType.PACKAGE)('::раз::два::три')
                                                                     PsiElement(PerlTokenType.;)(';')
                                                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                      раз::два::три::stub2
                                                                         PsiElement(PerlTokenType.sub)('sub')
                                                                         PsiElement(PerlTokenType.SUB)('stub2')
                                                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -187,7 +187,7 @@ Perl5
                                                                         PsiElement(PerlTokenType.PACKAGE)('::раз'два::три')
                                                                         PsiElement(PerlTokenType.;)(';')
                                                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                          раз::два::три::stub2
                                                                             PsiElement(PerlTokenType.sub)('sub')
                                                                             PsiElement(PerlTokenType.SUB)('stub2')
                                                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -198,7 +198,7 @@ Perl5
                                                                             PsiElement(PerlTokenType.PACKAGE)('::раз'два'три')
                                                                             PsiElement(PerlTokenType.;)(';')
                                                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                              раз::два::три::stub2
                                                                                 PsiElement(PerlTokenType.sub)('sub')
                                                                                 PsiElement(PerlTokenType.SUB)('stub2')
                                                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -209,7 +209,7 @@ Perl5
                                                                                 PsiElement(PerlTokenType.PACKAGE)('::раз::'два::::'три')
                                                                                 PsiElement(PerlTokenType.;)(';')
                                                                                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                  раз::::два::::::три::stub2
                                                                                     PsiElement(PerlTokenType.sub)('sub')
                                                                                     PsiElement(PerlTokenType.SUB)('stub2')
                                                                                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -220,7 +220,7 @@ Perl5
                                                                                     PsiElement(PerlTokenType.PACKAGE)('::one::два::три')
                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                      one::два::три::stub2
                                                                                         PsiElement(PerlTokenType.sub)('sub')
                                                                                         PsiElement(PerlTokenType.SUB)('stub2')
                                                                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -231,7 +231,7 @@ Perl5
                                                                                         PsiElement(PerlTokenType.PACKAGE)('::one::два::three')
                                                                                         PsiElement(PerlTokenType.;)(';')
                                                                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                          one::два::three::stub2
                                                                                             PsiElement(PerlTokenType.sub)('sub')
                                                                                             PsiElement(PerlTokenType.SUB)('stub2')
                                                                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -242,7 +242,7 @@ Perl5
                                                                                             PsiElement(PerlTokenType.PACKAGE)('::раз::two::три')
                                                                                             PsiElement(PerlTokenType.;)(';')
                                                                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                              раз::two::три::stub2
                                                                                                 PsiElement(PerlTokenType.sub)('sub')
                                                                                                 PsiElement(PerlTokenType.SUB)('stub2')
                                                                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -258,7 +258,7 @@ Perl5
                                                                                                     PsiElement(PerlTokenType.PACKAGE)('::раз::два::три::')
                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                      раз::два::три::stub3
                                                                                                         PsiElement(PerlTokenType.sub)('sub')
                                                                                                         PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -269,7 +269,7 @@ Perl5
                                                                                                         PsiElement(PerlTokenType.PACKAGE)('::раз'два::три::')
                                                                                                         PsiElement(PerlTokenType.;)(';')
                                                                                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                          раз::два::три::stub3
                                                                                                             PsiElement(PerlTokenType.sub)('sub')
                                                                                                             PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -280,7 +280,7 @@ Perl5
                                                                                                             PsiElement(PerlTokenType.PACKAGE)('::раз'два'три::')
                                                                                                             PsiElement(PerlTokenType.;)(';')
                                                                                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                              раз::два::три::stub3
                                                                                                                 PsiElement(PerlTokenType.sub)('sub')
                                                                                                                 PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -291,7 +291,7 @@ Perl5
                                                                                                                 PsiElement(PerlTokenType.PACKAGE)('::раз::'два::::'три::')
                                                                                                                 PsiElement(PerlTokenType.;)(';')
                                                                                                                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                  раз::::два::::::три::stub3
                                                                                                                     PsiElement(PerlTokenType.sub)('sub')
                                                                                                                     PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -302,7 +302,7 @@ Perl5
                                                                                                                     PsiElement(PerlTokenType.PACKAGE)('::one::два::три::')
                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                      one::два::три::stub3
                                                                                                                         PsiElement(PerlTokenType.sub)('sub')
                                                                                                                         PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -313,7 +313,7 @@ Perl5
                                                                                                                         PsiElement(PerlTokenType.PACKAGE)('::one::два::three::')
                                                                                                                         PsiElement(PerlTokenType.;)(';')
                                                                                                                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                          one::два::three::stub3
                                                                                                                             PsiElement(PerlTokenType.sub)('sub')
                                                                                                                             PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -324,7 +324,7 @@ Perl5
                                                                                                                             PsiElement(PerlTokenType.PACKAGE)('::раз::two::три::')
                                                                                                                             PsiElement(PerlTokenType.;)(';')
                                                                                                                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                              раз::two::три::stub3
                                                                                                                                 PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                 PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -335,7 +335,7 @@ Perl5
                                                                                                                                 PsiElement(PerlTokenType.PACKAGE)('::раз::два::three::')
                                                                                                                                 PsiElement(PerlTokenType.;)(';')
                                                                                                                                 PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                                  раз::два::three::stub3
                                                                                                                                     PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                     PsiElement(PerlTokenType.SUB)('stub3')
                                                                                                                                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -1581,121 +1581,121 @@ Perl5
                                                                                                                                                   PsiComment(PerlTokenType.COMMENT_LINE)('#    %'::раз::two::три;')
                                                                                                                                                   PsiComment(PerlTokenType.COMMENT_LINE)('#    %'::раз::два::three;')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз'два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз'два'')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::::два::::::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз::'два::::'')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::два::three
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('three')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::two::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз::two::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::three
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('раз::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('three')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз'два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз'два'')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::::два::::::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз::'два::::'')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::два::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::one::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::два::three
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::one::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('three')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::two::три
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз::two::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('три')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    раз::два::three
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('::раз::два::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('three')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::two::threeраз::раз
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::two::threeраз::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('раз')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::two::threeраз
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::two::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('threeраз')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::two::threeразthree::два
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::two::threeразthree::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('два')
                                                                                                                                                     PsiElement(PerlTokenType.;)(';')
                                                                                                                                                   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                                                                                                                                                    PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                                                                                                                                                    one::two::threeразthree
                                                                                                                                                       PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('one::two::')
                                                                                                                                                       PsiElement(PerlTokenType.SUB)('threeразthree')
@@ -2492,7 +2492,7 @@ Perl5
                                                                                                                                                       PsiElement(PerlTokenType.PACKAGE)('ꑭʑ')
                                                                                                                                                       PsiElement(PerlTokenType.;)(';')
                                                                                                                                                       PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                                                        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                                                        ꑭʑ::ニュー
                                                                                                                                                           PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                           PsiElement(PerlTokenType.SUB)('ニュー')
                                                                                                                                                           PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -2807,7 +2807,7 @@ Perl5
                                                                                                                                                               PsiElement(PerlTokenType.PACKAGE)('main')
                                                                                                                                                               PsiElement(PerlTokenType.;)(';')
                                                                                                                                                               PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                                                                                                                                                PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                                                                main::ㄘ
                                                                                                                                                                   PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                                   PsiElement(PerlTokenType.SUB)('ㄘ')
                                                                                                                                                                   PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -2822,7 +2822,7 @@ Perl5
                                                                                                                                                                             PsiElement(PerlTokenType.NUMBER_SIMPLE)('0')
                                                                                                                                                                         PsiElement(PerlTokenType.RIGHT_PAREN)(')')
                                                                                                                                                                     PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-                                                                                                                                                                PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                                                                                                                                                main::ƒஓ
                                                                                                                                                                   PsiElement(PerlTokenType.sub)('sub')
                                                                                                                                                                   PsiElement(PerlTokenType.SUB)('ƒஓ')
                                                                                                                                                                   PsiPerlBlockImpl(PerlElementType.BLOCK)

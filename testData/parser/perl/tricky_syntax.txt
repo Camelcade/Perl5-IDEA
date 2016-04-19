@@ -320,7 +320,7 @@ Perl5
     PsiElement(PerlTokenType.STRING_CONTENT)('%')
     PsiElement(PerlTokenType.STRING_CONTENT)('s')
   PsiComment(PerlTokenType.HEREDOC_END)('\n')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+  main::blah
     PsiElement(PerlTokenType.sub)('sub')
     PsiElement(PerlTokenType.SUB)('blah')
     PsiPerlBlockImpl(PerlElementType.BLOCK)

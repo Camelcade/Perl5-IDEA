@@ -649,14 +649,14 @@ Mason2 template file
       MasonAbstractBlockImpl(MasonTemplatingElementType.MasonTemplatingTokenType.MASON_ABSTRACT_BLOCK)
         PsiElement(MasonTemplatingTokenType.<%perl>)('<%perl>')
         PsiComment(PerlTokenType.COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::render
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('render')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
             PsiElement(PerlTokenType.LEFT_BRACE)('{')
             PsiElement(PerlTokenType.RIGHT_BRACE)('}')
         PsiElement(PerlTokenType.;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::wrap
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('wrap')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -694,14 +694,14 @@ Mason2 template file
       MasonAbstractBlockImpl(MasonTemplatingElementType.MasonTemplatingTokenType.MASON_ABSTRACT_BLOCK)
         PsiElement(MasonTemplatingTokenType.<%class>)('<%class>')
         PsiComment(PerlTokenType.COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::render
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('render')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
             PsiElement(PerlTokenType.LEFT_BRACE)('{')
             PsiElement(PerlTokenType.RIGHT_BRACE)('}')
         PsiElement(PerlTokenType.;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::wrap
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('wrap')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -739,14 +739,14 @@ Mason2 template file
       MasonAbstractBlockImpl(MasonTemplatingElementType.MasonTemplatingTokenType.MASON_ABSTRACT_BLOCK)
         PsiElement(MasonTemplatingTokenType.<%init>)('<%init>')
         PsiComment(PerlTokenType.COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::render
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('render')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
             PsiElement(PerlTokenType.LEFT_BRACE)('{')
             PsiElement(PerlTokenType.RIGHT_BRACE)('}')
         PsiElement(PerlTokenType.;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+        main::wrap
           PsiElement(PerlTokenType.sub)('sub')
           PsiElement(PerlTokenType.SUB)('wrap')
           PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -781,7 +781,7 @@ Mason2 template file
             PsiElement(PerlTokenType.RIGHT_PAREN)(')')
           PsiElement(PerlTokenType.;)(';')
         PsiElement(MasonTemplatingTokenType.</%init>)('</%init>')
-      MasonMethodDefinitionImpl(MASON_METHOD_DEFINITION)
+      main::greet1
         PsiElement(MasonTemplatingTokenType.<%method)('<%method')
         PsiElement(PerlTokenType.SUB)('greet1')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -857,7 +857,7 @@ Mason2 template file
             PsiElement(MasonTemplatingTokenType.</%perl>)('</%perl>')
           PsiComment(MasonTemplatingTokenType.MASON_TEMPLATE_BLOCK_HTML)('</div>')
         PsiElement(MasonTemplatingTokenType.</%method>)('</%method>')
-      MasonFilterDefinitionImpl(MASON_FILTER_DEFINITION)
+      main::Row1
         PsiElement(MasonTemplatingTokenType.<%filter)('<%filter')
         PsiElement(PerlTokenType.SUB)('Row1')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -932,7 +932,7 @@ Mason2 template file
       MasonFlagsStatementImpl(MasonTemplatingElementType.MasonTemplatingTokenType.FLAGS_STATEMENT)
         <empty list>
       PsiElement(MasonTemplatingTokenType.</%flags>)('</%flags>')
-      MasonOverrideDefinitionImpl(MASON_OVERRIDE_DEFINITION)
+      main::navbar1
         PsiElement(MasonTemplatingTokenType.<%override)('<%override')
         PsiElement(PerlTokenType.SUB)('navbar1')
         PsiElement(MasonTemplatingTokenType.>)('>')

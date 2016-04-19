@@ -26,7 +26,7 @@ Perl5
         PsiElement(PerlTokenType.use)('use')
         PsiElement(PerlTokenType.PACKAGE)('Method::Signatures::Simple')
         PsiElement(PerlTokenType.;)(';')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::new
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('new')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -104,7 +104,7 @@ Perl5
                     PsiElement(PerlTokenType.VARIABLE_NAME)('class')
             PsiElement(PerlTokenType.;)(';')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)
+      User::new_id
         PsiElement(PerlTokenType.sub)('func')
         PsiElement(PerlTokenType.SUB)('new_id')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -137,7 +137,7 @@ Perl5
               PsiElement(PerlTokenType.++)('++')
             PsiElement(PerlTokenType.;)(';')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::name
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('name')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -155,7 +155,7 @@ Perl5
                 PsiElement(PerlTokenType.RIGHT_BRACE)('}')
             PsiElement(PerlTokenType.;)(';')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::email
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('email')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -179,7 +179,7 @@ Perl5
         PsiElement(PerlTokenType.;)(';')
       PsiComment(PerlTokenType.COMMENT_LINE)('# -- other features -- #')
       PsiComment(PerlTokenType.COMMENT_LINE)('# attributes')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::foo
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('foo')
         PsiElement(PerlTokenType.:)(':')
@@ -200,7 +200,7 @@ Perl5
                 PsiElement(PerlTokenType.RIGHT_BRACE)('}')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
       PsiComment(PerlTokenType.COMMENT_LINE)('# change invocant name')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::foo
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('foo')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -228,7 +228,7 @@ Perl5
                     PsiElement(PerlTokenType.VARIABLE_NAME)('bar')
                 PsiElement(PerlTokenType.RIGHT_PAREN)(')')
           PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)
+      User::bar
         PsiElement(PerlTokenType.sub)('method')
         PsiElement(PerlTokenType.SUB)('bar')
         PsiElement(PerlTokenType.LEFT_PAREN)('(')

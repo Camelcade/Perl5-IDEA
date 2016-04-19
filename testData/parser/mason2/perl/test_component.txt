@@ -10,7 +10,7 @@ Mason2 pure perl file
               PsiElement(PerlTokenType.STRING_IDENTIFIER)('Hi')
               PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(''')
         PsiElement(PerlTokenType.;)(';')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      main::blalba
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('blalba')
         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -62,7 +62,7 @@ Mason2 pure perl file
               PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(''')
         PsiElement(PerlTokenType.;)(';')
       PsiElement(PerlTokenType.POD)('=head3 test\nthis\n    is\n        test\n\n\n=cut')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+      main::hi
         PsiElement(PerlTokenType.sub)('sub')
         PsiElement(PerlTokenType.SUB)('hi')
         PsiPerlBlockImpl(PerlElementType.BLOCK)

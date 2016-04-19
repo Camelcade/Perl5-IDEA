@@ -878,7 +878,7 @@ Perl5
         PsiElement(PerlTokenType.LEFT_PAREN)('(')
         PsiElement(PerlTokenType.RIGHT_PAREN)(')')
     PsiElement(PerlTokenType.;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+  main::abc
     PsiElement(PerlTokenType.sub)('sub')
     PsiElement(PerlTokenType.SUB)('abc')
     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -2653,7 +2653,7 @@ Perl5
                 PsiPerlBlockImpl(PerlElementType.BLOCK)
                   PsiElement(PerlTokenType.LEFT_BRACE)('{')
                   PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              Encode::KR::2022_KR::abc
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('abc')
                 PsiElement(PerlTokenType.:)(':')
@@ -2670,7 +2670,7 @@ Perl5
                   PsiElement(PerlTokenType.RIGHT_BRACE)('}')
               PsiElement(PerlTokenType.;)(';')
               PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                Encode::KR::2022_KR::abc
                   PsiElement(PerlTokenType.sub)('sub')
                   PsiElement(PerlTokenType.SUB)('abc')
                   PsiElement(PerlTokenType.:)(':')
@@ -2684,7 +2684,7 @@ Perl5
                     PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(')')
                 PsiElement(PerlTokenType.;)(';')
               PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                Encode::KR::2022_KR::abc
                   PsiElement(PerlTokenType.sub)('sub')
                   PsiElement(PerlTokenType.SUB)('abc')
                   PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -2694,7 +2694,7 @@ Perl5
                   PsiPerlAttributeImpl(PerlElementType.ATTRIBUTE)
                     PsiElement(PerlTokenType.IDENTIFIER)('method')
                 PsiElement(PerlTokenType.;)(';')
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              Encode::KR::2022_KR::abc
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('abc')
                 PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -2708,14 +2708,14 @@ Perl5
                   PsiElement(PerlTokenType.RIGHT_BRACE)('}')
               PsiElement(PerlTokenType.;)(';')
               PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                Encode::KR::2022_KR::abc
                   PsiElement(PerlTokenType.sub)('sub')
                   PsiElement(PerlTokenType.SUB)('abc')
                   PsiElement(PerlTokenType.:)(':')
                   PsiPerlAttributeImpl(PerlElementType.ATTRIBUTE)
                     PsiElement(PerlTokenType.IDENTIFIER)('method')
                 PsiElement(PerlTokenType.;)(';')
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              Encode::KR::2022_KR::abc
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('abc')
                 PsiElement(PerlTokenType.:)(':')
@@ -2726,14 +2726,14 @@ Perl5
                   PsiElement(PerlTokenType.RIGHT_BRACE)('}')
               PsiElement(PerlTokenType.;)(';')
               PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                Encode::KR::2022_KR::abc
                   PsiElement(PerlTokenType.sub)('sub')
                   PsiElement(PerlTokenType.SUB)('abc')
                   PsiElement(PerlTokenType.LEFT_PAREN)('(')
                   PsiElement(PerlTokenType.SUB_PROTOTYPE_TOKEN)('$$$@')
                   PsiElement(PerlTokenType.RIGHT_PAREN)(')')
                 PsiElement(PerlTokenType.;)(';')
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              Encode::KR::2022_KR::abc
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('abc')
                 PsiElement(PerlTokenType.LEFT_PAREN)('(')
@@ -2743,11 +2743,11 @@ Perl5
                   PsiElement(PerlTokenType.LEFT_BRACE)('{')
                   PsiElement(PerlTokenType.RIGHT_BRACE)('}')
               PsiPerlStatementImpl(PerlElementType.STATEMENT)
-                PsiPerlSubDeclarationImpl(SUB_DECLARATION)
+                Encode::KR::2022_KR::abc
                   PsiElement(PerlTokenType.sub)('sub')
                   PsiElement(PerlTokenType.SUB)('abc')
                 PsiElement(PerlTokenType.;)(';')
-              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+              Encode::KR::2022_KR::abc
                 PsiElement(PerlTokenType.sub)('sub')
                 PsiElement(PerlTokenType.SUB)('abc')
                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -2993,7 +2993,7 @@ Perl5
                       PsiPerlNumberConstantImpl(PerlElementType.NUMBER_CONSTANT)
                         PsiElement(PerlTokenType.NUMBER_SIMPLE)('123')
                     PsiElement(PerlTokenType.;)(';')
-                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                  main::import
                     PsiElement(PerlTokenType.sub)('sub')
                     PsiElement(PerlTokenType.SUB)('import')
                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -3723,19 +3723,19 @@ Perl5
                                 PsiElement(PerlTokenType.QUOTE_DOUBLE_CLOSE)('"')
                           PsiElement(PerlTokenType.;)(';')
                         PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                  main::eval
                     PsiElement(PerlTokenType.sub)('sub')
                     PsiElement(PerlTokenType.SUB)('eval')
                     PsiPerlBlockImpl(PerlElementType.BLOCK)
                       PsiElement(PerlTokenType.LEFT_BRACE)('{')
                       PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                  main::if
                     PsiElement(PerlTokenType.sub)('sub')
                     PsiElement(PerlTokenType.SUB)('if')
                     PsiPerlBlockImpl(PerlElementType.BLOCK)
                       PsiElement(PerlTokenType.LEFT_BRACE)('{')
                       PsiElement(PerlTokenType.RIGHT_BRACE)('}')
-                  PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                  main::while
                     PsiElement(PerlTokenType.sub)('sub')
                     PsiElement(PerlTokenType.SUB)('while')
                     PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -4593,7 +4593,7 @@ Perl5
                     PsiElement(PerlTokenType.PACKAGE)('Foo')
                     PsiElement(PerlTokenType.;)(';')
                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                      Foo::bar
                         PsiElement(PerlTokenType.sub)('sub')
                         PsiElement(PerlTokenType.SUB)('bar')
                         PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -4604,7 +4604,7 @@ Perl5
                         PsiElement(PerlTokenType.PACKAGE)('main')
                         PsiElement(PerlTokenType.;)(';')
                         PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                          PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                          main::somesub
                             PsiElement(PerlTokenType.sub)('sub')
                             PsiElement(PerlTokenType.SUB)('somesub')
                             PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -4615,7 +4615,7 @@ Perl5
                             PsiElement(PerlTokenType.PACKAGE)('Foo::Bar')
                             PsiElement(PerlTokenType.;)(';')
                             PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                              PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                              Foo::Bar::somesub
                                 PsiElement(PerlTokenType.sub)('sub')
                                 PsiElement(PerlTokenType.SUB)('somesub')
                                 PsiPerlBlockImpl(PerlElementType.BLOCK)
@@ -4653,7 +4653,7 @@ Perl5
                                     PsiElement(PerlTokenType.PACKAGE)('main')
                                     PsiElement(PerlTokenType.;)(';')
                                     PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
-                                      PsiPerlSubDefinitionImpl(SUB_DEFINITION)
+                                      Foo::Bar::somesub
                                         PsiElement(PerlTokenType.sub)('sub')
                                         PsiElement(PerlTokenType.PACKAGE)('Foo::Bar::')
                                         PsiElement(PerlTokenType.SUB)('somesub')
