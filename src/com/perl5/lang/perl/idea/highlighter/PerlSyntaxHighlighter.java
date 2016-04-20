@@ -118,6 +118,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
 
 		attributesMap.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.COMMENT_ANNOTATION, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
 		attributesMap.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});

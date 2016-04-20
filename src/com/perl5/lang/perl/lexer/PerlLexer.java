@@ -631,17 +631,17 @@ public class PerlLexer extends PerlLexerGenerated
 				while (currentPosition < bufferEnd && !isLineCommentEnd(currentPosition))
 					currentPosition++;
 
+				setTokenEnd(currentPosition);
 				// catching annotations #@
 				if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@')
 				{
-					if (currentPosition > tokenStart + 2)
-						parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart + 2);
-
-					setTokenEnd(tokenStart + 2);
-					return ANNOTATION_PREFIX;
+//					if (currentPosition > tokenStart + 2)
+//						parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart + 2);
+//
+//					setTokenEnd(tokenStart + 2);
+					return COMMENT_ANNOTATION;
 				}
 
-				setTokenEnd(currentPosition);
 				return COMMENT_LINE;
 			}
 
