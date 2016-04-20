@@ -167,13 +167,14 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 						}
 					}
 
-					PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declaration, PerlLexicalScope.class);
-					assert perlLexicalScope != null;
+					// fixme this is bad, because my $var1 && print $var1 will be valid, but it's not
+					PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declarationWrapper, PerlLexicalScope.class);
+					assert perlLexicalScope != null : "Got error at " + declarationWrapper.getTextOffset() + " in " + declarationWrapper.getContainingFile().getVirtualFile();
 
 					final String[] guessResult = new String[]{null};
 					PerlPsiUtil.processElementsInRange(
 							perlLexicalScope,
-							new TextRange(declaration.getTextRange().getEndOffset(), getTextRange().getStartOffset()),
+							new TextRange(declarationWrapper.getTextRange().getEndOffset(), getTextRange().getStartOffset()),
 							new PsiElementProcessor<PsiElement>()
 							{
 								@Override
