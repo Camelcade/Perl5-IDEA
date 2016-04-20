@@ -48,15 +48,6 @@ limitations under the License.
     SIGIL_HASH="SIGIL_HASH"
     SIGIL_CODE="SIGIL_CODE"
 
-    ANNOTATION_PREFIX="ANNOTATION_PREFIX"
-
-    ANNOTATION_UNKNOWN_KEY="ANNOTATION_UNKNOWN"
-    ANNOTATION_DEPRECATED_KEY="ANNOTATION_DEPRECATED"
-    ANNOTATION_RETURNS_KEY="ANNOTATION_RETURNS"
-    ANNOTATION_OVERRIDE_KEY="ANNOTATION_OVERRIDE"
-    ANNOTATION_METHOD_KEY="ANNOTATION_METHOD"
-    ANNOTATION_ABSTRACT_KEY="ANNOTATION_ABSTRACT"
-
     // generated tokens
     VARIABLE_NAME="VARIABLE_NAME"
     SUB="SUB"
@@ -329,9 +320,6 @@ limitations under the License.
     implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
 	mixin("named_list_expr")="com.perl5.lang.perl.psi.mixins.PerlMethodContainerMixIn"
 
-    extends("annotation_.*")=annotation
-    mixin("annotation_returns.*")="com.perl5.lang.perl.psi.mixins.PerlAnnotationsReturnsMixin"
-
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
     stubClass("use_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
@@ -459,8 +447,7 @@ private statement_item ::=
 		| <<parseBadCharacters>> // Fallback for bad characters
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
-private namespace_definition_name ::= [namespace_annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement}
-private namespace_annotations ::= annotation_deprecated
+private namespace_definition_name ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_statement} //
 
@@ -540,12 +527,12 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
+sub_definition ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_definition_parameters block
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= sub_signature |sub_prototype
 
-sub_declaration ::= [annotations] [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
+sub_declaration ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB canonical_sub_name sub_declaration_parameters
 private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
 private canonical_sub_name ::= [namespace_canonical] sub_definition_name
@@ -1128,40 +1115,12 @@ private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::= <<parseMethod>>
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
-private annotations ::= annotation+ //{recoverWhile=recover_sub_annotation}
-annotation ::=
-    annotation_unknown
-    | annotation_abstract
-    | annotation_deprecated
-    | annotation_method
-    | annotation_returns_ref
-    | annotation_returns_arrayref
-    | annotation_returns_hashref
-    | annotation_override
-    | annotation_incomplete
-
-annotation_unknown ::= ANNOTATION_PREFIX ANNOTATION_UNKNOWN_KEY
-annotation_abstract ::= ANNOTATION_PREFIX ANNOTATION_ABSTRACT_KEY
-annotation_deprecated ::= ANNOTATION_PREFIX ANNOTATION_DEPRECATED_KEY
-annotation_method ::= ANNOTATION_PREFIX ANNOTATION_METHOD_KEY
-annotation_override ::= ANNOTATION_PREFIX ANNOTATION_OVERRIDE_KEY
-annotation_returns_ref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY <<mergePackageName>>
-annotation_returns_arrayref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_bracketed
-annotation_returns_hashref ::= ANNOTATION_PREFIX ANNOTATION_RETURNS_KEY namespace_element_braced
-annotation_incomplete ::= ANNOTATION_PREFIX <<parseIncompleteAnnotation>> {pin=1}
-
-//private recover_sub_annotation ::= !(RESERVED_SUB|ANNOTATION_PREFIX)
-
-private namespace_element_bracketed ::= LEFT_BRACKET <<mergePackageName>> RIGHT_BRACKET {name="[Package::Name]"}
-private namespace_element_braced ::= LEFT_BRACE <<mergePackageName>> RIGHT_BRACE {name="{Package::Name}"}
-
-/******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> sub_definition_name [method_signature] [sub_attributes] block
-func_definition ::= [annotations] <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> sub_definition_name [func_signature] [sub_attributes] block
+method_definition ::= <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> sub_definition_name [method_signature] [sub_attributes] block
+func_definition ::= <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> sub_definition_name [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

@@ -109,6 +109,9 @@ public class PerlElementTypeFactory
 			return new PerlHeredocElementType(name);
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
 			return new PerlQQStringElementType(name);
+		else if (name.equals("COMMENT_ANNOTATION"))
+			return new PerlAnnotationElementType("PERL_ANNOTATION");
+
 		return new PerlTokenType(name);
 	}
 
@@ -142,7 +145,6 @@ public class PerlElementTypeFactory
 		else if (name.equals("REQUIRE_EXPR"))
 			return PerlStubElementTypes.PERL_REQUIRE_EXPR;
 
-
 		// below is auto-generated from PerlElementTypes
 		if (name.equals("ADD_EXPR"))
 			return new PerlElementTypeEx(name)
@@ -163,116 +165,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlAndExprImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_ABSTRACT"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationAbstractImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_DEPRECATED"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationDeprecatedImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_INCOMPLETE"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationIncompleteImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_METHOD"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationMethodImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_OVERRIDE"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationOverrideImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_RETURNS_ARRAYREF"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationReturnsArrayrefImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_RETURNS_HASHREF"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationReturnsHashrefImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_RETURNS_REF"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationReturnsRefImpl(node);
-				}
-			};
-
-		if (name.equals("ANNOTATION_UNKNOWN"))
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnnotationUnknownImpl(node);
 				}
 			};
 

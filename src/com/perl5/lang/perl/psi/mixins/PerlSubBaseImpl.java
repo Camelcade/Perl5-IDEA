@@ -23,6 +23,10 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlReturnType;
@@ -32,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -140,6 +145,13 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return findChildByClass(PerlSubNameElement.class);
 	}
 
+	@NotNull
+	@Override
+	public List<PerlAnnotation> getAnnotationList()
+	{
+		return PerlPsiUtil.collectAnnotations(this);
+	}
+
 	@Override
 	public PerlSubAnnotations getSubAnnotations()
 	{
@@ -149,15 +161,15 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 
 		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
 
-		for (PsiPerlAnnotation annotation : getAnnotationList())
+		for (PerlAnnotation annotation : getAnnotationList())
 		{
-			if (annotation instanceof PsiPerlAnnotationAbstract)
+			if (annotation instanceof PerlAnnotationAbstractImpl)
 				myAnnotations.setIsAbstract(true);
-			else if (annotation instanceof PsiPerlAnnotationDeprecated)
+			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
 				myAnnotations.setIsDeprecated(true);
-			else if (annotation instanceof PsiPerlAnnotationMethod)
+			else if (annotation instanceof PerlAnnotationMethodImpl)
 				myAnnotations.setIsMethod(true);
-			else if (annotation instanceof PsiPerlAnnotationOverride)
+			else if (annotation instanceof PerlAnnotationOverrideImpl)
 				myAnnotations.setIsOverride(true);
 			else if (annotation instanceof PerlNamespaceElementContainer) // returns
 			{

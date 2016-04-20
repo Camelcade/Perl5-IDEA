@@ -17,21 +17,26 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
+import gnu.trove.THashMap;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hurricup on 03.06.2015.
  */
 public class PerlAnnotations implements PerlElementTypes
 {
-	public static final HashMap<String, IElementType> TOKEN_TYPES = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 
 	static
 	{
-		TOKEN_TYPES.put("deprecated", ANNOTATION_DEPRECATED_KEY);
-		TOKEN_TYPES.put("override", ANNOTATION_OVERRIDE_KEY);
-		TOKEN_TYPES.put("method", ANNOTATION_METHOD_KEY);
-		TOKEN_TYPES.put("returns", ANNOTATION_RETURNS_KEY);
+		TOKENS_MAP.put("deprecated", ANNOTATION_DEPRECATED_KEY);
+		TOKENS_MAP.put("returns", ANNOTATION_RETURNS_KEY);
+		TOKENS_MAP.put("override", ANNOTATION_OVERRIDE_KEY);
+		TOKENS_MAP.put("method", ANNOTATION_METHOD_KEY);
+		TOKENS_MAP.put("abstract", ANNOTATION_ABSTRACT_KEY);
+		TOKENS_MAP.put("inject", ANNOTATION_INJECT_KEY);
+		TOKENS_MAP.put("noinspection", ANNOTATION_NOINSPECTION_KEY);
 	}
+
 }

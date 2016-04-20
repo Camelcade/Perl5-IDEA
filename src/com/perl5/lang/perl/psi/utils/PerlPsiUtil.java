@@ -475,6 +475,62 @@ public class PerlPsiUtil
 		return true;
 	}
 
+	public static List<PerlAnnotation> collectAnnotations(@NotNull PsiElement element)
+	{
+		final List<PerlAnnotation> result = new ArrayList<PerlAnnotation>();
+		processElementAnnotations(element, new Processor<PerlAnnotation>()
+		{
+			@Override
+			public boolean process(PerlAnnotation perlAnnotation)
+			{
+				result.add(perlAnnotation);
+				return true;
+			}
+		});
+		return result;
+	}
+
+	public static PerlAnnotation getAnnotationByClass(@NotNull PsiElement element, final Class<? extends PerlAnnotation> annotationClass)
+	{
+		final PerlAnnotation[] result = new PerlAnnotation[]{null};
+		processElementAnnotations(element, new Processor<PerlAnnotation>()
+		{
+			@Override
+			public boolean process(PerlAnnotation perlAnnotation)
+			{
+				if (annotationClass.isInstance(perlAnnotation))
+				{
+					result[0] = perlAnnotation;
+					return false;
+				}
+				return true;
+			}
+		});
+		return result[0];
+	}
+
+	public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor)
+	{
+		PsiElement run = element.getPrevSibling();
+		while (run != null)
+		{
+			if (run instanceof PerlAnnotationContainer)
+			{
+				PerlAnnotation annotation = ((PerlAnnotationContainer) run).getAnnotation();
+				if (annotation != null)
+				{
+					if (!annotationProcessor.process(annotation))
+						return;
+				}
+			}
+			else if (!(run instanceof PsiComment || run instanceof PsiWhiteSpace))
+			{
+				return;
+			}
+			run = run.getPrevSibling();
+		}
+	}
+
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{
 		protected final int lineEndOffset;
@@ -516,6 +572,5 @@ public class PerlPsiUtil
 			return myResult;
 		}
 	}
-
 
 }

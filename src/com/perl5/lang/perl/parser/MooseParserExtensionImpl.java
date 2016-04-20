@@ -86,7 +86,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	private static boolean parseHas(PerlBuilder b, int l)
 	{
 		PerlBuilder.Marker m = b.mark();
-		PerlParserImpl.annotations(b, l);
 
 		if (PerlParserUtil.consumeToken(b, RESERVED_HAS) && parseHasArguments(b, l))
 		{
@@ -158,7 +157,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken)
 	{
 		PerlBuilder.Marker m = b.mark();
-		PerlParserImpl.annotations(b, l);
 
 		if (PerlParserUtil.consumeToken(b, keywordToken))
 		{

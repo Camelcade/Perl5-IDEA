@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
@@ -29,8 +28,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 25.11.2015.
@@ -68,12 +65,6 @@ public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<Pe
 		return null;
 	}
 
-	@NotNull
-	@Override
-	public List<PsiPerlAnnotation> getAnnotationList()
-	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlAnnotation.class);
-	}
 
 	@Nullable
 	public PsiPerlExpr getExpr()

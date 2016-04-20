@@ -102,14 +102,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	static
 	{
-		attributesMap.put(PerlElementTypes.ANNOTATION_ABSTRACT_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_DEPRECATED_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_METHOD_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_OVERRIDE_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_PREFIX, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_RETURNS_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_UNKNOWN_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
 

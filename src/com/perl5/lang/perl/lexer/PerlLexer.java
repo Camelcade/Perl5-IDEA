@@ -635,10 +635,6 @@ public class PerlLexer extends PerlLexerGenerated
 				// catching annotations #@
 				if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@')
 				{
-//					if (currentPosition > tokenStart + 2)
-//						parseAnnotation(buffer.subSequence(tokenStart + 2, currentPosition), tokenStart + 2);
-//
-//					setTokenEnd(tokenStart + 2);
 					return COMMENT_ANNOTATION;
 				}
 
@@ -921,62 +917,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return NUMBER;
 	}
 
-	/**
-	 * Parses annotation line and puts result into the pre-parsed buffer
-	 *
-	 * @param annotationLine - string with annotation after marker
-	 */
-	void parseAnnotation(CharSequence annotationLine, int baseOffset)
-	{
-		Matcher m = ANNOTATION_PATTERN.matcher(annotationLine);
-		preparsedTokensList.clear();
-		CharSequence tailComment;
-
-		if (m.matches())
-		{
-//			String annotationKey = m.group(1);
-			IElementType tokenType = PerlAnnotations.TOKEN_TYPES.get(m.group(1));
-
-			if (tokenType == null)
-				tokenType = ANNOTATION_UNKNOWN_KEY;
-
-			preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + m.group(1).length(), tokenType));
-			baseOffset += m.group(1).length();
-
-			if (m.group(2) != null)
-			{
-				preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + m.group(2).length(), TokenType.WHITE_SPACE));
-				baseOffset += m.group(2).length();
-			}
-
-			if (tokenType == ANNOTATION_RETURNS_KEY && m.group(3) != null)
-			{
-				// additional parsing
-				String annotationRest = m.group(3);
-				Matcher pm = ANNOTATION_PATTERN_PACKAGE.matcher(annotationRest);
-
-				if (pm.matches())
-				{
-					if (pm.group(1) != null && pm.group(1).length() > 0)
-					{
-						preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + pm.group(1).length(), PACKAGE));
-						baseOffset += pm.group(1).length();
-					}
-
-					tailComment = pm.group(2);
-				}
-				else
-					tailComment = m.group(3);
-			}
-			else
-				tailComment = m.group(3);
-		}
-		else
-			tailComment = annotationLine;
-
-		if (tailComment != null && tailComment.length() > 0)
-			preparsedTokensList.add(new CustomToken(baseOffset, baseOffset + tailComment.length(), COMMENT_LINE));
-	}
 
 	/**
 	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isLineCommentEnd(int)} }

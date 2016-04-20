@@ -24,6 +24,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationInjectImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -48,7 +49,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithUseParameters(element, result);
 		}
-		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
+		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element) || element.getParent() instanceof PerlAnnotationInjectImpl) // HERE-DOC openers
 		{
 			PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
 		}

@@ -42,19 +42,20 @@
       <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package</li>
       <li>Lexical vairables are now in top of autocompletion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
-      <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings.</li>
-      <li><code>Perl::Tidy</code> formatting is now available. All configuration must be done via <code>.perltidyrc</code> file in project root (see <a href="http://search.cpan.org/~shancock/Perl-Tidy/">Perl::Tidy</a> documentation). Again, there is no UI to configure settings for now.</li>
+      <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings</li>
+      <li><code>Perl::Tidy</code> formatting is now available. All configuration must be done via <code>.perltidyrc</code> file in project root (see <a href="http://search.cpan.org/~shancock/Perl-Tidy/">Perl::Tidy</a> documentation). Again, there is no UI to configure settings for now</li>
       </ul>
      </p>
 
      <p>Fixes:
       <ul>
-      <li>Fixed scrolling problem on code generation.</li>
-      <li>Fixed multiple sub definitions inspection.</li>
-      <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA.</li>
-      <li>Fixed problem with package detection in qq string and it's consequences.</li>
-      <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation.</li>
-      <li>Fixed problem with occasional double <code>-></code> insertion on pre-formatting.</li>
+      <li>Changed the way annotation being parsed: should speed overall performance and allow to put annotations in any place without breaking syntax</li>
+      <li>Fixed scrolling problem on code generation</li>
+      <li>Fixed multiple sub definitions inspection</li>
+      <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA</li>
+      <li>Fixed problem with package detection in qq string and it's consequences</li>
+      <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation</li>
+      <li>Fixed problem with occasional double <code>-></code> insertion on pre-formatting</li>
       <li>Fixed possible OOM hang on object methods resolution, when method and object variable has the same name, e.g. <code>$test->test()</code></li>
       <li>Fixed performance problem appeared after IDEA 2016.1.1 update</li>
       <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
