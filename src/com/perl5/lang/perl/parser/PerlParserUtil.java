@@ -1579,22 +1579,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return true;
 	}
 
-	public static boolean parseIncompleteAnnotation(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-
-		if (consumeToken(b, ANNOTATION_RETURNS_KEY))
-		{
-			m.error("Missing returns value");
-		}
-		else
-		{
-			m.drop();
-		}
-
-		return true;
-	}
-
 	/**
 	 * Checking if it's angle or LT after block
 	 *

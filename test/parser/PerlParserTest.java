@@ -36,6 +36,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest("interpolation");
 	}
 
+	public void testAnnotations()
+	{
+		doTest("annotation", false);
+	}
+
 	public void testConstant()
 	{
 		doTest("constant");

@@ -82,7 +82,7 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 * @return list
 	 */
 	@NotNull
-	List<PsiPerlAnnotation> getAnnotationList();
+	List<PerlAnnotation> getAnnotationList();
 
 	/**
 	 * Used to re-set stubs

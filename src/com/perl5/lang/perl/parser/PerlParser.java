@@ -34,12 +34,6 @@ public interface PerlParser extends PerlElementTypes
 
 	// this is my attempt to make recovery using consumable tokenset. The point is that there is no need to modify it
 	TokenSet STATEMENT_RECOVERY_CONSUMABLE_TOKENS = TokenSet.create(
-			ANNOTATION_ABSTRACT_KEY,
-			ANNOTATION_DEPRECATED_KEY,
-			ANNOTATION_METHOD_KEY,
-			ANNOTATION_OVERRIDE_KEY,
-			ANNOTATION_RETURNS_KEY,
-			ANNOTATION_UNKNOWN_KEY,
 			COLON,
 			COMMENT_ANNOTATION,
 			COMMENT_BLOCK,

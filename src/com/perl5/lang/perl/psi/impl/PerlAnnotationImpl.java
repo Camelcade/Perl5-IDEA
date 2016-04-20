@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.properties;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.PerlAnnotation;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 20.04.2016.
  */
-public interface PerlNamespaceElementContainer extends PsiElement
+public abstract class PerlAnnotationImpl extends ASTWrapperPsiElement implements PerlAnnotation
 {
-	/**
-	 * Trying to search for netsted NamespaceElement
-	 *
-	 * @return psi element or null
-	 */
-	@Nullable
-	PerlNamespaceElement getNamespaceElement();
+	public PerlAnnotationImpl(@NotNull ASTNode node)
+	{
+		super(node);
+	}
 }

@@ -1,0 +1,12 @@
+#@deprecated this is the end!
+#@override this is the end!
+#@method this is the end!
+#@abstract this is t he  end!
+#@in
+#@returns Foo::Bar this is t  he end!
+#@returns Foo this is t he end!
+#@returns
+#@inject MYSQL this is the end!
+#@inject PERL5
+#@noinspection this is the end!
+#@noinspection

@@ -31,6 +31,12 @@
             <option name="FOREGROUND" value="CF34CF"/>
         </value>
     </option>
+    <option name="PERL_ANNOTATION">
+        <value>
+            <option name="FOREGROUND" value="808000"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
     <option name="PERL_HANDLE">
         <value>
             <option name="FOREGROUND" value="FF007F"/>

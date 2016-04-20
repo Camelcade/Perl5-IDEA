@@ -14,34 +14,29 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlAnnotationReturns;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 13.02.2016.
+ * Created by hurricup on 20.04.2016.
  */
-public class PerlAnnotationsReturnsMixin extends ASTWrapperPsiElement implements PerlNamespaceElementContainer
+public class PerlAnnotationReturnsImpl extends PerlAnnotationImpl implements PerlAnnotationReturns
 {
-	public PerlAnnotationsReturnsMixin(@NotNull ASTNode node)
+	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
+	@Nullable
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
-		for (PsiElement cur = getFirstChild(); cur != null; cur = cur.getNextSibling())
-		{
-			if (cur instanceof PerlNamespaceElement)
-				return (PerlNamespaceElement) cur;
-		}
-		return null;
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 }

@@ -102,14 +102,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	static
 	{
-		attributesMap.put(PerlElementTypes.ANNOTATION_ABSTRACT_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_DEPRECATED_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_METHOD_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_OVERRIDE_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_PREFIX, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_RETURNS_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-		attributesMap.put(PerlElementTypes.ANNOTATION_UNKNOWN_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
-
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
 		attributesMap.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
 
@@ -118,6 +110,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		attributesMap.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
 
 		attributesMap.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
+		attributesMap.put(PerlElementTypes.COMMENT_ANNOTATION, new TextAttributesKey[]{PERL_COMMENT});
 		attributesMap.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
 		attributesMap.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});

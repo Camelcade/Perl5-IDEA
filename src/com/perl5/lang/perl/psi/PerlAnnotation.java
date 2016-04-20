@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
-import com.perl5.lang.perl.psi.PsiPerlAttribute;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.psi.PsiElement;
 
 /**
- * Created by hurricup on 29.11.2015.
+ * Created by hurricup on 20.04.2016.
  */
-public interface PerlPsiLists
+public interface PerlAnnotation extends PsiElement
 {
-	List<PsiPerlAnnotation> EMPTY_ANNOTATIONS_LIST = new ArrayList<PsiPerlAnnotation>();
-	List<PsiPerlAttribute> EMPTY_ATTRIBUTES_LIST = new ArrayList<PsiPerlAttribute>();
-
 }

@@ -90,14 +90,6 @@ public interface PerlNamespaceDefinition extends
 	@NotNull
 	PerlNamespaceDefinitionImplMixin.ExporterInfo getExporterInfo();
 
-	/**
-	 * Returns deprecated annotation if any
-	 *
-	 * @return deprecated annotation
-	 */
-	@Nullable
-	PsiPerlAnnotationDeprecated getAnnotationDeprecated();
-
 
 	/**
 	 * Returns list of parent namespace names from stub or psi

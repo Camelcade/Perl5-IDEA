@@ -80,7 +80,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 			);
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_ANNOTATION_PATTERN =
-			NAMESPACE_NAME_PATTERN.inside(psiElement(PsiPerlAnnotation.class));
+			NAMESPACE_NAME_PATTERN.inside(psiElement(PerlAnnotationReturns.class));
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_DEFINITION_PATTERN =
 			NAMESPACE_NAME_PATTERN.withParent(NAMESPACE_DEFINITION_PATTERN);
@@ -112,7 +112,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 	);
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN = VARIABLE_NAME_PATTERN.inside(true, psiElement(PsiPerlVariableDeclarationLocal.class));
 
-	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(PerlElementTypes.ANNOTATION_UNKNOWN_KEY);
+	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(IDENTIFIER).afterLeaf(psiElement(ANNOTATION_PREFIX));
 
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
 			VARIABLE_NAME_PATTERN

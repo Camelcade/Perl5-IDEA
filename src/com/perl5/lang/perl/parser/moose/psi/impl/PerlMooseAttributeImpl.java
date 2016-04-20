@@ -24,10 +24,11 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
+import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,14 +66,13 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierI
 
 	@NotNull
 	@Override
-	public List<PsiPerlAnnotation> getAnnotationList()
+	public List<PerlAnnotation> getAnnotationList()
 	{
 		PerlMooseHasStatement hasStatement = getHasStatement();
 		if (hasStatement != null)
 		{
-			return hasStatement.getAnnotationList();
+			return PerlPsiUtil.collectAnnotations(hasStatement);
 		}
-
 		return super.getAnnotationList();
 	}
 }

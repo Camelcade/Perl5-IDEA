@@ -85,7 +85,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					CodeInsightColors.TODO_DEFAULT_ATTRIBUTES,
 					true,
 					false);
-		else if (element instanceof PsiPerlAnnotation)
+		else if (element instanceof PerlAnnotation)
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_ANNOTATION,

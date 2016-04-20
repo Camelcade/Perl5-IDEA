@@ -19,10 +19,11 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
-import com.perl5.lang.perl.psi.PsiPerlAnnotation;
+import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,9 +38,9 @@ public class PerlMooseHasStatementImpl extends PsiPerlStatementImpl implements P
 
 	@NotNull
 	@Override
-	public List<PsiPerlAnnotation> getAnnotationList()
+	public List<PerlAnnotation> getAnnotationList()
 	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlAnnotation.class);
+		return Collections.emptyList();
 	}
 
 
