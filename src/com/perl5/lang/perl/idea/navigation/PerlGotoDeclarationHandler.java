@@ -104,7 +104,8 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 
 			for (String file : FilenameIndex.getAllFilenames(project))
-				if (file.contains(fileName))
+			{
+				if (file != null && file.contains(fileName))
 				{
 					// fixme somehow if includeDirectories is true - no files found
 					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project)))
@@ -124,6 +125,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 								result.add(fileItem);
 					}
 				}
+			}
 		}
 
 		return result.size() == 0 ? null : result.toArray(new PsiElement[result.size()]);
