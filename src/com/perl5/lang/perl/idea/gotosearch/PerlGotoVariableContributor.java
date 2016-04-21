@@ -65,7 +65,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 
 		if (name.length() > 0)
 		{
-			Collection<PerlVariableDeclarationWrapper> result;
+			Collection<PerlVariableDeclarationWrapper> result = null;
 			GlobalSearchScope scope = includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project);
 
 			char firstChar = name.charAt(0);
@@ -90,7 +90,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 			}
 			else
 			{
-				throw new RuntimeException("Cant' be: " + name);
+				return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
 			}
 			//noinspection SuspiciousToArrayCall
 			return result.toArray(new NavigationItem[result.size()]);
