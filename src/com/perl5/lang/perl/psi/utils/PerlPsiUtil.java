@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.search.PsiElementProcessor;
@@ -490,7 +492,7 @@ public class PerlPsiUtil
 		return result;
 	}
 
-	public static PerlAnnotation getAnnotationByClass(@NotNull PsiElement element, final Class<? extends PerlAnnotation> annotationClass)
+	public static <T extends PerlAnnotation> T getAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass)
 	{
 		final PerlAnnotation[] result = new PerlAnnotation[]{null};
 		processElementAnnotations(element, new Processor<PerlAnnotation>()
@@ -506,8 +508,45 @@ public class PerlPsiUtil
 				return true;
 			}
 		});
-		return result[0];
+		//noinspection unchecked
+		return (T)result[0];
 	}
+
+	@Nullable
+	public static <T extends PerlAnnotation> T getEolAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass)
+	{
+		PerlAnnotation eolAnnotation = getEolAnnotation(element);
+		//noinspection unchecked
+		return annotationClass.isInstance(eolAnnotation) ? (T)eolAnnotation: null;
+	}
+
+
+	@Nullable
+	public static PerlAnnotation getEolAnnotation(@NotNull PsiElement element)
+	{
+		final Project project = element.getProject();
+		final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
+		final PsiFile file = element.getContainingFile();
+		final Document document = manager.getDocument(file);
+
+		if( document != null )
+		{
+			int elementEndOffset = element.getTextRange().getEndOffset();
+			int elementLastLine = document.getLineNumber(elementEndOffset);
+			int lineEndOffset = document.getLineEndOffset(elementLastLine);
+			if( lineEndOffset > 0 )
+			{
+				PsiElement lastLineElement = file.findElementAt(lineEndOffset - 1);
+				if (lastLineElement != null)
+				{
+					return PsiTreeUtil.getParentOfType(lastLineElement, PerlAnnotation.class);
+				}
+			}
+		}
+		return null;
+	}
+
+
 
 	public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor)
 	{

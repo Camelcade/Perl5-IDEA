@@ -49,8 +49,13 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithUseParameters(element, result);
 		}
-		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element) || element.getParent() instanceof PerlAnnotationInjectImpl) // HERE-DOC openers
+		else if (element.getParent() instanceof PerlAnnotationInjectImpl)
 		{
+			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
+		}
+		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
+		{
+			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
 			PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
 		}
 		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
@@ -58,5 +63,10 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 			PerlStringCompletionUtil.fillWithRefTypes(result);
 			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
 		}
+		else
+		{
+			return;
+		}
+		result.stopHere();
 	}
 }

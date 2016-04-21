@@ -22,9 +22,14 @@ import com.intellij.psi.InjectedLanguagePlaces;
 import com.intellij.psi.LanguageInjector;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.psi.PerlAnnotationInject;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -113,6 +118,44 @@ public class PerlLanguageInjector implements LanguageInjector
 				if (mappedLanguage != null)
 				{
 					injectionPlacesRegistrar.addPlace(mappedLanguage, new TextRange(0, host.getTextLength()), null, null);
+				}
+			}
+		}
+		else if (host instanceof PerlString && host.isValidHost())
+		{
+			// before element
+			PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnnotationByClass(host, PerlAnnotationInject.class);
+
+			// eol annotation
+			if( injectAnnotation == null )
+			{
+				injectAnnotation = PerlPsiUtil.getEolAnnotationByClass(host, PerlAnnotationInject.class);
+			}
+
+			// before statement
+			if( injectAnnotation == null )
+			{
+				PsiPerlStatement statement = PsiTreeUtil.getParentOfType(host, PsiPerlStatement.class);
+				if( statement != null )
+				{
+					injectAnnotation = PerlPsiUtil.getAnnotationByClass(statement, PerlAnnotationInject.class);
+				}
+			}
+
+			if (injectAnnotation != null)
+			{
+				String languageMarker = injectAnnotation.getLanguageMarker();
+				if (languageMarker != null)
+				{
+					Language targetLanguage = LANGUAGE_MAP.get(languageMarker);
+					if (targetLanguage != null)
+					{
+						TextRange contentRange = ((PerlString) host).getContentTextRangeInParent();
+						if( !contentRange.isEmpty())
+						{
+							injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
+						}
+					}
 				}
 			}
 		}

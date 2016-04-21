@@ -14,30 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlAnnotationInject;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 21.04.2016.
  */
-public class PerlAnnotationInjectImpl extends PerlAnnotationImpl implements PerlAnnotationInject
+public interface PerlAnnotationInject extends PerlAnnotation
 {
-	public PerlAnnotationInjectImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
-
 	@Nullable
-	@Override
-	public String getLanguageMarker()
-	{
-		PsiElement childByType = findChildByType(PerlElementTypes.STRING_CONTENT);
-		return childByType == null ? null: childByType.getText();
-	}
+	String getLanguageMarker();
 }

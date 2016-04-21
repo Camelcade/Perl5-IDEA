@@ -259,7 +259,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 		}
 	}
 
-	public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet)
+	public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet)
 	{
 		// injectable markers
 		for (Map.Entry<String, Language> entry : PerlLanguageInjector.LANGUAGE_MAP.entrySet())
@@ -279,6 +279,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 			resultSet.addElement(newItem);
 		}
 
+	}
+
+	public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet)
+	{
 		// cached values
 		for (String marker : HEREDOC_OPENERS_CACHE)
 		{

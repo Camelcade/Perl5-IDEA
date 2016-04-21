@@ -21,6 +21,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -45,6 +46,9 @@ public class PerlUseWarningsInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
+				if (file.getViewProvider() instanceof InjectedFileViewProvider)
+					return;
+
 				FileType fileType = file.getFileType();
 				if (!(fileType instanceof PerlFileType) || !((PerlFileType) fileType).checkWarningsPragma())
 				{
