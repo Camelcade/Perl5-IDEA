@@ -37,7 +37,7 @@
       <li>Introduced new annotation: <code>#@inject</code>, allows you to inject other languages in strings</li>
       <li>Class methods now properly re-factored in subclasses and optionally in super-class</li>
       <li>You may now create package files with full-qualified names from <code>New Perl File</code> menu</li>
-      <li>POD support: live templates, completion, navigation and few useful inspections</li>
+      <li>POD support: live templates, completion, navigation and few useful inspections.</li>
       <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files</li>
       <li>TryCatch basic support. Currently <code>catch{}</code>, <code>catch($var){}</code> and <code>catch(Foo::Bar $var){}</code> are supported</li>
       <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package</li>
@@ -50,6 +50,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Setback: block commenting with pod has been disabled for current version.</li>
       <li>Changed the way annotation being parsed: should speed overall performance and allow to put annotations in any place without breaking syntax</li>
       <li>Fixed scrolling problem on code generation</li>
       <li>Fixed multiple sub definitions inspection</li>
