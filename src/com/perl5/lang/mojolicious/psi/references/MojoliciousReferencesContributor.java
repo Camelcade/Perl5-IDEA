@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.idea.completion;
+package com.perl5.lang.mojolicious.psi.references;
 
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.psi.PsiReferenceContributor;
+import com.intellij.psi.PsiReferenceRegistrar;
 import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 02.08.2015.
+ * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousCompletionContributor extends CompletionContributor implements PerlElementTypes, MojoliciousElementPatterns
+public class MojoliciousReferencesContributor extends PsiReferenceContributor implements MojoliciousElementPatterns
 {
-
-	public MojoliciousCompletionContributor()
+	@Override
+	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
 	{
-		// refactored
-		extend(
-				CompletionType.BASIC,
+		registrar.registerReferenceProvider(
 				MOJO_HELPER_USAGE,
-				new MojoliciousCompletionProvider()
+				new MojoliciousHelperReferencesProvider()
 		);
 
 	}

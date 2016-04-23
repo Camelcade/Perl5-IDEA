@@ -65,10 +65,18 @@ public class PerlSubUnresolvableInspection extends PerlInspection implements Per
 				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
 					return;
 
-				PsiReference reference = subNameElement.getReference();
-
-				if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length == 0)
-					registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
+				for (PsiReference reference : subNameElement.getReferences())
+				{
+					if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length > 0)
+					{
+						return;
+					}
+					else if (reference.resolve() != null)
+					{
+						return;
+					}
+				}
+				registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
 			}
 		};
 	}

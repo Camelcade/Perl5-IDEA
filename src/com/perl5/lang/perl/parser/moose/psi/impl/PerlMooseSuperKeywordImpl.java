@@ -22,31 +22,21 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperKeyword;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 19.01.2016.
  */
 public class PerlMooseSuperKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseSuperKeyword
 {
-	protected final PsiReference[] myReferences = new PsiReference[]{
-			new PerlMooseSuperReference(this, null),
-	};
-
 	public PerlMooseSuperKeywordImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
 
-	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	protected void addReferences(List<PsiReference> result)
 	{
-		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
+		result.add(new PerlMooseSuperReference(this, null));
 	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		return myReferences[0];
-	}
-
 }

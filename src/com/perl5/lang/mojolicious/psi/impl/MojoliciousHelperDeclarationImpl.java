@@ -42,12 +42,6 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 		super(stub, nodeType);
 	}
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
-
 	@Nullable
 	@Override
 	public PsiElement getNameIdentifier()

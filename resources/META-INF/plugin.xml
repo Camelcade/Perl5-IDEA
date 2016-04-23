@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>Mojolicious helpers support: navigation, completion and refactoring. NB: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.
       <li>Introduced new annotation: <code>#@inject</code>, allows you to inject other languages in strings</li>
       <li>Class methods now properly re-factored in subclasses and optionally in super-class</li>
       <li>You may now create package files with full-qualified names from <code>New Perl File</code> menu</li>
@@ -445,6 +446,8 @@
         <annotator language="Perl5"
                    implementationClass="com.perl5.lang.mojolicious.idea.annotator.MojoliciousAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
+        <psi.referenceContributor language="Perl5"
+                                  implementation="com.perl5.lang.mojolicious.psi.references.MojoliciousReferencesContributor"/>
         <!-- End of Mojolicious -->
 
 

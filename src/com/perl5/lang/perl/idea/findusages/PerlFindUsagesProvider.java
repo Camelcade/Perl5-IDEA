@@ -20,6 +20,7 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
+import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +68,10 @@ public class PerlFindUsagesProvider implements FindUsagesProvider
 		else if (element instanceof PerlNamespaceElement)
 		{
 			return "package";
+		}
+		else if (element instanceof MojoliciousHelperDeclaration)
+		{
+			return "Mojo Helper";
 		}
 		else
 		{

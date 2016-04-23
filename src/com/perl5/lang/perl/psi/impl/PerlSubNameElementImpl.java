@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
@@ -33,19 +35,44 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by hurricup on 24.05.2015.
  */
 public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
 {
-	protected final PsiReference[] myReferences = new PsiReference[]{
-			new PerlSubReference(this, null)
-	};
+	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
+		createReferences();
 	}
+
+	protected void createReferences()
+	{
+		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+		{
+			@NotNull
+			@Override
+			protected PsiReference[] compute()
+			{
+				List<PsiReference> result = new ArrayList<PsiReference>();
+				addReferences(result);
+				result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlSubNameElementImpl.this)));
+				return result.toArray(new PsiReference[result.size()]);
+			}
+		};
+	}
+
+	protected void addReferences(List<PsiReference> result)
+	{
+		result.add(new PerlSubReference(this, null));
+	}
+
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
@@ -83,11 +110,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public PsiReference[] getReferences()
 	{
-		if (!this.equals(myReferences[0].getElement()))
-		{
-			myReferences[0] = new PerlSubReference(this, null);
-		}
-		return myReferences; //(PsiReference[]) ArrayUtils.addAll(, ReferenceProvidersRegistry.getReferencesFromProviders(this));
+		return myReferences.getValue();
 	}
 
 	@Override
