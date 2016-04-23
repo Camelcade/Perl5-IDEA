@@ -197,7 +197,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	@NotNull
 	public static String getContextPackageName(PsiElement element)
 	{
-		PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class, false);
+		PerlNamespaceDefinition namespaceDefinition = getContainingNamespace(element);
 
 		if (namespaceDefinition != null && namespaceDefinition.getPackageName() != null) // checking that definition is valid and got namespace
 		{
@@ -216,6 +216,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			return PerlPackageUtil.MAIN_PACKAGE;
 		}
+	}
+
+	public static PerlNamespaceDefinition getContainingNamespace(PsiElement element)
+	{
+		return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinition.class);
 	}
 
 	@NotNull

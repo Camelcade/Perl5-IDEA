@@ -23,7 +23,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
@@ -409,7 +408,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	@NotNull
 	public static List<PerlSubBase> getDirectOverridingSubs(@NotNull PerlSubBase subBase)
 	{
-		PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(subBase, PerlNamespaceDefinition.class);
+		PerlNamespaceDefinition containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
 
 		return containingNamespace == null ? Collections.<PerlSubBase>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
 	}
