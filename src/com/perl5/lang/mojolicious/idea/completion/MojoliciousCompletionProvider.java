@@ -20,10 +20,18 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
+import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,17 +47,21 @@ public class MojoliciousCompletionProvider extends CompletionProvider<Completion
 	static
 	{
 		for (String subName : MojoliciousSubUtil.MOJO_DEFAULT_HELPERS)
+		{
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
 					.create(subName)
 					.withIcon(PerlIcons.MOJO_FILE)
 					.withBoldness(true)
 			);
+		}
 		for (String subName : MojoliciousSubUtil.MOJO_TAG_HELPERS)
+		{
 			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
 					.create(subName)
 					.withIcon(PerlIcons.MOJO_FILE)
 					.withBoldness(true)
 			);
+		}
 	}
 
 	public void addCompletions(@NotNull CompletionParameters parameters,
@@ -60,7 +72,40 @@ public class MojoliciousCompletionProvider extends CompletionProvider<Completion
 		assert method instanceof PsiPerlMethod;
 
 		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
+		{
 			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
+
+			PerlStubIndex stubIndex = PerlStubIndex.getInstance();
+			final Project project = method.getProject();
+			final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
+
+			for (String helperName : stubIndex.getAllKeys(MojoliciousHelpersStubIndex.KEY, method.getProject()))
+			{
+				for (MojoliciousHelperDeclaration helper : PerlStubIndex.getElements(MojoliciousHelpersStubIndex.KEY, helperName, project, scope, MojoliciousHelperDeclaration.class))
+				{
+					if (helper != null)
+					{
+						LookupElementBuilder newElement = LookupElementBuilder
+								.create(helperName)
+								.withIcon(PerlIcons.MOJO_FILE)
+								.withTailText(helper.getSubArgumentsListAsString()
+								);
+
+						PsiFile file = helper.getContainingFile();
+						if (file != null)
+						{
+							ItemPresentation presentation = file.getPresentation();
+							if (presentation != null)
+							{
+								newElement = newElement.withTypeText(file.getName(), presentation.getIcon(false), false);
+							}
+						}
+
+						resultSet.addElement(newElement);
+					}
+				}
+			}
+		}
 	}
 
 }

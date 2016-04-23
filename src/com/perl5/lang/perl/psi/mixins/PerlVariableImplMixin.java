@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -118,6 +119,11 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 			{
 				if (isSelf())
 				{
+					// fixme this is hacky, we should generalize this in some way, see #1062
+					if (MojoliciousElementPatterns.MOJO_ELEMENT_IN_HELPER.accepts(this))
+					{
+						return "Mojolicious::Controller";
+					}
 					return PerlPackageUtil.getContextPackageName(this);
 				}
 
