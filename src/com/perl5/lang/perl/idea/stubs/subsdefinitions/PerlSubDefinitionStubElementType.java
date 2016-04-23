@@ -102,9 +102,9 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
 		//noinspection ConstantConditions
-		String packageName = dataStream.readName().toString();
+		String packageName = dataStream.readName().getString();
 		//noinspection ConstantConditions
-		String functionName = dataStream.readName().toString();
+		String functionName = dataStream.readName().getString();
 
 		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);

@@ -23,6 +23,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,6 +37,7 @@ import java.util.Map;
  */
 public class MooseParserExtensionImpl extends PerlParserExtension implements MooseParserExtension, PerlElementTypes
 {
+	protected static final PerlStringWrapper attributeWrapper = new PerlStringWrapper(MOOSE_ATTRIBUTE);
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
 	@SuppressWarnings("unchecked")
@@ -147,7 +149,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 
 	private static boolean parseHasAttributeDefinitions(PerlBuilder b, int l)
 	{
-		IElementType currentWrapper = b.setStringWrapper(MOOSE_ATTRIBUTE);
+		PerlStringWrapper currentWrapper = b.setStringWrapper(attributeWrapper);
 		boolean r = PerlParserImpl.scalar_expr(b, l - 1);
 		b.setStringWrapper(currentWrapper);
 		return r;

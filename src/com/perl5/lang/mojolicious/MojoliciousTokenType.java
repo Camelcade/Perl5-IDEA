@@ -16,14 +16,18 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.ILeafElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 22.12.2015.
  */
-public class MojoliciousTokenType extends IElementType
+public class MojoliciousTokenType extends IElementType implements ILeafElementType
 {
 	public MojoliciousTokenType(@NotNull @NonNls String debugName)
 	{
@@ -35,4 +39,17 @@ public class MojoliciousTokenType extends IElementType
 		return "MojoliciousTokenType." + super.toString();
 	}
 
+	@NotNull
+	@Override
+	public ASTNode createLeafNode(CharSequence leafText)
+	{
+		if (MojoliciousParserDefinition.COMMENTS.contains(this))
+		{
+			return new PsiCommentImpl(this, leafText);
+		}
+		else
+		{
+			return new LeafPsiElement(this, leafText);
+		}
+	}
 }

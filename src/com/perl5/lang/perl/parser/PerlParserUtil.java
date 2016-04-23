@@ -29,6 +29,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -160,7 +161,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
-
+	private static final PerlStringWrapper constantWrapper = new PerlStringWrapper(CONSTANT_NAME);
 	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
@@ -566,7 +567,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 						|| b.rawLookup(1) == LEFT_PAREN;
 	}
 
-
 	/**
 	 * Checks and parses bareword filehandle for <FH> operations
 	 *
@@ -805,12 +805,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
 	protected static boolean canBeVariableName(IElementType elementType, PerlBuilder b)
 	{
 		return CONVERTABLE_TOKENS.contains(elementType) || b.isSpecialVariableNamesAllowed() && SPECIAL_VARIABLE_NAME.contains(elementType);
 	}
-
 
 	protected static boolean convertVariableName(PsiBuilder b)
 	{
@@ -890,7 +888,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
-
 
 	/**
 	 * Parsing array index, smart error on empty expr
@@ -1157,7 +1154,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
 	/**
 	 * Parses SQ string content. Implemented for interpolation parsing, where 'test' is identifier in quotes
 	 *
@@ -1294,16 +1290,16 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 //			m.drop();
 			m.collapse(targetToken);
 
-			if (((PerlBuilder) b).getStringWrapper() != null && targetToken == STRING_IDENTIFIER)
+			PerlStringWrapper stringWrapper = ((PerlBuilder) b).getStringWrapper();
+			if (stringWrapper != null && targetToken == STRING_IDENTIFIER && stringWrapper.canProcess())
 			{
-				m.precede().done(((PerlBuilder) b).getStringWrapper());
+				stringWrapper.wrapMarker(m);
 			}
 
 			return true;
 		}
 		return false;
 	}
-
 
 	/**
 	 * Converts everything till $, @ or close brace to regex tokens;
@@ -1382,7 +1378,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		((PerlBuilder) b).setStringify(oldState);
 		return r;
 	}
-
 
 	/**
 	 * Collapses -bareword to a string if stringify is forced
@@ -1627,7 +1622,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-
 	/**
 	 * Checks if anon hash has proper suffix
 	 *
@@ -1687,7 +1681,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		return consumeToken(b, OPERATOR_ASSIGN) || checkAndConvertIdentifier(b, l, "=", OPERATOR_ASSIGN);
 	}
-
 
 	/**
 	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
@@ -1806,7 +1799,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
 	/**
 	 * Parsing sub name, any identifier might be
 	 *
@@ -1843,15 +1835,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 		if (tokenType instanceof PerlStringContentTokenType)
 		{
-			if (((PerlBuilder) b).getStringWrapper() == null || tokenType != STRING_IDENTIFIER)
+			PerlStringWrapper stringWrapper = ((PerlBuilder) b).getStringWrapper();
+			if (stringWrapper == null || !stringWrapper.canProcess() || tokenType != STRING_IDENTIFIER)
 			{
 				b.advanceLexer();
 			}
 			else
 			{
-				PsiBuilder.Marker m = b.mark();
-				b.advanceLexer();
-				m.done(((PerlBuilder) b).getStringWrapper());
+				stringWrapper.wrapNextToken((PerlBuilder) b);
 			}
 			return true;
 		}
@@ -1862,7 +1853,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseConstantDefinition(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-		IElementType oldValue = ((PerlBuilder) b).setStringWrapper(CONSTANT_NAME);
+		PerlStringWrapper oldValue = ((PerlBuilder) b).setStringWrapper(constantWrapper);
 		boolean r = PerlParserImpl.string(b, l);
 		((PerlBuilder) b).setStringWrapper(oldValue);
 		return r;

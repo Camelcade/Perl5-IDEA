@@ -21,26 +21,23 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
+import com.perl5.lang.perl.parser.builder.PerlStringWrapperOnce;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 /**
- * Created by hurricup on 21.01.2016.
+ * Created by hurricup on 23.04.2016.
  */
-public class ClassAccessorParserExtensionImpl extends PerlParserExtension implements ClassAccessorParserExtension
+public class MojoliciousParserExtensionImpl extends PerlParserExtension implements MojoliciousParserExtension
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
-	protected static final PerlStringWrapper declarationWrapper = new PerlStringWrapper(CLASS_ACCESSOR_DECLARATION);
 	protected static TokenSet TOKENS_SET;
 
 	static
 	{
-		TOKENS_MAP.put("follow_best_practice", RESERVED_FOLLOW_BEST_PRACTICE);
-		TOKENS_MAP.put("mk_accessors", RESERVED_MK_ACCESSORS);
-		TOKENS_MAP.put("mk_ro_accessors", RESERVED_MK_RO_ACCESSORS);
-		TOKENS_MAP.put("mk_wo_accessors", RESERVED_MK_WO_ACCESSORS);
+		TOKENS_MAP.put(KEYWORD_MOJO_HELPER_METHOD, MOJO_HELPER_METHOD);
 
 		TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
 	}
@@ -48,6 +45,15 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 	public static TokenSet getTokenSet()
 	{
 		return TOKENS_SET;
+	}
+
+	protected static boolean parseHelperDeclaration(PerlBuilder b, int l)
+	{
+		b.setNextSubElementType(MOJO_HELPER_METHOD);
+		PerlStringWrapper currentWrapper = b.setStringWrapper(new PerlStringWrapperOnce(MOJO_HELPER_DECLARATION));
+		boolean r = PerlParserImpl.nested_call(b, l);
+		b.setStringWrapper(currentWrapper);
+		return r;
 	}
 
 	@NotNull
@@ -60,36 +66,10 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 	@Override
 	public boolean parseNestedElement(PerlBuilder b, int l)
 	{
-		IElementType elementType = b.getTokenType();
-		if (elementType == RESERVED_MK_ACCESSORS)
+		if (b.getTokenType() == MOJO_HELPER_METHOD)
 		{
-			return parseAccessorDeclarations(b, l, elementType);
+			return parseHelperDeclaration(b, l);
 		}
-		else if (elementType == RESERVED_MK_RO_ACCESSORS)
-		{
-			return parseAccessorDeclarations(b, l, elementType);
-		}
-		else if (elementType == RESERVED_MK_WO_ACCESSORS)
-		{
-			return parseAccessorDeclarations(b, l, elementType);
-		}
-		else if (elementType == RESERVED_FOLLOW_BEST_PRACTICE)
-		{
-			b.setNextSubElementType(elementType);
-			return PerlParserImpl.nested_call(b, l);
-		}
-
 		return super.parseNestedElement(b, l);
 	}
-
-
-	protected boolean parseAccessorDeclarations(PerlBuilder b, int l, IElementType subElementType)
-	{
-		b.setNextSubElementType(subElementType);
-		PerlStringWrapper currentWrapper = b.setStringWrapper(declarationWrapper);
-		boolean r = PerlParserImpl.nested_call(b, l);
-		b.setStringWrapper(currentWrapper);
-		return r;
-	}
-
 }

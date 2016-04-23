@@ -36,4 +36,5 @@ public interface MojoliciousSyntaxElements
 
 	String KEYWORD_MOJO_BEGIN = "begin";
 	String KEYWORD_MOJO_END = "end";
+	String KEYWORD_MOJO_HELPER_METHOD = "helper";
 }

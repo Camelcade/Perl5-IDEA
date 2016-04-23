@@ -117,6 +117,7 @@
         <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimpleParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtensionImpl"/>
+        <parserExtension implementation="com.perl5.lang.perl.parser.MojoliciousParserExtensionImpl"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -395,6 +396,9 @@
 
 
         <!-- Mojolicious -->
+        <stubIndex implementation="com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex"/>
+        <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
+
         <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
         <lang.parserDefinition language="Mojolicious Perl"
                                implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
@@ -438,6 +442,9 @@
                         implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
         <highlightErrorFilter
                 implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
+        <annotator language="Perl5"
+                   implementationClass="com.perl5.lang.mojolicious.idea.annotator.MojoliciousAnnotator"
+                   order="after PERL_SUBS_ANNOTATOR"/>
         <!-- End of Mojolicious -->
 
 

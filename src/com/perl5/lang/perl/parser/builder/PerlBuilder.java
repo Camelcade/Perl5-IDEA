@@ -60,7 +60,8 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	/**
 	 * This element may be set to make an additional wrapping for strings, like constants and so on
 	 */
-	IElementType stringWrapper = null;
+	PerlStringWrapper stringWrapper = null;
+
 	Project myProject = getProject();
 	private IElementType mySubElementType = SUB;
 
@@ -236,14 +237,14 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return oldValue;
 	}
 
-	public IElementType getStringWrapper()
+	public PerlStringWrapper getStringWrapper()
 	{
 		return stringWrapper;
 	}
 
-	public IElementType setStringWrapper(IElementType stringWrapper)
+	public PerlStringWrapper setStringWrapper(PerlStringWrapper stringWrapper)
 	{
-		IElementType currentValue = this.stringWrapper;
+		PerlStringWrapper currentValue = this.stringWrapper;
 		this.stringWrapper = stringWrapper;
 		return currentValue;
 	}
@@ -264,4 +265,5 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	{
 		this.mySubElementType = subElement;
 	}
+
 }

@@ -16,13 +16,17 @@
 
 package com.perl5.lang.mojolicious;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 22.12.2015.
  */
-public class MojoliciousElementType extends MojoliciousTokenType
+public class MojoliciousElementType extends MojoliciousTokenType implements PsiElementProvider
 {
 	public MojoliciousElementType(@NotNull @NonNls String debugName)
 	{
@@ -34,4 +38,10 @@ public class MojoliciousElementType extends MojoliciousTokenType
 		return "MojoliciousElementType." + super.toString();
 	}
 
+	@NotNull
+	@Override
+	public PsiElement getPsiElement(@NotNull ASTNode node)
+	{
+		return new ASTWrapperPsiElement(node);
+	}
 }
