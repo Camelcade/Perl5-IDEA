@@ -132,8 +132,19 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 			}
 		}
 
+		PsiBuilder.Marker commentMarker = null;
 		while (!b.eof())
+		{
+			if (commentMarker == null)
+			{
+				commentMarker = b.mark();
+			}
 			b.advanceLexer();
+		}
+		if (commentMarker != null)
+		{
+			commentMarker.collapse(COMMENT_LINE);
+		}
 
 		marker_.done(root_);
 	}
