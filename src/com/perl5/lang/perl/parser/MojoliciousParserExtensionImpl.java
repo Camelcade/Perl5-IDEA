@@ -16,12 +16,11 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
-import com.perl5.lang.perl.parser.builder.PerlStringWrapperOnce;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,9 +49,18 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 	protected static boolean parseHelperDeclaration(PerlBuilder b, int l)
 	{
 		b.setNextSubElementType(MOJO_HELPER_METHOD);
-		PerlStringWrapper currentWrapper = b.setStringWrapper(new PerlStringWrapperOnce(MOJO_HELPER_DECLARATION));
-		boolean r = PerlParserImpl.nested_call(b, l);
-		b.setStringWrapper(currentWrapper);
+		PsiBuilder.Marker m = b.mark();
+		boolean r = PerlParserImpl.parse_nested_call(b, l);
+
+		if (r)
+		{
+			m.done(MOJO_HELPER_DECLARATION);
+		}
+		else
+		{
+			m.rollbackTo();
+		}
+
 		return r;
 	}
 

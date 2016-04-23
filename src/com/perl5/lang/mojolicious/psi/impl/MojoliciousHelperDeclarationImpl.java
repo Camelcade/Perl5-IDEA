@@ -17,11 +17,15 @@
 package com.perl5.lang.mojolicious.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 23.04.2016.
@@ -43,4 +47,88 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	{
 		return getName();
 	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		PsiPerlCommaSequenceExpr commaSequence = getArgumentsSequence();
+
+		if (commaSequence != null)
+		{
+			PsiElement name = commaSequence.getFirstChild();
+			if (name instanceof PsiPerlStringBare)
+			{
+				return name.getFirstChild();
+			}
+			else if (name instanceof PerlString)
+			{
+				PsiElement run = name.getFirstChild();
+				if (run != null)
+				{
+					run = run.getNextSibling();
+					if (run != null && run.getNode().getElementType() == STRING_IDENTIFIER)
+					{
+						return run;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public PsiPerlBlock getBlock()
+	{
+		PsiPerlCommaSequenceExpr argumentsSequence = getArgumentsSequence();
+		if (argumentsSequence != null)
+		{
+			PsiPerlSubExpr subArgument = PsiTreeUtil.getChildOfType(argumentsSequence, PsiPerlSubExpr.class);
+			if (subArgument != null)
+			{
+				return subArgument.getBlock();
+			}
+
+		}
+		return super.getBlock();
+	}
+
+	@Nullable
+	protected PsiPerlCommaSequenceExpr getArgumentsSequence()
+	{
+		PsiPerlCallArguments callArguments = getCallArguments();
+
+		if (callArguments != null)
+		{
+			PsiElement commaSequence = callArguments.getFirstChild();
+			if (commaSequence instanceof PsiPerlCommaSequenceExpr)
+			{
+				return (PsiPerlCommaSequenceExpr) commaSequence;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlCallArguments getCallArguments()
+	{
+		return findChildByClass(PsiPerlCallArguments.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlExpr getExpr()
+	{
+		return findChildByClass(PsiPerlExpr.class);
+	}
+
+	@Override
+	@Nullable
+	public PsiPerlMethod getMethod()
+	{
+		return findChildByClass(PsiPerlMethod.class);
+	}
+
 }

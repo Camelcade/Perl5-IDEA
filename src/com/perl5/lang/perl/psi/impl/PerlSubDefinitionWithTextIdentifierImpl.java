@@ -82,7 +82,8 @@ public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDef
 	@Override
 	protected String getSubNameHeavy()
 	{
-		return getNode().getText();
+		PsiElement nameIdentifier = getNameIdentifier();
+		return nameIdentifier == null ? null : nameIdentifier.getNode().getText();
 	}
 
 	@Override

@@ -1012,7 +1012,8 @@ private nested_element_variation ::=
     | nested_call_arguments    // function call like $var->()
     | scalar_call
 
-nested_call ::= method [method_call_arguments]
+nested_call ::= parse_nested_call
+private parse_nested_call ::= method [method_call_arguments]
 scalar_call ::= scalar [method_call_arguments]
 private method_call_arguments ::= LEFT_PAREN [<<parseSimpleCallArguments>>] RIGHT_PAREN
 nested_call_arguments ::= method_call_arguments

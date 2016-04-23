@@ -17,10 +17,11 @@
 package com.perl5.lang.mojolicious.psi;
 
 import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
+import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
 
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousHelperDeclaration extends PerlSubDefinitionWitTextIdentifier
+public interface MojoliciousHelperDeclaration extends PerlSubDefinitionWitTextIdentifier, PsiPerlSubCallExpr
 {
 }

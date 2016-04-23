@@ -1793,6 +1793,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (PerlParserImpl.expr(b, l, -1))
 		{
 			m.done(CALL_ARGUMENTS);
+
 			return true;
 		}
 		m.drop();
