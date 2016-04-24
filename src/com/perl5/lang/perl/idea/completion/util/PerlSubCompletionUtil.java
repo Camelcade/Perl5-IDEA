@@ -58,10 +58,13 @@ public class PerlSubCompletionUtil
 
 	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
 	{
-		return getSubDefinitionLookupElement(subDefinition.getSubName(), subDefinition.getSubArgumentsListAsString(), subDefinition);
+		return getSubDefinitionLookupElement(
+				subDefinition.getSubName(),
+				subDefinition.getSubArgumentsListAsString(),
+				subDefinition);
 	}
 
-	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubDeclaration subDeclaration)
+	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration)
 	{
 		return LookupElementBuilder
 				.create(subDeclaration.getSubName())

@@ -20,6 +20,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -604,8 +605,42 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	@Nullable
+	public static PsiFile getPackagePsiFileByPackageName(Project project, String packageName)
+	{
+		VirtualFile packageVirtualFile = getPackageVirtualFileByPackageName(project, packageName);
+
+		if (packageVirtualFile != null)
+		{
+			return PsiManager.getInstance(project).findFile(packageVirtualFile);
+		}
+
+		return null;
+	}
+
+	@Nullable
+	public static VirtualFile getPackageVirtualFileByPackageName(Project project, String packageName)
+	{
+		if (StringUtil.isEmpty(packageName))
+			return null;
+
+		String packagePath = getPackagePathByName(packageName);
+		VirtualFile[] classRoots = ProjectRootManager.getInstance(project).orderEntries().getClassesRoots();
+
+		for (VirtualFile classRoot : classRoots)
+		{
+			VirtualFile targetFile = classRoot.findFileByRelativePath(packagePath);
+			if (targetFile != null)
+			{
+				return targetFile;
+			}
+		}
+		return null;
+	}
+
+
 	public interface ClassRootVirtualFileProcessor
 	{
-		public boolean process(VirtualFile file, VirtualFile classRoot);
+		boolean process(VirtualFile file, VirtualFile classRoot);
 	}
 }

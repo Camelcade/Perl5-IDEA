@@ -32,5 +32,11 @@ public class PodCompletionContributor extends CompletionContributor implements P
 				LINK_IDENTIFIER,
 				new PodLinkCompletionProvider()
 		);
+
+		extend(
+				CompletionType.BASIC,
+				TITLE_IDENTIFIER,
+				new PodTitleCompletionProvider()
+		);
 	}
 }

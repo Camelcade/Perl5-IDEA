@@ -73,6 +73,32 @@ public class PodFileUtil
 		return null;
 	}
 
+	/**
+	 * Searching perl file related to specified pod file
+	 *
+	 * @param podFile pod psi file
+	 * @return perl psi file if found
+	 */
+	@Nullable
+	public static PsiFile getTargetPerlFile(PsiFile podFile)
+	{
+		if (podFile == null)
+		{
+			return null;
+		}
+
+		final PsiFile baseFile = podFile.getViewProvider().getStubBindingRoot();
+		if (baseFile != podFile)
+			return baseFile;
+
+		String packageName = getPackageName(baseFile);
+		if (StringUtil.isNotEmpty(packageName))
+		{
+			return PerlPackageUtil.getPackagePsiFileByPackageName(baseFile.getProject(), packageName);
+		}
+		return null;
+	}
+
 	@Nullable
 	public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot)
 	{

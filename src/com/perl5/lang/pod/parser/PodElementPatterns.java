@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.parser.psi.PodSectionH1;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -30,4 +31,11 @@ public interface PodElementPatterns extends PodElementTypes
 {
 	PsiElementPattern.Capture<PsiElement> LINK_IDENTIFIER =
 			psiElement().withParent(psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
+
+	PsiElementPattern.Capture<PsiElement> TITLE_IDENTIFIER =
+			psiElement().withParent(psiElement(SECTION_TITLE));
+
+	PsiElementPattern.Capture<PsiElement> HEADER1_ELEMENT =
+			TITLE_IDENTIFIER.withSuperParent(2, psiElement(PodSectionH1.class));
+
 }

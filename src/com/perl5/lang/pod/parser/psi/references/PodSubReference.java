@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.parser.psi.references;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -24,13 +23,9 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolver;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.jetbrains.annotations.NotNull;
@@ -81,35 +76,21 @@ public class PodSubReference extends PodReferenceBase<PodIdentifierImpl>
 				String subName = element.getText();
 				if (StringUtil.isNotEmpty(subName))
 				{
-					PsiFile podFile = element.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
-					if (podFile != null)
+					final PsiFile perlFile = PodFileUtil.getTargetPerlFile(element.getContainingFile());
+
+					if (perlFile != null)
 					{
-						String className = PodFileUtil.getPackageName((PodFile) podFile);
-						if (className == null)
+						List<ResolveResult> results = new ArrayList<ResolveResult>();
+						for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class))
 						{
-							className = "main";
-						}
-
-						String canonicalName = className + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
-
-						List<PsiElement> targets = new ArrayList<PsiElement>();
-						final Project project = element.getProject();
-						PerlSubReferenceResolver.collectRelatedItems(canonicalName, project, null, targets, GlobalSearchScope.projectScope(project));
-
-						if (targets.isEmpty())
-						{
-							PerlSubReferenceResolver.collectRelatedItems(canonicalName, project, null, targets, PerlScopes.getProjectAndLibrariesScope(project));
-						}
-
-						if (!targets.isEmpty())
-						{
-							List<ResolveResult> results = new ArrayList<ResolveResult>();
-							for (PsiElement target : targets)
+							String subBaseName = subBase.getName();
+							if (subBaseName != null && StringUtil.equals(subBaseName, subName))
 							{
-								results.add(new PsiElementResolveResult(target));
+								results.add(new PsiElementResolveResult(subBase));
+
 							}
-							return results.toArray(new ResolveResult[results.size()]);
 						}
+						return results.toArray(new ResolveResult[results.size()]);
 					}
 				}
 			}
