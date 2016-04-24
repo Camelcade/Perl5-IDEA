@@ -27,6 +27,8 @@ import com.intellij.psi.PsiFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,6 +38,14 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 {
 	public static final String ACTION_TITLE = "New Perl5 file";
 	public static final String PACKAGE_TEMPLATE_NAME = "Perl5 package";
+	public static final String POD_TEMPLATE_NAME = "Perl5 pod";
+
+	private static final List<String> TEMPLATES_WITH_PATH = new ArrayList<String>(
+			Arrays.asList(
+					PACKAGE_TEMPLATE_NAME,
+					POD_TEMPLATE_NAME
+			)
+	);
 
 	public PerlFileFromTemplateAction()
 	{
@@ -51,6 +61,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 				.addKind("Package", PerlIcons.PM_FILE, PACKAGE_TEMPLATE_NAME)
 				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
 				.addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
+				.addKind("POD file", PerlIcons.POD_FILE, POD_TEMPLATE_NAME)
 				.addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
 				.addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
 		;
@@ -65,7 +76,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 	@Override
 	protected PsiFile createFileFromTemplate(String name, FileTemplate template, PsiDirectory dir)
 	{
-		if (StringUtil.equals(template.getName(), PACKAGE_TEMPLATE_NAME) && StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR))
+		if (TEMPLATES_WITH_PATH.contains(template.getName()) && StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR))
 		{
 			final List<String> packageChunks = StringUtil.split(name, PerlPackageUtil.PACKAGE_SEPARATOR);
 			name = packageChunks.remove(packageChunks.size() - 1);

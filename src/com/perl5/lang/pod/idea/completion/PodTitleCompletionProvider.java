@@ -52,6 +52,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
 					"API",
 					"DESCRIPTION",
 					"INSTALLATION",
+					"NAME",
 					"AUTHORS",
 					"CONTRIBUTORS",
 					"COPYRIGHT AND LICENSE"

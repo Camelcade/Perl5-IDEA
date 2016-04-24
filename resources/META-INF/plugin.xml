@@ -127,6 +127,7 @@
         <internalFileTemplate name="Perl5 embedded"/>
         <internalFileTemplate name="Perl5 mojolicious"/>
         <internalFileTemplate name="Perl5 test"/>
+        <internalFileTemplate name="Perl5 pod"/>
 
         <lang.fileViewProviderFactory language="Perl5"
                                       implementationClass="com.perl5.lang.perl.parser.PerlFileViewProviderFactory"/>
