@@ -62,11 +62,20 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	PsiElement getSubNameElement();
 
 	/**
-	 * Checks if sub defined as method (accepts one of the PerlThisNames as first argument)
+	 * Checks if sub defined as method
 	 *
 	 * @return result
 	 */
 	boolean isMethod();
+
+
+	/**
+	 * Checks if sub defined as static, default implementation returns !isMethod(), but may be different for constants for example
+	 *
+	 * @return true if sub is static
+	 */
+	boolean isStatic();
+
 
 
 	/**

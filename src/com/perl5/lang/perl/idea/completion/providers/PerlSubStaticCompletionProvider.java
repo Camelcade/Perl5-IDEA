@@ -55,7 +55,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// defined subs
 		for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
-			if (!subDefinition.isMethod())
+			if (subDefinition.isStatic())
 				resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
 
 /*
@@ -67,7 +67,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
 		// declared subs
 		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
-			if (!subDeclaration.isMethod())
+			if (subDeclaration.isStatic())
 				resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
 
 /*

@@ -198,6 +198,12 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return getSubAnnotations().isMethod();
 	}
 
+	@Override
+	public boolean isStatic()
+	{
+		return !isMethod();
+	}
+
 	@Nullable
 	@Override
 	public Icon getIcon(int flags)
