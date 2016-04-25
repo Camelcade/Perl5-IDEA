@@ -19,8 +19,10 @@ package com.perl5.lang.perl.psi.references.scopes;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,11 +33,13 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
 {
 	private final String myName;
 	private final PerlVariableType myVariableType;
+	private final PerlVariable myVariable;
 	private PerlVariableDeclarationWrapper myResult;
 
 
 	public PerlVariableDeclarationSearcher(@NotNull PerlVariable variable)
 	{
+		myVariable = variable;
 		this.myName = variable.getName();
 		myVariableType = variable.getActualType();
 	}
@@ -50,8 +54,13 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
 			{
 				if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName()))
 				{
-					myResult = (PerlVariableDeclarationWrapper) element;
-					return false;
+					PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+
+					if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false))
+					{
+						myResult = (PerlVariableDeclarationWrapper) element;
+						return false;
+					}
 				}
 			}
 		}

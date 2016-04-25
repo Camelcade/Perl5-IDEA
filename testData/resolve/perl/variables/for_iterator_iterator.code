@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+for (my $abc; $a<caret>bc < 100; $abc++)
+{
+}

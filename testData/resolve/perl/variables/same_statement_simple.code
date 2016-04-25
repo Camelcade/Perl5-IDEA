@@ -1,0 +1,2 @@
+
+my($abc) && $a<caret>bc = 123;

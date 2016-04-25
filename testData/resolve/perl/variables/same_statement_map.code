@@ -1,0 +1,3 @@
+my $cde = map {
+    $c<caret>de = 123;
+} @ARGV;

@@ -1,0 +1,2 @@
+my $normvar;
+my($testvar) && $<caret>

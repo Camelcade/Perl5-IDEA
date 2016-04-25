@@ -1,0 +1,5 @@
+state $scalarname;
+state @arrayname;
+state %hashname;
+
+$<caret>

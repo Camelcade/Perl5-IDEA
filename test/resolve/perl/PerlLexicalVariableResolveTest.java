@@ -42,6 +42,11 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 		doTest("variable_for_iterator", true);
 	}
 
+	public void testForIteratorIterator()
+	{
+		doTest("for_iterator_iterator", true);
+	}
+
 	public void testUseVars()
 	{
 		doTest("variable_use_vars", true);
@@ -67,7 +72,6 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 		doTest("variable_in_call_expression", true);
 	}
 
-
 	public void testMethodImplicitInvocant()
 	{
 		doTest("variable_method_implicit_invocant", true);
@@ -81,5 +85,15 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 	public void testNegativeIfElse()
 	{
 		doTest("negative_if_else", false);
+	}
+
+	public void testSameStatementSimple()
+	{
+		doTest("same_statement_simple", false);
+	}
+
+	public void testSameStatementMap()
+	{
+		doTest("same_statement_map", false);
 	}
 }

@@ -219,6 +219,12 @@ public class PerlVariableCompletionUtil
 			{
 				PerlVariableDeclarationWrapper variable = (PerlVariableDeclarationWrapper) element;
 
+				PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PsiPerlStatement.class);
+				if (declarationStatement != null && PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false))
+				{
+					return true;
+				}
+
 				if (perlVariable instanceof PsiPerlScalarVariable)
 				{
 					String variableName = variable.getName();
