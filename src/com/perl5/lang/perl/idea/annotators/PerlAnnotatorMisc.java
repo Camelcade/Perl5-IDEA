@@ -24,6 +24,7 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
@@ -43,9 +44,10 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		PsiElement parent = element.getParent();
 		PsiElement grandParent = parent.getParent();
 
-		if (parent instanceof PerlHeredocElementImpl)
+
+		if (!(parent instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost) parent)))
 		{
-			if (!InjectedLanguageUtil.hasInjections((PerlHeredocElementImpl) parent))
+			if (parent instanceof PerlHeredocElementImpl)
 			{
 				Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
 				IElementType tokenType = parent.getNode().getElementType();
@@ -58,19 +60,17 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 
 			}
-		}
-		else if (!(parent instanceof PsiPerlConstantName
-				|| grandParent instanceof PsiPerlConstantName
-		))
-		{
-			Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
+			else if (!(parent instanceof PsiPerlConstantName || grandParent instanceof PsiPerlConstantName))
+			{
+				Annotation annotation = holder.createInfoAnnotation((PsiElement) element, null);
 
-			if (parent instanceof PsiPerlStringDq) // interpolated
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
-			else if (parent instanceof PsiPerlStringXq) // executable
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
-			else
-				annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+				if (parent instanceof PsiPerlStringDq) // interpolated
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
+				else if (parent instanceof PsiPerlStringXq) // executable
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_DX_STRING);
+				else
+					annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+			}
 		}
 	}
 
@@ -101,7 +101,9 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 			);
 		}
 		else if (element instanceof PerlStringContentElementImpl)
+		{
 			annotateStringContent((PerlStringContentElementImpl) element, holder);
+		}
 //		else if( element instanceof PsiPerlTermExpr)
 //			holder.createErrorAnnotation(element, "Term expression wrapper");
 		else
