@@ -551,6 +551,29 @@ public class PerlPsiUtil
 	public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor)
 	{
 		PsiElement run = element.getPrevSibling();
+
+		if (run == null)    // first element, check parents
+		{
+			run = element;
+			while (true)
+			{
+				if (run instanceof PsiFile)
+					return;
+
+				PsiElement parent = run.getParent();
+				if (parent != null && parent.getTextOffset() == run.getTextOffset())
+				{
+					run = parent;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			run = run.getPrevSibling();
+		}
+
 		while (run != null)
 		{
 			if (run instanceof PerlAnnotationContainer)
