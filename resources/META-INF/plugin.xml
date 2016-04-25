@@ -35,7 +35,7 @@
      <p>Improvements:
       <ul>
       <li>Mojolicious helpers support: navigation, completion and refactoring. NB: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.
-      <li>Introduced new annotation: <code>#@inject</code>, allows you to inject other languages in strings</li>
+      <li>Introduced new annotation:  <code>#@inject</code>, allows you to inject other languages in strings</li>
       <li>Class methods now properly re-factored in subclasses and optionally in super-class</li>
       <li>You may now create package files with full-qualified names from <code>New Perl File</code> menu</li>
       <li>POD support: live templates, completion, navigation and few useful inspections.</li>

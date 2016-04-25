@@ -133,6 +133,12 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 		}
 
 		PsiBuilder.Marker commentMarker = null;
+
+		if( b.getTokenType() == IDENTIFIER)
+		{
+			b.advanceLexer();
+		}
+
 		while (!b.eof())
 		{
 			if (commentMarker == null)
