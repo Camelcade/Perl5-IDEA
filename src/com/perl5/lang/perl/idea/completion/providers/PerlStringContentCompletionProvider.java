@@ -20,6 +20,8 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
@@ -36,6 +38,12 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet result)
 	{
 		PsiElement element = parameters.getPosition();
+		PsiElement parent = element.getParent();
+
+		if (parent instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost) parent))
+		{
+			return;
+		}
 
 		if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
 		{
