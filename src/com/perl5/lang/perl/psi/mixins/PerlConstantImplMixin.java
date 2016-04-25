@@ -144,4 +144,5 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 		return getName();
 	}
 
+
 }

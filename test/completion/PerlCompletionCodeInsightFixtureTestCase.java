@@ -20,6 +20,8 @@ import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -33,4 +35,11 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 
+	public void checkPackageFileCompletionWithArray(String fileName, String... result)
+	{
+		initWithFileAsPackage(fileName);
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertNotNull(strings);
+		assertContainsElements(strings, Arrays.asList(result));
+	}
 }

@@ -21,7 +21,7 @@ Perl5
     PsiComment(PerlTokenType.COMMENT_LINE)('this is t he  end!')
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiElement(PerlTokenType.ANNOTATION_PREFIX)('#@')
-    PsiComment(PerlTokenType.COMMENT_LINE)('in')
+    PsiElement(PerlTokenType.IDENTIFIER)('in')
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PerlAnnotationReturnsImpl(PerlElementType.ANNOTATION_RETURNS)
       PsiElement(PerlTokenType.ANNOTATION_PREFIX)('#@')

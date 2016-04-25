@@ -53,11 +53,15 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 	{
 		IElementType tokenType = b.getTokenType();
 		PsiBuilder.Marker marker_ = b.mark();
+
+		boolean skipIdentifier = true;
+
 		if (tokenType == ANNOTATION_PREFIX)
 		{
 			PsiBuilder.Marker annotationMarker = b.mark();
 			b.advanceLexer();
 			tokenType = b.getTokenType();
+
 			if (tokenType == ANNOTATION_ABSTRACT_KEY)
 			{
 				b.advanceLexer();
@@ -128,13 +132,14 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 			}
 			else
 			{
+				skipIdentifier = false;
 				annotationMarker.drop();
 			}
 		}
 
 		PsiBuilder.Marker commentMarker = null;
 
-		if( b.getTokenType() == IDENTIFIER)
+		if (!skipIdentifier && b.getTokenType() == IDENTIFIER)
 		{
 			b.advanceLexer();
 		}

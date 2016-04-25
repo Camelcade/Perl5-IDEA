@@ -18,9 +18,6 @@ package completion;
 
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Created by hurricup on 03.02.2016.
  * http://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins/completion_test.html
@@ -36,7 +33,7 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void testPackageDefinition()
 	{
-		checkFileWithArray("package_definition", "package_definition");
+		checkPackageFileCompletionWithArray("package_definition", "package_definition");
 	}
 
 	public void testPackageUse()
@@ -82,19 +79,12 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void checkPackageAndVersionsCompletions(String fileName)
 	{
-		checkFileWithArray(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		checkPackageFileCompletionWithArray(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
 	}
 
 	public void checkClassCompletions(String fileName)
 	{
-		checkFileWithArray(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		checkPackageFileCompletionWithArray(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
 	}
 
-	public void checkFileWithArray(String fileName, String... result)
-	{
-		initWithFileAsPackage(fileName);
-		List<String> strings = myFixture.getLookupElementStrings();
-		assertNotNull(strings);
-		assertContainsElements(strings, Arrays.asList(result));
-	}
 }
