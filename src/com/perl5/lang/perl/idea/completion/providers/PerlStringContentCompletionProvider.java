@@ -52,6 +52,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		else if (element.getParent() instanceof PerlAnnotationInjectImpl)
 		{
 			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
+			result.stopHere();
 		}
 		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
 		{
@@ -63,10 +64,5 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 			PerlStringCompletionUtil.fillWithRefTypes(result);
 			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
 		}
-		else
-		{
-			return;
-		}
-		result.stopHere();
 	}
 }
