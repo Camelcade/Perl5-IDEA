@@ -32,6 +32,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextIdentifierImpl implements MojoliciousHelperDeclaration
 {
+	public static final String HELPER_NAMESPACE_NAME = "Mojolicious::Controller";
+
 	public MojoliciousHelperDeclarationImpl(@NotNull ASTNode node)
 	{
 		super(node);
@@ -72,6 +74,8 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 		return null;
 	}
 
+
+
 	@Override
 	public PsiPerlBlock getBlock()
 	{
@@ -105,6 +109,12 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 	@Override
+	public String getExplicitPackageName()
+	{
+		return HELPER_NAMESPACE_NAME;
+	}
+
+	@Override
 	@Nullable
 	public PsiPerlCallArguments getCallArguments()
 	{
@@ -125,4 +135,10 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 		return findChildByClass(PsiPerlMethod.class);
 	}
 
+
+	@Override
+	public boolean isMethod()
+	{
+		return true;
+	}
 }
