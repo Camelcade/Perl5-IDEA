@@ -36,13 +36,13 @@
       <ul>
       <li>POD support: live templates, completion, navigation and few useful inspections</li>
       <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files or inline pod</li>
-      <li>Mojolicious helpers support: navigation, completion and refactoring. <b>NB</b>: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.
-      <li>Introduced new annotation:  <code>#@inject</code>, allows you to inject other languages in strings. Annotation may be before the string, before the statement containing the string or in the end of line string ends. (NB: eol annotation may be misleading and should be considered experimental, see <a href="https://github.com/hurricup/Perl5-IDEA/issues/1072">#1072</a>. Need a feedback.) </li>
+      <li>Mojolicious helpers support: navigation, completion and refactoring. <b>NB</b>: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.</li>
+      <li>Introduced new annotation:  <code>#@inject</code>, allows you to inject other languages in strings. Annotation may be before the string, before the statement containing the string or in the end of line string ends. (<b>NB</b>: eol annotation may be misleading and should be considered experimental, see <a href="https://github.com/hurricup/Perl5-IDEA/issues/1072">#1072</a>. Need a feedback.) </li>
       <li>Class methods now properly re-factored in subclasses and optionally in super-class</li>
       <li>You may now create package files with full-qualified names from <code>New Perl File</code> action</li>
       <li><a href="http://search.cpan.org/~ash/TryCatch/lib/TryCatch.pm">TryCatch</a> basic support. Currently <code>catch{}</code>, <code>catch($var){}</code> and <code>catch(Foo::Bar $var){}</code> are supported</li>
       <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> call from inside <code>Foo::Bar</code> package</li>
-      <li>Lexical vairables are now in top of autocompletion pop-up</li>
+      <li>Lexical vairables are now on top of the auto-completion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
       <li>New action: Deparse file using B::Deparse</li>
       <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings</li>
