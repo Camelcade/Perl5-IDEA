@@ -78,11 +78,13 @@ public class Perl5ProjectComponent implements ProjectComponent
 			NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
 			Notification notification = group.createNotification(
 					"Perl5 plugin updated to version " + PerlPluginUtil.getPluginVersion(),
-					"<p>Current release brings you POD support and context help (Ctrl+Q), alongside with many smaller fixes and improvements.</p><br/>" +
+					"<p>This is a very significant milestone for me: year ago I've started to work on this plugin. At the moment over 2k commits been done.</p><br/>" +
+							"<p>Current release brings you POD support, context help (Ctrl+Q), Mojolicious helpers support, Perl::Critic and Perl::Tidy basic support alongside with many smaller fixes and improvements.</p><br/>" +
 							"<p>Full list of changes and fixes may be found on the <a href=\"https://plugins.jetbrains.com/plugin/7796\">Plugin's page</a> in JetBrains repository.</p><br/>" +
 							"<p>Don't hesitate to report bugs and request new features to <a href=\"https://github.com/hurricup/Perl5-IDEA/issues\">our tracker</a>.</p><br/>" +
 							"<p>If you find this plugin helpful, you can support it using <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E\">PayPal</a>.</p><br/>" +
-							"<p>Have a nice coding!</p><br/>",
+							"<p>Have a nice coding!</p><br/>" +
+							"<p>Debugger is coming...</p><br/>",
 					NotificationType.INFORMATION,
 					new NotificationListener.UrlOpeningListener(false)
 			);

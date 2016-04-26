@@ -34,14 +34,14 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Mojolicious helpers support: navigation, completion and refactoring. NB: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.
+      <li>POD support: live templates, completion, navigation and few useful inspections</li>
+      <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files or inline pod</li>
+      <li>Mojolicious helpers support: navigation, completion and refactoring. <b>NB</b>: helpers should be declared explicitly, <code>$app->helper($_, sub{}) for @something;</code> wont work.
       <li>Introduced new annotation:  <code>#@inject</code>, allows you to inject other languages in strings. Annotation may be before the string, before the statement containing the string or in the end of line string ends. (NB: eol annotation may be misleading and should be considered experimental, see <a href="https://github.com/hurricup/Perl5-IDEA/issues/1072">#1072</a>. Need a feedback.) </li>
       <li>Class methods now properly re-factored in subclasses and optionally in super-class</li>
-      <li>You may now create package files with full-qualified names from <code>New Perl File</code> menu</li>
-      <li>POD support: live templates, completion, navigation and few useful inspections.</li>
-      <li>Context help: hit Ctrl+Q on element in question and get your answer from pod files</li>
-      <li>TryCatch basic support. Currently <code>catch{}</code>, <code>catch($var){}</code> and <code>catch(Foo::Bar $var){}</code> are supported</li>
-      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package</li>
+      <li>You may now create package files with full-qualified names from <code>New Perl File</code> action</li>
+      <li><a href="http://search.cpan.org/~ash/TryCatch/lib/TryCatch.pm">TryCatch</a> basic support. Currently <code>catch{}</code>, <code>catch($var){}</code> and <code>catch(Foo::Bar $var){}</code> are supported</li>
+      <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> call from inside <code>Foo::Bar</code> package</li>
       <li>Lexical vairables are now in top of autocompletion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
       <li>New action: Deparse file using B::Deparse</li>
@@ -53,18 +53,18 @@
      <p>Fixes:
       <ul>
       <li>Fixed issue with occasional % parsing in Mason2 and HTML::Mason templates</li>
-      <li>Setback: block commenting with pod has been disabled for current version.</li>
+      <li>Setback: block commenting with pod has been disabled for current version, use line commenting</li>
       <li>Changed the way annotation being parsed: should speed overall performance and allow to put annotations in any place without breaking syntax</li>
       <li>Fixed scrolling problem on code generation</li>
       <li>Fixed multiple sub definitions inspection</li>
       <li>Fixed problem with @ISA assignment when explicit namespace specified, like @Foo::ISA</li>
       <li>Fixed problem with package detection in qq string and it's consequences</li>
-      <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation</li>
+      <li>Fixed problem, when re-formatting could break syntax by joining number and concatenation operator</li>
       <li>Fixed problem with occasional double <code>-></code> insertion on pre-formatting</li>
       <li>Fixed possible OOM hang on object methods resolution, when method and object variable has the same name, e.g. <code>$test->test()</code></li>
       <li>Fixed performance problem appeared after IDEA 2016.1.1 update</li>
       <li>Disabled deprecation strikeout in packages auto-completion. Speeds things up and prevents hanging of IDEA 2016</li>
-      <li>Fixed package completion in variable definition expression</li>
+      <li>Fixed package completion in variable declaration expression</li>
       </ul>
      </p>
 
