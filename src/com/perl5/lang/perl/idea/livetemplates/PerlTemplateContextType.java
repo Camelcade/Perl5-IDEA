@@ -18,17 +18,19 @@ package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateContextType;
+import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -54,7 +56,12 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 			if (element == null)
 				return false;
 
-			if (element instanceof PsiWhiteSpace || element instanceof PerlStringContentElement || element.getNode().getElementType() == PerlElementTypes.REGEX_TOKEN)
+			IElementType tokenType = element.getNode().getElementType();
+
+			if (element instanceof PsiWhiteSpace ||
+					element instanceof PerlStringContentElementImpl ||
+					element instanceof PsiComment ||
+					tokenType == PerlElementTypes.REGEX_TOKEN)
 			{
 				return false;
 			}
