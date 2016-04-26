@@ -44,6 +44,7 @@
       <li>Redundant explicit namespace inspection, e.g. <code>Foo::Bar::somesub()</code> from inside <code>Foo::Bar</code> package</li>
       <li>Lexical vairables are now in top of autocompletion pop-up</li>
       <li>Significally improved parser recovery on incomplete and incorrect statements</li>
+      <li>New action: Deparse file using B::Deparse</li>
       <li><code>Perl::Critic</code> annotator is now on. All configurations must be done via <code>.perlcriticrc</code> file in project root or home dir (see <a href="http://search.cpan.org/~thaljef/Perl-Critic/">Perl::Critic</a> documentation). There is no any UI to configure <code>Perl::Critic</code> settings for now. Only enable/disable checkbox in Perl5 settings</li>
       <li><code>Perl::Tidy</code> formatting is now available. All configuration must be done via <code>.perltidyrc</code> file in project root (see <a href="http://search.cpan.org/~shancock/Perl-Tidy/">Perl::Tidy</a> documentation). Again, there is no UI to configure settings for now</li>
       </ul>
@@ -852,7 +853,14 @@
             <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
             <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
         </action>
-        
+        <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
+                text="Deparse file...">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="CodeMenu" anchor="last"/>
+            <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+        </action>
+
         <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>

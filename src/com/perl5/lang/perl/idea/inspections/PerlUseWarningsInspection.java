@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
@@ -46,7 +47,7 @@ public class PerlUseWarningsInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
-				if (file.getViewProvider() instanceof InjectedFileViewProvider)
+				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
 					return;
 
 				FileType fileType = file.getFileType();

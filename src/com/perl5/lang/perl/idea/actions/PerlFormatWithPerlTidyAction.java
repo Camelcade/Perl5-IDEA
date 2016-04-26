@@ -23,10 +23,9 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
@@ -34,9 +33,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.psi.PerlFile;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.util.PerlActionUtil;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -46,49 +44,24 @@ import java.util.List;
  * Created by hurricup on 17.04.2016.
  * For improvements, see UpdateCopyrightAction
  */
-public class PerlFormatWithPerlTidyAction extends AnAction
+public class PerlFormatWithPerlTidyAction extends PerlActionBase
 {
 	public static final String PERL_TIDY_GROUP = "PERL5_PERL_TIDY";
 
-	private static boolean isEnabled(AnActionEvent event)
+	@Override
+	protected boolean isEnabled(AnActionEvent event)
 	{
-		final PsiFile file = getPsiFileFromEvent(event);
+		final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 		return file instanceof PerlFile && ((PerlFile) file).isPerlTidyReformattable() && file.isWritable();
 	}
 
-	@Nullable
-	private static PsiFile getPsiFileFromEvent(AnActionEvent event)
-	{
-		final DataContext context = event.getDataContext();
-		final Project project = CommonDataKeys.PROJECT.getData(context);
-		if (project == null)
-		{
-			return null;
-		}
-
-		final Editor editor = CommonDataKeys.EDITOR.getData(context);
-		if (editor != null)
-		{
-			return PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
-
-		}
-		else
-		{
-			VirtualFile virtualFile = CommonDataKeys.VIRTUAL_FILE.getData(context);
-			if (virtualFile != null)
-			{
-				return PsiManager.getInstance(project).findFile(virtualFile);
-			}
-		}
-		return null;
-	}
 
 	@Override
 	public void actionPerformed(AnActionEvent event)
 	{
 		if (isEnabled(event))
 		{
-			PsiFile file = getPsiFileFromEvent(event);
+			PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
 			if (file == null)
 				return;
@@ -163,17 +136,6 @@ public class PerlFormatWithPerlTidyAction extends AnAction
 						NotificationType.ERROR
 				));
 			}
-		}
-	}
-
-	@Override
-	public void update(AnActionEvent event)
-	{
-		final boolean enabled = isEnabled(event);
-		event.getPresentation().setEnabled(enabled);
-		if (ActionPlaces.isPopupPlace(event.getPlace()))
-		{
-			event.getPresentation().setVisible(enabled);
 		}
 	}
 

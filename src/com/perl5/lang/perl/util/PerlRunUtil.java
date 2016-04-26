@@ -44,6 +44,7 @@ public class PerlRunUtil
 		return perlPath == null ? null : getPerlCommandLine(project, perlPath, scriptFile, perlParameters);
 	}
 
+	@NotNull
 	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();

@@ -51,7 +51,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 	@Override
 	public PerlFile collectInformation(@NotNull PsiFile file)
 	{
-		return file instanceof PerlFile && Perl5Settings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
+		return file instanceof PerlFile && file.isPhysical() && Perl5Settings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
 	}
 
 	@Nullable
