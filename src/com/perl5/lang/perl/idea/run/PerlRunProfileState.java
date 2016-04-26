@@ -28,25 +28,14 @@ import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.Function;
-import com.intellij.util.PlatformUtils;
-import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
-import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -72,55 +61,8 @@ public class PerlRunProfileState extends CommandLineState
 			throw new ExecutionException("Script file: " + runProfile.getScriptPath() + " is not exists");
 		}
 
-		String perlSdkPath = null;
-		List<String> includePaths = Collections.emptyList();
 		Project project = getEnvironment().getProject();
-		if (PlatformUtils.isIntelliJ())
-		{
-			Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
-			if (moduleForFile == null)
-			{
-				Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
-				if (projectSdk != null)
-				{
-					perlSdkPath = projectSdk.getHomePath();
-				}
-			}
-			else
-			{
-				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
-				if (sdk == null)
-				{
-					perlSdkPath = null;
-				}
-				else
-				{
-					perlSdkPath = sdk.getHomePath();
-					List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(moduleForFile).getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE);
-					if (!sourceRoots.isEmpty())
-					{
-						includePaths = new ArrayList<String>(sourceRoots.size());
-						for (VirtualFile sourceRoot : sourceRoots)
-						{
-							includePaths.add(sourceRoot.getPath());
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			Perl5Settings perl5Settings = Perl5Settings.getInstance(project);
-			perlSdkPath = perl5Settings.perlPath;
-			includePaths = ContainerUtil.map(perl5Settings.libRootUrls, new Function<String, String>()
-			{
-				@Override
-				public String fun(String str)
-				{
-					return VfsUtil.urlToPath(str);
-				}
-			});
-		}
+		String perlSdkPath = PerlRunUtil.getPerlPath(project, scriptFile);
 
 		String alternativeSdkPath = runProfile.getAlternativeSdkPath();
 		if (runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath))
@@ -157,19 +99,19 @@ public class PerlRunProfileState extends CommandLineState
 
 		assert homePath != null;
 
-		GeneralCommandLine commandLine = new GeneralCommandLine();
-		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlSdkPath);
-		commandLine.setExePath(FileUtil.toSystemIndependentName(executablePath));
-		for (String includePath : includePaths)
-		{
-			commandLine.addParameter("-I" + FileUtil.toSystemIndependentName(includePath));
-		}
-		commandLine.addParameter(scriptFile.getPath());
 		String programParameters = runProfile.getProgramParameters();
+		String[] perlParameters;
 		if (programParameters != null)
 		{
-			commandLine.addParameters(StringUtil.split(programParameters, " "));
+			List<String> split = StringUtil.split(programParameters, " ");
+			perlParameters = split.toArray(new String[split.size()]);
 		}
+		else
+		{
+			perlParameters = new String[0];
+		}
+
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, perlParameters);
 
 		String charsetName = runProfile.getCharset();
 		Charset charset = null;
