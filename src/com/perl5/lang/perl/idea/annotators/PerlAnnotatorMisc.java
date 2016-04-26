@@ -61,7 +61,8 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		}
 		else if (tokenType == HEREDOC || tokenType == STRING_LIST || tokenType == STRING_BARE || tokenType == STRING_SQ)
 		{
-			key = PerlSyntaxHighlighter.PERL_SQ_STRING;
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+			return;
 		}
 
 		if (key == null)
@@ -92,11 +93,24 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					true,
 					false);
 		else if (element instanceof PerlAnnotation)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_ANNOTATION,
 					false,
 					false);
+
+			PsiElement lastChild = element.getLastChild();
+			if (lastChild instanceof PerlStringContentElementImpl)
+			{
+				decorateElement(
+						holder.createInfoAnnotation(lastChild, null),
+						PerlSyntaxHighlighter.PERL_SQ_STRING,
+						false,
+						false
+				);
+			}
+		}
 		else if (element instanceof PerlLabel)
 		{
 			decorateElement(
