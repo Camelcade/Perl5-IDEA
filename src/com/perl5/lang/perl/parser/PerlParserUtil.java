@@ -151,6 +151,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_TICK_CLOSE,
 			QUOTE_SINGLE_CLOSE
 	);
+
+	public static final TokenSet ALL_QUOTES = TokenSet.orSet(
+			OPEN_QUOTES,
+			CLOSE_QUOTES
+	);
+
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
 			REGEX_QUOTE,
 			REGEX_QUOTE_CLOSE,

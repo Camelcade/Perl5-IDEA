@@ -23,24 +23,31 @@ package com.perl5.lang.perl.idea.annotators;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlLabel;
-import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlNyiStatement;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlStringListImpl;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotatorMisc extends PerlAnnotator
 {
+	private static final TokenSet QQ_STRINGS = TokenSet.create(HEREDOC_QQ, STRING_DQ);
+	private static final TokenSet XQ_STRINGS = TokenSet.create(HEREDOC_QX, STRING_XQ);
+	private static final TokenSet SQ_STRINGS = TokenSet.create(HEREDOC, STRING_SQ, STRING_BARE, STRING_LIST, TR_SEARCHLIST, TR_REPLACEMENTLIST);
+	private static final TokenSet STRINGS = TokenSet.orSet(QQ_STRINGS, SQ_STRINGS, XQ_STRINGS);
+
+
 	private void annotateStringContainerIfNotInjected(PsiElement element, AnnotationHolder holder)
 	{
 		if (element instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost) element))
@@ -51,35 +58,51 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		TextAttributesKey key = null;
 		IElementType tokenType = element.getNode().getElementType();
 
-		if (tokenType == HEREDOC_QX || tokenType == STRING_XQ)
+		if (XQ_STRINGS.contains(tokenType))
 		{
 			key = PerlSyntaxHighlighter.PERL_DX_STRING;
 		}
-		else if (tokenType == HEREDOC_QQ || tokenType == STRING_DQ)
+		else if (QQ_STRINGS.contains(tokenType))
 		{
 			key = PerlSyntaxHighlighter.PERL_DQ_STRING;
 		}
-		else if (tokenType == HEREDOC || tokenType == STRING_LIST || tokenType == STRING_BARE || tokenType == STRING_SQ)
+		else
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-			return;
-		}
-
-		if (key == null)
-		{
-			System.err.println("Don known how to highlight: " + tokenType);
-			return;
+			key = PerlSyntaxHighlighter.PERL_SQ_STRING;
 		}
 
 		PsiElement run = element.getFirstChild();
+		int offset = run == null ? -1 : run.getTextOffset();
+
 		while (run != null)
 		{
-			if (run instanceof PerlStringContentElementImpl)
+			boolean isString = run instanceof PerlStringContentElementImpl;
+			boolean isWhiteSpace = run instanceof PsiWhiteSpace;
+
+			tokenType = run.getNode().getElementType();
+
+			if (!(isString || isWhiteSpace || PerlParserUtil.ALL_QUOTES.contains(tokenType)))
 			{
-				holder.createInfoAnnotation(run, null).setTextAttributes(key);
+				int endOffset = run.getTextOffset();
+
+				if (endOffset > offset)
+				{
+//					System.err.println("Annotating from " + offset + " to " + endOffset);
+					holder.createInfoAnnotation(new TextRange(offset, endOffset), null).setTextAttributes(key);
+				}
+				offset = endOffset + run.getTextLength();
 			}
+
 			run = run.getNextSibling();
 		}
+
+		int endOffset = element.getTextOffset() + element.getTextLength();
+		if (endOffset > offset && offset > -1)
+		{
+//			System.err.println("Annotating from " + offset + " to " + endOffset);
+			holder.createInfoAnnotation(new TextRange(offset, endOffset), null).setTextAttributes(key);
+		}
+//		System.err.println("Done");
 	}
 
 	@Override
@@ -120,13 +143,13 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 					false
 			);
 		}
-		else if (element instanceof PerlString || element instanceof PerlHeredocElementImpl || element instanceof PsiPerlStringListImpl)
-		{
-			annotateStringContainerIfNotInjected(element, holder);
-		}
 		else
 		{
 			IElementType tokenType = element.getNode().getElementType();
+			if (STRINGS.contains(tokenType))
+			{
+				annotateStringContainerIfNotInjected(element, holder);
+			}
 			if (tokenType == HANDLE)
 				decorateElement(
 						holder.createInfoAnnotation(element, null),

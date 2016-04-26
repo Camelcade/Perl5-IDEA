@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.annotators.PerlAnnotator;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.MooseParserExtensionImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,6 +35,10 @@ public class MooseAnnotator extends PerlAnnotator
 		if (MooseParserExtensionImpl.getHighlighterTokenSet().contains(element.getNode().getElementType()))
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+		}
+		else if (element instanceof PerlMooseAttributeImpl)
+		{
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 		}
 	}
 }
