@@ -1,0 +1,9 @@
+HTML::Mason component
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('<b>')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiElement(HTML::Mason::Token.<%)('<%')
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('boomerang_sum')
+    PsiElement(HTML::Mason::Token.%>)('%>')
+  PsiComment(HTML::Mason::Token.HTML_MASON_TEMPLATE_BLOCK_HTML)('%</b>')

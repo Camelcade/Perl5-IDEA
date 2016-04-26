@@ -297,7 +297,6 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			int offset = tokenStart;
 
 			boolean blockStart = false;
-			boolean clearLine = true;
 			Matcher m;
 			Matcher matcherSimpleOpener = null;
 			Matcher matcherOpener = null;
@@ -338,23 +337,15 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
-				else if (offset < bufferEnd && clearLine && currentChar == '%')
+				else if (currentChar == '%' && (offset == 0 || buffer.charAt(offset - 1) == '\n'))
 				{
 					pushPreparsedToken(offset, offset + 1, MASON_LINE_OPENER);
 					setCustomState(LEX_MASON_PERL_LINE);
 					break;
 				}
-				else if (currentChar == '\n')
+				else if (!Character.isWhitespace(currentChar))
 				{
-					clearLine = true;
-				}
-				else
-				{
-					if (!Character.isWhitespace(currentChar))
-					{
-						lastNonspaceCharacterOffset = offset;
-					}
-					clearLine = false;
+					lastNonspaceCharacterOffset = offset;
 				}
 			}
 

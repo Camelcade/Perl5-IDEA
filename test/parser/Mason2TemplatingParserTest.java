@@ -43,6 +43,11 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase
 		doTest("test_component", true);
 	}
 
+	public void testIssue1077()
+	{
+		doTest("issue_1077", true);
+	}
+
 	@Override
 	public void setUp() throws Exception
 	{

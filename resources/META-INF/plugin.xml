@@ -51,6 +51,7 @@
 
      <p>Fixes:
       <ul>
+      <li>Fixed issue with occasional % parsing in Mason2 and HTML::Mason templates</li>
       <li>Setback: block commenting with pod has been disabled for current version.</li>
       <li>Changed the way annotation being parsed: should speed overall performance and allow to put annotations in any place without breaking syntax</li>
       <li>Fixed scrolling problem on code generation</li>

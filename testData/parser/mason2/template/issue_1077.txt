@@ -1,0 +1,11 @@
+Mason2 template file
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)
+    PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
+      PsiComment(MasonTemplatingTokenType.MASON_TEMPLATE_BLOCK_HTML)('<b>')
+      PsiPerlStatementImpl(PerlElementType.STATEMENT)
+        PsiElement(MasonTemplatingTokenType.<% )('<% ')
+        PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+          PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+          PsiElement(PerlTokenType.VARIABLE_NAME)('boomerang_sum')
+        PsiElement(MasonTemplatingTokenType. %>)(' %>')
+      PsiComment(MasonTemplatingTokenType.MASON_TEMPLATE_BLOCK_HTML)('%</b>')

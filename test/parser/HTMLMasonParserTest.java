@@ -40,6 +40,11 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 		return "testData/parser/htmlmason";
 	}
 
+	public void testIssue1077()
+	{
+		doTest("issue_1077");
+	}
+
 	public void testArgs()
 	{
 		doTest("parse_args");
