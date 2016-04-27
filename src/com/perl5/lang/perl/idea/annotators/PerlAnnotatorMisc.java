@@ -20,6 +20,7 @@ package com.perl5.lang.perl.idea.annotators;
  * Created by hurricup on 25.04.2015.
  */
 
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -72,18 +73,19 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		}
 
 		PsiElement run = element.getFirstChild();
-		int offset = run == null ? -1 : run.getTextOffset();
+		int offset = run == null ? -1 : run.getNode().getStartOffset();
 
 		while (run != null)
 		{
 			boolean isString = run instanceof PerlStringContentElementImpl;
 			boolean isWhiteSpace = run instanceof PsiWhiteSpace;
 
-			tokenType = run.getNode().getElementType();
+			ASTNode runNode = run.getNode();
+			tokenType = runNode.getElementType();
 
 			if (!(isString || isWhiteSpace || PerlParserUtil.ALL_QUOTES.contains(tokenType)))
 			{
-				int endOffset = run.getTextOffset();
+				int endOffset = runNode.getStartOffset();
 
 				if (endOffset > offset)
 				{
@@ -96,7 +98,8 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 			run = run.getNextSibling();
 		}
 
-		int endOffset = element.getTextOffset() + element.getTextLength();
+		ASTNode elementNode = element.getNode();
+		int endOffset = elementNode.getStartOffset() + elementNode.getTextLength();
 		if (endOffset > offset && offset > -1)
 		{
 //			System.err.println("Annotating from " + offset + " to " + endOffset);
