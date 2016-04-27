@@ -110,7 +110,10 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 	{
 		assert myElement instanceof PsiNamedElement;
 		String name = ((PsiNamedElement) myElement).getName();
-		assert name != null;
+		if (name == null)
+		{
+			name = "Empty named " + myElement;
+		}
 		return name;
 	}
 

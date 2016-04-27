@@ -852,6 +852,7 @@
             <add-to-group group-id="CodeMenu" anchor="last"/>
             <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
             <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Copy"/>
         </action>
         <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
                 text="Deparse file...">
@@ -859,6 +860,7 @@
             <add-to-group group-id="CodeMenu" anchor="last"/>
             <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
             <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Copy"/>
         </action>
 
         <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
