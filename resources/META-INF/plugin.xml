@@ -39,7 +39,8 @@
 
      <p>Fixes:
       <ul>
-      <li>Fixed sigils colorization in use vars</li>
+      <li>Fixed sigils highlighting in <code>use vars</code></li>
+      <li>Restored program arguments order to pre-1.5 position in Run configuration</li>
       </ul>
      </p>
 

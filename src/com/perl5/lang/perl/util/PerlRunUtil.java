@@ -56,10 +56,7 @@ public class PerlRunUtil
 			commandLine.addParameter("-I" + FileUtil.toSystemIndependentName(includePath));
 		}
 
-		for (String perlParameter : perlParameters)
-		{
-			commandLine.addParameter(perlParameter);
-		}
+		commandLine.addParameters(perlParameters);
 
 		if (scriptFile != null)
 		{

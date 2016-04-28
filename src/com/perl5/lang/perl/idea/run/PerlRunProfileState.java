@@ -36,7 +36,6 @@ import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.List;
 
 /**
  * @author VISTALL
@@ -99,19 +98,15 @@ public class PerlRunProfileState extends CommandLineState
 
 		assert homePath != null;
 
+
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile);
+
 		String programParameters = runProfile.getProgramParameters();
-		String[] perlParameters;
+
 		if (programParameters != null)
 		{
-			List<String> split = StringUtil.split(programParameters, " ");
-			perlParameters = split.toArray(new String[split.size()]);
+			commandLine.addParameters(StringUtil.split(programParameters, " "));
 		}
-		else
-		{
-			perlParameters = new String[0];
-		}
-
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, perlParameters);
 
 		String charsetName = runProfile.getCharset();
 		Charset charset = null;
