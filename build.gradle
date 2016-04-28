@@ -83,6 +83,17 @@ dependencies {
     gen files('lib/gk/light-psi-all.jar')
 }
 
+project.afterEvaluate {
+    prepareSandbox.doLast {
+        def perlUtils = "$it.destinationDir/perl/"
+        def XSParser = file("perl-utils/xs_parser_simple.pl")
+        copy {
+            from XSParser
+            into perlUtils
+        }
+    }
+}
+
 apply plugin: 'idea'
 idea {
     project {
