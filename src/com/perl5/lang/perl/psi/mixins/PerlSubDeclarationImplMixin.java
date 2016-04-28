@@ -61,4 +61,16 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSu
 	{
 		return this.getName();
 	}
+
+	@Override
+	public boolean isMethod()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isStatic()
+	{
+		return true;
+	}
 }
