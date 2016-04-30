@@ -22,6 +22,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -450,7 +451,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 					VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
 					if (targetFile != null)
 					{
-						return targetFile;
+						String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
+
+						if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath))
+						{
+							return targetFile;
+						}
 					}
 				}
 			}
