@@ -267,4 +267,17 @@
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
+    <template name="sub{}" value="sub { $END$ }" description="new anon sub" toReformat="true" toShortenFQNames="true">
+        <context>
+            <option name="PERL5" value="true"/>
+        </context>
+    </template>
+    <template name="sort" value="sort {$END$} $LIST$" description="sort expression" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="LIST" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5" value="true"/>
+        </context>
+    </template>
+
 </templateSet>

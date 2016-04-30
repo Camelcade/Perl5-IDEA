@@ -198,11 +198,11 @@ public interface PerlSubUtilBuiltIn
 			"values",
 
 //			Functions for list data
-			"grep",
+//			"grep",
 			"join",
-			"map",
+//			"map",
 			"reverse",
-			"sort",
+//			"sort",
 			"unpack",
 
 //			Functions for real %HASHes
