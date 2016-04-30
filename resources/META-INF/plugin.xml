@@ -39,6 +39,8 @@
 
      <p>Fixes:
       <ul>
+      <li>Improved package completion on invocation statement</li>
+      <li>Fixed probable NPE on incomplete Exporter arrays assignment</li>
       <li>Fixed sigils highlighting in <code>use vars</code></li>
       <li>Restored program arguments order to pre-1.5 position in Run configuration</li>
       </ul>

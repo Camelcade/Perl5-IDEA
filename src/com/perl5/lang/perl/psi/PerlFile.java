@@ -48,6 +48,7 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @param element method element
 	 * @return variable type string
 	 */
+	@NotNull
 	String getMethodNamespace(PerlMethod element);
 
 	/**

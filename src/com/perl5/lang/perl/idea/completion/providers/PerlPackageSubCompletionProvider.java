@@ -19,15 +19,14 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.project.Project;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,51 +38,57 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 	protected void addCompletions(
 			@NotNull CompletionParameters parameters,
 			ProcessingContext context,
-			final @NotNull CompletionResultSet result)
+			@NotNull CompletionResultSet result)
 	{
 		PsiElement method = parameters.getPosition().getParent();
 		assert method instanceof PsiPerlMethod;
 
-		PerlNamespaceElement explicitNamespace = ((PsiPerlMethod) method).getNamespaceElement();
+		String explicitNamespace = ((PsiPerlMethod) method).getExplicitPackageName();
+		String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
+		String newPrefixMathcer = (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.PACKAGE_SEPARATOR) + currentPrefixMatcher);
+		result = result.withPrefixMatcher(newPrefixMathcer);
 
-		boolean isObjectMethod = ((PsiPerlMethod) method).isObjectMethod();
-
-		String nameFilter = null;
-		final Project project = parameters.getPosition().getProject();
-
-		if (explicitNamespace != null)
+		if (!((PsiPerlMethod) method).isObjectMethod())
 		{
-			nameFilter = explicitNamespace.getCanonicalName() + PerlPackageUtil.PACKAGE_SEPARATOR;
+			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNamesWithAutocompletion(parameters.getPosition(), result);
+			PerlPackageCompletionUtil.fillWithAllPackageNamesWithAutocompletion(parameters.getPosition(), result);
 		}
 		else
 		{
-			result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, PerlPackageUtil.SUPER_PACKAGE + PerlPackageUtil.PACKAGE_SEPARATOR));
-		}
-
-		final String finalNameFilter = nameFilter;
-
-		if (!isObjectMethod)
-		{
-			// fixme not dry with PerlPackageNamesCompletionProvider
-			PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+			if (!StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE_FULL, newPrefixMathcer))
 			{
-				@Override
-				public boolean process(String s)
-				{
-					if (super.process(s))
-					{
-						if (finalNameFilter == null)
-						{
-							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
-						}
-						else if (s.startsWith(finalNameFilter))
-						{
-							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
-						}
-					}
-					return true;
-				}
-			});
+				LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(method.getProject(), PerlPackageUtil.SUPER_PACKAGE_FULL);
+				newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
+				result.addElement(newElement);
+			}
 		}
+
+
+//
+//		final String finalNameFilter = nameFilter;
+//
+//		if (!isObjectMethod)
+//		{
+//			// fixme not dry with PerlPackageNamesCompletionProvider
+//			PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+//			{
+//				@Override
+//				public boolean process(String s)
+//				{
+//					if (super.process(s))
+//					{
+//						if (finalNameFilter == null)
+//						{
+//							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
+//						}
+//						else if (s.startsWith(finalNameFilter))
+//						{
+//							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
+//						}
+//					}
+//					return true;
+//				}
+//			});
+//		}
 	}
 }

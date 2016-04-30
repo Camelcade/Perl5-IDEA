@@ -29,6 +29,7 @@ import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -43,7 +44,7 @@ import java.util.Map;
  */
 public class PerlPackageCompletionUtil
 {
-	public static final InsertHandler COMPLETION_REOPENER = new CompletionOpener();
+	public static final InsertHandler<LookupElement> COMPLETION_REOPENER = new CompletionOpener();
 
 	/**
 	 * Returns package lookup element by package name
@@ -94,7 +95,26 @@ public class PerlPackageCompletionUtil
 			public boolean process(String s)
 			{
 				if (super.process(s))
-					result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
+					result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+				return true;
+			}
+		});
+	}
+
+	public static void fillWithAllPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+		final String prefix = result.getPrefixMatcher().getPrefix();
+
+		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		{
+			@Override
+			public boolean process(String packageName)
+			{
+				if (super.process(packageName))
+				{
+					addExpandablePackageElement(project, result, packageName, prefix);
+				}
 				return true;
 			}
 		});
@@ -108,6 +128,36 @@ public class PerlPackageCompletionUtil
 			result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
 		}
 	}
+
+	public static void fillWithAllBuiltInPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	{
+		final Project project = element.getProject();
+		final String prefix = result.getPrefixMatcher().getPrefix();
+
+		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
+		{
+			addExpandablePackageElement(project, result, packageName, prefix);
+		}
+	}
+
+	protected static void addExpandablePackageElement(Project project, CompletionResultSet result, String packageName, String prefix)
+	{
+		String name = packageName + PerlPackageUtil.PACKAGE_SEPARATOR;
+		if (!StringUtil.equals(prefix, name))
+		{
+			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+			newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
+			result.addElement(newElement);
+		}
+		name = packageName + PerlPackageUtil.PACKAGE_DEREFERENCE;
+		if (!StringUtil.equals(prefix, name))
+		{
+			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+			newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
+			result.addElement(newElement);
+		}
+	}
+
 
 	public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{

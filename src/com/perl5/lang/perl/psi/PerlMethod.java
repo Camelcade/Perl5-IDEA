@@ -31,20 +31,20 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 	 *
 	 * @return checking result
 	 */
-	public boolean hasExplicitNamespace();
+	boolean hasExplicitNamespace();
 
 	/**
 	 * Check if this is an object method invocation
 	 *
 	 * @return result
 	 */
-	public boolean isObjectMethod();
+	boolean isObjectMethod();
 
 	/**
 	 * Checking for package name with traversing
 	 *
 	 * @return boolean
 	 */
-	public String getContextPackageNameHeavy();
+	String getContextPackageNameHeavy();
 
 }

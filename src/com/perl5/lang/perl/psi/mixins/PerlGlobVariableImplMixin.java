@@ -48,6 +48,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		super(stub, nodeType);
 	}
 
+	@NotNull
 	@Override
 	public String getPackageName()
 	{
@@ -77,6 +78,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		return null;
 	}
 
+	@NotNull
 	@Override
 	public String getContextPackageName()
 	{
@@ -140,6 +142,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		return this;
 	}
 
+	@NotNull
 	@Override
 	public String getCanonicalName()
 	{

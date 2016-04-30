@@ -53,15 +53,8 @@ public class PerlSubCompletionUtil
 					.withInsertHandler(SUB_SELECTION_HANDLER)
 					.withTailText(argsString);
 		}
-		return newElement;
-	}
 
-	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
-	{
-		return getSubDefinitionLookupElement(
-				subDefinition.getSubName(),
-				subDefinition.getSubArgumentsListAsString(),
-				subDefinition);
+		return newElement;
 	}
 
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration)
@@ -89,6 +82,14 @@ public class PerlSubCompletionUtil
 				.create(constant.getName())
 				.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
 
+	}
+
+	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
+	{
+		return getSubDefinitionLookupElement(
+				subDefinition.getSubName(),
+				subDefinition.getSubArgumentsListAsString(),
+				subDefinition);
 	}
 
 	// fixme dont know why modifying of definition lookup element doesn't work

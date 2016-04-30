@@ -203,6 +203,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return getVariableType(element);
 	}
 
+	@NotNull
 	@Override
 	public String getMethodNamespace(PerlMethod element)
 	{
@@ -210,7 +211,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		{
 //			System.err.println("Got cached type for method " + element.getText() + " at " + element.getTextOffset());
 			String type = METHODS_NAMESPACES_CACHE.get(element);
-			return type.isEmpty() ? null : type;
+			return type.isEmpty() ? PerlPackageUtil.MAIN_PACKAGE : type;
 		}
 
 		String type = element.getContextPackageNameHeavy();

@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
@@ -28,27 +30,31 @@ public interface PerlPackageMember extends PsiElement
 	 *
 	 * @return package name or null if n/a
 	 */
-	public String getExplicitPackageName();
+	@Nullable
+	String getExplicitPackageName();
 
 	/**
 	 * Trying to detect package name by traversing parents
 	 *
 	 * @return package name or main if not found
 	 */
-	public String getContextPackageName();
+	@NotNull
+	String getContextPackageName();
 
 	/**
 	 * Trying to get the package name from explicit specification or by traversing
 	 *
 	 * @return package name for current element
 	 */
-	public String getPackageName();
+	@NotNull
+	String getPackageName();
 
 	/**
 	 * Returns fullname package::element
 	 *
 	 * @return name
 	 */
-	public String getCanonicalName();
+	@NotNull
+	String getCanonicalName();
 
 }

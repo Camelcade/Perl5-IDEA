@@ -182,18 +182,21 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 		return null;
 	}
 
+	@NotNull
 	@Override
 	public String getContextPackageName()
 	{
 		return PerlPackageUtil.getContextPackageName(getParent());
 	}
 
+	@NotNull
 	@Override
 	public String getPackageName()
 	{
 		return getContextPackageName();
 	}
 
+	@NotNull
 	@Override
 	public String getCanonicalName()
 	{

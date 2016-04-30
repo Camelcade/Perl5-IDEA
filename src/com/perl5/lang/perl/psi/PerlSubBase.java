@@ -40,14 +40,6 @@ public interface PerlSubBase<Stub extends StubElement> extends
 		PerlLabelScope
 {
 	/**
-	 * Returns package name for current function
-	 *
-	 * @return canonical package name from declaration or context
-	 */
-	@NotNull
-	String getPackageName();
-
-	/**
 	 * Returns function name for current function definition
 	 *
 	 * @return function name or null

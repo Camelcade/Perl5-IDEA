@@ -58,6 +58,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
 	}
 
+	@NotNull
 	@Override
 	public String getPackageName()
 	{
@@ -69,6 +70,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		return namespace;
 	}
 
+	@NotNull
 	@Override
 	public String getContextPackageName()
 	{
@@ -326,6 +328,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		return super.getName();
 	}
 
+	@NotNull
 	@Override
 	public String getCanonicalName()
 	{

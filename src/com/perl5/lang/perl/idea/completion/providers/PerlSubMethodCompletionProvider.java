@@ -42,10 +42,6 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 		assert method instanceof PsiPerlMethod;
 
 		String packageName = ((PsiPerlMethod) method).getPackageName();
-
-		if (packageName == null)
-			return;
-
 		PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
 		boolean isSuper = namespaceElement != null && namespaceElement.isSUPER();
 		if (isSuper)

@@ -90,6 +90,7 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 		return this;
 	}
 
+	@NotNull
 	@Override
 	public String getContextPackageName()
 	{
@@ -103,6 +104,7 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 		return null;
 	}
 
+	@NotNull
 	@Override
 	public String getPackageName()
 	{
@@ -119,6 +121,7 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 		return namespace;
 	}
 
+	@NotNull
 	@Override
 	public String getCanonicalName()
 	{
