@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -25,7 +26,12 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.jetbrains.annotations.NotNull;
@@ -73,25 +79,51 @@ public class PodSubReference extends PodReferenceBase<PodIdentifierImpl>
 			PsiElement element = podSubReference.getElement();
 			if (element != null)
 			{
+				final Project project = element.getProject();
 				String subName = element.getText();
 				if (StringUtil.isNotEmpty(subName))
 				{
-					final PsiFile perlFile = PodFileUtil.getTargetPerlFile(element.getContainingFile());
+					final PsiFile containingFile = element.getContainingFile();
+					String packageName = PodFileUtil.getPackageName(containingFile);
 
-					if (perlFile != null)
+					List<ResolveResult> results = new ArrayList<ResolveResult>();
+
+					if (StringUtil.isNotEmpty(packageName))
 					{
-						List<ResolveResult> results = new ArrayList<ResolveResult>();
+						String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+						for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName))
+						{
+							results.add(new PsiElementResolveResult(target));
+						}
+						for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
+						{
+							results.add(new PsiElementResolveResult(target));
+						}
+						for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+						{
+							results.add(new PsiElementResolveResult(target));
+						}
+						for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
+						{
+							results.add(new PsiElementResolveResult(target));
+						}
+					}
+
+					if (results.isEmpty())
+					{
+						final PsiFile perlFile = containingFile.getViewProvider().getStubBindingRoot();
+
 						for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class))
 						{
 							String subBaseName = subBase.getName();
 							if (subBaseName != null && StringUtil.equals(subBaseName, subName))
 							{
 								results.add(new PsiElementResolveResult(subBase));
-
 							}
 						}
-						return results.toArray(new ResolveResult[results.size()]);
 					}
+
+					return results.toArray(new ResolveResult[results.size()]);
 				}
 			}
 

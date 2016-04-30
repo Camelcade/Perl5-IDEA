@@ -43,66 +43,44 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 		String packageName = ((PsiPerlMethod) method).getPackageName();
 		assert packageName != null;
 
-		String subPrefix = resultSet.getPrefixMatcher().getPrefix();
-
-//				System.err.println("Invoked with package: " + packageName + " and prefix " + subPrefix);
-
 		Project project = parameters.getPosition().getProject();
-
-//		String packageWithPrefix = packageName;
-//		if (!subPrefix.isEmpty())
-//			packageWithPrefix = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subPrefix;
 
 		// defined subs
 		for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+		{
 			if (subDefinition.isStatic())
+			{
 				resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
-
-/*
-		// defined subs with prefix
-		if (!subPrefix.isEmpty())
-			for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageWithPrefix))
-				resultSet.addElement(PerlSubCompletionUtil.getIncompleteSubDefinitionLookupElement(subDefinition, packageWithPrefix));
-*/
+			}
+		}
 
 		// declared subs
 		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
+		{
 			if (subDeclaration.isStatic())
+			{
 				resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
-
-/*
-		// declared subs with prefix
-		if (!subPrefix.isEmpty())
-			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageWithPrefix))
-				resultSet.addElement(PerlSubCompletionUtil.getIncompleteSubDeclarationLookupElement(subDeclaration, packageWithPrefix));
-*/
+			}
+		}
 
 		// Globs
 		for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
+		{
 			if (globVariable.getName() != null)
+			{
 				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
-
-/*
-		// Globs with prefix
-		if (!subPrefix.isEmpty())
-			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageWithPrefix))
-				if (globVariable.getName() != null)
-					resultSet.addElement(PerlSubCompletionUtil.getIncompleteGlobLookupElement(globVariable, packageWithPrefix));
-*/
+			}
+		}
 
 		// Constants
 		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
+		{
 			if (stringConstant.getName() != null)
+			{
 				resultSet.addElement(PerlSubCompletionUtil.getConstantLookupElement(stringConstant));
+			}
+		}
 
-
-/*
-		// Constatns with prefix
-		if (!subPrefix.isEmpty())
-			for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageWithPrefix))
-				if (stringConstant.getName() != null)
-					resultSet.addElement(PerlSubCompletionUtil.getIncompleteConstantLookupElement(stringConstant, packageWithPrefix));
-*/
 
 	}
 }
