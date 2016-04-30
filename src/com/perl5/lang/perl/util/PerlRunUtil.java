@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -31,6 +32,9 @@ import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by hurricup on 26.04.2016.
@@ -100,4 +104,35 @@ public class PerlRunUtil
 
 		return perlSdkPath;
 	}
+
+	@Nullable
+	public static String getPathFromPerl()
+	{
+		List<String> perlPathLines = getDataFromProgram("perl", "-le", "print $^X");
+
+		if (perlPathLines.size() == 1)
+		{
+			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
+			if (perlIndex > 0)
+				return perlPathLines.get(0).substring(0, perlIndex);
+
+		}
+		return null;
+	}
+
+	@NotNull
+	public static List<String> getDataFromProgram(String... command)
+	{
+		try
+		{
+			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines();
+
+		} catch (Exception e)
+		{
+//			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
+			return Collections.emptyList();
+		}
+	}
+
+
 }

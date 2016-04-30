@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>Implemented unconfigured Perl5 interpreter warning for non-IDEA ides. Also, default path is now fetched from perl itself</li>
       <li>Added B::Deparse options settings</li>
       <li>Package name to file resolution is now case sensitive even on Windows systems</li>
       <li>Improved package completion on invocation statement</li>
@@ -133,6 +134,9 @@
 
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
+
+        <editorNotificationProvider
+                implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
 

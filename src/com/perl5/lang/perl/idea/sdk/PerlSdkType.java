@@ -1,13 +1,12 @@
 package com.perl5.lang.perl.idea.sdk;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,7 +75,7 @@ public class PerlSdkType extends SdkType
 		List<String> perlLibPaths = new ArrayList<String>();
 		if (executablePath != null)
 		{
-			for (String path : getDataFromProgram(
+			for (String path : PerlRunUtil.getDataFromProgram(
 					executablePath,
 					"-le",
 					"print for @INC"
@@ -106,7 +104,7 @@ public class PerlSdkType extends SdkType
 	@Override
 	public String suggestHomePath()
 	{
-		String perlPath = getPathFromPerl();
+		String perlPath = PerlRunUtil.getPathFromPerl();
 
 		if (perlPath != null)
 			return perlPath;
@@ -173,7 +171,7 @@ public class PerlSdkType extends SdkType
 
 	public String getPerlVersionString(@NotNull String sdkHomePath)
 	{
-		List<String> versionLines = getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
+		List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
 
 		if (versionLines.size() > 0)
 		{
@@ -188,34 +186,6 @@ public class PerlSdkType extends SdkType
 		return "missing executable";
 	}
 
-
-	public String getPathFromPerl()
-	{
-		List<String> perlPathLines = getDataFromProgram("perl", "-le", "print $^X");
-
-		if (perlPathLines.size() == 1)
-		{
-			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
-			if (perlIndex > 0)
-				return perlPathLines.get(0).substring(0, perlIndex);
-
-		}
-		return null;
-	}
-
-
-	public List<String> getDataFromProgram(String... command)
-	{
-		try
-		{
-			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines();
-
-		} catch (Exception e)
-		{
-//			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
-			return Collections.emptyList();
-		}
-	}
 
 
 }

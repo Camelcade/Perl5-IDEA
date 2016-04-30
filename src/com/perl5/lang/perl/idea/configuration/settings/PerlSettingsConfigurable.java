@@ -25,9 +25,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
@@ -39,6 +42,7 @@ import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -156,7 +160,42 @@ public class PerlSettingsConfigurable implements Configurable
 
 	protected void createMicroIdeComponents(FormBuilder builder)
 	{
-		perlPathInputField = new TextFieldWithBrowseButton();
+		perlPathInputField = new TextFieldWithBrowseButton()
+		{
+
+			@Override
+			public void addBrowseFolderListener(@Nullable String title, @Nullable String description, @Nullable Project project, FileChooserDescriptor fileChooserDescriptor, TextComponentAccessor<JTextField> accessor, boolean autoRemoveOnHide)
+			{
+				addBrowseFolderListener(project, new BrowseFolderActionListener<JTextField>(title, description, this, project, fileChooserDescriptor, accessor)
+				{
+					@Nullable
+					@Override
+					protected VirtualFile getInitialFile()
+					{
+						VirtualFile virtualFile = super.getInitialFile();
+						if (virtualFile == null)
+						{
+							String directoryName = PerlRunUtil.getPathFromPerl();
+							if (StringUtil.isNotEmpty(directoryName))
+							{
+								directoryName = FileUtil.toSystemIndependentName(directoryName);
+								VirtualFile path = LocalFileSystem.getInstance().findFileByPath(expandPath(directoryName));
+								while (path == null && directoryName.length() > 0)
+								{
+									int pos = directoryName.lastIndexOf('/');
+									if (pos <= 0) break;
+									directoryName = directoryName.substring(0, pos);
+									path = LocalFileSystem.getInstance().findFileByPath(directoryName);
+								}
+								return path;
+							}
+						}
+						return virtualFile;
+					}
+				}, autoRemoveOnHide);
+			}
+		};
+
 		perlPathInputField.getTextField().setEditable(false);
 
 		FileChooserDescriptor descriptor = new FileChooserDescriptor(false, true, false, false, false, false)
@@ -176,6 +215,7 @@ public class PerlSettingsConfigurable implements Configurable
 				null, // project
 				descriptor
 		);
+
 
 		builder.addLabeledComponent("Perl5 interpreter path: ", perlPathInputField, 1);
 	}
