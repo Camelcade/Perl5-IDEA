@@ -1,0 +1,6 @@
+sub te<caret>st3
+{
+    my $var = shift;
+    shift;
+    my $othervar = @_;
+}

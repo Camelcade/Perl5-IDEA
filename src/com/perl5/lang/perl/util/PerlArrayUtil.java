@@ -17,15 +17,20 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
+import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -114,4 +119,36 @@ public class PerlArrayUtil implements PerlElementTypes
 		return collector.getResult();
 	}
 
+	/**
+	 * Traversing PsiElement for composite elements, expanding lists and collecting all elements to the plain one: ($a, $b, ($c, $d)) -> $a, $b, $c, $d;
+	 *
+	 * @param rootElement top-level container
+	 * @param result      resulting array to fill
+	 * @return passed or new List of found PsiElements
+	 */
+	public static List<PsiElement> getElementsAsPlainList(PsiElement rootElement, @Nullable List<PsiElement> result)
+	{
+		if (result == null)
+		{
+			result = new ArrayList<PsiElement>();
+		}
+
+		if (rootElement == null)
+		{
+			return result;
+		}
+
+		if (rootElement instanceof PsiPerlParenthesisedExpr || rootElement instanceof PsiPerlCommaSequenceExpr)
+		{
+			for (PsiElement childElement : rootElement.getChildren())
+			{
+				getElementsAsPlainList(childElement, result);
+			}
+		}
+		else if (rootElement.getNode() instanceof CompositeElement)
+		{
+			result.add(rootElement);
+		}
+		return result;
+	}
 }

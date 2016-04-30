@@ -1,0 +1,4 @@
+sub t<caret>est5
+{
+    my ($var, undef, $othervar) = (shift, @_);
+}

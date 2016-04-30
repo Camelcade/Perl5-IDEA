@@ -39,6 +39,7 @@
       <li>Improved package completion on invocation statement</li>
       <li>Implemented methods resolution with stringified packages, like <code>'Foo::Bar'->method</code></li>
       <li>Removed sort and sub from autocompletion, added respective live templates</li>
+      <li>Improved parameter variables extraction to handle multi-shifts and @_ elements</li>
       </ul>
      </p>
 

@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlFileElementType extends IStubFileElementType
 {
-	private static final int VERSION = 5;
+	private static final int VERSION = 1;
 
 	public PerlFileElementType(String debugName, Language language)
 	{

@@ -225,25 +225,32 @@ public interface PerlElementPatterns extends PerlElementTypes
 	);
 
 	// pattern for shift;
-	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> TAILING_SHIFT_PATTERN =
+	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> SHIFT_PATTERN =
 			psiElement(PsiPerlNamedUnaryExpr.class).withFirstChild(
 					psiElement(PsiPerlMethod.class).withText("shift")
-			).beforeLeaf(psiElement(SEMICOLON));
+			);
+
+	PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN = psiElement(PsiPerlArrayVariable.class).withText("@_");
+	PsiElementPattern.Capture<PsiPerlScalarArrayElement> ALL_ARGUMENTS_ELEMENT_PATTERN =
+			psiElement(PsiPerlScalarArrayElement.class)
+					.withFirstChild(psiElement(PsiPerlScalarVariable.class).withText("$_"));
+
+	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> TAILING_SHIFT_PATTERN =
+			SHIFT_PATTERN.beforeLeaf(psiElement(SEMICOLON));
 
 
 	PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT_PATTERN =
 			psiElement(PsiPerlStatement.class).withFirstChild(TAILING_SHIFT_PATTERN);
 
-	PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN = psiElement(PsiPerlArrayVariable.class).withText("@_");
 
-	PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_UNPACKING_PATTERN =
+	PsiElementPattern.Capture<PsiPerlStatement> DECLARATION_ASSIGNING_PATTERN =
 			psiElement(PsiPerlStatement.class).withFirstChild(
-					psiElement(PsiPerlAssignExpr.class).withFirstChild(
+					psiElement(PerlAssignExpression.class).withFirstChild(
 							psiElement(PerlVariableDeclaration.class)
-					).andOr(
+					)/*.andOr(
 							psiElement().withLastChild(TAILING_SHIFT_PATTERN),
 							psiElement().withLastChild(ALL_ARGUMENTS_PATTERN)
-					)
+					)*/
 			);
 
 	PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_LAST_UNPACKING_PATTERN =

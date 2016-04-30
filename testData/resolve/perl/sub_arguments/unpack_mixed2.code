@@ -1,0 +1,5 @@
+sub te<caret>st4
+{
+    my $var = shift;
+    my (undef, $othervar) = @_;
+}

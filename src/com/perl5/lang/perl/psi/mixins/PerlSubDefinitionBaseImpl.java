@@ -24,12 +24,14 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -106,67 +108,28 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	@NotNull
 	protected List<PerlSubArgument> getPerlSubArgumentsFromBody()
 	{
-		List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>();
-
+		PerlSubArgumentsExtractor extractor = new PerlSubArgumentsExtractor();
 		PsiPerlBlock subBlock = getBlock();
 
 		if (subBlock != null && subBlock.isValid())
 		{
 			for (PsiElement statement : subBlock.getChildren())
 			{
-				if (EMPTY_SHIFT_STATEMENT_PATTERN.accepts(statement))
+				if (statement instanceof PsiPerlStatement)
 				{
-					arguments.add(PerlSubArgument.getEmptyArgument());
-				}
-				else if (ARGUMENTS_UNPACKING_PATTERN.accepts(statement))
-				{
-					PerlVariableDeclaration variableDeclaration = PsiTreeUtil.findChildOfType(statement, PerlVariableDeclaration.class);
-					if (variableDeclaration != null)
+					if (!extractor.process((PsiPerlStatement) statement))
 					{
-						String variableClass = variableDeclaration.getDeclarationType();
-						if (variableClass == null)
-							variableClass = "";
-
-						PsiElement currentElement = variableDeclaration.getFirstChild();
-						while (currentElement != null)
-						{
-							if (currentElement instanceof PerlVariableDeclarationWrapper)
-							{
-								PerlVariable variable = ((PerlVariableDeclarationWrapper) currentElement).getVariable();
-								if (variable != null)
-								{
-									arguments.add(new PerlSubArgument(
-											variable.getActualType(),
-											variable.getName(),
-											variableClass,
-											false)
-									);
-								}
-								else
-								{
-									arguments.add(PerlSubArgument.getEmptyArgument());
-								}
-							}
-							else if (currentElement.getNode().getElementType() == RESERVED_UNDEF)
-							{
-								arguments.add(PerlSubArgument.getEmptyArgument());
-							}
-							currentElement = currentElement.getNextSibling();
-						}
-					}
-
-					if (ARGUMENTS_LAST_UNPACKING_PATTERN.accepts(statement))
 						break;
+					}
 				}
 				else
 				{
-					// unknown statement
 					break;
 				}
 			}
 		}
 
-		return arguments;
+		return extractor.getArguments();
 	}
 
 	@Override
@@ -242,4 +205,116 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 				place
 		);
 	}
+
+	protected static class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>
+	{
+		private List<PerlSubArgument> myArguments = new ArrayList<PerlSubArgument>();
+
+		@Override
+		public boolean process(PsiPerlStatement statement)
+		{
+			if (EMPTY_SHIFT_STATEMENT_PATTERN.accepts(statement))
+			{
+				myArguments.add(PerlSubArgument.getEmptyArgument());
+				return true;
+			}
+			else if (DECLARATION_ASSIGNING_PATTERN.accepts(statement))
+			{
+				PerlAssignExpression assignExpression = PsiTreeUtil.getChildOfType(statement, PerlAssignExpression.class);
+
+				if (assignExpression == null)
+					return false;
+
+
+				PsiElement leftSide = assignExpression.getLeftSide();
+				PsiElement rightSide = assignExpression.getRightSide();
+
+				if (rightSide == null)
+					return false;
+
+				PerlVariableDeclaration variableDeclaration = PsiTreeUtil.findChildOfType(leftSide, PerlVariableDeclaration.class, false);
+
+				if (variableDeclaration == null)
+					return false;
+
+				String variableClass = variableDeclaration.getDeclarationType();
+				if (variableClass == null)
+				{
+					variableClass = "";
+				}
+
+				List<PsiElement> rightSideElements = PerlArrayUtil.getElementsAsPlainList(rightSide, null);
+				int sequenceIndex = 0;
+
+				boolean processNextStatement = true;
+				PsiElement run = variableDeclaration.getFirstChild();
+				while (run != null)
+				{
+					PerlSubArgument newArgument = null;
+
+					if (run instanceof PerlVariableDeclarationWrapper)
+					{
+						PerlVariable variable = ((PerlVariableDeclarationWrapper) run).getVariable();
+						if (variable != null)
+						{
+							newArgument = new PerlSubArgument(
+									variable.getActualType(),
+									variable.getName(),
+									variableClass,
+									false
+							);
+						}
+						else
+						{
+							newArgument = PerlSubArgument.getEmptyArgument();
+						}
+					}
+					else if (run.getNode().getElementType() == RESERVED_UNDEF)
+					{
+						newArgument = PerlSubArgument.getEmptyArgument();
+					}
+
+					if (newArgument != null)
+					{
+						// we've found argument of left side
+						if (rightSideElements.size() > sequenceIndex)
+						{
+							PsiElement rightSideElement = rightSideElements.get(sequenceIndex);
+							boolean addArgument = false;
+
+							if (SHIFT_PATTERN.accepts(rightSideElement) ||                    // shift on the left side
+									ALL_ARGUMENTS_ELEMENT_PATTERN.accepts(rightSideElement) // $_[smth] on the left side
+									)
+							{
+								addArgument = true;
+								sequenceIndex++;
+							}
+							else if (ALL_ARGUMENTS_PATTERN.accepts(rightSideElement))    // @_ on the left side
+							{
+								addArgument = true;
+								processNextStatement = false;
+							}
+
+							if (addArgument)
+							{
+								myArguments.add(newArgument);
+							}
+
+						}
+					}
+
+					run = run.getNextSibling();
+				}
+
+				return processNextStatement;
+			}
+			return false;
+		}
+
+		public List<PerlSubArgument> getArguments()
+		{
+			return myArguments;
+		}
+	}
+
 }
