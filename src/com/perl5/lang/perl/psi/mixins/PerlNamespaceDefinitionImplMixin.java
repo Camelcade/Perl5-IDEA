@@ -405,14 +405,22 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			{
 				if (EXPORT_ASSIGN_STATEMENT.accepts(element))
 				{
-					EXPORT.clear();
-					EXPORT.addAll(getRightSideStrings(element.getFirstChild().getLastChild()));
+					PsiElement rightSide = element.getFirstChild().getLastChild();
+					if (rightSide != null)
+					{
+						EXPORT.clear();
+						EXPORT.addAll(getRightSideStrings(rightSide));
+					}
 
 				}
 				else if (EXPORT_OK_ASSIGN_STATEMENT.accepts(element))
 				{
-					EXPORT_OK.clear();
-					EXPORT_OK.addAll(getRightSideStrings(element.getFirstChild().getLastChild()));
+					PsiElement rightSide = element.getFirstChild().getLastChild();
+					if (rightSide != null)
+					{
+						EXPORT_OK.clear();
+						EXPORT_OK.addAll(getRightSideStrings(rightSide));
+					}
 				}
 			}
 
@@ -490,10 +498,14 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 
 					if (variable != null && StringUtil.equals("ISA", variable.getName()))
 					{
-						PerlNamespaceElement namespaceElement = variable.getNamespaceElement();
-						if (namespaceElement == null || StringUtil.equals(namespaceElement.getCanonicalName(), myPackageName))
+						PsiElement rightSide = assignExpr.getLastChild();
+						if (rightSide != null)
 						{
-							runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
+							PerlNamespaceElement namespaceElement = variable.getNamespaceElement();
+							if (namespaceElement == null || StringUtil.equals(namespaceElement.getCanonicalName(), myPackageName))
+							{
+								runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
+							}
 						}
 					}
 				}
