@@ -179,60 +179,67 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 					assert perlLexicalScope != null : "Got error at " + declarationWrapper.getTextOffset() + " in " + declarationWrapper.getContainingFile().getVirtualFile();
 
 					final String[] guessResult = new String[]{null};
-					PerlPsiUtil.processElementsInRange(
-							perlLexicalScope,
-							new TextRange(declarationWrapper.getTextRange().getEndOffset(), getTextRange().getStartOffset()),
-							new PsiElementProcessor<PsiElement>()
-							{
-								@Override
-								public boolean execute(@NotNull PsiElement element)
-								{
-									if (element != PerlVariableImplMixin.this &&
-											element instanceof PsiPerlScalarVariable &&
-											element.getParent() instanceof PsiPerlAssignExpr
-										)
-									{
-										PsiElement variableNameElement = ((PsiPerlScalarVariable) element).getVariableNameElement();
 
-										if( variableNameElement != null &&
-												variableNameElement.getReference() != null &&
-												variableNameElement.getReference().isReferenceTo(declarationWrapper)
+					int startOffset = declarationWrapper.getTextRange().getEndOffset();
+					int endOffset = getTextRange().getStartOffset();
+
+					if (startOffset < endOffset)
+					{
+						PerlPsiUtil.processElementsInRange(
+								perlLexicalScope,
+								new TextRange(startOffset, endOffset),
+								new PsiElementProcessor<PsiElement>()
+								{
+									@Override
+									public boolean execute(@NotNull PsiElement element)
+									{
+										if (element != PerlVariableImplMixin.this &&
+												element instanceof PsiPerlScalarVariable &&
+												element.getParent() instanceof PsiPerlAssignExpr
 												)
 										{
-											// found variable assignment
-											PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) element.getParent();
-											List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+											PsiElement variableNameElement = ((PsiPerlScalarVariable) element).getVariableNameElement();
 
-											if (assignmentElements.size() > 0)
+											if (variableNameElement != null &&
+													variableNameElement.getReference() != null &&
+													variableNameElement.getReference().isReferenceTo(declarationWrapper)
+													)
 											{
-												PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
+												// found variable assignment
+												PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) element.getParent();
+												List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-												if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset())
+												if (assignmentElements.size() > 0)
 												{
-													// source element is on the left side
-													// fixme implement variables assignment support. Need to build kinda visitor with recursion control
-													String returnValue = null;
-													if (lastExpression instanceof PerlMethodContainer)
+													PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
+
+													if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset())
 													{
-														returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
-													}
-													if (lastExpression instanceof PerlDerefExpression)
-													{
-														returnValue = ((PerlDerefExpression) lastExpression).guessType();
-													}
-													if (StringUtil.isNotEmpty(returnValue))
-													{
-														guessResult[0] = returnValue;
-														return false;
+														// source element is on the left side
+														// fixme implement variables assignment support. Need to build kinda visitor with recursion control
+														String returnValue = null;
+														if (lastExpression instanceof PerlMethodContainer)
+														{
+															returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer) lastExpression);
+														}
+														if (lastExpression instanceof PerlDerefExpression)
+														{
+															returnValue = ((PerlDerefExpression) lastExpression).guessType();
+														}
+														if (StringUtil.isNotEmpty(returnValue))
+														{
+															guessResult[0] = returnValue;
+															return false;
+														}
 													}
 												}
 											}
 										}
+										return true;
 									}
-									return true;
 								}
-							}
-					);
+						);
+					}
 
 					if (guessResult[0] != null)
 					{
