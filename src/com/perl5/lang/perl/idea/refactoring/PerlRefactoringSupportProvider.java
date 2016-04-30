@@ -18,8 +18,10 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.search.LocalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -35,11 +37,13 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
 	@Override
 	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
 	{
-		return element.getUseScope() instanceof LocalSearchScope
+		SearchScope useScope = element.getUseScope();
+		return useScope instanceof LocalSearchScope
 				&& element instanceof PsiNameIdentifierOwner
 				&& !(element instanceof PerlRenameUsagesSubstitutor)
 				&& !(((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement)
 				&& element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
+				&& !(((LocalSearchScope) useScope).getScope()[0] instanceof PsiFile)
 				;
 	}
 
