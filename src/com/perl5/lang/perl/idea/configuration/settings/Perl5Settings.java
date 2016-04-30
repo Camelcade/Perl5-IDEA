@@ -51,6 +51,7 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean PERL_CRITIC_ENABLED = false;
 	public boolean PERL_ANNOTATOR_ENABLED = false;
 	public boolean PERL_TRY_CATCH_ENABLED = false;
+	public String PERL_DEPARSE_ARGUMENTS = "";
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;
@@ -88,4 +89,12 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 		return SELF_NAMES_SET.contains(name);
 	}
 
+	public void setDeparseOptions(String optionsString)
+	{
+		while (optionsString.length() > 0 && optionsString.charAt(0) != '-')
+		{
+			optionsString = optionsString.substring(1);
+		}
+		PERL_DEPARSE_ARGUMENTS = optionsString;
+	}
 }

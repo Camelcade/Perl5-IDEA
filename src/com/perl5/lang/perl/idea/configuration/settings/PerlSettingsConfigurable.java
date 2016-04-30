@@ -53,6 +53,7 @@ public class PerlSettingsConfigurable implements Configurable
 	Perl5Settings mySettings;
 
 	TextFieldWithBrowseButton perlPathInputField;
+	JTextField deparseArgumentsTextField;
 
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
@@ -113,7 +114,10 @@ public class PerlSettingsConfigurable implements Configurable
 		builder.addComponent(perlTryCatchCheckBox);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
-		builder.addComponent(perlAnnotatorCheckBox);
+//		builder.addComponent(perlAnnotatorCheckBox);
+
+		deparseArgumentsTextField = new JTextField();
+		builder.addLabeledComponent(new JLabel("Comma-separated B::Deparse options for deparse action"), deparseArgumentsTextField);
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
@@ -186,6 +190,7 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
 				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
 				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
+				!StringUtil.equals(mySettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -205,6 +210,7 @@ public class PerlSettingsConfigurable implements Configurable
 		mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
 		mySettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
 		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
+		mySettings.setDeparseOptions(deparseArgumentsTextField.getText());
 
 		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
 		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
@@ -254,6 +260,7 @@ public class PerlSettingsConfigurable implements Configurable
 		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
 		perlAnnotatorCheckBox.setSelected(mySettings.PERL_ANNOTATOR_ENABLED);
 		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
+		deparseArgumentsTextField.setText(mySettings.PERL_DEPARSE_ARGUMENTS);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -278,5 +285,6 @@ public class PerlSettingsConfigurable implements Configurable
 		perlAnnotatorCheckBox = null;
 		perlCriticCheckBox = null;
 		perlTryCatchCheckBox = null;
+		deparseArgumentsTextField = null;
 	}
 }

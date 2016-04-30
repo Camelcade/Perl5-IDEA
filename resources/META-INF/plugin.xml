@@ -32,17 +32,19 @@
     ]]></description>
 
     <change-notes><![CDATA[
-     <!--<p>Improvements:-->
-      <!--<ul>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Improvements:
+      <ul>
+      <li>Added B::Deparse options settings</li>
+      <li>Package name to file resolution is now case sensitive even on Windows systems</li>
+      <li>Improved package completion on invocation statement</li>
+      <li>Implemented methods resolution with stringified packages, like <code>'Foo::Bar'->method</code></li>
+      </ul>
+     </p>
 
      <p>Fixes:
       <ul>
-      <li>Fixed problem with methods resolution on stringified packages, like <code>'Foo::Bar'->method</code></li>
+      <li>
       <li>Removed sort and sub from autocompletion, added respective live templates</li>
-      <li>Package name to file resolution is now case sensitive even on Windows systems</li>
-      <li>Improved package completion on invocation statement</li>
       <li>Fixed probable NPE on incomplete Exporter arrays assignment</li>
       <li>Fixed sigils highlighting in <code>use vars</code></li>
       <li>Restored program arguments order to pre-1.5 position in Run configuration</li>
