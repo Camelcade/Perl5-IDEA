@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by hurricup on 22.02.2016.
@@ -39,6 +38,11 @@ public class ExporterTest extends NamespaceTestCase
 	public void testExport()
 	{
 		doTest("export.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+	}
+
+	public void testExportVariables()
+	{
+		doTest("variables.pl", "Foo", new String[]{"$MYVAR", "@MYARR", "%MYHASH", "&MYCODE", "SIMPLECODE"}, new String[]{"$myvar", "@myarr", "%myhash", "&mycode", "simplecode"});
 	}
 
 	public void testExportInBegin()

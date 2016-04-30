@@ -1453,9 +1453,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		boolean r = PerlParserImpl.string_sq_parsed(b, l);
 
 		if (r && ((PerlBuilder) b).isReparseSQString())
+		{
 			m.collapse(PARSABLE_STRING_USE_VARS);
+		}
 		else
+		{
 			m.drop();
+		}
 
 		return r;
 	}

@@ -432,12 +432,23 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			List<String> result = new ArrayList<String>();
 			if (rigthSide.getFirstChild() != null)
 			{
+				int lastEnd = -1;
 				for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild()))
 				{
 					String text = psiElement.getText();
 					if (StringUtil.isNotEmpty(text))
 					{
-						result.add(text);
+						int newStart = psiElement.getNode().getStartOffset();
+						if (newStart == lastEnd) // appending
+						{
+							int lastIndex = result.size() - 1;
+							result.add(result.remove(lastIndex) + text);
+						}
+						else
+						{
+							result.add(text);
+						}
+						lastEnd = newStart + text.length();
 					}
 				}
 			}

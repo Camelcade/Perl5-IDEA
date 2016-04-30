@@ -47,6 +47,7 @@
      <p>Fixes:
       <ul>
       <li>
+      <li>Fixed bug with exporting variables and coderefs with sigils</li>
       <li>Fixed inplace renaming for file-level variables</li>
       <li>Fixed parser error when composite operators parsed correctly even with space or comment in it, like = = been treated as ==</li>
       <li>Fixed probable NPE on incomplete Exporter arrays assignment</li>
