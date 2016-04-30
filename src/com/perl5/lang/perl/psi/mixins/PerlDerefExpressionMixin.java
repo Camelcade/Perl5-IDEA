@@ -65,6 +65,10 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 			{
 				return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
 			}
+			else if (currentElement instanceof PerlString)
+			{
+				return ((PerlString) currentElement).getStringContent();
+			}
 			else if (isFirst && currentElement instanceof PerlVariable)
 			{
 				return ((PerlVariable) currentElement).guessVariableType();
