@@ -1,0 +1,321 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.*)('*')
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.*)('*')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlAssignExprImpl(PerlElementType.ASSIGN_EXPR)
+      PsiPerlCompareExprImpl(PerlElementType.COMPARE_EXPR)
+        PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+          PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+          PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+        PsiElement(PerlTokenType.>)('>')
+        PsiErrorElement:<expr> expected, got '='
+          <empty list>
+      PsiElement(PerlTokenType.=)('=')
+      PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlAssignExprImpl(PerlElementType.ASSIGN_EXPR)
+      PsiPerlCompareExprImpl(PerlElementType.COMPARE_EXPR)
+        PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+          PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+          PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+        PsiElement(PerlTokenType.<)('<')
+        PsiErrorElement:<expr> expected, got '='
+          <empty list>
+      PsiElement(PerlTokenType.=)('=')
+      PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '='
+      PsiElement(PerlTokenType.=)('=')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.!)('!')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlPrefixUnaryExprImpl(PerlElementType.PREFIX_UNARY_EXPR)
+      PsiElement(PerlTokenType.~)('~')
+      PsiPerlPrefixUnaryExprImpl(PerlElementType.PREFIX_UNARY_EXPR)
+        PsiElement(PerlTokenType.~)('~')
+        PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+          PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+          PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlAssignExprImpl(PerlElementType.ASSIGN_EXPR)
+      PsiPerlGlobVariableImpl(*)
+        PsiElement(PerlTokenType.SIGIL_GLOB)('*')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('*')
+      PsiElement(PerlTokenType.=)('=')
+      PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+        PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+        PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.+)('+')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.-)('-')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.*)('*')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.| or PerlTokenType.|| expected, got '/'
+      PsiElement(PerlTokenType./)('/')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.%)('%')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '.'
+      PsiElement(PerlTokenType..)('.')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.x)('x')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.&)('&')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiErrorElement:Unexpected token
+    PsiElement(PerlTokenType.!)('!')
+  PsiErrorElement:'=' unexpected
+    PsiElement(PerlTokenType.=)('=')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '^'
+      PsiElement(PerlTokenType.^)('^')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '<<'
+      PsiElement(PerlTokenType.<<)('<<')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '>>'
+      PsiElement(PerlTokenType.>>)('>>')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '&&'
+      PsiElement(PerlTokenType.&&)('&&')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '||'
+      PsiElement(PerlTokenType.||)('||')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('a')
+    PsiErrorElement:<statement modifier>, PerlTokenType.%, PerlTokenType.&&, PerlTokenType.*, PerlTokenType.+, PerlTokenType.,, PerlTokenType.-, PerlTokenType.., PerlTokenType./, PerlTokenType.//, PerlTokenType.<, PerlTokenType.<<, PerlTokenType.<=>, PerlTokenType.=, PerlTokenType.=>, PerlTokenType.>, PerlTokenType.>>, PerlTokenType.LEFT_BRACE, PerlTokenType.LEFT_BRACKET, PerlTokenType.^, PerlTokenType.cmp, PerlTokenType.eq, PerlTokenType.ge, PerlTokenType.gt, PerlTokenType.le, PerlTokenType.lt, PerlTokenType.ne, PerlTokenType.x, PerlTokenType.| or PerlTokenType.|| expected, got '//'
+      PsiElement(PerlTokenType.//)('//')
+    PsiElement(PerlTokenType.=)('=')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
+      PsiElement(PerlTokenType.SIGIL_SCALAR)('$')
+      PsiElement(PerlTokenType.VARIABLE_NAME)('b')
+    PsiElement(PerlTokenType.;)(';')

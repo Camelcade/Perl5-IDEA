@@ -38,13 +38,14 @@
       <li>Package name to file resolution is now case sensitive even on Windows systems</li>
       <li>Improved package completion on invocation statement</li>
       <li>Implemented methods resolution with stringified packages, like <code>'Foo::Bar'->method</code></li>
+      <li>Removed sort and sub from autocompletion, added respective live templates</li>
       </ul>
      </p>
 
      <p>Fixes:
       <ul>
       <li>
-      <li>Removed sort and sub from autocompletion, added respective live templates</li>
+      <li>Fixed parser errror when composite operators parsed correctly even with space or comment in it, like = = been treated as ==</li>
       <li>Fixed probable NPE on incomplete Exporter arrays assignment</li>
       <li>Fixed sigils highlighting in <code>use vars</code></li>
       <li>Restored program arguments order to pre-1.5 position in Run configuration</li>

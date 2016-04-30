@@ -36,6 +36,16 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest("interpolation");
 	}
 
+	public void testCompositeOps()
+	{
+		doTest("composite_ops");
+	}
+
+	public void testCompositeOpsSpaces()
+	{
+		doTest("composite_ops_spaces", false);
+	}
+
 	public void testAnnotations()
 	{
 		doTest("annotation", false);

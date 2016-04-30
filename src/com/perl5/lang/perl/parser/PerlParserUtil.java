@@ -472,16 +472,21 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (sequenceTokenType.length == 0)
 			return false;
 
-		PsiBuilder.Marker m = b.mark();
+		b.getTokenType(); // this advances lexer to the next non-space token
 
-		for (IElementType tokenType : sequenceTokenType)
-			if (b.getTokenType() == tokenType)
-				b.advanceLexer();
-			else
+		for (int i = 0; i < sequenceTokenType.length; i++)
+		{
+			if (b.rawLookup(i) != sequenceTokenType[i])
 			{
-				m.rollbackTo();
 				return false;
 			}
+		}
+
+		PsiBuilder.Marker m = b.mark();
+		for (int i = 0; i < sequenceTokenType.length; i++)
+		{
+			b.advanceLexer();
+		}
 
 		m.collapse(targetTokenType);
 		return true;
