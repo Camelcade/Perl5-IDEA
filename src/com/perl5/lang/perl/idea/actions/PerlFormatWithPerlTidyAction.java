@@ -33,6 +33,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.util.PerlActionUtil;
 
@@ -55,6 +56,27 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 		return file instanceof PerlFile && ((PerlFile) file).isPerlTidyReformattable() && file.isWritable();
 	}
 
+	protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException
+	{
+		String executable;
+		if (SystemInfo.isWindows)
+		{
+			executable = "perltidy.bat";
+		}
+		else if (SystemInfo.isMac)
+		{
+			executable = Perl5Settings.getInstance(project).PERL_TIDY_MAC_PATH;
+			if (StringUtil.isEmpty(executable))
+			{
+				throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
+			}
+		}
+		else
+		{
+			executable = "perltidy";
+		}
+		return new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
+	}
 
 	@Override
 	public void actionPerformed(AnActionEvent event)
@@ -81,10 +103,10 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 			{
 				FileDocumentManager.getInstance().saveDocument(document);
 				byte[] sourceBytes = virtualFile.contentsToByteArray();
-				GeneralCommandLine perltidy = new GeneralCommandLine(SystemInfo.isWindows ? "perltidy.bat" : "perltidy", "-st", "-se").withWorkDirectory(file.getProject().getBasePath());
 
 				try
 				{
+					GeneralCommandLine perltidy = getPerlTidyCommandLine(project);
 					final Process process = perltidy.createProcess();
 					OutputStream outputStream = process.getOutputStream();
 					outputStream.write(sourceBytes);

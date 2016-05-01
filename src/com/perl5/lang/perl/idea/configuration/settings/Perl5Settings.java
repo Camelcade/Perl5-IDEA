@@ -53,6 +53,10 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean PERL_TRY_CATCH_ENABLED = false;
 	public String PERL_DEPARSE_ARGUMENTS = "";
 
+	// mac-specific settings http://depressiverobot.com/2016/02/05/intellij-path.html
+	public String PERL_TIDY_MAC_PATH = "";
+	public String PERL_CRITIC_MAC_PATH = "";
+
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;
 

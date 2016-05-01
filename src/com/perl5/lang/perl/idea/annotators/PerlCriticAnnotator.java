@@ -27,6 +27,7 @@ import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -54,6 +55,29 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 		return file instanceof PerlFile && file.isPhysical() && Perl5Settings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
 	}
 
+	protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException
+	{
+		String executable;
+		if (SystemInfo.isWindows)
+		{
+			executable = "perlcritic.bat";
+		}
+		else if (SystemInfo.isMac)
+		{
+			executable = Perl5Settings.getInstance(project).PERL_CRITIC_MAC_PATH;
+			if (StringUtil.isEmpty(executable))
+			{
+				throw new ExecutionException("Path to PerlCritic executable must be configured in perl settings");
+			}
+		}
+		else
+		{
+			executable = "perlcritic";
+		}
+		return new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
+	}
+
+
 	@Nullable
 	@Override
 	public List<PerlCriticErrorDescriptor> doAnnotate(PerlFile sourcePsiFile)
@@ -68,7 +92,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 		try
 		{
-			GeneralCommandLine perlcritic = new GeneralCommandLine(SystemInfo.isWindows ? "perlcritic.bat" : "env perlcritic").withWorkDirectory(sourcePsiFile.getProject().getBasePath());
+			GeneralCommandLine perlcritic = getPerlCriticExecutable(sourcePsiFile.getProject());
 			final Process process = perlcritic.createProcess();
 
 			OutputStream outputStream = process.getOutputStream();
@@ -105,6 +129,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 					"<ul style=\"padding-left:10px;margin-left:0px;\">" +
 							"<li>Make sure that Perl::Critic module is installed</li>" +
 							"<li>perlcritic (or perlcritic.bat on Windows) starts successfully from the command line</li>" +
+							"<li>Mac users must explicitly configure PerlCritic executable in Perl5 settings</li>" +
 							"<li>Re-enable it in Perl5 Settings tab</li>" +
 							"</ul>" +
 							"<p>If it doesn't help, don't hesitate to <a href=\"http://github.com/hurricup/Perl5-IDEA/issues\">report a bug</a>.</p>",

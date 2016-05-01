@@ -28,6 +28,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -59,6 +60,9 @@ public class PerlSettingsConfigurable implements Configurable
 {
 	Project myProject;
 	Perl5Settings mySettings;
+
+	TextFieldWithBrowseButton macPerlCriticPathInputField;
+	TextFieldWithBrowseButton macPerlTidyPathInputField;
 
 	TextFieldWithBrowseButton perlPathInputField;
 	JTextField deparseArgumentsTextField;
@@ -118,14 +122,61 @@ public class PerlSettingsConfigurable implements Configurable
 		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
 		builder.addComponent(allowInjectionWithInterpolation);
 
-		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
-		builder.addComponent(perlCriticCheckBox);
-
 		perlTryCatchCheckBox = new JCheckBox("Enable TryCatch sytnax extension");
 		builder.addComponent(perlTryCatchCheckBox);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
 //		builder.addComponent(perlAnnotatorCheckBox);
+
+		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
+		builder.addComponent(perlCriticCheckBox);
+
+		macPerlCriticPathInputField = new TextFieldWithBrowseButton();
+		macPerlTidyPathInputField = new TextFieldWithBrowseButton();
+
+		if (SystemInfo.isMac)
+		{
+			macPerlCriticPathInputField.setEditable(false);
+			FileChooserDescriptor perlCriticDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
+			{
+				@Override
+				public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
+				{
+					if (!super.isFileVisible(file, showHiddenFiles))
+						return false;
+
+					return file.isDirectory() || StringUtil.equals(file.getName(), "perlcritic");
+				}
+			};
+			macPerlCriticPathInputField.addBrowseFolderListener(
+					"Select file",
+					"Choose a PerlCritic executable",
+					null, // project
+					perlCriticDescriptor
+			);
+			builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), macPerlCriticPathInputField);
+
+			macPerlTidyPathInputField.setEditable(false);
+			FileChooserDescriptor perlTidyDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
+			{
+				@Override
+				public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
+				{
+					if (!super.isFileVisible(file, showHiddenFiles))
+						return false;
+
+					return file.isDirectory() || StringUtil.equals(file.getName(), "perltidy");
+				}
+			};
+
+			macPerlTidyPathInputField.addBrowseFolderListener(
+					"Select file",
+					"Choose a PerlTidy executable",
+					null, // project
+					perlTidyDescriptor
+			);
+			builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), macPerlTidyPathInputField);
+		}
 
 		regeneratePanel = new JPanel(new BorderLayout());
 		regenerateButton = new JButton("Re-generate XSubs declarations");
@@ -251,6 +302,8 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
 				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
 				!StringUtil.equals(mySettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_CRITIC_MAC_PATH, macPerlCriticPathInputField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_TIDY_MAC_PATH, macPerlTidyPathInputField.getText()) ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -274,6 +327,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
 		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
+
+		mySettings.PERL_CRITIC_MAC_PATH = macPerlCriticPathInputField.getText();
+		mySettings.PERL_TIDY_MAC_PATH = macPerlTidyPathInputField.getText();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -322,6 +378,9 @@ public class PerlSettingsConfigurable implements Configurable
 		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
 		deparseArgumentsTextField.setText(mySettings.PERL_DEPARSE_ARGUMENTS);
 
+		macPerlCriticPathInputField.setText(mySettings.PERL_CRITIC_MAC_PATH);
+		macPerlTidyPathInputField.setText(mySettings.PERL_TIDY_MAC_PATH);
+
 		if (!PlatformUtils.isIntelliJ())
 		{
 			resetMicroIdeSettings();
@@ -348,5 +407,8 @@ public class PerlSettingsConfigurable implements Configurable
 		deparseArgumentsTextField = null;
 		regeneratePanel = null;
 		regenerateButton = null;
+
+		macPerlCriticPathInputField = null;
+		macPerlTidyPathInputField = null;
 	}
 }
