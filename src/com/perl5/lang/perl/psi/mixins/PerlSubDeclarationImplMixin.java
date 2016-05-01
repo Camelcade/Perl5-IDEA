@@ -18,11 +18,13 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
+import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +49,9 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSu
 	@Override
 	public Icon getIcon(int flags)
 	{
-		return PerlIcons.SUB_DECLARATION_GUTTER_ICON;
+		return isXSub()
+				? PerlIcons.XSUB_GUTTER_ICON
+				: PerlIcons.SUB_DECLARATION_GUTTER_ICON;
 	}
 
 	@Override
@@ -72,5 +76,11 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSu
 	public boolean isStatic()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean isXSub()
+	{
+		return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
 	}
 }

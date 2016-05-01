@@ -41,4 +41,10 @@
             <option name="FOREGROUND" value="ffc66d"/>
         </value>
     </option>
+    <option name="PERL_XSUB">
+        <value>
+            <option name="FOREGROUND" value="ffc66d"/>
+            <option name="FONT_TYPE" value="2"/>
+        </value>
+    </option>
 </list>

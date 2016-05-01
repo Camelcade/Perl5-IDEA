@@ -68,7 +68,12 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 */
 	boolean isStatic();
 
-
+	/**
+	 * Checks if current declaration/definition is XSub
+	 *
+	 * @return true if sub located in deparsed file
+	 */
+	boolean isXSub();
 
 	/**
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object

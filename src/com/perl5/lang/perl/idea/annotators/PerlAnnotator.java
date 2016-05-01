@@ -36,9 +36,13 @@ public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isBuiltIn, boolean isDeprecated)
 	{
 		if (isBuiltIn)
+		{
 			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.BOLD);
+		}
 		if (isDeprecated)
+		{
 			textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
+		}
 		return textAttributes;
 	}
 

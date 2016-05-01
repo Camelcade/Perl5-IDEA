@@ -23,10 +23,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
-import com.perl5.lang.perl.psi.PerlConstant;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolverSimple;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -47,6 +44,8 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 	protected static final int FLAG_DEFINED = 8;
 	protected static final int FLAG_ALIASED = 16;
 	protected static final int FLAG_IMPORTED = 32;    // fixme this is not set anyway
+	protected static final int FLAG_XSUB = 64;
+
 	private static final ResolveCache.PolyVariantResolver<PerlSubReferenceSimple> RESOLVER = new PerlSubReferenceResolverSimple();
 	protected int FLAGS = 0;
 
@@ -92,6 +91,11 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 		return (FLAGS & FLAG_IMPORTED) > 0;
 	}
 
+	public boolean isXSub()
+	{
+		return (FLAGS & FLAG_XSUB) > 0;
+	}
+
 	public void resetFlags()
 	{
 		FLAGS = 0;
@@ -106,6 +110,12 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 	{
 
 		FLAGS |= FLAG_DEFINED;
+	}
+
+	public void setXSub()
+	{
+
+		FLAGS |= FLAG_XSUB;
 	}
 
 	public void setDeclared()
@@ -140,19 +150,34 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 		for (PsiElement element : relatedItems)
 		{
 			if (!isAutoloaded() && element instanceof PerlNamedElement && PerlSubUtil.SUB_AUTOLOAD.equals(((PerlNamedElement) element).getName()))
+			{
 				setAutoloaded();
+			}
 
 			if (!isConstant() && element instanceof PerlConstant)
+			{
 				setConstant();
+			}
 
 			if (!isDeclared() && element instanceof PerlSubDeclaration)
+			{
 				setDeclared();
+			}
 
 			if (!isDefined() && element instanceof PerlSubDefinitionBase)
+			{
 				setDefined();
+			}
+
+			if (!isXSub() && element instanceof PerlSubBase && ((PerlSubBase) element).isXSub())
+			{
+				setXSub();
+			}
 
 			if (!isAliased() && element instanceof PerlGlobVariable)
+			{
 				setAliased();
+			}
 
 			result.add(new PsiElementResolveResult(element));
 		}

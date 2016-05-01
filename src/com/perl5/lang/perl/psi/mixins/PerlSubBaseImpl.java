@@ -206,6 +206,12 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return !isMethod();
 	}
 
+	@Override
+	public boolean isXSub()
+	{
+		return false;
+	}
+
 	@Nullable
 	@Override
 	public Icon getIcon(int flags)

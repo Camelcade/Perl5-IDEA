@@ -55,9 +55,10 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
 
+			new AttributesDescriptor("Sub", PerlSyntaxHighlighter.PERL_SUB),
+			new AttributesDescriptor("Sub, XS", PerlSyntaxHighlighter.PERL_XSUB),
 			new AttributesDescriptor("Sub, autoloaded", PerlSyntaxHighlighter.PERL_AUTOLOAD),
 			new AttributesDescriptor("Sub, constant", PerlSyntaxHighlighter.PERL_CONSTANT),
-			new AttributesDescriptor("Sub", PerlSyntaxHighlighter.PERL_SUB),
 			new AttributesDescriptor("Sub, definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
 			new AttributesDescriptor("Sub, declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
 			new AttributesDescriptor("Attribute", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
@@ -90,7 +91,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.PM_FILE;
+		return PerlIcons.PERL_LANGUAGE_ICON;
 	}
 
 	@NotNull
@@ -121,6 +122,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				"<kw>sub</kw> <sub_definition>sub_definition</sub_definition>(<sub_proto>$$$</sub_proto>){}\n" +
 				"<glob>*sub_declaration</glob> = \\&<sub>sub_definition</sub>;\n" +
 				"<package>LWP::UserAgent</package>-><sub>new</sub>();\n" +
+				"<package>Scalar::Util::</package><xsub>blessed</xsub>();\n" +
 				"<kw>my</kw> <scalar>$scalar</scalar>: <sub_attr>someattr</sub_attr> = <qx>`Executable string`</qx>; # line comment\n" +
 				"<scalar>$scalar</scalar> =~ /<rx>is there something</rx>/;\n" +
 				"<kw>my</kw> <array>@array</array> = (42, <array>@{</array><scalar>$scalar</scalar><array>}</array>, <array>@</array><scalar>$scalar</scalar>, <hash>%</hash><scalar>$scalar</scalar>, <angle><</angle><handle>STDIN</handle><angle>></angle>);\n" +
@@ -159,6 +161,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				, Pair.create("kw", PerlSyntaxHighlighter.PERL_KEYWORD)
 				, Pair.create("label", PerlSyntaxHighlighter.PERL_LABEL)
 				, Pair.create("sub", PerlSyntaxHighlighter.PERL_SUB)
+				, Pair.create("xsub", PerlSyntaxHighlighter.PERL_XSUB)
 				, Pair.create("sub_attr", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE)
 				, Pair.create("sub_proto", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN)
 				, Pair.create("sub_declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION)

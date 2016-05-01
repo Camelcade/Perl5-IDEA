@@ -44,7 +44,7 @@ public class PerlSubCompletionUtil
 	{
 		LookupElementBuilder newElement = LookupElementBuilder
 				.create(subName)
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
+				.withIcon(subDefinition.getIcon(0))
 				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
 
 		if (!argsString.isEmpty())
@@ -61,7 +61,7 @@ public class PerlSubCompletionUtil
 	{
 		return LookupElementBuilder
 				.create(subDeclaration.getSubName())
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
+				.withIcon(subDeclaration.getIcon(0))
 				.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
 				.withInsertHandler(SUB_SELECTION_HANDLER);
 
@@ -71,7 +71,7 @@ public class PerlSubCompletionUtil
 	{
 		return LookupElementBuilder
 				.create(globVariable.getName())
-				.withIcon(PerlIcons.GLOB_GUTTER_ICON)
+				.withIcon(globVariable.getIcon(0))
 				.withInsertHandler(SUB_SELECTION_HANDLER);
 
 	}
@@ -80,7 +80,7 @@ public class PerlSubCompletionUtil
 	{
 		return LookupElementBuilder
 				.create(constant.getName())
-				.withIcon(PerlIcons.CONSTANT_GUTTER_ICON);
+				.withIcon(constant.getIcon(0));
 
 	}
 

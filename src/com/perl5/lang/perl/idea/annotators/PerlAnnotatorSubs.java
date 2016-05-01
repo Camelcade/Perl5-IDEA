@@ -79,16 +79,26 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 						((PerlSubReference) reference).multiResolve(false);
 
 						if (((PerlSubReference) reference).isConstant())
+						{
 							holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+						}
 						else if (((PerlSubReference) reference).isAutoloaded())
+						{
 							holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+						}
+						else if (((PerlSubReference) reference).isXSub())
+						{
+							holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
+						}
 						else
+						{
 							decorateElement(
 									holder.createInfoAnnotation(element, null),
 									PerlSyntaxHighlighter.PERL_SUB,
 									((PerlSubNameElement) element).isBuiltIn(),
 									false
 							);
+						}
 					}
 				}
 			}
