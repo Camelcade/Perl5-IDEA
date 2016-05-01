@@ -838,46 +838,39 @@
     </project-components>
 
     <actions>
-        <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy" text="Re-format with Perl::Tidy">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <add-to-group group-id="CodeMenu" anchor="last"/>
-            <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Copy"/>
-        </action>
-        <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
-                text="Deparse file...">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <add-to-group group-id="CodeMenu" anchor="last"/>
-            <add-to-group group-id="NavbarPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="$Copy"/>
-        </action>
+        <group>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+            <add-to-group group-id="NavbarPopupMenu" anchor="first"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+
+            <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy"
+                    text="Re-format with Perl::Tidy"/>
+            <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
+                    text="Deparse file..."/>
+            <separator/>
+        </group>
+
 
         <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
-        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
-                text="Generate Constructor" description="Generate class constructor">
+        <group>
             <add-to-group group-id="GenerateGroup" anchor="first"/>
-        </action>
-        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
-                text="Generate Getters" description="Generate class getters">
-            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewConstructor"/>
-        </action>
-        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
-                text="Generate Setters" description="Generate class setters">
-            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewGetter"/>
-        </action>
-        <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
-                text="Generate Getters and Setters" description="Generate class getters and setters">
-            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewSetter"/>
-        </action>
-        <action class="com.perl5.lang.perl.idea.generation.PerlOverrideMethodAction" id="Perl5OverrideSub"
-                text="Override/Implement methods" description="Override/Implement methods">
-            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="Perl5NewGetterSetter"/>
-        </action>
+
+            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
+                    text="Generate Constructor" description="Generate class constructor"/>
+            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
+                    text="Generate Getters" description="Generate class getters"/>
+            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
+                    text="Generate Setters" description="Generate class setters"/>
+            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
+                    text="Generate Getters and Setters" description="Generate class getters and setters"/>
+            <action class="com.perl5.lang.perl.idea.generation.PerlOverrideMethodAction" id="Perl5OverrideSub"
+                    text="Override/Implement methods" description="Override/Implement methods"/>
+        </group>
 
     </actions>
 

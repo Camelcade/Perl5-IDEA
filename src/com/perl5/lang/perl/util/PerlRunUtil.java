@@ -52,6 +52,7 @@ public class PerlRunUtil
 	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();
+		commandLine.setPassParentEnvironment(true);
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
 		commandLine.setExePath(FileUtil.toSystemIndependentName(executablePath));
 		for (String libRoot : Perl5Settings.getInstance(project).libRootUrls)
@@ -125,7 +126,9 @@ public class PerlRunUtil
 	{
 		try
 		{
-			return ExecUtil.execAndGetOutput(new GeneralCommandLine(command)).getStdoutLines();
+			GeneralCommandLine commandLine = new GeneralCommandLine(command);
+			commandLine.setPassParentEnvironment(true);
+			return ExecUtil.execAndGetOutput(commandLine).getStdoutLines();
 
 		} catch (Exception e)
 		{

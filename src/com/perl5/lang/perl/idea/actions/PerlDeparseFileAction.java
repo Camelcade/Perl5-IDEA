@@ -95,7 +95,7 @@ public class PerlDeparseFileAction extends PerlActionBase
 					String deparsed = processOutput.getStdout();
 					String error = processOutput.getStderr();
 
-					if (!StringUtil.contains(error, "syntax OK"))
+					if (StringUtil.isNotEmpty(error) && !StringUtil.contains(error, "syntax OK"))
 					{
 						Notifications.Bus.notify(new Notification(
 								PERL_DEPARSE_GROUP,
