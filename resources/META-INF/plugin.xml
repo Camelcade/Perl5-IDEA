@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>Implemented XSubs declarations file generation</li>
       <li>Implemented unconfigured Perl5 interpreter warning for non-IDEA ides. Also, default path is now fetched from perl itself</li>
       <li>Added B::Deparse options settings</li>
       <li>Package name to file resolution is now case sensitive even on Windows systems</li>
@@ -140,6 +141,7 @@
                 implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
 
         <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
+        <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
 
         <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                             serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
@@ -822,6 +824,9 @@
         <!-- Add your project components here -->
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
         </component>
         <component>
             <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>

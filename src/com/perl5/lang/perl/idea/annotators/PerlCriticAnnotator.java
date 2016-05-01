@@ -68,8 +68,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 		try
 		{
-			GeneralCommandLine perlcritic = new GeneralCommandLine(SystemInfo.isWindows ? "perlcritic.bat" : "perlcritic").withWorkDirectory(sourcePsiFile.getProject().getBasePath());
-			perlcritic.setPassParentEnvironment(true);
+			GeneralCommandLine perlcritic = new GeneralCommandLine(SystemInfo.isWindows ? "perlcritic.bat" : "env perlcritic").withWorkDirectory(sourcePsiFile.getProject().getBasePath());
 			final Process process = perlcritic.createProcess();
 
 			OutputStream outputStream = process.getOutputStream();

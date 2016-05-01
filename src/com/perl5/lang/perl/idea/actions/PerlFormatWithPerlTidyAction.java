@@ -82,7 +82,6 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 				FileDocumentManager.getInstance().saveDocument(document);
 				byte[] sourceBytes = virtualFile.contentsToByteArray();
 				GeneralCommandLine perltidy = new GeneralCommandLine(SystemInfo.isWindows ? "perltidy.bat" : "perltidy", "-st", "-se").withWorkDirectory(file.getProject().getBasePath());
-				perltidy.setPassParentEnvironment(true);
 
 				try
 				{

@@ -43,10 +43,14 @@ import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by hurricup on 30.08.2015.
@@ -58,6 +62,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 	TextFieldWithBrowseButton perlPathInputField;
 	JTextField deparseArgumentsTextField;
+
+	JPanel regeneratePanel;
+	JButton regenerateButton;
 
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
@@ -119,6 +126,19 @@ public class PerlSettingsConfigurable implements Configurable
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
 //		builder.addComponent(perlAnnotatorCheckBox);
+
+		regeneratePanel = new JPanel(new BorderLayout());
+		regenerateButton = new JButton("Re-generate XSubs declarations");
+		regenerateButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				PerlXSubsState.getInstance(myProject).reparseXSubs();
+			}
+		});
+		regeneratePanel.add(regenerateButton, BorderLayout.WEST);
+		builder.addComponent(regeneratePanel);
 
 		deparseArgumentsTextField = new JTextField();
 		builder.addLabeledComponent(new JLabel("Comma-separated B::Deparse options for deparse action"), deparseArgumentsTextField);
@@ -326,5 +346,7 @@ public class PerlSettingsConfigurable implements Configurable
 		perlCriticCheckBox = null;
 		perlTryCatchCheckBox = null;
 		deparseArgumentsTextField = null;
+		regeneratePanel = null;
+		regenerateButton = null;
 	}
 }
