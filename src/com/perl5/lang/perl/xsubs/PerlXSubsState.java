@@ -127,14 +127,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 
 	public void rescanFiles()
 	{
-		VirtualFile projectRoot = myProject.getBaseDir();
-		VirtualFile deparsedFile = projectRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
-		if (deparsedFile == null)
-		{
-			isActual = false;
-			return;
-		}
-
+		final int[] actualFiles = new int[]{0};
 		for (VirtualFile classRoot : ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots())
 		{
 			VfsUtil.processFilesRecursively(classRoot, new Processor<VirtualFile>()
@@ -148,10 +141,24 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 						{
 							return isActual = false;
 						}
+						else
+						{
+							actualFiles[0]++;
+						}
 					}
 					return true;
 				}
 			});
+		}
+
+		if (actualFiles[0] > 0)
+		{
+			VirtualFile projectRoot = myProject.getBaseDir();
+			VirtualFile deparsedFile = projectRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
+			if (deparsedFile == null)
+			{
+				isActual = false;
+			}
 		}
 	}
 
