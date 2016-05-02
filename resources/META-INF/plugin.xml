@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>Implemented proper line comment splitting by enter</li>
       <li>Added PerlCritic and PerlTidy executables configuration for Mac users to avoid <a href="http://depressiverobot.com/2016/02/05/intellij-path.html">env problems</a>.</li>
       <li>Implemented XSubs declarations file generation</li>
       <li>Implemented unconfigured Perl5 interpreter warning for non-IDEA ides. Also, default path is now fetched from perl itself</li>

@@ -28,6 +28,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -41,7 +42,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 06.09.2015.
  */
-public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
+public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlElementTypes
 {
 	private final Pattern EMPTY_OPENER_PATTERN = Pattern.compile("<<\\s*(?:\"\"|''|``)");
 
@@ -59,13 +60,13 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 	@Override
 	public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext)
 	{
-		if (file instanceof PerlFileImpl && Perl5CodeInsightSettings.getInstance().HEREDOC_AUTO_INSERTION)
+		if (file instanceof PerlFileImpl)
 		{
 			final CaretModel caretModel = editor.getCaretModel();
 			int offset = caretModel.getOffset();
 			PsiElement currentElement = file.findElementAt(offset);
 
-			if (currentElement == null || currentElement.getParent() instanceof PerlHeredocElementImpl)
+			if (currentElement == null || currentElement.getParent() instanceof PerlHeredocElementImpl && Perl5CodeInsightSettings.getInstance().HEREDOC_AUTO_INSERTION)
 			{
 				LogicalPosition currentPosition = caretModel.getLogicalPosition();
 				final int enterLine = currentPosition.line - 1;
@@ -198,6 +199,22 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate
 					}
 				}
 			}
+			else
+			{
+				if (offset > 1)
+				{
+					currentElement = file.findElementAt(offset - 2);
+					if (currentElement != null && currentElement.getNode().getElementType() == COMMENT_LINE)
+					{
+						Document document = file.getViewProvider().getDocument();
+						if (document != null)
+						{
+							document.insertString(offset, "# ");
+						}
+					}
+				}
+			}
+
 		}
 		return Result.Continue;
 	}
