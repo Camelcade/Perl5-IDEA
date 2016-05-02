@@ -199,45 +199,25 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 					}
 				}
 			}
-			else if (offset > 0 && !(currentElement instanceof PsiWhiteSpace))
+			else if (offset > 0 && !(currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
 			{
-				currentElement = file.findElementAt(offset - 1);
+				Document document = file.getViewProvider().getDocument();
 
-				// some test
-
-				if (currentElement != null)
+				if (document != null)
 				{
-					boolean addComment = false;
-					while (true)
+					int currentLine = document.getLineNumber(offset);
+					if (currentLine > 0)
 					{
-						if (currentElement == null)
-						{
-							break;
-						}
-						else if (currentElement instanceof PsiWhiteSpace)
-						{
-							currentElement = currentElement.getPrevSibling();
-						}
-						else if (currentElement instanceof PsiComment && currentElement.getNode().getElementType() == COMMENT_LINE)
-						{
-							addComment = true;
-							break;
-						}
-						else
-						{
-							break;
-						}
-					}
+						int prevLineOffset = document.getLineEndOffset(currentLine - 1);
+						currentElement = file.findElementAt(prevLineOffset);
 
-					if (addComment)
-					{
-						Document document = file.getViewProvider().getDocument();
-						if (document != null)
+						if (currentElement instanceof PsiWhiteSpace && currentElement.getPrevSibling() instanceof PsiComment)
 						{
 							document.insertString(offset, "# ");
 						}
 					}
 				}
+
 			}
 
 		}
