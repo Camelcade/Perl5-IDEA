@@ -49,6 +49,7 @@ import java.util.*;
 public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 {
 	public static final String SUB_AUTOLOAD = "AUTOLOAD";
+	public static final String SUB_AUTOLOAD_WITH_PREFIX = PerlPackageUtil.PACKAGE_SEPARATOR + SUB_AUTOLOAD;
 
 	/**
 	 * Checks if provided function is built in
@@ -263,6 +264,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
+	@NotNull
 	public static Map<String, Set<String>> getImportedSubs(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlSubImportsCollector('&', new HashMap<String, Set<String>>());

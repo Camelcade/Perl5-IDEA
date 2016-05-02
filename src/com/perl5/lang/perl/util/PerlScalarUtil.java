@@ -103,7 +103,8 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedScalars(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
+	@NotNull
+	public static Map<String, Set<String>> getImportedScalarNames(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlImportsCollector('$', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);

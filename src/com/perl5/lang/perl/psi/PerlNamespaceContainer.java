@@ -20,7 +20,6 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -74,7 +73,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 *
 	 * @return map of imports
 	 */
-	@Nullable
+	@NotNull
 	Map<String, Set<String>> getImportedSubsNames();
 
 	/**
@@ -82,7 +81,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 *
 	 * @return map of imports
 	 */
-	@Nullable
+	@NotNull
 	Map<String, Set<String>> getImportedScalarNames();
 
 	/**
@@ -90,7 +89,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 *
 	 * @return map of imports
 	 */
-	@Nullable
+	@NotNull
 	Map<String, Set<String>> getImportedArrayNames();
 
 	/**
@@ -98,6 +97,6 @@ public interface PerlNamespaceContainer extends PsiElement
 	 *
 	 * @return map of imports
 	 */
-	@Nullable
+	@NotNull
 	Map<String, Set<String>> getImportedHashNames();
 }

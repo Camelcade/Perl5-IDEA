@@ -220,32 +220,32 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return getMethodNamespace(element);
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
 		return PerlSubUtil.getImportedSubs(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedScalarNames()
 	{
-		return PerlScalarUtil.getImportedScalars(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlScalarUtil.getImportedScalarNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedArrayNames()
 	{
-		return PerlArrayUtil.getImportedArrays(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlArrayUtil.getImportedArraysNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedHashNames()
 	{
-		return PerlHashUtil.getImportedHashes(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlHashUtil.getImportedHashesNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@NotNull

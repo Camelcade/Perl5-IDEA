@@ -285,44 +285,44 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	}
 
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedSubsNames()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
 			return PerlSubUtil.getImportedSubs(getProject(), packageName, getContainingFile());
-		return null;
+		return Collections.emptyMap();
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedScalarNames()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlScalarUtil.getImportedScalars(getProject(), packageName, getContainingFile());
-		return null;
+			return PerlScalarUtil.getImportedScalarNames(getProject(), packageName, getContainingFile());
+		return Collections.emptyMap();
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedArrayNames()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlArrayUtil.getImportedArrays(getProject(), packageName, getContainingFile());
-		return null;
+			return PerlArrayUtil.getImportedArraysNames(getProject(), packageName, getContainingFile());
+		return Collections.emptyMap();
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public Map<String, Set<String>> getImportedHashNames()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlHashUtil.getImportedHashes(getProject(), packageName, getContainingFile());
-		return null;
+			return PerlHashUtil.getImportedHashesNames(getProject(), packageName, getContainingFile());
+		return Collections.emptyMap();
 	}
 
 	@Override

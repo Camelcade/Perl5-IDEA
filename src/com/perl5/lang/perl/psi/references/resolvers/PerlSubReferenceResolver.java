@@ -46,17 +46,33 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 	public static void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
 	{
 		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
+		{
 			if (!target.isEquivalentTo(exclusion))
+			{
 				relatedItems.add(target);
+			}
+		}
 		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
+		{
 			if (!target.isEquivalentTo(exclusion))
+			{
 				relatedItems.add(target);
+			}
+		}
 		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
+		{
 			if (!target.isEquivalentTo(exclusion))
+			{
 				relatedItems.add(target);
+			}
+		}
 		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
+		{
 			if (!target.isEquivalentTo(exclusion))
+			{
 				relatedItems.add(target);
+			}
+		}
 	}
 
 	@NotNull
@@ -133,8 +149,8 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 							packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 							project,
 							parent,
-							relatedItems
-							, globalSearchScope
+							relatedItems,
+							globalSearchScope
 					);
 
 					if (expliclitPackageElement == null)
@@ -145,15 +161,33 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 						assert namespaceContainer != null;
 
 						for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
+						{
 							for (String importedSubName : imports.getValue())
+							{
 								if (importedSubName.equals(subName))
+								{
+									int currentSize = relatedItems.size();
 									collectRelatedItems(
 											imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 											project,
 											parent,
-											relatedItems
-											, globalSearchScope
+											relatedItems,
+											globalSearchScope
 									);
+
+									if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
+									{
+										collectRelatedItems(
+												imports.getKey() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
+												project,
+												parent,
+												relatedItems,
+												globalSearchScope
+										);
+									}
+								}
+							}
+						}
 					}
 					else    // check imports to target namespace
 					{
@@ -162,33 +196,39 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 						{
 							// fixme partially not DRY with previous block
 							for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
+							{
 								for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
+								{
 									for (String importedSubName : imports.getValue())
+									{
 										if (importedSubName.equals(subName))
+										{
 											collectRelatedItems(
 													imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
 													project,
 													parent,
-													relatedItems
-													, globalSearchScope
+													relatedItems,
+													globalSearchScope
 											);
+										}
+									}
+								}
+							}
 						}
 					}
 
 					// check for autoload
 					if (relatedItems.size() == 0
 							&& !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-							&& !(
-							parent instanceof PerlSubDeclaration
-									|| parent instanceof PerlSubDefinitionBase
-					))
+							&& !(parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinitionBase)
+							)
 					{
 						collectRelatedItems(
-								packageName + "::AUTOLOAD",
+								packageName + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
 								project,
 								parent,
-								relatedItems
-								, globalSearchScope
+								relatedItems,
+								globalSearchScope
 						);
 					}
 				}

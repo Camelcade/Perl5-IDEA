@@ -112,7 +112,8 @@ public class PerlArrayUtil implements PerlElementTypes
 	 * @param file      PsiFile to search in
 	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedArrays(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	@NotNull
+	public static Map<String, Set<String>> getImportedArraysNames(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlImportsCollector('@', new HashMap<String, Set<String>>());
 		PerlUtil.getImportedNames(project, namespace, file, collector);

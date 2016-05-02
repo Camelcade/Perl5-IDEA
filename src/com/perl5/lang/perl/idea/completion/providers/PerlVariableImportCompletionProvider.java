@@ -70,7 +70,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 		// fixme handle array and hash elements
 		if (perlVariable instanceof PsiPerlScalarVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlScalarUtil.getImportedScalars(project, packageName, originalFile).entrySet())
+			for (Map.Entry<String, Set<String>> imported : PerlScalarUtil.getImportedScalarNames(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
 					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
@@ -86,7 +86,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 					resultSet.addElement(element);
 				}
 		else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlArrayUtil.getImportedArrays(project, packageName, originalFile).entrySet())
+			for (Map.Entry<String, Set<String>> imported : PerlArrayUtil.getImportedArraysNames(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
 					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
@@ -102,7 +102,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 					resultSet.addElement(element);
 				}
 		else if (perlVariable instanceof PsiPerlHashVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlHashUtil.getImportedHashes(project, packageName, originalFile).entrySet())
+			for (Map.Entry<String, Set<String>> imported : PerlHashUtil.getImportedHashesNames(project, packageName, originalFile).entrySet())
 				for (String name : imported.getValue())
 				{
 					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;

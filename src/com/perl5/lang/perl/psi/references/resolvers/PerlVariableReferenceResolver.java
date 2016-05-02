@@ -79,7 +79,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 				// fixme DRY this
 				if (actualType == PerlVariableType.SCALAR)
 				{
-					importsMap = PerlScalarUtil.getImportedScalars(project, packageName, originalFile);
+					importsMap = PerlScalarUtil.getImportedScalarNames(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
@@ -88,7 +88,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 				}
 				else if (actualType == PerlVariableType.ARRAY)
 				{
-					importsMap = PerlArrayUtil.getImportedArrays(project, packageName, originalFile);
+					importsMap = PerlArrayUtil.getImportedArraysNames(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
@@ -97,7 +97,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 				}
 				else if (actualType == PerlVariableType.HASH)
 				{
-					importsMap = PerlHashUtil.getImportedHashes(project, packageName, originalFile);
+					importsMap = PerlHashUtil.getImportedHashesNames(project, packageName, originalFile);
 					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
 						for (String variable : importEntry.getValue())
 							if (variable.equals(variableName))
