@@ -70,7 +70,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 	public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
 	@Transient
 	public static final String PERL_XSUBS_NOTIFICATION_GROUP = "PERL5_XSUBS";
-	public boolean isActual = false;
+	public boolean isActual = true;
 	public Map<String, Long> filesMap = new THashMap<String, Long>();
 	@Transient
 	private Task.Backgroundable parserTask = null;
