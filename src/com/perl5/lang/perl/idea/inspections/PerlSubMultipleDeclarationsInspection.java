@@ -42,7 +42,7 @@ public class PerlSubMultipleDeclarationsInspection extends PerlInspection
 				Project project = o.getProject();
 				String canonicalName = o.getCanonicalName();
 
-				if (canonicalName != null && PerlSubUtil.getSubDeclarations(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
+				if (PerlSubUtil.getSubDeclarations(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
 					registerProblem(holder, o.getNameIdentifier(), "Multiple subs declarations found");
 			}
 		};

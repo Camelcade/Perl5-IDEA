@@ -44,6 +44,7 @@
       <li>Implemented methods resolution with stringified packages, like <code>'Foo::Bar'->method</code></li>
       <li>Removed sort and sub from autocompletion, added respective live templates</li>
       <li>Improved sub parameter variables extraction to handle multi-shifts and @_ elements</li>
+      <li>Typeglobs are not annotated as clashed/duplicated anymore. No sense.</li>
       </ul>
      </p>
 
