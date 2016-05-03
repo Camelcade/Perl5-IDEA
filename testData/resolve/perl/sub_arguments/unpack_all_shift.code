@@ -2,5 +2,5 @@ sub te<caret>st2
 {
     my $var = shift;
     shift;
-    my $othervar = shift;
+    my $othervar = shift @_;
 }

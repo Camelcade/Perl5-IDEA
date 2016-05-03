@@ -282,9 +282,18 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 							PsiElement rightSideElement = rightSideElements.get(sequenceIndex);
 							boolean addArgument = false;
 
-							if (SHIFT_PATTERN.accepts(rightSideElement) ||                    // shift on the left side
-									ALL_ARGUMENTS_ELEMENT_PATTERN.accepts(rightSideElement) // $_[smth] on the left side
-									)
+							if (SHIFT_PATTERN.accepts(rightSideElement)) // shift on the left side
+							{
+								PsiElement firstChild = rightSideElement.getFirstChild();
+								PsiElement lastChild = rightSideElement.getLastChild();
+
+								if (firstChild == lastChild || ALL_ARGUMENTS_PATTERN.accepts(lastChild))
+								{
+									addArgument = true;
+									sequenceIndex++;
+								}
+							}
+							else if (ALL_ARGUMENTS_ELEMENT_PATTERN.accepts(rightSideElement)) // $_[smth] on the left side
 							{
 								addArgument = true;
 								sequenceIndex++;

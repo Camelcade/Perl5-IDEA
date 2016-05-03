@@ -32,6 +32,11 @@ public class PerlArgsExtractionTest extends PerlLightCodeInsightFixtureTestCase
 		return "testData/resolve/perl/sub_arguments";
 	}
 
+	public void testUnpackFake()
+	{
+		doTest("unpack_fake", "");
+	}
+
 	public void testUnpackAll()
 	{
 		doTest("unpack_all", "($var, undef, $othervar)");

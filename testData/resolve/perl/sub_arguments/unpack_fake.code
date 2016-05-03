@@ -1,0 +1,4 @@
+sub te<caret>st2
+{
+    my $var = shift @$a;
+}
