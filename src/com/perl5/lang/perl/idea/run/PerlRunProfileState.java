@@ -99,7 +99,7 @@ public class PerlRunProfileState extends CommandLineState
 		assert homePath != null;
 
 
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile);
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlArguments());
 
 		String programParameters = runProfile.getProgramParameters();
 
@@ -133,4 +133,11 @@ public class PerlRunProfileState extends CommandLineState
 		ProcessTerminatedListener.attach(handler, project);
 		return handler;
 	}
+
+	@NotNull
+	protected String[] getPerlArguments()
+	{
+		return new String[0];
+	}
+
 }

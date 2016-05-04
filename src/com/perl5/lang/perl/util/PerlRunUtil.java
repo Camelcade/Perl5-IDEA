@@ -53,18 +53,18 @@ public class PerlRunUtil
 	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
-		commandLine.setExePath(FileUtil.toSystemIndependentName(executablePath));
+		commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
 		for (String libRoot : Perl5Settings.getInstance(project).libRootUrls)
 		{
 			String includePath = VfsUtil.urlToPath(libRoot);
-			commandLine.addParameter("-I" + FileUtil.toSystemIndependentName(includePath));
+			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
 		}
 
 		commandLine.addParameters(perlParameters);
 
 		if (scriptFile != null)
 		{
-			commandLine.addParameter(scriptFile.getPath());
+			commandLine.addParameter(FileUtil.toSystemDependentName(scriptFile.getPath()));
 		}
 		return commandLine;
 	}

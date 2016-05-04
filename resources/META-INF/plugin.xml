@@ -201,6 +201,7 @@
         <fileTypeFactory implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeFactory"/>
 
         <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
+        <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
         <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
         <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
 
