@@ -105,7 +105,10 @@ public class PerlDebugThread extends Thread
 		{
 			mySession.positionReached(new PerlSuspendContext());
 		}
-		System.err.println("Unhandled process data: " + response);
+		else
+		{
+			System.err.println("Unhandled process data: " + response);
+		}
 	}
 
 	public void sendString(String string)
