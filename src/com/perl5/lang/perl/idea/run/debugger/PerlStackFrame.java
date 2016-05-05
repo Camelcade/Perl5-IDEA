@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ColoredTextContainer;
@@ -47,6 +48,7 @@ public class PerlStackFrame extends XStackFrame
 	public void customizePresentation(@NotNull ColoredTextContainer component)
 	{
 		component.append(myEventStackFrame.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+		component.setIcon(AllIcons.Debugger.StackFrame);
 	}
 
 	@Nullable
