@@ -18,32 +18,38 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 04.05.2016.
  */
 public class PerlExecutionStack extends XExecutionStack
 {
-	PerlStackFrame myPerlStackFrame = new PerlStackFrame();
+	List<PerlStackFrame> myPerlStackFrames = new ArrayList<PerlStackFrame>();
 
-	public PerlExecutionStack()
+	public PerlExecutionStack(PerlDebuggingEventStackFrame[] frames)
 	{
 		super("");
+		for (PerlDebuggingEventStackFrame eventStackFrame : frames)
+		{
+			myPerlStackFrames.add(new PerlStackFrame(eventStackFrame));
+		}
 	}
 
 	@Nullable
 	@Override
 	public XStackFrame getTopFrame()
 	{
-		return myPerlStackFrame;
+		return myPerlStackFrames.get(0);
 	}
 
 	@Override
 	public void computeStackFrames(int firstFrameIndex, XStackFrameContainer container)
 	{
-		container.addStackFrames(Collections.singletonList(myPerlStackFrame), true);
+		container.addStackFrames(myPerlStackFrames, true);
 	}
 }

@@ -16,20 +16,47 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
+import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.XStackFrame;
+import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
 
 /**
  * Created by hurricup on 04.05.2016.
  */
 public class PerlStackFrame extends XStackFrame
 {
+	private final PerlDebuggingEventStackFrame myEventStackFrame;
+	private final VirtualFile myVirtualFile;
+
+	public PerlStackFrame(PerlDebuggingEventStackFrame eventStackFrame)
+	{
+		myEventStackFrame = eventStackFrame;
+		myVirtualFile = VfsUtil.findFileByIoFile(new File(eventStackFrame.getFile()), true);
+	}
 
 	@Override
 	public void customizePresentation(@NotNull ColoredTextContainer component)
 	{
-		component.append("Test", SimpleTextAttributes.REGULAR_ATTRIBUTES);
+		component.append(myEventStackFrame.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+	}
+
+	@Nullable
+	@Override
+	public XSourcePosition getSourcePosition()
+	{
+		if (myVirtualFile != null)
+		{
+			return XSourcePositionImpl.create(myVirtualFile, myEventStackFrame.getLine());
+		}
+		return super.getSourcePosition();
 	}
 }
