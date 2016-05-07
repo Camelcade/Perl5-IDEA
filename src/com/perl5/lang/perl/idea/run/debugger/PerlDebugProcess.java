@@ -19,19 +19,26 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
+import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
+import com.intellij.xdebugger.breakpoints.XBreakpointManager;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.EvaluationMode;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -125,6 +132,22 @@ public class PerlDebugProcess extends XDebugProcess
 	public void stop()
 	{
 		myPerlDebugThread.setStop();
+
+		ApplicationManager.getApplication().runReadAction(
+				new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						XBreakpointManager breakpointManager = XDebuggerManager.getInstance(getSession().getProject()).getBreakpointManager();
+						Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = breakpointManager.getBreakpoints(PerlLineBreakpointType.class);
+						for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
+						{
+							breakpointManager.updateBreakpointPresentation(breakpoint, null, null);
+						}
+					}
+				}
+		);
 	}
 
 	@Override
