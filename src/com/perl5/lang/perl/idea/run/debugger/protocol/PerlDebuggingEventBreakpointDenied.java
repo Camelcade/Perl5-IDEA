@@ -16,30 +16,23 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
+import com.intellij.xdebugger.XDebuggerManager;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 07.05.2016.
  */
-public class PerlDebuggingEventStop implements PerlDebuggingEvent
+public class PerlDebuggingEventBreakpointDenied extends PerlDebuggingEventBreakpointBase
 {
-	private PerlDebuggingStackFrame[] myFrames;
-
-	public void setFrames(PerlDebuggingStackFrame[] frames)
-	{
-		myFrames = frames;
-	}
-
-	public XSuspendContext getSuspendContext()
-	{
-		return new PerlSuspendContext(myFrames);
-	}
-
 	@Override
-	public void doWork(XDebugSession session)
+	protected void processBreakPoint(XLineBreakpoint breakpoint, XDebugSession session)
 	{
-		session.positionReached(getSuspendContext());
+		XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
+				breakpoint,
+				AllIcons.Debugger.Db_invalid_breakpoint,
+				"You can't set a breakpoint here"
+		);
 	}
 }

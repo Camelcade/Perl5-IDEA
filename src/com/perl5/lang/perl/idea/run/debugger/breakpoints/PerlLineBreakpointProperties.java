@@ -14,32 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.debugger.protocol;
+package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 
-import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
+import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 06.05.2016.
  */
-public class PerlDebuggingEventStop implements PerlDebuggingEvent
+public class PerlLineBreakpointProperties extends XBreakpointProperties<PerlLineBreakpointProperties>
 {
-	private PerlDebuggingStackFrame[] myFrames;
-
-	public void setFrames(PerlDebuggingStackFrame[] frames)
+	@Nullable
+	@Override
+	public PerlLineBreakpointProperties getState()
 	{
-		myFrames = frames;
-	}
-
-	public XSuspendContext getSuspendContext()
-	{
-		return new PerlSuspendContext(myFrames);
+		return this;
 	}
 
 	@Override
-	public void doWork(XDebugSession session)
+	public void loadState(PerlLineBreakpointProperties state)
 	{
-		session.positionReached(getSuspendContext());
+		XmlSerializerUtil.copyBean(state, this);
 	}
 }

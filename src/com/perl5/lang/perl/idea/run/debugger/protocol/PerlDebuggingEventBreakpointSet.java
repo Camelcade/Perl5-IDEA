@@ -16,27 +16,23 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.xdebugger.XDebugSession;
+import com.intellij.xdebugger.XDebuggerManager;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 07.05.2016.
  */
-public class PerlDebuggingEventStackFrame
+public class PerlDebuggingEventBreakpointSet extends PerlDebuggingEventBreakpointBase
 {
-	private String name;
-	private String file;
-	private int line;
-
-	public String getName()
+	@Override
+	protected void processBreakPoint(XLineBreakpoint breakpoint, XDebugSession session)
 	{
-		return name;
-	}
-
-	public String getFile()
-	{
-		return file;
-	}
-
-	public int getLine()
-	{
-		return line;
+		XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
+				breakpoint,
+				AllIcons.Debugger.Db_verified_breakpoint,
+				"Breakpoint set"
+		);
 	}
 }

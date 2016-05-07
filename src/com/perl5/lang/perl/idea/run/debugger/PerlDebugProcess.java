@@ -25,8 +25,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.breakpoints.XBreakpoint;
+import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.evaluation.EvaluationMode;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,6 +72,32 @@ public class PerlDebugProcess extends XDebugProcess
 	}
 
 	@Override
+	public boolean checkCanInitBreakpoints()
+	{
+		return false;
+	}
+
+	@NotNull
+	@Override
+	public XBreakpointHandler<?>[] getBreakpointHandlers()
+	{
+		return new XBreakpointHandler[]{new XBreakpointHandler(PerlLineBreakpointType.class)
+		{
+			@Override
+			public void registerBreakpoint(@NotNull XBreakpoint breakpoint)
+			{
+				System.err.println("Set breakpoint " + breakpoint);
+			}
+
+			@Override
+			public void unregisterBreakpoint(@NotNull XBreakpoint breakpoint, boolean temporary)
+			{
+				System.err.println("UnSet breakpoint " + breakpoint);
+			}
+		}};
+	}
+
+	@Override
 	public void startStepOver()
 	{
 		myPerlDebugThread.sendString("o\n");
@@ -95,7 +124,6 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public void stop()
 	{
-		myPerlDebugThread.sendString("q\n");
 		myPerlDebugThread.setStop();
 	}
 

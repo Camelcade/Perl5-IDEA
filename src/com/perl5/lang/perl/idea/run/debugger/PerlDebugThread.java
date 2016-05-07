@@ -16,22 +16,29 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
-import com.google.gson.*;
-import com.intellij.openapi.util.text.StringUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
+import com.intellij.xdebugger.XDebuggerManager;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEvent;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStop;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventsDeserializer;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Type;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -63,6 +70,30 @@ public class PerlDebugThread extends Thread
 			mySocket = new Socket("localhost", 12345);
 			myOutputStream = mySocket.getOutputStream();
 			myInputStream = mySocket.getInputStream();
+
+			ApplicationManager.getApplication().runReadAction(
+					new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = XDebuggerManager.getInstance(mySession.getProject()).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
+
+							List<PerlLineBreakPointDescriptor> descriptors = new ArrayList<PerlLineBreakPointDescriptor>();
+							for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
+							{
+								PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromBreakpoint(breakpoint);
+								if (descriptor != null)
+								{
+									descriptors.add(descriptor);
+								}
+							}
+
+							sendString(new Gson().toJson(descriptors) + "\n");
+						}
+					}
+			);
+
 			ByteArrayList response = new ByteArrayList();
 
 			while (!myStop)
@@ -97,10 +128,6 @@ public class PerlDebugThread extends Thread
 
 		} catch (IOException e)
 		{
-			if (!myStop)
-			{
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -109,9 +136,9 @@ public class PerlDebugThread extends Thread
 		String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
 		PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
-		if (newEvent instanceof PerlDebuggingEventStop)
+		if (newEvent != null)
 		{
-			mySession.positionReached(((PerlDebuggingEventStop) newEvent).getSuspendContext());
+			newEvent.doWork(mySession);
 		}
 	}
 
@@ -163,21 +190,30 @@ public class PerlDebugThread extends Thread
 		try
 		{
 			if (myInputStream != null)
+			{
 				myInputStream.close();
+				myInputStream = null;
+			}
 		} catch (IOException e)
 		{
 		}
 		try
 		{
 			if (myOutputStream != null)
+			{
 				myOutputStream.close();
+				myOutputStream = null;
+			}
 		} catch (IOException e)
 		{
 		}
 		try
 		{
 			if (mySocket != null)
+			{
 				mySocket.close();
+				mySocket = null;
+			}
 		} catch (IOException e)
 		{
 		}
@@ -187,41 +223,7 @@ public class PerlDebugThread extends Thread
 	protected Gson createGson()
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(PerlDebuggingEvent.class, new JsonDeserializer<PerlDebuggingEvent>()
-		{
-			@Override
-			public PerlDebuggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
-			{
-				String event = jsonElement.getAsJsonObject().getAsJsonPrimitive("event").getAsString();
-
-				PerlDebuggingEvent eventObject = null;
-
-				if (StringUtil.isNotEmpty(event))
-				{
-					if (StringUtil.equals(event, "STOP"))
-					{
-						PerlDebuggingEventStop stopEvent = new PerlDebuggingEventStop();
-
-						stopEvent.setFrames(
-								(PerlDebuggingEventStackFrame[]) jsonDeserializationContext.deserialize(
-										jsonElement.getAsJsonObject().getAsJsonArray("frames"), PerlDebuggingEventStackFrame[].class
-								));
-
-						eventObject = stopEvent;
-					}
-					else
-					{
-						System.err.println("Unhandled event in request: " + jsonElement.getAsString());
-					}
-				}
-				else
-				{
-					System.err.println("Empty event in request: " + jsonElement.getAsString());
-				}
-
-				return eventObject;
-			}
-		});
+		builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer());
 		return builder.create();
 	}
 

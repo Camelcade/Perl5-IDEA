@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class PerlSuspendContext extends XSuspendContext
 {
 	private final XExecutionStack myXExecutionStack;
 
-	public PerlSuspendContext(PerlDebuggingEventStackFrame[] eventStackFrames)
+	public PerlSuspendContext(PerlDebuggingStackFrame[] eventStackFrames)
 	{
 		myXExecutionStack = new PerlExecutionStack(eventStackFrames);
 	}

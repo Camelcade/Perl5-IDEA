@@ -24,7 +24,7 @@ import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,10 +35,10 @@ import java.io.File;
  */
 public class PerlStackFrame extends XStackFrame
 {
-	private final PerlDebuggingEventStackFrame myEventStackFrame;
+	private final PerlDebuggingStackFrame myEventStackFrame;
 	private final VirtualFile myVirtualFile;
 
-	public PerlStackFrame(PerlDebuggingEventStackFrame eventStackFrame)
+	public PerlStackFrame(PerlDebuggingStackFrame eventStackFrame)
 	{
 		myEventStackFrame = eventStackFrame;
 		myVirtualFile = VfsUtil.findFileByIoFile(new File(eventStackFrame.getFile()), true);

@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -31,10 +31,10 @@ public class PerlExecutionStack extends XExecutionStack
 {
 	List<PerlStackFrame> myPerlStackFrames = new ArrayList<PerlStackFrame>();
 
-	public PerlExecutionStack(PerlDebuggingEventStackFrame[] frames)
+	public PerlExecutionStack(PerlDebuggingStackFrame[] frames)
 	{
 		super("");
-		for (PerlDebuggingEventStackFrame eventStackFrame : frames)
+		for (PerlDebuggingStackFrame eventStackFrame : frames)
 		{
 			myPerlStackFrames.add(new PerlStackFrame(eventStackFrame));
 		}

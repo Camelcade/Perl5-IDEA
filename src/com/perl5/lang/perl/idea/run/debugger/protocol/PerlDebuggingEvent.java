@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
+import com.intellij.xdebugger.XDebugSession;
+
 /**
  * Created by hurricup on 05.05.2016.
  */
 public interface PerlDebuggingEvent
 {
+	public void doWork(XDebugSession session);
 }

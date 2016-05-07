@@ -17,29 +17,36 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import com.perl5.lang.perl.util.PerlDebugUtils;
 
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 07.05.2016.
  */
-public class PerlDebuggingEventStop implements PerlDebuggingEvent
+public abstract class PerlDebuggingEventBreakpointBase implements PerlDebuggingEvent
 {
-	private PerlDebuggingStackFrame[] myFrames;
-
-	public void setFrames(PerlDebuggingStackFrame[] frames)
-	{
-		myFrames = frames;
-	}
-
-	public XSuspendContext getSuspendContext()
-	{
-		return new PerlSuspendContext(myFrames);
-	}
+	private String path;
+	private int line;
 
 	@Override
 	public void doWork(XDebugSession session)
 	{
-		session.positionReached(getSuspendContext());
+		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);
+		if (breakpoint != null)
+		{
+			processBreakPoint(breakpoint, session);
+		}
+	}
+
+	protected abstract void processBreakPoint(XLineBreakpoint breakpoint, XDebugSession session);
+
+	public String getPath()
+	{
+		return path;
+	}
+
+	public int getLine()
+	{
+		return line;
 	}
 }
