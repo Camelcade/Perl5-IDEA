@@ -59,6 +59,10 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 				eventObject = jsonDeserializationContext.deserialize(
 						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointDenied.class);
 			}
+			else if (StringUtil.equals(event, "READY"))
+			{
+				eventObject = new PerlDebuggingEventReady();
+			}
 			else
 			{
 				System.err.println("Unhandled event in request: " + jsonElement.getAsString());

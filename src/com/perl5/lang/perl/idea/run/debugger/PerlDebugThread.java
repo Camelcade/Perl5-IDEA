@@ -24,6 +24,7 @@ import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEvent;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventReady;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventsDeserializer;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,6 +50,7 @@ public class PerlDebugThread extends Thread
 	private byte[] myResponseBuffer;
 	private boolean myStop = false;
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
+	private boolean isReady = false;
 
 	public PerlDebugThread(XDebugSession session)
 	{
@@ -62,6 +64,10 @@ public class PerlDebugThread extends Thread
 		if (descriptor != null)
 		{
 			breakpointsDescriptorsQueue.add(descriptor);
+			if (isReady && mySession.isPaused())
+			{
+				sendQueuedBreakpoints();
+			}
 		}
 	}
 
@@ -80,17 +86,10 @@ public class PerlDebugThread extends Thread
 			myOutputStream = mySocket.getOutputStream();
 			myInputStream = mySocket.getInputStream();
 
-			sendQueuedBreakpoints();
-
 			ByteArrayList response = new ByteArrayList();
 
 			while (!myStop)
 			{
-				if (!breakpointsDescriptorsQueue.isEmpty())
-				{
-					sendQueuedBreakpoints();
-				}
-
 				response.clear();
 
 				// reading bytes
@@ -131,7 +130,15 @@ public class PerlDebugThread extends Thread
 
 		if (newEvent != null)
 		{
-			newEvent.doWork(mySession);
+			if (newEvent instanceof PerlDebuggingEventReady)
+			{
+				isReady = true;
+				sendQueuedBreakpoints();
+			}
+			else
+			{
+				newEvent.doWork(mySession);
+			}
 		}
 	}
 

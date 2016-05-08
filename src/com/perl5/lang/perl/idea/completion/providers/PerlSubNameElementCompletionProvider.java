@@ -34,9 +34,9 @@ public class PerlSubNameElementCompletionProvider extends CompletionProvider<Com
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-		PsiElement element = parameters.getPosition();
+		PsiElement element = parameters.getOriginalPosition();
 
-		if (element.getParent() instanceof PerlSubDefinitionBase)
+		if (element != null && element.getParent() instanceof PerlSubDefinitionBase)
 		{
 			PerlSubDefinitionBase subDefinitionBase = (PerlSubDefinitionBase) element.getParent();
 			PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
