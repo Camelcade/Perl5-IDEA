@@ -51,6 +51,8 @@ public class PerlIcons
 	public static final Icon ANNOTATION_GUTTER_ICON = IconLoader.getIcon("/icons/annotation_gutter_icon.png");
 
 	public static final Icon REGEX_GUTTER_ICON = IconLoader.getIcon("/icons/re_gutter_icon.png");
+	public static final Icon FORMAT_GUTTER_ICON = IconLoader.getIcon("/icons/format_gutter_icon.png");
+	public static final Icon HANDLE_GUTTER_ICON = IconLoader.getIcon("/icons/handle_gutter_icon.png");
 
 	public static final Icon SCALAR_GUTTER_ICON = IconLoader.getIcon("/icons/scalar_gutter_icon.png");
 	public static final Icon ARRAY_GUTTER_ICON = IconLoader.getIcon("/icons/array_gutter_icon.png");

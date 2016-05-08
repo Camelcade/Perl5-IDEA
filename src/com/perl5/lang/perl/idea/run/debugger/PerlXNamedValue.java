@@ -119,9 +119,17 @@ public class PerlXNamedValue extends XNamedValue
 		{
 			return PerlIcons.SUB_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "REF"))
+		else if (StringUtil.equals(type, "GLOB"))
 		{
 			return PerlIcons.GLOB_GUTTER_ICON;
+		}
+		else if (StringUtil.equals(type, "FORMAT"))
+		{
+			return PerlIcons.FORMAT_GUTTER_ICON;
+		}
+		else if (StringUtil.equals(type, "IO::File"))
+		{
+			return PerlIcons.HANDLE_GUTTER_ICON;
 		}
 		else if (StringUtil.equals(type, "Regexp"))
 		{
