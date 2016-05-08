@@ -18,16 +18,11 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.XDebuggerManager;
-import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
-import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
-import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEvent;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventsDeserializer;
 import org.jetbrains.annotations.Nullable;
@@ -36,9 +31,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -54,12 +48,27 @@ public class PerlDebugThread extends Thread
 	private boolean myWaitForResponse = false;
 	private byte[] myResponseBuffer;
 	private boolean myStop = false;
+	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 
 	public PerlDebugThread(XDebugSession session)
 	{
 		super("PerlDebugThread");
 		mySession = session;
 		myGson = createGson();
+	}
+
+	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
+	{
+		if (descriptor != null)
+		{
+			breakpointsDescriptorsQueue.add(descriptor);
+		}
+	}
+
+	protected void sendQueuedBreakpoints()
+	{
+		sendString("b " + new Gson().toJson(breakpointsDescriptorsQueue) + "\n");
+		breakpointsDescriptorsQueue.clear();
 	}
 
 	@Override
@@ -71,37 +80,21 @@ public class PerlDebugThread extends Thread
 			myOutputStream = mySocket.getOutputStream();
 			myInputStream = mySocket.getInputStream();
 
-			ApplicationManager.getApplication().runReadAction(
-					new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = XDebuggerManager.getInstance(mySession.getProject()).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
-
-							List<PerlLineBreakPointDescriptor> descriptors = new ArrayList<PerlLineBreakPointDescriptor>();
-							for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
-							{
-								PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromBreakpoint(breakpoint);
-								if (descriptor != null)
-								{
-									descriptors.add(descriptor);
-								}
-							}
-
-							sendString(new Gson().toJson(descriptors) + "\n");
-						}
-					}
-			);
+			sendQueuedBreakpoints();
 
 			ByteArrayList response = new ByteArrayList();
 
 			while (!myStop)
 			{
+				if (!breakpointsDescriptorsQueue.isEmpty())
+				{
+					sendQueuedBreakpoints();
+				}
+
 				response.clear();
 
 				// reading bytes
-				while (true)
+				while (myInputStream != null)
 				{
 					byte newByte = (byte) myInputStream.read();
 					if (newByte == '\n')

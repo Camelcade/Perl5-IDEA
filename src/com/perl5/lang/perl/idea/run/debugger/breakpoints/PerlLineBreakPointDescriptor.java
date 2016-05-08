@@ -26,10 +26,11 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlLineBreakPointDescriptor
 {
-	String path;
-	int line;
-	boolean enabled;
-	String condition;
+	private String path;
+	private int line;
+	private boolean enabled;
+	private String condition;
+	private boolean remove;
 
 	@Nullable
 	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint)
@@ -43,9 +44,43 @@ public class PerlLineBreakPointDescriptor
 			descriptor.path = virtualFile.getCanonicalPath();
 			descriptor.line = breakpoint.getLine();
 			descriptor.enabled = breakpoint.isEnabled();
+			descriptor.remove = false;
 			descriptor.condition = "";
 		}
 		return descriptor;
+	}
+
+	@Nullable
+	public static PerlLineBreakPointDescriptor createRemoveFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint)
+	{
+		PerlLineBreakPointDescriptor descriptor = createFromBreakpoint(breakpoint);
+
+		if (descriptor != null)
+		{
+			descriptor.remove = true;
+		}
+
+		return descriptor;
+	}
+
+	public String getPath()
+	{
+		return path;
+	}
+
+	public int getLine()
+	{
+		return line;
+	}
+
+	public boolean isEnabled()
+	{
+		return enabled;
+	}
+
+	public String getCondition()
+	{
+		return condition;
 	}
 
 }

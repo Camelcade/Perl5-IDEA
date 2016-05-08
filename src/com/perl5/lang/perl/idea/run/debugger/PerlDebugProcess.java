@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
@@ -27,12 +28,12 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.XSourcePosition;
-import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.EvaluationMode;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointHandler;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import org.jetbrains.annotations.NotNull;
@@ -81,27 +82,34 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public boolean checkCanInitBreakpoints()
 	{
-		return false;
+		System.err.println("Check can init breakpoints");
+		return true;
 	}
 
 	@NotNull
 	@Override
 	public XBreakpointHandler<?>[] getBreakpointHandlers()
 	{
-		return new XBreakpointHandler[]{new XBreakpointHandler(PerlLineBreakpointType.class)
-		{
-			@Override
-			public void registerBreakpoint(@NotNull XBreakpoint breakpoint)
-			{
-				System.err.println("Set breakpoint " + breakpoint);
-			}
+		return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myPerlDebugThread)};
+	}
 
-			@Override
-			public void unregisterBreakpoint(@NotNull XBreakpoint breakpoint, boolean temporary)
-			{
-				System.err.println("UnSet breakpoint " + breakpoint);
-			}
-		}};
+	@Override
+	public void sessionInitialized()
+	{
+		System.err.println("Session initialized");
+		super.sessionInitialized();
+	}
+
+	@Override
+	public void registerAdditionalActions(@NotNull DefaultActionGroup leftToolbar, @NotNull DefaultActionGroup topToolbar, @NotNull DefaultActionGroup settings)
+	{
+		super.registerAdditionalActions(leftToolbar, topToolbar, settings);
+	}
+
+	@Override
+	public boolean checkCanPerformCommands()
+	{
+		return super.checkCanPerformCommands();
 	}
 
 	@Override
