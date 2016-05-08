@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Modifier;
 import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -137,7 +138,9 @@ public class PerlDebugThread extends Thread
 			}
 			else
 			{
-				newEvent.doWork(mySession);
+				newEvent.setDebugSession(mySession);
+				newEvent.setDebugThread(this);
+				newEvent.doWork();
 			}
 		}
 	}
@@ -224,7 +227,7 @@ public class PerlDebugThread extends Thread
 	{
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer());
-		return builder.create();
+		return builder.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
 	}
 
 }

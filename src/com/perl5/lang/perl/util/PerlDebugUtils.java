@@ -25,7 +25,7 @@ import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpointBase;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpoint;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -37,7 +37,7 @@ import java.util.Collection;
 public class PerlDebugUtils
 {
 	@Nullable
-	public static XLineBreakpoint findBreakpoint(final Project project, final PerlDebuggingEventBreakpointBase breakpointBase)
+	public static XLineBreakpoint findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase)
 	{
 		final XLineBreakpoint[] result = new XLineBreakpoint[]{null};
 

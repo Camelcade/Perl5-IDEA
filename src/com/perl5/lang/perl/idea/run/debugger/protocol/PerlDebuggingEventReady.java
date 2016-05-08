@@ -16,15 +16,13 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.xdebugger.XDebugSession;
-
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggingEventReady implements PerlDebuggingEvent
+public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 {
 	@Override
-	public void doWork(XDebugSession session)
+	public void doWork()
 	{
 	}
 }

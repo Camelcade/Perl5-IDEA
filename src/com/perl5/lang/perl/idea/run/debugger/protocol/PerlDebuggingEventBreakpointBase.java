@@ -19,18 +19,20 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.util.PerlDebugUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 07.05.2016.
  */
-public abstract class PerlDebuggingEventBreakpointBase implements PerlDebuggingEvent
+public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEventBase implements PerlDebuggingEventBreakpoint
 {
 	private String path;
 	private int line;
 
 	@Override
-	public void doWork(XDebugSession session)
+	public void doWork()
 	{
+		XDebugSession session = getDebugSession();
 		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);
 		if (breakpoint != null)
 		{
@@ -38,7 +40,7 @@ public abstract class PerlDebuggingEventBreakpointBase implements PerlDebuggingE
 		}
 	}
 
-	protected abstract void processBreakPoint(XLineBreakpoint breakpoint, XDebugSession session);
+	protected abstract void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session);
 
 	public String getPath()
 	{

@@ -16,30 +16,29 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import com.perl5.lang.perl.idea.run.debugger.PerlSuspendContext;
 
 /**
  * Created by hurricup on 05.05.2016.
  */
-public class PerlDebuggingEventStop implements PerlDebuggingEvent
+public class PerlDebuggingEventStop extends PerlDebuggingEventBase implements PerlDebuggingEvent
 {
-	private PerlDebuggingStackFrame[] myFrames;
+	private PerlDebuggingStackFrame[] frames;
 
 	public void setFrames(PerlDebuggingStackFrame[] frames)
 	{
-		myFrames = frames;
+		this.frames = frames;
 	}
 
 	public XSuspendContext getSuspendContext()
 	{
-		return new PerlSuspendContext(myFrames);
+		return new PerlSuspendContext(frames, getDebugSession(), getDebugThread());
 	}
 
 	@Override
-	public void doWork(XDebugSession session)
+	public void doWork()
 	{
-		session.positionReached(getSuspendContext());
+		getDebugSession().positionReached(getSuspendContext());
 	}
 }

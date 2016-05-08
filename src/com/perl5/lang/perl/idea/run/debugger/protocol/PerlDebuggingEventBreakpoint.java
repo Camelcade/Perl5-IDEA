@@ -16,22 +16,13 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.xdebugger.XDebugSession;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
-
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 08.05.2016.
  */
-public interface PerlDebuggingEvent
+public interface PerlDebuggingEventBreakpoint extends PerlDebuggingEvent
 {
-	void doWork();
+	String getPath();
 
-	XDebugSession getDebugSession();
-
-	void setDebugSession(XDebugSession debugSession);
-
-	PerlDebugThread getDebugThread();
-
-	void setDebugThread(PerlDebugThread debugThread);
+	int getLine();
 
 }

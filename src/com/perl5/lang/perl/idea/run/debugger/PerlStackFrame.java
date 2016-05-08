@@ -22,9 +22,12 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XStackFrame;
+import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,11 +40,13 @@ public class PerlStackFrame extends XStackFrame
 {
 	private final PerlDebuggingStackFrame myEventStackFrame;
 	private final VirtualFile myVirtualFile;
+	private final PerlExecutionStack myPerlExecutionStack;
 
-	public PerlStackFrame(PerlDebuggingStackFrame eventStackFrame)
+	public PerlStackFrame(PerlDebuggingStackFrame eventStackFrame, PerlExecutionStack stack)
 	{
 		myEventStackFrame = eventStackFrame;
 		myVirtualFile = VfsUtil.findFileByIoFile(new File(eventStackFrame.getFile()), true);
+		myPerlExecutionStack = stack;
 	}
 
 	@Override
@@ -60,5 +65,29 @@ public class PerlStackFrame extends XStackFrame
 			return XSourcePositionImpl.create(myVirtualFile, myEventStackFrame.getLine());
 		}
 		return super.getSourcePosition();
+	}
+
+	@Override
+	public void computeChildren(@NotNull XCompositeNode node)
+	{
+		PerlValueDescriptor[] lexicals = myEventStackFrame.getLexicals();
+		if (lexicals.length == 0)
+		{
+			super.computeChildren(node);
+		}
+		else
+		{
+			XValueChildrenList list = new XValueChildrenList();
+			for (PerlValueDescriptor descriptor : lexicals)
+			{
+				list.add(new PerlXNamedValue(descriptor, this));
+			}
+			node.addChildren(list, true);
+		}
+	}
+
+	public PerlExecutionStack getPerlExecutionStack()
+	{
+		return myPerlExecutionStack;
 	}
 }

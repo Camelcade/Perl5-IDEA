@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -29,10 +31,14 @@ import java.util.Collections;
 public class PerlSuspendContext extends XSuspendContext
 {
 	private final XExecutionStack myXExecutionStack;
+	private final XDebugSession myDebugSession;
+	private final PerlDebugThread myDebugThread;
 
-	public PerlSuspendContext(PerlDebuggingStackFrame[] eventStackFrames)
+	public PerlSuspendContext(PerlDebuggingStackFrame[] eventStackFrames, XDebugSession session, PerlDebugThread thread)
 	{
-		myXExecutionStack = new PerlExecutionStack(eventStackFrames);
+		myXExecutionStack = new PerlExecutionStack(eventStackFrames, this);
+		myDebugSession = session;
+		myDebugThread = thread;
 	}
 
 	@Nullable
@@ -48,5 +54,14 @@ public class PerlSuspendContext extends XSuspendContext
 		container.addExecutionStack(Collections.singletonList(myXExecutionStack), true);
 	}
 
+	public XDebugSession getDebugSession()
+	{
+		return myDebugSession;
+	}
 
+	@NotNull
+	public PerlDebugThread getDebugThread()
+	{
+		return myDebugThread;
+	}
 }

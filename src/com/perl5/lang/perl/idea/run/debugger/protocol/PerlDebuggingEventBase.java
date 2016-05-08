@@ -16,24 +16,35 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.xdebugger.XDebugSession;
-import com.intellij.xdebugger.XDebuggerManager;
-import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 
 /**
- * Created by hurricup on 07.05.2016.
+ * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggingEventBreakpointDenied extends PerlDebuggingEventBreakpointBase
+public abstract class PerlDebuggingEventBase implements PerlDebuggingEvent
 {
-	@Override
-	protected void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session)
+
+	private transient XDebugSession myDebugSession;
+	private transient PerlDebugThread myDebugThread;
+
+	public XDebugSession getDebugSession()
 	{
-		XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
-				breakpoint,
-				AllIcons.Debugger.Db_invalid_breakpoint,
-				"You can't set a breakpoint here"
-		);
+		return myDebugSession;
+	}
+
+	public void setDebugSession(XDebugSession debugSession)
+	{
+		myDebugSession = debugSession;
+	}
+
+	public PerlDebugThread getDebugThread()
+	{
+		return myDebugThread;
+	}
+
+	public void setDebugThread(PerlDebugThread debugThread)
+	{
+		myDebugThread = debugThread;
 	}
 }

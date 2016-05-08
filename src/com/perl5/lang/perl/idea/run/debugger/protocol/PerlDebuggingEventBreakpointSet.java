@@ -20,6 +20,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 07.05.2016.
@@ -27,7 +28,7 @@ import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 public class PerlDebuggingEventBreakpointSet extends PerlDebuggingEventBreakpointBase
 {
 	@Override
-	protected void processBreakPoint(XLineBreakpoint breakpoint, XDebugSession session)
+	protected void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session)
 	{
 		XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
 				breakpoint,

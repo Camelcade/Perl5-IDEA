@@ -29,14 +29,16 @@ import java.util.List;
  */
 public class PerlExecutionStack extends XExecutionStack
 {
+	private final PerlSuspendContext mySuspendContext;
 	List<PerlStackFrame> myPerlStackFrames = new ArrayList<PerlStackFrame>();
 
-	public PerlExecutionStack(PerlDebuggingStackFrame[] frames)
+	public PerlExecutionStack(PerlDebuggingStackFrame[] frames, PerlSuspendContext suspendContext)
 	{
 		super("");
+		mySuspendContext = suspendContext;
 		for (PerlDebuggingStackFrame eventStackFrame : frames)
 		{
-			myPerlStackFrames.add(new PerlStackFrame(eventStackFrame));
+			myPerlStackFrames.add(new PerlStackFrame(eventStackFrame, this));
 		}
 	}
 
@@ -51,5 +53,10 @@ public class PerlExecutionStack extends XExecutionStack
 	public void computeStackFrames(int firstFrameIndex, XStackFrameContainer container)
 	{
 		container.addStackFrames(myPerlStackFrames, true);
+	}
+
+	public PerlSuspendContext getSuspendContext()
+	{
+		return mySuspendContext;
 	}
 }

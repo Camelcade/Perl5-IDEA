@@ -17,32 +17,56 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 /**
- * Created by hurricup on 05.05.2016.
+ * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggingStackFrame
+public class PerlValueDescriptor
 {
 	private String name;
-	private String file;
-	private int line;
-	private PerlValueDescriptor[] lexicals;
+	private String type;
+	private String value;
+	private int ref_depth; // how many references been skipped
+	private String key;        // key to fetch additional elements, basically text representation of reference
+	private int size;        // size used for arrays/hashes elements
+	private boolean expandable;
+	private boolean blessed;
 
 	public String getName()
 	{
 		return name;
 	}
 
-	public String getFile()
+	public String getType()
 	{
-		return file;
+		return type;
 	}
 
-	public int getLine()
+	public String getValue()
 	{
-		return line;
+		return value;
 	}
 
-	public PerlValueDescriptor[] getLexicals()
+	public boolean isExpandable()
 	{
-		return lexicals;
+		return expandable;
+	}
+
+	public int getSize()
+	{
+		return size;
+	}
+
+	public String getKey()
+	{
+		return key;
+	}
+
+	public boolean isBlessed()
+	{
+		return blessed;
+	}
+
+	public int getRefDepth()
+	{
+		return ref_depth;
 	}
 }

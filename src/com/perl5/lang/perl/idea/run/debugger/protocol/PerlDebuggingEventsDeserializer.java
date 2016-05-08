@@ -40,14 +40,19 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 		{
 			if (StringUtil.equals(event, "STOP"))
 			{
-				PerlDebuggingEventStop stopEvent = new PerlDebuggingEventStop();
+				PerlDebuggingEventStop newEvent = new PerlDebuggingEventStop();
 
-				stopEvent.setFrames(
+				newEvent.setFrames(
 						(PerlDebuggingStackFrame[]) jsonDeserializationContext.deserialize(
 								jsonElement.getAsJsonObject().getAsJsonArray("data"), PerlDebuggingStackFrame[].class
 						));
 
-				eventObject = stopEvent;
+				eventObject = newEvent;
+			}
+			else if (StringUtil.equals(event, "BREAKPOINT_REACHED"))
+			{
+				eventObject = jsonDeserializationContext.deserialize(
+						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointReached.class);
 			}
 			else if (StringUtil.equals(event, "BREAKPOINT_SET"))
 			{
