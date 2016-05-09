@@ -33,15 +33,19 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
 {
 	private final String myName;
 	private final PerlVariableType myVariableType;
-	private final PerlVariable myVariable;
+	private final PsiElement myVariable;
 	private PerlVariableDeclarationWrapper myResult;
 
+	public PerlVariableDeclarationSearcher(String name, PerlVariableType variableType, PsiElement anchorElement)
+	{
+		myName = name;
+		myVariableType = variableType;
+		myVariable = anchorElement;
+	}
 
 	public PerlVariableDeclarationSearcher(@NotNull PerlVariable variable)
 	{
-		myVariable = variable;
-		this.myName = variable.getName();
-		myVariableType = variable.getActualType();
+		this(variable.getName(), variable.getActualType(), variable);
 	}
 
 	@Override
