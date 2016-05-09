@@ -181,11 +181,23 @@ public class PerlDebugThread extends Thread
 		String response = null;
 		try
 		{
+			myResponseBuffer = null;
 			myOutputStream.write(string.getBytes());
 			System.err.println("Sent and waiting:" + string + Hex.encodeHexString(string.getBytes()));
-			myResponseSemaphore.waitFor();
-			response = new String(myResponseBuffer, CharsetToolkit.UTF8_CHARSET);
-			System.err.println("Got response");
+			myResponseSemaphore.waitFor(5000);
+			myWaitForResponse = false;
+			myResponseSemaphore.tryUp();
+
+			if (myResponseBuffer == null)
+			{
+				response = "";
+				System.err.println("No response, timeoout");
+			}
+			else
+			{
+				response = new String(myResponseBuffer, CharsetToolkit.UTF8_CHARSET);
+				System.err.println("Got response");
+			}
 
 		} catch (IOException e)
 		{
