@@ -49,6 +49,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 {
 	public String SCRIPT_PATH;
 	public String PROGRAM_PARAMETERS;
+	public String PERL_PARAMETERS;
 	public String WORKING_DIRECTORY;
 	public Map<String, String> ENV = new HashMap<String, String>();
 	public boolean PASS_PARENT_ENVS = true;
@@ -195,5 +196,15 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void setPassParentEnvs(boolean b)
 	{
 		PASS_PARENT_ENVS = b;
+	}
+
+	public String getPERL_PARAMETERS()
+	{
+		return PERL_PARAMETERS;
+	}
+
+	public void setPERL_PARAMETERS(String PERL_PARAMETERS)
+	{
+		this.PERL_PARAMETERS = PERL_PARAMETERS;
 	}
 }

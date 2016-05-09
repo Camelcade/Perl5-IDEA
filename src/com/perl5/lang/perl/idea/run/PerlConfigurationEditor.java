@@ -31,6 +31,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.DocumentAdapter;
+import com.intellij.ui.RawCommandLineEditor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -48,6 +49,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	private TextFieldWithBrowseButton myScriptField;
 	private ComboBox myCharsetBox;
 	private CommonProgramParametersPanel myParametersPanel;
+	private LabeledComponent<RawCommandLineEditor> myPerlParametersPanel;
 	private PerlAlternativeSdkPanel myAlternativeSdkPanel;
 	private Project myProject;
 
@@ -63,11 +65,13 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myParametersPanel.reset(perlConfiguration);
 		myCharsetBox.setSelectedItem(perlConfiguration.getCharset());
 		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
+		myPerlParametersPanel.getComponent().setText(perlConfiguration.getPERL_PARAMETERS());
 	}
 
 	@Override
 	protected void applyEditorTo(PerlConfiguration perlConfiguration) throws ConfigurationException
 	{
+		perlConfiguration.setPERL_PARAMETERS(myPerlParametersPanel.getComponent().getText());
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
 		perlConfiguration.setCharset(StringUtil.nullize((String) myCharsetBox.getSelectedItem(), true));
@@ -121,6 +125,11 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myCharsetBox, "Console Encoding");
 				consoleEncoding.setLabelLocation(BorderLayout.WEST);
 				add(consoleEncoding);
+
+				myPerlParametersPanel = LabeledComponent.create(new RawCommandLineEditor(), "Perl5 arguments");
+				myPerlParametersPanel.setLabelLocation(BorderLayout.WEST);
+//				add(myPerlParametersPanel);
+
 				super.addComponents();
 				add(myAlternativeSdkPanel);
 			}
