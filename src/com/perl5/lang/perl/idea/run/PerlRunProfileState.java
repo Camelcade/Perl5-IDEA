@@ -36,6 +36,7 @@ import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Map;
 
 /**
  * @author VISTALL
@@ -127,7 +128,7 @@ public class PerlRunProfileState extends CommandLineState
 
 		commandLine.setCharset(charset);
 		commandLine.withWorkDirectory(homePath);
-		commandLine.withEnvironment(runProfile.getEnvs());
+		commandLine.withEnvironment(calcEnv(runProfile));
 		commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
 		OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
 		ProcessTerminatedListener.attach(handler, project);
@@ -138,6 +139,11 @@ public class PerlRunProfileState extends CommandLineState
 	protected String[] getPerlArguments()
 	{
 		return new String[0];
+	}
+
+	protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException
+	{
+		return runProfile.getEnvs();
 	}
 
 }

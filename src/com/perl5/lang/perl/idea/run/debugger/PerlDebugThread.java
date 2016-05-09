@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
@@ -33,6 +34,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -42,7 +45,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class PerlDebugThread extends Thread
 {
+	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
+
 	private final Gson myGson;
+	private final PerlDebugProfileState myDebugProfileState;
 	private XDebugSession mySession;
 	private Socket mySocket;
 	private OutputStream myOutputStream;
@@ -54,11 +60,12 @@ public class PerlDebugThread extends Thread
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 	private boolean isReady = false;
 
-	public PerlDebugThread(XDebugSession session)
+	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state)
 	{
 		super("PerlDebugThread");
 		mySession = session;
 		myGson = createGson();
+		myDebugProfileState = state;
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -84,7 +91,23 @@ public class PerlDebugThread extends Thread
 	{
 		try
 		{
-			mySocket = new Socket("localhost", 12345);
+			String debugHost = myDebugProfileState.getDebugHost();
+			int debugPort = myDebugProfileState.getDebugPort();
+			String debugName = debugHost + ":" + debugPort;
+			if (myDebugProfileState.isPerlServer())
+			{
+				if (DEV_MODE)
+					System.err.println("Connecting to " + debugName);
+				mySocket = new Socket(debugHost, debugPort);
+			}
+			else
+			{
+				if (DEV_MODE)
+					System.err.println("Listening on " + debugName);
+				ServerSocket serverSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
+				mySocket = serverSocket.accept();
+			}
+
 			myOutputStream = mySocket.getOutputStream();
 			myInputStream = mySocket.getInputStream();
 
@@ -126,6 +149,9 @@ public class PerlDebugThread extends Thread
 
 		} catch (IOException e)
 		{
+		} catch (ExecutionException e)
+		{
+
 		}
 	}
 
@@ -183,7 +209,10 @@ public class PerlDebugThread extends Thread
 		{
 			myResponseBuffer = null;
 			myOutputStream.write(string.getBytes());
-			System.err.println("Sent and waiting:" + string + Hex.encodeHexString(string.getBytes()));
+
+			if (DEV_MODE)
+				System.err.println("Sent and waiting:" + string + Hex.encodeHexString(string.getBytes()));
+
 			myResponseSemaphore.waitFor(5000);
 			myWaitForResponse = false;
 			myResponseSemaphore.tryUp();
@@ -191,12 +220,16 @@ public class PerlDebugThread extends Thread
 			if (myResponseBuffer == null)
 			{
 				response = "";
-				System.err.println("No response, timeoout");
+
+				if (DEV_MODE)
+					System.err.println("No response, timeoout");
 			}
 			else
 			{
 				response = new String(myResponseBuffer, CharsetToolkit.UTF8_CHARSET);
-				System.err.println("Got response");
+
+				if (DEV_MODE)
+					System.err.println("Got response");
 			}
 
 		} catch (IOException e)

@@ -29,6 +29,7 @@ import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointHandler;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
@@ -44,12 +45,14 @@ public class PerlDebugProcess extends XDebugProcess
 {
 	private ExecutionResult myExecutionResult;
 	private PerlDebugThread myPerlDebugThread;
+	private PerlRunProfileState myRunProfileState;
 
-	public PerlDebugProcess(@NotNull XDebugSession session, ExecutionResult executionResult)
+	public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
 		super(session);
 		this.myExecutionResult = executionResult;
-		myPerlDebugThread = new PerlDebugThread(session);
+		myPerlDebugThread = new PerlDebugThread(session, state);
+		myRunProfileState = state;
 		myPerlDebugThread.start();
 	}
 
@@ -63,7 +66,8 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public boolean checkCanInitBreakpoints()
 	{
-		System.err.println("Check can init breakpoints");
+		if (PerlDebugThread.DEV_MODE)
+			System.err.println("Check can init breakpoints");
 		return true;
 	}
 
@@ -77,7 +81,8 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public void sessionInitialized()
 	{
-		System.err.println("Session initialized");
+		if (PerlDebugThread.DEV_MODE)
+			System.err.println("Session initialized");
 		super.sessionInitialized();
 	}
 

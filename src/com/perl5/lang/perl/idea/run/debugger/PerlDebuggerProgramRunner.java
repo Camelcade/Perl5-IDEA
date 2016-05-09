@@ -59,11 +59,9 @@ public class PerlDebuggerProgramRunner extends DefaultProgramRunner
 			@Override
 			public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException
 			{
-				return new PerlDebugProcess(session, state.execute(env.getExecutor(), PerlDebuggerProgramRunner.this));
+				return new PerlDebugProcess(session, (PerlDebugProfileState) state, state.execute(env.getExecutor(), PerlDebuggerProgramRunner.this));
 			}
 		});
 		return xDebugSession.getRunContentDescriptor();
 	}
-
-
 }
