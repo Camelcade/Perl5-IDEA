@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
+import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -101,12 +102,12 @@ public class PerlDebugThread extends Thread
 			String debugName = debugHost + ":" + debugPort;
 			if (myDebugProfileState.isPerlServer())
 			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName, ConsoleViewContentType.SYSTEM_OUTPUT);
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName + "...", ConsoleViewContentType.SYSTEM_OUTPUT);
 				mySocket = new Socket(debugHost, debugPort);
 			}
 			else
 			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName, ConsoleViewContentType.SYSTEM_OUTPUT);
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName + "...", ConsoleViewContentType.SYSTEM_OUTPUT);
 				ServerSocket serverSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
 				mySocket = serverSocket.accept();
 			}
@@ -158,6 +159,7 @@ public class PerlDebugThread extends Thread
 
 		} catch (IOException e)
 		{
+			StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
 			e.printStackTrace();
 		} catch (ExecutionException e)
 		{
