@@ -19,6 +19,9 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
+import com.intellij.execution.ui.ConsoleView;
+import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
@@ -47,6 +50,7 @@ public class PerlDebugThread extends Thread
 {
 	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
 
+	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
 	private final PerlDebugProfileState myDebugProfileState;
 	private XDebugSession mySession;
@@ -60,12 +64,13 @@ public class PerlDebugThread extends Thread
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 	private boolean isReady = false;
 
-	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state)
+	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
 		super("PerlDebugThread");
 		mySession = session;
 		myGson = createGson();
 		myDebugProfileState = state;
+		myExecutionResult = executionResult;
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -96,14 +101,12 @@ public class PerlDebugThread extends Thread
 			String debugName = debugHost + ":" + debugPort;
 			if (myDebugProfileState.isPerlServer())
 			{
-				if (DEV_MODE)
-					System.err.println("Connecting to " + debugName);
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName, ConsoleViewContentType.SYSTEM_OUTPUT);
 				mySocket = new Socket(debugHost, debugPort);
 			}
 			else
 			{
-				if (DEV_MODE)
-					System.err.println("Listening on " + debugName);
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName, ConsoleViewContentType.SYSTEM_OUTPUT);
 				ServerSocket serverSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
 				mySocket = serverSocket.accept();
 			}
@@ -116,6 +119,9 @@ public class PerlDebugThread extends Thread
 			while (!myStop)
 			{
 				response.clear();
+
+				if (DEV_MODE)
+					System.err.println("Reading data");
 
 				// reading bytes
 				while (myInputStream != null)
@@ -135,6 +141,9 @@ public class PerlDebugThread extends Thread
 					}
 				}
 
+				if (DEV_MODE)
+					System.err.println("Read");
+
 				if (myWaitForResponse)
 				{
 					myResponseBuffer = response.toNativeArray();
@@ -149,9 +158,10 @@ public class PerlDebugThread extends Thread
 
 		} catch (IOException e)
 		{
+			e.printStackTrace();
 		} catch (ExecutionException e)
 		{
-
+			e.printStackTrace();
 		}
 	}
 

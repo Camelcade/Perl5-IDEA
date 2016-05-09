@@ -29,6 +29,7 @@ import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.perl5.lang.perl.idea.run.PerlConfiguration;
+import com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -46,7 +47,7 @@ public class PerlDebuggerProgramRunner extends DefaultProgramRunner
 	@Override
 	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
 	{
-		return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && profile instanceof PerlConfiguration;
+		return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && (profile instanceof PerlConfiguration || profile instanceof PerlRemoteDebuggingConfiguration);
 	}
 
 	@Override

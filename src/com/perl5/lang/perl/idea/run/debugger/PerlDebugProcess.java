@@ -43,15 +43,15 @@ import java.util.Collection;
  */
 public class PerlDebugProcess extends XDebugProcess
 {
-	private ExecutionResult myExecutionResult;
-	private PerlDebugThread myPerlDebugThread;
-	private PerlRunProfileState myRunProfileState;
+	private final ExecutionResult myExecutionResult;
+	private final PerlDebugThread myPerlDebugThread;
+	private final PerlRunProfileState myRunProfileState;
 
 	public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
 		super(session);
 		this.myExecutionResult = executionResult;
-		myPerlDebugThread = new PerlDebugThread(session, state);
+		myPerlDebugThread = new PerlDebugThread(session, state, executionResult);
 		myRunProfileState = state;
 		myPerlDebugThread.start();
 	}
