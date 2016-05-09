@@ -217,68 +217,71 @@ public class PerlVariableCompletionUtil
 			@Override
 			public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state)
 			{
-				PerlVariableDeclarationWrapper variable = (PerlVariableDeclarationWrapper) element;
-
-				PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PsiPerlStatement.class);
-				if (declarationStatement != null && PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false))
+				if (element instanceof PerlVariableDeclarationWrapper)
 				{
-					return true;
-				}
+					PerlVariableDeclarationWrapper variable = (PerlVariableDeclarationWrapper) element;
 
-				if (perlVariable instanceof PsiPerlScalarVariable)
-				{
-					String variableName = variable.getName();
-					if (variableName != null)
+					PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PsiPerlStatement.class);
+					if (declarationStatement != null && PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false))
 					{
-						if (variable.getActualType() == PerlVariableType.SCALAR)
+						return true;
+					}
+
+					if (perlVariable instanceof PsiPerlScalarVariable)
+					{
+						String variableName = variable.getName();
+						if (variableName != null)
 						{
-							resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
-						}
-						else if (variable.getActualType() == PerlVariableType.ARRAY)
-						{
-							resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
-						}
-						else if (variable.getActualType() == PerlVariableType.HASH)
-						{
-							resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
+							if (variable.getActualType() == PerlVariableType.SCALAR)
+							{
+								resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
+							}
+							else if (variable.getActualType() == PerlVariableType.ARRAY)
+							{
+								resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
+							}
+							else if (variable.getActualType() == PerlVariableType.HASH)
+							{
+								resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
+							}
 						}
 					}
-				}
-				else if (perlVariable instanceof PsiPerlArrayVariable)
-				{
-					String variableName = variable.getName();
-					if (variableName != null)
+					else if (perlVariable instanceof PsiPerlArrayVariable)
 					{
-						if (variable.getActualType() == PerlVariableType.ARRAY)
+						String variableName = variable.getName();
+						if (variableName != null)
 						{
-							resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
+							if (variable.getActualType() == PerlVariableType.ARRAY)
+							{
+								resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
 
-						}
-						else if (variable.getActualType() == PerlVariableType.HASH)
-						{
-							resultSet.addElement(setLexical(getHashSliceElementLookupElement(variableName)));
-						}
-					}
-				}
-				else if (perlVariable instanceof PsiPerlArrayIndexVariable)
-				{
-					String variableName = variable.getName();
-					if (variableName != null)
-					{
-						if (variable.getActualType() == PerlVariableType.ARRAY)
-						{
-							resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
+							}
+							else if (variable.getActualType() == PerlVariableType.HASH)
+							{
+								resultSet.addElement(setLexical(getHashSliceElementLookupElement(variableName)));
+							}
 						}
 					}
-				}
-				else if (perlVariable instanceof PsiPerlHashVariable)
-				{
-					String variableName = variable.getName();
-					if (variableName != null)
+					else if (perlVariable instanceof PsiPerlArrayIndexVariable)
 					{
-						if (variable.getActualType() == PerlVariableType.HASH)
+						String variableName = variable.getName();
+						if (variableName != null)
 						{
-							resultSet.addElement(setLexical(getHashLookupElement(variableName)));
+							if (variable.getActualType() == PerlVariableType.ARRAY)
+							{
+								resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
+							}
+						}
+					}
+					else if (perlVariable instanceof PsiPerlHashVariable)
+					{
+						String variableName = variable.getName();
+						if (variableName != null)
+						{
+							if (variable.getActualType() == PerlVariableType.HASH)
+							{
+								resultSet.addElement(setLexical(getHashLookupElement(variableName)));
+							}
 						}
 					}
 				}
