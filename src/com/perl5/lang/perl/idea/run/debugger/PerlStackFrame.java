@@ -22,6 +22,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.evaluation.XDebuggerEvaluator;
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.frame.XValueChildrenList;
@@ -89,5 +90,20 @@ public class PerlStackFrame extends XStackFrame
 	public PerlExecutionStack getPerlExecutionStack()
 	{
 		return myPerlExecutionStack;
+	}
+
+
+	@Nullable
+	@Override
+	public XDebuggerEvaluator getEvaluator()
+	{
+		return new XDebuggerEvaluator()
+		{
+			@Override
+			public void evaluate(@NotNull String expression, @NotNull XEvaluationCallback callback, @Nullable XSourcePosition expressionPosition)
+			{
+				callback.errorOccurred("Error occured");
+			}
+		};
 	}
 }

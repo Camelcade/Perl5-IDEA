@@ -21,9 +21,6 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.project.Project;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
@@ -31,7 +28,6 @@ import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import com.intellij.xdebugger.evaluation.EvaluationMode;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointHandler;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
@@ -61,22 +57,7 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public XDebuggerEditorsProvider getEditorsProvider()
 	{
-		return new XDebuggerEditorsProvider()
-		{
-			@NotNull
-			@Override
-			public FileType getFileType()
-			{
-				return null;
-			}
-
-			@NotNull
-			@Override
-			public Document createDocument(@NotNull Project project, @NotNull String text, @Nullable XSourcePosition sourcePosition, @NotNull EvaluationMode mode)
-			{
-				return null;
-			}
-		};
+		return PerlDebuggerEditorsProvider.INSTANCE;
 	}
 
 	@Override

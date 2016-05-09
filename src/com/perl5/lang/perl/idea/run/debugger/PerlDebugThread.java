@@ -26,6 +26,7 @@ import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescr
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEvent;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventReady;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventsDeserializer;
+import org.apache.commons.codec.binary.Hex;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -101,6 +102,10 @@ public class PerlDebugThread extends Thread
 					{
 						break;
 					}
+					else if (newByte == -1)
+					{
+						return;
+					}
 					else
 					{
 						response.add(newByte);
@@ -159,8 +164,13 @@ public class PerlDebugThread extends Thread
 		}
 	}
 
+	public String sendCommandAndGetResponse(String command, Object data)
+	{
+		return sendStringAndGetResponse(command + " " + new Gson().toJson(data) + "\n");
+	}
+
 	@Nullable
-	public synchronized String sendStringAndGetResponse(String string)
+	public String sendStringAndGetResponse(String string)
 	{
 		if (mySocket == null)
 			return null;
@@ -172,8 +182,10 @@ public class PerlDebugThread extends Thread
 		try
 		{
 			myOutputStream.write(string.getBytes());
+			System.err.println("Sent and waiting:" + string + Hex.encodeHexString(string.getBytes()));
 			myResponseSemaphore.waitFor();
 			response = new String(myResponseBuffer, CharsetToolkit.UTF8_CHARSET);
+			System.err.println("Got response");
 
 		} catch (IOException e)
 		{

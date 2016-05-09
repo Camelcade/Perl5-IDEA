@@ -18,8 +18,11 @@ package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
+import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerEditorsProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,5 +48,12 @@ public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpoi
 	{
 		// fixme add method to disable in templating
 		return file.getFileType() instanceof PerlFileType;
+	}
+
+	@Nullable
+	@Override
+	public XDebuggerEditorsProvider getEditorsProvider(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, @NotNull Project project)
+	{
+		return PerlDebuggerEditorsProvider.INSTANCE;
 	}
 }

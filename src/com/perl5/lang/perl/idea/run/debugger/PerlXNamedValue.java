@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.xdebugger.frame.*;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,8 +53,9 @@ public class PerlXNamedValue extends XNamedValue
 		//
 		PerlDebugThread thread = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
 
-		int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
-		String result = thread.sendStringAndGetResponse("getchildren " + offset + " " + frameSize + " " + myPerlValueDescriptor.getKey() + "\n");
+
+		final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
+		String result = thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset, frameSize, myPerlValueDescriptor.getKey()));
 		PerlValueDescriptor[] descriptors = new Gson().fromJson(result, PerlValueDescriptor[].class);
 
 		XValueChildrenList list = new XValueChildrenList();
