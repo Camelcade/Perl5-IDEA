@@ -17,18 +17,22 @@
 package com.perl5.lang.perl.idea.run.debugger;
 
 import com.google.gson.Gson;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.ResolveState;
+import com.intellij.util.ThreeState;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.*;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
@@ -161,24 +165,24 @@ public class PerlXNamedValue extends XNamedValue
 	@Override
 	public void computeSourcePosition(@NotNull XNavigatable navigatable)
 	{
-		if (!computeMySourcePosition(navigatable))
+		if (!computeMySourcePosition(navigatable, null))
 		{
 			super.computeSourcePosition(navigatable);
 		}
 	}
 
-	protected boolean computeMySourcePosition(@NotNull XNavigatable navigatable)
+	protected boolean computeMySourcePosition(@Nullable XNavigatable navigatable, @Nullable final XInlineDebuggerDataCallback callback)
 	{
 		String name = myPerlValueDescriptor.getName();
 
 		if (StringUtil.isEmpty(name) || name.length() < 2)
 			return false;
 
-		PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
+		final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
 		if (variableType == null || variableType == PerlVariableType.CODE)
 			return false;
 
-		String variableName = name.substring(1);
+		final String variableName = name.substring(1);
 
 		final XSourcePosition sourcePosition = myStackFrame.getSourcePosition();
 		if (sourcePosition == null)
@@ -186,25 +190,78 @@ public class PerlXNamedValue extends XNamedValue
 
 		final Project project = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugSession().getProject();
 		final VirtualFile virtualFile = sourcePosition.getFile();
-		PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
+		PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
 
-		if (!(file instanceof PerlFileImpl))
+		if (!(psiFile instanceof PerlFileImpl))
 			return false;
 
-		PsiElement element = file.findElementAt(sourcePosition.getOffset());
+		PsiElement element = psiFile.findElementAt(sourcePosition.getOffset());
 
 		if (element == null)
 			return false;
 
-		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
-		PerlScopeUtil.treeWalkUp(element, variableProcessor);
+		if (navigatable != null)
+		{
+			PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
+			PerlScopeUtil.treeWalkUp(element, variableProcessor);
 
-		PerlVariableDeclarationWrapper result = variableProcessor.getResult();
-		if (result == null)
-			return false;
+			PerlVariableDeclarationWrapper result = variableProcessor.getResult();
+			if (result == null)
+				return false;
 
-		navigatable.setSourcePosition(XSourcePositionImpl.createByElement(result));
+			navigatable.setSourcePosition(XSourcePositionImpl.createByElement(result));
+		}
+		else if (callback != null)
+		{
+			final Document document = psiFile.getViewProvider().getDocument();
+			if (document == null)
+				return false;
+
+			final boolean[] found = new boolean[]{false};
+
+			PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element)
+			{
+				@Override
+				public boolean execute(@NotNull PsiElement possibleElement, @NotNull ResolveState state)
+				{
+					boolean result = super.execute(possibleElement, state);
+
+					if (!result)
+					{
+						registerElement(getResult());
+					}
+					else if (possibleElement instanceof PerlVariable && ((PerlVariable) possibleElement).getActualType() == variableType && StringUtil.equals(variableName, ((PerlVariable) possibleElement).getName()))
+					{
+						registerElement(possibleElement);
+					}
+
+					return result;
+				}
+
+				private void registerElement(@Nullable PsiElement targetElement)
+				{
+					if (targetElement == null)
+					{
+						return;
+					}
+
+					found[0] = true;
+					callback.computed(virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
+				}
+			};
+
+			PerlScopeUtil.treeWalkUp(element, variableProcessor);
+			return found[0];
+
+		}
 		return true;
 	}
 
+
+	@NotNull
+	@Override
+	public ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback)
+	{
+		return computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO;
+	}
 }
