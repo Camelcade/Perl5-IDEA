@@ -27,6 +27,7 @@ import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import org.jetbrains.annotations.NotNull;
@@ -72,17 +73,26 @@ public class PerlStackFrame extends XStackFrame
 	public void computeChildren(@NotNull XCompositeNode node)
 	{
 		PerlValueDescriptor[] lexicals = myEventStackFrame.getLexicals();
-		if (lexicals.length == 0)
+		PerlValueDescriptor[] globals = myEventStackFrame.getGlobals();
+
+
+		if (lexicals.length + globals.length == 0)
 		{
 			super.computeChildren(node);
 		}
 		else
 		{
 			XValueChildrenList list = new XValueChildrenList();
-			for (PerlValueDescriptor descriptor : lexicals)
+
+			if (lexicals.length > 0)
 			{
-				list.add(new PerlXNamedValue(descriptor, this));
+				list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.PERL_LANGUAGE_ICON, lexicals, this));
 			}
+			if (globals.length > 0)
+			{
+				list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.PERL_LANGUAGE_ICON, globals, this));
+			}
+
 			node.addChildren(list, true);
 		}
 	}
