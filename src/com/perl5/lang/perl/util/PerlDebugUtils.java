@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.google.gson.Gson;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -23,9 +24,17 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import com.intellij.xdebugger.frame.XCompositeNode;
+import com.intellij.xdebugger.frame.XValueChildrenList;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
+import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.PerlXNamedValue;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpoint;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -67,4 +76,27 @@ public class PerlDebugUtils
 		return result[0];
 	}
 
+	public static int requestAndComputeChildren(@NotNull XCompositeNode node, PerlStackFrame perlStackFrame, int offset, int size, String key)
+	{
+		PerlDebugThread thread = perlStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
+
+		final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
+		String result = thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset, frameSize, key));
+		PerlValueDescriptor[] descriptors = new Gson().fromJson(result, PerlValueDescriptor[].class);
+
+		XValueChildrenList list = new XValueChildrenList();
+		for (PerlValueDescriptor descriptor : descriptors)
+		{
+			list.add(new PerlXNamedValue(descriptor, perlStackFrame));
+
+			offset++;
+		}
+		boolean isLast = offset >= size;
+		node.addChildren(list, isLast);
+		if (!isLast)
+		{
+			node.tooManyChildren(size - offset);
+		}
+		return offset;
+	}
 }

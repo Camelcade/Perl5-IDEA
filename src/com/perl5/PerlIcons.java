@@ -53,6 +53,11 @@ public class PerlIcons
 	public static final Icon REGEX_GUTTER_ICON = IconLoader.getIcon("/icons/re_gutter_icon.png");
 	public static final Icon FORMAT_GUTTER_ICON = IconLoader.getIcon("/icons/format_gutter_icon.png");
 	public static final Icon HANDLE_GUTTER_ICON = IconLoader.getIcon("/icons/handle_gutter_icon.png");
+	public static final Icon ARGS_GUTTER_ICON = IconLoader.getIcon("/icons/args_gutter_icon.png");
+	public static final Icon MAIN_GUTTER_ICON = IconLoader.getIcon("/icons/main_gutter_icon.png");
+	public static final Icon MY_GUTTER_ICON = IconLoader.getIcon("/icons/my_gutter_icon.png");
+	public static final Icon OUR_GUTTER_ICON = IconLoader.getIcon("/icons/our_gutter_icon.png");
+
 
 	public static final Icon SCALAR_GUTTER_ICON = IconLoader.getIcon("/icons/scalar_gutter_icon.png");
 	public static final Icon ARRAY_GUTTER_ICON = IconLoader.getIcon("/icons/array_gutter_icon.png");

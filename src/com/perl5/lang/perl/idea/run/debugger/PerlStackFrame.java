@@ -74,9 +74,10 @@ public class PerlStackFrame extends XStackFrame
 	{
 		PerlValueDescriptor[] lexicals = myEventStackFrame.getLexicals();
 		PerlValueDescriptor[] globals = myEventStackFrame.getGlobals();
+		PerlValueDescriptor[] args = myEventStackFrame.getArgs();
+		int mainSize = myEventStackFrame.getMainSize();
 
-
-		if (lexicals.length + globals.length == 0)
+		if (lexicals.length + globals.length + args.length + mainSize == 0)
 		{
 			super.computeChildren(node);
 		}
@@ -84,13 +85,21 @@ public class PerlStackFrame extends XStackFrame
 		{
 			XValueChildrenList list = new XValueChildrenList();
 
-			if (lexicals.length > 0)
-			{
-				list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.PERL_LANGUAGE_ICON, lexicals, this));
-			}
 			if (globals.length > 0)
 			{
-				list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.PERL_LANGUAGE_ICON, globals, this));
+				list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.OUR_GUTTER_ICON, globals, this, false));
+			}
+			if (mainSize > 0)
+			{
+				list.addTopGroup(new PerlXMainGroup(this, mainSize));
+			}
+			if (args.length > 0)
+			{
+				list.addTopGroup(new PerlXValueGroup("Arguments", null, PerlIcons.ARGS_GUTTER_ICON, args, this, true));
+			}
+			if (lexicals.length > 0)
+			{
+				list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.MY_GUTTER_ICON, lexicals, this, true));
 			}
 
 			node.addChildren(list, true);

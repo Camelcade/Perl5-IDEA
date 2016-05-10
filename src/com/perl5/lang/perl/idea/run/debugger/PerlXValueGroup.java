@@ -18,20 +18,22 @@ public class PerlXValueGroup extends XValueGroup
 	private final String myComment;
 	private final Icon myIcon;
 	private final PerlValueDescriptor[] myVariables;
+	private final boolean myIsAutoExpand;
 
-	public PerlXValueGroup(@NotNull String name, String comment, Icon icon, PerlValueDescriptor[] variables, PerlStackFrame stackFrame)
+	public PerlXValueGroup(@NotNull String name, String comment, Icon icon, PerlValueDescriptor[] variables, PerlStackFrame stackFrame, boolean isAutoExpand)
 	{
 		super(name);
 		myComment = comment;
 		myIcon = icon;
 		myVariables = variables;
 		myStackFrame = stackFrame;
+		myIsAutoExpand = isAutoExpand;
 	}
 
 	@Override
 	public boolean isAutoExpand()
 	{
-		return true;
+		return myIsAutoExpand;
 	}
 
 	@Override
@@ -64,5 +66,27 @@ public class PerlXValueGroup extends XValueGroup
 	public String getComment()
 	{
 		return myComment;
+	}
+
+	public PerlStackFrame getStackFrame()
+	{
+		return myStackFrame;
+	}
+
+	public PerlValueDescriptor[] getVariables()
+	{
+		return myVariables;
+	}
+
+	protected int getSize()
+	{
+		return myVariables.length;
+	}
+
+	@NotNull
+	@Override
+	public String getName()
+	{
+		return super.getName() + "(" + getSize() + ")";
 	}
 }

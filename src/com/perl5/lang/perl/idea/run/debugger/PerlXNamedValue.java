@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
-import com.google.gson.Gson;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -32,13 +31,13 @@ import com.intellij.xdebugger.frame.*;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlDebugUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,27 +81,10 @@ public class PerlXNamedValue extends XNamedValue
 			super.computeChildren(node);
 		}
 		//
-		PerlDebugThread thread = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
-
-
-		final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
-		String result = thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset, frameSize, myPerlValueDescriptor.getKey()));
-		PerlValueDescriptor[] descriptors = new Gson().fromJson(result, PerlValueDescriptor[].class);
-
-		XValueChildrenList list = new XValueChildrenList();
-		for (PerlValueDescriptor descriptor : descriptors)
-		{
-			list.add(new PerlXNamedValue(descriptor, myStackFrame));
-
-			offset++;
-		}
-		boolean isLast = offset >= myPerlValueDescriptor.getSize();
-		node.addChildren(list, isLast);
-		if (!isLast)
-		{
-			node.tooManyChildren(myPerlValueDescriptor.getSize() - offset);
-		}
+		offset = PerlDebugUtils.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
 	}
+
+
 
 	@Override
 	public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place)

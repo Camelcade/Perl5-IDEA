@@ -102,7 +102,7 @@ public class PerlDebugThread extends Thread
 			String debugName = debugHost + ":" + debugPort;
 			if (myDebugProfileState.isPerlServer())
 			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName + "...", ConsoleViewContentType.SYSTEM_OUTPUT);
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 				mySocket = new Socket(debugHost, debugPort);
 			}
 			else

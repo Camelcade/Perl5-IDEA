@@ -24,8 +24,10 @@ public class PerlDebuggingStackFrame
 	private String name;
 	private String file;
 	private int line;
+	private int main_size;
 	private PerlValueDescriptor[] lexicals;
 	private PerlValueDescriptor[] globals;
+	private PerlValueDescriptor[] args;
 
 	public String getName()
 	{
@@ -50,5 +52,15 @@ public class PerlDebuggingStackFrame
 	public PerlValueDescriptor[] getGlobals()
 	{
 		return globals;
+	}
+
+	public int getMainSize()
+	{
+		return main_size;
+	}
+
+	public PerlValueDescriptor[] getArgs()
+	{
+		return args;
 	}
 }
