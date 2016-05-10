@@ -54,6 +54,15 @@ public class PerlXNamedValue extends XNamedValue
 	private static Method mySourcePositionMethod;
 	private static Method myLegacyMethod;
 
+	static
+	{
+		mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
+		if (mySourcePositionMethod == null)
+		{
+			myLegacyMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
+		}
+	}
+
 	private final PerlStackFrame myStackFrame;
 	private final PerlValueDescriptor myPerlValueDescriptor;
 	private int offset = 0;
@@ -253,15 +262,6 @@ public class PerlXNamedValue extends XNamedValue
 
 					found[0] = true;
 
-					if (myLegacyMethod == null && mySourcePositionMethod == null)
-					{
-						mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
-						if (mySourcePositionMethod == null)
-						{
-							myLegacyMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
-						}
-					}
-
 					try
 					{
 						if (mySourcePositionMethod != null)
@@ -272,10 +272,16 @@ public class PerlXNamedValue extends XNamedValue
 						{
 							myLegacyMethod.invoke(callback, virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
 						}
-					} catch (InvocationTargetException e)
+						else
+						{
+							found[0] = false;
+						}
+					}
+					catch (InvocationTargetException e)
 					{
 						e.printStackTrace();
-					} catch (IllegalAccessException e)
+					}
+					catch (IllegalAccessException e)
 					{
 						e.printStackTrace();
 					}
