@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.ResolveState;
+import com.intellij.util.ReflectionUtil;
 import com.intellij.util.ThreeState;
 import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.*;
@@ -42,12 +43,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by hurricup on 08.05.2016.
  */
 public class PerlXNamedValue extends XNamedValue
 {
+	private static Method mySourcePositionMethod;
+	private static Method myLegacyMethod;
+
 	private final PerlStackFrame myStackFrame;
 	private final PerlValueDescriptor myPerlValueDescriptor;
 	private int offset = 0;
@@ -246,7 +252,33 @@ public class PerlXNamedValue extends XNamedValue
 					}
 
 					found[0] = true;
-					callback.computed(virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
+
+					if (myLegacyMethod == null && mySourcePositionMethod == null)
+					{
+						mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
+						if (mySourcePositionMethod == null)
+						{
+							myLegacyMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
+						}
+					}
+
+					try
+					{
+						if (mySourcePositionMethod != null)
+						{
+							mySourcePositionMethod.invoke(callback, XSourcePositionImpl.createByElement(targetElement));
+						}
+						else if (myLegacyMethod != null)
+						{
+							myLegacyMethod.invoke(callback, virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
+						}
+					} catch (InvocationTargetException e)
+					{
+						e.printStackTrace();
+					} catch (IllegalAccessException e)
+					{
+						e.printStackTrace();
+					}
 				}
 			};
 
