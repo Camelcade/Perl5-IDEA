@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.google.gson.Gson;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -29,6 +30,8 @@ import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlEvalRequestDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlEvalResponseDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -121,7 +124,23 @@ public class PerlStackFrame extends XStackFrame
 			@Override
 			public void evaluate(@NotNull String expression, @NotNull XEvaluationCallback callback, @Nullable XSourcePosition expressionPosition)
 			{
-				callback.errorOccurred("Error occured");
+				PerlDebugThread thread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+
+				String result = thread.sendCommandAndGetResponse("e", new PerlEvalRequestDescriptor(expression));
+				PerlEvalResponseDescriptor descriptor = new Gson().fromJson(result, PerlEvalResponseDescriptor.class);
+
+				if (descriptor == null)
+				{
+					callback.errorOccurred("Something bad happened on Perl side. Report to plugin devs.");
+				}
+				else if (descriptor.isError())
+				{
+					callback.errorOccurred(descriptor.getResult().getValue());
+				}
+				else
+				{
+					callback.evaluated(new PerlXNamedValue(descriptor.getResult(), PerlStackFrame.this));
+				}
 			}
 		};
 	}

@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +46,9 @@ public class PerlLineBreakPointDescriptor
 			descriptor.line = breakpoint.getLine();
 			descriptor.enabled = breakpoint.isEnabled();
 			descriptor.remove = false;
-			descriptor.condition = "";
+
+			XExpression conditionExpression = breakpoint.getConditionExpression();
+			descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
 		}
 		return descriptor;
 	}
