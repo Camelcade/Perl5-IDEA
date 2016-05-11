@@ -47,7 +47,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PerlDebugThread extends Thread
 {
-	public static final boolean DEV_MODE = true; //ApplicationManager.getApplication().isInternal();
+	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
 
 	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
