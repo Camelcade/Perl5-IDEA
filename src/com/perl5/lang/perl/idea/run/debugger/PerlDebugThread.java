@@ -40,6 +40,7 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -61,6 +62,7 @@ public class PerlDebugThread extends Thread
 	private boolean isReady = false;
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
+	private ReentrantLock lock = new ReentrantLock();
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -188,34 +190,55 @@ public class PerlDebugThread extends Thread
 
 		try
 		{
+			if (DEV_MODE)
+				System.err.println("Going to send string " + string);
+
+			lock.lock();
+
+			if (DEV_MODE)
+				System.err.println("Sent string " + string);
+
+
 			myOutputStream.write(string.getBytes());
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			lock.unlock();
+		}
 	}
 
-	public synchronized void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
+	public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
 	{
 		if (mySocket == null)
 			return;
 
-		PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
-		String string = command + " " + new Gson().toJson(transaction) + "\n";
-
-		if (DEV_MODE)
-			System.err.println("Sent transaction " + transaction.getTransactionId() + " " + string);
-
-		transactionsMap.put(transaction.getTransactionId(), transactionHandler);
-
 		try
 		{
-			myOutputStream.write(string.getBytes());
+			lock.lock();
+			PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
+			String string = command + " " + new Gson().toJson(transaction) + "\n";
+
+			if (DEV_MODE)
+				System.err.println("Sent transaction " + transaction.getTransactionId() + " " + string);
+
+			transactionsMap.put(transaction.getTransactionId(), transactionHandler);
+
+			try
+			{
+				myOutputStream.write(string.getBytes());
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
-		catch (IOException e)
+		finally
 		{
-			e.printStackTrace();
+			lock.unlock();
 		}
 	}
 
