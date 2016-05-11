@@ -80,33 +80,41 @@ public class PerlStackFrame extends XStackFrame
 		PerlValueDescriptor[] args = myEventStackFrame.getArgs();
 		int mainSize = myEventStackFrame.getMainSize();
 
-		if (lexicals.length + globals.length + args.length + mainSize == 0)
+		boolean fallback = true;
+
+		XValueChildrenList list = new XValueChildrenList();
+
+		if (globals != null && globals.length > 0)
+		{
+			list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.OUR_GUTTER_ICON, globals, this, false));
+			fallback = false;
+		}
+		if (mainSize > 0)
+		{
+			list.addTopGroup(new PerlXMainGroup(this, mainSize));
+			fallback = false;
+		}
+		if (args != null && args.length > 0)
+		{
+			list.addTopGroup(new PerlXValueGroup("Arguments", null, PerlIcons.ARGS_GUTTER_ICON, args, this, true));
+			fallback = false;
+		}
+		if (lexicals != null && lexicals.length > 0)
+		{
+			list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.MY_GUTTER_ICON, lexicals, this, true));
+			fallback = false;
+		}
+
+
+		if (fallback)
 		{
 			super.computeChildren(node);
 		}
 		else
 		{
-			XValueChildrenList list = new XValueChildrenList();
-
-			if (globals.length > 0)
-			{
-				list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.OUR_GUTTER_ICON, globals, this, false));
-			}
-			if (mainSize > 0)
-			{
-				list.addTopGroup(new PerlXMainGroup(this, mainSize));
-			}
-			if (args.length > 0)
-			{
-				list.addTopGroup(new PerlXValueGroup("Arguments", null, PerlIcons.ARGS_GUTTER_ICON, args, this, true));
-			}
-			if (lexicals.length > 0)
-			{
-				list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.MY_GUTTER_ICON, lexicals, this, true));
-			}
-
 			node.addChildren(list, true);
 		}
+
 	}
 
 	public PerlExecutionStack getPerlExecutionStack()
