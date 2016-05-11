@@ -49,7 +49,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class PerlDebugThread extends Thread
 {
-	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
+	public static final boolean DEV_MODE = true; //ApplicationManager.getApplication().isInternal();
 
 	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
@@ -145,16 +145,25 @@ public class PerlDebugThread extends Thread
 				}
 
 				if (DEV_MODE)
-					System.err.println("Read");
+				{
+					System.err.println("Got response");
+					System.err.println(new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
+				}
 
 				if (myWaitForResponse)
 				{
+					if (DEV_MODE)
+						System.err.println("Awaited response");
+
 					myResponseBuffer = response.toNativeArray();
 					myWaitForResponse = false;
 					myResponseSemaphore.up();
 				}
 				else
 				{
+					if (DEV_MODE)
+						System.err.println("My response");
+
 					processResponse(response);
 				}
 			}
