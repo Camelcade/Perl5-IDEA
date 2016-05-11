@@ -56,6 +56,7 @@ public class PerlDebugThread extends Thread
 	private final PerlDebugProfileState myDebugProfileState;
 	private XDebugSession mySession;
 	private Socket mySocket;
+	private ServerSocket myServerSocket;
 	private OutputStream myOutputStream;
 	private InputStream myInputStream;
 	private Semaphore myResponseSemaphore = new Semaphore();
@@ -107,10 +108,11 @@ public class PerlDebugThread extends Thread
 			}
 			else
 			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName + "...", ConsoleViewContentType.SYSTEM_OUTPUT);
-				ServerSocket serverSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
-				mySocket = serverSocket.accept();
+				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+				myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
+				mySocket = myServerSocket.accept();
 			}
+			((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 
 			myOutputStream = mySocket.getOutputStream();
 			myInputStream = mySocket.getInputStream();
@@ -159,8 +161,7 @@ public class PerlDebugThread extends Thread
 
 		} catch (IOException e)
 		{
-			StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
-			e.printStackTrace();
+			setStop();
 		} catch (ExecutionException e)
 		{
 			e.printStackTrace();
@@ -258,6 +259,9 @@ public class PerlDebugThread extends Thread
 
 	public void setStop()
 	{
+		if (myStop)
+			return;
+
 		myStop = true;
 		try
 		{
@@ -289,7 +293,22 @@ public class PerlDebugThread extends Thread
 		} catch (IOException e)
 		{
 		}
+		try
+		{
+			if (myServerSocket != null)
+			{
+				myServerSocket.close();
+				myServerSocket.close();
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
+		StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
+
+		((ConsoleView) myExecutionResult.getExecutionConsole()).print("Disconnected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 	}
 
 	protected Gson createGson()
