@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlXMainGroup extends PerlXValueGroup
 {
 	private final int mySize;
-	private int offset = 0;
+	private int[] offset = new int[]{0};
 
 	public PerlXMainGroup(PerlStackFrame stackFrame, int size)
 	{
@@ -38,12 +38,12 @@ public class PerlXMainGroup extends PerlXValueGroup
 	@Override
 	public void computeChildren(@NotNull XCompositeNode node)
 	{
-		offset = PerlDebugUtils.requestAndComputeChildren(node, getStackFrame(), getOffset(), getSize(), "*main::{HASH}");
+		PerlDebugUtils.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
 	}
 
 	public int getOffset()
 	{
-		return offset;
+		return offset[0];
 	}
 
 	@Override

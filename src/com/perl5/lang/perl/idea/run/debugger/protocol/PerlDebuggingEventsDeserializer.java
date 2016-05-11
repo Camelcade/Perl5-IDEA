@@ -21,6 +21,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 
 import java.lang.reflect.Type;
 
@@ -29,6 +30,13 @@ import java.lang.reflect.Type;
  */
 public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDebuggingEvent>
 {
+	private final PerlDebugThread myPerlDebugThread;
+
+	public PerlDebuggingEventsDeserializer(PerlDebugThread perlDebugThread)
+	{
+		myPerlDebugThread = perlDebugThread;
+	}
+
 	@Override
 	public PerlDebuggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
 	{
@@ -67,6 +75,20 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 			else if (StringUtil.equals(event, "READY"))
 			{
 				eventObject = new PerlDebuggingEventReady();
+			}
+			else if (StringUtil.equals(event, "RESPONSE"))
+			{
+				int transactionId = jsonElement.getAsJsonObject().getAsJsonPrimitive("transactionId").getAsInt();
+				PerlDebuggingTransactionHandler transactionHandler = myPerlDebugThread.getTransactionHandler(transactionId);
+
+				if (transactionHandler == null)
+				{
+					throw new RuntimeException("Missing transaction handler for transaction " + transactionId);
+				}
+
+				transactionHandler.run(jsonElement.getAsJsonObject(), jsonDeserializationContext);
+
+				eventObject = new PerlDebuggingEventDumb();
 			}
 			else
 			{

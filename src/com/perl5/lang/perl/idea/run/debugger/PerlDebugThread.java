@@ -24,14 +24,10 @@ import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEvent;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventReady;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventsDeserializer;
-import org.apache.commons.codec.binary.Hex;
+import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -42,6 +38,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -59,12 +56,11 @@ public class PerlDebugThread extends Thread
 	private ServerSocket myServerSocket;
 	private OutputStream myOutputStream;
 	private InputStream myInputStream;
-	private Semaphore myResponseSemaphore = new Semaphore();
-	private boolean myWaitForResponse = false;
-	private byte[] myResponseBuffer;
 	private boolean myStop = false;
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 	private boolean isReady = false;
+	private int transactionId = 0;
+	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -124,7 +120,7 @@ public class PerlDebugThread extends Thread
 				response.clear();
 
 				if (DEV_MODE)
-					System.err.println("Reading data");
+					System.err.println("\nReading data");
 
 				// reading bytes
 				while (myInputStream != null)
@@ -146,32 +142,19 @@ public class PerlDebugThread extends Thread
 
 				if (DEV_MODE)
 				{
-					System.err.println("Got response");
+					System.err.println("Got response " + response.size());
 					System.err.println(new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
 				}
 
-				if (myWaitForResponse)
-				{
-					if (DEV_MODE)
-						System.err.println("Awaited response");
-
-					myResponseBuffer = response.toNativeArray();
-					myWaitForResponse = false;
-					myResponseSemaphore.up();
-				}
-				else
-				{
-					if (DEV_MODE)
-						System.err.println("My response");
-
-					processResponse(response);
-				}
+				processResponse(response);
 			}
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			setStop();
-		} catch (ExecutionException e)
+		}
+		catch (ExecutionException e)
 		{
 			e.printStackTrace();
 		}
@@ -206,59 +189,34 @@ public class PerlDebugThread extends Thread
 		try
 		{
 			myOutputStream.write(string.getBytes());
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-	public String sendCommandAndGetResponse(String command, Object data)
-	{
-		return sendStringAndGetResponse(command + " " + new Gson().toJson(data) + "\n");
-	}
-
-	@Nullable
-	public String sendStringAndGetResponse(String string)
+	public synchronized void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
 	{
 		if (mySocket == null)
-			return null;
+			return;
 
-		myResponseSemaphore.down();
-		myWaitForResponse = true;
+		PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
+		String string = command + " " + new Gson().toJson(transaction) + "\n";
 
-		String response = null;
+		if (DEV_MODE)
+			System.err.println("Sent transaction " + transaction.getTransactionId() + " " + string);
+
+		transactionsMap.put(transaction.getTransactionId(), transactionHandler);
+
 		try
 		{
-			myResponseBuffer = null;
 			myOutputStream.write(string.getBytes());
-
-			if (DEV_MODE)
-				System.err.println("Sent and waiting:" + string + Hex.encodeHexString(string.getBytes()));
-
-			myResponseSemaphore.waitFor(5000);
-			myWaitForResponse = false;
-			myResponseSemaphore.tryUp();
-
-			if (myResponseBuffer == null)
-			{
-				response = "";
-
-				if (DEV_MODE)
-					System.err.println("No response, timeoout");
-			}
-			else
-			{
-				response = new String(myResponseBuffer, CharsetToolkit.UTF8_CHARSET);
-
-				if (DEV_MODE)
-					System.err.println("Got response");
-			}
-
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		return response;
 	}
 
 	public Socket getSocket()
@@ -279,7 +237,8 @@ public class PerlDebugThread extends Thread
 				myInputStream.close();
 				myInputStream = null;
 			}
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 		}
 		try
@@ -289,7 +248,8 @@ public class PerlDebugThread extends Thread
 				myOutputStream.close();
 				myOutputStream = null;
 			}
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 		}
 		try
@@ -299,7 +259,8 @@ public class PerlDebugThread extends Thread
 				mySocket.close();
 				mySocket = null;
 			}
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 		}
 		try
@@ -323,8 +284,13 @@ public class PerlDebugThread extends Thread
 	protected Gson createGson()
 	{
 		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer());
+		builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer(this));
 		return builder.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
 	}
 
+	@Nullable
+	public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId)
+	{
+		return transactionsMap.remove(transactionId);
+	}
 }

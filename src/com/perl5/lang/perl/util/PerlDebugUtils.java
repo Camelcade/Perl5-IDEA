@@ -16,7 +16,8 @@
 
 package com.perl5.lang.perl.util;
 
-import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -32,6 +33,7 @@ import com.perl5.lang.perl.idea.run.debugger.PerlXNamedValue;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpoint;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingTransactionHandler;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
 import org.jetbrains.annotations.NotNull;
@@ -76,27 +78,34 @@ public class PerlDebugUtils
 		return result[0];
 	}
 
-	public static int requestAndComputeChildren(@NotNull XCompositeNode node, PerlStackFrame perlStackFrame, int offset, int size, String key)
+	public static void requestAndComputeChildren(@NotNull final XCompositeNode node, final PerlStackFrame perlStackFrame, final int[] offset, final int size, String key)
 	{
 		PerlDebugThread thread = perlStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
 
 		final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
-		String result = thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset, frameSize, key));
-		PerlValueDescriptor[] descriptors = new Gson().fromJson(result, PerlValueDescriptor[].class);
-
-		XValueChildrenList list = new XValueChildrenList();
-		for (PerlValueDescriptor descriptor : descriptors)
+		thread.sendCommandAndGetResponse("getchildren", new PerlValueRequestDescriptor(offset[0], frameSize, key), new PerlDebuggingTransactionHandler()
 		{
-			list.add(new PerlXNamedValue(descriptor, perlStackFrame));
+			@Override
+			public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext)
+			{
+				PerlValueDescriptor[] descriptors = jsonDeserializationContext.deserialize(
+						jsonObject.getAsJsonArray("data"), PerlValueDescriptor[].class
+				);
 
-			offset++;
-		}
-		boolean isLast = offset >= size;
-		node.addChildren(list, isLast);
-		if (!isLast)
-		{
-			node.tooManyChildren(size - offset);
-		}
-		return offset;
+				XValueChildrenList list = new XValueChildrenList();
+				for (PerlValueDescriptor descriptor : descriptors)
+				{
+					list.add(new PerlXNamedValue(descriptor, perlStackFrame));
+
+					offset[0]++;
+				}
+				boolean isLast = offset[0] >= size;
+				node.addChildren(list, isLast);
+				if (!isLast)
+				{
+					node.tooManyChildren(size - offset[0]);
+				}
+			}
+		});
 	}
 }

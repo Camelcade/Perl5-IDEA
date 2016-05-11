@@ -64,7 +64,7 @@ public class PerlXNamedValue extends XNamedValue
 
 	private final PerlStackFrame myStackFrame;
 	private final PerlValueDescriptor myPerlValueDescriptor;
-	private int offset = 0;
+	private int[] offset = new int[]{0};
 
 	public PerlXNamedValue(@NotNull PerlValueDescriptor descriptor, PerlStackFrame stackFrame)
 	{
@@ -81,7 +81,7 @@ public class PerlXNamedValue extends XNamedValue
 			super.computeChildren(node);
 		}
 		//
-		offset = PerlDebugUtils.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+		PerlDebugUtils.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
 	}
 
 
