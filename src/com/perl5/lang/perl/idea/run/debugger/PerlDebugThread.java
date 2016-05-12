@@ -127,18 +127,18 @@ public class PerlDebugThread extends Thread
 				// reading bytes
 				while (myInputStream != null)
 				{
-					byte newByte = (byte) myInputStream.read();
-					if (newByte == '\n')
+					int dataByte = myInputStream.read();
+					if (dataByte == '\n')
 					{
 						break;
 					}
-					else if (newByte == -1)
+					else if (dataByte == -1)
 					{
 						return;
 					}
 					else
 					{
-						response.add(newByte);
+						response.add((byte) dataByte);
 					}
 				}
 
@@ -154,11 +154,19 @@ public class PerlDebugThread extends Thread
 		}
 		catch (IOException e)
 		{
-			setStop();
+			e.printStackTrace();
 		}
 		catch (ExecutionException e)
 		{
 			e.printStackTrace();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			setStop();
 		}
 	}
 
