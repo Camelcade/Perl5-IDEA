@@ -28,6 +28,7 @@ import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -38,6 +39,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
@@ -63,6 +65,7 @@ public class PerlDebugThread extends Thread
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
+	private Map<String, String> sourcesMap = new THashMap<String, String>();
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -241,6 +244,7 @@ public class PerlDebugThread extends Thread
 			}
 			catch (IOException e)
 			{
+				setStop();
 				e.printStackTrace();
 			}
 		}
@@ -323,5 +327,41 @@ public class PerlDebugThread extends Thread
 	public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId)
 	{
 		return transactionsMap.remove(transactionId);
+	}
+
+	public void registerFileSource(String fileName, String fileSource)
+	{
+		sourcesMap.put(fileName, fileSource);
+	}
+
+	@Nullable
+	public String getFileSource(String fileName)
+	{
+		return sourcesMap.get(fileName);
+
+		// this may be reused later
+//		if( sourcesMap.containsKey(fileName))
+//		{
+//		}
+//		final Semaphore responseSemaphore = new Semaphore();
+//		responseSemaphore.down();
+//
+//		final String[] response = new String[]{null};
+//
+//		PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler()
+//		{
+//			@Override
+//			public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext)
+//			{
+//				response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
+//				responseSemaphore.up();
+//			}
+//		};
+//
+//		sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(fileName), perlDebuggingTransactionHandler);
+//		responseSemaphore.waitFor(10000);
+//
+//		sourcesMap.put(fileName, response[0]);
+//		return response[0];
 	}
 }

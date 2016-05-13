@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XSuspendContext;
-import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingStackFrame;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,11 +34,11 @@ public class PerlSuspendContext extends XSuspendContext
 	private final XDebugSession myDebugSession;
 	private final PerlDebugThread myDebugThread;
 
-	public PerlSuspendContext(PerlDebuggingStackFrame[] eventStackFrames, XDebugSession session, PerlDebugThread thread)
+	public PerlSuspendContext(PerlStackFrameDescriptor[] eventStackFrames, XDebugSession session, PerlDebugThread thread)
 	{
-		myXExecutionStack = new PerlExecutionStack(eventStackFrames, this);
 		myDebugSession = session;
 		myDebugThread = thread;
+		myXExecutionStack = new PerlExecutionStack(eventStackFrames, this);
 	}
 
 	@Nullable

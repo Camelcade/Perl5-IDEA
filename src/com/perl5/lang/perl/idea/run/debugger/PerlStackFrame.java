@@ -19,8 +19,13 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
@@ -30,6 +35,7 @@ import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,21 +47,56 @@ import java.io.File;
  */
 public class PerlStackFrame extends XStackFrame
 {
-	private final PerlDebuggingStackFrame myEventStackFrame;
-	private final VirtualFile myVirtualFile;
+	private final PerlStackFrameDescriptor myFrameDescriptor;
 	private final PerlExecutionStack myPerlExecutionStack;
-
-	public PerlStackFrame(PerlDebuggingStackFrame eventStackFrame, PerlExecutionStack stack)
+	private AtomicNullableLazyValue<VirtualFile> myVirtualFile = new AtomicNullableLazyValue<VirtualFile>()
 	{
-		myEventStackFrame = eventStackFrame;
-		myVirtualFile = VfsUtil.findFileByIoFile(new File(eventStackFrame.getFile()), true);
+		@Nullable
+		@Override
+		protected VirtualFile compute()
+		{
+			String myFileName = myFrameDescriptor.getFileName();
+
+			if (StringUtil.startsWith(myFileName, "(eval ")) // evel sequence
+			{
+				PerlSuspendContext suspendContext = getPerlExecutionStack().getSuspendContext();
+
+
+				final Project project = suspendContext.getDebugSession().getProject();
+				for (VirtualFile openedFile : FileEditorManager.getInstance(project).getOpenFiles())
+				{
+					if (StringUtil.equals(openedFile.getName(), myFileName))
+					{
+						return openedFile;
+					}
+				}
+
+				String source = suspendContext.getDebugThread().getFileSource(myFileName);
+				return source == null ? null : new LightVirtualFile(myFileName, PerlFileType.INSTANCE, source);
+			}
+			else
+			{
+				return VfsUtil.findFileByIoFile(new File(myFileName), true);
+			}
+		}
+	};
+
+	public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack)
+	{
+		myFrameDescriptor = frameDescriptor;
 		myPerlExecutionStack = stack;
+		String source = myFrameDescriptor.getSource();
+		if (source != null)
+		{
+			myPerlExecutionStack.getSuspendContext().getDebugThread().registerFileSource(myFrameDescriptor.getFileName(), source);
+		}
+
 	}
 
 	@Override
 	public void customizePresentation(@NotNull ColoredTextContainer component)
 	{
-		component.append(myEventStackFrame.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+		component.append(myFrameDescriptor.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
 		component.setIcon(AllIcons.Debugger.StackFrame);
 	}
 
@@ -63,9 +104,10 @@ public class PerlStackFrame extends XStackFrame
 	@Override
 	public XSourcePosition getSourcePosition()
 	{
-		if (myVirtualFile != null)
+		VirtualFile virtualFile = myVirtualFile.getValue();
+		if (virtualFile != null)
 		{
-			return XSourcePositionImpl.create(myVirtualFile, myEventStackFrame.getLine());
+			return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getLine());
 		}
 		return super.getSourcePosition();
 	}
@@ -73,10 +115,10 @@ public class PerlStackFrame extends XStackFrame
 	@Override
 	public void computeChildren(@NotNull XCompositeNode node)
 	{
-		PerlValueDescriptor[] lexicals = myEventStackFrame.getLexicals();
-		PerlValueDescriptor[] globals = myEventStackFrame.getGlobals();
-		PerlValueDescriptor[] args = myEventStackFrame.getArgs();
-		int mainSize = myEventStackFrame.getMainSize();
+		PerlValueDescriptor[] lexicals = myFrameDescriptor.getLexicals();
+		PerlValueDescriptor[] globals = myFrameDescriptor.getGlobals();
+		PerlValueDescriptor[] args = myFrameDescriptor.getArgs();
+		int mainSize = myFrameDescriptor.getMainSize();
 
 		boolean fallback = true;
 

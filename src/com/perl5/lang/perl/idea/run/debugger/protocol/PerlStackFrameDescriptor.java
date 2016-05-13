@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 05.05.2016.
  */
-public class PerlDebuggingStackFrame
+public class PerlStackFrameDescriptor
 {
 	private String name;
 	private String file;
@@ -28,13 +28,14 @@ public class PerlDebuggingStackFrame
 	private PerlValueDescriptor[] lexicals;
 	private PerlValueDescriptor[] globals;
 	private PerlValueDescriptor[] args;
+	private String source;
 
 	public String getName()
 	{
 		return name;
 	}
 
-	public String getFile()
+	public String getFileName()
 	{
 		return file;
 	}
@@ -62,5 +63,10 @@ public class PerlDebuggingStackFrame
 	public PerlValueDescriptor[] getArgs()
 	{
 		return args;
+	}
+
+	public String getSource()
+	{
+		return source;
 	}
 }

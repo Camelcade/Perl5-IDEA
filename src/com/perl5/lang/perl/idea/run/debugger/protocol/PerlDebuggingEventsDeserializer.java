@@ -51,8 +51,8 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 				PerlDebuggingEventStop newEvent = new PerlDebuggingEventStop();
 
 				newEvent.setFrames(
-						(PerlDebuggingStackFrame[]) jsonDeserializationContext.deserialize(
-								jsonElement.getAsJsonObject().getAsJsonArray("data"), PerlDebuggingStackFrame[].class
+						(PerlStackFrameDescriptor[]) jsonDeserializationContext.deserialize(
+								jsonElement.getAsJsonObject().getAsJsonArray("data"), PerlStackFrameDescriptor[].class
 						));
 
 				eventObject = newEvent;
