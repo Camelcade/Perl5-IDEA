@@ -23,11 +23,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
+import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.PerlXNamedValue;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
@@ -58,7 +60,10 @@ public class PerlDebugUtils
 			public void run()
 			{
 				String path = breakpointBase.getPath();
-				VirtualFile virtualFile = breakpointBase.getDebugThread().getForeignVirtualFileByName(path);
+
+				VirtualFile virtualFile = null;
+
+				virtualFile = VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + path);
 
 				if (virtualFile == null)
 				{

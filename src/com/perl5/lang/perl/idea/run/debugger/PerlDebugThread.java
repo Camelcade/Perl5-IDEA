@@ -23,16 +23,12 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.util.Key;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -43,7 +39,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
@@ -53,7 +48,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PerlDebugThread extends Thread
 {
-	public static final Key<String> FOREIGN_FILE_NAME = new Key<String>("FOREIGN_FILE_NAME");
 	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
 
 	private final ExecutionResult myExecutionResult;
@@ -70,7 +64,7 @@ public class PerlDebugThread extends Thread
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
-	private Map<String, VirtualFile> sourcesMap = new THashMap<String, VirtualFile>();
+	private PerlRemoteFileSystem perlRemoteFileSystem = ApplicationManager.getApplication().getComponent(PerlRemoteFileSystem.class);
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -79,6 +73,7 @@ public class PerlDebugThread extends Thread
 		myGson = createGson();
 		myDebugProfileState = state;
 		myExecutionResult = executionResult;
+//		perlRemoteFileSystem.dropCache();
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -334,42 +329,8 @@ public class PerlDebugThread extends Thread
 		return transactionsMap.remove(transactionId);
 	}
 
-	public void registerFileSource(String fileName, String displayName, String fileSource)
+	public PerlRemoteFileSystem getPerlRemoteFileSystem()
 	{
-		LightVirtualFile value = new LightVirtualFile(displayName, PerlFileType.INSTANCE, fileSource);
-		value.putUserData(FOREIGN_FILE_NAME, fileName);
-		sourcesMap.put(fileName, value);
-		sourcesMap.put(value.getUrl(), value);
-	}
-
-	@Nullable
-	public VirtualFile getForeignVirtualFileByName(String fileName)
-	{
-		return sourcesMap.get(fileName);
-
-		// this may be reused later
-//		if( sourcesMap.containsKey(fileName))
-//		{
-//		}
-//		final Semaphore responseSemaphore = new Semaphore();
-//		responseSemaphore.down();
-//
-//		final String[] response = new String[]{null};
-//
-//		PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler()
-//		{
-//			@Override
-//			public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext)
-//			{
-//				response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
-//				responseSemaphore.up();
-//			}
-//		};
-//
-//		sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(fileName), perlDebuggingTransactionHandler);
-//		responseSemaphore.waitFor(10000);
-//
-//		sourcesMap.put(fileName, response[0]);
-//		return response[0];
+		return perlRemoteFileSystem;
 	}
 }

@@ -827,6 +827,10 @@
         <component>
             <implementation-class>com.perl5.compat.PerlStubIndex</implementation-class>
         </component>
+        <component>
+            <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
+        </component>
+
     </application-components>
 
     <project-components>

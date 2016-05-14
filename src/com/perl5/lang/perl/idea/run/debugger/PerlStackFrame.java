@@ -22,6 +22,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
@@ -53,8 +54,7 @@ public class PerlStackFrame extends XStackFrame
 			String myFileName = myFrameDescriptor.getFileName();
 
 			VirtualFile result = VfsUtil.findFileByIoFile(new File(myFileName), true);
-
-			return result == null ? getPerlExecutionStack().getSuspendContext().getDebugThread().getForeignVirtualFileByName(myFileName) : result;
+			return result == null ? VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + myFileName) : result;
 		}
 	};
 
@@ -65,7 +65,7 @@ public class PerlStackFrame extends XStackFrame
 		String source = myFrameDescriptor.getSource();
 		if (source != null)
 		{
-			myPerlExecutionStack.getSuspendContext().getDebugThread().registerFileSource(myFrameDescriptor.getFileName(), myFrameDescriptor.getName(), source);
+			myPerlExecutionStack.getSuspendContext().getDebugThread().getPerlRemoteFileSystem().registerRemoteFile(myFrameDescriptor.getName(), myFrameDescriptor.getFileName(), source);
 		}
 
 	}

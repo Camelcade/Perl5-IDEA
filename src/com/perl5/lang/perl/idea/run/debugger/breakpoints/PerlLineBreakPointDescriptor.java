@@ -38,26 +38,13 @@ public class PerlLineBreakPointDescriptor
 	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, PerlDebugThread debugThread)
 	{
 		VirtualFile virtualFile;
-		String fileUrl = breakpoint.getFileUrl();
 		String filePath = null;
 
-		if (fileUrl.startsWith("mock://"))
+		virtualFile = VirtualFileManager.getInstance().findFileByUrl(breakpoint.getFileUrl());
+		if (virtualFile != null)
 		{
-			virtualFile = debugThread.getForeignVirtualFileByName(fileUrl);
-			if (virtualFile != null)
-			{
-				filePath = PerlDebugThread.FOREIGN_FILE_NAME.get(virtualFile);
-			}
+			filePath = virtualFile.getCanonicalPath();
 		}
-		else
-		{
-			virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
-			if (virtualFile != null)
-			{
-				filePath = virtualFile.getCanonicalPath();
-			}
-		}
-
 
 		PerlLineBreakPointDescriptor descriptor = null;
 		if (virtualFile != null)
