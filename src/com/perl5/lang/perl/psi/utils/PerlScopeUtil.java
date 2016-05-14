@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,9 +41,26 @@ public class PerlScopeUtil
 		while (run != null)
 		{
 			if (place != run && !run.processDeclarations(processor, state, lastParent, place))
+			{
 				return false;
+			}
 			lastParent = run;
-			run = run.getParent();
+
+			if (run instanceof PsiFile)
+			{
+				if (run instanceof PerlFileImpl)
+				{
+					run = ((PerlFileImpl) ((PerlFileImpl) run).getOriginalFile()).getFileContext();
+				}
+				else
+				{
+					run = null;
+				}
+			}
+			else
+			{
+				run = run.getParent();
+			}
 		}
 		return true;
 	}

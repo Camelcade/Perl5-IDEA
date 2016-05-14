@@ -47,17 +47,14 @@ public class PerlLineBreakPointDescriptor
 		}
 
 		PerlLineBreakPointDescriptor descriptor = null;
-		if (virtualFile != null)
-		{
-			descriptor = new PerlLineBreakPointDescriptor();
-			descriptor.path = filePath;
-			descriptor.line = breakpoint.getLine();
-			descriptor.enabled = breakpoint.isEnabled();
-			descriptor.remove = false;
+		descriptor = new PerlLineBreakPointDescriptor();
+		descriptor.path = filePath;
+		descriptor.line = breakpoint.getLine();
+		descriptor.enabled = breakpoint.isEnabled();
+		descriptor.remove = false;
 
-			XExpression conditionExpression = breakpoint.getConditionExpression();
-			descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
-		}
+		XExpression conditionExpression = breakpoint.getConditionExpression();
+		descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
 		return descriptor;
 	}
 

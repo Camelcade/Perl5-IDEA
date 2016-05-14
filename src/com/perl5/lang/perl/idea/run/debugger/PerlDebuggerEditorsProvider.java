@@ -23,6 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProviderBase;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +37,9 @@ public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase
 	@Override
 	protected PsiFile createExpressionCodeFragment(@NotNull Project project, @NotNull String text, @Nullable PsiElement context, boolean isPhysical)
 	{
-		return PsiFileFactory.getInstance(project).createFileFromText("file.dummy", getFileType(), text, 0, isPhysical);
+		PsiFile fileFromText = PsiFileFactory.getInstance(project).createFileFromText("file.dummy", getFileType(), text, 0, isPhysical);
+		((PerlFileImpl) fileFromText).setFileContext(context);
+		return fileFromText;
 	}
 
 	@NotNull

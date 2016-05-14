@@ -69,6 +69,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	protected ConcurrentHashMap<PerlVariable, String> VARIABLE_TYPES_CACHE = new ConcurrentHashMap<PerlVariable, String>();
 	protected ConcurrentHashMap<PerlMethod, String> METHODS_NAMESPACES_CACHE = new ConcurrentHashMap<PerlMethod, String>();
 	protected GlobalSearchScope myElementsResolveScope;
+	protected PsiElement fileContext;
 
 	protected Map<Integer, Boolean> isNewLineFobiddenAtLine = new THashMap<Integer, Boolean>();
 
@@ -597,5 +598,15 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public boolean isPerlTidyReformattable()
 	{
 		return true;
+	}
+
+	public PsiElement getFileContext()
+	{
+		return fileContext;
+	}
+
+	public void setFileContext(PsiElement fileContext)
+	{
+		this.fileContext = fileContext;
 	}
 }
