@@ -76,6 +76,11 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 			{
 				eventObject = new PerlDebuggingEventReady();
 			}
+			else if (StringUtil.equals(event, "LOADED_FILES_DELTA"))
+			{
+				eventObject = jsonDeserializationContext.deserialize(
+						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventLoadedFiles.class);
+			}
 			else if (StringUtil.equals(event, "RESPONSE"))
 			{
 				int transactionId = jsonElement.getAsJsonObject().getAsJsonPrimitive("transactionId").getAsInt();

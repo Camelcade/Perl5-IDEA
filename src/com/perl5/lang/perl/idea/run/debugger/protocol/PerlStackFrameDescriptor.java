@@ -21,6 +21,8 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
  */
 public class PerlStackFrameDescriptor
 {
+	public transient static final String EVAL_PREFIX = "(eval ";
+
 	private String name;
 	private String file;
 	private int line;
@@ -68,5 +70,14 @@ public class PerlStackFrameDescriptor
 	public String getSource()
 	{
 		return source;
+	}
+
+	public String getPresentableName()
+	{
+		if (name != null && name.startsWith(EVAL_PREFIX))
+		{
+			return file;
+		}
+		return name;
 	}
 }

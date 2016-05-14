@@ -177,7 +177,11 @@ public class PerlDebugProcess extends XDebugProcess
 			@Override
 			public void registerAdditionalContent(@NotNull RunnerLayoutUi ui)
 			{
-				Content content = ui.createContent("PerlRemoteSourceView", myPerlDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_LANGUAGE_ICON, null);
+				Content content = ui.createContent("PerlSourceLIst", myPerlDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_SCRIPT_FILE_ICON, null);
+				content.setCloseable(false);
+				ui.addContent(content);
+
+				content = ui.createContent("PerlEvalsList", myPerlDebugThread.getEvalsListPanel(), "Compiled evals", PerlIcons.PERL_LANGUAGE_ICON, null);
 				content.setCloseable(false);
 				ui.addContent(content);
 			}

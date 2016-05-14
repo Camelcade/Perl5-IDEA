@@ -18,18 +18,21 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
-import com.perl5.lang.perl.idea.run.debugger.ui.JavaScriptListPanel;
+import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -54,7 +57,8 @@ public class PerlDebugThread extends Thread
 	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
 	private final PerlDebugProfileState myDebugProfileState;
-	private final JavaScriptListPanel myScriptListPanel;
+	private final PerlScriptsPanel myScriptListPanel;
+	private final PerlScriptsPanel myEvalsListPanel;
 	private XDebugSession mySession;
 	private Socket mySocket;
 	private ServerSocket myServerSocket;
@@ -66,7 +70,7 @@ public class PerlDebugThread extends Thread
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
-	private PerlRemoteFileSystem perlRemoteFileSystem = ApplicationManager.getApplication().getComponent(PerlRemoteFileSystem.class);
+	private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -75,8 +79,9 @@ public class PerlDebugThread extends Thread
 		myGson = createGson();
 		myDebugProfileState = state;
 		myExecutionResult = executionResult;
-		myScriptListPanel = new JavaScriptListPanel(session.getProject());
-		perlRemoteFileSystem.dropCache();
+		myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
+		myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
+		myPerlRemoteFileSystem.dropCache();
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -332,13 +337,45 @@ public class PerlDebugThread extends Thread
 		return transactionsMap.remove(transactionId);
 	}
 
-	public JavaScriptListPanel getScriptListPanel()
+	public PerlScriptsPanel getScriptListPanel()
 	{
 		return myScriptListPanel;
 	}
 
+	public PerlScriptsPanel getEvalsListPanel()
+	{
+		return myEvalsListPanel;
+	}
+
 	public PerlRemoteFileSystem getPerlRemoteFileSystem()
 	{
-		return perlRemoteFileSystem;
+		return myPerlRemoteFileSystem;
 	}
+
+	@Nullable
+	public VirtualFile loadRemoteSource(String filePath)
+	{
+		final Semaphore responseSemaphore = new Semaphore();
+		responseSemaphore.down();
+
+		final String[] response = new String[]{"# Source could not be loaded..."};
+
+		PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler()
+		{
+
+			@Override
+			public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext)
+			{
+				response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
+				responseSemaphore.up();
+
+			}
+		};
+
+		sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
+		responseSemaphore.waitFor(2000);
+
+		return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
+	}
+
 }

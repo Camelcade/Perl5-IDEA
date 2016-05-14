@@ -63,19 +63,28 @@ public class PerlStackFrame extends XStackFrame
 		myFrameDescriptor = frameDescriptor;
 		myPerlExecutionStack = stack;
 		String source = myFrameDescriptor.getSource();
+		PerlDebugThread debugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+		String filePath = myFrameDescriptor.getFileName();
+
 		if (source != null)
 		{
-			PerlDebugThread debugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
-			debugThread.getScriptListPanel().add(
-					debugThread.getPerlRemoteFileSystem().registerRemoteFile(myFrameDescriptor.getName(), myFrameDescriptor.getFileName(), source)
-			);
+			PerlRemoteFileSystem.getInstance().registerRemoteFile(myFrameDescriptor.getName(), filePath, source);
+		}
+
+		if (filePath.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX))
+		{
+			debugThread.getEvalsListPanel().add(filePath);
+		}
+		else
+		{
+			debugThread.getScriptListPanel().add(filePath);
 		}
 	}
 
 	@Override
 	public void customizePresentation(@NotNull ColoredTextContainer component)
 	{
-		component.append(myFrameDescriptor.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+		component.append(myFrameDescriptor.getPresentableName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
 		component.setIcon(AllIcons.Debugger.StackFrame);
 	}
 

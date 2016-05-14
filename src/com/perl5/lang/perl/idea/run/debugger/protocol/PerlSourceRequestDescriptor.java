@@ -21,10 +21,10 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
  */
 public class PerlSourceRequestDescriptor
 {
-	private final String fileid;
+	private final String path;
 
-	public PerlSourceRequestDescriptor(String fileid)
+	public PerlSourceRequestDescriptor(String path)
 	{
-		this.fileid = fileid;
+		this.path = path;
 	}
 }

@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.DeprecatedVirtualFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,6 +40,11 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 	public static final String PROTOCOL_PREFIX = "perl5_remote://";
 	private Map<String, VirtualFile> virtualFilesMap = new THashMap<String, VirtualFile>();
 
+	public static PerlRemoteFileSystem getInstance()
+	{
+		return ApplicationManager.getApplication().getComponent(PerlRemoteFileSystem.class);
+	}
+
 	@Override
 	@Nullable
 	public VirtualFile findFileByPath(@NotNull String path)
@@ -50,45 +57,29 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 		virtualFilesMap.clear();
 	}
 
-	public VirtualFile registerRemoteFile(String fileName, String filePath, String fileSource)
+	@Nullable
+	public VirtualFile registerRemoteFile(@NotNull String filePath, @NotNull String fileSource)
+	{
+		String fileName;
+		if (filePath.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX)) // make name for eval
+		{
+			fileName = filePath.substring(0, filePath.indexOf(')') + 1);
+		}
+		else // make name for regular file
+		{
+			int slashIndex = filePath.lastIndexOf('/');
+			fileName = slashIndex == -1 ? filePath : filePath.substring(slashIndex + 1);
+		}
+		return registerRemoteFile(fileName, filePath, fileSource);
+	}
+
+	@NotNull
+	public VirtualFile registerRemoteFile(@NotNull String fileName, @NotNull String filePath, @NotNull String fileSource)
 	{
 		LightVirtualFile newVirtualFile = new PerlRemoteVirtualFile(fileName, filePath, fileSource);
-		virtualFilesMap.put(fileName, newVirtualFile);
 		virtualFilesMap.put(filePath, newVirtualFile);
 		return newVirtualFile;
 	}
-
-//	@Nullable
-//	public VirtualFile getForeignVirtualFileByName(String fileName)
-//	{
-//		return virtualFilesMap.get(fileName);
-//
-	// this may be reused later
-//		if( sourcesMap.containsKey(fileName))
-//		{
-//		}
-//		final Semaphore responseSemaphore = new Semaphore();
-//		responseSemaphore.down();
-//
-//		final String[] response = new String[]{null};
-//
-//		PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler()
-//		{
-//			@Override
-//			public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext)
-//			{
-//				response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
-//				responseSemaphore.up();
-//			}
-//		};
-//
-//		sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(fileName), perlDebuggingTransactionHandler);
-//		responseSemaphore.waitFor(10000);
-//
-//		sourcesMap.put(fileName, response[0]);
-//		return response[0];
-//	}
-
 
 	@Override
 	@NotNull
