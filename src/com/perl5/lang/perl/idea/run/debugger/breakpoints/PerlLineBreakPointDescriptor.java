@@ -20,6 +20,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -34,15 +35,35 @@ public class PerlLineBreakPointDescriptor
 	private boolean remove;
 
 	@Nullable
-	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint)
+	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, PerlDebugThread debugThread)
 	{
-		VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(breakpoint.getFileUrl());
+		VirtualFile virtualFile;
+		String fileUrl = breakpoint.getFileUrl();
+		String filePath = null;
+
+		if (fileUrl.startsWith("mock://"))
+		{
+			virtualFile = debugThread.getForeignVirtualFileByName(fileUrl);
+			if (virtualFile != null)
+			{
+				filePath = PerlDebugThread.FOREIGN_FILE_NAME.get(virtualFile);
+			}
+		}
+		else
+		{
+			virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
+			if (virtualFile != null)
+			{
+				filePath = virtualFile.getCanonicalPath();
+			}
+		}
+
 
 		PerlLineBreakPointDescriptor descriptor = null;
 		if (virtualFile != null)
 		{
 			descriptor = new PerlLineBreakPointDescriptor();
-			descriptor.path = virtualFile.getCanonicalPath();
+			descriptor.path = filePath;
 			descriptor.line = breakpoint.getLine();
 			descriptor.enabled = breakpoint.isEnabled();
 			descriptor.remove = false;
@@ -54,9 +75,9 @@ public class PerlLineBreakPointDescriptor
 	}
 
 	@Nullable
-	public static PerlLineBreakPointDescriptor createRemoveFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint)
+	public static PerlLineBreakPointDescriptor createRemoveFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, PerlDebugThread debugThread)
 	{
-		PerlLineBreakPointDescriptor descriptor = createFromBreakpoint(breakpoint);
+		PerlLineBreakPointDescriptor descriptor = createFromBreakpoint(breakpoint, debugThread);
 
 		if (descriptor != null)
 		{

@@ -19,13 +19,9 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.ui.ColoredTextContainer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.xdebugger.XSourcePosition;
@@ -35,7 +31,6 @@ import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,27 +52,9 @@ public class PerlStackFrame extends XStackFrame
 		{
 			String myFileName = myFrameDescriptor.getFileName();
 
-			if (StringUtil.startsWith(myFileName, "(eval ")) // evel sequence
-			{
-				PerlSuspendContext suspendContext = getPerlExecutionStack().getSuspendContext();
+			VirtualFile result = VfsUtil.findFileByIoFile(new File(myFileName), true);
 
-
-				final Project project = suspendContext.getDebugSession().getProject();
-				for (VirtualFile openedFile : FileEditorManager.getInstance(project).getOpenFiles())
-				{
-					if (StringUtil.equals(openedFile.getName(), myFileName))
-					{
-						return openedFile;
-					}
-				}
-
-				String source = suspendContext.getDebugThread().getFileSource(myFileName);
-				return source == null ? null : new LightVirtualFile(myFileName, PerlFileType.INSTANCE, source);
-			}
-			else
-			{
-				return VfsUtil.findFileByIoFile(new File(myFileName), true);
-			}
+			return result == null ? getPerlExecutionStack().getSuspendContext().getDebugThread().getForeignVirtualFileByName(myFileName) : result;
 		}
 	};
 
@@ -88,7 +65,7 @@ public class PerlStackFrame extends XStackFrame
 		String source = myFrameDescriptor.getSource();
 		if (source != null)
 		{
-			myPerlExecutionStack.getSuspendContext().getDebugThread().registerFileSource(myFrameDescriptor.getFileName(), source);
+			myPerlExecutionStack.getSuspendContext().getDebugThread().registerFileSource(myFrameDescriptor.getFileName(), myFrameDescriptor.getName(), source);
 		}
 
 	}

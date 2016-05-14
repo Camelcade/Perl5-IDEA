@@ -41,7 +41,7 @@ public class PerlLineBreakpointHandler extends XBreakpointHandler
 		if (breakpoint instanceof XLineBreakpoint)
 		{
 			//noinspection unchecked
-			myPerlDebugThread.queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor.createFromBreakpoint((XLineBreakpoint) breakpoint));
+			myPerlDebugThread.queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor.createFromBreakpoint((XLineBreakpoint) breakpoint, myPerlDebugThread));
 		}
 		else
 		{
@@ -55,7 +55,7 @@ public class PerlLineBreakpointHandler extends XBreakpointHandler
 		if (breakpoint instanceof XLineBreakpoint)
 		{
 			//noinspection unchecked
-			myPerlDebugThread.queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor.createRemoveFromBreakpoint((XLineBreakpoint) breakpoint));
+			myPerlDebugThread.queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor.createRemoveFromBreakpoint((XLineBreakpoint) breakpoint, myPerlDebugThread));
 		}
 		else
 		{

@@ -57,7 +57,14 @@ public class PerlDebugUtils
 			@Override
 			public void run()
 			{
-				VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(breakpointBase.getPath()), true);
+				String path = breakpointBase.getPath();
+				VirtualFile virtualFile = breakpointBase.getDebugThread().getForeignVirtualFileByName(path);
+
+				if (virtualFile == null)
+				{
+					VfsUtil.findFileByIoFile(new File(path), true);
+				}
+
 				if (virtualFile != null)
 				{
 					String virtualFileUrl = virtualFile.getUrl();

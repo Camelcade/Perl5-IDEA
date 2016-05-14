@@ -23,9 +23,13 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import gnu.trove.THashMap;
@@ -49,6 +53,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PerlDebugThread extends Thread
 {
+	public static final Key<String> FOREIGN_FILE_NAME = new Key<String>("FOREIGN_FILE_NAME");
 	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
 
 	private final ExecutionResult myExecutionResult;
@@ -65,7 +70,7 @@ public class PerlDebugThread extends Thread
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
-	private Map<String, String> sourcesMap = new THashMap<String, String>();
+	private Map<String, VirtualFile> sourcesMap = new THashMap<String, VirtualFile>();
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -329,13 +334,16 @@ public class PerlDebugThread extends Thread
 		return transactionsMap.remove(transactionId);
 	}
 
-	public void registerFileSource(String fileName, String fileSource)
+	public void registerFileSource(String fileName, String displayName, String fileSource)
 	{
-		sourcesMap.put(fileName, fileSource);
+		LightVirtualFile value = new LightVirtualFile(displayName, PerlFileType.INSTANCE, fileSource);
+		value.putUserData(FOREIGN_FILE_NAME, fileName);
+		sourcesMap.put(fileName, value);
+		sourcesMap.put(value.getUrl(), value);
 	}
 
 	@Nullable
-	public String getFileSource(String fileName)
+	public VirtualFile getForeignVirtualFileByName(String fileName)
 	{
 		return sourcesMap.get(fileName);
 
