@@ -65,9 +65,11 @@ public class PerlStackFrame extends XStackFrame
 		String source = myFrameDescriptor.getSource();
 		if (source != null)
 		{
-			myPerlExecutionStack.getSuspendContext().getDebugThread().getPerlRemoteFileSystem().registerRemoteFile(myFrameDescriptor.getName(), myFrameDescriptor.getFileName(), source);
+			PerlDebugThread debugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+			debugThread.getScriptListPanel().add(
+					debugThread.getPerlRemoteFileSystem().registerRemoteFile(myFrameDescriptor.getName(), myFrameDescriptor.getFileName(), source)
+			);
 		}
-
 	}
 
 	@Override

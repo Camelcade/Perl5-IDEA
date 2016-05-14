@@ -29,6 +29,7 @@ import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
+import com.perl5.lang.perl.idea.run.debugger.ui.JavaScriptListPanel;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -53,6 +54,7 @@ public class PerlDebugThread extends Thread
 	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
 	private final PerlDebugProfileState myDebugProfileState;
+	private final JavaScriptListPanel myScriptListPanel;
 	private XDebugSession mySession;
 	private Socket mySocket;
 	private ServerSocket myServerSocket;
@@ -73,7 +75,8 @@ public class PerlDebugThread extends Thread
 		myGson = createGson();
 		myDebugProfileState = state;
 		myExecutionResult = executionResult;
-//		perlRemoteFileSystem.dropCache();
+		myScriptListPanel = new JavaScriptListPanel(session.getProject());
+		perlRemoteFileSystem.dropCache();
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -327,6 +330,11 @@ public class PerlDebugThread extends Thread
 	public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId)
 	{
 		return transactionsMap.remove(transactionId);
+	}
+
+	public JavaScriptListPanel getScriptListPanel()
+	{
+		return myScriptListPanel;
 	}
 
 	public PerlRemoteFileSystem getPerlRemoteFileSystem()

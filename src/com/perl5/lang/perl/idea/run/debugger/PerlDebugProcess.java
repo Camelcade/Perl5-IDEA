@@ -19,8 +19,10 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
+import com.intellij.execution.ui.RunnerLayoutUi;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.ui.content.Content;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
@@ -29,6 +31,8 @@ import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.intellij.xdebugger.ui.XDebugTabLayouter;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointHandler;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
@@ -45,14 +49,14 @@ public class PerlDebugProcess extends XDebugProcess
 {
 	private final ExecutionResult myExecutionResult;
 	private final PerlDebugThread myPerlDebugThread;
-	private final PerlRunProfileState myRunProfileState;
+	private final PerlRunProfileState myDebugProfileState;
 
 	public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
 		super(session);
 		this.myExecutionResult = executionResult;
 		myPerlDebugThread = new PerlDebugThread(session, state, executionResult);
-		myRunProfileState = state;
+		myDebugProfileState = state;
 		myPerlDebugThread.start();
 	}
 
@@ -162,5 +166,21 @@ public class PerlDebugProcess extends XDebugProcess
 	public ExecutionConsole createConsole()
 	{
 		return myExecutionResult.getExecutionConsole();
+	}
+
+	@NotNull
+	@Override
+	public XDebugTabLayouter createTabLayouter()
+	{
+		return new XDebugTabLayouter()
+		{
+			@Override
+			public void registerAdditionalContent(@NotNull RunnerLayoutUi ui)
+			{
+				Content content = ui.createContent("PerlRemoteSourceView", myPerlDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_LANGUAGE_ICON, null);
+				content.setCloseable(false);
+				ui.addContent(content);
+			}
+		};
 	}
 }

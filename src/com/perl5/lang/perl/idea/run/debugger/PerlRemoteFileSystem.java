@@ -50,11 +50,12 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 		virtualFilesMap.clear();
 	}
 
-	public void registerRemoteFile(String fileName, String filePath, String fileSource)
+	public VirtualFile registerRemoteFile(String fileName, String filePath, String fileSource)
 	{
 		LightVirtualFile newVirtualFile = new PerlRemoteVirtualFile(fileName, filePath, fileSource);
 		virtualFilesMap.put(fileName, newVirtualFile);
 		virtualFilesMap.put(filePath, newVirtualFile);
+		return newVirtualFile;
 	}
 
 //	@Nullable
