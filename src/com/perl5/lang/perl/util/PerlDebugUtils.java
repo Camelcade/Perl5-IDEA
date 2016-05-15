@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.frame.XCompositeNode;
@@ -63,25 +62,25 @@ public class PerlDebugUtils
 
 				VirtualFile virtualFile = null;
 
-				virtualFile = VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + path);
+				String virtualFileUrl = null;
+				virtualFile = VfsUtil.findFileByIoFile(new File(path), true);
 
 				if (virtualFile == null)
 				{
-					virtualFile = VfsUtil.findFileByIoFile(new File(path), true);
+					virtualFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + path;
+				}
+				else
+				{
+					virtualFileUrl = virtualFile.getUrl();
 				}
 
-				if (virtualFile != null)
+				Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = XDebuggerManager.getInstance(project).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
+				for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
 				{
-					String virtualFileUrl = virtualFile.getUrl();
-
-					Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = XDebuggerManager.getInstance(project).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
-					for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
+					if (StringUtil.equals(breakpoint.getFileUrl(), virtualFileUrl) && breakpoint.getLine() == breakpointBase.getLine())
 					{
-						if (StringUtil.equals(breakpoint.getFileUrl(), virtualFileUrl) && breakpoint.getLine() == breakpointBase.getLine())
-						{
-							result[0] = breakpoint;
-							return;
-						}
+						result[0] = breakpoint;
+						return;
 					}
 				}
 
