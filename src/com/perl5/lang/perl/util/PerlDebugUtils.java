@@ -67,7 +67,7 @@ public class PerlDebugUtils
 
 				if (virtualFile == null)
 				{
-					VfsUtil.findFileByIoFile(new File(path), true);
+					virtualFile = VfsUtil.findFileByIoFile(new File(path), true);
 				}
 
 				if (virtualFile != null)

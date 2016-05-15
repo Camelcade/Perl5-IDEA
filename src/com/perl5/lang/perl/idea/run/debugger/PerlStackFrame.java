@@ -68,7 +68,7 @@ public class PerlStackFrame extends XStackFrame
 
 		if (source != null)
 		{
-			PerlRemoteFileSystem.getInstance().registerRemoteFile(myFrameDescriptor.getName(), filePath, source);
+			PerlRemoteFileSystem.getInstance().registerRemoteFile(filePath, source);
 		}
 
 		if (filePath.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX))

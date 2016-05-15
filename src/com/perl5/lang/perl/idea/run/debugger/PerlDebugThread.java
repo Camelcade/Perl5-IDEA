@@ -372,8 +372,11 @@ public class PerlDebugThread extends Thread
 			}
 		};
 
-		sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
-		responseSemaphore.waitFor(2000);
+		if (mySocket != null)
+		{
+			sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
+			responseSemaphore.waitFor(2000);
+		}
 
 		return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
 	}

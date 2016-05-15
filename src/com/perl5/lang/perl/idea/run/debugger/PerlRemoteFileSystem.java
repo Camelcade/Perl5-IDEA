@@ -76,6 +76,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 	@NotNull
 	public VirtualFile registerRemoteFile(@NotNull String fileName, @NotNull String filePath, @NotNull String fileSource)
 	{
+//		System.err.println("Registering file: "+ fileName + " " + filePath);
 		LightVirtualFile newVirtualFile = new PerlRemoteVirtualFile(fileName, filePath, fileSource);
 		virtualFilesMap.put(filePath, newVirtualFile);
 		return newVirtualFile;
