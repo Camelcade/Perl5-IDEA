@@ -25,6 +25,7 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
+import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +42,9 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 
 	public static boolean isExecutableFile(@NotNull VirtualFile virtualFile)
 	{
+		if (virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile)
+			return false;
+
 		FileType fileType = virtualFile.getFileType();
 		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
 	}
