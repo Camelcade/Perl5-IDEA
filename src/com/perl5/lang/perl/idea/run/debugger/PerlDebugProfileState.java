@@ -23,6 +23,7 @@ import com.perl5.lang.perl.idea.run.PerlConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,7 +51,7 @@ public class PerlDebugProfileState extends PerlRunProfileState
 	@Override
 	protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException
 	{
-		Map<String, String> stringStringMap = super.calcEnv(runProfile);
+		Map<String, String> stringStringMap = new HashMap<String, String>(super.calcEnv(runProfile));
 		stringStringMap.put("PERL5_DEBUG_ROLE", isPerlServer() ? "server" : "client");
 		stringStringMap.put("PERL5_DEBUG_HOST", getDebugHost());
 		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));

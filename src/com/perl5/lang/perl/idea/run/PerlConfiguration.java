@@ -183,8 +183,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	@Override
 	public void setEnvs(@NotNull Map<String, String> map)
 	{
-		ENV.clear();
-		ENV.putAll(map);
+		ENV = new HashMap<String, String>(map);
 	}
 
 	@Override
