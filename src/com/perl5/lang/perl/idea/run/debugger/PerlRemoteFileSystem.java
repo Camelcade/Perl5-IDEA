@@ -54,6 +54,19 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 
 	public void dropCache()
 	{
+		ApplicationManager.getApplication().runWriteAction(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				for (Map.Entry<String, VirtualFile> entry : virtualFilesMap.entrySet())
+				{
+					VirtualFile value = entry.getValue();
+					fireBeforeFileDeletion(this, value);
+					fireFileDeleted(this, value, value.getName(), null);
+				}
+			}
+		});
 		virtualFilesMap.clear();
 	}
 
