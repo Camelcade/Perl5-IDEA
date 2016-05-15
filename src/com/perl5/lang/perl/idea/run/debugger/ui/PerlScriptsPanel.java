@@ -28,8 +28,10 @@ import com.intellij.ui.ListCellRendererWrapper;
 import com.intellij.ui.SortedListModel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLoadedFileDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,12 +50,12 @@ public class PerlScriptsPanel extends JPanel
 	@NotNull
 	private final Project myProject;
 	private final PerlDebugThread myDebugThread;
-	private SortedListModel<String> myModel = SortedListModel.create(new Comparator<String>()
+	private SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(new Comparator<PerlLoadedFileDescriptor>()
 	{
 		@Override
-		public int compare(String o1, String o2)
+		public int compare(PerlLoadedFileDescriptor o1, PerlLoadedFileDescriptor o2)
 		{
-			return StringUtil.compare(o1, o2, false);
+			return StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);
 		}
 	});
 
@@ -80,21 +82,20 @@ public class PerlScriptsPanel extends JPanel
 	private void init()
 	{
 		final JBList jbList = new JBList(myModel);
-		jbList.setCellRenderer(new ListCellRendererWrapper<String>()
+		jbList.setCellRenderer(new ListCellRendererWrapper<PerlLoadedFileDescriptor>()
 		{
 			@Override
-			public void customize(JList list, String virtualFileName, int index, boolean selected, boolean hasFocus)
+			public void customize(JList list, PerlLoadedFileDescriptor fileDescriptor, int index, boolean selected, boolean hasFocus)
 			{
-				VirtualFile virtualFile = getVirtualFileByName(virtualFileName);
+				VirtualFile virtualFile = getVirtualFileByName(fileDescriptor.getPath());
 
-				if (virtualFile == null)
-				{
-					setText(virtualFileName);
-				}
-				else
+				setIcon(PerlFileType.INSTANCE.getIcon());
+				setText(fileDescriptor.getPresentableName());
+
+				if (virtualFile != null)
 				{
 					setBackground(FileColorManager.getInstance(myProject).getFileColor(virtualFile));
-					setText(virtualFile.getPath());
+					setText(fileDescriptor.getPresentableName());
 					setIcon(virtualFile.getFileType().getIcon());
 				}
 			}
@@ -106,11 +107,11 @@ public class PerlScriptsPanel extends JPanel
 			{
 				if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1)
 				{
-					String filePath = (String) jbList.getSelectedValue();
-					VirtualFile selectedVirtualFile = getVirtualFileByName(filePath);
+					PerlLoadedFileDescriptor fileDescriptor = (PerlLoadedFileDescriptor) jbList.getSelectedValue();
+					VirtualFile selectedVirtualFile = getVirtualFileByName(fileDescriptor.getPath());
 					if (selectedVirtualFile == null)
 					{
-						selectedVirtualFile = myDebugThread.loadRemoteSource(filePath);
+						selectedVirtualFile = myDebugThread.loadRemoteSource(fileDescriptor.getPath());
 					}
 
 					if (selectedVirtualFile != null)
@@ -125,7 +126,13 @@ public class PerlScriptsPanel extends JPanel
 	}
 
 
-	public void add(final String value)
+	public void replace(final PerlLoadedFileDescriptor value)
+	{
+		remove(value);
+		add(value);
+	}
+
+	public void add(final PerlLoadedFileDescriptor value)
 	{
 		if (!myModel.getItems().contains(value))
 		{
@@ -140,7 +147,7 @@ public class PerlScriptsPanel extends JPanel
 		}
 	}
 
-	public void remove(final String value)
+	public void remove(final PerlLoadedFileDescriptor value)
 	{
 		if (myModel.getItems().contains(value))
 		{

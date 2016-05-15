@@ -23,8 +23,8 @@ import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
  */
 public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 {
-	String[] add;     // list of filenames
-	String[] remove; // list of filenames
+	PerlLoadedFileDescriptor[] add;     // list of filenames
+	PerlLoadedFileDescriptor[] remove; // list of filenames
 
 	@Override
 	public void doWork()
@@ -32,33 +32,33 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 		PerlScriptsPanel evalsListPanel = getDebugThread().getEvalsListPanel();
 		PerlScriptsPanel scriptListPanel = getDebugThread().getScriptListPanel();
 
-		for (String file : add)
+		for (PerlLoadedFileDescriptor fileDescriptor : add)
 		{
-			if (file != null)
+			if (fileDescriptor != null)
 			{
-				if (file.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX))
+				if (fileDescriptor.isEval())
 				{
-					evalsListPanel.add(file);
+					evalsListPanel.replace(fileDescriptor);
 				}
 				else
 				{
-					scriptListPanel.add(file);
+					scriptListPanel.replace(fileDescriptor);
 				}
 			}
 		}
 
-		for (String file : remove)
+		for (PerlLoadedFileDescriptor fileDescriptor : remove)
 		{
-			if (file != null)
+			if (fileDescriptor != null)
 			{
-				if (file.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX))
+				if (fileDescriptor.isEval())
 				{
 					// fixme we should check if file source is loaded and mark it as unloaded or smth
-					evalsListPanel.remove(file);
+					evalsListPanel.remove(fileDescriptor);
 				}
 				else
 				{
-					scriptListPanel.remove(file);
+					scriptListPanel.remove(fileDescriptor);
 				}
 			}
 		}

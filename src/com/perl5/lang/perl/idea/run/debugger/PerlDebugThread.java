@@ -81,7 +81,7 @@ public class PerlDebugThread extends Thread
 		myExecutionResult = executionResult;
 		myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
 		myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
-		myPerlRemoteFileSystem.dropCache();
+		myPerlRemoteFileSystem.dropFiles();
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)

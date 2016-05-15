@@ -24,6 +24,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
+import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -98,6 +99,8 @@ public class Perl5ProjectComponent implements ProjectComponent
 
 	public void projectClosed()
 	{
+		PerlRemoteFileSystem.getInstance().dropFiles();
+
 		// called when project is being closed
 //		PsiManager.getInstance(myProject).removePsiTreeChangeListener(myPsiTreeChangeListener);
 	}

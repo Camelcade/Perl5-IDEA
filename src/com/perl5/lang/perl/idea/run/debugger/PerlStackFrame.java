@@ -51,7 +51,7 @@ public class PerlStackFrame extends XStackFrame
 		@Override
 		protected VirtualFile compute()
 		{
-			String myFileName = myFrameDescriptor.getFileName();
+			String myFileName = myFrameDescriptor.getFileDescriptor().getPath();
 
 			VirtualFile result = VfsUtil.findFileByIoFile(new File(myFileName), true);
 			return result == null ? VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + myFileName) : result;
@@ -64,27 +64,27 @@ public class PerlStackFrame extends XStackFrame
 		myPerlExecutionStack = stack;
 		String source = myFrameDescriptor.getSource();
 		PerlDebugThread debugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
-		String filePath = myFrameDescriptor.getFileName();
+		PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
 
 		if (source != null)
 		{
-			PerlRemoteFileSystem.getInstance().registerRemoteFile(filePath, source);
+			PerlRemoteFileSystem.getInstance().registerRemoteFile(fileDescriptor.getPath(), source);
 		}
 
-		if (filePath.startsWith(PerlStackFrameDescriptor.EVAL_PREFIX))
+		if (fileDescriptor.isEval())
 		{
-			debugThread.getEvalsListPanel().add(filePath);
+			debugThread.getEvalsListPanel().add(fileDescriptor);
 		}
 		else
 		{
-			debugThread.getScriptListPanel().add(filePath);
+			debugThread.getScriptListPanel().add(fileDescriptor);
 		}
 	}
 
 	@Override
 	public void customizePresentation(@NotNull ColoredTextContainer component)
 	{
-		component.append(myFrameDescriptor.getPresentableName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+		component.append(myFrameDescriptor.getFileDescriptor().getNameOrPath(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
 		component.setIcon(AllIcons.Debugger.StackFrame);
 	}
 

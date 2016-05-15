@@ -52,7 +52,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 		return virtualFilesMap.get(path);
 	}
 
-	public void dropCache()
+	public void dropFiles()
 	{
 		ApplicationManager.getApplication().runWriteAction(new Runnable()
 		{

@@ -23,8 +23,7 @@ public class PerlStackFrameDescriptor
 {
 	public transient static final String EVAL_PREFIX = "(eval ";
 
-	private String name;
-	private String file;
+	PerlLoadedFileDescriptor file;
 	private int line;
 	private int main_size;
 	private PerlValueDescriptor[] lexicals;
@@ -32,12 +31,7 @@ public class PerlStackFrameDescriptor
 	private PerlValueDescriptor[] args;
 	private String source;
 
-	public String getName()
-	{
-		return name;
-	}
-
-	public String getFileName()
+	public PerlLoadedFileDescriptor getFileDescriptor()
 	{
 		return file;
 	}
@@ -70,14 +64,5 @@ public class PerlStackFrameDescriptor
 	public String getSource()
 	{
 		return source;
-	}
-
-	public String getPresentableName()
-	{
-		if (name != null && name.startsWith(EVAL_PREFIX))
-		{
-			return file;
-		}
-		return name;
 	}
 }
