@@ -165,15 +165,15 @@ public class PerlDebugThread extends Thread
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		catch (ExecutionException e)
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		finally
 		{

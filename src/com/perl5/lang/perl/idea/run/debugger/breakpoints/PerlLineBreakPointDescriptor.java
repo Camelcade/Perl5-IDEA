@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
+import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -37,24 +38,36 @@ public class PerlLineBreakPointDescriptor
 	@Nullable
 	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, PerlDebugThread debugThread)
 	{
-		VirtualFile virtualFile;
 		String filePath = null;
 
-		virtualFile = VirtualFileManager.getInstance().findFileByUrl(breakpoint.getFileUrl());
-		if (virtualFile != null)
+		String fileUrl = breakpoint.getFileUrl();
+
+		if (fileUrl.startsWith(PerlRemoteFileSystem.PROTOCOL_PREFIX))
 		{
-			filePath = virtualFile.getCanonicalPath();
+			filePath = fileUrl.substring(PerlRemoteFileSystem.PROTOCOL_PREFIX.length());
+		}
+		else
+		{
+			VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
+			if (virtualFile != null)
+			{
+				filePath = virtualFile.getCanonicalPath();
+			}
 		}
 
 		PerlLineBreakPointDescriptor descriptor = null;
-		descriptor = new PerlLineBreakPointDescriptor();
-		descriptor.path = filePath;
-		descriptor.line = breakpoint.getLine();
-		descriptor.enabled = breakpoint.isEnabled();
-		descriptor.remove = false;
 
-		XExpression conditionExpression = breakpoint.getConditionExpression();
-		descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
+		if (filePath != null)
+		{
+			descriptor = new PerlLineBreakPointDescriptor();
+			descriptor.path = filePath;
+			descriptor.line = breakpoint.getLine();
+			descriptor.enabled = breakpoint.isEnabled();
+			descriptor.remove = false;
+
+			XExpression conditionExpression = breakpoint.getConditionExpression();
+			descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
+		}
 		return descriptor;
 	}
 
