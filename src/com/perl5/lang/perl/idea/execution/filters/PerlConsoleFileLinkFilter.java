@@ -73,8 +73,8 @@ public class PerlConsoleFileLinkFilter implements Filter
 			Pattern pattern = Pattern.compile("([\\p{L}\\d:]+)?" +
 					separator + "+([\\p{L}\\d\\-.]+" +
 					separator + ")+" + projectDirName + "(" +
-					separator + "+([\\p{L}\\d\\-.]+" +
-					separator + "+)*[\\p{L}\\d]([\\p{L}\\d\\-.])+)( line (\\d+))?");
+					separator + "+([\\p{L}\\d\\-_.]+" +
+					separator + "+)*[\\p{L}\\d_]([\\p{L}\\d\\-_.])+)( line (\\d+))?");
 			Matcher matcher = pattern.matcher(textLine);
 			while (matcher.find())
 			{
