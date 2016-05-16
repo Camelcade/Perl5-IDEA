@@ -61,9 +61,9 @@ public class PerlDebugUtils
 				String path = breakpointBase.getPath();
 
 				VirtualFile virtualFile = null;
-
 				String virtualFileUrl = null;
-				virtualFile = VfsUtil.findFileByIoFile(new File(path), true);
+
+				virtualFile = VfsUtil.findFileByIoFile(new File(breakpointBase.getDebugThread().getDebugProfileState().mapPathToLocal(path)), true);
 
 				if (virtualFile == null)
 				{

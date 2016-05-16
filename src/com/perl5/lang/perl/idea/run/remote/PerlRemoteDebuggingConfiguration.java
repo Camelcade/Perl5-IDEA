@@ -27,6 +27,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.util.text.StringUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +40,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public boolean isPerlServer = true;
 	public String debugHost = "localhost";
 	public String debugPort = "12345";
-	public String remoteWorkingDirectory = "/home/";
+	public String remoteProjectRoot = "/home/";
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -114,13 +115,17 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 		this.debugPort = debugPort;
 	}
 
-	public String getRemoteWorkingDirectory()
+	public String getRemoteProjectRoot()
 	{
-		return remoteWorkingDirectory;
+		return remoteProjectRoot;
 	}
 
-	public void setRemoteWorkingDirectory(String remoteWorkingDirectory)
+	public void setRemoteProjectRoot(String remoteWorkingDirectory)
 	{
-		this.remoteWorkingDirectory = remoteWorkingDirectory;
+		while (StringUtil.endsWith(remoteWorkingDirectory, "/"))
+		{
+			remoteWorkingDirectory = remoteWorkingDirectory.substring(0, remoteWorkingDirectory.length() - 1);
+		}
+		this.remoteProjectRoot = remoteWorkingDirectory;
 	}
 }

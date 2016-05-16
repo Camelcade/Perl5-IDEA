@@ -25,6 +25,7 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
@@ -67,6 +68,7 @@ public class PerlDebugThread extends Thread
 	private boolean myStop = false;
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 	private boolean isReady = false;
+	private boolean sentInitialBreakpoints = false;
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
@@ -183,21 +185,35 @@ public class PerlDebugThread extends Thread
 
 	private void processResponse(ByteArrayList responseBytes)
 	{
-		String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
-		PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
+		final String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
+		final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
 		if (newEvent != null)
 		{
 			if (newEvent instanceof PerlDebuggingEventReady)
 			{
 				isReady = true;
-				sendQueuedBreakpoints();
+//				sendQueuedBreakpoints();
 			}
 			else
 			{
+				// fixme this is a hack to set breakpoints in RUN phase only, we should handle this on perl side
+				if (!sentInitialBreakpoints)
+				{
+					sentInitialBreakpoints = true;
+					sendQueuedBreakpoints();
+				}
+
 				newEvent.setDebugSession(mySession);
 				newEvent.setDebugThread(this);
-				newEvent.doWork();
+				ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						newEvent.doWork();
+					}
+				});
 			}
 		}
 	}
@@ -355,6 +371,10 @@ public class PerlDebugThread extends Thread
 	@Nullable
 	public VirtualFile loadRemoteSource(String filePath)
 	{
+		if (DEV_MODE)
+		{
+			System.err.println("Loading file " + filePath);
+		}
 		final Semaphore responseSemaphore = new Semaphore();
 		responseSemaphore.down();
 
@@ -381,4 +401,8 @@ public class PerlDebugThread extends Thread
 		return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
 	}
 
+	public PerlDebugProfileState getDebugProfileState()
+	{
+		return myDebugProfileState;
+	}
 }

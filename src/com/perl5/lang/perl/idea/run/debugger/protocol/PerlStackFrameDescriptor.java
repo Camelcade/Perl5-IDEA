@@ -29,7 +29,6 @@ public class PerlStackFrameDescriptor
 	private PerlValueDescriptor[] lexicals;
 	private PerlValueDescriptor[] globals;
 	private PerlValueDescriptor[] args;
-	private String source;
 
 	public PerlLoadedFileDescriptor getFileDescriptor()
 	{
@@ -61,8 +60,4 @@ public class PerlStackFrameDescriptor
 		return args;
 	}
 
-	public String getSource()
-	{
-		return source;
-	}
 }

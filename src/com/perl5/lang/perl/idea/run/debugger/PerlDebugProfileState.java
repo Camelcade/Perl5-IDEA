@@ -81,4 +81,15 @@ public class PerlDebugProfileState extends PerlRunProfileState
 	{
 		return isPerlServer;
 	}
+
+	public String mapPathToRemote(String localPath)
+	{
+		return localPath;
+	}
+
+	public String mapPathToLocal(String remotePath)
+	{
+		return remotePath;
+	}
+
 }

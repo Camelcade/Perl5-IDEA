@@ -48,7 +48,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 	@Override
 	protected void resetEditorFrom(PerlRemoteDebuggingConfiguration configuration)
 	{
-		myWorkingDirectoryComponent.getComponent().setText(configuration.getRemoteWorkingDirectory());
+		myWorkingDirectoryComponent.getComponent().setText(configuration.getRemoteProjectRoot());
 		myIsPerlServer.getComponent().setSelected(configuration.isPerlServer());
 		myDebuggingHost.getComponent().setText(configuration.getDebugHost());
 		myDebuggingPort.getComponent().setText(configuration.getDebugPort());
@@ -57,7 +57,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 	@Override
 	protected void applyEditorTo(PerlRemoteDebuggingConfiguration configuration) throws ConfigurationException
 	{
-		configuration.setRemoteWorkingDirectory(myWorkingDirectoryComponent.getComponent().getText());
+		configuration.setRemoteProjectRoot(myWorkingDirectoryComponent.getComponent().getText());
 		configuration.setPerlServer(myIsPerlServer.getComponent().isSelected());
 		configuration.setDebugHost(myDebuggingHost.getComponent().getText());
 		configuration.setDebugPort(myDebuggingPort.getComponent().getText());
@@ -73,7 +73,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 			@Override
 			protected void addComponents()
 			{
-				myWorkingDirectoryComponent = LabeledComponent.create(new JTextField(), "Remote working directory");
+				myWorkingDirectoryComponent = LabeledComponent.create(new JTextField(), "Remote project root");
 				myWorkingDirectoryComponent.setLabelLocation(BorderLayout.WEST);
 
 				myIsPerlServer = LabeledComponent.create(new JCheckBox(), "Perl acts as a server");

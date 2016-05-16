@@ -33,14 +33,20 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState
 {
-	private final PerlRemoteDebuggingConfiguration runProfile;
+	private final PerlRemoteDebuggingConfiguration myDebuggingConfiguration;
 	private final Project myProject;
+	private final String myLocalProjectRoot;
+	private final String myRemoteProjectRoot;
 
 	public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment)
 	{
 		super(environment);
-		runProfile = (PerlRemoteDebuggingConfiguration) environment.getRunProfile();
+		myDebuggingConfiguration = (PerlRemoteDebuggingConfiguration) environment.getRunProfile();
 		myProject = environment.getProject();
+		myLocalProjectRoot = myProject.getBaseDir().getCanonicalPath();
+		myRemoteProjectRoot = myDebuggingConfiguration.getRemoteProjectRoot();
+//		System.err.println("Local project root: " + myLocalProjectRoot);
+//		System.err.println("Remote project root: " + myRemoteProjectRoot);
 	}
 
 	@NotNull
@@ -53,18 +59,42 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState
 	@Override
 	public String getDebugHost()
 	{
-		return runProfile.getDebugHost();
+		return myDebuggingConfiguration.getDebugHost();
 	}
 
 	@Override
 	public int getDebugPort() throws ExecutionException
 	{
-		return Integer.parseInt(runProfile.getDebugPort());
+		return Integer.parseInt(myDebuggingConfiguration.getDebugPort());
 	}
 
 	@Override
 	public boolean isPerlServer()
 	{
-		return runProfile.isPerlServer();
+		return myDebuggingConfiguration.isPerlServer();
+	}
+
+	@Override
+	public String mapPathToRemote(String localPath)
+	{
+		if (localPath.startsWith(myLocalProjectRoot))
+		{
+			return localPath.replace(myLocalProjectRoot, myRemoteProjectRoot);
+//			System.err.println("Mapped to remote: " + localPath + " => " + remotePath);
+//			return remotePath;
+		}
+		return super.mapPathToRemote(localPath);
+	}
+
+	@Override
+	public String mapPathToLocal(String remotePath)
+	{
+		if (remotePath.startsWith(myRemoteProjectRoot))
+		{
+			return remotePath.replace(myRemoteProjectRoot, myLocalProjectRoot);
+//			System.err.println("Mapped to local: " + remotePath + " => " + localPath);
+//			return localPath;
+		}
+		return super.mapPathToLocal(remotePath);
 	}
 }

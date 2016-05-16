@@ -45,16 +45,29 @@ public class PerlStackFrame extends XStackFrame
 {
 	private final PerlStackFrameDescriptor myFrameDescriptor;
 	private final PerlExecutionStack myPerlExecutionStack;
+	private final PerlDebugThread myDebugThread;
 	private AtomicNullableLazyValue<VirtualFile> myVirtualFile = new AtomicNullableLazyValue<VirtualFile>()
 	{
 		@Nullable
 		@Override
 		protected VirtualFile compute()
 		{
-			String myFileName = myFrameDescriptor.getFileDescriptor().getPath();
+			String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
+			String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
+			VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), true);
 
-			VirtualFile result = VfsUtil.findFileByIoFile(new File(myFileName), true);
-			return result == null ? VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + myFileName) : result;
+			if (result == null)
+			{
+				String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
+				result = VirtualFileManager.getInstance().findFileByUrl(remoteFileUrl);
+
+				if (result == null)    // suppose that we need to fetch file
+				{
+					result = myDebugThread.loadRemoteSource(remoteFilePath);
+				}
+			}
+
+			return result;
 		}
 	};
 
@@ -62,22 +75,16 @@ public class PerlStackFrame extends XStackFrame
 	{
 		myFrameDescriptor = frameDescriptor;
 		myPerlExecutionStack = stack;
-		String source = myFrameDescriptor.getSource();
-		PerlDebugThread debugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+		myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
 		PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
-
-		if (source != null)
-		{
-			PerlRemoteFileSystem.getInstance().registerRemoteFile(fileDescriptor.getPath(), source);
-		}
 
 		if (fileDescriptor.isEval())
 		{
-			debugThread.getEvalsListPanel().add(fileDescriptor);
+			myDebugThread.getEvalsListPanel().add(fileDescriptor);
 		}
 		else
 		{
-			debugThread.getScriptListPanel().add(fileDescriptor);
+			myDebugThread.getScriptListPanel().add(fileDescriptor);
 		}
 	}
 

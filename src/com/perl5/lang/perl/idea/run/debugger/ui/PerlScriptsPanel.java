@@ -87,7 +87,9 @@ public class PerlScriptsPanel extends JPanel
 			@Override
 			public void customize(JList list, PerlLoadedFileDescriptor fileDescriptor, int index, boolean selected, boolean hasFocus)
 			{
-				VirtualFile virtualFile = getVirtualFileByName(fileDescriptor.getPath());
+				String remotePath = fileDescriptor.getPath();
+				String localPath = myDebugThread.getDebugProfileState().mapPathToLocal(remotePath);
+				VirtualFile virtualFile = getVirtualFileByName(localPath);
 
 				setIcon(PerlFileType.INSTANCE.getIcon());
 				setText(fileDescriptor.getPresentableName());
@@ -108,10 +110,12 @@ public class PerlScriptsPanel extends JPanel
 				if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1)
 				{
 					PerlLoadedFileDescriptor fileDescriptor = (PerlLoadedFileDescriptor) jbList.getSelectedValue();
-					VirtualFile selectedVirtualFile = getVirtualFileByName(fileDescriptor.getPath());
+					String remotePath = fileDescriptor.getPath();
+					String localPath = myDebugThread.getDebugProfileState().mapPathToLocal(remotePath);
+					VirtualFile selectedVirtualFile = getVirtualFileByName(localPath);
 					if (selectedVirtualFile == null)
 					{
-						selectedVirtualFile = myDebugThread.loadRemoteSource(fileDescriptor.getPath());
+						selectedVirtualFile = myDebugThread.loadRemoteSource(remotePath);
 					}
 
 					if (selectedVirtualFile != null)

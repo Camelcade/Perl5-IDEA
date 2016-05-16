@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
-import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -42,17 +41,10 @@ public class PerlLineBreakPointDescriptor
 
 		String fileUrl = breakpoint.getFileUrl();
 
-		if (fileUrl.startsWith(PerlRemoteFileSystem.PROTOCOL_PREFIX))
+		VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
+		if (virtualFile != null)
 		{
-			filePath = fileUrl.substring(PerlRemoteFileSystem.PROTOCOL_PREFIX.length());
-		}
-		else
-		{
-			VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
-			if (virtualFile != null)
-			{
-				filePath = virtualFile.getCanonicalPath();
-			}
+			filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFile.getCanonicalPath());
 		}
 
 		PerlLineBreakPointDescriptor descriptor = null;
