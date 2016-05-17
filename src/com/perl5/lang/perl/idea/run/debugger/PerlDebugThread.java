@@ -68,7 +68,6 @@ public class PerlDebugThread extends Thread
 	private boolean myStop = false;
 	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
 	private boolean isReady = false;
-	private boolean sentInitialBreakpoints = false;
 	private int transactionId = 0;
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
@@ -193,17 +192,10 @@ public class PerlDebugThread extends Thread
 			if (newEvent instanceof PerlDebuggingEventReady)
 			{
 				isReady = true;
-//				sendQueuedBreakpoints();
+				sendQueuedBreakpoints();
 			}
 			else
 			{
-				// fixme this is a hack to set breakpoints in RUN phase only, we should handle this on perl side
-				if (!sentInitialBreakpoints)
-				{
-					sentInitialBreakpoints = true;
-					sendQueuedBreakpoints();
-				}
-
 				newEvent.setDebugSession(mySession);
 				newEvent.setDebugThread(this);
 				ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
