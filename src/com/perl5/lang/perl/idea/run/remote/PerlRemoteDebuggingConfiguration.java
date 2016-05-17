@@ -41,6 +41,9 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public String debugHost = "localhost";
 	public String debugPort = "12345";
 	public String remoteProjectRoot = "/home/";
+	public boolean stopOnCompilation = false;
+	public String clientCharset;
+
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -127,5 +130,25 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 			remoteWorkingDirectory = remoteWorkingDirectory.substring(0, remoteWorkingDirectory.length() - 1);
 		}
 		this.remoteProjectRoot = remoteWorkingDirectory;
+	}
+
+	public boolean isStopOnCompilation()
+	{
+		return stopOnCompilation;
+	}
+
+	public void setStopOnCompilation(boolean stopOnCompilation)
+	{
+		this.stopOnCompilation = stopOnCompilation;
+	}
+
+	public String getClientCharset()
+	{
+		return clientCharset;
+	}
+
+	public void setClientCharset(String clientCharset)
+	{
+		this.clientCharset = clientCharset;
 	}
 }

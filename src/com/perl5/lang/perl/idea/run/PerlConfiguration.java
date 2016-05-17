@@ -56,6 +56,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public String CHARSET;
 	public boolean USE_ALTERNATIVE_SDK;
 	public String ALTERNATIVE_SDK_PATH;
+	public boolean stopOnCompilation = false;
 
 	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -206,5 +207,15 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void setPERL_PARAMETERS(String PERL_PARAMETERS)
 	{
 		this.PERL_PARAMETERS = PERL_PARAMETERS;
+	}
+
+	public boolean isStopOnCompilation()
+	{
+		return stopOnCompilation;
+	}
+
+	public void setStopOnCompilation(boolean stopOnCompilation)
+	{
+		this.stopOnCompilation = stopOnCompilation;
 	}
 }

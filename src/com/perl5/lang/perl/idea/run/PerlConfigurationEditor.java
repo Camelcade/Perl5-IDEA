@@ -47,11 +47,12 @@ import java.util.ArrayList;
 public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 {
 	private TextFieldWithBrowseButton myScriptField;
-	private ComboBox myCharsetBox;
+	private ComboBox myScriptCharset;
 	private CommonProgramParametersPanel myParametersPanel;
 	private LabeledComponent<RawCommandLineEditor> myPerlParametersPanel;
 	private PerlAlternativeSdkPanel myAlternativeSdkPanel;
 	private Project myProject;
+	private LabeledComponent<JCheckBox> myStopOnCompilation;
 
 	public PerlConfigurationEditor(Project project)
 	{
@@ -63,9 +64,10 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	{
 		myScriptField.setText(perlConfiguration.getScriptPath());
 		myParametersPanel.reset(perlConfiguration);
-		myCharsetBox.setSelectedItem(perlConfiguration.getCharset());
+		myScriptCharset.setSelectedItem(perlConfiguration.getCharset());
 		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
 		myPerlParametersPanel.getComponent().setText(perlConfiguration.getPERL_PARAMETERS());
+		myStopOnCompilation.getComponent().setSelected(perlConfiguration.isStopOnCompilation());
 	}
 
 	@Override
@@ -74,9 +76,10 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		perlConfiguration.setPERL_PARAMETERS(myPerlParametersPanel.getComponent().getText());
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
-		perlConfiguration.setCharset(StringUtil.nullize((String) myCharsetBox.getSelectedItem(), true));
+		perlConfiguration.setCharset(StringUtil.nullize((String) myScriptCharset.getSelectedItem(), true));
 		perlConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
 		perlConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
+		perlConfiguration.setStopOnCompilation(myStopOnCompilation.getComponent().isSelected());
 	}
 
 	@NotNull
@@ -93,7 +96,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			}
 		}), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
-		myCharsetBox = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
+		myScriptCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
 
 		myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter()
 		{
@@ -103,11 +106,11 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
 				if (file != null)
 				{
-					myCharsetBox.setSelectedItem(file.getCharset().displayName());
+					myScriptCharset.setSelectedItem(file.getCharset().displayName());
 				}
 				else
 				{
-					myCharsetBox.setSelectedItem(null);
+					myScriptCharset.setSelectedItem(null);
 				}
 			}
 		});
@@ -122,9 +125,14 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, "Script");
 				scriptLabel.setLabelLocation(BorderLayout.WEST);
 				add(scriptLabel);
-				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myCharsetBox, "Console Encoding");
+
+				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myScriptCharset, "Script's text encoding");
 				consoleEncoding.setLabelLocation(BorderLayout.WEST);
 				add(consoleEncoding);
+
+				myStopOnCompilation = LabeledComponent.create(new JCheckBox(), "Stop debugger ASAP");
+				myStopOnCompilation.setLabelLocation(BorderLayout.WEST);
+				add(myStopOnCompilation);
 
 				myPerlParametersPanel = LabeledComponent.create(new RawCommandLineEditor(), "Perl5 arguments");
 				myPerlParametersPanel.setLabelLocation(BorderLayout.WEST);
