@@ -57,6 +57,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public boolean USE_ALTERNATIVE_SDK;
 	public String ALTERNATIVE_SDK_PATH;
 	public boolean stopOnCompilation = false;
+	private String scriptCharset = "utf-8";
 
 	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -108,12 +109,12 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
 	}
 
-	public String getCharset()
+	public String getConsoleCharset()
 	{
 		return CHARSET;
 	}
 
-	public void setCharset(String charset)
+	public void setConsoleCharset(String charset)
 	{
 		CHARSET = charset;
 	}
@@ -217,5 +218,15 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void setStopOnCompilation(boolean stopOnCompilation)
 	{
 		this.stopOnCompilation = stopOnCompilation;
+	}
+
+	public String getScriptCharset()
+	{
+		return scriptCharset;
+	}
+
+	public void setScriptCharset(String scriptCharset)
+	{
+		this.scriptCharset = scriptCharset;
 	}
 }

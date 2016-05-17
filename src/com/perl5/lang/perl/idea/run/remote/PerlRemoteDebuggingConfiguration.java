@@ -42,7 +42,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public String debugPort = "12345";
 	public String remoteProjectRoot = "/home/";
 	public boolean stopOnCompilation = false;
-	public String clientCharset;
+	public String clientCharset = "utf-8";
 
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)

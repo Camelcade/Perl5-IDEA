@@ -109,7 +109,7 @@ public class PerlRunProfileState extends CommandLineState
 			commandLine.addParameters(StringUtil.split(programParameters, " "));
 		}
 
-		String charsetName = runProfile.getCharset();
+		String charsetName = runProfile.getConsoleCharset();
 		Charset charset = null;
 		if (!StringUtil.isEmpty(charsetName))
 		{

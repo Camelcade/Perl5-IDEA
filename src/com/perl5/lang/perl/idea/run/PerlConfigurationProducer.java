@@ -71,7 +71,7 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 		if (perlFile != null)
 		{
 			runConfiguration.setScriptPath(perlFile.getPath());
-			runConfiguration.setCharset(perlFile.getCharset().displayName());
+			runConfiguration.setConsoleCharset(perlFile.getCharset().displayName());
 			runConfiguration.setGeneratedName();
 			return true;
 		}
