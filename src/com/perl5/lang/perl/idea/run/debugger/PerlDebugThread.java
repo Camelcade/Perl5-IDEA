@@ -72,6 +72,7 @@ public class PerlDebugThread extends Thread
 	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
 	private ReentrantLock lock = new ReentrantLock();
 	private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
+	private PerlDebugOptions myPerlDebugOptions;
 
 	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
@@ -83,6 +84,7 @@ public class PerlDebugThread extends Thread
 		myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
 		myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
 		myPerlRemoteFileSystem.dropFiles();
+		myPerlDebugOptions = state.getDebugOptions();
 	}
 
 	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
@@ -103,15 +105,22 @@ public class PerlDebugThread extends Thread
 		breakpointsDescriptorsQueue.clear();
 	}
 
+	protected void setUpDebugger()
+	{
+		PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState);
+		sendString(new Gson().toJson(perlSetUpDescriptor));
+		breakpointsDescriptorsQueue.clear();
+	}
+
 	@Override
 	public void run()
 	{
 		try
 		{
-			String debugHost = myDebugProfileState.getDebugHost();
-			int debugPort = myDebugProfileState.getDebugPort();
+			String debugHost = myPerlDebugOptions.getDebugHost();
+			int debugPort = myPerlDebugOptions.getDebugPort();
 			String debugName = debugHost + ":" + debugPort;
-			if (myDebugProfileState.isPerlServer())
+			if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER))
 			{
 				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 				mySocket = new Socket(debugHost, debugPort);

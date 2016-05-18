@@ -20,7 +20,11 @@ import com.intellij.execution.ui.CommonProgramParametersPanel;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.ui.ColoredListCellRenderer;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
+import org.jdesktop.swingx.combobox.MapComboBoxModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -35,12 +39,12 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 {
 	private Project myProject;
 
-	private LabeledComponent<JTextField> myWorkingDirectoryComponent;
-	private LabeledComponent<JTextField> myScriptCharset;
-	private LabeledComponent<JCheckBox> myIsPerlServer;
-	private LabeledComponent<JCheckBox> myStopOnCompilation;
-	private LabeledComponent<JTextField> myDebuggingHost;
-	private LabeledComponent<JFormattedTextField> myDebuggingPort;
+	private JTextField myWorkingDirectoryComponent;
+	private JTextField myScriptCharset;
+	private ComboBox myStartMode;
+	private ComboBox myPerlRole;
+	private JTextField myDebuggingHost;
+	private JFormattedTextField myDebuggingPort;
 
 	public PerlRemoteDebuggingConfigurationEditor(Project project)
 	{
@@ -50,24 +54,24 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 	@Override
 	protected void resetEditorFrom(PerlRemoteDebuggingConfiguration configuration)
 	{
-		myWorkingDirectoryComponent.getComponent().setText(configuration.getRemoteProjectRoot());
-		myIsPerlServer.getComponent().setSelected(configuration.isPerlServer());
-		myDebuggingHost.getComponent().setText(configuration.getDebugHost());
-		myDebuggingPort.getComponent().setText(configuration.getDebugPort());
-		myStopOnCompilation.getComponent().setSelected(configuration.isStopOnCompilation());
-		myScriptCharset.getComponent().setText(configuration.getClientCharset());
+		myWorkingDirectoryComponent.setText(configuration.getRemoteProjectRoot());
+		myStartMode.setSelectedItem(configuration.getStartMode());
+		myPerlRole.setSelectedItem(configuration.getPerlRole());
+		myDebuggingHost.setText(configuration.getDebugHost());
+		myDebuggingPort.setText(String.valueOf(configuration.getDebugPort()));
+		myScriptCharset.setText(configuration.getScriptCharset());
 
 	}
 
 	@Override
 	protected void applyEditorTo(PerlRemoteDebuggingConfiguration configuration) throws ConfigurationException
 	{
-		configuration.setRemoteProjectRoot(myWorkingDirectoryComponent.getComponent().getText());
-		configuration.setPerlServer(myIsPerlServer.getComponent().isSelected());
-		configuration.setDebugHost(myDebuggingHost.getComponent().getText());
-		configuration.setDebugPort(myDebuggingPort.getComponent().getText());
-		configuration.setStopOnCompilation(myStopOnCompilation.getComponent().isSelected());
-		configuration.setClientCharset(myScriptCharset.getComponent().getText());
+		configuration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
+		configuration.setDebugHost(myDebuggingHost.getText());
+		configuration.setDebugPort(Integer.parseInt(myDebuggingPort.getText()));
+		configuration.setScriptCharset(myScriptCharset.getText());
+		configuration.setPerlRole(myPerlRole.getSelectedItem().toString());
+		configuration.setStartMode(myStartMode.getSelectedItem().toString());
 	}
 
 	@NotNull
@@ -80,25 +84,60 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 			@Override
 			protected void addComponents()
 			{
-				myWorkingDirectoryComponent = LabeledComponent.create(new JTextField(), "Remote project root");
-				myWorkingDirectoryComponent.setLabelLocation(BorderLayout.WEST);
-				add(myWorkingDirectoryComponent);
+				myWorkingDirectoryComponent = new JTextField();
+				LabeledComponent<JTextField> workingDirectory = LabeledComponent.create(myWorkingDirectoryComponent, "Remote project root");
+				workingDirectory.setLabelLocation(BorderLayout.WEST);
+				add(workingDirectory);
 
-				myScriptCharset = LabeledComponent.create(new JTextField(), "Text scalars encoding");
-				myScriptCharset.setLabelLocation(BorderLayout.WEST);
-				add(myScriptCharset);
+				myScriptCharset = new JTextField();
+				LabeledComponent<JTextField> scriptCharset = LabeledComponent.create(myScriptCharset, "Text scalars encoding");
+				scriptCharset.setLabelLocation(BorderLayout.WEST);
+				add(scriptCharset);
 
-				myStopOnCompilation = LabeledComponent.create(new JCheckBox(), "Stop debugger ASAP");
-				myStopOnCompilation.setLabelLocation(BorderLayout.WEST);
-				add(myStopOnCompilation);
+				myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS))
+				{
+					@Override
+					public void setRenderer(ListCellRenderer renderer)
+					{
+						super.setRenderer(new ColoredListCellRenderer<String>()
+						{
+							@Override
+							protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
+							{
+								append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
+							}
+						});
+					}
+				};
+				;
+				LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, "Debugger startup mode");
+				startMode.setLabelLocation(BorderLayout.WEST);
+				add(startMode);
 
-				myIsPerlServer = LabeledComponent.create(new JCheckBox(), "Perl acts as a server");
-				myIsPerlServer.setLabelLocation(BorderLayout.WEST);
-				add(myIsPerlServer);
+				myPerlRole = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.ROLE_OPTIONS))
+				{
+					@Override
+					public void setRenderer(ListCellRenderer renderer)
+					{
+						super.setRenderer(new ColoredListCellRenderer<String>()
+						{
+							@Override
+							protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
+							{
+								append(PerlDebugOptionsSets.ROLE_OPTIONS.get(value));
+							}
+						});
+					}
+				};
+				;
+				LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, "Connection mode");
+				perlRole.setLabelLocation(BorderLayout.WEST);
+				add(perlRole);
 
-				myDebuggingHost = LabeledComponent.create(new JTextField(), "Server Hostname");
-				myDebuggingHost.setLabelLocation(BorderLayout.WEST);
-				add(myDebuggingHost);
+				myDebuggingHost = new JTextField();
+				LabeledComponent<JTextField> debuggingHost = LabeledComponent.create(myDebuggingHost, "Server Hostname");
+				debuggingHost.setLabelLocation(BorderLayout.WEST);
+				add(debuggingHost);
 
 				NumberFormat numberFormat = NumberFormat.getInstance();
 				numberFormat.setMaximumIntegerDigits(6);
@@ -109,9 +148,10 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 				formatter.setMaximum(65535);
 				formatter.setMinimum(0);
 
-				myDebuggingPort = LabeledComponent.create(new JFormattedTextField(formatter), "Server Port");
-				myDebuggingPort.setLabelLocation(BorderLayout.WEST);
-				add(myDebuggingPort);
+				myDebuggingPort = new JFormattedTextField(formatter);
+				LabeledComponent<JFormattedTextField> debuggingPort = LabeledComponent.create(myDebuggingPort, "Server Port");
+				debuggingPort.setLabelLocation(BorderLayout.WEST);
+				add(debuggingPort);
 			}
 		};
 	}

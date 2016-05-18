@@ -28,6 +28,7 @@ import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,15 +36,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.05.2016.
  */
-public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase implements RunConfigurationWithSuppressedDefaultRunAction
+public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebugOptions
 {
-	public boolean isPerlServer = true;
 	public String debugHost = "localhost";
-	public String debugPort = "12345";
+	public int debugPort = 12345;
 	public String remoteProjectRoot = "/home/";
-	public boolean stopOnCompilation = false;
-	public String clientCharset = "utf-8";
-
+	public String scriptCharset = "utf-8";
+	public String perlRole = "client";
+	private String startMode = "RUN";
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -88,16 +88,6 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 		return null;
 	}
 
-	public boolean isPerlServer()
-	{
-		return isPerlServer;
-	}
-
-	public void setPerlServer(boolean perlServer)
-	{
-		this.isPerlServer = perlServer;
-	}
-
 	public String getDebugHost()
 	{
 		return debugHost;
@@ -108,12 +98,12 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 		this.debugHost = debugHost;
 	}
 
-	public String getDebugPort()
+	public int getDebugPort()
 	{
 		return debugPort;
 	}
 
-	public void setDebugPort(String debugPort)
+	public void setDebugPort(int debugPort)
 	{
 		this.debugPort = debugPort;
 	}
@@ -132,23 +122,35 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 		this.remoteProjectRoot = remoteWorkingDirectory;
 	}
 
-	public boolean isStopOnCompilation()
+	public String getScriptCharset()
 	{
-		return stopOnCompilation;
+		return scriptCharset;
 	}
 
-	public void setStopOnCompilation(boolean stopOnCompilation)
+	public void setScriptCharset(String scriptCharset)
 	{
-		this.stopOnCompilation = stopOnCompilation;
+		this.scriptCharset = scriptCharset;
 	}
 
-	public String getClientCharset()
+	@Override
+	public String getStartMode()
 	{
-		return clientCharset;
+		return startMode;
 	}
 
-	public void setClientCharset(String clientCharset)
+	public void setStartMode(String startMode)
 	{
-		this.clientCharset = clientCharset;
+		this.startMode = startMode;
+	}
+
+	@Override
+	public String getPerlRole()
+	{
+		return perlRole;
+	}
+
+	public void setPerlRole(String perlRole)
+	{
+		this.perlRole = perlRole;
 	}
 }

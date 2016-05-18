@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.util.net.NetUtils;
 import com.perl5.lang.perl.idea.run.PerlConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
@@ -32,9 +31,6 @@ import java.util.Map;
 public class PerlDebugProfileState extends PerlRunProfileState
 {
 	private static final String[] DEBUG_ARGUMENTS = new String[]{"-d:Camelcadedb", "-IC:\\Repository\\IDEA-Perl5-Debugger\\lib\\"};
-	private static final String debugHost = "localhost";
-	private static final boolean isPerlServer = true;
-	private Integer debugPort;
 
 	public PerlDebugProfileState(ExecutionEnvironment environment)
 	{
@@ -52,34 +48,16 @@ public class PerlDebugProfileState extends PerlRunProfileState
 	protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException
 	{
 		Map<String, String> stringStringMap = new HashMap<String, String>(super.calcEnv(runProfile));
-		stringStringMap.put("PERL5_DEBUG_ROLE", isPerlServer() ? "server" : "client");
-		stringStringMap.put("PERL5_DEBUG_HOST", getDebugHost());
-		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));
+		PerlDebugOptions debugOptions = getDebugOptions();
+		stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
+		stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());
+		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(debugOptions.getDebugPort()));
 		return stringStringMap;
 	}
 
-	public String getDebugHost()
+	public PerlDebugOptions getDebugOptions()
 	{
-		return debugHost;
-	}
-
-	public int getDebugPort() throws ExecutionException
-	{
-		if (debugPort == null)
-		{
-			debugPort = NetUtils.tryToFindAvailableSocketPort();
-			if (debugPort == -1)
-			{
-				throw new ExecutionException("No free port to work on");
-			}
-		}
-
-		return debugPort;
-	}
-
-	public boolean isPerlServer()
-	{
-		return isPerlServer;
+		return (PerlDebugOptions) getEnvironment().getRunProfile();
 	}
 
 	public String mapPathToRemote(String localPath)
@@ -91,5 +69,6 @@ public class PerlDebugProfileState extends PerlRunProfileState
 	{
 		return remotePath;
 	}
+
 
 }

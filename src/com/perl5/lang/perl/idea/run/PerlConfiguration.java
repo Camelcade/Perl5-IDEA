@@ -32,6 +32,8 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.net.NetUtils;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
@@ -45,7 +47,7 @@ import java.util.Map;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters
+public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions
 {
 	public String SCRIPT_PATH;
 	public String PROGRAM_PARAMETERS;
@@ -56,8 +58,12 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public String CHARSET;
 	public boolean USE_ALTERNATIVE_SDK;
 	public String ALTERNATIVE_SDK_PATH;
-	public boolean stopOnCompilation = false;
+
+	// debugging-related options
 	private String scriptCharset = "utf-8";
+	private String startMode = "RUN";
+
+	private transient Integer debugPort;
 
 	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -210,16 +216,51 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		this.PERL_PARAMETERS = PERL_PARAMETERS;
 	}
 
-	public boolean isStopOnCompilation()
+	@Override
+	public String getStartMode()
 	{
-		return stopOnCompilation;
+		return startMode;
 	}
 
-	public void setStopOnCompilation(boolean stopOnCompilation)
+	public void setStartMode(String startMode)
 	{
-		this.stopOnCompilation = stopOnCompilation;
+		this.startMode = startMode;
 	}
 
+	@Override
+	public String getPerlRole()
+	{
+		return PerlDebugOptions.ROLE_CLIENT;
+	}
+
+	@Override
+	public String getDebugHost()
+	{
+		return "localhost";
+	}
+
+	@Override
+	public int getDebugPort() throws ExecutionException
+	{
+		if (debugPort == null)
+		{
+			debugPort = NetUtils.tryToFindAvailableSocketPort();
+			if (debugPort == -1)
+			{
+				throw new ExecutionException("No free port to work on");
+			}
+		}
+
+		return debugPort;
+	}
+
+	@Override
+	public String getRemoteProjectRoot()
+	{
+		return getProject().getBasePath();
+	}
+
+	@Override
 	public String getScriptCharset()
 	{
 		return scriptCharset;
@@ -229,4 +270,6 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	{
 		this.scriptCharset = scriptCharset;
 	}
+
+
 }

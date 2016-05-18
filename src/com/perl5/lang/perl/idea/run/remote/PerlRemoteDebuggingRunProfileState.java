@@ -57,24 +57,6 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState
 	}
 
 	@Override
-	public String getDebugHost()
-	{
-		return myDebuggingConfiguration.getDebugHost();
-	}
-
-	@Override
-	public int getDebugPort() throws ExecutionException
-	{
-		return Integer.parseInt(myDebuggingConfiguration.getDebugPort());
-	}
-
-	@Override
-	public boolean isPerlServer()
-	{
-		return myDebuggingConfiguration.isPerlServer();
-	}
-
-	@Override
 	public String mapPathToRemote(String localPath)
 	{
 		if (localPath.startsWith(myLocalProjectRoot))
