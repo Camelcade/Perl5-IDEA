@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 
 import java.util.List;
@@ -30,10 +30,10 @@ public class PerlSetUpDescriptor
 	private String charset;
 	private String startMode;
 
-	public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugProfileState debugProfileState)
+	public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState)
 	{
 		this.breakpoints = breakpoints;
-//		this.charset = debugProfileState;
-//		this.startMode = startMode;
+		this.charset = debugProfileState.getScriptCharset();
+		this.startMode = debugProfileState.getStartMode();
 	}
 }

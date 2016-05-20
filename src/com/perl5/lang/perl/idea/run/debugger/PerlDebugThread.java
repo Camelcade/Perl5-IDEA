@@ -107,8 +107,8 @@ public class PerlDebugThread extends Thread
 
 	protected void setUpDebugger()
 	{
-		PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState);
-		sendString(new Gson().toJson(perlSetUpDescriptor));
+		PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState.getDebugOptions());
+		sendString(new Gson().toJson(perlSetUpDescriptor) + "\n");
 		breakpointsDescriptorsQueue.clear();
 	}
 
@@ -201,7 +201,7 @@ public class PerlDebugThread extends Thread
 			if (newEvent instanceof PerlDebuggingEventReady)
 			{
 				isReady = true;
-				sendQueuedBreakpoints();
+				setUpDebugger();
 			}
 			else
 			{
@@ -265,7 +265,7 @@ public class PerlDebugThread extends Thread
 
 			try
 			{
-				myOutputStream.write(string.getBytes());
+				myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
 			}
 			catch (IOException e)
 			{

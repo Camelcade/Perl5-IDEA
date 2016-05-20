@@ -60,8 +60,8 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public String ALTERNATIVE_SDK_PATH;
 
 	// debugging-related options
-	private String scriptCharset = "utf-8";
-	private String startMode = "RUN";
+	public String scriptCharset = "utf8";
+	public String startMode = "RUN";
 
 	private transient Integer debugPort;
 
