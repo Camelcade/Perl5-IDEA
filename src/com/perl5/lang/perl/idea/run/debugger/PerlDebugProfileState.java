@@ -31,6 +31,7 @@ import java.util.Map;
 public class PerlDebugProfileState extends PerlRunProfileState
 {
 	private static final String[] DEBUG_ARGUMENTS = new String[]{"-d:Camelcadedb", "-IC:\\Repository\\IDEA-Perl5-Debugger\\lib\\"};
+	private Integer myDebugPort;
 
 	public PerlDebugProfileState(ExecutionEnvironment environment)
 	{
@@ -51,7 +52,7 @@ public class PerlDebugProfileState extends PerlRunProfileState
 		PerlDebugOptions debugOptions = getDebugOptions();
 		stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
 		stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());
-		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(debugOptions.getDebugPort()));
+		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));
 		return stringStringMap;
 	}
 
@@ -70,5 +71,14 @@ public class PerlDebugProfileState extends PerlRunProfileState
 		return remotePath;
 	}
 
+
+	public Integer getDebugPort() throws ExecutionException
+	{
+		if (myDebugPort == null)
+		{
+			myDebugPort = getDebugOptions().getDebugPort();
+		}
+		return myDebugPort;
+	}
 
 }

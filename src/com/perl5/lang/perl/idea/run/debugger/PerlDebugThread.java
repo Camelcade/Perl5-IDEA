@@ -118,7 +118,7 @@ public class PerlDebugThread extends Thread
 		try
 		{
 			String debugHost = myPerlDebugOptions.getDebugHost();
-			int debugPort = myPerlDebugOptions.getDebugPort();
+			int debugPort = myDebugProfileState.getDebugPort();
 			String debugName = debugHost + ":" + debugPort;
 			if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER))
 			{
