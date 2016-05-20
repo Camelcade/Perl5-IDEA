@@ -30,9 +30,9 @@ public class PerlDebugOptionsSets
 
 	static
 	{
-		STARTUP_OPTIONS.put("COMPILE", "As soon as possible");
-		STARTUP_OPTIONS.put("RUN", "After compilation (use and BEGIN blocks are done)");
-		STARTUP_OPTIONS.put("BREAKPOINT", "Run to the first breakpoint");
+		STARTUP_OPTIONS.put("COMPILE", "Stop as soon as possible");
+		STARTUP_OPTIONS.put("RUN", "Stop after compilation (use and BEGIN blocks are done)");
+		STARTUP_OPTIONS.put("BREAKPOINT", "Stop at first breakpoint");
 
 		ROLE_OPTIONS.put(PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process");
 		ROLE_OPTIONS.put(PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE");

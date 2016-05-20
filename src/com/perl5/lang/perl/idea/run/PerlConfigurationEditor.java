@@ -153,7 +153,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				add(consoleEncoding);
 
 				myScriptCharset = new JTextField();
-				LabeledComponent<JTextField> myScriptCharsetLabel = LabeledComponent.create(myScriptCharset, "Text scalars encoding");
+				LabeledComponent<JTextField> myScriptCharsetLabel = LabeledComponent.create(myScriptCharset, "Script encoding");
 				myScriptCharsetLabel.setLabelLocation(BorderLayout.WEST);
 				add(myScriptCharsetLabel);
 

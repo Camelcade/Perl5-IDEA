@@ -90,7 +90,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 				add(workingDirectory);
 
 				myScriptCharset = new JTextField();
-				LabeledComponent<JTextField> scriptCharset = LabeledComponent.create(myScriptCharset, "Text scalars encoding");
+				LabeledComponent<JTextField> scriptCharset = LabeledComponent.create(myScriptCharset, "Script encoding");
 				scriptCharset.setLabelLocation(BorderLayout.WEST);
 				add(scriptCharset);
 
@@ -135,7 +135,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 				add(perlRole);
 
 				myDebuggingHost = new JTextField();
-				LabeledComponent<JTextField> debuggingHost = LabeledComponent.create(myDebuggingHost, "Server Hostname");
+				LabeledComponent<JTextField> debuggingHost = LabeledComponent.create(myDebuggingHost, "Server host");
 				debuggingHost.setLabelLocation(BorderLayout.WEST);
 				add(debuggingHost);
 
@@ -149,7 +149,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 				formatter.setMinimum(0);
 
 				myDebuggingPort = new JFormattedTextField(formatter);
-				LabeledComponent<JFormattedTextField> debuggingPort = LabeledComponent.create(myDebuggingPort, "Server Port");
+				LabeledComponent<JFormattedTextField> debuggingPort = LabeledComponent.create(myDebuggingPort, "Server port");
 				debuggingPort.setLabelLocation(BorderLayout.WEST);
 				add(debuggingPort);
 			}
