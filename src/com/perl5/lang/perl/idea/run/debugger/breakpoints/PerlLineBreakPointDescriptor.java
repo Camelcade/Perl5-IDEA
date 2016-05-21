@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
+import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import org.jetbrains.annotations.Nullable;
@@ -76,6 +77,25 @@ public class PerlLineBreakPointDescriptor
 		return descriptor;
 	}
 
+	@Nullable
+	public static PerlLineBreakPointDescriptor createFromSourcePosition(XSourcePosition position, PerlDebugThread debugThread)
+	{
+		VirtualFile virtualFile = position.getFile();
+
+		String filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFile.getCanonicalPath());
+
+		PerlLineBreakPointDescriptor descriptor = null;
+
+		if (filePath != null)
+		{
+			descriptor = new PerlLineBreakPointDescriptor();
+			descriptor.path = filePath;
+			descriptor.line = position.getLine();
+		}
+		return descriptor;
+
+	}
+
 	public String getPath()
 	{
 		return path;
@@ -95,5 +115,4 @@ public class PerlLineBreakPointDescriptor
 	{
 		return condition;
 	}
-
 }

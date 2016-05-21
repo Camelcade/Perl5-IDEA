@@ -101,14 +101,14 @@ public class PerlDebugThread extends Thread
 
 	protected void sendQueuedBreakpoints()
 	{
-		sendString("b " + new Gson().toJson(breakpointsDescriptorsQueue) + "\n");
+		sendCommand("b", breakpointsDescriptorsQueue);
 		breakpointsDescriptorsQueue.clear();
 	}
 
 	protected void setUpDebugger()
 	{
 		PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState.getDebugOptions());
-		sendString(new Gson().toJson(perlSetUpDescriptor) + "\n");
+		sendString(myGson.toJson(perlSetUpDescriptor));
 		breakpointsDescriptorsQueue.clear();
 	}
 
@@ -224,6 +224,8 @@ public class PerlDebugThread extends Thread
 		if (mySocket == null)
 			return;
 
+		string = string + "\n";
+
 		try
 		{
 			if (DEV_MODE)
@@ -235,7 +237,7 @@ public class PerlDebugThread extends Thread
 				System.err.println("Sent string " + string);
 
 
-			myOutputStream.write(string.getBytes());
+			myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
 		}
 		catch (IOException e)
 		{
@@ -247,6 +249,11 @@ public class PerlDebugThread extends Thread
 		}
 	}
 
+	public void sendCommand(String command, Object data)
+	{
+		sendString(command + " " + myGson.toJson(data));
+	}
+
 	public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
 	{
 		if (mySocket == null)
@@ -256,22 +263,8 @@ public class PerlDebugThread extends Thread
 		{
 			lock.lock();
 			PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
-			String string = command + " " + new Gson().toJson(transaction) + "\n";
-
-			if (DEV_MODE)
-				System.err.println("Sent transaction " + transaction.getTransactionId() + " " + string);
-
 			transactionsMap.put(transaction.getTransactionId(), transactionHandler);
-
-			try
-			{
-				myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
-			}
-			catch (IOException e)
-			{
-				setStop();
-				e.printStackTrace();
-			}
+			sendCommand(command, transaction);
 		}
 		finally
 		{

@@ -50,6 +50,7 @@ public class PerlXValueGroup extends XValueGroup
 			{
 				list.add(new PerlXNamedValue(descriptor, myStackFrame));
 			}
+			node.setAlreadySorted(true);
 			node.addChildren(list, true);
 		}
 	}

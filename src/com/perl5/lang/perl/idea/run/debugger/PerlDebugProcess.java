@@ -34,6 +34,7 @@ import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.intellij.xdebugger.ui.XDebugTabLayouter;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointHandler;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
@@ -48,16 +49,16 @@ import java.util.Collection;
 public class PerlDebugProcess extends XDebugProcess
 {
 	private final ExecutionResult myExecutionResult;
-	private final PerlDebugThread myPerlDebugThread;
+	private final PerlDebugThread myDebugThread;
 	private final PerlRunProfileState myDebugProfileState;
 
 	public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
 	{
 		super(session);
 		this.myExecutionResult = executionResult;
-		myPerlDebugThread = new PerlDebugThread(session, state, executionResult);
+		myDebugThread = new PerlDebugThread(session, state, executionResult);
 		myDebugProfileState = state;
-		myPerlDebugThread.start();
+		myDebugThread.start();
 	}
 
 	@NotNull
@@ -79,7 +80,7 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public XBreakpointHandler<?>[] getBreakpointHandlers()
 	{
-		return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myPerlDebugThread)};
+		return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myDebugThread)};
 	}
 
 	@Override
@@ -105,31 +106,31 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public void startStepOver()
 	{
-		myPerlDebugThread.sendString("o\n");
+		myDebugThread.sendString("o");
 	}
 
 	@Override
 	public void startStepInto()
 	{
-		myPerlDebugThread.sendString("\n");
+		myDebugThread.sendString("");
 	}
 
 	@Override
 	public void startStepOut()
 	{
-		myPerlDebugThread.sendString("u\n");
+		myDebugThread.sendString("u");
 	}
 
 	@Override
 	public void resume()
 	{
-		myPerlDebugThread.sendString("g\n");
+		myDebugThread.sendString("g");
 	}
 
 	@Override
 	public void stop()
 	{
-		myPerlDebugThread.setStop();
+		myDebugThread.setStop();
 
 		ApplicationManager.getApplication().runReadAction(
 				new Runnable()
@@ -151,7 +152,11 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public void runToPosition(@NotNull XSourcePosition position)
 	{
-
+		PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromSourcePosition(position, myDebugThread);
+		if (descriptor != null)
+		{
+			myDebugThread.sendCommand("p", descriptor);
+		}
 	}
 
 	@Nullable
@@ -177,11 +182,11 @@ public class PerlDebugProcess extends XDebugProcess
 			@Override
 			public void registerAdditionalContent(@NotNull RunnerLayoutUi ui)
 			{
-				Content content = ui.createContent("PerlSourceLIst", myPerlDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_SCRIPT_FILE_ICON, null);
+				Content content = ui.createContent("PerlSourceLIst", myDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_SCRIPT_FILE_ICON, null);
 				content.setCloseable(false);
 				ui.addContent(content);
 
-				content = ui.createContent("PerlEvalsList", myPerlDebugThread.getEvalsListPanel(), "Compiled evals", PerlIcons.PERL_LANGUAGE_ICON, null);
+				content = ui.createContent("PerlEvalsList", myDebugThread.getEvalsListPanel(), "Compiled evals", PerlIcons.PERL_LANGUAGE_ICON, null);
 				content.setCloseable(false);
 				ui.addContent(content);
 			}
