@@ -25,20 +25,22 @@ import com.perl5.lang.perl.util.PerlDebugUtils;
  */
 public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop implements PerlDebuggingEventBreakpoint
 {
+	boolean suspend;
+	String logmessage;
 	private String path;
 	private int line;
 
 	@Override
-	public void doWork()
+	public void run()
 	{
 		XDebugSession session = getDebugSession();
 		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);
 		if (breakpoint != null)
 		{
-			session.breakpointReached(breakpoint, "", getSuspendContext());
+			session.breakpointReached(breakpoint, logmessage, getSuspendContext());
 		}
 
-		super.doWork();
+		super.run();
 	}
 
 	@Override

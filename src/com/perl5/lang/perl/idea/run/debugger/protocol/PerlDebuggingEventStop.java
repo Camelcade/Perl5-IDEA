@@ -37,7 +37,7 @@ public class PerlDebuggingEventStop extends PerlDebuggingEventBase implements Pe
 	}
 
 	@Override
-	public void doWork()
+	public void run()
 	{
 		getDebugSession().positionReached(getSuspendContext());
 	}

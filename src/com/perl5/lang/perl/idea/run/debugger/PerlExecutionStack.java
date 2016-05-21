@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
@@ -46,7 +47,7 @@ public class PerlExecutionStack extends XExecutionStack
 	@Override
 	public XStackFrame getTopFrame()
 	{
-		return myPerlStackFrames.get(0);
+		return ContainerUtil.getFirstItem(myPerlStackFrames);
 	}
 
 	@Override

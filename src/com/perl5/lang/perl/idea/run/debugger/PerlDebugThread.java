@@ -25,7 +25,6 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
@@ -46,6 +45,8 @@ import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -54,7 +55,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class PerlDebugThread extends Thread
 {
 	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
-
+	private static Executor ourExecutor = Executors.newSingleThreadExecutor();
 	private final ExecutionResult myExecutionResult;
 	private final Gson myGson;
 	private final PerlDebugProfileState myDebugProfileState;
@@ -207,14 +208,8 @@ public class PerlDebugThread extends Thread
 			{
 				newEvent.setDebugSession(mySession);
 				newEvent.setDebugThread(this);
-				ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						newEvent.doWork();
-					}
-				});
+				ourExecutor.execute(newEvent);
+//				ApplicationManager.getApplication().executeOnPooledThread()invokeLater( // executeOnPooledThread - fixme concurrency problems
 			}
 		}
 	}

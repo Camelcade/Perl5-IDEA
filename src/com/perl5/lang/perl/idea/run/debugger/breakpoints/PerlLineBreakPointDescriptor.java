@@ -20,6 +20,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.xdebugger.XExpression;
 import com.intellij.xdebugger.XSourcePosition;
+import com.intellij.xdebugger.breakpoints.SuspendPolicy;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import org.jetbrains.annotations.Nullable;
@@ -34,6 +35,8 @@ public class PerlLineBreakPointDescriptor
 	private boolean enabled;
 	private String condition;
 	private boolean remove;
+	private String action;
+	private boolean suspend;
 
 	@Nullable
 	public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, PerlDebugThread debugThread)
@@ -57,6 +60,13 @@ public class PerlLineBreakPointDescriptor
 			descriptor.line = breakpoint.getLine();
 			descriptor.enabled = breakpoint.isEnabled();
 			descriptor.remove = false;
+			XExpression logExpressionObject = breakpoint.getLogExpressionObject();
+			if (logExpressionObject != null)
+			{
+				descriptor.action = logExpressionObject.getExpression();
+			}
+			SuspendPolicy suspendPolicy = breakpoint.getSuspendPolicy();
+			descriptor.suspend = suspendPolicy != SuspendPolicy.NONE;
 
 			XExpression conditionExpression = breakpoint.getConditionExpression();
 			descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";

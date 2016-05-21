@@ -30,7 +30,7 @@ public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEven
 	private int line;
 
 	@Override
-	public void doWork()
+	public void run()
 	{
 		XDebugSession session = getDebugSession();
 		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);

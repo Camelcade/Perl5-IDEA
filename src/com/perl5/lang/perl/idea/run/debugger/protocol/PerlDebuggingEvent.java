@@ -22,9 +22,9 @@ import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 /**
  * Created by hurricup on 05.05.2016.
  */
-public interface PerlDebuggingEvent
+public interface PerlDebuggingEvent extends Runnable
 {
-	void doWork();
+	void run();
 
 	XDebugSession getDebugSession();
 

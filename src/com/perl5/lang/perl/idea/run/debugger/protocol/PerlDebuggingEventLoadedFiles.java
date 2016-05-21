@@ -27,7 +27,7 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 	PerlLoadedFileDescriptor[] remove; // list of filenames
 
 	@Override
-	public void doWork()
+	public void run()
 	{
 		PerlScriptsPanel evalsListPanel = getDebugThread().getEvalsListPanel();
 		PerlScriptsPanel scriptListPanel = getDebugThread().getScriptListPanel();

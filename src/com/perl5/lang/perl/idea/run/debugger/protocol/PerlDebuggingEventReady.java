@@ -22,7 +22,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 {
 	@Override
-	public void doWork()
+	public void run()
 	{
 	}
 }
