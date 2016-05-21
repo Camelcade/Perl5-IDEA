@@ -29,6 +29,7 @@ public class PerlValueDescriptor
 	private int size;        // size used for arrays/hashes elements
 	private boolean expandable;
 	private boolean blessed;
+	private boolean is_utf;
 
 	public String getName()
 	{
@@ -68,5 +69,10 @@ public class PerlValueDescriptor
 	public int getRefDepth()
 	{
 		return ref_depth;
+	}
+
+	public boolean isUtf()
+	{
+		return is_utf;
 	}
 }

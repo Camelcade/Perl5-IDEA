@@ -121,7 +121,7 @@ public class PerlXNamedValue extends XNamedValue
 		}
 		else if (StringUtil.equals(type, "SCALAR"))
 		{
-			return PerlIcons.SCALAR_GUTTER_ICON;
+			return myPerlValueDescriptor.isUtf() ? PerlIcons.UTF_SCALAR_GUTTER_ICON : PerlIcons.SCALAR_GUTTER_ICON;
 		}
 		else if (StringUtil.equals(type, "ARRAY"))
 		{

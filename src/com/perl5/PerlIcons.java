@@ -58,8 +58,8 @@ public class PerlIcons
 	public static final Icon MY_GUTTER_ICON = IconLoader.getIcon("/icons/my_gutter_icon.png");
 	public static final Icon OUR_GUTTER_ICON = IconLoader.getIcon("/icons/our_gutter_icon.png");
 
-
 	public static final Icon SCALAR_GUTTER_ICON = IconLoader.getIcon("/icons/scalar_gutter_icon.png");
+	public static final Icon UTF_SCALAR_GUTTER_ICON = IconLoader.getIcon("/icons/scalar_utf_gutter_icon.png");
 	public static final Icon ARRAY_GUTTER_ICON = IconLoader.getIcon("/icons/array_gutter_icon.png");
 	public static final Icon HASH_GUTTER_ICON = IconLoader.getIcon("/icons/hash_gutter_icon.png");
 	public static final Icon GLOB_GUTTER_ICON = IconLoader.getIcon("/icons/glob_gutter_icon.png");
