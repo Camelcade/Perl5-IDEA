@@ -34,20 +34,10 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Implemented proper line comment splitting by enter</li>
-      <li>Added PerlCritic and PerlTidy  executables  configuration for Mac users to avoid <a href="http://depressiverobot.com/2016/02/05/intellij-path.html">env problems</a>.</li>
-      <li>Implemented XSubs  declarations file generation</li>
-      <li>Implemented unconfigured Perl5 interpreter warning for non-IDEA ides. Also, default path is now fetched from perl itself</li>
-      <li>Added B::Deparse options settings</li>
-      <li>Package name to file resolution is now case sensitive even on Windows systems</li>
-      <li>Improved package completion on invocation statement</li>
-      <li>Implemented methods resolution with stringified packages, like <code>'Foo::Bar'->method</code></li>
-      <li>Removed sort and sub from autocompletion, added respective live templates</li>
-      <li>Improved sub parameter variables extraction to handle multi-shifts and @_ elements</li>
-      <li>Typeglobs are not annotated as clashed/duplicated anymore. No sense.</li>
+      <li>Perl Debugger. More information <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Perl-Debugger">available here</a>.</li>
       </ul>
      </p>
-
+<!--
      <p>Fixes:
       <ul>
       <li>Fixed imported autoloaded subs resolution</li>
@@ -59,7 +49,7 @@
       <li>Restored program arguments order to pre-1.5 position in Run configuration</li>
       </ul>
      </p>
-
+-->
     ]]>
     </change-notes>
 
