@@ -201,8 +201,15 @@ public class PerlDebugThread extends Thread
 		{
 			if (newEvent instanceof PerlDebuggingEventReady)
 			{
-				isReady = true;
-				setUpDebugger();
+				if (((PerlDebuggingEventReady) newEvent).isValid())
+				{
+					isReady = true;
+					setUpDebugger();
+				}
+				else
+				{
+					setStop();
+				}
 			}
 			else
 			{

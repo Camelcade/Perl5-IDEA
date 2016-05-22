@@ -75,6 +75,7 @@ public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDeb
 			else if (StringUtil.equals(event, "READY"))
 			{
 				eventObject = new PerlDebuggingEventReady();
+				((PerlDebuggingEventReady) eventObject).version = jsonElement.getAsJsonObject().getAsJsonPrimitive("version").getAsString();
 			}
 			else if (StringUtil.equals(event, "LOADED_FILES_DELTA"))
 			{

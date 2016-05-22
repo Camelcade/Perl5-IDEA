@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class PerlDebugProfileState extends PerlRunProfileState
 {
-	private static final String[] DEBUG_ARGUMENTS = new String[]{"-d:Camelcadedb", "-IC:\\Repository\\IDEA-Perl5-Debugger\\lib\\"};
+	private static final String[] DEBUG_ARGUMENTS = new String[]{"-d:Camelcadedb"};
 	private Integer myDebugPort;
 
 	public PerlDebugProfileState(ExecutionEnvironment environment)

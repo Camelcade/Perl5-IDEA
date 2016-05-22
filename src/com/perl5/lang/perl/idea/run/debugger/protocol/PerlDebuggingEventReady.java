@@ -16,13 +16,39 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.util.text.StringUtil;
+
 /**
  * Created by hurricup on 08.05.2016.
  */
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 {
+	private static final String MODULE_VERSION_PREFIX = "1.6.";
+	public String version;
+
 	@Override
 	public void run()
 	{
 	}
+
+	public boolean isValid()
+	{
+		if (StringUtil.isNotEmpty(version) && StringUtil.startsWith(version, MODULE_VERSION_PREFIX))
+		{
+			return true;
+		}
+
+		Notifications.Bus.notify(new Notification(
+				"PERL_DEBUGGER",
+				"Incorrect Devel::Camelcadedb version",
+				"Current plugin version requires Devel::Camelcadedb version " + MODULE_VERSION_PREFIX + "x, but we've got " + version + ". Please install appropriate version from CPAN.",
+				NotificationType.ERROR
+		));
+		return false;
+	}
+
+
 }
