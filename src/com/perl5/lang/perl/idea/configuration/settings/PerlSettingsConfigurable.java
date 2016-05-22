@@ -122,7 +122,7 @@ public class PerlSettingsConfigurable implements Configurable
 		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
 		builder.addComponent(allowInjectionWithInterpolation);
 
-		perlTryCatchCheckBox = new JCheckBox("Enable TryCatch sytnax extension");
+		perlTryCatchCheckBox = new JCheckBox("Enable TryCatch syntax extension");
 		builder.addComponent(perlTryCatchCheckBox);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
