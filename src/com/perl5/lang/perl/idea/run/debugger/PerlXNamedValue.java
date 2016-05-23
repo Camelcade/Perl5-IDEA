@@ -119,35 +119,35 @@ public class PerlXNamedValue extends XNamedValue
 		{
 			return null;
 		}
-		else if (StringUtil.equals(type, "SCALAR"))
+		else if (StringUtil.startsWith(type, "SCALAR"))
 		{
 			return myPerlValueDescriptor.isUtf() ? PerlIcons.UTF_SCALAR_GUTTER_ICON : PerlIcons.SCALAR_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "ARRAY"))
+		else if (StringUtil.startsWith(type, "ARRAY"))
 		{
 			return PerlIcons.ARRAY_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "HASH"))
+		else if (StringUtil.startsWith(type, "HASH"))
 		{
 			return PerlIcons.HASH_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "CODE"))
+		else if (StringUtil.startsWith(type, "CODE"))
 		{
 			return PerlIcons.SUB_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "GLOB"))
+		else if (StringUtil.startsWith(type, "GLOB"))
 		{
 			return PerlIcons.GLOB_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "FORMAT"))
+		else if (StringUtil.startsWith(type, "FORMAT"))
 		{
 			return PerlIcons.FORMAT_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "IO::File"))
+		else if (StringUtil.startsWith(type, "IO::File"))
 		{
 			return PerlIcons.HANDLE_GUTTER_ICON;
 		}
-		else if (StringUtil.equals(type, "Regexp"))
+		else if (StringUtil.startsWith(type, "Regexp"))
 		{
 			return PerlIcons.REGEX_GUTTER_ICON;
 		}
