@@ -26,7 +26,7 @@ import com.intellij.openapi.util.text.StringUtil;
  */
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 {
-	private static final String MODULE_VERSION_PREFIX = "1.6.";
+	private static final String MODULE_VERSION_PREFIX = "1.6.1.";
 	public String version;
 
 	@Override
