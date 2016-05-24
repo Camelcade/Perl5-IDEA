@@ -35,12 +35,13 @@
      <p>Improvements:
       <ul>
       <li>Perl Debugger. More information <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Perl-Debugger">available here</a>.</li>
+      <li>Perl::Critic and Perl::Tidy paths are now configurable in all operation systems</li>
+      <li>Added command line parameters configuration for Perl::Critic and Perl::Tidy</li>
       </ul>
      </p>
      <p>Fixes:
       <ul>
       <li>Clarified XSubs deparsing notification</li>
-      <li>Perl::Critic and Perl::Tidy paths are now configurable in all operation systems</li>
       </ul>
      </p>
     ]]>

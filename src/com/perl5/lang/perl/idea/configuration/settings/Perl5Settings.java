@@ -56,7 +56,10 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public String PERL_DEPARSE_ARGUMENTS = "";
 
 	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_NAME;
+	public String PERL_TIDY_ARGS = "";
+
 	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_NAME;
+	public String PERL_CRITIC_ARGS = "";
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;

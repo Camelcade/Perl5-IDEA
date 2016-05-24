@@ -62,13 +62,21 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 	protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException
 	{
-		String executable = Perl5Settings.getInstance(project).PERL_CRITIC_PATH;
+		Perl5Settings settings = Perl5Settings.getInstance(project);
+		String executable = settings.PERL_CRITIC_PATH;
 
 		if (StringUtil.isEmpty(executable))
 		{
 			throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
 		}
-		return new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
+		GeneralCommandLine commandLine = new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
+
+		if (StringUtil.isNotEmpty(settings.PERL_CRITIC_ARGS))
+		{
+			commandLine.addParameters(StringUtil.split(settings.PERL_CRITIC_ARGS, " "));
+		}
+
+		return commandLine;
 	}
 
 

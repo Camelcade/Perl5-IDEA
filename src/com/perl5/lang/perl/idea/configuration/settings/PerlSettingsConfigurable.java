@@ -63,9 +63,13 @@ public class PerlSettingsConfigurable implements Configurable
 	Perl5Settings mySettings;
 
 	TextFieldWithBrowseButton perlCriticPathInputField;
+	JTextField perlCriticArgsInputField;
+
 	TextFieldWithBrowseButton perlTidyPathInputField;
+	JTextField perlTidyArgsInputField;
 
 	TextFieldWithBrowseButton perlPathInputField;
+
 	JTextField deparseArgumentsTextField;
 
 	JPanel regeneratePanel;
@@ -145,6 +149,7 @@ public class PerlSettingsConfigurable implements Configurable
 				return file.isDirectory() || StringUtil.equals(file.getName(), PerlCriticAnnotator.PERL_CRITIC_NAME);
 			}
 		};
+
 		perlCriticPathInputField.addBrowseFolderListener(
 				"Select file",
 				"Choose a Perl::Critic executable",
@@ -152,6 +157,8 @@ public class PerlSettingsConfigurable implements Configurable
 				perlCriticDescriptor
 		);
 		builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), perlCriticPathInputField);
+		perlCriticArgsInputField = new JTextField();
+		builder.addLabeledComponent(new JLabel("Perl::Critic command line arguments:"), perlCriticArgsInputField);
 
 		perlTidyPathInputField = new TextFieldWithBrowseButton();
 		perlTidyPathInputField.setEditable(false);
@@ -174,6 +181,8 @@ public class PerlSettingsConfigurable implements Configurable
 				perlTidyDescriptor
 		);
 		builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), perlTidyPathInputField);
+		perlTidyArgsInputField = new JTextField();
+		builder.addLabeledComponent(new JLabel("Perl::Tidy command line arguments (-se -se arguments will be added automatically):"), perlTidyArgsInputField);
 
 		regeneratePanel = new JPanel(new BorderLayout());
 		regenerateButton = new JButton("Re-generate XSubs declarations");
@@ -300,7 +309,9 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
 				!StringUtil.equals(mySettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
 				!StringUtil.equals(mySettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
 				!StringUtil.equals(mySettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -319,14 +330,17 @@ public class PerlSettingsConfigurable implements Configurable
 		mySettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
 		mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
 		mySettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
-		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
 		mySettings.setDeparseOptions(deparseArgumentsTextField.getText());
 
 		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
 		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
 
+		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
 		mySettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
+		mySettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
+
 		mySettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
+		mySettings.PERL_TIDY_ARGS = perlTidyArgsInputField.getText();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -370,13 +384,16 @@ public class PerlSettingsConfigurable implements Configurable
 		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySettings.AUTOMATIC_HEREDOC_INJECTIONS);
 		allowInjectionWithInterpolation.setSelected(mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
-		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
 		perlAnnotatorCheckBox.setSelected(mySettings.PERL_ANNOTATOR_ENABLED);
 		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
 		deparseArgumentsTextField.setText(mySettings.PERL_DEPARSE_ARGUMENTS);
 
+		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
 		perlCriticPathInputField.setText(mySettings.PERL_CRITIC_PATH);
+		perlCriticArgsInputField.setText(mySettings.PERL_CRITIC_ARGS);
+
 		perlTidyPathInputField.setText(mySettings.PERL_TIDY_PATH);
+		perlTidyArgsInputField.setText(mySettings.PERL_TIDY_ARGS);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -399,13 +416,16 @@ public class PerlSettingsConfigurable implements Configurable
 		autoInjectionCheckbox = null;
 		allowInjectionWithInterpolation = null;
 		perlAnnotatorCheckBox = null;
-		perlCriticCheckBox = null;
 		perlTryCatchCheckBox = null;
 		deparseArgumentsTextField = null;
 		regeneratePanel = null;
 		regenerateButton = null;
 
+		perlCriticCheckBox = null;
 		perlCriticPathInputField = null;
+		perlCriticArgsInputField = null;
+
 		perlTidyPathInputField = null;
+		perlTidyArgsInputField = null;
 	}
 }

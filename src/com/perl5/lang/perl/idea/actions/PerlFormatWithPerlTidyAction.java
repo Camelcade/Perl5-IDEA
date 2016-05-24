@@ -64,12 +64,20 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 
 	protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException
 	{
-		String executable = Perl5Settings.getInstance(project).PERL_TIDY_PATH;
+		Perl5Settings settings = Perl5Settings.getInstance(project);
+		String executable = settings.PERL_TIDY_PATH;
 		if (StringUtil.isEmpty(executable))
 		{
 			throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
 		}
-		return new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
+		GeneralCommandLine commandLine = new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
+
+		if (StringUtil.isNotEmpty(settings.PERL_TIDY_ARGS))
+		{
+			commandLine.addParameters(StringUtil.split(settings.PERL_TIDY_ARGS, " "));
+		}
+
+		return commandLine;
 	}
 
 	@Override
