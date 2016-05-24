@@ -20,6 +20,8 @@ import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
+import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
+import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,9 +55,8 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean PERL_TRY_CATCH_ENABLED = false;
 	public String PERL_DEPARSE_ARGUMENTS = "";
 
-	// mac-specific settings http://depressiverobot.com/2016/02/05/intellij-path.html
-	public String PERL_TIDY_MAC_PATH = "";
-	public String PERL_CRITIC_MAC_PATH = "";
+	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_NAME;
+	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_NAME;
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;

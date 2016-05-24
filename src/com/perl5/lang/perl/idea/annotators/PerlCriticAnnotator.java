@@ -27,6 +27,7 @@ import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.TextRange;
@@ -34,10 +35,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.event.HyperlinkEvent;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,8 @@ import java.util.List;
  */
 public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCriticErrorDescriptor>>
 {
+	public static final String PERL_CRITIC_NAME = SystemInfo.isWindows ? "perlcritic.bat" : "perlcritic";
+
 
 	@Nullable
 	@Override
@@ -57,22 +62,11 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 	protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException
 	{
-		String executable;
-		if (SystemInfo.isWindows)
+		String executable = Perl5Settings.getInstance(project).PERL_CRITIC_PATH;
+
+		if (StringUtil.isEmpty(executable))
 		{
-			executable = "perlcritic.bat";
-		}
-		else if (SystemInfo.isMac)
-		{
-			executable = Perl5Settings.getInstance(project).PERL_CRITIC_MAC_PATH;
-			if (StringUtil.isEmpty(executable))
-			{
-				throw new ExecutionException("Path to PerlCritic executable must be configured in perl settings");
-			}
-		}
-		else
-		{
-			executable = "perlcritic";
+			throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
 		}
 		return new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
 	}
@@ -80,7 +74,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 	@Nullable
 	@Override
-	public List<PerlCriticErrorDescriptor> doAnnotate(PerlFile sourcePsiFile)
+	public List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile)
 	{
 		if (sourcePsiFile == null)
 			return null;
@@ -121,24 +115,33 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 				}
 			}
 			return errors;
-		} catch (ExecutionException e)
+		}
+		catch (ExecutionException e)
 		{
 			Notifications.Bus.notify(new Notification(
 					"PerlCritic error",
 					"Perl::Critic failed to start and has been disabled",
 					"<ul style=\"padding-left:10px;margin-left:0px;\">" +
 							"<li>Make sure that Perl::Critic module is installed</li>" +
-							"<li>perlcritic (or perlcritic.bat on Windows) starts successfully from the command line</li>" +
-							"<li>Mac users must explicitly configure PerlCritic executable in Perl5 settings</li>" +
-							"<li>Re-enable it in Perl5 Settings tab</li>" +
-							"</ul>" +
-							"<p>If it doesn't help, don't hesitate to <a href=\"http://github.com/hurricup/Perl5-IDEA/issues\">report a bug</a>.</p>",
+							"<li>Configure path to perlcritic executable in <a href=\"configure\">Perl5 settings</a> and re-enable it</li>" +
+							"</ul>"
+					,
 					NotificationType.ERROR,
-					new NotificationListener.UrlOpeningListener(false)
+					new NotificationListener.Adapter()
+					{
+						@Override
+						protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
+						{
+							Project project = sourcePsiFile.getProject();
+							ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+							notification.expire();
+						}
+					}
 			));
 			Perl5Settings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
 
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

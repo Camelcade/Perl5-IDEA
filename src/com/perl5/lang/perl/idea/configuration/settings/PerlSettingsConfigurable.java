@@ -28,7 +28,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -41,6 +40,8 @@ import com.intellij.ui.components.JBList;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
+import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
+import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -61,8 +62,8 @@ public class PerlSettingsConfigurable implements Configurable
 	Project myProject;
 	Perl5Settings mySettings;
 
-	TextFieldWithBrowseButton macPerlCriticPathInputField;
-	TextFieldWithBrowseButton macPerlTidyPathInputField;
+	TextFieldWithBrowseButton perlCriticPathInputField;
+	TextFieldWithBrowseButton perlTidyPathInputField;
 
 	TextFieldWithBrowseButton perlPathInputField;
 	JTextField deparseArgumentsTextField;
@@ -131,52 +132,48 @@ public class PerlSettingsConfigurable implements Configurable
 		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
 		builder.addComponent(perlCriticCheckBox);
 
-		macPerlCriticPathInputField = new TextFieldWithBrowseButton();
-		macPerlTidyPathInputField = new TextFieldWithBrowseButton();
-
-		if (SystemInfo.isMac)
+		perlCriticPathInputField = new TextFieldWithBrowseButton();
+		perlCriticPathInputField.setEditable(false);
+		FileChooserDescriptor perlCriticDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
 		{
-			macPerlCriticPathInputField.setEditable(false);
-			FileChooserDescriptor perlCriticDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
+			@Override
+			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
-				@Override
-				public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
-				{
-					if (!super.isFileVisible(file, showHiddenFiles))
-						return false;
+				if (!super.isFileVisible(file, showHiddenFiles))
+					return false;
 
-					return file.isDirectory() || StringUtil.equals(file.getName(), "perlcritic");
-				}
-			};
-			macPerlCriticPathInputField.addBrowseFolderListener(
-					"Select file",
-					"Choose a PerlCritic executable",
-					null, // project
-					perlCriticDescriptor
-			);
-			builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), macPerlCriticPathInputField);
+				return file.isDirectory() || StringUtil.equals(file.getName(), PerlCriticAnnotator.PERL_CRITIC_NAME);
+			}
+		};
+		perlCriticPathInputField.addBrowseFolderListener(
+				"Select file",
+				"Choose a Perl::Critic executable",
+				null, // project
+				perlCriticDescriptor
+		);
+		builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), perlCriticPathInputField);
 
-			macPerlTidyPathInputField.setEditable(false);
-			FileChooserDescriptor perlTidyDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
+		perlTidyPathInputField = new TextFieldWithBrowseButton();
+		perlTidyPathInputField.setEditable(false);
+		FileChooserDescriptor perlTidyDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
+		{
+			@Override
+			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
-				@Override
-				public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
-				{
-					if (!super.isFileVisible(file, showHiddenFiles))
-						return false;
+				if (!super.isFileVisible(file, showHiddenFiles))
+					return false;
 
-					return file.isDirectory() || StringUtil.equals(file.getName(), "perltidy");
-				}
-			};
+				return file.isDirectory() || StringUtil.equals(file.getName(), PerlFormatWithPerlTidyAction.PERL_TIDY_NAME);
+			}
+		};
 
-			macPerlTidyPathInputField.addBrowseFolderListener(
-					"Select file",
-					"Choose a PerlTidy executable",
-					null, // project
-					perlTidyDescriptor
-			);
-			builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), macPerlTidyPathInputField);
-		}
+		perlTidyPathInputField.addBrowseFolderListener(
+				"Select file",
+				"Choose a Perl::Tidy executable",
+				null, // project
+				perlTidyDescriptor
+		);
+		builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), perlTidyPathInputField);
 
 		regeneratePanel = new JPanel(new BorderLayout());
 		regenerateButton = new JButton("Re-generate XSubs declarations");
@@ -302,8 +299,8 @@ public class PerlSettingsConfigurable implements Configurable
 				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
 				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
 				!StringUtil.equals(mySettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_CRITIC_MAC_PATH, macPerlCriticPathInputField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_TIDY_MAC_PATH, macPerlTidyPathInputField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
+				!StringUtil.equals(mySettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
 				!mySettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
@@ -328,8 +325,8 @@ public class PerlSettingsConfigurable implements Configurable
 		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
 		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
 
-		mySettings.PERL_CRITIC_MAC_PATH = macPerlCriticPathInputField.getText();
-		mySettings.PERL_TIDY_MAC_PATH = macPerlTidyPathInputField.getText();
+		mySettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
+		mySettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
 
 		mySettings.selfNames.clear();
 		mySettings.selfNames.addAll(selfNamesModel.getItems());
@@ -378,8 +375,8 @@ public class PerlSettingsConfigurable implements Configurable
 		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
 		deparseArgumentsTextField.setText(mySettings.PERL_DEPARSE_ARGUMENTS);
 
-		macPerlCriticPathInputField.setText(mySettings.PERL_CRITIC_MAC_PATH);
-		macPerlTidyPathInputField.setText(mySettings.PERL_TIDY_MAC_PATH);
+		perlCriticPathInputField.setText(mySettings.PERL_CRITIC_PATH);
+		perlTidyPathInputField.setText(mySettings.PERL_TIDY_PATH);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -408,7 +405,7 @@ public class PerlSettingsConfigurable implements Configurable
 		regeneratePanel = null;
 		regenerateButton = null;
 
-		macPerlCriticPathInputField = null;
-		macPerlTidyPathInputField = null;
+		perlCriticPathInputField = null;
+		perlTidyPathInputField = null;
 	}
 }

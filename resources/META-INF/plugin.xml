@@ -37,19 +37,12 @@
       <li>Perl Debugger. More information <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Perl-Debugger">available here</a>.</li>
       </ul>
      </p>
-<!--
      <p>Fixes:
       <ul>
-      <li>Fixed  imported autoloaded subs resolution</li>
-      <li>Fixed bug with exporting variables and coderefs with sigils</li>
-      <li>Fixed inplace renaming for file-level variables</li>
-      <li>Fixed parser error when composite operators parsed correctly even with space or comment in it, like = = been treated as ==</li>
-      <li>Fixed probable NPE on incomplete Exporter arrays assignment</li>
-      <li>Fixed sigils highlighting in <code>use vars</code></li>
-      <li>Restored program arguments order to pre-1.5 position in Run configuration</li>
+      <li>Clarified XSubs deparsing notification</li>
+      <li>Perl::Critic and Perl::Tidy paths are now configurable in all operation systems</li>
       </ul>
      </p>
--->
     ]]>
     </change-notes>
 

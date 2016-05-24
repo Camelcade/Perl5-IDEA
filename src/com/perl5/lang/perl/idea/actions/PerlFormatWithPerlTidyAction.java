@@ -21,12 +21,14 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -34,9 +36,12 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.util.PerlActionUtil;
+import org.jetbrains.annotations.NotNull;
 
+import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -47,6 +52,7 @@ import java.util.List;
  */
 public class PerlFormatWithPerlTidyAction extends PerlActionBase
 {
+	public static final String PERL_TIDY_NAME = SystemInfo.isWindows ? "perltidy.bat" : "perltidy";
 	public static final String PERL_TIDY_GROUP = "PERL5_PERL_TIDY";
 
 	@Override
@@ -58,22 +64,10 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 
 	protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException
 	{
-		String executable;
-		if (SystemInfo.isWindows)
+		String executable = Perl5Settings.getInstance(project).PERL_TIDY_PATH;
+		if (StringUtil.isEmpty(executable))
 		{
-			executable = "perltidy.bat";
-		}
-		else if (SystemInfo.isMac)
-		{
-			executable = Perl5Settings.getInstance(project).PERL_TIDY_MAC_PATH;
-			if (StringUtil.isEmpty(executable))
-			{
-				throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
-			}
-		}
-		else
-		{
-			executable = "perltidy";
+			throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
 		}
 		return new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
 	}
@@ -83,7 +77,7 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 	{
 		if (isEnabled(event))
 		{
-			PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
+			final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
 			if (file == null)
 				return;
@@ -140,16 +134,28 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 						));
 
 					}
-				} catch (ExecutionException e)
+				}
+				catch (ExecutionException e)
 				{
 					Notifications.Bus.notify(new Notification(
 							PERL_TIDY_GROUP,
 							"Error running Perl::Tidy",
-							e.getMessage(),
-							NotificationType.ERROR
+							"Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
+							NotificationType.ERROR,
+							new NotificationListener.Adapter()
+							{
+								@Override
+								protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
+								{
+									Project project = file.getProject();
+									ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+									notification.expire();
+								}
+							}
 					));
 				}
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				Notifications.Bus.notify(new Notification(
 						PERL_TIDY_GROUP,
