@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
@@ -42,6 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -75,7 +77,7 @@ public class PerlPsiUtil
 	 *
 	 * @param startWith element to start with (inclusive)
 	 */
-	public static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor)
+	private static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor)
 	{
 		while (startWith != null)
 		{
@@ -90,6 +92,43 @@ public class PerlPsiUtil
 			}
 
 			startWith = startWith.getNextSibling();
+		}
+	}
+
+	@NotNull
+	public static List<String> collectStringContents(PsiElement startWith)
+	{
+		if (startWith == null)
+		{
+			return Collections.emptyList();
+		}
+
+		List<String> result = new ArrayList<String>();
+		collectStringContentsRecursively(startWith, result);
+		return result;
+	}
+
+	private static void collectStringContentsRecursively(PsiElement run, List<String> result)
+	{
+		//noinspection ConstantConditions
+		while (run != null)
+		{
+			if (run instanceof PerlString)
+			{
+				result.add(((PerlString) run).getStringContent());
+			}
+			else if (run instanceof PerlStringList)
+			{
+				result.addAll(((PerlStringList) run).getStringContents());
+			}
+			else
+			{
+				if (run instanceof ASTWrapperPsiElement)
+				{
+					collectStringContentsRecursively(run.getFirstChild(), result);
+				}
+			}
+			run = run.getNextSibling();
 		}
 	}
 

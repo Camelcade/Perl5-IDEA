@@ -304,7 +304,11 @@ limitations under the License.
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
-    extends("string_list|number_constant")=expr
+    extends("number_constant")=expr
+
+    extends("string_list")=expr
+    mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListImplMixin"
+
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
     extends("anon_array_element|heredoc_opener|tag_scalar")=expr

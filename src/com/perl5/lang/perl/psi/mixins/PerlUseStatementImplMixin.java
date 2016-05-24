@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -103,12 +103,16 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		if (getExpr() == null)
 			return null;
 
-		ArrayList<String> stringParameters = new ArrayList<String>();
-		for (PerlStringContentElement stringContentElement : PerlPsiUtil.collectStringElements(getNamespaceElement().getNextSibling()))
+
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		if (namespaceElement != null)
 		{
-			stringParameters.add(stringContentElement.getText());
+			return PerlPsiUtil.collectStringContents(namespaceElement.getNextSibling());
 		}
-		return stringParameters;
+		else
+		{
+			return Collections.emptyList();
+		}
 	}
 
 	@Override

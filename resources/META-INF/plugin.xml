@@ -42,6 +42,7 @@
      <p>Fixes:
       <ul>
       <li>Clarified XSubs deparsing notification</li>
+      <li>Fixed problems with use lib appeared in 1.5</li>
       </ul>
      </p>
     ]]>
