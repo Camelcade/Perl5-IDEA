@@ -1,0 +1,1 @@
+us<caret>e Foo test => 'I:/mylib/', (something => "else"), qw(one three), ('and', (`even`, "more"));
