@@ -97,12 +97,25 @@ public class PerlDeparseFileAction extends PerlActionBase
 
 					if (StringUtil.isNotEmpty(error) && !StringUtil.contains(error, "syntax OK"))
 					{
-						Notifications.Bus.notify(new Notification(
-								PERL_DEPARSE_GROUP,
-								"Deparsing error",
-								error.replaceAll("\\n", "<br/>"),
-								NotificationType.ERROR
-						));
+						if (StringUtil.isEmpty(deparsed))
+						{
+							Notifications.Bus.notify(new Notification(
+									PERL_DEPARSE_GROUP,
+									"Deparsing error",
+									error.replaceAll("\\n", "<br/>"),
+									NotificationType.ERROR
+							));
+						}
+						else
+						{
+							Notifications.Bus.notify(new Notification(
+									PERL_DEPARSE_GROUP,
+									"Deparsing Completed",
+									"XSubs deparsing completed, but some errors occurred during the process:<br/>" +
+											error.replaceAll("\\n", "<br/>"),
+									NotificationType.INFORMATION
+							));
+						}
 					}
 
 					if (StringUtil.isNotEmpty(deparsed))
