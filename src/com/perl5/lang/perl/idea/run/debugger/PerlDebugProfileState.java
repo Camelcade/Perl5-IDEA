@@ -18,11 +18,14 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.run.PerlConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,7 +33,7 @@ import java.util.Map;
  */
 public class PerlDebugProfileState extends PerlRunProfileState
 {
-	private static final String[] DEBUG_ARGUMENTS = new String[]{"-d:Camelcadedb"};
+	private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
 	private Integer myDebugPort;
 
 	public PerlDebugProfileState(ExecutionEnvironment environment)
@@ -40,9 +43,20 @@ public class PerlDebugProfileState extends PerlRunProfileState
 
 	@NotNull
 	@Override
-	protected String[] getPerlArguments()
+	protected String[] getPerlArguments(PerlConfiguration runProfile)
 	{
-		return DEBUG_ARGUMENTS;
+		List<String> result = new ArrayList<String>();
+		result.add(DEBUG_ARGUMENT);
+
+		for (String argument : super.getPerlArguments(runProfile))
+		{
+			if (StringUtil.isNotEmpty(argument))
+			{
+				result.add(argument);
+			}
+		}
+
+		return result.toArray(new String[result.size()]);
 	}
 
 	@Override

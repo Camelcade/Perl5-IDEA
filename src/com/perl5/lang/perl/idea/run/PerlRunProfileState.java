@@ -36,6 +36,7 @@ import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -100,7 +101,7 @@ public class PerlRunProfileState extends CommandLineState
 		assert homePath != null;
 
 
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlArguments());
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlArguments(runProfile));
 
 		String programParameters = runProfile.getProgramParameters();
 
@@ -136,9 +137,10 @@ public class PerlRunProfileState extends CommandLineState
 	}
 
 	@NotNull
-	protected String[] getPerlArguments()
+	protected String[] getPerlArguments(PerlConfiguration runProfile)
 	{
-		return new String[0];
+		List<String> result = StringUtil.split(runProfile.getPerlParameters(), " ");
+		return result.toArray(new String[result.size()]);
 	}
 
 	protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException

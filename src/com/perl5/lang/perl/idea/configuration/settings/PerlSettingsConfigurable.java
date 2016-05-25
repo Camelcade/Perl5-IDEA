@@ -24,18 +24,12 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.ui.TextComponentAccessor;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.AnActionButton;
-import com.intellij.ui.AnActionButtonRunnable;
-import com.intellij.ui.CollectionListModel;
-import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
@@ -63,10 +57,10 @@ public class PerlSettingsConfigurable implements Configurable
 	Perl5Settings mySettings;
 
 	TextFieldWithBrowseButton perlCriticPathInputField;
-	JTextField perlCriticArgsInputField;
+	RawCommandLineEditor perlCriticArgsInputField;
 
 	TextFieldWithBrowseButton perlTidyPathInputField;
-	JTextField perlTidyArgsInputField;
+	RawCommandLineEditor perlTidyArgsInputField;
 
 	TextFieldWithBrowseButton perlPathInputField;
 
@@ -157,8 +151,8 @@ public class PerlSettingsConfigurable implements Configurable
 				perlCriticDescriptor
 		);
 		builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), perlCriticPathInputField);
-		perlCriticArgsInputField = new JTextField();
-		builder.addLabeledComponent(new JLabel("Perl::Critic command line arguments:"), perlCriticArgsInputField);
+		perlCriticArgsInputField = new RawCommandLineEditor();
+		builder.addComponent(copyDialogCaption(LabeledComponent.create(perlCriticArgsInputField, "Perl::Critic command line arguments:"), "Perl::Critic command line arguments:"));
 
 		perlTidyPathInputField = new TextFieldWithBrowseButton();
 		perlTidyPathInputField.setEditable(false);
@@ -181,8 +175,12 @@ public class PerlSettingsConfigurable implements Configurable
 				perlTidyDescriptor
 		);
 		builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), perlTidyPathInputField);
-		perlTidyArgsInputField = new JTextField();
-		builder.addLabeledComponent(new JLabel("Perl::Tidy command line arguments (-se -se arguments will be added automatically):"), perlTidyArgsInputField);
+		perlTidyArgsInputField = new RawCommandLineEditor();
+		builder.addComponent(
+				copyDialogCaption(
+						LabeledComponent.create(perlTidyArgsInputField, "Perl::Tidy command line arguments (-se -se arguments will be added automatically):"),
+						"Perl::Tidy command line arguments:"
+				));
 
 		regeneratePanel = new JPanel(new BorderLayout());
 		regenerateButton = new JButton("Re-generate XSubs declarations");
@@ -198,7 +196,7 @@ public class PerlSettingsConfigurable implements Configurable
 		builder.addComponent(regeneratePanel);
 
 		deparseArgumentsTextField = new JTextField();
-		builder.addLabeledComponent(new JLabel("Comma-separated B::Deparse options for deparse action"), deparseArgumentsTextField);
+		builder.addLabeledComponent("Comma-separated B::Deparse options for deparse action", deparseArgumentsTextField);
 
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
@@ -428,4 +426,13 @@ public class PerlSettingsConfigurable implements Configurable
 		perlTidyPathInputField = null;
 		perlTidyArgsInputField = null;
 	}
+
+	protected LabeledComponent<RawCommandLineEditor> copyDialogCaption(final LabeledComponent<RawCommandLineEditor> component, String text)
+	{
+		final RawCommandLineEditor rawCommandLineEditor = component.getComponent();
+		rawCommandLineEditor.setDialogCaption(text);
+		component.getLabel().setLabelFor(rawCommandLineEditor.getTextField());
+		return component;
+	}
+
 }

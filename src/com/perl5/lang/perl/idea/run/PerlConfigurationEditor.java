@@ -70,7 +70,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myParametersPanel.reset(perlConfiguration);
 		myConsoleCharset.setSelectedItem(perlConfiguration.getConsoleCharset());
 		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
-		myPerlParametersPanel.setText(perlConfiguration.getPERL_PARAMETERS());
+		myPerlParametersPanel.setText(perlConfiguration.getPerlParameters());
 		myStartMode.setSelectedItem(perlConfiguration.getStartMode());
 		myScriptCharset.setText(perlConfiguration.getScriptCharset());
 	}
@@ -78,7 +78,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	@Override
 	protected void applyEditorTo(PerlConfiguration perlConfiguration) throws ConfigurationException
 	{
-		perlConfiguration.setPERL_PARAMETERS(myPerlParametersPanel.getText());
+		perlConfiguration.setPerlParameters(myPerlParametersPanel.getText());
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
 		perlConfiguration.setConsoleCharset(StringUtil.nullize((String) myConsoleCharset.getSelectedItem(), true));
@@ -144,6 +144,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			@Override
 			protected void addComponents()
 			{
+
 				LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, "Script");
 				scriptLabel.setLabelLocation(BorderLayout.WEST);
 				add(scriptLabel);
@@ -162,14 +163,16 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				add(startMode);
 
 				myPerlParametersPanel = new RawCommandLineEditor();
-				LabeledComponent<RawCommandLineEditor> perlParametersPanel = LabeledComponent.create(myPerlParametersPanel, "Perl5 arguments");
+				LabeledComponent<RawCommandLineEditor> perlParametersPanel = LabeledComponent.create(myPerlParametersPanel, "Perl5 parameters");
 				perlParametersPanel.setLabelLocation(BorderLayout.WEST);
-//				add(perlParametersPanel);
+				copyDialogCaption(perlParametersPanel);
+				add(perlParametersPanel);
 
 				super.addComponents();
 				add(myAlternativeSdkPanel);
 			}
 		};
+		myParametersPanel.setProgramParametersLabel("Script parameters:");
 		return myParametersPanel;
 	}
 }

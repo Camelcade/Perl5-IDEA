@@ -50,8 +50,9 @@ import java.util.Map;
 public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions
 {
 	public String SCRIPT_PATH;
-	public String PROGRAM_PARAMETERS;
-	public String PERL_PARAMETERS;
+	public String PROGRAM_PARAMETERS;    // these are script parameters
+
+	public String PERL_PARAMETERS = "";
 	public String WORKING_DIRECTORY;
 	public Map<String, String> ENV = new HashMap<String, String>();
 	public boolean PASS_PARENT_ENVS = true;
@@ -206,12 +207,12 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		PASS_PARENT_ENVS = b;
 	}
 
-	public String getPERL_PARAMETERS()
+	public String getPerlParameters()
 	{
 		return PERL_PARAMETERS;
 	}
 
-	public void setPERL_PARAMETERS(String PERL_PARAMETERS)
+	public void setPerlParameters(String PERL_PARAMETERS)
 	{
 		this.PERL_PARAMETERS = PERL_PARAMETERS;
 	}
