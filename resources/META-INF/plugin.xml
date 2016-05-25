@@ -37,6 +37,7 @@
       <li>Perl Debugger. More information <a href="https://github.com/hurricup/Perl5-IDEA/wiki/Perl-Debugger">available here</a>.</li>
       <li>Perl::Critic and Perl::Tidy paths are now configurable in all operation systems</li>
       <li>Added command line parameters configuration for Perl::Critic and Perl::Tidy</li>
+      <li>Added Perl5 parameters to the run configuration</li>
       </ul>
      </p>
      <p>Fixes:
@@ -52,7 +53,7 @@
     <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different products -->
+         on how to target  different products -->
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
