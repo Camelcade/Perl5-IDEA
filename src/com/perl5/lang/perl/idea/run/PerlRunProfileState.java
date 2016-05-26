@@ -139,7 +139,13 @@ public class PerlRunProfileState extends CommandLineState
 	@NotNull
 	protected String[] getPerlArguments(PerlConfiguration runProfile)
 	{
-		List<String> result = StringUtil.split(runProfile.getPerlParameters(), " ");
+
+		String perlParameters = runProfile.getPerlParameters();
+		if( perlParameters == null )
+		{
+			return new String[0];
+		}
+		List<String> result = StringUtil.split(perlParameters, " ");
 		return result.toArray(new String[result.size()]);
 	}
 
