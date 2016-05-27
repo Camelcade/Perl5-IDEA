@@ -22,6 +22,7 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jdesktop.swingx.combobox.MapComboBoxModel;
@@ -68,7 +69,11 @@ public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlR
 	{
 		configuration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
 		configuration.setDebugHost(myDebuggingHost.getText());
-		configuration.setDebugPort(Integer.parseInt(myDebuggingPort.getText()));
+		String debuggingPort = myDebuggingPort.getText();
+		if (StringUtil.isNotEmpty(debuggingPort))
+		{
+			configuration.setDebugPort(Integer.parseInt(myDebuggingPort.getText()));
+		}
 		configuration.setScriptCharset(myScriptCharset.getText());
 		configuration.setPerlRole(myPerlRole.getSelectedItem().toString());
 		configuration.setStartMode(myStartMode.getSelectedItem().toString());
