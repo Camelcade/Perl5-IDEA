@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 {
-	private AtomicNotNullLazyValue<PsiReference[]> lazyReference;
+	private AtomicNotNullLazyValue<PsiReference[]> myReferences;
 	private AtomicNullableLazyValue<PodLinkDescriptor> myLinkDescriptor;
 
 	public PodFormatterLMixin(@NotNull ASTNode node)
@@ -125,18 +125,19 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 	@Override
 	public PsiReference[] getReferences()
 	{
-		if (lazyReference == null)
+		if (myReferences == null)
 		{
-			lazyReference = new PodFormatterLLazyReference(this);
+			myReferences = new PodFormatterLLazyReference(this);
 		}
-		return lazyReference.getValue();
+		return myReferences.getValue();
 	}
+
 
 	@Override
 	public void subtreeChanged()
 	{
 		super.subtreeChanged();
-		lazyReference = null;
+		myReferences = null;
 		myLinkDescriptor = null;
 	}
 

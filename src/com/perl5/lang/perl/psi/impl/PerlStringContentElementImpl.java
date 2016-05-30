@@ -167,8 +167,6 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		super.clearCaches();
 		createMyReferences();
 	}
-
-
 }
 
 

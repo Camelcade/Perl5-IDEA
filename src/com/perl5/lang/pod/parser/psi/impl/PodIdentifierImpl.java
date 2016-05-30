@@ -34,36 +34,47 @@ import java.util.List;
  */
 public class PodIdentifierImpl extends LeafPsiElement
 {
-	private final AtomicNotNullLazyValue<PsiReference[]> referenceProvider = new AtomicNotNullLazyValue<PsiReference[]>()
-	{
-		@NotNull
-		@Override
-		protected PsiReference[] compute()
-		{
-			final PodIdentifierImpl element = PodIdentifierImpl.this;
-			List<PsiReference> references = new ArrayList<PsiReference>();
-
-			if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
-			{
-				references.add(new PodSubReference(element));
-			}
-
-			references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
-
-			return references.toArray(new PsiReference[references.size()]);
-		}
-	};
+	private AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PodIdentifierImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
+		createReferences();
+	}
+
+	private void createReferences()
+	{
+		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+		{
+			@NotNull
+			@Override
+			protected PsiReference[] compute()
+			{
+				final PodIdentifierImpl element = PodIdentifierImpl.this;
+				List<PsiReference> references = new ArrayList<PsiReference>();
+
+				if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
+				{
+					references.add(new PodSubReference(element));
+				}
+
+				references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
+
+				return references.toArray(new PsiReference[references.size()]);
+			}
+		};
 	}
 
 	@NotNull
 	@Override
 	public PsiReference[] getReferences()
 	{
-		return referenceProvider.getValue();
+		return myReferences.getValue();
 	}
 
+	@Override
+	public void clearCaches()
+	{
+		createReferences();
+	}
 }

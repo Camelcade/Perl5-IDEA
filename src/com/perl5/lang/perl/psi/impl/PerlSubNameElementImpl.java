@@ -146,6 +146,11 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return false;
 	}
 
+	@Override
+	public void clearCaches()
+	{
+		createReferences();
+	}
 }
 
 
