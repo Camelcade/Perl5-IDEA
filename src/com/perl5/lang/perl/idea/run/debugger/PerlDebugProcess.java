@@ -122,6 +122,12 @@ public class PerlDebugProcess extends XDebugProcess
 	}
 
 	@Override
+	public void startPausing()
+	{
+		myDebugThread.sendString("pause");
+	}
+
+	@Override
 	public void resume()
 	{
 		myDebugThread.sendString("g");

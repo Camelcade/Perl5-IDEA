@@ -32,10 +32,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-     <!--<p>Improvements:-->
-      <!--<ul>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Improvements:
+      <ul>
+      <li>Implemented debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
+      </ul>
+     </p>
      <p>Fixes:
       <ul>
       <li>Fixed problem with resolving in generated code (overrides, constructors, etc...)</li>
