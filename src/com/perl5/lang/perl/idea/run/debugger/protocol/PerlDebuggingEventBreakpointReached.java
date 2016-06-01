@@ -40,7 +40,10 @@ public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop 
 			session.breakpointReached(breakpoint, logmessage, getSuspendContext());
 		}
 
-		super.run();
+		if (suspend)
+		{
+			super.run();
+		}
 	}
 
 	@Override

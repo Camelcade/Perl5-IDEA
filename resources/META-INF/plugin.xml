@@ -35,11 +35,13 @@
      <p>Improvements:
       <ul>
       <li>Implemented debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
+      <li>Implemented breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
       </ul>
      </p>
      <p>Fixes:
       <ul>
       <li>Fixed problem with resolving in generated code (overrides, constructors, etc...)</li>
+      <li>Fixed bug when non-suspending breakpoint suspended program nowhere</li>
       </ul>
      </p>
     ]]>

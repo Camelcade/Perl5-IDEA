@@ -93,7 +93,7 @@ public class PerlDebugThread extends Thread
 		if (descriptor != null)
 		{
 			breakpointsDescriptorsQueue.add(descriptor);
-			if (isReady && mySession.isPaused())
+			if (isReady)
 			{
 				sendQueuedBreakpoints();
 			}
