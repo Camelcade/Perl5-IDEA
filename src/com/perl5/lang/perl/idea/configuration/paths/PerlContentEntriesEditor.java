@@ -17,15 +17,20 @@
 package com.perl5.lang.perl.idea.configuration.paths;
 
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
+import com.intellij.openapi.roots.ui.configuration.ProjectStructureConfigurable;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.PlatformUtils;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -52,8 +57,26 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 		libRoots.clear();
 
 		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
+		{
 			libRoots.add(entry.getUrl());
+		}
 
 		PerlMicroIdeSettingsLoader.applyClassPaths(getModel());
+	}
+
+	@Override
+	protected void addAdditionalSettingsToPanel(JPanel mainPanel)
+	{
+		if (PlatformUtils.isIntelliJ())
+		{
+			mainPanel.add(new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
+			{
+				@Override
+				protected ModifiableRootModel getRootModel()
+				{
+					return getState().getRootModel();
+				}
+			}.createComponent(), BorderLayout.NORTH);
+		}
 	}
 }

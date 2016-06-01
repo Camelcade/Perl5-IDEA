@@ -38,6 +38,11 @@
       <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
       <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File</li>
       <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scritps</li>
+      <li>IntelliJ IDEA:
+      <ul>
+        <li>Perl Module SDK is now configurable, so you may have a Java project with perl module in it.</li>
+      </ul>
+       </li>
       </ul>
      </p>
      <p>Fixes:
