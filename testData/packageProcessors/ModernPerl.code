@@ -1,0 +1,5 @@
+package ModernPerlTest;
+use Modern::Per<caret>l;
+
+
+1;

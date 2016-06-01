@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,45 +17,44 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by hurricup on 25.11.2015.
+ * Created by hurricup on 01.06.2016.
+ * package processor for Modern::Perl module: http://search.cpan.org/~chromatic/Modern-Perl-1.20150127/lib/Modern/Perl.pm
  */
-public class MooseProcessor extends PerlPackageProcessorBase implements
+public class ModernPerlPackageProcessor extends PerlPackageProcessorBase implements
 		PerlStrictProvider,
 		PerlWarningsProvider,
-		PerlPackageParentsProvider,
-		PerlPackageLoader
+		PerlMroProvider,
+		PerlPackageLoader,
+		PerlFeaturesProvider
 {
-	public static final String MOOSE_OBJECT = "Moose::Object";
-	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);
-	protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+	private static final List<String> LOADED_PACKAGES = new ArrayList<String>(Arrays.asList(
+			"IO::File",
+			"IO::Handle"
+	));
 
-	@NotNull
 	@Override
+	public PerlMroType getMroType(PerlUseStatement useStatement)
+	{
+		return PerlMroType.C3;
+	}
+
+	@Override
+	@NotNull
 	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
 	{
-		return getLoadedClasses();
-	}
-
-	@Override
-	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
-	{
-		currentList.clear();
-		currentList.addAll(getParentClasses());
-	}
-
-	@Override
-	public boolean hasPackageFilesOptions()
-	{
-		return false;
+		return LOADED_PACKAGES;
 	}
 
 	@Override
@@ -72,13 +71,10 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
 		return currentMask.clone();
 	}
 
-	public List<String> getLoadedClasses()
+	@Override
+	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
 	{
-		return LOADED_CLASSES;
-	}
-
-	public List<String> getParentClasses()
-	{
-		return PARENT_CLASSES;
+		// fixme implement modification
+		return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
 	}
 }

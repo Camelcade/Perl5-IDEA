@@ -34,8 +34,9 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Implemented debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
-      <li>Implemented breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
+      <li>Debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
+      <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
+      <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File</li>
       </ul>
      </p>
      <p>Fixes:
@@ -90,6 +91,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
         <packageProcessor key="Dancer2"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
+        <packageProcessor key="Modern::Perl"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ModernPerlPackageProcessor"/>
 
         <parserExtension implementation="com.perl5.lang.perl.parser.TryCatchParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>

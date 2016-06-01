@@ -92,6 +92,7 @@ public class PerlDebugThread extends Thread
 	{
 		if (descriptor != null)
 		{
+			// fixme potentially risk of race condition between clar and add
 			breakpointsDescriptorsQueue.add(descriptor);
 			if (isReady)
 			{
