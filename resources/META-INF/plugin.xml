@@ -37,6 +37,7 @@
       <li>Debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
       <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
       <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File</li>
+      <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scritps</li>
       </ul>
      </p>
      <p>Fixes:

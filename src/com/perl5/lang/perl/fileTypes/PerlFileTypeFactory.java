@@ -29,6 +29,7 @@ public class PerlFileTypeFactory extends FileTypeFactory
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "cgi");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "pl");
 		fileTypeConsumer.consume(PerlFileType.INSTANCE, "ph");
+		fileTypeConsumer.consume(PerlFileType.INSTANCE, "al");
 
 		fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, "t");
 	}
