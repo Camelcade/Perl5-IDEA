@@ -26,6 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -284,45 +285,52 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 		return getExporterInfo().getEXPORT_TAGS();
 	}
 
-
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedSubsNames()
+	public List<PerlExportDescriptor> getImportedSubsDescriptors()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlSubUtil.getImportedSubs(getProject(), packageName, getContainingFile());
-		return Collections.emptyMap();
+		{
+			return PerlSubUtil.getImportedSubsDescriptors(getProject(), packageName, getContainingFile());
+		}
+		return Collections.emptyList();
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedScalarNames()
+	public List<PerlExportDescriptor> getImportedScalarDescriptors()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlScalarUtil.getImportedScalarNames(getProject(), packageName, getContainingFile());
-		return Collections.emptyMap();
+		{
+			return PerlScalarUtil.getImportedScalarsDescritptors(getProject(), packageName, getContainingFile());
+		}
+		return Collections.emptyList();
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedArrayNames()
+	public List<PerlExportDescriptor> getImportedArrayDescriptors()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlArrayUtil.getImportedArraysNames(getProject(), packageName, getContainingFile());
-		return Collections.emptyMap();
+		{
+			return PerlArrayUtil.getImportedArraysDescriptors(getProject(), packageName, getContainingFile());
+		}
+		return Collections.emptyList();
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedHashNames()
+	public List<PerlExportDescriptor> getImportedHashDescriptors()
 	{
 		String packageName = getPackageName();
 		if (packageName != null)
-			return PerlHashUtil.getImportedHashesNames(getProject(), packageName, getContainingFile());
-		return Collections.emptyMap();
+		{
+			return PerlHashUtil.getImportedHashesDescriptors(getProject(), packageName, getContainingFile());
+		}
+		return Collections.emptyList();
 	}
 
 	@Override

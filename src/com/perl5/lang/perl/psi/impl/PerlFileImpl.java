@@ -36,6 +36,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -223,30 +224,30 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedSubsNames()
+	public List<PerlExportDescriptor> getImportedSubsDescriptors()
 	{
-		return PerlSubUtil.getImportedSubs(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlSubUtil.getImportedSubsDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedScalarNames()
+	public List<PerlExportDescriptor> getImportedScalarDescriptors()
 	{
-		return PerlScalarUtil.getImportedScalarNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlScalarUtil.getImportedScalarsDescritptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedArrayNames()
+	public List<PerlExportDescriptor> getImportedArrayDescriptors()
 	{
-		return PerlArrayUtil.getImportedArraysNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlArrayUtil.getImportedArraysDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@NotNull
 	@Override
-	public Map<String, Set<String>> getImportedHashNames()
+	public List<PerlExportDescriptor> getImportedHashDescriptors()
 	{
-		return PerlHashUtil.getImportedHashesNames(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlHashUtil.getImportedHashesDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
 	}
 
 	@NotNull

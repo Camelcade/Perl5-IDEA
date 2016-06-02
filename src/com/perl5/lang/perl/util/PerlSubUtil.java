@@ -26,6 +26,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
@@ -265,10 +266,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @return result map
 	 */
 	@NotNull
-	public static Map<String, Set<String>> getImportedSubs(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
-		PerlImportsCollector collector = new PerlSubImportsCollector('&', new HashMap<String, Set<String>>());
-		PerlUtil.getImportedNames(project, namespace, file, collector);
+		PerlImportsCollector collector = new PerlSubImportsCollector();
+		PerlUtil.collectImportedNames(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

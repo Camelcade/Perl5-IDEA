@@ -21,16 +21,16 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
+import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -104,10 +104,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	 * @return result map
 	 */
 	@NotNull
-	public static Map<String, Set<String>> getImportedScalarNames(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
 	{
-		PerlImportsCollector collector = new PerlImportsCollector('$', new HashMap<String, Set<String>>());
-		PerlUtil.getImportedNames(project, namespace, file, collector);
+		PerlImportsCollector collector = new PerlScalarImportsCollector();
+		PerlUtil.collectImportedNames(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

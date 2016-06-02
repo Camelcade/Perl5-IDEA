@@ -20,6 +20,7 @@ import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -65,7 +66,8 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
 	}
 
 	@Override
-	public List<String> getImportedSubs(PerlUseStatement useStatement)
+	@NotNull
+	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
 	{
 		return Collections.emptyList();
 	}

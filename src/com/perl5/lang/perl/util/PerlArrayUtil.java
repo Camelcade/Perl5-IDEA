@@ -23,11 +23,13 @@ import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
+import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,10 +115,10 @@ public class PerlArrayUtil implements PerlElementTypes
 	 * @return result map
 	 */
 	@NotNull
-	public static Map<String, Set<String>> getImportedArraysNames(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
-		PerlImportsCollector collector = new PerlImportsCollector('@', new HashMap<String, Set<String>>());
-		PerlUtil.getImportedNames(project, namespace, file, collector);
+		PerlImportsCollector collector = new PerlArrayImportsCollector();
+		PerlUtil.collectImportedNames(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

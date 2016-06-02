@@ -23,6 +23,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
@@ -31,7 +32,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -114,32 +116,31 @@ public class PerlUtil
 	}
 
 	/**
-	 * Returns a map of imported names, filtered by specific processor
+	 * Processing use statements in the namespace and processing all imports found
 	 *
 	 * @param project   Project to search in
 	 * @param namespace namespace to search in
 	 * @param file      PsiFile to search in
-	 * @return result map
 	 */
-	public static Map<String, Set<String>> getImportedNames(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file, @NotNull PerlNamespaceEntityProcessor<String> processor)
+	public static void collectImportedNames(
+			@NotNull Project project,
+			@NotNull String namespace,
+			@NotNull PsiFile file,
+			@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor
+	)
 	{
-		Map<String, Set<String>> result = new HashMap<String, Set<String>>();
-
 		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(project, namespace, file))
 		{
 			String packageName = useStatement.getPackageName();
 
 			if (packageName != null)
 			{
-				List<String> imports = useStatement.getPackageProcessor().getImportedSubs(useStatement);
-
-				if (imports != null)
-					for (String item : imports)
-						processor.process(packageName, item);
+				for (PerlExportDescriptor entry : useStatement.getPackageProcessor().getImports(useStatement))
+				{
+					processor.process(packageName, entry);
+				}
 			}
 		}
-
-		return result;
 	}
 
 

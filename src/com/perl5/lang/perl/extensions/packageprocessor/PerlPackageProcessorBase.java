@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,9 +51,10 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 	}
 
 	@Override
-	public List<String> getImportedSubs(PerlUseStatement useStatement)
+	@NotNull
+	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
 	{
-		List<String> result = new ArrayList<String>();
+		List<PerlExportDescriptor> result = new ArrayList<PerlExportDescriptor>();
 		Project project = useStatement.getProject();
 		String packageName = useStatement.getPackageName();
 		if (packageName != null)
@@ -72,7 +74,10 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 
 			if (parameters == null)    // default import
 			{
-				result.addAll(packageExport);
+				for (String item : packageExport)
+				{
+					result.add(new PerlExportDescriptor(item, packageName));
+				}
 			}
 			else
 			{
@@ -80,7 +85,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 				{
 					if (packageExportOk.contains(parameter))
 					{
-						result.add(parameter);
+						result.add(new PerlExportDescriptor(parameter, packageName));
 					}
 				}
 			}

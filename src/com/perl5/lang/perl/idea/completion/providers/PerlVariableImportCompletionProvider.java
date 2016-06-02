@@ -26,28 +26,19 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by hurricup on 24.08.2015.
  */
 public class PerlVariableImportCompletionProvider extends CompletionProvider<CompletionParameters>
 {
-	protected final static Map<String, LookupElementBuilder> SCALAR_LOOKUP_CACHE = new ConcurrentHashMap<String, LookupElementBuilder>();
-	protected final static Map<String, LookupElementBuilder> ARRAY_LOOKUP_CACHE = new ConcurrentHashMap<String, LookupElementBuilder>();
-	protected final static Map<String, LookupElementBuilder> HASH_LOOKUP_CACHE = new ConcurrentHashMap<String, LookupElementBuilder>();
-
-
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
@@ -57,7 +48,9 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 		// fixme move this to pattern
 		if (perlVariable instanceof PerlNamespaceElementContainer && ((PerlNamespaceElementContainer) perlVariable).getNamespaceElement() != null)
+		{
 			return;
+		}
 
 		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(perlVariable, PerlNamespaceContainer.class);
 		assert namespaceContainer != null;
@@ -66,57 +59,44 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 		PsiFile originalFile = parameters.getOriginalFile();
 
 		if (packageName == null) // incomplete package definition
+		{
 			return;
+		}
 
 		// fixme handle array and hash elements
 		if (perlVariable instanceof PsiPerlScalarVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlScalarUtil.getImportedScalarNames(project, packageName, originalFile).entrySet())
-				for (String name : imported.getValue())
-				{
-					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
-					LookupElementBuilder element = SCALAR_LOOKUP_CACHE.get(name);
-
-					if (element == null)
-						SCALAR_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-								.create(name)
-								.withTypeText(imported.getKey())
-								.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
-						);
-
-					resultSet.addElement(element);
-				}
+		{
+			for (PerlExportDescriptor exportDescriptor : PerlScalarUtil.getImportedScalarsDescritptors(project, packageName, originalFile))
+			{
+				resultSet.addElement(LookupElementBuilder
+						.create(exportDescriptor.getExportedName())
+						.withTypeText(exportDescriptor.getTargetCanonicalName())
+						.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
+				);
+			}
+		}
 		else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlArrayUtil.getImportedArraysNames(project, packageName, originalFile).entrySet())
-				for (String name : imported.getValue())
-				{
-					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
-					LookupElementBuilder element = ARRAY_LOOKUP_CACHE.get(name);
-
-					if (element == null)
-						ARRAY_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-								.create(name)
-								.withTypeText(imported.getKey())
-								.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
-						);
-
-					resultSet.addElement(element);
-				}
+		{
+			for (PerlExportDescriptor exportDescriptor : PerlArrayUtil.getImportedArraysDescriptors(project, packageName, originalFile))
+			{
+				resultSet.addElement(LookupElementBuilder
+						.create(exportDescriptor.getExportedName())
+						.withTypeText(exportDescriptor.getTargetCanonicalName())
+						.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
+				);
+			}
+		}
 		else if (perlVariable instanceof PsiPerlHashVariable)
-			for (Map.Entry<String, Set<String>> imported : PerlHashUtil.getImportedHashesNames(project, packageName, originalFile).entrySet())
-				for (String name : imported.getValue())
-				{
-					String lookupKey = imported.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + name;
-					LookupElementBuilder element = HASH_LOOKUP_CACHE.get(name);
-
-					if (element == null)
-						HASH_LOOKUP_CACHE.put(lookupKey, element = LookupElementBuilder
-								.create(name)
-								.withTypeText(imported.getKey())
-								.withIcon(PerlIcons.HASH_GUTTER_ICON)
-						);
-
-					resultSet.addElement(element);
-				}
+		{
+			for (PerlExportDescriptor exportDescriptor : PerlHashUtil.getImportedHashesDescriptors(project, packageName, originalFile))
+			{
+				resultSet.addElement(LookupElementBuilder
+						.create(exportDescriptor.getExportedName())
+						.withTypeText(exportDescriptor.getTargetCanonicalName())
+						.withIcon(PerlIcons.HASH_GUTTER_ICON)
+				);
+			}
+		}
 	}
 
 }

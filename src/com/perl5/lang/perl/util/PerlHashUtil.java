@@ -21,13 +21,18 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -111,10 +116,10 @@ public class PerlHashUtil implements PerlElementTypes
 	 * @return result map
 	 */
 	@NotNull
-	public static Map<String, Set<String>> getImportedHashesNames(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
-		PerlImportsCollector collector = new PerlImportsCollector('%', new HashMap<String, Set<String>>());
-		PerlUtil.getImportedNames(project, namespace, file, collector);
+		PerlImportsCollector collector = new PerlHashImportsCollector();
+		PerlUtil.collectImportedNames(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

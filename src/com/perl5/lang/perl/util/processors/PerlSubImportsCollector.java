@@ -16,36 +16,17 @@
 
 package com.perl5.lang.perl.util.processors;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
 public class PerlSubImportsCollector extends PerlImportsCollector
 {
-	public PerlSubImportsCollector(char sigil, Map<String, Set<String>> result)
-	{
-		super(sigil, result);
-	}
-
 	@Override
-	public boolean processEntity(String namespaceName, String entity)
+	protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor)
 	{
-		boolean r = super.processEntity(namespaceName, entity);
-		if (!r)
-		{
-			char firstChar;
-			if (entity != null && !entity.isEmpty() && (firstChar = entity.charAt(0)) != '$' && firstChar != '@' && firstChar != '%')
-			{
-				if (!myResult.containsKey(namespaceName))
-					myResult.put(namespaceName, new HashSet<String>());
-
-				myResult.get(namespaceName).add(entity);
-				r = true;
-			}
-		}
-		return r;
+		return descriptor.isSub();
 	}
 }

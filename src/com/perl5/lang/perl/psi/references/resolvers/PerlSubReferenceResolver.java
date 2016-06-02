@@ -23,6 +23,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
@@ -35,8 +36,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by hurricup on 27.09.2015.
@@ -160,31 +159,28 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 
 						assert namespaceContainer != null;
 
-						for (Map.Entry<String, Set<String>> imports : namespaceContainer.getImportedSubsNames().entrySet())
+						for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
 						{
-							for (String importedSubName : imports.getValue())
+							if (exportDescriptor.getExportedName().equals(subName))
 							{
-								if (importedSubName.equals(subName))
+								int currentSize = relatedItems.size();
+								collectRelatedItems(
+										exportDescriptor.getTargetCanonicalName(),
+										project,
+										parent,
+										relatedItems,
+										globalSearchScope
+								);
+
+								if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
 								{
-									int currentSize = relatedItems.size();
 									collectRelatedItems(
-											imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
+											exportDescriptor.getTargetPackage() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
 											project,
 											parent,
 											relatedItems,
 											globalSearchScope
 									);
-
-									if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
-									{
-										collectRelatedItems(
-												imports.getKey() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
-												project,
-												parent,
-												relatedItems,
-												globalSearchScope
-										);
-									}
 								}
 							}
 						}
@@ -197,20 +193,17 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 							// fixme partially not DRY with previous block
 							for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
 							{
-								for (Map.Entry<String, Set<String>> imports : namespaceDefinition.getImportedSubsNames().entrySet())
+								for (PerlExportDescriptor exportDescriptor : namespaceDefinition.getImportedSubsDescriptors())
 								{
-									for (String importedSubName : imports.getValue())
+									if (exportDescriptor.getExportedName().equals(subName))
 									{
-										if (importedSubName.equals(subName))
-										{
-											collectRelatedItems(
-													imports.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + subName,
-													project,
-													parent,
-													relatedItems,
-													globalSearchScope
-											);
-										}
+										collectRelatedItems(
+												exportDescriptor.getTargetCanonicalName(),
+												project,
+												parent,
+												relatedItems,
+												globalSearchScope
+										);
 									}
 								}
 							}
@@ -220,7 +213,6 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 					// check for autoload
 					if (relatedItems.size() == 0
 							&& !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-							&& !(parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinitionBase)
 							)
 					{
 						collectRelatedItems(

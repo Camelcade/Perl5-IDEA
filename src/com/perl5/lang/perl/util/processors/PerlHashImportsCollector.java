@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,36 +19,14 @@ package com.perl5.lang.perl.util.processors;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by hurricup on 03.09.2015.
+ * Created by hurricup on 02.06.2016.
  */
-public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<PerlExportDescriptor>
+public class PerlHashImportsCollector extends PerlImportsCollector
 {
-	final protected List<PerlExportDescriptor> myResult;
-
-	public PerlImportsCollector()
-	{
-		myResult = new ArrayList<PerlExportDescriptor>();
-	}
-
-	protected abstract boolean meetsCondition(@NotNull PerlExportDescriptor descriptor);
-
 	@Override
-	public boolean process(String namespaceName, PerlExportDescriptor entity)
+	protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor)
 	{
-		if (entity != null && meetsCondition(entity) && !myResult.contains(entity))
-		{
-			myResult.add(entity);
-		}
-		return true;
-	}
-
-	@NotNull
-	public List<PerlExportDescriptor> getResult()
-	{
-		return myResult;
+		return descriptor.isHash();
 	}
 }

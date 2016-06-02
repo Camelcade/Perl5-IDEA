@@ -23,12 +23,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -79,44 +79,62 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 				// fixme DRY this
 				if (actualType == PerlVariableType.SCALAR)
 				{
-					importsMap = PerlScalarUtil.getImportedScalarNames(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
+					for (PerlExportDescriptor importEntry : PerlScalarUtil.getImportedScalarsDescritptors(project, packageName, originalFile))
+					{
+						if (importEntry.getExportedName().equals(variableName))
+						{
+							for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
+						}
+					}
 				}
 				else if (actualType == PerlVariableType.ARRAY)
 				{
-					importsMap = PerlArrayUtil.getImportedArraysNames(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
+					for (PerlExportDescriptor importEntry : PerlArrayUtil.getImportedArraysDescriptors(project, packageName, originalFile))
+					{
+						if (importEntry.getExportedName().equals(variableName))
+						{
+							for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
+						}
+					}
 				}
 				else if (actualType == PerlVariableType.HASH)
 				{
-					importsMap = PerlHashUtil.getImportedHashesNames(project, packageName, originalFile);
-					for (Map.Entry<String, Set<String>> importEntry : importsMap.entrySet())
-						for (String variable : importEntry.getValue())
-							if (variable.equals(variableName))
-								for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getKey() + PerlPackageUtil.PACKAGE_SEPARATOR + variableName))
-									result.add(new PsiElementResolveResult(targetVariable));
+					for (PerlExportDescriptor importEntry : PerlHashUtil.getImportedHashesDescriptors(project, packageName, originalFile))
+					{
+						if (importEntry.getExportedName().equals(variableName))
+						{
+							for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
+						}
+					}
 				}
 
 			}
 
 			// our variable declaration
 			for (PerlGlobVariable glob : myVariable.getRelatedGlobs())
+			{
 				result.add(new PsiElementResolveResult(glob));
+			}
 
 			// globs
 			for (PerlVariableDeclarationWrapper globalDeclaration : myVariable.getGlobalDeclarations())
+			{
 				result.add(new PsiElementResolveResult(globalDeclaration));
+			}
 		}
 		else
+		{
 			result.add(new PsiElementResolveResult(lexicalDeclaration));
+		}
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}

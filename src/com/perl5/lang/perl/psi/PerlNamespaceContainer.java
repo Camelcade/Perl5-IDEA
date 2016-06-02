@@ -17,14 +17,13 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -74,7 +73,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return map of imports
 	 */
 	@NotNull
-	Map<String, Set<String>> getImportedSubsNames();
+	List<PerlExportDescriptor> getImportedSubsDescriptors();
 
 	/**
 	 * Returns map of imported scalars as map package => qw(scalars)
@@ -82,7 +81,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return map of imports
 	 */
 	@NotNull
-	Map<String, Set<String>> getImportedScalarNames();
+	List<PerlExportDescriptor> getImportedScalarDescriptors();
 
 	/**
 	 * Returns map of imported arrays as map package => qw(arrays)
@@ -90,7 +89,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return map of imports
 	 */
 	@NotNull
-	Map<String, Set<String>> getImportedArrayNames();
+	List<PerlExportDescriptor> getImportedArrayDescriptors();
 
 	/**
 	 * Returns map of imported hashes as map package => qw(hashes)
@@ -98,5 +97,5 @@ public interface PerlNamespaceContainer extends PsiElement
 	 * @return map of imports
 	 */
 	@NotNull
-	Map<String, Set<String>> getImportedHashNames();
+	List<PerlExportDescriptor> getImportedHashDescriptors();
 }
