@@ -35,7 +35,7 @@ import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.PlatformUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
@@ -99,7 +99,7 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 			}
 			else
 			{
-				if (StringUtil.isEmpty(Perl5Settings.getInstance(myProject).perlPath))
+				if (StringUtil.isEmpty(PerlLocalSettings.getInstance(myProject).PERL_PATH))
 				{
 					EditorNotificationPanel panel = new EditorNotificationPanel();
 					panel.setText("Perl5 interpreter is not configured");

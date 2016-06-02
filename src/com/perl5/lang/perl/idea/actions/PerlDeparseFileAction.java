@@ -37,7 +37,7 @@ import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import gnu.trove.THashSet;
@@ -77,7 +77,7 @@ public class PerlDeparseFileAction extends PerlActionBase
 			final Project project = file.getProject();
 
 			String deparseArgument = "-MO=Deparse";
-			Perl5Settings perl5Settings = Perl5Settings.getInstance(project);
+			PerlSharedSettings perl5Settings = PerlSharedSettings.getInstance(project);
 			if (StringUtil.isNotEmpty(perl5Settings.PERL_DEPARSE_ARGUMENTS))
 			{
 				deparseArgument += "," + perl5Settings.PERL_DEPARSE_ARGUMENTS;

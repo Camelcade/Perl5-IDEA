@@ -32,7 +32,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.picocontainer.MutablePicoContainer;
@@ -58,7 +58,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
 		super.setUp();
-		registerApplicationService(Perl5Settings.class, new Perl5Settings());
+		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
 	}
 
 	protected <T> void registerApplicationService(final Class<T> aClass, T object)

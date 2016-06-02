@@ -22,6 +22,7 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
 		name = "Perl5ApplicationSettings",
-		storages = @Storage(id = "other", file = "$APP_CONFIG$/perl5.xml")
+		storages = @Storage(id = "other", file = PerlPathMacros.PERL5_APP_SETTINGS_FILE)
 )
 public class PerlApplicationSettings implements PersistentStateComponent<PerlApplicationSettings>
 {

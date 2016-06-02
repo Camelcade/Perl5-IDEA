@@ -29,7 +29,8 @@ import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
@@ -45,12 +46,12 @@ import java.util.Set;
 public class PerlMicroIdeSettingsLoader implements ProjectComponent
 {
 	protected Project myProject;
-	protected Perl5Settings perl5Settings;
+	protected PerlSharedSettings perl5Settings;
 
 	public PerlMicroIdeSettingsLoader(Project project)
 	{
 		myProject = project;
-		perl5Settings = Perl5Settings.getInstance(project);
+		perl5Settings = PerlSharedSettings.getInstance(project);
 	}
 
 	public static void applyClassPaths(ModifiableRootModel rootModel)
@@ -93,10 +94,10 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 		if (!PlatformUtils.isIntelliJ())
 		{
 			// add perl @inc to the end of libs
-			Perl5Settings settings = Perl5Settings.getInstance(rootModel.getProject());
-			if (!settings.perlPath.isEmpty())
+			PerlLocalSettings settings = PerlLocalSettings.getInstance(rootModel.getProject());
+			if (!settings.PERL_PATH.isEmpty())
 			{
-				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.perlPath))
+				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.PERL_PATH))
 				{
 					VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
 					if (incFile != null)

@@ -23,7 +23,7 @@ import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.roots.ui.configuration.ProjectStructureConfigurable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
@@ -51,7 +51,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		Perl5Settings mySettings = Perl5Settings.getInstance(getModel().getProject());
+		PerlSharedSettings mySettings = PerlSharedSettings.getInstance(getModel().getProject());
 
 		List<String> libRoots = mySettings.libRootUrls;
 		libRoots.clear();

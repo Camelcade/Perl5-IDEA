@@ -25,7 +25,7 @@ import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -85,7 +85,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 	{
 		super.setUp();
 		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
-		registerApplicationService(Perl5Settings.class, new Perl5Settings());
+		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
 		new PerlParserExtensions().initComponent();
 	}
 

@@ -16,8 +16,12 @@
 
 package com.perl5.lang.perl.idea.codeInsight;
 
-import com.intellij.openapi.components.*;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -27,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 		name = "Perl5CodeInsightSettings",
 		storages = {
 				@Storage(
-						file = StoragePathMacros.APP_CONFIG + "/other.xml"
+						file = PerlPathMacros.APP_OTHER_SETTINGS_FILE
 				)
 		}
 )

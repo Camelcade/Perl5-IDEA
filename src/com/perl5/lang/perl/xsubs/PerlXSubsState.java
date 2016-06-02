@@ -42,6 +42,7 @@ import com.intellij.util.FileContentUtil;
 import com.intellij.util.Processor;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,8 @@ import java.util.Map;
 @State(
 		name = "Perl5XSubsState",
 		storages = {
-				@Storage(id = "workspace", file = StoragePathMacros.WORKSPACE_FILE)
+				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 

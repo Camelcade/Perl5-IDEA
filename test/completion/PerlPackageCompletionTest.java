@@ -16,7 +16,7 @@
 
 package completion;
 
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 
 /**
  * Created by hurricup on 03.02.2016.
@@ -73,7 +73,7 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void testTryCatch()
 	{
-		Perl5Settings.getInstance(getProject()).PERL_TRY_CATCH_ENABLED = true;
+		PerlSharedSettings.getInstance(getProject()).PERL_TRY_CATCH_ENABLED = true;
 		checkClassCompletions("try_catch");
 	}
 

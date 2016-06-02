@@ -35,8 +35,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
@@ -64,17 +65,18 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 
 	protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException
 	{
-		Perl5Settings settings = Perl5Settings.getInstance(project);
-		String executable = settings.PERL_TIDY_PATH;
+		PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
+		PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
+		String executable = localSettings.PERL_TIDY_PATH;
 		if (StringUtil.isEmpty(executable))
 		{
 			throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
 		}
 		GeneralCommandLine commandLine = new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
 
-		if (StringUtil.isNotEmpty(settings.PERL_TIDY_ARGS))
+		if (StringUtil.isNotEmpty(sharedSettings.PERL_TIDY_ARGS))
 		{
-			commandLine.addParameters(StringUtil.split(settings.PERL_TIDY_ARGS, " "));
+			commandLine.addParameters(StringUtil.split(sharedSettings.PERL_TIDY_ARGS, " "));
 		}
 
 		return commandLine;

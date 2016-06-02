@@ -33,6 +33,7 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexer;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +51,7 @@ import java.util.regex.Pattern;
 		name = "HTMLMasonSettings",
 		storages = {
 				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
+				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 

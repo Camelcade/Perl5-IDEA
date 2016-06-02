@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.parser.trycatch.idea.liveTemplates;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix 
 	@Override
 	public boolean isInContext(PsiElement element)
 	{
-		return super.isInContext(element) && Perl5Settings.getInstance(element.getProject()).PERL_TRY_CATCH_ENABLED;
+		return super.isInContext(element) && PerlSharedSettings.getInstance(element.getProject()).PERL_TRY_CATCH_ENABLED;
 	}
 
 	public static class Catch extends TryCatchTemplateContextType

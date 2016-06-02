@@ -39,6 +39,7 @@
       <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File</li>
       <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scripts</li>
       <li>Informative notifications on failed attempts to start perl script when SDK or perl path is not configured</li>
+      <li>Perl settings are now stored in two separate files: perl5local.xml and perl5shared.xml. Local is machine-dependent, contains paths and so on, shared can be shared with VCS. (NB. you need to reconfigure your perl settings after this update. .idea/perl5.xml may be deleted)</li>
       <li>IntelliJ IDEA:
       <ul>
         <li>Perl Module SDK is now configurable, so you may have a Java project with perl module in it</li>
@@ -139,7 +140,8 @@
         <editorNotificationProvider
                 implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
 
-        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.Perl5Settings"/>
+        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
+        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
         <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
 
         <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"

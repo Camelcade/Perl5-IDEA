@@ -20,7 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -48,7 +48,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				String canonicalName = o.getCanonicalName();
 				if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
 				{
-					if (!PerlPackageUtil.isMain(o.getPackageName()) || !Perl5Settings.getInstance(project).SIMPLE_MAIN_RESOLUTION)
+					if (!PerlPackageUtil.isMain(o.getPackageName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION)
 					{
 						registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
 					}

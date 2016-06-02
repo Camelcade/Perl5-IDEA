@@ -54,7 +54,8 @@ import java.awt.event.ActionListener;
 public class PerlSettingsConfigurable implements Configurable
 {
 	Project myProject;
-	Perl5Settings mySettings;
+	PerlSharedSettings mySharedSettings;
+	PerlLocalSettings myLocalSettings;
 
 	TextFieldWithBrowseButton perlCriticPathInputField;
 	RawCommandLineEditor perlCriticArgsInputField;
@@ -83,7 +84,8 @@ public class PerlSettingsConfigurable implements Configurable
 	public PerlSettingsConfigurable(Project myProject)
 	{
 		this.myProject = myProject;
-		mySettings = Perl5Settings.getInstance(myProject);
+		mySharedSettings = PerlSharedSettings.getInstance(myProject);
+		myLocalSettings = PerlLocalSettings.getInstance(myProject);
 	}
 
 	@Nls
@@ -299,55 +301,55 @@ public class PerlSettingsConfigurable implements Configurable
 	public boolean isModified()
 	{
 		return isMicroIdeModified() ||
-				mySettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
-				mySettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
-				mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
-				mySettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
-				mySettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
-				mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
-				!StringUtil.equals(mySettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
-				!StringUtil.equals(mySettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
-				!mySettings.selfNames.equals(selfNamesModel.getItems());
+				mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
+				mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
+				mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
+				mySharedSettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
+				mySharedSettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
+				mySharedSettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
+				!StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
+				!StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
+				!StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
+				!StringUtil.equals(myLocalSettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
+				!StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
+				!mySharedSettings.selfNames.equals(selfNamesModel.getItems());
 	}
 
 	protected boolean isMicroIdeModified()
 	{
 		return !PlatformUtils.isIntelliJ() &&
 				(
-						!mySettings.perlPath.equals(perlPathInputField.getText())
+						!myLocalSettings.PERL_PATH.equals(perlPathInputField.getText())
 				);
 	}
 
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		mySettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
-		mySettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
-		mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
-		mySettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
-		mySettings.setDeparseOptions(deparseArgumentsTextField.getText());
+		mySharedSettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
+		mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
+		mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
+		mySharedSettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
+		mySharedSettings.setDeparseOptions(deparseArgumentsTextField.getText());
 
-		boolean needReparse = mySettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
-		mySettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
+		boolean needReparse = mySharedSettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
+		mySharedSettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
 
-		mySettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
-		mySettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
-		mySettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
+		mySharedSettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
+		myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
+		mySharedSettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
 
-		mySettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
-		mySettings.PERL_TIDY_ARGS = perlTidyArgsInputField.getText();
+		myLocalSettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
+		mySharedSettings.PERL_TIDY_ARGS = perlTidyArgsInputField.getText();
 
-		mySettings.selfNames.clear();
-		mySettings.selfNames.addAll(selfNamesModel.getItems());
+		mySharedSettings.selfNames.clear();
+		mySharedSettings.selfNames.addAll(selfNamesModel.getItems());
 
 		if (!PlatformUtils.isIntelliJ())
 		{
 			applyMicroIdeSettings();
 		}
-		mySettings.settingsUpdated();
+		mySharedSettings.settingsUpdated();
 
 		if (needReparse)
 		{
@@ -357,7 +359,7 @@ public class PerlSettingsConfigurable implements Configurable
 
 	public void applyMicroIdeSettings()
 	{
-		mySettings.perlPath = perlPathInputField.getText();
+		myLocalSettings.PERL_PATH = perlPathInputField.getText();
 
 		ApplicationManager.getApplication().runWriteAction(
 				new Runnable()
@@ -377,21 +379,21 @@ public class PerlSettingsConfigurable implements Configurable
 	public void reset()
 	{
 		selfNamesModel.removeAll();
-		selfNamesModel.add(mySettings.selfNames);
+		selfNamesModel.add(mySharedSettings.selfNames);
 
-		simpleMainCheckbox.setSelected(mySettings.SIMPLE_MAIN_RESOLUTION);
-		autoInjectionCheckbox.setSelected(mySettings.AUTOMATIC_HEREDOC_INJECTIONS);
-		allowInjectionWithInterpolation.setSelected(mySettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
-		perlAnnotatorCheckBox.setSelected(mySettings.PERL_ANNOTATOR_ENABLED);
-		perlTryCatchCheckBox.setSelected(mySettings.PERL_TRY_CATCH_ENABLED);
-		deparseArgumentsTextField.setText(mySettings.PERL_DEPARSE_ARGUMENTS);
+		simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
+		autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);
+		allowInjectionWithInterpolation.setSelected(mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
+		perlAnnotatorCheckBox.setSelected(mySharedSettings.PERL_ANNOTATOR_ENABLED);
+		perlTryCatchCheckBox.setSelected(mySharedSettings.PERL_TRY_CATCH_ENABLED);
+		deparseArgumentsTextField.setText(mySharedSettings.PERL_DEPARSE_ARGUMENTS);
 
-		perlCriticCheckBox.setSelected(mySettings.PERL_CRITIC_ENABLED);
-		perlCriticPathInputField.setText(mySettings.PERL_CRITIC_PATH);
-		perlCriticArgsInputField.setText(mySettings.PERL_CRITIC_ARGS);
+		perlCriticCheckBox.setSelected(mySharedSettings.PERL_CRITIC_ENABLED);
+		perlCriticPathInputField.setText(myLocalSettings.PERL_CRITIC_PATH);
+		perlCriticArgsInputField.setText(mySharedSettings.PERL_CRITIC_ARGS);
 
-		perlTidyPathInputField.setText(mySettings.PERL_TIDY_PATH);
-		perlTidyArgsInputField.setText(mySettings.PERL_TIDY_ARGS);
+		perlTidyPathInputField.setText(myLocalSettings.PERL_TIDY_PATH);
+		perlTidyArgsInputField.setText(mySharedSettings.PERL_TIDY_ARGS);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -401,7 +403,7 @@ public class PerlSettingsConfigurable implements Configurable
 
 	protected void resetMicroIdeSettings()
 	{
-		perlPathInputField.setText(mySettings.perlPath);
+		perlPathInputField.setText(myLocalSettings.PERL_PATH);
 	}
 
 	@Override

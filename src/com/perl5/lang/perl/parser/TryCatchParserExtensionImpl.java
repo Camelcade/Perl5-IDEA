@@ -20,7 +20,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -177,7 +177,7 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 	// fixme isn't this too expensive?
 	private boolean isEnabled(PerlBuilder b)
 	{
-		return Perl5Settings.getInstance(b.getProject()).PERL_TRY_CATCH_ENABLED;
+		return PerlSharedSettings.getInstance(b.getProject()).PERL_TRY_CATCH_ENABLED;
 	}
 
 	@Override

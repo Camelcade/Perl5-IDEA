@@ -29,7 +29,7 @@ import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -401,7 +401,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public boolean isSelf()
 	{
-		return getActualType() == PerlVariableType.SCALAR && Perl5Settings.getInstance(getProject()).isSelfName(getName());
+		return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
 	}
 
 	@Override

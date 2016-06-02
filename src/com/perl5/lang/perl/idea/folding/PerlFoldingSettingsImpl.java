@@ -19,8 +19,8 @@ package com.perl5.lang.perl.idea.folding;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 @State(
 		name = "PerlCodeFoldingSettings",
-		storages = @Storage(file = StoragePathMacros.APP_CONFIG + "/editor.codeinsight.xml")
+		storages = @Storage(file = PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
 )
 public class PerlFoldingSettingsImpl extends PerlFoldingSettings implements PersistentStateComponent<PerlFoldingSettings>
 {

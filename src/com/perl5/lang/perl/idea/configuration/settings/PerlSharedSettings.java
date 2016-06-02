@@ -20,8 +20,7 @@ import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
-import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
-import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
+import com.perl5.lang.perl.idea.PerlPathMacros;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,15 +37,14 @@ import java.util.Set;
 		name = "Perl5Settings",
 		storages = {
 				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/perl5.xml", scheme = StorageScheme.DIRECTORY_BASED)
+				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 
-public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
+public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings>
 {
 	public List<String> libRootUrls = new ArrayList<String>();
 	public List<String> selfNames = new ArrayList<String>(Arrays.asList("self", "this", "class", "proto"));
-	public String perlPath = "";
 	public boolean SIMPLE_MAIN_RESOLUTION = true;
 	public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
 	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
@@ -54,31 +52,27 @@ public class Perl5Settings implements PersistentStateComponent<Perl5Settings>
 	public boolean PERL_ANNOTATOR_ENABLED = false;
 	public boolean PERL_TRY_CATCH_ENABLED = false;
 	public String PERL_DEPARSE_ARGUMENTS = "";
-
-	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_NAME;
 	public String PERL_TIDY_ARGS = "";
-
-	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_NAME;
 	public String PERL_CRITIC_ARGS = "";
 
 	@Transient
 	private Set<String> SELF_NAMES_SET = null;
 
-	public static Perl5Settings getInstance(@NotNull Project project)
+	public static PerlSharedSettings getInstance(@NotNull Project project)
 	{
-		Perl5Settings persisted = ServiceManager.getService(project, Perl5Settings.class);
-		return persisted != null ? persisted : new Perl5Settings();
+		PerlSharedSettings persisted = ServiceManager.getService(project, PerlSharedSettings.class);
+		return persisted != null ? persisted : new PerlSharedSettings();
 	}
 
 	@Nullable
 	@Override
-	public Perl5Settings getState()
+	public PerlSharedSettings getState()
 	{
 		return this;
 	}
 
 	@Override
-	public void loadState(Perl5Settings state)
+	public void loadState(PerlSharedSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
 	}

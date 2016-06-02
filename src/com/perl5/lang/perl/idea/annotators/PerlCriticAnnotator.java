@@ -34,8 +34,9 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,13 +58,14 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 	@Override
 	public PerlFile collectInformation(@NotNull PsiFile file)
 	{
-		return file instanceof PerlFile && file.isPhysical() && Perl5Settings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
+		return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
 	}
 
 	protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException
 	{
-		Perl5Settings settings = Perl5Settings.getInstance(project);
-		String executable = settings.PERL_CRITIC_PATH;
+		PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
+		PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
+		String executable = localSettings.PERL_CRITIC_PATH;
 
 		if (StringUtil.isEmpty(executable))
 		{
@@ -71,9 +73,9 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 		}
 		GeneralCommandLine commandLine = new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
 
-		if (StringUtil.isNotEmpty(settings.PERL_CRITIC_ARGS))
+		if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS))
 		{
-			commandLine.addParameters(StringUtil.split(settings.PERL_CRITIC_ARGS, " "));
+			commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
 		}
 
 		return commandLine;
@@ -146,7 +148,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 						}
 					}
 			));
-			Perl5Settings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
+			PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
 
 		}
 		catch (Exception e)

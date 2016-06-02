@@ -26,7 +26,7 @@ import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -161,7 +161,7 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	@Override
 	public boolean isSelf()
 	{
-		return getActualType() == PerlVariableType.SCALAR && Perl5Settings.getInstance(getProject()).isSelfName(getName());
+		return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
 	}
 
 	@Override

@@ -35,8 +35,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +66,7 @@ public class PerlRunUtil
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
 		commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
-		for (String libRoot : Perl5Settings.getInstance(project).libRootUrls)
+		for (String libRoot : PerlSharedSettings.getInstance(project).libRootUrls)
 		{
 			String includePath = VfsUtil.urlToPath(libRoot);
 			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
@@ -116,7 +117,7 @@ public class PerlRunUtil
 		}
 		else
 		{
-			String perlPath = Perl5Settings.getInstance(project).perlPath;
+			String perlPath = PerlLocalSettings.getInstance(project).PERL_PATH;
 			if (StringUtil.isNotEmpty(perlPath))
 			{
 				return perlPath;

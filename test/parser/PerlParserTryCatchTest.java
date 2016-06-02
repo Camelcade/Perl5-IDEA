@@ -18,7 +18,7 @@ package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.parser.PerlFileViewProviderFactory;
 
 /**
@@ -57,6 +57,6 @@ public class PerlParserTryCatchTest extends PerlParserTestBase
 	{
 		super.setUp();
 		LanguageFileViewProviders.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlFileViewProviderFactory());
-		Perl5Settings.getInstance(getProject()).PERL_TRY_CATCH_ENABLED = true;
+		PerlSharedSettings.getInstance(getProject()).PERL_TRY_CATCH_ENABLED = true;
 	}
 }
