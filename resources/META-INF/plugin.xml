@@ -37,7 +37,8 @@
       <li>Debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
       <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
       <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File</li>
-      <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scritps</li>
+      <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scripts</li>
+      <li>Added informative notifications on failed attempts to start perl script when SDK or perl path is not configured</li>
       <li>IntelliJ IDEA:
       <ul>
         <li>Perl Module SDK is now configurable, so you may have a Java project with perl module in it.</li>
@@ -58,7 +59,7 @@
     <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different  products   -->
+         on how to target different  products    -->
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>

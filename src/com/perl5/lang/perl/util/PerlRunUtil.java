@@ -18,21 +18,30 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.util.ExecUtil;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationListener;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.roots.ui.configuration.ProjectSettingsService;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.event.HyperlinkEvent;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,6 +50,8 @@ import java.util.List;
  */
 public class PerlRunUtil
 {
+	public static final String PERL_RUN_ERROR_GROUP = "PERL_RUN_ERROR_GROUP";
+
 	@Nullable
 	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
@@ -72,7 +83,6 @@ public class PerlRunUtil
 	@Nullable
 	public static String getPerlPath(@NotNull Project project, @Nullable VirtualFile scriptFile)
 	{
-		String perlSdkPath = null;
 		if (PlatformUtils.isIntelliJ())
 		{
 			Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
@@ -81,28 +91,72 @@ public class PerlRunUtil
 				Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
 				if (projectSdk != null)
 				{
-					perlSdkPath = projectSdk.getHomePath();
+					if (projectSdk.getSdkType() == PerlSdkType.getInstance())
+					{
+						return projectSdk.getHomePath();
+					}
+					else
+					{
+						showSdkConfigurationError("<p>To run perl script, it must be in Perl module or project SDK should be set to the Perl Interpreter.</p>", project);
+					}
 				}
 			}
 			else
 			{
 				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
-				if (sdk == null)
+				if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
 				{
-					perlSdkPath = null;
+					return sdk.getHomePath();
 				}
 				else
 				{
-					perlSdkPath = sdk.getHomePath();
+					showSdkConfigurationError("<p>You should set up Perl Interpreter as project or module SDK.</p>", project);
 				}
 			}
 		}
 		else
 		{
-			perlSdkPath = Perl5Settings.getInstance(project).perlPath;
+			String perlPath = Perl5Settings.getInstance(project).perlPath;
+			if (StringUtil.isNotEmpty(perlPath))
+			{
+				return perlPath;
+			}
+			else
+			{
+				showSdkConfigurationError("<p>To be able to run Perl scripts you should configure a path to the Perl Interpreter.</p>", project);
+			}
 		}
+		return null;
+	}
 
-		return perlSdkPath;
+	private static void showSdkConfigurationError(String message, final Project project)
+	{
+		Notifications.Bus.notify(new Notification(
+				PERL_RUN_ERROR_GROUP,
+				"SDK Configuration Error",
+				message
+						+ "<br/>"
+						+ "<p><a href=\"configure\">Configure...</a></p>"
+						+ "<br/>"
+				,
+				NotificationType.ERROR,
+				new NotificationListener.UrlOpeningListener(false)
+				{
+					@Override
+					protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event)
+					{
+						if (PlatformUtils.isIntelliJ())
+						{
+							ProjectSettingsService.getInstance(project).openProjectSettings();
+						}
+						else
+						{
+							ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+						}
+						notification.expire();
+					}
+				}
+		));
 	}
 
 	@Nullable
@@ -128,7 +182,8 @@ public class PerlRunUtil
 			GeneralCommandLine commandLine = new GeneralCommandLine(command);
 			return ExecUtil.execAndGetOutput(commandLine).getStdoutLines();
 
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 //			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
 			return Collections.emptyList();

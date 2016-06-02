@@ -81,7 +81,7 @@ public class PerlRunProfileState extends CommandLineState
 
 		if (perlSdkPath == null)
 		{
-			throw new ExecutionException("Perl SDK is not set");
+			throw new ExecutionException("Unable to locate Perl Interpreter");
 		}
 
 		String homePath = runProfile.getWorkingDirectory();
