@@ -53,7 +53,6 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 		perl5Settings = Perl5Settings.getInstance(project);
 	}
 
-	// fixme make this non-static and request it from manager
 	public static void applyClassPaths(ModifiableRootModel rootModel)
 	{
 		for (OrderEntry entry : rootModel.getOrderEntries())
@@ -68,12 +67,12 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 
 		LibraryTable table = rootModel.getModuleLibraryTable();
 
-		for (VirtualFile entry : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
+		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
 		{
 //			System.err.println("Adding " + entry);
 			Library tableLibrary = table.createLibrary();
 			Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-			modifiableModel.addRoot(entry, OrderRootType.CLASSES);
+			modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
 			modifiableModel.commit();
 		}
 

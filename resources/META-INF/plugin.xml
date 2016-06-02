@@ -51,6 +51,7 @@
       <ul>
       <li>Fixed problem with resolving in generated code (overrides, constructors, etc...)</li>
       <li>Fixed bug when non-suspending breakpoint suspended program nowhere</li>
+      <li>Marking directory as library from the context menu now works as intended</li>
       </ul>
      </p>
     ]]>
