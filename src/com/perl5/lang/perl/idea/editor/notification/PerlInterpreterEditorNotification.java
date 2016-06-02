@@ -17,18 +17,27 @@
 package com.perl5.lang.perl.idea.editor.notification;
 
 import com.intellij.openapi.fileEditor.FileEditor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.roots.ui.configuration.ProjectSettingsService;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.PlatformUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.configuration.settings.Perl5Settings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,21 +63,57 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 
 	@Nullable
 	@Override
-	public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor)
+	public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile, @NotNull FileEditor fileEditor)
 	{
-		if (!PlatformUtils.isIntelliJ() && file.getFileType() instanceof PerlFileType && StringUtil.isEmpty(Perl5Settings.getInstance(myProject).perlPath))
+		if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile))
 		{
-			EditorNotificationPanel panel = new EditorNotificationPanel();
-			panel.setText("Perl5 interpreter is not configured");
-			panel.createActionLabel("Configure", new Runnable()
+			if (PlatformUtils.isIntelliJ())
 			{
-				@Override
-				public void run()
+				if (VfsUtil.isAncestor(myProject.getBaseDir(), virtualFile, true))
 				{
-					ShowSettingsUtil.getInstance().editConfigurable(myProject, new PerlSettingsConfigurable(myProject));
+					Module fileModule = ModuleUtilCore.findModuleForFile(virtualFile, myProject);
+					Sdk fileSdk = null;
+					if (fileModule == null)
+					{
+						fileSdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
+					}
+					else
+					{
+						fileSdk = ModuleRootManager.getInstance(fileModule).getSdk();
+					}
+					if (fileSdk == null || fileSdk.getSdkType() != PerlSdkType.getInstance())
+					{
+						EditorNotificationPanel panel = new EditorNotificationPanel();
+						panel.setText("Perl5 SDK is not configured.");
+						panel.createActionLabel("Configure", new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								ProjectSettingsService.getInstance(myProject).openProjectSettings();
+							}
+						});
+						return panel;
+					}
 				}
-			});
-			return panel;
+			}
+			else
+			{
+				if (StringUtil.isEmpty(Perl5Settings.getInstance(myProject).perlPath))
+				{
+					EditorNotificationPanel panel = new EditorNotificationPanel();
+					panel.setText("Perl5 interpreter is not configured");
+					panel.createActionLabel("Configure", new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							ShowSettingsUtil.getInstance().editConfigurable(myProject, new PerlSettingsConfigurable(myProject));
+						}
+					});
+					return panel;
+				}
+			}
 		}
 		return null;
 	}
