@@ -16,13 +16,14 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlStrictMask;
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.03.2016.
@@ -32,6 +33,16 @@ public class DancerPackageProcessor extends PerlPackageProcessorBase implements
 		PerlUtfProvider,
 		PerlWarningsProvider
 {
+	private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
+
+	static
+	{
+		for (String keyword : PerlDancerDSL.DSL_KEYWORDS)
+		{
+			EXPORT_DESCRIPTORS.add(new PerlExportDescriptor(keyword, "Dancer"));
+		}
+	}
+
 	@Override
 	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
 	{
@@ -44,5 +55,17 @@ public class DancerPackageProcessor extends PerlPackageProcessorBase implements
 	{
 		// fixme implement modification
 		return currentMask.clone();
+	}
+
+	@NotNull
+	@Override
+	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
+	{
+		return getExportDescriptors();
+	}
+
+	public List<PerlExportDescriptor> getExportDescriptors()
+	{
+		return EXPORT_DESCRIPTORS;
 	}
 }
