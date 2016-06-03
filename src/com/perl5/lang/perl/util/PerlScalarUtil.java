@@ -107,7 +107,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlScalarImportsCollector();
-		PerlUtil.collectImportedNames(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

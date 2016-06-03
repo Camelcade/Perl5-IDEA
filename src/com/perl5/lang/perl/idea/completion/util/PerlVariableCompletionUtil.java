@@ -58,37 +58,51 @@ public class PerlVariableCompletionUtil
 	static
 	{
 		for (String name : PerlScalarUtil.BUILT_IN)
+		{
 			BUILT_IN_SCALARS.add(getScalarLookupElement(name).withBoldness(true));
+		}
 
 		for (String name : PerlArrayUtil.BUILT_IN)
+		{
 			BUILT_IN_SCALARS.add(getArrayElementLookupElement(name).withBoldness(true));
+		}
 
 		for (String name : PerlHashUtil.BUILT_IN)
+		{
 			BUILT_IN_SCALARS.add(getHashElementLookupElement(name).withBoldness(true));
+		}
 	}
 
 	// fill arrays
 	static
 	{
 		for (String name : PerlArrayUtil.BUILT_IN)
+		{
 			BUILT_IN_ARRAYS.add(getArrayLookupElement(name).withBoldness(true));
+		}
 
 		for (String name : PerlHashUtil.BUILT_IN)
-			BUILT_IN_ARRAYS.add(getHashSliceElementLookupElement(name).withBoldness(true));
+		{
+			BUILT_IN_ARRAYS.add(getHashSliceLookupElement(name).withBoldness(true));
+		}
 	}
 
 	// fill arrays indexes
 	static
 	{
 		for (String name : PerlArrayUtil.BUILT_IN)
+		{
 			BUILT_IN_ARRAYS.add(getArrayLookupElement(name).withBoldness(true));
+		}
 	}
 
 	// fill hashes
 	static
 	{
 		for (String name : PerlHashUtil.BUILT_IN)
+		{
 			BUILT_IN_HASHES.add(getHashLookupElement(name).withBoldness(true));
+		}
 	}
 
 	// fill globs
@@ -96,9 +110,12 @@ public class PerlVariableCompletionUtil
 	{
 		// built-in globs
 		for (String name : PerlGlobUtil.BUILT_IN)
+		{
 			BUILT_IN_GLOBS.add(getGlobLookupElement(name).withBoldness(true));
+		}
 	}
 
+	@NotNull
 	public static LookupElementBuilder getScalarLookupElement(String name)
 	{
 		return LookupElementBuilder
@@ -106,6 +123,7 @@ public class PerlVariableCompletionUtil
 				.withIcon(PerlIcons.SCALAR_GUTTER_ICON);
 	}
 
+	@NotNull
 	public static LookupElementBuilder getGlobLookupElement(String name)
 	{
 		return LookupElementBuilder
@@ -113,6 +131,7 @@ public class PerlVariableCompletionUtil
 				.withIcon(PerlIcons.GLOB_GUTTER_ICON);
 	}
 
+	@NotNull
 	public static LookupElementBuilder getArrayLookupElement(String name)
 	{
 		return LookupElementBuilder
@@ -120,6 +139,7 @@ public class PerlVariableCompletionUtil
 				.withIcon(PerlIcons.ARRAY_GUTTER_ICON);
 	}
 
+	@NotNull
 	public static LookupElementBuilder getArrayElementLookupElement(String name)
 	{
 		return getArrayLookupElement(name)
@@ -128,6 +148,7 @@ public class PerlVariableCompletionUtil
 
 	}
 
+	@NotNull
 	public static LookupElementBuilder getHashLookupElement(String name)
 	{
 		return LookupElementBuilder
@@ -135,6 +156,7 @@ public class PerlVariableCompletionUtil
 				.withIcon(PerlIcons.HASH_GUTTER_ICON);
 	}
 
+	@NotNull
 	public static LookupElementBuilder getHashElementLookupElement(String name)
 	{
 		return getHashLookupElement(name)
@@ -142,7 +164,8 @@ public class PerlVariableCompletionUtil
 				.withTailText("{}");
 	}
 
-	public static LookupElementBuilder getHashSliceElementLookupElement(String name)
+	@NotNull
+	public static LookupElementBuilder getHashSliceLookupElement(String name)
 	{
 		return getHashLookupElement(name)
 				.withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER) // slice here
@@ -195,15 +218,25 @@ public class PerlVariableCompletionUtil
 		PsiElement perlVariable = variableNameElement.getParent();
 
 		if (perlVariable instanceof PsiPerlScalarVariable)
+		{
 			resultSet.addAllElements(BUILT_IN_SCALARS);
+		}
 		else if (perlVariable instanceof PsiPerlArrayVariable)
+		{
 			resultSet.addAllElements(BUILT_IN_ARRAYS);
+		}
 		else if (perlVariable instanceof PsiPerlArrayIndexVariable)
+		{
 			resultSet.addAllElements(BUILT_IN_ARRAYS_INDEXES);
+		}
 		else if (perlVariable instanceof PsiPerlHashVariable)
+		{
 			resultSet.addAllElements(BUILT_IN_HASHES);
+		}
 		else if (perlVariable instanceof PsiPerlGlobVariable)
+		{
 			resultSet.addAllElements(BUILT_IN_GLOBS);
+		}
 	}
 
 	public static void fillWithLExicalVariables(
@@ -258,7 +291,7 @@ public class PerlVariableCompletionUtil
 							}
 							else if (variable.getActualType() == PerlVariableType.HASH)
 							{
-								resultSet.addElement(setLexical(getHashSliceElementLookupElement(variableName)));
+								resultSet.addElement(setLexical(getHashSliceLookupElement(variableName)));
 							}
 						}
 					}

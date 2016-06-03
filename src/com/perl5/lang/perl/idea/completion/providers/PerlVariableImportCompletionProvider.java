@@ -25,13 +25,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.PerlUtil;
+import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -41,7 +40,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 {
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
+							   @NotNull final CompletionResultSet resultSet)
 	{
 		PsiElement variableNameElement = parameters.getPosition();
 		PsiElement perlVariable = variableNameElement.getParent();
@@ -63,39 +62,87 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			return;
 		}
 
-		// fixme handle array and hash elements
+		PerlNamespaceEntityProcessor<PerlExportDescriptor> processor = null;
+
 		if (perlVariable instanceof PsiPerlScalarVariable)
 		{
-			for (PerlExportDescriptor exportDescriptor : PerlScalarUtil.getImportedScalarsDescritptors(project, packageName, originalFile))
+			processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>()
 			{
-				resultSet.addElement(LookupElementBuilder
-						.create(exportDescriptor.getExportedName())
-						.withTypeText(exportDescriptor.getTargetCanonicalName())
-						.withIcon(PerlIcons.SCALAR_GUTTER_ICON)
-				);
-			}
+				@Override
+				public boolean process(String namespaceName, PerlExportDescriptor entity)
+				{
+					LookupElementBuilder lookupElement = null;
+					if (entity.isScalar())
+					{
+						lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getTargetName());
+					}
+					else if (entity.isArray())
+					{
+						lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getTargetName());
+					}
+					else if (entity.isHash())
+					{
+						lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getTargetName());
+					}
+
+					if (lookupElement != null)
+					{
+						resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+					}
+					return true;
+				}
+			};
 		}
 		else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable)
 		{
-			for (PerlExportDescriptor exportDescriptor : PerlArrayUtil.getImportedArraysDescriptors(project, packageName, originalFile))
+			processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>()
 			{
-				resultSet.addElement(LookupElementBuilder
-						.create(exportDescriptor.getExportedName())
-						.withTypeText(exportDescriptor.getTargetCanonicalName())
-						.withIcon(PerlIcons.ARRAY_GUTTER_ICON)
-				);
-			}
+				@Override
+				public boolean process(String namespaceName, PerlExportDescriptor entity)
+				{
+					LookupElementBuilder lookupElement = null;
+					if (entity.isArray())
+					{
+						lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getTargetName());
+					}
+					else if (entity.isHash())
+					{
+						lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getTargetName());
+					}
+
+					if (lookupElement != null)
+					{
+						resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+					}
+					return true;
+				}
+			};
 		}
 		else if (perlVariable instanceof PsiPerlHashVariable)
 		{
-			for (PerlExportDescriptor exportDescriptor : PerlHashUtil.getImportedHashesDescriptors(project, packageName, originalFile))
+			processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>()
 			{
-				resultSet.addElement(LookupElementBuilder
-						.create(exportDescriptor.getExportedName())
-						.withTypeText(exportDescriptor.getTargetCanonicalName())
-						.withIcon(PerlIcons.HASH_GUTTER_ICON)
-				);
-			}
+				@Override
+				public boolean process(String namespaceName, PerlExportDescriptor entity)
+				{
+					LookupElementBuilder lookupElement = null;
+					if (entity.isHash())
+					{
+						lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getTargetName());
+					}
+
+					if (lookupElement != null)
+					{
+						resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+					}
+					return true;
+				}
+			};
+		}
+
+		if (processor != null)
+		{
+			PerlUtil.processImportedEntities(project, packageName, originalFile, processor);
 		}
 	}
 

@@ -277,7 +277,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlSubImportsCollector();
-		PerlUtil.collectImportedNames(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

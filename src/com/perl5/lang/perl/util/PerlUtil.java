@@ -122,7 +122,7 @@ public class PerlUtil
 	 * @param namespace namespace to search in
 	 * @param file      PsiFile to search in
 	 */
-	public static void collectImportedNames(
+	public static void processImportedEntities(
 			@NotNull Project project,
 			@NotNull String namespace,
 			@NotNull PsiFile file,

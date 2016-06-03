@@ -207,7 +207,7 @@ public class PerlVariableGlobalCompletionProvider extends CompletionProvider<Com
 				{
 					if (super.process(s))
 					{
-						finalResultSet.addElement(PerlVariableCompletionUtil.getHashSliceElementLookupElement(adjustName(s)));
+						finalResultSet.addElement(PerlVariableCompletionUtil.getHashSliceLookupElement(adjustName(s)));
 					}
 					return true;
 				}

@@ -118,7 +118,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlArrayImportsCollector();
-		PerlUtil.collectImportedNames(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(project, namespace, file, collector);
 		return collector.getResult();
 	}
 

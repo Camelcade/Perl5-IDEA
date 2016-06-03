@@ -51,16 +51,22 @@ public class PerlCreatePackageFromTemplateHandler extends DefaultCreateFromTempl
 	{
 		String fileName = (String) props.get("NAME");
 		if (fileName.endsWith(".pm"))
+		{
 			fileName = fileName.replace(".pm", "");
+		}
 
 		String packagePrefix = (String) props.get("PERL_PACKAGE_PREFIX");
 
 		assert packagePrefix != null;
 
 		if (packagePrefix.isEmpty())
+		{
 			props.put("PERL_PACKAGE_NAME", fileName);
+		}
 		else
+		{
 			props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.PACKAGE_SEPARATOR + fileName);
+		}
 
 		super.prepareProperties(props);
 	}

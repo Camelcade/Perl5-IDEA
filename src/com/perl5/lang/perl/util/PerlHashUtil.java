@@ -119,7 +119,7 @@ public class PerlHashUtil implements PerlElementTypes
 	public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
 	{
 		PerlImportsCollector collector = new PerlHashImportsCollector();
-		PerlUtil.collectImportedNames(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(project, namespace, file, collector);
 		return collector.getResult();
 	}
 
