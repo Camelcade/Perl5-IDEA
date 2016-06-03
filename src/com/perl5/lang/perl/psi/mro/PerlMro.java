@@ -61,7 +61,7 @@ public abstract class PerlMro
 		}
 
 
-		if (result.size() == 0)
+		if (result.isEmpty())
 			for (String currentPackageName : linearISA)
 			{
 				if (!PerlPackageUtil.isUNIVERSAL(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD

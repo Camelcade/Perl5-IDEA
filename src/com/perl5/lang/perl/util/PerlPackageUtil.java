@@ -183,12 +183,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
 
 		for (String chunk : chunks)
-			if (!(canonicalChunks.size() == 0 && chunk.equals("main")))
+			if (!(canonicalChunks.isEmpty() && chunk.equals("main")))
 				canonicalChunks.add(chunk);
 
 //		System.out.println("Canonical chunks: " + chunks.length);
 
-		if (canonicalChunks.size() == 0)
+		if (canonicalChunks.isEmpty())
 			newName = "main";
 		else
 			newName = StringUtils.join(canonicalChunks, "::");
@@ -242,7 +242,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
-			if (list.size() == 0)
+			if (list.isEmpty())
 				list = getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
 
 			namespaceDefinitions.addAll(list);
@@ -304,7 +304,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @NotNull String packageName)
 	{
 		List<PerlNamespaceDefinition> list = getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
-		if (list.size() == 0)
+		if (list.isEmpty())
 		{
 			list = getDerivedNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
 		}

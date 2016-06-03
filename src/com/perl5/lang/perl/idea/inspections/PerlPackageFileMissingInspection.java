@@ -57,7 +57,7 @@ public class PerlPackageFileMissingInspection extends PerlInspection
 			{
 				List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
 
-				if (namespaceFiles.size() == 0)
+				if (namespaceFiles.isEmpty())
 					registerProblem(holder, o, "Unable to find package file");
 			}
 		};

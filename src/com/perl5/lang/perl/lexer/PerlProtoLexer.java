@@ -155,13 +155,13 @@ public abstract class PerlProtoLexer implements FlexLexer
 	 */
 	protected void pushPreparsedToken(CustomToken token)
 	{
-		assert preparsedTokensList.size() == 0 ||
+		assert preparsedTokensList.isEmpty() ||
 				preparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
 				"Tokens size is " +
 						preparsedTokensList.size() +
 						" new token start is " +
 						token.getTokenStart() +
-						(preparsedTokensList.size() == 0 ? "" :
+						(preparsedTokensList.isEmpty() ? "" :
 								" last token end is " +
 										preparsedTokensList.getLast().getTokenEnd());
 
@@ -175,13 +175,13 @@ public abstract class PerlProtoLexer implements FlexLexer
 	 */
 	protected void unshiftPreparsedToken(CustomToken token)
 	{
-		assert preparsedTokensList.size() == 0 ||
+		assert preparsedTokensList.isEmpty() ||
 				preparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
 				"Tokens size is " +
 						preparsedTokensList.size() +
 						" new token end is " +
 						token.getTokenEnd() +
-						(preparsedTokensList.size() == 0 ? "" :
+						(preparsedTokensList.isEmpty() ? "" :
 								" first start end is " +
 										preparsedTokensList.getFirst().getTokenStart());
 

@@ -74,7 +74,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	{
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
-		if (componentsRoots.size() == 0)
+		if (componentsRoots.isEmpty())
 			return;
 
 
@@ -125,7 +125,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
-		if (componentsRoots.size() == 0)
+		if (componentsRoots.isEmpty())
 			return;
 
 		VirtualFile renamedFile = event.getFile();
@@ -149,7 +149,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	{
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
-		if (componentsRoots.size() == 0)
+		if (componentsRoots.isEmpty())
 			return;
 
 		VirtualFile movedFile = event.getFile();

@@ -195,7 +195,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// globs
 				Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-				if (items.size() == 0)
+				if (items.isEmpty())
 				{
 					items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
 				}
@@ -220,7 +220,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// globs
 				Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-				if (items.size() == 0)
+				if (items.isEmpty())
 				{
 					items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
 				}
@@ -245,7 +245,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// globs
 				Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-				if (items.size() == 0)
+				if (items.isEmpty())
 				{
 					items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
 				}
@@ -263,7 +263,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// declarations
 				Collection<PsiPerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
-				if (subDeclarations.size() == 0)
+				if (subDeclarations.isEmpty())
 				{
 					subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
 				}
@@ -275,7 +275,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// definitions
 				Collection<PerlSubDefinitionBase> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
-				if (subDefinitions.size() == 0)
+				if (subDefinitions.isEmpty())
 				{
 					subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
 				}
@@ -287,7 +287,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// constants
 				Collection<PerlConstant> constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName, projectScope);
-				if (constantsDefinitions.size() == 0)
+				if (constantsDefinitions.isEmpty())
 				{
 					constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName);
 				}
@@ -299,7 +299,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				// globs
 				Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-				if (items.size() == 0)
+				if (items.isEmpty())
 				{
 					items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
 				}

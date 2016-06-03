@@ -140,7 +140,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 //				System.err.println("Checking for " + subName);
 				}
 
-				if (relatedItems.size() == 0)
+				if (relatedItems.isEmpty())
 				{
 					GlobalSearchScope globalSearchScope = GlobalSearchScope.allScope(project);
 
@@ -212,7 +212,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 					}
 
 					// check for autoload
-					if (relatedItems.size() == 0
+					if (relatedItems.isEmpty()
 							&& !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
 							)
 					{

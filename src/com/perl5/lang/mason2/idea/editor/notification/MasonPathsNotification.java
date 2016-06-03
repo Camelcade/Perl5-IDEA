@@ -61,7 +61,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 		{
 			String message = null;
 
-			if (MasonSettings.getInstance(myProject).componentRoots.size() == 0)
+			if (MasonSettings.getInstance(myProject).componentRoots.isEmpty())
 			{
 				message = "Mason2 components roots are not configured";
 			}

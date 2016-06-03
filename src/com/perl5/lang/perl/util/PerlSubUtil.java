@@ -320,7 +320,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 			}
 		}
 
-		if (argumentsList.size() == 0 && optionalAargumentsList.size() == 0)
+		if (argumentsList.isEmpty() && optionalAargumentsList.isEmpty())
 		{
 			return "";
 		}

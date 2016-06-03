@@ -61,7 +61,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 			return true;
 
 		List<PerlSubArgument> arguments = getSubArgumentsList();
-		if (arguments.size() == 0)
+		if (arguments.isEmpty())
 			return false;
 
 		return arguments.get(0).isSelf(getProject());

@@ -61,7 +61,7 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
 		{
 			String message = null;
 
-			if (HTMLMasonSettings.getInstance(myProject).componentRoots.size() == 0)
+			if (HTMLMasonSettings.getInstance(myProject).componentRoots.isEmpty())
 			{
 				message = "HTML::Mason components roots are not configured";
 			}

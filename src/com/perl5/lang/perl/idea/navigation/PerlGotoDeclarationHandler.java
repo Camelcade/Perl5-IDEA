@@ -128,7 +128,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 			}
 		}
 
-		return result.size() == 0 ? null : result.toArray(new PsiElement[result.size()]);
+		return result.isEmpty() ? null : result.toArray(new PsiElement[result.size()]);
 	}
 
 	@Nullable
