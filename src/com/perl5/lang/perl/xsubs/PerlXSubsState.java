@@ -265,7 +265,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 							}
 						}
 
-						if (!stdout.isEmpty())
+						if (!stdout.isEmpty() && !myProject.isDisposed())
 						{
 							new WriteAction<Object>()
 							{
