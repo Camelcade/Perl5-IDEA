@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util.processors;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Processor;
 
 /**
@@ -40,6 +41,10 @@ public class PerlInternalIndexKeysProcessor implements Processor<String>
 	@Override
 	public boolean process(String string)
 	{
+		if (StringUtil.isEmpty(string))
+		{
+			return false;
+		}
 		char firstChar = string.charAt(0);
 		return firstChar == '_' || Character.isLetterOrDigit(firstChar);
 	}
