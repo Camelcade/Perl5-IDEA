@@ -11,6 +11,8 @@ sub file_processor
     {
         my $name = $1;
         $name =~ s{/+}{::}g;
+        return if $name =~ /\QType::Tiny::XS\E/; # see https://github.com/tobyink/p5-type-tiny-xs/issues/4
+        #        print STDERR "Processing $name\n";
         eval "require $name;";
         if (my $e = $@)
         {
