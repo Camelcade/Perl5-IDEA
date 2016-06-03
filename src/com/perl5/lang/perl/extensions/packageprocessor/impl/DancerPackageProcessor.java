@@ -59,7 +59,7 @@ public class DancerPackageProcessor extends PerlPackageProcessorBase implements
 
 	@NotNull
 	@Override
-	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
+	public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement)
 	{
 		return getExportDescriptors();
 	}

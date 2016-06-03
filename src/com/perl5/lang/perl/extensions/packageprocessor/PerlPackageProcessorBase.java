@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -50,31 +50,43 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 
 	}
 
+	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
+	{
+		String packageName = useStatement.getPackageName();
+
+		if (StringUtil.isEmpty(packageName))
+		{
+			return;
+		}
+
+		// fixme handle tags
+		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName))
+		{
+			export.addAll(namespaceDefinition.getEXPORT());
+			exportOk.addAll(namespaceDefinition.getEXPORT_OK());
+		}
+		exportOk.addAll(export);
+	}
+
+
 	@Override
 	@NotNull
-	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
+	public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement)
 	{
 		List<PerlExportDescriptor> result = new ArrayList<PerlExportDescriptor>();
-		Project project = useStatement.getProject();
 		String packageName = useStatement.getPackageName();
 		if (packageName != null)
 		{
 			List<String> parameters = useStatement.getImportParameters();
 //			System.err.println("Import parameters for " + packageName + " are " + parameters);
-			Set<String> packageExport = new HashSet<String>();
-			Set<String> packageExportOk = new HashSet<String>();
+			Set<String> exportNames = new HashSet<String>();
+			Set<String> exportOkNames = new HashSet<String>();
 
-			// fixme handle tags
-			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
-			{
-				packageExport.addAll(namespaceDefinition.getEXPORT());
-				packageExportOk.addAll(namespaceDefinition.getEXPORT_OK());
-			}
-			packageExportOk.addAll(packageExport);
+			addExports(useStatement, exportNames, exportOkNames);
 
 			if (parameters == null)    // default import
 			{
-				for (String item : packageExport)
+				for (String item : exportNames)
 				{
 					result.add(new PerlExportDescriptor(item, packageName));
 				}
@@ -83,7 +95,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 			{
 				for (String parameter : parameters)
 				{
-					if (packageExportOk.contains(parameter))
+					if (exportOkNames.contains(parameter))
 					{
 						result.add(new PerlExportDescriptor(parameter, packageName));
 					}

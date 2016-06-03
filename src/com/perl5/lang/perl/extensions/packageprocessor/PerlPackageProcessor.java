@@ -20,6 +20,7 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 18.08.2015.
@@ -55,6 +56,16 @@ public interface PerlPackageProcessor
 	 * @return list of imported descriptors
 	 */
 	@NotNull
-	List<PerlExportDescriptor> getImports(PerlUseStatement useStatement);
+	List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement);
+
+
+	/**
+	 * Populates export and exportOk sets with exported names
+	 *
+	 * @param useStatement use statement we processing
+	 * @param export       export set to fill
+	 * @param exportOk     export_ok set to fill
+	 */
+	void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
 
 }

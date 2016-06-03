@@ -193,23 +193,28 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 					Map<String, String> options = ((PerlPackageOptionsProvider) packageProcessor).getOptions();
 
 					for (Map.Entry<String, String> option : options.entrySet())
+					{
 						resultSet.addElement(LookupElementBuilder
 								.create(option.getKey())
 								.withTypeText(option.getValue(), true)
 								.withIcon(PerlIcons.PERL_OPTION)
 						);
+					}
 
 					options = ((PerlPackageOptionsProvider) packageProcessor).getOptionsBundles();
 
 					for (Map.Entry<String, String> option : options.entrySet())
+					{
 						resultSet.addElement(LookupElementBuilder
 								.create(option.getKey())
 								.withTypeText(option.getValue(), true)
 								.withIcon(PerlIcons.PERL_OPTIONS)
 						);
+					}
 				}
 
 				if (packageProcessor instanceof PerlPackageParentsProvider && ((PerlPackageParentsProvider) packageProcessor).hasPackageFilesOptions())
+				{
 					PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, new Processor<String>()
 					{
 						@Override
@@ -219,32 +224,28 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 							return true;
 						}
 					});
+				}
 
-				String packageName = useStatement.getPackageName();
-				if (packageName != null)
+				Set<String> export = new HashSet<String>();
+				Set<String> exportOk = new HashSet<String>();
+				packageProcessor.addExports(useStatement, export, exportOk);
+				exportOk.removeAll(export);
+
+				for (String subName : export)
 				{
-					for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
-					{
-						HashSet<String> export = new HashSet<String>(namespaceDefinition.getEXPORT());
-						HashSet<String> exportOk = new HashSet<String>(namespaceDefinition.getEXPORT_OK());
-						// fixme we should resove subs here and put them in with signatures
-						for (String subName : export)
-						{
-							resultSet.addElement(LookupElementBuilder
-									.create(subName)
-									.withIcon(PerlIcons.SUB_GUTTER_ICON)
-									.withTypeText("default", true)
-							);
-						}
-						for (String subName : exportOk)
-						{
-							resultSet.addElement(LookupElementBuilder
-									.create(subName)
-									.withIcon(PerlIcons.SUB_GUTTER_ICON)
-									.withTypeText("optional", true)
-							);
-						}
-					}
+					resultSet.addElement(LookupElementBuilder
+							.create(subName)
+							.withIcon(PerlIcons.SUB_GUTTER_ICON)
+							.withTypeText("default", true)
+					);
+				}
+				for (String subName : exportOk)
+				{
+					resultSet.addElement(LookupElementBuilder
+							.create(subName)
+							.withIcon(PerlIcons.SUB_GUTTER_ICON)
+							.withTypeText("optional", true)
+					);
 				}
 			}
 		}

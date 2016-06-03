@@ -28,17 +28,24 @@ public class PerlExportDescriptor
 	public static final String ALL_SIGILS = "$@%*&";
 
 	private final char mySigil;
+	private final String myExporter;
 	private final String myExportedName;
 	private final String myTargetName;
 	private final String myTargetPackage;
 
-	public PerlExportDescriptor(@NotNull String exportedName, @NotNull String targetPackage)
+	public PerlExportDescriptor(@NotNull String exportedName, @NotNull String exportedBy)
 	{
-		this(exportedName, targetPackage, exportedName);
+		this(exportedBy, exportedName, exportedBy, exportedName);
 	}
 
-	public PerlExportDescriptor(@NotNull String exportedName, @NotNull String targetPackage, @NotNull String targetName)
+	public PerlExportDescriptor(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetPackage)
 	{
+		this(exportedBy, exportedName, targetPackage, exportedName);
+	}
+
+	public PerlExportDescriptor(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetPackage, @NotNull String targetName)
+	{
+		myExporter = exportedBy;
 		myTargetPackage = targetPackage;
 		if (targetName.length() > 0 && StringUtil.containsChar(ALL_SIGILS, targetName.charAt(0)))  // canonical export
 		{
@@ -52,6 +59,12 @@ public class PerlExportDescriptor
 			myExportedName = exportedName;
 			myTargetName = targetName;
 		}
+	}
+
+	@NotNull
+	public String getExporterName()
+	{
+		return myExporter;
 	}
 
 	@NotNull

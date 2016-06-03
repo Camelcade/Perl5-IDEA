@@ -59,7 +59,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 				{
 					resultSet.addElement(LookupElementBuilder
 							.create(exportDescriptor.getExportedName())
-							.withTypeText(exportDescriptor.getTargetCanonicalName())
+							.withTypeText(exportDescriptor.getExporterName())
 							.withIcon(PerlIcons.SUB_GUTTER_ICON)
 					);
 				}
@@ -78,7 +78,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 							{
 								resultSet.addElement(LookupElementBuilder
 										.create(exportDescriptor.getExportedName())
-										.withTypeText(exportDescriptor.getTargetCanonicalName())
+										.withTypeText(exportDescriptor.getExportedName())
 										.withIcon(PerlIcons.SUB_GUTTER_ICON)
 								);
 							}

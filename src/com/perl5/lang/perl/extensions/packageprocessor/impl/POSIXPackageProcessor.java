@@ -16,28 +16,22 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
+import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
- * Created by hurricup on 02.06.2016.
+ * Created by hurricup on 03.06.2016.
  */
-public class Dancer2PackageProcessor extends DancerPackageProcessor
+public class POSIXPackageProcessor extends PerlPackageProcessorBase
 {
-	private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
-
-	static
+	@Override
+	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
 	{
-		for (String keyword : PerlDancer2DSL.DSL_KEYWORDS)
-		{
-			EXPORT_DESCRIPTORS.add(new PerlExportDescriptor("Dancer2", keyword, "Dancer2::Core::DSL"));
-		}
-	}
-
-	public List<PerlExportDescriptor> getExportDescriptors()
-	{
-		return EXPORT_DESCRIPTORS;
+		export.addAll(POSIXExports.EXPORT);
+		exportOk.addAll(POSIXExports.EXPORT_OK);
+		exportOk.addAll(POSIXExports.EXPORT);
 	}
 }

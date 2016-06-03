@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 09.09.2015.
@@ -66,8 +67,14 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
 	}
 
 	@Override
+	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
+	{
+
+	}
+
+	@Override
 	@NotNull
-	public List<PerlExportDescriptor> getImports(PerlUseStatement useStatement)
+	public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement)
 	{
 		return Collections.emptyList();
 	}
