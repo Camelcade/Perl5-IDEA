@@ -42,7 +42,9 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
 			props.put("PERL_PACKAGE_PREFIX", newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtil.getPackageNameByPath(newRelativePath));
 		}
 		else
+		{
 			props.put("PERL_PACKAGE_PREFIX", "");
+		}
 	}
 }
 

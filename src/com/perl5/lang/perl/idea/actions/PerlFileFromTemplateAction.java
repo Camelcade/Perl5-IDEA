@@ -19,16 +19,18 @@ package com.perl5.lang.perl.idea.actions;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.ide.fileTemplates.FileTemplate;
+import com.intellij.ide.fileTemplates.FileTemplateManager;
+import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,20 +39,10 @@ import java.util.List;
 public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware
 {
 	public static final String ACTION_TITLE = "New Perl5 file";
-	public static final String PACKAGE_TEMPLATE_NAME = "Perl5 package";
-	public static final String POD_TEMPLATE_NAME = "Perl5 pod";
-
-	private static final List<String> TEMPLATES_WITH_PATH = new ArrayList<String>(
-			Arrays.asList(
-					PACKAGE_TEMPLATE_NAME,
-					POD_TEMPLATE_NAME
-			)
-	);
 
 	public PerlFileFromTemplateAction()
 	{
 		super("Perl5 File", "Creates a Perl5 file from the specified template", PerlIcons.PERL_LANGUAGE_ICON);
-
 	}
 
 	@Override
@@ -58,13 +50,22 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 	{
 		builder
 				.setTitle(ACTION_TITLE)
-				.addKind("Package", PerlIcons.PM_FILE, PACKAGE_TEMPLATE_NAME)
+				.addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
 				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
 				.addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
-				.addKind("POD file", PerlIcons.POD_FILE, POD_TEMPLATE_NAME)
+				.addKind("POD file", PerlIcons.POD_FILE, "Perl5 pod")
 				.addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
 				.addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
 		;
+
+		FileTypeManagerEx fileTypeManager = FileTypeManagerEx.getInstanceEx();
+		for (FileTemplate fileTemplate : FileTemplateManager.getInstance(project).getAllTemplates())
+		{
+			if (PerlCreateFileFromTemplateHandler.INSTANCE.handlesTemplate(fileTemplate))
+			{
+				builder.addKind(fileTemplate.getName(), fileTypeManager.getFileTypeByExtension(fileTemplate.getExtension()).getIcon(), fileTemplate.getName());
+			}
+		}
 	}
 
 	@Override
@@ -76,14 +77,28 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 	@Override
 	protected PsiFile createFileFromTemplate(String name, FileTemplate template, PsiDirectory dir)
 	{
-		if (TEMPLATES_WITH_PATH.contains(template.getName()) && StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR))
+		final List<String> pathChunks = new ArrayList<String>();
+
+		if (StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR))
 		{
-			final List<String> packageChunks = StringUtil.split(name, PerlPackageUtil.PACKAGE_SEPARATOR);
-			name = packageChunks.remove(packageChunks.size() - 1);
-			for (String packageChunk : packageChunks)
+			pathChunks.addAll(StringUtil.split(name, PerlPackageUtil.PACKAGE_SEPARATOR));
+		}
+		else if (StringUtil.contains(name, "/"))
+		{
+			pathChunks.addAll(StringUtil.split(name, "/"));
+		}
+		else
+		{
+			pathChunks.add(name);
+		}
+		name = pathChunks.remove(pathChunks.size() - 1);
+
+		for (String pathChunk : pathChunks)
+		{
+			if (StringUtil.isNotEmpty(pathChunk))
 			{
-				final PsiDirectory sub = dir.findSubdirectory(packageChunk);
-				dir = sub == null ? dir.createSubdirectory(packageChunk) : sub;
+				final PsiDirectory sub = dir.findSubdirectory(pathChunk);
+				dir = sub == null ? dir.createSubdirectory(pathChunk) : sub;
 			}
 		}
 		return super.createFileFromTemplate(name, template, dir);
