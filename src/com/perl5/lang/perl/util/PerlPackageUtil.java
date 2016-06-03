@@ -259,7 +259,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName)
 	{
-		return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+		return getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
 	}
 
 	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName, GlobalSearchScope scope)

@@ -16,8 +16,12 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -155,4 +159,10 @@ public class PerlExportDescriptor
 		result = 31 * result + getTargetPackage().hashCode();
 		return result;
 	}
+
+	public void processRelatedItems(@NotNull Project project, @NotNull Processor<PsiElement> processor)
+	{
+		PerlSubUtil.processRelatedItems(getTargetCanonicalName(), project, processor);
+	}
+
 }

@@ -39,9 +39,12 @@
       <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scripts</li>
       <li>Informative notifications on failed attempts to start perl script when SDK or perl path is not configured</li>
       <li>Perl settings are now stored in two separate files: perl5local.xml and perl5shared.xml. Local is machine-dependent, contains paths and so on, shared can be shared with VCS. (NB. you need to reconfigure your perl settings after this update. .idea/perl5.xml may be deleted)</li>
-      <li>Implemented Dancer & Dancer2 DSL importing</li>
-      <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File)</li>
-      <li>POSIX package processor, imports should work fine now</li>
+      <li>Exporter<ul>
+          <li>Implemented Dancer & Dancer2 DSL importing</li>
+          <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File)</li>
+          <li>POSIX package processor, imports should work fine now</li>
+          <li>Imported subs has signatures in completion lookup elements</li>
+      </ul></li>
       <li>IntelliJ IDEA:
       <ul>
         <li>Perl Module SDK is now configurable, so you may have a Java project with perl module in it</li>

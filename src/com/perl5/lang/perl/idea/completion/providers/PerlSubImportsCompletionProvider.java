@@ -19,19 +19,18 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceContainer;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,53 +38,65 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters>
 {
+	protected static void fillWithNamespaceImports(@NotNull PerlNamespaceContainer namespaceContainer, @NotNull final CompletionResultSet resultSet)
+	{
+		for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
+		{
+			exportDescriptor.processRelatedItems(namespaceContainer.getProject(), new Processor<PsiElement>()
+			{
+				@Override
+				public boolean process(PsiElement element)
+				{
+					// fixme for wierd situations when Foo::Bar::sub exported as supersub we need to force another name here
+					resultSet.addElement(PerlSubCompletionUtil.getSmartLookupElement(element));
+					return true;
+				}
+			});
+		}
+	}
+
 	public void addCompletions(@NotNull final CompletionParameters parameters,
 							   ProcessingContext context,
 							   @NotNull final CompletionResultSet resultSet)
 	{
-		PsiElement method = parameters.getPosition().getParent();
-		assert method instanceof PsiPerlMethod;
+		PsiElement position = parameters.getOriginalPosition();
 
-		if (!((PsiPerlMethod) method).isObjectMethod())
+		if (position == null)
 		{
-			Project project = method.getProject();
-			if (!((PsiPerlMethod) method).hasExplicitNamespace())
+			return;
+		}
+
+		PsiPerlMethod method = (PsiPerlMethod) position.getParent();
+
+		if (method.isObjectMethod())
+		{
+			return;
+		}
+
+		Project project = method.getProject();
+		if (!method.hasExplicitNamespace())
+		{
+			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
+			if (namespaceContainer != null)
 			{
-				PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
-
-				assert namespaceContainer != null;
-
-				for (PerlExportDescriptor exportDescriptor : PerlSubUtil.getImportedSubsDescriptors(project, namespaceContainer.getPackageName(), parameters.getOriginalFile()))
-				{
-					resultSet.addElement(LookupElementBuilder
-							.create(exportDescriptor.getExportedName())
-							.withTypeText(exportDescriptor.getExporterName())
-							.withIcon(PerlIcons.SUB_GUTTER_ICON)
-					);
-				}
+				fillWithNamespaceImports(namespaceContainer, resultSet);
 			}
-			else
-			{    // not an object method, but has explicit namespace
-				PerlNamespaceElement namespaceElement = ((PsiPerlMethod) method).getNamespaceElement();
-				if (namespaceElement != null)
+		}
+		else
+		{    // not an object method, but has explicit namespace
+			PerlNamespaceElement namespaceElement = method.getNamespaceElement();
+			if (namespaceElement != null)
+			{
+				String targetPackageName = namespaceElement.getCanonicalName();
+				if (targetPackageName != null)
 				{
-					String targetPackageName = namespaceElement.getCanonicalName();
-					if (targetPackageName != null)
-					{    // fixme partially not dry with above block
-						for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
-						{
-							for (PerlExportDescriptor exportDescriptor : namespaceDefinition.getImportedSubsDescriptors())
-							{
-								resultSet.addElement(LookupElementBuilder
-										.create(exportDescriptor.getExportedName())
-										.withTypeText(exportDescriptor.getExportedName())
-										.withIcon(PerlIcons.SUB_GUTTER_ICON)
-								);
-							}
-						}
+					for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
+					{
+						fillWithNamespaceImports(namespaceDefinition, resultSet);
 					}
 				}
 			}
 		}
 	}
+
 }

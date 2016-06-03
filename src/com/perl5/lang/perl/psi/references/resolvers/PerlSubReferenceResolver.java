@@ -42,6 +42,7 @@ import java.util.List;
  */
 public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolver<PerlSubReference>
 {
+	// fixme replace with PerlSubUtil#processRelatedItems
 	public static void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)
 	{
 		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))

@@ -239,26 +239,34 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 			PerlSubNameElement subNameElement = methodElement.getSubNameElement();
 
 			if ("new".equals(subNameElement.getName()))
+			{
 				return methodElement.getPackageName();
+			}
 
 			PsiReference reference = subNameElement.getReference();
 
 			if (reference instanceof PerlSubReference)
+			{
 				for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 				{
 					PsiElement targetElement = resolveResult.getElement();
 					if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).getSubAnnotations().getReturns() != null)
+					{
 						return ((PerlSubDefinitionBase) targetElement).getSubAnnotations().getReturns();
+					}
 					else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns() != null)
+					{
 						return ((PerlSubDeclaration) targetElement).getSubAnnotations().getReturns();
+					}
 				}
+			}
 		}
 
 		return null;
 	}
 
 	/**
-	 * Returns a map of imported subs names
+	 * Returns a list of imported descriptors
 	 *
 	 * @param project   Project to search in
 	 * @param namespace namespace to search in
@@ -353,7 +361,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		String packageName = subBase.getPackageName();
 
 		if (classRecursion.contains(packageName))
+		{
 			return subBase;
+		}
 
 		classRecursion.add(packageName);
 
@@ -365,7 +375,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static PerlSubBase getDirectSuperMethod(PerlSubBase subBase)
 	{
 		if (!subBase.isMethod())
+		{
 			return null;
+		}
 
 		Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
 				subBase.getProject(),
@@ -438,6 +450,44 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		});
 
 		return overridingSubs;
+	}
+
+	public static void processRelatedItems(@NotNull String canonicalName, @NotNull Project project, @NotNull Processor<PsiElement> processor)
+	{
+		processRelatedItems(canonicalName, project, PerlScopes.getProjectAndLibrariesScope(project), processor);
+	}
+
+	// fixme this should replace PerlSubReferenceResolver#collectRelatedItems
+	public static void processRelatedItems(@NotNull String canonicalName, @NotNull Project project, @NotNull GlobalSearchScope searchScope, @NotNull Processor<PsiElement> processor)
+	{
+		for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope))
+		{
+			if (!processor.process(target))
+			{
+				return;
+			}
+		}
+		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
+		{
+			if (!processor.process(target))
+			{
+				return;
+			}
+		}
+		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
+		{
+			if (!processor.process(target))
+			{
+				return;
+			}
+		}
+		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
+		{
+			if (!processor.process(target))
+			{
+				return;
+			}
+		}
 	}
 
 }

@@ -19,14 +19,13 @@ package com.perl5.lang.perl.idea.completion.util;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +56,28 @@ public class PerlSubCompletionUtil
 		return newElement;
 	}
 
+	public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element)
+	{
+		if (element instanceof PerlSubDefinitionBase)
+		{
+			return getSubDefinitionLookupElement((PerlSubDefinitionBase) element);
+		}
+		else if (element instanceof PerlSubDeclaration)
+		{
+			return getSubDeclarationLookupElement((PerlSubBase) element);
+		}
+		else if (element instanceof PerlGlobVariable)
+		{
+			return getGlobLookupElement((PerlGlobVariable) element);
+		}
+		else if (element instanceof PerlConstant)
+		{
+			return getConstantLookupElement((PerlConstant) element);
+		}
+		throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
+	}
+
+	@NotNull
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration)
 	{
 		return LookupElementBuilder
@@ -67,6 +88,7 @@ public class PerlSubCompletionUtil
 
 	}
 
+	@NotNull
 	public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable)
 	{
 		return LookupElementBuilder
@@ -76,6 +98,7 @@ public class PerlSubCompletionUtil
 
 	}
 
+	@NotNull
 	public static LookupElementBuilder getConstantLookupElement(PerlConstant constant)
 	{
 		return LookupElementBuilder
@@ -84,79 +107,13 @@ public class PerlSubCompletionUtil
 
 	}
 
+	@NotNull
 	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
 	{
 		return getSubDefinitionLookupElement(
 				subDefinition.getSubName(),
 				subDefinition.getSubArgumentsListAsString(),
 				subDefinition);
-	}
-
-	// fixme dont know why modifying of definition lookup element doesn't work
-	public static LookupElementBuilder getIncompleteSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition, String prefix)
-	{
-		String indexKeyName =
-				prefix +
-						(subDefinition.isMethod() ? "->" : PerlPackageUtil.PACKAGE_SEPARATOR) +
-						subDefinition.getSubName();
-
-		String argsString = subDefinition.getSubArgumentsListAsString();
-
-		LookupElementBuilder newElement = LookupElementBuilder
-				.create(indexKeyName)
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
-				.withPresentableText(subDefinition.getSubName())
-				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated());
-
-		if (!argsString.isEmpty())
-		{
-			newElement = newElement
-					.withInsertHandler(SUB_SELECTION_HANDLER)
-					.withTailText(argsString);
-		}
-
-		return newElement;
-	}
-
-	public static LookupElementBuilder getIncompleteSubDeclarationLookupElement(PerlSubDeclaration subDeclaration, String prefix)
-	{
-		String indexKeyName =
-				prefix +
-						(subDeclaration.isMethod() ? "->" : PerlPackageUtil.PACKAGE_SEPARATOR) +
-						subDeclaration.getSubName();
-
-		PerlSubAnnotations subAnnotations = subDeclaration.getSubAnnotations();
-
-		return LookupElementBuilder
-				.create(indexKeyName)
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
-				.withStrikeoutness(subAnnotations.isDeprecated())
-				.withPresentableText(subDeclaration.getSubName())
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				;
-	}
-
-	public static LookupElementBuilder getIncompleteGlobLookupElement(PerlGlobVariable globVariable, String prefix)
-	{
-		String indexKeyName = prefix + PerlPackageUtil.PACKAGE_SEPARATOR + globVariable.getName();
-
-		return LookupElementBuilder
-				.create(indexKeyName)
-				.withIcon(PerlIcons.GLOB_GUTTER_ICON)
-				.withPresentableText(globVariable.getName())
-				.withInsertHandler(SUB_SELECTION_HANDLER);
-
-	}
-
-	public static LookupElementBuilder getIncompleteConstantLookupElement(PerlConstant constant, String prefix)
-	{
-		String indexKeyName = prefix + PerlPackageUtil.PACKAGE_SEPARATOR + constant.getName();
-
-		return LookupElementBuilder
-				.create(indexKeyName)
-				.withIcon(PerlIcons.CONSTANT_GUTTER_ICON)
-				.withPresentableText(constant.getName());
-
 	}
 
 	public static void fillWithUnresolvedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
