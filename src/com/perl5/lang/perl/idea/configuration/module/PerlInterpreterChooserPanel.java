@@ -95,7 +95,7 @@ public class PerlInterpreterChooserPanel extends JPanel
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(ScrollPaneFactory.createScrollPane(myList), BorderLayout.CENTER);
 		add(panel, BorderLayout.CENTER);
-		if (myListModel.getSize() > 0)
+		if (!myListModel.isEmpty())
 		{
 			myList.setSelectedIndex(0);
 		}

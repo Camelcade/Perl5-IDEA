@@ -54,6 +54,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 		return currentFeaturesTable.clone();
 	}
 
+	@NotNull
 	@Override
 	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
 	{
@@ -64,7 +65,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 		{
 			allOptions.removeAll(getOptions().keySet());
 
-			if (allOptions.size() > 0 && !MOJO_BASE.equals(allOptions.get(0)))
+			if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.get(0)))
 			{
 				loadedPackages.add(allOptions.get(0));
 			}
@@ -101,7 +102,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
 			else
 			{
 				allOptions.removeAll(getOptions().keySet());
-				if (allOptions.size() > 0)
+				if (!allOptions.isEmpty())
 				{
 					currentList.add(allOptions.get(0));
 				}

@@ -131,7 +131,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			{
 				arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
 
-				if (arguments.size() > 0)
+				if (!arguments.isEmpty())
 				{
 					boolean useShift = false;
 
@@ -190,10 +190,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 				}
 			}
 
-			if (superArgs.size() > 0)
+			if (!superArgs.isEmpty())
 				superArgs.remove(0);
 
-			if (arguments.size() > 0 && !arguments.get(0).isEmpty())
+			if (!arguments.isEmpty() && !arguments.get(0).isEmpty())
 			{
 				code.append("$self->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
 			}

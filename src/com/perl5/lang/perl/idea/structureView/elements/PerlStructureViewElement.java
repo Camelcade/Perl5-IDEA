@@ -395,7 +395,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				}
 			}
 
-			if (inheritedResult.size() > 0)
+			if (!inheritedResult.isEmpty())
 				result.addAll(0, inheritedResult);
 		}
 

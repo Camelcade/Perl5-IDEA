@@ -456,7 +456,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				}
 			}
 
-			if (preparsedTokensList.size() > 0)
+			if (!preparsedTokensList.isEmpty())
 			{
 				return getPreParsedToken();
 			}

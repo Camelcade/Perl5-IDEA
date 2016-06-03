@@ -48,7 +48,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 				nameIdentifier = element;
 
 			List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions();
-			if (parentNamespaces.size() > 0)
+			if (!parentNamespaces.isEmpty())
 			{
 				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
 						.create(AllIcons.Gutter.ImplementingMethod)
@@ -59,7 +59,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 			}
 
 			Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions();
-			if (childNamespaces.size() > 0)
+			if (!childNamespaces.isEmpty())
 			{
 				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
 						.create(AllIcons.Gutter.ImplementedMethod)
@@ -97,7 +97,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 
 					final List<PerlSubBase> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubBase) element, containingNamespace);
 
-					if (overridingSubs.size() > 0)
+					if (!overridingSubs.isEmpty())
 					{
 						NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
 								.create(AllIcons.Gutter.OverridenMethod)

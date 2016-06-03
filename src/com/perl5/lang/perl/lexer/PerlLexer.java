@@ -1945,7 +1945,7 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public IElementType advance() throws IOException
 	{
-		boolean wasPreparsed = preparsedTokensList.size() > 0;
+		boolean wasPreparsed = !preparsedTokensList.isEmpty();
 
 		IElementType tokenType = super.advance();
 
@@ -1965,7 +1965,7 @@ public class PerlLexer extends PerlLexerGenerated
 					yybegin(YYINITIAL);
 				}
 /*
-				else if (stateStack.size() > 0)
+				else if (!stateStack.isEmpty())
 				{
 					int i = stateStack.size() - 1;
 					while (i >= 0 && waitingHereDoc(stateStack.get(i)))

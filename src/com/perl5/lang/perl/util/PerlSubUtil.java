@@ -296,7 +296,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 		for (PerlSubArgument argument : subArguments)
 		{
-			if (optionalAargumentsList.size() > 0 || argument.isOptional())
+			if (!optionalAargumentsList.isEmpty() || argument.isOptional())
 			{
 				optionalAargumentsList.add(argument.toStringShort());
 			}
@@ -308,7 +308,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 			int compiledListSize = argumentsList.size() + optionalAargumentsList.size();
 			if (compiledListSize > 5 && argumentsNumber > compiledListSize)
 			{
-				if (optionalAargumentsList.size() > 0)
+				if (!optionalAargumentsList.isEmpty())
 				{
 					optionalAargumentsList.add("...");
 				}

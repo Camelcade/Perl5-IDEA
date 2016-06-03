@@ -43,13 +43,13 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
 	private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay)
 	{
 		Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
-		if (definitions.size() > 0)
+		if (!definitions.isEmpty())
 		{
 			HashSet<PerlNamespaceDefinition> parents = new HashSet<PerlNamespaceDefinition>();
 			for (PerlNamespaceDefinition definition : definitions)
 				parents.addAll(definition.getParentNamespaceDefinitions());
 
-			if (parents.size() > 0)
+			if (!parents.isEmpty())
 			{
 				passedWay.add(packageName);
 				for (PerlNamespaceDefinition parent : parents)

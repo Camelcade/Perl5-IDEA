@@ -166,7 +166,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		mySettings.updateSubstitutors();
 		mySettings.settingsUpdated();
 
-		if (rootsDiff.size() > 0 || extDiff.size() > 0 || forceReparse)
+		if (!rootsDiff.isEmpty() || !extDiff.isEmpty() || forceReparse)
 		{
 			reparseComponents(rootsDiff, extDiff, forceReparse);
 		}
@@ -174,8 +174,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 	protected void reparseComponents(final Set<String> rootsDiff, Set<String> extDiff, final boolean forceAll)
 	{
-		boolean rootsChanged = rootsDiff.size() > 0;
-		boolean extChanged = extDiff.size() > 0;
+		boolean rootsChanged = !rootsDiff.isEmpty();
+		boolean extChanged = !extDiff.isEmpty();
 
 		if (rootsChanged || forceAll)
 			extDiff.addAll(mySettings.substitutedExtensions);

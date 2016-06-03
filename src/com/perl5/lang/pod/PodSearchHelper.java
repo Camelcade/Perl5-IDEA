@@ -74,7 +74,7 @@ public class PodSearchHelper
 	{
 		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, fileName, PerlScopes.getProjectAndLibrariesScope(project));
 
-		if (files.size() > 0)
+		if (!files.isEmpty())
 		{
 			return GlobalSearchScope.filesScope(project, files);
 		}

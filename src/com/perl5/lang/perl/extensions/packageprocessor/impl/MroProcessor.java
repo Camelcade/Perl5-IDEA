@@ -33,7 +33,7 @@ public class MroProcessor extends PerlPragmaProcessorBase implements PerlMroProv
 	{
 		List<String> parameters = useStatement.getImportParameters();
 
-		if (parameters != null && parameters.size() > 0 && "c3".equals(parameters.get(0)))
+		if (parameters != null && !parameters.isEmpty() && "c3".equals(parameters.get(0)))
 		{
 			return PerlMroType.C3;
 		}

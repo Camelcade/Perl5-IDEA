@@ -48,7 +48,7 @@ public abstract class PerlProtoLexer implements FlexLexer
 	{
 		IElementType tokenType = null;
 
-		if (preparsedTokensList.size() > 0)
+		if (!preparsedTokensList.isEmpty())
 			tokenType = getPreParsedToken();
 		else
 			tokenType = perlAdvance();
@@ -70,7 +70,7 @@ public abstract class PerlProtoLexer implements FlexLexer
 	@Override
 	public int yystate()
 	{
-		return preparsedTokensList.size() > 0 ? getPreparsedLexicalState() : getRealLexicalState();
+		return !preparsedTokensList.isEmpty() ? getPreparsedLexicalState() : getRealLexicalState();
 	}
 
 

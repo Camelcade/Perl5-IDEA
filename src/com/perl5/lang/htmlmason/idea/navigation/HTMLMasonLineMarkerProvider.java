@@ -53,7 +53,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider i
 			}
 
 			List<HTMLMasonFileImpl> childComponents = ((HTMLMasonFileImpl) element).getChildComponents();
-			if (childComponents.size() > 0)
+			if (!childComponents.isEmpty())
 			{
 				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
 						.create(AllIcons.Gutter.ImplementedMethod)

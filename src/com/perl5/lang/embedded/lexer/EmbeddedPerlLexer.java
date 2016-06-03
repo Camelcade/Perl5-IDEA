@@ -79,7 +79,7 @@ public class EmbeddedPerlLexer extends PerlTemplatingLexer implements EmbeddedPe
 				setCustomState(LEX_PERL_BLOCK);
 			}
 
-			assert preparsedTokensList.size() > 0;
+			assert !preparsedTokensList.isEmpty();
 			return getPreParsedToken();
 		}
 		else if (currentState == LEX_PERL_BLOCK)

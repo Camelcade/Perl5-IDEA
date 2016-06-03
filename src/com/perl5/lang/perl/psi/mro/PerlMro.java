@@ -56,7 +56,7 @@ public abstract class PerlMro
 		{
 			collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName);
 
-			if (result.size() > 0)
+			if (!result.isEmpty())
 				break;
 		}
 
@@ -68,7 +68,7 @@ public abstract class PerlMro
 				{
 					collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + "AUTOLOAD");
 
-					if (result.size() > 0)
+					if (!result.isEmpty())
 						break;
 				}
 			}

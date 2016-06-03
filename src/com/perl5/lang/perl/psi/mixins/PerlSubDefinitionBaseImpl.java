@@ -80,7 +80,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	{
 		List<PerlSubArgument> subArguments = getSubArgumentsList();
 
-		if (isMethod() && subArguments.size() > 0)
+		if (isMethod() && !subArguments.isEmpty())
 			subArguments.remove(0);
 
 		return PerlSubUtil.getArgumentsListAsString(subArguments);

@@ -69,21 +69,21 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 				isAlpha = matcher.group(1) != null;
 				revision = Integer.parseInt(versionChunks.remove(0));
 
-				if (versionChunks.size() > 0)
+				if (!versionChunks.isEmpty())
 				{
 					if (versionChunks.get(0).length() > 3)
 						throw new Exception();
 
 					major = Integer.parseInt(versionChunks.remove(0));
 
-					if (versionChunks.size() > 0)
+					if (!versionChunks.isEmpty())
 					{
 						if (versionChunks.get(0).length() > 3)
 							throw new Exception();
 
 						minor = Integer.parseInt(versionChunks.remove(0));
 
-						if (versionChunks.size() > 0)
+						if (!versionChunks.isEmpty())
 						{
 							extraChunks = new ArrayList<Integer>();
 							for (String chunk : versionChunks)
@@ -151,10 +151,10 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 	{
 		List<String> result = new ArrayList<String>(Arrays.asList(Integer.toString(revision)));
 
-		if (major > 0 || minor > 0 || extraChunks.size() > 0)
+		if (major > 0 || minor > 0 || !extraChunks.isEmpty())
 			result.add(Integer.toString(major));
 
-		if (minor > 0 || extraChunks.size() > 0)
+		if (minor > 0 || !extraChunks.isEmpty())
 			result.add(Integer.toString(minor));
 
 		for (Integer chunk : extraChunks)

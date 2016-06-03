@@ -173,7 +173,7 @@ public class PerlSdkType extends SdkType
 	{
 		List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
 
-		if (versionLines.size() > 0)
+		if (!versionLines.isEmpty())
 		{
 			Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
 

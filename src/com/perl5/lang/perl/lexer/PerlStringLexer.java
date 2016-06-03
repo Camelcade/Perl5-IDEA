@@ -48,7 +48,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	public IElementType perlAdvance() throws IOException
 	{
 		int bufferEnd = getBufferEnd();
-		boolean wasPreparsed = preparsedTokensList.size() > 0;
+		boolean wasPreparsed = !preparsedTokensList.isEmpty();
 		IElementType tokenType = super.perlAdvance();
 
 		// handling tailing spaces

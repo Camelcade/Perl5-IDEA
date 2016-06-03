@@ -158,7 +158,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 							PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) declaration.getParent();
 							List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-							if (assignmentElements.size() > 0)
+							if (!assignmentElements.isEmpty())
 							{
 								PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
@@ -213,7 +213,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 												PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr) element.getParent();
 												List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-												if (assignmentElements.size() > 0)
+												if (!assignmentElements.isEmpty())
 												{
 													PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 

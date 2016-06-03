@@ -450,7 +450,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 				}
 			}
 
-			if (preparsedTokensList.size() > 0)
+			if (!preparsedTokensList.isEmpty())
 			{
 				return getPreParsedToken();
 			}

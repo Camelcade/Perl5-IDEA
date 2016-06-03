@@ -54,7 +54,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 					}
 				}
 
-				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+				if (!PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).isEmpty())
 				{
 					registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with constant definition", name));
 				}
@@ -67,7 +67,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				Project project = o.getProject();
 				String canonicalName = o.getCanonicalName();
 
-				if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 0)
+				if (!PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).isEmpty())
 					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)

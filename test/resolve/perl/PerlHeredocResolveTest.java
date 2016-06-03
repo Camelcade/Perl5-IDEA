@@ -60,7 +60,7 @@ public class PerlHeredocResolveTest extends PerlResolveTestCase implements PerlE
 			}
 		});
 
-		assertTrue(openers.size() > 0);
+		assertNotEmpty(openers);
 		assertEquals(openers.size(), terminators.size());
 
 		for (int i = 0; i < terminators.size(); i++)
