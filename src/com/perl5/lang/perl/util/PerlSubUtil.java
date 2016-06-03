@@ -19,7 +19,6 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -268,16 +267,14 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	/**
 	 * Returns a list of imported descriptors
 	 *
-	 * @param project   Project to search in
-	 * @param namespace namespace to search in
-	 * @param file      PsiFile to search in
+	 * @param rootElement element to start looking from
 	 * @return result map
 	 */
 	@NotNull
-	public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull PsiElement rootElement)
 	{
 		PerlImportsCollector collector = new PerlSubImportsCollector();
-		PerlUtil.processImportedEntities(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(rootElement, collector);
 		return collector.getResult();
 	}
 

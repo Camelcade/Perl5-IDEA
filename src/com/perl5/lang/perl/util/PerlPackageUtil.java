@@ -37,14 +37,12 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -124,11 +122,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static boolean isDeprecated(Project project, String packageName)
 	{
 		if (isMain(packageName))
+		{
 			return false;
+		}
 
 		for (PerlNamespaceDefinition definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+		{
 			if (definition.isDeprecated())
+			{
 				return true;
+			}
+		}
 
 		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(packageName));
 	}
@@ -165,7 +169,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		String newName;
 
 		if ((newName = CANONICAL_NAMES_CACHE.get(name)) != null)
+		{
 			return newName;
+		}
 
 		String originalName = name;
 
@@ -180,18 +186,28 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 //		System.out.println("Chunks: " + chunks.length);
 
 		if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
+		{
 			chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
+		}
 
 		for (String chunk : chunks)
+		{
 			if (!(canonicalChunks.isEmpty() && chunk.equals("main")))
+			{
 				canonicalChunks.add(chunk);
+			}
+		}
 
 //		System.out.println("Canonical chunks: " + chunks.length);
 
 		if (canonicalChunks.isEmpty())
+		{
 			newName = "main";
+		}
 		else
+		{
 			newName = StringUtils.join(canonicalChunks, "::");
+		}
 
 //		System.out.println("Canonical: " + newName + "\n");
 		CANONICAL_NAMES_CACHE.put(originalName, newName);
@@ -243,7 +259,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
 			if (list.isEmpty())
+			{
 				list = getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+			}
 
 			namespaceDefinitions.addAll(list);
 		}
@@ -374,9 +392,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				{
 					PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
 					if (psiFile != null)
+					{
 						for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
+						{
 							if (oldPackageName.equals(namespaceDefinition.getPackageName()))
+							{
 								queue.addElement(namespaceDefinition, newPackageName);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -395,13 +419,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		VirtualFile directorySourceRoot = PerlUtil.getFileClassRoot(project, directory);
 
 		if (directorySourceRoot != null)
+		{
 			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
+			{
 				if (!file.isDirectory() && file.getFileType() == PerlFileTypePackage.INSTANCE && directorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					String relativePath = VfsUtil.getRelativePath(file, directory);
 					String oldFilePath = oldPath + "/" + relativePath;
 					collectNestedPackageDefinitionsFromFile(queue, file, oldFilePath);
 				}
+			}
+		}
 	}
 
 	/**
@@ -419,11 +447,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if (oldDirectorySourceRoot != null)
 		{
 			for (VirtualFile file : VfsUtil.collectChildrenRecursively(directory))
+			{
 				if (!file.isDirectory() && file.getFileType() == PerlFileTypePackage.INSTANCE && oldDirectorySourceRoot.equals(PerlUtil.getFileClassRoot(project, file)))
 				{
 					PsiFile psiFile = psiManager.findFile(file);
 
 					if (psiFile != null)
+					{
 						for (PsiReference inboundReference : ReferencesSearch.search(psiFile))
 						{
 							String newPackagePath = newPath + "/" + VfsUtil.getRelativePath(file, directory);
@@ -436,7 +466,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 								PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
 							}
 						}
+					}
 				}
+			}
 		}
 	}
 
@@ -497,21 +529,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					if (VfsUtil.isAncestor(classRoot, file, true))
 					{
 						if (!processor.process(file, classRoot))
+						{
 							return;
+						}
 					}
 				}
 			}
 		}
-	}
-
-	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull PsiFile file)
-	{
-		return getPackageImports(project, packageName, GlobalSearchScope.fileScope(project, file.getVirtualFile()));
-	}
-
-	public static Collection<PerlUseStatement> getPackageImports(@NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
-	{
-		return PerlStubIndex.getElements(PerlUseStatementStubIndex.KEY, packageName, project, scope, PerlUseStatement.class);
 	}
 
 	public static TextRange getPackageRangeFromOffset(int startOffset, String text)
@@ -561,7 +585,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	)
 	{
 		if (childClass == null || recursionMap.contains(childClass))
+		{
 			return;
+		}
 		recursionMap.add(childClass);
 
 		for (PerlNamespaceDefinition parentNamespace : childClass.getParentNamespaceDefinitions())
@@ -592,7 +618,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 												  Processor<PerlSubBase> processor)
 	{
 		if (recursionSet == null)
+		{
 			recursionSet = new THashSet<PerlNamespaceDefinition>();
+		}
 
 		recursionSet.add(namespaceDefinition);
 
@@ -632,7 +660,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static VirtualFile getPackageVirtualFileByPackageName(Project project, String packageName)
 	{
 		if (StringUtil.isEmpty(packageName))
+		{
 			return null;
+		}
 
 		String packagePath = getPackagePathByName(packageName);
 		VirtualFile[] classRoots = ProjectRootManager.getInstance(project).orderEntries().getClassesRoots();

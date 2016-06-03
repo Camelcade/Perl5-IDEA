@@ -59,12 +59,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 							   ProcessingContext context,
 							   @NotNull final CompletionResultSet resultSet)
 	{
-		PsiElement position = parameters.getOriginalPosition();
-
-		if (position == null)
-		{
-			return;
-		}
+		PsiElement position = parameters.getPosition();
 
 		PsiPerlMethod method = (PsiPerlMethod) position.getParent();
 
@@ -76,7 +71,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 		Project project = method.getProject();
 		if (!method.hasExplicitNamespace())
 		{
-			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(method, PerlNamespaceContainer.class);
+			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(position, PerlNamespaceContainer.class);
 			if (namespaceContainer != null)
 			{
 				fillWithNamespaceImports(namespaceContainer, resultSet);

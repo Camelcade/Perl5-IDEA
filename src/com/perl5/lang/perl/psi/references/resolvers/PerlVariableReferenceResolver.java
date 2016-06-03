@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.references.resolvers;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -69,54 +68,47 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			Project project = myVariable.getProject();
 			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myVariable, PerlNamespaceContainer.class);
 			assert namespaceContainer != null;
-			String packageName = namespaceContainer.getPackageName();
 
-			if (packageName != null)
+			String variableName = myVariable.getName();
+
+			if (actualType == PerlVariableType.SCALAR)
 			{
-				PsiFile originalFile = myVariable.getContainingFile();
-				String variableName = myVariable.getName();
-
-				// fixme DRY this
-				if (actualType == PerlVariableType.SCALAR)
+				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors())
 				{
-					for (PerlExportDescriptor importEntry : PerlScalarUtil.getImportedScalarsDescritptors(project, packageName, originalFile))
+					if (importEntry.getExportedName().equals(variableName))
 					{
-						if (importEntry.getExportedName().equals(variableName))
+						for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
 						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
+							result.add(new PsiElementResolveResult(targetVariable));
 						}
 					}
 				}
-				else if (actualType == PerlVariableType.ARRAY)
+			}
+			else if (actualType == PerlVariableType.ARRAY)
+			{
+				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors())
 				{
-					for (PerlExportDescriptor importEntry : PerlArrayUtil.getImportedArraysDescriptors(project, packageName, originalFile))
+					if (importEntry.getExportedName().equals(variableName))
 					{
-						if (importEntry.getExportedName().equals(variableName))
+						for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
 						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
+							result.add(new PsiElementResolveResult(targetVariable));
 						}
 					}
 				}
-				else if (actualType == PerlVariableType.HASH)
+			}
+			else if (actualType == PerlVariableType.HASH)
+			{
+				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors())
 				{
-					for (PerlExportDescriptor importEntry : PerlHashUtil.getImportedHashesDescriptors(project, packageName, originalFile))
+					if (importEntry.getExportedName().equals(variableName))
 					{
-						if (importEntry.getExportedName().equals(variableName))
+						for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
 						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
+							result.add(new PsiElementResolveResult(targetVariable));
 						}
 					}
 				}
-
 			}
 
 			// our variable declaration

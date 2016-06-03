@@ -258,7 +258,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getEXPORT();
+		}
 
 		return getExporterInfo().getEXPORT();
 	}
@@ -269,7 +271,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getEXPORT_OK();
+		}
 
 		return getExporterInfo().getEXPORT_OK();
 	}
@@ -280,7 +284,9 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	{
 		PerlNamespaceDefinitionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getEXPORT_TAGS();
+		}
 
 		return getExporterInfo().getEXPORT_TAGS();
 	}
@@ -289,48 +295,28 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public List<PerlExportDescriptor> getImportedSubsDescriptors()
 	{
-		String packageName = getPackageName();
-		if (packageName != null)
-		{
-			return PerlSubUtil.getImportedSubsDescriptors(getProject(), packageName, getContainingFile());
-		}
-		return Collections.emptyList();
+		return PerlSubUtil.getImportedSubsDescriptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedScalarDescriptors()
 	{
-		String packageName = getPackageName();
-		if (packageName != null)
-		{
-			return PerlScalarUtil.getImportedScalarsDescritptors(getProject(), packageName, getContainingFile());
-		}
-		return Collections.emptyList();
+		return PerlScalarUtil.getImportedScalarsDescritptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedArrayDescriptors()
 	{
-		String packageName = getPackageName();
-		if (packageName != null)
-		{
-			return PerlArrayUtil.getImportedArraysDescriptors(getProject(), packageName, getContainingFile());
-		}
-		return Collections.emptyList();
+		return PerlArrayUtil.getImportedArraysDescriptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedHashDescriptors()
 	{
-		String packageName = getPackageName();
-		if (packageName != null)
-		{
-			return PerlHashUtil.getImportedHashesDescriptors(getProject(), packageName, getContainingFile());
-		}
-		return Collections.emptyList();
+		return PerlHashUtil.getImportedHashesDescriptors(this);
 	}
 
 	@Override

@@ -88,7 +88,6 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 	@Override
 	public void indexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink)
 	{
-		sink.occurrence(PerlUseStatementStubIndex.KEY, stub.getOuterPackageName());
 	}
 
 	@Override

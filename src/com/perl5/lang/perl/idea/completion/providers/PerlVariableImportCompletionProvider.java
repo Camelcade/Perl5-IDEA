@@ -142,7 +142,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 
 		if (processor != null)
 		{
-			PerlUtil.processImportedEntities(project, packageName, originalFile, processor);
+			PerlUtil.processImportedEntities(namespaceContainer, processor);
 		}
 	}
 

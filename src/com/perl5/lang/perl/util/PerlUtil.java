@@ -20,11 +20,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
@@ -116,21 +118,18 @@ public class PerlUtil
 	}
 
 	/**
-	 * Processing use statements in the namespace and processing all imports found
+	 * Processing use statements in the namespace or file and processing all imports found
 	 *
-	 * @param project   Project to search in
-	 * @param namespace namespace to search in
-	 * @param file      PsiFile to search in
+	 * @param rootElement Root element to start searching from
 	 */
 	public static void processImportedEntities(
-			@NotNull Project project,
-			@NotNull String namespace,
-			@NotNull PsiFile file,
+			@NotNull PsiElement rootElement,
 			@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor
 	)
 	{
-		for (PerlUseStatement useStatement : PerlPackageUtil.getPackageImports(project, namespace, file))
+		for (PsiElement element : PerlPsiUtil.collectUseStatements(rootElement))
 		{
+			PerlUseStatement useStatement = (PerlUseStatement) element;
 			String packageName = useStatement.getPackageName();
 
 			if (packageName != null)

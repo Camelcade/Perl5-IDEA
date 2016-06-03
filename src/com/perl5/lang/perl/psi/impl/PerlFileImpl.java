@@ -226,28 +226,28 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	@Override
 	public List<PerlExportDescriptor> getImportedSubsDescriptors()
 	{
-		return PerlSubUtil.getImportedSubsDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlSubUtil.getImportedSubsDescriptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedScalarDescriptors()
 	{
-		return PerlScalarUtil.getImportedScalarsDescritptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlScalarUtil.getImportedScalarsDescritptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedArrayDescriptors()
 	{
-		return PerlArrayUtil.getImportedArraysDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlArrayUtil.getImportedArraysDescriptors(this);
 	}
 
 	@NotNull
 	@Override
 	public List<PerlExportDescriptor> getImportedHashDescriptors()
 	{
-		return PerlHashUtil.getImportedHashesDescriptors(getProject(), PerlPackageUtil.MAIN_PACKAGE, this);
+		return PerlHashUtil.getImportedHashesDescriptors(this);
 	}
 
 	@NotNull

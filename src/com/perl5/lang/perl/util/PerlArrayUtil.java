@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
@@ -109,16 +108,14 @@ public class PerlArrayUtil implements PerlElementTypes
 	/**
 	 * Returns a map of imported arrays names
 	 *
-	 * @param project   Project to search in
-	 * @param namespace namespace to search in
-	 * @param file      PsiFile to search in
+	 * @param rootElement element to start looking from
 	 * @return result map
 	 */
 	@NotNull
-	public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull Project project, @NotNull String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull PsiElement rootElement)
 	{
 		PerlImportsCollector collector = new PerlArrayImportsCollector();
-		PerlUtil.processImportedEntities(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(rootElement, collector);
 		return collector.getResult();
 	}
 

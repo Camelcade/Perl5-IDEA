@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
@@ -98,16 +98,14 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	/**
 	 * Returns a map of imported scalars names
 	 *
-	 * @param project   Project to search in
-	 * @param namespace namespace to search in
-	 * @param file      PsiFile to search in
+	 * @param rootElement element to start looking from
 	 * @return result map
 	 */
 	@NotNull
-	public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull Project project, @NotNull final String namespace, @NotNull PsiFile file)
+	public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull PsiElement rootElement)
 	{
 		PerlImportsCollector collector = new PerlScalarImportsCollector();
-		PerlUtil.processImportedEntities(project, namespace, file, collector);
+		PerlUtil.processImportedEntities(rootElement, collector);
 		return collector.getResult();
 	}
 

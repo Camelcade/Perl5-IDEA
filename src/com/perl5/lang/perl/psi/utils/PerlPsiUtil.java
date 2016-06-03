@@ -31,6 +31,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -253,6 +254,11 @@ public class PerlPsiUtil
 
 			currentStubElement = currentStubElement.getParentStub();
 		}
+	}
+
+	public static List<PsiElement> collectUseStatements(@NotNull PsiElement rootElement)
+	{
+		return collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class);
 	}
 
 	@NotNull
