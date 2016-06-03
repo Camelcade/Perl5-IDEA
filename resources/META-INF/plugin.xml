@@ -34,14 +34,17 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
-      <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
       <li>*.al files (AutoLoader/AutoSplitter pieces) are now being treated as perl scripts</li>
       <li>Informative notifications on failed attempts to start perl script when SDK or perl path is not configured</li>
       <li>Perl settings are now stored in two separate files: perl5local.xml and perl5shared.xml. Local is machine-dependent, contains paths and so on, shared can be shared with VCS. (NB. you need to reconfigure your perl settings after this update. .idea/perl5.xml may be deleted)</li>
       <li>Subs completion elements now displays containing package names</li>
       <li>Imported variables completion now works properly with elements and slices</li>
       <li>Perl-related custom file templates are now available in <code>New: Perl file</code> dialog. Also, you now may create files using subpath, e.g 'some/test/script'</li>
+      <li>Debugger<ul>
+        <li>Debugger pausing (NB: pause may work only on next sub invocation, loops like while(){} can't be paused)</li>
+        <li>Breakpoints manipulation in non-interactive mode (NB same as in pausing)</li>
+        <li><b>You need to update <code>Devel::Camelcadedb</code> from CPAN to use new features.</b></li>
+      </ul></li>
       <li>Exporter<ul>
           <li>Implemented Dancer & Dancer2 DSL importing</li>
           <li>Basic Modern::Perl package processor (enables strict, warnings, setting c3 mro and loads IO::Handle && IO::File)</li>
@@ -71,7 +74,7 @@
     <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different products    -->
+         on how to target different products  -->
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
