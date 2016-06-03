@@ -45,7 +45,7 @@ public class PerlSubCompletionUtil
 				.create(subName)
 				.withIcon(subDefinition.getIcon(0))
 				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated())
-				.withTypeText(subDefinition.getPackageName());
+				.withTypeText(subDefinition.getPackageName(), true);
 
 		if (!argsString.isEmpty())
 		{
@@ -86,7 +86,7 @@ public class PerlSubCompletionUtil
 				.withIcon(subDeclaration.getIcon(0))
 				.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
 				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTypeText(subDeclaration.getPackageName())
+				.withTypeText(subDeclaration.getPackageName(), true)
 				;
 
 	}
@@ -98,7 +98,7 @@ public class PerlSubCompletionUtil
 				.create(globVariable.getName())
 				.withIcon(globVariable.getIcon(0))
 				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTypeText(globVariable.getPackageName())
+				.withTypeText(globVariable.getPackageName(), true)
 				;
 
 	}
@@ -109,7 +109,7 @@ public class PerlSubCompletionUtil
 		return LookupElementBuilder
 				.create(constant.getName())
 				.withIcon(constant.getIcon(0))
-				.withTypeText(constant.getPackageName())
+				.withTypeText(constant.getPackageName(), true)
 				;
 
 	}
