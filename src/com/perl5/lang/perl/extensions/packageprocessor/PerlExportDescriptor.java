@@ -16,13 +16,14 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.openapi.project.Project;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.Processor;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 02.06.2016.
@@ -160,9 +161,37 @@ public class PerlExportDescriptor
 		return result;
 	}
 
-	public void processRelatedItems(@NotNull Project project, @NotNull Processor<PsiElement> processor)
+	@NotNull
+	public LookupElementBuilder getLookupElement()
 	{
-		PerlSubUtil.processRelatedItems(getTargetCanonicalName(), project, processor);
+		return LookupElementBuilder.create(getExportedName())
+				.withIcon(getIcon())
+				.withTypeText(getTargetPackage(), true);
 	}
 
+	@Nullable
+	public Icon getIcon()
+	{
+		if (isHash())
+		{
+			return PerlIcons.HASH_GUTTER_ICON;
+		}
+		else if (isScalar())
+		{
+			return PerlIcons.SCALAR_GUTTER_ICON;
+		}
+		else if (isArray())
+		{
+			return PerlIcons.ARRAY_GUTTER_ICON;
+		}
+		else if (isGlob())
+		{
+			return PerlIcons.GLOB_GUTTER_ICON;
+		}
+		else if (isSub())
+		{
+			return PerlIcons.SUB_GUTTER_ICON;
+		}
+		return null;
+	}
 }

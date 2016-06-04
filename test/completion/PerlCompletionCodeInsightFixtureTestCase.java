@@ -36,23 +36,38 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 
-	public void checkPackageFileCompletionWithArray(String fileName, String... result)
+	public void assertPackageFileCompletionContains(String fileName, String... pattern)
+	{
+		assertPackageFileCompletionContains(fileName, Arrays.asList(pattern));
+	}
+
+	public void assertPackageFileCompletionContains(String fileName, List<String> pattern)
 	{
 		initWithFileAsPackage(fileName);
-		assertContainsLookupElements(result);
+		assertContainsLookupElements(pattern);
 	}
 
 	public void assertContainsLookupElements(String... pattern)
 	{
+		assertContainsLookupElements(Arrays.asList(pattern));
+	}
+
+	public void assertContainsLookupElements(List<String> pattern)
+	{
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertNotNull(strings);
-		assertContainsElements(new HashSet<String>(strings), Arrays.asList(pattern));
+		assertContainsElements(new HashSet<String>(strings), pattern);
 	}
 
 	public void assertNotContainsLookupElements(String... pattern)
 	{
+		assertNotContainsLookupElements(Arrays.asList(pattern));
+	}
+
+	public void assertNotContainsLookupElements(List<String> pattern)
+	{
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertNotNull(strings);
-		assertDoesntContain(new HashSet<Object>(strings), Arrays.asList(pattern));
+		assertDoesntContain(new HashSet<Object>(strings), pattern);
 	}
 }

@@ -33,7 +33,7 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void testPackageDefinition()
 	{
-		checkPackageFileCompletionWithArray("package_definition", "package_definition");
+		assertPackageFileCompletionContains("package_definition", "package_definition");
 	}
 
 	public void testPackageUse()
@@ -79,12 +79,12 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void checkPackageAndVersionsCompletions(String fileName)
 	{
-		checkPackageFileCompletionWithArray(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		assertPackageFileCompletionContains(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
 	}
 
 	public void checkClassCompletions(String fileName)
 	{
-		checkPackageFileCompletionWithArray(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		assertPackageFileCompletionContains(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
 	}
 
 }

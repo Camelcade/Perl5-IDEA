@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceContainer;
@@ -31,7 +30,10 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 24.08.2015.
@@ -42,16 +44,19 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 	{
 		for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
 		{
-			exportDescriptor.processRelatedItems(namespaceContainer.getProject(), new Processor<PsiElement>()
+			List<PsiElement> psiElements = PerlSubUtil.collectRelatedItems(exportDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
+
+			if (psiElements.isEmpty()) // no definition found
 			{
-				@Override
-				public boolean process(PsiElement element)
+				resultSet.addElement(exportDescriptor.getLookupElement());
+			}
+			else
+			{
+				for (PsiElement element : psiElements)
 				{
-					// fixme for wierd situations when Foo::Bar::sub exported as supersub we need to force another name here
 					resultSet.addElement(PerlSubCompletionUtil.getSmartLookupElement(element));
-					return true;
 				}
-			});
+			}
 		}
 	}
 

@@ -29,11 +29,11 @@ public class PerlAnnotationsCompletionTest extends PerlCompletionCodeInsightFixt
 
 	public void testAnnotation()
 	{
-		checkPackageFileCompletionWithArray("annotation", "returns", "inject", "method", "override");
+		assertPackageFileCompletionContains("annotation", "returns", "inject", "method", "override");
 	}
 
 	public void testInjectMarkers()
 	{
-		checkPackageFileCompletionWithArray("inject_marker", "HTML", "XML", "JSON");
+		assertPackageFileCompletionContains("inject_marker", "HTML", "XML", "JSON");
 	}
 }

@@ -449,6 +449,22 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return overridingSubs;
 	}
 
+	@NotNull
+	public static List<PsiElement> collectRelatedItems(@NotNull String canonicalName, @NotNull Project project)
+	{
+		final List<PsiElement> result = new ArrayList<PsiElement>();
+		processRelatedItems(canonicalName, project, new Processor<PsiElement>()
+		{
+			@Override
+			public boolean process(PsiElement element)
+			{
+				result.add(element);
+				return true;
+			}
+		});
+		return result;
+	}
+
 	public static void processRelatedItems(@NotNull String canonicalName, @NotNull Project project, @NotNull Processor<PsiElement> processor)
 	{
 		processRelatedItems(canonicalName, project, PerlScopes.getProjectAndLibrariesScope(project), processor);
