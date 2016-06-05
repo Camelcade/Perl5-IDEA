@@ -371,6 +371,8 @@
         <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
         <lang.fileViewProviderFactory language="Template Toolkit 2"
                                       implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
+        <lang.parserDefinition language="Template Toolkit 2"
+                               implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
 
         <!-- End of template toolkit -->
 

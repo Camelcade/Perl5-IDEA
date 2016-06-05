@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2.psi;
+package com.perl5.lang.tt2.elementTypes;
 
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonTokenType;
+import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
+import com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public interface TemplateToolkitElementTypes
+public interface TemplateToolkitElementTypes extends TemplateToolkitElementTypesGenerated
 {
-	IElementType TT2_OUTER = new TemplateToolkitTokenType("TT2_OUTER");
-	IElementType TT2_HTML = new HTMLMasonTokenType("TT2_HTML");
+	IFileElementType TT2_FILE = new TemplateToolkitFileElementType();
+
 	IElementType TT2_TEMPLATE_DATA = new TemplateDataElementType(
 			"TT2_TEMPLATE_DATA",
 			TemplateToolkitLanguage.INSTANCE,

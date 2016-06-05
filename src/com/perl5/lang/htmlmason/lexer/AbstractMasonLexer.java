@@ -19,13 +19,13 @@ package com.perl5.lang.htmlmason.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.perl5.lang.perl.lexer.CustomToken;
-import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesBase;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 09.03.2016.
  */
-public abstract class AbstractMasonLexer extends PerlTemplatingLexer
+public abstract class AbstractMasonLexer extends PerlLexerWithCustomStatesBase
 {
 	public AbstractMasonLexer(Project project)
 	{

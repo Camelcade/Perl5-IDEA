@@ -16,26 +16,11 @@
 
 package com.perl5.lang.tt2.psi;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public abstract class TemplateToolkitElementType extends IElementType implements PsiElementProvider
+public interface TemplateToolkitCompositeElement extends PsiElement
 {
-	public TemplateToolkitElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, TemplateToolkitLanguage.INSTANCE);
-	}
-
-
-	@Override
-	public String toString()
-	{
-		return "TemplateToolkit2Element." + super.toString();
-	}
 }

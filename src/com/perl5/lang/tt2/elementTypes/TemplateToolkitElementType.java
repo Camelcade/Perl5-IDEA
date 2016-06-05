@@ -14,27 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.tt2.elementTypes;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.tt2.TemplateToolkitLanguage;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
+public abstract class TemplateToolkitElementType extends IElementType implements PsiElementProvider
 {
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-
-	private TemplateToolkitLanguage()
+	public TemplateToolkitElementType(@NotNull @NonNls String debugName)
 	{
-		super("Template Toolkit 2");
+		super(debugName, TemplateToolkitLanguage.INSTANCE);
 	}
+
 
 	@Override
-	public boolean isCaseSensitive()
+	public String toString()
 	{
-		return true;
+		return "TemplateToolkit2Element." + super.toString();
 	}
-
 }

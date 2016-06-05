@@ -1,0 +1,38 @@
+{
+  psiVisitorName="TemplateToolkitVisitorGenerated"
+
+  tokenTypeClass="com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenType"
+  elementTypeClass="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementType"
+  elementTypeHolderClass="com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated"
+  elementTypeFactory="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypeFactory.getElementType"
+  tokenTypeFactory="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypeFactory.getTokenType"
+
+  parserUtilClass="com.perl5.lang.tt2.parser.TemplateToolkitParserUtil"
+  parserClass="com.perl5.lang.tt2.parser.TemplateToolkitParserGenerated"
+
+  extends="com.perl5.lang.tt2.psi.impl.TemplateToolkitCompositeElementImpl"
+
+  psiClassPrefix="Psi"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.perl5.lang.tt2.psi"
+  psiImplPackage="com.perl5.lang.tt2.psi.impl"
+
+
+
+//  psiImplUtilClass="com.perl5.lang.tt2.psi.impl.TemplateToolkitPsiImplUtil"
+
+    tokens=[
+	TT2_OUTER="TT2_OUTER"
+	TT2_HTML="TT2_HTML"
+	TT2_COMMENT="TT2_COMMENT"
+
+	TT2_IDENTIFIER="TT2_IDENTIFIER"
+	TT2_SYMBOL="TT2_SYMBOL"
+	TT2_NUMBER="TT2_NUMBER"
+
+    ]
+
+}
+
+root ::= element *
+private element ::= TT2_IDENTIFIER | TT2_SYMBOL | TT2_NUMBER

@@ -26,11 +26,11 @@ import java.util.List;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public abstract class PerlTemplatingLexer extends PerlLexer
+public abstract class PerlLexerWithCustomStatesBase extends PerlLexer implements PerlLexerWithCustomStates
 {
 	private int customState = 0;
 
-	public PerlTemplatingLexer(Project project)
+	public PerlLexerWithCustomStatesBase(Project project)
 	{
 		super(project);
 	}
@@ -45,7 +45,6 @@ public abstract class PerlTemplatingLexer extends PerlLexer
 		customState = newState;
 	}
 
-	public abstract int getInitialCustomState();
 
 	/**
 	 * Lexes block cut off heading and tailing spaces/newlines and put them in the beginning of preparsed tokens

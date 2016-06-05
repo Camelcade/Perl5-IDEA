@@ -145,6 +145,21 @@ task generatePodParser(type: JavaExec) {
     classpath configurations.gen
 }
 
+task generateTT2Parser(type: JavaExec) {
+    ext.src = "grammar/TemplateToolkit.bnf"
+    ext.dstRoot = "gen"
+
+    main = "org.intellij.grammar.Main"
+
+    args = [dstRoot, file(src)]
+
+    inputs.file file(src)
+    outputs.file file(dstRoot + '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java')
+    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/tt2/psi', include: '**/*.java')
+
+    classpath configurations.gen
+}
+
 // fxime dry this
 task generatePerlLexer(type: JavaExec) {
     dependsOn generatePerl5Parser
@@ -182,6 +197,18 @@ task generatePodLexer(type: JavaExec) {
     classpath configurations.gen
 }
 
+task generateTT2Lexer(type: JavaExec) {
+    dependsOn generateTT2Parser
+    ext.src = "grammar/TemplateToolkit.flex"
+    ext.dst = "gen/com/perl5/lang/tt2/lexer/"
+    main = "JFlex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
+    outputs.file file(dst + "TemplateToolkitLexerGenerated.java")
+    classpath configurations.gen
+}
+
 task generatePerlStringLexer(type: JavaExec) {
     dependsOn generatePerl5Parser
     ext.src = "grammar/PerlString.flex"
@@ -199,6 +226,7 @@ task generateLexers{
     dependsOn generatePerlAnnotationsLexer
     dependsOn generatePerlStringLexer
     dependsOn generatePodLexer
+    dependsOn generateTT2Lexer
 }
 
 

@@ -28,14 +28,14 @@ import java.io.IOException;
  */
 public class PerlLexerWithCustomStatesAdapter extends LexerBase
 {
-	private PerlTemplatingLexer myFlex = null;
+	private PerlLexerWithCustomStates myFlex = null;
 	private IElementType myTokenType = null;
 	private CharSequence myText;
 
 	private int myEnd;
 	private int myState;
 
-	public PerlLexerWithCustomStatesAdapter(PerlTemplatingLexer lexer)
+	public PerlLexerWithCustomStatesAdapter(PerlLexerWithCustomStates lexer)
 	{
 		myFlex = lexer;
 	}

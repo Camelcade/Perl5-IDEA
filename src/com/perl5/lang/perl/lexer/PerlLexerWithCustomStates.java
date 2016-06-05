@@ -14,26 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2.psi;
+package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.FlexLexer;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitTokenType extends IElementType
+public interface PerlLexerWithCustomStates extends FlexLexer
 {
-	public TemplateToolkitTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, TemplateToolkitLanguage.INSTANCE);
-	}
+	int getCustomState();
 
-	@Override
-	public String toString()
-	{
-		return "TemplateToolkit2Token." + super.toString();
-	}
+	void setCustomState(int newState);
+
+	int getInitialCustomState();
 }

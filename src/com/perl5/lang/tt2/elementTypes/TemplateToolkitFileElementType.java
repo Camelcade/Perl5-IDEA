@@ -14,27 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.tt2.elementTypes;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.psi.tree.IFileElementType;
+import com.perl5.lang.tt2.TemplateToolkitLanguage;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
+public class TemplateToolkitFileElementType extends IFileElementType
 {
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-
-	private TemplateToolkitLanguage()
+	public TemplateToolkitFileElementType()
 	{
-		super("Template Toolkit 2");
+		super("Template Toolkit File", TemplateToolkitLanguage.INSTANCE);
 	}
-
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
-
 }

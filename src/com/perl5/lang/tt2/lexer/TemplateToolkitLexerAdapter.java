@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.tt2.lexer;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
+public class TemplateToolkitLexerAdapter extends PerlLexerWithCustomStatesAdapter
 {
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-
-	private TemplateToolkitLanguage()
+	public TemplateToolkitLexerAdapter(@Nullable Project project)
 	{
-		super("Template Toolkit 2");
+		super(new TemplateToolkitLexer(project));
 	}
-
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
-
 }

@@ -64,7 +64,6 @@ limitations under the License.
   psiPackage="com.perl5.lang.pod.psi"
   psiImplPackage="com.perl5.lang.pod.psi.impl"
 
-  elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypes"
   elementTypeClass="com.perl5.lang.pod.elementTypes.PodElementType"
   tokenTypeClass="com.perl5.lang.pod.elementTypes.PodTokenType"
   parserUtilClass="com.perl5.lang.pod.parser.PodParserUtil"

@@ -21,7 +21,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesBase;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousLexer extends PerlTemplatingLexer implements MojoliciousElementTypes
+public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements MojoliciousElementTypes
 {
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block

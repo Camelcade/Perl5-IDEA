@@ -14,27 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.tt2.psi.impl;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.tt2.psi.TemplateToolkitCompositeElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
+public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement implements TemplateToolkitCompositeElement
 {
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-
-	private TemplateToolkitLanguage()
+	public TemplateToolkitCompositeElementImpl(@NotNull ASTNode node)
 	{
-		super("Template Toolkit 2");
+		super(node);
 	}
-
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
-
 }

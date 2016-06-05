@@ -26,7 +26,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.ConfigurableTemplateLanguageFileViewProvider;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
-import com.perl5.lang.tt2.psi.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
