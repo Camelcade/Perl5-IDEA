@@ -27,18 +27,21 @@ import javax.swing.*;
 public class PerlIcons
 {
 	public static final Icon PERL_LANGUAGE_ICON = IconLoader.getIcon("/icons/perl5language.png");
+
 	public static final Icon PERL_OPTION = IconLoader.getIcon("/icons/option.png");
 	public static final Icon PERL_OPTIONS = IconLoader.getIcon("/icons/options.png");
+
 	public static final Icon PM_FILE = IconLoader.getIcon("/icons/perl5.png");
 	public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
 	public static final Icon POD_FILE = IconLoader.getIcon("/icons/podicon.png");
 	public static final Icon PERL_SCRIPT_FILE_ICON = IconLoader.getIcon("/icons/perl5classic.png");
 	public static final Icon TEST_FILE = IconLoader.getIcon("/icons/file-test.png");
 	public static final Icon XS_FILE = IconLoader.getIcon("/icons/xsicon.png");
+	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
+	public static final Icon TTK2_ICON = IconLoader.getIcon("/icons/template_toolkit_gutter_icon.png");
 
 	public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
 
-	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
 	public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/icons/package_gutter_icon.png");
 	public static final Icon PRAGMA_GUTTER_ICON = IconLoader.getIcon("/icons/pragmaicon.png");
 
