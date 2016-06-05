@@ -48,6 +48,7 @@ import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexer;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -290,20 +291,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		}
 	}
 
-	@Override
-	public void disposeUIResources()
-	{
-		super.disposeUIResources();
-		substitutedExtensionsPanel = null;
-		substitutedExtensionsModel = null;
-		substitutedExtensionsList = null;
-		autohandlerName = null;
-		defaulthandlerName = null;
-
-		customTagsModel = null;
-		customTagsTable = null;
-	}
-
 	protected void createSubstitutedExtensionsComponent(FormBuilder builder)
 	{
 		substitutedExtensionsModel = new CollectionListModel<String>();
@@ -352,7 +339,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 				})
 				.disableDownAction()
 				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
 				.createPanel();
 		builder.addLabeledComponent(new JLabel("Extensions that should be handled as HTML::Mason components except *.mas (only under roots configured above):"), substitutedExtensionsPanel);
 	}
@@ -431,7 +418,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 				})
 				.disableDownAction()
 				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
 				.createPanel()
 		);
 	}

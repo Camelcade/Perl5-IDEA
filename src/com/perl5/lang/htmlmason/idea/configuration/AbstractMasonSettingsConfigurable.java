@@ -16,18 +16,13 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
-import com.intellij.util.Consumer;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
@@ -35,14 +30,13 @@ import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
-import java.io.File;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -53,8 +47,6 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 	protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
 			"[$@%]" + PerlLexer.IDENTIFIER_PATTERN
 	);
-
-	protected static final int WIDGET_HEIGHT = 90;
 
 	protected final Project myProject;
 	protected final String windowTitile;
@@ -89,52 +81,15 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 	{
 		rootsModel = new CollectionListModel<String>();
 		rootsList = new JBList(rootsModel);
-		builder.addLabeledComponent(new JLabel("Components roots (relative to project's root):"), ToolbarDecorator
-				.createDecorator(rootsList)
-				.setAddAction(new AnActionButtonRunnable()
-				{
-					@Override
-					public void run(AnActionButton anActionButton)
-					{
-						//rootsModel.add("New element");
-						FileChooserFactory.getInstance().createPathChooser(
-								FileChooserDescriptorFactory.
-										createMultipleFoldersDescriptor().
-										withRoots(myProject.getBaseDir()).
-										withTreeRootVisible(true).
-										withTitle("Select Mason Component Roots"),
-								myProject,
-								rootsList
-						).choose(null, new Consumer<List<VirtualFile>>()
-						{
-							@Override
-							public void consume(List<VirtualFile> virtualFiles)
-							{
-								String rootPath = myProject.getBasePath();
-								if (rootPath != null)
-								{
-									VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
-
-									if (rootFile != null)
-									{
-										for (VirtualFile file : virtualFiles)
-										{
-											String relativePath = VfsUtil.getRelativePath(file, rootFile);
-											if (!rootsModel.getItems().contains(relativePath))
-											{
-												rootsModel.add(relativePath);
-											}
-										}
-									}
-								}
-							}
-						});
-					}
-				})
-				.disableDownAction()
-				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
-				.createPanel());
+		builder.addLabeledComponent(
+				new JLabel(
+						"Components roots (relative to project's root):"),
+				PerlConfigurationUtil.createProjectPathsSelection(
+						myProject,
+						rootsList,
+						rootsModel,
+						"Select Mason Component Roots"
+				));
 	}
 
 	public void createGlobalsComponent(FormBuilder builder)
@@ -181,7 +136,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 				})
 				.disableDownAction()
 				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
 				.createPanel()
 		)
 		;
@@ -190,10 +145,6 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 	@Override
 	public void disposeUIResources()
 	{
-		rootsModel = null;
-		rootsList = null;
-		globalsTable = null;
-		globalsModel = null;
 	}
 
 	public static abstract class myStringColumnInfo extends ColumnInfo<VariableDescription, String>

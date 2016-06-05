@@ -14,49 +14,53 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.settings;
+package com.perl5.lang.tt2.idea.settings;
 
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.idea.PerlPathMacros;
-import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
-import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by hurricup on 02.06.2016.
+ * Created by hurricup on 05.06.2016.
  */
 @State(
-		name = "Perl5LocalSettings",
+		name = "TemplateToolkitSettings",
 		storages = {
 				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
 		}
 )
 
-public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings>
+public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings>
 {
-	public String PERL_PATH = "";
-	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_NAME;
-	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_NAME;
+	public String START_TAG = "[%";
+	public String END_TAG = "%]";
+	public String OUTLINE_TAG = "%%";
+	public boolean ENABLE_ANYCASE = false;
+	public boolean ENABLE_RELATIVE = false;
+	public List<String> TEMPLATE_DIRS = new ArrayList<String>();
 
-	public static PerlLocalSettings getInstance(@NotNull Project project)
+	public static TemplateToolkitSettings getInstance(@NotNull Project project)
 	{
-		PerlLocalSettings persisted = ServiceManager.getService(project, PerlLocalSettings.class);
-		return persisted != null ? persisted : new PerlLocalSettings();
+		TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
+		return persisted != null ? persisted : new TemplateToolkitSettings();
 	}
 
 	@Nullable
 	@Override
-	public PerlLocalSettings getState()
+	public TemplateToolkitSettings getState()
 	{
 		return this;
 	}
 
 	@Override
-	public void loadState(PerlLocalSettings state)
+	public void loadState(TemplateToolkitSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
 	}

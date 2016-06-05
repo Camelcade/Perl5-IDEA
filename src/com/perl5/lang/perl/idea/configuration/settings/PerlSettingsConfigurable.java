@@ -409,24 +409,6 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public void disposeUIResources()
 	{
-		perlPathInputField = null;
-		simpleMainCheckbox = null;
-		selfNamesModel = null;
-		selfNamesList = null;
-		autoInjectionCheckbox = null;
-		allowInjectionWithInterpolation = null;
-		perlAnnotatorCheckBox = null;
-		perlTryCatchCheckBox = null;
-		deparseArgumentsTextField = null;
-		regeneratePanel = null;
-		regenerateButton = null;
-
-		perlCriticCheckBox = null;
-		perlCriticPathInputField = null;
-		perlCriticArgsInputField = null;
-
-		perlTidyPathInputField = null;
-		perlTidyArgsInputField = null;
 	}
 
 	protected LabeledComponent<RawCommandLineEditor> copyDialogCaption(final LabeledComponent<RawCommandLineEditor> component, String text)

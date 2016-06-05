@@ -20,40 +20,23 @@ package com.perl5;
  * Created by hurricup on 12.04.2015.
  */
 
-import com.intellij.CommonBundle;
-import org.jetbrains.annotations.NonNls;
+import com.intellij.AbstractBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
-import java.util.ResourceBundle;
-
-public class PerlBundle
+public class PerlBundle extends AbstractBundle
 {
+	private static final PerlBundle INSTANCE = new PerlBundle();
+	private static final String PATH_TO_BUNDLE = "messages.PerlBundle";
 
-	@NonNls
-	private static final String BUNDLE = "com.perl5.PerlBundle";
-	private static Reference<ResourceBundle> ourBundle;
-
-	@NotNull
-	public static String message(@PropertyKey(resourceBundle = BUNDLE) String key, Object... params)
+	public PerlBundle()
 	{
-		return CommonBundle.message(getBundle(), key, params);
+		super(PATH_TO_BUNDLE);
 	}
 
-	private static ResourceBundle getBundle()
+	public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params)
 	{
-		ResourceBundle bundle = null;
-
-		if (ourBundle != null) bundle = ourBundle.get();
-
-		if (bundle == null)
-		{
-			bundle = ResourceBundle.getBundle(BUNDLE);
-			ourBundle = new SoftReference<ResourceBundle>(bundle);
-		}
-		return bundle;
+		return INSTANCE.getMessage(key, params);
 	}
 
 }

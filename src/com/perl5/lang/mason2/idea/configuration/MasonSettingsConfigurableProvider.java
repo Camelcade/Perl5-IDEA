@@ -26,23 +26,23 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MasonSettingsConfigurableProvider extends ConfigurableProvider
 {
-	Project project;
+	private Project myProject;
 
 	public MasonSettingsConfigurableProvider(Project project)
 	{
-		this.project = project;
+		this.myProject = project;
 	}
 
 	@Nullable
 	@Override
 	public Configurable createConfigurable()
 	{
-		return new MasonSettingsConfigurable(project);
+		return new MasonSettingsConfigurable(myProject);
 	}
 
 	@Override
 	public boolean canCreateConfigurable()
 	{
-		return project != null;
+		return myProject != null;
 	}
 }

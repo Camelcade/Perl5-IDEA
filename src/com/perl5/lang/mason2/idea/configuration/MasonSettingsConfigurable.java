@@ -29,6 +29,7 @@ import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettingsConfigurable;
+import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -124,9 +125,6 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 	@Override
 	public void disposeUIResources()
 	{
-		super.disposeUIResources();
-		autobaseList = null;
-		autobaseModel = null;
 	}
 
 	protected void createAutobaseNamesComponent(FormBuilder builder)
@@ -153,7 +151,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 						}
 					}
 				})
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
 				.createPanel());
 	}
 
