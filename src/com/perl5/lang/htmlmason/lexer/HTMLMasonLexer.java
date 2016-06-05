@@ -197,7 +197,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 		}
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK || currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
+			if (isBufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + KEYWORD_BLOCK_CLOSER.length());
@@ -213,7 +213,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 		}
 		else if (currentCustomState == LEX_MASON_PERL_CALL_BLOCK || currentCustomState == LEX_MASON_PERL_FILTERING_CALL_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
+			if (isBufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + KEYWORD_CALL_CLOSER.length());
@@ -238,7 +238,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				(currentCustomState == LEX_MASON_PERL_BLOCK ||
 						currentCustomState == LEX_MASON_PERL_ARGS_BLOCK ||
 						currentCustomState == LEX_MASON_PERL_ATTR_BLOCK) &&
-						bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG)
+						isBufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG)
 				)
 		{
 			setTokenStart(tokenStart);
@@ -472,7 +472,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 		int customState = getCustomState();
 		return buffer.charAt(currentPosition) == '\n' ||
 				(customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
-						&& bufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
+						&& isBufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
 				;
 	}
 

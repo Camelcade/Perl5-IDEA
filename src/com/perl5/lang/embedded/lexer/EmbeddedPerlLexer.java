@@ -99,7 +99,7 @@ public class EmbeddedPerlLexer extends PerlLexerWithCustomStatesBase implements 
 	public boolean isLineCommentEnd(int currentPosition)
 	{
 		CharSequence buffer = getBuffer();
-		return buffer.charAt(currentPosition) == '\n' || bufferAtString(buffer, currentPosition, "?>");
+		return buffer.charAt(currentPosition) == '\n' || isBufferAtString(buffer, currentPosition, "?>");
 	}
 
 	protected boolean isCloseToken(CharSequence buffer, int offset)

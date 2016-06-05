@@ -81,7 +81,7 @@ public abstract class AbstractMasonLexer extends PerlLexerWithCustomStatesBase
 			offset++;
 		}
 
-		if (bufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
+		if (isBufferAtString(buffer, offset - 1, endToken)) // got closer after spaces
 		{
 			offset--;
 		}

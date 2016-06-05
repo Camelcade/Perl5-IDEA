@@ -26,6 +26,11 @@
 	TT2_HTML="TT2_HTML"
 	TT2_COMMENT="TT2_COMMENT"
 
+	TT2_OPEN_TAG="[%"
+	TT2_CLOSE_TAG="%]"
+	TT2_OUTLINE_TAG="%%"
+	TT2_HARD_NEWLINE="OUTLINE_END"
+
 	TT2_IDENTIFIER="TT2_IDENTIFIER"
 	TT2_SYMBOL="TT2_SYMBOL"
 	TT2_NUMBER="TT2_NUMBER"
@@ -35,4 +40,14 @@
 }
 
 root ::= element *
-private element ::= TT2_IDENTIFIER | TT2_SYMBOL | TT2_NUMBER
+private element ::= block_element|line_element
+
+block_element ::= TT2_OPEN_TAG  block_element_content TT2_CLOSE_TAG {pin=1}
+private block_element_content ::= element_content* {recoverWhile=recover_block_element}
+private recover_block_element ::= !(TT2_CLOSE_TAG) // manual recovery needs
+
+line_element ::= TT2_OUTLINE_TAG line_element_content TT2_HARD_NEWLINE {pin=1}
+private line_element_content ::= element_content* { recoverWhile=recover_line_element}
+private recover_line_element ::= !(TT2_HARD_NEWLINE) // manual recovery needs
+
+private element_content ::= TT2_IDENTIFIER | TT2_SYMBOL | TT2_NUMBER

@@ -545,8 +545,11 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			IElementType tokenType;
 			while ((tokenType = tokenLexer.advance()) != null)
+			{
 				result.add(new CustomToken(tokenLexer.getTokenStart(), tokenLexer.getTokenEnd(), tokenType));
-		} catch (IOException e)
+			}
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -580,7 +583,9 @@ public class PerlLexer extends PerlLexerGenerated
 		int bufferEnd = getBufferEnd();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
+		{
 			return super.perlAdvance();
+		}
 		else
 		{
 			int currentState = yystate();
@@ -596,25 +601,41 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				IElementType tokenType = captureFormat();
 				if (tokenType != null)    // got something
+				{
 					return tokenType;
+				}
 			}
 			else if (isOpeningQuoteFor(currentState, currentChar, LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW))
+			{
 				return captureString();
+			}
 			else if (isOpeningQuoteFor(currentState, currentChar, LEX_REGEX_OPENER))
+			{
 				return parseRegex(tokenStart);
+			}
 			else if (isOpeningQuoteFor(currentState, currentChar, LEX_TRANS_OPENER))
+			{
 				return parseTr();
+			}
 			else if (currentChar == '\'')
+			{
 				return captureString(LEX_QUOTE_LIKE_OPENER_Q);
+			}
 			else if (currentChar == '"')
+			{
 				return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
+			}
 			else if (currentChar == '`')
+			{
 				return captureString(LEX_QUOTE_LIKE_OPENER_QX);
-				// capture __DATA__ __END__
-				// capture pod
+			}
+			// capture __DATA__ __END__
+			// capture pod
 			else if (currentChar == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n') && bufferEnd > tokenStart + 1 && Character.isLetter(buffer.charAt(tokenStart + 1)))
+			{
 				return capturePodBlock();
-				// capture qw content from qw();
+			}
+			// capture qw content from qw();
 			else if (((tokenStart < bufferEnd - STRING_DATA_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_DATA_LENGTH), STRING_DATA))
 					|| ((tokenStart < bufferEnd - STRING_END_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_END_LENGTH), STRING_END))
 					)
@@ -629,7 +650,9 @@ public class PerlLexer extends PerlLexerGenerated
 				setTokenStart(tokenStart);
 
 				while (currentPosition < bufferEnd && !isLineCommentEnd(currentPosition))
+				{
 					currentPosition++;
+				}
 
 				setTokenEnd(currentPosition);
 				// catching annotations #@
@@ -686,9 +709,13 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean isOpeningQuoteFor(int currentState, char currentChar, int... states)
 	{
 		for (int state : states)
+		{
 			if (state == currentState)
+			{
 				return !Character.isWhitespace(currentChar)
 						&& (currentChar != '#' || allowSharpQuote);
+			}
+		}
 
 		return false;
 	}
@@ -761,13 +788,21 @@ public class PerlLexer extends PerlLexerGenerated
 			char currentChar = buffer.charAt(currentPosition);
 
 			if (!isEscaped && quotesDepth == 0 && currentChar == closeQuote)
+			{
 				break;
+			}
 
 			if (!isEscaped && quotesDiffer)
+			{
 				if (currentChar == openQuote)
+				{
 					quotesDepth++;
+				}
 				else if (currentChar == closeQuote)
+				{
 					quotesDepth--;
+				}
+			}
 
 			isEscaped = !isEscaped && currentChar == '\\';
 
@@ -775,7 +810,9 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		if (currentPosition < bufferEnd)    // got close quote
+		{
 			currentPosition++;
+		}
 
 		setTokenEnd(currentPosition);
 
@@ -802,7 +839,9 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlStringLexer getBareStringLexer()
 	{
 		if (myStringLexer == null)
+		{
 			myStringLexer = new PerlStringLexer(myProject);
+		}
 
 		return myStringLexer;
 	}
@@ -815,7 +854,9 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQStringLexer getQStringLexer()
 	{
 		if (myQStringLexer == null)
+		{
 			myQStringLexer = new PerlQStringLexer();
+		}
 
 		return myQStringLexer;
 	}
@@ -829,7 +870,9 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQQStringLexer getQQStringLexer()
 	{
 		if (myQQStringLexer == null)
+		{
 			myQQStringLexer = new PerlQQStringLexer(myProject);
+		}
 
 		return myQQStringLexer;
 	}
@@ -842,7 +885,9 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQXStringLexer getQXStringLexer()
 	{
 		if (myQXStringLexer == null)
+		{
 			myQXStringLexer = new PerlQXStringLexer(myProject);
+		}
 
 		return myQXStringLexer;
 	}
@@ -855,7 +900,9 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQWStringLexer getQWStringLexer()
 	{
 		if (myQWStringLexer == null)
+		{
 			myQWStringLexer = new PerlQWStringLexer();
+		}
 
 		return myQWStringLexer;
 	}
@@ -879,7 +926,9 @@ public class PerlLexer extends PerlLexerGenerated
 			if (m.find())
 			{
 				if (m.group(1).length() < tokenText.length())
+				{
 					yypushback(tokenText.length() - m.group(1).length());
+				}
 				return IDENTIFIER;
 			}
 
@@ -952,7 +1001,9 @@ public class PerlLexer extends PerlLexerGenerated
 				linePos++;
 			}
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+			{
 				linePos++;
+			}
 			CharSequence line = buffer.subSequence(currentPosition, linePos);
 			currentPosition = linePos;
 
@@ -1113,13 +1164,19 @@ public class PerlLexer extends PerlLexerGenerated
 		while (true)
 		{
 			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
+			{
 				linePos++;
+			}
 			int lineContentsEnd = linePos;
 
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+			{
 				linePos++;
+			}
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+			{
 				linePos++;
+			}
 
 			// reached the end of heredoc and got end marker
 
@@ -1185,13 +1242,19 @@ public class PerlLexer extends PerlLexerGenerated
 		while (true)
 		{
 			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
+			{
 				linePos++;
+			}
 			int lineContentsEnd = linePos;
 
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+			{
 				linePos++;
+			}
 			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+			{
 				linePos++;
+			}
 
 			// reached the end of format and got end marker
 			if (lineContentsEnd == currentPosition + 1 && buffer.charAt(currentPosition) == '.')
@@ -1208,7 +1271,9 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 				// empty format and got the end
 				else
+				{
 					return getPreParsedToken();
+				}
 			}
 			// reached the end of file
 			else if (linePos == bufferEnd)
@@ -1222,7 +1287,9 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 				// empty heredoc and got the end of file
 				else
+				{
 					return null;
+				}
 			}
 			currentPosition = linePos;
 		}
@@ -1309,7 +1376,9 @@ public class PerlLexer extends PerlLexerGenerated
 				|| SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())                            // $x123
 				|| isBraced()                                                        // {x123}
 				)
+		{
 			return IDENTIFIER;
+		}
 		else if (isCommaArrowAhead())    // we should check for ->
 		{
 			return STRING_IDENTIFIER;
@@ -1375,11 +1444,15 @@ public class PerlLexer extends PerlLexerGenerated
 
 		// close quote
 		if (currentOffset < bufferEnd)
+		{
 			pushPreparsedToken(currentOffset++, currentOffset, quotesDiffer ? REGEX_QUOTE_CLOSE : REGEX_QUOTE);
+		}
 
 		// between blocks
 		if (quotesDiffer)
+		{
 			currentOffset = lexWhiteSpacesAndComments(currentOffset, preparsedTokensList);
+		}
 
 		// second block
 		if (currentOffset < bufferEnd)
@@ -1396,7 +1469,9 @@ public class PerlLexer extends PerlLexerGenerated
 
 		// close quote
 		if (currentOffset < bufferEnd)
+		{
 			pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
+		}
 
 
 		// trans modifiers
@@ -1404,10 +1479,14 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			int blockStart = currentOffset;
 			while (currentOffset < bufferEnd && StringUtil.containsChar(TR_MODIFIERS, buffer.charAt(currentOffset)))
+			{
 				currentOffset++;
+			}
 
 			if (blockStart < currentOffset)
+			{
 				pushPreparsedToken(blockStart, currentOffset, REGEX_MODIFIER);
+			}
 		}
 
 		return getPreParsedToken();
@@ -1436,7 +1515,9 @@ public class PerlLexer extends PerlLexerGenerated
 			if (!isEscaped && quotesLevel == 0 && currentChar == closeQuote)
 			{
 				if (currentOffset > blockStartOffset)
+				{
 					pushPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
+				}
 				break;
 			}
 			if (isQuoteDiffers && !isEscaped)
@@ -1474,23 +1555,31 @@ public class PerlLexer extends PerlLexerGenerated
 			char currentChar = buffer.charAt(currentOffset);
 
 			if (currentChar == '\n')
+			{
 				targetList.add(getCustomToken(currentOffset++, currentOffset, TokenType.NEW_LINE_INDENT));
+			}
 			else if (Character.isWhitespace(currentChar))    // white spaces
 			{
 				int whiteSpaceStart = currentOffset;
 				while (currentOffset < bufferEnd && Character.isWhitespace(currentChar = buffer.charAt(currentOffset)) && currentChar != '\n')
+				{
 					currentOffset++;
+				}
 				targetList.add(getCustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
 			}
 			else if (currentChar == '#')    // line comment
 			{
 				int commentStart = currentOffset;
 				while (currentOffset < bufferEnd && buffer.charAt(currentOffset) != '\n')
+				{
 					currentOffset++;
+				}
 				targetList.add(getCustomToken(commentStart, currentOffset, COMMENT_LINE));
 			}
 			else
+			{
 				break;
+			}
 		}
 
 		return currentOffset;
@@ -1516,7 +1605,9 @@ public class PerlLexer extends PerlLexerGenerated
 		RegexBlock firstBlock = RegexBlock.parseBlock(buffer, tokenStart, bufferEnd, openQuote, false);
 
 		if (firstBlock == null)
+		{
 			return getPreParsedToken();
+		}
 
 		int currentOffset = firstBlock.getEndOffset();
 
@@ -1528,7 +1619,9 @@ public class PerlLexer extends PerlLexerGenerated
 		if (sectionsNumber == 2 && currentOffset < bufferEnd)
 		{
 			if (firstBlock.hasSameQuotes())
+			{
 				secondBLock = RegexBlock.parseBlock(buffer, currentOffset, bufferEnd, firstBlock.getOpeningQuote(), true);
+			}
 			else
 			{
 				currentOffset = lexWhiteSpacesAndComments(currentOffset, betweenBlocks);
@@ -1542,7 +1635,9 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 
 			if (secondBLock == null)
+			{
 				return getPreParsedToken();
+			}
 
 			currentOffset = secondBLock.getEndOffset();
 		}
@@ -1557,11 +1652,15 @@ public class PerlLexer extends PerlLexerGenerated
 		while (modifiersEnd < bufferEnd)
 		{
 			if (!allowedModifiers.contains(buffer.charAt(modifiersEnd)))    // unknown modifier
+			{
 				break;
+			}
 			else if (buffer.charAt(modifiersEnd) == 'x')    // mark as extended
 			{
 				if (preparsedTokensList.getFirst().getTokenType() == REGEX_QUOTE_OPEN)
+				{
 					preparsedTokensList.getFirst().setTokenType(REGEX_QUOTE_OPEN_X);
+				}
 
 				isExtended = true;
 			}
@@ -1569,7 +1668,9 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				isEvaluated = true;
 				if (secondBlockOpener != null)
+				{
 					secondBlockOpener.setTokenType(REGEX_QUOTE_OPEN_E);
+				}
 			}
 
 			modifierTokens.add(new CustomToken(modifiersEnd, modifiersEnd + 1, REGEX_MODIFIER));
@@ -1586,22 +1687,32 @@ public class PerlLexer extends PerlLexerGenerated
 			preparsedTokensList.addAll(betweenBlocks);
 
 			if (secondBlockOpener != null)
+			{
 				preparsedTokensList.add(secondBlockOpener);
+			}
 			else if (isEvaluated)
+			{
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE_E);
+			}
 			else
+			{
 				preparsedTokensList.getLast().setTokenType(REGEX_QUOTE);
+			}
 
 
 			// parse block 2
 			if (isEvaluated)
 			{
 				if (evalPerlLexer == null)
+				{
 					evalPerlLexer = new PerlLexerAdapter(myProject);
+				}
 				preparsedTokensList.addAll(secondBLock.parseEval(evalPerlLexer));
 			}
 			else
+			{
 				preparsedTokensList.addAll(secondBLock.tokenize(getBareStringLexer(), false, true));
+			}
 		}
 
 		// parse modifiers
@@ -1629,39 +1740,65 @@ public class PerlLexer extends PerlLexerGenerated
 		isEscaped = false;
 		pushState();
 		if (tokenType == RESERVED_Q)
+		{
 			yybegin(LEX_QUOTE_LIKE_OPENER_Q);
+		}
 		else if (tokenType == RESERVED_QQ)
+		{
 			yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
+		}
 		else if (tokenType == RESERVED_QX)
+		{
 			yybegin(LEX_QUOTE_LIKE_OPENER_QX);
+		}
 		else if (tokenType == RESERVED_QW)
+		{
 			yybegin(LEX_QUOTE_LIKE_OPENER_QW);
+		}
 		else
+		{
 			throw new RuntimeException("Unable to switch state by token " + tokenType);
+		}
 	}
 
 	public IElementType getOpenQuoteTokenType(char quoteCharacter)
 	{
 		if (quoteCharacter == '"')
+		{
 			return QUOTE_DOUBLE_OPEN;
+		}
 		else if (quoteCharacter == '`')
+		{
 			return QUOTE_TICK_OPEN;
+		}
 		else if (quoteCharacter == '\'')
+		{
 			return QUOTE_SINGLE_OPEN;
+		}
 		else
+		{
 			throw new RuntimeException("Unknown open quote type " + quoteCharacter);
+		}
 	}
 
 	public IElementType getCloseQuoteTokenType(char quoteCharacter)
 	{
 		if (quoteCharacter == '"')
+		{
 			return QUOTE_DOUBLE_CLOSE;
+		}
 		else if (quoteCharacter == '`')
+		{
 			return QUOTE_TICK_CLOSE;
+		}
 		else if (quoteCharacter == '\'')
+		{
 			return QUOTE_SINGLE_CLOSE;
+		}
 		else
+		{
 			throw new RuntimeException("Unknown close quote type " + quoteCharacter);
+		}
 	}
 
 
@@ -1669,13 +1806,21 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		int currentState = yystate();
 		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
+		{
 			return getQStringLexer();
+		}
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
+		{
 			return getQQStringLexer();
+		}
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
+		{
 			return getQXStringLexer();
+		}
 		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
+		{
 			return getQStringLexer();
+		}
 //		return getQWStringLexer();
 
 		throw new RuntimeException("Unknown lexical state for string token " + currentState);
@@ -1708,7 +1853,9 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			int endOffset = 1;
 			while (Character.isDigit(tokenText.charAt(endOffset)))
+			{
 				endOffset++;
+			}
 
 			yypushback(tokenText.length() - endOffset);
 			return NUMBER_SIMPLE;
@@ -1850,12 +1997,16 @@ public class PerlLexer extends PerlLexerGenerated
 			IElementType packageTokenType = parsePackageCanonical();
 
 			if (packageTokenType == PACKAGE_CORE_IDENTIFIER && RESERVED_TOKEN_TYPES.containsKey(identifier))
+			{
 				barewordToken.setTokenType(RESERVED_TOKEN_TYPES.get(identifier));
+			}
 			return packageTokenType;
 
 		}
 		else
+		{
 			throw new RuntimeException("Inappropriate package name " + tokenText);
+		}
 	}
 
 	// checks if ahead is comma, semi, close brace
@@ -1874,7 +2025,9 @@ public class PerlLexer extends PerlLexerGenerated
 							&& nextPosition + 1 < getBufferEnd()
 							&& buffer.charAt(nextPosition + 1) == '>'
 					)
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -1891,7 +2044,9 @@ public class PerlLexer extends PerlLexerGenerated
 							&& nextPosition + 1 < getBufferEnd()
 							&& buffer.charAt(nextPosition + 1) == '>'
 					)
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -1907,19 +2062,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return OPERATOR_DEREFERENCE;
 	}
 
-	/**
-	 * Checks if buffer at current offset contains specific string
-	 *
-	 * @param buffer  CharSequence buffer
-	 * @param offset  offset
-	 * @param pattern string to search
-	 * @return search result
-	 */
-	public boolean bufferAtString(CharSequence buffer, int offset, CharSequence pattern)
-	{
-		int patternEnd = offset + pattern.length();
-		return getBufferEnd() >= patternEnd && StringUtil.equals(buffer.subSequence(offset, patternEnd), pattern);
-	}
 
 	public void registerToken(IElementType tokenType, String tokenText)
 	{
@@ -1927,8 +2069,12 @@ public class PerlLexer extends PerlLexerGenerated
 
 		// fixme refactor this
 		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
+		{
 			if (yystate() == YYINITIAL && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
+			{
 				yybegin(LEX_CODE);
+			}
+		}
 	}
 
 
@@ -2026,20 +2172,32 @@ public class PerlLexer extends PerlLexerGenerated
 		if (waitingSubAttribute || waitingVarAttribute)
 		{
 			if (tokenType == LEFT_BRACE)
+			{
 				waitingAttributeBraceLevel++;
+			}
 			else if (tokenType == RIGHT_BRACE)
+			{
 				waitingAttributeBraceLevel--;
+			}
 			if (tokenType == LEFT_PAREN)
+			{
 				waitingAttributeParenLevel++;
+			}
 			else if (tokenType == RIGHT_PAREN)
+			{
 				waitingAttributeParenLevel--;
+			}
 
 			if (waitingSubAttribute)
 			{
 				if (tokenType == LEFT_BRACKET)
+				{
 					waitingAttributeBracketLevel++;
+				}
 				else if (tokenType == RIGHT_BRACKET)
+				{
 					waitingAttributeBracketLevel--;
+				}
 			}
 
 			if (waitingAttributeBraceLevel < 0

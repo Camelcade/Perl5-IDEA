@@ -39,9 +39,13 @@ import java.util.List;
 
 public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings>
 {
-	public String START_TAG = "[%";
-	public String END_TAG = "%]";
-	public String OUTLINE_TAG = "%%";
+	public static final String DEFAULT_START_TAG = "[%";
+	public static final String DEFAULT_END_TAG = "%]";
+	public static final String DEFAULT_OUTLINE_TAG = "%%";
+
+	public String START_TAG = DEFAULT_START_TAG;
+	public String END_TAG = DEFAULT_END_TAG;
+	public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
 	public boolean ENABLE_ANYCASE = false;
 	public boolean ENABLE_RELATIVE = false;
 	public List<String> TEMPLATE_DIRS = new ArrayList<String>();

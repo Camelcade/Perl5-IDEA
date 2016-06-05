@@ -254,7 +254,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 		}
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK || currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
+			if (isBufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + KEYWORD_BLOCK_CLOSER.length());
@@ -270,7 +270,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 		}
 		else if (currentCustomState == LEX_MASON_PERL_CALL_BLOCK)
 		{
-			if (bufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
+			if (isBufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
 			{
 				setTokenStart(tokenStart);
 				setTokenEnd(tokenStart + KEYWORD_CALL_CLOSER.length());
@@ -285,7 +285,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			}
 
 		}
-		else if (currentCustomState == LEX_MASON_PERL_BLOCK && bufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
+		else if (currentCustomState == LEX_MASON_PERL_BLOCK && isBufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
 		{
 			setTokenStart(tokenStart);
 			setTokenEnd(tokenStart + BLOCK_CLOSE_TAG.length());
@@ -466,7 +466,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 		int customState = getCustomState();
 		return buffer.charAt(currentPosition) == '\n' ||
 				(customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
-						&& bufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
+						&& isBufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
 				;
 	}
 
