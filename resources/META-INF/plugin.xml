@@ -367,6 +367,10 @@
         <lang.findUsagesProvider language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
+        <!-- Template Toolkit -->
+        <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
+
+        <!-- End of template toolkit -->
 
         <!--Embedded Perl-->
         <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
