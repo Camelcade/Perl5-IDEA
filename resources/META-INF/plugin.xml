@@ -369,6 +369,8 @@
 
         <!-- Template Toolkit -->
         <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
+        <lang.fileViewProviderFactory language="Template Toolkit 2"
+                                      implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
 
         <!-- End of template toolkit -->
 
