@@ -16,10 +16,17 @@
 
 package com.perl5.lang.tt2.filetypes;
 
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
+import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,6 +42,15 @@ public class TemplateToolkitFileType extends LanguageFileType
 	public TemplateToolkitFileType()
 	{
 		super(TemplateToolkitLanguage.INSTANCE);
+		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
+		{
+			@Override
+			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
+			{
+				return new TemplateToolkitHighlighter(project, virtualFile, editorColorsScheme);
+			}
+		});
+
 	}
 
 	@NotNull

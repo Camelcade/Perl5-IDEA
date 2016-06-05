@@ -30,6 +30,9 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by hurricup on 05.06.2016.
  */
@@ -37,17 +40,26 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
 {
 	private final Language myBaseLanguage = TemplateToolkitLanguage.INSTANCE;
 	private final Language myTemplateLanguage;
+	private final Set<Language> myRelevantLanguages = new HashSet<Language>();
 
 	public TemplateToolkitFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
 	{
 		super(manager, virtualFile, eventSystemEnabled);
-		myTemplateLanguage = calcTemplateLanguage(manager, virtualFile);
+		myRelevantLanguages.add(getBaseLanguage());
+		myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
 	}
 
-	protected Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
+	public static Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
 	{
 		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
 		return result == null ? StdLanguages.HTML : result;
+	}
+
+	@NotNull
+	@Override
+	public Set<Language> getLanguages()
+	{
+		return myRelevantLanguages;
 	}
 
 	@NotNull
@@ -76,7 +88,7 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
 	{
 		if (lang == getTemplateDataLanguage())
 		{
-			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(StdLanguages.HTML).createFile(this);
+			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage()).createFile(this);
 			file.setContentElementType(TemplateToolkitElementTypes.TT2_TEMPLATE_DATA);
 			return file;
 		}

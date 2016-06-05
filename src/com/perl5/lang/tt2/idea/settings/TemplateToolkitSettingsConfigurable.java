@@ -23,6 +23,7 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.components.JBList;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
@@ -145,7 +146,7 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 
 		mySettings.TEMPLATE_DIRS.clear();
 		mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
-
+		FileContentUtil.reparseOpenedFiles();
 	}
 
 	@Override
