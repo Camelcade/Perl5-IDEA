@@ -94,4 +94,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("insert");
 	}
 
+	public void testChomp()
+	{
+		doTest("chomp");
+	}
+
 }

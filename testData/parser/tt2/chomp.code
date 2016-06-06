@@ -1,0 +1,11 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% INSERT myfile %]
+[%- INSERT myfile %]
+[% INSERT myfile -%]
+[%- INSERT myfile -%]
+
+</body>
+</html>
