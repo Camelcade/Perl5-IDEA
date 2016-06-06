@@ -64,6 +64,10 @@ public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase impl
 		{
 			return PerlSyntaxHighlighter.ATTRIBUTES_MAP.get(PerlElementTypes.NUMBER);
 		}
+		else if (tokenType == LINE_COMMENT)
+		{
+			return PerlSyntaxHighlighter.ATTRIBUTES_MAP.get(PerlElementTypes.COMMENT_LINE);
+		}
 		return new TextAttributesKey[0];
 	}
 }

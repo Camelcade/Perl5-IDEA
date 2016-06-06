@@ -101,20 +101,24 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		{
 			if (isBufferAtString(buffer, tokenStart, getEndTag()))
 			{
-				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + getEndTag().length());
-				setCustomState(LEX_HTML);
+				endTemplate(tokenStart, getEndTag().length());
 				return TT2_CLOSE_TAG;
+			}
+			else if (isLineComment(buffer, tokenStart, bufferEnd))
+			{
+				return lexLineComment(buffer, tokenStart, bufferEnd);
 			}
 		}
 		else if (currentCustomState == LEX_TEMPLATE_LINE)
 		{
 			if (tokenStart < bufferEnd && buffer.charAt(tokenStart) == '\n')
 			{
-				setTokenStart(tokenStart);
-				setTokenEnd(tokenStart + 1);
-				setCustomState(LEX_HTML);
+				endTemplate(tokenStart, 1);
 				return TT2_HARD_NEWLINE;
+			}
+			else if (isLineComment(buffer, tokenStart, bufferEnd))
+			{
+				return lexLineComment(buffer, tokenStart, bufferEnd);
 			}
 		}
 
@@ -169,6 +173,42 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		}
 
 		return result;
+	}
+
+	protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd)
+	{
+		return getTokenHistory().getLastTokenType() != TT2_OPEN_TAG && offset < bufferEnd && buffer.charAt(offset) == '#';
+	}
+
+	protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd)
+	{
+		int endOffset = offset;
+
+		while (endOffset < bufferEnd)
+		{
+			if (buffer.charAt(endOffset) == '\n')
+			{
+				break;
+			}
+			endOffset++;
+		}
+		setTokenStart(offset);
+		setTokenEnd(endOffset);
+
+		return LINE_COMMENT;
+	}
+
+	protected void endTemplate(int tokenStart, int tokenLength)
+	{
+		setTokenStart(tokenStart);
+		setTokenEnd(tokenStart + tokenLength);
+		setCustomState(LEX_HTML);
+
+		int currentState = yystate();
+		if (currentState == LEX_SQ_STRING || currentState == LEX_DQ_STRING)
+		{
+			popState();
+		}
 	}
 
 	@Override

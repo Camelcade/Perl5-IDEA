@@ -62,6 +62,7 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 
 "," {return TT2_COMMA;}
 "." {return TT2_PERIOD;}
+"#" {return TT2_SHARP;}
 ".." {return TT2_RANGE;}
 
 "==" {return TT2_EQUAL;}

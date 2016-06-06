@@ -112,4 +112,30 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		m.precede().done(SQ_STRING_EXPR);
 		return true;
 	}
+
+	public static boolean parseBlockComment(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == TT2_SHARP)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+
+			PsiBuilder.Marker commentMarker = b.mark();
+			while (!b.eof())
+			{
+				if (b.getTokenType() == TT2_CLOSE_TAG)
+				{
+					break;
+				}
+				b.advanceLexer();
+			}
+			commentMarker.collapse(LINE_COMMENT);
+			b.advanceLexer();
+
+			m.done(BLOCK_COMMENT);
+			return true;
+		}
+		return false;
+	}
+
 }

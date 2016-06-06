@@ -54,5 +54,9 @@ public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolki
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
 		}
+		else if (tokenType == BLOCK_COMMENT)
+		{
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_COMMENT);
+		}
 	}
 }

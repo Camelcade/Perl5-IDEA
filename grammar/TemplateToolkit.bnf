@@ -25,7 +25,8 @@
     tokens=[
 	TT2_OUTER="TT2_OUTER"
 	TT2_HTML="TT2_HTML"
-	TT2_COMMENT="TT2_COMMENT"
+
+	LINE_COMMENT="LINE_COMMENT"
 
 	TT2_OPEN_TAG="[%"
 	TT2_CLOSE_TAG="%]"
@@ -37,6 +38,7 @@
 	TT2_NUMBER="TT2_NUMBER"
 	TT2_NUMBER_SIMPLE="TT2_NUMBER_SIMPLE"
 
+	TT2_SHARP="#"
 	TT2_LEFT_PAREN="("
 	TT2_RIGHT_PAREN=")"
 	TT2_LEFT_BRACKET="["
@@ -127,7 +129,7 @@
 }
 
 root ::= element *
-private element ::= block_element | line_element
+private element ::= <<parseBlockComment>> | block_element | line_element
 
 private block_element ::= TT2_OPEN_TAG [TT2_MINUS] block_element_content [TT2_MINUS] TT2_CLOSE_TAG {pin=1}
 private block_element_content ::= directive_expr {recoverWhile=recover_block_element_content}
@@ -219,6 +221,8 @@ call_expr ::= keyword_or_identifier_term call_arguments
 call_arguments ::= TT2_LEFT_PAREN call_arguments_content ? TT2_RIGHT_PAREN {pin=1}
 private call_arguments_content ::= call_arguments_item (TT2_COMMA call_arguments_item)* {recoverWhile=recover_parenthesised_item}
 private call_arguments_item ::= pair_expr | expr
+
+block_comment ::= expr
 
 term_expr ::=
 	parenthesised_expr |
