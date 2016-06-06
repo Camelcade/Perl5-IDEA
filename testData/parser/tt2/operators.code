@@ -43,6 +43,10 @@
 %% foo % bar
 [% foo mod bar %]
 %% foo mod bar
+[% copyright = '(C) Copyright' _ year _ ' ' _ author %]
+[% copyright = "(C) Copyright $year $author" %]
+%% copyright = '(C) Copyright' _ year _ ' ' _ author
+%% copyright = "(C) Copyright $year $author"
 
 </body>
 </html>

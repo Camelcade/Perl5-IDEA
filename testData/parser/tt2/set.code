@@ -1,0 +1,25 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+[% SET title = 'Hello World' %]
+[% title = 'Hello World' %]
+[% foo  = 'Foo'  %]               # literal value 'Foo'
+[% bar  =  foo   %]               # value of variable 'foo'
+[% cost = '$100' %]               # literal value '$100'
+[% item = "$bar: ${cost}.00" %]   # value "Foo: $100.00"
+[% foo  = 'Foo'
+   bar  = foo
+   cost = '$100'
+   item = "$bar: ${cost}.00"
+%]
+[% ten    = 10
+   twenty = 20
+   thirty = twenty + ten
+   forty  = 2 * twenty
+   fifty  = 100 div 2
+   six    = twenty mod 7
+%]
+[% copyright = '(C) Copyright' _ year _ ' ' _ author %]
+[% copyright = "(C) Copyright $year $author" %]
+</body>
+</html>

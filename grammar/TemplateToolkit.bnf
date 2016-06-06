@@ -124,13 +124,25 @@
 }
 
 root ::= element *
-private element ::=
-	call_directive |
-	set_directive |
-	get_directive
+private element ::= block_element | line_element
 
-//private recover_block_element ::= !(TT2_CLOSE_TAG) // manual recovery needs
-//private recover_line_element ::= !(TT2_HARD_NEWLINE) // manual recovery needs
+private block_element ::= TT2_OPEN_TAG  block_element_content TT2_CLOSE_TAG {pin=1}
+private block_element_content ::= directive_expr {recoverWhile=recover_block_element_content}
+private recover_block_element_content ::= !(TT2_CLOSE_TAG) // manual recovery needs
+
+private line_element ::= TT2_OUTLINE_TAG line_element_content <<parseHardNewLine>> {pin=1}
+private line_element_content ::= directive_expr {recoverWhile=recover_line_element_content}
+private recover_line_element_content ::= !(TT2_HARD_NEWLINE) // manual recovery needs
+
+private directive_expr ::=
+	call_directive_expr |
+	set_directive_expr |
+	get_directive_expr
+
+call_directive_expr ::= TT2_CALL expr {pin=1}
+get_directive_expr ::= [TT2_GET] expr
+private set_directive_expr ::= [TT2_SET] set_directive_item +
+set_directive_item ::= keyword_or_identifier_term TT2_ASSIGN expr {pin=2}
 
 expr ::=
 	ternar_expr |
@@ -152,29 +164,6 @@ add_expr ::= expr ((TT2_PLUS|TT2_MINUS|TT2_CONCAT) expr)+
 mul_expr ::= expr ((TT2_MUL|TT2_DIV|TT2_MOD|TT2_DIV_TEXT|TT2_MOD_TEXT) expr)+
 unary_expr ::= (TT2_NOT|TT2_NOT_TEXT) expr { rightAssociative=true }
 
-
-private get_directive ::= block_get_expr | line_get_expr
-private block_get_expr ::= TT2_OPEN_TAG  block_get_expr_content TT2_CLOSE_TAG// {pin=1}
-private block_get_expr_content ::= get_directive_expr //{recoverWhile=recover_block_element}
-private line_get_expr ::= TT2_OUTLINE_TAG line_get_expr_content <<parseHardNewLine>> //{pin=1}
-private line_get_expr_content ::= get_directive_expr //{recoverWhile=recover_line_element}
-get_directive_expr ::= [TT2_GET] expr
-
-private call_directive ::= block_call_expr | line_call_expr
-private block_call_expr ::= TT2_OPEN_TAG  block_call_expr_content TT2_CLOSE_TAG //{pin=1}
-private block_call_expr_content ::= call_directive_expr //{recoverWhile=recover_block_element}
-private line_call_expr ::= TT2_OUTLINE_TAG line_call_expr_content <<parseHardNewLine>> //{pin=1}
-private line_call_expr_content ::= call_directive_expr //{recoverWhile=recover_line_element}
-call_directive_expr ::= TT2_CALL expr {pin=1}
-
-private set_directive ::= block_set_expr | line_set_expr
-private block_set_expr ::= TT2_OPEN_TAG  block_set_expr_content TT2_CLOSE_TAG //{pin=1}
-private block_set_expr_content ::= set_directive_expr //{recoverWhile=recover_block_element}
-private line_set_expr ::= TT2_OUTLINE_TAG line_set_expr_content <<parseHardNewLine>> //{pin=1}
-private line_set_expr_content ::= set_directive_expr //{recoverWhile=recover_line_element}
-private set_directive_expr ::= [TT2_SET] set_directive_item + {pin=1}
-set_directive_item ::= keyword_or_identifier_term TT2_ASSIGN expr {pin=2}
-
 braced_expr ::= TT2_LEFT_BRACE braced_item_content TT2_RIGHT_BRACE {pin=1}
 private braced_item_content ::= expr {recoverWhile=recover_braced_item}
 private recover_braced_item ::= !(TT2_RIGHT_BRACE)
@@ -192,7 +181,6 @@ private deref_part ::=
 	call_expr |
 	TT2_NUMBER_SIMPLE |
 	keyword_or_identifier_term
-
 
 call_expr ::= keyword_or_identifier_term parenthesised_expr
 

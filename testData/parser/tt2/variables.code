@@ -1,0 +1,29 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+This is version [% version %] ([% release %]).
+Serial number: [% serial_no %]
+[% article %]
+
+[% person.id %]: [% person.name %] <[% person.email %]>
+
+[% primes.first %] - [% primes.last %], including [% primes.3 %]
+[% primes.size %] prime numbers: [% primes.join(', ') %]
+
+[% wizard %]
+[% wizard('Hocus Pocus!') %]
+
+[% cgi.param('mode') %]
+[% article %]
+
+<a href="[% home %]">Home</a>
+<a href="[% page.prev %]">Previous Page</a>
+<a href="[% page.next %]">Next Page</a>
+
+[% message %]           # outputs "Hello World!"
+[% _secret %]           # no output
+[% thing.public %]      # outputs "123"
+[% thing._private %]    # no output
+
+</body>
+</html>
