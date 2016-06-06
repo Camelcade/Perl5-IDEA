@@ -1,6 +1,6 @@
 # Perl5 plugin for IntelliJ IDEA
 
-[![Build Status](https://travis-ci.org/hurricup/Perl5-IDEA.svg)](https://travis-ci.org/hurricup/Perl5-IDEA)
+[![Build Status](https://travis-ci.org/Camelcade/Perl5-IDEA.svg)](https://travis-ci.org/Camelcade/Perl5-IDEA)
 
 Camelcade adds Perl5 support to any Java-based JetBrains product.
 
