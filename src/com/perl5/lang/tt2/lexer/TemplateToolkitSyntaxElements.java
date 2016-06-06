@@ -68,6 +68,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("CALL", TT2_CALL);
 		KEYWORDS.put("SET", TT2_SET);
 		KEYWORDS.put("DEFAULT", TT2_DEFAULT);
+		KEYWORDS.put("INSERT", TT2_INSERT);
 		KEYWORDS.put("INCLUDE", TT2_INCLUDE);
 		KEYWORDS.put("PROCESS", TT2_PROCESS);
 		KEYWORDS.put("WRAPPER", TT2_WRAPPER);

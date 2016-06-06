@@ -19,6 +19,8 @@ package com.perl5.lang.tt2.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 
@@ -56,10 +58,58 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return false;
 	}
 
-	public static boolean parseDericiveExpr(PsiBuilder b, int l)
+	public static boolean parseHashKey(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (TemplateToolkitParser.keyword_or_identifier_term(b, l))
+		{
+			m.collapse(TT2_STRING_CONTENT);
+			m.precede().done(SQ_STRING_EXPR);
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean parseDirictiveExpr(PsiBuilder b, int l)
 	{
 		boolean r = TemplateToolkitParser.directive_real_expr(b, l);
 
 		return r;
+	}
+
+	private static boolean isEndMarker(IElementType tokenType)
+	{
+		return tokenType == TT2_HARD_NEWLINE || tokenType == TT2_CLOSE_TAG;
+
+	}
+
+	public static boolean parseFileAsString(PsiBuilder b, int l)
+	{
+		if (b.eof())
+		{
+			return false;
+		}
+
+		IElementType tokenType = b.getTokenType();
+		if (isEndMarker(tokenType))
+		{
+			return false;
+		}
+
+		PsiBuilder.Marker m = b.mark();
+		while (!b.eof())
+		{
+			tokenType = b.rawLookup(1);
+			if (isEndMarker(tokenType) || TemplateToolkitParserDefinition.WHITE_SPACES.contains(tokenType))
+			{
+				b.advanceLexer();
+				break;
+			}
+			b.advanceLexer();
+		}
+		m.collapse(TT2_STRING_CONTENT);
+		m.precede().done(SQ_STRING_EXPR);
+		return true;
 	}
 }

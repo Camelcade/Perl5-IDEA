@@ -89,4 +89,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("default");
 	}
 
+	public void testInsert()
+	{
+		doTest("insert");
+	}
+
 }

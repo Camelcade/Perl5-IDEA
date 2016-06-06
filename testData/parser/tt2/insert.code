@@ -1,0 +1,22 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% INSERT myfile %]
+[% INSERT foo %]            # looks for /here/foo then /there/foo
+[% INSERT /etc/passwd %]    # file error: ABSOLUTE not set
+[% INSERT ../secret %]      # file error: RELATIVE not set
+[% INSERT misc/legalese.txt            %]
+[% INSERT 'dos98/Program Files/stupid' %]
+[% language = 'en'
+   legalese = 'misc/legalese.txt'
+%]
+
+[% INSERT $legalese %]              # misc/legalese.txt
+[% INSERT "$language/$legalese" %]  # en/misc/legalese.txt
+[% INSERT legalese.txt + warning.txt %]
+[% INSERT  "$legalese" + warning.txt %]  # requires quoting
+
+
+</body>
+</html>
