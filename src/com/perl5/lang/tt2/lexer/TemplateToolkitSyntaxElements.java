@@ -38,6 +38,8 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 			TT2_ASSIGN,
 			TT2_PERIOD,
 
+			TT2_CONCAT,
+			TT2_RANGE,
 			TT2_EQUAL,
 			TT2_NOT_EQUAL,
 			TT2_LT,

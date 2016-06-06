@@ -78,6 +78,7 @@
 	TT2_DIV="/"
 	TT2_MOD="%"
 	TT2_CONCAT="_"
+	TT2_RANGE=".."
 
 	TT2_DIV_TEXT="div"
 	TT2_AND_TEXT="and"
@@ -143,15 +144,20 @@ private directive_expr ::=
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
 private set_directive_expr ::= [TT2_SET] set_directive_item +
-set_directive_item ::= identifier_expr TT2_ASSIGN (expr|hash_expr) {pin=2}
+set_directive_item ::= identifier_expr TT2_ASSIGN (hash_expr|array_expr|expr) {pin=2}
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= hash_expr_item *
 hash_expr_item ::= keyword_or_identifier_term (TT2_ASSIGN|TT2_HASH_ASSIGN) expr [TT2_COMMA] {pin=2 recoverWhile=recover_hash_expr_item}
 private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_RIGHT_BRACE)
 
+array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
+private array_expr_content ::= expr ([TT2_COMMA] expr) * {recoverWhile=recover_array_content}
+private recover_array_content ::= !(TT2_RIGHT_BRACKET)
+
 expr ::=
 	ternar_expr |
+	range_expr |
 	or_expr |
 	and_expr |
 	equal_expr |
@@ -162,6 +168,7 @@ expr ::=
 	term_expr
 
 ternar_expr ::= expr TT2_QUESTION expr TT2_COLON expr { rightAssociative=true }
+range_expr ::= expr TT2_RANGE expr
 or_expr ::= expr ((TT2_OR|TT2_OR_TEXT) expr )+
 and_expr ::= expr ((TT2_AND|TT2_AND_TEXT) expr)+
 equal_expr ::= expr (TT2_EQUAL|TT2_NOT_EQUAL) expr
@@ -169,10 +176,6 @@ compare_expr ::= expr (TT2_LE|TT2_LT|TT2_GT|TT2_GE) expr
 add_expr ::= expr ((TT2_PLUS|TT2_MINUS|TT2_CONCAT) expr)+
 mul_expr ::= expr ((TT2_MUL|TT2_DIV|TT2_MOD|TT2_DIV_TEXT|TT2_MOD_TEXT) expr)+
 unary_expr ::= (TT2_NOT|TT2_NOT_TEXT) expr { rightAssociative=true }
-
-bracketed_expr ::= TT2_LEFT_BRACKET bracketed_item_content TT2_RIGHT_BRACKET {pin=1}
-private bracketed_item_content ::= expr {recoverWhile=recover_bracketed_item}
-private recover_bracketed_item ::= !(TT2_RIGHT_BRACKET)
 
 parenthesised_expr ::= TT2_LEFT_PAREN parenthesised_item_content TT2_RIGHT_PAREN {pin=1}
 private parenthesised_item_content ::= expr {recoverWhile=recover_parenthesised_item}
@@ -194,7 +197,6 @@ private recover_braced_variable ::= !(TT2_RIGHT_BRACE)
 call_expr ::= keyword_or_identifier_term parenthesised_expr
 
 term_expr ::=
-	bracketed_expr |
 	parenthesised_expr |
 	call_expr |
 	identifier_expr |

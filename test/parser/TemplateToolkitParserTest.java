@@ -49,9 +49,14 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("strings");
 	}
 
-	public void testHashes()
+	public void testHash()
 	{
-		doTest("hashes");
+		doTest("hash");
+	}
+
+	public void testArray()
+	{
+		doTest("array");
 	}
 
 	public void testVariables()
