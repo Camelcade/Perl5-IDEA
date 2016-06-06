@@ -70,7 +70,7 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 	static
 	{
 		attributesMap.put(POD_POD, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
-//		attributesMap.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
+//		ATTRIBUTES_MAP.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
 		attributesMap.put(PodElementTypes.POD_NEWLINE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
 		attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
 	}

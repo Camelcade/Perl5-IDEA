@@ -31,6 +31,9 @@ public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, Template
 {
 	private static final BracePair[] PAIRS = new BracePair[]{
 			new BracePair(TT2_OPEN_TAG, TT2_CLOSE_TAG, false),
+			new BracePair(TT2_LEFT_BRACE, TT2_RIGHT_BRACE, false),
+			new BracePair(TT2_LEFT_BRACKET, TT2_RIGHT_BRACKET, false),
+			new BracePair(TT2_LEFT_PAREN, TT2_RIGHT_PAREN, false),
 	};
 
 	@Override

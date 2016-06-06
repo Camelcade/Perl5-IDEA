@@ -16,12 +16,29 @@
 
 package com.perl5.lang.tt2.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
 public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes
 {
+	public static boolean parseIdentifier(PsiBuilder b, int l)
+	{
+		if (consumeToken(b, TT2_IDENTIFIER))
+		{
+			return true;
+		}
+		else if (TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET.contains(b.getTokenType()))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(TT2_IDENTIFIER);
+			return true;
+		}
+		return false;
+	}
 }

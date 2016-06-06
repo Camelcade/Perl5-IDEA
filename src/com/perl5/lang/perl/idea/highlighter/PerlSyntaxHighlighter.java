@@ -88,7 +88,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_HASH = createTextAttributesKey("PERL_HASH", DefaultLanguageHighlighterColors.IDENTIFIER);
 	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.IDENTIFIER);
 	public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
-	private static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
+
+	public static final HashMap<IElementType, TextAttributesKey[]> ATTRIBUTES_MAP = new HashMap<IElementType, TextAttributesKey[]>();
 	public static TextAttributesKey UNUSED_DEPRECATED;
 
 	static
@@ -103,65 +104,65 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	static
 	{
-		attributesMap.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
-		attributesMap.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		ATTRIBUTES_MAP.put(PerlElementTypes.OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
+		ATTRIBUTES_MAP.put(PerlElementTypes.OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
 
-		attributesMap.put(PerlElementTypes.BLOCK_NAME, PERL_KEYWORD_KEYS);
+		ATTRIBUTES_MAP.put(PerlElementTypes.BLOCK_NAME, PERL_KEYWORD_KEYS);
 
-		attributesMap.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
+		ATTRIBUTES_MAP.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
 
-		attributesMap.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
-		attributesMap.put(PerlElementTypes.COMMENT_ANNOTATION, new TextAttributesKey[]{PERL_COMMENT});
-		attributesMap.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
+		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
+		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_ANNOTATION, new TextAttributesKey[]{PERL_COMMENT});
+		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
-		attributesMap.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 
-		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 
-		attributesMap.put(PerlElementTypes.HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.HEREDOC_END, new TextAttributesKey[]{PERL_SQ_STRING});
 
-		attributesMap.put(PerlElementTypes.REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_QUOTE_OPEN_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_QUOTE_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
-		attributesMap.put(PerlElementTypes.REGEX_MODIFIER, PERL_KEYWORD_KEYS);
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_QUOTE_CLOSE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_QUOTE_OPEN, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_QUOTE_OPEN_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_QUOTE_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.REGEX_MODIFIER, PERL_KEYWORD_KEYS);
 
-		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_SINGLE, new TextAttributesKey[]{PERL_SQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_TICK, new TextAttributesKey[]{PERL_DX_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE_OPEN, new TextAttributesKey[]{PERL_DQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_SINGLE_OPEN, new TextAttributesKey[]{PERL_SQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_TICK_OPEN, new TextAttributesKey[]{PERL_DX_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_DOUBLE_CLOSE, new TextAttributesKey[]{PERL_DQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_SINGLE_CLOSE, new TextAttributesKey[]{PERL_SQ_STRING});
-		attributesMap.put(PerlElementTypes.QUOTE_TICK_CLOSE, new TextAttributesKey[]{PERL_DX_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_SINGLE, new TextAttributesKey[]{PERL_SQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_TICK, new TextAttributesKey[]{PERL_DX_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_DOUBLE_OPEN, new TextAttributesKey[]{PERL_DQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_SINGLE_OPEN, new TextAttributesKey[]{PERL_SQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_TICK_OPEN, new TextAttributesKey[]{PERL_DX_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_DOUBLE_CLOSE, new TextAttributesKey[]{PERL_DQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_SINGLE_CLOSE, new TextAttributesKey[]{PERL_SQ_STRING});
+		ATTRIBUTES_MAP.put(PerlElementTypes.QUOTE_TICK_CLOSE, new TextAttributesKey[]{PERL_DX_STRING});
 
-		attributesMap.put(PerlElementTypes.SEMICOLON, new TextAttributesKey[]{PERL_SEMICOLON});
-		attributesMap.put(PerlElementTypes.LEFT_BRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlElementTypes.RIGHT_BRACE, new TextAttributesKey[]{PERL_BRACE});
-		attributesMap.put(PerlElementTypes.LEFT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlElementTypes.RIGHT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
-		attributesMap.put(PerlElementTypes.LEFT_PAREN, new TextAttributesKey[]{PERL_PAREN});
-		attributesMap.put(PerlElementTypes.RIGHT_PAREN, new TextAttributesKey[]{PERL_PAREN});
+		ATTRIBUTES_MAP.put(PerlElementTypes.SEMICOLON, new TextAttributesKey[]{PERL_SEMICOLON});
+		ATTRIBUTES_MAP.put(PerlElementTypes.LEFT_BRACE, new TextAttributesKey[]{PERL_BRACE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.RIGHT_BRACE, new TextAttributesKey[]{PERL_BRACE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.LEFT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
+		ATTRIBUTES_MAP.put(PerlElementTypes.RIGHT_BRACKET, new TextAttributesKey[]{PERL_BRACK});
+		ATTRIBUTES_MAP.put(PerlElementTypes.LEFT_PAREN, new TextAttributesKey[]{PERL_PAREN});
+		ATTRIBUTES_MAP.put(PerlElementTypes.RIGHT_PAREN, new TextAttributesKey[]{PERL_PAREN});
 
-		attributesMap.put(PerlElementTypes.NUMBER, new TextAttributesKey[]{PERL_NUMBER});
-		attributesMap.put(PerlElementTypes.NUMBER_SIMPLE, new TextAttributesKey[]{PERL_NUMBER});
-		attributesMap.put(PerlElementTypes.NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
+		ATTRIBUTES_MAP.put(PerlElementTypes.NUMBER, new TextAttributesKey[]{PERL_NUMBER});
+		ATTRIBUTES_MAP.put(PerlElementTypes.NUMBER_SIMPLE, new TextAttributesKey[]{PERL_NUMBER});
+		ATTRIBUTES_MAP.put(PerlElementTypes.NUMBER_VERSION, new TextAttributesKey[]{PERL_VERSION});
 
 		// key for all operators
-		attributesMap.put(PerlElementTypes.OPERATOR_MUL, new TextAttributesKey[]{PERL_OPERATOR});
+		ATTRIBUTES_MAP.put(PerlElementTypes.OPERATOR_MUL, new TextAttributesKey[]{PERL_OPERATOR});
 		// key for all reserved
-		attributesMap.put(PerlElementTypes.RESERVED_IF, PERL_KEYWORD_KEYS);
+		ATTRIBUTES_MAP.put(PerlElementTypes.RESERVED_IF, PERL_KEYWORD_KEYS);
 
-		attributesMap.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
-		attributesMap.put(PerlElementTypes.TAG_END, new TextAttributesKey[]{PERL_TAG});
-		attributesMap.put(PerlElementTypes.TAG_DATA, new TextAttributesKey[]{PERL_TAG});
+		ATTRIBUTES_MAP.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
+		ATTRIBUTES_MAP.put(PerlElementTypes.TAG_END, new TextAttributesKey[]{PERL_TAG});
+		ATTRIBUTES_MAP.put(PerlElementTypes.TAG_DATA, new TextAttributesKey[]{PERL_TAG});
 
 		// fixme move core highlighting in annotation
-		attributesMap.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		attributesMap.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
+		ATTRIBUTES_MAP.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 	}
 
 
@@ -183,10 +184,14 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if (attributesMap.containsKey(tokenType))
-			return attributesMap.get(tokenType);
+		if (ATTRIBUTES_MAP.containsKey(tokenType))
+		{
+			return ATTRIBUTES_MAP.get(tokenType);
+		}
 		else if (PerlLexer.OPERATORS_TOKENSET.contains(tokenType))
-			return attributesMap.get(PerlElementTypes.OPERATOR_MUL);
+		{
+			return ATTRIBUTES_MAP.get(PerlElementTypes.OPERATOR_MUL);
+		}
 
 		return EMPTY_KEYS;
 	}

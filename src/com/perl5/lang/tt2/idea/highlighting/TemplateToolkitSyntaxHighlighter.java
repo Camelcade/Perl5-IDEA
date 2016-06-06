@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitLexerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -58,6 +59,10 @@ public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase impl
 		if (myMarkers.contains(tokenType))
 		{
 			return PerlSyntaxHighlighter.EMBED_MARKER_KEYS;
+		}
+		else if (tokenType == TT2_NUMBER || tokenType == TT2_NUMBER_SIMPLE)
+		{
+			return PerlSyntaxHighlighter.ATTRIBUTES_MAP.get(PerlElementTypes.NUMBER);
 		}
 		return new TextAttributesKey[0];
 	}

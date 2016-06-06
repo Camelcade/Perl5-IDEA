@@ -170,4 +170,23 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 	{
 		return isOutlineEnabled() && !(offset > 0 && buffer.charAt(offset - 1) != '\n') && isBufferAtString(buffer, offset, getOutlineTag());
 	}
+
+	protected boolean isAnycaseEnabled()
+	{
+		return mySettings != null && mySettings.ENABLE_ANYCASE;
+	}
+
+	@Override
+	public IElementType parseIdentifier()
+	{
+		String identifier = yytext().toString();
+		if (isAnycaseEnabled())
+		{
+			identifier = identifier.toUpperCase();
+		}
+
+		IElementType tokenType = TemplateToolkitSyntaxElements.KEYWORDS.get(identifier);
+
+		return tokenType == null ? TT2_IDENTIFIER : tokenType;
+	}
 }

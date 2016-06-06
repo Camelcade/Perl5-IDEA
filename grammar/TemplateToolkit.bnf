@@ -17,6 +17,7 @@
   psiPackage="com.perl5.lang.tt2.psi"
   psiImplPackage="com.perl5.lang.tt2.psi.impl"
 
+	extends(".+_expr")=expr
 
 
 //  psiImplUtilClass="com.perl5.lang.tt2.psi.impl.TemplateToolkitPsiImplUtil"
@@ -34,20 +35,104 @@
 	TT2_IDENTIFIER="TT2_IDENTIFIER"
 	TT2_SYMBOL="TT2_SYMBOL"
 	TT2_NUMBER="TT2_NUMBER"
+	TT2_NUMBER_SIMPLE="TT2_NUMBER_SIMPLE"
+
+	TT2_LEFT_PAREN="("
+	TT2_RIGHT_PAREN=")"
+	TT2_LEFT_BRACKET="["
+	TT2_RIGHT_BRACKET="]"
+	TT2_LEFT_BRACE="{"
+	TT2_RIGHT_BRACE="}"
+	TT2_ASSIGN="="
+	TT2_SIGIL_SCALAR="$"
+	TT2_PERIOD="."
+
+	TT2_GET="GET"
+	TT2_CALL="CALL"
+	TT2_SET="SET"
+	TT2_DEFAULT="DEFAULT"
+	TT2_INCLUDE="INCLUDE"
+	TT2_PROCESS="PROCESS"
+	TT2_WRAPPER="WRAPPER"
+	TT2_BLOCK="BLOCK"
+	TT2_END="END"
+	TT2_IF="IF"
+	TT2_UNLESS="UNLESS"
+	TT2_ELSIF="ELSIF"
+	TT2_ELSE="ELSE"
+	TT2_SWITCH="SWITCH"
+	TT2_CASE="CASE"
+	TT2_FOREACH="FOREACH"
+	TT2_WHILE="WHILE"
+	TT2_FILTER="FILTER"
+	TT2_USE="USE"
+	TT2_MACRO="MACRO"
+	TT2_PERL="PERL"
+	TT2_RAWPERL="RAWPERL"
+	TT2_TRY="TRY"
+	TT2_THROW="THROW"
+	TT2_CATCH="CATCH"
+	TT2_FINAL="FINAL"
+	TT2_NEXT="NEXT"
+	TT2_LAST="LAST"
+	TT2_RETURN="RETURN"
+	TT2_STOP="STOP"
+	TT2_CLEAR="CLEAR"
+	TT2_META="META"
+	TT2_TAGS="TAGS"
+	TT2_DEBUG="DEBUG"
 
     ]
 
 }
 
 root ::= element *
-private element ::= block_element|line_element
+private element ::=
+	get_derective |
+	expr
 
-block_element ::= TT2_OPEN_TAG  block_element_content TT2_CLOSE_TAG {pin=1}
-private block_element_content ::= element_content* {recoverWhile=recover_block_element}
 private recover_block_element ::= !(TT2_CLOSE_TAG) // manual recovery needs
-
-line_element ::= TT2_OUTLINE_TAG line_element_content TT2_HARD_NEWLINE {pin=1}
-private line_element_content ::= element_content* { recoverWhile=recover_line_element}
 private recover_line_element ::= !(TT2_HARD_NEWLINE) // manual recovery needs
 
-private element_content ::= TT2_IDENTIFIER | TT2_SYMBOL | TT2_NUMBER
+expr ::=
+	braced_expr |
+	bracketed_expr |
+	parenthesised_expr |
+	term_expr
+
+private get_derective ::= block_get_expr | line_get_expr
+private block_get_expr ::= TT2_OPEN_TAG  block_get_expr_content TT2_CLOSE_TAG {pin=1}
+private block_get_expr_content ::= get_expr {recoverWhile=recover_block_element}
+private line_get_expr ::= TT2_OUTLINE_TAG line_get_expr_content TT2_HARD_NEWLINE {pin=1}
+private line_get_expr_content ::= get_expr {recoverWhile=recover_line_element}
+get_expr ::= [TT2_GET] expr
+
+braced_expr ::= TT2_LEFT_BRACE braced_item_content TT2_RIGHT_BRACE {pin=1}
+private braced_item_content ::= expr {recoverWhile=recover_braced_item}
+private recover_braced_item ::= !(TT2_RIGHT_BRACE)
+
+bracketed_expr ::= TT2_LEFT_BRACKET bracketed_item_content TT2_RIGHT_BRACKET {pin=1}
+private bracketed_item_content ::= expr {recoverWhile=recover_bracketed_item}
+private recover_bracketed_item ::= !(TT2_RIGHT_BRACKET)
+
+parenthesised_expr ::= TT2_LEFT_PAREN parenthesised_item_content TT2_RIGHT_PAREN {pin=1}
+private parenthesised_item_content ::= expr {recoverWhile=recover_parenthesised_item}
+private recover_parenthesised_item ::= !(TT2_RIGHT_PAREN)
+
+identifier_expr ::= TT2_IDENTIFIER (TT2_PERIOD deref_part)*
+private deref_part ::=
+	call_expr |
+	TT2_NUMBER_SIMPLE |
+	keyword_or_identifier_term
+
+call_expr ::= keyword_or_identifier_term parenthesised_expr
+
+term_expr ::=
+	call_expr |
+	identifier_expr |
+	TT2_SYMBOL |
+	TT2_NUMBER |
+	TT2_NUMBER_SIMPLE |
+	keyword_or_identifier_term
+
+private keyword_or_identifier_term ::= <<parseIdentifier>>

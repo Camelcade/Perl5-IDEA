@@ -113,11 +113,13 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 	{
 
 		if (element instanceof PsiPerlNyiStatement)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, "Unimplemented statement"),
 					CodeInsightColors.TODO_DEFAULT_ATTRIBUTES,
 					true,
 					false);
+		}
 		else if (element instanceof PerlAnnotation)
 		{
 			decorateElement(
@@ -154,53 +156,69 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 				annotateStringContainerIfNotInjected(element, holder);
 			}
 			if (tokenType == HANDLE)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_GLOB,
 						PerlGlobUtil.BUILT_IN.contains(element.getText()),
 						false);
+			}
 			else if (tokenType == ATTRIBUTE)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE,
 						false,
 						false);
+			}
 			else if (tokenType == SUB_PROTOTYPE_TOKEN)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
 						false,
 						false);
+			}
 			else if (tokenType == NUMBER_VERSION)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_VERSION,
 						false,
 						false);
+			}
 			else if (tokenType == REGEX_TOKEN)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_REGEX_TOKEN,
 						false,
 						false);
+			}
 			else if (tokenType == LEFT_ANGLE || tokenType == RIGHT_ANGLE)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_ANGLE,
 						false,
 						false);
+			}
 			else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_KEYWORD,
 						true,
 						false);
+			}
 			else if (tokenType == SUB_SIGNATURE_ELEMENT_IGNORE)
+			{
 				decorateElement(
 						holder.createInfoAnnotation(element.getFirstChild(), null),
 						PerlSyntaxHighlighter.PERL_SCALAR,
 						true,
 						false);
+			}
 		}
 	}
 }

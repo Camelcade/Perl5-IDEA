@@ -21,7 +21,7 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 
 
 %{
-//    public abstract IElementType parseEscape();
+    public abstract IElementType parseIdentifier();
 %}
 
 
@@ -43,13 +43,14 @@ PERL_XIDC = [_a-zA-Z0-9]
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
-NUMBER_FLOAT = "." ([0-9][0-9_]*)?
+NUMBER_FLOAT = "." ([0-9][0-9_]*) // ? // fixme this causes incorrect lexing of foo.10.bar
 NUMBER_INT_SIMPLE = [0-9]+
 NUMBER_INT = [0-9][0-9_] *  {NUMBER_FLOAT}? {NUMBER_EXP}?
-NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
-NUMBER_HEX = "0x" [0-9a-fA-F]+
-NUMBER_BIN = "0b"[01]+
-NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
+//NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
+//NUMBER_HEX = "0x" [0-9a-fA-F]+
+//NUMBER_BIN = "0b"[01]+
+NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
+ // | {NUMBER_SMALL} // fixme this causes wrong lexing of foo.bar.10.smth
 
 %state LEX_PREPARSED_ITEMS, LEX_HTML, LEX_TEMPLATE_BLOCK, LEX_TEMPLATE_LINE
 
@@ -59,7 +60,6 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 
 //"," {return OPERATOR_COMMA;}
-//"." {return OPERATOR_CONCAT;}
 //"!" {return OPERATOR_NOT;}
 //"?"  {return QUESTION;}
 //":"  {return COLON;}
@@ -75,24 +75,25 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 //"^" {return OPERATOR_BITWISE_XOR;}
 //"~" {return OPERATOR_BITWISE_NOT;}
 //
-//"=" {return OPERATOR_ASSIGN;}
-//
-//"$"     {return SIGIL_SCALAR; }
-//"{"     {return LEFT_BRACE;}
-//"}"     {return RIGHT_BRACE;}
-//"["     {return LEFT_BRACKET;}
-//"]"     {return RIGHT_BRACKET;}
-//"("     {return LEFT_PAREN;}
-//")"     {return RIGHT_PAREN;}
 //
 //"`"     {return QUOTE_TICK;}
 //"'"     {return QUOTE_SINGLE;}
 //"\""     {return QUOTE_DOUBLE;}
 //"\\"    {return parseEscape();}
 
-//{NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
+"=" {return TT2_ASSIGN;}
+"." {return TT2_PERIOD;}
 
+"$"     {return TT2_SIGIL_SCALAR; }
+"{"     {return TT2_LEFT_BRACE;}
+"}"     {return TT2_RIGHT_BRACE;}
+"["     {return TT2_LEFT_BRACKET;}
+"]"     {return TT2_RIGHT_BRACKET;}
+"("     {return TT2_LEFT_PAREN;}
+")"     {return TT2_RIGHT_PAREN;}
+
+{NUMBER_INT_SIMPLE} {return TT2_NUMBER_SIMPLE;}
 {NUMBER} {return TT2_NUMBER;}
-{IDENTIFIER} {return TT2_IDENTIFIER;}
+{IDENTIFIER} {return parseIdentifier();}
 
 [^]    { return TT2_SYMBOL; }
