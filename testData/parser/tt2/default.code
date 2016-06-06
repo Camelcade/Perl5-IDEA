@@ -1,0 +1,14 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+[% DEFAULT
+    name = 'John Doe'
+    id   = 'jdoe'
+    some = foo.bar
+    other = foo.bar.baz()
+    else = foo.$bar.baz
+    orelse = foo.${bar}.baz
+%]
+
+</body>
+</html>

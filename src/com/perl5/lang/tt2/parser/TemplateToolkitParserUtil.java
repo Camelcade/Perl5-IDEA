@@ -55,4 +55,11 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 		return false;
 	}
+
+	public static boolean parseDericiveExpr(PsiBuilder b, int l)
+	{
+		boolean r = TemplateToolkitParser.directive_real_expr(b, l);
+
+		return r;
+	}
 }
