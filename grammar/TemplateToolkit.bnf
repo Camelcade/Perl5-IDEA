@@ -142,7 +142,7 @@ private directive_expr ::=
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
 private set_directive_expr ::= [TT2_SET] set_directive_item +
-set_directive_item ::= keyword_or_identifier_term TT2_ASSIGN expr {pin=2}
+set_directive_item ::= identifier_expr TT2_ASSIGN expr {pin=2}
 
 expr ::=
 	ternar_expr |
@@ -176,11 +176,18 @@ parenthesised_expr ::= TT2_LEFT_PAREN parenthesised_item_content TT2_RIGHT_PAREN
 private parenthesised_item_content ::= expr {recoverWhile=recover_parenthesised_item}
 private recover_parenthesised_item ::= !(TT2_RIGHT_PAREN)
 
-identifier_expr ::= TT2_IDENTIFIER (TT2_PERIOD deref_part)*
+identifier_expr ::= identifier_expr_content
+private identifier_expr_content ::= TT2_IDENTIFIER (TT2_PERIOD deref_part)*
 private deref_part ::=
 	call_expr |
+	variable_expr |
 	TT2_NUMBER_SIMPLE |
 	keyword_or_identifier_term
+
+variable_expr ::= TT2_SIGIL_SCALAR {variable_braced|identifier_expr_content}
+private variable_braced ::= TT2_LEFT_BRACE variable_braced_content TT2_RIGHT_BRACE {pin=1}
+private variable_braced_content ::= identifier_expr_content {recoverWhile=recover_braced_variable}
+private recover_braced_variable ::= !(TT2_RIGHT_BRACE)
 
 call_expr ::= keyword_or_identifier_term parenthesised_expr
 

@@ -25,5 +25,17 @@ Serial number: [% serial_no %]
 [% thing.public %]      # outputs "123"
 [% thing._private %]    # no output
 
+[% pagename = 'next' %]
+[% page.$pagename.somethign %]       # same as [% page.next %]
+[% page.${pagename}.somethign %]       # same as [% page.next %]
+[% product.id    = 'XYZ-2000'
+   product.desc  = 'Bogon Generator'
+   product.price = 666
+%]
+
+The [% product.id %] [% product.desc %]
+costs $[% product.price %].00
+
+
 </body>
 </html>
