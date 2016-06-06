@@ -11,5 +11,17 @@
 %% foo.GET.bar
 [% bi.zb.10.ar.baz(10) %]
 %% bi.zb.10.ar.baz(10)
+[% template.title or default.title %]
+%% template.title or default.title
+[% score * 100 %]
+%% score * 100
+[% order.nitems ? checkout(order.total) : 'no items' %]
+%% order.nitems ? checkout(order.total) : 'no items'
+[% 15 / 6 %]            # 2.5
+%% 15 / 6
+[% 15 div 6 %]          # 2
+%% 15 div 6
+[% 15 mod 6 %]          # 3
+%% 15 mod 6
 </body>
 </html>
