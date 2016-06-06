@@ -59,30 +59,31 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 
-//"," {return OPERATOR_COMMA;}
-//"!" {return OPERATOR_NOT;}
-//"?"  {return QUESTION;}
-//":"  {return COLON;}
-//";"  {return SEMICOLON;}
-//"+" {return OPERATOR_PLUS;}
-//"-" {return OPERATOR_MINUS;}
-//"/"  {return OPERATOR_DIV;}
-//"*" {return OPERATOR_MUL;}
-//"%" {return OPERATOR_MOD;}
-//"&" {return OPERATOR_BITWISE_AND;}
-//
-//"|" {return OPERATOR_BITWISE_OR;}
-//"^" {return OPERATOR_BITWISE_XOR;}
-//"~" {return OPERATOR_BITWISE_NOT;}
-//
-//
+"," {return TT2_COMMA;}
+"." {return TT2_PERIOD;}
+
+"==" {return TT2_EQUAL;}
+"!=" {return TT2_NOT_EQUAL;}
+"=" {return TT2_ASSIGN;}
+"<" {return TT2_LT;}
+"<=" {return TT2_LE;}
+">" {return TT2_GT;}
+">=" {return TT2_GE;}
+"&&" {return TT2_AND;}
+"||" {return TT2_OR;}
+"!" {return TT2_NOT;}
+"?"  {return TT2_QUESTION;}
+":"  {return TT2_COLON;}
+"+" {return TT2_PLUS;}
+"-" {return TT2_MINUS;}
+"/"  {return TT2_DIV;}
+"*" {return TT2_MUL;}
+"%" {return TT2_MOD;}
+
 //"`"     {return QUOTE_TICK;}
 //"'"     {return QUOTE_SINGLE;}
 //"\""     {return QUOTE_DOUBLE;}
 //"\\"    {return parseEscape();}
-
-"=" {return TT2_ASSIGN;}
-"." {return TT2_PERIOD;}
 
 "$"     {return TT2_SIGIL_SCALAR; }
 "{"     {return TT2_LEFT_BRACE;}

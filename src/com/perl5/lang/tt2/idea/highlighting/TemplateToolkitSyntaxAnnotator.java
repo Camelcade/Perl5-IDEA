@@ -42,5 +42,9 @@ public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolki
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
 		}
+		else if (TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET.contains(tokenType))
+		{
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_OPERATOR);
+		}
 	}
 }

@@ -29,9 +29,36 @@ import java.util.Map;
 public class TemplateToolkitSyntaxElements implements TemplateToolkitElementTypes
 {
 	public static final Map<String, IElementType> KEYWORDS = new HashMap<String, IElementType>();
-	public static final TokenSet KEYWORDS_TOKENSET = TokenSet.create(
-			KEYWORDS.values().toArray(new IElementType[KEYWORDS.values().size()])
+	public static final TokenSet KEYWORDS_TOKENSET;
+
+	public static final Map<String, IElementType> TEXT_OPERATORS = new HashMap<String, IElementType>();
+	public static final TokenSet TEXT_OPERATORS_TOKENSET;
+
+	public static final TokenSet SYMBOLIC_OPERATORS_TOKENSET = TokenSet.create(
+			TT2_ASSIGN,
+			TT2_PERIOD,
+
+			TT2_EQUAL,
+			TT2_NOT_EQUAL,
+			TT2_LT,
+			TT2_LE,
+			TT2_GT,
+			TT2_GE,
+			TT2_AND,
+			TT2_OR,
+			TT2_NOT,
+			TT2_QUESTION,
+			TT2_COLON,
+			TT2_PLUS,
+			TT2_MINUS,
+			TT2_MUL,
+			TT2_DIV,
+			TT2_MOD
 	);
+
+	public static final TokenSet ALL_OPERATORS_TOKENSET;
+
+	public static final TokenSet POSSIBLE_IDENTIFIERS;
 
 	static
 	{
@@ -69,6 +96,20 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("META", TT2_META);
 		KEYWORDS.put("TAGS", TT2_TAGS);
 		KEYWORDS.put("DEBUG", TT2_DEBUG);
+
+		KEYWORDS_TOKENSET = TokenSet.create(KEYWORDS.values().toArray(new IElementType[KEYWORDS.values().size()]));
+
+		TEXT_OPERATORS.put("div", TT2_DIV_TEXT);
+		TEXT_OPERATORS.put("and", TT2_AND_TEXT);
+		TEXT_OPERATORS.put("or", TT2_OR_TEXT);
+		TEXT_OPERATORS.put("not", TT2_NOT_TEXT);
+		TEXT_OPERATORS.put("mod", TT2_MOD_TEXT);
+
+		TEXT_OPERATORS_TOKENSET = TokenSet.create(TEXT_OPERATORS.values().toArray(new IElementType[TEXT_OPERATORS.values().size()]));
+
+		ALL_OPERATORS_TOKENSET = TokenSet.orSet(TEXT_OPERATORS_TOKENSET, SYMBOLIC_OPERATORS_TOKENSET);
+
+		POSSIBLE_IDENTIFIERS = TokenSet.orSet(KEYWORDS_TOKENSET, TEXT_OPERATORS_TOKENSET);
 	}
 
 }

@@ -1,0 +1,41 @@
+<html>
+<head></head>
+<body>
+[% foo %]
+%% foo
+
+[% !bar %]
+%% !bar
+[% not bar %]
+%% not bar
+
+[% foo.bar * bar / baz div bar % baz mod baz * !bar.zoo(123) / not baz %]
+%% foo.bar * bar / baz div bar % baz mod baz * !bar.zoo(123) / not baz
+
+[% foo.bar * bar /( baz div bar )% baz mod baz * !bar.zoo(123) / not baz %]
+%% foo.bar * bar / (baz div bar) % baz mod baz * !bar.zoo(123) / not baz
+
+[% foo + bar - baz * foo % !bar %]
+%% foo + bar - baz * foo % !bar
+
+[% foo + (bar - baz) * foo % !bar %]
+%% foo + (bar - baz) * foo % !bar
+
+[% foo + baz < bar * foo % !foo %]
+%% foo + baz < bar * foo % !foo
+
+[% foo + bar * !baz % zoo == bar % !foo * bar %]
+%% foo + bar * !baz % zoo == bar % !foo * bar
+
+[% foo.bar(123) * baz && bar + zoo.foo and some.else.call(123) %]
+%% foo.bar(123) * baz && bar + zoo.foo and some.else.call(123)
+
+[% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123) %]
+%% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123)
+
+
+[% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo %]
+%% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo
+
+</body>
+</html>

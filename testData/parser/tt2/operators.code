@@ -1,0 +1,48 @@
+<html>
+<head></head>
+<body>
+[% foo %]
+%% foo
+[% foo == bar %]
+%% foo == bar
+[% foo != bar %]
+%% foo != bar
+[% foo < bar %]
+%% foo < bar
+[% foo <= bar %]
+%% foo <= bar
+[% foo > bar %]
+%% foo > bar
+[% foo >= bar %]
+%% foo >= bar
+[% foo && bar %]
+%% foo && bar
+[% foo and bar %]
+%% foo and bar
+[% foo || bar %]
+%% foo || bar
+[% foo or bar %]
+%% foo or bar
+[% !bar %]
+%% !bar
+[% not bar %]
+%% not bar
+[% foo ? bar : baz %]
+%% foo ? bar : baz
+[% foo + bar %]
+%% foo + bar
+[% foo - bar %]
+%% foo - bar
+[% foo * bar %]
+%% foo * bar
+[% foo / bar %]
+%% foo / bar
+[% foo div bar %]
+%% foo div bar
+[% foo % bar %]
+%% foo % bar
+[% foo mod bar %]
+%% foo mod bar
+
+</body>
+</html>

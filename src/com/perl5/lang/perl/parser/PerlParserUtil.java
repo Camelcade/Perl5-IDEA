@@ -1984,6 +1984,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			}
 			return true;
 		}
+
 		return false;
 	}
 

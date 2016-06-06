@@ -180,12 +180,20 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 	public IElementType parseIdentifier()
 	{
 		String identifier = yytext().toString();
-		if (isAnycaseEnabled())
-		{
-			identifier = identifier.toUpperCase();
-		}
 
-		IElementType tokenType = TemplateToolkitSyntaxElements.KEYWORDS.get(identifier);
+		// check for operator
+		IElementType tokenType = TemplateToolkitSyntaxElements.TEXT_OPERATORS.get(identifier);
+
+		if (tokenType == null)
+		{
+			// check for derictive
+			if (isAnycaseEnabled())
+			{
+				identifier = identifier.toUpperCase();
+			}
+
+			tokenType = TemplateToolkitSyntaxElements.KEYWORDS.get(identifier);
+		}
 
 		return tokenType == null ? TT2_IDENTIFIER : tokenType;
 	}

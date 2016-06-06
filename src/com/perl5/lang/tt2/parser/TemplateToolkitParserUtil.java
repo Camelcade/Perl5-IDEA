@@ -18,6 +18,7 @@ package com.perl5.lang.tt2.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.psi.TokenType;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 
@@ -32,11 +33,24 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			return true;
 		}
-		else if (TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET.contains(b.getTokenType()))
+		else if (TemplateToolkitSyntaxElements.POSSIBLE_IDENTIFIERS.contains(b.getTokenType()))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.collapse(TT2_IDENTIFIER);
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("Duplicates")
+	public static boolean parseHardNewLine(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == TT2_HARD_NEWLINE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(TokenType.NEW_LINE_INDENT);
 			return true;
 		}
 		return false;

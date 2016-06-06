@@ -1,7 +1,5 @@
-
 <html>
-<head>  </head>
-
+<head></head>
 <body>
 [% GET foo %]
 %% GET foo
