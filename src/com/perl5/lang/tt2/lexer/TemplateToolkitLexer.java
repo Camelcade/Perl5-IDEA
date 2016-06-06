@@ -33,6 +33,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 	private final Project myProject;
 	private final TemplateToolkitSettings mySettings;
 	private int customState = 0;
+	private boolean isEscaped = false;
 
 	public TemplateToolkitLexer(Project project)
 	{
@@ -47,13 +48,13 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		CharSequence buffer = getBuffer();
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = getBufferEnd();
-		int currentState = getCustomState();
+		int currentCustomState = getCustomState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 		{
 			return super.perlAdvance();
 		}
-		else if (currentState == LEX_HTML)
+		else if (currentCustomState == LEX_HTML)
 		{
 			int offset = tokenStart;
 			boolean blockStart = false;
@@ -96,7 +97,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 			return getPreParsedToken();
 
 		}
-		else if (currentState == LEX_TEMPLATE_BLOCK)
+		else if (currentCustomState == LEX_TEMPLATE_BLOCK)
 		{
 			if (isBufferAtString(buffer, tokenStart, getEndTag()))
 			{
@@ -106,7 +107,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 				return TT2_CLOSE_TAG;
 			}
 		}
-		else if (currentState == LEX_TEMPLATE_LINE)
+		else if (currentCustomState == LEX_TEMPLATE_LINE)
 		{
 			if (tokenStart < bufferEnd && buffer.charAt(tokenStart) == '\n')
 			{
@@ -116,7 +117,58 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 				return TT2_HARD_NEWLINE;
 			}
 		}
-		return super.perlAdvance();
+
+		IElementType result = super.perlAdvance();
+
+		if (currentCustomState == LEX_TEMPLATE_BLOCK || currentCustomState == LEX_TEMPLATE_LINE)
+		{
+			int currentState = yystate();
+			if (currentState == LEX_DQ_STRING)
+			{
+				if (result == TT2_DQ && !isEscaped)
+				{
+					popState();
+					result = TT2_DQ_CLOSE;
+				}
+				else
+				{
+					isEscaped = !isEscaped && result == TT2_ESCAPE;
+					result = TT2_STRING_CONTENT;
+				}
+			}
+			else if (currentState == LEX_SQ_STRING)
+			{
+				if (result == TT2_SQ && !isEscaped)
+				{
+					popState();
+					result = TT2_SQ_CLOSE;
+				}
+				else
+				{
+					isEscaped = !isEscaped && result == TT2_ESCAPE;
+					result = TT2_STRING_CONTENT;
+				}
+			}
+			else
+			{
+				if (result == TT2_SQ)
+				{
+					pushState();
+					yybegin(LEX_SQ_STRING);
+					isEscaped = false;
+					result = TT2_SQ_OPEN;
+				}
+				else if (result == TT2_DQ)
+				{
+					pushState();
+					yybegin(LEX_DQ_STRING);
+					isEscaped = false;
+					result = TT2_DQ_OPEN;
+				}
+			}
+		}
+
+		return result;
 	}
 
 	@Override

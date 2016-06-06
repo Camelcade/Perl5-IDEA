@@ -46,6 +46,17 @@
 	TT2_ASSIGN="="
 	TT2_SIGIL_SCALAR="$"
 
+	TT2_SQ="SQ"
+	TT2_SQ_OPEN="SQ_OPEN"
+	TT2_SQ_CLOSE="SQ_CLOSE"
+
+	TT2_DQ="DQ"
+	TT2_DQ_OPEN="DQ_OPEN"
+	TT2_DQ_CLOSE="DQ_CLOSE"
+
+	TT2_ESCAPE="\\"
+	TT2_STRING_CONTENT="STRING_CONTENT"
+
 	TT2_PERIOD="."
 	TT2_COMMA=","
 
@@ -173,9 +184,19 @@ term_expr ::=
 	parenthesised_expr |
 	call_expr |
 	identifier_expr |
+	sq_string_expr |
+	dq_string_expr |
 	TT2_SYMBOL |
 	TT2_NUMBER |
 	TT2_NUMBER_SIMPLE |
 	keyword_or_identifier_term
+
+sq_string_expr ::= TT2_SQ_OPEN sq_string_content TT2_SQ_CLOSE {pin=1}
+private sq_string_content ::= TT2_STRING_CONTENT* {recoverWhile=recover_sq_string}
+private recover_sq_string ::= !(TT2_SQ_CLOSE)
+
+dq_string_expr ::= TT2_DQ_OPEN dq_string_content TT2_DQ_CLOSE {pin=1}
+private dq_string_content ::= TT2_STRING_CONTENT* {recoverWhile=recover_dq_string}
+private recover_dq_string ::= !(TT2_DQ_CLOSE)
 
 private keyword_or_identifier_term ::= <<parseIdentifier>>

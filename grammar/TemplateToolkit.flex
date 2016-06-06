@@ -53,6 +53,7 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
  // | {NUMBER_SMALL} // fixme this causes wrong lexing of foo.bar.10.smth
 
 %state LEX_PREPARSED_ITEMS, LEX_HTML, LEX_TEMPLATE_BLOCK, LEX_TEMPLATE_LINE
+%state LEX_DQ_STRING, LEX_SQ_STRING
 
 %%
 
@@ -80,10 +81,9 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 "*" {return TT2_MUL;}
 "%" {return TT2_MOD;}
 
-//"`"     {return QUOTE_TICK;}
-//"'"     {return QUOTE_SINGLE;}
-//"\""     {return QUOTE_DOUBLE;}
-//"\\"    {return parseEscape();}
+"'"     {return TT2_SQ;}
+"\""    {return TT2_DQ;}
+"\\"    {return TT2_ESCAPE;}
 
 "$"     {return TT2_SIGIL_SCALAR; }
 "{"     {return TT2_LEFT_BRACE;}
