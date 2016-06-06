@@ -1,0 +1,22 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+# minimal TT style
+[% product = {
+     id    = 'XYZ-2000'
+     desc  = 'Bogon Generator'
+     price = 666
+   }
+%]
+
+# perl style
+[% product = {
+     id    => 'XYZ-2000',
+     desc  => 'Bogon Generator',
+     price => 666,
+   }
+%]
+
+
+</body>
+</html>

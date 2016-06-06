@@ -66,6 +66,7 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 "==" {return TT2_EQUAL;}
 "!=" {return TT2_NOT_EQUAL;}
 "=" {return TT2_ASSIGN;}
+"=>" {return TT2_HASH_ASSIGN;}
 "<" {return TT2_LT;}
 "<=" {return TT2_LE;}
 ">" {return TT2_GT;}
