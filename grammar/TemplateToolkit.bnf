@@ -145,6 +145,7 @@ private directive_real_expr ::=
 	call_directive_expr |
 	default_directive_expr |
 	insert_directive_expr |
+	include_directive_expr |
 	set_directive_expr |
 	get_directive_expr
 
@@ -159,14 +160,16 @@ default_directive_expr ::= TT2_DEFAULT set_directive_item +
 insert_directive_expr ::= TT2_INSERT insert_directive_argument
 private insert_directive_argument ::=
 	variable_expr |
-	insert_strings |
+	strings_argument |
 	insert_files
 
-private insert_strings ::= insert_string (TT2_PLUS insert_string) *
-private insert_string ::= dq_string | sq_string
+private strings_argument ::= string_argument (TT2_PLUS string_argument) *
+private string_argument ::= dq_string_expr | sq_string_expr
 
 private insert_files ::= insert_file (TT2_PLUS insert_file) *
 private insert_file ::= <<parseFileAsString>>
+
+include_directive_expr ::= TT2_INCLUDE insert_directive_argument set_directive_item *
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *

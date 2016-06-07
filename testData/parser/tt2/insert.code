@@ -15,8 +15,6 @@
 [% INSERT $legalese %]              # misc/legalese.txt
 [% INSERT "$language/$legalese" %]  # en/misc/legalese.txt
 [% INSERT legalese.txt + warning.txt %]
-[% INSERT  "$legalese" + warning.txt %]  # requires quoting
-
 
 </body>
 </html>
