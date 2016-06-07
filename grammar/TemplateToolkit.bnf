@@ -129,24 +129,15 @@
 }
 
 root ::= element *
-private element ::= <<parseBlockComment>> | block_element | line_element
+private element ::= <<parseBlockComment>> | <<parseDirective>>
 
-private block_element ::= TT2_OPEN_TAG [TT2_MINUS] block_element_content [TT2_MINUS] TT2_CLOSE_TAG {pin=1}
-private block_element_content ::= directive_expr {recoverWhile=recover_block_element_content}
-private recover_block_element_content ::= !([TT2_MINUS] TT2_CLOSE_TAG) // manual recovery needs
-
-private line_element ::= TT2_OUTLINE_TAG line_element_content <<parseHardNewLine>> {pin=1}
-private line_element_content ::= directive_expr {recoverWhile=recover_line_element_content}
-private recover_line_element_content ::= !(TT2_HARD_NEWLINE) // manual recovery needs
-
-private directive_expr ::= <<parseDirictiveExpr>>
-
-private directive_real_expr ::=
+private directive_expr ::=
 	call_directive_expr |
 	default_directive_expr |
 	insert_directive_expr |
 	include_directive_expr |
 	process_directive_expr |
+	block_directive_expr |
 	set_directive_expr |
 	get_directive_expr
 
@@ -173,6 +164,13 @@ private insert_file ::= <<parseFileAsString>>
 include_directive_expr ::= TT2_INCLUDE insert_directive_argument set_directive_item *
 
 process_directive_expr ::= TT2_PROCESS insert_directive_argument set_directive_item *
+
+block_directive_expr ::= TT2_BLOCK block_name
+
+named_block ::= TT2_BLOCK block_name directive_expr end_directive_expr // fake rule to make psi element
+
+block_name ::= keyword_or_identifier_term
+end_directive_expr ::= TT2_END
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *

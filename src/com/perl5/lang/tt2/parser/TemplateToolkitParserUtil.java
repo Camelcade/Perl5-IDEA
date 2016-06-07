@@ -20,6 +20,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.PerlBundle;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
@@ -69,13 +70,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 
 		return false;
-	}
-
-	public static boolean parseDirictiveExpr(PsiBuilder b, int l)
-	{
-		boolean r = TemplateToolkitParser.directive_real_expr(b, l);
-
-		return r;
 	}
 
 	private static boolean isEndMarker(IElementType tokenType)
@@ -137,5 +131,75 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 		return false;
 	}
+
+	public static boolean parseDirective(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == TT2_OPEN_TAG)
+		{
+			if (b.rawLookup(1) == TT2_MINUS)
+			{
+				b.advanceLexer(); // chomp
+			}
+			b.advanceLexer();
+
+			boolean r = TemplateToolkitParser.directive_expr(b, l);
+
+			PsiBuilder.Marker m = null;
+			while (!b.eof())
+			{
+				tokenType = b.getTokenType();
+				if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+				{
+					break;
+				}
+				if (m == null)
+				{
+					m = b.mark();
+				}
+				b.advanceLexer();
+			}
+
+			if (m != null)
+			{
+				m.error(PerlBundle.message("ttk2.unexpected.token"));
+			}
+
+			consumeToken(b, TT2_MINUS);
+			consumeToken(b, TT2_CLOSE_TAG);
+
+			return true;
+		}
+		else if (tokenType == TT2_OUTLINE_TAG)
+		{
+			b.advanceLexer();
+
+			boolean r = TemplateToolkitParser.directive_expr(b, l);
+			PsiBuilder.Marker m = null;
+
+			while (!b.eof())
+			{
+				if (b.getTokenType() == TT2_HARD_NEWLINE)
+				{
+					break;
+				}
+				if (m == null)
+				{
+					m = b.mark();
+				}
+				b.advanceLexer();
+			}
+
+			if (m != null)
+			{
+				m.error("ttk2.unexpected.token");
+			}
+			parseHardNewLine(b, l);
+			return true;
+		}
+		return false;
+	}
+
 
 }
