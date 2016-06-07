@@ -206,7 +206,13 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			{
 				m.error("ttk2.unexpected.token");
 			}
-			parseHardNewLine(b, l);
+			// parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
+			if (b.getTokenType() == TT2_HARD_NEWLINE)
+			{
+				b.remapCurrentToken(TokenType.NEW_LINE_INDENT); // this is irreversable change, so not sure it's a good idea
+				b.advanceLexer();
+			}
+
 			r = true;
 		}
 
@@ -215,8 +221,14 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			tokenType = latestDoneMarker.getTokenType();
 			if (tokenType == BLOCK_DIRECTIVE_EXPR)
 			{
-				parseNamedBlock(b, l);
+				parseBlockContent(b, l);
 				outerMarer.done(NAMED_BLOCK);
+				outerMarer = null;
+			}
+			else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
+			{
+				parseBlockContent(b, l);
+				outerMarer.done(ANON_BLOCK);
 				outerMarer = null;
 			}
 		}
@@ -229,7 +241,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return r;
 	}
 
-	public static boolean parseNamedBlock(PsiBuilder b, int l)
+	public static boolean parseBlockContent(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = null;
 		while (!b.eof() && TemplateToolkitParser.element(b, l))

@@ -123,9 +123,7 @@
 	TT2_META="META"
 	TT2_TAGS="TAGS"
 	TT2_DEBUG="DEBUG"
-
     ]
-
 }
 
 root ::= element *
@@ -138,6 +136,7 @@ private directive_expr ::=
 	include_directive_expr |
 	process_directive_expr |
 	block_directive_expr |
+	anon_block_directive_expr |
 	end_directive_expr |
 	set_directive_expr |
 	get_directive_expr
@@ -168,9 +167,12 @@ process_directive_expr ::= TT2_PROCESS insert_directive_argument set_directive_i
 
 end_directive_expr ::= TT2_END
 
-named_block ::= block_directive_expr element end_directive_expr // fake rule to make psi element
+named_block ::= block_directive_expr element * end_directive_expr // fake rule to make psi element
 block_directive_expr ::= TT2_BLOCK block_name
 block_name ::= keyword_or_identifier_term
+
+anon_block ::= anon_block_directive_expr element * end_directive_expr // fake rule to make psi element
+anon_block_directive_expr ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
