@@ -10,8 +10,31 @@
 </tr>
 [% END %]
 
-[% BLOCK tmpblk %] This is OK [% END %]
+%% BLOCK tabrow
+<tr>
+  <td>[% name %]<td>
+  [% BLOCK tmpblk %] This is OK [% END %]
+  <td>[% email %]</td>
+</tr>
+%% END
 
+%% BLOCK tabrow
+<tr>
+  <td>[% name %]<td>
+  [% BLOCK tmpblk %] This is OK [% END %]
+  <td>[% email %]</td>
+</tr>
+[% END %]
+
+[% BLOCK tabrow %]
+<tr>
+  <td>[% name %]<td>
+  [% BLOCK tmpblk %] This is OK [% END %]
+  <td>[% email %]</td>
+</tr>
+%% END
+
+[% BLOCK tmpblk %] This is OK [% END %]
 
 </body>
 </html>
