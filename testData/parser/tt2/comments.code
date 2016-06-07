@@ -21,6 +21,8 @@
    theta = 20      # so is' this
    rho   = 30      # <aol>me "too!</aol>
    blah = 69       # same here
+   comment1 = '#notcomment' # this is
+   comment2 = "#notcomment too" # this is
 %]
 
 

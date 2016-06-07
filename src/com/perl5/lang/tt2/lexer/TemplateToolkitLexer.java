@@ -177,7 +177,12 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 	protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd)
 	{
-		return getTokenHistory().getLastTokenType() != TT2_OPEN_TAG && offset < bufferEnd && buffer.charAt(offset) == '#';
+		int currentState = yystate();
+		return currentState != LEX_DQ_STRING &&
+				currentState != LEX_SQ_STRING &&
+				getTokenHistory().getLastTokenType() != TT2_OPEN_TAG &&
+				offset < bufferEnd &&
+				buffer.charAt(offset) == '#';
 	}
 
 	protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd)
