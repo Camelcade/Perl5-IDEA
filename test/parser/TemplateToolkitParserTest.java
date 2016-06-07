@@ -114,5 +114,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("process");
 	}
 
+	public void testBlockNamed()
+	{
+		doTest("block_named");
+	}
 
 }

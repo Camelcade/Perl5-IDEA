@@ -16,6 +16,7 @@
 
 package com.perl5.lang.tt2.parser;
 
+import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
@@ -135,6 +136,9 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 	public static boolean parseDirective(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
+		boolean r = false;
+		LighterASTNode latestDoneMarker = null;
+		PsiBuilder.Marker outerMarer = b.mark();
 
 		if (tokenType == TT2_OPEN_TAG)
 		{
@@ -144,7 +148,10 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			}
 			b.advanceLexer();
 
-			boolean r = TemplateToolkitParser.directive_expr(b, l);
+			if (TemplateToolkitParser.directive_expr(b, l))
+			{
+				latestDoneMarker = b.getLatestDoneMarker();
+			}
 
 			PsiBuilder.Marker m = null;
 			while (!b.eof())
@@ -169,13 +176,17 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			consumeToken(b, TT2_MINUS);
 			consumeToken(b, TT2_CLOSE_TAG);
 
-			return true;
+			r = true;
 		}
 		else if (tokenType == TT2_OUTLINE_TAG)
 		{
 			b.advanceLexer();
 
-			boolean r = TemplateToolkitParser.directive_expr(b, l);
+			if (TemplateToolkitParser.directive_expr(b, l))
+			{
+				latestDoneMarker = b.getLatestDoneMarker();
+			}
+
 			PsiBuilder.Marker m = null;
 
 			while (!b.eof())
@@ -196,10 +207,40 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				m.error("ttk2.unexpected.token");
 			}
 			parseHardNewLine(b, l);
-			return true;
+			r = true;
 		}
-		return false;
+
+		if (latestDoneMarker != null)
+		{
+			tokenType = latestDoneMarker.getTokenType();
+			if (tokenType == BLOCK_DIRECTIVE_EXPR)
+			{
+				parseNamedBlock(b, l);
+				outerMarer.done(NAMED_BLOCK);
+				outerMarer = null;
+			}
+		}
+
+		if (outerMarer != null)
+		{
+			outerMarer.drop();
+		}
+
+		return r;
 	}
 
+	public static boolean parseNamedBlock(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = null;
+		while (!b.eof() && TemplateToolkitParser.element(b, l))
+		{
+			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
+			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+			{
+				break;
+			}
+		}
+		return true;
+	}
 
 }
