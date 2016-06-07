@@ -69,6 +69,16 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("variables");
 	}
 
+	public void testChomp()
+	{
+		doTest("chomp");
+	}
+
+	public void testComments()
+	{
+		doTest("comments");
+	}
+
 	public void testGet()
 	{
 		doTest("get");
@@ -99,14 +109,10 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("include");
 	}
 
-	public void testChomp()
+	public void testProcess()
 	{
-		doTest("chomp");
+		doTest("process");
 	}
 
-	public void testComments()
-	{
-		doTest("comments");
-	}
 
 }

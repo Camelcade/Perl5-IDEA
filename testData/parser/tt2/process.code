@@ -1,0 +1,25 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% foo = 10 %]
+
+foo is [% foo %]
+[% PROCESS bar %]
+foo is [% foo %]
+
+[% foo = 10 %]
+foo is [% foo %]
+[% PROCESS bar
+   foo = 20
+%]
+foo is [% foo %]
+
+[% myheader = 'my/misc/header' %]
+[% PROCESS  myheader %]              # 'myheader'
+[% PROCESS $myheader %]              # 'my/misc/header'
+
+[% PROCESS html/header + my/header %]
+
+</body>
+</html>
