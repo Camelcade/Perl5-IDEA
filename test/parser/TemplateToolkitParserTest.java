@@ -124,4 +124,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("block_anon");
 	}
 
+	public void testWrapper()
+	{
+		doTest("wrapper");
+	}
+
 }

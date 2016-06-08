@@ -231,6 +231,12 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				outerMarer.done(ANON_BLOCK);
 				outerMarer = null;
 			}
+			else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
+			{
+				parseBlockContent(b, l);
+				outerMarer.done(WRAPPER_BLOCK);
+				outerMarer = null;
+			}
 		}
 
 		if (outerMarer != null)

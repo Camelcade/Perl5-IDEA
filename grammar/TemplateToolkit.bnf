@@ -136,10 +136,14 @@ private directive_expr ::=
 	include_directive_expr |
 	process_directive_expr |
 	block_directive_expr |
-	anon_block_directive_expr |
+	block_directives |
 	end_directive_expr |
 	set_directive_expr |
 	get_directive_expr
+
+private block_directives ::=
+	anon_block_directive_expr |
+	wrapper_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -165,6 +169,10 @@ include_directive_expr ::= TT2_INCLUDE insert_directive_argument set_directive_i
 
 process_directive_expr ::= TT2_PROCESS insert_directive_argument set_directive_item *
 
+wrapper_directive_expr ::= TT2_WRAPPER insert_directive_argument set_directive_item *
+
+wrapper_block ::= wrapper_directive_expr element* end_directive_expr // fake rule to make psi element
+
 end_directive_expr ::= TT2_END
 
 named_block ::= block_directive_expr element * end_directive_expr // fake rule to make psi element
@@ -173,6 +181,7 @@ block_name ::= keyword_or_identifier_term
 
 anon_block ::= anon_block_directive_expr element * end_directive_expr // fake rule to make psi element
 anon_block_directive_expr ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
+
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
