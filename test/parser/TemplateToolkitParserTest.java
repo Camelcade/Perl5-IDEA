@@ -129,4 +129,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("wrapper");
 	}
 
+	public void testIf()
+	{
+		doTest("if");
+	}
+
 }

@@ -137,13 +137,21 @@ private directive_expr ::=
 	process_directive_expr |
 	block_directive_expr |
 	block_directives |
-	end_directive_expr |
+	reply_directives |
 	set_directive_expr |
 	get_directive_expr
 
+// these directives should be annotated as errors if they are outside of the blocks
+private reply_directives ::=
+	end_directive_expr |
+	elsif_directive_expr |
+	else_directive_expr
+
 private block_directives ::=
 	anon_block_directive_expr |
-	wrapper_directive_expr
+	wrapper_directive_expr |
+	if_directive_expr |
+	unless_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -170,6 +178,19 @@ include_directive_expr ::= TT2_INCLUDE insert_directive_argument set_directive_i
 process_directive_expr ::= TT2_PROCESS insert_directive_argument set_directive_item *
 
 wrapper_directive_expr ::= TT2_WRAPPER insert_directive_argument set_directive_item *
+
+if_directive_expr ::= TT2_IF expr
+unless_directive_expr ::= TT2_UNLESS expr
+elsif_directive_expr ::= TT2_ELSIF expr
+else_directive_expr ::= TT2_ELSE
+
+if_block ::= if_branch if_sequence // fake rule to make psi element
+unless_block ::= unless_branch if_sequence // fake rule to make psi element
+private if_sequence ::= elsif_branch * [else_branch] end_directive_expr
+if_branch ::= if_directive_expr element *
+unless_branch ::= unless_directive_expr element *
+elsif_branch ::= elsif_directive_expr element *
+else_branch ::= else_directive_expr element *
 
 wrapper_block ::= wrapper_directive_expr element* end_directive_expr // fake rule to make psi element
 

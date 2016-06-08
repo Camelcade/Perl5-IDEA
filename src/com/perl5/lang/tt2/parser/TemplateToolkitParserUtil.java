@@ -18,6 +18,7 @@ package com.perl5.lang.tt2.parser;
 
 import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -29,6 +30,7 @@ import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 /**
  * Created by hurricup on 05.06.2016.
  */
+@SuppressWarnings("Duplicates")
 public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes
 {
 	public static boolean parseIdentifier(PsiBuilder b, int l)
@@ -237,6 +239,22 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				outerMarer.done(WRAPPER_BLOCK);
 				outerMarer = null;
 			}
+			else if (tokenType == IF_DIRECTIVE_EXPR)
+			{
+				PsiBuilder.Marker branchMarker = outerMarer;
+				outerMarer = outerMarer.precede();
+				parseIfSequence(b, l, branchMarker, IF_BRANCH);
+				outerMarer.done(IF_BLOCK);
+				outerMarer = null;
+			}
+			else if (tokenType == UNLESS_DIRECTIVE_EXPR)
+			{
+				PsiBuilder.Marker branchMarker = outerMarer;
+				outerMarer = outerMarer.precede();
+				parseIfSequence(b, l, branchMarker, UNLESS_BRANCH);
+				outerMarer.done(UNLESS_BLOCK);
+				outerMarer = null;
+			}
 		}
 
 		if (outerMarer != null)
@@ -249,7 +267,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 	public static boolean parseBlockContent(PsiBuilder b, int l)
 	{
-		PsiBuilder.Marker m = null;
 		while (!b.eof() && TemplateToolkitParser.element(b, l))
 		{
 			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
@@ -258,6 +275,52 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				break;
 			}
 		}
+		return true;
+	}
+
+	public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType)
+	{
+		while (!b.eof())
+		{
+			PsiBuilder.Marker currentMarker = b.mark();
+			if (TemplateToolkitParser.element(b, l))
+			{
+				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
+				if (latestDoneMarker != null)
+				{
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						currentMarker.drop();
+						branchMarker = null;
+						break;
+					}
+					else if (latestDoneMarker.getTokenType() == ELSIF_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						branchMarker = currentMarker.precede();
+						branchTokenType = ELSIF_BRANCH;
+					}
+					else if (latestDoneMarker.getTokenType() == ELSE_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						branchMarker = currentMarker.precede();
+						branchTokenType = ELSE_BRANCH;
+					}
+				}
+			}
+			currentMarker.drop();
+		}
+
+		if (branchMarker != null)
+		{
+			branchMarker.done(branchTokenType);
+			branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+		}
+
 		return true;
 	}
 
