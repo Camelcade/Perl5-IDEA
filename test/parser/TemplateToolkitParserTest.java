@@ -119,14 +119,29 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("block_named");
 	}
 
+	public void testBlockNamedUnclosed()
+	{
+		doTest("block_named_unclosed", false);
+	}
+
 	public void testBlockAnon()
 	{
 		doTest("block_anon");
 	}
 
+	public void testBlockAnonUnclosed()
+	{
+		doTest("block_anon_unclosed", false);
+	}
+
 	public void testWrapper()
 	{
 		doTest("wrapper");
+	}
+
+	public void testWrapperUnclosed()
+	{
+		doTest("wrapper_unclosed", false);
 	}
 
 	public void testIf()

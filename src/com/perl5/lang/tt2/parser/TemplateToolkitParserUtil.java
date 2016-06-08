@@ -223,20 +223,37 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			tokenType = latestDoneMarker.getTokenType();
 			if (tokenType == BLOCK_DIRECTIVE_EXPR)
 			{
-				parseBlockContent(b, l);
+				boolean complete = parseBlockContent(b, l);
 				outerMarer.done(NAMED_BLOCK);
+
+				if (!complete) // this can happen on incomplete block, missing end
+				{
+					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
+				}
+
 				outerMarer = null;
 			}
 			else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
 			{
-				parseBlockContent(b, l);
+				boolean complete = parseBlockContent(b, l);
 				outerMarer.done(ANON_BLOCK);
+				if (!complete) // this can happen on incomplete block, missing end
+				{
+					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
+				}
 				outerMarer = null;
 			}
 			else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
 			{
-				parseBlockContent(b, l);
+				boolean complete = parseBlockContent(b, l);
 				outerMarer.done(WRAPPER_BLOCK);
+				if (!complete) // this can happen on incomplete block, missing end
+				{
+					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
+				}
 				outerMarer = null;
 			}
 			else if (tokenType == SWITCH_DIRECTIVE_EXPR)
@@ -271,17 +288,26 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return r;
 	}
 
+	/**
+	 * Parses block content
+	 *
+	 * @param b builder
+	 * @param l level
+	 * @return result of end parsing.
+	 */
 	public static boolean parseBlockContent(PsiBuilder b, int l)
 	{
+		boolean r = false;
 		while (!b.eof() && TemplateToolkitParser.element(b, l))
 		{
 			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
 			{
+				r = true;
 				break;
 			}
 		}
-		return true;
+		return r;
 	}
 
 	public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType)
