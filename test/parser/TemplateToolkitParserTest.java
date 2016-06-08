@@ -134,6 +134,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("if");
 	}
 
+	public void testSwitch()
+	{
+		doTest("switch");
+	}
+
 	public void testThrow()
 	{
 		doTest("throw");

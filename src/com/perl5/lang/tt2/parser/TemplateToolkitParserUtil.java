@@ -239,6 +239,12 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				outerMarer.done(WRAPPER_BLOCK);
 				outerMarer = null;
 			}
+			else if (tokenType == SWITCH_DIRECTIVE_EXPR)
+			{
+				parseSwitchBlockContent(b, l);
+				outerMarer.done(SWITCH_BLOCK);
+				outerMarer = null;
+			}
 			else if (tokenType == IF_DIRECTIVE_EXPR)
 			{
 				PsiBuilder.Marker branchMarker = outerMarer;
@@ -319,6 +325,51 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			branchMarker.done(branchTokenType);
 			branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+		}
+
+		return true;
+	}
+
+	public static boolean parseSwitchBlockContent(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker branchMarker = null;
+		while (!b.eof())
+		{
+			PsiBuilder.Marker currentMarker = b.mark();
+			if (TemplateToolkitParser.element(b, l))
+			{
+				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
+				if (latestDoneMarker != null)
+				{
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					{
+						if (branchMarker != null)
+						{
+							branchMarker.doneBefore(CASE_BLOCK, currentMarker);
+							branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						}
+						branchMarker = null;
+						currentMarker.drop();
+						break;
+					}
+					else if (latestDoneMarker.getTokenType() == CASE_DIRECTIVE_EXPR)
+					{
+						if (branchMarker != null)
+						{
+							branchMarker.doneBefore(CASE_BLOCK, currentMarker);
+							branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						}
+						branchMarker = currentMarker.precede();
+					}
+				}
+			}
+			currentMarker.drop();
+		}
+
+		if (branchMarker != null)
+		{
+			branchMarker.done(CASE_BLOCK);
+			branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 		}
 
 		return true;

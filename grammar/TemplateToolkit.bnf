@@ -137,6 +137,7 @@ private directive_expr ::=
 	process_directive_expr |
 	block_directive_expr |
 	throw_directive_expr |
+	switch_directive_expr |
 
 	block_directives |
 	reply_directives |
@@ -148,8 +149,10 @@ private directive_expr ::=
 private reply_directives ::=
 	end_directive_expr |
 	elsif_directive_expr |
+	case_directive_expr |
 	else_directive_expr
 
+// these directives may be used in postfix form
 private block_directives ::=
 	anon_block_directive_expr |
 	wrapper_directive_expr |
@@ -187,6 +190,12 @@ throw_directive_expr ::= TT2_THROW exception_type exception_message [exception_a
 exception_type ::= variable_strings_or_stringify
 exception_message ::= expr
 exception_args ::= {set_directive_item|expr}+
+
+switch_directive_expr ::= TT2_SWITCH expr {pin=1}
+case_directive_expr ::= TT2_CASE [TT2_DEFAULT|expr] {pin=1}
+
+switch_block ::= switch_directive_expr case_block * end_directive_expr // fake rule to make psi element
+case_block ::= case_directive_expr element *
 
 if_directive_expr ::= TT2_IF expr {pin=1}
 unless_directive_expr ::= TT2_UNLESS expr {pin=1}
