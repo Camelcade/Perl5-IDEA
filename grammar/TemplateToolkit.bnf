@@ -136,8 +136,11 @@ private directive_expr ::=
 	include_directive_expr |
 	process_directive_expr |
 	block_directive_expr |
+	throw_directive_expr |
+
 	block_directives |
 	reply_directives |
+
 	set_directive_expr |
 	get_directive_expr
 
@@ -159,30 +162,36 @@ get_directive_expr ::= [TT2_GET] expr
 private set_directive_expr ::= [TT2_SET] set_directive_item +
 set_directive_item ::= identifier_expr TT2_ASSIGN expr {pin=2}
 
-default_directive_expr ::= TT2_DEFAULT set_directive_item +
+default_directive_expr ::= TT2_DEFAULT set_directive_item + {pin=1}
 
-insert_directive_expr ::= TT2_INSERT insert_directive_argument
-private insert_directive_argument ::=
-	variable_expr |
-	strings_argument |
-	insert_files
+insert_directive_expr ::= TT2_INSERT variable_strings_or_files {pin=1}
+
+private variable_strings_or_files ::= variable_or_strings | insert_files
+private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
+private variable_or_strings ::= variable_expr | strings_argument
+
 
 private strings_argument ::= string_argument (TT2_PLUS string_argument) *
 private string_argument ::= dq_string_expr | sq_string_expr
 
-private insert_files ::= insert_file (TT2_PLUS insert_file) *
-private insert_file ::= <<parseFileAsString>>
+private insert_files ::= convert_to_string (TT2_PLUS convert_to_string) *
+private convert_to_string ::= <<parseFileAsString>>
 
-include_directive_expr ::= TT2_INCLUDE insert_directive_argument set_directive_item *
+include_directive_expr ::= TT2_INCLUDE variable_strings_or_files set_directive_item * {pin=1}
 
-process_directive_expr ::= TT2_PROCESS insert_directive_argument set_directive_item *
+process_directive_expr ::= TT2_PROCESS variable_strings_or_files set_directive_item * {pin=1}
 
-wrapper_directive_expr ::= TT2_WRAPPER insert_directive_argument set_directive_item *
+wrapper_directive_expr ::= TT2_WRAPPER variable_strings_or_files set_directive_item * {pin=1}
 
-if_directive_expr ::= TT2_IF expr
-unless_directive_expr ::= TT2_UNLESS expr
-elsif_directive_expr ::= TT2_ELSIF expr
-else_directive_expr ::= TT2_ELSE
+throw_directive_expr ::= TT2_THROW exception_type exception_message [exception_args] {pin=1}
+exception_type ::= variable_strings_or_stringify
+exception_message ::= expr
+exception_args ::= {set_directive_item|expr}+
+
+if_directive_expr ::= TT2_IF expr {pin=1}
+unless_directive_expr ::= TT2_UNLESS expr {pin=1}
+elsif_directive_expr ::= TT2_ELSIF expr {pin=1}
+else_directive_expr ::= TT2_ELSE {pin=1}
 
 if_block ::= if_branch if_sequence // fake rule to make psi element
 unless_block ::= unless_branch if_sequence // fake rule to make psi element
@@ -197,12 +206,11 @@ wrapper_block ::= wrapper_directive_expr element* end_directive_expr // fake rul
 end_directive_expr ::= TT2_END
 
 named_block ::= block_directive_expr element * end_directive_expr // fake rule to make psi element
-block_directive_expr ::= TT2_BLOCK block_name
+block_directive_expr ::= TT2_BLOCK block_name {pin=1}
 block_name ::= keyword_or_identifier_term
 
 anon_block ::= anon_block_directive_expr element * end_directive_expr // fake rule to make psi element
 anon_block_directive_expr ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
-
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *

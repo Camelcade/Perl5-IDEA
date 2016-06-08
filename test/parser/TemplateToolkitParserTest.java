@@ -134,4 +134,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("if");
 	}
 
+	public void testThrow()
+	{
+		doTest("throw");
+	}
+
 }
