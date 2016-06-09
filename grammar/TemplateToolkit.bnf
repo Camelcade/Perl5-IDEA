@@ -99,6 +99,7 @@
 	TT2_BLOCK="BLOCK"
 	TT2_END="END"
 	TT2_IF="IF"
+	TT2_IN="IN"
 	TT2_UNLESS="UNLESS"
 	TT2_ELSIF="ELSIF"
 	TT2_ELSE="ELSE"
@@ -157,7 +158,8 @@ private block_directives ::=
 	anon_block_directive_expr |
 	wrapper_directive_expr |
 	if_directive_expr |
-	unless_directive_expr
+	unless_directive_expr |
+	foreach_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -173,6 +175,12 @@ private variable_strings_or_files ::= variable_or_strings | insert_files
 private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
 private variable_or_strings ::= variable_expr | strings_argument
 
+foreach_directive_expr ::= TT2_FOREACH [foreach_iterator_] foreach_iterable {pin=1}
+private foreach_iterator_ ::= foreach_iterator {TT2_ASSIGN|TT2_IN} {pin=2}
+foreach_iterator ::= keyword_or_identifier_term {pin=2}
+foreach_iterable ::= expr
+
+foreach_block ::= foreach_directive_expr element * end_directive_expr // fake rule to generate psi
 
 private strings_argument ::= string_argument (TT2_PLUS string_argument) *
 private string_argument ::= dq_string_expr | sq_string_expr
@@ -228,7 +236,7 @@ pair_expr ::= <<parseHashKey>> (TT2_ASSIGN|TT2_HASH_ASSIGN) expr
 private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
-private array_expr_content ::= expr ([TT2_COMMA] expr) * {recoverWhile=recover_array_content}
+private array_expr_content ::= (expr [TT2_COMMA]) * {recoverWhile=recover_array_content}
 private recover_array_content ::= !(TT2_RIGHT_BRACKET|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 expr ::=
@@ -249,7 +257,7 @@ or_expr ::= expr ((TT2_OR|TT2_OR_TEXT) expr )+
 and_expr ::= expr ((TT2_AND|TT2_AND_TEXT) expr)+
 equal_expr ::= expr (TT2_EQUAL|TT2_NOT_EQUAL) expr
 compare_expr ::= expr (TT2_LE|TT2_LT|TT2_GT|TT2_GE) expr
-add_expr ::= expr ((TT2_PLUS|TT2_MINUS|TT2_CONCAT) expr)+
+add_expr ::= expr ((TT2_PLUS|TT2_MINUS !(TT2_CLOSE_TAG)|TT2_CONCAT) expr)+
 mul_expr ::= expr ((TT2_MUL|TT2_DIV|TT2_MOD|TT2_DIV_TEXT|TT2_MOD_TEXT) expr)+
 unary_expr ::= (TT2_NOT|TT2_NOT_TEXT) expr { rightAssociative=true }
 

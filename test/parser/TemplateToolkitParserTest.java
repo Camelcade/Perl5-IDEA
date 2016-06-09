@@ -154,6 +154,16 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("switch");
 	}
 
+	public void testForeach()
+	{
+		doTest("foreach");
+	}
+
+	public void testForeachUnclosed()
+	{
+		doTest("foreach_unclosed", false);
+	}
+
 	public void testThrow()
 	{
 		doTest("throw");

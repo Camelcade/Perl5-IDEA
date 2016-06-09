@@ -88,6 +88,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("PERL", TT2_PERL);
 		KEYWORDS.put("RAWPERL", TT2_RAWPERL);
 		KEYWORDS.put("TRY", TT2_TRY);
+		KEYWORDS.put("IN", TT2_IN);
 		KEYWORDS.put("THROW", TT2_THROW);
 		KEYWORDS.put("CATCH", TT2_CATCH);
 		KEYWORDS.put("FINAL", TT2_FINAL);

@@ -140,7 +140,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		IElementType tokenType = b.getTokenType();
 		boolean r = false;
 		LighterASTNode latestDoneMarker = null;
-		PsiBuilder.Marker outerMarer = b.mark();
+		PsiBuilder.Marker outerMarker = b.mark();
 
 		if (tokenType == TT2_OPEN_TAG)
 		{
@@ -223,66 +223,51 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			tokenType = latestDoneMarker.getTokenType();
 			if (tokenType == BLOCK_DIRECTIVE_EXPR)
 			{
-				boolean complete = parseBlockContent(b, l);
-				outerMarer.done(NAMED_BLOCK);
-
-				if (!complete) // this can happen on incomplete block, missing end
-				{
-					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
-					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
-				}
-
-				outerMarer = null;
+				parseBlockContent(b, l, outerMarker, NAMED_BLOCK);
+				outerMarker = null;
 			}
 			else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
 			{
-				boolean complete = parseBlockContent(b, l);
-				outerMarer.done(ANON_BLOCK);
-				if (!complete) // this can happen on incomplete block, missing end
-				{
-					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
-					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
-				}
-				outerMarer = null;
+				parseBlockContent(b, l, outerMarker, ANON_BLOCK);
+				outerMarker = null;
 			}
 			else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
 			{
-				boolean complete = parseBlockContent(b, l);
-				outerMarer.done(WRAPPER_BLOCK);
-				if (!complete) // this can happen on incomplete block, missing end
-				{
-					outerMarer.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
-					outerMarer.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
-				}
-				outerMarer = null;
+				parseBlockContent(b, l, outerMarker, WRAPPER_BLOCK);
+				outerMarker = null;
+			}
+			else if (tokenType == FOREACH_DIRECTIVE_EXPR)
+			{
+				parseBlockContent(b, l, outerMarker, FOREACH_BLOCK);
+				outerMarker = null;
 			}
 			else if (tokenType == SWITCH_DIRECTIVE_EXPR)
 			{
 				parseSwitchBlockContent(b, l);
-				outerMarer.done(SWITCH_BLOCK);
-				outerMarer = null;
+				outerMarker.done(SWITCH_BLOCK);
+				outerMarker = null;
 			}
 			else if (tokenType == IF_DIRECTIVE_EXPR)
 			{
-				PsiBuilder.Marker branchMarker = outerMarer;
-				outerMarer = outerMarer.precede();
+				PsiBuilder.Marker branchMarker = outerMarker;
+				outerMarker = outerMarker.precede();
 				parseIfSequence(b, l, branchMarker, IF_BRANCH);
-				outerMarer.done(IF_BLOCK);
-				outerMarer = null;
+				outerMarker.done(IF_BLOCK);
+				outerMarker = null;
 			}
 			else if (tokenType == UNLESS_DIRECTIVE_EXPR)
 			{
-				PsiBuilder.Marker branchMarker = outerMarer;
-				outerMarer = outerMarer.precede();
+				PsiBuilder.Marker branchMarker = outerMarker;
+				outerMarker = outerMarker.precede();
 				parseIfSequence(b, l, branchMarker, UNLESS_BRANCH);
-				outerMarer.done(UNLESS_BLOCK);
-				outerMarer = null;
+				outerMarker.done(UNLESS_BLOCK);
+				outerMarker = null;
 			}
 		}
 
-		if (outerMarer != null)
+		if (outerMarker != null)
 		{
-			outerMarer.drop();
+			outerMarker.drop();
 		}
 
 		return r;
@@ -295,7 +280,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 	 * @param l level
 	 * @return result of end parsing.
 	 */
-	public static boolean parseBlockContent(PsiBuilder b, int l)
+	public static boolean parseBlockContent(PsiBuilder b, int l, PsiBuilder.Marker outerMarker, IElementType blockTokenType)
 	{
 		boolean r = false;
 		while (!b.eof() && TemplateToolkitParser.element(b, l))
@@ -307,6 +292,14 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				break;
 			}
 		}
+
+		outerMarker.done(blockTokenType);
+		if (!r) // this can happen on incomplete block, missing end
+		{
+			outerMarker.setCustomEdgeTokenBinders(WhitespacesBinders.DEFAULT_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+			outerMarker.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
+		}
+
 		return r;
 	}
 

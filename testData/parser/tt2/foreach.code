@@ -1,0 +1,77 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% foo   = 'Foo'
+   items = [ 'one', 'two', 'three' ]
+%]
+
+Things:
+[% FOREACH thing IN [ foo 'Bar' "$foo Baz" ] %]
+   * [% thing %]
+[% END %]
+
+Items:
+[% FOREACH i IN items %]
+   * [% i %]
+[% END %]
+
+Stuff:
+[% stuff = [ foo "$foo Bar" ] %]
+[% FOREACH s IN stuff %]
+   * [% s %]
+[% END %]
+
+[% FOREACH i = items %]
+
+[% END %]
+
+[% userlist = [
+    { id => 'tom',   name => 'Thomas'  },
+    { id => 'dick',  name => 'Richard'  },
+    { id => 'larry', name => 'Lawrence' },
+   ]
+%]
+
+[% FOREACH user IN userlist %]
+   [% user.id %] [% user.name %]
+[% END %]
+
+[% FOREACH userlist %]
+   [% id %] [% name %]
+[% END %]
+
+[% users = {
+     tom   => 'Thomas',
+     dick  => 'Richard',
+     larry => 'Lawrence',
+   }
+%]
+
+[% FOREACH u IN users %]
+   * [% u.key %] : [% u.value %]
+[% END %]
+
+[% FOREACH user IN userlist %]
+   Name: [% user.name %]    Email: [% user.email %]
+[% END %]
+
+[% FOREACH match IN results.nsort('score').reverse %]
+   [% match.score %] : [% match.url %]
+[% END %]
+
+[% FOREACH item IN [ 'foo', 'bar', 'baz' ] -%]
+   <li>[% loop.count %]/[% loop.size %]: [% item %]
+[% END %]
+
+[% FOREACH group IN giter %]
+   [% FOREACH user IN group.userlist %]
+         user #[% loop.count %] in
+         group [% giter.count %] is
+         named [% user.name %]
+   [% END %]
+[% END %]
+
+
+</body>
+</html>
