@@ -33,7 +33,6 @@
 [% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123) %]
 %% foo.bar(123) * baz || bar and zoo.foo or some.else.call(123)
 
-
 [% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo %]
 %% foo < zoo.bar.some(123) ? bar mod zoo : baz + !foo
 

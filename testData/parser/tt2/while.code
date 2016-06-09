@@ -1,0 +1,15 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% WHILE total < 100 %]
+   ...
+   [% total = calculate_new_total %]
+[% END %]
+
+[% WHILE (user = get_next_user_record) %]
+   [% user.name %]
+[% END %]
+
+</body>
+</html>

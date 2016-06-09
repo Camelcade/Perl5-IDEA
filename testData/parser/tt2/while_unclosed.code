@@ -1,0 +1,10 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% WHILE total < 100 %]
+   ...
+   [% total = calculate_new_total %]
+
+</body>
+</html>
