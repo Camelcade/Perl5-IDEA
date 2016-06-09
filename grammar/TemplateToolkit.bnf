@@ -160,7 +160,8 @@ private block_directives ::=
 	if_directive_expr |
 	unless_directive_expr |
 	foreach_directive_expr |
-	while_directive_expr
+	while_directive_expr |
+	filter_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -193,6 +194,11 @@ include_directive_expr ::= TT2_INCLUDE variable_strings_or_files assign_expr * {
 process_directive_expr ::= TT2_PROCESS variable_strings_or_files assign_expr * {pin=1}
 
 wrapper_directive_expr ::= TT2_WRAPPER variable_strings_or_files assign_expr * {pin=1}
+
+filter_directive_expr ::= TT2_FILTER filter_arguments {pin=1}
+private filter_arguments ::= variable_expr | assign_expr | identifier_expr
+
+filter_block ::= filter_directive_expr element * end_directive_expr // fake rule to generate psi
 
 while_directive_expr ::= TT2_WHILE expr {pin=1}
 while_block ::= while_directive_expr element* end_directive_expr // fake rule to generate psi

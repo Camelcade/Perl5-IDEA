@@ -174,6 +174,17 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("while_unclosed", false);
 	}
 
+
+	public void testFilter()
+	{
+		doTest("filter");
+	}
+
+	public void testFilterUnclosed()
+	{
+		doTest("filter_unclosed", false);
+	}
+
 	public void testThrow()
 	{
 		doTest("throw");

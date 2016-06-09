@@ -246,6 +246,11 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				parseBlockContent(b, l, outerMarker, WHILE_BLOCK);
 				outerMarker = null;
 			}
+			else if (tokenType == FILTER_DIRECTIVE_EXPR)
+			{
+				parseBlockContent(b, l, outerMarker, FILTER_BLOCK);
+				outerMarker = null;
+			}
 			else if (tokenType == SWITCH_DIRECTIVE_EXPR)
 			{
 				parseSwitchBlockContent(b, l);

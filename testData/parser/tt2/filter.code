@@ -1,0 +1,28 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% FILTER html %]
+   HTML text may have < and > characters embedded
+   which you want converted to the correct HTML entities.
+[% END %]
+
+[% FILTER repeat(3) %]blah [% END %]
+
+[% FILTER echo = repeat(2) %]
+Is there anybody out there?
+[% END %]
+
+[% FILTER echo %]
+Mother, should I build a wall?
+[% END %]
+
+[% myfilter = 'html' %]
+[% FILTER $myfilter %]
+   ...
+[% END %]
+
+
+
+</body>
+</html>
