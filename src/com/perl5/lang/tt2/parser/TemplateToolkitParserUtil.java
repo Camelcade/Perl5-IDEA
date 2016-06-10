@@ -218,70 +218,70 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			r = true;
 		}
 
-		if (latestDoneMarker != null)
-		{
-			tokenType = latestDoneMarker.getTokenType();
-			if (tokenType == BLOCK_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, NAMED_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, ANON_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, WRAPPER_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == FOREACH_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, FOREACH_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == WHILE_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, WHILE_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == FILTER_DIRECTIVE_EXPR)
-			{
-				parseBlockContent(b, l, outerMarker, FILTER_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == SWITCH_DIRECTIVE_EXPR)
-			{
-				parseSwitchBlockContent(b, l);
-				outerMarker.done(SWITCH_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == IF_DIRECTIVE_EXPR)
-			{
-				PsiBuilder.Marker branchMarker = outerMarker;
-				outerMarker = outerMarker.precede();
-				parseIfSequence(b, l, branchMarker, IF_BRANCH);
-				outerMarker.done(IF_BLOCK);
-				outerMarker = null;
-			}
-			else if (tokenType == UNLESS_DIRECTIVE_EXPR)
-			{
-				PsiBuilder.Marker branchMarker = outerMarker;
-				outerMarker = outerMarker.precede();
-				parseIfSequence(b, l, branchMarker, UNLESS_BRANCH);
-				outerMarker.done(UNLESS_BLOCK);
-				outerMarker = null;
-			}
-		}
-
-		if (outerMarker != null)
-		{
-			outerMarker.drop();
-		}
+		processMarkers(b, l, latestDoneMarker, outerMarker);
 
 		return r;
 	}
+
+
+	protected static void processMarkers(PsiBuilder b, int l, LighterASTNode latestDoneMarker, PsiBuilder.Marker outerMarker)
+	{
+		if (latestDoneMarker == null)
+		{
+			outerMarker.drop();
+			return;
+		}
+
+		IElementType tokenType = latestDoneMarker.getTokenType();
+		if (tokenType == BLOCK_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, NAMED_BLOCK);
+		}
+		else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, ANON_BLOCK);
+		}
+		else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, WRAPPER_BLOCK);
+		}
+		else if (tokenType == FOREACH_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, FOREACH_BLOCK);
+		}
+		else if (tokenType == WHILE_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, WHILE_BLOCK);
+		}
+		else if (tokenType == FILTER_DIRECTIVE_EXPR)
+		{
+			parseBlockContent(b, l, outerMarker, FILTER_BLOCK);
+		}
+		else if (tokenType == SWITCH_DIRECTIVE_EXPR)
+		{
+			parseSwitchBlockContent(b, l);
+			outerMarker.done(SWITCH_BLOCK);
+		}
+		else if (tokenType == IF_DIRECTIVE_EXPR)
+		{
+			PsiBuilder.Marker branchMarker = outerMarker;
+			outerMarker = outerMarker.precede();
+			parseIfSequence(b, l, branchMarker, IF_BRANCH);
+			outerMarker.done(IF_BLOCK);
+		}
+		else if (tokenType == UNLESS_DIRECTIVE_EXPR)
+		{
+			PsiBuilder.Marker branchMarker = outerMarker;
+			outerMarker = outerMarker.precede();
+			parseIfSequence(b, l, branchMarker, UNLESS_BRANCH);
+			outerMarker.done(UNLESS_BLOCK);
+		}
+		else
+		{
+			outerMarker.drop();
+		}
+	}
+
 
 	/**
 	 * Parses block content

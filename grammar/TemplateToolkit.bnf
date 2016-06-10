@@ -140,6 +140,7 @@ private directive_expr ::=
 	throw_directive_expr |
 	switch_directive_expr |
 	use_directive_expr |
+	macro_directive_expr |
 
 	block_directives |
 	reply_directives |
@@ -201,6 +202,9 @@ private filter_arguments ::= variable_expr | assign_expr | identifier_expr
 
 filter_block ::= filter_directive_expr element * end_directive_expr // fake rule to generate psi
 
+macro_directive_expr ::= TT2_MACRO macro_name macro_content {pin=1}
+macro_name ::= keyword_or_identifier_term [call_arguments]
+macro_content ::= !(TT2_MACRO) directive_expr
 
 use_directive_expr ::= TT2_USE [use_instantiation] use_module {pin=1}
 private use_instantiation ::= use_instance TT2_ASSIGN
@@ -317,8 +321,8 @@ term_expr ::=
 	sq_string_expr |
 	dq_string_expr |
 	TT2_SYMBOL |
-	TT2_NUMBER |
-	TT2_NUMBER_SIMPLE |
+	[TT2_MINUS] TT2_NUMBER |
+	[TT2_MINUS] TT2_NUMBER_SIMPLE |
 	keyword_or_identifier_term
 
 sq_string_expr ::= TT2_SQ_OPEN sq_string_content TT2_SQ_CLOSE {pin=1}
