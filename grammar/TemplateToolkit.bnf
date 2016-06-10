@@ -139,6 +139,7 @@ private directive_expr ::=
 	block_directive_expr |
 	throw_directive_expr |
 	switch_directive_expr |
+	use_directive_expr |
 
 	block_directives |
 	reply_directives |
@@ -199,6 +200,15 @@ filter_directive_expr ::= TT2_FILTER filter_arguments {pin=1}
 private filter_arguments ::= variable_expr | assign_expr | identifier_expr
 
 filter_block ::= filter_directive_expr element * end_directive_expr // fake rule to generate psi
+
+
+use_directive_expr ::= TT2_USE [use_instantiation] use_module {pin=1}
+private use_instantiation ::= use_instance TT2_ASSIGN
+use_instance ::= keyword_or_identifier_term
+private use_module ::= module_name [module_params]
+module_name ::= identifier_expr
+module_params ::= call_arguments_
+
 
 while_directive_expr ::= TT2_WHILE expr {pin=1}
 while_block ::= while_directive_expr element* end_directive_expr // fake rule to generate psi
@@ -290,7 +300,8 @@ private variable_braced_content ::= identifier_expr_content {recoverWhile=recove
 private recover_braced_variable ::= !(TT2_RIGHT_BRACE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 call_expr ::= keyword_or_identifier_term call_arguments
-call_arguments ::= TT2_LEFT_PAREN call_arguments_content ? TT2_RIGHT_PAREN {pin=1}
+call_arguments ::= call_arguments_
+private call_arguments_ ::= TT2_LEFT_PAREN call_arguments_content ? TT2_RIGHT_PAREN {pin=1}
 private call_arguments_content ::= call_arguments_item (TT2_COMMA call_arguments_item)* {recoverWhile=recover_parenthesised_item}
 private call_arguments_item ::= pair_expr | expr
 
