@@ -185,6 +185,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("filter");
 	}
 
+	public void testFilterPostfix()
+	{
+		doTest("filter_postfix");
+	}
+
 	public void testFilterUnclosed()
 	{
 		doTest("filter_unclosed", false);

@@ -46,7 +46,6 @@
 	TT2_LEFT_BRACE="{"
 	TT2_RIGHT_BRACE="}"
 	TT2_ASSIGN="="
-	TT2_HASH_ASSIGN="=>"
 	TT2_SIGIL_SCALAR="$"
 
 	TT2_SQ="SQ"
@@ -187,7 +186,7 @@ private block_directives ::=
 	anon_block_directive |
 	try_directive
 
-private atom_directive_postfix ::=
+directive_postfix ::=
 	if_directive |
 	unless_directive |
 	filters_directives |
@@ -198,29 +197,29 @@ private atom_directive_postfix ::=
 private filters_directives ::= filter_element_expr +
 filter_element_expr ::= {TT2_PIPE|TT2_FILTER} filter_arguments {pin=1}
 
-call_directive ::= TT2_CALL expr [atom_directive_postfix] {pin=1}
-get_directive ::= [TT2_GET] expr [atom_directive_postfix]
+call_directive ::= TT2_CALL expr [directive_postfix] {pin=1}
+get_directive ::= [TT2_GET] expr [directive_postfix]
 
-set_directive ::= [TT2_SET] <<parseSetElement>> + [atom_directive_postfix]
+set_directive ::= [TT2_SET] <<parseSetElement>> + [directive_postfix]
 private parse_set_element ::= identifier_expr TT2_ASSIGN expr
 
-default_directive ::= TT2_DEFAULT assign_expr + [atom_directive_postfix] {pin=1}
+default_directive ::= TT2_DEFAULT assign_expr + [directive_postfix] {pin=1}
 
-insert_directive ::= TT2_INSERT variable_strings_or_files [atom_directive_postfix] {pin=1}
+insert_directive ::= TT2_INSERT variable_strings_or_files [directive_postfix] {pin=1}
 
 private variable_strings_or_files ::= variable_or_strings | insert_files
 private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
 private variable_or_strings ::= variable_expr | strings_argument
 
-next_directive ::= TT2_NEXT [atom_directive_postfix] {pin=1}
-last_directive ::= TT2_LAST [atom_directive_postfix] {pin=1}
-return_directive ::= TT2_RETURN [atom_directive_postfix] {pin=1}
-stop_directive ::= TT2_STOP [atom_directive_postfix] {pin=1}
-clear_directive ::= TT2_CLEAR [atom_directive_postfix] {pin=1}
+next_directive ::= TT2_NEXT [directive_postfix] {pin=1}
+last_directive ::= TT2_LAST [directive_postfix] {pin=1}
+return_directive ::= TT2_RETURN [directive_postfix] {pin=1}
+stop_directive ::= TT2_STOP [directive_postfix] {pin=1}
+clear_directive ::= TT2_CLEAR [directive_postfix] {pin=1}
 tags_directive ::= TT2_TAGS <<parseTags>> {pin=1}
 meta_directive ::= TT2_META pair_expr + {pin=1}
 
-debug_directive ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} [atom_directive_postfix] {pin=1}
+debug_directive ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} [directive_postfix] {pin=1}
 debug_format ::= TT2_FORMAT format_elements {pin=1}
 private format_elements ::=
 	variable_expr |
@@ -241,13 +240,13 @@ private string_argument ::= dq_string_expr | sq_string_expr
 private insert_files ::= convert_to_string (TT2_PLUS convert_to_string) *
 private convert_to_string ::= <<parseFileAsString>>
 
-include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
+include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * [directive_postfix] {pin=1}
 
-process_directive ::= TT2_PROCESS variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
+process_directive ::= TT2_PROCESS variable_strings_or_files assign_expr * [directive_postfix] {pin=1}
 
-wrapper_directive ::= TT2_WRAPPER variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
+wrapper_directive ::= TT2_WRAPPER variable_strings_or_files assign_expr * [directive_postfix] {pin=1}
 
-filter_directive ::= TT2_FILTER filter_arguments [atom_directive_postfix] {pin=1}
+filter_directive ::= TT2_FILTER filter_arguments [directive_postfix] {pin=1}
 private filter_arguments ::= variable_expr | assign_expr | identifier_expr
 
 filter_block ::= filter_directive element * end_directive // fake rule to generate psi
@@ -273,7 +272,7 @@ module_params ::= call_arguments_
 while_directive ::= TT2_WHILE expr {pin=1}
 while_block ::= while_directive element* end_directive // fake rule to generate psi
 
-throw_directive ::= TT2_THROW exception_type exception_message [exception_args] [atom_directive_postfix] {pin=1}
+throw_directive ::= TT2_THROW exception_type exception_message [exception_args] [directive_postfix] {pin=1}
 exception_type ::= variable_strings_or_stringify
 exception_message ::= expr
 exception_args ::= {assign_expr|expr}+
@@ -319,7 +318,7 @@ anon_block_directive ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
-pair_expr ::= <<parseHashKey>> (TT2_ASSIGN|TT2_HASH_ASSIGN) expr
+pair_expr ::= <<parseHashKey>> TT2_ASSIGN expr
 private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}

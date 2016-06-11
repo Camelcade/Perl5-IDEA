@@ -5,6 +5,8 @@
 [% LAST %]
 [% LAST IF some.condition %]
 [% some.var %]
+[% BREAK %]
+[% BREAK IF some.condition %]
 
 </body>
 </html>

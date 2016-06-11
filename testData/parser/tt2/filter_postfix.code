@@ -1,0 +1,10 @@
+<html>
+<head></head>
+<body>
+[% GET foo FILTER foo FILTER bar FILTER something(123) %]
+%% GET foo FILTER foo FILTER bar FILTER something(123)
+[% GET foo | foo | bar | something(123) %]
+%% GET foo | foo | bar | something(123)
+
+</body>
+</html>

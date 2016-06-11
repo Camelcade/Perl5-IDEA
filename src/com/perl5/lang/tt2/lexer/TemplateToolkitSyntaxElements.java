@@ -81,6 +81,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("SWITCH", TT2_SWITCH);
 		KEYWORDS.put("CASE", TT2_CASE);
 		KEYWORDS.put("FOREACH", TT2_FOREACH);
+		KEYWORDS.put("FOR", TT2_FOREACH);
 		KEYWORDS.put("WHILE", TT2_WHILE);
 		KEYWORDS.put("FILTER", TT2_FILTER);
 		KEYWORDS.put("USE", TT2_USE);
@@ -94,6 +95,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("FINAL", TT2_FINAL);
 		KEYWORDS.put("NEXT", TT2_NEXT);
 		KEYWORDS.put("LAST", TT2_LAST);
+		KEYWORDS.put("BREAK", TT2_LAST);
 		KEYWORDS.put("RETURN", TT2_RETURN);
 		KEYWORDS.put("STOP", TT2_STOP);
 		KEYWORDS.put("CLEAR", TT2_CLEAR);
