@@ -134,85 +134,85 @@
 root ::= element *
 private element ::= <<parseBlockComment>> | <<parseDirective>>
 
-private directive_expr ::=
-	call_directive_expr |
-	default_directive_expr |
-	insert_directive_expr |
-	include_directive_expr |
-	process_directive_expr |
-	block_directive_expr |
-	throw_directive_expr |
-	switch_directive_expr |
-	use_directive_expr |
-	macro_directive_expr |
-	next_directive_expr |
-	last_directive_expr |
-	return_directive_expr |
-	stop_directive_expr |
-	clear_directive_expr |
-	tags_directive_expr |
-	debug_directive_expr |
-	meta_directive_expr |
+private directive ::=
+	call_directive |
+	default_directive |
+	insert_directive |
+	include_directive |
+	process_directive |
+	block_directive |
+	throw_directive |
+	switch_directive |
+	use_directive |
+	macro_directive |
+	next_directive |
+	last_directive |
+	return_directive |
+	stop_directive |
+	clear_directive |
+	tags_directive |
+	debug_directive |
+	meta_directive |
 
 	block_directives |
 	reply_directives |
 
 	set_directive |
-	get_directive_expr
+	get_directive
 
 // these directives should be annotated as errors if they are outside of the blocks
 private reply_directives ::=
-	end_directive_expr |
-	elsif_directive_expr |
-	case_directive_expr |
-	else_directive_expr |
-	catch_directive_expr |
-	final_directive_expr
+	end_directive |
+	elsif_directive |
+	case_directive |
+	else_directive |
+	catch_directive |
+	final_directive
 
 // these directives may be used in postfix form
 private block_directives ::=
-	anon_block_directive_expr |
-	wrapper_directive_expr |
-	if_directive_expr |
-	unless_directive_expr |
-	foreach_directive_expr |
-	while_directive_expr |
-	filter_directive_expr |
-	perl_directive_expr |
-	rawperl_directive_expr |
-	try_directive_expr
+	anon_block_directive |
+	wrapper_directive |
+	if_directive |
+	unless_directive |
+	foreach_directive |
+	while_directive |
+	filter_directive |
+	perl_directive |
+	rawperl_directive |
+	try_directive
 
 private postfix_directive ::=
-	if_directive_expr |
-	unless_directive_expr |
-	filters_directives_expr
+	if_directive |
+	unless_directive |
+	filters_directives
 
-private filters_directives_expr ::= filter_element_expr +
+private filters_directives ::= filter_element_expr +
 filter_element_expr ::= {TT2_PIPE|TT2_FILTER} filter_arguments {pin=1}
 
-call_directive_expr ::= TT2_CALL expr {pin=1}
-get_directive_expr ::= [TT2_GET] expr
+call_directive ::= TT2_CALL expr {pin=1}
+get_directive ::= [TT2_GET] expr
 
 private set_directive ::= [TT2_SET] <<parseSetElement>> +
 private parse_set_element ::= identifier_expr TT2_ASSIGN expr
 
-default_directive_expr ::= TT2_DEFAULT assign_expr + {pin=1}
+default_directive ::= TT2_DEFAULT assign_expr + {pin=1}
 
-insert_directive_expr ::= TT2_INSERT variable_strings_or_files {pin=1}
+insert_directive ::= TT2_INSERT variable_strings_or_files {pin=1}
 
 private variable_strings_or_files ::= variable_or_strings | insert_files
 private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
 private variable_or_strings ::= variable_expr | strings_argument
 
-next_directive_expr ::= TT2_NEXT [postfix_directive] {pin=1}
-last_directive_expr ::= TT2_LAST [postfix_directive] {pin=1}
-return_directive_expr ::= TT2_RETURN [postfix_directive] {pin=1}
-stop_directive_expr ::= TT2_STOP [postfix_directive] {pin=1}
-clear_directive_expr ::= TT2_CLEAR [postfix_directive] {pin=1}
-tags_directive_expr ::= TT2_TAGS <<parseTags>> {pin=1}
-meta_directive_expr ::= TT2_META pair_expr + {pin=1}
+next_directive ::= TT2_NEXT [postfix_directive] {pin=1}
+last_directive ::= TT2_LAST [postfix_directive] {pin=1}
+return_directive ::= TT2_RETURN [postfix_directive] {pin=1}
+stop_directive ::= TT2_STOP [postfix_directive] {pin=1}
+clear_directive ::= TT2_CLEAR [postfix_directive] {pin=1}
+tags_directive ::= TT2_TAGS <<parseTags>> {pin=1}
+meta_directive ::= TT2_META pair_expr + {pin=1}
 
-debug_directive_expr ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} {pin=1}
+debug_directive ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} {pin=1}
 debug_format ::= TT2_FORMAT format_elements {pin=1}
 private format_elements ::=
 	variable_expr |
@@ -220,12 +220,12 @@ private format_elements ::=
 	dq_string_expr |
 	sq_string_expr
 
-foreach_directive_expr ::= TT2_FOREACH [foreach_iterator_] foreach_iterable {pin=1}
+foreach_directive ::= TT2_FOREACH [foreach_iterator_] foreach_iterable {pin=1}
 private foreach_iterator_ ::= foreach_iterator {TT2_ASSIGN|TT2_IN} {pin=2}
 foreach_iterator ::= keyword_or_identifier_term {pin=2}
 foreach_iterable ::= expr
 
-foreach_block ::= foreach_directive_expr element * end_directive_expr // fake rule to generate psi
+foreach_block ::= foreach_directive element * end_directive // fake rule to generate psi
 
 private strings_argument ::= string_argument (TT2_PLUS string_argument) *
 private string_argument ::= dq_string_expr | sq_string_expr
@@ -233,28 +233,28 @@ private string_argument ::= dq_string_expr | sq_string_expr
 private insert_files ::= convert_to_string (TT2_PLUS convert_to_string) *
 private convert_to_string ::= <<parseFileAsString>>
 
-include_directive_expr ::= TT2_INCLUDE variable_strings_or_files assign_expr * {pin=1}
+include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * {pin=1}
 
-process_directive_expr ::= TT2_PROCESS variable_strings_or_files assign_expr * {pin=1}
+process_directive ::= TT2_PROCESS variable_strings_or_files assign_expr * {pin=1}
 
-wrapper_directive_expr ::= TT2_WRAPPER variable_strings_or_files assign_expr * {pin=1}
+wrapper_directive ::= TT2_WRAPPER variable_strings_or_files assign_expr * {pin=1}
 
-filter_directive_expr ::= TT2_FILTER filter_arguments {pin=1}
+filter_directive ::= TT2_FILTER filter_arguments {pin=1}
 private filter_arguments ::= variable_expr | assign_expr | identifier_expr
 
-filter_block ::= filter_directive_expr element * end_directive_expr // fake rule to generate psi
+filter_block ::= filter_directive element * end_directive // fake rule to generate psi
 
-macro_directive_expr ::= TT2_MACRO macro_name macro_content {pin=1}
+macro_directive ::= TT2_MACRO macro_name macro_content {pin=1}
 macro_name ::= keyword_or_identifier_term [call_arguments]
 macro_content ::= !(TT2_MACRO) <<parseMacroBody>>
 
-perl_directive_expr ::= TT2_PERL
-rawperl_directive_expr ::= TT2_RAWPERL
+perl_directive ::= TT2_PERL
+rawperl_directive ::= TT2_RAWPERL
 
-perl_block ::= perl_directive_expr end_directive_expr
-rawperl_block ::= rawperl_directive_expr end_directive_expr
+perl_block ::= perl_directive end_directive
+rawperl_block ::= rawperl_directive end_directive
 
-use_directive_expr ::= TT2_USE [use_instantiation] use_module {pin=1}
+use_directive ::= TT2_USE [use_instantiation] use_module {pin=1}
 private use_instantiation ::= use_instance TT2_ASSIGN
 use_instance ::= keyword_or_identifier_term
 private use_module ::= module_name [module_params]
@@ -262,51 +262,51 @@ module_name ::= identifier_expr
 module_params ::= call_arguments_
 
 
-while_directive_expr ::= TT2_WHILE expr {pin=1}
-while_block ::= while_directive_expr element* end_directive_expr // fake rule to generate psi
+while_directive ::= TT2_WHILE expr {pin=1}
+while_block ::= while_directive element* end_directive // fake rule to generate psi
 
-throw_directive_expr ::= TT2_THROW exception_type exception_message [exception_args] {pin=1}
+throw_directive ::= TT2_THROW exception_type exception_message [exception_args] {pin=1}
 exception_type ::= variable_strings_or_stringify
 exception_message ::= expr
 exception_args ::= {assign_expr|expr}+
 
-switch_directive_expr ::= TT2_SWITCH expr {pin=1}
-case_directive_expr ::= TT2_CASE [TT2_DEFAULT|expr] {pin=1}
+switch_directive ::= TT2_SWITCH expr {pin=1}
+case_directive ::= TT2_CASE [TT2_DEFAULT|expr] {pin=1}
 
-switch_block ::= switch_directive_expr case_block * end_directive_expr // fake rule to make psi element
-case_block ::= case_directive_expr element *
+switch_block ::= switch_directive case_block * end_directive // fake rule to make psi element
+case_block ::= case_directive element *
 
-if_directive_expr ::= TT2_IF expr {pin=1}
-unless_directive_expr ::= TT2_UNLESS expr {pin=1}
-elsif_directive_expr ::= TT2_ELSIF expr {pin=1}
-else_directive_expr ::= TT2_ELSE {pin=1}
+if_directive ::= TT2_IF expr {pin=1}
+unless_directive ::= TT2_UNLESS expr {pin=1}
+elsif_directive ::= TT2_ELSIF expr {pin=1}
+else_directive ::= TT2_ELSE {pin=1}
 
 if_block ::= if_branch if_sequence // fake rule to make psi element
 unless_block ::= unless_branch if_sequence // fake rule to make psi element
-private if_sequence ::= elsif_branch * [else_branch] end_directive_expr
-if_branch ::= if_directive_expr element *
-unless_branch ::= unless_directive_expr element *
-elsif_branch ::= elsif_directive_expr element *
-else_branch ::= else_directive_expr element *
+private if_sequence ::= elsif_branch * [else_branch] end_directive
+if_branch ::= if_directive element *
+unless_branch ::= unless_directive element *
+elsif_branch ::= elsif_directive element *
+else_branch ::= else_directive element *
 
-try_catch_block ::= try_branch catch_branch* [final_branch] end_directive_expr // fake rule to make psi element
-try_directive_expr ::= TT2_TRY
-try_branch ::= try_directive_expr element * // fake rule to make psi element
-catch_directive_expr ::= TT2_CATCH [exception_type] {pin=1}
-catch_branch ::= catch_directive_expr element * // fake rule to make psi element
-final_directive_expr ::= TT2_FINAL
-final_branch ::= final_directive_expr element * // fake rule to make psi element
+try_catch_block ::= try_branch catch_branch* [final_branch] end_directive // fake rule to make psi element
+try_directive ::= TT2_TRY
+try_branch ::= try_directive element * // fake rule to make psi element
+catch_directive ::= TT2_CATCH [exception_type] {pin=1}
+catch_branch ::= catch_directive element * // fake rule to make psi element
+final_directive ::= TT2_FINAL
+final_branch ::= final_directive element * // fake rule to make psi element
 
-wrapper_block ::= wrapper_directive_expr element* end_directive_expr // fake rule to make psi element
+wrapper_block ::= wrapper_directive element* end_directive // fake rule to make psi element
 
-end_directive_expr ::= TT2_END
+end_directive ::= TT2_END
 
-named_block ::= block_directive_expr element * end_directive_expr // fake rule to make psi element
-block_directive_expr ::= TT2_BLOCK block_name {pin=1}
+named_block ::= block_directive element * end_directive // fake rule to make psi element
+block_directive ::= TT2_BLOCK block_name {pin=1}
 block_name ::= keyword_or_identifier_term
 
-anon_block ::= anon_block_directive_expr element * end_directive_expr // fake rule to make psi element
-anon_block_directive_expr ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
+anon_block ::= anon_block_directive element * end_directive // fake rule to make psi element
+anon_block_directive ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *

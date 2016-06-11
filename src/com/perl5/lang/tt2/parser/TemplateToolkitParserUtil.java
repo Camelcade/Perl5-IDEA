@@ -130,7 +130,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		LighterASTNode latestDoneMarker = null;
 		PsiBuilder.Marker outerMarker = b.mark();
 
-		if (TemplateToolkitParser.directive_expr(b, l))
+		if (TemplateToolkitParser.directive(b, l))
 		{
 			latestDoneMarker = b.getLatestDoneMarker();
 
@@ -182,12 +182,12 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			}
 			b.advanceLexer();
 
-			if (TemplateToolkitParser.directive_expr(b, l))
+			if (TemplateToolkitParser.directive(b, l))
 			{
 				latestDoneMarker = b.getLatestDoneMarker();
 			}
 
-			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE_EXPR)
+			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE)
 			{
 				PsiBuilder.Marker m = null;
 				while (!b.eof())
@@ -218,12 +218,12 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			b.advanceLexer();
 
-			if (TemplateToolkitParser.directive_expr(b, l))
+			if (TemplateToolkitParser.directive(b, l))
 			{
 				latestDoneMarker = b.getLatestDoneMarker();
 			}
 
-			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE_EXPR)
+			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE)
 			{
 
 				PsiBuilder.Marker m = null;
@@ -270,58 +270,58 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 
 		IElementType tokenType = latestDoneMarker.getTokenType();
-		if (tokenType == BLOCK_DIRECTIVE_EXPR)
+		if (tokenType == BLOCK_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, NAMED_BLOCK);
 		}
-		else if (tokenType == ANON_BLOCK_DIRECTIVE_EXPR)
+		else if (tokenType == ANON_BLOCK_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, ANON_BLOCK);
 		}
-		else if (tokenType == WRAPPER_DIRECTIVE_EXPR)
+		else if (tokenType == WRAPPER_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, WRAPPER_BLOCK);
 		}
-		else if (tokenType == FOREACH_DIRECTIVE_EXPR)
+		else if (tokenType == FOREACH_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, FOREACH_BLOCK);
 		}
-		else if (tokenType == WHILE_DIRECTIVE_EXPR)
+		else if (tokenType == WHILE_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, WHILE_BLOCK);
 		}
-		else if (tokenType == FILTER_DIRECTIVE_EXPR)
+		else if (tokenType == FILTER_DIRECTIVE)
 		{
 			parseBlockContent(b, l, outerMarker, FILTER_BLOCK);
 		}
-		else if (tokenType == PERL_DIRECTIVE_EXPR)
+		else if (tokenType == PERL_DIRECTIVE)
 		{
 			parsePerlCode(b, l, outerMarker, TT2_PERL_CODE, PERL_BLOCK);
 		}
-		else if (tokenType == RAWPERL_DIRECTIVE_EXPR)
+		else if (tokenType == RAWPERL_DIRECTIVE)
 		{
 			parsePerlCode(b, l, outerMarker, TT2_RAWPERL_CODE, RAWPERL_BLOCK);
 		}
-		else if (tokenType == SWITCH_DIRECTIVE_EXPR)
+		else if (tokenType == SWITCH_DIRECTIVE)
 		{
 			parseSwitchBlockContent(b, l);
 			outerMarker.done(SWITCH_BLOCK);
 		}
-		else if (tokenType == TRY_DIRECTIVE_EXPR)
+		else if (tokenType == TRY_DIRECTIVE)
 		{
 			PsiBuilder.Marker branchMarker = outerMarker;
 			outerMarker = outerMarker.precede();
 			parseTryCatchBlock(b, l, branchMarker, TRY_BRANCH);
 			outerMarker.done(TRY_CATCH_BLOCK);
 		}
-		else if (tokenType == IF_DIRECTIVE_EXPR)
+		else if (tokenType == IF_DIRECTIVE)
 		{
 			PsiBuilder.Marker branchMarker = outerMarker;
 			outerMarker = outerMarker.precede();
 			parseIfSequence(b, l, branchMarker, IF_BRANCH);
 			outerMarker.done(IF_BLOCK);
 		}
-		else if (tokenType == UNLESS_DIRECTIVE_EXPR)
+		else if (tokenType == UNLESS_DIRECTIVE)
 		{
 			PsiBuilder.Marker branchMarker = outerMarker;
 			outerMarker = outerMarker.precede();
@@ -348,7 +348,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		while (!b.eof() && TemplateToolkitParser.element(b, l))
 		{
 			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
-			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE)
 			{
 				r = true;
 				break;
@@ -395,7 +395,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 
-			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE)
 			{
 				outerMarker.done(blockTokenType);
 				recoverBlock = false;
@@ -433,7 +433,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 				if (latestDoneMarker != null)
 				{
-					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
@@ -441,14 +441,14 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 						branchMarker = null;
 						break;
 					}
-					else if (latestDoneMarker.getTokenType() == ELSIF_DIRECTIVE_EXPR)
+					else if (latestDoneMarker.getTokenType() == ELSIF_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 						branchMarker = currentMarker.precede();
 						branchTokenType = ELSIF_BRANCH;
 					}
-					else if (latestDoneMarker.getTokenType() == ELSE_DIRECTIVE_EXPR)
+					else if (latestDoneMarker.getTokenType() == ELSE_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
@@ -489,7 +489,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 				if (latestDoneMarker != null)
 				{
-					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
@@ -497,14 +497,14 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 						branchMarker = null;
 						break;
 					}
-					else if (latestDoneMarker.getTokenType() == CATCH_DIRECTIVE_EXPR)
+					else if (latestDoneMarker.getTokenType() == CATCH_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 						branchMarker = currentMarker.precede();
 						branchTokenType = CATCH_BRANCH;
 					}
-					else if (latestDoneMarker.getTokenType() == FINAL_DIRECTIVE_EXPR)
+					else if (latestDoneMarker.getTokenType() == FINAL_DIRECTIVE)
 					{
 						branchMarker.doneBefore(branchTokenType, currentMarker);
 						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
@@ -546,7 +546,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 				if (latestDoneMarker != null)
 				{
-					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE)
 					{
 						if (branchMarker != null)
 						{
@@ -557,7 +557,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 						currentMarker.drop();
 						break;
 					}
-					else if (latestDoneMarker.getTokenType() == CASE_DIRECTIVE_EXPR)
+					else if (latestDoneMarker.getTokenType() == CASE_DIRECTIVE)
 					{
 						if (branchMarker != null)
 						{

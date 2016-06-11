@@ -3,7 +3,7 @@ Template Toolkit File
   PsiErrorElement:Unclosed block directive, missing END
     TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.WHILE_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
-      TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.WHILE_DIRECTIVE_EXPR)
+      TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.WHILE_DIRECTIVE)
         PsiElement(TemplateToolkit2Token.WHILE)('WHILE')
         TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.COMPARE_EXPR)
           TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)

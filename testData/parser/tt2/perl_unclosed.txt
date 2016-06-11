@@ -3,7 +3,7 @@ Template Toolkit File
   PsiErrorElement:Unclosed perl block, missing END
     TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.PERL_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
-      TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.PERL_DIRECTIVE_EXPR)
+      TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.PERL_DIRECTIVE)
         PsiElement(TemplateToolkit2Token.PERL)('PERL')
       PsiElement(TemplateToolkit2Token.%])('%]')
       PsiComment(TemplateToolkit2Token.TT2_HTML)('print $context->include('myfile');\n   print $stash;\n   print $output;\n   print $error;\n\n\n</body>\n</html>')
