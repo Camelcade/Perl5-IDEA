@@ -158,30 +158,31 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 						// check for imports to the current file
 						PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(subNameElement, PerlNamespaceContainer.class);
 
-						assert namespaceContainer != null;
-
-						for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
+						if (namespaceContainer != null)
 						{
-							if (exportDescriptor.getExportedName().equals(subName))
+							for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
 							{
-								int currentSize = relatedItems.size();
-								collectRelatedItems(
-										exportDescriptor.getTargetCanonicalName(),
-										project,
-										parent,
-										relatedItems,
-										globalSearchScope
-								);
-
-								if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
+								if (exportDescriptor.getExportedName().equals(subName))
 								{
+									int currentSize = relatedItems.size();
 									collectRelatedItems(
-											exportDescriptor.getTargetPackage() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
+											exportDescriptor.getTargetCanonicalName(),
 											project,
 											parent,
 											relatedItems,
 											globalSearchScope
 									);
+
+									if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
+									{
+										collectRelatedItems(
+												exportDescriptor.getTargetPackage() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
+												project,
+												parent,
+												relatedItems,
+												globalSearchScope
+										);
+									}
 								}
 							}
 						}

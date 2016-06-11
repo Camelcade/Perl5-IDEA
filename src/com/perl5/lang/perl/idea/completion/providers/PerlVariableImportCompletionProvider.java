@@ -20,9 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
@@ -52,10 +50,13 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 		}
 
 		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(perlVariable, PerlNamespaceContainer.class);
-		assert namespaceContainer != null;
-		Project project = perlVariable.getProject();
+
+		if (namespaceContainer == null)
+		{
+			return;
+		}
+
 		String packageName = namespaceContainer.getPackageName();
-		PsiFile originalFile = parameters.getOriginalFile();
 
 		if (packageName == null) // incomplete package definition
 		{

@@ -21,11 +21,15 @@ import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.ConfigurableTemplateLanguageFileViewProvider;
+import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
+import com.intellij.util.ReflectionUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -99,4 +103,41 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
 		}
 		return null;
 	}
+
+	@Override
+	@Nullable
+	public PsiElement findElementAt(int offset, @NotNull Class<? extends Language> lang)
+	{
+		final PsiFile mainRoot = getPsi(getBaseLanguage());
+		PsiElement ret = null;
+		for (final Language language : getLanguages())
+		{
+			if (!ReflectionUtil.isAssignable(lang, language.getClass()))
+			{
+				continue;
+			}
+			if (lang.equals(Language.class) && !getLanguages().contains(language))
+			{
+				continue;
+			}
+
+			final PsiFile psiRoot = getPsi(language);
+			final PsiElement psiElement = findElementAt(psiRoot, offset);
+			if (psiElement == null || psiElement instanceof OuterLanguageElement)
+			{
+				continue;
+			}
+			if (ret == null || psiRoot != mainRoot)
+			{
+				ret = psiElement;
+				// fixme this hack is to avoid detecting perl code on lexing phase, guess there are more bugs of this kind, so we better do
+				if (psiElement.getLanguage() == PerlLanguage.INSTANCE)
+				{
+					break;
+				}
+			}
+		}
+		return ret;
+	}
+
 }

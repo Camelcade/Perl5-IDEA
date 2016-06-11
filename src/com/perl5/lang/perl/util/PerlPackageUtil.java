@@ -34,6 +34,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
@@ -43,6 +45,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -678,6 +681,127 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		return null;
 	}
 
+	/**
+	 * Resolving canonical package name to a psi file
+	 *
+	 * @param psiFile              base file
+	 * @param canonicalPackageName package name in canonical form
+	 * @return vartual file
+	 */
+	@Nullable
+	public static PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName)
+	{
+		// resolves to a psi file
+		return resolveRelativePathToPsi(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+	}
+
+	/**
+	 * Resolving canonical package to a virtual file
+	 *
+	 * @param psiFile              base file
+	 * @param canonicalPackageName package name in canonical form
+	 * @return vartual file
+	 */
+	@Nullable
+	public static VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName)
+	{
+		// resolves to a psi file
+		return resolveRelativePathToVirtualFile(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+	}
+
+	/**
+	 * Resolving relative path to a psi file
+	 *
+	 * @param psiFile      base file
+	 * @param relativePath relative path
+	 * @return vartual file
+	 */
+	@Nullable
+	public static PsiFile resolveRelativePathToPsi(@NotNull PsiFile psiFile, String relativePath)
+	{
+		VirtualFile targetFile = resolveRelativePathToVirtualFile(psiFile, relativePath);
+
+		if (targetFile != null && targetFile.exists())
+		{
+			PsiFile targetPsiFile = PsiManager.getInstance(psiFile.getProject()).findFile(targetFile);
+			if (targetPsiFile != null)
+			{
+				return targetPsiFile;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Resolving relative path to a virtual file
+	 *
+	 * @param psiFile      base file
+	 * @param relativePath relative path
+	 * @return vartual file
+	 */
+	@Nullable
+	public static VirtualFile resolveRelativePathToVirtualFile(@NotNull PsiFile psiFile, String relativePath)
+	{
+		if (relativePath != null)
+		{
+			for (VirtualFile classRoot : getLibPathsForPsiFile(psiFile))
+			{
+				if (classRoot != null)
+				{
+					VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
+					if (targetFile != null)
+					{
+						String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
+
+						if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath))
+						{
+							return targetFile;
+						}
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns List of lib directories including class roots, current directory and use lib ones
+	 *
+	 * @param psiFile psiFile to resolve from
+	 * @return list of lib dirs
+	 */
+	@NotNull
+	public static List<VirtualFile> getLibPathsForPsiFile(@NotNull PsiFile psiFile)
+	{
+		List<VirtualFile> result = new ArrayList<VirtualFile>();
+
+		// libdirs providers fixme we need to use stubs or psi here
+		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatement.class))
+		{
+			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+			if (packageProcessor instanceof PerlLibProvider)
+			{
+				((PerlLibProvider) packageProcessor).addLibDirs(useStatement, result);
+			}
+		}
+
+		// classpath
+		result.addAll(Arrays.asList(ProjectRootManager.getInstance(psiFile.getProject()).orderEntries().getClassesRoots()));
+
+		// current dir
+		if (psiFile instanceof PerlFileImpl)
+		{
+			VirtualFile virtualFile = psiFile.getVirtualFile();
+			if (virtualFile != null)
+			{
+				result.add(virtualFile.getParent());
+			}
+		}
+
+		return result;
+	}
 
 	public interface ClassRootVirtualFileProcessor
 	{

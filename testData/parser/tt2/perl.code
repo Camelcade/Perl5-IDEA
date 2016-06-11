@@ -1,0 +1,51 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% PERL %]
+   print $context->include('myfile');
+   print $stash;
+   print $output;
+   print $error;
+[% END %]
+
+
+[% RAWPERL %]
+   print $context->include('myfile');
+   print $stash;
+   print $output;
+   if ($somethig)
+   {
+      use POSIX;
+      POSIX::_exit();
+      localtime;
+   }
+
+   print $error;
+[% END %]
+
+
+[% PERL %]
+   print $context->include('myfile');
+[% END %]
+
+[% PERL %]
+   $stash->set(foo => 'bar');
+   print "foo value: ", $stash->get('foo');
+[% END %]
+
+[% PERL %]
+   print "foo\n";                           # OK
+   print PERLOUT "bar\n";                   # OK, same as above
+   print Template::Perl::PERLOUT "baz\n";   # OK, same as above
+   print STDOUT "qux\n";                    # WRONG!
+   [% END %]
+
+[% PERL %]
+   print "[% name %]\n";
+[% END %]
+
+
+
+</body>
+</html>

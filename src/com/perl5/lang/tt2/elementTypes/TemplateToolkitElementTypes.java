@@ -36,4 +36,6 @@ public interface TemplateToolkitElementTypes extends TemplateToolkitElementTypes
 			TT2_OUTER
 	);
 
+	IElementType TT2_PERL_CODE = new TemplateToolkitPerlCodeElementType("PERL_CODE");
+	IElementType TT2_RAWPERL_CODE = new TemplateToolkitRawPerlCodeElementType("RAW_PERL_CODE");
 }

@@ -205,4 +205,14 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("macro");
 	}
 
+	public void testPerl()
+	{
+		doTest("perl");
+	}
+
+	public void testPerlUnclosed()
+	{
+		doTest("perl_unclosed", false);
+	}
+
 }

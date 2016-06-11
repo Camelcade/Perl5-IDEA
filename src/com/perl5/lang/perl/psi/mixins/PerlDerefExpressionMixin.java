@@ -25,6 +25,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -36,6 +37,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		super(node);
 	}
 
+	@Nullable
 	@Override
 	public String getPreviousElementType(PsiElement methodElement)
 	{
@@ -50,6 +52,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		return getCurrentElementType(currentElement);
 	}
 
+	@Nullable
 	public String getCurrentElementType(PsiElement currentElement)
 	{
 		while (currentElement != null && (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))

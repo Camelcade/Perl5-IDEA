@@ -22,9 +22,11 @@ import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,4 +96,19 @@ public class PerlScopeUtil
 
 		return true;
 	}
+
+	/**
+	 * Searching for most recent lexically visible variable declaration
+	 *
+	 * @param variable variable to search declaration for
+	 * @return variable in declaration term or null if there is no such one
+	 */
+	@Nullable
+	public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable)
+	{
+		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
+		PerlScopeUtil.treeWalkUp(variable, variableProcessor);
+		return variableProcessor.getResult();
+	}
+
 }

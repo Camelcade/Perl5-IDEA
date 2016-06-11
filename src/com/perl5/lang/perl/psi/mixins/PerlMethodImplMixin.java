@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -58,7 +59,8 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		}
 		else
 		{
-			return getContextPackageNameHeavy();
+			String contextPackageNameHeavy = getContextPackageNameHeavy();
+			return contextPackageNameHeavy == null ? "" : contextPackageNameHeavy;
 		}
 	}
 
@@ -91,6 +93,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		return subNameElement.getText();
 	}
 
+	@Nullable
 	@Override
 	public String getContextPackageNameHeavy()
 	{

@@ -1,0 +1,14 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% PERL %]
+   print $context->include('myfile');
+   print $stash;
+   print $output;
+   print $error;
+
+
+</body>
+</html>
+

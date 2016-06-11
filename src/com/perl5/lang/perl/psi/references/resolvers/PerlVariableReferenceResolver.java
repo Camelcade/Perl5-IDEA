@@ -67,45 +67,47 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			PerlVariableType actualType = myVariable.getActualType();
 			Project project = myVariable.getProject();
 			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myVariable, PerlNamespaceContainer.class);
-			assert namespaceContainer != null;
 
-			String variableName = myVariable.getName();
-
-			if (actualType == PerlVariableType.SCALAR)
+			if (namespaceContainer != null) // not true if LPE in TemplateToolkit
 			{
-				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors())
+				String variableName = myVariable.getName();
+
+				if (actualType == PerlVariableType.SCALAR)
 				{
-					if (importEntry.getExportedName().equals(variableName))
+					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors())
 					{
-						for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
+						if (importEntry.getExportedName().equals(variableName))
 						{
-							result.add(new PsiElementResolveResult(targetVariable));
+							for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
 						}
 					}
 				}
-			}
-			else if (actualType == PerlVariableType.ARRAY)
-			{
-				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors())
+				else if (actualType == PerlVariableType.ARRAY)
 				{
-					if (importEntry.getExportedName().equals(variableName))
+					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors())
 					{
-						for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
+						if (importEntry.getExportedName().equals(variableName))
 						{
-							result.add(new PsiElementResolveResult(targetVariable));
+							for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
 						}
 					}
 				}
-			}
-			else if (actualType == PerlVariableType.HASH)
-			{
-				for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors())
+				else if (actualType == PerlVariableType.HASH)
 				{
-					if (importEntry.getExportedName().equals(variableName))
+					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors())
 					{
-						for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
+						if (importEntry.getExportedName().equals(variableName))
 						{
-							result.add(new PsiElementResolveResult(targetVariable));
+							for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
+							{
+								result.add(new PsiElementResolveResult(targetVariable));
+							}
 						}
 					}
 				}

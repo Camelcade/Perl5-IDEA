@@ -24,7 +24,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -49,14 +49,18 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 					{
 						PsiElement element = resolveResult.getElement();
 						if (element != null)
+						{
 							result.add(element);
+						}
 					}
 				}
 				else
 				{
 					PsiElement element = reference.resolve();
 					if (element != null)
+					{
 						result.add(element);
+					}
 				}
 			}
 		}
@@ -72,13 +76,11 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 				if (variableContainer instanceof PerlVariableDeclarationWrapper)
 				{
-					PsiFile myFile = sourceElement.getContainingFile();
 
-					if (myFile instanceof PerlFileImpl)
+					PerlVariableDeclarationWrapper shadowedVariable = PerlScopeUtil.getLexicalDeclaration((PerlVariable) variable);
+					if (shadowedVariable != null && !result.contains(shadowedVariable))
 					{
-						PerlVariableDeclarationWrapper shadowedVariable = ((PerlFileImpl) myFile).getLexicalDeclaration((PerlVariable) variable);
-						if (shadowedVariable != null && !result.contains(shadowedVariable))
-							result.add(shadowedVariable);
+						result.add(shadowedVariable);
 					}
 				}
 			}
@@ -90,8 +92,12 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 
 			// suppress declaration if there is a definition and declaration
 			if (result.size() == 2 && !(elementParent instanceof PerlSubDefinitionBase || elementParent instanceof PerlSubDeclaration))
+			{
 				if (result.get(0).getOriginalElement() instanceof PerlSubDeclaration && result.get(1).getOriginalElement() instanceof PerlSubDefinitionBase)
+				{
 					result.remove(0);
+				}
+			}
 
 		}
 		// string content to file jump fixme change to string
@@ -112,17 +118,27 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
 						if (canonicalPath != null)
+						{
 							if (canonicalPath.contains(tokenText + "."))    // higer priority
+							{
 								result.add(0, fileItem);
+							}
 							else if (canonicalPath.contains(tokenText))
+							{
 								result.add(fileItem);
+							}
+						}
 					}
 					for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true))
 					{
 						String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
 						if (canonicalPath != null)
+						{
 							if (canonicalPath.contains(tokenText))
+							{
 								result.add(fileItem);
+							}
+						}
 					}
 				}
 			}

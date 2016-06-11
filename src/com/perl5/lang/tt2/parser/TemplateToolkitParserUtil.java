@@ -305,6 +305,14 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			parseBlockContent(b, l, outerMarker, FILTER_BLOCK);
 		}
+		else if (tokenType == PERL_DIRECTIVE_EXPR)
+		{
+			parsePerlCode(b, l, outerMarker, TT2_PERL_CODE, PERL_BLOCK);
+		}
+		else if (tokenType == RAWPERL_DIRECTIVE_EXPR)
+		{
+			parsePerlCode(b, l, outerMarker, TT2_RAWPERL_CODE, RAWPERL_BLOCK);
+		}
 		else if (tokenType == SWITCH_DIRECTIVE_EXPR)
 		{
 			parseSwitchBlockContent(b, l);
@@ -359,6 +367,64 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 
 		return r;
+	}
+
+	/**
+	 * Collapses perl code for lazy parsing
+	 *
+	 * @param b builder
+	 * @param l level
+	 * @return result of end parsing.
+	 */
+	public static boolean parsePerlCode(PsiBuilder b, int l, PsiBuilder.Marker outerMarker, IElementType perlTokenType, IElementType blockTokenType)
+	{
+		PsiBuilder.Marker perlMarker = b.mark();
+		while (!b.eof() && !isEndAhead(b, l))
+		{
+			b.advanceLexer();
+		}
+		boolean recoverBlock = true;
+
+		if (isEndAhead(b, l))
+		{
+			perlMarker.collapse(perlTokenType);
+			perlMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+		}
+		else
+		{
+			perlMarker.drop();
+		}
+
+		if (TemplateToolkitParser.element(b, l))
+		{
+			LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
+
+			if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+			{
+				outerMarker.done(blockTokenType);
+				recoverBlock = false;
+			}
+		}
+
+		if (recoverBlock)
+		{
+			while (!b.eof() || b.getTokenType() == TT2_OUTLINE_TAG || b.getTokenType() == TT2_OPEN_TAG)
+			{
+				b.advanceLexer();
+			}
+
+			outerMarker.done(blockTokenType);
+			outerMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+			outerMarker.precede().error(PerlBundle.message("ttk2.error.unclosed.perl.block"));
+		}
+
+		return true;
+	}
+
+	protected static boolean isEndAhead(PsiBuilder b, int l)
+	{
+		IElementType tokenType = b.getTokenType();
+		return (tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG) && b.lookAhead(1) == TT2_END;
 	}
 
 	public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType)

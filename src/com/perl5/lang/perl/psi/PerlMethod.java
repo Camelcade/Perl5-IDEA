@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -45,6 +46,7 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 	 *
 	 * @return boolean
 	 */
+	@Nullable
 	String getContextPackageNameHeavy();
 
 }

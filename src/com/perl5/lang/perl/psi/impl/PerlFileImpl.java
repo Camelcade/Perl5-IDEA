@@ -21,8 +21,6 @@ import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -37,8 +35,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
@@ -49,7 +45,6 @@ import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.util.*;
@@ -140,20 +135,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		METHODS_NAMESPACES_CACHE.clear();
 		myElementsResolveScope = null;
 		isNewLineFobiddenAtLine.clear();
-	}
-
-
-	/**
-	 * Searching for most recent lexically visible variable declaration
-	 *
-	 * @param currentVariable variable to search declaration for
-	 * @return variable in declaration term or null if there is no such one
-	 */
-	public PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable currentVariable)
-	{
-		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(currentVariable);
-		PerlScopeUtil.treeWalkUp(currentVariable, variableProcessor);
-		return variableProcessor.getResult();
 	}
 
 	@Override
@@ -250,35 +231,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return PerlHashUtil.getImportedHashesDescriptors(this);
 	}
 
-	@NotNull
-	@Override
-	public List<VirtualFile> getLibPaths()
-	{
-		List<VirtualFile> result = new ArrayList<VirtualFile>();
-
-		// libdirs providers
-		for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(this, PerlUseStatement.class))
-		{
-			PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-			if (packageProcessor instanceof PerlLibProvider)
-			{
-				((PerlLibProvider) packageProcessor).addLibDirs(useStatement, result);
-			}
-		}
-
-		// classpath
-		result.addAll(Arrays.asList(ProjectRootManager.getInstance(getProject()).orderEntries().getClassesRoots()));
-
-		// current dir
-		VirtualFile virtualFile = getVirtualFile();
-		if (virtualFile != null)
-		{
-			result.add(virtualFile.getParent());
-		}
-
-		return result;
-	}
-
 //	@Override
 //	@NotNull
 //	public GlobalSearchScope getElementsResolveScope()
@@ -348,7 +300,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			String packageName = ((PerlUseStatementStub) currentStub).getPackageName();
 			if (packageName != null)
 			{
-				virtualFile = resolvePackageNameToVirtualFile(packageName);
+				virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
 			}
 
 		}
@@ -357,7 +309,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			String importPath = ((PerlRuntimeImportStub) currentStub).getImportPath();
 			if (importPath != null)
 			{
-				virtualFile = resolveRelativePathToVirtualFile(importPath);
+				virtualFile = PerlPackageUtil.resolveRelativePathToVirtualFile(this, importPath);
 			}
 		}
 
@@ -389,7 +341,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 				String packageName = ((PerlUseStatement) importStatement).getPackageName();
 				if (packageName != null)
 				{
-					virtualFile = resolvePackageNameToVirtualFile(packageName);
+					virtualFile = PerlPackageUtil.resolvePackageNameToVirtualFile(this, packageName);
 				}
 			}
 			else if (importStatement instanceof PerlDoExpr)
@@ -398,7 +350,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 				if (importPath != null)
 				{
-					virtualFile = resolveRelativePathToVirtualFile(((PerlDoExpr) importStatement).getImportPath());
+					virtualFile = PerlPackageUtil.resolveRelativePathToVirtualFile(this, ((PerlDoExpr) importStatement).getImportPath());
 				}
 			}
 
@@ -407,64 +359,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 				collectRequiresFromVirtualFile(virtualFile, includedVirtualFiles);
 			}
 		}
-	}
-
-	@Nullable
-	@Override
-	public PsiFile resolvePackageNameToPsi(String canonicalPackageName)
-	{
-		// resolves to a psi file
-		return resolveRelativePathToPsi(PerlPackageUtil.getPackagePathByName(canonicalPackageName));
-	}
-
-	@Nullable
-	@Override
-	public VirtualFile resolvePackageNameToVirtualFile(String canonicalPackageName)
-	{
-		// resolves to a psi file
-		return resolveRelativePathToVirtualFile(PerlPackageUtil.getPackagePathByName(canonicalPackageName));
-	}
-
-	@Nullable
-	@Override
-	public PsiFile resolveRelativePathToPsi(String relativePath)
-	{
-		VirtualFile targetFile = resolveRelativePathToVirtualFile(relativePath);
-
-		if (targetFile != null && targetFile.exists())
-		{
-			PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(targetFile);
-			if (targetPsiFile != null)
-				return targetPsiFile;
-		}
-
-		return null;
-	}
-
-	@Override
-	public VirtualFile resolveRelativePathToVirtualFile(String relativePath)
-	{
-		if (relativePath != null)
-		{
-			for (VirtualFile classRoot : getLibPaths())
-			{
-				if (classRoot != null)
-				{
-					VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
-					if (targetFile != null)
-					{
-						String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
-
-						if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath))
-						{
-							return targetFile;
-						}
-					}
-				}
-			}
-		}
-
-		return null;
 	}
 
 	@Override

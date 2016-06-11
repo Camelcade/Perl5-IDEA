@@ -110,8 +110,10 @@
 	TT2_FILTER="FILTER"
 	TT2_USE="USE"
 	TT2_MACRO="MACRO"
+
 	TT2_PERL="PERL"
 	TT2_RAWPERL="RAWPERL"
+
 	TT2_TRY="TRY"
 	TT2_THROW="THROW"
 	TT2_CATCH="CATCH"
@@ -163,7 +165,9 @@ private block_directives ::=
 	unless_directive_expr |
 	foreach_directive_expr |
 	while_directive_expr |
-	filter_directive_expr
+	filter_directive_expr |
+	perl_directive_expr |
+	rawperl_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -205,6 +209,12 @@ filter_block ::= filter_directive_expr element * end_directive_expr // fake rule
 macro_directive_expr ::= TT2_MACRO macro_name macro_content {pin=1}
 macro_name ::= keyword_or_identifier_term [call_arguments]
 macro_content ::= !(TT2_MACRO) <<parseMacroBody>>
+
+perl_directive_expr ::= TT2_PERL
+rawperl_directive_expr ::= TT2_RAWPERL
+
+perl_block ::= perl_directive_expr end_directive_expr
+rawperl_block ::= rawperl_directive_expr end_directive_expr
 
 use_directive_expr ::= TT2_USE [use_instantiation] use_module {pin=1}
 private use_instantiation ::= use_instance TT2_ASSIGN

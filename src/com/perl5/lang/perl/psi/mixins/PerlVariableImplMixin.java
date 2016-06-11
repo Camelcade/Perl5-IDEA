@@ -36,6 +36,7 @@ import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -343,11 +344,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		if (getNamespaceElement() != null)
 			return null;
 
-		PsiFile myFile = getContainingFile();
-		if (myFile instanceof PerlFileImpl)
-			return ((PerlFileImpl) myFile).getLexicalDeclaration(this);
-
-		return null;
+		return PerlScopeUtil.getLexicalDeclaration(this);
 	}
 
 	@Override

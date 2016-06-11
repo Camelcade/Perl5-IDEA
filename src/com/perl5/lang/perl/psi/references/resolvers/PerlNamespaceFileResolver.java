@@ -20,9 +20,9 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,10 +38,7 @@ public class PerlNamespaceFileResolver implements ResolveCache.PolyVariantResolv
 		PsiFile file = myElement.getContainingFile();
 		PsiFile targetFile = null;
 
-		if (file instanceof PerlFile)
-		{
-			targetFile = ((PerlFile) file).resolvePackageNameToPsi(perlNamespaceFileReference.getPackageName());
-		}
+		targetFile = PerlPackageUtil.resolvePackageNameToPsi(file, perlNamespaceFileReference.getPackageName());
 
 		return targetFile == null
 				? ResolveResult.EMPTY_ARRAY

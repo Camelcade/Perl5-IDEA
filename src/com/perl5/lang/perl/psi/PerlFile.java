@@ -26,7 +26,6 @@ import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -51,13 +50,6 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	@NotNull
 	String getMethodNamespace(PerlMethod element);
 
-	/**
-	 * Returns lib paths for current file
-	 *
-	 * @return lib paths list in normal order
-	 */
-	@NotNull
-	List<VirtualFile> getLibPaths();
 
 	/**
 	 * Returns resolve scope for nested elements. Probably it should be getResolveScope, but still not sure
@@ -74,41 +66,6 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 */
 	void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
 
-	/**
-	 * Resolves package name according to the current file contents
-	 *
-	 * @param canonicalPackageName canonical package name
-	 * @return target PsiFile if resolved
-	 */
-	@Nullable
-	PsiFile resolvePackageNameToPsi(String canonicalPackageName);
-
-	/**
-	 * Resolves package name according to the current file contents
-	 *
-	 * @param canonicalPackageName canonical package name
-	 * @return target VirtualFile if resolved
-	 */
-	@Nullable
-	VirtualFile resolvePackageNameToVirtualFile(String canonicalPackageName);
-
-	/**
-	 * Resolves relative path (from do/require) according to the current file contents
-	 *
-	 * @param relativePath relative path
-	 * @return target PsiFile if resolved
-	 */
-	@Nullable
-	PsiFile resolveRelativePathToPsi(String relativePath);
-
-	/**
-	 * Resolves relative path (from do/require) according to the current file contents
-	 *
-	 * @param relativePath relative path
-	 * @return target VirtualFile if resolved
-	 */
-	@Nullable
-	VirtualFile resolveRelativePathToVirtualFile(String relativePath);
 
 	/**
 	 * Returns generator for overriding elements
