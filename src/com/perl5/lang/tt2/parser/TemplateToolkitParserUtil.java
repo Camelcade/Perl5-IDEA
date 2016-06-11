@@ -135,6 +135,49 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return false;
 	}
 
+	public static boolean parseMacroBody(PsiBuilder b, int l)
+	{
+		boolean r = false;
+		LighterASTNode latestDoneMarker = null;
+		PsiBuilder.Marker outerMarker = b.mark();
+
+		if (TemplateToolkitParser.directive_expr(b, l))
+		{
+			latestDoneMarker = b.getLatestDoneMarker();
+
+			PsiBuilder.Marker m = null;
+			while (!b.eof())
+			{
+				IElementType tokenType = b.getTokenType();
+				if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_HARD_NEWLINE || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+				{
+					break;
+				}
+				if (m == null)
+				{
+					m = b.mark();
+				}
+				b.advanceLexer();
+			}
+
+			if (m != null)
+			{
+				m.error(PerlBundle.message("ttk2.unexpected.token"));
+			}
+
+			consumeToken(b, TT2_HARD_NEWLINE);
+			consumeToken(b, TT2_MINUS);
+			consumeToken(b, TT2_CLOSE_TAG);
+
+			r = true;
+		}
+
+		processMarkers(b, l, latestDoneMarker, outerMarker);
+
+		return r;
+	}
+
+
 	public static boolean parseDirective(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -155,29 +198,31 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				latestDoneMarker = b.getLatestDoneMarker();
 			}
 
-			PsiBuilder.Marker m = null;
-			while (!b.eof())
+			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE_EXPR)
 			{
-				tokenType = b.getTokenType();
-				if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+				PsiBuilder.Marker m = null;
+				while (!b.eof())
 				{
-					break;
+					tokenType = b.getTokenType();
+					if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+					{
+						break;
+					}
+					if (m == null)
+					{
+						m = b.mark();
+					}
+					b.advanceLexer();
 				}
-				if (m == null)
+
+				if (m != null)
 				{
-					m = b.mark();
+					m.error(PerlBundle.message("ttk2.unexpected.token"));
 				}
-				b.advanceLexer();
+
+				consumeToken(b, TT2_MINUS);
+				consumeToken(b, TT2_CLOSE_TAG);
 			}
-
-			if (m != null)
-			{
-				m.error(PerlBundle.message("ttk2.unexpected.token"));
-			}
-
-			consumeToken(b, TT2_MINUS);
-			consumeToken(b, TT2_CLOSE_TAG);
-
 			r = true;
 		}
 		else if (tokenType == TT2_OUTLINE_TAG)
@@ -189,32 +234,35 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				latestDoneMarker = b.getLatestDoneMarker();
 			}
 
-			PsiBuilder.Marker m = null;
-
-			while (!b.eof())
+			if (latestDoneMarker == null || latestDoneMarker.getTokenType() != MACRO_DIRECTIVE_EXPR)
 			{
+
+				PsiBuilder.Marker m = null;
+
+				while (!b.eof())
+				{
+					if (b.getTokenType() == TT2_HARD_NEWLINE)
+					{
+						break;
+					}
+					if (m == null)
+					{
+						m = b.mark();
+					}
+					b.advanceLexer();
+				}
+
+				if (m != null)
+				{
+					m.error("ttk2.unexpected.token");
+				}
+				// parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
 				if (b.getTokenType() == TT2_HARD_NEWLINE)
 				{
-					break;
+					b.remapCurrentToken(TokenType.NEW_LINE_INDENT); // this is irreversable change, so not sure it's a good idea
+					b.advanceLexer();
 				}
-				if (m == null)
-				{
-					m = b.mark();
-				}
-				b.advanceLexer();
 			}
-
-			if (m != null)
-			{
-				m.error("ttk2.unexpected.token");
-			}
-			// parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
-			if (b.getTokenType() == TT2_HARD_NEWLINE)
-			{
-				b.remapCurrentToken(TokenType.NEW_LINE_INDENT); // this is irreversable change, so not sure it's a good idea
-				b.advanceLexer();
-			}
-
 			r = true;
 		}
 
@@ -346,8 +394,13 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 						branchTokenType = ELSE_BRANCH;
 					}
 				}
+				currentMarker.drop();
 			}
-			currentMarker.drop();
+			else
+			{
+				b.advanceLexer();
+				branchMarker.error("ttk2.unexpected.token");
+			}
 		}
 
 		if (branchMarker != null)
@@ -403,5 +456,4 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 		return true;
 	}
-
 }

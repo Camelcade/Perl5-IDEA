@@ -204,7 +204,7 @@ filter_block ::= filter_directive_expr element * end_directive_expr // fake rule
 
 macro_directive_expr ::= TT2_MACRO macro_name macro_content {pin=1}
 macro_name ::= keyword_or_identifier_term [call_arguments]
-macro_content ::= !(TT2_MACRO) directive_expr
+macro_content ::= !(TT2_MACRO) <<parseMacroBody>>
 
 use_directive_expr ::= TT2_USE [use_instantiation] use_module {pin=1}
 private use_instantiation ::= use_instance TT2_ASSIGN

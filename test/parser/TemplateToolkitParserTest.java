@@ -195,4 +195,9 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("use");
 	}
 
+	public void testMacro()
+	{
+		doTest("macro");
+	}
+
 }
