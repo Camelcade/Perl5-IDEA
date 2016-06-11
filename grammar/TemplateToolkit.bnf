@@ -1,3 +1,4 @@
+// LALR grammar is at https://github.com/abw/Template2/blob/master/parser/Parser.yp
 {
   psiVisitorName="TemplateToolkitVisitorGenerated"
 
@@ -135,30 +136,36 @@ root ::= element *
 private element ::= <<parseBlockComment>> | <<parseDirective>>
 
 private directive ::=
-	call_directive |
-	default_directive |
-	insert_directive |
-	include_directive |
-	process_directive |
 	block_directive |
-	throw_directive |
 	switch_directive |
 	use_directive |
 	macro_directive |
+	tags_directive |
+	meta_directive |
+
+	block_directives |
+	reply_directives |
+	atom_dirictive
+
+// these are DIRECTIVE RULES from https://github.com/abw/Template2/blob/master/parser/Parser.yp
+private atom_dirictive ::=
+	filter_directive |
+	wrapper_directive |
+	debug_directive |
 	next_directive |
 	last_directive |
 	return_directive |
 	stop_directive |
 	clear_directive |
-	tags_directive |
-	debug_directive |
-	meta_directive |
-
-	block_directives |
-	reply_directives |
-
+	default_directive |
+	insert_directive |
+	include_directive |
+	process_directive |
+	call_directive |
+	throw_directive |
 	set_directive |
 	get_directive
+
 
 // these directives should be annotated as errors if they are outside of the blocks
 private reply_directives ::=
@@ -171,48 +178,49 @@ private reply_directives ::=
 
 // these directives may be used in postfix form
 private block_directives ::=
-	anon_block_directive |
-	wrapper_directive |
 	if_directive |
 	unless_directive |
 	foreach_directive |
 	while_directive |
-	filter_directive |
 	perl_directive |
 	rawperl_directive |
+	anon_block_directive |
 	try_directive
 
-private postfix_directive ::=
+private atom_directive_postfix ::=
 	if_directive |
 	unless_directive |
-	filters_directives
+	filters_directives |
+	foreach_directive |
+	while_directive |
+	wrapper_directive
 
 private filters_directives ::= filter_element_expr +
 filter_element_expr ::= {TT2_PIPE|TT2_FILTER} filter_arguments {pin=1}
 
-call_directive ::= TT2_CALL expr {pin=1}
-get_directive ::= [TT2_GET] expr
+call_directive ::= TT2_CALL expr [atom_directive_postfix] {pin=1}
+get_directive ::= [TT2_GET] expr [atom_directive_postfix]
 
-private set_directive ::= [TT2_SET] <<parseSetElement>> +
+set_directive ::= [TT2_SET] <<parseSetElement>> + [atom_directive_postfix]
 private parse_set_element ::= identifier_expr TT2_ASSIGN expr
 
-default_directive ::= TT2_DEFAULT assign_expr + {pin=1}
+default_directive ::= TT2_DEFAULT assign_expr + [atom_directive_postfix] {pin=1}
 
-insert_directive ::= TT2_INSERT variable_strings_or_files {pin=1}
+insert_directive ::= TT2_INSERT variable_strings_or_files [atom_directive_postfix] {pin=1}
 
 private variable_strings_or_files ::= variable_or_strings | insert_files
 private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
 private variable_or_strings ::= variable_expr | strings_argument
 
-next_directive ::= TT2_NEXT [postfix_directive] {pin=1}
-last_directive ::= TT2_LAST [postfix_directive] {pin=1}
-return_directive ::= TT2_RETURN [postfix_directive] {pin=1}
-stop_directive ::= TT2_STOP [postfix_directive] {pin=1}
-clear_directive ::= TT2_CLEAR [postfix_directive] {pin=1}
+next_directive ::= TT2_NEXT [atom_directive_postfix] {pin=1}
+last_directive ::= TT2_LAST [atom_directive_postfix] {pin=1}
+return_directive ::= TT2_RETURN [atom_directive_postfix] {pin=1}
+stop_directive ::= TT2_STOP [atom_directive_postfix] {pin=1}
+clear_directive ::= TT2_CLEAR [atom_directive_postfix] {pin=1}
 tags_directive ::= TT2_TAGS <<parseTags>> {pin=1}
 meta_directive ::= TT2_META pair_expr + {pin=1}
 
-debug_directive ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} {pin=1}
+debug_directive ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} [atom_directive_postfix] {pin=1}
 debug_format ::= TT2_FORMAT format_elements {pin=1}
 private format_elements ::=
 	variable_expr |
@@ -233,13 +241,13 @@ private string_argument ::= dq_string_expr | sq_string_expr
 private insert_files ::= convert_to_string (TT2_PLUS convert_to_string) *
 private convert_to_string ::= <<parseFileAsString>>
 
-include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * {pin=1}
+include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
 
-process_directive ::= TT2_PROCESS variable_strings_or_files assign_expr * {pin=1}
+process_directive ::= TT2_PROCESS variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
 
-wrapper_directive ::= TT2_WRAPPER variable_strings_or_files assign_expr * {pin=1}
+wrapper_directive ::= TT2_WRAPPER variable_strings_or_files assign_expr * [atom_directive_postfix] {pin=1}
 
-filter_directive ::= TT2_FILTER filter_arguments {pin=1}
+filter_directive ::= TT2_FILTER filter_arguments [atom_directive_postfix] {pin=1}
 private filter_arguments ::= variable_expr | assign_expr | identifier_expr
 
 filter_block ::= filter_directive element * end_directive // fake rule to generate psi
@@ -265,7 +273,7 @@ module_params ::= call_arguments_
 while_directive ::= TT2_WHILE expr {pin=1}
 while_block ::= while_directive element* end_directive // fake rule to generate psi
 
-throw_directive ::= TT2_THROW exception_type exception_message [exception_args] {pin=1}
+throw_directive ::= TT2_THROW exception_type exception_message [exception_args] [atom_directive_postfix] {pin=1}
 exception_type ::= variable_strings_or_stringify
 exception_message ::= expr
 exception_args ::= {assign_expr|expr}+
