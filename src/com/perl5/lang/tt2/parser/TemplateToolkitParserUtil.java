@@ -393,19 +393,24 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 						branchMarker = currentMarker.precede();
 						branchTokenType = ELSE_BRANCH;
 					}
+					else
+					{
+						currentMarker.error(PerlBundle.message("ttk2.else.elsif.end.expected"));
+					}
+					currentMarker.drop();
 				}
-				currentMarker.drop();
 			}
 			else
 			{
 				b.advanceLexer();
-				branchMarker.error("ttk2.unexpected.token");
+				currentMarker.error(PerlBundle.message("ttk2.unexpected.token"));
 			}
 		}
 
 		if (branchMarker != null)
 		{
 			branchMarker.done(branchTokenType);
+			branchMarker.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
 			branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 		}
 

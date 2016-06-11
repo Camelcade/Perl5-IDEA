@@ -149,6 +149,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("if");
 	}
 
+	public void testIfUnclosed()
+	{
+		doTest("if_unclosed", false);
+	}
+
 	public void testSwitch()
 	{
 		doTest("switch");
