@@ -155,7 +155,9 @@ private reply_directives ::=
 	end_directive_expr |
 	elsif_directive_expr |
 	case_directive_expr |
-	else_directive_expr
+	else_directive_expr |
+	catch_directive_expr |
+	final_directive_expr
 
 // these directives may be used in postfix form
 private block_directives ::=
@@ -167,7 +169,8 @@ private block_directives ::=
 	while_directive_expr |
 	filter_directive_expr |
 	perl_directive_expr |
-	rawperl_directive_expr
+	rawperl_directive_expr |
+	try_directive_expr
 
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
@@ -250,6 +253,14 @@ if_branch ::= if_directive_expr element *
 unless_branch ::= unless_directive_expr element *
 elsif_branch ::= elsif_directive_expr element *
 else_branch ::= else_directive_expr element *
+
+try_catch_block ::= try_branch catch_branch* [final_branch] end_directive_expr // fake rule to make psi element
+try_directive_expr ::= TT2_TRY
+try_branch ::= try_directive_expr element * // fake rule to make psi element
+catch_directive_expr ::= TT2_CATCH [exception_type] {pin=1}
+catch_branch ::= catch_directive_expr element * // fake rule to make psi element
+final_directive_expr ::= TT2_FINAL
+final_branch ::= final_directive_expr element * // fake rule to make psi element
 
 wrapper_block ::= wrapper_directive_expr element* end_directive_expr // fake rule to make psi element
 

@@ -215,4 +215,14 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("perl_unclosed", false);
 	}
 
+	public void testTryCatch()
+	{
+		doTest("try_catch");
+	}
+
+	public void testTryCatchUnclosed()
+	{
+		doTest("try_catch_unclosed", false);
+	}
+
 }

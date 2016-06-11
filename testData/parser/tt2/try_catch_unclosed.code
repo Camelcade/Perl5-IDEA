@@ -1,0 +1,18 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% TRY %]
+   ...blah...blah...
+   [% CALL somecode %]
+   ...etc...
+   [% INCLUDE someblock %]
+   ...and so on...
+[% CATCH %]
+   An error occurred!
+
+
+
+</body>
+</html>
+

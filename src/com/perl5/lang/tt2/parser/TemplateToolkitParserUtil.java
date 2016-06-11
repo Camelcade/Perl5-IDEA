@@ -318,6 +318,13 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			parseSwitchBlockContent(b, l);
 			outerMarker.done(SWITCH_BLOCK);
 		}
+		else if (tokenType == TRY_DIRECTIVE_EXPR)
+		{
+			PsiBuilder.Marker branchMarker = outerMarker;
+			outerMarker = outerMarker.precede();
+			parseTryCatchBlock(b, l, branchMarker, TRY_BRANCH);
+			outerMarker.done(TRY_CATCH_BLOCK);
+		}
 		else if (tokenType == IF_DIRECTIVE_EXPR)
 		{
 			PsiBuilder.Marker branchMarker = outerMarker;
@@ -462,6 +469,62 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 					else
 					{
 						currentMarker.error(PerlBundle.message("ttk2.else.elsif.end.expected"));
+					}
+					currentMarker.drop();
+				}
+			}
+			else
+			{
+				b.advanceLexer();
+				currentMarker.error(PerlBundle.message("ttk2.unexpected.token"));
+			}
+		}
+
+		if (branchMarker != null)
+		{
+			branchMarker.done(branchTokenType);
+			branchMarker.precede().error(PerlBundle.message("ttk2.error.unclosed.block.directive"));
+			branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+		}
+
+		return true;
+	}
+
+	public static boolean parseTryCatchBlock(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType)
+	{
+		while (!b.eof())
+		{
+			PsiBuilder.Marker currentMarker = b.mark();
+			if (TemplateToolkitParser.element(b, l))
+			{
+				LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
+				if (latestDoneMarker != null)
+				{
+					if (latestDoneMarker.getTokenType() == END_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						currentMarker.drop();
+						branchMarker = null;
+						break;
+					}
+					else if (latestDoneMarker.getTokenType() == CATCH_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						branchMarker = currentMarker.precede();
+						branchTokenType = CATCH_BRANCH;
+					}
+					else if (latestDoneMarker.getTokenType() == FINAL_DIRECTIVE_EXPR)
+					{
+						branchMarker.doneBefore(branchTokenType, currentMarker);
+						branchMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+						branchMarker = currentMarker.precede();
+						branchTokenType = FINAL_BRANCH;
+					}
+					else
+					{
+						currentMarker.error(PerlBundle.message("ttk2.catch.final.end.expected"));
 					}
 					currentMarker.drop();
 				}

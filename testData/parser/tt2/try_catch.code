@@ -1,0 +1,76 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% TRY %]
+   ...blah...blah...
+   [% CALL somecode %]
+   ...etc...
+   [% INCLUDE someblock %]
+   ...and so on...
+[% CATCH %]
+   An error occurred!
+[% END %]
+
+[% TRY %]
+   [% USE DBI(mydsn) %]
+[% CATCH %]
+   ERROR! Type: [% error.type %]
+          Info: [% error.info %]
+[% END %]
+
+[% TRY %]
+   [% INCLUDE myfile %]
+   [% USE DBI(mydsn) %]
+   [% CALL somecode %]
+[% CATCH file %]
+   File Error! [% error.info %]
+[% CATCH DBI %]
+   [% INCLUDE database/error.html %]
+[% CATCH %]
+   [% error %]
+[% END %]
+
+[% TRY %]
+   ...
+   [% TRY %]
+      [% INCLUDE $user.header %]
+   [% CATCH file %]
+      [% INCLUDE header %]
+   [% END %]
+   ...
+[% CATCH DBI %]
+   [% INCLUDE database/error.html %]
+[% END %]
+
+[% TRY %]
+   ...
+[% CATCH this %]
+   ...
+[% CATCH that %]
+   ...
+[% FINAL %]
+   All done!
+[% END %]
+
+[% TRY %]
+   This gets printed
+   [% THROW food 'carrots' %]
+   This doesn't
+[% CATCH food %]
+   [% CLEAR %]
+   culinary delights: [% error.info %]
+[% END %]
+
+[% TRY %]
+   ...
+[% CATCH myerror %]
+   [% error.info.errors.size or 'no';
+      error.info.errors.size == 1 ? ' error' : ' errors' %]
+   in [% error.info.module %]:
+      [% error.info.errors.join(', ') %].
+[% END %]
+
+</body>
+</html>
+
