@@ -225,4 +225,44 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("try_catch_unclosed", false);
 	}
 
+	public void testNext()
+	{
+		doTest("next");
+	}
+
+	public void testLast()
+	{
+		doTest("last");
+	}
+
+	public void testReturn()
+	{
+		doTest("return");
+	}
+
+	public void testStop()
+	{
+		doTest("stop");
+	}
+
+	public void testClear()
+	{
+		doTest("clear");
+	}
+
+	public void testMeta()
+	{
+		doTest("meta");
+	}
+
+	public void testDebug()
+	{
+		doTest("debug");
+	}
+
+	public void testTags()
+	{
+		doTest("tags");
+	}
+
 }

@@ -1,0 +1,22 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% DEBUG on %]
+directive debugging is on (assuming DEBUG option is set true)
+[% DEBUG off %]
+directive debugging is off
+
+[% DEBUG format '<!-- $file line $line : [% $text %] -->' %]
+
+%% DEBUG on
+directive debugging is on (assuming DEBUG option is set true)
+%% DEBUG off
+directive debugging is off
+
+%% DEBUG format '<!-- $file line $line : [% $text %] -->'
+
+
+</body>
+</html>
+

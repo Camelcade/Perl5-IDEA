@@ -65,8 +65,8 @@
 [% TRY %]
    ...
 [% CATCH myerror %]
-   [% error.info.errors.size or 'no';
-      error.info.errors.size == 1 ? ' error' : ' errors' %]
+   [% error.info.errors.size or 'no' %]
+     [% error.info.errors.size == 1 ? ' error' : ' errors' %]
    in [% error.info.module %]:
       [% error.info.errors.join(', ') %].
 [% END %]

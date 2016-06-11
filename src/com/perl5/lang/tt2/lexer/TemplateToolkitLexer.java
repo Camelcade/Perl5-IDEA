@@ -49,6 +49,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = getBufferEnd();
 		int currentCustomState = getCustomState();
+		int currentState = yystate();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 		{
@@ -85,6 +86,18 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 			if (blockStart)
 			{
 				pushPreparsedToken(offset, offset + getStartTag().length(), TT2_OPEN_TAG);
+				int nextCharOffset = offset + getStartTag().length();
+
+				if (nextCharOffset < bufferEnd && buffer.charAt(nextCharOffset) == '#')
+				{
+					int blockCommentEnd = nextCharOffset + 1;
+					String endTag = getEndTag();
+					while (blockCommentEnd < bufferEnd && !isBufferAtString(buffer, blockCommentEnd, endTag))
+					{
+						blockCommentEnd++;
+					}
+					pushPreparsedToken(nextCharOffset, blockCommentEnd, LINE_COMMENT);
+				}
 				setCustomState(LEX_TEMPLATE_BLOCK);
 			}
 			else if (offset < bufferEnd)
@@ -99,7 +112,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		}
 		else if (currentCustomState == LEX_TEMPLATE_BLOCK)
 		{
-			if (isBufferAtString(buffer, tokenStart, getEndTag()))
+			if (currentState != LEX_DQ_STRING && currentState != LEX_SQ_STRING && isBufferAtString(buffer, tokenStart, getEndTag()))
 			{
 				endTemplate(tokenStart, getEndTag().length());
 				return TT2_CLOSE_TAG;
@@ -126,7 +139,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 		if (currentCustomState == LEX_TEMPLATE_BLOCK || currentCustomState == LEX_TEMPLATE_LINE)
 		{
-			int currentState = yystate();
+			currentState = yystate();
 			if (currentState == LEX_DQ_STRING)
 			{
 				if (result == TT2_DQ && !isEscaped)
@@ -153,22 +166,19 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 					result = TT2_STRING_CONTENT;
 				}
 			}
-			else
+			else if (result == TT2_SQ)
 			{
-				if (result == TT2_SQ)
-				{
-					pushState();
-					yybegin(LEX_SQ_STRING);
-					isEscaped = false;
-					result = TT2_SQ_OPEN;
-				}
-				else if (result == TT2_DQ)
-				{
-					pushState();
-					yybegin(LEX_DQ_STRING);
-					isEscaped = false;
-					result = TT2_DQ_OPEN;
-				}
+				pushState();
+				yybegin(LEX_SQ_STRING);
+				isEscaped = false;
+				result = TT2_SQ_OPEN;
+			}
+			else if (result == TT2_DQ)
+			{
+				pushState();
+				yybegin(LEX_DQ_STRING);
+				isEscaped = false;
+				result = TT2_DQ_OPEN;
 			}
 		}
 

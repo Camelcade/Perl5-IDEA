@@ -112,22 +112,11 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 	public static boolean parseBlockComment(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == TT2_SHARP)
+		if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == LINE_COMMENT)
 		{
 			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-
-			PsiBuilder.Marker commentMarker = b.mark();
-			while (!b.eof())
-			{
-				if (b.getTokenType() == TT2_CLOSE_TAG)
-				{
-					break;
-				}
-				b.advanceLexer();
-			}
-			commentMarker.collapse(LINE_COMMENT);
-			b.advanceLexer();
+			b.advanceLexer(); // open
+			b.advanceLexer(); // close  fixme add unclosed handling
 
 			m.done(BLOCK_COMMENT);
 			return true;
@@ -386,13 +375,13 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 	public static boolean parsePerlCode(PsiBuilder b, int l, PsiBuilder.Marker outerMarker, IElementType perlTokenType, IElementType blockTokenType)
 	{
 		PsiBuilder.Marker perlMarker = b.mark();
-		while (!b.eof() && !isEndAhead(b, l))
+		while (!b.eof() && !isEndTagAhead(b, l))
 		{
 			b.advanceLexer();
 		}
 		boolean recoverBlock = true;
 
-		if (isEndAhead(b, l))
+		if (isEndTagAhead(b, l))
 		{
 			perlMarker.collapse(perlTokenType);
 			perlMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
@@ -428,7 +417,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return true;
 	}
 
-	protected static boolean isEndAhead(PsiBuilder b, int l)
+	protected static boolean isEndTagAhead(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
 		return (tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG) && b.lookAhead(1) == TT2_END;
@@ -589,5 +578,38 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		}
 
 		return true;
+	}
+
+	public static boolean parseTags(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = null;
+		while (!b.eof() && !isEndMarker(b.getTokenType()))
+		{
+			if (m == null)
+			{
+				m = b.mark();
+			}
+			b.advanceLexer();
+		}
+
+		if (m != null)
+		{
+			m.collapse(TT2_STRING_CONTENT);
+			m.precede().done(SQ_STRING_EXPR);
+		}
+
+		return true;
+	}
+
+	public static boolean parseSetElement(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (TemplateToolkitParser.parse_set_element(b, l))
+		{
+			m.done(ASSIGN_EXPR);
+			return true;
+		}
+		m.drop();
+		return false;
 	}
 }

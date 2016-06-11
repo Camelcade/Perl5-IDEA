@@ -1,0 +1,11 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% NEXT %]
+[% NEXT IF some.condition %]
+[% some.var %]
+
+</body>
+</html>
+

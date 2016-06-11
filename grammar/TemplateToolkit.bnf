@@ -38,7 +38,6 @@
 	TT2_NUMBER="TT2_NUMBER"
 	TT2_NUMBER_SIMPLE="TT2_NUMBER_SIMPLE"
 
-	TT2_SHARP="#"
 	TT2_LEFT_PAREN="("
 	TT2_RIGHT_PAREN=")"
 	TT2_LEFT_BRACKET="["
@@ -108,6 +107,7 @@
 	TT2_FOREACH="FOREACH"
 	TT2_WHILE="WHILE"
 	TT2_FILTER="FILTER"
+	TT2_PIPE="|"
 	TT2_USE="USE"
 	TT2_MACRO="MACRO"
 
@@ -126,6 +126,8 @@
 	TT2_META="META"
 	TT2_TAGS="TAGS"
 	TT2_DEBUG="DEBUG"
+	TT2_ON="on"
+	TT2_OFF="off"
     ]
 }
 
@@ -143,6 +145,14 @@ private directive_expr ::=
 	switch_directive_expr |
 	use_directive_expr |
 	macro_directive_expr |
+	next_directive_expr |
+	last_directive_expr |
+	return_directive_expr |
+	stop_directive_expr |
+	clear_directive_expr |
+	tags_directive_expr |
+	debug_directive_expr |
+	meta_directive_expr |
 
 	block_directives |
 	reply_directives |
@@ -172,10 +182,19 @@ private block_directives ::=
 	rawperl_directive_expr |
 	try_directive_expr
 
+private postfix_directive ::=
+	if_directive_expr |
+	unless_directive_expr |
+	filters_directives_expr
+
+private filters_directives_expr ::= filter_element_expr +
+filter_element_expr ::= {TT2_PIPE|TT2_FILTER} filter_arguments {pin=1}
+
 call_directive_expr ::= TT2_CALL expr {pin=1}
 get_directive_expr ::= [TT2_GET] expr
 
-private set_directive ::= [TT2_SET] assign_expr +
+private set_directive ::= [TT2_SET] <<parseSetElement>> +
+private parse_set_element ::= identifier_expr TT2_ASSIGN expr
 
 default_directive_expr ::= TT2_DEFAULT assign_expr + {pin=1}
 
@@ -184,6 +203,22 @@ insert_directive_expr ::= TT2_INSERT variable_strings_or_files {pin=1}
 private variable_strings_or_files ::= variable_or_strings | insert_files
 private variable_strings_or_stringify ::= variable_or_strings | convert_to_string
 private variable_or_strings ::= variable_expr | strings_argument
+
+next_directive_expr ::= TT2_NEXT [postfix_directive] {pin=1}
+last_directive_expr ::= TT2_LAST [postfix_directive] {pin=1}
+return_directive_expr ::= TT2_RETURN [postfix_directive] {pin=1}
+stop_directive_expr ::= TT2_STOP [postfix_directive] {pin=1}
+clear_directive_expr ::= TT2_CLEAR [postfix_directive] {pin=1}
+tags_directive_expr ::= TT2_TAGS <<parseTags>> {pin=1}
+meta_directive_expr ::= TT2_META pair_expr + {pin=1}
+
+debug_directive_expr ::= TT2_DEBUG {TT2_ON|TT2_OFF|debug_format} {pin=1}
+debug_format ::= TT2_FORMAT format_elements {pin=1}
+private format_elements ::=
+	variable_expr |
+	identifier_expr |
+	dq_string_expr |
+	sq_string_expr
 
 foreach_directive_expr ::= TT2_FOREACH [foreach_iterator_] foreach_iterable {pin=1}
 private foreach_iterator_ ::= foreach_iterator {TT2_ASSIGN|TT2_IN} {pin=2}
@@ -312,7 +347,7 @@ private parenthesised_item_content ::= expr {recoverWhile=recover_parenthesised_
 private recover_parenthesised_item ::= !(TT2_RIGHT_PAREN|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 identifier_expr ::= identifier_expr_content
-private identifier_expr_content ::= TT2_IDENTIFIER (TT2_PERIOD deref_part)*
+private identifier_expr_content ::= keyword_or_identifier_term (TT2_PERIOD deref_part)*
 private deref_part ::=
 	call_expr |
 	variable_expr |

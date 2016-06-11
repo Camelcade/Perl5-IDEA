@@ -100,6 +100,9 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("META", TT2_META);
 		KEYWORDS.put("TAGS", TT2_TAGS);
 		KEYWORDS.put("DEBUG", TT2_DEBUG);
+		KEYWORDS.put("on", TT2_ON);
+		KEYWORDS.put("off", TT2_OFF);
+		KEYWORDS.put("format", TT2_FORMAT);
 
 		KEYWORDS_TOKENSET = TokenSet.create(KEYWORDS.values().toArray(new IElementType[KEYWORDS.values().size()]));
 
