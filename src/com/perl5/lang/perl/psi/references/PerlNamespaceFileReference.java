@@ -67,4 +67,10 @@ public class PerlNamespaceFileReference extends PerlPolyVariantReference<PerlNam
 		throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
 	}
 
+	@Override
+	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
+	{
+		// fixme this is a stub to avoid exception
+		return myElement;
+	}
 }
