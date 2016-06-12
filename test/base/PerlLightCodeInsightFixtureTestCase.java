@@ -53,6 +53,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		return ApplicationManager.getApplication();
 	}
 
+	public String getFileExtension()
+	{
+		return "pl";
+	}
+
 	@Override
 	protected void setUp() throws Exception
 	{
@@ -77,6 +82,31 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		});
 	}
 
+	public void initWithFileSmart(String filename)
+	{
+		try
+		{
+			initWithFile(filename, getFileExtension());
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void initWithTextSmart(String content)
+	{
+		try
+		{
+			initWithFileContent("test", getFileExtension(), content);
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Deprecated // use initWithFileSmart
 	public void initWithFileAsScript(String filename)
 	{
 		try
@@ -88,6 +118,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		}
 	}
 
+	@Deprecated  // use initWithFileSmart
 	public void initWithFileAsHTMLMason(String filename)
 	{
 		try
@@ -99,6 +130,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		}
 	}
 
+	@Deprecated  // use initWithFileSmart
 	public void initWithFileAsPackage(String filename)
 	{
 		try
@@ -110,6 +142,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		}
 	}
 
+	@Deprecated // use initWIthTextSmart
 	public void initWithTextAsScript(String content)
 	{
 		try
@@ -119,7 +152,6 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		{
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	public void initWithFile(String filename, String extension) throws IOException
@@ -177,4 +209,25 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		Assert.assertEquals(expectedContent, actual);
 	}
 
+	protected void testSmartKeyFile(String filename, char typed)
+	{
+		initWithFileSmart(filename);
+		myFixture.type(typed);
+		checkResultByFile(filename);
+	}
+
+	protected void testSmartKey(String original, char typed, String expected)
+	{
+		initWithTextSmart(original);
+		myFixture.type(typed);
+		myFixture.checkResult(expected);
+	}
+
+	protected void checkResultByFile(String filenameWithoutExtension)
+	{
+		String checkFileName = filenameWithoutExtension + ".txt";
+
+
+		myFixture.checkResultByFile(checkFileName);
+	}
 }

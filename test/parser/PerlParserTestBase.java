@@ -21,6 +21,8 @@ import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
+import com.intellij.psi.templateLanguages.TemplateDataLanguagePatterns;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -86,6 +88,8 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		super.setUp();
 		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
 		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
+		registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
+		registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
 		new PerlParserExtensions().initComponent();
 	}
 
