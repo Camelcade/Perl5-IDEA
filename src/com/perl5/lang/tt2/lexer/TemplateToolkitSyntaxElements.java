@@ -28,6 +28,13 @@ import java.util.Map;
  */
 public class TemplateToolkitSyntaxElements implements TemplateToolkitElementTypes
 {
+	public static final TokenSet CONSTRUCTION_PREFIX = TokenSet.create(
+			TT2_OPEN_TAG,
+			TT2_OUTLINE_TAG,
+			TT2_SEMI,
+			MACRO_DIRECTIVE    // macro consumes semicolon
+	);
+
 	public static final Map<String, IElementType> KEYWORDS = new HashMap<String, IElementType>();
 	public static final TokenSet KEYWORDS_TOKENSET;
 
@@ -65,8 +72,8 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 	static
 	{
 		KEYWORDS.put("GET", TT2_GET);
-		KEYWORDS.put("CALL", TT2_CALL);
 		KEYWORDS.put("SET", TT2_SET);
+		KEYWORDS.put("CALL", TT2_CALL);
 		KEYWORDS.put("DEFAULT", TT2_DEFAULT);
 		KEYWORDS.put("INSERT", TT2_INSERT);
 		KEYWORDS.put("INCLUDE", TT2_INCLUDE);

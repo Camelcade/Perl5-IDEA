@@ -14,28 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.tt2.idea.liveTemplates;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 05.06.2016.
+ * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
+public class TemplateToolkitLiveTemplatesProvider implements DefaultLiveTemplatesProvider
 {
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-	public static final String NAME = "Template Toolkit 2";
-
-	private TemplateToolkitLanguage()
-	{
-		super(NAME);
-	}
+	public static final String[] TEMPLATES = new String[]{
+			"/liveTemplates/TemplateToolkit2"
+	};
 
 	@Override
-	public boolean isCaseSensitive()
+	public String[] getDefaultLiveTemplateFiles()
 	{
-		return true;
+		return TEMPLATES;
+	}
+
+	@Nullable
+	@Override
+	public String[] getHiddenLiveTemplateFiles()
+	{
+		return null;
 	}
 
 }

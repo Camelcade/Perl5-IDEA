@@ -1,0 +1,141 @@
+<!--
+  ~ Copyright 2016 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="Template Toolkit 2">
+    <template name="GET" value="GET $VAR$" description="GET directive" toReformat="false" toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;element&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="SET" value="SET $KEY$ = $VALUE$" description="SET directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="CALL" value="CALL $VAR$" description="CALL directive" toReformat="false" toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;element&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="DEFAULT" value="DEFAULT $KEY$ = $VALUE$" description="DEFAULT directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="INSERT" value="INSERT $VAR$" description="INSERT directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;file&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="INCLUDE" value="INCLUDE $VAR$" description="INCLUDE directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;fileorblock&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="PROCESS" value="PROCESS $VAR$" description="PROCESS directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;fileorblock&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="END" value="END" description="END directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="USE" value="USE $VAR$" description="USE directive" toReformat="false" toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;module&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="MACRO" value="MACRO $VAR$ $VALUE$" description="MACRO directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="VALUE" expression="&quot;directive&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="THROW" value="THROW $type$ $message$" description="THROW directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="type" expression="&quot;type&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="message" expression="&quot;message&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="NEXT" value="NEXT" description="NEXT directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="LAST" value="LAST" description="LAST directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="RETURN" value="RETURN" description="RETURN directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="STOP" value="STOP" description="STOP directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="CLEAR" value="CLEAR" description="CLEAR directive" toReformat="false" toShortenFQNames="true">
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="META" value="META $KEY$ = $VALUE$" description="META directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="KEY" expression="&quot;key&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="VALUE" expression="&quot;value&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="TAGS" value="TAGS $OPENTAG$ $CLOSETAG$" description="TAGS directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="OPENTAG" expression="&quot;[%&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CLOSETAG" expression="&quot;%]&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+    <template name="DEBUG" value="DEBUG $VAR$" description="DEBUG directive" toReformat="false" toShortenFQNames="true">
+        <variable name="VAR" expression="&quot;on&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.command" value="true"/>
+        </context>
+    </template>
+</templateSet>

@@ -1,11 +1,11 @@
 Template Toolkit File
   PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
   PsiErrorElement:Unclosed block directive, missing END
-    TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.FILTER_BLOCK)
+    PsiFilterBlockImpl(TemplateToolkit2Element.FILTER_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
-      TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.FILTER_DIRECTIVE)
+      PsiFilterDirectiveImpl(TemplateToolkit2Element.FILTER_DIRECTIVE)
         PsiElement(TemplateToolkit2Token.FILTER)('FILTER')
-        TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
+        PsiIdentifierExprImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
           PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('html')
       PsiElement(TemplateToolkit2Token.%])('%]')
       PsiComment(TemplateToolkit2Token.TT2_HTML)('HTML text may have < and > characters embedded\n   which you want converted to the correct HTML entities.\n\n\n</body>\n</html>')

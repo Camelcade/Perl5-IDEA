@@ -388,6 +388,13 @@
         <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
                       order="first"/>
 
+        <defaultLiveTemplatesProvider
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
+
         <!-- End of template toolkit -->
 
         <!--Embedded Perl-->
