@@ -34,7 +34,7 @@ public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolki
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
 		IElementType tokenType = element.getNode().getElementType();
-		if (tokenType == TT2_IDENTIFIER)
+		if (tokenType == TT2_IDENTIFIER || tokenType == TT2_SIGIL_SCALAR)
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB);
 		}

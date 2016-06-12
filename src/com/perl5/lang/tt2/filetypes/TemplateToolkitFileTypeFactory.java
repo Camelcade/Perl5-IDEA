@@ -29,5 +29,6 @@ public class TemplateToolkitFileTypeFactory extends FileTypeFactory
 	public void createFileTypes(@NotNull FileTypeConsumer consumer)
 	{
 		consumer.consume(TemplateToolkitFileType.INSTANCE, "tt");
+		consumer.consume(TemplateToolkitFileType.INSTANCE, "tt2");
 	}
 }
