@@ -107,7 +107,6 @@
 	TT2_FOREACH="FOREACH"
 	TT2_WHILE="WHILE"
 	TT2_FILTER="FILTER"
-	TT2_PIPE="|"
 	TT2_USE="USE"
 	TT2_MACRO="MACRO"
 
@@ -195,7 +194,7 @@ directive_postfix ::=
 	wrapper_directive
 
 private filters_directives ::= filter_element_expr +
-filter_element_expr ::= {TT2_PIPE|TT2_FILTER} filter_arguments {pin=1}
+filter_element_expr ::= TT2_FILTER filter_arguments {pin=1}
 
 call_directive ::= TT2_CALL expr [directive_postfix] {pin=1}
 get_directive ::= [TT2_GET] expr [directive_postfix]
@@ -319,7 +318,7 @@ hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
 pair_expr ::= <<parseHashKey>> TT2_ASSIGN expr
-private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
 private array_expr_content ::= (expr [TT2_COMMA]) * {recoverWhile=recover_array_content}

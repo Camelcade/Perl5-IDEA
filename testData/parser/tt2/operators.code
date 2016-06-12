@@ -21,14 +21,20 @@
 %% foo && bar
 [% foo and bar %]
 %% foo and bar
+[% foo AND bar %]
+%% foo AND bar
 [% foo || bar %]
 %% foo || bar
 [% foo or bar %]
 %% foo or bar
+[% foo OR bar %]
+%% foo OR bar
 [% !bar %]
 %% !bar
 [% not bar %]
 %% not bar
+[% NOT bar %]
+%% NOT bar
 [% foo ? bar : baz %]
 %% foo ? bar : baz
 [% foo + bar %]
@@ -41,10 +47,14 @@
 %% foo / bar
 [% foo div bar %]
 %% foo div bar
+[% foo DIV bar %]
+%% foo DIV bar
 [% foo % bar %]
 %% foo % bar
 [% foo mod bar %]
 %% foo mod bar
+[% foo MOD bar %]
+%% foo MOD bar
 [% copyright = '(C) Copyright' _ year _ ' ' _ author %]
 [% copyright = "(C) Copyright $year $author" %]
 %% copyright = '(C) Copyright' _ year _ ' ' _ author

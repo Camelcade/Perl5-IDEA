@@ -102,23 +102,35 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		KEYWORDS.put("META", TT2_META);
 		KEYWORDS.put("TAGS", TT2_TAGS);
 		KEYWORDS.put("DEBUG", TT2_DEBUG);
+
 		KEYWORDS.put("on", TT2_ON);
 		KEYWORDS.put("off", TT2_OFF);
 		KEYWORDS.put("format", TT2_FORMAT);
 
 		KEYWORDS_TOKENSET = TokenSet.create(KEYWORDS.values().toArray(new IElementType[KEYWORDS.values().size()]));
 
+		// see https://github.com/abw/Template2/blob/master/parser/Grammar.pm.skel
 		TEXT_OPERATORS.put("div", TT2_DIV_TEXT);
 		TEXT_OPERATORS.put("and", TT2_AND_TEXT);
 		TEXT_OPERATORS.put("or", TT2_OR_TEXT);
 		TEXT_OPERATORS.put("not", TT2_NOT_TEXT);
 		TEXT_OPERATORS.put("mod", TT2_MOD_TEXT);
 
+		TEXT_OPERATORS.put("DIV", TT2_DIV_TEXT);
+		TEXT_OPERATORS.put("AND", TT2_AND_TEXT);
+		TEXT_OPERATORS.put("OR", TT2_OR_TEXT);
+		TEXT_OPERATORS.put("NOT", TT2_NOT_TEXT);
+		TEXT_OPERATORS.put("MOD", TT2_MOD_TEXT);
+
 		TEXT_OPERATORS_TOKENSET = TokenSet.create(TEXT_OPERATORS.values().toArray(new IElementType[TEXT_OPERATORS.values().size()]));
 
 		ALL_OPERATORS_TOKENSET = TokenSet.orSet(TEXT_OPERATORS_TOKENSET, SYMBOLIC_OPERATORS_TOKENSET);
 
-		POSSIBLE_IDENTIFIERS = TokenSet.orSet(KEYWORDS_TOKENSET, TEXT_OPERATORS_TOKENSET);
+		POSSIBLE_IDENTIFIERS = TokenSet.create(
+				TT2_ON,
+				TT2_OFF,
+				TT2_FORMAT
+		);
 	}
 
 }

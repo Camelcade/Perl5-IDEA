@@ -7,8 +7,8 @@
 %% foo
 [% bar.baz %]
 %% foo.bar
-[% bar.GET.baz %]
-%% foo.GET.bar
+[% bar.get.baz %]
+%% foo.get.bar
 [% bi.zb.10.ar.baz(10) %]
 %% bi.zb.10.ar.baz(10)
 [% template.title or default.title %]
