@@ -49,6 +49,10 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
 			BLOCK_COMMENT
 	);
 
+	public static final TokenSet WHITESPACES_AND_COMMENTS = TokenSet.orSet(
+			WHITE_SPACES, COMMENTS
+	);
+
 	public static final TokenSet LITERALS = TokenSet.create(
 			TT2_STRING_CONTENT
 	);

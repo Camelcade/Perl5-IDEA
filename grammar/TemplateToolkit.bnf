@@ -80,6 +80,7 @@
 	TT2_MOD="%"
 	TT2_CONCAT="_"
 	TT2_RANGE=".."
+	TT2_SEMI=";"
 
 	TT2_DIV_TEXT="div"
 	TT2_AND_TEXT="and"
@@ -318,11 +319,11 @@ hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
 pair_expr ::= <<parseHashKey>> TT2_ASSIGN expr
-private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
 private array_expr_content ::= (expr [TT2_COMMA]) * {recoverWhile=recover_array_content}
-private recover_array_content ::= !(TT2_RIGHT_BRACKET|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_array_content ::= !(TT2_RIGHT_BRACKET|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 expr ::=
 	assign_expr |
@@ -350,7 +351,7 @@ unary_expr ::= (TT2_NOT|TT2_NOT_TEXT) expr {rightAssociative=true }
 
 parenthesised_expr ::= TT2_LEFT_PAREN parenthesised_item_content TT2_RIGHT_PAREN {pin=1}
 private parenthesised_item_content ::= expr {recoverWhile=recover_parenthesised_item}
-private recover_parenthesised_item ::= !(TT2_RIGHT_PAREN|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_parenthesised_item ::= !(TT2_RIGHT_PAREN|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 identifier_expr ::= identifier_expr_content
 private identifier_expr_content ::= keyword_or_identifier_term (TT2_PERIOD deref_part)*
@@ -363,7 +364,7 @@ private deref_part ::=
 variable_expr ::= TT2_SIGIL_SCALAR {variable_braced|identifier_expr_content}
 private variable_braced ::= TT2_LEFT_BRACE variable_braced_content TT2_RIGHT_BRACE {pin=1}
 private variable_braced_content ::= identifier_expr_content {recoverWhile=recover_braced_variable}
-private recover_braced_variable ::= !(TT2_RIGHT_BRACE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_braced_variable ::= !(TT2_RIGHT_BRACE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 call_expr ::= keyword_or_identifier_term call_arguments
 call_arguments ::= call_arguments_
@@ -389,10 +390,10 @@ term_expr ::=
 
 sq_string_expr ::= TT2_SQ_OPEN sq_string_content TT2_SQ_CLOSE {pin=1}
 private sq_string_content ::= TT2_STRING_CONTENT* {recoverWhile=recover_sq_string}
-private recover_sq_string ::= !(TT2_SQ_CLOSE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_sq_string ::= !(TT2_SQ_CLOSE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 dq_string_expr ::= TT2_DQ_OPEN dq_string_content TT2_DQ_CLOSE {pin=1}
 private dq_string_content ::= TT2_STRING_CONTENT* {recoverWhile=recover_dq_string}
-private recover_dq_string ::= !(TT2_DQ_CLOSE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG)
+private recover_dq_string ::= !(TT2_DQ_CLOSE|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 private keyword_or_identifier_term ::= <<parseIdentifier>>

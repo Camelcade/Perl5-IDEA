@@ -49,19 +49,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return false;
 	}
 
-	@SuppressWarnings("Duplicates")
-	public static boolean parseHardNewLine(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == TT2_HARD_NEWLINE)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(TokenType.NEW_LINE_INDENT);
-			return true;
-		}
-		return false;
-	}
-
 	public static boolean parseHashKey(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = b.mark();
@@ -77,7 +64,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 	private static boolean isEndMarker(IElementType tokenType)
 	{
-		return tokenType == TT2_HARD_NEWLINE || tokenType == TT2_CLOSE_TAG;
+		return tokenType == TT2_HARD_NEWLINE || tokenType == TT2_CLOSE_TAG || tokenType == TT2_SEMI;
 
 	}
 
@@ -138,7 +125,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			while (!b.eof())
 			{
 				IElementType tokenType = b.getTokenType();
-				if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_HARD_NEWLINE || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+				if (tokenType == TT2_SEMI || tokenType == TT2_CLOSE_TAG || tokenType == TT2_HARD_NEWLINE || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
 				{
 					break;
 				}
@@ -155,6 +142,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			}
 
 			consumeToken(b, TT2_HARD_NEWLINE);
+			consumeToken(b, TT2_SEMI);
 			consumeToken(b, TT2_MINUS);
 			consumeToken(b, TT2_CLOSE_TAG);
 
@@ -173,14 +161,18 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		boolean r = false;
 		LighterASTNode latestDoneMarker = null;
 		PsiBuilder.Marker outerMarker = b.mark();
+		boolean isAfterSemi = tokenType != TT2_OPEN_TAG && tokenType != TT2_OUTLINE_TAG && isAfterSemi(b);
 
-		if (tokenType == TT2_OPEN_TAG)
+		if (isAfterSemi || tokenType == TT2_OPEN_TAG)
 		{
-			if (b.rawLookup(1) == TT2_MINUS)
+			if (!isAfterSemi)
 			{
-				b.advanceLexer(); // chomp
+				if (b.rawLookup(1) == TT2_MINUS)
+				{
+					b.advanceLexer(); // chomp
+				}
+				b.advanceLexer();
 			}
-			b.advanceLexer();
 
 			if (TemplateToolkitParser.directive(b, l))
 			{
@@ -193,7 +185,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				while (!b.eof())
 				{
 					tokenType = b.getTokenType();
-					if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
+					if (tokenType == TT2_CLOSE_TAG || tokenType == TT2_SEMI || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG)
 					{
 						break;
 					}
@@ -209,6 +201,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 					m.error(PerlBundle.message("ttk2.unexpected.token"));
 				}
 
+				consumeToken(b, TT2_SEMI);
 				consumeToken(b, TT2_MINUS);
 				consumeToken(b, TT2_CLOSE_TAG);
 			}
@@ -610,6 +603,27 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			return true;
 		}
 		m.drop();
+		return false;
+	}
+
+	protected static boolean isAfterSemi(PsiBuilder b)
+	{
+		int offset = -1;
+		IElementType tokenType;
+
+		while ((tokenType = b.rawLookup(offset)) != null)
+		{
+			if (tokenType == TT2_SEMI)
+			{
+				return true;
+			}
+			if (!TemplateToolkitParserDefinition.WHITESPACES_AND_COMMENTS.contains(tokenType))
+			{
+				return false;
+			}
+			offset--;
+		}
+
 		return false;
 	}
 }
