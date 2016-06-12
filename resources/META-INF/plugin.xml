@@ -383,6 +383,9 @@
                            implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
         <annotator language="Template Toolkit 2"
                    implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
+        <quoteHandler fileType="Template Toolkit"
+                      className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
+
 
         <!-- End of template toolkit -->
 
