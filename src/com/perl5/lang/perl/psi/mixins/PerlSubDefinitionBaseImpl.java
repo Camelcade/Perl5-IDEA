@@ -58,11 +58,15 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	public boolean isMethod()
 	{
 		if (super.isMethod())
+		{
 			return true;
+		}
 
 		List<PerlSubArgument> arguments = getSubArgumentsList();
 		if (arguments.isEmpty())
+		{
 			return false;
+		}
 
 		return arguments.get(0).isSelf(getProject());
 	}
@@ -81,7 +85,9 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		List<PerlSubArgument> subArguments = getSubArgumentsList();
 
 		if (isMethod() && !subArguments.isEmpty())
+		{
 			subArguments.remove(0);
+		}
 
 		return PerlSubUtil.getArgumentsListAsString(subArguments);
 	}
@@ -92,7 +98,9 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	{
 		Stub stub = getStub();
 		if (stub != null)
+		{
 			return new ArrayList<PerlSubArgument>(stub.getSubArgumentsList());
+		}
 
 		List<PerlSubArgument> arguments = getPerlSubArgumentsFromSignature();
 
@@ -190,8 +198,14 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitSubDefinitionBase(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitSubDefinitionBase(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@Override
@@ -223,19 +237,25 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 				PerlAssignExpression assignExpression = PsiTreeUtil.getChildOfType(statement, PerlAssignExpression.class);
 
 				if (assignExpression == null)
+				{
 					return false;
+				}
 
 
 				PsiElement leftSide = assignExpression.getLeftSide();
 				PsiElement rightSide = assignExpression.getRightSide();
 
 				if (rightSide == null)
+				{
 					return false;
+				}
 
 				PerlVariableDeclaration variableDeclaration = PsiTreeUtil.findChildOfType(leftSide, PerlVariableDeclaration.class, false);
 
 				if (variableDeclaration == null)
+				{
 					return false;
+				}
 
 				String variableClass = variableDeclaration.getDeclarationType();
 				if (variableClass == null)
