@@ -23,7 +23,6 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.components.JBList;
-import com.intellij.util.FileContentUtil;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
@@ -42,11 +41,16 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 	@SuppressWarnings("Since15")
 	protected CollectionListModel<String> rootsModel;
 	protected JBList rootsList;
+	@SuppressWarnings("Since15")
+	protected CollectionListModel<String> substitutedExtensionsModel;
+	protected JBList substitutedExtensionsList;
+	protected JPanel substitutedExtensionsPanel;
 	private JTextField startTagField;
 	private JTextField endTagField;
 	private JTextField outlineTagField;
 	private JCheckBox enableAnycaseCheckBox;
 	private JCheckBox enableRelativePathsCheckBox;
+
 
 	public TemplateToolkitSettingsConfigurable(Project project)
 	{
@@ -111,6 +115,12 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 				));
 
 
+		//noinspection Since15
+		substitutedExtensionsModel = new CollectionListModel<String>();
+		substitutedExtensionsList = new JBList(substitutedExtensionsModel);
+		substitutedExtensionsPanel = PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
+		builder.addLabeledComponent(new JLabel(PerlBundle.message("ttk2.configuration.extension")), substitutedExtensionsPanel);
+
 		return builder.getPanel();
 	}
 
@@ -122,6 +132,7 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 				!StringUtil.equals(mySettings.START_TAG, startTagField.getText()) ||
 				!StringUtil.equals(mySettings.END_TAG, endTagField.getText()) ||
 				!StringUtil.equals(mySettings.OUTLINE_TAG, outlineTagField.getText()) ||
+				!mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
 				!mySettings.TEMPLATE_DIRS.equals(rootsModel.getItems())
 				;
 	}
@@ -146,7 +157,11 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 
 		mySettings.TEMPLATE_DIRS.clear();
 		mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
-		FileContentUtil.reparseOpenedFiles();
+
+		mySettings.substitutedExtensions.clear();
+		mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
+
+		mySettings.settingsUpdated();
 	}
 
 	@Override
@@ -159,6 +174,8 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 		enableRelativePathsCheckBox.setSelected(mySettings.ENABLE_RELATIVE);
 		rootsModel.removeAll();
 		rootsModel.add(mySettings.TEMPLATE_DIRS);
+		substitutedExtensionsModel.removeAll();
+		substitutedExtensionsModel.add(mySettings.substitutedExtensions);
 	}
 
 	@Override

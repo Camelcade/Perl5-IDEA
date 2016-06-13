@@ -20,15 +20,26 @@ import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by hurricup on 05.06.2016.
  */
 public class TemplateToolkitFileTypeFactory extends FileTypeFactory
 {
+	public static final List<String> DEFAULT_EXTENSIONS = new ArrayList<String>(Arrays.asList(
+			"tt",
+			"tt2"
+	));
+
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer)
 	{
-		consumer.consume(TemplateToolkitFileType.INSTANCE, "tt");
-		consumer.consume(TemplateToolkitFileType.INSTANCE, "tt2");
+		for (String ext : DEFAULT_EXTENSIONS)
+		{
+			consumer.consume(TemplateToolkitFileType.INSTANCE, ext);
+		}
 	}
 }

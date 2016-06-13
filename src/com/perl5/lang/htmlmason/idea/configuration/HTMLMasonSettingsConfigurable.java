@@ -28,9 +28,6 @@ import com.intellij.openapi.roots.impl.PushedFilePropertiesUpdater;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.ui.popup.PopupStep;
-import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -71,6 +68,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 {
 	final HTMLMasonSettings mySettings;
 
+	@SuppressWarnings("Since15")
 	protected CollectionListModel<String> substitutedExtensionsModel;
 	protected JBList substitutedExtensionsList;
 	protected JPanel substitutedExtensionsPanel;
@@ -293,54 +291,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 	protected void createSubstitutedExtensionsComponent(FormBuilder builder)
 	{
+		//noinspection Since15
 		substitutedExtensionsModel = new CollectionListModel<String>();
 		substitutedExtensionsList = new JBList(substitutedExtensionsModel);
-		substitutedExtensionsPanel = ToolbarDecorator
-				.createDecorator(substitutedExtensionsList)
-				.setAddAction(new AnActionButtonRunnable()
-				{
-					@Override
-					public void run(AnActionButton anActionButton)
-					{
-						FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-						final List<String> currentItems = substitutedExtensionsModel.getItems();
-						List<FileNameMatcher> possibleItems = new ArrayList<FileNameMatcher>();
-						List<Icon> itemsIcons = new ArrayList<Icon>();
-
-						for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
-						{
-							if (fileType instanceof LanguageFileType)
-							{
-								for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
-								{
-									String presentableString = matcher.getPresentableString();
-									if (!currentItems.contains(presentableString))
-									{
-										possibleItems.add(matcher);
-										itemsIcons.add(fileType.getIcon());
-									}
-								}
-							}
-						}
-
-						BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
-								new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons)
-								{
-									@Override
-									public PopupStep onChosen(FileNameMatcher selectedValue, boolean finalChoice)
-									{
-										substitutedExtensionsModel.add(selectedValue.getPresentableString());
-										return super.onChosen(selectedValue, finalChoice);
-									}
-								};
-
-						JBPopupFactory.getInstance().createListPopup(fileNameMatcherBaseListPopupStep, 20).showInCenterOf(substitutedExtensionsPanel);
-					}
-				})
-				.disableDownAction()
-				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
-				.createPanel();
+		substitutedExtensionsPanel = PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
 		builder.addLabeledComponent(new JLabel("Extensions that should be handled as HTML::Mason components except *.mas (only under roots configured above):"), substitutedExtensionsPanel);
 	}
 

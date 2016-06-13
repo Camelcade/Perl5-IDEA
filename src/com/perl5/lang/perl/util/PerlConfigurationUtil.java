@@ -18,7 +18,11 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
+import com.intellij.openapi.fileTypes.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.PopupStep;
+import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.AnActionButton;
@@ -33,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +50,7 @@ public class PerlConfigurationUtil
 	public static JPanel createProjectPathsSelection(
 			@NotNull final Project myProject,
 			@NotNull final JBList rootsList,
-			@NotNull final CollectionListModel<String> rootsModel,
+			@SuppressWarnings("Since15") @NotNull final CollectionListModel<String> rootsModel,
 			@NotNull @Nls final String dialogTitle
 	)
 	{
@@ -92,6 +97,63 @@ public class PerlConfigurationUtil
 					}
 				})
 				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+				.createPanel();
+	}
+
+	public static JPanel createSubstituteExtensionPanel(
+			@SuppressWarnings("Since15") @NotNull final CollectionListModel<String> substitutedExtensionsModel,
+			@NotNull final JBList substitutedExtensionsList
+
+	)
+	{
+		return ToolbarDecorator
+				.createDecorator(substitutedExtensionsList)
+				.setAddAction(new AnActionButtonRunnable()
+				{
+					@Override
+					public void run(AnActionButton anActionButton)
+					{
+						FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+						final List<String> currentItems = substitutedExtensionsModel.getItems();
+						List<FileNameMatcher> possibleItems = new ArrayList<FileNameMatcher>();
+						List<Icon> itemsIcons = new ArrayList<Icon>();
+
+						for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
+						{
+							if (fileType instanceof LanguageFileType)
+							{
+								for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
+								{
+									if (matcher instanceof ExtensionFileNameMatcher)
+									{
+										String presentableString = matcher.getPresentableString();
+										if (!currentItems.contains(presentableString))
+										{
+											possibleItems.add(matcher);
+											itemsIcons.add(fileType.getIcon());
+										}
+									}
+								}
+							}
+						}
+
+						BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
+								new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons)
+								{
+									@Override
+									public PopupStep onChosen(FileNameMatcher selectedValue, boolean finalChoice)
+									{
+										substitutedExtensionsModel.add(selectedValue.getPresentableString());
+										return super.onChosen(selectedValue, finalChoice);
+									}
+								};
+
+						JBPopupFactory.getInstance().createListPopup(fileNameMatcherBaseListPopupStep).show(anActionButton.getPreferredPopupPoint());
+					}
+				})
+				.disableDownAction()
+				.disableUpAction()
+				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
 				.createPanel();
 	}
 }

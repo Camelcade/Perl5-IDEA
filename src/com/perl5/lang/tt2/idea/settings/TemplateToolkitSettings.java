@@ -17,8 +17,17 @@
 package com.perl5.lang.tt2.idea.settings;
 
 import com.intellij.openapi.components.*;
+import com.intellij.openapi.fileTypes.FileNameMatcher;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,17 +52,99 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	public static final String DEFAULT_END_TAG = "%]";
 	public static final String DEFAULT_OUTLINE_TAG = "%%";
 
+	public List<String> substitutedExtensions = new ArrayList<String>();
+	public List<String> TEMPLATE_DIRS = new ArrayList<String>();
 	public String START_TAG = DEFAULT_START_TAG;
 	public String END_TAG = DEFAULT_END_TAG;
 	public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
 	public boolean ENABLE_ANYCASE = false;
 	public boolean ENABLE_RELATIVE = false;
-	public List<String> TEMPLATE_DIRS = new ArrayList<String>();
 
+	@Transient
+	private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
+	@Transient
+	private transient AtomicNotNullLazyValue<List<VirtualFile>> myLazyVirtualFilesRoots;
+	@Transient
+	private transient Project myProject;
+
+	public TemplateToolkitSettings()
+	{
+		createLazyObjects();
+	}
+
+	@NotNull
 	public static TemplateToolkitSettings getInstance(@NotNull Project project)
 	{
 		TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
-		return persisted != null ? persisted : new TemplateToolkitSettings();
+
+		if (persisted == null)
+		{
+			persisted = new TemplateToolkitSettings();
+		}
+		persisted.setProject(project);
+
+		return persisted;
+	}
+
+	public void settingsUpdated()
+	{
+		FileContentUtil.reparseOpenedFiles();
+		createLazyObjects();
+	}
+
+	protected void setProject(Project project)
+	{
+		myProject = project;
+	}
+
+	private void createLazyObjects()
+	{
+		myLazyMatchers = new AtomicNotNullLazyValue<List<FileNameMatcher>>()
+		{
+			@SuppressWarnings("Duplicates")
+			@NotNull
+			@Override
+			protected List<FileNameMatcher> compute()
+			{
+				List<FileNameMatcher> result = new ArrayList<FileNameMatcher>();
+				FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+				for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
+				{
+					if (fileType instanceof LanguageFileType)
+					{
+						for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
+						{
+							if (substitutedExtensions.contains(matcher.getPresentableString()))
+							{
+								result.add(matcher);
+							}
+						}
+					}
+				}
+				return result;
+			}
+		};
+
+		myLazyVirtualFilesRoots = new AtomicNotNullLazyValue<List<VirtualFile>>()
+		{
+			@NotNull
+			@Override
+			protected List<VirtualFile> compute()
+			{
+				List<VirtualFile> result = new ArrayList<VirtualFile>();
+
+				for (String relativeRoot : TEMPLATE_DIRS)
+				{
+					VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
+					if (rootFile != null && rootFile.exists())
+					{
+						result.add(rootFile);
+					}
+				}
+
+				return result;
+			}
+		};
 	}
 
 	@Nullable
@@ -67,5 +158,46 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	public void loadState(TemplateToolkitSettings state)
 	{
 		XmlSerializerUtil.copyBean(state, this);
+	}
+
+	@NotNull
+	public List<FileNameMatcher> getMatchers()
+	{
+		return myLazyMatchers.getValue();
+	}
+
+	@NotNull
+	public List<VirtualFile> getTemplateRoots()
+	{
+		return myLazyVirtualFilesRoots.getValue();
+	}
+
+	/**
+	 * Checks if virtualFile is under configured root
+	 *
+	 * @return true or false
+	 */
+	public boolean isVirtualFileUnderRoot(@NotNull VirtualFile file)
+	{
+		for (VirtualFile root : getTemplateRoots())
+		{
+			if (VfsUtil.isAncestor(root, file, true))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isVirtualFileNameMatches(@NotNull VirtualFile file)
+	{
+		for (FileNameMatcher matcher : getMatchers())
+		{
+			if (matcher.accept(file.getName()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -101,7 +101,6 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
 	public boolean isMyFileType(@NotNull VirtualFile file)
 	{
 		Project project = ProjectLocator.getInstance().guessProjectForFile(file);
-		// fixme we need to make cache here
 		if (project != null)
 		{
 			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
