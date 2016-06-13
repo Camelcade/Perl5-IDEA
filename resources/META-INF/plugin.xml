@@ -394,7 +394,10 @@
                 implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
         <liveTemplateContext
                 implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
-
+        <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
+        <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
+        <lang.indentStrategy language="Template Toolkit 2"
+                             implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
         <!-- End of template toolkit -->
 
         <!--Embedded Perl-->

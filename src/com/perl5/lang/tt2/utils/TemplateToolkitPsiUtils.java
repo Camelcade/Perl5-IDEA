@@ -16,9 +16,13 @@
 
 package com.perl5.lang.tt2.utils;
 
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
+import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -48,4 +52,22 @@ public class TemplateToolkitPsiUtils
 		return result;
 	}
 
+	@Nullable
+	public static IElementType getLastOpenMarker(Editor editor)
+	{
+		int offset = editor.getCaretModel().getOffset();
+		HighlighterIterator iterator = ((EditorEx) editor).getHighlighter().createIterator(offset);
+
+		while (!iterator.atEnd())
+		{
+			IElementType tokenType = iterator.getTokenType();
+			if (TemplateToolkitSyntaxElements.OPEN_TAGS.contains(tokenType))
+			{
+				return tokenType;
+			}
+			iterator.retreat();
+		}
+
+		return null;
+	}
 }

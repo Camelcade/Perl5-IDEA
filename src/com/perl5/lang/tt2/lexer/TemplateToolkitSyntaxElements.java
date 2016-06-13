@@ -28,11 +28,22 @@ import java.util.Map;
  */
 public class TemplateToolkitSyntaxElements implements TemplateToolkitElementTypes
 {
-	public static final TokenSet CONSTRUCTION_PREFIX = TokenSet.create(
+	public static final TokenSet OPEN_TAGS = TokenSet.create(
 			TT2_OPEN_TAG,
-			TT2_OUTLINE_TAG,
-			TT2_SEMI,
-			MACRO_DIRECTIVE    // macro consumes semicolon
+			TT2_OUTLINE_TAG
+	);
+
+	public static final TokenSet CLOSE_TAGS = TokenSet.create(
+			TT2_CLOSE_TAG,
+			TT2_HARD_NEWLINE
+	);
+
+	public static final TokenSet CONSTRUCTION_PREFIX = TokenSet.orSet(
+			OPEN_TAGS,
+			TokenSet.create(
+					TT2_SEMI,
+					MACRO_DIRECTIVE    // macro consumes semicolon
+			)
 	);
 
 	public static final Map<String, IElementType> KEYWORDS = new HashMap<String, IElementType>();
