@@ -1244,6 +1244,19 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory
 			};
 		}
 
+		if (name.equals("EMPTY_DIRECTIVE"))
+		{
+			return new TemplateToolkitElementType(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new TemplateToolkitCompositeElementImpl(node);
+				}
+			};
+		}
+
 		throw new RuntimeException("Missing element: " + name);
 	}
 }

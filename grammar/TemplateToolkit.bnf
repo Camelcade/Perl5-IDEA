@@ -144,7 +144,10 @@ private directive ::=
 
 	block_directives |
 	reply_directives |
-	atom_dirictive
+	atom_dirictive |
+	empty_directive
+
+empty_directive ::= [TT2_GET]	// needs to control flow in branches
 
 // these are DIRECTIVE RULES from https://github.com/abw/Template2/blob/master/parser/Parser.yp
 private atom_dirictive ::=
