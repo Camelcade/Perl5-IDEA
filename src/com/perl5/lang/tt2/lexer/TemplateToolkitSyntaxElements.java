@@ -46,6 +46,25 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 			)
 	);
 
+	public static final TokenSet ATOMIC_EXPRESSIONS = TokenSet.create(
+			FILTER_DIRECTIVE,
+			WRAPPER_DIRECTIVE,
+			DEBUG_DIRECTIVE,
+			NEXT_DIRECTIVE,
+			LAST_DIRECTIVE,
+			RETURN_DIRECTIVE,
+			STOP_DIRECTIVE,
+			CLEAR_DIRECTIVE,
+			DEFAULT_DIRECTIVE,
+			INSERT_DIRECTIVE,
+			INCLUDE_DIRECTIVE,
+			PROCESS_DIRECTIVE,
+			CALL_DIRECTIVE,
+			THROW_DIRECTIVE,
+			SET_DIRECTIVE,
+			GET_DIRECTIVE
+	);
+
 	public static final Map<String, IElementType> KEYWORDS = new HashMap<String, IElementType>();
 	public static final TokenSet KEYWORDS_TOKENSET;
 

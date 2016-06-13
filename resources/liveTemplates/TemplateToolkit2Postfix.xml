@@ -1,0 +1,59 @@
+<!--
+  ~ Copyright 2016 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<templateSet group="Template Toolkit 2 Postfix">
+    <template name="IF" value="IF $COND$" description="IF condition" toReformat="false" toShortenFQNames="true">
+        <variable name="COND" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+    <template name="UNLESS" value="IF $COND$" description="UNLESS condition" toReformat="false" toShortenFQNames="true">
+        <variable name="COND" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+    <template name="FILTER" value="FILTER $NAME$" description="FILTER directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="NAME" expression="tt2FilterName()" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+    <template name="FOREACH" value="FOREACH $ITERATOR$ IN $ITERABLE$" description="FOREACH directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="ITERATOR" expression="&quot;iterator&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="ITERABLE" expression="&quot;iterable&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+    <template name="WHILE" value="WHILE $CONDITION$" description="WHILE directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="CONDITION" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+    <template name="WRAPPER" value="WRAPPER $NAME$" description="WRAPPER directive" toReformat="false"
+              toShortenFQNames="true">
+        <variable name="NAME" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="Template Toolkit 2.posfix" value="true"/>
+        </context>
+    </template>
+</templateSet>

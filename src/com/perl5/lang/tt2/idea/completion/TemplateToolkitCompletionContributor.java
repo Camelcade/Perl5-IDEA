@@ -14,32 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2.idea.liveTemplates;
+package com.perl5.lang.tt2.idea.completion;
 
-import com.intellij.codeInsight.template.impl.DefaultLiveTemplatesProvider;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementPatterns;
 
 /**
  * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitLiveTemplatesProvider implements DefaultLiveTemplatesProvider
+public class TemplateToolkitCompletionContributor extends CompletionContributor implements TemplateToolkitElementPatterns
 {
-	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/TemplateToolkit2",
-			"/liveTemplates/TemplateToolkit2Postfix",
-	};
-
-	@Override
-	public String[] getDefaultLiveTemplateFiles()
+	public TemplateToolkitCompletionContributor()
 	{
-		return TEMPLATES;
-	}
+		extend(
+				CompletionType.BASIC,
+				FILTER_NAME_PATTERN,
+				new TemplateToolkitFilterNamesCompletionProvider()
+		);
 
-	@Nullable
-	@Override
-	public String[] getHiddenLiveTemplateFiles()
-	{
-		return null;
 	}
-
 }

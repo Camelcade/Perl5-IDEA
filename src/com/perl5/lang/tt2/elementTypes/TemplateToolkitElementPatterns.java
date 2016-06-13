@@ -16,10 +16,23 @@
 
 package com.perl5.lang.tt2.elementTypes;
 
+import com.intellij.patterns.PsiElementPattern;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+
 /**
  * Created by hurricup on 12.06.2016.
  */
 public interface TemplateToolkitElementPatterns extends TemplateToolkitElementTypes
 {
+	PsiElementPattern.Capture<PsiElement> FILTER_NAME_PATTERN =
+			psiElement(TT2_IDENTIFIER).withParent(
+					psiElement(IDENTIFIER_EXPR).afterLeafSkipping(
+							psiElement().andOr(psiElement().whitespace(), psiElement(PsiComment.class)),
+							psiElement(TT2_FILTER)
+					)
+			);
 
 }

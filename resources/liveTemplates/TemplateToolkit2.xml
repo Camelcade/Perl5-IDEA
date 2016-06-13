@@ -204,7 +204,7 @@
     </template>
     <template name="FILTER" value="FILTER $NAME$ $CLOSETAG$&#10;    $END$&#10;$OPENTAG$ END"
               description="FILTER directive" toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="&quot;name&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="tt2FilterName()" defaultValue="" alwaysStopAt="true"/>
         <variable name="CLOSETAG" expression="tt2CloseMarker()" defaultValue="" alwaysStopAt="false"/>
         <variable name="OPENTAG" expression="tt2OpenMarker()" defaultValue="" alwaysStopAt="false"/>
         <context>
