@@ -394,6 +394,13 @@
                 implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
         <liveTemplateContext
                 implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionElsif"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCase"/>
+        <liveTemplateContext
+                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCatch"/>
+
         <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
         <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
         <lang.indentStrategy language="Template Toolkit 2"

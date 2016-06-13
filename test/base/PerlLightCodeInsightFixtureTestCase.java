@@ -17,6 +17,7 @@
 package base;
 
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Caret;
@@ -39,6 +40,9 @@ import org.picocontainer.MutablePicoContainer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -223,6 +227,14 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		myFixture.checkResult(expected);
 	}
 
+	protected void testLiveTemplateFile(String filename)
+	{
+		initWithFileSmart(filename);
+		myFixture.performEditorAction(IdeActions.ACTION_EXPAND_LIVE_TEMPLATE_BY_TAB);
+		checkResultByFile(filename);
+	}
+
+
 	protected void checkResultByFile(String filenameWithoutExtension)
 	{
 		String checkFileName = filenameWithoutExtension + ".txt";
@@ -230,4 +242,30 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 		myFixture.checkResultByFile(checkFileName);
 	}
+
+	public void assertContainsLookupElements(String... pattern)
+	{
+		assertContainsLookupElements(Arrays.asList(pattern));
+	}
+
+	public void assertContainsLookupElements(List<String> pattern)
+	{
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertNotNull(strings);
+		assertContainsElements(new HashSet<String>(strings), pattern);
+	}
+
+
+	public void assertNotContainsLookupElements(String... pattern)
+	{
+		assertNotContainsLookupElements(Arrays.asList(pattern));
+	}
+
+	public void assertNotContainsLookupElements(List<String> pattern)
+	{
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertNotNull(strings);
+		assertDoesntContain(new HashSet<Object>(strings), pattern);
+	}
+
 }

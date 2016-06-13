@@ -21,7 +21,6 @@ import com.intellij.codeInsight.completion.CompletionType;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -47,27 +46,4 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 		assertContainsLookupElements(pattern);
 	}
 
-	public void assertContainsLookupElements(String... pattern)
-	{
-		assertContainsLookupElements(Arrays.asList(pattern));
-	}
-
-	public void assertContainsLookupElements(List<String> pattern)
-	{
-		List<String> strings = myFixture.getLookupElementStrings();
-		assertNotNull(strings);
-		assertContainsElements(new HashSet<String>(strings), pattern);
-	}
-
-	public void assertNotContainsLookupElements(String... pattern)
-	{
-		assertNotContainsLookupElements(Arrays.asList(pattern));
-	}
-
-	public void assertNotContainsLookupElements(List<String> pattern)
-	{
-		List<String> strings = myFixture.getLookupElementStrings();
-		assertNotNull(strings);
-		assertDoesntContain(new HashSet<Object>(strings), pattern);
-	}
 }

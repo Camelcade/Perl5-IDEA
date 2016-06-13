@@ -21,12 +21,12 @@ import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
-import com.perl5.lang.tt2.psi.impl.PsiGetDirectiveImpl;
-import com.perl5.lang.tt2.psi.impl.PsiIdentifierExprImpl;
-import com.perl5.lang.tt2.psi.impl.PsiMacroContentImpl;
+import com.perl5.lang.tt2.psi.PsiElsifBranch;
+import com.perl5.lang.tt2.psi.impl.*;
 import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -90,7 +90,12 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 	{
 		public CommandPosition()
 		{
-			super(TemplateToolkitLanguage.NAME + ".command", "Directive");
+			this(TemplateToolkitLanguage.NAME + ".command", "Directive");
+		}
+
+		public CommandPosition(String id, String presentableName)
+		{
+			super(id, presentableName);
 		}
 
 		@Override
@@ -123,4 +128,65 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 			return TemplateToolkitSyntaxElements.CONSTRUCTION_PREFIX.contains(prevSignificantSibling.getNode().getElementType());
 		}
 	}
+
+	public static class CommandPositionElsif extends TemplateToolkitTemplateContextType.CommandPosition
+	{
+		public CommandPositionElsif()
+		{
+			this(TemplateToolkitLanguage.NAME + ".command.elsif", "ELSIF/ELSE branch");
+		}
+
+		public CommandPositionElsif(String id, String presentableName)
+		{
+			super(id, presentableName);
+		}
+
+		@Override
+		protected boolean isInContext(PsiElement element)
+		{
+			return super.isInContext(element) && (PsiTreeUtil.getParentOfType(element, PsiIfBranchImpl.class) != null || PsiTreeUtil.getParentOfType(element, PsiUnlessBranchImpl.class) != null || PsiTreeUtil.getParentOfType(element, PsiElsifBranch.class) != null);
+
+		}
+	}
+
+	public static class CommandPositionCase extends TemplateToolkitTemplateContextType.CommandPosition
+	{
+		public CommandPositionCase()
+		{
+			this(TemplateToolkitLanguage.NAME + ".command.case", "CASE branch");
+		}
+
+		public CommandPositionCase(String id, String presentableName)
+		{
+			super(id, presentableName);
+		}
+
+		@Override
+		protected boolean isInContext(PsiElement element)
+		{
+			return super.isInContext(element) && PsiTreeUtil.getParentOfType(element, PsiSwitchBlockImpl.class) != null;
+
+		}
+	}
+
+	public static class CommandPositionCatch extends TemplateToolkitTemplateContextType.CommandPosition
+	{
+		public CommandPositionCatch()
+		{
+			this(TemplateToolkitLanguage.NAME + ".command.catch", "CATCH/FINAL branch");
+		}
+
+		public CommandPositionCatch(String id, String presentableName)
+		{
+			super(id, presentableName);
+		}
+
+		@Override
+		protected boolean isInContext(PsiElement element)
+		{
+			return super.isInContext(element) && (PsiTreeUtil.getParentOfType(element, PsiTryBranchImpl.class) != null || PsiTreeUtil.getParentOfType(element, PsiCatchBranchImpl.class) != null);
+
+		}
+	}
+
 }
