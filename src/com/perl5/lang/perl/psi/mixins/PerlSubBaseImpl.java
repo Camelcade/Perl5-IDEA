@@ -59,11 +59,15 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	{
 		Stub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 
 		String namespace = getExplicitPackageName();
 		if (namespace == null)
+		{
 			namespace = getContextPackageName();
+		}
 
 		return namespace;
 	}
@@ -105,7 +109,9 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	{
 		Stub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getSubName();
+		}
 
 		return getSubNameHeavy();
 	}
@@ -159,20 +165,30 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	{
 		Stub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getSubAnnotations();
+		}
 
 		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
 
 		for (PerlAnnotation annotation : getAnnotationList())
 		{
 			if (annotation instanceof PerlAnnotationAbstractImpl)
+			{
 				myAnnotations.setIsAbstract(true);
+			}
 			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
+			{
 				myAnnotations.setIsDeprecated(true);
+			}
 			else if (annotation instanceof PerlAnnotationMethodImpl)
+			{
 				myAnnotations.setIsMethod(true);
+			}
 			else if (annotation instanceof PerlAnnotationOverrideImpl)
+			{
 				myAnnotations.setIsOverride(true);
+			}
 			else if (annotation instanceof PerlNamespaceElementContainer) // returns
 			{
 				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
@@ -217,9 +233,13 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	public Icon getIcon(int flags)
 	{
 		if (isMethod())
+		{
 			return PerlIcons.METHOD_GUTTER_ICON;
+		}
 		else
+		{
 			return PerlIcons.SUB_GUTTER_ICON;
+		}
 	}
 
 
