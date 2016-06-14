@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.PsiFileStub;
@@ -35,9 +36,7 @@ import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
+import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
@@ -723,8 +722,44 @@ public class PerlPsiUtil
 		{
 			return getPerlExpressionType(element.getLastChild());
 		}
+		else if (isSelfShortcut(element))
+		{
+			return PerlPackageUtil.getContextPackageName(element);
+		}
 
 		return null;
+	}
+
+	/**
+	 * Checks if specified element is shift expression or $_[0] in the single statement of sub definition
+	 *
+	 * @param element element in question
+	 * @return check result
+	 */
+	public static boolean isSelfShortcut(PsiElement element)
+	{
+		if (element == null ||
+				!(element instanceof PsiPerlNamedUnaryExprImpl && StringUtil.equals(element.getText(), "shift") ||
+						element instanceof PsiPerlScalarArrayElementImpl && StringUtil.equals(element.getText(), "$_[0]")
+				))
+		{
+			return false;
+		}
+
+		PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatementImpl.class);
+		if (statement == null)
+		{
+			return false;
+		}
+
+		PsiElement statementContainer = statement.getParent();
+		if (!(statementContainer instanceof PsiPerlBlockImpl && statementContainer.getParent() instanceof PerlSubDefinition))
+		{
+			return false;
+		}
+
+		PsiPerlStatement[] statements = PsiTreeUtil.getChildrenOfType(statementContainer, PsiPerlStatement.class);
+		return statements != null && statements.length == 1;
 	}
 
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
