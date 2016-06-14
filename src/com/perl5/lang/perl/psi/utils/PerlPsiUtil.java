@@ -36,6 +36,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
@@ -717,6 +718,10 @@ public class PerlPsiUtil
 		else if (element instanceof PsiPerlParenthesisedExprImpl)
 		{
 			return getPerlExpressionType(((PsiPerlParenthesisedExprImpl) element).getExpr());
+		}
+		else if (element instanceof PsiPerlDerefExprImpl)
+		{
+			return getPerlExpressionType(element.getLastChild());
 		}
 
 		return null;
