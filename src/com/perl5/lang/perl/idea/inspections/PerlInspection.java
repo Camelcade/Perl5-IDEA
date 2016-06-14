@@ -26,7 +26,7 @@ import com.intellij.psi.PsiElement;
  */
 public abstract class PerlInspection extends LocalInspectionTool
 {
-	long startTime;
+//	long startTime;
 
 	protected void registerProblem(ProblemsHolder holder, PsiElement element, String message)
 	{

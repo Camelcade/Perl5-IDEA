@@ -22,6 +22,7 @@ import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.PerlBundle;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
@@ -33,6 +34,21 @@ import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 @SuppressWarnings("Duplicates")
 public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes
 {
+	public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
+			IF_BLOCK,
+			UNLESS_BLOCK,
+			FOREACH_BLOCK,
+			FILTER_BLOCK,
+			PERL_BLOCK,
+			RAWPERL_BLOCK,
+			WHILE_BLOCK,
+			SWITCH_BLOCK,
+			TRY_CATCH_BLOCK,
+			WRAPPER_BLOCK,
+			NAMED_BLOCK,
+			ANON_BLOCK
+	);
+
 	public static boolean parseIdentifier(PsiBuilder b, int l)
 	{
 		if (consumeToken(b, TT2_IDENTIFIER))

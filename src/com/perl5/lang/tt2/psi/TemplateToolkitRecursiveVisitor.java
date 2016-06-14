@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.tt2.psi;
 
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 12.11.2015.
+ * Created by hurricup on 14.06.2016.
  */
-public class PerlRecursiveVisitor extends PerlVisitor
+public class TemplateToolkitRecursiveVisitor extends TemplateToolkitVisitor
 {
 	@Override
 	public void visitElement(@NotNull PsiElement element)
