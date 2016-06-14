@@ -21,10 +21,10 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -66,28 +66,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
 		if (currentElement != null)
 		{
-			boolean isFirst = currentElement == getFirstChild();
-
-			if (currentElement instanceof PsiPerlNamespaceExpr)
-			{
-				return ((PerlNamespaceElement) currentElement.getFirstChild()).getCanonicalName();
-			}
-			else if (currentElement instanceof PerlString)
-			{
-				return ((PerlString) currentElement).getStringContent();
-			}
-			else if (isFirst && currentElement instanceof PerlVariable)
-			{
-				return ((PerlVariable) currentElement).guessVariableType();
-			}
-			else if (currentElement instanceof PerlMethodContainer)
-			{
-				return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) currentElement);
-			}
-			else if (currentElement instanceof PsiPerlTagScalar && "__PACKAGE__".equals(currentElement.getText()))
-			{
-				return PerlPackageUtil.getContextPackageName(this);
-			}
+			return PerlPsiUtil.getPerlExpressionType(currentElement);
 		}
 		return null;
 

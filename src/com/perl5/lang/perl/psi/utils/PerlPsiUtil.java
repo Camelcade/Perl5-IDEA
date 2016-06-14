@@ -36,9 +36,12 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -681,6 +684,42 @@ public class PerlPsiUtil
 			}
 			run = run.getPrevSibling();
 		}
+	}
+
+	@Nullable
+	public static String getPerlExpressionType(PsiElement element)
+	{
+		if (element == null)
+		{
+			return null;
+		}
+
+		if (element instanceof PsiPerlNamespaceExpr)
+		{
+			return ((PerlNamespaceElement) element.getFirstChild()).getCanonicalName();
+		}
+		else if (element instanceof PerlString)
+		{
+			return ((PerlString) element).getStringContent();
+		}
+		else if (element instanceof PerlVariable)
+		{
+			return ((PerlVariable) element).guessVariableType();
+		}
+		else if (element instanceof PerlMethodContainer)
+		{
+			return PerlSubUtil.getMethodReturnValue((PerlMethodContainer) element);
+		}
+		else if (element instanceof PsiPerlTagScalar && "__PACKAGE__".equals(element.getText()))
+		{
+			return PerlPackageUtil.getContextPackageName(element);
+		}
+		else if (element instanceof PsiPerlParenthesisedExprImpl)
+		{
+			return getPerlExpressionType(((PsiPerlParenthesisedExprImpl) element).getExpr());
+		}
+
+		return null;
 	}
 
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
