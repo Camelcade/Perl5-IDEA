@@ -33,16 +33,22 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 	public static boolean isOrContainFBP(PsiElement element)
 	{
 		if (element == null)
+		{
 			return false;
+		}
 
 		PsiElement currentElement = element;
 		while (currentElement != null)
 		{
 			if (element instanceof PerlClassAccessorFollowBestPractice)
+			{
 				return true;
+			}
 
 			if (element.getNode() instanceof CompositeElement && isOrContainFBP(element.getFirstChild()) && !(element instanceof PerlNamespaceDefinition))
+			{
 				return true;
+			}
 
 			currentElement = currentElement.getNextSibling();
 		}
@@ -58,7 +64,9 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 			PsiElement element = event.getChild();
 
 			if (element instanceof PsiComment && element.getText().contains("follow_best_practice") || isOrContainFBP(element))
+			{
 				reScanAccessors(event.getFile());
+			}
 		}
 	}
 
@@ -70,7 +78,9 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 			PsiElement element = event.getChild();
 
 			if (isOrContainFBP(element))
+			{
 				reScanAccessors(event.getFile());
+			}
 
 		}
 	}
@@ -81,7 +91,9 @@ public class ClassAccessorPsiTreeChangeListener extends PsiTreeChangeAdapter
 		if (canHandle(event)) // has old and new child for replacement
 		{
 			if (isOrContainFBP(event.getNewChild()) || isOrContainFBP(event.getOldChild()))
+			{
 				reScanAccessors(event.getFile());
+			}
 		}
 	}
 

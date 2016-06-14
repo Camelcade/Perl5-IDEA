@@ -75,7 +75,9 @@ public class HTMLMasonFilePropertyPusher implements FilePropertyPusher<Boolean>
 	public Boolean getImmediateValue(@NotNull Project project, @Nullable VirtualFile file)
 	{
 		if (file == null)
+		{
 			return false;
+		}
 
 		FileType fileType = file.getFileType();
 		if (fileType instanceof LanguageFileType)
@@ -113,8 +115,12 @@ public class HTMLMasonFilePropertyPusher implements FilePropertyPusher<Boolean>
 		{
 			try
 			{
-				if ((DataInputOutputUtil.readINT(iStream) == 1) == value) return;
-			} finally
+				if ((DataInputOutputUtil.readINT(iStream) == 1) == value)
+				{
+					return;
+				}
+			}
+			finally
 			{
 				iStream.close();
 			}

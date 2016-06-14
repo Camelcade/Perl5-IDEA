@@ -89,7 +89,9 @@ public class PodFileUtil
 
 		final PsiFile baseFile = podFile.getViewProvider().getStubBindingRoot();
 		if (baseFile != podFile)
+		{
 			return baseFile;
+		}
 
 		String packageName = getPackageName(baseFile);
 		if (StringUtil.isNotEmpty(packageName))
@@ -164,14 +166,18 @@ public class PodFileUtil
 					if (targetVirtualFile != null)
 					{
 						if (!processor.process(psiManager.findFile(targetVirtualFile)))
+						{
 							return;
+						}
 					}
 
 					targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
 					if (targetVirtualFile != null)
 					{
 						if (!processor.process(psiManager.findFile(targetVirtualFile)))
+						{
 							return;
+						}
 					}
 				}
 			}
@@ -182,7 +188,9 @@ public class PodFileUtil
 				for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, PerlScopes.getProjectAndLibrariesScope(project)))
 				{
 					if (!processor.process(podFile))
+					{
 						return;
+					}
 				}
 			}
 		}

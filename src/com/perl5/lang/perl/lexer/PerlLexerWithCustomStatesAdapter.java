@@ -72,35 +72,50 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 	@Override
 	public int getState()
 	{
-		if (myTokenType == null) locateToken();
+		if (myTokenType == null)
+		{
+			locateToken();
+		}
 		return myState;
 	}
 
 	@Override
 	public IElementType getTokenType()
 	{
-		if (myTokenType == null) locateToken();
+		if (myTokenType == null)
+		{
+			locateToken();
+		}
 		return myTokenType;
 	}
 
 	@Override
 	public int getTokenStart()
 	{
-		if (myTokenType == null) locateToken();
+		if (myTokenType == null)
+		{
+			locateToken();
+		}
 		return myFlex.getTokenStart();
 	}
 
 	@Override
 	public int getTokenEnd()
 	{
-		if (myTokenType == null) locateToken();
+		if (myTokenType == null)
+		{
+			locateToken();
+		}
 		return myFlex.getTokenEnd();
 	}
 
 	@Override
 	public void advance()
 	{
-		if (myTokenType == null) locateToken();
+		if (myTokenType == null)
+		{
+			locateToken();
+		}
 		myTokenType = null;
 	}
 
@@ -130,13 +145,18 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 
 	protected void locateToken()
 	{
-		if (myTokenType != null) return;
+		if (myTokenType != null)
+		{
+			return;
+		}
 		try
 		{
 			compileState();
 			myTokenType = myFlex.advance();
-		} catch (IOException e)
-		{ /*Can't happen*/ } catch (Error e)
+		}
+		catch (IOException e)
+		{ /*Can't happen*/ }
+		catch (Error e)
 		{
 			// add lexer class name to the error
 			final Error error = new Error(myFlex.getClass().getName() + ": " + e.getMessage());

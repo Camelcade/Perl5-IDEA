@@ -68,11 +68,15 @@ public class PerlDeparseFileAction extends PerlActionBase
 			PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
 			if (file == null)
+			{
 				return;
+			}
 
 			final Document document = file.getViewProvider().getDocument();
 			if (document == null)
+			{
 				return;
+			}
 
 			final Project project = file.getProject();
 
@@ -123,7 +127,8 @@ public class PerlDeparseFileAction extends PerlActionBase
 						VirtualFile newFile = new LightVirtualFile("Deparsed " + file.getName(), file.getFileType(), deparsed);
 						OpenFileAction.openFile(newFile, project);
 					}
-				} catch (ExecutionException e)
+				}
+				catch (ExecutionException e)
 				{
 					Notifications.Bus.notify(new Notification(
 							PERL_DEPARSE_GROUP,

@@ -63,7 +63,9 @@ public class PerlSubUnresolvableInspection extends PerlInspection implements Per
 
 				// fixme adjust built in checking to the file; Remove second condition after implementing annotations
 				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
+				{
 					return;
+				}
 
 				for (PsiReference reference : subNameElement.getReferences())
 				{

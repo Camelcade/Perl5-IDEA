@@ -45,7 +45,9 @@ public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPac
 	static
 	{
 		for (Map.Entry<String, List<String>> option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet())
+		{
 			OPTIONS_BUNDLES.put(":" + option.getKey(), StringUtils.join(option.getValue(), " "));
+		}
 	}
 
 

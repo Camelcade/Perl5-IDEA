@@ -80,8 +80,12 @@ public class PerlSdkType extends SdkType
 					"-le",
 					"print for @INC"
 			))
+			{
 				if (!".".equals(path))
+				{
 					perlLibPaths.add(path);
+				}
+			}
 		}
 		return perlLibPaths;
 	}
@@ -107,10 +111,14 @@ public class PerlSdkType extends SdkType
 		String perlPath = PerlRunUtil.getPathFromPerl();
 
 		if (perlPath != null)
+		{
 			return perlPath;
+		}
 
 		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD)
+		{
 			return "/usr/bin/";
+		}
 
 		return System.getenv("PERL_HOME");
 	}
@@ -132,12 +140,18 @@ public class PerlSdkType extends SdkType
 	public String getExecutablePath(@NotNull String sdkHome)
 	{
 		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
+		{
 			sdkHome += File.separator;
+		}
 
 		if (SystemInfo.isWindows)
+		{
 			return sdkHome + "perl.exe";
+		}
 		else
+		{
 			return sdkHome + "perl";
+		}
 	}
 
 	@Override
@@ -163,9 +177,13 @@ public class PerlSdkType extends SdkType
 	{
 		String sdkHomePath = sdk.getHomePath();
 		if (sdkHomePath != null)
+		{
 			return getPerlVersionString(sdkHomePath);
+		}
 		else
+		{
 			return null;
+		}
 	}
 
 
@@ -178,14 +196,15 @@ public class PerlSdkType extends SdkType
 			Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
 
 			if (m.find())
+			{
 				return m.group(1) + " (" + m.group(2) + ")";
+			}
 
 			return "Unknown version, please report a bug";
 		}
 
 		return "missing executable";
 	}
-
 
 
 }

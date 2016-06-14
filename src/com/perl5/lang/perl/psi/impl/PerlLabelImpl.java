@@ -43,8 +43,14 @@ public class PerlLabelImpl extends LeafPsiElement implements PerlLabel
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitLabel(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitLabel(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@Override

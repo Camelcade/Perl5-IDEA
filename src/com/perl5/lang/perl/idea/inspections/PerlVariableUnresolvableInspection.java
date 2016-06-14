@@ -45,7 +45,9 @@ public class PerlVariableUnresolvableInspection extends PerlInspection
 				PsiElement parent = variable.getParent();
 
 				if (parent instanceof PerlVariableDeclarationWrapper || variable.isBuiltIn())
+				{
 					return;
+				}
 
 				PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 

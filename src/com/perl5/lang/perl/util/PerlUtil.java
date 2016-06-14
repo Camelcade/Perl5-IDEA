@@ -109,7 +109,9 @@ public class PerlUtil
 					public boolean process(String name)
 					{
 						if (super.process(name))
+						{
 							result.add(name);
+						}
 						return true;
 					}
 				});

@@ -34,7 +34,9 @@ public class PerlUsageTypeProvider implements UsageTypeProvider
 	public UsageType getUsageType(PsiElement element)
 	{
 		if (element.getLanguage() == PodLanguage.INSTANCE)
+		{
 			return DOCUMENT_USAGE;
+		}
 		return null;
 	}
 }

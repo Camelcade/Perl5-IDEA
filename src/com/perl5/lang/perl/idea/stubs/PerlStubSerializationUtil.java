@@ -34,12 +34,16 @@ public class PerlStubSerializationUtil
 	public static void writeStringsList(@NotNull StubOutputStream dataStream, List<String> stringList) throws IOException
 	{
 		if (stringList == null)
+		{
 			dataStream.writeInt(-1);
+		}
 		else
 		{
 			dataStream.writeInt(stringList.size());
 			for (String stringItem : stringList)
+			{
 				dataStream.writeName(stringItem);
+			}
 		}
 	}
 
@@ -48,11 +52,15 @@ public class PerlStubSerializationUtil
 		int listSize = dataStream.readInt();
 
 		if (listSize == -1)
+		{
 			return null;
+		}
 
 		ArrayList<String> result = new ArrayList<String>(listSize);
 		for (int i = 0; i < listSize; i++)
+		{
 			result.add(dataStream.readName().toString());
+		}
 		return result;
 	}
 

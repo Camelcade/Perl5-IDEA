@@ -140,7 +140,9 @@ public class PerlSettingsConfigurable implements Configurable
 			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
 				if (!super.isFileVisible(file, showHiddenFiles))
+				{
 					return false;
+				}
 
 				return file.isDirectory() || StringUtil.equals(file.getName(), PerlCriticAnnotator.PERL_CRITIC_NAME);
 			}
@@ -164,7 +166,9 @@ public class PerlSettingsConfigurable implements Configurable
 			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
 				if (!super.isFileVisible(file, showHiddenFiles))
+				{
 					return false;
+				}
 
 				return file.isDirectory() || StringUtil.equals(file.getName(), PerlFormatWithPerlTidyAction.PERL_TIDY_NAME);
 			}
@@ -260,7 +264,10 @@ public class PerlSettingsConfigurable implements Configurable
 								while (path == null && directoryName.length() > 0)
 								{
 									int pos = directoryName.lastIndexOf('/');
-									if (pos <= 0) break;
+									if (pos <= 0)
+									{
+										break;
+									}
 									directoryName = directoryName.substring(0, pos);
 									path = LocalFileSystem.getInstance().findFileByPath(directoryName);
 								}
@@ -282,7 +289,9 @@ public class PerlSettingsConfigurable implements Configurable
 			{
 				PerlSdkType sdkType = PerlSdkType.getInstance();
 				if (!sdkType.isValidSdkHome(files[0].getCanonicalPath()))
+				{
 					throw new ConfigurationException("Unable to locate perl5 executable");
+				}
 			}
 		};
 

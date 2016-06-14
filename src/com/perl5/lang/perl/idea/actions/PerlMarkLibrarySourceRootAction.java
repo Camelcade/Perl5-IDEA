@@ -48,7 +48,10 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 	@Nullable
 	private static Module getModule(@NotNull AnActionEvent e, @Nullable VirtualFile[] files)
 	{
-		if (files == null) return null;
+		if (files == null)
+		{
+			return null;
+		}
 		Module module = e.getData(LangDataKeys.MODULE);
 		if (module == null)
 		{
@@ -60,13 +63,19 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 	@Nullable
 	private static Module findParentModule(@Nullable Project project, @NotNull VirtualFile[] files)
 	{
-		if (project == null) return null;
+		if (project == null)
+		{
+			return null;
+		}
 		Module result = null;
 		DirectoryIndex index = DirectoryIndex.getInstance(project);
 		for (VirtualFile file : files)
 		{
 			Module module = index.getInfoForFile(file).getModule();
-			if (module == null) return null;
+			if (module == null)
+			{
+				return null;
+			}
 			if (result == null)
 			{
 				result = module;

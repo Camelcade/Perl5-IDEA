@@ -245,7 +245,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					(prevTokenType == RIGHT_BRACE || prevTokenType == RIGHT_BRACKET)
 							&& (tokenType == LEFT_BRACE || tokenType == LEFT_BRACKET || tokenType == LEFT_PAREN)
 					)
+			{
 				return true;
+			}
 		}
 
 		return false;
@@ -269,19 +271,25 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
 
 		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
+		{
 			return false;
+		}
 
 		IElementType tokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
 
 		if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
-			// todo we should check current namespace here
+		// todo we should check current namespace here
+		{
 			return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
+		}
 		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(SUB) && b.lookAhead(2) != LEFT_PAREN)
 		{
 			PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
 			if (nextToken != null)
+			{
 				return PerlSubUtil.isUnary(b.getTokenText(), nextToken.getTokenText());
+			}
 		}
 
 		return false;
@@ -299,7 +307,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
 
 		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
+		{
 			return false;
+		}
 
 		IElementType tokenType = b.getTokenType();
 		IElementType nextTokenType = b.lookAhead(1);
@@ -353,14 +363,18 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		while (!b.eof() && (tokenType != RIGHT_PAREN))
 		{
 			if (m == null)
+			{
 				m = b.mark();
+			}
 
 
 			b.advanceLexer();
 			tokenType = b.getTokenType();
 		}
 		if (m != null)
+		{
 			m.collapse(SUB_PROTOTYPE_TOKEN);
+		}
 
 		return true;
 	}
@@ -470,7 +484,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType targetTokenType, IElementType... sequenceTokenType)
 	{
 		if (sequenceTokenType.length == 0)
+		{
 			return false;
+		}
 
 		b.getTokenType(); // this advances lexer to the next non-space token
 
@@ -533,7 +549,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean mergeRequirePackageName(PsiBuilder b, int l)
 	{
 		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == LEFT_PAREN)
+		{
 			return false;
+		}
 		return mergePackageName(b, l);
 	}
 
@@ -636,9 +654,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
 							|| ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
 							|| !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
+			{
 				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
+			}
 			else
+			{
 				return false;
+			}
 		}
 		// 	method
 		else if (CONVERTABLE_TOKENS.contains(currentTokenType))
@@ -647,25 +669,31 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			// ->sub
 			if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
+			{
 				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-				// may be
-				// 	method Foo::
-				//	method Foo::Bar
-				//  method Foo::othermethod
+			}
+			// may be
+			// 	method Foo::
+			//	method Foo::Bar
+			//  method Foo::othermethod
 			else if (PACKAGE_TOKENS.contains(nextTokenType))
 			{
 				IElementType nextNextTokenType = b.lookAhead(2);
 
 				// sub Foo::->method
 				if (nextNextTokenType == OPERATOR_DEREFERENCE)
+				{
 					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-					// identifier Package::identifier
+				}
+				// identifier Package::identifier
 				else if (CONVERTABLE_TOKENS.contains(nextNextTokenType))
 				{
 
 					// identifier Package::identifier->
 					if (b.lookAhead(3) == OPERATOR_DEREFERENCE)
+					{
 						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
+					}
 
 					PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
 					PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
@@ -673,14 +701,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + PerlPackageUtil.PACKAGE_SEPARATOR + nextNextTokenData.getTokenText();
 
 					if (((PerlBuilder) b).isKnownSub(packageOrSub))
+					{
 						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
+					}
 					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
+					{
 						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && mergePackageName(b, l);
+					}
 					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
 				}
 				else
-					// it's method Package::
+				// it's method Package::
+				{
 					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertPackageIdentifier(b, l);
+				}
 			}
 			// may be
 			// 	method Foo
@@ -690,16 +724,24 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 				String potentialSubName = nextTokenData.getTokenText() + PerlPackageUtil.PACKAGE_SEPARATOR + b.getTokenText();
 				if (((PerlBuilder) b).isKnownSub(potentialSubName))
+				{
 					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertIdentifier(b, l, PACKAGE);
+				}
 				else
+				{
 					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
+				}
 			}
 			// KnownPackage->
 			else if (nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
+			{
 				return false;
-				// it's just sub
+			}
+			// it's just sub
 			else
+			{
 				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
+			}
 		}
 
 		return false;
@@ -846,7 +888,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		else if (tokenType == sigilTokenType)
 		{
 			if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1)) && b.lookAhead(1) != LEFT_BRACE) // space disallowed after * or % if it's not a cast
+			{
 				return false;
+			}
 
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
@@ -887,7 +931,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (consumeToken(b, LEFT_BRACE))
 		{
 			boolean r = convertBracedString(b, l);
-			if (!r) r = PerlParserImpl.expr(b, l, -1);
+			if (!r)
+			{
+				r = PerlParserImpl.expr(b, l, -1);
+			}
 
 			if (!r && b.getTokenType() == RIGHT_BRACE)
 			{
@@ -917,7 +964,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			{
 				r = PerlParserImpl.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
 				if (!r)
+				{
 					r = PerlParserImpl.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
+				}
 			}
 			else
 			{
@@ -1012,14 +1061,20 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				while (true)
 				{
 					if (!(consumeToken(b, OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW)))
+					{
 						break;
+					}
 				}
 				;
 				if (!PerlParserImpl.expr(b, l, 4))    // looks like an end
+				{
 					break;
+				}
 			}
 			else
+			{
 				break;
+			}
 		}
 		return r;
 	}
@@ -1156,9 +1211,13 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (PerlParserImpl.glob_primitive(b, l))
 		{
 			if (PerlParserImpl.hash_index(b, l))
+			{
 				m.done(GLOB_SLOT);
+			}
 			else
+			{
 				m.drop();
+			}
 			return true;
 		}
 		m.drop();

@@ -37,12 +37,20 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement
 		List<PerlWarningTreeLeaf> result = new ArrayList<PerlWarningTreeLeaf>();
 
 		for (PerlAbstractWarningTreeElement subElement : subElements)
+		{
 			if (subElement instanceof PerlWarningTreeNode)
+			{
 				result.addAll(((PerlWarningTreeNode) subElement).collectChildLeafs());
+			}
 			else if (subElement instanceof PerlWarningTreeLeaf)
+			{
 				result.add((PerlWarningTreeLeaf) subElement);
+			}
 			else
+			{
 				throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
+			}
+		}
 
 		return result;
 	}
@@ -53,10 +61,16 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement
 		result.add(this);
 
 		for (PerlAbstractWarningTreeElement subElement : subElements)
+		{
 			if (subElement instanceof PerlWarningTreeNode)
+			{
 				result.addAll(((PerlWarningTreeNode) subElement).collectChildNodes());
+			}
 			else if (!(subElement instanceof PerlWarningTreeLeaf))
+			{
 				throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
+			}
+		}
 
 		return result;
 	}

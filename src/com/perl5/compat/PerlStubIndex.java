@@ -63,7 +63,8 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 		try
 		{
 			return StubIndex.getElements(indexKey, key, project, scope, idFilter, requiredClass);
-		} finally
+		}
+		finally
 		{
 			getInstance().myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
 		}
@@ -100,7 +101,8 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 		try
 		{
 			return StubIndex.getInstance().get(indexKey, key, project, scope);
-		} finally
+		}
+		finally
 		{
 			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
 		}
@@ -113,7 +115,8 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 		try
 		{
 			return StubIndex.getInstance().processElements(indexKey, key, project, scope, requiredClass, processor);
-		} finally
+		}
+		finally
 		{
 			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
 		}
@@ -127,7 +130,8 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 		try
 		{
 			return StubIndex.getInstance().getAllKeys(indexKey, project);
-		} finally
+		}
+		finally
 		{
 			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
 		}
@@ -140,7 +144,8 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 		try
 		{
 			return StubIndex.getInstance().processAllKeys(indexKey, project, processor);
-		} finally
+		}
+		finally
 		{
 			myAccessValidator.stoppedProcessingActivityForIndex(indexKey);
 		}

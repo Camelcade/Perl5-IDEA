@@ -76,11 +76,17 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 		PerlVariableType type = null;
 
 		if (variableName.startsWith("$"))
+		{
 			type = PerlVariableType.SCALAR;
+		}
 		else if (variableName.startsWith("@"))
+		{
 			type = PerlVariableType.ARRAY;
+		}
 		else if (variableName.startsWith("%"))
+		{
 			type = PerlVariableType.HASH;
+		}
 
 		if (type != null)
 		{
@@ -244,13 +250,25 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof PerlVariable)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof PerlVariable))
+		{
+			return false;
+		}
 
 		PerlVariable that = (PerlVariable) o;
 
-		if (myVariableType != that.getActualType()) return false;
-		if (!myVariableName.equals(that.getName())) return false;
+		if (myVariableType != that.getActualType())
+		{
+			return false;
+		}
+		if (!myVariableName.equals(that.getName()))
+		{
+			return false;
+		}
 		return StringUtil.equals(getPackageName(), that.getPackageName());
 
 	}

@@ -85,7 +85,9 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		if (name.isEmpty())
+		{
 			throw new IncorrectOperationException("Empty here-doc markers are not supported");
+		}
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof LeafPsiElement)

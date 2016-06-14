@@ -160,7 +160,9 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference
 					if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition) subcomponentDefitnition).getName(), nameOrPath))
 					{
 						if (result == null)
+						{
 							result = new ArrayList<ResolveResult>();
+						}
 						result.add(new PsiElementResolveResult(subcomponentDefitnition));
 					}
 				}

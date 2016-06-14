@@ -109,7 +109,8 @@ public class PerlInterpreterForModuleStep extends ModuleWizardStep
 							try
 							{
 								projectJdksModel.apply(jdkConfig);
-							} catch (ConfigurationException e1)
+							}
+							catch (ConfigurationException e1)
 							{
 								//name can't be wrong
 							}

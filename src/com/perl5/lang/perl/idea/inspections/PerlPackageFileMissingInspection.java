@@ -43,14 +43,18 @@ public class PerlPackageFileMissingInspection extends PerlInspection
 			public void visitUseStatement(@NotNull PsiPerlUseStatement o)
 			{
 				if (o.getNamespaceElement() != null)
+				{
 					checkPackageFile(o.getNamespaceElement());
+				}
 			}
 
 			@Override
 			public void visitRequireExpr(@NotNull PsiPerlRequireExpr o)
 			{
 				if (o.getNamespaceElement() != null)
+				{
 					checkPackageFile(o.getNamespaceElement());
+				}
 			}
 
 			public void checkPackageFile(PerlNamespaceElement o)
@@ -58,7 +62,9 @@ public class PerlPackageFileMissingInspection extends PerlInspection
 				List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
 
 				if (namespaceFiles.isEmpty())
+				{
 					registerProblem(holder, o, "Unable to find package file");
+				}
 			}
 		};
 	}

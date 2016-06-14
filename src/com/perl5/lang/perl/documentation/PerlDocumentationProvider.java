@@ -92,7 +92,9 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
 	{
 		if (contextElement == null || contextElement.getLanguage() != PerlLanguage.INSTANCE)
+		{
 			return null;
+		}
 
 		IElementType elementType = contextElement.getNode().getElementType();
 

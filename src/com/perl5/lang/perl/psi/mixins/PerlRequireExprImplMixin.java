@@ -50,7 +50,9 @@ public abstract class PerlRequireExprImplMixin extends PerlDoExprImplMixin imple
 	protected String findImportPath()
 	{
 		if (getNamespaceElement() != null)
+		{
 			return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
+		}
 
 		return super.findImportPath();
 	}

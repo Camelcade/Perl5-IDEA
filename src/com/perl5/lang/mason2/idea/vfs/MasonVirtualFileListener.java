@@ -65,7 +65,9 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
 	{
 		if (!event.getPropertyName().equals(VirtualFile.PROP_NAME))
+		{
 			return;
+		}
 
 		processFileChange(event.getFile());
 	}
@@ -75,7 +77,9 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
 		if (componentsRoots.isEmpty())
+		{
 			return;
+		}
 
 
 		Set<VirtualFile> rootsSet = new THashSet<VirtualFile>(componentsRoots);
@@ -121,12 +125,16 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
 	{
 		if (!event.getPropertyName().equals(VirtualFile.PROP_NAME))
+		{
 			return;
+		}
 
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
 		if (componentsRoots.isEmpty())
+		{
 			return;
+		}
 
 		VirtualFile renamedFile = event.getFile();
 
@@ -150,7 +158,9 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 		MasonSettings masonSettings = MasonSettings.getInstance(getProject());
 		List<VirtualFile> componentsRoots = masonSettings.getComponentsRootsVirtualFiles();
 		if (componentsRoots.isEmpty())
+		{
 			return;
+		}
 
 		VirtualFile movedFile = event.getFile();
 

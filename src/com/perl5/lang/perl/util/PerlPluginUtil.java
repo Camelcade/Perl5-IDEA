@@ -58,7 +58,8 @@ public class PerlPluginUtil
 			try
 			{
 				return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				return null;
 			}

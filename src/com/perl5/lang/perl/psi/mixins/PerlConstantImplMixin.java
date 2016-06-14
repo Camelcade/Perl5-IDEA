@@ -70,7 +70,9 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 	{
 		PerlConstantStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getName();
+		}
 
 		return getNode().getText();
 	}
@@ -79,7 +81,9 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		if (name.isEmpty())
+		{
 			throw new IncorrectOperationException("You can't set an empty constant name");
+		}
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof LeafPsiElement)
@@ -111,12 +115,16 @@ public abstract class PerlConstantImplMixin extends PerlStubBasedPsiElementBase<
 		// fixme check stub
 		PerlConstantStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 
 		String namespace = getExplicitPackageName();
 
 		if (namespace == null)
+		{
 			namespace = getContextPackageName();
+		}
 
 		return namespace;
 	}

@@ -68,10 +68,14 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 				String canonicalName = o.getCanonicalName();
 
 				if (!PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).isEmpty())
+				{
 					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
+				}
 
 				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
+				{
 					registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");
+				}
 			}
 		};
 	}

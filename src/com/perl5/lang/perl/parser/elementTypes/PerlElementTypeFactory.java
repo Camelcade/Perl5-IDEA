@@ -42,8 +42,11 @@ public class PerlElementTypeFactory
 	public static IElementType getTokenType(@NotNull String name)
 	{
 		if (STRING_TOKENS.contains(name))
+		{
 			return new PerlStringContentTokenType(name);
+		}
 		if (name.equals("HEREDOC_END"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -53,7 +56,9 @@ public class PerlElementTypeFactory
 					return new PerlHeredocTerminatorElementImpl(this, leafText);
 				}
 			};
+		}
 		if (name.equals("VARIABLE_NAME"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -63,7 +68,9 @@ public class PerlElementTypeFactory
 					return new PerlVariableNameElementImpl(this, leafText);
 				}
 			};
+		}
 		if (name.equals("SUB"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -73,7 +80,9 @@ public class PerlElementTypeFactory
 					return new PerlSubNameElementImpl(this, leafText);
 				}
 			};
+		}
 		if (name.equals("LABEL"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -83,7 +92,9 @@ public class PerlElementTypeFactory
 					return new PerlLabelImpl(this, leafText);
 				}
 			};
+		}
 		if (name.equals("PACKAGE"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -93,7 +104,9 @@ public class PerlElementTypeFactory
 					return new PerlNamespaceElementImpl(this, leafText);
 				}
 			};
+		}
 		if (name.equals("VERSION_ELEMENT"))
+		{
 			return new PerlTokenTypeEx(name)
 			{
 				@NotNull
@@ -103,14 +116,21 @@ public class PerlElementTypeFactory
 					return new PerlVersionElementImpl(this, leafText);
 				}
 			};
+		}
 //		if (name.equals("POD"))
 //			return new PerlPodElementType(name);
 		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
+		{
 			return new PerlHeredocElementType(name);
+		}
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
+		{
 			return new PerlQQStringElementType(name);
+		}
 		else if (name.equals("COMMENT_ANNOTATION"))
+		{
 			return new PerlAnnotationElementType("PERL_ANNOTATION");
+		}
 
 		return new PerlTokenType(name);
 	}
@@ -118,35 +138,62 @@ public class PerlElementTypeFactory
 	public static IElementType getElementType(@NotNull String name)
 	{
 		if (name.equals("SUB_DEFINITION"))
+		{
 			return PerlStubElementTypes.SUB_DEFINITION;
+		}
 		else if (name.equals("METHOD_DEFINITION"))
+		{
 			return PerlStubElementTypes.METHOD_DEFINITION;
+		}
 		else if (name.equals("FUNC_DEFINITION"))
+		{
 			return PerlStubElementTypes.FUNC_DEFINITION;
+		}
 		else if (name.equals("SUB_DECLARATION"))
+		{
 			return PerlStubElementTypes.SUB_DECLARATION;
+		}
 		else if (name.equals("SUB_DECLARATION"))
+		{
 			return PerlStubElementTypes.SUB_DECLARATION;
+		}
 		else if (name.equals("GLOB_VARIABLE"))
+		{
 			return PerlStubElementTypes.PERL_GLOB;
+		}
 		else if (name.equals("NAMESPACE_DEFINITION"))
+		{
 			return PerlStubElementTypes.PERL_NAMESPACE;
+		}
 		else if (name.equals("VARIABLE_DECLARATION_WRAPPER"))
+		{
 			return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_WRAPPER;
+		}
 		else if (name.equals("CONSTANT_NAME"))
+		{
 			return PerlStubElementTypes.PERL_CONSTANT;
+		}
 
 		else if (name.equals("USE_STATEMENT"))
+		{
 			return PerlStubElementTypes.PERL_USE_STATEMENT;
+		}
 		else if (name.equals("NO_STATEMENT"))
+		{
 			return PerlStubElementTypes.PERL_NO_STATEMENT;
+		}
 		else if (name.equals("DO_EXPR"))
+		{
 			return PerlStubElementTypes.PERL_DO_EXPR;
+		}
 		else if (name.equals("REQUIRE_EXPR"))
+		{
 			return PerlStubElementTypes.PERL_REQUIRE_EXPR;
+		}
 
 		// below is auto-generated from PerlElementTypes
 		if (name.equals("ADD_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -156,8 +203,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAddExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("AND_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -167,8 +216,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAndExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ANON_ARRAY"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -178,8 +229,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAnonArrayImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ANON_ARRAY_ELEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -189,8 +242,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAnonArrayElementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ANON_HASH"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -200,8 +255,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAnonHashImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_ARRAY_SLICE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -211,8 +268,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayArraySliceImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -222,8 +281,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_HASH_SLICE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -233,8 +294,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayHashSliceImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_INDEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -244,8 +307,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayIndexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_INDEX_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -255,8 +320,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayIndexVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ARRAY_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -266,8 +333,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlArrayVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ASSIGN_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -277,8 +346,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAssignExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("ATTRIBUTE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -288,8 +359,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlAttributeImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("BITWISE_AND_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -299,8 +372,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlBitwiseAndExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("BITWISE_OR_XOR_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -310,8 +385,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlBitwiseOrXorExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -321,8 +398,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CALL_ARGUMENTS"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -332,8 +411,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCallArgumentsImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CODE_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -343,8 +424,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCodeCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CODE_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -354,8 +437,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCodeVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("COMMA_SEQUENCE_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -365,8 +450,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCommaSequenceExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("COMPARE_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -376,8 +463,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCompareExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("COMPILE_REGEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -387,8 +476,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlCompileRegexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONDITIONAL_BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -398,8 +489,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConditionalBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONDITIONAL_BLOCK_WHILE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -409,8 +502,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConditionalBlockWhileImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONDITION_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -420,8 +515,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConditionStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONDITION_STATEMENT_WHILE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -431,8 +528,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConditionStatementWhileImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONSTANTS_BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -442,8 +541,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConstantsBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONSTANT_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -453,8 +554,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConstantDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONSTANT_NAME"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -464,8 +567,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlConstantNameImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("CONTINUE_BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -475,8 +580,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlContinueBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("DEFAULT_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -486,8 +593,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlDefaultCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("DEREF_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -497,8 +606,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlDerefExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("DO_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -508,8 +619,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlDoExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("EQUAL_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -519,8 +632,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlEqualExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("EVAL_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -530,8 +645,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlEvalExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -541,8 +658,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FILE_READ_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -552,8 +671,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFileReadExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FILE_READ_FORCED_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -563,8 +684,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFileReadForcedExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FLIPFLOP_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -574,8 +697,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFlipflopExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOREACH_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -585,8 +710,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForeachCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOREACH_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -596,8 +723,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForeachStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FORMAT_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -607,8 +736,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFormatDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -618,8 +749,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_ITERATOR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -629,8 +762,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForIteratorImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_ITERATOR_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -640,8 +775,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForIteratorStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_LIST_EPXR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -651,8 +788,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForListEpxrImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_LIST_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -662,8 +801,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForListStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FOR_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -673,8 +814,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlForStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FUNC_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -684,8 +827,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFuncDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("FUNC_SIGNATURE_CONTENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -695,8 +840,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlFuncSignatureContentImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GIVEN_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -706,8 +853,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGivenCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GLOB_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -717,8 +866,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGlobCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GLOB_SLOT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -728,8 +879,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGlobSlotImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GLOB_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -739,8 +892,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGlobVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GOTO_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -750,8 +905,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGotoExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("GREP_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -761,8 +918,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlGrepExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("HASH_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -772,8 +931,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlHashCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("HASH_INDEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -783,8 +944,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlHashIndexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("HASH_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -794,8 +957,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlHashVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("HEREDOC_OPENER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -805,8 +970,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlHeredocOpenerImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("IF_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -816,8 +983,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlIfCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("IF_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -827,8 +996,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlIfStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("LABEL_DECLARATION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -838,8 +1009,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlLabelDeclarationImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("LAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -849,8 +1022,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlLastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("LP_AND_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -860,8 +1035,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlLpAndExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("LP_NOT_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -871,8 +1048,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlLpNotExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("LP_OR_XOR_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -882,8 +1061,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlLpOrXorExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("MAP_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -893,8 +1074,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMapExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("MATCH_REGEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -904,8 +1087,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMatchRegexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("METHOD"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -915,8 +1100,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMethodImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("METHOD_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -926,8 +1113,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMethodDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("METHOD_SIGNATURE_CONTENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -937,8 +1126,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMethodSignatureContentImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("METHOD_SIGNATURE_INVOCANT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -948,8 +1139,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMethodSignatureInvocantImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("MUL_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -959,8 +1152,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlMulExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMED_BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -970,8 +1165,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamedBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMED_LIST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -981,8 +1178,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamedListExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMED_UNARY_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -992,8 +1191,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamedUnaryExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMESPACE_CONTENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1003,8 +1204,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamespaceContentImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMESPACE_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1014,8 +1217,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamespaceDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NAMESPACE_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1025,8 +1230,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNamespaceExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NESTED_CALL"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1036,8 +1243,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNestedCallImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NESTED_CALL_ARGUMENTS"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1047,8 +1256,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNestedCallArgumentsImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NEXT_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1058,8 +1269,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNextExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NO_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1069,8 +1282,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNoStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NUMBER_CONSTANT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1080,8 +1295,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNumberConstantImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("NYI_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1091,8 +1308,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlNyiStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("OR_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1102,8 +1321,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlOrExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PARENTHESISED_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1113,8 +1334,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlParenthesisedExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PERL_HANDLE_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1124,8 +1347,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPerlHandleExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PERL_REGEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1135,8 +1360,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPerlRegexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PERL_REGEX_EX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1146,8 +1373,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPerlRegexExImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PERL_REGEX_MODIFIERS"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1157,8 +1386,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPerlRegexModifiersImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("POW_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1168,8 +1399,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPowExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PREFIX_MINUS_AS_STRING_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1179,8 +1412,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrefixMinusAsStringExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PREFIX_UNARY_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1190,8 +1425,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrefixUnaryExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PREF_MM_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1201,8 +1438,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrefMmExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PREF_PP_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1212,8 +1451,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrefPpExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PRINT_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1223,8 +1464,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrintExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("PRINT_HANDLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1234,8 +1477,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlPrintHandleImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("READ_HANDLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1245,8 +1490,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlReadHandleImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("REDO_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1256,8 +1503,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlRedoExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("REF_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1267,8 +1516,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlRefExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("REGEX_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1278,8 +1529,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlRegexExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("REPLACEMENT_REGEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1289,8 +1542,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlReplacementRegexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("REQUIRE_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1300,8 +1555,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlRequireExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("RETURN_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1311,8 +1568,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlReturnExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_ARRAY_ELEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1322,8 +1581,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarArrayElementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_CALL"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1333,8 +1594,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarCallImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1344,8 +1607,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_HASH_ELEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1355,8 +1620,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarHashElementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_INDEX_CAST_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1366,8 +1633,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarIndexCastExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SCALAR_VARIABLE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1377,8 +1646,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlScalarVariableImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SHIFT_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1388,8 +1659,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlShiftExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SORT_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1399,8 +1672,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSortExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1410,8 +1685,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1421,8 +1698,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STRING_BARE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1432,8 +1711,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStringBareImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STRING_DQ"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1443,8 +1724,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStringDqImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STRING_LIST"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1454,8 +1737,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStringListImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STRING_SQ"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1465,8 +1750,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStringSqImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("STRING_XQ"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1476,8 +1763,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlStringXqImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_CALL_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1487,8 +1776,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubCallExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_DECLARATION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1498,8 +1789,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubDeclarationImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_DEFINITION"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1509,8 +1802,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubDefinitionImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1520,8 +1815,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_SIGNATURE_CONTENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1531,8 +1828,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubSignatureContentImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUB_SIGNATURE_ELEMENT_IGNORE"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1542,8 +1841,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSubSignatureElementIgnoreImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("SUFF_PP_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1553,8 +1854,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlSuffPpExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TAG_SCALAR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1564,8 +1867,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTagScalarImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TERM_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1575,8 +1880,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTermExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TRENAR_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1586,8 +1893,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTrenarExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TR_MODIFIERS"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1597,8 +1906,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTrModifiersImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TR_REGEX"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1608,8 +1919,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTrRegexImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TR_REPLACEMENTLIST"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1619,8 +1932,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTrReplacementlistImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("TR_SEARCHLIST"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1630,8 +1945,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlTrSearchlistImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNCONDITIONAL_BLOCK"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1641,8 +1958,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUnconditionalBlockImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNDEF_EXPR"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1652,8 +1971,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUndefExprImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNLESS_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1663,8 +1984,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUnlessCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNLESS_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1674,8 +1997,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUnlessStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNTIL_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1685,8 +2010,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUntilCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("UNTIL_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1696,8 +2023,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUntilStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("USE_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1707,8 +2036,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUseStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("USE_STATEMENT_CONSTANT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1718,8 +2049,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUseStatementConstantImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("USE_VARS_STATEMENT"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1729,8 +2062,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlUseVarsStatementImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("VARIABLE_DECLARATION_GLOBAL"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1740,8 +2075,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlVariableDeclarationGlobalImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("VARIABLE_DECLARATION_LEXICAL"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1751,8 +2088,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlVariableDeclarationLexicalImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("VARIABLE_DECLARATION_LOCAL"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1762,8 +2101,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlVariableDeclarationLocalImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("VARIABLE_DECLARATION_WRAPPER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1773,8 +2114,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlVariableDeclarationWrapperImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("WHEN_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1784,8 +2127,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlWhenCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("WHEN_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1795,8 +2140,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlWhenStatementModifierImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("WHILE_COMPOUND"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1806,8 +2153,10 @@ public class PerlElementTypeFactory
 					return new PsiPerlWhileCompoundImpl(node);
 				}
 			};
+		}
 
 		if (name.equals("WHILE_STATEMENT_MODIFIER"))
+		{
 			return new PerlElementTypeEx(name)
 			{
 				@NotNull
@@ -1817,6 +2166,7 @@ public class PerlElementTypeFactory
 					return new PsiPerlWhileStatementModifierImpl(node);
 				}
 			};
+		}
 
 		return new PerlElementType(name);
 	}

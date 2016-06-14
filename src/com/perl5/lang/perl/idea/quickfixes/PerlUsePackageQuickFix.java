@@ -82,7 +82,10 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 
 					while ((nextStatement = nextStatement.getNextSibling()) != null
 							&& PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(nextStatement.getNode().getElementType())
-							) ;
+							)
+					{
+						;
+					}
 
 					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())    // found more use pragma/version
 					{

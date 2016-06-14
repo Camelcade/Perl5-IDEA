@@ -233,7 +233,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 			{
 				ResultString = regexMatcher.group(1);
 			}
-		} catch (PatternSyntaxException ex)
+		}
+		catch (PatternSyntaxException ex)
 		{
 			// Syntax error in the regular expression
 		}
@@ -349,7 +350,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 				response += line;
 			}
 
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -390,7 +392,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 				{
 					resultString = regexMatcher.group(1);
 				}
-			} catch (PatternSyntaxException ex)
+			}
+			catch (PatternSyntaxException ex)
 			{
 				// Syntax error in the regular expression
 			}
@@ -401,7 +404,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 				return resultString;
 			}
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			LOGGER.info("Query Failed", e);
 		}
@@ -446,7 +450,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter
 
 			LOGGER.debug(response);
 
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			LOGGER.info("Command Failed", e);
 		}

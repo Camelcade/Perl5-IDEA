@@ -46,7 +46,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 		try
 		{
 			parseDoubleVersion(version);
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 		}
 	}
@@ -72,14 +73,18 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 				if (!versionChunks.isEmpty())
 				{
 					if (versionChunks.get(0).length() > 3)
+					{
 						throw new Exception();
+					}
 
 					major = Integer.parseInt(versionChunks.remove(0));
 
 					if (!versionChunks.isEmpty())
 					{
 						if (versionChunks.get(0).length() > 3)
+						{
 							throw new Exception();
+						}
 
 						minor = Integer.parseInt(versionChunks.remove(0));
 
@@ -87,10 +92,16 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 						{
 							extraChunks = new ArrayList<Integer>();
 							for (String chunk : versionChunks)
+							{
 								if (chunk.length() > 3)
+								{
 									throw new Exception();
+								}
 								else
+								{
 									extraChunks.add(Integer.parseInt(chunk));
+								}
+							}
 						}
 					}
 				}
@@ -103,7 +114,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 			}
 			isStrict = strict.matcher(versionString).matches();
 			isValid = true;
-		} catch (Exception e) // catching numberformat exception
+		}
+		catch (Exception e) // catching numberformat exception
 		{
 			isValid = isStrict = isAlpha = false;
 			revision = major = minor = 0;
@@ -127,7 +139,9 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 			}
 		}
 		else
+		{
 			throw new Exception("Version is too big");
+		}
 	}
 
 	public double getDoubleVersion()
@@ -152,13 +166,19 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion>
 		List<String> result = new ArrayList<String>(Arrays.asList(Integer.toString(revision)));
 
 		if (major > 0 || minor > 0 || !extraChunks.isEmpty())
+		{
 			result.add(Integer.toString(major));
+		}
 
 		if (minor > 0 || !extraChunks.isEmpty())
+		{
 			result.add(Integer.toString(minor));
+		}
 
 		for (Integer chunk : extraChunks)
+		{
 			result.add(Integer.toString(chunk));
+		}
 
 		return "v" + StringUtils.join(result, ".");
 	}

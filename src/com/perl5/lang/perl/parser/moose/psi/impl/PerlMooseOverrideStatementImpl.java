@@ -121,7 +121,9 @@ public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<Pe
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		if (name.isEmpty())
+		{
 			throw new IncorrectOperationException("You can't set an empty method name");
+		}
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof PerlString)

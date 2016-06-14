@@ -45,7 +45,9 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 		{
 			PsiElement nameIdentifier = ((PerlNamespaceDefinition) element).getNameIdentifier();
 			if (nameIdentifier == null)
+			{
 				nameIdentifier = element;
+			}
 
 			List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions();
 			if (!parentNamespaces.isEmpty())
@@ -79,7 +81,9 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
 				final String subName = ((PerlSubDefinitionBase) element).getSubName();
 				PsiElement nameIdentifier = ((PerlSubDefinitionBase) element).getNameIdentifier();
 				if (nameIdentifier == null)
+				{
 					nameIdentifier = element;
+				}
 
 				if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
 				{

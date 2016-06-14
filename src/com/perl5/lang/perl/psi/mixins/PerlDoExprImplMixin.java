@@ -46,7 +46,9 @@ public abstract class PerlDoExprImplMixin extends PerlStubBasedPsiElementBase<Pe
 	{
 		PerlRuntimeImportStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getImportPath();
+		}
 
 		return findImportPath();
 	}
@@ -56,7 +58,9 @@ public abstract class PerlDoExprImplMixin extends PerlStubBasedPsiElementBase<Pe
 	{
 		PsiElement lastChild = getLastChild();
 		if (lastChild instanceof PerlString)    // seems we've got require "...";
+		{
 			return ((PerlString) lastChild).getStringContent();
+		}
 		return null;
 	}
 }

@@ -33,7 +33,9 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
 	public PerlNamespaceElement handleContentChange(@NotNull PerlNamespaceElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
 		if (newContent.isEmpty())
+		{
 			throw new IncorrectOperationException("You can't set empty package name");
+		}
 
 		String currentName = element.getText();
 
@@ -41,9 +43,13 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
 		boolean newTail = newContent.endsWith(PerlPackageUtil.PACKAGE_SEPARATOR) || newContent.endsWith("'");
 
 		if (newTail && !currentTail)
+		{
 			newContent = PerlPackageUtil.PACKAGE_SEPARATOR_TAIL_RE.matcher(newContent).replaceFirst("");
+		}
 		else if (!newTail && currentTail)
+		{
 			newContent = newContent + PerlPackageUtil.PACKAGE_SEPARATOR;
+		}
 
 		return (PerlNamespaceElement) ((PerlNamespaceElementImpl) element).replaceWithText(newContent);
 	}

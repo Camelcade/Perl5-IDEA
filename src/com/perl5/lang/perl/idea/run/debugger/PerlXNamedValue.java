@@ -85,7 +85,6 @@ public class PerlXNamedValue extends XNamedValue
 	}
 
 
-
 	@Override
 	public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place)
 	{
@@ -173,29 +172,39 @@ public class PerlXNamedValue extends XNamedValue
 		String name = myPerlValueDescriptor.getName();
 
 		if (StringUtil.isEmpty(name) || name.length() < 2)
+		{
 			return false;
+		}
 
 		final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
 		if (variableType == null || variableType == PerlVariableType.CODE)
+		{
 			return false;
+		}
 
 		final String variableName = name.substring(1);
 
 		final XSourcePosition sourcePosition = myStackFrame.getSourcePosition();
 		if (sourcePosition == null)
+		{
 			return false;
+		}
 
 		final Project project = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugSession().getProject();
 		final VirtualFile virtualFile = sourcePosition.getFile();
 		PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
 
 		if (!(psiFile instanceof PerlFileImpl))
+		{
 			return false;
+		}
 
 		PsiElement element = psiFile.findElementAt(sourcePosition.getOffset());
 
 		if (element == null)
+		{
 			return false;
+		}
 
 		if (navigatable != null)
 		{
@@ -204,7 +213,9 @@ public class PerlXNamedValue extends XNamedValue
 
 			PerlVariableDeclarationWrapper result = variableProcessor.getResult();
 			if (result == null)
+			{
 				return false;
+			}
 
 			navigatable.setSourcePosition(XSourcePositionImpl.createByElement(result));
 		}
@@ -212,7 +223,9 @@ public class PerlXNamedValue extends XNamedValue
 		{
 			final Document document = psiFile.getViewProvider().getDocument();
 			if (document == null)
+			{
 				return false;
+			}
 
 			final boolean[] found = new boolean[]{false};
 

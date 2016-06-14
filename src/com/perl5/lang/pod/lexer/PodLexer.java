@@ -241,7 +241,9 @@ public class PodLexer extends PodLexerGenerated
 	protected IElementType parseCloseAngle()
 	{
 		if (myOpenedAngles.isEmpty())
+		{
 			return POD_SYMBOL;
+		}
 
 		int bufferEnd = getBufferEnd();
 		int tokenStart = getTokenStart();

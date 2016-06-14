@@ -59,7 +59,9 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
 	protected PsiFile createFile(@NotNull Language lang)
 	{
 		if (lang != PerlLanguage.INSTANCE && lang != PodLanguage.INSTANCE)
+		{
 			return null;
+		}
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 		if (parserDefinition != null)

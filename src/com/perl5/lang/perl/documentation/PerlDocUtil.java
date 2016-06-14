@@ -321,7 +321,9 @@ public class PerlDocUtil implements PerlElementTypes
 	public static String renderElement(PodCompositeElement element)
 	{
 		if (element == null)
+		{
 			return null;
+		}
 
 		PodTitledSection podSection = null;
 
@@ -361,7 +363,9 @@ public class PerlDocUtil implements PerlElementTypes
 				PsiElement nextSibling = lastSection.getNextSibling();
 
 				if (nextSibling == null)
+				{
 					break;
+				}
 				hasContent = nextSibling instanceof PodSection && ((PodSection) nextSibling).hasContent();
 
 				lastSection = nextSibling;

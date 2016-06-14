@@ -166,9 +166,13 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public PerlMro getMro()
 	{
 		if (getMroType() == PerlMroType.DFS)
+		{
 			return PerlMroDfs.INSTANCE;
+		}
 		else
+		{
 			return PerlMroC3.INSTANCE;
+		}
 	}
 
 	@Override
@@ -287,7 +291,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 //				System.err.println("Collecting from psi for " + virtualFile);
 				PsiFile targetPsiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
 				if (targetPsiFile != null)
+				{
 					collectRequiresFromPsi(targetPsiFile, includedVirtualFiles);
+				}
 			}
 		}
 	}
@@ -381,7 +387,9 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 			int lineNumber = document.getLineNumber(element.getTextRange().getEndOffset());
 
 			if (isNewLineFobiddenAtLine.containsKey(lineNumber))
+			{
 				return isNewLineFobiddenAtLine.get(lineNumber);
+			}
 
 			int lineEndOffset = document.getLineEndOffset(lineNumber);
 

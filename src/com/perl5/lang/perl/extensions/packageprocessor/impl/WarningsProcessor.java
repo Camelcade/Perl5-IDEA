@@ -45,7 +45,9 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
 		OPTIONS.put("FATAL", "FATALITY!");
 
 		for (Map.Entry<String, PerlWarningTreeLeaf> option : PerlWarningTree.LEAF_OPTIONS.entrySet())
+		{
 			OPTIONS.put(option.getKey(), option.getValue().getMinVersion().getStrictDottedVersion());
+		}
 	}
 
 	static
@@ -54,7 +56,9 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
 		{
 			List<String> subElements = new ArrayList<String>();
 			for (PerlWarningTreeLeaf leaf : option.getValue().collectChildLeafs())
+			{
 				subElements.add(leaf.getStringIdentifier() + "(" + leaf.getMinVersion().getStrictDottedVersion() + ")");
+			}
 
 			OPTIONS_BUNDLES.put(option.getKey(),
 					option.getValue().getMinVersion().getStrictDottedVersion()

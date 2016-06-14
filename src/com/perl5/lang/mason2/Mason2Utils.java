@@ -136,7 +136,9 @@ public class Mason2Utils
 	public static void reindexProjectRoots(Project project, List<String> rootsToReindex)
 	{
 		if (rootsToReindex.isEmpty())
+		{
 			return;
+		}
 
 		PsiDocumentManager.getInstance(project).commitAllDocuments();
 

@@ -169,7 +169,9 @@ public class PerlRunUtil
 		{
 			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
 			if (perlIndex > 0)
+			{
 				return perlPathLines.get(0).substring(0, perlIndex);
+			}
 
 		}
 		return null;

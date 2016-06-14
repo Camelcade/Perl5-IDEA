@@ -186,7 +186,9 @@ public class PerlPsiUtil
 		while (true)
 		{
 			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace))
+			{
 				break;
+			}
 			result = result.getNextSibling();
 		}
 		return result;
@@ -214,7 +216,9 @@ public class PerlPsiUtil
 		while (true)
 		{
 			if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace || result.getNode().getElementType() == PerlElementTypes.POD))
+			{
 				break;
+			}
 			result = result.getPrevSibling();
 		}
 		return result;
@@ -244,13 +248,19 @@ public class PerlPsiUtil
 		while (true)
 		{
 			if (currentStubElement == null)
+			{
 				return null;
+			}
 
 			if (stubClass.isInstance(currentStubElement))
+			{
 				return currentStubElement;
+			}
 
 			if (currentStubElement instanceof PsiFileStub)
+			{
 				return null;
+			}
 
 			currentStubElement = currentStubElement.getParentStub();
 		}
@@ -282,7 +292,9 @@ public class PerlPsiUtil
 							public boolean process(Stub stub)
 							{
 								if (stubClass.isInstance(stub))
+								{
 									result.add(((StubBase) stub).getPsi());
+								}
 
 								return true;
 							}
@@ -301,7 +313,9 @@ public class PerlPsiUtil
 					public boolean process(PsiElement element)
 					{
 						if (psiClass.isInstance(element))
+						{
 							result.add(element);
+						}
 						return true;
 					}
 				},
@@ -317,17 +331,23 @@ public class PerlPsiUtil
 	)
 	{
 		if (stub == null || processor == null)
+		{
 			return false;
+		}
 
 		for (Stub child : stub.getChildrenStubs())
 		{
 			if (!processor.process(child))
+			{
 				return false;
+			}
 
 			if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter sublcasses
 			{
 				if (!processElementsFromStubs(child, processor, avoidClass))
+				{
 					return false;
+				}
 			}
 		}
 		return true;
@@ -341,17 +361,23 @@ public class PerlPsiUtil
 	)
 	{
 		if (element == null || processor == null)
+		{
 			return false;
+		}
 
 		for (PsiElement child : element.getChildren())
 		{
 			if (!processor.process(child))
+			{
 				return false;
+			}
 
 			if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter subclasses
 			{
 				if (!processElementsFromPsi(child, processor, avoidClass))
+				{
 					return false;
+				}
 			}
 		}
 		return true;
@@ -366,10 +392,15 @@ public class PerlPsiUtil
 
 	public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor)
 	{
-		if (element == null || element instanceof PsiFile) return false;
+		if (element == null || element instanceof PsiFile)
+		{
+			return false;
+		}
 
 		if (!processor.process(element))
+		{
 			return false;
+		}
 
 		PsiElement run = element.getNextSibling();
 
@@ -452,7 +483,9 @@ public class PerlPsiUtil
 			if (prevElement instanceof PerlLabelDeclaration)
 			{
 				if (!processor.process((PerlLabelDeclaration) prevElement))
+				{
 					return;
+				}
 			}
 		}
 		processNextRedoLastLabelDeclarations(element.getParent(), processor);
@@ -477,7 +510,9 @@ public class PerlPsiUtil
 			if (run instanceof PerlLabelDeclaration)
 			{
 				if (!processor.process((PerlLabelDeclaration) run))
+				{
 					return;
+				}
 			}
 			run = run.getNextSibling();
 		}
@@ -501,13 +536,18 @@ public class PerlPsiUtil
 
 	public static boolean processElementsInRange(PsiElement element, @NotNull TextRange range, @NotNull final PsiElementProcessor<PsiElement> processor)
 	{
-		if (element == null) return true;
+		if (element == null)
+		{
+			return true;
+		}
 
 		TextRange elementRange = element.getNode().getTextRange();
 		if (range.contains(elementRange))
 		{
 			if (!processor.execute(element))
+			{
 				return false;
+			}
 		}
 		if (range.intersects(elementRange))
 		{
@@ -515,7 +555,9 @@ public class PerlPsiUtil
 			while (run != null)
 			{
 				if (!processElementsInRange(run, range, processor))
+				{
 					return false;
+				}
 				run = run.getNextSibling();
 			}
 		}
@@ -554,7 +596,7 @@ public class PerlPsiUtil
 			}
 		});
 		//noinspection unchecked
-		return (T)result[0];
+		return (T) result[0];
 	}
 
 	@Nullable
@@ -562,7 +604,7 @@ public class PerlPsiUtil
 	{
 		PerlAnnotation eolAnnotation = getEolAnnotation(element);
 		//noinspection unchecked
-		return annotationClass.isInstance(eolAnnotation) ? (T)eolAnnotation: null;
+		return annotationClass.isInstance(eolAnnotation) ? (T) eolAnnotation : null;
 	}
 
 
@@ -574,12 +616,12 @@ public class PerlPsiUtil
 		final PsiFile file = element.getContainingFile();
 		final Document document = manager.getDocument(file);
 
-		if( document != null )
+		if (document != null)
 		{
 			int elementEndOffset = element.getTextRange().getEndOffset();
 			int elementLastLine = document.getLineNumber(elementEndOffset);
 			int lineEndOffset = document.getLineEndOffset(elementLastLine);
-			if( lineEndOffset > 0 )
+			if (lineEndOffset > 0)
 			{
 				PsiElement lastLineElement = file.findElementAt(lineEndOffset - 1);
 				if (lastLineElement != null)
@@ -592,7 +634,6 @@ public class PerlPsiUtil
 	}
 
 
-
 	public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor)
 	{
 		PsiElement run = element.getPrevSibling();
@@ -603,7 +644,9 @@ public class PerlPsiUtil
 			while (true)
 			{
 				if (run instanceof PsiFile)
+				{
 					return;
+				}
 
 				PsiElement parent = run.getParent();
 				if (parent != null && parent.getTextOffset() == run.getTextOffset())
@@ -627,7 +670,9 @@ public class PerlPsiUtil
 				if (annotation != null)
 				{
 					if (!annotationProcessor.process(annotation))
+					{
 						return;
+					}
 				}
 			}
 			else if (!(run instanceof PsiComment || run instanceof PsiWhiteSpace))

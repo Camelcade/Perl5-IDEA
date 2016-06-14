@@ -37,13 +37,17 @@ public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlEl
 		int caretOffset = editor.getCaretModel().getOffset();
 		PsiElement targetElement = context.getFile().findElementAt(caretOffset);
 		if (targetElement != null && targetElement.getNode().getElementType() == LEFT_PAREN)
+		{
 			return;
+		}
 
 		PsiElement subDefitnition = item.getPsiElement();
 		EditorModificationUtil.insertStringAtCaret(editor, "()");
 
 		// todo we need hint with prototype here, but prototypes handling NYI
 		if (!(subDefitnition instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) subDefitnition).getSubArgumentsList().isEmpty()))
+		{
 			editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
+		}
 	}
 }

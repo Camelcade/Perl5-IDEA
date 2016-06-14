@@ -47,7 +47,9 @@ public class PerlNamespaceDefinitionResolver implements ResolveCache.PolyVariant
 		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, perlNamespaceReference.getCanonicalName()))
 		{
 			if (!parent.isEquivalentTo(namespaceDefinition))
+			{
 				result.add(new PsiElementResolveResult(namespaceDefinition));
+			}
 		}
 
 		return result.toArray(new ResolveResult[result.size()]);

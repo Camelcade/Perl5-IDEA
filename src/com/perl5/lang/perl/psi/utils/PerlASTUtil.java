@@ -30,8 +30,12 @@ public class PerlASTUtil
 		TokenSet tokenSet = TokenSet.create(tokenTypes);
 
 		while ((node = node.getTreeParent()) != null)
+		{
 			if (tokenSet.contains(node.getElementType()))
+			{
 				return node.getElementType();
+			}
+		}
 
 		return null;
 	}

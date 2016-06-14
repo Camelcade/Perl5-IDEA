@@ -48,7 +48,9 @@ public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock
 	protected boolean isNewLineForbidden(PerlFormattingBlock block)
 	{
 		if (super.isNewLineForbidden(block))
+		{
 			return true;
+		}
 
 		PsiElement element = block.getNode().getPsi();
 		PsiFile file = element.getContainingFile();

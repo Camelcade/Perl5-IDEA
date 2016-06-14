@@ -90,7 +90,9 @@ public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDef
 	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
 	{
 		if (name.isEmpty())
+		{
 			throw new IncorrectOperationException("You can't set an empty name");
+		}
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof LeafPsiElement)

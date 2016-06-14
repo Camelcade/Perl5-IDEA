@@ -45,7 +45,9 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
 	{
 		// @todo handle this
 		if (root instanceof OuterLanguageElementImpl)
+		{
 			return FoldingDescriptor.EMPTY;
+		}
 
 		FoldingRegionsCollector collector = new FoldingRegionsCollector(document);
 		root.accept(collector);

@@ -35,12 +35,21 @@ public class PerlPreFormatProcessor implements PreFormatProcessor
 	public TextRange process(@NotNull ASTNode element, @NotNull TextRange range)
 	{
 		PsiElement psiElement = element.getPsi();
-		if (psiElement == null) return range;
+		if (psiElement == null)
+		{
+			return range;
+		}
 
-		if (!canProcess(psiElement, range)) return range;
+		if (!canProcess(psiElement, range))
+		{
+			return range;
+		}
 
 		PsiFile file = psiElement.isValid() ? psiElement.getContainingFile() : null;
-		if (file == null) return range;
+		if (file == null)
+		{
+			return range;
+		}
 
 		Project project = psiElement.getProject();
 

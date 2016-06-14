@@ -41,7 +41,9 @@ public class PerlLabelResolver implements ResolveCache.AbstractResolver<PerlLabe
 		PsiElement parent = label == null ? null : label.getParent();
 
 		if (label == null || parent instanceof PerlLabelDeclaration)
+		{
 			return null;
+		}
 
 		LabelSeeker processor = new LabelSeeker(label.getText());
 

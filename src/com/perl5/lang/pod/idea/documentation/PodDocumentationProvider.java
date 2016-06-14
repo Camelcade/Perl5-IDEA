@@ -43,7 +43,9 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
 	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
 	{
 		if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE)
+		{
 			return null;
+		}
 
 		IElementType elementType = contextElement.getNode().getElementType();
 

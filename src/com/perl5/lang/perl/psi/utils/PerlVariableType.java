@@ -33,15 +33,25 @@ public enum PerlVariableType
 	public static PerlVariableType bySigil(char sigil)
 	{
 		if (sigil == '$')
+		{
 			return SCALAR;
+		}
 		else if (sigil == '@')
+		{
 			return ARRAY;
+		}
 		else if (sigil == '%')
+		{
 			return HASH;
+		}
 		else if (sigil == '*')
+		{
 			return GLOB;
+		}
 		else if (sigil == '&')
+		{
 			return CODE;
+		}
 
 		return null;
 	}
@@ -49,15 +59,25 @@ public enum PerlVariableType
 	public char getSigil()
 	{
 		if (this == SCALAR)
+		{
 			return '$';
+		}
 		else if (this == ARRAY)
+		{
 			return '@';
+		}
 		else if (this == HASH)
+		{
 			return '%';
+		}
 		else if (this == GLOB)
+		{
 			return '*';
+		}
 		else if (this == CODE)
+		{
 			return '&';
+		}
 		return ' ';
 	}
 

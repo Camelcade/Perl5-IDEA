@@ -35,7 +35,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider
 	public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result)
 	{
 		if (element instanceof PerlHeredocOpener)
+		{
 			result.addAll(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+		}
 
 		// todo play with this
 		return SuggestedNameInfo.NULL_INFO;

@@ -68,7 +68,9 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		String namespace = getExplicitPackageName();
 
 		if (namespace == null)
+		{
 			namespace = getContextPackageName();
+		}
 
 		return namespace;
 	}
@@ -106,7 +108,9 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	{
 		PsiFile file = getContainingFile();
 		if (file instanceof PerlFileImpl)
+		{
 			return ((PerlFileImpl) file).getVariableType(this);
+		}
 		return getVariableTypeHeavy();
 	}
 
@@ -254,8 +258,12 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 
 				// checking global declarations with explicit types
 				for (PerlVariableDeclarationWrapper declaration : getGlobalDeclarations())
+				{
 					if (declaration.getDeclaredType() != null)
+					{
 						return declaration.getDeclaredType();
+					}
+				}
 			}
 		}
 
@@ -268,27 +276,37 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		PsiElement variableContainer = this.getParent();
 
 		if (this instanceof PsiPerlCodeVariable)
+		{
 			return PerlVariableType.SCALAR;
+		}
 		else if (
 				variableContainer instanceof PsiPerlScalarHashElement
 						|| variableContainer instanceof PsiPerlArrayHashSlice
 						|| this instanceof PsiPerlHashVariable
 				)
+		{
 			return PerlVariableType.HASH;
+		}
 		else if (
 				variableContainer instanceof PsiPerlArrayArraySlice
 						|| variableContainer instanceof PsiPerlScalarArrayElement
 						|| this instanceof PsiPerlArrayIndexVariable
 						|| this instanceof PsiPerlArrayVariable
 				)
+		{
 			return PerlVariableType.ARRAY;
+		}
 		else if (
 				variableContainer instanceof PsiPerlDerefExpr
 						|| this instanceof PsiPerlScalarVariable
 				)
+		{
 			return PerlVariableType.SCALAR;
+		}
 		else
+		{
 			throw new RuntimeException("Can't be: could not detect actual type of myVariable: " + getText());
+		}
 
 	}
 
@@ -297,10 +315,14 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	public boolean isBuiltIn()
 	{
 		if (getNamespaceElement() != null)
+		{
 			return false;
+		}
 
 		if (getVariableNameElement() == null)
+		{
 			return false;
+		}
 
 		PerlVariableType variableType = getActualType();
 
@@ -308,9 +330,13 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		String variableName = getVariableNameElement().getName();
 
 		if (variableType == PerlVariableType.SCALAR)
+		{
 			return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
+		}
 		if (variableType == PerlVariableType.ARRAY)
+		{
 			return PerlArrayUtil.BUILT_IN.contains(variableName);
+		}
 
 		return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
 	}
@@ -326,7 +352,9 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	{
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
 		if (variableNameElement != null)
+		{
 			return variableNameElement.getName();
+		}
 
 		return super.getName();
 	}
@@ -342,7 +370,9 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	public PerlVariableDeclarationWrapper getLexicalDeclaration()
 	{
 		if (getNamespaceElement() != null)
+		{
 			return null;
+		}
 
 		return PerlScopeUtil.getLexicalDeclaration(this);
 	}
@@ -358,20 +388,32 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		if (myType == PerlVariableType.SCALAR)
 		{
 			for (PerlVariableDeclarationWrapper variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName()))
+			{
 				if (!variable.equals(parent))
+				{
 					result.add(variable);
+				}
+			}
 		}
 		else if (myType == PerlVariableType.ARRAY)
 		{
 			for (PerlVariableDeclarationWrapper variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName()))
+			{
 				if (!variable.equals(parent))
+				{
 					result.add(variable);
+				}
+			}
 		}
 		else if (myType == PerlVariableType.HASH)
 		{
 			for (PerlVariableDeclarationWrapper variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName()))
+			{
 				if (!variable.equals(parent))
+				{
 					result.add(variable);
+				}
+			}
 		}
 
 		return result;
@@ -383,7 +425,9 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		List<PerlGlobVariable> result = new ArrayList<PerlGlobVariable>();
 
 		for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName()))
+		{
 			result.add(glob);
+		}
 
 		return result;
 	}

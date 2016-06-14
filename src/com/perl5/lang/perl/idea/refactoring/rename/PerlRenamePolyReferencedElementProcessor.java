@@ -118,7 +118,9 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 		PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
 
 		if (topLevelSuperMethod == subBase)
+		{
 			return subBase;
+		}
 
 		int dialogResult = Messages.showOkCancelDialog(
 				"This method overrides SUPER method: " + topLevelSuperMethod.getCanonicalName() + ".",

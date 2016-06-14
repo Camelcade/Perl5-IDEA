@@ -58,7 +58,9 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase
 	protected String getQualifiedName(PsiElement psiElement)
 	{
 		if (psiElement instanceof PerlNamedElement)
+		{
 			return ((PerlNamedElement) psiElement).getPresentableName();
+		}
 
 		return null;
 	}

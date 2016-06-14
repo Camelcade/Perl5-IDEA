@@ -62,15 +62,21 @@ public class PodLegacySectionLinkInspection extends LocalInspectionTool
 			private boolean isSectionLegacy(String text, TextRange sectionRange)
 			{
 				if (text == null)
+				{
 					return false;
+				}
 
 				int sectionStartOffset = sectionRange.getStartOffset();
 				if (sectionStartOffset == 0)
+				{
 					return true;
+				}
 
 				char prevChar = text.charAt(sectionStartOffset - 1);
 				if (sectionStartOffset == 1)
+				{
 					return prevChar != '/';
+				}
 
 				char prevPrevChar = text.charAt(sectionStartOffset - 2);
 

@@ -59,7 +59,9 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLM
 					else
 					{
 						if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null)
+						{
 							EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+						}
 					}
 				}
 			}

@@ -34,10 +34,14 @@ public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl
 	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
 	{
 		if (code == null)
+		{
 			return;
+		}
 
 		if (anchor.getLanguage() == Mason2TemplatingLanguage.INSTANCE)
+		{
 			code = "<%perl>\n" + code + "\n</%perl>\n";
+		}
 
 		super.insertCodeAfterElement(anchor, code, editor);
 	}

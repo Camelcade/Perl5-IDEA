@@ -48,7 +48,9 @@ public abstract class PerlMro
 	{
 		Collection<PsiElement> result = new ArrayList<PsiElement>();
 		if (packageName == null || subName == null)
+		{
 			return result;
+		}
 
 		Collection<String> linearISA = getLinearISA(project, packageName, isSuper);
 
@@ -57,11 +59,14 @@ public abstract class PerlMro
 			collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName);
 
 			if (!result.isEmpty())
+			{
 				break;
+			}
 		}
 
 
 		if (result.isEmpty())
+		{
 			for (String currentPackageName : linearISA)
 			{
 				if (!PerlPackageUtil.isUNIVERSAL(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD
@@ -69,9 +74,12 @@ public abstract class PerlMro
 					collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + "AUTOLOAD");
 
 					if (!result.isEmpty())
+					{
 						break;
+					}
 				}
 			}
+		}
 
 		return result;
 

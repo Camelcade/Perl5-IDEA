@@ -32,7 +32,9 @@ public class PerlHeredocTerminatorManipulator extends AbstractElementManipulator
 	public PerlHeredocTerminatorElement handleContentChange(@NotNull PerlHeredocTerminatorElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
 		if (newContent.isEmpty())
+		{
 			throw new IncorrectOperationException("You can't set heredoc terminator to the empty one");
+		}
 		return (PerlHeredocTerminatorElement) ((LeafPsiElement) element).replaceWithText(newContent);
 	}
 

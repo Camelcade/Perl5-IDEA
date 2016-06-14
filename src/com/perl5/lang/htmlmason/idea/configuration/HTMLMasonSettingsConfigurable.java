@@ -177,10 +177,14 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 		boolean extChanged = !extDiff.isEmpty();
 
 		if (rootsChanged || forceAll)
+		{
 			extDiff.addAll(mySettings.substitutedExtensions);
+		}
 
 		if (extChanged || forceAll)
+		{
 			rootsDiff.addAll(mySettings.componentRoots);
+		}
 
 		// collecting matchers
 		final List<FileNameMatcher> matchers = new ArrayList<FileNameMatcher>();

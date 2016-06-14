@@ -191,7 +191,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			}
 
 			if (!superArgs.isEmpty())
+			{
 				superArgs.remove(0);
+			}
 
 			if (!arguments.isEmpty() && !arguments.get(0).isEmpty())
 			{
@@ -292,7 +294,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
+		{
 			insertCodeAfterElement(anchor, code.toString(), editor);
+		}
 	}
 
 	@Override
@@ -306,7 +310,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
+		{
 			insertCodeAfterElement(anchor, code.toString(), editor);
+		}
 	}
 
 	@Override
@@ -321,7 +327,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 		}
 
 		if (code.length() > 0)
+		{
 			insertCodeAfterElement(anchor, code.toString(), editor);
+		}
 	}
 
 	@Override

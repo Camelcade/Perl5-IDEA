@@ -123,7 +123,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 	{
 		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
 		if (canonicalPackageName.equals(PerlPackageUtil.CORE_PACKAGE))
+		{
 			return PACKAGE_CORE_IDENTIFIER;
+		}
 		return PACKAGE_IDENTIFIER;
 	}
 

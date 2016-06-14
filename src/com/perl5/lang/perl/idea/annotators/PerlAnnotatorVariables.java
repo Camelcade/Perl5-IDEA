@@ -44,7 +44,9 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 
 		while (nextElement != null &&
 				(nextElement instanceof PsiWhiteSpace || nextElement instanceof PsiComment))
+		{
 			nextElement = nextElement.getNextSibling();
+		}
 
 		if (nextElement != null && nextElement.getNode().getElementType() == LEFT_BRACE)
 		{
@@ -60,54 +62,76 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
 		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_SCALAR,
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		}
 		else if (element instanceof PsiPerlScalarCastExpr || element instanceof PsiPerlScalarIndexCastExpr)
+		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
+		}
 		else if (element instanceof PsiPerlHashVariable)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_HASH,
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		}
 		else if (element instanceof PsiPerlHashCastExpr)
+		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_HASH);
+		}
 		else if (element instanceof PsiPerlArrayVariable)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_ARRAY,
 					((PerlVariable) element).isBuiltIn(),
 					((PerlVariable) element).isDeprecated()
 			);
+		}
 		else if (element instanceof PsiPerlArrayCastExpr)
+		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
+		}
 		else if (element instanceof PsiPerlGlobVariable)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_GLOB,
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
+		}
 		else if (element instanceof PsiPerlConstantName)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_CONSTANT,
 					false,
 					false);
+		}
 		else if (element instanceof PsiPerlGlobCastExpr)
+		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);
+		}
 		else if (element instanceof PsiPerlCodeVariable)
+		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
 					PerlSyntaxHighlighter.PERL_SUB,
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
+		}
 		else if (element instanceof PsiPerlCodeCastExpr)
+		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SUB);
+		}
 
 	}
 }

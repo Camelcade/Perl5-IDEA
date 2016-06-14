@@ -64,7 +64,8 @@ public class PerlStrictMask implements Cloneable
 		try
 		{
 			return (PerlStrictMask) super.clone();
-		} catch (CloneNotSupportedException e)
+		}
+		catch (CloneNotSupportedException e)
 		{
 			throw new RuntimeException(e.getMessage());
 		}

@@ -72,7 +72,9 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
 	{
 		String importPath = stub.getImportPath();
 		if (importPath == null)
+		{
 			importPath = "";
+		}
 
 		dataStream.writeName(importPath);
 	}
@@ -83,7 +85,9 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
 	{
 		String importPath = dataStream.readName().toString();
 		if (importPath.isEmpty())
+		{
 			importPath = null;
+		}
 		return new PerlRuntimeImportStubImpl(parentStub, this, importPath);
 	}
 

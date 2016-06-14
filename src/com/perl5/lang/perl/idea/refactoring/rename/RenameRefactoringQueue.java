@@ -40,16 +40,22 @@ public class RenameRefactoringQueue implements Runnable
 		if (element instanceof PsiNamedElement)
 		{
 			if (myRefactoring == null)
+			{
 				myRefactoring = RefactoringFactory.getInstance(myProject).createRename(element, newName);
+			}
 			else
+			{
 				myRefactoring.addElement(element, newName);
+			}
 		}
 	}
 
 	public void run()
 	{
 		if (myRefactoring != null)
+		{
 			myRefactoring.run();
+		}
 	}
 
 	public Project getProject()

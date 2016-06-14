@@ -83,7 +83,9 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	protected static boolean isHashIndexKey(PsiElement o)
 	{
 		if (!(o.getParent() instanceof PsiPerlHashIndex))
+		{
 			return false;
+		}
 		PsiElement prevSibling = o.getPrevSibling();
 		PsiElement nextSibling = o.getNextSibling();
 		return prevSibling != null && prevSibling.getNode().getElementType() == LEFT_BRACE &&
@@ -110,7 +112,8 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 					myDelta += myFormattingOperations.get(i).apply();
 				}
 
-			} finally
+			}
+			finally
 			{
 				manager.commitDocument(document);
 			}

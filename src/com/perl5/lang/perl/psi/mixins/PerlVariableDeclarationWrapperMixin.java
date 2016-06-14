@@ -86,7 +86,9 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	{
 		PerlVariableStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getVariableName();
+		}
 		return getVariable().getName();
 	}
 
@@ -117,7 +119,9 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	{
 		PerlVariableStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getDeclaredType();
+		}
 
 		// check explicit name in declaration
 		PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
@@ -139,7 +143,9 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	{
 		PerlVariableStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 		return getVariable().getPackageName();
 	}
 
@@ -148,7 +154,9 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	{
 		PerlVariableStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getActualType();
+		}
 		return getVariable().getActualType();
 	}
 
@@ -213,11 +221,17 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		PerlVariableType actualType = getActualType();
 
 		if (actualType == PerlVariableType.ARRAY)
+		{
 			return PerlIcons.ARRAY_GUTTER_ICON;
+		}
 		if (actualType == PerlVariableType.HASH)
+		{
 			return PerlIcons.HASH_GUTTER_ICON;
+		}
 		if (actualType == PerlVariableType.SCALAR)
+		{
 			return PerlIcons.SCALAR_GUTTER_ICON;
+		}
 
 		return super.getIcon(flags);
 	}

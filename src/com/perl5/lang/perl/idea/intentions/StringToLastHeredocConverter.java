@@ -47,9 +47,13 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 		assert stringElement instanceof PerlString;
 		char quoteSymbol = '"';
 		if (stringElement instanceof PsiPerlStringSq)
+		{
 			quoteSymbol = '\'';
+		}
 		else if (stringElement instanceof PsiPerlStringXq)
+		{
 			quoteSymbol = '`';
+		}
 
 		String contentText = ((PerlString) stringElement).getStringContent();
 		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
@@ -68,7 +72,9 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 			anchor = currentFile.findElementAt(newLineIndex);
 			// fixme we should check here if \n in unbreakable entity - regex, qw, string, something else...
 			if (anchor != null && (anchor.getParent() instanceof PerlString || anchor.getParent() instanceof PsiPerlStringList))
+			{
 				anchor = null;
+			}
 		}
 
 		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
@@ -105,7 +111,9 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
 		if (!element.isWritable())
+		{
 			return false;
+		}
 		PsiElement parent = element.getParent();
 		PsiElement grandParent = parent.getParent();
 		return !(grandParent instanceof PerlHeredocOpener) && (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);

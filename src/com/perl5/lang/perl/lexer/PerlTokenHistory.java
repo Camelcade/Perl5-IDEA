@@ -187,7 +187,9 @@ public class PerlTokenHistory implements PerlElementTypes
 		public String getTokenTextAsString()
 		{
 			if (myTokenString == null)
+			{
 				myTokenString = getTokenText().toString();
+			}
 			return myTokenString;
 		}
 

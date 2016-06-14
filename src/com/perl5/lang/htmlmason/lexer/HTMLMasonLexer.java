@@ -438,14 +438,19 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 					}
 
 					if (offset > startOffset)
+					{
 						pushPreparsedToken(startOffset, startOffset = offset, TokenType.WHITE_SPACE);
+					}
 
 					while (offset < bufferEnd && (Character.isLetterOrDigit(currentChar = buffer.charAt(offset)) || currentChar == '_' || currentChar == '-' || currentChar == '.'))
 					{
 						offset++;
 					}
 
-					if (offset > startOffset) pushPreparsedToken(startOffset, startOffset = offset, IDENTIFIER);
+					if (offset > startOffset)
+					{
+						pushPreparsedToken(startOffset, startOffset = offset, IDENTIFIER);
+					}
 
 					setCustomState(LEX_MASON_OPENING_TAG);
 				}

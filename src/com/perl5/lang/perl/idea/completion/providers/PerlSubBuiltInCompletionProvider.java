@@ -62,7 +62,9 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 		assert method instanceof PsiPerlMethod;
 
 		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
+		{
 			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
+		}
 	}
 
 }

@@ -72,7 +72,9 @@ public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumen
 	protected PsiFile createFile(@NotNull final Language lang)
 	{
 		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
+		{
 			return null;
+		}
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 

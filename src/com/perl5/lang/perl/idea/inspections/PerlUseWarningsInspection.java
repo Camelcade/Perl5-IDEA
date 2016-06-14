@@ -48,7 +48,9 @@ public class PerlUseWarningsInspection extends PerlInspection
 			public void visitFile(PsiFile file)
 			{
 				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
+				{
 					return;
+				}
 
 				FileType fileType = file.getFileType();
 				if (!(fileType instanceof PerlFileType) || !((PerlFileType) fileType).checkWarningsPragma())
@@ -57,8 +59,12 @@ public class PerlUseWarningsInspection extends PerlInspection
 				}
 
 				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
+				{
 					if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider)
+					{
 						return;
+					}
+				}
 				holder.registerProblem(
 						file,
 						"No warnings pragma found in the file",

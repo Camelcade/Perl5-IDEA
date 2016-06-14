@@ -38,6 +38,6 @@ public class PerlAnnotationInjectImpl extends PerlAnnotationImpl implements Perl
 	public String getLanguageMarker()
 	{
 		PsiElement childByType = findChildByType(PerlElementTypes.STRING_CONTENT);
-		return childByType == null ? null: childByType.getText();
+		return childByType == null ? null : childByType.getText();
 	}
 }

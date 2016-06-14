@@ -380,7 +380,8 @@ public class PodFormatterEMixin extends PodSectionMixin implements PodFormatterE
 				try
 				{
 					myText = "" + (Character.toChars(codePoint))[0];
-				} catch (IllegalArgumentException e)
+				}
+				catch (IllegalArgumentException e)
 				{
 					myText = "Incorrect codePoint " + myText;
 				}

@@ -160,7 +160,10 @@ public class CookieManager
 		String path = url.getPath();
 
 		Map domainStore = (Map) store.get(domain);
-		if (domainStore == null) return;
+		if (domainStore == null)
+		{
+			return;
+		}
 		StringBuffer cookieStringBuffer = new StringBuffer();
 
 		Iterator cookieNames = domainStore.keySet().iterator();
@@ -175,13 +178,17 @@ public class CookieManager
 				cookieStringBuffer.append(cookieName);
 				cookieStringBuffer.append("=");
 				cookieStringBuffer.append((String) cookie.get(cookieName));
-				if (cookieNames.hasNext()) cookieStringBuffer.append(SET_COOKIE_SEPARATOR);
+				if (cookieNames.hasNext())
+				{
+					cookieStringBuffer.append(SET_COOKIE_SEPARATOR);
+				}
 			}
 		}
 		try
 		{
 			conn.setRequestProperty(COOKIE, cookieStringBuffer.toString());
-		} catch (java.lang.IllegalStateException ise)
+		}
+		catch (java.lang.IllegalStateException ise)
 		{
 			IOException ioe = new IOException(
 					"Illegal State! Cookies cannot be set on a URLConnection that is already connected. Only call setCookies(java.net.URLConnection) AFTER calling java.net.URLConnection.connect().");
@@ -203,12 +210,16 @@ public class CookieManager
 
 	private boolean isNotExpired(String cookieExpires)
 	{
-		if (cookieExpires == null) return true;
+		if (cookieExpires == null)
+		{
+			return true;
+		}
 		Date now = new Date();
 		try
 		{
 			return (now.compareTo(dateFormat.parse(cookieExpires))) <= 0;
-		} catch (java.text.ParseException pe)
+		}
+		catch (java.text.ParseException pe)
 		{
 			pe.printStackTrace();
 			return false;

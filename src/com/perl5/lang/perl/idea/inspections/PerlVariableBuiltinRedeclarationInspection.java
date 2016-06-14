@@ -32,6 +32,8 @@ public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDecl
 		PerlVariable variable = variableDeclarationWrapper.getVariable();
 		PsiElement declarationContainer = variableDeclarationWrapper.getParent();
 		if (variable != null && variable.isBuiltIn() && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
+		{
 			registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
+		}
 	}
 }

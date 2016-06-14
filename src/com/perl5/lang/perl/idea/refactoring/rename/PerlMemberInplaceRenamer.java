@@ -46,7 +46,10 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer
 	protected boolean notSameFile(@Nullable VirtualFile file, @NotNull PsiFile containingFile)
 	{
 		final PsiFile currentFile = PsiDocumentManager.getInstance(myProject).getPsiFile(myEditor.getDocument());
-		if (currentFile == null) return true;
+		if (currentFile == null)
+		{
+			return true;
+		}
 		InjectedLanguageManager manager = InjectedLanguageManager.getInstance(containingFile.getProject());
 		PsiFile topLevelFile = manager.getTopLevelFile(containingFile);
 		PsiFile topLevelFile1 = manager.getTopLevelFile(currentFile);

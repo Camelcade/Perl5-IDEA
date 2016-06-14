@@ -75,7 +75,9 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	{
 		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
 		if (stub != null)
+		{
 			return stub.isFollowsBestPractice();
+		}
 
 		// fixme here should be some walking up visitor
 		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(this, PerlNamespaceContainer.class);
@@ -87,22 +89,30 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	protected PerlClassAccessorFollowBestPractice getFBPElement(PsiElement element, PsiElement beforeElement)
 	{
 		if (element == null)
+		{
 			return null;
+		}
 
 		PsiElement currentElement = element;
 		while (currentElement != null && currentElement.getTextOffset() < beforeElement.getTextOffset())
 		{
 			if (currentElement.getTextOffset() > beforeElement.getTextOffset())
+			{
 				return null;
+			}
 
 			if (currentElement instanceof PerlClassAccessorFollowBestPractice)
+			{
 				return (PerlClassAccessorFollowBestPractice) currentElement;
+			}
 
 			if (!(currentElement instanceof PerlNamespaceDefinition) && currentElement.getNode() instanceof CompositeElement)
 			{
 				PsiElement subResult = getFBPElement(currentElement.getFirstChild(), beforeElement);
 				if (subResult != null)
+				{
 					return (PerlClassAccessorFollowBestPractice) subResult;
+				}
 			}
 
 			currentElement = currentElement.getNextSibling();
@@ -116,7 +126,9 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	{
 		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
 		if (stub != null)
+		{
 			return stub.isAccessorReadable();
+		}
 		return READABLE_DECLARATORS.contains(getDeclaratorElementType());
 	}
 
@@ -125,7 +137,9 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	{
 		PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub) getStub();
 		if (stub != null)
+		{
 			return stub.isAccessorWritable();
+		}
 		return WRITABLE_DECLARATORS.contains(getDeclaratorElementType());
 	}
 
@@ -236,9 +250,13 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 		if (newElement != null)
 		{
 			if (isInherited)
+			{
 				newElement.setInherited();
+			}
 			if (isImported)
+			{
 				newElement.setImported();
+			}
 			treeElements.add(newElement);
 		}
 
@@ -251,9 +269,13 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 		if (isFollowsBestPractice())
 		{
 			if (getGetterName().equals(element.getText()))
+			{
 				return ACCESSOR_PREFIX + newName;
+			}
 			else if (getSetterName().equals(element.getText()))
+			{
 				return MUTATOR_PREFIX + newName;
+			}
 		}
 		return newName;
 	}

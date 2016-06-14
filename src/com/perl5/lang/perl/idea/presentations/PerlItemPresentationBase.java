@@ -46,7 +46,9 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
 	public String getLocationString()
 	{
 		if (!myElement.isValid())
+		{
 			return null;
+		}
 
 /*		fixme seems this reparses file
 		String suffix = "";

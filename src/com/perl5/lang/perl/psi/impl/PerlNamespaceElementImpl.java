@@ -60,11 +60,17 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 				if (nameSpaceContainer instanceof PsiPerlUseStatement
 						|| nameSpaceContainer instanceof PsiPerlRequireExpr
 						)
+				{
 					return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
+				}
 				else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
+				{
 					return PsiReference.EMPTY_ARRAY;
+				}
 				else
+				{
 					return new PsiReference[]{new PerlNamespaceReference(element, null)};
+				}
 			}
 		};
 	}
@@ -72,8 +78,14 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitNamespaceElement(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitNamespaceElement(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@NotNull

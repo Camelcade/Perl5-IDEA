@@ -37,8 +37,14 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitHeredocTeminator(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitHeredocTeminator(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@NotNull

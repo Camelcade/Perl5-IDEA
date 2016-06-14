@@ -47,7 +47,9 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
 		{
 			HashSet<PerlNamespaceDefinition> parents = new HashSet<PerlNamespaceDefinition>();
 			for (PerlNamespaceDefinition definition : definitions)
+			{
 				parents.addAll(definition.getParentNamespaceDefinitions());
+			}
 
 			if (!parents.isEmpty())
 			{
@@ -75,7 +77,9 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
 			{
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
 				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
+				{
 					return;
+				}
 
 				if (hasRecursiveInheritance(o))
 				{

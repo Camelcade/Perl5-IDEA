@@ -32,6 +32,8 @@ public class ClassAccessorAnnotator extends PerlAnnotator
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
 		if (ClassAccessorParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType()))
+		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB);
+		}
 	}
 }

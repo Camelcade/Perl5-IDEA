@@ -46,7 +46,9 @@ public class PodRenderUtil implements PodElementTypes
 	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
 	{
 		if (firstElement == null)
+		{
 			return "";
+		}
 
 		StringBuilder result = new StringBuilder();
 		renderPsiRangeAsHTML(firstElement, lastElement, result, context);
@@ -56,7 +58,9 @@ public class PodRenderUtil implements PodElementTypes
 	public static void renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
 	{
 		if (firstElement == null)
+		{
 			return;
+		}
 
 		PsiElement run = firstElement;
 		while (run != null)
@@ -107,7 +111,9 @@ public class PodRenderUtil implements PodElementTypes
 	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
 	{
 		if (firstElement == null)
+		{
 			return "";
+		}
 
 		StringBuilder result = new StringBuilder();
 		renderPsiRangeAsText(firstElement, lastElement, result, context);
@@ -117,7 +123,9 @@ public class PodRenderUtil implements PodElementTypes
 	public static void renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
 	{
 		if (firstElement == null)
+		{
 			return;
+		}
 
 		PsiElement run = firstElement;
 		while (run != null)
@@ -211,7 +219,8 @@ public class PodRenderUtil implements PodElementTypes
 		try
 		{
 			return URLEncoder.encode(link, "UTF-8");
-		} catch (Exception e)
+		}
+		catch (Exception e)
 		{
 			throw new RuntimeException(e);
 		}

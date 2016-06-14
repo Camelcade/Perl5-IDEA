@@ -43,7 +43,9 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 	public static boolean isExecutableFile(@NotNull VirtualFile virtualFile)
 	{
 		if (virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile)
+		{
 			return false;
+		}
 
 		FileType fileType = virtualFile.getFileType();
 		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;

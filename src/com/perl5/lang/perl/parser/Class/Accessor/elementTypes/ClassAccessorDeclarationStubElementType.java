@@ -99,9 +99,13 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		{
 			// fixme these should depend on declaration type
 			if (((PerlClassAccessorDeclarationStub) stub).isAccessorReadable())
+			{
 				sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub) stub).getGetterCanonicalName());
+			}
 			if (((PerlClassAccessorDeclarationStub) stub).isAccessorWritable())
+			{
 				sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub) stub).getSetterCanonicalName());
+			}
 
 			sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
 		}

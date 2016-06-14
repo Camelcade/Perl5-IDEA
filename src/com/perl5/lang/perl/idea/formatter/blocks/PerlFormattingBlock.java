@@ -172,7 +172,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
 			for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 			{
-				if (!shouldCreateBlockFor(child)) continue;
+				if (!shouldCreateBlockFor(child))
+				{
+					continue;
+				}
 				blocks.add(createChildBlock(child, wrap, alignment));
 			}
 		}
@@ -267,9 +270,13 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type))
 			{
 				if (!isNewLineForbidden((PerlFormattingBlock) child1))
+				{
 					return Spacing.createSpacing(0, 0, 1, true, 1);
+				}
 				else
+				{
 					return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
+				}
 			}
 			if (isCodeBlock() && !inGrepMapSort() && !blockHasLessChildrenThan(2) &&
 					(BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock) child1).isFirst()

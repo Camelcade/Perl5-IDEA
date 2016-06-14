@@ -69,7 +69,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
 	@Override
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
-		super.indexStub(stub,sink);
+		super.indexStub(stub, sink);
 		sink.occurrence(MojoliciousHelpersStubIndex.KEY, stub.getSubName());
 	}
 

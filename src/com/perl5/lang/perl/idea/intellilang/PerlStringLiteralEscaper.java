@@ -47,8 +47,14 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplM
 	public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
 	{
 		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
-		if (offset < rangeInsideHost.getStartOffset()) offset = rangeInsideHost.getStartOffset();
-		if (offset > rangeInsideHost.getEndOffset()) offset = rangeInsideHost.getEndOffset();
+		if (offset < rangeInsideHost.getStartOffset())
+		{
+			offset = rangeInsideHost.getStartOffset();
+		}
+		if (offset > rangeInsideHost.getEndOffset())
+		{
+			offset = rangeInsideHost.getEndOffset();
+		}
 		return offset;
 	}
 

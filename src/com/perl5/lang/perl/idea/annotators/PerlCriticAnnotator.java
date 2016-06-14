@@ -87,11 +87,15 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 	public List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile)
 	{
 		if (sourcePsiFile == null)
+		{
 			return null;
+		}
 
 		byte[] sourceBytes = sourcePsiFile.getPerlContentInBytes();
 		if (sourceBytes == null)
+		{
 			return null;
+		}
 
 
 		try
@@ -162,7 +166,9 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 	public void apply(@NotNull PsiFile file, List<PerlCriticErrorDescriptor> annotationResult, @NotNull AnnotationHolder holder)
 	{
 		if (annotationResult == null)
+		{
 			return;
+		}
 
 		Document document = file.getViewProvider().getDocument();
 		if (document != null)

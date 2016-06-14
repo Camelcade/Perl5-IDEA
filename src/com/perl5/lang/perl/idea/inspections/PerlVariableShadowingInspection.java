@@ -37,7 +37,9 @@ public class PerlVariableShadowingInspection extends PerlVariableDeclarationInsp
 		{
 			PerlVariableDeclarationWrapper lexicalDeclaration = variable.getLexicalDeclaration();
 			if (lexicalDeclaration != null)
+			{
 				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getVariable().getLineNumber());
+			}
 		}
 	}
 }

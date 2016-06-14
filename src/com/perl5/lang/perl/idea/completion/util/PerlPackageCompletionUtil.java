@@ -60,10 +60,14 @@ public class PerlPackageCompletionUtil
 				.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
 
 		if (PerlPackageUtil.isBuiltIn(packageName))
+		{
 			result = result.withBoldness(true);
+		}
 
 		if (PerlPackageUtil.isPragma(packageName))
+		{
 			result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
+		}
 
 		// fixme this should be adjusted in #954
 //		if (PerlPackageUtil.isDeprecated(project, packageName))
@@ -95,7 +99,9 @@ public class PerlPackageCompletionUtil
 			public boolean process(String s)
 			{
 				if (super.process(s))
+				{
 					result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+				}
 				return true;
 			}
 		});
@@ -219,6 +225,7 @@ public class PerlPackageCompletionUtil
 		{
 			// fixme this is bad check for auto-inserting, i belive
 			if (context.getCompletionChar() != '\u0000')
+			{
 				context.setLaterRunnable(new Runnable()
 				{
 					@Override
@@ -228,6 +235,7 @@ public class PerlPackageCompletionUtil
 						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
 					}
 				});
+			}
 		}
 	}
 

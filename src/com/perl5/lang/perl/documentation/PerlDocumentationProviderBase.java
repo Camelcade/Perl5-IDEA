@@ -66,7 +66,8 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
 			try
 			{
 				return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
-			} catch (Exception e)
+			}
+			catch (Exception e)
 			{
 				throw new RuntimeException(e);
 			}

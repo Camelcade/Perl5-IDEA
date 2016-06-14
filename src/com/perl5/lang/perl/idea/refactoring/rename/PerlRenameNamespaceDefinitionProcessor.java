@@ -106,7 +106,8 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 						try
 						{
 							newContainingDir = subDir != null ? subDir : newContainingDir.createChildDirectory(null, subDirName);
-						} catch (IOException e)
+						}
+						catch (IOException e)
 						{
 							throw new IncorrectOperationException("Could not create subdirectory: " + newContainingDir.getPath() + "/" + subDirName);
 						}
@@ -117,7 +118,8 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 						try
 						{
 							file.getVirtualFile().move(this, newContainingDir);
-						} catch (IOException e)
+						}
+						catch (IOException e)
 						{
 							throw new IncorrectOperationException("Could not move package file to the: " + newContainingDir.getPath());
 						}

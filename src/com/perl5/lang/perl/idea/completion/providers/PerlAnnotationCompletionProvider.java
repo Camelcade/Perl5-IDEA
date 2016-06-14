@@ -38,11 +38,13 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
 	static
 	{
 		for (String annotation : PerlAnnotations.TOKENS_MAP.keySet())
+		{
 			ANNOTATIONS_LOOKUP_ELEMENTS.add(LookupElementBuilder
 					.create(annotation)
 					.withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
 					.withIcon(PerlIcons.ANNOTATION_GUTTER_ICON)
 			);
+		}
 	}
 
 

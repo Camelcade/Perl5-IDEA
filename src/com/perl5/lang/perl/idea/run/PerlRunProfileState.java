@@ -117,7 +117,8 @@ public class PerlRunProfileState extends CommandLineState
 			try
 			{
 				charset = Charset.forName(charsetName);
-			} catch (UnsupportedCharsetException e)
+			}
+			catch (UnsupportedCharsetException e)
 			{
 				throw new ExecutionException("Unknown charset: " + charsetName);
 			}
@@ -141,7 +142,7 @@ public class PerlRunProfileState extends CommandLineState
 	{
 
 		String perlParameters = runProfile.getPerlParameters();
-		if( perlParameters == null )
+		if (perlParameters == null)
 		{
 			return new String[0];
 		}

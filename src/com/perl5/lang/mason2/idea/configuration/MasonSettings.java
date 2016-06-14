@@ -54,7 +54,9 @@ public class MasonSettings extends AbstractMasonSettings<MasonSettings>
 	{
 		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
 		if (persisted == null)
+		{
 			persisted = new MasonSettings();
+		}
 
 		return (MasonSettings) persisted.setProject(project);
 	}

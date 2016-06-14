@@ -296,42 +296,54 @@ public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> 
 	public Map<String, IElementType> getCloseTokensMap()
 	{
 		if (myCloseTokensMap == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return myCloseTokensMap;
 	}
 
 	public Map<String, String> getOpenCloseMap()
 	{
 		if (myOpenCloseMap == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return myOpenCloseMap;
 	}
 
 	public Map<String, IElementType> getOpenTokensMap()
 	{
 		if (myOpenTokensMap == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return myOpenTokensMap;
 	}
 
 	public Pattern getClosersPattern()
 	{
 		if (myClosersPattern == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return myClosersPattern;
 	}
 
 	public Pattern getOpenersPattern()
 	{
 		if (myOpenersPattern == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return myOpenersPattern;
 	}
 
 	public Pattern getSimpleOpenersPattern()
 	{
 		if (mySimpleOpenersPattern == null)
+		{
 			prepareLexerConfiguration();
+		}
 		return mySimpleOpenersPattern;
 	}
 }

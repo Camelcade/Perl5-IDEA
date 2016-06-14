@@ -58,7 +58,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 				{
 					m = b.mark();
 				}
-				if( !PodParser.pod_term(b, l))
+				if (!PodParser.pod_term(b, l))
 				{
 					m.error("Can't parse");
 					break;

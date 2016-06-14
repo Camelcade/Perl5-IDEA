@@ -32,7 +32,9 @@ public class PerlSwitchAnnotator extends PerlAnnotator
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
 		if (PerlSwitchParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType()))
+		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+		}
 
 	}
 }

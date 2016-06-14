@@ -130,7 +130,10 @@ public abstract class PerlModuleSdkConfigurable implements Disposable
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				if (myFreeze) return;
+				if (myFreeze)
+				{
+					return;
+				}
 
 				final Sdk newJdk = myCbModuleJdk.getSelectedJdk();
 				setSdk(newJdk);

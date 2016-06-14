@@ -77,7 +77,9 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 	{
 		PsiElement titleBlock = getTitleBlock();
 		if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement) titleBlock).isIndexed())
+		{
 			return true;
+		}
 
 		return false;
 	}
@@ -89,7 +91,9 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 		PsiElement titleElement = getTitleBlock();
 
 		if (titleElement == null)
+		{
 			return null;
+		}
 
 		StringBuilder builder = new StringBuilder();
 		renderElementTitleAsText(builder, new PodRenderingContext());

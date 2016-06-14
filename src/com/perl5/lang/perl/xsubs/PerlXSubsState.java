@@ -298,7 +298,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 											));
 										}
 
-									} catch (IOException e)
+									}
+									catch (IOException e)
 									{
 										Notifications.Bus.notify(new Notification(
 												"PERL5_DEPARSING_ERROR",
@@ -306,7 +307,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 												e.getMessage(),
 												NotificationType.ERROR
 										));
-									} finally
+									}
+									finally
 									{
 										PerlXSubsState.this.parserTask = null;
 									}
@@ -318,7 +320,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 				parserTask.queue();
 
 
-			} catch (ExecutionException e)
+			}
+			catch (ExecutionException e)
 			{
 				Notifications.Bus.notify(new Notification(
 						"PERL5_START_ERROR",

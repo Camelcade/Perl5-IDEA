@@ -55,7 +55,9 @@ public class PerlQQStringLexer extends PerlStringLexer
 		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1
 				&& getBuffer().charAt(getBufferEnd() - 1) == RegexBlock.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
 				)
+		{
 			setTokenEnd(getTokenEnd() - 1);
+		}
 
 		return result;
 	}

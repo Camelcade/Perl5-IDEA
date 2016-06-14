@@ -54,7 +54,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 	{
 		// @todo handle this
 		if (root instanceof OuterLanguageElementImpl)
+		{
 			return FoldingDescriptor.EMPTY;
+		}
 
 		FoldingRegionsCollector collector = getCollector(document);
 		root.accept(collector);
@@ -142,7 +144,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 						}
 						// non-whitespace block
 						else
+						{
 							break;
+						}
 					}
 				}
 
@@ -172,7 +176,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 						{
 							endOffset = currentComment.getTextOffset() + currentComment.getTextLength();
 							if (currentComment.getText().endsWith("\n"))
+							{
 								endOffset--;
+							}
 						}
 						else if (!(currentComment instanceof PsiWhiteSpace))
 						{
@@ -219,7 +225,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 				PsiElement currentStatement = perlImport;
 
 				if (currentStatement instanceof PerlRequireExpr)
+				{
 					currentStatement = currentStatement.getParent();
+				}
 
 				if (currentStatement instanceof PerlUseStatement || currentStatement.getFirstChild() instanceof PerlRequireExpr)
 				{
@@ -238,7 +246,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 							importsNumber++;
 						}
 						else if (!(currentStatement instanceof PsiComment || currentStatement instanceof PsiWhiteSpace))
+						{
 							break;
+						}
 
 						currentStatement = currentStatement.getNextSibling();
 					}
@@ -262,31 +272,57 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 		IElementType elementType = node.getElementType();
 
 		if (elementType == BLOCK)
+		{
 			return PH_CODE_BLOCK;
+		}
 		if (elementType == CONSTANTS_BLOCK)
+		{
 			return "{constants definitions}";
+		}
 		if (elementType == STRING_LIST)
+		{
 			return "{strings list}";
+		}
 		else if (elementType == ANON_ARRAY)
+		{
 			return "[array]";
+		}
 		else if (elementType == ANON_HASH)
+		{
 			return "{hash}";
+		}
 		else if (elementType == PARENTHESISED_EXPR)
+		{
 			return "(list)";
+		}
 		else if (elementType == HEREDOC || elementType == HEREDOC_QQ || elementType == HEREDOC_QX)
+		{
 			return "<< heredoc >>";
+		}
 		else if (elementType == POD)
+		{
 			return "= POD block =";
+		}
 		else if (elementType == COMMENT_BLOCK)
+		{
 			return "# Block comment";
+		}
 		else if (elementType == COMMENT_LINE)
+		{
 			return "# comments...";
+		}
 		else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)
+		{
 			return "imports...";
+		}
 		else if (elementType == getTemplateBlockElementType())
+		{
 			return "/ template /";
+		}
 		else
+		{
 			return "unknown entity " + elementType;
+		}
 	}
 
 	@Override
@@ -294,29 +330,53 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 	{
 		IElementType elementType = node.getElementType();
 		if (elementType == POD)    // documentation comments
+		{
 			return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
+		}
 		else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)    // imports
+		{
 			return CodeFoldingSettings.getInstance().COLLAPSE_IMPORTS;
+		}
 		else if (elementType == BLOCK)    // method bodies
+		{
 			return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
+		}
 		else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_COMMENTS;
+		}
 		else if (elementType == CONSTANTS_BLOCK)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
+		}
 		else if (elementType == ANON_ARRAY)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_ARRAYS;
+		}
 		else if (elementType == ANON_HASH)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_ANON_HASHES;
+		}
 		else if (elementType == PARENTHESISED_EXPR)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_PARENTHESISED;
+		}
 		else if (elementType == HEREDOC)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
+		}
 		else if (elementType == STRING_LIST)
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_QW;
+		}
 		else if (elementType == getTemplateBlockElementType())
+		{
 			return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
+		}
 		else
+		{
 			return false;
+		}
 	}
 
 	@Nullable

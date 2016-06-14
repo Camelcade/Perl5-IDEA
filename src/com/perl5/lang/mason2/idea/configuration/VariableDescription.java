@@ -43,12 +43,21 @@ public class VariableDescription
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
 
 		VariableDescription that = (VariableDescription) o;
 
-		if (variableName != null ? !variableName.equals(that.variableName) : that.variableName != null) return false;
+		if (variableName != null ? !variableName.equals(that.variableName) : that.variableName != null)
+		{
+			return false;
+		}
 		return variableType != null ? variableType.equals(that.variableType) : that.variableType == null;
 
 	}

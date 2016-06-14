@@ -152,15 +152,25 @@ public class RegexBlock implements PerlElementTypes
 	public static char getQuoteCloseChar(char charOpener)
 	{
 		if (charOpener == '<')
+		{
 			return '>';
+		}
 		else if (charOpener == '{')
+		{
 			return '}';
+		}
 		else if (charOpener == '(')
+		{
 			return ')';
+		}
 		else if (charOpener == '[')
+		{
 			return ']';
+		}
 		else
+		{
 			return charOpener;
+		}
 	}
 
 	public int getStartOffset()
@@ -250,9 +260,13 @@ public class RegexBlock implements PerlElementTypes
 				int commentStart = currentOffset;
 				currentOffset += 2;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
+				{
 					currentOffset++;
+				}
 				if (currentOffset < regexEndOffset)
+				{
 					currentOffset++;
+				}
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				blockStart = currentOffset;
 			}
@@ -266,7 +280,9 @@ public class RegexBlock implements PerlElementTypes
 
 				int whiteSpaceStart = currentOffset;
 				while (currentOffset < regexEndOffset && Character.isWhitespace(buffer.charAt(currentOffset)))
+				{
 					currentOffset++;
+				}
 				tokens.add(new CustomToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE));
 				blockStart = currentOffset;
 			}
@@ -280,18 +296,28 @@ public class RegexBlock implements PerlElementTypes
 
 				int commentStart = currentOffset;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != '\n')
+				{
 					currentOffset++;
+				}
 				tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
 				blockStart = currentOffset;
 			}
 			else
+			{
 				currentOffset++;
+			}
 
 			if (!isSecondBlock)
+			{
 				if (!isEscaped && !isCharGroup && currentChar == '[')
+				{
 					isCharGroup = true;
+				}
 				else if (!isEscaped && isCharGroup && currentChar == ']')
+				{
 					isCharGroup = false;
+				}
+			}
 
 			isEscaped = !isEscaped && currentChar == '\\';
 		}
@@ -340,21 +366,31 @@ public class RegexBlock implements PerlElementTypes
 				int commentStart = currentOffset;
 				currentOffset += 2;
 				while (currentOffset < regexEndOffset && buffer.charAt(currentOffset) != ')')
+				{
 					currentOffset++;
+				}
 
 				blockStart = currentOffset;
 				if (currentOffset == regexEndOffset)
+				{
 					tokens.add(new CustomToken(commentStart, currentOffset, COMMENT_LINE));
+				}
 				else
+				{
 					tokens.add(new CustomToken(commentStart, currentOffset + 1, COMMENT_LINE));
+				}
 			}
 
 			if (!isSecondBlock)
 			{
 				if (!isEscaped && !isCharGroup && currentChar == '[')
+				{
 					isCharGroup = true;
+				}
 				else if (!isEscaped && isCharGroup && currentChar == ']')
+				{
 					isCharGroup = false;
+				}
 			}
 
 			isEscaped = !isEscaped && currentChar == '\\';

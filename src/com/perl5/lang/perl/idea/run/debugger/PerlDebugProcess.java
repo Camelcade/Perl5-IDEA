@@ -72,7 +72,9 @@ public class PerlDebugProcess extends XDebugProcess
 	public boolean checkCanInitBreakpoints()
 	{
 		if (PerlDebugThread.DEV_MODE)
+		{
 			System.err.println("Check can init breakpoints");
+		}
 		return true;
 	}
 
@@ -87,7 +89,9 @@ public class PerlDebugProcess extends XDebugProcess
 	public void sessionInitialized()
 	{
 		if (PerlDebugThread.DEV_MODE)
+		{
 			System.err.println("Session initialized");
+		}
 		super.sessionInitialized();
 	}
 

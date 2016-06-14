@@ -145,7 +145,9 @@ public class PerlDebugThread extends Thread
 				response.clear();
 
 				if (DEV_MODE)
+				{
 					System.err.println("\nReading data");
+				}
 
 				// reading bytes
 				while (myInputStream != null)
@@ -225,19 +227,25 @@ public class PerlDebugThread extends Thread
 	public void sendString(String string)
 	{
 		if (mySocket == null)
+		{
 			return;
+		}
 
 		string = string + "\n";
 
 		try
 		{
 			if (DEV_MODE)
+			{
 				System.err.println("Going to send string " + string);
+			}
 
 			lock.lock();
 
 			if (DEV_MODE)
+			{
 				System.err.println("Sent string " + string);
+			}
 
 
 			myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
@@ -260,7 +268,9 @@ public class PerlDebugThread extends Thread
 	public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
 	{
 		if (mySocket == null)
+		{
 			return;
+		}
 
 		try
 		{
@@ -283,7 +293,9 @@ public class PerlDebugThread extends Thread
 	public void setStop()
 	{
 		if (myStop)
+		{
 			return;
+		}
 
 		myStop = true;
 		try

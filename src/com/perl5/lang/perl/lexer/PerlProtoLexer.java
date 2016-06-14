@@ -53,12 +53,18 @@ public abstract class PerlProtoLexer implements FlexLexer
 		IElementType tokenType = null;
 
 		if (!preparsedTokensList.isEmpty())
+		{
 			tokenType = getPreParsedToken();
+		}
 		else
+		{
 			tokenType = perlAdvance();
+		}
 
 		if (tokenType != null)
+		{
 			registerToken(tokenType, yytext());
+		}
 
 		return tokenType;
 	}
@@ -219,12 +225,16 @@ public abstract class PerlProtoLexer implements FlexLexer
 				while (currentPosition < bufferEnd)
 				{
 					if (buffer.charAt(currentPosition) == '\n')
+					{
 						break;
+					}
 					currentPosition++;
 				}
 			}
 			else if (!Character.isWhitespace(currentChar))
+			{
 				return currentPosition;
+			}
 
 			currentPosition++;
 		}
@@ -254,7 +264,9 @@ public abstract class PerlProtoLexer implements FlexLexer
 		while (currentPosition < bufferEnd)
 		{
 			if (!Character.isWhitespace(buffer.charAt(currentPosition)))
+			{
 				return currentPosition;
+			}
 
 			currentPosition++;
 		}

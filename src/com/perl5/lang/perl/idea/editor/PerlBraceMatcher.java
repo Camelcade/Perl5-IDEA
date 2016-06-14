@@ -62,7 +62,10 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
 	{
 		PsiElement element = file.findElementAt(openingBraceOffset);
-		if (element == null || element instanceof PsiFile) return openingBraceOffset;
+		if (element == null || element instanceof PsiFile)
+		{
+			return openingBraceOffset;
+		}
 
 		PsiElement codeBlock = element.getParent();
 
@@ -76,7 +79,9 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 						|| blockContainer instanceof PsiPerlForCompound
 						|| blockContainer instanceof PsiPerlForeachCompound
 						)
+				{
 					return blockContainer.getTextOffset();
+				}
 				else if (blockContainer instanceof PsiPerlConditionalBlock
 						|| blockContainer instanceof PsiPerlUnconditionalBlock)
 				{
@@ -88,7 +93,9 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 					}
 
 					if (keyword != null)
+					{
 						return keyword.getTextOffset();
+					}
 				}
 			}
 		}

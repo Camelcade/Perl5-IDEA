@@ -104,19 +104,25 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 	private static boolean atSectionPosition(PsiElement element)
 	{
 		if (element == null)
+		{
 			return false;
+		}
 
 		IElementType elementType = element.getNode().getElementType();
 
 		PsiElement prevElement = element.getPrevSibling();
 
 		if (elementType == POD_ANGLE_RIGHT && prevElement != null)
+		{
 			prevElement = prevElement.getLastChild();
+		}
 
 		IElementType prevElementType = prevElement == null ? null : prevElement.getNode().getElementType();
 
 		if (elementType == POD_ANGLE_RIGHT && prevElementType == POD_DIV)
+		{
 			return true;
+		}
 
 		PsiElement prevPrevElement = prevElement == null ? null : prevElement.getPrevSibling();
 		IElementType prevPrevElementType = prevPrevElement == null ? null : prevPrevElement.getNode().getElementType();
@@ -152,11 +158,15 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 	{
 		PsiElement element = parameters.getOriginalPosition();
 		if (element == null)
+		{
 			return;
+		}
 
 		PsiPodFormatLink psiPodFormatLink = PsiTreeUtil.getParentOfType(element, PsiPodFormatLink.class);
 		if (psiPodFormatLink == null)
+		{
 			return;
+		}
 
 		TextRange elementRange = element.getTextRange().shiftRight(-psiPodFormatLink.getTextOffset());
 		CharSequence linkText = psiPodFormatLink.getText();

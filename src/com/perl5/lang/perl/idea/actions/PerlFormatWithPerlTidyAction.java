@@ -90,18 +90,24 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 			final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
 			if (file == null)
+			{
 				return;
+			}
 
 			final Project project = file.getProject();
 
 			final Document document = file.getViewProvider().getDocument();
 			if (document == null)
+			{
 				return;
+			}
 
 			VirtualFile virtualFile = file.getVirtualFile();
 
 			if (virtualFile == null)
+			{
 				return;
+			}
 
 			try
 			{

@@ -77,8 +77,14 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitSubNameElement(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitSubNameElement(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@Override
@@ -87,9 +93,13 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		PsiElement parent = getParent();
 
 		if (parent instanceof PerlPackageMember)
+		{
 			return ((PerlPackageMember) parent).getPackageName();
+		}
 		else
+		{
 			return PerlPackageUtil.getContextPackageName(this);
+		}
 	}
 
 	@Override
@@ -124,9 +134,13 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	{
 		// fixme i belive this should be implemented in file element
 		if (this.getContainingFile() instanceof MojoliciousFileImpl)
+		{
 			return isPerlBuiltIn() || MojoliciousSubUtil.isBuiltIn(getText());
+		}
 		else
+		{
 			return isPerlBuiltIn();
+		}
 	}
 
 	// fixme move to file element
@@ -141,7 +155,9 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 					!(grandParent instanceof PsiPerlNestedCall)
 							&& (getPrevSibling() == null || "CORE::".equals(getPrevSibling().getText()))
 					)
+			{
 				return PerlSubUtil.isBuiltIn(getText());
+			}
 		}
 		return false;
 	}

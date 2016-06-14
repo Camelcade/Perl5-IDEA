@@ -47,7 +47,9 @@ public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightA
 		while (true)
 		{
 			if (currentElement instanceof PsiFile || currentElement == null || currentElement.getParent() instanceof PsiFile)
+			{
 				return;
+			}
 
 			PsiElement parent = currentElement.getParent();
 			if (parent instanceof PsiPerlNamespaceContent || parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinition)

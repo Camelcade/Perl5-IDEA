@@ -63,8 +63,14 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitVariableNameElement(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitVariableNameElement(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@NotNull

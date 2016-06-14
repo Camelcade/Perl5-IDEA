@@ -34,7 +34,9 @@ public class PerlWarningsMask implements Cloneable
 	{
 		currentMask = new HashMap<String, Boolean>();
 		for (Map.Entry<String, PerlWarningTreeLeaf> leaf : PerlWarningTree.LEAF_OPTIONS.entrySet())
+		{
 			currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
+		}
 	}
 
 	public PerlWarningsMask clone()
@@ -42,7 +44,8 @@ public class PerlWarningsMask implements Cloneable
 		try
 		{
 			return (PerlWarningsMask) super.clone();
-		} catch (CloneNotSupportedException e)
+		}
+		catch (CloneNotSupportedException e)
 		{
 			throw new RuntimeException(e.getMessage());
 		}

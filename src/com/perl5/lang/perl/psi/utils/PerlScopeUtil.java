@@ -80,7 +80,9 @@ public class PerlScopeUtil
 					!(run instanceof PerlLexicalScope) &&
 					!run.processDeclarations(processor, resolveState, null, place)
 					)
+			{
 				return false;
+			}
 			run = run.getPrevSibling();
 		}
 
@@ -90,7 +92,9 @@ public class PerlScopeUtil
 			for (PerlVariableDeclarationWrapper wrapper : ((PerlImplicitVariablesProvider) element).getImplicitVariables())
 			{
 				if (!processor.execute(wrapper, resolveState))
+				{
 					return false;
+				}
 			}
 		}
 

@@ -98,7 +98,9 @@ public class PerlLanguageInjector implements LanguageInjector
 			String languageKey = ACCEPTABLE_LANGUAGES.get(language.getID());
 
 			if (languageKey != null && LANGUAGE_MAP.get(languageKey) == null)
+			{
 				LANGUAGE_MAP.put(languageKey, language);
+			}
 		}
 
 	}
@@ -127,16 +129,16 @@ public class PerlLanguageInjector implements LanguageInjector
 			PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnnotationByClass(host, PerlAnnotationInject.class);
 
 			// eol annotation
-			if( injectAnnotation == null )
+			if (injectAnnotation == null)
 			{
 				injectAnnotation = PerlPsiUtil.getEolAnnotationByClass(host, PerlAnnotationInject.class);
 			}
 
 			// before statement
-			if( injectAnnotation == null )
+			if (injectAnnotation == null)
 			{
 				PsiPerlStatement statement = PsiTreeUtil.getParentOfType(host, PsiPerlStatement.class);
-				if( statement != null )
+				if (statement != null)
 				{
 					injectAnnotation = PerlPsiUtil.getAnnotationByClass(statement, PerlAnnotationInject.class);
 				}
@@ -151,7 +153,7 @@ public class PerlLanguageInjector implements LanguageInjector
 					if (targetLanguage != null)
 					{
 						TextRange contentRange = ((PerlString) host).getContentTextRangeInParent();
-						if( !contentRange.isEmpty())
+						if (!contentRange.isEmpty())
 						{
 							injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
 						}

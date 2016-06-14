@@ -46,7 +46,9 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
 						PerlPackageUtil.getNamespaceDefinitions(project, o.getPackageName(), GlobalSearchScope.projectScope(project)).size() > 1 &&
 						o.getNameIdentifier() != null
 						)
+				{
 					registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
+				}
 
 			}
 		};

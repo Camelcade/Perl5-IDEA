@@ -43,7 +43,9 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
 		assert versionElement != null;
 
 		if (versionElement.getPerlVersion().lesserThan(PerlVersion.V5_12))
+		{
 			return INSTANCE;
+		}
 
 		return PerlVersionProcessor512.INSTANCE;
 	}

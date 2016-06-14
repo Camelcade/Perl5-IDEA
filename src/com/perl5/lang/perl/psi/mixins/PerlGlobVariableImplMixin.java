@@ -54,12 +54,16 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlGlobStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 
 		String namespace = getExplicitPackageName();
 
 		if (namespace == null)
+		{
 			namespace = getContextPackageName();
+		}
 
 		return namespace;
 	}
@@ -69,11 +73,15 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlGlobStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getName();
+		}
 
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
 		if (variableNameElement != null)
+		{
 			return variableNameElement.getName();
+		}
 
 		return null;
 	}
@@ -108,11 +116,15 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	public boolean isBuiltIn()
 	{
 		if (getNamespaceElement() != null)
+		{
 			return false;
+		}
 
 		String globName = getName();
 		if (globName == null)
+		{
 			return false;
+		}
 
 		return PerlGlobUtil.BUILT_IN.contains(globName);
 	}
@@ -168,7 +180,9 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlGlobStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.isLeftSideOfAssignment();
+		}
 		return getParent() instanceof PsiPerlAssignExpr && getNextSibling() != null;
 	}
 

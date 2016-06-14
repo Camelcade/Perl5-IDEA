@@ -38,7 +38,9 @@ public class PerlQWStringLexer extends PerlQQStringLexer
 		int tokenStart = getTokenEnd();
 
 		if (tokenStart < getBufferStart() + 1 || tokenStart >= bufferEnd - 1)    // empty buffer and opening/closing quote
+		{
 			return super.perlAdvance();
+		}
 
 		CharSequence buffer = getBuffer();
 
@@ -54,7 +56,9 @@ public class PerlQWStringLexer extends PerlQQStringLexer
 		{
 			char currentChar;
 			while (tokenEnd < bufferEnd && (currentChar = buffer.charAt(tokenEnd)) != '\n' && Character.isWhitespace(currentChar))
+			{
 				tokenEnd++;
+			}
 			setTokenEnd(tokenEnd);
 			return TokenType.WHITE_SPACE;
 		}
@@ -66,7 +70,9 @@ public class PerlQWStringLexer extends PerlQQStringLexer
 		{
 			char currentChar = buffer.charAt(tokenEnd);
 			if (!isEscaped && Character.isWhitespace(currentChar))
+			{
 				break;
+			}
 
 			isEscaped = !isEscaped && currentChar == '\\';
 

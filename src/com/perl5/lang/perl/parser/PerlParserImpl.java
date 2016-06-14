@@ -30,19 +30,19 @@ import org.jetbrains.annotations.NotNull;
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 {
 
-/*
-	@Override
-	public ASTNode parse(IElementType t, PsiBuilder b)
-	{
-		if (t instanceof PerlFileElementType)
+	/*
+		@Override
+		public ASTNode parse(IElementType t, PsiBuilder b)
 		{
-			PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
-			if (file != null && file.getVirtualFile() != null)
-				System.err.println("Parsed file " + file.getVirtualFile());
+			if (t instanceof PerlFileElementType)
+			{
+				PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+				if (file != null && file.getVirtualFile() != null)
+					System.err.println("Parsed file " + file.getVirtualFile());
+			}
+			return super.parse(t, b);
 		}
-		return super.parse(t, b);
-	}
-*/
+	*/
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
 		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)

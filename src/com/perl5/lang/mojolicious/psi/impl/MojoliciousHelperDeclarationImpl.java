@@ -75,7 +75,6 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 
-
 	@Override
 	public PsiPerlBlock getBlock()
 	{

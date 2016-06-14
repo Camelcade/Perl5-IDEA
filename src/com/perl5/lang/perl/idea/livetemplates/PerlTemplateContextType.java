@@ -51,10 +51,14 @@ public abstract class PerlTemplateContextType extends TemplateContextType
 			PsiElement element = psiFile.findElementAt(fileOffset);
 
 			if (element == null)
+			{
 				element = psiFile.findElementAt(fileOffset - 1);
+			}
 
 			if (element == null)
+			{
 				return false;
+			}
 
 			IElementType tokenType = element.getNode().getElementType();
 

@@ -82,7 +82,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 					{
 						PsiReference[] references = referencesProvider.getReferences(PerlStringContentElementImpl.this);
 						if (references != null)
+						{
 							result.addAll(Arrays.asList(references));
+						}
 					}
 				}
 				result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlStringContentElementImpl.this)));
@@ -94,8 +96,14 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PerlVisitor) ((PerlVisitor) visitor).visitStringContentElement(this);
-		else super.accept(visitor);
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitStringContentElement(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@NotNull
@@ -115,7 +123,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	public boolean looksLikePackage()
 	{
 		if (looksLikePackage != null)
+		{
 			return looksLikePackage;
+		}
 
 		return getElementType() == PerlElementTypes.STRING_PACKAGE;
 	}
@@ -124,7 +134,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 	public boolean looksLikePath()
 	{
 		if (looksLikePath != null)
+		{
 			return looksLikePath;
+		}
 		return looksLikePath = FILE_PATH_PATTERN.matcher(getContinuosText()).matches();
 	}
 
@@ -135,7 +147,9 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 		{
 			Matcher m = FILE_PATH_PATTERN.matcher(getContinuosText());
 			if (m.matches())
+			{
 				return m.group(1);
+			}
 		}
 		return null;
 	}

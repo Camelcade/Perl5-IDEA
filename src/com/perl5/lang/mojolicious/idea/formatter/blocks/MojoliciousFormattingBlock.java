@@ -57,7 +57,9 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 	protected boolean isNewLineForbidden(PerlFormattingBlock block)
 	{
 		if (super.isNewLineForbidden(block))
+		{
 			return true;
+		}
 
 		PsiElement element = block.getNode().getPsi();
 		PsiFile file = element.getContainingFile();
@@ -72,7 +74,9 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 			while (!element.equals(firstElement))
 			{
 				if (firstElement == null)
+				{
 					return false;
+				}
 
 				IElementType firstElementTokenType = firstElement.getNode().getElementType();
 				if (firstElementTokenType == MOJO_LINE_OPENER || firstElementTokenType == MOJO_LINE_EXPR_OPENER || firstElementTokenType == MOJO_LINE_EXPR_ESCAPED_OPENER)
@@ -80,7 +84,9 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 					return true;
 				}
 				if (!(firstElement instanceof PsiWhiteSpace))
+				{
 					return false;
+				}
 
 				firstElement = firstElement.getNextSibling();
 			}

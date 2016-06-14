@@ -36,7 +36,13 @@ public class MasonTextBlockImpl extends PerlCompositeElementImpl implements Maso
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof Mason2Visitor) ((Mason2Visitor) visitor).visitMasonTextBlock(this);
-		else super.accept(visitor);
+		if (visitor instanceof Mason2Visitor)
+		{
+			((Mason2Visitor) visitor).visitMasonTextBlock(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 }

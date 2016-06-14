@@ -40,17 +40,25 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection
 				PsiElement parent = o.getParent();
 
 				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement || parent instanceof PerlNamespaceDefinition)
+				{
 					return;
+				}
 
 				// fixme should depend on parent resolving
 				if (o.isSUPER())
+				{
 					return;
+				}
 
 				if (o.isBuiltin())
+				{
 					return;
+				}
 
 				if (o.getNamespaceDefinitions().isEmpty())
+				{
 					registerProblem(holder, o, "Unable to find namespace definition");
+				}
 			}
 		};
 	}

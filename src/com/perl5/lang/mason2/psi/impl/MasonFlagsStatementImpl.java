@@ -92,7 +92,9 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 	private boolean isNullOrNotComma(@Nullable PsiElement element)
 	{
 		if (element == null)
+		{
 			return false;
+		}
 
 		IElementType elementType = element.getNode().getElementType();
 		return elementType != OPERATOR_COMMA && elementType != OPERATOR_COMMA_ARROW;

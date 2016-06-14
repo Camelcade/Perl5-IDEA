@@ -55,7 +55,9 @@ public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
 	protected PsiFile createFile(@NotNull Language lang)
 	{
 		if (lang != Mason2Language.INSTANCE && lang != PodLanguage.INSTANCE)
+		{
 			return null;
+		}
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 		if (parserDefinition != null)

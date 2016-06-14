@@ -41,9 +41,13 @@ public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiRefere
 		if (element instanceof PerlClassAccessorDeclaration && ((PerlClassAccessorDeclaration) element).isFollowsBestPractice())
 		{
 			if (((PerlClassAccessorDeclaration) element).isAccessorReadable())
+			{
 				queryParameters.getOptimizer().searchWord(((PerlClassAccessorDeclaration) element).getGetterName(), queryParameters.getEffectiveSearchScope(), true, element);
+			}
 			if (((PerlClassAccessorDeclaration) element).isAccessorWritable())
+			{
 				queryParameters.getOptimizer().searchWord(((PerlClassAccessorDeclaration) element).getSetterName(), queryParameters.getEffectiveSearchScope(), true, element);
+			}
 		}
 	}
 }

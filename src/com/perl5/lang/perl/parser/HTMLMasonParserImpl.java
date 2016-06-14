@@ -87,7 +87,10 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
 		if (PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_OPENER))
 		{
-			while (parseArgument(b, l) || parseHardNewline(b)) ;
+			while (parseArgument(b, l) || parseHardNewline(b))
+			{
+				;
+			}
 		}
 
 		r = MasonParserUtil.endOrRecover(b, HTML_MASON_ARGS_CLOSER);
@@ -196,7 +199,10 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 					{
 						b.advanceLexer();
 
-						while (PerlParserUtil.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME)) ;
+						while (PerlParserUtil.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME))
+						{
+							;
+						}
 
 						if (!PerlParserUtil.consumeToken(b, OPERATOR_COMMA))
 						{

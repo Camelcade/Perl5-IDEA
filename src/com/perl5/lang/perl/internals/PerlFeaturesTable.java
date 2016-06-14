@@ -86,7 +86,9 @@ public class PerlFeaturesTable implements Cloneable
 	{
 		featuresMap = new HashMap<String, Boolean>();
 		for (String feature : AVAILABLE_FEATURES.keySet())
+		{
 			featuresMap.put(feature, false);
+		}
 	}
 
 	public PerlFeaturesTable clone()
@@ -96,7 +98,8 @@ public class PerlFeaturesTable implements Cloneable
 			PerlFeaturesTable newTable = (PerlFeaturesTable) super.clone();
 			newTable.featuresMap = (HashMap<String, Boolean>) featuresMap.clone();
 			return newTable;
-		} catch (CloneNotSupportedException e)
+		}
+		catch (CloneNotSupportedException e)
 		{
 			throw new RuntimeException(e.getMessage());
 		}

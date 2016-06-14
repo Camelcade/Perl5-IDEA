@@ -59,11 +59,15 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
 	{
 		if (!HTML_MASON_IDENTIFIER_PATTERN.matcher(name).matches())
+		{
 			throw new IncorrectOperationException("Incorrect HTML::Mason identifier");
+		}
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier instanceof LeafPsiElement)
+		{
 			((LeafPsiElement) nameIdentifier).replaceWithText(name);
+		}
 
 		return this;
 	}
@@ -83,7 +87,9 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
 		PsiElement nameIdentifier = getNameIdentifier();
 		if (nameIdentifier != null)
+		{
 			return nameIdentifier.getText();
+		}
 		return super.getName();
 	}
 
@@ -145,7 +151,9 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
 		HTMLMasonBlock block = PsiTreeUtil.getChildOfType(this, HTMLMasonBlock.class);
 		if (block != null)
+		{
 			return block.getArgsBlocks();
+		}
 
 		return Collections.emptyList();
 	}

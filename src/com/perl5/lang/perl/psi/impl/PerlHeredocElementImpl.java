@@ -52,8 +52,14 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		if (visitor instanceof PsiPerlVisitor) ((PerlVisitor) visitor).visitHeredocElement(this);
-		else super.accept(visitor);
+		if (visitor instanceof PsiPerlVisitor)
+		{
+			((PerlVisitor) visitor).visitHeredocElement(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 
 	@NotNull

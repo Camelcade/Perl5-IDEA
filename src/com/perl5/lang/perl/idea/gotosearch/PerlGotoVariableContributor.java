@@ -44,16 +44,24 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor
 		Collection<String> result = new ArrayList<String>();
 
 		for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project))
+		{
 			result.add("$" + name);
+		}
 
 		for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project))
+		{
 			result.add("@" + name);
+		}
 
 		for (String name : PerlHashUtil.getDefinedGlobalHashNames(project))
+		{
 			result.add("%" + name);
+		}
 
 		for (String name : PerlGlobUtil.getDefinedGlobsNames(project))
+		{
 			result.add("*" + name);
+		}
 
 		return result.toArray(new String[result.size()]);
 	}

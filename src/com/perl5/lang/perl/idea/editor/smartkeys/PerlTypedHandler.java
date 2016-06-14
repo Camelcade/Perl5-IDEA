@@ -125,7 +125,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 					}
 
 					if (result != null)
+					{
 						return result;
+					}
 				}
 			}
 		}
@@ -180,11 +182,15 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 	private char getRegexCloseChar(char openingChar, boolean hasSpace)
 	{
 		if (hasSpace && openingChar == '#')    // sharp may be only without space
+		{
 			return 0;
+		}
 //		if (!hasSpace && (openingChar == '_' || Character.isLetterOrDigit(openingChar))) // identifier continuation may be only with space
 //			return 0;
 		if (openingChar == '_' || Character.isLetterOrDigit(openingChar)) // temporarily disabled auto-insertion of non-delimiter quotes because of race
+		{
 			return 0;
+		}
 
 		return RegexBlock.getQuoteCloseChar(openingChar);
 	}

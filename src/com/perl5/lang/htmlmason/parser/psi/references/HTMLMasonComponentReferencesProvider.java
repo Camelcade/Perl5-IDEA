@@ -58,7 +58,9 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
 					String methodName = m.group(2);
 
 					if (methodName == null)
+					{
 						methodName = "";
+					}
 
 					TextRange componentRange = new TextRange(range.getStartOffset(), range.getStartOffset() + fileOrSlug.length());
 					TextRange methodRange = new TextRange(range.getEndOffset() - methodName.length(), range.getEndOffset());

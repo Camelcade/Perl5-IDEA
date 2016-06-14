@@ -36,7 +36,9 @@ public abstract class PerlConstantDefinitionMixin extends PerlCompositeElementIm
 	{
 		PsiElement[] children = getChildren();
 		if (children.length > 1)
+		{
 			return children[children.length - 1];
+		}
 		return null;
 	}
 }

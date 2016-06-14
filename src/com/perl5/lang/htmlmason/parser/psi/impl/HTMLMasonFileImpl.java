@@ -88,7 +88,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 					!(run instanceof PerlLexicalScope) &&
 					!run.processDeclarations(processor, resolveState, null, place)
 					)
+			{
 				return false;
+			}
 			run = run.getPrevSibling();
 		}
 
@@ -145,7 +147,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	public boolean isInPerlLine(PsiElement element)
 	{
 		if (element == null)
+		{
 			return false;
+		}
 
 		ASTNode node = element.getNode();
 		int startOffset = node.getStartOffset();
@@ -164,7 +168,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 			Boolean result = myPerlLinesMap.get(lineNumber);
 
 			if (result != null)
+			{
 				return result;
+			}
 
 			PsiElement firstElement = findElementAt(document.getLineStartOffset(lineNumber));
 
@@ -462,37 +468,51 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		if (checkCode)
 		{
 			if (!processChildren(this, processor, state, lastParent, place))
+			{
 				return false;
+			}
 		}
 		if (checkCleanup)
 		{
 			if (!checkSubblocks(processor, state, place, HTMLMasonCleanupBlock.class, cleanupAnchor))
+			{
 				return false;
+			}
 		}
 		if (checkInit)
 		{
 			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class, initAnchor))
+			{
 				return false;
+			}
 		}
 		if (checkArgs)
 		{
 			if (!checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class, argsAnchor))
+			{
 				return false;
+			}
 		}
 		if (checkShared)
 		{
 			if (!checkSubblocks(processor, state, place, HTMLMasonSharedBlock.class, sharedAnchor))
+			{
 				return false;
+			}
 		}
 
 		if (!checkSubblocks(processor, state, place, HTMLMasonOnceBlock.class, onceAnchor))
+		{
 			return false;
+		}
 
 		// implicit variables
 		for (PerlVariableDeclarationWrapper wrapper : getImplicitVariables())
 		{
 			if (!processor.execute(wrapper, state))
+			{
 				return false;
+			}
 		}
 
 		return false;
@@ -617,7 +637,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		recursionSet.add(this);
 
 		if (!processMethodDefinitions(processor))
+		{
 			return false;
+		}
 
 		HTMLMasonFileImpl parentComponent = getParentComponent();
 
@@ -639,7 +661,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		{
 			assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
 			if (!processor.process((HTMLMasonMethodDefinition) methodDefinition))
+			{
 				return false;
+			}
 		}
 		return true;
 	}
@@ -788,19 +812,33 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 				public boolean execute(@NotNull PsiElement element)
 				{
 					if (element instanceof HTMLMasonOnceBlock)
+					{
 						onceResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonSharedBlock)
+					{
 						sharedResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonCleanupBlock)
+					{
 						cleanupResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonInitBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+					{
 						initResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+					{
 						argsResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonMethodDefinition)
+					{
 						methodsResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonSubcomponentDefitnition)
+					{
 						subComponentsResult.add((HTMLMasonCompositeElement) element);
+					}
 
 					return true;
 				}

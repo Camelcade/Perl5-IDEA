@@ -72,11 +72,15 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlUseStatementStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getPackageName();
+		}
 
 		PerlNamespaceElement ns = getNamespaceElement();
 		if (ns != null)
+		{
 			return ns.getCanonicalName();
+		}
 		return null;
 	}
 
@@ -98,10 +102,14 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlUseStatementStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getImportParameters();
+		}
 
 		if (getExpr() == null)
+		{
 			return null;
+		}
 
 
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
@@ -120,20 +128,28 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	{
 		// cached
 		if (packageProcessor != null)
+		{
 			return packageProcessor;
+		}
 
 		// package name processor
 		String packageName = getPackageName();
 		if (packageName != null)
+		{
 			packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
+		}
 
 		// version processor
 		if (packageName == null && getVersionElement() != null)
+		{
 			packageProcessor = PerlVersionProcessor.getProcessor(this);
+		}
 
 		// default processor
 		if (packageProcessor == null)
+		{
 			packageProcessor = PerlPackageProcessorDefault.INSTANCE;
+		}
 
 		return packageProcessor;
 	}
@@ -143,7 +159,9 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	{
 		PerlUseStatementStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getOuterPackageName();
+		}
 
 		return PerlPackageUtil.getContextPackageName(this);
 	}

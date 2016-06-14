@@ -106,7 +106,9 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 	{
 		PodSectionStub stub = getStub();
 		if (stub != null)
+		{
 			return stub.getTitleText();
+		}
 
 		StringBuilder builder = new StringBuilder();
 		renderElementTitleAsText(builder, new PodRenderingContext());

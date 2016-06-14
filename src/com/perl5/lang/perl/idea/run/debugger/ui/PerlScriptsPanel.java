@@ -74,7 +74,9 @@ public class PerlScriptsPanel extends JPanel
 		VirtualFile result = VfsUtil.findFileByIoFile(new File(virtualFileName), true);
 
 		if (result != null)
+		{
 			return result;
+		}
 
 		return VirtualFileManager.getInstance().findFileByUrl(PerlRemoteFileSystem.PROTOCOL_PREFIX + virtualFileName);
 	}

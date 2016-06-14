@@ -62,7 +62,9 @@ public class PerlCriticErrorDescriptor
 	public void append(String text)
 	{
 		if (text != null)
+		{
 			myMessage.append(text);
+		}
 	}
 
 	public int getLine()

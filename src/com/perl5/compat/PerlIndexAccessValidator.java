@@ -40,7 +40,10 @@ public class PerlIndexAccessValidator
 			final String message = MessageFormat.format("Accessing ''{0}'' during processing ''{1}''. Nested different indices processing may cause deadlock",
 					indexKey.toString(),
 					alreadyProcessingIndex.toString());
-			if (ApplicationManager.getApplication().isUnitTestMode()) throw new RuntimeException(message);
+			if (ApplicationManager.getApplication().isUnitTestMode())
+			{
+				throw new RuntimeException(message);
+			}
 			Logger.getInstance(FileBasedIndexImpl.class).error(message); // RuntimeException to skip rebuild
 		}
 	}

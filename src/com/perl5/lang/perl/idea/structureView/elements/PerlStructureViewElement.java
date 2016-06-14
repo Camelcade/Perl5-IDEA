@@ -164,7 +164,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 		{
 			// namespaces
 			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
+			{
 				result.add(new PerlStructureViewElement(child));
+			}
 		}
 
 		if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition)
@@ -396,7 +398,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			}
 
 			if (!inheritedResult.isEmpty())
+			{
 				result.addAll(0, inheritedResult);
+			}
 		}
 
 		return result.toArray(new TreeElement[result.size()]);

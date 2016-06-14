@@ -59,8 +59,14 @@ public class PerlLoadedFileDescriptor
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o) return true;
-		if (!(o instanceof PerlLoadedFileDescriptor)) return false;
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof PerlLoadedFileDescriptor))
+		{
+			return false;
+		}
 
 		PerlLoadedFileDescriptor that = (PerlLoadedFileDescriptor) o;
 

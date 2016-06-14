@@ -97,7 +97,9 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 			Library.ModifiableModel modifiableModel = library.getModifiableModel();
 			modifiableModel.addRoot(getUrlByPath(moduleLibraryPath), OrderRootType.CLASSES);
 			if (sourceLibraryPath != null)
+			{
 				modifiableModel.addRoot(getUrlByPath(sourceLibraryPath), OrderRootType.SOURCES);
+			}
 			modifiableModel.commit();
 		}
 	}
@@ -136,7 +138,9 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 	public void addSourcePath(Pair<String, String> sourcePathInfo)
 	{
 		if (mySourcePaths == null)
+		{
 			mySourcePaths = new ArrayList<Pair<String, String>>();
+		}
 
 		mySourcePaths.add(sourcePathInfo);
 	}

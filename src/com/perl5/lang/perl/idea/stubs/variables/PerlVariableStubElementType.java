@@ -81,9 +81,13 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	public void serialize(@NotNull PerlVariableStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		if (stub.getDeclaredType() == null)
+		{
 			dataStream.writeName("");
+		}
 		else
+		{
 			dataStream.writeName(stub.getDeclaredType());
+		}
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getVariableName());
 		dataStream.writeByte(stub.getActualType().ordinal());
@@ -95,7 +99,9 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	{
 		String variableType = dataStream.readName().toString();
 		if (variableType.isEmpty())
+		{
 			variableType = null;
+		}
 
 		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString(), variableType, PerlVariableType.values()[dataStream.readByte()]);
 	}

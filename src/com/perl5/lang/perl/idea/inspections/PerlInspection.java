@@ -31,19 +31,25 @@ public abstract class PerlInspection extends LocalInspectionTool
 	protected void registerProblem(ProblemsHolder holder, PsiElement element, String message)
 	{
 		if (!element.getNode().getText().isEmpty())
+		{
 			holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
+		}
 	}
 
 	protected void registerError(ProblemsHolder holder, PsiElement element, String message)
 	{
 		if (!element.getNode().getText().isEmpty())
+		{
 			holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
+		}
 	}
 
 	protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message)
 	{
 		if (!element.getNode().getText().isEmpty())
+		{
 			holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);
+		}
 	}
 
 /*

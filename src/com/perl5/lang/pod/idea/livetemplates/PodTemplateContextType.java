@@ -64,7 +64,9 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 			}
 
 			if (element == null)
+			{
 				return false;
+			}
 
 			return isInContext(element);
 		}
@@ -188,7 +190,9 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 		protected boolean isInContext(PsiElement element)
 		{
 			if (!super.isInContext(element))
+			{
 				return false;
+			}
 
 			PodSectionItem firstItem = getFirstSectionItem(element);
 			return firstItem == null || firstItem.isBulleted();
@@ -206,7 +210,9 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 		protected boolean isInContext(PsiElement element)
 		{
 			if (!super.isInContext(element))
+			{
 				return false;
+			}
 
 			PodSectionItem firstItem = getFirstSectionItem(element);
 			return firstItem == null || !firstItem.isBulleted();

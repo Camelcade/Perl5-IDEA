@@ -41,11 +41,15 @@ public class PerlNamespaceClashesInspection extends PerlInspection
 			{
 				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
 				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
+				{
 					return;
+				}
 
 				// fixme we should check that this is not in SDK
 				if (namespaceElement.isBuiltin())
+				{
 					registerProblem(holder, namespaceElement, "Namespace definition clashes with built-in namespace");
+				}
 
 			}
 		};

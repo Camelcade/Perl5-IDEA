@@ -78,12 +78,16 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 		if (checkCode)
 		{
 			if (!super.processDeclarations(processor, state, lastParent, place))
+			{
 				return false;
+			}
 		}
 		if (checkInit)
 		{
 			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class, initAnchor))
+			{
 				return false;
+			}
 		}
 
 		return checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class, argsAnchor);
@@ -158,9 +162,13 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 				public boolean execute(@NotNull PsiElement element)
 				{
 					if (element instanceof HTMLMasonInitBlock && myBlock.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+					{
 						initResult.add((HTMLMasonCompositeElement) element);
+					}
 					else if (element instanceof HTMLMasonArgsBlock && myBlock.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+					{
 						argsResult.add((HTMLMasonCompositeElement) element);
+					}
 
 					return true;
 				}

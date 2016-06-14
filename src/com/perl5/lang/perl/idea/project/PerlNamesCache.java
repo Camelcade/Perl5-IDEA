@@ -137,7 +137,8 @@ public class PerlNamesCache implements ProjectComponent
 					try
 					{
 						wait();
-					} catch (Exception e)
+					}
+					catch (Exception e)
 					{
 						break;
 					}

@@ -37,7 +37,9 @@ public class PerlVersionElementImpl extends LeafPsiElement implements PerlVersio
 	public PerlVersion getPerlVersion()
 	{
 		if (myPerlVersion == null)
+		{
 			myPerlVersion = new PerlVersion(getText());
+		}
 
 		return myPerlVersion;
 	}

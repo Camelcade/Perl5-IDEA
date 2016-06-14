@@ -64,7 +64,9 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
 	{
 		final PsiElement element = parameters.getOriginalPosition();
 		if (element == null)
+		{
 			return;
+		}
 
 		PsiElement prevElement = element.getPrevSibling();
 

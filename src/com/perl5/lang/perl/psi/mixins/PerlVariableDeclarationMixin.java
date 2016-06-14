@@ -40,7 +40,9 @@ public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMembe
 	{
 		PerlNamespaceElement namespaceElement = getNamespaceElement();
 		if (namespaceElement != null)
+		{
 			return namespaceElement.getCanonicalName();
+		}
 		return null;
 	}
 

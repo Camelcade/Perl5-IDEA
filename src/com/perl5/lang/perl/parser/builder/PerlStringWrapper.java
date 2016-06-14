@@ -47,7 +47,9 @@ public class PerlStringWrapper
 	public PsiBuilder.Marker wrapMarker(@NotNull PsiBuilder.Marker marker)
 	{
 		if (!canProcess())
+		{
 			return null;
+		}
 
 		PsiBuilder.Marker m = marker.precede();
 		m.done(myTargetElementType);
@@ -60,7 +62,9 @@ public class PerlStringWrapper
 	public PsiBuilder.Marker wrapNextToken(@NotNull PerlBuilder b)
 	{
 		if (!canProcess())
+		{
 			return null;
+		}
 
 		PsiBuilder.Marker m = b.mark();
 		b.advanceLexer();

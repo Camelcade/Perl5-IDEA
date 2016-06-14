@@ -92,7 +92,9 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 		}
 		else
+		{
 			throw new RuntimeException("Inappropriate package name " + tokenText);
+		}
 	}
 
 	@Override
@@ -120,7 +122,9 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		{
 			int endOffset = 1;
 			while (Character.isDigit(tokenText.charAt(endOffset)))
+			{
 				endOffset++;
+			}
 
 			yypushback(tokenText.length() - endOffset);
 			return NUMBER_SIMPLE;

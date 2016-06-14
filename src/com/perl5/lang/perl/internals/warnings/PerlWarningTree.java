@@ -122,10 +122,16 @@ public class PerlWarningTree
 		LEAF_OPTIONS = new HashMap<String, PerlWarningTreeLeaf>();
 
 		for (PerlWarningTreeLeaf leaf : TREE.collectChildLeafs())
+		{
 			if (LEAF_OPTIONS.containsKey(leaf.getStringIdentifier()))
+			{
 				throw new RuntimeException("Duplicate warnings tree leaf element: " + leaf.getStringIdentifier());
+			}
 			else
+			{
 				LEAF_OPTIONS.put(leaf.getStringIdentifier(), leaf);
+			}
+		}
 	}
 
 	static
@@ -133,10 +139,16 @@ public class PerlWarningTree
 		NODE_OPTIONS = new HashMap<String, PerlWarningTreeNode>();
 
 		for (PerlWarningTreeNode node : TREE.collectChildNodes())
+		{
 			if (NODE_OPTIONS.containsKey(node.getStringIdentifier()))
+			{
 				throw new RuntimeException("Duplicate warnings tree node element: " + node.getStringIdentifier());
+			}
 			else
+			{
 				NODE_OPTIONS.put(node.getStringIdentifier(), node);
+			}
+		}
 	}
 
 }

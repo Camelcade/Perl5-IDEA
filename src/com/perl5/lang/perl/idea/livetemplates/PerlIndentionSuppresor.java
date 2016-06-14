@@ -43,7 +43,9 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 					|| PerlLexer.HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
 					|| PerlLexer.HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
 					)
+			{
 				template.setToIndent(false);
+			}
 		}
 	}
 
@@ -59,7 +61,9 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 	{
 		// fixme this is probably bad. Doesn't work if it's custom group
 		if (template instanceof TemplateImpl)
+		{
 			return ((TemplateImpl) template).getGroupName().startsWith("Perl5");
+		}
 		return false;
 	}
 

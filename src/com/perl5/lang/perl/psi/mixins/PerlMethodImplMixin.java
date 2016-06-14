@@ -72,7 +72,9 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		String namespace = getExplicitPackageName();
 
 		if (namespace == null)
+		{
 			namespace = getContextPackageName();
+		}
 
 		return namespace;
 	}

@@ -45,14 +45,19 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 				PsiElement container = o.getParent();
 
 				if (container instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) container).getSubAnnotations().isDeprecated())
+				{
 					markDeprecated(holder, o, "This sub defined as deprecated");
+				}
 				else if (container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).getSubAnnotations().isDeprecated())
+				{
 					markDeprecated(holder, o, "This sub declared as deprecated");
+				}
 				else
 				{
 					PsiReference reference = o.getReference();
 
 					if (reference instanceof PerlSubReference)
+					{
 						for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 						{
 							PsiElement targetElement = resolveResult.getElement();
@@ -64,6 +69,7 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 								return;
 							}
 						}
+					}
 				}
 			}
 		};

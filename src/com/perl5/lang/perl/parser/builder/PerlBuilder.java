@@ -109,10 +109,14 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
 			// reached end
 			if (rawTokenType == null)
+			{
 				return null;
+			}
 
 			if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType))
+			{
 				steps -= step;
+			}
 		}
 
 		// fixme crushes on quick s typing

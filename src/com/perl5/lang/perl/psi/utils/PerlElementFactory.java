@@ -134,8 +134,8 @@ public class PerlElementFactory
 
 	public static PerlFileImpl createFile(Project project, String text, FileType fileType)
 	{
-			return (PerlFileImpl) PsiFileFactory.getInstance(project).
-					createFileFromText("file.dummy", fileType, text);
+		return (PerlFileImpl) PsiFileFactory.getInstance(project).
+				createFileFromText("file.dummy", fileType, text);
 	}
 
 

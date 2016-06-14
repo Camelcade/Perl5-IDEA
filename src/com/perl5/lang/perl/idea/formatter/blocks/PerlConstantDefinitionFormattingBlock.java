@@ -58,7 +58,10 @@ public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock
 
 		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
 		{
-			if (!shouldCreateBlockFor(child)) continue;
+			if (!shouldCreateBlockFor(child))
+			{
+				continue;
+			}
 			blocks.add(createChildBlock(
 					child,
 					null,

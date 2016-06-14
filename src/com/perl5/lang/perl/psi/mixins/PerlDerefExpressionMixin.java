@@ -43,11 +43,15 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	{
 		// todo add some caching here
 		if (methodElement == getFirstChild())    // first element
+		{
 			return PerlPackageUtil.getContextPackageName(this);
+		}
 
 		PsiElement currentElement = methodElement.getPrevSibling();
 		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+		{
 			currentElement = currentElement.getPrevSibling();
+		}
 
 		return getCurrentElementType(currentElement);
 	}
@@ -93,7 +97,9 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	{
 		PsiElement[] children = getChildren();
 		if (children.length > 0)
+		{
 			return getCurrentElementType(children[children.length - 1]);
+		}
 		return null;
 	}
 

@@ -56,7 +56,9 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 			while (true)
 			{
 				if (!parseCatchCompound(b, l))
+				{
 					break;
+				}
 			}
 			return true;
 		}

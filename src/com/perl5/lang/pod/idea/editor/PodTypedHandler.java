@@ -56,18 +56,24 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 	{
 		int insertedChars = 0;
 		if (formatterBlock == null)
+		{
 			return insertedChars;
+		}
 
 		PsiElement openAngles = formatterBlock.getFirstChild();
 		openAngles = openAngles == null ? null : openAngles.getNextSibling();
 
 		if (openAngles == null)
+		{
 			return insertedChars;
+		}
 
 		PsiElement closeAngles = formatterBlock.getLastChild();
 
 		if (closeAngles == null)
+		{
 			return insertedChars;
+		}
 
 		int currentLength = openAngles.getTextRange().getLength();
 		if (currentLength == 1) // need to check spacing
@@ -86,7 +92,9 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 			if (!(closeSpace instanceof PsiWhiteSpace) || closeSpace == openSpace)
 			{
 				if (space == null)
+				{
 					space = PodElementFactory.getSpace(formatterBlock.getProject());
+				}
 				formatterBlock.addBefore(space, closeAngles);
 				insertedChars++;
 			}
