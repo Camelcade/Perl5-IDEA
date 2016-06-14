@@ -21,7 +21,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -53,29 +52,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection
 						registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
 					}
 				}
-
-				if (!PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).isEmpty())
-				{
-					registerProblem(holder, o.getNameIdentifier(), String.format("%s definition clashes with constant definition", name));
-				}
 				super.visitSubDefinitionBase(o);
-			}
-
-			@Override
-			public void visitPerlConstant(@NotNull PerlConstant o)
-			{
-				Project project = o.getProject();
-				String canonicalName = o.getCanonicalName();
-
-				if (!PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).isEmpty())
-				{
-					registerProblem(holder, o.getNameIdentifier(), "Constant clashes with sub definition");
-				}
-
-				if (PerlSubUtil.getConstantsDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
-				{
-					registerProblem(holder, o.getNameIdentifier(), "Multiple constants definitions found");
-				}
 			}
 		};
 	}

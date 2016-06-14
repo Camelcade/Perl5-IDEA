@@ -162,15 +162,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 						super.visitSubDefinitionBase(o);
 					}
 
-					@Override
-					public void visitConstantName(@NotNull PsiPerlConstantName o)
-					{
-						if (contextPackageName.equals(o.getPackageName()))
-						{
-							result.addElement(LookupElementBuilder.create(o.getText()));
-						}
-						super.visitConstantName(o);
-					}
 				}
 		);
 	}

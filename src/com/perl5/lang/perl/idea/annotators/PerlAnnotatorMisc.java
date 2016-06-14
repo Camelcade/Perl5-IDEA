@@ -35,6 +35,7 @@ import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlConstantDefinition;
 import com.perl5.lang.perl.psi.PerlLabel;
 import com.perl5.lang.perl.psi.PsiPerlNyiStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -53,6 +54,16 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 	{
 		if (element instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost) element))
 		{
+			return;
+		}
+
+		if (element.getParent() instanceof PerlConstantDefinition)
+		{
+			decorateElement(
+					holder.createInfoAnnotation(element, null),
+					PerlSyntaxHighlighter.PERL_CONSTANT,
+					false,
+					false);
 			return;
 		}
 

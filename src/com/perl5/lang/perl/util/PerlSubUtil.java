@@ -28,7 +28,6 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
@@ -179,48 +178,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static boolean processDeclaredSubsNames(Project project, Processor<String> processor)
 	{
 		return PerlStubIndex.getInstance().processAllKeys(PerlSubDeclarationStubIndex.KEY, project, processor);
-	}
-
-	/**
-	 * Searching project files for constants definitions by specific package and name
-	 *
-	 * @param project       project to search in
-	 * @param canonicalName canonical function name package::name
-	 * @return Collection of found definitions
-	 */
-	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName)
-	{
-		return getConstantsDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
-	}
-
-	public static Collection<PerlConstant> getConstantsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
-	{
-		assert canonicalName != null;
-		return PerlStubIndex.getElements(PerlConstantsStubIndex.KEY, canonicalName, project, scope, PerlConstant.class);
-	}
-
-
-	/**
-	 * Returns list of defined constants
-	 *
-	 * @param project project to search in
-	 * @return collection of constants names
-	 */
-	public static Collection<String> getDefinedConstantsNames(Project project)
-	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlConstantsStubIndex.KEY, project);
-	}
-
-	/**
-	 * Processes all defined constants names with given processor
-	 *
-	 * @param project   project to search in
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
-	 */
-	public static boolean processDefinedConstantsNames(Project project, Processor<String> processor)
-	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlConstantsStubIndex.KEY, project, processor);
 	}
 
 	/**
@@ -488,13 +445,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 			}
 		}
 		for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope))
-		{
-			if (!processor.process(target))
-			{
-				return;
-			}
-		}
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
 		{
 			if (!processor.process(target))
 			{

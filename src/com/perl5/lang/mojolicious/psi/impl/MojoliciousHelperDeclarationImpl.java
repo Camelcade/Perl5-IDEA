@@ -24,6 +24,7 @@ import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,23 +53,7 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 
 		if (commaSequence != null)
 		{
-			PsiElement name = commaSequence.getFirstChild();
-			if (name instanceof PsiPerlStringBare)
-			{
-				return name.getFirstChild();
-			}
-			else if (name instanceof PerlString)
-			{
-				PsiElement run = name.getFirstChild();
-				if (run != null)
-				{
-					run = run.getNextSibling();
-					if (run != null && run.getNode().getElementType() == STRING_IDENTIFIER)
-					{
-						return run;
-					}
-				}
-			}
+			return PerlPsiUtil.getFirstContentTokenOfString(commaSequence.getFirstChild());
 		}
 
 		return null;

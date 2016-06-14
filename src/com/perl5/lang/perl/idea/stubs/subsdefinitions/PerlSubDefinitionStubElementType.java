@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -128,9 +127,9 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement element = node.getPsi();
-		return element instanceof PerlSubDefinition &&
+		return element instanceof PerlSubDefinitionBase &&
 				element.isValid() &&
-				StringUtil.isNotEmpty(((PerlSubDefinition) element).getSubName());
+				StringUtil.isNotEmpty(((PerlSubDefinitionBase) element).getSubName());
 	}
 
 }

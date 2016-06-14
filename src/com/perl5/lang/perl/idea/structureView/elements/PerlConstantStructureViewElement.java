@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.perl5.lang.perl.psi.PerlConstant;
+import com.perl5.lang.perl.psi.PerlConstantDefinition;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
 public class PerlConstantStructureViewElement extends PerlLeafStructureViewElement
 {
-	public PerlConstantStructureViewElement(PerlConstant element)
+	public PerlConstantStructureViewElement(PerlConstantDefinition element)
 	{
 		super(element);
 	}

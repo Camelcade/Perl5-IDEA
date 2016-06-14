@@ -167,7 +167,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
-	private static final PerlStringWrapper constantWrapper = new PerlStringWrapper(CONSTANT_NAME);
 	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
 			HEREDOC,
 			HEREDOC_QQ,
@@ -1923,15 +1922,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 
-	}
-
-	public static boolean parseConstantDefinition(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		PerlStringWrapper oldValue = ((PerlBuilder) b).setStringWrapper(constantWrapper);
-		boolean r = PerlParserImpl.string(b, l);
-		((PerlBuilder) b).setStringWrapper(oldValue);
-		return r;
 	}
 
 	public static boolean parsePrintArguments(PsiBuilder b, int l)

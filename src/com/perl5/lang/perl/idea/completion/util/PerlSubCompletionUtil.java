@@ -71,10 +71,6 @@ public class PerlSubCompletionUtil
 		{
 			return getGlobLookupElement((PerlGlobVariable) element);
 		}
-		else if (element instanceof PerlConstant)
-		{
-			return getConstantLookupElement((PerlConstant) element);
-		}
 		throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
 	}
 
@@ -99,17 +95,6 @@ public class PerlSubCompletionUtil
 				.withIcon(globVariable.getIcon(0))
 				.withInsertHandler(SUB_SELECTION_HANDLER)
 				.withTypeText(globVariable.getPackageName(), true)
-				;
-
-	}
-
-	@NotNull
-	public static LookupElementBuilder getConstantLookupElement(PerlConstant constant)
-	{
-		return LookupElementBuilder
-				.create(constant.getName())
-				.withIcon(constant.getIcon(0))
-				.withTypeText(constant.getPackageName(), true)
 				;
 
 	}

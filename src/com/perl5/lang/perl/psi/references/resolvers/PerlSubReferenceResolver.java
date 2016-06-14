@@ -66,13 +66,6 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 				relatedItems.add(target);
 			}
 		}
-		for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName, searchScope))
-		{
-			if (!target.isEquivalentTo(exclusion))
-			{
-				relatedItems.add(target);
-			}
-		}
 	}
 
 	@NotNull

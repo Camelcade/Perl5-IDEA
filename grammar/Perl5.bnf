@@ -318,10 +318,6 @@ limitations under the License.
     mixin("string_sq|string_dq|string_xq")="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin"
     mixin("string_bare")="com.perl5.lang.perl.psi.mixins.PerlStringBareImplMixin"
 
-    implements("constant_name")="com.perl5.lang.perl.psi.PerlConstant"
-    mixin("constant_name")="com.perl5.lang.perl.psi.mixins.PerlConstantImplMixin"
-    stubClass("constant_name")="com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStub"
-
     extends("nested_call")=sub_call_expr
 
     implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
@@ -337,6 +333,7 @@ limitations under the License.
 
     implements("constant_definition")="com.perl5.lang.perl.psi.PerlConstantDefinition"
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
+    stubClass("constant_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
@@ -631,8 +628,7 @@ private recover_single_constant_definition ::= !(RIGHT_BRACE|comma|SEMICOLON)
 
 private single_constant_definition ::= constant_definition {recoverWhile=recover_statement}
 
-constant_definition ::= <<parseConstantDefinition>> comma scalar_expr
-constant_name ::= STRING_CONTENT
+constant_definition ::= string comma scalar_expr
 
 undef_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF (undef_params | LEFT_PAREN undef_params RIGHT_PAREN) ? {pin=2}
 private undef_params ::=

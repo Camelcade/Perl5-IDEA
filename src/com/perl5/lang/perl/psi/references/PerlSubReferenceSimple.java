@@ -154,7 +154,7 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 				setAutoloaded();
 			}
 
-			if (!isConstant() && element instanceof PerlConstant)
+			if (!isConstant() && element instanceof PerlConstantDefinition)
 			{
 				setConstant();
 			}

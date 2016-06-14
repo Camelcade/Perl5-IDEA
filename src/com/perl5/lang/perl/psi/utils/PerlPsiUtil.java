@@ -53,7 +53,7 @@ import java.util.List;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public class PerlPsiUtil
+public class PerlPsiUtil implements PerlElementTypes
 {
 	/**
 	 * Recursively searches for string content elements beginnign from specified PsiElement
@@ -799,6 +799,28 @@ public class PerlPsiUtil
 		return isSelfShortcut(derefExpr.getFirstChild());
 	}
 
+	@Nullable
+	public static PsiElement getFirstContentTokenOfString(PsiElement name)
+	{
+
+		if (name instanceof PsiPerlStringBare)
+		{
+			return name.getFirstChild();
+		}
+		else if (name instanceof PerlString)
+		{
+			PsiElement run = name.getFirstChild();
+			if (run != null)
+			{
+				run = run.getNextSibling();
+				if (run != null && run.getNode().getElementType() == STRING_IDENTIFIER)
+				{
+					return run;
+				}
+			}
+		}
+		return null;
+	}
 
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{

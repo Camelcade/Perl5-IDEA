@@ -169,10 +169,6 @@ public class PerlElementTypeFactory
 		{
 			return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_WRAPPER;
 		}
-		else if (name.equals("CONSTANT_NAME"))
-		{
-			return PerlStubElementTypes.PERL_CONSTANT;
-		}
 
 		else if (name.equals("USE_STATEMENT"))
 		{
@@ -545,28 +541,7 @@ public class PerlElementTypeFactory
 
 		if (name.equals("CONSTANT_DEFINITION"))
 		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlConstantDefinitionImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("CONSTANT_NAME"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlConstantNameImpl(node);
-				}
-			};
+			return PerlStubElementTypes.CONSTANT_DEFINITION;
 		}
 
 		if (name.equals("CONTINUE_BLOCK"))

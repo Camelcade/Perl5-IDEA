@@ -17,18 +17,33 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PsiPerlConstantDefinition;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 29.08.2015.
  */
-public abstract class PerlConstantDefinitionMixin extends PerlCompositeElementImpl implements PsiPerlConstantDefinition
+public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithTextIdentifierImpl implements PsiPerlConstantDefinition
 {
 	public PerlConstantDefinitionMixin(ASTNode node)
 	{
 		super(node);
+	}
+
+	public PerlConstantDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
+	{
+		super(stub, nodeType);
 	}
 
 	@Override
@@ -41,4 +56,37 @@ public abstract class PerlConstantDefinitionMixin extends PerlCompositeElementIm
 		}
 		return null;
 	}
+
+	@Override
+	public boolean isStatic()
+	{
+		return true;
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getNameIdentifier()
+	{
+		return PerlPsiUtil.getFirstContentTokenOfString(getFirstChild());
+	}
+
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new PerlItemPresentationSimple(this, getName());
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon(int flags)
+	{
+		return PerlIcons.CONSTANT_GUTTER_ICON;
+	}
+
+	@Override
+	public String getPresentableName()
+	{
+		return getName();
+	}
+
 }

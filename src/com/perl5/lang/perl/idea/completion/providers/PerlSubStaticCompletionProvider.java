@@ -23,7 +23,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -70,16 +73,5 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
 			}
 		}
-
-		// Constants
-		for (PerlConstant stringConstant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
-		{
-			if (stringConstant.getName() != null)
-			{
-				resultSet.addElement(PerlSubCompletionUtil.getConstantLookupElement(stringConstant));
-			}
-		}
-
-
 	}
 }

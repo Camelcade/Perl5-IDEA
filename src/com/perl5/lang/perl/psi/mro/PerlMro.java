@@ -18,7 +18,10 @@ package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -89,7 +92,6 @@ public abstract class PerlMro
 	{
 		result.addAll(PerlSubUtil.getSubDefinitions(project, fullName));
 		result.addAll(PerlSubUtil.getSubDeclarations(project, fullName));
-		result.addAll(PerlSubUtil.getConstantsDefinitions(project, fullName));
 		result.addAll(PerlGlobUtil.getGlobsDefinitions(project, fullName));
 	}
 
@@ -119,13 +121,6 @@ public abstract class PerlMro
 				if (!methods.containsKey(subDeclaration.getSubName()))
 				{
 					methods.put(subDeclaration.getSubName(), subDeclaration);
-				}
-			}
-			for (PerlConstant constant : PerlSubUtil.getConstantsDefinitions(project, "*" + packageName))
-			{
-				if (!methods.containsKey(constant.getName()))
-				{
-					methods.put(constant.getName(), constant);
 				}
 			}
 			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))

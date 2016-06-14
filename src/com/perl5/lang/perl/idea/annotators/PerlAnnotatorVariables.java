@@ -108,14 +108,6 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 					((PerlVariableNameElementContainer) element).isBuiltIn(),
 					false);
 		}
-		else if (element instanceof PsiPerlConstantName)
-		{
-			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_CONSTANT,
-					false,
-					false);
-		}
 		else if (element instanceof PsiPerlGlobCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);

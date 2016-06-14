@@ -21,7 +21,6 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
@@ -69,14 +68,6 @@ public class PerlSubUnusedInpsection extends PerlInspection
 				}
 			}
 
-			@Override
-			public void visitPerlConstant(@NotNull PerlConstant o)
-			{
-				if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
-				{
-					holder.registerProblem(o, "Unused constant definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-				}
-			}
 		};
 	}
 }

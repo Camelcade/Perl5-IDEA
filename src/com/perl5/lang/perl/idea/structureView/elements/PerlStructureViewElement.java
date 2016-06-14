@@ -284,19 +284,14 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 				for (PerlSubDefinitionBase item : subDefinitions)
 				{
-					result.add(new PerlSubStructureViewElement(item).setImported());
-				}
-
-				// constants
-				Collection<PerlConstant> constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName, projectScope);
-				if (constantsDefinitions.isEmpty())
-				{
-					constantsDefinitions = PerlSubUtil.getConstantsDefinitions(project, canonicalName);
-				}
-
-				for (PerlConstant item : constantsDefinitions)
-				{
-					result.add(new PerlConstantStructureViewElement(item).setImported());
+					if (item instanceof PerlConstantDefinition)
+					{
+						result.add(new PerlConstantStructureViewElement((PerlConstantDefinition) item).setImported());
+					}
+					else
+					{
+						result.add(new PerlSubStructureViewElement(item).setImported());
+					}
 				}
 
 				// globs
@@ -322,16 +317,6 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 				}
 			}
 
-			// containing constants
-			for (PerlConstant child : PsiTreeUtil.findChildrenOfType(myElement, PerlConstant.class))
-			{
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
-				{
-					implementedMethods.add(child.getName());
-					result.add(new PerlConstantStructureViewElement(child));
-				}
-			}
-
 			// containing subs declarations
 			for (PerlSubDeclaration child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclaration.class))
 			{
@@ -353,7 +338,16 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					else
 					{
 						implementedMethods.add(child.getName());
-						result.add(new PerlSubStructureViewElement(child));
+
+						if (child instanceof PerlConstantDefinition)
+						{
+							result.add(new PerlConstantStructureViewElement((PerlConstantDefinition) child));
+
+						}
+						else
+						{
+							result.add(new PerlSubStructureViewElement(child));
+						}
 					}
 				}
 			}
@@ -377,7 +371,11 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 					}
 					else if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement) element).getName()))
 					{
-						if (element instanceof PerlSubDefinitionBase)
+						if (element instanceof PerlConstantDefinition && ((PerlConstantDefinition) element).getName() != null)
+						{
+							inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinition) element).setInherited());
+						}
+						else if (element instanceof PerlSubDefinitionBase)
 						{
 							inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionBase) element).setInherited());
 						}
@@ -388,10 +386,6 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 						else if (element instanceof PerlGlobVariable && ((PerlGlobVariable) element).isLeftSideOfAssignment() && ((PerlGlobVariable) element).getName() != null)
 						{
 							inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable) element).setInherited());
-						}
-						else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
-						{
-							inheritedResult.add(new PerlConstantStructureViewElement((PerlConstant) element).setInherited());
 						}
 					}
 				}

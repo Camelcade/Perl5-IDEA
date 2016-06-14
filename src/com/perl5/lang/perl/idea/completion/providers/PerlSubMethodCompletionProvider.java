@@ -73,10 +73,6 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 			{
 				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement((PerlGlobVariable) element));
 			}
-			else if (element instanceof PerlConstant && ((PerlConstant) element).getName() != null)
-			{
-				resultSet.addElement(PerlSubCompletionUtil.getConstantLookupElement((PerlConstant) element));
-			}
 		}
 	}
 }

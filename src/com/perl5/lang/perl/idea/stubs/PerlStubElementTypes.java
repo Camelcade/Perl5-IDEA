@@ -24,10 +24,10 @@ import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlDoExprElementType;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRequireExprElementType;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
+import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlConstantDefinitionElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlFuncDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.constants.PerlConstantStubElementType;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
 
 /**
@@ -39,10 +39,9 @@ public interface PerlStubElementTypes
 	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
 	IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
 	IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
+	IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
 
 	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
-
-	IStubElementType PERL_CONSTANT = new PerlConstantStubElementType("PERL_CONSTANT");
 
 	IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
 	IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");

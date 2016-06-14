@@ -26,7 +26,6 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlConstant;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
@@ -96,14 +95,6 @@ public class PodSubReference extends PodReferenceBase<PodIdentifierImpl>
 							results.add(new PsiElementResolveResult(target));
 						}
 						for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-						{
-							results.add(new PsiElementResolveResult(target));
-						}
-						for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
-						{
-							results.add(new PsiElementResolveResult(target));
-						}
-						for (PerlConstant target : PerlSubUtil.getConstantsDefinitions(project, canonicalName))
 						{
 							results.add(new PsiElementResolveResult(target));
 						}

@@ -69,9 +69,9 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 				{
 					return "Function definition";
 				}
-				else if (element instanceof PerlConstant)
+				else if (element instanceof PerlConstantDefinition)
 				{
-					return "Constant";
+					return "Constant definition";
 				}
 				else if (element instanceof PerlNamespaceDefinition)
 				{

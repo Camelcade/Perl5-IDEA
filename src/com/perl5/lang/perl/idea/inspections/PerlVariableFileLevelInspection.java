@@ -35,7 +35,7 @@ public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInsp
 			return;
 		}
 
-		if (PsiTreeUtil.getParentOfType(variableDeclarationWrapper, PerlSubDefinition.class, PerlMethodDefinition.class, PerlFuncDefinition.class, PsiPerlSubExpr.class) == null)
+		if (PsiTreeUtil.getParentOfType(variableDeclarationWrapper, PerlSubDefinitionBase.class, PerlMethodDefinition.class, PerlFuncDefinition.class, PsiPerlSubExpr.class) == null)
 		{
 			PerlVariable variable = variableDeclarationWrapper.getVariable();
 			if (variable != null)
