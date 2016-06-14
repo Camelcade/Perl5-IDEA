@@ -16,11 +16,13 @@
 
 package com.perl5.lang.tt2.idea.settings;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -88,8 +90,24 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
 	public void settingsUpdated()
 	{
-		FileContentUtil.reparseOpenedFiles();
 		createLazyObjects();
+		final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+		if (fileTypeManager instanceof FileTypeManagerImpl)
+		{
+			ApplicationManager.getApplication().runWriteAction(
+					new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							((FileTypeManagerImpl) fileTypeManager).fireBeforeFileTypesChanged();
+							((FileTypeManagerImpl) fileTypeManager).fireFileTypesChanged();
+						}
+					}
+
+			);
+		}
+		FileContentUtil.reparseOpenedFiles();
 	}
 
 	protected void setProject(Project project)
