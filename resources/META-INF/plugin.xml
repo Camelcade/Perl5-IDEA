@@ -45,6 +45,7 @@
         <li>Subs with empty <code>shift;</code> as a first statement considered to be a method</li>
         <li>Subs with <code>undef</code> as first unpacked argument considered to be a method</li>
       </ul></li>
+      <li>Constants are now being parsed as subs, so inheritance, inspections, annotations and gutter navigation should work on them too</li>
       </ul>
      </p>
      <!--<p>Fixes:-->
