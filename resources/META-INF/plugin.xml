@@ -393,6 +393,8 @@
 
         <completion.contributor language="Template Toolkit 2"
                                 implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
+        <editorNotificationProvider
+                implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
         <!-- End of template toolkit -->
 
         <!--Embedded Perl-->
