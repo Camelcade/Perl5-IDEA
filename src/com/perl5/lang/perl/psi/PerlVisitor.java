@@ -146,4 +146,10 @@ public class PerlVisitor extends PsiPerlVisitor
 	{
 		visitSubDefinitionBase(o);
 	}
+
+	@Override
+	public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o)
+	{
+		visitSubDefinitionBase(o);
+	}
 }
