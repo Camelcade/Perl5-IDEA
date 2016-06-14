@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+sub somesub{
+	shift;
+}

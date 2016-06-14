@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+#@method
+sub somesub{
+}

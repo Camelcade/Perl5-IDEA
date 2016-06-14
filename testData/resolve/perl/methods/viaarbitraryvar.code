@@ -1,0 +1,10 @@
+package Foo::Bar;
+
+#@method
+sub something{
+}
+
+sub somesub{
+	my $var = shift;
+    $var->somet<caret>hing;
+}

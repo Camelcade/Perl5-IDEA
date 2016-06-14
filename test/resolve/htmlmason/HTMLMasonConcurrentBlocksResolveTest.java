@@ -31,6 +31,11 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTes
 		return "testData/resolve/htmlmason/concurrent_blocks";
 	}
 
+	@Override
+	public String getFileExtension()
+	{
+		return "mas";
+	}
 
 	public void testArgs() throws Exception
 	{
@@ -49,7 +54,7 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTes
 
 	protected void doTest(String fileName)
 	{
-		initWithFileAsHTMLMason(fileName);
+		initWithFileSmart(fileName);
 		PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationWrapper.class);
 		assertNotNull(fileLevelDeclaration);
 		PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationWrapper.class);

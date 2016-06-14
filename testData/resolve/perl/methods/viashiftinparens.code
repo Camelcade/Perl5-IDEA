@@ -1,0 +1,9 @@
+package Foo::Bar;
+
+#@method
+sub something{
+}
+
+sub somesub{
+    (shift)->somet<caret>hing;
+}

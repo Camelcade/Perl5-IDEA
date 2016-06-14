@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+sub somesub{
+    ($_[0])->somemethod2();
+}

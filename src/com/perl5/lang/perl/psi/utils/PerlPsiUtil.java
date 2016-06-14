@@ -738,6 +738,11 @@ public class PerlPsiUtil
 	 */
 	public static boolean isSelfShortcut(PsiElement element)
 	{
+		if (element instanceof PsiPerlParenthesisedExpr)
+		{
+			return isSelfShortcut(((PsiPerlParenthesisedExpr) element).getExpr());
+		}
+
 		if (element == null ||
 				!(element instanceof PsiPerlNamedUnaryExprImpl && StringUtil.equals(element.getText(), "shift") ||
 						element instanceof PsiPerlScalarArrayElementImpl && StringUtil.equals(element.getText(), "$_[0]")
@@ -761,6 +766,39 @@ public class PerlPsiUtil
 		PsiPerlStatement[] statements = PsiTreeUtil.getChildrenOfType(statementContainer, PsiPerlStatement.class);
 		return statements != null && statements.length == 1;
 	}
+
+	/**
+	 * Checks if statement is shift/$_[0] deref shortcut
+	 *
+	 * @param statement statement
+	 * @return check result
+	 */
+	public static boolean isSelfShortcutStatement(PsiPerlStatement statement)
+	{
+		if (statement == null)
+		{
+			return false;
+		}
+
+		PsiElement derefExpr = statement.getFirstChild();
+		if (derefExpr == null)
+		{
+			return false;
+		}
+
+		if (derefExpr instanceof PsiPerlReturnExprImpl)
+		{
+			derefExpr = derefExpr.getLastChild();
+		}
+
+		if (!(derefExpr instanceof PsiPerlDerefExpr))
+		{
+			return false;
+		}
+
+		return isSelfShortcut(derefExpr.getFirstChild());
+	}
+
 
 	static public abstract class HeredocProcessor implements Processor<PsiElement>
 	{
@@ -803,5 +841,4 @@ public class PerlPsiUtil
 			return myResult;
 		}
 	}
-
 }

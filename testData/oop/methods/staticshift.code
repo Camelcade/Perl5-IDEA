@@ -1,0 +1,6 @@
+package Foo::Bar;
+
+sub somesub{
+    my $var1 = shift;
+    my $var2 = shift;
+}

@@ -25,9 +25,15 @@ import com.intellij.psi.PsiReference;
  */
 public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTestCase
 {
+	@Override
+	public String getFileExtension()
+	{
+		return "pl";
+	}
+
 	public void doTest(String filename, boolean success, Class clazz)
 	{
-		initWithFile(filename);
+		initWithFileSmart(filename);
 		PsiElement element = getElementAtCaret(clazz);
 		assertNotNull(element);
 		PsiReference reference = element.getReference();
@@ -41,11 +47,6 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 		{
 			assertNull(reference.resolve());
 		}
-	}
-
-	public void initWithFile(String filename)
-	{
-		initWithFileAsScript(filename);
 	}
 
 	public void validateTarget(PsiElement sourceElement, PsiElement targetElement)

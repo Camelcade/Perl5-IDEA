@@ -1,0 +1,4 @@
+package Foo::Bar;
+
+sub somesub{
+}

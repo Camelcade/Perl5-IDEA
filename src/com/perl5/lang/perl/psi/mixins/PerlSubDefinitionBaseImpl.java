@@ -29,6 +29,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -63,12 +64,8 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 		}
 
 		List<PerlSubArgument> arguments = getSubArgumentsList();
-		if (arguments.isEmpty())
-		{
-			return false;
-		}
+		return !arguments.isEmpty() && arguments.get(0).isSelf(getProject());
 
-		return arguments.get(0).isSelf(getProject());
 	}
 
 	@Override
@@ -130,7 +127,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 						break;
 					}
 				}
-				else
+				else if (!(statement instanceof PerlAnnotation))
 				{
 					break;
 				}
@@ -223,13 +220,17 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	protected static class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>
 	{
 		private List<PerlSubArgument> myArguments = new ArrayList<PerlSubArgument>();
-
 		@Override
 		public boolean process(PsiPerlStatement statement)
 		{
-			if (EMPTY_SHIFT_STATEMENT_PATTERN.accepts(statement))
+			if (myArguments.isEmpty() && PerlPsiUtil.isSelfShortcutStatement(statement))
 			{
-				myArguments.add(PerlSubArgument.getEmptyArgument());
+				myArguments.add(PerlSubArgument.getSelfArgument());
+				return true;
+			}
+			else if (EMPTY_SHIFT_STATEMENT_PATTERN.accepts(statement))
+			{
+				myArguments.add(myArguments.isEmpty() ? PerlSubArgument.getSelfArgument() : PerlSubArgument.getEmptyArgument());
 				return true;
 			}
 			else if (DECLARATION_ASSIGNING_PATTERN.accepts(statement))
@@ -240,7 +241,6 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 				{
 					return false;
 				}
-
 
 				PsiElement leftSide = assignExpression.getLeftSide();
 				PsiElement rightSide = assignExpression.getRightSide();
@@ -291,7 +291,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 					}
 					else if (run.getNode().getElementType() == RESERVED_UNDEF)
 					{
-						newArgument = PerlSubArgument.getEmptyArgument();
+						newArgument = myArguments.isEmpty() ? PerlSubArgument.getSelfArgument() : PerlSubArgument.getEmptyArgument();
 					}
 
 					if (newArgument != null)

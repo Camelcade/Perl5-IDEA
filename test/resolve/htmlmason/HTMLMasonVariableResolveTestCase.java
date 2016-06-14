@@ -24,6 +24,12 @@ import resolve.perl.PerlVariableResolveTestCase;
  */
 public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResolveTestCase
 {
+	@Override
+	public String getFileExtension()
+	{
+		return "mas";
+	}
+
 	protected abstract boolean resolveFromOnce();
 
 	protected abstract boolean resolveFromShared();
@@ -120,12 +126,6 @@ public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResol
 	public void testFromFileArgs() throws Exception
 	{
 		doTest("from_file_args", resolveFromFileArgs());
-	}
-
-	@Override
-	public void initWithFile(String filename)
-	{
-		initWithFileAsHTMLMason(filename);
 	}
 
 }

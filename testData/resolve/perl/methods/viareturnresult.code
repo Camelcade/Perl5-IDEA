@@ -1,0 +1,14 @@
+package Foo::Bar;
+
+#@method
+sub something{
+}
+
+#@returns Foo::Bar
+sub getter
+{
+}
+
+sub somesub{
+    (shift->getter)->somet<caret>hing;
+}

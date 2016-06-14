@@ -88,6 +88,16 @@ public class PerlSubArgument
 		);
 	}
 
+	public static PerlSubArgument getSelfArgument()
+	{
+		return new PerlSubArgument(
+				PerlVariableType.SCALAR,
+				"self",
+				"",
+				false
+		);
+	}
+
 	public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException
 	{
 		dataStream.writeInt(arguments.size());
