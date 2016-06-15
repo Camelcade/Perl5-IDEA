@@ -23,28 +23,32 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtil;
 import com.perl5.lang.tt2.psi.TemplateToolkitString;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitCompositeElementImpl;
+import com.perl5.lang.tt2.psi.references.TemplateToolkitBlockReference;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by hurricup on 15.06.2016.
  */
 public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementImpl implements TemplateToolkitString
 {
-	protected static final TokenSet FILES_CONTAINERS = TokenSet.create(
+	public static final TokenSet BLOCK_NAME_TARGETED_CONTAINERS = TokenSet.create(
+			INCLUDE_DIRECTIVE,
+			PROCESS_DIRECTIVE,
+			WRAPPER_DIRECTIVE
+	);
+	protected static final TokenSet FILES_TARGETED_CONTAINERS = TokenSet.create(
 			INSERT_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
 			PROCESS_DIRECTIVE,
 			WRAPPER_DIRECTIVE
 	);
-	protected static final PsiReference[] EMPTY = new PsiReference[0];
-
 	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public TemplateToolkitStringMixin(@NotNull ASTNode node)
@@ -61,9 +65,12 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
 			@Override
 			protected PsiReference[] compute()
 			{
-				if (FILES_CONTAINERS.contains(PsiUtil.getElementType(getParent())))
+				List<PsiReference> references = new ArrayList<PsiReference>();
+				IElementType parentElementType = PsiUtil.getElementType(getParent());
+
+				if (FILES_TARGETED_CONTAINERS.contains(parentElementType))
 				{
-					return new FileReferenceSet(TemplateToolkitStringMixin.this)
+					references.addAll(Arrays.asList(new FileReferenceSet(TemplateToolkitStringMixin.this)
 					{
 						@NotNull
 						@Override
@@ -77,10 +84,15 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
 							}
 							return super.computeDefaultContexts();
 						}
-					}.getAllReferences();
+					}.getAllReferences()));
 				}
 
-				return EMPTY;
+				if (BLOCK_NAME_TARGETED_CONTAINERS.contains(parentElementType))
+				{
+					references.add(new TemplateToolkitBlockReference(TemplateToolkitStringMixin.this));
+				}
+
+				return references.toArray(new PsiReference[references.size()]);
 			}
 		};
 	}

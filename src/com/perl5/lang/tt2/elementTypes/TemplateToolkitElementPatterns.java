@@ -35,4 +35,7 @@ public interface TemplateToolkitElementPatterns extends TemplateToolkitElementTy
 					)
 			);
 
+	// fixme add controlling tokenset
+	PsiElementPattern.Capture<PsiElement> BLOCK_NAME_USAGE_PATTERN = psiElement(TT2_STRING_CONTENT);
+
 }

@@ -38,7 +38,9 @@ public class PerlIcons
 	public static final Icon TEST_FILE = IconLoader.getIcon("/icons/file-test.png");
 	public static final Icon XS_FILE = IconLoader.getIcon("/icons/xsicon.png");
 	public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
+
 	public static final Icon TTK2_ICON = IconLoader.getIcon("/icons/template_toolkit_gutter_icon.png");
+	public static final Icon TTK2_BLOCK_ICON = IconLoader.getIcon("/icons/template_toolkit_block_gutter_icon.png");
 
 	public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
 

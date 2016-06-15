@@ -40,6 +40,8 @@
         <li>Configuration for template roots, file extensions and markers</li>
         <li>Smart completion of block markers</li>
         <li>Ispection for incorrectly positioned directives</li>
+        <li>Files navigation and auto-completion</li>
+        <li>Blocks navigation and auto-completion</li>
       </ul></li>
       <li>Methods detection and resolving:<ul>
         <li>One-statement subs with: <code>shift->something</code>, <code>$_[0]->{something}</code> now considered to be methods. <code>shift</code> and <code>$_[0]</code> considered to be <code>$self</code></li>
@@ -410,6 +412,8 @@
                          groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
                          implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
 
+        <lang.refactoringSupport language="Template Toolkit 2"
+                                 implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
         <!-- End of template toolkit -->
 
         <!--Embedded Perl-->

@@ -33,5 +33,10 @@ public class TemplateToolkitCompletionContributor extends CompletionContributor 
 				new TemplateToolkitFilterNamesCompletionProvider()
 		);
 
+		extend(
+				CompletionType.BASIC,
+				BLOCK_NAME_USAGE_PATTERN,
+				new TemplateToolkitBlocksCompletionProvider()
+		);
 	}
 }

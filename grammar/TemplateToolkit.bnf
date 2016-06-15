@@ -21,6 +21,8 @@
   extends(".+_expr")=expr
   mixin("dq_string_expr|sq_string_expr")="com.perl5.lang.tt2.psi.mixins.TemplateToolkitStringMixin"
 
+  mixin("named_block")="com.perl5.lang.tt2.psi.mixins.TemplateToolkitNamedBlockMixin"
+
 //  psiImplUtilClass="com.perl5.lang.tt2.psi.impl.TemplateToolkitPsiImplUtil"
 
     tokens=[
