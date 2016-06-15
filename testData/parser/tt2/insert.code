@@ -3,6 +3,8 @@
 <body>
 
 [% INSERT myfile %]
+[% INSERT myfile -%]
+[% INSERT myfile-%]
 [% INSERT foo %]            # looks for /here/foo then /there/foo
 [% INSERT /etc/passwd %]    # file error: ABSOLUTE not set
 [% INSERT ../secret %]      # file error: RELATIVE not set

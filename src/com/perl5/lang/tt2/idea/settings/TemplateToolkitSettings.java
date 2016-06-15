@@ -60,7 +60,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	public String END_TAG = DEFAULT_END_TAG;
 	public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
 	public boolean ENABLE_ANYCASE = false;
-	public boolean ENABLE_RELATIVE = false;
 
 	@Transient
 	private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;

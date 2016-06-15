@@ -49,7 +49,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 	private JTextField endTagField;
 	private JTextField outlineTagField;
 	private JCheckBox enableAnycaseCheckBox;
-	private JCheckBox enableRelativePathsCheckBox;
 
 
 	public TemplateToolkitSettingsConfigurable(Project project)
@@ -98,10 +97,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 				enableAnycaseCheckBox = new JCheckBox(PerlBundle.message("ttk2.label.enableanycase"))
 		);
 
-		builder.addComponent(
-				enableRelativePathsCheckBox = new JCheckBox(PerlBundle.message("ttk2.label.enablerelative"))
-		);
-
 		//noinspection Since15
 		rootsModel = new CollectionListModel<String>();
 		rootsList = new JBList(rootsModel);
@@ -128,7 +123,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 	public boolean isModified()
 	{
 		return mySettings.ENABLE_ANYCASE != enableAnycaseCheckBox.isSelected() ||
-				mySettings.ENABLE_RELATIVE != enableAnycaseCheckBox.isSelected() ||
 				!StringUtil.equals(mySettings.START_TAG, startTagField.getText()) ||
 				!StringUtil.equals(mySettings.END_TAG, endTagField.getText()) ||
 				!StringUtil.equals(mySettings.OUTLINE_TAG, outlineTagField.getText()) ||
@@ -153,7 +147,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 		mySettings.END_TAG = endTagField.getText();
 		mySettings.OUTLINE_TAG = outlineTagField.getText();
 		mySettings.ENABLE_ANYCASE = enableAnycaseCheckBox.isSelected();
-		mySettings.ENABLE_RELATIVE = enableRelativePathsCheckBox.isSelected();
 
 		mySettings.TEMPLATE_DIRS.clear();
 		mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
@@ -171,7 +164,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable
 		endTagField.setText(mySettings.END_TAG);
 		outlineTagField.setText(mySettings.OUTLINE_TAG);
 		enableAnycaseCheckBox.setSelected(mySettings.ENABLE_ANYCASE);
-		enableRelativePathsCheckBox.setSelected(mySettings.ENABLE_RELATIVE);
 		rootsModel.removeAll();
 		rootsModel.add(mySettings.TEMPLATE_DIRS);
 		substitutedExtensionsModel.removeAll();

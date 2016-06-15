@@ -78,10 +78,10 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return false;
 	}
 
-	private static boolean isEndMarker(IElementType tokenType)
+	private static boolean isEndMarker(PsiBuilder b)
 	{
-		return tokenType == TT2_HARD_NEWLINE || tokenType == TT2_CLOSE_TAG || tokenType == TT2_SEMI;
-
+		IElementType tokenType = b.getTokenType();
+		return tokenType == TT2_SEMI || tokenType == TT2_CLOSE_TAG || tokenType == TT2_HARD_NEWLINE || tokenType == TT2_MINUS && b.rawLookup(1) == TT2_CLOSE_TAG;
 	}
 
 	public static boolean parseFileAsString(PsiBuilder b, int l)
@@ -91,26 +91,43 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			return false;
 		}
 
-		IElementType tokenType = b.getTokenType();
-		if (isEndMarker(tokenType))
+		if (isEndMarker(b))
 		{
 			return false;
 		}
 
-		PsiBuilder.Marker m = b.mark();
+		boolean gotItem = false;
+		PsiBuilder.Marker stringMarker = b.mark();
 		while (!b.eof())
 		{
-			tokenType = b.rawLookup(1);
-			if (isEndMarker(tokenType) || TemplateToolkitParserDefinition.WHITE_SPACES.contains(tokenType))
+			if (isEndMarker(b))
 			{
-				b.advanceLexer();
 				break;
 			}
+
+			boolean isLastToken = TemplateToolkitParserDefinition.WHITE_SPACES.contains(b.rawLookup(1));
+
+			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
+			m.collapse(TT2_STRING_CONTENT);
+
+			gotItem = true;
+
+			if (isLastToken)
+			{
+				break;
+			}
 		}
-		m.collapse(TT2_STRING_CONTENT);
-		m.precede().done(SQ_STRING_EXPR);
-		return true;
+
+		if (gotItem)
+		{
+			stringMarker.done(SQ_STRING_EXPR);
+		}
+		else
+		{
+			stringMarker.drop();
+		}
+		return gotItem;
 	}
 
 	public static boolean parseBlockComment(PsiBuilder b, int l)
@@ -426,6 +443,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return true;
 	}
 
+
 	protected static boolean isEndTagAhead(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
@@ -592,7 +610,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 	public static boolean parseTags(PsiBuilder b, int l)
 	{
 		PsiBuilder.Marker m = null;
-		while (!b.eof() && !isEndMarker(b.getTokenType()))
+		while (!b.eof() && !isEndMarker(b))
 		{
 			if (m == null)
 			{
