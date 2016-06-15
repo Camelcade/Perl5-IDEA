@@ -27,6 +27,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiFileSystemItem;
+import com.intellij.psi.PsiManager;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -34,7 +37,9 @@ import com.perl5.lang.perl.idea.PerlPathMacros;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -65,6 +70,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
 	@Transient
 	private transient AtomicNotNullLazyValue<List<VirtualFile>> myLazyVirtualFilesRoots;
+	@Transient
+	private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
 	@Transient
 	private transient Project myProject;
 
@@ -162,6 +169,27 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 				return result;
 			}
 		};
+
+		myLazyPsiDirsRoots = new AtomicNotNullLazyValue<Collection<PsiFileSystemItem>>()
+		{
+			@NotNull
+			@Override
+			protected Collection<PsiFileSystemItem> compute()
+			{
+				Collection<PsiFileSystemItem> result = new ArrayDeque<PsiFileSystemItem>();
+
+				PsiManager psiManager = PsiManager.getInstance(myProject);
+				for (VirtualFile virtualFile : getTemplateRoots())
+				{
+					PsiDirectory directory = psiManager.findDirectory(virtualFile);
+					if (directory != null)
+					{
+						result.add(directory);
+					}
+				}
+				return result;
+			}
+		};
 	}
 
 	@Nullable
@@ -187,6 +215,12 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	public List<VirtualFile> getTemplateRoots()
 	{
 		return myLazyVirtualFilesRoots.getValue();
+	}
+
+	@NotNull
+	public Collection<PsiFileSystemItem> getTemplatePsiRoots()
+	{
+		return myLazyPsiDirsRoots.getValue();
 	}
 
 	/**

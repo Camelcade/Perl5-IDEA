@@ -399,6 +399,12 @@
         <editorNotificationProvider
                 implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
 
+        <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
+                                 implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
+
+        <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
+        <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
+
         <localInspection language="Template Toolkit 2"
                          shortName="TT2OrphanReply" displayName="Orphan nested directives"
                          groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"

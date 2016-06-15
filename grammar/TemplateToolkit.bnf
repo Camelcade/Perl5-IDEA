@@ -18,8 +18,8 @@
   psiPackage="com.perl5.lang.tt2.psi"
   psiImplPackage="com.perl5.lang.tt2.psi.impl"
 
-	extends(".+_expr")=expr
-
+  extends(".+_expr")=expr
+  mixin("dq_string_expr|sq_string_expr")="com.perl5.lang.tt2.psi.mixins.TemplateToolkitStringMixin"
 
 //  psiImplUtilClass="com.perl5.lang.tt2.psi.impl.TemplateToolkitPsiImplUtil"
 

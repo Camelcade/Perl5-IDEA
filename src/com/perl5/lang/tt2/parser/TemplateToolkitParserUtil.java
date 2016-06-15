@@ -34,6 +34,15 @@ import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 @SuppressWarnings("Duplicates")
 public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes
 {
+	public static final TokenSet OPEN_QUOTES = TokenSet.create(
+			TT2_DQ_OPEN,
+			TT2_SQ_OPEN
+	);
+	public static final TokenSet CLOSE_QUOTES = TokenSet.create(
+			TT2_DQ_CLOSE,
+			TT2_SQ_CLOSE
+	);
+
 	public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
 			IF_BLOCK,
 			UNLESS_BLOCK,
