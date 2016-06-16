@@ -1,5 +1,10 @@
 Template Toolkit File
   PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
+  PsiElement(TemplateToolkit2Token.[%)('[%')
+  PsiComment(TemplateToolkit2Token.LINE_COMMENT)('#line comment in block ')
+  TemplateToolkitCompositeElementImpl(TemplateToolkit2Element.EMPTY_DIRECTIVE)
+    <empty list>
+  PsiElement(TemplateToolkit2Token.%])('%]')
   PsiBlockCommentImpl(TemplateToolkit2Element.BLOCK_COMMENT)
     PsiElement(TemplateToolkit2Token.[%)('[%')
     PsiComment(TemplateToolkit2Token.LINE_COMMENT)('#\n    this entire directive is ignored no\n    matter how many lines it wraps onto\n')

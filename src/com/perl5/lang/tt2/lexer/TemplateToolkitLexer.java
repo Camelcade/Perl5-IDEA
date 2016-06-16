@@ -198,10 +198,12 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 	protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd)
 	{
 		int endOffset = offset;
+		String endTag = getEndTag();
+		boolean isTemplateLine = getCustomState() == LEX_TEMPLATE_LINE;
 
 		while (endOffset < bufferEnd)
 		{
-			if (buffer.charAt(endOffset) == '\n')
+			if (buffer.charAt(endOffset) == '\n' || !isTemplateLine && isBufferAtString(buffer, endOffset, endTag))
 			{
 				break;
 			}

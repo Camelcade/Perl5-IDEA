@@ -2,6 +2,8 @@
 <head>http://template-toolkit.org/docs/manual/Variables.html</head>
 <body>
 
+[% #line comment in block %]
+
 [%#
     this entire directive is ignored no
     matter how many lines it wraps onto
