@@ -85,6 +85,7 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 "%" {return TT2_MOD;}
 "_" {return TT2_CONCAT;}
 "|" {return TT2_FILTER;}
+"~" {return TT2_TILDA;}
 
 "'"     {return TT2_SQ;}
 "\""    {return TT2_DQ;}

@@ -18,37 +18,28 @@ package com.perl5.lang.tt2.idea.editor;
 
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.parser.TemplateToolkitParserUtil;
 
 /**
  * Created by hurricup on 12.06.2016.
  */
 public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler implements TemplateToolkitElementTypes
 {
-	public static final TokenSet OPENING_QUOTES = TokenSet.create(
-			TT2_DQ_OPEN,
-			TT2_SQ_OPEN
-	);
-	public static final TokenSet CLOSING_QUOTES = TokenSet.create(
-			TT2_DQ_CLOSE,
-			TT2_SQ_CLOSE
-	);
-
 	public TemplateToolkitQuoteHandler()
 	{
-		super(OPENING_QUOTES);
+		super(TemplateToolkitParserUtil.OPEN_QUOTES);
 	}
 
 	@Override
 	public boolean isClosingQuote(HighlighterIterator iterator, int offset)
 	{
-		return CLOSING_QUOTES.contains(iterator.getTokenType());
+		return TemplateToolkitParserUtil.CLOSE_QUOTES.contains(iterator.getTokenType());
 	}
 
 	@Override
 	public boolean isOpeningQuote(HighlighterIterator iterator, int offset)
 	{
-		return OPENING_QUOTES.contains(iterator.getTokenType());
+		return TemplateToolkitParserUtil.OPEN_QUOTES.contains(iterator.getTokenType());
 	}
 }

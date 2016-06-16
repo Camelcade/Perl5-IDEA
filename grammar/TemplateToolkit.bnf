@@ -83,6 +83,7 @@
 	TT2_CONCAT="_"
 	TT2_RANGE=".."
 	TT2_SEMI=";"
+	TT2_TILDA="~"
 
 	TT2_DIV_TEXT="div"
 	TT2_AND_TEXT="and"
@@ -206,7 +207,7 @@ call_directive ::= TT2_CALL expr [directive_postfix] {pin=1}
 get_directive ::= [TT2_GET] expr [directive_postfix]
 
 set_directive ::= [TT2_SET] <<parseSetElement>> + [directive_postfix]
-private parse_set_element ::= identifier_expr TT2_ASSIGN expr
+private parse_set_element ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG expr
 
 default_directive ::= TT2_DEFAULT assign_expr + [directive_postfix] {pin=1}
 
@@ -233,16 +234,16 @@ private format_elements ::=
 	sq_string_expr
 
 foreach_directive ::= TT2_FOREACH [foreach_iterator_] foreach_iterable {pin=1}
-private foreach_iterator_ ::= foreach_iterator {TT2_ASSIGN|TT2_IN} {pin=2}
+private foreach_iterator_ ::= foreach_iterator {TT2_ASSIGN !TT2_CLOSE_TAG|TT2_IN} {pin=2}
 foreach_iterator ::= keyword_or_identifier_term {pin=2}
 foreach_iterable ::= expr
 
 foreach_block ::= foreach_directive element * end_directive // fake rule to generate psi
 
-private strings_argument ::= string_argument (TT2_PLUS string_argument) *
+private strings_argument ::= string_argument (TT2_PLUS !TT2_CLOSE_TAG string_argument) *
 private string_argument ::= dq_string_expr | sq_string_expr
 
-private insert_files ::= convert_to_string (TT2_PLUS convert_to_string) *
+private insert_files ::= convert_to_string (TT2_PLUS !TT2_CLOSE_TAG convert_to_string) *
 private convert_to_string ::= <<parseFileAsString>>
 
 include_directive ::= TT2_INCLUDE variable_strings_or_files assign_expr * [directive_postfix] {pin=1}
@@ -267,7 +268,7 @@ perl_block ::= perl_directive end_directive
 rawperl_block ::= rawperl_directive end_directive
 
 use_directive ::= TT2_USE [use_instantiation] use_module {pin=1}
-private use_instantiation ::= use_instance TT2_ASSIGN
+private use_instantiation ::= use_instance TT2_ASSIGN !TT2_CLOSE_TAG
 use_instance ::= keyword_or_identifier_term
 private use_module ::= module_name [module_params]
 module_name ::= identifier_expr
@@ -318,12 +319,12 @@ block_directive ::= TT2_BLOCK block_name {pin=1}
 block_name ::= keyword_or_identifier_term
 
 anon_block ::= anon_block_directive element * end_directive // fake rule to make psi element
-anon_block_directive ::= identifier_expr TT2_ASSIGN TT2_BLOCK {pin=3}
+anon_block_directive ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG TT2_BLOCK {pin=4}
 
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
-pair_expr ::= <<parseHashKey>> TT2_ASSIGN expr
+pair_expr ::= <<parseHashKey>> TT2_ASSIGN !TT2_CLOSE_TAG expr
 private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
@@ -343,14 +344,14 @@ expr ::=
 	unary_expr |
 	term_expr
 
-assign_expr ::= identifier_expr TT2_ASSIGN expr {rightAssociative=true}
+assign_expr ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG expr {rightAssociative=true}
 ternar_expr ::= expr TT2_QUESTION expr TT2_COLON expr { rightAssociative=true }
 range_expr ::= expr TT2_RANGE expr
 or_expr ::= expr ((TT2_OR|TT2_OR_TEXT) expr )+
 and_expr ::= expr ((TT2_AND|TT2_AND_TEXT) expr)+
 equal_expr ::= expr (TT2_EQUAL|TT2_NOT_EQUAL) expr
 compare_expr ::= expr (TT2_LE|TT2_LT|TT2_GT|TT2_GE) expr
-add_expr ::= expr ((TT2_PLUS|TT2_MINUS !(TT2_CLOSE_TAG)|TT2_CONCAT) expr)+
+add_expr ::= expr ((TT2_PLUS !TT2_CLOSE_TAG|TT2_MINUS !(TT2_CLOSE_TAG)|TT2_CONCAT) expr)+
 mul_expr ::= expr ((TT2_MUL|TT2_DIV|TT2_MOD|TT2_DIV_TEXT|TT2_MOD_TEXT) expr)+
 unary_expr ::= (TT2_NOT|TT2_NOT_TEXT) expr {rightAssociative=true }
 

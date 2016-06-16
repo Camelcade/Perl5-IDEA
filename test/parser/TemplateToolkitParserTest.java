@@ -270,6 +270,11 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 		doTest("tags");
 	}
 
+	public void testChompMarkers()
+	{
+		doTest("chomp_markers");
+	}
+
 	public void testMultiDirectiveBlocks()
 	{
 		doTest("multi_directives_blocks");
