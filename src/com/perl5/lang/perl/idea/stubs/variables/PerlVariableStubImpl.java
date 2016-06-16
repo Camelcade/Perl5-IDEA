@@ -32,14 +32,24 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
 	private final String myVariableName;
 	private final String myDeclaredType;
 	private final PerlVariableType myVariableType;
+	private final boolean myIsDeprecated;
 
-	public PerlVariableStubImpl(StubElement parent, IStubElementType elementType, String myPackageName, String myVariableName, String myDeclaredType, PerlVariableType variableType)
+	public PerlVariableStubImpl(
+			StubElement parent,
+			IStubElementType elementType,
+			String myPackageName,
+			String myVariableName,
+			String myDeclaredType,
+			PerlVariableType variableType,
+			boolean isDeprecated
+	)
 	{
 		super(parent, elementType);
 		this.myPackageName = myPackageName;
 		this.myVariableName = myVariableName;
 		this.myDeclaredType = myDeclaredType;
 		this.myVariableType = variableType;
+		myIsDeprecated = isDeprecated;
 	}
 
 	@Override
@@ -64,6 +74,12 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
 	public PerlVariableType getActualType()
 	{
 		return myVariableType;
+	}
+
+	@Override
+	public boolean isDeprecated()
+	{
+		return myIsDeprecated;
 	}
 
 	@Override

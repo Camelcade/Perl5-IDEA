@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.09.2015.
  */
-public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<PerlVariableStub>, PerlNamedElement, PerlCompositeElement
+public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<PerlVariableStub>, PerlNamedElement, PerlCompositeElement, PerlDeprecatable
 {
 	/**
 	 * Returns declared variable object
@@ -47,7 +47,7 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	 *
 	 * @return package name for current element
 	 */
-	public String getPackageName();
+	String getPackageName();
 
 	/**
 	 * Guessing actual variable type from context

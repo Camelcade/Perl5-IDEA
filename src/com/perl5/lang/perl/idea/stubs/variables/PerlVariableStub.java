@@ -34,6 +34,8 @@ public interface PerlVariableStub extends StubElement<PerlVariableDeclarationWra
 	@Nullable
 	String getDeclaredType();
 
+	boolean isDeprecated();
+
 	PerlVariableType getActualType();
 
 	StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey();

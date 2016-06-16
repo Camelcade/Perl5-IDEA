@@ -22,11 +22,9 @@ import com.intellij.psi.InjectedLanguagePlaces;
 import com.intellij.psi.LanguageInjector;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlAnnotationInject;
 import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -126,23 +124,7 @@ public class PerlLanguageInjector implements LanguageInjector
 		else if (host instanceof PerlString && host.isValidHost())
 		{
 			// before element
-			PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnnotationByClass(host, PerlAnnotationInject.class);
-
-			// eol annotation
-			if (injectAnnotation == null)
-			{
-				injectAnnotation = PerlPsiUtil.getEolAnnotationByClass(host, PerlAnnotationInject.class);
-			}
-
-			// before statement
-			if (injectAnnotation == null)
-			{
-				PsiPerlStatement statement = PsiTreeUtil.getParentOfType(host, PsiPerlStatement.class);
-				if (statement != null)
-				{
-					injectAnnotation = PerlPsiUtil.getAnnotationByClass(statement, PerlAnnotationInject.class);
-				}
-			}
+			PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnyAnnotationByClass(host, PerlAnnotationInject.class);
 
 			if (injectAnnotation != null)
 			{

@@ -567,6 +567,7 @@ public class PerlPsiUtil implements PerlElementTypes
 		return true;
 	}
 
+	@NotNull
 	public static List<PerlAnnotation> collectAnnotations(@NotNull PsiElement element)
 	{
 		final List<PerlAnnotation> result = new ArrayList<PerlAnnotation>();
@@ -582,6 +583,40 @@ public class PerlPsiUtil implements PerlElementTypes
 		return result;
 	}
 
+	/**
+	 * Gets annotation before element, eol or statement
+	 *
+	 * @param element         element to search for
+	 * @param annotationClass annotation class
+	 * @return annotation or null
+	 */
+	@Nullable
+	public static <T extends PerlAnnotation> T getAnyAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass)
+	{
+		// before element
+		T annotation = PerlPsiUtil.getAnnotationByClass(element, annotationClass);
+		if (annotation != null)
+		{
+			return annotation;
+		}
+
+		// eol annotation
+		annotation = PerlPsiUtil.getEolAnnotationByClass(element, annotationClass);
+		if (annotation != null)
+		{
+			return annotation;
+		}
+
+		// before statement
+		PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+		if (statement != null)
+		{
+			return PerlPsiUtil.getAnnotationByClass(statement, annotationClass);
+		}
+		return null;
+	}
+
+	@Nullable
 	public static <T extends PerlAnnotation> T getAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass)
 	{
 		final PerlAnnotation[] result = new PerlAnnotation[]{null};

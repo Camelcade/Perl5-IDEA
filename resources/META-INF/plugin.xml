@@ -49,6 +49,7 @@
         <li>Subs with <code>undef</code> as first unpacked argument considered to be a method</li>
       </ul></li>
       <li>Constants are now being parsed as subs, so inheritance, inspections, annotations and gutter navigation should work on them too</li>
+      <li>Variables can now be deprecated with <code>#@deprecated</code> annotation</li>
       </ul>
      </p>
      <!--<p>Fixes:-->

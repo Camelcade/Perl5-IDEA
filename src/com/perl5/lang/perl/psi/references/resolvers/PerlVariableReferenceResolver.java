@@ -33,8 +33,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by hurricup on 27.09.2015.
@@ -63,7 +61,6 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			// not found explicit lexically visible declarations
 
 			// imports
-			Map<String, Set<String>> importsMap = null;
 			PerlVariableType actualType = myVariable.getActualType();
 			Project project = myVariable.getProject();
 			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myVariable, PerlNamespaceContainer.class);
@@ -132,4 +129,6 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 
 		return result.toArray(new ResolveResult[result.size()]);
 	}
+
+
 }

@@ -24,75 +24,68 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceElement extends PsiElement
+public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable
 {
 	/**
 	 * Checks if package is from Core list
 	 *
 	 * @return result
 	 */
-	public boolean isBuiltin();
+	boolean isBuiltin();
 
 	/**
 	 * Checks if package is pragma
 	 *
 	 * @return result
 	 */
-	public boolean isPragma();
-
-	/**
-	 * Checks if package is deprecated
-	 *
-	 * @return result
-	 */
-	public boolean isDeprecated();
+	boolean isPragma();
 
 	/**
 	 * Returns list of definitions of current namespace
 	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
-	public List<PerlNamespaceDefinition> getNamespaceDefinitions();
+	List<PerlNamespaceDefinition> getNamespaceDefinitions();
 
 	/**
 	 * Returns list of files suitable for this namespace, works only if namespace is in use or require statement
 	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
-	public List<PerlFileImpl> getNamespaceFiles();
+	List<PerlFileImpl> getNamespaceFiles();
 
 	/**
 	 * Returns canonical namespace name
 	 *
 	 * @return canonical name
 	 */
-	public String getCanonicalName();
+	String getCanonicalName();
 
 	/**
 	 * Checks if namespace is SUPER::
 	 *
 	 * @return check result
 	 */
-	public boolean isSUPER();
+	boolean isSUPER();
 
 	/**
 	 * Checks if namespace is SUPER::
 	 *
 	 * @return check result
 	 */
-	public boolean isMain();
+	boolean isMain();
 
 	/**
 	 * Checks if namespace is SUPER::
 	 *
 	 * @return check result
 	 */
-	public boolean isCORE();
+	boolean isCORE();
 
 	/**
-	 * Checks if namespace is SUPER::
+	 * Checks if namespace is UNIVERSAL::
 	 *
 	 * @return check result
 	 */
-	public boolean isUNIVERSAL();
+	boolean isUNIVERSAL();
 }

@@ -20,10 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.ResolveState;
+import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -344,6 +341,43 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public boolean isDeprecated()
 	{
+		PsiElement parent = getParent();
+
+		if (parent instanceof PerlVariableDeclarationWrapper)
+		{
+			return ((PerlVariableDeclarationWrapper) parent).isDeprecated();
+		}
+
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement == null)
+		{
+			return false;
+		}
+
+		// fixme this been used already
+		for (PsiReference reference : variableNameElement.getReferences())
+		{
+			if (reference instanceof PsiPolyVariantReference)
+			{
+				for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
+				{
+					PsiElement targetElement = resolveResult.getElement();
+					if (targetElement instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) targetElement).isDeprecated())
+					{
+						return true;
+					}
+				}
+			}
+			else
+			{
+				PsiElement targetElement = reference.resolve();
+				if (targetElement instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) targetElement).isDeprecated())
+				{
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -366,6 +400,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
+	// fixme this need to be moved to PerlResolveUtil or Resolver
 	@Override
 	public PerlVariableDeclarationWrapper getLexicalDeclaration()
 	{
@@ -377,6 +412,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		return PerlScopeUtil.getLexicalDeclaration(this);
 	}
 
+	// fixme this need to be moved to PerlResolveUtil or Resolver
 	@Override
 	public List<PerlVariableDeclarationWrapper> getGlobalDeclarations()
 	{

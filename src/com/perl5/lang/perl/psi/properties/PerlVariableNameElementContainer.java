@@ -16,12 +16,13 @@
 
 package com.perl5.lang.perl.psi.properties;
 
+import com.perl5.lang.perl.psi.PerlDeprecatable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 
 /**
  * Created by hurricup on 02.06.2015.
  */
-public interface PerlVariableNameElementContainer
+public interface PerlVariableNameElementContainer extends PerlDeprecatable
 {
 	/**
 	 * Returns variable name element
@@ -35,13 +36,5 @@ public interface PerlVariableNameElementContainer
 	 *
 	 * @return result
 	 */
-	public boolean isBuiltIn();
-
-	/**
-	 * Checks if variable is deprecated
-	 *
-	 * @return result
-	 */
-	public boolean isDeprecated();
-
+	boolean isBuiltIn();
 }

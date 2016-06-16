@@ -44,7 +44,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	@Override
 	public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub)
 	{
-		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getName(), psi.getDeclaredType(), psi.getActualType());
+		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getName(), psi.getDeclaredType(), psi.getActualType(), psi.isDeprecated());
 	}
 
 	@Override
@@ -91,6 +91,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getVariableName());
 		dataStream.writeByte(stub.getActualType().ordinal());
+		dataStream.writeBoolean(stub.isDeprecated());
 	}
 
 	@NotNull
@@ -103,7 +104,15 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 			variableType = null;
 		}
 
-		return new PerlVariableStubImpl(parentStub, this, dataStream.readName().toString(), dataStream.readName().toString(), variableType, PerlVariableType.values()[dataStream.readByte()]);
+		return new PerlVariableStubImpl(
+				parentStub,
+				this,
+				dataStream.readName().toString(),
+				dataStream.readName().toString(),
+				variableType,
+				PerlVariableType.values()[dataStream.readByte()],
+				dataStream.readBoolean()
+		);
 	}
 
 	@Override
