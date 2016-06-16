@@ -55,7 +55,7 @@ import java.util.regex.Pattern;
 		}
 )
 
-public class HTMLMasonSettings extends AbstractMasonSettings<HTMLMasonSettings> implements HTMLMasonElementTypes
+public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings>, HTMLMasonElementTypes
 {
 
 	public String autoHandlerName = "autohandler";

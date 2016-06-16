@@ -16,7 +16,6 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -31,7 +30,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public abstract class AbstractMasonSettings<T> implements PersistentStateComponent<T>
+public abstract class AbstractMasonSettings
 {
 	public List<String> componentRoots = new ArrayList<String>();
 	public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
@@ -44,7 +43,7 @@ public abstract class AbstractMasonSettings<T> implements PersistentStateCompone
 	@Transient
 	private List<VirtualFile> componentsRootsVirtualFiles = null;
 
-	protected AbstractMasonSettings<T> setProject(Project project)
+	protected AbstractMasonSettings setProject(Project project)
 	{
 		myProject = project;
 		return this;

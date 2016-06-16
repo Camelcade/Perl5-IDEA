@@ -39,8 +39,7 @@ import java.util.List;
 		}
 )
 
-
-public class MasonSettings extends AbstractMasonSettings<MasonSettings>
+public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>
 {
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
 
