@@ -23,6 +23,7 @@ import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
@@ -35,6 +36,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -87,33 +89,31 @@ public class PerlRunUtil
 		if (PlatformUtils.isIntelliJ())
 		{
 			Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
-			if (moduleForFile == null)
+
+			// found in file module
+			String perlPath = getModuleSdkPath(moduleForFile);
+			if (perlPath != null)
 			{
-				Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
-				if (projectSdk != null)
+				return perlPath;
+			}
+
+			// found in project
+			Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
+			if (projectSdk != null && projectSdk.getSdkType() == PerlSdkType.getInstance())
+			{
+				return projectSdk.getHomePath();
+			}
+
+			// looking for any perl module in project
+			for (Module module : ModuleManager.getInstance(project).getModules())
+			{
+				perlPath = getModuleSdkPath(module);
+				if (perlPath != null)
 				{
-					if (projectSdk.getSdkType() == PerlSdkType.getInstance())
-					{
-						return projectSdk.getHomePath();
-					}
-					else
-					{
-						showSdkConfigurationError("<p>To run perl script, it must be in Perl module or project SDK should be set to the Perl Interpreter.</p>", project);
-					}
+					return perlPath;
 				}
 			}
-			else
-			{
-				Sdk sdk = ModuleRootManager.getInstance(moduleForFile).getSdk();
-				if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
-				{
-					return sdk.getHomePath();
-				}
-				else
-				{
-					showSdkConfigurationError("<p>You should set up Perl Interpreter as project or module SDK.</p>", project);
-				}
-			}
+			showSdkConfigurationError(PerlBundle.message("perl.error.idea.project.or.module.sdk"), project);
 		}
 		else
 		{
@@ -124,8 +124,24 @@ public class PerlRunUtil
 			}
 			else
 			{
-				showSdkConfigurationError("<p>To be able to run Perl scripts you should configure a path to the Perl Interpreter.</p>", project);
+				showSdkConfigurationError(PerlBundle.message("perl.error.micro.project.or.module.sdk"), project);
 			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private static String getModuleSdkPath(Module module)
+	{
+		if (module == null)
+		{
+			return null;
+		}
+
+		Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+		{
+			return sdk.getHomePath();
 		}
 		return null;
 	}
@@ -135,10 +151,10 @@ public class PerlRunUtil
 		Notifications.Bus.notify(new Notification(
 				PERL_RUN_ERROR_GROUP,
 				"SDK Configuration Error",
-				message
-						+ "<br/>"
-						+ "<p><a href=\"configure\">Configure...</a></p>"
-						+ "<br/>"
+				"<p>" + message + "</p>" +
+						"<br/>" +
+						"<p><a href=\"configure\">Configure...</a></p>" +
+						"<br/>"
 				,
 				NotificationType.ERROR,
 				new NotificationListener.UrlOpeningListener(false)

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.quickfixes;
 
+import com.intellij.codeInsight.FileModificationService;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
@@ -64,9 +65,14 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 	@Override
 	public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor)
 	{
+		PsiElement newStatementContainer = descriptor.getPsiElement();
+		if (!newStatementContainer.isWritable())
+		{
+			FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile());
+		}
+
 		PsiElement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
 
-		PsiElement newStatementContainer = descriptor.getPsiElement();
 		PsiElement afterAnchor = null;
 		PsiElement beforeAnchor = null;
 
@@ -84,7 +90,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 							&& PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(nextStatement.getNode().getElementType())
 							)
 					{
-						;
+
 					}
 
 					if (nextStatement instanceof PerlUseStatement && ((PerlUseStatement) nextStatement).isPragmaOrVersion())    // found more use pragma/version

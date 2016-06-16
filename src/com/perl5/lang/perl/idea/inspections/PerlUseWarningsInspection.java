@@ -47,7 +47,7 @@ public class PerlUseWarningsInspection extends PerlInspection
 			@Override
 			public void visitFile(PsiFile file)
 			{
-				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
+				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isWritable() || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
 				{
 					return;
 				}

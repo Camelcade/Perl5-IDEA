@@ -204,6 +204,7 @@ public class PerlSettingsConfigurable implements Configurable
 		deparseArgumentsTextField = new JTextField();
 		builder.addLabeledComponent("Comma-separated B::Deparse options for deparse action", deparseArgumentsTextField);
 
+		//noinspection Since15
 		selfNamesModel = new CollectionListModel<String>();
 		selfNamesList = new JBList(selfNamesModel);
 		builder.addLabeledComponent(new JLabel("Scalar names considered as an object self-reference (without a $):"), ToolbarDecorator
