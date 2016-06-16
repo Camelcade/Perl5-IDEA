@@ -196,20 +196,18 @@ public class PerlPackageCompletionUtil
 
 	public static void fillWithPackageNameSuggestions(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
-		PsiFile file = element.getOriginalElement().getContainingFile();
-		if (file != null)
+		PsiFile file = element.getContainingFile().getOriginalFile();
+
+		VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
+		if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
 		{
-			VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
-			if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE)
+			result.addElement(LookupElementBuilder.create(virtualFile.getNameWithoutExtension()));
+			if (file instanceof PerlFileImpl)
 			{
-				result.addElement(LookupElementBuilder.create(virtualFile.getNameWithoutExtension()));
-				if (file instanceof PerlFileImpl)
+				String packageName = ((PerlFileImpl) file).getFilePackageName();
+				if (packageName != null)
 				{
-					String packageName = ((PerlFileImpl) file).getFilePackageName();
-					if (packageName != null)
-					{
-						result.addElement(LookupElementBuilder.create(packageName));
-					}
+					result.addElement(LookupElementBuilder.create(packageName));
 				}
 			}
 		}
@@ -232,7 +230,7 @@ public class PerlPackageCompletionUtil
 					public void run()
 					{
 						Editor editor = context.getEditor();
-						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 0);
+						new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1);
 					}
 				});
 			}

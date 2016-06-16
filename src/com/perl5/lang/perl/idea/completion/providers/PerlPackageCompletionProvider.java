@@ -35,11 +35,7 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 								  ProcessingContext context,
 								  @NotNull CompletionResultSet result)
 	{
-		PsiElement element = parameters.getOriginalPosition();
-		if (element == null)
-		{
-			element = parameters.getPosition();
-		}
+		PsiElement element = parameters.getPosition();
 
 		if (NAMESPACE_IN_DEFINITION_PATTERN.accepts(element)) // package Foo
 		{
