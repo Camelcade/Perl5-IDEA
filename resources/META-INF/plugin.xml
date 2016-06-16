@@ -51,6 +51,7 @@
       </ul></li>
       <li>Constants are now being parsed as subs, so inheritance, inspections, annotations and gutter navigation should work on them too</li>
       <li>Variables can now be deprecated with <code>#@deprecated</code> annotation</li>
+      <li>Typing space after use/no/package now opens auto-completion pop-up</li>
       </ul>
      </p>
      <p>Fixes:

@@ -22,6 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -32,6 +33,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns
 {
+	private static final TokenSet AUTO_OPENED_TOKENS = TokenSet.create(
+			RESERVED_USE,
+			RESERVED_NO,
+			RESERVED_PACKAGE
+	);
 
 	public PerlCompletionContributor()
 	{
@@ -130,6 +136,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 	public boolean invokeAutoPopup(@NotNull PsiElement element, char typedChar)
 	{
 		IElementType elementType = element.getNode().getElementType();
+
 		if (typedChar == '>' && elementType == OPERATOR_MINUS)
 		{
 			return true;
@@ -138,6 +145,11 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 		{
 			return true;
 		}
+		else if (typedChar == ' ' && AUTO_OPENED_TOKENS.contains(elementType))
+		{
+			return true;
+		}
+
 		return super.invokeAutoPopup(element, typedChar);
 	}
 }
