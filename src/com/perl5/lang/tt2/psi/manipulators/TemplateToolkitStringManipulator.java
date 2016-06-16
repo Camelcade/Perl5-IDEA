@@ -20,7 +20,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.util.PsiUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.tt2.psi.TemplateToolkitString;
@@ -55,11 +55,11 @@ public class TemplateToolkitStringManipulator extends AbstractElementManipulator
 		int startOffset = 0;
 		int endOffset = element.getTextLength();
 
-		if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtil.getElementType(element.getFirstChild())))
+		if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtilCore.getElementType(element.getFirstChild())))
 		{
 			startOffset++;
 		}
-		if (PerlParserUtil.CLOSE_QUOTES.contains(PsiUtil.getElementType(element.getLastChild())))
+		if (PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(element.getLastChild())))
 		{
 			endOffset--;
 		}

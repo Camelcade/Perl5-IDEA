@@ -25,7 +25,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.tt2.psi.TemplateToolkitString;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitCompositeElementImpl;
 import com.perl5.lang.tt2.psi.references.TemplateToolkitBlockReference;
@@ -66,7 +66,7 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
 			protected PsiReference[] compute()
 			{
 				List<PsiReference> references = new ArrayList<PsiReference>();
-				IElementType parentElementType = PsiUtil.getElementType(getParent());
+				IElementType parentElementType = PsiUtilCore.getElementType(getParent());
 
 				if (FILES_TARGETED_CONTAINERS.contains(parentElementType))
 				{

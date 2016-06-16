@@ -24,7 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.tt2.psi.TemplateToolkitNamedBlock;
 import com.perl5.lang.tt2.psi.TemplateToolkitString;
@@ -53,7 +53,7 @@ public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<
 		}
 
 		PsiElement container = stringElement.getParent();
-		if (!TemplateToolkitStringMixin.BLOCK_NAME_TARGETED_CONTAINERS.contains(PsiUtil.getElementType(container)))
+		if (!TemplateToolkitStringMixin.BLOCK_NAME_TARGETED_CONTAINERS.contains(PsiUtilCore.getElementType(container)))
 		{
 			return;
 		}
