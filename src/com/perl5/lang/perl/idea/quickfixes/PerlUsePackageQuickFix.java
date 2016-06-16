@@ -66,9 +66,9 @@ public class PerlUsePackageQuickFix implements LocalQuickFix
 	public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor)
 	{
 		PsiElement newStatementContainer = descriptor.getPsiElement();
-		if (!newStatementContainer.isWritable())
+		if (!FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile()))
 		{
-			FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile());
+			return;
 		}
 
 		PsiElement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
