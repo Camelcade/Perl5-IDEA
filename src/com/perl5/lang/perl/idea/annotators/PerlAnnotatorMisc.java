@@ -57,7 +57,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 			return;
 		}
 
-		if (element.getParent() instanceof PerlConstantDefinition)
+		if (element.getParent() instanceof PerlConstantDefinition && element.getPrevSibling() == null)
 		{
 			decorateElement(
 					holder.createInfoAnnotation(element, null),
