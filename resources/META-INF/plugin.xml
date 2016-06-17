@@ -23,10 +23,11 @@
      <description><![CDATA[
     <p>Camelcade plugin adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
     <p>
-    <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
-    | <a href="https://github.com/hurricup/Perl5-IDEA">GitHub</a>
-    | <a href="https://github.com/hurricup/Perl5-IDEA/issues">Tracker</a>
-    | <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
+    <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
+    | <a href="https://github.com/hurricup/Perl5-IDEA/issues">Bug Tracker</a>
+    | <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
+    | <a href="https://groups.google.com/forum/#!forum/camelcade">Google Group</a>
+    | <a href="https://github.com/hurricup/Perl5-IDEA">Sources</a>
     </p>
     <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"><image src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" alt="Donate to support Project"></a></p>
     ]]></description>
