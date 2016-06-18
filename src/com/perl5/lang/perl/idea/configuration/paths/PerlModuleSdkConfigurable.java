@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.configuration.paths;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationBundle;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -34,7 +35,6 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.Condition;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.Nullable;
-import org.picocontainer.Disposable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -224,8 +224,6 @@ public abstract class PerlModuleSdkConfigurable implements Disposable
 	@Override
 	public void dispose()
 	{
-		myCbModuleJdk = null;
-		myJdkPanel = null;
 		myJdksModel.removeListener(myListener);
 	}
 }

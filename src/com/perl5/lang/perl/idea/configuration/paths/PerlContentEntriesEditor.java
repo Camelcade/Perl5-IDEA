@@ -69,14 +69,17 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	{
 		if (PlatformUtils.isIntelliJ())
 		{
-			mainPanel.add(new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
+
+			PerlModuleSdkConfigurable perlModuleSdkConfigurable = new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
 			{
 				@Override
 				protected ModifiableRootModel getRootModel()
 				{
 					return getState().getRootModel();
 				}
-			}.createComponent(), BorderLayout.NORTH);
+			};
+			registerDisposable(perlModuleSdkConfigurable);
+			mainPanel.add(perlModuleSdkConfigurable.createComponent(), BorderLayout.NORTH);
 		}
 	}
 }
