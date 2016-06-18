@@ -57,14 +57,15 @@
      </p>
      <p>Fixes:
       <ul>
-      <li>Fixed occasional exceptions on package auto-completion</li>
-      <li>Fixed exceptions with use strict/warnings quick-fix on read-only files</li>
+      <li>Occasional exceptions on package auto-completion</li>
+      <li>Exceptions with use strict/warnings quick-fix on read-only files</li>
+      <li>Occasional exceptions on SDK addition</li>
       </ul>
      </p>
     ]]>
     </change-notes>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
     <idea-version since-build="139"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
