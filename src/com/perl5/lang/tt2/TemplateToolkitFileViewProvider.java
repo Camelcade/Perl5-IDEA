@@ -18,6 +18,7 @@ package com.perl5.lang.tt2;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
@@ -92,7 +93,14 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
 	{
 		if (lang == getTemplateDataLanguage())
 		{
-			final PsiFileImpl file = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage()).createFile(this);
+			ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage());
+
+			if (parserDefinition == null)
+			{
+				return null;
+			}
+
+			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
 			file.setContentElementType(TemplateToolkitElementTypes.TT2_TEMPLATE_DATA);
 			return file;
 		}
