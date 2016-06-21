@@ -20,6 +20,9 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
 import com.intellij.execution.ui.RunnerLayoutUi;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.ui.content.Content;
@@ -32,6 +35,7 @@ import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.intellij.xdebugger.ui.XDebugTabLayouter;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
@@ -128,7 +132,19 @@ public class PerlDebugProcess extends XDebugProcess
 	@Override
 	public void startPausing()
 	{
-		myDebugThread.sendString("pause");
+		if (((PerlDebugOptions) myDebugProfileState.getEnvironment().getRunProfile()).isNonInteractiveModeEnabled())
+		{
+			myDebugThread.sendString("pause");
+		}
+		else
+		{
+			Notifications.Bus.notify(new Notification(
+					"PERL_DEBUGGER",
+					PerlBundle.message("perl.run.pause.unavailable.title"),
+					PerlBundle.message("perl.run.pause.unavailable.content"),
+					NotificationType.INFORMATION
+			));
+		}
 	}
 
 	@Override

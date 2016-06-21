@@ -63,6 +63,8 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	// debugging-related options
 	public String scriptCharset = "utf8";
 	public String startMode = "RUN";
+	public boolean isNonInteractiveModeEnabled = false;
+	public boolean isCompileTimeBreakpointsEnabled = false;
 
 	private transient Integer debugPort;
 
@@ -272,5 +274,25 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 		this.scriptCharset = scriptCharset;
 	}
 
+	@Override
+	public boolean isNonInteractiveModeEnabled()
+	{
+		return isNonInteractiveModeEnabled;
+	}
 
+	public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled)
+	{
+		isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
+	}
+
+	@Override
+	public boolean isCompileTimeBreakpointsEnabled()
+	{
+		return isCompileTimeBreakpointsEnabled;
+	}
+
+	public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled)
+	{
+		isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+	}
 }

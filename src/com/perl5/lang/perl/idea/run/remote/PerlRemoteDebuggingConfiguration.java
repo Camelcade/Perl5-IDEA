@@ -44,6 +44,8 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public String scriptCharset = "utf8";
 	public String perlRole = "client";
 	public String startMode = "RUN";
+	public boolean isNonInteractiveModeEnabled = false;
+	public boolean isCompileTimeBreakpointsEnabled = false;
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -152,5 +154,27 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public void setPerlRole(String perlRole)
 	{
 		this.perlRole = perlRole;
+	}
+
+	@Override
+	public boolean isNonInteractiveModeEnabled()
+	{
+		return isNonInteractiveModeEnabled;
+	}
+
+	public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled)
+	{
+		isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
+	}
+
+	@Override
+	public boolean isCompileTimeBreakpointsEnabled()
+	{
+		return isCompileTimeBreakpointsEnabled;
+	}
+
+	public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled)
+	{
+		isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
 	}
 }

@@ -35,33 +35,13 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Template Toolkit 2 support:<ul>
-        <li>Parsing of TT2 files</li>
-        <li>Live templates for directives</li>
-        <li>Configuration for template roots, file extensions and markers</li>
-        <li>Smart completion of block markers</li>
-        <li>Inspection for incorrectly positioned directives</li>
-        <li>Files navigation and auto-completion</li>
-        <li>Blocks navigation and auto-completion</li>
-      </ul></li>
-      <li>Methods detection and resolving:<ul>
-        <li>One-statement subs with: <code>shift->something</code>, <code>$_[0]->{something}</code> now considered to be
-            methods. <code>shift</code> and <code>$_[0]</code> considered to be <code>$self</code></li>
-        <li>Subs with empty <code>shift;</code> as a first statement considered to be a method</li>
-        <li>Subs with <code>undef</code> as first unpacked argument considered to be a method</li>
-      </ul></li>
-      <li>Constants are now being parsed as subs, so inheritance, inspections, annotations and gutter navigation should work on them too</li>
-      <li>Variables can now be deprecated with <code>#@deprecated</code> annotation</li>
-      <li>Typing space after use/no/package now opens auto-completion pop-up</li>
+      <li>Added new debugger options: non-interactive mode and compile-time breakpoints. Disabling them improves debugging performance</li>
       </ul>
      </p>
-     <p>Fixes:
-      <ul>
-      <li>Occasional exceptions on package auto-completion</li>
-      <li>Exceptions with use strict/warnings quick-fix on read-only files</li>
-      <li>Occasional exceptions on SDK addition</li>
-      </ul>
-     </p>
+     <!--<p>Fixes:-->
+      <!--<ul>-->
+      <!--</ul>-->
+     <!--</p>-->
     ]]>
     </change-notes>
 

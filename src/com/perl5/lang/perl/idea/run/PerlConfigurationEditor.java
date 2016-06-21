@@ -33,6 +33,7 @@ import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.RawCommandLineEditor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jdesktop.swingx.combobox.MapComboBoxModel;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +58,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	private PerlAlternativeSdkPanel myAlternativeSdkPanel;
 	private Project myProject;
 	private JTextField myScriptCharset;
+	private JCheckBox myIsNonInteractiveModeEnabled;
+	private JCheckBox myIsCompileTimeBreakpointsEnabled;
 
 	public PerlConfigurationEditor(Project project)
 	{
@@ -73,6 +76,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myPerlParametersPanel.setText(perlConfiguration.getPerlParameters());
 		myStartMode.setSelectedItem(perlConfiguration.getStartMode());
 		myScriptCharset.setText(perlConfiguration.getScriptCharset());
+		myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
+		myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
 	}
 
 	@Override
@@ -86,6 +91,8 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		perlConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
 		perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
 		perlConfiguration.setScriptCharset(myScriptCharset.getText());
+		perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
+		perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
 	}
 
 	@NotNull
@@ -93,7 +100,11 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 	protected JComponent createEditor()
 	{
 		myScriptField = new TextFieldWithBrowseButton();
-		myScriptField.addBrowseFolderListener("Select Perl Script", "Please select perl script file", myProject, FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(new Condition<VirtualFile>()
+		myScriptField.addBrowseFolderListener(
+				PerlBundle.message("perl.run.config.select.script.header"),
+				PerlBundle.message("perl.run.config.select.script.prompt"),
+				myProject,
+				FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(new Condition<VirtualFile>()
 		{
 			@Override
 			public boolean value(VirtualFile virtualFile)
@@ -102,6 +113,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			}
 		}), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
+		//noinspection Since15
 		myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS))
 		{
 			@Override
@@ -145,34 +157,42 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 			protected void addComponents()
 			{
 
-				LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, "Script");
+				LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, PerlBundle.message("perl.run.option.script"));
 				scriptLabel.setLabelLocation(BorderLayout.WEST);
 				add(scriptLabel);
 
-				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myConsoleCharset, "Script output encoding");
+				LabeledComponent<?> consoleEncoding = LabeledComponent.create(myConsoleCharset, PerlBundle.message("perl.run.option.output.encoding"));
 				consoleEncoding.setLabelLocation(BorderLayout.WEST);
 				add(consoleEncoding);
 
-				myScriptCharset = new JTextField();
-				LabeledComponent<JTextField> myScriptCharsetLabel = LabeledComponent.create(myScriptCharset, "Script encoding");
-				myScriptCharsetLabel.setLabelLocation(BorderLayout.WEST);
-				add(myScriptCharsetLabel);
-
-				LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, "Debugger startup mode");
-				startMode.setLabelLocation(BorderLayout.WEST);
-				add(startMode);
-
 				myPerlParametersPanel = new RawCommandLineEditor();
-				LabeledComponent<RawCommandLineEditor> perlParametersPanel = LabeledComponent.create(myPerlParametersPanel, "Perl5 parameters");
+				LabeledComponent<RawCommandLineEditor> perlParametersPanel = LabeledComponent.create(myPerlParametersPanel, PerlBundle.message("perl.run.option.perl.parameters"));
 				perlParametersPanel.setLabelLocation(BorderLayout.WEST);
 				copyDialogCaption(perlParametersPanel);
 				add(perlParametersPanel);
 
 				super.addComponents();
 				add(myAlternativeSdkPanel);
+
+				// debugger-related settings
+				myScriptCharset = new JTextField();
+				LabeledComponent<JTextField> myScriptCharsetLabel = LabeledComponent.create(myScriptCharset, PerlBundle.message("perl.run.option.script.encoding"));
+				myScriptCharsetLabel.setLabelLocation(BorderLayout.WEST);
+				add(myScriptCharsetLabel);
+
+				LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, PerlBundle.message("perl.run.option.debugger.startup.mode"));
+				startMode.setLabelLocation(BorderLayout.WEST);
+				add(startMode);
+
+				myIsNonInteractiveModeEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.noninteractive.mode"));
+				add(myIsNonInteractiveModeEnabled);
+
+				myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
+				add(myIsCompileTimeBreakpointsEnabled);
+
 			}
 		};
-		myParametersPanel.setProgramParametersLabel("Script parameters:");
+		myParametersPanel.setProgramParametersLabel(PerlBundle.message("perl.run.option.script.parameters"));
 		return myParametersPanel;
 	}
 }

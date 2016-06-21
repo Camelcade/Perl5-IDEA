@@ -37,4 +37,8 @@ public interface PerlDebugOptions
 	String getScriptCharset();
 
 	String getPerlRole();
+
+	boolean isNonInteractiveModeEnabled();
+
+	boolean isCompileTimeBreakpointsEnabled();
 }

@@ -29,11 +29,15 @@ public class PerlSetUpDescriptor
 	private List<PerlLineBreakPointDescriptor> breakpoints;
 	private String charset;
 	private String startMode;
+	private boolean enableCompileTimeBreakpoints;
+	private boolean enableNonInteractiveMode;
 
 	public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState)
 	{
 		this.breakpoints = breakpoints;
 		this.charset = debugProfileState.getScriptCharset();
 		this.startMode = debugProfileState.getStartMode();
+		this.enableCompileTimeBreakpoints = debugProfileState.isCompileTimeBreakpointsEnabled();
+		this.enableNonInteractiveMode = debugProfileState.isNonInteractiveModeEnabled();
 	}
 }
