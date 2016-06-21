@@ -121,7 +121,7 @@
         <referencesSearch
                 implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferencesSearcher"/>
         <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
-        <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlHeredocReferenceSearcher"/>
+        <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
 
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>

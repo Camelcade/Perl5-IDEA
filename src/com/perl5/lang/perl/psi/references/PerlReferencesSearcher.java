@@ -27,9 +27,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 02.03.2016.
  */
-public class PerlHeredocReferenceSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
+public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
 {
-	public PerlHeredocReferenceSearcher()
+	public PerlReferencesSearcher()
 	{
 		super(true);
 	}
@@ -38,6 +38,7 @@ public class PerlHeredocReferenceSearcher extends QueryExecutorBase<PsiReference
 	public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
 	{
 		PsiElement element = queryParameters.getElementToSearch();
+
 		if (element instanceof PerlHeredocOpener)
 		{
 			String heredocName = ((PerlHeredocOpener) element).getName();
