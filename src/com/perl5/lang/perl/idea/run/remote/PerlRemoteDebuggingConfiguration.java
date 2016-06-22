@@ -46,6 +46,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public String startMode = "RUN";
 	public boolean isNonInteractiveModeEnabled = false;
 	public boolean isCompileTimeBreakpointsEnabled = false;
+	public String initCode = "";
 
 	public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
 	{
@@ -176,5 +177,16 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled)
 	{
 		isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+	}
+
+	@Override
+	public String getInitCode()
+	{
+		return initCode;
+	}
+
+	public void setInitCode(String initCode)
+	{
+		this.initCode = initCode;
 	}
 }

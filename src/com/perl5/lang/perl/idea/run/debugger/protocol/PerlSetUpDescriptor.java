@@ -31,6 +31,7 @@ public class PerlSetUpDescriptor
 	private String startMode;
 	private boolean enableCompileTimeBreakpoints;
 	private boolean enableNonInteractiveMode;
+	private String initCode;
 
 	public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState)
 	{
@@ -39,5 +40,6 @@ public class PerlSetUpDescriptor
 		this.startMode = debugProfileState.getStartMode();
 		this.enableCompileTimeBreakpoints = debugProfileState.isCompileTimeBreakpointsEnabled();
 		this.enableNonInteractiveMode = debugProfileState.isNonInteractiveModeEnabled();
+		this.initCode = debugProfileState.getInitCode();
 	}
 }

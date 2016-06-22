@@ -65,6 +65,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public String startMode = "RUN";
 	public boolean isNonInteractiveModeEnabled = false;
 	public boolean isCompileTimeBreakpointsEnabled = false;
+	public String initCode = "";
 
 	private transient Integer debugPort;
 
@@ -294,5 +295,16 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled)
 	{
 		isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+	}
+
+	@Override
+	public String getInitCode()
+	{
+		return initCode;
+	}
+
+	public void setInitCode(String initCode)
+	{
+		this.initCode = initCode;
 	}
 }

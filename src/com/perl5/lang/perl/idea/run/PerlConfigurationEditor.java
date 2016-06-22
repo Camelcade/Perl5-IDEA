@@ -19,24 +19,17 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.ui.CommonProgramParametersPanel;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.LabeledComponent;
-import com.intellij.openapi.ui.TextComponentAccessor;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.RawCommandLineEditor;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
-import org.jdesktop.swingx.combobox.MapComboBoxModel;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -48,22 +41,17 @@ import java.util.ArrayList;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
+public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlConfiguration>
 {
 	private TextFieldWithBrowseButton myScriptField;
-	private ComboBox myConsoleCharset;
-	private ComboBox myStartMode;
 	private CommonProgramParametersPanel myParametersPanel;
+	private ComboBox myConsoleCharset;
 	private RawCommandLineEditor myPerlParametersPanel;
 	private PerlAlternativeSdkPanel myAlternativeSdkPanel;
-	private Project myProject;
-	private JTextField myScriptCharset;
-	private JCheckBox myIsNonInteractiveModeEnabled;
-	private JCheckBox myIsCompileTimeBreakpointsEnabled;
 
 	public PerlConfigurationEditor(Project project)
 	{
-		myProject = project;
+		super(project);
 	}
 
 	@Override
@@ -72,32 +60,26 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 		myScriptField.setText(perlConfiguration.getScriptPath());
 		myParametersPanel.reset(perlConfiguration);
 		myConsoleCharset.setSelectedItem(perlConfiguration.getConsoleCharset());
-		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
 		myPerlParametersPanel.setText(perlConfiguration.getPerlParameters());
-		myStartMode.setSelectedItem(perlConfiguration.getStartMode());
-		myScriptCharset.setText(perlConfiguration.getScriptCharset());
-		myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
-		myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
+		myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
+		super.resetEditorFrom(perlConfiguration);
 	}
 
 	@Override
 	protected void applyEditorTo(PerlConfiguration perlConfiguration) throws ConfigurationException
 	{
-		perlConfiguration.setPerlParameters(myPerlParametersPanel.getText());
 		perlConfiguration.setScriptPath(myScriptField.getText());
 		myParametersPanel.applyTo(perlConfiguration);
 		perlConfiguration.setConsoleCharset(StringUtil.nullize((String) myConsoleCharset.getSelectedItem(), true));
-		perlConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
+		perlConfiguration.setPerlParameters(myPerlParametersPanel.getText());
 		perlConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
-		perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
-		perlConfiguration.setScriptCharset(myScriptCharset.getText());
-		perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
-		perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
+		perlConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
+		super.applyEditorTo(perlConfiguration);
 	}
 
-	@NotNull
+	@Nullable
 	@Override
-	protected JComponent createEditor()
+	protected JComponent getGeneralComponent()
 	{
 		myScriptField = new TextFieldWithBrowseButton();
 		myScriptField.addBrowseFolderListener(
@@ -105,30 +87,13 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				PerlBundle.message("perl.run.config.select.script.prompt"),
 				myProject,
 				FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(new Condition<VirtualFile>()
-		{
-			@Override
-			public boolean value(VirtualFile virtualFile)
-			{
-				return PerlConfigurationProducer.isExecutableFile(virtualFile);
-			}
-		}), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
-
-		//noinspection Since15
-		myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS))
-		{
-			@Override
-			public void setRenderer(ListCellRenderer renderer)
-			{
-				super.setRenderer(new ColoredListCellRenderer<String>()
 				{
 					@Override
-					protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
+					public boolean value(VirtualFile virtualFile)
 					{
-						append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
+						return PerlConfigurationProducer.isExecutableFile(virtualFile);
 					}
-				});
-			}
-		};
+				}), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
 		myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
 
@@ -174,22 +139,7 @@ public class PerlConfigurationEditor extends SettingsEditor<PerlConfiguration>
 				super.addComponents();
 				add(myAlternativeSdkPanel);
 
-				// debugger-related settings
-				myScriptCharset = new JTextField();
-				LabeledComponent<JTextField> myScriptCharsetLabel = LabeledComponent.create(myScriptCharset, PerlBundle.message("perl.run.option.script.encoding"));
-				myScriptCharsetLabel.setLabelLocation(BorderLayout.WEST);
-				add(myScriptCharsetLabel);
-
-				LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, PerlBundle.message("perl.run.option.debugger.startup.mode"));
-				startMode.setLabelLocation(BorderLayout.WEST);
-				add(startMode);
-
-				myIsNonInteractiveModeEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.noninteractive.mode"));
-				add(myIsNonInteractiveModeEnabled);
-
-				myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
-				add(myIsCompileTimeBreakpointsEnabled);
-
+				setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
 			}
 		};
 		myParametersPanel.setProgramParametersLabel(PerlBundle.message("perl.run.option.script.parameters"));

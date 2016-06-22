@@ -35,7 +35,14 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
-      <li>Added new debugger options: non-interactive mode and compile-time breakpoints. Disabling them improves debugging performance</li>
+      <li>Debugger:<ul>
+        <li>Run and debugging settings are now on separated tabs</li>
+        <li>New options:<ul>
+            <li>Initialization code - allows you to run piece of Perl code after debugger been initialized, e.g. use DB::Skip (requires DB::Camelcadedb 1.6.1.5+)</li>
+            <li>Non-interactive mode - allows to pause the debugger and manager breakpoints while script is running. Disabled by default, moderate performance impact.</li>
+            <li>Compile-time breakpoints - allows to handle breakpoints on use statements and in BEGIN blocks. Disabled by default, significant performance impact.</li>
+         </ul></li>
+      </ul></li>
       </ul>
      </p>
      <!--<p>Fixes:-->

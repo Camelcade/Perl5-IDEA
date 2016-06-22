@@ -16,18 +16,17 @@
 
 package com.perl5.lang.perl.idea.run.remote;
 
-import com.intellij.execution.ui.CommonProgramParametersPanel;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.run.PerlConfigurationEditorBase;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jdesktop.swingx.combobox.MapComboBoxModel;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
@@ -37,143 +36,99 @@ import java.text.NumberFormat;
 /**
  * Created by hurricup on 09.05.2016.
  */
-public class PerlRemoteDebuggingConfigurationEditor extends SettingsEditor<PerlRemoteDebuggingConfiguration>
+public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase<PerlRemoteDebuggingConfiguration>
 {
-	private Project myProject;
-
 	private JTextField myWorkingDirectoryComponent;
-	private JTextField myScriptCharset;
-	private ComboBox myStartMode;
 	private ComboBox myPerlRole;
 	private JTextField myDebuggingHost;
 	private JFormattedTextField myDebuggingPort;
-	private JCheckBox myIsNonInteractiveModeEnabled;
-	private JCheckBox myIsCompileTimeBreakpointsEnabled;
-
 
 	public PerlRemoteDebuggingConfigurationEditor(Project project)
 	{
-		myProject = project;
+		super(project);
 	}
 
 	@Override
 	protected void resetEditorFrom(PerlRemoteDebuggingConfiguration perlConfiguration)
 	{
 		myWorkingDirectoryComponent.setText(perlConfiguration.getRemoteProjectRoot());
-		myStartMode.setSelectedItem(perlConfiguration.getStartMode());
 		myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
 		myDebuggingHost.setText(perlConfiguration.getDebugHost());
 		myDebuggingPort.setText(String.valueOf(perlConfiguration.getDebugPort()));
-		myScriptCharset.setText(perlConfiguration.getScriptCharset());
-		myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
-		myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
+		super.resetEditorFrom(perlConfiguration);
 	}
 
 	@Override
 	protected void applyEditorTo(PerlRemoteDebuggingConfiguration perlConfiguration) throws ConfigurationException
 	{
 		perlConfiguration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
+		perlConfiguration.setPerlRole(myPerlRole.getSelectedItem().toString());
 		perlConfiguration.setDebugHost(myDebuggingHost.getText());
 		String debuggingPort = myDebuggingPort.getText();
 		if (StringUtil.isNotEmpty(debuggingPort))
 		{
 			perlConfiguration.setDebugPort(Integer.parseInt(myDebuggingPort.getText()));
 		}
-		perlConfiguration.setScriptCharset(myScriptCharset.getText());
-		perlConfiguration.setPerlRole(myPerlRole.getSelectedItem().toString());
-		perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
-		perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
-		perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
+		super.applyEditorTo(perlConfiguration);
 	}
 
-	@NotNull
+	@Nullable
 	@Override
-	protected JComponent createEditor()
+	protected JComponent getDebuggingComponent()
 	{
-		return new CommonProgramParametersPanel()
+		JComponent debugPanel = super.getDebuggingComponent();
+
+		if (debugPanel == null)
 		{
+			return null;
+		}
 
+		myWorkingDirectoryComponent = new JTextField();
+		LabeledComponent<JTextField> workingDirectory = LabeledComponent.create(myWorkingDirectoryComponent, PerlBundle.message("perl.run.option.remote.root"));
+		workingDirectory.setLabelLocation(BorderLayout.WEST);
+		debugPanel.add(workingDirectory);
+
+		//noinspection Since15
+		myPerlRole = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.ROLE_OPTIONS))
+		{
 			@Override
-			protected void addComponents()
+			public void setRenderer(ListCellRenderer renderer)
 			{
-				myWorkingDirectoryComponent = new JTextField();
-				LabeledComponent<JTextField> workingDirectory = LabeledComponent.create(myWorkingDirectoryComponent, PerlBundle.message("perl.run.option.remote.root"));
-				workingDirectory.setLabelLocation(BorderLayout.WEST);
-				add(workingDirectory);
-
-				myScriptCharset = new JTextField();
-				LabeledComponent<JTextField> scriptCharset = LabeledComponent.create(myScriptCharset, PerlBundle.message("perl.run.option.script.encoding"));
-				scriptCharset.setLabelLocation(BorderLayout.WEST);
-				add(scriptCharset);
-
-				//noinspection Since15
-				myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS))
+				super.setRenderer(new ColoredListCellRenderer<String>()
 				{
 					@Override
-					public void setRenderer(ListCellRenderer renderer)
+					protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
 					{
-						super.setRenderer(new ColoredListCellRenderer<String>()
-						{
-							@Override
-							protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
-							{
-								append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
-							}
-						});
+						append(PerlDebugOptionsSets.ROLE_OPTIONS.get(value));
 					}
-				};
-				;
-				LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, PerlBundle.message("perl.run.option.debugger.startup.mode"));
-				startMode.setLabelLocation(BorderLayout.WEST);
-				add(startMode);
-
-				myIsNonInteractiveModeEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.noninteractive.mode"));
-				add(myIsNonInteractiveModeEnabled);
-
-				myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
-				add(myIsCompileTimeBreakpointsEnabled);
-
-
-				//noinspection Since15
-				myPerlRole = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.ROLE_OPTIONS))
-				{
-					@Override
-					public void setRenderer(ListCellRenderer renderer)
-					{
-						super.setRenderer(new ColoredListCellRenderer<String>()
-						{
-							@Override
-							protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
-							{
-								append(PerlDebugOptionsSets.ROLE_OPTIONS.get(value));
-							}
-						});
-					}
-				};
-				;
-				LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, PerlBundle.message("perl.run.option.debugger.connection.mode"));
-				perlRole.setLabelLocation(BorderLayout.WEST);
-				add(perlRole);
-
-				myDebuggingHost = new JTextField();
-				LabeledComponent<JTextField> debuggingHost = LabeledComponent.create(myDebuggingHost, PerlBundle.message("perl.run.option.debugger.host"));
-				debuggingHost.setLabelLocation(BorderLayout.WEST);
-				add(debuggingHost);
-
-				NumberFormat numberFormat = NumberFormat.getInstance();
-				numberFormat.setMaximumIntegerDigits(6);
-				numberFormat.setGroupingUsed(false);
-
-				NumberFormatter formatter = new NumberFormatter(numberFormat);
-				formatter.setAllowsInvalid(false);
-				formatter.setMaximum(65535);
-				formatter.setMinimum(0);
-
-				myDebuggingPort = new JFormattedTextField(formatter);
-				LabeledComponent<JFormattedTextField> debuggingPort = LabeledComponent.create(myDebuggingPort, PerlBundle.message("perl.run.option.debugger.port"));
-				debuggingPort.setLabelLocation(BorderLayout.WEST);
-				add(debuggingPort);
+				});
 			}
 		};
+		;
+		LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, PerlBundle.message("perl.run.option.debugger.connection.mode"));
+		perlRole.setLabelLocation(BorderLayout.WEST);
+		debugPanel.add(perlRole);
+
+		myDebuggingHost = new JTextField();
+		LabeledComponent<JTextField> debuggingHost = LabeledComponent.create(myDebuggingHost, PerlBundle.message("perl.run.option.debugger.host"));
+		debuggingHost.setLabelLocation(BorderLayout.WEST);
+		debugPanel.add(debuggingHost);
+
+		NumberFormat numberFormat = NumberFormat.getInstance();
+		numberFormat.setMaximumIntegerDigits(6);
+		numberFormat.setGroupingUsed(false);
+
+		NumberFormatter formatter = new NumberFormatter(numberFormat);
+		formatter.setAllowsInvalid(false);
+		formatter.setMaximum(65535);
+		formatter.setMinimum(0);
+
+		myDebuggingPort = new JFormattedTextField(formatter);
+		LabeledComponent<JFormattedTextField> debuggingPort = LabeledComponent.create(myDebuggingPort, PerlBundle.message("perl.run.option.debugger.port"));
+		debuggingPort.setLabelLocation(BorderLayout.WEST);
+		debugPanel.add(debuggingPort);
+
+		return debugPanel;
 	}
+
 }

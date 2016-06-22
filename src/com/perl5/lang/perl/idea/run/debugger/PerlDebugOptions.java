@@ -34,11 +34,23 @@ public interface PerlDebugOptions
 
 	String getStartMode();
 
+	void setStartMode(String startMode);
+
 	String getScriptCharset();
+
+	void setScriptCharset(String charset);
 
 	String getPerlRole();
 
 	boolean isNonInteractiveModeEnabled();
 
+	void setNonInteractiveModeEnabled(boolean isEnabled);
+
 	boolean isCompileTimeBreakpointsEnabled();
+
+	void setCompileTimeBreakpointsEnabled(boolean isEnabled);
+
+	String getInitCode();
+
+	void setInitCode(String code);
 }
