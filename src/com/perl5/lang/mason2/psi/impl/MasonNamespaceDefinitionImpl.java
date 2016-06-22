@@ -47,7 +47,7 @@ import java.util.List;
  */
 public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl implements MasonNamespaceDefinition
 {
-	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int mySettingsChangeCounter;
 
 	public MasonNamespaceDefinitionImpl(ASTNode node)
@@ -64,7 +64,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 	protected void fillImplicitVariables()
 	{
-		myImplicitVariables.clear();
+		myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 
 		if (isValid())
 		{

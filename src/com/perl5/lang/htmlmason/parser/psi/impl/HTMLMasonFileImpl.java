@@ -63,7 +63,7 @@ import java.util.Set;
  */
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 {
-	protected final List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 	protected int myMasonChangeCounter;
 	protected Map<Integer, Boolean> myPerlLinesMap = new THashMap<Integer, Boolean>();
 	protected MyBlocksCache myBlocksCache;
@@ -195,7 +195,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 
 	protected void fillImplicitVariables()
 	{
-		myImplicitVariables.clear();
+		myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 
 		if (isValid())
 		{
