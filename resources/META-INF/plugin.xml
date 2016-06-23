@@ -35,6 +35,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>Package processor for <a href="http://search.cpan.org/~haarg/strictures-2.000003/lib/strictures.pm">strictures</a> module</li>
       <li>Debugger:<ul>
         <li>Run and debugging settings are now on separated tabs</li>
         <li>New options:<ul>
@@ -101,6 +102,9 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ModernPerlPackageProcessor"/>
         <packageProcessor key="POSIX"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXPackageProcessor"/>
+        <packageProcessor key="strictures"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
+
 
         <parserExtension implementation="com.perl5.lang.perl.parser.TryCatchParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
