@@ -45,10 +45,12 @@
       </ul></li>
       </ul>
      </p>
-     <!--<p>Fixes:-->
-      <!--<ul>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Fixes:
+      <ul>
+      <li>JS line comment bug in Template Toolkit templates</li>
+      <li>Bug with PROCESS directive capturing parsing</li>
+      </ul>
+     </p>
     ]]>
     </change-notes>
 

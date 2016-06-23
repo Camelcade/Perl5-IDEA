@@ -207,7 +207,7 @@ call_directive ::= TT2_CALL expr [directive_postfix] {pin=1}
 get_directive ::= [TT2_GET] expr [directive_postfix]
 
 set_directive ::= [TT2_SET] <<parseSetElement>> + [directive_postfix]
-private parse_set_element ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG expr
+private parse_set_element ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG {process_directive|expr}
 
 default_directive ::= TT2_DEFAULT assign_expr + [directive_postfix] {pin=1}
 
