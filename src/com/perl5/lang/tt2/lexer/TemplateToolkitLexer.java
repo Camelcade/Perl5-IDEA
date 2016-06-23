@@ -59,7 +59,6 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		{
 			int offset = tokenStart;
 			boolean blockStart = false;
-			int lastNonSpaceCharacterOffset = -1;
 			for (; offset < bufferEnd; offset++)
 			{
 				char currentChar = buffer.charAt(offset);
@@ -72,15 +71,11 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 				{
 					break;
 				}
-				else if (!Character.isWhitespace(currentChar))
-				{
-					lastNonSpaceCharacterOffset = offset;
-				}
 			}
 
 			if (offset > tokenStart)
 			{
-				reLexHTMLBLock(tokenStart, offset, lastNonSpaceCharacterOffset, TT2_HTML);
+				pushPreparsedToken(tokenStart, offset, TT2_HTML);
 			}
 
 			if (blockStart)

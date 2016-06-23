@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n')
   PsiElement(TemplateToolkit2Token.[%)('[%')
   PsiDefaultDirectiveImpl(TemplateToolkit2Element.DEFAULT_DIRECTIVE)
     PsiElement(TemplateToolkit2Token.DEFAULT)('DEFAULT')
@@ -70,4 +70,4 @@ Template Toolkit File
         PsiElement(TemplateToolkit2Token..)('.')
         PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('baz')
   PsiElement(TemplateToolkit2Token.%])('%]')
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('</body>\n</html>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n</body>\n</html>')

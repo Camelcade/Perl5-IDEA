@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiErrorElement:Unclosed block directive, missing END
     PsiWrapperBlockImpl(TemplateToolkit2Element.WRAPPER_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
@@ -18,4 +18,4 @@ Template Toolkit File
             PsiElement(TemplateToolkit2Token.STRING_CONTENT)('Mechanics')
             PsiElement(TemplateToolkit2Token.SQ_CLOSE)(''')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('Quantum mechanics is a very interesting subject wish\n   should prove easy for the layman to fully comprehend.\n\n\n</body>\n</html>')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n   Quantum mechanics is a very interesting subject wish\n   should prove easy for the layman to fully comprehend.\n\n\n</body>\n</html>')

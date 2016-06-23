@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\nThings:')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\nThings:\n')
   PsiErrorElement:Unclosed block directive, missing END
     PsiForeachBlockImpl(TemplateToolkit2Element.FOREACH_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
@@ -26,10 +26,10 @@ Template Toolkit File
               PsiElement(TemplateToolkit2Token.DQ_CLOSE)('"')
             PsiElement(TemplateToolkit2Token.])(']')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('*')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n   * ')
       PsiElement(TemplateToolkit2Token.[%)('[%')
       PsiGetDirectiveImpl(TemplateToolkit2Element.GET_DIRECTIVE)
         PsiIdentifierExprImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
           PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('thing')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('</body>\n</html>')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n</body>\n</html>')

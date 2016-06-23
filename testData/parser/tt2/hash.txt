@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n# minimal TT style')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n# minimal TT style\n')
   PsiElement(TemplateToolkit2Token.[%)('[%')
   PsiSetDirectiveImpl(TemplateToolkit2Element.SET_DIRECTIVE)
     PsiAssignExprImpl(TemplateToolkit2Element.ASSIGN_EXPR)
@@ -36,7 +36,7 @@ Template Toolkit File
             PsiElement(TemplateToolkit2Token.TT2_NUMBER_SIMPLE)('666')
         PsiElement(TemplateToolkit2Token.})('}')
   PsiElement(TemplateToolkit2Token.%])('%]')
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('# perl style')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n# perl style\n')
   PsiElement(TemplateToolkit2Token.[%)('[%')
   PsiSetDirectiveImpl(TemplateToolkit2Element.SET_DIRECTIVE)
     PsiAssignExprImpl(TemplateToolkit2Element.ASSIGN_EXPR)
@@ -76,4 +76,4 @@ Template Toolkit File
         PsiElement(TemplateToolkit2Token.,)(',')
         PsiElement(TemplateToolkit2Token.})('}')
   PsiElement(TemplateToolkit2Token.%])('%]')
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('</body>\n</html>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n\n</body>\n</html>')

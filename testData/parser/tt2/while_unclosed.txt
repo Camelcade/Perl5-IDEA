@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiErrorElement:Unclosed block directive, missing END
     PsiWhileBlockImpl(TemplateToolkit2Element.WHILE_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
@@ -12,7 +12,7 @@ Template Toolkit File
           PsiTermExprImpl(TemplateToolkit2Element.TERM_EXPR)
             PsiElement(TemplateToolkit2Token.TT2_NUMBER_SIMPLE)('100')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('...')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n   ...\n   ')
       PsiElement(TemplateToolkit2Token.[%)('[%')
       PsiSetDirectiveImpl(TemplateToolkit2Element.SET_DIRECTIVE)
         PsiAssignExprImpl(TemplateToolkit2Element.ASSIGN_EXPR)
@@ -22,4 +22,4 @@ Template Toolkit File
           PsiIdentifierExprImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
             PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('calculate_new_total')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('</body>\n</html>')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n</body>\n</html>')

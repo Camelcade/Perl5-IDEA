@@ -1,5 +1,5 @@
 Template Toolkit File
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>')
+  PsiComment(TemplateToolkit2Token.TT2_HTML)('<html>\n<head>http://template-toolkit.org/docs/manual/Variables.html</head>\n<body>\n\n')
   PsiErrorElement:Unclosed block directive, missing END
     PsiAnonBlockImpl(TemplateToolkit2Element.ANON_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
@@ -9,10 +9,10 @@ Template Toolkit File
         PsiElement(TemplateToolkit2Token.=)('=')
         PsiElement(TemplateToolkit2Token.BLOCK)('BLOCK')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('And Caesar's spirit, ranging for revenge,')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n   And Caesar's spirit, ranging for revenge,\n   ')
       PsiElement(TemplateToolkit2Token.[%)('[%')
       PsiGetDirectiveImpl(TemplateToolkit2Element.GET_DIRECTIVE)
         PsiIdentifierExprImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
           PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('someval')
       PsiElement(TemplateToolkit2Token.%])('%]')
-      PsiComment(TemplateToolkit2Token.TT2_HTML)('With Ate by his side come hot from hell,\n\n</body>\n</html>')
+      PsiComment(TemplateToolkit2Token.TT2_HTML)('\n   With Ate by his side come hot from hell,\n\n</body>\n</html>')
