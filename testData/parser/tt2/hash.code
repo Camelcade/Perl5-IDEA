@@ -3,8 +3,8 @@
 <body>
 # minimal TT style
 [% product = {
-     id    = 'XYZ-2000'
-     desc  = 'Bogon Generator'
+     'id'    = 'XYZ-2000'
+     "desc"  = 'Bogon Generator'
      price = 666
    }
 %]
@@ -12,8 +12,8 @@
 # perl style
 [% product = {
      id    => 'XYZ-2000',
-     desc  => 'Bogon Generator',
-     price => 666,
+     "desc"  => 'Bogon Generator',
+     'price' => 666,
    }
 %]
 

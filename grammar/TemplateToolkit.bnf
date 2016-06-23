@@ -324,8 +324,8 @@ anon_block_directive ::= identifier_expr TT2_ASSIGN !TT2_CLOSE_TAG TT2_BLOCK {pi
 hash_expr ::= TT2_LEFT_BRACE hash_expr_content TT2_RIGHT_BRACE {pin=1}
 private hash_expr_content ::= {hash_expr_item [TT2_COMMA]} *
 private hash_expr_item ::= pair_expr {pin=2 recoverWhile=recover_hash_expr_item}
-pair_expr ::= <<parseHashKey>> TT2_ASSIGN !TT2_CLOSE_TAG expr
-private recover_hash_expr_item ::= !(TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
+pair_expr ::= {string_argument | <<parseHashKey>>} TT2_ASSIGN !TT2_CLOSE_TAG expr
+private recover_hash_expr_item ::= !(TT2_DQ_OPEN|TT2_SQ_OPEN|TT2_IDENTIFIER|TT2_FORMAT|TT2_ON|TT2|OFF|TT2_RIGHT_BRACE|TT2_COMMA|TT2_HARD_NEWLINE|[TT2_MINUS]TT2_CLOSE_TAG|TT2_SEMI)
 
 array_expr ::= TT2_LEFT_BRACKET array_expr_content TT2_RIGHT_BRACKET {pin=1}
 private array_expr_content ::= (expr [TT2_COMMA]) * {recoverWhile=recover_array_content}
