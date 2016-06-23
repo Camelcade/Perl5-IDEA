@@ -16,7 +16,6 @@
 
 package com.perl5.lang.tt2.idea.highlighting;
 
-import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.tt2.TemplateToolkitFileViewProvider;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
@@ -24,7 +23,7 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements TemplateToolkitElementTypes
+public class TemplateToolkitTemplateLanguageErrorFilter extends SmartTemplateLanguageErrorFilter implements TemplateToolkitElementTypes
 {
 	private static final TokenSet START_TOKENS = TokenSet.create(
 			TT2_OPEN_TAG,
