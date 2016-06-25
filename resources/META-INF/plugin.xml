@@ -33,6 +33,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+    <p>This is a fixing update for for 2.1 release:</p><br/>
      <p>Improvements:
       <ul>
       <li>Package processor for <a href="http://search.cpan.org/~haarg/strictures-2.000003/lib/strictures.pm">strictures</a> module</li>
@@ -48,9 +49,11 @@
      </p>
      <p>Fixes:
       <ul>
-      <li>JS line comment bug in Template Toolkit templates</li>
+      <li>Template Toolkit:<ul>
+      <li>JS line comment bug in templates</li>
       <li>Bug with PROCESS directive capturing parsing</li>
       <li>Bug with hash elements when keys are quoted</li>
+      </ul></li>
       </ul>
      </p>
     ]]>
