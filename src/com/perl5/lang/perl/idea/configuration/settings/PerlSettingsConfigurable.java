@@ -144,13 +144,13 @@ public class PerlSettingsConfigurable implements Configurable
 					return false;
 				}
 
-				return file.isDirectory() || StringUtil.equals(file.getName(), PerlCriticAnnotator.PERL_CRITIC_NAME);
+				return file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlCriticAnnotator.PERL_CRITIC_LINUX_NAME);
 			}
 		};
 
 		perlCriticPathInputField.addBrowseFolderListener(
-				"Select file",
-				"Choose a Perl::Critic executable",
+				"Select File",
+				"Choose a Perl::Critic Executable",
 				null, // project
 				perlCriticDescriptor
 		);
@@ -170,13 +170,13 @@ public class PerlSettingsConfigurable implements Configurable
 					return false;
 				}
 
-				return file.isDirectory() || StringUtil.equals(file.getName(), PerlFormatWithPerlTidyAction.PERL_TIDY_NAME);
+				return file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlFormatWithPerlTidyAction.PERL_TIDY_LINUX_NAME);
 			}
 		};
 
 		perlTidyPathInputField.addBrowseFolderListener(
-				"Select file",
-				"Choose a Perl::Tidy executable",
+				"Select File",
+				"Choose a Perl::Tidy Executable",
 				null, // project
 				perlTidyDescriptor
 		);

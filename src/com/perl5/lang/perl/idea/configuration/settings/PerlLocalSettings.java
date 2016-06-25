@@ -39,8 +39,8 @@ import org.jetbrains.annotations.Nullable;
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings>
 {
 	public String PERL_PATH = "";
-	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_NAME;
-	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_NAME;
+	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_OS_DEPENDENT_NAME;
+	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
 
 	public static PerlLocalSettings getInstance(@NotNull Project project)
 	{

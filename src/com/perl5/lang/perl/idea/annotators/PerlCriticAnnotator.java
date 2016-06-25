@@ -51,7 +51,9 @@ import java.util.List;
  */
 public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCriticErrorDescriptor>>
 {
-	public static final String PERL_CRITIC_NAME = SystemInfo.isWindows ? "perlcritic.bat" : "perlcritic";
+	public static final String PERL_CRITIC_LINUX_NAME = "perlcritic";
+	public static final String PERL_CRITIC_WINDOWS_NAME = PERL_CRITIC_LINUX_NAME + ".bat";
+	public static final String PERL_CRITIC_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_CRITIC_WINDOWS_NAME : PERL_CRITIC_LINUX_NAME;
 
 
 	@Nullable

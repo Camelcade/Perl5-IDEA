@@ -53,7 +53,10 @@ import java.util.List;
  */
 public class PerlFormatWithPerlTidyAction extends PerlActionBase
 {
-	public static final String PERL_TIDY_NAME = SystemInfo.isWindows ? "perltidy.bat" : "perltidy";
+	public static final String PERL_TIDY_LINUX_NAME = "perltidy";
+	public static final String PERL_TIDY_WINDOWS_NAME = PERL_TIDY_LINUX_NAME + ".bat";
+	public static final String PERL_TIDY_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_TIDY_WINDOWS_NAME : PERL_TIDY_LINUX_NAME;
+
 	public static final String PERL_TIDY_GROUP = "PERL5_PERL_TIDY";
 
 	@Override
