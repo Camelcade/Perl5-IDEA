@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.util;
 
+import com.perl5.lang.perl.lexer.PerlLexer;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -341,7 +343,7 @@ public interface PerlSubUtilBuiltIn
 			"prototype",
 			"reset",
 			"scalar",
-			"undef",
+			PerlLexer.STRING_UNDEF,
 
 //			Functions for processes and process groups
 			"alarm",

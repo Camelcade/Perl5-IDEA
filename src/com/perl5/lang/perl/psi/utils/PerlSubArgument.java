@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -134,7 +135,18 @@ public class PerlSubArgument
 
 	public String toStringShort()
 	{
-		return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : "undef";
+		return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : PerlLexer.STRING_UNDEF;
+	}
+
+	public String toStringLong()
+	{
+		if (StringUtil.isEmpty(argumentName))
+		{
+			return PerlLexer.STRING_UNDEF;
+		}
+
+		String shortName = argumentType.getSigil() + argumentName;
+		return StringUtil.isNotEmpty(variableClass) ? variableClass + " " + shortName : shortName;
 	}
 
 	private void serialize(@NotNull StubOutputStream dataStream) throws IOException

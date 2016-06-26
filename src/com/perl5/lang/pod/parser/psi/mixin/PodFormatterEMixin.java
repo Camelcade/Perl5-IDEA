@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.parser.psi.PodFormatterE;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import gnu.trove.THashMap;
@@ -320,7 +321,7 @@ public class PodFormatterEMixin extends PodSectionMixin implements PodFormatterE
 
 			if (myText == null)
 			{
-				myText = "undef";
+				myText = PerlLexer.STRING_UNDEF;
 			}
 			else if ((m = OCTAL_NUMBER_PATTERN.matcher(myText)).matches())
 			{

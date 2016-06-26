@@ -22,6 +22,7 @@ import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSub
 	 *
 	 * @return list of accepted arguments
 	 */
+	@NotNull
 	List<PerlSubArgument> getSubArgumentsList();
 
 	/**

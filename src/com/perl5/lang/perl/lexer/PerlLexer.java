@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated
 {
+	public static final String STRING_UNDEF = "undef";
 	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
 	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
@@ -467,7 +468,7 @@ public class PerlLexer extends PerlLexerGenerated
 		RESERVED_TOKEN_TYPES.put("no", RESERVED_NO);
 		RESERVED_TOKEN_TYPES.put("require", RESERVED_REQUIRE);
 
-		RESERVED_TOKEN_TYPES.put("undef", RESERVED_UNDEF);
+		RESERVED_TOKEN_TYPES.put(STRING_UNDEF, RESERVED_UNDEF);
 
 		RESERVED_TOKEN_TYPES.put("print", RESERVED_PRINT);
 		RESERVED_TOKEN_TYPES.put("printf", RESERVED_PRINTF);

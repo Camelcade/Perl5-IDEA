@@ -90,6 +90,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	}
 
 
+	@NotNull
 	@Override
 	public List<PerlSubArgument> getSubArgumentsList()
 	{

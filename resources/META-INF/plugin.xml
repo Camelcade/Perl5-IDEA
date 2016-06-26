@@ -141,6 +141,8 @@
         <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
         <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
 
+        <codeInsight.parameterInfo language="Perl5"
+                                   implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlParameterInfoHandler"/>
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
 
