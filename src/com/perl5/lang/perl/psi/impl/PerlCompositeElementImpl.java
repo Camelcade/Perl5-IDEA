@@ -22,8 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 17.02.2016.
@@ -46,5 +48,12 @@ public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements Pe
 				lastParent,
 				place
 		);
+	}
+
+	@Nullable
+	@Override
+	public PerlContextType getValueContextType()
+	{
+		return PerlContextType.SCALAR;
 	}
 }

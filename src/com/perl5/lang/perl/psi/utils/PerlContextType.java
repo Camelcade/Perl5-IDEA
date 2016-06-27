@@ -14,22 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
-
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.utils.PerlContextType;
-import org.jetbrains.annotations.Nullable;
+package com.perl5.lang.perl.psi.utils;
 
 /**
- * Created by hurricup on 17.02.2016.
+ * Created by hurricup on 27.06.2016.
  */
-public interface PerlCompositeElement extends PsiElement
+public enum PerlContextType
 {
-	/**
-	 * Returns context type for psi element
-	 *
-	 * @return like scalar for scalars, strings and so on, lists for arrays, hashes, can be null if we not sure
-	 */
-	@Nullable
-	PerlContextType getValueContextType();
+	VOID,
+	SCALAR,
+	LIST
 }
