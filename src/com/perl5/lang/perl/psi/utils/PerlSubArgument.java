@@ -166,4 +166,13 @@ public class PerlSubArgument
 	{
 		return StringUtil.isEmpty(argumentName);
 	}
+
+	public PerlContextType getContextType()
+	{
+		if (argumentType == PerlVariableType.SCALAR || argumentType == PerlVariableType.CODE || argumentType == PerlVariableType.GLOB)
+		{
+			return PerlContextType.SCALAR;
+		}
+		return PerlContextType.LIST;
+	}
 }

@@ -22,7 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -32,7 +35,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +44,7 @@ import java.util.List;
 /**
  * Created by hurricup on 26.06.2016.
  */
-public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCallArgumentsImpl, PerlParameterInfo>
+public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCallArgumentsImpl, PerlParameterInfo>, PerlElementTypes
 {
 	/**
 	 * Method marks parameters as active/inactive
@@ -72,13 +75,50 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 			{
 				currentIndex = markActiveparametersRecursively(element.getFirstChild(), parameterInfos, currentIndex, offset);
 			}
-			else if (element instanceof PerlCompositeElementImpl)
+			else
 			{
-				PerlContextType valueContextType = ((PerlCompositeElementImpl) element).getValueContextType();
-				PerlVariableType currentArgumentType = parameterInfos[currentIndex].getArgument().getArgumentType();
-
-
+				IElementType tokenType = PsiUtilCore.getElementType(element);
+				if (tokenType == OPERATOR_COMMA_ARROW || tokenType == OPERATOR_COMMA)
+				{
+					if (parameterInfos[currentIndex].getArgument().getContextType() == PerlContextType.SCALAR)
+					{
+						currentIndex++;
+					}
+				}
 			}
+
+			if (element.getNode().getTextRange().getEndOffset() >= offset)
+			{
+				if (element instanceof PerlCompositeElementImpl)
+				{
+					PerlContextType valueContextType = PerlUtil.getElementContextType(element);
+
+					if (valueContextType == PerlContextType.SCALAR)
+					{
+						if (currentIndex < parameterInfos.length)
+						{
+							parameterInfos[currentIndex].setSelected(true);
+						}
+						return parameterInfos.length;
+					}
+					else if (valueContextType == PerlContextType.LIST) // consumes all arguments to the end
+					{
+						while (currentIndex < parameterInfos.length)
+						{
+							parameterInfos[currentIndex++].setSelected(true);
+						}
+						return currentIndex;
+					}
+				}
+
+				// space, comma or smth
+				if (currentIndex < parameterInfos.length)
+				{
+					parameterInfos[currentIndex].setSelected(true);
+				}
+				return parameterInfos.length;
+			}
+
 			element = element.getNextSibling();
 		}
 		return currentIndex;
@@ -92,7 +132,14 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 		{
 			return callArguments;
 		}
-		return ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset() - 1, PsiPerlCallArgumentsImpl.class);
+
+		callArguments = ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset() - 1, PsiPerlCallArgumentsImpl.class);
+		if (callArguments != null)
+		{
+			return callArguments;
+		}
+
+		return ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset() + 1, PsiPerlCallArgumentsImpl.class);
 	}
 
 	@Nullable
@@ -110,7 +157,6 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 			subArgumentsList.remove(0);
 		}
 
-		// fixme we should wrap sub arguments to mark current element. One-liner is not really cool here
 		return PerlParameterInfo.wrapArguments(subArgumentsList);
 	}
 

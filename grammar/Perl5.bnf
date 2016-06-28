@@ -852,11 +852,12 @@ sub_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_SUB sub_definition_parameters bl
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
-private leftward_call_expr ::= callable LEFT_PAREN [call_arguments] RIGHT_PAREN !LEFT_BRACKET
+private leftward_call_expr ::= callable <<parseLeftwardCallArguments>>
 private rightward_call_expr ::= callable [call_arguments]
 
 //// fixme this should depend on prototype
-call_arguments ::=
+call_arguments ::= parse_call_arguments
+private parse_call_arguments ::=
     anon_hash comma list_expr
     | block [[comma] list_expr]
     | list_expr
