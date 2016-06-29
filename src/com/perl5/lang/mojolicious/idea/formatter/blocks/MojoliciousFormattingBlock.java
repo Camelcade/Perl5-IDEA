@@ -27,7 +27,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.idea.formatter.MojoliciousIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -41,6 +42,10 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MojoliciousFormattingBlock extends PerlFormattingBlock implements MojoliciousElementTypes
 {
+	private static final TokenSet LINE_OPENERS = TokenSet.create(
+			MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
+	);
+
 	public MojoliciousFormattingBlock(@NotNull ASTNode node,
 									  @Nullable Wrap wrap,
 									  @Nullable Alignment alignment,
@@ -71,6 +76,7 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 			int lineStartOffset = document.getLineStartOffset(lineNumber);
 			PsiElement firstElement = file.findElementAt(lineStartOffset);
 
+
 			while (!element.equals(firstElement))
 			{
 				if (firstElement == null)
@@ -78,8 +84,7 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 					return false;
 				}
 
-				IElementType firstElementTokenType = firstElement.getNode().getElementType();
-				if (firstElementTokenType == MOJO_LINE_OPENER || firstElementTokenType == MOJO_LINE_EXPR_OPENER || firstElementTokenType == MOJO_LINE_EXPR_ESCAPED_OPENER)
+				if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement)))
 				{
 					return true;
 				}
@@ -90,6 +95,12 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 
 				firstElement = firstElement.getNextSibling();
 			}
+
+			if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement)))
+			{
+				return true;
+			}
+
 		}
 
 		return false;

@@ -38,7 +38,8 @@
       <ul>
       <li>Package processor for <a href="http://search.cpan.org/~haarg/strictures-2.000003/lib/strictures.pm">strictures</a> module</li>
       <li>You may now choose perlcritic/perltidy executable with any extension (or even without it)</li>
-      <li>Implemented subs parameter info (Ctrl+P)</li>
+      <li>Subs parameter info (Ctrl+P)</li>
+      <li>Perl live-templates wrapping with line markers in Mojo templates</li>
       <li>Debugger:<ul>
         <li>Run and debugging settings are now on separated tabs</li>
         <li>New options:<ul>
@@ -525,6 +526,8 @@
                    order="after PERL_SUBS_ANNOTATOR"/>
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.mojolicious.psi.references.MojoliciousReferencesContributor"/>
+        <liveTemplateOptionalProcessor
+                implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
         <!-- End of Mojolicious -->
 
 
