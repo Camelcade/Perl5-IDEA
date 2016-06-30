@@ -37,6 +37,29 @@ import org.jetbrains.annotations.Nls;
  */
 public class MojoliciousLiveTemplateProcessor implements TemplateOptionalProcessor
 {
+	private static boolean shouldAddMarkerAtOffset(CharSequence buffer, int offset)
+	{
+		int bufferEnd = buffer.length();
+
+		while (offset < bufferEnd)
+		{
+			char currentChar = buffer.charAt(offset++);
+			if (currentChar == '%')
+			{
+				return false;
+			}
+			else if (currentChar == '\n')
+			{
+				return false;
+			}
+			else if (!Character.isWhitespace(currentChar))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor)
 	{
@@ -73,7 +96,7 @@ public class MojoliciousLiveTemplateProcessor implements TemplateOptionalProcess
 		for (int currentLine = endLine; currentLine > startLine; currentLine--)
 		{
 			int lineStartOffset = document.getLineStartOffset(currentLine);
-			if (charsSequence.charAt(lineStartOffset) != '%')
+			if (shouldAddMarkerAtOffset(charsSequence, lineStartOffset))
 			{
 				document.insertString(lineStartOffset, "% ");
 			}
