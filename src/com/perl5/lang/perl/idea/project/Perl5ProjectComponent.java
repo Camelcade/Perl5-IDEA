@@ -79,7 +79,7 @@ public class Perl5ProjectComponent implements ProjectComponent
 			NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
 			Notification notification = group.createNotification(
 					"Perl5 plugin updated to version " + PerlPluginUtil.getPluginVersion(),
-					"<p>This version brings you Template Toolkit 2 support, better constants and methods handling.</p><br/>" +
+					"<p>This is a fixing build for 2.1 release. Brings Template Toolkit 2 fixes and few minor improvements.</p><br/>" +
 							"<p>Full list of changes and fixes may be found on the <a href=\"https://plugins.jetbrains.com/plugin/7796\">Plugin's page</a> in JetBrains repository.</p><br/>" +
 							"<p>Don't hesitate to report bugs and request new features to <a href=\"https://github.com/hurricup/Perl5-IDEA/issues\">our tracker</a>.</p><br/>" +
 							"<p>If you find this plugin helpful, you can support it using <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E\">PayPal</a>.</p><br/>" +
