@@ -16,19 +16,27 @@
 
 package com.perl5.lang.perl.idea.generation.handlers;
 
+import com.intellij.lang.LanguageCodeInsightActionHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 
 /**
  * Created by hurricup on 29.01.2016.
  */
-public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBase
+public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBase implements LanguageCodeInsightActionHandler
 {
 	@Override
 	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
 	{
 		((PerlFile) file).getCodeGenerator().generateOverrideMethod(anchor, editor);
+	}
+
+	@Override
+	public boolean isValidFor(Editor editor, PsiFile file)
+	{
+		return file instanceof PerlFileImpl;
 	}
 }

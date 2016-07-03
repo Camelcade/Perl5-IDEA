@@ -33,32 +33,21 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    <p>This is a fixing update for for 2.1 release:</p><br/>
+    <!--<p>This is a fixing update for for 2.1 release:</p><br/>-->
      <p>Improvements:
       <ul>
-      <li>Package processor for <a href="http://search.cpan.org/~haarg/strictures-2.000003/lib/strictures.pm">strictures</a> module</li>
-      <li>You may now choose perlcritic/perltidy executable with any extension (or even without it)</li>
-      <li>Subs parameter info (Ctrl+P)</li>
-      <li>Perl live-templates wrapping with line markers in Mojo templates, also fixed a bug with occasional re-formatting bug</li>
-      <li>Debugger:<ul>
-        <li>Run and debugging settings are now on separated tabs</li>
-        <li>New options:<ul>
-            <li>Initialization code - allows you to run piece of Perl code after debugger been initialized, e.g. use DB::Skip (requires DB::Camelcadedb 1.6.1.5+)</li>
-            <li>Non-interactive mode - allows to pause the debugger and manager breakpoints while script is running. Disabled by default, moderate performance impact.</li>
-            <li>Compile-time breakpoints - allows to handle breakpoints on use statements and in BEGIN blocks. Disabled by default, significant performance impact.</li>
-         </ul></li>
-      </ul></li>
+      <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
       </ul>
      </p>
-     <p>Fixes:
-      <ul>
-      <li>Template Toolkit:<ul>
-      <li>JS line comment bug in templates</li>
-      <li>Bug with PROCESS directive capturing parsing</li>
-      <li>Bug with hash elements when keys are quoted</li>
-      </ul></li>
-      </ul>
-     </p>
+     <!--<p>Fixes:-->
+      <!--<ul>-->
+      <!--<li>Template Toolkit:<ul>-->
+      <!--<li>JS line comment bug in templates</li>-->
+      <!--<li>Bug with PROCESS directive capturing parsing</li>-->
+      <!--<li>Bug with hash elements when keys are quoted</li>-->
+      <!--</ul></li>-->
+      <!--</ul>-->
+     <!--</p>-->
     ]]>
     </change-notes>
 
@@ -145,6 +134,8 @@
 
         <codeInsight.parameterInfo language="Perl5"
                                    implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlParameterInfoHandler"/>
+        <codeInsight.overrideMethod language="Perl5"
+                                    implementationClass="com.perl5.lang.perl.idea.generation.handlers.PerlOverrideMethodHandler"/>
         <psi.referenceContributor language="Perl5"
                                   implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
 
@@ -961,8 +952,6 @@
                     text="Generate Setters" description="Generate class setters"/>
             <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
                     text="Generate Getters and Setters" description="Generate class getters and setters"/>
-            <action class="com.perl5.lang.perl.idea.generation.PerlOverrideMethodAction" id="Perl5OverrideSub"
-                    text="Override/Implement methods" description="Override/Implement methods"/>
         </group>
 
     </actions>
