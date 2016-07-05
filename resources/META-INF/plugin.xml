@@ -37,6 +37,7 @@
      <p>Improvements:
       <ul>
       <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
+      <li>Color settings page for Template Toolkit syntax</li>
       </ul>
      </p>
      <!--<p>Fixes:-->
@@ -364,6 +365,7 @@
                 parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
         <lang.syntaxHighlighterFactory language="Template Toolkit 2" key="Template Toolkit 2"
                                        implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
         <highlightErrorFilter
                 implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitTemplateLanguageErrorFilter"/>
         <lang.braceMatcher language="Template Toolkit 2"

@@ -24,6 +24,7 @@ import com.intellij.openapi.options.colors.ColorSettingsPage;
 import com.intellij.openapi.util.Pair;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -141,6 +142,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Override
 	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
 	{
+		//noinspection unchecked
 		return ContainerUtil.newHashMap(
 				Pair.create("package", PerlSyntaxHighlighter.PERL_PACKAGE)
 				, Pair.create("package_def", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION)
@@ -188,7 +190,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	@Override
 	public String getDisplayName()
 	{
-		return "Perl5";
+		return PerlLanguage.NAME;
 	}
 
 

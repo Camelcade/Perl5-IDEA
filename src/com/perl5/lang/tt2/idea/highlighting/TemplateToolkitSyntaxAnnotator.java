@@ -20,7 +20,6 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.NotNull;
@@ -36,27 +35,27 @@ public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolki
 		IElementType tokenType = element.getNode().getElementType();
 		if (tokenType == TT2_IDENTIFIER || tokenType == TT2_SIGIL_SCALAR)
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY);
 		}
 		else if (TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET.contains(tokenType))
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY);
 		}
 		else if (TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET.contains(tokenType))
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_OPERATOR);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY);
 		}
 		else if (tokenType == SQ_STRING_EXPR)
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY);
 		}
 		else if (tokenType == DQ_STRING_EXPR)
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_DQ_STRING);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY);
 		}
 		else if (tokenType == BLOCK_COMMENT)
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_COMMENT);
+			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY);
 		}
 	}
 }
