@@ -39,7 +39,6 @@ public class PerlConsoleFilterProvider implements ConsoleFilterProviderEx
 	@Override
 	public Filter[] getDefaultFilters(@NotNull Project project, @NotNull GlobalSearchScope globalSearchScope)
 	{
-		Filter filter = new PerlConsoleFileLinkFilter(project);
-		return new Filter[]{filter};
+		return getDefaultFilters(project);
 	}
 }

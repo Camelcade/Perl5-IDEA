@@ -19,9 +19,13 @@ package com.perl5.lang.perl.idea.execution.filters;
 import com.intellij.execution.filters.Filter;
 import com.intellij.execution.filters.OpenFileHyperlinkInfo;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,25 +34,19 @@ import java.util.regex.Pattern;
 /**
  * Created by ELI-HOME on 21-Sep-15.
  * This filter detects file paths and stack traces and turns them into code hyperlinks inside consoles (this doesn't affect the Terminal).
- * You can create various consoles using the external tools or remote SSH external tools (under Settings > Tools).
- * The classic usage will be to create an local or ssh tool to tail your server logs,
- * then whenever an exception occurs - you can click on it to go to the specific line in the code.
- * <p/>
- * the logic works in a way that allows the remote server and you local code base to exists on different libraries (providing they both have the same project folder name).
- * example:
- * the file in your local project folder:  /home/user.folder/main.project/lib/ABC.pm
- * the file in your remote server folder: /usr/server/main.project/lib/ABC.pm
- * <p/>
- * since the project folder is named main.project, it will know to remove the prefix of the path and replace it with the correct one.
+ * Attempts to find anything looks like path with optional line number.
+ * Detected file should exists on your file system
  */
 public class PerlConsoleFileLinkFilter implements Filter
 {
-
-	private final Project project;
+	@NonNls
+	private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}\\:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
+	private static final Pattern DIE_PATH_PATTERN = Pattern.compile(FILE_PATH_REGEXP + "(?: line (\\d+)\\.?)?$");
+	private final Project myProject;
 
 	public PerlConsoleFileLinkFilter(Project project)
 	{
-		this.project = project;
+		myProject = project;
 	}
 
 	@Nullable
@@ -64,32 +62,25 @@ public class PerlConsoleFileLinkFilter implements Filter
 
 	private void match(List<ResultItem> results, String textLine, int startPoint)
 	{
-		if (project != null)
+		if (myProject == null || StringUtil.isEmpty(textLine))
 		{
-			VirtualFile projectDir = project.getBaseDir();
-			String projectDirName = project.getBaseDir().getName();
+			return;
+		}
 
-			String separator = "[\\\\/]";
-			Pattern pattern = Pattern.compile("([\\p{L}\\d:]+)?" +
-					separator + "+([\\p{L}\\d\\-.]+" +
-					separator + ")+" + projectDirName + "(" +
-					separator + "+([\\p{L}\\d\\-_.]+" +
-					separator + "+)*[\\p{L}\\d_]([\\p{L}\\d\\-_.])+)( line (\\d+))?");
-			Matcher matcher = pattern.matcher(textLine);
-			while (matcher.find())
+		Matcher matcher = DIE_PATH_PATTERN.matcher(textLine);
+		while (matcher.find())
+		{
+			int startIndex = matcher.start(0);
+			int endIndex = matcher.end(0);
+			String file = matcher.group(1);
+			int line = (matcher.group(2) != null) ? (Integer.valueOf(matcher.group(2)) - 1) : 0;
+			VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(file), true);
+			if (virtualFile != null)
 			{
-				int startIndex = matcher.start(0);
-				int endIndex = matcher.end(0);
-				String file = matcher.group(3);
-				int line = (matcher.group(7) != null) ? (Integer.valueOf(matcher.group(7)) - 1) : 0;
-				VirtualFile virtualFile = projectDir.findFileByRelativePath(file);
-				if (virtualFile != null)
-				{
-					results.add(new Result(
-							startPoint + startIndex,
-							startPoint + endIndex,
-							new OpenFileHyperlinkInfo(project, virtualFile, line)));
-				}
+				results.add(new Result(
+						startPoint + startIndex,
+						startPoint + endIndex,
+						new OpenFileHyperlinkInfo(myProject, virtualFile, line)));
 			}
 		}
 	}
