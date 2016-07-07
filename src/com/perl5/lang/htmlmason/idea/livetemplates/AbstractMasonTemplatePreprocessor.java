@@ -24,7 +24,7 @@ import com.intellij.psi.PsiFile;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public abstract class AbstractMasonTemplateProcessor implements TemplatePreprocessor
+public abstract class AbstractMasonTemplatePreprocessor implements TemplatePreprocessor
 {
 	protected abstract boolean isMyFile(PsiFile file);
 

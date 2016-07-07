@@ -16,28 +16,24 @@
 
 package com.perl5.lang.mojolicious.idea.liveTemplates;
 
-import com.intellij.codeInsight.template.Template;
-import com.intellij.codeInsight.template.impl.TemplateOptionalProcessor;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.RangeMarker;
-import com.intellij.openapi.project.Project;
+import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
-import org.jetbrains.annotations.Nls;
+import com.perl5.lang.perl.idea.livetemplates.AbstractOutlineLiveTemplateProcessor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 29.06.2016.
  */
-public class MojoliciousLiveTemplateProcessor implements TemplateOptionalProcessor
+public class MojoliciousLiveTemplateProcessor extends AbstractOutlineLiveTemplateProcessor
 {
-	private static boolean shouldAddMarkerAtOffset(CharSequence buffer, int offset)
+	protected boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset)
 	{
 		int bufferEnd = buffer.length();
 
@@ -61,70 +57,34 @@ public class MojoliciousLiveTemplateProcessor implements TemplateOptionalProcess
 	}
 
 	@Override
-	public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor)
+	protected boolean isMyFile(PsiFile file)
 	{
-		PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
-		if (!(file instanceof MojoliciousFileImpl))
-		{
-			return;
-		}
-
-		int startOffset = templateRange.getStartOffset();
-		int startLine = document.getLineNumber(startOffset);
-		int endLine = document.getLineNumber(templateRange.getEndOffset());
-		if (startLine == endLine)
-		{
-			return;
-		}
-
-		int startLineBeginOffset = document.getLineStartOffset(startLine);
-
-		PsiElement elementAtStart = file.getViewProvider().findElementAt(startLineBeginOffset, MojoliciousLanguage.INSTANCE);
-
-		while (elementAtStart instanceof PsiWhiteSpace)
-		{
-			elementAtStart = elementAtStart.getNextSibling();
-		}
-
-		if (PsiUtilCore.getElementType(elementAtStart) != MojoliciousElementTypes.MOJO_LINE_OPENER)
-		{
-			return;
-		}
-
-		assert elementAtStart != null;
-		CharSequence charsSequence = document.getCharsSequence();
-		for (int currentLine = endLine; currentLine > startLine; currentLine--)
-		{
-			int lineStartOffset = document.getLineStartOffset(currentLine);
-			if (shouldAddMarkerAtOffset(charsSequence, lineStartOffset))
-			{
-				document.insertString(lineStartOffset, "% ");
-			}
-		}
-	}
-
-	@Nls
-	@Override
-	public String getOptionName()
-	{
-		return "Please report a bug";
+		return file instanceof MojoliciousFileImpl;
 	}
 
 	@Override
-	public boolean isEnabled(Template template)
+	@NotNull
+	protected Language getMyLanguage()
 	{
-		return true;
+		return MojoliciousLanguage.INSTANCE;
 	}
 
 	@Override
-	public void setEnabled(Template template, boolean value)
+	@Nullable
+	protected PsiElement getOutlineElement(PsiElement firstElement)
 	{
+		while (firstElement instanceof PsiWhiteSpace)
+		{
+			firstElement = firstElement.getNextSibling();
+		}
 
+		return PsiUtilCore.getElementType(firstElement) == MojoliciousElementTypes.MOJO_LINE_OPENER ? firstElement : null;
 	}
 
 	@Override
-	public boolean isVisible(Template template)
+	@NotNull
+	protected String getOutlineMarker()
 	{
-		return false;
+		return "% ";
 	}
 }

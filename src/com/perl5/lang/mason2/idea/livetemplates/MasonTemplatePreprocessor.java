@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.idea.livetemplates;
+package com.perl5.lang.mason2.idea.livetemplates;
 
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
+import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplatePreprocessor;
+import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 
 /**
- * Created by hurricup on 08.03.2016.
+ * Created by hurricup on 10.01.2016.
  */
-public class HTMLMasonTemplateProcessor extends AbstractMasonTemplateProcessor
+public class MasonTemplatePreprocessor extends AbstractMasonTemplatePreprocessor
 {
 	protected boolean isMyFile(PsiFile file)
 	{
-		return file instanceof HTMLMasonFileImpl;
+		return file instanceof MasonTemplatingFileImpl;
 	}
+
 }

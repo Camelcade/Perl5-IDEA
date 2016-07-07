@@ -16,18 +16,39 @@
 
 package com.perl5.lang.mason2.idea.livetemplates;
 
+import com.intellij.lang.Language;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateProcessor;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplateProcessor;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 10.01.2016.
+ * Created by hurricup on 07.07.2016.
  */
-public class MasonTemplateProcessor extends AbstractMasonTemplateProcessor
+public class MasonLiveTemplatesProcessor extends HTMLMasonLiveTemplateProcessor
 {
+	@Override
 	protected boolean isMyFile(PsiFile file)
 	{
 		return file instanceof MasonTemplatingFileImpl;
 	}
 
+	@NotNull
+	@Override
+	protected Language getMyLanguage()
+	{
+		return Mason2TemplatingLanguage.INSTANCE;
+	}
+
+	@Nullable
+	@Override
+	protected PsiElement getOutlineElement(PsiElement firstElement)
+	{
+		return PsiUtilCore.getElementType(firstElement) == Mason2ElementTypes.MASON_LINE_OPENER ? firstElement : null;
+	}
 }

@@ -38,6 +38,7 @@
       <ul>
       <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
       <li>Improved console log filter, now catching any file-like text with optional line number, should not cause catastrophic backtracking on binary data</li>
+      <li>Implemented proper outlining of perl live-templates for Mojolicious, HTML::Mason and Mason2</li>
       <li>Template Toolkit 2:<ul>
           <li>Color settings page for Template Toolkit syntax</li>
           <li>Using keywords or operators in identifiers now shows adequate error message</li>
@@ -568,7 +569,7 @@
 
         <liveTemplateContext implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateContextType"/>
         <liveTemplatePreprocessor
-                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateProcessor"/>
+                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplatePreprocessor"/>
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
         <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
@@ -593,7 +594,8 @@
         <elementDescriptionProvider
                 implementation="com.perl5.lang.htmlmason.parser.psi.HTMLMasonElementDescriptionProvider" order="first"/>
         <documentationProvider implementation="com.perl5.lang.htmlmason.documentation.HTMLMasonDocumentationProvider"/>
-
+        <liveTemplateOptionalProcessor
+                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplateProcessor"/>
         <!-- HTML::Mason settings end -->
 
         <!--Mason2 settings -->
@@ -612,7 +614,7 @@
                                 implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
 
         <liveTemplateContext implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
-        <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateProcessor"/>
+        <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreprocessor"/>
         <defaultLiveTemplatesProvider
                 implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLivetemplatesProvider"/>
 
@@ -671,6 +673,8 @@
                                  implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
         <highlightErrorFilter
                 implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
+        <liveTemplateOptionalProcessor
+                implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
         <!--Mason2 settings end -->
 
 
