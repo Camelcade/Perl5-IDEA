@@ -41,7 +41,7 @@ public class PerlConsoleFileLinkFilter implements Filter
 {
 	@NonNls
 	private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}\\:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
-	private static final Pattern DIE_PATH_PATTERN = Pattern.compile(FILE_PATH_REGEXP + "(?: line (\\d+)\\.?)?$");
+	private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\b" + FILE_PATH_REGEXP + "(?: line (\\d+)\\.?)?\\b");
 	private final Project myProject;
 
 	public PerlConsoleFileLinkFilter(Project project)

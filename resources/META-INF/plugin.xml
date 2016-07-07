@@ -44,7 +44,7 @@
      <!--<p>Fixes:-->
       <!--<ul>-->
       <!--<li>Template Toolkit:<ul>-->
-      <!--<li>JS line comment bug in templates</li>-->
+      <!--<li>JS line comment bug in templates</li>  -->
       <!--<li>Bug with PROCESS directive capturing parsing</li>-->
       <!--<li>Bug with hash elements when keys are quoted</li>-->
       <!--</ul></li>-->
