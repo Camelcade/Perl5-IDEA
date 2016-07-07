@@ -17,11 +17,14 @@
 package com.perl5.lang.perl.idea.generation.handlers;
 
 import com.intellij.lang.LanguageCodeInsightActionHandler;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 29.01.2016.
@@ -38,5 +41,18 @@ public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBas
 	public boolean isValidFor(Editor editor, PsiFile file)
 	{
 		return file instanceof PerlFileImpl;
+	}
+
+	@Override
+	public void invoke(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile file)
+	{
+		ApplicationManager.getApplication().runWriteAction(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				PerlOverrideMethodHandler.super.invoke(project, editor, file);
+			}
+		});
 	}
 }
