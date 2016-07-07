@@ -37,8 +37,11 @@
      <p>Improvements:
       <ul>
       <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
-      <li>Color settings page for Template Toolkit syntax</li>
       <li>Improved console log filter, now catching any file-like text with optional line number, should not cause catastrophic backtracking on binary data</li>
+      <li>Template Toolkit 2:<ul>
+          <li>Color settings page for Template Toolkit syntax</li>
+          <li>Using keywords or operators in identifiers now shows adequate error message</li>
+      </ul></li>
       </ul>
      </p>
      <!--<p>Fixes:-->

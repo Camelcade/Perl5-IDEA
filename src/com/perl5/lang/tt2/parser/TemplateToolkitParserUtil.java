@@ -686,4 +686,18 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 		return false;
 	}
+
+	public static boolean parseKeywordFallback(PsiBuilder b, int l)
+	{
+		if (TemplateToolkitSyntaxElements.KEYWORDS_OR_TEXT_OPERATORS_TOKENSET.contains(b.getTokenType()))
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.error(PerlBundle.message("tt2.error.keyword.in.identifier"));
+			return true;
+		}
+
+		return false;
+	}
+
 }

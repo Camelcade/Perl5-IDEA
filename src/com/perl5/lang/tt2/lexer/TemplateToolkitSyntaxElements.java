@@ -71,6 +71,8 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 	public static final Map<String, IElementType> TEXT_OPERATORS = new HashMap<String, IElementType>();
 	public static final TokenSet TEXT_OPERATORS_TOKENSET;
 
+	public static final TokenSet KEYWORDS_OR_TEXT_OPERATORS_TOKENSET;
+
 	public static final TokenSet SYMBOLIC_OPERATORS_TOKENSET = TokenSet.create(
 			TT2_ASSIGN,
 			TT2_PERIOD,
@@ -160,6 +162,10 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 		TEXT_OPERATORS.put("MOD", TT2_MOD_TEXT);
 
 		TEXT_OPERATORS_TOKENSET = TokenSet.create(TEXT_OPERATORS.values().toArray(new IElementType[TEXT_OPERATORS.values().size()]));
+
+		KEYWORDS_OR_TEXT_OPERATORS_TOKENSET = TokenSet.orSet(
+				KEYWORDS_TOKENSET, TEXT_OPERATORS_TOKENSET
+		);
 
 		ALL_OPERATORS_TOKENSET = TokenSet.orSet(TEXT_OPERATORS_TOKENSET, SYMBOLIC_OPERATORS_TOKENSET);
 

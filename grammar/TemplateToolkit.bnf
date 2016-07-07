@@ -365,7 +365,8 @@ private deref_part ::=
 	call_expr |
 	variable_expr |
 	TT2_NUMBER_SIMPLE |
-	keyword_or_identifier_term
+	keyword_or_identifier_term |
+	<<parseKeywordFallback>>
 
 variable_expr ::= TT2_SIGIL_SCALAR {variable_braced|identifier_expr_content}
 private variable_braced ::= TT2_LEFT_BRACE variable_braced_content TT2_RIGHT_BRACE {pin=1}
