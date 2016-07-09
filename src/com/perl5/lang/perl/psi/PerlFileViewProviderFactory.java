@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded;
+package com.perl5.lang.perl.psi;
 
+import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
@@ -23,16 +24,14 @@ import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 18.05.2015.
+ * Created by hurricup on 30.03.2016.
  */
-public class EmbeddedPerlFileViewProviderFactory implements FileViewProviderFactory
+public class PerlFileViewProviderFactory implements FileViewProviderFactory
 {
 	@NotNull
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
-												   com.intellij.lang.Language language,
-												   @NotNull PsiManager manager,
-												   boolean eventSystemEnabled)
+	@Override
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		return new EmbeddedPerlFileViewProvider(manager, file, eventSystemEnabled);
+		return new PerlFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

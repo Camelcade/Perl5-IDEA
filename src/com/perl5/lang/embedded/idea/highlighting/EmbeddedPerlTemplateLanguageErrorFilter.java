@@ -19,8 +19,8 @@ package com.perl5.lang.embedded.idea.highlighting;
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.EmbeddedPerlFileViewProvider;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProvider;
 
 /**
  * Created by hurricup on 16.03.2016.

@@ -29,6 +29,7 @@ import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.ConfigurableTemplateLanguageFileViewProvider;
 import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
+import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.ReflectionUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
@@ -56,6 +57,16 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
 
 	public static Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
 	{
+		while (file instanceof LightVirtualFile)
+		{
+			VirtualFile originalFile = ((LightVirtualFile) file).getOriginalFile();
+			if (originalFile == null || originalFile == file)
+			{
+				break;
+			}
+			file = originalFile;
+		}
+
 		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
 		return result == null ? StdLanguages.HTML : result;
 	}

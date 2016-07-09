@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser;
+package com.perl5.lang.embedded.psi;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.FileViewProviderFactory;
@@ -24,14 +23,16 @@ import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 30.03.2016.
+ * Created by hurricup on 18.05.2015.
  */
-public class PerlFileViewProviderFactory implements FileViewProviderFactory
+public class EmbeddedPerlFileViewProviderFactory implements FileViewProviderFactory
 {
 	@NotNull
-	@Override
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+												   com.intellij.lang.Language language,
+												   @NotNull PsiManager manager,
+												   boolean eventSystemEnabled)
 	{
-		return new PerlFileViewProvider(manager, file, eventSystemEnabled);
+		return new EmbeddedPerlFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

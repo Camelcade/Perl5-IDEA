@@ -18,7 +18,7 @@ package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.parser.PerlFileViewProviderFactory;
+import com.perl5.lang.perl.psi.PerlFileViewProviderFactory;
 
 /**
  * Created by hurricup on 31.01.2016.

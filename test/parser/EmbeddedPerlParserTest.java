@@ -17,9 +17,9 @@
 package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory;
 
 /**
  * Created by hurricup on 05.03.2016.

@@ -20,7 +20,7 @@ import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.embedded.EmbeddedPerlFileViewProvider;
+import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -127,7 +127,7 @@
         <internalFileTemplate name="Perl5 pod"/>
 
         <lang.fileViewProviderFactory language="Perl5"
-                                      implementationClass="com.perl5.lang.perl.parser.PerlFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.perl.psi.PerlFileViewProviderFactory"/>
         <annotator language="Perl5"
                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
                    order="after PERL_SUBS_ANNOTATOR"/>
@@ -430,7 +430,7 @@
         <lang.parserDefinition language="Embedded Perl"
                                implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
         <lang.fileViewProviderFactory language="Embedded Perl"
-                                      implementationClass="com.perl5.lang.embedded.EmbeddedPerlFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Embedded Perl" key="Embedded Perl"
                                        implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Embedded Perl"
