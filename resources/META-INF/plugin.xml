@@ -48,6 +48,7 @@
      <p>Fixes:
       <ul>
       <li>It's not possible anymore to inject other languages in hash elements and hash slices keys</li>
+      <li>Escaped quotes now being handled correctly with language injections in strings</li>
       </ul>
      </p>
     ]]>

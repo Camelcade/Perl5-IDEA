@@ -18,14 +18,20 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.lexer.RegexBlock;
 import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hurricup on 27.02.2016.
  */
 public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin>
 {
+	private Map<Integer, Integer> offsetsMap;
 	public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host)
 	{
 		super(host);
@@ -34,28 +40,66 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplM
 	@Override
 	public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars)
 	{
-		outChars.append(rangeInsideHost.subSequence(myHost.getText()));
-		// fixme this is beginning of real decoding
-//		PsiElement openingQuote = myHost.getOpeningQuote();
-//		char closeQuote = RegexBlock.getQuoteCloseChar(openingQuote.getText().charAt(0));
-//		String rawText = rangeInsideHost.subSequence(myHost.getText()).toString();
-//		outChars.append(rawText.replaceAll("(?<!\\\\)\\\\"+ closeQuote, "" + closeQuote));
+		PsiElement openQuoteElement = myHost.getOpeningQuote();
+		char openQuote = openQuoteElement.getText().charAt(0);
+		char closeQuote = RegexBlock.getQuoteCloseChar(openQuote);
+		offsetsMap = new HashMap<Integer, Integer>();
+		CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
+		Integer sourceOffset = 0;
+		Integer targetOffset = 0;
+		Integer sourceLength = sourceText.length();
+		boolean isEscaped = false;
+
+		while (sourceOffset < sourceLength)
+		{
+			char currentChar = sourceText.charAt(sourceOffset);
+
+			if (isEscaped)
+			{
+				if (currentChar != openQuote && currentChar != closeQuote)
+				{
+					assert sourceOffset > 0;
+					outChars.append('\\');
+					offsetsMap.put(targetOffset++, sourceOffset - 1);
+				}
+				outChars.append(currentChar);
+				offsetsMap.put(targetOffset++, sourceOffset);
+				isEscaped = false;
+			}
+			else if (currentChar == '\\')
+			{
+				isEscaped = true;
+			}
+			else
+			{
+				outChars.append(currentChar);
+				offsetsMap.put(targetOffset++, sourceOffset);
+			}
+
+			sourceOffset++;
+		}
+		if (isEscaped) // end with escape, not sure if possible
+		{
+			assert sourceOffset > 0;
+			outChars.append('\\');
+			offsetsMap.put(targetOffset++, sourceOffset - 1);
+		}
+
+		offsetsMap.put(targetOffset, sourceOffset);    // end marker
+
 		return true;
 	}
+
 
 	@Override
 	public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
 	{
-		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
-		if (offset < rangeInsideHost.getStartOffset())
-		{
-			offset = rangeInsideHost.getStartOffset();
-		}
-		if (offset > rangeInsideHost.getEndOffset())
-		{
-			offset = rangeInsideHost.getEndOffset();
-		}
-		return offset;
+		Integer offsetInEncoded = offsetsMap.get(offsetInDecoded);
+		assert offsetInEncoded != null : "Missing offset: " + offsetInDecoded +
+				"; text: " + rangeInsideHost.subSequence(myHost.getText()) +
+				"; range in host " + rangeInsideHost;
+
+		return offsetInEncoded + rangeInsideHost.getStartOffset();
 	}
 
 	@Override
