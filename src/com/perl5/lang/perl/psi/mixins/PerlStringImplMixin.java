@@ -21,7 +21,10 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
@@ -140,6 +143,22 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 	@Override
 	public boolean isValidHost()
 	{
+		PsiElement parent = getParent();
+		IElementType parentType = PsiUtilCore.getElementType(parent);
+		if (parentType == PerlElementTypes.HASH_INDEX)
+		{
+			return false;
+		}
+
+		if (parentType == PerlElementTypes.COMMA_SEQUENCE_EXPR)
+		{
+			IElementType grandParentType = PsiUtilCore.getElementType(parent.getParent());
+			if (grandParentType == PerlElementTypes.HASH_INDEX)
+			{
+				return false;
+			}
+		}
+
 		return true;
 	}
 

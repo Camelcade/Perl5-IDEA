@@ -45,15 +45,11 @@
       </ul></li>
       </ul>
      </p>
-     <!--<p>Fixes:-->
-      <!--<ul>-->
-      <!--<li>Template Toolkit:<ul>-->
-      <!--<li>JS line comment bug in templates</li>  -->
-      <!--<li>Bug with PROCESS directive capturing parsing</li>-->
-      <!--<li>Bug with hash elements when keys are quoted</li>-->
-      <!--</ul></li>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Fixes:
+      <ul>
+      <li>It's not possible anymore to inject other languages in hash elements and hash slices keys</li>
+      </ul>
+     </p>
     ]]>
     </change-notes>
 
