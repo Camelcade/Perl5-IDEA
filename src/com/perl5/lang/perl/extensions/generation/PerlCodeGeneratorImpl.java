@@ -64,8 +64,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 	{
 		return "sub get_" + name + "\n" +
 				"{\n" +
-				"	my $self = shift;\n" +
-				"	return $$self{" + name + "};\n" +
+				"	return $_[0]->{" + name + "};\n" +
 				"}\n";
 	}
 
@@ -197,7 +196,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 
 			if (!arguments.isEmpty() && !arguments.get(0).isEmpty())
 			{
-				code.append("$self->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
+				//noinspection StringConcatenationInsideStringBufferAppend
+				code.append(arguments.get(0).toStringShort() + "->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
 			}
 			code.append("}");
 			return code.toString();

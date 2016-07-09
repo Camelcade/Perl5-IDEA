@@ -39,6 +39,10 @@
       <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
       <li>Improved console log filter, now catching any file-like text with optional line number, should not cause catastrophic backtracking on binary data</li>
       <li>Implemented proper outlining of perl live-templates for Mojolicious, HTML::Mason and Mason2</li>
+      <li>Code generation:<ul>
+        <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
+        <li>Overriden methods now using proper self-reference variable from parent method, not <code>$self</code> in any case</li>
+      </ul></li>
       <li>Template Toolkit 2:<ul>
           <li>Color settings page for Template Toolkit syntax</li>
           <li>Using keywords or operators in identifiers now shows adequate error message</li>
