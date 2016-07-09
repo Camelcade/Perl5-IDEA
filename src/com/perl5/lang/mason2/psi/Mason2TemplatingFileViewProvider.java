@@ -35,6 +35,11 @@ public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDoc
 		super(manager, virtualFile, physical);
 	}
 
+	public Mason2TemplatingFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
+	{
+		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+	}
+
 	@Override
 	@NotNull
 	public Language getBaseLanguage()
@@ -59,7 +64,7 @@ public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDoc
 	@Override
 	protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new Mason2TemplatingFileViewProvider(getManager(), copy, false);
+		return new Mason2TemplatingFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
 	}
 
 }

@@ -34,6 +34,12 @@ public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFi
 		super(manager, virtualFile, physical);
 	}
 
+	public HTMLMasonFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
+	{
+		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+	}
+
+
 	@Override
 	@NotNull
 	public Language getBaseLanguage()
@@ -58,6 +64,6 @@ public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFi
 	@Override
 	protected HTMLMasonFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new HTMLMasonFileViewProvider(getManager(), copy, false);
+		return new HTMLMasonFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
 	}
 }

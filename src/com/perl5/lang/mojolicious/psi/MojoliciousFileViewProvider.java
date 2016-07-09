@@ -35,13 +35,17 @@ public class MojoliciousFileViewProvider extends PerlMultiplePsiFilesPerDocument
 		super(manager, virtualFile, physical);
 	}
 
+	public MojoliciousFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
+	{
+		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+	}
+
 	@Override
 	@NotNull
 	public Language getBaseLanguage()
 	{
 		return MojoliciousLanguage.INSTANCE;
 	}
-
 
 	@NotNull
 	@Override
@@ -60,6 +64,6 @@ public class MojoliciousFileViewProvider extends PerlMultiplePsiFilesPerDocument
 	@Override
 	protected MojoliciousFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new MojoliciousFileViewProvider(getManager(), copy, false);
+		return new MojoliciousFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
 	}
 }

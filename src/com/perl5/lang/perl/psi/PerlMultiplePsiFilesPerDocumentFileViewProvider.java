@@ -29,7 +29,6 @@ import com.intellij.psi.templateLanguages.ConfigurableTemplateLanguageFileViewPr
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,10 +49,22 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
 
 	public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
 	{
+		this(manager, virtualFile, eventSystemEnabled, calcTemplateLanguage(manager, virtualFile));
+	}
+
+	public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
+	{
 		super(manager, virtualFile, eventSystemEnabled);
 		myRelevantLanguages.add(getBaseLanguage());
 		myRelevantLanguages.add(PodLanguage.INSTANCE);
-		myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
+		myRelevantLanguages.add(myTemplateLanguage = templateLanguage);
+	}
+
+	@NotNull
+	protected static Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
+	{
+		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
+		return result == null ? StdLanguages.HTML : result;
 	}
 
 	/**
@@ -68,38 +79,11 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
 	@NotNull
 	protected abstract IElementType getPODContentElementType();
 
-	/**
-	 * Returns fallback templating language if non been configured via Templating Languages
-	 */
-	@NotNull
-	protected Language getDefaultTemplatingLanguage()
-	{
-		return StdLanguages.HTML;
-	}
-
 	@Override
 	@NotNull
 	public Language getTemplateDataLanguage()
 	{
 		return myTemplateLanguage;
-	}
-
-
-	@NotNull
-	protected Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
-	{
-		while (file instanceof LightVirtualFile)
-		{
-			VirtualFile originalFile = ((LightVirtualFile) file).getOriginalFile();
-			if (originalFile == null || originalFile == file)
-			{
-				break;
-			}
-			file = originalFile;
-		}
-
-		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
-		return result == null ? getDefaultTemplatingLanguage() : result;
 	}
 
 	@Override

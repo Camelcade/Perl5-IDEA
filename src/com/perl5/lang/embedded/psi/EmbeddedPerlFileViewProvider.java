@@ -34,6 +34,11 @@ public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumen
 		super(manager, virtualFile, physical);
 	}
 
+	public EmbeddedPerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
+	{
+		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+	}
+
 	@Override
 	@NotNull
 	public Language getBaseLanguage()
@@ -57,6 +62,6 @@ public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumen
 	@Override
 	protected EmbeddedPerlFileViewProvider cloneInner(final VirtualFile copy)
 	{
-		return new EmbeddedPerlFileViewProvider(getManager(), copy, false);
+		return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
 	}
 }
