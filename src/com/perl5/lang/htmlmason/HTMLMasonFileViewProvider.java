@@ -17,37 +17,18 @@
 package com.perl5.lang.htmlmason;
 
 import com.intellij.lang.Language;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.source.PsiFileImpl;
-import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.pod.PodLanguage;
-import gnu.trove.THashSet;
+import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.Set;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, HTMLMasonElementTypes
+public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements HTMLMasonElementTypes
 {
-	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(
-					StdLanguages.HTML,
-					HTMLMasonLanguage.INSTANCE,
-					PodLanguage.INSTANCE
-			));
-
-
 	public HTMLMasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
 	{
 		super(manager, virtualFile, physical);
@@ -60,38 +41,18 @@ public class HTMLMasonFileViewProvider extends MultiplePsiFilesPerDocumentFileVi
 		return HTMLMasonLanguage.INSTANCE;
 	}
 
-	@Override
 	@NotNull
-	public Set<Language> getLanguages()
+	@Override
+	protected IElementType getTemplateContentElementType()
 	{
-		return ourRelevantLanguages;
+		return HTML_MASON_HTML_TEMPLATE_DATA;
 	}
 
+	@NotNull
 	@Override
-	@Nullable
-	protected PsiFile createFile(@NotNull final Language lang)
+	protected IElementType getPODContentElementType()
 	{
-		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
-		{
-			return null;
-		}
-
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
-
-		if (parserDefinition != null)
-		{
-			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
-			if (lang == getTemplateDataLanguage())
-			{
-				file.setContentElementType(HTML_MASON_HTML_TEMPLATE_DATA);
-			}
-			else if (lang == PodLanguage.INSTANCE)
-			{
-				file.setContentElementType(HTML_MASON_POD_TEMPLATE_DATA);
-			}
-			return file;
-		}
-		return null;
+		return HTML_MASON_POD_TEMPLATE_DATA;
 	}
 
 	@Override
@@ -99,12 +60,4 @@ public class HTMLMasonFileViewProvider extends MultiplePsiFilesPerDocumentFileVi
 	{
 		return new HTMLMasonFileViewProvider(getManager(), copy, false);
 	}
-
-	@Override
-	@NotNull
-	public Language getTemplateDataLanguage()
-	{
-		return StdLanguages.HTML;
-	}
-
 }

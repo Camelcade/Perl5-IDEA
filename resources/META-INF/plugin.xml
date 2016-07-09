@@ -40,6 +40,7 @@
       <li>Improved console log filter, now catching any file-like text with optional line number, should not cause catastrophic backtracking on binary data</li>
       <li>Implemented proper outlining of perl live-templates for Mojolicious, HTML::Mason and Mason2</li>
       <li>POD parts of the perl file are now available in the structure view as a separate branch</li>
+      <li>Template language for Embedded Perl, Mojolicious, HTML::Mason and Mason2 is now configurable via Settings &gt; Template Data Language</li>
       <li>Code generation:<ul>
         <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
         <li>Overriden methods now using proper self-reference variable from parent method, not <code>$self</code> in any case</li>
