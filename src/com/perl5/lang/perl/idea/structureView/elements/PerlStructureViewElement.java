@@ -24,6 +24,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -36,6 +37,8 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.util.*;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.idea.structureView.PodStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -162,6 +165,12 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
 		if (myElement instanceof PerlFile)
 		{
+			PsiFile podFile = ((PerlFile) myElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+			if (podFile != null)
+			{
+				result.add(new PodStructureViewElement(podFile));
+			}
+
 			// namespaces
 			for (PerlNamespaceDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinition.class))
 			{

@@ -21,12 +21,7 @@ import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
 import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.idea.structureView.PodStructureViewModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,20 +40,6 @@ public class PerlStructureViewFactory implements PsiStructureViewFactory
 			@Override
 			public StructureViewModel createStructureViewModel(@Nullable Editor editor)
 			{
-				if (editor != null)
-				{
-					int offset = editor.getCaretModel().getOffset();
-					PsiElement element = psiFile.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
-					if (element != null && element.getNode().getElementType() == PerlElementTypes.POD)
-					{
-						PsiFile podTree = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
-						if (podTree != null)
-						{
-							return new PodStructureViewModel(podTree, editor);
-						}
-					}
-				}
-
 				return new PerlStructureViewModel(psiFile, editor);
 			}
 

@@ -22,6 +22,9 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.PsiCutSection;
@@ -84,7 +87,11 @@ public class PodStructureViewElement implements StructureViewTreeElement
 			@Override
 			public String getPresentableText()
 			{
-				if (myElement instanceof PodTitledSection)
+				if (myElement instanceof PodFile)
+				{
+					return PerlBundle.message("pod.structure.view.file.title");
+				}
+				else if (myElement instanceof PodTitledSection)
 				{
 					String title = null;
 					if (myElement instanceof PodSectionItem && ((PodSectionItem) myElement).isBulleted())
@@ -130,7 +137,7 @@ public class PodStructureViewElement implements StructureViewTreeElement
 			@Override
 			public Icon getIcon(boolean unused)
 			{
-				return myElement.getIcon(0);
+				return myElement instanceof PsiFile ? PerlIcons.POD_FILE : myElement.getIcon(0);
 			}
 		};
 	}
