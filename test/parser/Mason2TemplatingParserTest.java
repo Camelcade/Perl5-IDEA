@@ -17,9 +17,9 @@
 package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.mason2.Mason2TemplatingFileViewProviderFactory;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
+import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory;
 
 /**
  * Created by hurricup on 04.03.2016.

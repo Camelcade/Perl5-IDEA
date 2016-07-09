@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2;
+package com.perl5.lang.mason2.psi;
 
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.StdLanguages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
+import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -36,75 +37,70 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * Created by hurricup on 20.12.2015.
+ * Created by hurricup on 30.03.2016.
  */
-public class Mason2TemplatingFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, Mason2ElementTypes
+public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes
 {
-	private static final THashSet<Language> ourRelevantLanguages =
-			new THashSet<Language>(Arrays.asList(
-					StdLanguages.HTML,
-					Mason2TemplatingLanguage.INSTANCE,
-					PodLanguage.INSTANCE
-			));
+	private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
+			Mason2Language.INSTANCE,
+			PodLanguage.INSTANCE
+	));
 
-
-	public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
+	public Mason2FileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
 	{
-		super(manager, virtualFile, physical);
+		super(manager, virtualFile, eventSystemEnabled);
 	}
 
-	@Override
-	@NotNull
-	public Language getBaseLanguage()
-	{
-		return Mason2TemplatingLanguage.INSTANCE;
-	}
-
-	@Override
-	@NotNull
-	public Set<Language> getLanguages()
-	{
-		return ourRelevantLanguages;
-	}
-
-	@Override
 	@Nullable
-	protected PsiFile createFile(@NotNull final Language lang)
+	@Override
+	protected PsiFile createFile(@NotNull Language lang)
 	{
-		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
+		if (lang != Mason2Language.INSTANCE && lang != PodLanguage.INSTANCE)
 		{
 			return null;
 		}
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
-
 		if (parserDefinition != null)
 		{
-			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
-			if (lang == getTemplateDataLanguage())
+
+			final PsiFileImpl psiFile = (PsiFileImpl) parserDefinition.createFile(this);
+
+			if (lang == PodLanguage.INSTANCE)
 			{
-				file.setContentElementType(MASON_HTML_TEMPLATE_DATA);
+				psiFile.setContentElementType(POD_BLOCK);
 			}
-			else if (lang == PodLanguage.INSTANCE)
-			{
-				file.setContentElementType(MASON_POD_TEMPLATE_DATA);
-			}
-			return file;
+
+			return psiFile;
 		}
+
 		return null;
 	}
 
+	@NotNull
 	@Override
-	protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy)
+	public Set<Language> getLanguages()
 	{
-		return new Mason2TemplatingFileViewProvider(getManager(), copy, false);
+		return myLanguages;
+	}
+
+	@NotNull
+	@Override
+	public Language getBaseLanguage()
+	{
+		return Mason2Language.INSTANCE;
 	}
 
 	@Override
+	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy)
+	{
+		return new Mason2FileViewProvider(getManager(), fileCopy, false);
+	}
+
 	@NotNull
+	@Override
 	public Language getTemplateDataLanguage()
 	{
-		return StdLanguages.HTML;
+		return PodLanguage.INSTANCE;
 	}
-
 }

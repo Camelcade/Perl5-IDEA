@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2;
+package com.perl5.lang.mason2.psi;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;

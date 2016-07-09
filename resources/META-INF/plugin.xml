@@ -607,7 +607,7 @@
                    order="after PERL_SUBS_ANNOTATOR"/>
         <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
         <lang.fileViewProviderFactory language="Mason2"
-                                      implementationClass="com.perl5.lang.mason2.Mason2FileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
 
         <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
         <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
@@ -670,7 +670,7 @@
         <lang.parserDefinition language="Mason2 Templating Language"
                                implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
         <lang.fileViewProviderFactory language="Mason2 Templating Language"
-                                      implementationClass="com.perl5.lang.mason2.Mason2TemplatingFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
         <lang.findUsagesProvider language="Mason2 Templating Language"
                                  implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
         <highlightErrorFilter

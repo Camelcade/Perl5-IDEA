@@ -19,8 +19,8 @@ package com.perl5.lang.mason2.idea.highlighter;
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason2.Mason2TemplatingFileViewProvider;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
+import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProvider;
 
 /**
  * Created by hurricup on 16.03.2016.
