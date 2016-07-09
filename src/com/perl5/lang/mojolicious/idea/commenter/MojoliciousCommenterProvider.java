@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.templateLanguages.MultipleLangCommentProvider;
-import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
+import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.Nullable;
 
 /**

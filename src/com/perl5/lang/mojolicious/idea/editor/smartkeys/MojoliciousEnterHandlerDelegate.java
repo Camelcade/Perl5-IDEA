@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
+import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -482,7 +482,7 @@
         <lang.parserDefinition language="Mojolicious Perl"
                                implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
         <lang.fileViewProviderFactory language="Mojolicious Perl"
-                                      implementationClass="com.perl5.lang.mojolicious.MojoliciousFileViewProviderFactory"/>
+                                      implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
         <lang.syntaxHighlighterFactory language="Mojolicious Perl" key="Mojolicious Perl"
                                        implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
         <lang.findUsagesProvider language="Mojolicious Perl"

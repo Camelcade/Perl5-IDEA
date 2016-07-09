@@ -21,7 +21,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.mojolicious.MojoliciousFileViewProvider;
+import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**

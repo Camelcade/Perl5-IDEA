@@ -17,9 +17,9 @@
 package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
-import com.perl5.lang.mojolicious.MojoliciousFileViewProviderFactory;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
+import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory;
 
 /**
  * Created by hurricup on 04.03.2016.
