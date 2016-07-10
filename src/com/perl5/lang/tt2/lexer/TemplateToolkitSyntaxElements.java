@@ -92,6 +92,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
 			TT2_COLON,
 			TT2_PLUS,
 			TT2_MINUS,
+			TT2_MINUS_UNARY,
 			TT2_MUL,
 			TT2_DIV,
 			TT2_MOD

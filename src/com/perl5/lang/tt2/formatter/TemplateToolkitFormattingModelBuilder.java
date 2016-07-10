@@ -106,6 +106,7 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 
 		mySpacingBuilder = new SpacingBuilder(commonSettings.getRootSettings(), TemplateToolkitLanguage.INSTANCE)
 				.around(TT2_PERIOD).spaces(0)
+				.after(TT2_MINUS_UNARY).spaces(0)
 				.around(ALL_OPERATORS_TOKENSET).spaces(1)
 		;
 

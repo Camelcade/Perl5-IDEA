@@ -700,4 +700,16 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		return false;
 	}
 
+	public static boolean parseUnaryMinus(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == TT2_MINUS)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+			m.collapse(TT2_MINUS_UNARY);
+			return true;
+		}
+		return false;
+	}
+
 }

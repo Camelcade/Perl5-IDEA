@@ -67,7 +67,14 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			FINAL_BRANCH,
 
 			DEFAULT_DIRECTIVE,
+			INCLUDE_DIRECTIVE,
 			SET_DIRECTIVE
+	);
+
+	private final TokenSet ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS = TokenSet.create(
+			DEFAULT_DIRECTIVE,
+			SET_DIRECTIVE,
+			INCLUDE_DIRECTIVE
 	);
 
 	private final TokenSet NORMAL_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
@@ -217,17 +224,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		ASTNode grandParentNode = parentNode == null ? null : parentNode.getTreeParent();
 		IElementType grandParentNodeType = PsiUtilCore.getElementType(grandParentNode);
 
-		if (nodeType == TT2_ASSIGN &&
-				parentNodeType == ASSIGN_EXPR &&
-				(grandParentNodeType == DEFAULT_DIRECTIVE || grandParentNodeType == SET_DIRECTIVE)
-				)
-		{
-			return myModelBuilder.getAssignAlignment(grandParentNode);
-		}
-		else if ((nodeType == TT2_ASSIGN) &&
-				parentNodeType == PAIR_EXPR &&
-				(grandParentNodeType == HASH_EXPR)
-				)
+		if (nodeType == TT2_ASSIGN && (
+				parentNodeType == ASSIGN_EXPR && ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS.contains(grandParentNodeType) ||    // assignments
+						parentNodeType == PAIR_EXPR && grandParentNodeType == HASH_EXPR                                        // pairs
+		))
 		{
 			return myModelBuilder.getAssignAlignment(grandParentNode);
 		}

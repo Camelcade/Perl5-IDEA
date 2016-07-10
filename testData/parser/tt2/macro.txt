@@ -32,7 +32,7 @@ Template Toolkit File
             PsiCallArgumentsImpl(TemplateToolkit2Element.CALL_ARGUMENTS)
               PsiElement(TemplateToolkit2Token.()('(')
               PsiTermExprImpl(TemplateToolkit2Element.TERM_EXPR)
-                PsiElement(TemplateToolkit2Token.-)('-')
+                PsiElement(TemplateToolkit2Token.u-)('-')
                 PsiElement(TemplateToolkit2Token.TT2_NUMBER_SIMPLE)('3')
               PsiElement(TemplateToolkit2Token.))(')')
           PsiElement(TemplateToolkit2Token..)('.')

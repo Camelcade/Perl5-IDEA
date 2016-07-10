@@ -77,6 +77,7 @@
 	TT2_COLON=":"
 	TT2_PLUS="+"
 	TT2_MINUS="-"
+	TT2_MINUS_UNARY="u-"
 	TT2_MUL="*"
 	TT2_DIV="/"
 	TT2_MOD="%"
@@ -391,8 +392,8 @@ term_expr ::=
 	sq_string_expr |
 	dq_string_expr |
 	TT2_SYMBOL |
-	[TT2_MINUS] TT2_NUMBER |
-	[TT2_MINUS] TT2_NUMBER_SIMPLE |
+	[<<parseUnaryMinus>>] TT2_NUMBER |
+	[<<parseUnaryMinus>>] TT2_NUMBER_SIMPLE |
 	keyword_or_identifier_term
 
 sq_string_expr ::= TT2_SQ_OPEN sq_string_content TT2_SQ_CLOSE {pin=1}
