@@ -68,13 +68,19 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 			DEFAULT_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
-			SET_DIRECTIVE
+			SET_DIRECTIVE,
+			META_DIRECTIVE
 	);
 
 	private final TokenSet ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS = TokenSet.create(
 			DEFAULT_DIRECTIVE,
 			SET_DIRECTIVE,
 			INCLUDE_DIRECTIVE
+	);
+
+	private final TokenSet ALIGNABLE_PAIR_EXPRESSIONS_CONTAINERS = TokenSet.create(
+			HASH_EXPR,
+			META_DIRECTIVE
 	);
 
 	private final TokenSet NORMAL_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
@@ -146,8 +152,6 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 	/**
 	 * Checks that current node is first, controlling optional SET and GET
-	 *
-	 * @return
 	 */
 	protected boolean isFirst()
 	{
@@ -179,7 +183,13 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			return true;
 		}
 
-		if (myNode.getElementType() != TT2_OPEN_TAG)
+		IElementType elementType = myNode.getElementType();
+		if (elementType == END_DIRECTIVE)
+		{
+			return true;
+		}
+
+		if (elementType != TT2_OPEN_TAG)
 		{
 			return false;
 		}
@@ -225,8 +235,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		IElementType grandParentNodeType = PsiUtilCore.getElementType(grandParentNode);
 
 		if (nodeType == TT2_ASSIGN && (
-				parentNodeType == ASSIGN_EXPR && ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS.contains(grandParentNodeType) ||    // assignments
-						parentNodeType == PAIR_EXPR && grandParentNodeType == HASH_EXPR                                        // pairs
+				parentNodeType == ASSIGN_EXPR && ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS.contains(grandParentNodeType) ||   // assignments
+						parentNodeType == PAIR_EXPR && ALIGNABLE_PAIR_EXPRESSIONS_CONTAINERS.contains(grandParentNodeType)    // pairs
 		))
 		{
 			return myModelBuilder.getAssignAlignment(grandParentNode);
