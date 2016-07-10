@@ -30,6 +30,7 @@ import java.io.Reader;
  */
 public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates
 {
+	private static final String CHOMP_MODIFIERS = "-+=~";
 	private final Project myProject;
 	private final TemplateToolkitSettings mySettings;
 	private int customState = 0;
@@ -80,8 +81,15 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 			if (blockStart)
 			{
-				pushPreparsedToken(offset, offset + getStartTag().length(), TT2_OPEN_TAG);
-				int nextCharOffset = offset + getStartTag().length();
+				int openTagLength = getStartTag().length();
+
+				if (offset + openTagLength < bufferEnd && StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset + openTagLength)))
+				{
+					openTagLength++;
+				}
+
+				pushPreparsedToken(offset, offset + openTagLength, TT2_OPEN_TAG);
+				int nextCharOffset = offset + openTagLength;
 
 				if (nextCharOffset < bufferEnd && buffer.charAt(nextCharOffset) == '#')
 				{
@@ -107,9 +115,10 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		}
 		else if (currentCustomState == LEX_TEMPLATE_BLOCK)
 		{
-			if (currentState != LEX_DQ_STRING && currentState != LEX_SQ_STRING && isBufferAtString(buffer, tokenStart, getEndTag()))
+			int closeTagLength = -1;
+			if (currentState != LEX_DQ_STRING && currentState != LEX_SQ_STRING && (closeTagLength = checkCloseTagAndGetLength(buffer, tokenStart, bufferEnd)) > 0)
 			{
-				endTemplate(tokenStart, getEndTag().length());
+				endTemplate(tokenStart, closeTagLength);
 				return TT2_CLOSE_TAG;
 			}
 			else if (isLineComment(buffer, tokenStart, bufferEnd))
@@ -178,6 +187,35 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		}
 
 		return result;
+	}
+
+	/**
+	 * Checks if lexer is at close tag with possible chomp modifier and returns close tag length
+	 *
+	 * @param buffer    chars buffer
+	 * @param offset    current offset
+	 * @param bufferEnd buffer end
+	 * @return close tag length or -1 of we are not at it
+	 */
+	protected int checkCloseTagAndGetLength(CharSequence buffer, int offset, int bufferEnd)
+	{
+		if (offset >= bufferEnd)
+		{
+			return -1;
+		}
+
+		String endTag = getEndTag();
+		if (isBufferAtString(buffer, offset, endTag))
+		{
+			return endTag.length();
+		}
+
+		if (StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset)) && isBufferAtString(buffer, offset + 1, endTag))
+		{
+			return endTag.length() + 1;
+		}
+		return -1;
+
 	}
 
 	protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd)

@@ -43,13 +43,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 			TT2_SQ_CLOSE
 	);
 
-	public static final TokenSet CHOMP_MODIFIERS = TokenSet.create(
-			TT2_MINUS,
-			TT2_PLUS,
-			TT2_ASSIGN,
-			TT2_TILDA
-	);
-
 	public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
 			IF_BLOCK,
 			UNLESS_BLOCK,
@@ -103,7 +96,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 	private static boolean isBlockEndMarker(PsiBuilder b)
 	{
 		IElementType tokenType = b.getTokenType();
-		return tokenType == TT2_SEMI || tokenType == TT2_CLOSE_TAG || CHOMP_MODIFIERS.contains(tokenType) && b.rawLookup(1) == TT2_CLOSE_TAG;
+		return tokenType == TT2_SEMI || tokenType == TT2_CLOSE_TAG;
 	}
 
 	public static boolean parseFileAsString(PsiBuilder b, int l)
@@ -197,10 +190,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 
 			consumeToken(b, TT2_HARD_NEWLINE);
 			consumeToken(b, TT2_SEMI);
-			if (CHOMP_MODIFIERS.contains(b.getTokenType()))
-			{
-				b.advanceLexer();
-			}
 			consumeToken(b, TT2_CLOSE_TAG);
 
 			r = true;
@@ -224,10 +213,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 		{
 			if (!isAfterSemi)
 			{
-				if (CHOMP_MODIFIERS.contains(b.rawLookup(1)))
-				{
-					b.advanceLexer(); // chomp
-				}
 				b.advanceLexer();
 			}
 
@@ -258,10 +243,6 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
 				}
 
 				consumeToken(b, TT2_SEMI);
-				if (CHOMP_MODIFIERS.contains(b.getTokenType()))
-				{
-					b.advanceLexer();
-				}
 				consumeToken(b, TT2_CLOSE_TAG);
 			}
 			r = true;
