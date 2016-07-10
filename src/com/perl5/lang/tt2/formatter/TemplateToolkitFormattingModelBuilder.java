@@ -75,9 +75,14 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 		}
 		else
 		{
-			createSpacingBuilder(settings);
-			assert myInjectedLanguageBlockBuilder == null;
-			myInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+			if (mySpacingBuilder == null)
+			{
+				createSpacingBuilder(settings);
+			}
+			if (myInjectedLanguageBlockBuilder == null)
+			{
+				myInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+			}
 			rootBlock = getRootBlock(file, file.getViewProvider(), settings);
 		}
 		return new DocumentBasedFormattingModel(rootBlock, element.getProject(), settings, file.getFileType(), file);
@@ -95,7 +100,6 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 
 	protected void createSpacingBuilder(CodeStyleSettings settings)
 	{
-		assert mySpacingBuilder == null;
 		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
 //		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
 

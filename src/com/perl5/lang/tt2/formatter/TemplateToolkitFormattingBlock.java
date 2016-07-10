@@ -47,7 +47,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
 			ANON_BLOCK,
-			NAMED_BLOCK
+			NAMED_BLOCK,
+			FILTER_BLOCK
 	);
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS = TokenSet.create(
@@ -65,6 +66,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 	private final TokenSet NORMAL_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
 			NORMAL_INDENTED_CONTAINERS,
+			NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG,
 			NORMAL_INDENTED_CONTAINERS_PARENTS
 	);
 
