@@ -424,6 +424,9 @@
 
         <lang.refactoringSupport language="Template Toolkit 2"
                                  implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
+        <lang.formatter language="Template Toolkit 2"
+                        implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
+
         <!-- End of template toolkit -->
 
         <!--Embedded Perl-->
