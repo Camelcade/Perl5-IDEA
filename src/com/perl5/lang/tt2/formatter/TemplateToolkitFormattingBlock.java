@@ -48,7 +48,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	private final TokenSet NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
 			ANON_BLOCK,
 			NAMED_BLOCK,
-			FILTER_BLOCK
+
+			FILTER_BLOCK,
+			FOREACH_BLOCK,
+			WHILE_BLOCK
 	);
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS = TokenSet.create(
@@ -61,7 +64,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			CATCH_BRANCH,
 			FINAL_BRANCH,
 
-			DEFAULT_DIRECTIVE
+			DEFAULT_DIRECTIVE,
+			SET_DIRECTIVE
 	);
 
 	private final TokenSet NORMAL_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
@@ -115,7 +119,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			return Indent.getAbsoluteNoneIndent();
 		}
 
-		boolean isFirst = myNode.getTreePrev() == null;
+		boolean isFirst = isFirst();
 		ASTNode parentNode = myNode.getTreeParent();
 		IElementType parentNodeType = parentNode == null ? null : parentNode.getElementType();
 
@@ -129,6 +133,29 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		}
 
 		return Indent.getNoneIndent();
+	}
+
+	/**
+	 * Checks that current node is first, controlling optional SET and GET
+	 *
+	 * @return
+	 */
+	protected boolean isFirst()
+	{
+		boolean defaultValue = myNode.getTreePrev() == null;
+		if (defaultValue)
+		{
+			IElementType parentNodeType = PsiUtilCore.getElementType(myNode.getTreeParent());
+			if (parentNodeType == SET_DIRECTIVE)
+			{
+				return PsiUtilCore.getElementType(myNode) == TT2_SET;
+			}
+			else if (parentNodeType == GET_DIRECTIVE)
+			{
+				return PsiUtilCore.getElementType(myNode) == TT2_GET;
+			}
+		}
+		return defaultValue;
 	}
 
 	/**
@@ -193,7 +220,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 				assert parentNode != null;
 				ASTNode grandParentNode = parentNode.getTreeParent();
 				IElementType grandParentNodeType = PsiUtilCore.getElementType(grandParentNode);
-				if (grandParentNodeType == DEFAULT_DIRECTIVE)
+				if (grandParentNodeType == DEFAULT_DIRECTIVE || grandParentNodeType == SET_DIRECTIVE)
 				{
 					assert grandParentNode != null;
 					return myModelBuilder.getAssignAlignment(grandParentNode);
@@ -234,7 +261,13 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	@Override
 	public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2)
 	{
-		Spacing result = mySpacingBuilder.getSpacing(this, child1, child2);
+		Spacing result = null;
+
+		if (child1 instanceof TemplateToolkitFormattingBlock && child2 instanceof TemplateToolkitFormattingBlock)
+		{
+			result = mySpacingBuilder.getSpacing(this, child1, child2);
+		}
+
 		if (result != null)
 		{
 			return result;

@@ -62,6 +62,15 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 	@Override
 	public FormattingModel createModel(PsiElement element, CodeStyleSettings settings)
 	{
+		if (mySpacingBuilder == null)
+		{
+			createSpacingBuilder(settings);
+		}
+		if (myInjectedLanguageBlockBuilder == null)
+		{
+			myInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+		}
+
 		final PsiFile file = element.getContainingFile();
 		Block rootBlock;
 
@@ -75,14 +84,6 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 		}
 		else
 		{
-			if (mySpacingBuilder == null)
-			{
-				createSpacingBuilder(settings);
-			}
-			if (myInjectedLanguageBlockBuilder == null)
-			{
-				myInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
-			}
 			rootBlock = getRootBlock(file, file.getViewProvider(), settings);
 		}
 		return new DocumentBasedFormattingModel(rootBlock, element.getProject(), settings, file.getFileType(), file);
