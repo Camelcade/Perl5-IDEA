@@ -16,10 +16,7 @@
 
 package com.perl5.lang.tt2.formatter;
 
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.FormattingModel;
-import com.intellij.formatting.Wrap;
+import com.intellij.formatting.*;
 import com.intellij.formatting.templateLanguages.DataLanguageBlockWrapper;
 import com.intellij.formatting.templateLanguages.TemplateLanguageBlock;
 import com.intellij.formatting.templateLanguages.TemplateLanguageFormattingModelBuilder;
@@ -27,31 +24,32 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.DocumentBasedFormattingModel;
+import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
+import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.templateLanguages.SimpleTemplateLanguageFormattingModelBuilder;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET;
 
 /**
  * Created by hurricup on 10.07.2016.
  * based on handlebars plugin formatter
  */
-public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageFormattingModelBuilder
+public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageFormattingModelBuilder implements TemplateToolkitElementTypes
 {
-	@Override
-	public TemplateLanguageBlock createTemplateLanguageBlock(
-			@NotNull ASTNode node,
-			@Nullable Wrap wrap,
-			@Nullable Alignment alignment,
-			@Nullable List<DataLanguageBlockWrapper> foreignChildren,
-			@NotNull CodeStyleSettings codeStyleSettings
-	)
-	{
-		return new TemplateToolkitFormattingBlock(this, codeStyleSettings, node, foreignChildren);
-	}
+	private final Map<ASTNode, Alignment> myAssignAlignmentMap = new THashMap<ASTNode, Alignment>();
+	private SpacingBuilder mySpacingBuilder;
+	private InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
 
 	/**
 	 * We have to override {@link com.intellij.formatting.templateLanguages.TemplateLanguageFormattingModelBuilder#createModel}
@@ -77,16 +75,66 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 		}
 		else
 		{
+			createSpacingBuilder(settings);
+			assert myInjectedLanguageBlockBuilder == null;
+			myInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
 			rootBlock = getRootBlock(file, file.getViewProvider(), settings);
 		}
 		return new DocumentBasedFormattingModel(rootBlock, element.getProject(), settings, file.getFileType(), file);
+	}
 
-//		return super.createModel(element, settings);
+	public SpacingBuilder getSpacingBuilder()
+	{
+		return mySpacingBuilder;
+	}
+
+	public InjectedLanguageBlockBuilder getInjectedLanguageBlockBuilder()
+	{
+		return myInjectedLanguageBlockBuilder;
+	}
+
+	protected void createSpacingBuilder(CodeStyleSettings settings)
+	{
+		assert mySpacingBuilder == null;
+		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
+//		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
+
+		mySpacingBuilder = new SpacingBuilder(commonSettings.getRootSettings(), TemplateToolkitLanguage.INSTANCE)
+				.around(TT2_PERIOD).spaces(0)
+				.around(ALL_OPERATORS_TOKENSET).spaces(1)
+		;
+
+	}
+
+	@Override
+	public TemplateLanguageBlock createTemplateLanguageBlock(
+			@NotNull ASTNode node,
+			@Nullable Wrap wrap,
+			@Nullable Alignment alignment,
+			@Nullable List<DataLanguageBlockWrapper> foreignChildren,
+			@NotNull CodeStyleSettings codeStyleSettings
+	)
+	{
+		return new TemplateToolkitFormattingBlock(this, codeStyleSettings, node, foreignChildren);
 	}
 
 	@Override
 	public boolean dontFormatMyModel()
 	{
 		return false;
+	}
+
+	@NotNull
+	public Alignment getAssignAlignment(@NotNull ASTNode defaultDirectiveNode)
+	{
+		Alignment result = myAssignAlignmentMap.get(defaultDirectiveNode);
+		if (result != null)
+		{
+			return result;
+		}
+
+		result = Alignment.createAlignment(true);
+		myAssignAlignmentMap.put(defaultDirectiveNode, result);
+		return result;
 	}
 }
