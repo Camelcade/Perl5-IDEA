@@ -75,7 +75,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 			if (offset > tokenStart)
 			{
-				pushPreparsedToken(tokenStart, offset, TT2_HTML);
+				pushPreparsedSpaceOrToken(tokenStart, offset, TT2_HTML);
 			}
 
 			if (blockStart)

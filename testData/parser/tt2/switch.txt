@@ -7,7 +7,6 @@ Template Toolkit File
       PsiIdentifierExprImpl(TemplateToolkit2Element.IDENTIFIER_EXPR)
         PsiElement(TemplateToolkit2Token.TT2_IDENTIFIER)('myvar')
     PsiElement(TemplateToolkit2Token.%])('%]')
-    PsiComment(TemplateToolkit2Token.TT2_HTML)('\n')
     PsiCaseBlockImpl(TemplateToolkit2Element.CASE_BLOCK)
       PsiElement(TemplateToolkit2Token.[%)('[%')
       PsiCaseDirectiveImpl(TemplateToolkit2Element.CASE_DIRECTIVE)

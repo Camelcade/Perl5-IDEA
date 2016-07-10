@@ -48,7 +48,6 @@ Template Toolkit File
         PsiElement(TemplateToolkit2Token.STRING_CONTENT)('>')
         PsiElement(TemplateToolkit2Token.SQ_CLOSE)(''')
   PsiElement(TemplateToolkit2Token.%])('%]')
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('\n\n')
   PsiElement(TemplateToolkit2Token.%%)('%%')
   PsiDebugDirectiveImpl(TemplateToolkit2Element.DEBUG_DIRECTIVE)
     PsiElement(TemplateToolkit2Token.DEBUG)('DEBUG')

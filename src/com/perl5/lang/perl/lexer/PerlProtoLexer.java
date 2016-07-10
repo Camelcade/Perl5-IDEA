@@ -134,6 +134,43 @@ public abstract class PerlProtoLexer implements FlexLexer
 	}
 
 	/**
+	 * Checks if range contains only whitespace chars and pushes whitespace or passed tokentype
+	 *
+	 * @param start     start offset
+	 * @param end       end offset
+	 * @param tokenType tokentype to push if there are non-space chars
+	 */
+	protected void pushPreparsedSpaceOrToken(int start, int end, IElementType tokenType)
+	{
+		pushPreparsedToken(start, end, isWhiteSpacesOnly(start, end) ? TokenType.WHITE_SPACE : tokenType);
+	}
+
+	/**
+	 * Checks if specified range contains only spaces
+	 *
+	 * @param start start offset
+	 * @param end   end offset
+	 * @return check result
+	 */
+	protected boolean isWhiteSpacesOnly(int start, int end)
+	{
+		assert end <= getBufferEnd();
+		assert start >= 0;
+		CharSequence buffer = getBuffer();
+
+		while (start < end)
+		{
+			if (!Character.isWhitespace(buffer.charAt(start)))
+			{
+				return false;
+			}
+			start++;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Adds preparsed token to the beginning of the queue with consistency control
 	 *
 	 * @param start     token start

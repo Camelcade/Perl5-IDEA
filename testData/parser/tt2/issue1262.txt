@@ -9,7 +9,6 @@ Template Toolkit File
       PsiTermExprImpl(TemplateToolkit2Element.TERM_EXPR)
         PsiElement(TemplateToolkit2Token.TT2_NUMBER_SIMPLE)('1')
   PsiElement(TemplateToolkit2Token.%])('%]')
-  PsiComment(TemplateToolkit2Token.TT2_HTML)('\n    ')
   PsiIfBlockImpl(TemplateToolkit2Element.IF_BLOCK)
     PsiIfBranchImpl(TemplateToolkit2Element.IF_BRANCH)
       PsiElement(TemplateToolkit2Token.[%)('[%')
