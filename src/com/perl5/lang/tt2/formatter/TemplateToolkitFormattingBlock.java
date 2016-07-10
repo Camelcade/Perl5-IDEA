@@ -51,7 +51,9 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 			FILTER_BLOCK,
 			FOREACH_BLOCK,
-			WHILE_BLOCK
+			WHILE_BLOCK,
+
+			HASH_EXPR
 	);
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS = TokenSet.create(
@@ -210,22 +212,24 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	{
 		// we could use pattern here, but we need to find parent node, so this method is more effective i guess
 		IElementType nodeType = myNode.getElementType();
-		if (nodeType == TT2_ASSIGN)
-		{
-			ASTNode parentNode = myNode.getTreeParent();
-			IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+		ASTNode parentNode = myNode.getTreeParent();
+		IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+		ASTNode grandParentNode = parentNode == null ? null : parentNode.getTreeParent();
+		IElementType grandParentNodeType = PsiUtilCore.getElementType(grandParentNode);
 
-			if (parentNodeType == ASSIGN_EXPR)
-			{
-				assert parentNode != null;
-				ASTNode grandParentNode = parentNode.getTreeParent();
-				IElementType grandParentNodeType = PsiUtilCore.getElementType(grandParentNode);
-				if (grandParentNodeType == DEFAULT_DIRECTIVE || grandParentNodeType == SET_DIRECTIVE)
-				{
-					assert grandParentNode != null;
-					return myModelBuilder.getAssignAlignment(grandParentNode);
-				}
-			}
+		if (nodeType == TT2_ASSIGN &&
+				parentNodeType == ASSIGN_EXPR &&
+				(grandParentNodeType == DEFAULT_DIRECTIVE || grandParentNodeType == SET_DIRECTIVE)
+				)
+		{
+			return myModelBuilder.getAssignAlignment(grandParentNode);
+		}
+		else if ((nodeType == TT2_ASSIGN) &&
+				parentNodeType == PAIR_EXPR &&
+				(grandParentNodeType == HASH_EXPR)
+				)
+		{
+			return myModelBuilder.getAssignAlignment(grandParentNode);
 		}
 
 		return super.getAlignment();
