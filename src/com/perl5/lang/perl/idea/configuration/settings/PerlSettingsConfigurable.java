@@ -184,7 +184,7 @@ public class PerlSettingsConfigurable implements Configurable
 		perlTidyArgsInputField = new RawCommandLineEditor();
 		builder.addComponent(
 				copyDialogCaption(
-						LabeledComponent.create(perlTidyArgsInputField, "Perl::Tidy command line arguments (-se -se arguments will be added automatically):"),
+						LabeledComponent.create(perlTidyArgsInputField, "Perl::Tidy command line arguments (-st -se arguments will be added automatically):"),
 						"Perl::Tidy command line arguments:"
 				));
 
