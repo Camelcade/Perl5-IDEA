@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package editor;
+package formatter;
 
-import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
+public class PerlFormatterTestCase extends PerlFormatterTest
 {
 	@Override
 	protected String getTestDataPath()
@@ -45,17 +42,4 @@ public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
 		doFormatTest("statement_modifier_spacing", "_with_space");
 	}
 
-	protected void doFormatTest(String filename, String resultSuffix)
-	{
-		initWithFileAsScript(filename);
-		new WriteCommandAction.Simple(getProject())
-		{
-			@Override
-			protected void run() throws Throwable
-			{
-				CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
-			}
-		}.execute();
-		myFixture.checkResultByFile(filename + resultSuffix + ".txt");
-	}
 }

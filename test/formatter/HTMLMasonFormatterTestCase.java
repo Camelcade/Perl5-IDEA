@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package editor;
-
-import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.psi.codeStyle.CodeStyleManager;
+package formatter;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
+public class HTMLMasonFormatterTestCase extends PerlFormatterTest
 {
 	@Override
 	protected String getTestDataPath()
@@ -31,24 +27,16 @@ public class HTMLMasonFormatterTestCase extends PerlLightCodeInsightFixtureTestC
 		return "testData/formatting/htmlmason";
 	}
 
+	@Override
+	public String getFileExtension()
+	{
+		return "mas";
+	}
+
 	public void testStatementModifiersSpacing() throws Exception
 	{
 		doFormatTest("spaceless", "");
 	}
 
-
-	protected void doFormatTest(String filename, String resultSuffix)
-	{
-		initWithFileAsHTMLMason(filename);
-		new WriteCommandAction.Simple(getProject())
-		{
-			@Override
-			protected void run() throws Throwable
-			{
-				CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
-			}
-		}.execute();
-		myFixture.checkResultByFile(filename + resultSuffix + ".txt");
-	}
 
 }
