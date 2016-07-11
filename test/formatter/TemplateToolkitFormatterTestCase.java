@@ -17,26 +17,24 @@
 package formatter;
 
 /**
- * Created by hurricup on 15.03.2016.
+ * Created by hurricup on 11.07.2016.
  */
-public class HTMLMasonFormatterTestCase extends PerlFormatterTest
+public class TemplateToolkitFormatterTestCase extends PerlFormatterTest
 {
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/formatter/htmlmason";
+		return "testData/formatter/tt2";
 	}
 
 	@Override
 	public String getFileExtension()
 	{
-		return "mas";
+		return "tt";
 	}
 
-	public void testSpacelessTags() throws Exception
+	public void testStatementModifiersSpacing() throws Exception
 	{
-		doFormatTest("spaceless", "");
+		doFormatTest("block_anon");
 	}
-
-
 }

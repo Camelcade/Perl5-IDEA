@@ -27,7 +27,7 @@ public class PerlFormatterTestCase extends PerlFormatterTest
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/formatting/perl";
+		return "testData/formatter/perl";
 	}
 
 	public void testStatementModifiersSpacing() throws Exception

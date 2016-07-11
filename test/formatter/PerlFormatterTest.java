@@ -18,13 +18,21 @@ package formatter;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.testFramework.UsefulTestCase;
 
 /**
  * Created by hurricup on 11.07.2016.
  */
 public abstract class PerlFormatterTest extends PerlLightCodeInsightFixtureTestCase
 {
+	protected void doFormatTest(String filename)
+	{
+		doFormatTest(filename, "");
+	}
+
 	protected void doFormatTest(String filename, String resultSuffix)
 	{
 		initWithFileSmart(filename);
@@ -33,10 +41,16 @@ public abstract class PerlFormatterTest extends PerlLightCodeInsightFixtureTestC
 			@Override
 			protected void run() throws Throwable
 			{
-				CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
+				PsiFile file = myFixture.getFile();
+				TextRange rangeToUse = file.getTextRange();
+				CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
+				// 	CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
 			}
 		}.execute();
-		myFixture.checkResultByFile(filename + resultSuffix + ".txt");
+
+		String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
+		UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
+//		myFixture.checkResultByFile(resultFileName);
 	}
 
 }
