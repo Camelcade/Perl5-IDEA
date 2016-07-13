@@ -18,9 +18,9 @@ package com.perl5.lang.perl.parser.builder;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.compat.parser.GeneratedParserUtilBase;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
