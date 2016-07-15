@@ -43,8 +43,6 @@ import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.event.HyperlinkEvent;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -106,81 +104,67 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 			}
 
 			VirtualFile virtualFile = file.getVirtualFile();
+			String filePath = virtualFile == null ? null : virtualFile.getCanonicalPath();
 
-			if (virtualFile == null)
+			if (filePath == null)
 			{
 				return;
 			}
 
+			FileDocumentManager.getInstance().saveDocument(document);
+
 			try
 			{
-				FileDocumentManager.getInstance().saveDocument(document);
-				byte[] sourceBytes = virtualFile.contentsToByteArray();
+				GeneralCommandLine perltidy = getPerlTidyCommandLine(project);
+				perltidy.addParameter(filePath);
+				final Process process = perltidy.createProcess();
 
-				try
+				final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
+				ProcessOutput processOutput = processHandler.runProcess();
+
+				final List<String> stdoutLines = processOutput.getStdoutLines(false);
+				List<String> stderrLines = processOutput.getStderrLines();
+
+				if (stderrLines.isEmpty())
 				{
-					GeneralCommandLine perltidy = getPerlTidyCommandLine(project);
-					final Process process = perltidy.createProcess();
-					OutputStream outputStream = process.getOutputStream();
-					outputStream.write(sourceBytes);
-					outputStream.close();
-
-					final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
-					ProcessOutput processOutput = processHandler.runProcess();
-
-					final List<String> stdoutLines = processOutput.getStdoutLines(false);
-					List<String> stderrLines = processOutput.getStderrLines();
-
-					if (stderrLines.isEmpty())
+					WriteCommandAction.runWriteCommandAction(project, new Runnable()
 					{
-						WriteCommandAction.runWriteCommandAction(project, new Runnable()
+						@Override
+						public void run()
 						{
-							@Override
-							public void run()
-							{
-								document.setText(StringUtil.join(stdoutLines, "\n"));
-								PsiDocumentManager.getInstance(project).commitDocument(document);
-							}
-						});
-					}
-					else
-					{
-						Notifications.Bus.notify(new Notification(
-								PERL_TIDY_GROUP,
-								"Perl::Tidy formatting error",
-								StringUtil.join(stderrLines, "<br>"),
-								NotificationType.ERROR
-						));
-
-					}
+							document.setText(StringUtil.join(stdoutLines, "\n"));
+							PsiDocumentManager.getInstance(project).commitDocument(document);
+						}
+					});
 				}
-				catch (ExecutionException e)
+				else
 				{
 					Notifications.Bus.notify(new Notification(
 							PERL_TIDY_GROUP,
-							"Error running Perl::Tidy",
-							"Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
-							NotificationType.ERROR,
-							new NotificationListener.Adapter()
-							{
-								@Override
-								protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
-								{
-									Project project = file.getProject();
-									ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
-									notification.expire();
-								}
-							}
+							"Perl::Tidy formatting error",
+							StringUtil.join(stderrLines, "<br>"),
+							NotificationType.ERROR
 					));
+
 				}
 			}
-			catch (IOException e)
+			catch (ExecutionException e)
 			{
 				Notifications.Bus.notify(new Notification(
 						PERL_TIDY_GROUP,
-						"Re-formatting error",
-						e.getMessage(),
-						NotificationType.ERROR
+						"Error running Perl::Tidy",
+						"Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
+						NotificationType.ERROR,
+						new NotificationListener.Adapter()
+						{
+							@Override
+							protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
+							{
+								Project project = file.getProject();
+								ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+								notification.expire();
+							}
+						}
 				));
 			}
 		}
