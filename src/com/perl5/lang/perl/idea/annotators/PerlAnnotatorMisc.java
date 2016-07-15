@@ -219,7 +219,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 				decorateElement(
 						holder.createInfoAnnotation(element, null),
 						PerlSyntaxHighlighter.PERL_KEYWORD,
-						true,
+						false,
 						false);
 			}
 			else if (tokenType == SUB_SIGNATURE_ELEMENT_IGNORE)
