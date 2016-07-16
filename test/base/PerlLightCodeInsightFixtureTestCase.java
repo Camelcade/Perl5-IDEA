@@ -273,6 +273,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		assertDoesntContain(new HashSet<Object>(strings), pattern);
 	}
 
+	protected void doFormatTest()
+	{
+		doFormatTest(getTestName(false));
+	}
+
 	protected void doFormatTest(String filename)
 	{
 		doFormatTest(filename, "");

@@ -52,13 +52,18 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 		return "tt";
 	}
 
-	public void testStatementModifiersSpacing() throws Exception
+	public void testBlockAnon() throws Exception
 	{
-		doFormatTest("block_anon");
+		doFormatTest();
 	}
 
 	public void testBlockNamed() throws Exception
 	{
-		doFormatTest("block_named");
+		doFormatTest();
+	}
+
+	public void testChompMarkers() throws Exception
+	{
+		doFormatTest();
 	}
 }
