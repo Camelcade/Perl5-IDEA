@@ -21,6 +21,24 @@ package formatter;
  */
 public class TemplateToolkitFormatterTestCase extends PerlFormatterTest
 {
+	TemplateToolkitTestSettings myTestSettings;
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		myTestSettings = new TemplateToolkitTestSettings(myFixture.getProject());
+		myTestSettings.setUp();
+	}
+
+	@Override
+	protected void tearDown() throws Exception
+	{
+		myTestSettings.tearDown();
+		;
+		super.tearDown();
+	}
+
 	@Override
 	protected String getTestDataPath()
 	{
