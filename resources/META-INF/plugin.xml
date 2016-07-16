@@ -58,6 +58,7 @@
       <li>Escaped quotes now being handled correctly with language injections in strings</li>
       <li>Perl::Tidy re-formatting of large files now works correctly, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1297">@YuraKotov</a></li>
       <li>It's now possible to disable bold style of keywords and configure built-in subs, packages and variables styles and colors, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1298">@Dgc2002</a></li>
+      <li>Occasional sharp addition on the enter typing in Mojo templates</li>
       </ul>
      </p>
     ]]>

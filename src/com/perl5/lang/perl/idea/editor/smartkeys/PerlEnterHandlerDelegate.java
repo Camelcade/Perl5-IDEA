@@ -27,6 +27,7 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
@@ -211,7 +212,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 						int prevLineOffset = document.getLineEndOffset(currentLine - 1);
 						currentElement = file.findElementAt(prevLineOffset);
 
-						if (currentElement instanceof PsiWhiteSpace && currentElement.getPrevSibling() instanceof PsiComment)
+						if (currentElement instanceof PsiWhiteSpace && PsiUtilCore.getElementType(currentElement.getPrevSibling()) == COMMENT_LINE)
 						{
 							document.insertString(offset, "# ");
 						}
