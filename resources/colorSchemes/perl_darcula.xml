@@ -47,4 +47,47 @@
             <option name="FONT_TYPE" value="2"/>
         </value>
     </option>
+
+    <option name="PERL_ARRAY_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="9876aa"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_GLOB_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="a9b7c6"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_HASH_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="9876aa"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_PACKAGE_CORE">
+        <value>
+            <option name="FOREGROUND" value="a9b7c6"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_PACKAGE_PRAGMA">
+        <value>
+            <option name="FOREGROUND" value="a9b7c6"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
+    <option name="PERL_SCALAR_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="9876aa"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_SUB_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="ffc66d"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
 </list>

@@ -32,17 +32,12 @@ import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	public static final TextAttributes BOLD = new TextAttributes(null, null, null, null, Font.BOLD);
-	public static final TextAttributes ITALIC = new TextAttributes(null, null, null, null, Font.ITALIC);
-	public static final TextAttributes BOLD_ITALIC = TextAttributes.merge(BOLD, ITALIC);
-
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
 	public static final TextAttributesKey EMBED_MARKER_KEY = createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
@@ -51,12 +46,24 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_NUMBER = createTextAttributesKey("PERL_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey PERL_VERSION = createTextAttributesKey("PERL_VERSION", PERL_NUMBER);
 	public static final TextAttributesKey PERL_COMMENT = createTextAttributesKey("PERL_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
-	public static final TextAttributesKey PERL_HANDLE = createTextAttributesKey("PERL_HANDLE", DefaultLanguageHighlighterColors.CONSTANT);
+
+	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.IDENTIFIER);
+	public static final TextAttributesKey PERL_GLOB_BUILTIN = createTextAttributesKey("PERL_GLOB_BUILTIN", PERL_GLOB);
+
+	public static final TextAttributesKey PERL_HANDLE = createTextAttributesKey("PERL_HANDLE", PERL_GLOB);
+	public static final TextAttributesKey PERL_HANDLE_BUILTIN = createTextAttributesKey("PERL_HANDLE_BUILTIN", PERL_GLOB_BUILTIN);
+
 	public static final TextAttributesKey PERL_PACKAGE = createTextAttributesKey("PERL_PACKAGE", DefaultLanguageHighlighterColors.CLASS_NAME);
-	public static final TextAttributesKey PERL_PRAGMA = createTextAttributesKey("PERL_PRAGMA", TextAttributes.merge(PERL_PACKAGE.getDefaultAttributes(), BOLD_ITALIC));
+	public static final TextAttributesKey PERL_PACKAGE_PRAGMA = createTextAttributesKey("PERL_PACKAGE_PRAGMA", PERL_PACKAGE);
+	public static final TextAttributesKey PERL_PACKAGE_CORE = createTextAttributesKey("PERL_PACKAGE_CORE", PERL_PACKAGE);
+
 	public static final TextAttributesKey PERL_PACKAGE_DEFINITION = createTextAttributesKey("PERL_PACKAGE_DEFINITION", PERL_PACKAGE);
+
 	public static final TextAttributesKey PERL_SUB = createTextAttributesKey("PERL_SUB", DefaultLanguageHighlighterColors.FUNCTION_CALL);
+	public static final TextAttributesKey PERL_SUB_BUILTIN = createTextAttributesKey("PERL_SUB_BUILTIN", PERL_SUB);
+
 	public static final TextAttributesKey PERL_XSUB = createTextAttributesKey("PERL_XSUB", PERL_SUB);
+
 	public static final TextAttributesKey PERL_SUB_DEFINITION = createTextAttributesKey("PERL_SUB_DEFINITION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
 	public static final TextAttributesKey PERL_SUB_DECLARATION = createTextAttributesKey("PERL_SUB_DECLARATION", PERL_SUB_DEFINITION);
 	public static final TextAttributesKey PERL_LABEL = createTextAttributesKey("PERL_LABEL", DefaultLanguageHighlighterColors.LABEL);
@@ -83,10 +90,14 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey PERL_BRACK = createTextAttributesKey("PERL_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_ANGLE = createTextAttributesKey("PERL_ANGLES", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_AUTOLOAD = createTextAttributesKey("PERL_AUTOLOAD", TemplateColors.TEMPLATE_VARIABLE_ATTRIBUTES);
+
 	public static final TextAttributesKey PERL_SCALAR = createTextAttributesKey("PERL_SCALAR", DefaultLanguageHighlighterColors.IDENTIFIER);
+	public static final TextAttributesKey PERL_SCALAR_BUILTIN = createTextAttributesKey("PERL_SCALAR_BUILTIN", PERL_SCALAR);
 	public static final TextAttributesKey PERL_ARRAY = createTextAttributesKey("PERL_ARRAY", DefaultLanguageHighlighterColors.IDENTIFIER);
+	public static final TextAttributesKey PERL_ARRAY_BUILTIN = createTextAttributesKey("PERL_ARRAY_BUILTIN", PERL_ARRAY);
 	public static final TextAttributesKey PERL_HASH = createTextAttributesKey("PERL_HASH", DefaultLanguageHighlighterColors.IDENTIFIER);
-	public static final TextAttributesKey PERL_GLOB = createTextAttributesKey("PERL_GLOB", DefaultLanguageHighlighterColors.IDENTIFIER);
+	public static final TextAttributesKey PERL_HASH_BUILTIN = createTextAttributesKey("PERL_HASH_BUILTIN", PERL_HASH);
+
 	public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
 
 	public static final HashMap<IElementType, TextAttributesKey[]> ATTRIBUTES_MAP = new HashMap<IElementType, TextAttributesKey[]>();
@@ -110,10 +121,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		ATTRIBUTES_MAP.put(PerlElementTypes.BLOCK_NAME, PERL_KEYWORD_KEYS);
 
 		ATTRIBUTES_MAP.put(PerlElementTypes.COLON, new TextAttributesKey[]{PERL_OPERATOR});
-
-		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
-		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_ANNOTATION, new TextAttributesKey[]{PERL_COMMENT});
-		ATTRIBUTES_MAP.put(PerlElementTypes.COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
 		ATTRIBUTES_MAP.put(PerlElementTypes.OPERATOR_DEREFERENCE, new TextAttributesKey[]{PERL_DEREFERENCE});
 
@@ -158,11 +165,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase
 		ATTRIBUTES_MAP.put(PerlElementTypes.TAG, new TextAttributesKey[]{PERL_TAG});
 		ATTRIBUTES_MAP.put(PerlElementTypes.TAG_END, new TextAttributesKey[]{PERL_TAG});
 		ATTRIBUTES_MAP.put(PerlElementTypes.TAG_DATA, new TextAttributesKey[]{PERL_TAG});
-
-		// fixme move core highlighting in annotation
-		ATTRIBUTES_MAP.put(PerlElementTypes.PACKAGE_CORE_IDENTIFIER, new TextAttributesKey[]{PERL_PACKAGE});
-		ATTRIBUTES_MAP.put(PerlElementTypes.PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
-		ATTRIBUTES_MAP.put(PerlElementTypes.HANDLE, new TextAttributesKey[]{PERL_HANDLE});
 	}
 
 

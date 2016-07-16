@@ -56,7 +56,7 @@
       <li>It's not possible anymore to inject other languages in hash elements and hash slices keys</li>
       <li>Escaped quotes now being handled correctly with language injections in strings</li>
       <li>Perl::Tidy re-formatting of large files now works correctly, thanks to @YuraKotov</li>
-      <li>It's now possible to disable bold style of keywords, thanks to @Dgc2002</li>
+      <li>It's now possible to disable bold style of keywords and configure built-in subs, packages and variables styles and colors, thanks to @Dgc2002</li>
       </ul>
      </p>
     ]]>

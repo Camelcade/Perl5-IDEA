@@ -64,9 +64,9 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
 		{
 			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_SCALAR,
-					((PerlVariable) element).isBuiltIn(),
+					element,
+					holder,
+					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN : PerlSyntaxHighlighter.PERL_SCALAR,
 					((PerlVariable) element).isDeprecated()
 			);
 		}
@@ -77,9 +77,9 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		else if (element instanceof PsiPerlHashVariable)
 		{
 			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_HASH,
-					((PerlVariable) element).isBuiltIn(),
+					element,
+					holder,
+					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_HASH_BUILTIN : PerlSyntaxHighlighter.PERL_HASH,
 					((PerlVariable) element).isDeprecated()
 			);
 		}
@@ -90,9 +90,9 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		else if (element instanceof PsiPerlArrayVariable)
 		{
 			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_ARRAY,
-					((PerlVariable) element).isBuiltIn(),
+					element,
+					holder,
+					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN : PerlSyntaxHighlighter.PERL_ARRAY,
 					((PerlVariable) element).isDeprecated()
 			);
 		}
@@ -103,10 +103,9 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		else if (element instanceof PsiPerlGlobVariable)
 		{
 			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_GLOB,
-					((PerlVariableNameElementContainer) element).isBuiltIn(),
-					false);
+					element,
+					holder,
+					((PerlVariableNameElementContainer) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_GLOB_BUILTIN : PerlSyntaxHighlighter.PERL_GLOB);
 		}
 		else if (element instanceof PsiPerlGlobCastExpr)
 		{
@@ -115,10 +114,10 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		else if (element instanceof PsiPerlCodeVariable)
 		{
 			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_SUB,
-					((PerlVariableNameElementContainer) element).isBuiltIn(),
-					false);
+					element,
+					holder,
+					((PerlVariableNameElementContainer) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SUB_BUILTIN : PerlSyntaxHighlighter.PERL_SUB,
+					false); // fixme we could check deprecation here
 		}
 		else if (element instanceof PsiPerlCodeCastExpr)
 		{

@@ -29,14 +29,14 @@ public interface PerlSubNameElement extends PsiElement
 	 *
 	 * @return package name for current element
 	 */
-	public String getPackageName();
+	String getPackageName();
 
 	/**
 	 * Returns fullname package::element
 	 *
 	 * @return name
 	 */
-	public String getCanonicalName();
+	String getCanonicalName();
 
 
 	/**
@@ -44,7 +44,7 @@ public interface PerlSubNameElement extends PsiElement
 	 *
 	 * @return checking result
 	 */
-	public boolean isBuiltIn();
+	boolean isBuiltIn();
 
 
 	/**
@@ -53,5 +53,5 @@ public interface PerlSubNameElement extends PsiElement
 	 * @return sub name
 	 */
 	@NotNull
-	public String getName();
+	String getName();
 }

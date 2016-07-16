@@ -57,17 +57,12 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 				PerlNamespaceElement methodNamespace = ((PerlMethod) parent).getNamespaceElement();
 
 				if (
-						!(grandParent instanceof PsiPerlNestedCall)    /// not ...->method
+						!(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?
 								&& (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
 								&& ((PerlSubNameElement) element).isBuiltIn()
 						)
 				{
-					decorateElement(
-							holder.createInfoAnnotation(element, null),
-							PerlSyntaxHighlighter.PERL_SUB,
-							((PerlSubNameElement) element).isBuiltIn(),
-							false
-					);
+					decorateElement(element, holder, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
 				}
 				else
 				{
@@ -93,10 +88,9 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 						else
 						{
 							decorateElement(
-									holder.createInfoAnnotation(element, null),
-									PerlSyntaxHighlighter.PERL_SUB,
-									((PerlSubNameElement) element).isBuiltIn(),
-									false
+									element,
+									holder,
+									((PerlSubNameElement) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SUB_BUILTIN : PerlSyntaxHighlighter.PERL_SUB
 							);
 						}
 					}

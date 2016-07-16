@@ -17,14 +17,16 @@
 package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.lang.annotation.Annotation;
+import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
-import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.08.2015.
@@ -33,12 +35,8 @@ public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 {
 	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
-	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isBuiltIn, boolean isDeprecated)
+	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated)
 	{
-		if (isBuiltIn)
-		{
-			textAttributes = TextAttributes.merge(textAttributes, PerlSyntaxHighlighter.BOLD);
-		}
 		if (isDeprecated)
 		{
 			textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
@@ -47,9 +45,27 @@ public abstract class PerlAnnotator implements Annotator, PerlElementTypes
 	}
 
 
-	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean builtin, boolean deprecated)
+	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean deprecated)
 	{
-		annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), builtin, deprecated));
+		annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
+	}
+
+	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key, boolean deprecated)
+	{
+		if (element == null)
+		{
+			return;
+		}
+		holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
+	}
+
+	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key)
+	{
+		if (element == null)
+		{
+			return;
+		}
+		holder.createInfoAnnotation(element, null).setTextAttributes(key);
 	}
 
 }

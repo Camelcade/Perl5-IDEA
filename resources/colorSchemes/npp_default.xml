@@ -31,17 +31,6 @@
             <option name="FOREGROUND" value="CF34CF"/>
         </value>
     </option>
-    <option name="PERL_ANNOTATION">
-        <value>
-            <option name="FOREGROUND" value="808000"/>
-            <option name="FONT_TYPE" value="3"/>
-        </value>
-    </option>
-    <option name="PERL_HANDLE">
-        <value>
-            <option name="FOREGROUND" value="FF007F"/>
-        </value>
-    </option>
     <option name="PERL_HASH">
         <value>
             <option name="FOREGROUND" value="8080C0"/>
@@ -105,4 +94,46 @@
         </value>
     </option>
 
+    <option name="PERL_ARRAY_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="cf34cf"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_GLOB_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="ff0000"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_HASH_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="8080c0"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_PACKAGE_CORE">
+        <value>
+            <option name="FOREGROUND" value="800080"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_PACKAGE_PRAGMA">
+        <value>
+            <option name="FOREGROUND" value="800080"/>
+            <option name="FONT_TYPE" value="3"/>
+        </value>
+    </option>
+    <option name="PERL_SCALAR_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="ff8000"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
+    <option name="PERL_SUB_BUILTIN">
+        <value>
+            <option name="FOREGROUND" value="ff"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
 </list>

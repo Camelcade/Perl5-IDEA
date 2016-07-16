@@ -31,6 +31,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserUtil;
@@ -59,16 +60,12 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 
 		if (element.getParent() instanceof PerlConstantDefinition && element.getPrevSibling() == null)
 		{
-			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_CONSTANT,
-					false,
-					false);
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
 			return;
 		}
 
-		TextAttributesKey key = null;
-		IElementType tokenType = element.getNode().getElementType();
+		TextAttributesKey key;
+		IElementType tokenType = PsiUtilCore.getElementType(element);
 
 		if (XQ_STRINGS.contains(tokenType))
 		{
@@ -125,39 +122,21 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 
 		if (element instanceof PsiPerlNyiStatement)
 		{
-			decorateElement(
-					holder.createInfoAnnotation(element, "Unimplemented statement"),
-					CodeInsightColors.TODO_DEFAULT_ATTRIBUTES,
-					true,
-					false);
+			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
 		}
 		else if (element instanceof PerlAnnotation)
 		{
-			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_ANNOTATION,
-					false,
-					false);
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_ANNOTATION);
 
 			PsiElement lastChild = element.getLastChild();
 			if (lastChild instanceof PerlStringContentElementImpl)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(lastChild, null),
-						PerlSyntaxHighlighter.PERL_SQ_STRING,
-						false,
-						false
-				);
+				holder.createInfoAnnotation(lastChild, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
 			}
 		}
 		else if (element instanceof PerlLabel)
 		{
-			decorateElement(
-					holder.createInfoAnnotation(element, null),
-					PerlSyntaxHighlighter.PERL_LABEL,
-					false,
-					false
-			);
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}
 		else
 		{
@@ -169,66 +148,45 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 			if (tokenType == HANDLE)
 			{
 				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_GLOB,
-						PerlGlobUtil.BUILT_IN.contains(element.getText()),
-						false);
+						element,
+						holder,
+						PerlGlobUtil.BUILT_IN.contains(element.getText()) ? PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN : PerlSyntaxHighlighter.PERL_HANDLE
+				);
 			}
 			else if (tokenType == ATTRIBUTE)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE);
 			}
 			else if (tokenType == SUB_PROTOTYPE_TOKEN)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN);
 			}
 			else if (tokenType == NUMBER_VERSION)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_VERSION,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_VERSION);
 			}
 			else if (tokenType == REGEX_TOKEN)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_REGEX_TOKEN,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_REGEX_TOKEN);
 			}
 			else if (tokenType == LEFT_ANGLE || tokenType == RIGHT_ANGLE)
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_ANGLE,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_ANGLE);
 			}
 			else if (PerlLexer.RESERVED_TOKENSET.contains(tokenType))
 			{
-				decorateElement(
-						holder.createInfoAnnotation(element, null),
-						PerlSyntaxHighlighter.PERL_KEYWORD,
-						false,
-						false);
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
 			}
 			else if (tokenType == SUB_SIGNATURE_ELEMENT_IGNORE)
 			{
 				decorateElement(
 						holder.createInfoAnnotation(element.getFirstChild(), null),
 						PerlSyntaxHighlighter.PERL_SCALAR,
-						true,
-						false);
+						true);
+			}
+			else if (tokenType == COMMENT_LINE || tokenType == COMMENT_BLOCK)
+			{
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_COMMENT);
 			}
 		}
 	}

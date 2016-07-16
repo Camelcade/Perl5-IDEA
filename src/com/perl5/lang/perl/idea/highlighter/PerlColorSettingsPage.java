@@ -45,7 +45,6 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Embedding marker", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
 
-			new AttributesDescriptor("Handle", PerlSyntaxHighlighter.PERL_HANDLE),
 			new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
 			new AttributesDescriptor("Block name", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
 			new AttributesDescriptor("Special token", PerlSyntaxHighlighter.PERL_TAG),
@@ -57,6 +56,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
 
 			new AttributesDescriptor("Sub", PerlSyntaxHighlighter.PERL_SUB),
+			new AttributesDescriptor("Sub, built-in", PerlSyntaxHighlighter.PERL_SUB_BUILTIN),
 			new AttributesDescriptor("Sub, XS", PerlSyntaxHighlighter.PERL_XSUB),
 			new AttributesDescriptor("Sub, autoloaded", PerlSyntaxHighlighter.PERL_AUTOLOAD),
 			new AttributesDescriptor("Sub, constant", PerlSyntaxHighlighter.PERL_CONSTANT),
@@ -66,12 +66,21 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 			new AttributesDescriptor("Sub prototype", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
 
 			new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
+			new AttributesDescriptor("Package, pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
+			new AttributesDescriptor("Package, core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE),
 			new AttributesDescriptor("Package definition", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
 
 			new AttributesDescriptor("Variable, scalar", PerlSyntaxHighlighter.PERL_SCALAR),
+			new AttributesDescriptor("Variable, scalar, built-in ", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN),
 			new AttributesDescriptor("Variable, array", PerlSyntaxHighlighter.PERL_ARRAY),
+			new AttributesDescriptor("Variable, array, built-in", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN),
 			new AttributesDescriptor("Variable, hash", PerlSyntaxHighlighter.PERL_HASH),
-			new AttributesDescriptor("Variable, typeglob", PerlSyntaxHighlighter.PERL_GLOB),
+			new AttributesDescriptor("Variable, hash, built-in", PerlSyntaxHighlighter.PERL_HASH_BUILTIN),
+
+			new AttributesDescriptor("Typeglob", PerlSyntaxHighlighter.PERL_GLOB),
+			new AttributesDescriptor("Typeglob, built-in", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN),
+			new AttributesDescriptor("Typeglob, file handle", PerlSyntaxHighlighter.PERL_HANDLE),
+			new AttributesDescriptor("Typeglob, file handle, built-in", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
 
 			new AttributesDescriptor("String, single-quoted", PerlSyntaxHighlighter.PERL_SQ_STRING),
 			new AttributesDescriptor("String, double-quoted", PerlSyntaxHighlighter.PERL_DQ_STRING),
@@ -110,24 +119,28 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 		// fixme remove redundant kw tags after and if https://youtrack.jetbrains.com/issue/IJSDK-80 will be resolved
 		return "#!/usr/bin/perl\n" +
 				"<kw>use</kw> <pragma>strict</pragma>;\n" +
+				"<kw>use</kw> <package_core>Scalar::Util</package_core>;\n" +
 				"<kw>use</kw> v5.10;\n" +
 				"<kw>package</kw> <package_def>Foo::Bar</package_def>;\n" +
-				"<kw>use</kw> constant <const>CONSTANT</const> => 42;\n" +
+				"<kw>use</kw> <pragma>constant</pragma> <const>CONSTANT</const> => 42;\n" +
 				"<kw>print</kw> <const>CONSTANT</const>;\n" +
 				"<block>BEGIN</block> { <kw>use</kw> <package>Mojo::Base</package> <q>-strict</q>; };\n" +
 				"<kw>sub</kw> <autoload>AUTOLOAD</autoload>{}\n" +
 				"<autoload>autoloaded_sub_call</autoload>();\n" +
-				"#@method\n" +
+				"<ann>#@method</ann>\n" +
 				"<kw>sub</kw> <sub_declaration>sub_declaration</sub_declaration>: <sub_attr>method</sub_attr>;\n" +
-				"#@deprecated\n" +
+				"<ann>#@deprecated</ann>\n" +
 				"<kw>sub</kw> <sub_definition>sub_definition</sub_definition>(<sub_proto>$$$</sub_proto>){}\n" +
 				"<glob>*sub_declaration</glob> = \\&<sub>sub_definition</sub>;\n" +
 				"<package>LWP::UserAgent</package>-><sub>new</sub>();\n" +
-				"<package>Scalar::Util::</package><xsub>blessed</xsub>();\n" +
+				"<package_core>Scalar::Util::</package_core><xsub>blessed</xsub>();\n" +
 				"<kw>my</kw> <scalar>$scalar</scalar>: <sub_attr>someattr</sub_attr> = <qx>`Executable string`</qx>; # line comment\n" +
 				"<scalar>$scalar</scalar> =~ /<rx>is there something</rx>/;\n" +
-				"<kw>my</kw> <array>@array</array> = (42, <array>@{</array><scalar>$scalar</scalar><array>}</array>, <array>@</array><scalar>$scalar</scalar>, <hash>%</hash><scalar>$scalar</scalar>, <angle><</angle><handle>STDIN</handle><angle>></angle>);\n" +
-				"<kw>my</kw> <hash>%hash</hash> = ( <q>bareword_string</q> => <hash>%{</hash><array>@array</array>[0]<hash>}</hash>);\n" +
+				"<scalar>$scalar</scalar> = <scalar_builtin>${^WARNING_BITS}</scalar_builtin>;\n" +
+				"<scalar>$scalar</scalar> = <glob_builtin>*STDERR</glob_builtin>;\n" +
+				"<sub_builtin>open</sub_builtin> <handle>OTHERHANDLE</handle>, <q>'somefile'</q>;\n" +
+				"<kw>my</kw> <array>@array</array> = (<array_builtin>@ARGV</array_builtin>, 42, <array>@{</array><scalar>$scalar</scalar><array>}</array>, <array>@</array><scalar>$scalar</scalar>, <hash>%</hash><scalar>$scalar</scalar>, <angle><</angle><handle_builtin>STDIN</handle_builtin><angle>></angle>, <angle><</angle><handle>OHTERHANDLE</handle><angle>></angle>);\n" +
+				"<kw>my</kw> <hash>%hash</hash> = ( <hash_builtin>%INC</hash_builtin>, <q>bareword_string</q> => <hash>%{</hash><array>@array</array>[0]<hash>}</hash>);\n" +
 				"<label>START</label>: <kw>print</kw> <q>'Single quoted string'</q>;\n" +
 				"<kw>say</kw> <qq>\"Double quoted string\"</qq>;\n" +
 				"<kw>say</kw> __LINE__;\n" +
@@ -144,31 +157,39 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 	{
 		//noinspection unchecked
 		return ContainerUtil.newHashMap(
-				Pair.create("package", PerlSyntaxHighlighter.PERL_PACKAGE)
-				, Pair.create("package_def", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION)
-				, Pair.create("angle", PerlSyntaxHighlighter.PERL_ANGLE)
-				, Pair.create("scalar", PerlSyntaxHighlighter.PERL_SCALAR)
-				, Pair.create("array", PerlSyntaxHighlighter.PERL_ARRAY)
-				, Pair.create("hash", PerlSyntaxHighlighter.PERL_HASH)
-				, Pair.create("autoload", PerlSyntaxHighlighter.PERL_AUTOLOAD)
-				, Pair.create("q", PerlSyntaxHighlighter.PERL_SQ_STRING)
-				, Pair.create("qx", PerlSyntaxHighlighter.PERL_DX_STRING)
-				, Pair.create("qq", PerlSyntaxHighlighter.PERL_DQ_STRING)
-				, Pair.create("rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN)
-				, Pair.create("block", PerlSyntaxHighlighter.PERL_BLOCK_NAME)
-				, Pair.create("const", PerlSyntaxHighlighter.PERL_CONSTANT)
-				, Pair.create("em", PerlSyntaxHighlighter.EMBED_MARKER_KEY)
-				, Pair.create("glob", PerlSyntaxHighlighter.PERL_GLOB)
-				, Pair.create("handle", PerlSyntaxHighlighter.PERL_HANDLE)
-				, Pair.create("kw", PerlSyntaxHighlighter.PERL_KEYWORD)
-				, Pair.create("label", PerlSyntaxHighlighter.PERL_LABEL)
-				, Pair.create("sub", PerlSyntaxHighlighter.PERL_SUB)
-				, Pair.create("xsub", PerlSyntaxHighlighter.PERL_XSUB)
-				, Pair.create("sub_attr", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE)
-				, Pair.create("sub_proto", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN)
-				, Pair.create("sub_declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION)
-				, Pair.create("sub_definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION)
-				, Pair.create("pragma", PerlSyntaxHighlighter.PERL_PRAGMA)
+				Pair.create("package", PerlSyntaxHighlighter.PERL_PACKAGE),
+				Pair.create("package_core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE),
+				Pair.create("pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
+				Pair.create("package_def", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
+				Pair.create("angle", PerlSyntaxHighlighter.PERL_ANGLE),
+				Pair.create("scalar", PerlSyntaxHighlighter.PERL_SCALAR),
+				Pair.create("scalar_builtin", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN),
+				Pair.create("array", PerlSyntaxHighlighter.PERL_ARRAY),
+				Pair.create("array_builtin", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN),
+				Pair.create("hash", PerlSyntaxHighlighter.PERL_HASH),
+				Pair.create("hash_builtin", PerlSyntaxHighlighter.PERL_HASH_BUILTIN),
+				Pair.create("glob", PerlSyntaxHighlighter.PERL_GLOB),
+				Pair.create("glob_builtin", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN),
+				Pair.create("handle", PerlSyntaxHighlighter.PERL_HANDLE),
+				Pair.create("handle_builtin", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
+				Pair.create("autoload", PerlSyntaxHighlighter.PERL_AUTOLOAD),
+				Pair.create("q", PerlSyntaxHighlighter.PERL_SQ_STRING),
+				Pair.create("qx", PerlSyntaxHighlighter.PERL_DX_STRING),
+				Pair.create("qq", PerlSyntaxHighlighter.PERL_DQ_STRING),
+				Pair.create("rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
+				Pair.create("block", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
+				Pair.create("const", PerlSyntaxHighlighter.PERL_CONSTANT),
+				Pair.create("em", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
+				Pair.create("kw", PerlSyntaxHighlighter.PERL_KEYWORD),
+				Pair.create("label", PerlSyntaxHighlighter.PERL_LABEL),
+				Pair.create("sub", PerlSyntaxHighlighter.PERL_SUB),
+				Pair.create("sub_builtin", PerlSyntaxHighlighter.PERL_SUB_BUILTIN),
+				Pair.create("xsub", PerlSyntaxHighlighter.PERL_XSUB),
+				Pair.create("sub_attr", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
+				Pair.create("sub_proto", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
+				Pair.create("sub_declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
+				Pair.create("sub_definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
+				Pair.create("ann", PerlSyntaxHighlighter.PERL_ANNOTATION)
 		);
 	}
 

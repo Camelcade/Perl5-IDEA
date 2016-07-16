@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
-import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -37,26 +37,22 @@ public class PerlAnnotatorNamespaces extends PerlAnnotator
 
 		if (parent instanceof PerlNamespaceDefinition)
 		{
-			decorateElement(
-					holder.createInfoAnnotation(namespaceElement, null),
-					PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION,
-					namespaceElement.isBuiltin(),
-					namespaceElement.isDeprecated()
-			);
-		}
-		else if (namespaceElement.isPragma())    // fixme with such way pragma can't be deprecated
-		{
-			Annotation annotation = holder.createInfoAnnotation(namespaceElement, null);
-			annotation.setTextAttributes(PerlSyntaxHighlighter.PERL_PRAGMA);
+			decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, namespaceElement.isDeprecated());
 		}
 		else
 		{
-			decorateElement(
-					holder.createInfoAnnotation(namespaceElement, null),
-					PerlSyntaxHighlighter.PERL_PACKAGE,
-					namespaceElement.isBuiltin(),
-					namespaceElement.isDeprecated()
-			);
+			TextAttributesKey attributesKey = PerlSyntaxHighlighter.PERL_PACKAGE;
+
+			if (namespaceElement.isPragma())
+			{
+				attributesKey = PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA;
+			}
+			else if (namespaceElement.isBuiltin())
+			{
+				attributesKey = PerlSyntaxHighlighter.PERL_PACKAGE_CORE;
+			}
+
+			decorateElement(namespaceElement, holder, attributesKey, namespaceElement.isDeprecated());
 		}
 	}
 

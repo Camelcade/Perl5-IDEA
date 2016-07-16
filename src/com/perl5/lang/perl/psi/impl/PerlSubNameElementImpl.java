@@ -153,7 +153,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 
 			if (
 					!(grandParent instanceof PsiPerlNestedCall)
-							&& (getPrevSibling() == null || "CORE::".equals(getPrevSibling().getText()))
+							&& (getPrevSibling() == null || PerlPackageUtil.CORE_PACKAGE_FULL.equals(getPrevSibling().getText()))
 					)
 			{
 				return PerlSubUtil.isBuiltIn(getText());
