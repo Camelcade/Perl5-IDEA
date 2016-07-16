@@ -26,8 +26,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.DocumentBasedFormattingModel;
+import com.intellij.psi.formatter.FormattingDocumentModelImpl;
 import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
+import com.intellij.psi.formatter.xml.HtmlPolicy;
 import com.intellij.psi.templateLanguages.SimpleTemplateLanguageFormattingModelBuilder;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
@@ -124,7 +126,8 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 			@NotNull CodeStyleSettings codeStyleSettings
 	)
 	{
-		return new TemplateToolkitFormattingBlock(this, codeStyleSettings, node, foreignChildren);
+		final FormattingDocumentModelImpl documentModel = FormattingDocumentModelImpl.createOn(node.getPsi().getContainingFile());
+		return new TemplateToolkitFormattingBlock(this, codeStyleSettings, node, foreignChildren, new HtmlPolicy(codeStyleSettings, documentModel));
 	}
 
 	@Override

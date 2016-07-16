@@ -17,15 +17,19 @@
 package com.perl5.lang.tt2.formatter;
 
 import com.intellij.formatting.*;
+import com.intellij.formatting.templateLanguages.BlockWithParent;
 import com.intellij.formatting.templateLanguages.DataLanguageBlockWrapper;
 import com.intellij.formatting.templateLanguages.TemplateLanguageBlock;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
+import com.intellij.psi.formatter.xml.HtmlPolicy;
+import com.intellij.psi.formatter.xml.SyntheticBlock;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.psi.xml.XmlTag;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,8 +68,11 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 			TRY_BRANCH,
 			CATCH_BRANCH,
-			FINAL_BRANCH,
+			FINAL_BRANCH
 
+	);
+
+	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
 			DEFAULT_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
 			SET_DIRECTIVE,
@@ -92,15 +99,18 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	private final TemplateToolkitFormattingModelBuilder myModelBuilder;
 	private final SpacingBuilder mySpacingBuilder;
 	private final InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
+	private HtmlPolicy myHtmlPolicy;
 
 	public TemplateToolkitFormattingBlock(
 			@NotNull TemplateToolkitFormattingModelBuilder blockFactory,
 			@NotNull CodeStyleSettings settings,
 			@NotNull ASTNode node,
-			@Nullable List<DataLanguageBlockWrapper> foreignChildren
+			@Nullable List<DataLanguageBlockWrapper> foreignChildren,
+			HtmlPolicy htmlPolicy
 	)
 	{
 		this(node, null, null, blockFactory, settings, foreignChildren);
+		myHtmlPolicy = htmlPolicy;
 	}
 
 	public TemplateToolkitFormattingBlock(
@@ -142,10 +152,28 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		{
 			return Indent.getNormalIndent();
 		}
+		else if (!isFirst && CONTINUOS_INDENTED_CONTAINERS.contains(parentNodeType)) // default, set, etc
+		{
+			return Indent.getContinuationIndent();
+		}
 		else if (!isFirst && NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // blocks
 		{
 			return isLast() ? Indent.getNoneIndent() : Indent.getNormalIndent();
 		}
+
+		// any element that is the direct descendant of a foreign block gets an indent
+		// (unless that foreign element has been configured to not indent its children)
+		DataLanguageBlockWrapper foreignParent = getForeignBlockParent(true);
+		if (foreignParent != null)
+		{
+			if (foreignParent.getNode() instanceof XmlTag
+					&& !myHtmlPolicy.indentChildrenOf((XmlTag) foreignParent.getNode()))
+			{
+				return Indent.getNoneIndent();
+			}
+			return Indent.getNormalIndent();
+		}
+
 
 		return Indent.getNoneIndent();
 	}
@@ -289,5 +317,33 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		return super.getSpacing(child1, child2);
 	}
 
+	/**
+	 * From HandleBars
+	 * Returns this block's first "real" foreign block parent if it exists, and null otherwise.  (By "real" here, we mean that this method
+	 * skips SyntheticBlock blocks inserted by the template formatter)
+	 *
+	 * @param immediate Pass true to only check for an immediate foreign parent, false to look up the hierarchy.
+	 */
+	private DataLanguageBlockWrapper getForeignBlockParent(boolean immediate)
+	{
+		DataLanguageBlockWrapper foreignBlockParent = null;
+		BlockWithParent parent = getParent();
+
+		while (parent != null)
+		{
+			if (parent instanceof DataLanguageBlockWrapper && !(((DataLanguageBlockWrapper) parent).getOriginal() instanceof SyntheticBlock))
+			{
+				foreignBlockParent = (DataLanguageBlockWrapper) parent;
+				break;
+			}
+			else if (immediate && parent instanceof TemplateToolkitFormattingBlock)
+			{
+				break;
+			}
+			parent = parent.getParent();
+		}
+
+		return foreignBlockParent;
+	}
 
 }

@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+[% DEFAULT
+        name   = 'John Doe'
+        id     = 'jdoe'
+        some   = foo.bar
+        other  = foo.bar.baz()
+        else   = foo.$bar.baz
+        orelse = foo.${bar}.baz
+%]
+
+<div>
+    [% DEFAULT
+        name   = 'John Doe'
+        id     = 'jdoe'
+        some   = foo.bar
+        other  = foo.bar.baz()
+        else   = foo.$bar.baz
+        orelse = foo.${bar}.baz
+    %]
+
+</div>
+
+</body>
+</html>
