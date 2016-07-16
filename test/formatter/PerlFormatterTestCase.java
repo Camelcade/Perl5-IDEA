@@ -16,13 +16,14 @@
 
 package formatter;
 
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTestCase extends PerlFormatterTest
+public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
 {
 	@Override
 	protected String getTestDataPath()

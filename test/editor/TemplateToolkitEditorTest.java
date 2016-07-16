@@ -24,6 +24,7 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
  */
 public class TemplateToolkitEditorTest extends TemplateToolkitLightCodeInsightFixtureTestCase
 {
+
 	@Override
 	protected String getTestDataPath()
 	{
@@ -37,10 +38,12 @@ public class TemplateToolkitEditorTest extends TemplateToolkitLightCodeInsightFi
 
 	public void testAutocloseTagCustom()
 	{
+		saveSettings();
 		TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(getProject());
 		settings.START_TAG = "%SOME%=";
 		settings.END_TAG = "/ENDTAG$";
 		testSmartKey("%SOME%<caret>", '=', "%SOME%=  /ENDTAG$");
+		restoreSettings();
 	}
 
 	public void testBraces()

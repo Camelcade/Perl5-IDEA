@@ -16,10 +16,12 @@
 
 package formatter;
 
+import base.TemplateToolkitLightCodeInsightFixtureTestCase;
+
 /**
  * Created by hurricup on 11.07.2016.
  */
-public class TemplateToolkitFormatterTestCase extends PerlFormatterTest
+public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeInsightFixtureTestCase
 {
 	TemplateToolkitTestSettings myTestSettings;
 
@@ -35,7 +37,6 @@ public class TemplateToolkitFormatterTestCase extends PerlFormatterTest
 	protected void tearDown() throws Exception
 	{
 		myTestSettings.tearDown();
-		;
 		super.tearDown();
 	}
 

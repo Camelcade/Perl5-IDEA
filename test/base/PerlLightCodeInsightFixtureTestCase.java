@@ -20,16 +20,21 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
@@ -266,6 +271,31 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		List<String> strings = myFixture.getLookupElementStrings();
 		assertNotNull(strings);
 		assertDoesntContain(new HashSet<Object>(strings), pattern);
+	}
+
+	protected void doFormatTest(String filename)
+	{
+		doFormatTest(filename, "");
+	}
+
+	protected void doFormatTest(String filename, String resultSuffix)
+	{
+		initWithFileSmart(filename);
+		new WriteCommandAction.Simple(getProject())
+		{
+			@Override
+			protected void run() throws Throwable
+			{
+				PsiFile file = myFixture.getFile();
+				TextRange rangeToUse = file.getTextRange();
+				CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
+				// 	CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
+			}
+		}.execute();
+
+		String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
+		UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
+//		myFixture.checkResultByFile(resultFileName);
 	}
 
 }
