@@ -25,6 +25,7 @@ import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -43,6 +44,8 @@ import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.event.HyperlinkEvent;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -103,10 +106,9 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 				return;
 			}
 
-			VirtualFile virtualFile = file.getVirtualFile();
-			String filePath = virtualFile == null ? null : virtualFile.getCanonicalPath();
+			final VirtualFile virtualFile = file.getVirtualFile();
 
-			if (filePath == null)
+			if (virtualFile == null)
 			{
 				return;
 			}
@@ -115,9 +117,31 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 
 			try
 			{
-				GeneralCommandLine perltidy = getPerlTidyCommandLine(project);
-				perltidy.addParameter(filePath);
-				final Process process = perltidy.createProcess();
+				GeneralCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
+				final Process process = perlTidyCommandLine.createProcess();
+				final OutputStream outputStream = process.getOutputStream();
+				ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						try
+						{
+							final byte[] sourceBytes = virtualFile.contentsToByteArray();
+							outputStream.write(sourceBytes);
+							outputStream.close();
+						}
+						catch (IOException e)
+						{
+							Notifications.Bus.notify(new Notification(
+									PERL_TIDY_GROUP,
+									"Re-formatting error",
+									e.getMessage(),
+									NotificationType.ERROR
+							));
+						}
+					}
+				});
 
 				final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
 				ProcessOutput processOutput = processHandler.runProcess();
