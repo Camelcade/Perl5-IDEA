@@ -74,11 +74,17 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
 			FILTER_DIRECTIVE,
-			ARRAY_EXPR,
+			ASSIGN_EXPR,
+			PAIR_EXPR,
 			DEFAULT_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
 			SET_DIRECTIVE,
 			META_DIRECTIVE
+	);
+
+	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
+			ARRAY_EXPR,
+			HASH_EXPR
 	);
 
 	private final TokenSet ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS = TokenSet.create(
@@ -154,15 +160,33 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		{
 			return Indent.getNormalIndent();
 		}
-		else if (!isFirst && CONTINUOS_INDENTED_CONTAINERS.contains(parentNodeType)) // default, set, etc
+		else if (CONTINUOS_INDENTED_CONTAINERS.contains(parentNodeType)) // default, set, etc
 		{
-			return Indent.getContinuationIndent();
+			return Indent.getContinuationWithoutFirstIndent();
+		}
+		else if (CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // array, hash
+		{
+			return isLast() ? Indent.getNormalIndent() : Indent.getContinuationWithoutFirstIndent();
 		}
 		else if (!isFirst && NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // blocks
 		{
 			return isLast() ? Indent.getNoneIndent() : Indent.getNormalIndent();
 		}
 
+		return getForeignIndent();
+	}
+
+	@NotNull
+	protected Indent getForeignIndent()
+	{
+		//noinspection ConstantConditions
+		return getForeignIndent(Indent.getNoneIndent());
+	}
+
+
+	@Nullable
+	protected Indent getForeignIndent(@Nullable Indent defaultIndent)
+	{
 		// any element that is the direct descendant of a foreign block gets an indent
 		// (unless that foreign element has been configured to not indent its children)
 		DataLanguageBlockWrapper foreignParent = getForeignBlockParent(true);
@@ -175,10 +199,9 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			}
 			return Indent.getNormalIndent();
 		}
-
-
-		return Indent.getNoneIndent();
+		return defaultIndent;
 	}
+
 
 	/**
 	 * Checks that current node is first, controlling optional SET and GET
