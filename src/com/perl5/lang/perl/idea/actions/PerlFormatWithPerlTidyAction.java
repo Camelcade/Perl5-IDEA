@@ -30,12 +30,15 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.options.ShowSettingsUtil;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -115,83 +118,91 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 
 			FileDocumentManager.getInstance().saveDocument(document);
 
-			try
+			new Task.Backgroundable(project, PerlBundle.message("perl.tidy.formatting"), false)
 			{
-				GeneralCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
-				final Process process = perlTidyCommandLine.createProcess();
-				final OutputStream outputStream = process.getOutputStream();
-				ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
+				@Override
+				public void run(@NotNull ProgressIndicator indicator)
 				{
-					@Override
-					public void run()
+					try
 					{
-						try
+						GeneralCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
+						final Process process = perlTidyCommandLine.createProcess();
+						final OutputStream outputStream = process.getOutputStream();
+						ApplicationManager.getApplication().executeOnPooledThread(new Runnable()
 						{
-							final byte[] sourceBytes = virtualFile.contentsToByteArray();
-							outputStream.write(sourceBytes);
-							outputStream.close();
+							@Override
+							public void run()
+							{
+								try
+								{
+									final byte[] sourceBytes = virtualFile.contentsToByteArray();
+									outputStream.write(sourceBytes);
+									outputStream.close();
+								}
+								catch (IOException e)
+								{
+									Notifications.Bus.notify(new Notification(
+											PERL_TIDY_GROUP,
+											"Re-formatting error",
+											e.getMessage(),
+											NotificationType.ERROR
+									));
+								}
+							}
+						});
+
+						final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
+						ProcessOutput processOutput = processHandler.runProcess();
+
+						final List<String> stdoutLines = processOutput.getStdoutLines(false);
+						List<String> stderrLines = processOutput.getStderrLines();
+
+						if (stderrLines.isEmpty())
+						{
+							WriteCommandAction.runWriteCommandAction(project, new Runnable()
+							{
+								@Override
+								public void run()
+								{
+									document.setText(StringUtil.join(stdoutLines, "\n"));
+									PsiDocumentManager.getInstance(project).commitDocument(document);
+								}
+							});
 						}
-						catch (IOException e)
+						else
 						{
 							Notifications.Bus.notify(new Notification(
 									PERL_TIDY_GROUP,
-									"Re-formatting error",
-									e.getMessage(),
+									"Perl::Tidy formatting error",
+									StringUtil.join(stderrLines, "<br>"),
 									NotificationType.ERROR
 							));
+
 						}
 					}
-				});
-
-				final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
-				ProcessOutput processOutput = processHandler.runProcess();
-
-				final List<String> stdoutLines = processOutput.getStdoutLines(false);
-				List<String> stderrLines = processOutput.getStderrLines();
-
-				if (stderrLines.isEmpty())
-				{
-					WriteCommandAction.runWriteCommandAction(project, new Runnable()
+					catch (ExecutionException e)
 					{
-						@Override
-						public void run()
-						{
-							document.setText(StringUtil.join(stdoutLines, "\n"));
-							PsiDocumentManager.getInstance(project).commitDocument(document);
-						}
-					});
+						Notifications.Bus.notify(new Notification(
+								PERL_TIDY_GROUP,
+								"Error running Perl::Tidy",
+								"Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
+								NotificationType.ERROR,
+								new NotificationListener.Adapter()
+								{
+									@Override
+									protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
+									{
+										Project project = file.getProject();
+										ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+										notification.expire();
+									}
+								}
+						));
+					}
 				}
-				else
-				{
-					Notifications.Bus.notify(new Notification(
-							PERL_TIDY_GROUP,
-							"Perl::Tidy formatting error",
-							StringUtil.join(stderrLines, "<br>"),
-							NotificationType.ERROR
-					));
-
-				}
-			}
-			catch (ExecutionException e)
-			{
-				Notifications.Bus.notify(new Notification(
-						PERL_TIDY_GROUP,
-						"Error running Perl::Tidy",
-						"Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
-						NotificationType.ERROR,
-						new NotificationListener.Adapter()
-						{
-							@Override
-							protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
-							{
-								Project project = file.getProject();
-								ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
-								notification.expire();
-							}
-						}
-				));
-			}
+			}.queue();
 		}
+
 	}
 
 }
