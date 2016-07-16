@@ -56,4 +56,9 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 	{
 		doFormatTest("block_anon");
 	}
+
+	public void testBlockNamed() throws Exception
+	{
+		doFormatTest("block_named");
+	}
 }

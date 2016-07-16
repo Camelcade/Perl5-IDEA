@@ -1,0 +1,44 @@
+<html>
+<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<body>
+
+[% BLOCK tabrow %]
+<tr>
+<td>[% name %]
+<td>
+[% BLOCK tmpblk %] This is OK [% END %]
+<td>[% email %]</td>
+</tr>
+[% END %]
+
+%% BLOCK tabrow
+<tr>
+<td>[% name %]
+<td>
+[% BLOCK tmpblk %] This is OK [% END %]
+<td>[% email %]</td>
+</tr>
+%% END
+
+%% BLOCK tabrow
+<tr>
+<td>[% name %]
+<td>
+[% BLOCK tmpblk %] This is OK [% END %]
+<td>[% email %]</td>
+</tr>
+[% END %]
+
+[% BLOCK tabrow %]
+<tr>
+<td>[% name %]
+<td>
+[% BLOCK tmpblk %] This is OK [% END %]
+<td>[% email %]</td>
+</tr>
+%% END
+
+[% BLOCK tmpblk %] This is OK [% END %]
+
+</body>
+</html>
