@@ -34,6 +34,7 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.PlatformUtils;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
@@ -67,12 +68,20 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 	{
 		if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile))
 		{
+			final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
+			if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING)
+			{
+				return null;
+			}
+
+			EditorNotificationPanel panel = null;
+
 			if (PlatformUtils.isIntelliJ())
 			{
 				if (VfsUtil.isAncestor(myProject.getBaseDir(), virtualFile, true))
 				{
 					Module fileModule = ModuleUtilCore.findModuleForFile(virtualFile, myProject);
-					Sdk fileSdk = null;
+					Sdk fileSdk;
 					if (fileModule == null)
 					{
 						fileSdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
@@ -83,9 +92,9 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 					}
 					if (fileSdk == null || fileSdk.getSdkType() != PerlSdkType.getInstance())
 					{
-						EditorNotificationPanel panel = new EditorNotificationPanel();
-						panel.setText("Perl5 SDK is not configured.");
-						panel.createActionLabel("Configure", new Runnable()
+						panel = new EditorNotificationPanel();
+						panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
+						panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable()
 						{
 							@Override
 							public void run()
@@ -93,17 +102,16 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 								ProjectSettingsService.getInstance(myProject).openProjectSettings();
 							}
 						});
-						return panel;
 					}
 				}
 			}
 			else
 			{
-				if (StringUtil.isEmpty(PerlLocalSettings.getInstance(myProject).PERL_PATH))
+				if (StringUtil.isEmpty(perlLocalSettings.PERL_PATH))
 				{
-					EditorNotificationPanel panel = new EditorNotificationPanel();
-					panel.setText("Perl5 interpreter is not configured");
-					panel.createActionLabel("Configure", new Runnable()
+					panel = new EditorNotificationPanel();
+					panel.setText(PerlBundle.message("perl.notification.interperter.not.configured"));
+					panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable()
 					{
 						@Override
 						public void run()
@@ -111,9 +119,23 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 							ShowSettingsUtil.getInstance().editConfigurable(myProject, new PerlSettingsConfigurable(myProject));
 						}
 					});
-					return panel;
 				}
 			}
+
+			if (panel != null)
+			{
+				panel.createActionLabel(PerlBundle.message("perl.notification.disable.notification"), new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING = true;
+						EditorNotifications.getInstance(myProject).updateAllNotifications();
+					}
+				});
+			}
+
+			return panel;
 		}
 		return null;
 	}

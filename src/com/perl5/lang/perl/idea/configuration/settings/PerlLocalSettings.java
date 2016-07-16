@@ -41,6 +41,7 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
 	public String PERL_PATH = "";
 	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_OS_DEPENDENT_NAME;
 	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
+	public boolean DISABLE_NO_INTERPRETER_WARNING = false;
 
 	public static PerlLocalSettings getInstance(@NotNull Project project)
 	{

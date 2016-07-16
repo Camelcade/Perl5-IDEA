@@ -41,6 +41,7 @@
       <li>Implemented proper outlining of perl live-templates for Mojolicious, HTML::Mason and Mason2</li>
       <li>POD parts of the perl file are now available in the structure view as a separate branch</li>
       <li>Template language for Embedded Perl, Mojolicious, HTML::Mason and Mason2 is now configurable via Settings &gt; Template Data Language</li>
+      <li>You may now disable notification about unconfigured Perl interpreter/Perl SDK, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1295">@mcrawford-dayspring</a></li>
       <li>Code generation:<ul>
         <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
         <li>Overriden methods now using proper self-reference variable from parent method, not <code>$self</code> in any case</li>
@@ -55,8 +56,8 @@
       <ul>
       <li>It's not possible anymore to inject other languages in hash elements and hash slices keys</li>
       <li>Escaped quotes now being handled correctly with language injections in strings</li>
-      <li>Perl::Tidy re-formatting of large files now works correctly, thanks to @YuraKotov</li>
-      <li>It's now possible to disable bold style of keywords and configure built-in subs, packages and variables styles and colors, thanks to @Dgc2002</li>
+      <li>Perl::Tidy re-formatting of large files now works correctly, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1297">@YuraKotov</a></li>
+      <li>It's now possible to disable bold style of keywords and configure built-in subs, packages and variables styles and colors, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1298">@Dgc2002</a></li>
       </ul>
      </p>
     ]]>
