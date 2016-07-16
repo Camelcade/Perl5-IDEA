@@ -73,6 +73,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
+			FILTER_DIRECTIVE,
+			ARRAY_EXPR,
 			DEFAULT_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
 			SET_DIRECTIVE,

@@ -1,0 +1,20 @@
+<html>
+<head></head>
+<body>
+
+[% cols = [
+'red',
+'green',
+'blue'
+] %]
+
+<div>
+    [% cols = [
+'red',
+'green',
+'blue'
+] %]
+</div>
+
+</body>
+</html>

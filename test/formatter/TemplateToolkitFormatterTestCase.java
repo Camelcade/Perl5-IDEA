@@ -52,6 +52,11 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 		return "tt";
 	}
 
+	public void testArray() throws Exception
+	{
+		doFormatTest();
+	}
+
 	public void testBlockAnon() throws Exception
 	{
 		doFormatTest();
@@ -73,6 +78,11 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 	}
 
 	public void testFilter() throws Exception
+	{
+		doFormatTest();
+	}
+
+	public void testFilterPostfix() throws Exception
 	{
 		doFormatTest();
 	}
