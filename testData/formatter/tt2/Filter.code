@@ -1,0 +1,22 @@
+<html>
+<head></head>
+<body>
+
+[% FILTER html %]
+HTML text may have < and > characters embedded
+[% something %]
+which you want converted to the correct HTML entities.
+[% END %]
+
+
+<div>
+[% FILTER html %]
+HTML text may have < and > characters embedded
+[% something %]
+which you want converted to the correct HTML entities.
+[% END %]
+<p>test</p>
+</div>
+
+</body>
+</html>
