@@ -1,0 +1,22 @@
+<html>
+<head></head>
+<body>
+
+[% FOREACH
+        i
+        IN
+        items %]
+    [% i %]
+[% END %]
+
+<div>
+    [% FOREACH
+            i
+            IN
+            items %]
+        [% i %]
+    [% END %]
+</div>
+
+</body>
+</html>
