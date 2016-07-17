@@ -77,7 +77,6 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			ASSIGN_EXPR,
 			PAIR_EXPR,
 			DEFAULT_DIRECTIVE,
-			INCLUDE_DIRECTIVE,
 			SET_DIRECTIVE,
 			META_DIRECTIVE,
 			BLOCK_DIRECTIVE,
@@ -88,7 +87,9 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			ELSIF_DIRECTIVE,
 			CLEAR_DIRECTIVE,
 			FOREACH_DIRECTIVE,
-			GET_DIRECTIVE
+			GET_DIRECTIVE,
+			INCLUDE_DIRECTIVE,
+			INSERT_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
