@@ -1,0 +1,22 @@
+<html>
+<head></head>
+<body>
+
+[% INCLUDE
+        table
+        title   = "Active Projects"
+        bgcolor = "80ff00"    # chartreuse
+        border  = 2
+%]
+
+<div>
+    [% INCLUDE
+        table
+        title   = "Active Projects"
+        bgcolor = "80ff00"    # chartreuse
+        border  = 2
+    %]
+</div>
+
+</body>
+</html>
