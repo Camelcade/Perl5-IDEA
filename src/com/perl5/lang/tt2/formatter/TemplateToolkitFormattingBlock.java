@@ -76,6 +76,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
 			ASSIGN_EXPR,
 			PAIR_EXPR,
+			CALL_ARGUMENTS,
 
 			ANON_BLOCK_DIRECTIVE,
 			BLOCK_DIRECTIVE,
@@ -113,7 +114,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 	private final TokenSet ALIGNABLE_PAIR_EXPRESSIONS_CONTAINERS = TokenSet.create(
 			HASH_EXPR,
-			META_DIRECTIVE
+			META_DIRECTIVE,
+			CALL_ARGUMENTS
 	);
 
 	private final TokenSet NORMAL_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
