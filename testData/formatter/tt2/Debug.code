@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+
+[% DEBUG
+on %]
+directive debugging is on (assuming DEBUG option is set true)
+[% DEBUG
+off %]
+directive debugging is off
+
+<div>
+
+[% DEBUG
+on %]
+directive debugging is on (assuming DEBUG option is set true)
+[% DEBUG
+off %]
+directive debugging is off
+</div>
+
+</body>
+</html>
