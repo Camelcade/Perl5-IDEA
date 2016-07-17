@@ -57,6 +57,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			FILTER_BLOCK,
 			FOREACH_BLOCK,
 			WHILE_BLOCK,
+			SWITCH_BLOCK,
+			CASE_BLOCK,
 
 			HASH_EXPR
 	);
@@ -98,7 +100,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			PROCESS_DIRECTIVE,
 			RETURN_DIRECTIVE,
 			SET_DIRECTIVE,
-			STOP_DIRECTIVE
+			STOP_DIRECTIVE,
+
+			SWITCH_DIRECTIVE,
+			CASE_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(

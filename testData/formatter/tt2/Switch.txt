@@ -1,0 +1,73 @@
+<html>
+<head></head>
+<body>
+
+[% SWITCH myvar %]
+    [% CASE 'value1' %]
+    ...
+    [% CASE ['value2', 'value3'] %]   # multiple values
+    ...
+    [% CASE myhash.keys %]            # ditto
+    ...
+    [% CASE DEFAULT %]                        # default
+    ...
+    [% CASE %]                        # default
+
+[% END %]
+
+[% SWITCH
+        myvar %]
+    [% CASE
+            'value1' %]
+    ...
+    [% CASE
+            ['value2',
+                    'value3'] %]   # multiple values
+    ...
+    [% CASE
+            myhash.keys %]            # ditto
+    ...
+    [% CASE
+            DEFAULT %]                        # default
+    ...
+    [% CASE %]                        # default
+
+[% END %]
+
+<div>
+    [% SWITCH myvar %]
+        [% CASE 'value1' %]
+            ...
+        [% CASE ['value2', 'value3'] %]   # multiple values
+            ...
+        [% CASE myhash.keys %]            # ditto
+            ...
+        [% CASE DEFAULT %]                        # default
+            ...
+        [% CASE %]                        # default
+
+    [% END %]
+
+    [% SWITCH
+            myvar %]
+        [% CASE
+                'value1' %]
+            ...
+        [% CASE
+                ['value2',
+                        'value3'] %]   # multiple values
+            ...
+        [% CASE
+                myhash.keys %]            # ditto
+            ...
+        [% CASE
+                DEFAULT %]                        # default
+            ...
+        [% CASE %]                        # default
+
+    [% END %]
+
+</div>
+
+</body>
+</html>

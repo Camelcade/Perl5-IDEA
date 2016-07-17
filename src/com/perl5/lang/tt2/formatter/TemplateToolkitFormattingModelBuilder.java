@@ -115,6 +115,8 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.before(TT2_SEMI).spaces(0)
 				.after(TT2_SEMI).spaces(1)
 				.afterInside(TT2_NOT, UNARY_EXPR).spaces(0)
+				.before(TT2_COMMA).spaces(0)
+				.after(TT2_COMMA).spaces(1)
 				.before(TT2_CLOSE_TAG).spaces(1)
 				.around(KEYWORDS_TOKENSET).spaces(1)
 				.before(MACRO_CONTENT).spaces(1)
@@ -125,7 +127,6 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.between(PAIR_EXPR, PAIR_EXPR).spaces(1)
 				.around(ALL_OPERATORS_TOKENSET).spaces(1)
 		;
-
 	}
 
 	@Override
