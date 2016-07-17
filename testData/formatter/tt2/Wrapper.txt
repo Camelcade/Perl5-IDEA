@@ -1,0 +1,46 @@
+<html>
+<head></head>
+<body>
+
+[% WRAPPER
+        section
+        title      = 'Quantum Mechanics'
+        titleother = 'Quantum Mechanics'
+    %]
+    [% something %]
+Quantum mechanics is a very interesting subject wish
+should prove easy for the layman to fully comprehend.
+[% END %]
+
+
+[% WRAPPER section title = 'Quantum Mechanics' titleother = 'Quantum Mechanics'
+    %]
+    [% something %]
+Quantum mechanics is a very interesting subject wish
+should prove easy for the layman to fully comprehend.
+[% END %]
+
+
+<div>
+    [% WRAPPER
+            section
+            title      = 'Quantum Mechanics'
+            titleother = 'Quantum Mechanics'
+        %]
+        [% something %]
+        Quantum mechanics is a very interesting subject wish
+        should prove easy for the layman to fully comprehend.
+    [% END %]
+
+
+    [% WRAPPER section title = 'Quantum Mechanics' titleother = 'Quantum Mechanics'
+        %]
+        [% something %]
+        Quantum mechanics is a very interesting subject wish
+        should prove easy for the layman to fully comprehend.
+    [% END %]
+
+</div>
+
+</body>
+</html>

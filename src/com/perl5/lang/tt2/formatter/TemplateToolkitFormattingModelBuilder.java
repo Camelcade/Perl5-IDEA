@@ -123,6 +123,7 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.before(DIRECTIVE_POSTFIX).spaces(1)
 				.beforeInside(ASSIGN_EXPR, PROCESS_DIRECTIVE).spaces(1)
 				.beforeInside(ASSIGN_EXPR, EXCEPTION_ARGS).spaces(1)
+				.beforeInside(ASSIGN_EXPR, WRAPPER_DIRECTIVE).spaces(1)
 				.before(PAIR_EXPR).spaces(1)
 				.between(ASSIGN_EXPR, ASSIGN_EXPR).spaces(1)
 				.between(PAIR_EXPR, PAIR_EXPR).spaces(1)

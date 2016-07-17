@@ -60,6 +60,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			WHILE_BLOCK,
 			SWITCH_BLOCK,
 			CASE_BLOCK,
+			WRAPPER_BLOCK,
 
 			HASH_EXPR
 	);
@@ -73,7 +74,6 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			TRY_BRANCH,
 			CATCH_BRANCH,
 			FINAL_BRANCH
-
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
@@ -122,7 +122,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			DEFAULT_DIRECTIVE,
 			SET_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
-			EXCEPTION_ARGS
+			EXCEPTION_ARGS,
+			WRAPPER_DIRECTIVE
 	);
 
 	private final TokenSet ALIGNABLE_PAIR_EXPRESSIONS_CONTAINERS = TokenSet.create(
