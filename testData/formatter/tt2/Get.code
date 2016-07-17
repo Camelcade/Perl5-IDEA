@@ -1,0 +1,15 @@
+<html>
+<head></head>
+<body>
+
+[% GET foo %]
+[% GET
+foo %]
+<div>
+[% GET foo %]
+[% GET
+foo %]
+</div>
+
+</body>
+</html>

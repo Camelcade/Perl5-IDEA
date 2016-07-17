@@ -87,7 +87,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			IF_DIRECTIVE,
 			ELSIF_DIRECTIVE,
 			CLEAR_DIRECTIVE,
-			FOREACH_DIRECTIVE
+			FOREACH_DIRECTIVE,
+			GET_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
@@ -174,6 +175,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		}
 		else if (CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // array, hash
 		{
+			// fixme this one incorrectly detects indent inside DataWrapper; we could enforce to parent, but may be ugly
 			return isLast() ? Indent.getNormalIndent() : Indent.getContinuationWithoutFirstIndent();
 		}
 		else if (!isFirst && NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // blocks
