@@ -1,0 +1,36 @@
+<html>
+<head></head>
+<body>
+
+[% MACRO
+header
+INCLUDE
+header %]
+[% MACRO
+number(n)
+GET
+n.chunk(-3).join(',') %]
+[% MACRO        header        IF        frames %]
+[% INCLUDE          frames/header %]
+[% ELSE %]
+[% INCLUDE      header %]
+[% END %]
+
+<div>
+[% MACRO
+header
+INCLUDE
+header %]
+[% MACRO
+number(n)
+GET
+n.chunk(-3).join(',') %]
+[% MACRO        header        IF        frames %]
+[% INCLUDE          frames/header %]
+[% ELSE %]
+[% INCLUDE      header %]
+[% END %]
+</div>
+
+</body>
+</html>

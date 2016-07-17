@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET;
+import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET;
 
 /**
  * Created by hurricup on 10.07.2016.
@@ -112,6 +113,8 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.after(TT2_OUTLINE_TAG).spaces(1)
 				.after(TT2_OPEN_TAG).spaces(1)
 				.before(TT2_CLOSE_TAG).spaces(1)
+				.around(KEYWORDS_TOKENSET).spaces(1)
+				.before(MACRO_CONTENT).spaces(1)
 				.around(ALL_OPERATORS_TOKENSET).spaces(1)
 		;
 
