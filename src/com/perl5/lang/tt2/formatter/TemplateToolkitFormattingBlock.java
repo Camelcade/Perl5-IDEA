@@ -60,9 +60,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			WHILE_BLOCK,
 			SWITCH_BLOCK,
 			CASE_BLOCK,
-			WRAPPER_BLOCK,
-
-			HASH_EXPR
+			WRAPPER_BLOCK
 	);
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS = TokenSet.create(
@@ -136,6 +134,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			NORMAL_INDENTED_CONTAINERS,
 			NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG,
 			NORMAL_INDENTED_CONTAINERS_PARENTS
+	);
+	private final TokenSet CONTINUOS_CHILD_INDENTED_CONTAINERS = TokenSet.orSet(
+			CONTINUOS_INDENTED_CONTAINERS,
+			CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG
 	);
 
 	private final TokenSet LEAF_BLOCKS = TokenSet.create(
@@ -327,6 +329,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		{
 			return Indent.getNormalIndent();
 		}
+		else if (CONTINUOS_CHILD_INDENTED_CONTAINERS.contains(elementType))
+		{
+			return Indent.getContinuationWithoutFirstIndent();
+		}
 		return super.getChildIndent();
 	}
 
@@ -350,13 +356,6 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		}
 
 		return super.getAlignment();
-	}
-
-	@NotNull
-	@Override
-	public ChildAttributes getChildAttributes(int newChildIndex)
-	{
-		return super.getChildAttributes(newChildIndex);
 	}
 
 	@Override
