@@ -1,0 +1,39 @@
+<html>
+<head></head>
+<body>
+
+[% ten         = 10 twenty = 20
+        thirty = twenty + ten
+        forty  = 2 * twenty
+        fifty  = 100 div 2
+        six    = twenty mod 7
+%]
+
+[% SET
+        ten    = 10 twenty = 20
+        thirty = twenty + ten
+        forty  = 2 * twenty
+        fifty  = 100 div 2
+        six    = twenty mod 7
+%]
+
+
+<div>
+    [% ten     = 10 twenty = 20
+        thirty = twenty + ten
+        forty  = 2 * twenty
+        fifty  = 100 div 2
+        six    = twenty mod 7
+    %]
+
+    [% SET
+        ten    = 10 twenty = 20
+        thirty = twenty + ten
+        forty  = 2 * twenty
+        fifty  = 100 div 2
+        six    = twenty mod 7
+    %]
+</div>
+
+</body>
+</html>
