@@ -1,0 +1,225 @@
+<html>
+<head></head>
+<body>
+
+[% foo              =     bar        %]
+[% foo         ==    bar        %]
+[% foo        !=    bar        %]
+[% foo        <    bar        %]
+[% foo        <=    bar        %]
+[% foo        >    bar        %]
+[% foo        >=    bar        %]
+[% foo        &&    bar        %]
+[% foo        and    bar        %]
+[% foo        AND    bar        %]
+[% foo        ||    bar        %]
+[% foo        or    bar        %]
+[% foo        OR    bar        %]
+[% !	bar        %]
+[% not    bar        %]
+[% NOT    bar        %]
+[% foo        ?    bar        :         baz %]
+[% foo        +    bar        %]
+[% foo        -    bar        %]
+[% foo        *    bar        %]
+[% foo        /    bar        %]
+[% foo        div    bar        %]
+[% foo        DIV    bar        %]
+[% foo        %    bar        %]
+[% foo        mod    bar        %]
+[% foo        MOD    bar        %]
+[% copyright        =       '(C) Copyright'          _       year        _       '  '    _       author      %]
+[% copyright        =       "(C) Copyright $year $author" %]
+
+[% foo
+=bar        %]
+[% foo
+==bar        %]
+[% foo
+!=bar        %]
+[% foo
+<bar        %]
+[% foo
+<=bar        %]
+[% foo
+>bar        %]
+[% foo
+>=    bar
+%]
+[% foo
+&&    bar
+%]
+[% foo
+and    bar
+%]
+[% foo
+AND    bar
+%]
+[% foo
+||    bar
+%]
+[% foo
+or    bar
+%]
+[% foo
+OR    bar
+%]
+[% !	bar
+%]
+[% not    bar
+%]
+[% NOT    bar
+%]
+[% foo
+?    bar
+:baz %]
+[% foo
++    bar
+%]
+[% foo
+-    bar
+%]
+[% foo
+*    bar
+%]
+[% foo
+/    bar
+%]
+[% foo
+div    bar
+%]
+[% foo
+DIV    bar
+%]
+[% foo
+%    bar
+%]
+[% foo
+mod    bar
+%]
+[% foo
+MOD    bar
+%]
+[% copyright
+=
+'(C) Copyright'
+_ year
+_ '  '
+_ author
+%]
+[% copyright
+= "(C) Copyright $year $author" %]
+
+
+<div>
+[% foo              =     bar        %]
+[% foo         ==    bar        %]
+[% foo        !=    bar        %]
+[% foo        <    bar        %]
+[% foo        <=    bar        %]
+[% foo        >    bar        %]
+[% foo        >=    bar        %]
+[% foo        &&    bar        %]
+[% foo        and    bar        %]
+[% foo        AND    bar        %]
+[% foo        ||    bar        %]
+[% foo        or    bar        %]
+[% foo        OR    bar        %]
+[% !	bar        %]
+[% not    bar        %]
+[% NOT    bar        %]
+[% foo        ?    bar        :         baz %]
+[% foo        +    bar        %]
+[% foo        -    bar        %]
+[% foo        *    bar        %]
+[% foo        /    bar        %]
+[% foo        div    bar        %]
+[% foo        DIV    bar        %]
+[% foo        %    bar        %]
+[% foo        mod    bar        %]
+[% foo        MOD    bar        %]
+[% copyright        =       '(C) Copyright'          _       year        _       '  '    _       author      %]
+[% copyright        =       "(C) Copyright $year $author" %]
+
+[% foo
+=bar        %]
+[% foo
+==bar        %]
+[% foo
+!=bar        %]
+[% foo
+<bar        %]
+[% foo
+<=bar        %]
+[% foo
+>bar        %]
+[% foo
+>=    bar
+%]
+[% foo
+&&    bar
+%]
+[% foo
+and    bar
+%]
+[% foo
+AND    bar
+%]
+[% foo
+||    bar
+%]
+[% foo
+or    bar
+%]
+[% foo
+OR    bar
+%]
+[% !bar
+%]
+[% not    bar
+%]
+[% NOT    bar
+%]
+[% foo
+?    bar
+:baz %]
+[% foo
++    bar
+%]
+[% foo
+-    bar
+%]
+[% foo
+*    bar
+%]
+[% foo
+/    bar
+%]
+[% foo
+div    bar
+%]
+[% foo
+DIV    bar
+%]
+[% foo
+%    bar
+%]
+[% foo
+mod    bar
+%]
+[% foo
+MOD    bar
+%]
+[% copyright
+= '(C) Copyright'
+_ year
+_ '  '
+_ author
+%]
+[% copyright
+= "(C) Copyright $year $author" %]
+</div>
+
+
+</body>
+</html>

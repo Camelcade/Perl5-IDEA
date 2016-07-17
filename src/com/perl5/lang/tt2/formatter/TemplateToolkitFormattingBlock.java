@@ -31,6 +31,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.psi.xml.XmlTag;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.psi.impl.PsiExprImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,25 +74,27 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS = TokenSet.create(
-			FILTER_DIRECTIVE,
 			ASSIGN_EXPR,
 			PAIR_EXPR,
-			DEFAULT_DIRECTIVE,
-			SET_DIRECTIVE,
-			META_DIRECTIVE,
-			BLOCK_DIRECTIVE,
+
 			ANON_BLOCK_DIRECTIVE,
+			BLOCK_DIRECTIVE,
 			CALL_DIRECTIVE,
-			DEBUG_DIRECTIVE,
-			IF_DIRECTIVE,
-			ELSIF_DIRECTIVE,
 			CLEAR_DIRECTIVE,
+			DEBUG_DIRECTIVE,
+			DEFAULT_DIRECTIVE,
+			ELSIF_DIRECTIVE,
+			FILTER_DIRECTIVE,
 			FOREACH_DIRECTIVE,
 			GET_DIRECTIVE,
+			IF_DIRECTIVE,
 			INCLUDE_DIRECTIVE,
 			INSERT_DIRECTIVE,
 			LAST_DIRECTIVE,
-			MACRO_DIRECTIVE
+			MACRO_DIRECTIVE,
+			META_DIRECTIVE,
+			NEXT_DIRECTIVE,
+			SET_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
@@ -166,7 +169,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 
 		boolean isFirst = isFirst();
 		ASTNode parentNode = myNode.getTreeParent();
-		IElementType parentNodeType = parentNode == null ? null : parentNode.getElementType();
+		IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
 
 		if (!isFirst && NORMAL_INDENTED_CONTAINERS.contains(parentNodeType)) // branhces and so on
 		{
@@ -184,6 +187,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		else if (!isFirst && NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG.contains(parentNodeType)) // blocks
 		{
 			return isLast() ? Indent.getNoneIndent() : Indent.getNormalIndent();
+		}
+		else if (parentNode != null && parentNode.getPsi() instanceof PsiExprImpl) // expression, too broad to unit with default and set
+		{
+			return Indent.getContinuationWithoutFirstIndent();
 		}
 
 		return getForeignIndent();

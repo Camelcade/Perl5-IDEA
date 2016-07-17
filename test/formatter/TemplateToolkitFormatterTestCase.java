@@ -92,6 +92,11 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 		doFormatTest();
 	}
 
+	public void testExpressions() throws Exception
+	{
+		doFormatTest();
+	}
+
 	public void testFilter() throws Exception
 	{
 		doFormatTest();
@@ -148,6 +153,11 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 	}
 
 	public void testMultiDirectives() throws Exception
+	{
+		doFormatTest();
+	}
+
+	public void testNext() throws Exception
 	{
 		doFormatTest();
 	}

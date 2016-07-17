@@ -1,0 +1,18 @@
+<html>
+<head></head>
+<body>
+
+[% NEXT     IF      some.condition %]
+[% NEXT
+IF
+some.condition %]
+
+<div>
+[% NEXT     IF      some.condition %]
+[% NEXT
+IF
+some.condition %]
+</div>
+
+</body>
+</html>
