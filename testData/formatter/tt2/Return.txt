@@ -1,0 +1,19 @@
+<html>
+<head></head>
+<body>
+
+[% RETURN IF some.condition %]
+[% RETURN
+        IF
+                some.condition %]
+
+<div>
+    [% RETURN IF some.condition %]
+    [% RETURN
+        IF
+                some.condition %]
+
+</div>
+
+</body>
+</html>
