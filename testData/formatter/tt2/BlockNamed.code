@@ -1,5 +1,5 @@
 <html>
-<head>http://template-toolkit.org/docs/manual/Variables.html</head>
+<head></head>
 <body>
 
 [% BLOCK tabrow %]
@@ -11,24 +11,7 @@
 </tr>
 [% END %]
 
-%% BLOCK tabrow
-<tr>
-<td>[% name %]
-<td>
-[% BLOCK tmpblk %] This is OK [% END %]
-<td>[% email %]</td>
-</tr>
-%% END
-
-%% BLOCK tabrow
-<tr>
-<td>[% name %]
-<td>
-[% BLOCK tmpblk %] This is OK [% END %]
-<td>[% email %]</td>
-</tr>
-[% END %]
-
+<div>
 [% BLOCK tabrow %]
 <tr>
 <td>[% name %]
@@ -36,9 +19,8 @@
 [% BLOCK tmpblk %] This is OK [% END %]
 <td>[% email %]</td>
 </tr>
-%% END
-
-[% BLOCK tmpblk %] This is OK [% END %]
+[% END %]
+</div>
 
 </body>
 </html>
