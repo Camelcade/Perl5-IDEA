@@ -202,4 +202,9 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 		doFormatTest();
 	}
 
+	public void testTryCatch() throws Exception
+	{
+		doFormatTest();
+	}
+
 }

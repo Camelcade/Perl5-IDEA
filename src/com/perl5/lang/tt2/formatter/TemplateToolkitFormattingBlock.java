@@ -106,6 +106,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			SWITCH_DIRECTIVE,
 			CASE_DIRECTIVE,
 
+			CATCH_DIRECTIVE,
 			THROW_DIRECTIVE
 	);
 
