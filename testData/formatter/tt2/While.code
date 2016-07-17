@@ -1,0 +1,61 @@
+<html>
+<head></head>
+<body>
+
+[% WHILE    total       <       100 %]
+...
+[% total = calculate_new_total %]
+[% END %]
+
+[% WHILE
+total
+<
+100 %]
+...
+[% total = calculate_new_total %]
+[% END %]
+
+[% WHILE        (       user        =       get_next_user_record        ) %]
+[% user.name %]
+[% END %]
+
+[% WHILE
+(
+user
+=
+get_next_user_record
+) %]
+[% user.name %]
+[% END %]
+
+<div>
+
+[% WHILE    total       <       100 %]
+...
+[% total = calculate_new_total %]
+[% END %]
+
+[% WHILE
+total
+<
+100 %]
+...
+[% total = calculate_new_total %]
+[% END %]
+
+[% WHILE        (       user        =       get_next_user_record        ) %]
+[% user.name %]
+[% END %]
+
+[% WHILE
+(
+user
+=
+get_next_user_record
+) %]
+[% user.name %]
+[% END %]
+</div>
+
+</body>
+</html>
