@@ -1,0 +1,24 @@
+<html>
+<head></head>
+<body>
+
+[% CALL
+        dbi.disconnect %]
+%% CALL dbi.disconnect
+[% CALL
+        inc_page_counter(page_count) %]
+%% CALL inc_page_counter(page_count)
+
+
+<div>
+    [% CALL
+        dbi.disconnect %]
+%% CALL dbi.disconnect
+    [% CALL
+        inc_page_counter(page_count) %]
+%% CALL inc_page_counter(page_count)
+    <p>test</p>
+</div>
+
+</body>
+</html>
