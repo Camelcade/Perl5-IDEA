@@ -119,6 +119,10 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.around(KEYWORDS_TOKENSET).spaces(1)
 				.before(MACRO_CONTENT).spaces(1)
 				.before(DIRECTIVE_POSTFIX).spaces(1)
+				.before(ASSIGN_EXPR).spaces(1)
+				.before(PAIR_EXPR).spaces(1)
+				.between(ASSIGN_EXPR, ASSIGN_EXPR).spaces(1)
+				.between(PAIR_EXPR, PAIR_EXPR).spaces(1)
 				.around(ALL_OPERATORS_TOKENSET).spaces(1)
 		;
 

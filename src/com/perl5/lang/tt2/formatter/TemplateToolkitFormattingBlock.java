@@ -94,6 +94,7 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			MACRO_DIRECTIVE,
 			META_DIRECTIVE,
 			NEXT_DIRECTIVE,
+			PROCESS_DIRECTIVE,
 			SET_DIRECTIVE
 	);
 
