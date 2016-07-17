@@ -1,0 +1,27 @@
+<html>
+<head></head>
+<body>
+
+[% USE      Foo.Bar  %]     #  => Template::Plugin::Foo::Bar
+[% USE file         =       IO.File('/tmp/mydata') %]
+[% USE
+Foo.Bar  %]     #  => Template::Plugin::Foo::Bar
+[% USE
+file
+=
+IO.File('/tmp/mydata') %]
+
+<div>
+[% USE      Foo.Bar  %]     #  => Template::Plugin::Foo::Bar
+[% USE file         =       IO.File('/tmp/mydata') %]
+[% USE
+Foo.Bar  %]     #  => Template::Plugin::Foo::Bar
+[% USE
+file
+=
+IO.File('/tmp/mydata') %]
+
+</div>
+
+</body>
+</html>
