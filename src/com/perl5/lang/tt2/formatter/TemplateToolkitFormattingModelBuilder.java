@@ -112,9 +112,12 @@ public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageForma
 				.after(TT2_MINUS_UNARY).spaces(0)
 				.after(TT2_OUTLINE_TAG).spaces(1)
 				.after(TT2_OPEN_TAG).spaces(1)
+				.before(TT2_SEMI).spaces(0)
+				.after(TT2_SEMI).spaces(1)
 				.before(TT2_CLOSE_TAG).spaces(1)
 				.around(KEYWORDS_TOKENSET).spaces(1)
 				.before(MACRO_CONTENT).spaces(1)
+				.before(DIRECTIVE_POSTFIX).spaces(1)
 				.around(ALL_OPERATORS_TOKENSET).spaces(1)
 		;
 

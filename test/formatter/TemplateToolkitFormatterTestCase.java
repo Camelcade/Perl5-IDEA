@@ -146,4 +146,9 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeIn
 	{
 		doFormatTest();
 	}
+
+	public void testMultiDirectives() throws Exception
+	{
+		doFormatTest();
+	}
 }
