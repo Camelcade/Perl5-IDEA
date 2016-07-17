@@ -2,7 +2,7 @@
 <head></head>
 <body>
 
-[% cols = [
+[% cols 	=  [
 'red',
 'green',
 'blue'
@@ -17,8 +17,8 @@
 ]
 %]
 
-[% BLOCK name %]
-[% cols = [
+[% BLOCK 	name  %]
+[% cols= 	[
 'red',
 'green',
 'blue'

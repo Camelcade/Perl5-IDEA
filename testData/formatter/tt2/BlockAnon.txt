@@ -9,6 +9,12 @@ And Caesar's spirit, ranging for revenge,
 With Ate by his side come hot from hell,
 [% END %]
 
+[% julius = BLOCK %]
+And Caesar's spirit, ranging for revenge,
+    [% someval %]
+With Ate by his side come hot from hell,
+[% END %]
+
 <div>
     [% julius =
             BLOCK %]
