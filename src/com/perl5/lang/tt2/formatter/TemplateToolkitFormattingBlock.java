@@ -42,12 +42,13 @@ import java.util.List;
  */
 public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implements TemplateToolkitElementTypes
 {
-	// fixme return static modifier before release, made for hot swap
 	// getChildIndent being asked on try-catch, not branches
 	private final TokenSet NORMAL_INDENTED_CONTAINERS_PARENTS = TokenSet.create(
 			TRY_CATCH_BLOCK,
 			IF_BLOCK,
-			UNLESS_BLOCK
+			UNLESS_BLOCK,
+			SWITCH_BLOCK,
+			CASE_BLOCK
 	);
 
 	private final TokenSet NORMAL_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
@@ -103,7 +104,9 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			STOP_DIRECTIVE,
 
 			SWITCH_DIRECTIVE,
-			CASE_DIRECTIVE
+			CASE_DIRECTIVE,
+
+			THROW_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
@@ -114,7 +117,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	private final TokenSet ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS = TokenSet.create(
 			DEFAULT_DIRECTIVE,
 			SET_DIRECTIVE,
-			INCLUDE_DIRECTIVE
+			INCLUDE_DIRECTIVE,
+			EXCEPTION_ARGS
 	);
 
 	private final TokenSet ALIGNABLE_PAIR_EXPRESSIONS_CONTAINERS = TokenSet.create(
