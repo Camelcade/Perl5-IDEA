@@ -119,6 +119,11 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			NORMAL_INDENTED_CONTAINERS_PARENTS
 	);
 
+	private final TokenSet LEAF_BLOCKS = TokenSet.create(
+			TT2_RAWPERL_CODE,
+			TT2_PERL_CODE
+	);
+
 	private final TemplateToolkitFormattingModelBuilder myModelBuilder;
 	private final SpacingBuilder mySpacingBuilder;
 	private final InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
@@ -158,6 +163,12 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 	}
 
 	@Override
+	public boolean isLeaf()
+	{
+		return LEAF_BLOCKS.contains(PsiUtilCore.getElementType(myNode)) || super.isLeaf();
+	}
+
+	@Override
 	public Indent getIndent()
 	{
 		IElementType elementType = myNode.getElementType();
@@ -191,6 +202,10 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 		else if (parentNode != null && parentNode.getPsi() instanceof PsiExprImpl) // expression, too broad to unit with default and set
 		{
 			return Indent.getContinuationWithoutFirstIndent();
+		}
+		else if (parentNodeType == TT2_PERL_CODE || parentNodeType == TT2_RAWPERL_CODE)
+		{
+			return Indent.getNormalIndent();
 		}
 
 		return getForeignIndent();

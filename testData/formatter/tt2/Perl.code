@@ -1,0 +1,53 @@
+<html>
+<head></head>
+<body>
+
+[% PERL %]
+print $context->include('myfile');
+print $stash;
+print $output;
+print $error;
+[% END %]
+
+
+[% RAWPERL %]
+print $context->include('myfile');
+print $stash;
+print $output;
+if ($somethig)
+{
+use POSIX;
+POSIX  _exit();
+localtime;
+}
+
+print $error;
+[% END %]
+
+<div>
+[% PERL %]
+print $context->include('myfile');
+print $stash;
+print $output;
+print $error;
+[% END %]
+
+
+[% RAWPERL %]
+print $context->include('myfile');
+print $stash;
+print $output;
+if ($somethig)
+{
+use POSIX;
+POSIX  _exit();
+localtime;
+}
+
+print $error;
+[% END %]
+
+</div>
+
+</body>
+</html>
