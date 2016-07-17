@@ -1,0 +1,20 @@
+<html>
+<head></head>
+<body>
+
+[% STOP         IF      some.condition %]
+[% STOP
+IF
+some.condition %]
+
+
+<div>
+
+[% STOP         IF      some.condition %]
+[% STOP
+IF
+some.condition %]
+</div>
+
+</body>
+</html>

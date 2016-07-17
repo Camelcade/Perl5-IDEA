@@ -96,7 +96,8 @@ public class TemplateToolkitFormattingBlock extends TemplateLanguageBlock implem
 			NEXT_DIRECTIVE,
 			PROCESS_DIRECTIVE,
 			RETURN_DIRECTIVE,
-			SET_DIRECTIVE
+			SET_DIRECTIVE,
+			STOP_DIRECTIVE
 	);
 
 	private final TokenSet CONTINUOS_INDENTED_CONTAINERS_WITH_CLOSE_TAG = TokenSet.create(
