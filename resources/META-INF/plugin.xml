@@ -49,6 +49,7 @@
       <li>Template Toolkit 2:<ul>
           <li>Color settings page for Template Toolkit syntax</li>
           <li>Using keywords or operators in identifiers now shows adequate error message</li>
+          <li>Formatter is now available</li>
       </ul></li>
       </ul>
      </p>
