@@ -18,8 +18,6 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
@@ -600,13 +598,6 @@ public class PerlPsiUtil implements PerlElementTypes
 			return annotation;
 		}
 
-		// eol annotation
-		annotation = PerlPsiUtil.getEolAnnotationByClass(element, annotationClass);
-		if (annotation != null)
-		{
-			return annotation;
-		}
-
 		// before statement
 		PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 		if (statement != null)
@@ -635,40 +626,6 @@ public class PerlPsiUtil implements PerlElementTypes
 		});
 		//noinspection unchecked
 		return (T) result[0];
-	}
-
-	@Nullable
-	public static <T extends PerlAnnotation> T getEolAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass)
-	{
-		PerlAnnotation eolAnnotation = getEolAnnotation(element);
-		//noinspection unchecked
-		return annotationClass.isInstance(eolAnnotation) ? (T) eolAnnotation : null;
-	}
-
-
-	@Nullable
-	public static PerlAnnotation getEolAnnotation(@NotNull PsiElement element)
-	{
-		final Project project = element.getProject();
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(project);
-		final PsiFile file = element.getContainingFile();
-		final Document document = manager.getDocument(file);
-
-		if (document != null)
-		{
-			int elementEndOffset = element.getTextRange().getEndOffset();
-			int elementLastLine = document.getLineNumber(elementEndOffset);
-			int lineEndOffset = document.getLineEndOffset(elementLastLine);
-			if (lineEndOffset > 0)
-			{
-				PsiElement lastLineElement = file.findElementAt(lineEndOffset - 1);
-				if (lastLineElement != null)
-				{
-					return PsiTreeUtil.getParentOfType(lastLineElement, PerlAnnotation.class);
-				}
-			}
-		}
-		return null;
 	}
 
 

@@ -42,6 +42,7 @@
       <li>POD parts of the perl file are now available in the structure view as a separate branch</li>
       <li>Template language for Embedded Perl, Mojolicious, HTML::Mason and Mason2 is now configurable via Settings &gt; Template Data Language</li>
       <li>You may now disable notification about unconfigured Perl interpreter/Perl SDK, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1295">@mcrawford-dayspring</a></li>
+      <li>Experimental EOL annotations removed. They could be easily misguiding and buggy.</li>
       <li>Code generation:<ul>
         <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
         <li>Overriden methods now using proper self-reference variable from parent method, not <code>$self</code> in any case</li>
