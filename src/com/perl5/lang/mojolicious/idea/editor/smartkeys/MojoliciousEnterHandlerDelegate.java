@@ -18,11 +18,18 @@ package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,14 +40,66 @@ import org.jetbrains.annotations.Nullable;
 public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, MojoliciousElementTypes
 {
 	@Override
-	public Result preprocessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull Ref<Integer> caretOffset, @NotNull Ref<Integer> caretAdvance, @NotNull DataContext dataContext, @Nullable EditorActionHandler originalHandler)
+	public Result preprocessEnter(
+			@NotNull PsiFile file,
+			@NotNull Editor editor,
+			@NotNull Ref<Integer> caretOffset,
+			@NotNull Ref<Integer> caretAdvance,
+			@NotNull DataContext dataContext,
+			@Nullable EditorActionHandler originalHandler)
 	{
-		if (file.getViewProvider() instanceof MojoliciousFileViewProvider)
+		FileViewProvider viewProvider = file.getViewProvider();
+		if (viewProvider instanceof MojoliciousFileViewProvider)
 		{
-			boolean r = MojoliciousSmartKeysUtils.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER);
-			r = r || MojoliciousSmartKeysUtils.addEndMarker(editor, file, "\n% end\n");
+			if (!(MojoliciousSmartKeysUtils.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
+					MojoliciousSmartKeysUtils.addEndMarker(editor, file, "\n% end\n")))
+			{
+				addOutlineMarkerIfNeeded((MojoliciousFileViewProvider) viewProvider, caretOffset.get());
+			}
 		}
 		return Result.Continue;
+	}
+
+	protected void addOutlineMarkerIfNeeded(
+			@NotNull MojoliciousFileViewProvider viewProvider,
+			int offset
+	)
+	{
+		PsiElement element = viewProvider.findElementAt(offset, MojoliciousLanguage.INSTANCE);
+		while (element instanceof PsiWhiteSpace)
+		{
+			if (element.getText().charAt(0) == '\n')
+			{
+				return;
+			}
+			element = element.getNextSibling();
+		}
+
+		if (element == null)
+		{
+			return;
+		}
+
+		Document document = viewProvider.getDocument();
+		if (document == null)
+		{
+			return;
+		}
+
+		int elementLine = document.getLineNumber(offset);
+		int lineStart = document.getLineStartOffset(elementLine);
+		element = viewProvider.findElementAt(lineStart, MojoliciousLanguage.INSTANCE);
+
+		while (element instanceof PsiWhiteSpace || PsiUtilCore.getElementType(element) == MOJO_OUTER_ELEMENT_TYPE)
+		{
+			element = element.getNextSibling();
+		}
+
+		IElementType tokenType = PsiUtilCore.getElementType(element);
+		if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset)
+		{
+			document.insertString(offset, KEYWORD_MOJO_LINE_OPENER + " ");
+		}
 	}
 
 	@Override

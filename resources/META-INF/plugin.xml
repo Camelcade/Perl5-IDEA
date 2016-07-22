@@ -52,6 +52,9 @@
           <li>Using keywords or operators in identifiers now shows adequate error message</li>
           <li>Formatter is now available</li>
       </ul></li>
+      <li>Mojolicious:<ul>
+          <li>Hitting enter in the middle of the outlined line now adds an outline marker on the next line</li>
+      </ul></li>
       </ul>
      </p>
      <p>Fixes:
@@ -451,7 +454,7 @@
         <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
                       order="first"/>
         <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
-                              id="EmbeddedPerlEnterHandler" order="first"/>
+                              id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
         <lang.formatter language="Embedded Perl"
                         implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
 
@@ -509,7 +512,7 @@
                       order="first"/>
         <enterHandlerDelegate
                 implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
-                id="MojoliciousPerlEnterHandler" order="first"/>
+                id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
 
         <quoteHandler fileType="Mojolicious Perl5 Template"
                       className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>

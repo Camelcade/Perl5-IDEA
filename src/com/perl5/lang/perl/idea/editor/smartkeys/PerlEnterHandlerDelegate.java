@@ -55,6 +55,28 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 								  @NotNull DataContext dataContext,
 								  EditorActionHandler originalHandler)
 	{
+		if (file instanceof PerlFileImpl)
+		{
+			int offset = caretOffset.get();
+			PsiElement currentElement = file.findElementAt(offset);
+
+			//noinspection ConstantConditions
+			if (PsiUtilCore.getElementType(currentElement) == COMMENT_LINE && offset > currentElement.getTextOffset())
+			{
+				Document document = file.getViewProvider().getDocument();
+
+				if (document != null)
+				{
+					int lineNumber = document.getLineNumber(offset);
+					int lineEnd = document.getLineEndOffset(lineNumber);
+
+					if (lineEnd > offset)
+					{
+						document.insertString(offset, "# ");
+					}
+				}
+			}
+		}
 		return Result.Continue;
 	}
 
@@ -200,26 +222,26 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 					}
 				}
 			}
-			else if (offset > 0 && !(currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
-			{
-				Document document = file.getViewProvider().getDocument();
-
-				if (document != null)
-				{
-					int currentLine = document.getLineNumber(offset);
-					if (currentLine > 0)
-					{
-						int prevLineOffset = document.getLineEndOffset(currentLine - 1);
-						currentElement = file.findElementAt(prevLineOffset);
-
-						if (currentElement instanceof PsiWhiteSpace && PsiUtilCore.getElementType(currentElement.getPrevSibling()) == COMMENT_LINE)
-						{
-							document.insertString(offset, "# ");
-						}
-					}
-				}
-
-			}
+//			else if (offset > 0 && !(currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
+//			{
+//				Document document = file.getViewProvider().getDocument();
+//
+//				if (document != null)
+//				{
+//					int currentLine = document.getLineNumber(offset);
+//					if (currentLine > 0)
+//					{
+//						int prevLineOffset = document.getLineEndOffset(currentLine - 1);
+//						currentElement = file.findElementAt(prevLineOffset);
+//
+//						if (currentElement instanceof PsiWhiteSpace && PsiUtilCore.getElementType(currentElement.getPrevSibling()) == COMMENT_LINE)
+//						{
+//							document.insertString(offset, "# ");
+//						}
+//					}
+//				}
+//
+//			}
 
 		}
 		return Result.Continue;

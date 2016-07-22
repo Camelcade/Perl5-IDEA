@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -43,19 +44,15 @@ public class MojoliciousSmartKeysUtils implements MojoliciousElementTypes, PerlE
 	public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker)
 	{
 		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-		if (element != null)
+		IElementType elementType = PsiUtilCore.getElementType(element);
+		if (elementType == MOJO_BLOCK_OPENER || elementType == MOJO_BLOCK_EXPR_OPENER || elementType == MOJO_BLOCK_EXPR_ESCAPED_OPENER)
 		{
-			IElementType elementType = element.getNode().getElementType();
-			if (elementType == MOJO_BLOCK_OPENER || elementType == MOJO_BLOCK_EXPR_OPENER || elementType == MOJO_BLOCK_EXPR_ESCAPED_OPENER)
+			ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
+			if (nextSibling == null || !CLOSE_TOKENS.contains(nextSibling.getElementType()))
 			{
-				ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
-				if (nextSibling == null || !CLOSE_TOKENS.contains(nextSibling.getElementType()))
-				{
-					EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
-					return true;
-				}
+				EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+				return true;
 			}
-
 		}
 		return false;
 	}
@@ -63,21 +60,17 @@ public class MojoliciousSmartKeysUtils implements MojoliciousElementTypes, PerlE
 	public static boolean addEndMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker)
 	{
 		PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-		if (element != null)
+		IElementType elementType = PsiUtilCore.getElementType(element);
+		if (elementType == MOJO_BEGIN)
 		{
-			IElementType elementType = element.getNode().getElementType();
-			if (elementType == MOJO_BEGIN)
+			ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
+			if (nextSibling == null || nextSibling.getElementType() != BLOCK ||
+					nextSibling.getTreeNext() == null || nextSibling.getTreeNext().getElementType() != MOJO_END
+					)
 			{
-				ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
-				if (nextSibling == null || nextSibling.getElementType() != BLOCK ||
-						nextSibling.getTreeNext() == null || nextSibling.getTreeNext().getElementType() != MOJO_END
-						)
-				{
-					EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
-					return true;
-				}
+				EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+				return true;
 			}
-
 		}
 		return false;
 	}
