@@ -132,25 +132,28 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 		final int[] actualFiles = new int[]{0};
 		for (VirtualFile classRoot : ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots())
 		{
-			VfsUtil.processFilesRecursively(classRoot, new Processor<VirtualFile>()
+			if (classRoot.isValid() && classRoot.isDirectory())
 			{
-				@Override
-				public boolean process(VirtualFile virtualFile)
+				VfsUtil.processFilesRecursively(classRoot, new Processor<VirtualFile>()
 				{
-					if (isXSFile(virtualFile))
+					@Override
+					public boolean process(VirtualFile virtualFile)
 					{
-						if (!isFileUpToDate(virtualFile))
+						if (isXSFile(virtualFile))
 						{
-							return isActual = false;
+							if (!isFileUpToDate(virtualFile))
+							{
+								return isActual = false;
+							}
+							else
+							{
+								actualFiles[0]++;
+							}
 						}
-						else
-						{
-							actualFiles[0]++;
-						}
+						return true;
 					}
-					return true;
-				}
-			});
+				});
+			}
 		}
 
 		if (actualFiles[0] > 0)
