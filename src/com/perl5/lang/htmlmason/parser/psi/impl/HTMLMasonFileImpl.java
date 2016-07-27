@@ -63,7 +63,7 @@ import java.util.Set;
  */
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 {
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 	protected int myMasonChangeCounter;
 	protected Map<Integer, Boolean> myPerlLinesMap = new THashMap<Integer, Boolean>();
 	protected MyBlocksCache myBlocksCache;
@@ -186,23 +186,25 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		if (myMasonChangeCounter != HTMLMasonSettings.getInstance(getProject()).getChangeCounter())
+
+		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
+		if (myImplicitVariables == null || myMasonChangeCounter != settings.getChangeCounter())
 		{
-			fillImplicitVariables();
+			myImplicitVariables = buildImplicitVariables(settings);
+			myMasonChangeCounter = settings.getChangeCounter();
 		}
 		return myImplicitVariables;
 	}
 
-	protected void fillImplicitVariables()
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables(HTMLMasonSettings settings)
 	{
-		myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 
 		if (isValid())
 		{
-			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
-			MasonCoreUtils.fillVariablesList(this, myImplicitVariables, settings.globalVariables);
-			myMasonChangeCounter = settings.getChangeCounter();
+			MasonCoreUtils.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
 		}
+		return newImplicitVariables;
 	}
 
 	@Nullable

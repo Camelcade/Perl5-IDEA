@@ -47,31 +47,29 @@ import java.util.List;
  */
 public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl implements MasonNamespaceDefinition
 {
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 	protected int mySettingsChangeCounter;
 
 	public MasonNamespaceDefinitionImpl(ASTNode node)
 	{
 		super(node);
-		fillImplicitVariables();
 	}
 
 	public MasonNamespaceDefinitionImpl(PerlNamespaceDefinitionStub stub, IStubElementType nodeType)
 	{
 		super(stub, nodeType);
-		fillImplicitVariables();
 	}
 
-	protected void fillImplicitVariables()
+	@NotNull
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables(MasonSettings masonSettings)
 	{
-		myImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 
 		if (isValid())
 		{
-			MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-			MasonCoreUtils.fillVariablesList(this, myImplicitVariables, masonSettings.globalVariables);
-			mySettingsChangeCounter = masonSettings.getChangeCounter();
+			MasonCoreUtils.fillVariablesList(this, newImplicitVariables, masonSettings.globalVariables);
 		}
+		return newImplicitVariables;
 	}
 
 	@Override
@@ -376,9 +374,12 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		if (mySettingsChangeCounter != MasonSettings.getInstance(getProject()).getChangeCounter())
+		MasonSettings settings = MasonSettings.getInstance(getProject());
+		if (myImplicitVariables == null || mySettingsChangeCounter != settings.getChangeCounter())
 		{
-			fillImplicitVariables();
+			myImplicitVariables = buildImplicitVariables(settings);
+			mySettingsChangeCounter = settings.getChangeCounter();
+
 		}
 		return myImplicitVariables;
 	}

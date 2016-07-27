@@ -43,33 +43,39 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
 	}
 
 	@NotNull
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
+	{
+		List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>();
+		variables.add(new PerlVariableLightImpl(
+				getManager(),
+				PerlLanguage.INSTANCE,
+				"$context",
+				"Template::Context",
+				true,
+				false,
+				false,
+				this
+		));
+		variables.add(new PerlVariableLightImpl(
+				getManager(),
+				PerlLanguage.INSTANCE,
+				"$stash",
+				"Template::Stash",
+				true,
+				false,
+				false,
+				this
+		));
+		return variables;
+	}
+
+	@NotNull
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
 		if (myImplicitVariables == null)
 		{
-			List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>();
-			variables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					"$context",
-					"Template::Context",
-					true,
-					false,
-					false,
-					this
-			));
-			variables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					"$stash",
-					"Template::Stash",
-					true,
-					false,
-					false,
-					this
-			));
-			myImplicitVariables = variables;
+			myImplicitVariables = buildImplicitVariables();
 		}
 		return myImplicitVariables;
 	}

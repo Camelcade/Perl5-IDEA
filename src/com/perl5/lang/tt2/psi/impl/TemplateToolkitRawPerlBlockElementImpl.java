@@ -23,7 +23,6 @@ import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import com.perl5.lang.tt2.psi.TemplateToolkitRawPerlBlockElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,8 +30,6 @@ import java.util.List;
  */
 public class TemplateToolkitRawPerlBlockElementImpl extends TemplateToolkitPerlBlockElementImpl implements TemplateToolkitRawPerlBlockElement
 {
-	private List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
-
 	public TemplateToolkitRawPerlBlockElementImpl(@NotNull ASTNode node)
 	{
 		super(node);
@@ -40,32 +37,28 @@ public class TemplateToolkitRawPerlBlockElementImpl extends TemplateToolkitPerlB
 
 	@NotNull
 	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
 	{
-		if (myImplicitVariables == null)
-		{
-			List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>(super.getImplicitVariables());
-			variables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					"$output",
-					true,
-					false,
-					false,
-					this
-			));
-			variables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					"$error",
-					true,
-					false,
-					false,
-					this
-			));
-			myImplicitVariables = variables;
-		}
-		return myImplicitVariables;
+		List<PerlVariableDeclarationWrapper> variables = super.buildImplicitVariables();
+		variables.add(new PerlVariableLightImpl(
+				getManager(),
+				PerlLanguage.INSTANCE,
+				"$output",
+				true,
+				false,
+				false,
+				this
+		));
+		variables.add(new PerlVariableLightImpl(
+				getManager(),
+				PerlLanguage.INSTANCE,
+				"$error",
+				true,
+				false,
+				false,
+				this
+		));
+		return variables;
 	}
 }
 

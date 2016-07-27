@@ -21,7 +21,11 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason2.psi.MasonFilterDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 08.01.2016.
@@ -40,12 +44,11 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 		super(stub, nodeType);
 	}
 
-	protected void fillImplicitVariables()
+	@NotNull
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
 	{
-		super.fillImplicitVariables();
-		if (IMPLICIT_VARIABLES != null)
-		{
-			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
+		newImplicitVariables.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					YIELD_VARIABLE_NAME,
@@ -54,6 +57,6 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 					false,
 					this
 			));
-		}
+		return newImplicitVariables;
 	}
 }

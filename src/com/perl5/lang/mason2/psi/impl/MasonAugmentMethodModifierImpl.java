@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl implements MasonAugmentMethodModifier, Mason2ElementTypes
 {
-	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = null;
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 
 	public MasonAugmentMethodModifierImpl(ASTNode node)
 	{
@@ -58,12 +58,13 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
 		return null;
 	}
 
-	protected void fillImplicitVariables()
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
 	{
-		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+
 		if (isValid())
 		{
-			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+			newImplicitVariables.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
@@ -73,17 +74,18 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
 					this
 			));
 		}
+		return newImplicitVariables;
 	}
 
 	@NotNull
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		if (IMPLICIT_VARIABLES == null)
+		if (myImplicitVariables == null)
 		{
-			fillImplicitVariables();
+			myImplicitVariables = buildImplicitVariables();
 		}
-		return IMPLICIT_VARIABLES;
+		return myImplicitVariables;
 	}
 
 	@Nullable

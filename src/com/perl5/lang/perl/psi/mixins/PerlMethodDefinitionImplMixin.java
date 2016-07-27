@@ -40,7 +40,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 {
 	// fixme see the #717
 	protected static final String DEFAULT_INVOCANT_NAME = "$self";
-	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES;
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
 
 	public PerlMethodDefinitionImplMixin(@NotNull ASTNode node)
 	{
@@ -58,12 +58,13 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		return DEFAULT_INVOCANT_NAME;
 	}
 
-	protected void fillImplicitVariables()
+	@NotNull
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
 	{
-		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 		if (isValid())
 		{
-			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+			newImplicitVariables.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					getDefaultInvocantName(),
@@ -73,6 +74,7 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 					this
 			));
 		}
+		return newImplicitVariables;
 	}
 
 	@Override
@@ -142,11 +144,11 @@ public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBas
 		}
 		else
 		{
-			if (IMPLICIT_VARIABLES == null)
+			if (myImplicitVariables == null)
 			{
-				fillImplicitVariables();
+				myImplicitVariables = buildImplicitVariables();
 			}
-			return IMPLICIT_VARIABLES;
+			return myImplicitVariables;
 		}
 	}
 }

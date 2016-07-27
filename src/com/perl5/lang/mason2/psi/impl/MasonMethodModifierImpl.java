@@ -36,7 +36,7 @@ import java.util.List;
  */
 public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl implements MasonMethodModifier
 {
-	protected List<PerlVariableDeclarationWrapper> IMPLICIT_VARIABLES = null;
+	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 
 	public MasonMethodModifierImpl(ASTNode node)
 	{
@@ -51,12 +51,13 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
 		return null;
 	}
 
-	protected void fillImplicitVariables()
+	@NotNull
+	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
 	{
-		IMPLICIT_VARIABLES = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 		if (isValid())
 		{
-			IMPLICIT_VARIABLES.add(new PerlVariableLightImpl(
+			newImplicitVariables.add(new PerlVariableLightImpl(
 					getManager(),
 					PerlLanguage.INSTANCE,
 					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
@@ -66,6 +67,7 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
 					this
 			));
 		}
+		return newImplicitVariables;
 	}
 
 
@@ -73,10 +75,10 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
 	@Override
 	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
 	{
-		if (IMPLICIT_VARIABLES == null)
+		if (myImplicitVariables == null)
 		{
-			fillImplicitVariables();
+			myImplicitVariables = buildImplicitVariables();
 		}
-		return IMPLICIT_VARIABLES;
+		return myImplicitVariables;
 	}
 }
