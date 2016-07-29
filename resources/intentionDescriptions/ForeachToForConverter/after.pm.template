@@ -1,0 +1,4 @@
+for (my $idx = 0; $idx < scalar(@list); $idx++) {
+    my $element = $list[$idx];
+    say $element;
+}

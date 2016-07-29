@@ -916,6 +916,10 @@
             <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
         </intentionAction>
 
+        <intentionAction>
+            <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverter</className>
+            <category>Perl</category>
+        </intentionAction>
     </extensions>
 
     <application-components>
