@@ -52,7 +52,7 @@ public class PerlScopeUtil
 			{
 				if (run instanceof PerlFileImpl)
 				{
-					run = ((PerlFileImpl) ((PerlFileImpl) run).getOriginalFile()).getFileContext();
+					run = ((PerlFileImpl) ((PerlFileImpl) run).getOriginalFile()).getContext();
 				}
 				else
 				{

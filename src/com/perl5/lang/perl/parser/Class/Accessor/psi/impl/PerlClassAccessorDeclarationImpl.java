@@ -80,7 +80,7 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 		}
 
 		// fixme here should be some walking up visitor
-		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(this, PerlNamespaceContainer.class);
+		PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(this);
 
 		return namespaceContainer != null && getFBPElement(namespaceContainer.getFirstChild(), this) != null;
 	}

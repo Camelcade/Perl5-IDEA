@@ -42,10 +42,7 @@ import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -240,6 +237,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		PsiFile file = element.getContainingFile();
 		if (file instanceof PerlFileImpl)
 		{
+			PsiElement contextParent = file.getContext();
+			PsiElement realParent = file.getParent();
+
+			if (contextParent != null && !contextParent.equals(realParent))
+			{
+				return getContextPackageName(contextParent);
+			}
+
 			return ((PerlFileImpl) file).getPackageName();
 		}
 		else
@@ -248,6 +253,29 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
+	// fixme shouldn't we have recursion protection here?
+	@Nullable
+	public static PerlNamespaceContainer getNamespaceContainerForElement(@Nullable PsiElement element)
+	{
+		if (element == null)
+		{
+			return null;
+		}
+
+		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(element, PerlNamespaceContainer.class);
+
+		if (namespaceContainer instanceof PerlFileImpl)
+		{
+			PsiElement contextParent = namespaceContainer.getContext();
+			if (contextParent != null && !contextParent.equals(namespaceContainer.getParent()))
+			{
+				return getNamespaceContainerForElement(contextParent);
+			}
+		}
+		return namespaceContainer;
+	}
+
+	// fixme take fileContext in account?
 	public static PerlNamespaceDefinition getContainingNamespace(PsiElement element)
 	{
 		return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinition.class);

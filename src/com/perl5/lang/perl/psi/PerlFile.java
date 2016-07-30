@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
@@ -88,4 +89,12 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @return answer
 	 */
 	boolean isPerlTidyReformattable();
+
+
+	/**
+	 * Overrides file context; if null - using default context resoving implementation
+	 *
+	 * @param fileContext new file context
+	 */
+	void setFileContext(@Nullable PsiElement fileContext);
 }

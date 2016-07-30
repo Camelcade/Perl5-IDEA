@@ -21,13 +21,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +63,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			// imports
 			PerlVariableType actualType = myVariable.getActualType();
 			Project project = myVariable.getProject();
-			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(myVariable, PerlNamespaceContainer.class);
+			PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
 
 			if (namespaceContainer != null) // not true if LPE in TemplateToolkit
 			{

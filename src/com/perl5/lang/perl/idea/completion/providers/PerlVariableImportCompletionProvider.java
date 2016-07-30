@@ -21,12 +21,12 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +49,7 @@ public class PerlVariableImportCompletionProvider extends CompletionProvider<Com
 			return;
 		}
 
-		PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(perlVariable, PerlNamespaceContainer.class);
+		PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(perlVariable);
 
 		if (namespaceContainer == null)
 		{

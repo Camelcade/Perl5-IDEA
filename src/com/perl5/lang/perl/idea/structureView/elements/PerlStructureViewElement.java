@@ -183,7 +183,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			// global variables
 			for (PerlVariableDeclarationWrapper child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationWrapper.class))
 			{
-				if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child)))
 				{
 					result.add(new PerlVariableDeclarationStructureViewElement(child));
 				}
@@ -319,7 +319,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			// containing globs
 			for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class))
 			{
-				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child)))
 				{
 					implementedMethods.add(child.getName());
 					result.add(new PerlGlobStructureViewElement(child));
@@ -329,7 +329,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			// containing subs declarations
 			for (PerlSubDeclaration child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclaration.class))
 			{
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child)))
 				{
 					result.add(new PerlSubStructureViewElement(child));
 				}
@@ -338,7 +338,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 			// containing subs definitions, currently only supports PerlHierarchyViewElementsProvider
 			for (PerlSubDefinitionBase child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinitionBase.class))
 			{
-				if (myElement.isEquivalentTo(PsiTreeUtil.getParentOfType(child, PerlNamespaceContainer.class)))
+				if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child)))
 				{
 					if (child instanceof PerlHierarchyViewElementsProvider)
 					{

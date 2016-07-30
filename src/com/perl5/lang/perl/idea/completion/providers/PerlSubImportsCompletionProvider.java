@@ -21,7 +21,6 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
@@ -76,7 +75,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 		Project project = method.getProject();
 		if (!method.hasExplicitNamespace())
 		{
-			PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(position, PerlNamespaceContainer.class);
+			PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
 			if (namespaceContainer != null)
 			{
 				fillWithNamespaceImports(namespaceContainer, resultSet);

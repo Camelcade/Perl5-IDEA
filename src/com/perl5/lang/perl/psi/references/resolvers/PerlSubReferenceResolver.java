@@ -22,7 +22,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.*;
@@ -149,7 +148,7 @@ public class PerlSubReferenceResolver implements ResolveCache.PolyVariantResolve
 					if (expliclitPackageElement == null)
 					{
 						// check for imports to the current file
-						PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(subNameElement, PerlNamespaceContainer.class);
+						PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(subNameElement);
 
 						if (namespaceContainer != null)
 						{

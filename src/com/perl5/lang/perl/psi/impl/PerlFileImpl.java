@@ -24,6 +24,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.ObjectStubTree;
@@ -503,13 +504,22 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		return true;
 	}
 
-	public PsiElement getFileContext()
+	public PsiElement getContext()
 	{
-		return fileContext;
+		return fileContext == null ? super.getContext() : fileContext;
 	}
 
 	public void setFileContext(PsiElement fileContext)
 	{
 		this.fileContext = fileContext;
+	}
+
+	// fixme we could use some SmartPsiElementPointer and UserData to hold the context
+	@Override
+	protected PsiFileImpl clone()
+	{
+		PerlFileImpl clone = (PerlFileImpl) super.clone();
+		clone.setFileContext(fileContext);
+		return clone;
 	}
 }
