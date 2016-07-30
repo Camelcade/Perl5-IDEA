@@ -20,16 +20,12 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.RefactoringFactory;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -142,55 +138,4 @@ public class PerlElementFactory
 				createFileFromText("file.dummy", fileType, text);
 	}
 
-	public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
-													  @NotNull PsiPerlExpr lexicalVariableDeclaration,
-													  @NotNull PsiPerlForListEpxr listExpr,
-													  @NotNull PsiPerlBlock forBlock)
-	{
-		// check if listExpr is a single array or a list expression
-		boolean isSingleArray = listExpr.getFirstChild() instanceof PsiPerlArrayVariable
-				&& (listExpr.getChildren().length == 1);
-
-		String arrayName;
-		if (isSingleArray) {
-			PsiPerlArrayVariable childArray = (PsiPerlArrayVariable) listExpr.getFirstChild();
-			arrayName = childArray.getName();
-		} else {
-			arrayName = "list";
-		}
-
-		// Assign iterationVariable = iterationArray[$idx]
-		String assignStatementStr = String.format("%s = $%s[$idx];",
-				lexicalVariableDeclaration.getText(),
-				arrayName);
-		PsiPerlStatement assignStatement = createPsiOfTypeFromSyntax(project, assignStatementStr, PsiPerlStatement.class);
-
-		// Define where to insert the new statement
-		List<PsiPerlStatement> statementList = forBlock.getStatementList();
-		PsiElement anchorPoint = statementList.isEmpty() ? forBlock.getLastChild() : statementList.get(0);
-		forBlock.addBefore(assignStatement, anchorPoint);
-
-		String indexedForSyntax = String.format("for (my $idx = 0; $idx < scalar(@%s); $idx++) %s",
-				arrayName,
-				forBlock.getText());
-
-		PsiPerlForCompound result = createPsiOfTypeFromSyntax(project, indexedForSyntax, PsiPerlForCompound.class);
-
-		if (!isSingleArray) {
-			// declare and initialize the new array before the new for
-			String newListSyntax = String.format("my @%s = %s;\n", arrayName, listExpr.getText());
-			PsiPerlStatement newListStatement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiPerlStatement.class);
-			PsiWhiteSpace newLineElement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiWhiteSpace.class);
-			result.addBefore(newLineElement, result.getFirstChild());
-			result.addBefore(newListStatement, result.getFirstChild());
-		}
-
-		assert result != null : "While creating PsiPerlForCompound";
-		return result;
-	}
-
-	private static <T extends PsiElement> T createPsiOfTypeFromSyntax(Project project, String syntax, Class<T> type)
-	{
-		return PsiTreeUtil.findChildOfType(createFile(project, syntax), type);
-	}
 }
