@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.move;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -91,26 +92,33 @@ public class PerlMoveFileHandler extends MoveFileHandler
 			String newRelativePath = VfsUtil.getRelativePath(virtualFile, newInnermostRoot);
 			String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
-			RenameRefactoring refactoring = null;
+			final RenameRefactoring[] refactoring = {null};
 
 			for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinition.class))
 			{
 				if (originalPackageName.equals(namespaceDefinition.getPackageName()))
 				{
-					if (refactoring == null)
+					if (refactoring[0] == null)
 					{
-						refactoring = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);
+						refactoring[0] = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);
 					}
 					else
 					{
-						refactoring.addElement(namespaceDefinition, newPackageName);
+						refactoring[0].addElement(namespaceDefinition, newPackageName);
 					}
 				}
 			}
 
-			if (refactoring != null)
+			if (refactoring[0] != null)
 			{
-				refactoring.run();
+				ApplicationManager.getApplication().invokeLater(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						refactoring[0].run();
+					}
+				});
 			}
 		}
 	}

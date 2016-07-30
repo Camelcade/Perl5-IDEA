@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -76,26 +77,33 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 
 							if (psiFile != null)
 							{
-								RenameRefactoring refactoring = null;
+								final RenameRefactoring[] refactoring = {null};
 
 								for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
 								{
 									if (currentPackageName.equals(namespaceDefinition.getName()))
 									{
-										if (refactoring == null)
+										if (refactoring[0] == null)
 										{
-											refactoring = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
+											refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
 										}
 										else
 										{
-											refactoring.addElement(namespaceDefinition, newPackageName);
+											refactoring[0].addElement(namespaceDefinition, newPackageName);
 										}
 									}
 								}
 
-								if (refactoring != null)
+								if (refactoring[0] != null)
 								{
-									refactoring.run();
+									ApplicationManager.getApplication().invokeLater(new Runnable()
+									{
+										@Override
+										public void run()
+										{
+											refactoring[0].run();
+										}
+									});
 								}
 							}
 						}

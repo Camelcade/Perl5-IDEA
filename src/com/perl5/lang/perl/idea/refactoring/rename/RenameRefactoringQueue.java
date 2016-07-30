@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -27,8 +28,8 @@ import com.intellij.refactoring.RenameRefactoring;
  */
 public class RenameRefactoringQueue implements Runnable
 {
+	private final RenameRefactoring[] myRefactoring = {null};
 	private Project myProject;
-	private RenameRefactoring myRefactoring;
 
 	public RenameRefactoringQueue(Project project)
 	{
@@ -39,22 +40,29 @@ public class RenameRefactoringQueue implements Runnable
 	{
 		if (element instanceof PsiNamedElement)
 		{
-			if (myRefactoring == null)
+			if (myRefactoring[0] == null)
 			{
-				myRefactoring = RefactoringFactory.getInstance(myProject).createRename(element, newName);
+				myRefactoring[0] = RefactoringFactory.getInstance(myProject).createRename(element, newName);
 			}
 			else
 			{
-				myRefactoring.addElement(element, newName);
+				myRefactoring[0].addElement(element, newName);
 			}
 		}
 	}
 
 	public void run()
 	{
-		if (myRefactoring != null)
+		if (myRefactoring[0] != null)
 		{
-			myRefactoring.run();
+			ApplicationManager.getApplication().invokeLater(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					myRefactoring[0].run();
+				}
+			});
 		}
 	}
 
