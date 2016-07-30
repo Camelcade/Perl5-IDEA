@@ -67,6 +67,7 @@
       <li>Occasional sharp addition on the enter typing in Mojo templates</li>
       <li>Occasional exceptions in PyCharm</li>
       <li>Occasional exceptions in Mason, HTML::Mason files since 2016.2</li>
+      <li>ENV variables persistence in Run/Debug configurations, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1315">@prastovac</a></li>
       </ul>
      </p>
     ]]>

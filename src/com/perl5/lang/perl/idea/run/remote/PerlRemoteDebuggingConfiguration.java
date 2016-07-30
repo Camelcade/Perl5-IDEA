@@ -24,10 +24,10 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.xmlb.XmlSerializer;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -70,14 +70,14 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase imple
 	public void readExternal(Element element) throws InvalidDataException
 	{
 		super.readExternal(element);
-		DefaultJDOMExternalizer.readExternal(this, element);
+		XmlSerializer.deserializeInto(this, element);
 	}
 
 	@Override
 	public void writeExternal(Element element) throws WriteExternalException
 	{
 		super.writeExternal(element);
-		DefaultJDOMExternalizer.writeExternal(this, element);
+		XmlSerializer.serializeInto(this, element);
 	}
 
 	@Nullable

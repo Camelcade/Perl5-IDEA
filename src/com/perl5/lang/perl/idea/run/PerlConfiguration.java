@@ -27,12 +27,12 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.net.NetUtils;
+import com.intellij.util.xmlb.XmlSerializer;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.apache.commons.lang.StringUtils;
@@ -54,7 +54,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 
 	public String PERL_PARAMETERS = "";
 	public String WORKING_DIRECTORY;
-	public Map<String, String> ENV = new HashMap<String, String>();
+	public Map<String, String> ENVS = new HashMap<String, String>();
 	public boolean PASS_PARENT_ENVS = true;
 	public String CHARSET;
 	public boolean USE_ALTERNATIVE_SDK;
@@ -78,14 +78,14 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	public void readExternal(Element element) throws InvalidDataException
 	{
 		super.readExternal(element);
-		DefaultJDOMExternalizer.readExternal(this, element);
+		XmlSerializer.deserializeInto(this, element);
 	}
 
 	@Override
 	public void writeExternal(Element element) throws WriteExternalException
 	{
 		super.writeExternal(element);
-		DefaultJDOMExternalizer.writeExternal(this, element);
+		XmlSerializer.serializeInto(this, element);
 	}
 
 	@NotNull
@@ -189,13 +189,13 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 	@Override
 	public Map<String, String> getEnvs()
 	{
-		return ENV;
+		return ENVS;
 	}
 
 	@Override
 	public void setEnvs(@NotNull Map<String, String> map)
 	{
-		ENV = new HashMap<String, String>(map);
+		ENVS = map;
 	}
 
 	@Override
