@@ -148,13 +148,12 @@ public class PerlElementFactory
 													  @NotNull PsiPerlBlock forBlock)
 	{
 		// check if listExpr is a single array or a list expression
-		PsiPerlArrayVariable childArray = PsiTreeUtil.findChildOfType(listExpr, PsiPerlArrayVariable.class);
-		boolean isSingleArray =
-				childArray != null
+		boolean isSingleArray = listExpr.getFirstChild() instanceof PsiPerlArrayVariable
 				&& (listExpr.getChildren().length == 1);
 
 		String arrayName;
 		if (isSingleArray) {
+			PsiPerlArrayVariable childArray = (PsiPerlArrayVariable) listExpr.getFirstChild();
 			arrayName = childArray.getName();
 		} else {
 			arrayName = "list";
