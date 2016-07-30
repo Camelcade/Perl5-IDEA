@@ -204,6 +204,11 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 
 	public void reparseXSubs()
 	{
+		if (myProject.isDisposed())
+		{
+			return;
+		}
+
 		if (parserTask != null)
 		{
 			Messages.showErrorDialog(myProject, "Another process currently deparsing XSubs, please wait for further notifications", "XSubs Deparsing In Process");
