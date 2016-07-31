@@ -138,5 +138,4 @@ public class PerlElementFactory
 				createFileFromText("file.dummy", fileType, text);
 	}
 
-
 }
