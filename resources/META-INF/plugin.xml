@@ -44,6 +44,7 @@
       <li>You may now disable notification about unconfigured Perl interpreter/Perl SDK, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1295">@mcrawford-dayspring</a></li>
       <li>Experimental EOL annotations removed. They could be easily misguiding and buggy.</li>
       <li>New inspection checks that perl identifiers in the non-utf files are correct, according to the <a href="http://perldoc.perl.org/perldata.html#Identifier-parsing">perldoc</a>. Thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1309">@almirus</a></li>
+      <li>New intention allows you to convert foreach loop to for, by <a href="https://github.com/brnrc">@bcardoso</a></li>
       <li>Improved completion and resolving for code in breakpoints conditions and watches</li>
       <li>Code generation:<ul>
         <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
