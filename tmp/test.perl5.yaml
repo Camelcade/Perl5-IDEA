@@ -1,0 +1,17 @@
+somemethod:
+  returns: Foo::Bar
+  method: yes
+  deprecated: yes
+someothermethod:
+  returns: Foo::Bar::Baz
+  method: no
+  deprecated: no
+somethirdmethod: |
+  returns Bar::Baz
+  method
+  deprected
+someforthmethod: |
+  returns Bar::Bar
+  method
+  deprected
+
