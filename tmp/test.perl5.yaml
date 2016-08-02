@@ -7,9 +7,9 @@ someothermethod:
   method: no
   deprecated: no
 somethirdmethod: |
-  returns Bar::Baz
-  method
-  deprected
+  #@returns Bar::Baz
+  #@method
+  #@deprected
 someforthmethod: |
   returns Bar::Bar
   method

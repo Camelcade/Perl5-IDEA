@@ -52,7 +52,7 @@
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
-    <depends optional="true" config-file="yaml-deps.xml">org.jetbrains.plugins.yaml</depends>
+    <depends optional="true">org.jetbrains.plugins.yaml</depends>
 
     <extensionPoints>
         <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
@@ -182,6 +182,7 @@
                 implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
+        <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlYamlAnnotationsInjector"/>
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                       id="PerlTypedHandler" order="first"/>

@@ -16,25 +16,44 @@
 
 package com.perl5.lang.perl.idea.intellilang;
 
-import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.InjectedLanguagePlaces;
 import com.intellij.psi.LanguageInjector;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.yaml.psi.impl.YAMLScalarTextImpl;
 
 /**
  * Created by hurricup on 01.08.2016.
  */
 public class PerlYamlAnnotationsInjector implements LanguageInjector
 {
+	static Class<?> ourScalarListClass;
+
+	static
+	{
+		try
+		{
+			ourScalarListClass = Class.forName("org.jetbrains.yaml.psi.impl.YAMLScalarListImpl", true, PerlYamlAnnotationsInjector.class.getClassLoader());
+			if (!PsiLanguageInjectionHost.class.isAssignableFrom(ourScalarListClass))
+			{
+				ourScalarListClass = null;
+			}
+		}
+		catch (ClassNotFoundException ignored)
+		{
+		}
+	}
+
+
 	@Override
 	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar)
 	{
-		if (host instanceof YAMLScalarTextImpl)
+		if (host.getClass() != ourScalarListClass)
 		{
-			injectionPlacesRegistrar.addPlace(PerlLanguage.INSTANCE, new TextRange(0, host.getTextLength()), "#@", null);
+			return;
 		}
+
+		injectionPlacesRegistrar.addPlace(PerlLanguage.INSTANCE, ElementManipulators.getManipulator(host).getRangeInElement(host), null, null);
 	}
 }
