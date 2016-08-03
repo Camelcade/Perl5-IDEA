@@ -27,6 +27,7 @@ import javax.swing.*;
 public class PerlIcons
 {
 	public static final Icon PERL_LANGUAGE_ICON = IconLoader.getIcon("/icons/perl5language.png");
+	public static final Icon PERL_EXTERNAL_ANNOTATIONS_LANGUAGE_ICON = IconLoader.getIcon("/icons/perl5language.png");
 
 	public static final Icon PERL_OPTION = IconLoader.getIcon("/icons/option.png");
 	public static final Icon PERL_OPTIONS = IconLoader.getIcon("/icons/options.png");

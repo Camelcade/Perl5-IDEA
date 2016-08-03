@@ -347,6 +347,11 @@
         <lang.findUsagesProvider language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
+        <!-- Perl External Annotations -->
+        <fileTypeFactory implementation="com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileTypeFactory"/>
+
+        <!-- End of Perl External Annotations -->
+
         <!-- Template Toolkit -->
         <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
         <lang.fileViewProviderFactory language="Template Toolkit 2"
