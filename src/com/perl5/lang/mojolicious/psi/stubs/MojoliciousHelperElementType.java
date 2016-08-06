@@ -61,7 +61,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
 				psi.getPackageName(),
 				psi.getSubName(),
 				psi.getSubArgumentsList(),
-				psi.getSubAnnotations(),
+				psi.getLocalSubAnnotations(),
 				this
 		);
 	}

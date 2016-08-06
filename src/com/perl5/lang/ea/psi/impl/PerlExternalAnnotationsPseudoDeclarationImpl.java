@@ -21,7 +21,9 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationsPseudoDeclaration;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
 import com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 06.08.2016.
@@ -38,4 +40,11 @@ public class PerlExternalAnnotationsPseudoDeclarationImpl extends PerlSubDeclara
 		super(stub, nodeType);
 	}
 
+
+	@Nullable
+	@Override
+	public PerlSubAnnotations getExternalSubAnnotations()
+	{
+		return null;
+	}
 }

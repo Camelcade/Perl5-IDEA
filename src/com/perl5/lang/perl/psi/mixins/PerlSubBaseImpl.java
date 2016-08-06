@@ -166,6 +166,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return PerlPsiUtil.collectAnnotations(this);
 	}
 
+	@Nullable
 	@Override
 	public PerlSubAnnotations getSubAnnotations()
 	{
@@ -175,9 +176,28 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 			return stub.getSubAnnotations();
 		}
 
+		PerlSubAnnotations annotations = getLocalSubAnnotations();
+		if (annotations != null)
+		{
+			return annotations;
+		}
+
+		return getExternalSubAnnotations();
+	}
+
+	@Nullable
+	@Override
+	public PerlSubAnnotations getLocalSubAnnotations()
+	{
+		List<PerlAnnotation> annotationList = getAnnotationList();
+		if (annotationList.isEmpty())
+		{
+			return null;
+		}
+
 		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
 
-		for (PerlAnnotation annotation : getAnnotationList())
+		for (PerlAnnotation annotation : annotationList)
 		{
 			if (annotation instanceof PerlAnnotationAbstractImpl)
 			{
@@ -210,16 +230,33 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return myAnnotations;
 	}
 
+	@Nullable
+	@Override
+	public PerlSubAnnotations getExternalSubAnnotations()
+	{
+		return null;
+	}
+
 	@Override
 	public boolean isDeprecated()
 	{
-		return getSubAnnotations().isDeprecated();
+		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		return subAnnotations != null && subAnnotations.isDeprecated();
 	}
 
 	@Override
 	public boolean isMethod()
 	{
-		return getSubAnnotations().isMethod();
+		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		return subAnnotations != null && subAnnotations.isMethod();
+	}
+
+	@Nullable
+	@Override
+	public String getReturns()
+	{
+		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		return subAnnotations != null ? subAnnotations.getReturns() : null;
 	}
 
 	@Override

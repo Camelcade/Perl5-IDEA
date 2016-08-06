@@ -55,7 +55,7 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	@Override
 	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
 	{
-		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubAnnotations());
+		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalSubAnnotations());
 	}
 
 
@@ -71,7 +71,16 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	{
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getSubName());
-		stub.getSubAnnotations().serialize(dataStream);
+		PerlSubAnnotations subAnnotations = stub.getSubAnnotations();
+		if (subAnnotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			subAnnotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -80,7 +89,11 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	{
 		String packageName = dataStream.readName().toString();
 		String subName = dataStream.readName().toString();
-		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
+		PerlSubAnnotations annotations = null;
+		if (dataStream.readBoolean())
+		{
+			annotations = PerlSubAnnotations.deserialize(dataStream);
+		}
 		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations);
 	}
 

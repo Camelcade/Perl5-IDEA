@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.stubs;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -44,6 +45,7 @@ public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<St
 	 *
 	 * @return PerlSubAnnotation object
 	 */
+	@Nullable
 	PerlSubAnnotations getSubAnnotations();
 
 	/**

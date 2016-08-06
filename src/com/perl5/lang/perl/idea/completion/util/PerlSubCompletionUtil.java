@@ -44,7 +44,7 @@ public class PerlSubCompletionUtil
 		LookupElementBuilder newElement = LookupElementBuilder
 				.create(subName)
 				.withIcon(subDefinition.getIcon(0))
-				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated())
+				.withStrikeoutness(subDefinition.isDeprecated())
 				.withTypeText(subDefinition.getPackageName(), true);
 
 		if (!argsString.isEmpty())
@@ -80,7 +80,7 @@ public class PerlSubCompletionUtil
 		return LookupElementBuilder
 				.create(subDeclaration.getSubName())
 				.withIcon(subDeclaration.getIcon(0))
-				.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
+				.withStrikeoutness(subDeclaration.isDeprecated())
 				.withInsertHandler(SUB_SELECTION_HANDLER)
 				.withTypeText(subDeclaration.getPackageName(), true)
 				;

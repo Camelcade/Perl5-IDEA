@@ -44,11 +44,11 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 			{
 				PsiElement container = o.getParent();
 
-				if (container instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) container).getSubAnnotations().isDeprecated())
+				if (container instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) container).isDeprecated())
 				{
 					markDeprecated(holder, o, "This sub defined as deprecated");
 				}
-				else if (container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).getSubAnnotations().isDeprecated())
+				else if (container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).isDeprecated())
 				{
 					markDeprecated(holder, o, "This sub declared as deprecated");
 				}
@@ -61,8 +61,8 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 						for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 						{
 							PsiElement targetElement = resolveResult.getElement();
-							if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).getSubAnnotations().isDeprecated()
-									|| targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getSubAnnotations().isDeprecated()
+							if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).isDeprecated()
+									|| targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).isDeprecated()
 									)
 							{
 								markDeprecated(holder, o, "This sub declared as deprecated");

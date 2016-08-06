@@ -100,23 +100,26 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append("#@override\n");
 
 			PerlSubAnnotations annotations = perlSubBase.getSubAnnotations();
-			if (annotations.isDeprecated())
+			if (annotations != null)
 			{
-				code.append("#@deprecated\n");
-			}
-			if (annotations.isAbstract())
-			{
-				code.append("#@abstract\n");
-			}
-			if (annotations.isMethod() || subBase instanceof PerlMethodDefinition)
-			{
-				code.append("#@method\n");
-			}
-			if (StringUtil.isNotEmpty(annotations.getReturns()))
-			{
-				code.append("#@returns ");
-				code.append(annotations.getReturns());
-				code.append("\n");
+				if (annotations.isDeprecated())
+				{
+					code.append("#@deprecated\n");
+				}
+				if (annotations.isAbstract())
+				{
+					code.append("#@abstract\n");
+				}
+				if (annotations.isMethod() || subBase instanceof PerlMethodDefinition)
+				{
+					code.append("#@method\n");
+				}
+				if (StringUtil.isNotEmpty(annotations.getReturns()))
+				{
+					code.append("#@returns ");
+					code.append(annotations.getReturns());
+					code.append("\n");
+				}
 			}
 
 			code.append("sub ");

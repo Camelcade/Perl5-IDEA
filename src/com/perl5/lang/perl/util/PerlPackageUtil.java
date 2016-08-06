@@ -384,8 +384,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @return canonical package name
 	 */
 	@Nullable
-	public static String getPackageNameByFile(@NotNull VirtualFile virtualFile, @NotNull Project project)
+	public static String getPackageNameByFile(VirtualFile virtualFile, @NotNull Project project)
 	{
+		if (virtualFile == null)
+		{
+			return null;
+		}
+
 		VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(project, virtualFile);
 		if (innermostSourceRoot != null)
 		{

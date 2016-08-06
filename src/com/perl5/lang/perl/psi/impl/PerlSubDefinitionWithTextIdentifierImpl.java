@@ -22,15 +22,11 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 22.01.2016.
@@ -101,13 +97,6 @@ public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDef
 		}
 
 		return this;
-	}
-
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		return PerlPsiUtil.collectAnnotations(this);
 	}
 
 }
