@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
@@ -94,6 +95,6 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlSubDeclaration && ((PerlSubDeclaration) psi).getName() != null;
+		return psi instanceof PerlSubDeclaration && StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getCanonicalName());
 	}
 }

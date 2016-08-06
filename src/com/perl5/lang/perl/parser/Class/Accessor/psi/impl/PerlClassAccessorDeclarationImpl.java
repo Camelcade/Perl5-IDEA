@@ -202,16 +202,28 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 		return MUTATOR_PREFIX + getSubName();
 	}
 
+	@Nullable
 	@Override
 	public String getGetterCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
+		String packageName = getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
 	}
 
+	@Nullable
 	@Override
 	public String getSetterCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
+		String packageName = getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
 	}
 
 	@Override

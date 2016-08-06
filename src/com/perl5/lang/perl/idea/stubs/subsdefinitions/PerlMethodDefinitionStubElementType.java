@@ -18,9 +18,7 @@ package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import org.jetbrains.annotations.NonNls;
@@ -55,12 +53,4 @@ public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubEl
 		return new PsiPerlMethodDefinitionImpl(node);
 	}
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement element = node.getPsi();
-		return element instanceof PerlMethodDefinition
-				&& element.isValid()
-				&& StringUtil.isNotEmpty(((PerlMethodDefinition) element).getSubName());
-	}
 }

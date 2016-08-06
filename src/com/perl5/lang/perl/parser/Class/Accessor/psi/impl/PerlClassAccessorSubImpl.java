@@ -21,6 +21,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorSub;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.01.2016.
@@ -32,6 +33,7 @@ public class PerlClassAccessorSubImpl extends PerlSubNameElementImpl implements 
 		super(type, text);
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

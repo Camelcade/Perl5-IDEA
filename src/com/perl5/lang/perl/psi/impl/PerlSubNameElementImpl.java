@@ -29,6 +29,7 @@ import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -53,6 +54,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
 		}
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

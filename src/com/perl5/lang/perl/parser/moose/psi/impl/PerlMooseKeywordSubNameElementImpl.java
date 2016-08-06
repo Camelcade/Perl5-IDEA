@@ -21,6 +21,7 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.01.2016.
@@ -44,6 +45,7 @@ public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl i
 		return false;
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

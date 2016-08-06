@@ -21,6 +21,7 @@ import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.01.2016.
@@ -60,10 +61,12 @@ public interface PerlClassAccessorDeclaration extends
 
 	String getGetterName();
 
+	@Nullable
 	String getGetterCanonicalName();
 
 	String getSetterName();
 
+	@Nullable
 	String getSetterCanonicalName();
 
 }

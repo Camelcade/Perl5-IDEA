@@ -143,6 +143,7 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
 	}
 
+	@Nullable
 	@Override
 	public String getOuterPackageName()
 	{

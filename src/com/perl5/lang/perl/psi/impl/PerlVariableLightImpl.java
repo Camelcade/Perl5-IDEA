@@ -200,7 +200,12 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+		String packageName = getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 	@Override

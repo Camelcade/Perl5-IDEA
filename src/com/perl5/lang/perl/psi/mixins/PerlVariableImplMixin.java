@@ -413,7 +413,12 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+		String packageName = getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
 	}
 
 	// fixme this need to be improved very much

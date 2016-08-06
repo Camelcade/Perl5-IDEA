@@ -97,6 +97,6 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 		PsiElement psi = node.getPsi();
 		return psi instanceof PerlGlobVariable &&
 				psi.isValid() &&
-				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getName());
+				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getCanonicalName());
 	}
 }

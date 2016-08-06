@@ -98,7 +98,13 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public String getCanonicalName()
 	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+		String packageName = getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
 	}
 
 	@Override

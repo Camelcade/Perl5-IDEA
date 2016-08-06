@@ -129,7 +129,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		PsiElement element = node.getPsi();
 		return element instanceof PerlSubDefinitionBase &&
 				element.isValid() &&
-				StringUtil.isNotEmpty(((PerlSubDefinitionBase) element).getSubName());
+				StringUtil.isNotEmpty(((PerlSubDefinitionBase) element).getCanonicalName());
 	}
 
 }

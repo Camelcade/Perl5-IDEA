@@ -47,7 +47,8 @@ public abstract class PerlMro
 	 * @param isSuper     super flag
 	 * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
 	 */
-	public static Collection<PsiElement> resolveSub(Project project, String packageName, String subName, boolean isSuper)
+	@NotNull
+	public static Collection<PsiElement> resolveSub(@NotNull Project project, String packageName, String subName, boolean isSuper)
 	{
 		Collection<PsiElement> result = new ArrayList<PsiElement>();
 		if (packageName == null || subName == null)
@@ -103,31 +104,34 @@ public abstract class PerlMro
 	 * @param isSuper         flag for SUPER resolutions
 	 * @return collection of definitions
 	 */
-	public static Collection<PsiElement> getVariants(Project project, @NotNull String basePackageName, boolean isSuper)
+	public static Collection<PsiElement> getVariants(Project project, String basePackageName, boolean isSuper)
 	{
 		HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
 
-		for (String packageName : getLinearISA(project, basePackageName, isSuper))
+		if (basePackageName != null)
 		{
-			for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
+			for (String packageName : getLinearISA(project, basePackageName, isSuper))
 			{
-				if (!methods.containsKey(subDefinition.getSubName()))
+				for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
 				{
-					methods.put(subDefinition.getSubName(), subDefinition);
+					if (!methods.containsKey(subDefinition.getSubName()))
+					{
+						methods.put(subDefinition.getSubName(), subDefinition);
+					}
 				}
-			}
-			for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
-			{
-				if (!methods.containsKey(subDeclaration.getSubName()))
+				for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
 				{
-					methods.put(subDeclaration.getSubName(), subDeclaration);
+					if (!methods.containsKey(subDeclaration.getSubName()))
+					{
+						methods.put(subDeclaration.getSubName(), subDeclaration);
+					}
 				}
-			}
-			for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
-			{
-				if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName()))
+				for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
 				{
-					methods.put(globVariable.getName(), globVariable);
+					if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName()))
+					{
+						methods.put(globVariable.getName(), globVariable);
+					}
 				}
 			}
 		}

@@ -50,6 +50,10 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 		}
 
 //				System.out.println("Autocomplete for " + packageName);
+		if (packageName == null)
+		{
+			return;
+		}
 
 		// fixme
 		for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper))

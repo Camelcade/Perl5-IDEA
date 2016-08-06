@@ -209,7 +209,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param element psi element to find definition for
 	 * @return canonical package name
 	 */
-	@NotNull
+	@Nullable
 	public static String getContextPackageName(PsiElement element)
 	{
 		PerlNamespaceDefinition namespaceDefinition = getContainingNamespace(element);
@@ -564,11 +564,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		{
 			PsiFile containingFile = namespaceDefinition.getContainingFile();
 			String packageName = namespaceDefinition.getPackageName();
+			if (packageName == null)
+			{
+				return;
+			}
+
 			Set<String> namesSet = new THashSet<String>();
 			// collecting overrided
 			for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionBase.class))
 			{
-				if (subDefinitionBase.isValid() && packageName.equals(subDefinitionBase.getPackageName()))
+				if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getPackageName()))
 				{
 					namesSet.add(subDefinitionBase.getSubName());
 				}

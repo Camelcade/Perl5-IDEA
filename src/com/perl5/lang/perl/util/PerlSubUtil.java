@@ -176,6 +176,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param methodContainer method container inspected
 	 * @return package name or null
 	 */
+	@Nullable
 	public static String getMethodReturnValue(PerlMethodContainer methodContainer)
 	{
 		if (methodContainer.getMethod() != null && methodContainer.getMethod().getSubNameElement() != null)
@@ -304,7 +305,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	{
 		String packageName = subBase.getPackageName();
 
-		if (classRecursion.contains(packageName))
+		if (packageName == null || classRecursion.contains(packageName))
 		{
 			return subBase;
 		}
