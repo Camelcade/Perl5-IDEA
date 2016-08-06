@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea;
+package com.perl5.lang.ea.psi;
 
-import com.intellij.lang.Language;
-import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
 
 /**
- * Created by hurricup on 03.08.2016.
+ * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsLanguage extends Language
+public interface PerlExternalAnnotationsPseudoDeclaration extends PerlSubDeclaration
 {
-	public static final String NAME = "Perl5 External Annotations";
-	public static final PerlExternalAnnotationsLanguage INSTANCE = new PerlExternalAnnotationsLanguage();
-
-	private PerlExternalAnnotationsLanguage()
-	{
-		super(PerlLanguage.INSTANCE, NAME);
-	}
-
 }

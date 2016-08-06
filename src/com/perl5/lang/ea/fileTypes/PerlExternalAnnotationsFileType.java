@@ -30,7 +30,10 @@ import javax.swing.*;
  */
 public class PerlExternalAnnotationsFileType extends PerlFileType
 {
-	public final static PerlExternalAnnotationsFileType INSTANCE = new PerlExternalAnnotationsFileType();
+	public static final String NAME = "Perl5 External Annotations";
+	public static final String EXTENSION = "pmea";
+
+	public static final PerlExternalAnnotationsFileType INSTANCE = new PerlExternalAnnotationsFileType();
 
 	private PerlExternalAnnotationsFileType()
 	{
@@ -41,7 +44,7 @@ public class PerlExternalAnnotationsFileType extends PerlFileType
 	@Override
 	public String getName()
 	{
-		return PerlBundle.message("pmea.filetype.name");
+		return NAME;
 	}
 
 	@NotNull
@@ -55,7 +58,7 @@ public class PerlExternalAnnotationsFileType extends PerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return PerlBundle.message("pmea.filetype.extension");
+		return EXTENSION;
 	}
 
 	@Nullable

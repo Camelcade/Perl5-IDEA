@@ -52,7 +52,6 @@
 
     <depends>com.intellij.modules.lang</depends>
     <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
-    <depends optional="true">org.jetbrains.plugins.yaml</depends>
 
     <extensionPoints>
         <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
@@ -182,7 +181,6 @@
                 implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
         <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
-        <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlYamlAnnotationsInjector"/>
 
         <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                       id="PerlTypedHandler" order="first"/>
@@ -349,7 +347,12 @@
 
         <!-- Perl External Annotations -->
         <fileTypeFactory implementation="com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileTypeFactory"/>
-
+        <lang.parserDefinition language="Perl5 External Annotations"
+                               implementationClass="com.perl5.lang.ea.PerlExternalAnnotationsParserDefinition"/>
+        <lang.fileViewProviderFactory language="Perl5 External Annotations"
+                                      implementationClass="com.perl5.lang.ea.psi.PerlExternalAnnotationsFileViewProviderFactory"/>
+        <stubElementTypeHolder class="com.perl5.lang.ea.psi.PerlExternalAnnotationsElementTypes"/>
+        <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex"/>
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->

@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,7 +33,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
+public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PerlSubDeclaration
 {
 	public PerlSubDeclarationImplMixin(@NotNull ASTNode node)
 	{

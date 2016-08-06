@@ -245,7 +245,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 				return getContextPackageName(contextParent);
 			}
 
-			return ((PerlFileImpl) file).getPackageName();
+			// fixme this is a hack for psi viewer. Actually never happens
+			String packageName = ((PerlFileImpl) file).getPackageName();
+			return packageName == null ? PerlPackageUtil.MAIN_PACKAGE : packageName;
 		}
 		else
 		{
@@ -374,6 +376,25 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static String getPackagePathByName(String packageName)
 	{
 		return StringUtils.join(packageName.split(":+"), '/') + ".pm";
+	}
+
+	/**
+	 * Returns package name by virtual file and project
+	 *
+	 * @param virtualFile file in question
+	 * @param project     project
+	 * @return canonical package name
+	 */
+	@Nullable
+	public static String getPackageNameByFile(@NotNull VirtualFile virtualFile, @NotNull Project project)
+	{
+		VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(project, virtualFile);
+		if (innermostSourceRoot != null)
+		{
+			String relativePath = VfsUtil.getRelativePath(virtualFile, innermostSourceRoot);
+			return PerlPackageUtil.getPackageNameByPath(relativePath);
+		}
+		return null;
 	}
 
 	/**

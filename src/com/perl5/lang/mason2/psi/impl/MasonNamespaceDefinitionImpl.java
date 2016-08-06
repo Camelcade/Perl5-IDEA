@@ -78,6 +78,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		return null;
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

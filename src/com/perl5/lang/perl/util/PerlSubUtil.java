@@ -141,15 +141,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 * @param canonicalName canonical function name package::name
 	 * @return Collection of found definitions
 	 */
-	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
+	public static Collection<PerlSubDeclaration> getSubDeclarations(Project project, String canonicalName)
 	{
 		return getSubDeclarations(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
 	}
 
-	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
+	public static Collection<PerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return PerlStubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDeclaration.class);
+		return PerlStubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PerlSubDeclaration.class);
 	}
 
 	/**
@@ -437,7 +437,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 				return;
 			}
 		}
-		for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
+		for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope))
 		{
 			if (!processor.process(target))
 			{

@@ -14,20 +14,32 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.fileTypes;
+package com.perl5.lang.ea.psi.stubs;
 
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 03.08.2016.
+ * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsFileTypeFactory extends FileTypeFactory
+public class PerlExternalAnnotationsStubIndex extends StringStubIndexExtension<PerlSubDeclaration>
 {
+	public static final int VERSION = 1;
+	public static final StubIndexKey<String, PerlSubDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
+
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer)
+	public int getVersion()
 	{
-		consumer.consume(PerlExternalAnnotationsFileType.INSTANCE);
+		return super.getVersion() + VERSION;
 	}
+
+	@NotNull
+	@Override
+	public StubIndexKey<String, PerlSubDeclaration> getKey()
+	{
+		return KEY;
+	}
+
 }

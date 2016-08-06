@@ -21,7 +21,6 @@ import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.PsiFileImpl;
@@ -110,6 +109,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	 * Returns package name for this psi file. Name built from filename and innermost root.
 	 *
 	 * @return canonical package name or null if it's not pm file or it's not in source root
+	 *
+	 * fixme move package subclass
 	 */
 	@Nullable
 	public String getFilePackageName()
@@ -118,12 +119,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 
 		if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE)
 		{
-			VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(getProject(), containingFile);
-			if (innermostSourceRoot != null)
-			{
-				String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
-				return PerlPackageUtil.getPackageNameByPath(relativePath);
-			}
+			return PerlPackageUtil.getPackageNameByFile(containingFile, getProject());
 		}
 		return null;
 	}
@@ -138,6 +134,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 		isNewLineFobiddenAtLine.clear();
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

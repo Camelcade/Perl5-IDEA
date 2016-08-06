@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.annotators;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
@@ -32,10 +33,10 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (element.getNode().getElementType() == SUB) //  instanceof PerlSubNameElement
+		if (PsiUtilCore.getElementType(element) == SUB) //  instanceof PerlSubNameElement
 		{
 			PsiElement parent = element.getParent();
-			if (parent instanceof PsiPerlSubDeclaration)
+			if (parent instanceof PerlSubDeclaration)
 			{
 				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
 			}

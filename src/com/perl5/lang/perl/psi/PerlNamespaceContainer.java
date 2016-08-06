@@ -21,6 +21,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,6 +37,7 @@ public interface PerlNamespaceContainer extends PsiElement
 	 *
 	 * @return canonical package name
 	 */
+	@Nullable
 	String getPackageName();
 
 	/**

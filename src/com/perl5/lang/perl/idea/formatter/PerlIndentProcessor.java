@@ -21,6 +21,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.ea.PerlExternalAnnotationsParserDefinition;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -57,7 +58,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
 			DO_EXPR,
 			EVAL_EXPR,
-			PerlParserDefinition.FILE
+			PerlParserDefinition.FILE,
+
+			// fixme this is a hack till the formatter re-work
+			PerlExternalAnnotationsParserDefinition.FILE
 	);
 
 	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(

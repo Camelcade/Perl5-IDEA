@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.fileTypes;
+package com.perl5.lang.ea.psi;
 
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.intellij.lang.Language;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.FileViewProviderFactory;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.SingleRootFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 03.08.2016.
+ * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsFileTypeFactory extends FileTypeFactory
+public class PerlExternalAnnotationsFileViewProviderFactory implements FileViewProviderFactory
 {
+	@NotNull
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer)
+	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
 	{
-		consumer.consume(PerlExternalAnnotationsFileType.INSTANCE);
+		return new SingleRootFileViewProvider(manager, file, eventSystemEnabled);
 	}
 }

@@ -30,26 +30,26 @@ public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<St
 	 *
 	 * @return canonical package name from declaration or context
 	 */
-	public String getPackageName();
+	String getPackageName();
 
 	/**
 	 * Returns function name for current function definition
 	 *
 	 * @return function name or null
 	 */
-	public String getSubName();
+	String getSubName();
 
 	/**
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object
 	 *
 	 * @return PerlSubAnnotation object
 	 */
-	public PerlSubAnnotations getSubAnnotations();
+	PerlSubAnnotations getSubAnnotations();
 
 	/**
 	 * Returns canonical name PackageName::SubName
 	 *
 	 * @return name
 	 */
-	public String getCanonicalName();
+	String getCanonicalName();
 }

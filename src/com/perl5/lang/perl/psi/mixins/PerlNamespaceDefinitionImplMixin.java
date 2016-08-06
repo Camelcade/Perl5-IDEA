@@ -99,6 +99,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	}
 
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{
