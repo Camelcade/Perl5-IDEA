@@ -52,7 +52,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		super(stub, nodeType);
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getPackageName()
 	{
@@ -91,7 +91,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getContextPackageName()
 	{
@@ -156,7 +156,7 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		return this;
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getCanonicalName()
 	{
