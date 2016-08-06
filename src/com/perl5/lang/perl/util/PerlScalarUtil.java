@@ -30,6 +30,7 @@ import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,7 +63,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return PerlStubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
 				canonicalName,
 				project,

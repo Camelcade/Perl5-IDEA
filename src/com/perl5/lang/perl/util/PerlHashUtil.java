@@ -29,10 +29,7 @@ import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 19.04.2015.
@@ -73,7 +70,10 @@ public class PerlHashUtil implements PerlElementTypes
 
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return PerlStubIndex.getElements(
 				PerlVariablesStubIndex.KEY_HASH,
 				canonicalName,
