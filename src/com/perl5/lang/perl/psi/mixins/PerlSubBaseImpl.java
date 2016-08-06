@@ -53,7 +53,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		super(stub, nodeType);
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getPackageName()
 	{
@@ -97,7 +97,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return getSubName();
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getCanonicalName()
 	{
@@ -127,7 +127,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return null;
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getContextPackageName()
 	{

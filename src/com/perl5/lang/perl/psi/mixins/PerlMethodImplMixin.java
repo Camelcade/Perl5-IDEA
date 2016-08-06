@@ -48,7 +48,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		return null;
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getContextPackageName()
 	{
@@ -65,7 +65,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	}
 
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getPackageName()
 	{
@@ -79,7 +79,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		return namespace;
 	}
 
-	@NotNull
+	@Nullable
 	@Override
 	public String getCanonicalName()
 	{

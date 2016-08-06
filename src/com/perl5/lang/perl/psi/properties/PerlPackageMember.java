@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -36,9 +35,9 @@ public interface PerlPackageMember extends PsiElement
 	/**
 	 * Trying to detect package name by traversing parents
 	 *
-	 * @return package name or main if not found
+	 * @return package name or null if not found
 	 */
-	@NotNull
+	@Nullable
 	String getContextPackageName();
 
 	/**
@@ -46,7 +45,7 @@ public interface PerlPackageMember extends PsiElement
 	 *
 	 * @return package name for current element
 	 */
-	@NotNull
+	@Nullable
 	String getPackageName();
 
 	/**
@@ -54,7 +53,7 @@ public interface PerlPackageMember extends PsiElement
 	 *
 	 * @return name
 	 */
-	@NotNull
+	@Nullable
 	String getCanonicalName();
 
 }
