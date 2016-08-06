@@ -18,9 +18,7 @@ package com.perl5.lang.ea.psi.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IndexSink;
-import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsFileImpl;
 import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsPseudoDeclarationImpl;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
@@ -55,13 +53,5 @@ public class PerlExternalAnnotationsPseudoDeclarationElementType extends PerlSub
 	public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink)
 	{
 		sink.occurrence(PerlExternalAnnotationsStubIndex.KEY, stub.getCanonicalName());
-	}
-
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		PsiFile containingFile = psi.getContainingFile();
-		return containingFile instanceof PerlExternalAnnotationsFileImpl && ((PerlExternalAnnotationsFileImpl) containingFile).getFilePackageName() != null;
 	}
 }

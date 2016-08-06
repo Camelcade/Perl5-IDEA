@@ -34,6 +34,7 @@ import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,6 +88,7 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		}
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

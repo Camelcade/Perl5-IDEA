@@ -47,6 +47,7 @@ public interface PerlUseStatement extends StubBasedPsiElement<PerlUseStatementSt
 	@Nullable
 	PsiPerlExpr getExpr();
 
+	@Nullable
 	String getOuterPackageName();
 
 }

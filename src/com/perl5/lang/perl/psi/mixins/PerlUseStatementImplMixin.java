@@ -154,6 +154,7 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		return packageProcessor;
 	}
 
+	@Nullable
 	@Override
 	public String getOuterPackageName()
 	{

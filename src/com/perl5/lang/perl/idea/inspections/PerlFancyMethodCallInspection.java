@@ -41,7 +41,12 @@ public class PerlFancyMethodCallInspection extends PerlInspection
 			{
 				if (o.isObjectMethod() && o.getLastChild() instanceof PerlNamespaceElement)
 				{
-					String properForm = String.format("%s->%s", o.getPackageName(), o.getSubNameElement().getName());
+					String packageName = o.getPackageName();
+					if (packageName == null)
+					{
+						return;
+					}
+					String properForm = String.format("%s->%s", packageName, o.getSubNameElement().getName());
 					holder.registerProblem(
 							o,
 							String.format("Using of fancy calls is not recommended, use %s(...)", properForm),

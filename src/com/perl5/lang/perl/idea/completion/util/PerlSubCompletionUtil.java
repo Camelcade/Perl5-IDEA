@@ -111,6 +111,11 @@ public class PerlSubCompletionUtil
 	public static void fillWithUnresolvedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
 	{
 		final String packageName = subDefinition.getPackageName();
+		if (packageName == null)
+		{
+			return;
+		}
+
 		final Set<String> namesSet = new THashSet<String>();
 		PsiFile containingFile = subDefinition.getContainingFile();
 		containingFile.accept(new PerlRecursiveVisitor()

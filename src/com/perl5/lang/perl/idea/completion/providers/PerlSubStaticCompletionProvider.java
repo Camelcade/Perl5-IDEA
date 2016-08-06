@@ -44,6 +44,10 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 		assert method instanceof PsiPerlMethod;
 
 		String packageName = ((PsiPerlMethod) method).getPackageName();
+		if (packageName == null)
+		{
+			return;
+		}
 
 		Project project = parameters.getPosition().getProject();
 

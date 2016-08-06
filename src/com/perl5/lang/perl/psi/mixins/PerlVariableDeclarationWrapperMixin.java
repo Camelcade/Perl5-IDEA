@@ -139,6 +139,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		return null;
 	}
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{

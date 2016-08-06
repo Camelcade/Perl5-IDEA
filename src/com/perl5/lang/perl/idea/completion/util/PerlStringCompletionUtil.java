@@ -139,6 +139,12 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 	public static void fillWithExportableEntities(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
 		final String contextPackageName = PerlPackageUtil.getContextPackageName(element);
+
+		if (contextPackageName == null)
+		{
+			return;
+		}
+
 		element.getContainingFile().accept(
 				new PerlRecursiveVisitor()
 				{
