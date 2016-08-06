@@ -72,7 +72,10 @@ public class PerlArrayUtil implements PerlElementTypes
 
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return StubIndex.getElements(
 				PerlVariablesStubIndex.KEY_ARRAY,
 				canonicalName,

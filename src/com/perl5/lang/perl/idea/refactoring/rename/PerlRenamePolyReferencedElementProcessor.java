@@ -116,14 +116,15 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 	private PsiElement suggestSuperMethod(@NotNull PerlSubBase subBase)
 	{
 		PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
+		String canonicalName = topLevelSuperMethod.getCanonicalName();
 
-		if (topLevelSuperMethod == subBase)
+		if (topLevelSuperMethod == subBase || canonicalName == null)
 		{
 			return subBase;
 		}
 
 		int dialogResult = Messages.showOkCancelDialog(
-				"This method overrides SUPER method: " + topLevelSuperMethod.getCanonicalName() + ".",
+				"This method overrides SUPER method: " + canonicalName + ".",
 				"Method Rename",
 				"Rename SUPER method",
 				"Rename this one",

@@ -63,7 +63,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
 				canonicalName,
 				project,

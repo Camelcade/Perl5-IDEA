@@ -65,7 +65,10 @@ public class PerlGlobUtil implements PerlElementTypes
 
 	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
 	}
 

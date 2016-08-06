@@ -102,7 +102,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
 	}
 
@@ -143,7 +146,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
 	{
-		assert canonicalName != null;
+		if (canonicalName == null)
+		{
+			return Collections.emptyList();
+		}
 		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDeclaration.class);
 	}
 
