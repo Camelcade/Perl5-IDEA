@@ -59,7 +59,8 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 				parentStub,
 				psi.getOuterPackageName(),
 				psi.getPackageName(),
-				psi.getImportParameters()
+				psi.getImportParameters(),
+				this
 		);
 	}
 
@@ -82,7 +83,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
 	@Override
 	public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlUseStatementStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString(), PerlStubSerializationUtil.readStringsList(dataStream));
+		return new PerlUseStatementStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString(), PerlStubSerializationUtil.readStringsList(dataStream), this);
 	}
 
 	@Override

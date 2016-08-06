@@ -18,16 +18,16 @@ package com.perl5.lang.ea.psi.stubs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationsPseudoDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsStubIndex extends StringStubIndexExtension<PerlSubDeclaration>
+public class PerlExternalAnnotationsStubIndex extends StringStubIndexExtension<PerlExternalAnnotationsPseudoDeclaration>
 {
 	public static final int VERSION = 1;
-	public static final StubIndexKey<String, PerlSubDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
+	public static final StubIndexKey<String, PerlExternalAnnotationsPseudoDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlExternalAnnotationsStubIndex extends StringStubIndexExtension<P
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlSubDeclaration> getKey()
+	public StubIndexKey<String, PerlExternalAnnotationsPseudoDeclaration> getKey()
 	{
 		return KEY;
 	}

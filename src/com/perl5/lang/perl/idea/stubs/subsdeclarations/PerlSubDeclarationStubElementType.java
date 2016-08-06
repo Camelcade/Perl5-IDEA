@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
@@ -25,7 +26,9 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -36,7 +39,12 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 {
 	public PerlSubDeclarationStubElementType(String name)
 	{
-		super(name, PerlLanguage.INSTANCE);
+		this(name, PerlLanguage.INSTANCE);
+	}
+
+	public PerlSubDeclarationStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
+	{
+		super(debugName, language);
 	}
 
 	@Override
@@ -55,9 +63,8 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	@Override
 	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
 	{
-		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalSubAnnotations());
+		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalSubAnnotations(), this);
 	}
-
 
 	@NotNull
 	@Override
@@ -94,7 +101,7 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 		{
 			annotations = PerlSubAnnotations.deserialize(dataStream);
 		}
-		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations);
+		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations, this);
 	}
 
 	@Override

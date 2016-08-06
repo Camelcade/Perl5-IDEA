@@ -413,7 +413,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		if (result == null)
 		{
 			String path = packagePath.replaceAll("\\\\", "/");
-			result = getCanonicalPackageName(StringUtils.join(path.replaceFirst("\\.pm$", "").split("/"), PACKAGE_SEPARATOR));
+			result = getCanonicalPackageName(StringUtils.join(path.replaceFirst("\\.[^.]+$", "").split("/"), PACKAGE_SEPARATOR));
 			myFilePathsToPackageNameMap.put(packagePath, result);
 		}
 		return result;

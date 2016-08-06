@@ -40,6 +40,12 @@ public class PerlExternalAnnotationsPseudoDeclarationImpl extends PerlSubDeclara
 		super(stub, nodeType);
 	}
 
+	@Nullable
+	@Override
+	public String getCanonicalName()
+	{
+		return super.getCanonicalName();
+	}
 
 	@Nullable
 	@Override

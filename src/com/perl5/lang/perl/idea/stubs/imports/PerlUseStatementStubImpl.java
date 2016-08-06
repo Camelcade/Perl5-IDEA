@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.idea.stubs.imports;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
 import java.util.List;
@@ -32,9 +32,9 @@ public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> impleme
 	private final String myOuterPackageName;
 	private final List<String> myImportOptions;
 
-	public PerlUseStatementStubImpl(StubElement parent, String outerPackageName, String packageName, List<String> importOptions)
+	public PerlUseStatementStubImpl(StubElement parent, String outerPackageName, String packageName, List<String> importOptions, IStubElementType elementType)
 	{
-		super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
+		super(parent, elementType);
 		assert packageName != null;
 		assert outerPackageName != null;
 		this.myPackageName = packageName;

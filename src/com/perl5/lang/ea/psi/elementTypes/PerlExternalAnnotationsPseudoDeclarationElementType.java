@@ -19,6 +19,7 @@ package com.perl5.lang.ea.psi.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
+import com.perl5.lang.ea.PerlExternalAnnotationsLanguage;
 import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsPseudoDeclarationImpl;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
@@ -33,7 +34,7 @@ public class PerlExternalAnnotationsPseudoDeclarationElementType extends PerlSub
 {
 	public PerlExternalAnnotationsPseudoDeclarationElementType(String name)
 	{
-		super(name);
+		super(name, PerlExternalAnnotationsLanguage.INSTANCE);
 	}
 
 	@Override

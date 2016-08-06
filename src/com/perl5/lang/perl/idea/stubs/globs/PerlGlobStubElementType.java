@@ -58,7 +58,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub)
 	{
-		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment());
+		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment(), this);
 	}
 
 	@NotNull
@@ -88,7 +88,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean());
+		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean(), this);
 	}
 
 	@Override

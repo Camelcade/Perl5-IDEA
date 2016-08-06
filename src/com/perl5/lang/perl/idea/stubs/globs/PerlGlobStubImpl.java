@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.idea.stubs.globs;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 
 /**
@@ -30,9 +30,9 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
 	private final String variableName;
 	private final boolean isLeftSideOfAssignment;
 
-	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment)
+	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment, IStubElementType elementType)
 	{
-		super(parent, PerlStubElementTypes.PERL_GLOB);
+		super(parent, elementType);
 		this.packageName = packageName;
 		this.variableName = variableName;
 		this.isLeftSideOfAssignment = isLeftSideOfAssignment;
