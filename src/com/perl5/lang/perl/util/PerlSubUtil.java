@@ -25,15 +25,21 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
-import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex;
+import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
 import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -468,8 +474,8 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	{
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
-			for (PerlSubDeclaration declaration : PerlStubIndex.getElements(
-					PerlExternalAnnotationsStubIndex.KEY,
+			for (PerlExternalAnnotationDeclaration declaration : PerlStubIndex.getElements(
+					PerlExternalAnnotationDeclarationStubIndex.KEY,
 					canonicalName,
 					project,
 					GlobalSearchScope.projectScope(project),
@@ -481,6 +487,49 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		}
 
 		return null;
+	}
+
+	@Nullable
+	public static PerlSubAnnotations aggregateAnnotationsList(List<PerlAnnotation> annotations)
+	{
+		if (annotations.isEmpty())
+		{
+			return null;
+		}
+
+		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+
+		for (PerlAnnotation annotation : annotations)
+		{
+			if (annotation instanceof PerlAnnotationAbstractImpl)
+			{
+				myAnnotations.setIsAbstract(true);
+			}
+			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
+			{
+				myAnnotations.setIsDeprecated(true);
+			}
+			else if (annotation instanceof PerlAnnotationMethodImpl)
+			{
+				myAnnotations.setIsMethod(true);
+			}
+			else if (annotation instanceof PerlAnnotationOverrideImpl)
+			{
+				myAnnotations.setIsOverride(true);
+			}
+			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			{
+				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
+				if (ns != null)
+				{
+					myAnnotations.setReturns(ns.getCanonicalName());
+					myAnnotations.setReturnType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
+		}
+
+		return myAnnotations;
 	}
 
 }

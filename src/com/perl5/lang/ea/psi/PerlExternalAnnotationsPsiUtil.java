@@ -16,12 +16,30 @@
 
 package com.perl5.lang.ea.psi;
 
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 06.08.2016.
+ * Created by hurricup on 07.08.2016.
  */
-public interface PerlExternalAnnotationDeclaration extends StubBasedPsiElement<PerlExternalAnnotationDeclarationStub>, PerlExernalAnnotationDeclarationBase
+public class PerlExternalAnnotationsPsiUtil
 {
+	@Nullable
+	public static String getCanonicalName(PerlExernalAnnotationDeclarationBase declarationBase)
+	{
+		String packageName = declarationBase.getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+
+		String subName = declarationBase.getSubName();
+		if (subName == null)
+		{
+			return null;
+		}
+
+		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+	}
+
 }

@@ -18,16 +18,16 @@ package com.perl5.lang.ea.psi.stubs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 07.08.2016.
+ * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationNamespaceStubIndex extends StringStubIndexExtension<PerlExternalAnnotationNamespace>
+public class PerlExternalAnnotationDeclarationStubIndex extends StringStubIndexExtension<PerlExternalAnnotationDeclaration>
 {
-	public static final int VERSION = 3;
-	public static final StubIndexKey<String, PerlExternalAnnotationNamespace> KEY = StubIndexKey.createIndexKey("perl.external.annotations.ns");
+	public static final int VERSION = 2;
+	public static final StubIndexKey<String, PerlExternalAnnotationDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
 
 	@Override
 	public int getVersion()
@@ -37,7 +37,7 @@ public class PerlExternalAnnotationNamespaceStubIndex extends StringStubIndexExt
 
 	@NotNull
 	@Override
-	public StubIndexKey<String, PerlExternalAnnotationNamespace> getKey()
+	public StubIndexKey<String, PerlExternalAnnotationDeclaration> getKey()
 	{
 		return KEY;
 	}

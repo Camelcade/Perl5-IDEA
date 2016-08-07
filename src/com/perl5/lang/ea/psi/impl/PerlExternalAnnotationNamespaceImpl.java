@@ -77,4 +77,11 @@ public class PerlExternalAnnotationNamespaceImpl extends StubBasedPsiElementBase
 	{
 		return findChildByType(NAMESPACE_CONTENT);
 	}
+
+
+	@Override
+	public String toString()
+	{
+		return getPackageName();
+	}
 }

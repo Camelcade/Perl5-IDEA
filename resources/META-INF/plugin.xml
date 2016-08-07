@@ -352,7 +352,7 @@
         <lang.fileViewProviderFactory language="Perl5 External Annotations"
                                       implementationClass="com.perl5.lang.ea.psi.PerlExternalAnnotationsFileViewProviderFactory"/>
         <stubElementTypeHolder class="com.perl5.lang.ea.psi.PerlExternalAnnotationsElementTypes"/>
-        <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex"/>
         <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex"/>
         <!-- End of Perl External Annotations -->
 

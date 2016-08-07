@@ -16,30 +16,13 @@
 
 package com.perl5.lang.ea.psi.stubs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.ea.psi.PerlExernalAnnotationDeclarationBase;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 06.08.2016.
+ * Created by hurricup on 07.08.2016.
  */
-public class PerlExternalAnnotationsStubIndex extends StringStubIndexExtension<PerlExternalAnnotationDeclaration>
+public interface PerlExternalAnnotationDeclarationStub extends StubElement<PerlExternalAnnotationDeclaration>, PerlExernalAnnotationDeclarationBase
 {
-	public static final int VERSION = 2;
-	public static final StubIndexKey<String, PerlExternalAnnotationDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
-
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
-
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlExternalAnnotationDeclaration> getKey()
-	{
-		return KEY;
-	}
-
 }

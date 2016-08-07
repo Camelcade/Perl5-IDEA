@@ -23,13 +23,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -190,45 +184,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public PerlSubAnnotations getLocalSubAnnotations()
 	{
-		List<PerlAnnotation> annotationList = getAnnotationList();
-		if (annotationList.isEmpty())
-		{
-			return null;
-		}
-
-		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
-
-		for (PerlAnnotation annotation : annotationList)
-		{
-			if (annotation instanceof PerlAnnotationAbstractImpl)
-			{
-				myAnnotations.setIsAbstract(true);
-			}
-			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
-			{
-				myAnnotations.setIsDeprecated(true);
-			}
-			else if (annotation instanceof PerlAnnotationMethodImpl)
-			{
-				myAnnotations.setIsMethod(true);
-			}
-			else if (annotation instanceof PerlAnnotationOverrideImpl)
-			{
-				myAnnotations.setIsOverride(true);
-			}
-			else if (annotation instanceof PerlNamespaceElementContainer) // returns
-			{
-				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
-				if (ns != null)
-				{
-					myAnnotations.setReturns(ns.getCanonicalName());
-					myAnnotations.setReturnType(PerlReturnType.REF);
-					// todo implement brackets and braces
-				}
-			}
-		}
-
-		return myAnnotations;
+		return PerlSubUtil.aggregateAnnotationsList(getAnnotationList());
 	}
 
 	@Nullable

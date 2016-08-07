@@ -16,44 +16,91 @@
 
 package com.perl5.lang.ea.psi.impl;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
-import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
-import com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationsPsiUtil;
+import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationDeclarationImpl extends PerlSubDeclarationImplMixin implements PerlExternalAnnotationDeclaration
+public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBase<PerlExternalAnnotationDeclarationStub> implements PerlExternalAnnotationDeclaration
 {
 	public PerlExternalAnnotationDeclarationImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
-	public PerlExternalAnnotationDeclarationImpl(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType)
+	public PerlExternalAnnotationDeclarationImpl(@NotNull PerlExternalAnnotationDeclarationStub stub, @NotNull IStubElementType nodeType)
 	{
 		super(stub, nodeType);
 	}
 
 	@Nullable
 	@Override
-	public String getContextPackageName()
+	public String getPackageName()
 	{
+		PerlExternalAnnotationDeclarationStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getPackageName();
+		}
+
 		PerlExternalAnnotationNamespace namespace = PsiTreeUtil.getParentOfType(this, PerlExternalAnnotationNamespace.class);
 		return namespace == null ? null : namespace.getPackageName();
 	}
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getExternalSubAnnotations()
+	public PerlSubAnnotations getSubAnnotations()
 	{
-		return null;
+		PerlExternalAnnotationDeclarationStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getSubAnnotations();
+		}
+		return PerlSubUtil.aggregateAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+	}
+
+	@Override
+	public String getSubName()
+	{
+		PerlExternalAnnotationDeclarationStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getSubName();
+		}
+
+		PerlSubNameElement subNameElement = findChildByClass(PerlSubNameElement.class);
+		return subNameElement == null ? null : subNameElement.getName();
+	}
+
+	@Nullable
+	@Override
+	public String getCanonicalName()
+	{
+		PerlExternalAnnotationDeclarationStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getCanonicalName();
+		}
+
+		return PerlExternalAnnotationsPsiUtil.getCanonicalName(this);
+	}
+
+	@Override
+	public String toString()
+	{
+		return getCanonicalName();
 	}
 }

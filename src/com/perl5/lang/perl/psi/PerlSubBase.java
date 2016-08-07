@@ -101,7 +101,6 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	@Nullable
 	PerlSubAnnotations getExternalSubAnnotations();
 
-
 	/**
 	 * Returns list of sub annotations elements
 	 *
