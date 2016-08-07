@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
+import com.intellij.util.io.StringRef;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -88,7 +89,11 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 	@Override
 	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
 	{
-		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean(), this);
+		StringRef packageNameRef = dataStream.readName();
+		assert packageNameRef != null;
+		StringRef subNameRef = dataStream.readName();
+		assert subNameRef != null;
+		return new PerlGlobStubImpl(parentStub, packageNameRef.getString(), subNameRef.getString(), dataStream.readBoolean(), this);
 	}
 
 	@Override
@@ -97,6 +102,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 		PsiElement psi = node.getPsi();
 		return psi instanceof PerlGlobVariable &&
 				psi.isValid() &&
-				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getCanonicalName());
+				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getPackageName()) &&
+				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getName())
+				;
 	}
 }

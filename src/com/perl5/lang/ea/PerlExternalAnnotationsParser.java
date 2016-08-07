@@ -17,6 +17,8 @@
 package com.perl5.lang.ea;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.WhitespacesBinders;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.PerlBundle;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationsElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
@@ -27,17 +29,78 @@ import com.perl5.lang.perl.parser.PerlParserUtil;
  */
 public class PerlExternalAnnotationsParser extends PerlParserImpl implements PerlExternalAnnotationsElementTypes
 {
+	private static final TokenSet PACKAGE_RECOVERY_SET = TokenSet.create(
+			RESERVED_PACKAGE
+	);
+
+	private static final TokenSet DECLARATION_RECOVERY_SET = TokenSet.orSet(
+			PACKAGE_RECOVERY_SET,
+			TokenSet.create(
+					RESERVED_SUB
+			));
+
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
 		while (!b.eof())
 		{
-			parseDelcarationLikeStatement(b, l);
+			if (!parsePseudoNamespace(b, l))
+			{
+				recoverPseudoNamespace(b, l);
+			}
 		}
 		return true;
 	}
 
-	private void parseDelcarationLikeStatement(PsiBuilder b, int l)
+	private boolean parsePseudoNamespace(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == RESERVED_PACKAGE)
+		{
+			PsiBuilder.Marker m = b.mark();
+			b.advanceLexer();
+
+			if (PerlParserUtil.mergePackageName(b, l))
+			{
+				PerlParserUtil.parsePerlVersion(b, l);
+				parseOptionalSemicolon(b, l);
+
+				PsiBuilder.Marker contentMarker = b.mark();
+
+				while (!b.eof())
+				{
+					if (b.getTokenType() == RESERVED_PACKAGE)
+					{
+						break;
+					}
+					else if (!parsePseudoDeclaration(b, l))
+					{
+						recoverPseudoDeclaration(b, l);
+					}
+				}
+
+				contentMarker.done(PSEUDO_NAMESPACE_CONTENT);
+				contentMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+
+				m.done(PSEUDO_NAMESPACE);
+				return true;
+			}
+			else
+			{
+				m.error(PerlBundle.message("parser.package.name.expected"));
+			}
+		}
+		return false;
+	}
+
+	private void parseOptionalSemicolon(PsiBuilder b, int l)
+	{
+		if (!PerlParserUtil.parseSemicolon(b, l))
+		{
+			b.mark().error(PerlBundle.message("parser.semicolon.expected"));
+		}
+	}
+
+	private boolean parsePseudoDeclaration(PsiBuilder b, int l)
 	{
 		if (b.getTokenType() == RESERVED_SUB)
 		{
@@ -46,25 +109,50 @@ public class PerlExternalAnnotationsParser extends PerlParserImpl implements Per
 
 			if (PerlParserUtil.parseSubDefinitionName(b, l))
 			{
-				PerlParserUtil.consumeToken(b, SEMICOLON);
+				parseOptionalSemicolon(b, l);
 				marker.done(PSEUDO_DECLARATION);
+				return true;
 			}
 			else
 			{
-				marker.drop();
-				b.mark().error(PerlBundle.message("parser.identifier.expected"));
+				marker.error(PerlBundle.message("parser.identifier.expected"));
+				return false;
 			}
 		}
-		recoverDeclarationLikeStatement(b, l);
+		return false;
 	}
 
-	private void recoverDeclarationLikeStatement(PsiBuilder b, int l)
+	private void recoverPseudoDeclaration(PsiBuilder b, int l)
 	{
-		while (!b.eof() && b.getTokenType() != RESERVED_SUB)
+		PsiBuilder.Marker mark = null;
+		while (!b.eof() && !DECLARATION_RECOVERY_SET.contains(b.getTokenType()))
 		{
-			PsiBuilder.Marker mark = b.mark();
+			if (mark == null)
+			{
+				mark = b.mark();
+			}
 			b.advanceLexer();
-			mark.error(PerlBundle.message("parser.sub.expected"));
+		}
+		if (mark != null)
+		{
+			mark.error(PerlBundle.message("parser.sub.or.package.expected"));
+		}
+	}
+
+	private void recoverPseudoNamespace(PsiBuilder b, int l)
+	{
+		PsiBuilder.Marker mark = null;
+		while (!b.eof() && !PACKAGE_RECOVERY_SET.contains(b.getTokenType()))
+		{
+			if (mark == null)
+			{
+				mark = b.mark();
+			}
+			b.advanceLexer();
+		}
+		if (mark != null)
+		{
+			mark.error(PerlBundle.message("parser.package.expected"));
 		}
 	}
 }

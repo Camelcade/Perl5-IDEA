@@ -51,6 +51,16 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		super(dataPath, fileExt, definitions);
 	}
 
+	public void doTest()
+	{
+		doTest(true);
+	}
+
+	public void doTest(boolean check)
+	{
+		doTest(super.getTestName(true), check);
+	}
+
 	public void doTest(String filename)
 	{
 		doTest(filename, true);
@@ -59,7 +69,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 	public void doTest(String filename, boolean checkErrors)
 	{
 		myFileName = filename;
-		doTest(true);
+		super.doTest(true);
 
 		if (checkErrors)
 			assertFalse(

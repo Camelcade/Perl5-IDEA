@@ -17,11 +17,8 @@
 package com.perl5.lang.mojolicious.psi.stubs;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
-import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
@@ -53,30 +50,9 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
 	}
 
 	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
-	{
-		//noinspection unchecked
-		return new MojoliciousHelperDeclarationStubImpl(
-				parentStub,
-				psi.getPackageName(),
-				psi.getSubName(),
-				psi.getSubArgumentsList(),
-				psi.getLocalSubAnnotations(),
-				this
-		);
-	}
-
-	@Override
 	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
 	{
 		super.indexStub(stub, sink);
 		sink.occurrence(MojoliciousHelpersStubIndex.KEY, stub.getSubName());
-	}
-
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof MojoliciousHelperDeclaration && StringUtil.isNotEmpty(((MojoliciousHelperDeclaration) psi).getName());
 	}
 }

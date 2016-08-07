@@ -1,0 +1,29 @@
+Perl5
+  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+    PerlAnnotationDeprecatedImpl(PerlElementType.ANNOTATION_DEPRECATED)
+      PsiElement(PerlTokenType.ANNOTATION_PREFIX)('#@')
+      PsiElement(PerlTokenType.ANNOTATION_DEPRECATED_KEY)('deprecated')
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)
+    PsiElement(PerlTokenType.package)('package')
+    PsiElement(PerlTokenType.PACKAGE)('ModernPerlTest')
+    PsiElement(PerlTokenType.;)(';')
+    PsiPerlNamespaceContentImpl(PerlElementType.NAMESPACE_CONTENT)
+      PerlAnnotationContainerImpl(PERL_ANNOTATION)
+        PerlAnnotationDeprecatedImpl(PerlElementType.ANNOTATION_DEPRECATED)
+          PsiElement(PerlTokenType.ANNOTATION_PREFIX)('#@')
+          PsiElement(PerlTokenType.ANNOTATION_DEPRECATED_KEY)('deprecated')
+      PsiPerlStatementImpl(PerlElementType.STATEMENT)
+        ModernPerlTest::subname
+          PsiElement(PerlTokenType.sub)('sub')
+          PsiElement(PerlTokenType.SUB)('subname')
+        PsiErrorElement:Semicolon expected
+          <empty list>
+      PerlAnnotationContainerImpl(PERL_ANNOTATION)
+        PerlAnnotationDeprecatedImpl(PerlElementType.ANNOTATION_DEPRECATED)
+          PsiElement(PerlTokenType.ANNOTATION_PREFIX)('#@')
+          PsiElement(PerlTokenType.ANNOTATION_DEPRECATED_KEY)('deprecated')
+      PsiPerlStatementImpl(PerlElementType.STATEMENT)
+        ModernPerlTest::subname1
+          PsiElement(PerlTokenType.sub)('sub')
+          PsiElement(PerlTokenType.SUB)('subname1')
+        PsiElement(PerlTokenType.;)(';')

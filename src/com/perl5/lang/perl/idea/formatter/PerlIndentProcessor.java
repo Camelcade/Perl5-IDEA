@@ -22,6 +22,7 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.ea.PerlExternalAnnotationsParserDefinition;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationsElementTypes;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementTypes
+public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementTypes, PerlExternalAnnotationsElementTypes
 {
 	public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 
@@ -61,7 +62,9 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 			PerlParserDefinition.FILE,
 
 			// fixme this is a hack till the formatter re-work
-			PerlExternalAnnotationsParserDefinition.FILE
+			PerlExternalAnnotationsParserDefinition.FILE,
+			PSEUDO_NAMESPACE,
+			PSEUDO_NAMESPACE_CONTENT
 	);
 
 	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(

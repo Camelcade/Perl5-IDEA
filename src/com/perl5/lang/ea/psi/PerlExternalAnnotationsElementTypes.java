@@ -19,6 +19,7 @@ package com.perl5.lang.ea.psi;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationsPseudoDeclarationElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 
 /**
  * Created by hurricup on 06.08.2016.
@@ -26,4 +27,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 public interface PerlExternalAnnotationsElementTypes extends PerlElementTypes
 {
 	IElementType PSEUDO_DECLARATION = new PerlExternalAnnotationsPseudoDeclarationElementType("PSEUDO_DECLARATION");
+	IElementType PSEUDO_NAMESPACE = new PerlElementTypeEx("PSEUDO_NAMESPACE");
+	IElementType PSEUDO_NAMESPACE_CONTENT = new PerlElementTypeEx("PSEUDO_NAMESPACE_CONTENT");
 }

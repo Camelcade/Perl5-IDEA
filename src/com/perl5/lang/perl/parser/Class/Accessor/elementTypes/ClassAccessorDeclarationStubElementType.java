@@ -79,7 +79,10 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlClassAccessorDeclaration && StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getCanonicalName());
+		return psi instanceof PerlClassAccessorDeclaration &&
+				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getPackageName()) &&
+				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getName())
+				;
 	}
 
 	@Override

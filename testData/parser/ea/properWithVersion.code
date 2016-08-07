@@ -1,0 +1,5 @@
+#@deprecated
+package ModernPerlTest v5.10;
+
+#@deprecated
+sub subname;

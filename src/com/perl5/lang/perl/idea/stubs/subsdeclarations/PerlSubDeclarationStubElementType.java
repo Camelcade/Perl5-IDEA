@@ -115,6 +115,9 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlSubDeclaration && StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getCanonicalName());
+		return psi instanceof PerlSubDeclaration &&
+				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getPackageName()) &&
+				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getName())
+				;
 	}
 }
