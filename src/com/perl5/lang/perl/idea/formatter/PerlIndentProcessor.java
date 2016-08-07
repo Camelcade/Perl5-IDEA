@@ -63,8 +63,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
 			// fixme this is a hack till the formatter re-work
 			PerlExternalAnnotationsParserDefinition.FILE,
-			PSEUDO_NAMESPACE,
-			PSEUDO_NAMESPACE_CONTENT
+			PSEUDO_NAMESPACE
 	);
 
 	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(

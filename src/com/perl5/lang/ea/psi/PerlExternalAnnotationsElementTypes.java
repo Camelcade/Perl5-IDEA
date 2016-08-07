@@ -28,5 +28,4 @@ public interface PerlExternalAnnotationsElementTypes extends PerlElementTypes
 {
 	IElementType PSEUDO_DECLARATION = new PerlExternalAnnotationsPseudoDeclarationElementType("PSEUDO_DECLARATION");
 	IElementType PSEUDO_NAMESPACE = new PerlElementTypeEx("PSEUDO_NAMESPACE");
-	IElementType PSEUDO_NAMESPACE_CONTENT = new PerlElementTypeEx("PSEUDO_NAMESPACE_CONTENT");
 }

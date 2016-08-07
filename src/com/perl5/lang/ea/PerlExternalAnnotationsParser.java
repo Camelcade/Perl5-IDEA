@@ -78,7 +78,7 @@ public class PerlExternalAnnotationsParser extends PerlParserImpl implements Per
 					}
 				}
 
-				contentMarker.done(PSEUDO_NAMESPACE_CONTENT);
+				contentMarker.done(NAMESPACE_CONTENT);
 				contentMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
 				m.done(PSEUDO_NAMESPACE);
