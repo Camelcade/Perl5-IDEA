@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
 import com.perl5.lang.ea.PerlExternalAnnotationsLanguage;
-import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsPseudoDeclarationImpl;
+import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationDeclarationImpl;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
@@ -30,9 +30,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsPseudoDeclarationElementType extends PerlSubDeclarationStubElementType
+public class PerlExternalAnnotationDeclarationElementType extends PerlSubDeclarationStubElementType
 {
-	public PerlExternalAnnotationsPseudoDeclarationElementType(String name)
+	public PerlExternalAnnotationDeclarationElementType(String name)
 	{
 		super(name, PerlExternalAnnotationsLanguage.INSTANCE);
 	}
@@ -40,14 +40,14 @@ public class PerlExternalAnnotationsPseudoDeclarationElementType extends PerlSub
 	@Override
 	public PerlSubDeclaration createPsi(@NotNull PerlSubDeclarationStub stub)
 	{
-		return new PerlExternalAnnotationsPseudoDeclarationImpl(stub, this);
+		return new PerlExternalAnnotationDeclarationImpl(stub, this);
 	}
 
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
 	{
-		return new PerlExternalAnnotationsPseudoDeclarationImpl(node);
+		return new PerlExternalAnnotationDeclarationImpl(node);
 	}
 
 	@Override

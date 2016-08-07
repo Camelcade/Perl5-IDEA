@@ -24,7 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
-import com.perl5.lang.ea.psi.PerlExternalAnnotationsPseudoDeclaration;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationsStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
@@ -473,7 +473,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 					canonicalName,
 					project,
 					GlobalSearchScope.projectScope(project),
-					PerlExternalAnnotationsPseudoDeclaration.class
+					PerlExternalAnnotationDeclaration.class
 			))
 			{
 				return declaration.getSubAnnotations();

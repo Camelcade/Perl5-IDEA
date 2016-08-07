@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.psi.elementTypes;
+package com.perl5.lang.ea.psi;
 
-import com.perl5.lang.ea.PerlExternalAnnotationsLanguage;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.PerlSubDeclaration;
 
 /**
  * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationsFileElementType extends PerlFileElementType
+public interface PerlExternalAnnotationDeclaration extends PerlSubDeclaration
 {
-	public PerlExternalAnnotationsFileElementType()
-	{
-		super(PerlExternalAnnotationsLanguage.NAME, PerlExternalAnnotationsLanguage.INSTANCE);
-	}
 }

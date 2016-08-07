@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.psi;
+package com.perl5.lang.ea.psi.elementTypes;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationDeclarationElementType;
-import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationNamespaceElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.ea.PerlExternalAnnotationsLanguage;
+import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 
 /**
  * Created by hurricup on 06.08.2016.
  */
-public interface PerlExternalAnnotationsElementTypes extends PerlElementTypes
+public class PerlExternalAnnotationFileElementType extends PerlFileElementType
 {
-	IElementType PSEUDO_DECLARATION = new PerlExternalAnnotationDeclarationElementType("PSEUDO_DECLARATION");
-	IElementType PSEUDO_NAMESPACE = new PerlExternalAnnotationNamespaceElementType("PSEUDO_NAMESPACE");
+	public PerlExternalAnnotationFileElementType()
+	{
+		super(PerlExternalAnnotationsLanguage.NAME, PerlExternalAnnotationsLanguage.INSTANCE);
+	}
 }

@@ -18,11 +18,8 @@ package com.perl5.lang.ea;
 
 import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationsFileElementType;
-import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsFileImpl;
+import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationFileElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,19 +28,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlExternalAnnotationsParserDefinition extends PerlParserDefinition
 {
-	public static final IFileElementType FILE = new PerlExternalAnnotationsFileElementType();
+	public static final IFileElementType FILE = new PerlExternalAnnotationFileElementType();
 
 	@NotNull
 	@Override
 	public PsiParser createParser(Project project)
 	{
 		return new PerlExternalAnnotationsParser();
-	}
-
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new PerlExternalAnnotationsFileImpl(viewProvider);
 	}
 
 	@Override

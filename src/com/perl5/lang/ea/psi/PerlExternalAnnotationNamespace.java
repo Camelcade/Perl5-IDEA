@@ -16,16 +16,23 @@
 
 package com.perl5.lang.ea.psi;
 
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationDeclarationElementType;
-import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationNamespaceElementType;
+import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 06.08.2016.
+ * Created by hurricup on 07.08.2016.
  */
-public interface PerlExternalAnnotationsElementTypes extends PerlElementTypes
+public interface PerlExternalAnnotationNamespace extends StubBasedPsiElement<PerlExternalAnnotationNamespaceStub>, PerlElementTypes
 {
-	IElementType PSEUDO_DECLARATION = new PerlExternalAnnotationDeclarationElementType("PSEUDO_DECLARATION");
-	IElementType PSEUDO_NAMESPACE = new PerlExternalAnnotationNamespaceElementType("PSEUDO_NAMESPACE");
+	@Nullable
+	String getPackageName();
+
+	@Nullable
+	String getPackageVersion();
+
+	@Nullable
+	PsiPerlNamespaceContent getNamespaceContent();
 }

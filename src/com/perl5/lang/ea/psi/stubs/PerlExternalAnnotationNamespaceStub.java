@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.psi;
+package com.perl5.lang.ea.psi.stubs;
 
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 06.08.2016.
+ * Created by hurricup on 07.08.2016.
  */
-public interface PerlExternalAnnotationsPseudoDeclaration extends PerlSubDeclaration
+public interface PerlExternalAnnotationNamespaceStub extends StubElement<PerlExternalAnnotationNamespace>
 {
+	@Nullable
+	String getPackageName();
+
+	@Nullable
+	String getVersion();
+
 }
