@@ -20,6 +20,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,4 +109,30 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	 * @return checking result
 	 */
 	boolean isInvocantDeclaration();
+
+	/**
+	 * Returns stubbed, local or external variable annotations
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlVariableAnnotations getVariableAnnotations();
+
+	/**
+	 * Returns local variable annotations if any
+	 *
+	 * @return annotations object or null
+	 */
+	@Nullable
+	PerlVariableAnnotations getLocalVariableAnnotations();
+
+
+	/**
+	 * Returns external variable annotations if any
+	 *
+	 * @return annotations object or null
+	 */
+	@Nullable
+	PerlVariableAnnotations getExternalVariableAnnotations();
+
 }

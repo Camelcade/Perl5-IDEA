@@ -29,7 +29,7 @@ public abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVaria
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
 
-	public static final int VERSION = 5;
+	public static final int VERSION = 1;
 
 	@Override
 	public int getVersion()

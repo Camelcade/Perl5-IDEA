@@ -21,7 +21,9 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 30.05.2015.
@@ -32,24 +34,24 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
 	private final String myVariableName;
 	private final String myDeclaredType;
 	private final PerlVariableType myVariableType;
-	private final boolean myIsDeprecated;
+	private final PerlVariableAnnotations myPerlVariableAnnotations;
 
 	public PerlVariableStubImpl(
 			StubElement parent,
 			IStubElementType elementType,
-			String myPackageName,
-			String myVariableName,
-			String myDeclaredType,
+			String packageName,
+			String variableName,
+			String declaredType,
 			PerlVariableType variableType,
-			boolean isDeprecated
+			PerlVariableAnnotations variableAnnotations
 	)
 	{
 		super(parent, elementType);
-		this.myPackageName = myPackageName;
-		this.myVariableName = myVariableName;
-		this.myDeclaredType = myDeclaredType;
-		this.myVariableType = variableType;
-		myIsDeprecated = isDeprecated;
+		myPackageName = packageName;
+		myVariableName = variableName;
+		myDeclaredType = declaredType;
+		myVariableType = variableType;
+		myPerlVariableAnnotations = variableAnnotations;
 	}
 
 	@Override
@@ -76,10 +78,11 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
 		return myVariableType;
 	}
 
+	@Nullable
 	@Override
-	public boolean isDeprecated()
+	public PerlVariableAnnotations getVariableAnnotations()
 	{
-		return myIsDeprecated;
+		return myPerlVariableAnnotations;
 	}
 
 	@Override

@@ -579,8 +579,13 @@ public class PerlPsiUtil implements PerlElementTypes
 	}
 
 	@NotNull
-	public static List<PerlAnnotation> collectAnnotations(@NotNull PsiElement element)
+	public static List<PerlAnnotation> collectAnnotations(@Nullable PsiElement element)
 	{
+		if (element == null)
+		{
+			return Collections.emptyList();
+		}
+
 		final List<PerlAnnotation> result = new ArrayList<PerlAnnotation>();
 		processElementAnnotations(element, new Processor<PerlAnnotation>()
 		{

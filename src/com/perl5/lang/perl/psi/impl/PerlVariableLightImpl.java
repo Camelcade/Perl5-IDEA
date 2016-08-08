@@ -30,6 +30,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NonNls;
@@ -358,6 +359,27 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	public boolean isDeclaration()
 	{
 		return true;
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getVariableAnnotations()
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getLocalVariableAnnotations()
+	{
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getExternalVariableAnnotations()
+	{
+		return null;
 	}
 }
 
