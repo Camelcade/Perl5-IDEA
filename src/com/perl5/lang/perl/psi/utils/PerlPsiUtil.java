@@ -662,7 +662,7 @@ public class PerlPsiUtil implements PerlElementTypes
 				}
 
 				PsiElement parent = run.getParent();
-				if (parent != null && parent.getTextOffset() == run.getTextOffset())
+				if (parent != null && parent.getNode().getStartOffset() == run.getNode().getStartOffset())
 				{
 					run = parent;
 				}
