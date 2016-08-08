@@ -28,8 +28,6 @@ import java.io.IOException;
  */
 public class PerlSubAnnotations
 {
-	public static final PerlSubAnnotations EMPTY = new PerlSubAnnotations();
-
 	boolean isMethod = false;
 	boolean isDeprecated = false;
 	boolean isAbstract = false;
