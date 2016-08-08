@@ -61,10 +61,10 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 				((MasonNamespaceDefinitionImpl) psi).getAbsoluteComponentPath(),
 				psi.getMroType(),
 				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesNamesFromPsi(),
-				psi.isDeprecated(),
 				psi.getEXPORT(),
 				psi.getEXPORT_OK(),
-				psi.getEXPORT_TAGS()
+				psi.getEXPORT_TAGS(),
+				psi.getLocalAnnotations()
 		);
 	}
 

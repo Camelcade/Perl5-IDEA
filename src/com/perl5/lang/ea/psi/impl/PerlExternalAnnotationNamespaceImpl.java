@@ -25,6 +25,8 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +67,7 @@ public class PerlExternalAnnotationNamespaceImpl extends StubBasedPsiElementBase
 		PerlExternalAnnotationNamespaceStub stub = getStub();
 		if (stub != null)
 		{
-			return stub.getVersion();
+			return stub.getPackageVersion();
 		}
 		PsiElement versionElement = findChildByClass(PerlVersionElement.class);
 		return versionElement == null ? null : versionElement.getText();
@@ -83,5 +85,18 @@ public class PerlExternalAnnotationNamespaceImpl extends StubBasedPsiElementBase
 	public String toString()
 	{
 		return getPackageName();
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getAnnotations()
+	{
+		PerlExternalAnnotationNamespaceStub stub = getStub();
+		if (stub != null)
+		{
+			return stub.getAnnotations();
+		}
+
+		return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
 	}
 }

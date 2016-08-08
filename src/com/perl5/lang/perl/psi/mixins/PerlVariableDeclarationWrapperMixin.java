@@ -35,7 +35,6 @@ import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlVariableUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -299,7 +298,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		{
 			perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
 		}
-		return PerlVariableUtil.aggregateAnnotationsList(perlAnnotations);
+		return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations);
 	}
 
 	@Nullable

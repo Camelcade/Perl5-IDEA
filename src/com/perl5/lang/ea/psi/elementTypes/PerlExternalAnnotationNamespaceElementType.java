@@ -28,8 +28,10 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubImpl;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -52,7 +54,13 @@ public class PerlExternalAnnotationNamespaceElementType extends IStubElementType
 	@Override
 	public PerlExternalAnnotationNamespaceStub createStub(@NotNull PerlExternalAnnotationNamespace psi, StubElement parentStub)
 	{
-		return new PerlExternalAnnotationNamespaceStubImpl(parentStub, this, psi.getPackageName(), psi.getPackageVersion());
+		return new PerlExternalAnnotationNamespaceStubImpl(
+				parentStub,
+				this,
+				psi.getPackageName(),
+				psi.getPackageVersion(),
+				psi.getAnnotations()
+		);
 	}
 
 	@NotNull
@@ -66,7 +74,17 @@ public class PerlExternalAnnotationNamespaceElementType extends IStubElementType
 	public void serialize(@NotNull PerlExternalAnnotationNamespaceStub stub, @NotNull StubOutputStream dataStream) throws IOException
 	{
 		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getVersion());
+		dataStream.writeName(stub.getPackageVersion());
+		PerlNamespaceAnnotations annotations = stub.getAnnotations();
+		if (annotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			annotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -75,7 +93,19 @@ public class PerlExternalAnnotationNamespaceElementType extends IStubElementType
 	{
 		StringRef packageNameRef = dataStream.readName();
 		StringRef versionRef = dataStream.readName();
-		return new PerlExternalAnnotationNamespaceStubImpl(parentStub, this, packageNameRef.getString(), versionRef == null ? null : versionRef.getString());
+		return new PerlExternalAnnotationNamespaceStubImpl(
+				parentStub,
+				this,
+				packageNameRef.getString(),
+				versionRef == null ? null : versionRef.getString(),
+				deserializeAnnotations(dataStream)
+		);
+	}
+
+	@Nullable
+	private PerlNamespaceAnnotations deserializeAnnotations(@NotNull StubInputStream dataStream) throws IOException
+	{
+		return dataStream.readBoolean() ? PerlNamespaceAnnotations.deserialize(dataStream) : null;
 	}
 
 	@Override

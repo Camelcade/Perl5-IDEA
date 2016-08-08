@@ -35,11 +35,11 @@ import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -245,12 +245,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public boolean isDeprecated()
 	{
-		PerlNamespaceDefinitionStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.isDeprecated();
-		}
-		return PerlPsiUtil.getAnnotationByClass(this, PerlAnnotationDeprecatedImpl.class) != null;
+		PerlNamespaceAnnotations namespaceAnnotations = getAnnotations();
+		return namespaceAnnotations != null && namespaceAnnotations.isDeprecated();
 	}
 
 	@NotNull
@@ -356,6 +352,45 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			exporterInfoCache = new ExporterInfo();
 			PerlPsiUtil.processNamespaceStatements(this, exporterInfoCache);
 		}
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getAnnotations()
+	{
+		PerlNamespaceAnnotations annotations;
+		PerlNamespaceDefinitionStub stub = getStub();
+
+		if (stub != null)
+		{
+			annotations = stub.getAnnotations();
+		}
+		else
+		{
+			// re-parsing
+			annotations = getLocalAnnotations();
+		}
+
+		if (annotations != null)
+		{
+			return annotations;
+		}
+
+		return getExternalAnnotations();
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getLocalAnnotations()
+	{
+		return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getExternalAnnotations()
+	{
+		return PerlPackageUtil.getExternalAnnotations(getProject(), getPackageName());
 	}
 
 	public static class MroSearcher implements Processor<PsiElement>
@@ -533,5 +568,4 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			return parentNamespaces;
 		}
 	}
-
 }

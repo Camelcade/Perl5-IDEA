@@ -67,7 +67,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
 	{
 		//noinspection unchecked
-		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalSubAnnotations());
+		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
 	}
 
 
@@ -94,7 +94,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
 
-		PerlSubAnnotations subAnnotations = stub.getSubAnnotations();
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
 		if (subAnnotations == null)
 		{
 			dataStream.writeBoolean(false);

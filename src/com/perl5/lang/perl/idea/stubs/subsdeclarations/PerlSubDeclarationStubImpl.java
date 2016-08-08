@@ -53,7 +53,7 @@ public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> 
 	}
 
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
 		return myAnnotations;
 	}

@@ -14,38 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.util;
+package com.perl5.lang.ea.psi;
 
-import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
-import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 08.08.2016.
  */
-public class PerlVariableUtil
+public interface PerlExternalAnnotationNamespaceBase
 {
 	@Nullable
-	public static PerlVariableAnnotations aggregateAnnotationsList(List<PerlAnnotation> annotations)
-	{
-		if (annotations.isEmpty())
-		{
-			return null;
-		}
+	String getPackageName();
 
-		PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
+	@Nullable
+	String getPackageVersion();
 
-		for (PerlAnnotation annotation : annotations)
-		{
-			if (annotation instanceof PerlAnnotationDeprecatedImpl)
-			{
-				myAnnotations.setIsDeprecated();
-			}
-		}
+	/**
+	 * Returns namespace annotations
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlNamespaceAnnotations getAnnotations();
 
-		return myAnnotations;
-	}
 }

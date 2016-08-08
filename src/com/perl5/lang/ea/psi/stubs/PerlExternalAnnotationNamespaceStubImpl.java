@@ -20,6 +20,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -29,12 +30,20 @@ public class PerlExternalAnnotationNamespaceStubImpl extends StubBase<PerlExtern
 {
 	private final String myPackageName;
 	private final String myPackageVersion;
+	private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
-	public PerlExternalAnnotationNamespaceStubImpl(StubElement parent, IStubElementType elementType, String packageName, String packageVersion)
+	public PerlExternalAnnotationNamespaceStubImpl(
+			StubElement parent,
+			IStubElementType elementType,
+			String packageName,
+			String packageVersion,
+			PerlNamespaceAnnotations namespaceAnnotations
+	)
 	{
 		super(parent, elementType);
 		myPackageName = packageName;
 		myPackageVersion = packageVersion;
+		myPerlNamespaceAnnotations = namespaceAnnotations;
 	}
 
 	@Nullable
@@ -46,8 +55,15 @@ public class PerlExternalAnnotationNamespaceStubImpl extends StubBase<PerlExtern
 
 	@Nullable
 	@Override
-	public String getVersion()
+	public String getPackageVersion()
 	{
 		return myPackageVersion;
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getAnnotations()
+	{
+		return myPerlNamespaceAnnotations;
 	}
 }

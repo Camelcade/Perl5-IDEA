@@ -99,7 +99,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			StringBuilder code = new StringBuilder();
 			code.append("#@override\n");
 
-			PerlSubAnnotations annotations = perlSubBase.getSubAnnotations();
+			PerlSubAnnotations annotations = perlSubBase.getAnnotations();
 			if (annotations != null)
 			{
 				if (annotations.isDeprecated())

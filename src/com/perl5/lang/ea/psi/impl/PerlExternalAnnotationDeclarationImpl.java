@@ -27,7 +27,6 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +68,7 @@ public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBa
 		{
 			return stub.getSubAnnotations();
 		}
-		return PerlSubUtil.aggregateAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+		return PerlSubAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
 	}
 
 	@Override

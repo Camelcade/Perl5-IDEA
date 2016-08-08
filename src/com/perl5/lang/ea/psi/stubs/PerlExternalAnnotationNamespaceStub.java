@@ -18,17 +18,11 @@ package com.perl5.lang.ea.psi.stubs;
 
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespaceBase;
 
 /**
  * Created by hurricup on 07.08.2016.
  */
-public interface PerlExternalAnnotationNamespaceStub extends StubElement<PerlExternalAnnotationNamespace>
+public interface PerlExternalAnnotationNamespaceStub extends StubElement<PerlExternalAnnotationNamespace>, PerlExternalAnnotationNamespaceBase
 {
-	@Nullable
-	String getPackageName();
-
-	@Nullable
-	String getVersion();
-
 }

@@ -29,37 +29,37 @@ import java.util.List;
 /**
  * Created by hurricup on 08.08.2016.
  */
-public class PerlVariableAnnotations
+public class PerlNamespaceAnnotations
 {
 	private static final byte IS_DEPRECATED = 0x01;
 
 	private byte myFlags = 0;
 
-	public PerlVariableAnnotations()
+	public PerlNamespaceAnnotations()
 	{
 
 	}
 
-	public PerlVariableAnnotations(byte flags)
+	public PerlNamespaceAnnotations(byte flags)
 	{
 		myFlags = flags;
 	}
 
-	public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
+	public static PerlNamespaceAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
 		byte flags = dataStream.readByte();
-		return new PerlVariableAnnotations(flags);
+		return new PerlNamespaceAnnotations(flags);
 	}
 
 	@Nullable
-	public static PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
+	public static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
 	{
 		if (annotations.isEmpty())
 		{
 			return null;
 		}
 
-		PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
+		PerlNamespaceAnnotations myAnnotations = new PerlNamespaceAnnotations();
 
 		for (PerlAnnotation annotation : annotations)
 		{

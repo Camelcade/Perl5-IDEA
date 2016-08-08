@@ -163,39 +163,39 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
-		PerlSubAnnotations subAnnotations;
+		PerlSubAnnotations annotations;
 
 		Stub stub = getStub();
 		if (stub != null)
 		{
-			subAnnotations = stub.getSubAnnotations();
+			annotations = stub.getAnnotations();
 		}
 		else
 		{
 			// re-parsing
-			subAnnotations = getLocalSubAnnotations();
+			annotations = getLocalAnnotations();
 		}
 
-		if (subAnnotations != null)
+		if (annotations != null)
 		{
-			return subAnnotations;
+			return annotations;
 		}
 
-		return getExternalSubAnnotations();
+		return getExternalAnnotations();
 	}
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getLocalSubAnnotations()
+	public PerlSubAnnotations getLocalAnnotations()
 	{
-		return PerlSubUtil.aggregateAnnotationsList(getAnnotationList());
+		return PerlSubAnnotations.createFromAnnotationsList(getAnnotationList());
 	}
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getExternalSubAnnotations()
+	public PerlSubAnnotations getExternalAnnotations()
 	{
 		return PerlSubUtil.getExternalAnnotations(getProject(), getCanonicalName());
 	}
@@ -203,14 +203,14 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public boolean isDeprecated()
 	{
-		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		PerlSubAnnotations subAnnotations = getAnnotations();
 		return subAnnotations != null && subAnnotations.isDeprecated();
 	}
 
 	@Override
 	public boolean isMethod()
 	{
-		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		PerlSubAnnotations subAnnotations = getAnnotations();
 		return subAnnotations != null && subAnnotations.isMethod();
 	}
 
@@ -218,7 +218,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public String getReturns()
 	{
-		PerlSubAnnotations subAnnotations = getSubAnnotations();
+		PerlSubAnnotations subAnnotations = getAnnotations();
 		return subAnnotations != null ? subAnnotations.getReturns() : null;
 	}
 

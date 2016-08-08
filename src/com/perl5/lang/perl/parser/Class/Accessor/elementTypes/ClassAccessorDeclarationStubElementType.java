@@ -61,7 +61,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 				psi.getPackageName(),
 				psi.getSubName(),
 				psi.getSubArgumentsList(),
-				psi.getLocalSubAnnotations(),
+				psi.getLocalAnnotations(),
 				((PerlClassAccessorDeclaration) psi).isFollowsBestPractice(),
 				((PerlClassAccessorDeclaration) psi).isAccessorReadable(),
 				((PerlClassAccessorDeclaration) psi).isAccessorWritable(),
@@ -134,7 +134,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 
 		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
-		PerlSubAnnotations subAnnotations = stub.getSubAnnotations();
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
 		if (subAnnotations == null)
 		{
 			dataStream.writeBoolean(false);

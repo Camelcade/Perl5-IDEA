@@ -19,9 +19,18 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.io.StringRef;
+import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
+import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by hurricup on 03.06.2015.
@@ -57,6 +66,49 @@ public class PerlSubAnnotations
 				returnsRef == null ? null : returnsRef.getString(),
 				PerlReturnType.valueOf(dataStream.readName().toString())
 		);
+	}
+
+	@Nullable
+	public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
+	{
+		if (annotations.isEmpty())
+		{
+			return null;
+		}
+
+		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+
+		for (PerlAnnotation annotation : annotations)
+		{
+			if (annotation instanceof PerlAnnotationAbstractImpl)
+			{
+				myAnnotations.setIsAbstract();
+			}
+			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
+			{
+				myAnnotations.setIsDeprecated();
+			}
+			else if (annotation instanceof PerlAnnotationMethodImpl)
+			{
+				myAnnotations.setIsMethod();
+			}
+			else if (annotation instanceof PerlAnnotationOverrideImpl)
+			{
+				myAnnotations.setIsOverride();
+			}
+			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			{
+				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
+				if (ns != null)
+				{
+					myAnnotations.setReturns(ns.getCanonicalName());
+					myAnnotations.setReturnType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
+		}
+
+		return myAnnotations;
 	}
 
 	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
@@ -125,4 +177,5 @@ public class PerlSubAnnotations
 	{
 		this.myReturnType = returnType;
 	}
+
 }

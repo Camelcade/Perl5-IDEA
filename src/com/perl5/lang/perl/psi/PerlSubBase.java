@@ -82,7 +82,7 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 * @return PerlSubAnnotation object
 	 */
 	@Nullable
-	PerlSubAnnotations getSubAnnotations();
+	PerlSubAnnotations getAnnotations();
 
 	/**
 	 * Returns local sub annotations if any
@@ -90,7 +90,7 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 * @return annotations object or null
 	 */
 	@Nullable
-	PerlSubAnnotations getLocalSubAnnotations();
+	PerlSubAnnotations getLocalAnnotations();
 
 
 	/**
@@ -99,7 +99,7 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 * @return annotations object or null
 	 */
 	@Nullable
-	PerlSubAnnotations getExternalSubAnnotations();
+	PerlSubAnnotations getExternalAnnotations();
 
 	/**
 	 * Returns list of sub annotations elements

@@ -46,7 +46,7 @@ public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<St
 	 * @return PerlSubAnnotation object
 	 */
 	@Nullable
-	PerlSubAnnotations getSubAnnotations();
+	PerlSubAnnotations getAnnotations();
 
 	/**
 	 * Returns canonical name PackageName::SubName
