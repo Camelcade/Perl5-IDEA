@@ -67,7 +67,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
 	{
 		//noinspection unchecked
-		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getSubAnnotations());
+		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
 	}
 
 
@@ -93,7 +93,17 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 
 		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
-		stub.getSubAnnotations().serialize(dataStream);
+
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
+		if (subAnnotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			subAnnotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -106,7 +116,12 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
 		String functionName = dataStream.readName().getString();
 
 		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
-		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
+
+		PerlSubAnnotations annotations = null;
+		if (dataStream.readBoolean())
+		{
+			annotations = PerlSubAnnotations.deserialize(dataStream);
+		}
 
 		return createStubElement(parentStub, packageName, functionName, arguments, annotations);
 	}

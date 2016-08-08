@@ -16,12 +16,17 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.io.StringRef;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by hurricup on 03.06.2015.
@@ -64,6 +69,49 @@ public class PerlSubAnnotations
 				dataStream.readName(),
 				PerlReturnType.valueOf(dataStream.readName().toString())
 		);
+	}
+
+	@Nullable
+	public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
+	{
+		if (annotations.isEmpty())
+		{
+			return null;
+		}
+
+		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+
+		for (PerlAnnotation annotation : annotations)
+		{
+			if (annotation instanceof PsiPerlAnnotationAbstract)
+			{
+				myAnnotations.setIsAbstract(true);
+			}
+			else if (annotation instanceof PsiPerlAnnotationDeprecated)
+			{
+				myAnnotations.setIsDeprecated(true);
+			}
+			else if (annotation instanceof PsiPerlAnnotationMethod)
+			{
+				myAnnotations.setIsMethod(true);
+			}
+			else if (annotation instanceof PsiPerlAnnotationOverride)
+			{
+				myAnnotations.setIsOverride(true);
+			}
+			else if (annotation instanceof PsiPerlAnnotationReturns) // returns
+			{
+				PsiElement possibleNamespace = annotation.getLastChild();
+				if (possibleNamespace instanceof PerlNamespaceElement)
+				{
+					myAnnotations.setReturns(((PerlNamespaceElement) possibleNamespace).getCanonicalName());
+					myAnnotations.setReturnType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
+		}
+
+		return myAnnotations;
 	}
 
 	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
@@ -135,4 +183,5 @@ public class PerlSubAnnotations
 	{
 		this.returnType = returnType;
 	}
+
 }

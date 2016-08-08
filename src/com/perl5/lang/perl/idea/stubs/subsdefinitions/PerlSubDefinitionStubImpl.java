@@ -64,7 +64,7 @@ public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> i
 	}
 
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
 		return myAnnotations;
 	}

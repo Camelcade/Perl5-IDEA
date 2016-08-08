@@ -61,7 +61,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 				psi.getPackageName(),
 				psi.getSubName(),
 				psi.getSubArgumentsList(),
-				psi.getSubAnnotations(),
+				psi.getLocalAnnotations(),
 				((PerlClassAccessorDeclaration) psi).isFollowsBestPractice(),
 				((PerlClassAccessorDeclaration) psi).isAccessorReadable(),
 				((PerlClassAccessorDeclaration) psi).isAccessorWritable(),
@@ -79,7 +79,10 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlClassAccessorDeclaration && StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getCanonicalName());
+		return psi instanceof PerlClassAccessorDeclaration &&
+				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getPackageName()) &&
+				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getName())
+				;
 	}
 
 	@Override
@@ -130,7 +133,17 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		dataStream.writeName(stub.getSubName());
 
 		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
-		stub.getSubAnnotations().serialize(dataStream);
+
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
+		if (subAnnotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			subAnnotations.serialize(dataStream);
+		}
 
 		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice());
 		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isAccessorReadable());
@@ -147,7 +160,12 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 		String functionName = dataStream.readName().toString();
 
 		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
-		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
+
+		PerlSubAnnotations annotations = null;
+		if (dataStream.readBoolean())
+		{
+			annotations = PerlSubAnnotations.deserialize(dataStream);
+		}
 
 		boolean followsBestPractice = dataStream.readBoolean();
 		boolean isReadable = dataStream.readBoolean();

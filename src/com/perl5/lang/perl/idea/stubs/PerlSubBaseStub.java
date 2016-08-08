@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.stubs;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -30,26 +31,27 @@ public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<St
 	 *
 	 * @return canonical package name from declaration or context
 	 */
-	public String getPackageName();
+	String getPackageName();
 
 	/**
 	 * Returns function name for current function definition
 	 *
 	 * @return function name or null
 	 */
-	public String getSubName();
+	String getSubName();
 
 	/**
 	 * Checks PSI tree before a sub definition for annotations and builds annotations object
 	 *
 	 * @return PerlSubAnnotation object
 	 */
-	public PerlSubAnnotations getSubAnnotations();
+	@Nullable
+	PerlSubAnnotations getAnnotations();
 
 	/**
 	 * Returns canonical name PackageName::SubName
 	 *
 	 * @return name
 	 */
-	public String getCanonicalName();
+	String getCanonicalName();
 }

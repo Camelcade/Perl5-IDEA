@@ -21,6 +21,8 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -33,10 +35,10 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefin
 	private final String myPackageName;
 	private final PerlMroType myMroType;
 	private final List<String> myParentNamespaces;
-	private final boolean myIsDeprecated;
 	private final List<String> myEXPORT;
 	private final List<String> myEXPORT_OK;
 	private final Map<String, List<String>> myEXPORT_TAGS;
+	private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
 	public PerlNamespaceDefinitionStubImpl(
 			StubElement parent,
@@ -44,17 +46,17 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefin
 			String packageName,
 			PerlMroType mroType,
 			List<String> parentNamespaces,
-			boolean isDeprecated,
 			List<String> EXPORT,
 			List<String> EXPORT_OK,
-			Map<String, List<String>> EXPORT_TAGS
+			Map<String, List<String>> EXPORT_TAGS,
+			PerlNamespaceAnnotations namespaceAnnotations
 	)
 	{
 		super(parent, elementType);
 		myPackageName = packageName;
 		myMroType = mroType;
 		myParentNamespaces = parentNamespaces;
-		myIsDeprecated = isDeprecated;
+		myPerlNamespaceAnnotations = namespaceAnnotations;
 		myEXPORT = EXPORT;
 		myEXPORT_OK = EXPORT_OK;
 		myEXPORT_TAGS = EXPORT_TAGS;
@@ -78,10 +80,11 @@ public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefin
 		return myParentNamespaces;
 	}
 
+	@Nullable
 	@Override
-	public boolean isDeprecated()
+	public PerlNamespaceAnnotations getAnnotations()
 	{
-		return myIsDeprecated;
+		return myPerlNamespaceAnnotations;
 	}
 
 	@Override

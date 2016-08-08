@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
@@ -32,9 +33,9 @@ public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> 
 	private final String subName;
 	private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDeclarationStubImpl(final StubElement parent, final String packageName, final String subName, PerlSubAnnotations annotations)
+	public PerlSubDeclarationStubImpl(final StubElement parent, final String packageName, final String subName, PerlSubAnnotations annotations, IStubElementType elementType)
 	{
-		super(parent, PerlStubElementTypes.SUB_DECLARATION);
+		super(parent, elementType);
 		this.packageName = packageName;
 		this.subName = subName;
 		myAnnotations = annotations;
@@ -53,7 +54,7 @@ public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> 
 	}
 
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
 		return myAnnotations;
 	}

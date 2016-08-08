@@ -55,7 +55,7 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	@Override
 	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
 	{
-		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubAnnotations());
+		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
 	}
 
 
@@ -71,7 +71,16 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	{
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getSubName());
-		stub.getSubAnnotations().serialize(dataStream);
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
+		if (subAnnotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			subAnnotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -80,8 +89,12 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	{
 		String packageName = dataStream.readName().toString();
 		String subName = dataStream.readName().toString();
-		PerlSubAnnotations annotations = PerlSubAnnotations.deserialize(dataStream);
-		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations);
+		PerlSubAnnotations annotations = null;
+		if (dataStream.readBoolean())
+		{
+			annotations = PerlSubAnnotations.deserialize(dataStream);
+		}
+		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations, this);
 	}
 
 	@Override
@@ -95,6 +108,9 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 	public boolean shouldCreateStub(ASTNode node)
 	{
 		PsiElement psi = node.getPsi();
-		return psi instanceof PerlSubDeclaration && StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getCanonicalName());
+		return psi instanceof PerlSubDeclaration &&
+				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getPackageName()) &&
+				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getName())
+				;
 	}
 }

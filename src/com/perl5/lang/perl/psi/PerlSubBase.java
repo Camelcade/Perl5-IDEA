@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -74,11 +75,21 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	boolean isXSub();
 
 	/**
-	 * Checks PSI tree before a sub definition for annotations and builds annotations object
+	 * Returns stubbed, local or external sub annotations
 	 *
 	 * @return PerlSubAnnotation object
 	 */
-	PerlSubAnnotations getSubAnnotations();
+	@Nullable
+	PerlSubAnnotations getAnnotations();
+
+	/**
+	 * Returns local sub annotations if any
+	 *
+	 * @return annotations object or null
+	 */
+	@Nullable
+	PerlSubAnnotations getLocalAnnotations();
+
 
 	/**
 	 * Returns list of sub annotations elements
@@ -93,4 +104,9 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	 */
 	void subtreeChanged();
 
+	/**
+	 * Returns return value for this sub
+	 */
+	@Nullable
+	String getReturns();
 }

@@ -22,6 +22,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,4 +103,22 @@ public interface PerlNamespaceDefinition extends
 
 	@Nullable
 	String getName();
+
+	/**
+	 * Returns stubbed, local or external namespace annotations
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlNamespaceAnnotations getAnnotations();
+
+	/**
+	 * Returns local namespace annotations if any
+	 *
+	 * @return annotations object or null
+	 */
+	@Nullable
+	PerlNamespaceAnnotations getLocalAnnotations();
+
+
 }

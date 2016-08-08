@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.stubs.namespaces;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -28,17 +30,18 @@ import java.util.Map;
  */
 public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition>
 {
-	public String getPackageName();
+	String getPackageName();
 
-	public PerlMroType getMroType();
+	PerlMroType getMroType();
 
-	public List<String> getParentNamespaces();
+	List<String> getParentNamespaces();
 
-	public boolean isDeprecated();
+	List<String> getEXPORT();
 
-	public List<String> getEXPORT();
+	List<String> getEXPORT_OK();
 
-	public List<String> getEXPORT_OK();
+	Map<String, List<String>> getEXPORT_TAGS();
 
-	public Map<String, List<String>> getEXPORT_TAGS();
+	@Nullable
+	PerlNamespaceAnnotations getAnnotations();
 }

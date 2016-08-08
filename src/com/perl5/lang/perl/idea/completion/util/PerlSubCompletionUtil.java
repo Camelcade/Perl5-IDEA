@@ -25,6 +25,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class PerlSubCompletionUtil
 		LookupElementBuilder newElement = LookupElementBuilder
 				.create(subName)
 				.withIcon(subDefinition.getIcon(0))
-				.withStrikeoutness(subDefinition.getSubAnnotations().isDeprecated())
+				.withStrikeoutness(subDefinition.isDeprecated())
 				.withTypeText(subDefinition.getPackageName(), true);
 
 		if (!argsString.isEmpty())
@@ -79,7 +80,7 @@ public class PerlSubCompletionUtil
 		return LookupElementBuilder
 				.create(subDeclaration.getSubName())
 				.withIcon(subDeclaration.getIcon(0))
-				.withStrikeoutness(subDeclaration.getSubAnnotations().isDeprecated())
+				.withStrikeoutness(subDeclaration.isDeprecated())
 				.withInsertHandler(SUB_SELECTION_HANDLER)
 				.withTypeText(subDeclaration.getPackageName(), true)
 				;

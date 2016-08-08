@@ -27,6 +27,7 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -72,10 +73,10 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 				psi.getPackageName(),
 				psi.getMroType(),
 				psi.getParentNamepsacesNames(),
-				psi.isDeprecated(),
 				psi.getEXPORT(),
 				psi.getEXPORT_OK(),
-				psi.getEXPORT_TAGS()
+				psi.getEXPORT_TAGS(),
+				psi.getLocalAnnotations()
 		);
 	}
 
@@ -111,7 +112,17 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT());
 		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT_OK());
 		PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getEXPORT_TAGS());
-		dataStream.writeBoolean(stub.isDeprecated());
+
+		PerlNamespaceAnnotations namespaceAnnotations = stub.getAnnotations();
+		if (namespaceAnnotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			namespaceAnnotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -124,7 +135,6 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 		List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
 		List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
 		Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
-		boolean isDeprecated = dataStream.readBoolean();
 
 		return new PerlNamespaceDefinitionStubImpl(
 				parentStub,
@@ -132,11 +142,17 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
 				packageName,
 				mroType,
 				parentNamespaces,
-				isDeprecated,
 				EXPORT,
 				EXPORT_OK,
-				EXPORT_TAGS
+				EXPORT_TAGS,
+				desearializeAnnotations(dataStream)
 		);
+	}
+
+	@Nullable
+	private PerlNamespaceAnnotations desearializeAnnotations(@NotNull StubInputStream dataStream) throws IOException
+	{
+		return dataStream.readBoolean() ? PerlNamespaceAnnotations.deserialize(dataStream) : null;
 	}
 
 	@Override

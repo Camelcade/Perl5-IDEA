@@ -383,5 +383,4 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 		}
 		return myImplicitVariables;
 	}
-
 }

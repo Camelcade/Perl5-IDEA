@@ -48,6 +48,7 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionSt
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -363,6 +364,30 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static String getPackagePathByName(String packageName)
 	{
 		return StringUtils.join(packageName.split(":+"), '/') + ".pm";
+	}
+
+	/**
+	 * Returns package name by virtual file and project
+	 *
+	 * @param virtualFile file in question
+	 * @param project     project
+	 * @return canonical package name
+	 */
+	@Nullable
+	public static String getPackageNameByFile(VirtualFile virtualFile, @NotNull Project project)
+	{
+		if (virtualFile == null)
+		{
+			return null;
+		}
+
+		VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(project, virtualFile);
+		if (innermostSourceRoot != null)
+		{
+			String relativePath = VfsUtil.getRelativePath(virtualFile, innermostSourceRoot);
+			return PerlPackageUtil.getPackageNameByPath(relativePath);
+		}
+		return null;
 	}
 
 	/**
@@ -871,4 +896,5 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		boolean process(VirtualFile file, VirtualFile classRoot);
 	}
+
 }

@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -166,60 +167,58 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return PerlPsiUtil.collectAnnotations(this);
 	}
 
+	@Nullable
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
+		PerlSubAnnotations annotations;
+
 		Stub stub = getStub();
 		if (stub != null)
 		{
-			return stub.getSubAnnotations();
+			annotations = stub.getAnnotations();
 		}
-
-		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
-
-		for (PerlAnnotation annotation : getAnnotationList())
+		else
 		{
-			if (annotation instanceof PsiPerlAnnotationAbstract)
-			{
-				myAnnotations.setIsAbstract(true);
-			}
-			else if (annotation instanceof PsiPerlAnnotationDeprecated)
-			{
-				myAnnotations.setIsDeprecated(true);
-			}
-			else if (annotation instanceof PsiPerlAnnotationMethod)
-			{
-				myAnnotations.setIsMethod(true);
-			}
-			else if (annotation instanceof PsiPerlAnnotationOverride)
-			{
-				myAnnotations.setIsOverride(true);
-			}
-			else if (annotation instanceof PsiPerlAnnotationReturns) // returns
-			{
-				PsiElement possibleNamespace = annotation.getLastChild();
-				if (possibleNamespace instanceof PerlNamespaceElement)
-				{
-					myAnnotations.setReturns(((PerlNamespaceElement) possibleNamespace).getCanonicalName());
-					myAnnotations.setReturnType(PerlReturnType.REF);
-					// todo implement brackets and braces
-				}
-			}
+			// re-parsing
+			annotations = getLocalAnnotations();
 		}
 
-		return myAnnotations;
+		if (annotations != null)
+		{
+			return annotations;
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PerlSubAnnotations getLocalAnnotations()
+	{
+		return PerlSubAnnotations.createFromAnnotationsList(getAnnotationList());
 	}
 
 	@Override
 	public boolean isDeprecated()
 	{
-		return getSubAnnotations().isDeprecated();
+		PerlSubAnnotations subAnnotations = getAnnotations();
+		return subAnnotations != null && subAnnotations.isDeprecated();
 	}
 
 	@Override
 	public boolean isMethod()
 	{
-		return getSubAnnotations().isMethod();
+		PerlSubAnnotations subAnnotations = getAnnotations();
+		return subAnnotations != null && subAnnotations.isMethod();
+	}
+
+	@Nullable
+	@Override
+	public String getReturns()
+	{
+		PerlSubAnnotations subAnnotations = getAnnotations();
+		return subAnnotations != null ? subAnnotations.getReturns() : null;
 	}
 
 	@Override

@@ -39,6 +39,7 @@ import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
@@ -99,6 +100,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	}
 
 
+	@Nullable
 	@Override
 	public String getPackageName()
 	{
@@ -244,12 +246,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public boolean isDeprecated()
 	{
-		PerlNamespaceDefinitionStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.isDeprecated();
-		}
-		return PerlPsiUtil.getAnnotationByClass(this, PsiPerlAnnotationDeprecated.class) != null;
+		PerlNamespaceAnnotations namespaceAnnotations = getAnnotations();
+		return namespaceAnnotations != null && namespaceAnnotations.isDeprecated();
 	}
 
 	@NotNull
@@ -355,6 +353,38 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			exporterInfoCache = new ExporterInfo();
 			PerlPsiUtil.processNamespaceStatements(this, exporterInfoCache);
 		}
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getAnnotations()
+	{
+		PerlNamespaceAnnotations annotations;
+		PerlNamespaceDefinitionStub stub = getStub();
+
+		if (stub != null)
+		{
+			annotations = stub.getAnnotations();
+		}
+		else
+		{
+			// re-parsing
+			annotations = getLocalAnnotations();
+		}
+
+		if (annotations != null)
+		{
+			return annotations;
+		}
+
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getLocalAnnotations()
+	{
+		return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
 	}
 
 	public static class MroSearcher implements Processor<PsiElement>
@@ -536,5 +566,4 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			return parentNamespaces;
 		}
 	}
-
 }
