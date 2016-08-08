@@ -503,19 +503,19 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		{
 			if (annotation instanceof PerlAnnotationAbstractImpl)
 			{
-				myAnnotations.setIsAbstract(true);
+				myAnnotations.setIsAbstract();
 			}
 			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
 			{
-				myAnnotations.setIsDeprecated(true);
+				myAnnotations.setIsDeprecated();
 			}
 			else if (annotation instanceof PerlAnnotationMethodImpl)
 			{
-				myAnnotations.setIsMethod(true);
+				myAnnotations.setIsMethod();
 			}
 			else if (annotation instanceof PerlAnnotationOverrideImpl)
 			{
-				myAnnotations.setIsOverride(true);
+				myAnnotations.setIsOverride();
 			}
 			else if (annotation instanceof PerlNamespaceElementContainer) // returns
 			{

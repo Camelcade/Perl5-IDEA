@@ -28,111 +28,101 @@ import java.io.IOException;
  */
 public class PerlSubAnnotations
 {
-	boolean isMethod = false;
-	boolean isDeprecated = false;
-	boolean isAbstract = false;
-	boolean isOverride = false;
-	PerlReturnType returnType = PerlReturnType.VALUE;
-	String returns = null;
+	private static final byte IS_METHOD = 0x01;
+	private static final byte IS_DEPRECATED = 0x02;
+	private static final byte IS_ABSTRACT = 0x04;
+	private static final byte IS_OVERRIDE = 0x08;
+
+	private byte myFlags = 0;
+	private PerlReturnType myReturnType = PerlReturnType.VALUE;
+	private String myReturns = null;
 
 	public PerlSubAnnotations()
 	{
 	}
 
-	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, String returns, PerlReturnType returnType)
+	public PerlSubAnnotations(byte flags, String returns, PerlReturnType returnType)
 	{
-		this.isMethod = isMethod;
-		this.isDeprecated = isDeprecated;
-		this.isAbstract = isAbstract;
-		this.isOverride = isOverride;
-		this.returns = returns;
-		this.returnType = returnType;
-	}
-
-	public PerlSubAnnotations(boolean isMethod, boolean isDeprecated, boolean isAbstract, boolean isOverride, StringRef returns, PerlReturnType returnType)
-	{
-		this(isMethod, isDeprecated, isAbstract, isOverride, returns == null ? null : returns.toString(), returnType);
+		myFlags = flags;
+		myReturnType = returnType;
+		myReturns = returns;
 	}
 
 	public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
+		byte flags = dataStream.readByte();
+		StringRef returnsRef = dataStream.readName();
 		return new PerlSubAnnotations(
-				dataStream.readBoolean(),
-				dataStream.readBoolean(),
-				dataStream.readBoolean(),
-				dataStream.readBoolean(),
-				dataStream.readName(),
+				flags,
+				returnsRef == null ? null : returnsRef.getString(),
 				PerlReturnType.valueOf(dataStream.readName().toString())
 		);
 	}
 
 	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
 	{
-		dataStream.writeBoolean(isMethod);
-		dataStream.writeBoolean(isDeprecated);
-		dataStream.writeBoolean(isAbstract);
-		dataStream.writeBoolean(isOverride);
-		dataStream.writeName(returns);
-		dataStream.writeName(returnType.toString());
+		dataStream.writeByte(myFlags);
+		dataStream.writeName(myReturns);
+		dataStream.writeName(myReturnType.toString());
 	}
 
 	public boolean isMethod()
 	{
-		return isMethod;
+		return (myFlags & IS_METHOD) == IS_METHOD;
 	}
 
-	public void setIsMethod(boolean isMethod)
+	public void setIsMethod()
 	{
-		this.isMethod = isMethod;
+		myFlags |= IS_METHOD;
 	}
 
 	public boolean isDeprecated()
 	{
-		return isDeprecated;
+		return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
 	}
 
-	public void setIsDeprecated(boolean isDeprecated)
+	public void setIsDeprecated()
 	{
-		this.isDeprecated = isDeprecated;
+		myFlags |= IS_DEPRECATED;
 	}
 
 	public boolean isAbstract()
 	{
-		return isAbstract;
+		return (myFlags & IS_ABSTRACT) == IS_ABSTRACT;
 	}
 
-	public void setIsAbstract(boolean isAbstract)
+	public void setIsAbstract()
 	{
-		this.isAbstract = isAbstract;
+		myFlags |= IS_ABSTRACT;
 	}
 
 	public boolean isOverride()
 	{
-		return isOverride;
+		return (myFlags & IS_OVERRIDE) == IS_OVERRIDE;
 	}
 
-	public void setIsOverride(boolean isOverride)
+	public void setIsOverride()
 	{
-		this.isOverride = isOverride;
+		myFlags |= IS_OVERRIDE;
 	}
 
 	public String getReturns()
 	{
-		return returns;
+		return myReturns;
 	}
 
 	public void setReturns(String returns)
 	{
-		this.returns = returns;
+		this.myReturns = returns;
 	}
 
 	public PerlReturnType getReturnType()
 	{
-		return returnType;
+		return myReturnType;
 	}
 
 	public void setReturnType(PerlReturnType returnType)
 	{
-		this.returnType = returnType;
+		this.myReturnType = returnType;
 	}
 }

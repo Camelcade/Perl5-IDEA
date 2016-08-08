@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlExternalAnnotationDeclarationStubIndex extends StringStubIndexExtension<PerlExternalAnnotationDeclaration>
 {
-	public static final int VERSION = 2;
+	public static final int VERSION = 1;
 	public static final StubIndexKey<String, PerlExternalAnnotationDeclaration> KEY = StubIndexKey.createIndexKey("perl.external.annotations");
 
 	@Override

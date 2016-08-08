@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MojoliciousHelpersStubIndex extends StringStubIndexExtension<MojoliciousHelperDeclaration>
 {
-	public static final int VERSION = 3;
+	public static final int VERSION = 4;
 	public static final StubIndexKey<String, MojoliciousHelperDeclaration> KEY = StubIndexKey.createIndexKey("perl.mojo.helper");
 
 	@Override
