@@ -92,6 +92,14 @@ project.afterEvaluate {
             from XSParser
             into perlUtils
         }
+
+        def perlAnnotations = "$it.destinationDir/annotations/"
+        def perlAnnotationsSource = "annotations"
+        copy {
+            from perlAnnotationsSource
+            into perlAnnotations
+            include "**/*.pmea"
+        }
     }
 }
 

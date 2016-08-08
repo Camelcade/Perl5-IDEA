@@ -27,14 +27,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -53,28 +53,91 @@ public class PerlPackageCompletionUtil
 	 * @return lookup element
 	 */
 	@NotNull
-	public static LookupElementBuilder getPackageLookupElement(Project project, String packageName)
+	public static LookupElementBuilder getPackageLookupElement(
+			@NotNull Project project,
+			@NotNull String packageName
+	)
+	{
+		return getPackageLookupElement(project, packageName, null);
+	}
+
+	@NotNull
+	public static LookupElementBuilder getPackageLookupElement(
+			@NotNull Project project,
+			@NotNull String packageName,
+			@Nullable String lookupString
+	)
+	{
+		return getPackageLookupElement(
+				lookupString == null ? packageName : lookupString,
+				PerlPackageUtil.isBuiltIn(packageName),
+				PerlPackageUtil.isPragma(packageName),
+				PerlPackageUtil.isDeprecated(project, packageName)
+		);
+	}
+
+	@Nullable
+	public static LookupElementBuilder getPackageLookupElement(@NotNull PerlNamespaceDefinition namespaceDefinition)
+	{
+		return getPackageLookupElement(namespaceDefinition, null);
+	}
+
+	@Nullable
+	public static LookupElementBuilder getPackageLookupElement(
+			@NotNull PerlNamespaceDefinition namespaceDefinition,
+			@Nullable String lookupString
+	)
+	{
+		String packageName = namespaceDefinition.getPackageName();
+		if (packageName == null)
+		{
+			return null;
+		}
+
+		if (lookupString == null)
+		{
+			lookupString = packageName;
+		}
+
+		return getPackageLookupElement(
+				lookupString,
+				PerlPackageUtil.isBuiltIn(packageName),
+				PerlPackageUtil.isPragma(packageName),
+				namespaceDefinition.isDeprecated()
+		);
+	}
+
+	// fixme we could generalize this
+	@NotNull
+	public static LookupElementBuilder getPackageLookupElement(
+			String lookupString,
+			boolean isBuitIn,
+			boolean isPragma,
+			boolean isDeprecated
+	)
 	{
 		LookupElementBuilder result = LookupElementBuilder
-				.create(packageName)
+				.create(lookupString)
 				.withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
 
-		if (PerlPackageUtil.isBuiltIn(packageName))
+		if (isBuitIn)
 		{
 			result = result.withBoldness(true);
 		}
 
-		if (PerlPackageUtil.isPragma(packageName))
+		if (isPragma)
 		{
 			result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
 		}
 
-		// fixme this should be adjusted in #954
-//		if (PerlPackageUtil.isDeprecated(project, packageName))
-//			result = result.withStrikeoutness(true);
+		if (isDeprecated)
+		{
+			result = result.withStrikeoutness(true);
+		}
 
 		return result;
 	}
+
 
 	/**
 	 * Returns package lookup element with automatic re-opening autocompeltion
@@ -82,29 +145,34 @@ public class PerlPackageCompletionUtil
 	 * @param packageName package name
 	 * @return lookup element
 	 */
-	public static LookupElementBuilder getPackageLookupElementWithAutocomplete(Project project, String packageName)
+	public static LookupElementBuilder getPackageLookupElementWithAutocomplete(
+			Project project,
+			String packageName,
+			String lookupString
+	)
 	{
-		return getPackageLookupElement(project, packageName)
+		return getPackageLookupElement(project, packageName, lookupString)
 				.withInsertHandler(COMPLETION_REOPENER)
 				.withTailText("...");
 	}
 
-	public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
+	public static void fillWithDefinedNamespaces(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
 		final Project project = element.getProject();
 
-		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		result.addElement(getPackageLookupElement(project, PerlPackageUtil.UNIVERSAL_PACKAGE));
+
+		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
-			@Override
-			public boolean process(String s)
+			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 			{
-				if (super.process(s))
+				LookupElementBuilder packageLookupElement = getPackageLookupElement(namespaceDefinition);
+				if (packageLookupElement != null)
 				{
-					result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+					result.addElement(packageLookupElement);
 				}
-				return true;
 			}
-		});
+		}
 	}
 
 	public static void fillWithAllPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
@@ -112,35 +180,7 @@ public class PerlPackageCompletionUtil
 		final Project project = element.getProject();
 		final String prefix = result.getPrefixMatcher().getPrefix();
 
-		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
-		{
-			@Override
-			public boolean process(String packageName)
-			{
-				if (super.process(packageName))
-				{
-					addExpandablePackageElement(project, result, packageName, prefix);
-				}
-				return true;
-			}
-		});
-	}
-
-	public static void fillWithAllBuiltInPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
-	{
-		final Project project = element.getProject();
-		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-		{
-			result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
-		}
-	}
-
-	public static void fillWithAllBuiltInPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
-	{
-		final Project project = element.getProject();
-		final String prefix = result.getPrefixMatcher().getPrefix();
-
-		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
+		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
 			addExpandablePackageElement(project, result, packageName, prefix);
 		}
@@ -151,14 +191,14 @@ public class PerlPackageCompletionUtil
 		String name = packageName + PerlPackageUtil.PACKAGE_SEPARATOR;
 		if (!StringUtil.equals(prefix, name))
 		{
-			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, packageName, name);
 			newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
 			result.addElement(newElement);
 		}
 		name = packageName + PerlPackageUtil.PACKAGE_DEREFERENCE;
 		if (!StringUtil.equals(prefix, name))
 		{
-			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+			LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, packageName, name);
 			newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
 			result.addElement(newElement);
 		}

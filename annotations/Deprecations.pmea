@@ -1,0 +1,14 @@
+#@deprecated
+package Locale::Maketext::Guts;
+
+#@deprecated
+package Locale::Maketext::GutsLoader;
+
+#@deprecated
+package Module::Build::ModuleInfo;
+
+#@deprecated
+package Module::Build::Version;
+
+#@deprecated
+package Module::Build::YAML;

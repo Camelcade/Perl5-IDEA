@@ -31,7 +31,6 @@ public class TryCatchPackageCompletionProvider extends CompletionProvider<Comple
 	@Override
 	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result)
 	{
-		PerlPackageCompletionUtil.fillWithAllBuiltInPackageNames(parameters.getPosition(), result);
-		PerlPackageCompletionUtil.fillWithAllPackageNames(parameters.getPosition(), result);
+		PerlPackageCompletionUtil.fillWithDefinedNamespaces(parameters.getPosition(), result);
 	}
 }

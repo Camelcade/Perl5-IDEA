@@ -76,6 +76,20 @@ public class PerlPluginUtil
 	}
 
 	@Nullable
+	public static String getPluginAnnotationsRoot()
+	{
+		String pluginRoot = getPluginRoot();
+		return pluginRoot == null ? null : pluginRoot + "/annotations";
+	}
+
+	@Nullable
+	public static VirtualFile getPluginAnnotationsRootVirtualFile()
+	{
+		String annotaionsRoot = getPluginAnnotationsRoot();
+		return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
+	}
+
+	@Nullable
 	public static VirtualFile getPluginScriptVirtualFile(String scriptName)
 	{
 		String scriptsRoot = getPluginPerlScriptsRoot();

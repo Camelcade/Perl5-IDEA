@@ -50,45 +50,20 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 
 		if (!((PsiPerlMethod) method).isObjectMethod())
 		{
-			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNamesWithAutocompletion(parameters.getPosition(), result);
 			PerlPackageCompletionUtil.fillWithAllPackageNamesWithAutocompletion(parameters.getPosition(), result);
 		}
 		else
 		{
 			if (!StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE_FULL, newPrefixMathcer))
 			{
-				LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(method.getProject(), PerlPackageUtil.SUPER_PACKAGE_FULL);
+				LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(
+						method.getProject(),
+						PerlPackageUtil.SUPER_PACKAGE,
+						PerlPackageUtil.SUPER_PACKAGE_FULL
+				);
 				newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
 				result.addElement(newElement);
 			}
 		}
-
-
-//
-//		final String finalNameFilter = nameFilter;
-//
-//		if (!isObjectMethod)
-//		{
-//			// fixme not dry with PerlPackageNamesCompletionProvider
-//			PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
-//			{
-//				@Override
-//				public boolean process(String s)
-//				{
-//					if (super.process(s))
-//					{
-//						if (finalNameFilter == null)
-//						{
-//							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
-//						}
-//						else if (s.startsWith(finalNameFilter))
-//						{
-//							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
-//						}
-//					}
-//					return true;
-//				}
-//			});
-//		}
 	}
 }

@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -70,11 +71,14 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 
 		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
 		{
-//			System.err.println("Adding " + entry);
-			Library tableLibrary = table.createLibrary();
-			Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-			modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
-			modifiableModel.commit();
+			addClassRootLibrary(table, virtualFile, false);
+		}
+
+		// add external annotations coming with plugin
+		VirtualFile pluginAnnotationsRootVirtualFile = PerlPluginUtil.getPluginAnnotationsRootVirtualFile();
+		if (pluginAnnotationsRootVirtualFile != null)
+		{
+			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, true);
 		}
 
 		OrderEntry[] entries = rootModel.getOrderEntries();
@@ -102,15 +106,23 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 					VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
 					if (incFile != null)
 					{
-						Library tableLibrary = table.createLibrary();
-						Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-						modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
-						modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
-						modifiableModel.commit();
+						addClassRootLibrary(table, incFile, true);
 					}
 				}
 			}
 		}
+	}
+
+	private static void addClassRootLibrary(LibraryTable table, VirtualFile virtualFile, boolean addSource)
+	{
+		Library tableLibrary = table.createLibrary();
+		Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
+		modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
+		if (addSource)
+		{
+			modifiableModel.addRoot(virtualFile, OrderRootType.SOURCES);
+		}
+		modifiableModel.commit();
 	}
 
 	public void initComponent()

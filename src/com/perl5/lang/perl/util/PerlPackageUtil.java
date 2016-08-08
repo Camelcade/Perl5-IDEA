@@ -32,6 +32,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.intellij.util.containers.HashSet;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
@@ -82,7 +83,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	public static final String CORE_PACKAGE = "CORE";
 	public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
-	;
+
+	private static final Set<String> INTERNAL_PACKAGES = new HashSet<String>();
 
 	private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String, String>();
 	private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<String, String>();
@@ -91,7 +93,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	{
 		BUILT_IN_ALL.addAll(BUILT_IN);
 		BUILT_IN_ALL.addAll(BUILT_IN_PRAGMA);
-		BUILT_IN_ALL.addAll(BUILT_IN_DEPRECATED);
+
+		INTERNAL_PACKAGES.add(SUPER_PACKAGE);
+		INTERNAL_PACKAGES.add(MAIN_PACKAGE);
+		INTERNAL_PACKAGES.add(UNIVERSAL_PACKAGE);
+		INTERNAL_PACKAGES.add(CORE_PACKAGE);
 	}
 
 	/**
@@ -124,7 +130,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean isDeprecated(Project project, String packageName)
 	{
-		if (isMain(packageName))
+		if (INTERNAL_PACKAGES.contains(packageName))
 		{
 			return false;
 		}
@@ -137,7 +143,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 			}
 		}
 
-		return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(packageName));
+		return false;
 	}
 
 	public static boolean isSUPER(String packageName)
@@ -872,7 +878,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 					PerlExternalAnnotationNamespaceStubIndex.KEY,
 					canonicalName,
 					project,
-					GlobalSearchScope.projectScope(project),
+					PerlScopes.getProjectAndLibrariesScope(project),
 					PerlExternalAnnotationNamespace.class
 			))
 			{

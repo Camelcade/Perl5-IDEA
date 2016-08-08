@@ -64,22 +64,26 @@ public class PerlExternalAnnotationsParser extends PerlParserImpl implements Per
 				PerlParserUtil.parsePerlVersion(b, l);
 				parseOptionalSemicolon(b, l);
 
-				PsiBuilder.Marker contentMarker = b.mark();
-
-				while (!b.eof())
+				// this is a hack for grammar kit. Otherwise first getTokenType advances lexer and it's not possible to make it less greedy
+				if (b.lookAhead(0) != RESERVED_PACKAGE)
 				{
-					if (b.getTokenType() == RESERVED_PACKAGE)
-					{
-						break;
-					}
-					else if (!parsePseudoDeclaration(b, l))
-					{
-						recoverPseudoDeclaration(b, l);
-					}
-				}
+					PsiBuilder.Marker contentMarker = b.mark();
 
-				contentMarker.done(NAMESPACE_CONTENT);
-				contentMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+					while (!b.eof())
+					{
+						if (b.getTokenType() == RESERVED_PACKAGE)
+						{
+							break;
+						}
+						else if (!parsePseudoDeclaration(b, l))
+						{
+							recoverPseudoDeclaration(b, l);
+						}
+					}
+
+					contentMarker.done(NAMESPACE_CONTENT);
+					contentMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.DEFAULT_RIGHT_BINDER);
+				}
 
 				m.done(PSEUDO_NAMESPACE);
 				return true;

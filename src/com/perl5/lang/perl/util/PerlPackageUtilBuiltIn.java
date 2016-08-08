@@ -27,7 +27,7 @@ import java.util.Set;
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
 public interface PerlPackageUtilBuiltIn
 {
-	public static final Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
+	Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
 			"AnyDBM_File",
 			"App::Prove",
 			"App::Prove::State",
@@ -446,10 +446,17 @@ public interface PerlPackageUtilBuiltIn
 			"User::pwent",
 			"XSLoader",
 			PerlPackageUtil.MAIN_PACKAGE,
-			PerlPackageUtil.CORE_PACKAGE
+			PerlPackageUtil.CORE_PACKAGE,
+
+			// these are deprecated
+			"Locale::Maketext::Guts",
+			"Locale::Maketext::GutsLoader",
+			"Module::Build::ModuleInfo",
+			"Module::Build::Version",
+			"Module::Build::YAML"
 	));
 
-	public static final Set<String> BUILT_IN_PRAGMA = new THashSet<String>(Arrays.asList(
+	Set<String> BUILT_IN_PRAGMA = new THashSet<String>(Arrays.asList(
 			"attributes",
 			"autodie",
 			"autouse",
@@ -489,13 +496,5 @@ public interface PerlPackageUtilBuiltIn
 			"vmsish",
 			"warnings",
 			"warnings::register"
-	));
-
-	public static final Set<String> BUILT_IN_DEPRECATED = new THashSet<String>(Arrays.asList(
-			"Locale::Maketext::Guts",
-			"Locale::Maketext::GutsLoader",
-			"Module::Build::ModuleInfo",
-			"Module::Build::Version",
-			"Module::Build::YAML"
 	));
 }

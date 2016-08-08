@@ -472,7 +472,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 					PerlExternalAnnotationDeclarationStubIndex.KEY,
 					canonicalName,
 					project,
-					GlobalSearchScope.projectScope(project),
+					PerlScopes.getProjectAndLibrariesScope(project),
 					PerlExternalAnnotationDeclaration.class
 			))
 			{

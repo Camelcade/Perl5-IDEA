@@ -70,7 +70,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
 		{
 			PerlStringCompletionUtil.fillWithRefTypes(result);
-			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+			PerlPackageCompletionUtil.fillWithDefinedNamespaces(element, result);
 		}
 	}
 }
