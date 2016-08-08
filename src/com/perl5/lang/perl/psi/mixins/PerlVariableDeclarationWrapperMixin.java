@@ -31,14 +31,16 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlVariableUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -125,7 +127,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		}
 
 		// check explicit name in declaration
-		PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+		PerlVariableDeclaration declaration = getPerlDeclaration();
 		if (declaration != null)
 		{
 			String declaredType = declaration.getDeclarationType();
@@ -138,6 +140,13 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 
 		return null;
 	}
+
+	@Nullable
+	private PerlVariableDeclaration getPerlDeclaration()
+	{
+		return PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+	}
+
 
 	@Nullable
 	@Override
@@ -165,13 +174,10 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	@Override
 	public boolean isDeprecated()
 	{
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.isDeprecated();
-		}
-		return PerlPsiUtil.getAnyAnnotationByClass(this, PerlAnnotationDeprecatedImpl.class) != null;
+		PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
+		return variableAnnotations != null && variableAnnotations.isDeprecated();
 	}
+
 
 	@NotNull
 	@Override
@@ -257,5 +263,50 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 			return processor.execute(this, state);
 		}
 		return super.processDeclarations(processor, state, lastParent, place);
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getVariableAnnotations()
+	{
+		PerlVariableAnnotations variableAnnotations;
+
+		PerlVariableStub stub = getStub();
+		if (stub != null)
+		{
+			variableAnnotations = stub.getVariableAnnotations();
+		}
+		else
+		{
+			// re-parsing
+			variableAnnotations = getLocalVariableAnnotations();
+		}
+
+		if (variableAnnotations != null)
+		{
+			return variableAnnotations;
+		}
+
+		return getExternalVariableAnnotations();
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getLocalVariableAnnotations()
+	{
+		List<PerlAnnotation> perlAnnotations = PerlPsiUtil.collectAnnotations(this);
+		if (perlAnnotations.isEmpty())
+		{
+			perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
+		}
+		return PerlVariableUtil.aggregateAnnotationsList(perlAnnotations);
+	}
+
+	@Nullable
+	@Override
+	public PerlVariableAnnotations getExternalVariableAnnotations()
+	{
+		// fixme NYI
+		return null;
 	}
 }

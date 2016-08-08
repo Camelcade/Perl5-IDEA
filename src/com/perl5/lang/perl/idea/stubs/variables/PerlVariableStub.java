@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.stubs.variables;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,9 +35,16 @@ public interface PerlVariableStub extends StubElement<PerlVariableDeclarationWra
 	@Nullable
 	String getDeclaredType();
 
-	boolean isDeprecated();
-
 	PerlVariableType getActualType();
 
 	StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey();
+
+	/**
+	 * Returns stubbed, local or external variable annotations
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlVariableAnnotations getVariableAnnotations();
+
 }

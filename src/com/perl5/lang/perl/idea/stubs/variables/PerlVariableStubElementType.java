@@ -25,9 +25,11 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationWrapperImpl;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -44,7 +46,14 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 	@Override
 	public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub)
 	{
-		return new PerlVariableStubImpl(parentStub, this, psi.getPackageName(), psi.getName(), psi.getDeclaredType(), psi.getActualType(), psi.isDeprecated());
+		return new PerlVariableStubImpl(
+				parentStub,
+				this,
+				psi.getPackageName(),
+				psi.getName(),
+				psi.getDeclaredType(),
+				psi.getActualType(),
+				psi.getLocalVariableAnnotations());
 	}
 
 	@Override
@@ -91,7 +100,17 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getVariableName());
 		dataStream.writeByte(stub.getActualType().ordinal());
-		dataStream.writeBoolean(stub.isDeprecated());
+
+		PerlVariableAnnotations annotations = stub.getVariableAnnotations();
+		if (annotations == null)
+		{
+			dataStream.writeBoolean(false);
+		}
+		else
+		{
+			dataStream.writeBoolean(true);
+			annotations.serialize(dataStream);
+		}
 	}
 
 	@NotNull
@@ -111,8 +130,14 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 				dataStream.readName().toString(),
 				variableType,
 				PerlVariableType.values()[dataStream.readByte()],
-				dataStream.readBoolean()
+				readAnnotations(dataStream)
 		);
+	}
+
+	@Nullable
+	private PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException
+	{
+		return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : null;
 	}
 
 	@Override
