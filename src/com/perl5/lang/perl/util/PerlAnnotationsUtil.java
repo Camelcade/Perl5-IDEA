@@ -27,6 +27,7 @@ import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
 import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -47,22 +48,28 @@ public class PerlAnnotationsUtil
 		@Override
 		protected VirtualFile compute()
 		{
-			String annotaionsRoot = getPluginAnnotationsRoot();
+			String annotaionsRoot = getPluginAnnotationsPath();
 			return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
 		}
 	};
 
 	@Nullable
-	public static String getPluginAnnotationsRoot()
+	public static String getPluginAnnotationsPath()
 	{
 		String pluginRoot = PerlPluginUtil.getPluginRoot();
 		return pluginRoot == null ? null : pluginRoot + "/annotations";
 	}
 
 	@Nullable
-	public static VirtualFile getPluginAnnotationsRootVirtualFile()
+	public static VirtualFile getPluginAnnotationsRoot()
 	{
 		return myLazyAnnotationsRootVirtualFile.getValue();
+	}
+
+	@Nullable
+	public static VirtualFile getApplicationAnnotationsRoot()
+	{
+		return PerlApplicationSettings.getInstance().getApplicationAnnotationsRoot();
 	}
 
 	@Nullable

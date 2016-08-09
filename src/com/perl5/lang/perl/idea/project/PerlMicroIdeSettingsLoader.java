@@ -75,10 +75,17 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 		}
 
 		// add external annotations coming with plugin
-		VirtualFile pluginAnnotationsRootVirtualFile = PerlAnnotationsUtil.getPluginAnnotationsRootVirtualFile();
+		VirtualFile pluginAnnotationsRootVirtualFile = PerlAnnotationsUtil.getPluginAnnotationsRoot();
 		if (pluginAnnotationsRootVirtualFile != null)
 		{
-			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, true);
+			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, false);
+		}
+
+		// add application-level external annotations
+		VirtualFile applicationAnnotationsRoot = PerlAnnotationsUtil.getApplicationAnnotationsRoot();
+		if (applicationAnnotationsRoot != null)
+		{
+			addClassRootLibrary(table, applicationAnnotationsRoot, false);
 		}
 
 		OrderEntry[] entries = rootModel.getOrderEntries();

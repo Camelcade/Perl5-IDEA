@@ -16,15 +16,21 @@
 
 package com.perl5.lang.perl.idea.configuration.settings;
 
+import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
 
 /**
  * Created by hurricup on 16.04.2016.
@@ -37,6 +43,9 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 {
 	public String pluginVersion = "";
 	public boolean popupShown = false;
+
+	private String myApplicationAnnotationsPath = PathManager.getConfigPath() + "/perl5/annotations";
+	private transient NullableLazyValue<VirtualFile> myApplicationAnnotationsLazyRoot;
 
 	public static PerlApplicationSettings getInstance()
 	{
@@ -80,5 +89,50 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 	public boolean shouldShowAnnounce()
 	{
 		return isVersionChanged() || !popupShown;
+	}
+
+	@Nullable
+	public String getApplicationAnnotationsPath()
+	{
+		return myApplicationAnnotationsPath;
+	}
+
+	public void setApplicationAnnotationsPath(String applicationAnnotationsPath)
+	{
+		myApplicationAnnotationsPath = applicationAnnotationsPath;
+		myApplicationAnnotationsLazyRoot = null;
+	}
+
+	@Nullable
+	public synchronized VirtualFile getApplicationAnnotationsRoot()
+	{
+		if (myApplicationAnnotationsLazyRoot == null)
+		{
+			myApplicationAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
+			{
+				@Nullable
+				@Override
+				protected VirtualFile compute()
+				{
+					File file = new File(myApplicationAnnotationsPath);
+					if (file.exists())
+					{
+						if (file.isDirectory())
+						{
+							return VfsUtil.findFileByIoFile(file, true);
+						}
+					}
+					else
+					{
+						if (file.mkdirs())
+						{
+							return VfsUtil.findFileByIoFile(file, true);
+						}
+					}
+					return null;
+				}
+			};
+		}
+		return myApplicationAnnotationsLazyRoot.getValue();
 	}
 }
