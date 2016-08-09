@@ -26,7 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
@@ -61,7 +61,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 				resultSet.addElement(LookupElementBuilder
 						.create(name)
 						.withIcon(element.getIcon(0))
-						.withTailText(HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) element))
+						.withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) element))
 				);
 			}
 		}
@@ -80,7 +80,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 					resultSet.addElement(LookupElementBuilder
 							.create(name)
 							.withIcon(element.getIcon(0))
-							.withTailText(HTMLMasonUtils.getArgumentsListAsString(element))
+							.withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
 					);
 				}
 				return true;
@@ -139,7 +139,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
 
 					if (file instanceof HTMLMasonFileImpl)
 					{
-						newElement = newElement.withTailText(HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) file));
+						newElement = newElement.withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) file));
 					}
 
 					myResultSet.addElement(newElement);

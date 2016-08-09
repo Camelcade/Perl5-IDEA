@@ -22,7 +22,7 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public interface PerlScalarUtilBuiltIn
+public interface PerlBuiltInScalars
 {
 	HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			"^]",

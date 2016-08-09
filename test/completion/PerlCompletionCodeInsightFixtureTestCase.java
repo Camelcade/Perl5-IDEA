@@ -53,7 +53,7 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	protected static List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES);
 	protected static List<String> HASH_LOOKUPS = mergeLists(BUILT_IN_HASHES);
 
-	protected static List<String> BUILT_IN_SUBS = new ArrayList<>(PerlSubUtilBuiltIn.BUILT_IN);
+	protected static List<String> BUILT_IN_SUBS = new ArrayList<>(PerlBuiltInSubs.BUILT_IN);
 
 	protected static List<String> PACKAGES_LOOKUPS = new ArrayList<>();
 

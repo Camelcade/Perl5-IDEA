@@ -29,7 +29,7 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import com.perl5.lang.tt2.psi.PsiElsifBranch;
 import com.perl5.lang.tt2.psi.impl.*;
-import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtils;
+import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -120,7 +120,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 				return false;
 			}
 
-			PsiElement prevElement = TemplateToolkitPsiUtils.getPrevSignificantSibling(parent);
+			PsiElement prevElement = TemplateToolkitPsiUtil.getPrevSignificantSibling(parent);
 			return prevElement != null && TemplateToolkitSyntaxElements.ATOMIC_EXPRESSIONS.contains(prevElement.getNode().getElementType());
 		}
 	}
@@ -157,7 +157,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 				return false;
 			}
 
-			PsiElement prevSignificantSibling = TemplateToolkitPsiUtils.getPrevSignificantSibling(grandParent);
+			PsiElement prevSignificantSibling = TemplateToolkitPsiUtil.getPrevSignificantSibling(grandParent);
 
 			if (prevSignificantSibling == null)
 			{

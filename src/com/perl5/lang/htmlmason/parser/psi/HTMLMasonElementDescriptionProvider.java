@@ -23,7 +23,7 @@ import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,11 +45,11 @@ public class HTMLMasonElementDescriptionProvider implements ElementDescriptionPr
 			}
 			else if (location == UsageViewNodeTextLocation.INSTANCE) // name inside type tree node
 			{
-				return ((HTMLMasonNamedElement) element).getName() + HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) element);
+				return ((HTMLMasonNamedElement) element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) element);
 			}
 			else if (location == UsageViewShortNameLocation.INSTANCE) // ctrl+hover hint
 			{
-				return ((HTMLMasonNamedElement) element).getName() + HTMLMasonUtils.getArgumentsListAsString((HTMLMasonParametrizedEntity) element);
+				return ((HTMLMasonNamedElement) element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) element);
 			}
 			else if (element instanceof HTMLMasonMethodDefinition)
 			{

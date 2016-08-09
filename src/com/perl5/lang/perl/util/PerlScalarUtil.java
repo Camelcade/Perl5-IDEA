@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
+public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars
 {
 	/**
 	 * Checks if variable is built in

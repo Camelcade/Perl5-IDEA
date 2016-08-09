@@ -22,7 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.LanguageSubstitutor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +44,7 @@ public class HTMLMasonLanguageSubstitutor extends LanguageSubstitutor
 	@Override
 	public Language getLanguage(@NotNull VirtualFile file, @NotNull Project project)
 	{
-		if (myFileNameMatcher.accept(file.getName()) && HTMLMasonUtils.getComponentRoot(myProject, file) != null)
+		if (myFileNameMatcher.accept(file.getName()) && HTMLMasonUtil.getComponentRoot(myProject, file) != null)
 		{
 //			System.err.println(file.getName() +  " substituted as HTML::Mason");
 			return HTMLMasonLanguage.INSTANCE;

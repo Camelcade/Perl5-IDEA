@@ -18,7 +18,7 @@ package com.perl5.lang.htmlmason.documentation;
 
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +33,7 @@ public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvide
 	{
 		if (element instanceof HTMLMasonFileImpl)
 		{
-			return "HTML::Mason component:<br>" + ((HTMLMasonFileImpl) element).getAbsoluteComponentPath() + HTMLMasonUtils.getArgumentsListAsString((HTMLMasonFileImpl) element);
+			return "HTML::Mason component:<br>" + ((HTMLMasonFileImpl) element).getAbsoluteComponentPath() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl) element);
 		}
 		return super.getQuickNavigateInfo(element, originalElement);
 	}

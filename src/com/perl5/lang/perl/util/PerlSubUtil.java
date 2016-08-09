@@ -45,7 +45,7 @@ import java.util.*;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
+public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs
 {
 	public static final String SUB_AUTOLOAD = "AUTOLOAD";
 	public static final String SUB_AUTOLOAD_WITH_PREFIX = PerlPackageUtil.PACKAGE_SEPARATOR + SUB_AUTOLOAD;

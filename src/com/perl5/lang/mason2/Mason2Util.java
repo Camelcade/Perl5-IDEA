@@ -27,7 +27,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.indexing.FileBasedIndexProjectHandler;
-import com.perl5.lang.htmlmason.MasonCoreUtils;
+import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
@@ -44,7 +44,7 @@ import java.util.List;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class Mason2Utils
+public class Mason2Util
 {
 	@NotNull
 	public static String getClassnameFromPath(@NotNull String path)
@@ -71,7 +71,7 @@ public class Mason2Utils
 	@Nullable
 	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
 	{
-		return MasonCoreUtils.getComponentRoot(MasonSettings.getInstance(project), file);
+		return MasonCoreUtil.getComponentRoot(MasonSettings.getInstance(project), file);
 	}
 
 	public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath)
@@ -117,7 +117,7 @@ public class Mason2Utils
 				String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
 				if (absolutePath != null)
 				{
-					result.addAll(Mason2Utils.getMasonNamespacesByAbsolutePath(project, absolutePath));
+					result.addAll(Mason2Util.getMasonNamespacesByAbsolutePath(project, absolutePath));
 				}
 			}
 		}

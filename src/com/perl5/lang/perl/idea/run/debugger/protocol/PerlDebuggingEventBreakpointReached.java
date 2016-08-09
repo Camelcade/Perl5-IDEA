@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import com.perl5.lang.perl.util.PerlDebugUtils;
+import com.perl5.lang.perl.util.PerlDebugUtil;
 
 /**
  * Created by hurricup on 08.05.2016.
@@ -34,7 +34,7 @@ public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop 
 	public void run()
 	{
 		XDebugSession session = getDebugSession();
-		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);
+		XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
 		if (breakpoint != null)
 		{
 			session.breakpointReached(breakpoint, logmessage, getSuspendContext());

@@ -46,7 +46,7 @@ import java.util.Collection;
 /**
  * Created by hurricup on 07.05.2016.
  */
-public class PerlDebugUtils
+public class PerlDebugUtil
 {
 	@Nullable
 	public static XLineBreakpoint findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase)

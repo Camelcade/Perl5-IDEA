@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 11.05.2015.
  */
-public interface PerlSubUtilBuiltIn
+public interface PerlBuiltInSubs
 {
 
 	Set<String> BUILT_IN = new HashSet<String>(Arrays.asList(

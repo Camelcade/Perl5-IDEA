@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MojoliciousSmartKeysUtils implements MojoliciousElementTypes, PerlElementTypes
+public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlElementTypes
 {
 	private static final TokenSet CLOSE_TOKENS = TokenSet.create(
 			MOJO_BLOCK_CLOSER,
