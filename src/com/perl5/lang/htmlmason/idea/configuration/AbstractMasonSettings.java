@@ -43,12 +43,6 @@ public abstract class AbstractMasonSettings
 	@Transient
 	private List<VirtualFile> componentsRootsVirtualFiles = null;
 
-	protected AbstractMasonSettings setProject(Project project)
-	{
-		myProject = project;
-		return this;
-	}
-
 	public void settingsUpdated()
 	{
 		componentsRootsVirtualFiles = null;

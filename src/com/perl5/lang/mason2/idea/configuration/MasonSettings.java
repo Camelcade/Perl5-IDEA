@@ -43,7 +43,13 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
 {
 	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
 
-	public MasonSettings()
+	public MasonSettings(Project project)
+	{
+		this();
+		myProject = project;
+	}
+
+	private MasonSettings()
 	{
 		globalVariables.add(new VariableDescription("$m", "Mason::Request"));
 		changeCounter++;
@@ -52,12 +58,7 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
 	public static MasonSettings getInstance(@NotNull Project project)
 	{
 		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
-		if (persisted == null)
-		{
-			persisted = new MasonSettings();
-		}
-
-		return (MasonSettings) persisted.setProject(project);
+		return persisted == null ? new MasonSettings(project) : persisted;
 	}
 
 	@Nullable

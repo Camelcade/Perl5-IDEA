@@ -75,7 +75,13 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	@Transient
 	private transient Project myProject;
 
-	public TemplateToolkitSettings()
+	public TemplateToolkitSettings(Project project)
+	{
+		this();
+		myProject = project;
+	}
+
+	private TemplateToolkitSettings()
 	{
 		createLazyObjects();
 	}
@@ -84,14 +90,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 	public static TemplateToolkitSettings getInstance(@NotNull Project project)
 	{
 		TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
-
-		if (persisted == null)
-		{
-			persisted = new TemplateToolkitSettings();
-		}
-		persisted.setProject(project);
-
-		return persisted;
+		return persisted == null ? new TemplateToolkitSettings(project) : persisted;
 	}
 
 	public void settingsUpdated()
@@ -114,11 +113,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 			);
 		}
 		FileContentUtil.reparseOpenedFiles();
-	}
-
-	protected void setProject(Project project)
-	{
-		myProject = project;
 	}
 
 	private void createLazyObjects()

@@ -77,7 +77,13 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 	@Transient
 	private Map<String, IElementType> myCloseTokensMap;
 
-	public HTMLMasonSettings()
+	public HTMLMasonSettings(Project project)
+	{
+		this();
+		myProject = project;
+	}
+
+	private HTMLMasonSettings()
 	{
 		globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
 		globalVariables.add(new VariableDescription("$r", "Apache::Request"));
@@ -87,14 +93,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 	public static HTMLMasonSettings getInstance(@NotNull Project project)
 	{
 		HTMLMasonSettings persisted = ServiceManager.getService(project, HTMLMasonSettings.class);
-		if (persisted == null)
-		{
-			persisted = new HTMLMasonSettings();
-		}
-
-		persisted.setProject(project);
-
-		return persisted;
+		return persisted == null ? new HTMLMasonSettings(project) : persisted;
 	}
 
 	@Nullable
