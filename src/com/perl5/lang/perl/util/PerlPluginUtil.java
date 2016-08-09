@@ -21,6 +21,7 @@ import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -35,6 +36,40 @@ import java.io.IOException;
 public class PerlPluginUtil
 {
 	public static final String PLUGIN_ID = "com.perl5";
+
+	private static NullableLazyValue<String> myLazyPluginRoot = new NullableLazyValue<String>()
+	{
+		@Nullable
+		@Override
+		protected String compute()
+		{
+			IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
+			if (plugin != null)
+			{
+				try
+				{
+					return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
+				}
+				catch (IOException e)
+				{
+					return null;
+				}
+			}
+			return null;
+		}
+	};
+
+	private static NullableLazyValue<VirtualFile> myLazyAnnotationsRootVirtualFile = new NullableLazyValue<VirtualFile>()
+	{
+		@Nullable
+		@Override
+		protected VirtualFile compute()
+		{
+			String annotaionsRoot = getPluginAnnotationsRoot();
+			return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
+		}
+	};
+
 
 	@Nullable
 	public static IdeaPluginDescriptor getPlugin()
@@ -52,19 +87,7 @@ public class PerlPluginUtil
 	@Nullable
 	public static String getPluginRoot()
 	{
-		IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
-		if (plugin != null)
-		{
-			try
-			{
-				return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
-			}
-			catch (IOException e)
-			{
-				return null;
-			}
-		}
-		return null;
+		return myLazyPluginRoot.getValue();
 	}
 
 
@@ -85,8 +108,7 @@ public class PerlPluginUtil
 	@Nullable
 	public static VirtualFile getPluginAnnotationsRootVirtualFile()
 	{
-		String annotaionsRoot = getPluginAnnotationsRoot();
-		return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
+		return myLazyAnnotationsRootVirtualFile.getValue();
 	}
 
 	@Nullable
