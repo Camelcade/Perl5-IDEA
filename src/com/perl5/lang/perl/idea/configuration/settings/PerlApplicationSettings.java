@@ -26,6 +26,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.Nullable;
@@ -44,8 +45,10 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 	public String pluginVersion = "";
 	public boolean popupShown = false;
 
-	private String myApplicationAnnotationsPath = PathManager.getConfigPath() + "/perl5/annotations";
-	private transient NullableLazyValue<VirtualFile> myApplicationAnnotationsLazyRoot;
+	private String myAnnotationsPath = PathManager.getConfigPath() + "/perl5/annotations";
+
+	@Transient
+	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;
 
 	public static PerlApplicationSettings getInstance()
 	{
@@ -92,29 +95,32 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 	}
 
 	@Nullable
-	public String getApplicationAnnotationsPath()
+	public String getAnnotationsPath()
 	{
-		return myApplicationAnnotationsPath;
+		return myAnnotationsPath;
 	}
 
-	public void setApplicationAnnotationsPath(String applicationAnnotationsPath)
+	public void setAnnotationsPath(String annotationsPath)
 	{
-		myApplicationAnnotationsPath = applicationAnnotationsPath;
-		myApplicationAnnotationsLazyRoot = null;
+		myAnnotationsPath = annotationsPath;
+		synchronized (this)
+		{
+			myAnnotationsLazyRoot = null;
+		}
 	}
 
 	@Nullable
-	public synchronized VirtualFile getApplicationAnnotationsRoot()
+	public synchronized VirtualFile getAnnotationsRoot()
 	{
-		if (myApplicationAnnotationsLazyRoot == null)
+		if (myAnnotationsLazyRoot == null)
 		{
-			myApplicationAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
+			myAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
 			{
 				@Nullable
 				@Override
 				protected VirtualFile compute()
 				{
-					File file = new File(myApplicationAnnotationsPath);
+					File file = new File(myAnnotationsPath);
 					if (file.exists())
 					{
 						if (file.isDirectory())
@@ -133,6 +139,6 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 				}
 			};
 		}
-		return myApplicationAnnotationsLazyRoot.getValue();
+		return myAnnotationsLazyRoot.getValue();
 	}
 }

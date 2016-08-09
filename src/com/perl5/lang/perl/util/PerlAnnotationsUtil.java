@@ -28,6 +28,7 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -69,7 +70,13 @@ public class PerlAnnotationsUtil
 	@Nullable
 	public static VirtualFile getApplicationAnnotationsRoot()
 	{
-		return PerlApplicationSettings.getInstance().getApplicationAnnotationsRoot();
+		return PerlApplicationSettings.getInstance().getAnnotationsRoot();
+	}
+
+	@Nullable
+	public static VirtualFile getProjectAnnotationsRoot(Project project)
+	{
+		return PerlSharedSettings.getInstance(project).getAnnotationsRoot();
 	}
 
 	@Nullable

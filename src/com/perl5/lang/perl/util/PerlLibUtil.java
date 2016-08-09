@@ -117,6 +117,13 @@ public class PerlLibUtil
 			addClassRootLibrary(table, applicationAnnotationsRoot, false);
 		}
 
+		// Add project-level external annotations
+		VirtualFile projectAnnotationsRoot = PerlAnnotationsUtil.getProjectAnnotationsRoot(rootModel.getProject());
+		if (projectAnnotationsRoot != null)
+		{
+			addClassRootLibrary(table, projectAnnotationsRoot, false);
+		}
+
 		if (!PlatformUtils.isIntelliJ())
 		{
 			// add perl @inc to the end of libs

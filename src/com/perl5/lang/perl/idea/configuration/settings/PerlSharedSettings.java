@@ -19,6 +19,9 @@ package com.perl5.lang.perl.idea.configuration.settings;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NullableLazyValue;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.HashMap;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -27,6 +30,7 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -57,6 +61,11 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 	public String PERL_TIDY_ARGS = "";
 	public String PERL_CRITIC_ARGS = "";
 
+	private String myAnnotationsPath = "annotations";
+
+	@Transient
+	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;
+
 	@Transient
 	private Project myProject;
 	@Transient
@@ -67,7 +76,7 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 		myProject = project;
 	}
 
-	public PerlSharedSettings()
+	private PerlSharedSettings()
 	{
 	}
 
@@ -153,4 +162,58 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 	{
 		return libRootUrlsMap.remove(moduleName);
 	}
+
+	public String getAnnotationsPath()
+	{
+		return myAnnotationsPath;
+	}
+
+	public void setAnnotationsPath(String annotationsPath)
+	{
+		myAnnotationsPath = annotationsPath;
+
+		synchronized (this)
+		{
+			myAnnotationsLazyRoot = null;
+		}
+	}
+
+	@Nullable
+	public synchronized VirtualFile getAnnotationsRoot()
+	{
+		if (myAnnotationsLazyRoot == null)
+		{
+			myAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
+			{
+				@Nullable
+				@Override
+				protected VirtualFile compute()
+				{
+					VirtualFile baseDir = myProject.getBaseDir();
+					VirtualFile result = baseDir.findFileByRelativePath(myAnnotationsPath);
+
+					if (result != null)
+					{
+						if (result.isDirectory())
+						{
+							return result;
+						}
+					}
+					else
+					{
+						try
+						{
+							return VfsUtil.createDirectoryIfMissing(baseDir, myAnnotationsPath);
+						}
+						catch (IOException ignore)
+						{
+						}
+					}
+					return null;
+				}
+			};
+		}
+		return myAnnotationsLazyRoot.getValue();
+	}
+
 }

@@ -24,6 +24,7 @@ import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
@@ -37,12 +38,14 @@ import com.perl5.lang.perl.util.PerlLibUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by hurricup on 30.08.2015.
@@ -57,7 +60,10 @@ public class PerlSettingsConfigurable implements Configurable
 	TextFieldWithBrowseButton perlTidyPathInputField;
 	RawCommandLineEditor perlTidyArgsInputField;
 	TextFieldWithBrowseButton perlPathInputField;
+
 	TextFieldWithBrowseButton applicationExternalAnnotationsPath;
+	TextFieldWithBrowseButton projectExternalAnnotationsPath;
+
 	JTextField deparseArgumentsTextField;
 	JPanel regeneratePanel;
 	JButton regenerateButton;
@@ -107,17 +113,7 @@ public class PerlSettingsConfigurable implements Configurable
 			createMicroIdeComponents(builder);
 		}
 
-		applicationExternalAnnotationsPath = new TextFieldWithBrowseButton();
-		applicationExternalAnnotationsPath.setEditable(false);
-		FileChooserDescriptor applicationLevelAnnotationsDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
-		applicationExternalAnnotationsPath.addBrowseFolderListener(
-				"Select Directory",
-				"Choose an Application Level Annotations Directory:",
-				null, // project
-				applicationLevelAnnotationsDescriptor
-		);
-		builder.addLabeledComponent(new JLabel("Application-level annotations path:"), applicationExternalAnnotationsPath);
-
+		addAnnotationsPaths(builder);
 
 		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
 		builder.addComponent(simpleMainCheckbox);
@@ -247,6 +243,57 @@ public class PerlSettingsConfigurable implements Configurable
 		return builder.getPanel();
 	}
 
+	protected void addAnnotationsPaths(FormBuilder builder)
+	{
+		applicationExternalAnnotationsPath = new TextFieldWithBrowseButton();
+		applicationExternalAnnotationsPath.setEditable(false);
+		FileChooserDescriptor applicationLevelAnnotationsDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+		applicationExternalAnnotationsPath.addBrowseFolderListener(
+				"Select Directory",
+				"Choose an Application Level Annotations Directory:",
+				myProject,
+				applicationLevelAnnotationsDescriptor
+		);
+		builder.addLabeledComponent(new JLabel("Application-level annotations path:"), applicationExternalAnnotationsPath);
+
+
+		projectExternalAnnotationsPath = new TextFieldWithBrowseButton();
+		projectExternalAnnotationsPath.setEditable(false);
+		FileChooserDescriptor projectLevelAnnotationsDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+		projectLevelAnnotationsDescriptor.setRoots(myProject.getBaseDir());
+
+		projectExternalAnnotationsPath.addBrowseFolderListener(
+				"Select Directory",
+				"Choose a Project Level Annotations Directory:",
+				myProject,
+				projectLevelAnnotationsDescriptor,
+				new TextComponentAccessor<JTextField>()
+				{
+					@Override
+					public String getText(JTextField component)
+					{
+						VirtualFile baseDir = myProject.getBaseDir();
+						VirtualFile annotationsPath = baseDir.findFileByRelativePath(component.getText());
+						return annotationsPath == null ? baseDir.getCanonicalPath() : annotationsPath.getCanonicalPath();
+					}
+
+					@Override
+					public void setText(JTextField component, @NotNull String text)
+					{
+						VirtualFile fileByIoFile = VfsUtil.findFileByIoFile(new File(text), true);
+						String result = "";
+						if (fileByIoFile != null)
+						{
+							result = VfsUtil.getRelativePath(fileByIoFile, myProject.getBaseDir());
+						}
+
+						component.setText(result);
+					}
+				}
+		);
+		builder.addLabeledComponent(new JLabel("Project-level annotations path:"), projectExternalAnnotationsPath);
+	}
+
 	protected void createMicroIdeComponents(FormBuilder builder)
 	{
 		perlPathInputField = new TextFieldWithBrowseButton()
@@ -318,7 +365,8 @@ public class PerlSettingsConfigurable implements Configurable
 	public boolean isModified()
 	{
 		return isMicroIdeModified() ||
-				!StringUtil.equals(applicationExternalAnnotationsPath.getText(), myAppSettings.getApplicationAnnotationsPath()) ||
+				!StringUtil.equals(applicationExternalAnnotationsPath.getText(), myAppSettings.getAnnotationsPath()) ||
+				!StringUtil.equals(projectExternalAnnotationsPath.getText(), mySharedSettings.getAnnotationsPath()) ||
 				mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
 				mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
 				mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
@@ -344,7 +392,8 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		myAppSettings.setApplicationAnnotationsPath(applicationExternalAnnotationsPath.getText());
+		myAppSettings.setAnnotationsPath(applicationExternalAnnotationsPath.getText());
+		mySharedSettings.setAnnotationsPath(projectExternalAnnotationsPath.getText());
 
 		mySharedSettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
 		mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
@@ -389,7 +438,8 @@ public class PerlSettingsConfigurable implements Configurable
 		selfNamesModel.removeAll();
 		selfNamesModel.add(mySharedSettings.selfNames);
 
-		applicationExternalAnnotationsPath.setText(myAppSettings.getApplicationAnnotationsPath());
+		applicationExternalAnnotationsPath.setText(myAppSettings.getAnnotationsPath());
+		projectExternalAnnotationsPath.setText(mySharedSettings.getAnnotationsPath());
 
 		simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);

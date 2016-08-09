@@ -51,6 +51,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 	protected final Project myProject;
 	protected final String windowTitile;
 
+	@SuppressWarnings("Since15")
 	protected CollectionListModel<String> rootsModel;
 	protected JBList rootsList;
 
@@ -79,6 +80,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable
 
 	public void createRootsListComponent(FormBuilder builder)
 	{
+		//noinspection Since15
 		rootsModel = new CollectionListModel<String>();
 		rootsList = new JBList(rootsModel);
 		builder.addLabeledComponent(
