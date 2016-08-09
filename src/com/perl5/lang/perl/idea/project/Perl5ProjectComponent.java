@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.ProjectTopics;
 import com.intellij.notification.*;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
@@ -92,6 +93,10 @@ public class Perl5ProjectComponent implements ProjectComponent
 		}
 
 		PerlLibUtil.applyClassPaths(myProject);
+
+		myProject.getMessageBus().connect(myProject).subscribe(ProjectTopics.MODULES, new PerlModuleListener());
+
+
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);

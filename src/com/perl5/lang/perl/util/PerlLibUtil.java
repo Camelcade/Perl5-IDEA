@@ -28,11 +28,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by hurricup on 09.08.2016.
@@ -53,12 +56,32 @@ public class PerlLibUtil
 			{
 				for (Module module : ModuleManager.getInstance(project).getModules())
 				{
+					// fixme we could fix modules here. Any for micro-ide and perl for perl
 					ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
 					applyClassPaths(modifiableModel);
 					modifiableModel.commit();
 				}
 			}
 		});
+	}
+
+	/**
+	 * Scans ModifiableRootModel and update shared settings with new list
+	 *
+	 * @param model module modifiable model
+	 */
+	public static void updatePerlLibsForModel(ModifiableRootModel model)
+	{
+		List<String> libRoots = new ArrayList<String>();
+
+		for (VirtualFile entry : model.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
+		{
+			libRoots.add(entry.getUrl());
+		}
+
+		PerlSharedSettings.getInstance(model.getProject()).setLibRootUrlsForModule(model.getModule(), libRoots);
+
+		applyClassPaths(model);
 	}
 
 	public static void applyClassPaths(ModifiableRootModel rootModel)
@@ -77,7 +100,7 @@ public class PerlLibUtil
 
 		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
 		{
-			addClassRootLibrary(table, virtualFile, false);
+			addClassRootLibrary(table, virtualFile, true);
 		}
 
 		// add external annotations coming with plugin
@@ -93,20 +116,6 @@ public class PerlLibUtil
 		{
 			addClassRootLibrary(table, applicationAnnotationsRoot, false);
 		}
-
-		OrderEntry[] entries = rootModel.getOrderEntries();
-
-		ContainerUtil.sort(entries, new Comparator<OrderEntry>()
-		{
-			@Override
-			public int compare(OrderEntry orderEntry, OrderEntry t1)
-			{
-				int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
-				int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
-				return i2 - i1;
-			}
-		});
-		rootModel.rearrangeOrderEntries(entries);
 
 		if (!PlatformUtils.isIntelliJ())
 		{
@@ -124,6 +133,21 @@ public class PerlLibUtil
 				}
 			}
 		}
+
+		OrderEntry[] entries = rootModel.getOrderEntries();
+
+		ContainerUtil.sort(entries, new Comparator<OrderEntry>()
+		{
+			@Override
+			public int compare(OrderEntry orderEntry, OrderEntry t1)
+			{
+				int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
+				int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
+				return i2 - i1;
+			}
+		});
+		rootModel.rearrangeOrderEntries(entries);
+
 	}
 
 	private static void addClassRootLibrary(LibraryTable table, VirtualFile virtualFile, boolean addSource)

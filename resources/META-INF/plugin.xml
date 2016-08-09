@@ -37,10 +37,11 @@
       <ul>
       </ul>
      </p>
-     <!--<p>Fixes:-->
-      <!--<ul>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Fixes:
+      <ul>
+      <li>Library settings now being stored properly for multi-module projects, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1332">mciprijanovic</a>.</li>
+      </ul>
+     </p>
     ]]>
     </change-notes>
 
@@ -915,7 +916,6 @@
         <component>
             <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
         </component>
-
     </application-components>
 
     <project-components>

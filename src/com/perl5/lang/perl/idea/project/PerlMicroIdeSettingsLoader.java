@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.project;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
@@ -68,40 +69,44 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	public void projectOpened()
 	{
 		// called when project is opened
-		if (!PlatformUtils.isIntelliJ() && ModuleManager.getInstance(myProject).getModules().length > 0)
+		final Module[] modules = ModuleManager.getInstance(myProject).getModules();
+		if (!PlatformUtils.isIntelliJ() && modules.length > 0)
 		{
 			ApplicationManager.getApplication().runWriteAction(new Runnable()
 			{
 				@Override
 				public void run()
 				{
-					ModifiableRootModel rootModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-					ContentEntry[] entries = rootModel.getContentEntries();
-
-					if (entries.length > 0)
+					for (Module module : modules)
 					{
-						ContentEntry entry = entries[0];
-						Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
+						ModifiableRootModel rootModel = ModuleRootManager.getInstance(module).getModifiableModel();
+						ContentEntry[] entries = rootModel.getContentEntries();
 
-						for (SourceFolder folder : entry.getSourceFolders())
+						if (entries.length > 0)
 						{
-							if (libPaths.contains(folder.getUrl()))
-							{
-								entry.removeSourceFolder(folder);
-							}
-						}
+							ContentEntry entry = entries[0];
+							Set<String> libPaths = new HashSet<String>(perl5Settings.getLibRootUrlsForModule(module));
 
-						final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
-						for (String path : libPaths)
-						{
-							if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
+							for (SourceFolder folder : entry.getSourceFolders())
 							{
-								entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
+								if (libPaths.contains(folder.getUrl()))
+								{
+									entry.removeSourceFolder(folder);
+								}
 							}
+
+							final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
+							for (String path : libPaths)
+							{
+								if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
+								{
+									entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
+								}
+							}
+							rootModel.commit();
 						}
-						rootModel.commit();
-						PerlLibUtil.applyClassPaths(myProject);
 					}
+					PerlLibUtil.applyClassPaths(myProject);
 				}
 			});
 		}

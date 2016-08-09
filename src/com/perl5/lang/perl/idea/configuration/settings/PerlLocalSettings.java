@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.configuration.settings;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
@@ -43,10 +44,23 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
 	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
 	public boolean DISABLE_NO_INTERPRETER_WARNING = false;
 
+	@Transient
+	private Project myProject;
+
+	public PerlLocalSettings(Project project)
+	{
+		myProject = project;
+	}
+
+	private PerlLocalSettings()
+	{
+	}
+
+
 	public static PerlLocalSettings getInstance(@NotNull Project project)
 	{
 		PerlLocalSettings persisted = ServiceManager.getService(project, PerlLocalSettings.class);
-		return persisted != null ? persisted : new PerlLocalSettings();
+		return persisted != null ? persisted : new PerlLocalSettings(project);
 	}
 
 	@Nullable

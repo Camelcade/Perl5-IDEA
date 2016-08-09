@@ -21,9 +21,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.roots.ui.configuration.ProjectStructureConfigurable;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
@@ -31,7 +29,6 @@ import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -51,18 +48,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		ModifiableRootModel model = getModel();
-		PerlSharedSettings mySettings = PerlSharedSettings.getInstance(model.getProject());
-
-		List<String> libRoots = mySettings.libRootUrls;
-		libRoots.clear();
-
-		for (VirtualFile entry : model.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
-		{
-			libRoots.add(entry.getUrl());
-		}
-
-		PerlLibUtil.applyClassPaths(model);
+		PerlLibUtil.updatePerlLibsForModel(getModel());
 	}
 
 	@Override

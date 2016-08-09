@@ -68,10 +68,15 @@ public class PerlRunUtil
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
 		commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
-		for (String libRoot : PerlSharedSettings.getInstance(project).libRootUrls)
+
+		Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
+		if (moduleForFile != null)
 		{
-			String includePath = VfsUtil.urlToPath(libRoot);
-			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
+			for (String libRoot : PerlSharedSettings.getInstance(project).getLibRootUrlsForModule(moduleForFile))
+			{
+				String includePath = VfsUtil.urlToPath(libRoot);
+				commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
+			}
 		}
 
 		commandLine.addParameters(perlParameters);

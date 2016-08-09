@@ -122,7 +122,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 		if (mySourcePaths == null)
 		{
 			final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
-			paths.add(Pair.create(getContentEntryPath(), ""));
+//			paths.add(Pair.create(getContentEntryPath(), ""));
 			return paths;
 		}
 		return mySourcePaths;

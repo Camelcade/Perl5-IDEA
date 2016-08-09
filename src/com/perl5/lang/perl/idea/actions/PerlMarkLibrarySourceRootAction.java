@@ -107,7 +107,7 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 		}
 
 		final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
-		PerlLibUtil.applyClassPaths(modifiableModel);
+		PerlLibUtil.updatePerlLibsForModel(modifiableModel);
 		ApplicationManager.getApplication().runWriteAction(new Runnable()
 		{
 			@Override
