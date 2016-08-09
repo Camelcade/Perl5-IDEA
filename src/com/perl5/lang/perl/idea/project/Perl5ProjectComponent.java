@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -90,6 +91,7 @@ public class Perl5ProjectComponent implements ProjectComponent
 			Notifications.Bus.notify(notification);
 		}
 
+		PerlLibUtil.applyClassPaths(myProject);
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
 //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);

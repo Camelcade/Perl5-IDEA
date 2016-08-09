@@ -20,24 +20,18 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.*;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
-import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
-import com.perl5.lang.perl.util.PerlAnnotationsUtil;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,83 +47,6 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 	{
 		myProject = project;
 		perl5Settings = PerlSharedSettings.getInstance(project);
-	}
-
-	public static void applyClassPaths(ModifiableRootModel rootModel)
-	{
-		for (OrderEntry entry : rootModel.getOrderEntries())
-		{
-//			System.err.println("Checking " + entry + " of " + entry.getClass());
-			if (entry instanceof LibraryOrderEntry)
-			{
-//				System.err.println("Removing " + entry);
-				rootModel.removeOrderEntry(entry);
-			}
-		}
-
-		LibraryTable table = rootModel.getModuleLibraryTable();
-
-		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
-		{
-			addClassRootLibrary(table, virtualFile, false);
-		}
-
-		// add external annotations coming with plugin
-		VirtualFile pluginAnnotationsRootVirtualFile = PerlAnnotationsUtil.getPluginAnnotationsRoot();
-		if (pluginAnnotationsRootVirtualFile != null)
-		{
-			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, false);
-		}
-
-		// add application-level external annotations
-		VirtualFile applicationAnnotationsRoot = PerlAnnotationsUtil.getApplicationAnnotationsRoot();
-		if (applicationAnnotationsRoot != null)
-		{
-			addClassRootLibrary(table, applicationAnnotationsRoot, false);
-		}
-
-		OrderEntry[] entries = rootModel.getOrderEntries();
-
-		ContainerUtil.sort(entries, new Comparator<OrderEntry>()
-		{
-			@Override
-			public int compare(OrderEntry orderEntry, OrderEntry t1)
-			{
-				int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
-				int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
-				return i2 - i1;
-			}
-		});
-		rootModel.rearrangeOrderEntries(entries);
-
-		if (!PlatformUtils.isIntelliJ())
-		{
-			// add perl @inc to the end of libs
-			PerlLocalSettings settings = PerlLocalSettings.getInstance(rootModel.getProject());
-			if (!settings.PERL_PATH.isEmpty())
-			{
-				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.PERL_PATH))
-				{
-					VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
-					if (incFile != null)
-					{
-						addClassRootLibrary(table, incFile, true);
-					}
-				}
-			}
-		}
-	}
-
-	private static void addClassRootLibrary(LibraryTable table, VirtualFile virtualFile, boolean addSource)
-	{
-		Library tableLibrary = table.createLibrary();
-		Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-		modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
-		if (addSource)
-		{
-			modifiableModel.addRoot(virtualFile, OrderRootType.SOURCES);
-		}
-		modifiableModel.commit();
 	}
 
 	public void initComponent()
@@ -182,9 +99,8 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 								entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
 							}
 						}
-
-						applyClassPaths(rootModel);
 						rootModel.commit();
+						PerlLibUtil.applyClassPaths(myProject);
 					}
 				}
 			});

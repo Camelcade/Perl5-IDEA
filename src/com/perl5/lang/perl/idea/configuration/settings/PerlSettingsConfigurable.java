@@ -16,14 +16,10 @@
 
 package com.perl5.lang.perl.idea.configuration.settings;
 
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -36,8 +32,8 @@ import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
-import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
@@ -56,29 +52,25 @@ public class PerlSettingsConfigurable implements Configurable
 	Project myProject;
 	PerlSharedSettings mySharedSettings;
 	PerlLocalSettings myLocalSettings;
-
 	TextFieldWithBrowseButton perlCriticPathInputField;
 	RawCommandLineEditor perlCriticArgsInputField;
-
 	TextFieldWithBrowseButton perlTidyPathInputField;
 	RawCommandLineEditor perlTidyArgsInputField;
-
 	TextFieldWithBrowseButton perlPathInputField;
-
+	TextFieldWithBrowseButton applicationExternalAnnotationsPath;
 	JTextField deparseArgumentsTextField;
-
 	JPanel regeneratePanel;
 	JButton regenerateButton;
-
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
 	JCheckBox perlCriticCheckBox;
 	JCheckBox perlTryCatchCheckBox;
 	JCheckBox perlAnnotatorCheckBox;
 	JCheckBox allowInjectionWithInterpolation;
-
+	@SuppressWarnings("Since15")
 	CollectionListModel<String> selfNamesModel;
 	JBList selfNamesList;
+	private PerlApplicationSettings myAppSettings;
 
 
 	public PerlSettingsConfigurable(Project myProject)
@@ -86,6 +78,7 @@ public class PerlSettingsConfigurable implements Configurable
 		this.myProject = myProject;
 		mySharedSettings = PerlSharedSettings.getInstance(myProject);
 		myLocalSettings = PerlLocalSettings.getInstance(myProject);
+		myAppSettings = PerlApplicationSettings.getInstance();
 	}
 
 	@Nls
@@ -113,6 +106,18 @@ public class PerlSettingsConfigurable implements Configurable
 		{
 			createMicroIdeComponents(builder);
 		}
+
+		applicationExternalAnnotationsPath = new TextFieldWithBrowseButton();
+		applicationExternalAnnotationsPath.setEditable(false);
+		FileChooserDescriptor applicationLevelAnnotationsDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+		applicationExternalAnnotationsPath.addBrowseFolderListener(
+				"Select Directory",
+				"Choose an Application Level Annotations Directory:",
+				null, // project
+				applicationLevelAnnotationsDescriptor
+		);
+		builder.addLabeledComponent(new JLabel("Application-level annotations path:"), applicationExternalAnnotationsPath);
+
 
 		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
 		builder.addComponent(simpleMainCheckbox);
@@ -155,6 +160,8 @@ public class PerlSettingsConfigurable implements Configurable
 				perlCriticDescriptor
 		);
 		builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), perlCriticPathInputField);
+
+
 		perlCriticArgsInputField = new RawCommandLineEditor();
 		builder.addComponent(copyDialogCaption(LabeledComponent.create(perlCriticArgsInputField, "Perl::Critic command line arguments:"), "Perl::Critic command line arguments:"));
 
@@ -311,6 +318,7 @@ public class PerlSettingsConfigurable implements Configurable
 	public boolean isModified()
 	{
 		return isMicroIdeModified() ||
+				!StringUtil.equals(applicationExternalAnnotationsPath.getText(), myAppSettings.getApplicationAnnotationsPath()) ||
 				mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
 				mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
 				mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
@@ -336,6 +344,8 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public void apply() throws ConfigurationException
 	{
+		myAppSettings.setApplicationAnnotationsPath(applicationExternalAnnotationsPath.getText());
+
 		mySharedSettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
 		mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
 		mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
@@ -359,6 +369,7 @@ public class PerlSettingsConfigurable implements Configurable
 		{
 			applyMicroIdeSettings();
 		}
+		PerlLibUtil.applyClassPaths(myProject);
 		mySharedSettings.settingsUpdated();
 
 		if (needReparse)
@@ -370,19 +381,6 @@ public class PerlSettingsConfigurable implements Configurable
 	public void applyMicroIdeSettings()
 	{
 		myLocalSettings.PERL_PATH = perlPathInputField.getText();
-
-		ApplicationManager.getApplication().runWriteAction(
-				new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-						PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
-						modifiableModel.commit();
-					}
-				}
-		);
 	}
 
 	@Override
@@ -390,6 +388,8 @@ public class PerlSettingsConfigurable implements Configurable
 	{
 		selfNamesModel.removeAll();
 		selfNamesModel.add(mySharedSettings.selfNames);
+
+		applicationExternalAnnotationsPath.setText(myAppSettings.getApplicationAnnotationsPath());
 
 		simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);

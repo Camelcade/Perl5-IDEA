@@ -30,7 +30,7 @@ import com.intellij.openapi.roots.impl.DirectoryIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
-import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,7 +107,7 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 		}
 
 		final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
-		PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
+		PerlLibUtil.applyClassPaths(modifiableModel);
 		ApplicationManager.getApplication().runWriteAction(new Runnable()
 		{
 			@Override

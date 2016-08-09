@@ -25,7 +25,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
@@ -51,17 +51,18 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		PerlSharedSettings mySettings = PerlSharedSettings.getInstance(getModel().getProject());
+		ModifiableRootModel model = getModel();
+		PerlSharedSettings mySettings = PerlSharedSettings.getInstance(model.getProject());
 
 		List<String> libRoots = mySettings.libRootUrls;
 		libRoots.clear();
 
-		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
+		for (VirtualFile entry : model.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
 		{
 			libRoots.add(entry.getUrl());
 		}
 
-		PerlMicroIdeSettingsLoader.applyClassPaths(getModel());
+		PerlLibUtil.applyClassPaths(model);
 	}
 
 	@Override
