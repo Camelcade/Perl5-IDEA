@@ -34,8 +34,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.HashSet;
 import com.perl5.compat.PerlStubIndex;
-import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
-import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -47,7 +45,6 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionSt
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -867,25 +864,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 		}
 
 		return result;
-	}
-
-	@Nullable
-	public static PerlNamespaceAnnotations getExternalAnnotations(@NotNull Project project, String canonicalName)
-	{
-		if (StringUtil.isNotEmpty(canonicalName))
-		{
-			for (PerlExternalAnnotationNamespace declaration : PerlStubIndex.getElements(
-					PerlExternalAnnotationNamespaceStubIndex.KEY,
-					canonicalName,
-					project,
-					PerlScopes.getProjectAndLibrariesScope(project),
-					PerlExternalAnnotationNamespace.class
-			))
-			{
-				return declaration.getAnnotations();
-			}
-		}
-		return null;
 	}
 
 	public interface ClassRootVirtualFileProcessor

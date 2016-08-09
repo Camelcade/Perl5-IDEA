@@ -24,8 +24,6 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
-import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
-import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
@@ -34,7 +32,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
@@ -461,25 +458,5 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs
 				return;
 			}
 		}
-	}
-
-	@Nullable
-	public static PerlSubAnnotations getExternalAnnotations(@NotNull Project project, String canonicalName)
-	{
-		if (StringUtil.isNotEmpty(canonicalName))
-		{
-			for (PerlExternalAnnotationDeclaration declaration : PerlStubIndex.getElements(
-					PerlExternalAnnotationDeclarationStubIndex.KEY,
-					canonicalName,
-					project,
-					PerlScopes.getProjectAndLibrariesScope(project),
-					PerlExternalAnnotationDeclaration.class
-			))
-			{
-				return declaration.getSubAnnotations();
-			}
-		}
-
-		return null;
 	}
 }

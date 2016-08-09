@@ -33,7 +33,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
-import com.perl5.lang.perl.util.PerlPluginUtil;
+import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -75,7 +75,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 		}
 
 		// add external annotations coming with plugin
-		VirtualFile pluginAnnotationsRootVirtualFile = PerlPluginUtil.getPluginAnnotationsRootVirtualFile();
+		VirtualFile pluginAnnotationsRootVirtualFile = PerlAnnotationsUtil.getPluginAnnotationsRootVirtualFile();
 		if (pluginAnnotationsRootVirtualFile != null)
 		{
 			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, true);

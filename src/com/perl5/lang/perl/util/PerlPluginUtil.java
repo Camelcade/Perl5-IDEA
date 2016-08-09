@@ -59,17 +59,6 @@ public class PerlPluginUtil
 		}
 	};
 
-	private static NullableLazyValue<VirtualFile> myLazyAnnotationsRootVirtualFile = new NullableLazyValue<VirtualFile>()
-	{
-		@Nullable
-		@Override
-		protected VirtualFile compute()
-		{
-			String annotaionsRoot = getPluginAnnotationsRoot();
-			return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
-		}
-	};
-
 
 	@Nullable
 	public static IdeaPluginDescriptor getPlugin()
@@ -96,19 +85,6 @@ public class PerlPluginUtil
 	{
 		String pluginRoot = getPluginRoot();
 		return pluginRoot == null ? null : pluginRoot + "/perl";
-	}
-
-	@Nullable
-	public static String getPluginAnnotationsRoot()
-	{
-		String pluginRoot = getPluginRoot();
-		return pluginRoot == null ? null : pluginRoot + "/annotations";
-	}
-
-	@Nullable
-	public static VirtualFile getPluginAnnotationsRootVirtualFile()
-	{
-		return myLazyAnnotationsRootVirtualFile.getValue();
 	}
 
 	@Nullable

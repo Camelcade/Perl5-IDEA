@@ -390,7 +390,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public PerlNamespaceAnnotations getExternalAnnotations()
 	{
-		return PerlPackageUtil.getExternalAnnotations(getProject(), getPackageName());
+		return PerlAnnotationsUtil.getExternalAnnotations(this);
 	}
 
 	public static class MroSearcher implements Processor<PsiElement>
