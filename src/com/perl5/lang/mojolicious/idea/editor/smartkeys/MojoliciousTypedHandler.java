@@ -36,7 +36,7 @@ public class MojoliciousTypedHandler extends TypedHandlerDelegate implements Moj
 		{
 			if (c == ' ')
 			{
-				MojoliciousSmartKeysUtils.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
+				MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
 			}
 		}
 		return super.charTyped(c, project, editor, file);

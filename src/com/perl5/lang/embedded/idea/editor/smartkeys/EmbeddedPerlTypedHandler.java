@@ -35,7 +35,7 @@ public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate
 		{
 			if (c == ' ')
 			{
-				EmbeddedPerlSmartKeysUtils.addCloseMarker(editor, file, " ?>");
+				EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, " ?>");
 			}
 		}
 		return super.charTyped(c, project, editor, file);

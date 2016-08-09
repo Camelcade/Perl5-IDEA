@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlDebugUtils;
+import com.perl5.lang.perl.util.PerlDebugUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,7 +81,7 @@ public class PerlXNamedValue extends XNamedValue
 			super.computeChildren(node);
 		}
 		//
-		PerlDebugUtils.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+		PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
 	}
 
 

@@ -21,7 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
-import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtils;
+import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +46,7 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
 	@Override
 	public Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context)
 	{
-		return getResultByTokenType(context.getProject(), TemplateToolkitPsiUtils.getLastOpenMarker(context.getEditor()));
+		return getResultByTokenType(context.getProject(), TemplateToolkitPsiUtil.getLastOpenMarker(context.getEditor()));
 	}
 
 	@Nullable

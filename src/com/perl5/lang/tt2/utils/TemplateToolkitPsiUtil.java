@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitPsiUtils
+public class TemplateToolkitPsiUtil
 {
 	@Nullable
 	public static PsiElement getPrevSignificantSibling(PsiElement element)

@@ -20,9 +20,9 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.htmlmason.MasonCoreUtils;
+import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.Mason2Language;
-import com.perl5.lang.mason2.Mason2Utils;
+import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -63,6 +63,6 @@ public class MasonFileImpl extends PerlFileImpl
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return Mason2Utils.getComponentRoot(getProject(), MasonCoreUtils.getContainingVirtualFile(this));
+		return Mason2Util.getComponentRoot(getProject(), MasonCoreUtil.getContainingVirtualFile(this));
 	}
 }

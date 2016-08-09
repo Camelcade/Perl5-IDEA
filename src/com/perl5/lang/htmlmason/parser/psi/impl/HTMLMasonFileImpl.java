@@ -33,8 +33,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
-import com.perl5.lang.htmlmason.MasonCoreUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
+import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
@@ -100,12 +100,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	@Nullable
 	public VirtualFile getComponentRoot()
 	{
-		return HTMLMasonUtils.getComponentRoot(getProject(), getComponentVirtualFile());
+		return HTMLMasonUtil.getComponentRoot(getProject(), getComponentVirtualFile());
 	}
 
 	public VirtualFile getComponentVirtualFile()
 	{
-		return MasonCoreUtils.getContainingVirtualFile(this);
+		return MasonCoreUtil.getContainingVirtualFile(this);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 
 		if (isValid())
 		{
-			MasonCoreUtils.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
+			MasonCoreUtil.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
 		}
 		return newImplicitVariables;
 	}
@@ -225,7 +225,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 					startDir = startDir.getParent();
 				}
 
-				VirtualFile componentRoot = HTMLMasonUtils.getComponentRoot(getProject(), startDir);
+				VirtualFile componentRoot = HTMLMasonUtil.getComponentRoot(getProject(), startDir);
 				if (componentRoot != null)
 				{
 					while (VfsUtil.isAncestor(componentRoot, startDir, false))

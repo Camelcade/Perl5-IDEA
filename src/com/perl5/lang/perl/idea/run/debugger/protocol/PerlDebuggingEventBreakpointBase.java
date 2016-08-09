@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import com.perl5.lang.perl.util.PerlDebugUtils;
+import com.perl5.lang.perl.util.PerlDebugUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,7 +33,7 @@ public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEven
 	public void run()
 	{
 		XDebugSession session = getDebugSession();
-		XLineBreakpoint breakpoint = PerlDebugUtils.findBreakpoint(session.getProject(), this);
+		XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
 		if (breakpoint != null)
 		{
 			processBreakPoint(breakpoint, session);

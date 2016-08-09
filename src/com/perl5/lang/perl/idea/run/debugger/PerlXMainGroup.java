@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.util.PerlDebugUtils;
+import com.perl5.lang.perl.util.PerlDebugUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +38,7 @@ public class PerlXMainGroup extends PerlXValueGroup
 	@Override
 	public void computeChildren(@NotNull XCompositeNode node)
 	{
-		PerlDebugUtils.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
+		PerlDebugUtil.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
 	}
 
 	public int getOffset()

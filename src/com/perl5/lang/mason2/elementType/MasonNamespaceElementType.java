@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mason2.Mason2Language;
-import com.perl5.lang.mason2.Mason2Utils;
+import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
@@ -76,7 +76,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
 		sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
 
 		// fixme this is kinda hack to make MRO work. But, it should be smarter
-		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, Mason2Utils.getClassnameFromPath(name));
+		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, Mason2Util.getClassnameFromPath(name));
 
 		for (String parent : stub.getParentNamespaces())
 		{

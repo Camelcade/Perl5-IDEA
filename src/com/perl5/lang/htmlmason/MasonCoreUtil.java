@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class MasonCoreUtils
+public class MasonCoreUtil
 {
 	@Nullable
 	public static VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file)

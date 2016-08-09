@@ -33,12 +33,12 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonUtils
+public class HTMLMasonUtil
 {
 	@Nullable
 	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
 	{
-		return MasonCoreUtils.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
+		return MasonCoreUtil.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
 	}
 
 	public static List<PerlSubArgument> getArgumentsList(HTMLMasonParametrizedEntity entity)

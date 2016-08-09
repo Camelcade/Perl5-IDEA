@@ -51,8 +51,8 @@ public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, Mo
 		FileViewProvider viewProvider = file.getViewProvider();
 		if (viewProvider instanceof MojoliciousFileViewProvider)
 		{
-			if (!(MojoliciousSmartKeysUtils.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
-					MojoliciousSmartKeysUtils.addEndMarker(editor, file, "\n% end\n")))
+			if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
+					MojoliciousSmartKeysUtil.addEndMarker(editor, file, "\n% end\n")))
 			{
 				addOutlineMarkerIfNeeded((MojoliciousFileViewProvider) viewProvider, caretOffset.get());
 			}

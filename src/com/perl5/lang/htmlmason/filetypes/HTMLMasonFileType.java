@@ -28,7 +28,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.HTMLMasonUtils;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.idea.editor.HTMLMasonHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -106,7 +106,7 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
 			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 			if (settings != null &&
 					(StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())) &&
-					HTMLMasonUtils.getComponentRoot(project, file) != null)
+					HTMLMasonUtil.getComponentRoot(project, file) != null)
 			{
 				return true;
 			}

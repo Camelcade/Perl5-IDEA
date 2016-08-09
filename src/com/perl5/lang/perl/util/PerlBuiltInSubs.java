@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 11.05.2015.
  */
-public interface PerlSubUtilBuiltIn
+public interface PerlBuiltInSubs
 {
 	Set<String> BUILT_IN_ARGUMENTLESS = new HashSet<String>(Arrays.asList(
 			"__FILE__",

@@ -36,7 +36,7 @@ public class EmbeddedPerlEnterDelegate implements EnterHandlerDelegate
 	{
 		if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider)
 		{
-			EmbeddedPerlSmartKeysUtils.addCloseMarker(editor, file, "\n?>");
+			EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, "\n?>");
 		}
 		return Result.Continue;
 	}

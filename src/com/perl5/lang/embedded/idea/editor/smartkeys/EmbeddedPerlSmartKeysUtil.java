@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlSmartKeysUtils implements EmbeddedPerlElementTypes, PerlElementTypes
+public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes
 {
 	public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker)
 	{

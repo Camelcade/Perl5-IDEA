@@ -25,7 +25,7 @@ import java.util.Set;
  * Created by hurricup on 26.04.2015.
  */
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
-public interface PerlPackageUtilBuiltIn
+public interface PerlBuiltInNamespaces
 {
 	Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
 			"AnyDBM_File",

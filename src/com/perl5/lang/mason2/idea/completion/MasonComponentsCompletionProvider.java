@@ -27,7 +27,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
-import com.perl5.lang.htmlmason.MasonCoreUtils;
+import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
@@ -61,7 +61,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 			PsiFile psiFile = position.getContainingFile();
 			if (psiFile instanceof MasonFileImpl)
 			{
-				final VirtualFile containingFile = MasonCoreUtils.getContainingVirtualFile(psiFile);
+				final VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(psiFile);
 				VirtualFile containingDir = null;
 				if (containingFile != null && (containingDir = containingFile.getParent()) != null)
 				{
