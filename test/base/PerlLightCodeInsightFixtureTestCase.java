@@ -72,7 +72,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		VfsRootAccess.SHOULD_PERFORM_ACCESS_CHECK = false; // TODO: a workaround for v15
 		super.setUp();
-		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
+		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings(myFixture.getProject()));
 	}
 
 	protected <T> void registerApplicationService(final Class<T> aClass, T object)

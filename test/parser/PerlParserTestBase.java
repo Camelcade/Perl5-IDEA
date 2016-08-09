@@ -97,7 +97,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 	{
 		super.setUp();
 		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
-		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
+		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings(myProject));
 		registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
 		registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
 		new PerlParserExtensions().initComponent();
