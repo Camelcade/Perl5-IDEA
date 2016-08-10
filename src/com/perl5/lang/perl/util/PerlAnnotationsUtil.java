@@ -45,10 +45,10 @@ import java.util.Collection;
  */
 public class PerlAnnotationsUtil
 {
-	private static final int PROJECT_LEVEL = 0;
-	private static final int APP_LEVEL = 1;
-	private static final int PLUGIN_LEVEL = 2;
-	private static final int UNKNOWN_LEVEL = 3; // light virtual files and other stuff
+	public static final int PROJECT_LEVEL = 0;
+	public static final int APP_LEVEL = 1;
+	public static final int PLUGIN_LEVEL = 2;
+	public static final int UNKNOWN_LEVEL = 3; // light virtual files and other stuff
 	private static NullableLazyValue<VirtualFile> myPluginAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
 	{
 		@Nullable
@@ -94,7 +94,7 @@ public class PerlAnnotationsUtil
 		{
 			Project project = namespaceDefinition.getProject();
 			PerlExternalAnnotationNamespace lowestLevelPsiElement = getLowestLevelPsiElement(
-					getExternalNamespcaceAnnotations(project, canonicalName)
+					getNamespcaceExternalAnnotations(project, canonicalName)
 			);
 			if (lowestLevelPsiElement != null)
 			{
@@ -105,7 +105,7 @@ public class PerlAnnotationsUtil
 	}
 
 	@NotNull
-	public static Collection<PerlExternalAnnotationNamespace> getExternalNamespcaceAnnotations(
+	public static Collection<PerlExternalAnnotationNamespace> getNamespcaceExternalAnnotations(
 			@NotNull Project project, @NotNull String canonicalName
 	)
 	{
@@ -172,7 +172,7 @@ public class PerlAnnotationsUtil
 		return result;
 	}
 
-	private static int getPsiElementLevel(PsiElement element)
+	public static int getPsiElementLevel(PsiElement element)
 	{
 		VirtualFile virtualFile = element.getContainingFile().getVirtualFile();
 		VirtualFile annotationsRoot = getPluginAnnotationsRoot();

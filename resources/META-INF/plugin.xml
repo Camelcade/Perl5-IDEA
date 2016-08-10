@@ -355,6 +355,10 @@
         <stubElementTypeHolder class="com.perl5.lang.ea.psi.PerlExternalAnnotationsElementTypes"/>
         <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex"/>
         <stubIndex implementation="com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex"/>
+
+        <codeInsight.lineMarkerProvider language="Perl5"
+                                        implementationClass="com.perl5.lang.ea.idea.navigation.PerlExternalAnnotationsLineMarkerProvider"/>
+
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->
