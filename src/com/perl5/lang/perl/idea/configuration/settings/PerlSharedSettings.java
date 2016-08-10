@@ -61,7 +61,7 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 	public String PERL_TIDY_ARGS = "";
 	public String PERL_CRITIC_ARGS = "";
 
-	private String myAnnotationsPath = "annotations";
+	private String myAnnotationsPath = "project.annotations";
 
 	@Transient
 	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;

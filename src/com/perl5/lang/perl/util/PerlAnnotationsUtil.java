@@ -21,6 +21,7 @@ import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiElement;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
@@ -37,13 +38,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collection;
 
 /**
  * Created by hurricup on 09.08.2016.
  */
 public class PerlAnnotationsUtil
 {
-	private static NullableLazyValue<VirtualFile> myLazyAnnotationsRootVirtualFile = new NullableLazyValue<VirtualFile>()
+	private static final int PROJECT_LEVEL = 0;
+	private static final int APP_LEVEL = 1;
+	private static final int PLUGIN_LEVEL = 2;
+	private static final int UNKNOWN_LEVEL = 3; // light virtual files and other stuff
+	private static NullableLazyValue<VirtualFile> myPluginAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
 	{
 		@Nullable
 		@Override
@@ -58,13 +64,13 @@ public class PerlAnnotationsUtil
 	public static String getPluginAnnotationsPath()
 	{
 		String pluginRoot = PerlPluginUtil.getPluginRoot();
-		return pluginRoot == null ? null : pluginRoot + "/annotations";
+		return pluginRoot == null ? null : pluginRoot + "/plugin.annotations";
 	}
 
 	@Nullable
 	public static VirtualFile getPluginAnnotationsRoot()
 	{
-		return myLazyAnnotationsRootVirtualFile.getValue();
+		return myPluginAnnotationsLazyRoot.getValue();
 	}
 
 	@Nullable
@@ -87,15 +93,17 @@ public class PerlAnnotationsUtil
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
 			Project project = namespaceDefinition.getProject();
-			for (PerlExternalAnnotationNamespace declaration : PerlStubIndex.getElements(
+			PerlExternalAnnotationNamespace lowestLevelPsiElement = getLowestLevelPsiElement(PerlStubIndex.getElements(
 					PerlExternalAnnotationNamespaceStubIndex.KEY,
 					canonicalName,
 					project,
 					PerlScopes.getProjectAndLibrariesScope(project),
 					PerlExternalAnnotationNamespace.class
-			))
+					)
+			);
+			if (lowestLevelPsiElement != null)
 			{
-				return declaration.getAnnotations();
+				return lowestLevelPsiElement.getAnnotations();
 			}
 		}
 		return null;
@@ -109,19 +117,61 @@ public class PerlAnnotationsUtil
 
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
-			for (PerlExternalAnnotationDeclaration declaration : PerlStubIndex.getElements(
+			PerlExternalAnnotationDeclaration lowestLevelPsiElement = getLowestLevelPsiElement(PerlStubIndex.getElements(
 					PerlExternalAnnotationDeclarationStubIndex.KEY,
 					canonicalName,
 					project,
 					PerlScopes.getProjectAndLibrariesScope(project),
 					PerlExternalAnnotationDeclaration.class
-			))
+			));
+			if (lowestLevelPsiElement != null)
 			{
-				return declaration.getSubAnnotations();
+				return lowestLevelPsiElement.getSubAnnotations();
 			}
 		}
-
 		return null;
+	}
+
+	@Nullable
+	private static <T extends PsiElement> T getLowestLevelPsiElement(Collection<T> elements)
+	{
+		int currentLevel = UNKNOWN_LEVEL;
+		T result = null;
+		for (T element : elements)
+		{
+			int elementLevel = getPsiElementLevel(element);
+			if (elementLevel == PROJECT_LEVEL)
+			{
+				return element;
+			}
+			if (elementLevel < currentLevel)
+			{
+				currentLevel = elementLevel;
+				result = element;
+			}
+		}
+		return result;
+	}
+
+	private static int getPsiElementLevel(PsiElement element)
+	{
+		VirtualFile virtualFile = element.getContainingFile().getVirtualFile();
+		VirtualFile annotationsRoot = getPluginAnnotationsRoot();
+		if (annotationsRoot != null && VfsUtil.isAncestor(annotationsRoot, virtualFile, true))
+		{
+			return PLUGIN_LEVEL;
+		}
+		annotationsRoot = getApplicationAnnotationsRoot();
+		if (annotationsRoot != null && VfsUtil.isAncestor(annotationsRoot, virtualFile, true))
+		{
+			return APP_LEVEL;
+		}
+		annotationsRoot = element.getProject().getBaseDir();
+		if (annotationsRoot != null && VfsUtil.isAncestor(annotationsRoot, virtualFile, true))
+		{
+			return PROJECT_LEVEL;
+		}
+		return UNKNOWN_LEVEL;
 	}
 
 }

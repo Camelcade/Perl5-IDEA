@@ -25,7 +25,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.08.2016.
  */
-public interface PerlExternalAnnotationNamespace extends StubBasedPsiElement<PerlExternalAnnotationNamespaceStub>, PerlElementTypes, PerlExternalAnnotationNamespaceBase
+public interface PerlExternalAnnotationNamespace extends
+		StubBasedPsiElement<PerlExternalAnnotationNamespaceStub>,
+		PerlElementTypes,
+		PerlExternalAnnotationNamespaceBase
 {
 	@Nullable
 	PsiPerlNamespaceContent getNamespaceContent();

@@ -22,6 +22,8 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
 /**
  * Created by hurricup on 06.08.2016.
  */
-public interface PerlExternalAnnotationDeclaration extends StubBasedPsiElement<PerlExternalAnnotationDeclarationStub>, PerlExernalAnnotationDeclarationBase
+public interface PerlExternalAnnotationDeclaration extends
+		StubBasedPsiElement<PerlExternalAnnotationDeclarationStub>,
+		PerlExernalAnnotationDeclarationBase
 {
 }

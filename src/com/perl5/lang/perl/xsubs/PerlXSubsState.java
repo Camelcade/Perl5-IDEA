@@ -43,6 +43,7 @@ import com.intellij.util.Processor;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.util.PerlLibUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -109,6 +110,12 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 		return false;
 	}
 
+	@Nullable
+	public static VirtualFile getXSubsFile(Project project)
+	{
+		return project.getBaseDir().findFileByRelativePath(DEPARSED_FILE_NAME);
+	}
+
 	public void setProject(Project myProject)
 	{
 		this.myProject = myProject;
@@ -158,8 +165,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 
 		if (actualFiles[0] > 0)
 		{
-			VirtualFile projectRoot = myProject.getBaseDir();
-			VirtualFile deparsedFile = projectRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
+			VirtualFile deparsedFile = getXSubsFile(myProject);
 			if (deparsedFile == null)
 			{
 				isActual = false;
@@ -305,7 +311,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 													NotificationType.INFORMATION
 											));
 										}
-
+										PerlLibUtil.applyClassPaths(myProject);
 									}
 									catch (IOException e)
 									{
@@ -342,5 +348,4 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 
 		filesMap = newFilesMap;
 	}
-
 }

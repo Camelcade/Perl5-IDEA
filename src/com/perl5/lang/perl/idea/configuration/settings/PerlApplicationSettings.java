@@ -45,7 +45,7 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 	public String pluginVersion = "";
 	public boolean popupShown = false;
 
-	private String myAnnotationsPath = PathManager.getConfigPath() + "/perl5/annotations";
+	private String myAnnotationsPath = PathManager.getConfigPath() + "/perl5/application.annotations";
 
 	@Transient
 	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;

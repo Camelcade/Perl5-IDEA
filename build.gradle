@@ -93,7 +93,7 @@ project.afterEvaluate {
             into perlUtils
         }
 
-        def perlAnnotations = "$it.destinationDir/annotations/"
+        def perlAnnotations = "$it.destinationDir/plugin.annotations/"
         def perlAnnotationsSource = "annotations"
         copy {
             from perlAnnotationsSource

@@ -31,6 +31,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.xsubs.PerlXSubsState;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -118,16 +119,24 @@ public class PerlLibUtil
 		}
 
 		// Add project-level external annotations
-		VirtualFile projectAnnotationsRoot = PerlAnnotationsUtil.getProjectAnnotationsRoot(rootModel.getProject());
+		Project project = rootModel.getProject();
+		VirtualFile projectAnnotationsRoot = PerlAnnotationsUtil.getProjectAnnotationsRoot(project);
 		if (projectAnnotationsRoot != null)
 		{
 			addClassRootLibrary(table, projectAnnotationsRoot, false);
 		}
 
+		// Add deparsed XSubs
+		VirtualFile deparsedXSubs = PerlXSubsState.getXSubsFile(project);
+		if (deparsedXSubs != null)
+		{
+			addClassRootLibrary(table, deparsedXSubs, false);
+		}
+
 		if (!PlatformUtils.isIntelliJ())
 		{
 			// add perl @inc to the end of libs
-			PerlLocalSettings settings = PerlLocalSettings.getInstance(rootModel.getProject());
+			PerlLocalSettings settings = PerlLocalSettings.getInstance(project);
 			if (!settings.PERL_PATH.isEmpty())
 			{
 				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.PERL_PATH))
