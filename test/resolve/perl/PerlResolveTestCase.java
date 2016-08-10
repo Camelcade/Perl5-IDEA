@@ -19,6 +19,7 @@ package resolve.perl;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -28,7 +29,7 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 	@Override
 	public String getFileExtension()
 	{
-		return "pl";
+		return PerlFileType.EXTENSION_PL;
 	}
 
 	public void doTest(String filename, boolean success, Class clazz)

@@ -26,6 +26,7 @@ import com.intellij.psi.templateLanguages.TemplateDataLanguagePatterns;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NonNls;
@@ -43,7 +44,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 
 	public PerlParserTestBase()
 	{
-		this("", "pl", new PerlParserDefinition());
+		this("", PerlFileType.EXTENSION_PL, new PerlParserDefinition());
 	}
 
 	public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)

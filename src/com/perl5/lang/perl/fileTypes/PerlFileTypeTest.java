@@ -28,6 +28,7 @@ import javax.swing.*;
 public class PerlFileTypeTest extends PerlFileType
 {
 	public static final PerlFileTypeTest INSTANCE = new PerlFileTypeTest();
+	public static final String EXTENSION = "t";
 
 	@NotNull
 	@Override
@@ -47,7 +48,7 @@ public class PerlFileTypeTest extends PerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "t";
+		return EXTENSION;
 	}
 
 	@Nullable

@@ -38,6 +38,8 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -64,7 +66,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public String getFileExtension()
 	{
-		return "pl";
+		return PerlFileType.EXTENSION_PL;
 	}
 
 	@Override
@@ -120,19 +122,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFile(filename, "pl");
-		} catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Deprecated  // use initWithFileSmart
-	public void initWithFileAsHTMLMason(String filename)
-	{
-		try
-		{
-			initWithFile(filename, "mas");
+			initWithFile(filename, PerlFileType.EXTENSION_PL);
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);
@@ -144,7 +134,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFile(filename, "pm");
+			initWithFile(filename, PerlFileTypePackage.EXTENSION);
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);
@@ -156,7 +146,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFileContent("test", "pl", content);
+			initWithFileContent("test", PerlFileType.EXTENSION_PL, content);
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);

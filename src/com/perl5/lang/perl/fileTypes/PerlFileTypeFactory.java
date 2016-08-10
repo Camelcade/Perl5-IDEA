@@ -25,12 +25,12 @@ public class PerlFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, "pm");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "cgi");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "pl");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "ph");
-		fileTypeConsumer.consume(PerlFileType.INSTANCE, "al");
+		fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, PerlFileTypePackage.EXTENSION);
+		fileTypeConsumer.consume(PerlFileType.INSTANCE, PerlFileType.EXTENSION_CGI);
+		fileTypeConsumer.consume(PerlFileType.INSTANCE, PerlFileType.EXTENSION_PL);
+		fileTypeConsumer.consume(PerlFileType.INSTANCE, PerlFileType.EXTENSION_PH);
+		fileTypeConsumer.consume(PerlFileType.INSTANCE, PerlFileType.EXTENSION_AL);
 
-		fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, "t");
+		fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, PerlFileTypeTest.EXTENSION);
 	}
 }
