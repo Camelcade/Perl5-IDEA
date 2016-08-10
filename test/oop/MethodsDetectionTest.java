@@ -19,6 +19,7 @@ package oop;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
@@ -35,7 +36,7 @@ public class MethodsDetectionTest extends PerlLightCodeInsightFixtureTestCase
 	@Override
 	public String getFileExtension()
 	{
-		return "pm";
+		return PerlFileTypePackage.EXTENSION;
 	}
 
 	public void testAnnotation()

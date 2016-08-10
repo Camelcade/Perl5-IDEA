@@ -17,6 +17,9 @@
 package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
@@ -39,7 +42,7 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 	@Override
 	public String getFileExtension()
 	{
-		return "pl";
+		return PerlFileType.EXTENSION_PL;
 	}
 
 	public String getTestResultsFilePath()

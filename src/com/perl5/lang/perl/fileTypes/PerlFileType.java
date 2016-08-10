@@ -30,6 +30,11 @@ import javax.swing.*;
  */
 public class PerlFileType extends LanguageFileType
 {
+	public static final String EXTENSION_PL = "pl";
+	public static final String EXTENSION_PH = "ph";
+	public static final String EXTENSION_AL = "al";
+	public static final String EXTENSION_CGI = "cgi";
+
 	public static final PerlFileType INSTANCE = new PerlFileType();
 
 	public PerlFileType()
@@ -60,7 +65,7 @@ public class PerlFileType extends LanguageFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "pl";
+		return EXTENSION_PL;
 	}
 
 	@Nullable

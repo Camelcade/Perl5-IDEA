@@ -42,6 +42,8 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -70,7 +72,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public String getFileExtension()
 	{
-		return "pl";
+		return PerlFileType.EXTENSION_PL;
 	}
 
 
@@ -179,7 +181,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFile(filename, "pl");
+			initWithFile(filename, PerlFileType.EXTENSION_PL);
 		}
 		catch (IOException e)
 		{
