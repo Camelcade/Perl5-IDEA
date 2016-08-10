@@ -19,6 +19,7 @@ package com.perl5.lang.ea.psi;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,4 +35,7 @@ public interface PerlExternalAnnotationNamespace extends
 	@Nullable
 	PsiPerlNamespaceContent getNamespaceContent();
 
+	@Nullable
+	@Override
+	PerlNamespaceElement getNameIdentifier();
 }

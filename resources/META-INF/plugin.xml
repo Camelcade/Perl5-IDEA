@@ -361,6 +361,9 @@
         <codeInsight.lineMarkerProvider language="Perl5 External Annotations"
                                         implementationClass="com.perl5.lang.ea.idea.navigation.PerlExternalAnnotationsHierarchyLineMarkerProvider"/>
 
+        <annotator language="Perl5"
+                   implementationClass="com.perl5.lang.ea.idea.annotators.PerlExternalAnnotationsAnnotator"/>
+
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->

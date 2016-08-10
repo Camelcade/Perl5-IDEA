@@ -16,10 +16,14 @@
 
 package com.perl5.lang.ea.psi;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationDeclarationElementType;
 import com.perl5.lang.ea.psi.elementTypes.PerlExternalAnnotationNamespaceElementType;
+import com.perl5.lang.ea.psi.impl.PerlExternalAnnotationsSubNameElementImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 06.08.2016.
@@ -28,4 +32,13 @@ public interface PerlExternalAnnotationsElementTypes extends PerlElementTypes
 {
 	IElementType PSEUDO_DECLARATION = new PerlExternalAnnotationDeclarationElementType("PSEUDO_DECLARATION");
 	IElementType PSEUDO_NAMESPACE = new PerlExternalAnnotationNamespaceElementType("PSEUDO_NAMESPACE");
+	IElementType PSEUDO_SUB_NAME = new PerlTokenTypeEx("PSEUDO_SUB")
+	{
+		@NotNull
+		@Override
+		public ASTNode createLeafNode(CharSequence leafText)
+		{
+			return new PerlExternalAnnotationsSubNameElementImpl(this, leafText);
+		}
+	};
 }

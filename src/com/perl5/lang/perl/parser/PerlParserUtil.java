@@ -1882,12 +1882,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 */
 	public static boolean parseSubDefinitionName(PsiBuilder b, int l)
 	{
+		return parseSubDefinitionName(b, l, SUB);
+	}
+
+	public static boolean parseSubDefinitionName(PsiBuilder b, int l, IElementType targetTokenType)
+	{
 		IElementType tokenType = b.getTokenType();
 		if (CONVERTABLE_TOKENS.contains(tokenType) || PerlLexer.RESERVED_TOKENSET.contains(tokenType))
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(SUB);
+			m.collapse(targetTokenType);
 			return true;
 		}
 		return false;

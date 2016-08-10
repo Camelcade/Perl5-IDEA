@@ -24,6 +24,7 @@ import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationsPsiUtil;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -57,6 +58,20 @@ public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBa
 
 		PerlExternalAnnotationNamespace namespace = PsiTreeUtil.getParentOfType(this, PerlExternalAnnotationNamespace.class);
 		return namespace == null ? null : namespace.getPackageName();
+	}
+
+	@Nullable
+	private PerlExternalAnnotationNamespace getContainingNamespace()
+	{
+		return PsiTreeUtil.getParentOfType(this, PerlExternalAnnotationNamespace.class);
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceElement getNamespaceElement()
+	{
+		PerlExternalAnnotationNamespace containingNamespace = getContainingNamespace();
+		return containingNamespace == null ? null : containingNamespace.getNameIdentifier();
 	}
 
 	@Nullable

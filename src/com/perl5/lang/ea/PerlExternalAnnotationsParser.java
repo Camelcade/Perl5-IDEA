@@ -111,7 +111,7 @@ public class PerlExternalAnnotationsParser extends PerlParserImpl implements Per
 			PsiBuilder.Marker marker = b.mark();
 			b.advanceLexer();
 
-			if (PerlParserUtil.parseSubDefinitionName(b, l))
+			if (PerlParserUtil.parseSubDefinitionName(b, l, PSEUDO_SUB_NAME))
 			{
 				parseOptionalSemicolon(b, l);
 				marker.done(PSEUDO_DECLARATION);

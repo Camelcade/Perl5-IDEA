@@ -18,6 +18,7 @@ package com.perl5.lang.ea.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
 /**
  * Created by hurricup on 06.08.2016.
@@ -25,6 +26,7 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
 public interface PerlExternalAnnotationDeclaration extends
 		StubBasedPsiElement<PerlExternalAnnotationDeclarationStub>,
 		PerlExernalAnnotationDeclarationBase,
-		PerlExternalAnnotationsIdentifierOwner
+		PerlExternalAnnotationsIdentifierOwner,
+		PerlNamespaceElementContainer
 {
 }
