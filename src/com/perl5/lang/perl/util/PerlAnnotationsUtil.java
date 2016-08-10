@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
@@ -43,12 +44,8 @@ import java.util.Collection;
 /**
  * Created by hurricup on 09.08.2016.
  */
-public class PerlAnnotationsUtil
+public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 {
-	public static final int PROJECT_LEVEL = 0;
-	public static final int APP_LEVEL = 1;
-	public static final int PLUGIN_LEVEL = 2;
-	public static final int UNKNOWN_LEVEL = 3; // light virtual files and other stuff
 	private static NullableLazyValue<VirtualFile> myPluginAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
 	{
 		@Nullable
@@ -172,7 +169,7 @@ public class PerlAnnotationsUtil
 		return result;
 	}
 
-	public static int getPsiElementLevel(PsiElement element)
+	public static int getPsiElementLevel(@NotNull PsiElement element)
 	{
 		VirtualFile virtualFile = element.getContainingFile().getVirtualFile();
 		VirtualFile annotationsRoot = getPluginAnnotationsRoot();
@@ -192,5 +189,31 @@ public class PerlAnnotationsUtil
 		}
 		return UNKNOWN_LEVEL;
 	}
+
+	@NotNull
+	public static String getPsiElementLevelName(@NotNull PsiElement element)
+	{
+		return getAnnotationLevelName(getPsiElementLevel(element));
+	}
+
+	@NotNull
+	public static String getAnnotationLevelName(int psiElementLevel)
+	{
+		if (psiElementLevel == PROJECT_LEVEL)
+		{
+			return PerlBundle.message("perl.ea.project.level");
+		}
+		if (psiElementLevel == APP_LEVEL)
+		{
+			return PerlBundle.message("perl.ea.application.level");
+		}
+		if (psiElementLevel == PLUGIN_LEVEL)
+		{
+			return PerlBundle.message("perl.ea.plugin.level");
+		}
+		return PerlBundle.message("perl.ea.unknown.level");
+
+	}
+
 
 }

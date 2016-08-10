@@ -117,20 +117,7 @@ public class PerlExternalAnnotationsLineMarkerProvider extends RelatedItemLineMa
 		@Override
 		public String getElementText(PsiElement element)
 		{
-			int psiElementLevel = PerlAnnotationsUtil.getPsiElementLevel(element);
-			if (psiElementLevel == PerlAnnotationsUtil.PROJECT_LEVEL)
-			{
-				return PerlBundle.message("perl.ea.project.level");
-			}
-			if (psiElementLevel == PerlAnnotationsUtil.APP_LEVEL)
-			{
-				return PerlBundle.message("perl.ea.application.level");
-			}
-			if (psiElementLevel == PerlAnnotationsUtil.PLUGIN_LEVEL)
-			{
-				return PerlBundle.message("perl.ea.plugin.level");
-			}
-			return PerlBundle.message("perl.ea.unknown.level");
+			return PerlAnnotationsUtil.getPsiElementLevelName(element);
 		}
 
 		@Override

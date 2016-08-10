@@ -80,9 +80,17 @@ public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBa
 			return stub.getSubName();
 		}
 
-		PerlSubNameElement subNameElement = findChildByClass(PerlSubNameElement.class);
+		PerlSubNameElement subNameElement = getNameIdentifier();
 		return subNameElement == null ? null : subNameElement.getName();
 	}
+
+	@Nullable
+	@Override
+	public PerlSubNameElement getNameIdentifier()
+	{
+		return findChildByClass(PerlSubNameElement.class);
+	}
+
 
 	@Nullable
 	@Override

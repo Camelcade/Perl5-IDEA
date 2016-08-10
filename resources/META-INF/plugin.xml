@@ -358,6 +358,8 @@
 
         <codeInsight.lineMarkerProvider language="Perl5"
                                         implementationClass="com.perl5.lang.ea.idea.navigation.PerlExternalAnnotationsLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider language="Perl5 External Annotations"
+                                        implementationClass="com.perl5.lang.ea.idea.navigation.PerlExternalAnnotationsHierarchyLineMarkerProvider"/>
 
         <!-- End of Perl External Annotations -->
 

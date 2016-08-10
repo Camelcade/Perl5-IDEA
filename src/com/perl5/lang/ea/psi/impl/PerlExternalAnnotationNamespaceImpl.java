@@ -56,8 +56,15 @@ public class PerlExternalAnnotationNamespaceImpl extends StubBasedPsiElementBase
 		}
 
 
-		PerlNamespaceElement packageElement = findChildByClass(PerlNamespaceElement.class);
+		PerlNamespaceElement packageElement = getNameIdentifier();
 		return packageElement == null ? null : packageElement.getCanonicalName();
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceElement getNameIdentifier()
+	{
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Nullable

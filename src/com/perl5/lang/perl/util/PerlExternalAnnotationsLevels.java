@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.psi;
-
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
+package com.perl5.lang.perl.util;
 
 /**
- * Created by hurricup on 06.08.2016.
+ * Created by hurricup on 10.08.2016.
  */
-public interface PerlExternalAnnotationDeclaration extends
-		StubBasedPsiElement<PerlExternalAnnotationDeclarationStub>,
-		PerlExernalAnnotationDeclarationBase,
-		PerlExternalAnnotationsIdentifierOwner
+public interface PerlExternalAnnotationsLevels
 {
+	int PROJECT_LEVEL = 0;
+	int APP_LEVEL = 1;
+	int PLUGIN_LEVEL = 2;
+	int UNKNOWN_LEVEL = 3; // light virtual files and other stuff
 }
