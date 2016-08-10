@@ -93,13 +93,8 @@ public class PerlAnnotationsUtil
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
 			Project project = namespaceDefinition.getProject();
-			PerlExternalAnnotationNamespace lowestLevelPsiElement = getLowestLevelPsiElement(PerlStubIndex.getElements(
-					PerlExternalAnnotationNamespaceStubIndex.KEY,
-					canonicalName,
-					project,
-					PerlScopes.getProjectAndLibrariesScope(project),
-					PerlExternalAnnotationNamespace.class
-					)
+			PerlExternalAnnotationNamespace lowestLevelPsiElement = getLowestLevelPsiElement(
+					getExternalNamespcaceAnnotations(project, canonicalName)
 			);
 			if (lowestLevelPsiElement != null)
 			{
@@ -107,6 +102,20 @@ public class PerlAnnotationsUtil
 			}
 		}
 		return null;
+	}
+
+	@NotNull
+	public static Collection<PerlExternalAnnotationNamespace> getExternalNamespcaceAnnotations(
+			@NotNull Project project, @NotNull String canonicalName
+	)
+	{
+		return PerlStubIndex.getElements(
+				PerlExternalAnnotationNamespaceStubIndex.KEY,
+				canonicalName,
+				project,
+				PerlScopes.getProjectAndLibrariesScope(project),
+				PerlExternalAnnotationNamespace.class
+		);
 	}
 
 	@Nullable
@@ -117,19 +126,29 @@ public class PerlAnnotationsUtil
 
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
-			PerlExternalAnnotationDeclaration lowestLevelPsiElement = getLowestLevelPsiElement(PerlStubIndex.getElements(
-					PerlExternalAnnotationDeclarationStubIndex.KEY,
-					canonicalName,
-					project,
-					PerlScopes.getProjectAndLibrariesScope(project),
-					PerlExternalAnnotationDeclaration.class
-			));
+			PerlExternalAnnotationDeclaration lowestLevelPsiElement = getLowestLevelPsiElement(
+					getSubExternalAnnotations(project, canonicalName)
+			);
 			if (lowestLevelPsiElement != null)
 			{
 				return lowestLevelPsiElement.getSubAnnotations();
 			}
 		}
 		return null;
+	}
+
+	@NotNull
+	public static Collection<PerlExternalAnnotationDeclaration> getSubExternalAnnotations(
+			@NotNull Project project, @NotNull String canonicalName
+	)
+	{
+		return PerlStubIndex.getElements(
+				PerlExternalAnnotationDeclarationStubIndex.KEY,
+				canonicalName,
+				project,
+				PerlScopes.getProjectAndLibrariesScope(project),
+				PerlExternalAnnotationDeclaration.class
+		);
 	}
 
 	@Nullable
