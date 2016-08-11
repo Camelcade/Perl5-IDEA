@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -46,13 +46,8 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
 
 	public static void addCompletion(String subName)
 	{
-		BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-				.create(subName)
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
-				.withBoldness(true)
-		);
+		BUILT_IN_SUB_LOOKUP_ELEMENTS.add(PerlSubCompletionUtil.getBuiltInLookupElement(subName));
 	}
-
 
 	public void addCompletions(@NotNull CompletionParameters parameters,
 							   ProcessingContext context,

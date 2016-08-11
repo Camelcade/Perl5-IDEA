@@ -164,12 +164,15 @@ public class PerlPackageCompletionUtil
 
 		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
-			for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+			if (packageName.length() > 0 && Character.isLetterOrDigit(packageName.charAt(0)))
 			{
-				LookupElementBuilder packageLookupElement = getPackageLookupElement(namespaceDefinition);
-				if (packageLookupElement != null)
+				for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
 				{
-					result.addElement(packageLookupElement);
+					LookupElementBuilder packageLookupElement = getPackageLookupElement(namespaceDefinition);
+					if (packageLookupElement != null)
+					{
+						result.addElement(packageLookupElement);
+					}
 				}
 			}
 		}
@@ -182,7 +185,10 @@ public class PerlPackageCompletionUtil
 
 		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
-			addExpandablePackageElement(project, result, packageName, prefix);
+			if (packageName.length() > 0 && Character.isLetterOrDigit(packageName.charAt(0)))
+			{
+				addExpandablePackageElement(project, result, packageName, prefix);
+			}
 		}
 	}
 

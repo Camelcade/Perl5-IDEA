@@ -92,6 +92,13 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	@Nullable
 	PerlSubAnnotations getLocalAnnotations();
 
+	/**
+	 * Returns annotations from stub or psi
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlSubAnnotations getStubbedOrLocalAnnotations();
 
 	/**
 	 * Returns external sub annotations if any

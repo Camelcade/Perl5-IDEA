@@ -24,11 +24,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -39,7 +41,10 @@ public class PerlSubCompletionUtil
 {
 	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-	public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinitionBase subDefinition)
+	public static LookupElementBuilder getSubDefinitionLookupElement(
+			String subName,
+			@Nullable String argsString,
+			PerlSubDefinitionBase subDefinition)
 	{
 		LookupElementBuilder newElement = LookupElementBuilder
 				.create(subName)
@@ -47,7 +52,7 @@ public class PerlSubCompletionUtil
 				.withStrikeoutness(subDefinition.isDeprecated())
 				.withTypeText(subDefinition.getPackageName(), true);
 
-		if (!argsString.isEmpty())
+		if (StringUtil.isNotEmpty(argsString))
 		{
 			newElement = newElement
 					.withInsertHandler(SUB_SELECTION_HANDLER)
@@ -77,11 +82,18 @@ public class PerlSubCompletionUtil
 	@NotNull
 	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration)
 	{
+		return getSubDeclarationLookupElementWithoutInsertHandler(subDeclaration)
+				.withInsertHandler(SUB_SELECTION_HANDLER);
+
+	}
+
+	@NotNull
+	public static LookupElementBuilder getSubDeclarationLookupElementWithoutInsertHandler(PerlSubBase subDeclaration)
+	{
 		return LookupElementBuilder
 				.create(subDeclaration.getSubName())
 				.withIcon(subDeclaration.getIcon(0))
 				.withStrikeoutness(subDeclaration.isDeprecated())
-				.withInsertHandler(SUB_SELECTION_HANDLER)
 				.withTypeText(subDeclaration.getPackageName(), true)
 				;
 
@@ -105,6 +117,15 @@ public class PerlSubCompletionUtil
 		return getSubDefinitionLookupElement(
 				subDefinition.getSubName(),
 				subDefinition.getSubArgumentsListAsString(),
+				subDefinition);
+	}
+
+	@NotNull
+	public static LookupElementBuilder getSubDefinitionLookupElementWithoutArguments(PerlSubDefinitionBase subDefinition)
+	{
+		return getSubDefinitionLookupElement(
+				subDefinition.getSubName(),
+				null,
 				subDefinition);
 	}
 
@@ -168,5 +189,14 @@ public class PerlSubCompletionUtil
 					}
 				}
 		);
+	}
+
+	@NotNull
+	public static LookupElementBuilder getBuiltInLookupElement(String subName)
+	{
+		return LookupElementBuilder
+				.create(subName)
+				.withIcon(PerlIcons.SUB_GUTTER_ICON)
+				.withBoldness(true);
 	}
 }

@@ -39,7 +39,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 09.08.2016.
@@ -146,6 +148,33 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 				PerlScopes.getProjectAndLibrariesScope(project),
 				PerlExternalAnnotationDeclaration.class
 		);
+	}
+
+	@Nullable
+	public static Collection<PerlExternalAnnotationDeclaration> getSubExternalAnnotations(
+			@NotNull Project project, @Nullable String canonicalName, int desiredLevel
+	)
+	{
+		if (StringUtil.isEmpty(canonicalName))
+		{
+			return null;
+		}
+
+		List<PerlExternalAnnotationDeclaration> result = null;
+
+		for (PerlExternalAnnotationDeclaration declaration : getSubExternalAnnotations(project, canonicalName))
+		{
+			int currentElementLevel = getPsiElementLevel(declaration);
+			if (currentElementLevel == desiredLevel)
+			{
+				if (result == null)
+				{
+					result = new ArrayList<PerlExternalAnnotationDeclaration>();
+				}
+				result.add(declaration);
+			}
+		}
+		return result;
 	}
 
 	@Nullable
