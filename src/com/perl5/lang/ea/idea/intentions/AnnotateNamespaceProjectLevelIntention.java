@@ -18,8 +18,6 @@ package com.perl5.lang.ea.idea.intentions;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -34,13 +32,13 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import com.perl5.lang.perl.util.PerlExternalAnnotationsLevels;
+import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by hurricup on 11.08.2016.
@@ -116,41 +114,12 @@ public class AnnotateNamespaceProjectLevelIntention extends AnnotateNamespaceInt
 		}
 
 		String relativePath = PerlPackageUtil.getPathByNamspaceNameWithoutExtension(filePackageName) + "." + PerlExternalAnnotationsFileType.EXTENSION;
-		VirtualFile targetFile = VfsUtil.findRelativeFile(annotationsRoot, relativePath);
-		if (targetFile != null)
-		{
-			return targetFile;
-		}
 
-		List<String> pathChunks = StringUtil.split(relativePath, "/");
-		String fileName = pathChunks.remove(pathChunks.size() - 1);
-		for (String pathChunk : pathChunks)
-		{
-			VirtualFile subdir = annotationsRoot.findChild(pathChunk);
-			if (subdir == null)
-			{
-				try
-				{
-					subdir = annotationsRoot.createChildDirectory(this, pathChunk);
-				}
-				catch (IOException ignore)
-				{
-					// warn here
-					return null;
-				}
-			}
-			else if (!subdir.isDirectory())
-			{
-				// can't create path, should warn or something
-				return null;
-			}
-			annotationsRoot = subdir;
-		}
 		try
 		{
-			return annotationsRoot.findOrCreateChildData(this, fileName);
+			return PerlFileUtil.findOrCreateRelativeFile(annotationsRoot, relativePath);
 		}
-		catch (IOException ignore)
+		catch (IOException e)
 		{
 			return null;
 		}
