@@ -121,6 +121,14 @@ public interface PerlNamespaceDefinition extends
 
 
 	/**
+	 * Returns local or stubbed annotations objec
+	 *
+	 * @return annotations or null
+	 */
+	@Nullable
+	PerlNamespaceAnnotations getStubbedOrLocalAnnotations();
+
+	/**
 	 * Returns external namespace annotations if any
 	 *
 	 * @return annotations object or null

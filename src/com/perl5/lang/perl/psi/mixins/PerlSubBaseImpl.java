@@ -165,18 +165,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public PerlSubAnnotations getAnnotations()
 	{
-		PerlSubAnnotations annotations;
-
-		Stub stub = getStub();
-		if (stub != null)
-		{
-			annotations = stub.getAnnotations();
-		}
-		else
-		{
-			// re-parsing
-			annotations = getLocalAnnotations();
-		}
+		PerlSubAnnotations annotations = getStubbedOrLocalAnnotations();
 
 		if (annotations != null)
 		{

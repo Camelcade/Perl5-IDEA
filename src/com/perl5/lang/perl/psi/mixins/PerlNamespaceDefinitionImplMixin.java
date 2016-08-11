@@ -358,18 +358,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public PerlNamespaceAnnotations getAnnotations()
 	{
-		PerlNamespaceAnnotations annotations;
-		PerlNamespaceDefinitionStub stub = getStub();
-
-		if (stub != null)
-		{
-			annotations = stub.getAnnotations();
-		}
-		else
-		{
-			// re-parsing
-			annotations = getLocalAnnotations();
-		}
+		PerlNamespaceAnnotations annotations = getStubbedOrLocalAnnotations();
 
 		if (annotations != null)
 		{
@@ -377,6 +366,23 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 		}
 
 		return getExternalAnnotations();
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceAnnotations getStubbedOrLocalAnnotations()
+	{
+		PerlNamespaceDefinitionStub stub = getStub();
+
+		if (stub != null)
+		{
+			return stub.getAnnotations();
+		}
+		else
+		{
+			// re-parsing
+			return getLocalAnnotations();
+		}
 	}
 
 	@Nullable

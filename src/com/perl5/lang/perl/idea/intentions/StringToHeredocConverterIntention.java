@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class StringToHeredocConverter extends StringToLastHeredocConverter
+public class StringToHeredocConverterIntention extends StringToLastHeredocConverterIntention
 {
 
 	@Override

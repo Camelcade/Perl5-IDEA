@@ -366,6 +366,22 @@
                                 implementationClass="com.perl5.lang.ea.idea.completion.PerlExternalAnnotationsCompletionContributor"/>
         <nonProjectFileWritingAccessExtension
                 implementation="com.perl5.lang.ea.idea.fileEditor.PerlExternalAnnotationsNonProjectFileAccessExtension"/>
+
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateNamespaceDeclarationIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateNamespaceProjectLevelIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateNamespaceApplicationLevelIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->
@@ -900,19 +916,18 @@
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
 
         <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
-            <category>String converter</category>
-            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+            <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverterIntention</className>
+            <category>Perl</category>
         </intentionAction>
 
         <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
-            <category>String converter</category>
-            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+            <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverterIntention</className>
+            <category>Perl</category>
+            <descriptionDirectoryName>StringToHeredocConverterIntention</descriptionDirectoryName>
         </intentionAction>
 
         <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverter</className>
+            <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverterIntention</className>
             <category>Perl</category>
         </intentionAction>
     </extensions>

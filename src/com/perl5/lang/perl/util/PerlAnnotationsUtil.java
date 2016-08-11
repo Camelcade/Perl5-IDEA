@@ -118,6 +118,33 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 	}
 
 	@Nullable
+	public static Collection<PerlExternalAnnotationNamespace> getNamespcaceExternalAnnotations(
+			@NotNull Project project, @Nullable String canonicalName, int desiredLevel
+	)
+	{
+		if (StringUtil.isEmpty(canonicalName))
+		{
+			return null;
+		}
+
+		List<PerlExternalAnnotationNamespace> result = null;
+
+		for (PerlExternalAnnotationNamespace declaration : getNamespcaceExternalAnnotations(project, canonicalName))
+		{
+			int currentElementLevel = getPsiElementLevel(declaration);
+			if (currentElementLevel == desiredLevel)
+			{
+				if (result == null)
+				{
+					result = new ArrayList<PerlExternalAnnotationNamespace>();
+				}
+				result.add(declaration);
+			}
+		}
+		return result;
+	}
+
+	@Nullable
 	public static PerlSubAnnotations getExternalAnnotations(@NotNull PerlSubBase subBase)
 	{
 		Project project = subBase.getProject();

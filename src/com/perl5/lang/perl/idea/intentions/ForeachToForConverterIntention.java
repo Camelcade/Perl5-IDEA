@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by bcardoso on 7/28/16.
  */
-public class ForeachToForConverter extends PsiElementBaseIntentionAction
+public class ForeachToForConverterIntention extends PsiElementBaseIntentionAction
 {
 	public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
 													  @NotNull PsiPerlExpr lexicalVariableDeclaration,
