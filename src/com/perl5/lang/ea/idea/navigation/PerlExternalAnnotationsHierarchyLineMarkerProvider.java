@@ -105,7 +105,7 @@ public class PerlExternalAnnotationsHierarchyLineMarkerProvider extends RelatedI
 
 			calculateGutterIcons(
 					(PerlExternalAnnotationNamespace) element,
-					PerlAnnotationsUtil.getNamespcaceExternalAnnotations(element.getProject(), packageName),
+					PerlAnnotationsUtil.getExternalAnnotationsNamespaces(element.getProject(), packageName),
 					result
 			);
 
@@ -121,7 +121,7 @@ public class PerlExternalAnnotationsHierarchyLineMarkerProvider extends RelatedI
 
 			calculateGutterIcons(
 					(PerlExternalAnnotationDeclaration) element,
-					PerlAnnotationsUtil.getSubExternalAnnotations(element.getProject(), canonicalName),
+					PerlAnnotationsUtil.getExternalAnnotationsSubDeclarations(element.getProject(), canonicalName),
 					result
 			);
 		}

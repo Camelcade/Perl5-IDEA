@@ -21,11 +21,16 @@ import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.PsiNavigateUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 11.08.2016.
@@ -33,14 +38,42 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AnnotateNamespaceIntentionBase extends PsiElementBaseIntentionAction implements IntentionAction
 {
 	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
+	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
 	{
-		if (!(element instanceof PerlNamespaceElement))
+		assert element instanceof PerlNamespaceElement;
+
+		PsiElement elementToAnnotate = getElementToAnnotate((PerlNamespaceElement) element);
+		if (elementToAnnotate != null)
 		{
-			return false;
+			PsiNavigateUtil.navigate(elementToAnnotate);
+		}
+	}
+
+	@Nullable
+	protected abstract PsiElement getElementToAnnotate(PerlNamespaceElement namespaceElement);
+
+	@Nullable
+	protected PerlNamespaceDefinition getNamespaceDefinition(PerlNamespaceElement namespaceElement)
+	{
+		if (namespaceElement == null)
+		{
+			return null;
 		}
 
-		return element.getParent() instanceof PerlNamespaceDefinition || !((PerlNamespaceElement) element).getNamespaceDefinitions().isEmpty();
+		PsiElement parent = namespaceElement.getParent();
+		if (parent instanceof PerlNamespaceDefinition)
+		{
+			return (PerlNamespaceDefinition) parent;
+		}
+
+		List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
+		return namespaceDefinitions.isEmpty() ? null : namespaceDefinitions.get(0);
+	}
+
+	@Override
+	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
+	{
+		return element instanceof PerlNamespaceElement && getNamespaceDefinition((PerlNamespaceElement) element) != null;
 	}
 
 	@Nls

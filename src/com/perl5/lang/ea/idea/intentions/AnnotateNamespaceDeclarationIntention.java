@@ -19,23 +19,22 @@ package com.perl5.lang.ea.idea.intentions;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.PsiNavigateUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 11.08.2016.
  */
 public class AnnotateNamespaceDeclarationIntention extends AnnotateNamespaceIntentionBase
 {
+	@Nullable
 	@Override
-	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
+	protected PsiElement getElementToAnnotate(PerlNamespaceElement namespaceElement)
 	{
-		assert element instanceof PerlNamespaceElement;
-		PsiNavigateUtil.navigate(((PerlNamespaceElement) element).getNamespaceDefinitions().get(0));
+		return namespaceElement.getNamespaceDefinitions().get(0);
 	}
 
 	@Override

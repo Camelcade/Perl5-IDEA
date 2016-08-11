@@ -158,7 +158,7 @@ public class PodFileUtil
 			{
 				final PsiManager psiManager = PsiManager.getInstance(project);
 				String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
-				String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
+				String packageRelativePath = PerlPackageUtil.getPathByNamespaceName(fileId);
 
 				for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
 				{

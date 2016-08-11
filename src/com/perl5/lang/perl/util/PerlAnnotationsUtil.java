@@ -32,6 +32,7 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -93,7 +94,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 		{
 			Project project = namespaceDefinition.getProject();
 			PerlExternalAnnotationNamespace lowestLevelPsiElement = getLowestLevelPsiElement(
-					getNamespcaceExternalAnnotations(project, canonicalName)
+					getExternalAnnotationsNamespaces(project, canonicalName)
 			);
 			if (lowestLevelPsiElement != null)
 			{
@@ -104,7 +105,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 	}
 
 	@NotNull
-	public static Collection<PerlExternalAnnotationNamespace> getNamespcaceExternalAnnotations(
+	public static Collection<PerlExternalAnnotationNamespace> getExternalAnnotationsNamespaces(
 			@NotNull Project project, @NotNull String canonicalName
 	)
 	{
@@ -118,7 +119,20 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 	}
 
 	@Nullable
-	public static Collection<PerlExternalAnnotationNamespace> getNamespcaceExternalAnnotations(
+	public static Collection<PerlExternalAnnotationNamespace> getExternalAnnotationsNamespaces(
+			@Nullable PerlNamespaceElement element, int desiredLevel
+	)
+	{
+		if (element == null)
+		{
+			return null;
+		}
+		return getExternalAnnotationsNamespaces(element.getProject(), element.getCanonicalName(), desiredLevel);
+	}
+
+
+	@Nullable
+	public static Collection<PerlExternalAnnotationNamespace> getExternalAnnotationsNamespaces(
 			@NotNull Project project, @Nullable String canonicalName, int desiredLevel
 	)
 	{
@@ -129,7 +143,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 
 		List<PerlExternalAnnotationNamespace> result = null;
 
-		for (PerlExternalAnnotationNamespace declaration : getNamespcaceExternalAnnotations(project, canonicalName))
+		for (PerlExternalAnnotationNamespace declaration : getExternalAnnotationsNamespaces(project, canonicalName))
 		{
 			int currentElementLevel = getPsiElementLevel(declaration);
 			if (currentElementLevel == desiredLevel)
@@ -153,7 +167,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 		if (StringUtil.isNotEmpty(canonicalName))
 		{
 			PerlExternalAnnotationDeclaration lowestLevelPsiElement = getLowestLevelPsiElement(
-					getSubExternalAnnotations(project, canonicalName)
+					getExternalAnnotationsSubDeclarations(project, canonicalName)
 			);
 			if (lowestLevelPsiElement != null)
 			{
@@ -164,7 +178,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 	}
 
 	@NotNull
-	public static Collection<PerlExternalAnnotationDeclaration> getSubExternalAnnotations(
+	public static Collection<PerlExternalAnnotationDeclaration> getExternalAnnotationsSubDeclarations(
 			@NotNull Project project, @NotNull String canonicalName
 	)
 	{
@@ -178,7 +192,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 	}
 
 	@Nullable
-	public static Collection<PerlExternalAnnotationDeclaration> getSubExternalAnnotations(
+	public static Collection<PerlExternalAnnotationDeclaration> getExternalAnnotationsSubDeclarations(
 			@NotNull Project project, @Nullable String canonicalName, int desiredLevel
 	)
 	{
@@ -189,7 +203,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 
 		List<PerlExternalAnnotationDeclaration> result = null;
 
-		for (PerlExternalAnnotationDeclaration declaration : getSubExternalAnnotations(project, canonicalName))
+		for (PerlExternalAnnotationDeclaration declaration : getExternalAnnotationsSubDeclarations(project, canonicalName))
 		{
 			int currentElementLevel = getPsiElementLevel(declaration);
 			if (currentElementLevel == desiredLevel)

@@ -97,4 +97,5 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	 * @param fileContext new file context
 	 */
 	void setFileContext(@Nullable PsiElement fileContext);
+
 }

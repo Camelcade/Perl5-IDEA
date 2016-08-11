@@ -60,7 +60,7 @@ public class PerlExternalAnnotationsLineMarkerProvider extends RelatedItemLineMa
 				return;
 			}
 
-			Collection<PerlExternalAnnotationNamespace> namespcaceExternalAnnotations = PerlAnnotationsUtil.getNamespcaceExternalAnnotations(element.getProject(), packageName);
+			Collection<PerlExternalAnnotationNamespace> namespcaceExternalAnnotations = PerlAnnotationsUtil.getExternalAnnotationsNamespaces(element.getProject(), packageName);
 			if (namespcaceExternalAnnotations.isEmpty())
 			{
 				return;
@@ -92,7 +92,7 @@ public class PerlExternalAnnotationsLineMarkerProvider extends RelatedItemLineMa
 				return;
 			}
 
-			Collection<PerlExternalAnnotationDeclaration> subExternalAnnotations = PerlAnnotationsUtil.getSubExternalAnnotations(element.getProject(), canonicalName);
+			Collection<PerlExternalAnnotationDeclaration> subExternalAnnotations = PerlAnnotationsUtil.getExternalAnnotationsSubDeclarations(element.getProject(), canonicalName);
 			if (subExternalAnnotations.isEmpty())
 			{
 				return;

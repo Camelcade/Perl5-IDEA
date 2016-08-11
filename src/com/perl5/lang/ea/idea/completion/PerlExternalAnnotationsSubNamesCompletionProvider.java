@@ -79,6 +79,6 @@ public class PerlExternalAnnotationsSubNamesCompletionProvider extends Completio
 	private boolean isNotAnnotatedOnCurrentLevel(PerlSubBase subBase, int currentLevel)
 	{
 		return subBase.getStubbedOrLocalAnnotations() == null &&
-				PerlAnnotationsUtil.getSubExternalAnnotations(subBase.getProject(), subBase.getCanonicalName(), currentLevel) == null;
+				PerlAnnotationsUtil.getExternalAnnotationsSubDeclarations(subBase.getProject(), subBase.getCanonicalName(), currentLevel) == null;
 	}
 }

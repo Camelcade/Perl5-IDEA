@@ -377,9 +377,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 	 * @param packageName canonical package name
 	 * @return package path
 	 */
-	public static String getPackagePathByName(String packageName)
+	@NotNull
+	public static String getPathByNamespaceName(String packageName)
 	{
-		return StringUtils.join(packageName.split(":+"), '/') + ".pm";
+		return getPathByNamspaceNameWithoutExtension(packageName) + ".pm";
+	}
+
+	@NotNull
+	public static String getPathByNamspaceNameWithoutExtension(String packageName)
+	{
+		return StringUtils.join(packageName.split(":+"), '/');
 	}
 
 	/**
@@ -730,7 +737,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 			return null;
 		}
 
-		String packagePath = getPackagePathByName(packageName);
+		String packagePath = getPathByNamespaceName(packageName);
 		VirtualFile[] classRoots = ProjectRootManager.getInstance(project).orderEntries().getClassesRoots();
 
 		for (VirtualFile classRoot : classRoots)
@@ -755,7 +762,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 	public static PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName)
 	{
 		// resolves to a psi file
-		return resolveRelativePathToPsi(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+		return resolveRelativePathToPsi(psiFile, PerlPackageUtil.getPathByNamespaceName(canonicalPackageName));
 	}
 
 	/**
@@ -769,7 +776,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 	public static VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName)
 	{
 		// resolves to a psi file
-		return resolveRelativePathToVirtualFile(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+		return resolveRelativePathToVirtualFile(psiFile, PerlPackageUtil.getPathByNamespaceName(canonicalPackageName));
 	}
 
 	/**

@@ -18,12 +18,13 @@ package com.perl5.lang.ea.idea.intentions;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 11.08.2016.
@@ -31,16 +32,23 @@ import org.jetbrains.annotations.NotNull;
 public class AnnotateNamespaceApplicationLevelIntention extends AnnotateNamespaceProjectLevelIntention
 {
 	@Override
-	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
+	protected int getAnnotationsLevel()
 	{
+		return APP_LEVEL;
+	}
+
+	@Nullable
+	@Override
+	protected VirtualFile getAnnotationsRoot(Project project)
+	{
+		return PerlAnnotationsUtil.getApplicationAnnotationsRoot();
 	}
 
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
 		return super.isAvailable(project, editor, element) &&
-				PerlAnnotationsUtil.getNamespcaceExternalAnnotations(project, ((PerlNamespaceElement) element).getCanonicalName(), APP_LEVEL) == null
-				;
+				PerlAnnotationsUtil.getExternalAnnotationsNamespaces((PerlNamespaceElement) element, PROJECT_LEVEL) == null;
 	}
 
 	@NotNull
