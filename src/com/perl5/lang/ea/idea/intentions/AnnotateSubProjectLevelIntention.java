@@ -20,34 +20,51 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
+import com.perl5.lang.perl.util.PerlAnnotationsUtil;
+import com.perl5.lang.perl.util.PerlExternalAnnotationsLevels;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 11.08.2016.
  */
-public class AnnotateNamespaceDeclarationIntention extends AnnotateNamespaceIntentionBase
+public class AnnotateSubProjectLevelIntention extends AnnotateSubIntentionBase implements PerlExternalAnnotationsLevels
 {
 	@Nullable
 	@Override
-	protected PsiElement getElementToAnnotate(PsiElement namespaceElement)
+	protected PsiElement getElementToAnnotate(PsiElement element)
 	{
-		return ((PerlNamespaceElement) namespaceElement).getNamespaceDefinitions().get(0);
+		return PerlAnnotationsUtil.findOrCreateSubAnnotationTarget(
+				element.getProject(),
+				((PerlSubNameElement) element).getPackageName(),
+				((PerlSubNameElement) element).getName(),
+				getAnnotationsLevel());
+	}
+
+	protected int getAnnotationsLevel()
+	{
+		return PROJECT_LEVEL;
 	}
 
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		return super.isAvailable(project, editor, element) && !(element.getParent() instanceof PerlNamespaceDefinition);
+		if (!super.isAvailable(project, editor, element))
+		{
+			return false;
+		}
+
+		PerlSubBase subBase = getSubBase((PerlSubNameElement) element);
+		return subBase != null && subBase.getStubbedOrLocalAnnotations() == null;
 	}
 
 	@NotNull
 	@Override
 	public String getText()
 	{
-		return PerlBundle.message("perl.annotate.declaration");
+		return PerlBundle.message("perl.annotate.project");
 	}
 
 }

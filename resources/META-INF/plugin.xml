@@ -382,6 +382,22 @@
             <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
             <category>Perl</category>
         </intentionAction>
+
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateSubDeclarationIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateSubProjectLevelIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
+        <intentionAction>
+            <className>com.perl5.lang.ea.idea.intentions.AnnotateSubApplicationLevelIntention</className>
+            <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
+            <category>Perl</category>
+        </intentionAction>
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->

@@ -76,12 +76,12 @@ public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBa
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
 		PerlExternalAnnotationDeclarationStub stub = getStub();
 		if (stub != null)
 		{
-			return stub.getSubAnnotations();
+			return stub.getAnnotations();
 		}
 		return PerlSubAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
 	}

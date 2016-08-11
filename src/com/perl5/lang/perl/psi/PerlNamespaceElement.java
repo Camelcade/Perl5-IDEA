@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable
 	 *
 	 * @return list of PerlNameSpaceDefitions
 	 */
+	@NotNull
 	List<PerlNamespaceDefinition> getNamespaceDefinitions();
 
 	/**

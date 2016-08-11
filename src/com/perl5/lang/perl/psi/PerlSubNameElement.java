@@ -18,6 +18,9 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -54,4 +57,10 @@ public interface PerlSubNameElement extends PsiElement
 	 */
 	@NotNull
 	String getName();
+
+	/**
+	 * Returns list of sub definitionas and declarations
+	 */
+	@Nullable
+	List<PerlSubBase> getSubDefinitions();
 }

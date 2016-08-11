@@ -18,27 +18,14 @@ package com.perl5.lang.ea.idea.intentions;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.perl5.PerlBundle;
-import com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileType;
-import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import com.perl5.lang.perl.util.PerlExternalAnnotationsLevels;
-import com.perl5.lang.perl.util.PerlFileUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Created by hurricup on 11.08.2016.
@@ -47,82 +34,9 @@ public class AnnotateNamespaceProjectLevelIntention extends AnnotateNamespaceInt
 {
 	@Nullable
 	@Override
-	protected PsiElement getElementToAnnotate(PerlNamespaceElement namespaceElement)
+	protected PsiElement getElementToAnnotate(PsiElement element)
 	{
-		Collection<PerlExternalAnnotationNamespace> externalAnnotationsNamespcaces = PerlAnnotationsUtil.getExternalAnnotationsNamespaces(namespaceElement, getAnnotationsLevel());
-		if (externalAnnotationsNamespcaces != null && !externalAnnotationsNamespcaces.isEmpty())
-		{
-			return externalAnnotationsNamespcaces.iterator().next();
-		}
-
-		// no element
-		VirtualFile targetVirtualFile = getTargetVirtualFile(namespaceElement);
-		if (targetVirtualFile == null)
-		{
-			return null;
-		}
-
-		Project project = namespaceElement.getProject();
-		PsiFile targetPsiFile = PsiManager.getInstance(project).findFile(targetVirtualFile);
-		if (targetPsiFile == null)
-		{
-			return null;
-		}
-
-		PerlFileImpl dummyFile = PerlElementFactory.createFile(project, "package " + namespaceElement.getCanonicalName() + ";", PerlExternalAnnotationsFileType.INSTANCE);
-		PerlExternalAnnotationNamespace namespace = dummyFile.findChildByClass(PerlExternalAnnotationNamespace.class);
-
-		if (namespace == null)
-		{
-			return null;
-		}
-
-		PsiElement newLine = PerlElementFactory.createNewLine(project);
-		targetPsiFile.add(newLine);
-		targetPsiFile.add(newLine);
-		return targetPsiFile.add(namespace);
-	}
-
-	@Nullable
-	protected VirtualFile getTargetVirtualFile(PerlNamespaceElement namespaceElement)
-	{
-		PerlNamespaceDefinition namespaceDefinition = getNamespaceDefinition(namespaceElement);
-		if (namespaceDefinition == null)
-		{
-			return null;
-		}
-		PsiFile containingFile = namespaceDefinition.getContainingFile();
-		if (!(containingFile instanceof PerlFileImpl))
-		{
-			return null;
-		}
-		String filePackageName = ((PerlFileImpl) containingFile).getFilePackageName();
-		if (filePackageName == null)
-		{
-			filePackageName = namespaceDefinition.getPackageName();
-		}
-
-		if (filePackageName == null)
-		{
-			return null;
-		}
-
-		VirtualFile annotationsRoot = getAnnotationsRoot(namespaceElement.getProject());
-		if (annotationsRoot == null)
-		{
-			return null;
-		}
-
-		String relativePath = PerlPackageUtil.getPathByNamspaceNameWithoutExtension(filePackageName) + "." + PerlExternalAnnotationsFileType.EXTENSION;
-
-		try
-		{
-			return PerlFileUtil.findOrCreateRelativeFile(annotationsRoot, relativePath);
-		}
-		catch (IOException e)
-		{
-			return null;
-		}
+		return PerlAnnotationsUtil.findOrCreateNamespaceAnnotationTarget(element.getProject(), ((PerlNamespaceElement) element).getCanonicalName(), getAnnotationsLevel());
 	}
 
 	protected int getAnnotationsLevel()
@@ -130,11 +44,6 @@ public class AnnotateNamespaceProjectLevelIntention extends AnnotateNamespaceInt
 		return PROJECT_LEVEL;
 	}
 
-	@Nullable
-	protected VirtualFile getAnnotationsRoot(Project project)
-	{
-		return PerlAnnotationsUtil.getProjectAnnotationsRoot(project);
-	}
 
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
@@ -144,17 +53,8 @@ public class AnnotateNamespaceProjectLevelIntention extends AnnotateNamespaceInt
 			return false;
 		}
 
-		PerlNamespaceAnnotations declarationAnnotations = null;
-		if (element.getParent() instanceof PerlNamespaceDefinition)
-		{
-			declarationAnnotations = ((PerlNamespaceDefinition) element.getParent()).getStubbedOrLocalAnnotations();
-		}
-		else
-		{
-			declarationAnnotations = ((PerlNamespaceElement) element).getNamespaceDefinitions().get(0).getStubbedOrLocalAnnotations();
-		}
-
-		return declarationAnnotations == null;
+		PerlNamespaceDefinition namespaceDefinition = getNamespaceDefinition((PerlNamespaceElement) element);
+		return namespaceDefinition != null && namespaceDefinition.getStubbedOrLocalAnnotations() == null;
 	}
 
 	@NotNull

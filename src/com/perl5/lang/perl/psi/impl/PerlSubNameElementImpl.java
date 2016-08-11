@@ -20,16 +20,15 @@ import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
-import com.perl5.lang.perl.psi.PerlMethod;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlNestedCall;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -168,6 +167,37 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 	public void clearCaches()
 	{
 		createReferences();
+	}
+
+	@Nullable
+	@Override
+	public List<PerlSubBase> getSubDefinitions()
+	{
+		List<PerlSubBase> definitions = null;
+
+		PsiReference[] references = getReferences();
+
+		for (PsiReference reference : references)
+		{
+			if (reference instanceof PerlPolyVariantReference)
+			{
+				ResolveResult[] results = ((PerlPolyVariantReference) reference).multiResolve(false);
+
+				for (ResolveResult result : results)
+				{
+					PsiElement targetElement = result.getElement();
+					if (targetElement instanceof PerlSubBase)
+					{
+						if (definitions == null)
+						{
+							definitions = new ArrayList<PerlSubBase>();
+						}
+						definitions.add((PerlSubBase) targetElement);
+					}
+				}
+			}
+		}
+		return definitions;
 	}
 }
 

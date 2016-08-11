@@ -22,8 +22,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlBundle;
 import com.perl5.compat.PerlStubIndex;
+import com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileType;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStubIndex;
@@ -31,15 +35,16 @@ import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -171,7 +176,7 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 			);
 			if (lowestLevelPsiElement != null)
 			{
-				return lowestLevelPsiElement.getSubAnnotations();
+				return lowestLevelPsiElement.getAnnotations();
 			}
 		}
 		return null;
@@ -189,6 +194,18 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 				PerlScopes.getProjectAndLibrariesScope(project),
 				PerlExternalAnnotationDeclaration.class
 		);
+	}
+
+	@Nullable
+	public static Collection<PerlExternalAnnotationDeclaration> getExternalAnnotationsSubDeclarations(
+			@Nullable PerlSubNameElement subNameElement, int desiredLevel
+	)
+	{
+		if (subNameElement == null)
+		{
+			return null;
+		}
+		return getExternalAnnotationsSubDeclarations(subNameElement.getProject(), subNameElement.getCanonicalName(), desiredLevel);
 	}
 
 	@Nullable
@@ -260,6 +277,24 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 		return UNKNOWN_LEVEL;
 	}
 
+	@Nullable
+	public static VirtualFile getAnnotationsLevelRoot(@NotNull Project project, int level)
+	{
+		if (level == PLUGIN_LEVEL)
+		{
+			return getPluginAnnotationsRoot();
+		}
+		else if (level == APP_LEVEL)
+		{
+			return getApplicationAnnotationsRoot();
+		}
+		else if (level == PROJECT_LEVEL)
+		{
+			return getProjectAnnotationsRoot(project);
+		}
+		return null;
+	}
+
 	@NotNull
 	public static String getPsiElementLevelName(@NotNull PsiElement element)
 	{
@@ -285,5 +320,157 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 
 	}
 
+
+	@Nullable
+	public static PsiElement findOrCreateSubAnnotationTarget(
+			@NotNull Project project,
+			@Nullable String packageName,
+			@Nullable String subName,
+			int desiredLevel
+	)
+	{
+		if (StringUtil.isEmpty(packageName) || StringUtil.isEmpty(subName))
+		{
+			return null;
+		}
+		String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+
+		Collection<PerlExternalAnnotationDeclaration> externalAnnotationsSubDeclarations = getExternalAnnotationsSubDeclarations(project, canonicalName, desiredLevel);
+
+		if (externalAnnotationsSubDeclarations != null && !externalAnnotationsSubDeclarations.isEmpty())
+		{
+			return externalAnnotationsSubDeclarations.iterator().next();
+		}
+
+		PsiElement namespaceAnnotationTarget = findOrCreateNamespaceAnnotationTarget(project, packageName, desiredLevel);
+		if (namespaceAnnotationTarget == null)
+		{
+			return null;
+		}
+
+		PerlFileImpl dummyFile = PerlElementFactory.createFile(project, "package Dummy;\n\nsub " + subName + ";\n", PerlExternalAnnotationsFileType.INSTANCE);
+		PsiPerlNamespaceContent namespaceContent = PsiTreeUtil.findChildOfType(dummyFile, PsiPerlNamespaceContent.class);
+		if (namespaceContent == null)
+		{
+			return null;
+		}
+
+		PsiElement targetElement = ((PerlExternalAnnotationNamespace) namespaceAnnotationTarget).getNamespaceContent();
+		if (targetElement != null)
+		{
+			namespaceAnnotationTarget = targetElement;
+		}
+
+		namespaceAnnotationTarget.addRange(namespaceContent.getFirstChild(), namespaceContent.getLastChild());
+
+		for (PerlExternalAnnotationDeclaration declaration : PsiTreeUtil.findChildrenOfType(namespaceAnnotationTarget, PerlExternalAnnotationDeclaration.class))
+		{
+			if (StringUtil.equals(declaration.getSubName(), subName))
+			{
+				return declaration;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static PerlExternalAnnotationNamespace findOrCreateNamespaceAnnotationTarget(
+			@NotNull Project project,
+			@Nullable String canonicalName,
+			int desiredLevel
+	)
+	{
+		if (StringUtil.isEmpty(canonicalName))
+		{
+			return null;
+		}
+
+		Collection<PerlExternalAnnotationNamespace> externalAnnotationsNamespaces = PerlAnnotationsUtil.getExternalAnnotationsNamespaces(
+				project,
+				canonicalName,
+				desiredLevel
+		);
+		if (externalAnnotationsNamespaces != null && !externalAnnotationsNamespaces.isEmpty())
+		{
+			return externalAnnotationsNamespaces.iterator().next();
+		}
+
+		// no element
+		VirtualFile targetVirtualFile = findOrCreateAnnotationsVirtualFile(project, canonicalName, desiredLevel);
+		if (targetVirtualFile == null)
+		{
+			return null;
+		}
+
+		PsiFile targetPsiFile = PsiManager.getInstance(project).findFile(targetVirtualFile);
+		if (targetPsiFile == null)
+		{
+			return null;
+		}
+
+		PerlFileImpl dummyFile = PerlElementFactory.createFile(project, "\n\npackage " + canonicalName + ";\n", PerlExternalAnnotationsFileType.INSTANCE);
+		targetPsiFile.addRange(dummyFile.getFirstChild(), dummyFile.getLastChild());
+
+		for (PerlExternalAnnotationNamespace namespace : PsiTreeUtil.findChildrenOfType(targetPsiFile, PerlExternalAnnotationNamespace.class))
+		{
+			if (StringUtil.equals(namespace.getPackageName(), canonicalName))
+			{
+				return namespace;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static VirtualFile findOrCreateAnnotationsVirtualFile(
+			@NotNull Project project,
+			@NotNull String packageName,
+			int desiredLevel
+	)
+	{
+		Collection<PerlNamespaceDefinition> namespaceDefinitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
+		if (namespaceDefinitions.isEmpty())
+		{
+			return null;
+		}
+		PerlNamespaceDefinition namespaceDefinition = namespaceDefinitions.iterator().next();
+		if (namespaceDefinition == null)
+		{
+			return null;
+		}
+
+		PsiFile containingFile = namespaceDefinition.getContainingFile();
+		if (!(containingFile instanceof PerlFileImpl))
+		{
+			return null;
+		}
+		String filePackageName = ((PerlFileImpl) containingFile).getFilePackageName();
+		if (filePackageName == null)
+		{
+			filePackageName = namespaceDefinition.getPackageName();
+		}
+
+		if (filePackageName == null)
+		{
+			return null;
+		}
+
+		VirtualFile annotationsRoot = getAnnotationsLevelRoot(project, desiredLevel);
+		if (annotationsRoot == null)
+		{
+			return null;
+		}
+
+		String relativePath = PerlPackageUtil.getPathByNamspaceNameWithoutExtension(filePackageName) + "." + PerlExternalAnnotationsFileType.EXTENSION;
+
+		try
+		{
+			return PerlFileUtil.findOrCreateRelativeFile(annotationsRoot, relativePath);
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+	}
 
 }

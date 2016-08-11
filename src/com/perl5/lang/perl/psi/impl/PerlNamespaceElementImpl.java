@@ -160,6 +160,7 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 		return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
 	}
 
+	@NotNull
 	@Override
 	public List<PerlNamespaceDefinition> getNamespaceDefinitions()
 	{

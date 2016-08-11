@@ -19,8 +19,9 @@ package com.perl5.lang.ea.idea.intentions;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,30 +30,28 @@ import java.util.List;
 /**
  * Created by hurricup on 11.08.2016.
  */
-public abstract class AnnotateNamespaceIntentionBase extends AnnotateIntentionBase
+public class AnnotateSubDeclarationIntention extends AnnotateSubIntentionBase
 {
 	@Nullable
-	protected PerlNamespaceDefinition getNamespaceDefinition(PerlNamespaceElement namespaceElement)
+	@Override
+	protected PsiElement getElementToAnnotate(PsiElement subNameElement)
 	{
-		if (namespaceElement == null)
-		{
-			return null;
-		}
-
-		PsiElement parent = namespaceElement.getParent();
-		if (parent instanceof PerlNamespaceDefinition)
-		{
-			return (PerlNamespaceDefinition) parent;
-		}
-
-		List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
-		return namespaceDefinitions.isEmpty() ? null : namespaceDefinitions.get(0);
+		List<PerlSubBase> subDefinitions = ((PerlSubNameElement) subNameElement).getSubDefinitions();
+		return subDefinitions == null ? null : subDefinitions.get(0);
 	}
 
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		return element instanceof PerlNamespaceElement && getNamespaceDefinition((PerlNamespaceElement) element) != null;
+		return super.isAvailable(project, editor, element) && !(element.getParent() instanceof PerlSubBase);
+	}
+
+
+	@NotNull
+	@Override
+	public String getText()
+	{
+		return PerlBundle.message("perl.annotate.declaration");
 	}
 
 }

@@ -18,13 +18,14 @@ package com.perl5.lang.ea.idea.intentions;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
 
 /**
  * Created by hurricup on 11.08.2016.
@@ -37,18 +38,15 @@ public class AnnotateNamespaceApplicationLevelIntention extends AnnotateNamespac
 		return APP_LEVEL;
 	}
 
-	@Nullable
-	@Override
-	protected VirtualFile getAnnotationsRoot(Project project)
-	{
-		return PerlAnnotationsUtil.getApplicationAnnotationsRoot();
-	}
-
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		return super.isAvailable(project, editor, element) &&
-				PerlAnnotationsUtil.getExternalAnnotationsNamespaces((PerlNamespaceElement) element, PROJECT_LEVEL) == null;
+		if (!super.isAvailable(project, editor, element))
+		{
+			return false;
+		}
+		Collection<PerlExternalAnnotationNamespace> externalAnnotationsNamespaces = PerlAnnotationsUtil.getExternalAnnotationsNamespaces((PerlNamespaceElement) element, PROJECT_LEVEL);
+		return externalAnnotationsNamespaces == null || externalAnnotationsNamespaces.iterator().next().getAnnotations() == null;
 	}
 
 	@NotNull

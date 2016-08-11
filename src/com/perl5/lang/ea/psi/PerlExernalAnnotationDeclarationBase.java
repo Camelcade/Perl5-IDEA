@@ -30,7 +30,7 @@ public interface PerlExernalAnnotationDeclarationBase
 	 * @return PerlSubAnnotation object
 	 */
 	@Nullable
-	PerlSubAnnotations getSubAnnotations();
+	PerlSubAnnotations getAnnotations();
 
 	/**
 	 * Returns function name for current function definition

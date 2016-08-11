@@ -16,43 +16,42 @@
 
 package com.perl5.lang.ea.idea.intentions;
 
+import com.intellij.codeInsight.intention.IntentionAction;
+import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.PsiNavigateUtil;
+import com.perl5.PerlBundle;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 11.08.2016.
  */
-public abstract class AnnotateNamespaceIntentionBase extends AnnotateIntentionBase
+public abstract class AnnotateIntentionBase extends PsiElementBaseIntentionAction implements IntentionAction
 {
-	@Nullable
-	protected PerlNamespaceDefinition getNamespaceDefinition(PerlNamespaceElement namespaceElement)
+	@Override
+	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
 	{
-		if (namespaceElement == null)
+		PsiElement elementToAnnotate = getElementToAnnotate(element);
+		if (elementToAnnotate != null)
 		{
-			return null;
+			PsiNavigateUtil.navigate(elementToAnnotate);
 		}
-
-		PsiElement parent = namespaceElement.getParent();
-		if (parent instanceof PerlNamespaceDefinition)
-		{
-			return (PerlNamespaceDefinition) parent;
-		}
-
-		List<PerlNamespaceDefinition> namespaceDefinitions = namespaceElement.getNamespaceDefinitions();
-		return namespaceDefinitions.isEmpty() ? null : namespaceDefinitions.get(0);
 	}
 
+	@Nullable
+	protected abstract PsiElement getElementToAnnotate(PsiElement namespaceElement);
+
+	@Nls
+	@NotNull
 	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
+	public String getFamilyName()
 	{
-		return element instanceof PerlNamespaceElement && getNamespaceDefinition((PerlNamespaceElement) element) != null;
+		return PerlBundle.message("perl.ea.intention.family");
 	}
 
 }

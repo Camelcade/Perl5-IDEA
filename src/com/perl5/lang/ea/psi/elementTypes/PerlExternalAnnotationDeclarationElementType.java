@@ -58,7 +58,7 @@ public class PerlExternalAnnotationDeclarationElementType extends IStubElementTy
 	@Override
 	public PerlExternalAnnotationDeclarationStub createStub(@NotNull PerlExternalAnnotationDeclaration psi, StubElement parentStub)
 	{
-		return new PerlExternalAnnotationDeclarationStubImpl(parentStub, this, psi.getPackageName(), psi.getSubName(), psi.getSubAnnotations());
+		return new PerlExternalAnnotationDeclarationStubImpl(parentStub, this, psi.getPackageName(), psi.getSubName(), psi.getAnnotations());
 	}
 
 	@NotNull
@@ -74,7 +74,7 @@ public class PerlExternalAnnotationDeclarationElementType extends IStubElementTy
 		// fixme not dry with PerlSubDeclarationStubElementType
 		dataStream.writeName(stub.getPackageName());
 		dataStream.writeName(stub.getSubName());
-		PerlSubAnnotations subAnnotations = stub.getSubAnnotations();
+		PerlSubAnnotations subAnnotations = stub.getAnnotations();
 		if (subAnnotations == null)
 		{
 			dataStream.writeBoolean(false);

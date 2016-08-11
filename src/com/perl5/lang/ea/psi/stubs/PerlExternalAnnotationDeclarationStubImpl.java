@@ -49,7 +49,7 @@ public class PerlExternalAnnotationDeclarationStubImpl extends StubBase<PerlExte
 
 	@Nullable
 	@Override
-	public PerlSubAnnotations getSubAnnotations()
+	public PerlSubAnnotations getAnnotations()
 	{
 		return myPerlSubAnnotations;
 	}
