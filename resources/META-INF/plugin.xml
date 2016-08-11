@@ -347,6 +347,7 @@
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
         <!-- Perl External Annotations -->
+        <internalFileTemplate name="Perl5 external annotations"/>
         <fileTypeFactory implementation="com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileTypeFactory"/>
         <lang.parserDefinition language="Perl5 External Annotations"
                                implementationClass="com.perl5.lang.ea.PerlExternalAnnotationsParserDefinition"/>

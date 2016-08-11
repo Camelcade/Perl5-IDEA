@@ -24,10 +24,14 @@ import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
+import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.ArrayList;
@@ -50,13 +54,15 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 	{
 		builder
 				.setTitle(ACTION_TITLE)
-				.addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
-				.addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
-				.addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
-				.addKind("POD file", PerlIcons.POD_FILE, "Perl5 pod")
-				.addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
-				.addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
+				.addKind(PerlBundle.message("perl.file.kind.package"), PerlIcons.PM_FILE, "Perl5 package")
+				.addKind(PerlBundle.message("perl.file.kind.script"), PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
+				.addKind(PerlBundle.message("perl.file.kind.test"), PerlIcons.TEST_FILE, "Perl5 test")
+				.addKind(PerlBundle.message("perl.file.kind.pod"), PerlIcons.POD_FILE, "Perl5 pod")
+				.addKind(PerlBundle.message("perl.file.kind.mojo"), PerlIcons.MOJO_FILE, "Perl5 mojolicious")
+				.addKind(PerlBundle.message("perl.file.kind.embedded"), PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
 		;
+
+		addAnnotationsPathIfPossible(project, directory, builder);
 
 		FileTypeManagerEx fileTypeManager = FileTypeManagerEx.getInstanceEx();
 		for (FileTemplate fileTemplate : FileTemplateManager.getInstance(project).getAllTemplates())
@@ -67,6 +73,30 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 			}
 		}
 	}
+
+	private void addAnnotationsPathIfPossible(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder)
+	{
+		VirtualFile virtualFile = directory.getVirtualFile();
+		VirtualFile applicationAnnotationsRoot = PerlAnnotationsUtil.getApplicationAnnotationsRoot();
+		boolean addFile = false;
+		if (applicationAnnotationsRoot != null && VfsUtilCore.isAncestor(applicationAnnotationsRoot, virtualFile, false))
+		{
+			addFile = true;
+		}
+		else
+		{
+			VirtualFile projectAnnotationsRoot = PerlAnnotationsUtil.getProjectAnnotationsRoot(project);
+			if (projectAnnotationsRoot != null && VfsUtilCore.isAncestor(projectAnnotationsRoot, virtualFile, false))
+			{
+				addFile = true;
+			}
+		}
+		if (addFile)
+		{
+			builder.addKind(PerlBundle.message("perl.external.annotations"), PerlIcons.PERL_EXTERNAL_ANNOTATIONS_LANGUAGE_ICON, "Perl5 external annotations");
+		}
+	}
+
 
 	@Override
 	protected String getActionName(PsiDirectory directory, String newName, String templateName)
