@@ -18,11 +18,13 @@ package com.perl5.lang.ea.psi.impl;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationDeclaration;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationsPsiUtil;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationsVisitor;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -124,5 +126,18 @@ public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBa
 	public String toString()
 	{
 		return getCanonicalName();
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlExternalAnnotationsVisitor)
+		{
+			((PerlExternalAnnotationsVisitor) visitor).visitExternalAnnotationDeclaration(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 }

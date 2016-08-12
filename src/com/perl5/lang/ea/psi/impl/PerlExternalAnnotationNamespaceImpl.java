@@ -19,8 +19,10 @@ package com.perl5.lang.ea.psi.impl;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import com.perl5.lang.ea.psi.PerlExternalAnnotationsVisitor;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationNamespaceStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
@@ -105,5 +107,18 @@ public class PerlExternalAnnotationNamespaceImpl extends StubBasedPsiElementBase
 		}
 
 		return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlExternalAnnotationsVisitor)
+		{
+			((PerlExternalAnnotationsVisitor) visitor).visitExternalAnnotationNamespace(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
 	}
 }

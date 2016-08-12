@@ -399,6 +399,7 @@
             <descriptionDirectoryName>AnnotateNamespaceIntention</descriptionDirectoryName>
             <category>Perl</category>
         </intentionAction>
+
         <!-- End of Perl External Annotations -->
 
         <!-- Template Toolkit -->
