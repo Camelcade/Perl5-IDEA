@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
@@ -53,18 +54,20 @@ public class PerlSubUnusedInpsection extends PerlInspection
 			@Override
 			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
 			{
-				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
+				PsiElement subNameElement = o.getSubNameElement();
+				if (subNameElement != null && !EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 				{
-					holder.registerProblem(o.getSubNameElement(), "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+					holder.registerProblem(subNameElement, "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 				}
 			}
 
 			@Override
 			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
 			{
-				if (!EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
+				PsiElement subNameElement = o.getSubNameElement();
+				if (subNameElement != null && !EXCLUSIONS.contains(o.getName()) && ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
 				{
-					holder.registerProblem(o.getSubNameElement(), "Unused sub declaration", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+					holder.registerProblem(subNameElement, "Unused sub declaration", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
 				}
 			}
 
