@@ -16,6 +16,7 @@
 
 package com.perl5.lang.ea.idea.intentions;
 
+import com.intellij.codeInsight.intention.LowPriorityAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
@@ -30,7 +31,7 @@ import java.util.Collection;
 /**
  * Created by hurricup on 11.08.2016.
  */
-public class AnnotateNamespaceApplicationLevelIntention extends AnnotateNamespaceProjectLevelIntention
+public class AnnotateNamespaceApplicationLevelIntention extends AnnotateNamespaceProjectLevelIntention implements LowPriorityAction
 {
 	@Override
 	protected int getAnnotationsLevel()
