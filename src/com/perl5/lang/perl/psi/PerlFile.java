@@ -24,7 +24,6 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -34,32 +33,6 @@ import java.util.Set;
  */
 public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation, PodLinkTarget
 {
-	/**
-	 * Checks variable type from cache or using callback getVariableTypeHeavy
-	 *
-	 * @param element variable element
-	 * @return variable type string
-	 */
-	String getVariableType(PerlVariable element);
-
-	/**
-	 * Checks method namespace in cache or using callback getContextPackageNameHeavy
-	 *
-	 * @param element method element
-	 * @return variable type string
-	 */
-	@NotNull
-	String getMethodNamespace(PerlMethod element);
-
-
-	/**
-	 * Returns resolve scope for nested elements. Probably it should be getResolveScope, but still not sure
-	 *
-	 * @return search scope
-	 */
-//	@NotNull
-//	GlobalSearchScope getElementsResolveScope();
-
 	/**
 	 * Recursively collects virtual files included in current file
 	 *

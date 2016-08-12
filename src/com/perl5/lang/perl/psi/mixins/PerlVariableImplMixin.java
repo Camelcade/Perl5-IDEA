@@ -25,6 +25,9 @@ import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.PsiElementProcessor;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
@@ -32,7 +35,6 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -116,14 +118,16 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public String guessVariableType()
 	{
-		PsiFile file = getContainingFile();
-		if (file instanceof PerlFileImpl)
+		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>()
 		{
-			return ((PerlFileImpl) file).getVariableType(this);
-		}
-		return getVariableTypeHeavy();
+			@Nullable
+			@Override
+			public Result<String> compute()
+			{
+				return Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
+			}
+		});
 	}
-
 
 	@Nullable
 	@Override

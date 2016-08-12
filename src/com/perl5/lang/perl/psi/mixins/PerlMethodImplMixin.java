@@ -18,10 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,16 +55,15 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	@Override
 	public String getContextPackageName()
 	{
-		PsiFile file = getContainingFile();
-		if (file instanceof PerlFileImpl)
+		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>()
 		{
-			return ((PerlFileImpl) file).getMethodNamespace(this);
-		}
-		else
-		{
-			String contextPackageNameHeavy = getContextPackageNameHeavy();
-			return contextPackageNameHeavy == null ? "" : contextPackageNameHeavy;
-		}
+			@Nullable
+			@Override
+			public Result<String> compute()
+			{
+				return Result.create(getContextPackageNameHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
+			}
+		});
 	}
 
 
