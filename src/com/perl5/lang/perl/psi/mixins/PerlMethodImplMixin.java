@@ -17,45 +17,28 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.UserDataHolder;
-import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PsiModificationCounterCache;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
 public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod
 {
-	private static final String NULL_TYPE = "%NULL_TYPE%";
-	private static final UserDataHolder DATA_HOLDER = new UserDataHolderBase();
-
-	private static final CachedValueProvider<ConcurrentHashMap<PsiElement, String>> CACHE_PROVIDER = new CachedValueProvider<ConcurrentHashMap<PsiElement, String>>()
+	private static final PsiModificationCounterCache<PerlMethodImplMixin, String> myPackageNamesCache = new PsiModificationCounterCache<PerlMethodImplMixin, String>()
 	{
-		@Nullable
+
 		@Override
-		public Result<ConcurrentHashMap<PsiElement, String>> compute()
+		protected String compute(PerlMethodImplMixin key)
 		{
-			return Result.create(new ConcurrentHashMap<PsiElement, String>(), PsiModificationTracker.MODIFICATION_COUNT);
+			return key.getContextPackageNameHeavy();
 		}
 	};
-
-	@NotNull
-	private static Map<PsiElement, String> getCacheMap(Project project)
-	{
-		return CachedValuesManager.getManager(project).getCachedValue(DATA_HOLDER, CACHE_PROVIDER);
-	}
 
 	public PerlMethodImplMixin(@NotNull ASTNode node)
 	{
@@ -78,20 +61,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	@Override
 	public String getContextPackageName()
 	{
-		Map<PsiElement, String> cacheMap = getCacheMap(getProject());
-		String result = cacheMap.get(this);
-
-		if (result == null)
-		{
-			result = getContextPackageNameHeavy();
-			if (result == null)
-			{
-				result = NULL_TYPE;
-			}
-			cacheMap.put(this, result);
-		}
-		//noinspection StringEquality
-		return result == NULL_TYPE ? null : result;
+		return myPackageNamesCache.getValue(this);
 	}
 
 

@@ -23,9 +23,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.PsiElementProcessor;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
@@ -49,6 +46,16 @@ import java.util.List;
  */
 public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable
 {
+	private static final PsiModificationCounterCache<PerlVariableImplMixin, String> myTypesCache = new PsiModificationCounterCache<PerlVariableImplMixin, String>()
+	{
+
+		@Override
+		protected String compute(PerlVariableImplMixin key)
+		{
+			return key.getVariableTypeHeavy();
+		}
+	};
+
 	public PerlVariableImplMixin(ASTNode node)
 	{
 		super(node);
@@ -105,15 +112,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public String guessVariableType()
 	{
-		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>()
-		{
-			@Nullable
-			@Override
-			public Result<String> compute()
-			{
-				return Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
-			}
-		});
+		return myTypesCache.getValue(this);
 	}
 
 	@Nullable
