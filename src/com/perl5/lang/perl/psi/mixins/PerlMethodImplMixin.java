@@ -18,10 +18,12 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PsiModificationCounterCache;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,17 +32,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod
 {
-	private static final PsiModificationCounterCache<PerlMethodImplMixin, String> myPackageNamesCache = new PsiModificationCounterCache<PerlMethodImplMixin, String>()
-	{
-
-		@Nullable
-		@Override
-		protected String compute(PerlMethodImplMixin key)
-		{
-			return key.getContextPackageNameHeavy();
-		}
-	};
-
 	public PerlMethodImplMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -62,7 +53,15 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	@Override
 	public String getContextPackageName()
 	{
-		return myPackageNamesCache.getValue(this);
+		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>()
+		{
+			@Nullable
+			@Override
+			public Result<String> compute()
+			{
+				return Result.create(getContextPackageNameHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
+			}
+		});
 	}
 
 

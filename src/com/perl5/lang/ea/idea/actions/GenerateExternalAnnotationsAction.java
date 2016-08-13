@@ -17,22 +17,28 @@
 package com.perl5.lang.ea.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.perl5.lang.perl.idea.actions.PerlActionBase;
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.fileTypes.PurePerlFileType;
+import com.perl5.lang.perl.idea.actions.PurePerlActionBase;
+import com.perl5.lang.perl.util.PerlActionUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 13.08.2016.
  */
-public class GenerateExternalAnnotationsAction extends PerlActionBase
+public class GenerateExternalAnnotationsAction extends PurePerlActionBase
 {
 	@Override
-	protected boolean isEnabled(AnActionEvent event)
+	protected boolean isFileTypeOk(@NotNull PurePerlFileType fileType)
 	{
-		return false;
+		return fileType.isExternalAnnotationsSource();
 	}
 
 	@Override
 	public void actionPerformed(AnActionEvent e)
 	{
+		PsiFile file = PerlActionUtil.getPsiFileFromEvent(e);
+		assert file != null;
 
 	}
 }
