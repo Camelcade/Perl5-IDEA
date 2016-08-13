@@ -35,6 +35,7 @@
     <change-notes><![CDATA[
      <p>Improvements:
       <ul>
+      <li>External annotations mechanism. Allows you to annotate foreign modules on different levels. More information in our <a href="https://github.com/Camelcade/Perl5-IDEA/wiki/External-Annotations">wiki</a>.</li>
       </ul>
      </p>
      <p>Fixes:
