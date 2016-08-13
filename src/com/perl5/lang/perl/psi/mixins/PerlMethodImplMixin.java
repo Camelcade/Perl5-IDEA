@@ -33,6 +33,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	private static final PsiModificationCounterCache<PerlMethodImplMixin, String> myPackageNamesCache = new PsiModificationCounterCache<PerlMethodImplMixin, String>()
 	{
 
+		@Nullable
 		@Override
 		protected String compute(PerlMethodImplMixin key)
 		{

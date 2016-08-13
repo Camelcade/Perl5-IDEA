@@ -64,5 +64,6 @@ public abstract class PsiModificationCounterCache<K extends PsiElement, V>
 		return result == NULL_TYPE ? null : (V) result;
 	}
 
+	@Nullable
 	protected abstract V compute(K key);
 }

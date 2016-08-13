@@ -49,6 +49,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	private static final PsiModificationCounterCache<PerlVariableImplMixin, String> myTypesCache = new PsiModificationCounterCache<PerlVariableImplMixin, String>()
 	{
 
+		@Nullable
 		@Override
 		protected String compute(PerlVariableImplMixin key)
 		{
