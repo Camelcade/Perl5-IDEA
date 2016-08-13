@@ -16,12 +16,10 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.util.UserDataHolder;
-import com.intellij.openapi.util.UserDataHolderBase;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
+import com.intellij.psi.PsiManager;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -33,22 +31,25 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class PsiModificationCounterCache<K extends PsiElement, V>
 {
 	private static final Object NULL_TYPE = new Object();
-	private final UserDataHolder DATA_HOLDER = new UserDataHolderBase();
 
-	private final CachedValueProvider<ConcurrentHashMap<K, Object>> CACHE_PROVIDER = new CachedValueProvider<ConcurrentHashMap<K, Object>>()
+	private final Map<K, Object> myCache = new ConcurrentHashMap<K, Object>();
+	private long myModificationCount = 0;
+
+	private Map<K, Object> getCache(@NotNull Project project)
 	{
-		@Nullable
-		@Override
-		public Result<ConcurrentHashMap<K, Object>> compute()
+		long modificationCount = PsiManager.getInstance(project).getModificationTracker().getModificationCount();
+		if (modificationCount != myModificationCount)
 		{
-			return Result.create(new ConcurrentHashMap<K, Object>(), PsiModificationTracker.MODIFICATION_COUNT);
+			myModificationCount = modificationCount;
+			myCache.clear();
 		}
-	};
+		return myCache;
+	}
 
 	@Nullable
 	public V getValue(K key)
 	{
-		Map<K, Object> cacheMap = CachedValuesManager.getManager(key.getProject()).getCachedValue(DATA_HOLDER, CACHE_PROVIDER);
+		Map<K, Object> cacheMap = getCache(key.getProject());
 		Object result = cacheMap.get(key);
 
 		if (result == null)
