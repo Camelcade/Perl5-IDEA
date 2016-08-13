@@ -31,7 +31,9 @@ import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hurricup on 10.08.2016.
@@ -61,14 +63,29 @@ public class PerlExternalAnnotationsLineMarkerProvider extends RelatedItemLineMa
 			}
 
 			Collection<PerlExternalAnnotationNamespace> namespcaceExternalAnnotations = PerlAnnotationsUtil.getExternalAnnotationsNamespaces(element.getProject(), packageName);
-			if (namespcaceExternalAnnotations.isEmpty())
+
+			List<PerlExternalAnnotationNamespace> filteredAnnotations = null;
+
+			for (PerlExternalAnnotationNamespace namespcaceExternalAnnotation : namespcaceExternalAnnotations)
+			{
+				if (namespcaceExternalAnnotation.getAnnotations() != null)
+				{
+					if (filteredAnnotations == null)
+					{
+						filteredAnnotations = new ArrayList<PerlExternalAnnotationNamespace>();
+					}
+					filteredAnnotations.add(namespcaceExternalAnnotation);
+				}
+			}
+
+			if (filteredAnnotations == null)
 			{
 				return;
 			}
 
 			result.add(NavigationGutterIconBuilder
 					.create(AllIcons.Gutter.ExtAnnotation)
-					.setTargets(namespcaceExternalAnnotations)
+					.setTargets(filteredAnnotations)
 					.setTooltipText(PerlBundle.message("perl.external.annotations"))
 					.setCellRenderer(new ExternalAnnotationCellRenderer())
 					.createLineMarkerInfo(nameIdentifier)
@@ -93,13 +110,29 @@ public class PerlExternalAnnotationsLineMarkerProvider extends RelatedItemLineMa
 			}
 
 			Collection<PerlExternalAnnotationDeclaration> subExternalAnnotations = PerlAnnotationsUtil.getExternalAnnotationsSubDeclarations(element.getProject(), canonicalName);
-			if (subExternalAnnotations.isEmpty())
+
+			List<PerlExternalAnnotationDeclaration> filteredAnnotations = null;
+
+			for (PerlExternalAnnotationDeclaration subExternalAnnotation : subExternalAnnotations)
+			{
+				if (subExternalAnnotation.getAnnotations() != null)
+				{
+					if (filteredAnnotations == null)
+					{
+						filteredAnnotations = new ArrayList<PerlExternalAnnotationDeclaration>();
+					}
+					filteredAnnotations.add(subExternalAnnotation);
+				}
+			}
+
+			if (filteredAnnotations == null)
 			{
 				return;
 			}
+
 			result.add(NavigationGutterIconBuilder
 					.create(AllIcons.Gutter.ExtAnnotation)
-					.setTargets(subExternalAnnotations)
+					.setTargets(filteredAnnotations)
 					.setTooltipText(PerlBundle.message("perl.external.annotations"))
 					.setCellRenderer(new ExternalAnnotationCellRenderer())
 					.createLineMarkerInfo(nameIdentifier)
