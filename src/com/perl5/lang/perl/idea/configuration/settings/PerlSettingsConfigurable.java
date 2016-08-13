@@ -259,8 +259,10 @@ public class PerlSettingsConfigurable implements Configurable
 
 		projectExternalAnnotationsPath = new TextFieldWithBrowseButton();
 		projectExternalAnnotationsPath.setEditable(false);
-		FileChooserDescriptor projectLevelAnnotationsDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
-		projectLevelAnnotationsDescriptor.setRoots(myProject.getBaseDir());
+		FileChooserDescriptor projectLevelAnnotationsDescriptor =
+				new FileChooserDescriptor(false, true, false, false, false, false)
+						.withTreeRootVisible(true)
+						.withRoots(myProject.getBaseDir());
 
 		projectExternalAnnotationsPath.addBrowseFolderListener(
 				"Select Directory",
@@ -273,7 +275,12 @@ public class PerlSettingsConfigurable implements Configurable
 					public String getText(JTextField component)
 					{
 						VirtualFile baseDir = myProject.getBaseDir();
-						VirtualFile annotationsPath = baseDir.findFileByRelativePath(component.getText());
+						String text = component.getText();
+						if (text == null)
+						{
+							return baseDir.getCanonicalPath();
+						}
+						VirtualFile annotationsPath = baseDir.findFileByRelativePath(text);
 						return annotationsPath == null ? baseDir.getCanonicalPath() : annotationsPath.getCanonicalPath();
 					}
 

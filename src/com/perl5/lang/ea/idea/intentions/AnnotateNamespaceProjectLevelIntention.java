@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
@@ -48,13 +49,18 @@ public class AnnotateNamespaceProjectLevelIntention extends AnnotateNamespaceInt
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		if (!super.isAvailable(project, editor, element))
+		if (!super.isAvailable(project, editor, element) || !isRootConfigured(project))
 		{
 			return false;
 		}
 
 		PerlNamespaceDefinition namespaceDefinition = getNamespaceDefinition((PerlNamespaceElement) element);
 		return namespaceDefinition != null && namespaceDefinition.getStubbedOrLocalAnnotations() == null;
+	}
+
+	protected boolean isRootConfigured(@NotNull Project project)
+	{
+		return PerlSharedSettings.getInstance(project).getAnnotationsRoot() != null;
 	}
 
 	@NotNull

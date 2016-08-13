@@ -960,6 +960,11 @@
         <component>
             <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
         </component>
+
+        <component>
+            <implementation-class>com.perl5.lang.ea.idea.vfs.PerlExternalAnnotationsApplicationRootListener
+            </implementation-class>
+        </component>
     </application-components>
 
     <project-components>
@@ -981,6 +986,10 @@
         </component>
         <component>
             <implementation-class>com.perl5.lang.htmlmason.idea.project.HTMLMasonProjectComponent</implementation-class>
+        </component>
+        <component>
+            <implementation-class>com.perl5.lang.ea.idea.vfs.PerlExternalAnnotatioinsProjectRootListener
+            </implementation-class>
         </component>
     </project-components>
 

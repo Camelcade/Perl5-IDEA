@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +50,13 @@ public class AnnotateNamespaceApplicationLevelIntention extends AnnotateNamespac
 		Collection<PerlExternalAnnotationNamespace> externalAnnotationsNamespaces = PerlAnnotationsUtil.getExternalAnnotationsNamespaces((PerlNamespaceElement) element, PROJECT_LEVEL);
 		return externalAnnotationsNamespaces == null || externalAnnotationsNamespaces.iterator().next().getAnnotations() == null;
 	}
+
+	@Override
+	protected boolean isRootConfigured(@NotNull Project project)
+	{
+		return PerlApplicationSettings.getInstance().getAnnotationsRoot() != null;
+	}
+
 
 	@NotNull
 	@Override

@@ -61,7 +61,9 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 	public String PERL_TIDY_ARGS = "";
 	public String PERL_CRITIC_ARGS = "";
 
-	private String myAnnotationsPath = "project.annotations";
+	private static final String ourDefaultAnnotationsPath = "project.annotations";
+
+	private String myAnnotationsPath = ourDefaultAnnotationsPath;
 
 	@Transient
 	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;
@@ -163,12 +165,13 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 		return libRootUrlsMap.remove(moduleName);
 	}
 
+	@Nullable
 	public String getAnnotationsPath()
 	{
 		return myAnnotationsPath;
 	}
 
-	public void setAnnotationsPath(String annotationsPath)
+	public void setAnnotationsPath(@Nullable String annotationsPath)
 	{
 		myAnnotationsPath = annotationsPath;
 
@@ -190,6 +193,10 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 				protected VirtualFile compute()
 				{
 					VirtualFile baseDir = myProject.getBaseDir();
+					if (myAnnotationsPath == null)
+					{
+						return null;
+					}
 					VirtualFile result = baseDir.findFileByRelativePath(myAnnotationsPath);
 
 					if (result != null)

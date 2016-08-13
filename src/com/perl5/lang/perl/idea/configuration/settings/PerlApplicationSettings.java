@@ -29,6 +29,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -45,7 +46,9 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 	public String pluginVersion = "";
 	public boolean popupShown = false;
 
-	private String myAnnotationsPath = PathManager.getConfigPath() + "/perl5/application.annotations";
+	private static final String ourDefaultAnnotationsPath = PathManager.getConfigPath() + "/perl5/application.annotations";
+
+	private String myAnnotationsPath = ourDefaultAnnotationsPath;
 
 	@Transient
 	private transient NullableLazyValue<VirtualFile> myAnnotationsLazyRoot;
@@ -94,19 +97,24 @@ public class PerlApplicationSettings implements PersistentStateComponent<PerlApp
 		return isVersionChanged() || !popupShown;
 	}
 
-	@Nullable
+	@NotNull
 	public String getAnnotationsPath()
 	{
 		return myAnnotationsPath;
 	}
 
-	public void setAnnotationsPath(String annotationsPath)
+	public void setAnnotationsPath(@NotNull String annotationsPath)
 	{
 		myAnnotationsPath = annotationsPath;
 		synchronized (this)
 		{
 			myAnnotationsLazyRoot = null;
 		}
+	}
+
+	public void setDefaultAnnotationsPath()
+	{
+		setAnnotationsPath(ourDefaultAnnotationsPath);
 	}
 
 	@Nullable

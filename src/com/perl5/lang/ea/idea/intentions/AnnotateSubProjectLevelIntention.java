@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.util.PerlAnnotationsUtil;
@@ -51,13 +52,18 @@ public class AnnotateSubProjectLevelIntention extends AnnotateSubIntentionBase i
 	@Override
 	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
 	{
-		if (!super.isAvailable(project, editor, element))
+		if (!super.isAvailable(project, editor, element) || !isRootConfigured(project))
 		{
 			return false;
 		}
 
 		PerlSubBase subBase = getSubBase((PerlSubNameElement) element);
 		return subBase != null && subBase.getStubbedOrLocalAnnotations() == null;
+	}
+
+	protected boolean isRootConfigured(@NotNull Project project)
+	{
+		return PerlSharedSettings.getInstance(project).getAnnotationsRoot() != null;
 	}
 
 	@NotNull
