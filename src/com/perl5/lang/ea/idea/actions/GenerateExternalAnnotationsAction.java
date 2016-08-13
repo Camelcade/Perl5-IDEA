@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.fileTypes;
+package com.perl5.lang.ea.idea.actions;
 
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.perl5.lang.perl.idea.actions.PerlActionBase;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 13.08.2016.
  */
-public abstract class PerlFileType extends LanguageFileType
+public class GenerateExternalAnnotationsAction extends PerlActionBase
 {
-	public PerlFileType()
+	@Override
+	protected boolean isEnabled(AnActionEvent event)
 	{
-		this(PerlLanguage.INSTANCE);
+		return false;
 	}
 
-	public PerlFileType(Language language)
+	@Override
+	public void actionPerformed(AnActionEvent e)
 	{
-		super(language);
-	}
 
-	public boolean checkStrictPragma()
-	{
-		return true;
-	}
-
-	public boolean checkWarningsPragma()
-	{
-		return true;
 	}
 }

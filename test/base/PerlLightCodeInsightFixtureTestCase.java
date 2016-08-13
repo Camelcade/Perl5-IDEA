@@ -38,8 +38,8 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -66,7 +66,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public String getFileExtension()
 	{
-		return PerlFileType.EXTENSION_PL;
+		return PerlFileTypeScript.EXTENSION_PL;
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFile(filename, PerlFileType.EXTENSION_PL);
+			initWithFile(filename, PerlFileTypeScript.EXTENSION_PL);
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);
@@ -146,7 +146,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	{
 		try
 		{
-			initWithFileContent("test", PerlFileType.EXTENSION_PL, content);
+			initWithFileContent("test", PerlFileTypeScript.EXTENSION_PL, content);
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);

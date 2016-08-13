@@ -20,7 +20,7 @@ import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 
 /**
  * Created by hurricup on 23.02.2016.
@@ -35,7 +35,7 @@ public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase
 
 	public void testPerlFolding()
 	{
-		testFoldingRegions("perl_folding_test", PerlFileType.INSTANCE);
+		testFoldingRegions("perl_folding_test", PerlFileTypeScript.INSTANCE);
 	}
 
 	public void testMason2Folding()

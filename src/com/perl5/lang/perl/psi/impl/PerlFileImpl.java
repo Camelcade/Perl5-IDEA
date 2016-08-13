@@ -35,8 +35,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlDoExpr;
@@ -95,7 +95,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	protected FileType getDefaultFileType()
 	{
 		// fixme getViewProvider().getVirtualFile() should be here, but incompatible with IDEA14
-		return PerlFileType.INSTANCE;
+		return PerlFileTypeScript.INSTANCE;
 	}
 
 
@@ -459,12 +459,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile
 	public byte[] getPerlContentInBytes()
 	{
 		return getText().getBytes(getVirtualFile().getCharset());
-	}
-
-	@Override
-	public boolean isPerlTidyReformattable()
-	{
-		return true;
 	}
 
 	public PsiElement getContext()

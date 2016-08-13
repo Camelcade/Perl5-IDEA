@@ -27,38 +27,21 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import gnu.trove.THashSet;
-
-import java.util.Set;
 
 /**
  * Created by hurricup on 26.04.2016.
  */
-public class PerlDeparseFileAction extends PerlActionBase
+public class PerlDeparseFileAction extends PurePerlActionBase
 {
-	public static final Set<FileType> DEPARSABLE_TYPES = new THashSet<FileType>();
 	private static final String PERL_DEPARSE_GROUP = "PERL5_DEPARSE_FILE";
-
-	static
-	{
-		DEPARSABLE_TYPES.add(PerlFileType.INSTANCE);
-		DEPARSABLE_TYPES.add(PerlFileTypePackage.INSTANCE);
-		DEPARSABLE_TYPES.add(PerlFileTypeTest.INSTANCE);
-		DEPARSABLE_TYPES.add(MasonPurePerlComponentFileType.INSTANCE);
-	}
 
 	@Override
 	public void actionPerformed(AnActionEvent event)
@@ -142,10 +125,4 @@ public class PerlDeparseFileAction extends PerlActionBase
 		}
 	}
 
-	@Override
-	protected boolean isEnabled(AnActionEvent event)
-	{
-		final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
-		return file != null && file.isPhysical() && DEPARSABLE_TYPES.contains(file.getFileType());
-	}
 }

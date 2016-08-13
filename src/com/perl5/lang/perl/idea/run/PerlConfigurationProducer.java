@@ -23,7 +23,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
 		}
 
 		FileType fileType = virtualFile.getFileType();
-		return fileType == PerlFileType.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
+		return fileType == PerlFileTypeScript.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
 	}
 
 	@Nullable

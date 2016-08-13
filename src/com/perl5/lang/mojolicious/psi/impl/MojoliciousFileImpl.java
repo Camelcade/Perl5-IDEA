@@ -51,11 +51,4 @@ public class MojoliciousFileImpl extends PerlFileImpl
 		return null;
 	}
 
-	@Override
-	public boolean isPerlTidyReformattable()
-	{
-		return false;
-	}
-
-
 }

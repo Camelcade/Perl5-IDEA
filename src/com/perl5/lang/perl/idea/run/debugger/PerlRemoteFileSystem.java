@@ -21,7 +21,7 @@ import com.intellij.openapi.vfs.DeprecatedVirtualFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.testFramework.LightVirtualFile;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlStackFrameDescriptor;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -158,7 +158,7 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem
 
 		public PerlRemoteVirtualFile(@NotNull String name, String path, String text)
 		{
-			super(name, PerlFileType.INSTANCE, text);
+			super(name, PerlFileTypeScript.INSTANCE, text);
 			myPath = path;
 		}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.fileTypes;
 
-import com.intellij.openapi.fileTypes.FileType;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,39 +24,44 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 /**
- * Created by hurricup on 26.05.2015.
+ * Created by hurricup on 13.08.2016.
  */
-public class PerlFileTypeTest extends PurePerlFileType
+public class PerlFileTypeScript extends PurePerlFileType
 {
-	public static final FileType INSTANCE = new PerlFileTypeTest();
-	public static final String EXTENSION = "t";
+	public static final PerlFileType INSTANCE = new PerlFileTypeScript();
+
+	public static final String EXTENSION_PL = "pl";
+	public static final String EXTENSION_PH = "ph";
+	public static final String EXTENSION_AL = "al";
+	public static final String EXTENSION_CGI = "cgi";
+
+	@NotNull
+	@Override
+	public String getDefaultExtension()
+	{
+		return EXTENSION_PL;
+	}
 
 	@NotNull
 	@Override
 	public String getName()
 	{
-		return "Perl5 test";
+		return "Perl5 script";
 	}
 
 	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "Perl5 test";
+		return PerlBundle.message("perl.filetype.script.description");
 	}
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return EXTENSION;
-	}
 
 	@Nullable
 	@Override
 	public Icon getIcon()
 	{
-		return PerlIcons.TEST_FILE;
+		return PerlIcons.PERL_SCRIPT_FILE_ICON;
 	}
 
 }
