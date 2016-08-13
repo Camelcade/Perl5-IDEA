@@ -53,33 +53,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 24.04.2015.
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 {
-	public static final String PACKAGE_SEPARATOR = "::";
-	public static final String PACKAGE_DEREFERENCE = "->";
-	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
-	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
-	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
 	public static final Set<String> BUILT_IN_ALL = new THashSet<String>();
-
-	public static final String SUPER_PACKAGE = "SUPER";
-	public static final String SUPER_PACKAGE_FULL = SUPER_PACKAGE + PACKAGE_SEPARATOR;
-
-	public static final String MAIN_PACKAGE = "main";
-	public static final String MAIN_PACKAGE_FULL = MAIN_PACKAGE + PACKAGE_SEPARATOR;
-	public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
-
-	public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
-	public static final String UNIVERSAL_PACKAGE_FULL = UNIVERSAL_PACKAGE + PACKAGE_SEPARATOR;
-
-	public static final String CORE_PACKAGE = "CORE";
-	public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
 
 	private static final Set<String> INTERNAL_PACKAGES = new HashSet<String>();
 

@@ -25,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.containers.HashSet;
 import com.perl5.PerlBundle;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.ea.fileTypes.PerlExternalAnnotationsFileType;
@@ -45,14 +46,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hurricup on 09.08.2016.
  */
-public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
+public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels, PerlBuiltInNamespaces
 {
 	private static NullableLazyValue<VirtualFile> myPluginAnnotationsLazyRoot = new NullableLazyValue<VirtualFile>()
 	{
@@ -64,6 +63,13 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 			return annotaionsRoot == null ? null : VfsUtil.findFileByIoFile(new File(annotaionsRoot), true);
 		}
 	};
+
+	private static final Set<String> COMMON_USED_NAMESPACES = new HashSet<String>(Arrays.asList(
+			MAIN_PACKAGE,
+			CORE_PACKAGE,
+			UNIVERSAL_PACKAGE,
+			DB_PACKAGE
+	));
 
 	@Nullable
 	public static String getPluginAnnotationsPath()
@@ -428,31 +434,35 @@ public class PerlAnnotationsUtil implements PerlExternalAnnotationsLevels
 			int desiredLevel
 	)
 	{
-		Collection<PerlNamespaceDefinition> namespaceDefinitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
-		if (namespaceDefinitions.isEmpty())
+		String filePackageName = packageName;
+		if (!COMMON_USED_NAMESPACES.contains(packageName))
 		{
-			return null;
-		}
-		PerlNamespaceDefinition namespaceDefinition = namespaceDefinitions.iterator().next();
-		if (namespaceDefinition == null)
-		{
-			return null;
-		}
+			Collection<PerlNamespaceDefinition> namespaceDefinitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName);
+			if (namespaceDefinitions.isEmpty())
+			{
+				return null;
+			}
+			PerlNamespaceDefinition namespaceDefinition = namespaceDefinitions.iterator().next();
+			if (namespaceDefinition == null)
+			{
+				return null;
+			}
 
-		PsiFile containingFile = namespaceDefinition.getContainingFile();
-		if (!(containingFile instanceof PerlFileImpl))
-		{
-			return null;
-		}
-		String filePackageName = ((PerlFileImpl) containingFile).getFilePackageName();
-		if (filePackageName == null)
-		{
-			filePackageName = namespaceDefinition.getPackageName();
-		}
+			PsiFile containingFile = namespaceDefinition.getContainingFile();
+			if (!(containingFile instanceof PerlFileImpl))
+			{
+				return null;
+			}
+			filePackageName = ((PerlFileImpl) containingFile).getFilePackageName();
+			if (filePackageName == null)
+			{
+				filePackageName = namespaceDefinition.getPackageName();
+			}
 
-		if (filePackageName == null)
-		{
-			return null;
+			if (filePackageName == null)
+			{
+				return null;
+			}
 		}
 
 		VirtualFile annotationsRoot = getAnnotationsLevelRoot(project, desiredLevel);

@@ -21,6 +21,8 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
 import com.perl5.lang.perl.util.PerlActionUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 13.08.2016.
@@ -34,13 +36,18 @@ public abstract class PurePerlActionBase extends PerlActionBase
 		return isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
 	}
 
-	protected boolean isMyFile(PsiFile file)
+	protected boolean isMyFile(@Nullable PsiFile file)
 	{
 		if (file == null || !file.isPhysical())
 		{
 			return false;
 		}
 		FileType fileType = file.getFileType();
-		return fileType instanceof PurePerlFileType;
+		return fileType instanceof PurePerlFileType && isFileTypeOk((PurePerlFileType) fileType);
+	}
+
+	protected boolean isFileTypeOk(@NotNull PurePerlFileType fileType)
+	{
+		return true;
 	}
 }

@@ -20,6 +20,7 @@ import gnu.trove.THashSet;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 26.04.2015.
@@ -27,6 +28,29 @@ import java.util.Set;
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
 public interface PerlBuiltInNamespaces
 {
+	String PACKAGE_SEPARATOR = "::";
+	String PACKAGE_DEREFERENCE = "->";
+	String PACKAGE_SEPARATOR_LEGACY = "'";
+	Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
+	Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
+
+	String SUPER_PACKAGE = "SUPER";
+	String SUPER_PACKAGE_FULL = SUPER_PACKAGE + PACKAGE_SEPARATOR;
+
+	String DB_PACKAGE = "DB";
+	String DB_PACKAGE_FULL = DB_PACKAGE + PACKAGE_SEPARATOR;
+
+	String MAIN_PACKAGE = "main";
+	String MAIN_PACKAGE_FULL = MAIN_PACKAGE + PACKAGE_SEPARATOR;
+	String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
+
+	String UNIVERSAL_PACKAGE = "UNIVERSAL";
+	String UNIVERSAL_PACKAGE_FULL = UNIVERSAL_PACKAGE + PACKAGE_SEPARATOR;
+
+	String CORE_PACKAGE = "CORE";
+	String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
+	
+	
 	Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
 			"AnyDBM_File",
 			"App::Prove",
@@ -441,12 +465,12 @@ public interface PerlBuiltInNamespaces
 			"Unicode::Collate",
 			"Unicode::Normalize",
 			"Unicode::UCD",
-			PerlPackageUtil.UNIVERSAL_PACKAGE,
+			UNIVERSAL_PACKAGE,
 			"User::grent",
 			"User::pwent",
 			"XSLoader",
-			PerlPackageUtil.MAIN_PACKAGE,
-			PerlPackageUtil.CORE_PACKAGE,
+			MAIN_PACKAGE,
+			CORE_PACKAGE,
 
 			// these are deprecated
 			"Locale::Maketext::Guts",
