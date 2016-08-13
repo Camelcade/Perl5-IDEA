@@ -96,7 +96,7 @@ public class PerlExternalAnnotationsApplicationRootListener extends VirtualFileA
 
 	private void handleBeforeOperation(VirtualFileEvent event)
 	{
-		VirtualFile annotationsRoot = PerlApplicationSettings.getInstance().getAnnotationsRoot();
+		VirtualFile annotationsRoot = mySettings.getAnnotationsRoot();
 		if (annotationsRoot == null)
 		{
 			return;
