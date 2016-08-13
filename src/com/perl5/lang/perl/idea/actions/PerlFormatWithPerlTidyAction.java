@@ -42,7 +42,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +54,7 @@ import java.util.List;
  * Created by hurricup on 17.04.2016.
  * For improvements, see UpdateCopyrightAction
  */
-public class PerlFormatWithPerlTidyAction extends PerlActionBase
+public class PerlFormatWithPerlTidyAction extends PurePerlActionBase
 {
 	public static final String PERL_TIDY_LINUX_NAME = "perltidy";
 	public static final String PERL_TIDY_WINDOWS_NAME = PERL_TIDY_LINUX_NAME + ".bat";
@@ -67,7 +66,8 @@ public class PerlFormatWithPerlTidyAction extends PerlActionBase
 	protected boolean isEnabled(AnActionEvent event)
 	{
 		final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
-		return file instanceof PerlFile && ((PerlFile) file).isPerlTidyReformattable() && file.isWritable();
+		//noinspection ConstantConditions
+		return super.isMyFile(file) && file.isWritable();
 	}
 
 	protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException

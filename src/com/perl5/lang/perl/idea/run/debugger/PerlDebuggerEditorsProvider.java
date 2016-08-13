@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProviderBase;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,6 +46,6 @@ public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase
 	@Override
 	public FileType getFileType()
 	{
-		return PerlFileType.INSTANCE;
+		return PerlFileTypeScript.INSTANCE;
 	}
 }

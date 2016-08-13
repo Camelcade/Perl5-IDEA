@@ -30,7 +30,7 @@ import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.EditorTextField;
 import com.intellij.ui.components.JBTabbedPane;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jdesktop.swingx.combobox.MapComboBoxModel;
@@ -123,9 +123,9 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
 		myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
 		panel.add(myIsCompileTimeBreakpointsEnabled);
 
-		PsiFile fileFromText = PsiFileFactory.getInstance(myProject).createFileFromText("file.dummy", PerlFileType.INSTANCE, "", 0, true);
+		PsiFile fileFromText = PsiFileFactory.getInstance(myProject).createFileFromText("file.dummy", PerlFileTypeScript.INSTANCE, "", 0, true);
 		Document document = PsiDocumentManager.getInstance(myProject).getDocument(fileFromText);
-		myInitCodeTextField = new EditorTextField(document, myProject, PerlFileType.INSTANCE);
+		myInitCodeTextField = new EditorTextField(document, myProject, PerlFileTypeScript.INSTANCE);
 		myInitCodeTextField.setOneLineMode(false);
 		myInitCodeTextField.setPreferredSize(new Dimension(0, 100));
 		LabeledComponent<EditorTextField> initCode = LabeledComponent.create(myInitCodeTextField, PerlBundle.message("perl.run.option.debugger.init.code"));

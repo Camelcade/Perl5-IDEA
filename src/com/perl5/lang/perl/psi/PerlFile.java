@@ -57,14 +57,6 @@ public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContai
 	byte[] getPerlContentInBytes();
 
 	/**
-	 * Returns true if contents may be re-formatted with Perl::Tidy
-	 *
-	 * @return answer
-	 */
-	boolean isPerlTidyReformattable();
-
-
-	/**
 	 * Overrides file context; if null - using default context resoving implementation
 	 *
 	 * @param fileContext new file context

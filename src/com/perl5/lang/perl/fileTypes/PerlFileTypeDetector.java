@@ -33,7 +33,7 @@ public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector
 	public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText)
 	{
 		// todo add some detections for xs/pod/pm
-		return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileType.INSTANCE : null;
+		return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileTypeScript.INSTANCE : null;
 	}
 
 	@Override

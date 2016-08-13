@@ -58,10 +58,5 @@ public class MasonTemplatingFileImpl extends MasonFileImpl
 		return null;
 	}
 
-	@Override
-	public boolean isPerlTidyReformattable()
-	{
-		return false;
-	}
 
 }

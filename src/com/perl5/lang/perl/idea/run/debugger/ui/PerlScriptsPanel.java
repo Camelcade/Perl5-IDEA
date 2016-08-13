@@ -28,7 +28,7 @@ import com.intellij.ui.ListCellRendererWrapper;
 import com.intellij.ui.SortedListModel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLoadedFileDescriptor;
@@ -96,7 +96,7 @@ public class PerlScriptsPanel extends JPanel
 				String localPath = myDebugThread.getDebugProfileState().mapPathToLocal(remotePath);
 				VirtualFile virtualFile = getVirtualFileByName(localPath);
 
-				setIcon(PerlFileType.INSTANCE.getIcon());
+				setIcon(PerlFileTypeScript.INSTANCE.getIcon());
 				setText(fileDescriptor.getPresentableName());
 
 				if (virtualFile != null)

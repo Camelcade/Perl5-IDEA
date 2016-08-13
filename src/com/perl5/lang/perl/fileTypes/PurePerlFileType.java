@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,31 +17,21 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.perl5.lang.perl.PerlLanguage;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 13.08.2016.
+ * This filetype represents file with pure perl syntax.
+ * Such files can be deparsed and re-formatted with Perl::Tidy
  */
-public abstract class PerlFileType extends LanguageFileType
+public abstract class PurePerlFileType extends PerlFileType
 {
-	public PerlFileType()
+	public PurePerlFileType()
 	{
-		this(PerlLanguage.INSTANCE);
+		super();
 	}
 
-	public PerlFileType(Language language)
+	public PurePerlFileType(Language language)
 	{
 		super(language);
-	}
-
-	public boolean checkStrictPragma()
-	{
-		return true;
-	}
-
-	public boolean checkWarningsPragma()
-	{
-		return true;
 	}
 }

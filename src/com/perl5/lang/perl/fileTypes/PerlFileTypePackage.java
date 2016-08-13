@@ -25,7 +25,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PerlFileTypePackage extends PerlFileType
+public class PerlFileTypePackage extends PurePerlFileType
 {
 	public static final String EXTENSION = "pm";
 

@@ -34,6 +34,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+
 /**
  * Created by hurricup on 13.03.2016.
  */
@@ -42,7 +44,7 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 	@Override
 	public String getFileExtension()
 	{
-		return PerlFileType.EXTENSION_PL;
+		return PerlFileTypeScript.EXTENSION_PL;
 	}
 
 	public String getTestResultsFilePath()

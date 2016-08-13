@@ -673,11 +673,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		return null;
 	}
 
-	@Override
-	public boolean isPerlTidyReformattable()
-	{
-		return false;
-	}
 
 	private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap()
 	{

@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.filetypes;
 import com.intellij.lang.Language;
 import com.perl5.lang.mason2.Mason2Icons;
 import com.perl5.lang.mason2.Mason2Language;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
+import com.perl5.lang.perl.fileTypes.PurePerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,13 +28,13 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPurePerlComponentFileType extends PerlFileType
+public class MasonPurePerlComponentFileType extends PurePerlFileType
 {
 	public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
 
 	public MasonPurePerlComponentFileType()
 	{
-		super(Mason2Language.INSTANCE);
+		this(Mason2Language.INSTANCE);
 	}
 
 	public MasonPurePerlComponentFileType(Language language)
