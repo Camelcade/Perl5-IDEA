@@ -16,10 +16,12 @@
 
 package com.perl5.lang.ea.idea.vfs;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.*;
+import com.intellij.openapi.vfs.pointers.VirtualFilePointer;
+import com.intellij.openapi.vfs.pointers.VirtualFilePointerManager;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +33,7 @@ import java.io.IOException;
  */
 public class PerlExternalAnnotationsApplicationRootListener extends VirtualFileAdapter implements ApplicationComponent
 {
+	private Key<VirtualFilePointer> KEY = Key.create(getClass().getName());
 	private final PerlApplicationSettings mySettings = PerlApplicationSettings.getInstance();
 
 	@Override
@@ -53,6 +56,60 @@ public class PerlExternalAnnotationsApplicationRootListener extends VirtualFileA
 	}
 
 	@Override
+	public void fileMoved(@NotNull VirtualFileMoveEvent event)
+	{
+		handleAfterOperation(event);
+	}
+
+	@Override
+	public void beforeFileMovement(@NotNull VirtualFileMoveEvent event)
+	{
+		handleBeforeOperation(event);
+	}
+
+	@Override
+	public void propertyChanged(@NotNull VirtualFilePropertyEvent event)
+	{
+		handleAfterOperation(event);
+	}
+
+	@Override
+	public void beforePropertyChange(@NotNull VirtualFilePropertyEvent event)
+	{
+		handleBeforeOperation(event);
+	}
+
+	private void handleAfterOperation(VirtualFileEvent event)
+	{
+		VirtualFile file = event.getFile();
+		VirtualFilePointer virtualFilePointer = file.getUserData(KEY);
+		if (virtualFilePointer != null)
+		{
+			VirtualFile annotationsRoot = virtualFilePointer.getFile();
+			if (annotationsRoot != null)
+			{
+				mySettings.setAnnotationsPath(annotationsRoot.getPath());
+			}
+			file.putUserData(KEY, null);
+		}
+	}
+
+	private void handleBeforeOperation(VirtualFileEvent event)
+	{
+		VirtualFile annotationsRoot = PerlApplicationSettings.getInstance().getAnnotationsRoot();
+		if (annotationsRoot == null)
+		{
+			return;
+		}
+
+		VirtualFile file = event.getFile();
+		if (VfsUtil.isAncestor(file, annotationsRoot, false))
+		{
+			file.putUserData(KEY, VirtualFilePointerManager.getInstance().create(annotationsRoot, ApplicationManager.getApplication(), null));
+		}
+	}
+
+	@Override
 	public void fileDeleted(@NotNull VirtualFileEvent event)
 	{
 		VirtualFile annotationsRoot = mySettings.getAnnotationsRoot();
@@ -72,11 +129,8 @@ public class PerlExternalAnnotationsApplicationRootListener extends VirtualFileA
 			catch (IOException ignore)
 			{
 			}
-
-			for (Project project : ProjectManager.getInstance().getOpenProjects())
-			{
-				PerlLibUtil.applyClassPaths(project);
-			}
+			PerlLibUtil.applyClassPathsForAllProjects();
 		}
 	}
+
 }

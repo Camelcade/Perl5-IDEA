@@ -20,6 +20,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
@@ -43,6 +44,15 @@ import java.util.List;
  */
 public class PerlLibUtil
 {
+	public static void applyClassPathsForAllProjects()
+	{
+		for (Project project : ProjectManager.getInstance().getOpenProjects())
+		{
+			PerlLibUtil.applyClassPaths(project);
+		}
+	}
+
+
 	public static void applyClassPaths(final Project project)
 	{
 		if (project == null)
@@ -108,14 +118,14 @@ public class PerlLibUtil
 		VirtualFile pluginAnnotationsRootVirtualFile = PerlAnnotationsUtil.getPluginAnnotationsRoot();
 		if (pluginAnnotationsRootVirtualFile != null)
 		{
-			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, false);
+			addClassRootLibrary(table, pluginAnnotationsRootVirtualFile, true);
 		}
 
 		// add application-level external annotations
 		VirtualFile applicationAnnotationsRoot = PerlAnnotationsUtil.getApplicationAnnotationsRoot();
 		if (applicationAnnotationsRoot != null)
 		{
-			addClassRootLibrary(table, applicationAnnotationsRoot, false);
+			addClassRootLibrary(table, applicationAnnotationsRoot, true);
 		}
 
 		// Add project-level external annotations
@@ -123,7 +133,7 @@ public class PerlLibUtil
 		VirtualFile projectAnnotationsRoot = PerlAnnotationsUtil.getProjectAnnotationsRoot(project);
 		if (projectAnnotationsRoot != null)
 		{
-			addClassRootLibrary(table, projectAnnotationsRoot, false);
+			addClassRootLibrary(table, projectAnnotationsRoot, true);
 		}
 
 		// Add deparsed XSubs
@@ -177,4 +187,5 @@ public class PerlLibUtil
 		}
 		modifiableModel.commit();
 	}
+
 }

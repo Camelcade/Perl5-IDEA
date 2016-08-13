@@ -20,6 +20,7 @@ import com.intellij.openapi.components.*;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NullableLazyValue;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.HashMap;
@@ -173,6 +174,11 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
 	public void setAnnotationsPath(@Nullable String annotationsPath)
 	{
+		if (StringUtil.isEmpty(annotationsPath))
+		{
+			annotationsPath = null;
+		}
+
 		myAnnotationsPath = annotationsPath;
 
 		synchronized (this)
