@@ -26,6 +26,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mason2.Mason2Icons;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.idea.highlighter.MasonHighlighter;
+import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,9 +35,10 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileType
+public class MasonTopLevelComponentFileType extends PerlFileType implements MasonFileType
 {
 	public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
+	public static final String EXTENSION = "mc";
 
 	public MasonTopLevelComponentFileType()
 	{
@@ -69,7 +71,7 @@ public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileTy
 	@Override
 	public String getDefaultExtension()
 	{
-		return "mc";
+		return EXTENSION;
 	}
 
 	@Nullable

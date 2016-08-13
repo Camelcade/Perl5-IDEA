@@ -28,7 +28,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason2.filetypes.MasonFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
@@ -71,7 +71,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 						public boolean process(VirtualFile virtualFile)
 						{
 							FileType fileType = virtualFile.getFileType();
-							if (fileType instanceof MasonPurePerlComponentFileType && !containingFile.equals(virtualFile))
+							if (fileType instanceof MasonFileType && !containingFile.equals(virtualFile))
 							{
 								String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
 								if (StringUtil.isNotEmpty(relativePath))
@@ -97,7 +97,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
 					public boolean process(VirtualFile virtualFile)
 					{
 						FileType fileType = virtualFile.getFileType();
-						if (fileType instanceof MasonPurePerlComponentFileType)
+						if (fileType instanceof MasonFileType)
 						{
 							String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
 							if (StringUtil.isNotEmpty(relativePath))

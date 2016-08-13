@@ -28,7 +28,7 @@ import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason2.filetypes.MasonFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
@@ -155,7 +155,7 @@ public class Mason2Util
 				{
 					for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot))
 					{
-						if (file.getFileType() instanceof MasonPurePerlComponentFileType)
+						if (file.getFileType() instanceof MasonFileType)
 						{
 							index.requestReindex(file);
 						}

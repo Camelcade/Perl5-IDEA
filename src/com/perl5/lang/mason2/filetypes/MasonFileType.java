@@ -14,30 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.fileTypes;
-
-import com.intellij.lang.Language;
+package com.perl5.lang.mason2.filetypes;
 
 /**
  * Created by hurricup on 13.08.2016.
- * This filetype represents file with pure perl syntax.
- * Such files can be deparsed and re-formatted with Perl::Tidy
+ * Marks FileType as Mason2
  */
-public abstract class PurePerlFileType extends PerlFileType
+public interface MasonFileType
 {
-	public PurePerlFileType()
-	{
-		super();
-	}
-
-	public PurePerlFileType(Language language)
-	{
-		super(language);
-	}
-
-	@Override
-	public boolean isExternalAnnotationsSource()
-	{
-		return true;
-	}
 }

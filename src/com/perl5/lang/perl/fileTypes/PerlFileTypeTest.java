@@ -59,4 +59,9 @@ public class PerlFileTypeTest extends PurePerlFileType
 		return PerlIcons.TEST_FILE;
 	}
 
+	@Override
+	public boolean isExternalAnnotationsSource()
+	{
+		return false;
+	}
 }

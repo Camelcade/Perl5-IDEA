@@ -28,7 +28,7 @@ public class EmbeddedPerlFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "thtml");
-		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, "phtml");
+		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, EmbeddedPerlFileType.EXTENSION_THTML);
+		fileTypeConsumer.consume(EmbeddedPerlFileType.INSTANCE, EmbeddedPerlFileType.EXTENSION_PHTML);
 	}
 }

@@ -44,4 +44,9 @@ public abstract class PerlFileType extends LanguageFileType
 	{
 		return true;
 	}
+
+	public boolean isExternalAnnotationsSource()
+	{
+		return false;
+	}
 }

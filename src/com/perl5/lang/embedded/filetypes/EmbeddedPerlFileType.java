@@ -38,6 +38,8 @@ import javax.swing.*;
 public class EmbeddedPerlFileType extends PerlFileType
 {
 	public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
+	public static final String EXTENSION_THTML = "thtml";
+	public static final String EXTENSION_PHTML = "phtml";
 
 	public EmbeddedPerlFileType()
 	{
@@ -71,7 +73,7 @@ public class EmbeddedPerlFileType extends PerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "thtml";
+		return EXTENSION_THTML;
 	}
 
 	@Nullable

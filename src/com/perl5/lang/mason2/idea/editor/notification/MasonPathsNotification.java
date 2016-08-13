@@ -26,7 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason2.filetypes.MasonFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.idea.configuration.MasonSettingsConfigurable;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
@@ -57,7 +57,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
 	@Override
 	public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor)
 	{
-		if (file.getFileType() instanceof MasonPurePerlComponentFileType)
+		if (file.getFileType() instanceof MasonFileType)
 		{
 			String message = null;
 

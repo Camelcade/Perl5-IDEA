@@ -28,6 +28,6 @@ public class HTMLMasonFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer consumer)
 	{
-		consumer.consume(HTMLMasonFileType.INSTANCE, "mas");
+		consumer.consume(HTMLMasonFileType.INSTANCE, HTMLMasonFileType.EXTENSION);
 	}
 }

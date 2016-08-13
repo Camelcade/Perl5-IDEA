@@ -28,9 +28,10 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPurePerlComponentFileType extends PurePerlFileType
+public class MasonPurePerlComponentFileType extends PurePerlFileType implements MasonFileType
 {
 	public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
+	public static final String EXTENSION = "mp";
 
 	public MasonPurePerlComponentFileType()
 	{
@@ -60,7 +61,7 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType
 	@Override
 	public String getDefaultExtension()
 	{
-		return "mp";
+		return EXTENSION;
 	}
 
 	@Nullable
@@ -78,6 +79,12 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType
 
 	@Override
 	public boolean checkWarningsPragma()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isExternalAnnotationsSource()
 	{
 		return false;
 	}

@@ -28,8 +28,8 @@ public class MasonFileTypeFactory extends FileTypeFactory
 	@Override
 	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
 	{
-		fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
-		fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
-		fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");
+		fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, MasonTopLevelComponentFileType.EXTENSION);
+		fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, MasonInternalComponentFileType.EXTENSION);
+		fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, MasonPurePerlComponentFileType.EXTENSION);
 	}
 }

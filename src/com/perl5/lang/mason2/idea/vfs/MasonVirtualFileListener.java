@@ -21,7 +21,7 @@ import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.*;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.perl5.lang.mason2.Mason2Util;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
+import com.perl5.lang.mason2.filetypes.MasonFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -93,7 +93,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 				Mason2Util.reindexProjectFile(getProject(), changedFile);
 			}
 		}
-		else if (changedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
+		else if (changedFile.getFileType() instanceof MasonFileType)    // Mason file has been moved
 		{
 			if (changedFile.getUserData(FORCE_REINDEX) != null ||
 					VfsUtil.isUnder(changedFile, rootsSet)
@@ -174,7 +174,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter
 				movedFile.putUserData(FORCE_REINDEX, true);
 			}
 		}
-		else if (movedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
+		else if (movedFile.getFileType() instanceof MasonFileType)    // Mason file has been moved
 		{
 			if (VfsUtil.isUnder(movedFile, rootsSet))
 			{
