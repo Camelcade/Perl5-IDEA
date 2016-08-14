@@ -18,7 +18,10 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlAnnotationType;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,20 +38,37 @@ public class PerlVariableAnnotations
 
 	private byte myFlags = 0;
 
+	private PerlReturnType myRefType = PerlReturnType.VALUE;
+	private String myType = null;
+
+
 	public PerlVariableAnnotations()
 	{
 
 	}
 
-	public PerlVariableAnnotations(byte flags)
+	public PerlVariableAnnotations(byte flags, @Nullable String type, PerlReturnType refType)
 	{
 		myFlags = flags;
+		myType = type;
+		myRefType = refType;
 	}
 
 	public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
-		byte flags = dataStream.readByte();
-		return new PerlVariableAnnotations(flags);
+		return new PerlVariableAnnotations(
+				dataStream.readByte(),
+				PerlStubSerializationUtil.readNullableString(dataStream),
+				PerlReturnType.deserialize(dataStream)
+		);
+
+	}
+
+	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
+	{
+		dataStream.writeByte(myFlags);
+		dataStream.writeName(myType);
+		myRefType.serialize(dataStream);
 	}
 
 	@Nullable
@@ -67,15 +87,21 @@ public class PerlVariableAnnotations
 			{
 				myAnnotations.setIsDeprecated();
 			}
+			else if (annotation instanceof PerlAnnotationType) // type
+			{
+				PerlNamespaceElement ns = ((PerlAnnotationType) annotation).getType();
+				if (ns != null)
+				{
+					myAnnotations.setType(ns.getCanonicalName());
+					myAnnotations.setRefType(PerlReturnType.REF);
+					// todo implement brackets and braces
+				}
+			}
 		}
 
 		return myAnnotations;
 	}
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeByte(myFlags);
-	}
 
 	public boolean isDeprecated()
 	{
@@ -85,5 +111,25 @@ public class PerlVariableAnnotations
 	public void setIsDeprecated()
 	{
 		myFlags |= IS_DEPRECATED;
+	}
+
+	public PerlReturnType getRefType()
+	{
+		return myRefType;
+	}
+
+	public void setRefType(PerlReturnType refType)
+	{
+		myRefType = refType;
+	}
+
+	public String getType()
+	{
+		return myType;
+	}
+
+	public void setType(String type)
+	{
+		myType = type;
 	}
 }

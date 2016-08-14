@@ -56,6 +56,62 @@ public class PerlVariableTypesTest extends PerlLightCodeInsightFixtureTestCase
 		doTest("variable_after_assignment", "Foo::Bar");
 	}
 
+	public void testAnnotatedSingleInside()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedSingle()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedMulti()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedMultiNonFirst()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentStatement()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentStatementOuter()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentRealTypeInside()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentRealTypeMulti()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentRealTypeSingle()
+	{
+		doTest("JSON::XS");
+	}
+
+	public void testAnnotatedConcurrentRealTypeWins()
+	{
+		doTest("DBI");
+	}
+
+	public void doTest(String type)
+	{
+		doTest(getTestName(true), type);
+	}
+
+
 	public void doTest(String filename, String type)
 	{
 		initWithFileAsScript(filename);

@@ -18,14 +18,14 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.io.StringRef;
+import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlAnnotationReturns;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,13 +59,19 @@ public class PerlSubAnnotations
 
 	public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
 	{
-		byte flags = dataStream.readByte();
-		StringRef returnsRef = dataStream.readName();
 		return new PerlSubAnnotations(
-				flags,
-				returnsRef == null ? null : returnsRef.getString(),
-				PerlReturnType.valueOf(dataStream.readName().toString())
+				dataStream.readByte(),
+				PerlStubSerializationUtil.readNullableString(dataStream),
+				PerlReturnType.deserialize(dataStream)
 		);
+	}
+
+
+	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
+	{
+		dataStream.writeByte(myFlags);
+		dataStream.writeName(myReturns);
+		myReturnType.serialize(dataStream);
 	}
 
 	@Nullable
@@ -96,9 +102,9 @@ public class PerlSubAnnotations
 			{
 				myAnnotations.setIsOverride();
 			}
-			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			else if (annotation instanceof PerlAnnotationReturns) // returns
 			{
-				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
+				PerlNamespaceElement ns = ((PerlAnnotationReturns) annotation).getType();
 				if (ns != null)
 				{
 					myAnnotations.setReturns(ns.getCanonicalName());
@@ -109,13 +115,6 @@ public class PerlSubAnnotations
 		}
 
 		return myAnnotations;
-	}
-
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeByte(myFlags);
-		dataStream.writeName(myReturns);
-		dataStream.writeName(myReturnType.toString());
 	}
 
 	public boolean isMethod()

@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
-
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlAnnotationReturns;
-import org.jetbrains.annotations.NotNull;
+package com.perl5.lang.perl.psi;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 14.08.2016.
  */
-public class PerlAnnotationReturnsImpl extends PerlAnnotationWithTypeImpl implements PerlAnnotationReturns
+public interface PerlAnnotationType extends PerlAnnotationWithType
 {
-	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
 }

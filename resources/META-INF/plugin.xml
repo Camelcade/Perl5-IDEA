@@ -36,6 +36,7 @@
      <p>Improvements:
       <ul>
       <li>External annotations mechanism. Allows you to annotate foreign modules on different levels. More information in our <a href="https://github.com/Camelcade/Perl5-IDEA/wiki/External-Annotations">wiki</a>.</li>
+      <li><code>#@type</code> annotation for variables. More information in our <a href="https://github.com/Camelcade/Perl5-IDEA/wiki/Annotations#type">wiki</a>.</li>
       </ul>
      </p>
      <p>Fixes:

@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-
 /**
  * Created by hurricup on 20.04.2016.
  */
-public interface PerlAnnotationReturns extends PerlAnnotation, PerlNamespaceElementContainer
+public interface PerlAnnotationReturns extends PerlAnnotationWithType
 {
 }

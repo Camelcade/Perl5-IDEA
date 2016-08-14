@@ -51,7 +51,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 				this,
 				psi.getPackageName(),
 				psi.getName(),
-				psi.getDeclaredType(),
+				psi.getLocallyDeclaredType(),
 				psi.getActualType(),
 				psi.getLocalVariableAnnotations());
 	}

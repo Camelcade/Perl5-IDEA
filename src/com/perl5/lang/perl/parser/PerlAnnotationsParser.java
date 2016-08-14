@@ -87,26 +87,11 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 			}
 			else if (tokenType == ANNOTATION_RETURNS_KEY)
 			{
-				b.advanceLexer();
-				tokenType = b.getTokenType();
-
-				if (tokenType == PACKAGE)
-				{
-					b.advanceLexer();
-				}
-				else if (tokenType == IDENTIFIER)
-				{
-					PsiBuilder.Marker packageMarker = b.mark();
-					b.advanceLexer();
-					packageMarker.collapse(PACKAGE);
-				}
-				else
-				{
-					b.mark().error("Package expected");
-				}
-
-				annotationMarker.done(ANNOTATION_RETURNS);
-
+				parseAnnotationWithType(b, annotationMarker, ANNOTATION_RETURNS);
+			}
+			else if (tokenType == ANNOTATION_TYPE_KEY)
+			{
+				parseAnnotationWithType(b, annotationMarker, ANNOTATION_TYPE);
 			}
 			else if (tokenType == ANNOTATION_INJECT_KEY)
 			{
@@ -158,6 +143,29 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 		}
 
 		marker_.done(root_);
+	}
+
+	private static void parseAnnotationWithType(PsiBuilder b, PsiBuilder.Marker annotationMarker, IElementType annotationType)
+	{
+		b.advanceLexer();
+		IElementType tokenType = b.getTokenType();
+
+		if (tokenType == PACKAGE)
+		{
+			b.advanceLexer();
+		}
+		else if (tokenType == IDENTIFIER)
+		{
+			PsiBuilder.Marker packageMarker = b.mark();
+			b.advanceLexer();
+			packageMarker.collapse(PACKAGE);
+		}
+		else
+		{
+			b.mark().error("Package expected");
+		}
+
+		annotationMarker.done(annotationType);
 	}
 
 }

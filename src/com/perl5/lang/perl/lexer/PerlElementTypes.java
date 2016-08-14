@@ -41,6 +41,7 @@ public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementT
 	IElementType ANNOTATION_METHOD_KEY = new PerlTokenType("ANNOTATION_METHOD_KEY");
 	IElementType ANNOTATION_ABSTRACT_KEY = new PerlTokenType("ANNOTATION_ABSTRACT_KEY");
 	IElementType ANNOTATION_INJECT_KEY = new PerlTokenType("ANNOTATION_INJECT_KEY");
+	IElementType ANNOTATION_TYPE_KEY = new PerlTokenType("ANNOTATION_TYPE_KEY");
 	IElementType ANNOTATION_NOINSPECTION_KEY = new PerlTokenType("ANNOTATION_NOINSPECTION_KEY");
 
 	IElementType ANNOTATION_ABSTRACT = new PerlElementTypeEx("ANNOTATION_ABSTRACT")
@@ -52,6 +53,18 @@ public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementT
 			return new PerlAnnotationAbstractImpl(node);
 		}
 	};
+
+	IElementType ANNOTATION_TYPE = new
+
+			PerlElementTypeEx("ANNOTATION_TYPE")
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PerlAnnotationTypeImpl(node);
+				}
+			};
 
 	IElementType ANNOTATION_DEPRECATED = new
 

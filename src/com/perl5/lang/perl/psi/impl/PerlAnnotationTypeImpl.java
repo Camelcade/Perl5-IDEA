@@ -17,15 +17,15 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlAnnotationReturns;
+import com.perl5.lang.perl.psi.PerlAnnotationType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 14.08.2016.
  */
-public class PerlAnnotationReturnsImpl extends PerlAnnotationWithTypeImpl implements PerlAnnotationReturns
+public class PerlAnnotationTypeImpl extends PerlAnnotationWithTypeImpl implements PerlAnnotationType
 {
-	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
+	public PerlAnnotationTypeImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}

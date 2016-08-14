@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlAnnotationReturns;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 14.08.2016.
  */
-public class PerlAnnotationReturnsImpl extends PerlAnnotationWithTypeImpl implements PerlAnnotationReturns
+public interface PerlAnnotationWithType extends PerlAnnotation
 {
-	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+	/**
+	 * Trying to search for netsted NamespaceElement
+	 * fixme this is raw, should be a type
+	 *
+	 * @return psi element or null
+	 */
+	@Nullable
+	PerlNamespaceElement getType();
+
 }

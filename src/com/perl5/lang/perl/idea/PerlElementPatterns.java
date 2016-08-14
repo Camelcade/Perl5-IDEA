@@ -80,7 +80,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 			);
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_ANNOTATION_PATTERN =
-			NAMESPACE_NAME_PATTERN.inside(psiElement(PerlAnnotationReturns.class));
+			NAMESPACE_NAME_PATTERN.inside(psiElement(PerlAnnotationWithType.class));
 
 	PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_DEFINITION_PATTERN =
 			NAMESPACE_NAME_PATTERN.withParent(NAMESPACE_DEFINITION_PATTERN);

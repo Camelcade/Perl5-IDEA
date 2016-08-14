@@ -17,16 +17,26 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlAnnotationReturns;
+import com.perl5.lang.perl.psi.PerlAnnotationWithType;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 14.08.2016.
  */
-public class PerlAnnotationReturnsImpl extends PerlAnnotationWithTypeImpl implements PerlAnnotationReturns
+public abstract class PerlAnnotationWithTypeImpl extends PerlAnnotationImpl implements PerlAnnotationWithType
 {
-	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
+	public PerlAnnotationWithTypeImpl(@NotNull ASTNode node)
 	{
 		super(node);
 	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceElement getType()
+	{
+		return findChildByClass(PerlNamespaceElement.class);
+	}
+
 }

@@ -32,10 +32,13 @@ public class PerlAnnotations implements PerlElementTypes
 	{
 		TOKENS_MAP.put("deprecated", ANNOTATION_DEPRECATED_KEY);
 		TOKENS_MAP.put("returns", ANNOTATION_RETURNS_KEY);
-		TOKENS_MAP.put("override", ANNOTATION_OVERRIDE_KEY);
+		TOKENS_MAP.put("type", ANNOTATION_TYPE_KEY);
 		TOKENS_MAP.put("method", ANNOTATION_METHOD_KEY);
-		TOKENS_MAP.put("abstract", ANNOTATION_ABSTRACT_KEY);
 		TOKENS_MAP.put("inject", ANNOTATION_INJECT_KEY);
+
+		// these are parsed but not used
+		TOKENS_MAP.put("override", ANNOTATION_OVERRIDE_KEY);
+		TOKENS_MAP.put("abstract", ANNOTATION_ABSTRACT_KEY);
 		TOKENS_MAP.put("noinspection", ANNOTATION_NOINSPECTION_KEY);
 	}
 
