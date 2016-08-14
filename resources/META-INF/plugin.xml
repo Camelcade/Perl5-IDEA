@@ -42,6 +42,7 @@
       <ul>
       <li>Library settings now being stored properly for multi-module projects, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1332">mciprijanovic</a>.</li>
       <li>Fixed possible NPE in unused subs inspection</li>
+      <li>Fixed resolving problem if spaces or comments around <code>-></code> operator.</li>
       </ul>
      </p>
     ]]>

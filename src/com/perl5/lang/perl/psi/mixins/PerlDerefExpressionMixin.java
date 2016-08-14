@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
@@ -48,7 +49,9 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		}
 
 		PsiElement currentElement = methodElement.getPrevSibling();
-		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+		while (currentElement instanceof PsiWhiteSpace ||
+				currentElement instanceof PsiComment ||
+				PsiUtilCore.getElementType(currentElement) == PerlElementTypes.OPERATOR_DEREFERENCE)
 		{
 			currentElement = currentElement.getPrevSibling();
 		}
@@ -59,7 +62,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 	@Nullable
 	public String getCurrentElementType(PsiElement currentElement)
 	{
-		while (currentElement != null && (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
+		while (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment)
 		{
 			currentElement = currentElement.getPrevSibling();
 		}
