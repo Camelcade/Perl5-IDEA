@@ -335,17 +335,17 @@
         <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
         <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 
-        <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
+        <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
 
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlScalarsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlArraysStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
 
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+        <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
 
         <lang.findUsagesProvider language="Perl5"
                                  implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>

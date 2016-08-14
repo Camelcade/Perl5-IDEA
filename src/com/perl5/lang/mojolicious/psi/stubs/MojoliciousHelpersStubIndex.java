@@ -19,7 +19,7 @@ package com.perl5.lang.mojolicious.psi.stubs;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
-import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
+import com.perl5.lang.perl.psi.stubs.PerlStubIndexesVersions;
 import org.jetbrains.annotations.NotNull;
 
 /**

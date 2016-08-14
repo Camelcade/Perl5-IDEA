@@ -26,8 +26,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.parser.MojoliciousParser;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**

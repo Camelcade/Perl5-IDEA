@@ -325,15 +325,15 @@ limitations under the License.
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
-    stubClass("use_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
+    stubClass("use_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
     mixin("no_statement")="com.perl5.lang.perl.psi.mixins.PerlNoStatementImplMixin"
     implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
-    stubClass("no_statement")="com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub"
+    stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
     implements("constant_definition")="com.perl5.lang.perl.psi.PerlConstantDefinition"
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
-    stubClass("constant_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
+    stubClass("constant_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
@@ -373,7 +373,7 @@ limitations under the License.
 
     extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element")=expr
 
-    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
+    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
     mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin"
     implements("variable_declaration_wrapper")="com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper"
 
@@ -382,33 +382,33 @@ limitations under the License.
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
 
-    stubClass("namespace_definition")="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub"
+    stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
     implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
 
-    stubClass("method_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
+    stubClass("method_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("method_definition")="com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin"
     implements("method_definition")="com.perl5.lang.perl.psi.PerlMethodDefinition"
 
-    stubClass("func_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
+    stubClass("func_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("func_definition")="com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionImplMixin"
     implements("func_definition")="com.perl5.lang.perl.psi.PerlFuncDefinition"
 
-    stubClass("sub_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
+    stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionImplMixin"
     implements("sub_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
 
-    stubClass("sub_declaration")="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub"
+    stubClass("sub_declaration")="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub"
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
 
-    stubClass("glob_variable")="com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub"
+    stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableImplMixin"
     implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariable"
 
     mixin("require_expr")="com.perl5.lang.perl.psi.mixins.PerlRequireExprImplMixin"
     implements("require_expr")="com.perl5.lang.perl.psi.PerlRequireExpr"
-    stubClass("require_expr")="com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub"
+    stubClass("require_expr")="com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub"
 
 	implements("grep_expr")="com.perl5.lang.perl.psi.PerlGrepExpr"
 	implements("map_expr")="com.perl5.lang.perl.psi.PerlMapExpr"
@@ -418,7 +418,7 @@ limitations under the License.
 
     mixin("do_expr")="com.perl5.lang.perl.psi.mixins.PerlDoExprImplMixin"
     implements("do_expr")="com.perl5.lang.perl.psi.PerlDoExpr"
-    stubClass("do_expr")="com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub"
+    stubClass("do_expr")="com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub"
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin";
     implements("method")="com.perl5.lang.perl.psi.PerlMethod";

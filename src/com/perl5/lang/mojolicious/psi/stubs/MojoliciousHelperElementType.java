@@ -20,10 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**

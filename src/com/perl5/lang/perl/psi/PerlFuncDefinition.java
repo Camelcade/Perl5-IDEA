@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
  * Created by hurricup on 10.11.2015.

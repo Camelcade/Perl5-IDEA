@@ -20,9 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.compat.PerlStubIndex;
-import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
 
 import java.util.Arrays;
 import java.util.Collection;

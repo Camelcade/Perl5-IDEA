@@ -17,7 +17,7 @@
 package com.perl5.lang.ea.psi.elementTypes;
 
 import com.perl5.lang.ea.PerlExternalAnnotationsLanguage;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 
 /**
  * Created by hurricup on 06.08.2016.

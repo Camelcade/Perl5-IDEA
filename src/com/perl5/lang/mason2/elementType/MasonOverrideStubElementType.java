@@ -20,9 +20,9 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinitionImpl;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 /**

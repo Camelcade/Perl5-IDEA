@@ -18,9 +18,9 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlRequireExpr;
+import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.perl5.lang.perl.idea.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlAnnotationReturns;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -26,6 +25,7 @@ import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

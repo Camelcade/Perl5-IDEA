@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

@@ -26,7 +26,7 @@ import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
