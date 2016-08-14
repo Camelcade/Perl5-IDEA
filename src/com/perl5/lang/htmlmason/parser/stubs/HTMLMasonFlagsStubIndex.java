@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason.parser.stubs;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -28,12 +29,11 @@ import org.jetbrains.annotations.NotNull;
 public class HTMLMasonFlagsStubIndex extends StringStubIndexExtension<HTMLMasonFlagsStatement>
 {
 	public static final StubIndexKey<String, HTMLMasonFlagsStatement> KEY = StubIndexKey.createIndexKey("perl.html.mason.flags");
-	public static final int VERSION = 2;
 
 	@Override
 	public int getVersion()
 	{
-		return VERSION + super.getVersion();
+		return PerlStubIndexesVersions.MASON_FLAGS_INDEX_VERSION + super.getVersion();
 	}
 
 	@NotNull

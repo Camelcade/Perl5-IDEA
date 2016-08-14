@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.stubs;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,12 +29,10 @@ public class PodStubIndex extends StringStubIndexExtension<PodStubBasedSection>
 {
 	public static final StubIndexKey<String, PodStubBasedSection> KEY = StubIndexKey.createIndexKey("pod.index");
 
-	public static final int VERSION = 3;
-
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.POD_STUB_INDEX_VERSION;
 	}
 
 	@NotNull

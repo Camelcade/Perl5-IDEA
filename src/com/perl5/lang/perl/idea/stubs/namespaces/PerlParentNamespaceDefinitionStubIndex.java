@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.stubs.namespaces;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,13 +27,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParentNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
 {
-	public static final int VERSION = 3;
 	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.parent");
 
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.PARENT_NS_STUB_INDEX_VERSION;
 	}
 
 	@NotNull

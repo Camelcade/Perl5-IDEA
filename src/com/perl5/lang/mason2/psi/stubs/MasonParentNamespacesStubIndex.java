@@ -19,6 +19,7 @@ package com.perl5.lang.mason2.psi.stubs;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,13 +27,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MasonParentNamespacesStubIndex extends StringStubIndexExtension<MasonNamespaceDefinition>
 {
-	public static final int VERSION = 1;
 	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason2.namespace.parent");
 
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.MASON_PARENT_NS_INDEX_VERSION;
 	}
 
 	@NotNull

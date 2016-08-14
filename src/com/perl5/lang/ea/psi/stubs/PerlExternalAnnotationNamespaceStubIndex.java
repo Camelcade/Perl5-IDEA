@@ -19,6 +19,7 @@ package com.perl5.lang.ea.psi.stubs;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationNamespace;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,13 +27,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlExternalAnnotationNamespaceStubIndex extends StringStubIndexExtension<PerlExternalAnnotationNamespace>
 {
-	public static final int VERSION = 1;
 	public static final StubIndexKey<String, PerlExternalAnnotationNamespace> KEY = StubIndexKey.createIndexKey("perl.external.annotations.ns");
 
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.EXTERNAL_ANNOTATIONS_NS_INDEX_VERSION;
 	}
 
 	@NotNull

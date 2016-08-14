@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,13 +27,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubDeclarationStubIndex extends StringStubIndexExtension<PerlSubDeclaration>
 {
-	public static final int VERSION = 1;
 	public static final StubIndexKey<String, PerlSubDeclaration> KEY = StubIndexKey.createIndexKey("perl.sub.declaration");
 
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.SUB_DECLARATION_INDEX_VERSION;
 	}
 
 	@NotNull

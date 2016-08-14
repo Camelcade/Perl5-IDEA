@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.stubs.variables;
 
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexesVersions;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 
 /**
@@ -29,11 +30,9 @@ public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<Pe
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
 
-	public static final int VERSION = 1;
-
 	@Override
 	public int getVersion()
 	{
-		return super.getVersion() + VERSION;
+		return super.getVersion() + PerlStubIndexesVersions.VAR_STUB_INDEX_VERSION;
 	}
 }
