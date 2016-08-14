@@ -16,7 +16,14 @@ my $result = { };
 my $coder = JSON::XS->new()->canonical( 1 )->pretty( 1 );
 my $limit = 10;
 
-collect_namespaces();
+if( $ARGV[0])
+{
+    $namespaces->{$ARGV[0]} = 1;
+}
+else
+{
+    collect_namespaces();
+}
 
 foreach my $package (sort keys %$namespaces)
 {
@@ -35,12 +42,13 @@ foreach my $package (sort keys %$namespaces)
 
         foreach my $ns (keys %{$decoded->{ns}})
         {
+            next if $ns ne $package && exists $namespaces->{$ns};
             if (!exists $result->{$ns} || $ns eq $package)
             {
                 $result->{$ns} = $decoded->{ns}->{$ns};
             }
         }
-        #        last unless --$limit;
+#        last unless --$limit;
 
     }
     else
@@ -54,7 +62,9 @@ foreach my $ns (keys %$result)
 {
     my $data = $result->{$ns};
 
-    next if ( keys %$data == 1 && $data->{mro} && $data->{mro} eq 'dfs');
+    my @keys = keys %$data;
+    next unless @keys;
+    next if ( @keys == 1 && exists $data->{mro} && $data->{mro} eq 'dfs');
 
     my @chunks = split '::', $ns;
     my $filename = pop @chunks;
@@ -64,10 +74,12 @@ foreach my $ns (keys %$result)
     my $filepath = $dirname.'/'.$filename;
     if (open my $of, '>', $filepath)
     {
+        printf $of "#\@features %s\n", join ',', @{$data->{features}} if ( $data->{features});
         printf $of "#\@parent %s\n", join ',', @{$data->{isa}} if ( $data->{isa});
+        printf $of "#\@set_parent %s\n", join ',', @{$data->{sets_parent}} if ( $data->{sets_parent});
         printf $of "#\@export %s\n", join ',', @{$data->{export}} if ( $data->{export});
         printf $of "#\@export_ok %s\n", join ',', @{$data->{export_ok}} if ( $data->{export_ok});
-        printf $of "#\@mro %s\n", $data->{mro};
+        printf $of "#\@mro %s\n", $data->{mro} if $data->{mro};
         printf $of "package %s;\n", $ns;
         close $of;
     }
