@@ -1,0 +1,6 @@
+#@type DBI
+my(
+#@type JSON::XS
+$var, $var2, $var3);
+
+say $v<caret>ar;

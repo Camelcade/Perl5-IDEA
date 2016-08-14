@@ -1,0 +1,4 @@
+#@type JSON::XS
+my $var;
+
+say $v<caret>ar;

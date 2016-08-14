@@ -16,6 +16,12 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
 /**
  * Created by hurricup on 03.06.2015.
  */
@@ -27,5 +33,16 @@ public enum PerlReturnType
 	HASH,        // %Package::Name	NYI
 	ARRAY_REF,    // [Package::Name]
 	HASH_REF,    // {Package::Name}
-	CODE_REF    // &				NYI
+	CODE_REF;    // &				NYI
+
+	public static PerlReturnType deserialize(@NotNull StubInputStream dataStream) throws IOException
+	{
+		return PerlReturnType.valueOf(dataStream.readName().toString());
+	}
+
+	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
+	{
+		dataStream.writeName(toString());
+	}
+
 }

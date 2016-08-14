@@ -16,11 +16,25 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 14.08.2016.
  */
-public interface PerlAnnotationReturns extends PerlAnnotation, PerlNamespaceElementContainer
+public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation
 {
+	/**
+	 * Trying to search for netsted NamespaceElement
+	 * fixme this is raw, should be a type
+	 *
+	 * @return psi element or null
+	 */
+	@Nullable
+	default PerlNamespaceElement getType()
+	{
+		return PsiTreeUtil.findChildOfType(this, PerlNamespaceElement.class);
+	}
+
 }

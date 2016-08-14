@@ -36,7 +36,9 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 	private static final TokenSet AUTO_OPENED_TOKENS = TokenSet.create(
 			RESERVED_USE,
 			RESERVED_NO,
-			RESERVED_PACKAGE
+			RESERVED_PACKAGE,
+			ANNOTATION_RETURNS_KEY,
+			ANNOTATION_TYPE_KEY
 	);
 
 	public PerlCompletionContributor()

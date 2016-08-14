@@ -39,12 +39,20 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	PerlVariable getVariable();
 
 	/**
-	 * Returns declaration type if variable is in declaration
+	 * Returns declaration type in annotation or declaration
 	 *
 	 * @return type string or null
 	 */
 	@Nullable
 	String getDeclaredType();
+
+	/**
+	 * Returns declaration type if variable is in declaration
+	 *
+	 * @return type string or null
+	 */
+	@Nullable
+	String getLocallyDeclaredType();
 
 	/**
 	 * Trying to get the package name from explicit specification or by traversing

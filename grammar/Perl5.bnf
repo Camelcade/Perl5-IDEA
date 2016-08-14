@@ -333,6 +333,7 @@ limitations under the License.
     ANNOTATION_METHOD_KEY='#@method'
     ANNOTATION_ABSTRACT_KEY='#@abstract'
     ANNOTATION_INJECT_KEY='#@inject'
+    ANNOTATION_TYPE_KEY='#@type'
     ANNOTATION_NOINSPECTION_KEY='#@noinspection'
     ANNOTATION_UNKNOWN_KEY='#@unknown'
   ]
@@ -475,6 +476,7 @@ limitations under the License.
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
+    implements("annotation_returns|annotation_type")="com.perl5.lang.perl.psi.PerlAnnotationWithType"
     implements("annotation_.*")="com.perl5.lang.perl.psi.PerlAnnotation"
     mixin("annotation_inject")="com.perl5.lang.perl.psi.mixins.PerlAnnotationInjectMixin"
  }
@@ -1121,6 +1123,7 @@ private annotation ::=
 	| annotation_method
 	| annotation_override
 	| annotation_returns
+	| annotation_type
 	| annotation_inject
 	| annotation_noinspection
 	| '#@unknown'
@@ -1130,6 +1133,7 @@ annotation_deprecated ::= '#@deprecated' {pin=1}
 annotation_method ::=  '#@method' {pin=1}
 annotation_override ::=  '#@override' {pin=1}
 annotation_returns ::=  '#@returns' any_package {pin=1}
+annotation_type ::=  '#@type' any_package {pin=1}
 annotation_inject ::=  '#@inject' string_bare {pin=1}
 annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 

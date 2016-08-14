@@ -119,25 +119,33 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	@Override
 	public String getDeclaredType()
 	{
+		PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
+		if (variableAnnotations != null)
+		{
+			String type = variableAnnotations.getType();
+			if (type != null)
+			{
+				return type;
+			}
+		}
+
 		PerlVariableStub stub = getStub();
 		if (stub != null)
 		{
 			return stub.getDeclaredType();
 		}
-
-		// check explicit name in declaration
-		PerlVariableDeclaration declaration = getPerlDeclaration();
-		if (declaration != null)
+		else
 		{
-			String declaredType = declaration.getDeclarationType();
-			if (declaredType != null)
-			{
-				return declaredType;
-			}
-
+			return getLocallyDeclaredType();
 		}
+	}
 
-		return null;
+	@Nullable
+	@Override
+	public String getLocallyDeclaredType()
+	{
+		PerlVariableDeclaration declaration = getPerlDeclaration();
+		return declaration == null ? null : declaration.getDeclarationType();
 	}
 
 	@Nullable

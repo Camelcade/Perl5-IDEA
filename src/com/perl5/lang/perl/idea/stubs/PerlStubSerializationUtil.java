@@ -18,7 +18,9 @@ package com.perl5.lang.perl.idea.stubs;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.util.io.StringRef;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +33,14 @@ import java.util.Map;
  */
 public class PerlStubSerializationUtil
 {
+	@Nullable
+	public static String readNullableString(@NotNull StubInputStream dataStream) throws IOException
+	{
+		StringRef stringRef = dataStream.readName();
+		return stringRef == null ? null : stringRef.getString();
+	}
+
+
 	public static void writeStringsList(@NotNull StubOutputStream dataStream, List<String> stringList) throws IOException
 	{
 		if (stringList == null)
