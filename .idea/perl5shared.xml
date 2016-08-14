@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Perl5Settings">
+    <option name="libRootUrlsMap">
+      <map>
+        <entry key="perl-utils">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
