@@ -28,6 +28,9 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by hurricup on 23.04.2016.
  */
@@ -59,6 +62,28 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 		return null;
 	}
 
+	@NotNull
+	@Override
+	public List<PerlAnnotation> getAnnotationList()
+	{
+		PsiElement nameIdentifier = getNameIdentifier();
+		List<PerlAnnotation> annotationsList = null;
+		if (nameIdentifier != null)
+		{
+			annotationsList = PerlPsiUtil.collectAnnotations(nameIdentifier);
+		}
+
+		if (annotationsList == null || annotationsList.isEmpty())
+		{
+			PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(this, PsiPerlStatement.class);
+			if (containingStatement != null)
+			{
+				annotationsList = PerlPsiUtil.collectAnnotations(containingStatement);
+			}
+		}
+
+		return annotationsList == null ? Collections.<PerlAnnotation>emptyList() : annotationsList;
+	}
 
 	@Override
 	public PsiPerlBlock getBlock()

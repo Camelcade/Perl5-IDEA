@@ -21,10 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,19 +38,35 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
+			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
+			{
+				processSubBase(o);
+				super.visitSubDefinitionBase(o);
+			}
+
+			@Override
+			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
+			{
+				processSubBase(o);
+				super.visitSubDeclaration(o);
+			}
+
+			private void processSubBase(@NotNull PerlSubBase o)
+			{
+				if (o.isDeprecated())
+				{
+					PsiElement nameIdentifier = o.getNameIdentifier();
+					if (nameIdentifier != null)
+					{
+						markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.sub.deprecated"));
+					}
+				}
+			}
+
+			@Override
 			public void visitSubNameElement(@NotNull PerlSubNameElement o)
 			{
-				PsiElement container = o.getParent();
-
-				if (container instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) container).isDeprecated())
-				{
-					markDeprecated(holder, o, "This sub defined as deprecated");
-				}
-				else if (container instanceof PerlSubDeclaration && ((PerlSubDeclaration) container).isDeprecated())
-				{
-					markDeprecated(holder, o, "This sub declared as deprecated");
-				}
-				else
+				if (o.getParent() instanceof PerlMethod)
 				{
 					PsiReference reference = o.getReference();
 
@@ -65,7 +79,7 @@ public class PerlSubDeprecatedInspection extends PerlInspection
 									|| targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).isDeprecated()
 									)
 							{
-								markDeprecated(holder, o, "This sub declared as deprecated");
+								markDeprecated(holder, o, PerlBundle.message("perl.sub.deprecated"));
 								return;
 							}
 						}

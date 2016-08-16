@@ -23,6 +23,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,25 +34,34 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (PsiUtilCore.getElementType(element) == SUB) //  instanceof PerlSubNameElement
+		if (element instanceof PerlSubDefinitionBase)
 		{
-			PsiElement parent = element.getParent();
-			if (parent instanceof PerlSubDeclaration)
+			PsiElement nameIdentifier = ((PerlSubDefinitionBase) element).getNameIdentifier();
+			if (nameIdentifier != null)
 			{
-				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
-			}
-			else if (parent instanceof PerlSubDefinitionBase)
-			{
-				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
+				String subName = ((PerlSubDefinitionBase) element).getSubName();
+				if (PerlSubUtil.SUB_AUTOLOAD.equals(subName))
 				{
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+					holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
 				}
 				else
 				{
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+					holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
 				}
 			}
-			else if (parent instanceof PerlMethod)
+		}
+		else if (element instanceof PerlSubDeclaration)
+		{
+			PsiElement nameIdentifier = ((PerlSubDeclaration) element).getNameIdentifier();
+			if (nameIdentifier != null)
+			{
+				holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+			}
+		}
+		if (PsiUtilCore.getElementType(element) == SUB) //  instanceof PerlSubNameElement
+		{
+			PsiElement parent = element.getParent();
+			if (parent instanceof PerlMethod)
 			{
 				// fixme don't we need to take multiple references here?
 				PsiElement grandParent = parent.getParent();
