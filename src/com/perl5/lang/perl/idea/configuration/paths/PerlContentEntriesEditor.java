@@ -37,7 +37,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 {
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
 	{
-		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
+		this(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
 	}
 
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes)
