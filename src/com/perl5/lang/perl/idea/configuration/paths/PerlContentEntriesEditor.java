@@ -48,15 +48,24 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	@Override
 	public void apply() throws ConfigurationException
 	{
+		// fixme here we should remove classroots from reset and add new ones;
+		// fixme also, we should serialize our library roots
 		PerlLibUtil.updatePerlLibsForModel(getModel());
+	}
+
+	@Override
+	public void reset()
+	{
+		// fixme here we should remember library roots
+		super.reset();
 	}
 
 	@Override
 	protected void addAdditionalSettingsToPanel(JPanel mainPanel)
 	{
+		// fixme this should be handled with subclasses
 		if (PlatformUtils.isIntelliJ())
 		{
-
 			PerlModuleSdkConfigurable perlModuleSdkConfigurable = new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
 			{
 				@Override

@@ -98,11 +98,16 @@ sub get_parents
     {
         if( my $meta_obj = $meta_ref->($namespace))
         {
+            my @isa = ();
             if( UNIVERSAL::can($meta_obj, 'superclasses'))
             {
-                my @isa = $meta_obj->superclasses();
-                return @isa ? \@isa: undef;
+                push @isa, $meta_obj->superclasses();
             }
+            if (UNIVERSAL::can($meta_obj, 'roles'))
+            {
+                push @isa, map {(split /\|/, $_->name)} @{$meta_obj->roles()};
+            }
+            return @isa ? \@isa : undef;
         }
     }
     return undef;

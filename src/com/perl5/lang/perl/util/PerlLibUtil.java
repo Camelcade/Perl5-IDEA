@@ -44,6 +44,7 @@ import java.util.List;
  */
 public class PerlLibUtil
 {
+	@Deprecated // implement event-based configuration
 	public static void applyClassPathsForAllProjects()
 	{
 		for (Project project : ProjectManager.getInstance().getOpenProjects())
@@ -52,7 +53,7 @@ public class PerlLibUtil
 		}
 	}
 
-
+	@Deprecated // implement event-based configuration
 	public static void applyClassPaths(final Project project)
 	{
 		if (project == null)
@@ -81,6 +82,7 @@ public class PerlLibUtil
 	 *
 	 * @param model module modifiable model
 	 */
+	@Deprecated // this should be done gently
 	public static void updatePerlLibsForModel(ModifiableRootModel model)
 	{
 		List<String> libRoots = new ArrayList<String>();
@@ -95,6 +97,7 @@ public class PerlLibUtil
 		applyClassPaths(model);
 	}
 
+	@Deprecated // this should be done gently on events, not like this
 	public static void applyClassPaths(ModifiableRootModel rootModel)
 	{
 		for (OrderEntry entry : rootModel.getOrderEntries())

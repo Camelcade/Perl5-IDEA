@@ -21,6 +21,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.impl.ModuleConfigurationStateImpl;
+import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -32,6 +33,8 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 17.08.2016.
@@ -94,9 +97,38 @@ public class PerlModuleConfigurationState extends ModuleConfigurationStateImpl i
 		return myModifiableModel;
 	}
 
+	@NotNull
 	public CommonContentEntriesEditor getEditor()
 	{
 		return myEditor;
+	}
+
+	@NotNull
+	public JComponent getEditorComponent()
+	{
+		return getEditor().getComponent();
+	}
+
+	public void apply() throws ConfigurationException
+	{
+		getEditor().apply();
+		final ModifiableRootModel modifiableModel = getModifiableModel();
+		if (modifiableModel.isChanged())
+		{
+			ApplicationManager.getApplication().runWriteAction(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					modifiableModel.commit();
+				}
+			});
+		}
+	}
+
+	public void reset()
+	{
+		getEditor().reset();
 	}
 
 	@Override

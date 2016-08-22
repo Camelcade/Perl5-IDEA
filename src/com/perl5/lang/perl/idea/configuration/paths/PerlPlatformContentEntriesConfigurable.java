@@ -22,8 +22,6 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.DefaultModulesProvider;
 import com.intellij.openapi.ui.Splitter;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -32,14 +30,14 @@ import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.components.JBScrollPane;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import gnu.trove.THashMap;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -50,14 +48,13 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 	private final JpsModuleSourceRootType<?>[] myRootTypes = new JpsModuleSourceRootType[]{JpsPerlLibrarySourceRootType.INSTANCE};
 
 	private JPanel myTopPanel;
-	private JBScrollPane myJBScrollPane;
 	private JPanel myRightPanel;
 	@SuppressWarnings("Since15")
 	private CollectionListModel<Module> myModuleCollectionListModel;
 	private JBList myModulesList;
+	private ListSelectionListener mySelectionListener;
 
-	// fixme need list, not map
-	private final Map<Module, PerlModuleConfigurationState> myStatesMap = new THashMap<Module, PerlModuleConfigurationState>();
+	private final List<PerlModuleConfigurationState> myStatesList = new ArrayList<PerlModuleConfigurationState>();
 
 	public PerlPlatformContentEntriesConfigurable(Project project)
 	{
@@ -80,48 +77,58 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 	public JComponent createComponent()
 	{
 		myTopPanel = new JPanel(new BorderLayout());
-		Splitter splitter = new Splitter(false, 0.25f);
-		myTopPanel.add(splitter);
-		myJBScrollPane = new JBScrollPane();
-		splitter.setFirstComponent(myJBScrollPane);
-		myRightPanel = new JPanel(new VerticalFlowLayout());
-		splitter.setSecondComponent(myRightPanel);
-		//noinspection Since15
-		myModuleCollectionListModel = new CollectionListModel<Module>();
-		myModulesList = new JBList(myModuleCollectionListModel);
-		myModulesList.addListSelectionListener(new ListSelectionListener()
-		{
-			@Override
-			public void valueChanged(ListSelectionEvent e)
-			{
-				if (!e.getValueIsAdjusting())
-				{
-					int lastIndex = e.getLastIndex();
-					if (myModuleCollectionListModel.getSize() > lastIndex)
-					{
-						Module selectedModule = myModuleCollectionListModel.getElementAt(lastIndex);
-						for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesMap.values())
-						{
-							perlModuleConfigurationState.getEditor().getComponent().setVisible(selectedModule.equals(perlModuleConfigurationState.getModule()));
-						}
-						myRightPanel.repaint();
-					}
-				}
-			}
-		});
-		myModulesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		myJBScrollPane.getViewport().add(myModulesList);
-
 		createEditor();
 		return myTopPanel;
 	}
 
 	private void createEditor()
 	{
-		myStatesMap.clear();
+		Module[] modules = ModuleManager.getInstance(myProject).getModules();
+		if (modules.length > 1)
+		{
+			Splitter splitter = new Splitter(false, 0.25f);
+			myTopPanel.add(splitter);
+			JBScrollPane JBScrollPane = new JBScrollPane();
+			splitter.setFirstComponent(JBScrollPane);
+			myRightPanel = new JPanel(new VerticalFlowLayout());
+			splitter.setSecondComponent(myRightPanel);
+			//noinspection Since15
+			myModuleCollectionListModel = new CollectionListModel<Module>();
+			myModulesList = new JBList(myModuleCollectionListModel);
+			mySelectionListener = new ListSelectionListener()
+			{
+				@Override
+				public void valueChanged(ListSelectionEvent e)
+				{
+					if (!e.getValueIsAdjusting())
+					{
+						int lastIndex = e.getLastIndex();
+						if (myModuleCollectionListModel.getSize() > lastIndex)
+						{
+							Module selectedModule = myModuleCollectionListModel.getElementAt(lastIndex);
+							for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesList)
+							{
+								perlModuleConfigurationState.getEditorComponent().setVisible(selectedModule.equals(perlModuleConfigurationState.getModule()));
+							}
+							myRightPanel.repaint();
+						}
+					}
+				}
+			};
+			myModulesList.addListSelectionListener(mySelectionListener);
+			myModulesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+			JBScrollPane.getViewport().add(myModulesList);
+		}
+		else
+		{
+			//noinspection SuspiciousNameCombination
+			myRightPanel = myTopPanel;
+		}
+
+		myStatesList.clear();
 		DefaultModulesProvider defaultModulesProvider = new DefaultModulesProvider(myProject);
-		for (Module module : ModuleManager.getInstance(myProject).getModules())
+		for (Module module : modules)
 		{
 			final PerlModuleConfigurationState perlModuleConfigurationState = new PerlModuleConfigurationState(module, defaultModulesProvider, myRootTypes);
 			JComponent component = ApplicationManager.getApplication().runReadAction(new Computable<JComponent>()
@@ -133,15 +140,19 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 				}
 			});
 			myRightPanel.add(component);
-			myStatesMap.put(module, perlModuleConfigurationState);
-			myModuleCollectionListModel.add(module);
+			myStatesList.add(perlModuleConfigurationState);
+
+			if (myModuleCollectionListModel != null)
+			{
+				myModuleCollectionListModel.add(module);
+			}
 		}
 	}
 
 	@Override
 	public boolean isModified()
 	{
-		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesMap.values())
+		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesList)
 		{
 			if (perlModuleConfigurationState.getEditor().isModified())
 			{
@@ -154,22 +165,9 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 	@Override
 	public void apply() throws ConfigurationException
 	{
-		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesMap.values())
+		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesList)
 		{
-			CommonContentEntriesEditor editor = perlModuleConfigurationState.getEditor();
-			editor.apply();
-			final ModifiableRootModel modifiableModel = perlModuleConfigurationState.getModifiableModel();
-			if (modifiableModel.isChanged())
-			{
-				ApplicationManager.getApplication().runWriteAction(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						modifiableModel.commit();
-					}
-				});
-			}
+			perlModuleConfigurationState.apply();
 		}
 		disposeUIResources();
 		createEditor();
@@ -178,19 +176,35 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 	@Override
 	public void reset()
 	{
-		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesMap.values())
+		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesList)
 		{
-			perlModuleConfigurationState.getEditor().reset();
+			perlModuleConfigurationState.reset();
+		}
+		if (myStatesList.size() > 1)
+		{
+			myModulesList.setSelectedIndex(0);
 		}
 	}
 
 	@Override
 	public void disposeUIResources()
 	{
-		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesMap.values())
+		for (PerlModuleConfigurationState perlModuleConfigurationState : myStatesList)
 		{
-			myRightPanel.remove(perlModuleConfigurationState.getEditor().getComponent());
+			if (myRightPanel != null)
+			{
+				myRightPanel.remove(perlModuleConfigurationState.getEditorComponent());
+			}
 			perlModuleConfigurationState.dispose();
 		}
+
+		if (myModulesList != null && mySelectionListener != null)
+		{
+			myModulesList.removeListSelectionListener(mySelectionListener);
+			mySelectionListener = null;
+		}
+
+		myModulesList = null;
+		myRightPanel = null;
 	}
 }
