@@ -21,7 +21,6 @@ import com.intellij.openapi.module.ModuleConfigurationEditor;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
-import com.perl5.lang.perl.idea.configuration.paths.PerlContentEntriesEditor;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
 
 /**
@@ -36,8 +35,7 @@ public class PerlModuleConfigurationEditorProvider implements ModuleConfiguratio
 		if (ModuleType.get(module) instanceof PerlModuleType)
 		{
 			return new ModuleConfigurationEditor[]{
-					new PerlContentEntriesEditor(module.getName(), state)
-					//, new ClasspathEditor(state)
+					new PerlIdeaContentEntriesEditor(module.getName(), state)
 			};
 		}
 		return ModuleConfigurationEditor.EMPTY;

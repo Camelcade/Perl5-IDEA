@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.paths;
+package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
@@ -26,11 +26,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlPathsConfigurableProvider extends ConfigurableProvider
+public class PerlModuleConfigurableProvider extends ConfigurableProvider
 {
 	Project project;
 
-	public PerlPathsConfigurableProvider(Project project)
+	public PerlModuleConfigurableProvider(Project project)
 	{
 		this.project = project;
 	}
@@ -39,7 +39,7 @@ public class PerlPathsConfigurableProvider extends ConfigurableProvider
 	@Override
 	public Configurable createConfigurable()
 	{
-		return new PerlPlatformContentEntriesConfigurable(project);
+		return new PerlModuleAwareProjectConfigurable(project);
 	}
 
 	@Override

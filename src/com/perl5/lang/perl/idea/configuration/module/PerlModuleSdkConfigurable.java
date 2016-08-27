@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.paths;
+package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationBundle;

@@ -20,7 +20,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.ModuleListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.Function;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 
 import java.util.List;
 
@@ -50,15 +49,15 @@ public class PerlModuleListener implements ModuleListener
 	@Override
 	public void modulesRenamed(Project project, List<Module> modules, Function<Module, String> oldNameProvider)
 	{
-		PerlSharedSettings perlSharedSettings = PerlSharedSettings.getInstance(project);
-		for (Module module : modules)
-		{
-			String oldName = oldNameProvider.fun(module);
-			List<String> libRootUrlsForModule = perlSharedSettings.deleteLibRootUrlsForModule(oldName);
-			if (libRootUrlsForModule != null)
-			{
-				perlSharedSettings.setLibRootUrlsForModule(module, libRootUrlsForModule);
-			}
-		}
+//		PerlSharedSettings perlSharedSettings = PerlSharedSettings.getInstance(project);
+//		for (Module module : modules)
+//		{
+//			String oldName = oldNameProvider.fun(module);
+//			List<String> libRootUrlsForModule = perlSharedSettings.deleteLibRootUrlsForModule(oldName);
+//			if (libRootUrlsForModule != null)
+//			{
+//				perlSharedSettings.setLibRootUrlsForModule(module, libRootUrlsForModule);
+//			}
+//		}
 	}
 }

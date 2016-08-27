@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,32 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.paths;
+package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
-import com.intellij.openapi.roots.ui.configuration.ProjectStructureConfigurable;
-import com.intellij.util.PlatformUtils;
-import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import com.perl5.lang.perl.util.PerlLibUtil;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.ui.TabbedPaneWrapper;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by hurricup on 07.06.2015.
  */
-public class PerlContentEntriesEditor extends CommonContentEntriesEditor
+public abstract class PerlContentEntriesEditor extends CommonContentEntriesEditor
 {
-	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
-	{
-		this(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
-	}
-
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes)
 	{
 		super(moduleName, state, rootTypes);
@@ -50,7 +41,7 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	{
 		// fixme here we should remove classroots from reset and add new ones;
 		// fixme also, we should serialize our library roots
-		PerlLibUtil.updatePerlLibsForModel(getModel());
+//		PerlLibUtil.updatePerlLibsForModel(getModel());
 	}
 
 	@Override
@@ -61,21 +52,17 @@ public class PerlContentEntriesEditor extends CommonContentEntriesEditor
 	}
 
 	@Override
-	protected void addAdditionalSettingsToPanel(JPanel mainPanel)
+	public JPanel createComponentImpl()
 	{
-		// fixme this should be handled with subclasses
-		if (PlatformUtils.isIntelliJ())
-		{
-			PerlModuleSdkConfigurable perlModuleSdkConfigurable = new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
-			{
-				@Override
-				protected ModifiableRootModel getRootModel()
-				{
-					return getState().getRootModel();
-				}
-			};
-			registerDisposable(perlModuleSdkConfigurable);
-			mainPanel.add(perlModuleSdkConfigurable.createComponent(), BorderLayout.NORTH);
-		}
+
+		JPanel componentImpl = super.createComponentImpl();
+
+		Disposable disposable = Disposer.newDisposable();
+		registerDisposable(disposable);
+		TabbedPaneWrapper tabbedPaneWrapper = new TabbedPaneWrapper(disposable);
+		tabbedPaneWrapper.addTab("Structure", componentImpl);
+
+		return (JPanel) tabbedPaneWrapper.getComponent();
 	}
+
 }
