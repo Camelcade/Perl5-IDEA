@@ -18,19 +18,14 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.projectView.actions.MarkSourceRootAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.impl.DirectoryIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
-import com.perl5.lang.perl.util.PerlLibUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -91,32 +86,7 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
 	@Override
 	protected boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module)
 	{
+		// fixme check that perl enabled for module in microIde
 		return super.isEnabled(selection, module) && ModuleType.get(module) == PerlModuleType.getInstance();
 	}
-
-	@Override
-	public void actionPerformed(AnActionEvent e)
-	{
-		super.actionPerformed(e);
-
-		VirtualFile[] files = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
-		final Module module = getModule(e, files);
-		if (module == null)
-		{
-			return;
-		}
-
-		final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
-		PerlLibUtil.updatePerlLibsForModel(modifiableModel);
-		ApplicationManager.getApplication().runWriteAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				modifiableModel.commit();
-				module.getProject().save();
-			}
-		});
-	}
-
 }

@@ -17,8 +17,11 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.roots.*;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -29,8 +32,10 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.NonClasspathDirectoriesScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.PlatformUtils;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.HashSet;
 import com.perl5.compat.PerlStubIndex;
@@ -38,7 +43,9 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -59,7 +66,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 {
-
+	// perl using idea class roots plus some inferred classroots not presenting in order entries
+	public static final Key<List<VirtualFile>> PERL_CLASS_ROOTS = Key.create("perl.class.roots");
 	public static final Set<String> BUILT_IN_ALL = new THashSet<String>();
 
 	private static final Set<String> INTERNAL_PACKAGES = new HashSet<String>();
@@ -293,6 +301,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 	 * @param packageName canonical package name (without tailing ::)
 	 * @return collection of found definitions
 	 */
+	@Deprecated // must use element's resolve scope here
 	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName)
 	{
 		return getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
@@ -314,21 +323,33 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 		return PerlStubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
-	public static boolean isPackageIndexAvailable()
-	{
-		return PerlStubIndex.getInstance().isIndexAvailable(PerlNamespaceDefinitionStubIndex.KEY);
-	}
-
 	/**
-	 * Processes all global packages names with specific processor
-	 *
-	 * @param scope     search scope
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
+	 * Finds and processes all namespace definitions for psi element, according to it's resolve scope
+	 * @param element element in question
+	 * @param processor processor
 	 */
-	public static boolean processDefinedPackageNames(GlobalSearchScope scope, Processor<String> processor)
+	public static void processDefinedPackagesForPsiElement(PsiElement element, Processor<Collection<PerlNamespaceDefinition>> processor)
 	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, processor, scope, null);
+		if (element == null)
+		{
+			return;
+		}
+
+		final Project project = element.getProject();
+		final GlobalSearchScope elementResolveScope = element.getResolveScope();
+
+		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
+		{
+			if (packageName.length() > 0 && Character.isLetterOrDigit(packageName.charAt(0)))
+			{
+				Collection<PerlNamespaceDefinition> namespaceDefinitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName, elementResolveScope);
+
+				if (namespaceDefinitions.size() > 0)
+				{
+					processor.process(namespaceDefinitions);
+				}
+			}
+		}
 	}
 
 	/**
@@ -549,7 +570,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 
 	public static void processPackageFilesForPsiElement(PsiElement element, final Processor<String> processor)
 	{
-		processFilesForPsiElement(
+		processClassrootFilesForPsiElement(
 				element,
 				new ClassRootVirtualFileProcessor()
 				{
@@ -565,15 +586,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 		;
 	}
 
-	public static void processFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType)
+	public static void processClassrootFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType)
 	{
 		if (element != null)
 		{
-			VirtualFile[] classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
-
-			for (VirtualFile file : FileTypeIndex.getFiles(fileType, PerlScopes.getProjectAndLibrariesScope(element.getProject())))
+			List<VirtualFile> psiElementPerlClassRoots = getPsiElementPerlClassRoots(element);
+			if (psiElementPerlClassRoots.isEmpty())
 			{
-				for (VirtualFile classRoot : classRoots)
+				return;
+			}
+			for (VirtualFile file : FileTypeIndex.getFiles(fileType, new NonClasspathDirectoriesScope(psiElementPerlClassRoots)))
+			{
+				for (VirtualFile classRoot : psiElementPerlClassRoots)
 				{
 					if (VfsUtil.isAncestor(classRoot, file, true))
 					{
@@ -586,6 +610,88 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 			}
 		}
 	}
+
+	private static List<VirtualFile> getPsiElementPerlClassRoots(PsiElement element)
+	{
+		if (element == null)
+		{
+			return Collections.emptyList();
+		}
+		Module moduleForPsiElement = ModuleUtilCore.findModuleForPsiElement(element);
+		if (moduleForPsiElement == null)
+		{
+			return Collections.emptyList();
+		}
+		List<VirtualFile> classRoots = moduleForPsiElement.getUserData(PERL_CLASS_ROOTS);
+		if (classRoots != null)
+		{
+			return classRoots;
+		}
+
+		classRoots = new ArrayList<VirtualFile>();
+		recursivelyCollectPerlClassRoots(moduleForPsiElement, classRoots, true, new HashSet<Module>());
+		moduleForPsiElement.putUserData(PERL_CLASS_ROOTS, classRoots);
+		return classRoots;
+	}
+
+	private static void recursivelyCollectPerlClassRoots(Module module, List<VirtualFile> result, boolean includeUnexported, Set<Module> moduleRecursionControl)
+	{
+		if (moduleRecursionControl.contains(module))
+		{
+			return;
+		}
+		moduleRecursionControl.add(module);
+
+		ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+
+		addIfMissing(result, moduleRootManager.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE));
+
+		for (OrderEntry orderEntry : moduleRootManager.getOrderEntries())
+		{
+			if (includeUnexported && PlatformUtils.isIntelliJ() &&
+					orderEntry instanceof JdkOrderEntry &&
+					((JdkOrderEntry) orderEntry).getJdk().getSdkType() == PerlSdkType.getInstance())
+			{
+				addIfMissing(result, Arrays.asList(orderEntry.getFiles(OrderRootType.CLASSES)));
+			}
+
+			if (!(orderEntry instanceof ExportableOrderEntry))
+			{
+				continue;
+			}
+			if (!includeUnexported && !((ExportableOrderEntry) orderEntry).isExported())
+			{
+				continue;
+			}
+
+			if (orderEntry instanceof LibraryOrderEntry)
+			{
+				addIfMissing(result, Arrays.asList(orderEntry.getFiles(OrderRootType.CLASSES)));
+			}
+			else if (orderEntry instanceof ModuleOrderEntry)
+			{
+				recursivelyCollectPerlClassRoots(((ModuleOrderEntry) orderEntry).getModule(), result, false, moduleRecursionControl);
+			}
+		}
+
+	}
+
+	private static <E> void addIfMissing(Collection<E> result, Iterable<E> addition)
+	{
+		if (addition == null)
+		{
+			return;
+		}
+
+		for (E e : addition)
+		{
+			if (!result.contains(e))
+			{
+				result.add(e);
+			}
+		}
+	}
+
 
 	public static TextRange getPackageRangeFromOffset(int startOffset, String text)
 	{
@@ -839,7 +945,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 		}
 
 		// classpath
-		result.addAll(Arrays.asList(ProjectRootManager.getInstance(psiFile.getProject()).orderEntries().getClassesRoots()));
+		result.addAll(getPsiElementPerlClassRoots(psiFile));
 
 		// current dir
 		if (psiFile instanceof PerlFileImpl)

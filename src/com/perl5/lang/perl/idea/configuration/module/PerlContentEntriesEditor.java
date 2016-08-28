@@ -22,6 +22,7 @@ import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.ui.TabbedPaneWrapper;
+import com.perl5.PerlBundle;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
@@ -31,6 +32,8 @@ import javax.swing.*;
  */
 public abstract class PerlContentEntriesEditor extends CommonContentEntriesEditor
 {
+	private PerlDependenciesConfigurable myPerlDependenciesConfigurable;
+
 	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes)
 	{
 		super(moduleName, state, rootTypes);
@@ -42,6 +45,8 @@ public abstract class PerlContentEntriesEditor extends CommonContentEntriesEdito
 		// fixme here we should remove classroots from reset and add new ones;
 		// fixme also, we should serialize our library roots
 //		PerlLibUtil.updatePerlLibsForModel(getModel());
+		super.apply();
+		myPerlDependenciesConfigurable.apply();
 	}
 
 	@Override
@@ -49,6 +54,7 @@ public abstract class PerlContentEntriesEditor extends CommonContentEntriesEdito
 	{
 		// fixme here we should remember library roots
 		super.reset();
+		myPerlDependenciesConfigurable.reset();
 	}
 
 	@Override
@@ -60,9 +66,21 @@ public abstract class PerlContentEntriesEditor extends CommonContentEntriesEdito
 		Disposable disposable = Disposer.newDisposable();
 		registerDisposable(disposable);
 		TabbedPaneWrapper tabbedPaneWrapper = new TabbedPaneWrapper(disposable);
-		tabbedPaneWrapper.addTab("Structure", componentImpl);
+		tabbedPaneWrapper.addTab(PerlBundle.message("perl.settings.structure"), componentImpl);
+		myPerlDependenciesConfigurable = new PerlDependenciesConfigurable(getState());
+		tabbedPaneWrapper.addTab(PerlBundle.message("perl.settings.dependencies"), myPerlDependenciesConfigurable.createComponent());
 
 		return (JPanel) tabbedPaneWrapper.getComponent();
 	}
 
+	@Override
+	public void disposeUIResources()
+	{
+		super.disposeUIResources();
+		if (myPerlDependenciesConfigurable != null)
+		{
+			myPerlDependenciesConfigurable.disposeUIResources();
+			myPerlDependenciesConfigurable = null;
+		}
+	}
 }

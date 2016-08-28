@@ -59,7 +59,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 		final Project project = link.getProject();
 		final Set<String> foundPods = new THashSet<String>();
 
-		PerlPackageUtil.processFilesForPsiElement(link, new PerlPackageUtil.ClassRootVirtualFileProcessor()
+		PerlPackageUtil.processClassrootFilesForPsiElement(link, new PerlPackageUtil.ClassRootVirtualFileProcessor()
 		{
 			@Override
 			public boolean process(VirtualFile file, VirtualFile classRoot)

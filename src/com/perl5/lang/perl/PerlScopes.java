@@ -30,6 +30,7 @@ public class PerlScopes
 {
 	private static final Key<GlobalSearchScope> PROJECT_AND_LIBS_SCOPE_KEY = new Key<GlobalSearchScope>("PROJECT_AND_LIBS_SCOPE_KEY");
 
+	@Deprecated // re-work with resolve scope
 	@NotNull
 	public static GlobalSearchScope getProjectAndLibrariesScope(@NotNull Project project)
 	{

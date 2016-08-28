@@ -19,14 +19,19 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.ProjectTopics;
 import com.intellij.notification.*;
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
-import com.perl5.lang.perl.util.PerlLibUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,8 +42,6 @@ public class Perl5ProjectComponent implements ProjectComponent
 {
 	private Project myProject;
 	private VirtualFileListener myChangeListener;
-//	private PsiTreeChangeListener myPsiTreeChangeListener;
-
 	public Perl5ProjectComponent(Project project)
 	{
 		myProject = project;
@@ -92,9 +95,24 @@ public class Perl5ProjectComponent implements ProjectComponent
 			Notifications.Bus.notify(notification);
 		}
 
-		PerlLibUtil.applyClassPaths(myProject);
+		MessageBusConnection connection = myProject.getMessageBus().connect(myProject);
+		connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootListener()
+		{
+			@Override
+			public void beforeRootsChange(ModuleRootEvent event)
+			{
 
-		myProject.getMessageBus().connect(myProject).subscribe(ProjectTopics.MODULES, new PerlModuleListener());
+			}
+
+			@Override
+			public void rootsChanged(ModuleRootEvent event)
+			{
+				for (Module module : ModuleManager.getInstance((Project) event.getSource()).getModules())
+				{
+					module.putUserData(PerlPackageUtil.PERL_CLASS_ROOTS, null);
+				}
+			}
+		});
 
 
 		// called when project is opened

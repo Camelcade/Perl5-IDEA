@@ -118,6 +118,8 @@
         <internalFileTemplate name="Perl5 pod"/>
 
         <!--<moduleExtension implementation="com.perl5.lang.perl.idea.configuration.module.PerlModuleExtension"/>-->
+        <orderEnumerationHandlerFactory
+                implementation="com.perl5.lang.perl.idea.configuration.module.PerlIdeaOrderEnumeratorHandler$Factory"/>
 
         <jps.plugin/>
 
@@ -167,7 +169,7 @@
 
         <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
-        <projectConfigurable displayName="Perl5 libs" groupId="project"
+        <projectConfigurable displayName="Perl5 Structure and Dependencies" groupId="project"
                              provider="com.perl5.lang.perl.idea.configuration.module.PerlModuleConfigurableProvider"/>
         <projectConfigurable groupId="language"
                              provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"

@@ -36,6 +36,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -162,34 +163,37 @@ public class PerlPackageCompletionUtil
 
 		result.addElement(getPackageLookupElement(project, PerlPackageUtil.UNIVERSAL_PACKAGE));
 
-		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
+		PerlPackageUtil.processDefinedPackagesForPsiElement(element, new Processor<Collection<PerlNamespaceDefinition>>()
 		{
-			if (packageName.length() > 0 && Character.isLetterOrDigit(packageName.charAt(0)))
+			@Override
+			public boolean process(Collection<PerlNamespaceDefinition> namespaceDefinitions)
 			{
-				for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName))
+				for (PerlNamespaceDefinition perlNamespaceDefinition : namespaceDefinitions)
 				{
-					LookupElementBuilder packageLookupElement = getPackageLookupElement(namespaceDefinition);
+					LookupElementBuilder packageLookupElement = getPackageLookupElement(perlNamespaceDefinition);
 					if (packageLookupElement != null)
 					{
 						result.addElement(packageLookupElement);
 					}
 				}
+				return true;
 			}
-		}
+		});
 	}
 
 	public static void fillWithAllPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
-		final Project project = element.getProject();
 		final String prefix = result.getPrefixMatcher().getPrefix();
-
-		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
+		final Project project = element.getProject();
+		PerlPackageUtil.processDefinedPackagesForPsiElement(element, new Processor<Collection<PerlNamespaceDefinition>>()
 		{
-			if (packageName.length() > 0 && Character.isLetterOrDigit(packageName.charAt(0)))
+			@Override
+			public boolean process(Collection<PerlNamespaceDefinition> namespaceDefinitions)
 			{
-				addExpandablePackageElement(project, result, packageName, prefix);
+				addExpandablePackageElement(project, result, namespaceDefinitions.iterator().next().getPackageName(), prefix);
+				return true;
 			}
-		}
+		});
 	}
 
 	protected static void addExpandablePackageElement(Project project, CompletionResultSet result, String packageName, String prefix)
