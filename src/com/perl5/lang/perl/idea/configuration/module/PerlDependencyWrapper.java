@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.roots.ExportableOrderEntry;
 import com.intellij.openapi.roots.OrderEntry;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +52,23 @@ public abstract class PerlDependencyWrapper<Entry extends OrderEntry>
 		return null;
 	}
 
+	public boolean isExportable()
+	{
+		return myOrderEntry instanceof ExportableOrderEntry;
+	}
+
+	public boolean isExported()
+	{
+		return isExportable() && ((ExportableOrderEntry) myOrderEntry).isExported();
+	}
+
+	public void setExported(boolean newValue)
+	{
+		if (isExportable())
+		{
+			((ExportableOrderEntry) myOrderEntry).setExported(newValue);
+		}
+	}
 
 	boolean isConfigurable()
 	{

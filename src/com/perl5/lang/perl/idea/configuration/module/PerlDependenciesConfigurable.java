@@ -35,10 +35,7 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.AnActionButton;
-import com.intellij.ui.AnActionButtonRunnable;
-import com.intellij.ui.ColoredTableCellRenderer;
-import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.*;
 import com.intellij.ui.table.JBTable;
 import com.intellij.ui.table.TableView;
 import com.intellij.util.Consumer;
@@ -49,7 +46,10 @@ import com.perl5.PerlBundle;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +72,9 @@ public class PerlDependenciesConfigurable implements UnnamedConfigurable
 	public JComponent createComponent()
 	{
 		myDependenciesTableModel = new ListTableModel<PerlDependencyWrapper>(
-				new myDependencyNameColumnInfo(),
-				new myDependencyTypeColumnInfo()
+				new myDependencyExportableColumnInfo(),
+				new myDependencyTypeColumnInfo(),
+				new myDependencyNameColumnInfo()
 		)
 		{
 			@Override
@@ -114,6 +115,9 @@ public class PerlDependenciesConfigurable implements UnnamedConfigurable
 		};
 
 		myDependenciesTable = new TableView<PerlDependencyWrapper>(myDependenciesTableModel);
+		setFixedColumnWidth(0);
+		setFixedColumnWidth(1);
+
 		return ToolbarDecorator
 				.createDecorator(myDependenciesTable)
 				.setAddAction(new AnActionButtonRunnable()
@@ -188,6 +192,13 @@ public class PerlDependenciesConfigurable implements UnnamedConfigurable
 				.createPanel();
 	}
 
+	private void setFixedColumnWidth(final int columnIndex)
+	{
+		final TableColumn column = myDependenciesTable.getTableHeader().getColumnModel().getColumn(columnIndex);
+		column.setResizable(false);
+		column.setMaxWidth(column.getPreferredWidth());
+	}
+
 	@Override
 	public boolean isModified()
 	{
@@ -206,26 +217,68 @@ public class PerlDependenciesConfigurable implements UnnamedConfigurable
 		myDependenciesTableModel.setItems(new ArrayList<PerlDependencyWrapper>());
 		for (OrderEntry orderEntry : myConfigurationState.getRootModel().getOrderEntries())
 		{
-			if (isOrderEntryConfigurable(orderEntry))
-			{
-				myDependenciesTableModel.addRow(PerlDependencyWrapperFactory.getWrapper(orderEntry));
-			}
+			myDependenciesTableModel.addRow(PerlDependencyWrapperFactory.getWrapper(orderEntry));
 		}
-	}
-
-	/**
-	 * Filters order entries that we can configure with our UI
-	 */
-	private boolean isOrderEntryConfigurable(OrderEntry orderEntry)
-	{
-		return true;
-//		return orderEntry instanceof ModuleOrderEntry ||
-//				orderEntry instanceof LibraryOrderEntry;
 	}
 
 	@Override
 	public void disposeUIResources()
 	{
+	}
+
+	private static class myDependencyExportableColumnInfo extends ColumnInfo<PerlDependencyWrapper, Boolean>
+	{
+		public myDependencyExportableColumnInfo()
+		{
+			super(PerlBundle.message("perl.settings.dependency.exportable"));
+		}
+
+		@Nullable
+		@Override
+		public Boolean valueOf(PerlDependencyWrapper perlDependencyWrapper)
+		{
+			return perlDependencyWrapper.isExported();
+		}
+
+		@Override
+		public boolean isCellEditable(PerlDependencyWrapper perlDependencyWrapper)
+		{
+			return perlDependencyWrapper.isExportable();
+		}
+
+		@Override
+		public void setValue(PerlDependencyWrapper perlDependencyWrapper, Boolean value)
+		{
+			perlDependencyWrapper.setExported(value);
+		}
+
+		@Nullable
+		@Override
+		public TableCellEditor getEditor(PerlDependencyWrapper perlDependencyWrapper)
+		{
+			return new BooleanTableCellEditor();
+		}
+
+		@Nullable
+		@Override
+		public TableCellRenderer getRenderer(final PerlDependencyWrapper perlDependencyWrapper)
+		{
+			if (perlDependencyWrapper.isExportable())
+			{
+				return new BooleanTableCellRenderer();
+			}
+
+			return new TableCellRenderer()
+			{
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+				{
+					JPanel jPanel = new JPanel();
+					jPanel.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+					return jPanel;
+				}
+			};
+		}
 	}
 
 	private static class myDependencyNameColumnInfo extends ColumnInfo<PerlDependencyWrapper, String>

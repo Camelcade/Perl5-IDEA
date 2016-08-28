@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.JdkOrderEntry;
@@ -43,12 +45,16 @@ public class PerlDependencyWrapperSdk extends PerlDependencyWrapper<JdkOrderEntr
 	@Override
 	Icon getIcon()
 	{
-		SdkTypeId sdkType = myOrderEntry.getJdk().getSdkType();
-		if (sdkType instanceof SdkType)
+		Sdk jdk = myOrderEntry.getJdk();
+		if (jdk != null)
 		{
-			return ((SdkType) sdkType).getIcon();
+			SdkTypeId sdkType = jdk.getSdkType();
+			if (sdkType instanceof SdkType)
+			{
+				return ((SdkType) sdkType).getIcon();
+			}
 		}
-		return null;
+		return AllIcons.Nodes.UnknownJdk;
 	}
 
 	@Override
