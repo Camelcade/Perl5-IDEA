@@ -206,5 +206,9 @@ public class PerlSdkType extends SdkType
 		return "missing executable";
 	}
 
-
+	@Override
+	public boolean isRootTypeApplicable(OrderRootType type)
+	{
+		return type == OrderRootType.CLASSES;
+	}
 }
