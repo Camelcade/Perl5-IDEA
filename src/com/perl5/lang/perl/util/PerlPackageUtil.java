@@ -20,6 +20,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
@@ -325,7 +326,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 
 	/**
 	 * Finds and processes all namespace definitions for psi element, according to it's resolve scope
-	 * @param element element in question
+	 *
+	 * @param element   element in question
 	 * @param processor processor
 	 */
 	public static void processDefinedPackagesForPsiElement(PsiElement element, Processor<Collection<PerlNamespaceDefinition>> processor)
@@ -649,10 +651,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces
 		for (OrderEntry orderEntry : moduleRootManager.getOrderEntries())
 		{
 			if (includeUnexported && PlatformUtils.isIntelliJ() &&
-					orderEntry instanceof JdkOrderEntry &&
-					((JdkOrderEntry) orderEntry).getJdk().getSdkType() == PerlSdkType.getInstance())
+					orderEntry instanceof JdkOrderEntry)
 			{
-				addIfMissing(result, Arrays.asList(orderEntry.getFiles(OrderRootType.CLASSES)));
+				Sdk jdk = ((JdkOrderEntry) orderEntry).getJdk();
+				if (jdk != null && jdk.getSdkType() == PerlSdkType.getInstance())
+				{
+					addIfMissing(result, Arrays.asList(orderEntry.getFiles(OrderRootType.CLASSES)));
+				}
 			}
 
 			if (!(orderEntry instanceof ExportableOrderEntry))
