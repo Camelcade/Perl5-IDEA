@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlAnnotation;
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlAnnotationContainerImpl extends ASTWrapperPsiElement implements PerlAnnotationContainer
+public class PerlAnnotationContainerImpl extends PerlASTWrapperPsiElement implements PerlAnnotationContainer
 {
 	public PerlAnnotationContainerImpl(@NotNull ASTNode node)
 	{

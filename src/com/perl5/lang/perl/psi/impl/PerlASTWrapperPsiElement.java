@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveState;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.perl5.lang.perl.psi.references.PerlElementWithCachingReference;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,37 +31,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hurricup on 31.01.2016.
+ * Created by hurricup on 10.09.2016.
  */
-public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBasedPsiElementBase<T> implements PerlElementWithCachingReference
+public class PerlASTWrapperPsiElement extends ASTWrapperPsiElement implements PerlElementWithCachingReference
 {
-	public PerlStubBasedPsiElementBase(@NotNull T stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
-
-	public PerlStubBasedPsiElementBase(@NotNull ASTNode node)
+	public PerlASTWrapperPsiElement(@NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public String toString()
-	{
-		return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
-	}
-
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-//		System.err.println(this);
-		return PerlScopeUtil.processChildren(
-				this,
-				processor,
-				state,
-				lastParent,
-				place
-		);
 	}
 
 	// fixme not dry with other base element, move to interface in Java 8

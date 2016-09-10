@@ -16,12 +16,12 @@
 
 package com.perl5.lang.pod.parser.psi.mixin;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.psi.impl.PerlASTWrapperPsiElement;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
@@ -34,7 +34,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodCompositeElementMixin extends ASTWrapperPsiElement implements PodCompositeElement
+public class PodCompositeElementMixin extends PerlASTWrapperPsiElement implements PodCompositeElement
 {
 	public PodCompositeElementMixin(@NotNull ASTNode node)
 	{

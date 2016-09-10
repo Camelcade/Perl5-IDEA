@@ -16,15 +16,15 @@
 
 package com.perl5.lang.tt2.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.impl.PerlASTWrapperPsiElement;
 import com.perl5.lang.tt2.psi.TemplateToolkitCompositeElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement implements TemplateToolkitCompositeElement
+public class TemplateToolkitCompositeElementImpl extends PerlASTWrapperPsiElement implements TemplateToolkitCompositeElement
 {
 	public TemplateToolkitCompositeElementImpl(@NotNull ASTNode node)
 	{

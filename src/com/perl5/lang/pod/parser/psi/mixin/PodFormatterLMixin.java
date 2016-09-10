@@ -17,14 +17,14 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.perl5.lang.pod.parser.psi.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
@@ -35,7 +35,6 @@ import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,9 +43,6 @@ import java.util.List;
  */
 public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 {
-	private AtomicNotNullLazyValue<PsiReference[]> myReferences;
-	private AtomicNullableLazyValue<PodLinkDescriptor> myLinkDescriptor;
-
 	public PodFormatterLMixin(@NotNull ASTNode node)
 	{
 		super(node);
@@ -96,12 +92,25 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 	@Override
 	public PodLinkDescriptor getLinkDescriptor()
 	{
-		if (myLinkDescriptor == null)
+		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<PodLinkDescriptor>()
 		{
-			myLinkDescriptor = new LazyPodLinkDescriptor(this);
-		}
-
-		return myLinkDescriptor.getValue();
+			@Nullable
+			@Override
+			public Result<PodLinkDescriptor> compute()
+			{
+				PodLinkDescriptor descriptor = null;
+				PsiElement contentBlock = getContentBlock();
+				if (contentBlock != null)
+				{
+					String contentText = contentBlock.getText();
+					if (StringUtil.isNotEmpty(contentText))
+					{
+						descriptor = PodLinkDescriptor.getDescriptor(contentText);
+					}
+				}
+				return Result.create(descriptor, this);
+			}
+		});
 	}
 
 	@Nullable
@@ -121,95 +130,43 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		return getContainingFile();
 	}
 
-	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	public boolean hasReferences()
 	{
-		if (myReferences == null)
-		{
-			myReferences = new PodFormatterLLazyReference(this);
-		}
-		return myReferences.getValue();
+		return true;
 	}
 
-
 	@Override
-	public void subtreeChanged()
+	public void computeReferences(List<PsiReference> result)
 	{
-		super.subtreeChanged();
-		myReferences = null;
-		myLinkDescriptor = null;
-	}
+		final PodLinkDescriptor descriptor = getLinkDescriptor();
 
-	private static class LazyPodLinkDescriptor extends AtomicNullableLazyValue<PodLinkDescriptor>
-	{
-		private final PodFormatterL myFormatter;
-
-		public LazyPodLinkDescriptor(PodFormatterL myFormatter)
+		if (descriptor != null && !descriptor.isUrl())
 		{
-			this.myFormatter = myFormatter;
-		}
-
-		@Nullable
-		@Override
-		protected PodLinkDescriptor compute()
-		{
-			PsiElement contentBlock = myFormatter.getContentBlock();
+			PsiElement contentBlock = getContentBlock();
 			if (contentBlock != null)
 			{
-				String contentText = contentBlock.getText();
-				if (StringUtil.isNotEmpty(contentText))
+				int rangeOffset = contentBlock.getStartOffsetInParent();
+
+				// file reference
+				TextRange fileRange = descriptor.getFileIdTextRangeInLink();
+				if (fileRange != null && !fileRange.isEmpty())
 				{
-					return PodLinkDescriptor.getDescriptor(contentText);
+					result.add(new PodLinkToFileReference(this, fileRange.shiftRight(rangeOffset)));
+				}
+
+				// section reference
+				TextRange sectionRange = descriptor.getSectionTextRangeInLink();
+				if (sectionRange != null && !sectionRange.isEmpty())
+				{
+					result.add(new PodLinkToSectionReference(this, sectionRange.shiftRight(rangeOffset)));
 				}
 			}
-			return null;
-		}
-	}
-
-	private static class PodFormatterLLazyReference extends AtomicNotNullLazyValue<PsiReference[]>
-	{
-		private final PodFormatterL myElement;
-
-		public PodFormatterLLazyReference(PodFormatterL myElement)
-		{
-			this.myElement = myElement;
 		}
 
-		@NotNull
-		@Override
-		protected PsiReference[] compute()
-		{
-			List<PsiReference> references = new ArrayList<PsiReference>();
-			final PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
 
-			if (descriptor != null && !descriptor.isUrl())
-			{
-				PsiElement contentBlock = myElement.getContentBlock();
-				if (contentBlock != null)
-				{
-					int rangeOffset = contentBlock.getStartOffsetInParent();
+		result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(this)));
 
-					// file reference
-					TextRange fileRange = descriptor.getFileIdTextRangeInLink();
-					if (fileRange != null && !fileRange.isEmpty())
-					{
-						references.add(new PodLinkToFileReference(myElement, fileRange.shiftRight(rangeOffset)));
-					}
-
-					// section reference
-					TextRange sectionRange = descriptor.getSectionTextRangeInLink();
-					if (sectionRange != null && !sectionRange.isEmpty())
-					{
-						references.add(new PodLinkToSectionReference(myElement, sectionRange.shiftRight(rangeOffset)));
-					}
-				}
-			}
-
-
-			references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(myElement)));
-
-			return references.toArray(new PsiReference[references.size()]);
-		}
+		super.computeReferences(result);
 	}
 }

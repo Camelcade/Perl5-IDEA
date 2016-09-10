@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements PerlCompositeElement
+public class PerlCompositeElementImpl extends PerlASTWrapperPsiElement implements PerlCompositeElement
 {
 	public PerlCompositeElementImpl(@NotNull ASTNode node)
 	{

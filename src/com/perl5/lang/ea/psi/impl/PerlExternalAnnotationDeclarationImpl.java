@@ -16,7 +16,6 @@
 
 package com.perl5.lang.ea.psi.impl;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
@@ -27,6 +26,7 @@ import com.perl5.lang.ea.psi.PerlExternalAnnotationsPsiUtil;
 import com.perl5.lang.ea.psi.PerlExternalAnnotationsVisitor;
 import com.perl5.lang.ea.psi.stubs.PerlExternalAnnotationDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 06.08.2016.
  */
-public class PerlExternalAnnotationDeclarationImpl extends StubBasedPsiElementBase<PerlExternalAnnotationDeclarationStub> implements PerlExternalAnnotationDeclaration
+public class PerlExternalAnnotationDeclarationImpl extends PerlStubBasedPsiElementBase<PerlExternalAnnotationDeclarationStub> implements PerlExternalAnnotationDeclaration
 {
 	public PerlExternalAnnotationDeclarationImpl(@NotNull ASTNode node)
 	{

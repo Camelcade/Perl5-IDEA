@@ -19,8 +19,6 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
@@ -74,18 +72,9 @@ public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements
 		return getContentTextRangeInParent().getLength();
 	}
 
-	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	public boolean hasReferences()
 	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+		return true;
 	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
-
 }
