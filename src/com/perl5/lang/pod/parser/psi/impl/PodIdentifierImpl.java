@@ -16,65 +16,35 @@
 
 package com.perl5.lang.pod.parser.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.psi.PerlLeafPsiElement;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.references.PodSubReference;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodIdentifierImpl extends LeafPsiElement
+public class PodIdentifierImpl extends PerlLeafPsiElement
 {
-	private AtomicNotNullLazyValue<PsiReference[]> myReferences;
-
 	public PodIdentifierImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
-		createReferences();
 	}
 
-	private void createReferences()
+	@Override
+	protected void computeReferences(List<PsiReference> psiReferences)
 	{
-		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+
+		final PodIdentifierImpl element = PodIdentifierImpl.this;
+
+		if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
 		{
-			@NotNull
-			@Override
-			protected PsiReference[] compute()
-			{
-				final PodIdentifierImpl element = PodIdentifierImpl.this;
-				List<PsiReference> references = new ArrayList<PsiReference>();
-
-				if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
-				{
-					references.add(new PodSubReference(element));
-				}
-
-				references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
-
-				return references.toArray(new PsiReference[references.size()]);
-			}
-		};
-	}
-
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return myReferences.getValue();
-	}
-
-	@Override
-	public void clearCaches()
-	{
-		createReferences();
+			psiReferences.add(new PodSubReference(element));
+		}
+		super.computeReferences(psiReferences);
 	}
 }

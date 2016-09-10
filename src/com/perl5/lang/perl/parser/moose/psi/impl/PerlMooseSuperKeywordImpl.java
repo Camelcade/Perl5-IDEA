@@ -35,8 +35,9 @@ public class PerlMooseSuperKeywordImpl extends PerlMooseKeywordSubNameElementImp
 	}
 
 	@Override
-	protected void addReferences(List<PsiReference> result)
+	protected void computeReferences(List<PsiReference> psiReferences)
 	{
-		result.add(new PerlMooseSuperReference(this, null));
+		psiReferences.add(new PerlMooseSuperReference(this, null));
+		super.computeReferences(psiReferences);
 	}
 }

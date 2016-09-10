@@ -16,48 +16,36 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlLeafPsiElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlVariableNameElement
+public class PerlVariableNameElementImpl extends PerlLeafPsiElement implements PerlVariableNameElement
 {
-	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
-
 	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
-		createMyReferences();
 	}
 
-	private void createMyReferences()
+	@Override
+	protected void computeReferences(List<PsiReference> psiReferences)
 	{
-		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
+		if (!(getParent() instanceof PerlGlobVariable))
 		{
-			@NotNull
-			@Override
-			protected PsiReference[] compute()
-			{
-				if (getParent() instanceof PerlGlobVariable)
-				{
-					return PsiReference.EMPTY_ARRAY;
-				}
-				else
-				{
-					return new PsiReference[]{new PerlVariableReference(PerlVariableNameElementImpl.this, null)};
-				}
-			}
-		};
+			psiReferences.add(new PerlVariableReference(PerlVariableNameElementImpl.this, null));
+		}
+		super.computeReferences(psiReferences);
 	}
 
 	@Override
@@ -80,23 +68,4 @@ public class PerlVariableNameElementImpl extends LeafPsiElement implements PerlV
 		return this.getText();
 	}
 
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return myReferences.getValue();
-	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		return myReferences.getValue()[0];
-	}
-
-	@Override
-	public void clearCaches()
-	{
-		super.clearCaches();
-		createMyReferences();
-	}
 }

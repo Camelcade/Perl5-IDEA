@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.internals.PerlVersion;
+import com.perl5.lang.perl.psi.PerlLeafPsiElement;
 import com.perl5.lang.perl.psi.PerlVersionElement;
 
 /**
  * Created by hurricup on 09.09.2015.
  */
-public class PerlVersionElementImpl extends LeafPsiElement implements PerlVersionElement
+public class PerlVersionElementImpl extends PerlLeafPsiElement implements PerlVersionElement
 {
 	protected PerlVersion myPerlVersion;
 

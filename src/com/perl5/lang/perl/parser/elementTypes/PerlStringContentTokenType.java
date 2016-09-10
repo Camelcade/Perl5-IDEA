@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.ILeafElementType;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlStringContentTokenType extends PerlTokenType implements ILeafElementType
+public class PerlStringContentTokenType extends PerlTokenTypeEx
 {
 	public PerlStringContentTokenType(@NotNull @NonNls String debugName)
 	{

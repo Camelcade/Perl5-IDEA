@@ -23,28 +23,22 @@ import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.perl.psi.references.PerlSubReferenceSuper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Created by hurricup on 28.01.2016.
  */
 public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implements MasonMethodModifierName
 {
-	private final PsiReference[] myReferences = new PsiReference[]{new PerlSubReferenceSuper(this, null)};
-
 	public MasonMethodModifierNameImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
 
-	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	protected void computeReferences(List<PsiReference> psiReferences)
 	{
-		return myReferences;
-	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		return myReferences[0];
+		psiReferences.add(new PerlSubReferenceSuper(this, null));
+		super.computeReferences(psiReferences);
 	}
 }

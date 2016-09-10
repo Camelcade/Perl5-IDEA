@@ -16,13 +16,10 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
@@ -36,43 +33,24 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNameElement
+public class PerlSubNameElementImpl extends PerlLeafPsiElement implements PerlSubNameElement
 {
-	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
-
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
-		createReferences();
 	}
 
-	protected void createReferences()
+	@Override
+	protected void computeReferences(List<PsiReference> psiReferences)
 	{
-		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-		{
-			@NotNull
-			@Override
-			protected PsiReference[] compute()
-			{
-				List<PsiReference> result = new ArrayList<PsiReference>();
-				addReferences(result);
-				result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlSubNameElementImpl.this)));
-				return result.toArray(new PsiReference[result.size()]);
-			}
-		};
+		psiReferences.add(new PerlSubReference(this, null));
+		super.computeReferences(psiReferences);
 	}
-
-	protected void addReferences(List<PsiReference> result)
-	{
-		result.add(new PerlSubReference(this, null));
-	}
-
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
@@ -117,19 +95,6 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 		return this.getText();
 	}
 
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return myReferences.getValue();
-	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		return getReferences()[0];
-	}
-
 	@Override
 	public boolean isBuiltIn()
 	{
@@ -161,12 +126,6 @@ public class PerlSubNameElementImpl extends LeafPsiElement implements PerlSubNam
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void clearCaches()
-	{
-		createReferences();
 	}
 
 	@Nullable
