@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi.impl;
 
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PerlLeafPsiElement;
+import com.perl5.lang.perl.psi.PerlLeafPsiElementWithCachingReference;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.references.PodSubReference;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodIdentifierImpl extends PerlLeafPsiElement
+public class PodIdentifierImpl extends PerlLeafPsiElementWithCachingReference
 {
 	public PodIdentifierImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -36,14 +36,12 @@ public class PodIdentifierImpl extends PerlLeafPsiElement
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 
-		final PodIdentifierImpl element = PodIdentifierImpl.this;
-
-		if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
+		if (getParent() instanceof PodSectionTitle && getPrevSibling() == null)
 		{
-			psiReferences.add(new PodSubReference(element));
+			psiReferences.add(new PodSubReference(this));
 		}
 		super.computeReferences(psiReferences);
 	}

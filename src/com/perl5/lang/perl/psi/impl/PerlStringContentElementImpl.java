@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -24,14 +23,13 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlLeafPsiElement;
+import com.perl5.lang.perl.psi.PerlLeafPsiElementWithCachingReference;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,7 +38,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 23.05.2015.
  */
-public class PerlStringContentElementImpl extends PerlLeafPsiElement implements PerlStringContentElement
+public class PerlStringContentElementImpl extends PerlLeafPsiElementWithCachingReference implements PerlStringContentElement
 {
 	static final String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
 	static final String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
@@ -51,16 +49,14 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElement implements 
 	);
 	protected Boolean looksLikePath = null;
 	protected Boolean looksLikePackage = null;
-	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
-		createMyReferences();
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		if (looksLikePackage())
 		{
@@ -81,20 +77,6 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElement implements 
 			}
 		}
 		super.computeReferences(psiReferences);
-	}
-
-	private void createMyReferences()
-	{
-		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-		{
-			@NotNull
-			@Override
-			protected PsiReference[] compute()
-			{
-				List<PsiReference> result = new ArrayList<PsiReference>();
-				return result.toArray(new PsiReference[result.size()]);
-			}
-		};
 	}
 
 	@Override

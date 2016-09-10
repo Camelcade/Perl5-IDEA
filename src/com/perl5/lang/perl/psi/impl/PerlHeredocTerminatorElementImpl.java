@@ -18,17 +18,16 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement
-{
-	protected final PsiReference[] myReferences = new PsiReference[]{new PerlHeredocReference(this, null)};
+import java.util.List;
 
+public class PerlHeredocTerminatorElementImpl extends PerlPsiCommentImpl implements PerlHeredocTerminatorElement
+{
 	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -47,17 +46,17 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 		}
 	}
 
-	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	public boolean hasReferences()
 	{
-		return myReferences;
+		return true;
 	}
 
 	@Override
-	public PsiReference getReference()
+	public void computeReferences(List<PsiReference> result)
 	{
-		return myReferences[0];
+		result.add(new PerlHeredocReference(this, null));
+		super.computeReferences(result);
 	}
 
 	@Override

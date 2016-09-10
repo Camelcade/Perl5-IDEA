@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -33,9 +33,9 @@ import java.util.List;
 /**
  * Created by hurricup on 10.09.2016.
  */
-public class PerlLeafPsiElement extends LeafPsiElement implements PerlElementWithCachingReference
+public class PerlPsiCommentImpl extends PsiCommentImpl implements PerlElementWithCachingReference
 {
-	public PerlLeafPsiElement(@NotNull IElementType type, CharSequence text)
+	public PerlPsiCommentImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}

@@ -35,7 +35,7 @@ public class PerlMooseInnerKeywordImpl extends PerlMooseKeywordSubNameElementImp
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		psiReferences.add(new PerlMooseInnerReference(this, null));
 		super.computeReferences(psiReferences);

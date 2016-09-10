@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlSubNameElementImpl extends PerlLeafPsiElement implements PerlSubNameElement
+public class PerlSubNameElementImpl extends PerlLeafPsiElementWithCachingReference implements PerlSubNameElement
 {
 	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -46,7 +46,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElement implements PerlSu
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		psiReferences.add(new PerlSubReference(this, null));
 		super.computeReferences(psiReferences);

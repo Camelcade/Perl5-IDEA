@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlLeafPsiElement;
+import com.perl5.lang.perl.psi.PerlLeafPsiElementWithCachingReference;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlVariableNameElementImpl extends PerlLeafPsiElement implements PerlVariableNameElement
+public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithCachingReference implements PerlVariableNameElement
 {
 	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -39,7 +39,7 @@ public class PerlVariableNameElementImpl extends PerlLeafPsiElement implements P
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		if (!(getParent() instanceof PerlGlobVariable))
 		{

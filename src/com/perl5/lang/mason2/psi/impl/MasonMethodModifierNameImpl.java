@@ -36,7 +36,7 @@ public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implemen
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		psiReferences.add(new PerlSubReferenceSuper(this, null));
 		super.computeReferences(psiReferences);

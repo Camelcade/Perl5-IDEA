@@ -14,30 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.psi.impl;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseSuperKeyword;
-import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
- * Created by hurricup on 19.01.2016.
+ * Created by hurricup on 10.09.2016.
  */
-public class PerlMooseSuperKeywordImpl extends PerlMooseKeywordSubNameElementImpl implements PerlMooseSuperKeyword
+public class PerlLeafPsiElementWithCachingReference extends PerlLeafPsiElement
 {
-	public PerlMooseSuperKeywordImpl(@NotNull IElementType type, CharSequence text)
+	public PerlLeafPsiElementWithCachingReference(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
 	}
 
 	@Override
-	public void computeReferences(List<PsiReference> psiReferences)
+	public boolean hasReferences()
 	{
-		psiReferences.add(new PerlMooseSuperReference(this, null));
-		super.computeReferences(psiReferences);
+		return true;
 	}
 }

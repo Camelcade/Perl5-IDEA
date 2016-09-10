@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlLabel;
-import com.perl5.lang.perl.psi.PerlLeafPsiElement;
+import com.perl5.lang.perl.psi.PerlLeafPsiElementWithCachingReference;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlLabelReference;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelImpl extends PerlLeafPsiElement implements PerlLabel
+public class PerlLabelImpl extends PerlLeafPsiElementWithCachingReference implements PerlLabel
 {
 	public PerlLabelImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -58,7 +58,7 @@ public class PerlLabelImpl extends PerlLeafPsiElement implements PerlLabel
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		psiReferences.add(new PerlLabelReference(this, null));
 		super.computeReferences(psiReferences);

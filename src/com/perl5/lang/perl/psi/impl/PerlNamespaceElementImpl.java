@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlNamespaceElementImpl extends PerlLeafPsiElement implements PerlNamespaceElement
+public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithCachingReference implements PerlNamespaceElement
 {
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -42,7 +42,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElement implements Perl
 	}
 
 	@Override
-	protected void computeReferences(List<PsiReference> psiReferences)
+	public void computeReferences(List<PsiReference> psiReferences)
 	{
 		PerlNamespaceElement element = PerlNamespaceElementImpl.this;
 		PsiElement nameSpaceContainer = element.getParent();
