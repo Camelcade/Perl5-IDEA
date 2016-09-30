@@ -33,44 +33,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    <!--<p>This is a fixing update for for 2.1 release:</p><br/>-->
-     <p>Improvements:
-      <ul>
-      <li>Override method action may now be invoked using IDEAs default hotkey (Ctrl+O)</li>
-      <li>Improved console log filter, now catching any file-like text with optional line number, should not cause catastrophic backtracking on binary data</li>
-      <li>Implemented proper outlining of perl live-templates for Mojolicious, HTML::Mason and Mason2</li>
-      <li>POD parts of the perl file are now available in the structure view as a separate branch</li>
-      <li>Template language for Embedded Perl, Mojolicious, HTML::Mason and Mason2 is now configurable via Settings &gt; Template Data Language</li>
-      <li>You may now disable notification about unconfigured Perl interpreter/Perl SDK, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1295">@mcrawford-dayspring</a></li>
-      <li>Experimental EOL annotations removed. They could be easily misguiding and buggy.</li>
-      <li>New inspection checks that perl identifiers in the non-utf files are correct, according to the <a href="http://perldoc.perl.org/perldata.html#Identifier-parsing">perldoc</a>. Thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1309">@almirus</a></li>
-      <li>New intention allows you to convert foreach loop to for, by <a href="https://github.com/brnrc">@bcardoso</a></li>
-      <li>Improved completion and resolving for code in breakpoints conditions and watches</li>
-      <li>Code generation:<ul>
-        <li>Getters now being generated in faster form: <code>return $_[0]->{keyname}</code></li>
-        <li>Overriden methods now using proper self-reference variable from parent method, not <code>$self</code> in any case</li>
-      </ul></li>
-      <li>Template Toolkit 2:<ul>
-          <li>Color settings page for Template Toolkit syntax</li>
-          <li>Using keywords or operators in identifiers now shows adequate error message</li>
-          <li>Formatter is now available</li>
-      </ul></li>
-      <li>Mojolicious:<ul>
-          <li>Hitting enter in the middle of the outlined line now adds an outline marker on the next line</li>
-      </ul></li>
-      </ul>
-     </p>
+    <p>This is a fixing update for for 2.2 release:</p><br/>
      <p>Fixes:
       <ul>
-      <li>It's not possible anymore to inject other languages in hash elements and hash slices keys</li>
-      <li>Escaped quotes now being handled correctly with language injections in strings</li>
-      <li>Perl::Tidy re-formatting of large files now works correctly, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1297">@YuraKotov</a></li>
-      <li>It's now possible to disable bold style of keywords and configure built-in subs, packages and variables styles and colors, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1298">@Dgc2002</a></li>
-      <li>Occasional sharp addition on the enter typing in Mojo templates</li>
-      <li>Occasional exceptions in PyCharm</li>
-      <li>Occasional exceptions in Mason, HTML::Mason files since 2016.2</li>
-      <li>Exception on package file moving/renaming since 2016.2</li>
-      <li>ENV variables persistence in Run/Debug configurations, thanks to <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1315">@prastovac</a></li>
+      <li>Possible NPE on running the script if settings file been corrupted</li>
       </ul>
      </p>
     ]]>

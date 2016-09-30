@@ -145,7 +145,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 					if (entries.length > 0)
 					{
 						ContentEntry entry = entries[0];
-						Set<String> libPaths = new HashSet<String>(perl5Settings.libRootUrls);
+						Set<String> libPaths = new HashSet<String>(perl5Settings.getLibRootUrls());
 
 						for (SourceFolder folder : entry.getSourceFolders())
 						{

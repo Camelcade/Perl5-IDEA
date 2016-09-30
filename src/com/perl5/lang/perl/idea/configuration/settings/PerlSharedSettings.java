@@ -71,6 +71,15 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 		return this;
 	}
 
+	public synchronized List<String> getLibRootUrls()
+	{
+		if (libRootUrls == null)
+		{
+			libRootUrls = new ArrayList<String>();
+		}
+		return libRootUrls;
+	}
+
 	@Override
 	public void loadState(PerlSharedSettings state)
 	{
