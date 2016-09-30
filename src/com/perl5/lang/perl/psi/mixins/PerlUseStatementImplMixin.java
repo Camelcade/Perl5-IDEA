@@ -26,6 +26,7 @@ import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -36,8 +37,6 @@ import java.util.List;
  */
 public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
 {
-	protected PerlPackageProcessor packageProcessor = null;
-
 	public PerlUseStatementImplMixin(ASTNode node)
 	{
 		super(node);
@@ -123,14 +122,11 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		}
 	}
 
+	@NotNull
 	@Override
 	public PerlPackageProcessor getPackageProcessor()
 	{
-		// cached
-		if (packageProcessor != null)
-		{
-			return packageProcessor;
-		}
+		PerlPackageProcessor packageProcessor = null;
 
 		// package name processor
 		String packageName = getPackageName();
@@ -138,20 +134,12 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		{
 			packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
 		}
-
-		// version processor
-		if (packageName == null && getVersionElement() != null)
+		else if (getVersionElement() != null)
 		{
-			packageProcessor = PerlVersionProcessor.getProcessor(this);
+			packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementImplMixin.this);
 		}
 
-		// default processor
-		if (packageProcessor == null)
-		{
-			packageProcessor = PerlPackageProcessorDefault.INSTANCE;
-		}
-
-		return packageProcessor;
+		return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
 	}
 
 	@Override
@@ -196,12 +184,5 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	public PsiPerlSubDeclaration getSubDeclaration()
 	{
 		return null;
-	}
-
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		packageProcessor = null;
 	}
 }
