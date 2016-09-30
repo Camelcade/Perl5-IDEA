@@ -74,7 +74,7 @@ public class PerlConsoleFileLinkFilter implements Filter
 			int endIndex = matcher.end(0);
 			String file = matcher.group(1);
 			int line = (matcher.group(2) != null) ? (Integer.valueOf(matcher.group(2)) - 1) : 0;
-			VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(file), true);
+			VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(file), false);
 			if (virtualFile != null)
 			{
 				results.add(new Result(
