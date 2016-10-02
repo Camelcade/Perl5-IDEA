@@ -631,9 +631,7 @@ private single_constant_definition ::= constant_definition {recoverWhile=recover
 constant_definition ::= string comma scalar_expr
 
 undef_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_UNDEF (undef_params | LEFT_PAREN undef_params RIGHT_PAREN) ? {pin=2}
-private undef_params ::=
-    deref_expr
-    | variable
+private undef_params ::= deref_expr | variable
 
 require_expr ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_REQUIRE (<<mergeRequirePackageName>> | perl_version | scalar_expr)  {pin=2}// multiline string is possible too
 
@@ -682,27 +680,42 @@ private immutable_expr ::= <<parseExpressionLevel 21>>
 named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
 named_list_expr ::= <<parseListExpression>>
 
+// ordered for best performance of perltidy
 term_expr ::=
-    variable_expr
-	| <<parseParserExtensionTerm>>
-    | variable_declaration
+    <<parseScalarOrElement>>	// scalar, cast or elements
+    | string
+    | number_constant
+    | variable_declaration_lexical
     | <<parseListOrListElement>> // fixme this must be in array with qw
-    | scalar_constant
-    | do_expr
+    | <<parseArrayOrSlice>>		// array, cast or slice
+    | match_regex
+    | return_expr
+    | hash_variable
+    | hash_cast_expr
+    | anon_array
+    | undef_expr
+    | print_expr
+	| replacement_regex
     | sub_expr
     | eval_expr
-    | grep_expr
-    | return_expr
-    | map_expr
+    | do_expr
+	| anon_hash
+    | variable_declaration_local
     | sort_expr
-    | regex_term
+    | grep_expr
+    | map_expr
+
+    | <<parseGlobOrElement>>	// glob
+    | array_index_variable
+    | tag_scalar
+    | variable_declaration_global
+    | compile_regex
+	| tr_regex
     | file_read_expr
-    | print_expr
     | require_expr
-    | undef_expr
     | perl_handle_expr
+	| <<parseParserExtensionTerm>>
     | sub_call_expr
-    | reference_value_expr
     | namespace_expr
 
 
@@ -730,8 +743,6 @@ private sort_arguments_ ::=
     | block [comma] grep_map_sort_tail
     | callable grep_map_sort_tail
     | grep_map_sort_tail
-
-private variable_expr ::= variable | array_index_variable
 
 namespace_expr ::= <<mergePackageName>>
 parenthesised_expr ::= LEFT_PAREN parenthesised_expr_content RIGHT_PAREN {pin=1 name="Parenthesised expression"}
@@ -869,12 +880,6 @@ file_read_forced_expr ::= <<checkAndConvertToken LEFT_ANGLE OPERATOR_LT_NUMERIC>
 read_handle ::= <<parseReadHandle>>
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
-private regex_term ::=
-    compile_regex
-    | replacement_regex
-    | tr_regex
-    | match_regex
-
 // pinning quotes leads to bug with replacement block
 compile_regex ::= [PACKAGE_CORE_IDENTIFIER]  RESERVED_QR match_regex_body {pin=2}
 match_regex ::= [PACKAGE_CORE_IDENTIFIER]  [RESERVED_M] match_regex_body
@@ -903,16 +908,12 @@ perl_regex_modifiers ::= REGEX_MODIFIER +
 perl_regex ::= <<parseRegexContent false>>
 private perl_regex_items ::= perl_regex_item +
 
-private perl_regex_item ::=
-  interpolated_constructs
-  | <<convertRegexToken>>
+private perl_regex_item ::= interpolated_constructs | <<convertRegexToken>>
 
 perl_regex_ex ::= <<parseRegexContent true>> {extends=perl_regex}
 private perl_regex_ex_items ::= perl_regex_item_ex +
 
-private perl_regex_item_ex ::=
-  interpolated_constructs
-  | <<convertRegexTokenEx>>
+private perl_regex_item_ex ::= interpolated_constructs | <<convertRegexTokenEx>>
 
 tr_regex ::= [PACKAGE_CORE_IDENTIFIER] (RESERVED_TR|RESERVED_Y) tr_search tr_replacement [tr_modifiers] {pin=2}
 private tr_search ::= REGEX_QUOTE_OPEN [tr_searchlist] {pin=1}
@@ -952,38 +953,25 @@ private strict_variable_declaration_wrapper ::= variable_declaration_wrapper !(L
 variable_declaration_wrapper ::= lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
-// most of the references created by \ operator, but some - don't
-private reference_value_expr ::=
-    anon_array
-    | anon_hash
-    | sub_expr
-
 anon_array ::= LEFT_BRACKET [expr] RIGHT_BRACKET //{pin=1}
 anon_hash ::= LEFT_BRACE [expr] RIGHT_BRACE <<validateAnonHashSuffix>>  // fixme pin here after solving problem with code block and prototypes
 
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
 // fixme it's not a variable, its variable expression
-private variable ::= scalar | array | hash | glob
-
-private array ::= <<parseArrayOrSlice>>
+private variable ::= <<parseScalarOrElement>> | <<parseArrayOrSlice>> | hash_variable | hash_cast_expr | <<parseGlobOrElement>>
 
 private array_primitive ::=
     array_variable
     | array_cast_expr
     | string_list
+
 array_array_slice ::= array_primitive array_index
 array_hash_slice ::= array_primitive hash_index
 
 array_cast_expr ::= SIGIL_ARRAY cast_target
 
-private hash ::=
-    hash_variable
-    | hash_cast_expr
-
 hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD SIGIL_HASH>> cast_target
-
-private scalar ::= <<parseScalarOrElement>>
 
 private scalar_primitive ::=
     scalar_variable
@@ -1003,7 +991,6 @@ scalar_array_element ::= scalar_primitive array_index
 scalar_hash_element ::= scalar_primitive hash_index
 anon_array_element ::= parenthesised_expr array_index
 
-private glob ::= <<parseGlobOrElement>>
 private glob_primitive ::=
     glob_variable
     | glob_cast_expr
@@ -1023,7 +1010,7 @@ private nested_element_variation ::=
 
 nested_call ::= parse_nested_call
 private parse_nested_call ::= method [method_call_arguments]
-scalar_call ::= scalar [method_call_arguments]
+scalar_call ::= <<parseScalarOrElement>> [method_call_arguments]
 private method_call_arguments ::= LEFT_PAREN [<<parseSimpleCallArguments>>] RIGHT_PAREN
 nested_call_arguments ::= method_call_arguments
 
@@ -1051,17 +1038,9 @@ perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
 
-private scalar_constant ::=
-    number_constant
-    | tag_scalar
-    | string
-
 tag_scalar ::= TAG
 
-number_constant ::=
-    NUMBER
-    | NUMBER_VERSION
-    | NUMBER_SIMPLE
+number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_SIMPLE
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
@@ -1085,14 +1064,12 @@ string_sq ::=
 
 private string_sq_parsed ::= QUOTE_SINGLE_OPEN <<parseAndWrapStringContent>>* QUOTE_SINGLE_CLOSE {pin=1}
 private string_content_qq ::= string_content_element +
-private string_content_element ::=
-  <<parseInterpolatedConstructs>>
-  | <<convertToStringContent>>
+private string_content_element ::= <<parseInterpolatedConstructs>>  | <<convertToStringContent>>
 
 // these constructs are for regular strings
 private interpolated_constructs ::=
-  scalar
-  | array
+  <<parseScalarOrElement>>
+  | <<parseArrayOrSlice>>
   | array_index_variable
 
 private use_vars_interpolated_constructs ::=

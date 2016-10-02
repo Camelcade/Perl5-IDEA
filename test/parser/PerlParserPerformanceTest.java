@@ -20,11 +20,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import gnu.trove.THashMap;
 
-import java.io.IOException;
 import java.util.*;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**
  * Created by hurricup on 02.10.2016.
@@ -39,6 +41,7 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 
 	public void testlabels_parsing()
 	{
+/*
 		myFileName = "perltidy";
 		try
 		{
@@ -46,31 +49,95 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 			String text = loadFile(testName + "." + myFileExt);
 			long startTime = System.currentTimeMillis();
 
-			PsiFile psiFile;
+			PsiFile psiFile = null;
 
-/*
-			for (int i = 0; i < 50; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				psiFile = createPsiFile(testName, text);
 				psiFile.getFirstChild();
 			}
-*/
 
 			long endTime = System.currentTimeMillis();
 			System.err.println("Done in " + (endTime - startTime) + " ms");
 
-//			analyzeFile(psiFile);
+			analyzeFile(psiFile);
 
 		}
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
+*/
 	}
+
+	private static final TokenSet TERMINAL_TOKENS = TokenSet.create(
+			// variable
+			SCALAR_VARIABLE,
+			SCALAR_CAST_EXPR,
+			UNDEF_EXPR,
+			SCALAR_INDEX_CAST_EXPR,
+			ARRAY_INDEX_VARIABLE,
+
+			ARRAY_VARIABLE,
+			ARRAY_CAST_EXPR,
+			STRING_LIST,
+			ARRAY_ARRAY_SLICE,
+			ARRAY_HASH_SLICE,
+
+			HASH_VARIABLE,
+			HASH_CAST_EXPR,
+
+			GLOB_VARIABLE,
+
+			// declarations
+			VARIABLE_DECLARATION_GLOBAL,
+			VARIABLE_DECLARATION_LEXICAL,
+			VARIABLE_DECLARATION_LOCAL,
+
+			// constants
+			NUMBER_CONSTANT,
+			TAG_SCALAR,
+			STRING_BARE,
+			STRING_SQ,
+			STRING_DQ,
+			STRING_XQ,
+			HEREDOC_OPENER,
+
+			// list or element
+			PARENTHESISED_EXPR,
+			ANON_ARRAY_ELEMENT,
+
+			//regexps
+			COMPILE_REGEX,
+			REPLACEMENT_REGEX,
+			TR_REGEX,
+			MATCH_REGEX,
+
+			// exprs
+			DO_EXPR,
+			EVAL_EXPR,
+			GREP_EXPR,
+			RETURN_EXPR,
+			MAP_EXPR,
+			SORT_EXPR,
+
+			FILE_READ_EXPR,
+			PRINT_EXPR,
+			UNDEF_EXPR,
+			PERL_HANDLE_EXPR,
+			ANON_ARRAY,
+			ANON_HASH,
+			SUB_EXPR,
+
+			//calls
+			SUB_CALL_EXPR,
+			NAMESPACE_EXPR
+	);
 
 	private void analyzeFile(PsiFile psiFile)
 	{
 		final Map<IElementType, Integer> tokensMap = new THashMap<IElementType, Integer>();
+		final int[] totalTokens = new int[]{0};
 
 		psiFile.accept(new PsiElementVisitor()
 		{
@@ -78,10 +145,14 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 			public void visitElement(PsiElement element)
 			{
 				IElementType elementType = PsiUtilCore.getElementType(element);
-				Integer count = tokensMap.get(elementType);
-				tokensMap.put(elementType, count == null ? 1 : count + 1);
-				super.visitElement(element);
+				if (TERMINAL_TOKENS.contains(elementType))
+				{
+					Integer count = tokensMap.get(elementType);
+					tokensMap.put(elementType, count == null ? 1 : count + 1);
+					totalTokens[0]++;
+				}
 				element.acceptChildren(this);
+				super.visitElement(element);
 			}
 		});
 
@@ -97,7 +168,9 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 
 		for (Map.Entry<IElementType, Integer> entry : entries)
 		{
-			System.err.println(entry.getKey() + ": " + entry.getValue());
+			Integer elementCount = entry.getValue();
+			float percent = (float) elementCount / totalTokens[0];
+			System.err.println(entry.getKey() + ": " + elementCount + " " + percent * 100 + "%");
 		}
 	}
 }
