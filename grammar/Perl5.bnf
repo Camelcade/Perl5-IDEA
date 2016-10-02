@@ -683,7 +683,8 @@ named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_e
 named_list_expr ::= <<parseListExpression>>
 
 term_expr ::=
-	<<parseParserExtensionTerm>>
+    variable_expr
+	| <<parseParserExtensionTerm>>
     | variable_declaration
     | <<parseListOrListElement>> // fixme this must be in array with qw
     | scalar_constant
@@ -702,7 +703,6 @@ term_expr ::=
     | perl_handle_expr
     | sub_call_expr
     | reference_value_expr
-    | variable_expr
     | namespace_expr
 
 
@@ -1104,7 +1104,7 @@ private use_vars_interpolated_constructs ::=
 
 heredoc_opener ::= OPERATOR_HEREDOC ( OPERATOR_REFERENCE string_bare | <<parseEmptyString>> | string ){pin=1}
 
-string_list ::= [[PACKAGE_CORE_IDENTIFIER] RESERVED_QW] <<parseSQString>>
+string_list ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_QW <<parseSQString>>
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
