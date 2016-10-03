@@ -47,18 +47,29 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 		{
 			String testName = getTestName(false);
 			String text = loadFile(testName + "." + myFileExt);
-			long startTime = System.currentTimeMillis();
-
 			PsiFile psiFile = null;
 
-			for (int i = 0; i < 100; i++)
+			System.err.println("Warming up...");
+			int times = 50;
+
+			for (int i = 0; i < times; i++)
+			{
+				psiFile = createPsiFile(testName, text);
+				psiFile.getFirstChild();
+			}
+
+			System.err.println("Testing...");
+			long startTime = System.currentTimeMillis();
+
+			for (int i = 0; i < times; i++)
 			{
 				psiFile = createPsiFile(testName, text);
 				psiFile.getFirstChild();
 			}
 
 			long endTime = System.currentTimeMillis();
-			System.err.println("Done in " + (endTime - startTime) + " ms");
+			long length = endTime - startTime;
+			System.err.println("Done in " + length + " ms; " + length / times + " per parse");
 
 			analyzeFile(psiFile);
 
