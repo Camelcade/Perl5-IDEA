@@ -165,7 +165,12 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public void initWithFile(String filename, String extension) throws IOException
 	{
-		initWithFileContent(filename, extension, FileUtil.loadFile(new File(getTestDataPath(), filename + ".code"), CharsetToolkit.UTF8, true).trim());
+		initWithFile(filename, extension, filename + ".code");
+	}
+
+	public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException
+	{
+		initWithFileContent(targetFileName, targetFileExtension, FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true).trim());
 	}
 
 	public void initWithFileContent(String filename, String extension, String content) throws IOException
