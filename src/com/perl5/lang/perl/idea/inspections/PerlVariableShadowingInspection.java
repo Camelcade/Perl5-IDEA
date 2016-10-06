@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
+import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -35,7 +36,7 @@ public class PerlVariableShadowingInspection extends PerlVariableDeclarationInsp
 
 		if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
 		{
-			PerlVariableDeclarationWrapper lexicalDeclaration = variable.getLexicalDeclaration();
+			PerlVariableDeclarationWrapper lexicalDeclaration = PerlScopeUtil.getLexicalDeclaration(variable);
 			if (lexicalDeclaration != null)
 			{
 				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getVariable().getLineNumber());

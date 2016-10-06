@@ -110,6 +110,10 @@ public class PerlScopeUtil
 	@Nullable
 	public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable)
 	{
+		if (variable.getNamespaceElement() != null)
+		{
+			return null;
+		}
 		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
 		PerlScopeUtil.treeWalkUp(variable, variableProcessor);
 		return variableProcessor.getResult();
