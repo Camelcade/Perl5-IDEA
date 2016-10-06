@@ -96,4 +96,10 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
 	{
 		doTest("same_statement_map", false);
 	}
+
+	public void testPerlTidy()
+	{
+		initWithPerlTidy();
+		doTestWithFileCheckWithoutInit();
+	}
 }
