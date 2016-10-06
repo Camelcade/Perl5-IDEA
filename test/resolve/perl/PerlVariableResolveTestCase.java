@@ -19,18 +19,12 @@ package resolve.perl;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
 
 /**
  * Created by hurricup on 13.03.2016.
  */
 public abstract class PerlVariableResolveTestCase extends PerlResolveTestCase
 {
-	public void doTest(String filename, boolean success)
-	{
-		doTest(filename, success, PerlVariableNameElement.class);
-	}
-
 	@Override
 	public void validateTarget(PsiElement sourceElement, PsiElement targetElement)
 	{
