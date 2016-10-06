@@ -93,15 +93,21 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public void initWithPerlTidy()
 	{
+		initWithPerlTidy("perlTidy");
+	}
+
+	public void initWithPerlTidy(@NotNull String targetName)
+	{
 		try
 		{
-			initWithFileContent("perlTidy", getFileExtension(), FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim());
+			initWithFileContent(targetName, getFileExtension(), FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim());
 		}
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
+
 
 	public void initWithFileSmart()
 	{

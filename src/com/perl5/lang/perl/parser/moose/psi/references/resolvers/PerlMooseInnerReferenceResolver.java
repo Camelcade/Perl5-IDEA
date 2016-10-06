@@ -21,6 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
@@ -30,6 +32,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +92,7 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 			{
 				boolean noSubclasses = false;
 
-				for (PsiElement augmentStatement : PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlMooseAugmentStatementStub.class, PerlMooseAugmentStatement.class))
+				for (PsiElement augmentStatement : getAugmentStatements(childNamespace))
 				{
 					if (subName.equals(((PerlMooseAugmentStatement) augmentStatement).getSubName()))
 					{
@@ -104,5 +107,18 @@ public class PerlMooseInnerReferenceResolver implements ResolveCache.PolyVariant
 				}
 			}
 		}
+	}
+
+	private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace)
+	{
+		return CachedValuesManager.getCachedValue(childNamespace, new CachedValueProvider<List<PsiElement>>()
+		{
+			@Nullable
+			@Override
+			public Result<List<PsiElement>> compute()
+			{
+				return Result.create(PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlMooseAugmentStatementStub.class, PerlMooseAugmentStatement.class), childNamespace);
+			}
+		});
 	}
 }

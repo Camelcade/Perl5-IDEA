@@ -26,6 +26,8 @@ import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
@@ -267,9 +269,17 @@ public class PerlPsiUtil implements PerlElementTypes
 		}
 	}
 
-	public static List<PsiElement> collectUseStatements(@NotNull PsiElement rootElement)
+	public static List<PsiElement> collectUseStatements(@NotNull final PsiElement rootElement)
 	{
-		return collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class);
+		return CachedValuesManager.getCachedValue(rootElement, new CachedValueProvider<List<PsiElement>>()
+		{
+			@Nullable
+			@Override
+			public Result<List<PsiElement>> compute()
+			{
+				return Result.create(collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class), rootElement);
+			}
+		});
 	}
 
 	@NotNull
