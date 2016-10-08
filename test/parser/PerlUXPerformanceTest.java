@@ -17,6 +17,7 @@
 package parser;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import categories.Performance;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
@@ -36,6 +37,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.ui.UIUtil;
+import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ import java.util.List;
 /**
  * Created by hurricup on 07.10.2016.
  */
+@Category(Performance.class)
 public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 {
 	public void testEnterTyping()

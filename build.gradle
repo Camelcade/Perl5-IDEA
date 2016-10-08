@@ -62,6 +62,13 @@ test {
     doFirst{
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
     }
+    useJUnit {
+        if (project.hasProperty("perf")) {
+            includeCategories 'categories.Performance'
+        } else {
+            excludeCategories 'categories.Performance'
+        }
+    }
     testLogging {
         exceptionFormat = 'full'
         showStandardStreams = true

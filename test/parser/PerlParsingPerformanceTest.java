@@ -16,6 +16,7 @@
 
 package parser;
 
+import categories.Performance;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.PsiElement;
@@ -27,6 +28,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.ThrowableRunnable;
 import gnu.trove.THashMap;
+import org.junit.experimental.categories.Category;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +39,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 /**
  * Created by hurricup on 02.10.2016.
  */
+@Category(Performance.class)
 public class PerlParsingPerformanceTest extends PerlParserTestBase
 {
 	@Override
