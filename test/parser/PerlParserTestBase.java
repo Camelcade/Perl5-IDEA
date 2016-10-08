@@ -46,7 +46,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 
 	public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)
 	{
-		super(dataPath, fileExt, definitions);
+		super(dataPath, fileExt, true, definitions);
 	}
 
 	/*
