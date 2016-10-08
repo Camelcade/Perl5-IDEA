@@ -36,7 +36,10 @@
     <p>This is a fixing update for for 2.2 release:</p><br/>
      <p>Fixes:
       <ul>
+      <li>Fixed issues with current EAP builds</li>
       <li>Possible NPE on running the script if settings file been corrupted</li>
+      <li>Optimized parsing of multiple namespaces</li>
+      <li>Optimized variables resolving, made it 10 times faster</li>
       </ul>
      </p>
     ]]>
