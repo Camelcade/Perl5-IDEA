@@ -52,13 +52,14 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 	{
 		initWithPerlTidy();
 		myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65,0));
-		final int iterations = 20;
+		final int iterations = 30;
 		for (int i = 0; i < iterations; i++)
 		{
 			myFixture.type("\n");
 		}
 
-		PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * 630, new ThrowableRunnable()
+		final int time = 630;
+		PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * time, new ThrowableRunnable()
 		{
 			@Override
 			public void run() throws Throwable
@@ -69,7 +70,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 					myFixture.type("\n");
 				}
 				long length = System.currentTimeMillis() - start;
-				System.err.println("Typing enter done in " + length / iterations + " ms per iteration");
+				System.err.println("Typing enter done in " + length / iterations + " ms per iteration  of " + time);
 			}
 		}).cpuBound().assertTiming();
 	}
@@ -94,7 +95,8 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 			codeAnalyzerEx.getFileLevelHighlights(project, file);
 		}
 
-		PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * 750, new ThrowableRunnable()
+		final int time = 750;
+		PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * time, new ThrowableRunnable()
 		{
 			@Override
 			public void run() throws Throwable
@@ -108,7 +110,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 					DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
 				}
 				long length = System.currentTimeMillis() - start;
-				System.err.println("Highlighting done in " + length / iterations + " ms per iteration");
+				System.err.println("Highlighting done in " + length / iterations + " ms per iteration of " + time);
 			}
 		}).cpuBound().assertTiming();
 
