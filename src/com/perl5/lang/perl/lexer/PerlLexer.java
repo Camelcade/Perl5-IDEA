@@ -299,9 +299,9 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> namedOperators = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> blockNames = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> tagNames = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> NAMED_OPERATORS = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> BLOCK_NAMES = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> TAG_NAMES = new HashMap<String, IElementType>();
 	public static final TokenSet QUOTE_LIKE_STRING_OPENER_TOKENSET = TokenSet.create(
 			RESERVED_QW,
 			RESERVED_Q,
@@ -370,39 +370,39 @@ public class PerlLexer extends PerlLexerGenerated
 	static
 	{
 		// named operators
-		namedOperators.put("x", OPERATOR_X);
+		NAMED_OPERATORS.put("x", OPERATOR_X);
 
-		namedOperators.put("not", OPERATOR_NOT_LP);
-		namedOperators.put("and", OPERATOR_AND_LP);
-		namedOperators.put("or", OPERATOR_OR_LP);
-		namedOperators.put("xor", OPERATOR_XOR_LP);
+		NAMED_OPERATORS.put("not", OPERATOR_NOT_LP);
+		NAMED_OPERATORS.put("and", OPERATOR_AND_LP);
+		NAMED_OPERATORS.put("or", OPERATOR_OR_LP);
+		NAMED_OPERATORS.put("xor", OPERATOR_XOR_LP);
 
-		namedOperators.put("lt", OPERATOR_LT_STR);
-		namedOperators.put("gt", OPERATOR_GT_STR);
-		namedOperators.put("le", OPERATOR_LE_STR);
-		namedOperators.put("ge", OPERATOR_GE_STR);
-		namedOperators.put("eq", OPERATOR_EQ_STR);
-		namedOperators.put("ne", OPERATOR_NE_STR);
-		namedOperators.put("cmp", OPERATOR_CMP_STR);
+		NAMED_OPERATORS.put("lt", OPERATOR_LT_STR);
+		NAMED_OPERATORS.put("gt", OPERATOR_GT_STR);
+		NAMED_OPERATORS.put("le", OPERATOR_LE_STR);
+		NAMED_OPERATORS.put("ge", OPERATOR_GE_STR);
+		NAMED_OPERATORS.put("eq", OPERATOR_EQ_STR);
+		NAMED_OPERATORS.put("ne", OPERATOR_NE_STR);
+		NAMED_OPERATORS.put("cmp", OPERATOR_CMP_STR);
 
 		// block names
-		blockNames.put("BEGIN", BLOCK_NAME);
-		blockNames.put("UNITCHECK", BLOCK_NAME);
-		blockNames.put("CHECK", BLOCK_NAME);
-		blockNames.put("INIT", BLOCK_NAME);
-		blockNames.put("END", BLOCK_NAME);
+		BLOCK_NAMES.put("BEGIN", BLOCK_NAME);
+		BLOCK_NAMES.put("UNITCHECK", BLOCK_NAME);
+		BLOCK_NAMES.put("CHECK", BLOCK_NAME);
+		BLOCK_NAMES.put("INIT", BLOCK_NAME);
+		BLOCK_NAMES.put("END", BLOCK_NAME);
 
 		// these added for core packages, not blocks, just subs
-		blockNames.put("AUTOLOAD", BLOCK_NAME);
-		blockNames.put("DESTROY", BLOCK_NAME);
+		BLOCK_NAMES.put("AUTOLOAD", BLOCK_NAME);
+		BLOCK_NAMES.put("DESTROY", BLOCK_NAME);
 
-		PerlParserUtil.addConvertableTokens(blockNames.values().toArray(new IElementType[blockNames.values().size()]));
+		PerlParserUtil.addConvertableTokens(BLOCK_NAMES.values().toArray(new IElementType[BLOCK_NAMES.values().size()]));
 
 		// tags
-		tagNames.put("__FILE__", TAG);
-		tagNames.put("__LINE__", TAG);
-		tagNames.put("__PACKAGE__", TAG);
-		tagNames.put("__SUB__", TAG);
+		TAG_NAMES.put("__FILE__", TAG);
+		TAG_NAMES.put("__LINE__", TAG);
+		TAG_NAMES.put("__PACKAGE__", TAG);
+		TAG_NAMES.put("__SUB__", TAG);
 
 	}
 
@@ -516,9 +516,9 @@ public class PerlLexer extends PerlLexerGenerated
 
 		Set<IElementType> allTextTokens = new HashSet<IElementType>();
 
-		allTextTokens.addAll(namedOperators.values());
-		allTextTokens.addAll(blockNames.values());
-		allTextTokens.addAll(tagNames.values());
+		allTextTokens.addAll(NAMED_OPERATORS.values());
+		allTextTokens.addAll(BLOCK_NAMES.values());
+		allTextTokens.addAll(TAG_NAMES.values());
 
 		LABEL_TOKENSET = TokenSet.andNot(
 				TokenSet.orSet(
@@ -1914,7 +1914,7 @@ public class PerlLexer extends PerlLexerGenerated
 				)
 		{
 
-			if ((tokenType = namedOperators.get(tokenText)) != null)
+			if ((tokenType = NAMED_OPERATORS.get(tokenText)) != null)
 			{
 				return tokenType;
 			}
@@ -1932,11 +1932,11 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return tokenType;
 			}
-			else if ((tokenType = blockNames.get(tokenText)) != null)
+			else if ((tokenType = BLOCK_NAMES.get(tokenText)) != null)
 			{
 				return tokenType;
 			}
-			else if ((tokenType = tagNames.get(tokenText)) != null)
+			else if ((tokenType = TAG_NAMES.get(tokenText)) != null)
 			{
 				return tokenType;
 			}
