@@ -341,8 +341,6 @@ limitations under the License.
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
-	extends("namespace_content")=block
-
 	implements("label_declaration")="com.perl5.lang.perl.psi.PerlLabelDeclaration"
 	extends("label_declaration")="com.perl5.lang.perl.psi.mixins.PerlLabelDeclarationImplMixin"
 
@@ -422,10 +420,12 @@ limitations under the License.
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin";
     implements("method")="com.perl5.lang.perl.psi.PerlMethod";
+
+    implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
-root ::= <<parseFileContent>>
+root ::= <<parseFileContent>> file_items
 // invoked by parser
 private file_items ::= file_item*
 
@@ -453,7 +453,7 @@ private statement_item ::=
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= [PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE <<mergePackageName>> [perl_version] {pin=3 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= file_item *  {extends=block recoverWhile=recover_statement} //
+private real_namespace_content ::= {!{[PACKAGE_CORE_IDENTIFIER] RESERVED_PACKAGE} file_item} *  {extends=block recoverWhile=recover_statement} //
 
 block ::= LEFT_BRACE block_content RIGHT_BRACE {pin=1} // !OPERATOR_DEREFERENCE  pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_statement}

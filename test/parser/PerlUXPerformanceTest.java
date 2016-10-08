@@ -32,6 +32,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.ui.UIUtil;
@@ -76,6 +77,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 		final PsiFile file = getFile();
 		final Editor editor = getEditor();
 		final Project project = getProject();
+		CodeInsightTestFixtureImpl.ensureIndexesUpToDate(project);
 		final DaemonCodeAnalyzerImpl codeAnalyzer = (DaemonCodeAnalyzerImpl) DaemonCodeAnalyzer.getInstance(project);
 		final TextEditor textEditor = TextEditorProvider.getInstance().getTextEditor(editor);
 		DaemonCodeAnalyzerEx codeAnalyzerEx = DaemonCodeAnalyzerEx.getInstanceEx(project);

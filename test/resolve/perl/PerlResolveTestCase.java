@@ -22,6 +22,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import junit.framework.AssertionFailedError;
 
@@ -86,6 +87,7 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 
 	public void doTestWithFileCheckWithoutInit()
 	{
+		CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
 		StringBuilder sb = new StringBuilder();
 
 		for (PsiReference psiReference : collectFileReferences())

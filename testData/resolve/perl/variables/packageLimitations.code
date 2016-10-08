@@ -1,0 +1,19 @@
+use v5.10;
+package Foo{
+    my $var = 'top';
+    package Bla;
+    say $var;
+
+    package OtherBla{
+        say $var;
+    }
+}
+
+package Bar;
+say $var;
+my $baz = 'bar';
+
+package Baz;
+say $baz;
+
+
