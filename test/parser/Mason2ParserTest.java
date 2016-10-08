@@ -37,9 +37,9 @@ public class Mason2ParserTest extends PerlParserTestBase
 		return "testData/parser/mason2/perl";
 	}
 
-	public void testComponent()
+	public void testTestComponent()
 	{
-		doTest("test_component", true);
+		doTest(true);
 	}
 
 	@Override

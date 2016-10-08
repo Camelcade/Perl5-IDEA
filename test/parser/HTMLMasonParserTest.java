@@ -42,112 +42,112 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 
 	public void testIssue1077()
 	{
-		doTest("issue_1077");
+		doTest();
 	}
 
 	public void testArgs()
 	{
-		doTest("parse_args");
+		doTest();
 	}
 
 	public void testAttr()
 	{
-		doTest("parse_attr");
+		doTest();
 	}
 
 	public void testCalls()
 	{
-		doTest("parse_calls");
+		doTest();
 	}
 
 	public void testCallsUnclosed()
 	{
-		doTest("parse_calls_unclosed", false);
+		doTest(false);
 	}
 
 	public void testCallsUnclosedTag()
 	{
-		doTest("parse_calls_unclosed_tag", false);
+		doTest(false);
 	}
 
 	public void testCallsFiltering()
 	{
-		doTest("parse_calls_filtering");
+		doTest();
 	}
 
 	public void testCode()
 	{
-		doTest("parse_code");
+		doTest();
 	}
 
 	public void testDef()
 	{
-		doTest("parse_def");
+		doTest();
 	}
 
 	public void testDoc()
 	{
-		doTest("parse_doc");
+		doTest();
 	}
 
 	public void testFilter()
 	{
-		doTest("parse_filter");
+		doTest();
 	}
 
 	public void testFlags()
 	{
-		doTest("parse_flags");
+		doTest();
 	}
 
 	public void testInit()
 	{
-		doTest("parse_init");
+		doTest();
 	}
 
 	public void testMethod()
 	{
-		doTest("parse_method");
+		doTest();
 	}
 
 	public void testOnce()
 	{
-		doTest("parse_once");
+		doTest();
 	}
 
 	public void testPerl()
 	{
-		doTest("parse_perl");
+		doTest();
 	}
 
 	public void testShared()
 	{
-		doTest("parse_shared");
+		doTest();
 	}
 
 	public void testText()
 	{
-		doTest("parse_text");
+		doTest();
 	}
 
 	public void testSpaceless()
 	{
-		doTest("parse_spaceless");
+		doTest();
 	}
 
 	public void testEscapedBlock()
 	{
-		doTest("parse_escaped_block");
+		doTest();
 	}
 
 	public void testMasonSample()
 	{
-		doTest("parse_mason_sample");
+		doTest();
 	}
 
 	public void testErrorFilter() throws Exception
 	{
-		String name = "error_filter";
+		String name = "errorFilter";
 		String text = loadFile(name + "." + myFileExt);
 		myFile = createPsiFile(name, text);
 		ensureParsed(myFile);

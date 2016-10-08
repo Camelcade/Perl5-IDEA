@@ -34,24 +34,24 @@ public class PODParserTest extends PerlParserTestBase
 		return "testData/parser/pod";
 	}
 
-	public void testSyntax()
+	public void testHierarchy()
 	{
-		doTest("hierarchy");
+		doTest();
 	}
 
 	public void testOverRecovery()
 	{
-		doTest("over_recovery", false);
+		doTest(false);
 	}
 
 	public void testForBeginContent()
 	{
-		doTest("for_begin_content", false);
+		doTest(false);
 	}
 
 	public void testBeginRecovery()
 	{
-		doTest("begin_recovery", false);
+		doTest(false);
 	}
 
 }

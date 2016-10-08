@@ -38,122 +38,122 @@ public class PerlParserTest extends PerlParserTestBase
 
 	public void testInterpolation()
 	{
-		doTest("interpolation");
+		doTest();
 	}
 
 	public void testCompositeOps()
 	{
-		doTest("composite_ops");
+		doTest();
 	}
 
 	public void testCompositeOpsSpaces()
 	{
-		doTest("composite_ops_spaces", false);
+		doTest(false);
 	}
 
-	public void testAnnotations()
+	public void testAnnotation()
 	{
-		doTest("annotation", false);
+		doTest(false);
 	}
 
 	public void testConstant()
 	{
-		doTest("constant");
+		doTest();
 	}
 
 	public void testBareUtfString()
 	{
-		doTest("bare_utf_string");
+		doTest();
 	}
 
 	public void testLazyParsing()
 	{
-		doTest("lazy_parsing");
+		doTest();
 	}
 
-	public void testParserTest()
+	public void testParserTestSet()
 	{
-		doTest("parser_test_set");
+		doTest();
 	}
 
 	public void testTrickySyntax()
 	{
-		doTest("tricky_syntax");
+		doTest();
 	}
 
 	public void testVariables()
 	{
-		doTest("variables");
+		doTest();
 	}
 
 	public void testMethodSignaturesSimple()
 	{
-		doTest("method_signatures_simple");
+		doTest();
 	}
 
 	public void testUtfIdentifiers()
 	{
-		doTest("utfidentifiers");
+		doTest();
 	}
 
-	public void testSwitch()
+	public void testPerlSwitch()
 	{
-		doTest("perl_switch");
+		doTest();
 	}
 
 	public void testInterpolatedHashArrayElements()
 	{
-		doTest("interpolated_hash_array_elements");
+		doTest();
 	}
 
 	public void testImplicitRegex()
 	{
-		doTest("implicit_regex");
+		doTest();
 	}
 
 	public void testCamelcade94()
 	{
-		doTest("camelcade94", false);
+		doTest(false);
 	}
 
 	public void testIssue855()
 	{
-		doTest("issue855");
+		doTest();
 	}
 
 	public void testIssue867()
 	{
-		doTest("issue867");
+		doTest();
 	}
 
-	public void testregex_n_modifier()
+	public void testRegexNModifier()
 	{
-		doTest("regex_n_modifier");
+		doTest();
 	}
 
-	public void testutf8_package_name()
+	public void testUtf8PackageName()
 	{
-		doTest("utf8_package_name");
+		doTest();
 	}
 
-	public void testhex_bin_numbers_parsing()
+	public void testHexBinNumbersParsing()
 	{
-		doTest("hex_bin_numbers_parsing");
+		doTest();
 	}
 
-	public void test28_backref_style_heredoc()
+	public void test28BackrefStyleHeredoc()
 	{
-		doTest("28_backref_style_heredoc");
+		doTest();
 	}
 
-	public void testheredoc_sequential()
+	public void testHeredocSequential()
 	{
-		doTest("heredoc_sequential");
+		doTest();
 	}
 
-	public void testlabels_parsing()
+	public void testLabelsParsing()
 	{
-		doTest("labels_parsing");
+		doTest();
 	}
 
 	@Override

@@ -37,9 +37,9 @@ public class MojoliciousParserTest extends PerlParserTestBase
 		return "testData/parser/mojolicious";
 	}
 
-	public void testSyntax()
+	public void testMojoParserTest()
 	{
-		doTest("mojo_parser_test");
+		doTest();
 	}
 
 	@Override

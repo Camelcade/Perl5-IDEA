@@ -37,9 +37,9 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase
 		return "testData/parser/embedded";
 	}
 
-	public void testSyntax()
+	public void testParserTest()
 	{
-		doTest("parser_test");
+		doTest();
 	}
 
 	@Override

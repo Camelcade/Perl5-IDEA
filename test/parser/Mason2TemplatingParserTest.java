@@ -38,14 +38,14 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase
 	}
 
 
-	public void testComponent()
+	public void testTestComponent()
 	{
-		doTest("test_component", true);
+		doTest(true);
 	}
 
 	public void testIssue1077()
 	{
-		doTest("issue_1077", true);
+		doTest(true);
 	}
 
 	@Override

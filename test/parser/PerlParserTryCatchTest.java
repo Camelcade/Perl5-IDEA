@@ -32,24 +32,24 @@ public class PerlParserTryCatchTest extends PerlParserTestBase
 		return "testData/parser/perl/TryCatch";
 	}
 
-	public void testSyntax()
+	public void testtry_catch()
 	{
-		doTest("try_catch");
+		doTest();
 	}
 
-	public void testErrorWrongParams()
+	public void testcatch_with_wrong_params()
 	{
-		doTest("catch_with_wrong_params", false);
+		doTest(false);
 	}
 
-	public void testErrorWithoutTry()
+	public void testcatch_without_try()
 	{
-		doTest("catch_without_try", false);
+		doTest(false);
 	}
 
-	public void testErrorWithoutVar()
+	public void testcatch_without_var()
 	{
-		doTest("catch_without_var", false);
+		doTest(false);
 	}
 
 	@Override

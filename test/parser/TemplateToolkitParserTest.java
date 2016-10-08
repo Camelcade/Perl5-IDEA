@@ -36,258 +36,258 @@ public class TemplateToolkitParserTest extends PerlParserTestBase
 
 	public void testOperators()
 	{
-		doTest("operators");
+		doTest();
 	}
 
 	public void testPrecedence()
 	{
-		doTest("precedence");
+		doTest();
 	}
 
 	public void testStrings()
 	{
-		doTest("strings");
+		doTest();
 	}
 
 	public void testHash()
 	{
-		doTest("hash");
+		doTest();
 	}
 
 	public void testSub()
 	{
-		doTest("sub");
+		doTest();
 	}
 
 	public void testArray()
 	{
-		doTest("array");
+		doTest();
 	}
 
 	public void testVariables()
 	{
-		doTest("variables");
+		doTest();
 	}
 
 	public void testChomp()
 	{
-		doTest("chomp");
+		doTest();
 	}
 
 	public void testComments()
 	{
-		doTest("comments");
+		doTest();
 	}
 
 	public void testGet()
 	{
-		doTest("get");
+		doTest();
 	}
 
 	public void testCall()
 	{
-		doTest("call");
+		doTest();
 	}
 
 	public void testSet()
 	{
-		doTest("set");
+		doTest();
 	}
 
 	public void testDefault()
 	{
-		doTest("default");
+		doTest();
 	}
 
 	public void testInsert()
 	{
-		doTest("insert");
+		doTest();
 	}
 
 	public void testInclude()
 	{
-		doTest("include");
+		doTest();
 	}
 
 	public void testProcess()
 	{
-		doTest("process");
+		doTest();
 	}
 
 	public void testBlockNamed()
 	{
-		doTest("block_named");
+		doTest();
 	}
 
 	public void testBlockNamedUnclosed()
 	{
-		doTest("block_named_unclosed", false);
+		doTest(false);
 	}
 
 	public void testBlockAnon()
 	{
-		doTest("block_anon");
+		doTest();
 	}
 
 	public void testBlockAnonUnclosed()
 	{
-		doTest("block_anon_unclosed", false);
+		doTest(false);
 	}
 
 	public void testWrapper()
 	{
-		doTest("wrapper");
+		doTest();
 	}
 
 	public void testWrapperUnclosed()
 	{
-		doTest("wrapper_unclosed", false);
+		doTest(false);
 	}
 
 	public void testIf()
 	{
-		doTest("if");
+		doTest();
 	}
 
 	public void testIfUnclosed()
 	{
-		doTest("if_unclosed", false);
+		doTest(false);
 	}
 
 	public void testSwitch()
 	{
-		doTest("switch");
+		doTest();
 	}
 
 	public void testForeach()
 	{
-		doTest("foreach");
+		doTest();
 	}
 
 	public void testForeachUnclosed()
 	{
-		doTest("foreach_unclosed", false);
+		doTest(false);
 	}
 
 	public void testWhile()
 	{
-		doTest("while");
+		doTest();
 	}
 
 	public void testWhileUnclosed()
 	{
-		doTest("while_unclosed", false);
+		doTest(false);
 	}
 
 
 	public void testFilter()
 	{
-		doTest("filter");
+		doTest();
 	}
 
 	public void testFilterPostfix()
 	{
-		doTest("filter_postfix");
+		doTest();
 	}
 
 	public void testFilterUnclosed()
 	{
-		doTest("filter_unclosed", false);
+		doTest(false);
 	}
 
 	public void testThrow()
 	{
-		doTest("throw");
+		doTest();
 	}
 
 	public void testUse()
 	{
-		doTest("use");
+		doTest();
 	}
 
 	public void testMacro()
 	{
-		doTest("macro");
+		doTest();
 	}
 
 	public void testPerl()
 	{
-		doTest("perl");
+		doTest();
 	}
 
 	public void testPerlUnclosed()
 	{
-		doTest("perl_unclosed", false);
+		doTest(false);
 	}
 
 	public void testTryCatch()
 	{
-		doTest("try_catch");
+		doTest();
 	}
 
 	public void testTryCatchUnclosed()
 	{
-		doTest("try_catch_unclosed", false);
+		doTest(false);
 	}
 
 	public void testNext()
 	{
-		doTest("next");
+		doTest();
 	}
 
 	public void testLast()
 	{
-		doTest("last");
+		doTest();
 	}
 
 	public void testReturn()
 	{
-		doTest("return");
+		doTest();
 	}
 
 	public void testStop()
 	{
-		doTest("stop");
+		doTest();
 	}
 
 	public void testClear()
 	{
-		doTest("clear");
+		doTest();
 	}
 
 	public void testMeta()
 	{
-		doTest("meta");
+		doTest();
 	}
 
 	public void testDebug()
 	{
-		doTest("debug");
+		doTest();
 	}
 
 	public void testTags()
 	{
-		doTest("tags");
+		doTest();
 	}
 
 	public void testChompMarkers()
 	{
-		doTest("chomp_markers");
+		doTest();
 	}
 
-	public void testMultiDirectiveBlocks()
+	public void testMultiDirectivesBlocks()
 	{
-		doTest("multi_directives_blocks");
+		doTest();
 	}
 
 	public void testIssue1262()
 	{
-		doTest("issue1262");
+		doTest();
 	}
 
 	public void testIssue1263()
 	{
-		doTest("issue1263");
+		doTest();
 	}
 
 }

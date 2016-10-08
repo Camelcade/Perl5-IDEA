@@ -39,8 +39,6 @@ import java.io.IOException;
  */
 public abstract class PerlParserTestBase extends ParsingTestCase
 {
-	protected String myFileName;
-
 	public PerlParserTestBase()
 	{
 		this("", "pl", new PerlParserDefinition());
@@ -51,36 +49,17 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		super(dataPath, fileExt, definitions);
 	}
 
+	/*
+			if (checkErrors)
+				assertFalse(
+						"PsiFile contains error elements",
+						toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+				);
+	*/
 	public void doTest()
 	{
-		String name = getName();
-		doTest(getTestName(name, true));
-	}
-
-	public void doTest(String filename)
-	{
-		doTest(filename, true);
-	}
-
-	public void doTest(String filename, boolean checkErrors)
-	{
-		myFileName = filename;
 		doTest(true);
-
-		if (checkErrors)
-			assertFalse(
-					"PsiFile contains error elements",
-					toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-			);
 	}
-
-
-	@Override
-	protected String getTestName(boolean lowercaseFirstLetter)
-	{
-		return myFileName;
-	}
-
 
 	@Override
 	protected boolean skipSpaces()
