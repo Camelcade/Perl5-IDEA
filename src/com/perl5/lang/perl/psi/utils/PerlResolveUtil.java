@@ -48,21 +48,7 @@ public class PerlResolveUtil
 			}
 			lastParent = run;
 
-			if (run instanceof PsiFile)
-			{
-				if (run instanceof PerlFileImpl)
-				{
-					run = ((PerlFileImpl) ((PerlFileImpl) run).getOriginalFile()).getContext();
-				}
-				else
-				{
-					run = null;
-				}
-			}
-			else
-			{
-				run = run.getParent();
-			}
+			run = run.getContext();
 		}
 		return true;
 	}
