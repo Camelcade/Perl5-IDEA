@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.btr.proxy.search.browser.ie.IELocalByPassFilter;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.*;
@@ -25,14 +27,14 @@ import java.util.regex.Pattern;
 
 public class RegexBlock implements PerlElementTypes
 {
-	public static final HashMap<String, List<Character>> allowedModifiers = new HashMap<String, List<Character>>();
+	public static final HashMap<IElementType, List<Character>> allowedModifiers = new HashMap<IElementType, List<Character>>();
 	public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
 
 	static
 	{
-		allowedModifiers.put("s", Arrays.asList(ArrayUtils.toObject("nmsixpodualgcer".toCharArray())));
-		allowedModifiers.put("m", Arrays.asList(ArrayUtils.toObject("nmsixpodualgc".toCharArray())));
-		allowedModifiers.put("qr", Arrays.asList(ArrayUtils.toObject("nmsixpodual".toCharArray())));
+		allowedModifiers.put(RESERVED_S, Arrays.asList(ArrayUtils.toObject("nmsixpodualgcer".toCharArray())));
+		allowedModifiers.put(RESERVED_M, Arrays.asList(ArrayUtils.toObject("nmsixpodualgc".toCharArray())));
+		allowedModifiers.put(RESERVED_QR, Arrays.asList(ArrayUtils.toObject("nmsixpodual".toCharArray())));
 	}
 
 	protected int startOffset;
