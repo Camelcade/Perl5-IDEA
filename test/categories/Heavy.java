@@ -14,34 +14,11 @@
  * limitations under the License.
  */
 
-package parserHeavy;
+package categories;
 
 /**
- * Created by hurricup on 28.02.2016.
+ * Created by hurricup on 08.10.2016.
  */
-public class PerlParserTestPPIToken extends PerlParserTestPPIBase
+public interface Heavy
 {
-	private static final String myGroup = "07_token";
-
-	@Override
-	protected String getTestsGroup()
-	{
-		return myGroup;
-	}
-
-	public void testExp()
-	{
-		doTest("exp");
-	}
-
-	public void testRangeOperator()
-	{
-		doTest("range_operator");
-	}
-
-	public void testSmartMatch()
-	{
-		doTest("smart_match");
-	}
-
 }

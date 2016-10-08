@@ -19,14 +19,20 @@ package parserHeavy;
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlSourcesParserTestComp extends PerlSourcesParserTestAbstract
+
+import categories.Heavy;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
+
+@Category(Heavy.class)
+public class PerlSourcesParserTestComp extends PerlParserTestBase
 {
-	private static final String GROUP = "comp";
+	public static final String DATA_PATH = "testDataHeavy/parser/perl5/comp";
 
 	@Override
-	protected String getTestsGroup()
+	protected String getTestDataPath()
 	{
-		return GROUP;
+		return DATA_PATH;
 	}
 
 	public void testbproto()

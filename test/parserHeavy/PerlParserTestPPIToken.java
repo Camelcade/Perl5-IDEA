@@ -19,39 +19,35 @@ package parserHeavy;
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlSourcesParserTestCmd extends PerlSourcesParserTestAbstract
+
+import categories.Heavy;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
+
+@Category(Heavy.class)
+public class PerlParserTestPPIToken extends PerlParserTestBase
 {
-	private static final String GROUP = "cmd";
+	public static final String DATA_PATH = "testDataHeavy/parser/ppi/07_token";
 
 	@Override
-	protected String getTestsGroup()
+	protected String getTestDataPath()
 	{
-		return GROUP;
+		return DATA_PATH;
 	}
 
-	public void testelsif()
+	public void testExp()
 	{
-		doTest("elsif");
+		doTest("exp");
 	}
 
-	public void testfor()
+	public void testrange_operator()
 	{
-		doTest("for");
+		doTest("range_operator");
 	}
 
-	public void testmod()
+	public void testsmart_match()
 	{
-		doTest("mod");
-	}
-
-	public void testsubval()
-	{
-		doTest("subval");
-	}
-
-	public void testswitch()
-	{
-		doTest("switch");
+		doTest("smart_match");
 	}
 
 }

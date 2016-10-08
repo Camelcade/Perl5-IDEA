@@ -19,14 +19,21 @@ package parserHeavy;
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlParserTestPPIRegression extends PerlParserTestPPIBase
+
+import categories.Heavy;
+import categories.Performance;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
+
+@Category(Heavy.class)
+public class PerlParserTestPPIRegression extends PerlParserTestBase
 {
-	private static final String myGroup = "08_regression";
+	public static final String DATA_PATH = "testDataHeavy/parser/ppi/08_regression";
 
 	@Override
-	protected String getTestsGroup()
+	protected String getTestDataPath()
 	{
-		return myGroup;
+		return DATA_PATH;
 	}
 
 	public void test01_rt_cpan_19629()

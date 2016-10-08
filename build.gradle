@@ -37,11 +37,10 @@ sourceSets {
         resources.srcDir 'resources'
     }
     test {
+        java.srcDir 'test'
         if (project.hasProperty("heavy")) {
-            java.srcDirs 'test', 'testHeavy'
             resources.srcDirs 'testData', 'testDataHeavy'
         } else {
-            java.srcDir 'test'
             resources.srcDir 'testData'
         }
     }
@@ -73,6 +72,11 @@ test {
             includeCategories 'categories.Performance'
         } else {
             excludeCategories 'categories.Performance'
+        }
+        if (project.hasProperty("heavy")) {
+            includeCategories 'categories.Heavy'
+        } else {
+            excludeCategories 'categories.Heavy'
         }
     }
     testLogging {

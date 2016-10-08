@@ -16,19 +16,48 @@
 
 package parserHeavy;
 
-import parser.PerlParserSubtestBase;
-
 /**
  * Created by hurricup on 28.02.2016.
  */
-public abstract class PerlSourcesParserTestAbstract extends PerlParserSubtestBase
+
+import categories.Heavy;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
+
+@Category(Heavy.class)
+public class PerlSourcesParserTestCmd extends PerlParserTestBase
 {
-	public static final String DATA_PATH = "testDataHeavy/parser/perl5";
+	public static final String DATA_PATH = "testDataHeavy/parser/perl5/cmd";
 
 	@Override
 	protected String getTestDataPath()
 	{
 		return DATA_PATH;
+	}
+
+	public void testelsif()
+	{
+		doTest("elsif");
+	}
+
+	public void testfor()
+	{
+		doTest("for");
+	}
+
+	public void testmod()
+	{
+		doTest("mod");
+	}
+
+	public void testsubval()
+	{
+		doTest("subval");
+	}
+
+	public void testswitch()
+	{
+		doTest("switch");
 	}
 
 }

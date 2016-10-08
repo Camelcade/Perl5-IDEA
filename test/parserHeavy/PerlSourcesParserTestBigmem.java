@@ -16,15 +16,18 @@
 
 package parserHeavy;
 
-import parser.PerlParserSubtestBase;
-
 /**
  * Created by hurricup on 28.02.2016.
- * Following are tests for samples from https://github.com/adamkennedy/PPI
  */
-public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
+
+import categories.Heavy;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
+
+@Category(Heavy.class)
+public class PerlSourcesParserTestBigmem extends PerlParserTestBase
 {
-	public static final String DATA_PATH = "testDataHeavy/parser/ppi";
+	public static final String DATA_PATH = "testDataHeavy/parser/perl5/bigmem";
 
 	@Override
 	protected String getTestDataPath()
@@ -32,4 +35,33 @@ public abstract class PerlParserTestPPIBase extends PerlParserSubtestBase
 		return DATA_PATH;
 	}
 
+	public void testindex()
+	{
+		doTest("index");
+	}
+
+	public void testpos()
+	{
+		doTest("pos");
+	}
+
+	public void testread()
+	{
+		doTest("read");
+	}
+
+	public void testregexp()
+	{
+		doTest("regexp");
+	}
+
+	public void testsubst()
+	{
+		doTest("subst");
+	}
+
+	public void testvec()
+	{
+		doTest("vec");
+	}
 }

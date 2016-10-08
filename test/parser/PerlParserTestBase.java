@@ -56,6 +56,19 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 						toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
 				);
 	*/
+
+	@Deprecated // this is legacy for heavy tests
+	public void doTest(String name)
+	{
+		doTest(true);
+	}
+
+	@Deprecated // this is legacy for heavy tests
+	public void doTest(String name, boolean check)
+	{
+		doTest(check);
+	}
+
 	public void doTest()
 	{
 		doTest(true);

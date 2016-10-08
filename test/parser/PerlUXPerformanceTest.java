@@ -58,7 +58,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 			myFixture.type("\n");
 		}
 
-		final int time = 630;
+		final int time = 1000;
 		PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * time, new ThrowableRunnable()
 		{
 			@Override
@@ -72,7 +72,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 				long length = System.currentTimeMillis() - start;
 				System.err.println("Typing enter done in " + length / iterations + " ms per iteration  of " + time);
 			}
-		}).cpuBound().assertTiming();
+		}).cpuBound().useLegacyScaling().assertTiming();
 	}
 
 	public void testHighlighting()
@@ -95,7 +95,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 			codeAnalyzerEx.getFileLevelHighlights(project, file);
 		}
 
-		final int time = 750;
+		final int time = 1100;
 		PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * time, new ThrowableRunnable()
 		{
 			@Override
@@ -112,7 +112,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 				long length = System.currentTimeMillis() - start;
 				System.err.println("Highlighting done in " + length / iterations + " ms per iteration of " + time);
 			}
-		}).cpuBound().assertTiming();
+		}).cpuBound().useLegacyScaling().assertTiming();
 
 	}
 }

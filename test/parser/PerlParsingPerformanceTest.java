@@ -71,21 +71,18 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase
 		}
 
 		final int time = 400;
-		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, new ThrowableRunnable()
+
+		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
 		{
-			@Override
-			public void run() throws Throwable
+			long start = System.currentTimeMillis();
+			for (int i = 0; i < iterations; i++)
 			{
-				long start = System.currentTimeMillis();
-				for (int i = 0; i < iterations; i++)
-				{
-					PsiFile psiFile = createPsiFile("mytest", testData);
-					psiFile.getFirstChild();
-				}
-				long length = System.currentTimeMillis() - start;
-				System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
+				PsiFile psiFile1 = createPsiFile("mytest", testData);
+				psiFile1.getFirstChild();
 			}
-		}).cpuBound().assertTiming();
+			long length = System.currentTimeMillis() - start;
+			System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
+		}).cpuBound().useLegacyScaling().assertTiming();
 
 //		analyzeFile(psiFile);
 	}

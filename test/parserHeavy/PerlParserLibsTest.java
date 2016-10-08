@@ -16,25 +16,23 @@
 
 package parserHeavy;
 
-import parser.PerlParserSubtestBase;
+import categories.Heavy;
+import categories.Performance;
+import org.junit.experimental.categories.Category;
+import parser.PerlParserTestBase;
 
 /**
  * Created by hurricup on 28.02.2016.
  */
-public class PerlParserLibsTest extends PerlParserSubtestBase
+@Category(Heavy.class)
+public class PerlParserLibsTest extends PerlParserTestBase
 {
-	public static final String DATA_PATH = "testDataHeavy/parser";
+	public static final String DATA_PATH = "testDataHeavy/parser/perl5libs";
 
 	@Override
 	protected String getTestDataPath()
 	{
 		return DATA_PATH;
-	}
-
-	@Override
-	protected String getTestsGroup()
-	{
-		return "perl5libs";
 	}
 
 	public void testAlgorithm_C3_pm()
