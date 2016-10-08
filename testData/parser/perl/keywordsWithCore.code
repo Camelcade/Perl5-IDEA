@@ -1,0 +1,96 @@
+if($var){}
+elsif($var){}
+else{$var}
+
+given ($var)
+{
+    when($var){}
+    default{}
+}
+while($var){} continue {}
+until($var){}
+for(my $i; $i < 100; $i++){}
+foreach my $element (@list){}
+
+format some =
+.
+
+sub subname{}
+sub{};
+package Foo;
+use warnings;
+no warnings;
+require warnings;
+undef;
+print "some";
+printf "pattern", $var;
+say "some";
+grep{}
+    map{};
+qw//;
+qq//;
+q//;
+qx//;
+tr///;
+y///;
+s///;
+qr//;
+m//;
+my $var;
+our $var;
+local $var;
+do{};
+eval{};
+goto LABEL;
+redo LABEL;
+next LABEL;
+last LABEL;
+return $var;
+
+CORE::if($var){}
+CORE::elsif($var){}
+CORE::else{$var}
+
+CORE::given ($var)
+{
+    CORE::when($var){}
+    CORE::default{}
+}
+CORE::while($var){} CORE::continue {}
+CORE::until($var){}
+CORE::for(CORE::my $i; $i < 100; $i++){}
+CORE::foreach CORE::my $element (@list){}
+
+CORE::format some =
+.
+CORE::sub subname{}
+CORE::sub{};
+CORE::package Foo;
+CORE::use warnings;
+CORE::no warnings;
+CORE::require warnings;
+CORE::undef;
+CORE::print "some";
+CORE::printf "pattern", $var;
+CORE::say "some";
+CORE::grep{};
+CORE::map{};
+CORE::qw//;
+CORE::qq//;
+CORE::q//;
+CORE::qx//;
+CORE::tr///;
+CORE::y///;
+CORE::s///;
+CORE::qr//;
+CORE::m//;
+CORE::my $var;
+CORE::our $var;
+CORE::local $var;
+CORE::do{};
+CORE::eval{};
+CORE::goto LABEL;
+CORE::redo LABEL;
+CORE::next LABEL;
+CORE::last LABEL;
+CORE::return $var;

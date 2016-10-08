@@ -28,6 +28,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ import java.io.Reader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE_FULL;
 
 public class PerlLexer extends PerlLexerGenerated
 {
@@ -436,7 +439,7 @@ public class PerlLexer extends PerlLexerGenerated
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
-	CharSequence regexCommand = null;
+	protected IElementType regexCommand = null;
 
 	public PerlLexer(Project project)
 	{
@@ -1349,7 +1352,7 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			allowSharpQuote = true;
 			isEscaped = false;
-			regexCommand = "m";
+			regexCommand = RESERVED_M;
 			sectionsNumber = 1;
 			pushState();
 			return parseRegex(getTokenStart());
@@ -1404,13 +1407,13 @@ public class PerlLexer extends PerlLexerGenerated
 	/**
 	 * Sets up regex parser
 	 */
-	public void processRegexOpener()
+	public void processRegexOpener(IElementType tokenType)
 	{
 		allowSharpQuote = true;
 		isEscaped = false;
-		regexCommand = yytext();
+		regexCommand = tokenType;
 
-		if (StringUtil.equals("s", regexCommand))    // two sections s
+		if (regexCommand == RESERVED_S)    // two sections s
 		{
 			sectionsNumber = 2;
 		}
@@ -1646,7 +1649,8 @@ public class PerlLexer extends PerlLexerGenerated
 		// check modifiers for x
 		boolean isExtended = false;
 		boolean isEvaluated = false;
-		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand == null ? null : regexCommand.toString());
+		assert regexCommand != null;
+		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
@@ -1962,25 +1966,34 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType parsePackage()
 	{
-		String tokenText = yytext().toString();
+		CharSequence tokenText = yytext();
 
 		// check if it's cmp'
-		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && tokenText.substring(0, 3).equals("cmp"))
+		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && tokenText.subSequence(0, 3).equals("cmp"))
 		{
 			yypushback(tokenText.length() - 3);
 			return getIdentifierToken();
 		}
 		// check if it's qw|qr|qx|qq|tr|ne|eq|gt|lt|ge|le'
-		else if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 2)))
+		else if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.subSequence(0, 2).toString()))
 		{
 			yypushback(tokenText.length() - 2);
 			return getIdentifierToken();
 		}
 		// check if it's m|q|s|y'
-		else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.substring(0, 1)))
+		else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.subSequence(0, 1).toString()))
 		{
 			yypushback(tokenText.length() - 1);
 			return getIdentifierToken();
+		}
+
+		if (StringUtil.startsWith(tokenText, CORE_PACKAGE_FULL))
+		{
+			IElementType reservedTokenType = RESERVED_TOKEN_TYPES.get(tokenText.subSequence(CORE_PACKAGE_FULL.length(), tokenText.length()).toString());
+			if (reservedTokenType != null)
+			{
+				return reservedTokenType;
+			}
 		}
 
 		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
@@ -2129,7 +2142,7 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 			{
-				processRegexOpener();
+				processRegexOpener(tokenType);
 			}
 			else if (tokenType == RESERVED_MY || tokenType == RESERVED_OUR || tokenType == RESERVED_STATE)
 			{

@@ -99,8 +99,6 @@ SQL
 
 
 
-CORE::package main;
-
 # tailing comma
 
 $x123;
@@ -182,7 +180,6 @@ if ( my $comment = $self->msg_comment($msgid) ) {
 }
 
 $var[time];
-$var[CORE::time];
 $var[HTML::Template::LOOP::PARAM_SET];
 $self->{param_map}{$name}[HTML::Template::LOOP::PARAM_SET];
 
@@ -202,9 +199,6 @@ for(1..10)
     say;
 }
 
-CORE::given ( $self->{buffer} ) {
-}
-
 given ( $self->{buffer} ) {
     when ( $_ =~ /^Subroutine [\w:]+ not found[.]/sxm ) {
         return 0;
@@ -215,18 +209,12 @@ given ( $self->{buffer} ) {
     when ( $_ =~ /^\d+ levels deep in subroutine calls!/sxm ) {
         return 0;
     }
-    CORE::when ( $_ =~ /^Already in/m ) {
-        return 1;
-    }
     when ( $_ =~ /\S/sxm ) {
 
         # say 'Non-whitespace charter found';
         return 0;
     }
     default {
-        return 1;
-    }
-    CORE::default {
         return 1;
     }
     print "something" when 100;
@@ -244,19 +232,7 @@ q'test';
 qq'test';
 qx'test';
 
-return CORE::exit(1);
-
 # Log::Agent::File::Native  print magic doesn't work here
-return CORE::print $glob @_;
-return CORE::printf $glob @_;
-return CORE::say $glob @_;
-
-
-CORE::if(1){}
-CORE::elsif(2){}
-CORE::else{}
-
-CORE::m//;
 
 # Pod::Main Config::Perl::V
 if ($$self{MAGIC_EMDASH}) {

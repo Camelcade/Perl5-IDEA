@@ -51,6 +51,12 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		super(dataPath, fileExt, definitions);
 	}
 
+	public void doTest()
+	{
+		String name = getName();
+		doTest(getTestName(name, true));
+	}
+
 	public void doTest(String filename)
 	{
 		doTest(filename, true);
