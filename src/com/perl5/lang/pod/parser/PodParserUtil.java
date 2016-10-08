@@ -17,8 +17,8 @@
 package com.perl5.lang.pod.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.compat.parser.GeneratedParserUtilBase;
 import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 
