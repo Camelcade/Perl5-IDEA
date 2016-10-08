@@ -30,7 +30,7 @@ import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -322,7 +322,7 @@ public class PerlVariableCompletionUtil
 				return true;
 			}
 		};
-		PerlScopeUtil.treeWalkUp(variableNameElement, processor);
+		PerlResolveUtil.treeWalkUp(variableNameElement, processor);
 	}
 
 

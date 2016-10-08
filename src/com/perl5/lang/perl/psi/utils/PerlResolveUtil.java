@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlScopeUtil
+public class PerlResolveUtil
 {
 	public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor)
 	{
@@ -115,7 +115,7 @@ public class PerlScopeUtil
 			return null;
 		}
 		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
-		PerlScopeUtil.treeWalkUp(variable, variableProcessor);
+		PerlResolveUtil.treeWalkUp(variable, variableProcessor);
 		return variableProcessor.getResult();
 	}
 

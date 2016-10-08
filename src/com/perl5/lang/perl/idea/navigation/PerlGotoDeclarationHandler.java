@@ -24,7 +24,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 				if (variableContainer instanceof PerlVariableDeclarationWrapper)
 				{
 
-					PerlVariableDeclarationWrapper shadowedVariable = PerlScopeUtil.getLexicalDeclaration((PerlVariable) variable);
+					PerlVariableDeclarationWrapper shadowedVariable = PerlResolveUtil.getLexicalDeclaration((PerlVariable) variable);
 					if (shadowedVariable != null && !result.contains(shadowedVariable))
 					{
 						result.add(shadowedVariable);

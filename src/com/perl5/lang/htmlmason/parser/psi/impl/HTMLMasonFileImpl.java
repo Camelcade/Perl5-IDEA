@@ -74,7 +74,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		myBlocksCache = new MyBlocksCache(this);
 	}
 
-	// fixme this is a cut version from PerlScopeUtil to make implicit vars checking in the last order
+	// fixme this is a cut version from PerlResolveUtil to make implicit vars checking in the last order
 	public static boolean processChildren(@NotNull PsiElement element,
 										  @NotNull PsiScopeProcessor processor,
 										  @NotNull ResolveState resolveState,

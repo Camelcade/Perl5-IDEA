@@ -23,7 +23,7 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.tt2.psi.TemplateToolkitPerlBlockElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -83,7 +83,7 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
 	@Override
 	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
 	{
-		return PerlScopeUtil.processChildren(
+		return PerlResolveUtil.processChildren(
 				this,
 				processor,
 				state,

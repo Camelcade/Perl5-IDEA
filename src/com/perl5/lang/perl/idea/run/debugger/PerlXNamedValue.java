@@ -35,7 +35,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlDebugUtils;
 import org.jetbrains.annotations.NotNull;
@@ -209,7 +209,7 @@ public class PerlXNamedValue extends XNamedValue
 		if (navigatable != null)
 		{
 			PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
-			PerlScopeUtil.treeWalkUp(element, variableProcessor);
+			PerlResolveUtil.treeWalkUp(element, variableProcessor);
 
 			PerlVariableDeclarationWrapper result = variableProcessor.getResult();
 			if (result == null)
@@ -283,7 +283,7 @@ public class PerlXNamedValue extends XNamedValue
 				}
 			};
 
-			PerlScopeUtil.treeWalkUp(element, variableProcessor);
+			PerlResolveUtil.treeWalkUp(element, variableProcessor);
 			return found[0];
 
 		}

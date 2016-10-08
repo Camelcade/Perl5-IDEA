@@ -24,7 +24,7 @@ import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
-import com.perl5.lang.perl.psi.utils.PerlScopeUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -55,7 +55,7 @@ public class PerlVariableReferenceResolver implements ResolveCache.PolyVariantRe
 			return ResolveResult.EMPTY_ARRAY;
 		}
 
-		PerlVariableDeclarationWrapper lexicalDeclaration = PerlScopeUtil.getLexicalDeclaration(myVariable);
+		PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
 
 		if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlVariableLight))
 		{
