@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.util;
 
 import com.intellij.codeInsight.documentation.DocumentationManager;
+import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -192,7 +193,7 @@ public class PodRenderUtil implements PodElementTypes
 
 		if (isPsi)
 		{
-			builder.append(DocumentationManager.PSI_ELEMENT_PROTOCOL);
+			builder.append(DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL);
 			builder.append(PodRenderUtil.encodeLink(link));
 		}
 		else

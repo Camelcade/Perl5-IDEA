@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.intellij.util.indexing.IdFilter;
+import com.intellij.util.indexing.IdIterator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -80,6 +81,13 @@ public class PerlStubIndex extends StubIndex implements ApplicationComponent
 	public void disposeComponent()
 	{
 
+	}
+
+	@NotNull
+	@Override
+	public <Key> IdIterator getContainingIds(@NotNull StubIndexKey<Key, ?> stubIndexKey, @NotNull Key key, @NotNull Project project, @NotNull GlobalSearchScope globalSearchScope)
+	{
+		return StubIndex.getInstance().getContainingIds(stubIndexKey, key, project, globalSearchScope);
 	}
 
 	public <Key, Psi extends PsiElement> boolean isIndexAvailable(@NotNull StubIndexKey<Key, Psi> indexKey)

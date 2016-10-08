@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
+buildscript {
+    repositories {
+        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+    }
+}
+
 plugins {
-    id 'org.jetbrains.intellij' version '0.0.40'
+    id "org.jetbrains.intellij" version "0.1.9"
 }
 
 version = "$version$buildNumber"
 
 apply plugin: 'java'
 sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+targetCompatibility = javaTargetVersion
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
 sourceSets {
