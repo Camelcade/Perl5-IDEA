@@ -28,7 +28,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
@@ -1650,7 +1649,7 @@ public class PerlLexer extends PerlLexerGenerated
 		boolean isExtended = false;
 		boolean isEvaluated = false;
 		assert regexCommand != null;
-		List<Character> allowedModifiers = RegexBlock.allowedModifiers.get(regexCommand);
+		List<Character> allowedModifiers = RegexBlock.ALLOWED_MODIFIERS.get(regexCommand);
 		int modifiersEnd = currentOffset;
 		ArrayList<CustomToken> modifierTokens = new ArrayList<CustomToken>();
 
