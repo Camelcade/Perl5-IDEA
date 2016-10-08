@@ -16,14 +16,20 @@
 
 package parser;
 
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.util.ThrowableRunnable;
 import gnu.trove.THashMap;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -31,7 +37,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 /**
  * Created by hurricup on 02.10.2016.
  */
-public class PerlParserPerformanceTest extends PerlParserTestBase
+public class PerlParsingPerformanceTest extends PerlParserTestBase
 {
 	@Override
 	protected String getTestDataPath()
@@ -39,46 +45,45 @@ public class PerlParserPerformanceTest extends PerlParserTestBase
 		return "testData/parser/performance";
 	}
 
-	public void testlabels_parsing()
+	public void testPerlTidyParsing()
 	{
-/*
-		myFileName = "perltidy";
+
+		final String testData;
 		try
 		{
-			String testName = getTestName(false);
-			String text = loadFile(testName + "." + myFileExt);
-			PsiFile psiFile = null;
-
-			System.err.println("Warming up...");
-			int times = 50;
-
-			for (int i = 0; i < times; i++)
-			{
-				psiFile = createPsiFile(testName, text);
-				psiFile.getFirstChild();
-			}
-
-			System.err.println("Testing...");
-			long startTime = System.currentTimeMillis();
-
-			for (int i = 0; i < times; i++)
-			{
-				psiFile = createPsiFile(testName, text);
-				psiFile.getFirstChild();
-			}
-
-			long endTime = System.currentTimeMillis();
-			long length = endTime - startTime;
-			System.err.println("Done in " + length + " ms; " + length / times + " per parse");
-
-			analyzeFile(psiFile);
-
+			testData = FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
 		}
 		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
-*/
+
+		final int iterations = 30;
+
+		PsiFile psiFile = null;
+		for (int i = 0; i < iterations; i++)
+		{
+			psiFile = createPsiFile("test", testData);
+			psiFile.getFirstChild();
+		}
+
+		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * 400, new ThrowableRunnable()
+		{
+			@Override
+			public void run() throws Throwable
+			{
+				long start = System.currentTimeMillis();
+				for (int i = 0; i < iterations; i++)
+				{
+					PsiFile psiFile = createPsiFile("mytest", testData);
+					psiFile.getFirstChild();
+				}
+				long length = System.currentTimeMillis() - start;
+				System.err.println("Parsing done in " + length / iterations + " ms per iteration");
+			}
+		}).cpuBound().assertTiming();
+
+//		analyzeFile(psiFile);
 	}
 
 	private static final TokenSet TERMINAL_TOKENS = TokenSet.create(

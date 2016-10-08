@@ -1,0 +1,111 @@
+/*
+ * Copyright 2016 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package parser;
+
+import base.PerlLightCodeInsightFixtureTestCase;
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
+import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
+import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
+import com.intellij.codeInsight.daemon.impl.HighlightInfo;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.LogicalPosition;
+import com.intellij.openapi.fileEditor.TextEditor;
+import com.intellij.openapi.fileEditor.impl.text.TextEditorProvider;
+import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.PsiModificationTrackerImpl;
+import com.intellij.psi.util.PsiModificationTracker;
+import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.util.ArrayUtil;
+import com.intellij.util.ThrowableRunnable;
+import com.intellij.util.ui.UIUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by hurricup on 07.10.2016.
+ */
+public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
+{
+	public void testEnterTyping()
+	{
+		initWithPerlTidy();
+		myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65,0));
+		final int iterations = 20;
+		for (int i = 0; i < iterations; i++)
+		{
+			myFixture.type("\n");
+		}
+
+		PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * 630, new ThrowableRunnable()
+		{
+			@Override
+			public void run() throws Throwable
+			{
+				long start = System.currentTimeMillis();
+				for (int i = 0; i < iterations; i++)
+				{
+					myFixture.type("\n");
+				}
+				long length = System.currentTimeMillis() - start;
+				System.err.println("Typing enter done in " + length / iterations + " ms per iteration");
+			}
+		}).cpuBound().assertTiming();
+	}
+
+	public void testHighlighting()
+	{
+		initWithPerlTidy();
+		final PsiFile file = getFile();
+		final Editor editor = getEditor();
+		final Project project = getProject();
+		final DaemonCodeAnalyzerImpl codeAnalyzer = (DaemonCodeAnalyzerImpl) DaemonCodeAnalyzer.getInstance(project);
+		final TextEditor textEditor = TextEditorProvider.getInstance().getTextEditor(editor);
+		DaemonCodeAnalyzerEx codeAnalyzerEx = DaemonCodeAnalyzerEx.getInstanceEx(project);
+
+		final int iterations = 30;
+		for (int i = 0; i < iterations; i++)
+		{
+			codeAnalyzer.restart();
+			((PsiModificationTrackerImpl) getPsiManager().getModificationTracker()).incCounter();
+			codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
+			codeAnalyzerEx.getFileLevelHighlights(project, file);
+		}
+
+		PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * 750, new ThrowableRunnable()
+		{
+			@Override
+			public void run() throws Throwable
+			{
+				long start = System.currentTimeMillis();
+				for (int i = 0; i < iterations; i++)
+				{
+					codeAnalyzer.restart();
+					((PsiModificationTrackerImpl) getPsiManager().getModificationTracker()).incCounter();
+					codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
+					DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
+				}
+				long length = System.currentTimeMillis() - start;
+				System.err.println("Highlighting done in " + length / iterations + " ms per iteration");
+			}
+		}).cpuBound().assertTiming();
+
+	}
+}
