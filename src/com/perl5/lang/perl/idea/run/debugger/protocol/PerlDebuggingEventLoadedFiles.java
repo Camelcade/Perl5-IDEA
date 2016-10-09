@@ -18,6 +18,9 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hurricup on 14.05.2016.
  */
@@ -31,6 +34,10 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 	{
 		PerlScriptsPanel evalsListPanel = getDebugThread().getEvalsListPanel();
 		PerlScriptsPanel scriptListPanel = getDebugThread().getScriptListPanel();
+		List<PerlLoadedFileDescriptor> evalRemove = new ArrayList<PerlLoadedFileDescriptor>();
+		List<PerlLoadedFileDescriptor> evalAdd = new ArrayList<PerlLoadedFileDescriptor>();
+		List<PerlLoadedFileDescriptor> scriptRemove = new ArrayList<PerlLoadedFileDescriptor>();
+		List<PerlLoadedFileDescriptor> scriptAdd = new ArrayList<PerlLoadedFileDescriptor>();
 
 		for (PerlLoadedFileDescriptor fileDescriptor : add)
 		{
@@ -38,11 +45,13 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 			{
 				if (fileDescriptor.isEval())
 				{
-					evalsListPanel.replace(fileDescriptor);
+					evalRemove.add(fileDescriptor);
+					evalAdd.add(fileDescriptor);
 				}
 				else
 				{
-					scriptListPanel.replace(fileDescriptor);
+					scriptRemove.add(fileDescriptor);
+					scriptAdd.add(fileDescriptor);
 				}
 			}
 		}
@@ -54,14 +63,16 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase
 				if (fileDescriptor.isEval())
 				{
 					// fixme we should check if file source is loaded and mark it as unloaded or smth
-					evalsListPanel.remove(fileDescriptor);
+					evalRemove.add(fileDescriptor);
 				}
 				else
 				{
-					scriptListPanel.remove(fileDescriptor);
+					scriptRemove.add(fileDescriptor);
 				}
 			}
 		}
 
+		evalsListPanel.bulkChange(evalAdd, evalRemove);
+		scriptListPanel.bulkChange(scriptAdd, scriptRemove);
 	}
 }
