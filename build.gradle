@@ -38,11 +38,7 @@ sourceSets {
     }
     test {
         java.srcDir 'test'
-        if (project.hasProperty("heavy")) {
-            resources.srcDirs 'testData', 'testDataHeavy'
-        } else {
-            resources.srcDir 'testData'
-        }
+        resources.srcDirs 'testData', 'testDataHeavy'
     }
 }
 
@@ -50,21 +46,19 @@ apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    if( project.hasProperty('idea_sandbox')) {
+    if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
-    }
-    else
-    {
+    } else {
         sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
     }
-    if( project.hasProperty('idea_path')) {
+    if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
     updateSinceUntilBuild = false
 }
 
 test {
-    doFirst{
+    doFirst {
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
     }
     useJUnit {
@@ -184,7 +178,7 @@ task generatePerlLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst+ "PerlLexerGenerated.java")
+    outputs.file file(dst + "PerlLexerGenerated.java")
 
     classpath configurations.lexer
 }
@@ -238,7 +232,7 @@ task generatePerlStringLexer(type: JavaExec) {
     classpath configurations.lexer
 }
 
-task generateLexers{
+task generateLexers {
     dependsOn generatePerlLexer
     dependsOn generatePerlAnnotationsLexer
     dependsOn generatePerlStringLexer
@@ -246,11 +240,10 @@ task generateLexers{
     dependsOn generateTT2Lexer
 }
 
-
 // doesn't work
 jar.archiveName = "camelcade.jar"
 
 
-compileJava{
+compileJava {
     dependsOn generateLexers
 }
