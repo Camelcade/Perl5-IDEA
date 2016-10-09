@@ -195,7 +195,7 @@ head4_section_content ::= head4_section_item *
 private head4_section_item ::= any_level_item
 
 over_section ::= over_section_opener  over_section_content over_section_closer {pin=1}
-private over_section_opener ::= POD_OVER [<<checkAndConvert POD_NUMBER POD_INDENT_LEVEL>>] POD_NEWLINE+ {pin=1}
+private over_section_opener ::= POD_OVER [<<checkAndConvert 'POD_NUMBER, POD_INDENT_LEVEL'>>] POD_NEWLINE+ {pin=1}
 private over_section_closer ::= POD_BACK POD_NEWLINE* {pin=1}
 over_section_content ::= over_section_item* {recoverWhile=recover_over_section}
 private over_section_item ::=
@@ -208,11 +208,11 @@ private recover_over_section ::= !(<<eof>>|POD_BACK|POD_HEAD1|POD_HEAD2|POD_HEAD
 begin_section ::= POD_BEGIN parse_begin_section_content begin_section_closer  {pin=1}
 private begin_section_closer ::= POD_END pod_section_format POD_NEWLINE* {pin=1}
 
-pod_section_format ::= POD_COLON ? <<collapseNonSpaceTo POD_FORMAT_NAME>>
+pod_section_format ::= POD_COLON ? <<collapseNonSpaceTo 'POD_FORMAT_NAME '>>
 
 private parse_begin_section_content ::=
 	&POD_COLON pod_section_format begin_section_content
-	| pod_section_format <<parsePodSectionContent POD_END BEGIN_SECTION_CONTENT "Unclosed begin-end section">>
+	| pod_section_format <<parsePodSectionContent 'POD_END, BEGIN_SECTION_CONTENT, "Unclosed begin-end section"'>>
 
 begin_section_content ::= {pod_term|POD_NEWLINE}* {recoverWhile=recover_begin_section} // fixme we should merge when no colon in format
 private recover_begin_section ::= !(<<eof>>|POD_END|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
@@ -220,11 +220,11 @@ private recover_begin_section ::= !(<<eof>>|POD_END|POD_HEAD1|POD_HEAD2|POD_HEAD
 for_section ::= POD_FOR parse_for_section_content POD_NEWLINE *{pin=1}
 private parse_for_section_content ::=
 	&POD_COLON pod_section_format for_section_content
-	 | pod_section_format <<parsePodSectionContent POD_NEWLINE FOR_SECTION_CONTENT "Unclosed for section">>
+	 | pod_section_format <<parsePodSectionContent 'POD_NEWLINE, FOR_SECTION_CONTENT, "Unclosed for section"'>>
 
 for_section_content ::=	pod_term * // fixme we should merge when no colon in format
 
-encoding_section ::= POD_ENCODING <<collapseNonSpaceTo POD_ENCODING_NAME>> POD_NEWLINE+ {pin=1}
+encoding_section ::= POD_ENCODING <<collapseNonSpaceTo 'POD_ENCODING_NAME '>> POD_NEWLINE+ {pin=1}
 
 cut_section ::= POD_CUT [parse_section_title] POD_NEWLINE* {pin=1}
 

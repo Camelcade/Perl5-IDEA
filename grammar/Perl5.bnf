@@ -477,7 +477,7 @@ private compound_statement ::=
 named_block ::= BLOCK_NAME block
 
 if_compound ::=  RESERVED_IF conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
-unless_compound ::=  RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=1 extends=if_compound}
+unless_compound ::=  RESERVED_UNLESS conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 private if_compound_elsif ::= [POD]  RESERVED_ELSIF conditional_block  {pin=2}
 private if_compound_else ::= [POD]  RESERVED_ELSE unconditional_block {pin=2}
 unconditional_block ::= block
@@ -575,8 +575,8 @@ goto_expr ::=  RESERVED_GOTO [goto_param] {pin=1}
 
 return_expr ::=  RESERVED_RETURN [list_expr] {pin=1}
 
-private lnr_param ::= <<convertIdentifier LABEL>> | expr // fixme scalar_expr ?
-private goto_param ::= <<convertIdentifier LABEL>> | OPERATOR_BITWISE_AND <<convertIdentifier SUB>> | expr // fixme same, scalar expr?
+private lnr_param ::= <<convertIdentifier 'LABEL '>> | expr // fixme scalar_expr ?
+private goto_param ::= <<convertIdentifier 'LABEL '>> | OPERATOR_BITWISE_AND <<convertIdentifier 'SUB '>> | expr // fixme same, scalar expr?
 
 
 statement_modifier ::=
@@ -611,14 +611,14 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
-use_statement_constant ::=  RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_CONSTANT>> [perl_version] [use_constant_parameters] {pin=2}
+use_statement_constant ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_CONSTANT'>> [perl_version] [use_constant_parameters] {pin=2}
 private use_constant_parameters ::=
   constants_block
   | single_constant_definition
   | expr
 
 // other name to extend declaration, not variable
-use_vars_statement ::=  RESERVED_USE <<checkAndCollapseToken PACKAGE PACKAGE_PRAGMA_VARS>> [perl_version] [<<parseUseVarsParameters>>] {pin=2}
+use_vars_statement ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_VARS'>> [perl_version] [<<parseUseVarsParameters>>] {pin=2}
 
 constants_block ::= LEFT_BRACE [constants_block_content] RIGHT_BRACE {pin=1}
 private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_constants_block}
@@ -758,7 +758,7 @@ pref_mm_expr ::= OPERATOR_MINUS_MINUS expr
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
 pow_expr ::= expr (pow_operator expr)+ { rightAssociative=true }
-private pow_operator ::= <<checkAndCollapseToken OPERATOR_POW OPERATOR_MUL OPERATOR_MUL>> !OPERATOR_ASSIGN
+private pow_operator ::= <<checkAndCollapseToken 'OPERATOR_POW, OPERATOR_MUL, OPERATOR_MUL'>> !OPERATOR_ASSIGN
 
 private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
@@ -767,8 +767,8 @@ prefix_minus_as_string_expr ::= <<parseMinusBareword>>
 private operator_prefix_unary ::= (
 	OPERATOR_BITWISE_NOT
 	| OPERATOR_NOT
-	| <<checkAndConvertToken OPERATOR_PLUS_UNARY OPERATOR_PLUS>>
-	| <<checkAndConvertToken OPERATOR_MINUS_UNARY OPERATOR_MINUS>>
+	| <<checkAndConvertToken 'OPERATOR_PLUS_UNARY, OPERATOR_PLUS'>>
+	| <<checkAndConvertToken 'OPERATOR_MINUS_UNARY, OPERATOR_MINUS'>>
 	) !OPERATOR_ASSIGN // not sure we need !OPERATOR_ASSIGN
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
@@ -784,8 +784,8 @@ private operator_shift ::= (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) !OPERATOR_
 
 compare_expr ::= expr (operator_compare) expr
 private operator_compare ::=
-    <<checkAndCollapseToken OPERATOR_GE_NUMERIC OPERATOR_GT_NUMERIC OPERATOR_ASSIGN>>   // >=
-    |<<checkAndCollapseToken OPERATOR_LE_NUMERIC OPERATOR_LT_NUMERIC OPERATOR_ASSIGN>>  // <=
+    <<checkAndCollapseToken 'OPERATOR_GE_NUMERIC, OPERATOR_GT_NUMERIC, OPERATOR_ASSIGN'>>   // >=
+    |<<checkAndCollapseToken 'OPERATOR_LE_NUMERIC, OPERATOR_LT_NUMERIC, OPERATOR_ASSIGN'>>  // <=
     |OPERATOR_GT_NUMERIC
     |OPERATOR_LT_NUMERIC
 
@@ -796,13 +796,13 @@ private operator_compare ::=
 
 equal_expr ::= expr operator_equal expr
 private operator_equal ::=
-    <<checkAndCollapseToken OPERATOR_EQ_NUMERIC OPERATOR_ASSIGN OPERATOR_ASSIGN>> // ==
-    |<<checkAndCollapseToken OPERATOR_NE_NUMERIC OPERATOR_NOT OPERATOR_ASSIGN>>  // !=
+    <<checkAndCollapseToken 'OPERATOR_EQ_NUMERIC, OPERATOR_ASSIGN, OPERATOR_ASSIGN'>> // ==
+    |<<checkAndCollapseToken 'OPERATOR_NE_NUMERIC, OPERATOR_NOT, OPERATOR_ASSIGN'>>  // !=
     |OPERATOR_CMP_NUMERIC
     |OPERATOR_EQ_STR
     |OPERATOR_NE_STR
     |OPERATOR_CMP_STR
-    |<<checkAndCollapseToken OPERATOR_SMARTMATCH OPERATOR_BITWISE_NOT OPERATOR_BITWISE_NOT>> // ~~
+    |<<checkAndCollapseToken 'OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT, OPERATOR_BITWISE_NOT'>> // ~~
 
 bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND !OPERATOR_ASSIGN expr)+
 
@@ -829,22 +829,22 @@ private assign_or_flow_expr ::=
 assign_expr ::= expr (operator_assign expr ) + { rightAssociative=true }
 
 private operator_assign ::=
-    <<checkAndCollapseToken OPERATOR_POW_ASSIGN OPERATOR_MUL OPERATOR_MUL OPERATOR_ASSIGN>>  // **=
-    |<<checkAndCollapseToken OPERATOR_PLUS_ASSIGN OPERATOR_PLUS OPERATOR_ASSIGN>>      // +=
-    |<<checkAndCollapseToken OPERATOR_MINUS_ASSIGN OPERATOR_MINUS OPERATOR_ASSIGN>>     // -=
-    |<<checkAndCollapseToken OPERATOR_MUL_ASSIGN OPERATOR_MUL OPERATOR_ASSIGN>>       // *=
-    |<<checkAndCollapseToken OPERATOR_DIV_ASSIGN OPERATOR_DIV OPERATOR_ASSIGN>>       // /=
-    |<<checkAndCollapseToken OPERATOR_MOD_ASSIGN OPERATOR_MOD OPERATOR_ASSIGN>>       // %=
-    |<<checkAndCollapseToken OPERATOR_CONCAT_ASSIGN OPERATOR_CONCAT OPERATOR_ASSIGN>>    // .=
-    |<<checkAndCollapseToken OPERATOR_X_ASSIGN OPERATOR_X OPERATOR_ASSIGN>>         // x=
-    |<<checkAndCollapseToken OPERATOR_BITWISE_AND_ASSIGN OPERATOR_BITWISE_AND OPERATOR_ASSIGN>>   // &=
-    |<<checkAndCollapseToken OPERATOR_BITWISE_OR_ASSIGN OPERATOR_BITWISE_OR OPERATOR_ASSIGN>>    // |=
-    |<<checkAndCollapseToken OPERATOR_BITWISE_XOR_ASSIGN OPERATOR_BITWISE_XOR OPERATOR_ASSIGN>>   // ^=
-    |<<checkAndCollapseToken OPERATOR_SHIFT_LEFT_ASSIGN OPERATOR_SHIFT_LEFT OPERATOR_ASSIGN>>    //  <<=
-    |<<checkAndCollapseToken OPERATOR_SHIFT_RIGHT_ASSIGN OPERATOR_SHIFT_RIGHT OPERATOR_ASSIGN>>   //  >>=
-    |<<checkAndCollapseToken OPERATOR_AND_ASSIGN OPERATOR_AND OPERATOR_ASSIGN>>           //  &&=
-    |<<checkAndCollapseToken OPERATOR_OR_ASSIGN OPERATOR_OR OPERATOR_ASSIGN>>            //  ||=
-    |<<checkAndCollapseToken OPERATOR_OR_DEFINED_ASSIGN OPERATOR_OR_DEFINED OPERATOR_ASSIGN>>    //  //=
+    <<checkAndCollapseToken 'OPERATOR_POW_ASSIGN, OPERATOR_MUL, OPERATOR_MUL, OPERATOR_ASSIGN'>>  // **=
+    |<<checkAndCollapseToken 'OPERATOR_PLUS_ASSIGN, OPERATOR_PLUS, OPERATOR_ASSIGN'>>      // +=
+    |<<checkAndCollapseToken 'OPERATOR_MINUS_ASSIGN, OPERATOR_MINUS, OPERATOR_ASSIGN'>>     // -=
+    |<<checkAndCollapseToken 'OPERATOR_MUL_ASSIGN, OPERATOR_MUL, OPERATOR_ASSIGN'>>       // *=
+    |<<checkAndCollapseToken 'OPERATOR_DIV_ASSIGN, OPERATOR_DIV, OPERATOR_ASSIGN'>>       // /=
+    |<<checkAndCollapseToken 'OPERATOR_MOD_ASSIGN, OPERATOR_MOD, OPERATOR_ASSIGN'>>       // %=
+    |<<checkAndCollapseToken 'OPERATOR_CONCAT_ASSIGN, OPERATOR_CONCAT, OPERATOR_ASSIGN'>>    // .=
+    |<<checkAndCollapseToken 'OPERATOR_X_ASSIGN, OPERATOR_X, OPERATOR_ASSIGN'>>         // x=
+    |<<checkAndCollapseToken 'OPERATOR_BITWISE_AND_ASSIGN, OPERATOR_BITWISE_AND, OPERATOR_ASSIGN'>>   // &=
+    |<<checkAndCollapseToken 'OPERATOR_BITWISE_OR_ASSIGN, OPERATOR_BITWISE_OR, OPERATOR_ASSIGN'>>    // |=
+    |<<checkAndCollapseToken 'OPERATOR_BITWISE_XOR_ASSIGN, OPERATOR_BITWISE_XOR, OPERATOR_ASSIGN'>>   // ^=
+    |<<checkAndCollapseToken 'OPERATOR_SHIFT_LEFT_ASSIGN, OPERATOR_SHIFT_LEFT, OPERATOR_ASSIGN'>>    //  <<=
+    |<<checkAndCollapseToken 'OPERATOR_SHIFT_RIGHT_ASSIGN, OPERATOR_SHIFT_RIGHT, OPERATOR_ASSIGN'>>   //  >>=
+    |<<checkAndCollapseToken 'OPERATOR_AND_ASSIGN, OPERATOR_AND, OPERATOR_ASSIGN'>>           //  &&=
+    |<<checkAndCollapseToken 'OPERATOR_OR_ASSIGN, OPERATOR_OR, OPERATOR_ASSIGN'>>            //  ||=
+    |<<checkAndCollapseToken 'OPERATOR_OR_DEFINED_ASSIGN, OPERATOR_OR_DEFINED, OPERATOR_ASSIGN'>>    //  //=
     |OPERATOR_ASSIGN !OPERATOR_ASSIGN
 
 comma_sequence_expr ::= expr <<parseCommaSequence>> // fixme implement pinnning
@@ -873,9 +873,9 @@ private parse_call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= <<checkFileReadToken>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
+file_read_expr ::= <<checkFileReadToken>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken 'RIGHT_ANGLE, OPERATOR_GT_NUMERIC'>>
 // this one is used to force parsing, like list_epxr after map, grep or sort; Not sure if we need this after implementing chckFileReadToken
-file_read_forced_expr ::= <<checkAndConvertToken LEFT_ANGLE OPERATOR_LT_NUMERIC>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken RIGHT_ANGLE OPERATOR_GT_NUMERIC>>
+file_read_forced_expr ::= <<checkAndConvertToken 'LEFT_ANGLE, OPERATOR_LT_NUMERIC'>> [read_handle | <<parseFileHandleAsString>> ] <<checkAndConvertToken 'RIGHT_ANGLE, OPERATOR_GT_NUMERIC'>>
 
 read_handle ::= <<parseReadHandle>>
 
@@ -905,12 +905,12 @@ private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
-perl_regex ::= <<parseRegexContent false>>
+perl_regex ::= <<parseRegexContent 'false'>>
 private perl_regex_items ::= perl_regex_item +
 
 private perl_regex_item ::= interpolated_constructs | <<convertRegexToken>>
 
-perl_regex_ex ::= <<parseRegexContent true>> {extends=perl_regex}
+perl_regex_ex ::= <<parseRegexContent 'true'>> {extends=perl_regex}
 private perl_regex_ex_items ::= perl_regex_item_ex +
 
 private perl_regex_item_ex ::= interpolated_constructs | <<convertRegexTokenEx>>
@@ -971,7 +971,7 @@ array_hash_slice ::= array_primitive hash_index
 
 array_cast_expr ::= SIGIL_ARRAY cast_target
 
-hash_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MOD SIGIL_HASH>> cast_target
+hash_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_MOD, SIGIL_HASH'>> cast_target
 
 private scalar_primitive ::=
     scalar_variable
@@ -995,7 +995,7 @@ private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= <<parseAmbiguousSigil OPERATOR_MUL SIGIL_GLOB>> cast_target
+glob_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_MUL, SIGIL_GLOB'>> cast_target
 
 glob_slot ::= glob_primitive hash_index
 
@@ -1023,11 +1023,11 @@ private callable ::= method | code // being used in parseFunctionCall
 private referencable_expr ::= code | scalar_expr
 
 private code ::=
-    <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> method
+    <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> method
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> cast_target
+code_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -1046,13 +1046,13 @@ private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_ope
 
 string_dq ::=
   [ RESERVED_QQ] string_dq_parsed
-  | <<parseNetstedInterpolatedString QUOTE_DOUBLE>>
+  | <<parseNetstedInterpolatedString 'QUOTE_DOUBLE '>>
 
 private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [<<parseInterpolatedStringContent>>] QUOTE_DOUBLE_CLOSE {pin=1}
 
 string_xq ::=
   [ RESERVED_QX] string_xq_parsed
-  | <<parseNetstedInterpolatedString QUOTE_TICK>>
+  | <<parseNetstedInterpolatedString 'QUOTE_TICK '>>
 
 private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
@@ -1089,12 +1089,12 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
-hash_variable ::= <<parseAmbiguousSigil OPERATOR_MOD SIGIL_HASH>> variable_body
+hash_variable ::= <<parseAmbiguousSigil 'OPERATOR_MOD, SIGIL_HASH'>> variable_body
 
 //fixme probably this should not be here
-code_variable ::= <<parseAmbiguousSigil OPERATOR_BITWISE_AND SIGIL_CODE>> variable_body
+code_variable ::= <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> variable_body
 
-glob_variable ::= <<parseAmbiguousSigil OPERATOR_MUL SIGIL_GLOB>> variable_body
+glob_variable ::= <<parseAmbiguousSigil 'OPERATOR_MUL, SIGIL_GLOB'>> variable_body
 
 private variable_body ::= <<parseVariableName>>
 
@@ -1106,8 +1106,8 @@ private namespace_canonical ::= <<convertPackageIdentifier>>
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= <<checkAndConvertToken RESERVED_SUB RESERVED_METHOD>> sub_definition_name [method_signature] [sub_attributes] block
-func_definition ::= <<checkAndConvertToken RESERVED_SUB RESERVED_FUNC>> sub_definition_name [func_signature] [sub_attributes] block
+method_definition ::= <<checkAndConvertToken 'RESERVED_SUB, RESERVED_METHOD'>> sub_definition_name [method_signature] [sub_attributes] block
+func_definition ::= <<checkAndConvertToken 'RESERVED_SUB, RESERVED_FUNC'>> sub_definition_name [func_signature] [sub_attributes] block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= LEFT_PAREN method_signature_content RIGHT_PAREN {pin=1}

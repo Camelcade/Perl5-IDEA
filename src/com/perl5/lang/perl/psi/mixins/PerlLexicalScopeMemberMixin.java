@@ -18,9 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PsiPerlUnconditionalBlock;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 27.05.2015.
@@ -38,5 +40,11 @@ public abstract class PerlLexicalScopeMemberMixin extends PerlCompositeElementIm
 	public PerlLexicalScope getLexicalScope()
 	{
 		return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
+	}
+
+	@Nullable
+	public PsiPerlUnconditionalBlock getUnconditionalBlock()
+	{
+		return PsiTreeUtil.getChildOfType(this, PsiPerlUnconditionalBlock.class);
 	}
 }
