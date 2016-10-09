@@ -604,21 +604,21 @@ private use_statements ::= // fixme these shold be recovered otherwise, cause it
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   no_statement
 
-use_statement ::=  RESERVED_USE use_no_parameters {pin=1}
-no_statement ::=  RESERVED_NO use_no_parameters {pin=1}
+upper use_statement ::=  RESERVED_USE use_no_parameters {pin=1}
+upper no_statement ::=  RESERVED_NO use_no_parameters {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= <<mergePackageName>> [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
-use_statement_constant ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_CONSTANT'>> [perl_version] [use_constant_parameters] {pin=2}
+upper use_statement_constant ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_CONSTANT'>> [perl_version] [use_constant_parameters] {pin=2}
 private use_constant_parameters ::=
   constants_block
   | single_constant_definition
   | expr
 
 // other name to extend declaration, not variable
-use_vars_statement ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_VARS'>> [perl_version] [<<parseUseVarsParameters>>] {pin=2}
+upper use_vars_statement ::=  RESERVED_USE <<checkAndCollapseToken 'PACKAGE, PACKAGE_PRAGMA_VARS'>> [perl_version] [<<parseUseVarsParameters>>] {pin=2}
 
 constants_block ::= LEFT_BRACE [constants_block_content] RIGHT_BRACE {pin=1}
 private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_constants_block}
