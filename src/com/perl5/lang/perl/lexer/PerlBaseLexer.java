@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
@@ -28,11 +27,7 @@ import java.util.regex.Pattern;
  */
 public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes
 {
-	protected final static int EXT_NOTHING = -1;
-	protected final static int EXT_IDENTIFIER = 0;
-	protected final static int EXT_PACKAGE = 1;
-	protected final static int EXT_PACKAGE_DISCLOSED = 2;
-	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*"; // something strang in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*"; // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
 			"(?:" +
 					"(?:::)+'?" +
@@ -51,82 +46,16 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
 
-	// has identifier inside
-	public IElementType adjustAndParsePackage()
-	{
-		int adjustResult = adjustUtfIdentifier();
-		if (adjustResult == EXT_PACKAGE_DISCLOSED)
-		{
-			return parsePackageCanonical();
-		}
-		else
-		{
-			return parsePackage();
-		}
-	}
+	public abstract IElementType parseAmbiguousPackage(IElementType identifierType);
 
-	public abstract IElementType parsePackage();
-
-	public IElementType adjustAndParseBarewordMinus()
-	{
-		int adjustResult = adjustUtfIdentifier();
-
-		if (!StringUtil.startsWith(yytext(), "-"))
-		{
-			if (adjustResult == EXT_PACKAGE_DISCLOSED)
-			{
-				return parsePackageCanonical();
-			}
-			else if (adjustResult == EXT_PACKAGE)
-			{
-				return parsePackage();
-			}
-		}
-		return parseBarewordMinus();
-	}
 
 	public abstract IElementType parseBarewordMinus();
 
 
-	// only ::
-	public IElementType adjustAndParsePackageShort()
+	public IElementType parsePackage(IElementType identifierType)
 	{
-		int adjustResult = adjustUtfIdentifier();
-
-		if (adjustResult == EXT_PACKAGE_DISCLOSED) // got ::smth::
-		{
-			return parsePackageCanonical();
-		}
-		else if (adjustResult == EXT_PACKAGE || adjustResult == EXT_IDENTIFIER) // got ::smth +
-		{
-			return parsePackage();
-		}
-
-		return PACKAGE_IDENTIFIER; // only ::
-	}
-
-	// ends with ::
-	public IElementType adjustAndParsePackageCanonical()
-	{
-		int adjustResult = adjustUtfIdentifier();
-		if (adjustResult == EXT_IDENTIFIER || adjustResult == EXT_PACKAGE)    // ends with identifier
-		{
-			return parsePackage();
-		}
-		else
-		{
-			return parsePackageCanonical();    // ends with ::
-		}
-	}
-
-	public IElementType parsePackageCanonical()
-	{
-		String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(yytext().toString());
-		if (canonicalPackageName.equals(PerlPackageUtil.CORE_PACKAGE))
-		{
-			return PACKAGE_CORE_IDENTIFIER;
-		}
-		return PACKAGE_IDENTIFIER;
+		CharSequence yytext = yytext();
+		return StringUtil.endsWith(yytext, PerlPackageUtil.PACKAGE_SEPARATOR) || yytext.charAt(yytext.length() - 1) == PerlPackageUtil.PACKAGE_SEPARATOR_LEGACY ? PACKAGE_IDENTIFIER : parseAmbiguousPackage(identifierType);
 	}
 
 
@@ -137,83 +66,25 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 	}
 
 
-	protected IElementType lexBadCharacter()
-	{
-		int tokenStart = getTokenStart();
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		if (tokenStart < bufferEnd)
-		{
-			if (isValidIdentifierStartCharacter(buffer.charAt(tokenStart)))
-			{
-				int adjustResult = adjustUtfIdentifier();
-
-				if (adjustResult == EXT_PACKAGE_DISCLOSED)
-				{
-					return parsePackageCanonical();
-				}
-				else if (adjustResult == EXT_PACKAGE)
-				{
-					return parsePackage();
-				}
-				else
-				{
-					return parseBarewordMinus();
-				}
-			}
-		}
-		return TokenType.BAD_CHARACTER;
-	}
-
-	protected int adjustUtfIdentifier()
-	{
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-		int tokenEnd = getTokenEnd();
-		int result = EXT_NOTHING;
-		char currentChar;
-		while (tokenEnd < bufferEnd)
-		{
-			if (isValidIdentifierCharacter(currentChar = buffer.charAt(tokenEnd)))
-			{
-				tokenEnd++;
-				if (result == EXT_PACKAGE_DISCLOSED)
-				{
-					result = EXT_PACKAGE;
-				}
-				else if (result == EXT_NOTHING)
-				{
-					result = EXT_IDENTIFIER;
-				}
-			}
-			else if (currentChar == ':' && tokenEnd + 1 < bufferEnd && buffer.charAt(tokenEnd + 1) == ':')
-			{
-				tokenEnd += 2;
-				result = EXT_PACKAGE_DISCLOSED;
-			}
-			else if (currentChar == '\'' && tokenEnd + 1 < bufferEnd && isValidIdentifierCharacter(buffer.charAt(tokenEnd + 1)))
-			{
-				tokenEnd += 2;
-				result = EXT_PACKAGE;
-			}
-			else
-			{
-				break;
-			}
-		}
-
-		setTokenEnd(tokenEnd);
-		return result;
-	}
-
 	public boolean isValidIdentifierCharacter(char character)
 	{
 		return character == '_' || Character.isLetterOrDigit(character);
 	}
 
-	public boolean isValidIdentifierStartCharacter(char character)
+	protected IElementType startVariableLexing(int sigilSize, IElementType sigilType)
 	{
-		return character == '_' || Character.isLetter(character);
+		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_VARIABLE_NAME, sigilType);
+	}
+
+	protected IElementType startBracedVariableLexing(int sigilSize, IElementType sigilType)
+	{
+		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_BRACED_VARIABLE_NAME, sigilType);
+	}
+
+	private IElementType startVariableLexing(int sigilSize, int newState, IElementType sigilType)
+	{
+		yypushback(yylength() - sigilSize);
+		pushStateAndBegin(newState);
+		return sigilType;
 	}
 }

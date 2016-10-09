@@ -96,6 +96,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testVarRefactoringBugs()
+	{
+		doTest();
+	}
+
 	public void testPerlSwitch()
 	{
 		doTest();

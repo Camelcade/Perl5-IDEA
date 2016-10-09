@@ -63,7 +63,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 {
 	public static final String PACKAGE_SEPARATOR = "::";
 	public static final String PACKAGE_DEREFERENCE = "->";
-	public static final String PACKAGE_SEPARATOR_LEGACY = "'";
+	public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
 	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
 	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 

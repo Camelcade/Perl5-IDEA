@@ -46,6 +46,10 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract int getNextTokenStart();
 
+	public abstract void yypushback(int number);
+
+	public abstract int yylength();
+
 	public abstract boolean isLastToken();
 
 	public IElementType advance() throws IOException
@@ -99,6 +103,12 @@ public abstract class PerlProtoLexer implements FlexLexer
 		setTokenStart(token.getTokenStart());
 		setTokenEnd(token.getTokenEnd());
 		return token.getTokenType();
+	}
+
+	public void pushStateAndBegin(int newState)
+	{
+		pushState();
+		yybegin(newState);
 	}
 
 	public void pushState()

@@ -286,7 +286,8 @@ public class PerlLexer extends PerlLexerGenerated
 			PACKAGE_IDENTIFIER,
 			QUOTE_SINGLE_CLOSE,
 			QUOTE_DOUBLE_CLOSE,
-			QUOTE_TICK_CLOSE
+			QUOTE_TICK_CLOSE,
+			VARIABLE_NAME
 	);
 
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
@@ -434,11 +435,11 @@ public class PerlLexer extends PerlLexerGenerated
 	protected PerlQQStringLexer myQQStringLexer;
 	protected PerlQXStringLexer myQXStringLexer;
 	protected PerlQWStringLexer myQWStringLexer;
-	Project myProject;
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
 	protected IElementType regexCommand = null;
+	Project myProject;
 
 	public PerlLexer(Project project)
 	{
@@ -620,17 +621,27 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return parseTr();
 			}
-			else if (currentChar == '\'')
+			else if (currentChar == '"' || currentChar == '\'' || currentChar == '`')
 			{
-				return captureString(LEX_QUOTE_LIKE_OPENER_Q);
-			}
-			else if (currentChar == '"')
-			{
-				return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
-			}
-			else if (currentChar == '`')
-			{
-				return captureString(LEX_QUOTE_LIKE_OPENER_QX);
+				// fixme this is dirty
+				PerlTokenHistory tokenHistory = getTokenHistory();
+				IElementType lastTokenType = tokenHistory.getLastTokenType();
+				boolean isDirectlyAfterSigil = SIGILS_TOKENS.contains(lastTokenType);    // $'
+				boolean isBracedVariable = !isDirectlyAfterSigil && lastTokenType == LEFT_BRACE && SIGILS_TOKENS.contains(tokenHistory.getLastUnbracedTokenType())
+						&& getNextNonSpaceCharacter(tokenStart + 1) == '}';    // ${'}
+
+				if (currentChar == '\'' && !isDirectlyAfterSigil && !isBracedVariable)
+				{
+					return captureString(LEX_QUOTE_LIKE_OPENER_Q);
+				}
+				else if (currentChar == '"' && !isDirectlyAfterSigil && !isBracedVariable)
+				{
+					return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
+				}
+				else if (currentChar == '`' && !isDirectlyAfterSigil && !isBracedVariable)
+				{
+					return captureString(LEX_QUOTE_LIKE_OPENER_QX);
+				}
 			}
 			// capture __DATA__ __END__
 			// capture pod
@@ -666,9 +677,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 				return COMMENT_LINE;
 			}
-
 		}
-
 		return super.perlAdvance();
 	}
 
@@ -730,35 +739,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType captureString(int newState) throws IOException
 	{
-		int nextCharOffset = getTokenEnd() + 1;
-		PerlTokenHistory tokenHistory = getTokenHistory();
-		boolean afterSigil = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
-
-		// handles archaic vars like $'var instead of $::var
-		if (newState == LEX_QUOTE_LIKE_OPENER_Q && afterSigil && isValidIdentifierCharacter(getSafeCharacterAt(nextCharOffset)))
-		{
-			setTokenStart(getTokenEnd());
-			setTokenEnd(nextCharOffset);
-			int adjustResult = adjustUtfIdentifier();
-			if (adjustResult == EXT_IDENTIFIER || adjustResult == EXT_PACKAGE)
-			{
-				return parsePackage();
-			}
-			else
-			{
-				return parsePackageCanonical();
-			}
-		}
-
-		if (afterSigil // this is not a beginning of a string, but variable name
-				|| (SIGILS_TOKENS.contains(tokenHistory.getLastUnbracedTokenType()) &&
-				tokenHistory.getLastSignificantTokenType() == LEFT_BRACE &&    // isBraced doesn't work here, because tokenEnd is not set yet
-				getNextNonSpaceCharacter(nextCharOffset) == '}'
-		))
-		{
-			return super.perlAdvance();
-		}
-
 		pushState();
 		yybegin(newState);
 		return captureString();
@@ -959,7 +939,14 @@ public class PerlLexer extends PerlLexerGenerated
 			if (getTokenHistory().getLastUnbracedTokenType() == SIGIL_SCALAR) // $1.$something
 			{
 				yypushback(1);
-				return IDENTIFIER;
+
+				int realLexicalState = getRealLexicalState();
+				if (realLexicalState == LEX_VARIABLE_NAME || realLexicalState == LEX_BRACED_VARIABLE_NAME)
+				{
+					popState();
+				}
+
+				return VARIABLE_NAME;
 			}
 			if (getNextCharacter() == '.')    // it's a 1..10
 			{
@@ -1373,11 +1360,9 @@ public class PerlLexer extends PerlLexerGenerated
 	// fixme how about $x234sdfsdf ?
 	public IElementType checkOperatorXSticked()
 	{
-		yypushback(1);
-		if (getTokenHistory().getLastSignificantTokenType() == RESERVED_REQUIRE                            // require x123
-				|| IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())    // package x123, ->x123, etc.
-				|| SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())                            // $x123
-				|| isBraced()                                                        // {x123}
+		IElementType lastSignificantTokenType = getTokenHistory().getLastSignificantTokenType();
+		if (lastSignificantTokenType == RESERVED_REQUIRE                            // require x123
+				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)    // package x123, ->x123, etc.
 				)
 		{
 			return IDENTIFIER;
@@ -1385,6 +1370,10 @@ public class PerlLexer extends PerlLexerGenerated
 		else if (isCommaArrowAhead())    // we should check for ->
 		{
 			return STRING_IDENTIFIER;
+		}
+		else if (isBraced())    // {x123}
+		{
+			return STRING_CONTENT;
 		}
 
 		yypushback(yylength() - 1);
@@ -1963,12 +1952,12 @@ public class PerlLexer extends PerlLexerGenerated
 	 *
 	 * @return token type
 	 */
-	public IElementType parsePackage()
+	public IElementType parseAmbiguousPackage(IElementType identifierType)
 	{
 		CharSequence tokenText = yytext();
 
 		// check if it's cmp'
-		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && tokenText.subSequence(0, 3).equals("cmp"))
+		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && StringUtil.startsWith(tokenText, "cmp"))
 		{
 			yypushback(tokenText.length() - 3);
 			return getIdentifierToken();
@@ -1999,22 +1988,14 @@ public class PerlLexer extends PerlLexerGenerated
 		if (m.matches())
 		{
 			String packageIdentifier = m.group(1);
-			String identifier = m.group(2);
 
 			preparsedTokensList.clear();
 			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER);
+			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), identifierType);
 			preparsedTokensList.add(barewordToken);
 			setTokenEnd(packageIdentifierEnd);
 
-			IElementType packageTokenType = parsePackageCanonical();
-
-			if (packageTokenType == PACKAGE_CORE_IDENTIFIER && RESERVED_TOKEN_TYPES.containsKey(identifier))
-			{
-				barewordToken.setTokenType(RESERVED_TOKEN_TYPES.get(identifier));
-			}
-			return packageTokenType;
-
+			return parsePackage(identifierType);
 		}
 		else
 		{

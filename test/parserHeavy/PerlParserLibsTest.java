@@ -17,7 +17,6 @@
 package parserHeavy;
 
 import categories.Heavy;
-import categories.Performance;
 import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
@@ -9818,11 +9817,6 @@ public class PerlParserLibsTest extends PerlParserTestBase
 	public void testLocale_Codes_LangVar_pm()
 	{
 		doTest("Locale_Codes_LangVar_pm");
-	}
-
-	public void testLocale_Codes_Language_Codes_pm()
-	{
-		doTest("Locale_Codes_Language_Codes_pm");
 	}
 
 	public void testLocale_Codes_Language_Retired_pm()

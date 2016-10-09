@@ -50,7 +50,7 @@ public class PerlQStringLexer extends PerlQQStringLexer
 	}
 
 	@Override
-	public IElementType parsePackage()
+	public IElementType parseAmbiguousPackage(IElementType identifierType)
 	{
 		return PACKAGE_IDENTIFIER;
 	}

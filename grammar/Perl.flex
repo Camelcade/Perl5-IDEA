@@ -56,14 +56,11 @@ import org.jetbrains.annotations.NotNull;
 */
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
+ANY_SPACE = [\r\n\s\t\f]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
-//PERL_XIDS = [\w && \p{XID_Start}]
-//PERL_XIDC = [\w && \p{XID_Continue}]
-
-// added digits to opener for package Encode::KR::2022_KR;
-PERL_XIDS = [_a-zA-Z0-9]
-PERL_XIDC = [_a-zA-Z0-9]
+PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
+PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
@@ -71,8 +68,7 @@ BAREWORD_MINUS = "-" * {IDENTIFIER}
 
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
-PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
+QAULIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
@@ -89,8 +85,16 @@ NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
+SCALAR_VARIABLE = "$" {QAULIFIED_IDENTIFIER}
+ARRAY_VARIABLE = "@" {QAULIFIED_IDENTIFIER}
+ARRAY_INDEX_VARIABLE = "$#" {QAULIFIED_IDENTIFIER}
+
+SCALAR_VARIABLE_BRACED = "$" "{" {QAULIFIED_IDENTIFIER} "}"
+ARRAY_VARIABLE_BRACED = "@" "{" {QAULIFIED_IDENTIFIER} "}"
+ARRAY_INDEX_VARIABLE_BRACED = "$#" "{" {QAULIFIED_IDENTIFIER} "}"
+
 // fixme this can be done in bareword parser
-X_OP_STICKED = "x"[0-9]+[^a-zA-Z]
+X_OP_STICKED = "x"[0-9]+
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
@@ -114,6 +118,8 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
 %state LEX_PREPARSED_ITEMS
 
+%state LEX_VARIABLE_NAME, LEX_BRACED_VARIABLE_NAME
+
 %%
 
 // inclusive states
@@ -122,6 +128,25 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 ";"     {return SEMICOLON;}
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
+<LEX_VARIABLE_NAME>{
+	{IDENTIFIER} {popState(); return VARIABLE_NAME;}
+	{QAULIFIED_IDENTIFIER} {popState(); return parsePackage(VARIABLE_NAME);}
+}
+
+<LEX_BRACED_VARIABLE_NAME>{
+	"{" {return LEFT_BRACE;}
+	"}" {popState(); return RIGHT_BRACE;}
+	{IDENTIFIER} {return VARIABLE_NAME;}
+	{QAULIFIED_IDENTIFIER} {return parsePackage(VARIABLE_NAME);}
+}
+
+{SCALAR_VARIABLE} {return startVariableLexing(1,SIGIL_SCALAR);}
+{ARRAY_VARIABLE} {return startVariableLexing(1, SIGIL_ARRAY);}
+{ARRAY_INDEX_VARIABLE} {return startVariableLexing(2, SIGIL_SCALAR_INDEX);}
+
+{SCALAR_VARIABLE_BRACED} {return startBracedVariableLexing(1, SIGIL_SCALAR);}
+{ARRAY_VARIABLE_BRACED} {return startBracedVariableLexing(1, SIGIL_ARRAY);}
+{ARRAY_INDEX_VARIABLE_BRACED} {return startBracedVariableLexing(2, SIGIL_SCALAR_INDEX);}
 
 {HEREDOC_OPENER}   {return parseHeredocOpener();}
 {HEREDOC_OPENER_BACKREF} {return parseHeredocOpenerBackref();}
@@ -154,9 +179,6 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 "&&" {return OPERATOR_AND;}
 "||" {return OPERATOR_OR;}
 "!" {return OPERATOR_NOT;}
-
-{X_OP_STICKED} {return checkOperatorXSticked();} // fixme split this ?
-
 
 "?"  {return QUESTION;}
 ":"  {return COLON;}
@@ -198,11 +220,10 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 
 {CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
-// fixme refactor
-{BAREWORD_MINUS} {return adjustAndParseBarewordMinus();}
-{PACKAGE_PARSABLE} {return adjustAndParsePackage(); }	// has :: inside
-{PACKAGE_SHORT} {return adjustAndParsePackageShort();}			// only ::
-{PACKAGE} {return adjustAndParsePackageCanonical();}	// ends with ::
+{X_OP_STICKED} {return checkOperatorXSticked();} // for x100
+{BAREWORD_MINUS} {return parseBarewordMinus();}
+{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
+{QAULIFIED_IDENTIFIER} {return parsePackage(IDENTIFIER);}
 
 /* error fallback [^] */
-[^]    { return lexBadCharacter(); }
+[^]    { return TokenType.BAD_CHARACTER; }

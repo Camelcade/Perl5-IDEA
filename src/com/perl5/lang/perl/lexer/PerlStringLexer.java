@@ -73,7 +73,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	 *
 	 * @return token type
 	 */
-	public IElementType parsePackage()
+	public IElementType parseAmbiguousPackage(IElementType identifierType)
 	{
 		CharSequence tokenText = yytext();
 
@@ -84,11 +84,11 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 
 			preparsedTokensList.clear();
 			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), IDENTIFIER);
+			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), identifierType);
 			preparsedTokensList.add(barewordToken);
 			setTokenEnd(packageIdentifierEnd);
 
-			return parsePackageCanonical();
+			return parsePackage(identifierType);
 
 		}
 		else

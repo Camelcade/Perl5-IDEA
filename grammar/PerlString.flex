@@ -47,18 +47,14 @@ NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
-//PERL_XIDS = [\w && \p{XID_Start}]
-//PERL_XIDC = [\w && \p{XID_Continue}]
-
-// added digits to opener for package Encode::KR::2022_KR;
-PERL_XIDS = [_a-zA-Z0-9]
-PERL_XIDC = [_a-zA-Z0-9]
+PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
+PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
 
-PACKAGE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) * {IDENTIFIER} "::" +
-PACKAGE_PARSABLE = ("::" + "'" ?) ? ({IDENTIFIER} ("::"+ "'" ? | "::"* "'" )) + {IDENTIFIER}
+// fixme this plus is hacky for proper handling of single quote inside the string. Unsure that we should check this at all
+PACKAGE = ("::"+ "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
 NUMBER_EXP = [eE][+-]?[0-9_]+
@@ -139,9 +135,8 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}
 
-{BAREWORD_MINUS} {return adjustAndParseBarewordMinus();}
-{PACKAGE_PARSABLE} {return adjustAndParsePackage(); }
-{PACKAGE_SHORT} {return adjustAndParsePackageShort();}
-{PACKAGE} {return adjustAndParsePackageCanonical();}
+{BAREWORD_MINUS} {return parseBarewordMinus();}
+{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
+{PACKAGE} {return parsePackage(IDENTIFIER);}
 
-[^]    { return lexBadCharacter(); }
+[^]    { return TokenType.BAD_CHARACTER; }

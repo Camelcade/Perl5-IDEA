@@ -692,6 +692,8 @@ term_expr ::=
     | return_expr
     | hash_variable
     | hash_cast_expr
+    | array_index_variable
+	| scalar_index_cast_expr
     | anon_array
     | undef_expr
     | print_expr
@@ -706,7 +708,6 @@ term_expr ::=
     | map_expr
 
     | <<parseGlobOrElement>>	// glob
-    | array_index_variable
     | tag_scalar
     | variable_declaration_global
     | compile_regex
@@ -977,7 +978,6 @@ private scalar_primitive ::=
     scalar_variable
     | scalar_cast_expr
     | undef_expr  // shouldn't it be in term ? (check declarations)
-    | scalar_index_cast_expr
 
 scalar_cast_expr ::= SIGIL_SCALAR cast_target
 
@@ -1071,6 +1071,7 @@ private interpolated_constructs ::=
   <<parseScalarOrElement>>
   | <<parseArrayOrSlice>>
   | array_index_variable
+  | scalar_index_cast_expr
 
 private use_vars_interpolated_constructs ::=
     scalar_variable
@@ -1096,10 +1097,15 @@ code_variable ::= <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> var
 
 glob_variable ::= <<parseAmbiguousSigil 'OPERATOR_MUL, SIGIL_GLOB'>> variable_body
 
-private variable_body ::= <<parseVariableName>>
+private variable_body ::=
+ 	[package_token] VARIABLE_NAME
+ 	| LEFT_BRACE [package_token] VARIABLE_NAME RIGHT_BRACE
+	| <<parseVariableName>>
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::= <<parseMethod>>
+
+private package_token ::= <<convertPackageIdentifier>>
 
 /******************************************** PERL SUBS ANNOTATIONS ***************************************************/
 private namespace_canonical ::= <<convertPackageIdentifier>>
