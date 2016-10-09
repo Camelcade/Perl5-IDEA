@@ -33,10 +33,18 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    <p>This is a fixing update for for 2.2 release:</p><br/>
+    <p>Plugin moves to the IDEA-like versioning to make things more consistent. Also, future updates will be released for current version of JetBrains products only. Critical things
+     may be backported to previous version, but current - 2.2 version is pretty stable for those, who don't want or need to upgrade.</p>
+     <p>Changes:
+     <ul>
+      <li>IDEA 2016.3 compatibility</li>
+      <li>Multiple internal tools upgrades</li>
+      <li>Moved to Java 8</li>
+     </ul>
+     </p>
+
      <p>Fixes:
       <ul>
-      <li>Fixed issues with current EAP builds</li>
       <li>Possible NPE on running the script if settings file been corrupted</li>
       <li>Optimized parsing of multiple namespaces</li>
       <li>Optimized variables resolving, made it 10 times faster</li>
@@ -46,7 +54,7 @@
     </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
-    <idea-version since-build="162.2032"/>
+    <idea-version since-build="162" until-build="163.*"/>
 
     <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products  -->
