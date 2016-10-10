@@ -44,7 +44,6 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType parseVersion();
 	public abstract IElementType parseNumber();
 	public abstract IElementType parseOperatorDereference();
-	public abstract IElementType parseCappedVariableName();
 	public abstract IElementType parseHeredocOpener();
 	public abstract IElementType parseHeredocOpenerBackref();
 	public abstract IElementType guessLtNumeric();
@@ -56,7 +55,6 @@ import org.jetbrains.annotations.NotNull;
 */
 NEW_LINE = \r?\n
 WHITE_SPACE     = [ \t\f]
-ANY_SPACE = [\r\n\s\t\f]
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
@@ -66,10 +64,12 @@ IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
 BAREWORD_MINUS = "-" * {IDENTIFIER}
 
-CAPPED_VARIABLE_NAME = "^"{PERL_XIDC}+
-
 QAULIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
+
+//DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""	// for lpe
+//SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
+//XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
 PERL_VERSION = "v"?{PERL_VERSION_CHUNK}("." {PERL_VERSION_CHUNK})*
@@ -85,13 +85,12 @@ NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
-SCALAR_VARIABLE = "$" {QAULIFIED_IDENTIFIER}
-ARRAY_VARIABLE = "@" {QAULIFIED_IDENTIFIER}
-ARRAY_INDEX_VARIABLE = "$#" {QAULIFIED_IDENTIFIER}
+SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@]
+CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
+VARIABLE_NAME = {QAULIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 
-SCALAR_VARIABLE_BRACED = "$" "{" {QAULIFIED_IDENTIFIER} "}"
-ARRAY_VARIABLE_BRACED = "@" "{" {QAULIFIED_IDENTIFIER} "}"
-ARRAY_INDEX_VARIABLE_BRACED = "$#" "{" {QAULIFIED_IDENTIFIER} "}"
+CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
+BRACED_VARIABLE_NAME = "{" ({VARIABLE_NAME}|"$"|{CAPPED_BRACED_VARIABLE}) "}"
 
 // fixme this can be done in bareword parser
 X_OP_STICKED = "x"[0-9]+
@@ -106,10 +105,7 @@ HEREDOC_MARKER_XQ = [^\`\n\r]*
 HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"{HEREDOC_MARKER_DQ}\" | {WHITE_SPACE}* \`{HEREDOC_MARKER_XQ}\` | {HEREDOC_MARKER})
 HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 
-%state LEX_CODE
-
-%state LEX_HEREDOC_WAITING, LEX_HEREDOC_WAITING_QQ, LEX_HEREDOC_WAITING_QX
-%state LEX_FORMAT_WAITING
+%state LEX_OPERATOR
 
 %state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 %state LEX_TRANS_OPENER, LEX_REGEX_OPENER
@@ -125,89 +121,146 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 // inclusive states
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
-";"     {return SEMICOLON;}
 
 ///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 <LEX_VARIABLE_NAME>{
-	{IDENTIFIER} {popState(); return VARIABLE_NAME;}
-	{QAULIFIED_IDENTIFIER} {popState(); return parsePackage(VARIABLE_NAME);}
+	"$"										{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{SPECIAL_VARIABLE_NAME} 				{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{IDENTIFIER} 							{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{QAULIFIED_IDENTIFIER} 					{yybegin(YYINITIAL); return parsePackage(VARIABLE_NAME);}
 }
 
 <LEX_BRACED_VARIABLE_NAME>{
-	"{" {return LEFT_BRACE;}
-	"}" {popState(); return RIGHT_BRACE;}
-	{IDENTIFIER} {return VARIABLE_NAME;}
-	{QAULIFIED_IDENTIFIER} {return parsePackage(VARIABLE_NAME);}
+	"{" 							{return LEFT_BRACE;}
+	"$"								{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{IDENTIFIER} / "}" 				{yybegin(YYINITIAL); return VARIABLE_NAME;}
+	{QAULIFIED_IDENTIFIER} / "}"  	{yybegin(YYINITIAL); return parsePackage(VARIABLE_NAME);}
 }
 
-{SCALAR_VARIABLE} {return startVariableLexing(1,SIGIL_SCALAR);}
-{ARRAY_VARIABLE} {return startVariableLexing(1, SIGIL_ARRAY);}
-{ARRAY_INDEX_VARIABLE} {return startVariableLexing(2, SIGIL_SCALAR_INDEX);}
+<LEX_OPERATOR>{
+	"**"	{return OPERATOR_POW;}
+	"%=" 	{return OPERATOR_MOD_ASSIGN;}
+	"*=" 	{return OPERATOR_MUL_ASSIGN;}
+	"&&" 	{return OPERATOR_AND;}
+	"&=" 	{return OPERATOR_BITWISE_AND_ASSIGN;}
+	"**=" 	{return OPERATOR_POW_ASSIGN;}
+	"&&="	{return OPERATOR_AND_ASSIGN;}
+	"*" 	{return OPERATOR_MUL;}
+	"%" 	{return OPERATOR_MOD;}
+	"&" 	{return OPERATOR_BITWISE_AND;}
+	">="	{return OPERATOR_GE_NUMERIC;}
+	"<="	{return OPERATOR_LE_NUMERIC;}
+	"=="	{return OPERATOR_EQ_NUMERIC;}
+	"!="	{return OPERATOR_NE_NUMERIC;}
+	"~~"	{return OPERATOR_SMARTMATCH;}
+	"+="	{return OPERATOR_PLUS_ASSIGN;}
+	"-="	{return OPERATOR_MINUS_ASSIGN;}
+	"/=" 	{return OPERATOR_DIV_ASSIGN;}
+	".=" 	{return OPERATOR_CONCAT_ASSIGN;}
+	"x=" 	{return OPERATOR_X_ASSIGN;}
+	"|=" 	{return OPERATOR_BITWISE_OR_ASSIGN;}
+	"^=" 	{return OPERATOR_BITWISE_XOR_ASSIGN;}
+	"<<=" 	{return OPERATOR_SHIFT_LEFT_ASSIGN;}
+	">>=" 	{return OPERATOR_SHIFT_RIGHT_ASSIGN;}
+	"||=" 	{return OPERATOR_OR_ASSIGN;}
+	"//=" 	{return OPERATOR_OR_DEFINED_ASSIGN;}
+	"<=>" 	{return OPERATOR_CMP_NUMERIC;}
+	"<" 	{return guessLtNumeric();}
+	">" 	{return OPERATOR_GT_NUMERIC;}
 
-{SCALAR_VARIABLE_BRACED} {return startBracedVariableLexing(1, SIGIL_SCALAR);}
-{ARRAY_VARIABLE_BRACED} {return startBracedVariableLexing(1, SIGIL_ARRAY);}
-{ARRAY_INDEX_VARIABLE_BRACED} {return startBracedVariableLexing(2, SIGIL_SCALAR_INDEX);}
+	"->" 	{return parseOperatorDereference();}
+	"=>" 	{return OPERATOR_COMMA_ARROW;}
+	"," 	{return OPERATOR_COMMA;}
+
+	"..." 	{return OPERATOR_HELLIP;}
+	".." 	{return OPERATOR_FLIP_FLOP;}
+	"." 	{return OPERATOR_CONCAT;}
+	"=~" 	{return OPERATOR_RE;}
+	"!~" 	{return OPERATOR_NOT_RE;}
+
+	"<<" 	{return OPERATOR_SHIFT_LEFT;}
+	">>" 	{return OPERATOR_SHIFT_RIGHT;}
+
+	"||" 	{return OPERATOR_OR;}
+	"?"  	{return QUESTION;}
+	":"  	{return COLON;}
+	"|" 	{return OPERATOR_BITWISE_OR;}
+	"^" 	{return OPERATOR_BITWISE_XOR;}
+	"=" 	{return OPERATOR_ASSIGN;}
+}
+
+<YYINITIAL>{
+	"$$" / [^$\{\w] {return startVariableLexing(1,SIGIL_SCALAR);}
+	"$"{VARIABLE_NAME} {return startVariableLexing(1,SIGIL_SCALAR);}
+
+	"@$" / [^$\{\w] {return startVariableLexing(1,SIGIL_ARRAY);}
+	"@"{VARIABLE_NAME} {return startVariableLexing(1, SIGIL_ARRAY);}
+
+	"$#$" / [^$\{\w] {return startVariableLexing(2,SIGIL_SCALAR_INDEX);}
+	"$#"{VARIABLE_NAME} {return startVariableLexing(2, SIGIL_SCALAR_INDEX);}
+
+	"%$" / [^$\{\w] {return startVariableLexing(1,SIGIL_HASH);}
+	"%"{VARIABLE_NAME} {return startVariableLexing(1, SIGIL_HASH);}
+
+	"&$" / [^$\{\w] {return startVariableLexing(1,SIGIL_CODE);}
+	"&"{VARIABLE_NAME} {return startVariableLexing(1, SIGIL_CODE);}
+
+	"*$" / [^$\{\w] {return startVariableLexing(1,SIGIL_GLOB);}
+	"*"{VARIABLE_NAME} {return startVariableLexing(1, SIGIL_GLOB);}
+
+	"$"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(1, SIGIL_SCALAR);}
+	"@"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(1, SIGIL_ARRAY);}
+	"$#"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(2, SIGIL_SCALAR_INDEX);}
+	"%"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(1, SIGIL_HASH);}
+	"&"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(1, SIGIL_CODE);}
+	"*"{BRACED_VARIABLE_NAME} {return startBracedVariableLexing(1, SIGIL_GLOB);}
+}
+
+//	{DQ_STRING}	{return STRING_IDENTIFIER;}
+//	{SQ_STRING} {return STRING_IDENTIFIER;}
+//	{XQ_STRING} {return STRING_IDENTIFIER;}
 
 {HEREDOC_OPENER}   {return parseHeredocOpener();}
 {HEREDOC_OPENER_BACKREF} {return parseHeredocOpenerBackref();}
 
-"\"" {return QUOTE_DOUBLE;}
-"`" {return QUOTE_TICK;}
-"'" {return QUOTE_SINGLE;}
 
-"<=>" {return OPERATOR_CMP_NUMERIC;}
-"<" {return guessLtNumeric();}
-">" {return OPERATOR_GT_NUMERIC;}
+"\"" 	{return QUOTE_DOUBLE;}
+"`" 	{return QUOTE_TICK;}
+"'" 	{return QUOTE_SINGLE;}
 
-"->" {return parseOperatorDereference();}
-"=>" {return OPERATOR_COMMA_ARROW;}
-"," {return OPERATOR_COMMA;}
 
-"..." {return OPERATOR_HELLIP;}
-".." {return OPERATOR_FLIP_FLOP;}
-"." {return OPERATOR_CONCAT;}
+"++" 	{return OPERATOR_PLUS_PLUS;}
+"--" 	{return OPERATOR_MINUS_MINUS;}
 
-"++" {return OPERATOR_PLUS_PLUS;}
-"--" {return OPERATOR_MINUS_MINUS;}
+"!" 	{return OPERATOR_NOT;}
 
-"=~" {return OPERATOR_RE;}
-"!~" {return OPERATOR_NOT_RE;}
 
-"<<" {return OPERATOR_SHIFT_LEFT;}
-">>" {return OPERATOR_SHIFT_RIGHT;}
+"\\" 	{return OPERATOR_REFERENCE;}
 
-"&&" {return OPERATOR_AND;}
-"||" {return OPERATOR_OR;}
-"!" {return OPERATOR_NOT;}
+"+" 	{return OPERATOR_PLUS;}
+"-" 	{return OPERATOR_MINUS;}
+"/"   	{return guessDiv(); }
 
-"?"  {return QUESTION;}
-":"  {return COLON;}
+"~" 	{return OPERATOR_BITWISE_NOT;}
+";"     {return SEMICOLON;}
 
-"\\" {return OPERATOR_REFERENCE;}
 
-"+" {return OPERATOR_PLUS;}
-"-" {return OPERATOR_MINUS;}
-"/"   { return guessDiv(); }
-"*" {return OPERATOR_MUL;}
-"%" {return OPERATOR_MOD;}
-"&" {return OPERATOR_BITWISE_AND;}
+"@" 	{return SIGIL_ARRAY;}
+"$#" 	{return SIGIL_SCALAR_INDEX;}
+"$" 	{ return SIGIL_SCALAR; }
+"%"		{ return SIGIL_HASH;}
+"*"		{return SIGIL_GLOB;}
+"&"		{return SIGIL_CODE;}
 
-"|" {return OPERATOR_BITWISE_OR;}
-"^" {return OPERATOR_BITWISE_XOR;}
-"~" {return OPERATOR_BITWISE_NOT;}
-
-"=" {return OPERATOR_ASSIGN;}
-
-"@" {return SIGIL_ARRAY;}
-"$#" {return SIGIL_SCALAR_INDEX;}
-"$" { return SIGIL_SCALAR; }
-
-"{"             {return LEFT_BRACE;}
-"}"             {return RIGHT_BRACE;}
-"["             {return LEFT_BRACKET;}
-"]"             {return RIGHT_BRACKET;}
-"("             {return LEFT_PAREN;}
-")"             {return RIGHT_PAREN;}
+"{"     {return LEFT_BRACE;}
+"}"     {return RIGHT_BRACE;}
+"["     {return LEFT_BRACKET;}
+"]"     {return RIGHT_BRACKET;}
+"("     {return LEFT_PAREN;}
+")"     {return RIGHT_PAREN;}
 
 {NUMBER_INT_SIMPLE} {return NUMBER_SIMPLE;}
 {NUMBER}        {return parseNumber();}
@@ -217,8 +270,6 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 
 
 {PERL_OPERATORS_FILETEST} {yypushback(1);return OPERATOR_FILETEST;}
-
-{CAPPED_VARIABLE_NAME} {return parseCappedVariableName();}
 
 {X_OP_STICKED} {return checkOperatorXSticked();} // for x100
 {BAREWORD_MINUS} {return parseBarewordMinus();}

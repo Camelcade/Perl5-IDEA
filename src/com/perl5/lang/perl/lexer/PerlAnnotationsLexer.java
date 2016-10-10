@@ -92,12 +92,7 @@ public class PerlAnnotationsLexer extends PerlAnnotationsLexerGenerated
 	@Override
 	public int yystate()
 	{
-		return getPreparsedLexicalState();    // annotations should be reparsed completely all the time
+		return LEX_PREPARSED;    // annotations should be reparsed completely all the time
 	}
 
-	@Override
-	protected int getPreparsedLexicalState()
-	{
-		return LEX_PREPARSED;
-	}
 }

@@ -16,23 +16,25 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.tree.IElementType;
+
 /**
  * Created by hurricup on 01.03.2016.
  */
 public class PerlHeredocQueueElement
 {
-	private final int myState;
+	private final IElementType myTargetElement;
 	private final String myMarker;
 
-	public PerlHeredocQueueElement(int myState, String myMarker)
+	public PerlHeredocQueueElement(IElementType targetElement, String marker)
 	{
-		this.myState = myState;
-		this.myMarker = myMarker;
+		myTargetElement = targetElement;
+		myMarker = marker;
 	}
 
-	public int getState()
+	public IElementType getTargetElement()
 	{
-		return myState;
+		return myTargetElement;
 	}
 
 	public String getMarker()

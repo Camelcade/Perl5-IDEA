@@ -758,8 +758,7 @@ pref_mm_expr ::= OPERATOR_MINUS_MINUS expr
 
 suff_pp_expr ::= expr (OPERATOR_PLUS_PLUS|OPERATOR_MINUS_MINUS)
 
-pow_expr ::= expr (pow_operator expr)+ { rightAssociative=true }
-private pow_operator ::= <<checkAndCollapseToken 'OPERATOR_POW, OPERATOR_MUL, OPERATOR_MUL'>> !OPERATOR_ASSIGN
+pow_expr ::= expr (OPERATOR_POW expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
@@ -785,8 +784,8 @@ private operator_shift ::= (OPERATOR_SHIFT_LEFT|OPERATOR_SHIFT_RIGHT) !OPERATOR_
 
 compare_expr ::= expr (operator_compare) expr
 private operator_compare ::=
-    <<checkAndCollapseToken 'OPERATOR_GE_NUMERIC, OPERATOR_GT_NUMERIC, OPERATOR_ASSIGN'>>   // >=
-    |<<checkAndCollapseToken 'OPERATOR_LE_NUMERIC, OPERATOR_LT_NUMERIC, OPERATOR_ASSIGN'>>  // <=
+    OPERATOR_GE_NUMERIC   // >=
+    |OPERATOR_LE_NUMERIC  // <=
     |OPERATOR_GT_NUMERIC
     |OPERATOR_LT_NUMERIC
 
@@ -797,13 +796,13 @@ private operator_compare ::=
 
 equal_expr ::= expr operator_equal expr
 private operator_equal ::=
-    <<checkAndCollapseToken 'OPERATOR_EQ_NUMERIC, OPERATOR_ASSIGN, OPERATOR_ASSIGN'>> // ==
-    |<<checkAndCollapseToken 'OPERATOR_NE_NUMERIC, OPERATOR_NOT, OPERATOR_ASSIGN'>>  // !=
+    OPERATOR_EQ_NUMERIC // ==
+    |OPERATOR_NE_NUMERIC  // !=
     |OPERATOR_CMP_NUMERIC
     |OPERATOR_EQ_STR
     |OPERATOR_NE_STR
     |OPERATOR_CMP_STR
-    |<<checkAndCollapseToken 'OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT, OPERATOR_BITWISE_NOT'>> // ~~
+    |OPERATOR_SMARTMATCH // ~~
 
 bitwise_and_expr ::= expr (OPERATOR_BITWISE_AND !OPERATOR_ASSIGN expr)+
 
@@ -830,23 +829,23 @@ private assign_or_flow_expr ::=
 assign_expr ::= expr (operator_assign expr ) + { rightAssociative=true }
 
 private operator_assign ::=
-    <<checkAndCollapseToken 'OPERATOR_POW_ASSIGN, OPERATOR_MUL, OPERATOR_MUL, OPERATOR_ASSIGN'>>  // **=
-    |<<checkAndCollapseToken 'OPERATOR_PLUS_ASSIGN, OPERATOR_PLUS, OPERATOR_ASSIGN'>>      // +=
-    |<<checkAndCollapseToken 'OPERATOR_MINUS_ASSIGN, OPERATOR_MINUS, OPERATOR_ASSIGN'>>     // -=
-    |<<checkAndCollapseToken 'OPERATOR_MUL_ASSIGN, OPERATOR_MUL, OPERATOR_ASSIGN'>>       // *=
-    |<<checkAndCollapseToken 'OPERATOR_DIV_ASSIGN, OPERATOR_DIV, OPERATOR_ASSIGN'>>       // /=
-    |<<checkAndCollapseToken 'OPERATOR_MOD_ASSIGN, OPERATOR_MOD, OPERATOR_ASSIGN'>>       // %=
-    |<<checkAndCollapseToken 'OPERATOR_CONCAT_ASSIGN, OPERATOR_CONCAT, OPERATOR_ASSIGN'>>    // .=
-    |<<checkAndCollapseToken 'OPERATOR_X_ASSIGN, OPERATOR_X, OPERATOR_ASSIGN'>>         // x=
-    |<<checkAndCollapseToken 'OPERATOR_BITWISE_AND_ASSIGN, OPERATOR_BITWISE_AND, OPERATOR_ASSIGN'>>   // &=
-    |<<checkAndCollapseToken 'OPERATOR_BITWISE_OR_ASSIGN, OPERATOR_BITWISE_OR, OPERATOR_ASSIGN'>>    // |=
-    |<<checkAndCollapseToken 'OPERATOR_BITWISE_XOR_ASSIGN, OPERATOR_BITWISE_XOR, OPERATOR_ASSIGN'>>   // ^=
-    |<<checkAndCollapseToken 'OPERATOR_SHIFT_LEFT_ASSIGN, OPERATOR_SHIFT_LEFT, OPERATOR_ASSIGN'>>    //  <<=
-    |<<checkAndCollapseToken 'OPERATOR_SHIFT_RIGHT_ASSIGN, OPERATOR_SHIFT_RIGHT, OPERATOR_ASSIGN'>>   //  >>=
-    |<<checkAndCollapseToken 'OPERATOR_AND_ASSIGN, OPERATOR_AND, OPERATOR_ASSIGN'>>           //  &&=
-    |<<checkAndCollapseToken 'OPERATOR_OR_ASSIGN, OPERATOR_OR, OPERATOR_ASSIGN'>>            //  ||=
-    |<<checkAndCollapseToken 'OPERATOR_OR_DEFINED_ASSIGN, OPERATOR_OR_DEFINED, OPERATOR_ASSIGN'>>    //  //=
-    |OPERATOR_ASSIGN !OPERATOR_ASSIGN
+    OPERATOR_POW_ASSIGN  // **=
+    | OPERATOR_PLUS_ASSIGN      // +=
+    | OPERATOR_MINUS_ASSIGN     // -=
+    | OPERATOR_MUL_ASSIGN       // *=
+    | OPERATOR_DIV_ASSIGN       // /=
+    | OPERATOR_MOD_ASSIGN       // %=
+    | OPERATOR_CONCAT_ASSIGN    // .=
+    | OPERATOR_X_ASSIGN         // x=
+    | OPERATOR_BITWISE_AND_ASSIGN   // &=
+    | OPERATOR_BITWISE_OR_ASSIGN    // |=
+    | OPERATOR_BITWISE_XOR_ASSIGN  // ^=
+    | OPERATOR_SHIFT_LEFT_ASSIGN   //  <<=
+    | OPERATOR_SHIFT_RIGHT_ASSIGN  //  >>=
+    | OPERATOR_AND_ASSIGN           //  &&=
+    | OPERATOR_OR_ASSIGN  //  ||=
+    | OPERATOR_OR_DEFINED_ASSIGN    //  //=
+    | OPERATOR_ASSIGN
 
 comma_sequence_expr ::= expr <<parseCommaSequence>> // fixme implement pinnning
 
@@ -972,7 +971,7 @@ array_hash_slice ::= array_primitive hash_index
 
 array_cast_expr ::= SIGIL_ARRAY cast_target
 
-hash_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_MOD, SIGIL_HASH'>> cast_target
+hash_cast_expr ::= SIGIL_HASH cast_target
 
 private scalar_primitive ::=
     scalar_variable
@@ -995,7 +994,7 @@ private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_MUL, SIGIL_GLOB'>> cast_target
+glob_cast_expr ::= SIGIL_GLOB cast_target
 
 glob_slot ::= glob_primitive hash_index
 
@@ -1023,11 +1022,11 @@ private callable ::= method | code // being used in parseFunctionCall
 private referencable_expr ::= code | scalar_expr
 
 private code ::=
-    <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> method
+    SIGIL_CODE method
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> cast_target
+code_cast_expr ::= SIGIL_CODE cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -1090,17 +1089,16 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= SIGIL_SCALAR_INDEX variable_body
 scalar_variable ::= SIGIL_SCALAR variable_body
 array_variable ::= SIGIL_ARRAY variable_body
-hash_variable ::= <<parseAmbiguousSigil 'OPERATOR_MOD, SIGIL_HASH'>> variable_body
-
-//fixme probably this should not be here
-code_variable ::= <<parseAmbiguousSigil 'OPERATOR_BITWISE_AND, SIGIL_CODE'>> variable_body
-
-glob_variable ::= <<parseAmbiguousSigil 'OPERATOR_MUL, SIGIL_GLOB'>> variable_body
+hash_variable ::= SIGIL_HASH variable_body
+code_variable ::= SIGIL_CODE variable_body
+glob_variable ::= SIGIL_GLOB variable_body
 
 private variable_body ::=
- 	[package_token] VARIABLE_NAME
- 	| LEFT_BRACE [package_token] VARIABLE_NAME RIGHT_BRACE
-	| <<parseVariableName>>
+ 	LEFT_BRACE [package_token] VARIABLE_NAME ? RIGHT_BRACE
+ 	| package_token VARIABLE_NAME ?
+ 	| VARIABLE_NAME
+
+//	| <<parseVariableName>>
 
 private comma ::= OPERATOR_COMMA | OPERATOR_COMMA_ARROW
 method ::= <<parseMethod>>

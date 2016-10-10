@@ -39,9 +39,9 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	}
 
 	@Override
-	protected int getPreparsedLexicalState()
+	public int yystate()
 	{
-		return LEX_PREPARSED_ITEMS;
+		return preparsedTokensList.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
 	}
 
 	@Override

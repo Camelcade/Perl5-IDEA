@@ -66,11 +66,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 	}
 
 
-	public boolean isValidIdentifierCharacter(char character)
-	{
-		return character == '_' || Character.isLetterOrDigit(character);
-	}
-
 	protected IElementType startVariableLexing(int sigilSize, IElementType sigilType)
 	{
 		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_VARIABLE_NAME, sigilType);
@@ -81,10 +76,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_BRACED_VARIABLE_NAME, sigilType);
 	}
 
+
 	private IElementType startVariableLexing(int sigilSize, int newState, IElementType sigilType)
 	{
 		yypushback(yylength() - sigilSize);
-		pushStateAndBegin(newState);
+		yybegin(newState);
 		return sigilType;
 	}
 }

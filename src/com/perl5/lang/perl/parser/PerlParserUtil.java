@@ -773,6 +773,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	 * @param l parsing level
 	 * @return parsing result
 	 */
+/*
 	public static boolean parseVariableName(PsiBuilder b, int l)
 	{
 		IElementType currentTokenType = b.getTokenType();
@@ -870,6 +871,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		b.advanceLexer();
 		return true;
 	}
+*/
 
 	protected static boolean isOperatorToken(PsiBuilder b, int l)
 	{

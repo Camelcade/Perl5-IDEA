@@ -26,7 +26,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 
@@ -36,6 +35,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.perl.PerlParserDefinition.WHITE_SPACE_AND_COMMENTS;
 import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE_FULL;
 
 public class PerlLexer extends PerlLexerGenerated
@@ -56,17 +56,12 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern ANNOTATION_PATTERN = Pattern.compile("^(\\p{L}+)(?:(\\s+)(.+)?)?$");
 	// fixme this is not dry with package pattern
 	public static final Pattern ANNOTATION_PATTERN_PACKAGE = Pattern.compile("^(\\p{L}[\\p{L}_\\d]*(?:::[_\\p{L}\\d]+)*)(.*)$");
-
-
 	public static final String STRING_DATA = "__DATA__";
 	public static final int STRING_DATA_LENGTH = STRING_DATA.length();
 	public static final String STRING_END = "__END__";
 	public static final int STRING_END_LENGTH = STRING_END.length();
-
 	public static final String TR_MODIFIERS = "cdsr";
-
 	public static final String SPECIAL_VARIABLE_NAMES_OPERATORS = "\\!'|+-/<=>~?";
-
 	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
@@ -106,7 +101,6 @@ public class PerlLexer extends PerlLexerGenerated
 			, OPERATOR_PLUS
 			, SEMICOLON
 	);
-
 	// tokens allowed to be between my/our/state and attributes :
 	public static final TokenSet ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
@@ -144,7 +138,6 @@ public class PerlLexer extends PerlLexerGenerated
 //			, LEFT_BRACE
 //			, RIGHT_BRACE
 	);
-
 	// tokens allowed to be in attribute
 	public static final TokenSet ALLOWED_IN_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
@@ -159,7 +152,6 @@ public class PerlLexer extends PerlLexerGenerated
 			, COLON
 			, STRING_CONTENT
 	);
-
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
@@ -289,7 +281,6 @@ public class PerlLexer extends PerlLexerGenerated
 			QUOTE_TICK_CLOSE,
 			VARIABLE_NAME
 	);
-
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
 			"scalar",
 			"split",
@@ -297,7 +288,6 @@ public class PerlLexer extends PerlLexerGenerated
 			"grep"
 	));
 	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
-
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> NAMED_OPERATORS = new HashMap<String, IElementType>();
@@ -413,7 +403,6 @@ public class PerlLexer extends PerlLexerGenerated
 
 	// last captured heredoc marker
 	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<PerlHeredocQueueElement>();
-
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -440,6 +429,17 @@ public class PerlLexer extends PerlLexerGenerated
 	 **/
 	protected IElementType regexCommand = null;
 	Project myProject;
+	private TokenSet PRE_OPERATOR_TOKENSET = TokenSet.create(
+			VARIABLE_NAME,
+			LEFT_PAREN,
+			IDENTIFIER,
+			STRING_BARE,
+			QUOTE_SINGLE_CLOSE,
+			QUOTE_DOUBLE_CLOSE,
+			QUOTE_TICK_CLOSE,
+			RIGHT_BRACE
+	);
+	private boolean myFormatWaiting = false;
 
 	public PerlLexer(Project project)
 	{
@@ -568,10 +568,11 @@ public class PerlLexer extends PerlLexerGenerated
 	}
 
 	@Override
-	protected int getPreparsedLexicalState()
+	public int yystate()
 	{
-		return LEX_PREPARSED_ITEMS;
+		return preparsedTokensList.isEmpty() && !myFormatWaiting && heredocQueue.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
 	}
+
 
 	/**
 	 * Lexers perlAdvance method. Parses some thing here, or just invoking generated flex parser
@@ -593,6 +594,7 @@ public class PerlLexer extends PerlLexerGenerated
 		else
 		{
 			int currentState = yystate();
+			int currentRealState = getRealLexicalState();
 			char currentChar = buffer.charAt(tokenStart);
 
 			// capture heredoc
@@ -601,9 +603,10 @@ public class PerlLexer extends PerlLexerGenerated
 				return captureHereDoc(false);
 			}
 			// capture format
-			else if (currentState == LEX_FORMAT_WAITING && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
+			else if (myFormatWaiting && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 			{
 				IElementType tokenType = captureFormat();
+				myFormatWaiting = false;
 				if (tokenType != null)    // got something
 				{
 					return tokenType;
@@ -621,24 +624,17 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return parseTr();
 			}
-			else if (currentChar == '"' || currentChar == '\'' || currentChar == '`')
+			else if ((currentChar == '"' || currentChar == '\'' || currentChar == '`') && currentRealState != LEX_BRACED_VARIABLE_NAME && currentRealState != LEX_VARIABLE_NAME)
 			{
-				// fixme this is dirty
-				PerlTokenHistory tokenHistory = getTokenHistory();
-				IElementType lastTokenType = tokenHistory.getLastTokenType();
-				boolean isDirectlyAfterSigil = SIGILS_TOKENS.contains(lastTokenType);    // $'
-				boolean isBracedVariable = !isDirectlyAfterSigil && lastTokenType == LEFT_BRACE && SIGILS_TOKENS.contains(tokenHistory.getLastUnbracedTokenType())
-						&& getNextNonSpaceCharacter(tokenStart + 1) == '}';    // ${'}
-
-				if (currentChar == '\'' && !isDirectlyAfterSigil && !isBracedVariable)
+				if (currentChar == '\'')
 				{
 					return captureString(LEX_QUOTE_LIKE_OPENER_Q);
 				}
-				else if (currentChar == '"' && !isDirectlyAfterSigil && !isBracedVariable)
+				else if (currentChar == '"')
 				{
 					return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
 				}
-				else if (currentChar == '`' && !isDirectlyAfterSigil && !isBracedVariable)
+				else
 				{
 					return captureString(LEX_QUOTE_LIKE_OPENER_QX);
 				}
@@ -943,7 +939,7 @@ public class PerlLexer extends PerlLexerGenerated
 				int realLexicalState = getRealLexicalState();
 				if (realLexicalState == LEX_VARIABLE_NAME || realLexicalState == LEX_BRACED_VARIABLE_NAME)
 				{
-					popState();
+					yybegin(YYINITIAL);
 				}
 
 				return VARIABLE_NAME;
@@ -1018,9 +1014,7 @@ public class PerlLexer extends PerlLexerGenerated
 		int tokenStart = getTokenStart();
 		pushPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
 		pushPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
-		heredocQueue.push(new PerlHeredocQueueElement(LEX_HEREDOC_WAITING, openToken.subSequence(3, openToken.length()).toString()));
-		pushState();
-		yybegin(LEX_HEREDOC_WAITING);
+		heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, openToken.subSequence(3, openToken.length()).toString()));
 		setTokenEnd(tokenStart + 2);
 		return OPERATOR_HEREDOC;
 	}
@@ -1034,7 +1028,7 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		CharSequence openToken = yytext();
 		Matcher m;
-		int newState = LEX_HEREDOC_WAITING_QQ;
+		IElementType targetElement = HEREDOC_QQ;
 
 		if (StringUtil.endsWithChar(openToken, '"'))
 		{
@@ -1043,12 +1037,12 @@ public class PerlLexer extends PerlLexerGenerated
 		else if (StringUtil.endsWithChar(openToken, '\''))
 		{
 			m = HEREDOC_OPENER_PATTERN_SQ.matcher(openToken);
-			newState = LEX_HEREDOC_WAITING;
+			targetElement = HEREDOC;
 		}
 		else if (StringUtil.endsWithChar(openToken, '`'))
 		{
 			m = HEREDOC_OPENER_PATTERN_XQ.matcher(openToken);
-			newState = LEX_HEREDOC_WAITING_QX;
+			targetElement = HEREDOC_QX;
 		}
 		else
 		{
@@ -1066,7 +1060,7 @@ public class PerlLexer extends PerlLexerGenerated
 			if (m.groupCount() > 1)    // quoted heredoc
 			{
 				String heredocMarker = m.group(3);
-				heredocQueue.push(new PerlHeredocQueueElement(newState, heredocMarker));
+				heredocQueue.push(new PerlHeredocQueueElement(targetElement, heredocMarker));
 
 				int elementLength = m.group(1).length();
 				if (elementLength > 0)    // got spaces
@@ -1099,7 +1093,7 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 
 				String heredocMarker = m.group(1);
-				heredocQueue.push(new PerlHeredocQueueElement(newState, heredocMarker));
+				heredocQueue.push(new PerlHeredocQueueElement(targetElement, heredocMarker));
 				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
 			}
 		}
@@ -1107,9 +1101,6 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
 		}
-
-		pushState();
-		yybegin(LEX_HEREDOC_WAITING);    // actual heredoc waiting got from heredocQueue
 
 		return OPERATOR_HEREDOC;
 	}
@@ -1122,20 +1113,10 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType captureHereDoc(boolean afterEmptyCloser)
 	{
-		popState();
 		final PerlHeredocQueueElement heredocQueueElement = heredocQueue.remove(0);
 		final String heredocMarker = heredocQueueElement.getMarker();
-		final int oldState = heredocQueueElement.getState();
 
-		IElementType tokenType = HEREDOC;
-		if (oldState == LEX_HEREDOC_WAITING_QQ)
-		{
-			tokenType = HEREDOC_QQ;
-		}
-		else if (oldState == LEX_HEREDOC_WAITING_QX)
-		{
-			tokenType = HEREDOC_QX;
-		}
+		IElementType tokenType = heredocQueueElement.getTargetElement();
 
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
@@ -1220,7 +1201,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 	public IElementType captureFormat()
 	{
-		popState();
 		CharSequence buffer = getBuffer();
 		int tokenStart = getTokenEnd();
 		setTokenStart(tokenStart);
@@ -1380,17 +1360,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return OPERATOR_X;
 	}
 
-	public IElementType parseCappedVariableName()
-	{
-		// fixme fix this according to http://perldoc.perl.org/perlvar.html#The-Syntax-of-Variable-Names
-		if (SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType()))
-		{
-			return IDENTIFIER;
-		}
-
-		yypushback(yylength() - 1);
-		return OPERATOR_BITWISE_XOR;
-	}
 
 	/**
 	 * Sets up regex parser
@@ -1821,12 +1790,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public boolean waitingHereDoc()
 	{
-		return waitingHereDoc(yystate());
-	}
-
-	public boolean waitingHereDoc(int state)
-	{
-		return state == LEX_HEREDOC_WAITING || state == LEX_HEREDOC_WAITING_QQ || state == LEX_HEREDOC_WAITING_QX;
+		return !heredocQueue.isEmpty();
 	}
 
 	/**
@@ -2057,21 +2021,6 @@ public class PerlLexer extends PerlLexerGenerated
 	}
 
 
-	public void registerToken(IElementType tokenType, String tokenText)
-	{
-		super.registerToken(tokenType, tokenText);
-
-		// fixme refactor this
-		if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType))
-		{
-			if (yystate() == YYINITIAL && tokenType != SEMICOLON) // to ensure proper highlighting reparsing
-			{
-				yybegin(LEX_CODE);
-			}
-		}
-	}
-
-
 	@Override
 	public void resetInternals()
 	{
@@ -2097,25 +2046,6 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				allowSharpQuote = false;
 			}
-			else if (tokenType == SEMICOLON) // fixme this is bad, semi might be in the prototype
-			{
-				int currentState = yystate();
-				if (currentState != LEX_FORMAT_WAITING && currentState != LEX_HEREDOC_WAITING)
-				{
-					yybegin(YYINITIAL);
-				}
-/*
-				else if (!stateStack.isEmpty())
-				{
-					int i = stateStack.size() - 1;
-					while (i >= 0 && waitingHereDoc(stateStack.get(i)))
-					{
-						i--;
-					}
-					stateStack.set(i, YYINITIAL);
-				}
-*/
-			}
 			else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
 			{
 				processQuoteLikeStringOpener(tokenType);
@@ -2140,21 +2070,18 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if (tokenType == RESERVED_FORMAT)
 			{
-				pushState();
-				yybegin(LEX_FORMAT_WAITING);
+				myFormatWaiting = true;
 			}
-			else if (tokenType == SIGIL_SCALAR)
-			{
-				// fixme this is really lame, because $$. is valid operation but won't work here
-				// fixme this is fires badly in prototypes and signatures like $$
-				char nextChar = getNextCharacter();
-				if (StringUtil.containsChar(SPECIAL_VARIABLE_NAMES_OPERATORS, nextChar) &&
-						(nextChar != '\'' || !isValidIdentifierCharacter(getSafeCharacterAt(getTokenEnd() + 1)))
-						)
-				{
-					pushPreparsedToken(getTokenEnd(), getTokenEnd() + 1, IDENTIFIER);
-				}
-			}
+		}
+
+		int yystate = getRealLexicalState();
+		if (yystate == YYINITIAL && PRE_OPERATOR_TOKENSET.contains(tokenType))
+		{
+			yybegin(LEX_OPERATOR);
+		}
+		else if (yystate == LEX_OPERATOR && !WHITE_SPACE_AND_COMMENTS.contains(tokenType))
+		{
+			yybegin(YYINITIAL);
 		}
 
 		return tokenType;

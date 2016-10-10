@@ -79,14 +79,6 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract CharSequence yytext();
 
-	protected abstract int getPreparsedLexicalState();
-
-	@Override
-	public int yystate()
-	{
-		return !preparsedTokensList.isEmpty() ? getPreparsedLexicalState() : getRealLexicalState();
-	}
-
 
 	/**
 	 * Reading tokens from parsed queue, setting start and end and returns them one by one
@@ -103,12 +95,6 @@ public abstract class PerlProtoLexer implements FlexLexer
 		setTokenStart(token.getTokenStart());
 		setTokenEnd(token.getTokenEnd());
 		return token.getTokenType();
-	}
-
-	public void pushStateAndBegin(int newState)
-	{
-		pushState();
-		yybegin(newState);
 	}
 
 	public void pushState()
