@@ -16,16 +16,16 @@
 
 package com.perl5.lang.htmlmason.lexer;
 
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class HTMLMasonLexerAdapter extends FlexAdapter
 {
 	public HTMLMasonLexerAdapter(Project project)
 	{
-		super(new HTMLMasonLexer(project));
+		super(new HTMLMasonLexerGenerated(null));
 	}
 }

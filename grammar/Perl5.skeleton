@@ -72,6 +72,17 @@
 	protected int getBufferStart(){ return bufferStart;	}
  	public int getRealLexicalState() {return zzLexicalState;  }
 
+ 	public void pullback(int i)
+ 	{
+ 		int length = yylength();
+ 		if( i == length)
+ 		{
+ 			return;
+ 		}
+ 		assert i < length: "Pulling back for " + i + " of " + length + " for: " + yytext();
+		yypushback(length - i);
+ 	}
+
   public final int getTokenStart() {
     return zzStartRead;
   }

@@ -35,33 +35,20 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.perl5.lang.perl.PerlParserDefinition.WHITE_SPACE_AND_COMMENTS;
-import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE_FULL;
-
 public class PerlLexer extends PerlLexerGenerated
 {
 	public static final String STRING_UNDEF = "undef";
 	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
 	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
-	public static final Pattern BARE_STRING_PATTERN = Pattern.compile("[-+]*[_\\p{L}][_\\p{L}\\d]*");
 
 	// pattern for getting marker
 	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
 	public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
 	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
-	public static final Pattern VERSION_IDENTIFIER_PATTERN = Pattern.compile("^(v[\\d_]+)");
 
-	public static final Pattern ANNOTATION_PATTERN = Pattern.compile("^(\\p{L}+)(?:(\\s+)(.+)?)?$");
-	// fixme this is not dry with package pattern
-	public static final Pattern ANNOTATION_PATTERN_PACKAGE = Pattern.compile("^(\\p{L}[\\p{L}_\\d]*(?:::[_\\p{L}\\d]+)*)(.*)$");
-	public static final String STRING_DATA = "__DATA__";
-	public static final int STRING_DATA_LENGTH = STRING_DATA.length();
-	public static final String STRING_END = "__END__";
-	public static final int STRING_END_LENGTH = STRING_END.length();
 	public static final String TR_MODIFIERS = "cdsr";
-	public static final String SPECIAL_VARIABLE_NAMES_OPERATORS = "\\!'|+-/<=>~?";
 	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
 			TokenType.NEW_LINE_INDENT
 			, TokenType.WHITE_SPACE
@@ -269,18 +256,6 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_NE_NUMERIC,
 			OPERATOR_SMARTMATCH
 	);
-	// tokens which may preceeds .123 and . is a concat
-	public static final TokenSet CONCAT_OPERATOR_PREFIX = TokenSet.create(
-			IDENTIFIER,
-			RIGHT_BRACE,
-			RIGHT_PAREN,
-			RIGHT_BRACKET,
-			PACKAGE_IDENTIFIER,
-			QUOTE_SINGLE_CLOSE,
-			QUOTE_DOUBLE_CLOSE,
-			QUOTE_TICK_CLOSE,
-			VARIABLE_NAME
-	);
 	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
 			"scalar",
 			"split",
@@ -290,9 +265,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> NAMED_OPERATORS = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> BLOCK_NAMES = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> TAG_NAMES = new HashMap<String, IElementType>();
 	public static final TokenSet QUOTE_LIKE_STRING_OPENER_TOKENSET = TokenSet.create(
 			RESERVED_QW,
 			RESERVED_Q,
@@ -313,24 +285,6 @@ public class PerlLexer extends PerlLexerGenerated
 			QUOTE_LIKE_REGEX_OPENER_TOKENSET,
 			QUOTE_LIKE_TRANSLATE_OPENER_TOKENSET
 	);
-	static final HashSet<String> PACKAGE_EXCEPTIONS = new HashSet<String>(Arrays.asList(
-			"eq",
-			"ne",
-			"gt",
-			"lt",
-			"ge",
-			"le",
-
-			"qw",
-			"qr",
-			"qx",
-			"qq",
-			"tr",
-			"m",
-			"q",
-			"s",
-			"y"
-	));
 	// tokens that preceeds regexp opener or file <FH>
 	public static TokenSet BARE_REGEX_PREFIX_TOKENSET =
 			TokenSet.andNot(
@@ -356,45 +310,6 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		PRAGMA_TOKENS_MAP.put("constant", PACKAGE_PRAGMA_CONSTANT);
 		PRAGMA_TOKENS_MAP.put("vars", PACKAGE_PRAGMA_VARS);
-	}
-
-	static
-	{
-		// named operators
-		NAMED_OPERATORS.put("x", OPERATOR_X);
-
-		NAMED_OPERATORS.put("not", OPERATOR_NOT_LP);
-		NAMED_OPERATORS.put("and", OPERATOR_AND_LP);
-		NAMED_OPERATORS.put("or", OPERATOR_OR_LP);
-		NAMED_OPERATORS.put("xor", OPERATOR_XOR_LP);
-
-		NAMED_OPERATORS.put("lt", OPERATOR_LT_STR);
-		NAMED_OPERATORS.put("gt", OPERATOR_GT_STR);
-		NAMED_OPERATORS.put("le", OPERATOR_LE_STR);
-		NAMED_OPERATORS.put("ge", OPERATOR_GE_STR);
-		NAMED_OPERATORS.put("eq", OPERATOR_EQ_STR);
-		NAMED_OPERATORS.put("ne", OPERATOR_NE_STR);
-		NAMED_OPERATORS.put("cmp", OPERATOR_CMP_STR);
-
-		// block names
-		BLOCK_NAMES.put("BEGIN", BLOCK_NAME);
-		BLOCK_NAMES.put("UNITCHECK", BLOCK_NAME);
-		BLOCK_NAMES.put("CHECK", BLOCK_NAME);
-		BLOCK_NAMES.put("INIT", BLOCK_NAME);
-		BLOCK_NAMES.put("END", BLOCK_NAME);
-
-		// these added for core packages, not blocks, just subs
-		BLOCK_NAMES.put("AUTOLOAD", BLOCK_NAME);
-		BLOCK_NAMES.put("DESTROY", BLOCK_NAME);
-
-		PerlParserUtil.addConvertableTokens(BLOCK_NAMES.values().toArray(new IElementType[BLOCK_NAMES.values().size()]));
-
-		// tags
-		TAG_NAMES.put("__FILE__", TAG);
-		TAG_NAMES.put("__LINE__", TAG);
-		TAG_NAMES.put("__PACKAGE__", TAG);
-		TAG_NAMES.put("__SUB__", TAG);
-
 	}
 
 	/**
@@ -431,13 +346,16 @@ public class PerlLexer extends PerlLexerGenerated
 	Project myProject;
 	private TokenSet PRE_OPERATOR_TOKENSET = TokenSet.create(
 			VARIABLE_NAME,
-			LEFT_PAREN,
+			RIGHT_PAREN,
+			RIGHT_BRACKET,
 			IDENTIFIER,
+			RIGHT_BRACE,
 			STRING_BARE,
 			QUOTE_SINGLE_CLOSE,
 			QUOTE_DOUBLE_CLOSE,
 			QUOTE_TICK_CLOSE,
-			RIGHT_BRACE
+			NUMBER,
+			NUMBER_SIMPLE
 	);
 	private boolean myFormatWaiting = false;
 
@@ -451,63 +369,6 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		RESERVED_TOKEN_TYPES.clear();
 		// reserved
-		RESERVED_TOKEN_TYPES.put("if", RESERVED_IF);
-		RESERVED_TOKEN_TYPES.put("unless", RESERVED_UNLESS);
-		RESERVED_TOKEN_TYPES.put("elsif", RESERVED_ELSIF);
-		RESERVED_TOKEN_TYPES.put("else", RESERVED_ELSE);
-		RESERVED_TOKEN_TYPES.put("given", RESERVED_GIVEN);
-		RESERVED_TOKEN_TYPES.put("when", RESERVED_WHEN);
-		RESERVED_TOKEN_TYPES.put("default", RESERVED_DEFAULT);
-		RESERVED_TOKEN_TYPES.put("while", RESERVED_WHILE);
-		RESERVED_TOKEN_TYPES.put("until", RESERVED_UNTIL);
-		RESERVED_TOKEN_TYPES.put("for", RESERVED_FOR);
-		RESERVED_TOKEN_TYPES.put("foreach", RESERVED_FOREACH);
-		RESERVED_TOKEN_TYPES.put("continue", RESERVED_CONTINUE);
-
-		RESERVED_TOKEN_TYPES.put("format", RESERVED_FORMAT);
-		RESERVED_TOKEN_TYPES.put("sub", RESERVED_SUB);
-		RESERVED_TOKEN_TYPES.put("package", RESERVED_PACKAGE);
-		RESERVED_TOKEN_TYPES.put("use", RESERVED_USE);
-		RESERVED_TOKEN_TYPES.put("no", RESERVED_NO);
-		RESERVED_TOKEN_TYPES.put("require", RESERVED_REQUIRE);
-
-		RESERVED_TOKEN_TYPES.put(STRING_UNDEF, RESERVED_UNDEF);
-
-		RESERVED_TOKEN_TYPES.put("print", RESERVED_PRINT);
-		RESERVED_TOKEN_TYPES.put("printf", RESERVED_PRINTF);
-		RESERVED_TOKEN_TYPES.put("say", RESERVED_SAY);
-
-		RESERVED_TOKEN_TYPES.put("grep", RESERVED_GREP);
-		RESERVED_TOKEN_TYPES.put("map", RESERVED_MAP);
-		RESERVED_TOKEN_TYPES.put("sort", RESERVED_SORT);
-
-		RESERVED_TOKEN_TYPES.put("qw", RESERVED_QW);
-
-		RESERVED_TOKEN_TYPES.put("qq", RESERVED_QQ);
-		RESERVED_TOKEN_TYPES.put("q", RESERVED_Q);
-		RESERVED_TOKEN_TYPES.put("qx", RESERVED_QX);
-
-		RESERVED_TOKEN_TYPES.put("tr", RESERVED_TR);
-		RESERVED_TOKEN_TYPES.put("y", RESERVED_Y);
-
-		RESERVED_TOKEN_TYPES.put("s", RESERVED_S);
-		RESERVED_TOKEN_TYPES.put("qr", RESERVED_QR);
-		RESERVED_TOKEN_TYPES.put("m", RESERVED_M);
-
-		RESERVED_TOKEN_TYPES.put("my", RESERVED_MY);
-		RESERVED_TOKEN_TYPES.put("our", RESERVED_OUR);
-		RESERVED_TOKEN_TYPES.put("state", RESERVED_STATE);
-		RESERVED_TOKEN_TYPES.put("local", RESERVED_LOCAL);
-
-		RESERVED_TOKEN_TYPES.put("do", RESERVED_DO);
-		RESERVED_TOKEN_TYPES.put("eval", RESERVED_EVAL);
-
-		RESERVED_TOKEN_TYPES.put("goto", RESERVED_GOTO);
-		RESERVED_TOKEN_TYPES.put("redo", RESERVED_REDO);
-		RESERVED_TOKEN_TYPES.put("next", RESERVED_NEXT);
-		RESERVED_TOKEN_TYPES.put("last", RESERVED_LAST);
-
-		RESERVED_TOKEN_TYPES.put("return", RESERVED_RETURN);
 	}
 
 	public static void initReservedTokensSet()
@@ -515,15 +376,8 @@ public class PerlLexer extends PerlLexerGenerated
 		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
 		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
 
-		Set<IElementType> allTextTokens = new HashSet<IElementType>();
-
-		allTextTokens.addAll(NAMED_OPERATORS.values());
-		allTextTokens.addAll(BLOCK_NAMES.values());
-		allTextTokens.addAll(TAG_NAMES.values());
-
 		LABEL_TOKENSET = TokenSet.andNot(
 				TokenSet.orSet(
-						TokenSet.create(allTextTokens.toArray(new IElementType[allTextTokens.size()])),
 						RESERVED_TOKENSET,
 						CUSTOM_TOKENSET,
 						PerlParserUtil.CONVERTABLE_TOKENS
@@ -639,19 +493,6 @@ public class PerlLexer extends PerlLexerGenerated
 					return captureString(LEX_QUOTE_LIKE_OPENER_QX);
 				}
 			}
-			// capture __DATA__ __END__
-			// capture pod
-			else if (currentChar == '=' && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n') && bufferEnd > tokenStart + 1 && Character.isLetter(buffer.charAt(tokenStart + 1)))
-			{
-				return capturePodBlock();
-			}
-			// capture qw content from qw();
-			else if (((tokenStart < bufferEnd - STRING_DATA_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_DATA_LENGTH), STRING_DATA))
-					|| ((tokenStart < bufferEnd - STRING_END_LENGTH) && StringUtil.equals(buffer.subSequence(tokenStart, tokenStart + STRING_END_LENGTH), STRING_END))
-					)
-			{
-				return parseEndBlock(tokenStart, bufferEnd);
-			}
 			// capture line comment
 			else if (currentChar == '#')
 			{
@@ -676,43 +517,6 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		return super.perlAdvance();
 	}
-
-
-	private IElementType parseEndBlock(int tokenStart, int bufferEnd)
-	{
-		int run = tokenStart;
-		CharSequence buffer = getBuffer();
-
-		if (buffer.charAt(run + 2) == 'D')
-		{
-			pushPreparsedToken(run, run + STRING_DATA_LENGTH, TAG_DATA);
-			run += STRING_DATA_LENGTH;
-		}
-		else
-		{
-			pushPreparsedToken(run, run + STRING_END_LENGTH, TAG_END);
-			run += STRING_END_LENGTH;
-		}
-		tokenStart = run;
-
-		while (run < bufferEnd)
-		{
-			char currentChar = buffer.charAt(run);
-			if (currentChar == '=' && (run == 0 || buffer.charAt(run - 1) == '\n') && run + 1 < bufferEnd && Character.isLetter(buffer.charAt(run + 1)))
-			{
-				break;
-			}
-			run++;
-		}
-
-		pushPreparsedToken(tokenStart, run, COMMENT_BLOCK);
-		if (run < bufferEnd)
-		{
-			pushPreparsedToken(run, bufferEnd, POD);
-		}
-		return getPreParsedToken();
-	}
-
 
 	public boolean isOpeningQuoteFor(int currentState, char currentChar, int... states)
 	{
@@ -805,6 +609,7 @@ public class PerlLexer extends PerlLexerGenerated
 		PerlStringLexer stringLexer = getStringLexer();
 		popState();
 		preparsedTokensList.addAll(lexCurrentToken(stringLexer));
+		yybegin(LEX_OPERATOR);
 		return getPreParsedToken();
 	}
 
@@ -888,72 +693,6 @@ public class PerlLexer extends PerlLexerGenerated
 
 
 	/**
-	 * Checks that version is a really version, not a variable name
-	 * fixme how about sub v123123 ?
-	 *
-	 * @return token type
-	 */
-	@Override
-	public IElementType parseVersion()
-	{
-		if (SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType())
-				|| isBraced() && SIGILS_TOKENS.contains(getTokenHistory().getLastUnbracedTokenType())
-				)
-		{
-			CharSequence tokenText = yytext();
-			Matcher m = VERSION_IDENTIFIER_PATTERN.matcher(tokenText);
-			if (m.find())
-			{
-				if (m.group(1).length() < tokenText.length())
-				{
-					yypushback(tokenText.length() - m.group(1).length());
-				}
-				return IDENTIFIER;
-			}
-
-		}
-		return NUMBER_VERSION;
-	}
-
-	/**
-	 * Parses number, handling some specific cases
-	 *
-	 * @return token type
-	 */
-	@Override
-	public IElementType parseNumber()
-	{
-		CharSequence tokenText = yytext();
-//		System.err.println("For "  + tokenText + "Last significant token is " + getTokenHistory().getLastSignificantTokenType());
-		if (tokenText.charAt(0) == '.' && CONCAT_OPERATOR_PREFIX.contains(getTokenHistory().getLastSignificantTokenType())) // It's a $var.123; where . is a concat
-		{
-			yypushback(tokenText.length() - 1);
-			return OPERATOR_CONCAT;
-		}
-		else if (StringUtil.endsWith(tokenText, "."))
-		{
-			if (getTokenHistory().getLastUnbracedTokenType() == SIGIL_SCALAR) // $1.$something
-			{
-				yypushback(1);
-
-				int realLexicalState = getRealLexicalState();
-				if (realLexicalState == LEX_VARIABLE_NAME || realLexicalState == LEX_BRACED_VARIABLE_NAME)
-				{
-					yybegin(YYINITIAL);
-				}
-
-				return VARIABLE_NAME;
-			}
-			if (getNextCharacter() == '.')    // it's a 1..10
-			{
-				yypushback(1);
-			}
-		}
-		return NUMBER;
-	}
-
-
-	/**
 	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isLineCommentEnd(int)} }
 	 *
 	 * @param currentPosition current position to check
@@ -964,49 +703,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return getBuffer().charAt(currentPosition) == '\n';
 	}
 
-	/**
-	 * Captures pod block from current position
-	 *
-	 * @return PERL_POD token type
-	 */
-	public IElementType capturePodBlock()
-	{
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenEnd();
-		setTokenStart(tokenStart);
-		int bufferEnd = getBufferEnd();
-
-		int currentPosition = tokenStart;
-		int linePos = currentPosition;
-		int linesNumber = 0;
-
-		while (true)
-		{
-			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n')
-			{
-				linePos++;
-			}
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
-			{
-				linePos++;
-			}
-			CharSequence line = buffer.subSequence(currentPosition, linePos);
-			currentPosition = linePos;
-
-			if (linePos == bufferEnd || StringUtil.startsWith(line, "=cut") && linesNumber > 0)
-			{
-				if (linePos < bufferEnd)
-				{
-					linePos--;
-				}
-				setTokenEnd(linePos);
-				break;
-			}
-			linesNumber++;
-		}
-
-		return POD;
-	}
 
 	public IElementType parseHeredocOpenerBackref()
 	{
@@ -1271,95 +967,17 @@ public class PerlLexer extends PerlLexerGenerated
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
-	/**
-	 * Contains heuristic to detect if we are at term position. Used for regexp and <string>
-	 *
-	 * @return check result
-	 */
-	public boolean isTermPosition()
-	{
-		// todo we should check argumentless prefix sub
-		// todo we should check if we are after grep/map/sort block
-		// actually, we can't distict somesub / somediv from somesub /regex/;
-
-		PerlTokenHistory tokenHistory = getTokenHistory();
-		IElementType lastUnbracedTokenType = tokenHistory.getLastUnbracedTokenType();
-		IElementType lastSignificantTokenType = tokenHistory.getLastSignificantTokenType();
-
-		boolean isTermPrefix = BARE_REGEX_PREFIX_TOKENSET.contains(lastSignificantTokenType);
-		if (lastSignificantTokenType == OPERATOR_CONCAT)
-		{
-			PerlTokenHistory.PerlTokenHistoryElement prevElement = tokenHistory.getPreviousToken(tokenHistory.getLastSignificantToken());
-			if (prevElement != null && prevElement.getTokenType() == SIGIL_SCALAR)
-			{
-				isTermPrefix = false;
-			}
-		}
-
-		return !SIGILS_TOKENS.contains(lastUnbracedTokenType)    // for $/
-				&& (
-				lastSignificantTokenType == null
-						|| RESERVED_TOKENSET.contains(lastSignificantTokenType)
-						|| isTermPrefix
-						|| getTokenHistory().getLastUnparenTokenType() == IDENTIFIER &&
-						REGEXP_PREFIX_SUBS.contains(getTokenHistory().getLastUnparenTokenTextAsString())
-		);
-	}
 
 	// guess if this is a OPERATOR_DIV or regex opener
-	public IElementType guessDiv()
+	public IElementType startRegexp()
 	{
-		char nextChar = 0;
-		if (isTermPosition()
-				// additional hacks for regexps we could add check for (? here
-				|| (nextChar = getNextNonSpaceCharacter()) == '\\' // we can div by reference
-				|| nextChar == '['    // can't div by anon array
-				)
-		{
-			allowSharpQuote = true;
-			isEscaped = false;
-			regexCommand = RESERVED_M;
-			sectionsNumber = 1;
-			pushState();
-			return parseRegex(getTokenStart());
-		}
-		else
-		{
-			if (getNextCharacter() == '/')
-			{
-				setTokenEnd(getNextTokenStart() + 1);
-				return OPERATOR_OR_DEFINED;
-			}
-			else
-			{
-				return OPERATOR_DIV;
-			}
-		}
+		allowSharpQuote = true;
+		isEscaped = false;
+		regexCommand = RESERVED_M;
+		sectionsNumber = 1;
+		pushState();
+		return parseRegex(getTokenStart());
 	}
-
-	// fixme how about $x234sdfsdf ?
-	public IElementType checkOperatorXSticked()
-	{
-		IElementType lastSignificantTokenType = getTokenHistory().getLastSignificantTokenType();
-		if (lastSignificantTokenType == RESERVED_REQUIRE                            // require x123
-				|| IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)    // package x123, ->x123, etc.
-				)
-		{
-			return IDENTIFIER;
-		}
-		else if (isCommaArrowAhead())    // we should check for ->
-		{
-			return STRING_IDENTIFIER;
-		}
-		else if (isBraced())    // {x123}
-		{
-			return STRING_CONTENT;
-		}
-
-		yypushback(yylength() - 1);
-		return OPERATOR_X;
-	}
-
 
 	/**
 	 * Sets up regex parser
@@ -1391,6 +1009,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseTr()
 	{
 		popState();
+		yybegin(LEX_OPERATOR);
 		CharSequence buffer = getBuffer();
 		int currentOffset = getTokenEnd();
 		int bufferEnd = getBufferEnd();
@@ -1556,6 +1175,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseRegex(int tokenStart)
 	{
 		popState();
+		yybegin(LEX_OPERATOR);
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
 
@@ -1867,11 +1487,7 @@ public class PerlLexer extends PerlLexerGenerated
 				)
 		{
 
-			if ((tokenType = NAMED_OPERATORS.get(tokenText)) != null)
-			{
-				return tokenType;
-			}
-			else if (
+			if (
 					(lastSignificantTokenType == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
 							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
 							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenTextAsString())
@@ -1882,14 +1498,6 @@ public class PerlLexer extends PerlLexerGenerated
 				return HANDLE;
 			}
 			else if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
-			{
-				return tokenType;
-			}
-			else if ((tokenType = BLOCK_NAMES.get(tokenText)) != null)
-			{
-				return tokenType;
-			}
-			else if ((tokenType = TAG_NAMES.get(tokenText)) != null)
 			{
 				return tokenType;
 			}
@@ -1909,62 +1517,6 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		return IDENTIFIER;
-	}
-
-	/**
-	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
-	 *
-	 * @return token type
-	 */
-	public IElementType parseAmbiguousPackage(IElementType identifierType)
-	{
-		CharSequence tokenText = yytext();
-
-		// check if it's cmp'
-		if (tokenText.length() > 4 && tokenText.charAt(3) == '\'' && StringUtil.startsWith(tokenText, "cmp"))
-		{
-			yypushback(tokenText.length() - 3);
-			return getIdentifierToken();
-		}
-		// check if it's qw|qr|qx|qq|tr|ne|eq|gt|lt|ge|le'
-		else if (tokenText.length() > 3 && tokenText.charAt(2) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.subSequence(0, 2).toString()))
-		{
-			yypushback(tokenText.length() - 2);
-			return getIdentifierToken();
-		}
-		// check if it's m|q|s|y'
-		else if (tokenText.length() > 2 && tokenText.charAt(1) == '\'' && PACKAGE_EXCEPTIONS.contains(tokenText.subSequence(0, 1).toString()))
-		{
-			yypushback(tokenText.length() - 1);
-			return getIdentifierToken();
-		}
-
-		if (StringUtil.startsWith(tokenText, CORE_PACKAGE_FULL))
-		{
-			IElementType reservedTokenType = RESERVED_TOKEN_TYPES.get(tokenText.subSequence(CORE_PACKAGE_FULL.length(), tokenText.length()).toString());
-			if (reservedTokenType != null)
-			{
-				return reservedTokenType;
-			}
-		}
-
-		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
-		if (m.matches())
-		{
-			String packageIdentifier = m.group(1);
-
-			preparsedTokensList.clear();
-			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), identifierType);
-			preparsedTokensList.add(barewordToken);
-			setTokenEnd(packageIdentifierEnd);
-
-			return parsePackage(identifierType);
-		}
-		else
-		{
-			throw new RuntimeException("Inappropriate package name " + tokenText);
-		}
 	}
 
 	// checks if ahead is comma, semi, close brace
@@ -2007,17 +1559,6 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public IElementType parseOperatorDereference()
-	{
-		if (getTokenHistory().getLastTokenType() == SIGIL_SCALAR)    // suppose it's a $->
-		{
-			yypushback(1);
-			return IDENTIFIER;
-		}
-		return OPERATOR_DEREFERENCE;
 	}
 
 
@@ -2072,16 +1613,6 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				myFormatWaiting = true;
 			}
-		}
-
-		int yystate = getRealLexicalState();
-		if (yystate == YYINITIAL && PRE_OPERATOR_TOKENSET.contains(tokenType))
-		{
-			yybegin(LEX_OPERATOR);
-		}
-		else if (yystate == LEX_OPERATOR && !WHITE_SPACE_AND_COMMENTS.contains(tokenType))
-		{
-			yybegin(YYINITIAL);
 		}
 
 		return tokenType;
@@ -2165,15 +1696,5 @@ public class PerlLexer extends PerlLexerGenerated
 		waitingAttributeBraceLevel = 0;
 		waitingAttributeBracketLevel = 0;
 		waitingAttributeParenLevel = 0;
-	}
-
-	@Override
-	public IElementType guessLtNumeric()
-	{
-		if (isTermPosition())
-		{
-			return LEFT_ANGLE;
-		}
-		return OPERATOR_LT_NUMERIC;
 	}
 }

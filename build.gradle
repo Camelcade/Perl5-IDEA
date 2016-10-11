@@ -232,12 +232,65 @@ task generatePerlStringLexer(type: JavaExec) {
     classpath configurations.lexer
 }
 
+task generateEmbeddedPerlLexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/EmbeddedPerl.flex"
+    ext.dst = "gen/com/perl5/lang/embedded/lexer/"
+    main = "jflex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
+    outputs.file file(dst + "EmbeddedPerlLexerGenerated.java")
+    classpath configurations.lexer
+}
+
+task generateHTMLMasonLexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/HTMLMason.flex"
+    ext.dst = "gen/com/perl5/lang/htmlmason/lexer/"
+    main = "jflex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
+    outputs.file file(dst + "HTMLMasonLexerGenerated.java")
+    classpath configurations.lexer
+}
+task generateMason2Lexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/Mason2.flex"
+    ext.dst = "gen/com/perl5/lang/mason2/lexer/"
+    main = "jflex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
+    outputs.file file(dst + "Mason2LexerGenerated.java")
+    classpath configurations.lexer
+}
+task generateMojoliciousLexer(type: JavaExec) {
+    dependsOn generatePerl5Parser
+    ext.src = "grammar/Mojolicious.flex"
+    ext.dst = "gen/com/perl5/lang/mojolicious/lexer/"
+    main = "jflex.Main"
+    args = getJflexArguments(src, dst)
+    inputs.file file(src)
+    inputs.file file("$lexer_skeleton")
+    outputs.file file(dst + "MojoliciousLexerGenerated.java")
+    classpath configurations.lexer
+}
+
+
 task generateLexers {
     dependsOn generatePerlLexer
     dependsOn generatePerlAnnotationsLexer
     dependsOn generatePerlStringLexer
     dependsOn generatePodLexer
     dependsOn generateTT2Lexer
+
+    dependsOn generateEmbeddedPerlLexer
+    dependsOn generateHTMLMasonLexer
+    dependsOn generateMason2Lexer
+    dependsOn generateMojoliciousLexer
+
 }
 
 // doesn't work

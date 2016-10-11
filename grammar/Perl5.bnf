@@ -64,7 +64,7 @@ limitations under the License.
 
     NUMBER_VERSION="NUMBER_VERSION"
     NUMBER="NUMBER"
-    NUMBER_SIMPLE="NUMBER_SIMPLE"
+    NUMBER_SIMPLE="NUMBER_SIMPLE" // fixme get rid of
 
     RESERVED_IF="if"
     RESERVED_UNLESS="unless"
@@ -128,6 +128,8 @@ limitations under the License.
 	RESERVED_FUNC="func"
 
     // Operators
+
+
 
     OPERATOR_X="x"
 
@@ -219,6 +221,7 @@ limitations under the License.
     OPERATOR_SMARTMATCH="~~"
 // end of synthetic operators
 
+	OPERATOR_NAMED_UNARY="NAMED_UNARY_OPERATOR"
     OPERATOR_FILETEST="OPERATOR_FILETEST"
 
     // single mid-quote. e evaluatable s///e;
@@ -677,7 +680,7 @@ private unary_expr ::= <<parseExpressionLevel 14>>
 // used in local declaration, fixme legacy
 private immutable_expr ::= <<parseExpressionLevel 21>>
 
-named_unary_expr ::= { OPERATOR_FILETEST | <<isUnaryOperator>> method } [unary_expr]
+named_unary_expr ::= { OPERATOR_FILETEST | OPERATOR_NAMED_UNARY } [unary_expr]
 named_list_expr ::= <<parseListExpression>>
 
 // ordered for best performance of perltidy
@@ -764,12 +767,12 @@ private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
 ref_expr ::= OPERATOR_REFERENCE referencable_expr { rightAssociative=true }
 prefix_unary_expr ::= operator_prefix_unary expr { rightAssociative=true }
 prefix_minus_as_string_expr ::= <<parseMinusBareword>>
-private operator_prefix_unary ::= (
+private operator_prefix_unary ::=
 	OPERATOR_BITWISE_NOT
 	| OPERATOR_NOT
-	| <<checkAndConvertToken 'OPERATOR_PLUS_UNARY, OPERATOR_PLUS'>>
-	| <<checkAndConvertToken 'OPERATOR_MINUS_UNARY, OPERATOR_MINUS'>>
-	) !OPERATOR_ASSIGN // not sure we need !OPERATOR_ASSIGN
+	| OPERATOR_PLUS_UNARY
+	| OPERATOR_MINUS_UNARY
+
 
 regex_expr ::= expr (OPERATOR_RE|OPERATOR_NOT_RE) expr
 

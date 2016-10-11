@@ -16,17 +16,17 @@
 
 package com.perl5.lang.mojolicious.lexer;
 
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 21.07.2015.
  * Copy-pasted FlexAdapter because of private variables and no setters
  */
-public class MojoliciousLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class MojoliciousLexerAdapter extends FlexAdapter
 {
 	public MojoliciousLexerAdapter(Project project)
 	{
-		super(new MojoliciousLexer(project));
+		super(new MojoliciousLexerGenerated(null));
 	}
 }

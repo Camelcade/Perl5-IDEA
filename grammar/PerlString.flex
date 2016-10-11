@@ -21,7 +21,6 @@ import com.intellij.lexer.FlexLexer;
 
 %%
 
-%abstract
 %class PerlStringLexerGenerated
 %extends PerlBaseLexer
 %abstract
@@ -137,6 +136,6 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
 {BAREWORD_MINUS} {return parseBarewordMinus();}
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
-{PACKAGE} {return parsePackage(IDENTIFIER);}
+{PACKAGE} {return lexQualifiedIdentifier(yystate(),yystate());}
 
 [^]    { return TokenType.BAD_CHARACTER; }

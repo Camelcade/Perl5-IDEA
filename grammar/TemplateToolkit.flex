@@ -7,7 +7,6 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 
 %%
 
-%abstract
 %class TemplateToolkitLexerGenerated
 %extends PerlProtoLexer
 %implements TemplateToolkitElementTypes

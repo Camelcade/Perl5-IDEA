@@ -88,7 +88,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			preparsedTokensList.add(barewordToken);
 			setTokenEnd(packageIdentifierEnd);
 
-			return parsePackage(identifierType);
+			return lexQualifiedIdentifier(yystate(), yystate());
 
 		}
 		else

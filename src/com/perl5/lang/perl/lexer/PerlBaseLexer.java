@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.regex.Pattern;
 
@@ -46,16 +44,37 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
 
-	public abstract IElementType parseAmbiguousPackage(IElementType identifierType);
-
 
 	public abstract IElementType parseBarewordMinus();
 
 
-	public IElementType parsePackage(IElementType identifierType)
+	public IElementType lexQualifiedIdentifier(int fullState, int pushBackState)
 	{
 		CharSequence yytext = yytext();
-		return StringUtil.endsWith(yytext, PerlPackageUtil.PACKAGE_SEPARATOR) || yytext.charAt(yytext.length() - 1) == PerlPackageUtil.PACKAGE_SEPARATOR_LEGACY ? PACKAGE_IDENTIFIER : parseAmbiguousPackage(identifierType);
+		int tokenSize = yytext.length();
+		int pushbackSize = 0;
+
+		while (true)
+		{
+			char currentChar = yytext.charAt(tokenSize - 1 - pushbackSize);
+			if (currentChar == '\'' || currentChar == ':')
+			{
+				break;
+			}
+			pushbackSize++;
+			assert pushbackSize < tokenSize;
+		}
+
+		if (pushbackSize > 0)
+		{
+			yypushback(pushbackSize);
+			yybegin(pushBackState);
+		}
+		else
+		{
+			yybegin(fullState);
+		}
+		return PACKAGE;
 	}
 
 

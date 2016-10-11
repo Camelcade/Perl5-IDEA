@@ -16,16 +16,16 @@
 
 package com.perl5.lang.mason2.lexer;
 
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTemplatingLexerAdapter extends PerlLexerWithCustomStatesAdapter
+public class MasonTemplatingLexerAdapter extends FlexAdapter
 {
 	public MasonTemplatingLexerAdapter(Project project)
 	{
-		super(new MasonTemplatingLexer(project));
+		super(new Mason2LexerGenerated(null));
 	}
 }
