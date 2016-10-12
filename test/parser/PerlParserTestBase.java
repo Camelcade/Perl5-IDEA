@@ -80,6 +80,18 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		return true;
 	}
 
+	protected String getPerlTidy()
+	{
+		try
+		{
+			return FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
+		}
+		catch (IOException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	public void setUp() throws Exception
 	{

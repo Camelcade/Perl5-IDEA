@@ -17,8 +17,6 @@
 package parser;
 
 import categories.Performance;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
@@ -26,12 +24,9 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.util.ThrowableRunnable;
 import gnu.trove.THashMap;
 import org.junit.experimental.categories.Category;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -42,51 +37,6 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 @Category(Performance.class)
 public class PerlParsingPerformanceTest extends PerlParserTestBase
 {
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/performance";
-	}
-
-	public void testPerlTidyParsing()
-	{
-
-		final String testData;
-		try
-		{
-			testData = FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-
-		final int iterations = 30;
-
-		PsiFile psiFile = null;
-		for (int i = 0; i < iterations; i++)
-		{
-			psiFile = createPsiFile("test", testData);
-			psiFile.getFirstChild();
-		}
-
-		final int time = 400;
-
-		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
-		{
-			long start = System.currentTimeMillis();
-			for (int i = 0; i < iterations; i++)
-			{
-				PsiFile psiFile1 = createPsiFile("mytest", testData);
-				psiFile1.getFirstChild();
-			}
-			long length = System.currentTimeMillis() - start;
-			System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
-		}).cpuBound().useLegacyScaling().assertTiming();
-
-//		analyzeFile(psiFile);
-	}
-
 	private static final TokenSet TERMINAL_TOKENS = TokenSet.create(
 			// variable
 			SCALAR_VARIABLE,
@@ -150,6 +100,43 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase
 			SUB_CALL_EXPR,
 			NAMESPACE_EXPR
 	);
+
+	@Override
+	protected String getTestDataPath()
+	{
+		return "testData/parser/performance";
+	}
+
+	public void testPerlTidyParsing()
+	{
+
+		final String testData = getPerlTidy();
+
+		final int iterations = 30;
+
+		PsiFile psiFile = null;
+		for (int i = 0; i < iterations; i++)
+		{
+			psiFile = createPsiFile("test", testData);
+			psiFile.getFirstChild();
+		}
+
+		final int time = 400;
+
+		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
+		{
+			long start = System.currentTimeMillis();
+			for (int i = 0; i < iterations; i++)
+			{
+				PsiFile psiFile1 = createPsiFile("mytest", testData);
+				psiFile1.getFirstChild();
+			}
+			long length = System.currentTimeMillis() - start;
+			System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
+		}).cpuBound().useLegacyScaling().assertTiming();
+
+//		analyzeFile(psiFile);
+	}
 
 	private void analyzeFile(PsiFile psiFile)
 	{
