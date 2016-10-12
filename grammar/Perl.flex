@@ -86,7 +86,7 @@ NUMBER_INT = [0-9][0-9_]*
 NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 
-SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_]
+SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_$]
 CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
 VARIABLE_NAME = {QUALIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 
@@ -105,6 +105,9 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
+
+// suffix, sigil from variable
+SIGIL_SUFFIX = "{" | "$" [{$\w]
 
 SUB_PROTOTYPE = [\s\[$@%&*\];+]+
 
@@ -175,7 +178,6 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <LEX_VARIABLE_NAME>{
-	"$"										{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{IDENTIFIER} 							{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
@@ -204,7 +206,6 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 <LEX_BRACED_VARIABLE_NAME>{
 	"{" 							{return LEFT_BRACE;}
-	"$" / "}"						{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{IDENTIFIER} / "}" 				{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
@@ -353,22 +354,11 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
-	"$$" / [^$\{\w]  	{return startVariableLexing(1,SIGIL_SCALAR);}
 	"$"{VARIABLE_NAME} 	{return startVariableLexing(1,SIGIL_SCALAR);}
-
-	"@$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_ARRAY);}
 	"@"{VARIABLE_NAME} 	{return startVariableLexing(1, SIGIL_ARRAY);}
-
-	"$#$" / [^$\{\w] 	{return startVariableLexing(2,SIGIL_SCALAR_INDEX);}
 	"$#"{VARIABLE_NAME} {return startVariableLexing(2, SIGIL_SCALAR_INDEX);}
-
-	"%$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_HASH);}
 	"%"{VARIABLE_NAME} 	{return startVariableLexing(1, SIGIL_HASH);}
-
-	"&$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_CODE);}
 	"&"{VARIABLE_NAME} 	{return startVariableLexing(1, SIGIL_CODE);}
-
-	"*$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_GLOB);}
 	"*"{VARIABLE_NAME} 	{return startVariableLexing(1, SIGIL_GLOB);}
 
 	"$"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_SCALAR);}
@@ -377,6 +367,13 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	"%"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_HASH);}
 	"&"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_CODE);}
 	"*"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_GLOB);}
+
+	"@"	 / {SIGIL_SUFFIX} 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
+	"$#" / {SIGIL_SUFFIX} 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
+	"$"	 / {SIGIL_SUFFIX} 	{yybegin(YYINITIAL);return SIGIL_SCALAR; }
+	"%"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_HASH;}
+	"*"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_GLOB;}
+	"&"	 / {SIGIL_SUFFIX}	{yybegin(YYINITIAL);return SIGIL_CODE;}
 
 	"@" 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
 	"$#" 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}

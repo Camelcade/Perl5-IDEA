@@ -28,8 +28,8 @@ $ { $args[3] || {} };
 @ { $args[3] || {} };
 
 my %attrs = (
-  % { $args[3] || {} },
-  % { $args[4] || {} },
+    % { $args[3] || {} },
+    % { $args[4] || {} },
 );
 
 my $lpBuffer .= pack("L@".16, 0);
@@ -116,18 +116,18 @@ unless (exists $opts{x1} and exists $opts{y1}) { $self->{ERRSTR}='missing begini
 
 $string =~
     s{\\([Nnever\\fartz0b]|x([0-9a-fA-F]{2}))}
-     {(length($1)>1)?pack("H2",$2):$UNESCAPES{$1}}gex;
+        {(length($1)>1)?pack("H2",$2):$UNESCAPES{$1}}gex;
 
-    if (my %kv = ($pv =~ m{\b
-	    (\w+)		# key
-	    \s*=		# assign
-	    ( '\s*[^']*?\s*'	# quoted value
-	    | \S+[^=]*?\s*\n	# unquoted running till end of line
-	    | \S+		# unquoted value
-	    | \s*\n		# empty
-	    )
-	    (?:,?\s+|\s*\n)?	# separator \(5.8.x reports did not have a ','
-	    }gx)) {}		# between every kv pair
+if (my %kv = ($pv =~ m{\b
+    (\w+)		# key
+    \s*=		# assign
+    ( '\s*[^']*?\s*'	# quoted value
+    | \S+[^=]*?\s*\n	# unquoted running till end of line
+    | \S+		# unquoted value
+    | \s*\n		# empty
+    )
+    (?:,?\s+|\s*\n)?	# separator \(5.8.x reports did not have a ','
+    }gx)) {}		# between every kv pair
 
 
 #DBM::Deep
@@ -136,7 +136,7 @@ my %is_legal_filter = map {
 } qw(
     store_key store_value
     fetch_key fetch_value
-);
+    );
 set_in_declare(~~@{$temp_name||[]});
 
 
@@ -147,12 +147,12 @@ $a ~~ $b;
 $a ~~ ~$b;
 
 s/a
-s
-d[          # this is a test
-f
-a]
-s
-df/as
+    s
+    d[          # this is a test
+    f
+    a]
+    s
+    df/as
     dfa{
     sdf(
     asdf[       # this is a test
@@ -161,7 +161,7 @@ df/as
     [[[[
     ]]
 
-/x;
+    /x;
 
 !!!$a;
 
@@ -171,7 +171,7 @@ require join( '/', split /::/, $server ) . '.pm';
 $@->method;
 
 $self->{grammar}{tree}{'TOP'} & 'TOP' or
-die "No starting rule for Pegex::Parser::parse";
+    die "No starting rule for Pegex::Parser::parse";
 
 
 if ( my $comment = $self->msg_comment($msgid) ) {
@@ -320,24 +320,24 @@ $var => something;
 -package => 123;
 package => 123;
 
-$hash{--package} =4;
-$a->{--package} = 5;
+$hash{-package} =4;
+    $a->{-package} = 5;
 
-print $$ if 123;
+        print $$ if 123;
 
-sub import {
-    my $callpack = caller;
-    my $pack = shift;
-    my @imports = @_;
-    foreach my $sym (@imports) {
-	*{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
-    }
-};
-
-
+        sub import {
+            my $callpack = caller;
+            my $pack = shift;
+            my @imports = @_;
+            foreach my $sym (@imports) {
+                *{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
+            }
+        };
 
 
-my $text = <<'=end';
+
+
+        my $text = <<'=end';
 
 =pod
 
@@ -352,236 +352,235 @@ some pod document
 
 
 
-my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
-              map(($_,            60), qw(m minute minutes min mins)),
-              map(($_,         60*60), qw(h hr hour hours)),
-              map(($_,      60*60*24), qw(d day days)),
-              map(($_,    60*60*24*7), qw(w week weeks)),
-              map(($_,   60*60*24*30), qw(M month months)),
-              map(($_,  60*60*24*365), qw(y year years)) );
+        my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
+            map(($_,            60), qw(m minute minutes min mins)),
+            map(($_,         60*60), qw(h hr hour hours)),
+            map(($_,      60*60*24), qw(d day days)),
+            map(($_,    60*60*24*7), qw(w week weeks)),
+            map(($_,   60*60*24*30), qw(M month months)),
+            map(($_,  60*60*24*365), qw(y year years)) );
 
-my %hash;
+        my %hash;
 
-$hash{something};
-$hash{something}->{something};
-$hash{'something'};
-$hash{'something'}->{'something'};
-$hash{"something"};
-$hash{"something"}->{"something"};
+        $hash{something};
+        $hash{something}->{something};
+        $hash{'something'};
+        $hash{'something'}->{'something'};
+        $hash{"something"};
+        $hash{"something"}->{"something"};
 
-*{something};
-*something{SCALAR};
+        *{something};
+        *something{SCALAR};
 
-my $full_path;
+        my $full_path;
 
-no warnings qw(once);
-local *alias = *$full_path;
-use warnings qw(once);
+        no warnings qw(once);
+        local *alias = *$full_path;
+        use warnings qw(once);
 
-# Copy innocent bystanders back.  Note that we lose
-# formats; it seems that Perl versions up to 5.10.0
-# have a bug which causes copying formats to end up in
-# the scalar slot.  Thanks to Ben Morrow for spotting this.
+        # Copy innocent bystanders back.  Note that we lose
+        # formats; it seems that Perl versions up to 5.10.0
+        # have a bug which causes copying formats to end up in
+        # the scalar slot.  Thanks to Ben Morrow for spotting this.
 
-my %oldglob;
+        my %oldglob;
 
-foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
-    next unless defined *$oldglob{$slot};
-    *alias = *$oldglob{$slot};
-}
-my $sub_ref;
+        foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
+            next unless defined *$oldglob{$slot};
+            *alias = *$oldglob{$slot};
+        }
+        my $sub_ref;
 
-if ($sub_ref) {
-    *$full_path = $sub_ref;
-}
-
-
+        if ($sub_ref) {
+            *$full_path = $sub_ref;
+        }
 
 
 
-print <<'!END!';
+
+
+        print <<'!END!';
 Test from perl lib
 !END!
 
-print <<TEST;
+        print <<TEST;
 message
 TEST
 
-print <<'TEST WITH SPACE !';
+        print <<'TEST WITH SPACE !';
 message
 TEST WITH SPACE !
 
-print <<`TEST WITH SPACE !`;
+        print <<`TEST WITH SPACE !`;
 message
 TEST WITH SPACE !
 
-print <<"TEST WITH SPACE !";
+        print <<"TEST WITH SPACE !";
 message
 TEST WITH SPACE !
 
-for(;;){
-    print "Here";
-}
-while(){
-    print "Here";
-}
+        for(;;){
+            print "Here";
+        }
+        while(){
+            print "Here";
+        }
 
-sub eval{}
-sub if{}
-sub while{}
+        sub eval{}
+        sub if{}
+        sub while{}
 
-&eval;
-&while;
-&if;
-*eval;
+        &eval;
+        &while;
+        &if;
+        *eval;
 
-my $abcd = {
-    --test => &while
-};
+        my $abcd = {
+            --test => &while
+        };
 
-print sprintf "here we go";
+        print sprintf "here we go";
 
-print OF "something";
-say OF "something";
-printf OF "something";
+        print OF "something";
+        say OF "something";
+        printf OF "something";
 
-print OF, "something";
-say OF, "something";
-printf OF, "something";
-
-
-close STDERR;
-close (STDERR);
-syswrite(STDERR, 'Caught a SIG', 12);
-syswrite STDERR, 'Caught a SIG', 12;
-
-use Opcode 1.01, qw(..);
-
-my $panic;
-
-my $_wow;
-my ${some};
-my $^a;
-$_;
-$$_;
-my $ abc;
-$ $$abc;
+        print OF, "something";
+        say OF, "something";
+        printf OF, "something";
 
 
-SOMELABEL: {
-    last SOMELABEL;
-}
+        close STDERR;
+        close (STDERR);
+        syswrite(STDERR, 'Caught a SIG', 12);
+        syswrite STDERR, 'Caught a SIG', 12;
 
-$abc ? $cde : blah();
+        use Opcode 1.01, qw(..);
 
-split /2134/, @array;
-m/2342342/x;
-s/234234/$$/e;
+        my $panic;
 
-Foo::Bar;
-
-Foo::bar;
-
-Foo::bar baz;
-
-Foo::Bar->method();
-
-bar Foo::baz;
-
-bar Foo(123);
-
-Foo->bar;
-my $self;
-
-my $abc = {
-    some => 1
-};
-
-my @array;
-
-grep {defined} @array;
-
-print if defined $abc;
-
-$abc->{cde} = 2;
-
-$self->SUPER::method();
-
-Foo::Bar->something;
-
-BEGIN {
-    print "something";
-}
-
-UNITCHECK {
-    print "something";
-}
-
-CHECK {
-    print "something";
-}
-
-INIT {
-    print "something";
-}
-
-END {
-    print "something";
-}
-
-AUTOLOAD {
-    print "something";
-}
-
-DESTROY {
-    print "something";
-}
-
-$abc = __PACKAGE__;
-$abc = 1 and 2;
+        my $_wow;
+        my ${some};
+        my $^A;
+        $_;
+        $$_;
+        my $abc;
+        $ $$abc;
 
 
-open (IF, 'something');
-open IF, 'something';
-open Foo::->method();
-open Foo::method();
+        SOMELABEL: {
+            last SOMELABEL;
+        }
 
-somesub IF, blah;
+        $abc ? $cde : blah();
 
-print OF(1,2,3);
-print sprintf "here we go";
-print Foo->method();
-print Foo::method();
-print Foo::->method();
-print method, "text";
+        split /2134/, @array;
+        m/2342342/x;
+        s/234234/$$/e;
 
-my @list = <IF>;
-my @list = <Foo::method>;
-my @list = <{Foo->method}>;
+        Foo::Bar;
 
-use if (1 > 2);
-use open;
+        Foo::bar;
 
-package Foo;
+        Foo::bar baz;
 
-sub bar{
-}
+        Foo::Bar->method();
 
-package main;
+        bar Foo::baz;
 
-sub somesub
-{
-}
+        bar Foo(123);
 
-package Foo::Bar;
+        Foo->bar;
+        my $self;
 
-sub somesub
-{
+        my $abc = {
+            some => 1
+        };
 
-}
+        my @array;
+
+        grep {defined} @array;
+
+        print if defined $abc;
+
+        $abc->{cde} = 2;
+
+        $self->SUPER::method();
+
+        Foo::Bar->something;
+
+        BEGIN {
+            print "something";
+        }
+
+        UNITCHECK {
+            print "something";
+        }
+
+        CHECK {
+            print "something";
+        }
+
+        INIT {
+            print "something";
+        }
+
+        END {
+            print "something";
+        }
+
+        AUTOLOAD {
+            print "something";
+        }
+
+        DESTROY {
+            print "something";
+        }
+
+        $abc = __PACKAGE__;
+        $abc = 1 and 2;
 
 
-format =
+        open (IF, 'something');
+        open IF, 'something';
+        open Foo::->method();
+        open Foo::method();
+
+        somesub IF, blah;
+
+        print OF(1,2,3);
+        print sprintf "here we go";
+        print Foo->method();
+        print Foo::method();
+        print Foo::->method();
+        print method, "text";
+
+        my @list = <IF>;
+        my @list = <Foo::method>;
+
+    use if (1 > 2);
+    use open;
+
+    package Foo;
+
+    sub bar{
+    }
+
+    package main;
+
+    sub somesub
+    {
+    }
+
+    package Foo::Bar;
+
+    sub somesub
+    {
+
+    }
+
+
+    format =
 
 ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     $typedesc
@@ -591,11 +590,11 @@ format =
 	$list
 .
 
-# Pod/Functions.pm
-format =
+    # Pod/Functions.pm
+    format =
 .
 
-format SOMETHING =
+    format SOMETHING =
 
 ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     $typedesc
@@ -605,27 +604,37 @@ format SOMETHING =
 	$list
 .
 
-# Pod/Functions.pm
-format STDOUT =
+    # Pod/Functions.pm
+    format STDOUT =
 .
 
-package Foo::Bar;
+    package Foo::Bar;
 
 package main;
 
-sub Foo::Bar::somesub{};
+    sub Foo::Bar::somesub{};
 
-${Foo::Bar::somesub()};
-@{Foo::Bar::somesub()};
-$#{Foo::Bar::somesub()};
-%{Foo::Bar::somesub()};
-*{Foo::Bar::somesub()};
-&{Foo::Bar::somesub()};
+    ${Foo::Bar::somesub()};
+    @{Foo::Bar::somesub()};
+    $#{Foo::Bar::somesub()};
+    %{Foo::Bar::somesub()};
+    *{Foo::Bar::somesub()};
+    &{Foo::Bar::somesub()};
 
-Foo::Bar::somesub;
-::somesub;
-Foo::Bar::somesub();
-::somesub();
-somesub;
-somesub();
+    Foo::Bar::somesub;
+    ::somesub;
+    Foo::Bar::somesub();
+    ::somesub();
+    somesub;
+    somesub();
+
+
+sub mysub
+	:attr1 	#some
+	attr2 	# other
+	: attr3	# blah
+{
+	say 'hi';
+}
+
 

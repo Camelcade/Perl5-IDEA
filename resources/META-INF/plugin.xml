@@ -40,6 +40,9 @@
       <li>IDEA 2016.3 compatibility</li>
       <li>Multiple internal tools upgrades</li>
       <li>Moved to Java 8</li>
+      <li>Lexer and parser deeply reworked and should be faster:</li><ul>
+      <li>Spaces between sigils and variable names not supported for the sake of performance</li>
+      </ul>
      </ul>
      </p>
 
