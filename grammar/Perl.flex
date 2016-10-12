@@ -104,6 +104,8 @@ HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
 
+SUB_PROTOTYPE = [\s\[$@%&*\];+]+
+
 POD_START = "="[\w][.]*
 POD_LINE = ([.]+ {NEW_LINE} ? | {NEW_LINE})
 POD_END = "=cut" (\s [.]*) {NEW_LINE}
@@ -127,6 +129,8 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 // custom lexical states to avoid crossing with navie ones
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
 %state LEX_PREPARSED_ITEMS
+%xstate LEX_SUB_PROTOTYPE
+%state LEX_SUB_ATTRIBUTES
 
 %state LEX_AFTER_DEREFERENCE, LEX_AFTER_RIGHT_BRACE, LEX_AFTER_IDENTIFIER, LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER, LEX_AFTER_VARIABLE_NAME
 
@@ -193,9 +197,20 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <LEX_SUB>{
-	{IDENTIFIER}			{return IDENTIFIER;}
-	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_SUB,LEX_SUB);}
-	":"						{yybegin(LEX_ATTRIBUTES);return COLON;}
+	{IDENTIFIER}				{return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} 		{return lexQualifiedIdentifier(LEX_SUB,LEX_SUB);}
+	"(" / {SUB_PROTOTYPE}? ")"	{yybegin(LEX_SUB_PROTOTYPE);return LEFT_PAREN;}
+	"(" 						{yybegin(YYINITIAL);return LEFT_PAREN;}
+}
+
+<LEX_SUB,LEX_SUB_ATTRIBUTES>{
+	":"							{yybegin(LEX_ATTRIBUTES);return COLON;}
+	[^]							{yypushback(1);yybegin(YYINITIAL);break;}
+}
+
+<LEX_SUB_PROTOTYPE>{
+	{SUB_PROTOTYPE}			{return SUB_PROTOTYPE_TOKEN;}
+	")"						{yybegin(LEX_SUB_ATTRIBUTES);return RIGHT_PAREN;}
 }
 
 <LEX_ATTRIBUTES>
