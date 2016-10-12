@@ -142,6 +142,7 @@ limitations under the License.
     OPERATOR_COMMA=","
 
     OPERATOR_HELLIP="..."
+    OPERATOR_NYI="NYI"
     OPERATOR_FLIP_FLOP=".."
     OPERATOR_CONCAT="."
 

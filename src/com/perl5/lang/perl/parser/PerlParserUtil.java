@@ -418,14 +418,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 	public static boolean convertBracedString(PsiBuilder b, int l)
 	{
-
-		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == RIGHT_BRACE)
+		if (b.getTokenType() == STRING_CONTENT)
 		{
-			// fixme shouldn't we add string_sq here?
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			m.collapse(STRING_CONTENT);
-			m.precede().done(STRING_BARE);
+			m.done(STRING_BARE);
 			return true;
 		}
 		return false;
@@ -517,10 +514,22 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean mergePackageName(PsiBuilder b, int l)
 	{
 		IElementType tokenType = b.getTokenType();
+		IElementType nextTokenType = b.rawLookup(1);
 
 		if (tokenType == PACKAGE)
 		{
-			b.advanceLexer();
+			// temporary hack
+			if (nextTokenType == IDENTIFIER)
+			{
+				PsiBuilder.Marker m = b.mark();
+				b.advanceLexer();
+				b.advanceLexer();
+				m.collapse(PACKAGE);
+			}
+			else
+			{
+				b.advanceLexer();
+			}
 			return true;
 		}
 		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1)))

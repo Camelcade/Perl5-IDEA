@@ -45,9 +45,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					")");
 
 
-	public abstract IElementType parseBarewordMinus();
-
-
 	public IElementType lexQualifiedIdentifier(int fullState, int pushBackState)
 	{
 		CharSequence yytext = yytext();
@@ -77,12 +74,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return PACKAGE;
 	}
 
-
-	// check that current token surrounded with braces
-	protected boolean isBraced()
-	{
-		return getTokenHistory().getLastSignificantTokenType() == LEFT_BRACE && getNextNonSpaceCharacter() == '}';
-	}
 
 
 	protected IElementType startVariableLexing(int sigilSize, IElementType sigilType)

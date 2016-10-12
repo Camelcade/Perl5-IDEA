@@ -105,7 +105,7 @@ public interface PerlParser extends PerlElementTypes
 			RIGHT_ANGLE,
 			RIGHT_BRACKET,
 			RIGHT_PAREN,
-			STRING_CONTENT,
+//			STRING_CONTENT,
 			STRING_PACKAGE,
 			STRING_PLUS,
 			STRING_WHITESPACE,

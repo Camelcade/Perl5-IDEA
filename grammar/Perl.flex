@@ -50,6 +50,10 @@ import org.jetbrains.annotations.NotNull;
 */
 NEW_LINE = \R
 WHITE_SPACE     = [ \t\f]
+ANY_SPACE = [ \t\f\R]
+LINE_COMMENT = "#" .* \R
+SPACES_OR_COMMENTS = ({ANY_SPACE}|{LINE_COMMENT})*
+
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
@@ -57,7 +61,8 @@ PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
-//BAREWORD_MINUS = "-" * {IDENTIFIER}
+FARROW = "=>"
+BAREWORD_MINUS = "-" ? {IDENTIFIER}
 
 QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
@@ -66,7 +71,7 @@ PACKAGE_SHORT = "::"+ "'" ?
 //SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
 //XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
 
-QUOTE_LIKE_SUFFIX= "'"?
+QUOTE_LIKE_SUFFIX= ("'" {QUALIFIED_IDENTIFIER} ? )?
 CORE_PREFIX = "CORE::"?
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
@@ -104,10 +109,11 @@ POD_LINE = ([.]+ {NEW_LINE} ? | {NEW_LINE})
 POD_END = "=cut" (\s [.]*) {NEW_LINE}
 
 // original list taken from http://www.perlmonks.org/?node_id=1131277
-NAMED_UNARY_OPERATORS = "write"|"values"|"umask"|"ucfirst"|"uc"|"telldir"|"tell"|"study"|"stat"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"scalar"|"rmdir"|"rewinddir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"readdir"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"lstat"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"getc"|"fileno"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"eof"|"each"|"defined"|"cos"|"closedir"|"close"|"chroot"|"chr"|"chdir"|"caller"|"alarm"|"abs"
+NAMED_UNARY_OPERATORS = "write"|"values"|"umask"|"ucfirst"|"uc"|"telldir"|"tell"|"study"|"stat"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"rmdir"|"rewinddir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"readdir"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"lstat"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"getc"|"fileno"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"eof"|"each"|"defined"|"cos"|"closedir"|"close"|"chroot"|"chr"|"chdir"|"caller"|"alarm"|"abs"
 
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
+NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"continue"|"break"
 
 %state LEX_OPERATOR
 
@@ -116,11 +122,13 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 %state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 %state LEX_TRANS_OPENER, LEX_REGEX_OPENER
 
-%state LEX_PACKAGE
+%state LEX_PACKAGE, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
 
 // custom lexical states to avoid crossing with navie ones
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
 %state LEX_PREPARSED_ITEMS
+
+%state LEX_AFTER_DEREFERENCE, LEX_AFTER_RIGHT_BRACE, LEX_AFTER_IDENTIFIER, LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER, LEX_AFTER_VARIABLE_NAME
 
 %state LEX_VARIABLE_NAME, LEX_BRACED_VARIABLE_NAME, LEX_VARIABLE_CLOSE_BRACE
 
@@ -131,27 +139,37 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{POD_LINE}	{return POD;}
 }
 
-^{POD_START} {yybegin(LEX_POD);return POD;}
 
 <LEX_END_BLOCK>{
-	[^]+ {return COMMENT_BLOCK;}
+	[^]+ 		{return COMMENT_BLOCK;}
 }
 
-// inclusive states
-{NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
-{WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
+^{POD_START} 	{yybegin(LEX_POD);return POD;}
+{NEW_LINE}   	{return TokenType.NEW_LINE_INDENT;}
+{WHITE_SPACE}+  {return TokenType.WHITE_SPACE;}
+{END_BLOCK}		{yybegin(LEX_END_BLOCK);return TAG_END;}
+{DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return TAG_DATA;}
 
-///////////////////////// package definition ///////////////////////////////////////////////////////////////////////////
 <LEX_VARIABLE_NAME>{
-	"$"										{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
-	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
-	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
-	{IDENTIFIER} 							{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
-	{QUALIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_OPERATOR, LEX_VARIABLE_NAME);}
+	"$"										{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
+	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
+	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
+	{IDENTIFIER} 							{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
+	{QUALIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_AFTER_VARIABLE_NAME, LEX_VARIABLE_NAME);}
 }
 
-<LEX_PACKAGE>{
+<LEX_BRACED_STRING>{
+	{BAREWORD_MINUS}	{return STRING_CONTENT;}
+	"}"					{yybegin(LEX_AFTER_VARIABLE_NAME);return RIGHT_BRACE;}
+}
+
+<LEX_PACKAGE,LEX_PACKAGE_REQUIRE>{
 	{QUALIFIED_IDENTIFIER}			{yybegin(YYINITIAL);return PACKAGE;}
+}
+
+<LEX_PACKAGE_REQUIRE>{
+	{IDENTIFIER} / "("				{yybegin(LEX_AFTER_IDENTIFIER);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} / "("	{return lexQualifiedIdentifier(LEX_AFTER_IDENTIFIER, LEX_PACKAGE_REQUIRE);}
 }
 
 <LEX_BRACED_VARIABLE_NAME>{
@@ -163,18 +181,51 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{QUALIFIED_IDENTIFIER} / "}"  	{return lexQualifiedIdentifier(LEX_VARIABLE_CLOSE_BRACE, LEX_BRACED_VARIABLE_NAME);}
 }
 
-<LEX_VARIABLE_CLOSE_BRACE> "}" {yybegin(LEX_OPERATOR);return RIGHT_BRACE;}
+<LEX_VARIABLE_CLOSE_BRACE> "}" {yybegin(LEX_AFTER_VARIABLE_NAME);return RIGHT_BRACE;}
 
-<YYINITIAL,LEX_OPERATOR>{
+<LEX_AFTER_DEREFERENCE>{
+	{IDENTIFIER}			{yybegin(LEX_OPERATOR);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_OPERATOR, LEX_AFTER_DEREFERENCE);}
+}
+
+<LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{
+	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(LEX_BRACED_STRING);return LEFT_BRACE;}
+}
+
+<LEX_SUB>{
+	{IDENTIFIER}			{return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_SUB,LEX_SUB);}
+	":"						{yybegin(LEX_ATTRIBUTES);return COLON;}
+}
+
+<LEX_ATTRIBUTES>
+{
+	":"					{return COLON;}
+	{IDENTIFIER} / "("	{pushState();yybegin(LEX_QUOTE_LIKE_OPENER_Q);return IDENTIFIER;}
+	{IDENTIFIER}		{return IDENTIFIER;}
+	[^]					{yypushback(1);yybegin(YYINITIAL);break;}
+}
+
+<YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_SUB>{
+	"{"     {yybegin(YYINITIAL);return LEFT_BRACE;}
+}
+
+// common logic
+<YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
+	"["     {yybegin(YYINITIAL);return LEFT_BRACKET;}
+	"("     {yybegin(YYINITIAL);return LEFT_PAREN;}
+}
+
+<YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_SUB>{
+	";"     {yybegin(YYINITIAL);return SEMICOLON;}
+}
+
+<YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
 	"," 	{yybegin(YYINITIAL);return OPERATOR_COMMA;}
 	"++" 	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
 	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
-	";"     {yybegin(YYINITIAL);return SEMICOLON;}
-	"{"     {yybegin(YYINITIAL);return LEFT_BRACE;}
-	"}"     {yybegin(LEX_OPERATOR);return RIGHT_BRACE;}
-	"["     {yybegin(YYINITIAL);return LEFT_BRACKET;}
+	"}"     {yybegin(LEX_AFTER_RIGHT_BRACE);return RIGHT_BRACE;}
 	"]"     {yybegin(LEX_OPERATOR);return RIGHT_BRACKET;}
-	"("     {yybegin(YYINITIAL);return LEFT_PAREN;}
 	")"     {yybegin(LEX_OPERATOR);return RIGHT_PAREN;}
 
 	{CORE_PREFIX}"if"	 	{ yybegin(YYINITIAL); return RESERVED_IF;}
@@ -183,12 +234,10 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CORE_PREFIX}"until"	{ yybegin(YYINITIAL);return RESERVED_UNTIL;}
 	{CORE_PREFIX}"for"	 	{ yybegin(YYINITIAL);return RESERVED_FOR;}
 	{CORE_PREFIX}"foreach"	{ yybegin(YYINITIAL);return RESERVED_FOREACH;}
-
-	{END_BLOCK}						{yybegin(LEX_END_BLOCK);return TAG_END;}
-	{DATA_BLOCK}					{yybegin(LEX_END_BLOCK);return TAG_DATA;}
+	{CORE_PREFIX}"when"	 	{ yybegin(YYINITIAL);return RESERVED_WHEN;}
 }
 
-<LEX_OPERATOR>{
+<LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
 	"**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
 	"%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
 	"*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
@@ -219,8 +268,8 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
 	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
 
-	"->" 	{yybegin(YYINITIAL); return OPERATOR_DEREFERENCE;}
-	"=>" 	{yybegin(YYINITIAL);return OPERATOR_COMMA_ARROW;}
+	"->" 		{yybegin(LEX_AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
+	{FARROW} 	{yybegin(YYINITIAL);return OPERATOR_COMMA_ARROW;}
 
 	"=~" 	{yybegin(YYINITIAL);return OPERATOR_RE;}
 	"!~" 	{yybegin(YYINITIAL);return OPERATOR_NOT_RE;}
@@ -259,7 +308,11 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 }
 
 <YYINITIAL>{
-	"$$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_SCALAR);}
+	"..." 	{yybegin(LEX_OPERATOR);return OPERATOR_HELLIP;} // after testing change to OPERATOR_NYI
+}
+
+<YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
+	"$$" / [^$\{\w]  	{return startVariableLexing(1,SIGIL_SCALAR);}
 	"$"{VARIABLE_NAME} 	{return startVariableLexing(1,SIGIL_SCALAR);}
 
 	"@$" / [^$\{\w] 	{return startVariableLexing(1,SIGIL_ARRAY);}
@@ -284,11 +337,26 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	"&"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_CODE);}
 	"*"{BRACED_VARIABLE_NAME} 	{return startBracedVariableLexing(1, SIGIL_GLOB);}
 
+	"@" 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
+	"$#" 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
+	"$" 	{yybegin(YYINITIAL);return SIGIL_SCALAR; }
+	"%"		{yybegin(YYINITIAL);return SIGIL_HASH;}
+	"*"		{yybegin(YYINITIAL);return SIGIL_GLOB;}
+	"&"		{yybegin(YYINITIAL);return SIGIL_CODE;}
+}
+
+<YYINITIAL,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
 	{NUMBER_BIN}									{yybegin(LEX_OPERATOR);return NUMBER;}
 	{NUMBER_HEX}									{yybegin(LEX_OPERATOR);return NUMBER;}
 	{NUMBER_INT}? "." {NUMBER_INT} {NUMBER_EXP}?	{yybegin(LEX_OPERATOR);return NUMBER;}
 	{NUMBER_INT} ("." {NUMBER_INT})? {NUMBER_EXP}?	{yybegin(LEX_OPERATOR);return NUMBER;}
+}
 
+<YYINITIAL,LEX_AFTER_RIGHT_BRACE,LEX_PACKAGE,LEX_PACKAGE_REQUIRE,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
+	{PERL_VERSION}  		{yybegin(LEX_OPERATOR);return NUMBER_VERSION;}
+}
+
+<YYINITIAL,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
 //	{DQ_STRING}	{yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
 //	{SQ_STRING} {yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
 //	{XQ_STRING} {yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
@@ -296,71 +364,70 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 //	"`" 	{return QUOTE_TICK;}
 //	"'" 	{return QUOTE_SINGLE;}
 
-	"/"   						{yybegin(LEX_OPERATOR);return startRegexp();}
+	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(LEX_OPERATOR);return STRING_CONTENT;}
+
+	"<"							{yybegin(YYINITIAL);return LEFT_ANGLE;}
+
 	{HEREDOC_OPENER}   			{yybegin(LEX_OPERATOR);return parseHeredocOpener();}
 	{HEREDOC_OPENER_BACKREF} 	{yybegin(LEX_OPERATOR);return parseHeredocOpenerBackref();}
 
-	{NAMED_UNARY_OPERATORS}		{return OPERATOR_NAMED_UNARY;}
+	"/"   						{yybegin(LEX_OPERATOR);return startRegexp();}
 
-	"!" 						{return OPERATOR_NOT;}
-	"+" 						{return OPERATOR_PLUS_UNARY;}
-	"-" 						{return OPERATOR_MINUS_UNARY;}
-	"~" 						{return OPERATOR_BITWISE_NOT;}
-	{PERL_OPERATORS_FILETEST} 	{yypushback(1);return OPERATOR_FILETEST;}
+	"split"						{yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return OPERATOR_NAMED_UNARY;}
+	{NAMED_UNARY_OPERATORS}		{yybegin(YYINITIAL);return OPERATOR_NAMED_UNARY;}
 
-	"@" 	{return SIGIL_ARRAY;}
-	"$#" 	{return SIGIL_SCALAR_INDEX;}
-	"$" 	{ return SIGIL_SCALAR; }
-	"%"		{ return SIGIL_HASH;}
-	"*"		{return SIGIL_GLOB;}
-	"&"		{return SIGIL_CODE;}
-	"\\" 	{return OPERATOR_REFERENCE;}
+	"!" 						{yybegin(YYINITIAL);return OPERATOR_NOT;}
+	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
+	"-" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_UNARY;}
+	"~" 						{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
+	{PERL_OPERATORS_FILETEST} 	{yybegin(YYINITIAL);yypushback(1);return OPERATOR_FILETEST;}
 
-	{CORE_PREFIX}"my"	{return RESERVED_MY;}
-	{CORE_PREFIX}"our"	{return RESERVED_OUR;}
-	{CORE_PREFIX}"local"	{return RESERVED_LOCAL;}
-	{CORE_PREFIX}"state"	{return RESERVED_STATE;}
+	"\\" 						{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
 
-	{CORE_PREFIX}"elsif"	 { return  RESERVED_ELSIF;}
-	{CORE_PREFIX}"else"	 { return  RESERVED_ELSE;}
-	{CORE_PREFIX}"given"	 { return  RESERVED_GIVEN;}
-	{CORE_PREFIX}"when"	 { return  RESERVED_WHEN;}
-	{CORE_PREFIX}"default"	 { return  RESERVED_DEFAULT;}
-	{CORE_PREFIX}"continue"	 { return  RESERVED_CONTINUE;}
+	{CORE_PREFIX}"my"			{yybegin(YYINITIAL);return RESERVED_MY;}
+	{CORE_PREFIX}"our"			{yybegin(YYINITIAL);return RESERVED_OUR;}
+	{CORE_PREFIX}"local"		{yybegin(YYINITIAL);return RESERVED_LOCAL;}
+	{CORE_PREFIX}"state"		{yybegin(YYINITIAL);return RESERVED_STATE;}
 
-	{CORE_PREFIX}"format"	 { return  RESERVED_FORMAT;}
-	{CORE_PREFIX}"sub"	 		{ return  RESERVED_SUB;}
+	{CORE_PREFIX}"elsif"	 	{yybegin(YYINITIAL);return RESERVED_ELSIF;}
+	{CORE_PREFIX}"else"	 		{yybegin(YYINITIAL);return RESERVED_ELSE;}
+	{CORE_PREFIX}"given"	 	{yybegin(YYINITIAL);return RESERVED_GIVEN;}
+	{CORE_PREFIX}"default"	 	{yybegin(YYINITIAL);return RESERVED_DEFAULT;}
+	{CORE_PREFIX}"continue"	 	{yybegin(YYINITIAL);return  RESERVED_CONTINUE;}
 
-	{CORE_PREFIX}"package"	 	{ yybegin(LEX_PACKAGE); return  RESERVED_PACKAGE;}
-	{CORE_PREFIX}"use"	 		{ yybegin(LEX_PACKAGE); return  RESERVED_USE;}
-	{CORE_PREFIX}"no"	 		{ yybegin(LEX_PACKAGE); return  RESERVED_NO;}
-	{CORE_PREFIX}"require"	 	{ yybegin(LEX_PACKAGE); return  RESERVED_REQUIRE;}
+	{CORE_PREFIX}"format"	 	{yybegin(LEX_AFTER_IDENTIFIER);return  RESERVED_FORMAT;}
+	{CORE_PREFIX}"sub"	 		{yybegin(LEX_SUB);return  RESERVED_SUB;}
 
-	{CORE_PREFIX}"undef"	{ return RESERVED_UNDEF;}
+	{CORE_PREFIX}"package"	 	{yybegin(LEX_PACKAGE); return  RESERVED_PACKAGE;}
+	{CORE_PREFIX}"use"	 		{yybegin(LEX_PACKAGE); return  RESERVED_USE;}
+	{CORE_PREFIX}"no"	 		{yybegin(LEX_PACKAGE); return  RESERVED_NO;}
+	{CORE_PREFIX}"require"	 	{yybegin(LEX_PACKAGE_REQUIRE); return  RESERVED_REQUIRE;}
+
+	{CORE_PREFIX}"undef"		{yybegin(LEX_OPERATOR);return RESERVED_UNDEF;}
 
 	// special treatment?
-	{CORE_PREFIX}"print"	 { return  RESERVED_PRINT;}
-	{CORE_PREFIX}"printf"	 { return  RESERVED_PRINTF;}
-	{CORE_PREFIX}"say"	 { return  RESERVED_SAY;}
+	{CORE_PREFIX}"print"	 	{yybegin(YYINITIAL); return RESERVED_PRINT;}
+	{CORE_PREFIX}"printf"	 	{yybegin(YYINITIAL); return RESERVED_PRINTF;}
+	{CORE_PREFIX}"say"	 		{yybegin(YYINITIAL); return RESERVED_SAY;}
 
-	{CORE_PREFIX}"grep"	 { return  RESERVED_GREP;}
-	{CORE_PREFIX}"map"	 { return  RESERVED_MAP;}
-	{CORE_PREFIX}"sort"	 { return  RESERVED_SORT;}
+	{CORE_PREFIX}"grep"	 { yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return  RESERVED_GREP;}
+	{CORE_PREFIX}"map"	 { yybegin(YYINITIAL);return  RESERVED_MAP;}
+	{CORE_PREFIX}"sort"	 { yybegin(YYINITIAL);return  RESERVED_SORT;}
 
-	{CORE_PREFIX}"do"	 { return  RESERVED_DO;}
-	{CORE_PREFIX}"eval"	 { return  RESERVED_EVAL;}
+	{CORE_PREFIX}"do"	 { yybegin(YYINITIAL);return  RESERVED_DO;}
+	{CORE_PREFIX}"eval"	 { yybegin(YYINITIAL);return  RESERVED_EVAL;}
 
-	{CORE_PREFIX}"goto"	 { return  RESERVED_GOTO;}
-	{CORE_PREFIX}"redo"	 { return  RESERVED_REDO;}
-	{CORE_PREFIX}"next"	 { return  RESERVED_NEXT;}
-	{CORE_PREFIX}"last"	 { return  RESERVED_LAST;}
+	{CORE_PREFIX}"goto"	 { yybegin(YYINITIAL);return  RESERVED_GOTO;}
+	{CORE_PREFIX}"redo"	 { yybegin(YYINITIAL);return  RESERVED_REDO;}
+	{CORE_PREFIX}"next"	 { yybegin(YYINITIAL);return  RESERVED_NEXT;}
+	{CORE_PREFIX}"last"	 { yybegin(YYINITIAL);return  RESERVED_LAST;}
 
-	{CORE_PREFIX}"return"	 { return  RESERVED_RETURN;}
+	{CORE_PREFIX}"return"	 { yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return  RESERVED_RETURN;}
 
-	{BLOCK_NAMES}	{return BLOCK_NAME;}
-	{TAG_NAMES}		{yybegin(LEX_OPERATOR); return TAG;}
+	{BLOCK_NAMES}			{yybegin(YYINITIAL);return BLOCK_NAME;}
+	{TAG_NAMES}				{yybegin(LEX_OPERATOR); return TAG;}
+	{NAMED_ARGUMENTLESS}	{yybegin(LEX_OPERATOR);return IDENTIFIER;}	// fixme we can return special token here to help parser
 
-	{PERL_VERSION}  		{yybegin(LEX_OPERATOR);return NUMBER_VERSION;}
 	{PACKAGE_SHORT} 		{yybegin(LEX_OPERATOR);return PACKAGE;}
 
 	{CORE_PREFIX}"y" {QUOTE_LIKE_SUFFIX} {pullback(1);return RESERVED_Y;}
@@ -375,8 +442,8 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CORE_PREFIX}"m"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_M;}
 	{CORE_PREFIX}"s"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_S;}
 
-	{IDENTIFIER}			{yybegin(LEX_OPERATOR);return getIdentifierToken();}
-	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_OPERATOR, YYINITIAL);}
+	{IDENTIFIER}			{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
+	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_AFTER_IDENTIFIER, YYINITIAL);}
 }
 
 

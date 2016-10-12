@@ -108,30 +108,6 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 		return OPERATOR_REFERENCE;
 	}
 
-	/**
-	 * Parses IDENTIFIER =>
-	 * can be string_content => or ->identifier
-	 *
-	 * @return token type
-	 */
-	public IElementType parseBarewordMinus()
-	{
-		final CharSequence tokenText = yytext();
-
-		if (Character.isDigit(tokenText.charAt(0)))
-		{
-			int endOffset = 1;
-			while (Character.isDigit(tokenText.charAt(endOffset)))
-			{
-				endOffset++;
-			}
-
-			yypushback(tokenText.length() - endOffset);
-			return NUMBER_SIMPLE;
-		}
-
-		return IDENTIFIER;
-	}
 
 	public PerlLexer getPerlLexer()
 	{

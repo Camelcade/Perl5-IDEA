@@ -134,7 +134,7 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}
 
-{BAREWORD_MINUS} {return parseBarewordMinus();}
+{BAREWORD_MINUS} {return IDENTIFIER;}
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
 {PACKAGE} {return lexQualifiedIdentifier(yystate(),yystate());}
 

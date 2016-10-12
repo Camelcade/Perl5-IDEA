@@ -256,12 +256,6 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_NE_NUMERIC,
 			OPERATOR_SMARTMATCH
 	);
-	public static final HashSet<String> REGEXP_PREFIX_SUBS = new HashSet<String>(Arrays.asList(
-			"scalar",
-			"split",
-			"return",
-			"grep"
-	));
 	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
@@ -324,15 +318,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean allowSharpQuote = true;
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
-	protected int waitingAttributeBraceLevel = 0;
-	protected int waitingAttributeBracketLevel = 0;
-	protected int waitingAttributeParenLevel = 0;
-	// we've parsed my/our/state
-	protected boolean waitingVarAttribute = false;
-	// we've passed sub
-	protected boolean waitingSubAttribute = false;
-	// we've passed sub and colon
-	protected boolean isAttribute = false;
+
 	protected PerlLexerAdapter evalPerlLexer;
 	protected PerlStringLexer myStringLexer;
 	protected PerlQStringLexer myQStringLexer;
@@ -479,6 +465,7 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 			else if ((currentChar == '"' || currentChar == '\'' || currentChar == '`') && currentState != LEX_BRACED_VARIABLE_NAME && currentState != LEX_VARIABLE_NAME)
 			{
+				yybegin(LEX_OPERATOR);
 				if (currentChar == '\'')
 				{
 					return captureString(LEX_QUOTE_LIKE_OPENER_Q);
@@ -608,7 +595,6 @@ public class PerlLexer extends PerlLexerGenerated
 		PerlStringLexer stringLexer = getStringLexer();
 		popState();
 		preparsedTokensList.addAll(lexCurrentToken(stringLexer));
-		yybegin(LEX_OPERATOR);
 		return getPreParsedToken();
 	}
 
@@ -1413,52 +1399,6 @@ public class PerlLexer extends PerlLexerGenerated
 	}
 
 	/**
-	 * Parses IDENTIFIER =>
-	 * can be string_content => or ->identifier
-	 *
-	 * @return token type
-	 */
-	public IElementType parseBarewordMinus()
-	{
-		final CharSequence tokenText = yytext();
-		boolean startsWithMinus = tokenText.charAt(0) == '-';
-
-		boolean negate = IDENTIFIER_NEGATION_PREFIX.contains(getTokenHistory().getLastSignificantTokenType()) || SIGILS_TOKENS.contains(getTokenHistory().getLastTokenType());
-
-		if (Character.isDigit(tokenText.charAt(0)))
-		{
-			int endOffset = 1;
-			while (Character.isDigit(tokenText.charAt(endOffset)))
-			{
-				endOffset++;
-			}
-
-			yypushback(tokenText.length() - endOffset);
-			return NUMBER_SIMPLE;
-		}
-		else if (!negate && isBraced())
-		{
-			return IDENTIFIER;
-		}
-		else if (!negate && isCommaArrowAhead())
-		{
-			return STRING_IDENTIFIER;
-		}
-		else if (StringUtil.startsWith(tokenText, "--"))
-		{
-			yypushback(tokenText.length() - 2);
-			return OPERATOR_MINUS_MINUS;
-		}
-		else if (startsWithMinus)
-		{
-			yypushback(tokenText.length() - 1);
-			return OPERATOR_MINUS;
-		}
-
-		return getIdentifierToken();
-	}
-
-	/**
 	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
 	 *
 	 * @return token type
@@ -1472,16 +1412,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		boolean isSigilBehind = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
 
-		if (isAttribute)
-		{
-			if (getNextCharacter() == '(')
-			{
-				pushState();
-				yybegin(LEX_QUOTE_LIKE_OPENER_Q);
-			}
-			return IDENTIFIER;
-		}
-		else if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
+		if (!IDENTIFIER_NEGATION_PREFIX.contains(lastSignificantTokenType)
 				&& !isSigilBehind    // print $$ if smth
 				)
 		{
@@ -1565,9 +1496,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public void resetInternals()
 	{
 		super.resetInternals();
-		waitingSubAttribute = false;
-		waitingVarAttribute = false;
-		resetAttributeCounters();
 		heredocQueue.clear();
 	}
 
@@ -1580,7 +1508,6 @@ public class PerlLexer extends PerlLexerGenerated
 
 		if (!wasPreparsed && preparsedTokensList.isEmpty())
 		{
-			attributesLogic(tokenType);
 
 			if (tokenType == TokenType.NEW_LINE_INDENT || tokenType == TokenType.WHITE_SPACE)
 			{
@@ -1593,16 +1520,6 @@ public class PerlLexer extends PerlLexerGenerated
 			else if (tokenType == RESERVED_S || tokenType == RESERVED_M || tokenType == RESERVED_QR)
 			{
 				processRegexOpener(tokenType);
-			}
-			else if (tokenType == RESERVED_MY || tokenType == RESERVED_OUR || tokenType == RESERVED_STATE)
-			{
-				waitingVarAttribute = true;
-				resetAttributeCounters();
-			}
-			else if (tokenType == RESERVED_SUB)
-			{
-				waitingSubAttribute = true;
-				resetAttributeCounters();
 			}
 			else if (tokenType == RESERVED_TR || tokenType == RESERVED_Y)
 			{
@@ -1617,83 +1534,4 @@ public class PerlLexer extends PerlLexerGenerated
 		return tokenType;
 	}
 
-	protected void attributesLogic(IElementType tokenType)
-	{
-		// stop on extra closing ) ] }
-		if (waitingSubAttribute || waitingVarAttribute)
-		{
-			if (tokenType == LEFT_BRACE)
-			{
-				waitingAttributeBraceLevel++;
-			}
-			else if (tokenType == RIGHT_BRACE)
-			{
-				waitingAttributeBraceLevel--;
-			}
-			if (tokenType == LEFT_PAREN)
-			{
-				waitingAttributeParenLevel++;
-			}
-			else if (tokenType == RIGHT_PAREN)
-			{
-				waitingAttributeParenLevel--;
-			}
-
-			if (waitingSubAttribute)
-			{
-				if (tokenType == LEFT_BRACKET)
-				{
-					waitingAttributeBracketLevel++;
-				}
-				else if (tokenType == RIGHT_BRACKET)
-				{
-					waitingAttributeBracketLevel--;
-				}
-			}
-
-			if (waitingAttributeBraceLevel < 0
-					|| waitingAttributeParenLevel < 0
-					|| waitingAttributeBracketLevel < 0
-					)
-			{
-				waitingSubAttribute = false;
-				waitingVarAttribute = false;
-			}
-		}
-
-		// stop on incorrect token
-		if (waitingSubAttribute && !ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE.contains(tokenType))
-		{
-			waitingSubAttribute = false;
-		}
-
-		// stop on incorrect token
-		if (waitingVarAttribute && !ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE.contains(tokenType))
-		{
-			waitingVarAttribute = false;
-		}
-
-		// stop on incorrect token
-		if (isAttribute && !ALLOWED_IN_ATTRIBUTE.contains(tokenType))
-		{
-			isAttribute = false;
-		}
-
-		// switch to attribute
-		if ((waitingVarAttribute || waitingSubAttribute) && tokenType == COLON)
-		{
-			waitingVarAttribute = false;
-			waitingSubAttribute = false;
-			isAttribute = true;
-		}
-
-	}
-
-	protected void resetAttributeCounters()
-	{
-		isAttribute = false;
-		waitingAttributeBraceLevel = 0;
-		waitingAttributeBracketLevel = 0;
-		waitingAttributeParenLevel = 0;
-	}
 }
