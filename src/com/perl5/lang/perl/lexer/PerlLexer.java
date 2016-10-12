@@ -447,8 +447,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 		else
 		{
-			int currentState = yystate();
-			int currentRealState = getRealLexicalState();
+			int currentState = getRealLexicalState();
 			char currentChar = buffer.charAt(tokenStart);
 
 			// capture heredoc
@@ -478,7 +477,7 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return parseTr();
 			}
-			else if ((currentChar == '"' || currentChar == '\'' || currentChar == '`') && currentRealState != LEX_BRACED_VARIABLE_NAME && currentRealState != LEX_VARIABLE_NAME)
+			else if ((currentChar == '"' || currentChar == '\'' || currentChar == '`') && currentState != LEX_BRACED_VARIABLE_NAME && currentState != LEX_VARIABLE_NAME)
 			{
 				if (currentChar == '\'')
 				{
@@ -1386,7 +1385,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 	public PerlStringLexer getStringLexer()
 	{
-		int currentState = yystate();
+		int currentState = getRealLexicalState();
 		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
 		{
 			return getQStringLexer();

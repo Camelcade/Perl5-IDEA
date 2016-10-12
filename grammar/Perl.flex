@@ -57,16 +57,16 @@ PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
-BAREWORD_MINUS = "-" * {IDENTIFIER}
+//BAREWORD_MINUS = "-" * {IDENTIFIER}
 
-QAULIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
+QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
 //DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""	// for lpe
 //SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
 //XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
 
-QUOTE_LIKE_SUFFIX= "'"? {QAULIFIED_IDENTIFIER}?
+QUOTE_LIKE_SUFFIX= "'"?
 CORE_PREFIX = "CORE::"?
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*
@@ -81,7 +81,7 @@ NUMBER_BIN = "0"[bB][01_]+
 
 SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_]
 CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
-VARIABLE_NAME = {QAULIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
+VARIABLE_NAME = {QUALIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
 BRACED_VARIABLE_NAME = "{" ({VARIABLE_NAME}|"$"|{CAPPED_BRACED_VARIABLE}) "}"
@@ -116,6 +116,8 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 %state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 %state LEX_TRANS_OPENER, LEX_REGEX_OPENER
 
+%state LEX_PACKAGE
+
 // custom lexical states to avoid crossing with navie ones
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
 %state LEX_PREPARSED_ITEMS
@@ -145,7 +147,11 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
 	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
 	{IDENTIFIER} 							{yybegin(LEX_OPERATOR); return VARIABLE_NAME;}
-	{QAULIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_OPERATOR, LEX_VARIABLE_NAME);}
+	{QUALIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_OPERATOR, LEX_VARIABLE_NAME);}
+}
+
+<LEX_PACKAGE>{
+	{QUALIFIED_IDENTIFIER}			{yybegin(YYINITIAL);return PACKAGE;}
 }
 
 <LEX_BRACED_VARIABLE_NAME>{
@@ -154,7 +160,7 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
 	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
 	{IDENTIFIER} / "}" 				{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
-	{QAULIFIED_IDENTIFIER} / "}"  	{return lexQualifiedIdentifier(LEX_VARIABLE_CLOSE_BRACE, LEX_BRACED_VARIABLE_NAME);}
+	{QUALIFIED_IDENTIFIER} / "}"  	{return lexQualifiedIdentifier(LEX_VARIABLE_CLOSE_BRACE, LEX_BRACED_VARIABLE_NAME);}
 }
 
 <LEX_VARIABLE_CLOSE_BRACE> "}" {yybegin(LEX_OPERATOR);return RIGHT_BRACE;}
@@ -323,11 +329,13 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CORE_PREFIX}"continue"	 { return  RESERVED_CONTINUE;}
 
 	{CORE_PREFIX}"format"	 { return  RESERVED_FORMAT;}
-	{CORE_PREFIX}"sub"	 { return  RESERVED_SUB;}
-	{CORE_PREFIX}"package"	 { return  RESERVED_PACKAGE;}
-	{CORE_PREFIX}"use"	 { return  RESERVED_USE;}
-	{CORE_PREFIX}"no"	 { return  RESERVED_NO;}
-	{CORE_PREFIX}"require"	 { return  RESERVED_REQUIRE;}
+	{CORE_PREFIX}"sub"	 		{ return  RESERVED_SUB;}
+
+	{CORE_PREFIX}"package"	 	{ yybegin(LEX_PACKAGE); return  RESERVED_PACKAGE;}
+	{CORE_PREFIX}"use"	 		{ yybegin(LEX_PACKAGE); return  RESERVED_USE;}
+	{CORE_PREFIX}"no"	 		{ yybegin(LEX_PACKAGE); return  RESERVED_NO;}
+	{CORE_PREFIX}"require"	 	{ yybegin(LEX_PACKAGE); return  RESERVED_REQUIRE;}
+
 	{CORE_PREFIX}"undef"	{ return RESERVED_UNDEF;}
 
 	// special treatment?
@@ -368,7 +376,7 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 	{CORE_PREFIX}"s"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_S;}
 
 	{IDENTIFIER}			{yybegin(LEX_OPERATOR);return getIdentifierToken();}
-	{QAULIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_OPERATOR, YYINITIAL);}
+	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_OPERATOR, YYINITIAL);}
 }
 
 
