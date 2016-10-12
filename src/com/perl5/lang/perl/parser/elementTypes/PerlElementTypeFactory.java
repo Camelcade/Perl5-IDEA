@@ -39,6 +39,14 @@ public class PerlElementTypeFactory
 			"STRING_CONTENT"
 	));
 
+	protected final static Set<String> VARIABLE_NAMES_TOKESN = new THashSet<>(Arrays.asList(
+			"SCALAR_NAME",
+			"ARRAY_NAME",
+			"HASH_NAME",
+			"GLOB_NAME",
+			"CODE_NAME"
+	));
+
 	public static IElementType getTokenType(@NotNull String name)
 	{
 		if (STRING_TOKENS.contains(name))

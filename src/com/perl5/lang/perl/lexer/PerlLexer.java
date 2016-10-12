@@ -27,7 +27,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -256,7 +255,6 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_NE_NUMERIC,
 			OPERATOR_SMARTMATCH
 	);
-	public static final Map<String, IElementType> PRAGMA_TOKENS_MAP = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
 	public static final TokenSet QUOTE_LIKE_STRING_OPENER_TOKENSET = TokenSet.create(
@@ -300,12 +298,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static TokenSet CUSTOM_TOKENSET;
 	public static TokenSet LABEL_TOKENSET;
 
-	static
-	{
-		PRAGMA_TOKENS_MAP.put("constant", PACKAGE_PRAGMA_CONSTANT);
-		PRAGMA_TOKENS_MAP.put("vars", PACKAGE_PRAGMA_VARS);
-	}
-
 	/**
 	 * HEREDOC proceccing section
 	 */
@@ -330,19 +322,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 **/
 	protected IElementType regexCommand = null;
 	Project myProject;
-	private TokenSet PRE_OPERATOR_TOKENSET = TokenSet.create(
-			VARIABLE_NAME,
-			RIGHT_PAREN,
-			RIGHT_BRACKET,
-			IDENTIFIER,
-			RIGHT_BRACE,
-			STRING_BARE,
-			QUOTE_SINGLE_CLOSE,
-			QUOTE_DOUBLE_CLOSE,
-			QUOTE_TICK_CLOSE,
-			NUMBER,
-			NUMBER_SIMPLE
-	);
 	private boolean myFormatWaiting = false;
 
 	public PerlLexer(Project project)
@@ -463,22 +442,6 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return parseTr();
 			}
-			else if ((currentChar == '"' || currentChar == '\'' || currentChar == '`') && currentState != LEX_BRACED_VARIABLE_NAME && currentState != LEX_VARIABLE_NAME)
-			{
-				yybegin(LEX_OPERATOR);
-				if (currentChar == '\'')
-				{
-					return captureString(LEX_QUOTE_LIKE_OPENER_Q);
-				}
-				else if (currentChar == '"')
-				{
-					return captureString(LEX_QUOTE_LIKE_OPENER_QQ);
-				}
-				else
-				{
-					return captureString(LEX_QUOTE_LIKE_OPENER_QX);
-				}
-			}
 			// capture line comment
 			else if (currentChar == '#')
 			{
@@ -517,19 +480,6 @@ public class PerlLexer extends PerlLexerGenerated
 
 		return false;
 	}
-
-	/**
-	 * Changes current lexical state and than captures string
-	 *
-	 * @return string token
-	 */
-	public IElementType captureString(int newState) throws IOException
-	{
-		pushState();
-		yybegin(newState);
-		return captureString();
-	}
-
 
 	/**
 	 * Captures string token from current position according to the current lexical state
@@ -1417,28 +1367,10 @@ public class PerlLexer extends PerlLexerGenerated
 				)
 		{
 
-			if (
-					(lastSignificantTokenType == OPERATOR_FILETEST && tokenText.equals("_"))    // for -t _
-							|| (tokenHistory.getLastUnparenTokenType() == IDENTIFIER
-							&& PerlParserUtil.PRE_HANDLE_OPS.contains(tokenHistory.getLastUnparenTokenTextAsString())
-							&& !PerlSubUtil.BUILT_IN.contains(tokenText)
-							&& isListElementEndAhead()
-					))
-			{
-				return HANDLE;
-			}
-			else if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
+			if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
 			{
 				return tokenType;
 			}
-		}
-		else if (lastSignificantTokenType == RESERVED_USE || lastSignificantTokenType == RESERVED_NO) // pragma section
-		{
-			if (PRAGMA_TOKENS_MAP.containsKey(tokenText))
-			{
-				return PRAGMA_TOKENS_MAP.get(tokenText);
-			}
-
 		}
 
 		if (!isSigilBehind && (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)

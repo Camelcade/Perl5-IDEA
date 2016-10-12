@@ -111,7 +111,6 @@ public interface PerlParser extends PerlElementTypes
 			STRING_WHITESPACE,
 			SUB,
 			SUB_PROTOTYPE_TOKEN,
-			VARIABLE_NAME,
 			VERSION_ELEMENT
 	);
 

@@ -43,7 +43,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					"(" +
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
-
+	protected IElementType myVariableNameElementType = null;
 
 	public IElementType lexQualifiedIdentifier(int fullState, int pushBackState)
 	{
@@ -74,8 +74,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return PACKAGE;
 	}
 
-
-
 	protected IElementType startVariableLexing(int sigilSize, IElementType sigilType)
 	{
 		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_VARIABLE_NAME, sigilType);
@@ -86,9 +84,34 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_BRACED_VARIABLE_NAME, sigilType);
 	}
 
-
 	private IElementType startVariableLexing(int sigilSize, int newState, IElementType sigilType)
 	{
+		// fixme temporary
+		if (sigilType == SIGIL_SCALAR || sigilType == SIGIL_SCALAR_INDEX)
+		{
+			myVariableNameElementType = SCALAR_NAME;
+		}
+		else if (sigilType == SIGIL_ARRAY)
+		{
+			myVariableNameElementType = ARRAY_NAME;
+		}
+		else if (sigilType == SIGIL_HASH)
+		{
+			myVariableNameElementType = HASH_NAME;
+		}
+		else if (sigilType == SIGIL_GLOB)
+		{
+			myVariableNameElementType = GLOB_NAME;
+		}
+		else if (sigilType == SIGIL_CODE)
+		{
+			myVariableNameElementType = CODE_NAME;
+		}
+		else
+		{
+			throw new RuntimeException("Unable to find name for " + sigilType);
+		}
+
 		yypushback(yylength() - sigilSize);
 		yybegin(newState);
 		return sigilType;

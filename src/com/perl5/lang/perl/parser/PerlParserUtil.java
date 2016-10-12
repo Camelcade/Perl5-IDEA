@@ -35,9 +35,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 /**
  * Created by hurricup on 01.05.2015.
  */
@@ -102,40 +99,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 					)
 			)
 	);
-	// commands, that accepts filehandles as first parameter
-	public static final HashSet<String> PRE_HANDLE_OPS = new HashSet<String>(Arrays.asList(
-			"opendir",
-			"chdir",
-			"telldir",
-			"seekdir",
-			"rewinddir",
-			"readdir",
-			"closedir",
-
-			"sysopen",
-			"syswrite",
-			"sysseek",
-			"sysread",
-
-			"open",
-			"close",
-			"read",
-			"write",
-			"stat",
-			"ioctl",
-			"fcntl",
-			"lstat",
-			"truncate",
-			"tell",
-			"select",
-			"seek",
-			"getc",
-			"flock",
-			"fileno",
-			"eof",
-			"eof",
-			"binmode"
-	));
 	public static final TokenSet VERSION_TOKENS = TokenSet.create(
 			NUMBER,
 			NUMBER_SIMPLE,
@@ -175,7 +138,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	// tokens that can be converted between each other depending on context
 	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
-			VARIABLE_NAME,
 			SUB,
 			LABEL,
 			RESERVED_METHOD,
@@ -602,29 +564,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return
 				PRINT_HANDLE_NEGATE_SUFFIX.contains(b.lookAhead(1))
 						|| b.rawLookup(1) == LEFT_PAREN;
-	}
-
-	/**
-	 * Checks and parses bareword filehandle for <FH> operations
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseReadHandle(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		IElementType nextTokenType = b.lookAhead(1);
-
-		if (CONVERTABLE_TOKENS.contains(currentTokenType) && nextTokenType == OPERATOR_GT_NUMERIC)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(HANDLE);
-			return true;
-		}
-
-		return false;
 	}
 
 	/**

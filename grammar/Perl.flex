@@ -42,6 +42,8 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType getIdentifierToken();
 	public abstract IElementType parseHeredocOpener();
 	public abstract IElementType parseHeredocOpenerBackref();
+	public abstract IElementType captureString();
+
 %}
 
 
@@ -67,9 +69,9 @@ BAREWORD_MINUS = "-" ? {IDENTIFIER}
 QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
-//DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""	// for lpe
-//SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
-//XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
+DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""
+SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
+XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
 
 QUOTE_LIKE_SUFFIX= ("'" {QUALIFIED_IDENTIFIER} ? )?
 CORE_PREFIX = "CORE::"?
@@ -111,7 +113,9 @@ POD_LINE = ([.]+ {NEW_LINE} ? | {NEW_LINE})
 POD_END = "=cut" (\s [.]*) {NEW_LINE}
 
 // original list taken from http://www.perlmonks.org/?node_id=1131277
-NAMED_UNARY_OPERATORS = "write"|"values"|"umask"|"ucfirst"|"uc"|"telldir"|"tell"|"study"|"stat"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"rmdir"|"rewinddir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"readdir"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"lstat"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"getc"|"fileno"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"eof"|"each"|"defined"|"cos"|"closedir"|"close"|"chroot"|"chr"|"chdir"|"caller"|"alarm"|"abs"
+NAMED_UNARY_OPERATORS = "values"|"umask"|"ucfirst"|"uc"|"study"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"rmdir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"each"|"defined"|"cos"|"chroot"|"chr"|"caller"|"alarm"|"abs"
+BARE_HANDLE_ACCEPTORS = "truncate"|"syswrite"|"sysseek"|"sysread"|"sysopen"|"select"|"seekdir"|"seek"|"read"|"opendir"|"open"|"ioctl"|"flock"|"fcntl"|"binmode"
+NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"stat"|"rewinddir"|"readdir"|"lstat"|"getc"|"fileno"|"eof"|"closedir"|"close"|"chdir"
 
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
@@ -131,6 +135,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 %state LEX_PREPARSED_ITEMS
 %xstate LEX_SUB_PROTOTYPE
 %state LEX_SUB_ATTRIBUTES
+%state LEX_HANDLE, LEX_STRICT_HANDLE, LEX_ANGLED_HANDLE
 
 %state LEX_AFTER_DEREFERENCE, LEX_AFTER_RIGHT_BRACE, LEX_AFTER_IDENTIFIER, LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER, LEX_AFTER_VARIABLE_NAME
 
@@ -143,28 +148,49 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{POD_LINE}	{return POD;}
 }
 
-
-<LEX_END_BLOCK>{
-	[^]+ 		{return COMMENT_BLOCK;}
-}
-
 ^{POD_START} 	{yybegin(LEX_POD);return POD;}
 {NEW_LINE}   	{return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+  {return TokenType.WHITE_SPACE;}
 {END_BLOCK}		{yybegin(LEX_END_BLOCK);return TAG_END;}
 {DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return TAG_DATA;}
 
+<LEX_HANDLE> {
+	"("				{yybegin(LEX_STRICT_HANDLE);return LEFT_PAREN;}
+}
+
+<LEX_ANGLED_HANDLE>{
+	{IDENTIFIER} 	{return HANDLE;}
+	">"				{yybegin(LEX_OPERATOR);return RIGHT_ANGLE;}
+	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
+}
+
+<LEX_HANDLE,LEX_STRICT_HANDLE>{
+	{IDENTIFIER} / [:(-] {yypushback(yylength());yybegin(YYINITIAL);break;}
+	{IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return HANDLE;}
+	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
+}
+
+<LEX_END_BLOCK>{
+	[^]+ 		{return COMMENT_BLOCK;}
+}
+
 <LEX_VARIABLE_NAME>{
-	"$"										{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
-	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
-	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
-	{IDENTIFIER} 							{yybegin(LEX_AFTER_VARIABLE_NAME); return VARIABLE_NAME;}
+	"$"										{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
+	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
+	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
+	{IDENTIFIER} 							{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{QUALIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_AFTER_VARIABLE_NAME, LEX_VARIABLE_NAME);}
 }
 
 <LEX_BRACED_STRING>{
 	{BAREWORD_MINUS}	{return STRING_CONTENT;}
 	"}"					{yybegin(LEX_AFTER_VARIABLE_NAME);return RIGHT_BRACE;}
+}
+
+// fixme temproary
+<LEX_PACKAGE>{
+	"constant"		{yybegin(YYINITIAL);return PACKAGE_PRAGMA_CONSTANT;}
+	"vars"			{yybegin(YYINITIAL);return PACKAGE_PRAGMA_VARS;}
 }
 
 <LEX_PACKAGE,LEX_PACKAGE_REQUIRE>{
@@ -178,10 +204,10 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 <LEX_BRACED_VARIABLE_NAME>{
 	"{" 							{return LEFT_BRACE;}
-	"$" / "}"						{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
-	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
-	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
-	{IDENTIFIER} / "}" 				{yybegin(LEX_VARIABLE_CLOSE_BRACE);return VARIABLE_NAME;}
+	"$" / "}"						{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
+	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
+	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
+	{IDENTIFIER} / "}" 				{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{QUALIFIED_IDENTIFIER} / "}"  	{return lexQualifiedIdentifier(LEX_VARIABLE_CLOSE_BRACE, LEX_BRACED_VARIABLE_NAME);}
 }
 
@@ -372,16 +398,14 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <YYINITIAL,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
-//	{DQ_STRING}	{yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
-//	{SQ_STRING} {yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
-//	{XQ_STRING} {yybegin(LEX_OPERATOR);return STRING_IDENTIFIER;}
-//	"\"" 	{return QUOTE_DOUBLE;}
-//	"`" 	{return QUOTE_TICK;}
-//	"'" 	{return QUOTE_SINGLE;}
+	{DQ_STRING}	{yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_QQ);return captureString();}
+	{SQ_STRING} {yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_Q);return captureString();}
+	{XQ_STRING} {yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_QX);return captureString();}
 
 	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(LEX_OPERATOR);return STRING_CONTENT;}
 
-	"<"							{yybegin(YYINITIAL);return LEFT_ANGLE;}
+	"<"{IDENTIFIER}">"  		{yybegin(LEX_ANGLED_HANDLE);pullback(1);return LEFT_ANGLE;}
+	"<"							{yybegin(LEX_OPERATOR);pushState();yypushback(1);yybegin(LEX_QUOTE_LIKE_OPENER_QQ);return captureString();}
 
 	{HEREDOC_OPENER}   			{yybegin(LEX_OPERATOR);return parseHeredocOpener();}
 	{HEREDOC_OPENER_BACKREF} 	{yybegin(LEX_OPERATOR);return parseHeredocOpenerBackref();}
@@ -389,13 +413,16 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	"/"   						{yybegin(LEX_OPERATOR);return startRegexp();}
 
 	"split"						{yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return OPERATOR_NAMED_UNARY;}
-	{NAMED_UNARY_OPERATORS}		{yybegin(YYINITIAL);return OPERATOR_NAMED_UNARY;}
+
+	{NAMED_UNARY_OPERATORS}				{yybegin(YYINITIAL);return OPERATOR_NAMED_UNARY;}
+	{BARE_HANDLE_ACCEPTORS}				{yybegin(LEX_HANDLE);return IDENTIFIER;}
+	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{yybegin(LEX_HANDLE);return OPERATOR_NAMED_UNARY;}
 
 	"!" 						{yybegin(YYINITIAL);return OPERATOR_NOT;}
 	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
 	"-" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_UNARY;}
 	"~" 						{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
-	{PERL_OPERATORS_FILETEST} 	{yybegin(YYINITIAL);yypushback(1);return OPERATOR_FILETEST;}
+	{PERL_OPERATORS_FILETEST} 	{yybegin(LEX_HANDLE);yypushback(1);return OPERATOR_FILETEST;}
 
 	"\\" 						{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
 
