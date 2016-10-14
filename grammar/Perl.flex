@@ -409,7 +409,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 	"/"   						{yybegin(LEX_OPERATOR);return startRegexp();}
 
-	"split"						{yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return OPERATOR_NAMED_UNARY;}
+	"split"						{yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER); return IDENTIFIER;}
 
 	{NAMED_UNARY_OPERATORS}				{yybegin(YYINITIAL);return OPERATOR_NAMED_UNARY;}
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(LEX_HANDLE);return IDENTIFIER;}
