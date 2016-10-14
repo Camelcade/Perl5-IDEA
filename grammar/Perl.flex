@@ -20,7 +20,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-
 %%
 
 %class PerlLexerGenerated
@@ -140,6 +139,8 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 %state LEX_SUB_ATTRIBUTES
 %state LEX_HANDLE, LEX_STRICT_HANDLE, LEX_ANGLED_HANDLE
 
+%xstate LEX_IDENTIFIER
+
 %state LEX_AFTER_DEREFERENCE, LEX_AFTER_RIGHT_BRACE, LEX_AFTER_IDENTIFIER, LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER, LEX_AFTER_VARIABLE_NAME
 
 %state LEX_VARIABLE_NAME, LEX_BRACED_VARIABLE_NAME, LEX_VARIABLE_CLOSE_BRACE
@@ -149,6 +150,11 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 <LEX_POD> {
 	{POD_END}	{yybegin(YYINITIAL);return POD;}
 	{POD_LINE}	{return POD;}
+}
+
+<LEX_IDENTIFIER> {IDENTIFIER}	{
+	popState();
+	return myForcedIdentifierElementType;
 }
 
 ^{POD_START} 	{yybegin(LEX_POD);return POD;}
@@ -181,7 +187,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{CAPPED_SINGLE_LETTER_VARIABLE_NAME}	{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{SPECIAL_VARIABLE_NAME} 				{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
 	{IDENTIFIER} 							{yybegin(LEX_AFTER_VARIABLE_NAME); return myVariableNameElementType;}
-	{QUALIFIED_IDENTIFIER} 					{return lexQualifiedIdentifier(LEX_AFTER_VARIABLE_NAME, LEX_VARIABLE_NAME);}
+	{QUALIFIED_IDENTIFIER} 					{yybegin(LEX_AFTER_VARIABLE_NAME); return lexQualifiedIdentifier(myVariableNameElementType);}
 }
 
 <LEX_BRACED_STRING>{
@@ -201,7 +207,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 <LEX_PACKAGE_REQUIRE>{
 	{IDENTIFIER} / "("				{yybegin(LEX_AFTER_IDENTIFIER);return IDENTIFIER;}
-	{QUALIFIED_IDENTIFIER} / "("	{return lexQualifiedIdentifier(LEX_AFTER_IDENTIFIER, LEX_PACKAGE_REQUIRE);}
+	{QUALIFIED_IDENTIFIER} / "("	{yybegin(LEX_AFTER_IDENTIFIER);return lexQualifiedIdentifier(IDENTIFIER);}
 }
 
 <LEX_BRACED_VARIABLE_NAME>{
@@ -209,14 +215,14 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{CAPPED_BRACED_VARIABLE} / "}"	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{SPECIAL_VARIABLE_NAME} / "}" 	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
 	{IDENTIFIER} / "}" 				{yybegin(LEX_VARIABLE_CLOSE_BRACE);return myVariableNameElementType;}
-	{QUALIFIED_IDENTIFIER} / "}"  	{return lexQualifiedIdentifier(LEX_VARIABLE_CLOSE_BRACE, LEX_BRACED_VARIABLE_NAME);}
+	{QUALIFIED_IDENTIFIER} / "}"  	{yybegin(LEX_VARIABLE_CLOSE_BRACE);return lexQualifiedIdentifier(myVariableNameElementType);}
 }
 
 <LEX_VARIABLE_CLOSE_BRACE> "}" {yybegin(LEX_AFTER_VARIABLE_NAME);return RIGHT_BRACE;}
 
 <LEX_AFTER_DEREFERENCE>{
 	{IDENTIFIER}			{yybegin(LEX_OPERATOR);return IDENTIFIER;}
-	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_OPERATOR, LEX_AFTER_DEREFERENCE);}
+	{QUALIFIED_IDENTIFIER} 	{yybegin(LEX_OPERATOR);return lexQualifiedIdentifier(IDENTIFIER);}
 }
 
 <LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{
@@ -225,7 +231,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 <LEX_SUB>{
 	{IDENTIFIER}				{return IDENTIFIER;}
-	{QUALIFIED_IDENTIFIER} 		{return lexQualifiedIdentifier(LEX_SUB,LEX_SUB);}
+	{QUALIFIED_IDENTIFIER} 		{return lexQualifiedIdentifier(IDENTIFIER);}
 	"(" / {SUB_PROTOTYPE}? ")"	{yybegin(LEX_SUB_PROTOTYPE);return LEFT_PAREN;}
 	"(" 						{yybegin(YYINITIAL);return LEFT_PAREN;}
 }
@@ -444,6 +450,9 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 	{CORE_PREFIX}"undef"		{yybegin(LEX_OPERATOR);return RESERVED_UNDEF;}
 
+	"switch"					{yybegin(YYINITIAL);return RESERVED_SWITCH;}
+	"case"						{yybegin(LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER);return RESERVED_CASE;}
+
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(YYINITIAL); return RESERVED_PRINT;}
 	{CORE_PREFIX}"printf"	 	{yybegin(YYINITIAL); return RESERVED_PRINTF;}
@@ -482,7 +491,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_S;}
 
 	{IDENTIFIER}			{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
-	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_AFTER_IDENTIFIER, YYINITIAL);}
+	{QUALIFIED_IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return lexQualifiedIdentifier(IDENTIFIER);}
 }
 
 

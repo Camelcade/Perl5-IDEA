@@ -17,13 +17,17 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
+
+import static com.perl5.lang.perl.lexer.PerlLexerGenerated.LEX_IDENTIFIER;
 
 /**
  * Created by hurricup on 10.08.2015.
  */
-public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes
+public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes, PerlSwitchElementTypes
 {
 	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*"; // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
@@ -44,8 +48,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
 	protected IElementType myVariableNameElementType = null;
+	protected IElementType myForcedIdentifierElementType = null;
 
-	public IElementType lexQualifiedIdentifier(int fullState, int pushBackState)
+	public IElementType lexQualifiedIdentifier(@NotNull IElementType identifierElementType)
 	{
 		CharSequence yytext = yytext();
 		int tokenSize = yytext.length();
@@ -65,11 +70,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 		if (pushbackSize > 0)
 		{
 			yypushback(pushbackSize);
-			yybegin(pushBackState);
-		}
-		else
-		{
-			yybegin(fullState);
+			myForcedIdentifierElementType = identifierElementType;
+			pushStateAndBegin(LEX_IDENTIFIER);
 		}
 		return PACKAGE;
 	}

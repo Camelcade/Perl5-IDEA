@@ -136,6 +136,6 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 
 {BAREWORD_MINUS} {return IDENTIFIER;}
 {PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
-{PACKAGE} {return lexQualifiedIdentifier(yystate(),yystate());}
+{PACKAGE} {return PACKAGE_IDENTIFIER;}
 
 [^]    { return TokenType.BAD_CHARACTER; }

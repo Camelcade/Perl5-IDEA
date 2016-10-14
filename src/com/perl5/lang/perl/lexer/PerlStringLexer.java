@@ -21,7 +21,6 @@ import com.intellij.psi.tree.IElementType;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.regex.Matcher;
 
 /**
  * Created by hurricup on 10.08.2015.
@@ -66,35 +65,6 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 			}
 		}
 		return tokenType;
-	}
-
-	/**
-	 * Splitting ambiguous package to PACKAGE_IDENTIFIER and IDENTIFIER
-	 *
-	 * @return token type
-	 */
-	public IElementType parseAmbiguousPackage(IElementType identifierType)
-	{
-		CharSequence tokenText = yytext();
-
-		Matcher m = AMBIGUOUS_PACKAGE_PATTERN.matcher(tokenText);
-		if (m.matches())
-		{
-			String packageIdentifier = m.group(1);
-
-			preparsedTokensList.clear();
-			int packageIdentifierEnd = getTokenStart() + packageIdentifier.length();
-			CustomToken barewordToken = new CustomToken(packageIdentifierEnd, getTokenEnd(), identifierType);
-			preparsedTokensList.add(barewordToken);
-			setTokenEnd(packageIdentifierEnd);
-
-			return lexQualifiedIdentifier(yystate(), yystate());
-
-		}
-		else
-		{
-			throw new RuntimeException("Inappropriate package name " + tokenText);
-		}
 	}
 
 	@Override

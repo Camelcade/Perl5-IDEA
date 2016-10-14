@@ -50,12 +50,6 @@ public class PerlQStringLexer extends PerlQQStringLexer
 	}
 
 	@Override
-	public IElementType parseAmbiguousPackage(IElementType identifierType)
-	{
-		return PACKAGE_IDENTIFIER;
-	}
-
-	@Override
 	protected IElementType getOpenQuoteToken()
 	{
 		return QUOTE_SINGLE_OPEN;
