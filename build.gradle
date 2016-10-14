@@ -71,10 +71,8 @@ test {
         } else {
             excludeCategories 'categories.Heavy'
         }
-        if (project.hasProperty("lexerperf")) {
-            include '**/*PerlLexerPerformanceTest.class'
-        } else {
-            exclude '**/*PerlLexerPerformanceTest.class'
+        if (project.hasProperty("runtest")) {
+            include '**/' + project.property('runtest') + '.class'
         }
     }
     testLogging {
