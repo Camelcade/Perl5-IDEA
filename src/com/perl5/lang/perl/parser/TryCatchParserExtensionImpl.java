@@ -134,7 +134,7 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		boolean pr = PerlParserUtil.mergePackageName(b, l);
+		boolean pr = PerlParserImpl.default_package(b, l);
 		boolean r = PerlParserUtil.scalarDeclarationWrapper(b, l);
 
 		if (r || pr)

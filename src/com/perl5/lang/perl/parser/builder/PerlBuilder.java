@@ -22,14 +22,9 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.PerlTokenData;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
-
-import java.util.Set;
 
 /**
  * Created by hurricup on 04.05.2015.
@@ -38,8 +33,6 @@ import java.util.Set;
 public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes
 {
 	private final PerlParserImpl perlParser;
-	protected Set<String> KNOWN_SUBS;
-	protected Set<String> KNOWN_PACKAGES;
 
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
@@ -63,29 +56,11 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	PerlStringWrapper stringWrapper = null;
 
 	Project myProject = getProject();
-	private IElementType mySubElementType = SUB;
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
 		super(builder, state, parser);
 		perlParser = (PerlParserImpl) parser;
-		initIndexes();
-	}
-
-	protected void initIndexes()
-	{
-		PerlNamesCache component = myProject.getComponent(PerlNamesCache.class);
-
-		if (component == null)
-		{
-			KNOWN_SUBS = new THashSet<String>();
-			KNOWN_PACKAGES = new THashSet<String>();
-		}
-		else
-		{
-			KNOWN_SUBS = component.getSubsNamesSet();
-			KNOWN_PACKAGES = component.getPackagesNamesSet();
-		}
 	}
 
 	/**
@@ -123,29 +98,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
 	}
 
-	/**
-	 * Checks if sub is indexed.
-	 *
-	 * @param subName canonical sub name Foo::somesub
-	 * @return checking result
-	 */
-
-	public boolean isKnownSub(String subName)
-	{
-		return KNOWN_SUBS.contains(subName);
-	}
-
-
-	/**
-	 * Checks if package is indexed.
-	 *
-	 * @return checking result
-	 */
-
-	public boolean isKnownPackage(String packageName)
-	{
-		return KNOWN_PACKAGES.contains(PerlPackageUtil.getCanonicalPackageName(packageName));
-	}
 
 	public boolean isStringify()
 	{
@@ -212,11 +164,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return stopOnNumericGt;
 	}
 
-	public void setStopOnNumericGt(boolean stopOnNumericGt)
-	{
-		this.stopOnNumericGt = stopOnNumericGt;
-	}
-
 	public IElementType getExtraStopQuote()
 	{
 		return extraStopQuote;
@@ -227,11 +174,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		IElementType currentExtraStopQuote = getExtraStopQuote();
 		this.extraStopQuote = extraStopQuote;
 		return currentExtraStopQuote;
-	}
-
-	public boolean isSpecialVariableNamesAllowed()
-	{
-		return isSpecialVariableNamesAllowed;
 	}
 
 	public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed)
@@ -258,16 +200,9 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return perlParser;
 	}
 
-	public IElementType popSubElementType()
-	{
-		IElementType result = mySubElementType;
-		mySubElementType = SUB;
-		return result;
-	}
-
 	public void setNextSubElementType(IElementType subElement)
 	{
-		this.mySubElementType = subElement;
+		// fixme implement
 	}
 
 }

@@ -22,10 +22,10 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -117,7 +117,7 @@ public class PerlUtil implements PerlElementTypes
 		final Set<String> result = new THashSet<String>();
 
 		// safe for getElements
-		PerlStubIndex.getInstance().processAllKeys(key, project, new
+		StubIndex.getInstance().processAllKeys(key, project, new
 				PerlInternalIndexKeysProcessor()
 				{
 					@Override

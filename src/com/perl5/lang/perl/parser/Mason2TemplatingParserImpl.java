@@ -92,7 +92,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 						fm.collapse(SUB);
 						fm.precede().done(METHOD);
 
-						if (!PerlParserUtil.consumeToken(b, OPERATOR_COMMA))
+						if (!PerlParserUtil.consumeToken(b, COMMA))
 						{
 							break;
 						}

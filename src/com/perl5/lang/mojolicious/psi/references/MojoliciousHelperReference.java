@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.compat.PerlStubIndex;
+import com.intellij.psi.stubs.StubIndex;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.perl.PerlScopes;
@@ -61,7 +61,7 @@ public class MojoliciousHelperReference extends PerlPolyVariantReference<PsiElem
 			final Project project = element.getProject();
 			List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-			for (MojoliciousHelperDeclaration helper : PerlStubIndex.getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project), MojoliciousHelperDeclaration.class))
+			for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project), MojoliciousHelperDeclaration.class))
 			{
 				result.add(new PsiElementResolveResult(helper));
 			}

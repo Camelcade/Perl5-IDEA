@@ -1,0 +1,18 @@
+my $os = (@_) ? shift : Win_OS_Type();
+$logger_object->write_logfile_entry(
+qx/perl -v $error_redirection/."\n" );
+print $fh_tee $_[0];
+undef $rOpts->{'pod2html'};
+$token = qq(<span class="$short_name">).$token."</span>";
+        print $fh <<EOM;
+These values are the main control of whitespace to the left of a token type;
+They may be altered with the -wls parameter.
+For a list of token types, use perltidy --dump-token-types (-dtt)
+ 1 means the token wants a space to its left
+-1 means the token does not want a space to its left
+------------------------------------------------------------------------
+EOM
+print $fh "$_\t$want_left_space{$_}\n";
+
+
+

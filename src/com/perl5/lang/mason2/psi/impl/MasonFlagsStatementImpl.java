@@ -97,6 +97,6 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 		}
 
 		IElementType elementType = element.getNode().getElementType();
-		return elementType != OPERATOR_COMMA && elementType != OPERATOR_COMMA_ARROW;
+		return elementType != COMMA && elementType != FAT_COMMA;
 	}
 }

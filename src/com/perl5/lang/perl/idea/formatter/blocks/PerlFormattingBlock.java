@@ -198,7 +198,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 	)
 	{
 		IElementType childElementType = child.getElementType();
-		if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == OPERATOR_COMMA_ARROW))
+		if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == FAT_COMMA))
 		{
 			return createBlock(child, wrap, alignment);
 		}

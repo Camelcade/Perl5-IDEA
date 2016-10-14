@@ -64,10 +64,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	);
 	public static final TokenSet IDENTIFIERS = TokenSet.create(
 			SUB,
-			PACKAGE,
 			SCALAR_NAME,
-			IDENTIFIER,
-			PACKAGE_IDENTIFIER
+			IDENTIFIER
 	);
 
 	public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
@@ -122,6 +120,13 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiElement createElement(ASTNode node)
 	{
-		return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
+		try
+		{
+			return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException("Problem with node " + node, e);
+		}
 	}
 }

@@ -77,7 +77,7 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 {NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 "<=>" {return OPERATOR_CMP_NUMERIC;}
-"=>" {return OPERATOR_COMMA_ARROW;}
+"=>" {return FAT_COMMA;}
 "..." {return OPERATOR_HELLIP;}
 ".." {return OPERATOR_FLIP_FLOP;}
 "++" {return OPERATOR_PLUS_PLUS;}
@@ -91,7 +91,7 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 "->" {return OPERATOR_DEREFERENCE;}
 "<" {return OPERATOR_LT_NUMERIC;}
 ">" {return OPERATOR_GT_NUMERIC;}
-"," {return OPERATOR_COMMA;}
+"," {return COMMA;}
 "." {return OPERATOR_CONCAT;}
 "!" {return OPERATOR_NOT;}
 "?"  {return QUESTION;}
@@ -135,7 +135,7 @@ SIMPLE_ARRAY = "@{" "^"? {BAREWORD_MINUS} "}"
 {CAPPED_VARIABLE_NAME} {return IDENTIFIER;}
 
 {BAREWORD_MINUS} {return IDENTIFIER;}
-{PACKAGE_SHORT} {return PACKAGE_IDENTIFIER;}			// only ::
-{PACKAGE} {return PACKAGE_IDENTIFIER;}
+{PACKAGE_SHORT} {return IDENTIFIER;}			// only ::
+{PACKAGE} {return IDENTIFIER;}
 
 [^]    { return TokenType.BAD_CHARACTER; }

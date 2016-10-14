@@ -136,7 +136,7 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	{
 		PsiBuilder.Marker m = b.mark();
 		if (parseHasAttributeDefinitions(b, l) &&
-				(PerlParserUtil.consumeToken(b, OPERATOR_COMMA) || PerlParserUtil.consumeToken(b, OPERATOR_COMMA_ARROW)) &&
+				(PerlParserUtil.consumeToken(b, COMMA) || PerlParserUtil.consumeToken(b, FAT_COMMA)) &&
 				PerlParserImpl.expr(b, l, -1)
 				)
 		{

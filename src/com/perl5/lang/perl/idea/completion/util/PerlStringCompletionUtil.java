@@ -113,7 +113,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns
 										processStringElement(stringElement);
 									}
 								}
-								else if (elementType == OPERATOR_COMMA || elementType == OPERATOR_COMMA_ARROW)
+								else if (elementType == COMMA || elementType == FAT_COMMA)
 								{
 									isKey = !isKey;
 								}

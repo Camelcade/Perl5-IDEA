@@ -696,11 +696,14 @@ public class PerlPsiUtil implements PerlElementTypes
 			return null;
 		}
 
+/*
 		if (element instanceof PsiPerlNamespaceExpr)
 		{
 			return ((PerlNamespaceElement) element.getFirstChild()).getCanonicalName();
 		}
-		else if (element instanceof PerlString)
+		else
+*/
+		if (element instanceof PerlString)
 		{
 			return ((PerlString) element).getStringContent();
 		}

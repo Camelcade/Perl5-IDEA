@@ -180,8 +180,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(SIGIL_CODE, new TextAttributesKey[]{PERL_SUB});
 		ATTRIBUTES_MAP.put(CODE_NAME, new TextAttributesKey[]{PERL_SUB});
 
-		ATTRIBUTES_MAP.put(OPERATOR_COMMA_ARROW, new TextAttributesKey[]{PERL_COMMA});
-		ATTRIBUTES_MAP.put(OPERATOR_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		ATTRIBUTES_MAP.put(FAT_COMMA, new TextAttributesKey[]{PERL_COMMA});
+		ATTRIBUTES_MAP.put(COMMA, new TextAttributesKey[]{PERL_COMMA});
 
 		ATTRIBUTES_MAP.put(BLOCK_NAME, PERL_KEYWORD_KEYS);
 

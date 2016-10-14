@@ -22,8 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
@@ -103,12 +103,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return PerlStubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
-	}
-
-	public static boolean isSubDefinitionsIndexAvailable()
-	{
-		return PerlStubIndex.getInstance().isIndexAvailable(PerlSubDefinitionsStubIndex.KEY);
+		return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
 	}
 
 	/**
@@ -131,7 +126,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static boolean processDefinedSubsNames(Project project, Processor<String> processor)
 	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlSubDefinitionsStubIndex.KEY, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlSubDefinitionsStubIndex.KEY, project, processor);
 	}
 
 	/**
@@ -149,7 +144,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	public static Collection<PsiPerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return PerlStubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDeclaration.class);
+		return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PsiPerlSubDeclaration.class);
 	}
 
 	/**
@@ -163,11 +158,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 		return PerlUtil.getIndexKeysWithoutInternals(PerlSubDeclarationStubIndex.KEY, project);
 	}
 
-	public static boolean isSubDeclarationsIndexAvailable()
-	{
-		return PerlStubIndex.getInstance().isIndexAvailable(PerlSubDeclarationStubIndex.KEY);
-	}
-
 	/**
 	 * Processes all declared subs names with given processor
 	 *
@@ -177,7 +167,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlSubUtilBuiltIn
 	 */
 	public static boolean processDeclaredSubsNames(Project project, Processor<String> processor)
 	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlSubDeclarationStubIndex.KEY, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlSubDeclarationStubIndex.KEY, project, processor);
 	}
 
 	/**

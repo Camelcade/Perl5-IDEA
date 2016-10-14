@@ -52,7 +52,7 @@ public class PerlAnnotationsLexer extends PerlAnnotationsLexerGenerated
 
 					if (currentChar == ':' && tokenEnd + 1 < bufferEnd && buffer.charAt(tokenEnd + 1) == ':')
 					{
-						targetElementType = PACKAGE;
+						targetElementType = IDENTIFIER;
 						tokenEnd++;
 					}
 					else if (!isIdentifierCharacter(currentChar))

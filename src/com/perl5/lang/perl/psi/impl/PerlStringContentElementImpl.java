@@ -127,7 +127,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 			return looksLikePackage;
 		}
 
-		return getElementType() == PerlElementTypes.STRING_PACKAGE;
+		return getElementType() == PerlElementTypes.STRING_IDENTIFIER;
 	}
 
 	@Override

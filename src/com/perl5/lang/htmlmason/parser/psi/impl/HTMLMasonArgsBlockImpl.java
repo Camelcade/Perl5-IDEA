@@ -76,7 +76,7 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
 							variable.getActualType(),
 							variable.getName(),
 							"",
-							nextSibling != null && nextSibling.getNode().getElementType() == OPERATOR_COMMA_ARROW
+							nextSibling != null && nextSibling.getNode().getElementType() == FAT_COMMA
 					));
 				}
 			}

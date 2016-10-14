@@ -18,11 +18,8 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
-
-import static com.perl5.lang.perl.lexer.PerlLexerGenerated.LEX_IDENTIFIER;
 
 /**
  * Created by hurricup on 10.08.2015.
@@ -48,74 +45,5 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
 	protected IElementType myVariableNameElementType = null;
-	protected IElementType myForcedIdentifierElementType = null;
 
-	public IElementType lexQualifiedIdentifier(@NotNull IElementType identifierElementType)
-	{
-		CharSequence yytext = yytext();
-		int tokenSize = yytext.length();
-		int pushbackSize = 0;
-
-		while (true)
-		{
-			char currentChar = yytext.charAt(tokenSize - 1 - pushbackSize);
-			if (currentChar == '\'' || currentChar == ':')
-			{
-				break;
-			}
-			pushbackSize++;
-			assert pushbackSize < tokenSize;
-		}
-
-		if (pushbackSize > 0)
-		{
-			yypushback(pushbackSize);
-			myForcedIdentifierElementType = identifierElementType;
-			pushStateAndBegin(LEX_IDENTIFIER);
-		}
-		return PACKAGE;
-	}
-
-	protected IElementType startVariableLexing(int sigilSize, IElementType sigilType)
-	{
-		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_VARIABLE_NAME, sigilType);
-	}
-
-	protected IElementType startBracedVariableLexing(int sigilSize, IElementType sigilType)
-	{
-		return startVariableLexing(sigilSize, PerlLexerGenerated.LEX_BRACED_VARIABLE_NAME, sigilType);
-	}
-
-	private IElementType startVariableLexing(int sigilSize, int newState, IElementType sigilType)
-	{
-		// fixme temporary
-		if (sigilType == SIGIL_SCALAR || sigilType == SIGIL_SCALAR_INDEX)
-		{
-			myVariableNameElementType = SCALAR_NAME;
-		}
-		else if (sigilType == SIGIL_ARRAY)
-		{
-			myVariableNameElementType = ARRAY_NAME;
-		}
-		else if (sigilType == SIGIL_HASH)
-		{
-			myVariableNameElementType = HASH_NAME;
-		}
-		else if (sigilType == SIGIL_GLOB)
-		{
-			myVariableNameElementType = GLOB_NAME;
-		}
-		else if (sigilType == SIGIL_CODE)
-		{
-			myVariableNameElementType = CODE_NAME;
-		}
-		else
-		{
-			throw new RuntimeException("Unable to find name for " + sigilType);
-		}
-
-		yypushback(yylength() - sigilSize);
-		yybegin(newState);
-		return sigilType;
-	}
 }

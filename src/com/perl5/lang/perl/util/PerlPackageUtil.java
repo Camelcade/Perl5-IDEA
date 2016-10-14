@@ -30,11 +30,11 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -315,7 +315,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName, GlobalSearchScope scope)
 	{
-		return PerlStubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class);
+		return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class);
 	}
 
 	/**
@@ -326,12 +326,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static Collection<String> getDefinedPackageNames(Project project)
 	{
-		return PerlStubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
-	}
-
-	public static boolean isPackageIndexAvailable()
-	{
-		return PerlStubIndex.getInstance().isIndexAvailable(PerlNamespaceDefinitionStubIndex.KEY);
+		return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
 	}
 
 	/**
@@ -343,7 +338,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean processDefinedPackageNames(GlobalSearchScope scope, Processor<String> processor)
 	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, processor, scope, null);
+		return StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, processor, scope, null);
 	}
 
 	/**
@@ -364,7 +359,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 	public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @NotNull String packageName, @NotNull GlobalSearchScope scope)
 	{
-		return new ArrayList<PerlNamespaceDefinition>(PerlStubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
+		return new ArrayList<PerlNamespaceDefinition>(StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
 	}
 
 	/**

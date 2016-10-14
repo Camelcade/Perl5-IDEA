@@ -63,16 +63,13 @@ public class PerlLexer extends PerlLexerGenerated
 			, IDENTIFIER
 
 			// namespace allowed in sub name
-			, PACKAGE
-			, PACKAGE_CORE_IDENTIFIER
-			, PACKAGE_IDENTIFIER
 			, PACKAGE_PRAGMA_CONSTANT
 			, PACKAGE_PRAGMA_VARS
 
 			// comma separated vars and colon starts attribute
 			, COLON
-			, OPERATOR_COMMA
-			, OPERATOR_COMMA_ARROW
+			, COMMA
+			, FAT_COMMA
 
 			// prototype sybmols
 			, SIGIL_SCALAR
@@ -103,16 +100,13 @@ public class PerlLexer extends PerlLexerGenerated
 			, IDENTIFIER
 
 			// namespace allowed in our
-			, PACKAGE
-			, PACKAGE_CORE_IDENTIFIER
-			, PACKAGE_IDENTIFIER
 			, PACKAGE_PRAGMA_CONSTANT
 			, PACKAGE_PRAGMA_VARS
 
 			// comma separated vars and colon starts attribute
 			, COLON
-			, OPERATOR_COMMA
-			, OPERATOR_COMMA_ARROW
+			, COMMA
+			, FAT_COMMA
 
 			// variables sigils
 			, SIGIL_SCALAR
@@ -223,8 +217,8 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_XOR_LP,
 			OPERATOR_NOT_LP,
 
-			OPERATOR_COMMA,
-			OPERATOR_COMMA_ARROW,
+			COMMA,
+			FAT_COMMA,
 
 			OPERATOR_DEREFERENCE,
 

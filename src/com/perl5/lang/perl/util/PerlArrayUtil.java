@@ -20,8 +20,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -73,7 +73,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
 	{
 		assert canonicalName != null;
-		return PerlStubIndex.getElements(
+		return StubIndex.getElements(
 				PerlVariablesStubIndex.KEY_ARRAY,
 				canonicalName,
 				project,
@@ -102,7 +102,7 @@ public class PerlArrayUtil implements PerlElementTypes
 	 */
 	public static boolean processDefinedGlobalArrayNames(Project project, Processor<String> processor)
 	{
-		return PerlStubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_ARRAY, project, processor);
+		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_ARRAY, project, processor);
 	}
 
 	/**

@@ -67,7 +67,7 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 					.withParent(
 							psiElement(PsiPerlCommaSequenceExpr.class).withParent(psiElement(HTMLMasonFlagsStatement.class))
 					)
-					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(OPERATOR_COMMA_ARROW));
+					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(FAT_COMMA));
 
 
 	PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =

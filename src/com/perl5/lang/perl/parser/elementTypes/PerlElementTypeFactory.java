@@ -656,19 +656,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("FILE_READ_FORCED_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlFileReadForcedExprImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("FLIPFLOP_EXPR"))
 		{
 			return new PerlElementTypeEx(name)
@@ -1198,19 +1185,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlNamespaceDefinitionImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("NAMESPACE_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlNamespaceExprImpl(node);
 				}
 			};
 		}
@@ -2147,6 +2121,19 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlWhileStatementModifierImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("PACKAGE_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPackageExprImpl(node);
 				}
 			};
 		}

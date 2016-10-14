@@ -115,7 +115,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 	public static boolean parseArgument(PsiBuilder b, int l)
 	{
 		boolean r = variable_declaration_wrapper(b, l);
-		if (r && PerlParserUtil.consumeToken(b, OPERATOR_COMMA_ARROW))
+		if (r && PerlParserUtil.consumeToken(b, FAT_COMMA))
 		{
 			r = expr(b, l, -1);
 		}
@@ -204,7 +204,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 							;
 						}
 
-						if (!PerlParserUtil.consumeToken(b, OPERATOR_COMMA))
+						if (!PerlParserUtil.consumeToken(b, COMMA))
 						{
 							break;
 						}

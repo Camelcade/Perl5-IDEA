@@ -72,7 +72,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	protected static boolean isCommaArrowAhead(PsiElement o)
 	{
 		PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(o);
-		return nextElement != null && nextElement.getNode().getElementType() == OPERATOR_COMMA_ARROW;
+		return nextElement != null && nextElement.getNode().getElementType() == FAT_COMMA;
 	}
 
 	protected static boolean isInHeredocOpener(PerlString o)

@@ -18,7 +18,7 @@ import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 %function perlAdvance
 %type IElementType
 
-EVERYTHING = [^]*
+EVERYTHING = [^]+
 
 %%
 

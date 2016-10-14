@@ -22,8 +22,8 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.mason2.Mason2Utils;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
@@ -242,7 +242,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 			final List<String> relativePaths = new ArrayList<String>();
 			final List<String> exactPaths = new ArrayList<String>();
 
-			PerlStubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>()
+			StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>()
 			{
 				@Override
 				public boolean process(final String parentPath)
@@ -265,7 +265,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 			for (String parentPath : exactPaths)
 			{
-				childNamespaces.addAll(PerlStubIndex.getElements(
+				childNamespaces.addAll(StubIndex.getElements(
 						MasonParentNamespacesStubIndex.KEY,
 						parentPath,
 						project,
@@ -276,7 +276,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 			for (String parentPath : relativePaths)
 			{
-				for (MasonNamespaceDefinition masonNamespaceDefinition : PerlStubIndex.getElements(
+				for (MasonNamespaceDefinition masonNamespaceDefinition : StubIndex.getElements(
 						MasonParentNamespacesStubIndex.KEY,
 						parentPath,
 						project,
@@ -303,7 +303,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 				if (basePath != null)
 				{
 					final List<String> componentPaths = new ArrayList<String>();
-					PerlStubIndex.getInstance().processAllKeys(
+					StubIndex.getInstance().processAllKeys(
 							MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), new Processor<String>()
 							{
 								@Override
@@ -320,7 +320,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
 					for (String compoPath : componentPaths)
 					{
-						for (MasonNamespaceDefinition namespaceDefinition : PerlStubIndex.getElements(
+						for (MasonNamespaceDefinition namespaceDefinition : StubIndex.getElements(
 								MasonNamespaceDefitnitionsStubIndex.KEY,
 								compoPath,
 								project,

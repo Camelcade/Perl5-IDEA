@@ -71,8 +71,8 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.between(LEFT_PAREN, CALL_ARGUMENTS).spaceIf(perlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
 				.between(CALL_ARGUMENTS, RIGHT_PAREN).spaceIf(perlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
 
-				.before(OPERATOR_COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
-				.after(OPERATOR_COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
+				.before(COMMA).spaceIf(settings.SPACE_BEFORE_COMMA)
+				.after(COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 
 				.beforeInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_COLON)
 				.afterInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_COLON)
@@ -121,7 +121,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 
 				// perl specific
 				.after(RESERVED_VARIABLE_DECLARATION).spaceIf(perlSettings.SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD)
-				.around(OPERATOR_COMMA_ARROW).spacing(1, 1, 0, true, 1)
+				.around(FAT_COMMA).spacing(1, 1, 0, true, 1)
 				.beforeInside(STATEMENT_MODIFIERS, STATEMENT).spaces(1)
 				;
 	}

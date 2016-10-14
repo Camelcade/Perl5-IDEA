@@ -78,7 +78,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 			else
 			{
 				IElementType tokenType = PsiUtilCore.getElementType(element);
-				if (tokenType == OPERATOR_COMMA_ARROW || tokenType == OPERATOR_COMMA)
+				if (tokenType == FAT_COMMA || tokenType == COMMA)
 				{
 					if (parameterInfos[currentIndex].getArgument().getContextType() == PerlContextType.SCALAR)
 					{

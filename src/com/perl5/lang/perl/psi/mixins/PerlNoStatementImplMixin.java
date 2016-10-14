@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlNoStatement;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement
+public abstract class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement
 {
 	public PerlNoStatementImplMixin(ASTNode node)
 	{

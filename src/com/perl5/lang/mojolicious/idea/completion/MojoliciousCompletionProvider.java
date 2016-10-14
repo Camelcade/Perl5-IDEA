@@ -25,9 +25,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
@@ -75,13 +75,13 @@ public class MojoliciousCompletionProvider extends CompletionProvider<Completion
 		{
 			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
 
-			PerlStubIndex stubIndex = PerlStubIndex.getInstance();
+			StubIndex stubIndex = StubIndex.getInstance();
 			final Project project = method.getProject();
 			final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
 
 			for (String helperName : stubIndex.getAllKeys(MojoliciousHelpersStubIndex.KEY, method.getProject()))
 			{
-				for (MojoliciousHelperDeclaration helper : PerlStubIndex.getElements(MojoliciousHelpersStubIndex.KEY, helperName, project, scope, MojoliciousHelperDeclaration.class))
+				for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, helperName, project, scope, MojoliciousHelperDeclaration.class))
 				{
 					if (helper != null)
 					{

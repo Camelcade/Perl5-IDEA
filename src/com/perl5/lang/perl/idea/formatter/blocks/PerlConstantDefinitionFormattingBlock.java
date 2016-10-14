@@ -65,7 +65,7 @@ public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock
 			blocks.add(createChildBlock(
 					child,
 					null,
-					child.getElementType() == OPERATOR_COMMA_ARROW ? arrowAlignment : null
+					child.getElementType() == FAT_COMMA ? arrowAlignment : null
 			));
 		}
 

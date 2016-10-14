@@ -39,7 +39,7 @@ public interface TryCatchElementPatterns extends TryCatchElementTypes, PerlEleme
 					));
 
 	PsiElementPattern.Capture<PsiElement> PACKAGE_IN_CATCH =
-			psiElement(PACKAGE).withParent(
+			psiElement(IDENTIFIER).withParent(
 					psiElement(CATCH_CONDITION)
 			);
 }

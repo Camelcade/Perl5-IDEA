@@ -18,7 +18,7 @@ import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 %function perlAdvance
 %type IElementType
 
-EVERYTHING = [^]*
+EVERYTHING = [^]+
 
 %%
 

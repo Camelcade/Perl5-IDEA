@@ -18,7 +18,7 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 %function perlAdvance
 %type IElementType
 
-EVERYTHING = [^]*
+EVERYTHING = [^]+
 
 %%
 

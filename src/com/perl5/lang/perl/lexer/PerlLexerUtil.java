@@ -40,10 +40,6 @@ public class PerlLexerUtil implements PerlElementTypes
 	{
 		TOKENS_MAP.put(OPERATOR_PLUS, STRING_PLUS);
 		TOKENS_MAP.put(IDENTIFIER, STRING_IDENTIFIER);
-
-		TOKENS_MAP.put(PACKAGE, STRING_PACKAGE);
-		TOKENS_MAP.put(PACKAGE_IDENTIFIER, STRING_PACKAGE);
-		TOKENS_MAP.put(PACKAGE_CORE_IDENTIFIER, STRING_PACKAGE);
 	}
 
 	public static IElementType remapSQToken(IElementType tokenType)

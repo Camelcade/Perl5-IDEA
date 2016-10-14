@@ -90,15 +90,9 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 				b.advanceLexer();
 				tokenType = b.getTokenType();
 
-				if (tokenType == PACKAGE)
+				if (tokenType == IDENTIFIER)
 				{
 					b.advanceLexer();
-				}
-				else if (tokenType == IDENTIFIER)
-				{
-					PsiBuilder.Marker packageMarker = b.mark();
-					b.advanceLexer();
-					packageMarker.collapse(PACKAGE);
 				}
 				else
 				{

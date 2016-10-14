@@ -24,14 +24,12 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,48 +40,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 {
 	// tokens that can be converted to a PACKAGE
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
-			PACKAGE_CORE_IDENTIFIER,
 			PACKAGE_PRAGMA_CONSTANT,
-			PACKAGE_PRAGMA_VARS,
-			PACKAGE_IDENTIFIER,
-			PACKAGE
-	);
-	// tokens, allowed to be $^ names part
-	public static final TokenSet CONTROL_VARIABLE_NAMES = TokenSet.create(
-			LEFT_BRACKET,
-			RIGHT_BRACKET
-	);
-	public static final TokenSet SPECIAL_VARIABLE_NAME = TokenSet.create(
-			QUOTE_DOUBLE,
-			QUOTE_SINGLE,
-			QUOTE_TICK,
-			OPERATOR_REFERENCE,
-			OPERATOR_NOT,
-			OPERATOR_MOD,
-			OPERATOR_BITWISE_AND,
-			LEFT_PAREN,
-			RIGHT_PAREN,
-			OPERATOR_PLUS,
-			SIGIL_SCALAR,
-			OPERATOR_COMMA,
-			OPERATOR_MINUS,
-			OPERATOR_CONCAT,
-			OPERATOR_DIV,
-			SEMICOLON,
-			OPERATOR_LT_NUMERIC,
-			OPERATOR_ASSIGN,
-			OPERATOR_GT_NUMERIC,
-			SIGIL_ARRAY,
-			LEFT_BRACKET,
-			RIGHT_BRACKET,
-			OPERATOR_BITWISE_OR,
-			OPERATOR_BITWISE_NOT,
-			OPERATOR_BITWISE_XOR,
-			QUESTION,
-			COLON,
-			OPERATOR_MUL,
-			NUMBER_SIMPLE,
-			OPERATOR_X
+			PACKAGE_PRAGMA_VARS
 	);
 	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
 			TokenSet.create(
@@ -130,11 +88,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			TokenSet.create(
 					SIGIL_SCALAR, SIGIL_ARRAY
 			));
-	public static TokenSet LIGHT_CONTAINERS = TokenSet.create(
-			HEREDOC,
-			HEREDOC_QQ,
-			HEREDOC_QX
-	);
 	// tokens that can be converted between each other depending on context
 	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
@@ -219,102 +172,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return PerlParserImpl.expr(b, l, g);
 	}
 
-	/**
-	 * Named unary operators
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean isUnaryOperator(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
-
-		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
-		{
-			return false;
-		}
-
-		IElementType tokenType = b.getTokenType();
-		IElementType nextTokenType = b.lookAhead(1);
-
-		if (CONVERTABLE_TOKENS.contains(tokenType) && nextTokenType != LEFT_PAREN && !PACKAGE_TOKENS.contains(nextTokenType))
-		// todo we should check current namespace here
-		{
-			return PerlSubUtil.BUILT_IN_UNARY.contains(b.getTokenText());
-		}
-		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(SUB) && b.lookAhead(2) != LEFT_PAREN)
-		{
-			PerlTokenData nextToken = ((PerlBuilder) b).lookupToken(1);
-			if (nextToken != null)
-			{
-				return PerlSubUtil.isUnary(b.getTokenText(), nextToken.getTokenText());
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Named list operators
-	 *
-	 * @param b PerlBuilder
-	 * @param l Parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseListExpression(PsiBuilder b, int l)
-	{
-		PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
-
-		if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
-		{
-			return false;
-		}
-
-		IElementType tokenType = b.getTokenType();
-		IElementType nextTokenType = b.lookAhead(1);
-
-		if (CONVERTABLE_TOKENS.contains(tokenType)
-				&& nextTokenType != LEFT_PAREN              // not function call
-				&& !PACKAGE_TOKENS.contains(nextTokenType)  // not method Package::
-				&& !(nextTokenType == IDENTIFIER && ((PerlBuilder) b).isKnownPackage(((PerlBuilder) b).lookupToken(1).getTokenText()))  // not Method Package
-				)
-		{
-			// todo we should check current namespace here
-
-			String tokenText = b.getTokenText();
-			if (!PerlSubUtil.BUILT_IN_UNARY.contains(tokenText)) // not unary
-			{
-				boolean r = PerlParserImpl.method(b, l);
-
-				if (r && !PerlSubUtil.BUILT_IN_ARGUMENTLESS.contains(tokenText)) // not argumentless
-				{
-					PerlParserImpl.call_arguments(b, l);
-				}
-				return r;
-			}
-		}
-		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != LEFT_PAREN)
-		{
-			String packageName = b.getTokenText();
-			String subName = ((PerlBuilder) b).lookupToken(1).getTokenText();
-			//noinspection ConstantConditions
-			if (!PerlSubUtil.isUnary(packageName, subName))    // not unary
-			{
-				boolean r = PerlParserImpl.method(b, l);
-
-				//noinspection ConstantConditions
-				if (r && !PerlSubUtil.isArgumentless(packageName, subName)) // not argumentless
-				{
-					PerlParserImpl.call_arguments(b, l);
-				}
-				return r;
-			}
-		}
-
-		return false;
-	}
 
 	public static boolean parseSubPrototype(PsiBuilder b, int l)
 	{
@@ -391,141 +248,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Completes namespace, invoked when we are 100% sure that PACKAGE_IDENTIFIER is a package
-	 *
-	 * @param b Perlbuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertPackageIdentifier(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		if (currentTokenType == PACKAGE)
-		{
-			b.advanceLexer();
-			return true;
-		}
-		else if (PACKAGE_TOKENS.contains(currentTokenType))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PACKAGE);
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Check for token and converts it to another
-	 *
-	 * @param b               PerlBuilder
-	 * @param l               parsing level
-	 * @param targetTokenType token type to convert to
-	 * @param sourceTokenType token to check for
-	 * @return checking level
-	 */
-	public static boolean checkAndConvertToken(PsiBuilder b, int l, IElementType targetTokenType, IElementType sourceTokenType)
-	{
-		return checkAndCollapseToken(b, l, targetTokenType, sourceTokenType);
-	}
-
-	/**
-	 * Checks token sequence and collapses it into target token
-	 *
-	 * @param b                 PerlBuilder
-	 * @param l                 parsing level
-	 * @param targetTokenType   source token type
-	 * @param sequenceTokenType varargs tokens to check
-	 * @return result
-	 */
-	public static boolean checkAndCollapseToken(PsiBuilder b, int l, IElementType targetTokenType, IElementType... sequenceTokenType)
-	{
-		if (sequenceTokenType.length == 0)
-		{
-			return false;
-		}
-
-		b.getTokenType(); // this advances lexer to the next non-space token
-
-		for (int i = 0; i < sequenceTokenType.length; i++)
-		{
-			if (b.rawLookup(i) != sequenceTokenType[i])
-			{
-				return false;
-			}
-		}
-
-		PsiBuilder.Marker m = b.mark();
-		for (int i = 0; i < sequenceTokenType.length; i++)
-		{
-			b.advanceLexer();
-		}
-
-		m.collapse(targetTokenType);
-		return true;
-	}
-
-	/**
-	 * Merges sequence [package] identifier to a package
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean mergePackageName(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		IElementType nextTokenType = b.rawLookup(1);
-
-		if (tokenType == PACKAGE)
-		{
-			// temporary hack
-			if (nextTokenType == IDENTIFIER)
-			{
-				PsiBuilder.Marker m = b.mark();
-				b.advanceLexer();
-				b.advanceLexer();
-				m.collapse(PACKAGE);
-			}
-			else
-			{
-				b.advanceLexer();
-			}
-			return true;
-		}
-		else if (PACKAGE_TOKENS.contains(tokenType) && CONVERTABLE_TOKENS.contains(b.lookAhead(1)))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			b.advanceLexer();
-			m.collapse(PACKAGE);
-			return true;
-		}
-		else if (
-				PACKAGE_TOKENS.contains(tokenType)  // explicit package name, like Foo::->method()
-						|| CONVERTABLE_TOKENS.contains(tokenType) // single word package
-				)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(PACKAGE);
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean mergeRequirePackageName(PsiBuilder b, int l)
-	{
-		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && b.lookAhead(1) == LEFT_PAREN)
-		{
-			return false;
-		}
-		return mergePackageName(b, l);
-	}
-
-	/**
 	 * parser for print/say/printf filehandle
 	 *
 	 * @param b PerlBuilder
@@ -567,134 +289,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parses invocable method
-	 * As input we may have:
-	 * PACKAGE_IDENTIFIER IDENTIFIER	Foo::sub
-	 * IDENTIFIER PACKAGE_IDENTIFIER	sub Foo::
-	 * IDENTIFIER IDENTIFIER			sub Foo
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseMethod(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		IElementType nextTokenType = b.lookAhead(1);
-
-		assert b instanceof PerlBuilder;
-
-		// can be
-		// 	Foo::method
-		//  Foo::Bar
-		if (PACKAGE_TOKENS.contains(currentTokenType) && CONVERTABLE_TOKENS.contains(nextTokenType))
-		{
-			PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
-			PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
-
-			IElementType nextNextTokenType = nextNextTokenData == null ? null : nextNextTokenData.getTokenType();
-
-			String canonicalPackageName = PerlPackageUtil.getCanonicalPackageName(b.getTokenText());
-			String potentialSubName = canonicalPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + nextTokenData.getTokenText();
-
-			if (
-					nextNextTokenType == LEFT_PAREN                        // Package::Identifier( - what can it be?
-							|| ((PerlBuilder) b).isKnownSub(potentialSubName)       // we know this sub
-							|| !((PerlBuilder) b).isKnownPackage(potentialSubName)) // we don't know such package
-			{
-				return convertPackageIdentifier(b, l) && convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-			}
-			else
-			{
-				return false;
-			}
-		}
-		// 	method
-		else if (CONVERTABLE_TOKENS.contains(currentTokenType))
-		{
-			PerlTokenData prevTokenData = ((PerlBuilder) b).lookupToken(-1);
-
-			// ->sub
-			if (prevTokenData != null && prevTokenData.getTokenType() == OPERATOR_DEREFERENCE)
-			{
-				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-			}
-			// may be
-			// 	method Foo::
-			//	method Foo::Bar
-			//  method Foo::othermethod
-			else if (PACKAGE_TOKENS.contains(nextTokenType))
-			{
-				IElementType nextNextTokenType = b.lookAhead(2);
-
-				// sub Foo::->method
-				if (nextNextTokenType == OPERATOR_DEREFERENCE)
-				{
-					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-				}
-				// identifier Package::identifier
-				else if (CONVERTABLE_TOKENS.contains(nextNextTokenType))
-				{
-
-					// identifier Package::identifier->
-					if (b.lookAhead(3) == OPERATOR_DEREFERENCE)
-					{
-						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-					}
-
-					PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
-					PerlTokenData nextNextTokenData = ((PerlBuilder) b).lookupToken(2);
-
-					String packageOrSub = PerlPackageUtil.getCanonicalPackageName(nextTokenData.getTokenText()) + PerlPackageUtil.PACKAGE_SEPARATOR + nextNextTokenData.getTokenText();
-
-					if (((PerlBuilder) b).isKnownSub(packageOrSub))
-					{
-						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-					}
-					else if (((PerlBuilder) b).isKnownPackage(packageOrSub))
-					{
-						return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && mergePackageName(b, l);
-					}
-					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-				}
-				else
-				// it's method Package::
-				{
-					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertPackageIdentifier(b, l);
-				}
-			}
-			// may be
-			// 	method Foo
-			else if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(2) != OPERATOR_DEREFERENCE)
-			{
-				PerlTokenData nextTokenData = ((PerlBuilder) b).lookupToken(1);
-
-				String potentialSubName = nextTokenData.getTokenText() + PerlPackageUtil.PACKAGE_SEPARATOR + b.getTokenText();
-				if (((PerlBuilder) b).isKnownSub(potentialSubName))
-				{
-					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType()) && convertIdentifier(b, l, PACKAGE);
-				}
-				else
-				{
-					return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-				}
-			}
-			// KnownPackage->
-			else if (nextTokenType == OPERATOR_DEREFERENCE && ((PerlBuilder) b).isKnownPackage(b.getTokenText()))
-			{
-				return false;
-			}
-			// it's just sub
-			else
-			{
-				return convertIdentifier(b, l, ((PerlBuilder) b).popSubElementType());
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Parsing label declaration LABEL:
 	 *
 	 * @param b PerlBuilder
@@ -714,141 +308,11 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * Parses tokens as variables name; replaces:
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-/*
-	public static boolean parseVariableName(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		IElementType nextTokenType = b.rawLookup(1);
-
-		PsiBuilder.Marker m;
-
-		// checking for scalar cast
-		if (currentTokenType == SIGIL_SCALAR && (
-				POST_SIGILS_SUFFIXES.contains(b.lookAhead(1))
-						|| b.rawLookup(1) == OPERATOR_BITWISE_XOR    // fixme this requires more love in lexer see parseCappedVariableName
-		))
-		{
-			return false;
-		}
-
-		// $package::
-		// $package::var
-		if (PACKAGE_TOKENS.contains(currentTokenType))
-		{
-			PsiBuilder.Marker mp = b.mark();
-			b.advanceLexer();
-			mp.collapse(PACKAGE);
-			if (CONVERTABLE_TOKENS.contains(nextTokenType))
-			{
-				PsiBuilder.Marker mv = b.mark();
-				b.advanceLexer();
-				mv.collapse(VARIABLE_NAME);
-			}
-			return true;
-		}
-		// $var
-		else if (canBeVariableName(currentTokenType, (PerlBuilder) b))
-		{
-			if (currentTokenType == OPERATOR_BITWISE_XOR && CONTROL_VARIABLE_NAMES.contains(nextTokenType)) // branch for $^]
-			{
-				m = b.mark();
-				b.advanceLexer();
-				b.advanceLexer();
-				m.collapse(VARIABLE_NAME);
-			}
-			else
-			{
-				PsiBuilder.Marker mv = b.mark();
-				b.advanceLexer();
-				mv.collapse(VARIABLE_NAME);
-			}
-
-			return true;
-		}
-		// ${var}
-		else if (currentTokenType == LEFT_BRACE)
-		{
-			b.advanceLexer();
-			currentTokenType = nextTokenType;
-			nextTokenType = b.lookAhead(1);
-
-			// ${package::}
-			// ${package::var}
-			if (PACKAGE_TOKENS.contains(currentTokenType))
-			{
-				PsiBuilder.Marker mp = b.mark();
-				b.advanceLexer();
-				mp.collapse(PACKAGE);
-				if (CONVERTABLE_TOKENS.contains(nextTokenType) && b.lookAhead(1) == RIGHT_BRACE)
-				{
-					return convertVariableName(b);
-				}
-				else if (nextTokenType == RIGHT_BRACE)
-				{
-					b.advanceLexer();
-					return true;
-				}
-			}
-			// ${var}
-			else if (canBeVariableName(currentTokenType, (PerlBuilder) b) && nextTokenType == RIGHT_BRACE)
-			{
-				return convertVariableName(b);
-			}
-		}
-
-		return false;
-	}
-
-	protected static boolean canBeVariableName(IElementType elementType, PerlBuilder b)
-	{
-		return CONVERTABLE_TOKENS.contains(elementType) || b.isSpecialVariableNamesAllowed() && SPECIAL_VARIABLE_NAME.contains(elementType);
-	}
-
-	protected static boolean convertVariableName(PsiBuilder b)
-	{
-		PsiBuilder.Marker mv = b.mark();
-		b.advanceLexer();
-		mv.collapse(VARIABLE_NAME);
-		b.advanceLexer();
-		return true;
-	}
-*/
-
 	protected static boolean isOperatorToken(PsiBuilder b, int l)
 	{
 		return PerlLexer.OPERATORS_TOKENSET.contains(b.getTokenType());
 	}
 
-	public static boolean parseAmbiguousSigil(PsiBuilder b, int l, IElementType sigilTokenType, IElementType targetTokenType)
-	{
-		IElementType tokenType = b.getTokenType();
-		if (tokenType == targetTokenType)
-		{
-			b.advanceLexer();
-			return true;
-		}
-		else if (tokenType == sigilTokenType)
-		{
-			if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(b.rawLookup(1)) && b.lookAhead(1) != LEFT_BRACE) // space disallowed after * or % if it's not a cast
-			{
-				return false;
-			}
-
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(targetTokenType);
-			return true;
-		}
-
-		return false;
-	}
 
 	/**
 	 * Statement recovery function. Should not consume token, only check;
@@ -1002,14 +466,14 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		boolean r = false;
 		while (true)
 		{
-			if (consumeToken(b, OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW))    // got comma
+			if (consumeToken(b, COMMA) || consumeToken(b, FAT_COMMA))    // got comma
 			{
 				r = true;
 
 				// consume sequential commas
 				while (true)
 				{
-					if (!(consumeToken(b, OPERATOR_COMMA) || consumeToken(b, OPERATOR_COMMA_ARROW)))
+					if (!(consumeToken(b, COMMA) || consumeToken(b, FAT_COMMA)))
 					{
 						break;
 					}
@@ -1300,10 +764,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 			PsiBuilder.Marker m = b.mark();
 
-			if (targetToken == STRING_PACKAGE && b.rawLookup(1) == IDENTIFIER)    // we suppose it's Foo::Bar
-			{
-				b.advanceLexer();
-			}
 			b.advanceLexer();
 
 //			m.drop();
@@ -1512,15 +972,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 	}
 
-	public static boolean parseFileHandleAsString(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		((PerlBuilder) b).setStopOnNumericGt(true);
-		boolean r = parseInterpolatedStringContent(b, l);
-		((PerlBuilder) b).setStopOnNumericGt(false);
-		return r;
-	}
-
 	/**
 	 * Parsing interpolated string contents
 	 *
@@ -1595,32 +1046,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return true;
-	}
-
-	/**
-	 * Checking if it's angle or LT after block
-	 *
-	 * @param b PerlBuildfer
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean checkFileReadToken(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		if (tokenType == LEFT_ANGLE)
-		{
-			b.advanceLexer();
-			return true;
-		}
-		if (tokenType == OPERATOR_LT_NUMERIC && b.getLatestDoneMarker() != null && b.getLatestDoneMarker().getTokenType() == BLOCK)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(LEFT_ANGLE);
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
@@ -1820,26 +1245,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		m.drop();
-		return false;
-	}
-
-	/**
-	 * Parsing sub name, any identifier might be
-	 *
-	 * @param b Perlbuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseSubDefinitionName(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		if (CONVERTABLE_TOKENS.contains(tokenType) || PerlLexer.RESERVED_TOKENSET.contains(tokenType))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(SUB);
-			return true;
-		}
 		return false;
 	}
 

@@ -29,9 +29,9 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
-import com.perl5.compat.PerlStubIndex;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtils;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
@@ -298,12 +298,12 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 				HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 
 				// indexed children
-				for (String parentPath : PerlStubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project))
+				for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project))
 				{
 					boolean isEquals = StringUtil.equals(relativePath, parentPath);
 					boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VfsUtil.VFS_SEPARATOR_CHAR;
 
-					for (HTMLMasonFlagsStatement statement : PerlStubIndex.getElements(
+					for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
 							HTMLMasonFlagsStubIndex.KEY,
 							parentPath,
 							project,
