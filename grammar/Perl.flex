@@ -469,17 +469,17 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 	{PACKAGE_SHORT} 		{yybegin(LEX_OPERATOR);return PACKAGE;}
 
-	{CORE_PREFIX}"y" {QUOTE_LIKE_SUFFIX} {pullback(1);return RESERVED_Y;}
-	{CORE_PREFIX}"tr"{QUOTE_LIKE_SUFFIX} {pullback(2);return RESERVED_TR;}
+	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {return RESERVED_Y;}
+	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {return RESERVED_TR;}
 
-	{CORE_PREFIX}"qr"{QUOTE_LIKE_SUFFIX} {pullback(2);return RESERVED_QR;}
-	{CORE_PREFIX}"qw"{QUOTE_LIKE_SUFFIX} {pullback(2);return RESERVED_QW;}
-	{CORE_PREFIX}"qq"{QUOTE_LIKE_SUFFIX} {pullback(2);return RESERVED_QQ;}
-	{CORE_PREFIX}"qx"{QUOTE_LIKE_SUFFIX} {pullback(2);return RESERVED_QX;}
-	{CORE_PREFIX}"q"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_Q;}
+	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {return RESERVED_QR;}
+	{CORE_PREFIX}"qw" / {QUOTE_LIKE_SUFFIX} {return RESERVED_QW;}
+	{CORE_PREFIX}"qq" / {QUOTE_LIKE_SUFFIX} {return RESERVED_QQ;}
+	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {return RESERVED_QX;}
+	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_Q;}
 
-	{CORE_PREFIX}"m"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_M;}
-	{CORE_PREFIX}"s"{QUOTE_LIKE_SUFFIX}  {pullback(1);return RESERVED_S;}
+	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_M;}
+	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_S;}
 
 	{IDENTIFIER}			{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
 	{QUALIFIED_IDENTIFIER} 	{return lexQualifiedIdentifier(LEX_AFTER_IDENTIFIER, YYINITIAL);}
