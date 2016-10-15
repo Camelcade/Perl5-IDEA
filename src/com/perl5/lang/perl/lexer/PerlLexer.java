@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -172,8 +171,8 @@ public class PerlLexer extends PerlLexerGenerated
 			QUOTE_LIKE_TRANSLATE_OPENER_TOKENSET
 	);
 	private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
-	private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE);
-	private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_QQ, QUOTE_TICK_CLOSE);
+	private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
+	private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
 	private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
 	// tokens that preceeds regexp opener or file <FH>
 	public static TokenSet BARE_REGEX_PREFIX_TOKENSET =
@@ -203,12 +202,6 @@ public class PerlLexer extends PerlLexerGenerated
 		ALLOWED_REGEXP_MODIFIERS.put(RESERVED_QR, "nmsixpodual");
 	}
 
-	/**
-	 * HEREDOC proceccing section
-	 */
-
-	// last captured heredoc marker
-	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -474,102 +467,44 @@ public class PerlLexer extends PerlLexerGenerated
 		return getBuffer().charAt(currentPosition) == '\n';
 	}
 
-	public IElementType parseHeredocOpenerBackref()
+	public void captureInterpolatedCode()
 	{
-		CharSequence openToken = yytext();
-		int tokenStart = getTokenStart();
-		pushPreparsedToken(tokenStart + 2, tokenStart + 3, OPERATOR_REFERENCE);
-		pushPreparsedToken(tokenStart + 3, tokenStart + openToken.length(), STRING_CONTENT);
-		heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, openToken.subSequence(3, openToken.length()).toString()));
-		setTokenEnd(tokenStart + 2);
-		return OPERATOR_HEREDOC;
+		int seekStart = getTokenEnd();
+		int seekEnd = getBufferEnd();
+		int currentPos = seekStart;
+		CharSequence buffer = getBuffer();
+
+		int braceLevel = 0;
+		boolean isEscaped = false;
+
+		while (currentPos < seekEnd)
+		{
+			char currentChar = buffer.charAt(currentPos);
+
+			if (!isEscaped && braceLevel == 0 && currentChar == '}')
+			{
+				break;
+			}
+
+			if (!isEscaped)
+			{
+				if (currentChar == '{')
+				{
+					braceLevel++;
+				}
+				else if (currentChar == '}')
+				{
+					braceLevel--;
+				}
+			}
+
+			isEscaped = !isEscaped && currentChar == '\\';
+			currentPos++;
+		}
+
+		pushPreparsedToken(seekStart, currentPos, LP_CODE);
 	}
 
-	/**
-	 * Processing captured heredoc opener. Stores marker and switches to proper lexical state
-	 *
-	 * @return PERL_OPERATOR  for << operator
-	 */
-	public IElementType parseHeredocOpener()
-	{
-		CharSequence openToken = yytext();
-		Matcher m;
-		IElementType targetElement = HEREDOC_QQ;
-
-		if (StringUtil.endsWithChar(openToken, '"'))
-		{
-			m = HEREDOC_OPENER_PATTERN_DQ.matcher(openToken);
-		}
-		else if (StringUtil.endsWithChar(openToken, '\''))
-		{
-			m = HEREDOC_OPENER_PATTERN_SQ.matcher(openToken);
-			targetElement = HEREDOC;
-		}
-		else if (StringUtil.endsWithChar(openToken, '`'))
-		{
-			m = HEREDOC_OPENER_PATTERN_XQ.matcher(openToken);
-			targetElement = HEREDOC_QX;
-		}
-		else
-		{
-			m = HEREDOC_OPENER_PATTERN.matcher(openToken);
-		}
-
-		Character nextCharacter = getNextSignificantCharacter();
-		yypushback(openToken.length() - 2);
-
-		if (m.matches())
-		{
-			preparsedTokensList.clear();
-			int currentPosition = getNextTokenStart();
-
-			if (m.groupCount() > 1)    // quoted heredoc
-			{
-				String heredocMarker = m.group(3);
-				heredocQueue.push(new PerlHeredocQueueElement(targetElement, heredocMarker));
-
-				int elementLength = m.group(1).length();
-				if (elementLength > 0)    // got spaces
-				{
-					pushPreparsedToken(currentPosition, currentPosition + elementLength, TokenType.WHITE_SPACE);
-				}
-
-				currentPosition += elementLength;
-
-				pushPreparsedToken(currentPosition, currentPosition + 1, getOpenQuoteTokenType(m.group(2).charAt(0)));
-				currentPosition++;
-
-				if (heredocMarker.length() > 0)
-				{
-					pushPreparsedToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER);
-					currentPosition += heredocMarker.length();
-				}
-
-				pushPreparsedToken(currentPosition, currentPosition + 1, getCloseQuoteTokenType(m.group(2).charAt(0)));
-			}
-			else if (m.group(1).matches("\\d+"))    // check if it's numeric shift
-			{
-				return OPERATOR_SHIFT_LEFT;
-			}
-			else    // bareword heredoc
-			{
-				if (nextCharacter != null && nextCharacter.equals('('))    // it's a sub
-				{
-					return OPERATOR_SHIFT_LEFT;
-				}
-
-				String heredocMarker = m.group(1);
-				heredocQueue.push(new PerlHeredocQueueElement(targetElement, heredocMarker));
-				preparsedTokensList.add(new CustomToken(currentPosition, currentPosition + heredocMarker.length(), STRING_IDENTIFIER));
-			}
-		}
-		else
-		{
-			throw new RuntimeException("Unable to parse HEREDOC opener " + openToken);
-		}
-
-		return OPERATOR_HEREDOC;
-	}
 
 	/**
 	 * Captures HereDoc document and returns appropriate token type
@@ -580,7 +515,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType captureHereDoc(boolean afterEmptyCloser)
 	{
 		final PerlHeredocQueueElement heredocQueueElement = heredocQueue.remove(0);
-		final String heredocMarker = heredocQueueElement.getMarker();
+		final CharSequence heredocMarker = heredocQueueElement.getMarker();
 
 		IElementType tokenType = heredocQueueElement.getTargetElement();
 
@@ -617,7 +552,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 			// reached the end of heredoc and got end marker
 
-			if (heredocMarker.isEmpty() && lineContentsEnd == currentPosition && linePos > lineContentsEnd)
+			if (heredocMarker.length() == 0 && lineContentsEnd == currentPosition && linePos > lineContentsEnd)
 			{
 				// non-empty heredoc and got the end
 				if (currentPosition > tokenStart)
@@ -1169,47 +1104,6 @@ public class PerlLexer extends PerlLexerGenerated
 			throw new RuntimeException("Unable to switch state by token " + tokenType);
 		}
 	}
-
-	public IElementType getOpenQuoteTokenType(char quoteCharacter)
-	{
-		if (quoteCharacter == '"')
-		{
-			return QUOTE_DOUBLE_OPEN;
-		}
-		else if (quoteCharacter == '`')
-		{
-			return QUOTE_TICK_OPEN;
-		}
-		else if (quoteCharacter == '\'')
-		{
-			return QUOTE_SINGLE_OPEN;
-		}
-		else
-		{
-			throw new RuntimeException("Unknown open quote type " + quoteCharacter);
-		}
-	}
-
-	public IElementType getCloseQuoteTokenType(char quoteCharacter)
-	{
-		if (quoteCharacter == '"')
-		{
-			return QUOTE_DOUBLE_CLOSE;
-		}
-		else if (quoteCharacter == '`')
-		{
-			return QUOTE_TICK_CLOSE;
-		}
-		else if (quoteCharacter == '\'')
-		{
-			return QUOTE_SINGLE_CLOSE;
-		}
-		else
-		{
-			throw new RuntimeException("Unknown close quote type " + quoteCharacter);
-		}
-	}
-
 
 	public boolean waitingHereDoc()
 	{

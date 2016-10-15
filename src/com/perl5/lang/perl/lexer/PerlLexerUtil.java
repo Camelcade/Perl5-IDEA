@@ -36,12 +36,6 @@ public class PerlLexerUtil implements PerlElementTypes
 
 	public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<IElementType, IElementType>();
 
-	static
-	{
-		TOKENS_MAP.put(OPERATOR_PLUS, STRING_PLUS);
-		TOKENS_MAP.put(IDENTIFIER, STRING_IDENTIFIER);
-	}
-
 	public static IElementType remapSQToken(IElementType tokenType)
 	{
 		if (tokenType == null || IMMUTABLE_TOKEN_SET.contains(tokenType))

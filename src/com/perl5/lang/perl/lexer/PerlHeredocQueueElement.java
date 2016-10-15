@@ -24,9 +24,9 @@ import com.intellij.psi.tree.IElementType;
 public class PerlHeredocQueueElement
 {
 	private final IElementType myTargetElement;
-	private final String myMarker;
+	private final CharSequence myMarker;
 
-	public PerlHeredocQueueElement(IElementType targetElement, String marker)
+	public PerlHeredocQueueElement(IElementType targetElement, CharSequence marker)
 	{
 		myTargetElement = targetElement;
 		myMarker = marker;
@@ -37,7 +37,7 @@ public class PerlHeredocQueueElement
 		return myTargetElement;
 	}
 
-	public String getMarker()
+	public CharSequence getMarker()
 	{
 		return myMarker;
 	}

@@ -30,7 +30,7 @@ public class PodWordsScanner extends DefaultWordsScanner implements PodElementTy
 
 	public PodWordsScanner()
 	{
-		super(new PodLexerAdapter(null),
+		super(new PodLexerAdapter(),
 				PodParserDefinition.IDENTIFIERS,
 				PodParserDefinition.COMMENTS,
 				TokenSet.EMPTY);

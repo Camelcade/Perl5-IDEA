@@ -222,17 +222,6 @@ task generateTT2Lexer(type: JavaExec) {
     classpath configurations.lexer
 }
 
-task generatePerlStringLexer(type: JavaExec) {
-    dependsOn generatePerl5Parser
-    ext.src = "grammar/PerlString.flex"
-    ext.dst = "gen/com/perl5/lang/perl/lexer/"
-    main = "jflex.Main"
-    args = getJflexArguments(src, dst)
-    inputs.file file(src)
-    inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "PerlStringLexerGenerated.java")
-    classpath configurations.lexer
-}
 
 task generateEmbeddedPerlLexer(type: JavaExec) {
     dependsOn generatePerl5Parser
@@ -284,7 +273,6 @@ task generateMojoliciousLexer(type: JavaExec) {
 task generateLexers {
     dependsOn generatePerlLexer
     dependsOn generatePerlAnnotationsLexer
-    dependsOn generatePerlStringLexer
     dependsOn generatePodLexer
     dependsOn generateTT2Lexer
 

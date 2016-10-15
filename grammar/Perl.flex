@@ -39,8 +39,6 @@ import org.jetbrains.annotations.NotNull;
 
 	public abstract IElementType startRegexp();
 	public abstract IElementType getIdentifierToken();
-	public abstract IElementType parseHeredocOpener();
-	public abstract IElementType parseHeredocOpenerBackref();
 	public abstract IElementType captureString();
 
 %}
@@ -51,10 +49,10 @@ import org.jetbrains.annotations.NotNull;
 */
 NEW_LINE = \R
 WHITE_SPACE     = [ \t\f]
-ANY_SPACE = [ \t\f\R]
+ANY_SPACE = [ \t\f\n\r]
 LINE_COMMENT = "#" .* \R
 SPACES_OR_COMMENTS = ({ANY_SPACE}|{LINE_COMMENT})*
-
+ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
@@ -68,9 +66,9 @@ BAREWORD_MINUS = "-" ? {IDENTIFIER}
 QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
-DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""
-SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"
-XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"
+DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
+SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"?
+XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"?
 
 QUOTE_LIKE_SUFFIX= ("'" {QUALIFIED_IDENTIFIER} ? )?
 CORE_PREFIX = "CORE::"?
@@ -97,12 +95,11 @@ ANY_VARIABLE_NAME = {VARIABLE_NAME}|{BRACED_VARIABLE_NAME}
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
 
-HEREDOC_MARKER = [a-zA-Z0-9_]+
 HEREDOC_MARKER_DQ = [^\"\n\r]*
 HEREDOC_MARKER_SQ = [^\'\n\r]*
 HEREDOC_MARKER_XQ = [^\`\n\r]*
-HEREDOC_OPENER = "<<"({WHITE_SPACE}* \'{HEREDOC_MARKER_SQ}\' | {WHITE_SPACE}* \"{HEREDOC_MARKER_DQ}\" | {WHITE_SPACE}* \`{HEREDOC_MARKER_XQ}\` | {HEREDOC_MARKER})
-HEREDOC_OPENER_BACKREF = "<<\\"[a-zA-Z0-9_]+
+QUOTED_HEREDOC_MARKER = {WHITE_SPACE}*(\'{HEREDOC_MARKER_SQ}\'| \"{HEREDOC_MARKER_DQ}\" | \`{HEREDOC_MARKER_XQ}\`)
+UNQUOTED_HEREDOC_MARKER = [\w_]{IDENTIFIER}?
 
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
@@ -134,7 +131,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 %state LEX_PACKAGE, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
 
-%xstate LEX_STRING_CONTENT, LEX_INTERPOLATED_STRING_CONTENT, LEX_STRING_LIST
+%xstate LEX_STRING_CONTENT, LEX_STRING_CONTENT_QQ, LEX_STRING_CONTENT_XQ, LEX_STRING_LIST
 %xstate LEX_REGEX, LEX_EXTENDED_REGEX
 
 // custom lexical states to avoid crossing with navie ones
@@ -146,6 +143,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 %state LEX_PRINT
 %state LEX_AFTER_DEREFERENCE, LEX_AFTER_RIGHT_BRACE, LEX_AFTER_IDENTIFIER, LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER, LEX_AFTER_VARIABLE_NAME
 
+%state LEX_QUOTED_HEREDOC_OPENER, LEX_BARE_HEREDOC_OPENER, LEX_BARE_BACKREF_HEREDOC_OPENER
 %state LEX_SCALAR_NAME,LEX_ARRAY_NAME,LEX_HASH_NAME,LEX_CODE_NAME,LEX_GLOB_NAME
 
 %%
@@ -155,34 +153,67 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	[^]+	{return REGEX_TOKEN;}
 }
 
-<LEX_STRING_CONTENT>{
+<LEX_QUOTED_HEREDOC_OPENER>{
+	{DQ_STRING}	{
+		yybegin(LEX_OPERATOR);
+		pushState();
+		heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext().subSequence(1,yylength()-1)));
+		pullback(0);
+		yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
+		return captureString();
+	}
+	{SQ_STRING} {
+		yybegin(LEX_OPERATOR);
+		pushState();
+		heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, yytext().subSequence(1,yylength()-1)));
+		pullback(0);
+		yybegin(LEX_QUOTE_LIKE_OPENER_Q);
+		return captureString();
+	}
+	{XQ_STRING} {
+		yybegin(LEX_OPERATOR);
+		pushState();
+		heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QX, yytext().subSequence(1,yylength()-1)));
+		pullback(0);
+		yybegin(LEX_QUOTE_LIKE_OPENER_QX);
+		return captureString();
+	}
+}
+
+<LEX_BARE_BACKREF_HEREDOC_OPENER>{
+	{UNQUOTED_HEREDOC_MARKER} {	yybegin(LEX_OPERATOR);heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, yytext()));return STRING_CONTENT;}
+}
+
+<LEX_BARE_HEREDOC_OPENER>{
+	"\\" {yybegin(LEX_BARE_BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;}
+	{UNQUOTED_HEREDOC_MARKER} {	yybegin(LEX_OPERATOR); heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
+}
+
+<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ>{
 	"$" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
 	"@" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
 	"$#" / {ANY_VARIABLE_NAME}  {pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
-	"%" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_HASH_NAME);return SIGIL_HASH;}
-	"&" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_CODE_NAME);return SIGIL_CODE;}
-	"*" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_GLOB_NAME);return SIGIL_GLOB;}
-
-	"@"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_ARRAY;}
-	"$#" / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
-	"$"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR; }
-	"%"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_HASH;}
-	"*"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_GLOB;}
-	"&"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_CODE;}
-
-	"@" 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
-	"$#" 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
-	"$" 	{yybegin(YYINITIAL);return SIGIL_SCALAR; }
-	"%"		{yybegin(YYINITIAL);return SIGIL_HASH;}
-	"*"		{yybegin(YYINITIAL);return SIGIL_GLOB;}
-	"&"		{yybegin(YYINITIAL);return SIGIL_CODE;}
 }
 
-<LEX_INTERPOLATED_STRING_CONTENT,LEX_STRING_CONTENT,LEX_STRING_LIST>
+<LEX_STRING_CONTENT_QQ>{
+	[^$\@]+						{return STRING_CONTENT_QQ;}
+	[\$\@]						{return STRING_CONTENT_QQ;}
+}
+
+<LEX_STRING_CONTENT_XQ>{
+	[^\$\@]+					{return STRING_CONTENT_XQ;}
+	[\$\@]						{return STRING_CONTENT_XQ;}
+}
+
+<LEX_STRING_LIST>
 {
-	{QUALIFIED_IDENTIFIER}	{return STRING_IDENTIFIER;}
-	{ANY_SPACE}				{return STRING_WHITESPACE;}
-	[^]						{return STRING_CONTENT;}
+	[^\s\n\r]+				{return STRING_CONTENT;}
+	{ESCAPED_WHITE_SPACE}	{return STRING_CONTENT;}
+	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
+}
+
+<LEX_STRING_CONTENT>{
+	[^]+					{return STRING_CONTENT;}
 }
 
 <LEX_POD> {
@@ -203,7 +234,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	"%" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_HASH_NAME);return SIGIL_HASH;}
 	"&" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_CODE_NAME);return SIGIL_CODE;}
 	"*" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_GLOB_NAME);return SIGIL_GLOB;}
-	{IDENTIFIER} / [^(,-<{\[]		{yybegin(YYINITIAL);return HANDLE;}
+	{IDENTIFIER} / [^(,-<{\[\w]		{yybegin(YYINITIAL);return HANDLE;}
 }
 
 <LEX_HANDLE> {
@@ -430,11 +461,12 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(LEX_OPERATOR);return STRING_CONTENT;}
 
-	"<"{IDENTIFIER}">"  		{yybegin(LEX_ANGLED_HANDLE);pullback(1);return LEFT_ANGLE;}
+	"<" / {IDENTIFIER}">"  		{yybegin(LEX_ANGLED_HANDLE);return LEFT_ANGLE;}
 	"<"							{yybegin(LEX_OPERATOR);pushState();yypushback(1);yybegin(LEX_QUOTE_LIKE_OPENER_QQ);return captureString();}
 
-	{HEREDOC_OPENER}   			{yybegin(LEX_OPERATOR);return parseHeredocOpener();}
-	{HEREDOC_OPENER_BACKREF} 	{yybegin(LEX_OPERATOR);return parseHeredocOpenerBackref();}
+	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(LEX_QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(LEX_BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / {UNQUOTED_HEREDOC_MARKER} 		{yybegin(LEX_BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 
 	"/"   						{yybegin(LEX_OPERATOR);return startRegexp();}
 

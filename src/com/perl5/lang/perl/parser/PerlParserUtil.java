@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.WhitespacesBinders;
@@ -26,7 +25,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
@@ -56,11 +54,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_DOUBLE_CLOSE,
 			QUOTE_TICK_CLOSE,
 			QUOTE_SINGLE_CLOSE
-	);
-
-	public static final TokenSet ALL_QUOTES = TokenSet.orSet(
-			OPEN_QUOTES,
-			CLOSE_QUOTES
 	);
 
 	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
@@ -582,148 +575,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * Parses SQ string content. Implemented for interpolation parsing, where 'test' is identifier in quotes
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseNestedSQString(PsiBuilder b, int l)
-	{
-		IElementType tokenType;
-
-		if (b.getTokenType() == QUOTE_SINGLE)
-		{ // b.rawLookup(-1) == LEFT_BRACE &&
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(QUOTE_SINGLE_OPEN);
-
-			m = b.mark();
-
-			while ((tokenType = b.getTokenType()) != null)
-			{
-				if (CLOSE_QUOTES.contains(tokenType))    // reached end of outer string
-				{
-					m.drop();
-					return false;
-				}
-				else if (tokenType == QUOTE_SINGLE)    // reached end of inner string
-				{
-					m.collapse(STRING_CONTENT);
-					m = b.mark();
-					b.advanceLexer();
-					m.collapse(QUOTE_SINGLE_CLOSE);
-					return true;
-				}
-				b.advanceLexer();
-			}
-			m.drop();
-		}
-		return false;
-	}
-
-	/**
-	 * Magic for nested string opener
-	 *
-	 * @param b              PerlPraser
-	 * @param l              paring level
-	 * @param quoteTokenType opening quote type (atm only QQ)
-	 * @return parsing result
-	 */
-	public static boolean parseNetstedInterpolatedString(PsiBuilder b, int l, IElementType quoteTokenType)
-	{
-		assert b instanceof PerlBuilder;
-
-		IElementType tokenType = b.getTokenType();
-
-		if (((PerlBuilder) b).getExtraStopQuote() != quoteTokenType && tokenType == quoteTokenType)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			if (quoteTokenType == QUOTE_DOUBLE)
-			{
-				m.collapse(QUOTE_DOUBLE_OPEN);
-			}
-			else if (quoteTokenType == QUOTE_TICK)
-			{
-				m.collapse(QUOTE_TICK_OPEN);
-			}
-			else
-			{
-				throw new RuntimeException("Unknown open quote for token " + quoteTokenType);
-			}
-
-			IElementType currentStopQuote = ((PerlBuilder) b).setExtraStopQuote(quoteTokenType);
-
-			parseInterpolatedStringContent(b, l);
-
-			((PerlBuilder) b).setExtraStopQuote(currentStopQuote);
-
-			if ((b.getTokenType()) == quoteTokenType)
-			{
-				m = b.mark();
-				b.advanceLexer();
-				if (quoteTokenType == QUOTE_DOUBLE)
-				{
-					m.collapse(QUOTE_DOUBLE_CLOSE);
-				}
-				else if (quoteTokenType == QUOTE_TICK)
-				{
-					m.collapse(QUOTE_TICK_CLOSE);
-				}
-				else
-				{
-					throw new RuntimeException("Unknown open quote for token " + quoteTokenType);
-				}
-				return true;
-			}
-			return false;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Converting string element to string content if it's not a closing quote
-	 *
-	 * @param b PerlBuildder
-	 * @param l Parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertToStringContent(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		assert b instanceof PerlBuilder;
-
-		boolean isStopOnNumericGt = ((PerlBuilder) b).isStopOnNumericGt();
-		IElementType extraStopQuote = ((PerlBuilder) b).getExtraStopQuote();
-
-		if (tokenType != null
-				&& !(isStopOnNumericGt && tokenType == OPERATOR_GT_NUMERIC)    // stop bare glob
-				&& !(!isStopOnNumericGt && CLOSE_QUOTES.contains(tokenType))    // stop on close quote
-				&& tokenType != extraStopQuote
-				)
-		{
-			IElementType targetToken = PerlLexerUtil.remapSQToken(tokenType);
-
-			PsiBuilder.Marker m = b.mark();
-
-			b.advanceLexer();
-
-//			m.drop();
-			m.collapse(targetToken);
-
-			PerlStringWrapper stringWrapper = ((PerlBuilder) b).getStringWrapper();
-			if (stringWrapper != null && targetToken == STRING_IDENTIFIER && stringWrapper.canProcess())
-			{
-				stringWrapper.wrapMarker(m);
-			}
-
-			return true;
-		}
-		return false;
-	}
 
 	/**
 	 * Converts everything till $, @ or close brace to regex tokens;
@@ -835,7 +686,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		boolean r = PerlParserImpl.string_sq_parsed(b, l);
+		boolean r = PerlParserImpl.quoted_sq_string(b, l);
 
 		if (r && ((PerlBuilder) b).isReparseSQString())
 		{
@@ -846,62 +697,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			m.drop();
 		}
 
-		return r;
-	}
-
-	/**
-	 * Hack for use vars parameter
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseInterpolatedConstructs(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		if (((PerlBuilder) b).isUseVarsContent())
-		{
-			PsiBuilder.Marker m = b.mark();
-			boolean r = PerlParserImpl.use_vars_interpolated_constructs(b, l);
-
-			if (r)
-			{
-				LighterASTNode lastMarker = b.getLatestDoneMarker();
-
-				if (lastMarker != null)
-				{
-					IElementType elementType = lastMarker.getTokenType();
-
-					if (elementType == SCALAR_VARIABLE || elementType == ARRAY_VARIABLE || elementType == HASH_VARIABLE)
-					{
-						m.done(VARIABLE_DECLARATION_WRAPPER);
-						return true;
-					}
-				}
-			}
-			m.drop();
-			return r;
-		}
-		else
-		{
-			return PerlParserImpl.interpolated_constructs(b, l);
-		}
-	}
-
-	/**
-	 * Parsing interpolated string contents
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseInterpolatedStringContent(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		boolean currentState = ((PerlBuilder) b).setIsInterpolated(true);
-		boolean r = PerlParserImpl.string_content_qq(b, l);
-		((PerlBuilder) b).setIsInterpolated(currentState);
 		return r;
 	}
 
@@ -1182,7 +977,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		if (tokenType instanceof PerlStringContentTokenType)
 		{
 			PerlStringWrapper stringWrapper = ((PerlBuilder) b).getStringWrapper();
-			if (stringWrapper == null || !stringWrapper.canProcess() || tokenType != STRING_IDENTIFIER)
+			if (stringWrapper == null || !stringWrapper.canProcess() || tokenType != STRING_CONTENT)
 			{
 				b.advanceLexer();
 			}
@@ -1259,38 +1054,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		m.rollbackTo();
-		return false;
-	}
-
-	public static boolean parseEmptyString(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		IElementType nextTokenType = b.rawLookup(1);
-		if (tokenType == QUOTE_DOUBLE_OPEN && nextTokenType == QUOTE_DOUBLE_CLOSE ||
-				tokenType == QUOTE_SINGLE_OPEN && nextTokenType == QUOTE_SINGLE_CLOSE ||
-				tokenType == QUOTE_TICK_OPEN && nextTokenType == QUOTE_TICK_CLOSE
-				)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			b.mark().collapse(STRING_CONTENT);
-			b.advanceLexer();
-
-			if (tokenType == QUOTE_DOUBLE_OPEN)
-			{
-				m.done(STRING_DQ);
-			}
-			else if (tokenType == QUOTE_SINGLE_OPEN)
-			{
-				m.done(STRING_SQ);
-			}
-			else
-			{
-				m.done(STRING_XQ);
-			}
-			return true;
-		}
-
 		return false;
 	}
 

@@ -246,6 +246,7 @@ limitations under the License.
 
 	LP_STRING_Q="LAZY_PARSABLE_Q_STRING"
 	LP_STRING_QQ="LAZY_PARSABLE_DQ_STRING"
+	LP_STRING_XQ="LAZY_PARSABLE_XQ_STRING"
 	LP_STRING_QW="LAZY_PARSABLE_QW_STRING"
 
 	LP_REGEX="LAZY_PARSABLE_REGEX"
@@ -254,9 +255,8 @@ limitations under the License.
 	LP_CODE="LAZY_PARSABLE_CODE"
 
     STRING_CONTENT='STRING_CONTENT'
-    STRING_IDENTIFIER='STRING_IDENTIFIER'
-    STRING_WHITESPACE='STRING_WHITESPACE'
-    STRING_PLUS='STRING_PLUS'
+    STRING_CONTENT_QQ='STRING_CONTENT_QQ'
+    STRING_CONTENT_XQ='STRING_CONTENT_XQ'
 
     PARSABLE_STRING_USE_VARS = 'PARSABLE_STRING_USE_VARS'
 
@@ -576,7 +576,7 @@ private sub_signature_scalar ::= <<scalarDeclarationWrapper>> ['=' scalar_expr]
 
 private sub_attributes ::= ':' attribute ([':'] attribute)*  {pin=1}
 private var_attributes ::= ':' attribute ([':'] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
-attribute ::= IDENTIFIER [string_sq_parsed]
+attribute ::= IDENTIFIER [quoted_sq_string]
 
 last_expr ::=  'last' [lnr_param] {pin=1}
 next_expr ::=  'next' [lnr_param] {pin=1}
@@ -984,34 +984,27 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_SIMPLE
 
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
-string_dq ::=
-  [ 'qq'] string_dq_parsed
-  | <<parseNetstedInterpolatedString 'QUOTE_DOUBLE '>>
+string_dq ::= [ 'qq'] quoted_qq_string
+private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [LP_STRING_QQ | qq_string_content ] QUOTE_DOUBLE_CLOSE {pin=1}
+private qq_string_content ::= (STRING_CONTENT_QQ | interpolated_constructs)+
 
-private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [LP_STRING_QQ | <<parseInterpolatedStringContent>>] QUOTE_DOUBLE_CLOSE {pin=1}
+string_xq ::= [ 'qx'] quoted_xq_string
+private quoted_xq_string ::= QUOTE_TICK_OPEN [LP_STRING_XQ | xq_string_content] QUOTE_TICK_CLOSE {pin=1}
+private xq_string_content ::= (STRING_CONTENT_XQ | interpolated_constructs)+
 
-string_xq ::=
-  [ 'qx'] string_xq_parsed
-  | <<parseNetstedInterpolatedString 'QUOTE_TICK '>>
-
-private string_xq_parsed ::= QUOTE_TICK_OPEN [LP_STRING_QQ |<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
-
-string_bare ::= <<parseAndWrapStringContent>>+
-
-string_sq ::=
-  [ 'q'] <<parseSQString>>
-  | <<parseNestedSQString>> // nested sq string
-
-private string_sq_parsed ::= QUOTE_SINGLE_OPEN [LP_STRING_Q |LP_STRING_QW |<<parseAndWrapStringContent>>*] QUOTE_SINGLE_CLOSE {pin=1}
-private string_content_qq ::= string_content_element +
-private string_content_element ::= <<parseInterpolatedConstructs>>  | <<convertToStringContent>>
-
-// these constructs are for regular strings
 private interpolated_constructs ::=
   <<parseScalarOrElement>>
   | <<parseArrayOrSlice>>
   | array_index_variable
   | scalar_index_cast_expr
+
+string_bare ::= <<parseAndWrapStringContent>>+
+
+string_sq ::= [ 'q'] <<parseSQString>>	// fixme use vars hack, remove
+string_list ::=  'qw' <<parseSQString>>
+private quoted_sq_string ::= QUOTE_SINGLE_OPEN [LP_STRING_Q |LP_STRING_QW|sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
+private sq_string_content ::= STRING_CONTENT+
+
 
 private use_vars_interpolated_constructs ::=
     scalar_variable
@@ -1020,9 +1013,7 @@ private use_vars_interpolated_constructs ::=
     | glob_variable
     | code_variable
 
-heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | <<parseEmptyString>> | string ){pin=1}
-
-string_list ::=  'qw' <<parseSQString>>
+heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable

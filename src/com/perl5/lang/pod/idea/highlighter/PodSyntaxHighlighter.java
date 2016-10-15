@@ -20,7 +20,6 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -75,18 +74,11 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 		attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
 	}
 
-	private final Project myProject;
-
-	public PodSyntaxHighlighter(Project myProject)
-	{
-		this.myProject = myProject;
-	}
-
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PodLexerAdapter(myProject);
+		return new PodLexerAdapter();
 	}
 
 	@NotNull

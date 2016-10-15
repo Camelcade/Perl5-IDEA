@@ -33,7 +33,7 @@ public class PodSyntaxHighlighterFactory extends SyntaxHighlighterFactory
 	@NotNull
 	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
 	{
-		return new PodSyntaxHighlighter(project);
+		return new PodSyntaxHighlighter();
 
 	}
 }

@@ -818,7 +818,7 @@ public class PerlPsiUtil implements PerlElementTypes
 			if (run != null)
 			{
 				run = run.getNextSibling();
-				if (run != null && run.getNode().getElementType() == STRING_IDENTIFIER)
+				if (run != null && run.getNode().getElementType() == STRING_CONTENT) // fixme review
 				{
 					return run;
 				}

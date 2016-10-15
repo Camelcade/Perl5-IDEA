@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser.builder;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -44,18 +43,12 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	boolean isInterpolated = false;
 	// flag set if we are inside of regexp. Safe parsing for array indexes
 	boolean isRegex = false;
-	// flag marks that interpolated string should stop on >
-	boolean stopOnNumericGt = false;
-	// this is a stop quote for nexted strings parsing
-	IElementType extraStopQuote = null;
 	// flag allowes special variable names
 	boolean isSpecialVariableNamesAllowed = true;
 	/**
 	 * This element may be set to make an additional wrapping for strings, like constants and so on
 	 */
 	PerlStringWrapper stringWrapper = null;
-
-	Project myProject = getProject();
 
 	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
 	{
@@ -159,22 +152,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return currentState;
 	}
 
-	public boolean isStopOnNumericGt()
-	{
-		return stopOnNumericGt;
-	}
-
-	public IElementType getExtraStopQuote()
-	{
-		return extraStopQuote;
-	}
-
-	public IElementType setExtraStopQuote(IElementType extraStopQuote)
-	{
-		IElementType currentExtraStopQuote = getExtraStopQuote();
-		this.extraStopQuote = extraStopQuote;
-		return currentExtraStopQuote;
-	}
 
 	public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed)
 	{

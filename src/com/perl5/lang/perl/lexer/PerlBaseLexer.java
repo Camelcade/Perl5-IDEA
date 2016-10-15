@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 
+import java.util.Stack;
 import java.util.regex.Pattern;
 
 /**
@@ -44,6 +44,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 					"(" +
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
-	protected IElementType myVariableNameElementType = null;
+
+	// last captured heredoc marker
+	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
 
 }

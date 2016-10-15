@@ -21,11 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
 import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -60,7 +58,8 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierI
 	public boolean isExtension()
 	{
 		PsiElement prevElement = getPrevSibling();
-		return prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
+		// fixme adjust
+		return false; //prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
 	}
 
 

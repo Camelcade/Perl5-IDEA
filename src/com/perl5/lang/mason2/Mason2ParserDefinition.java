@@ -27,7 +27,7 @@ import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 

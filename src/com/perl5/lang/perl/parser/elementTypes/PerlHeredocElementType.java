@@ -25,9 +25,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlQQHeredocLexerAdapter;
-import com.perl5.lang.perl.lexer.PerlSimpleHeredocLexerAdapter;
-import com.perl5.lang.perl.parser.PerlHeredocParserImpl;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
+import com.perl5.lang.perl.parser.PerlStringContentParser;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,23 +49,27 @@ public class PerlHeredocElementType extends ILazyParseableElementType implements
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				getLexerAdapter(parentElement.getProject()),
+				getLexerAdapter(),
 				getLanguage(),
 				chameleon.getText());
-		PsiParser parser = new PerlHeredocParserImpl();
+		PsiParser parser = new PerlStringContentParser(this);
 
 		return parser.parse(this, builder).getFirstChildNode();
 	}
 
-	protected FlexAdapter getLexerAdapter(Project project)
+	protected FlexAdapter getLexerAdapter()
 	{
-		if ("HEREDOC".equals(toString()))
+		if (equals(PerlElementTypes.HEREDOC))
 		{
-			return new PerlSimpleHeredocLexerAdapter();
+			return PerlSubLexerAdapter.forStringSQ();
+		}
+		else if (equals(PerlElementTypes.HEREDOC_QQ))
+		{
+			return PerlSubLexerAdapter.forStringDQ();
 		}
 		else
 		{
-			return new PerlQQHeredocLexerAdapter(project);
+			return PerlSubLexerAdapter.forStringXQ();
 		}
 	}
 

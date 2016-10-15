@@ -20,7 +20,7 @@ import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
 
 /**
  * Created by hurricup on 06.01.2016.

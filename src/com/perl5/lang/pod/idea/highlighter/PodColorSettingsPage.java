@@ -51,7 +51,7 @@ public class PodColorSettingsPage implements ColorSettingsPage
 	@Override
 	public SyntaxHighlighter getHighlighter()
 	{
-		return new PodSyntaxHighlighter(null);
+		return new PodSyntaxHighlighter();
 	}
 
 	@NotNull

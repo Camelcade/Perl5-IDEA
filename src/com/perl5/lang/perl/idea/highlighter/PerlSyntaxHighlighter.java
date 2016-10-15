@@ -29,7 +29,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -228,6 +228,13 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(TAG, new TextAttributesKey[]{PERL_TAG});
 		ATTRIBUTES_MAP.put(TAG_END, new TextAttributesKey[]{PERL_TAG});
 		ATTRIBUTES_MAP.put(TAG_DATA, new TextAttributesKey[]{PERL_TAG});
+
+		ATTRIBUTES_MAP.put(STRING_CONTENT, new TextAttributesKey[]{PERL_SQ_STRING});
+		ATTRIBUTES_MAP.put(STRING_CONTENT_QQ, new TextAttributesKey[]{PERL_DQ_STRING});
+		ATTRIBUTES_MAP.put(STRING_CONTENT_XQ, new TextAttributesKey[]{PERL_DX_STRING});
+
+		ATTRIBUTES_MAP.put(COMMENT_LINE, new TextAttributesKey[]{PERL_COMMENT});
+		ATTRIBUTES_MAP.put(COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 	}
 
 
@@ -242,7 +249,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PerlLexerAdapter();
+		return new PerlHighlightingLexerAdapter();
 	}
 
 	@NotNull

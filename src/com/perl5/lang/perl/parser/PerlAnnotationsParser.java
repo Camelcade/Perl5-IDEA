@@ -43,7 +43,7 @@ public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlEle
 	}
 
 	@NotNull
-	public ASTNode parse(IElementType root_, PsiBuilder builder_)
+	public ASTNode parse(@NotNull IElementType root_, @NotNull PsiBuilder builder_)
 	{
 		parseLight(root_, builder_);
 		return builder_.getTreeBuilt();

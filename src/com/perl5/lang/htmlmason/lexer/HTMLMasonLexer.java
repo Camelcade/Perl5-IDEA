@@ -507,12 +507,12 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 				{
 					if (colonOffset > startOffset)
 					{
-						pushPreparsedToken(startOffset, colonOffset, STRING_IDENTIFIER);
+						pushPreparsedToken(startOffset, colonOffset, STRING_CONTENT);
 					}
-					pushPreparsedToken(colonOffset, colonOffset + 1, STRING_IDENTIFIER);
+					pushPreparsedToken(colonOffset, colonOffset + 1, STRING_CONTENT);
 					if (colonOffset + 1 < endOffset)
 					{
-						pushPreparsedToken(colonOffset + 1, endOffset, STRING_IDENTIFIER);
+						pushPreparsedToken(colonOffset + 1, endOffset, STRING_CONTENT);
 					}
 					return;
 				}

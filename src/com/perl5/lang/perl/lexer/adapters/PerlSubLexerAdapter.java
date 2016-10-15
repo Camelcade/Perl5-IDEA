@@ -14,37 +14,43 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.elementTypes;
+package com.perl5.lang.perl.lexer.adapters;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lexer.FlexAdapter;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 10.09.2015.
+ * Created by hurricup on 10.10.2015.
  */
-public class PerlQQStringElementType extends PerlParsableStringElementType implements PsiElementProvider
+public class PerlSubLexerAdapter extends FlexAdapter
 {
-	public PerlQQStringElementType(String name)
+	private final int myPerlLexerState;
+
+	public PerlSubLexerAdapter(int perlLexerState)
 	{
-		super(name);
+		super(new PerlLexer());
+		myPerlLexerState = perlLexerState;
 	}
 
-	@Override
-	protected FlexAdapter getLexerAdapter(Project project)
+	public static PerlSubLexerAdapter forStringSQ()
+	{
+		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT);
+	}
+
+	public static PerlSubLexerAdapter forStringDQ()
 	{
 		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT_QQ);
 	}
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
+	public static PerlSubLexerAdapter forStringXQ()
 	{
-		return new PerlParsableStringWrapperlImpl(node);
+		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT_XQ);
+	}
+
+	@Override
+	public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState)
+	{
+		super.start(buffer, startOffset, endOffset, myPerlLexerState);
 	}
 }
