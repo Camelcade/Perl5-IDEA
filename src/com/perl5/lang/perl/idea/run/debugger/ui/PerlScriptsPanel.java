@@ -40,6 +40,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -47,17 +50,18 @@ import java.util.Comparator;
  */
 public class PerlScriptsPanel extends JPanel
 {
-	@NotNull
-	private final Project myProject;
-	private final PerlDebugThread myDebugThread;
-	private SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(new Comparator<PerlLoadedFileDescriptor>()
+	private static final Comparator<PerlLoadedFileDescriptor> compareEntries = new Comparator<PerlLoadedFileDescriptor>()
 	{
 		@Override
 		public int compare(PerlLoadedFileDescriptor o1, PerlLoadedFileDescriptor o2)
 		{
 			return StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);
 		}
-	});
+	};
+	@NotNull
+	private final Project myProject;
+	private final PerlDebugThread myDebugThread;
+	private SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(compareEntries);
 
 	public PerlScriptsPanel(@NotNull Project project, PerlDebugThread debugThread)
 	{
@@ -131,16 +135,9 @@ public class PerlScriptsPanel extends JPanel
 		add(new JBScrollPane(jbList), BorderLayout.CENTER);
 	}
 
-
-	public void replace(final PerlLoadedFileDescriptor value)
-	{
-		remove(value);
-		add(value);
-	}
-
 	public void add(final PerlLoadedFileDescriptor value)
 	{
-		if (!myModel.getItems().contains(value))
+		if (myModel.indexOf(value) == -1)
 		{
 			ApplicationManager.getApplication().invokeLater(new Runnable()
 			{
@@ -155,7 +152,7 @@ public class PerlScriptsPanel extends JPanel
 
 	public void remove(final PerlLoadedFileDescriptor value)
 	{
-		if (myModel.getItems().contains(value))
+		if (myModel.indexOf(value) != -1)
 		{
 			ApplicationManager.getApplication().invokeLater(new Runnable()
 			{
@@ -166,5 +163,65 @@ public class PerlScriptsPanel extends JPanel
 				}
 			});
 		}
+	}
+
+	public void bulkChange(final java.util.List<PerlLoadedFileDescriptor> toAdd, final java.util.List<PerlLoadedFileDescriptor> toRemove)
+	{
+		// based on synthetic benchmarks, at 5000 items the performance of bulkChangeNow is definitely
+		// better than the naive method; the axact number might still need some tweaking
+		if (toAdd.size() + toRemove.size() < 5000)
+		{
+			for (PerlLoadedFileDescriptor value : toRemove)
+			{
+				remove(value);
+			}
+			for (PerlLoadedFileDescriptor value : toAdd)
+			{
+				add(value);
+			}
+		}
+		else
+		{
+			ApplicationManager.getApplication().invokeLater(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					bulkChangeNow(toAdd, toRemove);
+				}
+			});
+		}
+	}
+
+	// so the naive version is good for "small" added/removed; where the exact value needs to be determined with benchamrks;
+	// there is a slightly more detailed analysis in the commit message
+	private void bulkChangeNow(final java.util.List<PerlLoadedFileDescriptor> toAdd, final java.util.List<PerlLoadedFileDescriptor> toRemove)
+	{
+		java.util.List<PerlLoadedFileDescriptor> currentEntries = myModel.getItems();
+		if (toRemove.size() > 0)
+		{
+			// first find all indices to be removed, then remove them in reverse order by overwriting with
+			// the last element and then removing the last element
+			int removeSize = toRemove.size();
+			int[] indices = new int[removeSize];
+			for (int i = 0; i < removeSize; ++i)
+			{
+				indices[i] = Collections.binarySearch(currentEntries, toRemove.get(i), compareEntries);
+			}
+			Arrays.sort(indices);
+			int lastIndex = currentEntries.size() - 1;
+			for (int i = removeSize - 1; i >= 0; --i)
+			{
+				int index = indices[i];
+				if (index >= 0)
+				{
+					currentEntries.set(index, currentEntries.get(lastIndex));
+					currentEntries.remove(lastIndex);
+					--lastIndex;
+				}
+			}
+		}
+		currentEntries.addAll(toAdd);
+		myModel.setAll(currentEntries);
 	}
 }
