@@ -28,7 +28,7 @@ public class PerlDebuggingLexer extends PerlLexer
 {
 	public PerlDebuggingLexer(Project project)
 	{
-		super(project);
+		super();
 	}
 
 	@Override

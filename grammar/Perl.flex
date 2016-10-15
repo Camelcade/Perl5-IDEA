@@ -134,6 +134,9 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 %state LEX_PACKAGE, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
 
+%xstate LEX_STRING_CONTENT, LEX_INTERPOLATED_STRING_CONTENT, LEX_STRING_LIST
+%xstate LEX_REGEX, LEX_EXTENDED_REGEX
+
 // custom lexical states to avoid crossing with navie ones
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
 %state LEX_PREPARSED_ITEMS
@@ -146,6 +149,41 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 %state LEX_SCALAR_NAME,LEX_ARRAY_NAME,LEX_HASH_NAME,LEX_CODE_NAME,LEX_GLOB_NAME
 
 %%
+
+<LEX_REGEX,LEX_EXTENDED_REGEX>
+{
+	[^]+	{return REGEX_TOKEN;}
+}
+
+<LEX_STRING_CONTENT>{
+	"$" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
+	"@" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
+	"$#" / {ANY_VARIABLE_NAME}  {pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
+	"%" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_HASH_NAME);return SIGIL_HASH;}
+	"&" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_CODE_NAME);return SIGIL_CODE;}
+	"*" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_GLOB_NAME);return SIGIL_GLOB;}
+
+	"@"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_ARRAY;}
+	"$#" / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
+	"$"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR; }
+	"%"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_HASH;}
+	"*"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_GLOB;}
+	"&"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_CODE;}
+
+	"@" 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
+	"$#" 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
+	"$" 	{yybegin(YYINITIAL);return SIGIL_SCALAR; }
+	"%"		{yybegin(YYINITIAL);return SIGIL_HASH;}
+	"*"		{yybegin(YYINITIAL);return SIGIL_GLOB;}
+	"&"		{yybegin(YYINITIAL);return SIGIL_CODE;}
+}
+
+<LEX_INTERPOLATED_STRING_CONTENT,LEX_STRING_CONTENT,LEX_STRING_LIST>
+{
+	{QUALIFIED_IDENTIFIER}	{return STRING_IDENTIFIER;}
+	{ANY_SPACE}				{return STRING_WHITESPACE;}
+	[^]						{return STRING_CONTENT;}
+}
 
 <LEX_POD> {
 	{POD_END}	{yybegin(YYINITIAL);return POD;}

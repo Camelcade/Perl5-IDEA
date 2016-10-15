@@ -33,7 +33,7 @@ public class PodHighlightingLexer extends LayeredLexer
 		super(new PodLexerAdapter(project));
 
 		registerSelfStoppingLayer(
-				new PerlLexerAdapter(project),
+				new PerlLexerAdapter(),
 				new IElementType[]{PodElementTypes.POD_CODE},
 				IElementType.EMPTY_ARRAY
 		);

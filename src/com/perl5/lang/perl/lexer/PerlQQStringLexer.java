@@ -42,7 +42,7 @@ public class PerlQQStringLexer extends PerlStringLexer
 		}
 		else if (
 				getTokenEnd() == getBufferEnd() - 1
-						&& getBuffer().charAt(getBufferEnd() - 1) == RegexBlock.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
+						&& getBuffer().charAt(getBufferEnd() - 1) == PerlLexer.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
 				)
 		{
 			setTokenStart(getTokenEnd());
@@ -53,7 +53,7 @@ public class PerlQQStringLexer extends PerlStringLexer
 		IElementType result = super.perlAdvance();
 
 		if (getTokenEnd() == getBufferEnd() && getTokenStart() < getBufferEnd() - 1
-				&& getBuffer().charAt(getBufferEnd() - 1) == RegexBlock.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
+				&& getBuffer().charAt(getBufferEnd() - 1) == PerlLexer.getQuoteCloseChar(getBuffer().charAt(getBufferStart()))
 				)
 		{
 			setTokenEnd(getTokenEnd() - 1);

@@ -83,7 +83,7 @@ public class PerlStringLexer extends PerlStringLexerGenerated
 	{
 		if (PERL_LEXER == null)
 		{
-			PERL_LEXER = new PerlLexer(myProject);
+			PERL_LEXER = new PerlLexer();
 		}
 		return PERL_LEXER;
 	}

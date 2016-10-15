@@ -48,7 +48,7 @@ public class Mason2ParserDefinition extends PerlParserDefinition implements Maso
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PerlLexerAdapter(project);
+		return new PerlLexerAdapter();
 	}
 
 	@Override

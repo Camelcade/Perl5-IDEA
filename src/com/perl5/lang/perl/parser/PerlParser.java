@@ -128,7 +128,6 @@ public interface PerlParser extends PerlElementTypes
 			REGEX_QUOTE_CLOSE,
 
 			REGEX_QUOTE_OPEN,
-			REGEX_QUOTE_OPEN_X,
 			QUOTE_DOUBLE_OPEN,
 			QUOTE_SINGLE_OPEN,
 			QUOTE_TICK_OPEN,

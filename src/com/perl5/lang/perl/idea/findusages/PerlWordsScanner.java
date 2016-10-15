@@ -29,7 +29,7 @@ public class PerlWordsScanner extends DefaultWordsScanner implements PerlElement
 {
 	public PerlWordsScanner()
 	{
-		super(new PerlLexerAdapter(null),
+		super(new PerlLexerAdapter(),
 				PerlParserDefinition.IDENTIFIERS,
 				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
 				PerlParserDefinition.LITERALS

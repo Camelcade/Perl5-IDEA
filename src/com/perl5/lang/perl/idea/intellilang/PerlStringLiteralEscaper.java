@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.intellilang;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.RegexBlock;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,6 +32,7 @@ import java.util.Map;
 public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin>
 {
 	private Map<Integer, Integer> offsetsMap;
+
 	public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host)
 	{
 		super(host);
@@ -42,7 +43,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplM
 	{
 		PsiElement openQuoteElement = myHost.getOpeningQuote();
 		char openQuote = openQuoteElement.getText().charAt(0);
-		char closeQuote = RegexBlock.getQuoteCloseChar(openQuote);
+		char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
 		offsetsMap = new HashMap<Integer, Integer>();
 		CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
 		Integer sourceOffset = 0;

@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.manipulators;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.RegexBlock;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 	public PerlStringImplMixin handleContentChange(@NotNull PerlStringImplMixin element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
 		PsiElement openingQuote = element.getOpeningQuote();
-		char closeQuote = RegexBlock.getQuoteCloseChar(openingQuote.getText().charAt(0));
+		char closeQuote = PerlLexer.getQuoteCloseChar(openingQuote.getText().charAt(0));
 		return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
 	}
 

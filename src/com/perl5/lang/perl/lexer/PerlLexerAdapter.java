@@ -21,12 +21,11 @@ package com.perl5.lang.perl.lexer;
  */
 
 import com.intellij.lexer.FlexAdapter;
-import com.intellij.openapi.project.Project;
 
 public class PerlLexerAdapter extends FlexAdapter
 {
-	public PerlLexerAdapter(Project project)
+	public PerlLexerAdapter()
 	{
-		super(new PerlLexer(project));
+		super(new PerlLexer());
 	}
 }

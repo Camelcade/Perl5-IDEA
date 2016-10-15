@@ -233,16 +233,25 @@ limitations under the License.
     // single mid-quote. e evaluatable s///e;
     REGEX_QUOTE='REGEX_QUOTE'
     REGEX_QUOTE_E='REGEX_QUOTE_E'
+    REGEX_TOKEN='REGEX_TOKEN'
 
     // paired mid-quote. e for evaluatable s{}{}e;
     REGEX_QUOTE_OPEN='REGEX_QUOTE_OPEN'
-    REGEX_QUOTE_OPEN_X='REGEX_QUOTE_OPEN_X' // extended regex, spaces and newlines must be escaped
     REGEX_QUOTE_OPEN_E='REGEX_QUOTE_OPEN_E' // block should be interpolated as a perl script
 
     REGEX_QUOTE_CLOSE='REGEX_QUOTE_CLOSE'
 
     REGEX_MODIFIER='REGEX_MODIFIER'
     REGEX_TOKEN='REGEX_TOKEN'
+
+	LP_STRING_Q="LAZY_PARSABLE_Q_STRING"
+	LP_STRING_QQ="LAZY_PARSABLE_DQ_STRING"
+	LP_STRING_QW="LAZY_PARSABLE_QW_STRING"
+
+	LP_REGEX="LAZY_PARSABLE_REGEX"
+	LP_REGEX_X="LAZY_PARSABLE_EXTENDED_REGEX"
+
+	LP_CODE="LAZY_PARSABLE_CODE"
 
     STRING_CONTENT='STRING_CONTENT'
     STRING_IDENTIFIER='STRING_IDENTIFIER'
@@ -825,20 +834,18 @@ private match_regex_body ::= regex_match REGEX_QUOTE_CLOSE [perl_regex_modifiers
 replacement_regex ::=
      's'
     regex_match
-    replacement_replace
+    regex_replace
     REGEX_QUOTE_CLOSE
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::=
-  REGEX_QUOTE_OPEN [perl_regex]
-  | REGEX_QUOTE_OPEN_X [perl_regex_ex]
-private replacement_replace ::= replacement_replace_regex | replacement_replace_code
+private regex_match ::= REGEX_QUOTE_OPEN [LP_REGEX|LP_REGEX_X|perl_regex]
+private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private replacement_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [perl_regex]
-private replacement_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
+private regex_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [LP_REGEX|perl_regex]
+private regex_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
 
-private regex_code ::= file_item+ {recoverWhile=recover_regex_code}
+private regex_code ::= LP_CODE | file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
@@ -985,13 +992,13 @@ string_dq ::=
   [ 'qq'] string_dq_parsed
   | <<parseNetstedInterpolatedString 'QUOTE_DOUBLE '>>
 
-private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [<<parseInterpolatedStringContent>>] QUOTE_DOUBLE_CLOSE {pin=1}
+private string_dq_parsed ::= QUOTE_DOUBLE_OPEN [LP_STRING_QQ | <<parseInterpolatedStringContent>>] QUOTE_DOUBLE_CLOSE {pin=1}
 
 string_xq ::=
   [ 'qx'] string_xq_parsed
   | <<parseNetstedInterpolatedString 'QUOTE_TICK '>>
 
-private string_xq_parsed ::= QUOTE_TICK_OPEN [<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
+private string_xq_parsed ::= QUOTE_TICK_OPEN [LP_STRING_QQ |<<parseInterpolatedStringContent>>] QUOTE_TICK_CLOSE {pin=1}
 
 string_bare ::= <<parseAndWrapStringContent>>+
 
@@ -999,7 +1006,7 @@ string_sq ::=
   [ 'q'] <<parseSQString>>
   | <<parseNestedSQString>> // nested sq string
 
-private string_sq_parsed ::= QUOTE_SINGLE_OPEN <<parseAndWrapStringContent>>* QUOTE_SINGLE_CLOSE {pin=1}
+private string_sq_parsed ::= QUOTE_SINGLE_OPEN [LP_STRING_Q |LP_STRING_QW |<<parseAndWrapStringContent>>*] QUOTE_SINGLE_CLOSE {pin=1}
 private string_content_qq ::= string_content_element +
 private string_content_element ::= <<parseInterpolatedConstructs>>  | <<convertToStringContent>>
 

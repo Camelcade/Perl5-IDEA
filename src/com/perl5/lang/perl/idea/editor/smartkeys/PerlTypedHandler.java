@@ -28,7 +28,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.RegexBlock;
+import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import gnu.trove.THashSet;
@@ -192,6 +192,6 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 			return 0;
 		}
 
-		return RegexBlock.getQuoteCloseChar(openingChar);
+		return PerlLexer.getQuoteCloseChar(openingChar);
 	}
 }

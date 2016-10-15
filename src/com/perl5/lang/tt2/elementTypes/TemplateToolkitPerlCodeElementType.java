@@ -49,7 +49,7 @@ public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementTyp
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlLexerAdapter(project),
+				new PerlLexerAdapter(),
 				PerlLanguage.INSTANCE,
 				chameleon.getText()
 		);
