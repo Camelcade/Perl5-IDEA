@@ -30,7 +30,6 @@ import com.perl5.lang.perl.lexer.PerlLexerUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,20 +41,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
 			PACKAGE_PRAGMA_CONSTANT,
 			PACKAGE_PRAGMA_VARS
-	);
-	public static final TokenSet PRINT_HANDLE_NEGATE_SUFFIX = TokenSet.orSet(
-			TokenSet.create(
-					LEFT_BRACE,
-					LEFT_BRACKET,
-//					LEFT_PAREN,		// can be print STDERR ($a);
-					OPERATOR_LT_NUMERIC
-			),
-			TokenSet.andNot(
-					PerlLexer.OPERATORS_TOKENSET,
-					TokenSet.create(
-							OPERATOR_NOT    // can be print STDERR !$value;
-					)
-			)
 	);
 	public static final TokenSet VERSION_TOKENS = TokenSet.create(
 			NUMBER,
@@ -247,46 +232,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	/**
-	 * parser for print/say/printf filehandle
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parsePrintHandle(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		assert b instanceof PerlBuilder;
-
-		if (
-				CONVERTABLE_TOKENS.contains(currentTokenType)                // it's identifier
-						&& !printHandleNegation(b, l)        // no negation tokens,
-						&& !PerlSubUtil.BUILT_IN.contains(b.getTokenText())         // it's not built in. crude, probably we should check any known sub
-				)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(HANDLE);
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Checks if next tokens negates filehandle in print statements
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return check result
-	 */
-	public static boolean printHandleNegation(PsiBuilder b, int l)
-	{
-		return
-				PRINT_HANDLE_NEGATE_SUFFIX.contains(b.lookAhead(1))
-						|| b.rawLookup(1) == LEFT_PAREN;
-	}
 
 	/**
 	 * Parsing label declaration LABEL:
@@ -859,34 +804,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Collapses -bareword to a string if stringify is forced
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseMinusBareword(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		if (((PerlBuilder) b).isStringify()
-				&& (b.getTokenType() == OPERATOR_MINUS || b.getTokenType() == OPERATOR_MINUS_MINUS)
-				&& b.lookAhead(1) == IDENTIFIER
-				)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			if (!PerlSubUtil.isBuiltIn(b.getTokenText()))
-			{
-				b.advanceLexer();
-				m.collapse(STRING_CONTENT);
-				return true;
-			}
-			m.drop();
-		}
-		return false;
-	}
-
-	/**
 	 * Parsing use vars parameters by forsing re-parsing SQ strings as DQ
 	 *
 	 * @param b PerlBuilder
@@ -1277,21 +1194,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 
-	}
-
-	public static boolean parsePrintArguments(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-		if (PerlParserImpl.print_arguments_content(b, l))
-		{
-			m.done(CALL_ARGUMENTS);
-			return true;
-		}
-		else
-		{
-			m.rollbackTo();
-			return false;
-		}
 	}
 
 	/**

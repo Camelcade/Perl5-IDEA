@@ -1358,18 +1358,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("PREFIX_MINUS_AS_STRING_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlPrefixMinusAsStringExprImpl(node);
-				}
-			};
-		}
 
 		if (name.equals("PREFIX_UNARY_EXPR"))
 		{
@@ -1419,32 +1407,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlPrintExprImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("PRINT_HANDLE"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlPrintHandleImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("READ_HANDLE"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlReadHandleImpl(node);
 				}
 			};
 		}

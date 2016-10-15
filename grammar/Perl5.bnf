@@ -764,7 +764,7 @@ private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
-private op_3_expr ::= pref_pp_expr | prefix_minus_as_string_expr | pref_mm_expr | suff_pp_expr
+private op_3_expr ::= pref_pp_expr | pref_mm_expr | suff_pp_expr
 pref_pp_expr ::= '++' expr
 pref_mm_expr ::= '--' expr
 
@@ -772,10 +772,9 @@ suff_pp_expr ::= expr ('++'|'--')
 
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
-private op_5_expr ::= ref_expr | prefix_minus_as_string_expr | prefix_unary_expr
+private op_5_expr ::= ref_expr | prefix_unary_expr
 ref_expr ::= '\\' referencable_expr { rightAssociative=true }
 prefix_unary_expr ::= {'~' | '!' | 'u+' | 'u-'} expr { rightAssociative=true }
-prefix_minus_as_string_expr ::= <<parseMinusBareword>>	// fixme investigate
 regex_expr ::= expr ('=~'|'!~') expr
 mul_expr ::= expr ({'*'|'/'|'%'|'x'} expr)+
 add_expr ::= expr ({'+'|'-'|'.'} expr)+
@@ -804,9 +803,7 @@ lp_and_expr ::= expr ('and' expr)+
 lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 
 print_expr ::=  ('print'|'printf'|'say') ( '(' [print_arguments] ')' | [print_arguments] ) {pin=1}
-private print_arguments ::= <<parsePrintArguments>>
-private print_arguments_content ::= print_handle expr | expr
-print_handle ::=  <<parsePrintHandle>> | perl_handle
+private print_arguments ::= perl_handle expr | expr
 
 sub_expr ::=  'sub' sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
 
@@ -822,8 +819,7 @@ private parse_call_arguments ::=
     | block [[comma] list_expr]
     | list_expr
 
-file_read_expr ::= LEFT_ANGLE HANDLE RIGHT_ANGLE
-read_handle ::= HANDLE
+file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
 
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
@@ -977,7 +973,7 @@ code_cast_expr ::= SIGIL_CODE cast_target
 
 label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
 private perl_version ::= <<parsePerlVersion>>
-private perl_handle ::=  block | scalar_variable !('{'|'['|<<isOperatorToken>>)
+private perl_handle ::=  perl_handle_expr | block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
