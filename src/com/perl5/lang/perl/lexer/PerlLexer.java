@@ -19,7 +19,6 @@
 package com.perl5.lang.perl.lexer;
 
 
-import com.intellij.lexer.FlexLexer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -29,7 +28,10 @@ import com.perl5.lang.perl.parser.PerlParserUtil;
 import gnu.trove.THashMap;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,90 +50,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 	public static final String TR_MODIFIERS = "cdsr";
-	public static final TokenSet ALLOWED_WHILE_WAITING_SUB_ATTRIBUTE = TokenSet.create(
-			TokenType.NEW_LINE_INDENT
-			, TokenType.WHITE_SPACE
-			, COMMENT_BLOCK
-			, COMMENT_LINE
-			, POD
-
-			// for prototype/signature
-			, LEFT_PAREN
-			, RIGHT_PAREN
-
-			// var name in signature
-			, IDENTIFIER
-
-			// namespace allowed in sub name
-			, PACKAGE_PRAGMA_CONSTANT
-			, PACKAGE_PRAGMA_VARS
-
-			// comma separated vars and colon starts attribute
-			, COLON
-			, COMMA
-			, FAT_COMMA
-
-			// prototype sybmols
-			, SIGIL_SCALAR
-			, SIGIL_ARRAY
-			, SIGIL_HASH
-			, OPERATOR_MOD
-			, OPERATOR_MUL
-			, OPERATOR_BITWISE_AND
-			, LEFT_BRACKET
-			, RIGHT_BRACKET
-			, OPERATOR_REFERENCE
-			, OPERATOR_PLUS
-			, SEMICOLON
-	);
-	// tokens allowed to be between my/our/state and attributes :
-	public static final TokenSet ALLOWED_WHILE_WAITING_VAR_ATTRIBUTE = TokenSet.create(
-			TokenType.NEW_LINE_INDENT
-			, TokenType.WHITE_SPACE
-			, COMMENT_BLOCK
-			, COMMENT_LINE
-			, POD
-
-			// for list declaration
-			, LEFT_PAREN
-			, RIGHT_PAREN
-
-			// var name
-			, IDENTIFIER
-
-			// namespace allowed in our
-			, PACKAGE_PRAGMA_CONSTANT
-			, PACKAGE_PRAGMA_VARS
-
-			// comma separated vars and colon starts attribute
-			, COLON
-			, COMMA
-			, FAT_COMMA
-
-			// variables sigils
-			, SIGIL_SCALAR
-			, SIGIL_ARRAY
-			, SIGIL_HASH
-			, OPERATOR_MOD
-
-			// variable name may be braced fixme this wont' work for now, see #504
-//			, LEFT_BRACE
-//			, RIGHT_BRACE
-	);
-	// tokens allowed to be in attribute
-	public static final TokenSet ALLOWED_IN_ATTRIBUTE = TokenSet.create(
-			TokenType.NEW_LINE_INDENT
-			, TokenType.WHITE_SPACE
-			, COMMENT_BLOCK
-			, COMMENT_LINE
-			, POD
-
-			, IDENTIFIER
-			, QUOTE_SINGLE_OPEN
-			, QUOTE_SINGLE_CLOSE
-			, COLON
-			, STRING_CONTENT
-	);
 	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
@@ -141,24 +59,6 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_BITWISE_AND,    // code sigil
 			OPERATOR_MOD,    // hash sigil
 			OPERATOR_MUL    // glob sigil
-	);
-	// we should not check bareword for reserved tokens if following was before
-	public static final TokenSet PRE_PACKAGE_TOKENS = TokenSet.create(
-			RESERVED_USE,
-			RESERVED_NO,
-			RESERVED_PACKAGE,
-			RESERVED_MY,
-			RESERVED_OUR,
-			RESERVED_STATE,
-			RESERVED_LOCAL
-	);
-	// prefixes, disables identifier interpretation attempt
-	public static final TokenSet IDENTIFIER_NEGATION_PREFIX = TokenSet.orSet(
-			PRE_PACKAGE_TOKENS,
-			TokenSet.create(
-					RESERVED_SUB,            // sub eval
-					OPERATOR_DEREFERENCE    // ->identifier
-			)
 	);
 	// operators tokens (except commas)
 	public static final TokenSet OPERATORS_TOKENSET = TokenSet.create(
@@ -249,8 +149,8 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_NE_NUMERIC,
 			OPERATOR_SMARTMATCH
 	);
-	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new HashMap<String, IElementType>();
-	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new HashMap<String, IElementType>();
+	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
+	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
 	public static final TokenSet QUOTE_LIKE_STRING_OPENER_TOKENSET = TokenSet.create(
 			RESERVED_QW,
 			RESERVED_Q,
@@ -308,7 +208,7 @@ public class PerlLexer extends PerlLexerGenerated
 	 */
 
 	// last captured heredoc marker
-	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<PerlHeredocQueueElement>();
+	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
 	/**
 	 * Quote-like, transliteration and regexps common part
 	 */
@@ -351,31 +251,6 @@ public class PerlLexer extends PerlLexerGenerated
 		);
 	}
 
-	/**
-	 * Lex current token with specific lexer
-	 *
-	 * @param tokenLexer lexer to use
-	 * @return list of custom tokens
-	 */
-	public static List<CustomToken> processLexer(FlexLexer tokenLexer)
-	{
-		ArrayList<CustomToken> result = new ArrayList<CustomToken>();
-
-		try
-		{
-			IElementType tokenType;
-			while ((tokenType = tokenLexer.advance()) != null)
-			{
-				result.add(new CustomToken(tokenLexer.getTokenStart(), tokenLexer.getTokenEnd(), tokenType));
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
 
 	/**
 	 * Choosing closing character by opening one
@@ -407,11 +282,6 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 	}
 
-	public List<CustomToken> lexCurrentToken(FlexLexer tokenLexer)
-	{
-		tokenLexer.reset(getBuffer(), getTokenStart(), getTokenEnd(), 0);
-		return processLexer(tokenLexer);
-	}
 
 	@Override
 	public int yystate()
@@ -423,7 +293,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 * Lexers perlAdvance method. Parses some thing here, or just invoking generated flex parser
 	 *
 	 * @return next token type
-	 * @throws IOException
 	 */
 	public IElementType perlAdvance() throws IOException
 	{
@@ -563,6 +432,7 @@ public class PerlLexer extends PerlLexerGenerated
 				break;
 			}
 
+			//noinspection Duplicates
 			if (!isEscaped && quotesDiffer)
 			{
 				if (currentChar == openQuote)
@@ -999,6 +869,7 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 				break;
 			}
+			//noinspection Duplicates
 			if (isQuoteDiffers && !isEscaped)
 			{
 				if (currentChar == openQuote)
@@ -1355,7 +1226,6 @@ public class PerlLexer extends PerlLexerGenerated
 		String tokenText = yytext().toString();
 		IElementType tokenType;
 		PerlTokenHistory tokenHistory = getTokenHistory();
-		IElementType lastSignificantTokenType = tokenHistory.getLastSignificantTokenType();
 
 		boolean isSigilBehind = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
 
@@ -1371,49 +1241,6 @@ public class PerlLexer extends PerlLexerGenerated
 
 		return IDENTIFIER;
 	}
-
-	// checks if ahead is comma, semi, close brace
-	private boolean isListElementEndAhead()
-	{
-		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
-		if (nextPosition > -1)
-		{
-			CharSequence buffer = getBuffer();
-			char nextChar = buffer.charAt(nextPosition);
-			if (
-					nextChar == ','
-							|| nextChar == ';'
-							|| nextChar == ')'
-							|| nextChar == '='
-							&& nextPosition + 1 < getBufferEnd()
-							&& buffer.charAt(nextPosition + 1) == '>'
-					)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// checks if ahead is =>
-	private boolean isCommaArrowAhead()
-	{
-		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
-		if (nextPosition > -1)
-		{
-			CharSequence buffer = getBuffer();
-			if (
-					buffer.charAt(nextPosition) == '='
-							&& nextPosition + 1 < getBufferEnd()
-							&& buffer.charAt(nextPosition + 1) == '>'
-					)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
 
 	@Override
 	public void resetInternals()
