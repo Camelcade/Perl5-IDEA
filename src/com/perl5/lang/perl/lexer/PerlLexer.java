@@ -49,7 +49,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 	public static final String TR_MODIFIERS = "cdsr";
-	// http://perldoc.perl.org/perldata.html#Identifier-parsing
 	// pre-variable name tokens
 	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
 			SIGIL_ARRAY,
@@ -1039,17 +1038,18 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				if (secondBlockOpeningToken != null)
 				{
-					if (secondBlockOpeningToken.getTokenType() == REGEX_QUOTE_OPEN)
+					IElementType secondBlockOpeningTokenType = secondBlockOpeningToken.getTokenType();
+					if (secondBlockOpeningTokenType == REGEX_QUOTE_OPEN || secondBlockOpeningTokenType == REGEX_QUOTE_OPEN_E)
 					{
 						secondBlockOpeningToken.setTokenType(REGEX_QUOTE_OPEN_E);
 					}
-					else if (secondBlockOpeningToken.getTokenType() == REGEX_QUOTE)
+					else if (secondBlockOpeningTokenType == REGEX_QUOTE || secondBlockOpeningTokenType == REGEX_QUOTE_E)
 					{
 						secondBlockOpeningToken.setTokenType(REGEX_QUOTE_E);
 					}
 					else
 					{
-						throw new RuntimeException("Bug");
+						throw new RuntimeException("Bug, got: " + secondBlockOpeningTokenType);
 					}
 				}
 				if (secondBlockToken != null)

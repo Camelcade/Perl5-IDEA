@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 %%
 
 // http://perldoc.perl.org/perlop.html#Gory-details-of-parsing-quoted-constructs
+// http://perldoc.perl.org/perldata.html#Identifier-parsing
 
 %class PerlLexerGenerated
 %extends PerlBaseLexer
@@ -134,7 +135,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW
 %state LEX_TRANS_OPENER, LEX_REGEX_OPENER
 
-%state LEX_PACKAGE, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
+%state LEX_PACKAGE, LEX_PACKAGE_USE, LEX_PACKAGE_USE_VERSION, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
 
 %xstate LEX_STRING_CONTENT, LEX_STRING_CONTENT_QQ, LEX_STRING_CONTENT_XQ, LEX_STRING_LIST
 %xstate LEX_MATCH_REGEX, LEX_EXTENDED_MATCH_REGEX, LEX_REPLACEMENT_REGEX
@@ -261,8 +262,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 ^{POD_START} 	{yybegin(LEX_POD);return POD;}
 {NEW_LINE}   	{return TokenType.NEW_LINE_INDENT;}
 {WHITE_SPACE}+  {return TokenType.WHITE_SPACE;}
-{END_BLOCK}		{yybegin(LEX_END_BLOCK);return TAG_END;}
-{DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return TAG_DATA;}
+{END_BLOCK}		{yybegin(LEX_END_BLOCK);return COMMENT_BLOCK;}
+{DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return COMMENT_BLOCK;}
 
 <LEX_PRINT>{
 	"$" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
@@ -316,12 +317,24 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"vars"			{yybegin(YYINITIAL);return PACKAGE_PRAGMA_VARS;}
 }
 
-<LEX_PACKAGE,LEX_PACKAGE_REQUIRE>{
+<LEX_PACKAGE_USE>{
+	"constant"						{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_CONSTANT;}
+	"vars"							{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_VARS;}
+	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_PACKAGE_USE_VERSION);return IDENTIFIER;}
+}
+
+<LEX_PACKAGE,LEX_PACKAGE_USE_VERSION,LEX_PACKAGE_REQUIRE>{
+	{PERL_VERSION}					{yybegin(YYINITIAL);return NUMBER_VERSION;}
+	[^]								{yypushback(1);yybegin(YYINITIAL);}
+}
+
+<LEX_PACKAGE>{
 	{QUALIFIED_IDENTIFIER}			{yybegin(YYINITIAL);return IDENTIFIER;}
 }
 
 <LEX_PACKAGE_REQUIRE>{
 	{QUALIFIED_IDENTIFIER} / "("	{yybegin(LEX_AFTER_IDENTIFIER);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_OPERATOR);return IDENTIFIER;}
 }
 
 <LEX_AFTER_DEREFERENCE>{
@@ -374,11 +387,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	";"     {yybegin(YYINITIAL);return SEMICOLON;}
 }
 
+<YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
+	"++" 	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
+	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
+}
+<LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_VARIABLE_NAME>{
+	"++" 	{yybegin(LEX_OPERATOR);return OPERATOR_PLUS_PLUS;}
+	"--" 	{yybegin(LEX_OPERATOR);return OPERATOR_MINUS_MINUS;}
+}
+
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_PRINT>{
 	{FARROW} 	{yybegin(YYINITIAL);return FAT_COMMA;}
 	"," 	{yybegin(YYINITIAL);return COMMA;}
-	"++" 	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
-	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
 	"}"     {yybegin(LEX_AFTER_RIGHT_BRACE);return RIGHT_BRACE;}
 	"]"     {yybegin(LEX_OPERATOR);return RIGHT_BRACKET;}
 	")"     {yybegin(LEX_OPERATOR);return RIGHT_PAREN;}
@@ -545,8 +565,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"sub"	 		{yybegin(LEX_SUB);return  RESERVED_SUB;}
 
 	{CORE_PREFIX}"package"	 	{yybegin(LEX_PACKAGE); return  RESERVED_PACKAGE;}
-	{CORE_PREFIX}"use"	 		{yybegin(LEX_PACKAGE); return  RESERVED_USE;}
-	{CORE_PREFIX}"no"	 		{yybegin(LEX_PACKAGE); return  RESERVED_NO;}
+	{CORE_PREFIX}"use"	 		{yybegin(LEX_PACKAGE_USE); return  RESERVED_USE;}
+	{CORE_PREFIX}"no"	 		{yybegin(LEX_PACKAGE_USE); return  RESERVED_NO;}
 	{CORE_PREFIX}"require"	 	{yybegin(LEX_PACKAGE_REQUIRE); return  RESERVED_REQUIRE;}
 
 	{CORE_PREFIX}"undef"		{yybegin(LEX_AFTER_IDENTIFIER);return RESERVED_UNDEF;}
@@ -556,6 +576,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	"method"					{yybegin(YYINITIAL);return RESERVED_METHOD;}
 	"func"						{yybegin(YYINITIAL);return RESERVED_FUNC;}
+
+	// fixme we should check if try/catch is enabled in settings
+	"try"						{yybegin(YYINITIAL);return RESERVED_TRY;}
+	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
 
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(LEX_PRINT); return RESERVED_PRINT;}
