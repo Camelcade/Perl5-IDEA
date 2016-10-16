@@ -156,6 +156,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 				if (myTokenType != null)
 				{
+					myState = PerlLexer.LEX_PREPARSED_ITEMS;
 					return;
 				}
 
