@@ -48,7 +48,7 @@ public class PerlLazyCodeBlockElementType extends ILazyParseableElementType impl
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlSublexingLexerAdapter(false, false),
+				new PerlSublexingLexerAdapter(parentElement.getProject(), false, false),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlLazyBlockParser();

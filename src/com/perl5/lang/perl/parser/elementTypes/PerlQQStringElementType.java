@@ -38,7 +38,7 @@ public class PerlQQStringElementType extends PerlParsableStringElementType imple
 	@Override
 	protected FlexAdapter getLexerAdapter(Project project)
 	{
-		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT_QQ);
+		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_QQ);
 	}
 
 	@NotNull

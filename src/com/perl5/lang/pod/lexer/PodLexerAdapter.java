@@ -17,13 +17,15 @@
 package com.perl5.lang.pod.lexer;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 21.04.2015.
  */
 public class PodLexerAdapter extends FlexAdapter
 {
-	public PodLexerAdapter()
+	public PodLexerAdapter(@Nullable Project project)
 	{
 		super(new PodLexer(null));
 	}

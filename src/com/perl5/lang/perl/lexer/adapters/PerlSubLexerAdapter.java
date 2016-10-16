@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 10.10.2015.
@@ -27,30 +29,30 @@ public class PerlSubLexerAdapter extends FlexAdapter
 {
 	private final int myPerlLexerState;
 
-	public PerlSubLexerAdapter(int perlLexerState)
+	public PerlSubLexerAdapter(@Nullable Project project, int perlLexerState)
 	{
-		super(new PerlLexer());
+		super(new PerlLexer(project));
 		myPerlLexerState = perlLexerState;
 	}
 
-	public static PerlSubLexerAdapter forCode()
+	public static PerlSubLexerAdapter forCode(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(PerlLexer.YYINITIAL);
+		return new PerlSubLexerAdapter(project, PerlLexer.YYINITIAL);
 	}
 
-	public static PerlSubLexerAdapter forStringSQ()
+	public static PerlSubLexerAdapter forStringSQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT);
+		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT);
 	}
 
-	public static PerlSubLexerAdapter forStringDQ()
+	public static PerlSubLexerAdapter forStringDQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT_QQ);
+		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_QQ);
 	}
 
-	public static PerlSubLexerAdapter forStringXQ()
+	public static PerlSubLexerAdapter forStringXQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT_XQ);
+		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_XQ);
 	}
 
 	@Override

@@ -577,9 +577,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"method"					{yybegin(YYINITIAL);return RESERVED_METHOD;}
 	"func"						{yybegin(YYINITIAL);return RESERVED_FUNC;}
 
-	// fixme we should check if try/catch is enabled in settings
 	"try"						{yybegin(YYINITIAL);return RESERVED_TRY;}
 	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
+	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
 
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(LEX_PRINT); return RESERVED_PRINT;}

@@ -17,35 +17,37 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.LayeredLexer;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.10.2016.
  */
 public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes
 {
-	public PerlHighlightingLexerAdapter()
+	public PerlHighlightingLexerAdapter(@NotNull Project project)
 	{
-		super(new PerlMergingLexerAdapter(false, true));
+		super(new PerlMergingLexerAdapter(project, false, true));
 		registerSelfStoppingLayer(
-				new PodLexerAdapter(),
+				new PodLexerAdapter(project),
 				new IElementType[]{POD},
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringSQ(),
+				PerlSubLexerAdapter.forStringSQ(project),
 				new IElementType[]{HEREDOC},
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringDQ(),
+				PerlSubLexerAdapter.forStringDQ(project),
 				new IElementType[]{HEREDOC_QQ},
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringXQ(),
+				PerlSubLexerAdapter.forStringXQ(project),
 				new IElementType[]{HEREDOC_QX},
 				IElementType.EMPTY_ARRAY
 		);

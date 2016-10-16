@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.MergingLexerAdapter;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 16.10.2016.
@@ -30,13 +32,13 @@ public class PerlMergingLexerAdapter extends MergingLexerAdapter implements Perl
 			POD, STRING_CONTENT, REGEX_TOKEN
 	);
 
-	public PerlMergingLexerAdapter()
+	public PerlMergingLexerAdapter(@Nullable Project project)
 	{
-		this(true, false);
+		this(project, true, false);
 	}
 
-	public PerlMergingLexerAdapter(boolean allowToMergeCodeBlocks, boolean forceSublexing)
+	public PerlMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing)
 	{
-		super(new PerlSublexingLexerAdapter(allowToMergeCodeBlocks, forceSublexing), TOKENS_TO_MERGE);
+		super(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing), TOKENS_TO_MERGE);
 	}
 }

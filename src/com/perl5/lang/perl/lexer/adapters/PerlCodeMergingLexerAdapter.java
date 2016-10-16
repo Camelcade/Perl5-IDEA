@@ -20,11 +20,13 @@ import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -49,10 +51,10 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 
 	private boolean myAllowToMergeCodeBlocks;
 
-	public PerlCodeMergingLexerAdapter(boolean allowToMergeCodeBlocks)
+	public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks)
 	{
 		myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
-		myFlex = new PerlLexer();
+		myFlex = new PerlLexer(project);
 	}
 
 	public FlexLexer getFlex()

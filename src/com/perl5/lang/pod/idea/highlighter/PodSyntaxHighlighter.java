@@ -20,11 +20,13 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -36,13 +38,10 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes
 {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
-
 	public static final TextAttributesKey POD_TAG = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
 	public static final TextAttributesKey POD_TEXT = createTextAttributesKey("POD_TEXT", DefaultLanguageHighlighterColors.DOC_COMMENT);
 	public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
-
 	public static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<IElementType, TextAttributesKey[]>();
-
 	private static final TokenSet POD_TOKENS = TokenSet.create(
 			POD_POD,
 
@@ -74,6 +73,14 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 		attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
 	}
 
+	@Nullable
+	private final Project myProject;
+
+	public PodSyntaxHighlighter(@Nullable Project project)
+	{
+		myProject = project;
+	}
+
 	public static TextAttributesKey[] getTokenAttributes(IElementType tokenType)
 	{
 		if (POD_TOKENS.contains(tokenType))
@@ -92,7 +99,7 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PodLexerAdapter();
+		return new PodLexerAdapter(myProject);
 	}
 
 	@NotNull

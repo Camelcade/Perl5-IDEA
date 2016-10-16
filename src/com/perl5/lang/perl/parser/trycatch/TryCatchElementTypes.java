@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.parser.trycatch.psi.impl.TryCatchCompoundStatementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationLexicalImpl;
 import org.jetbrains.annotations.NotNull;
@@ -30,9 +29,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface TryCatchElementTypes
 {
-	IElementType RESERVED_TRY = new PerlTokenType("try");
-	IElementType RESERVED_CATCH = new PerlTokenType("try");
-
 	IElementType TRY_COMPOUND = new PerlElementTypeEx("TRY_COMPOUND")
 	{
 		@NotNull

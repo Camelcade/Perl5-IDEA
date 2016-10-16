@@ -2104,6 +2104,58 @@ public class PerlElementTypeFactory
 			};
 		}
 
+		if (name.equals("TRYCATCH_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlTrycatchExprImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("TRY_BRANCH"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlTryBranchImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("CATCH_BRANCH"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlCatchBranchImpl(node);
+				}
+			};
+		}
+		if (name.equals("FINALLY_BRANCH"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlFinallyBranchImpl(node);
+				}
+			};
+		}
+
+
 		return new PerlElementType(name);
 	}
 }

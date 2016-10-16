@@ -252,7 +252,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new PerlHighlightingLexerAdapter();
+		return new PerlHighlightingLexerAdapter(myProject);
 	}
 
 	@NotNull

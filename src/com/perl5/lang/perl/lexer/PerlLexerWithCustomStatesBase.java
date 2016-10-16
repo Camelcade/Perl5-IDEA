@@ -27,7 +27,7 @@ public abstract class PerlLexerWithCustomStatesBase extends PerlLexer implements
 
 	public PerlLexerWithCustomStatesBase(Project project)
 	{
-		super();
+		super(project);
 	}
 
 	public int getCustomState()

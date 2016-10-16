@@ -24,12 +24,14 @@ package com.perl5.lang.perl.lexer.adapters;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Map;
@@ -53,25 +55,22 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 		SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
 	}
 
+	@Nullable
+	private final Project myProject;
 	private boolean myIsForcingSublexing;
 	private boolean myIsSublexing = false;
 	private PerlCodeMergingLexerAdapter myMainLexer;
 	private PerlSublexingLexerAdapter mySubLexer;
-
 	private int myTokenStart;
 	private int myTokenEnd;
 	private int myState;
 	private IElementType myTokenType;
 
-	public PerlSublexingLexerAdapter()
+	public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing)
 	{
-		this(true, false);
-	}
-
-	public PerlSublexingLexerAdapter(boolean allowToMergeCodeBlocks, boolean forceSublexing)
-	{
-		myMainLexer = new PerlCodeMergingLexerAdapter(allowToMergeCodeBlocks);
+		myMainLexer = new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks);
 		myIsForcingSublexing = forceSublexing;
+		myProject = project;
 	}
 
 	@Override
@@ -137,7 +136,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 	{
 		if (mySubLexer == null)
 		{
-			mySubLexer = new PerlSublexingLexerAdapter(false, true);
+			mySubLexer = new PerlSublexingLexerAdapter(myProject, false, true);
 		}
 		return mySubLexer;
 	}

@@ -19,13 +19,16 @@
 package com.perl5.lang.perl.lexer;
 
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import gnu.trove.THashMap;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -41,7 +44,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
 	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
 	public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
-
 	public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
 	// pattern for getting marker
 	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
@@ -207,16 +209,20 @@ public class PerlLexer extends PerlLexerGenerated
 	public boolean allowSharpQuote = true;
 	public boolean isEscaped = false;
 	public int sectionsNumber = 0;    // number of sections one or two
-
 	/**
 	 * Regex processor qr{} m{} s{}{}
 	 **/
 	protected IElementType regexCommand = null;
+	private boolean myTryCatchEnabled = false;
 	private boolean myFormatWaiting = false;
 
-	public PerlLexer()
+	public PerlLexer(@Nullable Project project)
 	{
 		super(null);
+		if (project != null)
+		{
+			myTryCatchEnabled = PerlSharedSettings.getInstance(project).PERL_TRY_CATCH_ENABLED;
+		}
 	}
 
 	public static void initReservedTokensMap()

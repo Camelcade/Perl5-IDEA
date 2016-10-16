@@ -49,7 +49,7 @@ public class PerlHeredocElementType extends ILazyParseableElementType implements
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				getLexerAdapter(),
+				getLexerAdapter(parentElement.getProject()),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlStringContentParser(this);
@@ -57,19 +57,19 @@ public class PerlHeredocElementType extends ILazyParseableElementType implements
 		return parser.parse(this, builder).getFirstChildNode();
 	}
 
-	protected FlexAdapter getLexerAdapter()
+	protected FlexAdapter getLexerAdapter(@NotNull Project project)
 	{
 		if (equals(PerlElementTypes.HEREDOC))
 		{
-			return PerlSubLexerAdapter.forStringSQ();
+			return PerlSubLexerAdapter.forStringSQ(project);
 		}
 		else if (equals(PerlElementTypes.HEREDOC_QQ))
 		{
-			return PerlSubLexerAdapter.forStringDQ();
+			return PerlSubLexerAdapter.forStringDQ(project);
 		}
 		else
 		{
-			return PerlSubLexerAdapter.forStringXQ();
+			return PerlSubLexerAdapter.forStringXQ(project);
 		}
 	}
 

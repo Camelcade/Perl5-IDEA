@@ -113,6 +113,10 @@ limitations under the License.
     RESERVED_QR='qr'
     RESERVED_M='m'
 
+	RESERVED_FINALLY = 'finally';
+	RESERVED_TRY = 'try';
+	RESERVED_CATCH = 'catch';
+
     RESERVED_MY='my'
     RESERVED_OUR='our'
     RESERVED_STATE='state'
@@ -501,6 +505,12 @@ private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
 private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
 unconditional_block ::= parse_block
 
+// implements Try::Tiny fallback
+trycatch_expr ::= try_branch (catch_branch|finally_branch)*
+try_branch ::= 'try' parse_block {pin=1}
+catch_branch ::= 'catch' parse_block {pin=1}
+finally_branch ::= 'finally' parse_block {pin=1}
+
 conditional_block ::= condition_statement parse_block {pin=1 name="Conditional block"}
 condition_statement ::= '(' condition_statement_expr ')' {pin=1 name="Condition"}
 
@@ -724,6 +734,7 @@ term_expr ::=
     | variable_declaration_local
     | sort_expr
     | grep_expr
+    | trycatch_expr
     | map_expr
 
     | <<parseGlobOrElement>>	// glob
