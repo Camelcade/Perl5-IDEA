@@ -18,10 +18,10 @@ package com.perl5.lang.perl.lexer.adapters;
 
 /**
  * Created by hurricup on 12.04.2015.
+ * Second level adapter, relexes lazy blocks if necessary
  */
 
 import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.TokenType;
@@ -34,9 +34,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Map;
 
-public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
+public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes
 {
 	private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
+	private static final int LAZY_BLOCK_MINIMAL_SIZE = 140;
 	private static Map<IElementType, Integer> SUBLEXINGS_MAP = new THashMap<>();
 
 	static
@@ -51,58 +52,41 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 		SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
 	}
 
-	private final FlexLexer myFlex;
-
-	private IElementType myTokenType;
-	private CharSequence myText;
+	private boolean myIsForcingSublexing;
+	private boolean myIsSublexing = false;
+	private PerlCodeMergingLexerAdapter myMainLexer;
+	private PerlSublexingLexerAdapter mySubLexer;
 
 	private int myTokenStart;
 	private int myTokenEnd;
-
-	private int myBufferStart;
-	private int myBufferEnd;
 	private int myState;
+	private IElementType myTokenType;
 
-	private boolean isMySubLexing = false;
-	private PerlLexer mySubLexer;
-
-	public PerlLexerAdapter()
+	public PerlSublexingLexerAdapter()
 	{
-		myFlex = new PerlLexer();
+		this(true, false);
 	}
 
-	public FlexLexer getFlex()
+	public PerlSublexingLexerAdapter(boolean allowToMergeCodeBlocks, boolean forceSublexing)
 	{
-		return myFlex;
+		myMainLexer = new PerlCodeMergingLexerAdapter(allowToMergeCodeBlocks);
+		myIsForcingSublexing = forceSublexing;
 	}
 
 	@Override
-	public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, final int initialState)
+	public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState)
 	{
-		assert initialState == PerlLexer.YYINITIAL : "Attempt to reset to non-initial state";
-		myText = buffer;
-		myTokenStart = myTokenEnd = myBufferStart = startOffset;
-		myBufferEnd = endOffset;
-		myFlex.reset(myText, startOffset, endOffset, initialState);
+		myMainLexer.start(buffer, startOffset, endOffset, initialState);
+		myTokenStart = myTokenEnd = startOffset;
 		myTokenType = null;
-		isMySubLexing = false;
+		myIsSublexing = false;
 	}
 
 	@Override
 	public int getState()
 	{
 		locateToken();
-		return isMySubLexing ? PerlLexer.LEX_PREPARSED_ITEMS : myState;
-	}
-
-	@NotNull
-	private PerlLexer getSubLexer()
-	{
-		if (mySubLexer == null)
-		{
-			mySubLexer = new PerlLexer();
-		}
-		return mySubLexer;
+		return myState;
 	}
 
 	@Override
@@ -137,13 +121,24 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 	@Override
 	public CharSequence getBufferSequence()
 	{
-		return myText;
+		return myMainLexer.getBufferSequence();
 	}
 
 	@Override
 	public int getBufferEnd()
 	{
-		return myBufferEnd;
+		return myMainLexer.getBufferEnd();
+	}
+
+
+	@NotNull
+	private PerlSublexingLexerAdapter getSubLexer()
+	{
+		if (mySubLexer == null)
+		{
+			mySubLexer = new PerlSublexingLexerAdapter(false, false);
+		}
+		return mySubLexer;
 	}
 
 	protected void locateToken()
@@ -155,9 +150,9 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 
 		try
 		{
-			if (isMySubLexing)
+			if (myIsSublexing)
 			{
-				lexToken(getSubLexer());
+				lexToken(mySubLexer);
 
 				if (myTokenType != null)
 				{
@@ -165,76 +160,39 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 				}
 
 				// sublexing finished
-				isMySubLexing = false;
+				myIsSublexing = false;
 			}
 
-			lexToken(myFlex);
+			lexToken(myMainLexer);
 
 			Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
-			// fixme add a thrashhold here for large LPE chunks
-			if (subLexingState == null)
+
+			if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myIsForcingSublexing))
 			{
-				mergeTokens();
 				return;
 			}
 
 			// need to sublex
-			PerlLexer subLexer = getSubLexer();
-			subLexer.reset(myText, myTokenStart, myTokenEnd, subLexingState);
-			isMySubLexing = true;
+			LexerBase subLexer = getSubLexer();
+			subLexer.start(getBufferSequence(), myTokenStart, myTokenEnd, subLexingState);
+			myIsSublexing = true;
 			myTokenType = null;
 			locateToken();
 		}
 		catch (Exception | Error e)
 		{
-			LOG.error(myFlex.getClass().getName(), e);
+			LOG.error(myMainLexer.getClass().getName(), e);
 			myTokenType = TokenType.WHITE_SPACE;
-			myTokenEnd = myBufferEnd;
+			myTokenEnd = getBufferEnd();
 		}
 	}
 
-	private void mergeTokens() throws IOException
+	private void lexToken(LexerBase lexer) throws IOException
 	{
-		if (myTokenType != LEFT_BRACE_CODE)
-		{
-			return;
-		}
-		if (myTokenStart == myBufferStart)    // block reparsing
-		{
-			myTokenType = LEFT_BRACE;
-		}
-
-		int bracesDepth = 0;
-		while (true)
-		{
-			IElementType nextTokenType = myFlex.advance();
-			if (nextTokenType == null)
-			{
-				break;
-			}
-			else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE)
-			{
-				bracesDepth++;
-			}
-			else if (nextTokenType == RIGHT_BRACE)
-			{
-				if (bracesDepth == 0)
-				{
-					break;
-				}
-				bracesDepth--;
-			}
-		}
-		myTokenEnd = myFlex.getTokenEnd();
-		myTokenType = LP_CODE_BLOCK;
-		myState = PerlLexer.YYINITIAL;
-	}
-
-	private void lexToken(FlexLexer lexer) throws IOException
-	{
-		myTokenStart = lexer.getTokenEnd();
-		myState = lexer.yystate();
-		myTokenType = lexer.advance();
+		myTokenType = lexer.getTokenType();
+		myTokenStart = lexer.getTokenStart();
+		myState = lexer.getState();
 		myTokenEnd = lexer.getTokenEnd();
+		lexer.advance();
 	}
 }

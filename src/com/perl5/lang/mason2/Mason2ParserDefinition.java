@@ -27,7 +27,7 @@ import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +48,7 @@ public class Mason2ParserDefinition extends PerlParserDefinition implements Maso
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PerlLexerAdapter();
+		return new PerlSublexingLexerAdapter();
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlLazyBlockParser;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
@@ -48,7 +48,7 @@ public class PerlLazyCodeBlockElementType extends ILazyParseableElementType impl
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlLexerAdapter(),
+				new PerlSublexingLexerAdapter(false, false),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlLazyBlockParser();

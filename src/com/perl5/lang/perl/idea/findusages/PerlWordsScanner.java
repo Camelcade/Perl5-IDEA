@@ -20,7 +20,7 @@ import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 
 /**
  * Created by hurricup on 06.01.2016.
@@ -29,7 +29,7 @@ public class PerlWordsScanner extends DefaultWordsScanner implements PerlElement
 {
 	public PerlWordsScanner()
 	{
-		super(new PerlLexerAdapter(),
+		super(new PerlSublexingLexerAdapter(),
 				PerlParserDefinition.IDENTIFIERS,
 				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
 				PerlParserDefinition.LITERALS

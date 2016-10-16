@@ -34,7 +34,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.adapters.PerlLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -74,7 +74,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new PerlLexerAdapter();
+		return new PerlSublexingLexerAdapter();
 	}
 
 	@NotNull

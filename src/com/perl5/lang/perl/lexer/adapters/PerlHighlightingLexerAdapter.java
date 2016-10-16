@@ -23,13 +23,12 @@ import com.perl5.lang.pod.lexer.PodLexerAdapter;
 
 /**
  * Created by hurricup on 15.10.2016.
- * fixme we need a lazy layered adapter
  */
 public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes
 {
 	public PerlHighlightingLexerAdapter()
 	{
-		super(new PerlLexerAdapter());
+		super(new PerlSublexingLexerAdapter(false, true));
 		registerSelfStoppingLayer(
 				new PodLexerAdapter(),
 				new IElementType[]{POD},
@@ -38,11 +37,6 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 		registerSelfStoppingLayer(
 				PerlSubLexerAdapter.forStringSQ(),
 				new IElementType[]{HEREDOC},
-				IElementType.EMPTY_ARRAY
-		);
-		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forCode(),
-				new IElementType[]{LP_CODE_BLOCK},
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
