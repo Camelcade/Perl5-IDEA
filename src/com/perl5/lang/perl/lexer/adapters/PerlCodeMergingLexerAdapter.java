@@ -31,6 +31,7 @@ import java.io.IOException;
 /**
  * Created by hurricup on 16.10.2016.
  * First level adapter, working above Flex lexer. Merges code blocks into LP_CODE_BLOCK tokens
+ * fixme would be better to use lookahead adapter here; currently small code blocks may be lexed twice
  */
 public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes
 {

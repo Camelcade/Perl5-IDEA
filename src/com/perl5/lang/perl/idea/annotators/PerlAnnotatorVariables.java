@@ -24,7 +24,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -61,63 +60,21 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (element instanceof PsiPerlScalarVariable || element instanceof PsiPerlArrayIndexVariable)
-		{
-			decorateElement(
-					element,
-					holder,
-					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN : PerlSyntaxHighlighter.PERL_SCALAR,
-					((PerlVariable) element).isDeprecated()
-			);
-		}
-		else if (element instanceof PsiPerlScalarCastExpr || element instanceof PsiPerlScalarIndexCastExpr)
+		if (element instanceof PsiPerlScalarCastExpr || element instanceof PsiPerlScalarIndexCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
 		}
-		else if (element instanceof PsiPerlHashVariable)
-		{
-			decorateElement(
-					element,
-					holder,
-					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_HASH_BUILTIN : PerlSyntaxHighlighter.PERL_HASH,
-					((PerlVariable) element).isDeprecated()
-			);
-		}
-		else if (element instanceof PsiPerlHashCastExpr)
+		if (element instanceof PsiPerlHashCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_HASH);
 		}
-		else if (element instanceof PsiPerlArrayVariable)
-		{
-			decorateElement(
-					element,
-					holder,
-					((PerlVariable) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN : PerlSyntaxHighlighter.PERL_ARRAY,
-					((PerlVariable) element).isDeprecated()
-			);
-		}
-		else if (element instanceof PsiPerlArrayCastExpr)
+		if (element instanceof PsiPerlArrayCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
 		}
-		else if (element instanceof PsiPerlGlobVariable)
-		{
-			decorateElement(
-					element,
-					holder,
-					((PerlVariableNameElementContainer) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_GLOB_BUILTIN : PerlSyntaxHighlighter.PERL_GLOB);
-		}
-		else if (element instanceof PsiPerlGlobCastExpr)
+		if (element instanceof PsiPerlGlobCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);
-		}
-		else if (element instanceof PsiPerlCodeVariable)
-		{
-			decorateElement(
-					element,
-					holder,
-					((PerlVariableNameElementContainer) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SUB_BUILTIN : PerlSyntaxHighlighter.PERL_SUB,
-					false); // fixme we could check deprecation here
 		}
 		else if (element instanceof PsiPerlCodeCastExpr)
 		{
