@@ -200,6 +200,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(REGEX_QUOTE_OPEN_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		ATTRIBUTES_MAP.put(REGEX_QUOTE_E, new TextAttributesKey[]{PERL_REGEX_QUOTE});
 		ATTRIBUTES_MAP.put(REGEX_QUOTE, new TextAttributesKey[]{PERL_REGEX_QUOTE});
+		ATTRIBUTES_MAP.put(REGEX_TOKEN, new TextAttributesKey[]{PERL_REGEX_TOKEN});
 		ATTRIBUTES_MAP.put(REGEX_MODIFIER, PERL_KEYWORD_KEYS);
 
 		ATTRIBUTES_MAP.put(QUOTE_DOUBLE, new TextAttributesKey[]{PERL_DQ_STRING});
