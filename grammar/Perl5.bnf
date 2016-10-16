@@ -506,7 +506,7 @@ private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
 unconditional_block ::= parse_block
 
 // implements Try::Tiny fallback
-trycatch_expr ::= try_branch (catch_branch|finally_branch)*
+trycatch_expr ::= try_branch (catch_branch|finally_branch)* [expr]
 try_branch ::= 'try' parse_block {pin=1}
 catch_branch ::= 'catch' parse_block {pin=1}
 finally_branch ::= 'finally' parse_block {pin=1}
@@ -959,12 +959,12 @@ private nested_element_variation ::=
 	<<parseNestedElementVariation>>
     | hash_index
     | array_index
-    | nested_call
+    | <<nested_call IDENTIFIER>>
     | nested_call_arguments    // function call like $var->()
     | scalar_call
 
-nested_call ::= parse_nested_call
-private parse_nested_call ::= method [method_call_arguments]
+meta nested_call ::= <<parse_nested_call <<x1>>>>
+private meta parse_nested_call ::= <<method <<x1>>>> [method_call_arguments]
 scalar_call ::= <<parseScalarOrElement>> [method_call_arguments]
 private method_call_arguments ::= '(' [<<parseSimpleCallArguments>>] ')'
 nested_call_arguments ::= method_call_arguments
@@ -974,11 +974,11 @@ array_index ::= <<parseArrayIndex>>
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 
-private callable ::= method | code // being used in parseFunctionCall
+private callable ::= normal_method | code // being used in parseFunctionCall
 private referencable_expr ::= code | scalar_expr
 
 private code ::=
-    '$&' method
+    '$&' normal_method
     | code_variable
     | code_cast_expr
 
@@ -1041,7 +1041,9 @@ code_variable ::= '$&' CODE_NAME
 glob_variable ::= '$*' GLOB_NAME
 
 private comma ::= ',' | '=>'
-method ::= IDENTIFIER
+private normal_method ::= <<method IDENTIFIER>>
+meta method ::= <<x1>>
+
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise

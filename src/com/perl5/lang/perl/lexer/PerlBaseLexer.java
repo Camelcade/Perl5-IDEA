@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.parser.trycatch.TryCatchElementTypes;
 
@@ -25,7 +27,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 10.08.2015.
  */
-public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes, PerlSwitchElementTypes, TryCatchElementTypes
+public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes, PerlSwitchElementTypes, TryCatchElementTypes, ClassAccessorElementTypes, MojoliciousElementTypes
 {
 	private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*"; // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
 	private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =

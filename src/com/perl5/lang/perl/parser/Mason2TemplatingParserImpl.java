@@ -234,7 +234,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			if (nested_call(b, l))
+			if (nested_call(b, l, IDENTIFIER_parser_))
 			{
 				m.done(MASON_SIMPLE_DEREF_EXPR);
 			}

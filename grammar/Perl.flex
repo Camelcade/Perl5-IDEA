@@ -338,7 +338,12 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <LEX_AFTER_DEREFERENCE>{
-	{QUALIFIED_IDENTIFIER} 	{yybegin(LEX_OPERATOR);return IDENTIFIER;}
+	"follow_best_practice"		{yybegin(LEX_OPERATOR);return RESERVED_FOLLOW_BEST_PRACTICE;}
+	"mk_accessors"				{yybegin(LEX_OPERATOR);return RESERVED_MK_ACCESSORS;}
+	"mk_ro_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_RO_ACCESSORS;}
+	"mk_wo_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_WO_ACCESSORS;}
+	"helper"					{yybegin(LEX_OPERATOR);return MOJO_HELPER_METHOD;}
+	{QUALIFIED_IDENTIFIER} 		{yybegin(LEX_OPERATOR);return IDENTIFIER;}
 }
 
 <LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{

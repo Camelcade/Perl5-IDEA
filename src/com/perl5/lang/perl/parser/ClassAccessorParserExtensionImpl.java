@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
@@ -24,7 +26,10 @@ import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.Map;
+
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
 /**
  * Created by hurricup on 21.01.2016.
@@ -33,6 +38,10 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final PerlStringWrapper declarationWrapper = new PerlStringWrapper(CLASS_ACCESSOR_DECLARATION);
+	final static GeneratedParserUtilBase.Parser FBP_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_FOLLOW_BEST_PRACTICE);
+	final static GeneratedParserUtilBase.Parser MK_ACCESSOR_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_MK_ACCESSORS);
+	final static GeneratedParserUtilBase.Parser MK_RO_ACCESSOR_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_MK_RO_ACCESSORS);
+	final static GeneratedParserUtilBase.Parser MK_WO_ACCESSOR_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_MK_WO_ACCESSORS);
 	protected static TokenSet TOKENS_SET;
 
 	static
@@ -54,7 +63,7 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 	@Override
 	public Map<String, IElementType> getCustomTokensMap()
 	{
-		return TOKENS_MAP;
+		return Collections.emptyMap();
 	}
 
 	@Override
@@ -63,31 +72,29 @@ public class ClassAccessorParserExtensionImpl extends PerlParserExtension implem
 		IElementType elementType = b.getTokenType();
 		if (elementType == RESERVED_MK_ACCESSORS)
 		{
-			return parseAccessorDeclarations(b, l, elementType);
+			return parseAccessorDeclarations(b, l, MK_ACCESSOR_PARSER);
 		}
 		else if (elementType == RESERVED_MK_RO_ACCESSORS)
 		{
-			return parseAccessorDeclarations(b, l, elementType);
+			return parseAccessorDeclarations(b, l, MK_RO_ACCESSOR_PARSER);
 		}
 		else if (elementType == RESERVED_MK_WO_ACCESSORS)
 		{
-			return parseAccessorDeclarations(b, l, elementType);
+			return parseAccessorDeclarations(b, l, MK_WO_ACCESSOR_PARSER);
 		}
 		else if (elementType == RESERVED_FOLLOW_BEST_PRACTICE)
 		{
 			b.setNextSubElementType(elementType);
-			return PerlParserImpl.nested_call(b, l);
+			return PerlParserImpl.nested_call(b, l, FBP_PARSER);
 		}
 
 		return super.parseNestedElement(b, l);
 	}
 
-
-	protected boolean parseAccessorDeclarations(PerlBuilder b, int l, IElementType subElementType)
+	protected boolean parseAccessorDeclarations(PerlBuilder b, int l, Parser subElementParser)
 	{
-		b.setNextSubElementType(subElementType);
 		PerlStringWrapper currentWrapper = b.setStringWrapper(declarationWrapper);
-		boolean r = PerlParserImpl.nested_call(b, l);
+		boolean r = PerlParserImpl.nested_call(b, l, subElementParser);
 		b.setStringWrapper(currentWrapper);
 		return r;
 	}

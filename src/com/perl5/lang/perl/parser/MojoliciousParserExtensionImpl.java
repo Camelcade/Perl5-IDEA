@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
@@ -24,7 +25,10 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.Map;
+
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
 /**
  * Created by hurricup on 23.04.2016.
@@ -32,6 +36,7 @@ import java.util.Map;
 public class MojoliciousParserExtensionImpl extends PerlParserExtension implements MojoliciousParserExtension
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
+	final static GeneratedParserUtilBase.Parser MOJO_HELPER_PARSER = (builder_, level_) -> consumeToken(builder_, MOJO_HELPER_METHOD);
 	protected static TokenSet TOKENS_SET;
 
 	static
@@ -50,7 +55,7 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 	{
 		b.setNextSubElementType(MOJO_HELPER_METHOD);
 		PsiBuilder.Marker m = b.mark();
-		boolean r = PerlParserImpl.parse_nested_call(b, l);
+		boolean r = PerlParserImpl.parse_nested_call(b, l, MOJO_HELPER_PARSER);
 
 		if (r)
 		{
@@ -68,7 +73,7 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 	@Override
 	public Map<String, IElementType> getCustomTokensMap()
 	{
-		return TOKENS_MAP;
+		return Collections.emptyMap();
 	}
 
 	@Override

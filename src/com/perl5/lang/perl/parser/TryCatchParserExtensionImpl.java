@@ -25,6 +25,7 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -173,7 +174,7 @@ public class TryCatchParserExtensionImpl extends PerlParserExtension implements 
 	@Override
 	public Map<String, IElementType> getCustomTokensMap()
 	{
-		return TOKENS_MAP;
+		return Collections.emptyMap();
 	}
 
 	// fixme isn't this too expensive?
