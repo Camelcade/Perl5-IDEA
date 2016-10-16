@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,29 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.findusages;
+package com.perl5.lang.perl.lexer.adapters;
 
-import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
+import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 
 /**
- * Created by hurricup on 06.01.2016.
+ * Created by hurricup on 16.10.2016.
+ * Third level of lexer adapter merges necessary tokens
  */
-public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes
+public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes
 {
-	public PerlWordsScanner()
+	private final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
+			POD, STRING_CONTENT
+	);
+
+	public PerlMergingLexerAdapter()
 	{
-		super(new PerlMergingLexerAdapter(),
-				PerlParserDefinition.IDENTIFIERS,
-				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
-				PerlParserDefinition.LITERALS
-		);
-		setMayHaveFileRefsInLiterals(true);
+		this(true, false);
+	}
+
+	public PerlMergingLexerAdapter(boolean allowToMergeCodeBlocks, boolean forceSublexing)
+	{
+		super(new PerlSublexingLexerAdapter(allowToMergeCodeBlocks, forceSublexing), TOKENS_TO_MERGE);
 	}
 }

@@ -109,9 +109,9 @@ SIGIL_SUFFIX = "{" | "$" [{$\w]
 
 SUB_PROTOTYPE = [\s\[$@%&*\];+]+
 
-POD_START = "="[\w][.]*
-POD_LINE = ([.]+ {NEW_LINE} ? | {NEW_LINE})
-POD_END = "=cut" (\s [.]*) {NEW_LINE}
+POD_START = "="[\w].* {NEW_LINE} ?
+POD_LINE = (.+ {NEW_LINE} ? | {NEW_LINE})
+POD_END = "=cut" ({WHITE_SPACE} .*)?
 
 // original list taken from http://www.perlmonks.org/?node_id=1131277
 NAMED_UNARY_OPERATORS = "values"|"umask"|"ucfirst"|"uc"|"study"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"rmdir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"each"|"defined"|"cos"|"chroot"|"chr"|"caller"|"alarm"|"abs"
@@ -217,8 +217,8 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <LEX_POD> {
-	{POD_END}	{yybegin(YYINITIAL);return POD;}
-	{POD_LINE}	{return POD;}
+	{POD_END} / {NEW_LINE}	{yybegin(YYINITIAL);return POD;}
+	{POD_LINE}				{return POD;}
 }
 
 ^{POD_START} 	{yybegin(LEX_POD);return POD;}

@@ -28,7 +28,7 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 {
 	public PerlHighlightingLexerAdapter()
 	{
-		super(new PerlSublexingLexerAdapter(false, true));
+		super(new PerlMergingLexerAdapter(false, true));
 		registerSelfStoppingLayer(
 				new PodLexerAdapter(),
 				new IElementType[]{POD},
@@ -49,6 +49,5 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 				new IElementType[]{HEREDOC_QX},
 				IElementType.EMPTY_ARRAY
 		);
-
 	}
 }

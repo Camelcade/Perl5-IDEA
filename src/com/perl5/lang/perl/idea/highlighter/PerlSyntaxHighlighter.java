@@ -30,6 +30,8 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -256,7 +258,11 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
-		if (ATTRIBUTES_MAP.containsKey(tokenType))
+		if (tokenType.getLanguage() == PodLanguage.INSTANCE)
+		{
+			return PodSyntaxHighlighter.getTokenAttributes(tokenType);
+		}
+		else if (ATTRIBUTES_MAP.containsKey(tokenType))
 		{
 			return ATTRIBUTES_MAP.get(tokenType);
 		}

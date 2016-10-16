@@ -74,16 +74,7 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 		attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
 	}
 
-	@NotNull
-	@Override
-	public Lexer getHighlightingLexer()
-	{
-		return new PodLexerAdapter();
-	}
-
-	@NotNull
-	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	public static TextAttributesKey[] getTokenAttributes(IElementType tokenType)
 	{
 		if (POD_TOKENS.contains(tokenType))
 		{
@@ -95,5 +86,19 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 		}
 
 		return EMPTY_KEYS;
+	}
+
+	@NotNull
+	@Override
+	public Lexer getHighlightingLexer()
+	{
+		return new PodLexerAdapter();
+	}
+
+	@NotNull
+	@Override
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
+		return getTokenAttributes(tokenType);
 	}
 }
