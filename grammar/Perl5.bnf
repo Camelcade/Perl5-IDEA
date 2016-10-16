@@ -927,9 +927,8 @@ scalar_cast_expr ::= '$$' cast_target
 
 scalar_index_cast_expr ::= '$#' cast_target
 
-private cast_target ::= braced_cast | scalar_primitive
-private braced_cast ::= '{' <<parseBracedCastContent>> '}' {pin=1} // fixme this is a hack; is code inside?
-
+// fixme need optimization
+private cast_target ::= scalar_primitive | parse_block
 
 scalar_array_element ::= scalar_primitive array_index
 scalar_hash_element ::= scalar_primitive hash_index

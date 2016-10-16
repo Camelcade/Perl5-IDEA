@@ -761,28 +761,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parsing braced cast content. For interpolated strings and regex we should disable appropriate flags to remove limitations
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseBracedCastContent(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-
-		boolean oldInterpolatedState = ((PerlBuilder) b).setIsInterpolated(false);
-		boolean oldRegexState = ((PerlBuilder) b).setIsRegex(false);
-
-		boolean r = PerlParserImpl.block_content(b, l);
-
-		((PerlBuilder) b).setIsInterpolated(oldInterpolatedState);
-		((PerlBuilder) b).setIsRegex(oldRegexState);
-
-		return r;
-	}
-
-	/**
 	 * Checks if anon hash has proper suffix
 	 *
 	 * @param b PerlBuilder
