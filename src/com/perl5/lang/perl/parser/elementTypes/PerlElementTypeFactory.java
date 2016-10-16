@@ -53,6 +53,10 @@ public class PerlElementTypeFactory
 		{
 			return new PerlStringContentTokenType(name);
 		}
+		if (name.equals("LAZY_PARSABLE_BLOCK"))
+		{
+			return new PerlLazyCodeBlockElementType(name);
+		}
 		if (name.equals("HEREDOC_END"))
 		{
 			return new PerlTokenTypeEx(name)

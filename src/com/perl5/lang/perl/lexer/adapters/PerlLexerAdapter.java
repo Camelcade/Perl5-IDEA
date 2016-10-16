@@ -48,7 +48,7 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 
 		SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.LEX_REGEX);
 		SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.LEX_EXTENDED_REGEX);
-		SUBLEXINGS_MAP.put(LP_CODE, PerlLexer.YYINITIAL);
+		SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
 	}
 
 	private final FlexLexer myFlex;
@@ -59,6 +59,7 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 	private int myTokenStart;
 	private int myTokenEnd;
 
+	private int myBufferStart;
 	private int myBufferEnd;
 	private int myState;
 
@@ -80,7 +81,7 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 	{
 		assert initialState == PerlLexer.YYINITIAL : "Attempt to reset to non-initial state";
 		myText = buffer;
-		myTokenStart = myTokenEnd = startOffset;
+		myTokenStart = myTokenEnd = myBufferStart = startOffset;
 		myBufferEnd = endOffset;
 		myFlex.reset(myText, startOffset, endOffset, initialState);
 		myTokenType = null;
@@ -173,6 +174,7 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 			// fixme add a thrashhold here for large LPE chunks
 			if (subLexingState == null)
 			{
+				mergeTokens();
 				return;
 			}
 
@@ -189,6 +191,43 @@ public class PerlLexerAdapter extends LexerBase implements PerlElementTypes
 			myTokenType = TokenType.WHITE_SPACE;
 			myTokenEnd = myBufferEnd;
 		}
+	}
+
+	private void mergeTokens() throws IOException
+	{
+		if (myTokenType != LEFT_BRACE_CODE)
+		{
+			return;
+		}
+		if (myTokenStart == myBufferStart)    // block reparsing
+		{
+			myTokenType = LEFT_BRACE;
+		}
+
+		int bracesDepth = 0;
+		while (true)
+		{
+			IElementType nextTokenType = myFlex.advance();
+			if (nextTokenType == null)
+			{
+				break;
+			}
+			else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE)
+			{
+				bracesDepth++;
+			}
+			else if (nextTokenType == RIGHT_BRACE)
+			{
+				if (bracesDepth == 0)
+				{
+					break;
+				}
+				bracesDepth--;
+			}
+		}
+		myTokenEnd = myFlex.getTokenEnd();
+		myTokenType = LP_CODE_BLOCK;
+		myState = PerlLexer.YYINITIAL;
 	}
 
 	private void lexToken(FlexLexer lexer) throws IOException

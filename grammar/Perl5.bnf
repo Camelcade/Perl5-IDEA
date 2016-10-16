@@ -252,7 +252,7 @@ limitations under the License.
 	LP_REGEX="LAZY_PARSABLE_REGEX"
 	LP_REGEX_X="LAZY_PARSABLE_EXTENDED_REGEX"
 
-	LP_CODE="LAZY_PARSABLE_CODE"
+	LP_CODE_BLOCK="LAZY_PARSABLE_BLOCK"
 
     STRING_CONTENT='STRING_CONTENT'
     STRING_CONTENT_QQ='STRING_CONTENT_QQ'
@@ -272,6 +272,9 @@ limitations under the License.
 
     LEFT_PAREN='('
     RIGHT_PAREN=')'
+
+	// abstract token to make code blocks
+    LEFT_BRACE_CODE='code{'
 
     LEFT_BRACE='{'
     RIGHT_BRACE='}'
@@ -469,6 +472,7 @@ private namespace_definition_name ::= 'package' IDENTIFIER [perl_version] {pin=1
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
 
+private parse_block ::= LP_CODE_BLOCK | block
 block ::= '{' block_content '}' {pin=1} // !-> pin disabled for dereference of anon hash; probably this slows us down
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
@@ -488,32 +492,32 @@ private compound_statement ::=
     | when_compound
     | default_compound
 
-named_block ::= BLOCK_NAME block
+named_block ::= BLOCK_NAME parse_block
 
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
 private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
-unconditional_block ::= block
+unconditional_block ::= parse_block
 
-conditional_block ::= condition_statement block {pin=1 name="Conditional block"}
+conditional_block ::= condition_statement parse_block {pin=1 name="Conditional block"}
 condition_statement ::= '(' condition_statement_expr ')' {pin=1 name="Condition"}
 
-conditional_block_while ::= condition_statement_while block {pin=1 name="Conditional block"}
+conditional_block_while ::= condition_statement_while parse_block {pin=1 name="Conditional block"}
 condition_statement_while ::= '(' [condition_statement_expr] ')' {pin=1 name="Condition"}
 private condition_statement_expr ::= expr {recoverWhile=recover_condition_statement_expr}
 private recover_condition_statement_expr ::= !('{'|')')
 
 given_compound ::=  'given' conditional_block  {pin=1}
 when_compound ::=  'when' conditional_block  {pin=1}
-default_compound ::=  'default' block {pin=1}
+default_compound ::=  'default' parse_block {pin=1}
 
 while_compound ::=  'while' conditional_block_while [continue_block]  {pin=1}
 until_compound ::=  'until' conditional_block [continue_block]  {pin=1}
 
-continue_block ::= [POD] 'continue' block {pin=2}
+continue_block ::= [POD] 'continue' parse_block {pin=2}
 
-private block_compound ::= block [continue_block]
+private block_compound ::= parse_block [continue_block]
 
 
 // for/foreach
@@ -521,7 +525,7 @@ private block_compound ::= block [continue_block]
 for_compound ::=  'for' for_arguments {pin=1}
 foreach_compound ::=  'foreach' for_arguments  {pin=1}
 private for_arguments ::=
-    for_iterator block
+    for_iterator parse_block
     | for_list_statement block_compound
 
 for_iterator ::= '(' [for_iterator_statement]  ';' [for_iterator_statement] ';' [for_iterator_statement] ')' {pin=3}
@@ -545,7 +549,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme we can't pin this because we need to distinct declaration and definition
-sub_definition ::=  'sub' IDENTIFIER sub_definition_parameters block
+sub_definition ::=  'sub' IDENTIFIER sub_definition_parameters parse_block
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= sub_signature |sub_prototype
@@ -741,7 +745,7 @@ private grep_map_arguments ::=
     | grep_map_arguments_
 
 private grep_map_arguments_ ::=
-    block [comma] grep_map_sort_tail
+    parse_block [comma] grep_map_sort_tail
     | scalar_expr comma grep_map_sort_tail
     | expr
 
@@ -754,7 +758,7 @@ private sort_arguments ::=
 
 private sort_arguments_ ::=
     scalar_variable grep_map_sort_tail
-    | block [comma] grep_map_sort_tail
+    | parse_block [comma] grep_map_sort_tail
     | callable grep_map_sort_tail
     | grep_map_sort_tail
 
@@ -805,7 +809,7 @@ lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 print_expr ::=  ('print'|'printf'|'say') ( '(' [print_arguments] ')' | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-sub_expr ::=  'sub' sub_definition_parameters block  // fixme make sure that this one checked after definition and declaration
+sub_expr ::=  'sub' sub_definition_parameters parse_block  // fixme make sure that this one checked after definition and declaration
 
 sub_call_expr ::= leftward_call_expr | rightward_call_expr
 
@@ -816,7 +820,7 @@ private rightward_call_expr ::= callable [call_arguments]
 call_arguments ::= parse_call_arguments
 private parse_call_arguments ::=
     anon_hash comma list_expr
-    | block [[comma] list_expr]
+    | parse_block [[comma] list_expr]
     | list_expr
 
 file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
@@ -841,7 +845,7 @@ private regex_replace ::= regex_replace_regex | regex_replace_code
 private regex_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [LP_REGEX|perl_regex]
 private regex_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
 
-private regex_code ::= LP_CODE | file_item+ {recoverWhile=recover_regex_code}
+private regex_code ::= LP_CODE_BLOCK | file_item+ {recoverWhile=recover_regex_code}
 private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
 
 perl_regex_modifiers ::= REGEX_MODIFIER +
@@ -866,7 +870,7 @@ tr_modifiers ::= REGEX_MODIFIER +
 
 do_expr ::=  'do' eval_argument {pin=1}
 eval_expr ::=  'eval' [eval_argument] {pin=1}
-private eval_argument ::= parenthesised_expr | block | expr
+private eval_argument ::= parenthesised_expr | parse_block | expr
 
 private variable_declaration ::=
     variable_declaration_global
@@ -973,7 +977,7 @@ code_cast_expr ::= SIGIL_CODE cast_target
 
 label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
 private perl_version ::= <<parsePerlVersion>>
-private perl_handle ::=  perl_handle_expr | block | scalar_variable !('{'|'['|<<isOperatorToken>>)
+private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
 
 //////////////////////////////////// constants /////////////////////////////////////////////////////////////////////////
@@ -998,7 +1002,7 @@ private interpolated_constructs ::=
   | array_index_variable
   | scalar_index_cast_expr
 
-string_bare ::= <<parseAndWrapStringContent>>+
+string_bare ::= <<parseAndWrapStringContent>>
 
 string_sq ::= [ 'q'] <<parseSQString>>	// fixme use vars hack, remove
 string_list ::=  'qw' <<parseSQString>>
@@ -1030,8 +1034,8 @@ method ::= IDENTIFIER
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= 'method' IDENTIFIER [method_signature] [sub_attributes] block
-func_definition ::= 'func' IDENTIFIER [func_signature] [sub_attributes] block
+method_definition ::= 'method' IDENTIFIER [method_signature] [sub_attributes] parse_block
+func_definition ::= 'func' IDENTIFIER [func_signature] [sub_attributes] parse_block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= '(' method_signature_content ')' {pin=1}

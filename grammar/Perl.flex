@@ -248,9 +248,13 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 }
 
 <LEX_HANDLE,LEX_STRICT_HANDLE>{
-	{IDENTIFIER} / [:(-] {yypushback(yylength());yybegin(YYINITIAL);break;}
+	{CORE_PREFIX}"my"			{yybegin(YYINITIAL);return RESERVED_MY;}
+	{CORE_PREFIX}"our"			{yybegin(YYINITIAL);return RESERVED_OUR;}
+	{CORE_PREFIX}"local"		{yybegin(YYINITIAL);return RESERVED_LOCAL;}
+	{CORE_PREFIX}"state"		{yybegin(YYINITIAL);return RESERVED_STATE;}
+	{IDENTIFIER} / [:(-] {pullback(0);yybegin(YYINITIAL);}
 	{IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return HANDLE;}
-	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
+	[^]				{yybegin(YYINITIAL);yypushback(1);}
 }
 
 <LEX_END_BLOCK>{
@@ -297,6 +301,10 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	"(" 						{yybegin(YYINITIAL);return LEFT_PAREN;}
 }
 
+<LEX_SUB,LEX_SUB_ATTRIBUTES,LEX_ATTRIBUTES>{
+	"{"     					{yybegin(YYINITIAL);return LEFT_BRACE_CODE;}
+}
+
 <LEX_SUB,LEX_SUB_ATTRIBUTES>{
 	":"							{yybegin(LEX_ATTRIBUTES);return COLON;}
 	[^]							{yypushback(1);yybegin(YYINITIAL);break;}
@@ -312,7 +320,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	":"					{return COLON;}
 	{IDENTIFIER} / "("	{pushState();yybegin(LEX_QUOTE_LIKE_OPENER_Q);return IDENTIFIER;}
 	{IDENTIFIER}		{return IDENTIFIER;}
-	[^]					{yypushback(1);yybegin(YYINITIAL);break;}
+	[^]					{yypushback(1);yybegin(YYINITIAL);}
 }
 
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_SUB,LEX_PRINT>{
@@ -374,6 +382,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
 	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
 	"//=" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;}
+	"//" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;}
 	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
 	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
 	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}

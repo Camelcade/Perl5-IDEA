@@ -502,7 +502,7 @@ public class PerlLexer extends PerlLexerGenerated
 			currentPos++;
 		}
 
-		pushPreparsedToken(seekStart, currentPos, LP_CODE);
+		pushPreparsedToken(seekStart, currentPos, LP_CODE_BLOCK);
 	}
 
 
@@ -1055,7 +1055,7 @@ public class PerlLexer extends PerlLexerGenerated
 				}
 				if (secondBlockToken != null)
 				{
-					secondBlockToken.setTokenType(LP_CODE);
+					secondBlockToken.setTokenType(LP_CODE_BLOCK);
 				}
 			}
 

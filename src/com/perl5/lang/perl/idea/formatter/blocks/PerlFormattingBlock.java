@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -445,6 +444,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		return myInjectedLanguageBlockBuilder;
 	}
 
+/*
 	@NotNull
 	@Override
 	public TextRange getTextRange()
@@ -452,4 +452,5 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 		int start = myNode.getStartOffset();
 		return new TextRange(start, start + myNode.getText().length());
 	}
+*/
 }

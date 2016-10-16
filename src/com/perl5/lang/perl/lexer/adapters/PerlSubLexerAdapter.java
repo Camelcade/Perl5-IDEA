@@ -33,6 +33,11 @@ public class PerlSubLexerAdapter extends FlexAdapter
 		myPerlLexerState = perlLexerState;
 	}
 
+	public static PerlSubLexerAdapter forCode()
+	{
+		return new PerlSubLexerAdapter(PerlLexer.YYINITIAL);
+	}
+
 	public static PerlSubLexerAdapter forStringSQ()
 	{
 		return new PerlSubLexerAdapter(PerlLexer.LEX_STRING_CONTENT);

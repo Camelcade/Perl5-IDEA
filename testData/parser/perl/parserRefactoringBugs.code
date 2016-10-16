@@ -13,4 +13,8 @@ For a list of token types, use perltidy --dump-token-types (-dtt)
 ------------------------------------------------------------------------
 EOM
 print $fh "$_\t$want_left_space{$_}\n";
-say qw(some)
+say qw(some);
+say $a->{test} // $some;
+friendly::allowed({
+        lev2 => $item->{lev2}
+    })

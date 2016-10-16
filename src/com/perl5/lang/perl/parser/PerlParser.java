@@ -32,7 +32,7 @@ public interface PerlParser extends PerlElementTypes
 			SEMICOLON
 	);
 
-	// this is my attempt to make recovery using consumable tokenset. The point is that there is no need to modify it
+	// Contains tokens that can be freely consumed during statement recovery
 	TokenSet STATEMENT_RECOVERY_CONSUMABLE_TOKENS = TokenSet.create(
 			COLON,
 			COMMENT_ANNOTATION,
@@ -103,7 +103,6 @@ public interface PerlParser extends PerlElementTypes
 			RIGHT_ANGLE,
 			RIGHT_BRACKET,
 			RIGHT_PAREN,
-			STRING_CONTENT,
 			SUB,
 			SUB_PROTOTYPE_TOKEN,
 			VERSION_ELEMENT
