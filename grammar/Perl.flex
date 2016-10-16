@@ -22,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 %%
 
+// http://perldoc.perl.org/perlop.html#Gory-details-of-parsing-quoted-constructs
+
 %class PerlLexerGenerated
 %extends PerlBaseLexer
 %abstract
@@ -53,6 +55,7 @@ ANY_SPACE = [ \t\f\n\r]
 LINE_COMMENT = "#" .* \R
 SPACES_OR_COMMENTS = ({ANY_SPACE}|{LINE_COMMENT})*
 ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
+ESCAPED_CHARACTER = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
@@ -122,6 +125,8 @@ BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"continue"|"break"
 
+REGEX_COMMENT = "(?#"[^)]*")"
+
 %state LEX_OPERATOR
 
 %state LEX_END_BLOCK
@@ -132,7 +137,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 %state LEX_PACKAGE, LEX_PACKAGE_REQUIRE, LEX_SUB, LEX_BRACED_STRING, LEX_ATTRIBUTES
 
 %xstate LEX_STRING_CONTENT, LEX_STRING_CONTENT_QQ, LEX_STRING_CONTENT_XQ, LEX_STRING_LIST
-%xstate LEX_REGEX, LEX_EXTENDED_REGEX
+%xstate LEX_MATCH_REGEX, LEX_EXTENDED_MATCH_REGEX, LEX_REPLACEMENT_REGEX
 
 // custom lexical states to avoid crossing with navie ones
 %state LEX_CUSTOM1, LEX_CUSTOM2, LEX_CUSTOM3, LEX_CUSTOM4, LEX_CUSTOM5, LEX_CUSTOM6, LEX_CUSTOM7, LEX_CUSTOM8, LEX_CUSTOM9, LEX_CUSTOM10
@@ -184,7 +189,7 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{UNQUOTED_HEREDOC_MARKER} {	yybegin(LEX_OPERATOR); heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
 }
 
-<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ,LEX_REGEX,LEX_EXTENDED_REGEX>{
+<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ,LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>{
 	"$" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
 	"@" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
 	"$#" / {ANY_VARIABLE_NAME}  {pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
@@ -204,12 +209,26 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	"@" / "{"					{return captureInterpolatedCode() ? SIGIL_ARRAY: STRING_CONTENT_XQ;}
 }
 
-<LEX_REGEX,LEX_EXTENDED_REGEX>
+<LEX_EXTENDED_MATCH_REGEX>{
+	{ESCAPED_CHARACTER}	{return REGEX_TOKEN;}
+	{ANY_SPACE}+		{return TokenType.WHITE_SPACE;}
+}
+
+<LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX>
+{
+	{REGEX_COMMENT}	{return COMMENT_LINE;}
+	[^]				{return REGEX_TOKEN;}
+}
+
+<LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>
 {
 	"$" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR: REGEX_TOKEN;}
 	"$#" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: REGEX_TOKEN;}
 	"@" / "{"		{return captureInterpolatedCode() ? SIGIL_ARRAY: REGEX_TOKEN;}
 	[$@]			{return REGEX_TOKEN;}
+}
+
+<LEX_REPLACEMENT_REGEX>{
 	[^$@]+			{return REGEX_TOKEN;}
 }
 

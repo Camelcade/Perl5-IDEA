@@ -251,6 +251,7 @@ limitations under the License.
 
 	LP_REGEX="LAZY_PARSABLE_REGEX"
 	LP_REGEX_X="LAZY_PARSABLE_EXTENDED_REGEX"
+	LP_REGEX_REPLACEMENT="LAZY_PARSABLE_REGEX_REPLACEMENT"
 
 	LP_CODE_BLOCK="LAZY_PARSABLE_BLOCK"
 
@@ -842,7 +843,7 @@ replacement_regex ::=
 private regex_match ::= REGEX_QUOTE_OPEN [LP_REGEX|LP_REGEX_X|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [LP_REGEX|perl_regex]
+private regex_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [LP_REGEX_REPLACEMENT|perl_regex]
 private regex_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
 
 private regex_code ::= LP_CODE_BLOCK | file_item+ {recoverWhile=recover_regex_code}

@@ -1004,7 +1004,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 					if (secondBlockEndOffset > currentOffset)
 					{
-						secondBlockToken = new CustomToken(currentOffset, secondBlockEndOffset, LP_REGEX);
+						secondBlockToken = new CustomToken(currentOffset, secondBlockEndOffset, LP_REGEX_REPLACEMENT);
 						pushPreparsedToken(secondBlockToken);
 						currentOffset = secondBlockEndOffset;
 					}
