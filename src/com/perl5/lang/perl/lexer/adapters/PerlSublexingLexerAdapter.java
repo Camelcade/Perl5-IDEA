@@ -136,7 +136,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 	{
 		if (mySubLexer == null)
 		{
-			mySubLexer = new PerlSublexingLexerAdapter(false, false);
+			mySubLexer = new PerlSublexingLexerAdapter(false, true);
 		}
 		return mySubLexer;
 	}
@@ -167,7 +167,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 			Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
-			if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myIsForcingSublexing))
+			if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && myTokenType == LP_CODE_BLOCK && !myIsForcingSublexing))
 			{
 				return;
 			}
