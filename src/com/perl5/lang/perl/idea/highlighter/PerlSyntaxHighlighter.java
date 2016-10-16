@@ -27,9 +27,11 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
+import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +40,7 @@ import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements PerlElementTypes
+public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements PerlElementTypes, MooseElementTypes
 {
 	public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -104,6 +106,63 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
 
 	public static final HashMap<IElementType, TextAttributesKey[]> ATTRIBUTES_MAP = new HashMap<IElementType, TextAttributesKey[]>();
+	private static final TokenSet KEYWORDS = TokenSet.create(
+			RESERVED_MY,
+			RESERVED_OUR,
+			RESERVED_STATE,
+			RESERVED_LOCAL,
+			RESERVED_ELSIF,
+			RESERVED_ELSE,
+			RESERVED_GIVEN,
+			RESERVED_DEFAULT,
+			RESERVED_CONTINUE,
+			RESERVED_FORMAT,
+			RESERVED_SUB,
+			RESERVED_PACKAGE,
+			RESERVED_USE,
+			RESERVED_NO,
+			RESERVED_REQUIRE,
+			RESERVED_UNDEF,
+			RESERVED_PRINT,
+			RESERVED_PRINTF,
+			RESERVED_SAY,
+			RESERVED_GREP,
+			RESERVED_MAP,
+			RESERVED_SORT,
+			RESERVED_DO,
+			RESERVED_EVAL,
+			RESERVED_GOTO,
+			RESERVED_REDO,
+			RESERVED_NEXT,
+			RESERVED_LAST,
+			RESERVED_RETURN,
+
+			RESERVED_Y,
+			RESERVED_TR,
+			RESERVED_Q,
+			RESERVED_S,
+			RESERVED_M,
+			RESERVED_QW,
+			RESERVED_QQ,
+			RESERVED_QR,
+			RESERVED_QX,
+
+			RESERVED_TRY,
+			RESERVED_CATCH,
+			RESERVED_FINALLY,
+
+			RESERVED_INNER,
+			RESERVED_WITH,
+			RESERVED_EXTENDS,
+			RESERVED_META,
+			RESERVED_OVERRIDE,
+			RESERVED_AROUND,
+			RESERVED_SUPER,
+			RESERVED_AUGMENT,
+			RESERVED_AFTER,
+			RESERVED_BEFORE,
+			RESERVED_HAS
+	);
 	public static TextAttributesKey UNUSED_DEPRECATED;
 
 	static
@@ -126,49 +185,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(RESERVED_FOREACH, PERL_KEYWORD_KEYS);
 		ATTRIBUTES_MAP.put(RESERVED_WHEN, PERL_KEYWORD_KEYS);
 
-		ATTRIBUTES_MAP.put(RESERVED_MY, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_OUR, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_STATE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_LOCAL, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_ELSIF, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_ELSE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_GIVEN, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_DEFAULT, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_CONTINUE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_FORMAT, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_SUB, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_PACKAGE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_USE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_NO, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_REQUIRE, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_UNDEF, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_PRINT, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_PRINTF, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_SAY, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_GREP, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_MAP, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_SORT, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_DO, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_EVAL, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_GOTO, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_REDO, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_NEXT, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_LAST, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_RETURN, PERL_KEYWORD_KEYS);
-
-		ATTRIBUTES_MAP.put(RESERVED_Y, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_TR, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_Q, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_S, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_M, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_QW, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_QQ, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_QR, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_QX, PERL_KEYWORD_KEYS);
-
-		ATTRIBUTES_MAP.put(RESERVED_TRY, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_CATCH, PERL_KEYWORD_KEYS);
-		ATTRIBUTES_MAP.put(RESERVED_FINALLY, PERL_KEYWORD_KEYS);
 
 		ATTRIBUTES_MAP.put(SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		ATTRIBUTES_MAP.put(SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
@@ -266,6 +282,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		if (tokenType.getLanguage() == PodLanguage.INSTANCE)
 		{
 			return PodSyntaxHighlighter.getTokenAttributes(tokenType);
+		}
+		else if (KEYWORDS.contains(tokenType))
+		{
+			return PERL_KEYWORD_KEYS;
 		}
 		else if (ATTRIBUTES_MAP.containsKey(tokenType))
 		{

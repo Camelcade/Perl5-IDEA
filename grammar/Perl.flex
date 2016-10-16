@@ -586,6 +586,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
 	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
 
+	"inner"					{yybegin(YYINITIAL);return RESERVED_INNER;}
+	"with"					{yybegin(YYINITIAL);return RESERVED_WITH;}
+	"extends"				{yybegin(YYINITIAL);return RESERVED_EXTENDS;}
+	"meta"					{yybegin(YYINITIAL);return RESERVED_META;}
+	"override"				{yybegin(YYINITIAL);return RESERVED_OVERRIDE;}
+	"around"				{yybegin(YYINITIAL);return RESERVED_AROUND;}
+	"super"					{yybegin(YYINITIAL);return RESERVED_SUPER;}
+	"augment"				{yybegin(YYINITIAL);return RESERVED_AUGMENT;}
+	"after"					{yybegin(YYINITIAL);return RESERVED_AFTER;}
+	"before"				{yybegin(YYINITIAL);return RESERVED_BEFORE;}
+	"has"					{yybegin(YYINITIAL);return RESERVED_HAS;}
+
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(LEX_PRINT); return RESERVED_PRINT;}
 	{CORE_PREFIX}"printf"	 	{yybegin(LEX_PRINT); return RESERVED_PRINTF;}

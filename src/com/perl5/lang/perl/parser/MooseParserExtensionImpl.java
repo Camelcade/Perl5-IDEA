@@ -28,6 +28,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -41,11 +42,8 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
 	@SuppressWarnings("unchecked")
-	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = Collections.singletonList(
-			Pair.create(EXPR, TokenSet.create(MOOSE_ATTRIBUTE))
-	);
+	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = new ArrayList<>();
 	protected static TokenSet PARSER_TOKEN_SET;
-	protected static TokenSet HIGHLIGHTER_TOKEN_SET;
 
 	static
 	{
@@ -71,13 +69,13 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_BEFORE, MOOSE_STATEMENT_BEFORE);
 		RESERVED_TO_STATEMENT_MAP.put(RESERVED_HAS, MOOSE_STATEMENT_HAS);
 
-		PARSER_TOKEN_SET = TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
-		HIGHLIGHTER_TOKEN_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
-	}
 
-	public static TokenSet getHighlighterTokenSet()
-	{
-		return HIGHLIGHTER_TOKEN_SET;
+		List<IElementType> tokensList = new ArrayList<>();
+		tokensList.add(MOOSE_ATTRIBUTE);
+		tokensList.addAll(RESERVED_TO_STATEMENT_MAP.values());
+		EXTENSION_SET.add(Pair.create(EXPR, TokenSet.create(tokensList.toArray(new IElementType[tokensList.size()]))));
+
+		PARSER_TOKEN_SET = TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
 	}
 
 	private static boolean parseOverride(PerlBuilder b, int l)
@@ -165,7 +163,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
-				PerlParserUtil.statementSemi(b, l);
 				m.done(statementToken);
 				return true;
 			}
@@ -186,7 +183,6 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 			if (PerlParserImpl.expr(b, l, -1))
 			{
 				PerlParserUtil.parseStatementModifier(b, l);
-				PerlParserUtil.statementSemi(b, l);
 				m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
 				return true;
 			}
@@ -200,25 +196,18 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	@Override
 	public Map<String, IElementType> getCustomTokensMap()
 	{
-		return TOKENS_MAP;
-	}
-
-	@Override
-	public boolean parseStatement(PerlBuilder b, int l)
-	{
-		return parseOverride(b, l) ||
-				parseHas(b, l) ||
-				parseDefault(b, l)
-				;
+		return Collections.emptyMap();
 	}
 
 	@Override
 	public boolean parseTerm(PerlBuilder b, int l)
 	{
-		return
+		return parseOverride(b, l) ||
+				parseHas(b, l) ||
+				parseDefault(b, l) ||
 				parseMooseInvocation(b, l, RESERVED_INNER) ||
-						parseMooseInvocation(b, l, RESERVED_SUPER) ||
-						super.parseTerm(b, l);
+				parseMooseInvocation(b, l, RESERVED_SUPER) ||
+				super.parseTerm(b, l);
 	}
 
 	public boolean parseMooseInvocation(PerlBuilder b, int l, IElementType keyToken)
