@@ -467,7 +467,7 @@ public class PerlLexer extends PerlLexerGenerated
 		return getBuffer().charAt(currentPosition) == '\n';
 	}
 
-	public void captureInterpolatedCode()
+	public boolean captureInterpolatedCode()
 	{
 		int seekStart = getTokenEnd();
 		int seekEnd = getBufferEnd();
@@ -481,11 +481,6 @@ public class PerlLexer extends PerlLexerGenerated
 		{
 			char currentChar = buffer.charAt(currentPos);
 
-			if (!isEscaped && braceLevel == 0 && currentChar == '}')
-			{
-				break;
-			}
-
 			if (!isEscaped)
 			{
 				if (currentChar == '{')
@@ -495,14 +490,18 @@ public class PerlLexer extends PerlLexerGenerated
 				else if (currentChar == '}')
 				{
 					braceLevel--;
+					if (braceLevel == 0)
+					{
+						pushPreparsedToken(seekStart, currentPos + 1, LP_CODE_BLOCK);
+						return true;
+					}
 				}
 			}
 
 			isEscaped = !isEscaped && currentChar == '\\';
 			currentPos++;
 		}
-
-		pushPreparsedToken(seekStart, currentPos, LP_CODE_BLOCK);
+		return false;
 	}
 
 

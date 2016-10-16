@@ -40,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType startRegexp();
 	public abstract IElementType getIdentifierToken();
 	public abstract IElementType captureString();
-
+	public abstract boolean captureInterpolatedCode();
 %}
 
 
@@ -148,11 +148,6 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 
 %%
 
-<LEX_REGEX,LEX_EXTENDED_REGEX>
-{
-	[^]+	{return REGEX_TOKEN;}
-}
-
 <LEX_QUOTED_HEREDOC_OPENER>{
 	{DQ_STRING}	{
 		yybegin(LEX_OPERATOR);
@@ -189,10 +184,33 @@ NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"ge
 	{UNQUOTED_HEREDOC_MARKER} {	yybegin(LEX_OPERATOR); heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
 }
 
-<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ>{
+<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ,LEX_REGEX,LEX_EXTENDED_REGEX>{
 	"$" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
 	"@" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
 	"$#" / {ANY_VARIABLE_NAME}  {pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
+}
+
+<LEX_STRING_CONTENT_QQ>
+{
+	"$" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR: STRING_CONTENT_QQ;}
+	"$#" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: STRING_CONTENT_QQ;}
+	"@" / "{"					{return captureInterpolatedCode() ? SIGIL_ARRAY: STRING_CONTENT_QQ;}
+}
+
+<LEX_STRING_CONTENT_XQ>
+{
+	"$" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR: STRING_CONTENT_XQ;}
+	"$#" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: STRING_CONTENT_XQ;}
+	"@" / "{"					{return captureInterpolatedCode() ? SIGIL_ARRAY: STRING_CONTENT_XQ;}
+}
+
+<LEX_REGEX,LEX_EXTENDED_REGEX>
+{
+	"$" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR: REGEX_TOKEN;}
+	"$#" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: REGEX_TOKEN;}
+	"@" / "{"		{return captureInterpolatedCode() ? SIGIL_ARRAY: REGEX_TOKEN;}
+	[$@]			{return REGEX_TOKEN;}
+	[^$@]+			{return REGEX_TOKEN;}
 }
 
 <LEX_STRING_CONTENT_QQ>{

@@ -27,7 +27,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes
 {
 	private final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
-			POD, STRING_CONTENT
+			POD, STRING_CONTENT, REGEX_TOKEN
 	);
 
 	public PerlMergingLexerAdapter()
