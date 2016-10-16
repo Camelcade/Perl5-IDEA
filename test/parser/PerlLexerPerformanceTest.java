@@ -18,10 +18,8 @@ package parser;
 
 import categories.Performance;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.junit.experimental.categories.Category;
-
-import java.io.IOException;
 
 /**
  * Created by hurricup on 12.10.2016.
@@ -58,25 +56,18 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase
 
 	private long testLexing(String testData)
 	{
-		PerlLexer perlLexer = new PerlLexer(null);
-		perlLexer.reset(testData, 0, testData.length(), 0);
+		PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(false, true);
+		perlLexer.start(testData, 0, testData.length(), 0);
 
 		long start = System.currentTimeMillis();
 
-		try
+		int tokens = 0;
+		while (perlLexer.getTokenType() != null)
 		{
-
-			int tokens = 0;
-			while (perlLexer.advance() != null)
-			{
-				tokens++;
-			}
+			perlLexer.advance();
+			tokens++;
+		}
 //			System.err.println("Total tokens: " + tokens);
-		}
-		catch (IOException ignore)
-		{
-
-		}
 
 		return System.currentTimeMillis() - start;
 	}
