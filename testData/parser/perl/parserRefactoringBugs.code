@@ -17,4 +17,19 @@ say qw(some);
 say $a->{test} // $some;
 friendly::allowed({
         lev2 => $item->{lev2}
-    })
+    });
+
+
+++$var;
+{
+    say $var;
+}
+++ $var;
+
+++$somevar->{blabla}++;
+
+require 'Config_heavy.pl';
+
+
+
+

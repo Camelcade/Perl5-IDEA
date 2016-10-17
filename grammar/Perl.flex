@@ -67,7 +67,9 @@ IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 FARROW = "=>"
 BAREWORD_MINUS = "-" ? {IDENTIFIER}
 
-QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
+// qualified identifer can't start with ', but variable can
+QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
+VARIABLE_QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
 PACKAGE_SHORT = "::"+ "'" ?
 
 DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
@@ -89,7 +91,7 @@ NUMBER_BIN = "0"[bB][01_]+
 
 SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_$]
 CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
-VARIABLE_NAME = {QUALIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
+VARIABLE_NAME = {VARIABLE_QUALIFIED_IDENTIFIER} | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
 BRACED_VARIABLE_NAME = "{" ({VARIABLE_NAME}|"$"|{CAPPED_BRACED_VARIABLE}) "}"
@@ -396,6 +398,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"++" 	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
 	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
 }
+
+<LEX_AFTER_RIGHT_BRACE>
+{
+	"++" / {SPACES_OR_COMMENTS}"$"	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
+	"--" / {SPACES_OR_COMMENTS}"$"	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
+}
+
 <LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_VARIABLE_NAME>{
 	"++" 	{yybegin(LEX_OPERATOR);return OPERATOR_PLUS_PLUS;}
 	"--" 	{yybegin(LEX_OPERATOR);return OPERATOR_MINUS_MINUS;}
@@ -635,7 +644,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_M;}
 	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_S;}
 
-	{QUALIFIED_IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
+	{VARIABLE_QUALIFIED_IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
 }
 
 
