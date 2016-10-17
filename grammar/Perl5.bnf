@@ -1033,12 +1033,12 @@ heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-array_index_variable ::= '$#' SCALAR_NAME
-scalar_variable ::= '$$' SCALAR_NAME
-array_variable ::= '$@' ARRAY_NAME
-hash_variable ::= '$%' HASH_NAME
-code_variable ::= '$&' CODE_NAME
-glob_variable ::= '$*' GLOB_NAME
+array_index_variable ::= '$#' {SCALAR_NAME | '{' SCALAR_NAME '}'}
+scalar_variable ::= '$$' {SCALAR_NAME | '{' SCALAR_NAME '}'}
+array_variable ::= '$@' {ARRAY_NAME | '{' ARRAY_NAME '}'}
+hash_variable ::= '$%' {HASH_NAME | '{' HASH_NAME '}'}
+code_variable ::= '$&' {CODE_NAME | '{' CODE_NAME '}'}
+glob_variable ::= '$*' {GLOB_NAME | '{' GLOB_NAME '}'}
 
 private comma ::= ',' | '=>'
 private normal_method ::= <<method IDENTIFIER>>

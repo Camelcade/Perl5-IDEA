@@ -56,7 +56,7 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase
 
 	private long testLexing(String testData)
 	{
-		PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(false, true);
+		PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(getProject(), false, true);
 		perlLexer.start(testData, 0, testData.length(), 0);
 
 		long start = System.currentTimeMillis();

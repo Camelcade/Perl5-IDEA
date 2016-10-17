@@ -30,6 +30,23 @@ friendly::allowed({
 
 require 'Config_heavy.pl';
 
+$::;
+say $   # comment
+    var;
+say $   # comment
+    {
+# other
+var
+# else
+};
+
+
+say "this is a $    #comment
+{   # comment
+var
+    #comment
+} test";
+
 
 
 
