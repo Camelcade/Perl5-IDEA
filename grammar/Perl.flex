@@ -89,7 +89,7 @@ NUMBER_INT = [0-9][0-9_]*
 NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 
-SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_$]
+SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\\!\%\&\(\)\+\,\-\.\/\;\<\=\>\|\~\?\:\*\^\@\_\$]
 CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
 VARIABLE_NAME = {VARIABLE_QUALIFIED_IDENTIFIER} | "::" | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
@@ -470,7 +470,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <LEX_VARIABLE_UNBRACED>{
-	"$" / {SPECIAL_VARIABLE_NAME}|[\:\w_\d]		{return processUnbracedScalarSigil();}
+	// this is a subset of builtins, $;, $, for example, can't be dereferenced
+	"$" / [\{\"\'\[\]\`\\\!\%\&\(\)\+\-\.\/\<\=\>\|\~\?\:\*\^\@\_\$\:\w_\d]		{return processUnbracedScalarSigil();}
 	"{"											{return startBracedVariable();}
 	{VARIABLE_NAME}								{return getUnbracedVariableNameToken();}
 }

@@ -190,8 +190,8 @@ my $abc *= 123;
 
 # Process info.
 
-*PROCESS_ID = *$;
-*PID = *$;
+*PROCESS_ID = *$ ;
+*PID = *$ ;
 $abc * $abc;
 *REAL_USER_ID = *<;
 *UID = *<;
