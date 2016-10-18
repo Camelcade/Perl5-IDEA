@@ -111,6 +111,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return getLeftBrace();
 	}
 
+	protected IElementType startStructuredBlock(int afterState)
+	{
+		myBracesStack.push(0);
+		yybegin(afterState);
+		pushStateAndBegin(PerlLexer.YYINITIAL);
+		return getLeftBrace();
+	}
+
 	protected IElementType getLeftBraceCode()
 	{
 		return getLeftBrace(LEFT_BRACE_CODE);
@@ -130,7 +138,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return braceType;
 	}
 
-	protected IElementType getRightBrace()
+	protected IElementType getRightBrace(int afterState)
 	{
 		if (!myBracesStack.isEmpty())
 		{
@@ -138,8 +146,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 			{
 				myBracesStack.pop();
 				popState();
+				return RIGHT_BRACE;
 			}
 		}
+		yybegin(afterState);
 		return RIGHT_BRACE;
 	}
 
