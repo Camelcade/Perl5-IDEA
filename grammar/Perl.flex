@@ -44,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 	public abstract IElementType getIdentifierToken();
 	public abstract IElementType captureString();
 	public abstract boolean captureInterpolatedCode();
+
 %}
 
 
@@ -91,12 +92,7 @@ NUMBER_BIN = "0"[bB][01_]+
 SPECIAL_VARIABLE_NAME = [\"\'\[\]\`\\!\%&\(\)\+,-./\;<=>|~?:*\^@_$]
 CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
 VARIABLE_NAME = {VARIABLE_QUALIFIED_IDENTIFIER} | "::" | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
-
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
-
-BRACED_VARIABLE_TAIL = {SPACES_OR_COMMENTS} ({VARIABLE_NAME}|"$"|{CAPPED_BRACED_VARIABLE}) {SPACES_OR_COMMENTS} "}"
-BRACED_VARIABLE_NAME = "{" {BRACED_VARIABLE_TAIL}
-ANY_VARIABLE_NAME = {SPACES_OR_COMMENTS}({VARIABLE_NAME}|{BRACED_VARIABLE_NAME})
 
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC][^a-zA-Z0-9_]
@@ -109,9 +105,6 @@ UNQUOTED_HEREDOC_MARKER = [\w_]{IDENTIFIER}?
 
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
-
-// suffix, sigil from variable
-SIGIL_SUFFIX = "{" | "$" [{$\w]
 
 SUB_PROTOTYPE = [\s\[$@%&*\];+]+
 
@@ -153,8 +146,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 %state LEX_QUOTED_HEREDOC_OPENER, LEX_BARE_HEREDOC_OPENER, LEX_BARE_BACKREF_HEREDOC_OPENER
 
-%state LEX_SCALAR_NAME,LEX_ARRAY_NAME,LEX_HASH_NAME,LEX_CODE_NAME,LEX_GLOB_NAME
-%state LEX_SCALAR_NAME_BRACED,LEX_ARRAY_NAME_BRACED,LEX_HASH_NAME_BRACED,LEX_CODE_NAME_BRACED,LEX_GLOB_NAME_BRACED
+%state LEX_VARIABLE_UNBRACED, LEX_VARIABLE_BRACED
 
 %%
 
@@ -194,24 +186,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{UNQUOTED_HEREDOC_MARKER} {	yybegin(LEX_OPERATOR); heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
 }
 
-<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ,LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>{
-	"$" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
-	"@" / {ANY_VARIABLE_NAME} 	{pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
-	"$#" / {ANY_VARIABLE_NAME}  {pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
-}
-
-<LEX_STRING_CONTENT_QQ>
+<LEX_STRING_CONTENT_QQ,LEX_STRING_CONTENT_XQ,LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>
 {
-	"$" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR: STRING_CONTENT_QQ;}
-	"$#" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: STRING_CONTENT_QQ;}
-	"@" / "{"					{return captureInterpolatedCode() ? SIGIL_ARRAY: STRING_CONTENT_QQ;}
-}
-
-<LEX_STRING_CONTENT_XQ>
-{
-	"$" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR: STRING_CONTENT_XQ;}
-	"$#" / "{"					{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: STRING_CONTENT_XQ;}
-	"@" / "{"					{return captureInterpolatedCode() ? SIGIL_ARRAY: STRING_CONTENT_XQ;}
+	"@" / [^] 	{return startUnbracedVariable(SIGIL_ARRAY);}
+	"$#" / [^] 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
+	"$" / [^] 	{return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
 <LEX_EXTENDED_MATCH_REGEX>{
@@ -219,22 +198,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{ANY_SPACE}+		{return TokenType.WHITE_SPACE;}
 }
 
-<LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX>
+<LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>
 {
 	{REGEX_COMMENT}	{return COMMENT_LINE;}
 	[^]				{return REGEX_TOKEN;}
-}
-
-<LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>
-{
-	"$" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR: REGEX_TOKEN;}
-	"$#" / "{"		{return captureInterpolatedCode() ? SIGIL_SCALAR_INDEX: REGEX_TOKEN;}
-	"@" / "{"		{return captureInterpolatedCode() ? SIGIL_ARRAY: REGEX_TOKEN;}
-	[$@]			{return REGEX_TOKEN;}
-}
-
-<LEX_REPLACEMENT_REGEX>{
-	[^$@]+			{return REGEX_TOKEN;}
 }
 
 <LEX_STRING_CONTENT_QQ>{
@@ -270,12 +237,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 {DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return COMMENT_BLOCK;}
 
 <LEX_PRINT>{
-	"$" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
-	"@" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
-	"$#" / {ANY_VARIABLE_NAME}  {yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
-	"%" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_HASH_NAME);return SIGIL_HASH;}
-	"&" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_CODE_NAME);return SIGIL_CODE;}
-	"*" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_IDENTIFIER);pushStateAndBegin(LEX_GLOB_NAME);return SIGIL_GLOB;}
+	"@" 	{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_ARRAY);}
+	"$#" 	{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_SCALAR_INDEX);}
+	"$" 	{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_SCALAR); }
+	"%"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_HASH);}
+	"*"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_GLOB);}
+	"&"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_CODE);}
+
 	{IDENTIFIER} / [^(,-<{\[\w]		{yybegin(YYINITIAL);return HANDLE;}
 }
 
@@ -303,6 +271,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]+ 		{return COMMENT_BLOCK;}
 }
 
+/*
 <LEX_SCALAR_NAME_BRACED,LEX_ARRAY_NAME_BRACED,LEX_HASH_NAME_BRACED,LEX_CODE_NAME_BRACED,LEX_GLOB_NAME_BRACED>
 {
 	"}"								{popState(); return RIGHT_BRACE;}
@@ -337,10 +306,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{VARIABLE_NAME}					{popState(); return CODE_NAME;}
 }
 <LEX_CODE_NAME_BRACED>	{VARIABLE_NAME}					{return CODE_NAME;}
+*/
 
 <LEX_BRACED_STRING>{
 	{BAREWORD_MINUS}	{return STRING_CONTENT;}
-	"}"					{yybegin(LEX_AFTER_VARIABLE_NAME);return RIGHT_BRACE;}
+	"}"					{yybegin(LEX_AFTER_VARIABLE_NAME);return getRightBrace();}
 }
 
 // fixme temproary
@@ -379,7 +349,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{
-	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(LEX_BRACED_STRING);return LEFT_BRACE;}
+	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(LEX_BRACED_STRING);return getLeftBrace();}
 }
 
 <LEX_SUB>{
@@ -389,7 +359,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <LEX_SUB,LEX_SUB_ATTRIBUTES,LEX_ATTRIBUTES>{
-	"{"     					{yybegin(YYINITIAL);return LEFT_BRACE_CODE;}
+	"{"     					{yybegin(YYINITIAL);return getLeftBraceCode();}
 }
 
 <LEX_SUB,LEX_SUB_ATTRIBUTES>{
@@ -411,7 +381,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_SUB,LEX_PRINT>{
-	"{"     {yybegin(YYINITIAL);return LEFT_BRACE;}
+	"{"     {yybegin(YYINITIAL);return getLeftBraceCode();}
 }
 
 // common logic
@@ -443,7 +413,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_PRINT>{
 	{FARROW} 	{yybegin(YYINITIAL);return FAT_COMMA;}
 	"," 	{yybegin(YYINITIAL);return COMMA;}
-	"}"     {yybegin(LEX_AFTER_RIGHT_BRACE);return RIGHT_BRACE;}
+	"}"     {yybegin(LEX_AFTER_RIGHT_BRACE);return getRightBrace();}
 	"]"     {yybegin(LEX_OPERATOR);return RIGHT_BRACKET;}
 	")"     {yybegin(LEX_OPERATOR);return RIGHT_PAREN;}
 
@@ -530,28 +500,27 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"..." 	{yybegin(LEX_OPERATOR);return OPERATOR_NYI;}
 }
 
-<YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
-	"$" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR;}
-	"@" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_ARRAY_NAME);return SIGIL_ARRAY;}
-	"$#" / {ANY_VARIABLE_NAME}  {yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_SCALAR_NAME);return SIGIL_SCALAR_INDEX;}
-	"%" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_HASH_NAME);return SIGIL_HASH;}
-	"&" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_CODE_NAME);return SIGIL_CODE;}
-	"*" / {ANY_VARIABLE_NAME} 	{yybegin(LEX_AFTER_VARIABLE_NAME);pushStateAndBegin(LEX_GLOB_NAME);return SIGIL_GLOB;}
-
-	"@"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_ARRAY;}
-	"$#" / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
-	"$"	 / {SIGIL_SUFFIX} 		{yybegin(YYINITIAL);return SIGIL_SCALAR; }
-	"%"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_HASH;}
-	"*"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_GLOB;}
-	"&"	 / {SIGIL_SUFFIX}		{yybegin(YYINITIAL);return SIGIL_CODE;}
-
-	"@" 	{yybegin(YYINITIAL);return SIGIL_ARRAY;}
-	"$#" 	{yybegin(YYINITIAL);return SIGIL_SCALAR_INDEX;}
-	"$" 	{yybegin(YYINITIAL);return SIGIL_SCALAR; }
-	"%"		{yybegin(YYINITIAL);return SIGIL_HASH;}
-	"*"		{yybegin(YYINITIAL);return SIGIL_GLOB;}
-	"&"		{yybegin(YYINITIAL);return SIGIL_CODE;}
+<LEX_VARIABLE_UNBRACED>{
+	"$" / [${:\w_'\d]						{return processUnbracedScalarSigil();}
+	"{"										{return startBracedVariable();}
+	{VARIABLE_NAME}							{return getUnbracedVariableNameToken();}
 }
+
+<LEX_VARIABLE_BRACED>{
+	{VARIABLE_NAME}	/ {SPACES_OR_COMMENTS}"}"				{return getBracedVariableNameToken();}
+	{CAPPED_BRACED_VARIABLE} / {SPACES_OR_COMMENTS}"}"		{return getBracedVariableNameToken();}
+	[^]														{yypushback(1);yybegin(YYINITIAL);}
+}
+
+<YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
+	"@" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_ARRAY);}
+	"$#" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_SCALAR_INDEX);}
+	"$" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_SCALAR); }
+	"%"		{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_HASH);}
+	"*"		{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_GLOB);}
+	"&"		{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_CODE);}
+}
+
 
 <YYINITIAL,LEX_AFTER_RIGHT_BRACE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
 	{NUMBER_BIN}									{yybegin(LEX_OPERATOR);return NUMBER;}

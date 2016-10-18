@@ -16,12 +16,16 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.parser.trycatch.TryCatchElementTypes;
+import gnu.trove.THashMap;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -55,7 +59,113 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
 
+	private static final Map<IElementType, IElementType> SIGILS_TO_TOKENS_MAP = new THashMap<>();
+
+	static
+	{
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR, SCALAR_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR_INDEX, SCALAR_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_ARRAY, ARRAY_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, HASH_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, CODE_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, GLOB_NAME);
+	}
+
 	// last captured heredoc marker
 	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
+	protected final PerlBracesStack myBracesStack = new PerlBracesStack();
+	private IElementType myCurrentSigilToken;
+
+	/**
+	 * We've met any sigil
+	 */
+	protected IElementType startUnbracedVariable(@NotNull IElementType sigilToken)
+	{
+		return startUnbracedVariable(getRealLexicalState(), sigilToken);
+	}
+
+	/**
+	 * We've met any sigil
+	 */
+	protected IElementType startUnbracedVariable(int state, @NotNull IElementType sigilToken)
+	{
+		myCurrentSigilToken = sigilToken;
+		yybegin(state);
+		pushStateAndBegin(PerlLexer.LEX_VARIABLE_UNBRACED);
+		return sigilToken;
+	}
+
+	/**
+	 * We've met one of the $ / [${]
+	 */
+	protected IElementType processUnbracedScalarSigil()
+	{
+		myCurrentSigilToken = SIGIL_SCALAR;
+		return SIGIL_SCALAR;
+	}
+
+	protected IElementType startBracedVariable()
+	{
+		myBracesStack.push(0);
+		yybegin(PerlLexer.LEX_VARIABLE_BRACED);
+		return getLeftBrace();
+	}
+
+	protected IElementType getLeftBraceCode()
+	{
+		return getLeftBrace(LEFT_BRACE_CODE);
+	}
+
+	protected IElementType getLeftBrace()
+	{
+		return getLeftBrace(LEFT_BRACE);
+	}
+
+	private IElementType getLeftBrace(IElementType braceType)
+	{
+		if (!myBracesStack.isEmpty())
+		{
+			myBracesStack.incLast();
+		}
+		return braceType;
+	}
+
+	protected IElementType getRightBrace()
+	{
+		if (!myBracesStack.isEmpty())
+		{
+			if (myBracesStack.decLast() == 0)
+			{
+				myBracesStack.pop();
+				popState();
+			}
+		}
+		return RIGHT_BRACE;
+	}
+
+	/**
+	 * We've met identifier (variable name)
+	 */
+	@NotNull
+	protected IElementType getUnbracedVariableNameToken()
+	{
+		popState();
+		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
+	}
+
+	@NotNull
+	protected IElementType getBracedVariableNameToken()
+	{
+		yybegin(PerlLexer.YYINITIAL);
+		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
+	}
+
+
+	@Override
+	protected void resetInternals()
+	{
+		super.resetInternals();
+		myBracesStack.clear();
+	}
 
 }

@@ -284,7 +284,7 @@ public class PerlLexer extends PerlLexerGenerated
 	@Override
 	public int yystate()
 	{
-		return preparsedTokensList.isEmpty() && !myFormatWaiting && heredocQueue.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
+		return preparsedTokensList.isEmpty() && !myFormatWaiting && heredocQueue.isEmpty() && myBracesStack.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
 	}
 
 	/**
