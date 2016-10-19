@@ -36,10 +36,12 @@ public class PerlElementTypeFactory
 			"STRING_PLUS",
 			"STRING_IDENTIFIER",
 			"STRING_PACKAGE",
-			"STRING_CONTENT"
+			"STRING_CONTENT",
+			"STRING_CONTENT_QQ",
+			"STRING_CONTENT_QX"
 	));
 
-	protected final static Set<String> VARIABLE_NAMES_TOKESN = new THashSet<>(Arrays.asList(
+	protected final static Set<String> VARIABLE_NAMES_TOKENS_NAMES = new THashSet<>(Arrays.asList(
 			"SCALAR_NAME",
 			"ARRAY_NAME",
 			"HASH_NAME",
@@ -69,7 +71,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("VARIABLE_NAME"))
+		if (VARIABLE_NAMES_TOKENS_NAMES.contains(name))
 		{
 			return new PerlTokenTypeEx(name)
 			{
