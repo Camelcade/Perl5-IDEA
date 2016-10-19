@@ -44,14 +44,14 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 	static
 	{
-		SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.LEX_STRING_LIST);
-		SUBLEXINGS_MAP.put(LP_STRING_Q, PerlLexer.LEX_STRING_CONTENT);
-		SUBLEXINGS_MAP.put(LP_STRING_QQ, PerlLexer.LEX_STRING_CONTENT_QQ);
-		SUBLEXINGS_MAP.put(LP_STRING_XQ, PerlLexer.LEX_STRING_CONTENT_XQ);
+		SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
+		SUBLEXINGS_MAP.put(LP_STRING_Q, PerlLexer.STRING_Q);
+		SUBLEXINGS_MAP.put(LP_STRING_QQ, PerlLexer.STRING_QQ);
+		SUBLEXINGS_MAP.put(LP_STRING_XQ, PerlLexer.STRING_QX);
 
-		SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.LEX_MATCH_REGEX);
-		SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.LEX_EXTENDED_MATCH_REGEX);
-		SUBLEXINGS_MAP.put(LP_REGEX_REPLACEMENT, PerlLexer.LEX_REPLACEMENT_REGEX);
+		SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
+		SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.EXTENDED_MATCH_REGEX);
+		SUBLEXINGS_MAP.put(LP_REGEX_REPLACEMENT, PerlLexer.REPLACEMENT_REGEX);
 		SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
 	}
 
@@ -156,7 +156,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 				if (myTokenType != null)
 				{
-					myState = PerlLexer.LEX_PREPARSED_ITEMS;
+					myState = PerlLexer.PREPARSED_ITEMS;
 					return;
 				}
 

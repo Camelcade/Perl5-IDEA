@@ -42,17 +42,17 @@ public class PerlSubLexerAdapter extends FlexAdapter
 
 	public static PerlSubLexerAdapter forStringSQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT);
+		return new PerlSubLexerAdapter(project, PerlLexer.STRING_Q);
 	}
 
 	public static PerlSubLexerAdapter forStringDQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_QQ);
+		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QQ);
 	}
 
 	public static PerlSubLexerAdapter forStringXQ(@Nullable Project project)
 	{
-		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_XQ);
+		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QX);
 	}
 
 	@Override

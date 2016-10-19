@@ -7,5 +7,5 @@ git:
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 
 branches:
-	except:
-		- lexer_rework
+  except:
+    - lexer_rework

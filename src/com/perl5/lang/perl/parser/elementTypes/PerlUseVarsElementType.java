@@ -48,7 +48,7 @@ public class PerlUseVarsElementType extends ILazyParseableElementType implements
 		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
 				project,
 				chameleon,
-				new PerlSubLexerAdapter(project, PerlLexer.LEX_USE_VARS_STRING),
+				new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING),
 				getLanguage(),
 				chameleon.getText());
 		PsiParser parser = new PerlUseVarsDeclarationsParser();

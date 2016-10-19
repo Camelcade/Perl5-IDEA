@@ -288,7 +288,7 @@ public class PerlLexer extends PerlLexerGenerated
 				!myFormatWaiting &&
 				heredocQueue.isEmpty() &&
 				myBracesStack.isEmpty()
-				? super.yystate() : LEX_PREPARSED_ITEMS;
+				? super.yystate() : PREPARSED_ITEMS;
 	}
 
 	/**
@@ -327,15 +327,15 @@ public class PerlLexer extends PerlLexerGenerated
 					return tokenType;
 				}
 			}
-			else if (isOpeningQuoteFor(currentState, currentChar, LEX_QUOTE_LIKE_OPENER_Q, LEX_QUOTE_LIKE_OPENER_QQ, LEX_QUOTE_LIKE_OPENER_QX, LEX_QUOTE_LIKE_OPENER_QW))
+			else if (isOpeningQuoteFor(currentState, currentChar, QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW))
 			{
 				return captureString();
 			}
-			else if (isOpeningQuoteFor(currentState, currentChar, LEX_REGEX_OPENER))
+			else if (isOpeningQuoteFor(currentState, currentChar, REGEX_OPENER))
 			{
 				return parseRegex(tokenStart);
 			}
-			else if (isOpeningQuoteFor(currentState, currentChar, LEX_TRANS_OPENER))
+			else if (isOpeningQuoteFor(currentState, currentChar, TRANS_OPENER))
 			{
 				return parseTr();
 			}
@@ -382,19 +382,19 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		int currentState = getRealLexicalState();
 
-		if (currentState == LEX_QUOTE_LIKE_OPENER_Q)
+		if (currentState == QUOTE_LIKE_OPENER_Q)
 		{
 			return SQ_TOKENS;
 		}
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QQ)
+		if (currentState == QUOTE_LIKE_OPENER_QQ)
 		{
 			return DQ_TOKENS;
 		}
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QX)
+		if (currentState == QUOTE_LIKE_OPENER_QX)
 		{
 			return XQ_TOKENS;
 		}
-		if (currentState == LEX_QUOTE_LIKE_OPENER_QW)
+		if (currentState == QUOTE_LIKE_OPENER_QW)
 		{
 			return QW_TOKENS;
 		}
@@ -710,7 +710,7 @@ public class PerlLexer extends PerlLexerGenerated
 		}
 
 		pushState();
-		yybegin(LEX_REGEX_OPENER);
+		yybegin(REGEX_OPENER);
 	}
 
 	/**
@@ -721,7 +721,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseTr()
 	{
 		popState();
-		yybegin(LEX_OPERATOR);
+		yybegin(OPERATOR);
 		CharSequence buffer = getBuffer();
 		int currentOffset = getTokenEnd();
 		int bufferEnd = getBufferEnd();
@@ -958,7 +958,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseRegex(int currentOffset)
 	{
 		popState();
-		yybegin(LEX_OPERATOR);
+		yybegin(OPERATOR);
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
 
@@ -1081,7 +1081,7 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		allowSharpQuote = true;
 		pushState();
-		yybegin(LEX_TRANS_OPENER);
+		yybegin(TRANS_OPENER);
 	}
 
 	/**
@@ -1094,19 +1094,19 @@ public class PerlLexer extends PerlLexerGenerated
 		pushState();
 		if (tokenType == RESERVED_Q)
 		{
-			yybegin(LEX_QUOTE_LIKE_OPENER_Q);
+			yybegin(QUOTE_LIKE_OPENER_Q);
 		}
 		else if (tokenType == RESERVED_QQ)
 		{
-			yybegin(LEX_QUOTE_LIKE_OPENER_QQ);
+			yybegin(QUOTE_LIKE_OPENER_QQ);
 		}
 		else if (tokenType == RESERVED_QX)
 		{
-			yybegin(LEX_QUOTE_LIKE_OPENER_QX);
+			yybegin(QUOTE_LIKE_OPENER_QX);
 		}
 		else if (tokenType == RESERVED_QW)
 		{
-			yybegin(LEX_QUOTE_LIKE_OPENER_QW);
+			yybegin(QUOTE_LIKE_OPENER_QW);
 		}
 		else
 		{

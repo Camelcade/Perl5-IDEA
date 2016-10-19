@@ -91,7 +91,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	{
 		myCurrentSigilToken = sigilToken;
 		yybegin(state);
-		pushStateAndBegin(PerlLexer.LEX_VARIABLE_UNBRACED);
+		pushStateAndBegin(PerlLexer.VARIABLE_UNBRACED);
 		return sigilToken;
 	}
 
@@ -107,7 +107,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected IElementType startBracedVariable()
 	{
 		myBracesStack.push(0);
-		yybegin(PerlLexer.LEX_VARIABLE_BRACED);
+		yybegin(PerlLexer.VARIABLE_BRACED);
 		return getLeftBrace();
 	}
 
