@@ -147,6 +147,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state LEX_AFTER_RIGHT_BRACKET
 
 %state LEX_QUOTED_HEREDOC_OPENER, LEX_BARE_HEREDOC_OPENER, LEX_BARE_BACKREF_HEREDOC_OPENER
+%state LEX_EVAL_DO
 
 %state LEX_USE_VARS_STRING
 
@@ -295,6 +296,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 // handles hash indexes after variable and/or ->
 <LEX_AFTER_DEREFERENCE,LEX_AFTER_VARIABLE_NAME,LEX_AFTER_RIGHT_BRACKET>{
 	"{"							{return startStructuredBlock(LEX_AFTER_VARIABLE_NAME);}
+}
+
+<LEX_EVAL_DO>{
+	"{"							{return startStructuredBlock(LEX_OPERATOR);}
+	[^]							{yypushback(1);yybegin(YYINITIAL);}
 }
 
 <LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{
@@ -574,8 +580,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"map"	 { yybegin(YYINITIAL);return  RESERVED_MAP;}
 	{CORE_PREFIX}"sort"	 { yybegin(YYINITIAL);return  RESERVED_SORT;}
 
-	{CORE_PREFIX}"do"	 { yybegin(YYINITIAL);return  RESERVED_DO;}
-	{CORE_PREFIX}"eval"	 { yybegin(YYINITIAL);return  RESERVED_EVAL;}
+	{CORE_PREFIX}"do"	 { yybegin(LEX_EVAL_DO);return  RESERVED_DO;}
+	{CORE_PREFIX}"eval"	 { yybegin(LEX_EVAL_DO);return  RESERVED_EVAL;}
 
 	{CORE_PREFIX}"goto"	 { yybegin(YYINITIAL);return  RESERVED_GOTO;}
 	{CORE_PREFIX}"redo"	 { yybegin(YYINITIAL);return  RESERVED_REDO;}
