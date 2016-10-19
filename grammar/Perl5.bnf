@@ -526,12 +526,12 @@ given_compound ::=  'given' conditional_block  {pin=1}
 when_compound ::=  'when' conditional_block  {pin=1}
 default_compound ::=  'default' parse_block {pin=1}
 
-while_compound ::=  'while' conditional_block_while [continue_block]  {pin=1}
-until_compound ::=  'until' conditional_block [continue_block]  {pin=1}
+while_compound ::=  'while' conditional_block_while [ [POD] continue_block]  {pin=1}
+until_compound ::=  'until' conditional_block [[POD] continue_block]  {pin=1}
 
-continue_block ::= [POD] 'continue' parse_block {pin=2}
+continue_block ::= 'continue' parse_block {pin=1}
 
-private block_compound ::= parse_block [continue_block]
+private block_compound ::= parse_block [[POD] continue_block]
 
 
 // for/foreach
