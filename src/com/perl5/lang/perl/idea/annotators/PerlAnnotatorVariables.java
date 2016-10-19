@@ -22,8 +22,12 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -60,19 +64,21 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
+		IElementType elementType = PsiUtilCore.getElementType(element);
+		// fixme we could implement specific tokens for cast braces and get rid of this
 		if (element instanceof PsiPerlScalarCastExpr || element instanceof PsiPerlScalarIndexCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SCALAR);
 		}
-		if (element instanceof PsiPerlHashCastExpr)
+		else if (element instanceof PsiPerlHashCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_HASH);
 		}
-		if (element instanceof PsiPerlArrayCastExpr)
+		else if (element instanceof PsiPerlArrayCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_ARRAY);
 		}
-		if (element instanceof PsiPerlGlobCastExpr)
+		else if (element instanceof PsiPerlGlobCastExpr)
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_GLOB);
 		}
@@ -80,6 +86,42 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SUB);
 		}
+		else if (elementType == PARSABLE_STRING_USE_VARS)
+		{
+			for (PsiElement psiElement : element.getChildren())
+			{
+				TextAttributesKey elementKey = null;
+				if (psiElement instanceof PerlVariableDeclarationWrapper)
+				{
+					PerlVariableType actualType = ((PerlVariableDeclarationWrapper) psiElement).getActualType();
+					if (actualType == PerlVariableType.SCALAR)
+					{
+						elementKey = PerlSyntaxHighlighter.PERL_SCALAR;
+					}
+					else if (actualType == PerlVariableType.HASH)
+					{
+						elementKey = PerlSyntaxHighlighter.PERL_HASH;
+					}
+					else if (actualType == PerlVariableType.ARRAY)
+					{
+						elementKey = PerlSyntaxHighlighter.PERL_ARRAY;
+					}
+				}
+				else if (psiElement instanceof PerlGlobVariable)
+				{
+					elementKey = PerlSyntaxHighlighter.PERL_GLOB;
+				}
+				else if (psiElement instanceof PsiPerlCodeVariable)
+				{
+					elementKey = PerlSyntaxHighlighter.PERL_SUB;
+				}
 
+				if (elementKey != null)
+				{
+					holder.createInfoAnnotation(element, null).setTextAttributes(elementKey);
+				}
+			}
+
+		}
 	}
 }

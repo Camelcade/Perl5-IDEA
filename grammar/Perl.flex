@@ -148,6 +148,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 %state LEX_QUOTED_HEREDOC_OPENER, LEX_BARE_HEREDOC_OPENER, LEX_BARE_BACKREF_HEREDOC_OPENER
 
+%state LEX_USE_VARS_STRING
+
 %state LEX_VARIABLE_UNBRACED, LEX_VARIABLE_BRACED
 
 %%
@@ -457,6 +459,16 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{VARIABLE_NAME}	/ {SPACES_OR_COMMENTS}"}"				{return getBracedVariableNameToken();}
 	{CAPPED_BRACED_VARIABLE} / {SPACES_OR_COMMENTS}"}"		{return getBracedVariableNameToken();}
 	[^]														{yypushback(1);yybegin(YYINITIAL);}
+}
+
+<LEX_USE_VARS_STRING>
+{
+	"@" 	{return startUnbracedVariable(SIGIL_ARRAY);}
+	"$#" 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
+	"$" 	{return startUnbracedVariable(SIGIL_SCALAR); }
+	"%"		{return startUnbracedVariable(SIGIL_HASH);}
+	"*"		{return startUnbracedVariable(SIGIL_GLOB);}
+	"&"		{return startUnbracedVariable(SIGIL_CODE);}
 }
 
 <YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{

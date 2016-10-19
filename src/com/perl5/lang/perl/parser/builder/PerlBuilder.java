@@ -35,9 +35,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
 	// flag forces stringification of -identifiers, required for use Package -option;
 	boolean stringify = false;
-	// flag shows that SQ strings should be re-parsed as QQ strings. Used in use vars expr
-	boolean reparseSQString = false;
-	// flag allowes additional sigils to parse, required in use vars reparsed strings
+	// flags that sq strings should be converted to the use_vars_lazy_parsable_strings
 	boolean isUseVarsContent = false;
 	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
 	boolean isInterpolated = false;
@@ -104,40 +102,19 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return oldState;
 	}
 
-	public boolean isReparseSQString()
-	{
-		return reparseSQString;
-	}
-
-	public boolean setReparseSQString(boolean newState)
-	{
-		boolean currentState = isReparseSQString();
-		reparseSQString = newState;
-		return currentState;
-	}
-
 	public boolean isUseVarsContent()
 	{
 		return isUseVarsContent;
 	}
 
-	public boolean setUseVarsContent(boolean newState)
+	public void setUseVarsContent(boolean newState)
 	{
-		boolean currentState = isUseVarsContent();
 		isUseVarsContent = newState;
-		return currentState;
 	}
 
 	public boolean isInterpolated()
 	{
 		return isInterpolated;
-	}
-
-	public boolean setIsInterpolated(boolean newState)
-	{
-		boolean currentState = isInterpolated();
-		isInterpolated = newState;
-		return currentState;
 	}
 
 	public boolean isRegex()

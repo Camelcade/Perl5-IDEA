@@ -103,14 +103,9 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
 
-		PerlBuilder perlBuilder = new PerlBuilder(builder, state, parser);
-
-		if (root == PARSABLE_STRING_USE_VARS)
-		{
-			perlBuilder.setUseVarsContent(true);
-		}
-		return perlBuilder;
+		return new PerlBuilder(builder, state, parser);
 	}
+
 
 	/**
 	 * Smart parser for ->, makes }->[ optional
@@ -664,31 +659,30 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean parseUseVarsParameters(PsiBuilder b, int l)
 	{
 		assert b instanceof PerlBuilder;
-		boolean currentReparseState = ((PerlBuilder) b).setReparseSQString(true);
-		boolean currentUseVarsState = ((PerlBuilder) b).setUseVarsContent(true);
+		((PerlBuilder) b).setUseVarsContent(true);
 
 		boolean r = PerlParserImpl.expr(b, l, -1);
 
-		((PerlBuilder) b).setReparseSQString(currentReparseState);
-		((PerlBuilder) b).setUseVarsContent(currentUseVarsState);
+		((PerlBuilder) b).setUseVarsContent(false);
 
 		return r;
 	}
 
 	/**
-	 * Parses SQ string depending on reparseSQString flag of PerlBuilder
+	 * Parses SQ string with optional conversion to the use_vars lp string
 	 *
 	 * @param b PerlBuilder
 	 * @param l parsing level
 	 * @return parsing result
 	 */
-	public static boolean parseSQString(PsiBuilder b, int l)
+	public static boolean mapUseVars(PsiBuilder b, int l, Parser parser)
 	{
 		PsiBuilder.Marker m = b.mark();
 
-		boolean r = PerlParserImpl.quoted_sq_string(b, l);
+		boolean r = parser.parse(b, l);
 
-		if (r && ((PerlBuilder) b).isReparseSQString())
+		// fixme prepend last done marker
+		if (r)
 		{
 			m.collapse(PARSABLE_STRING_USE_VARS);
 		}
@@ -698,6 +692,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 
 		return r;
+	}
+
+	// fixme replace with looking to upper frames ?
+	public static boolean isUseVars(PsiBuilder b, int l)
+	{
+		return ((PerlBuilder) b).isUseVarsContent();
 	}
 
 	/**

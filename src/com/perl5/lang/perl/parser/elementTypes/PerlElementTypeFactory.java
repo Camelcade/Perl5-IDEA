@@ -139,7 +139,7 @@ public class PerlElementTypeFactory
 		}
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
 		{
-			return new PerlQQStringElementType(name);
+			return new PerlUseVarsElementType(name);
 		}
 		else if (name.equals("COMMENT_ANNOTATION"))
 		{

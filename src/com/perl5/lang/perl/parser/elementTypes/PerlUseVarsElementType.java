@@ -17,34 +17,49 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiBuilderFactory;
+import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.ILazyParseableElementType;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
+import com.perl5.lang.perl.parser.PerlUseVarsDeclarationsParser;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.09.2015.
  */
-public class PerlQQStringElementType extends PerlParsableStringElementType implements PsiElementProvider
+public class PerlUseVarsElementType extends ILazyParseableElementType implements PsiElementProvider
 {
-	public PerlQQStringElementType(String name)
+	public PerlUseVarsElementType(String name)
 	{
-		super(name);
+		super(name, PerlLanguage.INSTANCE);
 	}
 
 	@Override
-	protected FlexAdapter getLexerAdapter(Project project)
+	public ASTNode parseContents(ASTNode chameleon)
 	{
-		return new PerlSubLexerAdapter(project, PerlLexer.LEX_STRING_CONTENT_QQ);
+		PsiElement parentElement = chameleon.getTreeParent().getPsi();
+		Project project = parentElement.getProject();
+		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+				project,
+				chameleon,
+				new PerlSubLexerAdapter(project, PerlLexer.LEX_USE_VARS_STRING),
+				getLanguage(),
+				chameleon.getText());
+		PsiParser parser = new PerlUseVarsDeclarationsParser();
+
+		return parser.parse(this, builder).getFirstChildNode();
 	}
 
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
 	{
-		return new PerlParsableStringWrapperlImpl(node);
+		return new PerlCompositeElementImpl(node);
 	}
 }

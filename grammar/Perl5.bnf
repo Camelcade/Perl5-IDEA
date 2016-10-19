@@ -472,6 +472,9 @@ private statement_item ::=
 		| TAG_DATA
 		| <<parseBadCharacters>> // Fallback for bad characters
 
+// invoked from PerlUseVarsDeclarationsParser
+private use_vars_declarations ::= {variable_declaration_wrapper|glob_variable|code_variable}*
+
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' IDENTIFIER [perl_version] {pin=1 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
@@ -1015,10 +1018,12 @@ private interpolated_constructs ::=
 
 string_bare ::= <<parseAndWrapStringContent>>
 
-string_sq ::= [ 'q'] <<parseSQString>>	// fixme use vars hack, remove
-string_list ::=  'qw' <<parseSQString>>
-private quoted_sq_string ::= QUOTE_SINGLE_OPEN [LP_STRING_Q |LP_STRING_QW|sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
-private sq_string_content ::= STRING_CONTENT+
+string_sq ::= [ 'q'] quoted_sq_string
+string_list ::=  'qw' quoted_sq_string
+private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
+private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
+private sq_string_content ::= sq_string_content_element +
+private sq_string_content_element ::= LP_STRING_Q |LP_STRING_QW|STRING_CONTENT
 
 
 private use_vars_interpolated_constructs ::=

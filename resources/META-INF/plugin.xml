@@ -237,7 +237,7 @@
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorMisc"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorSubs"
                    id="PERL_SUBS_ANNOTATOR" order="first"/>
-        <!--<annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>-->
+        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorVariables"/>
         <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotatorNamespaces"/>
 
         <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlCodeFoldingOptionsProvider"/>
