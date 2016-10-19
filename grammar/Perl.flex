@@ -442,7 +442,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"/"   	{yybegin(YYINITIAL);return OPERATOR_DIV;}
 
 	"x"   		{yybegin(YYINITIAL);return OPERATOR_X;}
-	"not"		{yybegin(YYINITIAL);return OPERATOR_NOT_LP;}
 	"and"		{yybegin(YYINITIAL);return OPERATOR_AND_LP;}
 	"or"		{yybegin(YYINITIAL);return OPERATOR_OR_LP;}
 	"xor"		{yybegin(YYINITIAL);return OPERATOR_XOR_LP;}
@@ -533,6 +532,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
 	"-" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_UNARY;}
 	"~" 						{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
+	"not"						{yybegin(YYINITIAL);return OPERATOR_NOT_LP;}
 	{PERL_OPERATORS_FILETEST} 	{yybegin(LEX_HANDLE);yypushback(1);return OPERATOR_FILETEST;}
 
 	"\\" 						{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
