@@ -206,17 +206,22 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <LEX_MATCH_REGEX,LEX_EXTENDED_MATCH_REGEX,LEX_REPLACEMENT_REGEX>
 {
 	{REGEX_COMMENT}	{return COMMENT_LINE;}
+	"\\"[\$\@]		{return REGEX_TOKEN;}
 	[^]				{return REGEX_TOKEN;}
 }
 
 <LEX_STRING_CONTENT_QQ>{
-	[^$\@]+						{return STRING_CONTENT_QQ;}
-	[\$\@]						{return STRING_CONTENT_QQ;}
+	"\\"[\$\@]					{return STRING_CONTENT_QQ;}
+	// chars with special treatments
+	[^$\@\\]+					{return STRING_CONTENT_QQ;}
+	[^]							{return STRING_CONTENT_QQ;}
 }
 
 <LEX_STRING_CONTENT_XQ>{
-	[^\$\@]+					{return STRING_CONTENT_XQ;}
-	[\$\@]						{return STRING_CONTENT_XQ;}
+	"\\"[\$\@]					{return STRING_CONTENT_XQ;}
+	// chars with special treatments
+	[^\$\@\\]+					{return STRING_CONTENT_XQ;}
+	[^]							{return STRING_CONTENT_XQ;}
 }
 
 <LEX_STRING_LIST>
