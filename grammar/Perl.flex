@@ -112,7 +112,6 @@ POD_START = "="[\w].* {NEW_LINE} ?
 POD_LINE = (.+ {NEW_LINE} ? | {NEW_LINE})
 POD_END = "=cut" ({WHITE_SPACE} .*)?
 
-// original list taken from http://www.perlmonks.org/?node_id=1131277
 NAMED_UNARY_OPERATORS = "values"|"umask"|"ucfirst"|"uc"|"study"|"srand"|"sqrt"|"sleep"|"sin"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"rmdir"|"reset"|"ref"|"readpipe"|"readlink"|"readline"|"rand"|"quotemeta"|"prototype"|"pop"|"ord"|"oct"|"log"|"localtime"|"length"|"lcfirst"|"lc"|"keys"|"int"|"hex"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"fc"|"exp"|"exit"|"exists"|"evalbytes"|"each"|"defined"|"cos"|"chroot"|"chr"|"caller"|"alarm"|"abs"
 BARE_HANDLE_ACCEPTORS = "truncate"|"syswrite"|"sysseek"|"sysread"|"sysopen"|"select"|"seekdir"|"seek"|"read"|"opendir"|"open"|"ioctl"|"flock"|"fcntl"|"binmode"
 NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"stat"|"rewinddir"|"readdir"|"lstat"|"getc"|"fileno"|"eof"|"closedir"|"close"|"chdir"
@@ -120,6 +119,8 @@ NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"stat"|"rewinddir"|
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"continue"|"break"
+LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"unpack"|"unlink"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"split"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"scalar"|"rindex"|"reverse"|"rename"|"recv"|"push"|"pos"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"mkdir"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"import"|"glob"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"die"|"delete"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chop"|"chomp"|"chmod"|"bless"|"bind"|"atan2"|"accept"
+HANDLES = "STDIN"|"STDOUT"|"STDERR"
 
 REGEX_COMMENT = "(?#"[^)]*")"
 
@@ -244,8 +245,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"%"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_HASH);}
 	"*"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_GLOB);}
 	"&"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_CODE);}
-
-	{IDENTIFIER} / [^(,-<{\[\w]		{yybegin(YYINITIAL);return HANDLE;}
 }
 
 <LEX_HANDLE> {
@@ -284,38 +283,16 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"vars"			{yybegin(YYINITIAL);return PACKAGE_PRAGMA_VARS;}
 }
 
-<LEX_PACKAGE_USE>{
-	"constant"						{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_CONSTANT;}
-	"vars"							{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_VARS;}
-	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_PACKAGE_USE_VERSION);return IDENTIFIER;}
-}
 
 <LEX_PACKAGE,LEX_PACKAGE_USE_VERSION,LEX_PACKAGE_REQUIRE>{
 	{PERL_VERSION}					{yybegin(YYINITIAL);return NUMBER_VERSION;}
 	[^]								{yypushback(1);yybegin(YYINITIAL);}
 }
 
-<LEX_PACKAGE>{
-	{QUALIFIED_IDENTIFIER}			{yybegin(YYINITIAL);return IDENTIFIER;}
-}
-
-<LEX_PACKAGE_REQUIRE>{
-	{QUALIFIED_IDENTIFIER} / "("	{yybegin(LEX_AFTER_IDENTIFIER);return IDENTIFIER;}
-	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_OPERATOR);return IDENTIFIER;}
-}
 
 // handles hash indexes after variable and/or ->
 <LEX_AFTER_DEREFERENCE,LEX_AFTER_VARIABLE_NAME,LEX_AFTER_RIGHT_BRACKET>{
 	"{"							{return startStructuredBlock(LEX_AFTER_VARIABLE_NAME);}
-}
-
-<LEX_AFTER_DEREFERENCE>{
-	"follow_best_practice"		{yybegin(LEX_OPERATOR);return RESERVED_FOLLOW_BEST_PRACTICE;}
-	"mk_accessors"				{yybegin(LEX_OPERATOR);return RESERVED_MK_ACCESSORS;}
-	"mk_ro_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_RO_ACCESSORS;}
-	"mk_wo_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_WO_ACCESSORS;}
-	"helper"					{yybegin(LEX_OPERATOR);return MOJO_HELPER_METHOD;}
-	{QUALIFIED_IDENTIFIER} 		{yybegin(LEX_OPERATOR);return IDENTIFIER;}
 }
 
 <LEX_AFTER_VARIABLE_NAME,LEX_AFTER_DEREFERENCE>{
@@ -482,7 +459,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]														{yypushback(1);yybegin(YYINITIAL);}
 }
 
-<YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
+<YYINITIAL,LEX_AFTER_DEREFERENCE,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER>{
 	"@" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_ARRAY);}
 	"$#" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_SCALAR_INDEX);}
 	"$" 	{return startUnbracedVariable(LEX_AFTER_VARIABLE_NAME, SIGIL_SCALAR); }
@@ -598,6 +575,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{BLOCK_NAMES}			{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}				{yybegin(LEX_OPERATOR); return TAG;}
 	{NAMED_ARGUMENTLESS}	{yybegin(LEX_OPERATOR);return IDENTIFIER;}	// fixme we can return special token here to help parser
+	{LIST_OPERATORS}		{yybegin(YYINITIAL);return IDENTIFIER;}
 
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {return RESERVED_Y;}
 	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {return RESERVED_TR;}
@@ -611,9 +589,40 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_M;}
 	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_S;}
 
-	{VARIABLE_QUALIFIED_IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
 }
 
+// identifiers fallbacks
+
+<LEX_AFTER_DEREFERENCE>{
+	"follow_best_practice"		{yybegin(LEX_OPERATOR);return RESERVED_FOLLOW_BEST_PRACTICE;}
+	"mk_accessors"				{yybegin(LEX_OPERATOR);return RESERVED_MK_ACCESSORS;}
+	"mk_ro_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_RO_ACCESSORS;}
+	"mk_wo_accessors"			{yybegin(LEX_OPERATOR);return RESERVED_MK_WO_ACCESSORS;}
+	"helper"					{yybegin(LEX_OPERATOR);return MOJO_HELPER_METHOD;}
+	{QUALIFIED_IDENTIFIER} 		{yybegin(LEX_OPERATOR);return IDENTIFIER;}
+}
+
+<LEX_PACKAGE>{
+	{QUALIFIED_IDENTIFIER}			{yybegin(YYINITIAL);return IDENTIFIER;}
+}
+
+<LEX_PACKAGE_REQUIRE>{
+	{QUALIFIED_IDENTIFIER} / "("	{yybegin(LEX_AFTER_IDENTIFIER);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_OPERATOR);return IDENTIFIER;}
+}
+
+<LEX_PACKAGE_USE>{
+	"constant"						{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_CONSTANT;}
+	"vars"							{yybegin(LEX_PACKAGE_USE_VERSION);return PACKAGE_PRAGMA_VARS;}
+	{QUALIFIED_IDENTIFIER}			{yybegin(LEX_PACKAGE_USE_VERSION);return IDENTIFIER;}
+}
+
+// unsure if we need this, jut for better highlighting
+<LEX_PRINT>	{HANDLES} 	{yybegin(YYINITIAL);return HANDLE;}
+
+<YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
+	{QUALIFIED_IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return getIdentifierToken();}
+}
 
 /* error fallback [^] */
 [^]    { return TokenType.BAD_CHARACTER; }
