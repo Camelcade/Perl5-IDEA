@@ -349,17 +349,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	";"     {yybegin(YYINITIAL);return SEMICOLON;}
 }
 
-<YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
-	"++" 	{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
-	"--" 	{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
-}
-
-<LEX_AFTER_VARIABLE_NAME,LEX_AFTER_RIGHT_BRACKET,LEX_OPERATOR>{
-	"++" 	{yybegin(LEX_OPERATOR);return OPERATOR_PLUS_PLUS;}
-	"--" 	{yybegin(LEX_OPERATOR);return OPERATOR_MINUS_MINUS;}
-}
-
-
 
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACKET,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_AFTER_VARIABLE_NAME,LEX_PRINT>{
 	{FARROW} 	{yybegin(YYINITIAL);return FAT_COMMA;}
@@ -392,6 +381,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"*" 	{yybegin(YYINITIAL);return OPERATOR_MUL;}
 	"%" 	{yybegin(YYINITIAL);return OPERATOR_MOD;}
 	"&" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND;}
+}
+
+
+// no identifier
+<LEX_AFTER_VARIABLE_NAME,LEX_AFTER_RIGHT_BRACKET,LEX_OPERATOR>{
+	"++" 	{yybegin(LEX_OPERATOR);return OPERATOR_PLUS_PLUS;}
+	"--" 	{yybegin(LEX_OPERATOR);return OPERATOR_MINUS_MINUS;}
 }
 
 <LEX_OPERATOR,LEX_AFTER_RIGHT_BRACKET,LEX_AFTER_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
@@ -504,6 +500,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{PERL_VERSION}  		{yybegin(LEX_OPERATOR);return NUMBER_VERSION;}
 }
 
+
 <YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
 	{DQ_STRING}	{yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_Q);return captureString();}
@@ -528,6 +525,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{NAMED_ARGUMENTLESS}				{yybegin(LEX_OPERATOR);return IDENTIFIER;}	// fixme we can return special token here to help parser
 	{LIST_OPERATORS}					{yybegin(YYINITIAL);return IDENTIFIER;}
 
+	"++" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
+	"--" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
 	"!" 						{yybegin(YYINITIAL);return OPERATOR_NOT;}
 	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
 	"-" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_UNARY;}
