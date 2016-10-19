@@ -476,7 +476,7 @@ private statement_item ::=
 private use_vars_declarations ::= {variable_declaration_wrapper|glob_variable|code_variable}*
 
 namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
-private namespace_definition_name ::= 'package' IDENTIFIER [perl_version] {pin=1 recoverWhile=recover_statement}
+private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
 
@@ -636,7 +636,7 @@ upper use_statement ::=  'use' use_no_parameters {pin=1}
 upper no_statement ::=  'no' use_no_parameters {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters
-private use_module_parameters ::= default_package [perl_version [comma]] [<<parseStringifiedExpression>>];
+private use_module_parameters ::= any_package [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
 upper use_statement_constant ::=  'use' <<package_expr 'constant'>> [perl_version] [use_constant_parameters] {pin=2}
@@ -663,8 +663,9 @@ private undef_params ::= deref_expr | variable
 
 require_expr ::=  'require' (require_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
-private require_package ::= default_package !'('
-private default_package ::= <<package_expr IDENTIFIER>>
+private require_package ::= any_package !'('
+private any_package ::= <<package_expr any_package_name>>
+private any_package_name ::= IDENTIFIER|'constant'|'vars'
 meta package_expr ::= <<x1>>
 
 private recover_statement ::= <<recoverStatement>>
@@ -893,9 +894,9 @@ private variable_declaration ::=
     | variable_declaration_local
 
 // @todo attributes support
-variable_declaration_local ::=  'local' [default_package]  local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::=  ('my' | 'state') [default_package] variable_declaration_variation [var_attributes] {pin=1}
-variable_declaration_global ::=  'our' [default_package] variable_declaration_variation [var_attributes] {pin=1}
+variable_declaration_local ::=  'local' [any_package]  local_variable_declaration_variation {pin=1}
+variable_declaration_lexical ::=  ('my' | 'state') [any_package] variable_declaration_variation [var_attributes] {pin=1}
+variable_declaration_global ::=  'our' [any_package] variable_declaration_variation [var_attributes] {pin=1}
 
 
 private local_variable_declaration_variation ::= local_parenthesised_declaration | local_variable_declaration_argument
