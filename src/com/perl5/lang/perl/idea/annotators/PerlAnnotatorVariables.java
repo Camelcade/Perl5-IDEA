@@ -25,8 +25,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
@@ -86,6 +85,7 @@ public class PerlAnnotatorVariables extends PerlAnnotator
 		{
 			decorateCastElement(element, holder, PerlSyntaxHighlighter.PERL_SUB);
 		}
+		// this is available only after first-pass parsing
 		else if (elementType == PARSABLE_STRING_USE_VARS)
 		{
 			for (PsiElement psiElement : element.getChildren())
