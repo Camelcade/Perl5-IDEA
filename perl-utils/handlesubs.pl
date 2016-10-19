@@ -10,7 +10,7 @@ my @keywords = qw(my our local state elsif else given default continue format su
 my @extkeywords = qw(method func try catch finally);
 my @moose = qw(inner with extends meta override around super augment after before has);
 my @operators = qw(x not and or xor lt gt le ge eq ne cmp);
-my @argumentless = qw(wantarray wait times time setpwent setgrent getservent getpwent getprotoent getppid getnetent getlogin gethostent getgrent fork endservent endpwent endprotoent endnetent endhostent endgrent dump continue break);
+my @argumentless = qw(wantarray wait times time setpwent setgrent getservent getpwent getprotoent getppid getnetent getlogin gethostent getgrent fork endservent endpwent endprotoent endnetent endhostent endgrent dump break);
 
 my %unary;
 @unary{@unary} = @unary;
@@ -18,8 +18,11 @@ my %acceptors;
 @acceptors{@acceptors} = @acceptors;
 my %allknown;
 @allknown{@allknown} = @allknown;
+my %argumentless;
+@argumentless{@argumentless} = @argumentless;
 
 delete @allknown{@unary,@acceptors,@operators,@argumentless,@moose,@extkeywords,@keywords};
+delete @argumentless{@keywords,@moose,@extkeywords,@operators};
 
 my %unary_acceptors;
 
@@ -36,3 +39,4 @@ say "NAMED_UNARY_OPERATORS = ".join '|', map "\"$_\"", reverse sort keys %unary;
 say "BARE_HANDLE_ACCEPTORS = ".join '|', map "\"$_\"", reverse sort keys %acceptors;
 say "NAMED_UNARY_BARE_HANDLE_ACCEPTORS = ".join '|', map "\"$_\"", reverse sort keys %unary_acceptors;
 say "LIST_OPERATORS = ".join '|',  map "\"$_\"", reverse sort keys %allknown;
+say "NAMED_ARGUMENTLESS = ".join '|',  map "\"$_\"", reverse sort keys %argumentless;

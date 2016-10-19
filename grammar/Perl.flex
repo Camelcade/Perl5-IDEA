@@ -118,7 +118,7 @@ NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"stat"|"rewinddir"|
 
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
-NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"continue"|"break"
+NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"break"
 LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"unpack"|"unlink"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"split"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"scalar"|"rindex"|"reverse"|"rename"|"recv"|"push"|"pos"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"mkdir"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"import"|"glob"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"die"|"delete"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chop"|"chomp"|"chmod"|"bless"|"bind"|"atan2"|"accept"
 HANDLES = "STDIN"|"STDOUT"|"STDERR"
 
