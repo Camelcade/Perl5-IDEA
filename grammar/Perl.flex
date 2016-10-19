@@ -382,6 +382,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"->" 		{yybegin(LEX_AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
 	// may be in ? sub{} : sub{}; the other way to make a structured block for anon subs
 	":"  	{yybegin(YYINITIAL);return COLON;}
+
+	// may be after lvalue, e.g pos or tailing comma in substr
+	"=" 	{yybegin(YYINITIAL);return OPERATOR_ASSIGN;}
 }
 
 // we won't allow to use ambigious operators after identifier, only sigils
@@ -430,7 +433,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"?"  	{yybegin(YYINITIAL);return QUESTION;}
 	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
 	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
-	"=" 	{yybegin(YYINITIAL);return OPERATOR_ASSIGN;}
 	"+" 	{yybegin(YYINITIAL);return OPERATOR_PLUS;}
 	"-" 	{yybegin(YYINITIAL);return OPERATOR_MINUS;}
 
@@ -461,7 +463,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <LEX_VARIABLE_UNBRACED>{
 	// this is a subset of builtins, $;, $, for example, can't be dereferenced
-	"$" / [\{\"\'\[\]\`\\\!\%\&\(\)\+\-\.\/\<\=\>\|\~\?\:\*\^\@\_\$\:\w_\d]		{return processUnbracedScalarSigil();}
+	"$" / [\{\"\'\[\]\`\\\!\%\&\(\+\-\.\/\<\=\>\|\~\?\:\*\^\@\_\$\:\w_\d]		{return processUnbracedScalarSigil();}
 	"{"											{return startBracedVariable();}
 	{VARIABLE_NAME}								{return getUnbracedVariableNameToken();}
 }
