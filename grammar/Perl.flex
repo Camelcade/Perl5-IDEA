@@ -389,8 +389,21 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <OPERATOR,OPERATOR_OR_OPERAND,POSTFIX_OR_OPERATOR>{
-	"**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
+	// ambuguates unary plus
+	"+" 	{yybegin(YYINITIAL);return OPERATOR_PLUS;}
+	// ambuguates unary minus
+	"-" 	{yybegin(YYINITIAL);return OPERATOR_MINUS;}
+	// ambuguates left angle
+	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
+}
+
+<OPERATOR,AFTER_COMMA,OPERATOR_OR_OPERAND,POSTFIX_OR_OPERATOR,HANDLE_OR_OPERAND_OR_NOTHING>{
 	"&&" 	{yybegin(YYINITIAL);return OPERATOR_AND;}
+	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
+}
+
+<OPERATOR,AFTER_COMMA,OPERATOR_OR_OPERAND,POSTFIX_OR_OPERATOR>{
+	"**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
 	"%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
 	"*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
 	"&=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
@@ -415,7 +428,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"//=" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;}
 	"//" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;}
 	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
-	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
 	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
 
 	"=~" 	{yybegin(YYINITIAL);return OPERATOR_RE;}
@@ -424,12 +436,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"<<" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
 	">>" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;}
 
-	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
 	"?"  	{yybegin(YYINITIAL);return QUESTION;}
 	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
 	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
-	"+" 	{yybegin(YYINITIAL);return OPERATOR_PLUS;}
-	"-" 	{yybegin(YYINITIAL);return OPERATOR_MINUS;}
 
 	"..." 	{yybegin(YYINITIAL);return OPERATOR_HELLIP;}
 	".." 	{yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;}
@@ -566,7 +575,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	"try"						{yybegin(YYINITIAL);return RESERVED_TRY;}
 	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
-	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
+//	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
 
 	"with"					{yybegin(YYINITIAL);return RESERVED_WITH;}
 	"extends"				{yybegin(YYINITIAL);return RESERVED_EXTENDS;}
