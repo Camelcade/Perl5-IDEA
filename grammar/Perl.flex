@@ -246,6 +246,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 {END_BLOCK}		{yybegin(LEX_END_BLOCK);return COMMENT_BLOCK;}
 {DATA_BLOCK}	{yybegin(LEX_END_BLOCK);return COMMENT_BLOCK;}
 
+// fixme we need more generic way to handle this
 <LEX_PRINT>{
 	"@" 	{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_ARRAY);}
 	"$#" 	{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_SCALAR_INDEX);}
