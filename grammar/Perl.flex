@@ -267,16 +267,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]				{yybegin(YYINITIAL);yypushback(1);break;}
 }
 
-<LEX_HANDLE,LEX_STRICT_HANDLE>{
-	{CORE_PREFIX}"my"			{yybegin(YYINITIAL);return RESERVED_MY;}
-	{CORE_PREFIX}"our"			{yybegin(YYINITIAL);return RESERVED_OUR;}
-	{CORE_PREFIX}"local"		{yybegin(YYINITIAL);return RESERVED_LOCAL;}
-	{CORE_PREFIX}"state"		{yybegin(YYINITIAL);return RESERVED_STATE;}
-	{IDENTIFIER} / [:(-] {pullback(0);yybegin(YYINITIAL);}
-	{IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return HANDLE;}
-	[^]				{yybegin(YYINITIAL);yypushback(1);}
-}
-
 <LEX_END_BLOCK>{
 	[^]+ 		{return COMMENT_BLOCK;}
 }
@@ -508,7 +498,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 
-<YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT>{
+<YYINITIAL,LEX_AFTER_IDENTIFIER,LEX_AFTER_REGEX_ACCEPTING_IDENTIFIER,LEX_PRINT,LEX_HANDLE,LEX_STRICT_HANDLE>{
 	{DQ_STRING}	{yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_Q);return captureString();}
 	{XQ_STRING} {yybegin(LEX_OPERATOR);pushState();pullback(0);yybegin(LEX_QUOTE_LIKE_OPENER_QX);return captureString();}
@@ -574,13 +564,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
 	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
 
-	"inner"					{yybegin(YYINITIAL);return RESERVED_INNER;}
 	"with"					{yybegin(YYINITIAL);return RESERVED_WITH;}
 	"extends"				{yybegin(YYINITIAL);return RESERVED_EXTENDS;}
 	"meta"					{yybegin(YYINITIAL);return RESERVED_META;}
 	"override"				{yybegin(YYINITIAL);return RESERVED_OVERRIDE;}
 	"around"				{yybegin(YYINITIAL);return RESERVED_AROUND;}
-	"super"					{yybegin(YYINITIAL);return RESERVED_SUPER;}
 	"augment"				{yybegin(YYINITIAL);return RESERVED_AUGMENT;}
 	"after"					{yybegin(YYINITIAL);return RESERVED_AFTER;}
 	"before"				{yybegin(YYINITIAL);return RESERVED_BEFORE;}
@@ -623,6 +611,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 // identifiers fallbacks
+<LEX_HANDLE,LEX_STRICT_HANDLE>{
+	{IDENTIFIER} / [:(-] {pullback(0);yybegin(YYINITIAL);}
+	{IDENTIFIER} 	{yybegin(LEX_AFTER_IDENTIFIER);return HANDLE;}
+	[^]				{yybegin(YYINITIAL);yypushback(1);}
+}
 
 <LEX_AFTER_DEREFERENCE>{
 	"follow_best_practice"		{yybegin(LEX_OPERATOR);return RESERVED_FOLLOW_BEST_PRACTICE;}
