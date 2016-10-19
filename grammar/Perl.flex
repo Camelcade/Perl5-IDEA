@@ -253,6 +253,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"%"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_HASH);}
 	"*"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_GLOB);}
 	"&"		{return startUnbracedVariable(LEX_AFTER_IDENTIFIER, SIGIL_CODE);}
+	"("		{return LEFT_PAREN;}
 }
 
 <LEX_HANDLE> {
