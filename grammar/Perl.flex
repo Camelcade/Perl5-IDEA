@@ -377,9 +377,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"when"	 	{ yybegin(YYINITIAL);return RESERVED_WHEN;}
 }
 
-// may be after right brace, like anon hash
 <YYINITIAL,LEX_OPERATOR,LEX_AFTER_RIGHT_BRACKET,LEX_AFTER_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
+	// may be after right brace, like anon hash
 	"->" 		{yybegin(LEX_AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
+	// may be in ? sub{} : sub{}; the other way to make a structured block for anon subs
+	":"  	{yybegin(YYINITIAL);return COLON;}
+}
+
+// we won't allow to use ambigious operators after identifier, only sigils
+<LEX_OPERATOR,LEX_AFTER_RIGHT_BRACKET,LEX_AFTER_VARIABLE_NAME>{
+	"*" 	{yybegin(YYINITIAL);return OPERATOR_MUL;}
+	"%" 	{yybegin(YYINITIAL);return OPERATOR_MOD;}
+	"&" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND;}
 }
 
 <LEX_OPERATOR,LEX_AFTER_RIGHT_BRACKET,LEX_AFTER_IDENTIFIER,LEX_AFTER_VARIABLE_NAME>{
@@ -390,9 +399,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"&=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
 	"**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
 	"&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
-	"*" 	{yybegin(YYINITIAL);return OPERATOR_MUL;}
-	"%" 	{yybegin(YYINITIAL);return OPERATOR_MOD;}
-	"&" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND;}
 	">="	{yybegin(YYINITIAL);return OPERATOR_GE_NUMERIC;}
 	"<="	{yybegin(YYINITIAL);return OPERATOR_LE_NUMERIC;}
 	"=="	{yybegin(YYINITIAL);return OPERATOR_EQ_NUMERIC;}
@@ -422,7 +428,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
 	"?"  	{yybegin(YYINITIAL);return QUESTION;}
-	":"  	{yybegin(YYINITIAL);return COLON;}
 	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
 	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
 	"=" 	{yybegin(YYINITIAL);return OPERATOR_ASSIGN;}
@@ -519,6 +524,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{NAMED_UNARY_OPERATORS}				{yybegin(LEX_AFTER_IDENTIFIER);return OPERATOR_NAMED_UNARY;}
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(LEX_HANDLE);return IDENTIFIER;}
 	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{yybegin(LEX_HANDLE);return OPERATOR_NAMED_UNARY;}
+	{NAMED_ARGUMENTLESS}				{yybegin(LEX_OPERATOR);return IDENTIFIER;}	// fixme we can return special token here to help parser
+	{LIST_OPERATORS}					{yybegin(YYINITIAL);return IDENTIFIER;}
 
 	"!" 						{yybegin(YYINITIAL);return OPERATOR_NOT;}
 	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
@@ -592,8 +599,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	{BLOCK_NAMES}			{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}				{yybegin(LEX_OPERATOR); return TAG;}
-	{NAMED_ARGUMENTLESS}	{yybegin(LEX_OPERATOR);return IDENTIFIER;}	// fixme we can return special token here to help parser
-	{LIST_OPERATORS}		{yybegin(YYINITIAL);return IDENTIFIER;}
 
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {return RESERVED_Y;}
 	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {return RESERVED_TR;}
