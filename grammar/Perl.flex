@@ -444,12 +444,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <YYINITIAL,AFTER_COMMA>{
 	"++" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;}
 	"--" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;}
-	"!" 						{yybegin(YYINITIAL);return OPERATOR_NOT;}
 	"+" 						{yybegin(YYINITIAL);return OPERATOR_PLUS_UNARY;}
 	"-" 						{yybegin(YYINITIAL);return OPERATOR_MINUS_UNARY;}
-	"~" 						{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
-
-	"\\" 						{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
 }
 
 
@@ -605,6 +601,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"]"     	{return getRightBracket(AFTER_VALUE);}
 	")"     	{yybegin(AFTER_VALUE);return RIGHT_PAREN;}
 	":"			{yybegin(YYINITIAL);return COLON;}
+
+	"!" 		{yybegin(YYINITIAL);return OPERATOR_NOT;}
+	"~" 		{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
+	"\\" 		{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
 
 	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
