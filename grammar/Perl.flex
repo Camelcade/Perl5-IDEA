@@ -457,11 +457,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <YYINITIAL,AFTER_COMMA>{
 	"<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
 	"<"							{yybegin(AFTER_VALUE);pushState();yypushback(1);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
-
-	// may be after identifier
-	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
-	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
-	"<<" / {UNQUOTED_HEREDOC_MARKER} 		{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
@@ -610,6 +605,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"]"     	{return getRightBracket(AFTER_VALUE);}
 	")"     	{yybegin(AFTER_VALUE);return RIGHT_PAREN;}
 	":"			{yybegin(YYINITIAL);return COLON;}
+
+	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / {UNQUOTED_HEREDOC_MARKER}  		{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 
 	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
