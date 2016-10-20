@@ -287,7 +287,8 @@ public class PerlLexer extends PerlLexerGenerated
 		return preparsedTokensList.isEmpty() &&
 				!myFormatWaiting &&
 				heredocQueue.isEmpty() &&
-				myBracesStack.isEmpty()
+				myBracesStack.isEmpty() &&
+				myBracketsStack.isEmpty()
 				? super.yystate() : PREPARSED_ITEMS;
 	}
 
@@ -721,7 +722,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseTr()
 	{
 		popState();
-		yybegin(OPERATOR);
+		yybegin(AFTER_VALUE);
 		CharSequence buffer = getBuffer();
 		int currentOffset = getTokenEnd();
 		int bufferEnd = getBufferEnd();
@@ -958,7 +959,7 @@ public class PerlLexer extends PerlLexerGenerated
 	public IElementType parseRegex(int currentOffset)
 	{
 		popState();
-		yybegin(OPERATOR);
+		yybegin(AFTER_VALUE);
 		CharSequence buffer = getBuffer();
 		int bufferEnd = getBufferEnd();
 

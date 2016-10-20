@@ -303,6 +303,7 @@ limitations under the License.
 
     SUB_PROTOTYPE_TOKEN='SUB_PROTOTYPE_TOKEN'
 
+    PACKAGE='package::name'
     PACKAGE_PRAGMA_CONSTANT='constant'
     PACKAGE_PRAGMA_VARS='vars'
 
@@ -665,7 +666,7 @@ require_expr ::=  'require' (require_package| perl_version | scalar_expr)  {pin=
 
 private require_package ::= any_package !'('
 private any_package ::= <<package_expr any_package_name>>
-private any_package_name ::= IDENTIFIER|'constant'|'vars'
+private any_package_name ::= 'package::name'|'constant'|'vars'|IDENTIFIER
 meta package_expr ::= <<x1>>
 
 private recover_statement ::= <<recoverStatement>>

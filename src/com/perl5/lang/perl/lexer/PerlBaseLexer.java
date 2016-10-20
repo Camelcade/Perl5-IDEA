@@ -74,6 +74,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	// last captured heredoc marker
 	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
 	protected final PerlBracesStack myBracesStack = new PerlBracesStack();
+	protected final PerlBracesStack myBracketsStack = new PerlBracesStack();
 	private IElementType myCurrentSigilToken;
 
 	/**
@@ -111,7 +112,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return getLeftBrace();
 	}
 
-	protected IElementType startStructuredBlock(int afterState)
+	protected IElementType startBracedBlock(int afterState)
 	{
 		myBracesStack.push(0);
 		yybegin(afterState);
@@ -138,6 +139,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return braceType;
 	}
 
+	@SuppressWarnings("Duplicates")
 	protected IElementType getRightBrace(int afterState)
 	{
 		if (!myBracesStack.isEmpty())
@@ -151,6 +153,40 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		}
 		yybegin(afterState);
 		return RIGHT_BRACE;
+	}
+
+	protected IElementType startBracketedBlock(int afterState)
+	{
+		myBracketsStack.push(0);
+		yybegin(afterState);
+		pushStateAndBegin(PerlLexer.YYINITIAL);
+		return getLeftBracket();
+	}
+
+	protected IElementType getLeftBracket()
+	{
+		if (!myBracketsStack.isEmpty())
+		{
+			myBracketsStack.incLast();
+		}
+		return LEFT_BRACKET;
+	}
+
+
+	@SuppressWarnings("Duplicates")
+	protected IElementType getRightBracket(int afterState)
+	{
+		if (!myBracketsStack.isEmpty())
+		{
+			if (myBracketsStack.decLast() == 0)
+			{
+				myBracketsStack.pop();
+				popState();
+				return RIGHT_BRACKET;
+			}
+		}
+		yybegin(afterState);
+		return RIGHT_BRACKET;
 	}
 
 	/**
@@ -176,6 +212,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	{
 		super.resetInternals();
 		myBracesStack.clear();
+		myBracketsStack.clear();
 	}
 
 }
