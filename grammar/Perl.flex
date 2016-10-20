@@ -94,6 +94,8 @@ CAPPED_SINGLE_LETTER_VARIABLE_NAME = "^"[\]\[A-Z\^_?\\]
 VARIABLE_NAME = {VARIABLE_QUALIFIED_IDENTIFIER} | "::" | {CAPPED_SINGLE_LETTER_VARIABLE_NAME} | {SPECIAL_VARIABLE_NAME}
 CAPPED_BRACED_VARIABLE = {CAPPED_SINGLE_LETTER_VARIABLE_NAME}[\w_]*
 
+AMBIGUOUS_SIGIL_SUFFIX = {SPACES_OR_COMMENTS} ("{"|{SPECIAL_VARIABLE_NAME}|{CAPPED_SINGLE_LETTER_VARIABLE_NAME} )
+
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
 
@@ -329,11 +331,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 
-<YYINITIAL,AFTER_COMMA>{
-	{FARROW} 	{yybegin(AFTER_COMMA);return FAT_COMMA;}
-	"," 		{yybegin(AFTER_COMMA);return COMMA;}
-}
-
 <YYINITIAL,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
 	{CORE_PREFIX}"if"	 	{ yybegin(YYINITIAL); return RESERVED_IF;}
 	{CORE_PREFIX}"unless"	{ yybegin(YYINITIAL);return RESERVED_UNLESS;}
@@ -386,7 +383,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
 	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
 	"//=" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;}
-	"//" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;}
 	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
 	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
 
@@ -424,16 +420,24 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 // normal variable, unambiguous
-<YYINITIAL,AFTER_DEREFERENCE,YYINITIAL>{
+<YYINITIAL,AFTER_DEREFERENCE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
 	"@" 	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_ARRAY);}
 	"$#" 	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_SCALAR_INDEX);}
 	"$" 	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_SCALAR); }
 }
 // normal variable, ambiguous
-<YYINITIAL,AFTER_DEREFERENCE,YYINITIAL>{
+<YYINITIAL,AFTER_DEREFERENCE,AFTER_COMMA>{
 	"%"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
 	"&"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
+}
+
+// ambiguous
+<AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>
+{
+	"%" / {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
+	"*"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
+	"&"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
 }
 
 // prefix operators
@@ -451,12 +455,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 // operands and starters
 <YYINITIAL,AFTER_COMMA>{
-	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
-	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
-	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
-
-	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
-
 	"<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
 	"<"							{yybegin(AFTER_VALUE);pushState();yypushback(1);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 
@@ -468,6 +466,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
 	"/"   	{yybegin(YYINITIAL);return OPERATOR_DIV;}
+	"//" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;}
 }
 
 <YYINITIAL,AFTER_COMMA,AFTER_IDENTIFIER_WITH_REGEX>{
@@ -476,7 +475,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 
 // known identifiers
-<YYINITIAL,AFTER_COMMA>{
+<YYINITIAL,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
 	"split"						{yybegin(AFTER_IDENTIFIER_WITH_REGEX); return IDENTIFIER;}
 
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(YYINITIAL);return IDENTIFIER;}
@@ -585,7 +584,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 // block start after eval/do
 <BLOCK_AS_VALUE>{
 	"{"		{return startBracedBlock(AFTER_VALUE);}
-	[^]		{yypushback(1);yybegin(AFTER_IDENTIFIER);}
+	[^]		{yypushback(1);yybegin(YYINITIAL);}
 }
 
 // handles hash indexes after variable and/or ->
@@ -595,17 +594,29 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(BRACED_STRING);return getLeftBrace();}
 }
 
+<AFTER_DEREFERENCE> "("     	{yybegin(YYINITIAL);return LEFT_PAREN;}
+
 // always checked except explicit states
 <YYINITIAL,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
-	";"     {yybegin(YYINITIAL);return SEMICOLON;}
-	"=" 	{yybegin(YYINITIAL);return OPERATOR_ASSIGN;}
-	"->" 	{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
-	"["     {yybegin(YYINITIAL);return getLeftBracket();}
-	"("     {yybegin(YYINITIAL);return LEFT_PAREN;}
-	"{"     {yybegin(YYINITIAL);return getLeftBrace();}
+	{FARROW} 	{yybegin(AFTER_COMMA);return FAT_COMMA;}
+	"," 		{yybegin(AFTER_COMMA);return COMMA;}
+	";"     	{yybegin(YYINITIAL);return SEMICOLON;}
+	"=" 		{yybegin(YYINITIAL);return OPERATOR_ASSIGN;}
+	"->" 		{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
+	"["     	{yybegin(YYINITIAL);return getLeftBracket();}
+	"("     	{yybegin(YYINITIAL);return LEFT_PAREN;}
+	"{"     	{yybegin(YYINITIAL);return getLeftBrace();}
 	"}"     	{return getRightBrace(YYINITIAL);}
 	"]"     	{return getRightBracket(AFTER_VALUE);}
 	")"     	{yybegin(AFTER_VALUE);return RIGHT_PAREN;}
+	":"			{yybegin(YYINITIAL);return COLON;}
+
+	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
+	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
+
+	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
+
 	{NUMBER_BIN}									{yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_HEX}									{yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_INT}? "." {NUMBER_INT} {NUMBER_EXP}?	{yybegin(AFTER_VALUE);return NUMBER;}
