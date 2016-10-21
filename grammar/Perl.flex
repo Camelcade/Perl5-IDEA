@@ -507,7 +507,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"next"	 { yybegin(YYINITIAL);return  RESERVED_NEXT;}
 	{CORE_PREFIX}"last"	 { yybegin(YYINITIAL);return  RESERVED_LAST;}
 
-	{CORE_PREFIX}"return"	 { yybegin(AFTER_IDENTIFIER_WITH_REGEX); return  RESERVED_RETURN;}
+	{CORE_PREFIX}"return"	 { yybegin(YYINITIAL); return  RESERVED_RETURN;}
 
 	{BLOCK_NAMES}			{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}				{yybegin(AFTER_VALUE); return TAG;}
