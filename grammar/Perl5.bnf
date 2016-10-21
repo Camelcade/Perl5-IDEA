@@ -182,10 +182,7 @@ limitations under the License.
     OPERATOR_MOD='%'
 
     OPERATOR_PLUS='+'
-    OPERATOR_PLUS_UNARY='u+'
-
     OPERATOR_MINUS='-'
-    OPERATOR_MINUS_UNARY='u-'
 
     OPERATOR_BITWISE_NOT='~'
     OPERATOR_BITWISE_AND='&'
@@ -795,7 +792,7 @@ pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr | prefix_unary_expr
 ref_expr ::= '\\' referencable_expr { rightAssociative=true }
-prefix_unary_expr ::= {'~' | '!' | 'u+' | 'u-'} expr { rightAssociative=true }
+prefix_unary_expr ::= {'~' | '!' | '+' | '-'} expr { rightAssociative=true }
 regex_expr ::= expr ('=~'|'!~') expr
 mul_expr ::= expr ({'*'|'/'|'%'|'x'} expr)+
 add_expr ::= expr ({'+'|'-'|'.'} expr)+

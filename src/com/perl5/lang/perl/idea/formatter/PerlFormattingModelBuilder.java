@@ -61,8 +61,8 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
 				.afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(perlSettings.SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET)
 				.beforeInside(RIGHT_BRACKET, ANON_ARRAY).spaceIf(perlSettings.SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET)
 
-				.after(OPERATOR_MINUS_UNARY).spaces(0)
-				.after(OPERATOR_PLUS_UNARY).spaces(0)
+				.afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaces(0)
+				.afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaces(0)
 
 				.around(ARRAY_INDEX).spaces(0)
 				.around(HASH_INDEX).spaces(0)
