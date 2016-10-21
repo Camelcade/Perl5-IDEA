@@ -399,13 +399,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"and"		{yybegin(YYINITIAL);return OPERATOR_AND_LP;}
 	"or"		{yybegin(YYINITIAL);return OPERATOR_OR_LP;}
 	"xor"		{yybegin(YYINITIAL);return OPERATOR_XOR_LP;}
-	"lt"		{yybegin(YYINITIAL);return OPERATOR_LT_STR;}
-	"gt"		{yybegin(YYINITIAL);return OPERATOR_GT_STR;}
-	"le"		{yybegin(YYINITIAL);return OPERATOR_LE_STR;}
-	"ge"		{yybegin(YYINITIAL);return OPERATOR_GE_STR;}
-	"eq"		{yybegin(YYINITIAL);return OPERATOR_EQ_STR;}
-	"ne"		{yybegin(YYINITIAL);return OPERATOR_NE_STR;}
-	"cmp"		{yybegin(YYINITIAL);return OPERATOR_CMP_STR;}
+	"lt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_LT_STR;}
+	"gt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_GT_STR;}
+	"le" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_LE_STR;}
+	"ge" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_GE_STR;}
+	"eq" / {QUOTE_LIKE_SUFFIX} 		{yybegin(YYINITIAL);return OPERATOR_EQ_STR;}
+	"ne" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_NE_STR;}
+	"cmp" / {QUOTE_LIKE_SUFFIX} 	{yybegin(YYINITIAL);return OPERATOR_CMP_STR;}
 }
 
 <YYINITIAL>{
