@@ -360,7 +360,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
 	"&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
 
+	// ambiguous with double negation
+	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
 
+	// ambiguous with nyi
 	"..." 	{yybegin(YYINITIAL);return OPERATOR_HELLIP;}
 }
 
@@ -575,7 +578,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"<="	{yybegin(YYINITIAL);return OPERATOR_LE_NUMERIC;}
 	"=="	{yybegin(YYINITIAL);return OPERATOR_EQ_NUMERIC;}
 	"!="	{yybegin(YYINITIAL);return OPERATOR_NE_NUMERIC;}
-	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
 	"+="	{yybegin(YYINITIAL);return OPERATOR_PLUS_ASSIGN;}
 	"-="	{yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;}
 	".=" 	{yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;}
