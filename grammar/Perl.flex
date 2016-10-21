@@ -374,7 +374,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
 	"+="	{yybegin(YYINITIAL);return OPERATOR_PLUS_ASSIGN;}
 	"-="	{yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;}
-	"/=" 	{yybegin(YYINITIAL);return OPERATOR_DIV_ASSIGN;}
 	".=" 	{yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;}
 	"x=" 	{yybegin(YYINITIAL);return OPERATOR_X_ASSIGN;}
 	"|=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;}
@@ -382,7 +381,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"<<=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT_ASSIGN;}
 	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
 	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
-	"//=" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;}
 	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
 	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
 
@@ -426,14 +424,14 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"$" 	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_SCALAR); }
 }
 
-// normal variable, ambiguous
-<YYINITIAL,AFTER_DEREFERENCE,AFTER_COMMA>{
+// ambiguous variable in unambiguous situation
+<YYINITIAL,AFTER_COMMA>{
 	"%"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
 	"&"		{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
 }
 
-// ambiguous
+// ambiguous variable in ambiguous situation
 <AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>
 {
 	"%" / {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
@@ -459,6 +457,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
 	"/"   	{yybegin(YYINITIAL);return OPERATOR_DIV;}
 	"//" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;}
+	"/=" 	{yybegin(YYINITIAL);return OPERATOR_DIV_ASSIGN;}
+	"//=" 	{yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;}
 }
 
 <YYINITIAL,AFTER_COMMA,AFTER_IDENTIFIER_WITH_REGEX>{
