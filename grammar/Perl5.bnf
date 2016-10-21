@@ -675,7 +675,6 @@ expr ::=
     | lp_not_expr           // 2
     | named_list_expr       // 3
     | comma_sequence_expr   // 4
-//    | comma_expr            // 4
     | assign_or_flow_expr   // 5
     | trenar_expr           // 6
     | flipflop_expr         // 7
@@ -839,6 +838,7 @@ private parse_call_arguments ::=
 
 file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
 
+
 ////////////////////////// regular expressions /////////////////////////////////////////////////////////////////////////
 // pinning quotes leads to bug with replacement block
 compile_regex ::=   'qr' match_regex_body {pin=1}
@@ -930,7 +930,7 @@ array_hash_slice ::= array_primitive hash_index
 
 array_cast_expr ::= '$@' cast_target
 
-hash_cast_expr ::= '$%' cast_target
+hash_cast_expr ::= {'$%'|'%'} cast_target
 
 private scalar_primitive ::=
     scalar_variable
@@ -952,7 +952,7 @@ private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= '$*' cast_target
+glob_cast_expr ::= {'$*'|'*'} cast_target
 
 glob_slot ::= glob_primitive hash_index
 
@@ -984,7 +984,7 @@ private code ::=
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= SIGIL_CODE cast_target
+code_cast_expr ::= {'$&'|'&'} cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -1040,9 +1040,10 @@ private lexical_variable ::= scalar_variable | array_variable | hash_variable
 array_index_variable ::= '$#' {SCALAR_NAME | '{' SCALAR_NAME '}'}
 scalar_variable ::= '$$' {SCALAR_NAME | '{' SCALAR_NAME '}'}
 array_variable ::= '$@' {ARRAY_NAME | '{' ARRAY_NAME '}'}
-hash_variable ::= '$%' {HASH_NAME | '{' HASH_NAME '}'}
-code_variable ::= '$&' {CODE_NAME | '{' CODE_NAME '}'}
-glob_variable ::= '$*' {GLOB_NAME | '{' GLOB_NAME '}'}
+hash_variable ::= '$%' {HASH_NAME | '{' HASH_NAME '}'} | '%' ambiguous_variable_body
+code_variable ::= '$&' {CODE_NAME | '{' CODE_NAME '}'} | '&' ambiguous_variable_body
+glob_variable ::= '$*' {GLOB_NAME | '{' GLOB_NAME '}'} | '*' ambiguous_variable_body
+private ambiguous_variable_body ::= IDENTIFIER | '{' IDENTIFIER '}'
 
 private comma ::= ',' | '=>'
 private normal_method ::= <<method IDENTIFIER>>
