@@ -109,7 +109,6 @@
 
         <parserExtension implementation="com.perl5.lang.perl.parser.TryCatchParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.MethodSignaturesSimpleParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MojoliciousParserExtensionImpl"/>
