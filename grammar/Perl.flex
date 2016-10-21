@@ -353,7 +353,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
 	"&&" 	{yybegin(YYINITIAL);return OPERATOR_AND;}
-	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
 	"**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
 	"%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
 	"*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
@@ -361,37 +360,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
 	"&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
 
-	">="	{yybegin(YYINITIAL);return OPERATOR_GE_NUMERIC;}
-	"<="	{yybegin(YYINITIAL);return OPERATOR_LE_NUMERIC;}
-	"=="	{yybegin(YYINITIAL);return OPERATOR_EQ_NUMERIC;}
-	"!="	{yybegin(YYINITIAL);return OPERATOR_NE_NUMERIC;}
-	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
-	"+="	{yybegin(YYINITIAL);return OPERATOR_PLUS_ASSIGN;}
-	"-="	{yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;}
-	".=" 	{yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;}
-	"x=" 	{yybegin(YYINITIAL);return OPERATOR_X_ASSIGN;}
-	"|=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;}
-	"^=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR_ASSIGN;}
-	"<<=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT_ASSIGN;}
-	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
-	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
-	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
-	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
-
-	"=~" 	{yybegin(YYINITIAL);return OPERATOR_RE;}
-	"!~" 	{yybegin(YYINITIAL);return OPERATOR_NOT_RE;}
-
-	"<<" 								{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
-	"<<" / {QUALIFIED_IDENTIFIER}"(" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
-	">>" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;}
-
-	"?"  	{yybegin(YYINITIAL);return QUESTION;}
-	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
-	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
 
 	"..." 	{yybegin(YYINITIAL);return OPERATOR_HELLIP;}
-	".." 	{yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;}
-	"." 	{yybegin(YYINITIAL);return OPERATOR_CONCAT;}
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
@@ -600,11 +570,43 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	")"     	{yybegin(AFTER_VALUE);return RIGHT_PAREN;}
 	":"			{yybegin(YYINITIAL);return COLON;}
 
+	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
+	">="	{yybegin(YYINITIAL);return OPERATOR_GE_NUMERIC;}
+	"<="	{yybegin(YYINITIAL);return OPERATOR_LE_NUMERIC;}
+	"=="	{yybegin(YYINITIAL);return OPERATOR_EQ_NUMERIC;}
+	"!="	{yybegin(YYINITIAL);return OPERATOR_NE_NUMERIC;}
+	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
+	"+="	{yybegin(YYINITIAL);return OPERATOR_PLUS_ASSIGN;}
+	"-="	{yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;}
+	".=" 	{yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;}
+	"x=" 	{yybegin(YYINITIAL);return OPERATOR_X_ASSIGN;}
+	"|=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;}
+	"^=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR_ASSIGN;}
+	"<<=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT_ASSIGN;}
+	">>=" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;}
+	"||=" 	{yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;}
+	"<=>" 	{yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;}
+	">" 	{yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;}
+
+	"=~" 	{yybegin(YYINITIAL);return OPERATOR_RE;}
+	"!~" 	{yybegin(YYINITIAL);return OPERATOR_NOT_RE;}
+
+	"<<" 								{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
+	"<<" / {QUALIFIED_IDENTIFIER}"(" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
+	">>" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;}
+
+	"?"  	{yybegin(YYINITIAL);return QUESTION;}
+	"|" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;}
+	"^" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;}
+
 	"+" 		{yybegin(YYINITIAL);return OPERATOR_PLUS;}
 	"-" 		{yybegin(YYINITIAL);return OPERATOR_MINUS;}
 	"!" 		{yybegin(YYINITIAL);return OPERATOR_NOT;}
 	"~" 		{yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;}
 	"\\" 		{yybegin(YYINITIAL);return OPERATOR_REFERENCE;}
+
+	".." 	{yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;}
+	"." 	{yybegin(YYINITIAL);return OPERATOR_CONCAT;}
 
 	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
