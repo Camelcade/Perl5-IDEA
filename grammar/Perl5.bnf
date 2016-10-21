@@ -497,6 +497,8 @@ private compound_statement ::=
     | foreach_compound
     | when_compound
     | default_compound
+    | method_definition
+    | func_definition
 
 named_block ::= BLOCK_NAME parse_block
 
@@ -1045,7 +1047,9 @@ code_variable ::= '$&' {CODE_NAME | '{' CODE_NAME '}'}
 glob_variable ::= '$*' {GLOB_NAME | '{' GLOB_NAME '}'}
 
 private comma ::= ',' | '=>'
-private normal_method ::= <<method IDENTIFIER>>
+private normal_method ::= <<method method_tokens>>
+// the rest are fallback
+private method_tokens ::= IDENTIFIER | 'method' | 'func' | 'finally' | 'try' | 'catch'
 meta method ::= <<x1>>
 
 
