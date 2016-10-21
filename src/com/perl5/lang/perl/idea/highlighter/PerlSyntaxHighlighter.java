@@ -151,6 +151,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 			RESERVED_CATCH,
 			RESERVED_FINALLY,
 
+			RESERVED_METHOD,
+			RESERVED_FUNC,
+
 			RESERVED_INNER,
 			RESERVED_WITH,
 			RESERVED_EXTENDS,
