@@ -622,10 +622,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
 
-	{NUMBER_BIN}									{yybegin(AFTER_VALUE);return NUMBER;}
-	{NUMBER_HEX}									{yybegin(AFTER_VALUE);return NUMBER;}
-	{NUMBER_INT}? "." {NUMBER_INT} {NUMBER_EXP}?	{yybegin(AFTER_VALUE);return NUMBER;}
-	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}?{yybegin(AFTER_VALUE);return NUMBER;}
+	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER;}
+	{NUMBER_HEX}									 {yybegin(AFTER_VALUE);return NUMBER;}
+	"." {NUMBER_INT} {NUMBER_EXP}?	 				 {yybegin(AFTER_VALUE);return NUMBER;}
+	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}
 	{PERL_VERSION}  		{yybegin(AFTER_VALUE);return NUMBER_VERSION;}
 	{QUALIFIED_IDENTIFIER} 	{yybegin(AFTER_IDENTIFIER);return getIdentifierToken();}
 }
