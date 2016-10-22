@@ -10,7 +10,7 @@ my @keywords = qw(my our local state elsif else given default continue format su
 my @extkeywords = qw(method func try catch finally);
 my @moose = qw(inner with extends meta override around super augment after before has);
 my @operators = qw(x not and or xor lt gt le ge eq ne cmp);
-my @argumentless = qw(wantarray wait times time setpwent setgrent getservent getpwent getprotoent getppid getnetent getlogin gethostent getgrent fork endservent endpwent endprotoent endnetent endhostent endgrent dump break);
+my @argumentless = qw(wantarray wait times time setpwent setgrent getservent getpwent getprotoent getppid getnetent getlogin gethostent getgrent fork endservent endpwent endprotoent endnetent endhostent endgrent break);
 
 # using $_ see http://perldoc.perl.org/perlvar.html#General-Variables 
 my @implicitusers = qw(abs alarm chomp chop chr chroot cos defined eval evalbytes exp fc glob hex int lc lcfirst length log lstat mkdir oct ord pos print printf quotemeta readlink readpipe ref require reverse rmdir say sin split sqrt stat study uc ucfirst unlink unpack);
@@ -42,11 +42,11 @@ my %unary_acceptors;
 
 for my $acceptor (@acceptors)
 {
-	if(exists $unary{$acceptor}){
-		$unary_acceptors{$acceptor} = $acceptor;	
-		delete $unary{$acceptor};
-		delete $acceptors{$acceptor};
-	}
+    if(exists $unary{$acceptor}){
+        $unary_acceptors{$acceptor} = $acceptor;    
+        delete $unary{$acceptor};
+        delete $acceptors{$acceptor};
+    }
 }
 
 say "NAMED_UNARY_OPERATORS = ".join '|', map "\"$_\"", reverse sort keys %unary;
