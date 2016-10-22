@@ -33,12 +33,9 @@ import java.util.Set;
 public class PerlElementTypeFactory
 {
 	protected final static Set<String> STRING_TOKENS = new THashSet<String>(Arrays.asList(
-			"STRING_PLUS",
-			"STRING_IDENTIFIER",
-			"STRING_PACKAGE",
 			"STRING_CONTENT",
 			"STRING_CONTENT_QQ",
-			"STRING_CONTENT_QX"
+			"STRING_CONTENT_XQ"
 	));
 
 	protected final static Set<String> VARIABLE_NAMES_TOKENS_NAMES = new THashSet<>(Arrays.asList(
@@ -1296,19 +1293,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlPerlRegexImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("PERL_REGEX_EX"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlPerlRegexExImpl(node);
 				}
 			};
 		}

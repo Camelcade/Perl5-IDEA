@@ -238,18 +238,16 @@ limitations under the License.
     OPERATOR_FILETEST='-t'
 
     // single mid-quote. e evaluatable s///e;
-    REGEX_QUOTE='REGEX_QUOTE'
-    REGEX_QUOTE_E='REGEX_QUOTE_E'
-    REGEX_TOKEN='REGEX_TOKEN'
+    REGEX_QUOTE='r/'
+    REGEX_QUOTE_E='re/'
+    REGEX_TOKEN='regex'
 
     // paired mid-quote. e for evaluatable s{}{}e;
-    REGEX_QUOTE_OPEN='REGEX_QUOTE_OPEN'
-    REGEX_QUOTE_OPEN_E='REGEX_QUOTE_OPEN_E' // block should be interpolated as a perl script
+    REGEX_QUOTE_OPEN='r{'
+    REGEX_QUOTE_OPEN_E='re{' // block should be interpolated as a perl script
 
-    REGEX_QUOTE_CLOSE='REGEX_QUOTE_CLOSE'
-
-    REGEX_MODIFIER='REGEX_MODIFIER'
-    REGEX_TOKEN='REGEX_TOKEN'
+    REGEX_QUOTE_CLOSE='r}'
+    REGEX_MODIFIER='/m'
 
 	LP_STRING_Q="LAZY_PARSABLE_Q_STRING"
 	LP_STRING_QQ="LAZY_PARSABLE_DQ_STRING"
@@ -866,36 +864,27 @@ replacement_regex ::=
      's'
     regex_match
     regex_replace
-    REGEX_QUOTE_CLOSE
+    'r}'
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::= REGEX_QUOTE_OPEN [LP_REGEX|LP_REGEX_X|perl_regex]
+private regex_match ::= 'r{' [LP_REGEX|LP_REGEX_X|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [LP_REGEX_REPLACEMENT|perl_regex]
-private regex_replace_code ::= {REGEX_QUOTE_E | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN_E} [regex_code]
+private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [LP_REGEX_REPLACEMENT|perl_regex]
+private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
+private regex_code ::= LP_CODE_BLOCK | file_item+
 
-private regex_code ::= LP_CODE_BLOCK | file_item+ {recoverWhile=recover_regex_code}
-private recover_regex_code ::= !(REGEX_QUOTE_CLOSE)
-
-perl_regex_modifiers ::= REGEX_MODIFIER +
-perl_regex ::= <<parseRegexContent 'false'>>
-private perl_regex_items ::= perl_regex_item +
-
-private perl_regex_item ::= interpolated_constructs | <<convertRegexToken>>
-
-perl_regex_ex ::= <<parseRegexContent 'true'>> {extends=perl_regex}
-private perl_regex_ex_items ::= perl_regex_item_ex +
-
-private perl_regex_item_ex ::= interpolated_constructs | <<convertRegexTokenEx>>
+perl_regex_modifiers ::= '/m' +
+perl_regex ::= perl_regex_item +
+private perl_regex_item ::= 'regex' | interpolated_constructs
 
 tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
-private tr_search ::= REGEX_QUOTE_OPEN [tr_searchlist] {pin=1}
+private tr_search ::= 'r{' [tr_searchlist] {pin=1}
 tr_searchlist ::= STRING_CONTENT
-private tr_replacement ::= {REGEX_QUOTE | REGEX_QUOTE_CLOSE REGEX_QUOTE_OPEN} [tr_replacementlist] REGEX_QUOTE_CLOSE {pin=1}
+private tr_replacement ::= {'r/' | 'r}' 'r{'} [tr_replacementlist] 'r}' {pin=1}
 tr_replacementlist ::= STRING_CONTENT
-tr_modifiers ::= REGEX_MODIFIER +
+tr_modifiers ::= '/m' +
 
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
@@ -997,8 +986,13 @@ scalar_call ::= <<parseScalarOrElement>> [method_call_arguments]
 private method_call_arguments ::= '(' [<<parseSimpleCallArguments>>] ')'
 nested_call_arguments ::= method_call_arguments
 
-hash_index ::= <<parseHashIndex>>
-array_index ::= <<parseArrayIndex>>
+hash_index ::= '{' hash_index_content '}' {pin=1}
+private hash_index_content ::= expr {recoverWhile=recover_braced_expression}
+private recover_braced_expression ::= !'}'
+array_index ::= '[' array_index_content ']' {pin=1}
+private array_index_content ::= expr {recoverWhile=recover_bracketed_expression}
+private recover_bracketed_expression ::= !']'
+
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 

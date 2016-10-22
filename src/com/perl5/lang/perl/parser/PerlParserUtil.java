@@ -207,18 +207,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-	public static boolean convertBracedString(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == STRING_CONTENT)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.done(STRING_BARE);
-			return true;
-		}
-		return false;
-	}
-
 	protected static boolean isOperatorToken(PsiBuilder b, int l)
 	{
 		return PerlLexer.OPERATORS_TOKENSET.contains(b.getTokenType());
@@ -241,70 +229,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 				currentTokenType == null ||                                                                                 // got end of file
 						!((PerlBuilder) b).getPerlParser().getStatementRecoveryConsumableTokenSet().contains(currentTokenType)
 		);
-	}
-
-	/**
-	 * Parsing hash index, counting braces, smart error on empty expr
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseHashIndex(PsiBuilder b, int l)
-	{
-		if (consumeToken(b, LEFT_BRACE))
-		{
-			boolean r = convertBracedString(b, l);
-			if (!r)
-			{
-				r = PerlParserImpl.expr(b, l, -1);
-			}
-
-			if (!r && b.getTokenType() == RIGHT_BRACE)
-			{
-				r = true;
-				b.mark().error("Empty hash index");    // fixme this must be done via inspection or annotator
-			}
-
-			return r && consumeToken(b, RIGHT_BRACE);
-		}
-		return false;
-	}
-
-	/**
-	 * Parsing array index, smart error on empty expr
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseArrayIndex(PsiBuilder b, int l)
-	{
-		if (consumeToken(b, LEFT_BRACKET))
-		{
-			boolean r = false;
-			assert b instanceof PerlBuilder;
-			if (((PerlBuilder) b).isRegex())    // we could take it from ErrorState stack. I guess...
-			{
-				r = PerlParserImpl.interpolated_constructs(b, l);    // we can't parse an expression here, cause it's pinned inside
-				if (!r)
-				{
-					r = PerlParserImpl.number_constant(b, l);    // little hack for plain number. Basically we need to use expr here with pin checking
-				}
-			}
-			else
-			{
-				r = PerlParserImpl.expr(b, l + 1, -1);
-
-				if (!r && b.getTokenType() == RIGHT_BRACKET)
-				{
-					r = true;
-					b.mark().error("Empty array index");    // fixme this must be done via inspection or annotator
-				}
-			}
-			return r && consumeToken(b, RIGHT_BRACKET);
-		}
-		return false;
 	}
 
 	/**
@@ -548,69 +472,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
-
-	/**
-	 * Converts everything till $, @ or close brace to regex tokens;
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertRegexToken(PsiBuilder b, int l)
-	{
-
-		IElementType tokenType = b.getTokenType();
-		if (!REGEX_BLOCK_CLOSER.contains(tokenType))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-
-			// reduces nodes number
-			while (!b.eof() && !REGEX_MERGE_STOP_TOKENS.contains(tokenType = b.getTokenType()))
-			{
-				b.advanceLexer();
-			}
-//			m.drop();
-			m.collapse(REGEX_TOKEN);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Converts everything till $, @ or close brace to regex tokens; Spaces and newlines must be escaped
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertRegexTokenEx(PsiBuilder b, int l)
-	{
-
-		IElementType tokenType = b.getTokenType();
-		if (!REGEX_BLOCK_CLOSER.contains(tokenType))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-
-			IElementType prevRawTokenType;
-
-			// reduces nodes number
-			while (!b.eof()
-					&& !REGEX_MERGE_STOP_TOKENS.contains(tokenType = b.getTokenType())
-					&& (prevRawTokenType = b.rawLookup(-1)) != TokenType.WHITE_SPACE
-					&& prevRawTokenType != TokenType.NEW_LINE_INDENT)
-			{
-				b.advanceLexer();
-
-			}
-//			m.drop();
-			m.collapse(REGEX_TOKEN);
-			return true;
-		}
-		return false;
-	}
-
 	/**
 	 * This is kinda hack for use/no statements and bareword -options
 	 *
@@ -676,23 +537,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static boolean isUseVars(PsiBuilder b, int l)
 	{
 		return ((PerlBuilder) b).isUseVarsContent();
-	}
-
-	/**
-	 * Setting flag of regex contents and parse regex
-	 *
-	 * @param b          PerlBuilder
-	 * @param l          parsing level
-	 * @param isExtended marks extended regex to use other content processor
-	 * @return parsing result
-	 */
-	public static boolean parseRegexContent(PsiBuilder b, int l, boolean isExtended)
-	{
-		assert b instanceof PerlBuilder;
-		boolean currentState = ((PerlBuilder) b).setIsRegex(true);
-		boolean r = isExtended ? PerlParserImpl.perl_regex_ex_items(b, l) : PerlParserImpl.perl_regex_items(b, l);
-		((PerlBuilder) b).setIsRegex(currentState);
-		return r;
 	}
 
 	/**

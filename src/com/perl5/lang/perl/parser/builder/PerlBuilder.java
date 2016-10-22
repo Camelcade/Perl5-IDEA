@@ -39,8 +39,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	boolean isUseVarsContent = false;
 	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
 	boolean isInterpolated = false;
-	// flag set if we are inside of regexp. Safe parsing for array indexes
-	boolean isRegex = false;
 	// flag allowes special variable names
 	boolean isSpecialVariableNamesAllowed = true;
 	/**
@@ -116,19 +114,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	{
 		return isInterpolated;
 	}
-
-	public boolean isRegex()
-	{
-		return isRegex;
-	}
-
-	public boolean setIsRegex(boolean newState)
-	{
-		boolean currentState = isRegex();
-		isRegex = newState;
-		return currentState;
-	}
-
 
 	public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed)
 	{
