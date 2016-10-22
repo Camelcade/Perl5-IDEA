@@ -55,7 +55,9 @@ NEW_LINE = \R
 WHITE_SPACE     = [ \t\f]
 ANY_SPACE = [ \t\f\n\r]
 LINE_COMMENT = "#" .* \R
-SPACES_OR_COMMENTS = ({ANY_SPACE}|{LINE_COMMENT})*
+SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT}
+SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
+NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
 ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
 ESCAPED_CHARACTER = "\\"({ANY_SPACE}|"#")
 
@@ -204,9 +206,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <STRING_QQ,STRING_QX,MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
 {
-	"@" / [^] 	{return startUnbracedVariable(SIGIL_ARRAY);}
-	"$#" / [^] 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
-	"$" / [^] 	{return startUnbracedVariable(SIGIL_SCALAR); }
+	"@" /  {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_ARRAY);}
+	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
+	"$" /  {NON_SPACE_AHEAD}   	{return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
 <EXTENDED_MATCH_REGEX>{
