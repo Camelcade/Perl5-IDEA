@@ -2,3 +2,8 @@
 keys %val;
 values %s;
 each %s;
+
+# these are non-acceptors
+constant %hash;
+constant *glob;
+constant &hash;
