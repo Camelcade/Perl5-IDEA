@@ -19,8 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.PerlLabel;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
+import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.references.resolvers.PerlLabelResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,11 +28,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelReference extends PerlReference<PerlLabel>
+public class PerlLabelReference extends PerlReference<PsiPerlLabelExpr>
 {
 	private static final ResolveCache.AbstractResolver<PerlLabelReference, PerlLabelDeclaration> RESOLVER = new PerlLabelResolver();
 
-	public PerlLabelReference(@NotNull PerlLabel element, TextRange textRange)
+	public PerlLabelReference(@NotNull PsiPerlLabelExpr element, TextRange textRange)
 	{
 		super(element, textRange);
 	}

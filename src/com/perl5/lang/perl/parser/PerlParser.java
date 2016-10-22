@@ -45,7 +45,6 @@ public interface PerlParser extends PerlElementTypes
 			HEREDOC_END,
 			HEREDOC_QQ,
 			HEREDOC_QX,
-			LABEL,
 			OPERATOR_AND,
 			OPERATOR_AND_ASSIGN,
 			OPERATOR_ASSIGN,

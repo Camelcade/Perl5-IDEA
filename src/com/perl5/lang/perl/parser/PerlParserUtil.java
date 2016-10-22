@@ -70,7 +70,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
 			SUB,
-			LABEL,
 			RESERVED_METHOD,
 			RESERVED_FUNC
 	);
@@ -215,27 +214,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
 			m.done(STRING_BARE);
-			return true;
-		}
-		return false;
-	}
-
-
-	/**
-	 * Parsing label declaration LABEL:
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseLabelDeclaration(PsiBuilder b, int l)
-	{
-		if (PerlLexer.LABEL_TOKENSET.contains(b.getTokenType()) && b.lookAhead(1) == COLON)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(LABEL);
-			b.advanceLexer();
 			return true;
 		}
 		return false;

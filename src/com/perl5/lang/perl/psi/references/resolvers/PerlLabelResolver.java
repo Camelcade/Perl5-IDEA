@@ -20,9 +20,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlLabel;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlGotoExpr;
+import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.references.PerlLabelReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -37,23 +37,23 @@ public class PerlLabelResolver implements ResolveCache.AbstractResolver<PerlLabe
 	@Override
 	public PerlLabelDeclaration resolve(@NotNull PerlLabelReference perlLabelReference, boolean incompleteCode)
 	{
-		PerlLabel label = perlLabelReference.getElement();
-		PsiElement parent = label == null ? null : label.getParent();
+		PsiPerlLabelExpr labelExpr = perlLabelReference.getElement();
+		PsiElement parent = labelExpr == null ? null : labelExpr.getParent();
 
-		if (label == null || parent instanceof PerlLabelDeclaration)
+		if (labelExpr == null)
 		{
 			return null;
 		}
 
-		LabelSeeker processor = new LabelSeeker(label.getText());
+		LabelSeeker processor = new LabelSeeker(labelExpr.getText());
 
 		if (parent instanceof PsiPerlGotoExpr) // goto
 		{
-			PerlPsiUtil.processGotoLabelDeclarations(label.getParent(), processor);
+			PerlPsiUtil.processGotoLabelDeclarations(labelExpr.getParent(), processor);
 		}
 		else // suppose it's last, next or redo
 		{
-			PerlPsiUtil.processNextRedoLastLabelDeclarations(label.getParent(), processor);
+			PerlPsiUtil.processNextRedoLastLabelDeclarations(labelExpr.getParent(), processor);
 		}
 		return processor.getResult();
 	}

@@ -20,9 +20,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
-import com.perl5.lang.perl.psi.PerlLabel;
-import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,21 +36,17 @@ public class PerlLabelUndeclaredInspection extends PerlInspection
 		return new PerlVisitor()
 		{
 			@Override
-			public void visitLabel(@NotNull PerlLabel o)
+			public void visitLabelExpr(@NotNull PsiPerlLabelExpr o)
 			{
-				if (!(o.getParent() instanceof PerlLabelDeclaration))
+				PsiReference reference = o.getReference();
+				if (reference != null)
 				{
-					PsiReference reference = o.getReference();
-					if (reference != null)
+					PsiElement declaration = reference.resolve();
+					if (declaration == null)
 					{
-						PsiElement declaration = reference.resolve();
-						if (declaration == null)
-						{
-							registerProblem(holder, o, "Unable to find label declaration (possible deprecated usage)");
-						}
+						registerProblem(holder, o, "Unable to find label declaration (possible deprecated usage)");
 					}
 				}
-				super.visitLabel(o);
 			}
 		};
 	}

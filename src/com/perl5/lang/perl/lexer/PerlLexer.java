@@ -26,7 +26,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.parser.PerlParserUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
@@ -194,7 +193,6 @@ public class PerlLexer extends PerlLexerGenerated
 			);
 	public static TokenSet RESERVED_TOKENSET;
 	public static TokenSet CUSTOM_TOKENSET;
-	public static TokenSet LABEL_TOKENSET;
 
 	static
 	{
@@ -235,18 +233,6 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
 		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
-
-		LABEL_TOKENSET = TokenSet.andNot(
-				TokenSet.orSet(
-						RESERVED_TOKENSET,
-						CUSTOM_TOKENSET,
-						PerlParserUtil.CONVERTABLE_TOKENS
-				),
-				TokenSet.orSet(
-						QUOTE_LIKE_OPENER_TOKENSET,
-						TokenSet.create(RESERVED_SUB)
-				)
-		);
 	}
 
 

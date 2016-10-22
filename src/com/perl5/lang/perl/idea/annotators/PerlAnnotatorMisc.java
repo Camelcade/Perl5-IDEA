@@ -25,11 +25,11 @@ import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlLabel;
-import com.perl5.lang.perl.psi.PsiPerlNyiStatement;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -45,10 +45,14 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder)
 	{
-
-		if (element instanceof PsiPerlNyiStatement)
+		IElementType elementType = PsiUtilCore.getElementType(element);
+		if (elementType == NYI_STATEMENT)
 		{
 			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
+		}
+		if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
+		{
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}
 		else if (element instanceof PerlAnnotation)
 		{
@@ -71,10 +75,6 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 				}
 				run = run.getNextSibling();
 			}
-		}
-		else if (element instanceof PerlLabel)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}
 	}
 }
