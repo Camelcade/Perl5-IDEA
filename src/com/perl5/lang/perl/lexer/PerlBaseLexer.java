@@ -76,6 +76,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected final PerlBracesStack myBracesStack = new PerlBracesStack();
 	protected final PerlBracesStack myBracketsStack = new PerlBracesStack();
 	private IElementType myCurrentSigilToken;
+	private IElementType myNonLabelTokenType;
+	private int myNonLabelState;
 
 	/**
 	 * We've met any sigil
@@ -172,7 +174,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return LEFT_BRACKET;
 	}
 
-
 	@SuppressWarnings("Duplicates")
 	protected IElementType getRightBracket(int afterState)
 	{
@@ -206,7 +207,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
 	}
 
-
 	@Override
 	protected void resetInternals()
 	{
@@ -215,4 +215,24 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		myBracketsStack.clear();
 	}
 
+	protected void checkIfLabel(int newState, IElementType tokenType)
+	{
+		myNonLabelTokenType = tokenType;
+		myNonLabelState = newState;
+		yybegin(PerlLexer.LEX_LABEL);
+	}
+
+	protected IElementType getLabelToken()
+	{
+		yypushback(yylength());
+		yybegin(PerlLexerGenerated.YYINITIAL);
+		return IDENTIFIER;
+	}
+
+	protected IElementType getNonLabelToken()
+	{
+		yypushback(yylength());
+		yybegin(myNonLabelState);
+		return myNonLabelTokenType;
+	}
 }
