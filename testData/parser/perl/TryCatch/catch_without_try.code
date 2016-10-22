@@ -1,4 +1,0 @@
-catch(Foo::Bar $somevar){
-    say 'Catching';
-    say $somevar->somesub;
-}

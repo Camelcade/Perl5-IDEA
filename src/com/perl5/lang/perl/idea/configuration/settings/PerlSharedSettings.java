@@ -50,7 +50,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
 	public boolean PERL_CRITIC_ENABLED = false;
 	public boolean PERL_ANNOTATOR_ENABLED = false;
-	public boolean PERL_TRY_CATCH_ENABLED = false;
 	public String PERL_DEPARSE_ARGUMENTS = "";
 	public String PERL_TIDY_ARGS = "";
 	public String PERL_CRITIC_ARGS = "";

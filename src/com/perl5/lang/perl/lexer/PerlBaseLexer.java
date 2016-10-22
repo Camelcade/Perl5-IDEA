@@ -21,7 +21,6 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
-import com.perl5.lang.perl.parser.trycatch.TryCatchElementTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +34,6 @@ import java.util.regex.Pattern;
 public abstract class PerlBaseLexer extends PerlProtoLexer
 		implements PerlElementTypes,
 		PerlSwitchElementTypes,
-		TryCatchElementTypes,
 		ClassAccessorElementTypes,
 		MojoliciousElementTypes,
 		MooseElementTypes

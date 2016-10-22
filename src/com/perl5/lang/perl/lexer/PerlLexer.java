@@ -25,7 +25,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
@@ -211,16 +210,11 @@ public class PerlLexer extends PerlLexerGenerated
 	 * Regex processor qr{} m{} s{}{}
 	 **/
 	protected IElementType regexCommand = null;
-	private boolean myTryCatchEnabled = false;
 	private boolean myFormatWaiting = false;
 
 	public PerlLexer(@Nullable Project project)
 	{
 		super(null);
-		if (project != null)
-		{
-			myTryCatchEnabled = PerlSharedSettings.getInstance(project).PERL_TRY_CATCH_ENABLED;
-		}
 	}
 
 	public static void initReservedTokensMap()

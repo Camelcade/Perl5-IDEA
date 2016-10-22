@@ -1,0 +1,105 @@
+# Try::Tiny
+try {
+    die "foo";
+} catch {
+    warn "caught error: $_"; # not $@
+};
+
+# just silence errors
+try {
+    die "foo";
+};
+
+my $x = try { die "foo" } catch { "bar" };
+my $x = try { die "foo" } || "bar";
+my $x = (try { die "foo" }) // "bar";
+
+my $x = eval { die "foo" } || "bar";
+
+my $x;
+try { die 'foo' } finally { $x = 'bar' };
+try { die 'foo' } catch { warn "Got a die: $_" } finally { $x = 'bar' };
+
+say finally{ $var } if something;
+
+try {
+    require Foo;
+} catch {
+    when (/^Can't locate .*?\.pm in \@INC/) { } # ignore
+    default { die $_ }
+};
+
+sub foo {
+    my ( $self, @args ) = @_;
+    try { $self->bar(@args) }
+}
+
+sub bar_in_place {
+    my $self = shift;
+    my $args = \@_;
+    try { $_ = $self->bar($_) for @$args }
+}
+
+sub parent_sub {
+    try {
+        die;
+    }
+    catch {
+        return;
+    };
+
+    say "this text WILL be displayed, even though an exception is thrown";
+}
+
+sub parent_sub {
+    my $success = try {
+        die;
+        1;
+    };
+    return unless $success;
+
+    say "This text WILL NEVER appear!";
+}
+# OR
+sub parent_sub_with_catch {
+    my $success = try {
+        die;
+        1;
+    }
+        catch {
+            # do something with $_
+            return undef; #see note
+        };
+    return unless $success;
+
+    say "This text WILL NEVER appear!";
+}
+
+########################################################### TryCatch ###################################################
+use TryCatch;
+
+sub foo {
+    my ($self) = @_;
+
+    try {
+        die Some::Class->new(code => 404 ) if $self->not_found;
+        return "return value from foo";
+    }
+    catch (Some::Class $e where { $_->code > 100 } ) {
+    }
+}
+
+try{}
+catch (TypeFoo $e) { ... }
+catch (Dict[code => Int, message => Str] $err) { ... }
+catch ($err){}
+catch (HTTPError $e where { $_->code >= 400 && $_->code <= 499 } ) {
+    return "4XX error";
+}
+try{}
+catch (HTTPError $e) {
+    return "other http code";
+}
+
+################################################# Error ################################################################
+

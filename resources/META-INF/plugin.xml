@@ -115,7 +115,6 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
 
 
-        <parserExtension implementation="com.perl5.lang.perl.parser.TryCatchParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
         <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtensionImpl"/>
@@ -756,9 +755,6 @@
 
         <completion.contributor language="Perl5"
                                 implementationClass="com.perl5.lang.perl.parser.trycatch.idea.completion.TryCatchCompletionContributor"/>
-        <annotator language="Perl5"
-                   implementationClass="com.perl5.lang.perl.parser.trycatch.idea.annotator.TryCatchAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
         <!--TryCatch settings end -->
 
         <!-- Switch settings -->

@@ -2094,7 +2094,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("TRY_BRANCH"))
+		if (name.equals("TRY_EXPR"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -2102,12 +2102,12 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlTryBranchImpl(node);
+					return new PsiPerlTryExprImpl(node);
 				}
 			};
 		}
 
-		if (name.equals("CATCH_BRANCH"))
+		if (name.equals("CATCH_EXPR"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -2115,11 +2115,12 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlCatchBranchImpl(node);
+					return new PsiPerlCatchExprImpl(node);
 				}
 			};
 		}
-		if (name.equals("FINALLY_BRANCH"))
+
+		if (name.equals("CATCH_CONDITION"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -2127,7 +2128,33 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlFinallyBranchImpl(node);
+					return new PsiPerlCatchConditionImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("TYPE_CONSTRAINTS"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlTypeConstraintsImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("FINALLY_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlFinallyExprImpl(node);
 				}
 			};
 		}

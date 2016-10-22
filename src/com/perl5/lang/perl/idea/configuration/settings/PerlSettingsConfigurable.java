@@ -31,7 +31,6 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
-import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
@@ -73,7 +72,6 @@ public class PerlSettingsConfigurable implements Configurable
 	JCheckBox simpleMainCheckbox;
 	JCheckBox autoInjectionCheckbox;
 	JCheckBox perlCriticCheckBox;
-	JCheckBox perlTryCatchCheckBox;
 	JCheckBox perlAnnotatorCheckBox;
 	JCheckBox allowInjectionWithInterpolation;
 
@@ -122,9 +120,6 @@ public class PerlSettingsConfigurable implements Configurable
 
 		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
 		builder.addComponent(allowInjectionWithInterpolation);
-
-		perlTryCatchCheckBox = new JCheckBox("Enable TryCatch syntax extension");
-		builder.addComponent(perlTryCatchCheckBox);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
 //		builder.addComponent(perlAnnotatorCheckBox);
@@ -316,7 +311,6 @@ public class PerlSettingsConfigurable implements Configurable
 				mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
 				mySharedSettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
 				mySharedSettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
-				mySharedSettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected() ||
 				!StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
 				!StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
 				!StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
@@ -342,9 +336,6 @@ public class PerlSettingsConfigurable implements Configurable
 		mySharedSettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
 		mySharedSettings.setDeparseOptions(deparseArgumentsTextField.getText());
 
-		boolean needReparse = mySharedSettings.PERL_TRY_CATCH_ENABLED != perlTryCatchCheckBox.isSelected();
-		mySharedSettings.PERL_TRY_CATCH_ENABLED = perlTryCatchCheckBox.isSelected();
-
 		mySharedSettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
 		myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
 		mySharedSettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
@@ -360,11 +351,6 @@ public class PerlSettingsConfigurable implements Configurable
 			applyMicroIdeSettings();
 		}
 		mySharedSettings.settingsUpdated();
-
-		if (needReparse)
-		{
-			FileContentUtil.reparseOpenedFiles();
-		}
 	}
 
 	public void applyMicroIdeSettings()
@@ -395,7 +381,6 @@ public class PerlSettingsConfigurable implements Configurable
 		autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);
 		allowInjectionWithInterpolation.setSelected(mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
 		perlAnnotatorCheckBox.setSelected(mySharedSettings.PERL_ANNOTATOR_ENABLED);
-		perlTryCatchCheckBox.setSelected(mySharedSettings.PERL_TRY_CATCH_ENABLED);
 		deparseArgumentsTextField.setText(mySharedSettings.PERL_DEPARSE_ARGUMENTS);
 
 		perlCriticCheckBox.setSelected(mySharedSettings.PERL_CRITIC_ENABLED);
