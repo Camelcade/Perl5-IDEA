@@ -60,17 +60,19 @@ ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
 ESCAPED_CHARACTER = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
-PERL_XIDS = [\w && \p{XID_Start}\d_] // seems in java \d does not matches XID_Start
+PERL_XIDS = [\w && \p{XID_Start}_]
 PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
+// following chunks may start with a number
+IDENTIFIER_CONTINUE = {PERL_XIDC}+
 
 FARROW = "=>"
 BAREWORD_MINUS = "-" ? {IDENTIFIER}
 
 // qualified identifer can't start with ', but variable can
-QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
-VARIABLE_QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER} )*  "::" *
+QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE} )*  "::" *
+VARIABLE_QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER_CONTINUE} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE} )*  "::" *
 
 DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
 SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"?
@@ -121,8 +123,8 @@ TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
 NAMED_UNARY_OPERATORS = "values"|"umask"|"srand"|"sleep"|"shift"|"setservent"|"setprotoent"|"setnetent"|"sethostent"|"reset"|"readline"|"rand"|"prototype"|"pop"|"localtime"|"keys"|"gmtime"|"getsockname"|"getpwuid"|"getpwnam"|"getprotobyname"|"getpgrp"|"getpeername"|"getnetbyname"|"gethostbyname"|"getgrnam"|"getgrgid"|"exit"|"exists"|"each"|"caller"
 BARE_HANDLE_ACCEPTORS = "truncate"|"syswrite"|"sysseek"|"sysread"|"sysopen"|"stat"|"select"|"seekdir"|"seek"|"read"|"opendir"|"open"|"lstat"|"ioctl"|"flock"|"fcntl"|"binmode"
 NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"rewinddir"|"readdir"|"getc"|"fileno"|"eof"|"closedir"|"close"|"chdir"
-LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"scalar"|"rindex"|"rename"|"recv"|"push"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"import"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"die"|"delete"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chmod"|"bless"|"bind"|"atan2"|"accept"
-NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"dump"|"break"
+LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"scalar"|"rindex"|"rename"|"recv"|"push"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"import"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"dump"|"die"|"delete"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chmod"|"bless"|"bind"|"atan2"|"accept"
+NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"break"
 IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"split"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"defined"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
 
 REGEX_COMMENT = "(?#"[^)]*")"
@@ -157,6 +159,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_IDENTIFIER_WITH_REGEX
 %state AFTER_POSSIBLE_SIGIL
 %state AFTER_ASSIGN
+
+%xstate LEX_LABEL
 
 %%
 
@@ -325,6 +329,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]														{yypushback(1);yybegin(YYINITIAL);}
 }
 
+<LEX_LABEL>{
+	{SPACES_OR_COMMENTS}":"	{return getLabelToken();}
+	[^]						{return getNonLabelToken();}
+}
+
 ////////////////////////// COMMON PART /////////////////////////////////////////////////////////////////////////////////
 
 <BRACED_STRING>{
@@ -334,13 +343,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 
 <YYINITIAL,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
-	{CORE_PREFIX}"if"	 	{ yybegin(YYINITIAL); return RESERVED_IF;}
-	{CORE_PREFIX}"unless"	{ yybegin(YYINITIAL);return RESERVED_UNLESS;}
-	{CORE_PREFIX}"while"	{ yybegin(YYINITIAL);return RESERVED_WHILE;}
-	{CORE_PREFIX}"until"	{ yybegin(YYINITIAL);return RESERVED_UNTIL;}
-	{CORE_PREFIX}"for"	 	{ yybegin(YYINITIAL);return RESERVED_FOR;}
-	{CORE_PREFIX}"foreach"	{ yybegin(YYINITIAL);return RESERVED_FOREACH;}
-	{CORE_PREFIX}"when"	 	{ yybegin(YYINITIAL);return RESERVED_WHEN;}
+	{CORE_PREFIX}"if"	 	{ checkIfLabel(YYINITIAL, RESERVED_IF);}
+	{CORE_PREFIX}"unless"	{ checkIfLabel(YYINITIAL, RESERVED_UNLESS);}
+	{CORE_PREFIX}"while"	{ checkIfLabel(YYINITIAL, RESERVED_WHILE);}
+	{CORE_PREFIX}"until"	{ checkIfLabel(YYINITIAL, RESERVED_UNTIL);}
+	{CORE_PREFIX}"for"	 	{ checkIfLabel(YYINITIAL, RESERVED_FOR);}
+	{CORE_PREFIX}"foreach"	{ checkIfLabel(YYINITIAL, RESERVED_FOREACH);}
+	{CORE_PREFIX}"when"	 	{ checkIfLabel(YYINITIAL, RESERVED_WHEN);}
 }
 
 <YYINITIAL,AFTER_COMMA,AFTER_IDENTIFIER>{
@@ -369,21 +378,35 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX>{
-	"x" / [\d]*	{yybegin(YYINITIAL);return OPERATOR_X;}
-	"and"		{yybegin(YYINITIAL);return OPERATOR_AND_LP;}
-	"or"		{yybegin(YYINITIAL);return OPERATOR_OR_LP;}
-	"xor"		{yybegin(YYINITIAL);return OPERATOR_XOR_LP;}
-	"lt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_LT_STR;}
-	"gt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_GT_STR;}
-	"le" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_LE_STR;}
-	"ge" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_GE_STR;}
-	"eq" / {QUOTE_LIKE_SUFFIX} 		{yybegin(YYINITIAL);return OPERATOR_EQ_STR;}
-	"ne" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL);return OPERATOR_NE_STR;}
-	"cmp" / {QUOTE_LIKE_SUFFIX} 	{yybegin(YYINITIAL);return OPERATOR_CMP_STR;}
+	"x" / [\d]*	{checkIfLabel(YYINITIAL, OPERATOR_X);}
+	"and"		{checkIfLabel(YYINITIAL, OPERATOR_AND_LP);}
+	"or"		{checkIfLabel(YYINITIAL, OPERATOR_OR_LP);}
+	"xor"		{checkIfLabel(YYINITIAL, OPERATOR_XOR_LP);}
+	"lt" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_LT_STR);}
+	"gt" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_GT_STR);}
+	"le" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_LE_STR);}
+	"ge" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_GE_STR);}
+	"eq" / {QUOTE_LIKE_SUFFIX} 		{checkIfLabel(YYINITIAL, OPERATOR_EQ_STR);}
+	"ne" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_NE_STR);}
+	"cmp" / {QUOTE_LIKE_SUFFIX} 	{checkIfLabel(YYINITIAL, OPERATOR_CMP_STR);}
 }
 
 <YYINITIAL>{
 	"..." 	{yybegin(YYINITIAL);return OPERATOR_NYI;}
+}
+
+<AFTER_DEREFERENCE>{
+	"$*"	{yybegin(AFTER_VALUE);return DEREF_SCALAR;}
+	"$#*"	{yybegin(AFTER_VALUE);return DEREF_SCALAR_INDEX;}
+	"@*"	{yybegin(AFTER_VALUE);return DEREF_ARRAY;}
+	"%*"	{yybegin(AFTER_VALUE);return DEREF_HASH;}
+	"**"	{yybegin(AFTER_VALUE);return DEREF_GLOB;}
+	"&*"	{yybegin(AFTER_VALUE);return DEREF_CODE;}
+
+	"@"		{yybegin(AFTER_VARIABLE); return SIGIL_ARRAY;}
+	"%"		{yybegin(AFTER_VARIABLE); return SIGIL_HASH;}
+	"*"		{yybegin(AFTER_VARIABLE); return SIGIL_GLOB;}
+	"&"		{yybegin(AFTER_VARIABLE); return SIGIL_CODE;}
 }
 
 // normal variable, unambiguous
@@ -440,10 +463,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 // known identifiers
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_REGEX,AFTER_VARIABLE>{
-	"split"						{yybegin(AFTER_IDENTIFIER_WITH_REGEX); return IDENTIFIER;}
+	"split"						{checkIfLabel(AFTER_IDENTIFIER_WITH_REGEX, IDENTIFIER);}
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(YYINITIAL);return IDENTIFIER;}
-	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{yybegin(YYINITIAL);return OPERATOR_NAMED_UNARY;}
-	{NAMED_UNARY_OPERATORS}				{yybegin(AFTER_IDENTIFIER);return OPERATOR_NAMED_UNARY;}
+	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{checkIfLabel(YYINITIAL, OPERATOR_NAMED_UNARY);}
+	{NAMED_UNARY_OPERATORS}				{checkIfLabel(AFTER_IDENTIFIER, OPERATOR_NAMED_UNARY);}
 
 	{IMPLICIT_USERS}					{yybegin(AFTER_IDENTIFIER);return IDENTIFIER;}
 	{PERL_OPERATORS_FILETEST} / [^a-zA-Z0-9_] 	{yybegin(AFTER_IDENTIFIER);return OPERATOR_FILETEST;}
@@ -451,70 +474,71 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{NAMED_ARGUMENTLESS}				{yybegin(AFTER_VALUE);return IDENTIFIER;}	// fixme we can return special token here to help parser
 	{LIST_OPERATORS}					{yybegin(YYINITIAL);return IDENTIFIER;}
 
-	"not"						{yybegin(YYINITIAL);return OPERATOR_NOT_LP;}
+	"not"						{checkIfLabel(YYINITIAL, OPERATOR_NOT_LP);}
 
-	{CORE_PREFIX}"my"			{yybegin(YYINITIAL);return RESERVED_MY;}
-	{CORE_PREFIX}"our"			{yybegin(YYINITIAL);return RESERVED_OUR;}
-	{CORE_PREFIX}"local"		{yybegin(YYINITIAL);return RESERVED_LOCAL;}
-	{CORE_PREFIX}"state"		{yybegin(YYINITIAL);return RESERVED_STATE;}
+	{CORE_PREFIX}"my"			{checkIfLabel(YYINITIAL, RESERVED_MY);}
+	{CORE_PREFIX}"our"			{checkIfLabel(YYINITIAL, RESERVED_OUR);}
+	{CORE_PREFIX}"local"		{checkIfLabel(YYINITIAL, RESERVED_LOCAL);}
+	{CORE_PREFIX}"state"		{checkIfLabel(YYINITIAL, RESERVED_STATE);}
 
-	{CORE_PREFIX}"elsif"	 	{yybegin(YYINITIAL);return RESERVED_ELSIF;}
-	{CORE_PREFIX}"else"	 		{yybegin(YYINITIAL);return RESERVED_ELSE;}
-	{CORE_PREFIX}"given"	 	{yybegin(YYINITIAL);return RESERVED_GIVEN;}
-	{CORE_PREFIX}"default"	 	{yybegin(YYINITIAL);return RESERVED_DEFAULT;}
-	{CORE_PREFIX}"continue"	 	{yybegin(YYINITIAL);return  RESERVED_CONTINUE;}
+	{CORE_PREFIX}"elsif"	 	{checkIfLabel(YYINITIAL, RESERVED_ELSIF);}
+	{CORE_PREFIX}"else"	 		{checkIfLabel(YYINITIAL, RESERVED_ELSE);}
+	{CORE_PREFIX}"given"	 	{checkIfLabel(YYINITIAL, RESERVED_GIVEN);}
+	{CORE_PREFIX}"default"	 	{checkIfLabel(YYINITIAL, RESERVED_DEFAULT);}
+	{CORE_PREFIX}"continue"	 	{checkIfLabel(YYINITIAL, RESERVED_CONTINUE);}
 
-	{CORE_PREFIX}"format"	 	{yybegin(AFTER_IDENTIFIER);return  RESERVED_FORMAT;}
-	{CORE_PREFIX}"sub"	 		{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
+	{CORE_PREFIX}"format"	 							{checkIfLabel(AFTER_IDENTIFIER, RESERVED_FORMAT);}
+	// distinct from label pattern
+	{CORE_PREFIX}"sub" / ({SPACES_OR_COMMENTS}":")?		{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
-	{CORE_PREFIX}"package"	 	{yybegin(PACKAGE_ARGUMENTS); return  RESERVED_PACKAGE;}
-	{CORE_PREFIX}"use"	 		{yybegin(PACKAGE_ARGUMENTS); return  RESERVED_USE;}
-	{CORE_PREFIX}"no"	 		{yybegin(PACKAGE_ARGUMENTS); return  RESERVED_NO;}
-	{CORE_PREFIX}"require"	 	{yybegin(REQUIRE_ARGUMENTS); return  RESERVED_REQUIRE;}
+	{CORE_PREFIX}"package"	 	{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_PACKAGE);}
+	{CORE_PREFIX}"use"	 		{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_USE);}
+	{CORE_PREFIX}"no"	 		{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_NO);}
+	{CORE_PREFIX}"require"	 	{checkIfLabel(REQUIRE_ARGUMENTS, RESERVED_REQUIRE);}
 
-	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER);return RESERVED_UNDEF;}
+	{CORE_PREFIX}"undef"		{checkIfLabel(AFTER_IDENTIFIER, RESERVED_UNDEF);}
 
-	"switch"					{yybegin(YYINITIAL);return RESERVED_SWITCH;}
-	"case"						{yybegin(AFTER_IDENTIFIER_WITH_REGEX);return RESERVED_CASE;}
+	"switch"					{checkIfLabel(YYINITIAL, RESERVED_SWITCH);}
+	"case"						{checkIfLabel(AFTER_IDENTIFIER_WITH_REGEX, RESERVED_CASE);}
 
-	"method"					{yybegin(YYINITIAL);return RESERVED_METHOD;}
-	"func"						{yybegin(YYINITIAL);return RESERVED_FUNC;}
+	"method"					{checkIfLabel(YYINITIAL, RESERVED_METHOD);}
+	"func"						{checkIfLabel(YYINITIAL, RESERVED_FUNC);}
 
-	"try"						{yybegin(YYINITIAL);return RESERVED_TRY;}
-	"catch"						{yybegin(YYINITIAL);return RESERVED_CATCH;}
-	"finally"					{yybegin(YYINITIAL);return RESERVED_FINALLY;}
+	"try"						{checkIfLabel(YYINITIAL, RESERVED_TRY);}
+	"catch"						{checkIfLabel(YYINITIAL, RESERVED_CATCH);}
+	"finally"					{checkIfLabel(YYINITIAL, RESERVED_FINALLY);}
 
-	"with"					{yybegin(YYINITIAL);return RESERVED_WITH;}
-	"extends"				{yybegin(YYINITIAL);return RESERVED_EXTENDS;}
-	"meta"					{yybegin(YYINITIAL);return RESERVED_META;}
-	"override"				{yybegin(YYINITIAL);return RESERVED_OVERRIDE;}
-	"around"				{yybegin(YYINITIAL);return RESERVED_AROUND;}
-	"augment"				{yybegin(YYINITIAL);return RESERVED_AUGMENT;}
-	"after"					{yybegin(YYINITIAL);return RESERVED_AFTER;}
-	"before"				{yybegin(YYINITIAL);return RESERVED_BEFORE;}
-	"has"					{yybegin(YYINITIAL);return RESERVED_HAS;}
+	"with"					{checkIfLabel(YYINITIAL, RESERVED_WITH);}
+	"extends"				{checkIfLabel(YYINITIAL, RESERVED_EXTENDS);}
+	"meta"					{checkIfLabel(YYINITIAL, RESERVED_META);}
+	"override"				{checkIfLabel(YYINITIAL, RESERVED_OVERRIDE);}
+	"around"				{checkIfLabel(YYINITIAL, RESERVED_AROUND);}
+	"augment"				{checkIfLabel(YYINITIAL, RESERVED_AUGMENT);}
+	"after"					{checkIfLabel(YYINITIAL, RESERVED_AFTER);}
+	"before"				{checkIfLabel(YYINITIAL, RESERVED_BEFORE);}
+	"has"					{checkIfLabel(YYINITIAL, RESERVED_HAS);}
 
 	// special treatment?
-	{CORE_PREFIX}"print"	 	{yybegin(AFTER_IDENTIFIER); return RESERVED_PRINT;}
-	{CORE_PREFIX}"printf"	 	{yybegin(AFTER_IDENTIFIER); return RESERVED_PRINTF;}
-	{CORE_PREFIX}"say"	 		{yybegin(AFTER_IDENTIFIER); return RESERVED_SAY;}
+	{CORE_PREFIX}"print"	 	{checkIfLabel(AFTER_IDENTIFIER, RESERVED_PRINT);}
+	{CORE_PREFIX}"printf"	 	{checkIfLabel(AFTER_IDENTIFIER, RESERVED_PRINTF);}
+	{CORE_PREFIX}"say"	 		{checkIfLabel(AFTER_IDENTIFIER, RESERVED_SAY);}
 
-	{CORE_PREFIX}"grep"	 { yybegin(AFTER_IDENTIFIER_WITH_REGEX); return  RESERVED_GREP;}
-	{CORE_PREFIX}"map"	 { yybegin(YYINITIAL);return  RESERVED_MAP;}
-	{CORE_PREFIX}"sort"	 { yybegin(YYINITIAL);return  RESERVED_SORT;}
+	{CORE_PREFIX}"grep"	 { checkIfLabel(AFTER_IDENTIFIER_WITH_REGEX, RESERVED_GREP);}
+	{CORE_PREFIX}"map"	 { checkIfLabel(YYINITIAL, RESERVED_MAP);}
+	{CORE_PREFIX}"sort"	 { checkIfLabel(YYINITIAL, RESERVED_SORT);}
 
-	{CORE_PREFIX}"do"	 { yybegin(BLOCK_AS_VALUE);return  RESERVED_DO;}
-	{CORE_PREFIX}"eval"	 { yybegin(BLOCK_AS_VALUE);return  RESERVED_EVAL;}
+	{CORE_PREFIX}"do"	 { checkIfLabel(BLOCK_AS_VALUE, RESERVED_DO);}
+	{CORE_PREFIX}"eval"	 { checkIfLabel(BLOCK_AS_VALUE, RESERVED_EVAL);}
 
-	{CORE_PREFIX}"goto"	 { yybegin(YYINITIAL);return  RESERVED_GOTO;}
-	{CORE_PREFIX}"redo"	 { yybegin(YYINITIAL);return  RESERVED_REDO;}
-	{CORE_PREFIX}"next"	 { yybegin(YYINITIAL);return  RESERVED_NEXT;}
-	{CORE_PREFIX}"last"	 { yybegin(YYINITIAL);return  RESERVED_LAST;}
+	{CORE_PREFIX}"goto"	 { checkIfLabel(YYINITIAL, RESERVED_GOTO);}
+	{CORE_PREFIX}"redo"	 { checkIfLabel(YYINITIAL, RESERVED_REDO);}
+	{CORE_PREFIX}"next"	 { checkIfLabel(YYINITIAL, RESERVED_NEXT);}
+	{CORE_PREFIX}"last"	 { checkIfLabel(YYINITIAL, RESERVED_LAST);}
 
-	{CORE_PREFIX}"return"	 { yybegin(YYINITIAL); return  RESERVED_RETURN;}
+	{CORE_PREFIX}"return"	 { checkIfLabel(YYINITIAL, RESERVED_RETURN);}
 
-	{BLOCK_NAMES}			{yybegin(YYINITIAL);return BLOCK_NAME;}
-	{TAG_NAMES}				{yybegin(AFTER_VALUE); return TAG;}
+	{BLOCK_NAMES} / {SPACES_OR_COMMENTS}"{"		{yybegin(YYINITIAL);return BLOCK_NAME;}
+	{TAG_NAMES}									{checkIfLabel(AFTER_VALUE, TAG);}
 
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_Y;}
 	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_TR;}
@@ -627,6 +651,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"." {NUMBER_INT} {NUMBER_EXP}?	 				 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}
 	{PERL_VERSION}  		{yybegin(AFTER_VALUE);return NUMBER_VERSION;}
+
 	{QUALIFIED_IDENTIFIER} 	{yybegin(AFTER_IDENTIFIER);return getIdentifierToken();}
 }
 

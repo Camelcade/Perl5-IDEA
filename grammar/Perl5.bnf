@@ -42,11 +42,17 @@ limitations under the License.
     SIGIL_ARRAY='$@'
     SIGIL_SCALAR='$$'
     SIGIL_SCALAR_INDEX='$#'
-
-    // synthetic sigils
     SIGIL_GLOB='$*'
     SIGIL_HASH='$%'
     SIGIL_CODE='$&'
+
+	// postfix deref
+	DEREF_SCALAR='->$*'
+	DEREF_SCALAR_INDEX='->$#*'
+	DEREF_ARRAY='->@*'
+	DEREF_HASH='->%*'
+	DEREF_GLOB='->**'
+	DEREF_CODE='->&*'
 
     // generated tokens
     SUB='SUB'
@@ -306,7 +312,6 @@ limitations under the License.
 
     HANDLE='HANDLE'
     BLOCK_NAME='BLOCK_NAME'
-    LABEL='LABEL'
   ]
 
     extends(".+expr")=expr
@@ -452,7 +457,7 @@ private file_items ::= file_item*
 private file_item ::= !<<eof>>
 {
 	namespace_definition
-	| label_declaration [statement_item]
+	| label_declaration ':' [statement_item]
     | statement_item
 }
 
@@ -603,8 +608,8 @@ goto_expr ::=  'goto' [goto_param] {pin=1}
 
 return_expr ::=  'return' [list_expr] {pin=1}
 
-private lnr_param ::= <<convertIdentifier 'LABEL '>> | expr // fixme scalar_expr ?
-private goto_param ::= <<convertIdentifier 'LABEL '>> | '&' <<convertIdentifier 'SUB '>> | expr // fixme same, scalar expr?
+private lnr_param ::= label_expr | expr // fixme scalar_expr ?
+private goto_param ::= label_expr | code_cast_expr | code_variable | expr
 
 
 statement_modifier ::=
@@ -932,7 +937,7 @@ array_hash_slice ::= array_primitive hash_index
 
 array_cast_expr ::= '$@' cast_target
 
-hash_cast_expr ::= {'$%'|'%'} cast_target
+hash_cast_expr ::= '$%' cast_target
 
 private scalar_primitive ::=
     scalar_variable
@@ -966,6 +971,15 @@ private nested_element_variation ::=
     | <<nested_call IDENTIFIER>>
     | nested_call_arguments    // function call like $var->()
     | scalar_call
+    | post_deref_expr
+    | post_deref_glob_expr
+    | post_deref_array_slice_expr
+    | post_deref_hash_slice_expr
+
+post_deref_expr ::= '->$*'|'->$#*'|'->@*'|'->%*'|'->**'|'->&*'	{name="Postderef"}
+post_deref_glob_expr ::= '$*' hash_index 						{name="Glob expr"}
+post_deref_array_slice_expr ::= '$@' {hash_index|array_index}	{name="Array slice"}
+post_deref_hash_slice_expr ::= '$%' {hash_index|array_index}	{name="Hash slice"}
 
 meta nested_call ::= <<parse_nested_call <<x1>>>>
 private meta parse_nested_call ::= <<method <<x1>>>> [method_call_arguments]
@@ -990,7 +1004,8 @@ code_cast_expr ::= '$&' cast_target
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= <<parseLabelDeclaration>> // do we need to change tokentype?
+label_declaration ::= IDENTIFIER &':'
+label_expr ::= IDENTIFIER
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
