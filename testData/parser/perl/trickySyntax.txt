@@ -340,7 +340,7 @@ Perl5
             PsiPerlHashIndexImpl(PerlElementType.HASH_INDEX)
               PsiElement(PerlTokenType.{)('{')
               PsiPerlDerefExprImpl(PerlElementType.DEREF_EXPR)
-                PsiPerlScalarArrayElementImpl(PerlElementType.SCALAR_ARRAY_ELEMENT)
+                PsiPerlArrayElementImpl(PerlElementType.ARRAY_ELEMENT)
                   PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
                     PsiElement(PerlTokenType.$$)('$')
                     PsiElement(PerlTokenType.SCALAR_NAME)('_')

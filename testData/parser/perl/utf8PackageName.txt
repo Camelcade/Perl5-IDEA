@@ -2508,7 +2508,7 @@ Perl5
             PsiPerlCallArgumentsImpl(PerlElementType.CALL_ARGUMENTS)
               PsiElement(PerlTokenType.()('(')
               PsiPerlCommaSequenceExprImpl(PerlElementType.COMMA_SEQUENCE_EXPR)
-                PsiPerlAnonArrayElementImpl(PerlElementType.ANON_ARRAY_ELEMENT)
+                PsiPerlArrayElementImpl(PerlElementType.ARRAY_ELEMENT)
                   PsiPerlParenthesisedExprImpl(PerlElementType.PARENTHESISED_EXPR)
                     PsiElement(PerlTokenType.()('(')
                     PsiPerlSubCallExprImpl(PerlElementType.SUB_CALL_EXPR)

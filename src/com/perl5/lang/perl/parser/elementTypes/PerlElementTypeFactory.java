@@ -226,19 +226,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("ANON_ARRAY_ELEMENT"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlAnonArrayElementImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("ANON_HASH"))
 		{
 			return new PerlElementTypeEx(name)
@@ -252,7 +239,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("ARRAY_ARRAY_SLICE"))
+		if (name.equals("ARRAY_SLICE"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -260,7 +247,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlArrayArraySliceImpl(node);
+					return new PsiPerlArraySliceImpl(node);
 				}
 			};
 		}
@@ -278,7 +265,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("ARRAY_HASH_SLICE"))
+		if (name.equals("HASH_SLICE"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -286,7 +273,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlArrayHashSliceImpl(node);
+					return new PsiPerlHashSliceImpl(node);
 				}
 			};
 		}
@@ -1454,7 +1441,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("SCALAR_ARRAY_ELEMENT"))
+		if (name.equals("ARRAY_ELEMENT"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -1462,7 +1449,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlScalarArrayElementImpl(node);
+					return new PsiPerlArrayElementImpl(node);
 				}
 			};
 		}
@@ -1493,7 +1480,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("SCALAR_HASH_ELEMENT"))
+		if (name.equals("HASH_ELEMENT"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -1501,7 +1488,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlScalarHashElementImpl(node);
+					return new PsiPerlHashElementImpl(node);
 				}
 			};
 		}

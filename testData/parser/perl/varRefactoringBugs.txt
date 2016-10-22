@@ -1,6 +1,6 @@
 Perl5
   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-    PsiPerlScalarHashElementImpl(PerlElementType.SCALAR_HASH_ELEMENT)
+    PsiPerlHashElementImpl(PerlElementType.HASH_ELEMENT)
       PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
         PsiElement(PerlTokenType.$$)('$')
         PsiElement(PerlTokenType.SCALAR_NAME)('some')
@@ -91,7 +91,7 @@ Perl5
       PsiElement(PerlTokenType.QUOTE_DOUBLE_CLOSE)('"')
     PsiElement(PerlTokenType.;)(';')
   PsiPerlStatementImpl(PerlElementType.STATEMENT)
-    PsiPerlScalarHashElementImpl(PerlElementType.SCALAR_HASH_ELEMENT)
+    PsiPerlHashElementImpl(PerlElementType.HASH_ELEMENT)
       PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
         PsiElement(PerlTokenType.$$)('$')
         PsiElement(PerlTokenType.SCALAR_NAME)('opts')

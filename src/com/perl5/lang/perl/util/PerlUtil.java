@@ -48,9 +48,9 @@ import java.util.Set;
 public class PerlUtil implements PerlElementTypes
 {
 	private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
-			ARRAY_ARRAY_SLICE,
+			ARRAY_SLICE,
 			ARRAY_CAST_EXPR,
-			ARRAY_HASH_SLICE,
+			HASH_SLICE,
 			ARRAY_VARIABLE,
 			HASH_VARIABLE,
 			HASH_CAST_EXPR,

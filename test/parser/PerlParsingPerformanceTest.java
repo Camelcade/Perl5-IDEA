@@ -48,8 +48,8 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase
 			ARRAY_VARIABLE,
 			ARRAY_CAST_EXPR,
 			STRING_LIST,
-			ARRAY_ARRAY_SLICE,
-			ARRAY_HASH_SLICE,
+			ARRAY_SLICE,
+			HASH_SLICE,
 
 			HASH_VARIABLE,
 			HASH_CAST_EXPR,
@@ -72,7 +72,6 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase
 
 			// list or element
 			PARENTHESISED_EXPR,
-			ANON_ARRAY_ELEMENT,
 
 			//regexps
 			COMPILE_REGEX,

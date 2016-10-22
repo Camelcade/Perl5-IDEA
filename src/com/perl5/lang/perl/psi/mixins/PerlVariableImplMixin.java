@@ -276,16 +276,16 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 			return PerlVariableType.SCALAR;
 		}
 		else if (
-				variableContainer instanceof PsiPerlScalarHashElement
-						|| variableContainer instanceof PsiPerlArrayHashSlice
+				variableContainer instanceof PsiPerlHashElement
+						|| variableContainer instanceof PsiPerlHashSlice
 						|| this instanceof PsiPerlHashVariable
 				)
 		{
 			return PerlVariableType.HASH;
 		}
 		else if (
-				variableContainer instanceof PsiPerlArrayArraySlice
-						|| variableContainer instanceof PsiPerlScalarArrayElement
+				variableContainer instanceof PsiPerlArraySlice
+						|| variableContainer instanceof PsiPerlArrayElement
 						|| this instanceof PsiPerlArrayIndexVariable
 						|| this instanceof PsiPerlArrayVariable
 				)

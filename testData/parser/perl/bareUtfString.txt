@@ -1,7 +1,7 @@
 Perl5
   PsiPerlStatementImpl(PerlElementType.STATEMENT)
     PsiPerlAssignExprImpl(PerlElementType.ASSIGN_EXPR)
-      PsiPerlScalarHashElementImpl(PerlElementType.SCALAR_HASH_ELEMENT)
+      PsiPerlHashElementImpl(PerlElementType.HASH_ELEMENT)
         PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
           PsiElement(PerlTokenType.$$)('$')
           PsiElement(PerlTokenType.SCALAR_NAME)('переменная')

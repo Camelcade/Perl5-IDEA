@@ -61,7 +61,7 @@ Perl5
       PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
         PsiElement(PerlTokenType.$$)('$')
         PsiElement(PerlTokenType.SCALAR_NAME)('fh_tee')
-      PsiPerlScalarArrayElementImpl(PerlElementType.SCALAR_ARRAY_ELEMENT)
+      PsiPerlArrayElementImpl(PerlElementType.ARRAY_ELEMENT)
         PsiPerlScalarVariableImpl(PerlElementType.SCALAR_VARIABLE)
           PsiElement(PerlTokenType.$$)('$')
           PsiElement(PerlTokenType.SCALAR_NAME)('_')

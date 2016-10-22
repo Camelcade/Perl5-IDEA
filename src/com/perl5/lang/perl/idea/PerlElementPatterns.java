@@ -231,8 +231,8 @@ public interface PerlElementPatterns extends PerlElementTypes
 			);
 
 	PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN = psiElement(PsiPerlArrayVariable.class).withText("@_");
-	PsiElementPattern.Capture<PsiPerlScalarArrayElement> ALL_ARGUMENTS_ELEMENT_PATTERN =
-			psiElement(PsiPerlScalarArrayElement.class)
+	PsiElementPattern.Capture<PsiPerlArrayElement> ALL_ARGUMENTS_ELEMENT_PATTERN =
+			psiElement(PsiPerlArrayElement.class)
 					.withFirstChild(psiElement(PsiPerlScalarVariable.class).withText("$_"));
 
 	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> TAILING_SHIFT_PATTERN =

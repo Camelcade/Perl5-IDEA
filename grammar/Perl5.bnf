@@ -334,7 +334,7 @@ limitations under the License.
 
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
-    extends("anon_array_element|heredoc_opener|tag_scalar")=expr
+    extends("heredoc_opener|tag_scalar")=expr
 
     extends("string_sq|string_dq|string_xq|string_bare")=expr
     implements("string_sq|string_dq|string_xq|string_bare")="com.perl5.lang.perl.psi.PerlString"
@@ -392,7 +392,7 @@ limitations under the License.
 
     extends("code_variable")=expr
 
-    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element|glob_slot")=expr
+    extends("array_slice|hash_slice|array_element|hash_element|glob_slot")=expr
 
     stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
     mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin"
@@ -790,7 +790,7 @@ private sort_arguments_ ::=
     | callable grep_map_sort_tail
     | grep_map_sort_tail
 
-private list_or_list_element ::= parenthesised_expr [anon_array_element]
+private list_or_list_element ::= parenthesised_expr [array_element]
 parenthesised_expr ::= '(' parenthesised_expr_content ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )
@@ -933,9 +933,9 @@ private array_primitive ::=
     | string_list
 
 
-private array_or_slice ::= array_primitive [array_array_slice|array_hash_slice]
-left array_array_slice ::= array_index
-left array_hash_slice ::= hash_index
+private array_or_slice ::= array_primitive [array_slice|hash_slice]
+left array_slice ::= array_index
+left hash_slice ::= hash_index
 
 array_cast_expr ::= '$@' cast_target
 
@@ -953,12 +953,10 @@ scalar_index_cast_expr ::= '$#' cast_target
 // fixme need optimization
 private cast_target ::= scalar_primitive | parse_block
 
-private scalar_or_element ::= scalar_primitive [scalar_array_element|scalar_hash_element]
+private scalar_or_element ::= scalar_primitive [array_element|hash_element]
 
-left scalar_array_element ::= array_index
-left scalar_hash_element ::= hash_index
-left anon_array_element ::= array_index
-
+left array_element ::= array_index
+left hash_element ::= hash_index
 
 private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::=

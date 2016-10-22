@@ -750,7 +750,7 @@ public class PerlPsiUtil implements PerlElementTypes
 
 		if (element == null ||
 				!(element instanceof PsiPerlNamedUnaryExprImpl && StringUtil.equals(element.getText(), "shift") ||
-						element instanceof PsiPerlScalarArrayElementImpl && StringUtil.equals(element.getText(), "$_[0]")
+						element instanceof PsiPerlArrayElementImpl && StringUtil.equals(element.getText(), "$_[0]")
 				))
 		{
 			return false;

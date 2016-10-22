@@ -283,7 +283,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
 		if (o instanceof PsiPerlScalarCastExpr)
 		{
-			boolean isInsideHashOrArrayElement = parent instanceof PsiPerlScalarArrayElement || parent instanceof PsiPerlScalarHashElement;
+			boolean isInsideHashOrArrayElement = parent instanceof PsiPerlArrayElement || parent instanceof PsiPerlHashElement;
 
 			if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS && isInsideHashOrArrayElement && isSimpleScalarCast) // convert $$var{key} to $var->{key}
 			{
@@ -386,7 +386,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 		PsiElement parent = o.getParent();
 		PsiElement anchor = o;
 		if (parent instanceof PsiPerlDerefExpr ||
-				(((anchor = parent) instanceof PsiPerlScalarHashElement || anchor instanceof PsiPerlScalarArrayElement) &&
+				(((anchor = parent) instanceof PsiPerlHashElement || anchor instanceof PsiPerlArrayElement) &&
 						anchor.getParent() instanceof PsiPerlDerefExpr
 				))
 		{
