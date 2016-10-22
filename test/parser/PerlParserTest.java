@@ -31,6 +31,11 @@ public class PerlParserTest extends PerlParserTestBase
 		return "testData/parser/perl";
 	}
 
+	public void testKeywordAsLabel()
+	{
+		doTest();
+	}
+
 	public void testKeywordsWithCore()
 	{
 		doTest();

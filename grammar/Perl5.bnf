@@ -1005,7 +1005,7 @@ code_cast_expr ::= '$&' cast_target
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
 label_declaration ::= IDENTIFIER &':'
-label_expr ::= IDENTIFIER
+label_expr ::= IDENTIFIER 
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE

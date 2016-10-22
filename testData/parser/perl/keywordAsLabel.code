@@ -1,0 +1,53 @@
+next unless ref($op) eq 'ARRAY';
+next if ref($op) eq 'ARRAY';
+next for ref($op) eq 'ARRAY';
+next foreach ref($op) eq 'ARRAY';
+next while ref($op) eq 'ARRAY';
+next until ref($op) eq 'ARRAY';
+next when ref($op) eq 'ARRAY';
+
+switch: {
+    say 'something';
+    next switch;
+}
+
+last unless ref($op) eq 'ARRAY';
+last if ref($op) eq 'ARRAY';
+last for ref($op) eq 'ARRAY';
+last foreach ref($op) eq 'ARRAY';
+last while ref($op) eq 'ARRAY';
+last until ref($op) eq 'ARRAY';
+last when ref($op) eq 'ARRAY';
+
+switch: {
+    say 'something';
+    last switch;
+}
+
+
+goto unless ref($op) eq 'ARRAY';
+goto if ref($op) eq 'ARRAY';
+goto for ref($op) eq 'ARRAY';
+goto foreach ref($op) eq 'ARRAY';
+goto while ref($op) eq 'ARRAY';
+goto until ref($op) eq 'ARRAY';
+goto when ref($op) eq 'ARRAY';
+
+switch: {
+    say 'something';
+    goto switch;
+}
+
+redo unless ref($op) eq 'ARRAY';
+redo if ref($op) eq 'ARRAY';
+redo for ref($op) eq 'ARRAY';
+redo foreach ref($op) eq 'ARRAY';
+redo while ref($op) eq 'ARRAY';
+redo until ref($op) eq 'ARRAY';
+redo when ref($op) eq 'ARRAY';
+
+switch: {
+    say 'something';
+    redo switch;
+}
+
