@@ -1,9 +1,9 @@
-
-keys %val;
-values %s;
-each %s;
-
-# these are non-acceptors
-constant %hash;
-constant *glob;
-constant &hash;
+keys % hash;
+values % hash;
+each % hash;
+constant % hash;
+constant * glob;
+constant & hash;
+constant( % hash);
+constant( * glob);
+constant(& hash);
