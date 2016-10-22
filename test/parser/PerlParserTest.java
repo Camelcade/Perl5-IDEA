@@ -36,6 +36,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testPostDeref()
+	{
+		doTest();
+	}
+
 	public void testInterpolation()
 	{
 		doTest();

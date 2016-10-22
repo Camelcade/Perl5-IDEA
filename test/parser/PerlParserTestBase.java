@@ -49,13 +49,18 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		super(dataPath, fileExt, true, definitions);
 	}
 
-	/*
-			if (checkErrors)
-				assertFalse(
-						"PsiFile contains error elements",
-						toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-				);
-	*/
+	@Override
+	protected void doTest(boolean checkErrors)
+	{
+		super.doTest(true);
+		if (checkErrors)
+		{
+			assertFalse(
+					"PsiFile contains error elements",
+					toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+			);
+		}
+	}
 
 	@Deprecated // this is legacy for heavy tests
 	public void doTest(String name)
