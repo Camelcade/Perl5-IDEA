@@ -95,18 +95,6 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("LABEL"))
-		{
-			return new PerlTokenTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public ASTNode createLeafNode(CharSequence leafText)
-				{
-					return new PerlLabelImpl(this, leafText);
-				}
-			};
-		}
 		if (name.equals("PACKAGE"))
 		{
 			return new PerlTokenTypeEx(name)
@@ -970,19 +958,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlIfStatementModifierImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("LABEL_DECLARATION"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlLabelDeclarationImpl(node);
 				}
 			};
 		}
@@ -2157,7 +2132,80 @@ public class PerlElementTypeFactory
 			};
 		}
 
+		if (name.equals("POST_DEREF_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPostDerefExprImpl(node);
+				}
+			};
+		}
 
-		return new PerlElementType(name);
+		if (name.equals("POST_DEREF_GLOB_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPostDerefGlobExprImpl(node);
+				}
+			};
+		}
+		if (name.equals("POST_DEREF_ARRAY_SLICE_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPostDerefArraySliceExprImpl(node);
+				}
+			};
+		}
+		if (name.equals("POST_DEREF_HASH_SLICE_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPostDerefHashSliceExprImpl(node);
+				}
+			};
+		}
+		if (name.equals("LABEL_DECLARATION"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlLabelDeclarationImpl(node);
+				}
+			};
+		}
+		if (name.equals("LABEL_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlLabelExprImpl(node);
+				}
+			};
+		}
+
+		throw new RuntimeException("Unknown token:" + name);
 	}
 }
