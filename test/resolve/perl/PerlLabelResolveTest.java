@@ -16,7 +16,7 @@
 
 package resolve.perl;
 
-import com.perl5.lang.perl.psi.PerlLabel;
+import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -191,6 +191,6 @@ public class PerlLabelResolveTest extends PerlResolveTestCase
 
 	public void doTest(String filename, boolean success)
 	{
-		doTest(filename, success, PerlLabel.class);
+		doTest(filename, success, PsiPerlLabelExpr.class);
 	}
 }

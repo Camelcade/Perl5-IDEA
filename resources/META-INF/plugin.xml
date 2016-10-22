@@ -40,9 +40,17 @@
       <li>IDEA 2016.3 compatibility</li>
       <li>Multiple internal tools upgrades</li>
       <li>Moved to Java 8</li>
-      <li>Lexer and parser deeply reworked and should be faster:</li><ul>
-      <li>Spaces between sigils and variable names not supported for the sake of performance</li>
+      <li>Lexer and parser deeply reworked and should be much faster:</li>
+      <ul>
+          <li>Initial parsing and reparsing on typing should be much faster</li>
+          <li>Highlighting is now instant for unambiguous entities</li>
+          <li>Ambiguous things, like regexps without explicit m, hashes, globs and code-refs works in the boundaries of common sense.
+                If plugin parses it wrong - adjust your code to be less ambiguous. Feel free to post a bug-report if something is
+                going wrong, but keep in mind that plugin's lexer and parser (unlike perl itself) processes source without knowing anything
+                about included files or defined subs. So it doesn't know if you've declared sub with empty prototype for example</li>
+          <li>Implemented support for post-deref syntax according to the perldoc</li>
       </ul>
+
      </ul>
      </p>
 
@@ -287,9 +295,6 @@
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlLabel" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLabelManipulator"/>
 
         <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
                                  implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
