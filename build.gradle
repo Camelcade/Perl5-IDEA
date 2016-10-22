@@ -65,6 +65,7 @@ test {
         if (project.hasProperty("perf")) {
             includeCategories 'categories.Performance'
         } else {
+            excludeCategories 'categories.Performance'
         }
         if (project.hasProperty("heavy")) {
             includeCategories 'categories.Heavy'
