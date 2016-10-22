@@ -332,8 +332,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 // exclusive
 <LEX_LABEL>{
-	{SPACES_OR_COMMENTS}":"	{return getLabelToken();}
-	[^]						{return getNonLabelToken();}
+	{SPACES_OR_COMMENTS}":"[^\:]	{return getLabelToken();}
+	[^]								{return getNonLabelToken();}
 }
 
 ////////////////////////// COMMON PART /////////////////////////////////////////////////////////////////////////////////
