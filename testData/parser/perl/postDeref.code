@@ -1,0 +1,16 @@
+$r = \@a;
+@b = $r->@*; # equivalent to @$r or @{ $r }
+$r = [ 1, [ 2, 3 ], 4 ];
+$r->[1]->@*;  # equivalent to @{ $r->[1] }
+
+$sref->$*;  # same as  ${ $sref }
+$aref->@*;  # same as  @{ $aref }
+$aref->$#*; # same as $#{ $aref }
+$href->%*;  # same as  %{ $href }
+$cref->&*;  # same as  &{ $cref }
+$gref->**;  # same as  *{ $gref }
+$gref->*{SCALAR}; # same as *{ $gref }{SCALAR}
+$aref->@[1,2,3];  # same as @$aref[ ... ]
+$href->@{qw/one two three/};  # same as @$href{ ... }
+$aref->%[1,2,3];  # same as %$aref[ ... ]
+$href->%{qw/one two three/};  # same as %$href{ ... }

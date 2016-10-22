@@ -23,6 +23,10 @@ lt: { say 'test';}
 ge: { say 'test';}
 mcp: { say 'test';}
 le: { say 'test';}
+next LOOP;
+last LOOP;
+redo LOOP;
+goto LOOP;
 {
     say 'test';
     last:
