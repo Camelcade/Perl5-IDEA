@@ -392,7 +392,7 @@ limitations under the License.
 
     extends("code_variable")=expr
 
-    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element")=expr
+    extends("array_array_slice|array_hash_slice|scalar_array_element|scalar_hash_element|glob_slot")=expr
 
     stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub"
     mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin"
@@ -723,12 +723,12 @@ named_list_expr ::= 'argumentless' // fixme implement
 
 // ordered for best performance of perltidy
 term_expr ::=
-    <<parseScalarOrElement>>	// scalar, cast or elements
+    scalar_or_element
     | string
     | number_constant
     | variable_declaration_lexical
-    | <<parseListOrListElement>> // fixme this must be in array with qw
-    | <<parseArrayOrSlice>>		// array, cast or slice
+    | list_or_list_element
+    | array_or_slice
     | match_regex
     | return_expr
     | hash_variable
@@ -748,7 +748,7 @@ term_expr ::=
     | grep_expr
     | map_expr
 
-    | <<parseGlobOrElement>>	// glob
+    | glob_or_element
     | tag_scalar
     | variable_declaration_global
     | compile_regex
@@ -790,6 +790,7 @@ private sort_arguments_ ::=
     | callable grep_map_sort_tail
     | grep_map_sort_tail
 
+private list_or_list_element ::= parenthesised_expr [anon_array_element]
 parenthesised_expr ::= '(' parenthesised_expr_content ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )
@@ -924,15 +925,17 @@ anon_hash ::= '{' [expr] '}' <<validateAnonHashSuffix>>  // fixme pin here after
 //////////////////////////// END OF REFERENCES /////////////////////////////////////////////////////////////////////////
 
 // fixme it's not a variable, its variable expression
-private variable ::= <<parseScalarOrElement>> | <<parseArrayOrSlice>> | hash_variable | hash_cast_expr | <<parseGlobOrElement>>
+private variable ::= scalar_or_element | array_or_slice | hash_variable | hash_cast_expr | glob_or_element
 
 private array_primitive ::=
     array_variable
     | array_cast_expr
     | string_list
 
-array_array_slice ::= array_primitive array_index
-array_hash_slice ::= array_primitive hash_index
+
+private array_or_slice ::= array_primitive [array_array_slice|array_hash_slice]
+left array_array_slice ::= array_index
+left array_hash_slice ::= hash_index
 
 array_cast_expr ::= '$@' cast_target
 
@@ -950,17 +953,21 @@ scalar_index_cast_expr ::= '$#' cast_target
 // fixme need optimization
 private cast_target ::= scalar_primitive | parse_block
 
-scalar_array_element ::= scalar_primitive array_index
-scalar_hash_element ::= scalar_primitive hash_index
-anon_array_element ::= parenthesised_expr array_index
+private scalar_or_element ::= scalar_primitive [scalar_array_element|scalar_hash_element]
 
+left scalar_array_element ::= array_index
+left scalar_hash_element ::= hash_index
+left anon_array_element ::= array_index
+
+
+private glob_or_element ::= glob_primitive [glob_slot]
 private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
 glob_cast_expr ::= '$*' cast_target
 
-glob_slot ::= glob_primitive hash_index
+left glob_slot ::= hash_index
 
 // extended nested element for using in ()
 private nested_element_variation ::=
@@ -982,7 +989,7 @@ post_deref_hash_slice_expr ::= '$%' {hash_index|array_index}	{name="Hash slice"}
 
 meta nested_call ::= <<parse_nested_call <<x1>>>>
 private meta parse_nested_call ::= <<method <<x1>>>> [method_call_arguments]
-scalar_call ::= <<parseScalarOrElement>> [method_call_arguments]
+scalar_call ::= scalar_or_element [method_call_arguments]
 private method_call_arguments ::= '(' [<<parseSimpleCallArguments>>] ')'
 nested_call_arguments ::= method_call_arguments
 
@@ -1031,8 +1038,8 @@ private quoted_xq_string ::= QUOTE_TICK_OPEN [LP_STRING_XQ | xq_string_content] 
 private xq_string_content ::= (STRING_CONTENT_XQ | interpolated_constructs)+
 
 private interpolated_constructs ::=
-  <<parseScalarOrElement>>
-  | <<parseArrayOrSlice>>
+  scalar_or_element
+  | array_or_slice
   | array_index_variable
   | scalar_index_cast_expr
 
@@ -1044,14 +1051,6 @@ private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_S
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
 private sq_string_content_element ::= LP_STRING_Q |LP_STRING_QW|STRING_CONTENT
-
-
-private use_vars_interpolated_constructs ::=
-    scalar_variable
-    | array_variable
-    | hash_variable
-    | glob_variable
-    | code_variable
 
 heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 

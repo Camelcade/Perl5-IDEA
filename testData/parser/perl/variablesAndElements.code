@@ -1,0 +1,13 @@
+
+$scalar;
+@array;
+*glob;
+%hash;
+
+$array[1];
+$hash{key};
+
+@array[1,2,3];
+@hash{qw/key two/};
+
+*glob{SCALAR};
