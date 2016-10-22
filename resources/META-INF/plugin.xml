@@ -44,12 +44,13 @@
       <ul>
           <li>Initial parsing and reparsing on typing should be much faster</li>
           <li>Highlighting is now instant for unambiguous entities</li>
-          <li>%hash, &code and *glob can't be passed as first argument to the rightward call anymore, except some perl functions.
-          Please, use leftward calls instead (the one with parens). Plugin will treat <code>identifier % identifier</code> as mod operator.
+          <li>%hash, &code and *glob can't be passed as first argument to the rightward call anymore without braces, except some perl functions.
+          Please, use leftward calls instead (the one with parens) or disambiguate with <code>%{varname}</code> form.
+          Plugin will treat <code>identifier % identifier</code> as mod operator.
 
-          <p>Ambiguous things: regexps without explicit m, hashes, globs and code-refs works in boundaries of common sense.
+          <p>Ambiguous things like regexps without explicit m, hashes, globs and code-refs works in boundaries of common sense.
                 If plugin parses it wrong - adjust your code to be less ambiguous. Feel free to post a bug-report if something is
-                going wrong, but keep in mind that plugin's lexer and parser (unlike perl itself) processes source without knowing anything
+                going wrong, but keep in mind that plugin's lexer and parser (unlike perl itself) processes sources without knowing anything
                 about included files or defined subs. So it doesn't know if you've declared sub with list prototype for example.</p>
           </li>
           <li>Implemented support for post-deref syntax according to the perldoc</li>
