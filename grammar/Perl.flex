@@ -610,7 +610,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	";"     	{yybegin(YYINITIAL);return SEMICOLON;}
 	"=" 		{yybegin(BLOCK_AS_VALUE);return OPERATOR_ASSIGN;}
 	"->" 		{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
-	"["     	{yybegin(YYINITIAL);return getLeftBracket();}
+	"["     	{return getLeftBracket(YYINITIAL);}
 	"("     	{return getLeftParen(YYINITIAL);}
 	"{"     	{yybegin(YYINITIAL);return getLeftBrace();}
 	"}"     	{return getRightBrace(YYINITIAL);}

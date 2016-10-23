@@ -160,16 +160,17 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	{
 		myBracketsStack.push(0);
 		yybegin(afterState);
-		pushStateAndBegin(PerlLexer.YYINITIAL);
-		return getLeftBracket();
+		pushState();
+		return getLeftBracket(PerlLexer.YYINITIAL);
 	}
 
-	protected IElementType getLeftBracket()
+	protected IElementType getLeftBracket(int newState)
 	{
 		if (!myBracketsStack.isEmpty())
 		{
 			myBracketsStack.incLast();
 		}
+		yybegin(newState);
 		return LEFT_BRACKET;
 	}
 
