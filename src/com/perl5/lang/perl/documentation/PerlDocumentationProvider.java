@@ -26,7 +26,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -72,7 +72,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 		IElementType elementType = element.getNode().getElementType();
 		return myForceAsFunc.contains(elementType) ||
 				!myForceAsOp.contains(elementType) && (
-						PerlLexer.RESERVED_TOKENSET.contains(elementType) ||
+						PerlTokenSets.DEFAULT_KEYWORDS_TOKENSET.contains(elementType) ||
 								element instanceof PerlSubNameElement && ((PerlSubNameElement) element).isBuiltIn()
 				);
 	}
@@ -82,7 +82,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 		IElementType elementType = element.getNode().getElementType();
 		return myForceAsOp.contains(elementType) ||
 				!myForceAsFunc.contains(elementType) && (
-						PerlLexer.OPERATORS_TOKENSET.contains(elementType)
+						PerlTokenSets.OPERATORS_TOKENSET.contains(elementType)
 				);
 	}
 

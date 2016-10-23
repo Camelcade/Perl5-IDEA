@@ -24,7 +24,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
@@ -209,7 +209,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 	protected static boolean isOperatorToken(PsiBuilder b, int l)
 	{
-		return PerlLexer.OPERATORS_TOKENSET.contains(b.getTokenType());
+		return PerlTokenSets.OPERATORS_TOKENSET.contains(b.getTokenType());
 	}
 
 

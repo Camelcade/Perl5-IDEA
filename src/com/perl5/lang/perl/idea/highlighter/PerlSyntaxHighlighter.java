@@ -27,9 +27,8 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.pod.PodLanguage;
@@ -39,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.KEYWORDS_TOKENSET;
 
 public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements PerlElementTypes, MooseElementTypes
 {
@@ -106,74 +106,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
 
 	public static final HashMap<IElementType, TextAttributesKey[]> ATTRIBUTES_MAP = new HashMap<IElementType, TextAttributesKey[]>();
-	private static final TokenSet KEYWORDS = TokenSet.create(
-			RESERVED_MY,
-			RESERVED_OUR,
-			RESERVED_STATE,
-			RESERVED_LOCAL,
-			RESERVED_ELSIF,
-			RESERVED_ELSE,
-			RESERVED_GIVEN,
-			RESERVED_DEFAULT,
-			RESERVED_CONTINUE,
-			RESERVED_FORMAT,
-			RESERVED_SUB,
-			RESERVED_PACKAGE,
-			RESERVED_USE,
-			RESERVED_NO,
-			RESERVED_REQUIRE,
-			RESERVED_UNDEF,
-			RESERVED_PRINT,
-			RESERVED_PRINTF,
-			RESERVED_SAY,
-			RESERVED_GREP,
-			RESERVED_MAP,
-			RESERVED_SORT,
-			RESERVED_DO,
-			RESERVED_EVAL,
-			RESERVED_GOTO,
-			RESERVED_REDO,
-			RESERVED_NEXT,
-			RESERVED_LAST,
-			RESERVED_RETURN,
-
-			RESERVED_Y,
-			RESERVED_TR,
-			RESERVED_Q,
-			RESERVED_S,
-			RESERVED_M,
-			RESERVED_QW,
-			RESERVED_QQ,
-			RESERVED_QR,
-			RESERVED_QX,
-
-			RESERVED_TRY,
-			RESERVED_CATCH,
-			RESERVED_FINALLY,
-
-			RESERVED_METHOD,
-			RESERVED_FUNC,
-
-			RESERVED_INNER,
-			RESERVED_WITH,
-			RESERVED_EXTENDS,
-			RESERVED_META,
-			RESERVED_OVERRIDE,
-			RESERVED_AROUND,
-			RESERVED_SUPER,
-			RESERVED_AUGMENT,
-			RESERVED_AFTER,
-			RESERVED_BEFORE,
-			RESERVED_HAS,
-
-			RESERVED_IF,
-			RESERVED_UNTIL,
-			RESERVED_UNLESS,
-			RESERVED_FOR,
-			RESERVED_FOREACH,
-			RESERVED_WHEN,
-			RESERVED_WHILE
-	);
 	public static TextAttributesKey UNUSED_DEPRECATED;
 
 	static
@@ -296,7 +228,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		{
 			return PodSyntaxHighlighter.getTokenAttributes(tokenType);
 		}
-		else if (KEYWORDS.contains(tokenType))
+		else if (KEYWORDS_TOKENSET.contains(tokenType))
 		{
 			return PERL_KEYWORD_KEYS;
 		}
@@ -304,7 +236,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		{
 			return ATTRIBUTES_MAP.get(tokenType);
 		}
-		else if (PerlLexer.OPERATORS_TOKENSET.contains(tokenType))
+		else if (PerlTokenSets.OPERATORS_TOKENSET.contains(tokenType))
 		{
 			return ATTRIBUTES_MAP.get(OPERATOR_MUL);
 		}
