@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.lexer.adapters;
 
+import com.intellij.lexer.Lexer;
 import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -29,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes
 {
 	private final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
-			POD, STRING_CONTENT, REGEX_TOKEN
+			POD, STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ
 	);
 
 	public PerlMergingLexerAdapter(@Nullable Project project)
@@ -39,6 +41,11 @@ public class PerlMergingLexerAdapter extends MergingLexerAdapter implements Perl
 
 	public PerlMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing)
 	{
-		super(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing), TOKENS_TO_MERGE);
+		this(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing));
+	}
+
+	public PerlMergingLexerAdapter(@NotNull Lexer original)
+	{
+		super(original, TOKENS_TO_MERGE);
 	}
 }

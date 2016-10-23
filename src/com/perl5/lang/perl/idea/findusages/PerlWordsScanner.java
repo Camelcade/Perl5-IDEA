@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -29,7 +30,7 @@ public class PerlWordsScanner extends DefaultWordsScanner implements PerlElement
 {
 	public PerlWordsScanner()
 	{
-		super(new PerlMergingLexerAdapter(null),
+		super(new PerlMergingLexerAdapter((Project) null),
 				PerlParserDefinition.IDENTIFIERS,
 				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
 				PerlParserDefinition.LITERALS
