@@ -35,11 +35,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes
 {
-	// tokens that can be converted to a PACKAGE
-	public static final TokenSet PACKAGE_TOKENS = TokenSet.create(
-			PACKAGE_PRAGMA_CONSTANT,
-			PACKAGE_PRAGMA_VARS
-	);
 	public static final TokenSet VERSION_TOKENS = TokenSet.create(
 			NUMBER,
 			NUMBER_SIMPLE,
@@ -56,16 +51,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			QUOTE_SINGLE_CLOSE
 	);
 
-	protected static final TokenSet REGEX_BLOCK_CLOSER = TokenSet.create(
-			REGEX_QUOTE,
-			REGEX_QUOTE_CLOSE,
-			REGEX_QUOTE_E
-	);
-	protected static final TokenSet REGEX_MERGE_STOP_TOKENS = TokenSet.orSet(
-			REGEX_BLOCK_CLOSER,
-			TokenSet.create(
-					SIGIL_SCALAR, SIGIL_ARRAY
-			));
 	// tokens that can be converted between each other depending on context
 	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
 			IDENTIFIER,
@@ -73,19 +58,10 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			RESERVED_METHOD,
 			RESERVED_FUNC
 	);
-	public static TokenSet POST_SIGILS_SUFFIXES = TokenSet.orSet(
-			PACKAGE_TOKENS,
-			CONVERTABLE_TOKENS,
-			TokenSet.create(
-					LEFT_BRACE,
-					SIGIL_SCALAR,
-					NUMBER_SIMPLE
-			));
 
 	public static void addConvertableTokens(IElementType... convertableTokens)
 	{
 		CONVERTABLE_TOKENS = TokenSet.orSet(CONVERTABLE_TOKENS, TokenSet.create(convertableTokens));
-		POST_SIGILS_SUFFIXES = TokenSet.orSet(POST_SIGILS_SUFFIXES, CONVERTABLE_TOKENS);
 	}
 
 	/**
