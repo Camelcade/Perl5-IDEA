@@ -135,7 +135,8 @@ public class PerlLexer extends PerlLexerGenerated
 				!myFormatWaiting &&
 				heredocQueue.isEmpty() &&
 				myBracesStack.isEmpty() &&
-				myBracketsStack.isEmpty()
+				myBracketsStack.isEmpty() &&
+				myParensStack.isEmpty()
 				? super.yystate() : PREPARSED_ITEMS;
 	}
 

@@ -73,6 +73,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
 	protected final PerlBracesStack myBracesStack = new PerlBracesStack();
 	protected final PerlBracesStack myBracketsStack = new PerlBracesStack();
+	protected final PerlBracesStack myParensStack = new PerlBracesStack();
 	private IElementType myCurrentSigilToken;
 	private IElementType myNonLabelTokenType;
 	private int myNonLabelState;
@@ -188,6 +189,44 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return RIGHT_BRACKET;
 	}
 
+	protected IElementType startParethesizedBlock(int afterState)
+	{
+		return startParethesizedBlock(afterState, PerlLexer.YYINITIAL);
+	}
+
+	protected IElementType startParethesizedBlock(int afterState, int afterParenState)
+	{
+		myParensStack.push(0);
+		yybegin(afterState);
+		pushStateAndBegin(afterParenState);
+		return getLeftParen();
+	}
+
+	protected IElementType getLeftParen()
+	{
+		if (!myParensStack.isEmpty())
+		{
+			myParensStack.incLast();
+		}
+		return LEFT_PAREN;
+	}
+
+	@SuppressWarnings("Duplicates")
+	protected IElementType getRightParen(int afterState)
+	{
+		if (!myParensStack.isEmpty())
+		{
+			if (myParensStack.decLast() == 0)
+			{
+				myParensStack.pop();
+				popState();
+				return RIGHT_PAREN;
+			}
+		}
+		yybegin(afterState);
+		return RIGHT_PAREN;
+	}
+
 	/**
 	 * We've met identifier (variable name)
 	 */
@@ -211,6 +250,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		super.resetInternals();
 		myBracesStack.clear();
 		myBracketsStack.clear();
+		myParensStack.clear();
 	}
 
 	protected void checkIfLabel(int newState, IElementType tokenType)

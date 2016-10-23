@@ -275,8 +275,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <SUB_DECLARATION>{
 	{QUALIFIED_IDENTIFIER} 		{return IDENTIFIER;}
-	"(" / {SUB_PROTOTYPE}? ")"	{yybegin(SUB_PROTOTYPE);return LEFT_PAREN;}
-	"(" 						{yybegin(YYINITIAL);return LEFT_PAREN;}
+	"(" / {SUB_PROTOTYPE}? ")"	{return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);}
+	"(" 						{return startParethesizedBlock(SUB_ATTRIBUTES);}
 }
 
 <SUB_DECLARATION,SUB_ATTRIBUTES,ATTRIBUTES>{
@@ -290,7 +290,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <SUB_PROTOTYPE>{
 	{SUB_PROTOTYPE}			{return SUB_PROTOTYPE_TOKEN;}
-	")"						{yybegin(SUB_ATTRIBUTES);return RIGHT_PAREN;}
+	")"						{return getRightParen(SUB_ATTRIBUTES);}
 }
 
 <ATTRIBUTES>
@@ -599,7 +599,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(BRACED_STRING);return getLeftBrace();}
 }
 
-<AFTER_DEREFERENCE> "("     	{yybegin(YYINITIAL);return LEFT_PAREN;}
+<AFTER_DEREFERENCE> "("     	{yybegin(YYINITIAL);return getLeftParen();}
 
 <AFTER_VALUE,AFTER_VARIABLE> "." / {NUMBER_INT} {return OPERATOR_CONCAT;}
 
@@ -611,11 +611,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"=" 		{yybegin(BLOCK_AS_VALUE);return OPERATOR_ASSIGN;}
 	"->" 		{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
 	"["     	{yybegin(YYINITIAL);return getLeftBracket();}
-	"("     	{yybegin(YYINITIAL);return LEFT_PAREN;}
+	"("     	{yybegin(YYINITIAL);return getLeftParen();}
 	"{"     	{yybegin(YYINITIAL);return getLeftBrace();}
 	"}"     	{return getRightBrace(YYINITIAL);}
 	"]"     	{return getRightBracket(AFTER_VALUE);}
-	")"     	{yybegin(AFTER_VALUE);return RIGHT_PAREN;}
+	")"     	{return getRightParen(AFTER_VALUE);}
 	":"			{yybegin(YYINITIAL);return COLON;}
 
 	"||" 	{yybegin(YYINITIAL);return OPERATOR_OR;}
@@ -663,6 +663,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
 	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
 
+	// fixme optimize via merging?
 	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
 
 	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER;}
