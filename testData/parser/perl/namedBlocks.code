@@ -1,0 +1,27 @@
+BEGIN {
+    print "something";
+}
+
+UNITCHECK {
+    print "something";
+}
+
+CHECK {
+    print "something";
+}
+
+INIT {
+    print "something";
+}
+
+END {
+    print "something";
+}
+
+AUTOLOAD {
+    print "something";
+}
+
+DESTROY {
+    print "something";
+}

@@ -99,7 +99,7 @@ Perl5
       PsiElement(PerlTokenType.sub)('sub')
       PsiElement(PerlTokenType.:)(':')
       PsiPerlAttributeImpl(PerlElementType.ATTRIBUTE)
-        PsiElement(PerlTokenType.IDENTIFIER)('lvalue')
+        PsiElement(PerlTokenType.ATTRIBUTE_IDENTIFIER)('lvalue')
       PsiPerlBlockImpl(PerlElementType.BLOCK)
         PsiElement(PerlTokenType.{)('{')
         PsiPerlStatementImpl(PerlElementType.STATEMENT)

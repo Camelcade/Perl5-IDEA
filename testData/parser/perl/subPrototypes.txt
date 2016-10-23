@@ -13,7 +13,7 @@ Perl5
       PsiElement(PerlTokenType.IDENTIFIER)('mypush')
       PsiElement(PerlTokenType.:)(':')
       PsiPerlAttributeImpl(PerlElementType.ATTRIBUTE)
-        PsiElement(PerlTokenType.IDENTIFIER)('prototype')
+        PsiElement(PerlTokenType.ATTRIBUTE_IDENTIFIER)('prototype')
         PsiElement(PerlTokenType.QUOTE_SINGLE_OPEN)('(')
         PsiElement(PerlTokenType.STRING_CONTENT)('\@@')
         PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(')')

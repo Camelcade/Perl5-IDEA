@@ -81,22 +81,6 @@ sub abc
 @_[1,2,3];      # array slice
 @-{'a','b','c'}; # hash slice
 
-my $query = <<'SQL';
-
-SQL
-
-$query = <<`SQL`;
-
-SQL
-
-$query = <<"SQL";
-
-SQL
-
-$query = <<SQL;
-
-SQL
-
 
 
 # tailing comma
@@ -145,23 +129,6 @@ set_in_declare(~~@{$temp_name||[]});
 ~~1;
 $a ~~ $b;
 $a ~~ ~$b;
-
-s/a
-    s
-    d[          # this is a test
-    f
-    a]
-    s
-    df/as
-    dfa{
-    sdf(
-    asdf[       # this is a test
-    {{{{
-    }}
-    [[[[
-    ]]
-
-    /x;
 
 !!!$a;
 
@@ -267,8 +234,6 @@ time * $_[123];;;;
 time & $_[123];;;;
 time % $_[123];;;;
 
-our Foo $var :shared unique;
-our Foo ($var1, $var2) :shared unique = 1;
 say $var1;
 
 my @array;
@@ -276,14 +241,6 @@ for our $var  (@array)
 {
 }
 
-sub abc: prototype($$$$){};
-sub abc: prototype($$$$);
-
-sub abc($$$@): method;
-sub abc($$$@): method {};
-
-sub abc: method;
-sub abc: method{};
 
 sub abc($$$@);
 sub abc($$$@){}
@@ -304,9 +261,6 @@ $v123."something";
 
 v5.10;
 
-our $AUTOLOADED_ROUTINES=<<'END_OF_AUTOLOAD';
-
-END_OF_AUTOLOAD
 
 package main;
 
@@ -321,320 +275,213 @@ $var => something;
 package => 123;
 
 $hash{-package} =4;
-    $a->{-package} = 5;
-
-        print $$ if 123;
-
-        sub import {
-            my $callpack = caller;
-            my $pack = shift;
-            my @imports = @_;
-            foreach my $sym (@imports) {
-                *{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
-            }
-        };
-
-
-
-
-        my $text = <<'=end';
-
-=pod
-
-some pod document
-
-=end
-
-
-
-
-
-
-
-
-        my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
-            map(($_,            60), qw(m minute minutes min mins)),
-            map(($_,         60*60), qw(h hr hour hours)),
-            map(($_,      60*60*24), qw(d day days)),
-            map(($_,    60*60*24*7), qw(w week weeks)),
-            map(($_,   60*60*24*30), qw(M month months)),
-            map(($_,  60*60*24*365), qw(y year years)) );
-
-        my %hash;
-
-        $hash{something};
-        $hash{something}->{something};
-        $hash{'something'};
-        $hash{'something'}->{'something'};
-        $hash{"something"};
-        $hash{"something"}->{"something"};
-
-        *{something};
-        *something{SCALAR};
-
-        my $full_path;
-
-        no warnings qw(once);
-        local *alias = *$full_path;
-        use warnings qw(once);
-
-        # Copy innocent bystanders back.  Note that we lose
-        # formats; it seems that Perl versions up to 5.10.0
-        # have a bug which causes copying formats to end up in
-        # the scalar slot.  Thanks to Ben Morrow for spotting this.
-
-        my %oldglob;
-
-        foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
-            next unless defined *$oldglob{$slot};
-            *alias = *$oldglob{$slot};
-        }
-        my $sub_ref;
-
-        if ($sub_ref) {
-            *$full_path = $sub_ref;
-        }
-
-
-
-
-
-        print <<'!END!';
-Test from perl lib
-!END!
-
-        print <<TEST;
-message
-TEST
-
-        print <<'TEST WITH SPACE !';
-message
-TEST WITH SPACE !
-
-        print <<`TEST WITH SPACE !`;
-message
-TEST WITH SPACE !
-
-        print <<"TEST WITH SPACE !";
-message
-TEST WITH SPACE !
-
-        for(;;){
-            print "Here";
-        }
-        while(){
-            print "Here";
-        }
-
-        sub eval{}
-        sub if{}
-        sub while{}
-
-        &eval;
-        &while;
-        &if;
-        *eval;
-
-        my $abcd = {
-            --test => &while
-        };
-
-        print sprintf "here we go";
-
-        print OF "something";
-        say OF "something";
-        printf OF "something";
-
-        print OF, "something";
-        say OF, "something";
-        printf OF, "something";
-
-
-        close STDERR;
-        close (STDERR);
-        syswrite(STDERR, 'Caught a SIG', 12);
-        syswrite STDERR, 'Caught a SIG', 12;
-
-        use Opcode 1.01, qw(..);
-
-        my $panic;
-
-        my $_wow;
-        my ${some};
-        my $^A;
-        $_;
-        $$_;
-        my $abc;
-        $ $$abc;
-
-
-        SOMELABEL: {
-            last SOMELABEL;
-        }
-
-        $abc ? $cde : blah();
-
-        split /2134/, @array;
-        m/2342342/x;
-        s/234234/$$/e;
-
-        Foo::Bar;
-
-        Foo::bar;
-
-        Foo::bar baz;
-
-        Foo::Bar->method();
-
-        bar Foo::baz;
-
-        bar Foo(123);
-
-        Foo->bar;
-        my $self;
-
-        my $abc = {
-            some => 1
-        };
-
-        my @array;
-
-        grep {defined} @array;
-
-        print if defined $abc;
-
-        $abc->{cde} = 2;
-
-        $self->SUPER::method();
-
-        Foo::Bar->something;
-
-        BEGIN {
-            print "something";
-        }
-
-        UNITCHECK {
-            print "something";
-        }
-
-        CHECK {
-            print "something";
-        }
-
-        INIT {
-            print "something";
-        }
-
-        END {
-            print "something";
-        }
-
-        AUTOLOAD {
-            print "something";
-        }
-
-        DESTROY {
-            print "something";
-        }
-
-        $abc = __PACKAGE__;
-        $abc = 1 and 2;
-
-
-        open (IF, 'something');
-        open IF, 'something';
-        open Foo::->method();
-        open Foo::method();
-
-        somesub IF, blah;
-
-        print OF(1,2,3);
-        print sprintf "here we go";
-        print Foo->method();
-        print Foo::method();
-        print Foo::->method();
-        print method, "text";
-
-        my @list = <IF>;
-        my @list = <Foo::method>;
-
-    use if (1 > 2);
-    use open;
-
-    package Foo;
-
-    sub bar{
+$a->{-package} = 5;
+
+print $$ if 123;
+
+sub import {
+    my $callpack = caller;
+    my $pack = shift;
+    my @imports = @_;
+    foreach my $sym (@imports) {
+        *{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
     }
+};
 
-    package main;
+my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
+    map(($_,            60), qw(m minute minutes min mins)),
+    map(($_,         60*60), qw(h hr hour hours)),
+    map(($_,      60*60*24), qw(d day days)),
+    map(($_,    60*60*24*7), qw(w week weeks)),
+    map(($_,   60*60*24*30), qw(M month months)),
+    map(($_,  60*60*24*365), qw(y year years)) );
 
-    sub somesub
-    {
-    }
+my %hash;
 
-    package Foo::Bar;
+$hash{something};
+$hash{something}->{something};
+$hash{'something'};
+$hash{'something'}->{'something'};
+$hash{"something"};
+$hash{"something"}->{"something"};
 
-    sub somesub
-    {
+*{something};
+*something{SCALAR};
 
-    }
+my $full_path;
+
+no warnings qw(once);
+local *alias = *$full_path;
+use warnings qw(once);
+
+# Copy innocent bystanders back.  Note that we lose
+# formats; it seems that Perl versions up to 5.10.0
+# have a bug which causes copying formats to end up in
+# the scalar slot.  Thanks to Ben Morrow for spotting this.
+
+my %oldglob;
+
+foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
+    next unless defined *$oldglob{$slot};
+    *alias = *$oldglob{$slot};
+}
+my $sub_ref;
+
+if ($sub_ref) {
+    *$full_path = $sub_ref;
+}
+
+for(;;){
+    print "Here";
+}
+while(){
+    print "Here";
+}
+
+sub eval{}
+sub if{}
+sub while{}
+
+&eval;
+&while;
+&if;
+*eval;
+
+my $abcd = {
+    --test => &while
+};
+
+print sprintf "here we go";
+
+print OF "something";
+say OF "something";
+printf OF "something";
+
+print OF, "something";
+say OF, "something";
+printf OF, "something";
 
 
-    format =
+close STDERR;
+close (STDERR);
+syswrite(STDERR, 'Caught a SIG', 12);
+syswrite STDERR, 'Caught a SIG', 12;
 
-^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
-~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
- ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	$list
-.
+use Opcode 1.01, qw(..);
 
-    # Pod/Functions.pm
-    format =
-.
+my $panic;
 
-    format SOMETHING =
+my $_wow;
+my ${some};
+my $^A;
+$_;
+$$_;
+my $abc;
+$ $$abc;
 
-^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
-~~ ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    $typedesc
- ~~  ^<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	$list
-.
 
-    # Pod/Functions.pm
-    format STDOUT =
-.
+SOMELABEL: {
+    last SOMELABEL;
+}
 
-    package Foo::Bar;
+$abc ? $cde : blah();
+
+split /2134/, @array;
+m/2342342/x;
+s/234234/$$/e;
+
+Foo::Bar;
+
+Foo::bar;
+
+Foo::bar baz;
+
+Foo::Bar->method();
+
+bar Foo::baz;
+
+bar Foo(123);
+
+Foo->bar;
+my $self;
+
+my $abc = {
+    some => 1
+};
+
+my @array;
+
+grep {defined} @array;
+
+print if defined $abc;
+
+$abc->{cde} = 2;
+
+$self->SUPER::method();
+
+Foo::Bar->something;
+
+$abc = __PACKAGE__;
+$abc = 1 and 2;
+
+
+open (IF, 'something');
+open IF, 'something';
+open Foo::->method();
+open Foo::method();
+
+somesub IF, blah;
+
+print OF(1,2,3);
+print sprintf "here we go";
+print Foo->method();
+print Foo::method();
+print Foo::->method();
+print method, "text";
+
+my @list = <IF>;
+my @list = <Foo::method>;
+
+use if (1 > 2);
+use open;
+
+package Foo;
+
+sub bar{
+}
 
 package main;
 
-    sub Foo::Bar::somesub{};
-
-    ${Foo::Bar::somesub()};
-    @{Foo::Bar::somesub()};
-    $#{Foo::Bar::somesub()};
-    %{Foo::Bar::somesub()};
-    *{Foo::Bar::somesub()};
-    &{Foo::Bar::somesub()};
-
-    Foo::Bar::somesub;
-    ::somesub;
-    Foo::Bar::somesub();
-    ::somesub();
-    somesub;
-    somesub();
-
-
-sub mysub
-	:attr1 	#some
-	attr2 	# other
-	: attr3	# blah
+sub somesub
 {
-	say 'hi';
 }
 
+package Foo::Bar;
+
+sub somesub
+{
+
+}
+
+
+
+package Foo::Bar;
+
+package main;
+
+sub Foo::Bar::somesub{};
+
+${Foo::Bar::somesub()};
+@{Foo::Bar::somesub()};
+$#{Foo::Bar::somesub()};
+%{Foo::Bar::somesub()};
+*{Foo::Bar::somesub()};
+&{Foo::Bar::somesub()};
+
+Foo::Bar::somesub;
+::somesub;
+Foo::Bar::somesub();
+::somesub();
+somesub;
+somesub();
 

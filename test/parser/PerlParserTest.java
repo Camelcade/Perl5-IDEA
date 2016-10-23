@@ -36,6 +36,32 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+
+	public void testExtendedRegexpReplacementComment()
+	{
+		doTest();
+	}
+
+	public void testHeredocs()
+	{
+		doTest();
+	}
+
+	public void testSubAttributes()
+	{
+		doTest();
+	}
+
+	public void testFormat()
+	{
+		doTest();
+	}
+
+	public void testNamedBlocks()
+	{
+		doTest();
+	}
+
 	public void testVariablesAndElements()
 	{
 		doTest();
