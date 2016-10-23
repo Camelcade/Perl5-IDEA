@@ -37,7 +37,12 @@ public class PerlParserTest extends PerlParserTestBase
 	}
 
 
-	public void testExtendedRegexpReplacementComment()
+	public void testCommentInRegexp()
+	{
+		doTest();
+	}
+
+	public void testCommentInString()
 	{
 		doTest();
 	}

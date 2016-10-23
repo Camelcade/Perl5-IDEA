@@ -1,0 +1,31 @@
+"somestring #comment";
+"somestring#comment";
+"somestring $var#comment";
+"somestring ${var}#comment";
+"somestring $   #comment
+{               #comment
+    var         #comment
+}#comment";
+"#comment";
+
+`somestring #comment`;
+`somestring#comment`;
+`somestring $var#comment`;
+`somestring ${var}#comment`;
+`somestring $   #comment
+{               #comment
+    var         #comment
+}#comment`;
+`#comment`;
+
+'somestring #comment';
+'somestring#comment';
+'somestring $var#comment';
+'somestring ${var}#comment';
+'somestring $   #comment
+{               #comment
+    var         #comment
+}#comment';
+'#comment';
+
+
