@@ -1,0 +1,48 @@
+sub mypush (\@@);
+sub mypush :prototype(\@@);
+sub mylink ($$); #	   mylink $old, $new
+sub myvec ($$$); #	   myvec $var, $offset, 1
+sub myindex ($$;$); #	   myindex &getstring, "substr"
+sub mysyswrite ($$$;$); #  mysyswrite $buf, 0, length($buf) - $off, $off
+sub myreverse (@); #	   myreverse $a, $b, $c
+sub myjoin ($@); #	   myjoin ":", $a, $b, $c
+sub mypop (\@); #	   mypop @array
+sub mysplice (\@$$@); #	   mysplice @array, 0, 2, @pushme
+sub mykeys (\[%@]); #	   mykeys %{$hashref}
+sub myopen (*;$); #	   myopen HANDLE, $name
+sub mypipe (**); #	   mypipe READHANDLE, WRITEHANDLE
+sub mygrep (&@); #	   mygrep { /foo/ } $a, $b, $c
+sub myrand (;$); #	   myrand 42
+sub mytime (); #	   mytime
+sub myref (\[$@%&*]);
+sub mypush (+@) {
+    my $aref = shift;
+    die "Not an array or arrayref" unless ref $aref eq 'ARRAY';
+    push @$aref, @_;
+}
+sub mygetprotobynumber($;);
+sub try (&@) {
+    my ($try, $catch) = @_;
+    eval { &$try };
+    if ($@) {
+        local $_ = $@;
+        &$catch;
+    }
+}
+sub catch (&) { $_[0] }
+sub mygrep (&@) {
+    my $code = shift;
+    my @result;
+    foreach $_ (@_) {
+        push(@result, $_) if &$code;
+    }
+    @result;
+}
+sub func ($) {
+    my $n = shift;
+    print "you gave me $n\n";
+}
+sub foo($$);
+sub foo($$) {
+    foo 1, 2;
+}
