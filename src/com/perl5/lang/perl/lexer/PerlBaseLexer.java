@@ -109,34 +109,34 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected IElementType startBracedVariable()
 	{
 		myBracesStack.push(0);
-		yybegin(PerlLexer.VARIABLE_BRACED);
-		return getLeftBrace();
+		return getLeftBrace(LEFT_BRACE, PerlLexer.VARIABLE_BRACED);
 	}
 
 	protected IElementType startBracedBlock(int afterState)
 	{
 		myBracesStack.push(0);
 		yybegin(afterState);
-		pushStateAndBegin(PerlLexer.YYINITIAL);
-		return getLeftBrace();
+		pushState();
+		return getLeftBrace(PerlLexer.YYINITIAL);
 	}
 
-	protected IElementType getLeftBraceCode()
+	protected IElementType getLeftBraceCode(int newState)
 	{
-		return getLeftBrace(LEFT_BRACE_CODE);
+		return getLeftBrace(LEFT_BRACE_CODE, newState);
 	}
 
-	protected IElementType getLeftBrace()
+	protected IElementType getLeftBrace(int newState)
 	{
-		return getLeftBrace(LEFT_BRACE);
+		return getLeftBrace(LEFT_BRACE, newState);
 	}
 
-	private IElementType getLeftBrace(IElementType braceType)
+	private IElementType getLeftBrace(IElementType braceType, int newState)
 	{
 		if (!myBracesStack.isEmpty())
 		{
 			myBracesStack.incLast();
 		}
+		yybegin(newState);
 		return braceType;
 	}
 

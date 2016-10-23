@@ -280,7 +280,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <SUB_DECLARATION,SUB_ATTRIBUTES,ATTRIBUTES>{
-	"{"     					{yybegin(YYINITIAL);return getLeftBraceCode();}
+	"{"     					{return getLeftBraceCode(YYINITIAL);}
 }
 
 <SUB_DECLARATION,SUB_ATTRIBUTES>{
@@ -596,7 +596,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <AFTER_DEREFERENCE,AFTER_VARIABLE>{
 	"["															{return startBracketedBlock(AFTER_VARIABLE);}
 	"{"															{return startBracedBlock(AFTER_VARIABLE);}
-	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(BRACED_STRING);return getLeftBrace();}
+	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{return getLeftBrace(BRACED_STRING);}
 }
 
 <AFTER_DEREFERENCE> "("     	{return getLeftParen(YYINITIAL);}
@@ -612,7 +612,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"->" 		{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
 	"["     	{return getLeftBracket(YYINITIAL);}
 	"("     	{return getLeftParen(YYINITIAL);}
-	"{"     	{yybegin(YYINITIAL);return getLeftBrace();}
+	"{"     	{return getLeftBrace(YYINITIAL);}
 	"}"     	{return getRightBrace(YYINITIAL);}
 	"]"     	{return getRightBracket(AFTER_VALUE);}
 	")"     	{return getRightParen(AFTER_VALUE);}
