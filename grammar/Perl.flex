@@ -506,9 +506,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"default"	 	{checkIfLabel(YYINITIAL, RESERVED_DEFAULT);}
 	{CORE_PREFIX}"continue"	 	{checkIfLabel(YYINITIAL, RESERVED_CONTINUE);}
 
-	{CORE_PREFIX}"format"	 							{checkIfLabel(AFTER_IDENTIFIER, RESERVED_FORMAT);}
-	// distinct from label pattern
-	{CORE_PREFIX}"sub" / ({SPACES_OR_COMMENTS}":")?		{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
+	{CORE_PREFIX}"format"	 	{checkIfLabel(AFTER_IDENTIFIER, RESERVED_FORMAT);}
+	{CORE_PREFIX}"sub" 			{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
 	{CORE_PREFIX}"package"	 	{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_PACKAGE);}
 	{CORE_PREFIX}"use"	 		{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_USE);}

@@ -572,16 +572,13 @@ private statement_body ::=
 private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
-// fixme we can't pin this because we need to distinct declaration and definition
+// fixme adjust parsing of this thing to avoid duplicates
 sub_definition ::=  'sub' IDENTIFIER sub_definition_parameters parse_block
+sub_declaration ::=  'sub' IDENTIFIER sub_definition_parameters
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
 private sub_prototype_or_signature_content ::= sub_signature |sub_prototype
-
-sub_declaration ::=  'sub' IDENTIFIER sub_declaration_parameters
-private sub_declaration_parameters ::= [sub_prototype_content] [sub_attributes]
-private sub_prototype_content ::= '(' sub_prototype ')' {pin=1}
 
 private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 
