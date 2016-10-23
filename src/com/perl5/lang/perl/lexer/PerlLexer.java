@@ -189,7 +189,7 @@ public class PerlLexer extends PerlLexerGenerated
 				return parseTr();
 			}
 			// capture line comment
-			else if (currentChar == '#' && currentState != REPLACEMENT_REGEX && currentState != MATCH_REGEX && currentState != STRING_QQ && currentState != STRING_QX)
+			else if (currentChar == '#' && currentState != REPLACEMENT_REGEX && currentState != MATCH_REGEX && currentState != STRING_QQ && currentState != STRING_QX && currentState != STRING_LIST)
 			{
 				// comment may end on newline or ?>
 				int currentPosition = tokenStart;
