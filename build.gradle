@@ -62,18 +62,19 @@ test {
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
     }
     useJUnit {
-        if (project.hasProperty("perf")) {
-            includeCategories 'categories.Performance'
-        } else {
-            excludeCategories 'categories.Performance'
-        }
-        if (project.hasProperty("heavy")) {
-            includeCategories 'categories.Heavy'
-        } else {
-            excludeCategories 'categories.Heavy'
-        }
         if (project.hasProperty("runtest")) {
             include '**/' + project.property('runtest') + '.class'
+        } else {
+            if (project.hasProperty("perf")) {
+                includeCategories 'categories.Performance'
+            } else {
+                excludeCategories 'categories.Performance'
+            }
+            if (project.hasProperty("heavy")) {
+                includeCategories 'categories.Heavy'
+            } else {
+                excludeCategories 'categories.Heavy'
+            }
         }
     }
     testLogging {
