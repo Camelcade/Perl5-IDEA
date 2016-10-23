@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.ANNOTATIONS_KEYS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.KEYWORDS_TOKENSET;
 
 public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements PerlElementTypes, MooseElementTypes
@@ -205,6 +206,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
 		ATTRIBUTES_MAP.put(ATTRIBUTE_IDENTIFIER, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
+		ATTRIBUTES_MAP.put(ANNOTATION_PREFIX, new TextAttributesKey[]{PERL_ANNOTATION});
 	}
 
 
@@ -226,6 +228,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 	@Override
 	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
 	{
+		// fixme unify this somehow
 		if (tokenType.getLanguage() == PodLanguage.INSTANCE)
 		{
 			return PodSyntaxHighlighter.getTokenAttributes(tokenType);
@@ -237,6 +240,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		else if (ATTRIBUTES_MAP.containsKey(tokenType))
 		{
 			return ATTRIBUTES_MAP.get(tokenType);
+		}
+		else if (ANNOTATIONS_KEYS.contains(tokenType))
+		{
+			return ATTRIBUTES_MAP.get(ANNOTATION_PREFIX);
 		}
 		else if (PerlTokenSets.OPERATORS_TOKENSET.contains(tokenType))
 		{

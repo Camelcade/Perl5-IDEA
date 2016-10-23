@@ -18,8 +18,6 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 
-import java.io.Reader;
-
 /**
  * Created by hurricup on 20.04.2016.
  */
@@ -27,9 +25,9 @@ public class PerlAnnotationsLexer extends PerlAnnotationsLexerGenerated
 {
 
 
-	public PerlAnnotationsLexer(Reader in)
+	public PerlAnnotationsLexer()
 	{
-		super(in);
+		super(null);
 	}
 
 	protected IElementType parseFallback()

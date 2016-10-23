@@ -38,5 +38,4 @@ public class PerlAnnotations implements PerlElementTypes
 		TOKENS_MAP.put("inject", ANNOTATION_INJECT_KEY);
 		TOKENS_MAP.put("noinspection", ANNOTATION_NOINSPECTION_KEY);
 	}
-
 }
