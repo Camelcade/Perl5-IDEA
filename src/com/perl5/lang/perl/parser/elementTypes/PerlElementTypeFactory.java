@@ -158,7 +158,7 @@ public class PerlElementTypeFactory
 		}
 		else if (name.equals("COMMENT_ANNOTATION"))
 		{
-			return new PerlAnnotationElementType("PERL_ANNOTATION");
+			return new PerlLazyAnnotationElementType("PERL_ANNOTATION");
 		}
 
 		return new PerlTokenType(name);

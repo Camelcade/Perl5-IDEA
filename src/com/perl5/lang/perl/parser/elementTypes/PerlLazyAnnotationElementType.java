@@ -23,7 +23,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlAnnotationsLexer;
-import com.perl5.lang.perl.parser.PerlAnnotationsParser;
+import com.perl5.lang.perl.parser.PerlLazyAnnotationsParser;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -31,9 +31,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlAnnotationElementType extends PerlLazyBlockElementType
+public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType
 {
-	public PerlAnnotationElementType(@NotNull @NonNls String debugName)
+	public PerlLazyAnnotationElementType(@NotNull @NonNls String debugName)
 	{
 		super(debugName);
 	}
@@ -49,7 +49,7 @@ public class PerlAnnotationElementType extends PerlLazyBlockElementType
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlAnnotationsParser.INSTANCE;
+		return PerlLazyAnnotationsParser.INSTANCE;
 	}
 
 	@NotNull

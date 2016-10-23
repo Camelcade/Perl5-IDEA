@@ -22,9 +22,9 @@ import com.intellij.lang.PsiParser;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlQQStringContentParser extends PerlParserImpl
+public class PerlLazyQQStringContentParser extends PerlParserImpl
 {
-	public static final PsiParser INSTANCE = new PerlQQStringContentParser();
+	public static final PsiParser INSTANCE = new PerlLazyQQStringContentParser();
 
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)

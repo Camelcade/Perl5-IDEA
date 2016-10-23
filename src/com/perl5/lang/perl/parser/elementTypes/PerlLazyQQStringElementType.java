@@ -20,7 +20,7 @@ import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlQQStringContentParser;
+import com.perl5.lang.perl.parser.PerlLazyQQStringContentParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -44,6 +44,6 @@ public class PerlLazyQQStringElementType extends PerlLazyBlockElementType
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlQQStringContentParser.INSTANCE;
+		return PerlLazyQQStringContentParser.INSTANCE;
 	}
 }

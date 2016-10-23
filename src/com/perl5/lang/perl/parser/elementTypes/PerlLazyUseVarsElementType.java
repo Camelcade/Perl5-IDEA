@@ -21,7 +21,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlUseVarsDeclarationsParser;
+import com.perl5.lang.perl.parser.PerlLazyUseVarsDeclarationsParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -45,6 +45,6 @@ public class PerlLazyUseVarsElementType extends PerlLazyBlockElementType
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlUseVarsDeclarationsParser.INSTANCE;
+		return PerlLazyUseVarsDeclarationsParser.INSTANCE;
 	}
 }

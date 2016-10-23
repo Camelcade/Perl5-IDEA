@@ -20,15 +20,15 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 
 /**
- * Created by hurricup on 23.10.2016.
+ * Created by hurricup on 23.02.2016.
  */
-public class PerlQXStringContentParser extends PerlParserImpl
+public class PerlLazyQStringContentParser extends PerlParserImpl
 {
-	public static final PsiParser INSTANCE = new PerlQXStringContentParser();
+	public static final PsiParser INSTANCE = new PerlLazyQStringContentParser();
 
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		return PerlParserImpl.xq_string_content(b, l);
+		return PerlParserImpl.sq_string_content(b, l);
 	}
 }
