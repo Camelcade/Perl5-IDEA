@@ -27,7 +27,21 @@ method email { $self->{email}; }
 
 # -- other features -- #
 # attributes
-method foo : lvalue { $self->{foo} }
+method foo : lvalue
+something(withparams)
+: andotherattr()
+{ $self->{foo} }
+method foo($class: $name, $email) : lvalue something(withparams)
+: andotherattr()
+{ $self->{foo} }
+
+func foo : lvalue
+something(withparams)
+: andotherattr()
+{ $self->{foo} }
+func foo($name, $email) : lvalue something(withparams)
+: andotherattr()
+{ $self->{foo} }
 
 # change invocant name
 method foo ($bar) { $this->bar( $bar ) }
