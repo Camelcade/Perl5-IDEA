@@ -50,7 +50,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		{
 			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
 		}
-		if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
+		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}

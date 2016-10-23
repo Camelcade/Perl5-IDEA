@@ -292,8 +292,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <ATTRIBUTES>
 {
 	":"					{return COLON;}
-	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return IDENTIFIER;}
-	{IDENTIFIER}		{return IDENTIFIER;}
+	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;}
+	{IDENTIFIER}		{return ATTRIBUTE_IDENTIFIER;}
 	[^]					{yypushback(1);yybegin(YYINITIAL);}
 }
 

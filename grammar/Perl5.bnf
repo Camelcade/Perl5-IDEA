@@ -301,6 +301,7 @@ limitations under the License.
 
     // custom tokens
     IDENTIFIER='IDENTIFIER'
+	ATTRIBUTE_IDENTIFIER='ATTRIBUTE_IDENTIFIER'
 
     SUB_PROTOTYPE_TOKEN='SUB_PROTOTYPE_TOKEN'
 
@@ -603,7 +604,7 @@ private sub_signature_scalar ::= <<scalarDeclarationWrapper>> ['=' scalar_expr]
 
 private sub_attributes ::= ':' attribute ([':'] attribute)*  {pin=1}
 private var_attributes ::= ':' attribute ([':'] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
-attribute ::= IDENTIFIER [quoted_sq_string]
+attribute ::= ATTRIBUTE_IDENTIFIER [quoted_sq_string]
 
 last_expr ::=  'last' [lnr_param] {pin=1}
 next_expr ::=  'next' [lnr_param] {pin=1}
