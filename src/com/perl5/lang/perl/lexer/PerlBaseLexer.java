@@ -308,4 +308,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		yybegin(myNonLabelState);
 		return myNonLabelTokenType;
 	}
+
+	protected IElementType getEofToken()
+	{
+		int realLexicalState = getRealLexicalState();
+		if (realLexicalState == PerlLexer.LEX_LABEL)
+		{
+			return getNonLabelToken();
+		}
+		return null;
+	}
 }

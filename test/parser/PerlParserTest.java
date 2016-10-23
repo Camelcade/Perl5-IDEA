@@ -36,6 +36,10 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testLookAheadEofBug()
+	{
+		doTest(false);
+	}
 
 	public void testCommentInRegexp()
 	{

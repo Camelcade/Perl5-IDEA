@@ -47,6 +47,10 @@ import org.jetbrains.annotations.NotNull;
 
 %}
 
+%eofval{
+	return getEofToken();
+%eofval}
+
 
 /*
 // Char classes
