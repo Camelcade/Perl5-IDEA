@@ -98,7 +98,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	@NotNull
 	public PsiParser createParser(final Project project)
 	{
-		return new PerlParserImpl();
+		return PerlParserImpl.INSTANCE;
 	}
 
 	@Override

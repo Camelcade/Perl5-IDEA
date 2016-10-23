@@ -17,41 +17,18 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.PsiParser;
 
 /**
- * Created by hurricup on 23.02.2016.
+ * Created by hurricup on 23.10.2016.
  */
-public class PerlStringContentParser extends PerlParserImpl
+public class PerlQXStringContentParser extends PerlParserImpl
 {
-	private final IElementType myStringType;
-
-	public PerlStringContentParser(IElementType stringType)
-	{
-		myStringType = stringType;
-	}
+	public static final PsiParser INSTANCE = new PerlQXStringContentParser();
 
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		if (b.eof())
-		{
-			return true;
-		}
-
-		if (myStringType == HEREDOC)
-		{
-			return PerlParserImpl.sq_string_content(b, l);
-		}
-		else if (myStringType == HEREDOC_QQ)
-		{
-			return PerlParserImpl.qq_string_content(b, l);
-		}
-		else if (myStringType == HEREDOC_QX)
-		{
-			return PerlParserImpl.xq_string_content(b, l);
-		}
-
-		throw new RuntimeException("Don't know how to parse contents for " + myStringType);
+		return PerlParserImpl.xq_string_content(b, l);
 	}
 }

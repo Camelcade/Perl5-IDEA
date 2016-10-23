@@ -53,7 +53,7 @@ public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementTyp
 				PerlLanguage.INSTANCE,
 				chameleon.getText()
 		);
-		PsiParser parser = new PerlParserImpl();
+		PsiParser parser = PerlParserImpl.INSTANCE;
 
 		return parser.parse(this, builder).getFirstChildNode();
 	}

@@ -1,9 +1,12 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
 
 public class PerlUseVarsDeclarationsParser extends PerlParserImpl
 {
+	public static final PsiParser INSTANCE = new PerlUseVarsDeclarationsParser();
+
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{

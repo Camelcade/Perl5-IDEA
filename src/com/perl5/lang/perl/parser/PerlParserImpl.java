@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -29,20 +30,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlParserImpl extends PerlParserGenerated implements PerlParser
 {
+	public static final PsiParser INSTANCE = new PerlParserImpl();
+
+	public PerlParserImpl()
+	{
+	}
 
 	/*
-		@Override
-		public ASTNode parse(IElementType t, PsiBuilder b)
-		{
-			if (t instanceof PerlFileElementType)
+			@Override
+			public ASTNode parse(IElementType t, PsiBuilder b)
 			{
-				PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
-				if (file != null && file.getVirtualFile() != null)
-					System.err.println("Parsed file " + file.getVirtualFile());
+				if (t instanceof PerlFileElementType)
+				{
+					PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+					if (file != null && file.getVirtualFile() != null)
+						System.err.println("Parsed file " + file.getVirtualFile());
+				}
+				return super.parse(t, b);
 			}
-			return super.parse(t, b);
-		}
-	*/
+		*/
 	public boolean parseStatement(PsiBuilder b, int l)
 	{
 		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)

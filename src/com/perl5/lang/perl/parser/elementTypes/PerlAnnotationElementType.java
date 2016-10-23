@@ -17,14 +17,11 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.ILazyParseableElementType;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlAnnotationsLexer;
 import com.perl5.lang.perl.parser.PerlAnnotationsParser;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
@@ -34,27 +31,25 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlAnnotationElementType extends ILazyParseableElementType implements PsiElementProvider
+public class PerlAnnotationElementType extends PerlLazyBlockElementType
 {
 	public PerlAnnotationElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName, PerlLanguage.INSTANCE);
+		super(debugName);
 	}
 
+	@NotNull
 	@Override
-	public ASTNode parseContents(ASTNode chameleon)
+	protected Lexer getLexer(@NotNull Project project)
 	{
-		PsiElement parentElement = chameleon.getTreeParent().getPsi();
-		Project project = parentElement.getProject();
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
-				project,
-				chameleon,
-				new FlexAdapter(new PerlAnnotationsLexer(null)),
-				PerlLanguage.INSTANCE,
-				chameleon.getText());
-		PsiParser parser = new PerlAnnotationsParser();
+		return new FlexAdapter(new PerlAnnotationsLexer(null));
+	}
 
-		return parser.parse(this, builder).getFirstChildNode();
+	@NotNull
+	@Override
+	protected PsiParser getParser()
+	{
+		return PerlAnnotationsParser.INSTANCE;
 	}
 
 	@NotNull

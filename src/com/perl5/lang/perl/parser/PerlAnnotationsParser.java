@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlAnnotationsParser implements PsiParser, LightPsiParser, PerlElementTypes
 {
+	public static final PsiParser INSTANCE = new PerlAnnotationsParser();
 
 	private static boolean consumeIdentifierAsString(PsiBuilder b)
 	{

@@ -50,7 +50,7 @@ public class PerlSubLexerAdapter extends FlexAdapter
 		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QQ);
 	}
 
-	public static PerlSubLexerAdapter forStringXQ(@Nullable Project project)
+	public static PerlSubLexerAdapter forStringQX(@Nullable Project project)
 	{
 		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QX);
 	}

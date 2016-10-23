@@ -47,7 +47,7 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringXQ(project),
+				PerlSubLexerAdapter.forStringQX(project),
 				new IElementType[]{HEREDOC_QX},
 				IElementType.EMPTY_ARRAY
 		);

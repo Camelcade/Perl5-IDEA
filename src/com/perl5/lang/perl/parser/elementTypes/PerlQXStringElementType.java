@@ -19,17 +19,16 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlUseVarsDeclarationsParser;
+import com.perl5.lang.perl.parser.PerlQXStringContentParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 10.09.2015.
+ * Created by hurricup on 23.10.2016.
  */
-public class PerlUseVarsElementType extends PerlLazyBlockElementType
+public class PerlQXStringElementType extends PerlLazyBlockElementType
 {
-	public PerlUseVarsElementType(String name)
+	public PerlQXStringElementType(String name)
 	{
 		super(name);
 	}
@@ -38,13 +37,13 @@ public class PerlUseVarsElementType extends PerlLazyBlockElementType
 	@Override
 	protected Lexer getLexer(@NotNull Project project)
 	{
-		return new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING);
+		return PerlSubLexerAdapter.forStringQX(project);
 	}
 
 	@NotNull
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlUseVarsDeclarationsParser.INSTANCE;
+		return PerlQXStringContentParser.INSTANCE;
 	}
 }

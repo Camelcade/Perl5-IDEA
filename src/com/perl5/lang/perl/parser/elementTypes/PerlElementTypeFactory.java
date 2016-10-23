@@ -116,11 +116,41 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-//		if (name.equals("POD"))
-//			return new PerlPodElementType(name);
-		if (name.equals("HEREDOC_QQ") || name.equals("HEREDOC_QX") || name.equals("HEREDOC"))
+		if (name.equals("HEREDOC_QQ"))
 		{
-			return new PerlHeredocElementType(name);
+			return new PerlQQStringElementType(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PerlHeredocElementImpl(node);
+				}
+			};
+		}
+		if (name.equals("HEREDOC_QX"))
+		{
+			return new PerlQXStringElementType(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PerlHeredocElementImpl(node);
+				}
+			};
+		}
+		if (name.equals("HEREDOC"))
+		{
+			return new PerlQStringElementType(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PerlHeredocElementImpl(node);
+				}
+			};
 		}
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
 		{

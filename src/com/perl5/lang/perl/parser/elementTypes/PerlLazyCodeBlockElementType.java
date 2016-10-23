@@ -16,50 +16,35 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.ILazyParseableElementType;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlLazyBlockParser;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 16.10.2016.
  */
-public class PerlLazyCodeBlockElementType extends ILazyParseableElementType implements PsiElementProvider
+public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType
 {
 	public PerlLazyCodeBlockElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName, PerlLanguage.INSTANCE);
-	}
-
-	@Override
-	public ASTNode parseContents(ASTNode chameleon)
-	{
-		PsiElement parentElement = chameleon.getTreeParent().getPsi();
-		Project project = parentElement.getProject();
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
-				project,
-				chameleon,
-				new PerlSublexingLexerAdapter(parentElement.getProject(), false, false),
-				getLanguage(),
-				chameleon.getText());
-		PsiParser parser = new PerlLazyBlockParser();
-
-		return parser.parse(this, builder).getFirstChildNode();
+		super(debugName);
 	}
 
 	@NotNull
 	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
+	protected Lexer getLexer(@NotNull Project project)
 	{
-		return new PerlCompositeElementImpl(node);
+		return new PerlSublexingLexerAdapter(project, false, false);
+	}
+
+	@NotNull
+	@Override
+	protected PsiParser getParser()
+	{
+		return PerlLazyBlockParser.INSTANCE;
 	}
 }
