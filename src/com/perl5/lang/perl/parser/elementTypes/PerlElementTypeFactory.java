@@ -156,6 +156,34 @@ public class PerlElementTypeFactory
 		{
 			return new PerlLazyUseVarsElementType(name);
 		}
+		if (name.equals("LP_REGEX"))
+		{
+			return new PerlLazyMatchRegexpElementType(name);
+		}
+		if (name.equals("LP_REGEX_X"))
+		{
+			return new PerlLazyExtendedMatchRegexpElementType(name);
+		}
+		if (name.equals("LP_REGEX_REPLACEMENT"))
+		{
+			return new PerlLazyReplacementRegexpElementType(name);
+		}
+		if (name.equals("LP_STRING_Q"))
+		{
+			return new PerlLazyQStringElementType(name);
+		}
+		if (name.equals("LP_STRING_QQ"))
+		{
+			return new PerlLazyQQStringElementType(name);
+		}
+		if (name.equals("LP_STRING_QX"))
+		{
+			return new PerlLazyQXStringElementType(name);
+		}
+		if (name.equals("LP_STRING_QW"))
+		{
+			return new PerlLazyQWStringElementType(name);
+		}
 		else if (name.equals("COMMENT_ANNOTATION"))
 		{
 			return new PerlLazyAnnotationElementType("PERL_ANNOTATION");

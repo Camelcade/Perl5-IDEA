@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -54,8 +55,15 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
 		return getParser().parse(this, builder).getFirstChildNode();
 	}
 
+
 	@NotNull
-	protected abstract Lexer getLexer(@NotNull Project project);
+	protected Lexer getLexer(@NotNull Project project)
+	{
+		return new PerlMergingLexerAdapter(getInnerLexer(project));
+	}
+
+	@NotNull
+	protected abstract Lexer getInnerLexer(@NotNull Project project);
 
 	@NotNull
 	protected abstract PsiParser getParser();

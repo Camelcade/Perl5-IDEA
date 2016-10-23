@@ -1,0 +1,90 @@
+my $var = qw(
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+        this     is a     very     large    text    enough   # to be    leazy    parsable
+        this     is a     very     large    text    enough   \# to be    leazy    parsable
+        this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    );
+
+my $var = qq(
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    );
+
+my $var = q(
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    );
+
+my $var = qx(
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    );
+
+my $var = qr(
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    );
+
+
+$var =~ /
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    /;
+
+$var =~ /
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+        this     is a     very     large    text    enough   # to be    leazy    parsable
+        this     is a     very     large    text    enough   \# to be    leazy    parsable
+        this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    /x;
+
+$var =~ s/
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+        this     is a     very     large    text    enough   # to be    leazy    parsable
+        this     is a     very     large    text    enough   \# to be    leazy    parsable
+        this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    /
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+    this     is a     very     large    text    enough   # to be    leazy    parsable
+    this     is a     very     large    text    enough   \# to be    leazy    parsable
+    this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    /x;
+
+$var =~ s/
+    this     is a  $somevar   very   \  large   \$somevar text    enough    to be    leazy    parsable
+        this     is a     very     large    text    enough   # to be    leazy    parsable
+        this     is a     very     large    text    enough   \# to be    leazy    parsable
+        this     is a     very     large    text    (?#enough    to be)    leazy    parsable
+    /
+    say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+        say 'this is a logn code heavy engouh for lazy parsing';
+    /ex;
+
+sub somesub{
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+    say 'this is a logn code heavy engouh for lazy parsing';
+}

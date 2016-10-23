@@ -14,36 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.elementTypes;
+package com.perl5.lang.perl.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlLazyQXStringContentParser;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyQXStringElementType extends PerlLazyBlockElementType
+public class PerlLazyRegexParser extends PerlParserImpl
 {
-	public PerlLazyQXStringElementType(String name)
-	{
-		super(name);
-	}
+	public static final PsiParser INSTANCE = new PerlLazyRegexParser();
 
-	@NotNull
 	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
+	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		return PerlSubLexerAdapter.forStringQX(project);
-	}
-
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyQXStringContentParser.INSTANCE;
+		return perl_regex(b, l);
 	}
 }

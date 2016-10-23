@@ -46,6 +46,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testLazyParsableBlocks()
+	{
+		doTest();
+	}
+
 	public void testCommentInRegexp()
 	{
 		doTest();

@@ -168,7 +168,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 			Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
-			if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && myTokenType == LP_CODE_BLOCK && !myIsForcingSublexing))
+			if (subLexingState == null || (myTokenEnd - myTokenStart > LAZY_BLOCK_MINIMAL_SIZE && !myIsForcingSublexing))
 			{
 				return;
 			}

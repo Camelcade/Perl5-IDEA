@@ -40,7 +40,7 @@ public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType
 
 	@NotNull
 	@Override
-	protected Lexer getLexer(@NotNull Project project)
+	protected Lexer getInnerLexer(@NotNull Project project)
 	{
 		return new FlexAdapter(new PerlAnnotationsLexer(null));
 	}

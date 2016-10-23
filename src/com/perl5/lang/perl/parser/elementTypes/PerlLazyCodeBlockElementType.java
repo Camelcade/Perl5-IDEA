@@ -36,7 +36,7 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType
 
 	@NotNull
 	@Override
-	protected Lexer getLexer(@NotNull Project project)
+	protected Lexer getInnerLexer(@NotNull Project project)
 	{
 		return new PerlSublexingLexerAdapter(project, false, false);
 	}

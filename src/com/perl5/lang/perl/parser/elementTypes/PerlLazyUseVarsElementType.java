@@ -36,7 +36,7 @@ public class PerlLazyUseVarsElementType extends PerlLazyBlockElementType
 
 	@NotNull
 	@Override
-	protected Lexer getLexer(@NotNull Project project)
+	protected Lexer getInnerLexer(@NotNull Project project)
 	{
 		return new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING);
 	}

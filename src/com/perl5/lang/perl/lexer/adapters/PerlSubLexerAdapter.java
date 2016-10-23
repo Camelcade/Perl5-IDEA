@@ -35,9 +35,29 @@ public class PerlSubLexerAdapter extends FlexAdapter
 		myPerlLexerState = perlLexerState;
 	}
 
+	public static PerlSubLexerAdapter forMatchRegex(@Nullable Project project)
+	{
+		return new PerlSubLexerAdapter(project, PerlLexer.MATCH_REGEX);
+	}
+
+	public static PerlSubLexerAdapter forExtendedMatchRegex(@Nullable Project project)
+	{
+		return new PerlSubLexerAdapter(project, PerlLexer.EXTENDED_MATCH_REGEX);
+	}
+
+	public static PerlSubLexerAdapter forReplacementRegex(@Nullable Project project)
+	{
+		return new PerlSubLexerAdapter(project, PerlLexer.REPLACEMENT_REGEX);
+	}
+
 	public static PerlSubLexerAdapter forCode(@Nullable Project project)
 	{
 		return new PerlSubLexerAdapter(project, PerlLexer.YYINITIAL);
+	}
+
+	public static PerlSubLexerAdapter forStringQW(@Nullable Project project)
+	{
+		return new PerlSubLexerAdapter(project, PerlLexer.STRING_LIST);
 	}
 
 	public static PerlSubLexerAdapter forStringSQ(@Nullable Project project)

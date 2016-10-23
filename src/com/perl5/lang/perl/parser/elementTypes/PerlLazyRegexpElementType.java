@@ -17,33 +17,24 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlLazyQXStringContentParser;
+import com.perl5.lang.perl.parser.PerlLazyRegexParser;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyQXStringElementType extends PerlLazyBlockElementType
+public abstract class PerlLazyRegexpElementType extends PerlLazyBlockElementType
 {
-	public PerlLazyQXStringElementType(String name)
+	public PerlLazyRegexpElementType(@NotNull @NonNls String debugName)
 	{
-		super(name);
-	}
-
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forStringQX(project);
+		super(debugName);
 	}
 
 	@NotNull
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlLazyQXStringContentParser.INSTANCE;
+		return PerlLazyRegexParser.INSTANCE;
 	}
 }
