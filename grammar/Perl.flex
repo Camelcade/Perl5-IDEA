@@ -63,7 +63,7 @@ SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT}
 SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
 NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
 ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
-ESCAPED_CHARACTER = "\\"({ANY_SPACE}|"#")
+ESCAPED_SPACE_OR_COMMENT = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 PERL_XIDS = [\w && \p{XID_Start}_]
@@ -217,9 +217,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"$" /  {NON_SPACE_AHEAD}   	{return startUnbracedVariable(SIGIL_SCALAR); }
 }
 
-<EXTENDED_MATCH_REGEX>{
-	{ESCAPED_CHARACTER}	{return REGEX_TOKEN;}
-	{ANY_SPACE}+		{return TokenType.WHITE_SPACE;}
+<MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
+{
+	"\\"[\$\@]		{return REGEX_TOKEN;}
 }
 
 <MATCH_REGEX,EXTENDED_MATCH_REGEX>
@@ -227,11 +227,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{REGEX_COMMENT}	{return COMMENT_LINE;}
 }
 
-<MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
-{
-	"\\"[\$\@]		{return REGEX_TOKEN;}
-	[^]				{return REGEX_TOKEN;}
+<EXTENDED_MATCH_REGEX>{
+	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
+	{ANY_SPACE}+				{return TokenType.WHITE_SPACE;}
+	[^\\ \t\f\n\r$@#\(]+		{return REGEX_TOKEN;}
 }
+
+<MATCH_REGEX>
+	[^$@\\\(]+	{return REGEX_TOKEN;}
+<REPLACEMENT_REGEX>
+	[^$@\\]+ 	{return REGEX_TOKEN;}
+<MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
+	[^] 		{return REGEX_TOKEN;}
 
 <STRING_QQ>{
 	"\\"[\$\@]					{return STRING_CONTENT_QQ;}
@@ -249,7 +256,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <STRING_LIST>
 {
-	[^\s\n\r]+				{return STRING_CONTENT;}
+	[^\s\n\r\t\f]+				{return STRING_CONTENT;}
 	{ESCAPED_WHITE_SPACE}	{return STRING_CONTENT;}
 	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
 }
