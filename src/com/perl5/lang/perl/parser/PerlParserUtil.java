@@ -121,30 +121,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 
-	public static boolean parseSubPrototype(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = null;
-
-		IElementType tokenType = b.getTokenType();
-		while (!b.eof() && (tokenType != RIGHT_PAREN))
-		{
-			if (m == null)
-			{
-				m = b.mark();
-			}
-
-
-			b.advanceLexer();
-			tokenType = b.getTokenType();
-		}
-		if (m != null)
-		{
-			m.collapse(SUB_PROTOTYPE_TOKEN);
-		}
-
-		return true;
-	}
-
 	/**
 	 * Smart semi checker decides if we need semi here
 	 *

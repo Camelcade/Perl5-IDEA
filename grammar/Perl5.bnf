@@ -582,7 +582,7 @@ private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
 
 // todo implement parsing
 private sub_prototype ::= '(' [sub_prototype_content] ')' {pin=1}
-private sub_prototype_content ::= <<parseSubPrototype>>
+private sub_prototype_content ::= SUB_PROTOTYPE_TOKEN*
 
 /************************************* Sub signatures *****************************************************************/
 private sub_signature ::= '(' sub_signature_content ')' //{pin=1} pinning is temporary disabled in favor of protos
