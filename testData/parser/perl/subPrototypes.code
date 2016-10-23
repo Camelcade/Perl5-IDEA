@@ -46,3 +46,6 @@ sub foo($$);
 sub foo($$) {
     foo 1, 2;
 }
+sub length (_);
+sub chr (_@);
+sub ord (_$@);

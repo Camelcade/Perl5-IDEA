@@ -112,7 +112,7 @@ UNQUOTED_HEREDOC_MARKER = [a-zA-Z_]{IDENTIFIER}?
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
 
-SUB_PROTOTYPE = [\s\[\$\@\%\&\*\]\;\+\\]+
+SUB_PROTOTYPE = [\s\[\$\@\%\&\*\]\;\+\\_]+
 
 POD_START = "="[\w].* {NEW_LINE} ?
 POD_LINE = (.+ {NEW_LINE} ? | {NEW_LINE})
