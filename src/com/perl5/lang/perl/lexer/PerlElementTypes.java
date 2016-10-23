@@ -42,6 +42,7 @@ public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementT
 	IElementType ANNOTATION_ABSTRACT_KEY = new PerlTokenType("ANNOTATION_ABSTRACT_KEY");
 	IElementType ANNOTATION_INJECT_KEY = new PerlTokenType("ANNOTATION_INJECT_KEY");
 	IElementType ANNOTATION_NOINSPECTION_KEY = new PerlTokenType("ANNOTATION_NOINSPECTION_KEY");
+	IElementType ANNOTATION_UNKNOWN_KEY = new PerlTokenType("ANNOTATION_UKNOWN_KEY");
 
 	IElementType ANNOTATION_ABSTRACT = new PerlElementTypeEx("ANNOTATION_ABSTRACT")
 	{

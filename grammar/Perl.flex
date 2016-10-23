@@ -160,6 +160,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state BLOCK_AS_VALUE
 
 %state USE_VARS_STRING
+%xstate ANNOTATION,ANNOTATION_KEY,ANNOTATION_PACKAGE,ANNOTATION_STRING,ANNOTATION_FALLBACK
 
 %state VARIABLE_UNBRACED, VARIABLE_BRACED
 
@@ -172,6 +173,39 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state HASH_ACCEPTOR
 
 %%
+
+/////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
+<ANNOTATION_FALLBACK> [^]+	{return COMMENT_LINE;}
+<ANNOTATION> "#@"			{yybegin(ANNOTATION_KEY);return ANNOTATION_PREFIX;}
+
+<ANNOTATION_STRING,ANNOTATION_PACKAGE>
+{
+	{WHITE_SPACE}+			{return TokenType.WHITE_SPACE;}
+}
+
+<ANNOTATION_PACKAGE>{
+	{QUALIFIED_IDENTIFIER}	{yybegin(ANNOTATION_FALLBACK);return PACKAGE;}
+}
+<ANNOTATION_STRING>{
+	{IDENTIFIER}			{yybegin(ANNOTATION_FALLBACK);return STRING_CONTENT;}
+}
+
+<ANNOTATION_KEY>{
+	"deprecated"	{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_DEPRECATED_KEY;}
+	"returns"		{yybegin(ANNOTATION_PACKAGE);return ANNOTATION_RETURNS_KEY;}
+	"override"		{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_OVERRIDE_KEY;}
+	"method"		{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_METHOD_KEY;}
+	"abstract"		{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_ABSTRACT_KEY;}
+	"inject"		{yybegin(ANNOTATION_STRING);return ANNOTATION_INJECT_KEY;}
+	"noinspection"	{yybegin(ANNOTATION_STRING);return ANNOTATION_NOINSPECTION_KEY;}
+	{IDENTIFIER}	{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_UNKNOWN_KEY;}
+}
+
+<ANNOTATION_PACKAGE,ANNOTATION_KEY,ANNOTATION_STRING>
+{
+	[^]				{yybegin(ANNOTATION_FALLBACK);}
+}
+/////////////////////////////////// end of annotations /////////////////////////////////////////////////////////////////
 
 
 <QUOTED_HEREDOC_OPENER>{

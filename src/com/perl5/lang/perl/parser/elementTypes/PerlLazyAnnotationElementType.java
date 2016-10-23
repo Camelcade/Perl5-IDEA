@@ -18,11 +18,10 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlAnnotationsLexer;
+import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
 import com.perl5.lang.perl.parser.PerlLazyAnnotationsParser;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
@@ -42,7 +41,7 @@ public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType
 	@Override
 	protected Lexer getInnerLexer(@NotNull Project project)
 	{
-		return new FlexAdapter(new PerlAnnotationsLexer());
+		return PerlSubLexerAdapter.forAnnotation(project);
 	}
 
 	@NotNull

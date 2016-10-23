@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.lexer.adapters;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.LayeredLexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlAnnotationsLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +52,7 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 				IElementType.EMPTY_ARRAY
 		);
 		registerSelfStoppingLayer(
-				new FlexAdapter(new PerlAnnotationsLexer()),
+				PerlSubLexerAdapter.forAnnotation(project),
 				new IElementType[]{COMMENT_ANNOTATION},
 				IElementType.EMPTY_ARRAY
 		);
