@@ -153,6 +153,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state SUB_ATTRIBUTES
 %state HANDLE_WITH_ANGLE
 
+%state VARIABLE_DECLARATION,VARIABLE_DECLARATION_STRICT,VAR_ATTRIBUTES,VAR_ATTRIBUTES_START
+
 // this is a hack for stupid tailing commas in calls
 %state QUOTED_HEREDOC_OPENER, BARE_HEREDOC_OPENER, BACKREF_HEREDOC_OPENER
 %state BLOCK_AS_VALUE
@@ -304,12 +306,28 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	")"						{return getRightParen(SUB_ATTRIBUTES);}
 }
 
-<ATTRIBUTES>
+<VAR_ATTRIBUTES_START> ":"	{yybegin(VAR_ATTRIBUTES); return COLON;}
+
+<ATTRIBUTES,VAR_ATTRIBUTES>
 {
 	":"					{return COLON;}
 	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;}
 	{IDENTIFIER}		{return ATTRIBUTE_IDENTIFIER;}
-	[^]					{yypushback(1);yybegin(YYINITIAL);}
+}
+
+<ATTRIBUTES> 	 [^]						{yypushback(1);yybegin(YYINITIAL);}
+<VAR_ATTRIBUTES,VAR_ATTRIBUTES_START> [^]	{yypushback(1);yybegin(AFTER_VARIABLE);}
+
+<VARIABLE_DECLARATION>
+{
+	{QUALIFIED_IDENTIFIER}		{yybegin(VARIABLE_DECLARATION_STRICT);return PACKAGE;}
+	<VARIABLE_DECLARATION_STRICT>{
+		"$" 		{return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_SCALAR);}
+		"@"			{return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_ARRAY);}
+		"%"			{return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_HASH);}
+		"("			{return startParethesizedBlock(VAR_ATTRIBUTES_START, YYINITIAL);}
+		[^]			{yypushback(1);yybegin(AFTER_VARIABLE);}
+	}
 }
 
 <VERSION_OR_OPERAND,REQUIRE_ARGUMENTS>{
@@ -506,10 +524,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 	"not"						{checkIfLabel(YYINITIAL, OPERATOR_NOT_LP);}
 
-	{CORE_PREFIX}"my"			{checkIfLabel(YYINITIAL, RESERVED_MY);}
-	{CORE_PREFIX}"our"			{checkIfLabel(YYINITIAL, RESERVED_OUR);}
+	{CORE_PREFIX}"my"			{checkIfLabel(VARIABLE_DECLARATION, RESERVED_MY);}
+	{CORE_PREFIX}"our"			{checkIfLabel(VARIABLE_DECLARATION, RESERVED_OUR);}
 	{CORE_PREFIX}"local"		{checkIfLabel(YYINITIAL, RESERVED_LOCAL);}
-	{CORE_PREFIX}"state"		{checkIfLabel(YYINITIAL, RESERVED_STATE);}
+	{CORE_PREFIX}"state"		{checkIfLabel(VARIABLE_DECLARATION, RESERVED_STATE);}
 
 	{CORE_PREFIX}"elsif"	 	{checkIfLabel(YYINITIAL, RESERVED_ELSIF);}
 	{CORE_PREFIX}"else"	 		{checkIfLabel(YYINITIAL, RESERVED_ELSE);}

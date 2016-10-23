@@ -41,6 +41,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest(false);
 	}
 
+	public void testVariableAttributes()
+	{
+		doTest();
+	}
+
 	public void testCommentInRegexp()
 	{
 		doTest();
