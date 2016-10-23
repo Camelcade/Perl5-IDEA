@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.util.ArrayUtil;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.EmptyStackException;
 
 /**
@@ -27,11 +27,13 @@ import java.util.EmptyStackException;
 public class PerlBracesStack
 {
 	private int[] data;
+	private Object[] additionalData;
 	private int size;
 
 	public PerlBracesStack(int initialCapacity)
 	{
 		data = new int[initialCapacity];
+		additionalData = new Object[initialCapacity];
 		size = 0;
 	}
 
@@ -42,11 +44,18 @@ public class PerlBracesStack
 
 	public void push(int t)
 	{
+		push(t, null);
+	}
+
+	public void push(int t, @Nullable Object od)
+	{
 		if (size >= data.length)
 		{
 			data = ArrayUtil.realloc(data, data.length * 3 / 2);
+			additionalData = ArrayUtil.realloc(additionalData, additionalData.length * 3 / 2, Object[]::new);
 		}
-		data[size++] = t;
+		data[size] = t;
+		additionalData[size++] = od;
 	}
 
 	public int peek()
@@ -58,13 +67,23 @@ public class PerlBracesStack
 		return data[size - 1];
 	}
 
-	public int pop()
+	@Nullable
+	public Object peekAdditional()
 	{
 		if (size == 0)
 		{
 			throw new EmptyStackException();
 		}
-		return data[--size];
+		return additionalData[size - 1];
+	}
+
+	public void pop()
+	{
+		if (size == 0)
+		{
+			throw new EmptyStackException();
+		}
+		--size;
 	}
 
 	public int size()
@@ -77,38 +96,9 @@ public class PerlBracesStack
 		return size == 0;
 	}
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o instanceof PerlBracesStack)
-		{
-			PerlBracesStack otherStack = (PerlBracesStack) o;
-			if (size != otherStack.size)
-			{
-				return false;
-			}
-			for (int i = 0; i < otherStack.size; i++)
-			{
-				if (data[i] != otherStack.data[i])
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		return false;
-	}
-
 	public void clear()
 	{
 		size = 0;
-	}
-
-	@Override
-	public String toString()
-	{
-		return Arrays.toString(Arrays.copyOf(data, size));
 	}
 
 	public int incLast()

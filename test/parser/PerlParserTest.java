@@ -57,6 +57,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testSubSignatures()
+	{
+		doTest();
+	}
+
 	public void testFormat()
 	{
 		doTest();
