@@ -599,7 +599,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{yybegin(BRACED_STRING);return getLeftBrace();}
 }
 
-<AFTER_DEREFERENCE> "("     	{yybegin(YYINITIAL);return getLeftParen();}
+<AFTER_DEREFERENCE> "("     	{return getLeftParen(YYINITIAL);}
 
 <AFTER_VALUE,AFTER_VARIABLE> "." / {NUMBER_INT} {return OPERATOR_CONCAT;}
 
@@ -611,7 +611,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"=" 		{yybegin(BLOCK_AS_VALUE);return OPERATOR_ASSIGN;}
 	"->" 		{yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;}
 	"["     	{yybegin(YYINITIAL);return getLeftBracket();}
-	"("     	{yybegin(YYINITIAL);return getLeftParen();}
+	"("     	{return getLeftParen(YYINITIAL);}
 	"{"     	{yybegin(YYINITIAL);return getLeftBrace();}
 	"}"     	{return getRightBrace(YYINITIAL);}
 	"]"     	{return getRightBracket(AFTER_VALUE);}

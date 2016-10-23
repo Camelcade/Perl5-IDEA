@@ -198,16 +198,17 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	{
 		myParensStack.push(0);
 		yybegin(afterState);
-		pushStateAndBegin(afterParenState);
-		return getLeftParen();
+		pushState();
+		return getLeftParen(afterParenState);
 	}
 
-	protected IElementType getLeftParen()
+	protected IElementType getLeftParen(int newState)
 	{
 		if (!myParensStack.isEmpty())
 		{
 			myParensStack.incLast();
 		}
+		yybegin(newState);
 		return LEFT_PAREN;
 	}
 
