@@ -49,15 +49,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 	public static final String TR_MODIFIERS = "cdsr";
-	// pre-variable name tokens
-	public static final TokenSet SIGILS_TOKENS = TokenSet.create(
-			SIGIL_ARRAY,
-			SIGIL_SCALAR,
-			SIGIL_SCALAR_INDEX,
-			OPERATOR_BITWISE_AND,    // code sigil
-			OPERATOR_MOD,    // hash sigil
-			OPERATOR_MUL    // glob sigil
-	);
 	// operators tokens (except commas)
 	public static final TokenSet OPERATORS_TOKENSET = TokenSet.create(
 			OPERATOR_CMP_NUMERIC,
@@ -83,7 +74,7 @@ public class PerlLexer extends PerlLexerGenerated
 			OPERATOR_RE,
 			OPERATOR_NOT_RE,
 
-//			OPERATOR_HEREDOC, // this is an artificial operator, not the real one
+			OPERATOR_HEREDOC, // this is an artificial operator, not the real one
 			OPERATOR_SHIFT_LEFT,
 			OPERATOR_SHIFT_RIGHT,
 
@@ -174,22 +165,7 @@ public class PerlLexer extends PerlLexerGenerated
 	private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
 	private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
 	// tokens that preceeds regexp opener or file <FH>
-	public static TokenSet BARE_REGEX_PREFIX_TOKENSET =
-			TokenSet.andNot(
-					TokenSet.orSet(
-							OPERATORS_TOKENSET
-							, TokenSet.create(
-									SEMICOLON,
-									COLON,
-									LEFT_PAREN,
-									LEFT_BRACE,
-									LEFT_BRACKET
-							)),
-					TokenSet.create(
-							OPERATOR_PLUS_PLUS,
-							OPERATOR_MINUS_MINUS
-					)
-			);
+	public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
 	public static TokenSet RESERVED_TOKENSET;
 	public static TokenSet CUSTOM_TOKENSET;
 
@@ -1109,21 +1085,17 @@ public class PerlLexer extends PerlLexerGenerated
 	{
 		String tokenText = yytext().toString();
 		IElementType tokenType;
-		PerlTokenHistory tokenHistory = getTokenHistory();
 
-		boolean isSigilBehind = SIGILS_TOKENS.contains(tokenHistory.getLastTokenType());
-
-		if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) != null)
+		if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) == null &&
+				(tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null
+				)
 		{
-			return tokenType;
+			tokenType = IDENTIFIER;
 		}
 
-		if (!isSigilBehind && (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) != null)
-		{
-			return tokenType;
-		}
+		yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);
 
-		return IDENTIFIER;
+		return tokenType;
 	}
 
 	@Override

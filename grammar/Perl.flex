@@ -667,7 +667,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}
 	{PERL_VERSION}  		{yybegin(AFTER_VALUE);return NUMBER_VERSION;}
 
-	{QUALIFIED_IDENTIFIER} 	{yybegin(AFTER_IDENTIFIER);return getIdentifierToken();}
+	{QUALIFIED_IDENTIFIER} 	{return getIdentifierToken();}
 }
 
 
