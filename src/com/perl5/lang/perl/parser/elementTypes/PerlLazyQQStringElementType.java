@@ -20,15 +20,15 @@ import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlQXStringContentParser;
+import com.perl5.lang.perl.parser.PerlQQStringContentParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlQXStringElementType extends PerlLazyBlockElementType
+public class PerlLazyQQStringElementType extends PerlLazyBlockElementType
 {
-	public PerlQXStringElementType(String name)
+	public PerlLazyQQStringElementType(String name)
 	{
 		super(name);
 	}
@@ -37,13 +37,13 @@ public class PerlQXStringElementType extends PerlLazyBlockElementType
 	@Override
 	protected Lexer getLexer(@NotNull Project project)
 	{
-		return PerlSubLexerAdapter.forStringQX(project);
+		return PerlSubLexerAdapter.forStringDQ(project);
 	}
 
 	@NotNull
 	@Override
 	protected PsiParser getParser()
 	{
-		return PerlQXStringContentParser.INSTANCE;
+		return PerlQQStringContentParser.INSTANCE;
 	}
 }

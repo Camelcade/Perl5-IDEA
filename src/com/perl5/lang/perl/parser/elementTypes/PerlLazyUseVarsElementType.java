@@ -27,9 +27,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.09.2015.
  */
-public class PerlUseVarsElementType extends PerlLazyBlockElementType
+public class PerlLazyUseVarsElementType extends PerlLazyBlockElementType
 {
-	public PerlUseVarsElementType(String name)
+	public PerlLazyUseVarsElementType(String name)
 	{
 		super(name);
 	}

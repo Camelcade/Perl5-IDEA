@@ -118,7 +118,7 @@ public class PerlElementTypeFactory
 		}
 		if (name.equals("HEREDOC_QQ"))
 		{
-			return new PerlQQStringElementType(name)
+			return new PerlLazyQQStringElementType(name)
 			{
 				@NotNull
 				@Override
@@ -130,7 +130,7 @@ public class PerlElementTypeFactory
 		}
 		if (name.equals("HEREDOC_QX"))
 		{
-			return new PerlQXStringElementType(name)
+			return new PerlLazyQXStringElementType(name)
 			{
 				@NotNull
 				@Override
@@ -142,7 +142,7 @@ public class PerlElementTypeFactory
 		}
 		if (name.equals("HEREDOC"))
 		{
-			return new PerlQStringElementType(name)
+			return new PerlLazyQStringElementType(name)
 			{
 				@NotNull
 				@Override
@@ -154,7 +154,7 @@ public class PerlElementTypeFactory
 		}
 		if (name.equals("PARSABLE_STRING_USE_VARS"))
 		{
-			return new PerlUseVarsElementType(name);
+			return new PerlLazyUseVarsElementType(name);
 		}
 		else if (name.equals("COMMENT_ANNOTATION"))
 		{
