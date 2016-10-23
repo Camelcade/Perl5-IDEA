@@ -189,7 +189,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 	{
 		PsiElement parent = getParent();
 		return parent instanceof PsiPerlVariableDeclarationLexical ||
-				parent instanceof PsiPerlSubSignatureContent ||
+				parent instanceof PsiPerlSubSignature ||
 				isInvocantDeclaration() ||
 				isLocalDeclaration() ||
 				isArgsDeclaration()

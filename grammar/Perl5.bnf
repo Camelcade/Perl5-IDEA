@@ -324,7 +324,7 @@ limitations under the License.
 
 	extends(".*statement_modifier")=statement_modifier
 
-	extends(".*_signature_content")=sub_signature_content
+	extends(".*_signature_content")=sub_signature
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
@@ -576,30 +576,21 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 sub_definition ::=  'sub' IDENTIFIER sub_definition_parameters parse_block
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
-private sub_prototype_or_signature ::= sub_signature |sub_prototype
+private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
+private sub_prototype_or_signature_content ::= sub_signature |sub_prototype
 
 sub_declaration ::=  'sub' IDENTIFIER sub_declaration_parameters
-private sub_declaration_parameters ::= [sub_prototype] [sub_attributes]
+private sub_declaration_parameters ::= [sub_prototype_content] [sub_attributes]
+private sub_prototype_content ::= '(' sub_prototype ')' {pin=1}
 
-// todo implement parsing
-private sub_prototype ::= '(' [sub_prototype_content] ')' {pin=1}
-private sub_prototype_content ::= SUB_PROTOTYPE_TOKEN*
+private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 
 /************************************* Sub signatures *****************************************************************/
-private sub_signature ::= '(' sub_signature_content ')' //{pin=1} pinning is temporary disabled in favor of protos
-sub_signature_content ::=
-	<<cancelProtoLikeSignature>>
-	{
-		sub_signature_element (',' sub_signature_element)* [',' sub_signature_element_slurpy]
-		| [sub_signature_element_slurpy]
-	}
-//	{recoverWhile=recover_signature_content}
-private sub_signature_element ::= sub_signature_element_ignore	| sub_signature_scalar
-private sub_signature_element_slurpy ::= <<arrayDeclarationWrapper>> | <<hashDeclarationWrapper>>
+sub_signature ::= sub_signature_element (',' sub_signature_element) *
+private sub_signature_element ::= signature_left_side ['=' [scalar_expr]]
+private signature_left_side ::= variable_declaration_wrapper | sub_signature_element_ignore
+sub_signature_element_ignore ::= '$$' | '$@' | '$%'
 
-// fixme this is side-effect of detecting var names in lexer
-sub_signature_element_ignore ::= SIGIL_SCALAR [<<checkAssignIdentifier>> [scalar_expr]] &(','|')')
-private sub_signature_scalar ::= <<scalarDeclarationWrapper>> ['=' scalar_expr]
 /************************************* Sub signatures *****************************************************************/
 
 private sub_attributes ::= ':' attribute ([':'] attribute)*  {pin=1}

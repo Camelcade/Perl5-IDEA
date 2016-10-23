@@ -56,7 +56,7 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseIm
 				newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
 				arguments.add(newArgument);
 			}
-			else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN)
+			else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN && arguments.size() > 0)
 			{
 				// setting last element as optional
 				arguments.get(arguments.size() - 1).setOptional(true);
@@ -74,6 +74,6 @@ public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseIm
 	@Override
 	public PsiElement getSignatureContainer()
 	{
-		return getSubSignatureContent();
+		return getSubSignature();
 	}
 }

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
@@ -58,6 +59,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 					")");
 
 	private static final Map<IElementType, IElementType> SIGILS_TO_TOKENS_MAP = new THashMap<>();
+	private static final String SUB_SIGNATURE = "Sub.Signature";
 
 	static
 	{
@@ -190,14 +192,24 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return RIGHT_BRACKET;
 	}
 
+	protected IElementType startSubSignatureBlock()
+	{
+		return startParethesizedBlock(PerlLexer.SUB_ATTRIBUTES, PerlLexer.YYINITIAL, SUB_SIGNATURE);
+	}
+
 	protected IElementType startParethesizedBlock(int afterState)
 	{
-		return startParethesizedBlock(afterState, PerlLexer.YYINITIAL);
+		return startParethesizedBlock(afterState, PerlLexer.YYINITIAL, null);
 	}
 
 	protected IElementType startParethesizedBlock(int afterState, int afterParenState)
 	{
-		myParensStack.push(0);
+		return startParethesizedBlock(afterState, afterParenState, null);
+	}
+
+	protected IElementType startParethesizedBlock(int afterState, int afterParenState, Object userData)
+	{
+		myParensStack.push(0, userData);
 		yybegin(afterState);
 		pushState();
 		return getLeftParen(afterParenState);
@@ -236,6 +248,27 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected IElementType getUnbracedVariableNameToken()
 	{
 		popState();
+		char currentChar;
+		if (
+				!myParensStack.isEmpty() &&
+						yylength() == 1 &&
+						StringUtil.containsChar(",=)", currentChar = yytext().charAt(0)) &&
+						myParensStack.peek() == 1 &&
+						myParensStack.peekAdditional() == SUB_SIGNATURE)
+		{
+			if (currentChar == ',')
+			{
+				return COMMA;
+			}
+			else if (currentChar == '=')
+			{
+				return OPERATOR_ASSIGN;
+			}
+			else if (currentChar == ')')
+			{
+				return getRightParen(PerlLexer.SUB_ATTRIBUTES);
+			}
+		}
 		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
 	}
 

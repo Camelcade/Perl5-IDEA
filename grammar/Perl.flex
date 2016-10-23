@@ -276,7 +276,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <SUB_DECLARATION>{
 	{QUALIFIED_IDENTIFIER} 		{return IDENTIFIER;}
 	"(" / {SUB_PROTOTYPE}? ")"	{return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);}
-	"(" 						{return startParethesizedBlock(SUB_ATTRIBUTES);}
+	"(" 						{return startSubSignatureBlock();}
 }
 
 <SUB_DECLARATION,SUB_ATTRIBUTES,ATTRIBUTES>{

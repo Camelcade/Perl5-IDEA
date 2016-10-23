@@ -16,6 +16,23 @@ sub abc: prototype($$$$);
 sub abc($$$@): method;
 sub abc($$$@): method {};
 
+sub abc($argument): method othermethod : otherthing(withparame) {};
+sub abc($): method othermethod : otherthing(withparame) {};
+sub abc($=): method othermethod : otherthing(withparame) {};
+sub abc($argument, $): method othermethod : otherthing(withparame) {};
+sub abc($argument, %): method othermethod : otherthing(withparame) {};
+sub abc($argument, @): method othermethod : otherthing(withparame) {};
+sub abc($argument, $=): method othermethod : otherthing(withparame) {};
+sub abc($argument, %=): method othermethod : otherthing(withparame) {};
+sub abc($argument, @=): method othermethod : otherthing(withparame) {};
+
+sub abc($$$@): method othermethod : otherthing(withparame);
+sub abc($$$@): method othermethod : otherthing(withparame);
+sub abc($$$@): method othermethod : otherthing(withparame);
+sub abc($$$@): method othermethod : otherthing(withparame);
+sub abc($$$@): method othermethod : otherthing(withparame);
+sub abc($$$@): method othermethod : otherthing(withparame);
+
 sub abc: method;
 sub abc: method{};
 

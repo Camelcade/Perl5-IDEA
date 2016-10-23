@@ -28,7 +28,6 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -414,42 +413,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Checks that we are at identifier with specific name and convert it to the token type
-	 *
-	 * @param b               PerlBuilder
-	 * @param l               parsing level
-	 * @param identifierValue text of identifier to check
-	 * @param tokenType       target token type
-	 * @return check result
-	 */
-	@Deprecated
-	public static boolean checkAndConvertIdentifier(PsiBuilder b, int l, @NotNull String identifierValue, @NotNull IElementType tokenType)
-	{
-		if (CONVERTABLE_TOKENS.contains(b.getTokenType()) && identifierValue.equals(b.getTokenText()))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(tokenType);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * This is a hack, because GrammarKit parses <<someMethod "=" OPERATOR_ASSIGN>> incorrectly
-	 * fixme this should be changed to two-face token =/id
-	 *
-	 * @param b Perl builder
-	 * @param l parsing level
-	 * @return conversion result
-	 */
-	@Deprecated
-	public static boolean checkAssignIdentifier(PsiBuilder b, int l)
-	{
-		return consumeToken(b, OPERATOR_ASSIGN) || checkAndConvertIdentifier(b, l, "=", OPERATOR_ASSIGN);
-	}
-
-	/**
 	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
 	 *
 	 * @param b Perl builder
@@ -476,76 +439,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-	/**
-	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
-	 *
-	 * @param b Perl builder
-	 * @param l parsing level
-	 * @return check result
-	 */
-	public static boolean arrayDeclarationWrapper(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-		boolean r = false;
-		assert b instanceof PerlBuilder;
-		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
-
-		if (PerlParserImpl.array_variable(b, l))
-		{
-			m.done(VARIABLE_DECLARATION_WRAPPER);
-			r = true;
-		}
-		else
-		{
-			m.drop();
-		}
-		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
-		return r;
-	}
-
-	/**
-	 * Parses and wraps declaration of scalar variable; NB: special variable names suppressed
-	 *
-	 * @param b Perl builder
-	 * @param l parsing level
-	 * @return check result
-	 */
-	public static boolean hashDeclarationWrapper(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-		boolean r = false;
-		assert b instanceof PerlBuilder;
-		boolean flagBackup = ((PerlBuilder) b).setSpecialVariableNamesAllowed(false);
-
-		if (PerlParserImpl.hash_variable(b, l))
-		{
-			m.done(VARIABLE_DECLARATION_WRAPPER);
-			r = true;
-		}
-		else
-		{
-			m.drop();
-		}
-		((PerlBuilder) b).setSpecialVariableNamesAllowed(flagBackup);
-		return r;
-	}
-
-	/**
-	 * This is a hack to cancel empty signature or ($) signature
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return check result
-	 */
-	public static boolean cancelProtoLikeSignature(PsiBuilder b, int l)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		if (currentTokenType == RIGHT_PAREN || currentTokenType == SIGIL_SCALAR && b.lookAhead(1) == RIGHT_PAREN)
-		{
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * Parsing simple call arguments, prototype tricks not allowed (like code block without sub

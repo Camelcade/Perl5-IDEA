@@ -71,7 +71,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
 	public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(
 			COMMA_SEQUENCE_EXPR,
-			SUB_SIGNATURE_CONTENT,
+			SUB_SIGNATURE,
 			METHOD_SIGNATURE_CONTENT,
 			FUNC_SIGNATURE_CONTENT,
 			TRENAR_EXPR

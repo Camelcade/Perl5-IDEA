@@ -1688,7 +1688,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("SUB_SIGNATURE_CONTENT"))
+		if (name.equals("SUB_SIGNATURE"))
 		{
 			return new PerlElementTypeEx(name)
 			{
@@ -1696,7 +1696,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlSubSignatureContentImpl(node);
+					return new PsiPerlSubSignatureImpl(node);
 				}
 			};
 		}
