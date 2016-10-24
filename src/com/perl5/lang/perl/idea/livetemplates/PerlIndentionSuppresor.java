@@ -23,14 +23,22 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.Nls;
+
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 04.09.2015.
  */
 public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 {
+	// pattern for getting marker
+	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
+	public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
+	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
+	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
+
+
 	@Override
 	public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor)
 	{
@@ -38,10 +46,10 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor
 		{
 			String templateText = template.getTemplateText();
 
-			if (PerlLexer.HEREDOC_OPENER_PATTERN.matcher(templateText).find()
-					|| PerlLexer.HEREDOC_OPENER_PATTERN_SQ.matcher(templateText).find()
-					|| PerlLexer.HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
-					|| PerlLexer.HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
+			if (HEREDOC_OPENER_PATTERN.matcher(templateText).find()
+					|| HEREDOC_OPENER_PATTERN_SQ.matcher(templateText).find()
+					|| HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
+					|| HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
 					)
 			{
 				template.setToIndent(false);

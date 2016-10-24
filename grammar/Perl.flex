@@ -38,10 +38,6 @@ import org.jetbrains.annotations.NotNull;
 
 %{
 
-    protected int trenarCounter = 0;
-
-	public abstract IElementType getIdentifierToken();
-
 %}
 
 %eofval{
@@ -179,14 +175,14 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, TRANS_OPENER, REGEX_OPENER>{
 	{WHITE_SPACE}+	{setNoSharpState(); return TokenType.WHITE_SPACE;}
-	{NEW_LINE}		{setNoSharpState(); return TokenType.NEW_LINE_INDENT;}
+	{NEW_LINE}		{return getNewLineToken();}
 }
 
 <QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP,TRANS_OPENER_NO_SHARP,REGEX_OPENER_NO_SHARP>
 {
 	{WHITE_SPACE}+	{return TokenType.WHITE_SPACE;}
 	{LINE_COMMENT}	{adjustCommentToken();return COMMENT_LINE;}
-	{NEW_LINE}		{return TokenType.NEW_LINE_INDENT;}
+	{NEW_LINE}		{return getNewLineToken();}
 }
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW,QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP>{
@@ -325,7 +321,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 ^{POD_START} 				{yybegin(POD_STATE);return COMMENT_BLOCK;}
-{NEW_LINE}   				{return TokenType.NEW_LINE_INDENT;}
+{NEW_LINE}   				{return getNewLineToken();}
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
 {END_BLOCK}					{yybegin(END_BLOCK);return COMMENT_BLOCK;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);return COMMENT_BLOCK;}
@@ -598,7 +594,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{CORE_PREFIX}"default"	 	{checkIfLabel(YYINITIAL, RESERVED_DEFAULT);}
 	{CORE_PREFIX}"continue"	 	{checkIfLabel(YYINITIAL, RESERVED_CONTINUE);}
 
-	{CORE_PREFIX}"format"	 	{checkIfLabel(AFTER_IDENTIFIER, RESERVED_FORMAT);}
+	{CORE_PREFIX}"format"	 	{myFormatWaiting = true; yybegin(AFTER_IDENTIFIER); return RESERVED_FORMAT;}
 	{CORE_PREFIX}"sub" 			{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
 	{CORE_PREFIX}"package"	 	{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_PACKAGE);}
@@ -650,17 +646,17 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{BLOCK_NAMES} / {SPACES_OR_COMMENTS}"{"		{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}									{checkIfLabel(AFTER_VALUE, TAG);}
 
-	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_Y;}
-	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_TR;}
+	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_Y;}
+	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_TR;}
 
-	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_QR;}
-	{CORE_PREFIX}"qw" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_QW;}
-	{CORE_PREFIX}"qq" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_QQ;}
-	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {yybegin(AFTER_VALUE);return RESERVED_QX;}
-	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {yybegin(AFTER_VALUE);return RESERVED_Q;}
+	{CORE_PREFIX}"qw" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QW);}
+	{CORE_PREFIX}"qq" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QQ);}
+	{CORE_PREFIX}"qx" / {QUOTE_LIKE_SUFFIX} {return processQuoteLikeStringOpener(RESERVED_QX);}
+	{CORE_PREFIX}"q" / {QUOTE_LIKE_SUFFIX}  {return processQuoteLikeStringOpener(RESERVED_Q);}
 
-	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_M;}
-	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return RESERVED_S;}
+	{CORE_PREFIX}"qr" / {QUOTE_LIKE_SUFFIX} {return processRegexOpener(RESERVED_QR);}
+	{CORE_PREFIX}"m" / {QUOTE_LIKE_SUFFIX}  {return processRegexOpener(RESERVED_M);}
+	{CORE_PREFIX}"s" / {QUOTE_LIKE_SUFFIX}  {return processRegexOpener(RESERVED_S);}
 }
 
 <AFTER_DEREFERENCE>{

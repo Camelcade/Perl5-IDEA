@@ -27,7 +27,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.formatter.operations.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -36,12 +35,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 12.11.2015.
  */
 public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes
 {
+	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
+	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
+
 	protected final Project myProject;
 	protected final CodeStyleSettings mySettings;
 	protected final PerlCodeStyleSettings myPerlSettings;
@@ -60,13 +63,13 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 	{
 		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
 				// we need this because lexer unable to properly parse utf
-				PerlLexer.ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
+				ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
 	}
 
 	protected static boolean isStringSimpleIdentifier(PerlString o)
 	{
 		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
-				PerlLexer.ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
+				ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
 	}
 
 	protected static boolean isCommaArrowAhead(PsiElement o)

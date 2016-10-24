@@ -19,6 +19,7 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
@@ -49,6 +50,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
 	public static final String ALLOWED_TR_MODIFIERS = "cdsr";
 	public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
+	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
+	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
 	private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
 	private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
 	private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
@@ -73,6 +76,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 					")");
 	private static final Map<IElementType, IElementType> SIGILS_TO_TOKENS_MAP = new THashMap<>();
 	private static final String SUB_SIGNATURE = "Sub.Signature";
+	public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
+	public static TokenSet RESERVED_TOKENSET;
+	public static TokenSet CUSTOM_TOKENSET;
 
 	static
 	{
@@ -107,6 +113,18 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	private IElementType myCurrentSigilToken;
 	private IElementType myNonLabelTokenType;
 	private int myNonLabelState;
+
+	public static void initReservedTokensMap()
+	{
+		RESERVED_TOKEN_TYPES.clear();
+		// reserved
+	}
+
+	public static void initReservedTokensSet()
+	{
+		RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
+		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
+	}
 
 	/**
 	 * Choosing closing character by opening one
@@ -344,6 +362,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		myBracesStack.clear();
 		myBracketsStack.clear();
 		myParensStack.clear();
+		heredocQueue.clear();
 	}
 
 	protected void checkIfLabel(int newState, IElementType tokenType)
@@ -373,6 +392,48 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	 */
 	public void adjustCommentToken()
 	{
+	}
+
+	protected IElementType getNewLineToken()
+	{
+		setNoSharpState();
+		if (myFormatWaiting)
+		{
+			IElementType tokenType = captureFormat();
+			myFormatWaiting = false;
+			if (tokenType != null)    // got something
+			{
+				return tokenType;
+			}
+		}
+		else if (!heredocQueue.isEmpty())
+		{
+			return captureHereDoc(false);
+		}
+
+		return TokenType.NEW_LINE_INDENT;
+	}
+
+	/**
+	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
+	 *
+	 * @return token type
+	 */
+	protected IElementType getIdentifierToken()
+	{
+		String tokenText = yytext().toString();
+		IElementType tokenType;
+
+		if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) == null &&
+				(tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null
+				)
+		{
+			tokenType = IDENTIFIER;
+		}
+
+		yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);
+
+		return tokenType;
 	}
 
 	protected IElementType getEofToken()
@@ -717,6 +778,57 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return currentOffset;
 	}
 
+	/**
+	 * Quote-like string procesors
+	 **/
+	public IElementType processQuoteLikeStringOpener(IElementType tokenType)
+	{
+		yybegin(AFTER_VALUE);
+		pushState();
+		if (tokenType == RESERVED_Q)
+		{
+			yybegin(QUOTE_LIKE_OPENER_Q);
+		}
+		else if (tokenType == RESERVED_QQ)
+		{
+			yybegin(QUOTE_LIKE_OPENER_QQ);
+		}
+		else if (tokenType == RESERVED_QX)
+		{
+			yybegin(QUOTE_LIKE_OPENER_QX);
+		}
+		else if (tokenType == RESERVED_QW)
+		{
+			yybegin(QUOTE_LIKE_OPENER_QW);
+		}
+		else
+		{
+			throw new RuntimeException("Unable to switch state by token " + tokenType);
+		}
+		return tokenType;
+	}
+
+	/**
+	 * Sets up regex parser
+	 */
+	public IElementType processRegexOpener(IElementType tokenType)
+	{
+		regexCommand = tokenType;
+
+		if (regexCommand == RESERVED_S)    // two sections s
+		{
+			sectionsNumber = 2;
+		}
+		else                        // one section qr m
+		{
+			sectionsNumber = 1;
+		}
+
+		pushState();
+		yybegin(REGEX_OPENER);
+		return tokenType;
+	}
+
 	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType captureImplicitRegex()
 	{
@@ -852,6 +964,152 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return getPreParsedToken();
 	}
 
+	/**
+	 * Captures HereDoc document and returns appropriate token type
+	 *
+	 * @param afterEmptyCloser - this here-doc being captured after empty closer, e.g. sequentional <<"", <<""
+	 * @return Heredoc token type
+	 */
+	protected IElementType captureHereDoc(boolean afterEmptyCloser)
+	{
+		final PerlHeredocQueueElement heredocQueueElement = heredocQueue.remove(0);
+		final CharSequence heredocMarker = heredocQueueElement.getMarker();
+
+		IElementType tokenType = heredocQueueElement.getTargetElement();
+
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenStart();
+
+		if (!afterEmptyCloser)
+		{
+			pushPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+		}
+
+		int bufferEnd = getBufferEnd();
+
+		int currentPosition = tokenStart;
+		int linePos = currentPosition;
+
+
+		while (true)
+		{
+			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
+			{
+				linePos++;
+			}
+			int lineContentsEnd = linePos;
+
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+			{
+				linePos++;
+			}
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+			{
+				linePos++;
+			}
+
+			// reached the end of heredoc and got end marker
+
+			if (heredocMarker.length() == 0 && lineContentsEnd == currentPosition && linePos > lineContentsEnd)
+			{
+				// non-empty heredoc and got the end
+				if (currentPosition > tokenStart)
+				{
+					pushPreparsedToken(tokenStart, currentPosition, tokenType);
+				}
+				pushPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
+
+				if (!heredocQueue.isEmpty() && bufferEnd > lineContentsEnd + 1)
+				{
+					setTokenStart(lineContentsEnd + 1);
+					return captureHereDoc(true);
+				}
+				else
+				{
+					return getPreParsedToken();
+				}
+			}
+			else if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
+			{
+				// non-empty heredoc and got the end
+				if (currentPosition > tokenStart)
+				{
+					pushPreparsedToken(tokenStart, currentPosition, tokenType);
+				}
+				pushPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
+				return getPreParsedToken();
+			}
+			// reached the end of file
+			else if (linePos == bufferEnd)
+			{
+				// non-empty heredoc and got the end of file
+				if (linePos > tokenStart)
+				{
+					pushPreparsedToken(tokenStart, linePos, tokenType);
+				}
+				return getPreParsedToken();
+			}
+			currentPosition = linePos;
+		}
+	}
+
+	/**
+	 * Captures format; fixme refactor with captureHeredoc got common parts
+	 *
+	 * @return Heredoc token type
+	 */
+	protected IElementType captureFormat()
+	{
+		CharSequence buffer = getBuffer();
+		int tokenStart = getTokenStart();
+		pushPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+		int bufferEnd = getBufferEnd();
+
+		int currentPosition = tokenStart;
+		int linePos = currentPosition;
+
+		while (true)
+		{
+			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
+			{
+				linePos++;
+			}
+			int lineContentsEnd = linePos;
+
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
+			{
+				linePos++;
+			}
+			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
+			{
+				linePos++;
+			}
+
+			// reached the end of format and got end marker
+			if (lineContentsEnd == currentPosition + 1 && buffer.charAt(currentPosition) == '.')
+			{
+				// non-empty heredoc and got the end
+				if (currentPosition > tokenStart)
+				{
+					pushPreparsedToken(tokenStart, currentPosition, FORMAT);
+				}
+				pushPreparsedToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR);
+
+				return getPreParsedToken();
+			}
+			// reached the end of file
+			else if (linePos == bufferEnd)
+			{
+				// non-empty format and got the end of file
+				if (currentPosition > tokenStart)
+				{
+					pushPreparsedToken(tokenStart, currentPosition, FORMAT);
+				}
+				return getPreParsedToken();
+			}
+			currentPosition = linePos;
+		}
+	}
 
 	/**
 	 * Changes current state to nosharp one if necessary
