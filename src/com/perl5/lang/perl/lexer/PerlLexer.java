@@ -28,8 +28,6 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,10 +48,6 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final String TR_MODIFIERS = "cdsr";
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
-	private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
-	private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
-	private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
-	private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
 	// tokens that preceeds regexp opener or file <FH>
 	public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
 	public static TokenSet RESERVED_TOKENSET;
@@ -95,38 +89,6 @@ public class PerlLexer extends PerlLexerGenerated
 		CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
 	}
 
-
-	/**
-	 * Choosing closing character by opening one
-	 *
-	 * @param charOpener - char with which sequence started
-	 * @return - ending char
-	 */
-	public static char getQuoteCloseChar(char charOpener)
-	{
-		if (charOpener == '<')
-		{
-			return '>';
-		}
-		else if (charOpener == '{')
-		{
-			return '}';
-		}
-		else if (charOpener == '(')
-		{
-			return ')';
-		}
-		else if (charOpener == '[')
-		{
-			return ']';
-		}
-		else
-		{
-			return charOpener;
-		}
-	}
-
-
 	@Override
 	public int yystate()
 	{
@@ -163,21 +125,19 @@ public class PerlLexer extends PerlLexerGenerated
 			// capture heredoc
 			if (waitingHereDoc() && (tokenStart == 0 || currentChar == '\n'))
 			{
+				setNoSharpState();
 				return captureHereDoc(false);
 			}
 			// capture format
 			else if (myFormatWaiting && (tokenStart == 0 || buffer.charAt(tokenStart - 1) == '\n'))
 			{
+				setNoSharpState();
 				IElementType tokenType = captureFormat();
 				myFormatWaiting = false;
 				if (tokenType != null)    // got something
 				{
 					return tokenType;
 				}
-			}
-			else if (isOpeningQuoteFor(currentState, currentChar, QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW))
-			{
-				return captureString();
 			}
 			else if (isOpeningQuoteFor(currentState, currentChar, REGEX_OPENER))
 			{
@@ -202,131 +162,6 @@ public class PerlLexer extends PerlLexerGenerated
 			}
 		}
 
-		return false;
-	}
-
-	private List<IElementType> getStringTokens()
-	{
-		int currentState = getRealLexicalState();
-
-		if (currentState == QUOTE_LIKE_OPENER_Q)
-		{
-			return SQ_TOKENS;
-		}
-		if (currentState == QUOTE_LIKE_OPENER_QQ)
-		{
-			return DQ_TOKENS;
-		}
-		if (currentState == QUOTE_LIKE_OPENER_QX)
-		{
-			return XQ_TOKENS;
-		}
-		if (currentState == QUOTE_LIKE_OPENER_QW)
-		{
-			return QW_TOKENS;
-		}
-
-		throw new RuntimeException("Unknown lexical state for string token " + currentState);
-	}
-
-	/**
-	 * Captures string token from current position according to the current lexical state
-	 *
-	 * @return string token
-	 */
-	public IElementType captureString()
-	{
-		CharSequence buffer = getBuffer();
-		int currentPosition = getTokenEnd();
-		int bufferEnd = getBufferEnd();
-
-		char openQuote = buffer.charAt(currentPosition);
-		char closeQuote = getQuoteCloseChar(openQuote);
-		boolean quotesDiffer = openQuote != closeQuote;
-
-		boolean isEscaped = false;
-		int quotesDepth = 0;    // for using with different quotes
-
-		List<IElementType> stringTokens = getStringTokens();
-		pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(0));
-
-		int contentStart = currentPosition;
-
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-
-			if (!isEscaped && quotesDepth == 0 && currentChar == closeQuote)
-			{
-				break;
-			}
-
-			//noinspection Duplicates
-			if (!isEscaped && quotesDiffer)
-			{
-				if (currentChar == openQuote)
-				{
-					quotesDepth++;
-				}
-				else if (currentChar == closeQuote)
-				{
-					quotesDepth--;
-				}
-			}
-
-			isEscaped = !isEscaped && currentChar == '\\';
-
-			currentPosition++;
-		}
-
-		if (currentPosition > contentStart)
-		{
-			pushPreparsedToken(contentStart, currentPosition, stringTokens.get(1));
-		}
-
-		if (currentPosition < bufferEnd)    // got close quote
-		{
-			pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(2));
-		}
-		popState();
-		return getPreParsedToken();
-	}
-
-
-	public boolean captureInterpolatedCode()
-	{
-		int seekStart = getTokenEnd();
-		int seekEnd = getBufferEnd();
-		int currentPos = seekStart;
-		CharSequence buffer = getBuffer();
-
-		int braceLevel = 0;
-		boolean isEscaped = false;
-
-		while (currentPos < seekEnd)
-		{
-			char currentChar = buffer.charAt(currentPos);
-
-			if (!isEscaped)
-			{
-				if (currentChar == '{')
-				{
-					braceLevel++;
-				}
-				else if (currentChar == '}')
-				{
-					braceLevel--;
-					if (braceLevel == 0)
-					{
-						pushPreparsedToken(seekStart, currentPos + 1, LP_CODE_BLOCK);
-						return true;
-					}
-				}
-			}
-
-			isEscaped = !isEscaped && currentChar == '\\';
-			currentPos++;
-		}
 		return false;
 	}
 

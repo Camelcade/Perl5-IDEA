@@ -1,0 +1,23 @@
+my @arr = ( <<EOM, qq
+heredoc here
+EOM
+#comment
+(and string content));
+
+my @arr = ( <<EOM, q
+heredoc here
+EOM
+#comment
+(and string content));
+
+my @arr = ( <<EOM, qx
+heredoc here
+EOM
+#comment
+(and string content));
+
+my @arr = ( <<EOM, qw
+heredoc here
+EOM
+#comment
+(and string content));

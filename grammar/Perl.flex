@@ -42,8 +42,6 @@ import org.jetbrains.annotations.NotNull;
 
 	public abstract IElementType startRegexp();
 	public abstract IElementType getIdentifierToken();
-	public abstract IElementType captureString();
-	public abstract boolean captureInterpolatedCode();
 
 %}
 
@@ -140,7 +138,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state END_BLOCK
 %state POD_STATE
 
-%state QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW
+%xstate QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW
+%xstate QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP
+
 %state TRANS_OPENER, REGEX_OPENER
 
 %state PACKAGE_ARGUMENTS, VERSION_OR_OPERAND, REQUIRE_ARGUMENTS, SUB_DECLARATION, BRACED_STRING, ATTRIBUTES, METHOD_DECLARATION
@@ -175,6 +175,23 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state HASH_ACCEPTOR
 
 %%
+/////////////////////////////////// quote like openers /////////////////////////////////////////////////////////////////
+
+<QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW>{
+	{WHITE_SPACE}+	{setNoSharpState(); return TokenType.WHITE_SPACE;}
+	{NEW_LINE}		{setNoSharpState(); return TokenType.NEW_LINE_INDENT;}
+}
+
+<QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP>
+{
+	{WHITE_SPACE}+	{return TokenType.WHITE_SPACE;}
+	{LINE_COMMENT}	{adjustCommentToken();return COMMENT_LINE;}
+	{NEW_LINE}		{return TokenType.NEW_LINE_INDENT;}
+}
+
+<QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW,QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP>{
+	[^]	{return captureString();}
+}
 
 /////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
 <ANNOTATION_FALLBACK> [^]+	{yybegin(YYINITIAL);return COMMENT_LINE;}
@@ -215,7 +232,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 				yybegin(AFTER_VALUE);
 				pushState();
 				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext().subSequence(1,yylength()-1)));
-				pullback(0);
 				yybegin(QUOTE_LIKE_OPENER_QQ);
 				return captureString();
 			}
@@ -223,7 +239,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 				yybegin(AFTER_VALUE);
 				pushState();
 				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, yytext().subSequence(1,yylength()-1)));
-				pullback(0);
 				yybegin(QUOTE_LIKE_OPENER_Q);
 				return captureString();
 			}
@@ -231,7 +246,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 				yybegin(AFTER_VALUE);
 				pushState();
 				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QX, yytext().subSequence(1,yylength()-1)));
-				pullback(0);
 				yybegin(QUOTE_LIKE_OPENER_QX);
 				return captureString();
 			}
@@ -540,7 +554,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 // operands and starters
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA>{
 	"<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
-	"<"							{yybegin(AFTER_VALUE);pushState();yypushback(1);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+	"<"							{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
@@ -733,9 +747,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 	"<<" / {UNQUOTED_HEREDOC_MARKER}  		{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 
-	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
-	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
-	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();pullback(0);yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
+	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}
+	{XQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QX);return captureString();}
 
 	// fixme optimize via merging?
 	{BAREWORD_MINUS} / {SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
