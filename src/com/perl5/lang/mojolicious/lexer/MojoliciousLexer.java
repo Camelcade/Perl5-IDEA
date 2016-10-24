@@ -17,6 +17,7 @@
 package com.perl5.lang.mojolicious.lexer;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
@@ -330,12 +331,12 @@ public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements M
 	}
 
 	@Override
-	public boolean isLineCommentEnd(int currentPosition)
+	public void adjustCommentToken()
 	{
-		CharSequence buffer = getBuffer();
-		char currentChar = buffer.charAt(currentPosition);
-		return currentChar == '\n'
-				|| currentChar == '%' && currentPosition + 1 < getBufferEnd() && buffer.charAt(currentChar + 1) == '>'
-				;
+		int endIndex = StringUtil.indexOf(yytext(), "%>");
+		if (endIndex > -1)
+		{
+			setTokenEnd(getTokenStart() + endIndex);
+		}
 	}
 }

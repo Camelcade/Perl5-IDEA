@@ -309,6 +309,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return myNonLabelTokenType;
 	}
 
+	/**
+	 * Implemented for templating languages, which can seek through the comment token (current one) and adjust end
+	 * position with setTokenEnd() method
+	 */
+	public void adjustCommentToken()
+	{
+	}
+
 	protected IElementType getEofToken()
 	{
 		int realLexicalState = getRealLexicalState();

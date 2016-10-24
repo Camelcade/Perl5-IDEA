@@ -58,8 +58,10 @@ import org.jetbrains.annotations.NotNull;
 NEW_LINE = \R
 WHITE_SPACE     = [ \t\f]
 ANY_SPACE = [ \t\f\n\r]
-LINE_COMMENT = "#" .* \R
-SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT}
+LINE_COMMENT = "#" .*
+LINE_COMMENT_ANNOTATION = "#@" .*
+LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
+SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT_WITH_NEW_LINE}
 SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
 NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
 ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
@@ -264,6 +266,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <EXTENDED_MATCH_REGEX>{
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
 	{ANY_SPACE}+				{return TokenType.WHITE_SPACE;}
+	{LINE_COMMENT}				{adjustCommentToken();return COMMENT_LINE;}
 	[^\\ \t\f\n\r$@#\(]+		{return REGEX_TOKEN;}
 }
 
@@ -304,11 +307,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{POD_LINE}				{return COMMENT_BLOCK;}
 }
 
-^{POD_START} 	{yybegin(POD_STATE);return COMMENT_BLOCK;}
-{NEW_LINE}   	{return TokenType.NEW_LINE_INDENT;}
-{WHITE_SPACE}+  {return TokenType.WHITE_SPACE;}
-{END_BLOCK}		{yybegin(END_BLOCK);return COMMENT_BLOCK;}
-{DATA_BLOCK}	{yybegin(END_BLOCK);return COMMENT_BLOCK;}
+^{POD_START} 				{yybegin(POD_STATE);return COMMENT_BLOCK;}
+{NEW_LINE}   				{return TokenType.NEW_LINE_INDENT;}
+{WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+{END_BLOCK}					{yybegin(END_BLOCK);return COMMENT_BLOCK;}
+{DATA_BLOCK}				{yybegin(END_BLOCK);return COMMENT_BLOCK;}
+{LINE_COMMENT_ANNOTATION}	{adjustCommentToken();return COMMENT_ANNOTATION;}
+{LINE_COMMENT}				{adjustCommentToken();return COMMENT_LINE;}
 
 <HANDLE_WITH_ANGLE>{
 	{IDENTIFIER} 	{return HANDLE;}

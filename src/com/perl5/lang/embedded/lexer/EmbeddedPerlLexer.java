@@ -17,6 +17,7 @@
 package com.perl5.lang.embedded.lexer;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesBase;
@@ -96,10 +97,13 @@ public class EmbeddedPerlLexer extends PerlLexerWithCustomStatesBase implements 
 	}
 
 	@Override
-	public boolean isLineCommentEnd(int currentPosition)
+	public void adjustCommentToken()
 	{
-		CharSequence buffer = getBuffer();
-		return buffer.charAt(currentPosition) == '\n' || isBufferAtString(buffer, currentPosition, "?>");
+		int endIndex = StringUtil.indexOf(yytext(), "?>");
+		if (endIndex > -1)
+		{
+			setTokenEnd(getTokenStart() + endIndex);
+		}
 	}
 
 	protected boolean isCloseToken(CharSequence buffer, int offset)

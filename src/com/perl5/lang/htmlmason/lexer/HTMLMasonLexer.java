@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.lexer;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
@@ -470,15 +471,17 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 	}
 
 	@Override
-	public boolean isLineCommentEnd(int currentPosition)
+	public void adjustCommentToken()
 	{
-		CharSequence buffer = getBuffer();
-		// fixme need to implement close tags handling i guess
 		int customState = getCustomState();
-		return buffer.charAt(currentPosition) == '\n' ||
-				(customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
-						&& isBufferAtString(buffer, currentPosition, KEYWORD_BLOCK_CLOSER)
-				;
+		if (customState == LEX_MASON_PERL_EXPR_BLOCK || customState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
+		{
+			int endIndex = StringUtil.indexOf(yytext(), KEYWORD_BLOCK_CLOSER);
+			if (endIndex > -1)
+			{
+				setTokenEnd(getTokenStart() + endIndex);
+			}
+		}
 	}
 
 	@Override

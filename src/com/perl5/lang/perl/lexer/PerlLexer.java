@@ -24,7 +24,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
@@ -188,35 +187,6 @@ public class PerlLexer extends PerlLexerGenerated
 			{
 				return parseTr();
 			}
-			// capture line comment
-			else if (currentChar == '#' &&
-					currentState != REPLACEMENT_REGEX &&
-					currentState != MATCH_REGEX &&
-					currentState != STRING_QQ &&
-					currentState != STRING_QX &&
-					currentState != STRING_LIST &&
-					currentState != ANNOTATION &&
-					currentState != ANNOTATION_KEY
-					)
-			{
-				// comment may end on newline or ?>
-				int currentPosition = tokenStart;
-				setTokenStart(tokenStart);
-
-				while (currentPosition < bufferEnd && !isLineCommentEnd(currentPosition))
-				{
-					currentPosition++;
-				}
-
-				setTokenEnd(currentPosition);
-				// catching annotations #@
-				if (tokenStart + 1 < bufferEnd && buffer.charAt(tokenStart + 1) == '@')
-				{
-					return COMMENT_ANNOTATION;
-				}
-
-				return COMMENT_LINE;
-			}
 		}
 		return super.perlAdvance();
 	}
@@ -322,16 +292,6 @@ public class PerlLexer extends PerlLexerGenerated
 		return getPreParsedToken();
 	}
 
-	/**
-	 * Checking if comment is ended. Implemented for overriding in {@link EmbeddedPerlLexer#isLineCommentEnd(int)} }
-	 *
-	 * @param currentPosition current position to check
-	 * @return checking result
-	 */
-	public boolean isLineCommentEnd(int currentPosition)
-	{
-		return getBuffer().charAt(currentPosition) == '\n';
-	}
 
 	public boolean captureInterpolatedCode()
 	{
