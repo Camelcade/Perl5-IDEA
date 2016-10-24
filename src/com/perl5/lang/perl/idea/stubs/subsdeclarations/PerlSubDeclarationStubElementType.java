@@ -89,4 +89,11 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 		sink.occurrence(PerlSubDeclarationStubIndex.KEY, stub.getCanonicalName());
 		sink.occurrence(PerlSubDeclarationStubIndex.KEY, "*" + stub.getPackageName());
 	}
+
+	@Override
+	public boolean shouldCreateStub(ASTNode node)
+	{
+		PsiElement psi = node.getPsi();
+		return psi instanceof PerlSubDeclaration && ((PerlSubDeclaration) psi).getName() != null;
+	}
 }
