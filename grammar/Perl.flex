@@ -40,7 +40,6 @@ import org.jetbrains.annotations.NotNull;
 
     protected int trenarCounter = 0;
 
-	public abstract IElementType startRegexp();
 	public abstract IElementType getIdentifierToken();
 
 %}
@@ -141,7 +140,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %xstate QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW
 %xstate QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP
 
-%state TRANS_OPENER, REGEX_OPENER
+%xstate TRANS_OPENER, TRANS_OPENER_NO_SHARP
+%xstate REGEX_OPENER, REGEX_OPENER_NO_SHARP
 
 %state PACKAGE_ARGUMENTS, VERSION_OR_OPERAND, REQUIRE_ARGUMENTS, SUB_DECLARATION, BRACED_STRING, ATTRIBUTES, METHOD_DECLARATION
 
@@ -177,12 +177,12 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %%
 /////////////////////////////////// quote like openers /////////////////////////////////////////////////////////////////
 
-<QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW>{
+<QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, TRANS_OPENER, REGEX_OPENER>{
 	{WHITE_SPACE}+	{setNoSharpState(); return TokenType.WHITE_SPACE;}
 	{NEW_LINE}		{setNoSharpState(); return TokenType.NEW_LINE_INDENT;}
 }
 
-<QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP>
+<QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP,TRANS_OPENER_NO_SHARP,REGEX_OPENER_NO_SHARP>
 {
 	{WHITE_SPACE}+	{return TokenType.WHITE_SPACE;}
 	{LINE_COMMENT}	{adjustCommentToken();return COMMENT_LINE;}
@@ -192,6 +192,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW,QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP>{
 	[^]	{return captureString();}
 }
+
+<TRANS_OPENER,TRANS_OPENER_NO_SHARP> [^] {return captureTr();}
+<REGEX_OPENER,REGEX_OPENER_NO_SHARP> [^] {return captureRegex();}
 
 /////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
 <ANNOTATION_FALLBACK> [^]+	{yybegin(YYINITIAL);return COMMENT_LINE;}
@@ -565,7 +568,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA>{
-	"/"   						{yybegin(AFTER_VALUE);return startRegexp();}
+	"/"   						{yybegin(AFTER_VALUE);return captureImplicitRegex();}
 }
 
 // known identifiers

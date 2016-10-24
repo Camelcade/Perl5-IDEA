@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerlLexer extends PerlLexerGenerated
@@ -38,39 +37,17 @@ public class PerlLexer extends PerlLexerGenerated
 	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
 	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
 	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
-	public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
-	public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
 	// pattern for getting marker
 	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
 	public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
 	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
 	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
-	public static final String TR_MODIFIERS = "cdsr";
 	public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
 	public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
 	// tokens that preceeds regexp opener or file <FH>
 	public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
 	public static TokenSet RESERVED_TOKENSET;
 	public static TokenSet CUSTOM_TOKENSET;
-
-	static
-	{
-		ALLOWED_REGEXP_MODIFIERS.put(RESERVED_S, "nmsixpodualgcer");
-		ALLOWED_REGEXP_MODIFIERS.put(RESERVED_M, "nmsixpodualgc");
-		ALLOWED_REGEXP_MODIFIERS.put(RESERVED_QR, "nmsixpodual");
-	}
-
-	/**
-	 * Quote-like, transliteration and regexps common part
-	 */
-	public boolean allowSharpQuote = true;
-	public boolean isEscaped = false;
-	public int sectionsNumber = 0;    // number of sections one or two
-	/**
-	 * Regex processor qr{} m{} s{}{}
-	 **/
-	protected IElementType regexCommand = null;
-	private boolean myFormatWaiting = false;
 
 	public PerlLexer(@Nullable Project project)
 	{
@@ -139,32 +116,9 @@ public class PerlLexer extends PerlLexerGenerated
 					return tokenType;
 				}
 			}
-			else if (isOpeningQuoteFor(currentState, currentChar, REGEX_OPENER))
-			{
-				return parseRegex(tokenStart);
-			}
-			else if (isOpeningQuoteFor(currentState, currentChar, TRANS_OPENER))
-			{
-				return parseTr();
-			}
 		}
 		return super.perlAdvance();
 	}
-
-	public boolean isOpeningQuoteFor(int currentState, char currentChar, int... states)
-	{
-		for (int state : states)
-		{
-			if (state == currentState)
-			{
-				return !Character.isWhitespace(currentChar)
-						&& (currentChar != '#' || allowSharpQuote);
-			}
-		}
-
-		return false;
-	}
-
 
 	/**
 	 * Captures HereDoc document and returns appropriate token type
@@ -332,24 +286,12 @@ public class PerlLexer extends PerlLexerGenerated
 //		System.err.println(String.format("Lexer re-set to %d - %d, %d of %d", start, end, end - start, buf.length()));
 	}
 
-	// guess if this is a OPERATOR_DIV or regex opener
-	public IElementType startRegexp()
-	{
-		allowSharpQuote = true;
-		isEscaped = false;
-		regexCommand = RESERVED_M;
-		sectionsNumber = 1;
-		pushState();
-		return parseRegex(getTokenStart());
-	}
 
 	/**
 	 * Sets up regex parser
 	 */
 	public void processRegexOpener(IElementType tokenType)
 	{
-		allowSharpQuote = true;
-		isEscaped = false;
 		regexCommand = tokenType;
 
 		if (regexCommand == RESERVED_S)    // two sections s
@@ -365,373 +307,12 @@ public class PerlLexer extends PerlLexerGenerated
 		yybegin(REGEX_OPENER);
 	}
 
-	/**
-	 * Parsing tr/y content
-	 *
-	 * @return first token
-	 */
-	public IElementType parseTr()
-	{
-		popState();
-		yybegin(AFTER_VALUE);
-		CharSequence buffer = getBuffer();
-		int currentOffset = getTokenEnd();
-		int bufferEnd = getBufferEnd();
-
-		// search block
-		char openQuote = buffer.charAt(currentOffset);
-		char closeQuote = getQuoteCloseChar(openQuote);
-		boolean quotesDiffer = openQuote != closeQuote;
-		pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
-
-		currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
-
-		// close quote
-		if (currentOffset < bufferEnd)
-		{
-			pushPreparsedToken(currentOffset++, currentOffset, quotesDiffer ? REGEX_QUOTE_CLOSE : REGEX_QUOTE);
-		}
-
-		// between blocks
-		if (quotesDiffer)
-		{
-			currentOffset = lexWhiteSpacesAndComments(currentOffset);
-		}
-
-		// second block
-		if (currentOffset < bufferEnd)
-		{
-			if (quotesDiffer)
-			{
-				openQuote = buffer.charAt(currentOffset);
-				closeQuote = getQuoteCloseChar(openQuote);
-				pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
-			}
-
-			currentOffset = parseTrBlockContent(currentOffset, openQuote, closeQuote);
-		}
-
-		// close quote
-		if (currentOffset < bufferEnd)
-		{
-			pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
-		}
-
-
-		// trans modifiers
-		if (currentOffset < bufferEnd)
-		{
-			int blockStart = currentOffset;
-			while (currentOffset < bufferEnd && StringUtil.containsChar(TR_MODIFIERS, buffer.charAt(currentOffset)))
-			{
-				currentOffset++;
-			}
-
-			if (blockStart < currentOffset)
-			{
-				pushPreparsedToken(blockStart, currentOffset, REGEX_MODIFIER);
-			}
-		}
-
-		return getPreParsedToken();
-	}
-
-	/**
-	 * Parsing tr block content till close quote
-	 *
-	 * @param currentOffset start offset
-	 * @param closeQuote    close quote character
-	 * @return next offset
-	 */
-	int parseTrBlockContent(int currentOffset, char openQuote, char closeQuote)
-	{
-		int blockStartOffset = currentOffset;
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
-		boolean isEscaped = false;
-		boolean isQuoteDiffers = openQuote != closeQuote;
-		int quotesLevel = 0;
-
-		while (currentOffset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentOffset);
-
-			if (!isEscaped && quotesLevel == 0 && currentChar == closeQuote)
-			{
-				if (currentOffset > blockStartOffset)
-				{
-					pushPreparsedToken(blockStartOffset, currentOffset, STRING_CONTENT);
-				}
-				break;
-			}
-			//noinspection Duplicates
-			if (isQuoteDiffers && !isEscaped)
-			{
-				if (currentChar == openQuote)
-				{
-					quotesLevel++;
-				}
-				else if (currentChar == closeQuote)
-				{
-					quotesLevel--;
-				}
-			}
-
-			isEscaped = (currentChar == '\\' && !isEscaped);
-			currentOffset++;
-		}
-
-		return currentOffset;
-	}
-
-	/**
-	 * Lexing empty spaces and comments between regex/tr blocks and adding tokens to the target list
-	 *
-	 * @param currentOffset start offset
-	 * @return new offset
-	 */
-	protected int lexWhiteSpacesAndComments(int currentOffset)
-	{
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
-		while (currentOffset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentOffset);
-
-			if (currentChar == '\n')
-			{
-				// fixme check heredocs ?
-				pushPreparsedToken(currentOffset++, currentOffset, TokenType.NEW_LINE_INDENT);
-			}
-			else if (Character.isWhitespace(currentChar))    // white spaces
-			{
-				int whiteSpaceStart = currentOffset;
-				while (currentOffset < bufferEnd && Character.isWhitespace(currentChar = buffer.charAt(currentOffset)) && currentChar != '\n')
-				{
-					currentOffset++;
-				}
-				pushPreparsedToken(whiteSpaceStart, currentOffset, TokenType.WHITE_SPACE);
-			}
-			else if (currentChar == '#')    // line comment
-			{
-				int commentStart = currentOffset;
-				while (currentOffset < bufferEnd && buffer.charAt(currentOffset) != '\n')
-				{
-					currentOffset++;
-				}
-				pushPreparsedToken(getCustomToken(commentStart, currentOffset, COMMENT_LINE));
-			}
-			else
-			{
-				break;
-			}
-		}
-
-		return currentOffset;
-	}
-
-	public int getRegexBlockEndOffset(int startOffset, char openingChar, boolean isSecondBlock)
-	{
-		char closingChar = getQuoteCloseChar(openingChar);
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
-
-		boolean isEscaped = false;
-		boolean isCharGroup = false;
-		boolean isQuotesDiffers = closingChar != openingChar;
-
-		int braceLevel = 0;
-		int parenLevel = 0;
-		int delimiterLevel = 0;
-
-		int currentOffset = startOffset;
-
-		while (true)
-		{
-			if (currentOffset >= bufferEnd)
-			{
-				break;
-			}
-
-			char currentChar = buffer.charAt(currentOffset);
-
-			if (delimiterLevel == 0 && braceLevel == 0 && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar)
-			{
-				return currentOffset;
-			}
-
-			if (!isSecondBlock)
-			{
-				if (!isEscaped && !isCharGroup && currentChar == '[')
-				{
-					Matcher m = POSIX_CHAR_CLASS_PATTERN.matcher(buffer.subSequence(currentOffset, bufferEnd));
-					if (m.lookingAt())
-					{
-						currentOffset += m.toMatchResult().group(0).length();
-						continue;
-					}
-					else
-					{
-						isCharGroup = true;
-					}
-				}
-				else if (!isEscaped && isCharGroup && currentChar == ']')
-				{
-					isCharGroup = false;
-				}
-			}
-
-			if (!isEscaped && isQuotesDiffers && !isCharGroup)
-			{
-				if (currentChar == openingChar)
-				{
-					delimiterLevel++;
-				}
-				else if (currentChar == closingChar && delimiterLevel > 0)
-				{
-					delimiterLevel--;
-				}
-			}
-
-			isEscaped = !isEscaped && closingChar != '\\' && currentChar == '\\';
-
-			currentOffset++;
-		}
-		return currentOffset;
-	}
-
-
-	/**
-	 * Parses regexp from the current position (opening delimiter) and preserves tokens in preparsedTokensList
-	 * REGEX_MODIFIERS = [msixpodualgcer]
-	 *
-	 * @return opening delimiter type
-	 */
-	public IElementType parseRegex(int currentOffset)
-	{
-		popState();
-		yybegin(AFTER_VALUE);
-		CharSequence buffer = getBuffer();
-		int bufferEnd = getBufferEnd();
-
-		char firstBlockOpeningQuote = buffer.charAt(currentOffset);
-		pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
-
-		// find block 1
-		int firstBlockEndOffset = getRegexBlockEndOffset(currentOffset, firstBlockOpeningQuote, false);
-		CustomToken firstBlockToken = null;
-		if (firstBlockEndOffset > currentOffset)
-		{
-			firstBlockToken = new CustomToken(currentOffset, firstBlockEndOffset, LP_REGEX);
-			pushPreparsedToken(firstBlockToken);
-		}
-
-		currentOffset = firstBlockEndOffset;
-
-		// find block 2
-		CustomToken secondBlockOpeningToken = null;
-		CustomToken secondBlockToken = null;
-
-		if (currentOffset < bufferEnd)
-		{
-			if (sectionsNumber == 1)
-			{
-				pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
-			}
-			else // should have second part
-			{
-				char secondBlockOpeningQuote = firstBlockOpeningQuote;
-				if (firstBlockOpeningQuote == getQuoteCloseChar(firstBlockOpeningQuote))
-				{
-					secondBlockOpeningToken = new CustomToken(currentOffset++, currentOffset, REGEX_QUOTE);
-					pushPreparsedToken(secondBlockOpeningToken);
-				}
-				else
-				{
-					pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
-					currentOffset = lexWhiteSpacesAndComments(currentOffset);
-
-					if (currentOffset < bufferEnd)
-					{
-						secondBlockOpeningQuote = buffer.charAt(currentOffset);
-						secondBlockOpeningToken = new CustomToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
-						pushPreparsedToken(secondBlockOpeningToken);
-					}
-				}
-
-				if (currentOffset < bufferEnd)
-				{
-					int secondBlockEndOffset = getRegexBlockEndOffset(currentOffset, secondBlockOpeningQuote, true);
-
-					if (secondBlockEndOffset > currentOffset)
-					{
-						secondBlockToken = new CustomToken(currentOffset, secondBlockEndOffset, LP_REGEX_REPLACEMENT);
-						pushPreparsedToken(secondBlockToken);
-						currentOffset = secondBlockEndOffset;
-					}
-				}
-
-				if (currentOffset < bufferEnd)
-				{
-					pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_CLOSE);
-				}
-			}
-		}
-
-		// check modifiers for x
-		assert regexCommand != null;
-		String allowedModifiers = ALLOWED_REGEXP_MODIFIERS.get(regexCommand);
-
-		while (currentOffset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentOffset);
-			if (!StringUtil.containsChar(allowedModifiers, currentChar))    // unknown modifier
-			{
-				break;
-			}
-			else if (currentChar == 'x')    // mark as extended
-			{
-				if (firstBlockToken != null)
-				{
-					firstBlockToken.setTokenType(LP_REGEX_X);
-				}
-			}
-			else if (currentChar == 'e')    // mark as evaluated
-			{
-				if (secondBlockOpeningToken != null)
-				{
-					IElementType secondBlockOpeningTokenType = secondBlockOpeningToken.getTokenType();
-					if (secondBlockOpeningTokenType == REGEX_QUOTE_OPEN || secondBlockOpeningTokenType == REGEX_QUOTE_OPEN_E)
-					{
-						secondBlockOpeningToken.setTokenType(REGEX_QUOTE_OPEN_E);
-					}
-					else if (secondBlockOpeningTokenType == REGEX_QUOTE || secondBlockOpeningTokenType == REGEX_QUOTE_E)
-					{
-						secondBlockOpeningToken.setTokenType(REGEX_QUOTE_E);
-					}
-					else
-					{
-						throw new RuntimeException("Bug, got: " + secondBlockOpeningTokenType);
-					}
-				}
-				if (secondBlockToken != null)
-				{
-					secondBlockToken.setTokenType(LP_CODE_BLOCK);
-				}
-			}
-
-			pushPreparsedToken(currentOffset++, currentOffset, REGEX_MODIFIER);
-		}
-
-		return getPreParsedToken();
-	}
 
 	/**
 	 * Transliteration processors tr y
 	 **/
 	public void processTransOpener()
 	{
-		allowSharpQuote = true;
 		pushState();
 		yybegin(TRANS_OPENER);
 	}
@@ -741,8 +322,6 @@ public class PerlLexer extends PerlLexerGenerated
 	 **/
 	public void processQuoteLikeStringOpener(IElementType tokenType)
 	{
-		allowSharpQuote = true;
-		isEscaped = false;
 		pushState();
 		if (tokenType == RESERVED_Q)
 		{
@@ -809,12 +388,7 @@ public class PerlLexer extends PerlLexerGenerated
 
 		if (!wasPreparsed && preparsedTokensList.isEmpty())
 		{
-
-			if (tokenType == TokenType.NEW_LINE_INDENT || tokenType == TokenType.WHITE_SPACE)
-			{
-				allowSharpQuote = false;
-			}
-			else if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
+			if (tokenType == RESERVED_QW || tokenType == RESERVED_Q || tokenType == RESERVED_QQ || tokenType == RESERVED_QX)
 			{
 				processQuoteLikeStringOpener(tokenType);
 			}

@@ -19,5 +19,48 @@ EOM
 my @arr = ( <<EOM, qw
 heredoc here
 EOM
-#comment
-(and string content));
+        #comment
+        (and string content));
+
+my @arr = ( <<EOM, m
+heredoc here
+EOM
+        #comment
+        (regexp match content));
+
+my @arr = ( <<EOM, qr
+heredoc here
+EOM
+        #comment
+        (regexp match content));
+
+my @arr = ( <<EOM, y
+heredoc here
+EOM
+        #comment
+        (match content)/replacement content/);
+
+my @arr = ( <<EOM, tr
+heredoc here
+EOM
+        #comment
+        (match content)/replacement content/);
+
+my @arr = ( <<EOM, s
+heredoc here
+EOM
+        #comment
+        (match content)/replacement content/);
+
+my @arr = ( <<EOM, s
+heredoc here
+EOM
+        #comment
+        (match content)/replacement content/x);
+
+my @arr = ( <<EOM, s
+heredoc here
+EOM
+        #comment
+        (match content)/say 'hi'/ex);
+
