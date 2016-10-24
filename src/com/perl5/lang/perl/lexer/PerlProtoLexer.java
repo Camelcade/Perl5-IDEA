@@ -20,20 +20,20 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.containers.IntStack;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by hurricup on 24.03.2016.
  */
 public abstract class PerlProtoLexer implements FlexLexer
 {
-	protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<CustomToken>();
-	protected final Stack<Integer> stateStack = new Stack<Integer>();
+	protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<>();
+	protected final IntStack stateStack = new IntStack();
 	protected final PerlTokenHistory myTokenHistory = new PerlTokenHistory();
 
 	public abstract void setTokenStart(int position);
@@ -50,11 +50,9 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract int yylength();
 
-	public abstract boolean isLastToken();
-
 	public IElementType advance() throws IOException
 	{
-		IElementType tokenType = null;
+		IElementType tokenType;
 
 		if (!preparsedTokensList.isEmpty())
 		{
@@ -172,17 +170,6 @@ public abstract class PerlProtoLexer implements FlexLexer
 		return true;
 	}
 
-	/**
-	 * Adds preparsed token to the beginning of the queue with consistency control
-	 *
-	 * @param start     token start
-	 * @param end       token end
-	 * @param tokenType token type
-	 */
-	protected void unshiftPreparsedToken(int start, int end, IElementType tokenType)
-	{
-		unshiftPreparsedToken(getCustomToken(start, end, tokenType));
-	}
 
 	/**
 	 * Helper for creating custom token object
@@ -244,85 +231,6 @@ public abstract class PerlProtoLexer implements FlexLexer
 		stateStack.clear();
 	}
 
-	protected Character getNextSignificantCharacter()
-	{
-		int nextPosition = getNextSignificantCharacterPosition(getTokenEnd());
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : null;
-	}
-
-	protected int getNextSignificantCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			char currentChar = buffer.charAt(currentPosition);
-			if (currentChar == '#')
-			{
-				while (currentPosition < bufferEnd)
-				{
-					if (buffer.charAt(currentPosition) == '\n')
-					{
-						break;
-					}
-					currentPosition++;
-				}
-			}
-			else if (!Character.isWhitespace(currentChar))
-			{
-				return currentPosition;
-			}
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	protected char getNextCharacter()
-	{
-		return getSafeCharacterAt(getTokenEnd());
-	}
-
-	protected char getSafeCharacterAt(int offset)
-	{
-		if (offset < getBufferEnd())
-		{
-			return getBuffer().charAt(offset);
-		}
-		return 0;
-	}
-
-	protected int getNextNonSpaceCharacterPosition(int position)
-	{
-		int currentPosition = position;
-		int bufferEnd = getBufferEnd();
-		CharSequence buffer = getBuffer();
-
-		while (currentPosition < bufferEnd)
-		{
-			if (!Character.isWhitespace(buffer.charAt(currentPosition)))
-			{
-				return currentPosition;
-			}
-
-			currentPosition++;
-		}
-		return -1;
-	}
-
-	protected char getNextNonSpaceCharacter()
-	{
-		return getNextNonSpaceCharacter(getTokenEnd());
-	}
-
-	protected char getNextNonSpaceCharacter(int nextPosition)
-	{
-		nextPosition = getNextNonSpaceCharacterPosition(nextPosition);
-		return nextPosition > -1 ? getBuffer().charAt(nextPosition) : 0;    // not sure it's a good idea
-	}
-
 	/**
 	 * Checks if buffer at current offset contains specific string
 	 *
@@ -347,7 +255,7 @@ public abstract class PerlProtoLexer implements FlexLexer
 	 */
 	protected void reLexHTMLBLock(int blockStart, int blockEnd, int lastNonspaceCharacterOffset, IElementType templateElementType)
 	{
-		List<CustomToken> tokens = new ArrayList<CustomToken>();
+		List<CustomToken> tokens = new ArrayList<>();
 		int myOffset = lexSpacesInRange(blockStart, blockEnd, tokens);
 
 		// real template
