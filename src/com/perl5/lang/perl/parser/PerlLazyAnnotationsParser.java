@@ -29,6 +29,7 @@ public class PerlLazyAnnotationsParser extends PerlParserImpl
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		return annotation(b, l);
+		annotation(b, l);
+		return true;
 	}
 }

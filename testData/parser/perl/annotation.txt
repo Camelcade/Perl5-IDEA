@@ -54,3 +54,5 @@ Perl5
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiPerlAnnotationNoinspectionImpl(PerlElementType.ANNOTATION_NOINSPECTION)
       PsiElement(PerlTokenType.#@noinspection)('#@noinspection')
+  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+    PsiComment(PerlTokenType.COMMENT_LINE)('#@')
