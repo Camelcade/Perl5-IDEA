@@ -16,143 +16,19 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LightPsiParser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlLazyAnnotationsParser implements PsiParser, LightPsiParser, PerlElementTypes
+public class PerlLazyAnnotationsParser extends PerlParserImpl
 {
 	public static final PsiParser INSTANCE = new PerlLazyAnnotationsParser();
 
-	private static boolean consumeIdentifierAsString(PsiBuilder b)
+	@Override
+	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		if (b.getTokenType() == IDENTIFIER)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(STRING_CONTENT);
-			return true;
-		}
-		return false;
+		return annotation(b, l);
 	}
-
-	@NotNull
-	public ASTNode parse(@NotNull IElementType root_, @NotNull PsiBuilder builder_)
-	{
-		parseLight(root_, builder_);
-		return builder_.getTreeBuilt();
-	}
-
-	public void parseLight(IElementType root_, PsiBuilder b)
-	{
-		IElementType tokenType = b.getTokenType();
-		PsiBuilder.Marker marker_ = b.mark();
-
-		boolean skipIdentifier = true;
-
-		if (tokenType == ANNOTATION_PREFIX)
-		{
-			PsiBuilder.Marker annotationMarker = b.mark();
-			b.advanceLexer();
-			tokenType = b.getTokenType();
-
-			if (tokenType == ANNOTATION_ABSTRACT_KEY)
-			{
-				b.advanceLexer();
-				annotationMarker.done(ANNOTATION_ABSTRACT);
-			}
-			else if (tokenType == ANNOTATION_DEPRECATED_KEY)
-			{
-				b.advanceLexer();
-				annotationMarker.done(ANNOTATION_DEPRECATED);
-
-			}
-			else if (tokenType == ANNOTATION_METHOD_KEY)
-			{
-				b.advanceLexer();
-				annotationMarker.done(ANNOTATION_METHOD);
-
-			}
-			else if (tokenType == ANNOTATION_OVERRIDE_KEY)
-			{
-				b.advanceLexer();
-				annotationMarker.done(ANNOTATION_OVERRIDE);
-
-			}
-			else if (tokenType == ANNOTATION_RETURNS_KEY)
-			{
-				b.advanceLexer();
-				tokenType = b.getTokenType();
-
-				if (tokenType == IDENTIFIER)
-				{
-					b.advanceLexer();
-				}
-				else
-				{
-					b.mark().error("Package expected");
-				}
-
-				annotationMarker.done(ANNOTATION_RETURNS);
-
-			}
-			else if (tokenType == ANNOTATION_INJECT_KEY)
-			{
-				b.advanceLexer();
-
-				if (!consumeIdentifierAsString(b))
-				{
-					b.mark().error("Language marker expected");
-				}
-
-				annotationMarker.done(ANNOTATION_INJECT);
-
-			}
-			else if (tokenType == ANNOTATION_NOINSPECTION_KEY)
-			{
-				b.advanceLexer();
-
-				if (!consumeIdentifierAsString(b))
-				{
-					b.mark().error("Inspection name expected");
-				}
-				annotationMarker.done(ANNOTATION_NOINSPECTION);
-			}
-			else
-			{
-				skipIdentifier = false;
-				annotationMarker.drop();
-			}
-		}
-
-		PsiBuilder.Marker commentMarker = null;
-
-		if (!skipIdentifier && b.getTokenType() == IDENTIFIER)
-		{
-			b.advanceLexer();
-		}
-
-		while (!b.eof())
-		{
-			if (commentMarker == null)
-			{
-				commentMarker = b.mark();
-			}
-			b.advanceLexer();
-		}
-		if (commentMarker != null)
-		{
-			commentMarker.collapse(COMMENT_LINE);
-		}
-
-		marker_.done(root_);
-	}
-
 }

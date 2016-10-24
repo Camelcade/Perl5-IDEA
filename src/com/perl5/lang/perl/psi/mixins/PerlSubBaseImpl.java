@@ -23,10 +23,6 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationAbstractImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationMethodImpl;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationOverrideImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlReturnType;
@@ -173,19 +169,19 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 
 		for (PerlAnnotation annotation : getAnnotationList())
 		{
-			if (annotation instanceof PerlAnnotationAbstractImpl)
+			if (annotation instanceof PsiPerlAnnotationAbstract)
 			{
 				myAnnotations.setIsAbstract(true);
 			}
-			else if (annotation instanceof PerlAnnotationDeprecatedImpl)
+			else if (annotation instanceof PsiPerlAnnotationDeprecated)
 			{
 				myAnnotations.setIsDeprecated(true);
 			}
-			else if (annotation instanceof PerlAnnotationMethodImpl)
+			else if (annotation instanceof PsiPerlAnnotationMethod)
 			{
 				myAnnotations.setIsMethod(true);
 			}
-			else if (annotation instanceof PerlAnnotationOverrideImpl)
+			else if (annotation instanceof PsiPerlAnnotationOverride)
 			{
 				myAnnotations.setIsOverride(true);
 			}

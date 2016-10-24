@@ -35,7 +35,6 @@ import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -249,7 +248,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 		{
 			return stub.isDeprecated();
 		}
-		return PerlPsiUtil.getAnnotationByClass(this, PerlAnnotationDeprecatedImpl.class) != null;
+		return PerlPsiUtil.getAnnotationByClass(this, PsiPerlAnnotationDeprecated.class) != null;
 	}
 
 	@NotNull

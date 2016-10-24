@@ -31,7 +31,6 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -169,7 +168,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		{
 			return stub.isDeprecated();
 		}
-		return PerlPsiUtil.getAnyAnnotationByClass(this, PerlAnnotationDeprecatedImpl.class) != null;
+		return PerlPsiUtil.getAnyAnnotationByClass(this, PsiPerlAnnotationDeprecated.class) != null;
 	}
 
 	@NotNull

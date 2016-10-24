@@ -195,7 +195,8 @@ public class PerlLexer extends PerlLexerGenerated
 					currentState != STRING_QQ &&
 					currentState != STRING_QX &&
 					currentState != STRING_LIST &&
-					currentState != ANNOTATION
+					currentState != ANNOTATION &&
+					currentState != ANNOTATION_KEY
 					)
 			{
 				// comment may end on newline or ?>

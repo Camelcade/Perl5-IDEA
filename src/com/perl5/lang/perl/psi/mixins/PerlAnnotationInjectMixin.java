@@ -14,29 +14,30 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlAnnotationReturns;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlAnnotationInject;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 20.04.2016.
+ * Created by hurricup on 24.10.2016.
  */
-public class PerlAnnotationReturnsImpl extends PerlAnnotationImpl implements PerlAnnotationReturns
+public abstract class PerlAnnotationInjectMixin extends PerlCompositeElementImpl implements PerlAnnotationInject
 {
-	public PerlAnnotationReturnsImpl(@NotNull ASTNode node)
+	public PerlAnnotationInjectMixin(@NotNull ASTNode node)
 	{
 		super(node);
 	}
 
 	@Nullable
 	@Override
-	public PerlNamespaceElement getNamespaceElement()
+	public String getLanguageMarker()
 	{
-		return findChildByClass(PerlNamespaceElement.class);
+		PsiPerlStringBare stringBare = getStringBare();
+		return stringBare == null ? null : stringBare.getText();
 	}
-
 }

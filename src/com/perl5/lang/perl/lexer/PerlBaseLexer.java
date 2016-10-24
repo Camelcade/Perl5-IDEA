@@ -316,6 +316,16 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		{
 			return getNonLabelToken();
 		}
+		if (realLexicalState == PerlLexer.ANNOTATION_FALLBACK)
+		{
+			yybegin(PerlLexer.YYINITIAL);
+			return COMMENT_LINE;
+		}
+		if (realLexicalState == PerlLexer.ANNOTATION_KEY)
+		{
+			yybegin(PerlLexer.YYINITIAL);
+			return COMMENT_LINE;
+		}
 		return null;
 	}
 }

@@ -112,7 +112,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 	);
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN = VARIABLE_NAME_PATTERN.inside(true, psiElement(PsiPerlVariableDeclarationLocal.class));
 
-	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(IDENTIFIER).afterLeaf(psiElement(ANNOTATION_PREFIX));
+	PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(ANNOTATION_UNKNOWN_KEY);
 
 	PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
 			VARIABLE_NAME_PATTERN

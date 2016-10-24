@@ -175,8 +175,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %%
 
 /////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
-<ANNOTATION_FALLBACK> [^]+	{return COMMENT_LINE;}
-<ANNOTATION> "#@"			{yybegin(ANNOTATION_KEY);return ANNOTATION_PREFIX;}
+<ANNOTATION_FALLBACK> [^]+	{yybegin(YYINITIAL);return COMMENT_LINE;}
+<ANNOTATION> "#@"			{yybegin(ANNOTATION_KEY);}
 
 <ANNOTATION_STRING,ANNOTATION_PACKAGE>
 {
@@ -201,7 +201,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{IDENTIFIER}	{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_UNKNOWN_KEY;}
 }
 
-<ANNOTATION_PACKAGE,ANNOTATION_KEY,ANNOTATION_STRING>
+<ANNOTATION,ANNOTATION_PACKAGE,ANNOTATION_KEY,ANNOTATION_STRING>
 {
 	[^]				{yybegin(ANNOTATION_FALLBACK);}
 }

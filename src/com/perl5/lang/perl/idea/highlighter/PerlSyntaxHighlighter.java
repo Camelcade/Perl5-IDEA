@@ -206,8 +206,8 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(COMMENT_BLOCK, new TextAttributesKey[]{PERL_COMMENT});
 
 		ATTRIBUTES_MAP.put(ATTRIBUTE_IDENTIFIER, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
-		ATTRIBUTES_MAP.put(ANNOTATION_PREFIX, new TextAttributesKey[]{PERL_ANNOTATION});
 		ATTRIBUTES_MAP.put(ANNOTATION_UNKNOWN_KEY, new TextAttributesKey[]{PERL_COMMENT});
+		ATTRIBUTES_MAP.put(ANNOTATION_NOINSPECTION_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
 	}
 
 
@@ -244,7 +244,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		}
 		else if (ANNOTATIONS_KEYS.contains(tokenType))
 		{
-			return ATTRIBUTES_MAP.get(ANNOTATION_PREFIX);
+			return ATTRIBUTES_MAP.get(ANNOTATION_NOINSPECTION_KEY);
 		}
 		else if (PerlTokenSets.OPERATORS_TOKENSET.contains(tokenType))
 		{

@@ -2262,6 +2262,92 @@ public class PerlElementTypeFactory
 			};
 		}
 
+		if (name.equals("ANNOTATION_ABSTRACT"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationAbstractImpl(node);
+				}
+			};
+		}
+		if (name.equals("ANNOTATION_DEPRECATED"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationDeprecatedImpl(node);
+				}
+			};
+		}
+		if (name.equals("ANNOTATION_METHOD"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationMethodImpl(node);
+				}
+			};
+		}
+		if (name.equals("ANNOTATION_OVERRIDE"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationOverrideImpl(node);
+				}
+			};
+		}
+		if (name.equals("ANNOTATION_RETURNS"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationReturnsImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("ANNOTATION_INJECT"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationInjectImpl(node);
+				}
+			};
+		}
+		if (name.equals("ANNOTATION_NOINSPECTION"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationNoinspectionImpl(node);
+				}
+			};
+		}
+
 		throw new RuntimeException("Unknown token:" + name);
 	}
 }

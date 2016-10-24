@@ -311,6 +311,15 @@ limitations under the License.
 
     HANDLE='HANDLE'
     BLOCK_NAME='BLOCK_NAME'
+
+    ANNOTATION_DEPRECATED_KEY='#@deprecated'
+    ANNOTATION_RETURNS_KEY='#@returns'
+    ANNOTATION_OVERRIDE_KEY='#@override'
+    ANNOTATION_METHOD_KEY='#@method'
+    ANNOTATION_ABSTRACT_KEY='#@abstract'
+    ANNOTATION_INJECT_KEY='#@inject'
+    ANNOTATION_NOINSPECTION_KEY='#@noinspection'
+    ANNOTATION_UNKNOWN_KEY='#@unknown'
   ]
 
     extends(".+expr")=expr
@@ -446,6 +455,9 @@ limitations under the License.
     implements("method")="com.perl5.lang.perl.psi.PerlMethod";
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
+
+    implements("annotation_.*")="com.perl5.lang.perl.psi.PerlAnnotation"
+    mixin("annotation_inject")="com.perl5.lang.perl.psi.mixins.PerlAnnotationInjectMixin"
  }
 
 ///////////////////////////// main code structure //////////////////////////////////////////////////////////////////////
@@ -1072,3 +1084,26 @@ func_signature_content ::= [variable_parenthesised_declaration_contents] {recove
 private recover_signature_content ::= !(')'|'{')
 
 /********************************************** Extensions for Moose **************************************************/
+
+/******************************************* Annotations **************************************************************/
+private annotation ::=
+	annotation_abstract
+	| annotation_deprecated
+	| annotation_method
+	| annotation_override
+	| annotation_returns
+	| annotation_inject
+	| annotation_noinspection
+	| '#@unknown'
+
+annotation_abstract ::= '#@abstract' {pin=1}
+annotation_deprecated ::= '#@deprecated' {pin=1}
+annotation_method ::=  '#@method' {pin=1}
+annotation_override ::=  '#@override' {pin=1}
+annotation_returns ::=  '#@returns' any_package {pin=1}
+annotation_inject ::=  '#@inject' string_bare {pin=1}
+annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
+
+
+
+/******************************************* End of annotations *******************************************************/

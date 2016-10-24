@@ -21,14 +21,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 15.10.2016.
  */
 public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes
 {
-	public PerlHighlightingLexerAdapter(@NotNull Project project)
+	public PerlHighlightingLexerAdapter(@Nullable Project project)
 	{
 		super(new PerlMergingLexerAdapter(project, false, true));
 		registerSelfStoppingLayer(
