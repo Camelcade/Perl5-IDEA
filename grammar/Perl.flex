@@ -36,15 +36,6 @@ import org.jetbrains.annotations.NotNull;
 %type IElementType
 
 
-%{
-
-%}
-
-%eofval{
-	return getEofToken();
-%eofval}
-
-
 /*
 // Char classes
 */
@@ -193,7 +184,9 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <REGEX_OPENER,REGEX_OPENER_NO_SHARP> [^] {return captureRegex();}
 
 /////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
-<ANNOTATION_FALLBACK> [^]+	{yybegin(YYINITIAL);return COMMENT_LINE;}
+<ANNOTATION_FALLBACK>{
+	[^]+			{yybegin(YYINITIAL);return COMMENT_LINE;}
+}
 <ANNOTATION> "#@"			{yybegin(ANNOTATION_KEY);}
 
 <ANNOTATION_STRING,ANNOTATION_PACKAGE>
@@ -217,11 +210,12 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"inject"		{yybegin(ANNOTATION_STRING);return ANNOTATION_INJECT_KEY;}
 	"noinspection"	{yybegin(ANNOTATION_STRING);return ANNOTATION_NOINSPECTION_KEY;}
 	{IDENTIFIER}	{yybegin(ANNOTATION_FALLBACK);return ANNOTATION_UNKNOWN_KEY;}
+	<<EOF>>			{yybegin(YYINITIAL);return COMMENT_LINE;}
 }
 
 <ANNOTATION,ANNOTATION_PACKAGE,ANNOTATION_KEY,ANNOTATION_STRING>
 {
-	[^]				{yybegin(ANNOTATION_FALLBACK);}
+	[^]				{yypushback(1);yybegin(ANNOTATION_FALLBACK);}
 }
 /////////////////////////////////// end of annotations /////////////////////////////////////////////////////////////////
 
@@ -428,6 +422,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <LEX_LABEL>{
 	{SPACES_OR_COMMENTS}":"[^\:]	{return getLabelToken();}
 	[^]								{return getNonLabelToken();}
+	<<EOF>>							{return getNonLabelToken();}
 }
 
 ////////////////////////// COMMON PART /////////////////////////////////////////////////////////////////////////////////

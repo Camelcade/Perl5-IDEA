@@ -436,26 +436,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return tokenType;
 	}
 
-	protected IElementType getEofToken()
-	{
-		int realLexicalState = getRealLexicalState();
-		if (realLexicalState == LEX_LABEL)
-		{
-			return getNonLabelToken();
-		}
-		if (realLexicalState == ANNOTATION_FALLBACK)
-		{
-			yybegin(YYINITIAL);
-			return COMMENT_LINE;
-		}
-		if (realLexicalState == ANNOTATION_KEY)
-		{
-			yybegin(YYINITIAL);
-			return COMMENT_LINE;
-		}
-		return null;
-	}
-
 	private List<IElementType> getStringTokens()
 	{
 		int currentState = getRealLexicalState();
