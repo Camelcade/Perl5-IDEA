@@ -12,8 +12,6 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
  * Created by bcardoso on 7/28/16.
  */
@@ -46,8 +44,8 @@ public class ForeachToForConverter extends PsiElementBaseIntentionAction
 		PsiPerlStatement assignStatement = createPsiOfTypeFromSyntax(project, assignStatementStr, PsiPerlStatement.class);
 
 		// Define where to insert the new statement
-		List<PsiPerlStatement> statementList = forBlock.getStatementList();
-		PsiElement anchorPoint = statementList.isEmpty() ? forBlock.getLastChild() : statementList.get(0);
+		PsiPerlStatement[] statementList = PsiTreeUtil.getChildrenOfType(forBlock, PsiPerlStatement.class);
+		PsiElement anchorPoint = statementList == null ? forBlock.getLastChild() : statementList[0];
 		forBlock.addBefore(assignStatement, anchorPoint);
 
 		String indexedForSyntax = String.format("for (my $idx = 0; $idx < scalar(@%s); $idx++) %s",

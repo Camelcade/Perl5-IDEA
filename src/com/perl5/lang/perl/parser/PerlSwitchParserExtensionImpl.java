@@ -56,7 +56,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
 		if (PerlParserUtil.consumeToken(b, RESERVED_SWITCH))
 		{
 			boolean r = parseSwitchCondition(b, l);
-			r = r && PerlParserImpl.block(b, l);
+			r = r && PerlParserImpl.normal_block(b, l);
 			return r;
 		}
 		return false;
@@ -119,7 +119,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
 		if (PerlParserUtil.consumeToken(b, RESERVED_CASE))
 		{
 			boolean r = parseCaseCondition(b, l);
-			r = r && PerlParserImpl.block(b, l);
+			r = r && PerlParserImpl.normal_block(b, l);
 			return r;
 		}
 		return false;
@@ -130,7 +130,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
 		PerlBuilder.Marker m = b.mark();
 
 		boolean r = parseCaseConditionParenthesised(b, l);
-		r = r || PerlParserImpl.block(b, l);
+		r = r || PerlParserImpl.normal_block(b, l);
 		r = r || parseCaseConditionSimple(b, l);
 
 		if (r)

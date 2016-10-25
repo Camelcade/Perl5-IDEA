@@ -501,13 +501,15 @@ private statement_item ::=
 // invoked from PerlUseVarsDeclarationsParser
 private use_vars_declarations ::= {variable_declaration_wrapper|glob_variable|code_variable}*
 
-namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
+namespace_definition ::= namespace_definition_name (normal_block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
+private real_namespace_content ::= {!'package' file_item} *  {extends=normal_block recoverWhile=recover_statement} //
 
-private parse_block ::= LP_CODE_BLOCK | block
-block ::= '{' block_content '}' {pin=1} // !-> pin disabled for dereference of anon hash; probably this slows us down
+private parse_block ::= LP_CODE_BLOCK | normal_block
+private normal_block ::= <<block braced_block_content>> // !-> pin disabled for dereference of anon hash; probably this slows us down
+meta block ::= <<x1>>
+private braced_block_content ::= '{' block_content '}' {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= 'nyi'
@@ -951,11 +953,11 @@ left array_slice ::= array_index
 left hash_slice ::= hash_index
 
 array_cast_expr ::= '$@' array_cast_target
-private array_cast_target ::= {array_braced_cast_target | scalar_primitive}
+private array_cast_target ::= {<<block array_braced_cast_target>> | scalar_primitive}
 private array_braced_cast_target ::= '@{' block_content '@}' {pin=1}
 
 hash_cast_expr ::= '$%' hash_cast_target
-private hash_cast_target ::= {hash_braced_cast_target | scalar_primitive}
+private hash_cast_target ::= {<<block hash_braced_cast_target >> | scalar_primitive}
 private hash_braced_cast_target ::= '%{' block_content '%}' {pin=1}
 
 private scalar_primitive ::=
@@ -966,11 +968,8 @@ private scalar_primitive ::=
 // |'$}'|'@}'|'%}'|'*}'|'&}'
 scalar_cast_expr ::= '$$' scalar_cast_target
 scalar_index_cast_expr ::= '$#' scalar_cast_target
-private scalar_cast_target ::= {scalar_braced_cast_target | scalar_primitive}
+private scalar_cast_target ::= {<<block scalar_braced_cast_target>> | scalar_primitive}
 private scalar_braced_cast_target ::= '${' block_content '$}' {pin=1}
-
-// fixme need optimization
-private cast_target ::= scalar_primitive | parse_block
 
 private scalar_or_element ::= scalar_primitive [array_element|hash_element]
 
@@ -983,7 +982,7 @@ private glob_primitive ::=
     | glob_cast_expr
 
 glob_cast_expr ::= '$*' glob_cast_target
-private glob_cast_target ::= {glob_braced_cast_target | scalar_primitive}
+private glob_cast_target ::= {<<block glob_braced_cast_target>> | scalar_primitive}
 private glob_braced_cast_target ::= '*{' block_content '*}' {pin=1}
 
 left glob_slot ::= hash_index
@@ -1031,7 +1030,7 @@ private code ::=
     | code_cast_expr
 
 code_cast_expr ::= '$&' code_cast_target
-private code_cast_target ::= {code_braced_cast_target | scalar_primitive}
+private code_cast_target ::= {<<block code_braced_cast_target>> | scalar_primitive}
 private code_braced_cast_target ::= '&{' block_content '&}' {pin=1}
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////

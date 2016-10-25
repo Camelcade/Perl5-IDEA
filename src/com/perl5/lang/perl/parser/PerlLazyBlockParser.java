@@ -29,6 +29,6 @@ public class PerlLazyBlockParser extends PerlParserImpl
 	@Override
 	public boolean parseFileContents(PsiBuilder b, int l)
 	{
-		return PerlParserImpl.block(b, l) || super.parseFileContents(b, l);
+		return PerlParserImpl.normal_block(b, l) || super.parseFileContents(b, l);
 	}
 }
