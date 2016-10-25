@@ -145,7 +145,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 
 	protected void mergeCode() throws IOException
 	{
-		if (myTokenType != LEFT_BRACE_CODE)
+		if (myTokenType != LEFT_BRACE_CODE_START)
 		{
 			return;
 		}
@@ -163,7 +163,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 			{
 				break;
 			}
-			else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE)
+			else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE_START)
 			{
 				bracesDepth++;
 			}

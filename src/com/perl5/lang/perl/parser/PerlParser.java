@@ -28,6 +28,11 @@ public interface PerlParser extends PerlElementTypes
 	TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
 			RESERVED_PACKAGE,
 			RIGHT_BRACE,
+			RIGHT_BRACE_SCALAR,
+			RIGHT_BRACE_ARRAY,
+			RIGHT_BRACE_HASH,
+			RIGHT_BRACE_GLOB,
+			RIGHT_BRACE_CODE,
 			REGEX_QUOTE_CLOSE,
 			SEMICOLON
 	);
@@ -117,6 +122,11 @@ public interface PerlParser extends PerlElementTypes
 	TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
 			RIGHT_BRACE,
 			REGEX_QUOTE_CLOSE,
+			RIGHT_BRACE_SCALAR,
+			RIGHT_BRACE_HASH,
+			RIGHT_BRACE_ARRAY,
+			RIGHT_BRACE_GLOB,
+			RIGHT_BRACE_CODE,
 			TAG_END,
 			TAG_DATA
 	);

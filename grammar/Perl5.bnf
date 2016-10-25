@@ -292,7 +292,7 @@ limitations under the License.
     RIGHT_PAREN=')'
 
 	// abstract token to make code blocks
-    LEFT_BRACE_CODE='code{'
+    LEFT_BRACE_CODE_START='code{'
 
     LEFT_BRACE='{'
     RIGHT_BRACE='}'
@@ -950,18 +950,24 @@ private array_or_slice ::= array_primitive [array_slice|hash_slice]
 left array_slice ::= array_index
 left hash_slice ::= hash_index
 
-array_cast_expr ::= '$@' cast_target
+array_cast_expr ::= '$@' array_cast_target
+private array_cast_target ::= {array_braced_cast_target | scalar_primitive}
+private array_braced_cast_target ::= '@{' block_content '@}' {pin=1}
 
-hash_cast_expr ::= '$%' cast_target
+hash_cast_expr ::= '$%' hash_cast_target
+private hash_cast_target ::= {hash_braced_cast_target | scalar_primitive}
+private hash_braced_cast_target ::= '%{' block_content '%}' {pin=1}
 
 private scalar_primitive ::=
     scalar_variable
     | scalar_cast_expr
     | undef_expr  // shouldn't it be in term ? (check declarations)
 
-scalar_cast_expr ::= '$$' cast_target
-
-scalar_index_cast_expr ::= '$#' cast_target
+// |'$}'|'@}'|'%}'|'*}'|'&}'
+scalar_cast_expr ::= '$$' scalar_cast_target
+scalar_index_cast_expr ::= '$#' scalar_cast_target
+private scalar_cast_target ::= {scalar_braced_cast_target | scalar_primitive}
+private scalar_braced_cast_target ::= '${' block_content '$}' {pin=1}
 
 // fixme need optimization
 private cast_target ::= scalar_primitive | parse_block
@@ -976,7 +982,9 @@ private glob_primitive ::=
     glob_variable
     | glob_cast_expr
 
-glob_cast_expr ::= '$*' cast_target
+glob_cast_expr ::= '$*' glob_cast_target
+private glob_cast_target ::= {glob_braced_cast_target | scalar_primitive}
+private glob_braced_cast_target ::= '*{' block_content '*}' {pin=1}
 
 left glob_slot ::= hash_index
 
@@ -1022,7 +1030,9 @@ private code ::=
     | code_variable
     | code_cast_expr
 
-code_cast_expr ::= '$&' cast_target
+code_cast_expr ::= '$&' code_cast_target
+private code_cast_target ::= {code_braced_cast_target | scalar_primitive}
+private code_braced_cast_target ::= '&{' block_content '&}' {pin=1}
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -1068,12 +1078,12 @@ heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 ///////////////////////////////////// variables ////////////////////////////////////////////////////////////////////////
 private lexical_variable ::= scalar_variable | array_variable | hash_variable
 
-array_index_variable ::= '$#' {SCALAR_NAME | '{' SCALAR_NAME '}'}
-scalar_variable ::= '$$' {SCALAR_NAME | '{' SCALAR_NAME '}'}
-array_variable ::= '$@' {ARRAY_NAME | '{' ARRAY_NAME '}'}
-hash_variable ::= '$%' {HASH_NAME | '{' HASH_NAME '}'}
-code_variable ::= '$&' {CODE_NAME | '{' CODE_NAME '}'}
-glob_variable ::= '$*' {GLOB_NAME | '{' GLOB_NAME '}'}
+array_index_variable ::= '$#' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
+scalar_variable ::= '$$' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
+array_variable ::= '$@' {ARRAY_NAME | '@{' ARRAY_NAME '@}'}
+hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'}
+code_variable ::= '$&' {CODE_NAME | '&{' CODE_NAME '&}'}
+glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'}
 
 private comma ::= ',' | '=>'
 private normal_method ::= <<method method_tokens>>

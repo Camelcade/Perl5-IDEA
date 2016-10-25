@@ -189,8 +189,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	protected IElementType startBracedVariable()
 	{
-		myBracesStack.push(0);
-		return getLeftBrace(LEFT_BRACE, VARIABLE_BRACED);
+		Trinity<IElementType, IElementType, IElementType> sigilTokens = SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
+		assert sigilTokens != null;
+		myBracesStack.push(0, sigilTokens.third);
+		return getLeftBrace(sigilTokens.first, VARIABLE_BRACED);
 	}
 
 	protected IElementType startBracedBlock(int afterState)
@@ -203,7 +205,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	protected IElementType getLeftBraceCode(int newState)
 	{
-		return getLeftBrace(LEFT_BRACE_CODE, newState);
+		return getLeftBrace(LEFT_BRACE_CODE_START, newState);
 	}
 
 	protected IElementType getLeftBrace(int newState)
@@ -228,9 +230,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		{
 			if (myBracesStack.decLast() == 0)
 			{
+				Object userData = myBracesStack.peekAdditional();
 				myBracesStack.pop();
 				popState();
-				return RIGHT_BRACE;
+				return userData instanceof IElementType ? (IElementType) userData : RIGHT_BRACE;
 			}
 		}
 		yybegin(afterState);
