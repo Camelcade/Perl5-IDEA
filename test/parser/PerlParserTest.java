@@ -36,6 +36,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testVarsAndCasts()
+	{
+		doTest();
+	}
+
 	public void testSubPrototypes()
 	{
 		doTest();
