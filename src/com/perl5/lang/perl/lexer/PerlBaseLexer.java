@@ -399,12 +399,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		setNoSharpState();
 		if (myFormatWaiting)
 		{
-			IElementType tokenType = captureFormat();
 			myFormatWaiting = false;
-			if (tokenType != null)    // got something
-			{
-				return tokenType;
-			}
+			yybegin(CAPTURE_FORMAT);
 		}
 		else if (!heredocQueue.isEmpty())
 		{
@@ -809,7 +805,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return tokenType;
 	}
 
-	// guess if this is a OPERATOR_DIV or regex opener
 	public IElementType captureImplicitRegex()
 	{
 		regexCommand = RESERVED_M;
@@ -1026,64 +1021,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				if (linePos > tokenStart)
 				{
 					pushPreparsedToken(tokenStart, linePos, tokenType);
-				}
-				return getPreParsedToken();
-			}
-			currentPosition = linePos;
-		}
-	}
-
-	/**
-	 * Captures format; fixme refactor with captureHeredoc got common parts
-	 *
-	 * @return Heredoc token type
-	 */
-	protected IElementType captureFormat()
-	{
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenStart();
-		pushPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
-		int bufferEnd = getBufferEnd();
-
-		int currentPosition = tokenStart;
-		int linePos = currentPosition;
-
-		while (true)
-		{
-			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
-			{
-				linePos++;
-			}
-			int lineContentsEnd = linePos;
-
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
-			{
-				linePos++;
-			}
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
-			{
-				linePos++;
-			}
-
-			// reached the end of format and got end marker
-			if (lineContentsEnd == currentPosition + 1 && buffer.charAt(currentPosition) == '.')
-			{
-				// non-empty heredoc and got the end
-				if (currentPosition > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, currentPosition, FORMAT);
-				}
-				pushPreparsedToken(currentPosition, lineContentsEnd, FORMAT_TERMINATOR);
-
-				return getPreParsedToken();
-			}
-			// reached the end of file
-			else if (linePos == bufferEnd)
-			{
-				// non-empty format and got the end of file
-				if (currentPosition > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, currentPosition, FORMAT);
 				}
 				return getPreParsedToken();
 			}

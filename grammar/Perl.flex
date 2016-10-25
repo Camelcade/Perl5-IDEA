@@ -157,11 +157,21 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_POSSIBLE_SIGIL
 %state AFTER_ASSIGN
 
+%xstate CAPTURE_FORMAT
+
 %xstate LEX_LABEL
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
 
 %%
+/////////////////////////////////// format capture /// /////////////////////////////////////////////////////////////////
+<CAPTURE_FORMAT>{
+	"." 		{yybegin(YYINITIAL);return FORMAT_TERMINATOR;}
+	.+			{return FORMAT;}
+	\R			{return FORMAT;}
+}
+/////////////////////////////////// end of format capture //////////////////////////////////////////////////////////////
+
 /////////////////////////////////// quote like openers /////////////////////////////////////////////////////////////////
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, TRANS_OPENER, REGEX_OPENER>{
