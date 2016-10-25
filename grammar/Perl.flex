@@ -158,13 +158,28 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_ASSIGN
 
 %xstate CAPTURE_FORMAT
+%xstate CAPTURE_HEREDOC, CAPTURE_HEREDOC_NEWLINE
 
 %xstate LEX_LABEL
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
 
 %%
-/////////////////////////////////// format capture /// /////////////////////////////////////////////////////////////////
+/////////////////////////////////// heredoc capture ////////////////////////////////////////////////////////////////////
+
+<CAPTURE_HEREDOC>{
+	.+		{yybegin(CAPTURE_HEREDOC_NEWLINE);return processHeredocLine();}
+	\R		{return processHeredocNewLine();}
+}
+
+<CAPTURE_HEREDOC_NEWLINE>{
+	\R		{yybegin(CAPTURE_HEREDOC);return heredocQueue.peekFirst().getTargetElement();}
+}
+
+////////////////////////////////// end of heredoc capture //////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////// format capture /////////////////////////////////////////////////////////////////////
 <CAPTURE_FORMAT>{
 	"." 		{yybegin(YYINITIAL);return FORMAT_TERMINATOR;}
 	.+			{return FORMAT;}
@@ -234,33 +249,33 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{DQ_STRING}	{
 				yybegin(AFTER_VALUE);
 				pushState();
-				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext().subSequence(1,yylength()-1)));
+				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QQ, yytext().subSequence(1,yylength()-1)));
 				yybegin(QUOTE_LIKE_OPENER_QQ);
 				return captureString();
 			}
 	{SQ_STRING} {
 				yybegin(AFTER_VALUE);
 				pushState();
-				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, yytext().subSequence(1,yylength()-1)));
+				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC, yytext().subSequence(1,yylength()-1)));
 				yybegin(QUOTE_LIKE_OPENER_Q);
 				return captureString();
 			}
 	{XQ_STRING} {
 				yybegin(AFTER_VALUE);
 				pushState();
-				heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QX, yytext().subSequence(1,yylength()-1)));
+				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QX, yytext().subSequence(1,yylength()-1)));
 				yybegin(QUOTE_LIKE_OPENER_QX);
 				return captureString();
 			}
 }
 
 <BACKREF_HEREDOC_OPENER>{
-	{UNQUOTED_HEREDOC_MARKER} {	yybegin(AFTER_VALUE);heredocQueue.push(new PerlHeredocQueueElement(HEREDOC, yytext()));return STRING_CONTENT;}
+	{UNQUOTED_HEREDOC_MARKER} {	yybegin(AFTER_VALUE);heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC, yytext()));return STRING_CONTENT;}
 }
 
 <BARE_HEREDOC_OPENER>{
 	"\\" 					  {yybegin(BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;}
-	{UNQUOTED_HEREDOC_MARKER} {yybegin(AFTER_VALUE); heredocQueue.push(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
+	{UNQUOTED_HEREDOC_MARKER} {yybegin(AFTER_VALUE); heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
 }
 
 <STRING_QQ,STRING_QX,MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>

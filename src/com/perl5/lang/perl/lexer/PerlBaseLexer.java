@@ -20,6 +20,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.containers.Queue;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
@@ -30,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,7 +98,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	}
 
 	// last captured heredoc marker
-	protected final Stack<PerlHeredocQueueElement> heredocQueue = new Stack<>();
+	protected final Queue<PerlHeredocQueueElement> heredocQueue = new Queue<>(5);
 	protected final PerlBracesStack myBracesStack = new PerlBracesStack();
 	protected final PerlBracesStack myBracketsStack = new PerlBracesStack();
 	protected final PerlBracesStack myParensStack = new PerlBracesStack();
@@ -404,7 +404,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		}
 		else if (!heredocQueue.isEmpty())
 		{
-			return captureHereDoc(false);
+			pushStateAndBegin(CAPTURE_HEREDOC);
 		}
 
 		return TokenType.NEW_LINE_INDENT;
@@ -940,91 +940,43 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	}
 
 	/**
-	 * Captures HereDoc document and returns appropriate token type
-	 *
-	 * @param afterEmptyCloser - this here-doc being captured after empty closer, e.g. sequentional <<"", <<""
-	 * @return Heredoc token type
+	 * Invoked on empty newline
 	 */
-	protected IElementType captureHereDoc(boolean afterEmptyCloser)
+	protected IElementType processHeredocNewLine()
 	{
-		final PerlHeredocQueueElement heredocQueueElement = heredocQueue.remove(0);
-		final CharSequence heredocMarker = heredocQueueElement.getMarker();
-
-		IElementType tokenType = heredocQueueElement.getTargetElement();
-
-		CharSequence buffer = getBuffer();
-		int tokenStart = getTokenStart();
-
-		if (!afterEmptyCloser)
+		PerlHeredocQueueElement perlHeredocQueueElement = heredocQueue.peekFirst();
+		if (perlHeredocQueueElement.getMarker().length() == 0)
 		{
-			pushPreparsedToken(tokenStart++, tokenStart, TokenType.NEW_LINE_INDENT);
+			// empty heredoc terminator reached
+			heredocQueue.pullFirst();
+			if (heredocQueue.isEmpty())
+			{
+				popState();
+			}
+			return HEREDOC_END;
 		}
-
-		int bufferEnd = getBufferEnd();
-
-		int currentPosition = tokenStart;
-		int linePos = currentPosition;
-
-
-		while (true)
+		else
 		{
-			while (linePos < bufferEnd && buffer.charAt(linePos) != '\n' && buffer.charAt(linePos) != '\r')
-			{
-				linePos++;
-			}
-			int lineContentsEnd = linePos;
+			return perlHeredocQueueElement.getTargetElement();
+		}
+	}
 
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\r')
-			{
-				linePos++;
-			}
-			if (linePos < bufferEnd && buffer.charAt(linePos) == '\n')
-			{
-				linePos++;
-			}
-
-			// reached the end of heredoc and got end marker
-
-			if (heredocMarker.length() == 0 && lineContentsEnd == currentPosition && linePos > lineContentsEnd)
-			{
-				// non-empty heredoc and got the end
-				if (currentPosition > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, currentPosition, tokenType);
-				}
-				pushPreparsedToken(currentPosition, lineContentsEnd + 1, HEREDOC_END);
-
-				if (!heredocQueue.isEmpty() && bufferEnd > lineContentsEnd + 1)
-				{
-					setTokenStart(lineContentsEnd + 1);
-					return captureHereDoc(true);
-				}
-				else
-				{
-					return getPreParsedToken();
-				}
-			}
-			else if (StringUtil.equals(heredocMarker, buffer.subSequence(currentPosition, lineContentsEnd)))
-			{
-				// non-empty heredoc and got the end
-				if (currentPosition > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, currentPosition, tokenType);
-				}
-				pushPreparsedToken(currentPosition, lineContentsEnd, HEREDOC_END);
-				return getPreParsedToken();
-			}
-			// reached the end of file
-			else if (linePos == bufferEnd)
-			{
-				// non-empty heredoc and got the end of file
-				if (linePos > tokenStart)
-				{
-					pushPreparsedToken(tokenStart, linePos, tokenType);
-				}
-				return getPreParsedToken();
-			}
-			currentPosition = linePos;
+	/**
+	 * Invoked on non-empty line
+	 */
+	protected IElementType processHeredocLine()
+	{
+		PerlHeredocQueueElement perlHeredocQueueElement = heredocQueue.peekFirst();
+		if (StringUtil.equals(perlHeredocQueueElement.getMarker(), yytext()))
+		{
+			// empty heredoc terminator reached, no need to restart capture, enter is coming
+			heredocQueue.pullFirst();
+			popState();
+			return HEREDOC_END;
+		}
+		else
+		{
+			return perlHeredocQueueElement.getTargetElement();
 		}
 	}
 
