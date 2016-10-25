@@ -46,6 +46,18 @@ limitations under the License.
     SIGIL_HASH='$%'
     SIGIL_CODE='$&'
 
+	LEFT_BRACE_SCALAR='${'
+	LEFT_BRACE_ARRAY='@{'
+	LEFT_BRACE_HASH='%{'
+	LEFT_BRACE_GLOB='*{'
+	LEFT_BRACE_CODE='&{'
+
+	RIGHT_BRACE_SCALAR='$}'
+	RIGHT_BRACE_ARRAY='@}'
+	RIGHT_BRACE_HASH='%}'
+	RIGHT_BRACE_GLOB='*}'
+	RIGHT_BRACE_CODE='&}'
+
 	// postfix deref
 	DEREF_SCALAR='->$*'
 	DEREF_SCALAR_INDEX='->$#*'

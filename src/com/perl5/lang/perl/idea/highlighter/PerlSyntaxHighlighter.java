@@ -127,24 +127,34 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(PACKAGE_PRAGMA_VARS, new TextAttributesKey[]{PERL_PACKAGE});
 
 		ATTRIBUTES_MAP.put(SIGIL_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		ATTRIBUTES_MAP.put(LEFT_BRACE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
+		ATTRIBUTES_MAP.put(RIGHT_BRACE_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		ATTRIBUTES_MAP.put(DEREF_SCALAR, new TextAttributesKey[]{PERL_SCALAR});
 		ATTRIBUTES_MAP.put(SIGIL_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		ATTRIBUTES_MAP.put(DEREF_SCALAR_INDEX, new TextAttributesKey[]{PERL_SCALAR});
 		ATTRIBUTES_MAP.put(SCALAR_NAME, new TextAttributesKey[]{PERL_SCALAR});
 
 		ATTRIBUTES_MAP.put(SIGIL_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
+		ATTRIBUTES_MAP.put(LEFT_BRACE_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
+		ATTRIBUTES_MAP.put(RIGHT_BRACE_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		ATTRIBUTES_MAP.put(DEREF_ARRAY, new TextAttributesKey[]{PERL_ARRAY});
 		ATTRIBUTES_MAP.put(ARRAY_NAME, new TextAttributesKey[]{PERL_ARRAY});
 
 		ATTRIBUTES_MAP.put(SIGIL_HASH, new TextAttributesKey[]{PERL_HASH});
+		ATTRIBUTES_MAP.put(LEFT_BRACE_HASH, new TextAttributesKey[]{PERL_HASH});
+		ATTRIBUTES_MAP.put(RIGHT_BRACE_HASH, new TextAttributesKey[]{PERL_HASH});
 		ATTRIBUTES_MAP.put(DEREF_HASH, new TextAttributesKey[]{PERL_HASH});
 		ATTRIBUTES_MAP.put(HASH_NAME, new TextAttributesKey[]{PERL_HASH});
 
 		ATTRIBUTES_MAP.put(SIGIL_GLOB, new TextAttributesKey[]{PERL_GLOB});
+		ATTRIBUTES_MAP.put(LEFT_BRACE_GLOB, new TextAttributesKey[]{PERL_GLOB});
+		ATTRIBUTES_MAP.put(RIGHT_BRACE_GLOB, new TextAttributesKey[]{PERL_GLOB});
 		ATTRIBUTES_MAP.put(DEREF_GLOB, new TextAttributesKey[]{PERL_GLOB});
 		ATTRIBUTES_MAP.put(GLOB_NAME, new TextAttributesKey[]{PERL_GLOB});
 
 		ATTRIBUTES_MAP.put(SIGIL_CODE, new TextAttributesKey[]{PERL_SUB});
+		ATTRIBUTES_MAP.put(LEFT_BRACE_CODE, new TextAttributesKey[]{PERL_SUB});
+		ATTRIBUTES_MAP.put(RIGHT_BRACE_CODE, new TextAttributesKey[]{PERL_SUB});
 		ATTRIBUTES_MAP.put(DEREF_CODE, new TextAttributesKey[]{PERL_SUB});
 		ATTRIBUTES_MAP.put(CODE_NAME, new TextAttributesKey[]{PERL_SUB});
 

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
@@ -74,7 +75,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 					"(" +
 					BASIC_IDENTIFIER_PATTERN_TEXT +
 					")");
-	private static final Map<IElementType, IElementType> SIGILS_TO_TOKENS_MAP = new THashMap<>();
+
+	private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new THashMap<>();
+
 	private static final String SUB_SIGNATURE = "Sub.Signature";
 	public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
 	public static TokenSet RESERVED_TOKENSET;
@@ -89,12 +92,12 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	static
 	{
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR, SCALAR_NAME);
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR_INDEX, SCALAR_NAME);
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_ARRAY, ARRAY_NAME);
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, HASH_NAME);
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, CODE_NAME);
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, GLOB_NAME);
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR_INDEX, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_ARRAY, Trinity.create(LEFT_BRACE_ARRAY, ARRAY_NAME, RIGHT_BRACE_ARRAY));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, Trinity.create(LEFT_BRACE_HASH, HASH_NAME, RIGHT_BRACE_HASH));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, CODE_NAME, RIGHT_BRACE_CODE));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, Trinity.create(LEFT_BRACE_GLOB, GLOB_NAME, RIGHT_BRACE_GLOB));
 	}
 
 	// last captured heredoc marker
@@ -345,14 +348,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				return getRightParen(SUB_ATTRIBUTES);
 			}
 		}
-		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
+		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken).second;
 	}
 
 	@NotNull
 	protected IElementType getBracedVariableNameToken()
 	{
 		yybegin(YYINITIAL);
-		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken);
+		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken).second;
 	}
 
 	@Override
