@@ -22,6 +22,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
+import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -49,6 +50,6 @@ public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new EmbeddedPerlLexerAdapter(myProject);
+		return new PerlHighlightingLexerAdapter(myProject, new EmbeddedPerlLexerAdapter(myProject));
 	}
 }

@@ -17,10 +17,12 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.LayeredLexer;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -30,7 +32,13 @@ public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlEl
 {
 	public PerlHighlightingLexerAdapter(@Nullable Project project)
 	{
-		super(new PerlMergingLexerAdapter(project, false, true));
+		this(project, new PerlMergingLexerAdapter(project, false, true));
+	}
+
+
+	public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer)
+	{
+		super(lexer);
 		registerSelfStoppingLayer(
 				new PodLexerAdapter(project),
 				new IElementType[]{POD},
