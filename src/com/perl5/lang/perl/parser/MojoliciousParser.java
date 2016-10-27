@@ -66,7 +66,6 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 			{
 				blockMarker.done(BLOCK);
 				blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
-				b.advanceLexer();
 				subMarker.done(SUB_EXPR);
 				return true;
 			}
@@ -78,6 +77,17 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
 		}
 
 		return super.parseTerm(b, l);
+	}
+
+	@Override
+	public boolean parseStatementSemi(PsiBuilder b, int l)
+	{
+		if (b.getTokenType() == MOJO_END)
+		{
+			b.advanceLexer();
+			return true;
+		}
+		return super.parseStatementSemi(b, l);
 	}
 
 	@NotNull

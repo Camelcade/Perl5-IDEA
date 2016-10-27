@@ -1,27 +1,28 @@
+
 % use Time::Piece;
 <!DOCTYPE html>
 <html>
   <head><title>Simple</title></head>
-  % my $now = localtime;
+% my $now = localtime;
   <body>Time: <%= $now->hms %></body>
 </html>
 
 <html>
-  <head><title><%= $title %></title></head>
+  <head><title><%= $title #this is a titile %></title></head>
   <body>
     test 123
     foo <% my $i = $num + 2; %>
-    % for (1 .. 23) {
+% for (1 .. 23) {
     * some text <%= $i++ %>
-    % }
+% }
   </body>
 </html>
 
 % use Mojo::ByteStream 'b';
 <%= b('<div>excluded!</div>') %>
 
-<% for (1 .. 3) { %>
-  <%= 'Trim all whitespace characters around this expression' =%>
+<% for (1 .. 3) { # some comment is accepatble %>
+    <%= 'Trim all whitespace characters around this expression' =%>
 <% } %>
 
 This is <%= 1 + 1 %> a\
@@ -32,17 +33,31 @@ in multiple\\
 lines
 
 <% my $block = begin %>
-  <% my $name = shift; =%>
+    <% my $name = shift; =%>
   Hello <%= $name %>.
 <% end %>
-<%= $block->('Baerbel') %>
+<%= $block->('Baerbel') %>spaces should be after
+
+
+
 <%= $block->('Wolfgang') %>
 
+
+non-spaces
+
+spaces should be before
+
+some %
+
+< unparen >
+
+<%= $block->('Wolfgang') %>
 % my $block = begin
-  % my $name = shift;
+<% say 'hi'; %>
+% my $name = shift;
   Hello <%= $name %>.
 % end
-%= $block->('Baerbel')
+        %= $block->('Baerbel')
 %= $block->('Wolfgang')
 
 % my ($foo, $bar) = @_;
@@ -53,9 +68,22 @@ test 123 <%= $foo %>
   Some data!
 <% end %>
 
-<%== $foo %>
+        <%== $foo %>
 
 <%= $foo %>
 
 <%% my $foo = 23; %>
 
+<%
+    say <<EOM;
+    this is a text
+EOM
+
+=pod
+
+Some documentation here
+
+=cut
+
+
+%>
