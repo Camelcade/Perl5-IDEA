@@ -42,6 +42,8 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract CharSequence getBuffer();
 
+	public abstract int getBufferStart();
+
 	public abstract int getBufferEnd();
 
 	public abstract int getNextTokenStart();
