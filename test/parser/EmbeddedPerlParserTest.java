@@ -40,6 +40,11 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase
 		return "testData/parser/embedded";
 	}
 
+	public void testWithPod()
+	{
+		doTest();
+	}
+
 	public void testParserTest()
 	{
 		doTest();
