@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements MojoliciousElementTypes
+public class MojoliciousLexerLegacy extends PerlLexerWithCustomStatesBase implements MojoliciousElementTypes
 {
 	// lexical states
 	public static final int LEX_HTML_BLOCK = LEX_CUSTOM1;             // template block
@@ -45,7 +45,7 @@ public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements M
 	public static final Pattern MOJO_END_IN_BLOCK = Pattern.compile(KEYWORD_MOJO_BLOCK_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)" + KEYWORD_MOJO_BLOCK_CLOSER);
 	public static final Pattern MOJO_END_IN_LINE = Pattern.compile(KEYWORD_MOJO_LINE_OPENER + "(\\s*)" + KEYWORD_MOJO_END + "(\\s*)\\n");
 
-	public MojoliciousLexer(Project project)
+	public MojoliciousLexerLegacy(Project project)
 	{
 		super(project);
 		setCustomState(LEX_HTML_BLOCK);
@@ -329,16 +329,4 @@ public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements M
 		setTokenEnd(offset + KEYWORD_MOJO_BEGIN.length());
 		return MOJO_BEGIN;
 	}
-
-/*
-	@Override
-	public void adjustCommentToken()
-	{
-		int endIndex = StringUtil.indexOf(yytext(), "%>");
-		if (endIndex > -1)
-		{
-			setTokenEnd(getTokenStart() + endIndex);
-		}
-	}
-*/
 }

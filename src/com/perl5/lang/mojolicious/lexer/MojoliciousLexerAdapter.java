@@ -27,6 +27,6 @@ public class MojoliciousLexerAdapter extends FlexAdapter
 {
 	public MojoliciousLexerAdapter(Project project)
 	{
-		super(new MojoliciousLexerGenerated(null));
+		super(new MojoliciousLexer(null));
 	}
 }
