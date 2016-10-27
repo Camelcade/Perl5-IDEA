@@ -334,11 +334,11 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <POD_STATE> {
-	{POD_END} / {NEW_LINE}	{yybegin(YYINITIAL);return COMMENT_BLOCK;}
-	{POD_LINE}				{return COMMENT_BLOCK;}
+	{POD_END} / {NEW_LINE}	{yybegin(YYINITIAL);return POD;}
+	{POD_LINE}				{return POD;}
 }
 
-^{POD_START} 				{yybegin(POD_STATE);return COMMENT_BLOCK;}
+^{POD_START} 				{yybegin(POD_STATE);return POD;}
 {NEW_LINE}   				{return getNewLineToken();}
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
 {END_BLOCK}					{yybegin(END_BLOCK);return COMMENT_BLOCK;}

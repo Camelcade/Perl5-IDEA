@@ -1,0 +1,13 @@
+say 'hi';
+
+=pod
+
+this is a pod
+
+=cut
+
+say 'more hi';
+
+=pod
+
+Something else
