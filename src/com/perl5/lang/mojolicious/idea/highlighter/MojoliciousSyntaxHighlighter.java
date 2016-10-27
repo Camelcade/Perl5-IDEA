@@ -24,6 +24,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
+import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -65,7 +66,7 @@ public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded 
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new MojoliciousLexerAdapter(myProject);
+		return new PerlHighlightingLexerAdapter(myProject, new MojoliciousLexerAdapter(myProject));
 	}
 
 	@NotNull
