@@ -17,6 +17,7 @@
 package parser;
 
 import com.intellij.core.CoreApplicationEnvironment;
+import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.util.io.FileUtil;
@@ -25,9 +26,12 @@ import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
 import com.intellij.psi.templateLanguages.TemplateDataLanguagePatterns;
 import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.TestDataFile;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.PodParserDefinition;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -105,6 +109,8 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
 		registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
 		registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
+		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlParserDefinition());
+		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
 		new PerlParserExtensions().initComponent();
 	}
 
