@@ -70,7 +70,7 @@ BLOCK_COMMENT_START = "<%#"
 <PERL_BLOCK>{
 	{PERL_BLOCK_CLOSER}							{yybegin(AFTER_PERL_BLOCK);return MOJO_BLOCK_CLOSER;}
 	"begin" / {ANY_SPACES}? {PERL_BLOCK_CLOSER}	{return MOJO_BEGIN;}
-	"end" / {ANY_SPACES}? {PERL_BLOCK_CLOSER}	{return MOJO_BEGIN;}
+	"end" / {ANY_SPACES}? {PERL_BLOCK_CLOSER}	{return MOJO_END;}
 	[^]											{return delegateLexing();}
 }
 
@@ -82,7 +82,7 @@ BLOCK_COMMENT_START = "<%#"
 <PERL_LINE>{
 	\R								{yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;}
 	"begin" / {WHITE_SPACES}? \R	{return MOJO_BEGIN;}
-	"end" / {WHITE_SPACES}? \R		{return MOJO_BEGIN;}
+	"end" / {WHITE_SPACES}? \R		{return MOJO_END;}
 	[^]								{return delegateLexing();}
 }
 
