@@ -112,7 +112,7 @@ public abstract class PerlProtoLexer implements FlexLexer
 		return token.getTokenType();
 	}
 
-	protected void pushStateAndBegin(int newState)
+	public void pushStateAndBegin(int newState)
 	{
 		pushState();
 		yybegin(newState);
