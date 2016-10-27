@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.perl5.lang.perl.lexer.PerlLexerGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlLexer.*;
 
 /**
  * Created by hurricup on 10.08.2015.
@@ -47,6 +47,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		MojoliciousElementTypes,
 		MooseElementTypes
 {
+	// fixme move somewhere
+	public static final String STRING_UNDEF = "undef";
+	public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+
 
 	public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
 	public static final String ALLOWED_TR_MODIFIERS = "cdsr";
@@ -157,6 +161,17 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		{
 			return charOpener;
 		}
+	}
+
+	@Override
+	public boolean isInitialState()
+	{
+		return super.isInitialState() &&
+				!myFormatWaiting &&
+				heredocQueue.isEmpty() &&
+				myBracesStack.isEmpty() &&
+				myBracketsStack.isEmpty() &&
+				myParensStack.isEmpty();
 	}
 
 	/**
@@ -381,7 +396,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	protected IElementType getLabelToken()
 	{
 		yypushback(yylength());
-		yybegin(PerlLexerGenerated.YYINITIAL);
+		yybegin(PerlLexer.YYINITIAL);
 		return IDENTIFIER;
 	}
 

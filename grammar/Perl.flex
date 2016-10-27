@@ -25,9 +25,8 @@ import org.jetbrains.annotations.NotNull;
 // http://perldoc.perl.org/perlop.html#Gory-details-of-parsing-quoted-constructs
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
 
-%class PerlLexerGenerated
+%class PerlLexer
 %extends PerlBaseLexer
-%abstract
 %unicode
 %public
 

@@ -51,7 +51,7 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase
 		myText = buffer;
 		myEnd = endOffset;
 
-		if (startOffset == 0 && initialState == PerlLexerGenerated.YYINITIAL)    // beginning of doc
+		if (startOffset == 0 && initialState == PerlLexer.YYINITIAL)    // beginning of doc
 		{
 			myFlex.setCustomState(myFlex.getInitialCustomState());
 		}

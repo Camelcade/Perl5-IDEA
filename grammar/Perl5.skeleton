@@ -117,7 +117,7 @@
    * Returns the current lexical state.
    */
   public int yystate() {
-    return zzLexicalState;
+    return isInitialState() ? zzLexicalState: -1;
   }
 
 

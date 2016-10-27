@@ -50,6 +50,21 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract int yylength();
 
+	public boolean hasPreparsedTokens()
+	{
+		return !preparsedTokensList.isEmpty();
+	}
+
+	/**
+	 * Checks internal lexer state aside of flex states
+	 *
+	 * @return true if it's safe to return YYINITIAL from yystate
+	 */
+	public boolean isInitialState()
+	{
+		return preparsedTokensList.isEmpty() && stateStack.empty();
+	}
+
 	public IElementType advance() throws IOException
 	{
 		IElementType tokenType;
