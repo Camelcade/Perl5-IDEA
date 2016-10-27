@@ -16,17 +16,25 @@
 
 package com.perl5.lang.mojolicious.lexer;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
 /**
  * Created by hurricup on 21.07.2015.
  * Copy-pasted FlexAdapter because of private variables and no setters
  */
-public class MojoliciousLexerAdapter extends FlexAdapter
+public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter implements MojoliciousElementTypes
 {
+	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+			TokenSet.create(MOJO_TEMPLATE_BLOCK_HTML)
+	);
+
 	public MojoliciousLexerAdapter(Project project)
 	{
-		super(new MojoliciousLexer(null));
+		super(project, new MojoliciousLexer(null), TOKENS_TO_MERGE);
 	}
 }
