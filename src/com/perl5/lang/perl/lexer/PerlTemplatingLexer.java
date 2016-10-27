@@ -43,6 +43,14 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		return super.advance();
 	}
 
+	@Override
+	protected void resetInternals()
+	{
+		super.resetInternals();
+		assert yystate() == 0;
+		myPerlLexer.reset(getBuffer(), getBufferStart(), getBufferEnd(), 0);
+	}
+
 	/**
 	 * Delegating current position to the perl lexer
 	 */
@@ -60,5 +68,11 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		{
 		}
 		throw new RuntimeException("Something bad happened");
+	}
+
+	@Override
+	public boolean isInitialState()
+	{
+		return super.isInitialState() && myPerlLexer.yystate() == 0;
 	}
 }
