@@ -1,16 +1,22 @@
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_ANNOTATION;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
 
 public abstract class PerlTemplatingLexer extends PerlProtoLexer
 {
-	private final PerlLexer myPerlLexer = new PerlLexer(null);
+	protected final PerlLexer myPerlLexer = new PerlLexer(null);
+	private final CommentEndCalculator myCommentEndCalculator;
+
+	public PerlTemplatingLexer()
+	{
+		myCommentEndCalculator = getCommentEndCalculator();
+	}
 
 	/**
 	 * syncronizes position of perl lexer with main one
@@ -63,9 +69,13 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		try
 		{
 			IElementType result = myPerlLexer.advance();
-			if (result == COMMENT_LINE)
+			if (myCommentEndCalculator != null && (result == COMMENT_LINE || result == COMMENT_ANNOTATION))
 			{
-				adjustCommentToken();
+				int endIndex = myCommentEndCalculator.getCommentEndOffset(myPerlLexer.yytext());
+				if (endIndex > -1)
+				{
+					myPerlLexer.setTokenEnd(myPerlLexer.getTokenStart() + endIndex);
+				}
 			}
 			syncMainLexer();
 			return result;
@@ -76,17 +86,26 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		throw new RuntimeException("Something bad happened");
 	}
 
-	/**
-	 * Implemented for templating languages, which can seek through the comment token (current one) and adjust end
-	 * position with setTokenEnd() method
-	 */
-	public void adjustCommentToken()
+	@Nullable
+	protected CommentEndCalculator getCommentEndCalculator()
 	{
+		return null;
 	}
 
 	@Override
 	public boolean isInitialState()
 	{
 		return super.isInitialState() && myPerlLexer.yystate() == 0;
+	}
+
+	public interface CommentEndCalculator
+	{
+		/**
+		 * Finds real comment end offset
+		 *
+		 * @param commentText comment text, found by perl lexer
+		 * @return comment end offset or -1 if comment is ok
+		 */
+		int getCommentEndOffset(CharSequence commentText);
 	}
 }
