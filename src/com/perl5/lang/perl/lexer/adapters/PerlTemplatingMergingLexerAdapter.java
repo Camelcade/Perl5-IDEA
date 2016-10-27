@@ -12,11 +12,10 @@ public abstract class PerlTemplatingMergingLexerAdapter extends MergingLexerAdap
 {
 	public PerlTemplatingMergingLexerAdapter(@Nullable Project project, @NotNull FlexLexer flexLexer, TokenSet tokensToMerge)
 	{
-		super(new PerlMergingLexerAdapter(
-						new PerlSublexingLexerAdapter(
-								project,
-								new FlexAdapter(flexLexer), false)
-				),
+		super(
+				new PerlSublexingLexerAdapter(
+						project,
+						new FlexAdapter(flexLexer), false),
 				tokensToMerge
 		);
 	}
