@@ -22,6 +22,7 @@ package com.perl5.lang.perl.lexer.adapters;
  */
 
 import com.intellij.lexer.FlexAdapter;
+import com.intellij.lexer.Lexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -59,7 +60,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 	private final Project myProject;
 	private boolean myIsForcingSublexing;
 	private boolean myIsSublexing = false;
-	private PerlCodeMergingLexerAdapter myMainLexer;
+	private Lexer myMainLexer;
 	private PerlSublexingLexerAdapter mySubLexer;
 	private int myTokenStart;
 	private int myTokenEnd;
@@ -68,10 +69,16 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
 	public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing)
 	{
-		myMainLexer = new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks);
+		this(project, new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks), forceSublexing);
+	}
+
+	public PerlSublexingLexerAdapter(@Nullable Project project, @NotNull Lexer mainLexer, boolean forceSublexing)
+	{
+		myMainLexer = mainLexer;
 		myIsForcingSublexing = forceSublexing;
 		myProject = project;
 	}
+
 
 	@Override
 	public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState)
@@ -188,9 +195,13 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 		}
 	}
 
-	private void lexToken(LexerBase lexer) throws IOException
+	private void lexToken(Lexer lexer) throws IOException
 	{
 		myTokenType = lexer.getTokenType();
+		if (myTokenType == LEFT_BRACE_CODE_START)
+		{
+			myTokenType = LEFT_BRACE;
+		}
 		myTokenStart = lexer.getTokenStart();
 		myState = lexer.getState();
 		myTokenEnd = lexer.getTokenEnd();
