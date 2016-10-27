@@ -297,7 +297,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 <EXTENDED_MATCH_REGEX>{
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
 	{ANY_SPACE}+				{return TokenType.WHITE_SPACE;}
-	{LINE_COMMENT}				{adjustCommentToken();return COMMENT_LINE;}
+	{LINE_COMMENT}				{return COMMENT_LINE;}
 	[^\\ \t\f\n\r$@#\(]+		{return REGEX_TOKEN;}
 }
 
@@ -343,8 +343,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
 {END_BLOCK}					{yybegin(END_BLOCK);return COMMENT_BLOCK;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);return COMMENT_BLOCK;}
-{LINE_COMMENT_ANNOTATION}	{adjustCommentToken();return COMMENT_ANNOTATION;}
-{LINE_COMMENT}				{adjustCommentToken();return COMMENT_LINE;}
+{LINE_COMMENT_ANNOTATION}	{return COMMENT_ANNOTATION;}
+{LINE_COMMENT}				{return COMMENT_LINE;}
 
 <HANDLE_WITH_ANGLE>{
 	{IDENTIFIER} 	{return HANDLE;}
