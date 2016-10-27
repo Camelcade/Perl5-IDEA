@@ -96,6 +96,21 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testFormatEmpty()
+	{
+		doTest();
+	}
+
+	public void testFormatIncomplete()
+	{
+		doTest(false);
+	}
+
+	public void testFormatEmptyIncomplete()
+	{
+		doTest(false);
+	}
+
 	public void testNamedBlocks()
 	{
 		doTest();

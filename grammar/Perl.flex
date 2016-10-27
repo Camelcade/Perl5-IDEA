@@ -156,7 +156,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_POSSIBLE_SIGIL
 %state AFTER_ASSIGN
 
-%xstate CAPTURE_FORMAT
+%xstate CAPTURE_FORMAT,CAPTURE_FORMAT_NON_EMPTY
 %xstate CAPTURE_HEREDOC, CAPTURE_HEREDOC_NEWLINE
 
 %xstate LEX_LABEL
@@ -179,10 +179,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 
 /////////////////////////////////// format capture /////////////////////////////////////////////////////////////////////
+<CAPTURE_FORMAT_NON_EMPTY>{
+	"." 		{yypushback(1);yybegin(CAPTURE_FORMAT);return FORMAT;}
+	.+			{}
+	\R			{}
+	<<EOF>>		{yybegin(YYINITIAL);return FORMAT;}
+}
+
+
 <CAPTURE_FORMAT>{
 	"." 		{yybegin(YYINITIAL);return FORMAT_TERMINATOR;}
-	.+			{return FORMAT;}
-	\R			{return FORMAT;}
+	.+			{yybegin(CAPTURE_FORMAT_NON_EMPTY);}
+	\R			{yybegin(CAPTURE_FORMAT_NON_EMPTY);}
 }
 /////////////////////////////////// end of format capture //////////////////////////////////////////////////////////////
 

@@ -1,0 +1,8 @@
+Perl5
+  PsiPerlFormatDefinitionImpl(PerlElementType.FORMAT_DEFINITION)
+    PsiElement(PerlTokenType.format)('format')
+    PsiElement(PerlTokenType.IDENTIFIER)('SOME')
+    PsiElement(PerlTokenType.=)('=')
+    PsiElement(PerlTokenType.FORMAT)('this is\nformat')
+    PsiErrorElement:PerlTokenType.FORMAT_TERMINATOR expected, unexpected end of file
+      <empty list>
