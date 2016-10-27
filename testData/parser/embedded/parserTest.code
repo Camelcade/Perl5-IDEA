@@ -1,13 +1,33 @@
+<html></html><?
+say 'hi';
+?>
+
+
+<html></html>
+
+
+<?
+use strict; # comment
+use warnings FATAL => 'all';
+
+?><? say 'hi'; #comment ?>
+
+<?
+
+say 'blah';
+
+?>
+
 <html>
 <? say 'hi'; ?>
 
 <? foreach(@ARGV) { ?>
 
-<div>
-<? print $_; ?>
+    <div>
+    <? print $_; ?>
 
-</div>
+    </div>
 
-<? } ?>
+    <? } ?>
 
 </html>

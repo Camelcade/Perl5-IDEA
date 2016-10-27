@@ -1,0 +1,11 @@
+Embedded Perl file
+  PsiComment(EmbeddedPerlTokenType.EMBED_TEMPLATE_BLOCK_HTML)('<html></html>')
+  PsiComment(EmbeddedPerlTokenType.EMBED_MARKER_OPEN)('<?')
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlPrintExprImpl(PerlElementType.PRINT_EXPR)
+      PsiElement(PerlTokenType.say)('say')
+      PsiPerlStringSqImpl(PerlElementType.STRING_SQ)
+        PsiElement(PerlTokenType.QUOTE_SINGLE_OPEN)(''')
+        PsiElement(PerlTokenType.STRING_CONTENT)('')
+        PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)('hi'')
+    PsiElement(PerlTokenType.;)(';')
