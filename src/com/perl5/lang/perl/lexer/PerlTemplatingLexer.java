@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
+
 public abstract class PerlTemplatingLexer extends PerlProtoLexer
 {
 	private final PerlLexer myPerlLexer = new PerlLexer(null);
@@ -61,6 +63,10 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		try
 		{
 			IElementType result = myPerlLexer.advance();
+			if (result == COMMENT_LINE)
+			{
+				adjustCommentToken();
+			}
 			syncMainLexer();
 			return result;
 		}
@@ -68,6 +74,14 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		{
 		}
 		throw new RuntimeException("Something bad happened");
+	}
+
+	/**
+	 * Implemented for templating languages, which can seek through the comment token (current one) and adjust end
+	 * position with setTokenEnd() method
+	 */
+	public void adjustCommentToken()
+	{
 	}
 
 	@Override
