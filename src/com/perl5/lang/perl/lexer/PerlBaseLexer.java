@@ -417,7 +417,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		}
 		else if (!heredocQueue.isEmpty())
 		{
-			pushStateAndBegin(CAPTURE_HEREDOC);
+			startHeredocCapture();
 		}
 
 		return TokenType.NEW_LINE_INDENT;
@@ -953,44 +953,28 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	}
 
 	/**
-	 * Invoked on empty newline
+	 * Checks if there are more here-docs in stack and immediately starts next one
 	 */
-	protected IElementType processHeredocNewLine()
+	protected void closeEmptyMarkerHeredoc()
 	{
-		PerlHeredocQueueElement perlHeredocQueueElement = heredocQueue.peekFirst();
-		if (perlHeredocQueueElement.getMarker().length() == 0)
+	}
+
+	protected void startHeredocCapture()
+	{
+		pushState();
+		if (heredocQueue.peekFirst().getMarker().length() > 0)
 		{
-			// empty heredoc terminator reached
-			heredocQueue.pullFirst();
-			if (heredocQueue.isEmpty())
-			{
-				popState();
-			}
-			return HEREDOC_END;
+			yybegin(CAPTURE_HEREDOC);
 		}
 		else
 		{
-			return perlHeredocQueueElement.getTargetElement();
+			yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);
 		}
 	}
 
-	/**
-	 * Invoked on non-empty line
-	 */
-	protected IElementType processHeredocLine()
+	protected boolean isCloseMarker()
 	{
-		PerlHeredocQueueElement perlHeredocQueueElement = heredocQueue.peekFirst();
-		if (StringUtil.equals(perlHeredocQueueElement.getMarker(), yytext()))
-		{
-			// empty heredoc terminator reached, no need to restart capture, enter is coming
-			heredocQueue.pullFirst();
-			popState();
-			return HEREDOC_END;
-		}
-		else
-		{
-			return perlHeredocQueueElement.getTargetElement();
-		}
+		return StringUtil.equals(yytext(), heredocQueue.peekFirst().getMarker());
 	}
 
 	/**

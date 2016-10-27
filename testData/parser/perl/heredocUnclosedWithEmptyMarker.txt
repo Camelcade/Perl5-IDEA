@@ -1,0 +1,11 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlPrintExprImpl(PerlElementType.PRINT_EXPR)
+      PsiElement(PerlTokenType.say)('say')
+      PsiPerlHeredocOpenerImpl(PerlElementType.HEREDOC_OPENER)
+        PsiElement(PerlTokenType.heredoc<<)('<<')
+        PsiPerlStringSqImpl(PerlElementType.STRING_SQ)
+          PsiElement(PerlTokenType.QUOTE_SINGLE_OPEN)(''')
+          PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(''')
+  PerlHeredocElementImpl(HEREDOC)
+    PsiElement(PerlTokenType.STRING_CONTENT)('asdfasdf\nsdfasdf\nasdfasdf')

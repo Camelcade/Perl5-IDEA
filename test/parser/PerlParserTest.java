@@ -91,6 +91,22 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testHeredocSequential()
+	{
+		doTest();
+	}
+
+	public void testHeredocUnclosed()
+	{
+		doTest();
+	}
+
+	public void testHeredocUnclosedWithEmptyMarker()
+	{
+		doTest();
+	}
+
+
 	public void testSubAttributes()
 	{
 		doTest();
@@ -282,11 +298,6 @@ public class PerlParserTest extends PerlParserTestBase
 	}
 
 	public void test28BackrefStyleHeredoc()
-	{
-		doTest();
-	}
-
-	public void testHeredocSequential()
 	{
 		doTest();
 	}

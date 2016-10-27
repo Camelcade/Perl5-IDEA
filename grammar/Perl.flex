@@ -156,7 +156,8 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_ASSIGN
 
 %xstate CAPTURE_FORMAT,CAPTURE_FORMAT_NON_EMPTY
-%xstate CAPTURE_HEREDOC, CAPTURE_HEREDOC_NEWLINE
+%xstate CAPTURE_HEREDOC, CAPTURE_NON_EMPTY_HEREDOC
+%xstate CAPTURE_HEREDOC_WITH_EMPTY_MARKER, CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER
 
 %xstate LEX_LABEL
 %state AFTER_IDENTIFIER_WITH_LABEL
@@ -167,7 +168,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <POD_STATE> {
 	{POD_END}  	{yybegin(YYINITIAL);return POD;}
-	.*			{}
+	.+			{}
 	\R+			{}
 	<<EOF>>		{yybegin(YYINITIAL);return POD;}
 }
@@ -176,13 +177,52 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 /////////////////////////////////// heredoc capture ////////////////////////////////////////////////////////////////////
 
-<CAPTURE_HEREDOC>{
-	.+		{yybegin(CAPTURE_HEREDOC_NEWLINE);return processHeredocLine();}
-	\R		{return processHeredocNewLine();}
+<CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER>{
+	.+ \R?	{}
+	\R		{yypushback(1);yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);return heredocQueue.peekFirst().getTargetElement();}
+	<<EOF>>	{yybegin(YYINITIAL);return heredocQueue.peekFirst().getTargetElement();}
 }
 
-<CAPTURE_HEREDOC_NEWLINE>{
-	\R		{yybegin(CAPTURE_HEREDOC);return heredocQueue.peekFirst().getTargetElement();}
+<CAPTURE_HEREDOC_WITH_EMPTY_MARKER>{
+	\R		{
+		heredocQueue.pullFirst();
+		popState();
+
+		if (!heredocQueue.isEmpty())
+		{
+			startHeredocCapture();
+		}
+		return HEREDOC_END;
+	}
+	.+ \R?	{yybegin(CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER);}
+}
+
+<CAPTURE_NON_EMPTY_HEREDOC>{
+	.+			{
+		if( isCloseMarker())
+		{
+			pullback(0);
+			yybegin(CAPTURE_HEREDOC);
+			return heredocQueue.peekFirst().getTargetElement();
+		}
+	}
+	\R+			{}
+	<<EOF>>		{yybegin(YYINITIAL);return heredocQueue.peekFirst().getTargetElement();}
+}
+
+<CAPTURE_HEREDOC>{
+	.+		{
+		if( isCloseMarker()){
+			popState();
+			heredocQueue.pullFirst();
+			return HEREDOC_END;
+		}
+		else
+		{
+			yybegin(CAPTURE_NON_EMPTY_HEREDOC);
+		}
+	}
+	\R		{yybegin(CAPTURE_NON_EMPTY_HEREDOC);}
 }
 
 ////////////////////////////////// end of heredoc capture //////////////////////////////////////////////////////////////
