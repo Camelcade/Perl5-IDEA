@@ -330,6 +330,7 @@ public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements M
 		return MOJO_BEGIN;
 	}
 
+/*
 	@Override
 	public void adjustCommentToken()
 	{
@@ -339,4 +340,5 @@ public class MojoliciousLexer extends PerlLexerWithCustomStatesBase implements M
 			setTokenEnd(getTokenStart() + endIndex);
 		}
 	}
+*/
 }

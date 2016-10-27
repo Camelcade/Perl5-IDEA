@@ -470,6 +470,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 		return super.perlAdvance();
 	}
 
+/*
 	@Override
 	public void adjustCommentToken()
 	{
@@ -483,6 +484,7 @@ public class HTMLMasonLexer extends AbstractMasonLexer implements HTMLMasonEleme
 			}
 		}
 	}
+*/
 
 	@Override
 	protected String getKeywordCallCloser()

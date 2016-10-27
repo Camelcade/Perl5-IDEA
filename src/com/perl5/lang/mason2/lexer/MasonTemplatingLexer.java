@@ -459,6 +459,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 		return super.perlAdvance();
 	}
 
+/*
 	@Override
 	public void adjustCommentToken()
 	{
@@ -472,6 +473,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			}
 		}
 	}
+*/
 
 	@Override
 	protected String getKeywordCallCloser()
