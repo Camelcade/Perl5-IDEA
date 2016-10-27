@@ -52,10 +52,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		if (myPerlLexer.hasPreparsedTokens())
 		{
 			IElementType result = myPerlLexer.advance();
-			if (!myPerlLexer.hasPreparsedTokens())
-			{
-				syncMainLexer();
-			}
+			syncMainLexer();
 			return result;
 		}
 		return super.advance();
