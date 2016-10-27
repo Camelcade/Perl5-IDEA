@@ -69,7 +69,7 @@
     public int getBufferEnd() {return zzEndRead;}
     public int getNextTokenStart(){ return zzMarkedPos;}
     public boolean isLastToken(){ return zzMarkedPos == zzEndRead; }
-	protected int getBufferStart(){ return bufferStart;	}
+	public int getBufferStart(){ return bufferStart;	}
  	public int getRealLexicalState() {return zzLexicalState;  }
 
  	public void pullback(int i)
@@ -97,8 +97,8 @@
     zzAtEOF  = false;
     zzAtBOL = true;
     zzEndRead = end;
-    resetInternals();
     yybegin(initialState);
+    resetInternals();
   }
 
   /**
@@ -117,7 +117,7 @@
    * Returns the current lexical state.
    */
   public int yystate() {
-    return isInitialState() ? zzLexicalState: -1;
+    return isInitialState() ? zzLexicalState: -666;
   }
 
 
