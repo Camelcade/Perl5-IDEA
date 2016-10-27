@@ -1,0 +1,10 @@
+Perl5
+  PsiPerlStatementImpl(PerlElementType.STATEMENT)
+    PsiPerlPrintExprImpl(PerlElementType.PRINT_EXPR)
+      PsiElement(PerlTokenType.say)('say')
+      PsiPerlStringSqImpl(PerlElementType.STRING_SQ)
+        PsiElement(PerlTokenType.QUOTE_SINGLE_OPEN)(''')
+        PsiElement(PerlTokenType.STRING_CONTENT)('hi')
+        PsiElement(PerlTokenType.QUOTE_SINGLE_CLOSE)(''')
+    PsiElement(PerlTokenType.;)(';')
+  PsiElement(PerlTokenType.POD)('=pod Pod Starts')

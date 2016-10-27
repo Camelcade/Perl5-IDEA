@@ -7,6 +7,4 @@ say 'hi';
 
 =cutnotreal end
 
-=cut Pod ends
-
 say 'hi again'

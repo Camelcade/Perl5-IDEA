@@ -36,6 +36,16 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testPerlPodEmpty()
+	{
+		doTest();
+	}
+
+	public void testPerlPodIncomplete()
+	{
+		doTest();
+	}
+
 	public void testQuoteLikeWithHeredocs()
 	{
 		doTest();

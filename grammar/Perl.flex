@@ -104,7 +104,6 @@ DATA_BLOCK = "__DATA__" [^] +
 SUB_PROTOTYPE = [\s\[\$\@\%\&\*\]\;\+\\_]+
 
 POD_START = "="[\w].* {NEW_LINE} ?
-POD_LINE = (.+ {NEW_LINE} ? | {NEW_LINE})
 POD_END = "=cut" ({WHITE_SPACE} .*)?
 
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
@@ -121,7 +120,7 @@ IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"r
 REGEX_COMMENT = "(?#"[^)]*")"
 
 %state END_BLOCK
-%state POD_STATE
+%xstate POD_STATE
 
 %xstate QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW
 %xstate QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP
@@ -164,6 +163,17 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state HASH_ACCEPTOR
 
 %%
+/////////////////////////////////////// pod capture ////////////////////////////////////////////////////////////////////
+
+<POD_STATE> {
+	{POD_END}  	{yybegin(YYINITIAL);return POD;}
+	.*			{}
+	\R+			{}
+	<<EOF>>		{yybegin(YYINITIAL);return POD;}
+}
+
+/////////////////////////////////// end of pod capture /////////////////////////////////////////////////////////////////
+
 /////////////////////////////////// heredoc capture ////////////////////////////////////////////////////////////////////
 
 <CAPTURE_HEREDOC>{
@@ -341,12 +351,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]+					{return STRING_CONTENT;}
 }
 
-<POD_STATE> {
-	{POD_END} / {NEW_LINE}	{yybegin(YYINITIAL);return POD;}
-	{POD_LINE}				{return POD;}
-}
-
-^{POD_START} 				{yybegin(POD_STATE);return POD;}
+^{POD_START} 				{yybegin(POD_STATE);}
 {NEW_LINE}   				{return getNewLineToken();}
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
 {END_BLOCK}					{yybegin(END_BLOCK);return COMMENT_BLOCK;}

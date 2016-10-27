@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes
 {
 	public final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
-			POD, STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, HEREDOC, HEREDOC_QQ, HEREDOC_QX
+			STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, HEREDOC, HEREDOC_QQ, HEREDOC_QX
 	);
 
 	public PerlMergingLexerAdapter(@Nullable Project project)
