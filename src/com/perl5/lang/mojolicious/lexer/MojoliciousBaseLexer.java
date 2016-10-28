@@ -16,14 +16,4 @@ public abstract class MojoliciousBaseLexer extends PerlTemplatingLexer implement
 	{
 		return COMMENT_END_CALCULATOR;
 	}
-
-	protected void startPerlExpression()
-	{
-		myPerlLexer.pushStateAndBegin(0);
-	}
-
-	protected void endPerlExpression()
-	{
-		myPerlLexer.popState();
-	}
 }

@@ -93,6 +93,21 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		return super.isInitialState() && myPerlLexer.yystate() == 0;
 	}
 
+	protected void startPerlExpression()
+	{
+		myPerlLexer.pushStateAndBegin(0);
+	}
+
+	protected void endPerlExpression()
+	{
+		myPerlLexer.popState();
+	}
+
+	protected void setPerlToInitial()
+	{
+		myPerlLexer.yybegin(0);
+	}
+
 	public interface CommentEndCalculator
 	{
 		/**
@@ -103,4 +118,5 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		 */
 		int getCommentEndOffset(CharSequence commentText);
 	}
+
 }
