@@ -23,7 +23,7 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.mason2.elementType.MasonFileElementType;
-import com.perl5.lang.mason2.lexer.MasonTemplatingLexerAdapter;
+import com.perl5.lang.mason2.lexer.Mason2TemplatingLexerAdapter;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 import com.perl5.lang.perl.parser.Mason2TemplatingParserImpl;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +45,7 @@ public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new MasonTemplatingLexerAdapter(project);
+		return new Mason2TemplatingLexerAdapter(project);
 	}
 
 	@NotNull
