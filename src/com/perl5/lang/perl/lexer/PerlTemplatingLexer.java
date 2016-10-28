@@ -23,13 +23,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 	 */
 	private void syncPerlLexer()
 	{
-		int tokenEnd = getTokenEnd();
-		myPerlLexer.setTokenEnd(tokenEnd);
-		if (tokenEnd > 0)
-		{
-			tokenEnd--;
-		}
-		myPerlLexer.setTokenStart(tokenEnd);
+		myPerlLexer.setTokenEnd(getTokenEnd());
 	}
 
 	/**
@@ -37,13 +31,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 	 */
 	private void syncMainLexer()
 	{
-		int tokenEnd = myPerlLexer.getTokenEnd();
-		setTokenEnd(tokenEnd);
-		if (tokenEnd > 0)
-		{
-			tokenEnd--;
-		}
-		setTokenStart(tokenEnd);
+		setTokenEnd(myPerlLexer.getTokenEnd());
 	}
 
 	@Override
