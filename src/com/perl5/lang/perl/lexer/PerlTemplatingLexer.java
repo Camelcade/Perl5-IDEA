@@ -11,12 +11,6 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
 public abstract class PerlTemplatingLexer extends PerlProtoLexer
 {
 	protected final PerlLexer myPerlLexer = new PerlLexer(null);
-	private final CommentEndCalculator myCommentEndCalculator;
-
-	public PerlTemplatingLexer()
-	{
-		myCommentEndCalculator = getCommentEndCalculator();
-	}
 
 	/**
 	 * syncronizes position of perl lexer with main one
@@ -64,9 +58,10 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 		try
 		{
 			IElementType result = myPerlLexer.advance();
-			if (myCommentEndCalculator != null && (result == COMMENT_LINE || result == COMMENT_ANNOTATION))
+			CommentEndCalculator commentEndCalculator = getCommentEndCalculator();
+			if (commentEndCalculator != null && (result == COMMENT_LINE || result == COMMENT_ANNOTATION))
 			{
-				int endIndex = myCommentEndCalculator.getCommentEndOffset(myPerlLexer.yytext());
+				int endIndex = commentEndCalculator.getCommentEndOffset(myPerlLexer.yytext());
 				if (endIndex > -1)
 				{
 					myPerlLexer.setTokenEnd(myPerlLexer.getTokenStart() + endIndex);
