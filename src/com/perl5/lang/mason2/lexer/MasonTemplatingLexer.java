@@ -17,12 +17,9 @@
 package com.perl5.lang.mason2.lexer;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.lexer.AbstractMasonLexer;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import gnu.trove.THashMap;
 
 import java.io.IOException;
@@ -78,6 +75,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					")>"
 	);
 
+/*
 	public static final Pattern MASON_SELF_POINTER_PATTERN = Pattern.compile(
 			"\\$\\." + PerlLexer.IDENTIFIER_PATTERN
 	);
@@ -90,6 +88,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			"\\}\\}\\s*(?:#.*)?\n"
 	);
 
+*/
 
 	// lexical states
 	public static final int LEX_MASON_HTML_BLOCK = LEX_CUSTOM1;             // template block
@@ -190,6 +189,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 
 		char currentChar = buffer.charAt(tokenStart);
 
+/*
 		if ((currentCustomState == LEX_MASON_PERL_LINE || currentCustomState == LEX_MASON_PERL_BLOCK) &&
 				currentChar == '$' &&
 				tokenStart + 2 < bufferEnd &&
@@ -201,10 +201,12 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			setTokenEnd(tokenStart + KEYWORD_SELF_POINTER.length());
 			return MASON_SELF_POINTER;
 		}
+*/
 
 
 		if (currentCustomState == LEX_MASON_PERL_LINE)
 		{
+/*
 			if (currentChar == '\n')
 			{
 				setTokenStart(tokenStart);
@@ -213,6 +215,8 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 				setCustomState(getInitialCustomState());
 				return SEMICOLON;
 			}
+*/
+/*
 			else if (tokenStart + 1 < bufferEnd)
 			{
 				char nextChar = buffer.charAt(tokenStart + 1);
@@ -233,7 +237,9 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					return MASON_FILTERED_BLOCK_CLOSER;
 				}
 			}
+*/
 		}
+/*
 		else if (currentCustomState == LEX_MASON_OPENING_TAG && currentChar == '>')
 		{
 			setTokenStart(tokenStart);
@@ -241,6 +247,8 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			setCustomState(getInitialCustomState());
 			return MASON_TAG_CLOSER;
 		}
+*/
+/*
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK && currentChar == '|')
 		{
 			Matcher m = MASON_EXPRESSION_FILTER_BLOCK.matcher(buffer);
@@ -253,6 +261,8 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 				return MASON_EXPR_FILTER_PIPE;
 			}
 		}
+*/
+/*
 		else if (currentCustomState == LEX_MASON_PERL_EXPR_BLOCK || currentCustomState == LEX_MASON_PERL_EXPR_FILTER_BLOCK)
 		{
 			if (isBufferAtString(buffer, tokenStart, KEYWORD_BLOCK_CLOSER))
@@ -269,6 +279,8 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 				return TokenType.WHITE_SPACE;
 			}
 		}
+*/
+/*
 		else if (currentCustomState == LEX_MASON_PERL_CALL_BLOCK)
 		{
 			if (isBufferAtString(buffer, tokenStart, KEYWORD_CALL_CLOSER))
@@ -286,6 +298,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 			}
 
 		}
+*/
 		else if (currentCustomState == LEX_MASON_PERL_BLOCK && isBufferAtString(buffer, tokenStart, BLOCK_CLOSE_TAG))
 		{
 			setTokenStart(tokenStart);
@@ -331,6 +344,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					pushPreparsedToken(offset, offset + tag.length(), CLOSE_TOKENS_MAP.get(tag));
 					break;
 				}
+/*
 				else if (offset < bufferEnd - 2 && currentChar == '<' && buffer.charAt(offset + 1) == '&' && Character.isWhitespace(buffer.charAt(offset + 2)))
 				{
 					pushPreparsedToken(offset, offset + KEYWORD_CALL_OPENER.length(), MASON_CALL_OPENER);
@@ -338,12 +352,15 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					setCustomState(LEX_MASON_PERL_CALL_BLOCK);
 					break;
 				}
+*/
+/*
 				else if (currentChar == '%' && (offset == 0 || buffer.charAt(offset - 1) == '\n'))
 				{
 					pushPreparsedToken(offset, offset + 1, MASON_LINE_OPENER);
 					setCustomState(LEX_MASON_PERL_LINE);
 					break;
 				}
+*/
 				else if (!Character.isWhitespace(currentChar))
 				{
 					lastNonspaceCharacterOffset = offset;
@@ -436,6 +453,7 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 						setCustomState(LEX_MASON_PERL_BLOCK);// fixme we should capture text here
 					}
 				}
+/*
 				else if (matcherOpener != null && matcherOpener.lookingAt())
 				{
 					// check for named block
@@ -443,18 +461,23 @@ public class MasonTemplatingLexer extends AbstractMasonLexer implements Mason2El
 					pushPreparsedToken(offset, offset + openingTag.length(), OPEN_TOKENS_MAP.get(openingTag));
 					setCustomState(LEX_MASON_OPENING_TAG);
 				}
+*/
+/*
 				else
 				{
 					assert Character.isWhitespace(buffer.charAt(offset + 2));
 					pushPreparsedToken(offset, offset + KEYWORD_BLOCK_OPENER.length(), MASON_BLOCK_OPENER);
 					setCustomState(LEX_MASON_PERL_EXPR_BLOCK);
 				}
+*/
 			}
 
+/*
 			if (!preparsedTokensList.isEmpty())
 			{
 				return getPreParsedToken();
 			}
+*/
 		}
 		return super.perlAdvance();
 	}
