@@ -16,16 +16,24 @@
 
 package com.perl5.lang.mason2.lexer;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTemplatingLexerAdapter extends FlexAdapter
+public class Mason2TemplatingLexerAdapter extends PerlTemplatingMergingLexerAdapter implements Mason2ElementTypes
 {
-	public MasonTemplatingLexerAdapter(Project project)
+	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+			TokenSet.create(MASON_TEMPLATE_BLOCK_HTML)
+	);
+
+	public Mason2TemplatingLexerAdapter(Project project)
 	{
-		super(new Mason2LexerGenerated(null));
+		super(project, new Mason2TemplatingLexer(null), TOKENS_TO_MERGE);
 	}
 }
