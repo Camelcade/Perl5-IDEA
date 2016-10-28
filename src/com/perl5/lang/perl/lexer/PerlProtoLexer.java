@@ -48,6 +48,11 @@ public abstract class PerlProtoLexer implements FlexLexer
 
 	public abstract int getNextTokenStart();
 
+	protected void pushback()
+	{
+		yypushback(yylength());
+	}
+
 	public abstract void yypushback(int number);
 
 	public abstract int yylength();
