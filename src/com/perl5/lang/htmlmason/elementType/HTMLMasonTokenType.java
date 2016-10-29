@@ -33,7 +33,7 @@ public class HTMLMasonTokenType extends IElementType
 
 	public String toString()
 	{
-		return "HTML::Mason::Token." + super.toString();
+		return "HTML::Mason: " + super.toString();
 	}
 
 }

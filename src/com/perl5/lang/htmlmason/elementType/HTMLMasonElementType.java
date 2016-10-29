@@ -33,11 +33,6 @@ public class HTMLMasonElementType extends HTMLMasonTokenType implements PsiEleme
 		super(debugName);
 	}
 
-	public String toString()
-	{
-		return "HTML::Mason::Element." + super.toString();
-	}
-
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
