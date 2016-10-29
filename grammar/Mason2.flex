@@ -189,10 +189,10 @@ SELF_POINTER = "$."
 }
 
 <CALL_PATH>{
-	{CALL_CLOSER}		{pushback();yybegin(CALL_EXPRESSION);return STRING_CONTENT;}
-	","					{pushback();yybegin(CALL_EXPRESSION);return STRING_CONTENT;}
-	[^]					{}
-	<<EOF>>				{yybegin(YYINITIAL);return STRING_CONTENT;}
+	{ANY_SPACES}?{CALL_CLOSER}		{pushback();yybegin(CALL_EXPRESSION);return STRING_CONTENT;}
+	{ANY_SPACES}?","				{pushback();yybegin(CALL_EXPRESSION);return STRING_CONTENT;}
+	[^]								{}
+	<<EOF>>							{yybegin(YYINITIAL);return STRING_CONTENT;}
 }
 
 <CALL_EXPRESSION>{
