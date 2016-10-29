@@ -31,7 +31,6 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
-import com.perl5.lang.htmlmason.lexer.HTMLMasonLexer;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import gnu.trove.THashMap;
@@ -177,7 +176,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 		StringBuilder simpleBuilder = new StringBuilder("<%(");
 		boolean addOr = false;
 
-		for (String token : HTMLMasonLexer.BUILTIN_TAGS_SIMPLE)
+		for (String token : BUILTIN_TAGS_SIMPLE)
 		{
 			if (addOr)
 			{
@@ -195,7 +194,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 		StringBuilder complexBuilder = new StringBuilder("%(");
 		addOr = false;
 
-		for (String token : HTMLMasonLexer.BUILTIN_TAGS_COMPLEX)
+		for (String token : BUILTIN_TAGS_COMPLEX)
 		{
 			if (addOr)
 			{

@@ -42,7 +42,6 @@ import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
-import com.perl5.lang.htmlmason.lexer.HTMLMasonLexer;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
@@ -387,8 +386,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 		static
 		{
-			BUILTIN_TAGS.addAll(HTMLMasonLexer.BUILTIN_TAGS_SIMPLE);
-			BUILTIN_TAGS.addAll(HTMLMasonLexer.BUILTIN_TAGS_COMPLEX);
+			BUILTIN_TAGS.addAll(BUILTIN_TAGS_SIMPLE);
+			BUILTIN_TAGS.addAll(BUILTIN_TAGS_COMPLEX);
 		}
 
 		protected ListTableModel<HTMLMasonCustomTag> myCustomTagsModel;

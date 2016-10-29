@@ -16,6 +16,11 @@
 
 package com.perl5.lang.htmlmason;
 
+import gnu.trove.THashSet;
+
+import java.util.Arrays;
+import java.util.Set;
+
 /**
  * Created by hurricup on 05.03.2016.
  */
@@ -98,4 +103,23 @@ public interface HTMLMasonSyntaxElements
 	String KEYWORD_DOC_OPENER_UNCLOSED = "<%" + KEYWORD_DOC;
 	String KEYWORD_DOC_OPENER = KEYWORD_DOC_OPENER_UNCLOSED + ">";
 	String KEYWORD_DOC_CLOSER = "</%" + KEYWORD_DOC + ">";
+
+	Set<String> BUILTIN_TAGS_SIMPLE = new THashSet<String>(Arrays.asList(
+			KEYWORD_ARGS,
+			KEYWORD_ATTR,
+			KEYWORD_PERL,
+			KEYWORD_INIT,
+			KEYWORD_CLEANUP,
+			KEYWORD_ONCE,
+			KEYWORD_SHARED,
+			KEYWORD_FLAGS,
+			KEYWORD_FILTER,
+			KEYWORD_TEXT,
+			KEYWORD_DOC
+	));
+
+	Set<String> BUILTIN_TAGS_COMPLEX = new THashSet<String>(Arrays.asList(
+			KEYWORD_METHOD,
+			KEYWORD_DEF
+	));
 }
