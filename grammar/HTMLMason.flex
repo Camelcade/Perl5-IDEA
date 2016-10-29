@@ -35,6 +35,9 @@ CALL_OPEN_TAG_START = "<&"
 CALL_OPEN_TAG_START_FILTERING = "<&|"
 CALL_OPEN_TAG_END = "&>"
 CALL_CLOSE_TAG_START = "</&"
+CALL_BAREWORD_PATH_START = [\w\/\.]
+
+SUBCOMPONENT_NAME = [\w\.\_\-]+
 
 EXP_BLOCK_FILTER_SUFFIX = {ANY_SPACE}*{IDENTIFIER}(","{ANY_SPACE}*{IDENTIFIER})*{ANY_SPACE}*{EXPR_BLOCK_CLOSER}
 
@@ -80,7 +83,9 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 %state PERL_LINE
 %state PERL_EXPR, PERL_EXPR_FILTER
 %state SELECT_OPEN_TAG,SELECT_CLOSE_TAG
-%state CALL_OPENER, CALL_CLOSER, CALL_OPENER_FILTERING
+%state CALL_OPENER, CALL_PATH, CALL_OPENER_DELEGATED
+%state CALL_OPENER_FILTERING, CALL_OPENER_COMMON
+%state CALL_CLOSER, CALL_CLOSER_NAME
 %state AFTER_PERL_LINE, AFTER_PERL_BLOCK
 
 %state INIT,CLEANUP,ONCE,SHARED,PARAMETRIZED_OPENER,FLAGS,ATTR,FILTER,PERL,ARGS
@@ -89,22 +94,52 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 
 %%
 
-<CALL_OPENER>{
+<CALL_PATH>{
+	{ANY_SPACES}?","					{pushback();yybegin(CALL_OPENER_DELEGATED);return STRING_CONTENT;}
+	{ANY_SPACES}?{CALL_OPEN_TAG_END}	{pushback();yybegin(CALL_OPENER_DELEGATED);return STRING_CONTENT;}
+	[^ \t\f\n\r,&]+						{}
+	{ANY_SPACES}						{}
+	<<EOF>>								{popState();yybegin(YYINITIAL);return STRING_CONTENT;}
+}
 
+<CALL_OPENER_COMMON>{
+	{CALL_BAREWORD_PATH_START}	{yybegin(CALL_PATH);}
+	{ANY_SPACES}				{return TokenType.WHITE_SPACE;}
+	[^]							{pushback();yybegin(CALL_OPENER_DELEGATED);}
+	<CALL_OPENER_DELEGATED>{
+		{CALL_OPEN_TAG_END}		{pushback();popState();}
+		[^]						{return delegateLexing();}
+	}
+}
+
+<CALL_OPENER>{
+	{CALL_OPEN_TAG_END}			{endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_CALL_CLOSER;}
+	[^]							{pushback();pushStateAndBegin(CALL_OPENER_COMMON);}
 }
 
 <CALL_OPENER_FILTERING>{
+	{CALL_OPEN_TAG_END}			{endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_CALL_CLOSER_UNMATCHED;}
+	[^]							{pushback();pushStateAndBegin(CALL_OPENER_COMMON);}
+}
 
+<CALL_CLOSER_NAME>{
+	{ANY_SPACES}?">"	{pushback();yybegin(CALL_CLOSER);return STRING_CONTENT;}
+	[^ \t\f\n\r\>]+		{}
+	{ANY_SPACES}		{}
+	<<EOF>>				{yybegin(YYINITIAL);return STRING_CONTENT;}
 }
 
 <CALL_CLOSER>{
-
+	">"				{yybegin(AFTER_PERL_BLOCK);return HTML_MASON_TAG_CLOSER;}
+	{ANY_SPACES}	{return TokenType.WHITE_SPACE;}
+	[^]				{pushback();yybegin(CALL_CLOSER_NAME);}
 }
 
 <PARAMETRIZED_OPENER>{
-	">"				{yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_TAG_CLOSER;}
-	{ANY_SPACES}	{return TokenType.WHITE_SPACE;}
-	{IDENTIFIER}	{return IDENTIFIER;}
+	">"					{yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_TAG_CLOSER;}
+	{ANY_SPACES}		{return TokenType.WHITE_SPACE;}
+	{SUBCOMPONENT_NAME}	{return IDENTIFIER;}
+	[^]					{return TokenType.BAD_CHARACTER;}
 }
 
 <INIT>{
@@ -146,7 +181,7 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 }
 
 <NON_EMPTY_DOC>{
-	{DOC_CLOSE_TAG}		{yybegin(TEXT);return COMMENT_BLOCK;}
+	{DOC_CLOSE_TAG}		{yybegin(DOC);pushback();return COMMENT_BLOCK;}
 	[^<]+				{}
 	"<"					{}
 	<<EOF>>				{yybegin(YYINITIAL);return COMMENT_BLOCK;}
@@ -158,7 +193,7 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 }
 
 <NON_EMPTY_TEXT>{
-	{TEXT_CLOSE_TAG}	{yybegin(TEXT);return STRING_CONTENT;}
+	{TEXT_CLOSE_TAG}	{yybegin(TEXT);pushback();return STRING_CONTENT;}
 	[^<]+				{}
 	"<"					{}
 	<<EOF>>				{yybegin(YYINITIAL);return STRING_CONTENT;}
@@ -236,8 +271,8 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 		{CALL_OPEN_TAG_START}			{pushback();yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;}
 		{CALL_OPEN_TAG_START_FILTERING}	{pushback();yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;}
 		{CALL_CLOSE_TAG_START}			{pushback();yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;}
-		[^]								{pushback();return HTML_MASON_TEMPLATE_BLOCK_HTML;}
-		<<EOF>>							{return HTML_MASON_TEMPLATE_BLOCK_HTML;}
+		[^]								{pushback();yybegin(NON_CLEAR_LINE);return HTML_MASON_TEMPLATE_BLOCK_HTML;}
+		<<EOF>>							{yybegin(YYINITIAL);return HTML_MASON_TEMPLATE_BLOCK_HTML;}
 	}
 }
 
@@ -246,8 +281,8 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 	<NON_CLEAR_LINE>{
 		{OPEN_TAG_START}				{yybegin(SELECT_OPEN_TAG);}
 		{CLOSE_TAG_START}				{yybegin(SELECT_CLOSE_TAG);}
-		{CALL_OPEN_TAG_START}			{yybegin(CALL_OPENER);return HTML_MASON_CALL_OPENER;}
-		{CALL_OPEN_TAG_START_FILTERING}	{yybegin(CALL_OPENER_FILTERING);return HTML_MASON_CALL_FILTERING_OPENER;}
+		{CALL_OPEN_TAG_START}			{yybegin(CALL_OPENER);startPerlExpression();return HTML_MASON_CALL_OPENER;}
+		{CALL_OPEN_TAG_START_FILTERING}	{yybegin(CALL_OPENER_FILTERING);startPerlExpression();return HTML_MASON_CALL_FILTERING_OPENER;}
 		{CALL_CLOSE_TAG_START}			{yybegin(CALL_CLOSER); return HTML_MASON_CALL_CLOSE_TAG_START;}
 		{WHITE_SPACES_ENDING_NEW_LINE}	{yybegin(CHECK_SPACE_CLEAR_LINE);}
 		{ANY_SPACES}					{yybegin(CHECK_SPACE);}

@@ -16,16 +16,25 @@
 
 package com.perl5.lang.htmlmason.lexer;
 
-import com.intellij.lexer.FlexAdapter;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
+import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonLexerAdapter extends FlexAdapter
+public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter implements HTMLMasonElementTypes
 {
+	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+			TokenSet.create(HTML_MASON_TEMPLATE_BLOCK_HTML)
+	);
+
 	public HTMLMasonLexerAdapter(Project project)
 	{
-		super(new HTMLMasonLexerGenerated(null));
+		super(project, new HTMLMasonLexer(null), TOKENS_TO_MERGE);
 	}
 }
+
