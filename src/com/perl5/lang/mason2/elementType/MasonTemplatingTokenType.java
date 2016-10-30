@@ -33,6 +33,6 @@ public class MasonTemplatingTokenType extends IElementType
 
 	public String toString()
 	{
-		return "MasonTemplatingTokenType." + super.toString();
+		return "Mason2: " + super.toString();
 	}
 }

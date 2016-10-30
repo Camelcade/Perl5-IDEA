@@ -33,11 +33,6 @@ public class MasonTemplatingElementType extends MasonTemplatingTokenType impleme
 		super(debugName);
 	}
 
-	public String toString()
-	{
-		return "MasonTemplatingElementType." + super.toString();
-	}
-
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)
