@@ -73,10 +73,19 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 		return getPackageName();
 	}
 
+	@Nullable
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespaceElement.class);
+		assert this instanceof PsiPerlNamespaceDefinition;
+		PsiPerlPackageExpr packageExpr = ((PsiPerlNamespaceDefinition) this).getPackageExpr();
+		if (packageExpr == null)
+		{
+			return null;
+		}
+
+		PsiElement firstChild = packageExpr.getFirstChild();
+		return firstChild instanceof PerlNamespaceElement ? (PerlNamespaceElement) firstChild : null;
 	}
 
 	@Nullable

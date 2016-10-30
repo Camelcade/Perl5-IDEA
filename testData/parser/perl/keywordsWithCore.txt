@@ -493,7 +493,7 @@ Perl5
         PsiElement(Perl5: IDENTIFIER)('some')
         PsiElement(Perl5: =)('=')
         PsiElement(Perl5: FORMAT_TERMINATOR)('.')
-      main::null
+      Foo::null
         PsiElement(Perl5: sub)('CORE::sub')
         PsiElement(Perl5: IDENTIFIER)('subname')
         PsiPerlBlockImpl(Perl5: BLOCK)

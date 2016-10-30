@@ -92,7 +92,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("PACKAGE"))
+		if (name.equals("package::name") || name.equals("constant") || name.equals("vars"))
 		{
 			return new PerlTokenTypeEx(name)
 			{
