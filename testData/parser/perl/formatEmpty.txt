@@ -1,6 +1,6 @@
 Perl5
-  PsiPerlFormatDefinitionImpl(PerlElementType.FORMAT_DEFINITION)
-    PsiElement(PerlTokenType.format)('format')
-    PsiElement(PerlTokenType.IDENTIFIER)('SOME')
-    PsiElement(PerlTokenType.=)('=')
-    PsiElement(PerlTokenType.FORMAT_TERMINATOR)('.')
+  PsiPerlFormatDefinitionImpl(Perl5: FORMAT_DEFINITION)
+    PsiElement(Perl5: format)('format')
+    PsiElement(Perl5: IDENTIFIER)('SOME')
+    PsiElement(Perl5: =)('=')
+    PsiElement(Perl5: FORMAT_TERMINATOR)('.')

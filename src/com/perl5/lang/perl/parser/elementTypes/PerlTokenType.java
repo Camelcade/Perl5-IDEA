@@ -30,7 +30,7 @@ public class PerlTokenType extends IElementType
 
 	public String toString()
 	{
-		return "PerlTokenType." + super.toString();
+		return "Perl5: " + super.toString();
 	}
 
 }
