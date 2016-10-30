@@ -33,11 +33,6 @@ public class MojoliciousElementType extends MojoliciousTokenType implements PsiE
 		super(debugName);
 	}
 
-	public String toString()
-	{
-		return "MojoliciousElementType." + super.toString();
-	}
-
 	@NotNull
 	@Override
 	public PsiElement getPsiElement(@NotNull ASTNode node)

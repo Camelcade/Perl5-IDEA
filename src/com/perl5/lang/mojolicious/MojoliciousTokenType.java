@@ -36,7 +36,7 @@ public class MojoliciousTokenType extends IElementType implements ILeafElementTy
 
 	public String toString()
 	{
-		return "MojoliciousTokenType." + super.toString();
+		return "Mojolicious: " + super.toString();
 	}
 
 	@NotNull
