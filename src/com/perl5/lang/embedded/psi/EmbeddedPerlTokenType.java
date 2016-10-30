@@ -33,6 +33,6 @@ public class EmbeddedPerlTokenType extends IElementType
 
 	public String toString()
 	{
-		return "EmbeddedPerlTokenType." + super.toString();
+		return "Embedded Perl5: " + super.toString();
 	}
 }
