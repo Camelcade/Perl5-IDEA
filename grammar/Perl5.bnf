@@ -544,8 +544,8 @@ try_expr ::= 'try' (parse_block|expr) {pin=1}
 catch_expr ::= 'catch' [catch_condition] (parse_block|expr) {pin=1}
 catch_condition ::= '(' catch_condition_content ')' {pin=1}
 private catch_condition_content ::= [catch_condition_type] variable_declaration_wrapper [expr]
-private catch_condition_type ::= any_package [type_constraints]
-left type_constraints ::= '[' expr ']'
+private catch_condition_type ::=  [type_constraints]
+type_constraints ::= any_package ['[' expr ']']
 
 finally_expr ::= 'finally' (parse_block|expr) {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -663,14 +663,14 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters
 private use_module_parameters ::= any_package [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
-upper use_statement_constant ::=  'use' <<package_expr 'constant'>> [perl_version] [use_constant_parameters] {pin=2}
+upper use_statement_constant ::=  'use' 'constant' [perl_version] [use_constant_parameters] {pin=2}
 private use_constant_parameters ::=
   constants_block
   | single_constant_definition
   | expr
 
 // other name to extend declaration, not variable
-upper use_vars_statement ::=  'use' <<package_expr 'vars'>> [perl_version] [<<parseUseVarsParameters>>] {pin=2}
+upper use_vars_statement ::=  'use' 'vars' [perl_version] [<<parseUseVarsParameters>>] {pin=2}
 
 constants_block ::= '{' [constants_block_content] '}' {pin=1}
 private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_constants_block}
@@ -685,12 +685,9 @@ constant_definition ::= string comma scalar_expr
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
 private undef_params ::= deref_expr | variable
 
-require_expr ::=  'require' (require_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
+require_expr ::=  'require' (any_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
-private require_package ::= any_package !'('
-private any_package ::= <<package_expr any_package_name>>
-private any_package_name ::= 'package::name'|'constant'|'vars'|IDENTIFIER
-meta package_expr ::= <<x1>>
+private any_package ::= 'package::name'|'constant'|'vars'
 
 private recover_statement ::= <<recoverStatement>>
 

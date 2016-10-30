@@ -77,15 +77,7 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
-		assert this instanceof PsiPerlNamespaceDefinition;
-		PsiPerlPackageExpr packageExpr = ((PsiPerlNamespaceDefinition) this).getPackageExpr();
-		if (packageExpr == null)
-		{
-			return null;
-		}
-
-		PsiElement firstChild = packageExpr.getFirstChild();
-		return firstChild instanceof PerlNamespaceElement ? (PerlNamespaceElement) firstChild : null;
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@Nullable

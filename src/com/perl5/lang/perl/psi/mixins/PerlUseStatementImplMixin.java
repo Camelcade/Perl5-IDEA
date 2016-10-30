@@ -83,6 +83,7 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 		return null;
 	}
 
+	@Nullable
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{

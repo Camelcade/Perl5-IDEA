@@ -2097,19 +2097,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("PACKAGE_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlPackageExprImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("TRYCATCH_EXPR"))
 		{
 			return new PerlElementTypeEx(name)
