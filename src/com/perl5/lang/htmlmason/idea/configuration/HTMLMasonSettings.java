@@ -23,11 +23,11 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.LanguageSubstitutor;
 import com.intellij.psi.LanguageSubstitutors;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
@@ -59,29 +59,54 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 	public String defaultHandlerName = "dhandler";
 	public List<String> substitutedExtensions = new ArrayList<String>();
 	public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
-	@Transient
-	private Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<String, Pair<Language, LanguageSubstitutor>>();
-	@Transient
-	private Map<String, String> myOpenCloseMap;
 
-	public HTMLMasonSettings()
+	private transient Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<>();
+	private transient Map<String, String> myOpenCloseMap;
+	private transient AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider;
+
+	public HTMLMasonSettings(@NotNull Project project)
+	{
+		this();
+		myProject = project;
+	}
+
+	private HTMLMasonSettings()
 	{
 		globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
 		globalVariables.add(new VariableDescription("$r", "Apache::Request"));
 		changeCounter++;
+		initCustomTagsMapProvider();
 	}
 
+	@NotNull
 	public static HTMLMasonSettings getInstance(@NotNull Project project)
 	{
-		HTMLMasonSettings persisted = ServiceManager.getService(project, HTMLMasonSettings.class);
-		if (persisted == null)
+		return ServiceManager.getService(project, HTMLMasonSettings.class);
+	}
+
+	private void initCustomTagsMapProvider()
+	{
+		myCustomTagsMapProvider = new AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>>()
 		{
-			persisted = new HTMLMasonSettings();
-		}
+			@Nullable
+			@Override
+			protected Map<String, HTMLMasonCustomTag> compute()
+			{
+				if (customTags.isEmpty())
+				{
+					return null;
+				}
 
-		persisted.setProject(project);
+				Map<String, HTMLMasonCustomTag> result = new THashMap<>();
 
-		return persisted;
+				for (HTMLMasonCustomTag customTag : customTags)
+				{
+					result.put(customTag.getText(), customTag);
+				}
+
+				return result;
+			}
+		};
 	}
 
 	@Nullable
@@ -151,6 +176,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 	{
 		super.settingsUpdated();
 		myOpenCloseMap = null;
+		initCustomTagsMapProvider();
 	}
 
 	public void prepareLexerConfiguration()
@@ -190,4 +216,9 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 		return myOpenCloseMap;
 	}
 
+	@Nullable
+	private Map<String, HTMLMasonCustomTag> getCustomTagsMap()
+	{
+		return myCustomTagsMapProvider.getValue();
+	}
 }
