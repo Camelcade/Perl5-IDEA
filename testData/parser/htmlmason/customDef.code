@@ -1,0 +1,8 @@
+<%def somedef>
+<div><% 'hi' %></div>
+</%def>
+
+
+<%customdef otherdef>
+<div><% 'hi' %></div>
+</%customdef>

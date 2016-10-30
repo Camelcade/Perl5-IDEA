@@ -44,6 +44,9 @@ EXP_BLOCK_FILTER_SUFFIX = {ANY_SPACE}*{IDENTIFIER}(","{ANY_SPACE}*{IDENTIFIER})*
 KEYWORD_DEF="def"
 KEYWORD_METHOD="method"
 
+CUSTOM_OPEN_TAG_CLOSED = {IDENTIFIER}">"
+CUSTOM_CLOSE_TAG = {CLOSE_TAG_START}{CUSTOM_OPEN_TAG_CLOSED}
+
 KEYWORD_INIT="init"
 INIT_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_INIT}">"
 
@@ -82,13 +85,15 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 %state PARAMETRIZED_TAG
 %state PERL_LINE
 %state PERL_EXPR, PERL_EXPR_FILTER
-%state SELECT_OPEN_TAG,SELECT_CLOSE_TAG
+%state SELECT_OPEN_TAG,SELECT_CLOSE_TAG,SELECT_OPEN_TAG_WITH_CUSTOM_TAGS,SELECT_CLOSE_TAG_WITH_CUSTOM_TAGS
 %state CALL_OPENER, CALL_PATH, CALL_OPENER_DELEGATED
 %state CALL_OPENER_FILTERING, CALL_OPENER_COMMON
 %state CALL_CLOSER, CALL_CLOSER_NAME
 %state AFTER_PERL_LINE, AFTER_PERL_BLOCK
 
-%state INIT,CLEANUP,ONCE,SHARED,PARAMETRIZED_OPENER,FLAGS,ATTR,FILTER,PERL,ARGS
+%state INIT,CLEANUP,ONCE,SHARED,PARAMETRIZED_OPENER,FLAGS,ATTR,FILTER,
+%state PERL,PERL_WITH_CUSTOM_CLOSER
+%state ARGS,ARGS_WITH_CUSTOM_CLOSER
 %state DOC, NON_EMPTY_DOC
 %state TEXT, NON_EMPTY_TEXT
 
@@ -164,8 +169,10 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 	[^]					{return delegateLexing();}
 }
 
-<ARGS>{
-	{ARGS_CLOSE_TAG}	{endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_ARGS_CLOSER;}
+<ARGS> 						{ARGS_CLOSE_TAG}	{return processArgsCloser();}
+<ARGS_WITH_CUSTOM_CLOSER>	{CUSTOM_CLOSE_TAG}	{return processCustomArgsCloser();}
+
+<ARGS_WITH_CUSTOM_CLOSER,ARGS>{
 	\R					{setPerlToInitial();return HTML_MASON_HARD_NEWLINE;}
 	[^]					{return delegateLexing();}
 }
@@ -204,10 +211,9 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 	[^]					{yybegin(NON_EMPTY_TEXT);}
 }
 
-<PERL>{
-	{PERL_CLOSE_TAG}	{yybegin(AFTER_PERL_BLOCK);return HTML_MASON_PERL_CLOSER;}
-	[^]					{return delegateLexing();}
-}
+<PERL> 							{PERL_CLOSE_TAG}	{return processPerlCloser();}
+<PERL_WITH_CUSTOM_CLOSER>		{CUSTOM_CLOSE_TAG}	{return processCustomPerlCloser();}
+<PERL_WITH_CUSTOM_CLOSER,PERL> 	[^]					{return delegateLexing();}
 
 <PERL_EXPR_FILTER>{
 	{ANY_SPACES}			{return TokenType.WHITE_SPACE;}
@@ -231,30 +237,44 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 <AFTER_PERL_LINE>	[^]	{pushback();yybegin(YYINITIAL);}
 <AFTER_PERL_BLOCK>	[^]	{pushback();yybegin(NON_CLEAR_LINE);}
 
-<SELECT_OPEN_TAG>{
-	{KEYWORD_METHOD}	{yybegin(PARAMETRIZED_OPENER);return HTML_MASON_METHOD_OPENER;}
-	{KEYWORD_DEF}		{yybegin(PARAMETRIZED_OPENER);return HTML_MASON_DEF_OPENER;}
+<SELECT_OPEN_TAG_WITH_CUSTOM_TAGS>{
+	<SELECT_OPEN_TAG>{
+		{KEYWORD_METHOD}	{return processMethodOpenTag();}
+		{KEYWORD_DEF}		{return processDefOpenTag();}
 
-	{KEYWORD_INIT}">"		{yybegin(INIT);startPerlExpression();return HTML_MASON_INIT_OPENER;}
-	{KEYWORD_CLEANUP}">"	{yybegin(CLEANUP);startPerlExpression();return HTML_MASON_CLEANUP_OPENER;}
-	{KEYWORD_ONCE}">"		{yybegin(ONCE);startPerlExpression();return HTML_MASON_ONCE_OPENER;}
-	{KEYWORD_SHARED}">"		{yybegin(SHARED);startPerlExpression();return HTML_MASON_SHARED_OPENER;}
-	{KEYWORD_FLAGS}">"		{yybegin(FLAGS);startPerlExpression();return HTML_MASON_FLAGS_OPENER;}
-	{KEYWORD_ATTR}">"		{yybegin(ATTR);startPerlExpression();return HTML_MASON_ATTR_OPENER;}
-	{KEYWORD_ARGS}">"		{yybegin(ARGS);startPerlExpression();return HTML_MASON_ARGS_OPENER;}
-	{KEYWORD_FILTER}">"		{yybegin(FILTER);startPerlExpression();return HTML_MASON_FILTER_OPENER;}
-	{KEYWORD_DOC}">"		{yybegin(DOC);return HTML_MASON_DOC_OPENER;}
-	{KEYWORD_TEXT}">"		{yybegin(TEXT);return HTML_MASON_TEXT_OPENER;}
+		{KEYWORD_INIT}">"		{yybegin(INIT);startPerlExpression();return HTML_MASON_INIT_OPENER;}
+		{KEYWORD_CLEANUP}">"	{yybegin(CLEANUP);startPerlExpression();return HTML_MASON_CLEANUP_OPENER;}
+		{KEYWORD_ONCE}">"		{yybegin(ONCE);startPerlExpression();return HTML_MASON_ONCE_OPENER;}
+		{KEYWORD_SHARED}">"		{yybegin(SHARED);startPerlExpression();return HTML_MASON_SHARED_OPENER;}
+		{KEYWORD_FLAGS}">"		{yybegin(FLAGS);startPerlExpression();return HTML_MASON_FLAGS_OPENER;}
+		{KEYWORD_ATTR}">"		{yybegin(ATTR);startPerlExpression();return HTML_MASON_ATTR_OPENER;}
+		{KEYWORD_ARGS}">"		{return processArgsOpenTag(ARGS);}
+		{KEYWORD_FILTER}">"		{yybegin(FILTER);startPerlExpression();return HTML_MASON_FILTER_OPENER;}
+		{KEYWORD_DOC}">"		{yybegin(DOC);return HTML_MASON_DOC_OPENER;}
+		{KEYWORD_TEXT}">"		{yybegin(TEXT);return HTML_MASON_TEXT_OPENER;}
 
-	{KEYWORD_PERL}">"		{yybegin(PERL);return HTML_MASON_PERL_OPENER;}
-	// fixme chack for custom tags
-	[^]					{pushback();startPerlExpression();yybegin(PERL_EXPR);return HTML_MASON_BLOCK_OPENER;}
+		{KEYWORD_PERL}">"		{return processPerlOpenTag(PERL);}
+	}
+
+	{IDENTIFIER}">"				{return processCustomSimpleOpenTag();}
+	{IDENTIFIER}				{return processCustomComplexOpenTag();}
+
+	<SELECT_OPEN_TAG>{
+		[^]						{return processOpenTagFallback();}
+		<<EOF>>					{yybegin(YYINITIAL);return HTML_MASON_BLOCK_OPENER;}
+	}
 }
 
-<SELECT_CLOSE_TAG>{
-	{KEYWORD_DEF}">"	{yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_DEF_CLOSER;}
-	{KEYWORD_METHOD}">"	{yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_METHOD_CLOSER;}
-	[^]					{yybegin(NON_CLEAR_LINE);return HTML_MASON_TEMPLATE_BLOCK_HTML;}
+<SELECT_CLOSE_TAG_WITH_CUSTOM_TAGS>{
+	<SELECT_CLOSE_TAG>{
+		{KEYWORD_DEF}">"	{return processDefCloseTag();}
+		{KEYWORD_METHOD}">"	{return processMethodCloseTag();}
+	}
+	{IDENTIFIER}">"			{return processCustomCloseTag();}
+	<SELECT_CLOSE_TAG>{
+		[^]					{return processCloseTagFallback();}
+		<<EOF>>				{return processCloseTagFallback();}
+	}
 }
 
 <PERL_LINE>{
@@ -279,8 +299,24 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 <YYINITIAL>{
 	{PERL_LINE_OPENER}	{yybegin(PERL_LINE);return HTML_MASON_LINE_OPENER;}
 	<NON_CLEAR_LINE>{
-		{OPEN_TAG_START}				{yybegin(SELECT_OPEN_TAG);}
-		{CLOSE_TAG_START}				{yybegin(SELECT_CLOSE_TAG);}
+		{OPEN_TAG_START}				{
+			if( myCustomTagsMap == null ){
+				yybegin(SELECT_OPEN_TAG);
+			}
+			else
+			{
+				yybegin(SELECT_OPEN_TAG_WITH_CUSTOM_TAGS);
+			}
+		}
+		{CLOSE_TAG_START}				{
+			if( myCustomTagsMap == null ){
+				yybegin(SELECT_CLOSE_TAG);
+			}
+			else
+			{
+				yybegin(SELECT_CLOSE_TAG_WITH_CUSTOM_TAGS);
+			}
+		}
 		{CALL_OPEN_TAG_START}			{yybegin(CALL_OPENER);startPerlExpression();return HTML_MASON_CALL_OPENER;}
 		{CALL_OPEN_TAG_START_FILTERING}	{yybegin(CALL_OPENER_FILTERING);startPerlExpression();return HTML_MASON_CALL_FILTERING_OPENER;}
 		{CALL_CLOSE_TAG_START}			{yybegin(CALL_CLOSER); return HTML_MASON_CALL_CLOSE_TAG_START;}

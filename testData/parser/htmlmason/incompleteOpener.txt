@@ -1,0 +1,5 @@
+HTML::Mason component
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiElement(HTML::Mason: <%)('<%')
+    PsiErrorElement:Error
+      <empty list>

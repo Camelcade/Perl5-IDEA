@@ -16,6 +16,7 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -53,7 +54,10 @@ public abstract class AbstractMasonSettings
 	{
 		componentsRootsVirtualFiles = null;
 		changeCounter++;
-		EditorNotifications.getInstance(myProject).updateAllNotifications();
+		if (!ApplicationManager.getApplication().isUnitTestMode())
+		{
+			EditorNotifications.getInstance(myProject).updateAllNotifications();
+		}
 	}
 
 	@NotNull

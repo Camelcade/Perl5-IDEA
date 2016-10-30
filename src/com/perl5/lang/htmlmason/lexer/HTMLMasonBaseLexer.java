@@ -18,8 +18,10 @@ package com.perl5.lang.htmlmason.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
@@ -27,8 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.PERL_EXPR;
-import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.PERL_EXPR_FILTER;
+import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.*;
 
 
 /**
@@ -59,5 +60,159 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
 	{
 		myCustomTagsMap = project == null ? null : HTMLMasonSettings.getInstance(project).getCustomTagsMap();
 		return this;
+	}
+
+	protected IElementType processCloseTagFallback()
+	{
+		yybegin(NON_CLEAR_LINE);
+		return HTML_MASON_TEMPLATE_BLOCK_HTML;
+	}
+
+	protected IElementType processMethodCloseTag()
+	{
+		yybegin(AFTER_PERL_BLOCK);
+		setPerlToInitial();
+		return HTML_MASON_METHOD_CLOSER;
+	}
+
+	protected IElementType processDefCloseTag()
+	{
+		yybegin(AFTER_PERL_BLOCK);
+		setPerlToInitial();
+		return HTML_MASON_DEF_CLOSER;
+	}
+
+	protected IElementType processCustomCloseTag()
+	{
+		CharSequence tokenText = yytext();
+		CharSequence tokenKey = tokenText.subSequence(0, tokenText.length() - 1);
+		assert myCustomTagsMap != null;
+		HTMLMasonCustomTag customTag = myCustomTagsMap.get(tokenKey.toString());
+		if (customTag != null)
+		{
+			HTMLMasonCustomTagRole tagRole = customTag.getRole();
+			if (tagRole == HTMLMasonCustomTagRole.METHOD)
+			{
+				return processMethodCloseTag();
+			}
+			else if (tagRole == HTMLMasonCustomTagRole.DEF)
+			{
+				return processDefCloseTag();
+			}
+		}
+		return processCloseTagFallback();
+	}
+
+	protected IElementType processArgsOpenTag(int state)
+	{
+		yybegin(state);
+		startPerlExpression();
+		return HTML_MASON_ARGS_OPENER;
+	}
+
+	protected IElementType processPerlOpenTag(int state)
+	{
+		yybegin(state);
+		return HTML_MASON_PERL_OPENER;
+	}
+
+	protected IElementType processArgsCloser()
+	{
+		endPerlExpression();
+		yybegin(AFTER_PERL_BLOCK);
+		return HTML_MASON_ARGS_CLOSER;
+	}
+
+	protected IElementType processCustomArgsCloser()
+	{
+		CharSequence tokenText = yytext();
+		CharSequence tokenKey = tokenText.subSequence(3, tokenText.length() - 1);
+		assert myCustomTagsMap != null;
+		HTMLMasonCustomTag customTag = myCustomTagsMap.get(tokenKey.toString());
+		if (customTag != null && customTag.getRole() == HTMLMasonCustomTagRole.ARGS)
+		{
+			return processArgsCloser();
+		}
+		return delegateLexing();
+	}
+
+	protected IElementType processPerlCloser()
+	{
+		yybegin(AFTER_PERL_BLOCK);
+		return HTML_MASON_PERL_CLOSER;
+	}
+
+	protected IElementType processCustomPerlCloser()
+	{
+		CharSequence tokenText = yytext();
+		CharSequence tokenKey = tokenText.subSequence(3, tokenText.length() - 1);
+		assert myCustomTagsMap != null;
+		HTMLMasonCustomTag customTag = myCustomTagsMap.get(tokenKey.toString());
+		if (customTag != null && customTag.getRole() == HTMLMasonCustomTagRole.PERL)
+		{
+			return processPerlCloser();
+		}
+		return delegateLexing();
+	}
+
+	protected IElementType processMethodOpenTag()
+	{
+		yybegin(PARAMETRIZED_OPENER);
+		return HTML_MASON_METHOD_OPENER;
+	}
+
+	protected IElementType processDefOpenTag()
+	{
+		yybegin(PARAMETRIZED_OPENER);
+		return HTML_MASON_DEF_OPENER;
+	}
+
+	protected IElementType processCustomSimpleOpenTag()
+	{
+		CharSequence tokenText = yytext();
+		CharSequence tokenKey = tokenText.subSequence(0, tokenText.length() - 1);
+		assert myCustomTagsMap != null;
+		HTMLMasonCustomTag customTag = myCustomTagsMap.get(tokenKey.toString());
+		if (customTag != null)
+		{
+			HTMLMasonCustomTagRole tagRole = customTag.getRole();
+			if (tagRole == HTMLMasonCustomTagRole.ARGS)
+			{
+				return processArgsOpenTag(ARGS_WITH_CUSTOM_CLOSER);
+			}
+			else if (tagRole == HTMLMasonCustomTagRole.PERL)
+			{
+				return processPerlOpenTag(PERL_WITH_CUSTOM_CLOSER);
+			}
+		}
+		return processOpenTagFallback();
+	}
+
+	protected IElementType processCustomComplexOpenTag()
+	{
+		assert myCustomTagsMap != null;
+		HTMLMasonCustomTag customTag = myCustomTagsMap.get(yytext().toString());
+		if (customTag != null)
+		{
+			HTMLMasonCustomTagRole tagRole = customTag.getRole();
+			if (tagRole == HTMLMasonCustomTagRole.METHOD)
+			{
+				return processMethodOpenTag();
+			}
+			else if (tagRole == HTMLMasonCustomTagRole.DEF)
+			{
+				return processDefOpenTag();
+			}
+		}
+
+		return processOpenTagFallback();
+	}
+
+	protected IElementType processOpenTagFallback()
+	{
+		pushback();
+		startPerlExpression();
+		yybegin(PERL_EXPR);
+		return HTML_MASON_BLOCK_OPENER;
 	}
 }

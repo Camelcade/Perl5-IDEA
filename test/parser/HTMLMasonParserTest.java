@@ -20,6 +20,9 @@ import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 
 /**
  * Created by hurricup on 06.03.2016.
@@ -35,6 +38,47 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 	protected String getTestDataPath()
 	{
 		return "testData/parser/htmlmason";
+	}
+
+	private void addCustomTag(String text, HTMLMasonCustomTagRole role)
+	{
+		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
+		settings.customTags.add(new HTMLMasonCustomTag(text, role));
+		settings.settingsUpdated();
+	}
+
+	public void testCustomArgs()
+	{
+		addCustomTag("customargs", HTMLMasonCustomTagRole.ARGS);
+		doTest();
+	}
+
+	public void testCustomPerl()
+	{
+		addCustomTag("customperl", HTMLMasonCustomTagRole.PERL);
+		doTest();
+	}
+
+	public void testCustomMethod()
+	{
+		addCustomTag("custommethod", HTMLMasonCustomTagRole.METHOD);
+		doTest();
+	}
+
+	public void testCustomDef()
+	{
+		addCustomTag("customdef", HTMLMasonCustomTagRole.DEF);
+		doTest();
+	}
+
+	public void testIncompleteCloser()
+	{
+		doTest();
+	}
+
+	public void testIncompleteOpener()
+	{
+		doTest(false);
 	}
 
 	public void testIssue1077()
@@ -163,6 +207,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase
 	{
 		super.setUp();
 		LanguageFileViewProviders.INSTANCE.addExplicitExtension(HTMLMasonLanguage.INSTANCE, new HTMLMasonFileViewProviderFactory());
+		getProject().registerService(HTMLMasonSettings.class, new HTMLMasonSettings(getProject()));
 	}
 
 }

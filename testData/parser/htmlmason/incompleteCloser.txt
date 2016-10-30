@@ -1,0 +1,2 @@
+HTML::Mason component
+  PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</%')

@@ -22,7 +22,7 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 /**
  * Created by hurricup on 11.03.2016.
  */
-enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes
+public enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes
 {
 	PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
 	METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),

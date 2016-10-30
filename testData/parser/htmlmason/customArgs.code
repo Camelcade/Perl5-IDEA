@@ -1,0 +1,9 @@
+<%args>
+    $var1
+    $var => $var1
+</%args>
+
+<%customargs>
+    $var1
+    $var => $var1
+</%customargs>
