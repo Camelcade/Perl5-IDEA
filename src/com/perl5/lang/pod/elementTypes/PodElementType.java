@@ -16,25 +16,17 @@
 
 package com.perl5.lang.pod.elementTypes;
 
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 24.04.2015.
  */
-public abstract class PodElementType extends IElementType implements PsiElementProvider
+public abstract class PodElementType extends PodTokenType implements PsiElementProvider
 {
 	public PodElementType(@NotNull @NonNls String debugName)
 	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "PodElementType." + super.toString();
+		super(debugName);
 	}
 }

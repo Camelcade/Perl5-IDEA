@@ -34,6 +34,6 @@ public class PodTokenType extends IElementType
 	@Override
 	public String toString()
 	{
-		return "PodTokenType." + super.toString();
+		return "Perl5 POD: " + super.toString();
 	}
 }
