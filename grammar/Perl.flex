@@ -159,6 +159,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %xstate LEX_LABEL
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
+%state CATCH, CATCH_PACKAGE
 
 %%
 /////////////////////////////////////// pod capture ////////////////////////////////////////////////////////////////////
@@ -298,7 +299,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 /////////////////////////////////// end of annotations /////////////////////////////////////////////////////////////////
 
-
 <QUOTED_HEREDOC_OPENER>{
 	{DQ_STRING}	{
 				yybegin(AFTER_VALUE);
@@ -395,6 +395,15 @@ REGEX_COMMENT = "(?#"[^)]*")"
 {DATA_BLOCK}				{yybegin(END_BLOCK);return COMMENT_BLOCK;}
 {LINE_COMMENT_ANNOTATION}	{return COMMENT_ANNOTATION;}
 {LINE_COMMENT}				{return COMMENT_LINE;}
+
+<CATCH_PACKAGE>	{QUALIFIED_IDENTIFIER}	{yybegin(YYINITIAL);return PACKAGE;}
+
+<CATCH>{
+	"("		{return getLeftParen(CATCH_PACKAGE);}
+	<CATCH_PACKAGE>{
+		[^]		{pushback();yybegin(YYINITIAL);}
+	}
+}
 
 <HANDLE_WITH_ANGLE>{
 	{IDENTIFIER} 	{return HANDLE;}
@@ -680,7 +689,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"func"						{checkIfLabel(METHOD_DECLARATION, RESERVED_FUNC);}
 
 	"try"						{checkIfLabel(YYINITIAL, RESERVED_TRY);}
-	"catch"						{checkIfLabel(YYINITIAL, RESERVED_CATCH);}
+	"catch"						{checkIfLabel(CATCH, RESERVED_CATCH);}
 	"finally"					{checkIfLabel(YYINITIAL, RESERVED_FINALLY);}
 
 	"with"					{checkIfLabel(YYINITIAL, RESERVED_WITH);}
