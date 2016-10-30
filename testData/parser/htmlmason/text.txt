@@ -2,6 +2,6 @@ HTML::Mason component
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<html>')
   PerlCompositeElementImpl(HTML::Mason: HTML_MASON_TEXT_BLOCK)
     PsiElement(HTML::Mason: <%text>)('<%text>')
-    PsiElement(PerlTokenType.STRING_CONTENT)('\n% This is an example of a Perl line.\n<% This is an example of an expression block. %>\n')
+    PsiElement(Perl5: STRING_CONTENT)('\n% This is an example of a Perl line.\n<% This is an example of an expression block. %>\n')
     PsiElement(HTML::Mason: </%text>)('</%text>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('</html>')
