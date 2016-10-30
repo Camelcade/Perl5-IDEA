@@ -34,6 +34,6 @@ public class TemplateToolkitTokenType extends IElementType
 	@Override
 	public String toString()
 	{
-		return "TT2: " + super.toString();
+		return "TemplateToolkit2Token." + super.toString();
 	}
 }
