@@ -50,7 +50,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		int tokenStart = getNextTokenStart();
 		int bufferEnd = getBufferEnd();
 		int currentCustomState = getCustomState();
-		int currentState = yystate();
+		int currentState = getRealLexicalState();
 
 		if (bufferEnd == 0 || tokenStart >= bufferEnd)
 		{
@@ -143,7 +143,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 		if (currentCustomState == LEX_TEMPLATE_BLOCK || currentCustomState == LEX_TEMPLATE_LINE)
 		{
-			currentState = yystate();
+			currentState = getRealLexicalState();
 			if (currentState == LEX_DQ_STRING)
 			{
 				if (result == TT2_DQ && !isEscaped)
@@ -220,7 +220,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 
 	protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd)
 	{
-		int currentState = yystate();
+		int currentState = getRealLexicalState();
 		return currentState != LEX_DQ_STRING &&
 				currentState != LEX_SQ_STRING &&
 				getTokenHistory().getLastTokenType() != TT2_OPEN_TAG &&
@@ -254,17 +254,11 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
 		setTokenEnd(tokenStart + tokenLength);
 		setCustomState(LEX_HTML);
 
-		int currentState = yystate();
+		int currentState = getRealLexicalState();
 		if (currentState == LEX_SQ_STRING || currentState == LEX_DQ_STRING)
 		{
 			popState();
 		}
-	}
-
-	@Override
-	public int yystate()
-	{
-		return preparsedTokensList.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
 	}
 
 	public Project getProject()
