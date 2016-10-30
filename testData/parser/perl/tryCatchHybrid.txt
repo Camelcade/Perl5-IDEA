@@ -336,7 +336,7 @@ Perl5
               PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -383,7 +383,7 @@ Perl5
                   PsiElement(Perl5: ))(')')
             PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::bar_in_place
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('bar_in_place')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -449,7 +449,7 @@ Perl5
                     PsiElement(Perl5: SCALAR_NAME)('args')
             PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::parent_sub
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('parent_sub')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
@@ -486,7 +486,7 @@ Perl5
               PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
           PsiElement(Perl5: ;)(';')
         PsiElement(Perl5: })('}')
-  main::null
+  sub main::parent_sub
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('parent_sub')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -534,7 +534,7 @@ Perl5
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
   PsiComment(Perl5: COMMENT_LINE)('# OR')
-  main::null
+  sub main::parent_sub_with_catch
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('parent_sub_with_catch')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
@@ -601,7 +601,7 @@ Perl5
     PsiElement(Perl5: use)('use')
     PsiElement(Perl5: package::name)('TryCatch')
     PsiElement(Perl5: ;)(';')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)

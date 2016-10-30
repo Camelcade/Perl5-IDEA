@@ -422,7 +422,7 @@ Perl5
           PsiElement(Perl5: /m)('e')
           PsiElement(Perl5: /m)('x')
     PsiElement(Perl5: ;)(';')
-  main::null
+  sub main::somesub
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('somesub')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)

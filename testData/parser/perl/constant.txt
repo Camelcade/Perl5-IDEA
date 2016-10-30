@@ -23,7 +23,7 @@ Perl5
   PsiPerlUseStatementConstantImpl(Perl5: USE_STATEMENT_CONSTANT)
     PsiElement(Perl5: use)('use')
     PsiElement(Perl5: constant)('constant')
-    main::PI
+    sub main::PI
       PsiPerlStringBareImpl(Perl5: STRING_BARE)
         PsiElement(Perl5: STRING_CONTENT)('PI')
       PsiElement(Perl5: =>)('=>')
@@ -35,14 +35,14 @@ Perl5
     PsiElement(Perl5: constant)('constant')
     PsiPerlConstantsBlockImpl(Perl5: CONSTANTS_BLOCK)
       PsiElement(Perl5: {)('{')
-      main::simple
+      sub main::simple
         PsiPerlStringBareImpl(Perl5: STRING_BARE)
           PsiElement(Perl5: STRING_CONTENT)('simple')
         PsiElement(Perl5: =>)('=>')
         PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
           PsiElement(Perl5: NUMBER)('1')
       PsiElement(Perl5: ,)(',')
-      main::array
+      sub main::array
         PsiPerlStringSqImpl(Perl5: STRING_SQ)
           PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
           PsiElement(Perl5: STRING_CONTENT)('array')
@@ -56,7 +56,7 @@ Perl5
           PsiElement(Perl5: STRING_CONTENT)('three')
           PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(')')
       PsiElement(Perl5: ,)(',')
-      main::null
+      sub main::null
         PsiPerlStringDqImpl(Perl5: STRING_DQ)
           PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
           PsiElement(Perl5: STRING_CONTENT_QQ)('array2')

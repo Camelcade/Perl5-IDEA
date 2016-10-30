@@ -6,7 +6,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -17,7 +17,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз'два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -28,7 +28,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз'два'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -39,7 +39,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::'два::::'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::::два::::::три::null
+      sub раз::::два::::::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -50,7 +50,7 @@ Perl5
     PsiElement(Perl5: package::name)('one::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::три::null
+      sub one::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -61,7 +61,7 @@ Perl5
     PsiElement(Perl5: package::name)('one::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::three::null
+      sub one::два::three::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -72,7 +72,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::two::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::two::три::null
+      sub раз::two::три::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -83,7 +83,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::three::null
+      sub раз::два::three::stub
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -94,7 +94,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -105,7 +105,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз'два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -116,7 +116,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз'два'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -127,7 +127,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::'два::::'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::::два::::::три::null
+      sub раз::::два::::::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -138,7 +138,7 @@ Perl5
     PsiElement(Perl5: package::name)('one::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::три::null
+      sub one::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -149,7 +149,7 @@ Perl5
     PsiElement(Perl5: package::name)('one::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::three::null
+      sub one::два::three::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -160,7 +160,7 @@ Perl5
     PsiElement(Perl5: package::name)('раз::two::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::two::три::null
+      sub раз::two::три::stub1
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -176,7 +176,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -187,7 +187,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз'два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -198,7 +198,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз'два'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -209,7 +209,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::'два::::'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::::два::::::три::null
+      sub раз::::два::::::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -220,7 +220,7 @@ Perl5
     PsiElement(Perl5: package::name)('::one::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::три::null
+      sub one::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -231,7 +231,7 @@ Perl5
     PsiElement(Perl5: package::name)('::one::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::three::null
+      sub one::два::three::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -242,7 +242,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::two::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::two::три::null
+      sub раз::two::три::stub2
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -258,7 +258,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -269,7 +269,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз'два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -280,7 +280,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз'два'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::три::null
+      sub раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -291,7 +291,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::'два::::'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::::два::::::три::null
+      sub раз::::два::::::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -302,7 +302,7 @@ Perl5
     PsiElement(Perl5: package::name)('::one::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::три::null
+      sub one::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -313,7 +313,7 @@ Perl5
     PsiElement(Perl5: package::name)('::one::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      one::два::three::null
+      sub one::два::three::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -324,7 +324,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::two::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::two::три::null
+      sub раз::two::три::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -335,7 +335,7 @@ Perl5
     PsiElement(Perl5: package::name)('::раз::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      раз::два::three::null
+      sub раз::два::three::stub3
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -1458,102 +1458,102 @@ Perl5
       PsiComment(Perl5: COMMENT_LINE)('#    %'::раз::two::три;')
       PsiComment(Perl5: COMMENT_LINE)('#    %'::раз::два::three;')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз::два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз::два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз'два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз'два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз'два'три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз'два'три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз::'два::::'три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз::'два::::'три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::два::three
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::два::three')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз::two::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз::two::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::раз::два::three
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('раз::два::three')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз::два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз::два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз'два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз'два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз'два'три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз'два'три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз::'два::::'три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз::'два::::'три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::one::два::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::one::два::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::one::два::three
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::one::два::three')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз::two::три
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз::two::три')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::::раз::два::three
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('::раз::два::three')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::two::threeраз::раз
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::two::threeраз::раз')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::two::threeраз
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::two::threeраз')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::two::threeразthree::два
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::two::threeразthree::два')
         PsiElement(Perl5: ;)(';')
       PsiPerlStatementImpl(Perl5: STATEMENT)
-        one::two::threeразthree::null
+        sub one::two::threeразthree::one::two::threeразthree
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('one::two::threeразthree')
         PsiElement(Perl5: ;)(';')
@@ -2159,7 +2159,7 @@ Perl5
       PsiElement(Perl5: package::name)('ꑭʑ')
       PsiElement(Perl5: ;)(';')
       PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-        ꑭʑ::null
+        sub ꑭʑ::ニュー
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('ニュー')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -2396,7 +2396,7 @@ Perl5
       PsiElement(Perl5: package::name)('main')
       PsiElement(Perl5: ;)(';')
       PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-        main::null
+        sub main::ㄘ
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('ㄘ')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -2410,7 +2410,7 @@ Perl5
                     PsiElement(Perl5: NUMBER)('0')
                   PsiElement(Perl5: ))(')')
             PsiElement(Perl5: })('}')
-        main::null
+        sub main::ƒஓ
           PsiElement(Perl5: sub)('sub')
           PsiElement(Perl5: IDENTIFIER)('ƒஓ')
           PsiPerlBlockImpl(Perl5: BLOCK)

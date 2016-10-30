@@ -1,7 +1,7 @@
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiComment(Perl5: COMMENT_LINE)('# Этот исходник посвящается программистам 1с приходящим на собеседование')
-  main::null
+  sub main::обождать_пять_менут
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('обождать_пять_менут')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -48,7 +48,7 @@ Perl5
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::обождать_менуту
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('обождать_менуту')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -126,25 +126,25 @@ Perl5
     PsiElement(Perl5: package::name)('Foo')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      Foo::null
+      sub Foo::раздватри
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('раздватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      Foo::null
+      sub Foo::_раздватри
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('_раздватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      Foo::null
+      sub Foo::oneразд123ватри
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('oneразд123ватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      Foo::null
+      sub Foo::_разд123one_ватри
         PsiElement(Perl5: sub)('sub')
         PsiElement(Perl5: IDENTIFIER)('_разд123one_ватри')
         PsiPerlBlockImpl(Perl5: BLOCK)

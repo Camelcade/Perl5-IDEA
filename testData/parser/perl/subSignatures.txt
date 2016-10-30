@@ -1,5 +1,5 @@
 Perl5
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -29,7 +29,7 @@ Perl5
               PsiElement(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -65,7 +65,7 @@ Perl5
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -98,7 +98,7 @@ Perl5
               PsiElement(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -144,7 +144,7 @@ Perl5
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -168,7 +168,7 @@ Perl5
             PsiElement(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -207,7 +207,7 @@ Perl5
             PsiElement(Perl5: ARRAY_NAME)('inputs')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -230,7 +230,7 @@ Perl5
             PsiElement(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -285,7 +285,7 @@ Perl5
               PsiElement(Perl5: HASH_NAME)('inputs')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -308,7 +308,7 @@ Perl5
             PsiElement(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')
@@ -322,7 +322,7 @@ Perl5
             PsiElement(Perl5: NUMBER)('123')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  main::null
+  sub main::foo
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('foo')
     PsiElement(Perl5: ()('(')

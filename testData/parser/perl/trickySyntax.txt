@@ -311,7 +311,7 @@ Perl5
   PerlHeredocElementImpl(HEREDOC)
     PsiElement(Perl5: STRING_CONTENT)('SELECT __ESSENTIAL__\n    FROM   __TABLE__\n    WHERE  %s\n')
   PsiComment(Perl5: HEREDOC_END)('\n')
-  main::null
+  sub main::blah
     PsiElement(Perl5: sub)('sub')
     PsiElement(Perl5: IDENTIFIER)('blah')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)

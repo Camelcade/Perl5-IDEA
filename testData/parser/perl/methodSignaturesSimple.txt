@@ -26,7 +26,7 @@ Perl5
         PsiElement(Perl5: use)('use')
         PsiElement(Perl5: package::name)('Method::Signatures::Simple')
         PsiElement(Perl5: ;)(';')
-      User::null
+      sub User::new
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('new')
         PsiElement(Perl5: ()('(')
@@ -104,7 +104,7 @@ Perl5
                     PsiElement(Perl5: SCALAR_NAME)('class')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::new_id
         PsiElement(Perl5: func)('func')
         PsiElement(Perl5: IDENTIFIER)('new_id')
         PsiElement(Perl5: ()('(')
@@ -137,7 +137,7 @@ Perl5
               PsiElement(Perl5: ++)('++')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::name
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('name')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -155,7 +155,7 @@ Perl5
                 PsiElement(Perl5: })('}')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::email
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('email')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -179,7 +179,7 @@ Perl5
         PsiElement(Perl5: ;)(';')
       PsiComment(Perl5: COMMENT_LINE)('# -- other features -- #')
       PsiComment(Perl5: COMMENT_LINE)('# attributes')
-      User::null
+      sub User::foo
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('foo')
         PsiElement(Perl5: :)(':')
@@ -209,7 +209,7 @@ Perl5
                   PsiElement(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::foo
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('foo')
         PsiElement(Perl5: ()('(')
@@ -257,7 +257,7 @@ Perl5
                   PsiElement(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::foo
         PsiElement(Perl5: func)('func')
         PsiElement(Perl5: IDENTIFIER)('foo')
         PsiElement(Perl5: :)(':')
@@ -287,7 +287,7 @@ Perl5
                   PsiElement(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::foo
         PsiElement(Perl5: func)('func')
         PsiElement(Perl5: IDENTIFIER)('foo')
         PsiElement(Perl5: ()('(')
@@ -330,7 +330,7 @@ Perl5
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
       PsiComment(Perl5: COMMENT_LINE)('# change invocant name')
-      User::null
+      sub User::foo
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('foo')
         PsiElement(Perl5: ()('(')
@@ -358,7 +358,7 @@ Perl5
                     PsiElement(Perl5: SCALAR_NAME)('bar')
                 PsiElement(Perl5: ))(')')
           PsiElement(Perl5: })('}')
-      User::null
+      sub User::bar
         PsiElement(Perl5: method)('method')
         PsiElement(Perl5: IDENTIFIER)('bar')
         PsiElement(Perl5: ()('(')

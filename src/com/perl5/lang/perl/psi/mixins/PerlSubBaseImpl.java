@@ -34,6 +34,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.IDENTIFIER;
+
 /**
  * Created by hurricup on 05.06.2015.
  */
@@ -146,7 +148,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public PsiElement getSubNameElement()
 	{
-		return findChildByClass(PerlSubNameElement.class);
+		return findChildByType(IDENTIFIER);
 	}
 
 	@NotNull
@@ -252,6 +254,6 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public String toString()
 	{
-		return getCanonicalName();
+		return "sub " + getCanonicalName();
 	}
 }
