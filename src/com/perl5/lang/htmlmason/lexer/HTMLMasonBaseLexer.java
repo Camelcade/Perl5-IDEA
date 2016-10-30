@@ -16,11 +16,16 @@
 
 package com.perl5.lang.htmlmason.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
+import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.PERL_EXPR;
 import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.PERL_EXPR_FILTER;
@@ -40,6 +45,8 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
 		}
 		return -1;
 	};
+	@Nullable
+	protected Map<String, HTMLMasonCustomTag> myCustomTagsMap;
 
 	@Nullable
 	@Override
@@ -48,4 +55,9 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
 		return COMMENT_END_CALCULATOR;
 	}
 
+	public HTMLMasonBaseLexer withProject(@Nullable Project project)
+	{
+		myCustomTagsMap = project == null ? null : HTMLMasonSettings.getInstance(project).getCustomTagsMap();
+		return this;
+	}
 }

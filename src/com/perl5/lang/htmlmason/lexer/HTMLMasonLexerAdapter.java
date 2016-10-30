@@ -34,7 +34,7 @@ public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter imp
 
 	public HTMLMasonLexerAdapter(Project project)
 	{
-		super(project, new HTMLMasonLexer(null), TOKENS_TO_MERGE);
+		super(project, new HTMLMasonLexer(null).withProject(project), TOKENS_TO_MERGE);
 	}
 }
 

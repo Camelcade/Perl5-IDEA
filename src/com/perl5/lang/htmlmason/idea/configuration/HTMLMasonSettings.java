@@ -217,7 +217,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 	}
 
 	@Nullable
-	private Map<String, HTMLMasonCustomTag> getCustomTagsMap()
+	public Map<String, HTMLMasonCustomTag> getCustomTagsMap()
 	{
 		return myCustomTagsMapProvider.getValue();
 	}
