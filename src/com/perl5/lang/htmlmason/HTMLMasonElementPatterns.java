@@ -42,7 +42,7 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
 			psiElement(PerlSubNameElement.class).withParent(
 					psiElement(PsiPerlMethod.class)
 							.withParent(
-									psiElement(PsiPerlNamedListExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
+									psiElement(PsiPerlSubCallExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
 							)
 			);
 

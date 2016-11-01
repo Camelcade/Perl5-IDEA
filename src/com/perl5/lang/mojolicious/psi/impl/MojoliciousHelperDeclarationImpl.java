@@ -107,13 +107,6 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 
 	@Override
 	@Nullable
-	public PsiPerlExpr getExpr()
-	{
-		return findChildByClass(PsiPerlExpr.class);
-	}
-
-	@Override
-	@Nullable
 	public PsiPerlMethod getMethod()
 	{
 		return findChildByClass(PsiPerlMethod.class);
@@ -124,5 +117,19 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	public boolean isMethod()
 	{
 		return true;
+	}
+
+	@Override
+	@NotNull
+	public PsiPerlParenthesisedCallArguments getParenthesisedCallArguments()
+	{
+		return notNullChild(PsiTreeUtil.getChildOfType(this, PsiPerlParenthesisedCallArguments.class));
+	}
+
+	@Override
+	@NotNull
+	public PsiPerlExpr getExpr()
+	{
+		return notNullChild(PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class));
 	}
 }

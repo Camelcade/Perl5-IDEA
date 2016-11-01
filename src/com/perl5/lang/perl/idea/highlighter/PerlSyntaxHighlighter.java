@@ -218,6 +218,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(ATTRIBUTE_IDENTIFIER, new TextAttributesKey[]{PERL_SUB_ATTRIBUTE});
 		ATTRIBUTES_MAP.put(ANNOTATION_UNKNOWN_KEY, new TextAttributesKey[]{PERL_COMMENT});
 		ATTRIBUTES_MAP.put(ANNOTATION_NOINSPECTION_KEY, new TextAttributesKey[]{PERL_ANNOTATION});
+
+		ATTRIBUTES_MAP.put(BUILTIN_ARGUMENTLESS, new TextAttributesKey[]{PERL_SUB_BUILTIN});
+		ATTRIBUTES_MAP.put(BUILTIN_UNARY, new TextAttributesKey[]{PERL_SUB_BUILTIN});
+		ATTRIBUTES_MAP.put(BUILTIN_LIST, new TextAttributesKey[]{PERL_SUB_BUILTIN});
 	}
 
 

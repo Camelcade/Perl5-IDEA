@@ -439,27 +439,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return r;
 	}
 
-
-	/**
-	 * Parsing simple call arguments, prototype tricks not allowed (like code block without sub
-	 *
-	 * @param b Perlbuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseSimpleCallArguments(PsiBuilder b, int l)
-	{
-		PsiBuilder.Marker m = b.mark();
-		if (PerlParserImpl.expr(b, l, -1))
-		{
-			m.done(CALL_ARGUMENTS);
-
-			return true;
-		}
-		m.drop();
-		return false;
-	}
-
 	/**
 	 * Parses string and wraps it if necessary
 	 * fixme we should control where string is located, and avoid in hash indexes, for example
@@ -554,25 +533,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			return true;
 		}
 		m.rollbackTo();
-		return false;
-	}
-
-	// LEFT_PAREN [call_arguments] RIGHT_PAREN !LEFT_BRACKET
-	public static boolean parseLeftwardCallArguments(PsiBuilder b, int l)
-	{
-		if (b.getTokenType() == LEFT_PAREN)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			PerlParserImpl.parse_call_arguments(b, l);
-			if (b.getTokenType() == RIGHT_PAREN && b.lookAhead(1) != LEFT_BRACKET)
-			{
-				b.advanceLexer();
-				m.done(CALL_ARGUMENTS);
-				return true;
-			}
-			m.rollbackTo();
-		}
 		return false;
 	}
 

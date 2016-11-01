@@ -55,7 +55,7 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 	{
 		b.setNextSubElementType(MOJO_HELPER_METHOD);
 		PsiBuilder.Marker m = b.mark();
-		boolean r = PerlParserImpl.parse_nested_call(b, l, MOJO_HELPER_PARSER);
+		boolean r = PerlParserImpl.nested_call(b, l, MOJO_HELPER_PARSER);
 
 		if (r)
 		{

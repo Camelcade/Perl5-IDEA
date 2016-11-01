@@ -1160,32 +1160,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("NAMED_LIST_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlNamedListExprImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("NAMED_UNARY_EXPR"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlNamedUnaryExprImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("NAMESPACE_CONTENT"))
 		{
 			return new PerlElementTypeEx(name)
@@ -1221,19 +1195,6 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlNestedCallImpl(node);
-				}
-			};
-		}
-
-		if (name.equals("NESTED_CALL_ARGUMENTS"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlNestedCallArgumentsImpl(node);
 				}
 			};
 		}
@@ -2331,6 +2292,19 @@ public class PerlElementTypeFactory
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
 					return new PsiPerlAnnotationNoinspectionImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("PARENTHESISED_CALL_ARGUMENTS"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlParenthesisedCallArgumentsImpl(node);
 				}
 			};
 		}

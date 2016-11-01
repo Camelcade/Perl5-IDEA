@@ -245,8 +245,6 @@ limitations under the License.
     OPERATOR_SMARTMATCH='~~'
 // end of synthetic operators
 
-	OPERATOR_NAMED_UNARY='unary'
-	OPERATOR_NAMED_ARGUMENTLESS='argumentless'
     OPERATOR_FILETEST='-t'
 
     // single mid-quote. e evaluatable s///e;
@@ -313,6 +311,11 @@ limitations under the License.
 
     // custom tokens
     IDENTIFIER='IDENTIFIER'
+
+    BUILTIN_LIST='list'
+    BUILTIN_UNARY='unary'
+    BUILTIN_ARGUMENTLESS='argumentless'
+
 	ATTRIBUTE_IDENTIFIER='ATTRIBUTE_IDENTIFIER'
 
     SUB_PROTOTYPE_TOKEN='SUB_PROTOTYPE_TOKEN'
@@ -366,7 +369,6 @@ limitations under the License.
     extends("nested_call")=sub_call_expr
 
     implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
-	mixin("named_list_expr")="com.perl5.lang.perl.psi.mixins.PerlMethodContainerMixIn"
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementImplMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
@@ -379,6 +381,8 @@ limitations under the License.
     implements("constant_definition")="com.perl5.lang.perl.psi.PerlConstantDefinition"
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
     stubClass("constant_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
+
+	extends("parenthesised_call_arguments")=call_arguments
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
@@ -696,42 +700,34 @@ expr ::=
     lp_or_xor_expr          // 0
     | lp_and_expr           // 1
     | lp_not_expr           // 2
-    | named_list_expr       // 3
-    | comma_sequence_expr   // 4
-    | assign_or_flow_expr   // 5
-    | trenar_expr           // 6
-    | flipflop_expr         // 7
-    | or_expr               // 8
-    | and_expr              // 9
-    | bitwise_or_xor_expr   // 10
-    | bitwise_and_expr      // 11
-    | equal_expr            // 12
-    | compare_expr          // 13
-    | named_unary_expr      // 14
-    | shift_expr            // 15
-    | add_expr              // 16
-    | mul_expr              // 17
-    | regex_expr            // 18
-    | op_5_expr             // 19
-    | pow_expr              // 20
-    | op_3_expr             // 21
-    | deref_expr            // 22
-    | term_expr             // 23
+    | comma_sequence_expr   // 3 for list
+    | assign_or_flow_expr   // 4
+    | trenar_expr           // 5
+    | flipflop_expr         // 6
+    | or_expr               // 7
+    | and_expr              // 8
+    | bitwise_or_xor_expr   // 9
+    | bitwise_and_expr      // 10
+    | equal_expr            // 11
+    | compare_expr          // 12
+    | shift_expr            // 13  for unary
+    | add_expr              // 14
+    | mul_expr              // 15
+    | regex_expr            // 16
+    | op_5_expr             // 17
+    | pow_expr              // 18
+    | op_3_expr             // 19
+    | deref_expr            // 20
+    | term_expr             // 21
 
 // above list operators
-private list_expr ::= <<parseExpressionLevel 3>>
+private list_expr ::= <<parseExpressionLevel 2>>
 
 // List expression elements
-private scalar_expr ::= <<parseExpressionLevel 4>>
+private scalar_expr ::= <<parseExpressionLevel 3>>
 
 // Unary expression argument
-private unary_expr ::= <<parseExpressionLevel 14>>
-
-// used in local declaration, fixme legacy
-private immutable_expr ::= <<parseExpressionLevel 21>>
-
-named_unary_expr ::= { '-t' | 'unary' } [unary_expr]
-named_list_expr ::= 'argumentless' // fixme implement
+private unary_expr ::= <<parseExpressionLevel 12>>
 
 // ordered for best performance of perltidy
 term_expr ::=
@@ -775,6 +771,7 @@ term_expr ::=
     | finally_expr // fallback for keyword
 
     | sub_call_expr
+    | code_primitive
 
 
 grep_expr ::=  'grep' grep_map_arguments {pin=1}
@@ -797,13 +794,15 @@ private sort_arguments ::=
     | sort_arguments_
 
 private sort_arguments_ ::=
-    scalar_variable grep_map_sort_tail
-    | parse_block [comma] grep_map_sort_tail
-    | callable grep_map_sort_tail
+    parse_block [comma] grep_map_sort_tail
+    | sorter grep_map_sort_tail
     | grep_map_sort_tail
 
+private sorter ::= scalar_variable | normal_method
+
 private list_or_list_element ::= parenthesised_expr [array_element]
-parenthesised_expr ::= '(' parenthesised_expr_content ')' {pin=1 name="Parenthesised expression"}
+parenthesised_expr ::= <<parse_parenthesized_expression parenthesised_expr_content>>
+private meta parse_parenthesized_expression ::= '(' <<x1>> ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )
 
@@ -818,7 +817,7 @@ suff_pp_expr ::= expr ('++'|'--')
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }
 
 private op_5_expr ::= ref_expr | prefix_unary_expr
-ref_expr ::= '\\' referencable_expr { rightAssociative=true }
+ref_expr ::= '\\' expr { rightAssociative=true }
 prefix_unary_expr ::= {'~' | '!' | '+' | '-'} expr { rightAssociative=true }
 regex_expr ::= expr ('=~'|'!~') expr
 mul_expr ::= expr ({'*'|'/'|'%'|'x'} expr)+
@@ -851,18 +850,6 @@ print_expr ::=  ('print'|'printf'|'say') ( '(' [print_arguments] ')' | [print_ar
 private print_arguments ::= perl_handle expr | expr
 
 sub_expr ::=  'sub' sub_definition_parameters parse_block  // fixme make sure that this one checked after definition and declaration
-
-sub_call_expr ::= leftward_call_expr | rightward_call_expr
-
-private leftward_call_expr ::= callable <<parseLeftwardCallArguments>>
-private rightward_call_expr ::= callable [call_arguments]
-
-//// fixme this should depend on prototype
-call_arguments ::= parse_call_arguments
-private parse_call_arguments ::=
-    anon_hash comma list_expr
-    | parse_block [[comma] list_expr]
-    | list_expr
 
 file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
 
@@ -984,13 +971,19 @@ private glob_braced_cast_target ::= '*{' block_content '*}' {pin=1}
 
 left glob_slot ::= hash_index
 
+private code_primitive ::= code_variable | code_cast_expr
+code_cast_expr ::= '$&' code_cast_target
+private code_cast_target ::= {<<block code_braced_cast_target>> | scalar_primitive}
+private code_braced_cast_target ::= '&{' block_content '&}' {pin=1}
+
+
 // extended nested element for using in ()
 private nested_element_variation ::=
 	<<parseNestedElementVariation>>
     | hash_index
     | array_index
-    | <<nested_call IDENTIFIER>>
-    | nested_call_arguments    // function call like $var->()
+    | regular_nested_call
+    | parenthesised_call_arguments
     | scalar_call
     | post_deref_expr
     | post_deref_glob_expr
@@ -1002,12 +995,6 @@ post_deref_glob_expr ::= '$*' hash_index 						{name="Glob expr"}
 post_deref_array_slice_expr ::= '$@' {hash_index|array_index}	{name="Array slice"}
 post_deref_hash_slice_expr ::= '$%' {hash_index|array_index}	{name="Hash slice"}
 
-meta nested_call ::= <<parse_nested_call <<x1>>>>
-private meta parse_nested_call ::= <<method <<x1>>>> [method_call_arguments]
-scalar_call ::= scalar_or_element [method_call_arguments]
-private method_call_arguments ::= '(' [<<parseSimpleCallArguments>>] ')'
-nested_call_arguments ::= method_call_arguments
-
 hash_index ::= '{' hash_index_content '}' {pin=1}
 private hash_index_content ::= expr {recoverWhile=recover_braced_expression}
 private recover_braced_expression ::= !'}'
@@ -1015,20 +1002,44 @@ array_index ::= '[' array_index_content ']' {pin=1}
 private array_index_content ::= expr {recoverWhile=recover_bracketed_expression}
 private recover_bracketed_expression ::= !']'
 
-
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
+meta method ::= <<x1>>
+meta nested_call ::= <<method <<x1>>>> [parenthesised_call_arguments]	// reused by mk_accessor and so on
+meta call_arguments ::= <<x1>>
+parenthesised_call_arguments ::= <<parse_parenthesized_expression optional_expression>> !'['
+private optional_expression ::= [expr]
 
-private callable ::= normal_method | code // being used in parseFunctionCall
-private referencable_expr ::= code | scalar_expr
+private regular_nested_call ::= <<nested_call IDENTIFIER>>
+scalar_call ::= scalar_or_element [parenthesised_call_arguments]
 
-private code ::=
-    '$&' normal_method
-    | code_variable
-    | code_cast_expr
+sub_call_expr ::=
+ 	normal_leftward_call |
+ 	named_unary_call |
+ 	argumentless_call |
+ 	normal_rightward_call
 
-code_cast_expr ::= '$&' code_cast_target
-private code_cast_target ::= {<<block code_braced_cast_target>> | scalar_primitive}
-private code_braced_cast_target ::= '&{' block_content '&}' {pin=1}
+private argumentless_call ::= <<method 'argumentless'>>
+
+private named_unary_call ::= <<method named_unary_calee>> [<<call_arguments unary_expr>>]
+private named_unary_calee ::= 'unary' | '-t'
+
+private normal_rightward_call ::= <<rightward_call method_tokens>>
+private meta rightward_call ::= <<method <<x1>>>> [<<call_arguments parse_call_arguments>>]
+
+// this should come first to avoid ambiguation method (list)[index]
+private normal_leftward_call ::= <<leftward_call method_tokens>>
+private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} parenthesised_call_arguments
+
+//// fixme this should depend on prototype
+private parse_call_arguments ::=
+    anon_hash comma list_expr
+    | parse_block [[comma] list_expr]
+    | list_expr
+
+private normal_method ::= <<method method_tokens>>
+// the rest are fallback
+private method_tokens ::= IDENTIFIER | 'list' | 'unary' | 'argumentless' | 'method' | 'func' | 'finally' | 'try' | 'catch'
+
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
@@ -1082,10 +1093,6 @@ code_variable ::= '$&' {CODE_NAME | '&{' CODE_NAME '&}'}
 glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'}
 
 private comma ::= ',' | '=>'
-private normal_method ::= <<method method_tokens>>
-// the rest are fallback
-private method_tokens ::= IDENTIFIER | 'method' | 'func' | 'finally' | 'try' | 'catch'
-meta method ::= <<x1>>
 
 
 /********************************************** Extensions for Method::Signatures *************************************/

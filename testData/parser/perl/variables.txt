@@ -956,7 +956,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
       PsiPerlMethodImpl(Perl5: METHOD)
-        PsiElement(Perl5: IDENTIFIER)('kill')
+        PsiElement(Perl5: list)('kill')
       PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
         PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
           PsiPerlStringSqImpl(Perl5: STRING_SQ)

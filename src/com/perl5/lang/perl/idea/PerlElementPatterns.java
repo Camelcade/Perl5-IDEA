@@ -225,8 +225,8 @@ public interface PerlElementPatterns extends PerlElementTypes
 	);
 
 	// pattern for shift;
-	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> SHIFT_PATTERN =
-			psiElement(PsiPerlNamedUnaryExpr.class).withFirstChild(
+	PsiElementPattern.Capture<PsiPerlSubCallExpr> SHIFT_PATTERN =
+			psiElement(PsiPerlSubCallExpr.class).withFirstChild(
 					psiElement(PsiPerlMethod.class).withText("shift")
 			);
 
@@ -235,7 +235,7 @@ public interface PerlElementPatterns extends PerlElementTypes
 			psiElement(PsiPerlArrayElement.class)
 					.withFirstChild(psiElement(PsiPerlScalarVariable.class).withText("$_"));
 
-	PsiElementPattern.Capture<PsiPerlNamedUnaryExpr> TAILING_SHIFT_PATTERN =
+	PsiElementPattern.Capture<PsiPerlSubCallExpr> TAILING_SHIFT_PATTERN =
 			SHIFT_PATTERN.beforeLeaf(psiElement(SEMICOLON));
 
 
