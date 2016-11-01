@@ -182,7 +182,7 @@ task generatePerlLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "PerlLexerGenerated.java")
+    outputs.file file(dst + "PerlLexer.java")
 
     classpath configurations.lexer
 }
@@ -220,7 +220,7 @@ task generateEmbeddedPerlLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "EmbeddedPerlLexerGenerated.java")
+    outputs.file file(dst + "EmbeddedPerlLexer.java")
     classpath configurations.lexer
 }
 
@@ -232,7 +232,7 @@ task generateHTMLMasonLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "HTMLMasonLexerGenerated.java")
+    outputs.file file(dst + "HTMLMasonLexer.java")
     classpath configurations.lexer
 }
 task generateMason2Lexer(type: JavaExec) {
@@ -243,7 +243,7 @@ task generateMason2Lexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "Mason2LexerGenerated.java")
+    outputs.file file(dst + "Mason2Lexer.java")
     classpath configurations.lexer
 }
 task generateMojoliciousLexer(type: JavaExec) {
@@ -254,7 +254,7 @@ task generateMojoliciousLexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "MojoliciousLexerGenerated.java")
+    outputs.file file(dst + "MojoliciousLexer.java")
     classpath configurations.lexer
 }
 
