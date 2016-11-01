@@ -647,17 +647,18 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 // known identifiers
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_VARIABLE>{
-	"split"						{checkIfLabel(YYINITIAL, IDENTIFIER);}
-	"keys"|"values"|"each"		{yybegin(HASH_ACCEPTOR);return IDENTIFIER;}
-	{BARE_HANDLE_ACCEPTORS}				{yybegin(YYINITIAL);return IDENTIFIER;}
-	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{checkIfLabel(YYINITIAL, OPERATOR_NAMED_UNARY);}
-	{NAMED_UNARY_OPERATORS}				{checkIfLabel(AFTER_IDENTIFIER, OPERATOR_NAMED_UNARY);}
+	"split"						{checkIfLabel(YYINITIAL, BUILTIN_LIST);}
+	"keys"|"values"|"each"		{yybegin(HASH_ACCEPTOR);return BUILTIN_UNARY;}
+	"defined" / {SPACES_OR_COMMENTS}[\*\%]	{yybegin(YYINITIAL);return BUILTIN_UNARY;}
+	{BARE_HANDLE_ACCEPTORS}				{yybegin(YYINITIAL);return BUILTIN_LIST;}
+	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{checkIfLabel(YYINITIAL, BUILTIN_UNARY);}
+	{NAMED_UNARY_OPERATORS}				{checkIfLabel(AFTER_IDENTIFIER, BUILTIN_UNARY);}
 
-	{IMPLICIT_USERS}					{yybegin(AFTER_IDENTIFIER);return IDENTIFIER;}
+	{IMPLICIT_USERS}					{yybegin(AFTER_IDENTIFIER);return BUILTIN_UNARY;}
 	{PERL_OPERATORS_FILETEST} / [^a-zA-Z0-9_] 	{yybegin(AFTER_IDENTIFIER);return OPERATOR_FILETEST;}
 
-	{NAMED_ARGUMENTLESS}				{yybegin(AFTER_VALUE);return IDENTIFIER;}	// fixme we can return special token here to help parser
-	{LIST_OPERATORS}					{yybegin(YYINITIAL);return IDENTIFIER;}
+	{NAMED_ARGUMENTLESS}				{yybegin(AFTER_VALUE);return BUILTIN_ARGUMENTLESS;}	// fixme we can return special token here to help parser
+	{LIST_OPERATORS}					{yybegin(YYINITIAL);return BUILTIN_LIST;}
 
 	"not"						{checkIfLabel(YYINITIAL, OPERATOR_NOT_LP);}
 
