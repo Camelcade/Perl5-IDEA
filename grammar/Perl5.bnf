@@ -519,7 +519,7 @@ private braced_block_content ::= '{' block_content '}' {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
 
 nyi_statement ::= 'nyi'
-format_definition ::=  'format' [IDENTIFIER] '=' [FORMAT] FORMAT_TERMINATOR {pin=1}
+format_definition ::=  'format' [SUB_NAME] '=' [FORMAT] FORMAT_TERMINATOR {pin=1}
 
 private compound_statement ::=
     sub_definition

@@ -2,7 +2,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::fnord
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('fnord')
+      PsiElement(Perl5: subname)('fnord')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('&\%')
       PsiElement(Perl5: ))(')')
@@ -19,7 +19,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::plugh
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('plugh')
+      PsiElement(Perl5: subname)('plugh')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: ))(')')
       PsiElement(Perl5: :)(':')
@@ -34,7 +34,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
   sub main::xyzzy
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('xyzzy')
+    PsiElement(Perl5: subname)('xyzzy')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('_5x5')
@@ -46,7 +46,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('method')
@@ -74,7 +74,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('method')
@@ -82,7 +82,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('switch')
@@ -96,7 +96,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Ugly')
@@ -110,7 +110,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('_5x5')
@@ -118,7 +118,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::foo
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('foo')
+      PsiElement(Perl5: subname)('foo')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('lvalue')
@@ -127,7 +127,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('prototype')
@@ -141,7 +141,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('prototype')
@@ -152,7 +152,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -162,7 +162,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
     PsiElement(Perl5: ))(')')
@@ -175,7 +175,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -200,7 +200,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$')
     PsiElement(Perl5: ))(')')
@@ -221,7 +221,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlSubSignatureElementIgnoreImpl(Perl5: SUB_SIGNATURE_ELEMENT_IGNORE)
@@ -245,7 +245,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -273,7 +273,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -301,7 +301,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -329,7 +329,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -358,7 +358,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -387,7 +387,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -417,7 +417,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -436,7 +436,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -455,7 +455,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -474,7 +474,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -493,7 +493,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -512,7 +512,7 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: ()('(')
       PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
       PsiElement(Perl5: ))(')')
@@ -531,14 +531,14 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     sub main::abc
       PsiElement(Perl5: sub)('sub')
-      PsiElement(Perl5: IDENTIFIER)('abc')
+      PsiElement(Perl5: subname)('abc')
       PsiElement(Perl5: :)(':')
       PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
         PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('method')
     PsiElement(Perl5: ;)(';')
   sub main::abc
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('abc')
+    PsiElement(Perl5: subname)('abc')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('method')
@@ -548,7 +548,7 @@ Perl5
   PsiElement(Perl5: ;)(';')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('MyAttribute')
@@ -567,7 +567,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -581,7 +581,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -595,7 +595,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -609,7 +609,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -623,7 +623,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -637,7 +637,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -651,7 +651,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -665,7 +665,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -679,7 +679,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::RealLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('RealLoud')
+    PsiElement(Perl5: subname)('RealLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -698,7 +698,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::RealLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('RealLoud')
+    PsiElement(Perl5: subname)('RealLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -717,7 +717,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::RealLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('RealLoud')
+    PsiElement(Perl5: subname)('RealLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -736,7 +736,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::RealLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('RealLoud')
+    PsiElement(Perl5: subname)('RealLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -755,7 +755,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::RealLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('RealLoud')
+    PsiElement(Perl5: subname)('RealLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -767,7 +767,7 @@ Perl5
       PsiPerlStatementImpl(Perl5: STATEMENT)
         PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
           PsiPerlMethodImpl(Perl5: METHOD)
-            PsiElement(Perl5: IDENTIFIER)('croak')
+            PsiElement(Perl5: subname)('croak')
           PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
             PsiPerlStringDqImpl(Perl5: STRING_DQ)
               PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
@@ -776,7 +776,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::SeriousLoud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('SeriousLoud')
+    PsiElement(Perl5: subname)('SeriousLoud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -797,7 +797,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Raw
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Raw')
+    PsiElement(Perl5: subname)('Raw')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -811,7 +811,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Nekkid
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Nekkid')
+    PsiElement(Perl5: subname)('Nekkid')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -823,9 +823,9 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub main::Au::Naturale
+  sub Au::Naturale
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Au::Naturale')
+    PsiElement(Perl5: package::subname)('Au::Naturale')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -839,7 +839,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Early
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Early')
+    PsiElement(Perl5: subname)('Early')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -853,7 +853,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Normal
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Normal')
+    PsiElement(Perl5: subname)('Normal')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -867,7 +867,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Late
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Late')
+    PsiElement(Perl5: subname)('Late')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -881,7 +881,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Final
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Final')
+    PsiElement(Perl5: subname)('Final')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -895,7 +895,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Bookends
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Bookends')
+    PsiElement(Perl5: subname)('Bookends')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -907,9 +907,9 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub main::UNIVERSAL::Name
+  sub UNIVERSAL::Name
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('UNIVERSAL::Name')
+    PsiElement(Perl5: package::subname)('UNIVERSAL::Name')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -945,9 +945,9 @@ Perl5
               PsiElement(Perl5: ])(']')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::UNIVERSAL::Purpose
+  sub UNIVERSAL::Purpose
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('UNIVERSAL::Purpose')
+    PsiElement(Perl5: package::subname)('UNIVERSAL::Purpose')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -958,7 +958,7 @@ Perl5
           PsiElement(Perl5: print)('print')
           PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
             PsiPerlMethodImpl(Perl5: METHOD)
-              PsiElement(Perl5: IDENTIFIER)('STDERR')
+              PsiElement(Perl5: subname)('STDERR')
             PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
               PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
                 PsiPerlStringDqImpl(Perl5: STRING_DQ)
@@ -980,9 +980,9 @@ Perl5
                   PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::UNIVERSAL::Unit
+  sub UNIVERSAL::Unit
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('UNIVERSAL::Unit')
+    PsiElement(Perl5: package::subname)('UNIVERSAL::Unit')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -995,11 +995,11 @@ Perl5
             PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR)
               PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
                 PsiPerlMethodImpl(Perl5: METHOD)
-                  PsiElement(Perl5: IDENTIFIER)('STDERR')
+                  PsiElement(Perl5: subname)('STDERR')
               PsiElement(Perl5: &)('&')
               PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
                 PsiPerlMethodImpl(Perl5: METHOD)
-                  PsiElement(Perl5: IDENTIFIER)('name')
+                  PsiElement(Perl5: subname)('name')
             PsiElement(Perl5: ,)(',')
             PsiPerlStringDqImpl(Perl5: STRING_DQ)
               PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
@@ -1013,7 +1013,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('Loud')
@@ -1232,7 +1232,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Good
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Good')
+    PsiElement(Perl5: subname)('Good')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1286,7 +1286,7 @@ Perl5
         PsiElement(Perl5: })('}')
   sub main::Bad
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Bad')
+    PsiElement(Perl5: subname)('Bad')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1304,7 +1304,7 @@ Perl5
         PsiElement(Perl5: })('}')
   sub main::Good
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Good')
+    PsiElement(Perl5: subname)('Good')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1322,7 +1322,7 @@ Perl5
         PsiElement(Perl5: })('}')
   sub main::Good
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Good')
+    PsiElement(Perl5: subname)('Good')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1340,7 +1340,7 @@ Perl5
         PsiElement(Perl5: })('}')
   sub main::Ugly
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Ugly')
+    PsiElement(Perl5: subname)('Ugly')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1356,7 +1356,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::Omni
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Omni')
+    PsiElement(Perl5: subname)('Omni')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1373,7 +1373,7 @@ Perl5
         PsiElement(Perl5: })('}')
   sub main::Loud
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('Loud')
+    PsiElement(Perl5: subname)('Loud')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -1435,7 +1435,7 @@ Perl5
             PsiElement(Perl5: print)('print')
             PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
               PsiPerlMethodImpl(Perl5: METHOD)
-                PsiElement(Perl5: IDENTIFIER)('STDERR')
+                PsiElement(Perl5: subname)('STDERR')
               PsiPerlCallArgumentsImpl(Perl5: CALL_ARGUMENTS)
                 PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
                   PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)

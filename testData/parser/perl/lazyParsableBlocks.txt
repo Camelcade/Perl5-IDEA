@@ -424,7 +424,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
   sub main::somesub
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('somesub')
+    PsiElement(Perl5: subname)('somesub')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')

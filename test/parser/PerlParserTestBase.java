@@ -30,6 +30,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodParserDefinition;
 import org.jetbrains.annotations.NonNls;
@@ -111,6 +112,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase
 		registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
 		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlParserDefinition());
 		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
+		myProject.addComponent(PerlNamesCache.class, new PerlNamesCache(myProject));
 		new PerlParserExtensions().initComponent();
 	}
 

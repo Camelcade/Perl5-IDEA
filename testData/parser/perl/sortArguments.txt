@@ -3,7 +3,7 @@ Perl5
     PsiPerlSortExprImpl(Perl5: SORT_EXPR)
       PsiElement(Perl5: sort)('sort')
       PsiPerlMethodImpl(Perl5: METHOD)
-        PsiElement(Perl5: IDENTIFIER)('somesub')
+        PsiElement(Perl5: subname)('somesub')
       PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
         PsiElement(Perl5: $@)('@')
         PsiElement(Perl5: ARRAY_NAME)('list')

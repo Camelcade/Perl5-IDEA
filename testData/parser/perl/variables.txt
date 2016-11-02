@@ -983,7 +983,7 @@ Perl5
       PsiElement(Perl5: if)('if')
       PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
         PsiPerlMethodImpl(Perl5: METHOD)
-          PsiElement(Perl5: IDENTIFIER)('something')
+          PsiElement(Perl5: subname)('something')
     PsiElement(Perl5: ;)(';')
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR)

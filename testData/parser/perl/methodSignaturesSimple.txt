@@ -28,7 +28,7 @@ Perl5
         PsiElement(Perl5: ;)(';')
       sub User::new
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('new')
+        PsiElement(Perl5: subname)('new')
         PsiElement(Perl5: ()('(')
         PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
           PsiPerlMethodSignatureInvocantImpl(Perl5: METHOD_SIGNATURE_INVOCANT)
@@ -66,7 +66,7 @@ Perl5
                   PsiElement(Perl5: =>)('=>')
                   PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
                     PsiPerlMethodImpl(Perl5: METHOD)
-                      PsiElement(Perl5: IDENTIFIER)('new_id')
+                      PsiElement(Perl5: subname)('new_id')
                     PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
                       PsiElement(Perl5: ()('(')
                       PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
@@ -106,7 +106,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::new_id
         PsiElement(Perl5: func)('func')
-        PsiElement(Perl5: IDENTIFIER)('new_id')
+        PsiElement(Perl5: subname)('new_id')
         PsiElement(Perl5: ()('(')
         PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
           PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -139,7 +139,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::name
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('name')
+        PsiElement(Perl5: subname)('name')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -157,7 +157,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::email
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('email')
+        PsiElement(Perl5: subname)('email')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -181,7 +181,7 @@ Perl5
       PsiComment(Perl5: COMMENT_LINE)('# attributes')
       sub User::foo
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('foo')
+        PsiElement(Perl5: subname)('foo')
         PsiElement(Perl5: :)(':')
         PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
           PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('lvalue')
@@ -211,7 +211,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::foo
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('foo')
+        PsiElement(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
         PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
           PsiPerlMethodSignatureInvocantImpl(Perl5: METHOD_SIGNATURE_INVOCANT)
@@ -259,7 +259,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::foo
         PsiElement(Perl5: func)('func')
-        PsiElement(Perl5: IDENTIFIER)('foo')
+        PsiElement(Perl5: subname)('foo')
         PsiElement(Perl5: :)(':')
         PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
           PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('lvalue')
@@ -289,7 +289,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::foo
         PsiElement(Perl5: func)('func')
-        PsiElement(Perl5: IDENTIFIER)('foo')
+        PsiElement(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
         PsiPerlFuncSignatureContentImpl(Perl5: FUNC_SIGNATURE_CONTENT)
           PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -332,7 +332,7 @@ Perl5
       PsiComment(Perl5: COMMENT_LINE)('# change invocant name')
       sub User::foo
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('foo')
+        PsiElement(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
         PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
           PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -350,7 +350,7 @@ Perl5
               PsiElement(Perl5: ->)('->')
               PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
                 PsiPerlMethodImpl(Perl5: METHOD)
-                  PsiElement(Perl5: IDENTIFIER)('bar')
+                  PsiElement(Perl5: subname)('bar')
                 PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
                   PsiElement(Perl5: ()('(')
                   PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -360,7 +360,7 @@ Perl5
           PsiElement(Perl5: })('}')
       sub User::bar
         PsiElement(Perl5: method)('method')
-        PsiElement(Perl5: IDENTIFIER)('bar')
+        PsiElement(Perl5: subname)('bar')
         PsiElement(Perl5: ()('(')
         PsiPerlMethodSignatureContentImpl(Perl5: METHOD_SIGNATURE_CONTENT)
           PsiPerlMethodSignatureInvocantImpl(Perl5: METHOD_SIGNATURE_INVOCANT)
@@ -384,7 +384,7 @@ Perl5
               PsiElement(Perl5: ->)('->')
               PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
                 PsiPerlMethodImpl(Perl5: METHOD)
-                  PsiElement(Perl5: IDENTIFIER)('baz')
+                  PsiElement(Perl5: subname)('baz')
                 PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
                   PsiElement(Perl5: ()('(')
                   PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)

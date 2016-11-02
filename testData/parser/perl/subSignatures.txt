@@ -1,7 +1,7 @@
 Perl5
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -31,7 +31,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -67,7 +67,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -100,7 +100,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -146,7 +146,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -170,7 +170,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -208,7 +208,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -231,7 +231,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -285,7 +285,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
@@ -308,7 +308,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: ))(')')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -322,7 +322,7 @@ Perl5
       PsiElement(Perl5: })('}')
   sub main::foo
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: IDENTIFIER)('foo')
+    PsiElement(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
     PsiPerlSubSignatureImpl(Perl5: SUB_SIGNATURE)
       PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
