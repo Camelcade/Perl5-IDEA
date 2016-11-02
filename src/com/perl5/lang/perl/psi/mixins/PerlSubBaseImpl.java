@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
@@ -34,13 +35,19 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.IDENTIFIER;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME_QUALIFIED;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
 public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
 {
+	private final static TokenSet SUB_NAMES_TOKEN_SET = TokenSet.create(
+			SUB_NAME,
+			SUB_NAME_QUALIFIED
+	);
+
 	public PerlSubBaseImpl(@NotNull ASTNode node)
 	{
 		super(node);
@@ -119,7 +126,9 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		PsiElement subNameElement = getSubNameElement();
 		if (subNameElement != null)
 		{
-			return subNameElement.getText();
+			String subNameText = subNameElement.getText();
+			int namespaceDelimiterIndex = subNameText.lastIndexOf(':');
+			return namespaceDelimiterIndex == -1 ? subNameText : subNameText.substring(namespaceDelimiterIndex + 1);
 		}
 
 		return null;
@@ -132,23 +141,24 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 		return PerlPackageUtil.getContextPackageName(this);
 	}
 
+	@Nullable
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-	}
-
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
+		PsiElement subNameElement = getSubNameElement();
+		if (subNameElement == null)
+		{
+			return null;
+		}
+		String subNameText = subNameElement.getText();
+		int namespaceDelimiterIndex = subNameText.lastIndexOf(':');
+		return namespaceDelimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(subNameText.substring(0, namespaceDelimiterIndex + 1));
 	}
 
 	@Override
 	public PsiElement getSubNameElement()
 	{
-		return findChildByType(IDENTIFIER);
+		return findChildByFilter(SUB_NAMES_TOKEN_SET);
 	}
 
 	@NotNull

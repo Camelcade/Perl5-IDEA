@@ -21,7 +21,6 @@ import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +33,6 @@ import java.util.List;
 public interface PerlSubBase<Stub extends StubElement> extends
 		StubBasedPsiElement<Stub>,
 		PerlPackageMember,
-		PerlNamespaceElementContainer,
 		PerlNamedElement,
 		PerlDeprecatable,
 		PerlLabelScope
