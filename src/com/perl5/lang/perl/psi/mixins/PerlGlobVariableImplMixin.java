@@ -24,7 +24,10 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
+import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -78,12 +81,13 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		}
 
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if (variableNameElement != null)
+		if (variableNameElement == null)
 		{
-			return variableNameElement.getName();
+			return null;
 		}
-
-		return null;
+		String variableNameText = variableNameElement.getText();
+		int delimiterIndex = variableNameText.lastIndexOf(':');
+		return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
 	}
 
 	@NotNull
@@ -93,17 +97,19 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 		return PerlPackageUtil.getContextPackageName(this);
 	}
 
+	@Nullable
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-	}
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement == null)
+		{
+			return null;
+		}
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
+		String variableNameText = variableNameElement.getText();
+		int delimiterIndex = variableNameText.lastIndexOf(':');
+		return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
 	}
 
 	@Override
@@ -115,18 +121,13 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	@Override
 	public boolean isBuiltIn()
 	{
-		if (getNamespaceElement() != null)
+		if (getExplicitPackageName() != null)
 		{
 			return false;
 		}
 
 		String globName = getName();
-		if (globName == null)
-		{
-			return false;
-		}
-
-		return PerlGlobUtil.BUILT_IN.contains(globName);
+		return globName != null && PerlGlobUtil.BUILT_IN.contains(globName);
 	}
 
 	@Override

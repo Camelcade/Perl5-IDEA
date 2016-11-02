@@ -18,14 +18,13 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer, PerlNamedElement
+public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlNamedElement
 {
 	/**
 	 * Checks if this typeglob is left part of assignment
