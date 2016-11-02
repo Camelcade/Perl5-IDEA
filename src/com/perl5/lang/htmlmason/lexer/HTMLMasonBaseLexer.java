@@ -59,6 +59,7 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
 	public HTMLMasonBaseLexer withProject(@Nullable Project project)
 	{
 		myCustomTagsMap = project == null ? null : HTMLMasonSettings.getInstance(project).getCustomTagsMap();
+		myPerlLexer.withProject(project);
 		return this;
 	}
 
