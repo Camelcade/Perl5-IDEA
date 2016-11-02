@@ -1,0 +1,1 @@
+DynaLoader::bootstrap Math::MPFR::Random $VERSION;

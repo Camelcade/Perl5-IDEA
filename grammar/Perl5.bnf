@@ -1045,7 +1045,7 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= 'list' | 'unary' | 'argumentless' | SUB_NAME_QUALIFIED | SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
+private method_tokens ::= 'list' | 'unary' | 'argumentless' | SUB_NAME_QUALIFIED [PACKAGE] | SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
 
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
