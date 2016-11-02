@@ -605,8 +605,10 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  'sub' (SUB_NAME|SUB_NAME_QUALIFIED) sub_definition_parameters parse_block
-sub_declaration ::=  'sub' (SUB_NAME|SUB_NAME_QUALIFIED) sub_definition_parameters
+sub_definition ::=  'sub' sub_names_token sub_definition_parameters parse_block
+sub_declaration ::=  'sub' sub_names_token sub_definition_parameters
+
+private sub_names_token ::= SUB_NAME|SUB_NAME_QUALIFIED
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
@@ -1102,8 +1104,8 @@ private comma ::= ',' | '=>'
 
 /********************************************** Extensions for Method::Signatures *************************************/
 // we can make this smareter and use keywords from settings or import opitions; We can't pin here because MooseX method works othewise
-method_definition ::= 'method' IDENTIFIER [method_signature] [sub_attributes] parse_block
-func_definition ::= 'func' IDENTIFIER [func_signature] [sub_attributes] parse_block
+method_definition ::= 'method' sub_names_token [method_signature] [sub_attributes] parse_block
+func_definition ::= 'func' sub_names_token [func_signature] [sub_attributes] parse_block
 
 // not sure that we need a wrapper for signatures
 private method_signature ::= '(' method_signature_content ')' {pin=1}
