@@ -18,13 +18,25 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
+import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.intellij.psi.tree.IElementType;
+
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
 /**
  * Created by hurricup on 13.01.2016.
  */
 public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 {
+
+	private static final Parser IDENTIFIER_PARSER = new Parser()
+	{
+		@Override
+		public boolean parse(PsiBuilder builder, int level)
+		{
+			return consumeToken(builder, IDENTIFIER);
+		}
+	};
 
 	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
@@ -66,7 +78,6 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 	{
 		return MasonParserUtil.parsePerlBlock(b, l, closeToken, MASON_ABSTRACT_BLOCK);
 	}
-
 
 	@Override
 	public boolean parseStatement(PsiBuilder b, int l)
@@ -234,7 +245,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			if (nested_call(b, l, IDENTIFIER_parser_))
+			if (nested_call(b, l, IDENTIFIER_PARSER))
 			{
 				m.done(MASON_SIMPLE_DEREF_EXPR);
 			}
@@ -246,6 +257,4 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		}
 		return super.parseTerm(b, l);
 	}
-
-
 }
