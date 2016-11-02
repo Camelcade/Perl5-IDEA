@@ -31,6 +31,11 @@ public class PerlParserTest extends PerlParserTestBase
 		return "testData/parser/perl";
 	}
 
+	public void testUniversalCan()
+	{
+		doTest();
+	}
+
 	public void testDefinedGlob()
 	{
 		doTest();

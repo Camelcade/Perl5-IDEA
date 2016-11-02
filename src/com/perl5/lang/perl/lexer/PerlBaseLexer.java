@@ -481,6 +481,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				{
 					tokenType = SUB_NAME;
 				}
+				else if (StringUtil.equals(tokenText, "UNIVERSAL::can"))
+				{
+					return SUB_NAME_QUALIFIED;
+				}
 				else if (mySubNamesProvider.getValue().contains(tokenText))
 				{
 					tokenType = SUB_NAME_QUALIFIED;
