@@ -924,6 +924,9 @@
     <project-components>
         <!-- Add your project components here -->
         <component>
+            <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
+        </component>
+        <component>
             <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
         </component>
         <component>
