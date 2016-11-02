@@ -18,25 +18,13 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
-import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.intellij.psi.tree.IElementType;
-
-import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
 /**
  * Created by hurricup on 13.01.2016.
  */
 public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 {
-
-	private static final Parser IDENTIFIER_PARSER = new Parser()
-	{
-		@Override
-		public boolean parse(PsiBuilder builder, int level)
-		{
-			return consumeToken(builder, IDENTIFIER);
-		}
-	};
 
 	public static boolean parseMasonMethod(PsiBuilder b, int l, IElementType closeToken, IElementType statementTokenType)
 	{
@@ -45,7 +33,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		PsiBuilder.Marker methodMarker = b.mark();
 		b.advanceLexer();
 		PsiBuilder.Marker subMarker = b.mark();
-		if (PerlParserUtil.consumeToken(b, IDENTIFIER))
+		if (PerlParserUtil.consumeToken(b, SUB_NAME))
 		{
 			subMarker.collapse(SUB);
 			PerlParserImpl.method_signature(b, l);
@@ -191,20 +179,17 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 			b.advanceLexer();
 			IElementType closeToken = RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType);
 
-			if (PerlParserUtil.convertIdentifier(b, l, MASON_METHOD_MODIFIER_NAME))
+			if (PerlParserUtil.consumeToken(b, SUB_NAME) && PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
 			{
-				if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
-				{
-					PsiBuilder.Marker blockMarker = b.mark();
-					PerlParserImpl.block_content(b, l);
-					blockMarker.done(BLOCK);
-					blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+				PsiBuilder.Marker blockMarker = b.mark();
+				PerlParserImpl.block_content(b, l);
+				blockMarker.done(BLOCK);
+				blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
-					if (r = PerlParserUtil.consumeToken(b, closeToken))
-					{
-						statementMarker.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
-						statementMarker = null;
-					}
+				if (r = PerlParserUtil.consumeToken(b, closeToken))
+				{
+					statementMarker.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
+					statementMarker = null;
 				}
 			}
 
@@ -245,7 +230,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		{
 			PsiBuilder.Marker m = b.mark();
 			b.advanceLexer();
-			if (nested_call(b, l, IDENTIFIER_PARSER))
+			if (regular_nested_call(b, l))
 			{
 				m.done(MASON_SIMPLE_DEREF_EXPR);
 			}
