@@ -1050,7 +1050,7 @@ private method_tokens ::= 'list' | 'unary' | 'argumentless' | SUB_NAME_QUALIFIED
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= {IDENTIFIER|SUB_NAME} &':'
+label_declaration ::= <<parseLabelDeclaration>> // custom faster method
 label_expr ::= IDENTIFIER|SUB_NAME
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)

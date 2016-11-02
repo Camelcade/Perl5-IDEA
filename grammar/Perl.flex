@@ -156,7 +156,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %xstate CAPTURE_HEREDOC, CAPTURE_NON_EMPTY_HEREDOC
 %xstate CAPTURE_HEREDOC_WITH_EMPTY_MARKER, CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER
 
-%xstate LEX_LABEL
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
 %state CATCH, CATCH_PACKAGE
@@ -476,6 +475,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"vars"							{yybegin(VERSION_OR_OPERAND);return PACKAGE_PRAGMA_VARS;}
 	{PERL_VERSION}					{yybegin(YYINITIAL);return NUMBER_VERSION;}
 	{QUALIFIED_IDENTIFIER}			{yybegin(VERSION_OR_OPERAND);return PACKAGE;}
+	[^]								{yybegin(YYINITIAL);pushback();}
 }
 
 <USE_VARS_STRING>
@@ -501,13 +501,6 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	[^]														{yypushback(1);yybegin(YYINITIAL);}
 }
 
-// exclusive
-<LEX_LABEL>{
-	{SPACES_OR_COMMENTS}":"[^\:]	{return getLabelToken();}
-	[^]								{return getNonLabelToken();}
-	<<EOF>>							{return getNonLabelToken();}
-}
-
 ////////////////////////// COMMON PART /////////////////////////////////////////////////////////////////////////////////
 
 <BRACED_STRING>{
@@ -517,13 +510,13 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 
 <YYINITIAL,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_IDENTIFIER_WITH_LABEL>{
-	{CORE_PREFIX}"if"	 	{ checkIfLabel(YYINITIAL, RESERVED_IF);}
-	{CORE_PREFIX}"unless"	{ checkIfLabel(YYINITIAL, RESERVED_UNLESS);}
-	{CORE_PREFIX}"while"	{ checkIfLabel(YYINITIAL, RESERVED_WHILE);}
-	{CORE_PREFIX}"until"	{ checkIfLabel(YYINITIAL, RESERVED_UNTIL);}
-	{CORE_PREFIX}"for"	 	{ checkIfLabel(YYINITIAL, RESERVED_FOR);}
-	{CORE_PREFIX}"foreach"	{ checkIfLabel(YYINITIAL, RESERVED_FOREACH);}
-	{CORE_PREFIX}"when"	 	{ checkIfLabel(YYINITIAL, RESERVED_WHEN);}
+	{CORE_PREFIX}"if"	 	{ yybegin(YYINITIAL); return RESERVED_IF;}
+	{CORE_PREFIX}"unless"	{ yybegin(YYINITIAL); return RESERVED_UNLESS;}
+	{CORE_PREFIX}"while"	{ yybegin(YYINITIAL); return RESERVED_WHILE;}
+	{CORE_PREFIX}"until"	{ yybegin(YYINITIAL); return RESERVED_UNTIL;}
+	{CORE_PREFIX}"for"	 	{ yybegin(YYINITIAL); return RESERVED_FOR;}
+	{CORE_PREFIX}"foreach"	{ yybegin(YYINITIAL); return RESERVED_FOREACH;}
+	{CORE_PREFIX}"when"	 	{ yybegin(YYINITIAL); return RESERVED_WHEN;}
 }
 
 <AFTER_IDENTIFIER_WITH_LABEL>{
@@ -557,17 +550,17 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER>{
-	"x" / [\d]*	{checkIfLabel(YYINITIAL, OPERATOR_X);}
-	"and"		{checkIfLabel(YYINITIAL, OPERATOR_AND_LP);}
-	"or"		{checkIfLabel(YYINITIAL, OPERATOR_OR_LP);}
-	"xor"		{checkIfLabel(YYINITIAL, OPERATOR_XOR_LP);}
-	"lt" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_LT_STR);}
-	"gt" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_GT_STR);}
-	"le" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_LE_STR);}
-	"ge" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_GE_STR);}
-	"eq" / {QUOTE_LIKE_SUFFIX} 		{checkIfLabel(YYINITIAL, OPERATOR_EQ_STR);}
-	"ne" / {QUOTE_LIKE_SUFFIX}		{checkIfLabel(YYINITIAL, OPERATOR_NE_STR);}
-	"cmp" / {QUOTE_LIKE_SUFFIX} 	{checkIfLabel(YYINITIAL, OPERATOR_CMP_STR);}
+	"x" / [\d]*	{yybegin(YYINITIAL); return OPERATOR_X;}
+	"and"		{yybegin(YYINITIAL); return OPERATOR_AND_LP;}
+	"or"		{yybegin(YYINITIAL); return OPERATOR_OR_LP;}
+	"xor"		{yybegin(YYINITIAL); return OPERATOR_XOR_LP;}
+	"lt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_LT_STR;}
+	"gt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_GT_STR;}
+	"le" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_LE_STR;}
+	"ge" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_GE_STR;}
+	"eq" / {QUOTE_LIKE_SUFFIX} 		{yybegin(YYINITIAL); return OPERATOR_EQ_STR;}
+	"ne" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_NE_STR;}
+	"cmp" / {QUOTE_LIKE_SUFFIX} 	{yybegin(YYINITIAL); return OPERATOR_CMP_STR;}
 }
 
 <YYINITIAL>{
@@ -647,12 +640,12 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 // known identifiers
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_VARIABLE>{
-	"split"						{checkIfLabel(YYINITIAL, BUILTIN_LIST);}
+	"split"						{yybegin(YYINITIAL); return BUILTIN_LIST;}
 	"keys"|"values"|"each"		{yybegin(HASH_ACCEPTOR);return BUILTIN_UNARY;}
 	"defined" / {SPACES_OR_COMMENTS}[\*\%]	{yybegin(YYINITIAL);return BUILTIN_UNARY;}
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(YYINITIAL);return BUILTIN_LIST;}
-	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{checkIfLabel(YYINITIAL, BUILTIN_UNARY);}
-	{NAMED_UNARY_OPERATORS}				{checkIfLabel(AFTER_IDENTIFIER, BUILTIN_UNARY);}
+	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{yybegin(YYINITIAL); return BUILTIN_UNARY;}
+	{NAMED_UNARY_OPERATORS}				{yybegin(AFTER_IDENTIFIER); return BUILTIN_UNARY;}
 
 	{IMPLICIT_USERS}					{yybegin(AFTER_IDENTIFIER);return BUILTIN_UNARY;}
 	{PERL_OPERATORS_FILETEST} / [^a-zA-Z0-9_] 	{yybegin(AFTER_IDENTIFIER);return OPERATOR_FILETEST;}
@@ -660,70 +653,70 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	{NAMED_ARGUMENTLESS}				{yybegin(AFTER_VALUE);return BUILTIN_ARGUMENTLESS;}	// fixme we can return special token here to help parser
 	{LIST_OPERATORS}					{yybegin(YYINITIAL);return BUILTIN_LIST;}
 
-	"not"						{checkIfLabel(YYINITIAL, OPERATOR_NOT_LP);}
+	"not"						{yybegin(YYINITIAL); return OPERATOR_NOT_LP;}
 
-	{CORE_PREFIX}"my"			{checkIfLabel(VARIABLE_DECLARATION, RESERVED_MY);}
-	{CORE_PREFIX}"our"			{checkIfLabel(VARIABLE_DECLARATION, RESERVED_OUR);}
-	{CORE_PREFIX}"local"		{checkIfLabel(YYINITIAL, RESERVED_LOCAL);}
-	{CORE_PREFIX}"state"		{checkIfLabel(VARIABLE_DECLARATION, RESERVED_STATE);}
+	{CORE_PREFIX}"my"			{yybegin(VARIABLE_DECLARATION); return RESERVED_MY;}
+	{CORE_PREFIX}"our"			{yybegin(VARIABLE_DECLARATION); return RESERVED_OUR;}
+	{CORE_PREFIX}"local"		{yybegin(YYINITIAL); return RESERVED_LOCAL;}
+	{CORE_PREFIX}"state"		{yybegin(VARIABLE_DECLARATION); return RESERVED_STATE;}
 
-	{CORE_PREFIX}"elsif"	 	{checkIfLabel(YYINITIAL, RESERVED_ELSIF);}
-	{CORE_PREFIX}"else"	 		{checkIfLabel(YYINITIAL, RESERVED_ELSE);}
-	{CORE_PREFIX}"given"	 	{checkIfLabel(YYINITIAL, RESERVED_GIVEN);}
-	{CORE_PREFIX}"default"	 	{checkIfLabel(YYINITIAL, RESERVED_DEFAULT);}
-	{CORE_PREFIX}"continue"	 	{checkIfLabel(YYINITIAL, RESERVED_CONTINUE);}
+	{CORE_PREFIX}"elsif"	 	{yybegin(YYINITIAL); return RESERVED_ELSIF;}
+	{CORE_PREFIX}"else"	 		{yybegin(YYINITIAL); return RESERVED_ELSE;}
+	{CORE_PREFIX}"given"	 	{yybegin(YYINITIAL); return RESERVED_GIVEN;}
+	{CORE_PREFIX}"default"	 	{yybegin(YYINITIAL); return RESERVED_DEFAULT;}
+	{CORE_PREFIX}"continue"	 	{yybegin(YYINITIAL); return RESERVED_CONTINUE;}
 
 	{CORE_PREFIX}"format"	 	{myFormatWaiting = true; yybegin(AFTER_IDENTIFIER); return RESERVED_FORMAT;}
 	{CORE_PREFIX}"sub" 			{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
 
-	{CORE_PREFIX}"package"	 	{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_PACKAGE);}
-	{CORE_PREFIX}"use"	 		{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_USE);}
-	{CORE_PREFIX}"no"	 		{checkIfLabel(PACKAGE_ARGUMENTS, RESERVED_NO);}
-	{CORE_PREFIX}"require"	 	{checkIfLabel(REQUIRE_ARGUMENTS, RESERVED_REQUIRE);}
+	{CORE_PREFIX}"package"	 	{yybegin(PACKAGE_ARGUMENTS); return RESERVED_PACKAGE;}
+	{CORE_PREFIX}"use"	 		{yybegin(PACKAGE_ARGUMENTS); return RESERVED_USE;}
+	{CORE_PREFIX}"no"	 		{yybegin(PACKAGE_ARGUMENTS); return RESERVED_NO;}
+	{CORE_PREFIX}"require"	 	{yybegin(REQUIRE_ARGUMENTS); return RESERVED_REQUIRE;}
 
-	{CORE_PREFIX}"undef"		{checkIfLabel(AFTER_IDENTIFIER, RESERVED_UNDEF);}
+	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;}
 
-	"switch"					{checkIfLabel(YYINITIAL, RESERVED_SWITCH);}
-	"case"						{checkIfLabel(YYINITIAL, RESERVED_CASE);}
+	"switch"					{yybegin(YYINITIAL); return RESERVED_SWITCH;}
+	"case"						{yybegin(YYINITIAL); return RESERVED_CASE;}
 
-	"method"					{checkIfLabel(METHOD_DECLARATION, RESERVED_METHOD);}
-	"func"						{checkIfLabel(METHOD_DECLARATION, RESERVED_FUNC);}
+	"method"					{yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
+	"func"						{yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 
-	"try"						{checkIfLabel(YYINITIAL, RESERVED_TRY);}
-	"catch"						{checkIfLabel(CATCH, RESERVED_CATCH);}
-	"finally"					{checkIfLabel(YYINITIAL, RESERVED_FINALLY);}
+	"try"						{yybegin(YYINITIAL); return RESERVED_TRY;}
+	"catch"						{yybegin(CATCH); return RESERVED_CATCH;}
+	"finally"					{yybegin(YYINITIAL); return RESERVED_FINALLY;}
 
-	"with"					{checkIfLabel(YYINITIAL, RESERVED_WITH);}
-	"extends"				{checkIfLabel(YYINITIAL, RESERVED_EXTENDS);}
-	"meta"					{checkIfLabel(YYINITIAL, RESERVED_META);}
-	"override"				{checkIfLabel(YYINITIAL, RESERVED_OVERRIDE);}
-	"around"				{checkIfLabel(YYINITIAL, RESERVED_AROUND);}
-	"augment"				{checkIfLabel(YYINITIAL, RESERVED_AUGMENT);}
-	"after"					{checkIfLabel(YYINITIAL, RESERVED_AFTER);}
-	"before"				{checkIfLabel(YYINITIAL, RESERVED_BEFORE);}
-	"has"					{checkIfLabel(YYINITIAL, RESERVED_HAS);}
+	"with"					{yybegin(YYINITIAL); return RESERVED_WITH;}
+	"extends"				{yybegin(YYINITIAL); return RESERVED_EXTENDS;}
+	"meta"					{yybegin(YYINITIAL); return RESERVED_META;}
+	"override"				{yybegin(YYINITIAL); return RESERVED_OVERRIDE;}
+	"around"				{yybegin(YYINITIAL); return RESERVED_AROUND;}
+	"augment"				{yybegin(YYINITIAL); return RESERVED_AUGMENT;}
+	"after"					{yybegin(YYINITIAL); return RESERVED_AFTER;}
+	"before"				{yybegin(YYINITIAL); return RESERVED_BEFORE;}
+	"has"					{yybegin(YYINITIAL); return RESERVED_HAS;}
 
 	// special treatment?
-	{CORE_PREFIX}"print"	 	{checkIfLabel(YYINITIAL, RESERVED_PRINT);}
-	{CORE_PREFIX}"printf"	 	{checkIfLabel(YYINITIAL, RESERVED_PRINTF);}
-	{CORE_PREFIX}"say"	 		{checkIfLabel(YYINITIAL, RESERVED_SAY);}
+	{CORE_PREFIX}"print"	 	{yybegin(YYINITIAL); return RESERVED_PRINT;}
+	{CORE_PREFIX}"printf"	 	{yybegin(YYINITIAL); return RESERVED_PRINTF;}
+	{CORE_PREFIX}"say"	 		{yybegin(YYINITIAL); return RESERVED_SAY;}
 
-	{CORE_PREFIX}"grep"	 { checkIfLabel(YYINITIAL, RESERVED_GREP);}
-	{CORE_PREFIX}"map"	 { checkIfLabel(YYINITIAL, RESERVED_MAP);}
-	{CORE_PREFIX}"sort"	 { checkIfLabel(YYINITIAL, RESERVED_SORT);}
+	{CORE_PREFIX}"grep"	 { yybegin(YYINITIAL); return RESERVED_GREP;}
+	{CORE_PREFIX}"map"	 { yybegin(YYINITIAL); return RESERVED_MAP;}
+	{CORE_PREFIX}"sort"	 { yybegin(YYINITIAL); return RESERVED_SORT;}
 
-	{CORE_PREFIX}"do"	 { checkIfLabel(BLOCK_AS_VALUE, RESERVED_DO);}
-	{CORE_PREFIX}"eval"	 { checkIfLabel(BLOCK_AS_VALUE, RESERVED_EVAL);}
+	{CORE_PREFIX}"do"	 { yybegin(BLOCK_AS_VALUE); return RESERVED_DO;}
+	{CORE_PREFIX}"eval"	 { yybegin(BLOCK_AS_VALUE); return RESERVED_EVAL;}
 
-	{CORE_PREFIX}"goto"	 { checkIfLabel(AFTER_IDENTIFIER_WITH_LABEL, RESERVED_GOTO);}
-	{CORE_PREFIX}"redo"	 { checkIfLabel(AFTER_IDENTIFIER_WITH_LABEL, RESERVED_REDO);}
-	{CORE_PREFIX}"next"	 { checkIfLabel(AFTER_IDENTIFIER_WITH_LABEL, RESERVED_NEXT);}
-	{CORE_PREFIX}"last"	 { checkIfLabel(AFTER_IDENTIFIER_WITH_LABEL, RESERVED_LAST);}
+	{CORE_PREFIX}"goto"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_GOTO;}
+	{CORE_PREFIX}"redo"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_REDO;}
+	{CORE_PREFIX}"next"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_NEXT;}
+	{CORE_PREFIX}"last"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_LAST;}
 
-	{CORE_PREFIX}"return"	 { checkIfLabel(YYINITIAL, RESERVED_RETURN);}
+	{CORE_PREFIX}"return"	 { yybegin(YYINITIAL); return RESERVED_RETURN;}
 
 	{BLOCK_NAMES} / {SPACES_OR_COMMENTS}"{"		{yybegin(YYINITIAL);return BLOCK_NAME;}
-	{TAG_NAMES}									{checkIfLabel(AFTER_VALUE, TAG);}
+	{TAG_NAMES}									{yybegin(AFTER_VALUE); return TAG;}
 
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_Y;}
 	{CORE_PREFIX}"tr" / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_TR;}

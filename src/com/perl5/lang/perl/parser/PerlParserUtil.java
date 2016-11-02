@@ -23,6 +23,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -536,4 +537,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return false;
 	}
 
+	public static boolean parseLabelDeclaration(PsiBuilder b, int l)
+	{
+		if (b.lookAhead(1) == COLON && b.getTokenType() != RESERVED_SUB)
+		{
+			String tokenText = b.getTokenText();
+			if (tokenText != null && PerlBaseLexer.IDENTIFIER_PATTERN.matcher(tokenText).matches())
+			{
+				b.advanceLexer();
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -124,8 +124,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	 **/
 	protected IElementType regexCommand = null;
 	private IElementType myCurrentSigilToken;
-	private IElementType myNonLabelTokenType;
-	private int myNonLabelState;
 
 	@Nullable
 	private Project myProject;
@@ -417,27 +415,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		myBracketsStack.clear();
 		myParensStack.clear();
 		heredocQueue.clear();
-	}
-
-	protected void checkIfLabel(int newState, IElementType tokenType)
-	{
-		myNonLabelTokenType = tokenType;
-		myNonLabelState = newState;
-		yybegin(LEX_LABEL);
-	}
-
-	protected IElementType getLabelToken()
-	{
-		yypushback(yylength());
-		yybegin(PerlLexer.YYINITIAL);
-		return IDENTIFIER;
-	}
-
-	protected IElementType getNonLabelToken()
-	{
-		yypushback(yylength());
-		yybegin(myNonLabelState);
-		return myNonLabelTokenType;
 	}
 
 	protected IElementType getNewLineToken()
