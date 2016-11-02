@@ -35,6 +35,6 @@ public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter i
 
 	public MojoliciousLexerAdapter(Project project)
 	{
-		super(project, new MojoliciousLexer(null), TOKENS_TO_MERGE);
+		super(project, new MojoliciousLexer(null).withProject(project), TOKENS_TO_MERGE);
 	}
 }

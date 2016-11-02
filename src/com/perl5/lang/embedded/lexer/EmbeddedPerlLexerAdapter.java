@@ -34,6 +34,6 @@ public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter 
 
 	public EmbeddedPerlLexerAdapter(Project project)
 	{
-		super(project, new EmbeddedPerlLexer(null), TOKENS_TO_MERGE);
+		super(project, new EmbeddedPerlLexer(null).withProject(project), TOKENS_TO_MERGE);
 	}
 }

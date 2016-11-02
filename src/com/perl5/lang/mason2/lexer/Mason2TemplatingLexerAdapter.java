@@ -34,6 +34,6 @@ public class Mason2TemplatingLexerAdapter extends PerlTemplatingMergingLexerAdap
 
 	public Mason2TemplatingLexerAdapter(Project project)
 	{
-		super(project, new Mason2TemplatingLexer(null), TOKENS_TO_MERGE);
+		super(project, new Mason2TemplatingLexer(null).withProject(project), TOKENS_TO_MERGE);
 	}
 }

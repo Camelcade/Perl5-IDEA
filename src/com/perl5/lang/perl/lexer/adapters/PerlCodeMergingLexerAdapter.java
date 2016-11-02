@@ -54,7 +54,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 	public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks)
 	{
 		myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
-		myFlex = new PerlLexer(null);
+		myFlex = new PerlLexer(null).withProject(project);
 	}
 
 	public FlexLexer getFlex()

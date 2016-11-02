@@ -31,7 +31,7 @@ public class PerlSubLexerAdapter extends FlexAdapter
 
 	public PerlSubLexerAdapter(@Nullable Project project, int perlLexerState)
 	{
-		super(new PerlLexer(null));
+		super(new PerlLexer(null).withProject(project));
 		myPerlLexerState = perlLexerState;
 	}
 
