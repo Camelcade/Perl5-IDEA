@@ -129,6 +129,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	private Project myProject;
 	private final AtomicNotNullLazyValue<Set<String>> mySubNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
 	{
+		@NotNull
 		@Override
 		protected Set<String> compute()
 		{
@@ -138,6 +139,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	};
 	private final AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
 	{
+		@NotNull
 		@Override
 		protected Set<String> compute()
 		{
