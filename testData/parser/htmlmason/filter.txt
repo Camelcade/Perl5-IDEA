@@ -32,7 +32,7 @@ HTML::Mason component
           PsiElement(Perl5: ->)('->')
           PsiPerlNestedCallImpl(Perl5: NESTED_CALL)
             PsiPerlMethodImpl(Perl5: METHOD)
-              PsiElement(Perl5: IDENTIFIER)('uri')
+              PsiElement(Perl5: subname)('uri')
       PsiElement(Perl5: ;)(';')
     PsiPerlStatementImpl(Perl5: STATEMENT)
       PsiPerlReplacementRegexImpl(Perl5: REPLACEMENT_REGEX)
