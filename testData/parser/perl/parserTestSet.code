@@ -351,22 +351,6 @@ my $abcd = {
     --test => &while
 };
 
-print sprintf "here we go";
-
-print OF "something";
-say OF "something";
-printf OF "something";
-
-print OF, "something";
-say OF, "something";
-printf OF, "something";
-
-
-close STDERR;
-close (STDERR);
-syswrite(STDERR, 'Caught a SIG', 12);
-syswrite STDERR, 'Caught a SIG', 12;
-
 use Opcode 1.01, qw(..);
 
 my $panic;
@@ -423,21 +407,6 @@ Foo::Bar->something;
 
 $abc = __PACKAGE__;
 $abc = 1 and 2;
-
-
-open (IF, 'something');
-open IF, 'something';
-open Foo::->method();
-open Foo::method();
-
-somesub IF, blah;
-
-print OF(1,2,3);
-print sprintf "here we go";
-print Foo->method();
-print Foo::method();
-print Foo::->method();
-print method, "text";
 
 my @list = <IF>;
 my @list = <Foo::method>;

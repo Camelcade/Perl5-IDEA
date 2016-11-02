@@ -1,0 +1,37 @@
+print sprintf "here we go";
+
+print OF "something";
+say OF "something";
+printf OF "something";
+
+print OF, "something";
+say OF, "something";
+printf OF, "something";
+
+
+close STDERR;
+close (STDERR);
+syswrite(STDERR, 'Caught a SIG', 12);
+syswrite STDERR, 'Caught a SIG', 12;
+
+open (IF, 'something');
+open IF, 'something';
+open Foo::->method();
+open Foo::method();
+
+somesub IF, blah;
+
+print OF(1,2,3);
+print sprintf "here we go";
+print Foo->method();
+print Foo::method();
+print Foo::->method();
+print method, "text";
+
+open STDERR, ">&" . fileno DEV_NULL
+	or die "CheckLib: $! redirecting STDERR to null handle";
+
+print STDERR qq(some text here);
+print STDERR & name, " measured in $_[4]\n";
+
+

@@ -31,6 +31,11 @@ public class PerlParserTest extends PerlParserTestBase
 		return "testData/parser/perl";
 	}
 
+	public void testHandleAcceptors()
+	{
+		doTest();
+	}
+
 	public void testDynaLoaderCall()
 	{
 		doTest();
