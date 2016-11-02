@@ -22,6 +22,7 @@ package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
@@ -41,6 +42,18 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
+		}
+		else if (elementType == SUB_NAME_QUALIFIED || elementType == CODE_NAME)
+		{
+			String text = element.getText();
+			int delimiterIndex = text.lastIndexOf(':') + 1;
+
+			if (delimiterIndex >= 0)
+			{
+				TextRange textRange = element.getTextRange();
+				int startOffset = textRange.getStartOffset();
+				holder.createInfoAnnotation(TextRange.create(startOffset, startOffset + delimiterIndex), null).setTextAttributes(PerlSyntaxHighlighter.PERL_PACKAGE);
+			}
 		}
 	}
 }

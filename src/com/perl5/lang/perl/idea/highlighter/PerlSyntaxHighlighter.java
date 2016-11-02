@@ -223,6 +223,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(BUILTIN_UNARY, new TextAttributesKey[]{PERL_SUB_BUILTIN});
 		ATTRIBUTES_MAP.put(BUILTIN_LIST, new TextAttributesKey[]{PERL_SUB_BUILTIN});
 		ATTRIBUTES_MAP.put(SUB_NAME, new TextAttributesKey[]{PERL_SUB});
+		ATTRIBUTES_MAP.put(SUB_NAME_QUALIFIED, new TextAttributesKey[]{PERL_SUB});
 	}
 
 
