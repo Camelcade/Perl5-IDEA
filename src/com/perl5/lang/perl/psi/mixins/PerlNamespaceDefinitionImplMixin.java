@@ -506,8 +506,8 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 						PsiElement rightSide = assignExpr.getLastChild();
 						if (rightSide != null)
 						{
-							PerlNamespaceElement namespaceElement = variable.getNamespaceElement();
-							if (namespaceElement == null || StringUtil.equals(namespaceElement.getCanonicalName(), myPackageName))
+							String explicitPackageName = variable.getExplicitPackageName();
+							if (explicitPackageName == null || StringUtil.equals(explicitPackageName, myPackageName))
 							{
 								runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
 							}

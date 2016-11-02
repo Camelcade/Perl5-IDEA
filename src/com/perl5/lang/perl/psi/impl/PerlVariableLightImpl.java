@@ -177,12 +177,6 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	}
 
 	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return null;
-	}
-
-	@Override
 	public String getExplicitPackageName()
 	{
 		return null;

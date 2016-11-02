@@ -17,14 +17,12 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import org.jetbrains.annotations.NotNull;
@@ -96,7 +94,7 @@ public class PerlResolveUtil
 	@Nullable
 	public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable)
 	{
-		if (variable.getNamespaceElement() != null)
+		if (variable.getExplicitPackageName() != null)
 		{
 			return null;
 		}

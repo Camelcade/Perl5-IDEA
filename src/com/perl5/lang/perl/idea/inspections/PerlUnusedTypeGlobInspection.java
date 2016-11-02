@@ -40,7 +40,7 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection
 			@Override
 			public void visitGlobVariable(@NotNull PsiPerlGlobVariable o)
 			{
-				if (o.getNamespaceElement() == null && PerlGlobUtil.BUILT_IN.contains(o.getName()))
+				if (o.getExplicitPackageName() == null && PerlGlobUtil.BUILT_IN.contains(o.getName()))
 				{
 				}
 				else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)

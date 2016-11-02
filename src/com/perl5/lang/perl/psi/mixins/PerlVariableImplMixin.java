@@ -81,14 +81,15 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public String getExplicitPackageName()
 	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-	}
+		PerlVariableNameElement variableNameElement = getVariableNameElement();
+		if (variableNameElement == null)
+		{
+			return null;
+		}
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
+		String variableNameText = variableNameElement.getText();
+		int delimiterIndex = variableNameText.lastIndexOf(':');
+		return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
 	}
 
 	@Nullable
@@ -310,7 +311,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public boolean isBuiltIn()
 	{
-		if (getNamespaceElement() != null)
+		if (getExplicitPackageName() != null)
 		{
 			return false;
 		}
@@ -384,12 +385,13 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	public String getName()
 	{
 		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if (variableNameElement != null)
+		if (variableNameElement == null)
 		{
-			return variableNameElement.getName();
+			return null;
 		}
-
-		return super.getName();
+		String variableNameText = variableNameElement.getText();
+		int delimiterIndex = variableNameText.lastIndexOf(':');
+		return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
 	}
 
 	@NotNull
@@ -403,7 +405,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 	@Override
 	public PerlVariableDeclarationWrapper getLexicalDeclaration()
 	{
-		if (getNamespaceElement() != null)
+		if (getExplicitPackageName() != null)
 		{
 			return null;
 		}

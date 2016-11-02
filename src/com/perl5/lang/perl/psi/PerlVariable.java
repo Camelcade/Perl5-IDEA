@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -28,7 +27,7 @@ import java.util.List;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlPackageMember, PerlNamespaceElementContainer, PerlVariableNameElementContainer
+public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlPackageMember, PerlVariableNameElementContainer
 {
 	/**
 	 * Guesses variable type from definition or context (uses containing perl file to cache types)
