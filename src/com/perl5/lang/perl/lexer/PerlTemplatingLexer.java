@@ -1,5 +1,6 @@
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,6 +12,12 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
 public abstract class PerlTemplatingLexer extends PerlProtoLexer
 {
 	protected final PerlLexer myPerlLexer = new PerlLexer(null);
+
+	public PerlTemplatingLexer withProject(@Nullable Project project)
+	{
+		myPerlLexer.withProject(project);
+		return this;
+	}
 
 	/**
 	 * syncronizes position of perl lexer with main one

@@ -416,7 +416,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <METHOD_DECLARATION,SUB_DECLARATION>{
-	{QUALIFIED_IDENTIFIER} 		{return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} 		{return getIdentifierTokenWithoutIndex();}
 }
 
 <METHOD_DECLARATION>{
@@ -744,12 +744,12 @@ REGEX_COMMENT = "(?#"[^)]*")"
 	"mk_ro_accessors"			{yybegin(AFTER_VALUE);return RESERVED_MK_RO_ACCESSORS;}
 	"mk_wo_accessors"			{yybegin(AFTER_VALUE);return RESERVED_MK_WO_ACCESSORS;}
 	"helper"					{yybegin(AFTER_VALUE);return MOJO_HELPER_METHOD;}
-	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndex();}
 }
 
 // following is for require
 <REQUIRE_ARGUMENTS>{
-	{QUALIFIED_IDENTIFIER} / "("	{yybegin(YYINITIAL);return IDENTIFIER;}
+	{QUALIFIED_IDENTIFIER} / "("	{yybegin(YYINITIAL);return getIdentifierToken();}
 	{QUALIFIED_IDENTIFIER}			{yybegin(AFTER_IDENTIFIER);return PACKAGE;}
 }
 

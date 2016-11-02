@@ -2309,6 +2309,19 @@ public class PerlElementTypeFactory
 			};
 		}
 
+		if (name.equals("PACKAGE_EXPR"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPackageExprImpl(node);
+				}
+			};
+		}
+
 		throw new RuntimeException("Unknown token:" + name);
 	}
 }

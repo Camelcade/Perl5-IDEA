@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.lexer;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
@@ -23,15 +25,19 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Queue;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,6 +127,27 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	private IElementType myNonLabelTokenType;
 	private int myNonLabelState;
 
+	@Nullable
+	private Project myProject;
+	private final AtomicNotNullLazyValue<Set<String>> mySubNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
+	{
+		@Override
+		protected Set<String> compute()
+		{
+			assert myProject != null;
+			return myProject.getComponent(PerlNamesCache.class).getSubsNamesSet();
+		}
+	};
+	private final AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
+	{
+		@Override
+		protected Set<String> compute()
+		{
+			assert myProject != null;
+			return myProject.getComponent(PerlNamesCache.class).getPackagesNamesSet();
+		}
+	};
+
 	public static void initReservedTokensMap()
 	{
 		RESERVED_TOKEN_TYPES.clear();
@@ -161,6 +188,12 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		{
 			return charOpener;
 		}
+	}
+
+	public PerlBaseLexer withProject(@Nullable Project project)
+	{
+		myProject = project;
+		return this;
 	}
 
 	@Override
@@ -424,6 +457,27 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	}
 
 	/**
+	 * Distincts sub_name from qualified sub_name by :
+	 * @return guessed token
+	 */
+	protected IElementType getIdentifierTokenWithoutIndex()
+	{
+		CharSequence tokenText = yytext();
+		if (StringUtil.endsWithChar(tokenText, ':'))
+		{
+			return PACKAGE;
+		}
+		else if (StringUtil.contains(tokenText, ":"))
+		{
+			return SUB_NAME_QUALIFIED;
+		}
+		else
+		{
+			return SUB_NAME;
+		}
+	}
+
+	/**
 	 * Bareword parser, resolves built-ins and runs additional processings where it's necessary
 	 *
 	 * @return token type
@@ -437,7 +491,34 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				(tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null
 				)
 		{
-			tokenType = IDENTIFIER;
+			if (StringUtil.endsWithChar(tokenText, ':'))
+			{
+				tokenType = PACKAGE;
+			}
+			else if (myProject != null)
+			{
+				tokenText = PerlPackageUtil.getCanonicalPackageName(tokenText);
+				if (!StringUtil.containsChar(tokenText, ':'))
+				{
+					tokenType = SUB_NAME;
+				}
+				else if (mySubNamesProvider.getValue().contains(tokenText))
+				{
+					tokenType = SUB_NAME_QUALIFIED;
+				}
+				else if (myPackageNamesProvider.getValue().contains(tokenText))
+				{
+					tokenType = PACKAGE;
+				}
+				else
+				{
+					tokenType = SUB_NAME_QUALIFIED;
+				}
+			}
+			else    // fallback for words scanner
+			{
+				tokenType = IDENTIFIER;
+			}
 		}
 
 		yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);

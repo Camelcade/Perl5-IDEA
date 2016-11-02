@@ -311,6 +311,8 @@ limitations under the License.
 
     // custom tokens
     IDENTIFIER='IDENTIFIER'
+	SUB_NAME='subname'
+	SUB_NAME_QUALIFIED='package::subname'
 
     BUILTIN_LIST='list'
     BUILTIN_UNARY='unary'
@@ -603,8 +605,8 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  'sub' IDENTIFIER sub_definition_parameters parse_block
-sub_declaration ::=  'sub' IDENTIFIER sub_definition_parameters
+sub_definition ::=  'sub' (SUB_NAME|SUB_NAME_QUALIFIED) sub_definition_parameters parse_block
+sub_declaration ::=  'sub' (SUB_NAME|SUB_NAME_QUALIFIED) sub_definition_parameters
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
@@ -772,7 +774,9 @@ term_expr ::=
 
     | sub_call_expr
     | code_primitive
+	| package_expr
 
+package_expr ::= PACKAGE
 
 grep_expr ::=  'grep' grep_map_arguments {pin=1}
 map_expr ::=  'map' grep_map_arguments {pin=1}
@@ -1009,7 +1013,8 @@ meta call_arguments ::= <<x1>>
 parenthesised_call_arguments ::= <<parse_parenthesized_expression optional_expression>> !'['
 private optional_expression ::= [expr]
 
-private regular_nested_call ::= <<nested_call IDENTIFIER>>
+private regular_nested_call ::= <<nested_call regular_nested_call_tokens>>
+private regular_nested_call_tokens ::= SUB_NAME | SUB_NAME_QUALIFIED
 scalar_call ::= scalar_or_element [parenthesised_call_arguments]
 
 sub_call_expr ::=
@@ -1038,13 +1043,13 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= IDENTIFIER | 'list' | 'unary' | 'argumentless' | 'method' | 'func' | 'finally' | 'try' | 'catch'
+private method_tokens ::= 'list' | 'unary' | 'argumentless' | SUB_NAME_QUALIFIED | SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
 
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
-label_declaration ::= IDENTIFIER &':'
-label_expr ::= IDENTIFIER
+label_declaration ::= {IDENTIFIER|SUB_NAME} &':'
+label_expr ::= IDENTIFIER|SUB_NAME
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE
