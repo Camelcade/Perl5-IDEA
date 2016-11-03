@@ -29,6 +29,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodSubReference extends PodReferenceBase<PodIdentifierImpl>
+public class PodSubReference extends PerlPolyVariantReference<PodIdentifierImpl>
 {
 	protected static final ResolveCache.PolyVariantResolver<PodSubReference> RESOLVER = new PodSubReferenceResolver();
 

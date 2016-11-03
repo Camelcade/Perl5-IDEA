@@ -21,6 +21,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import com.perl5.lang.pod.parser.psi.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodLinkToSectionReference extends PodReferenceBase<PodFormatterL>
+public class PodLinkToSectionReference extends PerlPolyVariantReference<PodFormatterL>
 {
 	protected static final ResolveCache.PolyVariantResolver<PodLinkToSectionReference> RESOLVER = new PodSectionReferenceResolver();
 

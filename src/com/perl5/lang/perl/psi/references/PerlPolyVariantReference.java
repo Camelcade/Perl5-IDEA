@@ -26,9 +26,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class PerlPolyVariantReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T>
 {
+	public PerlPolyVariantReference(T psiElement)
+	{
+		super(psiElement);
+	}
+
 	public PerlPolyVariantReference(@NotNull T element, TextRange textRange)
 	{
 		super(element, textRange);
+	}
+
+	public PerlPolyVariantReference(T element, TextRange range, boolean soft)
+	{
+		super(element, range, soft);
 	}
 
 	@NotNull

@@ -18,10 +18,14 @@ package com.perl5.lang.tt2.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.ElementManipulators;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import com.perl5.lang.tt2.psi.TemplateToolkitNamedBlock;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +35,7 @@ import java.util.List;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitBlockReference extends PsiPolyVariantReferenceBase<PsiElement>
+public class TemplateToolkitBlockReference extends PerlPolyVariantReference<PsiElement>
 {
 	private static final ResolveCache.PolyVariantResolver<TemplateToolkitBlockReference> RESOLVER = new TemplateToolkitBlockReferenceResolver();
 

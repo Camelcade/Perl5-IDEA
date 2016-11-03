@@ -25,6 +25,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFormatterL;
@@ -36,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.04.2016.
  */
-public class PodLinkToFileReference extends PodReferenceBase<PodFormatterL>
+public class PodLinkToFileReference extends PerlPolyVariantReference<PodFormatterL>
 {
 	protected static final ResolveCache.PolyVariantResolver<PodLinkToFileReference> RESOLVER = new PodFileReferenceResolver();
 
