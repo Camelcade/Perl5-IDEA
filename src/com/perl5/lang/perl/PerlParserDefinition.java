@@ -60,11 +60,18 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 
 	public static final TokenSet LITERALS = TokenSet.create(
 			STRING_CONTENT,
-			HEREDOC
+			STRING_CONTENT_XQ,
+			STRING_CONTENT_QQ
 	);
 	public static final TokenSet IDENTIFIERS = TokenSet.create(
-			SUB,
+			SUB_NAME,
+			SUB_NAME_QUALIFIED,
 			SCALAR_NAME,
+			ARRAY_NAME,
+			HASH_NAME,
+			CODE_NAME,
+			GLOB_NAME,
+			PACKAGE,
 			IDENTIFIER
 	);
 
