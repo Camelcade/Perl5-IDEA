@@ -116,6 +116,7 @@ NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"rewinddir"|"readdi
 LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"scalar"|"rindex"|"rename"|"recv"|"push"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"dump"|"die"|"delete"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chmod"|"bless"|"bind"|"atan2"|"accept"
 NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"break"
 IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"defined"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
+CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
 
 REGEX_COMMENT = "(?#"[^)]*")"
 
@@ -852,6 +853,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_POSSIBLE_SIGIL>{
+	{CORE_LIST}				{return PACKAGE;}
 	{QUALIFIED_IDENTIFIER} 	{return getIdentifierToken();}
 }
 
