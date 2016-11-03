@@ -31,7 +31,7 @@ public class PerlVariableNameManipulator extends AbstractElementManipulator<Perl
 	@Override
 	public PerlVariableNameElement handleContentChange(@NotNull PerlVariableNameElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
-		return (PerlVariableNameElement) ((LeafPsiElement) element).replaceWithText(newContent);
+		return (PerlVariableNameElement) ((LeafPsiElement) element).replaceWithText(range.replace(element.getText(), newContent));
 	}
 
 }
