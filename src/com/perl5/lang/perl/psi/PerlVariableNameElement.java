@@ -16,13 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlVariableNameElement extends PsiElement
+public interface PerlVariableNameElement extends PerlReferenceOwner
 {
 	@NotNull
 	String getName();
