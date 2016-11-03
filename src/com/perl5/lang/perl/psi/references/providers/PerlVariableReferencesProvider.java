@@ -39,7 +39,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider
 	{
 		PsiElement parent = element.getParent();
 
-		if (parent instanceof PerlVariable)
+		if (parent instanceof PerlVariable && !((PerlVariable) parent).isDeclaration())
 		{
 			String elementText = element.getText();
 			if (PerlPackageUtil.isFullQualifiedName(elementText))
@@ -53,7 +53,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider
 			}
 			else
 			{
-				return new PsiReference[]{new PerlVariableReference(element, element.getTextRange())};
+				return new PsiReference[]{new PerlVariableReference(element, TextRange.allOf(elementText))};
 			}
 		}
 

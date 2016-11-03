@@ -521,4 +521,10 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		}
 		return super.processDeclarations(processor, state, lastParent, place);
 	}
+
+	@Override
+	public boolean isDeclaration()
+	{
+		return getParent() instanceof PerlVariableDeclarationWrapper;
+	}
 }

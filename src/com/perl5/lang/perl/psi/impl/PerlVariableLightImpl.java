@@ -348,5 +348,11 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
 	{
 		return getVariableName();
 	}
+
+	@Override
+	public boolean isDeclaration()
+	{
+		return true;
+	}
 }
 

@@ -61,14 +61,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement>
 	{
 		PerlVariable myVariable = getVariable();
 
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-		PsiElement variableContainer = myVariable.getParent();
-
-		if (variableContainer instanceof PerlVariableDeclarationWrapper) // it's a declaration
-		{
-			return ResolveResult.EMPTY_ARRAY;
-		}
+		List<ResolveResult> result = new ArrayList<>();
 
 		PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
 

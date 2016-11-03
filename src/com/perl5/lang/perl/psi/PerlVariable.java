@@ -93,4 +93,11 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlP
 	 * @return true of false
 	 */
 	boolean isSelf();
+
+	/**
+	 * Checks if this occurance is declaration
+	 *
+	 * @return true if it's declaration
+	 */
+	boolean isDeclaration();
 }
