@@ -16,35 +16,45 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceDefinitionResolver;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PerlPolyVariantReference<PsiElement>
+public class PerlNamespaceReference extends PerlCachingReference<PsiElement>
 {
-	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceReference> RESOLVER = new PerlNamespaceDefinitionResolver();
-
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
-	public String getCanonicalName()
-	{
-		return PerlPackageUtil.getCanonicalPackageName(myElement.getText());
-	}
-
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
+		String referenceText = getRangeInElement().substring(myElement.getText());
+		if (referenceText.isEmpty())
+		{
+			referenceText = PerlPackageUtil.MAIN_PACKAGE;
+		}
+
+		Project project = myElement.getProject();
+		List<ResolveResult> result = new ArrayList<>();
+
+		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(referenceText)))
+		{
+			result.add(new PsiElementResolveResult(namespaceDefinition));
+		}
+
+		return result.toArray(new ResolveResult[result.size()]);
 	}
 }
