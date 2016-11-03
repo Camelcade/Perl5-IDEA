@@ -21,4 +21,4 @@ say ${NewName};
 say ${Foo::Bar::Moo::NewName};
 EOM
 
-say Foo::Bar::Boo->some;
+say Foo::Bar::Moo::->some;
