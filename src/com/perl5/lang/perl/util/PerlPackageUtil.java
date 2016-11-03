@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -839,6 +840,44 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 
 		return result;
+	}
+
+	/**
+	 * Checks if sequence looks like a fqn
+	 *
+	 * @param text sequence to check
+	 * @return true if it's foo::bar
+	 */
+	public static boolean isFullQualifiedName(CharSequence text)
+	{
+		return StringUtil.contains(text, ":");
+	}
+
+	/**
+	 * Returns qualified ranges for full-qualified identifier, like variable name or sub_name_qualified
+	 *
+	 * @param text token text
+	 * @return array of two ranges
+	 */
+	@NotNull
+	public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull String text)
+	{
+
+		int lastSeparatorOffset = text.lastIndexOf(':');
+		assert lastSeparatorOffset >= 0;
+
+		TextRange packageRange = TextRange.create(0, lastSeparatorOffset - 1);
+		TextRange nameRange;
+
+		if (++lastSeparatorOffset < text.length())
+		{
+			nameRange = TextRange.create(lastSeparatorOffset, text.length());
+		}
+		else
+		{
+			nameRange = TextRange.EMPTY_RANGE;
+		}
+		return Pair.create(packageRange, nameRange);
 	}
 
 	public interface ClassRootVirtualFileProcessor

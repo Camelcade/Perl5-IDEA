@@ -20,6 +20,7 @@ import com.intellij.psi.PsiReferenceContributor;
 import com.intellij.psi.PsiReferenceRegistrar;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.references.providers.PerlSimpleSubReferenceProvider;
+import com.perl5.lang.perl.psi.references.providers.PerlVariableReferencesProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,6 +36,7 @@ public class PerlReferencesContributor extends PsiReferenceContributor implement
 				new PerlSimpleSubReferenceProvider()
 		);
 
+		registrar.registerReferenceProvider(VARIABLE_NAME_PATTERN, new PerlVariableReferencesProvider());
 
 	}
 }
