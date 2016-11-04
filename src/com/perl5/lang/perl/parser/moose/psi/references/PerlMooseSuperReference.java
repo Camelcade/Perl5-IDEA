@@ -16,32 +16,61 @@
 
 package com.perl5.lang.perl.parser.moose.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.parser.moose.psi.references.resolvers.PerlMooseSuperReferenceResolver;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
+import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseSuperReference extends PerlPolyVariantReference<PsiElement>
+public class PerlMooseSuperReference extends PerlCachingReference<PsiElement>
 {
-	private static final ResolveCache.PolyVariantResolver<PerlMooseSuperReference> RESOLVER = new PerlMooseSuperReferenceResolver();
 
 	public PerlMooseSuperReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
+		// fixme not really dry with simpleresolver and superresolver. Need some generics magic
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
+		PsiElement element = getElement();
+
+		PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
+
+		if (overrideStatement != null)
+		{
+			String packageName = PerlPackageUtil.getContextPackageName(element);
+			String subName = overrideStatement.getSubName();
+			Project project = element.getProject();
+
+
+			for (PsiElement targetElement : PerlMro.resolveSub(
+					project,
+					packageName,
+					subName,
+					true
+			))
+			{
+				result.add(new PsiElementResolveResult(targetElement));
+			}
+		}
+
+		return result.toArray(new ResolveResult[result.size()]);
 	}
 
 	@Override
