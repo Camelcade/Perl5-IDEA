@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
@@ -32,18 +31,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference
 {
-	protected static final ResolveCache.PolyVariantResolver<HTMLMasonComponentSimpleReference> RESOLVER = new HTMLMasonSelfReferenceResolver();
-
 	public HTMLMasonComponentSimpleReference(@NotNull PerlString element, TextRange textRange)
 	{
 		super(element, textRange);
-	}
-
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
 	}
 
 	@Override
@@ -58,20 +48,16 @@ public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference
 		return myElement;
 	}
 
-	private static class HTMLMasonSelfReferenceResolver implements ResolveCache.PolyVariantResolver<HTMLMasonComponentSimpleReference>
+	@Override
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull HTMLMasonComponentSimpleReference reference, boolean incompleteCode)
+		PsiFile psiFile = getElement().getContainingFile();
+
+		if (psiFile instanceof HTMLMasonFileImpl)
 		{
-			PsiFile psiFile = reference.getElement().getContainingFile();
-
-			if (psiFile instanceof HTMLMasonFileImpl)
-			{
-				return new ResolveResult[]{new PsiElementResolveResult(psiFile)};
-			}
-
-			return ResolveResult.EMPTY_ARRAY;
+			return new ResolveResult[]{new PsiElementResolveResult(psiFile)};
 		}
+
+		return ResolveResult.EMPTY_ARRAY;
 	}
 }

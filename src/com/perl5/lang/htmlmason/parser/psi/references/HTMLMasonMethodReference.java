@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
@@ -35,19 +34,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HTMLMasonMethodReference extends HTMLMasonStringReference
 {
-	protected static final ResolveCache.PolyVariantResolver<HTMLMasonMethodReference> RESOLVER = new HTMLMasonMethodResolver();
-
 	public HTMLMasonMethodReference(@NotNull PerlString element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
-	}
 
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
@@ -64,33 +55,30 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference
 		return myElement;
 	}
 
-	private static class HTMLMasonMethodResolver implements ResolveCache.PolyVariantResolver<HTMLMasonMethodReference>
+	@Override
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull HTMLMasonMethodReference reference, boolean incompleteCode)
-		{
-			PerlString element = reference.getElement();
-			String methodName = reference.getRangeInElement().substring(element.getText());
+		PerlString element = getElement();
+		String methodName = getRangeInElement().substring(element.getText());
 
-			if (StringUtil.isNotEmpty(methodName))
+		if (StringUtil.isNotEmpty(methodName))
+		{
+			PsiReference[] references = element.getReferences();
+			if (references.length == 2)
 			{
-				PsiReference[] references = element.getReferences();
-				if (references.length == 2)
+				PsiReference componentReference = references[0];
+				PsiElement startComponent = componentReference.resolve();
+				if (startComponent instanceof HTMLMasonFileImpl)
 				{
-					PsiReference componentReference = references[0];
-					PsiElement startComponent = componentReference.resolve();
-					if (startComponent instanceof HTMLMasonFileImpl)
+					HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl) startComponent).findMethodDefinitionByNameInThisOrParents(methodName);
+					if (methodDefinition != null)
 					{
-						HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl) startComponent).findMethodDefinitionByNameInThisOrParents(methodName);
-						if (methodDefinition != null)
-						{
-							return new ResolveResult[]{new PsiElementResolveResult(methodDefinition)};
-						}
+						return new ResolveResult[]{new PsiElementResolveResult(methodDefinition)};
 					}
 				}
 			}
-			return ResolveResult.EMPTY_ARRAY;
 		}
+		return ResolveResult.EMPTY_ARRAY;
 	}
+
 }

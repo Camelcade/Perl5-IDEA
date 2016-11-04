@@ -22,7 +22,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
@@ -40,18 +39,9 @@ import java.util.List;
  */
 public class HTMLMasonComponentReference extends HTMLMasonStringReference
 {
-	protected static final ResolveCache.PolyVariantResolver<HTMLMasonComponentReference> RESOLVER = new HTMLMasonComponentResolver();
-
 	public HTMLMasonComponentReference(@NotNull PerlString element, TextRange textRange)
 	{
 		super(element, textRange);
-	}
-
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
 	}
 
 	@Override
@@ -140,79 +130,75 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference
 		return myElement;
 	}
 
-	private static class HTMLMasonComponentResolver implements ResolveCache.PolyVariantResolver<HTMLMasonComponentReference>
+	@Override
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull HTMLMasonComponentReference htmlMasonComponentReference, boolean incompleteCode)
+		List<ResolveResult> result = null;
+
+		// looking subcomponents
+		String nameOrPath = getRangeInElement().substring(getElement().getText());
+		final PsiFile file = getElement().getContainingFile();
+
+		if (file instanceof HTMLMasonFileImpl)
 		{
-			List<ResolveResult> result = null;
-
-			// looking subcomponents
-			String nameOrPath = htmlMasonComponentReference.getRangeInElement().substring(htmlMasonComponentReference.getElement().getText());
-			final PsiFile file = htmlMasonComponentReference.getElement().getContainingFile();
-
-			if (file instanceof HTMLMasonFileImpl)
+			for (HTMLMasonCompositeElement subcomponentDefitnition : ((HTMLMasonFileImpl) file).getSubComponentsDefinitions())
 			{
-				for (HTMLMasonCompositeElement subcomponentDefitnition : ((HTMLMasonFileImpl) file).getSubComponentsDefinitions())
+				assert subcomponentDefitnition instanceof HTMLMasonSubcomponentDefitnition;
+				if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition) subcomponentDefitnition).getName(), nameOrPath))
 				{
-					assert subcomponentDefitnition instanceof HTMLMasonSubcomponentDefitnition;
-					if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition) subcomponentDefitnition).getName(), nameOrPath))
-					{
-						if (result == null)
-						{
-							result = new ArrayList<ResolveResult>();
-						}
-						result.add(new PsiElementResolveResult(subcomponentDefitnition));
-					}
-				}
-			}
-
-			// looking components
-			if (result == null)
-			{
-				final Project project = file.getProject();
-				VirtualFile componentVirtualFile = null;
-
-				if (StringUtil.startsWith(nameOrPath, "/"))
-				{
-					HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-					if (settings != null)
-					{
-						for (VirtualFile componentRoot : settings.getComponentsRootsVirtualFiles())
-						{
-							componentVirtualFile = componentRoot.findFileByRelativePath(nameOrPath);
-
-							if (componentVirtualFile != null)
-							{
-								break;
-							}
-						}
-					}
-				}
-				else // possible relative path
-				{
-					VirtualFile containingFile = file.getVirtualFile();
-					if (containingFile != null)
-					{
-						VirtualFile containingDir = containingFile.getParent();
-						componentVirtualFile = containingDir.findFileByRelativePath(nameOrPath);
-					}
-				}
-
-				if (componentVirtualFile != null)
-				{
-					PsiFile componentFile = PsiManager.getInstance(project).findFile(componentVirtualFile);
-					if (componentFile instanceof HTMLMasonFileImpl)
+					if (result == null)
 					{
 						result = new ArrayList<ResolveResult>();
-						result.add(new PsiElementResolveResult(componentFile));
 					}
+					result.add(new PsiElementResolveResult(subcomponentDefitnition));
+				}
+			}
+		}
 
+		// looking components
+		if (result == null)
+		{
+			final Project project = file.getProject();
+			VirtualFile componentVirtualFile = null;
+
+			if (StringUtil.startsWith(nameOrPath, "/"))
+			{
+				HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+				if (settings != null)
+				{
+					for (VirtualFile componentRoot : settings.getComponentsRootsVirtualFiles())
+					{
+						componentVirtualFile = componentRoot.findFileByRelativePath(nameOrPath);
+
+						if (componentVirtualFile != null)
+						{
+							break;
+						}
+					}
+				}
+			}
+			else // possible relative path
+			{
+				VirtualFile containingFile = file.getVirtualFile();
+				if (containingFile != null)
+				{
+					VirtualFile containingDir = containingFile.getParent();
+					componentVirtualFile = containingDir.findFileByRelativePath(nameOrPath);
 				}
 			}
 
-			return result == null ? ResolveResult.EMPTY_ARRAY : result.toArray(new ResolveResult[result.size()]);
+			if (componentVirtualFile != null)
+			{
+				PsiFile componentFile = PsiManager.getInstance(project).findFile(componentVirtualFile);
+				if (componentFile instanceof HTMLMasonFileImpl)
+				{
+					result = new ArrayList<ResolveResult>();
+					result.add(new PsiElementResolveResult(componentFile));
+				}
+
+			}
 		}
+
+		return result == null ? ResolveResult.EMPTY_ARRAY : result.toArray(new ResolveResult[result.size()]);
 	}
 }
