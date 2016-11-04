@@ -18,12 +18,10 @@ package com.perl5.lang.pod.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.pod.parser.psi.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,21 +29,13 @@ import java.util.List;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodLinkToSectionReference extends PerlPolyVariantReference<PodFormatterL>
+public class PodLinkToSectionReference extends PerlCachingReference<PodFormatterL>
 {
-	protected static final ResolveCache.PolyVariantResolver<PodLinkToSectionReference> RESOLVER = new PodSectionReferenceResolver();
-
 	public PodLinkToSectionReference(PodFormatterL element, TextRange range)
 	{
 		super(element, range);
 	}
 
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
-	}
 
 	@Override
 	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
@@ -53,55 +43,50 @@ public class PodLinkToSectionReference extends PerlPolyVariantReference<PodForma
 		return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
 	}
 
-	private static class PodSectionReferenceResolver implements ResolveCache.PolyVariantResolver<PodLinkToSectionReference>
+	@Override
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull PodLinkToSectionReference podLinkToSectionReference, boolean incompleteCode)
+		PodFormatterL podLink = getElement();
+		PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
+
+		if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null)
 		{
-			PodFormatterL podLink = podLinkToSectionReference.getElement();
-			PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
+			List<PsiFile> targetFiles = new ArrayList<PsiFile>();
 
-			if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null)
+			if (descriptor.getFileId() != null)
 			{
-				List<PsiFile> targetFiles = new ArrayList<PsiFile>();
-
-				if (descriptor.getFileId() != null)
+				for (PsiReference reference : podLink.getReferences())
 				{
-					for (PsiReference reference : podLink.getReferences())
+					if (reference instanceof PodLinkToFileReference)
 					{
-						if (reference instanceof PodLinkToFileReference)
+						for (ResolveResult resolveResult : ((PodLinkToFileReference) reference).multiResolve(false))
 						{
-							for (ResolveResult resolveResult : ((PodLinkToFileReference) reference).multiResolve(false))
-							{
-								targetFiles.add((PsiFile) resolveResult.getElement());
-							}
+							targetFiles.add((PsiFile) resolveResult.getElement());
 						}
 					}
-				}
-				else
-				{
-					targetFiles.add(podLink.getContainingFile());
-				}
-
-				if (!targetFiles.isEmpty())
-				{
-					List<ResolveResult> results = new ArrayList<ResolveResult>();
-					PodDocumentPattern searchPattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection()).withExactMatch();
-					for (PsiFile file : targetFiles)
-					{
-						PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
-						if (podCompositeElement != null)
-						{
-							results.add(new PsiElementResolveResult(podCompositeElement));
-						}
-					}
-					return results.toArray(new ResolveResult[results.size()]);
 				}
 			}
+			else
+			{
+				targetFiles.add(podLink.getContainingFile());
+			}
 
-			return ResolveResult.EMPTY_ARRAY;
+			if (!targetFiles.isEmpty())
+			{
+				List<ResolveResult> results = new ArrayList<ResolveResult>();
+				PodDocumentPattern searchPattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection()).withExactMatch();
+				for (PsiFile file : targetFiles)
+				{
+					PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
+					if (podCompositeElement != null)
+					{
+						results.add(new PsiElementResolveResult(podCompositeElement));
+					}
+				}
+				return results.toArray(new ResolveResult[results.size()]);
+			}
 		}
-	}
 
+		return ResolveResult.EMPTY_ARRAY;
+	}
 }
