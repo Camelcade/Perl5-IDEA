@@ -65,11 +65,10 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
 	);
 	public static final TokenSet IDENTIFIERS = TokenSet.create(
 			SUB_NAME,
-			SUB_NAME_QUALIFIED,
+			QUALIFYING_PACKAGE,
 			SCALAR_NAME,
 			ARRAY_NAME,
 			HASH_NAME,
-			CODE_NAME,
 			GLOB_NAME,
 			PACKAGE,
 			IDENTIFIER

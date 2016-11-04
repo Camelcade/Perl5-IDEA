@@ -156,7 +156,6 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(LEFT_BRACE_CODE, new TextAttributesKey[]{PERL_SUB});
 		ATTRIBUTES_MAP.put(RIGHT_BRACE_CODE, new TextAttributesKey[]{PERL_SUB});
 		ATTRIBUTES_MAP.put(DEREF_CODE, new TextAttributesKey[]{PERL_SUB});
-		ATTRIBUTES_MAP.put(CODE_NAME, new TextAttributesKey[]{PERL_SUB});
 
 		ATTRIBUTES_MAP.put(FAT_COMMA, new TextAttributesKey[]{PERL_COMMA});
 		ATTRIBUTES_MAP.put(COMMA, new TextAttributesKey[]{PERL_COMMA});
@@ -223,7 +222,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		ATTRIBUTES_MAP.put(BUILTIN_UNARY, new TextAttributesKey[]{PERL_SUB_BUILTIN});
 		ATTRIBUTES_MAP.put(BUILTIN_LIST, new TextAttributesKey[]{PERL_SUB_BUILTIN});
 		ATTRIBUTES_MAP.put(SUB_NAME, new TextAttributesKey[]{PERL_SUB});
-		ATTRIBUTES_MAP.put(SUB_NAME_QUALIFIED, new TextAttributesKey[]{PERL_SUB});
+		ATTRIBUTES_MAP.put(QUALIFYING_PACKAGE, new TextAttributesKey[]{PERL_PACKAGE});
 	}
 
 

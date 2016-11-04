@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
@@ -36,18 +35,12 @@ import javax.swing.*;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME_QUALIFIED;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
 public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
 {
-	private final static TokenSet SUB_NAMES_TOKEN_SET = TokenSet.create(
-			SUB_NAME,
-			SUB_NAME_QUALIFIED
-	);
-
 	public PerlSubBaseImpl(@NotNull ASTNode node)
 	{
 		super(node);
@@ -158,7 +151,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public PsiElement getSubNameElement()
 	{
-		return findChildByFilter(SUB_NAMES_TOKEN_SET);
+		return findChildByType(SUB_NAME);
 	}
 
 	@NotNull

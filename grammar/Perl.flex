@@ -161,8 +161,16 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
 %state CATCH, CATCH_PACKAGE
+%xstate LEX_SUB_NAME
 
 %%
+
+<LEX_SUB_NAME>{
+	{IDENTIFIER_CONTINUE} |
+	{CAPPED_SINGLE_LETTER_VARIABLE_NAME} |
+	{SPECIAL_VARIABLE_NAME} {popState();return SUB_NAME;}
+}
+
 /////////////////////////////////////// pod capture ////////////////////////////////////////////////////////////////////
 
 <POD_STATE> {

@@ -67,12 +67,10 @@ limitations under the License.
 	DEREF_CODE='->&*'
 
     // generated tokens
-    SUB='SUB'
     SCALAR_NAME='SCALAR_NAME'
     ARRAY_NAME='ARRAY_NAME'
     HASH_NAME='HASH_NAME'
     GLOB_NAME='GLOB_NAME'
-    CODE_NAME='CODE_NAME'
 
     HEREDOC='HEREDOC'
     HEREDOC_QQ='HEREDOC_QQ'
@@ -312,7 +310,6 @@ limitations under the License.
     // custom tokens
     IDENTIFIER='IDENTIFIER'
 	SUB_NAME='subname'
-	SUB_NAME_QUALIFIED='package::subname'
 
     BUILTIN_LIST='list'
     BUILTIN_UNARY='unary'
@@ -323,6 +320,7 @@ limitations under the License.
     SUB_PROTOTYPE_TOKEN='SUB_PROTOTYPE_TOKEN'
 
     PACKAGE='package::name'
+    QUALIFYING_PACKAGE='package::name::'
     PACKAGE_PRAGMA_CONSTANT='constant'
     PACKAGE_PRAGMA_VARS='vars'
 
@@ -608,7 +606,7 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 sub_definition ::=  'sub' sub_names_token sub_definition_parameters parse_block
 sub_declaration ::=  'sub' sub_names_token sub_definition_parameters
 
-private sub_names_token ::= SUB_NAME|SUB_NAME_QUALIFIED
+private sub_names_token ::= [QUALIFYING_PACKAGE] SUB_NAME
 
 private sub_definition_parameters ::= [sub_prototype_or_signature] [sub_attributes]
 private sub_prototype_or_signature ::= '(' sub_prototype_or_signature_content ')' {pin=1}
@@ -1016,7 +1014,7 @@ parenthesised_call_arguments ::= <<parse_parenthesized_expression optional_expre
 private optional_expression ::= [expr]
 
 private regular_nested_call ::= <<nested_call regular_nested_call_tokens>>
-private regular_nested_call_tokens ::= SUB_NAME | SUB_NAME_QUALIFIED
+private regular_nested_call_tokens ::= [QUALIFYING_PACKAGE] SUB_NAME
 scalar_call ::= scalar_or_element [parenthesised_call_arguments]
 
 sub_call_expr ::=
@@ -1045,7 +1043,7 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= 'list' | 'unary' | 'argumentless' | SUB_NAME_QUALIFIED [PACKAGE] | SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
+private method_tokens ::= 'list' | 'unary' | 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
 
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
@@ -1096,7 +1094,7 @@ array_index_variable ::= '$#' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
 scalar_variable ::= '$$' {SCALAR_NAME | '${' SCALAR_NAME '$}'}
 array_variable ::= '$@' {ARRAY_NAME | '@{' ARRAY_NAME '@}'}
 hash_variable ::= '$%' {HASH_NAME | '%{' HASH_NAME '%}'}
-code_variable ::= '$&' {CODE_NAME | '&{' CODE_NAME '&}'}
+code_variable ::= '$&' {normal_method | '&{' normal_method '&}'}
 glob_variable ::= '$*' {GLOB_NAME | '*{' GLOB_NAME '*}'}
 
 private comma ::= ',' | '=>'

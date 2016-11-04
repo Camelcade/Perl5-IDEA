@@ -823,9 +823,10 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub Au::Naturale
+  sub main::Naturale
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: package::subname)('Au::Naturale')
+    PsiElement(Perl5: package::name::)('Au::')
+    PsiElement(Perl5: subname)('Naturale')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -907,9 +908,10 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub UNIVERSAL::Name
+  sub main::Name
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: package::subname)('UNIVERSAL::Name')
+    PsiElement(Perl5: package::name::)('UNIVERSAL::')
+    PsiElement(Perl5: subname)('Name')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -945,9 +947,10 @@ Perl5
               PsiElement(Perl5: ])(']')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub UNIVERSAL::Purpose
+  sub main::Purpose
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: package::subname)('UNIVERSAL::Purpose')
+    PsiElement(Perl5: package::name::)('UNIVERSAL::')
+    PsiElement(Perl5: subname)('Purpose')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -966,7 +969,8 @@ Perl5
             PsiElement(Perl5: ,)(',')
             PsiPerlCodeVariableImpl(Perl5: CODE_VARIABLE)
               PsiElement(Perl5: $&)('&')
-              PsiElement(Perl5: CODE_NAME)('name')
+              PsiPerlMethodImpl(Perl5: METHOD)
+                PsiElement(Perl5: subname)('name')
             PsiElement(Perl5: ,)(',')
             PsiPerlStringDqImpl(Perl5: STRING_DQ)
               PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
@@ -978,9 +982,10 @@ Perl5
               PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub UNIVERSAL::Unit
+  sub main::Unit
     PsiElement(Perl5: sub)('sub')
-    PsiElement(Perl5: package::subname)('UNIVERSAL::Unit')
+    PsiElement(Perl5: package::name::)('UNIVERSAL::')
+    PsiElement(Perl5: subname)('Unit')
     PsiElement(Perl5: :)(':')
     PsiPerlAttributeImpl(Perl5: ATTRIBUTE)
       PsiElement(Perl5: ATTRIBUTE_IDENTIFIER)('ATTR')
@@ -994,7 +999,8 @@ Perl5
           PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
             PsiPerlCodeVariableImpl(Perl5: CODE_VARIABLE)
               PsiElement(Perl5: $&)('&')
-              PsiElement(Perl5: CODE_NAME)('name')
+              PsiPerlMethodImpl(Perl5: METHOD)
+                PsiElement(Perl5: subname)('name')
             PsiElement(Perl5: ,)(',')
             PsiPerlStringDqImpl(Perl5: STRING_DQ)
               PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')

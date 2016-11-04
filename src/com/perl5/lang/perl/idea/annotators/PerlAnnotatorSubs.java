@@ -32,7 +32,7 @@ public class PerlAnnotatorSubs extends PerlAnnotator
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (element.getNode().getElementType() == SUB) //  instanceof PerlSubNameElement
+		if (element.getNode().getElementType() == SUB_NAME) //  instanceof PerlSubNameElement
 		{
 			PsiElement parent = element.getParent();
 			if (parent instanceof PsiPerlSubDeclaration)

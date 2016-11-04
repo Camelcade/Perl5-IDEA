@@ -35,7 +35,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 		PsiBuilder.Marker subMarker = b.mark();
 		if (PerlParserUtil.consumeToken(b, SUB_NAME))
 		{
-			subMarker.collapse(SUB);
+			subMarker.collapse(SUB_NAME);
 			PerlParserImpl.method_signature(b, l);
 			if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER))
 			{
@@ -88,7 +88,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl
 					{
 						PsiBuilder.Marker fm = b.mark();
 						b.advanceLexer();
-						fm.collapse(SUB);
+						fm.collapse(SUB_NAME);
 						fm.precede().done(METHOD);
 
 						if (!PerlParserUtil.consumeToken(b, COMMA))

@@ -53,10 +53,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 
 	// tokens that can be converted between each other depending on context
 	public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
-			IDENTIFIER,
-			SUB,
-			RESERVED_METHOD,
-			RESERVED_FUNC
 	);
 
 	public static void addConvertableTokens(IElementType... convertableTokens)

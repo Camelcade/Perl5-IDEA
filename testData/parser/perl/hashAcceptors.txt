@@ -86,6 +86,7 @@ Perl5
         PsiElement(Perl5: ()('(')
         PsiPerlCodeVariableImpl(Perl5: CODE_VARIABLE)
           PsiElement(Perl5: $&)('&')
-          PsiElement(Perl5: CODE_NAME)('hash')
+          PsiPerlMethodImpl(Perl5: METHOD)
+            PsiElement(Perl5: subname)('hash')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')

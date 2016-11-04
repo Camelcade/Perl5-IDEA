@@ -131,7 +131,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 		PsiBuilder.Marker subMarker = b.mark();
 		if (PerlParserUtil.consumeToken(b, IDENTIFIER))
 		{
-			subMarker.collapse(SUB);
+			subMarker.collapse(SUB_NAME);
 			if (PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER))
 			{
 				PsiBuilder.Marker blockMarker = b.mark();

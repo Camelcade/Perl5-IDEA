@@ -80,7 +80,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("SUB"))
+		if (name.equals("subname"))
 		{
 			return new PerlTokenTypeEx(name)
 			{
@@ -92,7 +92,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("package::name") || name.equals("constant") || name.equals("vars"))
+		if (name.equals("package::name") || name.equals("package::name::") || name.equals("constant") || name.equals("vars"))
 		{
 			return new PerlTokenTypeEx(name)
 			{

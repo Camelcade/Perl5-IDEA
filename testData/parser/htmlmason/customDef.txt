@@ -1,7 +1,7 @@
 HTML::Mason component
   HTMLMasonSubcomponentDefitnitionImpl(HTML_MASON_DEF_DEFINITION)
     PsiElement(HTML::Mason: <%def)('<%def')
-    PsiElement(Perl5: SUB)('somedef')
+    PsiElement(Perl5: subname)('somedef')
     PsiElement(HTML::Mason: >)('>')
     HTMLMasonBlockImpl(HTML::Mason: HTML_MASON_BLOCK)
       PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<div>')
@@ -16,7 +16,7 @@ HTML::Mason component
     PsiElement(HTML::Mason: </%def>)('</%def>')
   HTMLMasonSubcomponentDefitnitionImpl(HTML_MASON_DEF_DEFINITION)
     PsiElement(HTML::Mason: <%def)('<%customdef')
-    PsiElement(Perl5: SUB)('otherdef')
+    PsiElement(Perl5: subname)('otherdef')
     PsiElement(HTML::Mason: >)('>')
     HTMLMasonBlockImpl(HTML::Mason: HTML_MASON_BLOCK)
       PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<div>')

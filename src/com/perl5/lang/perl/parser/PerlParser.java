@@ -107,7 +107,6 @@ public interface PerlParser extends PerlElementTypes
 			RIGHT_ANGLE,
 			RIGHT_BRACKET,
 			RIGHT_PAREN,
-			SUB,
 			SUB_PROTOTYPE_TOKEN,
 			VERSION_ELEMENT
 	);

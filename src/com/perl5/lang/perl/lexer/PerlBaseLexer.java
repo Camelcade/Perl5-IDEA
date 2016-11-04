@@ -106,7 +106,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR_INDEX, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR));
 		SIGILS_TO_TOKENS_MAP.put(SIGIL_ARRAY, Trinity.create(LEFT_BRACE_ARRAY, ARRAY_NAME, RIGHT_BRACE_ARRAY));
 		SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, Trinity.create(LEFT_BRACE_HASH, HASH_NAME, RIGHT_BRACE_HASH));
-		SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, CODE_NAME, RIGHT_BRACE_CODE));
+		SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, SUB_NAME, RIGHT_BRACE_CODE));
 		SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, Trinity.create(LEFT_BRACE_GLOB, GLOB_NAME, RIGHT_BRACE_GLOB));
 	}
 
@@ -399,14 +399,40 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				return getRightParen(SUB_ATTRIBUTES);
 			}
 		}
-		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken).second;
+		return getVariableNameTokenBySigil();
 	}
 
 	@NotNull
 	protected IElementType getBracedVariableNameToken()
 	{
 		yybegin(YYINITIAL);
-		return SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken).second;
+		return getVariableNameTokenBySigil();
+	}
+
+	private IElementType getVariableNameTokenBySigil()
+	{
+		IElementType nameToken = SIGILS_TO_TOKENS_MAP.get(myCurrentSigilToken).second;
+		if (nameToken != SUB_NAME)
+		{
+			return nameToken;
+		}
+
+		CharSequence tokenText = yytext();
+		if (StringUtil.endsWithChar(tokenText, ':'))
+		{
+			return PACKAGE;
+		}
+
+		int tokenLength = tokenText.length();
+		int nameIndex = StringUtil.lastIndexOfAny(tokenText, ":'") + 1;
+		if (nameIndex == 0)
+		{
+			return nameToken;
+		}
+
+		yypushback(tokenLength - nameIndex);
+		pushStateAndBegin(LEX_SUB_NAME);
+		return QUALIFYING_PACKAGE;
 	}
 
 	@Override
@@ -437,18 +463,24 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	/**
 	 * Distincts sub_name from qualified sub_name by :
+	 *
 	 * @return guessed token
 	 */
 	protected IElementType getIdentifierTokenWithoutIndex()
 	{
 		CharSequence tokenText = yytext();
+		int lastIndex;
 		if (StringUtil.endsWithChar(tokenText, ':'))
 		{
 			return PACKAGE;
 		}
-		else if (StringUtil.contains(tokenText, ":"))
+
+		int tokenLength = tokenText.length();
+		if ((lastIndex = StringUtil.lastIndexOfAny(tokenText, ":'") + 1) > 0)
 		{
-			return SUB_NAME_QUALIFIED;
+			yypushback(tokenLength - lastIndex);
+			pushStateAndBegin(LEX_SUB_NAME);
+			return QUALIFYING_PACKAGE;
 		}
 		else
 		{
@@ -483,11 +515,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				}
 				else if (StringUtil.equals(tokenText, "UNIVERSAL::can"))
 				{
-					return SUB_NAME_QUALIFIED;
+					tokenType = QUALIFYING_PACKAGE;
 				}
 				else if (mySubNamesProvider.getValue().contains(tokenText))
 				{
-					tokenType = SUB_NAME_QUALIFIED;
+					tokenType = QUALIFYING_PACKAGE;
 				}
 				else if (myPackageNamesProvider.getValue().contains(tokenText))
 				{
@@ -495,7 +527,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				}
 				else
 				{
-					tokenType = SUB_NAME_QUALIFIED;
+					tokenType = QUALIFYING_PACKAGE;
 				}
 			}
 			else    // fallback for words scanner
@@ -505,6 +537,13 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		}
 
 		yybegin(BARE_REGEX_PREFIX_TOKENSET.contains(tokenType) ? YYINITIAL : AFTER_IDENTIFIER);
+
+		if (tokenType == QUALIFYING_PACKAGE)
+		{
+			int lastIndex = StringUtil.lastIndexOfAny(tokenText, ":'") + 1;
+			yypushback(tokenText.length() - lastIndex);
+			pushStateAndBegin(LEX_SUB_NAME);
+		}
 
 		return tokenType;
 	}
