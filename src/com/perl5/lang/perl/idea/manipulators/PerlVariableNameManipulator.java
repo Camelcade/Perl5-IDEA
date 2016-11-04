@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.manipulators;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.util.IncorrectOperationException;
@@ -28,6 +29,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlVariableNameManipulator extends AbstractElementManipulator<PerlVariableNameElement>
 {
+	@NotNull
+	@Override
+	public TextRange getRangeInElement(@NotNull PerlVariableNameElement element)
+	{
+		String elementText = element.getText();
+		if (StringUtil.endsWithChar(elementText, ':'))
+		{
+			return TextRange.EMPTY_RANGE;
+		}
+
+		int lastDelimiterOffset = elementText.lastIndexOf(':');
+		if (lastDelimiterOffset > -1)
+		{
+			return TextRange.create(lastDelimiterOffset + 1, elementText.length());
+		}
+
+		return super.getRangeInElement(element);
+	}
+
 	@Override
 	public PerlVariableNameElement handleContentChange(@NotNull PerlVariableNameElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
