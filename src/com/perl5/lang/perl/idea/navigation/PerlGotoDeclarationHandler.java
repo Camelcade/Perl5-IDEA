@@ -38,10 +38,17 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler
 	@Override
 	public PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor)
 	{
-		ArrayList<PsiElement> result = new ArrayList<PsiElement>();
-		if (sourceElement != null)
+		if (sourceElement == null)
 		{
-			for (PsiReference reference : sourceElement.getReferences())
+			return null;
+		}
+
+		int offsetInElement = offset - sourceElement.getNode().getStartOffset();
+
+		ArrayList<PsiElement> result = new ArrayList<PsiElement>();
+		for (PsiReference reference : sourceElement.getReferences())
+		{
+			if (reference.getRangeInElement().contains(offsetInElement))
 			{
 				if (reference instanceof PsiPolyVariantReference)
 				{
