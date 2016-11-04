@@ -17,30 +17,76 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.ResolveResult;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlLabelDeclaration;
+import com.perl5.lang.perl.psi.PsiPerlGotoExpr;
 import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
-import com.perl5.lang.perl.psi.references.resolvers.PerlLabelResolver;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelReference extends PerlReference<PsiPerlLabelExpr>
+public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr>
 {
-	private static final ResolveCache.AbstractResolver<PerlLabelReference, PerlLabelDeclaration> RESOLVER = new PerlLabelResolver();
-
 	public PerlLabelReference(@NotNull PsiPerlLabelExpr element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
-	@Nullable
 	@Override
-	public PsiElement resolve()
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
+		PsiPerlLabelExpr labelExpr = getElement();
+		PsiElement parent = labelExpr == null ? null : labelExpr.getParent();
+
+		if (labelExpr == null)
+		{
+			return ResolveResult.EMPTY_ARRAY;
+		}
+
+		LabelSeeker processor = new LabelSeeker(labelExpr.getText());
+
+		if (parent instanceof PsiPerlGotoExpr) // goto
+		{
+			PerlPsiUtil.processGotoLabelDeclarations(labelExpr.getParent(), processor);
+		}
+		else // suppose it's last, next or redo
+		{
+			PerlPsiUtil.processNextRedoLastLabelDeclarations(labelExpr.getParent(), processor);
+		}
+		PerlLabelDeclaration result = processor.getResult();
+		return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults();
+	}
+
+	protected static class LabelSeeker implements Processor<PerlLabelDeclaration>
+	{
+		protected final String myName;
+		protected PerlLabelDeclaration myResult = null;
+
+		public LabelSeeker(@NotNull String myName)
+		{
+			this.myName = myName;
+		}
+
+		@Override
+		public boolean process(PerlLabelDeclaration perlLabelDeclaration)
+		{
+			if (StringUtil.equals(perlLabelDeclaration.getName(), myName))
+			{
+				myResult = perlLabelDeclaration;
+				return false;
+			}
+			return true;
+		}
+
+		public PerlLabelDeclaration getResult()
+		{
+			return myResult;
+		}
 	}
 }
