@@ -18,14 +18,15 @@ package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.*;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
 
 /**
  * Created by hurricup on 07.04.2016.
@@ -54,5 +55,44 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer
 		PsiFile topLevelFile = manager.getTopLevelFile(containingFile);
 		PsiFile topLevelFile1 = manager.getTopLevelFile(currentFile);
 		return topLevelFile == null || topLevelFile1 == null || topLevelFile.getViewProvider() != topLevelFile1.getViewProvider();
+	}
+
+	@Override
+	protected boolean appendAdditionalElement(Collection<PsiReference> refs, Collection<Pair<PsiElement, TextRange>> stringUsages)
+	{
+		boolean b = super.appendAdditionalElement(refs, stringUsages);
+
+		for (PsiReference ref : refs)
+		{
+			if (ref instanceof PsiPolyVariantReference)
+			{
+				for (ResolveResult resolveResult : ((PsiPolyVariantReference) ref).multiResolve(false))
+				{
+					appendAdditionalElement(resolveResult.getElement(), stringUsages);
+				}
+			}
+			else
+			{
+				appendAdditionalElement(ref.resolve(), stringUsages);
+			}
+		}
+
+		return b;
+	}
+
+	private void appendAdditionalElement(@Nullable PsiElement psiElement, Collection<Pair<PsiElement, TextRange>> stringUsages)
+	{
+		if (psiElement == null || psiElement.equals(myElementToRename) || !(psiElement instanceof PsiNameIdentifierOwner))
+		{
+			return;
+		}
+
+		PsiElement nameIdentifier = ((PsiNameIdentifierOwner) psiElement).getNameIdentifier();
+		if (nameIdentifier == null)
+		{
+			return;
+		}
+
+		stringUsages.add(Pair.create(nameIdentifier, ElementManipulators.getValueTextRange(nameIdentifier)));
 	}
 }

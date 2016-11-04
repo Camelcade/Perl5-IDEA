@@ -17,13 +17,8 @@
 package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenamer;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 20.09.2015.
@@ -35,8 +30,4 @@ public class PerlVariableInplaceRenamer extends VariableInplaceRenamer
 		super(elementToRename, editor);
 	}
 
-	@Override
-	protected void collectAdditionalElementsToRename(List<Pair<PsiElement, TextRange>> stringUsages)
-	{
-	}
 }
