@@ -95,4 +95,11 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer
 
 		stringUsages.add(Pair.create(nameIdentifier, ElementManipulators.getValueTextRange(nameIdentifier)));
 	}
+
+	@NotNull
+	@Override
+	protected TextRange getRangeToRename(@NotNull PsiElement element)
+	{
+		return ElementManipulators.getValueTextRange(element);
+	}
 }
