@@ -22,10 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFormatterL;
@@ -37,20 +36,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.04.2016.
  */
-public class PodLinkToFileReference extends PerlPolyVariantReference<PodFormatterL>
+public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL>
 {
-	protected static final ResolveCache.PolyVariantResolver<PodLinkToFileReference> RESOLVER = new PodFileReferenceResolver();
-
 	public PodLinkToFileReference(PodFormatterL element, TextRange range)
 	{
 		super(element, range);
 	}
 
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
+		PodFormatterL podLink = getElement();
+		PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
+
+		if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null)
+		{
+			PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
+			if (targetFile != null)
+			{
+				return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
+			}
+		}
+
+		return ResolveResult.EMPTY_ARRAY;
 	}
 
 	@Override
@@ -88,25 +96,4 @@ public class PodLinkToFileReference extends PerlPolyVariantReference<PodFormatte
 		return myElement;
 	}
 
-	private static class PodFileReferenceResolver implements ResolveCache.PolyVariantResolver<PodLinkToFileReference>
-	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull PodLinkToFileReference podLinkToFileReference, boolean incompleteCode)
-		{
-			PodFormatterL podLink = podLinkToFileReference.getElement();
-			PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
-
-			if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null)
-			{
-				PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
-				if (targetFile != null)
-				{
-					return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
-				}
-			}
-
-			return ResolveResult.EMPTY_ARRAY;
-		}
-	}
 }
