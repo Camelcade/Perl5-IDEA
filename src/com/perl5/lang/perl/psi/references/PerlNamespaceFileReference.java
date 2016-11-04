@@ -18,11 +18,11 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.references.resolvers.PerlNamespaceFileResolver;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -30,10 +30,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceFileReference extends PerlPolyVariantReference<PerlNamespaceElement>
+public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement>
 {
-	protected static final ResolveCache.PolyVariantResolver<PerlNamespaceFileReference> RESOLVER = new PerlNamespaceFileResolver();
-
 	public PerlNamespaceFileReference(@NotNull PerlNamespaceElement element, TextRange textRange)
 	{
 		super(element, textRange);
@@ -44,11 +42,19 @@ public class PerlNamespaceFileReference extends PerlPolyVariantReference<PerlNam
 		return myElement.getCanonicalName();
 	}
 
-	@NotNull
+
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
+		PerlNamespaceElement myElement = getElement();
+		PsiFile file = myElement.getContainingFile();
+		PsiFile targetFile = null;
+
+		targetFile = PerlPackageUtil.resolvePackageNameToPsi(file, getPackageName());
+
+		return targetFile == null
+				? ResolveResult.EMPTY_ARRAY
+				: new ResolveResult[]{new PsiElementResolveResult(targetFile)};
 	}
 
 	@Override
