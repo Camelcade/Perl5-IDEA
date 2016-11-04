@@ -22,12 +22,9 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.tt2.psi.TemplateToolkitNamedBlock;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,73 +32,46 @@ import java.util.List;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitBlockReference extends PerlPolyVariantReference<PsiElement>
+public class TemplateToolkitBlockReference extends PerlCachingReference<PsiElement>
 {
-	private static final ResolveCache.PolyVariantResolver<TemplateToolkitBlockReference> RESOLVER = new TemplateToolkitBlockReferenceResolver();
-
 	public TemplateToolkitBlockReference(PsiElement psiElement)
 	{
 		super(psiElement);
 	}
 
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
-	}
-
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return new Object[0];
-	}
-
-	private static class TemplateToolkitBlockReferenceResolver implements ResolveCache.PolyVariantResolver<TemplateToolkitBlockReference>
-	{
-		private static final ResolveResult[] EMPTY_RESULT = new ResolveResult[0];
-
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull TemplateToolkitBlockReference templateToolkitBlockReference, boolean incompleteCode)
+		PsiElement element = getElement();
+		if (element == null)
 		{
-			PsiElement element = templateToolkitBlockReference.getElement();
-			if (element == null)
-			{
-				return EMPTY_RESULT;
-			}
-
-			TextRange range = ElementManipulators.getValueTextRange(element);
-			if (range == null)
-			{
-				return EMPTY_RESULT;
-			}
-
-			final CharSequence targetName = range.subSequence(element.getText());
-			if (StringUtil.isEmpty(targetName))
-			{
-				return EMPTY_RESULT;
-			}
-
-			final List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-			PsiTreeUtil.processElements(element.getContainingFile(), new PsiElementProcessor()
-			{
-				@Override
-				public boolean execute(@NotNull PsiElement element)
-				{
-					if (element instanceof TemplateToolkitNamedBlock && StringUtil.equals(((TemplateToolkitNamedBlock) element).getName(), targetName))
-					{
-						result.add(new PsiElementResolveResult(element));
-					}
-					return true;
-				}
-			});
-
-			return result.toArray(new ResolveResult[result.size()]);
+			return ResolveResult.EMPTY_ARRAY;
 		}
-	}
 
+		TextRange range = ElementManipulators.getValueTextRange(element);
+		if (range == null)
+		{
+			return ResolveResult.EMPTY_ARRAY;
+		}
+
+		final CharSequence targetName = range.subSequence(element.getText());
+		if (StringUtil.isEmpty(targetName))
+		{
+			return ResolveResult.EMPTY_ARRAY;
+		}
+
+		final List<ResolveResult> result = new ArrayList<ResolveResult>();
+
+		PsiTreeUtil.processElements(element.getContainingFile(), element1 ->
+		{
+			if (element1 instanceof TemplateToolkitNamedBlock && StringUtil.equals(((TemplateToolkitNamedBlock) element1).getName(), targetName))
+			{
+				result.add(new PsiElementResolveResult(element1));
+			}
+			return true;
+		});
+
+		return result.toArray(new ResolveResult[result.size()]);
+	}
 
 }
