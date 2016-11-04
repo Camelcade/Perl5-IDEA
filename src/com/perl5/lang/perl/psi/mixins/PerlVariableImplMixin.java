@@ -423,7 +423,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 				for (ResolveResult resolveResult : ((PsiPolyVariantReference) psiReference).multiResolve(false))
 				{
 					PsiElement element = resolveResult.getElement();
-					if (element != null)
+					if (element instanceof PerlVariableDeclarationWrapper)
 					{
 						return (PerlVariableDeclarationWrapper) element;
 					}

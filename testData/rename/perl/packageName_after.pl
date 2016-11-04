@@ -22,3 +22,4 @@ say ${Foo::Bar::Moo::NewName};
 EOM
 
 say Foo::Bar::Moo::->some;
+say *Foo::Bar::Moo::NewName;

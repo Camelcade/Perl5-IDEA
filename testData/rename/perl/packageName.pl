@@ -22,3 +22,4 @@ say ${Fo<caret>o::Bar::Boo::NewName};
 EOM
 
 say Foo::Bar::Boo::->some;
+say *Foo::Bar::Boo::NewName;

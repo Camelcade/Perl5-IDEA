@@ -29,6 +29,11 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase
 		return "testData/rename/perl";
 	}
 
+	public void testGlobRename()
+	{
+		doTest();
+	}
+
 	public void testLexicalVariable()
 	{
 		doTest();
