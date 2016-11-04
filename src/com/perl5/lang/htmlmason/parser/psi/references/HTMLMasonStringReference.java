@@ -21,13 +21,13 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.parser.psi.utils.HTMLMasonElementFactory;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.03.2016.
  */
-public abstract class HTMLMasonStringReference extends PerlPolyVariantReference<PerlString>
+public abstract class HTMLMasonStringReference extends PerlCachingReference<PerlString>
 {
 	public HTMLMasonStringReference(@NotNull PerlString element, TextRange textRange)
 	{

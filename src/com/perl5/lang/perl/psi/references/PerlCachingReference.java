@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiPolyVariantReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public abstract class PerlCachingReference<T extends PsiElement> extends PerlPolyVariantReference<T>
+public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T>
 {
 	private final static ResolveCache.PolyVariantResolver<PerlCachingReference> RESOLVER = PerlCachingReference::resolveInner;
 
@@ -42,6 +43,13 @@ public abstract class PerlCachingReference<T extends PsiElement> extends PerlPol
 	public PerlCachingReference(T element, TextRange range, boolean soft)
 	{
 		super(element, range, soft);
+	}
+
+	@NotNull
+	@Override
+	public Object[] getVariants()
+	{
+		return EMPTY_ARRAY;
 	}
 
 	protected abstract ResolveResult[] resolveInner(boolean incompleteCode);

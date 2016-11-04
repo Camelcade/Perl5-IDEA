@@ -19,10 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.codeInsight.TargetElementEvaluatorEx2;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,9 +35,9 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2
 		if (refElement == null)
 		{
 			PsiReference ref = TargetElementUtil.findReference(editor, offset);
-			if (ref instanceof PerlPolyVariantReference)
+			if (ref instanceof PerlCachingReference)
 			{
-				ResolveResult[] resolveResults = ((PerlPolyVariantReference) ref).multiResolve(false);
+				ResolveResult[] resolveResults = ((PsiPolyVariantReference) ref).multiResolve(false);
 				if (resolveResults.length > 0)
 				{
 					return resolveResults[0].getElement();

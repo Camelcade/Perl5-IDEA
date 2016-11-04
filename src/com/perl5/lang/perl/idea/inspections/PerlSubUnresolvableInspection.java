@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlMethod;
@@ -25,7 +26,6 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -69,7 +69,7 @@ public class PerlSubUnresolvableInspection extends PerlInspection implements Per
 
 				for (PsiReference reference : subNameElement.getReferences())
 				{
-					if (reference instanceof PerlPolyVariantReference && ((PerlPolyVariantReference) reference).multiResolve(false).length > 0)
+					if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference) reference).multiResolve(false).length > 0)
 					{
 						return;
 					}
