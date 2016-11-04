@@ -17,6 +17,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
@@ -197,10 +198,12 @@ public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementB
 	public int getTextOffset()
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
+		if (nameIdentifier == null)
+		{
+			return super.getTextOffset();
+		}
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
+		return nameIdentifier.getTextOffset() + ElementManipulators.getOffsetInElement(nameIdentifier);
 	}
 
 }
