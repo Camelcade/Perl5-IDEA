@@ -16,16 +16,17 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
-import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolverSimple;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +37,7 @@ import java.util.List;
  * Created by hurricup on 26.11.2015.
  * Basic class for sub reference. Uses context package to resolve. Used in string contents, moose, etc.
  */
-public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
+public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement>
 {
 	protected static final int FLAG_AUTOLOADED = 1;
 	protected static final int FLAG_CONSTANT = 2;
@@ -46,7 +47,6 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 	protected static final int FLAG_IMPORTED = 32;    // fixme this is not set anyway
 	protected static final int FLAG_XSUB = 64;
 
-	private static final ResolveCache.PolyVariantResolver<PerlSubReferenceSimple> RESOLVER = new PerlSubReferenceResolverSimple();
 	protected int FLAGS = 0;
 
 	public PerlSubReferenceSimple(@NotNull PsiElement element, TextRange textRange)
@@ -54,11 +54,27 @@ public class PerlSubReferenceSimple extends PerlPolyVariantReference<PsiElement>
 		super(element, textRange);
 	}
 
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
+		// fixme not dry with super resolver, need some generics fix
+		PsiElement myElement = getElement();
+		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+
+		String packageName = PerlPackageUtil.getContextPackageName(myElement);
+		String subName = myElement.getNode().getText();
+		Project project = myElement.getProject();
+
+		relatedItems.addAll(PerlMroDfs.resolveSub(
+				project,
+				packageName,
+				subName,
+				false
+		));
+
+		List<ResolveResult> result = getResolveResults(relatedItems);
+
+		return result.toArray(new ResolveResult[result.size()]);
 	}
 
 	public boolean isAutoloaded()

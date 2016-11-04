@@ -16,30 +16,48 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
-import com.perl5.lang.perl.psi.references.resolvers.PerlSubReferenceResolverSuper;
+import com.perl5.lang.perl.psi.mro.PerlMroDfs;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 25.01.2016.
  */
 public class PerlSubReferenceSuper extends PerlSubReferenceSimple
 {
-	private static final ResolveCache.PolyVariantResolver<PerlSubReferenceSuper> RESOLVER = new PerlSubReferenceResolverSuper();
-
 	public PerlSubReferenceSuper(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);
 	}
 
-	@NotNull
-	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, false);
-	}
 
+	@Override
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
+	{
+		// fixme not dry with simple resolver, need some generics fix
+		PsiElement myElement = getElement();
+		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+
+		String packageName = PerlPackageUtil.getContextPackageName(myElement);
+		String subName = myElement.getNode().getText();
+		Project project = myElement.getProject();
+
+		relatedItems.addAll(PerlMroDfs.resolveSub(
+				project,
+				packageName,
+				subName,
+				true
+		));
+
+		List<ResolveResult> result = getResolveResults(relatedItems);
+
+		return result.toArray(new ResolveResult[result.size()]);
+	}
 }
