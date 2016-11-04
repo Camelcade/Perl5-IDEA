@@ -20,12 +20,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.psi.stubs.StubIndex;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.psi.references.PerlPolyVariantReference;
+import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -34,39 +33,26 @@ import java.util.List;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperReference extends PerlPolyVariantReference<PsiElement>
+public class MojoliciousHelperReference extends PerlCachingReference<PsiElement>
 {
-	private static final ResolveCache.PolyVariantResolver<MojoliciousHelperReference> RESOLVER = new MojoliciousHelperResolver();
-
 	public MojoliciousHelperReference(@NotNull PsiElement element)
 	{
 		super(element, null);
 	}
 
-	@NotNull
 	@Override
-	public ResolveResult[] multiResolve(boolean incompleteCode)
+	protected ResolveResult[] resolveInner(boolean incompleteCode)
 	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
-	}
+		PsiElement element = getElement();
+		String elementText = element.getText();
+		final Project project = element.getProject();
+		List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-	private static class MojoliciousHelperResolver implements ResolveCache.PolyVariantResolver<MojoliciousHelperReference>
-	{
-		@NotNull
-		@Override
-		public ResolveResult[] resolve(@NotNull MojoliciousHelperReference mojoliciousHelperReference, boolean incompleteCode)
+		for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project), MojoliciousHelperDeclaration.class))
 		{
-			PsiElement element = mojoliciousHelperReference.getElement();
-			String elementText = element.getText();
-			final Project project = element.getProject();
-			List<ResolveResult> result = new ArrayList<ResolveResult>();
-
-			for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project), MojoliciousHelperDeclaration.class))
-			{
-				result.add(new PsiElementResolveResult(helper));
-			}
-
-			return result.toArray(new ResolveResult[result.size()]);
+			result.add(new PsiElementResolveResult(helper));
 		}
+
+		return result.toArray(new ResolveResult[result.size()]);
 	}
 }
