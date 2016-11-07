@@ -1,0 +1,4 @@
+LABEL8: # labeled block
+{
+    sub {LABEL8123: while(1){redo LABE<caret>L8123}};
+}
