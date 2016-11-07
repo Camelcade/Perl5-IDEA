@@ -1,4 +1,9 @@
 LABEL8: # labeled block
 {
-    sub {NewName: while(1){redo NewName}};
+    sub {NewName: while(1){
+        redo NewName;
+        next NewName;
+        goto NewName;
+        last NewName;
+    }};
 }
