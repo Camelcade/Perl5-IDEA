@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
@@ -33,9 +32,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr>
 {
-	public PerlLabelReference(@NotNull PsiPerlLabelExpr element, TextRange textRange)
+	public PerlLabelReference(@NotNull PsiPerlLabelExpr element)
 	{
-		super(element, textRange);
+		super(element, element.getTextRange().shiftRight(-element.getTextOffset()));
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr>
 			PerlPsiUtil.processNextRedoLastLabelDeclarations(labelExpr.getParent(), processor);
 		}
 		PerlLabelDeclaration result = processor.getResult();
-		return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults();
+		return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(result);
 	}
 
 	protected static class LabelSeeker implements Processor<PerlLabelDeclaration>

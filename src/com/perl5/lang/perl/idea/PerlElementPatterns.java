@@ -32,7 +32,8 @@ public interface PerlElementPatterns extends PerlElementTypes
 {
 	PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
 
-	PsiElementPattern.Capture<PsiElement> LABEL_PATTERN = psiElement().withParent(PsiPerlLabelExpr.class);
+	PsiElementPattern.Capture<PsiElement> LABEL_EXPR_PATTERN = psiElement(LABEL_EXPR);
+	PsiElementPattern.Capture<PsiElement> LABEL_PATTERN = psiElement().withParent(LABEL_EXPR_PATTERN);
 	PsiElementPattern.Capture<PsiElement> LABEL_DECLARATION_PATTERN = psiElement().withParent(PerlLabelDeclaration.class);
 	PsiElementPattern.Capture<PsiElement> LABEL_IN_GOTO_PATTERN = LABEL_PATTERN.withParent(psiElement(PsiPerlGotoExpr.class));
 	PsiElementPattern.Capture<PsiElement> LABEL_IN_NEXT_LAST_REDO_PATTERN = LABEL_PATTERN.andOr(

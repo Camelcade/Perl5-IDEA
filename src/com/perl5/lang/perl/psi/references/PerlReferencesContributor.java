@@ -16,9 +16,10 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.psi.PsiReferenceContributor;
-import com.intellij.psi.PsiReferenceRegistrar;
+import com.intellij.psi.*;
+import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.references.providers.PerlSimpleSubReferenceProvider;
 import com.perl5.lang.perl.psi.references.providers.PerlVariableReferencesProvider;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +39,14 @@ public class PerlReferencesContributor extends PsiReferenceContributor implement
 
 		registrar.registerReferenceProvider(VARIABLE_NAME_PATTERN, new PerlVariableReferencesProvider());
 
+		registrar.registerReferenceProvider(LABEL_EXPR_PATTERN, new PsiReferenceProvider()
+		{
+			@NotNull
+			@Override
+			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
+			{
+				return new PsiReference[]{new PerlLabelReference((PsiPerlLabelExpr) element)};
+			}
+		});
 	}
 }
