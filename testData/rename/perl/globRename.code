@@ -8,4 +8,4 @@ say *Foo::Bar::Boo::varname;
 
 say $varname;
 say @varname;
-say %var < caret > name;
+say %var<caret>name;

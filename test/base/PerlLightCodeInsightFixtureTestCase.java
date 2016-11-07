@@ -29,7 +29,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -192,7 +191,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
 	public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException
 	{
-		initWithFileContent(targetFileName, targetFileExtension, FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true).trim());
+		initWithFileContent(targetFileName, targetFileExtension, FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true));
 	}
 
 	public void initWithFileContent(String filename, String extension, String content) throws IOException

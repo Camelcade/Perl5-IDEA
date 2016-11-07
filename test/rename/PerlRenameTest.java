@@ -61,10 +61,8 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase
 
 	protected void doTest(String newName)
 	{
-		String testName = getTestName(true);
-		String sourceFileName = testName + "." + getFileExtension();
-		String targetFileName = testName + "_after." + getFileExtension();
-
-		myFixture.testRename(sourceFileName, targetFileName, newName);
+		initWithFileSmart();
+		String checkFileName = getTestName(true) + "_after.code";
+		myFixture.testRename(checkFileName, newName);
 	}
 }
