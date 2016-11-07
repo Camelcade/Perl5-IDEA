@@ -40,7 +40,7 @@ public class PerlAnnotatorMisc extends PerlAnnotator
 		}
 		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
 		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
+			holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}
 	}
 }
