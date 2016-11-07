@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public abstract class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement
+public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement
 {
 	public PerlMooseKeywordSubNameElementImpl(@NotNull IElementType type, CharSequence text)
 	{

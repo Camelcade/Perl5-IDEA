@@ -23,7 +23,6 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -190,12 +189,12 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 			{
 				myAnnotations.setIsOverride(true);
 			}
-			else if (annotation instanceof PerlNamespaceElementContainer) // returns
+			else if (annotation instanceof PsiPerlAnnotationReturns) // returns
 			{
-				PerlNamespaceElement ns = ((PerlNamespaceElementContainer) annotation).getNamespaceElement();
-				if (ns != null)
+				PsiElement possibleNamespace = annotation.getLastChild();
+				if (possibleNamespace instanceof PerlNamespaceElement)
 				{
-					myAnnotations.setReturns(ns.getCanonicalName());
+					myAnnotations.setReturns(((PerlNamespaceElement) possibleNamespace).getCanonicalName());
 					myAnnotations.setReturnType(PerlReturnType.REF);
 					// todo implement brackets and braces
 				}

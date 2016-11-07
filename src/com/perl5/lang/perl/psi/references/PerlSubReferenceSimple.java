@@ -49,6 +49,11 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement>
 
 	protected int FLAGS = 0;
 
+	public PerlSubReferenceSimple(PsiElement psiElement)
+	{
+		super(psiElement);
+	}
+
 	public PerlSubReferenceSimple(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);

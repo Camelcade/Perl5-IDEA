@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser.moose.psi.references;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
@@ -27,7 +26,6 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +36,9 @@ import java.util.List;
 public class PerlMooseSuperReference extends PerlCachingReference<PsiElement>
 {
 
-	public PerlMooseSuperReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlMooseSuperReference(PsiElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 	@Override

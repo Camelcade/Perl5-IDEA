@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
@@ -30,7 +29,6 @@ import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +36,9 @@ import java.util.List;
 public class PerlSubReference extends PerlSubReferenceSimple
 {
 
-	public PerlSubReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlSubReference(PsiElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 	public static void collectRelatedItems(String canonicalName, Project project, PsiElement exclusion, List<PsiElement> relatedItems, GlobalSearchScope searchScope)

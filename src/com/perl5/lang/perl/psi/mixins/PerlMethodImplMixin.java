@@ -26,6 +26,8 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PACKAGE;
+
 /**
  * Created by hurricup on 24.05.2015.
  */
@@ -127,10 +129,17 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 				;
 	}
 
+	@Nullable
 	@Override
 	public PerlNamespaceElement getNamespaceElement()
 	{
-		return findChildByClass(PerlNamespaceElement.class);
+		PsiElement childByType = findChildByType(QUALIFYING_PACKAGE);
+		if (childByType == null)
+		{
+			return null;
+		}
+		assert childByType instanceof PerlNamespaceElement;
+		return (PerlNamespaceElement) childByType;
 	}
 
 	@Override

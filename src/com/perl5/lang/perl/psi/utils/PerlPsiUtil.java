@@ -696,20 +696,21 @@ public class PerlPsiUtil implements PerlElementTypes
 			return null;
 		}
 
-/*
-		if (element instanceof PsiPerlNamespaceExpr)
+		if (element instanceof PsiPerlPackageExpr)
 		{
 			return ((PerlNamespaceElement) element.getFirstChild()).getCanonicalName();
 		}
-		else
-*/
-		if (element instanceof PerlString)
+		else if (element instanceof PerlString)
 		{
 			return ((PerlString) element).getStringContent();
 		}
 		else if (element instanceof PerlVariable)
 		{
 			return ((PerlVariable) element).guessVariableType();
+		}
+		else if (isSelfShortcut(element))
+		{
+			return PerlPackageUtil.getContextPackageName(element);
 		}
 		else if (element instanceof PerlMethodContainer)
 		{
@@ -726,10 +727,6 @@ public class PerlPsiUtil implements PerlElementTypes
 		else if (element instanceof PsiPerlDerefExprImpl)
 		{
 			return getPerlExpressionType(element.getLastChild());
-		}
-		else if (isSelfShortcut(element))
-		{
-			return PerlPackageUtil.getContextPackageName(element);
 		}
 
 		return null;

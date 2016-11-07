@@ -21,6 +21,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.references.providers.PerlSimpleSubReferenceProvider;
+import com.perl5.lang.perl.psi.references.providers.PerlSubReferenceProvider;
 import com.perl5.lang.perl.psi.references.providers.PerlVariableReferencesProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,5 +49,7 @@ public class PerlReferencesContributor extends PsiReferenceContributor implement
 				return new PsiReference[]{new PerlLabelReference((PsiPerlLabelExpr) element)};
 			}
 		});
+
+		registrar.registerReferenceProvider(SUB_NAME_PATTERN, new PerlSubReferenceProvider());
 	}
 }

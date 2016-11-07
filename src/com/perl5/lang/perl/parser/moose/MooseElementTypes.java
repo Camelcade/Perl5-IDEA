@@ -39,7 +39,7 @@ public interface MooseElementTypes
 		@Override
 		public ASTNode createLeafNode(CharSequence leafText)
 		{
-			return new PerlMooseInnerKeywordImpl(this, leafText);
+			return new PerlMooseKeywordSubNameElementImpl(this, leafText);
 		}
 	};
 	IElementType RESERVED_SUPER = new PerlTokenTypeEx("super")
@@ -48,7 +48,7 @@ public interface MooseElementTypes
 		@Override
 		public ASTNode createLeafNode(CharSequence leafText)
 		{
-			return new PerlMooseSuperKeywordImpl(this, leafText);
+			return new PerlMooseKeywordSubNameElementImpl(this, leafText);
 		}
 	};
 

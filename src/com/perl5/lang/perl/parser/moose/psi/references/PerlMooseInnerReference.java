@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.moose.psi.references;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
@@ -44,9 +43,9 @@ import java.util.Set;
 public class PerlMooseInnerReference extends PerlCachingReference<PsiElement>
 {
 
-	public PerlMooseInnerReference(@NotNull PsiElement element, TextRange textRange)
+	public PerlMooseInnerReference(PsiElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 	private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace)

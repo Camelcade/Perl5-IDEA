@@ -48,7 +48,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 		}
 
 		PsiElement currentElement = methodElement.getPrevSibling();
-		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE)
+		if (currentElement.getNode().getElementType() == PerlElementTypes.OPERATOR_DEREFERENCE) // fixme spaces and comments
 		{
 			currentElement = currentElement.getPrevSibling();
 		}
