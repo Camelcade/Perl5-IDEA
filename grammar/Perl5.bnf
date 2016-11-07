@@ -382,6 +382,7 @@ limitations under the License.
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
     stubClass("constant_definition")="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub"
 
+	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin"
 	extends("parenthesised_call_arguments")=call_arguments
 
     extends("use_statement.*")=statement

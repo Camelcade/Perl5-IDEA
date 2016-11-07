@@ -28,6 +28,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -305,10 +306,10 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 
 							if (SHIFT_PATTERN.accepts(rightSideElement)) // shift on the left side
 							{
-								PsiElement firstChild = rightSideElement.getFirstChild();
-								PsiElement lastChild = rightSideElement.getLastChild();
-
-								if (firstChild == lastChild || ALL_ARGUMENTS_PATTERN.accepts(lastChild))
+								assert rightSideElement instanceof PsiPerlSubCallExpr;
+								PsiPerlCallArguments callArguments = ((PsiPerlSubCallExpr) rightSideElement).getCallArguments();
+								List<PsiPerlExpr> argumentsList = callArguments == null ? null : ((PsiPerlCallArgumentsImpl) callArguments).getArgumentsList();
+								if (argumentsList == null || argumentsList.isEmpty() || ALL_ARGUMENTS_PATTERN.accepts(argumentsList.get(0)))
 								{
 									addArgument = true;
 									sequenceIndex++;
