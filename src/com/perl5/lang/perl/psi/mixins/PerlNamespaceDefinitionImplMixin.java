@@ -494,6 +494,10 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
 			{
 				runtimeModifiers.add((PerlRuntimeParentsProvider) element);
 			}
+			else if (element.getFirstChild() instanceof PerlRuntimeParentsProvider)
+			{
+				runtimeModifiers.add((PerlRuntimeParentsProvider) element.getFirstChild());
+			}
 			else if (ISA_ASSIGN_STATEMENT.accepts(element))
 			{
 				PsiElement assignExpr = element.getFirstChild();
