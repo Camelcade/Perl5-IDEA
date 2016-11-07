@@ -418,12 +418,17 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		}
 
 		CharSequence tokenText = yytext();
+		int tokenLength = tokenText.length();
+		if (tokenLength == 1)
+		{
+			return nameToken;
+		}
+
 		if (StringUtil.endsWithChar(tokenText, ':'))
 		{
 			return PACKAGE;
 		}
 
-		int tokenLength = tokenText.length();
 		int nameIndex = StringUtil.lastIndexOfAny(tokenText, ":'") + 1;
 		if (nameIndex == 0)
 		{

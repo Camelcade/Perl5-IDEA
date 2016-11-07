@@ -83,3 +83,5 @@ identifier & |;
 identifier & ~;
 identifier & ?;
 identifier & ^;
+identifier & ';
+identifier & :;
