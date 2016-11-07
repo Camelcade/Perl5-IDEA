@@ -60,14 +60,12 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 	public void doTest(String filename, boolean success, Class clazz)
 	{
 		initWithFileSmart(filename);
-		PsiElement element = getElementAtCaret(clazz);
-		assertNotNull(element);
-		PsiReference reference = element.getReference();
+		PsiReference reference = getFile().findReferenceAt(myFixture.getEditor().getCaretModel().getOffset());
 		assertNotNull(reference);
 		if (success)
 		{
 			assertNotNull(reference.resolve());
-			validateTarget(element, reference.resolve());
+			validateTarget(reference.getElement(), reference.resolve());
 		}
 		else
 		{

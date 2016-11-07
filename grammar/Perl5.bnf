@@ -428,6 +428,7 @@ limitations under the License.
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableImplMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
+	mixin("label_expr")="com.perl5.lang.perl.psi.impl.PerlCompositeElementWithReference"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
@@ -484,7 +485,7 @@ private file_items ::= file_item*
 private file_item ::= !<<eof>>
 {
 	namespace_definition
-	| label_declaration ':' [statement_item]
+	| label_declaration [statement_item]
     | statement_item
 }
 

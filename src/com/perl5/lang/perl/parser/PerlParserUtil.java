@@ -541,6 +541,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			if (tokenText != null && PerlBaseLexer.IDENTIFIER_PATTERN.matcher(tokenText).matches())
 			{
 				b.advanceLexer();
+				b.advanceLexer();
 				return true;
 			}
 		}

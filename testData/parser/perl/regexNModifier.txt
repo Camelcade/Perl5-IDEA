@@ -551,7 +551,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
   PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION)
     PsiElement(Perl5: subname)('SKIP')
-  PsiElement(Perl5: :)(':')
+    PsiElement(Perl5: :)(':')
   PsiPerlBlockImpl(Perl5: BLOCK)
     PsiElement(Perl5: {)('{')
     PsiPerlStatementImpl(Perl5: STATEMENT)
