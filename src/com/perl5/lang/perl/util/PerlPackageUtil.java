@@ -848,9 +848,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param text sequence to check
 	 * @return true if it's foo::bar
 	 */
-	public static boolean isFullQualifiedName(CharSequence text)
+	public static boolean isFullQualifiedName(String text)
 	{
-		return StringUtil.contains(text, ":");
+		return StringUtil.containsAnyChar(text, ":'");
 	}
 
 	/**
@@ -863,7 +863,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull String text)
 	{
 
-		int lastSeparatorOffset = text.lastIndexOf(':');
+		int lastSeparatorOffset = StringUtil.lastIndexOfAny(text, ":'");
 		assert lastSeparatorOffset >= 0;
 
 		TextRange packageRange = TextRange.create(0, lastSeparatorOffset - 1);
