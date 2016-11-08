@@ -16,11 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -48,6 +51,28 @@ public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<Perl
 	 * @return package name for current element
 	 */
 	String getPackageName();
+
+	/**
+	 * returns proper fqn
+	 *
+	 * @return fqn or null if name is missing
+	 */
+	@Nullable
+	default String getFullQualifiedName()
+	{
+		String name = getName();
+		if (StringUtil.isEmpty(name))
+		{
+			return null;
+		}
+
+		String packageName = getPackageName();
+		if (StringUtil.isEmpty(packageName))
+		{
+			return name;
+		}
+		return packageName + PACKAGE_SEPARATOR + name;
+	}
 
 	/**
 	 * Guessing actual variable type from context

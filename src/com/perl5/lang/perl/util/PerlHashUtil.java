@@ -102,9 +102,9 @@ public class PerlHashUtil implements PerlElementTypes
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedGlobalHashNames(Project project, Processor<String> processor)
+	public static boolean processDefinedGlobalHashes(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_HASH, project, processor);
+		return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
 	}
 
 	/**

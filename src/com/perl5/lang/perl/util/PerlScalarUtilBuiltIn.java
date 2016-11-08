@@ -24,7 +24,7 @@ import java.util.HashSet;
  */
 public interface PerlScalarUtilBuiltIn
 {
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+	HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
 			"^]",
 			"^[",
 			"OLD_PERL_VERSION",

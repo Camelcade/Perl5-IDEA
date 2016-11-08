@@ -20,14 +20,12 @@ import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
+import com.perl5.lang.perl.util.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -47,6 +45,15 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	);
 
 	protected List<String> REF_TYPES = Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING");
+
+	protected List<String> BUILT_IN_SCALARS = new ArrayList<>(PerlScalarUtil.BUILT_IN);
+	protected List<String> BUILT_IN_ARRAYS = new ArrayList<>(PerlArrayUtil.BUILT_IN);
+	protected List<String> BUILT_IN_HASHES = new ArrayList<>(PerlHashUtil.BUILT_IN);
+	protected List<String> BUILT_INT_GLOBS = new ArrayList<>(PerlGlobUtil.BUILT_IN);
+
+	protected List<String> SCALAR_LOOKUPS = mergeLists(BUILT_IN_SCALARS, BUILT_IN_ARRAYS, BUILT_IN_HASHES);
+	protected List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES);
+	protected List<String> HASH_LOOKUPS = mergeLists(BUILT_IN_HASHES);
 
 	protected List<String> getLanguageMarkers()
 	{
@@ -78,11 +85,11 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	@SafeVarargs
 	protected final List<String> mergeLists(List<String>... sources)
 	{
-		Set<String> resultSet = new THashSet<>();
+		List<String> resultList = new ArrayList<>();
 		for (List<String> strings : sources)
 		{
-			resultSet.addAll(strings);
+			resultList.addAll(strings);
 		}
-		return new ArrayList<>(resultSet);
+		return resultList;
 	}
 }

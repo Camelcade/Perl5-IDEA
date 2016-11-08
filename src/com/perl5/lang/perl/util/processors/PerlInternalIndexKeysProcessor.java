@@ -38,6 +38,18 @@ public class PerlInternalIndexKeysProcessor implements Processor<String>
 		this(false);
 	}
 
+	public static String adjustName(String originalName, boolean forceShortMain)
+	{
+		if (originalName == null || !forceShortMain || !originalName.startsWith(MAIN_TEMPLATE))
+		{
+			return originalName;
+		}
+		else
+		{
+			return originalName.substring(4);
+		}
+	}
+
 	@Override
 	public boolean process(String string)
 	{
@@ -47,22 +59,5 @@ public class PerlInternalIndexKeysProcessor implements Processor<String>
 		}
 		char firstChar = string.charAt(0);
 		return firstChar == '_' || Character.isLetterOrDigit(firstChar);
-	}
-
-	public boolean isForceShortMain()
-	{
-		return myForceShortMain;
-	}
-
-	public String adjustName(String originalName)
-	{
-		if (originalName == null || !isForceShortMain() || !originalName.startsWith(MAIN_TEMPLATE))
-		{
-			return originalName;
-		}
-		else
-		{
-			return originalName.substring(4);
-		}
 	}
 }

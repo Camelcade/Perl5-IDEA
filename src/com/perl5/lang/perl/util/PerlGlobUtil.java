@@ -22,7 +22,9 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -85,9 +87,17 @@ public class PerlGlobUtil implements PerlElementTypes
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedGlobsNames(Project project, Processor<String> processor)
+	public static boolean processDefinedGlobsNames(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlGlobVariable> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlGlobsStubIndex.KEY, project, processor);
+		StubIndex stubIndex = StubIndex.getInstance();
+		for (String globName : stubIndex.getAllKeys(PerlGlobsStubIndex.KEY, project))
+		{
+			if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, processor))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

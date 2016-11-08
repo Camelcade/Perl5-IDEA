@@ -71,19 +71,6 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 				new PerlVariableNameCompletionProvider()
 		);
 
-		extend(
-				CompletionType.BASIC,
-				VARIABLE_COMPLETION_PATTERN,
-				new PerlVariableImportCompletionProvider()
-		);
-
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				VARIABLE_COMPLETION_PATTERN,
-				new PerlVariableGlobalCompletionProvider()
-		);
-
 		// refactored
 		extend(
 				CompletionType.BASIC,

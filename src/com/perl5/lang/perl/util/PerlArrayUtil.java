@@ -100,9 +100,9 @@ public class PerlArrayUtil implements PerlElementTypes
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedGlobalArrayNames(Project project, Processor<String> processor)
+	public static boolean processDefinedGlobalArrays(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_ARRAY, project, processor);
+		return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
 	}
 
 	/**

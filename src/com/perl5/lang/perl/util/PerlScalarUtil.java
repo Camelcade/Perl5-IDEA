@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.stubs.variables.PerlVariablesStubIndex;
@@ -84,16 +85,52 @@ public class PerlScalarUtil implements PerlElementTypes, PerlScalarUtilBuiltIn
 	}
 
 	/**
-	 * Processes all global scalars names with specific processor
+	 * Processes all global scalars with specific processor
 	 *
 	 * @param project   project to search in
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedGlobalScalarNames(Project project, Processor<String> processor)
+	public static boolean processDefinedGlobalScalars(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlVariablesStubIndex.KEY_SCALAR, project, processor);
+		return processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
 	}
+
+	/**
+	 * Method for processing global indexed variables
+	 *
+	 * @param key       stub index key
+	 * @param project   project
+	 * @param scope     scope to search
+	 * @param processor process to process
+	 * @return false if we should stop processing
+	 */
+	public static boolean processDefinedGlobalVariables(
+			@NotNull StubIndexKey<String, PerlVariableDeclarationWrapper> key,
+			@NotNull Project project,
+			@NotNull GlobalSearchScope scope,
+			@NotNull Processor<PerlVariableDeclarationWrapper> processor)
+	{
+		StubIndex stubIndex = StubIndex.getInstance();
+		for (String variableName : stubIndex.getAllKeys(key, project))
+		{
+			if (variableName.length() == 0)
+			{
+				return true;
+			}
+
+			char firstChar = variableName.charAt(0);
+			if (firstChar == '_' || Character.isLetterOrDigit(firstChar))
+			{
+				if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationWrapper.class, processor))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 
 	/**
 	 * Returns a map of imported scalars names

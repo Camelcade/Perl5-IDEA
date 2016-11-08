@@ -856,7 +856,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 */
 	public static boolean isFullQualifiedName(String text)
 	{
-		return StringUtil.containsAnyChar(text, ":'");
+		return text.length() > 1 && StringUtil.containsAnyChar(text, ":'");
 	}
 
 	/**

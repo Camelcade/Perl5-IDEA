@@ -36,27 +36,65 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testLexicalMy()
+	{
+		doTestLexicalVars("scalarname", "arrayname", "hashname");
+	}
+
+	public void testLexicalState()
+	{
+		doTestLexicalVars("scalarname", "arrayname", "hashname");
+	}
+
+	public void testLexicalOur()
+	{
+		doTestLexicalVars("scalarname", "arrayname", "hashname");
+	}
+
+	private void doTestLexicalVars(String... additionalVars)
+	{
+		doTest(
+				Arrays.asList(additionalVars),
+				SCALAR_LOOKUPS
+		);
+	}
+
+	public void testSameStatementSimple()
+	{
+		doTestLexicalVars("normvar");
+	}
+
+	public void testSameStatementMap()
+	{
+		doTestLexicalVars("normvar");
+	}
+
 	public void testHeredocOpenerBare()
 	{
-		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+		doTestHeredoc();
 	}
 
 	public void testHeredocOpenerBackref()
 	{
-		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+		doTestHeredoc();
 	}
 
 	public void testHeredocOpenerQQ()
 	{
-		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+		doTestHeredoc();
 	}
 
 	public void testHeredocOpenerSQ()
 	{
-		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+		doTestHeredoc();
 	}
 
 	public void testHeredocOpenerXQ()
+	{
+		doTestHeredoc();
+	}
+
+	private void doTestHeredoc()
 	{
 		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
 	}

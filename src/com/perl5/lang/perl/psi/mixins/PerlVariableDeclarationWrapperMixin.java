@@ -225,6 +225,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 		return new PerlItemPresentationSimple(this, getName());
 	}
 
+
 	@Nullable
 	@Override
 	public Icon getIcon(int flags)

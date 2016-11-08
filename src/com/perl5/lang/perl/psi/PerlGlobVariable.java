@@ -32,4 +32,5 @@ public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVar
 	 * @return result
 	 */
 	boolean isLeftSideOfAssignment();
+
 }
