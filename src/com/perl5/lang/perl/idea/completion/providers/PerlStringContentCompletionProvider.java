@@ -57,7 +57,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
 		{
 			PerlStringCompletionUtil.fillWithUseParameters(element, result);
 		}
-		else if (element.getParent() instanceof PsiPerlAnnotationInject)
+		else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
 		{
 			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
 			result.stopHere();

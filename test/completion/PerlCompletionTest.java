@@ -17,7 +17,9 @@
 package completion;
 
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +33,20 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 	{
 		return "testData/completion/perl";
 	}
+
+
+	public void testAnnotation()
+	{
+		doTest("returns", "inject", "method", "override", "abstract", "deprecated", "noinspection");
+	}
+
+	public void testInjectMarkers()
+	{
+		ArrayList<String> strings = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+		assert !strings.isEmpty();
+		doTest(strings);
+	}
+
 
 	public void testNextLabels()
 	{
