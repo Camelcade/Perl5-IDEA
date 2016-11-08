@@ -57,5 +57,10 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
 			PerlPackageCompletionUtil.fillWithVersionNumbers(element, result);
 			PerlPackageCompletionUtil.fillWithAllPackageFiles(element, result);
 		}
+		else // fallback
+		{
+			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNames(element, result);
+			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+		}
 	}
 }
