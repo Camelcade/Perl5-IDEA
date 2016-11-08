@@ -19,6 +19,7 @@ package completion;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 
 import java.io.IOException;
@@ -32,6 +33,21 @@ import java.util.Set;
  */
 public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase
 {
+	protected List<String> LIBRARY_PACKAGES = Arrays.asList(
+			"MyTest::Some::Package",
+			"MyTest::Something"
+	);
+
+	protected List<String> BUILT_IN_PACKAGES = new ArrayList<>(PerlPackageUtil.BUILT_IN_ALL);
+
+	protected List<String> BUILT_IN_VERSIONS = Arrays.asList(
+			"v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
+			"v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
+	);
+
+	protected List<String> REF_TYPES = Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING");
+
+
 	@Override
 	public void initWithFileContent(String filename, String extension, String content) throws IOException
 	{
@@ -46,15 +62,20 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	}
 
 	@SafeVarargs
-	public final void assertCompletionIs(List<String>... pattern)
+	public final void assertCompletionIs(List<String>... expected)
+	{
+		initWithFileSmart();
+		assertLookupIs(mergeLists(expected));
+	}
+
+	@SafeVarargs
+	protected final List<String> mergeLists(List<String>... sources)
 	{
 		Set<String> resultSet = new THashSet<>();
-		for (List<String> strings : pattern)
+		for (List<String> strings : sources)
 		{
 			resultSet.addAll(strings);
 		}
-
-		initWithFileSmart();
-		assertLookupIs(new ArrayList<>(resultSet));
+		return new ArrayList<>(resultSet);
 	}
 }

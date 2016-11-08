@@ -43,14 +43,12 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.picocontainer.MutablePicoContainer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -64,17 +62,6 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 	private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
 	private static final String END_FOLD = "</fold>";
 
-	protected List<String> LIBRARY_PACKAGES = Arrays.asList(
-			"MyTest::Some::Package",
-			"MyTest::Something"
-	);
-
-	protected List<String> BUILT_IN_PACKAGES = new ArrayList<>(PerlPackageUtil.BUILT_IN_ALL);
-
-	protected List<String> BUILT_IN_VERSIONS = Arrays.asList(
-			"v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
-			"v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
-	);
 
 	public static Application getApplication()
 	{
@@ -193,45 +180,6 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			initWithFile(filename, "pl");
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Deprecated  // use initWithFileSmart
-	public void initWithFileAsHTMLMason(String filename)
-	{
-		try
-		{
-			initWithFile(filename, "mas");
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Deprecated  // use initWithFileSmart
-	public void initWithFileAsPackage(String filename)
-	{
-		try
-		{
-			initWithFile(filename, "pm");
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Deprecated // use initWIthTextSmart
-	public void initWithTextAsScript(String content)
-	{
-		try
-		{
-			initWithFileContent("test", "pl", content);
 		}
 		catch (IOException e)
 		{

@@ -16,6 +16,7 @@
 
 package completion;
 
+import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 
@@ -32,6 +33,23 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 	protected String getTestDataPath()
 	{
 		return "testData/completion/perl";
+	}
+
+	public void testRefTypes()
+	{
+		initWithTextSmart("my $var = '<caret>'");
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertNotNull(strings);
+
+		UsefulTestCase.assertSameElements(strings, mergeLists(REF_TYPES, LIBRARY_PACKAGES));
+	}
+
+	public void testHashIndexBare()
+	{
+		initWithTextSmart("$$a{testindex}; $b->{<caret>}");
+		List<String> strings = myFixture.getLookupElementStrings();
+		assertNotNull(strings);
+		UsefulTestCase.assertSameElements(strings, Arrays.asList("testindex"));
 	}
 
 
