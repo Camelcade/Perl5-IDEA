@@ -22,16 +22,24 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by hurricup on 03.02.2016.
- * http://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins/completion_test.html
+ * Created by hurricup on 04.03.2016.
  */
-@SuppressWarnings("unchecked")
-public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
+public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 {
 	@Override
 	protected String getTestDataPath()
 	{
-		return "testData/completion/namespace";
+		return "testData/completion/perl";
+	}
+
+	public void testNextLabels()
+	{
+		doTest("LABEL1", "LABEL2", "LABEL3");
+	}
+
+	public void testGotoLabels()
+	{
+		doTest("LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "LABEL6", "LABEL8");
 	}
 
 	@Override
@@ -80,7 +88,8 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 		doTestAllPackages();
 	}
 
-	private void doTest(List<String>... result)
+	@SafeVarargs
+	private final void doTest(List<String>... result)
 	{
 		assertCompletionIs(result);
 	}
@@ -90,13 +99,14 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 		doTest(Arrays.asList(result));
 	}
 
-	public void doTestPackageAndVersions()
+	private void doTestPackageAndVersions()
 	{
 		doTest(BUILT_IN_PACKAGES, BUILT_IN_VERSIONS, LIBRARY_PACKAGES);
 	}
 
-	public void doTestAllPackages()
+	private void doTestAllPackages()
 	{
 		doTest(BUILT_IN_PACKAGES, LIBRARY_PACKAGES);
 	}
+
 }
