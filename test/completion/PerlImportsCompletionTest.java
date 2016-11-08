@@ -32,51 +32,51 @@ public class PerlImportsCompletionTest extends PerlCompletionCodeInsightFixtureT
 
 	public void testSubs()
 	{
-		assertPackageFileCompletionContains("subs", "somecode", "someothercode");
+		assertCompletionIs("somecode", "someothercode");
 		assertNotContainsLookupElements("somescalar", "somearray", "somehash");
 	}
 
 	public void testHashes()
 	{
-		assertPackageFileCompletionContains("hashes", "somehash");
+		assertCompletionIs("somehash");
 		assertNotContainsLookupElements("somesub", "someothersub", "somescalar", "somearray");
 	}
 
 	public void testArrays()
 	{
-		assertPackageFileCompletionContains("arrays", "somearray", "somehash");
+		assertCompletionIs("somearray", "somehash");
 		assertNotContainsLookupElements("somesub", "someothersub", "somescalar");
 	}
 
 	public void testScalars()
 	{
-		assertPackageFileCompletionContains("scalars", "somearray", "somehash", "somescalar");
+		assertCompletionIs("somearray", "somehash", "somescalar");
 		assertNotContainsLookupElements("somesub", "someothersub");
 	}
 
 	public void testDancer()
 	{
-		assertPackageFileCompletionContains("dancer", PerlDancerDSL.DSL_KEYWORDS);
+		assertCompletionIs(PerlDancerDSL.DSL_KEYWORDS);
 	}
 
 	public void testDancer2()
 	{
-		assertPackageFileCompletionContains("dancer2", PerlDancer2DSL.DSL_KEYWORDS);
+		assertCompletionIs(PerlDancer2DSL.DSL_KEYWORDS);
 	}
 
 	public void testPosix()
 	{
-		assertPackageFileCompletionContains("posix", "FLT_MIN_10_EXP", "FP_INFINITE", "INFINITY");
+		assertCompletionIs("FLT_MIN_10_EXP", "FP_INFINITE", "INFINITY");
 	}
 
 	public void testPosixVar()
 	{
-		assertPackageFileCompletionContains("posix_var", "SIGRT");
+		assertCompletionIs("SIGRT");
 	}
 
 	public void testPosixOk()
 	{
-		assertPackageFileCompletionContains("posix_ok", "isgreaterequal");
+		assertCompletionIs("isgreaterequal");
 	}
 
 }

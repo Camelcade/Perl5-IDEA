@@ -16,10 +16,16 @@
 
 package completion;
 
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by hurricup on 03.02.2016.
  * http://www.jetbrains.org/intellij/sdk/docs/tutorials/writing_tests_for_plugins/completion_test.html
  */
+@SuppressWarnings("unchecked")
 public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 {
 	@Override
@@ -28,60 +34,69 @@ public class PerlPackageCompletionTest extends PerlCompletionCodeInsightFixtureT
 		return "testData/completion/namespace";
 	}
 
+	@Override
+	public String getFileExtension()
+	{
+		return PerlFileTypePackage.EXTENSION;
+	}
 
 	public void testPackageDefinition()
 	{
-		assertPackageFileCompletionContains("package_definition", "package_definition");
+		doTest("packageDefinition");
 	}
 
 	public void testPackageUse()
 	{
-		checkPackageAndVersionsCompletions("package_use");
+		doTestPackageAndVersions();
 	}
 
 	public void testPackageNo()
 	{
-		checkPackageAndVersionsCompletions("package_no");
+		doTestPackageAndVersions();
 	}
 
 	public void testPackageRequire()
 	{
-		checkPackageAndVersionsCompletions("package_require");
+		doTestPackageAndVersions();
 	}
 
-	public void testLocal()
+	public void testPackageMy()
 	{
-		checkClassCompletions("package_local");
+		doTestAllPackages();
 	}
 
-	public void testMy()
+	public void testPackageOur()
 	{
-		checkClassCompletions("package_my");
+		doTestAllPackages();
 	}
 
-	public void testOur()
+	public void testPackageState()
 	{
-		checkClassCompletions("package_our");
-	}
-
-	public void testState()
-	{
-		checkClassCompletions("package_state");
+		doTestAllPackages();
 	}
 
 	public void testTryCatch()
 	{
-		checkClassCompletions("try_catch");
+		doTestAllPackages();
 	}
 
-	public void checkPackageAndVersionsCompletions(String fileName)
+	private void doTest(List<String>... result)
 	{
-		assertPackageFileCompletionContains(fileName, "v5.10", "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		assertCompletionIs(result);
 	}
 
-	public void checkClassCompletions(String fileName)
+	private void doTest(String... result)
 	{
-		assertPackageFileCompletionContains(fileName, "B", "UNIVERSAL", "Scalar::Util", "strict", "warnings");
+		doTest(Arrays.asList(result));
 	}
 
+	public void doTestPackageAndVersions()
+	{
+		doTest(BUILT_IN_PACKAGES, BUILT_IN_VERSIONS, LIBRARY_PACKAGES);
+	}
+
+	public void doTestAllPackages()
+	{
+		doTest(BUILT_IN_PACKAGES, LIBRARY_PACKAGES);
+	}
 }

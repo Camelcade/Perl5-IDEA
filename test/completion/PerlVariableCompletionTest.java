@@ -31,28 +31,28 @@ public class PerlVariableCompletionTest extends PerlCompletionCodeInsightFixture
 	{
 		initWithFileAsScript("lexical_my");
 		assertContainsBuiltInVars();
-		assertContainsLookupElements("scalarname", "arrayname", "hashname");
+		assertLookupIs("scalarname", "arrayname", "hashname");
 	}
 
 	public void testLexicalState()
 	{
 		initWithFileAsScript("lexical_state");
 		assertContainsBuiltInVars();
-		assertContainsLookupElements("scalarname", "arrayname", "hashname");
+		assertLookupIs("scalarname", "arrayname", "hashname");
 	}
 
 	public void testLexicalOur()
 	{
 		initWithFileAsScript("lexical_our");
 		assertContainsBuiltInVars();
-		assertContainsLookupElements("scalarname", "arrayname", "hashname");
+		assertLookupIs("scalarname", "arrayname", "hashname");
 	}
 
 	public void testSameStatementSimple()
 	{
 		initWithFileAsScript("same_statement_simple");
 		assertContainsBuiltInVars();
-		assertContainsLookupElements("normvar");
+		assertLookupIs("normvar");
 		assertNotContainsLookupElements("testvar");
 	}
 
@@ -60,12 +60,12 @@ public class PerlVariableCompletionTest extends PerlCompletionCodeInsightFixture
 	{
 		initWithFileAsScript("same_statement_map");
 		assertContainsBuiltInVars();
-		assertContainsLookupElements("normvar");
+		assertLookupIs("normvar");
 		assertNotContainsLookupElements("testvar");
 	}
 
 	protected void assertContainsBuiltInVars()
 	{
-		assertContainsLookupElements("a", "b", "ARGV", "INC");
+		assertLookupIs("a", "b", "ARGV", "INC");
 	}
 }

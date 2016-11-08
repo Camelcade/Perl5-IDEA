@@ -18,10 +18,14 @@ package completion;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import gnu.trove.THashSet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -32,18 +36,25 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	public void initWithFileContent(String filename, String extension, String content) throws IOException
 	{
 		super.initWithFileContent(filename, extension, content);
+		CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
 		myFixture.complete(CompletionType.BASIC, 1);
 	}
 
-	public void assertPackageFileCompletionContains(String fileName, String... pattern)
+	public void assertCompletionIs(String... pattern)
 	{
-		assertPackageFileCompletionContains(fileName, Arrays.asList(pattern));
+		assertCompletionIs(Arrays.asList(pattern));
 	}
 
-	public void assertPackageFileCompletionContains(String fileName, List<String> pattern)
+	@SafeVarargs
+	public final void assertCompletionIs(List<String>... pattern)
 	{
-		initWithFileAsPackage(fileName);
-		assertContainsLookupElements(pattern);
-	}
+		Set<String> resultSet = new THashSet<>();
+		for (List<String> strings : pattern)
+		{
+			resultSet.addAll(strings);
+		}
 
+		initWithFileSmart();
+		assertLookupIs(new ArrayList<>(resultSet));
+	}
 }
