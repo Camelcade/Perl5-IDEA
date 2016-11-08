@@ -337,9 +337,15 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param processor string processor for suitable strings
 	 * @return collection of constants names
 	 */
-	public static boolean processDefinedPackageNames(GlobalSearchScope scope, Processor<String> processor)
+	public static boolean processPackages(@NotNull String name, @NotNull Project project, GlobalSearchScope scope, Processor<PerlNamespaceDefinition> processor)
 	{
-		return StubIndex.getInstance().processAllKeys(PerlNamespaceDefinitionStubIndex.KEY, processor, scope, null);
+		return StubIndex.getInstance().processElements(
+				PerlNamespaceDefinitionStubIndex.KEY,
+				name,
+				project,
+				scope,
+				PerlNamespaceDefinition.class,
+				processor);
 	}
 
 	/**

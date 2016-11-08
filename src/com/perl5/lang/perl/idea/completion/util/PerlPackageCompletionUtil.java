@@ -25,15 +25,14 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -92,38 +91,48 @@ public class PerlPackageCompletionUtil
 	public static void fillWithAllPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
 		final Project project = element.getProject();
+		GlobalSearchScope resolveScope = element.getResolveScope();
 
-		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
-			@Override
-			public boolean process(String s)
+			PerlPackageUtil.processPackages(packageName, project, resolveScope, namespace ->
 			{
-				if (super.process(s))
+				String name = namespace.getName();
+				if (StringUtil.isNotEmpty(name))
 				{
-					result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+					char firstChar = name.charAt(0);
+					if (firstChar == '_' || Character.isLetterOrDigit(firstChar))
+					{
+						result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, name));
+					}
 				}
 				return true;
-			}
-		});
+			});
+		}
 	}
 
 	public static void fillWithAllPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
 		final Project project = element.getProject();
 		final String prefix = result.getPrefixMatcher().getPrefix();
+		GlobalSearchScope resolveScope = element.getResolveScope();
 
-		PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
+		for (String packageName : PerlPackageUtil.getDefinedPackageNames(project))
 		{
-			@Override
-			public boolean process(String packageName)
+			PerlPackageUtil.processPackages(packageName, project, resolveScope, namespace ->
 			{
-				if (super.process(packageName))
+				String name = namespace.getName();
+				if (StringUtil.isNotEmpty(name))
 				{
-					addExpandablePackageElement(project, result, packageName, prefix);
+					char firstChar = name.charAt(0);
+					if (firstChar == '_' || Character.isLetterOrDigit(firstChar))
+					{
+						addExpandablePackageElement(project, result, packageName, prefix);
+					}
 				}
 				return true;
-			}
-		});
+			});
+		}
 	}
 
 	public static void fillWithAllBuiltInPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
