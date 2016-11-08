@@ -24,11 +24,16 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.roots.*;
+import com.intellij.openapi.roots.libraries.Library;
+import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -38,12 +43,14 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.picocontainer.MutablePicoContainer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -53,8 +60,21 @@ import java.util.List;
  */
 public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsightFixtureTestCase
 {
+	private static final String PERL_LIBRARY_NAME = "-perl-test-lib-";
 	private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
 	private static final String END_FOLD = "</fold>";
+
+	protected List<String> LIBRARY_PACKAGES = Arrays.asList(
+			"MyTest::Some::Package",
+			"MyTest::Something"
+	);
+
+	protected List<String> BUILT_IN_PACKAGES = new ArrayList<>(PerlPackageUtil.BUILT_IN_ALL);
+
+	protected List<String> BUILT_IN_VERSIONS = Arrays.asList(
+			"v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
+			"v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
+	);
 
 	public static Application getApplication()
 	{
@@ -66,11 +86,42 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		return "pl";
 	}
 
+
 	@Override
 	protected void setUp() throws Exception
 	{
 		super.setUp();
 		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
+		setUpLibrary();
+	}
+
+	protected void setUpLibrary()
+	{
+		ApplicationManager.getApplication().runWriteAction(() ->
+		{
+			ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
+
+			for (OrderEntry entry : modifiableModel.getOrderEntries())
+			{
+				if (entry instanceof LibraryOrderEntry && StringUtil.equals(((LibraryOrderEntry) entry).getLibraryName(), PERL_LIBRARY_NAME))
+				{
+					modifiableModel.removeOrderEntry(entry);
+				}
+			}
+
+//			TempDirTestFixture tempDirFixture = myFixture.getTempDirFixture();
+//			tempDirFixture.copyAll("testData/testlib", "testlib");
+
+			LibraryTable moduleLibraryTable = modifiableModel.getModuleLibraryTable();
+			Library library = moduleLibraryTable.createLibrary(PERL_LIBRARY_NAME);
+			Library.ModifiableModel libraryModifyableModel = library.getModifiableModel();
+			VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
+			assert libdir != null;
+			libraryModifyableModel.addRoot(libdir, OrderRootType.CLASSES); // myFixture.findFileInTempDir("testlib")
+			libraryModifyableModel.commit();
+			modifiableModel.commit();
+			CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+		});
 	}
 
 	protected <T> void registerApplicationService(final Class<T> aClass, T object)
@@ -142,7 +193,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			initWithFile(filename, "pl");
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -154,7 +206,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			initWithFile(filename, "mas");
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -166,7 +219,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			initWithFile(filename, "pm");
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -178,7 +232,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			initWithFileContent("test", "pl", content);
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -229,7 +284,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		try
 		{
 			expectedContent = FileUtil.loadFile(new File(getTestDataPath() + "/" + verificationFileName + ".code"));
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -274,16 +330,16 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		myFixture.checkResultByFile(checkFileName);
 	}
 
-	public void assertContainsLookupElements(String... pattern)
+	public void assertLookupIs(String... pattern)
 	{
-		assertContainsLookupElements(Arrays.asList(pattern));
+		assertLookupIs(Arrays.asList(pattern));
 	}
 
-	public void assertContainsLookupElements(List<String> pattern)
+	public void assertLookupIs(List<String> expected)
 	{
-		List<String> strings = myFixture.getLookupElementStrings();
-		assertNotNull(strings);
-		assertContainsElements(new HashSet<String>(strings), pattern);
+		List<String> lookups = myFixture.getLookupElementStrings();
+		assertNotNull(lookups);
+		UsefulTestCase.assertSameElements(lookups, expected);
 	}
 
 
