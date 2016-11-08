@@ -35,11 +35,11 @@ public interface PerlElementPatterns extends PerlElementTypes
 	PsiElementPattern.Capture<PsiElement> LABEL_EXPR_PATTERN = psiElement(LABEL_EXPR);
 	PsiElementPattern.Capture<PsiElement> LABEL_PATTERN = psiElement().withParent(LABEL_EXPR_PATTERN);
 	PsiElementPattern.Capture<PsiElement> LABEL_DECLARATION_PATTERN = psiElement().withParent(PerlLabelDeclaration.class);
-	PsiElementPattern.Capture<PsiElement> LABEL_IN_GOTO_PATTERN = LABEL_PATTERN.withParent(psiElement(PsiPerlGotoExpr.class));
+	PsiElementPattern.Capture<PsiElement> LABEL_IN_GOTO_PATTERN = LABEL_PATTERN.withSuperParent(2, PsiPerlGotoExpr.class);
 	PsiElementPattern.Capture<PsiElement> LABEL_IN_NEXT_LAST_REDO_PATTERN = LABEL_PATTERN.andOr(
-			psiElement().withParent(psiElement(PsiPerlNextExpr.class)),
-			psiElement().withParent(psiElement(PsiPerlLastExpr.class)),
-			psiElement().withParent(psiElement(PsiPerlRedoExpr.class))
+			psiElement().withSuperParent(2, PsiPerlNextExpr.class),
+			psiElement().withSuperParent(2, PsiPerlLastExpr.class),
+			psiElement().withSuperParent(2, PsiPerlRedoExpr.class)
 	);
 
 	PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_PATTERN = psiElement(PerlStringContentElement.class);

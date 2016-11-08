@@ -23,9 +23,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.psi.PerlLabelDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,32 +42,24 @@ public class PerlLabelCompletionProvider extends CompletionProvider<CompletionPa
 		}
 		else if (LABEL_IN_GOTO_PATTERN.accepts(element))
 		{
-			PerlPsiUtil.processGotoLabelDeclarations(element, new Processor<PerlLabelDeclaration>()
+			PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration ->
 			{
-				@Override
-				public boolean process(PerlLabelDeclaration perlLabelDeclaration)
+				if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
 				{
-					if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
-					{
-						result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
-					}
-					return true;
+					result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
 				}
+				return true;
 			});
 		}
 		else if (LABEL_IN_NEXT_LAST_REDO_PATTERN.accepts(element))
 		{
-			PerlPsiUtil.processNextRedoLastLabelDeclarations(element, new Processor<PerlLabelDeclaration>()
+			PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration ->
 			{
-				@Override
-				public boolean process(PerlLabelDeclaration perlLabelDeclaration)
+				if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
 				{
-					if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
-					{
-						result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
-					}
-					return true;
+					result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
 				}
+				return true;
 			});
 		}
 	}

@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Package Completion" type="GradleRunConfiguration" factoryName="Gradle" singleton="true">
+  <configuration default="false" name="Test Perl Completion" type="GradleRunConfiguration" factoryName="Gradle" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=completion/PerlPackageCompletionTest" />
+      <option name="scriptParameters" value="-Pruntest=completion/PerlCompletionTest" />
       <option name="taskDescriptions">
         <list />
       </option>
