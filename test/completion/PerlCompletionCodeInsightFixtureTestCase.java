@@ -19,6 +19,7 @@ package completion;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 
@@ -47,6 +48,12 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 
 	protected List<String> REF_TYPES = Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING");
 
+	protected List<String> getLanguageMarkers()
+	{
+		ArrayList<String> languageMarkers = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+		assert !languageMarkers.isEmpty();
+		return languageMarkers;
+	}
 
 	@Override
 	public void initWithFileContent(String filename, String extension, String content) throws IOException

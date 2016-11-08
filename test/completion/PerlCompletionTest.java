@@ -18,9 +18,7 @@ package completion;
 
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,10 +27,38 @@ import java.util.List;
  */
 public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 {
+
+	private List<String> SUPER_HERE_DOC_MARKER = Arrays.asList("MYSUPERMARKER");
+
 	@Override
 	protected String getTestDataPath()
 	{
 		return "testData/completion/perl";
+	}
+
+	public void testHeredocOpenerBare()
+	{
+		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+	}
+
+	public void testHeredocOpenerBackref()
+	{
+		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+	}
+
+	public void testHeredocOpenerQQ()
+	{
+		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+	}
+
+	public void testHeredocOpenerSQ()
+	{
+		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+	}
+
+	public void testHeredocOpenerXQ()
+	{
+		doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
 	}
 
 	public void testRefTypes()
@@ -60,9 +86,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
 	public void testInjectMarkers()
 	{
-		ArrayList<String> strings = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
-		assert !strings.isEmpty();
-		doTest(strings);
+		doTest(getLanguageMarkers());
 	}
 
 
