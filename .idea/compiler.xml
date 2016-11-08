@@ -18,7 +18,7 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.6">
+    <bytecodeTargetLevel target="1.8">
       <module name="IDEA-Perl5_main" target="1.8" />
       <module name="IDEA-Perl5_test" target="1.8" />
     </bytecodeTargetLevel>
