@@ -1,0 +1,53 @@
+PerlVariableReference at (56,57); text in range: 'a' => 0 results:
+
+PerlVariableReference at (182,183); text in range: 'a' => 0 results:
+
+PerlHeredocReference at (207,211); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 23 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (212,216); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 33 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (303,307); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 45 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (406,407); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 59 in sequentionalHereDocs.pl
+
+PerlVariableReference at (452,453); text in range: 'a' => 0 results:
+
+PerlHeredocReference at (487,491); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 90 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (492,493); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 100 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (493,494); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 106 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (532,536); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 112 in sequentionalHereDocs.pl
+
+PerlVariableReference at (582,583); text in range: 'a' => 0 results:
+
+PerlHeredocReference at (617,618); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 122 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (716,717); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 128 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (776,777); text in range: '
+' => 1 results:
+	Perl5: HEREDOC_OPENER at 134 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (859,863); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 140 in sequentionalHereDocs.pl
+
+PerlHeredocReference at (874,878); text in range: 'HTML' => 1 results:
+	Perl5: HEREDOC_OPENER at 867 in sequentionalHereDocs.pl
+
