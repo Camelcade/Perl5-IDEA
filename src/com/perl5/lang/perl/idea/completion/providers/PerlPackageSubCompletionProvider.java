@@ -50,7 +50,6 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 
 		if (!((PsiPerlMethod) method).isObjectMethod())
 		{
-			PerlPackageCompletionUtil.fillWithAllBuiltInPackageNamesWithAutocompletion(parameters.getPosition(), result);
 			PerlPackageCompletionUtil.fillWithAllPackageNamesWithAutocompletion(parameters.getPosition(), result);
 		}
 		else

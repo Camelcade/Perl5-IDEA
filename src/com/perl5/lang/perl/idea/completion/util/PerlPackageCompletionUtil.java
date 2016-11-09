@@ -135,17 +135,6 @@ public class PerlPackageCompletionUtil
 		}
 	}
 
-	public static void fillWithAllBuiltInPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
-	{
-		final Project project = element.getProject();
-		final String prefix = result.getPrefixMatcher().getPrefix();
-
-		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-		{
-			addExpandablePackageElement(project, result, packageName, prefix);
-		}
-	}
-
 	protected static void addExpandablePackageElement(Project project, CompletionResultSet result, String packageName, String prefix)
 	{
 		String name = packageName + PerlPackageUtil.PACKAGE_SEPARATOR;
