@@ -1,0 +1,19 @@
+package <info descr="null">Foo::Bla</info>;
+
+use constant <info descr="null">ALONECONST1</info> => 123;
+use constant '<info descr="null">ALONECONST2</info>' => 123;
+use constant "<info descr="null">ALONECONST3</info>" => 123;
+use constant {
+    <info descr="null">MULTI_CONST1</info>   => 123,
+    '<info descr="null">MULTI_CONST2</info>' => 69,
+    "<info descr="null">MULTI_CONST3</info>" => 0,
+};
+
+package <info descr="null">main</info>;
+
+Foo::Bla::<info descr="Constant">ALONECONST1</info>;
+Foo::Bla::<info descr="Constant">ALONECONST2</info>;
+Foo::Bla::<info descr="Constant">ALONECONST3</info>;
+Foo::Bla::<info descr="Constant">MULTI_CONST1</info>;
+Foo::Bla::<info descr="Constant">MULTI_CONST2</info>;
+Foo::Bla::<info descr="Constant">MULTI_CONST3</info>;
