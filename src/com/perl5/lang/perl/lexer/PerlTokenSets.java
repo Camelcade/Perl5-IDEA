@@ -205,4 +205,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes
 			ANNOTATION_NOINSPECTION_KEY
 
 	);
+
+	TokenSet STRING_CONTENT_TOKENSET = TokenSet.create(
+			STRING_CONTENT,
+			STRING_CONTENT_XQ,
+			STRING_CONTENT_QQ
+	);
 }

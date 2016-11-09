@@ -16,56 +16,132 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
-import com.intellij.lang.annotation.Annotation;
+/**
+ * Created by hurricup on 25.04.2015.
+ */
+
 import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 10.08.2015.
- */
-public abstract class PerlAnnotator implements Annotator, PerlElementTypes
+public class PerlAnnotator extends PerlBaseAnnotator
 {
-	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
-
-	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated)
+	@Override
+	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		if (isDeprecated)
+		IElementType elementType = PsiUtilCore.getElementType(element);
+		if (elementType == NYI_STATEMENT)
 		{
-			textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
+			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
 		}
-		return textAttributes;
-	}
-
-
-	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean deprecated)
-	{
-		annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-	}
-
-	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key, boolean deprecated)
-	{
-		if (element == null)
+		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
 		{
-			return;
+			holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
 		}
-		holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-	}
-
-	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key)
-	{
-		if (element == null)
+		else if (elementType == PACKAGE)
 		{
-			return;
-		}
-		holder.createInfoAnnotation(element, null).setTextAttributes(key);
-	}
+			assert element instanceof PerlNamespaceElement;
+			PerlNamespaceElement namespaceElement = (PerlNamespaceElement) element;
 
+			PsiElement parent = namespaceElement.getParent();
+
+			if (parent instanceof PerlNamespaceDefinition)
+			{
+				decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, namespaceElement.isDeprecated());
+			}
+			else
+			{
+				if (namespaceElement.isPragma())
+				{
+					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, namespaceElement.isDeprecated());
+				}
+				else if (namespaceElement.isBuiltin())
+				{
+					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, namespaceElement.isDeprecated());
+				}
+			}
+		}
+		else if (elementType == CONSTANT_DEFINITION)
+		{
+			assert element instanceof PerlConstantDefinition;
+			PsiElement nameIdentifier = ((PerlConstantDefinition) element).getNameIdentifier();
+			if (nameIdentifier != null)
+			{
+				decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, ((PerlConstantDefinition) element).isDeprecated());
+			}
+		}
+		else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement
+		{
+			PsiElement parent = element.getParent();
+			if (parent instanceof PsiPerlSubDeclaration)
+			{
+				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+			}
+			else if (parent instanceof PerlSubDefinitionBase)
+			{
+				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
+				{
+					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+				}
+				else
+				{
+					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+				}
+			}
+			else if (parent instanceof PerlMethod)
+			{
+				// fixme don't we need to take multiple references here?
+				PsiElement grandParent = parent.getParent();
+				PerlNamespaceElement methodNamespace = ((PerlMethod) parent).getNamespaceElement();
+
+				if (
+						!(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?
+								&& (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
+								&& ((PerlSubNameElement) element).isBuiltIn()
+						)
+				{
+					decorateElement(element, holder, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
+				}
+				else
+				{
+
+					PsiReference reference = element.getReference();
+
+					if (reference instanceof PerlSubReference)
+					{
+						((PerlSubReference) reference).multiResolve(false);
+
+						if (((PerlSubReference) reference).isConstant())
+						{
+							holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+						}
+						else if (((PerlSubReference) reference).isAutoloaded())
+						{
+							holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+						}
+						else if (((PerlSubReference) reference).isXSub())
+						{
+							holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
+						}
+						else
+						{
+							decorateElement(
+									element,
+									holder,
+									((PerlSubNameElement) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SUB_BUILTIN : PerlSyntaxHighlighter.PERL_SUB
+							);
+						}
+					}
+				}
+			}
+		}
+
+	}
 }

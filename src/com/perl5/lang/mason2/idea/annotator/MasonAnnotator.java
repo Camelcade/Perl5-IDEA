@@ -19,14 +19,14 @@ package com.perl5.lang.mason2.idea.annotator;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.psi.MasonMethodModifierName;
-import com.perl5.lang.perl.idea.annotators.PerlAnnotator;
+import com.perl5.lang.perl.idea.annotators.PerlBaseAnnotator;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonAnnotator extends PerlAnnotator
+public class MasonAnnotator extends PerlBaseAnnotator
 {
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)

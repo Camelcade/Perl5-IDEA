@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser.perlswitch.idea.annotator;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.annotators.PerlAnnotator;
+import com.perl5.lang.perl.idea.annotators.PerlBaseAnnotator;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class PerlSwitchAnnotator extends PerlAnnotator
+public class PerlSwitchAnnotator extends PerlBaseAnnotator
 {
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
