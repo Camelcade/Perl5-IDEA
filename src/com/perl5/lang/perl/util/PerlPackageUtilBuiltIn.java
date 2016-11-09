@@ -27,7 +27,7 @@ import java.util.Set;
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
 public interface PerlPackageUtilBuiltIn
 {
-	public static final Set<String> BUILT_IN = new THashSet<String>(Arrays.asList(
+	Set<String> BUILT_IN = new THashSet<>(Arrays.asList(
 			"AnyDBM_File",
 			"App::Prove",
 			"App::Prove::State",

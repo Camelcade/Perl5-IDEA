@@ -68,7 +68,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
 	public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
-	public static final Set<String> BUILT_IN_ALL = new THashSet<String>();
+	public static final Set<String> BUILT_IN_ALL = new THashSet<>();
 
 	public static final String SUPER_PACKAGE = "SUPER";
 	public static final String SUPER_PACKAGE_FULL = SUPER_PACKAGE + PACKAGE_SEPARATOR;
