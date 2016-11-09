@@ -167,7 +167,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	 * @param name package name
 	 * @return canonical package name
 	 */
-	public static String getCanonicalPackageName(String name)
+	public static String getCanonicalPackageName(@NotNull String name)
+	{
+		String canonicalName = getCanonicalName(name);
+		return StringUtils.startsWith(canonicalName, MAIN_PACKAGE_FULL) ?
+				canonicalName.substring(MAIN_PACKAGE_FULL.length()) : canonicalName;
+	}
+
+	public static String getCanonicalName(@NotNull String name)
 	{
 		String newName;
 
@@ -178,41 +185,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 
 		String originalName = name;
 
-//		System.out.println("Source: " + name);
-		// removing trailing separator if any
 		name = PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
-//		System.out.println("Notail: " + name);
 
-		ArrayList<String> canonicalChunks = new ArrayList<String>();
+		ArrayList<String> canonicalChunks = new ArrayList<>();
 		String[] chunks = PACKAGE_SEPARATOR_RE.split(name, -1);
-
-//		System.out.println("Chunks: " + chunks.length);
 
 		if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
 		{
 			chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
 		}
 
-		for (String chunk : chunks)
-		{
-			if (!(canonicalChunks.isEmpty() && chunk.equals("main")))
-			{
-				canonicalChunks.add(chunk);
-			}
-		}
+		newName = StringUtils.join(chunks, "::");
 
-//		System.out.println("Canonical chunks: " + chunks.length);
-
-		if (canonicalChunks.isEmpty())
-		{
-			newName = "main";
-		}
-		else
-		{
-			newName = StringUtils.join(canonicalChunks, "::");
-		}
-
-//		System.out.println("Canonical: " + newName + "\n");
 		CANONICAL_NAMES_CACHE.put(originalName, newName);
 
 		return newName;

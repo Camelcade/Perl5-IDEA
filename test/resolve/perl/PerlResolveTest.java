@@ -41,4 +41,9 @@ public class PerlResolveTest extends PerlResolveTestCase
 	{
 		doTestWithFileCheck();
 	}
+
+	public void testMainSubs()
+	{
+		doTestWithFileCheck();
+	}
 }

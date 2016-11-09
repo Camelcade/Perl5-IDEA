@@ -513,20 +513,21 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 			}
 			else if (myProject != null)
 			{
-				tokenText = PerlPackageUtil.getCanonicalPackageName(tokenText);
-				if (!StringUtil.containsChar(tokenText, ':'))
+
+				String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
+				if (!StringUtil.containsChar(canonicalName, ':'))
 				{
 					tokenType = SUB_NAME;
 				}
-				else if (StringUtil.equals(tokenText, "UNIVERSAL::can"))
+				else if (StringUtil.equals(canonicalName, "UNIVERSAL::can"))
 				{
 					tokenType = QUALIFYING_PACKAGE;
 				}
-				else if (mySubNamesProvider.getValue().contains(tokenText))
+				else if (mySubNamesProvider.getValue().contains(canonicalName))
 				{
 					tokenType = QUALIFYING_PACKAGE;
 				}
-				else if (myPackageNamesProvider.getValue().contains(tokenText))
+				else if (myPackageNamesProvider.getValue().contains(canonicalName))
 				{
 					tokenType = PACKAGE;
 				}

@@ -1,0 +1,11 @@
+sub somesub{
+
+}
+
+somesub;
+
+package Other;
+
+::somesub();
+main::somesub();
+
