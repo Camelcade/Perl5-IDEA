@@ -90,7 +90,7 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public String getDisplayName()
 	{
-		return "Perl5 settings";
+		return "Perl5";
 	}
 
 	@Nullable
