@@ -74,10 +74,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 		}
 
 		// fqn names
-		if (isFullQualified)
-		{
-			fillWithFullQualifiedVariables(variableNameElement, resultSet);
-		}
+		fillWithFullQualifiedVariables(variableNameElement, resultSet);
 
 	}
 

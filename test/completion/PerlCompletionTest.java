@@ -48,7 +48,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
 	public void testLexicalOur()
 	{
-		doTestLexicalVars("scalarname", "arrayname", "hashname");
+		doTestLexicalVars("scalarname", "arrayname", "hashname", "main::scalarname", "main::arrayname", "main::hashname");
 	}
 
 	private void doTestLexicalVars(String... additionalVars)
