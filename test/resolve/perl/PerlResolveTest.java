@@ -37,4 +37,8 @@ public class PerlResolveTest extends PerlResolveTestCase
 		doTestWithFileCheck();
 	}
 
+	public void testVariablesAndElements()
+	{
+		doTestWithFileCheck();
+	}
 }

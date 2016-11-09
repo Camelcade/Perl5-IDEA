@@ -1,0 +1,13 @@
+my $scalar;
+my @array;
+my %hash;
+
+say $scalar;
+
+say @array;
+say $array[123];
+say @array[1,2,3];
+
+say %hash;
+say $hash{123};
+say @hash{1,2,3};

@@ -1,0 +1,21 @@
+PerlVariableReference at (39,45); text in range: 'scalar' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in variablesAndElements.pl
+
+PerlVariableReference at (53,58); text in range: 'array' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 15 in variablesAndElements.pl
+
+PerlVariableReference at (65,70); text in range: 'array' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 15 in variablesAndElements.pl
+
+PerlVariableReference at (82,87); text in range: 'array' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 15 in variablesAndElements.pl
+
+PerlVariableReference at (102,106); text in range: 'hash' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 26 in variablesAndElements.pl
+
+PerlVariableReference at (113,117); text in range: 'hash' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 26 in variablesAndElements.pl
+
+PerlVariableReference at (129,133); text in range: 'hash' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 26 in variablesAndElements.pl
+
