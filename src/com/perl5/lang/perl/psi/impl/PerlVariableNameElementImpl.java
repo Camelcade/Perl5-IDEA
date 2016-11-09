@@ -44,4 +44,10 @@ public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithReference
 			super.accept(visitor);
 		}
 	}
+
+	@Override
+	public String getName()
+	{
+		return getText();
+	}
 }
