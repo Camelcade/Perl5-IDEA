@@ -24,6 +24,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,6 +39,11 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 	protected String getTestDataPath()
 	{
 		return "testData/completion/perl";
+	}
+
+	public void testVariableInDeclaration()
+	{
+		doTest();
 	}
 
 	public void testImportSubs()
@@ -269,6 +275,11 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 	public void testTryCatch()
 	{
 		doTestAllPackages();
+	}
+
+	private void doTest()
+	{
+		doTest(Collections.emptyList());
 	}
 
 	@SafeVarargs
