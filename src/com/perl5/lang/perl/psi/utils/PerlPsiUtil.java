@@ -29,6 +29,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -49,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -815,7 +818,7 @@ public class PerlPsiUtil implements PerlElementTypes
 			if (run != null)
 			{
 				run = run.getNextSibling();
-				if (run != null && run.getNode().getElementType() == STRING_CONTENT) // fixme review
+				if (STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(run)))
 				{
 					return run;
 				}
