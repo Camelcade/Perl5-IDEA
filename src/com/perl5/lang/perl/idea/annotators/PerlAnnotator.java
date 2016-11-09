@@ -130,14 +130,6 @@ public class PerlAnnotator extends PerlBaseAnnotator
 						{
 							holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
 						}
-						else
-						{
-							decorateElement(
-									element,
-									holder,
-									((PerlSubNameElement) element).isBuiltIn() ? PerlSyntaxHighlighter.PERL_SUB_BUILTIN : PerlSyntaxHighlighter.PERL_SUB
-							);
-						}
 					}
 				}
 			}
