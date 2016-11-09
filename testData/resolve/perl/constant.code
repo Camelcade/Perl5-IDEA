@@ -1,0 +1,19 @@
+package Foo::Bla;
+
+use constant ALONECONST1 => 123;
+use constant 'ALONECONST2' => 123;
+use constant "ALONECONST3" => 123;
+use constant {
+    MULTI_CONST1 => 123,
+    'MULTI_CONST2' => 69,
+    "MULTI_CONST3" => 0,
+};
+
+package main;
+
+Foo::Bla::ALONECONST1;
+Foo::Bla::ALONECONST2;
+Foo::Bla::ALONECONST3;
+Foo::Bla::MULTI_CONST1;
+Foo::Bla::MULTI_CONST2;
+Foo::Bla::MULTI_CONST3;

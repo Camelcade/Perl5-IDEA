@@ -1,0 +1,44 @@
+PerlNamespaceReference at (23,31); text in range: 'constant' => 0 results:
+
+PerlNamespaceReference at (56,64); text in range: 'constant' => 0 results:
+
+PerlNamespaceReference at (91,99); text in range: 'constant' => 0 results:
+
+PerlNamespaceReference at (126,134); text in range: 'constant' => 0 results:
+
+PerlNamespaceReference at (232,240); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (242,253); text in range: 'ALONECONST1' => 1 results:
+	CONSTANT_DEFINITION at 32 in constant.pl
+
+PerlNamespaceReference at (255,263); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (265,276); text in range: 'ALONECONST2' => 1 results:
+	CONSTANT_DEFINITION at 65 in constant.pl
+
+PerlNamespaceReference at (278,286); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (288,299); text in range: 'ALONECONST3' => 1 results:
+	CONSTANT_DEFINITION at 100 in constant.pl
+
+PerlNamespaceReference at (301,309); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (311,323); text in range: 'MULTI_CONST1' => 1 results:
+	CONSTANT_DEFINITION at 141 in constant.pl
+
+PerlNamespaceReference at (325,333); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (335,347); text in range: 'MULTI_CONST2' => 1 results:
+	CONSTANT_DEFINITION at 166 in constant.pl
+
+PerlNamespaceReference at (349,357); text in range: 'Foo::Bla' => 1 results:
+	NAMESPACE at 0 in constant.pl
+
+PerlSubReference at (359,371); text in range: 'MULTI_CONST3' => 1 results:
+	CONSTANT_DEFINITION at 192 in constant.pl
+
