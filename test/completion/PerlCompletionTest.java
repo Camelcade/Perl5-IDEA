@@ -17,8 +17,12 @@
 package completion;
 
 import com.intellij.testFramework.UsefulTestCase;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXExports;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancer2DSL;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancerDSL;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,22 +40,89 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testImportSubs()
+	{
+		doTestSubs("somecode", "someothercode", "Foo::Bar::", "Foo::Bar->", "Foo::Baz::", "Foo::Baz->");
+	}
+
+	public void testImportHashes()
+	{
+		doTestHashVariables("somehash", "Foo::Bar::somehash");
+	}
+
+	public void testImportArrays()
+	{
+		doTestArrayVariables("somearray", "somehash", "Foo::Bar::somearray", "Foo::Bar::somehash", "Foo::Bar::EXPORT");
+	}
+
+	public void testImportScalars()
+	{
+		doTestScalarVariables(
+				"somearray",
+				"somehash",
+				"somescalar",
+				"Foo::Bar::EXPORT",
+				"Foo::Bar::somearray",
+				"Foo::Bar::somehash",
+				"Foo::Bar::somescalar");
+	}
+
+	public void testImportDancer()
+	{
+		doTestSubs(PerlDancerDSL.DSL_KEYWORDS);
+	}
+
+	public void testImportDancer2()
+	{
+		ArrayList<String> dancerCopy = new ArrayList<>(PerlDancer2DSL.DSL_KEYWORDS);
+		dancerCopy.remove("import");
+		dancerCopy.remove("log"); // as far as we have no psi elements inside lookups, they are not duplicating
+		doTestSubs(dancerCopy);
+	}
+
+	public void testImportPosix()
+	{
+		ArrayList<String> posixCopy = new ArrayList<>(POSIXExports.EXPORT);
+		posixCopy.remove("%SIGRT");  // variable does not appear
+		doTestSubs(posixCopy);
+	}
+
+	public void testImportPosixVar()
+	{
+		doTestHashVariables("SIGRT");
+	}
+
+	public void testImportPosixOk()
+	{
+		doTestSubs("isgreaterequal");
+	}
+
+	private void doTestSubs(String... additional)
+	{
+		doTestSubs(Arrays.asList(additional));
+	}
+
+	private void doTestSubs(List<String> additional)
+	{
+		doTest(BUILT_IN_SUBS, PACKAGES_LOOKUPS, additional);
+	}
+
 	public void testLexicalMy()
 	{
-		doTestLexicalVars("scalarname", "arrayname", "hashname");
+		doTestScalarVariables("scalarname", "arrayname", "hashname");
 	}
 
 	public void testLexicalState()
 	{
-		doTestLexicalVars("scalarname", "arrayname", "hashname");
+		doTestScalarVariables("scalarname", "arrayname", "hashname");
 	}
 
 	public void testLexicalOur()
 	{
-		doTestLexicalVars("scalarname", "arrayname", "hashname", "main::scalarname", "main::arrayname", "main::hashname");
+		doTestScalarVariables("scalarname", "arrayname", "hashname", "main::scalarname", "main::arrayname", "main::hashname");
 	}
 
-	private void doTestLexicalVars(String... additionalVars)
+	private void doTestScalarVariables(String... additionalVars)
 	{
 		doTest(
 				Arrays.asList(additionalVars),
@@ -59,14 +130,30 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		);
 	}
 
+	private void doTestArrayVariables(String... additionalVars)
+	{
+		doTest(
+				Arrays.asList(additionalVars),
+				ARRAY_LOOKUPS
+		);
+	}
+
+	private void doTestHashVariables(String... additionalVars)
+	{
+		doTest(
+				Arrays.asList(additionalVars),
+				HASH_LOOKUPS
+		);
+	}
+
 	public void testSameStatementSimple()
 	{
-		doTestLexicalVars("normvar");
+		doTestScalarVariables("normvar");
 	}
 
 	public void testSameStatementMap()
 	{
-		doTestLexicalVars("normvar");
+		doTestScalarVariables("normvar");
 	}
 
 	public void testHeredocOpenerBare()
@@ -197,12 +284,12 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
 	private void doTestPackageAndVersions()
 	{
-		doTest(BUILT_IN_PACKAGES, BUILT_IN_VERSIONS, LIBRARY_PACKAGES);
+		doTest(BUILT_IN_VERSIONS, LIBRARY_PACKAGES);
 	}
 
 	private void doTestAllPackages()
 	{
-		doTest(BUILT_IN_PACKAGES, LIBRARY_PACKAGES);
+		doTest(LIBRARY_PACKAGES);
 	}
 
 }
