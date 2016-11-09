@@ -56,7 +56,7 @@ Perl5
           PsiElement(Perl5: STRING_CONTENT)('three')
           PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(')')
       PsiElement(Perl5: ,)(',')
-      sub main::null
+      sub main::array2
         PsiPerlStringDqImpl(Perl5: STRING_DQ)
           PsiElement(Perl5: QUOTE_DOUBLE_OPEN)('"')
           PsiElement(Perl5: STRING_CONTENT_QQ)('array2')
