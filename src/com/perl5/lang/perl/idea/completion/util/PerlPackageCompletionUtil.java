@@ -135,15 +135,6 @@ public class PerlPackageCompletionUtil
 		}
 	}
 
-	public static void fillWithAllBuiltInPackageNames(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
-	{
-		final Project project = element.getProject();
-		for (String packageName : PerlPackageUtil.BUILT_IN_ALL)
-		{
-			result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, packageName));
-		}
-	}
-
 	public static void fillWithAllBuiltInPackageNamesWithAutocompletion(@NotNull PsiElement element, @NotNull final CompletionResultSet result)
 	{
 		final Project project = element.getProject();
