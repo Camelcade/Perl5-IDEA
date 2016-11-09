@@ -53,7 +53,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 		boolean isFullQualified = PerlPackageUtil.isFullQualifiedName(variableNameElement.getText());
 
 		PsiElement originalPosition = parameters.getOriginalPosition();
-		if (originalPosition != null)
+		if (originalPosition instanceof PerlVariableNameElement)
 		{
 			resultSet = resultSet.withPrefixMatcher(new PlainPrefixMatcher(originalPosition.getText()));
 		}
