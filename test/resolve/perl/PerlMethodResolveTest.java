@@ -81,6 +81,6 @@ public class PerlMethodResolveTest extends PerlResolveTestCase
 
 	public void doTest(boolean success)
 	{
-		super.doTest(getTestName(false).toLowerCase(), success, PerlSubNameElement.class);
+		super.doTest(getTestName(true), success, PerlSubNameElement.class);
 	}
 }
