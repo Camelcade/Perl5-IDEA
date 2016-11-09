@@ -65,6 +65,11 @@ public class PerlSubLexerAdapter extends FlexAdapter
 		return new PerlSubLexerAdapter(project, PerlLexer.ANNOTATION);
 	}
 
+	public static PerlSubLexerAdapter forUseVars(@Nullable Project project)
+	{
+		return new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING);
+	}
+
 	public static PerlSubLexerAdapter forStringSQ(@Nullable Project project)
 	{
 		return new PerlSubLexerAdapter(project, PerlLexer.STRING_Q);
