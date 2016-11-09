@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.PlainPrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -46,7 +47,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
 		String explicitNamespace = ((PsiPerlMethod) method).getExplicitPackageName();
 		String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
 		String newPrefixMathcer = (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.PACKAGE_SEPARATOR) + currentPrefixMatcher);
-		result = result.withPrefixMatcher(newPrefixMathcer);
+		result = result.withPrefixMatcher(new PlainPrefixMatcher(newPrefixMathcer));
 
 		if (!((PsiPerlMethod) method).isObjectMethod())
 		{
