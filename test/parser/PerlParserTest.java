@@ -347,6 +347,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testInterpolatedElements()
+	{
+		doTest();
+	}
+
 	@Override
 	public void setUp() throws Exception
 	{

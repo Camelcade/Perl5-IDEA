@@ -162,6 +162,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 %state HASH_ACCEPTOR
 %state CATCH, CATCH_PACKAGE
 %xstate LEX_SUB_NAME
+%xstate INTERPOLATED_VARIABLE_SUFFIX
 
 %%
 
@@ -343,9 +344,28 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <STRING_QQ,STRING_QX,MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
 {
-	"@" /  {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_ARRAY);}
+	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
 	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
-	"$" /  {NON_SPACE_AHEAD}   	{return startUnbracedVariable(SIGIL_SCALAR); }
+	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
+}
+
+<INTERPOLATED_VARIABLE_SUFFIX>{
+	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{
+	// block A
+	return startBracedBlockWithState(BRACED_STRING);}
+	"["		{
+	// block b
+	return startBracketedBlock();}
+	"{"		{
+	// block C
+	return startBracedBlock();}
+	"->"	{
+	// block D
+	return OPERATOR_DEREFERENCE;}
+	[^]		{
+	// block E
+	yypushback(1);popState();}
+	<<EOF>>	{yybegin(YYINITIAL);}
 }
 
 <MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>

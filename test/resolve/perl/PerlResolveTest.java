@@ -46,4 +46,9 @@ public class PerlResolveTest extends PerlResolveTestCase
 	{
 		doTestWithFileCheck();
 	}
+
+	public void testInterpolatedElements()
+	{
+		doTestWithFileCheck();
+	}
 }

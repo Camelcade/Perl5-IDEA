@@ -1072,11 +1072,7 @@ string_xq ::= [ 'qx'] quoted_xq_string
 private quoted_xq_string ::= QUOTE_TICK_OPEN [LP_STRING_XQ | xq_string_content] QUOTE_TICK_CLOSE {pin=1}
 private xq_string_content ::= (STRING_CONTENT_XQ | interpolated_constructs)+
 
-private interpolated_constructs ::=
-  scalar_or_element
-  | array_or_slice
-  | array_index_variable
-  | scalar_index_cast_expr
+private interpolated_constructs ::= deref_expr
 
 string_bare ::= <<parseAndWrapStringContent>>
 

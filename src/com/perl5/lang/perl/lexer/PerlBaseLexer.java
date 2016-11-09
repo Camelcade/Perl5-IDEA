@@ -243,12 +243,28 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return getLeftBrace(sigilTokens.first, VARIABLE_BRACED);
 	}
 
-	protected IElementType startBracedBlock(int afterState)
+	protected IElementType startBracedBlock()
+	{
+		return startBracedBlockWithState(YYINITIAL);
+	}
+
+	protected IElementType startBracedBlock(int returnState)
+	{
+		yybegin(returnState);
+		return startBracedBlockWithState(YYINITIAL);
+	}
+
+	/**
+	 * Starts a braced block
+	 *
+	 * @param blockState state to start after brace
+	 * @return token type
+	 */
+	protected IElementType startBracedBlockWithState(int blockState)
 	{
 		myBracesStack.push(0);
-		yybegin(afterState);
 		pushState();
-		return getLeftBrace(YYINITIAL);
+		return getLeftBrace(blockState);
 	}
 
 	protected IElementType getLeftBraceCode(int newState)
@@ -288,12 +304,22 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return RIGHT_BRACE;
 	}
 
-	protected IElementType startBracketedBlock(int afterState)
+	protected IElementType startBracketedBlock()
+	{
+		return startBracketedBlockWithState(YYINITIAL);
+	}
+
+	protected IElementType startBracketedBlock(int returnState)
+	{
+		yybegin(returnState);
+		return startBracketedBlockWithState(YYINITIAL);
+	}
+
+	protected IElementType startBracketedBlockWithState(int blockState)
 	{
 		myBracketsStack.push(0);
-		yybegin(afterState);
 		pushState();
-		return getLeftBracket(YYINITIAL);
+		return getLeftBracket(blockState);
 	}
 
 	protected IElementType getLeftBracket(int newState)

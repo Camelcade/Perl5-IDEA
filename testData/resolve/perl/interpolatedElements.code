@@ -1,0 +1,15 @@
+my $scalar;
+my @array;
+my %hash;
+
+say "test $scalar test";
+say "test $scalar->{something}->{keys %hash}->{@array} test";
+
+say "test @array test";
+say "test @array[1,2,3] test";
+say "test @array[keys %hash] test";
+say "test $array[1] test";
+
+say "test %hash test";
+say "test @hash{1,2,3} test";
+say "test $hash{123} test";
