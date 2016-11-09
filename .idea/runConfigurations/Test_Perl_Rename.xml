@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test PerlMethodResolveTest" type="GradleRunConfiguration" factoryName="Gradle" folderName="tests" singleton="true">
+  <configuration default="false" name="Test Perl Rename" type="GradleRunConfiguration" factoryName="Gradle" folderName="tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=resolve/perl/PerlMethodResolveTest" />
+      <option name="scriptParameters" value="-Pruntest=rename/PerlRenameTest" />
       <option name="taskDescriptions">
         <list />
       </option>
