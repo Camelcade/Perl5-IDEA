@@ -127,26 +127,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	@Nullable
 	private Project myProject;
-	private final AtomicNotNullLazyValue<Set<String>> mySubNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
-	{
-		@NotNull
-		@Override
-		protected Set<String> compute()
-		{
-			assert myProject != null;
-			return myProject.getComponent(PerlNamesCache.class).getSubsNamesSet();
-		}
-	};
-	private final AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
-	{
-		@NotNull
-		@Override
-		protected Set<String> compute()
-		{
-			assert myProject != null;
-			return myProject.getComponent(PerlNamesCache.class).getPackagesNamesSet();
-		}
-	};
+	private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
+	private AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider;
 
 	public static void initReservedTokensMap()
 	{
@@ -474,6 +456,28 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		myBracketsStack.clear();
 		myParensStack.clear();
 		heredocQueue.clear();
+
+		mySubNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
+		{
+			@NotNull
+			@Override
+			protected Set<String> compute()
+			{
+				assert myProject != null;
+				return myProject.getComponent(PerlNamesCache.class).getSubsNamesSet();
+			}
+		};
+
+		myPackageNamesProvider = new AtomicNotNullLazyValue<Set<String>>()
+		{
+			@NotNull
+			@Override
+			protected Set<String> compute()
+			{
+				assert myProject != null;
+				return myProject.getComponent(PerlNamesCache.class).getPackagesNamesSet();
+			}
+		};
 	}
 
 	protected IElementType getNewLineToken()
@@ -543,7 +547,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
 				if (!StringUtil.containsChar(canonicalName, ':'))
 				{
-					tokenType = SUB_NAME;
+					if (StringUtil.isCapitalized(canonicalName) && myPackageNamesProvider.getValue().contains(canonicalName))
+					{
+						tokenType = PACKAGE;
+					}
+					else
+					{
+						tokenType = SUB_NAME;
+					}
 				}
 				else if (StringUtil.equals(canonicalName, "UNIVERSAL::can"))
 				{

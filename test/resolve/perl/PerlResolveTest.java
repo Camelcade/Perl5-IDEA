@@ -51,4 +51,9 @@ public class PerlResolveTest extends PerlResolveTestCase
 	{
 		doTestWithFileCheck();
 	}
+
+	public void testSingleWordPackages()
+	{
+		doTestWithFileCheck();
+	}
 }

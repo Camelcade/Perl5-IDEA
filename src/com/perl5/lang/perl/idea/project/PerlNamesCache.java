@@ -148,7 +148,7 @@ public class PerlNamesCache implements ProjectComponent
 
 		public void update()
 		{
-			if (!isNotified && lastUpdate + TTL < System.currentTimeMillis() && !isTestMode() && !DumbService.isDumb(myProject))
+			if (!isNotified && lastUpdate + TTL < System.currentTimeMillis() && (isTestMode() || !DumbService.isDumb(myProject)))
 			{
 				synchronized (this)
 				{

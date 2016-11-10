@@ -1,0 +1,16 @@
+
+package testpackage;
+sub somesub{}
+
+
+package Somepackage;
+sub somesub{}
+
+package main;
+
+
+testpackage->somesub();
+
+Somepackage->somesub();
+
+

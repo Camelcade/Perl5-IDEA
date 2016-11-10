@@ -1,0 +1,10 @@
+PerlSubReference at (90,101); text in range: 'testpackage' => 0 results:
+
+PerlSubReference at (103,110); text in range: 'somesub' => 0 results:
+
+PerlNamespaceReference at (115,126); text in range: 'Somepackage' => 1 results:
+	NAMESPACE at 38 in singleWordPackages.pl
+
+PerlSubReference at (128,135); text in range: 'somesub' => 1 results:
+	SUB_DEFINITION at 59 in singleWordPackages.pl
+
