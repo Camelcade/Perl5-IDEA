@@ -34,6 +34,7 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -244,7 +245,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 		{
 			try
 			{
-				final CapturingProcessHandler processHandler = new CapturingProcessHandler(commandLine.createProcess());
+				final CapturingProcessHandler processHandler = new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
 
 				parserTask = new Task.Backgroundable(myProject, "XSubs Scanning", false)
 				{
