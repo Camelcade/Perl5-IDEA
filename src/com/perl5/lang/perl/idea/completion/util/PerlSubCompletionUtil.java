@@ -122,7 +122,7 @@ public class PerlSubCompletionUtil
 				{
 					PerlSubNameElement subNameElement = method.getSubNameElement();
 
-					if (subNameElement.isValid())
+					if (subNameElement != null && subNameElement.isValid()) // fixme don't understand how this happened
 					{
 
 						String subName = subNameElement.getName();
