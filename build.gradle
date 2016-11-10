@@ -243,7 +243,7 @@ task generateMason2Lexer(type: JavaExec) {
     args = getJflexArguments(src, dst)
     inputs.file file(src)
     inputs.file file("$lexer_skeleton")
-    outputs.file file(dst + "Mason2Lexer.java")
+    outputs.file file(dst + "Mason2TemplatingLexer.java")
     classpath configurations.lexer
 }
 task generateMojoliciousLexer(type: JavaExec) {
