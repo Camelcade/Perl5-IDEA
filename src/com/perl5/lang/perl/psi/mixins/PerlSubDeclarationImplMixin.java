@@ -23,6 +23,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
@@ -82,5 +83,12 @@ public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSu
 	public boolean isXSub()
 	{
 		return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
+	}
+
+	@Nullable
+	@Override
+	public PsiPerlExpr getExpr()
+	{
+		return null;
 	}
 }

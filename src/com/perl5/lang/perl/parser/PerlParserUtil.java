@@ -73,7 +73,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	{
 		ErrorState state = new ErrorState();
 		ErrorState.initState(state, builder, root, extendsSets);
-
+//		builder.setDebugMode(true);
 		return new PerlBuilder(builder, state, parser);
 	}
 

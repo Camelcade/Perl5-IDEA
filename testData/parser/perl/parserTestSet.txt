@@ -2364,13 +2364,12 @@ Perl5
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub Encode::KR::2022_KR::abc
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: subname)('abc')
-          PsiElement(Perl5: ()('(')
-          PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
-          PsiElement(Perl5: ))(')')
+      sub Encode::KR::2022_KR::abc
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: subname)('abc')
+        PsiElement(Perl5: ()('(')
+        PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$$@')
+        PsiElement(Perl5: ))(')')
         PsiElement(Perl5: ;)(';')
       sub Encode::KR::2022_KR::abc
         PsiElement(Perl5: sub)('sub')
@@ -2381,10 +2380,9 @@ Perl5
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub Encode::KR::2022_KR::abc
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: subname)('abc')
+      sub Encode::KR::2022_KR::abc
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: subname)('abc')
         PsiElement(Perl5: ;)(';')
       sub Encode::KR::2022_KR::abc
         PsiElement(Perl5: sub)('sub')

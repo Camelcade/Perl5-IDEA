@@ -161,29 +161,4 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
 	{
 		return findChildByClass(PsiPerlExpr.class);
 	}
-
-
-	/**
-	 * following trash required to extend use_statement with statement fixme do something about it
-	 **/
-	@Override
-	@Nullable
-	public PsiPerlNoStatement getNoStatement()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlStatement getStatement()
-	{
-		return null;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlSubDeclaration getSubDeclaration()
-	{
-		return null;
-	}
 }

@@ -132,26 +132,4 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
 		return findChildByClass(PsiPerlExpr.class);
 	}
 
-	@Override
-	@Nullable
-	public PsiPerlNoStatement getNoStatement()
-	{
-		return findChildByClass(PsiPerlNoStatement.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlStatement getStatement()
-	{
-		return findChildByClass(PsiPerlStatement.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlSubDeclaration getSubDeclaration()
-	{
-		return findChildByClass(PsiPerlSubDeclaration.class);
-	}
-
-
 }

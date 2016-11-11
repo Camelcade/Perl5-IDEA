@@ -450,6 +450,7 @@ limitations under the License.
     stubClass("sub_declaration")="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub"
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationImplMixin"
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
+    extends("sub_declaration")=statement
 
     stubClass("glob_variable")="com.perl5.lang.perl.idea.stubs.globs.PerlGlobStub"
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableImplMixin"
@@ -593,20 +594,21 @@ for_list_epxr ::= '(' for_list_expr_content ')' {pin=1}
 private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
 
 
-statement ::= statement_body <<statementSemi>>
-private statement_body ::=
+statement ::=
     use_statements
     | no_statements
     | sub_declaration
-    | normal_statement
-    {recoverWhile=recover_statement}
+	| statement_body <<statementSemi>>
+
+private statement_body ::= normal_statement {recoverWhile=recover_statement}
 
 private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
 sub_definition ::=  'sub' sub_names_token sub_definition_parameters parse_block
-sub_declaration ::=  'sub' sub_names_token sub_definition_parameters
+sub_declaration ::=  'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
+private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
 private sub_names_token ::= [QUALIFYING_PACKAGE] SUB_NAME
 
@@ -664,21 +666,23 @@ private use_statements ::= // fixme these shold be recovered otherwise, cause it
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   no_statement
 
-upper use_statement ::=  'use' use_no_parameters {pin=1}
-upper no_statement ::=  'no' use_no_parameters {pin=1}
+use_statement ::=  'use' use_no_parameters <<statementSemi>> {pin=1}
+no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
-private use_no_parameters ::= use_module_parameters | use_version_parameters
+private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
 private use_module_parameters ::= any_package [perl_version [comma]] [<<parseStringifiedExpression>>];
 private use_version_parameters ::= perl_version;
 
-upper use_statement_constant ::=  'use' 'constant' [perl_version] [use_constant_parameters] {pin=2}
-private use_constant_parameters ::=
+// other name to extend declaration, not variable
+use_vars_statement ::=  'use' 'vars' use_vars_parameters <<statementSemi>> {pin=2}
+private use_vars_parameters ::= [perl_version] [<<parseUseVarsParameters>>] {recoverWhile=recover_statement}
+
+use_statement_constant ::=  'use' 'constant' use_constant_parameters <<statementSemi>> {pin=2}
+private use_constant_parameters ::= [perl_version] [use_constant_variants] {recoverWhile=recover_statement}
+private use_constant_variants ::=
   constants_block
   | single_constant_definition
   | expr
-
-// other name to extend declaration, not variable
-upper use_vars_statement ::=  'use' 'vars' [perl_version] [<<parseUseVarsParameters>>] {pin=2}
 
 constants_block ::= '{' [constants_block_content] '}' {pin=1}
 private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_constants_block}

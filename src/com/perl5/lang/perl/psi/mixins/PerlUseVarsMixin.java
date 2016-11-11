@@ -30,30 +30,6 @@ public class PerlUseVarsMixin extends PerlVariableDeclarationMixin implements IP
 		super(node);
 	}
 
-	/**
-	 * following trash required to extend use_statement with statement fixme do something about it
-	 **/
-	@Override
-	@Nullable
-	public PsiPerlNoStatement getNoStatement()
-	{
-		return findChildByClass(PsiPerlNoStatement.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlStatement getStatement()
-	{
-		return findChildByClass(PsiPerlStatement.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlSubDeclaration getSubDeclaration()
-	{
-		return findChildByClass(PsiPerlSubDeclaration.class);
-	}
-
 
 	@Nullable
 	@Override

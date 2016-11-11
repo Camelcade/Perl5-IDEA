@@ -1457,125 +1457,105 @@ Perl5
       PsiComment(Perl5: COMMENT_LINE)('#    %'::one::два::three;')
       PsiComment(Perl5: COMMENT_LINE)('#    %'::раз::two::три;')
       PsiComment(Perl5: COMMENT_LINE)('#    %'::раз::два::three;')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз::два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз::два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз'два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз'два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз'два'')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз'два'')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз::'два::::'')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз::'два::::'')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::three
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::два::')
-          PsiElement(Perl5: subname)('three')
+      sub one::two::threeразthree::three
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::два::')
+        PsiElement(Perl5: subname)('three')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз::two::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз::two::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::three
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('раз::два::')
-          PsiElement(Perl5: subname)('three')
+      sub one::two::threeразthree::three
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('раз::два::')
+        PsiElement(Perl5: subname)('three')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз::два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз::два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз'два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз'два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз'два'')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз'два'')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз::'два::::'')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз::'два::::'')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::one::два::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::one::два::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::three
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::one::два::')
-          PsiElement(Perl5: subname)('three')
+      sub one::two::threeразthree::three
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::one::два::')
+        PsiElement(Perl5: subname)('three')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::три
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз::two::')
-          PsiElement(Perl5: subname)('три')
+      sub one::two::threeразthree::три
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз::two::')
+        PsiElement(Perl5: subname)('три')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::three
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('::раз::два::')
-          PsiElement(Perl5: subname)('three')
+      sub one::two::threeразthree::three
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('::раз::два::')
+        PsiElement(Perl5: subname)('three')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::раз
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::two::threeраз::')
-          PsiElement(Perl5: subname)('раз')
+      sub one::two::threeразthree::раз
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::two::threeраз::')
+        PsiElement(Perl5: subname)('раз')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::threeраз
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::two::')
-          PsiElement(Perl5: subname)('threeраз')
+      sub one::two::threeразthree::threeраз
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::two::')
+        PsiElement(Perl5: subname)('threeраз')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::два
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::two::threeразthree::')
-          PsiElement(Perl5: subname)('два')
+      sub one::two::threeразthree::два
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::two::threeразthree::')
+        PsiElement(Perl5: subname)('два')
         PsiElement(Perl5: ;)(';')
-      PsiPerlStatementImpl(Perl5: STATEMENT)
-        sub one::two::threeразthree::threeразthree
-          PsiElement(Perl5: sub)('sub')
-          PsiElement(Perl5: package::name::)('one::two::')
-          PsiElement(Perl5: subname)('threeразthree')
+      sub one::two::threeразthree::threeразthree
+        PsiElement(Perl5: sub)('sub')
+        PsiElement(Perl5: package::name::)('one::two::')
+        PsiElement(Perl5: subname)('threeразthree')
         PsiElement(Perl5: ;)(';')
       PsiPerlNamedBlockImpl(Perl5: NAMED_BLOCK)
         PsiElement(Perl5: BLOCK_NAME)('BEGIN')
