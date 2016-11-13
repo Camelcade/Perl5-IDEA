@@ -16,20 +16,18 @@
 
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
@@ -58,20 +56,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 {
 	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 	protected int myMasonChangeCounter;
-	protected Map<Integer, Boolean> myPerlLinesMap = new THashMap<Integer, Boolean>();
-	protected MyBlocksCache myBlocksCache;
 
 	public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, HTMLMasonLanguage.INSTANCE);
-		myBlocksCache = new MyBlocksCache(this);
 	}
 
 	// fixme this is a cut version from PerlResolveUtil to make implicit vars checking in the last order
@@ -144,43 +136,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		return null;
 	}
 
-	public boolean isInPerlLine(PsiElement element)
-	{
-		if (element == null)
-		{
-			return false;
-		}
-
-		ASTNode node = element.getNode();
-		int startOffset = node.getStartOffset();
-//		int endOffset = startOffset + node.getTextLength();
-
-		return isInPerlLine(startOffset); ///|| isInPerlLine(endOffset);
-	}
-
-	protected boolean isInPerlLine(int offset)
-	{
-		Document document = PsiDocumentManager.getInstance(getProject()).getDocument(this);
-		if (document != null)
-		{
-			int lineNumber = document.getLineNumber(offset);
-
-			Boolean result = myPerlLinesMap.get(lineNumber);
-
-			if (result != null)
-			{
-				return result;
-			}
-
-			PsiElement firstElement = findElementAt(document.getLineStartOffset(lineNumber));
-
-			result = firstElement != null && firstElement.getNode().getElementType() == HTML_MASON_LINE_OPENER;
-
-			myPerlLinesMap.put(lineNumber, result);
-			return result;
-		}
-		return false;
-	}
 
 	@NotNull
 	@Override
@@ -198,7 +153,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 
 	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables(HTMLMasonSettings settings)
 	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<>();
 
 		if (isValid())
 		{
@@ -282,7 +237,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	@NotNull
 	public List<HTMLMasonFileImpl> getChildComponents()
 	{
-		final List<HTMLMasonFileImpl> result = new ArrayList<HTMLMasonFileImpl>();
+		final List<HTMLMasonFileImpl> result = new ArrayList<>();
 		VirtualFile containingFile = getComponentVirtualFile();
 
 		if (containingFile != null)
@@ -345,7 +300,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		{
 			if (recursionMap == null) // first iteration
 			{
-				recursionMap = new THashSet<VirtualFile>();
+				recursionMap = new THashSet<>();
 			}
 			else // non-first iteration
 			{
@@ -393,7 +348,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	public HTMLMasonFlagsStatement getFlagsStatement()
 	{
 		StubElement stub = getStub();
-		FlagsStatementSeeker seeker = null;
+		FlagsStatementSeeker seeker;
 
 		if (stub != null)
 		{
@@ -529,7 +484,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 			@Nullable PsiElement anchor
 	)
 	{
-		List<HTMLMasonCompositeElement> elements = myBlocksCache.getValue().get(clazz);
+		List<HTMLMasonCompositeElement> elements = getBlocksMap().get(clazz);
 
 		for (int i = elements.size() - 1; i >= 0; i--)
 		{
@@ -547,16 +502,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		return true;
 	}
 
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		myBlocksCache = new MyBlocksCache(this);
-	}
-
 	public List<HTMLMasonCompositeElement> getSubComponentsDefinitions()
 	{
-		return myBlocksCache.getValue().get(HTMLMasonSubcomponentDefitnition.class);
+		return getBlocksMap().get(HTMLMasonSubcomponentDefitnition.class);
 	}
 
 
@@ -569,8 +517,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	@NotNull
 	public List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name)
 	{
-		List<HTMLMasonMethodDefinition> result = new ArrayList<HTMLMasonMethodDefinition>();
-		Set<HTMLMasonFileImpl> recursionSet = new THashSet<HTMLMasonFileImpl>();
+		List<HTMLMasonMethodDefinition> result = new ArrayList<>();
+		Set<HTMLMasonFileImpl> recursionSet = new THashSet<>();
 
 		collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
 
@@ -626,7 +574,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 
 	public boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor)
 	{
-		return processMethodDefinitionsInThisOrParents(processor, new THashSet<HTMLMasonFileImpl>());
+		return processMethodDefinitionsInThisOrParents(processor, new THashSet<>());
 	}
 
 
@@ -675,23 +623,19 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		StubElement stub = getStub();
 		if (stub != null)
 		{
-			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
-			PerlPsiUtil.processElementsFromStubs(stub, new Processor<Stub>()
+			final List<HTMLMasonCompositeElement> result = new ArrayList<>();
+			PerlPsiUtil.processElementsFromStubs(stub, stub1 ->
 			{
-				@Override
-				public boolean process(Stub stub)
+				if (stub1 instanceof HTMLMasonMethodDefinitionStub)
 				{
-					if (stub instanceof HTMLMasonMethodDefinitionStub)
-					{
-						result.add(((HTMLMasonMethodDefinitionStub) stub).getPsi());
-					}
-					return true;
+					result.add(((HTMLMasonMethodDefinitionStub) stub1).getPsi());
 				}
+				return true;
 			}, null);
 
 			return result;
 		}
-		return myBlocksCache.getValue().get(HTMLMasonMethodDefinition.class);
+		return getBlocksMap().get(HTMLMasonMethodDefinition.class);
 	}
 
 	@NotNull
@@ -703,28 +647,24 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 		//noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl
 		if (stub != null)
 		{
-			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> result = new ArrayList<>();
 
 			PerlPsiUtil.processElementsFromStubs(
 					stub,
-					new Processor<Stub>()
+					stub1 ->
 					{
-						@Override
-						public boolean process(Stub stub)
+						if (stub1 instanceof HTMLMasonArgsBlockStub)
 						{
-							if (stub instanceof HTMLMasonArgsBlockStub)
-							{
-								result.add(((HTMLMasonArgsBlockStub) stub).getPsi());
-							}
-							return true;
+							result.add(((HTMLMasonArgsBlockStub) stub1).getPsi());
 						}
+						return true;
 					},
 					HTMLMasonNamedElementStubBaseImpl.class
 			);
 			return result;
 		}
 
-		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
+		return getBlocksMap().get(HTMLMasonArgsBlock.class);
 	}
 
 	@Override
@@ -737,6 +677,66 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 	public boolean isPerlTidyReformattable()
 	{
 		return false;
+	}
+
+	private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap()
+	{
+		return CachedValuesManager.getCachedValue(this, () ->
+		{
+			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
+
+			final List<HTMLMasonCompositeElement> cleanupResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> sharedResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> onceResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> methodsResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> subComponentsResult = new ArrayList<>();
+
+			result.put(HTMLMasonOnceBlock.class, onceResult);
+			result.put(HTMLMasonSharedBlock.class, sharedResult);
+			result.put(HTMLMasonInitBlock.class, initResult);
+			result.put(HTMLMasonArgsBlock.class, argsResult);
+			result.put(HTMLMasonCleanupBlock.class, cleanupResult);
+			result.put(HTMLMasonMethodDefinition.class, methodsResult);
+			result.put(HTMLMasonSubcomponentDefitnition.class, subComponentsResult);
+
+			PsiTreeUtil.processElements(HTMLMasonFileImpl.this, element ->
+			{
+				if (element instanceof HTMLMasonOnceBlock)
+				{
+					onceResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonSharedBlock)
+				{
+					sharedResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonCleanupBlock)
+				{
+					cleanupResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonInitBlock && HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+				{
+					initResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonArgsBlock && HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+				{
+					argsResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonMethodDefinition)
+				{
+					methodsResult.add((HTMLMasonCompositeElement) element);
+				}
+				else if (element instanceof HTMLMasonSubcomponentDefitnition)
+				{
+					subComponentsResult.add((HTMLMasonCompositeElement) element);
+				}
+
+				return true;
+			});
+
+			return CachedValueProvider.Result.create(result, HTMLMasonFileImpl.this);
+		});
 	}
 
 	protected abstract static class FlagsStatementSeeker<T> implements Processor<T>
@@ -774,79 +774,6 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile
 				return false;
 			}
 			return true;
-		}
-	}
-
-	protected static class MyBlocksCache extends AtomicNotNullLazyValue<Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>>
-	{
-		private final HTMLMasonFileImpl myFile;
-
-		public MyBlocksCache(HTMLMasonFileImpl myFile)
-		{
-			this.myFile = myFile;
-		}
-
-		@NotNull
-		@Override
-		protected Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> compute()
-		{
-			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>();
-
-			final List<HTMLMasonCompositeElement> cleanupResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> initResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> sharedResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> onceResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> methodsResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> subComponentsResult = new ArrayList<HTMLMasonCompositeElement>();
-
-			result.put(HTMLMasonOnceBlock.class, onceResult);
-			result.put(HTMLMasonSharedBlock.class, sharedResult);
-			result.put(HTMLMasonInitBlock.class, initResult);
-			result.put(HTMLMasonArgsBlock.class, argsResult);
-			result.put(HTMLMasonCleanupBlock.class, cleanupResult);
-			result.put(HTMLMasonMethodDefinition.class, methodsResult);
-			result.put(HTMLMasonSubcomponentDefitnition.class, subComponentsResult);
-
-			PsiTreeUtil.processElements(myFile, new PsiElementProcessor()
-			{
-				@Override
-				public boolean execute(@NotNull PsiElement element)
-				{
-					if (element instanceof HTMLMasonOnceBlock)
-					{
-						onceResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonSharedBlock)
-					{
-						sharedResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonCleanupBlock)
-					{
-						cleanupResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonInitBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-					{
-						initResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonArgsBlock && myFile.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-					{
-						argsResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonMethodDefinition)
-					{
-						methodsResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonSubcomponentDefitnition)
-					{
-						subComponentsResult.add((HTMLMasonCompositeElement) element);
-					}
-
-					return true;
-				}
-			});
-
-			return result;
 		}
 	}
 
