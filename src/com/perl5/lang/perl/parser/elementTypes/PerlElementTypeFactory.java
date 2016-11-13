@@ -46,6 +46,24 @@ public class PerlElementTypeFactory
 			"CODE_NAME"
 	));
 
+
+	protected final static Set<String> SUB_NAMES_TOKENS_NAMES = new THashSet<>(Arrays.asList(
+			"subname",
+			"list",
+			"unary",
+			"argumentless"
+	));
+
+
+	protected final static Set<String> PACKAGE_NAMES_TOKENS_NAMES = new THashSet<>(Arrays.asList(
+			"package::name",
+			"package::name::",
+			"constant",
+			"vars"
+	));
+
+
+
 	public static IElementType getTokenType(@NotNull String name)
 	{
 		if (STRING_TOKENS.contains(name))
@@ -80,7 +98,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("subname"))
+		if (SUB_NAMES_TOKENS_NAMES.contains(name))
 		{
 			return new PerlTokenTypeEx(name)
 			{
@@ -92,7 +110,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-		if (name.equals("package::name") || name.equals("package::name::") || name.equals("constant") || name.equals("vars"))
+		if (PACKAGE_NAMES_TOKENS_NAMES.contains(name))
 		{
 			return new PerlTokenTypeEx(name)
 			{
