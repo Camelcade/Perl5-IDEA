@@ -56,4 +56,10 @@ public class PerlResolveTest extends PerlResolveTestCase
 	{
 		doTestWithFileCheck();
 	}
+
+	public void testPackageRanges()
+	{
+		doTestWithFileCheck();
+	}
+
 }

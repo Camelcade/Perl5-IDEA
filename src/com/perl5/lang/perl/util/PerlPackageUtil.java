@@ -40,6 +40,7 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -557,20 +558,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 		}
 	}
 
-	public static TextRange getPackageRangeFromOffset(int startOffset, String text)
-	{
-		int endOffset = startOffset + text.length();
-		if (text.endsWith("::"))
-		{
-			endOffset -= 2;
-		}
-		else if (text.endsWith("'"))
-		{
-			endOffset -= 1;
-		}
-		return new TextRange(startOffset, endOffset);
-	}
-
 	public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubBase> processor)
 	{
 		if (namespaceDefinition != null)
@@ -844,19 +831,24 @@ public class PerlPackageUtil implements PerlElementTypes, PerlPackageUtilBuiltIn
 	}
 
 	/**
-	 * Returns qualified ranges for full-qualified identifier, like variable name or sub_name_qualified
+	 * Returns qualified ranges for identifier, like variable name or sub_name_qualified
 	 *
 	 * @param text token text
-	 * @return array of two ranges
+	 * @return pair of two ranges; first will be null if it's not qualified name
 	 */
 	@NotNull
-	public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull String text)
+	public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull CharSequence text)
 	{
 
 		int lastSeparatorOffset = StringUtil.lastIndexOfAny(text, ":'");
-		assert lastSeparatorOffset >= 0;
 
-		TextRange packageRange = TextRange.create(0, lastSeparatorOffset - 1);
+		if (lastSeparatorOffset < 0)
+		{
+			return Pair.create(null, TextRange.create(0, text.length()));
+		}
+
+		TextRange packageRange = PerlNamespaceElementManipulator.getRangeInString(text.subSequence(0, lastSeparatorOffset));
+
 		TextRange nameRange;
 
 		if (++lastSeparatorOffset < text.length())

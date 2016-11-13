@@ -18,9 +18,11 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -87,9 +89,20 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 			return null;
 		}
 
-		String variableNameText = variableNameElement.getText();
-		int delimiterIndex = variableNameText.lastIndexOf(':');
-		return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
+		assert variableNameElement instanceof LeafPsiElement;
+		CharSequence variableName = ((LeafPsiElement) variableNameElement).getChars();
+
+
+		Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableName);
+		if (qualifiedRanges.first == null)
+		{
+			return null;
+		}
+		else if (qualifiedRanges.first == TextRange.EMPTY_RANGE)
+		{
+			return PerlPackageUtil.MAIN_PACKAGE;
+		}
+		return PerlPackageUtil.getCanonicalPackageName(qualifiedRanges.first.subSequence(variableName).toString());
 	}
 
 	@Nullable
@@ -389,9 +402,11 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 		{
 			return null;
 		}
-		String variableNameText = variableNameElement.getText();
-		int delimiterIndex = variableNameText.lastIndexOf(':');
-		return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
+		assert variableNameElement instanceof LeafPsiElement;
+		CharSequence variableName = ((LeafPsiElement) variableNameElement).getChars();
+		Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableName);
+		assert qualifiedRanges.second != null;
+		return qualifiedRanges.second.subSequence(variableName).toString();
 	}
 
 	@NotNull
