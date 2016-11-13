@@ -1,0 +1,15 @@
+package Foo::Bar::Package::;
+
+our $var;
+sub somesub;
+
+package main;
+
+Foo::Bar::Package->somesub();
+Foo::Bar::Package::->somesub();
+Foo::Bar::Package::somesub();
+Foo::Bar::Package'somesub();
+$Foo::Bar::Package::var;
+$Foo::Bar::Package'var;
+$Foo::Bar::Package::var;
+$Fo<caret>o::Bar::Package'var;

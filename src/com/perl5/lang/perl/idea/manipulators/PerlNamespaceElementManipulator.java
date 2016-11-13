@@ -21,7 +21,6 @@ import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -54,21 +53,7 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
 			throw new IncorrectOperationException("You can't set empty package name");
 		}
 
-		String currentName = element.getText();
-
-		boolean currentTail = currentName.endsWith(PerlPackageUtil.PACKAGE_SEPARATOR) || currentName.endsWith("'");
-		boolean newTail = newContent.endsWith(PerlPackageUtil.PACKAGE_SEPARATOR) || newContent.endsWith("'");
-
-		if (newTail && !currentTail)
-		{
-			newContent = PerlPackageUtil.PACKAGE_SEPARATOR_TAIL_RE.matcher(newContent).replaceFirst("");
-		}
-		else if (!newTail && currentTail)
-		{
-			newContent = newContent + PerlPackageUtil.PACKAGE_SEPARATOR;
-		}
-
-		return (PerlNamespaceElement) ((PerlNamespaceElementImpl) element).replaceWithText(newContent);
+		return (PerlNamespaceElement) ((PerlNamespaceElementImpl) element).replaceWithText(range.replace(element.getText(), newContent));
 	}
 
 	@NotNull

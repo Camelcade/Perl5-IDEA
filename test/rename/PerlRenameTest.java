@@ -59,6 +59,11 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase
 		doTest("Foo::Bar::Boo");
 	}
 
+	public void testPackageRanges()
+	{
+		doTest("Some::Other::Package");
+	}
+
 	protected void doTest()
 	{
 		doTest("NewName");
