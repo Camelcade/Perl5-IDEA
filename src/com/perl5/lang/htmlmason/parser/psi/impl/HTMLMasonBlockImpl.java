@@ -17,11 +17,11 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.search.PsiElementProcessor;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
@@ -38,12 +38,9 @@ import java.util.Map;
  */
 public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlock
 {
-	protected MyBlocksCache myBlocksCache;
-
 	public HTMLMasonBlockImpl(ASTNode node)
 	{
 		super(node);
-		myBlocksCache = new MyBlocksCache(this);
 	}
 
 	@Override
@@ -103,7 +100,7 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 			@Nullable PsiElement anchor
 	)
 	{
-		List<HTMLMasonCompositeElement> elements = myBlocksCache.getValue().get(clazz);
+		List<HTMLMasonCompositeElement> elements = getBlocksMap().get(clazz);
 
 		for (int i = elements.size() - 1; i >= 0; i--)
 		{
@@ -121,60 +118,41 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
 		return true;
 	}
 
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		myBlocksCache = new MyBlocksCache(this);
-	}
-
 	@NotNull
 	@Override
 	public List<HTMLMasonCompositeElement> getArgsBlocks()
 	{
-		return myBlocksCache.getValue().get(HTMLMasonArgsBlock.class);
+		return getBlocksMap().get(HTMLMasonArgsBlock.class);
 	}
 
-	protected static class MyBlocksCache extends AtomicNotNullLazyValue<Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>>
+	private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap()
 	{
-		private final HTMLMasonBlockImpl myBlock;
-
-		public MyBlocksCache(HTMLMasonBlockImpl block)
+		return CachedValuesManager.getCachedValue(this, () ->
 		{
-			myBlock = block;
-		}
+			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
 
-		@NotNull
-		@Override
-		protected Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> compute()
-		{
-			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>>();
-
-			final List<HTMLMasonCompositeElement> initResult = new ArrayList<HTMLMasonCompositeElement>();
-			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<HTMLMasonCompositeElement>();
+			final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();
+			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<>();
 
 			result.put(HTMLMasonInitBlock.class, initResult);
 			result.put(HTMLMasonArgsBlock.class, argsResult);
 
-			PsiTreeUtil.processElements(myBlock, new PsiElementProcessor()
+			PsiTreeUtil.processElements(HTMLMasonBlockImpl.this, element ->
 			{
-				@Override
-				public boolean execute(@NotNull PsiElement element)
+				if (element instanceof HTMLMasonInitBlock && HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
 				{
-					if (element instanceof HTMLMasonInitBlock && myBlock.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-					{
-						initResult.add((HTMLMasonCompositeElement) element);
-					}
-					else if (element instanceof HTMLMasonArgsBlock && myBlock.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-					{
-						argsResult.add((HTMLMasonCompositeElement) element);
-					}
-
-					return true;
+					initResult.add((HTMLMasonCompositeElement) element);
 				}
+				else if (element instanceof HTMLMasonArgsBlock && HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
+				{
+					argsResult.add((HTMLMasonCompositeElement) element);
+				}
+
+				return true;
 			});
 
-			return result;
-		}
+			return CachedValueProvider.Result.create(result, HTMLMasonBlockImpl.this);
+		});
 	}
+
 }
