@@ -23,7 +23,7 @@ Perl5
         PsiElement(Perl5: regex)('some')
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')
-          PsiElement(Perl5: SCALAR_NAME)('var')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')
         PsiElement(Perl5: regex)('$')
       PsiComment(Perl5: COMMENT_LINE)('# com')
       PsiElement(Perl5: r})('/')

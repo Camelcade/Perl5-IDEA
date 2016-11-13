@@ -36,6 +36,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testMultiTokenElements()
+	{
+		doTest();
+	}
+
 	public void testHandleAcceptors()
 	{
 		doTest();

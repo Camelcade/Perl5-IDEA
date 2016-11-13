@@ -4,6 +4,6 @@ HTML::Mason component
     PsiElement(HTML::Mason: <%)('<%')
     PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
       PsiElement(Perl5: $$)('$')
-      PsiElement(Perl5: SCALAR_NAME)('boomerang_sum')
+      PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('boomerang_sum')
     PsiElement(HTML::Mason: %>)('%>')
   PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('%</b>')

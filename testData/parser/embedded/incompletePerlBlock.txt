@@ -6,6 +6,6 @@ Embedded Perl file
       PsiElement(Perl5: say)('say')
       PsiPerlStringSqImpl(Perl5: STRING_SQ)
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
-        PsiElement(Perl5: STRING_CONTENT)('hi')
+        PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
     PsiElement(Perl5: ;)(';')

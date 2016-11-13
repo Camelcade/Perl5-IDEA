@@ -5,6 +5,6 @@ Perl5
       PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
         PsiElement(Perl5: heredoc<<)('<<')
         PsiPerlStringBareImpl(Perl5: STRING_BARE)
-          PsiElement(Perl5: STRING_CONTENT)('EOM')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
   PerlHeredocElementImpl(HEREDOC_QQ)
-    PsiElement(Perl5: STRING_CONTENT_QQ)('\nthis is a text\n\nsome')
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\nthis is a text\n\nsome')

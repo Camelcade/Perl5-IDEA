@@ -34,16 +34,21 @@ public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceO
 
 	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	public final PsiReference[] getReferences()
 	{
 		return getReferencesWithCache();
 	}
 
 	@Override
-	public PsiReference getReference()
+	public final PsiReference getReference()
 	{
 		PsiReference[] references = getReferences();
 		return references.length == 0 ? null : references[0];
 	}
 
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
+	}
 }

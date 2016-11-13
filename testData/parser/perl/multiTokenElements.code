@@ -1,0 +1,11 @@
+# these are different nodes wrapped with same psi element
+sleep 100;
+warn 'something';
+wantarray;
+use something;
+some::foo;
+use constant;
+use vars;
+somesubcustom();
+sub something{}
+sub something;

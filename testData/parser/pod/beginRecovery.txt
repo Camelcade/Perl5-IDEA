@@ -6,17 +6,17 @@ POD file
       PsiElement(Perl5 POD: POD_FORMAT_NAME)('format')
     PsiBeginSectionContentImpl(Perl5 POD: BEGIN_SECTION_CONTENT)
       PsiElement(Perl5 POD: POD_NEWLINE)('\n')
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('This')
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('is')
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('format')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('This')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('is')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('format')
       PsiElement(Perl5 POD: POD_NEWLINE)('\n')
     PsiErrorElement:Perl5 POD: POD_END expected, got '=head1'
       <empty list>
   PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION)
     PsiElement(Perl5 POD: POD_HEAD1)('=head1')
     PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('this')
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('is')
-      PsiElement(Perl5 POD: POD_IDENTIFIER)('header')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('this')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('is')
+      PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('header')
     PsiHead1SectionContentImpl(Perl5 POD: HEAD_1_SECTION_CONTENT)
       <empty list>

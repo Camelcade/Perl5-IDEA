@@ -8,4 +8,4 @@ Perl5
           PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
           PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
   PerlHeredocElementImpl(HEREDOC)
-    PsiElement(Perl5: STRING_CONTENT)('asdfasdf\nsdfasdf\nasdfasdf')
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT)('asdfasdf\nsdfasdf\nasdfasdf')
