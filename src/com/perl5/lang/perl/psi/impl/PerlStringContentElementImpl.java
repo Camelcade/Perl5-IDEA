@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -50,7 +49,6 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
 	);
 	protected Boolean looksLikePath = null;
 	protected Boolean looksLikePackage = null;
-	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
 
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
