@@ -37,6 +37,17 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 {
 	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
 	final static GeneratedParserUtilBase.Parser MOJO_HELPER_PARSER = (builder_, level_) -> consumeToken(builder_, MOJO_HELPER_METHOD);
+	final static GeneratedParserUtilBase.Parser HELPER_DECLARATION_PARSER = (b, l) ->
+	{
+		PsiBuilder.Marker wrapperMarker = b.mark();
+		if (PerlParserImpl.optional_expression(b, l))
+		{
+			wrapperMarker.done(MOJO_HELPER_DECLARATION);
+			return true;
+		}
+		wrapperMarker.rollbackTo();
+		return false;
+	};
 	protected static TokenSet TOKENS_SET;
 
 	static
@@ -53,20 +64,7 @@ public class MojoliciousParserExtensionImpl extends PerlParserExtension implemen
 
 	protected static boolean parseHelperDeclaration(PerlBuilder b, int l)
 	{
-		b.setNextSubElementType(MOJO_HELPER_METHOD);
-		PsiBuilder.Marker m = b.mark();
-		boolean r = PerlParserImpl.nested_call(b, l, MOJO_HELPER_PARSER);
-
-		if (r)
-		{
-			m.done(MOJO_HELPER_DECLARATION);
-		}
-		else
-		{
-			m.rollbackTo();
-		}
-
-		return r;
+		return PerlParserImpl.nested_call(b, l, MOJO_HELPER_PARSER, HELPER_DECLARATION_PARSER);
 	}
 
 	@NotNull

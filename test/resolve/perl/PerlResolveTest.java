@@ -32,6 +32,11 @@ public class PerlResolveTest extends PerlResolveTestCase
 		doTestWithFileCheck();
 	}
 
+	public void testMojoliciousHelper()
+	{
+		doTestWithFileCheck();
+	}
+
 	public void testSequentionalHereDocs()
 	{
 		doTestWithFileCheck();

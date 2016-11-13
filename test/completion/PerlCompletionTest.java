@@ -49,6 +49,11 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testMojoliciousHelper()
+	{
+		doTest("myhelper", "SUPER::");
+	}
+
 	public void testUnresolvedSubDeclaration()
 	{
 		doTest("somesubcustom");

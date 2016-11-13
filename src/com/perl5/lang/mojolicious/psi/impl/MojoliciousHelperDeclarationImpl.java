@@ -22,7 +22,9 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
+import com.perl5.lang.perl.psi.PsiPerlSubExpr;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -49,21 +51,20 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		PsiPerlCommaSequenceExpr commaSequence = getArgumentsSequence();
-
-		if (commaSequence != null)
+		PsiElement expression = getSequence();
+		if (expression == null)
 		{
-			return PerlPsiUtil.getFirstContentTokenOfString(commaSequence.getFirstChild());
+			return null;
 		}
 
-		return null;
+		return PerlPsiUtil.getFirstContentTokenOfString(expression.getFirstChild());
 	}
 
 
 	@Override
 	public PsiPerlBlock getBlock()
 	{
-		PsiPerlCommaSequenceExpr argumentsSequence = getArgumentsSequence();
+		PsiPerlCommaSequenceExpr argumentsSequence = getSequence();
 		if (argumentsSequence != null)
 		{
 			PsiPerlSubExpr subArgument = PsiTreeUtil.getChildOfType(argumentsSequence, PsiPerlSubExpr.class);
@@ -77,39 +78,16 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 	@Nullable
-	protected PsiPerlCommaSequenceExpr getArgumentsSequence()
+	private PsiPerlCommaSequenceExpr getSequence()
 	{
-		PsiPerlCallArguments callArguments = getCallArguments();
-
-		if (callArguments != null)
-		{
-			PsiElement commaSequence = callArguments.getFirstChild();
-			if (commaSequence instanceof PsiPerlCommaSequenceExpr)
-			{
-				return (PsiPerlCommaSequenceExpr) commaSequence;
-			}
-		}
-		return null;
+		PsiElement firstChild = getFirstChild();
+		return firstChild instanceof PsiPerlCommaSequenceExpr ? (PsiPerlCommaSequenceExpr) firstChild : null;
 	}
 
 	@Override
 	public String getExplicitPackageName()
 	{
 		return HELPER_NAMESPACE_NAME;
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlCallArguments getCallArguments()
-	{
-		return findChildByClass(PsiPerlCallArguments.class);
-	}
-
-	@Override
-	@Nullable
-	public PsiPerlMethod getMethod()
-	{
-		return findChildByClass(PsiPerlMethod.class);
 	}
 
 
@@ -119,17 +97,4 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 		return true;
 	}
 
-	@Override
-	@NotNull
-	public PsiPerlParenthesisedCallArguments getParenthesisedCallArguments()
-	{
-		return notNullChild(PsiTreeUtil.getChildOfType(this, PsiPerlParenthesisedCallArguments.class));
-	}
-
-	@Override
-	@NotNull
-	public PsiPerlExpr getExpr()
-	{
-		return notNullChild(PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class));
-	}
 }

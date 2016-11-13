@@ -31,6 +31,11 @@ public class PerlParserTest extends PerlParserTestBase
 		return "testData/parser/perl";
 	}
 
+	public void testMojoliciousHelperDeclaration()
+	{
+		doTest();
+	}
+
 	public void testCoreModules()
 	{
 		doTest();

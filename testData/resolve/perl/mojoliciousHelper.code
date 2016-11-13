@@ -1,0 +1,3 @@
+$self->helper(myhelper => sub { return 'I am your helper!' });
+
+Mojolicious::Controller->myhelper();
