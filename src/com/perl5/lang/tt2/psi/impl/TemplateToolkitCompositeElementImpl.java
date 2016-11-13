@@ -18,6 +18,7 @@ package com.perl5.lang.tt2.psi.impl;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiReference;
 import com.perl5.lang.tt2.psi.TemplateToolkitCompositeElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,5 +30,19 @@ public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement im
 	public TemplateToolkitCompositeElementImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@NotNull
+	@Override
+	public final PsiReference[] getReferences()
+	{
+		return getReferencesWithCache();
+	}
+
+	@Override
+	public final PsiReference getReference()
+	{
+		PsiReference[] references = getReferences();
+		return references.length == 0 ? null : references[0];
 	}
 }

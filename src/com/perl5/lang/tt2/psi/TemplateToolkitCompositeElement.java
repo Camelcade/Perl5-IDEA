@@ -17,10 +17,11 @@
 package com.perl5.lang.tt2.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlReferenceOwner;
 
 /**
  * Created by hurricup on 05.06.2016.
  */
-public interface TemplateToolkitCompositeElement extends PsiElement
+public interface TemplateToolkitCompositeElement extends PsiElement, PerlReferenceOwner
 {
 }
