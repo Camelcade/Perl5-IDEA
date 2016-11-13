@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -33,6 +34,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
+
 /**
  * Created by hurricup on 25.11.2015.
  */
@@ -43,6 +46,8 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 	protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
 	@SuppressWarnings("unchecked")
 	protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = new ArrayList<>();
+	final static GeneratedParserUtilBase.Parser SUPER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_SUPER);
+	final static GeneratedParserUtilBase.Parser INNER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_INNER);
 	protected static TokenSet PARSER_TOKEN_SET;
 
 	static
@@ -205,21 +210,10 @@ public class MooseParserExtensionImpl extends PerlParserExtension implements Moo
 		return parseOverride(b, l) ||
 				parseHas(b, l) ||
 				parseDefault(b, l) ||
-				parseMooseInvocation(b, l, RESERVED_INNER) ||
-				parseMooseInvocation(b, l, RESERVED_SUPER) ||
+				PerlParserUtil.parseCustomCallExpr(b, l, INNER_PARSER) ||
+				PerlParserUtil.parseCustomCallExpr(b, l, SUPER_PARSER) ||
 				super.parseTerm(b, l);
 	}
-
-	public boolean parseMooseInvocation(PerlBuilder b, int l, IElementType keyToken)
-	{
-		if (b.getTokenType() == keyToken)
-		{
-			b.setNextSubElementType(keyToken);
-			return PerlParserImpl.sub_call_expr(b, l);
-		}
-		return false;
-	}
-
 
 	@Nullable
 	@Override

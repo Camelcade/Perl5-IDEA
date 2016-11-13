@@ -993,7 +993,7 @@ private nested_element_variation ::=
     | hash_index
     | array_index
     | regular_nested_call
-    | parenthesised_call_arguments
+    | default_parenthesised_call_arguments
     | scalar_call
     | post_deref_expr
     | post_deref_glob_expr
@@ -1014,32 +1014,29 @@ private recover_bracketed_expression ::= !']'
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 meta method ::= <<x1>>
-meta nested_call ::= <<method <<x1>>>> [parenthesised_call_arguments]	// reused by mk_accessor and so on
+meta nested_call ::= <<method <<x1>>>> [<<parenthesised_call_arguments <<x2>>>>]	// reused by mk_accessor and so on
 meta call_arguments ::= <<x1>>
-parenthesised_call_arguments ::= <<parse_parenthesized_expression optional_expression>> !'['
+private default_parenthesised_call_arguments ::= <<parenthesised_call_arguments optional_expression>>
+meta parenthesised_call_arguments ::= <<parse_parenthesized_expression <<x1>>>> !'['
 private optional_expression ::= [expr]
 
-private regular_nested_call ::= <<nested_call regular_nested_call_tokens>>
+private regular_nested_call ::= <<nested_call regular_nested_call_tokens optional_expression>>
 private regular_nested_call_tokens ::= [QUALIFYING_PACKAGE] SUB_NAME
-scalar_call ::= scalar_or_element [parenthesised_call_arguments]
+scalar_call ::= scalar_or_element [default_parenthesised_call_arguments]
 
 sub_call_expr ::=
- 	normal_leftward_call |
+ 	<<leftward_call method_tokens>> |
  	named_unary_call |
  	argumentless_call |
- 	normal_rightward_call
+ 	<<rightward_call method_tokens>>
 
 private argumentless_call ::= <<method 'argumentless'>>
 
 private named_unary_call ::= <<method named_unary_calee>> [<<call_arguments unary_expr>>]
 private named_unary_calee ::= 'unary' | '-t'
 
-private normal_rightward_call ::= <<rightward_call method_tokens>>
 private meta rightward_call ::= <<method <<x1>>>> [<<call_arguments parse_call_arguments>>]
-
-// this should come first to avoid ambiguation method (list)[index]
-private normal_leftward_call ::= <<leftward_call method_tokens>>
-private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} parenthesised_call_arguments
+private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parenthesised_call_arguments
 
 //// fixme this should depend on prototype
 private parse_call_arguments ::=

@@ -547,4 +547,23 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		}
 		return false;
 	}
+
+	/**
+	 * Parses leftward or rightward call with custom sub token
+	 *
+	 * @param b builder
+	 * @param l level
+	 * @return result
+	 */
+	public static boolean parseCustomCallExpr(PsiBuilder b, int l, Parser tokenParser)
+	{
+		PsiBuilder.Marker m = b.mark();
+		if (PerlParserImpl.leftward_call(b, l, tokenParser) || PerlParserImpl.rightward_call(b, l, tokenParser))
+		{
+			m.done(SUB_CALL_EXPR);
+			return true;
+		}
+		m.rollbackTo();
+		return false;
+	}
 }
