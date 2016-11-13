@@ -89,20 +89,6 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 		return true;
 	}
 
-	@NotNull
-	@Override
-	public final PsiReference[] getReferences()
-	{
-		return getReferencesWithCache();
-	}
-
-	@Override
-	public final PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
-
 	@Override
 	public boolean hasReferences()
 	{

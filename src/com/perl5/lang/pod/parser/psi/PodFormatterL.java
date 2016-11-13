@@ -18,13 +18,12 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFormatterL extends PsiElement, PodFormatter, PodSection, PerlReferenceOwner
+public interface PodFormatterL extends PsiElement, PodFormatter, PodSection
 {
 	@Nullable
 	PodLinkDescriptor getLinkDescriptor();

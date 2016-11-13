@@ -18,12 +18,13 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation
+public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation, PerlReferenceOwner
 {
 	/**
 	 * Returns if element contains direct child X<>

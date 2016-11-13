@@ -22,6 +22,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
@@ -55,6 +56,20 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
 		StringBuilder builder = new StringBuilder();
 		renderElementAsText(builder, new PodRenderingContext());
 		return builder.toString();
+	}
+
+	@NotNull
+	@Override
+	public final PsiReference[] getReferences()
+	{
+		return getReferencesWithCache();
+	}
+
+	@Override
+	public final PsiReference getReference()
+	{
+		PsiReference[] references = getReferences();
+		return references.length == 0 ? null : references[0];
 	}
 
 	@Override
