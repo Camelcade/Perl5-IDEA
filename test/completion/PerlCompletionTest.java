@@ -41,6 +41,16 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testUnresolvedSubDeclaration()
+	{
+		doTest("somesubcustom");
+	}
+
+	public void testUnresolvedSubDefinition()
+	{
+		doTest("somesubcustom");
+	}
+
 	public void testConstants()
 	{
 		doTestSubs("ALONECONST1", "ALONECONST2", "ALONECONST3", "MULTI_CONST1", "MULTI_CONST2", "MULTI_CONST3");

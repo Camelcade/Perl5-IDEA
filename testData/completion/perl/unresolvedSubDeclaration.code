@@ -1,0 +1,6 @@
+somesubcustom();
+sleep 100;
+warn 'something';
+wantarray;
+
+sub <caret>

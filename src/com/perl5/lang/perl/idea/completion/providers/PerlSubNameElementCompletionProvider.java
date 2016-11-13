@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,11 +34,11 @@ public class PerlSubNameElementCompletionProvider extends CompletionProvider<Com
 							   ProcessingContext context,
 							   @NotNull CompletionResultSet resultSet)
 	{
-		PsiElement element = parameters.getOriginalPosition();
+		PsiElement element = parameters.getPosition();
 
-		if (element != null && element.getParent() instanceof PerlSubDefinitionBase)
+		if (element.getParent() instanceof PerlSubBase)
 		{
-			PerlSubDefinitionBase subDefinitionBase = (PerlSubDefinitionBase) element.getParent();
+			PerlSubBase subDefinitionBase = (PerlSubBase) element.getParent();
 			PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
 			PerlSubCompletionUtil.fillWithNotOverridedSubs(subDefinitionBase, resultSet);
 		}

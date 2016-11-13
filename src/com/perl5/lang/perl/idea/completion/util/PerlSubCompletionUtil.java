@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -108,7 +107,7 @@ public class PerlSubCompletionUtil
 				subDefinition);
 	}
 
-	public static void fillWithUnresolvedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
+	public static void fillWithUnresolvedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet)
 	{
 		final String packageName = subDefinition.getPackageName();
 		final Set<String> namesSet = new THashSet<String>();
@@ -122,14 +121,21 @@ public class PerlSubCompletionUtil
 				{
 					PerlSubNameElement subNameElement = method.getSubNameElement();
 
-					if (subNameElement != null && subNameElement.isValid()) // fixme don't understand how this happened
+					if (subNameElement.isValid())
 					{
 
 						String subName = subNameElement.getName();
 
 						if (StringUtil.isNotEmpty(subName) && !namesSet.contains(subName))
 						{
-							for (PsiReference reference : subNameElement.getReferences())
+							PsiReference[] references = subNameElement.getReferences();
+							if (references.length == 0)
+							{
+								super.visitMethod(method);
+								return;
+							}
+
+							for (PsiReference reference : references)
 							{
 								if (reference.resolve() != null)
 								{
@@ -149,18 +155,14 @@ public class PerlSubCompletionUtil
 
 	}
 
-	public static void fillWithNotOverridedSubs(final PerlSubDefinitionBase subDefinition, final CompletionResultSet resultSet)
+	public static void fillWithNotOverridedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet)
 	{
 		PerlPackageUtil.processNotOverridedMethods(
 				PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
-				new Processor<PerlSubBase>()
+				subDefinitionBase ->
 				{
-					@Override
-					public boolean process(PerlSubBase subDefinitionBase)
-					{
-						resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
-						return true;
-					}
+					resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
+					return true;
 				}
 		);
 	}
