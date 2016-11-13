@@ -29,6 +29,23 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlNamespaceElementManipulator extends AbstractElementManipulator<PerlNamespaceElement>
 {
+	@NotNull
+	public static TextRange getRangeInString(CharSequence elementText)
+	{
+		int endOffset = elementText.length();
+		while (endOffset > 0)
+		{
+			char currentChar = elementText.charAt(endOffset - 1);
+			if (currentChar != '\'' && currentChar != ':')
+			{
+				break;
+			}
+			endOffset--;
+		}
+
+		return endOffset == 0 ? TextRange.EMPTY_RANGE : TextRange.create(0, endOffset);
+	}
+
 	@Override
 	public PerlNamespaceElement handleContentChange(@NotNull PerlNamespaceElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
 	{
@@ -58,6 +75,6 @@ public class PerlNamespaceElementManipulator extends AbstractElementManipulator<
 	@Override
 	public TextRange getRangeInElement(@NotNull PerlNamespaceElement element)
 	{
-		return PerlPackageUtil.getPackageRangeFromOffset(0, element.getText());
+		return getRangeInString(element.getText());
 	}
 }

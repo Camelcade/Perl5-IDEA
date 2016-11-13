@@ -16,13 +16,10 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
@@ -36,43 +33,32 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlNamespaceElement
+public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences implements PerlNamespaceElement
 {
-	protected AtomicNotNullLazyValue<PsiReference[]> myReferences;
-
 	public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text)
 	{
 		super(type, text);
-		createMyReferences();
 	}
 
-	private void createMyReferences()
+	@Override
+	public PsiReference[] computeReferences()
 	{
-		myReferences = new AtomicNotNullLazyValue<PsiReference[]>()
-		{
-			@NotNull
-			@Override
-			protected PsiReference[] compute()
-			{
-				PerlNamespaceElement element = PerlNamespaceElementImpl.this;
-				PsiElement nameSpaceContainer = element.getParent();
+		PsiElement nameSpaceContainer = getParent();
 
-				if (nameSpaceContainer instanceof PsiPerlUseStatement
-						|| nameSpaceContainer instanceof PsiPerlRequireExpr
-						)
-				{
-					return new PsiReference[]{new PerlNamespaceFileReference(element, null)};
-				}
-				else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
-				{
-					return PsiReference.EMPTY_ARRAY;
-				}
-				else
-				{
-					return new PsiReference[]{new PerlNamespaceReference(element, null)};
-				}
-			}
-		};
+		if (nameSpaceContainer instanceof PsiPerlUseStatement
+				|| nameSpaceContainer instanceof PsiPerlRequireExpr
+				)
+		{
+			return new PsiReference[]{new PerlNamespaceFileReference(this)};
+		}
+		else if (nameSpaceContainer instanceof PerlNamespaceDefinition)
+		{
+			return PsiReference.EMPTY_ARRAY;
+		}
+		else
+		{
+			return new PsiReference[]{new PerlNamespaceReference(this)};
+		}
 	}
 
 	@Override
@@ -98,19 +84,6 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 	public String getCanonicalName()
 	{
 		return PerlPackageUtil.getCanonicalPackageName(getName());
-	}
-
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return myReferences.getValue();
-	}
-
-	@Override
-	public PsiReference getReference()
-	{
-		return myReferences.getValue().length > 0 ? myReferences.getValue()[0] : null;
 	}
 
 	@Override
@@ -207,18 +180,5 @@ public class PerlNamespaceElementImpl extends LeafPsiElement implements PerlName
 			}
 		}
 		return namespaceFiles;
-	}
-
-	@Override
-	public TextRange getTextRange()
-	{
-		return PerlPackageUtil.getPackageRangeFromOffset(getStartOffset(), getText());
-	}
-
-	@Override
-	public void clearCaches()
-	{
-		super.clearCaches();
-		createMyReferences();
 	}
 }
