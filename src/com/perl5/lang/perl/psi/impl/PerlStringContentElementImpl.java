@@ -70,7 +70,7 @@ public class PerlStringContentElementImpl extends LeafPsiElement implements Perl
 				List<PsiReference> result = new ArrayList<PsiReference>();
 				if (looksLikePackage())
 				{
-					result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this, null));
+					result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this));
 				}
 				else
 				{

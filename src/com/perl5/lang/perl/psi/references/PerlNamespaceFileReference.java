@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.references;
 
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
@@ -32,16 +31,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement>
 {
-	public PerlNamespaceFileReference(@NotNull PerlNamespaceElement element, TextRange textRange)
+	public PerlNamespaceFileReference(PerlNamespaceElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 	public String getPackageName()
 	{
 		return myElement.getCanonicalName();
 	}
-
 
 	@Override
 	protected ResolveResult[] resolveInner(boolean incompleteCode)

@@ -112,7 +112,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
 			PsiElement meOrCommaSequence = string.getParent();
 			if (meOrCommaSequence == this || meOrCommaSequence != null && meOrCommaSequence.getParent() == this)
 			{
-				return new PsiReference[]{new PerlNamespaceReference(element, null)};
+				return new PsiReference[]{new PerlNamespaceReference(element)};
 			}
 		}
 		return null;

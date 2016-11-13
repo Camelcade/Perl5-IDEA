@@ -33,6 +33,11 @@ import java.util.List;
  */
 public class PerlNamespaceReference extends PerlCachingReference<PsiElement>
 {
+	public PerlNamespaceReference(PsiElement psiElement)
+	{
+		super(psiElement);
+	}
+
 	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
 	{
 		super(element, textRange);

@@ -17,12 +17,10 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +30,9 @@ import java.util.List;
  */
 public class PerlSubReferenceSuper extends PerlSubReferenceSimple
 {
-	public PerlSubReferenceSuper(@NotNull PsiElement element, TextRange textRange)
+	public PerlSubReferenceSuper(PsiElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 

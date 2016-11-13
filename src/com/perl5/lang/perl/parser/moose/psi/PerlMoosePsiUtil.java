@@ -47,7 +47,7 @@ public class PerlMoosePsiUtil
 
 			if (PsiTreeUtil.isAncestor(expr, element, true) && !PsiTreeUtil.isAncestor(lastElement, element, true))
 			{
-				return new PsiReference[]{new PerlSubReferenceSuper(element, null)};
+				return new PsiReference[]{new PerlSubReferenceSuper(element)};
 			}
 		}
 
