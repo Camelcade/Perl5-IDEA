@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
@@ -26,14 +25,14 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTerminatorElement>
 {
-	public PerlHeredocReference(@NotNull PerlHeredocTerminatorElement element, TextRange textRange)
+
+	public PerlHeredocReference(PerlHeredocTerminatorElement psiElement)
 	{
-		super(element, textRange);
+		super(psiElement);
 	}
 
 	@Override

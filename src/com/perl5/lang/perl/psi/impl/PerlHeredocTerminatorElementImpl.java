@@ -27,8 +27,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement
 {
-	protected final PsiReference[] myReferences = new PsiReference[]{new PerlHeredocReference(this, null)};
-
 	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
 	{
 		super(type, text);
@@ -49,15 +47,28 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 
 	@NotNull
 	@Override
-	public PsiReference[] getReferences()
+	public final PsiReference[] getReferences()
 	{
-		return myReferences;
+		return getReferencesWithCache();
 	}
 
 	@Override
-	public PsiReference getReference()
+	public final PsiReference getReference()
 	{
-		return myReferences[0];
+		PsiReference[] references = getReferences();
+		return references.length == 0 ? null : references[0];
+	}
+
+	@Override
+	public PsiReference[] computeReferences()
+	{
+		return new PsiReference[]{new PerlHeredocReference(this)};
+	}
+
+	@Override
+	public boolean hasReferences()
+	{
+		return true;
 	}
 
 	@Override

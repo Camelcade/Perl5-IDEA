@@ -21,6 +21,6 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by evstigneev on 28.09.2015.
  */
-public interface PerlHeredocTerminatorElement extends PsiElement
+public interface PerlHeredocTerminatorElement extends PsiElement, PerlReferenceOwner
 {
 }
