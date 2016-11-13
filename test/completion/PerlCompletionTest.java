@@ -21,6 +21,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXExports;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancer2DSL;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancerDSL;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +35,13 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 {
 
 	private List<String> SUPER_HERE_DOC_MARKER = Arrays.asList("MYSUPERMARKER");
+
+	@Override
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+		getProject().getComponent(PerlNamesCache.class).forceCacheUpdate();
+	}
 
 	@Override
 	protected String getTestDataPath()
@@ -106,6 +114,11 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		doTestSubs(dancerCopy);
 	}
 
+	public void testImportPosixOk()
+	{
+		doTestSubs("isgreaterequal");
+	}
+
 	public void testImportPosix()
 	{
 		ArrayList<String> posixCopy = new ArrayList<>(POSIXExports.EXPORT);
@@ -116,11 +129,6 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 	public void testImportPosixVar()
 	{
 		doTestHashVariables("SIGRT");
-	}
-
-	public void testImportPosixOk()
-	{
-		doTestSubs("isgreaterequal");
 	}
 
 	private void doTestSubs(String... additional)

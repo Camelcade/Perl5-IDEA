@@ -77,6 +77,11 @@ public class PerlNamesCache implements ProjectComponent
 
 	}
 
+	public void forceCacheUpdate()
+	{
+		cacheUpdaterWorker.run();
+	}
+
 	@Override
 	public void initComponent()
 	{
