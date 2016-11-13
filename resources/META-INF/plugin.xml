@@ -64,6 +64,7 @@
       <li>Possible NPE on running the script if settings file been corrupted</li>
       <li>Optimized parsing of multiple namespaces</li>
       <li>Optimized variables resolving, made it 10 times faster</li>
+      <li>Optimized debugger pausing performance with many evals on the perl side, by <a href="https://github.com/Camelcade/Perl5-IDEA/commit/ce3fc66e3aa800fb90d85812a8877c8839ba4df9">@mbarbon</a>.</li>
       </ul>
      </p>
     ]]>
