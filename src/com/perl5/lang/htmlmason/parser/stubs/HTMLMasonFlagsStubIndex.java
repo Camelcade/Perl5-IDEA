@@ -16,16 +16,16 @@
 
 package com.perl5.lang.htmlmason.parser.stubs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.03.2016.
  * Index used to handle parent-to-child hierarchy resolution
  */
-public class HTMLMasonFlagsStubIndex extends StringStubIndexExtension<HTMLMasonFlagsStatement>
+public class HTMLMasonFlagsStubIndex extends PerlStubIndexBase<HTMLMasonFlagsStatement>
 {
 	public static final StubIndexKey<String, HTMLMasonFlagsStatement> KEY = StubIndexKey.createIndexKey("perl.html.mason.flags");
 	public static final int VERSION = 2;

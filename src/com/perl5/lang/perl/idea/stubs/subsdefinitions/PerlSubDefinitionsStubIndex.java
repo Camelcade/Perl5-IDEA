@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdefinitions;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionsStubIndex extends StringStubIndexExtension<PerlSubDefinitionBase>
+public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefinitionBase>
 {
 	public static final int VERSION = 2;
 	public static final StubIndexKey<String, PerlSubDefinitionBase> KEY = StubIndexKey.createIndexKey("perl.sub.definition");

@@ -16,15 +16,15 @@
 
 package com.perl5.lang.pod.parser.psi.stubs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodStubIndex extends StringStubIndexExtension<PodStubBasedSection>
+public class PodStubIndex extends PerlStubIndexBase<PodStubBasedSection>
 {
 	public static final StubIndexKey<String, PodStubBasedSection> KEY = StubIndexKey.createIndexKey("pod.index");
 

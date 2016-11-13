@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.idea.stubs.namespaces;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubIndex extends StringStubIndexExtension<PerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubIndex extends PerlStubIndexBase<PerlNamespaceDefinition>
 {
 	public static final int VERSION = 5;
 	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");

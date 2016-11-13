@@ -16,15 +16,15 @@
 
 package com.perl5.lang.mojolicious.psi.stubs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelpersStubIndex extends StringStubIndexExtension<MojoliciousHelperDeclaration>
+public class MojoliciousHelpersStubIndex extends PerlStubIndexBase<MojoliciousHelperDeclaration>
 {
 	public static final int VERSION = 3;
 	public static final StubIndexKey<String, MojoliciousHelperDeclaration> KEY = StubIndexKey.createIndexKey("perl.mojo.helper");

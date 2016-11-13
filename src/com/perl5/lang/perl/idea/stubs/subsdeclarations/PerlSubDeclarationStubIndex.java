@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.idea.stubs.subsdeclarations;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubIndex extends StringStubIndexExtension<PsiPerlSubDeclaration>
+public class PerlSubDeclarationStubIndex extends PerlStubIndexBase<PsiPerlSubDeclaration>
 {
 	public static final int VERSION = 4;
 	public static final StubIndexKey<String, PsiPerlSubDeclaration> KEY = StubIndexKey.createIndexKey("perl.sub.declaration");

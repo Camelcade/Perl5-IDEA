@@ -16,15 +16,15 @@
 
 package com.perl5.lang.mason2.psi.stubs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 16.01.2016.
  */
-public class MasonNamespaceDefitnitionsStubIndex extends StringStubIndexExtension<MasonNamespaceDefinition>
+public class MasonNamespaceDefitnitionsStubIndex extends PerlStubIndexBase<MasonNamespaceDefinition>
 {
 	public static final int VERSION = 2;
 	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason2.namespace");

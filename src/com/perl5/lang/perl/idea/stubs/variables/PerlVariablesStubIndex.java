@@ -16,14 +16,14 @@
 
 package com.perl5.lang.perl.idea.stubs.variables;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 
 /**
  * Created by hurricup on 30.05.2015.
  */
-public abstract class PerlVariablesStubIndex extends StringStubIndexExtension<PerlVariableDeclarationWrapper>
+public abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVariableDeclarationWrapper>
 {
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
 	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");

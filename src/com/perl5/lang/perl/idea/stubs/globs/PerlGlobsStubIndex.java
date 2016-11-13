@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.idea.stubs.globs;
 
-import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobsStubIndex extends StringStubIndexExtension<PsiPerlGlobVariable>
+public class PerlGlobsStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable>
 {
 	public static final int VERSION = 5;
 	public static final StubIndexKey<String, PsiPerlGlobVariable> KEY = StubIndexKey.createIndexKey("perl.glob");
