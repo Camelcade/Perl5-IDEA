@@ -5,7 +5,7 @@ sub somesub;
 
 package main;
 
-Foo::Bar::Package->somesub();
+Some::Other::Package->somesub();
 Some::Other::Package::->somesub();
 Some::Other::Package::somesub();
 Some::Other::Package'somesub();

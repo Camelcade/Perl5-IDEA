@@ -1123,6 +1123,15 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 		return StringUtil.equals(yytext(), heredocQueue.peekFirst().getMarker());
 	}
 
+	protected IElementType registerPackage(IElementType tokenType)
+	{
+		if (myProject != null)
+		{
+			myPackageNamesProvider.getValue().add(PerlPackageUtil.getCanonicalPackageName(yytext().toString()));
+		}
+		return tokenType;
+	}
+
 	/**
 	 * Changes current state to nosharp one if necessary
 	 */

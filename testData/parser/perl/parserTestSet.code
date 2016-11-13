@@ -1,3 +1,6 @@
+package Foo;
+package Foo::Bar;
+package main;
 
 my @array;
 my $array_ref;
