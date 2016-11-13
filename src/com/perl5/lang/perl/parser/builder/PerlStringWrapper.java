@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 23.04.2016.
  */
+@Deprecated // should wrap all psi element
 public class PerlStringWrapper
 {
 	private final IElementType myTargetElementType;

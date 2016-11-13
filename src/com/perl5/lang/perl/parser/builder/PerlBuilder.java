@@ -122,11 +122,13 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 		return oldValue;
 	}
 
+	@Deprecated // to be removed
 	public PerlStringWrapper getStringWrapper()
 	{
 		return stringWrapper;
 	}
 
+	@Deprecated // to be removed
 	public PerlStringWrapper setStringWrapper(PerlStringWrapper stringWrapper)
 	{
 		PerlStringWrapper currentValue = this.stringWrapper;
@@ -137,11 +139,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 	public PerlParserImpl getPerlParser()
 	{
 		return perlParser;
-	}
-
-	public void setNextSubElementType(IElementType subElement)
-	{
-		// fixme implement
 	}
 
 }
