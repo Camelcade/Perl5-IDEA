@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.parser.psi.util;
 
-import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;

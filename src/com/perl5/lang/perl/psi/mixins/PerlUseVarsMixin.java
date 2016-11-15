@@ -17,7 +17,8 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.IPerlUseVars;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import org.jetbrains.annotations.Nullable;
 
 /**

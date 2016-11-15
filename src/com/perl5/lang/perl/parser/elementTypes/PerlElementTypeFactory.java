@@ -63,7 +63,6 @@ public class PerlElementTypeFactory
 	));
 
 
-
 	public static IElementType getTokenType(@NotNull String name)
 	{
 		if (STRING_TOKENS.contains(name))

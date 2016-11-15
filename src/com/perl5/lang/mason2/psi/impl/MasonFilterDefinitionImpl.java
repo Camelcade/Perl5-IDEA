@@ -49,14 +49,14 @@ public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl impleme
 	{
 		List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
 		newImplicitVariables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					YIELD_VARIABLE_NAME,
-					true,
-					false,
-					false,
-					this
-			));
+				getManager(),
+				PerlLanguage.INSTANCE,
+				YIELD_VARIABLE_NAME,
+				true,
+				false,
+				false,
+				this
+		));
 		return newImplicitVariables;
 	}
 }

@@ -222,6 +222,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	protected static class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>
 	{
 		private List<PerlSubArgument> myArguments = new ArrayList<PerlSubArgument>();
+
 		@Override
 		public boolean process(PsiPerlStatement statement)
 		{
