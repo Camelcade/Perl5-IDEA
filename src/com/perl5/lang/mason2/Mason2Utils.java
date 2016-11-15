@@ -19,6 +19,8 @@ package com.perl5.lang.mason2;
 import com.intellij.openapi.progress.PerformInBackgroundOption;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.DumbModeTask;
+import com.intellij.openapi.project.DumbServiceImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -27,6 +29,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndexImpl;
+import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.perl5.lang.htmlmason.MasonCoreUtils;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
@@ -164,19 +167,11 @@ public class Mason2Utils
 			}
 			if (index instanceof FileBasedIndexImpl)
 			{
-				new Task.Backgroundable(project, "Reindexing Files", false, PerformInBackgroundOption.ALWAYS_BACKGROUND)
+				DumbModeTask changedFilesIndexingTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(project);
+				if (changedFilesIndexingTask != null)
 				{
-					@Override
-					public void run(@NotNull ProgressIndicator indicator)
-					{
-						double totalFiles = ((FileBasedIndexImpl) index).getChangedFileCount();
-						double filesLeft;
-						while ((filesLeft = ((FileBasedIndexImpl) index).getChangedFileCount()) > 0)
-						{
-							indicator.setFraction((totalFiles - filesLeft) / totalFiles);
-						}
-					}
-				}.queue();
+					DumbServiceImpl.getInstance(project).queueTask(changedFilesIndexingTask);
+				}
 			}
 		}
 	}
