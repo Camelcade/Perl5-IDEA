@@ -49,6 +49,36 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testPackageToStringQ()
+	{
+		doTestStringCompletion();
+	}
+
+	public void testPackageToStringQPartial()
+	{
+		doTest(LIBRARY_PACKAGES);
+	}
+
+	public void testPackageToStringQQ()
+	{
+		doTestStringCompletion();
+	}
+
+	public void testPackageToStringQWFirst()
+	{
+		doTestStringCompletion();
+	}
+
+	public void testPackageToStringQWNonFirst()
+	{
+		doTestStringCompletion();
+	}
+
+	private void doTestStringCompletion()
+	{
+		doTest(REF_TYPES, LIBRARY_PACKAGES, Collections.singletonList("Foo::Bar::Bla"));
+	}
+
 	public void testMojoliciousHelper()
 	{
 		doTest("myhelper", "SUPER::");

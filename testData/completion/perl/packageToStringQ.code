@@ -1,0 +1,4 @@
+package Foo::Bar::Bla;
+
+
+say '<caret>';

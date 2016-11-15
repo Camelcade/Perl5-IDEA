@@ -1,0 +1,7 @@
+package Foo::Bar::Bla;
+
+
+say qw(
+	Some::Thing
+	<caret>
+);
