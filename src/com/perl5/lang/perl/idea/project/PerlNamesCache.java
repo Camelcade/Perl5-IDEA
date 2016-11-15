@@ -45,16 +45,19 @@ public class PerlNamesCache implements ProjectComponent
 		@Override
 		public void run()
 		{
-			Set<String> newSet = new THashSet<>();
-			newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-			newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-			newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-			KNOWN_SUBS = newSet;
+			if (isTestMode() || !DumbService.isDumb(myProject))
+			{
+				Set<String> newSet = new THashSet<>();
+				newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+				newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+				newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
+				KNOWN_SUBS = newSet;
 
-			newSet = new THashSet<>();
-			newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
-			newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-			KNOWN_PACKAGES = newSet;
+				newSet = new THashSet<>();
+				newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
+				newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+				KNOWN_PACKAGES = newSet;
+			}
 		}
 	};
 	//	long notifyCounter = 0;
@@ -130,11 +133,8 @@ public class PerlNamesCache implements ProjectComponent
 
 			while (!stopThis)
 			{
-//				long start = System.currentTimeMillis();
-
 				myApplication.runReadAction(cacheUpdaterWorker);
 				lastUpdate = System.currentTimeMillis();
-//				System.err.println("Updated cache in " + (System.currentTimeMillis() - start) + " in " + Thread.currentThread().getId());
 				isNotified = false;
 
 				synchronized (this)
@@ -153,7 +153,7 @@ public class PerlNamesCache implements ProjectComponent
 
 		public void update()
 		{
-			if (!isNotified && lastUpdate + TTL < System.currentTimeMillis() && (isTestMode() || !DumbService.isDumb(myProject)))
+			if (!isNotified && lastUpdate + TTL < System.currentTimeMillis())
 			{
 				synchronized (this)
 				{
