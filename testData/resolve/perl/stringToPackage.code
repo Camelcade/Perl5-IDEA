@@ -1,0 +1,10 @@
+package Foo::Bar::Bla;
+
+
+say 'Foo::Bar::Bla';
+
+my @arr = qw(
+    Foo::Bar::Bla
+    );
+
+say 'Foo::Bar::Bla som';

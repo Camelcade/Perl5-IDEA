@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -35,6 +36,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.perl.lexer.PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN;
+
 /**
  * Created by hurricup on 23.05.2015.
  */
@@ -48,7 +51,6 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
 					"(" + FILE_PATH_PATTERN_TEXT + ")" + FILE_PATH_DELIMITER_PATTERN_TEXT + "?"
 	);
 	protected Boolean looksLikePath = null;
-	protected Boolean looksLikePackage = null;
 
 	public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text)
 	{
@@ -97,13 +99,8 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
 	@Override
 	public boolean looksLikePackage()
 	{
-		if (looksLikePackage != null)
-		{
-			return looksLikePackage;
-		}
-
-		// fixme
-		return false;
+		String elementText = getText();
+		return StringUtil.containsAnyChar(elementText, ":'") && AMBIGUOUS_PACKAGE_PATTERN.matcher(elementText).matches();
 	}
 
 	@Override
