@@ -37,6 +37,11 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 			"MyTest::Something"
 	);
 
+	protected static List<String> LIBRARY_GLOBAL_ARRAYS = Arrays.asList(
+			"MyTest::Some::Package::EXPORT",
+			"MyTest::Some::Package::EXPORT_OK"
+	);
+
 	protected static List<String> BUILT_IN_VERSIONS = Arrays.asList(
 			"v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
 			"v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
@@ -49,8 +54,8 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 	protected static List<String> BUILT_IN_HASHES = new ArrayList<>(PerlHashUtil.BUILT_IN);
 	protected static List<String> BUILT_IN_GLOBS = new ArrayList<>(PerlGlobUtil.BUILT_IN);
 
-	protected static List<String> SCALAR_LOOKUPS = mergeLists(BUILT_IN_SCALARS, BUILT_IN_ARRAYS, BUILT_IN_HASHES);
-	protected static List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES);
+	protected static List<String> SCALAR_LOOKUPS = mergeLists(BUILT_IN_SCALARS, BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
+	protected static List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
 	protected static List<String> HASH_LOOKUPS = mergeLists(BUILT_IN_HASHES);
 
 	protected static List<String> BUILT_IN_SUBS = new ArrayList<>(PerlBuiltInSubs.BUILT_IN);
