@@ -21,3 +21,7 @@ use constant {
 	multiconst1 => 1,
 	MULTICONST2 => 2,
 };
+
+sub unimportedsub{}
+
+use constant unimportedconstant => 1;
