@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationDeprecatedImpl;
+import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ public class PerlVariableUtil
 
 		for (PerlAnnotation annotation : annotations)
 		{
-			if (annotation instanceof PerlAnnotationDeprecatedImpl)
+			if (annotation instanceof PsiPerlAnnotationDeprecated)
 			{
 				myAnnotations.setIsDeprecated();
 			}
