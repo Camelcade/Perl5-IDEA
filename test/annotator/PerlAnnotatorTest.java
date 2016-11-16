@@ -17,6 +17,7 @@
 package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
 
 /**
  * Created by hurricup on 09.11.2016.
@@ -32,6 +33,13 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase
 	public void testConstants()
 	{
 		doTest();
+	}
+
+	public void testDeprecations()
+	{
+		initWithFileSmart();
+		myFixture.enableInspections(PerlDeprecatedInspection.class);
+		myFixture.checkHighlighting(true, false, false);
 	}
 
 	private void doTest()

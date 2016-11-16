@@ -16,9 +16,10 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
+import com.intellij.openapi.util.Pair;
+import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -103,4 +104,68 @@ public class PerlResolveUtil
 		return variableProcessor.getResult();
 	}
 
+	/**
+	 * Processing all targets of all references of all elements
+	 *
+	 * @param processor processor
+	 * @param elements  references sources
+	 * @return processor result
+	 */
+	public static boolean processElementReferencesResolveResults(@NotNull Processor<Pair<PsiElement, PsiReference>> processor, PsiElement... elements)
+	{
+		if (elements == null || elements.length == 0)
+		{
+			return true;
+		}
+
+		for (PsiElement element : elements)
+		{
+			if (!processResolveElements(processor, element.getReferences()))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Processing target elements of array of references
+	 *
+	 * @param processor  processor
+	 * @param references references to iterate
+	 * @return processor result
+	 */
+	public static boolean processResolveElements(@NotNull Processor<Pair<PsiElement, PsiReference>> processor, @Nullable PsiReference... references)
+	{
+		if (references == null || references.length == 0)
+		{
+			return true;
+		}
+
+		for (PsiReference reference : references)
+		{
+			if (reference instanceof PsiPolyVariantReference)
+			{
+				for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
+				{
+					PsiElement targetElement = resolveResult.getElement();
+					if (targetElement != null && !processor.process(Pair.create(targetElement, reference)))
+					{
+						return false;
+					}
+				}
+			}
+			else if (reference != null)
+			{
+				PsiElement targetElement = reference.resolve();
+				if (targetElement != null && !processor.process(Pair.create(targetElement, reference)))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

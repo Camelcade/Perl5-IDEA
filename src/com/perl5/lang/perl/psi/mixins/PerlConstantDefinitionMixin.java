@@ -19,17 +19,23 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlConstantDefinition;
+import com.perl5.lang.perl.psi.PsiPerlUseStatementConstant;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -55,6 +61,32 @@ public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithT
 			return children[children.length - 1];
 		}
 		return null;
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if (visitor instanceof PerlVisitor)
+		{
+			((PerlVisitor) visitor).visitConstantDefinition(this);
+		}
+		else
+		{
+			super.accept(visitor);
+		}
+	}
+
+	@NotNull
+	@Override
+	public List<PerlAnnotation> getAnnotationList()
+	{
+		List<PerlAnnotation> annotationList = super.getAnnotationList();
+		if (!annotationList.isEmpty())
+		{
+			return annotationList;
+		}
+
+		return PerlPsiUtil.collectAnnotations(PsiTreeUtil.getParentOfType(this, PsiPerlUseStatementConstant.class));
 	}
 
 	@Override

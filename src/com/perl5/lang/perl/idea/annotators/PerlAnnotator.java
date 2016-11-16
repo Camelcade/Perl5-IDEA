@@ -54,17 +54,17 @@ public class PerlAnnotator extends PerlBaseAnnotator
 
 			if (parent instanceof PerlNamespaceDefinition)
 			{
-				decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, namespaceElement.isDeprecated());
+				decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, false);
 			}
 			else
 			{
 				if (namespaceElement.isPragma())
 				{
-					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, namespaceElement.isDeprecated());
+					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, false);
 				}
 				else if (namespaceElement.isBuiltin())
 				{
-					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, namespaceElement.isDeprecated());
+					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, false);
 				}
 			}
 		}
@@ -74,7 +74,7 @@ public class PerlAnnotator extends PerlBaseAnnotator
 			PsiElement nameIdentifier = ((PerlConstantDefinition) element).getNameIdentifier();
 			if (nameIdentifier != null)
 			{
-				decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, ((PerlConstantDefinition) element).isDeprecated());
+				decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, false);
 			}
 		}
 		else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement

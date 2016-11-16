@@ -830,9 +830,9 @@
                          implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>
 
         <localInspection language="Perl5"
-                         shortName="SubDeprecated" displayName="Deprecated sub" groupName="Perl5"
+                         shortName="Deprecations" displayName="Deprecations" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubDeprecatedInspection"/>
+                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection"/>
         <localInspection language="Perl5"
                          shortName="SubUnresolvable" displayName="Unresolved sub" groupName="Perl5"
                          enabledByDefault="true" level="WARNING"
