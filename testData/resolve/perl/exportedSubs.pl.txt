@@ -1,0 +1,34 @@
+PerlSubReferenceSimple at (41,50); text in range: 'something' => 1 results:
+	SUB_DEFINITION at 232 in exportedSubs.pl
+
+PerlSubReferenceSimple at (55,66); text in range: 'singleconst' => 1 results:
+	CONSTANT_DEFINITION at 287 in exportedSubs.pl
+
+PerlSubReferenceSimple at (71,84); text in range: 'somethingelse' => 1 results:
+	SUB_DEFINITION at 251 in exportedSubs.pl
+
+PerlSubReferenceSimple at (89,99); text in range: 'multiconst' => 1 results:
+	CONSTANT_DEFINITION at 326 in exportedSubs.pl
+
+PerlSubReferenceSimple at (104,115); text in range: 'MULTICONST2' => 1 results:
+	CONSTANT_DEFINITION at 347 in exportedSubs.pl
+
+PerlSubReferenceSimple at (149,158); text in range: 'something' => 1 results:
+	SUB_DEFINITION at 232 in exportedSubs.pl
+
+PerlSubReferenceSimple at (163,174); text in range: 'singleconst' => 1 results:
+	CONSTANT_DEFINITION at 287 in exportedSubs.pl
+
+PerlSubReferenceSimple at (179,192); text in range: 'somethingelse' => 1 results:
+	SUB_DEFINITION at 251 in exportedSubs.pl
+
+PerlSubReferenceSimple at (197,207); text in range: 'multiconst' => 1 results:
+	CONSTANT_DEFINITION at 326 in exportedSubs.pl
+
+PerlSubReferenceSimple at (212,223); text in range: 'MULTICONST2' => 1 results:
+	CONSTANT_DEFINITION at 347 in exportedSubs.pl
+
+PerlNamespaceReference at (278,286); text in range: 'constant' => 0 results:
+
+PerlNamespaceReference at (311,319); text in range: 'constant' => 0 results:
+
