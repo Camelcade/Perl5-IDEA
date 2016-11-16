@@ -51,7 +51,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
 	private void doTestExportArray()
 	{
-		doTest("something", "somethingelse");
+		doTest("something", "somethingelse", "singleconst", "multiconst", "MULTICONST2");
 	}
 
 	public void testExportArrayEmpty()

@@ -13,3 +13,10 @@ sub something {
 sub somethingelse{
 
 }
+
+use constant singleconst => 42;
+
+use constant {
+    multiconst => 1,
+    MULTICONST2 => 2
+};
