@@ -185,6 +185,7 @@
     catch (ArrayIndexOutOfBoundsException e) {
       message = ZZ_ERROR_MSG[ZZ_UNKNOWN_ERROR];
     }
+    message += "; Real state is: " + zzLexicalState + "; yystate(): " + yystate();
 
 --- throws clause
   }
