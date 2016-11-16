@@ -31,6 +31,7 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashMap;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -129,6 +130,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 	private Project myProject;
 	private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
 	private AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider;
+	private Set<String> myLocalPackages = new THashSet<>();
 
 	public static void initReservedTokensMap()
 	{
@@ -478,6 +480,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				return myProject.getComponent(PerlNamesCache.class).getPackagesNamesSet();
 			}
 		};
+		myLocalPackages.clear();
 	}
 
 	protected IElementType getNewLineToken()
@@ -547,7 +550,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
 				if (!StringUtil.containsChar(canonicalName, ':'))
 				{
-					if (StringUtil.isCapitalized(canonicalName) && myPackageNamesProvider.getValue().contains(canonicalName))
+					if (StringUtil.isCapitalized(canonicalName) && (myPackageNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName)))
 					{
 						tokenType = PACKAGE;
 					}
@@ -564,7 +567,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 				{
 					tokenType = QUALIFYING_PACKAGE;
 				}
-				else if (myPackageNamesProvider.getValue().contains(canonicalName))
+				else if (myPackageNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))
 				{
 					tokenType = PACKAGE;
 				}
@@ -1125,10 +1128,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
 	protected IElementType registerPackage(IElementType tokenType)
 	{
-		if (myProject != null)
-		{
-			myPackageNamesProvider.getValue().add(PerlPackageUtil.getCanonicalPackageName(yytext().toString()));
-		}
+		myLocalPackages.add(PerlPackageUtil.getCanonicalPackageName(yytext().toString()));
 		return tokenType;
 	}
 
