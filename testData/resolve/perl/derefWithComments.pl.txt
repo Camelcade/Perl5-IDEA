@@ -1,0 +1,6 @@
+PerlNamespaceReference at (38,46); text in range: 'Foo::Bar' => 1 results:
+	NAMESPACE at 0 in derefWithComments.pl
+
+PerlSubReference at (90,99); text in range: 'something' => 1 results:
+	SUB_DEFINITION at 19 in derefWithComments.pl
+

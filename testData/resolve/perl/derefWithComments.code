@@ -1,0 +1,9 @@
+package Foo::Bar;
+
+sub something {
+}
+
+Foo::Bar   # comment
+    ->
+    # other comment
+    something;
