@@ -49,6 +49,31 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	private void doTestExportArray()
+	{
+		doTest("something", "somethingelse");
+	}
+
+	public void testExportArrayEmpty()
+	{
+		doTestExportArray();
+	}
+
+	public void testExportArrayNonEmpty()
+	{
+		doTestExportArray();
+	}
+
+	public void testExportOkArrayEmpty()
+	{
+		doTestExportArray();
+	}
+
+	public void testExportOkArrayNonEmpty()
+	{
+		doTestExportArray();
+	}
+
 	public void testPackageToStringQ()
 	{
 		doTestStringCompletion();

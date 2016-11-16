@@ -1,0 +1,15 @@
+package Foo::Bar;
+
+our @EXPORT = qw/
+    something
+	<caret>
+    /;
+
+
+
+sub something {
+}
+
+sub somethingelse{
+
+}
