@@ -49,6 +49,16 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 		return "testData/completion/perl";
 	}
 
+	public void testAnnotationReturnsPackage()
+	{
+		doTest(LIBRARY_PACKAGES);
+	}
+
+	public void testAnnotationTypePackage()
+	{
+		doTest(LIBRARY_PACKAGES);
+	}
+
 	public void testImportSubsParam()
 	{
 		doTest("somesub1", "someconst1", "multiconst1", "somesub2", "SOMECONST2", "MULTICONST2");
