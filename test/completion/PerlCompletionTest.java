@@ -275,7 +275,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
 	public void testAnnotation()
 	{
-		doTest("returns", "inject", "method", "override", "abstract", "deprecated", "noinspection");
+		doTest("returns", "inject", "method", "override", "abstract", "deprecated", "noinspection", "type");
 	}
 
 	public void testInjectMarkers()

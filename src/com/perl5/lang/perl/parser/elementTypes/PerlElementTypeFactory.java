@@ -2287,7 +2287,18 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
-
+		if (name.equals("ANNOTATION_TYPE"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlAnnotationTypeImpl(node);
+				}
+			};
+		}
 		if (name.equals("ANNOTATION_INJECT"))
 		{
 			return new PerlElementTypeEx(name)
