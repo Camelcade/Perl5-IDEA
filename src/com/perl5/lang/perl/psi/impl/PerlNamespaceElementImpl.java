@@ -125,6 +125,11 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 	@Override
 	public boolean isDeprecated()
 	{
+		PsiElement parent = getParent();
+		if (parent instanceof PerlNamespaceDefinition)
+		{
+			return ((PerlNamespaceDefinition) parent).isDeprecated();
+		}
 		return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
 	}
 
