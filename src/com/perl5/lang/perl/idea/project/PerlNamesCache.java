@@ -21,6 +21,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupManager;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -88,7 +89,7 @@ public class PerlNamesCache implements ProjectComponent
 	@Override
 	public void initComponent()
 	{
-		updaterThread.start();
+		StartupManager.getInstance(myProject).runWhenProjectIsInitialized(updaterThread::start);
 	}
 
 	@Override
