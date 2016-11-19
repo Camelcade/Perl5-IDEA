@@ -100,11 +100,6 @@ public interface PerlSubBase<Stub extends StubElement> extends
 	List<PerlAnnotation> getAnnotationList();
 
 	/**
-	 * Used to re-set stubs
-	 */
-	void subtreeChanged();
-
-	/**
 	 * Returns return value for this sub
 	 */
 	@Nullable

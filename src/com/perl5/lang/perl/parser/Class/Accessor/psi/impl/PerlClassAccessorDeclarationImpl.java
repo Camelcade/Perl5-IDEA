@@ -155,12 +155,6 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
 	}
 
 	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-	}
-
-	@Override
 	public void fillCompletions(CompletionResultSet resultSet)
 	{
 		String getterName = getSubName();
