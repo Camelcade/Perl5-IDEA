@@ -62,7 +62,7 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 
 
 	@Override
-	public PsiPerlBlock getBlock()
+	public PsiPerlBlock getBlockSmart()
 	{
 		PsiPerlCommaSequenceExpr argumentsSequence = getSequence();
 		if (argumentsSequence != null)
@@ -74,7 +74,7 @@ public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextI
 			}
 
 		}
-		return super.getBlock();
+		return super.getBlockSmart();
 	}
 
 	@Nullable

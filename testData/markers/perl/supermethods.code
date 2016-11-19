@@ -1,0 +1,64 @@
+package Some::Parent::Package;
+
+#@method
+sub somemethod{}
+
+sub somemethod_shift{
+    shift;
+}
+
+sub somemethod_shift_self{
+    my $self = shift;
+}
+
+sub somemethod_unpack{
+    my ($self, %kwargs) = @_;
+}
+
+use constant CONSTANT_METHOD => 1;
+
+use constant {
+    OTHER_CONSTANT_METHOD1 => 1,
+    OTHER_CONSTANT_METHOD2 => 12
+};
+
+sub somemethod_with_lpe_block{
+    my $self = shift;
+    say 'All work and no play makes Jack a dull boy';
+    say 'All work and no play makes Jack a dull boy';
+    say 'All work and no play makes Jack a dull boy';
+}
+
+package Some::Child::Package;
+
+use parent qw/Some::Parent::Package/;
+
+#@method
+sub somemethod{}
+
+sub somemethod_shift{
+    shift;
+}
+
+sub somemethod_shift_self{
+    my $self = shift;
+}
+
+
+sub somemethod_unpack{
+    my ($self, %kwargs) = @_;
+}
+
+use constant CONSTANT_METHOD => 1;
+
+use constant {
+    OTHER_CONSTANT_METHOD1 => 1,
+    OTHER_CONSTANT_METHOD2 => 12
+};
+
+sub somemethod_with_lpe_block{
+    my $self = shift;
+    say 'All work and no play makes Jack a dull boy';
+    say 'All work and no play makes Jack a dull boy';
+    say 'All work and no play makes Jack a dull boy';
+}

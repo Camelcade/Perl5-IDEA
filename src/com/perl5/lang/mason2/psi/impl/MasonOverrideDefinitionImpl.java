@@ -74,7 +74,7 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 
 	@Override
 	@NotNull
-	public PsiPerlBlock getBlock()
+	public PsiPerlBlock getBlockSmart()
 	{
 		return findNotNullChildByClass(PsiPerlBlock.class);
 	}

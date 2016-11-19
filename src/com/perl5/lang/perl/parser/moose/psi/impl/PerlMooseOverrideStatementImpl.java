@@ -53,7 +53,7 @@ public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<Pe
 
 
 	@Override
-	public PsiPerlBlock getBlock()
+	public PsiPerlBlock getBlockSmart()
 	{
 		return null;
 	}

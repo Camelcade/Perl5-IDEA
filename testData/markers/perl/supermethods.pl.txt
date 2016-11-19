@@ -1,0 +1,72 @@
+8 - 29: 'Some::Parent::Package': Subclasses
+Targets: 1
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in supermethods.pl at 542
+
+45 - 55: 'somemethod': Overriden methods
+Targets: 1
+    sub Some::Child::Package::somemethod in supermethods.pl at 621
+
+63 - 79: 'somemethod_shift': Overriden methods
+Targets: 1
+    sub Some::Child::Package::somemethod_shift in supermethods.pl at 639
+
+99 - 120: 'somemethod_shift_self': Overriden methods
+Targets: 1
+    sub Some::Child::Package::somemethod_shift_self in supermethods.pl at 675
+
+151 - 168: 'somemethod_unpack': Overriden methods
+Targets: 1
+    sub Some::Child::Package::somemethod_unpack in supermethods.pl at 728
+
+216 - 231: 'CONSTANT_METHOD': Overriden methods
+Targets: 1
+    sub Some::Child::Package::CONSTANT_METHOD in supermethods.pl at 797
+
+258 - 280: 'OTHER_CONSTANT_METHOD1': Overriden methods
+Targets: 1
+    sub Some::Child::Package::OTHER_CONSTANT_METHOD1 in supermethods.pl at 839
+
+291 - 313: 'OTHER_CONSTANT_METHOD2': Overriden methods
+Targets: 1
+    sub Some::Child::Package::OTHER_CONSTANT_METHOD2 in supermethods.pl at 872
+
+328 - 353: 'somemethod_with_lpe_block': Overriden methods
+Targets: 1
+    sub Some::Child::Package::somemethod_with_lpe_block in supermethods.pl at 905
+
+550 - 570: 'Some::Child::Package': Parent classes
+Targets: 1
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in supermethods.pl at 0
+
+625 - 635: 'somemethod': Overriding method
+Targets: 1
+    sub Some::Parent::Package::somemethod in supermethods.pl at 41
+
+643 - 659: 'somemethod_shift': Overriding method
+Targets: 1
+    sub Some::Parent::Package::somemethod_shift in supermethods.pl at 59
+
+679 - 700: 'somemethod_shift_self': Overriding method
+Targets: 1
+    sub Some::Parent::Package::somemethod_shift_self in supermethods.pl at 95
+
+732 - 749: 'somemethod_unpack': Overriding method
+Targets: 1
+    sub Some::Parent::Package::somemethod_unpack in supermethods.pl at 147
+
+797 - 812: 'CONSTANT_METHOD': Overriding method
+Targets: 1
+    sub Some::Parent::Package::CONSTANT_METHOD in supermethods.pl at 216
+
+839 - 861: 'OTHER_CONSTANT_METHOD1': Overriding method
+Targets: 1
+    sub Some::Parent::Package::OTHER_CONSTANT_METHOD1 in supermethods.pl at 258
+
+872 - 894: 'OTHER_CONSTANT_METHOD2': Overriding method
+Targets: 1
+    sub Some::Parent::Package::OTHER_CONSTANT_METHOD2 in supermethods.pl at 291
+
+909 - 934: 'somemethod_with_lpe_block': Overriding method
+Targets: 1
+    sub Some::Parent::Package::somemethod_with_lpe_block in supermethods.pl at 324
+

@@ -17,15 +17,13 @@
 package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import junit.framework.AssertionFailedError;
 
@@ -33,8 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -45,11 +41,6 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 	public String getFileExtension()
 	{
 		return PerlFileTypeScript.EXTENSION_PL;
-	}
-
-	public String getTestResultsFilePath()
-	{
-		return getTestDataPath() + "/" + getTestName(true) + "." + getFileExtension() + ".txt";
 	}
 
 	public void doTest(boolean success)

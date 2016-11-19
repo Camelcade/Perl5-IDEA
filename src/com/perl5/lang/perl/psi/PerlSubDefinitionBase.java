@@ -34,11 +34,11 @@ public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSub
 {
 
 	/**
-	 * Returns sub block.
+	 * Returns sub block, even if it's in the lazy_parsable_block
 	 *
 	 * @return sub block element; optional in constant, different extensions
 	 */
-	PsiPerlBlock getBlock();
+	PsiPerlBlock getBlockSmart();
 
 	/**
 	 * Returns list of accepted arguments

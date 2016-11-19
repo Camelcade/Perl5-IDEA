@@ -48,7 +48,7 @@ public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDef
 	}
 
 	@Override
-	public PsiPerlBlock getBlock()
+	public PsiPerlBlock getBlockSmart()
 	{
 		return null;
 	}

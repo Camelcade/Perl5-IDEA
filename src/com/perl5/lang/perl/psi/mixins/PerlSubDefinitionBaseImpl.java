@@ -116,7 +116,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 	protected List<PerlSubArgument> getPerlSubArgumentsFromBody()
 	{
 		PerlSubArgumentsExtractor extractor = new PerlSubArgumentsExtractor();
-		PsiPerlBlock subBlock = getBlock();
+		PsiPerlBlock subBlock = getBlockSmart();
 
 		if (subBlock != null && subBlock.isValid())
 		{
@@ -217,6 +217,28 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 				lastParent,
 				place
 		);
+	}
+
+	@Override
+	public PsiPerlBlock getBlockSmart()
+	{
+		if (this instanceof PsiPerlSubDefinition)
+		{
+			PsiPerlBlock block = ((PsiPerlSubDefinition) this).getBlock();
+			if (block != null)
+			{
+				return block;
+			}
+		}
+
+		PsiElement lazyParsableBlock = findChildByType(LP_CODE_BLOCK);
+		if (lazyParsableBlock != null)
+		{
+			PsiElement possibleBlock = lazyParsableBlock.getFirstChild();
+			return possibleBlock instanceof PsiPerlBlock ? (PsiPerlBlock) possibleBlock : null;
+		}
+
+		return null;
 	}
 
 	protected static class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>
@@ -348,5 +370,4 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 			return myArguments;
 		}
 	}
-
 }

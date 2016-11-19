@@ -42,8 +42,6 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.jetbrains.annotations.NotNull;
@@ -83,6 +81,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 		super.setUp();
 		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
 		setUpLibrary();
+	}
+
+	public String getTestResultsFilePath()
+	{
+		return getTestDataPath() + "/" + getTestName(true) + "." + getFileExtension() + ".txt";
 	}
 
 	protected void setUpLibrary()
