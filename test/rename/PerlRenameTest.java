@@ -49,6 +49,11 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase
 		doTest();
 	}
 
+	public void testMojoHelper()
+	{
+		doTest("newName");
+	}
+
 	public void testPackageName()
 	{
 		doTest("Foo::Bar::Moo");

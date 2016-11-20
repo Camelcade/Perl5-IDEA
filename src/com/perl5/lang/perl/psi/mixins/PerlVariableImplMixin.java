@@ -29,7 +29,6 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.mojolicious.psi.MojoliciousElementPatterns;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -144,7 +143,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
 				if (isSelf())
 				{
 					// fixme this is hacky, we should generalize this in some way, see #1062
-					if (MojoliciousElementPatterns.MOJO_ELEMENT_IN_HELPER.accepts(this))
+					if (PsiTreeUtil.getParentOfType(this, MojoliciousHelperDeclarationImpl.class) != null)
 					{
 						return MojoliciousHelperDeclarationImpl.HELPER_NAMESPACE_NAME;
 					}

@@ -17,23 +17,15 @@
 package com.perl5.lang.mojolicious.psi;
 
 import com.intellij.patterns.PsiElementPattern;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlSubExpr;
-
-import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 /**
  * Created by hurricup on 23.04.2016.
  */
 public interface MojoliciousElementPatterns extends MojoliciousElementTypes, PerlElementPatterns
 {
-	PsiElementPattern.Capture<PsiElement> MOJO_ELEMENT_IN_HELPER = psiElement().inside(
-			psiElement(PsiPerlSubExpr.class).withSuperParent(3, MojoliciousHelperDeclaration.class)
-	);
-
 	PsiElementPattern.Capture<PerlSubNameElement> MOJO_HELPER_USAGE =
 			SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN).and(IN_MOJOLICIOUS_FILE);
 

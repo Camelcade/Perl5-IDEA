@@ -1,0 +1,23 @@
+package Some::Helper::Package;
+use Mojo::Base 'Mojolicious::Plugin';
+
+sub register {
+
+    my ($self, $app) = @_;
+
+    $app->helper(
+            somehelper => sub {
+            my $self = shift;
+            $self->other_helper();
+        }
+    );
+
+    $app->helper(
+            other_helper => sub {
+            my ($self) = @_;
+
+            $self->somehe<caret>lper();
+        }
+    );
+}
+1;
