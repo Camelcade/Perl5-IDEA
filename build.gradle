@@ -99,7 +99,7 @@ dependencies {
 
 project.afterEvaluate {
     prepareSandbox.doLast {
-        def perlUtils = "$it.destinationDir/perl/"
+        def perlUtils = "$it.destinationDir/$intellij.pluginName/perl/"
         def XSParser = file("perl-utils/xs_parser_simple.pl")
         copy {
             from XSParser
