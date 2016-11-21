@@ -39,15 +39,15 @@ import org.jetbrains.annotations.NotNull;
 // Char classes
 */
 NEW_LINE = \R
-WHITE_SPACE     = [ \t\f]
+WHITE_SPACE = [ \t\f]
 ANY_SPACE = [ \t\f\n\r]
+NON_SPACE = [^ \t\f\n\r]
 LINE_COMMENT = "#" .*
 LINE_COMMENT_ANNOTATION = "#@" .*
 LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
 SPACE_OR_COMMENT = {ANY_SPACE}|{LINE_COMMENT_WITH_NEW_LINE}
 SPACES_OR_COMMENTS = {SPACE_OR_COMMENT}*
 NON_SPACE_AHEAD = {SPACES_OR_COMMENTS}[^ \t\f\n\r\#]
-ESCAPED_WHITE_SPACE="\\"{WHITE_SPACE}
 ESCAPED_SPACE_OR_COMMENT = "\\"({ANY_SPACE}|"#")
 
 // http://perldoc.perl.org/perldata.html#Identifier-parsing
@@ -410,8 +410,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 
 <STRING_LIST>
 {
-	[^\s\n\r\t\f]+				{return STRING_CONTENT;}
-	{ESCAPED_WHITE_SPACE}	{return STRING_CONTENT;}
+	{NON_SPACE}+			{return STRING_CONTENT;}
 	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
 }
 

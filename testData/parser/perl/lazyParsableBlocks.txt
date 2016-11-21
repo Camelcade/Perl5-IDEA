@@ -17,7 +17,7 @@ Perl5
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('a')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('$somevar')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('very')
-          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('\ ')
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('\')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('large')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('\$somevar')
           PerlStringContentElementImpl(Perl5: STRING_CONTENT)('text')
