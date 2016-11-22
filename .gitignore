@@ -6,3 +6,4 @@ classes/
 gen/
 *.iml
 camelcade.jar
+.idea/misc.xml
