@@ -806,7 +806,7 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub main::Naturale
+  sub Au::Naturale
     PsiElement(Perl5: sub)('sub')
     PerlNamespaceElementImpl(Perl5: package::name::)('Au::')
     PerlSubNameElementImpl(Perl5: subname)('Naturale')
@@ -891,7 +891,7 @@ Perl5
       PsiPerlNyiStatementImpl(Perl5: NYI_STATEMENT)
         PsiElement(Perl5: nyi)('...')
       PsiElement(Perl5: })('}')
-  sub main::Name
+  sub UNIVERSAL::Name
     PsiElement(Perl5: sub)('sub')
     PerlNamespaceElementImpl(Perl5: package::name::)('UNIVERSAL::')
     PerlSubNameElementImpl(Perl5: subname)('Name')
@@ -930,7 +930,7 @@ Perl5
               PsiElement(Perl5: ])(']')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::Purpose
+  sub UNIVERSAL::Purpose
     PsiElement(Perl5: sub)('sub')
     PerlNamespaceElementImpl(Perl5: package::name::)('UNIVERSAL::')
     PerlSubNameElementImpl(Perl5: subname)('Purpose')
@@ -971,7 +971,7 @@ Perl5
               PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::Unit
+  sub UNIVERSAL::Unit
     PsiElement(Perl5: sub)('sub')
     PerlNamespaceElementImpl(Perl5: package::name::)('UNIVERSAL::')
     PerlSubNameElementImpl(Perl5: subname)('Unit')

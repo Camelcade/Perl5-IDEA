@@ -3747,7 +3747,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('main')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      sub main::somesub
+      sub Foo::Bar::somesub
         PsiElement(Perl5: sub)('sub')
         PerlNamespaceElementImpl(Perl5: package::name::)('Foo::Bar::')
         PerlSubNameElementImpl(Perl5: subname)('somesub')

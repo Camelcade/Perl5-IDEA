@@ -22,12 +22,13 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
+import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.psi.utils.PerlReturnType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -123,14 +124,7 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	protected String getSubNameHeavy()
 	{
 		PsiElement subNameElement = getSubNameElement();
-		if (subNameElement != null)
-		{
-			String subNameText = subNameElement.getText();
-			int namespaceDelimiterIndex = subNameText.lastIndexOf(':');
-			return namespaceDelimiterIndex == -1 ? subNameText : subNameText.substring(namespaceDelimiterIndex + 1);
-		}
-
-		return null;
+		return subNameElement == null ? null : subNameElement.getText();
 	}
 
 	@Nullable
@@ -144,20 +138,21 @@ public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends Perl
 	@Override
 	public String getExplicitPackageName()
 	{
-		PsiElement subNameElement = getSubNameElement();
-		if (subNameElement == null)
-		{
-			return null;
-		}
-		String subNameText = subNameElement.getText();
-		int namespaceDelimiterIndex = subNameText.lastIndexOf(':');
-		return namespaceDelimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(subNameText.substring(0, namespaceDelimiterIndex + 1));
+		PerlNamespaceElement namespaceElement = getNamespaceElement();
+		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
 	}
 
 	@Override
 	public PsiElement getSubNameElement()
 	{
 		return findChildByType(SUB_NAME);
+	}
+
+	@Nullable
+	@Override
+	public PerlNamespaceElement getNamespaceElement()
+	{
+		return findChildByClass(PerlNamespaceElement.class);
 	}
 
 	@NotNull
