@@ -57,6 +57,11 @@ public class PerlResolveTest extends PerlResolveTestCase
 		doTestWithFileCheck();
 	}
 
+	public void testVariableIsa()
+	{
+		doTestWithFileCheck();
+	}
+
 	public void testSequentionalHereDocs()
 	{
 		doTestWithFileCheck();

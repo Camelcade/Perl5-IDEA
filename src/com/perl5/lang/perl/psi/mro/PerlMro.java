@@ -51,9 +51,14 @@ public abstract class PerlMro
 	public static Collection<PsiElement> resolveSub(@NotNull Project project, String packageName, String subName, boolean isSuper)
 	{
 		Collection<PsiElement> result = new ArrayList<PsiElement>();
-		if (packageName == null || subName == null)
+		if (subName == null)
 		{
 			return result;
+		}
+
+		if (packageName == null)
+		{
+			packageName = PerlPackageUtil.UNIVERSAL_PACKAGE;
 		}
 
 		Collection<String> linearISA = getLinearISA(project, packageName, isSuper);

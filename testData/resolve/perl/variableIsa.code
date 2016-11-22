@@ -1,0 +1,4 @@
+
+sub UNIVERSAL::isa;
+
+say $something->isa();

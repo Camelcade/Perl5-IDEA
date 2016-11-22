@@ -1,0 +1,7 @@
+PerlNamespaceReference at (5,14); text in range: 'UNIVERSAL' => 0 results:
+
+PerlVariableReference at (27,36); text in range: 'something' => 0 results:
+
+PerlSubReference at (38,41); text in range: 'isa' => 1 results:
+	SUB_DECLARATION at 1 in variableIsa.pl
+
