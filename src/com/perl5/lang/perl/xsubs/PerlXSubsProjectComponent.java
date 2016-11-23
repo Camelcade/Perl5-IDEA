@@ -18,6 +18,7 @@ package com.perl5.lang.perl.xsubs;
 
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,33 +28,24 @@ public class PerlXSubsProjectComponent implements ProjectComponent
 {
 
 	private final Project myProject;
-	//	private final VirtualFileListener myFileListener;
-	private final PerlXSubsState xSubsState;
 
-	public PerlXSubsProjectComponent(Project myProject)
+	public PerlXSubsProjectComponent(Project project)
 	{
-		this.myProject = myProject;
-//		myFileListener = new PerlXSubsFileListener();
-		xSubsState = PerlXSubsState.getInstance(myProject);
+		myProject = project;
 	}
 
 	@Override
 	public void projectOpened()
 	{
-		xSubsState.rescanFiles();
-
-		if (!xSubsState.isActual)
+		StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() ->
 		{
-			xSubsState.notifyUser();
-		}
-
-//		VirtualFileManager.getInstance().addVirtualFileListener(myFileListener);
+			PerlXSubsState.getInstance(myProject).rescanFiles();
+		});
 	}
 
 	@Override
 	public void projectClosed()
 	{
-//		VirtualFileManager.getInstance().removeVirtualFileListener(myFileListener);
 	}
 
 	@Override
