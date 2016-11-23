@@ -59,6 +59,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -140,10 +141,13 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
 
 	private Set<VirtualFile> getAllXSFiles(@NotNull Project project)
 	{
-		GlobalSearchScope classRootsScope = GlobalSearchScopesCore.directoriesScope(
-				myProject,
-				true,
-				ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots());
+		VirtualFile[] classesRoots = ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots();
+		if (classesRoots.length == 0)
+		{
+			return Collections.emptySet();
+		}
+
+		GlobalSearchScope classRootsScope = GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots);
 
 		Set<VirtualFile> result = new THashSet<>();
 		for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope))
