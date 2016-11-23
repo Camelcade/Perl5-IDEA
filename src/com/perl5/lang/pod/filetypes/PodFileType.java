@@ -16,8 +16,8 @@
 
 package com.perl5.lang.pod.filetypes;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,7 +27,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodFileType extends LanguageFileType
+public class PodFileType extends PerlPluginBaseFileType
 {
 	public static final String EXTENSION = "pod";
 	public static final PodFileType INSTANCE = new PodFileType();

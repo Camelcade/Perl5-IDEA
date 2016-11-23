@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Alexandr Evstigneev
+ * Copyright 2016 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,30 +17,16 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.lang.Language;
-import com.perl5.lang.perl.PerlLanguage;
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 26.04.2015.
+ * Created by hurricup on 23.11.2016.
  */
-public abstract class PerlFileType extends PerlPluginBaseFileType
+public abstract class PerlPluginBaseFileType extends LanguageFileType
 {
-	public PerlFileType()
-	{
-		this(PerlLanguage.INSTANCE);
-	}
-
-	public PerlFileType(Language language)
+	public PerlPluginBaseFileType(@NotNull Language language)
 	{
 		super(language);
-	}
-
-	public boolean checkStrictPragma()
-	{
-		return true;
-	}
-
-	public boolean checkWarningsPragma()
-	{
-		return true;
 	}
 }

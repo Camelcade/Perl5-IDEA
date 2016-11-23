@@ -17,8 +17,8 @@
 package com.perl5.lang.xs.filetypes;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.xs.XSLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +28,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class XSFileType extends LanguageFileType
+public class XSFileType extends PerlPluginBaseFileType
 {
 	public static final XSFileType INSTANCE = new XSFileType();
 	public static final Language LANGUAGE = INSTANCE.getLanguage();

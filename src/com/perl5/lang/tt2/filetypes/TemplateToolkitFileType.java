@@ -21,13 +21,13 @@ import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectLocator;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.StubVirtualFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitHighlighter;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
@@ -39,7 +39,7 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile
+public class TemplateToolkitFileType extends PerlPluginBaseFileType implements FileTypeIdentifiableByVirtualFile
 {
 	public static final FileType INSTANCE = new TemplateToolkitFileType();
 
