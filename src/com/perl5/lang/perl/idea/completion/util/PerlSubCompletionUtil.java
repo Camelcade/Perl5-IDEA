@@ -25,7 +25,6 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -127,7 +126,7 @@ public class PerlSubCompletionUtil
 				{
 					PerlSubNameElement subNameElement = method.getSubNameElement();
 
-					if (subNameElement.isValid())
+					if (subNameElement != null && subNameElement.isValid())
 					{
 
 						String subName = subNameElement.getName();
