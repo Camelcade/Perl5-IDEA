@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.perl5.lang.perl.psi.PerlSubNameElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -29,5 +30,6 @@ public interface PerlSubNameElementContainer
 	 *
 	 * @return psi element or null
 	 */
+	@Nullable
 	PerlSubNameElement getSubNameElement();
 }

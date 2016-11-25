@@ -98,8 +98,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 	public String getName()
 	{
 		PerlSubNameElement subNameElement = getSubNameElement();
-		assert subNameElement != null;
-		return subNameElement.getText();
+		return subNameElement == null ? null : subNameElement.getText();
 	}
 
 	@Nullable
@@ -147,6 +146,7 @@ public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl imple
 		return (PerlNamespaceElement) childByType;
 	}
 
+	@Nullable
 	@Override
 	public PerlSubNameElement getSubNameElement()
 	{

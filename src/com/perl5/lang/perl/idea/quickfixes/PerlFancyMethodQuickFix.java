@@ -21,6 +21,8 @@ import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
@@ -64,7 +66,13 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix
 		assert currentCallExpression instanceof PsiPerlSubCallExpr;
 
 		// fixme ok, this is works, but we make syntax tree invalid, will be updated with next reparsing. Not sure it's a problem
-		method.replace(PerlElementFactory.createMethodCall(project, ((PerlMethod) method).getNamespaceElement().getCanonicalName(), ((PerlMethod) method).getSubNameElement().getName()));
+		PerlNamespaceElement namespaceElement = ((PerlMethod) method).getNamespaceElement();
+		assert namespaceElement != null;
+
+		PerlSubNameElement subNameElement = ((PerlMethod) method).getSubNameElement();
+		assert subNameElement != null;
+
+		method.replace(PerlElementFactory.createMethodCall(project, namespaceElement.getCanonicalName(), subNameElement.getName()));
 	}
 
 

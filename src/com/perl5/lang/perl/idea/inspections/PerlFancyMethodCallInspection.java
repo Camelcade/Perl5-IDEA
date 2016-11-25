@@ -21,6 +21,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.idea.quickfixes.PerlFancyMethodQuickFix;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,12 @@ public class PerlFancyMethodCallInspection extends PerlInspection
 					{
 						return;
 					}
-					String properForm = String.format("%s->%s", packageName, o.getSubNameElement().getName());
+					PerlSubNameElement subNameElement = o.getSubNameElement();
+					if (subNameElement == null)
+					{
+						return;
+					}
+					String properForm = String.format("%s->%s", packageName, subNameElement.getName());
 					holder.registerProblem(
 							o,
 							String.format("Using of fancy calls is not recommended, use %s(...)", properForm),

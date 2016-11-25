@@ -185,32 +185,38 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs
 	@Nullable
 	public static String getMethodReturnValue(PerlMethodContainer methodContainer)
 	{
-		if (methodContainer.getMethod() != null && methodContainer.getMethod().getSubNameElement() != null)
+		PerlMethod methodElement = methodContainer.getMethod();
+		if (methodElement == null)
 		{
-			// fixme this should be moved to a method
-			PerlMethod methodElement = methodContainer.getMethod();
-			PerlSubNameElement subNameElement = methodElement.getSubNameElement();
+			return null;
+		}
+		PerlSubNameElement subNameElement = methodElement.getSubNameElement();
+		if (subNameElement == null)
+		{
+			return null;
+		}
 
-			if ("new".equals(subNameElement.getName()))
+		// fixme this should be moved to a method
+
+		if ("new".equals(subNameElement.getName()))
+		{
+			return methodElement.getPackageName();
+		}
+
+		PsiReference reference = subNameElement.getReference();
+
+		if (reference instanceof PerlSubReference)
+		{
+			for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
 			{
-				return methodElement.getPackageName();
-			}
-
-			PsiReference reference = subNameElement.getReference();
-
-			if (reference instanceof PerlSubReference)
-			{
-				for (ResolveResult resolveResult : ((PerlSubReference) reference).multiResolve(false))
+				PsiElement targetElement = resolveResult.getElement();
+				if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).getReturns() != null)
 				{
-					PsiElement targetElement = resolveResult.getElement();
-					if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) targetElement).getReturns() != null)
-					{
-						return ((PerlSubDefinitionBase) targetElement).getReturns();
-					}
-					else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getReturns() != null)
-					{
-						return ((PerlSubDeclaration) targetElement).getReturns();
-					}
+					return ((PerlSubDefinitionBase) targetElement).getReturns();
+				}
+				else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration) targetElement).getReturns() != null)
+				{
+					return ((PerlSubDeclaration) targetElement).getReturns();
 				}
 			}
 		}
