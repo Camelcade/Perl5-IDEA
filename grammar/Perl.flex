@@ -120,6 +120,15 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
+REGEX_CHARGROUPS = "\\" [dswDSW]
+REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
+REGEX_POSIX_OPEN = "[:"
+REGEX_POSIX_CLOSE = ":]"
+REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
+
+//REGEX_NUMBER_OCTAL = "0"[0-7]+
+//REGEX_NUMBER_HEX = [xX][0-9a-fA-F]+
+//REGEX_ESCAPES = '\\' ([nNtra]| {REGEX_NUMBER_OCTAL} | {REGEX_NUMBER_HEX})
 
 %state LEX_HANDLE, LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT
 %state END_BLOCK
@@ -364,29 +373,35 @@ REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
 	<<EOF>>									{yybegin(YYINITIAL);}
 }
 
-<MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
-{
-	"\\"[\$\@]		{return REGEX_TOKEN;}
-}
+//////////////////////////////////// REGULAR EXPRESSION ////////////////////////////////////////////////////////////////
 
-<MATCH_REGEX,EXTENDED_MATCH_REGEX>
+<EXTENDED_MATCH_REGEX>
 {
-	{REGEX_COMMENT}	{return COMMENT_LINE;}
-}
-
-<EXTENDED_MATCH_REGEX>{
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
 	{ANY_SPACE}+				{return TokenType.WHITE_SPACE;}
 	{LINE_COMMENT}				{return COMMENT_LINE;}
-	[^\\ \t\f\n\r$@#\(]+		{return REGEX_TOKEN;}
+
+	<MATCH_REGEX>
+	{
+		{REGEX_COMMENT}	{return COMMENT_LINE;}
+
+		<REPLACEMENT_REGEX>{
+			"\\".		{return REGEX_TOKEN;}
+		}
+	}
 }
 
+<EXTENDED_MATCH_REGEX>
+	[^\\ \t\f\n\r$@#\(]+	{return REGEX_TOKEN;}
 <MATCH_REGEX>
-	[^$@\\\(]+	{return REGEX_TOKEN;}
+	[^$@\\\(]+				{return REGEX_TOKEN;}
 <REPLACEMENT_REGEX>
-	[^$@\\]+ 	{return REGEX_TOKEN;}
+	[^$@\\]+ 				{return REGEX_TOKEN;}
+
 <MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
-	[^] 		{return REGEX_TOKEN;}
+	[^] 					{return REGEX_TOKEN;}
+
+//////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
 
 <STRING_QQ>{
 	"\\"[\$\@]					{return STRING_CONTENT_QQ;}
