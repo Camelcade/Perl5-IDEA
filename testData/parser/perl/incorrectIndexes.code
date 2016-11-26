@@ -1,0 +1,7 @@
+"{injection_guard} attribute to ${class}->new()";
+"$self->\$builder()";
+qr/\A@$warn[^`]*\z/;
+qr/\A@$warn[:`]*\z/;
+qr/\A@$warn[\`]*\z/;
+$tmp =~ /(^|\|)${termpat}[:|]/s;
+" call to $clas s->meta->make _immutable\n";

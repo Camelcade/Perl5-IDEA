@@ -119,6 +119,7 @@ IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"r
 CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
 
 REGEX_COMMENT = "(?#"[^)]*")"
+REGEX_ARRAY_NEGATING = [\^\:\\]
 
 %state LEX_HANDLE, LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT
 %state END_BLOCK
@@ -352,22 +353,15 @@ REGEX_COMMENT = "(?#"[^)]*")"
 }
 
 <INTERPOLATED_VARIABLE_SUFFIX>{
-	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"	{
-	// block A
-	return startBracedBlockWithState(BRACED_STRING);}
-	"["		{
-	// block b
-	return startBracketedBlock();}
-	"{"		{
-	// block C
-	return startBracedBlock();}
-	"->"	{
-	// block D
-	return OPERATOR_DEREFERENCE;}
-	[^]		{
-	// block E
-	yypushback(1);popState();}
-	<<EOF>>	{yybegin(YYINITIAL);}
+	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"
+											{return startBracedBlockWithState(BRACED_STRING);	}
+	"["										{return startBracketedBlock();}
+	"["	/ {REGEX_ARRAY_NEGATING}			{pushback();popState();}
+	"{"										{return startBracedBlock();}
+	"->" / [\{\[] {REGEX_ARRAY_NEGATING} 	{pushback();popState();}
+	"->" / [\{\[]							{return OPERATOR_DEREFERENCE;}
+	[^]										{yypushback(1);popState();}
+	<<EOF>>									{yybegin(YYINITIAL);}
 }
 
 <MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>

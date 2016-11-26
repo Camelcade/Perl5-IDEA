@@ -24,7 +24,7 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
  */
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi>
 {
-	private final static int VERSION = 2;
+	private final static int VERSION = 3;
 
 	@Override
 	public int getVersion()
