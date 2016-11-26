@@ -56,7 +56,7 @@ public class PerlDelegatingLightNamedElement<T extends PerlPolyNamedElement> ext
 	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
 	{
 		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : ElementManipulators.handleContentChange(nameIdentifier, null);
+		return nameIdentifier == null ? null : ElementManipulators.handleContentChange(nameIdentifier, name);
 	}
 
 	@Override

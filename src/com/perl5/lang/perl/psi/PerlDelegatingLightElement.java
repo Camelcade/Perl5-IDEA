@@ -158,34 +158,6 @@ public class PerlDelegatingLightElement<T extends PsiElement> extends LightEleme
 		return getDelegate().getUseScope();
 	}
 
-/*
-	@Override
-	public void navigate(boolean requestFocus) {
-		getDelegate().navigate(requestFocus);
-	}
-
-	@Override
-	public boolean canNavigate() {
-		return getDelegate().canNavigate();
-	}
-
-	@Override
-	public boolean canNavigateToSource() {
-		return getDelegate().canNavigateToSource();
-	}
-
-	@Override
-	public ItemPresentation getPresentation() {
-		return getDelegate().getPresentation();
-	}
-
-
-	@Override
-	public String getName() {
-		return getDelegate().getName();
-	}
-*/
-
 	@NotNull
 	@Override
 	public Project getProject()
