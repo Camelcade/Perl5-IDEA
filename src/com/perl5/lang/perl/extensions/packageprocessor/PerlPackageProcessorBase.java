@@ -38,18 +38,6 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
 		return false;
 	}
 
-	@Override
-	public void use(PerlUseStatement useStatement)
-	{
-
-	}
-
-	@Override
-	public void no(PerlUseStatement noStatement)
-	{
-
-	}
-
 	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
 	{
 		String packageName = useStatement.getPackageName();

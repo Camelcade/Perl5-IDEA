@@ -36,20 +36,6 @@ public interface PerlPackageProcessor
 	boolean isPragma();
 
 	/**
-	 * Can do additional work for import
-	 *
-	 * @param useStatement psi element of use statement
-	 */
-	void use(PerlUseStatement useStatement);
-
-	/**
-	 * Can do additional work for unimport
-	 *
-	 * @param noStatement psi element of no statement
-	 */
-	void no(PerlUseStatement noStatement);
-
-	/**
 	 * Retuns list of imported descriptors
 	 *
 	 * @param useStatement use statement psi element

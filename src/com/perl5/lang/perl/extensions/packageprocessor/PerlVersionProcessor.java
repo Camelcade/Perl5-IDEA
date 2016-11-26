@@ -56,17 +56,6 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
 		return false;
 	}
 
-	@Override
-	public void use(PerlUseStatement useStatement)
-	{
-
-	}
-
-	@Override
-	public void no(PerlUseStatement noStatement)
-	{
-
-	}
 
 	@Override
 	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
