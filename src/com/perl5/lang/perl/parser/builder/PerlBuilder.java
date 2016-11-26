@@ -33,8 +33,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 {
 	private final PerlParserImpl perlParser;
 
-	// flag forces stringification of -identifiers, required for use Package -option;
-	boolean stringify = false;
 	// flags that sq strings should be converted to the use_vars_lazy_parsable_strings
 	boolean isUseVarsContent = false;
 	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
@@ -85,19 +83,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
 		// fixme crushes on quick s typing
 		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
-	}
-
-
-	public boolean isStringify()
-	{
-		return stringify;
-	}
-
-	public boolean setStringify(boolean stringify)
-	{
-		boolean oldState = this.stringify;
-		this.stringify = stringify;
-		return oldState;
 	}
 
 	public boolean isUseVarsContent()

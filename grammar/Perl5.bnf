@@ -672,7 +672,7 @@ use_statement ::=  'use' use_no_parameters <<statementSemi>> {pin=1}
 no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
-private use_module_parameters ::= any_package [perl_version [comma]] [<<parseStringifiedExpression>>];
+private use_module_parameters ::= any_package [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
 // other name to extend declaration, not variable

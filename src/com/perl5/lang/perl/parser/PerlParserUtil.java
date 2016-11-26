@@ -276,22 +276,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * This is kinda hack for use/no statements and bareword -options
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean parseStringifiedExpression(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		boolean oldState = ((PerlBuilder) b).setStringify(true);
-		boolean r = PerlParserImpl.expr(b, l, -1);
-		((PerlBuilder) b).setStringify(oldState);
-		return r;
-	}
-
-	/**
 	 * Parsing use vars parameters by forsing re-parsing SQ strings as DQ
 	 *
 	 * @param b PerlBuilder
