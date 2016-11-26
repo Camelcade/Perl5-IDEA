@@ -120,7 +120,7 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
-REGEX_CHARGROUPS = "\\" [dswDSW]
+REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
 REGEX_POSIX_OPEN = "[:"
 REGEX_POSIX_CLOSE = ":]"
@@ -145,6 +145,7 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 %xstate STRING_Q, STRING_QQ, STRING_QX, STRING_LIST
 %xstate MATCH_REGEX, EXTENDED_MATCH_REGEX, REPLACEMENT_REGEX
+%xstate LEX_REGEX_CHAR_CLASS, REGEX_POSIX_CHAR_CLASS
 
 %state PREPARSED_ITEMS
 %xstate SUB_PROTOTYPE
@@ -375,6 +376,17 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 //////////////////////////////////// REGULAR EXPRESSION ////////////////////////////////////////////////////////////////
 
+<REGEX_POSIX_CHAR_CLASS>{
+	{REGEX_POSIX_CHARGROUPS}	{return REGEX_POSIX_CLASS_NAME;}
+	{REGEX_POSIX_CLOSE}			{yybegin(LEX_REGEX_CHAR_CLASS);return REGEX_POSIX_RIGHT_BRACKET;}
+}
+
+<LEX_REGEX_CHAR_CLASS>{
+	"]"										{popState();return REGEX_RIGHT_BRACKET;}
+	{REGEX_POSIX_OPEN} / {REGEX_POSIX_END}	{yybegin(REGEX_POSIX_CHAR_CLASS);return REGEX_POSIX_LEFT_BRACKET;}
+	[^]										{return REGEX_CHAR_CLASS;}
+}
+
 <EXTENDED_MATCH_REGEX>
 {
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
@@ -383,7 +395,9 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 	<MATCH_REGEX>
 	{
-		{REGEX_COMMENT}	{return COMMENT_LINE;}
+		{REGEX_COMMENT}		{return COMMENT_LINE;}
+		"["					{pushStateAndBegin(LEX_REGEX_CHAR_CLASS);return REGEX_LEFT_BRACKET;}
+		{REGEX_CHAR_CLASS}	{return REGEX_CHAR_CLASS;}
 
 		<REPLACEMENT_REGEX>{
 			"\\".		{return REGEX_TOKEN;}
@@ -392,9 +406,9 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 }
 
 <EXTENDED_MATCH_REGEX>
-	[^\\ \t\f\n\r$@#\(]+	{return REGEX_TOKEN;}
+	[^\\ \t\f\n\r$@#\(\[]+	{return REGEX_TOKEN;}
 <MATCH_REGEX>
-	[^$@\\\(]+				{return REGEX_TOKEN;}
+	[^$@\\\(\[]+				{return REGEX_TOKEN;}
 <REPLACEMENT_REGEX>
 	[^$@\\]+ 				{return REGEX_TOKEN;}
 
