@@ -48,6 +48,10 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes
 			new BracePair(LEFT_BRACE_HASH, RIGHT_BRACE_HASH, true),
 			new BracePair(LEFT_BRACE_CODE, RIGHT_BRACE_CODE, true),
 			new BracePair(LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB, true),
+			new BracePair(REGEX_LEFT_BRACE, REGEX_RIGHT_BRACE, true),
+			new BracePair(REGEX_LEFT_BRACKET, REGEX_RIGHT_BRACKET, true),
+			new BracePair(REGEX_LEFT_PAREN, REGEX_RIGHT_PAREN, true),
+			new BracePair(REGEX_POSIX_LEFT_BRACKET, REGEX_POSIX_RIGHT_BRACKET, true),
 	};
 
 	@Override
