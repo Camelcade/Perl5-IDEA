@@ -75,7 +75,7 @@ public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded 
 	{
 		if (tokenType == MOJO_BEGIN || tokenType == MOJO_END)
 		{
-			return PERL_KEYWORD_KEYS;
+			tokenType = RESERVED_IF;
 		}
 		return super.getTokenHighlights(tokenType);
 	}
