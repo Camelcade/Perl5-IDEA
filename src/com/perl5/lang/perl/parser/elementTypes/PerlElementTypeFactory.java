@@ -2350,6 +2350,46 @@ public class PerlElementTypeFactory
 			};
 		}
 
+		if (name.equals("CUSTOM_CHAR_CLASS"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlCustomCharClassImpl(node);
+				}
+			};
+		}
+		if (name.equals("POSIX_CHAR_CLASS"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlPosixCharClassImpl(node);
+				}
+			};
+		}
+
+		if (name.equals("CHAR_RANGE"))
+		{
+			return new PerlElementTypeEx(name)
+			{
+				@NotNull
+				@Override
+				public PsiElement getPsiElement(@NotNull ASTNode node)
+				{
+					return new PsiPerlCharRangeImpl(node);
+				}
+			};
+		}
+
+
+
 		throw new RuntimeException("Unknown token:" + name);
 	}
 }

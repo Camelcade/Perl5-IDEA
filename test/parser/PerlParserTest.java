@@ -36,6 +36,11 @@ public class PerlParserTest extends PerlParserTestBase
 		doTest();
 	}
 
+	public void testCharGroups()
+	{
+		doTest();
+	}
+
 	public void testMojoliciousHelperDeclaration()
 	{
 		doTest();

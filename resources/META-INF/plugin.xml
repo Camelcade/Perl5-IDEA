@@ -55,6 +55,7 @@
           </li>
           <li>Implemented support for post-deref syntax according to the perldoc</li>
           <li><code>#@type</code> annotation for variables. More information in our <a href="https://github.com/Camelcade/Perl5-IDEA/wiki/Annotations#type">wiki</a>.</li>
+          <li>Plugin now recognizes and highlights character classes in regular expressions.</li>
       </ul>
       <li>Class::Accessor functionality is unavailable in this version</li>
      </ul>

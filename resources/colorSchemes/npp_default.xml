@@ -16,6 +16,12 @@
   -->
 
 <list>
+    <option name="PERL_REGEX_CHAR_CLASS">
+        <value>
+            <option name="FOREGROUND" value="800080"/>
+            <option name="FONT_TYPE" value="1"/>
+        </value>
+    </option>
     <option name="PERL_SCALAR">
         <value>
             <option name="FOREGROUND" value="FF8000"/>

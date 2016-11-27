@@ -900,7 +900,18 @@ private regex_code ::= LP_CODE_BLOCK | file_item+
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item +
-private perl_regex_item ::= 'regex' | interpolated_constructs
+private perl_regex_item ::=
+	'regex' |
+	'\w'	|
+	custom_char_class |
+	interpolated_constructs
+
+custom_char_class ::= '[[' custom_char_class_body ']]' {pin=1}
+private custom_char_class_body ::= ['^'] regex_char_class_body_item * {recoverWhile=recover_char_class_body}
+private regex_char_class_body_item ::= char_range | '\w' | <<remapToken 'OPERATOR_MINUS, REGEX_CHAR_CLASS'>> | posix_char_class | interpolated_constructs
+private recover_char_class_body ::= !('\w'| ']]' | '$@' | '$$' | '$#' | 'r}' | '-')
+char_range ::= '\w' '-' '\w'
+posix_char_class ::= '[:' ['^'] [':name:'] ':]' {pin=1}
 
 tr_regex ::=  ('tr'|'y') tr_search tr_replacement [tr_modifiers] {pin=1}
 private tr_search ::= 'r{' [tr_searchlist] {pin=1}

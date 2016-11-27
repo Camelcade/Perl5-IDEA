@@ -88,6 +88,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
 			new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
+			new AttributesDescriptor("Regex character class", PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS),
 
 			new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
 			new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),
@@ -127,6 +128,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 				"<block>BEGIN</block> { <kw>use</kw> <package>Mojo::Base</package> <q>-strict</q>; };\n" +
 				"<kw>sub</kw> <autoload>AUTOLOAD</autoload>{}\n" +
 				"<autoload>autoloaded_sub_call</autoload>();\n" +
+				"/this[-\\s[:^alpha:]a-z-]is\\sa[^\\s]te\\\\sst/;\n" +
 				"<ann>#@method</ann>\n" +
 				"<kw>sub</kw> <sub_declaration>sub_declaration</sub_declaration>: <sub_attr>method</sub_attr>;\n" +
 				"<ann>#@deprecated</ann>\n" +

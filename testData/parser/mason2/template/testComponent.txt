@@ -874,7 +874,7 @@ Mason2 template file
                       PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
                         PsiElement(Perl5: r{)('/')
                         PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
-                          PsiElement(Perl5: regex)('\s')
+                          PsiElement(Perl5: \w)('\s')
                         PsiElement(Perl5: r})('/')
                       PsiElement(Perl5: ,)(',')
                       PsiPerlDerefExprImpl(Perl5: DEREF_EXPR)

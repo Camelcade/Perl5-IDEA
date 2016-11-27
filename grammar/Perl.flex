@@ -120,11 +120,12 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
+REGEX_HASH_NEGATING = [\^\:\\\[\{]
 REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
 REGEX_POSIX_OPEN = "[:"
 REGEX_POSIX_CLOSE = ":]"
-REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
+REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 //REGEX_NUMBER_OCTAL = "0"[0-7]+
 //REGEX_NUMBER_HEX = [xX][0-9a-fA-F]+
@@ -145,7 +146,8 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 %xstate STRING_Q, STRING_QQ, STRING_QX, STRING_LIST
 %xstate MATCH_REGEX, EXTENDED_MATCH_REGEX, REPLACEMENT_REGEX
-%xstate LEX_REGEX_CHAR_CLASS, REGEX_POSIX_CHAR_CLASS
+%xstate LEX_REGEX_CHAR_CLASS, LEX_REGEX_CHAR_CLASS_START
+%xstate REGEX_POSIX_CHAR_CLASS
 
 %state PREPARSED_ITEMS
 %xstate SUB_PROTOTYPE
@@ -355,18 +357,12 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 	{UNQUOTED_HEREDOC_MARKER} {yybegin(AFTER_VALUE); heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
 }
 
-<STRING_QQ,STRING_QX,MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX>
-{
-	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
-	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
-	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
-}
-
 <INTERPOLATED_VARIABLE_SUFFIX>{
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"
 											{return startBracedBlockWithState(BRACED_STRING);	}
 	"["										{return startBracketedBlock();}
 	"["	/ {REGEX_ARRAY_NEGATING}			{pushback();popState();}
+	"{"	/ {REGEX_HASH_NEGATING}				{pushback();popState();}
 	"{"										{return startBracedBlock();}
 	"->" / [\{\[] {REGEX_ARRAY_NEGATING} 	{pushback();popState();}
 	"->" / [\{\[]							{return OPERATOR_DEREFERENCE;}
@@ -378,12 +374,26 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 <REGEX_POSIX_CHAR_CLASS>{
 	{REGEX_POSIX_CHARGROUPS}	{return REGEX_POSIX_CLASS_NAME;}
+	"^"							{return OPERATOR_BITWISE_XOR;}
 	{REGEX_POSIX_CLOSE}			{yybegin(LEX_REGEX_CHAR_CLASS);return REGEX_POSIX_RIGHT_BRACKET;}
+}
+
+<LEX_REGEX_CHAR_CLASS_START>{
+	"^" / "-"					{return OPERATOR_BITWISE_XOR;}
+	"^"							{yybegin(LEX_REGEX_CHAR_CLASS); return OPERATOR_BITWISE_XOR;}
+	"-"							{yybegin(LEX_REGEX_CHAR_CLASS); return REGEX_CHAR_CLASS;}
+	[^]							{yypushback(1);yybegin(LEX_REGEX_CHAR_CLASS);}
 }
 
 <LEX_REGEX_CHAR_CLASS>{
 	"]"										{popState();return REGEX_RIGHT_BRACKET;}
+	"-" / "]"								{return REGEX_CHAR_CLASS;}
+	"@" / [\]%\\]							{return REGEX_CHAR_CLASS;}
+	"$" / \s+ "]"							{return REGEX_CHAR_CLASS;}
 	{REGEX_POSIX_OPEN} / {REGEX_POSIX_END}	{yybegin(REGEX_POSIX_CHAR_CLASS);return REGEX_POSIX_LEFT_BRACKET;}
+	{REGEX_CHAR_CLASS}						{return REGEX_CHAR_CLASS;}
+	"\\".									{return REGEX_CHAR_CLASS;}
+	"-"										{return OPERATOR_MINUS;}
 	[^]										{return REGEX_CHAR_CLASS;}
 }
 
@@ -396,7 +406,7 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 	<MATCH_REGEX>
 	{
 		{REGEX_COMMENT}		{return COMMENT_LINE;}
-		"["					{pushStateAndBegin(LEX_REGEX_CHAR_CLASS);return REGEX_LEFT_BRACKET;}
+		"["					{pushStateAndBegin(LEX_REGEX_CHAR_CLASS_START);return REGEX_LEFT_BRACKET;}
 		{REGEX_CHAR_CLASS}	{return REGEX_CHAR_CLASS;}
 
 		<REPLACEMENT_REGEX>{
@@ -416,6 +426,13 @@ REGEX_POSIX_END = {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 	[^] 					{return REGEX_TOKEN;}
 
 //////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
+
+<STRING_QQ,STRING_QX,MATCH_REGEX,EXTENDED_MATCH_REGEX,REPLACEMENT_REGEX,LEX_REGEX_CHAR_CLASS>
+{
+	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
+	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
+	"$" /  {NON_SPACE_AHEAD}   	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR); }
+}
 
 <STRING_QQ>{
 	"\\"[\$\@]					{return STRING_CONTENT_QQ;}

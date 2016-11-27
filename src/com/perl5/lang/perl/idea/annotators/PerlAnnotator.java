@@ -24,6 +24,7 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
@@ -40,6 +41,10 @@ public class PerlAnnotator extends PerlBaseAnnotator
 		if (elementType == NYI_STATEMENT)
 		{
 			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
+		}
+		else if (elementType == REGEX_CHAR_CLASS && element.getTextLength() == 1 && ((LeafPsiElement) element).getChars().charAt(0) == '-')
+		{
+			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS);
 		}
 		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
 		{

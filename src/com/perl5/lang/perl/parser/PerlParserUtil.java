@@ -525,4 +525,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		m.rollbackTo();
 		return false;
 	}
+
+	public static boolean remapToken(PsiBuilder b, int l, IElementType sourceType, IElementType targetToken)
+	{
+		if (b.getTokenType() != sourceType)
+		{
+			return false;
+		}
+
+		PsiBuilder.Marker mark = b.mark();
+		b.advanceLexer();
+		mark.collapse(targetToken);
+		return true;
+	}
 }
