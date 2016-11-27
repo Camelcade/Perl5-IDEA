@@ -129,31 +129,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		return ((PerlBuilder) b).getPerlParser().parseStatementSemi(b, l);
 	}
 
-	/**
-	 * Replaces identifier as a variable name
-	 *
-	 * @param b Perlbuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public static boolean convertIdentifier(PsiBuilder b, int l, IElementType tokenType)
-	{
-		IElementType currentTokenType = b.getTokenType();
-		if (currentTokenType == tokenType)
-		{
-			b.advanceLexer();
-			return true;
-		}
-		else if (CONVERTABLE_TOKENS.contains(currentTokenType))
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(tokenType);
-			return true;
-		}
-
-		return false;
-	}
 
 	protected static boolean isOperatorToken(PsiBuilder b, int l)
 	{
@@ -261,7 +236,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 						break;
 					}
 				}
-				;
+
 				if (!PerlParserImpl.expr(b, l, 4))    // looks like an end
 				{
 					break;
