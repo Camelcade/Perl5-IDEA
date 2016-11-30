@@ -412,6 +412,8 @@ REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 //		{REGEX_CHAR_CLASS}	{return REGEX_CHAR_CLASS;}
 
 		<REPLACEMENT_REGEX>{
+			"@" / [\]%\\]							{return REGEX_TOKEN;}
+			"$" / \s+ "]"							{return REGEX_TOKEN;}
 			"\\".		{return REGEX_TOKEN;}
 		}
 	}
