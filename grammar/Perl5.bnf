@@ -371,6 +371,8 @@ limitations under the License.
 
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
+    mixin("perl_regex")="com.perl5.lang.perl.psi.mixins.Perl5RegexpMixin"
+
     extends("heredoc_opener|tag_scalar")=expr
 
     extends("string_sq|string_dq|string_xq|string_bare")=expr
