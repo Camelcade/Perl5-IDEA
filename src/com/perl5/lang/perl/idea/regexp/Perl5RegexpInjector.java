@@ -18,9 +18,11 @@ package com.perl5.lang.perl.idea.regexp;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_TOKEN;
 
 /**
  * Created by hurricup on 30.11.2016.
@@ -31,7 +33,7 @@ public class Perl5RegexpInjector implements LanguageInjector
 	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar)
 	{
 
-		if (host instanceof PsiPerlPerlRegexImpl)
+		if (host instanceof PsiPerlPerlRegexImpl && ((PsiPerlPerlRegexImpl) host).isMatchRegexp())
 		{
 			int[] sourceOffset = new int[]{0};
 			host.acceptChildren(new PsiElementVisitor()
@@ -39,13 +41,13 @@ public class Perl5RegexpInjector implements LanguageInjector
 				@Override
 				public void visitElement(PsiElement element)
 				{
-					if (element instanceof PsiWhiteSpace || element instanceof PsiComment || element instanceof PsiPerlExpr)
+					if (PsiUtilCore.getElementType(element) == REGEX_TOKEN)
 					{
+						injectionPlacesRegistrar.addPlace(Perl5RegexpLanguage.INSTANCE, TextRange.from(sourceOffset[0], element.getTextLength()), null, null);
 						sourceOffset[0] += element.getTextLength();
 					}
 					else
 					{
-						injectionPlacesRegistrar.addPlace(Perl5RegexpLanguage.INSTANCE, TextRange.from(sourceOffset[0], element.getTextLength()), null, null);
 						sourceOffset[0] += element.getTextLength();
 					}
 				}
