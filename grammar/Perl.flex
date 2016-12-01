@@ -121,11 +121,11 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
 REGEX_HASH_NEGATING = [\^\:\\\[\{]
-REGEX_CHAR_CLASS = "\\" [dswDSW]
-REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
-REGEX_POSIX_OPEN = "[:"
-REGEX_POSIX_CLOSE = ":]"
-REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
+//REGEX_CHAR_CLASS = "\\" [dswDSW]
+//REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
+//REGEX_POSIX_OPEN = "[:"
+//REGEX_POSIX_CLOSE = ":]"
+//REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
 
 //REGEX_NUMBER_OCTAL = "0"[0-7]+
 //REGEX_NUMBER_HEX = [xX][0-9a-fA-F]+

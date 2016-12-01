@@ -70,7 +70,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 
 	public static final TextAttributesKey PERL_REGEX_QUOTE = createTextAttributesKey("PERL_REGEX_QUOTE", DefaultLanguageHighlighterColors.BRACKETS);
 	public static final TextAttributesKey PERL_REGEX_TOKEN = createTextAttributesKey("PERL_REGEX_TOKEN", DefaultLanguageHighlighterColors.STRING);
-	public static final TextAttributesKey PERL_REGEX_CHAR_CLASS = createTextAttributesKey("PERL_REGEX_CHAR_CLASS", DefaultLanguageHighlighterColors.KEYWORD);
+//	public static final TextAttributesKey PERL_REGEX_CHAR_CLASS = createTextAttributesKey("PERL_REGEX_CHAR_CLASS", DefaultLanguageHighlighterColors.KEYWORD);
 
 	public static final TextAttributesKey PERL_ANNOTATION = createTextAttributesKey("PERL_ANNOTATION", DefaultLanguageHighlighterColors.METADATA);
 	public static final TextAttributesKey PERL_SUB_ATTRIBUTE = createTextAttributesKey("PERL_SUB_ATTRIBUTE", DefaultLanguageHighlighterColors.METADATA);
@@ -136,9 +136,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 
 		safeMap(SEMICOLON, PERL_SEMICOLON);
 
-		safeMap(PERL_BRACE, LEFT_BRACE, RIGHT_BRACE, REGEX_LEFT_BRACE, REGEX_RIGHT_BRACE);
-		safeMap(PERL_BRACK, LEFT_BRACKET, RIGHT_BRACKET, REGEX_LEFT_BRACKET, REGEX_RIGHT_BRACKET, REGEX_POSIX_LEFT_BRACKET, REGEX_POSIX_RIGHT_BRACKET);
-		safeMap(PERL_PAREN, LEFT_PAREN, RIGHT_PAREN, REGEX_LEFT_PAREN, REGEX_RIGHT_PAREN);
+		safeMap(PERL_BRACE, LEFT_BRACE, RIGHT_BRACE); //, REGEX_LEFT_BRACE, REGEX_RIGHT_BRACE
+		safeMap(PERL_BRACK, LEFT_BRACKET, RIGHT_BRACKET); //, REGEX_LEFT_BRACKET, REGEX_RIGHT_BRACKET, REGEX_POSIX_LEFT_BRACKET, REGEX_POSIX_RIGHT_BRACKET
+		safeMap(PERL_PAREN, LEFT_PAREN, RIGHT_PAREN); // , REGEX_LEFT_PAREN, REGEX_RIGHT_PAREN
 
 		safeMap(PERL_NUMBER, NUMBER, NUMBER_SIMPLE);
 		safeMap(NUMBER_VERSION, PERL_VERSION);
@@ -157,7 +157,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 		safeMap(ANNOTATIONS_KEYS, PERL_ANNOTATION);
 		safeMap(TokenSet.andNot(OPERATORS_TOKENSET, TokenSet.create(COMMA, FAT_COMMA, OPERATOR_DEREFERENCE)), PERL_OPERATOR);
 
-		safeMap(PERL_REGEX_CHAR_CLASS, REGEX_CHAR_CLASS, REGEX_POSIX_CLASS_NAME);
+//		safeMap(PERL_REGEX_CHAR_CLASS, REGEX_CHAR_CLASS, REGEX_POSIX_CLASS_NAME);
 	}
 
 

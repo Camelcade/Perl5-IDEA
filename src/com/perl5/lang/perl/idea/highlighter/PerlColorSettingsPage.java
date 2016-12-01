@@ -88,7 +88,7 @@ public class PerlColorSettingsPage implements ColorSettingsPage
 
 			new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
 			new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
-			new AttributesDescriptor("Regex character class", PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS),
+//			new AttributesDescriptor("Regex character class", PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS),
 
 			new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
 			new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),

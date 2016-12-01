@@ -2350,6 +2350,7 @@ public class PerlElementTypeFactory
 			};
 		}
 
+/*
 		if (name.equals("CUSTOM_CHAR_CLASS"))
 		{
 			return new PerlElementTypeEx(name)
@@ -2387,6 +2388,7 @@ public class PerlElementTypeFactory
 				}
 			};
 		}
+*/
 
 
 
