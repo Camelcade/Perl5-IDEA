@@ -22,6 +22,7 @@ import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.regexp.Perl5RegexpLiteralEscaper;
 import com.perl5.lang.perl.psi.PsiPerlReplacementRegex;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -40,7 +41,7 @@ public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLan
 	@Override
 	public boolean isValidHost()
 	{
-		return true;
+		return PerlLocalSettings.getInstance(getProject()).ENABLE_REGEX_INJECTIONS && isMatchRegexp();
 	}
 
 	@Override

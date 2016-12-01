@@ -31,8 +31,10 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
@@ -74,6 +76,7 @@ public class PerlSettingsConfigurable implements Configurable
 	JCheckBox perlCriticCheckBox;
 	JCheckBox perlAnnotatorCheckBox;
 	JCheckBox allowInjectionWithInterpolation;
+	JCheckBox allowRegexpInjections;
 
 	CollectionListModel<String> selfNamesModel;
 	JBList selfNamesList;
@@ -120,6 +123,9 @@ public class PerlSettingsConfigurable implements Configurable
 
 		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
 		builder.addComponent(allowInjectionWithInterpolation);
+
+		allowRegexpInjections = new JCheckBox(PerlBundle.message("perl.config.regex.injections"));
+		builder.addComponent(allowRegexpInjections);
 
 		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
 //		builder.addComponent(perlAnnotatorCheckBox);
@@ -309,6 +315,7 @@ public class PerlSettingsConfigurable implements Configurable
 				mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
 				mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
 				mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
+				myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected() ||
 				mySharedSettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
 				mySharedSettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
 				!StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
@@ -340,6 +347,12 @@ public class PerlSettingsConfigurable implements Configurable
 		myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
 		mySharedSettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
 
+		if (myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected())
+		{
+			myLocalSettings.ENABLE_REGEX_INJECTIONS = allowRegexpInjections.isSelected();
+			FileContentUtil.reparseOpenedFiles();
+		}
+
 		myLocalSettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
 		mySharedSettings.PERL_TIDY_ARGS = perlTidyArgsInputField.getText();
 
@@ -351,6 +364,7 @@ public class PerlSettingsConfigurable implements Configurable
 			applyMicroIdeSettings();
 		}
 		mySharedSettings.settingsUpdated();
+
 	}
 
 	public void applyMicroIdeSettings()
@@ -380,6 +394,7 @@ public class PerlSettingsConfigurable implements Configurable
 		simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
 		autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);
 		allowInjectionWithInterpolation.setSelected(mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);
+		allowRegexpInjections.setSelected(myLocalSettings.ENABLE_REGEX_INJECTIONS);
 		perlAnnotatorCheckBox.setSelected(mySharedSettings.PERL_ANNOTATOR_ENABLED);
 		deparseArgumentsTextField.setText(mySharedSettings.PERL_DEPARSE_ARGUMENTS);
 

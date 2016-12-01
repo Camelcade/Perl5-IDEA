@@ -33,7 +33,7 @@ public class Perl5RegexpInjector implements LanguageInjector
 	public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar)
 	{
 
-		if (host instanceof PsiPerlPerlRegexImpl && ((PsiPerlPerlRegexImpl) host).isMatchRegexp())
+		if (host instanceof PsiPerlPerlRegexImpl && host.isValidHost())
 		{
 			int[] sourceOffset = new int[]{0};
 			host.acceptChildren(new PsiElementVisitor()
@@ -44,12 +44,8 @@ public class Perl5RegexpInjector implements LanguageInjector
 					if (PsiUtilCore.getElementType(element) == REGEX_TOKEN)
 					{
 						injectionPlacesRegistrar.addPlace(Perl5RegexpLanguage.INSTANCE, TextRange.from(sourceOffset[0], element.getTextLength()), null, null);
-						sourceOffset[0] += element.getTextLength();
 					}
-					else
-					{
-						sourceOffset[0] += element.getTextLength();
-					}
+					sourceOffset[0] += element.getTextLength();
 				}
 			});
 		}
