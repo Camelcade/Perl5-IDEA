@@ -29,7 +29,9 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.*;
+import com.intellij.ui.CollectionListModel;
+import com.intellij.ui.RawCommandLineEditor;
+import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
@@ -46,8 +48,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by hurricup on 30.08.2015.
@@ -93,7 +93,7 @@ public class PerlSettingsConfigurable implements Configurable
 	@Override
 	public String getDisplayName()
 	{
-		return "Perl5";
+		return PerlBundle.message("perl.perl5");
 	}
 
 	@Nullable
@@ -115,22 +115,22 @@ public class PerlSettingsConfigurable implements Configurable
 			createMicroIdeComponents(builder);
 		}
 
-		simpleMainCheckbox = new JCheckBox("Use simple main:: subs resolution (many scripts with same named subs in main:: namespace)");
+		simpleMainCheckbox = new JCheckBox(PerlBundle.message("perl.config.simple.main"));
 		builder.addComponent(simpleMainCheckbox);
 
-		autoInjectionCheckbox = new JCheckBox("Automatically inject other languages in here-docs by marker text");
+		autoInjectionCheckbox = new JCheckBox(PerlBundle.message("perl.config.heredoc.injections"));
 		builder.addComponent(autoInjectionCheckbox);
 
-		allowInjectionWithInterpolation = new JCheckBox("Allow injections in QQ here-docs with interpolated entities");
+		allowInjectionWithInterpolation = new JCheckBox(PerlBundle.message("perl.config.heredoc.injections.qq"));
 		builder.addComponent(allowInjectionWithInterpolation);
 
 		allowRegexpInjections = new JCheckBox(PerlBundle.message("perl.config.regex.injections"));
 		builder.addComponent(allowRegexpInjections);
 
-		perlAnnotatorCheckBox = new JCheckBox("Enable perl -cw annotations [NYI]");
+		perlAnnotatorCheckBox = new JCheckBox(PerlBundle.message("perl.config.annotations.cw"));
 //		builder.addComponent(perlAnnotatorCheckBox);
 
-		perlCriticCheckBox = new JCheckBox("Enable Perl::Critic annotations (should be installed)");
+		perlCriticCheckBox = new JCheckBox(PerlBundle.message("perl.config.annotations.critic"));
 		builder.addComponent(perlCriticCheckBox);
 
 		perlCriticPathInputField = new TextFieldWithBrowseButton();
@@ -140,24 +140,27 @@ public class PerlSettingsConfigurable implements Configurable
 			@Override
 			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
-				if (!super.isFileVisible(file, showHiddenFiles))
-				{
-					return false;
-				}
+				return super.isFileVisible(file, showHiddenFiles) &&
+						(file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlCriticAnnotator.PERL_CRITIC_LINUX_NAME));
 
-				return file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlCriticAnnotator.PERL_CRITIC_LINUX_NAME);
 			}
 		};
 
+		//noinspection DialogTitleCapitalization
 		perlCriticPathInputField.addBrowseFolderListener(
-				"Select File",
-				"Choose a Perl::Critic Executable",
+				PerlBundle.message("perl.config.select.file.title"),
+				PerlBundle.message("perl.config.select.critic"),
 				null, // project
 				perlCriticDescriptor
 		);
-		builder.addLabeledComponent(new JLabel("Path to PerlCritic executable:"), perlCriticPathInputField);
+		builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.path.critic")), perlCriticPathInputField);
 		perlCriticArgsInputField = new RawCommandLineEditor();
-		builder.addComponent(copyDialogCaption(LabeledComponent.create(perlCriticArgsInputField, "Perl::Critic command line arguments:"), "Perl::Critic command line arguments:"));
+		builder.addComponent(
+				copyDialogCaption(
+						LabeledComponent.create(perlCriticArgsInputField, PerlBundle.message("perl.config.critic.cmd.arguments")),
+						PerlBundle.message("perl.config.critic.cmd.arguments")
+				)
+		);
 
 		perlTidyPathInputField = new TextFieldWithBrowseButton();
 		perlTidyPathInputField.setEditable(false);
@@ -166,73 +169,60 @@ public class PerlSettingsConfigurable implements Configurable
 			@Override
 			public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles)
 			{
-				if (!super.isFileVisible(file, showHiddenFiles))
-				{
-					return false;
-				}
+				return super.isFileVisible(file, showHiddenFiles) &&
+						(file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlFormatWithPerlTidyAction.PERL_TIDY_LINUX_NAME));
 
-				return file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlFormatWithPerlTidyAction.PERL_TIDY_LINUX_NAME);
 			}
 		};
 
+		//noinspection DialogTitleCapitalization
 		perlTidyPathInputField.addBrowseFolderListener(
-				"Select File",
-				"Choose a Perl::Tidy Executable",
+				PerlBundle.message("perl.config.select.file.title"),
+				PerlBundle.message("perl.config.select.tidy"),
 				null, // project
 				perlTidyDescriptor
 		);
-		builder.addLabeledComponent(new JLabel("Path to PerlTidy executable:"), perlTidyPathInputField);
+		builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.path.tidy")), perlTidyPathInputField);
 		perlTidyArgsInputField = new RawCommandLineEditor();
 		builder.addComponent(
 				copyDialogCaption(
-						LabeledComponent.create(perlTidyArgsInputField, "Perl::Tidy command line arguments (-st -se arguments will be added automatically):"),
-						"Perl::Tidy command line arguments:"
+						LabeledComponent.create(perlTidyArgsInputField, PerlBundle.message("perl.config.tidy.options.label")),
+						PerlBundle.message("perl.config.tidy.options.label.short")
 				));
 
 		regeneratePanel = new JPanel(new BorderLayout());
-		regenerateButton = new JButton("Re-generate XSubs declarations");
-		regenerateButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				PerlXSubsState.getInstance(myProject).reparseXSubs();
-			}
-		});
+		regenerateButton = new JButton(PerlBundle.message("perl.config.generate.xsubs"));
+		regenerateButton.addActionListener(e -> PerlXSubsState.getInstance(myProject).reparseXSubs());
 		regeneratePanel.add(regenerateButton, BorderLayout.WEST);
 		builder.addComponent(regeneratePanel);
 
 		deparseArgumentsTextField = new JTextField();
-		builder.addLabeledComponent("Comma-separated B::Deparse options for deparse action", deparseArgumentsTextField);
+		builder.addLabeledComponent(PerlBundle.message("perl.config.deparse.options.label"), deparseArgumentsTextField);
 
 		//noinspection Since15
-		selfNamesModel = new CollectionListModel<String>();
+		selfNamesModel = new CollectionListModel<>();
 		selfNamesList = new JBList(selfNamesModel);
-		builder.addLabeledComponent(new JLabel("Scalar names considered as an object self-reference (without a $):"), ToolbarDecorator
+		builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.self.names.label")), ToolbarDecorator
 				.createDecorator(selfNamesList)
-				.setAddAction(new AnActionButtonRunnable()
+				.setAddAction(anActionButton ->
 				{
-					@Override
-					public void run(AnActionButton anActionButton)
+					String variableName = Messages.showInputDialog(
+							myProject,
+							PerlBundle.message("perl.config.self.add.text"),
+							PerlBundle.message("perl.config.self.add.title"),
+							Messages.getQuestionIcon(),
+							"",
+							null);
+					if (StringUtil.isNotEmpty(variableName))
 					{
-						String variableName = Messages.showInputDialog(
-								myProject,
-								"Type variable name:",
-								"New Self-Reference Variable Name",
-								Messages.getQuestionIcon(),
-								"",
-								null);
-						if (StringUtil.isNotEmpty(variableName))
+						while (variableName.startsWith("$"))
 						{
-							while (variableName.startsWith("$"))
-							{
-								variableName = variableName.substring(1);
-							}
+							variableName = variableName.substring(1);
+						}
 
-							if (StringUtil.isNotEmpty(variableName) && !selfNamesModel.getItems().contains(variableName))
-							{
-								selfNamesModel.add(variableName);
-							}
+						if (StringUtil.isNotEmpty(variableName) && !selfNamesModel.getItems().contains(variableName))
+						{
+							selfNamesModel.add(variableName);
 						}
 					}
 				}).createPanel());
@@ -247,9 +237,9 @@ public class PerlSettingsConfigurable implements Configurable
 		{
 
 			@Override
-			public void addBrowseFolderListener(@Nullable String title, @Nullable String description, @Nullable Project project, FileChooserDescriptor fileChooserDescriptor, TextComponentAccessor<JTextField> accessor, boolean autoRemoveOnHide)
+			public void addBrowseFolderListener(@Nullable String title, @Nullable String description, @Nullable Project project, FileChooserDescriptor fileChooserDescriptor, TextComponentAccessor<JTextField> accessor)
 			{
-				addBrowseFolderListener(project, new BrowseFolderActionListener<JTextField>(title, description, this, project, fileChooserDescriptor, accessor)
+				addActionListener(new BrowseFolderActionListener<JTextField>(title, description, this, project, fileChooserDescriptor, accessor)
 				{
 					@Nullable
 					@Override
@@ -278,7 +268,7 @@ public class PerlSettingsConfigurable implements Configurable
 						}
 						return virtualFile;
 					}
-				}, autoRemoveOnHide);
+				});
 			}
 		};
 
@@ -292,20 +282,20 @@ public class PerlSettingsConfigurable implements Configurable
 				PerlSdkType sdkType = PerlSdkType.getInstance();
 				if (!sdkType.isValidSdkHome(files[0].getCanonicalPath()))
 				{
-					throw new ConfigurationException("Unable to locate perl5 executable");
+					throw new ConfigurationException(PerlBundle.message("perl.config.error.exe.not.found"));
 				}
 			}
 		};
 
 		perlPathInputField.addBrowseFolderListener(
-				"Perl5 Interpreter",
-				"Choose a directory with perl5 executable:",
+				PerlBundle.message("perl.config.interpreter.title"),
+				PerlBundle.message("perl.config.interpreter.text"),
 				null, // project
 				descriptor
 		);
 
 
-		builder.addLabeledComponent("Perl5 interpreter path: ", perlPathInputField, 1);
+		builder.addLabeledComponent(PerlBundle.message("perl.config.interpreter.label"), perlPathInputField, 1);
 	}
 
 	@Override
@@ -372,15 +362,11 @@ public class PerlSettingsConfigurable implements Configurable
 		myLocalSettings.PERL_PATH = perlPathInputField.getText();
 
 		ApplicationManager.getApplication().runWriteAction(
-				new Runnable()
+				() ->
 				{
-					@Override
-					public void run()
-					{
-						ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-						PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
-						modifiableModel.commit();
-					}
+					ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
+					PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
+					modifiableModel.commit();
 				}
 		);
 	}
