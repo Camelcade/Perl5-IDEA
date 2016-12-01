@@ -377,7 +377,7 @@
                                implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
         <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
                             implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
-        <languageInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
+        <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
 
         <!-- Template Toolkit -->
         <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
