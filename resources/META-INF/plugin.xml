@@ -37,7 +37,7 @@
      may be backported to previous version, but current - 2.2 version is pretty stable for those, who don't want or need to upgrade.</p>
      <p>Changes:
      <ul>
-      <li>IDEA 2016.3 compatibility</li>
+      <li>IDEA 2017.1 EAP compatibility</li>
       <li>Multiple internal tools upgrades</li>
       <li>Moved to Java 8</li>
       <li>Lexer and parser deeply reworked and should be much faster:</li>
