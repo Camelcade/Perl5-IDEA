@@ -19,8 +19,10 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.notification.*;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.idea.PerlVirtualFileListener;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
@@ -89,6 +91,8 @@ public class Perl5ProjectComponent implements ProjectComponent
 			);
 			Notifications.Bus.notify(notification);
 		}
+
+		StartupManager.getInstance(myProject).runWhenProjectIsInitialized(FileContentUtil::reparseOpenedFiles);
 
 		// called when project is opened
 //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
