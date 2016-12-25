@@ -52,7 +52,7 @@ public abstract class PerlTemplatingLexer extends PerlProtoLexer
 	{
 		super.resetInternals();
 		myPerlLexer.reset(getBuffer(), getBufferStart(), getBufferEnd(), 0);
-		assert yystate() == 0;
+		assert yystate() == 0 : "Got yystate: " + yystate() + " instead of 0";
 	}
 
 	/**
