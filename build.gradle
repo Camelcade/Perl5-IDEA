@@ -93,6 +93,7 @@ configurations {
 }
 
 dependencies {
+    testCompile 'junit:junit:4.+'
     lexer files('lib/jflex-1.7.0-SNAPSHOT.jar')
     parser files('lib/grammar-kit.jar')
 }
@@ -118,7 +119,6 @@ idea {
         generatedSourceDirs += file('gen')
     }
 }
-
 
 def getJflexArguments(srcFlex, targetDir) {
     return [
