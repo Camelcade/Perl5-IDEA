@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.regexp;
 
+import org.intellij.lang.regexp.DefaultRegExpPropertiesProvider;
 import org.intellij.lang.regexp.RegExpLanguageHost;
 import org.intellij.lang.regexp.psi.RegExpChar;
 import org.intellij.lang.regexp.psi.RegExpGroup;
@@ -28,6 +29,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class Perl5RegexpHost implements RegExpLanguageHost
 {
+	private static final DefaultRegExpPropertiesProvider PROPERTIES_PROVIDER = DefaultRegExpPropertiesProvider.getInstance();
+
 	@Override
 	public boolean characterNeedsEscaping(char c)
 	{
@@ -73,7 +76,7 @@ public class Perl5RegexpHost implements RegExpLanguageHost
 	@Override
 	public boolean isValidCategory(@NotNull String category)
 	{
-		return false;
+		return PROPERTIES_PROVIDER.isValidCategory(category);
 	}
 
 	@NotNull
@@ -81,20 +84,20 @@ public class Perl5RegexpHost implements RegExpLanguageHost
 	public String[][] getAllKnownProperties()
 	{
 		// todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
-		return new String[][]{};
+		return PROPERTIES_PROVIDER.getAllKnownProperties();
 	}
 
 	@Nullable
 	@Override
 	public String getPropertyDescription(@Nullable String name)
 	{
-		return null;
+		return PROPERTIES_PROVIDER.getPropertyDescription(name);
 	}
 
 	@NotNull
 	@Override
 	public String[][] getKnownCharacterClasses()
 	{
-		return new String[0][];
+		return PROPERTIES_PROVIDER.getKnownCharacterClasses();
 	}
 }
