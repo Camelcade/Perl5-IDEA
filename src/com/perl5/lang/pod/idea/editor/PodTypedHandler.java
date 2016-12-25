@@ -100,7 +100,9 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
 			}
 		}
 
+		assert openAngles instanceof LeafPsiElement : "Got non-leaf elements in open angles: " + openAngles.getClass() + "@" + formatterBlock.getText();
 		((LeafPsiElement) openAngles).replaceWithText(openAngles.getText() + "<");
+		assert closeAngles instanceof LeafPsiElement : "Got non-leaf elements in close angles: " + closeAngles.getClass() + "@" + formatterBlock.getText();
 		((LeafPsiElement) closeAngles).replaceWithText(closeAngles.getText() + ">");
 		return insertedChars + 2;
 	}
