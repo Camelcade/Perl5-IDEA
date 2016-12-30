@@ -62,6 +62,9 @@ public interface PerlPackageProcessor
 	 * Parses use statement parameters. Might be used if you need to put some specific PSI constructs in the parameters,
 	 * like constant definition, moose attributes or smth.
 	 * By default uses default parser passed from generated parser.
+	 * It's safe to assume that builder is at PACKAGE token with appropriate name
+	 * We are not advancing lexer through PACKAGE and [VERSION], because it may be used in parsing logic. If you
+	 * don't need them, just invoke {@link com.perl5.lang.perl.parser.PerlParserUtil#passPackageAndVersion(PerlBuilder, int)}
 	 */
 	default boolean parseUseParameters(@NotNull PerlBuilder b, int l, @NotNull Parser defaultParser)
 	{

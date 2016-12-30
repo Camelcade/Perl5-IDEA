@@ -73,8 +73,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 			UNTIL_COMPOUND,
 			IF_COMPOUND,
 			USE_STATEMENT,
-			USE_STATEMENT_CONSTANT,
-			USE_VARS_STATEMENT
+			USE_STATEMENT_CONSTANT
 	);
 
 	public final static TokenSet BLOCK_OPENERS = TokenSet.create(

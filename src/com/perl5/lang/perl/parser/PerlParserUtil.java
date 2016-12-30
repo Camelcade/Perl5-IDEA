@@ -255,25 +255,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 	}
 
 	/**
-	 * Parsing use vars parameters by forsing re-parsing SQ strings as DQ
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return result
-	 */
-	public static boolean parseUseVarsParameters(PsiBuilder b, int l)
-	{
-		assert b instanceof PerlBuilder;
-		((PerlBuilder) b).setUseVarsContent(true);
-
-		boolean r = PerlParserImpl.expr(b, l, -1);
-
-		((PerlBuilder) b).setUseVarsContent(false);
-
-		return r;
-	}
-
-	/**
 	 * Parses SQ string with optional conversion to the use_vars lp string
 	 *
 	 * @param b PerlBuilder
@@ -563,5 +544,15 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			}
 		}
 		return defaultParser.parse(b, l);
+	}
+
+	/**
+	 * Helper method to pass package [version] in use statement
+	 */
+	public static boolean passPackageAndVersion(@NotNull PerlBuilder b, int l)
+	{
+		assert PerlParserUtil.consumeTokenFast(b, PACKAGE);
+		PerlParserImpl.perl_version(b, l);
+		return true;
 	}
 }

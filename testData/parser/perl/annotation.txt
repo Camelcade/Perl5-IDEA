@@ -30,7 +30,7 @@ Perl5
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiPerlAnnotationReturnsImpl(Perl5: ANNOTATION_RETURNS)
       PsiElement(Perl5: #@returns)('#@returns')
-      PsiErrorElement:Perl5: constant, Perl5: package::name or Perl5: vars expected, unexpected end of file
+      PsiErrorElement:Perl5: package::name expected, unexpected end of file
         <empty list>
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiPerlAnnotationInjectImpl(Perl5: ANNOTATION_INJECT)

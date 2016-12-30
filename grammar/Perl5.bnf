@@ -335,7 +335,6 @@ limitations under the License.
     PACKAGE='package::name'
     QUALIFYING_PACKAGE='package::name::'
     PACKAGE_PRAGMA_CONSTANT='constant'
-    PACKAGE_PRAGMA_VARS='vars'
 
     HANDLE='HANDLE'
     BLOCK_NAME='BLOCK_NAME'
@@ -424,10 +423,6 @@ limitations under the License.
 
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
-
-    extends("use_vars_statement")=statement
-    implements("use_vars_statement")="com.perl5.lang.perl.psi.IPerlUseVars"
-    mixin("use_vars_statement")="com.perl5.lang.perl.psi.mixins.PerlUseVarsMixin"
 
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
@@ -677,7 +672,6 @@ when_statement_modifier ::=    'when' expr {pin=1 name="Postfix when"}
 
 private use_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   use_statement_constant
-  | use_vars_statement
   | use_statement
 
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
@@ -689,10 +683,6 @@ no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
 private use_module_parameters ::= any_package [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
-
-// other name to extend declaration, not variable
-use_vars_statement ::=  'use' 'vars' use_vars_parameters <<statementSemi>> {pin=2}
-private use_vars_parameters ::= [perl_version] [<<parseUseVarsParameters>>] {recoverWhile=recover_statement}
 
 use_statement_constant ::=  'use' 'constant' use_constant_parameters <<statementSemi>> {pin=2}
 private use_constant_parameters ::= [perl_version] [use_constant_variants] {recoverWhile=recover_statement}
@@ -716,7 +706,7 @@ private undef_params ::= deref_expr | variable
 
 require_expr ::=  'require' (any_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
-private any_package ::= 'package::name'|'constant'|'vars'
+private any_package ::= 'package::name'
 
 private recover_statement ::= <<recoverStatement>>
 

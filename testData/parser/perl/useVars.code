@@ -1,0 +1,2 @@
+use vars qw/$scalar @array %hash *glob &code/;
+use vars '$scalar', '@array', '%hash', '*glob', '&code';

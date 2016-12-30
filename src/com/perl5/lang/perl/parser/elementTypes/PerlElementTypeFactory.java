@@ -1958,19 +1958,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("USE_VARS_STATEMENT"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlUseVarsStatementImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("VARIABLE_DECLARATION_GLOBAL"))
 		{
 			return new PerlElementTypeEx(name)
