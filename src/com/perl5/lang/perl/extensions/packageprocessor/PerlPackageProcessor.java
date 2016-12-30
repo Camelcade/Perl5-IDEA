@@ -19,6 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
+import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,7 +63,7 @@ public interface PerlPackageProcessor
 	 * like constant definition, moose attributes or smth.
 	 * By default uses default parser passed from generated parser.
 	 */
-	default boolean parseUseParameters(@NotNull PsiBuilder b, int l, @NotNull Parser defaultParser)
+	default boolean parseUseParameters(@NotNull PerlBuilder b, int l, @NotNull Parser defaultParser)
 	{
 		return defaultParser.parse(b, l);
 	}

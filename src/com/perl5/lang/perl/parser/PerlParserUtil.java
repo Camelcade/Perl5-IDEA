@@ -558,7 +558,8 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 			PerlPackageProcessor packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
 			if (packageProcessor != null)
 			{
-				return packageProcessor.parseUseParameters(b, l, defaultParser);
+				assert b instanceof PerlBuilder;
+				return packageProcessor.parseUseParameters((PerlBuilder) b, l, defaultParser);
 			}
 		}
 		return defaultParser.parse(b, l);
