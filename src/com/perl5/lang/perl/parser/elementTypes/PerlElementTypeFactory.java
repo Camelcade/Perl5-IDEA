@@ -1945,19 +1945,6 @@ public class PerlElementTypeFactory
 			};
 		}
 
-		if (name.equals("USE_STATEMENT_CONSTANT"))
-		{
-			return new PerlElementTypeEx(name)
-			{
-				@NotNull
-				@Override
-				public PsiElement getPsiElement(@NotNull ASTNode node)
-				{
-					return new PsiPerlUseStatementConstantImpl(node);
-				}
-			};
-		}
-
 		if (name.equals("VARIABLE_DECLARATION_GLOBAL"))
 		{
 			return new PerlElementTypeEx(name)

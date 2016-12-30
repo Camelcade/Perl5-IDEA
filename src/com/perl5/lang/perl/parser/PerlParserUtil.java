@@ -542,4 +542,12 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		PerlParserImpl.perl_version(b, l);
 		return true;
 	}
+
+	/**
+	 * Proxy method because methods are package private
+	 */
+	public static boolean parseUseConstantVariants(PerlBuilder b, int l)
+	{
+		return PerlParserImpl.use_constant_variants(b, l);
+	}
 }

@@ -1,10 +1,10 @@
-PerlNamespaceReference at (23,31); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (23,31); text in range: 'constant' => 0 results:
 
-PerlNamespaceReference at (56,64); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (56,64); text in range: 'constant' => 0 results:
 
-PerlNamespaceReference at (91,99); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (91,99); text in range: 'constant' => 0 results:
 
-PerlNamespaceReference at (126,134); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (126,134); text in range: 'constant' => 0 results:
 
 PerlNamespaceReference at (232,240); text in range: 'Foo::Bla' => 1 results:
 	NAMESPACE at 0 in constant.pl

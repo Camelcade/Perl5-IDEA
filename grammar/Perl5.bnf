@@ -334,7 +334,6 @@ limitations under the License.
 
     PACKAGE='package::name'
     QUALIFYING_PACKAGE='package::name::'
-    PACKAGE_PRAGMA_CONSTANT='constant'
 
     HANDLE='HANDLE'
     BLOCK_NAME='BLOCK_NAME'
@@ -607,8 +606,8 @@ private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
 
 
 statement ::=
-    use_statements
-    | no_statements
+    use_statement
+    | no_statement
     | sub_declaration
 	| statement_body <<statementSemi>>
 
@@ -670,13 +669,6 @@ for_statement_modifier ::=    'for' expr  {pin=1 name="Postfix for"}
 foreach_statement_modifier ::=    'foreach' expr {pin=1 name="Postfix foreach"}
 when_statement_modifier ::=    'when' expr {pin=1 name="Postfix when"}
 
-private use_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
-  use_statement_constant
-  | use_statement
-
-private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
-  no_statement
-
 use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}
 no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
@@ -684,8 +676,8 @@ private use_no_parameters ::= use_module_parameters | use_version_parameters {re
 private use_module_parameters ::= any_package [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
 
-use_statement_constant ::=  'use' 'constant' use_constant_parameters <<statementSemi>> {pin=2}
-private use_constant_parameters ::= [perl_version] [use_constant_variants] {recoverWhile=recover_statement}
+/************************************* use constant body **************************************************************/
+// used in com.perl5.lang.perl.parser.PerlParserUtil.parseUseConstantVariants
 private use_constant_variants ::=
   constants_block
   | single_constant_definition
@@ -700,6 +692,7 @@ private recover_single_constant_definition ::= !('}'|comma|';')
 private single_constant_definition ::= constant_definition {recoverWhile=recover_statement}
 
 constant_definition ::= string comma scalar_expr
+/********************************** end of use constant body **********************************************************/
 
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
 private undef_params ::= deref_expr | variable

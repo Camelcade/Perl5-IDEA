@@ -124,6 +124,8 @@
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
         <packageProcessor key="vars"
                           implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor"/>
+        <packageProcessor key="constant"
+                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
 
 
         <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>

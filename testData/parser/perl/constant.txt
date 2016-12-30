@@ -20,9 +20,9 @@ Perl5
     PsiElement(Perl5: use)('use')
     PerlVersionElementImpl(Perl5: VERSION_ELEMENT)('v5.10')
     PsiElement(Perl5: ;)(';')
-  PsiPerlUseStatementConstantImpl(Perl5: USE_STATEMENT_CONSTANT)
+  PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
-    PerlNamespaceElementImpl(Perl5: constant)('constant')
+    PerlNamespaceElementImpl(Perl5: package::name)('constant')
     sub main::PI
       PsiPerlStringBareImpl(Perl5: STRING_BARE)
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('PI')
@@ -30,9 +30,9 @@ Perl5
       PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
         PsiElement(Perl5: NUMBER)('3.14')
     PsiElement(Perl5: ;)(';')
-  PsiPerlUseStatementConstantImpl(Perl5: USE_STATEMENT_CONSTANT)
+  PsiPerlUseStatementImpl(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
-    PerlNamespaceElementImpl(Perl5: constant)('constant')
+    PerlNamespaceElementImpl(Perl5: package::name)('constant')
     PsiPerlConstantsBlockImpl(Perl5: CONSTANTS_BLOCK)
       PsiElement(Perl5: {)('{')
       sub main::simple

@@ -28,7 +28,7 @@ PerlSubReferenceSimple at (197,207); text in range: 'multiconst' => 1 results:
 PerlSubReferenceSimple at (212,223); text in range: 'MULTICONST2' => 1 results:
 	CONSTANT_DEFINITION at 347 in exportedSubs.pl
 
-PerlNamespaceReference at (278,286); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (278,286); text in range: 'constant' => 0 results:
 
-PerlNamespaceReference at (311,319); text in range: 'constant' => 0 results:
+PerlNamespaceFileReference at (311,319); text in range: 'constant' => 0 results:
 

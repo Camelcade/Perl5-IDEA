@@ -26,9 +26,9 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlConstantDefinition;
-import com.perl5.lang.perl.psi.PsiPerlUseStatementConstant;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -86,7 +86,7 @@ public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithT
 			return annotationList;
 		}
 
-		return PerlPsiUtil.collectAnnotations(PsiTreeUtil.getParentOfType(this, PsiPerlUseStatementConstant.class));
+		return PerlPsiUtil.collectAnnotations(PsiTreeUtil.getParentOfType(this, PerlUseStatement.class));
 	}
 
 	@Override

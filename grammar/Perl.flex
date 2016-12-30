@@ -547,7 +547,6 @@ REGEX_HASH_NEGATING = [\^\:\\\[\{]
 }
 
 <PACKAGE_ARGUMENTS>{
-	"constant"						{yybegin(VERSION_OR_OPERAND);return PACKAGE_PRAGMA_CONSTANT;}
 	{PERL_VERSION}					{yybegin(YYINITIAL);return NUMBER_VERSION;}
 	{QUALIFIED_IDENTIFIER}			{yybegin(VERSION_OR_OPERAND);return PACKAGE;}
 	[^]								{yybegin(YYINITIAL);pushback();}
