@@ -81,24 +81,31 @@ public interface PerlPolyNamedElement extends PsiElement
 	}
 
 	/**
-	 * @return Map of light elements, bound to the names identifiers, one for each name identifier
+	 * Returns cached map of light elements, bound to the names identifiers, one for each name identifier
 	 */
 	@NotNull
 	default Map<String, PerlDelegatingLightNamedElement> getLightElementsMap()
 	{
 		return CachedValuesManager.getCachedValue(this, () ->
+				CachedValueProvider.Result.create(calcLightElementsMap(), PerlPolyNamedElement.this));
+	}
+
+	/**
+	 * @return Map of light elements, bound to the names identifiers, one for each name identifier
+	 */
+	@NotNull
+	default Map<String, PerlDelegatingLightNamedElement> calcLightElementsMap()
+	{
+		List<String> namesList = getNamesList();
+		Map<String, PerlDelegatingLightNamedElement> result = new THashMap<>();
+
+		for (String name : namesList)
 		{
-			List<String> namesList = getNamesList();
-			Map<String, PerlDelegatingLightNamedElement> result = new THashMap<>();
+			assert name != null;
+			result.put(name, createLightElement(name));
+		}
 
-			for (String name : namesList)
-			{
-				assert name != null;
-				result.put(name, createLightElement(name));
-			}
-
-			return CachedValueProvider.Result.create(result, PerlPolyNamedElement.this);
-		});
+		return result;
 	}
 
 	/**
