@@ -683,7 +683,7 @@ private use_statements ::= // fixme these shold be recovered otherwise, cause it
 private no_statements ::= // fixme these shold be recovered otherwise, cause it has no statement modifiers
   no_statement
 
-use_statement ::=  'use' use_no_parameters <<statementSemi>> {pin=1}
+use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}
 no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}

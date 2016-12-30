@@ -16,6 +16,9 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,4 +57,13 @@ public interface PerlPackageProcessor
 	 */
 	void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
 
+	/**
+	 * Parses use statement parameters. Might be used if you need to put some specific PSI constructs in the parameters,
+	 * like constant definition, moose attributes or smth.
+	 * By default uses default parser passed from generated parser.
+	 */
+	default boolean parseUseParameters(@NotNull PsiBuilder b, int l, @NotNull Parser defaultParser)
+	{
+		return defaultParser.parse(b, l);
+	}
 }

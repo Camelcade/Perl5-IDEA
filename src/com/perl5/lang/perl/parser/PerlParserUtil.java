@@ -20,15 +20,19 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
 import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 01.05.2015.
@@ -537,5 +541,26 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
 		b.advanceLexer();
 		mark.collapse(targetToken);
 		return true;
+	}
+
+	/**
+	 * Parses use parameters with package processor if it's possible. If not, uses default parsing logic.
+	 */
+	public static boolean parseUseParameters(@NotNull PsiBuilder b, int l, @NotNull Parser defaultParser)
+	{
+		if (b.getTokenType() == PACKAGE)
+		{
+			String packageName = b.getTokenText();
+			if (StringUtil.isEmpty(packageName))
+			{
+				return false;
+			}
+			PerlPackageProcessor packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
+			if (packageProcessor != null)
+			{
+				return packageProcessor.parseUseParameters(b, l, defaultParser);
+			}
+		}
+		return defaultParser.parse(b, l);
 	}
 }
