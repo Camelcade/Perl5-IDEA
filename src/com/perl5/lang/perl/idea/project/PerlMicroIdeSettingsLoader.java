@@ -131,46 +131,6 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 
 	public void projectOpened()
 	{
-		// called when project is opened
-		if (!PlatformUtils.isIntelliJ() && ModuleManager.getInstance(myProject).getModules().length > 0)
-		{
-			ApplicationManager.getApplication().runWriteAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					ModifiableRootModel rootModel = ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-					ContentEntry[] entries = rootModel.getContentEntries();
-
-					if (entries.length > 0)
-					{
-						ContentEntry entry = entries[0];
-						Set<String> libPaths = new HashSet<String>(perl5Settings.getLibRootUrls());
-
-						for (SourceFolder folder : entry.getSourceFolders())
-						{
-							if (libPaths.contains(folder.getUrl()))
-							{
-								entry.removeSourceFolder(folder);
-							}
-						}
-
-						final String rootPath = VfsUtilCore.urlToPath(entry.getUrl());
-						for (String path : libPaths)
-						{
-							if (FileUtil.isAncestor(rootPath, VfsUtilCore.urlToPath(path), true))
-							{
-								entry.addSourceFolder(path, JpsPerlLibrarySourceRootType.INSTANCE);
-							}
-						}
-
-						applyClassPaths(rootModel);
-						rootModel.commit();
-					}
-				}
-			});
-		}
-
 	}
 
 	public void projectClosed()
