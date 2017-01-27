@@ -83,14 +83,7 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 
 	private void createEditor()
 	{
-		myModifiableModel = ApplicationManager.getApplication().runReadAction(new Computable<ModifiableRootModel>()
-		{
-			@Override
-			public ModifiableRootModel compute()
-			{
-				return ModuleRootManager.getInstance(myModule).getModifiableModel();
-			}
-		});
+		myModifiableModel = ApplicationManager.getApplication().runReadAction((Computable<ModifiableRootModel>) () -> ModuleRootManager.getInstance(myModule).getModifiableModel());
 
 		final ModuleConfigurationStateImpl moduleConfigurationState =
 				new ModuleConfigurationStateImpl(myModule.getProject(), new DefaultModulesProvider(myModule.getProject()))
@@ -117,14 +110,7 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 				return entries;
 			}
 		};
-		JComponent component = ApplicationManager.getApplication().runReadAction(new Computable<JComponent>()
-		{
-			@Override
-			public JComponent compute()
-			{
-				return myEditor.createComponent();
-			}
-		});
+		JComponent component = ApplicationManager.getApplication().runReadAction((Computable<JComponent>) () -> myEditor.createComponent());
 		myTopPanel.add(component, BorderLayout.CENTER);
 	}
 
@@ -140,14 +126,7 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 		myEditor.apply();
 		if (myModifiableModel.isChanged())
 		{
-			ApplicationManager.getApplication().runWriteAction(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					myModifiableModel.commit();
-				}
-			});
+			ApplicationManager.getApplication().runWriteAction(() -> myModifiableModel.commit());
 			myEditor.disposeUIResources();
 			myTopPanel.remove(myEditor.getComponent());
 			createEditor();
