@@ -32,7 +32,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.SpeedSearchComparator;
-import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
@@ -46,6 +45,7 @@ import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -126,11 +126,12 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			code.append(perlSubBase.getSubName());
 			code.append("{\n");
 
-			List<String> superArgs = new ArrayList<String>();
+			List<String> superArgs = new ArrayList<>();
 			List<PerlSubArgument> arguments = Collections.emptyList();
 
 			if (perlSubBase instanceof PerlSubDefinitionBase)
 			{
+				//noinspection unchecked
 				arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
 
 				if (!arguments.isEmpty())
@@ -220,18 +221,14 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 	{
 		if (anchor != null)
 		{
-			final List<PerlMethodMember> subDefinitions = new ArrayList<PerlMethodMember>();
+			final List<PerlMethodMember> subDefinitions = new ArrayList<>();
 
 			PerlPackageUtil.processNotOverridedMethods(
 					PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
-					new Processor<PerlSubBase>()
+					subDefinitionBase ->
 					{
-						@Override
-						public boolean process(PerlSubBase subDefinitionBase)
-						{
-							subDefinitions.add(new PerlMethodMember(subDefinitionBase));
-							return true;
-						}
+						subDefinitions.add(new PerlMethodMember(subDefinitionBase));
+						return true;
 					}
 			);
 
@@ -245,7 +242,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 							{
 								@Nullable
 								@Override
-								public Iterable<TextRange> matchingFragments(String pattern, String text)
+								public Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text)
 								{
 									return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
 								}
@@ -348,7 +345,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 			String promptTitle
 	)
 	{
-		Set<String> result = new THashSet<String>();
+		Set<String> result = new THashSet<>();
 		String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
 
 		if (!StringUtil.isEmpty(name))
@@ -362,7 +359,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 				}
 			}
 		}
-		return new ArrayList<String>(result);
+		return new ArrayList<>(result);
 	}
 
 	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
