@@ -24,6 +24,7 @@ import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -45,6 +46,8 @@ import java.util.Set;
  */
 public class PerlMicroIdeSettingsLoader implements ProjectComponent
 {
+	private static final String PERL5_LIBRARY_NAME = "Perl5 library: ";
+
 	protected Project myProject;
 	protected PerlSharedSettings perl5Settings;
 
@@ -61,8 +64,14 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 //			System.err.println("Checking " + entry + " of " + entry.getClass());
 			if (entry instanceof LibraryOrderEntry)
 			{
+
+				String libraryName = ((LibraryOrderEntry) entry).getLibraryName();
+
+				if (StringUtil.isNotEmpty(libraryName) && StringUtil.startsWith(libraryName, PERL5_LIBRARY_NAME))
+				{
 //				System.err.println("Removing " + entry);
-				rootModel.removeOrderEntry(entry);
+					rootModel.removeOrderEntry(entry);
+				}
 			}
 		}
 
@@ -70,8 +79,7 @@ public class PerlMicroIdeSettingsLoader implements ProjectComponent
 
 		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
 		{
-//			System.err.println("Adding " + entry);
-			Library tableLibrary = table.createLibrary();
+			Library tableLibrary = table.createLibrary(PERL5_LIBRARY_NAME + virtualFile.getCanonicalPath());
 			Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
 			modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
 			modifiableModel.commit();
