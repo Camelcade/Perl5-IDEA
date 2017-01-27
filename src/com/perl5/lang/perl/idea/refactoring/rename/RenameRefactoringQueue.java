@@ -55,14 +55,7 @@ public class RenameRefactoringQueue implements Runnable
 	{
 		if (myRefactoring[0] != null)
 		{
-			ApplicationManager.getApplication().invokeLater(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					myRefactoring[0].run();
-				}
-			});
+			ApplicationManager.getApplication().invokeLater(myRefactoring[0]::run);
 		}
 	}
 

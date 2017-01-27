@@ -64,47 +64,36 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor
 
 				final String newFileName = ((PerlFileImpl) element).getVirtualFile().getParent().getPath() + '/' + newName;
 
-				return new Runnable()
+				return () ->
 				{
-					@Override
-					public void run()
+					VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
+
+					if (newFile != null)
 					{
-						VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
+						PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
 
-						if (newFile != null)
+						if (psiFile != null)
 						{
-							PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
+							final RenameRefactoring[] refactoring = {null};
 
-							if (psiFile != null)
+							for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
 							{
-								final RenameRefactoring[] refactoring = {null};
-
-								for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
+								if (currentPackageName.equals(namespaceDefinition.getName()))
 								{
-									if (currentPackageName.equals(namespaceDefinition.getName()))
+									if (refactoring[0] == null)
 									{
-										if (refactoring[0] == null)
-										{
-											refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
-										}
-										else
-										{
-											refactoring[0].addElement(namespaceDefinition, newPackageName);
-										}
+										refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
+									}
+									else
+									{
+										refactoring[0].addElement(namespaceDefinition, newPackageName);
 									}
 								}
+							}
 
-								if (refactoring[0] != null)
-								{
-									ApplicationManager.getApplication().invokeLater(new Runnable()
-									{
-										@Override
-										public void run()
-										{
-											refactoring[0].run();
-										}
-									});
-								}
+							if (refactoring[0] != null)
+							{
+								ApplicationManager.getApplication().invokeLater(refactoring[0]::run);
 							}
 						}
 					}

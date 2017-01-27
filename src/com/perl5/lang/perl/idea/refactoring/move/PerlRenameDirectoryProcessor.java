@@ -78,12 +78,8 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor
 	@Override
 	public boolean canProcessElement(@NotNull PsiElement element)
 	{
-		if (element instanceof PsiDirectory)
-		{
-			return canProcessDir((PsiDirectory) element);
-		}
+		return element instanceof PsiDirectory && canProcessDir((PsiDirectory) element);
 
-		return false;
 	}
 
 	protected boolean canProcessDir(PsiDirectory dir)

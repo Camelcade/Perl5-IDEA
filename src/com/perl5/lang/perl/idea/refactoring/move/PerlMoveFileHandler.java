@@ -111,14 +111,7 @@ public class PerlMoveFileHandler extends MoveFileHandler
 
 			if (refactoring[0] != null)
 			{
-				ApplicationManager.getApplication().invokeLater(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						refactoring[0].run();
-					}
-				});
+				ApplicationManager.getApplication().invokeLater(refactoring[0]::run);
 			}
 		}
 	}
