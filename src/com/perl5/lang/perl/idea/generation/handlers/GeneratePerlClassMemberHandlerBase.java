@@ -94,7 +94,7 @@ public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightA
 	@Override
 	public boolean startInWriteAction()
 	{
-		return true;
+		return false;
 	}
 
 }

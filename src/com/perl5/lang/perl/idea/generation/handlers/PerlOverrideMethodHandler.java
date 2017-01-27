@@ -46,13 +46,6 @@ public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBas
 	@Override
 	public void invoke(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile file)
 	{
-		ApplicationManager.getApplication().runWriteAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				PerlOverrideMethodHandler.super.invoke(project, editor, file);
-			}
-		});
+		PerlOverrideMethodHandler.super.invoke(project, editor, file);
 	}
 }

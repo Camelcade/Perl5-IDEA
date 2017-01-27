@@ -18,6 +18,8 @@ package com.perl5.lang.perl.extensions.generation;
 
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.MemberChooser;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ScrollType;
@@ -364,27 +366,31 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator
 
 	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
 	{
-		FileType fileType = anchor.getContainingFile().getFileType();
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
-		final Document document = manager.getDocument(anchor.getContainingFile());
-
-		if (code.length() > 0 && document != null)
+		ApplicationManager.getApplication().runWriteAction(() ->
 		{
-			manager.doPostponedOperationsAndUnblockDocument(document);
+			FileType fileType = anchor.getContainingFile().getFileType();
+			final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
+			final Document document = manager.getDocument(anchor.getContainingFile());
 
-			PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
-			PsiElement container = anchor.getParent();
-			int newOffset = anchor.getTextOffset() + anchor.getTextLength();
-
-			if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
+			if (code.length() > 0 && document != null)
 			{
-				container.addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
-			}
+				manager.doPostponedOperationsAndUnblockDocument(document);
 
-			manager.commitDocument(document);
-			editor.getCaretModel().moveToOffset(newOffset);
-			editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
-		}
+				PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
+				PsiElement container = anchor.getParent();
+				int newOffset = anchor.getTextOffset() + anchor.getTextLength();
+
+				if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
+				{
+					container.addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
+				}
+
+				manager.commitDocument(document);
+				editor.getCaretModel().moveToOffset(newOffset);
+				editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
+			}
+		});
+
 	}
 
 }

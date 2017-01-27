@@ -69,6 +69,7 @@
       <li>Optimized variables resolving, made it 10 times faster</li>
       <li>Optimized debugger pausing performance with many evals on the perl side, by <a href="https://github.com/Camelcade/Perl5-IDEA/commit/ce3fc66e3aa800fb90d85812a8877c8839ba4df9">@mbarbon</a>.</li>
       <li>Fixed bug when plugin messed with Go project dependencies</li>
+      <li>Fixed exception on code generation in 2017 EAP IDEs.</li>
       </ul>
      </p>
     ]]>
