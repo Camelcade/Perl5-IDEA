@@ -37,6 +37,7 @@ import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -103,9 +104,9 @@ public class PerlPlatformContentEntriesConfigurable implements Configurable
 		myEditor = new PerlContentEntriesEditor(myModule.getName(), moduleConfigurationState, myRootTypes)
 		{
 			@Override
-			protected java.util.List<ContentEntry> addContentEntries(VirtualFile[] files)
+			protected List<ContentEntry> addContentEntries(VirtualFile[] files)
 			{
-				java.util.List<ContentEntry> entries = super.addContentEntries(files);
+				List<ContentEntry> entries = super.addContentEntries(files);
 				addContentEntryPanels(entries.toArray(new ContentEntry[entries.size()]));
 				return entries;
 			}
