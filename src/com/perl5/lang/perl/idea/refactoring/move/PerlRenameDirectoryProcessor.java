@@ -45,19 +45,15 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor
 		PsiFile[] files = sourceRoot.getFiles();
 		if (files.length > 0)
 		{
-			new MoveFilesOrDirectoriesProcessor(project, files, dstRoot, false, false, new MoveCallback()
+			new MoveFilesOrDirectoriesProcessor(project, files, dstRoot, false, false, () ->
 			{
-				@Override
-				public void refactoringCompleted()
-				{
-					PsiDirectory currentDir = sourceRoot;
+				PsiDirectory currentDir = sourceRoot;
 
-					while (currentDir != null && currentDir.getFiles().length == 0 && currentDir.getSubdirectories().length == 0)
-					{
-						PsiDirectory parentDir = currentDir.getParentDirectory();
-						currentDir.delete();
-						currentDir = parentDir;
-					}
+				while (currentDir != null && currentDir.getFiles().length == 0 && currentDir.getSubdirectories().length == 0)
+				{
+					PsiDirectory parentDir = currentDir.getParentDirectory();
+					currentDir.delete();
+					currentDir = parentDir;
 				}
 			}, null).run();
 		}
@@ -99,14 +95,7 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor
 	public void prepareRenaming(final PsiElement element, final String newName, Map<PsiElement, String> allRenames)
 	{
 		allRenames.clear();
-		ApplicationManager.getApplication().runWriteAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				renamePsiElement(element, newName);
-			}
-		});
+		ApplicationManager.getApplication().runWriteAction(() -> renamePsiElement(element, newName));
 	}
 
 	protected void renamePsiElement(PsiElement element, String newName)
