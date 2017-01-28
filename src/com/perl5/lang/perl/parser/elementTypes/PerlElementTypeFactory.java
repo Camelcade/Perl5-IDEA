@@ -2365,7 +2365,6 @@ public class PerlElementTypeFactory
 */
 
 
-
 		throw new RuntimeException("Unknown token:" + name);
 	}
 }

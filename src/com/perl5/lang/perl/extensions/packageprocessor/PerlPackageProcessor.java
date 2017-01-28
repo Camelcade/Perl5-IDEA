@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlUseStatement;

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.extensions.generation;
 
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.util.MemberChooser;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;

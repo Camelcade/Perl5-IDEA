@@ -48,7 +48,6 @@ import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionSt
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;

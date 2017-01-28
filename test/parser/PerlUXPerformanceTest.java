@@ -21,26 +21,18 @@ import categories.Performance;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.fileEditor.impl.text.TextEditorProvider;
-import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.PsiModificationTrackerImpl;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.ThrowableRunnable;
-import com.intellij.util.ui.UIUtil;
 import org.junit.experimental.categories.Category;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 07.10.2016.
@@ -51,7 +43,7 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase
 	public void testEnterTyping()
 	{
 		initWithPerlTidy();
-		myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65,0));
+		myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65, 0));
 		final int iterations = 30;
 		for (int i = 0; i < iterations; i++)
 		{

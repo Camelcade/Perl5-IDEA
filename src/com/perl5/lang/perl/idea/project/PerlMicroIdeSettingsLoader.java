@@ -16,17 +16,16 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.*;
+import com.intellij.openapi.roots.LibraryOrderEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.OrderEntry;
+import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.PlatformUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -38,8 +37,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by hurricup on 30.08.2015.

@@ -21,7 +21,6 @@ package parserHeavy;
  */
 
 import categories.Heavy;
-import categories.Performance;
 import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 

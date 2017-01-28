@@ -16,13 +16,10 @@
 
 package parser;
 
-import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.PerlParserDefinition;
 
 /**
  * Created by hurricup on 05.03.2016.

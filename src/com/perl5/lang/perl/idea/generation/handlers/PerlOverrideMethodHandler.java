@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.generation.handlers;
 
 import com.intellij.lang.LanguageCodeInsightActionHandler;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;

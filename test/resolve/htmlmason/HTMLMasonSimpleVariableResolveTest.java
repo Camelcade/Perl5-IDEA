@@ -18,7 +18,6 @@ package resolve.htmlmason;
 
 /**
  * Created by hurricup on 13.03.2016.
- *
  */
 public class HTMLMasonSimpleVariableResolveTest extends HTMLMasonVariableResolveTestCase
 {
