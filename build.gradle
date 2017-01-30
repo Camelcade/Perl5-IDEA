@@ -138,7 +138,7 @@ task generatePerl5Parser(type: JavaExec) {
 
     inputs.file file(src)
     outputs.file file(dstRoot + '/com/perl5/lang/perl/parser/PerlParserGenerated.java')
-    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/perl/psi', include: '**/*.java')
+    outputs.dir dstRoot + '/com/perl5/lang/perl/psi'
 
     classpath configurations.compile + configurations.parser
 }
@@ -153,7 +153,7 @@ task generatePodParser(type: JavaExec) {
 
     inputs.file file(src)
     outputs.file file(dstRoot + '/com/perl5/lang/pod/parser/PodParserGenerated.java')
-    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/pod/psi', include: '**/*.java')
+    outputs.dir dstRoot + '/com/perl5/lang/pod/psi'
 
     classpath configurations.compile + configurations.parser
 }
@@ -168,7 +168,7 @@ task generateTT2Parser(type: JavaExec) {
 
     inputs.file file(src)
     outputs.file file(dstRoot + '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java')
-    outputs.dir fileTree(dir: dstRoot + '/com/perl5/lang/tt2/psi', include: '**/*.java')
+    outputs.dir dstRoot + '/com/perl5/lang/tt2/psi'
 
     classpath configurations.compile + configurations.parser
 }
