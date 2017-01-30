@@ -691,7 +691,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlExprImpl(node);
+					throw new RuntimeException("Instantiating " + node);
 				}
 			};
 		}
@@ -1602,7 +1602,7 @@ public class PerlElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiPerlStatementModifierImpl(node);
+					throw new RuntimeException("Instantiating " + node);
 				}
 			};
 		}

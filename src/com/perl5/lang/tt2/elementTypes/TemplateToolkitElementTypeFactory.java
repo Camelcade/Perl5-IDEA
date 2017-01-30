@@ -459,7 +459,7 @@ public class TemplateToolkitElementTypeFactory extends PodElementTypeFactory
 				@Override
 				public PsiElement getPsiElement(@NotNull ASTNode node)
 				{
-					return new PsiExprImpl(node);
+					throw new RuntimeException("Instantiating " + node);
 				}
 			};
 		}
