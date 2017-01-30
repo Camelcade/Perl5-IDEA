@@ -48,18 +48,20 @@ public class Perl5ProjectComponent implements ProjectComponent
 	public void initComponent()
 	{
 		// TODO: insert component initialization logic here
+/*
 		if (myChangeListener == null)
 		{
 			myChangeListener = new PerlVirtualFileListener(myProject);
 			VirtualFileManager.getInstance().addVirtualFileListener(myChangeListener);
 		}
+*/
 	}
 
 	public void disposeComponent()
 	{
 		// TODO: insert component disposal logic here
 //		System.out.println("Unregistered listener");
-		VirtualFileManager.getInstance().removeVirtualFileListener(myChangeListener);
+//		VirtualFileManager.getInstance().removeVirtualFileListener(myChangeListener);
 
 	}
 

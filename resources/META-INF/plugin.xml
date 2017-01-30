@@ -33,43 +33,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-    <p>Plugin moves to the IDEA-like versioning to make things more consistent. Also, future updates will be released for current version of JetBrains products only. Critical things
-     may be backported to previous version, but current - 2.2 version is pretty stable for those, who don't want or need to upgrade.</p>
-     <p>Changes:
-     <ul>
-      <li>IDEA 2017.1 EAP compatibility</li>
-      <li>Multiple internal tools upgrades</li>
-      <li>Moved to Java 8</li>
-      <li>Lexer and parser deeply reworked and should be much faster:</li>
-      <ul>
-          <li>Initial parsing and reparsing on typing should be much faster</li>
-          <li>Highlighting is now instant for unambiguous entities</li>
-          <li>%hash, &code and *glob can't be passed as first argument to the rightward call anymore without braces, except some perl functions.
-          Please, use leftward calls instead (the one with parens) or disambiguate with <code>%{varname}</code> form.
-          Plugin will treat <code>identifier % identifier</code> as mod operator.
-
-          <p>Ambiguous things like regexps without explicit m, hashes, globs and code-refs works in boundaries of common sense.
-                If plugin parses it wrong - adjust your code to be less ambiguous. Feel free to post a bug-report if something is
-                going wrong, but keep in mind that plugin's lexer and parser (unlike perl itself) processes sources without knowing anything
-                about included files or defined subs. So it doesn't know if you've declared sub with list prototype for example.</p>
-          </li>
-          <li>Implemented support for post-deref syntax according to the perldoc</li>
-          <li><code>#@type</code> annotation for variables. More information in our <a href="https://github.com/Camelcade/Perl5-IDEA/wiki/Annotations#type">wiki</a>.</li>
-          <li><strike>Plugin now recognizes and highlights character classes in regular expressions.</strike></li>
-          <li>Experimental regexp language injection is now available. This feature still in development and disabled by default. You may enable it via perl settings.</li>
-      </ul>
-      <li>Class::Accessor functionality is unavailable in this version</li>
-     </ul>
-     </p>
-
      <p>Fixes:
       <ul>
-      <li>Possible NPE on running the script if settings file been corrupted</li>
-      <li>Optimized parsing of multiple namespaces</li>
-      <li>Optimized variables resolving, made it 10 times faster</li>
-      <li>Optimized debugger pausing performance with many evals on the perl side, by <a href="https://github.com/Camelcade/Perl5-IDEA/commit/ce3fc66e3aa800fb90d85812a8877c8839ba4df9">@mbarbon</a>.</li>
       <li>Fixed bug when plugin messed with Go project dependencies</li>
       <li>Fixed exception on code generation in 2017 EAP IDEs.</li>
+      <li>Temporary disable package names adjusting on moving/renaming package directories, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1419">#1419</a>.</li>
       </ul>
      </p>
     ]]>
