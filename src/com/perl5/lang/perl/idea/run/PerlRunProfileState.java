@@ -101,7 +101,7 @@ public class PerlRunProfileState extends CommandLineState
 		assert homePath != null;
 
 
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlArguments(runProfile));
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, runProfile, perlSdkPath, scriptFile, getPerlArguments(runProfile));
 
 		String programParameters = runProfile.getProgramParameters();
 
