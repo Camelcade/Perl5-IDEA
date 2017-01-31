@@ -28,14 +28,22 @@ import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.PlatformUtils;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -101,7 +109,7 @@ public class PerlRunProfileState extends CommandLineState
 		assert homePath != null;
 
 
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, runProfile, perlSdkPath, scriptFile, getPerlArguments(runProfile));
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, getPerlLibraries(scriptFile), perlSdkPath, scriptFile, getPerlArguments(runProfile));
 
 		String programParameters = runProfile.getProgramParameters();
 
@@ -155,4 +163,54 @@ public class PerlRunProfileState extends CommandLineState
 		return runProfile.getEnvs();
 	}
 
+	public List<String> getPerlLibraries(@Nullable VirtualFile scriptFile)
+	{
+		if (!PlatformUtils.isIntelliJ())
+		{
+			return Collections.emptyList();
+		}
+		else
+		{
+			PerlConfiguration runProfile = (PerlConfiguration) getEnvironment().getRunProfile();
+
+			// try to get used SDK
+			Sdk sdk;
+			if (runProfile.isUseAlternativeSdk())
+			{
+				sdk = ProjectJdkTable.getInstance().findJdk(runProfile.getAlternativeSdkPath());
+			}
+			else
+			{
+				Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, getEnvironment().getProject());
+
+				sdk = PerlRunUtil.getModuleSdk(moduleForFile);
+				if (sdk == null)
+				{
+					// try project SDK
+					sdk = ProjectRootManager.getInstance(getEnvironment().getProject()).getProjectSdk();
+				}
+			}
+
+			if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+			{
+				List<String> incPaths = PerlSdkType.getInstance().getINCPaths(sdk.getHomePath());
+				List<String> list = new ArrayList<>();
+
+				for (VirtualFile file : sdk.getRootProvider().getFiles(OrderRootType.CLASSES))
+				{
+					// add only paths that not already exist
+					String path = FileUtil.toSystemIndependentName(file.getPath());
+					if (!incPaths.contains(path)) {
+						list.add(path);
+					}
+				}
+
+				return list;
+			}
+			else
+			{
+				return Collections.emptyList();
+			}
+		}
+	}
 }

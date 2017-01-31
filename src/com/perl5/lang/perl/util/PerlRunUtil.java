@@ -27,13 +27,10 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.ui.configuration.ProjectSettingsService;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -43,13 +40,11 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.run.PerlConfiguration;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.event.HyperlinkEvent;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -70,11 +65,11 @@ public class PerlRunUtil
 	@NotNull
 	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
-		return getPerlCommandLine(project, null, perlDirectory, scriptFile, perlParameters);
+		return getPerlCommandLine(project, Collections.emptyList(), perlDirectory, scriptFile, perlParameters);
 	}
 
 	@NotNull
-	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, PerlConfiguration runProfile, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
+	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, List<String> additionalLibraries, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
@@ -85,7 +80,7 @@ public class PerlRunUtil
 			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
 		}
 
-		for (String path : getPerlLibraries(project, runProfile, scriptFile))
+		for (String path : additionalLibraries)
 		{
 			String includePath = VfsUtil.urlToPath(path);
 			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
@@ -100,68 +95,8 @@ public class PerlRunUtil
 		return commandLine;
 	}
 
-	private static List<String> getPerlLibraries(@NotNull Project project, PerlConfiguration runProfile, @Nullable VirtualFile scriptFile)
-	{
-		if (PlatformUtils.isIntelliJ())
-		{
-			// try to get used SDK
-			Sdk sdk;
-			if (runProfile != null && runProfile.isUseAlternativeSdk())
-			{
-				sdk = ProjectJdkTable.getInstance().findJdk(runProfile.getAlternativeSdkPath());
-			}
-			else
-			{
-				Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
-
-				sdk = getModuleSdk(moduleForFile);
-				if (sdk == null)
-				{
-					// found in project
-					sdk = ProjectRootManager.getInstance(project).getProjectSdk();
-					if (sdk == null || sdk.getSdkType() != PerlSdkType.getInstance())
-					{
-						// looking for any perl module in project
-						for (Module module : ModuleManager.getInstance(project).getModules())
-						{
-							sdk = getModuleSdk(module);
-							if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
-							{
-								break;
-							}
-						}
-					}
-				}
-			}
-
-			if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
-			{
-				List<String> incPaths = PerlSdkType.getInstance().getINCPaths(sdk.getHomePath());
-				List<String> list = new ArrayList<>();
-				for (VirtualFile file : sdk.getRootProvider().getFiles(OrderRootType.CLASSES))
-				{
-					// add only paths that not already exist
-					String path = file.getPath().replace("\\", "/");
-					if (!incPaths.contains(path)) {
-						list.add(path);
-					}
-				}
-
-				return list;
-			}
-			else
-			{
-				return new ArrayList<>();
-			}
-		}
-		else
-		{
-			return new ArrayList<>();
-		}
-	}
-
 	@Nullable
-	private static Sdk getModuleSdk(Module module)
+	public static Sdk getModuleSdk(@Nullable Module module)
 	{
 		if (module == null)
 		{
@@ -224,15 +159,10 @@ public class PerlRunUtil
 	}
 
 	@Nullable
-	private static String getModuleSdkPath(Module module)
+	private static String getModuleSdkPath(@Nullable Module module)
 	{
-		if (module == null)
-		{
-			return null;
-		}
-
-		Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
-		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+		Sdk sdk = getModuleSdk(module);
+		if (sdk != null)
 		{
 			return sdk.getHomePath();
 		}
