@@ -65,24 +65,12 @@ public class PerlRunUtil
 	@NotNull
 	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
 	{
-		return getPerlCommandLine(project, Collections.emptyList(), perlDirectory, scriptFile, perlParameters);
-	}
-
-	@NotNull
-	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, List<String> additionalLibraries, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
-	{
 		GeneralCommandLine commandLine = new GeneralCommandLine();
 		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
 		commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
 		for (String libRoot : PerlSharedSettings.getInstance(project).getLibRootUrls())
 		{
 			String includePath = VfsUtil.urlToPath(libRoot);
-			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
-		}
-
-		for (String path : additionalLibraries)
-		{
-			String includePath = VfsUtil.urlToPath(path);
 			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
 		}
 
