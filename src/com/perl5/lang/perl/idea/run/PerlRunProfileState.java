@@ -28,14 +28,25 @@ import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ArrayUtil;
+import com.intellij.util.PlatformUtils;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -100,8 +111,8 @@ public class PerlRunProfileState extends CommandLineState
 
 		assert homePath != null;
 
-
-		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlArguments(runProfile));
+		String[] parameter = ArrayUtil.mergeArrays(getPerlLibraryParameters(scriptFile), getPerlArguments(runProfile));
+		GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, parameter);
 
 		String programParameters = runProfile.getProgramParameters();
 
@@ -155,4 +166,64 @@ public class PerlRunProfileState extends CommandLineState
 		return runProfile.getEnvs();
 	}
 
+	@NotNull
+	public String[] getPerlLibraryParameters(@Nullable VirtualFile scriptFile)
+	{
+		List<String> parameterList = new ArrayList<>();
+		for (String path : getPerlLibraries(scriptFile))
+		{
+			String includePath = VfsUtil.urlToPath(path);
+			parameterList.add("-I" + FileUtil.toSystemDependentName(includePath));
+		}
+		return parameterList.toArray(new String[parameterList.size()]);
+	}
+
+	public List<String> getPerlLibraries(@Nullable VirtualFile scriptFile)
+	{
+		if (!PlatformUtils.isIntelliJ())
+		{
+			return Collections.emptyList();
+		}
+
+		PerlConfiguration runProfile = (PerlConfiguration) getEnvironment().getRunProfile();
+		Project project = getEnvironment().getProject();
+
+		// try to get used SDK
+		Sdk sdk;
+		if (runProfile.isUseAlternativeSdk())
+		{
+			sdk = ProjectJdkTable.getInstance().findJdk(runProfile.getAlternativeSdkPath());
+		}
+		else
+		{
+			Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
+
+			sdk = PerlRunUtil.getModuleSdk(moduleForFile);
+			if (sdk == null)
+			{
+				// try project SDK
+				sdk = ProjectRootManager.getInstance(project).getProjectSdk();
+			}
+		}
+
+		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+		{
+			List<String> incPaths = PerlSdkType.getInstance().getINCPaths(sdk.getHomePath());
+			incPaths.addAll(PerlSharedSettings.getInstance(project).getLibRootUrls());
+			List<String> list = new ArrayList<>();
+
+			for (VirtualFile file : sdk.getRootProvider().getFiles(OrderRootType.CLASSES))
+			{
+				// add only paths that not already exist
+				String path = FileUtil.toSystemIndependentName(file.getPath());
+				if (!incPaths.contains(path))
+				{
+					list.add(path);
+				}
+			}
+
+			return list;
+		}
+		return Collections.emptyList();
+	}
 }

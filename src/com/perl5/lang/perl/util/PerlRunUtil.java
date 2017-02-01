@@ -84,6 +84,22 @@ public class PerlRunUtil
 	}
 
 	@Nullable
+	public static Sdk getModuleSdk(@Nullable Module module)
+	{
+		if (module == null)
+		{
+			return null;
+		}
+
+		Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+		{
+			return sdk;
+		}
+		return null;
+	}
+
+	@Nullable
 	public static String getPerlPath(@NotNull Project project, @Nullable VirtualFile scriptFile)
 	{
 		if (PlatformUtils.isIntelliJ())
@@ -131,15 +147,10 @@ public class PerlRunUtil
 	}
 
 	@Nullable
-	private static String getModuleSdkPath(Module module)
+	private static String getModuleSdkPath(@Nullable Module module)
 	{
-		if (module == null)
-		{
-			return null;
-		}
-
-		Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
-		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
+		Sdk sdk = getModuleSdk(module);
+		if (sdk != null)
 		{
 			return sdk.getHomePath();
 		}
