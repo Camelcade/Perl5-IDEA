@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.regexp;
 
 import com.intellij.lang.Language;
+import org.intellij.lang.regexp.RegExpLanguage;
 
 /**
  * Created by hurricup on 30.11.2016.
@@ -27,6 +28,6 @@ public class Perl5RegexpLanguage extends Language
 
 	private Perl5RegexpLanguage()
 	{
-		super(Perl5RegexpLanguage.INSTANCE, "Perl5Regexp");
+		super(RegExpLanguage.INSTANCE, "Perl5Regexp");
 	}
 }
