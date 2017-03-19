@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.0"
+    id "org.jetbrains.intellij" version "0.2.5"
 }
 
 version = "$version$buildNumber"
@@ -85,17 +85,20 @@ test {
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 configurations {
     lexer
-    parser
 }
 
 dependencies {
+    compileOnly('com.github.JetBrains:Grammar-Kit:34fd65b92a') {
+        exclude group: 'org.jetbrains.plugins'
+        exclude module: 'idea'
+    }
     testCompile 'junit:junit:4.+'
     lexer files('lib/jflex-1.7.0-SNAPSHOT.jar')
-    parser files('lib/grammar-kit.jar')
 }
 
 project.afterEvaluate {
@@ -140,7 +143,7 @@ task generatePerl5Parser(type: JavaExec) {
     outputs.file file(dstRoot + '/com/perl5/lang/perl/parser/PerlParserGenerated.java')
     outputs.dir dstRoot + '/com/perl5/lang/perl/psi'
 
-    classpath configurations.compile + configurations.parser
+    classpath configurations.compile + configurations.compileOnly
 }
 
 task generatePodParser(type: JavaExec) {
@@ -155,7 +158,7 @@ task generatePodParser(type: JavaExec) {
     outputs.file file(dstRoot + '/com/perl5/lang/pod/parser/PodParserGenerated.java')
     outputs.dir dstRoot + '/com/perl5/lang/pod/psi'
 
-    classpath configurations.compile + configurations.parser
+    classpath configurations.compile + configurations.compileOnly
 }
 
 task generateTT2Parser(type: JavaExec) {
@@ -170,7 +173,7 @@ task generateTT2Parser(type: JavaExec) {
     outputs.file file(dstRoot + '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java')
     outputs.dir dstRoot + '/com/perl5/lang/tt2/psi'
 
-    classpath configurations.compile + configurations.parser
+    classpath configurations.compile + configurations.compileOnly
 }
 
 // fxime dry this
