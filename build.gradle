@@ -85,14 +85,9 @@ test {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    compileOnly('com.github.JetBrains:Grammar-Kit:34fd65b92a') {
-        exclude group: 'org.jetbrains.plugins'
-        exclude module: 'idea'
-    }
     testCompile 'junit:junit:4.+'
 }
 
@@ -118,49 +113,24 @@ idea {
     }
 }
 
-task generatePerl5Parser(type: JavaExec) {
-    ext.src = file("grammar/Perl5.bnf")
-    ext.dstRoot = "gen"
+apply plugin: GrammarKit
 
-    main = "org.intellij.grammar.Main"
-
-    args = [dstRoot, src]
-
-    inputs.file file(src)
-    outputs.file file(dstRoot + '/com/perl5/lang/perl/parser/PerlParserGenerated.java')
-    outputs.dir dstRoot + '/com/perl5/lang/perl/psi'
-
-    classpath configurations.compile + configurations.compileOnly
+task generatePerl5Parser(type: GenerateParser) {
+    source = "grammar/Perl5.bnf"
+    pathToParser = '/com/perl5/lang/perl/parser/PerlParserGenerated.java'
+    pathToPsiRoot = '/com/perl5/lang/perl/psi'
 }
 
-task generatePodParser(type: JavaExec) {
-    ext.src = "grammar/Pod.bnf"
-    ext.dstRoot = "gen"
-
-    main = "org.intellij.grammar.Main"
-
-    args = [dstRoot, file(src)]
-
-    inputs.file file(src)
-    outputs.file file(dstRoot + '/com/perl5/lang/pod/parser/PodParserGenerated.java')
-    outputs.dir dstRoot + '/com/perl5/lang/pod/psi'
-
-    classpath configurations.compile + configurations.compileOnly
+task generatePodParser(type: GenerateParser) {
+    source = "grammar/Pod.bnf"
+    pathToParser = '/com/perl5/lang/pod/parser/PodParserGenerated.java'
+    pathToPsiRoot = '/com/perl5/lang/pod/psi'
 }
 
-task generateTT2Parser(type: JavaExec) {
-    ext.src = "grammar/TemplateToolkit.bnf"
-    ext.dstRoot = "gen"
-
-    main = "org.intellij.grammar.Main"
-
-    args = [dstRoot, file(src)]
-
-    inputs.file file(src)
-    outputs.file file(dstRoot + '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java')
-    outputs.dir dstRoot + '/com/perl5/lang/tt2/psi'
-
-    classpath configurations.compile + configurations.compileOnly
+task generateTT2Parser(type: GenerateParser) {
+    source = "grammar/TemplateToolkit.bnf"
+    pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'
+    pathToPsiRoot = '/com/perl5/lang/tt2/psi'
 }
 
 
@@ -197,7 +167,7 @@ task generateHTMLMasonLexer(type: GenerateFlexLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/HTMLMason.flex"
     targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
-    targetClass =  "HTMLMasonLexer"
+    targetClass = "HTMLMasonLexer"
 }
 task generateMason2Lexer(type: GenerateFlexLexer) {
     dependsOn generatePerl5Parser
@@ -233,6 +203,41 @@ compileJava {
     dependsOn generateLexers
 }
 
+
+class GrammarKit implements Plugin<Project> {
+    @Override
+    void apply(Project target) {
+        target.repositories.maven { url 'https://jitpack.io' }
+        target.dependencies.add(
+                JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME,
+                'com.github.JetBrains:Grammar-Kit:34fd65b92a',
+                {
+                    exclude group: 'org.jetbrains.plugins'
+                    exclude module: 'idea'
+                })
+    }
+}
+
+class GenerateParser extends JavaExec {
+    def source
+    def targetRoot = "gen"
+    // would be nice to obtain these from the GC
+    def pathToParser
+    def pathToPsiRoot
+
+    GenerateParser() {
+        setMain("org.intellij.grammar.Main");
+        project.afterEvaluate {
+            inputs.file source
+            outputs.file targetRoot + pathToParser
+            outputs.dir targetRoot + pathToPsiRoot
+
+            args = [targetRoot, project.file(source)]
+            classpath project.configurations.compile + project.configurations.compileOnly
+        }
+    }
+}
+
 class GenerateFlexLexer extends JavaExec {
 
     def jFlexPath = 'lib/jflex-1.7.0-SNAPSHOT.jar'
@@ -246,15 +251,13 @@ class GenerateFlexLexer extends JavaExec {
             setMain("jflex.Main")
             classpath(project.file(jFlexPath))
             inputs.file project.file(source)
-            if( skeleton != null )
-            {
+            if (skeleton != null) {
                 inputs.file project.file(skeleton)
             }
             outputs.file project.file("${targetDir}/${targetClass}.java")
 
             def newArgs = []
-            if( skeleton != null)
-            {
+            if (skeleton != null) {
                 newArgs.add("--skel")
                 newArgs.add(skeleton)
             }
