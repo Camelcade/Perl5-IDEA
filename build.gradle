@@ -215,6 +215,15 @@ class GrammarKit implements Plugin<Project> {
                     exclude group: 'org.jetbrains.plugins'
                     exclude module: 'idea'
                 })
+        target.configurations.create('jflex')
+        target.dependencies.add(
+                'jflex',
+                'com.github.hurricup.jflex:jflex:dff8549cee',
+                {
+                    exclude group: 'org.jetbrains.plugins'
+                    exclude module: 'idea'
+                }
+        )
     }
 }
 
@@ -228,19 +237,26 @@ class GenerateParser extends JavaExec {
     GenerateParser() {
         setMain("org.intellij.grammar.Main");
         project.afterEvaluate {
-            inputs.file source
-            outputs.file targetRoot + pathToParser
-            outputs.dir targetRoot + pathToPsiRoot
+            def bnfFile = project.file(source)
+            inputs.file bnfFile
+            def parserFile = project.file("$targetRoot$pathToParser")
+            outputs.file parserFile
+            def psiDir =  project.file("$targetRoot$pathToPsiRoot")
+            outputs.dir psiDir
 
-            args = [targetRoot, project.file(source)]
+            args = [project.file(targetRoot), bnfFile]
+
             classpath project.configurations.compile + project.configurations.compileOnly
+            doFirst{
+                project.delete parserFile
+                project.delete psiDir
+            }
         }
     }
 }
 
 class GenerateFlexLexer extends JavaExec {
 
-    def jFlexPath = 'lib/jflex-1.7.0-SNAPSHOT.jar'
     def targetDir
     def targetClass
     def source
@@ -249,22 +265,27 @@ class GenerateFlexLexer extends JavaExec {
     GenerateFlexLexer() {
         project.afterEvaluate({
             setMain("jflex.Main")
-            classpath(project.file(jFlexPath))
-            inputs.file project.file(source)
-            if (skeleton != null) {
-                inputs.file project.file(skeleton)
-            }
-            outputs.file project.file("${targetDir}/${targetClass}.java")
+            def flexFile = project.file(source)
+            inputs.file flexFile
+            def targetFile = project.file("${targetDir}/${targetClass}.java")
+            outputs.file targetFile
 
             def newArgs = []
             if (skeleton != null) {
                 newArgs.add("--skel")
-                newArgs.add(skeleton)
+                newArgs.add(project.file(skeleton))
+                inputs.file skeleton
             }
             newArgs.add("-d")
-            newArgs.add(targetDir)
-            newArgs.add(source)
+            newArgs.add(project.file(targetDir))
+            newArgs.add(flexFile)
             args(newArgs)
+
+            classpath project.configurations.jflex
+
+            doFirst{
+                project.delete targetFile
+            }
         })
     }
 }
