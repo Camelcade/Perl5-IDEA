@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.IntelliJPluginExtension
+
 /*
  * Copyright 2016 Alexandr Evstigneev
  *
@@ -114,6 +116,7 @@ idea {
 }
 
 apply plugin: GrammarKit
+grammarKit.jflexSkeleton = lexer_skeleton
 
 task generatePerl5Parser(type: GenerateParser) {
     source = "grammar/Perl5.bnf"
@@ -208,23 +211,33 @@ class GrammarKit implements Plugin<Project> {
     @Override
     void apply(Project target) {
         target.repositories.maven { url 'https://jitpack.io' }
-        target.dependencies.add(
-                JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME,
-                'com.github.JetBrains:Grammar-Kit:34fd65b92a',
-                {
-                    exclude group: 'org.jetbrains.plugins'
-                    exclude module: 'idea'
-                })
         target.configurations.create('jflex')
-        target.dependencies.add(
-                'jflex',
-                'com.github.hurricup.jflex:jflex:dff8549cee',
-                {
-                    exclude group: 'org.jetbrains.plugins'
-                    exclude module: 'idea'
-                }
-        )
+        def grammarKitExtension = target.extensions.create("grammarKit", GrammarKitPluginExtension.class)
+
+        target.afterEvaluate {
+            target.dependencies.add(
+                    JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME,
+                    "com.github.JetBrains:Grammar-Kit:${grammarKitExtension.grammarKitRelease}",
+                    {
+                        exclude group: 'org.jetbrains.plugins'
+                        exclude module: 'idea'
+                    })
+            target.dependencies.add(
+                    'jflex',
+                    "com.github.hurricup.jflex:jflex:${grammarKitExtension.jflexRelease}",
+                    {
+                        exclude group: 'org.jetbrains.plugins'
+                        exclude module: 'idea'
+                    }
+            )
+        }
     }
+}
+
+class GrammarKitPluginExtension{
+    def grammarKitRelease = '34fd65b92a';
+    def jflexRelease = '1.7.0';
+    def jflexSkeleton;
 }
 
 class GenerateParser extends JavaExec {
@@ -260,7 +273,7 @@ class GenerateFlexLexer extends JavaExec {
     def targetDir
     def targetClass
     def source
-    def skeleton = project.property("lexer_skeleton")
+    def skeleton
 
     GenerateFlexLexer() {
         project.afterEvaluate({
@@ -271,10 +284,11 @@ class GenerateFlexLexer extends JavaExec {
             outputs.file targetFile
 
             def newArgs = []
-            if (skeleton != null) {
+            def effectiveSkeleton = getSkeleton()
+            if (effectiveSkeleton != null) {
                 newArgs.add("--skel")
-                newArgs.add(project.file(skeleton))
-                inputs.file skeleton
+                newArgs.add(effectiveSkeleton)
+                inputs.file effectiveSkeleton
             }
             newArgs.add("-d")
             newArgs.add(project.file(targetDir))
@@ -287,5 +301,14 @@ class GenerateFlexLexer extends JavaExec {
                 project.delete targetFile
             }
         })
+    }
+
+    File getSkeleton(){
+        if( skeleton != null )
+        {
+            return project.file(skeleton);
+        }
+        def ext = project.extensions.findByType(GrammarKitPluginExtension)
+        return ext == null || ext.jflexSkeleton == null ? null: project.file(ext.jflexSkeleton)
     }
 }
