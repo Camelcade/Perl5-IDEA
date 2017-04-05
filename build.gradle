@@ -19,6 +19,10 @@ import org.jetbrains.intellij.IntelliJPluginExtension
 buildscript {
     repositories {
         maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+        maven { url 'https://jitpack.io'}
+    }
+    dependencies{
+        classpath "com.github.hurricup:gradle-grammar-kit-plugin:4241ee2274"
     }
 }
 
@@ -115,8 +119,16 @@ idea {
     }
 }
 
-apply plugin: GrammarKit
-grammarKit.jflexSkeleton = lexer_skeleton
+apply plugin: 'org.jetbrains.grammarkit'
+import org.jetbrains.grammarkit.tasks.*
+
+grammarKit{
+    jflexSkeleton = lexer_skeleton
+    jflexRelease = jflex_version
+    grammarKitRelease = grammarkit_version
+    purgeOldFiles = true
+}
+
 
 task generatePerl5Parser(type: GenerateParser) {
     source = "grammar/Perl5.bnf"
@@ -137,21 +149,21 @@ task generateTT2Parser(type: GenerateParser) {
 }
 
 
-task generatePerlLexer(type: GenerateFlexLexer) {
+task generatePerlLexer(type: GenerateLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/Perl.flex"
     targetDir = "gen/com/perl5/lang/perl/lexer/"
     targetClass = "PerlLexer"
 }
 
-task generatePodLexer(type: GenerateFlexLexer) {
+task generatePodLexer(type: GenerateLexer) {
     dependsOn generatePodParser
     source = "grammar/Pod.flex"
     targetDir = "gen/com/perl5/lang/pod/lexer/"
     targetClass = "PodLexerGenerated"
 }
 
-task generateTT2Lexer(type: GenerateFlexLexer) {
+task generateTT2Lexer(type: GenerateLexer) {
     dependsOn generateTT2Parser
     source = "grammar/TemplateToolkit.flex"
     targetDir = "gen/com/perl5/lang/tt2/lexer/"
@@ -159,26 +171,26 @@ task generateTT2Lexer(type: GenerateFlexLexer) {
 }
 
 
-task generateEmbeddedPerlLexer(type: GenerateFlexLexer) {
+task generateEmbeddedPerlLexer(type: GenerateLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/EmbeddedPerl.flex"
     targetDir = "gen/com/perl5/lang/embedded/lexer/"
     targetClass = "EmbeddedPerlLexer"
 }
 
-task generateHTMLMasonLexer(type: GenerateFlexLexer) {
+task generateHTMLMasonLexer(type: GenerateLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/HTMLMason.flex"
     targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
     targetClass = "HTMLMasonLexer"
 }
-task generateMason2Lexer(type: GenerateFlexLexer) {
+task generateMason2Lexer(type: GenerateLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/Mason2.flex"
     targetDir = "gen/com/perl5/lang/mason2/lexer/"
     targetClass = "Mason2TemplatingLexer"
 }
-task generateMojoliciousLexer(type: GenerateFlexLexer) {
+task generateMojoliciousLexer(type: GenerateLexer) {
     dependsOn generatePerl5Parser
     source = "grammar/Mojolicious.flex"
     targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
@@ -207,108 +219,5 @@ compileJava {
 }
 
 
-class GrammarKit implements Plugin<Project> {
-    @Override
-    void apply(Project target) {
-        target.repositories.maven { url 'https://jitpack.io' }
-        target.configurations.create('jflex')
-        def grammarKitExtension = target.extensions.create("grammarKit", GrammarKitPluginExtension.class)
 
-        target.afterEvaluate {
-            target.dependencies.add(
-                    JavaPlugin.COMPILE_ONLY_CONFIGURATION_NAME,
-                    "com.github.JetBrains:Grammar-Kit:${grammarKitExtension.grammarKitRelease}",
-                    {
-                        exclude group: 'org.jetbrains.plugins'
-                        exclude module: 'idea'
-                    })
-            target.dependencies.add(
-                    'jflex',
-                    "com.github.hurricup.jflex:jflex:${grammarKitExtension.jflexRelease}",
-                    {
-                        exclude group: 'org.jetbrains.plugins'
-                        exclude module: 'idea'
-                    }
-            )
-        }
-    }
-}
 
-class GrammarKitPluginExtension{
-    def grammarKitRelease = '34fd65b92a';
-    def jflexRelease = '1.7.0';
-    def jflexSkeleton;
-}
-
-class GenerateParser extends JavaExec {
-    def source
-    def targetRoot = "gen"
-    // would be nice to obtain these from the GC
-    def pathToParser
-    def pathToPsiRoot
-
-    GenerateParser() {
-        setMain("org.intellij.grammar.Main");
-        project.afterEvaluate {
-            def bnfFile = project.file(source)
-            inputs.file bnfFile
-            def parserFile = project.file("$targetRoot$pathToParser")
-            outputs.file parserFile
-            def psiDir =  project.file("$targetRoot$pathToPsiRoot")
-            outputs.dir psiDir
-
-            args = [project.file(targetRoot), bnfFile]
-
-            classpath project.configurations.compile + project.configurations.compileOnly
-            doFirst{
-                project.delete parserFile
-                project.delete psiDir
-            }
-        }
-    }
-}
-
-class GenerateFlexLexer extends JavaExec {
-
-    def targetDir
-    def targetClass
-    def source
-    def skeleton
-
-    GenerateFlexLexer() {
-        project.afterEvaluate({
-            setMain("jflex.Main")
-            def flexFile = project.file(source)
-            inputs.file flexFile
-            def targetFile = project.file("${targetDir}/${targetClass}.java")
-            outputs.file targetFile
-
-            def newArgs = []
-            def effectiveSkeleton = getSkeleton()
-            if (effectiveSkeleton != null) {
-                newArgs.add("--skel")
-                newArgs.add(effectiveSkeleton)
-                inputs.file effectiveSkeleton
-            }
-            newArgs.add("-d")
-            newArgs.add(project.file(targetDir))
-            newArgs.add(flexFile)
-            args(newArgs)
-
-            classpath project.configurations.jflex
-
-            doFirst{
-                project.delete targetFile
-            }
-        })
-    }
-
-    File getSkeleton(){
-        if( skeleton != null )
-        {
-            return project.file(skeleton);
-        }
-        def ext = project.extensions.findByType(GrammarKitPluginExtension)
-        return ext == null || ext.jflexSkeleton == null ? null: project.file(ext.jflexSkeleton)
-    }
-}
