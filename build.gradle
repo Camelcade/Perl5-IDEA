@@ -1,4 +1,5 @@
-import org.jetbrains.intellij.IntelliJPluginExtension
+import org.jetbrains.grammarkit.tasks.GenerateLexer
+import org.jetbrains.grammarkit.tasks.GenerateParser
 
 /*
  * Copyright 2016 Alexandr Evstigneev
@@ -19,10 +20,10 @@ import org.jetbrains.intellij.IntelliJPluginExtension
 buildscript {
     repositories {
         maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
-        maven { url 'https://jitpack.io'}
+        maven { url 'https://jitpack.io' }
     }
-    dependencies{
-        classpath "com.github.hurricup:gradle-grammar-kit-plugin:4241ee2274"
+    dependencies {
+        classpath "com.github.hurricup:gradle-grammar-kit-plugin:2017.1"
     }
 }
 
@@ -36,10 +37,11 @@ apply plugin: 'java'
 sourceCompatibility = javaVersion
 targetCompatibility = javaTargetVersion
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+def genRoot = file('gen')
 
 sourceSets {
     main {
-        java.srcDirs 'src', 'gen'
+        java.srcDirs 'src', genRoot
         resources.srcDir 'resources'
     }
     test {
@@ -115,20 +117,16 @@ idea {
         languageLevel = javaVersion
     }
     module {
-        generatedSourceDirs += file('gen')
+        generatedSourceDirs += genRoot
     }
 }
 
 apply plugin: 'org.jetbrains.grammarkit'
-import org.jetbrains.grammarkit.tasks.*
 
-grammarKit{
-    jflexSkeleton = lexer_skeleton
+grammarKit {
     jflexRelease = jflex_version
     grammarKitRelease = grammarkit_version
-    purgeOldFiles = true
 }
-
 
 task generatePerl5Parser(type: GenerateParser) {
     source = "grammar/Perl5.bnf"
@@ -195,6 +193,16 @@ task generateMojoliciousLexer(type: GenerateLexer) {
     source = "grammar/Mojolicious.flex"
     targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
     targetClass = "MojoliciousLexer"
+}
+
+tasks.withType(GenerateLexer).each {
+    it.skeleton = lexer_skeleton
+    it.purgeOldFiles = true
+}
+
+tasks.withType(GenerateParser).each {
+    it.targetRoot = genRoot
+    it.purgeOldFiles = true
 }
 
 
