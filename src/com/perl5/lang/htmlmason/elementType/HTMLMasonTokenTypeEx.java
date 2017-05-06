@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public abstract class HTMLMasonTokenTypeEx extends HTMLMasonTokenType implements ILeafElementType
-{
-	public HTMLMasonTokenTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class HTMLMasonTokenTypeEx extends HTMLMasonTokenType implements ILeafElementType {
+  public HTMLMasonTokenTypeEx(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

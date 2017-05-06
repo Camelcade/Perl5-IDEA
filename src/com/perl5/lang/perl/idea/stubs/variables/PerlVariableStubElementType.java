@@ -36,115 +36,100 @@ import java.io.IOException;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper> implements PerlElementTypes, PsiElementProvider
-{
-	public PerlVariableStubElementType(@NotNull String debugName)
-	{
-		super(debugName, PerlLanguage.INSTANCE);
-	}
+public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper>
+  implements PerlElementTypes, PsiElementProvider {
+  public PerlVariableStubElementType(@NotNull String debugName) {
+    super(debugName, PerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub)
-	{
-		return new PerlVariableStubImpl(
-				parentStub,
-				this,
-				psi.getPackageName(),
-				psi.getName(),
-				psi.getLocallyDeclaredType(),
-				psi.getActualType(),
-				psi.getLocalVariableAnnotations());
-	}
+  @Override
+  public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub) {
+    return new PerlVariableStubImpl(
+      parentStub,
+      this,
+      psi.getPackageName(),
+      psi.getName(),
+      psi.getLocallyDeclaredType(),
+      psi.getActualType(),
+      psi.getLocalVariableAnnotations());
+  }
 
-	@Override
-	public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub)
-	{
-		return new PsiPerlVariableDeclarationWrapperImpl(stub, this);
-	}
+  @Override
+  public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub) {
+    return new PsiPerlVariableDeclarationWrapperImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlVariableDeclarationWrapperImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlVariableDeclarationWrapperImpl(node);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof PerlVariableDeclarationWrapper &&
-				psi.isValid() &&
-				((PerlVariableDeclarationWrapper) psi).isGlobalDeclaration() &&
-				StringUtil.isNotEmpty(((PerlVariableDeclarationWrapper) psi).getName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof PerlVariableDeclarationWrapper &&
+           psi.isValid() &&
+           ((PerlVariableDeclarationWrapper)psi).isGlobalDeclaration() &&
+           StringUtil.isNotEmpty(((PerlVariableDeclarationWrapper)psi).getName());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull PerlVariableStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		if (stub.getDeclaredType() == null)
-		{
-			dataStream.writeName("");
-		}
-		else
-		{
-			dataStream.writeName(stub.getDeclaredType());
-		}
-		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getVariableName());
-		dataStream.writeByte(stub.getActualType().ordinal());
+  @Override
+  public void serialize(@NotNull PerlVariableStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    if (stub.getDeclaredType() == null) {
+      dataStream.writeName("");
+    }
+    else {
+      dataStream.writeName(stub.getDeclaredType());
+    }
+    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getVariableName());
+    dataStream.writeByte(stub.getActualType().ordinal());
 
-		PerlVariableAnnotations annotations = stub.getVariableAnnotations();
-		if (annotations == null)
-		{
-			dataStream.writeBoolean(false);
-		}
-		else
-		{
-			dataStream.writeBoolean(true);
-			annotations.serialize(dataStream);
-		}
-	}
+    PerlVariableAnnotations annotations = stub.getVariableAnnotations();
+    if (annotations == null) {
+      dataStream.writeBoolean(false);
+    }
+    else {
+      dataStream.writeBoolean(true);
+      annotations.serialize(dataStream);
+    }
+  }
 
-	@NotNull
-	@Override
-	public PerlVariableStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		String variableType = dataStream.readName().toString();
-		if (variableType.isEmpty())
-		{
-			variableType = null;
-		}
+  @NotNull
+  @Override
+  public PerlVariableStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    String variableType = dataStream.readName().toString();
+    if (variableType.isEmpty()) {
+      variableType = null;
+    }
 
-		return new PerlVariableStubImpl(
-				parentStub,
-				this,
-				dataStream.readName().toString(),
-				dataStream.readName().toString(),
-				variableType,
-				PerlVariableType.values()[dataStream.readByte()],
-				readAnnotations(dataStream)
-		);
-	}
+    return new PerlVariableStubImpl(
+      parentStub,
+      this,
+      dataStream.readName().toString(),
+      dataStream.readName().toString(),
+      variableType,
+      PerlVariableType.values()[dataStream.readByte()],
+      readAnnotations(dataStream)
+    );
+  }
 
-	@Nullable
-	private PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException
-	{
-		return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : null;
-	}
+  @Nullable
+  private PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
+    return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : null;
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlVariableStub stub, @NotNull IndexSink sink)
-	{
-		String variableName = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
-		sink.occurrence(stub.getIndexKey(), variableName);
-		sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());
-	}
+  @Override
+  public void indexStub(@NotNull PerlVariableStub stub, @NotNull IndexSink sink) {
+    String variableName = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
+    sink.occurrence(stub.getIndexKey(), variableName);
+    sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());
+  }
 }

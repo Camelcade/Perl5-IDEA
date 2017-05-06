@@ -29,21 +29,22 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlEnterDelegate implements EnterHandlerDelegate
-{
-	@Override
-	public Result preprocessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull Ref<Integer> caretOffset, @NotNull Ref<Integer> caretAdvance, @NotNull DataContext dataContext, @Nullable EditorActionHandler originalHandler)
-	{
-		if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider)
-		{
-			EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, "\n?>");
-		}
-		return Result.Continue;
-	}
+public class EmbeddedPerlEnterDelegate implements EnterHandlerDelegate {
+  @Override
+  public Result preprocessEnter(@NotNull PsiFile file,
+                                @NotNull Editor editor,
+                                @NotNull Ref<Integer> caretOffset,
+                                @NotNull Ref<Integer> caretAdvance,
+                                @NotNull DataContext dataContext,
+                                @Nullable EditorActionHandler originalHandler) {
+    if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider) {
+      EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, "\n?>");
+    }
+    return Result.Continue;
+  }
 
-	@Override
-	public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext)
-	{
-		return Result.Continue;
-	}
+  @Override
+  public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
+    return Result.Continue;
+  }
 }

@@ -31,48 +31,47 @@ import static com.intellij.patterns.PlatformPatterns.psiFile;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlElementTypes
-{
-	PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
-			psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),
-			psiElement().inside(psiElement(HTML_MASON_ARGS_BLOCK))
-	);
+public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlElementTypes {
+  PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
+    psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),
+    psiElement().inside(psiElement(HTML_MASON_ARGS_BLOCK))
+  );
 
-	PsiElementPattern.Capture<PerlSubNameElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN =
-			psiElement(PerlSubNameElement.class).withParent(
-					psiElement(PsiPerlMethod.class)
-							.withParent(
-									psiElement(PsiPerlSubCallExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
-							)
-			);
+  PsiElementPattern.Capture<PerlSubNameElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN =
+    psiElement(PerlSubNameElement.class).withParent(
+      psiElement(PsiPerlMethod.class)
+        .withParent(
+          psiElement(PsiPerlSubCallExpr.class).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER))
+        )
+    );
 
-	// this is for corrupterd <%identifier
-	PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
-			psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
-			);
+  // this is for corrupterd <%identifier
+  PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
+    psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
+    );
 
-	PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALEE =
-			psiElement(PerlString.class)
-					.inFile(psiFile(HTMLMasonFileImpl.class))
-					.withParent(psiElement(HTML_MASON_CALL_STATEMENT))
-					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement().andOr(
-							psiElement(HTML_MASON_CALL_OPENER),
-							psiElement(HTML_MASON_CALL_FILTERING_OPENER)
-					));
-
-
-	PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =
-			psiElement(PerlString.class)
-					.inFile(psiFile(HTMLMasonFileImpl.class))
-					.withParent(
-							psiElement(PsiPerlCommaSequenceExpr.class).withParent(psiElement(HTMLMasonFlagsStatement.class))
-					)
-					.afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(FAT_COMMA));
+  PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALEE =
+    psiElement(PerlString.class)
+      .inFile(psiFile(HTMLMasonFileImpl.class))
+      .withParent(psiElement(HTML_MASON_CALL_STATEMENT))
+      .afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement().andOr(
+        psiElement(HTML_MASON_CALL_OPENER),
+        psiElement(HTML_MASON_CALL_FILTERING_OPENER)
+      ));
 
 
-	PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
-			psiElement(PerlStringContentElement.class).andOr(
-					psiElement().withParent(HTML_MASON_COMPONENT_CALEE),
-					psiElement().withParent(HTML_MASON_FLAGS_PARENT)
-			);
+  PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =
+    psiElement(PerlString.class)
+      .inFile(psiFile(HTMLMasonFileImpl.class))
+      .withParent(
+        psiElement(PsiPerlCommaSequenceExpr.class).withParent(psiElement(HTMLMasonFlagsStatement.class))
+      )
+      .afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(FAT_COMMA));
+
+
+  PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
+    psiElement(PerlStringContentElement.class).andOr(
+      psiElement().withParent(HTML_MASON_COMPONENT_CALEE),
+      psiElement().withParent(HTML_MASON_FLAGS_PARENT)
+    );
 }

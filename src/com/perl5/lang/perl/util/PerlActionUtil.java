@@ -30,33 +30,25 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.04.2016.
  */
-public class PerlActionUtil
-{
-	@Nullable
-	public static PsiFile getPsiFileFromEvent(AnActionEvent event)
-	{
-		final DataContext context = event.getDataContext();
-		final Project project = CommonDataKeys.PROJECT.getData(context);
-		if (project == null)
-		{
-			return null;
-		}
+public class PerlActionUtil {
+  @Nullable
+  public static PsiFile getPsiFileFromEvent(AnActionEvent event) {
+    final DataContext context = event.getDataContext();
+    final Project project = CommonDataKeys.PROJECT.getData(context);
+    if (project == null) {
+      return null;
+    }
 
-		final Editor editor = CommonDataKeys.EDITOR.getData(context);
-		if (editor != null)
-		{
-			return PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
-
-		}
-		else
-		{
-			VirtualFile virtualFile = CommonDataKeys.VIRTUAL_FILE.getData(context);
-			if (virtualFile != null)
-			{
-				return PsiManager.getInstance(project).findFile(virtualFile);
-			}
-		}
-		return null;
-	}
-
+    final Editor editor = CommonDataKeys.EDITOR.getData(context);
+    if (editor != null) {
+      return PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
+    }
+    else {
+      VirtualFile virtualFile = CommonDataKeys.VIRTUAL_FILE.getData(context);
+      if (virtualFile != null) {
+        return PsiManager.getInstance(project).findFile(virtualFile);
+      }
+    }
+    return null;
+  }
 }

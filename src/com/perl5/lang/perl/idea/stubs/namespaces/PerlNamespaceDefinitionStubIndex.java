@@ -24,21 +24,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubIndex extends PerlStubIndexBase<PerlNamespaceDefinition>
-{
-	public static final int VERSION = 1;
-	public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+public class PerlNamespaceDefinitionStubIndex extends PerlStubIndexBase<PerlNamespaceDefinition> {
+  public static final int VERSION = 1;
+  public static final StubIndexKey<String, PerlNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlNamespaceDefinition> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, PerlNamespaceDefinition> getKey() {
+    return KEY;
+  }
 }

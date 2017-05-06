@@ -25,25 +25,20 @@ import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 /**
  * Created by hurricup on 30.01.2016.
  */
-public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl
-{
-	public static PerlCodeGenerator INSTANCE = new Mason2TemplatingCodeGeneratorImpl();
+public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl {
+  public static PerlCodeGenerator INSTANCE = new Mason2TemplatingCodeGeneratorImpl();
 
 
-	@Override
-	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
-	{
-		if (code == null)
-		{
-			return;
-		}
+  @Override
+  protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor) {
+    if (code == null) {
+      return;
+    }
 
-		if (anchor.getLanguage() == Mason2TemplatingLanguage.INSTANCE)
-		{
-			code = "<%perl>\n" + code + "\n</%perl>\n";
-		}
+    if (anchor.getLanguage() == Mason2TemplatingLanguage.INSTANCE) {
+      code = "<%perl>\n" + code + "\n</%perl>\n";
+    }
 
-		super.insertCodeAfterElement(anchor, code, editor);
-	}
-
+    super.insertCodeAfterElement(anchor, code, editor);
+  }
 }

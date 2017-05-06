@@ -39,166 +39,139 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodFileImpl extends PsiFileBase implements PodFile
-{
-	public PodFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, PodLanguage.INSTANCE);
-	}
+public class PodFileImpl extends PsiFileBase implements PodFile {
+  public PodFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, PodLanguage.INSTANCE);
+  }
 
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return PodFileType.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public FileType getFileType() {
+    return PodFileType.INSTANCE;
+  }
 
-	@Override
-	public String toString()
-	{
-		return "POD file";
-	}
+  @Override
+  public String toString() {
+    return "POD file";
+  }
 
-	@Override
-	public Icon getIcon(int flags)
-	{
-		PsiFile baseFile = getViewProvider().getStubBindingRoot();
-		return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
-	}
+  @Override
+  public Icon getIcon(int flags) {
+    PsiFile baseFile = getViewProvider().getStubBindingRoot();
+    return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
+  }
 
-	// fixme this is debugging method
-	public String getAsHTML()
-	{
-		StringBuilder builder = new StringBuilder();
-		renderElementAsHTML(builder, new PodRenderingContext());
-		return builder.toString();
-	}
+  // fixme this is debugging method
+  public String getAsHTML() {
+    StringBuilder builder = new StringBuilder();
+    renderElementAsHTML(builder, new PodRenderingContext());
+    return builder.toString();
+  }
 
-	// fixme this is debugging method
-	public String getAsText()
-	{
-		StringBuilder builder = new StringBuilder();
-		renderElementAsText(builder, new PodRenderingContext());
-		return builder.toString();
-	}
+  // fixme this is debugging method
+  public String getAsText() {
+    StringBuilder builder = new StringBuilder();
+    renderElementAsText(builder, new PodRenderingContext());
+    return builder.toString();
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		PodRenderUtil.renderPsiRangeAsHTML(getFirstNamedBlock(), null, builder, context);
-	}
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PodRenderUtil.renderPsiRangeAsHTML(getFirstNamedBlock(), null, builder, context);
+  }
 
-	@Nullable
-	public PsiElement getFirstNamedBlock()
-	{
-		return findChildByClass(PodTitledSection.class);
-	}
+  @Nullable
+  public PsiElement getFirstNamedBlock() {
+    return findChildByClass(PodTitledSection.class);
+  }
 
-	@Override
-	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		PodRenderUtil.renderPsiRangeAsText(getFirstNamedBlock(), null, builder, context);
-	}
+  @Override
+  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    PodRenderUtil.renderPsiRangeAsText(getFirstNamedBlock(), null, builder, context);
+  }
 
-	@Override
-	public boolean isIndexed()
-	{
-		return false;
-	}
+  @Override
+  public boolean isIndexed() {
+    return false;
+  }
 
-	@Override
-	public int getListLevel()
-	{
-		return 0;
-	}
+  @Override
+  public int getListLevel() {
+    return 0;
+  }
 
-	@Override
-	public boolean isHeading()
-	{
-		return false;
-	}
+  @Override
+  public boolean isHeading() {
+    return false;
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return this;
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public String getPresentableText()
-	{
-		String packageName = PodFileUtil.getPackageName(this);
-		if (StringUtil.isEmpty(packageName))
-		{
-			return getName();
-		}
-		if (StringUtil.startsWith(packageName, "pods::"))
-		{
-			return packageName.substring(6);
-		}
-		return packageName;
-	}
+  @Nullable
+  @Override
+  public String getPresentableText() {
+    String packageName = PodFileUtil.getPackageName(this);
+    if (StringUtil.isEmpty(packageName)) {
+      return getName();
+    }
+    if (StringUtil.startsWith(packageName, "pods::")) {
+      return packageName.substring(6);
+    }
+    return packageName;
+  }
 
-	@Nullable
-	@Override
-	public String getLocationString()
-	{
-		final PsiDirectory psiDirectory = getParent();
-		if (psiDirectory != null)
-		{
-			return psiDirectory.getVirtualFile().getPresentableUrl();
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public String getLocationString() {
+    final PsiDirectory psiDirectory = getParent();
+    if (psiDirectory != null) {
+      return psiDirectory.getVirtualFile().getPresentableUrl();
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(boolean unused)
-	{
-		return getFileType().getIcon();
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(boolean unused) {
+    return getFileType().getIcon();
+  }
 
-	@Nullable
-	@Override
-	public String getPodLink()
-	{
-		return getPresentableText();
-	}
+  @Nullable
+  @Override
+  public String getPodLink() {
+    return getPresentableText();
+  }
 
-	@Nullable
-	@Override
-	public String getPodLinkText()
-	{
-		return getPodLink();
-	}
+  @Nullable
+  @Override
+  public String getPodLinkText() {
+    return getPodLink();
+  }
 
-	@Override
-	public int getHeadingLevel()
-	{
-		return 0;
-	}
+  @Override
+  public int getHeadingLevel() {
+    return 0;
+  }
 
 
-	@Nullable
-	@Override
-	public String getUsageViewTypeLocation()
-	{
-		return "POD file";
-	}
+  @Nullable
+  @Override
+  public String getUsageViewTypeLocation() {
+    return "POD file";
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewLongNameLocation()
-	{
-		return "NYI Long name location string for " + this;
-	}
+  @Nullable
+  @Override
+  public String getUsageViewLongNameLocation() {
+    return "NYI Long name location string for " + this;
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewShortNameLocation()
-	{
-		return "NYI Short name location string for " + this;
-	}
-
+  @Nullable
+  @Override
+  public String getUsageViewShortNameLocation() {
+    return "NYI Short name location string for " + this;
+  }
 }

@@ -22,28 +22,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.11.2015.
  */
-public class PerlFormattingInsertBefore extends PerlFormattingInsertAfter
-{
-	public PerlFormattingInsertBefore(@NotNull PsiElement element, @NotNull PsiElement anchorElement)
-	{
-		super(element, anchorElement);
-	}
+public class PerlFormattingInsertBefore extends PerlFormattingInsertAfter {
+  public PerlFormattingInsertBefore(@NotNull PsiElement element, @NotNull PsiElement anchorElement) {
+    super(element, anchorElement);
+  }
 
-	public PerlFormattingInsertBefore(@NotNull PsiElement fromElement, @NotNull PsiElement toElement, @NotNull PsiElement anchorElement)
-	{
-		super(fromElement, toElement, anchorElement);
-	}
+  public PerlFormattingInsertBefore(@NotNull PsiElement fromElement, @NotNull PsiElement toElement, @NotNull PsiElement anchorElement) {
+    super(fromElement, toElement, anchorElement);
+  }
 
-	@Override
-	protected PsiElement insertElement(@NotNull PsiElement newElement, @NotNull PsiElement anchorElement, @NotNull PsiElement anchorContainer)
-	{
-		if (getMyAnchor() == anchorContainer)    // first element being added before
-		{
-			return anchorContainer.addBefore(newElement, anchorElement);
-		}
-		else    // the rest if added after
-		{
-			return super.insertElement(newElement, anchorElement, anchorContainer);
-		}
-	}
+  @Override
+  protected PsiElement insertElement(@NotNull PsiElement newElement,
+                                     @NotNull PsiElement anchorElement,
+                                     @NotNull PsiElement anchorContainer) {
+    if (getMyAnchor() == anchorContainer)    // first element being added before
+    {
+      return anchorContainer.addBefore(newElement, anchorElement);
+    }
+    else    // the rest if added after
+    {
+      return super.insertElement(newElement, anchorElement, anchorContainer);
+    }
+  }
 }

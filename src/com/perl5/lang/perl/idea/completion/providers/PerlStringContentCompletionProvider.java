@@ -32,45 +32,44 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.01.2016.
  */
-public class PerlStringContentCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns
-{
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet result)
-	{
-		PsiElement element = parameters.getPosition();
-		PsiElement parent = element.getParent();
+public class PerlStringContentCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
+  @Override
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                ProcessingContext context,
+                                @NotNull final CompletionResultSet result) {
+    PsiElement element = parameters.getPosition();
+    PsiElement parent = element.getParent();
 
-		if (parent instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost) parent))
-		{
-			return;
-		}
+    if (parent instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost)parent)) {
+      return;
+    }
 
-		if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
-		{
-			PerlStringCompletionUtil.fillWithExportableEntities(element, result);
-		}
-		else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
-		{
-			PerlStringCompletionUtil.fillWithHashIndexes(element, result);
-		}
-		else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
-		{
-			PerlStringCompletionUtil.fillWithUseParameters(element, result);
-		}
-		else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
-		{
-			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
-			result.stopHere();
-		}
-		else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
-		{
-			PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
-			PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
-		}
-		else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
-		{
-			PerlStringCompletionUtil.fillWithRefTypes(result);
-			PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
-		}
-	}
+    if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(element)) // exporter assignments
+    {
+      PerlStringCompletionUtil.fillWithExportableEntities(element, result);
+    }
+    else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
+    {
+      PerlStringCompletionUtil.fillWithHashIndexes(element, result);
+    }
+    else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
+    {
+      PerlStringCompletionUtil.fillWithUseParameters(element, result);
+    }
+    else if (parent != null && parent.getParent() instanceof PsiPerlAnnotationInject) // #@Inject some
+    {
+      PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
+      result.stopHere();
+    }
+    else if (STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN.accepts(element)) // HERE-DOC openers
+    {
+      PerlStringCompletionUtil.fillWithInjectableMarkers(element, result);
+      PerlStringCompletionUtil.fillWithHeredocOpeners(element, result);
+    }
+    else if (STRING_CONTENT_IN_LIST_OR_STRING_START.accepts(element))    // begin of string or qw element
+    {
+      PerlStringCompletionUtil.fillWithRefTypes(result);
+      PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
+    }
+  }
 }

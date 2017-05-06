@@ -26,20 +26,17 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface ClassAccessorElementTypes
-{
-	IElementType RESERVED_MK_RO_ACCESSORS = new ClassAccessorSubElementType("MK_RO_ACCESSORS");
-	IElementType RESERVED_MK_WO_ACCESSORS = new ClassAccessorSubElementType("MK_WO_ACCESSORS");
-	IElementType RESERVED_MK_ACCESSORS = new ClassAccessorSubElementType("MK_ACCESSORS");
-	IElementType RESERVED_FOLLOW_BEST_PRACTICE = new ClassAccessorSubElementType("FOLLOW_BEST_PRACTICE")
-	{
-		@NotNull
-		@Override
-		public ASTNode createLeafNode(CharSequence leafText)
-		{
-			return new PerlClassAccessorFollowBestPracticeImpl(this, leafText);
-		}
-	};
+public interface ClassAccessorElementTypes {
+  IElementType RESERVED_MK_RO_ACCESSORS = new ClassAccessorSubElementType("MK_RO_ACCESSORS");
+  IElementType RESERVED_MK_WO_ACCESSORS = new ClassAccessorSubElementType("MK_WO_ACCESSORS");
+  IElementType RESERVED_MK_ACCESSORS = new ClassAccessorSubElementType("MK_ACCESSORS");
+  IElementType RESERVED_FOLLOW_BEST_PRACTICE = new ClassAccessorSubElementType("FOLLOW_BEST_PRACTICE") {
+    @NotNull
+    @Override
+    public ASTNode createLeafNode(CharSequence leafText) {
+      return new PerlClassAccessorFollowBestPracticeImpl(this, leafText);
+    }
+  };
 
-	IElementType CLASS_ACCESSOR_DECLARATION = new ClassAccessorDeclarationStubElementType("CLASS_ACCESSOR_DECLARATION");
+  IElementType CLASS_ACCESSOR_DECLARATION = new ClassAccessorDeclarationStubElementType("CLASS_ACCESSOR_DECLARATION");
 }

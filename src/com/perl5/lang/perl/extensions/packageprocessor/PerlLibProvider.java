@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public interface PerlLibProvider
-{
-	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs);
+public interface PerlLibProvider {
+  public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs);
 }

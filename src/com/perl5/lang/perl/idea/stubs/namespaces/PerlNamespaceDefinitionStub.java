@@ -28,20 +28,19 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition>
-{
-	String getPackageName();
+public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition> {
+  String getPackageName();
 
-	PerlMroType getMroType();
+  PerlMroType getMroType();
 
-	List<String> getParentNamespaces();
+  List<String> getParentNamespaces();
 
-	List<String> getEXPORT();
+  List<String> getEXPORT();
 
-	List<String> getEXPORT_OK();
+  List<String> getEXPORT_OK();
 
-	Map<String, List<String>> getEXPORT_TAGS();
+  Map<String, List<String>> getEXPORT_TAGS();
 
-	@Nullable
-	PerlNamespaceAnnotations getAnnotations();
+  @Nullable
+  PerlNamespaceAnnotations getAnnotations();
 }

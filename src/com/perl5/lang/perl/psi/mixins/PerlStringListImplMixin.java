@@ -29,45 +29,37 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2016.
  */
-public class PerlStringListImplMixin extends PerlCompositeElementImpl implements PerlStringList
-{
-	public PerlStringListImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlStringListImplMixin extends PerlCompositeElementImpl implements PerlStringList {
+  public PerlStringListImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public List<String> getStringContents()
-	{
-		List<String> result = new ArrayList<String>();
+  @NotNull
+  @Override
+  public List<String> getStringContents() {
+    List<String> result = new ArrayList<String>();
 
-		PsiElement run = getFirstChild();
-		StringBuilder builder = null;
+    PsiElement run = getFirstChild();
+    StringBuilder builder = null;
 
-		while (run != null)
-		{
-			while (run instanceof PerlStringContentElementImpl)
-			{
-				if (builder == null)
-				{
-					builder = new StringBuilder();
-				}
-				builder.append(run.getNode().getText());
-				run = run.getNextSibling();
-			}
+    while (run != null) {
+      while (run instanceof PerlStringContentElementImpl) {
+        if (builder == null) {
+          builder = new StringBuilder();
+        }
+        builder.append(run.getNode().getText());
+        run = run.getNextSibling();
+      }
 
-			if (builder != null)
-			{
-				result.add(builder.toString());
-				builder = null;
-			}
-			else
-			{
-				run = run.getNextSibling();
-			}
-		}
+      if (builder != null) {
+        result.add(builder.toString());
+        builder = null;
+      }
+      else {
+        run = run.getNextSibling();
+      }
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

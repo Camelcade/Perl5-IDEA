@@ -22,13 +22,11 @@ import com.intellij.lang.PsiParser;
 /**
  * Created by hurricup on 16.10.2016.
  */
-public class PerlLazyBlockParser extends PerlParserImpl
-{
-	public static final PsiParser INSTANCE = new PerlLazyBlockParser();
+public class PerlLazyBlockParser extends PerlParserImpl {
+  public static final PsiParser INSTANCE = new PerlLazyBlockParser();
 
-	@Override
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		return PerlParserImpl.normal_block(b, l) || super.parseFileContents(b, l);
-	}
+  @Override
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    return PerlParserImpl.normal_block(b, l) || super.parseFileContents(b, l);
+  }
 }

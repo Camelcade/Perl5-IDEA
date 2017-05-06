@@ -31,35 +31,30 @@ import java.util.List;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceReference extends PerlCachingReference<PsiElement>
-{
-	public PerlNamespaceReference(PsiElement psiElement)
-	{
-		super(psiElement);
-	}
+public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
+  public PerlNamespaceReference(PsiElement psiElement) {
+    super(psiElement);
+  }
 
-	public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
+  public PerlNamespaceReference(@NotNull PsiElement element, TextRange textRange) {
+    super(element, textRange);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		String referenceText = getRangeInElement().substring(myElement.getText());
-		if (referenceText.isEmpty())
-		{
-			referenceText = PerlPackageUtil.MAIN_PACKAGE;
-		}
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    String referenceText = getRangeInElement().substring(myElement.getText());
+    if (referenceText.isEmpty()) {
+      referenceText = PerlPackageUtil.MAIN_PACKAGE;
+    }
 
-		Project project = myElement.getProject();
-		List<ResolveResult> result = new ArrayList<>();
+    Project project = myElement.getProject();
+    List<ResolveResult> result = new ArrayList<>();
 
-		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(referenceText)))
-		{
-			result.add(new PsiElementResolveResult(namespaceDefinition));
-		}
+    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil
+      .getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(referenceText))) {
+      result.add(new PsiElementResolveResult(namespaceDefinition));
+    }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 }

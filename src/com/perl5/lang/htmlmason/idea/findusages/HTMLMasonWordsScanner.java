@@ -23,14 +23,12 @@ import com.perl5.lang.perl.PerlParserDefinition;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonWordsScanner extends DefaultWordsScanner
-{
-	public HTMLMasonWordsScanner()
-	{
-		super(new HTMLMasonLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
-				PerlParserDefinition.LITERALS);
-		setMayHaveFileRefsInLiterals(true);
-	}
+public class HTMLMasonWordsScanner extends DefaultWordsScanner {
+  public HTMLMasonWordsScanner() {
+    super(new HTMLMasonLexerAdapter(null),
+          PerlParserDefinition.IDENTIFIERS,
+          PerlParserDefinition.COMMENTS,
+          PerlParserDefinition.LITERALS);
+    setMayHaveFileRefsInLiterals(true);
+  }
 }

@@ -23,18 +23,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlLeafStructureViewElement extends PerlStructureViewElement
-{
-	public PerlLeafStructureViewElement(PsiElement element)
-	{
-		super(element);
-	}
+public class PerlLeafStructureViewElement extends PerlStructureViewElement {
+  public PerlLeafStructureViewElement(PsiElement element) {
+    super(element);
+  }
 
-	@NotNull
-	@Override
-	public TreeElement[] getChildren()
-	{
-		return new TreeElement[0];
-	}
-
+  @NotNull
+  @Override
+  public TreeElement[] getChildren() {
+    return new TreeElement[0];
+  }
 }

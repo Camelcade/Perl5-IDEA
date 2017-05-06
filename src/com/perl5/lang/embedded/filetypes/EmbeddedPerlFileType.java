@@ -35,61 +35,54 @@ import javax.swing.*;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlFileType extends PerlFileType
-{
-	public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
+public class EmbeddedPerlFileType extends PerlFileType {
+  public static final EmbeddedPerlFileType INSTANCE = new EmbeddedPerlFileType();
 
-	public EmbeddedPerlFileType()
-	{
+  public EmbeddedPerlFileType() {
 
-		super(EmbeddedPerlLanguage.INSTANCE);
-		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
-		{
-			@Override
-			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
-			{
-				return new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme);
-			}
-		});
-	}
+    super(EmbeddedPerlLanguage.INSTANCE);
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
+      @Override
+      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                    @NotNull FileType fileType,
+                                                    @Nullable VirtualFile virtualFile,
+                                                    @NotNull EditorColorsScheme editorColorsScheme) {
+        return new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme);
+      }
+    });
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Embedded perl";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Embedded perl";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Embedded perl file";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Embedded perl file";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "thtml";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "thtml";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.EMBEDDED_PERL_FILE;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.EMBEDDED_PERL_FILE;
+  }
 
-	@Override
-	public boolean checkStrictPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkStrictPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean checkWarningsPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkWarningsPragma() {
+    return false;
+  }
 }

@@ -29,51 +29,47 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> implements PerlSubDefinitionStub
-{
-	private final String packageName;
-	private final String subName;
-	private final List<PerlSubArgument> myArguments;
-	private final PerlSubAnnotations myAnnotations;
+public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> implements PerlSubDefinitionStub {
+  private final String packageName;
+  private final String subName;
+  private final List<PerlSubArgument> myArguments;
+  private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDefinitionStubImpl(final StubElement parent, final String packageName, final String subName, List<PerlSubArgument> arguments, PerlSubAnnotations annotations, IStubElementType elementType)
-	{
-		super(parent, elementType);
-		this.packageName = packageName;
-		this.subName = subName;
-		myArguments = arguments;
-		myAnnotations = annotations;
-	}
+  public PerlSubDefinitionStubImpl(final StubElement parent,
+                                   final String packageName,
+                                   final String subName,
+                                   List<PerlSubArgument> arguments,
+                                   PerlSubAnnotations annotations,
+                                   IStubElementType elementType) {
+    super(parent, elementType);
+    this.packageName = packageName;
+    this.subName = subName;
+    myArguments = arguments;
+    myAnnotations = annotations;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return packageName;
-	}
+  @Override
+  public String getPackageName() {
+    return packageName;
+  }
 
-	@Override
-	public String getSubName()
-	{
-		return subName;
-	}
+  @Override
+  public String getSubName() {
+    return subName;
+  }
 
-	@Override
-	public List<PerlSubArgument> getSubArgumentsList()
-	{
-		return myArguments;
-	}
+  @Override
+  public List<PerlSubArgument> getSubArgumentsList() {
+    return myArguments;
+  }
 
-	@Override
-	public PerlSubAnnotations getAnnotations()
-	{
-		return myAnnotations;
-	}
+  @Override
+  public PerlSubAnnotations getAnnotations() {
+    return myAnnotations;
+  }
 
-	@Override
-	public String getCanonicalName()
-	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
-	}
-
-
+  @Override
+  public String getCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
 }

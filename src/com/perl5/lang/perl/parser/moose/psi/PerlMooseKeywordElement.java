@@ -19,6 +19,5 @@ package com.perl5.lang.perl.parser.moose.psi;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public interface PerlMooseKeywordElement
-{
+public interface PerlMooseKeywordElement {
 }

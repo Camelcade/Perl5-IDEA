@@ -19,6 +19,5 @@ package com.perl5.lang.mason2.psi;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public interface MasonFilterDefinition extends MasonMethodDefinition
-{
+public interface MasonFilterDefinition extends MasonMethodDefinition {
 }

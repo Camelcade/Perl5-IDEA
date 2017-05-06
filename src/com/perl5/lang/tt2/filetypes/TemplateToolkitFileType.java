@@ -39,74 +39,64 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileType extends PerlPluginBaseFileType implements FileTypeIdentifiableByVirtualFile
-{
-	public static final FileType INSTANCE = new TemplateToolkitFileType();
+public class TemplateToolkitFileType extends PerlPluginBaseFileType implements FileTypeIdentifiableByVirtualFile {
+  public static final FileType INSTANCE = new TemplateToolkitFileType();
 
-	public TemplateToolkitFileType()
-	{
-		super(TemplateToolkitLanguage.INSTANCE);
-		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
-		{
-			@Override
-			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
-			{
-				return new TemplateToolkitHighlighter(project, virtualFile, editorColorsScheme);
-			}
-		});
+  public TemplateToolkitFileType() {
+    super(TemplateToolkitLanguage.INSTANCE);
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
+      @Override
+      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                    @NotNull FileType fileType,
+                                                    @Nullable VirtualFile virtualFile,
+                                                    @NotNull EditorColorsScheme editorColorsScheme) {
+        return new TemplateToolkitHighlighter(project, virtualFile, editorColorsScheme);
+      }
+    });
+  }
 
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Template Toolkit";
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Template Toolkit";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Template Toolkit Template";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Template Toolkit Template";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "tt";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "tt";
-	}
-
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.TTK2_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.TTK2_ICON;
+  }
 
 
-	@Override
-	public boolean isMyFileType(@NotNull VirtualFile virtualFile)
-	{
-		String extension = virtualFile.getExtension();
-		if (TemplateToolkitFileTypeFactory.DEFAULT_EXTENSIONS.contains(extension))
-		{
-			return true;
-		}
+  @Override
+  public boolean isMyFileType(@NotNull VirtualFile virtualFile) {
+    String extension = virtualFile.getExtension();
+    if (TemplateToolkitFileTypeFactory.DEFAULT_EXTENSIONS.contains(extension)) {
+      return true;
+    }
 
-		if (virtualFile instanceof StubVirtualFile)
-		{
-			return false;
-		}
+    if (virtualFile instanceof StubVirtualFile) {
+      return false;
+    }
 
-		Project project = ProjectLocator.getInstance().guessProjectForFile(virtualFile);
-		if (project != null)
-		{
-			TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
-			return settings.isVirtualFileNameMatches(virtualFile) && settings.isVirtualFileUnderRoot(virtualFile);
-		}
+    Project project = ProjectLocator.getInstance().guessProjectForFile(virtualFile);
+    if (project != null) {
+      TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
+      return settings.isVirtualFileNameMatches(virtualFile) && settings.isVirtualFileUnderRoot(virtualFile);
+    }
 
-		return false;
-	}
+    return false;
+  }
 }

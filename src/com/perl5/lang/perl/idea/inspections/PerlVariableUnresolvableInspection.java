@@ -30,44 +30,34 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.06.2015.
  */
-public class PerlVariableUnresolvableInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
+public class PerlVariableUnresolvableInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
 
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitPerlVariable(@NotNull final PerlVariable variable)
-			{
-				PsiElement parent = variable.getParent();
+    return new PerlVisitor() {
+      @Override
+      public void visitPerlVariable(@NotNull final PerlVariable variable) {
+        PsiElement parent = variable.getParent();
 
-				if (parent instanceof PerlVariableDeclarationWrapper || variable.isBuiltIn())
-				{
-					return;
-				}
+        if (parent instanceof PerlVariableDeclarationWrapper || variable.isBuiltIn()) {
+          return;
+        }
 
-				PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
+        PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-				if (variableNameElement != null)
-				{
-					for (PsiReference reference : variableNameElement.getReferences())
-					{
-						if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference) reference).multiResolve(false).length > 0
-								|| reference.resolve() != null
-								)
-						{
-							return;
-						}
-					}
+        if (variableNameElement != null) {
+          for (PsiReference reference : variableNameElement.getReferences()) {
+            if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length > 0
+                || reference.resolve() != null
+              ) {
+              return;
+            }
+          }
 
-					registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
-				}
-			}
-
-		};
-
-	}
+          registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
+        }
+      }
+    };
+  }
 }

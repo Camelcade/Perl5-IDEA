@@ -44,133 +44,112 @@ import java.util.List;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class Mason2Util
-{
-	@NotNull
-	public static String getClassnameFromPath(@NotNull String path)
-	{
-		return "/MC0::" + path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
-	}
+public class Mason2Util {
+  @NotNull
+  public static String getClassnameFromPath(@NotNull String path) {
+    return "/MC0::" +
+           path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtil.PACKAGE_SEPARATOR);
+  }
 
-	@Nullable
-	public static String getVirtualFileClassName(@NotNull Project project, @Nullable VirtualFile componentFile)
-	{
-		if (componentFile != null && componentFile.isValid())
-		{
-			VirtualFile componentRoot = getComponentRoot(project, componentFile);
-			if (componentRoot != null)
-			{
-				//noinspection ConstantConditions
-				return getClassnameFromPath(VfsUtil.getRelativePath(componentFile, componentRoot));
-			}
-		}
+  @Nullable
+  public static String getVirtualFileClassName(@NotNull Project project, @Nullable VirtualFile componentFile) {
+    if (componentFile != null && componentFile.isValid()) {
+      VirtualFile componentRoot = getComponentRoot(project, componentFile);
+      if (componentRoot != null) {
+        //noinspection ConstantConditions
+        return getClassnameFromPath(VfsUtil.getRelativePath(componentFile, componentRoot));
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Nullable
-	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
-	{
-		return MasonCoreUtil.getComponentRoot(MasonSettings.getInstance(project), file);
-	}
+  @Nullable
+  public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file) {
+    return MasonCoreUtil.getComponentRoot(MasonSettings.getInstance(project), file);
+  }
 
-	public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath)
-	{
-		return new ArrayList<PerlNamespaceDefinition>(
-				StubIndex.getElements(
-						MasonNamespaceDefitnitionsStubIndex.KEY,
-						absolutePath,
-						project,
-						GlobalSearchScope.projectScope(project),
-						MasonNamespaceDefinition.class
-				)
-		);
-	}
+  public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath) {
+    return new ArrayList<PerlNamespaceDefinition>(
+      StubIndex.getElements(
+        MasonNamespaceDefitnitionsStubIndex.KEY,
+        absolutePath,
+        project,
+        GlobalSearchScope.projectScope(project),
+        MasonNamespaceDefinition.class
+      )
+    );
+  }
 
-	@NotNull
-	public static List<PerlNamespaceDefinition> collectComponentNamespacesByPaths(@NotNull Project project, @NotNull List<String> componentPaths, @NotNull VirtualFile anchorDir)
-	{
-		List<PerlNamespaceDefinition> result = new ArrayList<PerlNamespaceDefinition>();
-		MasonSettings masonSettings = MasonSettings.getInstance(project);
+  @NotNull
+  public static List<PerlNamespaceDefinition> collectComponentNamespacesByPaths(@NotNull Project project,
+                                                                                @NotNull List<String> componentPaths,
+                                                                                @NotNull VirtualFile anchorDir) {
+    List<PerlNamespaceDefinition> result = new ArrayList<PerlNamespaceDefinition>();
+    MasonSettings masonSettings = MasonSettings.getInstance(project);
 
-		for (String componentPath : componentPaths)
-		{
-			VirtualFile componentFile = null;
-			if (componentPath.startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path relative to mason roots, see the Mason::Interp::_determine_parent_compc
-			{
-				for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
-				{
-					componentFile = componentRoot.findFileByRelativePath(componentPath.substring(1));
-					if (componentFile != null)
-					{
-						break;
-					}
-				}
-			}
-			else // relative path
-			{
-				componentFile = anchorDir.findFileByRelativePath(componentPath);
-			}
+    for (String componentPath : componentPaths) {
+      VirtualFile componentFile = null;
+      if (componentPath
+        .startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path relative to mason roots, see the Mason::Interp::_determine_parent_compc
+      {
+        for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles()) {
+          componentFile = componentRoot.findFileByRelativePath(componentPath.substring(1));
+          if (componentFile != null) {
+            break;
+          }
+        }
+      }
+      else // relative path
+      {
+        componentFile = anchorDir.findFileByRelativePath(componentPath);
+      }
 
-			if (componentFile != null)
-			{
-				String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
-				if (absolutePath != null)
-				{
-					result.addAll(Mason2Util.getMasonNamespacesByAbsolutePath(project, absolutePath));
-				}
-			}
-		}
+      if (componentFile != null) {
+        String absolutePath = VfsUtil.getRelativePath(componentFile, project.getBaseDir());
+        if (absolutePath != null) {
+          result.addAll(Mason2Util.getMasonNamespacesByAbsolutePath(project, absolutePath));
+        }
+      }
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	public static void reindexProjectFile(Project project, VirtualFile virtualFile)
-	{
-		if (VfsUtil.isAncestor(project.getBaseDir(), virtualFile, false))
-		{
-			reindexProjectRoots(project, Collections.singletonList(VfsUtil.getRelativePath(virtualFile, project.getBaseDir())));
-		}
-	}
+  public static void reindexProjectFile(Project project, VirtualFile virtualFile) {
+    if (VfsUtil.isAncestor(project.getBaseDir(), virtualFile, false)) {
+      reindexProjectRoots(project, Collections.singletonList(VfsUtil.getRelativePath(virtualFile, project.getBaseDir())));
+    }
+  }
 
-	public static void reindexProjectRoots(Project project, List<String> rootsToReindex)
-	{
-		if (rootsToReindex.isEmpty())
-		{
-			return;
-		}
+  public static void reindexProjectRoots(Project project, List<String> rootsToReindex) {
+    if (rootsToReindex.isEmpty()) {
+      return;
+    }
 
-		PsiDocumentManager.getInstance(project).commitAllDocuments();
+    PsiDocumentManager.getInstance(project).commitAllDocuments();
 
-		VirtualFile projectRoot = project.getBaseDir();
+    VirtualFile projectRoot = project.getBaseDir();
 
-		if (projectRoot != null)
-		{
-			final FileBasedIndex index = FileBasedIndex.getInstance();
+    if (projectRoot != null) {
+      final FileBasedIndex index = FileBasedIndex.getInstance();
 
-			for (String root : rootsToReindex)
-			{
-				VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
-				if (componentRoot != null)
-				{
-					for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot))
-					{
-						if (file.getFileType() instanceof MasonPurePerlComponentFileType)
-						{
-							index.requestReindex(file);
-						}
-					}
-				}
-			}
-			if (index instanceof FileBasedIndexImpl)
-			{
-				DumbModeTask changedFilesIndexingTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(project);
-				if (changedFilesIndexingTask != null)
-				{
-					DumbServiceImpl.getInstance(project).queueTask(changedFilesIndexingTask);
-				}
-			}
-		}
-	}
-
+      for (String root : rootsToReindex) {
+        VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
+        if (componentRoot != null) {
+          for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot)) {
+            if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
+              index.requestReindex(file);
+            }
+          }
+        }
+      }
+      if (index instanceof FileBasedIndexImpl) {
+        DumbModeTask changedFilesIndexingTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(project);
+        if (changedFilesIndexingTask != null) {
+          DumbServiceImpl.getInstance(project).queueTask(changedFilesIndexingTask);
+        }
+      }
+    }
+  }
 }

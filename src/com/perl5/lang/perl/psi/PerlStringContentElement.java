@@ -21,31 +21,28 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 18.07.2015.
  */
-public interface PerlStringContentElement extends PsiElement
-{
-	/**
-	 * Checks if contents looks like a package
-	 *
-	 * @return checking result
-	 */
-	public boolean looksLikePackage();
+public interface PerlStringContentElement extends PsiElement {
+  /**
+   * Checks if contents looks like a package
+   *
+   * @return checking result
+   */
+  public boolean looksLikePackage();
 
-	/**
-	 * Checks if contents looks like a valid path
-	 *
-	 * @return checking result
-	 */
-	public boolean looksLikePath();
+  /**
+   * Checks if contents looks like a valid path
+   *
+   * @return checking result
+   */
+  public boolean looksLikePath();
 
-	/**
-	 * Returns continuos string for this element
-	 *
-	 * @return text till space or end before and after this element
-	 */
-	String getContinuosText();
-
-
-	String getContentFileName();
+  /**
+   * Returns continuos string for this element
+   *
+   * @return text till space or end before and after this element
+   */
+  String getContinuosText();
 
 
+  String getContentFileName();
 }

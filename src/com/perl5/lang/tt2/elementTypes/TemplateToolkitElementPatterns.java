@@ -25,18 +25,15 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public interface TemplateToolkitElementPatterns extends TemplateToolkitElementTypes
-{
-	PsiElementPattern.Capture<PsiElement> FILTER_NAME_PATTERN =
-			psiElement(TT2_IDENTIFIER).withParent(
-					psiElement(IDENTIFIER_EXPR).afterLeafSkipping(
-							psiElement().andOr(psiElement().whitespace(), psiElement(PsiComment.class)),
-							psiElement(TT2_FILTER)
-					)
-			);
+public interface TemplateToolkitElementPatterns extends TemplateToolkitElementTypes {
+  PsiElementPattern.Capture<PsiElement> FILTER_NAME_PATTERN =
+    psiElement(TT2_IDENTIFIER).withParent(
+      psiElement(IDENTIFIER_EXPR).afterLeafSkipping(
+        psiElement().andOr(psiElement().whitespace(), psiElement(PsiComment.class)),
+        psiElement(TT2_FILTER)
+      )
+    );
 
-	// fixme add controlling tokenset
-	PsiElementPattern.Capture<PsiElement> BLOCK_NAME_USAGE_PATTERN = psiElement(TT2_STRING_CONTENT);
-
-
+  // fixme add controlling tokenset
+  PsiElementPattern.Capture<PsiElement> BLOCK_NAME_USAGE_PATTERN = psiElement(TT2_STRING_CONTENT);
 }

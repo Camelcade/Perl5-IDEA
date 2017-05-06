@@ -24,22 +24,20 @@ import java.util.List;
 /**
  * Created by hurricup on 18.05.2016.
  */
-public class PerlSetUpDescriptor
-{
-	private List<PerlLineBreakPointDescriptor> breakpoints;
-	private String charset;
-	private String startMode;
-	private boolean enableCompileTimeBreakpoints;
-	private boolean enableNonInteractiveMode;
-	private String initCode;
+public class PerlSetUpDescriptor {
+  private List<PerlLineBreakPointDescriptor> breakpoints;
+  private String charset;
+  private String startMode;
+  private boolean enableCompileTimeBreakpoints;
+  private boolean enableNonInteractiveMode;
+  private String initCode;
 
-	public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState)
-	{
-		this.breakpoints = breakpoints;
-		this.charset = debugProfileState.getScriptCharset();
-		this.startMode = debugProfileState.getStartMode();
-		this.enableCompileTimeBreakpoints = debugProfileState.isCompileTimeBreakpointsEnabled();
-		this.enableNonInteractiveMode = debugProfileState.isNonInteractiveModeEnabled();
-		this.initCode = debugProfileState.getInitCode();
-	}
+  public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState) {
+    this.breakpoints = breakpoints;
+    this.charset = debugProfileState.getScriptCharset();
+    this.startMode = debugProfileState.getStartMode();
+    this.enableCompileTimeBreakpoints = debugProfileState.isCompileTimeBreakpointsEnabled();
+    this.enableNonInteractiveMode = debugProfileState.isNonInteractiveModeEnabled();
+    this.initCode = debugProfileState.getInitCode();
+  }
 }

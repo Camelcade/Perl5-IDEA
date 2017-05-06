@@ -23,11 +23,10 @@ import javax.swing.*;
 /**
  * Created by hurricup on 10.01.2016.
  */
-public class Mason2Icons
-{
-	public static final Icon MASON_LANGUAGE_ICON = PerlIcons.PERL_LANGUAGE_ICON;
+public class Mason2Icons {
+  public static final Icon MASON_LANGUAGE_ICON = PerlIcons.PERL_LANGUAGE_ICON;
 
-	public static final Icon MASON_PURE_PERL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
-	public static final Icon MASON_TOP_LEVEL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
-	public static final Icon MASON_INTERNAL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+  public static final Icon MASON_PURE_PERL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+  public static final Icon MASON_TOP_LEVEL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+  public static final Icon MASON_INTERNAL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
 }

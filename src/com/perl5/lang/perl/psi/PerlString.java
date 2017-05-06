@@ -23,35 +23,34 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.08.2015.
  */
-public interface PerlString extends PsiElement
-{
-	/**
-	 * Returns string content text
-	 *
-	 * @return String content text
-	 */
-	@NotNull
-	String getStringContent();
+public interface PerlString extends PsiElement {
+  /**
+   * Returns string content text
+   *
+   * @return String content text
+   */
+  @NotNull
+  String getStringContent();
 
-	/**
-	 * Changing string contents
-	 *
-	 * @param newContent new string content
-	 */
-	void setStringContent(String newContent);
+  /**
+   * Changing string contents
+   *
+   * @param newContent new string content
+   */
+  void setStringContent(String newContent);
 
-	/**
-	 * Returns text content range
-	 *
-	 * @return text content range
-	 */
-	@NotNull
-	TextRange getContentTextRangeInParent();
+  /**
+   * Returns text content range
+   *
+   * @return text content range
+   */
+  @NotNull
+  TextRange getContentTextRangeInParent();
 
-	/**
-	 * Returns the lenght of string content
-	 *
-	 * @return string content length
-	 */
-	int getContentLength();
+  /**
+   * Returns the lenght of string content
+   *
+   * @return string content length
+   */
+  int getContentLength();
 }

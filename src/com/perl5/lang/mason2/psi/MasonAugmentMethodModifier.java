@@ -21,6 +21,5 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public interface MasonAugmentMethodModifier extends PerlMooseAugmentStatement, MasonMethodModifier
-{
+public interface MasonAugmentMethodModifier extends PerlMooseAugmentStatement, MasonMethodModifier {
 }

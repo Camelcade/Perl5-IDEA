@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public interface PerlCompositeElement extends PsiElement
-{
+public interface PerlCompositeElement extends PsiElement {
 }

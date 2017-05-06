@@ -35,34 +35,31 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlDebuggerProgramRunner extends DefaultProgramRunner
-{
-	@NotNull
-	@Override
-	public String getRunnerId()
-	{
-		return "Perl Debugger";
-	}
+public class PerlDebuggerProgramRunner extends DefaultProgramRunner {
+  @NotNull
+  @Override
+  public String getRunnerId() {
+    return "Perl Debugger";
+  }
 
-	@Override
-	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
-	{
-		return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) && (profile instanceof PerlConfiguration || profile instanceof PerlRemoteDebuggingConfiguration);
-	}
+  @Override
+  public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
+    return executorId.equals(DefaultDebugExecutor.EXECUTOR_ID) &&
+           (profile instanceof PerlConfiguration || profile instanceof PerlRemoteDebuggingConfiguration);
+  }
 
-	@Override
-	protected RunContentDescriptor doExecute(@NotNull final RunProfileState state, @NotNull final ExecutionEnvironment env) throws ExecutionException
-	{
-		FileDocumentManager.getInstance().saveAllDocuments();
-		XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter()
-		{
-			@NotNull
-			@Override
-			public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException
-			{
-				return new PerlDebugProcess(session, (PerlDebugProfileState) state, state.execute(env.getExecutor(), PerlDebuggerProgramRunner.this));
-			}
-		});
-		return xDebugSession.getRunContentDescriptor();
-	}
+  @Override
+  protected RunContentDescriptor doExecute(@NotNull final RunProfileState state, @NotNull final ExecutionEnvironment env)
+    throws ExecutionException {
+    FileDocumentManager.getInstance().saveAllDocuments();
+    XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
+      @NotNull
+      @Override
+      public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
+        return new PerlDebugProcess(session, (PerlDebugProfileState)state,
+                                    state.execute(env.getExecutor(), PerlDebuggerProgramRunner.this));
+      }
+    });
+    return xDebugSession.getRunContentDescriptor();
+  }
 }

@@ -34,38 +34,32 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider
-{
-	public PerlMooseOverrideStubElementType(String name)
-	{
-		super(name);
-	}
+public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider {
+  public PerlMooseOverrideStubElementType(String name) {
+    super(name);
+  }
 
-	public PerlMooseOverrideStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
-	{
-		super(debugName, language);
-	}
+  public PerlMooseOverrideStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PerlMooseOverrideStatementImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PerlMooseOverrideStatementImpl(stub, this);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
 
-		return psi instanceof PerlMooseOverrideStatement &&
-				psi.isValid() &&
-				StringUtil.isNotEmpty(((PerlMooseOverrideStatement) psi).getSubName());
-	}
+    return psi instanceof PerlMooseOverrideStatement &&
+           psi.isValid() &&
+           StringUtil.isNotEmpty(((PerlMooseOverrideStatement)psi).getSubName());
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlMooseOverrideStatementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlMooseOverrideStatementImpl(node);
+  }
 }

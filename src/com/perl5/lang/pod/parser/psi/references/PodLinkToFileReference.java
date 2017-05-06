@@ -36,64 +36,53 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.04.2016.
  */
-public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL>
-{
-	public PodLinkToFileReference(PodFormatterL element, TextRange range)
-	{
-		super(element, range);
-	}
+public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> {
+  public PodLinkToFileReference(PodFormatterL element, TextRange range) {
+    super(element, range);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PodFormatterL podLink = getElement();
-		PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PodFormatterL podLink = getElement();
+    PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
-		if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null)
-		{
-			PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
-			if (targetFile != null)
-			{
-				return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
-			}
-		}
+    if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null) {
+      PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
+      if (targetFile != null) {
+        return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
+      }
+    }
 
-		return ResolveResult.EMPTY_ARRAY;
-	}
+    return ResolveResult.EMPTY_ARRAY;
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
-		if (descriptor != null)
-		{
-			String currentName = descriptor.getFileId();
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
+    if (descriptor != null) {
+      String currentName = descriptor.getFileId();
 
-			if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))
-			{
-				String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
-				nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
-				newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+      if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) ||
+          newElementName.endsWith("." + PodFileType.EXTENSION)) {
+        String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+        nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
+        newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
 
-				return super.handleElementRename(newElementName);
-			}
-//			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
-		}
-		return myElement;
-	}
+        return super.handleElementRename(newElementName);
+      }
+      //			throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
+    }
+    return myElement;
+  }
 
-	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-		if (element instanceof PsiFile)
-		{
-			String newName = PodFileUtil.getPackageName((PsiFile) element);
-			if (StringUtil.isNotEmpty(newName))
-			{
-				return super.handleElementRename(newName);
-			}
-		}
-		return myElement;
-	}
-
+  @Override
+  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    if (element instanceof PsiFile) {
+      String newName = PodFileUtil.getPackageName((PsiFile)element);
+      if (StringUtil.isNotEmpty(newName)) {
+        return super.handleElementRename(newName);
+      }
+    }
+    return myElement;
+  }
 }

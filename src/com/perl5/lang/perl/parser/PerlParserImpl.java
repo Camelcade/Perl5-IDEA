@@ -28,129 +28,106 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.12.2015.
  */
-public class PerlParserImpl extends PerlParserGenerated implements PerlParser
-{
-	public static final PsiParser INSTANCE = new PerlParserImpl();
+public class PerlParserImpl extends PerlParserGenerated implements PerlParser {
+  public static final PsiParser INSTANCE = new PerlParserImpl();
 
-	public PerlParserImpl()
-	{
-	}
+  public PerlParserImpl() {
+  }
 
-	/*
-			@Override
-			public ASTNode parse(IElementType t, PsiBuilder b)
-			{
-				if (t instanceof PerlFileElementType)
-				{
-					PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
-					if (file != null && file.getVirtualFile() != null)
-						System.err.println("Parsed file " + file.getVirtualFile());
-				}
-				return super.parse(t, b);
-			}
-		*/
-	public boolean parseStatement(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseStatement((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+  /*
+                  @Override
+                  public ASTNode parse(IElementType t, PsiBuilder b)
+                  {
+                          if (t instanceof PerlFileElementType)
+                          {
+                                  PsiFile file = b.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+                                  if (file != null && file.getVirtualFile() != null)
+                                          System.err.println("Parsed file " + file.getVirtualFile());
+                          }
+                          return super.parse(t, b);
+                  }
+          */
+  public boolean parseStatement(PsiBuilder b, int l) {
+    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+      if (parserExtension.parseStatement((PerlBuilder)b, l)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	public boolean parseTerm(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseTerm((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+  public boolean parseTerm(PsiBuilder b, int l) {
+    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+      if (parserExtension.parseTerm((PerlBuilder)b, l)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	public boolean parseStatementModifier(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseStatementModifier((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+  public boolean parseStatementModifier(PsiBuilder b, int l) {
+    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+      if (parserExtension.parseStatementModifier((PerlBuilder)b, l)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	public boolean parseNestedElementVariation(PsiBuilder b, int l)
-	{
-		for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS)
-		{
-			if (parserExtension.parseNestedElement((PerlBuilder) b, l))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+  public boolean parseNestedElementVariation(PsiBuilder b, int l) {
+    for (PerlParserExtension parserExtension : PerlParserDefinition.PARSER_EXTENSIONS) {
+      if (parserExtension.parseNestedElement((PerlBuilder)b, l)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	@NotNull
-	public TokenSet getBadCharacterForbiddenTokens()
-	{
-		return BAD_CHARACTER_FORBIDDEN_TOKENS;
-	}
+  @NotNull
+  public TokenSet getBadCharacterForbiddenTokens() {
+    return BAD_CHARACTER_FORBIDDEN_TOKENS;
+  }
 
-	@NotNull
-	public TokenSet getStatementRecoveryConsumableTokenSet()
-	{
-		return STATEMENT_RECOVERY_CONSUMABLE_TOKENS;
-	}
+  @NotNull
+  public TokenSet getStatementRecoveryConsumableTokenSet() {
+    return STATEMENT_RECOVERY_CONSUMABLE_TOKENS;
+  }
 
-	@NotNull
-	public TokenSet getConsumableSemicolonTokens()
-	{
-		return CONSUMABLE_SEMI_TOKENS;
-	}
+  @NotNull
+  public TokenSet getConsumableSemicolonTokens() {
+    return CONSUMABLE_SEMI_TOKENS;
+  }
 
-	@NotNull
-	public TokenSet getAnonHashSuffixTokens()
-	{
-		return ANON_HASH_TOKEN_SUFFIXES;
-	}
+  @NotNull
+  public TokenSet getAnonHashSuffixTokens() {
+    return ANON_HASH_TOKEN_SUFFIXES;
+  }
 
-	@NotNull
-	public TokenSet getUnconsumableSemicolonTokens()
-	{
-		return UNCONSUMABLE_SEMI_TOKENS;
-	}
+  @NotNull
+  public TokenSet getUnconsumableSemicolonTokens() {
+    return UNCONSUMABLE_SEMI_TOKENS;
+  }
 
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		return PerlParserGenerated.file_items(b, l);
-	}
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    return PerlParserGenerated.file_items(b, l);
+  }
 
-	public boolean parseStatementSemi(PsiBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
-		if (((PerlBuilder) b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType))
-		{
-			b.advanceLexer();
-			return true;
-		}
-		else if (((PerlBuilder) b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType))
-		{
-			return true;
-		}
-		else if (b.eof()) // eof
-		{
-			return true;
-		}
+  public boolean parseStatementSemi(PsiBuilder b, int l) {
+    IElementType tokenType = b.getTokenType();
+    if (((PerlBuilder)b).getPerlParser().getConsumableSemicolonTokens().contains(tokenType)) {
+      b.advanceLexer();
+      return true;
+    }
+    else if (((PerlBuilder)b).getPerlParser().getUnconsumableSemicolonTokens().contains(tokenType)) {
+      return true;
+    }
+    else if (b.eof()) // eof
+    {
+      return true;
+    }
 
-		b.mark().error("Semicolon expected");
+    b.mark().error("Semicolon expected");
 
-		return true;
-	}
+    return true;
+  }
 }

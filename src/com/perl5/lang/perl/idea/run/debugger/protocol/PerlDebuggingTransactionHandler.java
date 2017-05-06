@@ -22,7 +22,6 @@ import com.google.gson.JsonObject;
 /**
  * Created by hurricup on 11.05.2016.
  */
-public abstract class PerlDebuggingTransactionHandler
-{
-	public abstract void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext);
+public abstract class PerlDebuggingTransactionHandler {
+  public abstract void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext);
 }

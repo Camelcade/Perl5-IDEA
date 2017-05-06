@@ -27,36 +27,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class MasonTemplatingFileImpl extends MasonFileImpl
-{
-	public MasonTemplatingFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, Mason2TemplatingLanguage.INSTANCE);
-	}
+public class MasonTemplatingFileImpl extends MasonFileImpl {
+  public MasonTemplatingFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, Mason2TemplatingLanguage.INSTANCE);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "Mason2 template file";
-	}
+  @Override
+  public String toString() {
+    return "Mason2 template file";
+  }
 
-	@Override
-	protected FileType getDefaultFileType()
-	{
-		return MasonTopLevelComponentFileType.INSTANCE;
-	}
+  @Override
+  protected FileType getDefaultFileType() {
+    return MasonTopLevelComponentFileType.INSTANCE;
+  }
 
-	@Override
-	public PerlCodeGenerator getCodeGenerator()
-	{
-		return Mason2TemplatingCodeGeneratorImpl.INSTANCE;
-	}
+  @Override
+  public PerlCodeGenerator getCodeGenerator() {
+    return Mason2TemplatingCodeGeneratorImpl.INSTANCE;
+  }
 
-	@Override
-	public byte[] getPerlContentInBytes()
-	{
-		return null;
-	}
-
-
+  @Override
+  public byte[] getPerlContentInBytes() {
+    return null;
+  }
 }

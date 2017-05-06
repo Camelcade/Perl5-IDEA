@@ -27,20 +27,17 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
  * Created by hurricup on 23.06.2016.
  */
 public class StricturesPackageProcessor extends PerlPackageProcessorBase implements
-		PerlWarningsProvider,
-		PerlStrictProvider
-{
-	@Override
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+                                                                         PerlWarningsProvider,
+                                                                         PerlStrictProvider {
+  @Override
+  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 }

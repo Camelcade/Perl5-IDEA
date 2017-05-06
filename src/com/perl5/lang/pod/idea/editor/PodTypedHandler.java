@@ -37,136 +37,124 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.04.2016.
  */
-public class PodTypedHandler extends TypedHandlerDelegate implements PodElementTypes
-{
-	private static final String POD_COMMANDS = "IBCLEFSXZ";
-	private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(
-			POD_I,
-			POD_B,
-			POD_C,
-			POD_L,
-			POD_E,
-			POD_F,
-			POD_S,
-			POD_X,
-			POD_Z
-	);
+public class PodTypedHandler extends TypedHandlerDelegate implements PodElementTypes {
+  private static final String POD_COMMANDS = "IBCLEFSXZ";
+  private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(
+    POD_I,
+    POD_B,
+    POD_C,
+    POD_L,
+    POD_E,
+    POD_F,
+    POD_S,
+    POD_X,
+    POD_Z
+  );
 
-	protected int extendAngles(PsiElement formatterBlock)
-	{
-		int insertedChars = 0;
-		if (formatterBlock == null)
-		{
-			return insertedChars;
-		}
+  protected int extendAngles(PsiElement formatterBlock) {
+    int insertedChars = 0;
+    if (formatterBlock == null) {
+      return insertedChars;
+    }
 
-		PsiElement openAngles = formatterBlock.getFirstChild();
-		openAngles = openAngles == null ? null : openAngles.getNextSibling();
+    PsiElement openAngles = formatterBlock.getFirstChild();
+    openAngles = openAngles == null ? null : openAngles.getNextSibling();
 
-		if (openAngles == null)
-		{
-			return insertedChars;
-		}
+    if (openAngles == null) {
+      return insertedChars;
+    }
 
-		PsiElement closeAngles = formatterBlock.getLastChild();
+    PsiElement closeAngles = formatterBlock.getLastChild();
 
-		if (closeAngles == null)
-		{
-			return insertedChars;
-		}
+    if (closeAngles == null) {
+      return insertedChars;
+    }
 
-		int currentLength = openAngles.getTextRange().getLength();
-		if (currentLength == 1) // need to check spacing
-		{
-			PsiElement openSpace = openAngles.getNextSibling();
-			PsiElement closeSpace = openAngles.getPrevSibling();
-			PsiElement space = null;
+    int currentLength = openAngles.getTextRange().getLength();
+    if (currentLength == 1) // need to check spacing
+    {
+      PsiElement openSpace = openAngles.getNextSibling();
+      PsiElement closeSpace = openAngles.getPrevSibling();
+      PsiElement space = null;
 
-			if (!(openSpace instanceof PsiWhiteSpace))
-			{
-				space = PodElementFactory.getSpace(formatterBlock.getProject());
-				formatterBlock.addAfter(space, openAngles);
-				openSpace = null;
-				insertedChars++;
-			}
-			if (!(closeSpace instanceof PsiWhiteSpace) || closeSpace == openSpace)
-			{
-				if (space == null)
-				{
-					space = PodElementFactory.getSpace(formatterBlock.getProject());
-				}
-				formatterBlock.addBefore(space, closeAngles);
-				insertedChars++;
-			}
-		}
+      if (!(openSpace instanceof PsiWhiteSpace)) {
+        space = PodElementFactory.getSpace(formatterBlock.getProject());
+        formatterBlock.addAfter(space, openAngles);
+        openSpace = null;
+        insertedChars++;
+      }
+      if (!(closeSpace instanceof PsiWhiteSpace) || closeSpace == openSpace) {
+        if (space == null) {
+          space = PodElementFactory.getSpace(formatterBlock.getProject());
+        }
+        formatterBlock.addBefore(space, closeAngles);
+        insertedChars++;
+      }
+    }
 
-		assert openAngles instanceof LeafPsiElement : "Got non-leaf elements in open angles: " + openAngles.getClass() + "@" + formatterBlock.getText();
-		((LeafPsiElement) openAngles).replaceWithText(openAngles.getText() + "<");
-		assert closeAngles instanceof LeafPsiElement : "Got non-leaf elements in close angles: " + closeAngles.getClass() + "@" + formatterBlock.getText();
-		((LeafPsiElement) closeAngles).replaceWithText(closeAngles.getText() + ">");
-		return insertedChars + 2;
-	}
+    assert openAngles instanceof LeafPsiElement : "Got non-leaf elements in open angles: " +
+                                                  openAngles.getClass() +
+                                                  "@" +
+                                                  formatterBlock.getText();
+    ((LeafPsiElement)openAngles).replaceWithText(openAngles.getText() + "<");
+    assert closeAngles instanceof LeafPsiElement : "Got non-leaf elements in close angles: " +
+                                                   closeAngles.getClass() +
+                                                   "@" +
+                                                   formatterBlock.getText();
+    ((LeafPsiElement)closeAngles).replaceWithText(closeAngles.getText() + ">");
+    return insertedChars + 2;
+  }
 
-	@Override
-	public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType)
-	{
-		if (file instanceof PodFile)
-		{
-			if (c == '<')
-			{
-				CaretModel caretModel = editor.getCaretModel();
-				int offset = caretModel.getOffset() - 1;
-				PsiElement element = file.findElementAt(offset);
-				IElementType elementType = element == null ? null : element.getNode().getElementType();
-				String text = element == null ? null : element.getText();
+  @Override
+  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+    if (file instanceof PodFile) {
+      if (c == '<') {
+        CaretModel caretModel = editor.getCaretModel();
+        int offset = caretModel.getOffset() - 1;
+        PsiElement element = file.findElementAt(offset);
+        IElementType elementType = element == null ? null : element.getNode().getElementType();
+        String text = element == null ? null : element.getText();
 
-				if (elementType == POD_IDENTIFIER && text != null)
-				{
+        if (elementType == POD_IDENTIFIER && text != null) {
 
-					if (text.length() == 1 && StringUtil.containsChar(POD_COMMANDS, text.charAt(0)))
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
-					}
-				}
-				else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType))
-				{
-					//noinspection ConstantConditions
-					extendAngles(element.getParent());
-					caretModel.moveToOffset(offset + 2);
-					return Result.STOP;
-				}
-			}
-			else if (c == '>')    // '>'
-			{
-				CaretModel caretModel = editor.getCaretModel();
-				int offset = caretModel.getOffset();
-				PsiElement element = file.findElementAt(offset);
-				IElementType elementType = element == null ? null : element.getNode().getElementType();
-				int extraOffset = 0;
+          if (text.length() == 1 && StringUtil.containsChar(POD_COMMANDS, text.charAt(0))) {
+            EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
+          }
+        }
+        else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType)) {
+          //noinspection ConstantConditions
+          extendAngles(element.getParent());
+          caretModel.moveToOffset(offset + 2);
+          return Result.STOP;
+        }
+      }
+      else if (c == '>')    // '>'
+      {
+        CaretModel caretModel = editor.getCaretModel();
+        int offset = caretModel.getOffset();
+        PsiElement element = file.findElementAt(offset);
+        IElementType elementType = element == null ? null : element.getNode().getElementType();
+        int extraOffset = 0;
 
-				if (elementType != POD_ANGLE_RIGHT)
-				{
-					offset--;
-					element = file.findElementAt(offset);
-					elementType = element == null ? null : element.getNode().getElementType();
-					extraOffset++;
-				}
+        if (elementType != POD_ANGLE_RIGHT) {
+          offset--;
+          element = file.findElementAt(offset);
+          elementType = element == null ? null : element.getNode().getElementType();
+          extraOffset++;
+        }
 
-				if (elementType == POD_ANGLE_RIGHT)
-				{
-					//noinspection ConstantConditions
-					caretModel.moveToOffset(offset + extendAngles(element.getParent()) + extraOffset);
-					return Result.STOP;
-				}
-			}
-		}
-		return super.beforeCharTyped(c, project, editor, file, fileType);
-	}
+        if (elementType == POD_ANGLE_RIGHT) {
+          //noinspection ConstantConditions
+          caretModel.moveToOffset(offset + extendAngles(element.getParent()) + extraOffset);
+          return Result.STOP;
+        }
+      }
+    }
+    return super.beforeCharTyped(c, project, editor, file, fileType);
+  }
 
-	@Override
-	public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file)
-	{
-		return super.charTyped(c, project, editor, file);
-	}
-
+  @Override
+  public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    return super.charTyped(c, project, editor, file);
+  }
 }

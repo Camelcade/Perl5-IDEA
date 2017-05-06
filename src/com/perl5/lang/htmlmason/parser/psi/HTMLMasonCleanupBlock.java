@@ -19,6 +19,5 @@ package com.perl5.lang.htmlmason.parser.psi;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public interface HTMLMasonCleanupBlock extends HTMLMasonCompositeElement
-{
+public interface HTMLMasonCleanupBlock extends HTMLMasonCompositeElement {
 }

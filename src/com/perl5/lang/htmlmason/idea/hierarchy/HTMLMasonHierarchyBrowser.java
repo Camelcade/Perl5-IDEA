@@ -26,37 +26,31 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonHierarchyBrowser extends PerlHierarchyBrowser
-{
-	public HTMLMasonHierarchyBrowser(PsiElement element)
-	{
-		super(element);
-	}
+public class HTMLMasonHierarchyBrowser extends PerlHierarchyBrowser {
+  public HTMLMasonHierarchyBrowser(PsiElement element) {
+    super(element);
+  }
 
-	@Override
-	protected boolean isApplicableElement(@NotNull PsiElement element)
-	{
-		return element instanceof HTMLMasonFileImpl;
-	}
+  @Override
+  protected boolean isApplicableElement(@NotNull PsiElement element) {
+    return element instanceof HTMLMasonFileImpl;
+  }
 
-	@Nullable
-	@Override
-	protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return new HTMLMasonTypeHierarchyTreeStructure(psiElement);
-	}
+  @Nullable
+  @Override
+  protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
+    return new HTMLMasonTypeHierarchyTreeStructure(psiElement);
+  }
 
-	@Nullable
-	@Override
-	protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return new HTMLMasonSuperTypeHierarchyStructure(psiElement);
-	}
+  @Nullable
+  @Override
+  protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
+    return new HTMLMasonSuperTypeHierarchyStructure(psiElement);
+  }
 
-	@Nullable
-	@Override
-	protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return new HTMLMasonSubTypeHierarchyStructure(psiElement);
-	}
+  @Nullable
+  @Override
+  protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
+    return new HTMLMasonSubTypeHierarchyStructure(psiElement);
+  }
 }

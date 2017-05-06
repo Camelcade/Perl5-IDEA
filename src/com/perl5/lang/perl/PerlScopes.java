@@ -26,15 +26,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.01.2016.
  */
-public class PerlScopes
-{
-	private static final Key<GlobalSearchScope> PROJECT_AND_LIBS_SCOPE_KEY = new Key<GlobalSearchScope>("PROJECT_AND_LIBS_SCOPE_KEY");
+public class PerlScopes {
+  private static final Key<GlobalSearchScope> PROJECT_AND_LIBS_SCOPE_KEY = new Key<GlobalSearchScope>("PROJECT_AND_LIBS_SCOPE_KEY");
 
-	@NotNull
-	public static GlobalSearchScope getProjectAndLibrariesScope(@NotNull Project project)
-	{
-		GlobalSearchScope cached = project.getUserData(PROJECT_AND_LIBS_SCOPE_KEY);
-		return cached != null ? cached : ((UserDataHolderEx) project).putUserDataIfAbsent(PROJECT_AND_LIBS_SCOPE_KEY, new ProjectAndLibrariesScope(project));
-	}
-
+  @NotNull
+  public static GlobalSearchScope getProjectAndLibrariesScope(@NotNull Project project) {
+    GlobalSearchScope cached = project.getUserData(PROJECT_AND_LIBS_SCOPE_KEY);
+    return cached != null
+           ? cached
+           : ((UserDataHolderEx)project).putUserDataIfAbsent(PROJECT_AND_LIBS_SCOPE_KEY, new ProjectAndLibrariesScope(project));
+  }
 }

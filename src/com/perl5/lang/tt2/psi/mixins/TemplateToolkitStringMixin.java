@@ -35,61 +35,52 @@ import java.util.*;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementImpl implements TemplateToolkitString
-{
-	public static final TokenSet BLOCK_NAME_TARGETED_CONTAINERS = TokenSet.create(
-			INCLUDE_DIRECTIVE,
-			PROCESS_DIRECTIVE,
-			WRAPPER_DIRECTIVE
-	);
-	protected static final TokenSet FILES_TARGETED_CONTAINERS = TokenSet.create(
-			INSERT_DIRECTIVE,
-			INCLUDE_DIRECTIVE,
-			PROCESS_DIRECTIVE,
-			WRAPPER_DIRECTIVE
-	);
+public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementImpl implements TemplateToolkitString {
+  public static final TokenSet BLOCK_NAME_TARGETED_CONTAINERS = TokenSet.create(
+    INCLUDE_DIRECTIVE,
+    PROCESS_DIRECTIVE,
+    WRAPPER_DIRECTIVE
+  );
+  protected static final TokenSet FILES_TARGETED_CONTAINERS = TokenSet.create(
+    INSERT_DIRECTIVE,
+    INCLUDE_DIRECTIVE,
+    PROCESS_DIRECTIVE,
+    WRAPPER_DIRECTIVE
+  );
 
-	public TemplateToolkitStringMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public TemplateToolkitStringMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public PsiReference[] computeReferences()
-	{
-		List<PsiReference> references = new ArrayList<PsiReference>();
-		IElementType parentElementType = PsiUtilCore.getElementType(getParent());
+  @Override
+  public PsiReference[] computeReferences() {
+    List<PsiReference> references = new ArrayList<PsiReference>();
+    IElementType parentElementType = PsiUtilCore.getElementType(getParent());
 
-		if (FILES_TARGETED_CONTAINERS.contains(parentElementType))
-		{
-			references.addAll(Arrays.asList(new FileReferenceSet(TemplateToolkitStringMixin.this)
-			{
-				@NotNull
-				@Override
-				public Collection<PsiFileSystemItem> computeDefaultContexts()
-				{
-					String path = getPathString();
-					PsiFile containingFile = getContainingFile();
-					if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.getParent() != null)
-					{
-						return Collections.<PsiFileSystemItem>singletonList(containingFile.getParent());
-					}
-					return super.computeDefaultContexts();
-				}
-			}.getAllReferences()));
-		}
+    if (FILES_TARGETED_CONTAINERS.contains(parentElementType)) {
+      references.addAll(Arrays.asList(new FileReferenceSet(TemplateToolkitStringMixin.this) {
+        @NotNull
+        @Override
+        public Collection<PsiFileSystemItem> computeDefaultContexts() {
+          String path = getPathString();
+          PsiFile containingFile = getContainingFile();
+          if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.getParent() != null) {
+            return Collections.<PsiFileSystemItem>singletonList(containingFile.getParent());
+          }
+          return super.computeDefaultContexts();
+        }
+      }.getAllReferences()));
+    }
 
-		if (BLOCK_NAME_TARGETED_CONTAINERS.contains(parentElementType))
-		{
-			references.add(new TemplateToolkitBlockReference(TemplateToolkitStringMixin.this));
-		}
+    if (BLOCK_NAME_TARGETED_CONTAINERS.contains(parentElementType)) {
+      references.add(new TemplateToolkitBlockReference(TemplateToolkitStringMixin.this));
+    }
 
-		return references.toArray(new PsiReference[references.size()]);
-	}
+    return references.toArray(new PsiReference[references.size()]);
+  }
 
-	@Override
-	public boolean hasReferences()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasReferences() {
+    return true;
+  }
 }

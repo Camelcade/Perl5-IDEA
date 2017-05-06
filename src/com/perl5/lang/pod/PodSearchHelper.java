@@ -30,57 +30,56 @@ import java.util.Collection;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSearchHelper
-{
-	public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
-	public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
-	public static final String PERL_OP_FILE_NAME = "perlop.pod";
-	public static final String PERL_API_FILE_NAME = "perlapi.pod";
+public class PodSearchHelper {
+  public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
+  public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
+  public static final String PERL_OP_FILE_NAME = "perlop.pod";
+  public static final String PERL_API_FILE_NAME = "perlapi.pod";
 
-	private static final Key<GlobalSearchScope> PERL_VAR_SCOPE = new Key<GlobalSearchScope>(PERL_VAR_FILE_NAME);
-	private static final Key<GlobalSearchScope> PERL_FUNC_SCOPE = new Key<GlobalSearchScope>(PERL_FUNC_FILE_NAME);
-	private static final Key<GlobalSearchScope> PERL_OP_SCOPE = new Key<GlobalSearchScope>(PERL_OP_FILE_NAME);
-	private static final Key<GlobalSearchScope> PERL_API_SCOPE = new Key<GlobalSearchScope>(PERL_API_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_VAR_SCOPE = new Key<GlobalSearchScope>(PERL_VAR_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_FUNC_SCOPE = new Key<GlobalSearchScope>(PERL_FUNC_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_OP_SCOPE = new Key<GlobalSearchScope>(PERL_OP_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_API_SCOPE = new Key<GlobalSearchScope>(PERL_API_FILE_NAME);
 
-	@NotNull
-	public static GlobalSearchScope getPerlVarScope(@NotNull Project project)
-	{
-		GlobalSearchScope cached = project.getUserData(PERL_VAR_SCOPE);
-		return cached != null ? cached : ((UserDataHolderEx) project).putUserDataIfAbsent(PERL_VAR_SCOPE, createFileScope(project, PERL_VAR_FILE_NAME));
-	}
+  @NotNull
+  public static GlobalSearchScope getPerlVarScope(@NotNull Project project) {
+    GlobalSearchScope cached = project.getUserData(PERL_VAR_SCOPE);
+    return cached != null
+           ? cached
+           : ((UserDataHolderEx)project).putUserDataIfAbsent(PERL_VAR_SCOPE, createFileScope(project, PERL_VAR_FILE_NAME));
+  }
 
-	@NotNull
-	public static GlobalSearchScope getPerlApiScope(@NotNull Project project)
-	{
-		GlobalSearchScope cached = project.getUserData(PERL_API_SCOPE);
-		return cached != null ? cached : ((UserDataHolderEx) project).putUserDataIfAbsent(PERL_API_SCOPE, createFileScope(project, PERL_API_FILE_NAME));
-	}
+  @NotNull
+  public static GlobalSearchScope getPerlApiScope(@NotNull Project project) {
+    GlobalSearchScope cached = project.getUserData(PERL_API_SCOPE);
+    return cached != null
+           ? cached
+           : ((UserDataHolderEx)project).putUserDataIfAbsent(PERL_API_SCOPE, createFileScope(project, PERL_API_FILE_NAME));
+  }
 
-	@NotNull
-	public static GlobalSearchScope getPerlFuncScope(@NotNull Project project)
-	{
-		GlobalSearchScope cached = project.getUserData(PERL_FUNC_SCOPE);
-		return cached != null ? cached : ((UserDataHolderEx) project).putUserDataIfAbsent(PERL_FUNC_SCOPE, createFileScope(project, PERL_FUNC_FILE_NAME));
-	}
+  @NotNull
+  public static GlobalSearchScope getPerlFuncScope(@NotNull Project project) {
+    GlobalSearchScope cached = project.getUserData(PERL_FUNC_SCOPE);
+    return cached != null
+           ? cached
+           : ((UserDataHolderEx)project).putUserDataIfAbsent(PERL_FUNC_SCOPE, createFileScope(project, PERL_FUNC_FILE_NAME));
+  }
 
-	@NotNull
-	public static GlobalSearchScope getPerlOpScope(@NotNull Project project)
-	{
-		GlobalSearchScope cached = project.getUserData(PERL_FUNC_SCOPE);
-		return cached != null ? cached : ((UserDataHolderEx) project).putUserDataIfAbsent(PERL_FUNC_SCOPE, createFileScope(project, PERL_OP_FILE_NAME));
-	}
+  @NotNull
+  public static GlobalSearchScope getPerlOpScope(@NotNull Project project) {
+    GlobalSearchScope cached = project.getUserData(PERL_FUNC_SCOPE);
+    return cached != null
+           ? cached
+           : ((UserDataHolderEx)project).putUserDataIfAbsent(PERL_FUNC_SCOPE, createFileScope(project, PERL_OP_FILE_NAME));
+  }
 
-	protected static GlobalSearchScope createFileScope(@NotNull Project project, String fileName)
-	{
-		Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, fileName, PerlScopes.getProjectAndLibrariesScope(project));
+  protected static GlobalSearchScope createFileScope(@NotNull Project project, String fileName) {
+    Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, fileName, PerlScopes.getProjectAndLibrariesScope(project));
 
-		if (!files.isEmpty())
-		{
-			return GlobalSearchScope.filesScope(project, files);
-		}
+    if (!files.isEmpty()) {
+      return GlobalSearchScope.filesScope(project, files);
+    }
 
-		return GlobalSearchScope.EMPTY_SCOPE;
-	}
-
-
+    return GlobalSearchScope.EMPTY_SCOPE;
+  }
 }

@@ -26,21 +26,17 @@ import java.util.List;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class BaseProcessor extends PerlPragmaProcessorBase implements PerlPackageParentsProvider
-{
-	@Override
-	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
-	{
-		List<String> useParameters = useStatement.getImportParameters();
-		if (useParameters != null)
-		{
-			currentList.addAll(useParameters);
-		}
-	}
+public class BaseProcessor extends PerlPragmaProcessorBase implements PerlPackageParentsProvider {
+  @Override
+  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+    List<String> useParameters = useStatement.getImportParameters();
+    if (useParameters != null) {
+      currentList.addAll(useParameters);
+    }
+  }
 
-	@Override
-	public boolean hasPackageFilesOptions()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasPackageFilesOptions() {
+    return true;
+  }
 }

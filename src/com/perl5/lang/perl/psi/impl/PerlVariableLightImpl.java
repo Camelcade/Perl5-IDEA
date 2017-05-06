@@ -42,351 +42,296 @@ import java.util.List;
 /**
  * Created by hurricup on 17.01.2016.
  */
-public class PerlVariableLightImpl extends LightElement implements PerlVariableLight
-{
-	protected final PerlVariableType myVariableType;
-	protected final String myVariableName;
-	protected final String myVariableClass;
-	protected final PsiElement myParent;
-	protected final boolean myIsLexical;
-	protected final boolean myIsLocal;
-	protected final boolean myIsInvocant;
+public class PerlVariableLightImpl extends LightElement implements PerlVariableLight {
+  protected final PerlVariableType myVariableType;
+  protected final String myVariableName;
+  protected final String myVariableClass;
+  protected final PsiElement myParent;
+  protected final boolean myIsLexical;
+  protected final boolean myIsLocal;
+  protected final boolean myIsInvocant;
 
-	public PerlVariableLightImpl(@NotNull PsiManager manager,
-								 @NotNull Language language,
-								 @NotNull String variableName,
-								 boolean isLexical,
-								 boolean isLocal,
-								 boolean isInvocant,
-								 @NotNull PsiElement parent)
-	{
-		this(manager, language, variableName, null, isLexical, isLocal, isInvocant, parent);
-	}
+  public PerlVariableLightImpl(@NotNull PsiManager manager,
+                               @NotNull Language language,
+                               @NotNull String variableName,
+                               boolean isLexical,
+                               boolean isLocal,
+                               boolean isInvocant,
+                               @NotNull PsiElement parent) {
+    this(manager, language, variableName, null, isLexical, isLocal, isInvocant, parent);
+  }
 
-	public PerlVariableLightImpl(@NotNull PsiManager manager,
-								 @NotNull Language language,
-								 @NotNull String variableName,
-								 @Nullable String variableClass,
-								 boolean isLexical,
-								 boolean isLocal,
-								 boolean isInvocant,
-								 @NotNull PsiElement parent)
-	{
-		super(manager, language);
+  public PerlVariableLightImpl(@NotNull PsiManager manager,
+                               @NotNull Language language,
+                               @NotNull String variableName,
+                               @Nullable String variableClass,
+                               boolean isLexical,
+                               boolean isLocal,
+                               boolean isInvocant,
+                               @NotNull PsiElement parent) {
+    super(manager, language);
 
-		PerlVariableType type = null;
+    PerlVariableType type = null;
 
-		if (variableName.startsWith("$"))
-		{
-			type = PerlVariableType.SCALAR;
-		}
-		else if (variableName.startsWith("@"))
-		{
-			type = PerlVariableType.ARRAY;
-		}
-		else if (variableName.startsWith("%"))
-		{
-			type = PerlVariableType.HASH;
-		}
+    if (variableName.startsWith("$")) {
+      type = PerlVariableType.SCALAR;
+    }
+    else if (variableName.startsWith("@")) {
+      type = PerlVariableType.ARRAY;
+    }
+    else if (variableName.startsWith("%")) {
+      type = PerlVariableType.HASH;
+    }
 
-		if (type != null)
-		{
-			myVariableType = type;
-			myVariableName = variableName.substring(1);
-			myVariableClass = variableClass;
-			myParent = parent;
-			myIsLexical = isLexical;
-			myIsLocal = isLocal;
-			myIsInvocant = isInvocant;
-		}
-		else
-		{
-			throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableName);
-		}
-	}
+    if (type != null) {
+      myVariableType = type;
+      myVariableName = variableName.substring(1);
+      myVariableClass = variableClass;
+      myParent = parent;
+      myIsLexical = isLexical;
+      myIsLocal = isLocal;
+      myIsInvocant = isInvocant;
+    }
+    else {
+      throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableName);
+    }
+  }
 
-	@Override
-	public String toString()
-	{
-		return getVariableType().getSigil() + getVariableName() + '@' + getVariableClass();
-	}
+  @Override
+  public String toString() {
+    return getVariableType().getSigil() + getVariableName() + '@' + getVariableClass();
+  }
 
 
-	@Nullable
-	@Override
-	public String getDeclaredType()
-	{
-		return getVariableClass();
-	}
+  @Nullable
+  @Override
+  public String getDeclaredType() {
+    return getVariableClass();
+  }
 
-	@Nullable
-	@Override
-	public String guessVariableType()
-	{
-		return getVariableClass();
-	}
+  @Nullable
+  @Override
+  public String guessVariableType() {
+    return getVariableClass();
+  }
 
-	@Nullable
-	@Override
-	public String getVariableTypeHeavy()
-	{
-		return getVariableClass();
-	}
+  @Nullable
+  @Override
+  public String getVariableTypeHeavy() {
+    return getVariableClass();
+  }
 
-	@Nullable
-	@Override
-	public String getLocallyDeclaredType()
-	{
-		return getVariableClass();
-	}
+  @Nullable
+  @Override
+  public String getLocallyDeclaredType() {
+    return getVariableClass();
+  }
 
-	@Override
-	public PerlVariableType getActualType()
-	{
-		return getVariableType();
-	}
+  @Override
+  public PerlVariableType getActualType() {
+    return getVariableType();
+  }
 
-	@Override
-	public PerlVariableDeclarationWrapper getLexicalDeclaration()
-	{
-		return null;
-	}
+  @Override
+  public PerlVariableDeclarationWrapper getLexicalDeclaration() {
+    return null;
+  }
 
-	@Override
-	public List<PerlVariableDeclarationWrapper> getGlobalDeclarations()
-	{
-		return null;
-	}
+  @Override
+  public List<PerlVariableDeclarationWrapper> getGlobalDeclarations() {
+    return null;
+  }
 
-	@Override
-	public List<PerlGlobVariable> getRelatedGlobs()
-	{
-		return null;
-	}
+  @Override
+  public List<PerlGlobVariable> getRelatedGlobs() {
+    return null;
+  }
 
 
-	@Override
-	public int getLineNumber()
-	{
-		Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getParent().getContainingFile());
-		return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-	}
+  @Override
+  public int getLineNumber() {
+    Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getParent().getContainingFile());
+    return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
+  }
 
-	@Override
-	public boolean isSelf()
-	{
-		return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
-	}
+  @Override
+  public boolean isSelf() {
+    return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
+  }
 
-	@Override
-	public PerlLexicalScope getLexicalScope()
-	{
-		return PsiTreeUtil.getParentOfType(getParent(), PerlLexicalScope.class, false);
-	}
+  @Override
+  public PerlLexicalScope getLexicalScope() {
+    return PsiTreeUtil.getParentOfType(getParent(), PerlLexicalScope.class, false);
+  }
 
-	@Override
-	public String getExplicitPackageName()
-	{
-		return null;
-	}
+  @Override
+  public String getExplicitPackageName() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(getParent());
-	}
+  @Nullable
+  @Override
+  public String getContextPackageName() {
+    return PerlPackageUtil.getContextPackageName(getParent());
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		return getContextPackageName();
-	}
+  @Nullable
+  @Override
+  public String getPackageName() {
+    return getContextPackageName();
+  }
 
-	@Nullable
-	@Override
-	public String getCanonicalName()
-	{
-		String packageName = getPackageName();
-		if (packageName == null)
-		{
-			return null;
-		}
-		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-	}
+  @Nullable
+  @Override
+  public String getCanonicalName() {
+    String packageName = getPackageName();
+    if (packageName == null) {
+      return null;
+    }
+    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+  }
 
-	@Override
-	public PerlVariableNameElement getVariableNameElement()
-	{
-		return this;
-	}
+  @Override
+  public PerlVariableNameElement getVariableNameElement() {
+    return this;
+  }
 
-	@Override
-	public boolean isBuiltIn()
-	{
-		return false;
-	}
+  @Override
+  public boolean isBuiltIn() {
+    return false;
+  }
 
-	@Override
-	public boolean isDeprecated()
-	{
-		return false;
-	}
+  @Override
+  public boolean isDeprecated() {
+    return false;
+  }
 
-	public PerlVariableType getVariableType()
-	{
-		return myVariableType;
-	}
+  public PerlVariableType getVariableType() {
+    return myVariableType;
+  }
 
-	public String getVariableName()
-	{
-		return myVariableName;
-	}
+  public String getVariableName() {
+    return myVariableName;
+  }
 
-	public String getVariableClass()
-	{
-		return myVariableClass;
-	}
+  public String getVariableClass() {
+    return myVariableClass;
+  }
 
-	public PsiElement getParent()
-	{
-		return myParent;
-	}
+  public PsiElement getParent() {
+    return myParent;
+  }
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof PerlVariable))
-		{
-			return false;
-		}
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlVariable)) {
+      return false;
+    }
 
-		PerlVariable that = (PerlVariable) o;
+    PerlVariable that = (PerlVariable)o;
 
-		if (myVariableType != that.getActualType())
-		{
-			return false;
-		}
-		if (!myVariableName.equals(that.getName()))
-		{
-			return false;
-		}
-		return StringUtil.equals(getPackageName(), that.getPackageName());
+    if (myVariableType != that.getActualType()) {
+      return false;
+    }
+    if (!myVariableName.equals(that.getName())) {
+      return false;
+    }
+    return StringUtil.equals(getPackageName(), that.getPackageName());
+  }
 
-	}
+  @Override
+  public int hashCode() {
+    int result = myVariableType.hashCode();
+    result = 31 * result + myVariableName.hashCode();
+    return result;
+  }
 
-	@Override
-	public int hashCode()
-	{
-		int result = myVariableType.hashCode();
-		result = 31 * result + myVariableName.hashCode();
-		return result;
-	}
+  @Override
+  public PerlVariable getVariable() {
+    return this;
+  }
 
-	@Override
-	public PerlVariable getVariable()
-	{
-		return this;
-	}
+  @Override
+  public boolean isLexicalDeclaration() {
+    return myIsLexical;
+  }
 
-	@Override
-	public boolean isLexicalDeclaration()
-	{
-		return myIsLexical;
-	}
+  @Override
+  public boolean isLocalDeclaration() {
+    return myIsLocal;
+  }
 
-	@Override
-	public boolean isLocalDeclaration()
-	{
-		return myIsLocal;
-	}
+  @Override
+  public boolean isGlobalDeclaration() {
+    return !myIsLexical;
+  }
 
-	@Override
-	public boolean isGlobalDeclaration()
-	{
-		return !myIsLexical;
-	}
+  @Override
+  public boolean isInvocantDeclaration() {
+    return myIsInvocant;
+  }
 
-	@Override
-	public boolean isInvocantDeclaration()
-	{
-		return myIsInvocant;
-	}
+  @Override
+  public String getPresentableName() {
+    return getCanonicalName();
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return getCanonicalName();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return this;
-	}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    return this;
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		return this;
-	}
+  @Override
+  public IStubElementType getElementType() {
+    return null;
+  }
 
-	@Override
-	public IStubElementType getElementType()
-	{
-		return null;
-	}
+  @Override
+  public PerlVariableStub getStub() {
+    return null;
+  }
 
-	@Override
-	public PerlVariableStub getStub()
-	{
-		return null;
-	}
+  @Override
+  public int getTextOffset() {
+    return getParent().getTextOffset();
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		return getParent().getTextOffset();
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return getVariableName();
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return getVariableName();
-	}
+  @Override
+  public boolean isDeclaration() {
+    return true;
+  }
 
-	@Override
-	public boolean isDeclaration()
-	{
-		return true;
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getVariableAnnotations() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getVariableAnnotations()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getLocalVariableAnnotations() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getLocalVariableAnnotations()
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getExternalVariableAnnotations()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getExternalVariableAnnotations() {
+    return null;
+  }
 }
 

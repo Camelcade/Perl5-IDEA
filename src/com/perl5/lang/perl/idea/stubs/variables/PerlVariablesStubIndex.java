@@ -23,17 +23,15 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVariableDeclarationWrapper>
-{
-	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
-	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
-	public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
+public abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVariableDeclarationWrapper> {
+  public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
+  public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
+  public static final StubIndexKey<String, PerlVariableDeclarationWrapper> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
 
-	public static final int VERSION = 1;
+  public static final int VERSION = 1;
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 }

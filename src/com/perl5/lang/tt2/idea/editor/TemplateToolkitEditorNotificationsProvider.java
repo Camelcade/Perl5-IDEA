@@ -34,46 +34,38 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class TemplateToolkitEditorNotificationsProvider extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware
-{
-	private static final Key<EditorNotificationPanel> KEY = Key.create("perl.tt2.roots.not.set.panel");
-	private final Project myProject;
+public class TemplateToolkitEditorNotificationsProvider extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
+  private static final Key<EditorNotificationPanel> KEY = Key.create("perl.tt2.roots.not.set.panel");
+  private final Project myProject;
 
-	public TemplateToolkitEditorNotificationsProvider(Project project)
-	{
-		myProject = project;
-	}
+  public TemplateToolkitEditorNotificationsProvider(Project project) {
+    myProject = project;
+  }
 
-	@NotNull
-	@Override
-	public Key<EditorNotificationPanel> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public Key<EditorNotificationPanel> getKey() {
+    return KEY;
+  }
 
-	@Nullable
-	@Override
-	public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor)
-	{
-		if (file.getFileType() == TemplateToolkitFileType.INSTANCE)
-		{
-			TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
-			if (!settings.isVirtualFileUnderRoot(file))
-			{
-				EditorNotificationPanel panel = new EditorNotificationPanel();
-				panel.setText(PerlBundle.message("tt2.error.file.not.in.root"));
-				panel.createActionLabel("Configure", new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						ShowSettingsUtil.getInstance().editConfigurable(myProject, new TemplateToolkitSettingsConfigurable(myProject));
-					}
-				});
-				return panel;
-			}
-		}
+  @Nullable
+  @Override
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor) {
+    if (file.getFileType() == TemplateToolkitFileType.INSTANCE) {
+      TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
+      if (!settings.isVirtualFileUnderRoot(file)) {
+        EditorNotificationPanel panel = new EditorNotificationPanel();
+        panel.setText(PerlBundle.message("tt2.error.file.not.in.root"));
+        panel.createActionLabel("Configure", new Runnable() {
+          @Override
+          public void run() {
+            ShowSettingsUtil.getInstance().editConfigurable(myProject, new TemplateToolkitSettingsConfigurable(myProject));
+          }
+        });
+        return panel;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

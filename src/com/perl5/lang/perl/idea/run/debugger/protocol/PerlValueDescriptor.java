@@ -19,60 +19,50 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlValueDescriptor
-{
-	private String name;
-	private String type;
-	private String value;
-	private int ref_depth; // how many references been skipped
-	private String key;        // key to fetch additional elements, basically text representation of reference
-	private int size;        // size used for arrays/hashes elements
-	private boolean expandable;
-	private boolean blessed;
-	private boolean is_utf;
+public class PerlValueDescriptor {
+  private String name;
+  private String type;
+  private String value;
+  private int ref_depth; // how many references been skipped
+  private String key;        // key to fetch additional elements, basically text representation of reference
+  private int size;        // size used for arrays/hashes elements
+  private boolean expandable;
+  private boolean blessed;
+  private boolean is_utf;
 
-	public String getName()
-	{
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getType()
-	{
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public String getValue()
-	{
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public boolean isExpandable()
-	{
-		return expandable;
-	}
+  public boolean isExpandable() {
+    return expandable;
+  }
 
-	public int getSize()
-	{
-		return size;
-	}
+  public int getSize() {
+    return size;
+  }
 
-	public String getKey()
-	{
-		return key;
-	}
+  public String getKey() {
+    return key;
+  }
 
-	public boolean isBlessed()
-	{
-		return blessed;
-	}
+  public boolean isBlessed() {
+    return blessed;
+  }
 
-	public int getRefDepth()
-	{
-		return ref_depth;
-	}
+  public int getRefDepth() {
+    return ref_depth;
+  }
 
-	public boolean isUtf()
-	{
-		return is_utf;
-	}
+  public boolean isUtf() {
+    return is_utf;
+  }
 }

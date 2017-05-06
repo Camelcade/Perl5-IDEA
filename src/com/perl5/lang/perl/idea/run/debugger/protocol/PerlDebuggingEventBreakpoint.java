@@ -19,10 +19,8 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public interface PerlDebuggingEventBreakpoint extends PerlDebuggingEvent
-{
-	String getPath();
+public interface PerlDebuggingEventBreakpoint extends PerlDebuggingEvent {
+  String getPath();
 
-	int getLine();
-
+  int getLine();
 }

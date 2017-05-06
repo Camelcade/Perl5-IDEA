@@ -22,12 +22,10 @@ import org.intellij.lang.regexp.RegExpLanguage;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpLanguage extends Language
-{
-	public static final Perl5RegexpLanguage INSTANCE = new Perl5RegexpLanguage();
+public class Perl5RegexpLanguage extends Language {
+  public static final Perl5RegexpLanguage INSTANCE = new Perl5RegexpLanguage();
 
-	private Perl5RegexpLanguage()
-	{
-		super(RegExpLanguage.INSTANCE, "Perl5Regexp");
-	}
+  private Perl5RegexpLanguage() {
+    super(RegExpLanguage.INSTANCE, "Perl5Regexp");
+  }
 }

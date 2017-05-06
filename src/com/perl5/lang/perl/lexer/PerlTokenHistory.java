@@ -27,180 +27,150 @@ import java.util.List;
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class PerlTokenHistory implements PerlElementTypes
-{
-	private final List<PerlTokenHistoryElement> myHistory = new ArrayList<PerlTokenHistoryElement>();
+public class PerlTokenHistory implements PerlElementTypes {
+  private final List<PerlTokenHistoryElement> myHistory = new ArrayList<PerlTokenHistoryElement>();
 
-	private PerlTokenHistoryElement myLastToken;
-	private PerlTokenHistoryElement myLastSignificantToken;
-	private PerlTokenHistoryElement myLastUnbracedToken;
-	private PerlTokenHistoryElement myLastUnparenToken;
+  private PerlTokenHistoryElement myLastToken;
+  private PerlTokenHistoryElement myLastSignificantToken;
+  private PerlTokenHistoryElement myLastUnbracedToken;
+  private PerlTokenHistoryElement myLastUnparenToken;
 
-	public void addToken(IElementType tokenType, CharSequence tokenText)
-	{
-		myHistory.add(myLastToken = new PerlTokenHistoryElement(tokenType, tokenText));
-		if (myLastToken.isSignificant())
-		{
-			myLastSignificantToken = myLastToken;
+  public void addToken(IElementType tokenType, CharSequence tokenText) {
+    myHistory.add(myLastToken = new PerlTokenHistoryElement(tokenType, tokenText));
+    if (myLastToken.isSignificant()) {
+      myLastSignificantToken = myLastToken;
 
-			if (myLastToken.getTokenType() != LEFT_BRACE)
-			{
-				myLastUnbracedToken = myLastToken;
-			}
+      if (myLastToken.getTokenType() != LEFT_BRACE) {
+        myLastUnbracedToken = myLastToken;
+      }
 
-			if (myLastToken.getTokenType() != LEFT_PAREN)
-			{
-				myLastUnparenToken = myLastToken;
-			}
-		}
-	}
+      if (myLastToken.getTokenType() != LEFT_PAREN) {
+        myLastUnparenToken = myLastToken;
+      }
+    }
+  }
 
-	@Nullable
-	public PerlTokenHistoryElement getLastToken()
-	{
-		return myLastToken;
-	}
+  @Nullable
+  public PerlTokenHistoryElement getLastToken() {
+    return myLastToken;
+  }
 
-	@Nullable
-	public IElementType getLastTokenType()
-	{
-		return myLastToken == null ? null : myLastToken.getTokenType();
-	}
+  @Nullable
+  public IElementType getLastTokenType() {
+    return myLastToken == null ? null : myLastToken.getTokenType();
+  }
 
-	@Nullable
-	public CharSequence getLastTokenText()
-	{
-		return myLastToken == null ? null : myLastToken.getTokenText();
-	}
+  @Nullable
+  public CharSequence getLastTokenText() {
+    return myLastToken == null ? null : myLastToken.getTokenText();
+  }
 
-	@Nullable
-	public PerlTokenHistoryElement getLastSignificantToken()
-	{
-		return myLastSignificantToken;
-	}
+  @Nullable
+  public PerlTokenHistoryElement getLastSignificantToken() {
+    return myLastSignificantToken;
+  }
 
-	@Nullable
-	public IElementType getLastSignificantTokenType()
-	{
-		return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenType();
-	}
+  @Nullable
+  public IElementType getLastSignificantTokenType() {
+    return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenType();
+  }
 
-	@Nullable
-	public CharSequence getLastSignificantTokenText()
-	{
-		return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenText();
-	}
+  @Nullable
+  public CharSequence getLastSignificantTokenText() {
+    return myLastSignificantToken == null ? null : myLastSignificantToken.getTokenText();
+  }
 
-	@Nullable
-	public PerlTokenHistoryElement getLastUnbracedToken()
-	{
-		return myLastUnbracedToken;
-	}
+  @Nullable
+  public PerlTokenHistoryElement getLastUnbracedToken() {
+    return myLastUnbracedToken;
+  }
 
-	@Nullable
-	public IElementType getLastUnbracedTokenType()
-	{
-		return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenType();
-	}
+  @Nullable
+  public IElementType getLastUnbracedTokenType() {
+    return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenType();
+  }
 
-	@Nullable
-	public CharSequence getLastUnbracedTokenText()
-	{
-		return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenText();
-	}
+  @Nullable
+  public CharSequence getLastUnbracedTokenText() {
+    return myLastUnbracedToken == null ? null : myLastUnbracedToken.getTokenText();
+  }
 
-	@Nullable
-	public PerlTokenHistoryElement getLastUnparenToken()
-	{
-		return myLastUnparenToken;
-	}
+  @Nullable
+  public PerlTokenHistoryElement getLastUnparenToken() {
+    return myLastUnparenToken;
+  }
 
-	@Nullable
-	public IElementType getLastUnparenTokenType()
-	{
-		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenType();
-	}
+  @Nullable
+  public IElementType getLastUnparenTokenType() {
+    return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenType();
+  }
 
-	@Nullable
-	public CharSequence getLastUnparenTokenText()
-	{
-		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenText();
-	}
+  @Nullable
+  public CharSequence getLastUnparenTokenText() {
+    return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenText();
+  }
 
-	@Nullable
-	public String getLastUnparenTokenTextAsString()
-	{
-		return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenTextAsString();
-	}
+  @Nullable
+  public String getLastUnparenTokenTextAsString() {
+    return myLastUnparenToken == null ? null : myLastUnparenToken.getTokenTextAsString();
+  }
 
-	@NotNull
-	public List<PerlTokenHistoryElement> getHistory()
-	{
-		return myHistory;
-	}
+  @NotNull
+  public List<PerlTokenHistoryElement> getHistory() {
+    return myHistory;
+  }
 
-	@Nullable
-	public PerlTokenHistoryElement getPreviousToken(PerlTokenHistoryElement token)
-	{
-		int index = getHistory().lastIndexOf(token);
-		if (index > 0)
-		{
-			return getHistory().get(index - 1);
-		}
-		return null;
-	}
+  @Nullable
+  public PerlTokenHistoryElement getPreviousToken(PerlTokenHistoryElement token) {
+    int index = getHistory().lastIndexOf(token);
+    if (index > 0) {
+      return getHistory().get(index - 1);
+    }
+    return null;
+  }
 
-	public void reset()
-	{
-		myHistory.clear();
-		myLastToken = null;
-		myLastSignificantToken = null;
-		myLastUnbracedToken = null;
-		myLastUnparenToken = null;
-	}
+  public void reset() {
+    myHistory.clear();
+    myLastToken = null;
+    myLastSignificantToken = null;
+    myLastUnbracedToken = null;
+    myLastUnparenToken = null;
+  }
 
 
-	public int size()
-	{
-		return myHistory.size();
-	}
+  public int size() {
+    return myHistory.size();
+  }
 
-	public static class PerlTokenHistoryElement
-	{
-		private final IElementType myTokenType;
-		private final CharSequence myTokenText;
-		private final boolean myIsSignificant;
-		private String myTokenString;
+  public static class PerlTokenHistoryElement {
+    private final IElementType myTokenType;
+    private final CharSequence myTokenText;
+    private final boolean myIsSignificant;
+    private String myTokenString;
 
-		public PerlTokenHistoryElement(IElementType tokenType, CharSequence tokenText)
-		{
-			myTokenText = tokenText;
-			myTokenType = tokenType;
-			myIsSignificant = !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType);
-		}
+    public PerlTokenHistoryElement(IElementType tokenType, CharSequence tokenText) {
+      myTokenText = tokenText;
+      myTokenType = tokenType;
+      myIsSignificant = !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(tokenType);
+    }
 
-		public CharSequence getTokenText()
-		{
-			return myTokenText;
-		}
+    public CharSequence getTokenText() {
+      return myTokenText;
+    }
 
-		public String getTokenTextAsString()
-		{
-			if (myTokenString == null)
-			{
-				myTokenString = getTokenText().toString();
-			}
-			return myTokenString;
-		}
+    public String getTokenTextAsString() {
+      if (myTokenString == null) {
+        myTokenString = getTokenText().toString();
+      }
+      return myTokenString;
+    }
 
-		public IElementType getTokenType()
-		{
-			return myTokenType;
-		}
+    public IElementType getTokenType() {
+      return myTokenType;
+    }
 
-		public boolean isSignificant()
-		{
-			return myIsSignificant;
-		}
-	}
+    public boolean isSignificant() {
+      return myIsSignificant;
+    }
+  }
 }

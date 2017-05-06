@@ -31,38 +31,32 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileImpl extends PerlFileImpl
-{
-	public MasonFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, Mason2Language.INSTANCE);
-	}
+public class MasonFileImpl extends PerlFileImpl {
+  public MasonFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, Mason2Language.INSTANCE);
+  }
 
-	public MasonFileImpl(@NotNull FileViewProvider viewProvider, Language language)
-	{
-		super(viewProvider, language);
-	}
+  public MasonFileImpl(@NotNull FileViewProvider viewProvider, Language language) {
+    super(viewProvider, language);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "Mason2 pure perl file";
-	}
+  @Override
+  public String toString() {
+    return "Mason2 pure perl file";
+  }
 
-	@Override
-	protected FileType getDefaultFileType()
-	{
-		return MasonPurePerlComponentFileType.INSTANCE;
-	}
+  @Override
+  protected FileType getDefaultFileType() {
+    return MasonPurePerlComponentFileType.INSTANCE;
+  }
 
-	/**
-	 * Returns VFS object representing component root
-	 *
-	 * @return component root
-	 */
-	@Nullable
-	public VirtualFile getComponentRoot()
-	{
-		return Mason2Util.getComponentRoot(getProject(), MasonCoreUtil.getContainingVirtualFile(this));
-	}
+  /**
+   * Returns VFS object representing component root
+   *
+   * @return component root
+   */
+  @Nullable
+  public VirtualFile getComponentRoot() {
+    return Mason2Util.getComponentRoot(getProject(), MasonCoreUtil.getContainingVirtualFile(this));
+  }
 }

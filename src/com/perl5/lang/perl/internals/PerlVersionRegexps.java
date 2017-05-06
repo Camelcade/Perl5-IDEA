@@ -22,58 +22,56 @@ import java.util.regex.Pattern;
  * Created by hurricup on 07.09.2015.
  * regexps taken from verion/regex.pm original names are kept, but in camelcase
  */
-public interface PerlVersionRegexps
-{
-	static final Pattern numericVersion = Pattern.compile(
-			"(0|[1-9]\\d*)" +                // revision
-					"(?:\\." +
-					"([\\d_]+)" +            // major
-					")?"
-	);
+public interface PerlVersionRegexps {
+  static final Pattern numericVersion = Pattern.compile(
+    "(0|[1-9]\\d*)" +                // revision
+    "(?:\\." +
+    "([\\d_]+)" +            // major
+    ")?"
+  );
 
-	static final Pattern dottedVersion = Pattern.compile(
-			"v(?:0|[1-9]\\d*)" +            // revision
-					"(?:\\.\\d+)*" +    // major, minor and others
-					"(_\\d+)?"        // alpha
-	);
+  static final Pattern dottedVersion = Pattern.compile(
+    "v(?:0|[1-9]\\d*)" +            // revision
+    "(?:\\.\\d+)*" +    // major, minor and others
+    "(_\\d+)?"        // alpha
+  );
 
-	static final String fractionPart = "(?:\\.([0-9]+))";
+  static final String fractionPart = "(?:\\.([0-9]+))";
 
-	static final String strictIntegerPart = "(0|[1-9][0-9]*)";
-	static final String strictDottedDecimalPart = "(?:\\.([0-9]{1,3}))";
+  static final String strictIntegerPart = "(0|[1-9][0-9]*)";
+  static final String strictDottedDecimalPart = "(?:\\.([0-9]{1,3}))";
 
-	static final String laxIntegerPart = "([0-9]+)";
-	static final String laxDottedDecimalPart = "(?:\\.([0-9]+))";
-	static final String laxAlphaPart = "(?:_([0-9]+))";
+  static final String laxIntegerPart = "([0-9]+)";
+  static final String laxDottedDecimalPart = "(?:\\.([0-9]+))";
+  static final String laxAlphaPart = "(?:_([0-9]+))";
 
-	// strict versions
-	static final Pattern strictDecimalVersion = Pattern.compile(
-			strictIntegerPart + fractionPart + "?"
-	);
+  // strict versions
+  static final Pattern strictDecimalVersion = Pattern.compile(
+    strictIntegerPart + fractionPart + "?"
+  );
 
-	static final Pattern strictDottedDecimalVersion = Pattern.compile(
-			"v" + strictIntegerPart + strictDottedDecimalPart + strictDottedDecimalPart + "+"
-	);
+  static final Pattern strictDottedDecimalVersion = Pattern.compile(
+    "v" + strictIntegerPart + strictDottedDecimalPart + strictDottedDecimalPart + "+"
+  );
 
-	static final Pattern strict = Pattern.compile(
-			strictDecimalVersion + "|" + strictDottedDecimalVersion
-	);
+  static final Pattern strict = Pattern.compile(
+    strictDecimalVersion + "|" + strictDottedDecimalVersion
+  );
 
-	// lax versions
-	static final Pattern laxDecimalVersion = Pattern.compile(
-			laxIntegerPart + "(?:\\.|" + fractionPart + laxAlphaPart + "?)?"
-					+ "|"
-					+ fractionPart + laxAlphaPart + "?"
-	);
+  // lax versions
+  static final Pattern laxDecimalVersion = Pattern.compile(
+    laxIntegerPart + "(?:\\.|" + fractionPart + laxAlphaPart + "?)?"
+    + "|"
+    + fractionPart + laxAlphaPart + "?"
+  );
 
-	static final Pattern laxDottedDecimalVersion = Pattern.compile(
-			"v" + laxIntegerPart + "(?:" + laxDottedDecimalPart + laxAlphaPart + "?)?"
-					+ "|"
-					+ laxIntegerPart + "?" + laxDottedDecimalPart + laxDottedDecimalPart + "+" + laxAlphaPart + "?"
-	);
+  static final Pattern laxDottedDecimalVersion = Pattern.compile(
+    "v" + laxIntegerPart + "(?:" + laxDottedDecimalPart + laxAlphaPart + "?)?"
+    + "|"
+    + laxIntegerPart + "?" + laxDottedDecimalPart + laxDottedDecimalPart + "+" + laxAlphaPart + "?"
+  );
 
-	static final Pattern lax = Pattern.compile(
-			laxDecimalVersion + "|" + laxDottedDecimalVersion
-	);
-
+  static final Pattern lax = Pattern.compile(
+    laxDecimalVersion + "|" + laxDottedDecimalVersion
+  );
 }

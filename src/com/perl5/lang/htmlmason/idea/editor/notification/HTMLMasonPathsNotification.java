@@ -36,62 +36,50 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonPathsNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware
-{
-	private static final Key<EditorNotificationPanel> KEY = Key.create("perl.htmlmason.roots.not.set.panel");
-	private final Project myProject;
+public class HTMLMasonPathsNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
+  private static final Key<EditorNotificationPanel> KEY = Key.create("perl.htmlmason.roots.not.set.panel");
+  private final Project myProject;
 
-	public HTMLMasonPathsNotification(Project myProject)
-	{
-		this.myProject = myProject;
-	}
+  public HTMLMasonPathsNotification(Project myProject) {
+    this.myProject = myProject;
+  }
 
-	@NotNull
-	@Override
-	public Key<EditorNotificationPanel> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public Key<EditorNotificationPanel> getKey() {
+    return KEY;
+  }
 
-	@Nullable
-	@Override
-	public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor)
-	{
-		if (file.getFileType() == HTMLMasonFileType.INSTANCE)
-		{
-			String message = null;
+  @Nullable
+  @Override
+  public EditorNotificationPanel createNotificationPanel(@NotNull final VirtualFile file, @NotNull FileEditor fileEditor) {
+    if (file.getFileType() == HTMLMasonFileType.INSTANCE) {
+      String message = null;
 
-			if (HTMLMasonSettings.getInstance(myProject).componentRoots.isEmpty())
-			{
-				message = "HTML::Mason components roots are not configured";
-			}
-			else
-			{
-				PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-				if (psiFile instanceof HTMLMasonFileImpl && ((HTMLMasonFileImpl) psiFile).getComponentRoot() == null)
-				{
-					message = "Component is not under one of configured roots";
-				}
-			}
+      if (HTMLMasonSettings.getInstance(myProject).componentRoots.isEmpty()) {
+        message = "HTML::Mason components roots are not configured";
+      }
+      else {
+        PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
+        if (psiFile instanceof HTMLMasonFileImpl && ((HTMLMasonFileImpl)psiFile).getComponentRoot() == null) {
+          message = "Component is not under one of configured roots";
+        }
+      }
 
-			if (message != null)
-			{
-				EditorNotificationPanel panel = new EditorNotificationPanel();
-				panel.setText(message);
-				panel.createActionLabel("Configure", new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						ShowSettingsUtil.getInstance().editConfigurable(myProject, new HTMLMasonSettingsConfigurable(myProject, "HTML::Mason Settings"));
-					}
-				});
-				return panel;
-			}
-		}
+      if (message != null) {
+        EditorNotificationPanel panel = new EditorNotificationPanel();
+        panel.setText(message);
+        panel.createActionLabel("Configure", new Runnable() {
+          @Override
+          public void run() {
+            ShowSettingsUtil.getInstance()
+              .editConfigurable(myProject, new HTMLMasonSettingsConfigurable(myProject, "HTML::Mason Settings"));
+          }
+        });
+        return panel;
+      }
+    }
 
-		return null;
-	}
-
-
+    return null;
+  }
 }

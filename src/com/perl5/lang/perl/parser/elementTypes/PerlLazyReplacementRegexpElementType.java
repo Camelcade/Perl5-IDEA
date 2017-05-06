@@ -25,18 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyReplacementRegexpElementType extends PerlLazyRegexpElementType
-{
-	public PerlLazyReplacementRegexpElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlLazyReplacementRegexpElementType extends PerlLazyRegexpElementType {
+  public PerlLazyReplacementRegexpElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forReplacementRegex(project);
-	}
-
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return PerlSubLexerAdapter.forReplacementRegex(project);
+  }
 }

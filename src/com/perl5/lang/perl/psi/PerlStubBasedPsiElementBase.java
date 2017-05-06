@@ -29,34 +29,32 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 31.01.2016.
  */
-public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBasedPsiElementBase<T>
-{
-	public PerlStubBasedPsiElementBase(@NotNull T stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBasedPsiElementBase<T> {
+  public PerlStubBasedPsiElementBase(@NotNull T stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public PerlStubBasedPsiElementBase(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PerlStubBasedPsiElementBase(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public String toString()
-	{
-		return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
-	}
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-//		System.err.println(this);
-		return PerlResolveUtil.processChildren(
-				this,
-				processor,
-				state,
-				lastParent,
-				place
-		);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    //		System.err.println(this);
+    return PerlResolveUtil.processChildren(
+      this,
+      processor,
+      state,
+      lastParent,
+      place
+    );
+  }
 }

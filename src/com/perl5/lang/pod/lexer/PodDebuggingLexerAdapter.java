@@ -22,10 +22,8 @@ import com.intellij.openapi.project.Project;
 /**
  * Created by hurricup on 25.03.2016.
  */
-public class PodDebuggingLexerAdapter extends FlexAdapter
-{
-	public PodDebuggingLexerAdapter(Project project)
-	{
-		super(new PodDebuggingLexer((java.io.Reader) null));
-	}
+public class PodDebuggingLexerAdapter extends FlexAdapter {
+  public PodDebuggingLexerAdapter(Project project) {
+    super(new PodDebuggingLexer((java.io.Reader)null));
+  }
 }

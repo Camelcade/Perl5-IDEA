@@ -22,19 +22,17 @@ import com.intellij.codeInsight.completion.CompletionType;
 /**
  * Created by hurricup on 10.01.2016.
  */
-public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns
-{
-	public MasonCompletionContributor()
-	{
-		extend(
-				CompletionType.BASIC,
-				MASON_EXTENDS_VALUE_TEXT_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
-		extend(
-				CompletionType.BASIC,
-				MASON_CALL_TEMPLATE_PATTERN,
-				new MasonComponentsCompletionProvider()
-		);
-	}
+public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns {
+  public MasonCompletionContributor() {
+    extend(
+      CompletionType.BASIC,
+      MASON_EXTENDS_VALUE_TEXT_PATTERN,
+      new MasonComponentsCompletionProvider()
+    );
+    extend(
+      CompletionType.BASIC,
+      MASON_CALL_TEMPLATE_PATTERN,
+      new MasonComponentsCompletionProvider()
+    );
+  }
 }

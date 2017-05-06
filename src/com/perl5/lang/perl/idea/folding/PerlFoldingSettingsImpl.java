@@ -28,21 +28,18 @@ import org.jetbrains.annotations.Nullable;
  */
 
 @State(
-		name = "PerlCodeFoldingSettings",
-		storages = @Storage(file = PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
+  name = "PerlCodeFoldingSettings",
+  storages = @Storage(file = PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
 )
-public class PerlFoldingSettingsImpl extends PerlFoldingSettings implements PersistentStateComponent<PerlFoldingSettings>
-{
-	@Nullable
-	@Override
-	public PerlFoldingSettings getState()
-	{
-		return this;
-	}
+public class PerlFoldingSettingsImpl extends PerlFoldingSettings implements PersistentStateComponent<PerlFoldingSettings> {
+  @Nullable
+  @Override
+  public PerlFoldingSettings getState() {
+    return this;
+  }
 
-	@Override
-	public void loadState(PerlFoldingSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  @Override
+  public void loadState(PerlFoldingSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 }

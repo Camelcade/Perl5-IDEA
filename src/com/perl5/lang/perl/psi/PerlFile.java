@@ -31,35 +31,34 @@ import java.util.Set;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation, PodLinkTarget
-{
-	/**
-	 * Recursively collects virtual files included in current file
-	 *
-	 * @param includedVirtualFiles set of already gathered files
-	 */
-	void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
+public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation, PodLinkTarget {
+  /**
+   * Recursively collects virtual files included in current file
+   *
+   * @param includedVirtualFiles set of already gathered files
+   */
+  void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
 
 
-	/**
-	 * Returns generator for overriding elements
-	 *
-	 * @return override generator
-	 */
-	PerlCodeGenerator getCodeGenerator();
+  /**
+   * Returns generator for overriding elements
+   *
+   * @return override generator
+   */
+  PerlCodeGenerator getCodeGenerator();
 
-	/**
-	 * Returns perl content with templating injections replaced with spaces
-	 *
-	 * @return bytes for external analysis/formatting
-	 */
-	@Nullable
-	byte[] getPerlContentInBytes();
+  /**
+   * Returns perl content with templating injections replaced with spaces
+   *
+   * @return bytes for external analysis/formatting
+   */
+  @Nullable
+  byte[] getPerlContentInBytes();
 
-	/**
-	 * Overrides file context; if null - using default context resoving implementation
-	 *
-	 * @param fileContext new file context
-	 */
-	void setFileContext(@Nullable PsiElement fileContext);
+  /**
+   * Overrides file context; if null - using default context resoving implementation
+   *
+   * @param fileContext new file context
+   */
+  void setFileContext(@Nullable PsiElement fileContext);
 }

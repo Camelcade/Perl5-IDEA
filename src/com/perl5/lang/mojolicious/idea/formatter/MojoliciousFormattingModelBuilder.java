@@ -34,19 +34,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilder
-{
-	@NotNull
-	@Override
-	public FormattingModel createModel(PsiElement element, CodeStyleSettings settings)
-	{
-		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
-		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
-		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
-		InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
-		PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
-		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
-	}
-
-
+public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilder {
+  @NotNull
+  @Override
+  public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
+    CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
+    PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
+    SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
+    InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder,
+                                                               injectedLanguageBlockBuilder);
+    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
+  }
 }

@@ -49,161 +49,138 @@ import java.util.List;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCriticErrorDescriptor>>
-{
-	public static final String PERL_CRITIC_LINUX_NAME = "perlcritic";
-	public static final String PERL_CRITIC_WINDOWS_NAME = PERL_CRITIC_LINUX_NAME + ".bat";
-	public static final String PERL_CRITIC_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_CRITIC_WINDOWS_NAME : PERL_CRITIC_LINUX_NAME;
+public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCriticErrorDescriptor>> {
+  public static final String PERL_CRITIC_LINUX_NAME = "perlcritic";
+  public static final String PERL_CRITIC_WINDOWS_NAME = PERL_CRITIC_LINUX_NAME + ".bat";
+  public static final String PERL_CRITIC_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_CRITIC_WINDOWS_NAME : PERL_CRITIC_LINUX_NAME;
 
 
-	@Nullable
-	@Override
-	public PerlFile collectInformation(@NotNull PsiFile file)
-	{
-		return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED ? (PerlFile) file : null;
-	}
+  @Nullable
+  @Override
+  public PerlFile collectInformation(@NotNull PsiFile file) {
+    return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED
+           ? (PerlFile)file
+           : null;
+  }
 
-	protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException
-	{
-		PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
-		PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
-		String executable = localSettings.PERL_CRITIC_PATH;
+  protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException {
+    PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
+    PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
+    String executable = localSettings.PERL_CRITIC_PATH;
 
-		if (StringUtil.isEmpty(executable))
-		{
-			throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
-		}
-		GeneralCommandLine commandLine = new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
+    if (StringUtil.isEmpty(executable)) {
+      throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
+    }
+    GeneralCommandLine commandLine = new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
 
-		if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS))
-		{
-			commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
-		}
+    if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS)) {
+      commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
+    }
 
-		return commandLine;
-	}
+    return commandLine;
+  }
 
 
-	@Nullable
-	@Override
-	public List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile)
-	{
-		if (sourcePsiFile == null)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  public List<PerlCriticErrorDescriptor> doAnnotate(final PerlFile sourcePsiFile) {
+    if (sourcePsiFile == null) {
+      return null;
+    }
 
-		byte[] sourceBytes = sourcePsiFile.getPerlContentInBytes();
-		if (sourceBytes == null)
-		{
-			return null;
-		}
+    byte[] sourceBytes = sourcePsiFile.getPerlContentInBytes();
+    if (sourceBytes == null) {
+      return null;
+    }
 
 
-		try
-		{
-			GeneralCommandLine perlcritic = getPerlCriticExecutable(sourcePsiFile.getProject());
-			final Process process = perlcritic.createProcess();
+    try {
+      GeneralCommandLine perlcritic = getPerlCriticExecutable(sourcePsiFile.getProject());
+      final Process process = perlcritic.createProcess();
 
-			OutputStream outputStream = process.getOutputStream();
-			outputStream.write(sourceBytes);
-			outputStream.close();
+      OutputStream outputStream = process.getOutputStream();
+      outputStream.write(sourceBytes);
+      outputStream.close();
 
-			final CapturingProcessHandler processHandler = new CapturingProcessHandler(process);
+      final CapturingProcessHandler processHandler = new CapturingProcessHandler(process);
 
-			List<PerlCriticErrorDescriptor> errors = new ArrayList<PerlCriticErrorDescriptor>();
-			PerlCriticErrorDescriptor lastDescriptor = null;
-			for (String output : processHandler.runProcess().getStdoutLines())
-			{
-				PerlCriticErrorDescriptor fromString = PerlCriticErrorDescriptor.getFromString(output);
-				if (fromString != null)
-				{
-					errors.add(lastDescriptor = fromString);
-				}
-				else if (lastDescriptor != null)
-				{
-					lastDescriptor.append(" " + output);
-				}
-				else if (!StringUtil.equals(output, "source OK"))
-				{
-					// fixme we could make some popup here
-					System.err.println("Could not parse line: " + output);
-				}
-			}
-			return errors;
-		}
-		catch (ExecutionException e)
-		{
-			Notifications.Bus.notify(new Notification(
-					"PerlCritic error",
-					"Perl::Critic failed to start and has been disabled",
-					"<ul style=\"padding-left:10px;margin-left:0px;\">" +
-							"<li>Make sure that Perl::Critic module is installed</li>" +
-							"<li>Configure path to perlcritic executable in <a href=\"configure\">Perl5 settings</a> and re-enable it</li>" +
-							"</ul>"
-					,
-					NotificationType.ERROR,
-					new NotificationListener.Adapter()
-					{
-						@Override
-						protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e)
-						{
-							Project project = sourcePsiFile.getProject();
-							ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
-							notification.expire();
-						}
-					}
-			));
-			PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
+      List<PerlCriticErrorDescriptor> errors = new ArrayList<PerlCriticErrorDescriptor>();
+      PerlCriticErrorDescriptor lastDescriptor = null;
+      for (String output : processHandler.runProcess().getStdoutLines()) {
+        PerlCriticErrorDescriptor fromString = PerlCriticErrorDescriptor.getFromString(output);
+        if (fromString != null) {
+          errors.add(lastDescriptor = fromString);
+        }
+        else if (lastDescriptor != null) {
+          lastDescriptor.append(" " + output);
+        }
+        else if (!StringUtil.equals(output, "source OK")) {
+          // fixme we could make some popup here
+          System.err.println("Could not parse line: " + output);
+        }
+      }
+      return errors;
+    }
+    catch (ExecutionException e) {
+      Notifications.Bus.notify(new Notification(
+        "PerlCritic error",
+        "Perl::Critic failed to start and has been disabled",
+        "<ul style=\"padding-left:10px;margin-left:0px;\">" +
+        "<li>Make sure that Perl::Critic module is installed</li>" +
+        "<li>Configure path to perlcritic executable in <a href=\"configure\">Perl5 settings</a> and re-enable it</li>" +
+        "</ul>"
+        ,
+        NotificationType.ERROR,
+        new NotificationListener.Adapter() {
+          @Override
+          protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e) {
+            Project project = sourcePsiFile.getProject();
+            ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+            notification.expire();
+          }
+        }
+      ));
+      PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
+  @Override
+  public void apply(@NotNull PsiFile file, List<PerlCriticErrorDescriptor> annotationResult, @NotNull AnnotationHolder holder) {
+    if (annotationResult == null) {
+      return;
+    }
 
-	@Override
-	public void apply(@NotNull PsiFile file, List<PerlCriticErrorDescriptor> annotationResult, @NotNull AnnotationHolder holder)
-	{
-		if (annotationResult == null)
-		{
-			return;
-		}
+    Document document = file.getViewProvider().getDocument();
+    if (document != null) {
+      for (PerlCriticErrorDescriptor descriptor : annotationResult) {
+        int line = descriptor.getLine();
+        int col = descriptor.getCol();
 
-		Document document = file.getViewProvider().getDocument();
-		if (document != null)
-		{
-			for (PerlCriticErrorDescriptor descriptor : annotationResult)
-			{
-				int line = descriptor.getLine();
-				int col = descriptor.getCol();
+        TextRange warningRange = null;
+        if (col == 1) // suppose it's stupid output without column
+        {
+          warningRange = new TextRange(document.getLineStartOffset(line - 1), document.getLineEndOffset(line - 1));
+        }
+        else // trying to find real element
+        {
+          int offset = document.getLineStartOffset(line - 1) + col;
+          PsiElement targetElement = file.findElementAt(offset);
+          if (targetElement != null) {
+            warningRange = targetElement.getTextRange();
+          }
+          else {
+            System.err.println("Error creating annotation for " + descriptor);
+          }
+        }
 
-				TextRange warningRange = null;
-				if (col == 1) // suppose it's stupid output without column
-				{
-					warningRange = new TextRange(document.getLineStartOffset(line - 1), document.getLineEndOffset(line - 1));
-				}
-				else // trying to find real element
-				{
-					int offset = document.getLineStartOffset(line - 1) + col;
-					PsiElement targetElement = file.findElementAt(offset);
-					if (targetElement != null)
-					{
-						warningRange = targetElement.getTextRange();
-					}
-					else
-					{
-						System.err.println("Error creating annotation for " + descriptor);
-					}
-				}
-
-				if (warningRange != null)
-				{
-					holder.createAnnotation(HighlightSeverity.WARNING, warningRange, descriptor.getMessage());
-				}
-			}
-		}
-	}
+        if (warningRange != null) {
+          holder.createAnnotation(HighlightSeverity.WARNING, warningRange, descriptor.getMessage());
+        }
+      }
+    }
+  }
 }

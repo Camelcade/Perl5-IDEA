@@ -26,13 +26,12 @@ import java.util.Set;
  * Implement this interface to declarations, which provides their own TreeView elements
  * Useful for multi-declarations, like best practice Class::Accessor accessors/mutators
  */
-public interface PerlHierarchyViewElementsProvider
-{
-	/**
-	 * Fill treeElements with appropriate elements
-	 *
-	 * @param treeElements   result elements list
-	 * @param duplicationMap element should not be added if it's already in there and shouild be added to map otherwise
-	 */
-	void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap, boolean isInherited, boolean isImported);
+public interface PerlHierarchyViewElementsProvider {
+  /**
+   * Fill treeElements with appropriate elements
+   *
+   * @param treeElements   result elements list
+   * @param duplicationMap element should not be added if it's already in there and shouild be added to map otherwise
+   */
+  void fillHierarchyViewElements(List<TreeElement> treeElements, Set<String> duplicationMap, boolean isInherited, boolean isImported);
 }

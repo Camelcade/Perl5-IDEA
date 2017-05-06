@@ -35,79 +35,66 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlSubDefinitionWitTextIdentifier
-{
-	public PerlSubDefinitionWithTextIdentifierImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub>
+  implements PerlSubDefinitionWitTextIdentifier {
+  public PerlSubDefinitionWithTextIdentifierImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlSubDefinitionWithTextIdentifierImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlSubDefinitionWithTextIdentifierImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public PsiPerlBlock getBlockSmart()
-	{
-		return null;
-	}
+  @Override
+  public PsiPerlBlock getBlockSmart() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getSignatureContainer() {
+    return null;
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		return true;
-	}
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getFirstChild();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getFirstChild();
+  }
 
-	@Override
-	public PsiElement getSubNameElement()
-	{
-		return getNameIdentifier();
-	}
+  @Override
+  public PsiElement getSubNameElement() {
+    return getNameIdentifier();
+  }
 
-	@Override
-	protected String getSubNameHeavy()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getNode().getText();
-	}
+  @Override
+  protected String getSubNameHeavy() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    return nameIdentifier == null ? null : nameIdentifier.getNode().getText();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.isEmpty())
-		{
-			throw new IncorrectOperationException("You can't set an empty name");
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    if (name.isEmpty()) {
+      throw new IncorrectOperationException("You can't set an empty name");
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof LeafPsiElement)
-		{
-			((LeafPsiElement) nameIdentifier).replaceWithText(name);
-		}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof LeafPsiElement) {
+      ((LeafPsiElement)nameIdentifier).replaceWithText(name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		return PerlPsiUtil.collectAnnotations(this);
-	}
-
+  @NotNull
+  @Override
+  public List<PerlAnnotation> getAnnotationList() {
+    return PerlPsiUtil.collectAnnotations(this);
+  }
 }

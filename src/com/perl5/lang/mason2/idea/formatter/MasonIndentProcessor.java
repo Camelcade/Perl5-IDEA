@@ -24,82 +24,78 @@ import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2ElementTypes
-{
-	public static final MasonIndentProcessor INSTANCE = new MasonIndentProcessor();
+public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2ElementTypes {
+  public static final MasonIndentProcessor INSTANCE = new MasonIndentProcessor();
 
-	public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
-			PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
-			TokenSet.create(
-					MASON_LINE_OPENER,
-					MASON_TEMPLATE_BLOCK_HTML
-			));
+  public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
+    PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
+    TokenSet.create(
+      MASON_LINE_OPENER,
+      MASON_TEMPLATE_BLOCK_HTML
+    ));
 
-	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-			PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
-			TokenSet.create(
-					Mason2TemplatingParserDefinition.FILE,
+  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+    PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
+    TokenSet.create(
+      Mason2TemplatingParserDefinition.FILE,
 
-					MASON_AUGMENT_MODIFIER,
-					MASON_AFTER_MODIFIER,
-					MASON_BEFORE_MODIFIER,
-					MASON_AROUND_MODIFIER,
+      MASON_AUGMENT_MODIFIER,
+      MASON_AFTER_MODIFIER,
+      MASON_BEFORE_MODIFIER,
+      MASON_AROUND_MODIFIER,
 
-					MASON_FILTER_DEFINITION,
-					MASON_METHOD_DEFINITION,
-					MASON_OVERRIDE_DEFINITION
-			));
+      MASON_FILTER_DEFINITION,
+      MASON_METHOD_DEFINITION,
+      MASON_OVERRIDE_DEFINITION
+    ));
 
-	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
-			PerlIndentProcessor.UNINDENTABLE_TOKENS,
-			TokenSet.create(
-					MASON_METHOD_OPENER,
-					MASON_METHOD_CLOSER,
+  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
+    PerlIndentProcessor.UNINDENTABLE_TOKENS,
+    TokenSet.create(
+      MASON_METHOD_OPENER,
+      MASON_METHOD_CLOSER,
 
-					MASON_OVERRIDE_OPENER,
-					MASON_OVERRIDE_CLOSER,
+      MASON_OVERRIDE_OPENER,
+      MASON_OVERRIDE_CLOSER,
 
-					MASON_AFTER_OPENER,
-					MASON_AFTER_CLOSER,
+      MASON_AFTER_OPENER,
+      MASON_AFTER_CLOSER,
 
-					MASON_BEFORE_OPENER,
-					MASON_BEFORE_CLOSER,
+      MASON_BEFORE_OPENER,
+      MASON_BEFORE_CLOSER,
 
-					MASON_AROUND_OPENER,
-					MASON_AROUND_CLOSER,
+      MASON_AROUND_OPENER,
+      MASON_AROUND_CLOSER,
 
-					MASON_AUGMENT_OPENER,
-					MASON_AUGMENT_CLOSER,
+      MASON_AUGMENT_OPENER,
+      MASON_AUGMENT_CLOSER,
 
-					MASON_FLAGS_OPENER,
-					MASON_FLAGS_CLOSER,
+      MASON_FLAGS_OPENER,
+      MASON_FLAGS_CLOSER,
 
-					MASON_INIT_OPENER,
-					MASON_INIT_CLOSER,
+      MASON_INIT_OPENER,
+      MASON_INIT_CLOSER,
 
-					MASON_CLASS_OPENER,
-					MASON_CLASS_CLOSER,
+      MASON_CLASS_OPENER,
+      MASON_CLASS_CLOSER,
 
-					MASON_PERL_OPENER,
-					MASON_PERL_CLOSER
-			));
+      MASON_PERL_OPENER,
+      MASON_PERL_CLOSER
+    ));
 
 
-	@Override
-	public TokenSet getAbsoluteUnindentableTokens()
-	{
-		return ABSOLUTE_UNINDENTABLE_TOKENS;
-	}
+  @Override
+  public TokenSet getAbsoluteUnindentableTokens() {
+    return ABSOLUTE_UNINDENTABLE_TOKENS;
+  }
 
-	@Override
-	public TokenSet getUnindentableContainers()
-	{
-		return UNINDENTABLE_CONTAINERS;
-	}
+  @Override
+  public TokenSet getUnindentableContainers() {
+    return UNINDENTABLE_CONTAINERS;
+  }
 
-	@Override
-	public TokenSet getUnindentableTokens()
-	{
-		return UNINDENTABLE_TOKENS;
-	}
+  @Override
+  public TokenSet getUnindentableTokens() {
+    return UNINDENTABLE_TOKENS;
+  }
 }

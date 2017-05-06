@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface PerlClassAccessorSub extends PerlSubNameElement
-{
+public interface PerlClassAccessorSub extends PerlSubNameElement {
 }

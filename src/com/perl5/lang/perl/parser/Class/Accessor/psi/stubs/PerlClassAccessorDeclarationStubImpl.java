@@ -29,67 +29,58 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class PerlClassAccessorDeclarationStubImpl extends PerlSubDefinitionStubImpl implements PerlClassAccessorDeclarationStub
-{
-	private final boolean myFollowingBestPractice;
-	private final boolean myIsAcessorReadable;
-	private final boolean myIsAcessorWritable;
+public class PerlClassAccessorDeclarationStubImpl extends PerlSubDefinitionStubImpl implements PerlClassAccessorDeclarationStub {
+  private final boolean myFollowingBestPractice;
+  private final boolean myIsAcessorReadable;
+  private final boolean myIsAcessorWritable;
 
-	public PerlClassAccessorDeclarationStubImpl(StubElement parent,
-												String packageName,
-												String subName,
-												List<PerlSubArgument> arguments,
-												PerlSubAnnotations annotations,
-												boolean followingBestPractice,
-												boolean isAcessorReadable,
-												boolean isAcessorWritable,
-												IStubElementType elementType)
-	{
-		super(parent, packageName, subName, arguments, annotations, elementType);
-		myFollowingBestPractice = followingBestPractice;
-		myIsAcessorReadable = isAcessorReadable;
-		myIsAcessorWritable = isAcessorWritable;
-	}
+  public PerlClassAccessorDeclarationStubImpl(StubElement parent,
+                                              String packageName,
+                                              String subName,
+                                              List<PerlSubArgument> arguments,
+                                              PerlSubAnnotations annotations,
+                                              boolean followingBestPractice,
+                                              boolean isAcessorReadable,
+                                              boolean isAcessorWritable,
+                                              IStubElementType elementType) {
+    super(parent, packageName, subName, arguments, annotations, elementType);
+    myFollowingBestPractice = followingBestPractice;
+    myIsAcessorReadable = isAcessorReadable;
+    myIsAcessorWritable = isAcessorWritable;
+  }
 
-	@Override
-	public boolean isFollowsBestPractice()
-	{
-		return myFollowingBestPractice;
-	}
+  @Override
+  public boolean isFollowsBestPractice() {
+    return myFollowingBestPractice;
+  }
 
-	@Override
-	public String getGetterName()
-	{
-		return PerlClassAccessorDeclaration.ACCESSOR_PREFIX + getSubName();
-	}
+  @Override
+  public String getGetterName() {
+    return PerlClassAccessorDeclaration.ACCESSOR_PREFIX + getSubName();
+  }
 
-	@Override
-	public String getSetterName()
-	{
-		return PerlClassAccessorDeclaration.MUTATOR_PREFIX + getSubName();
-	}
+  @Override
+  public String getSetterName() {
+    return PerlClassAccessorDeclaration.MUTATOR_PREFIX + getSubName();
+  }
 
-	@Override
-	public String getGetterCanonicalName()
-	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
-	}
+  @Override
+  public String getGetterCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
+  }
 
-	@Override
-	public String getSetterCanonicalName()
-	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
-	}
+  @Override
+  public String getSetterCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
+  }
 
-	@Override
-	public boolean isAccessorReadable()
-	{
-		return myIsAcessorReadable;
-	}
+  @Override
+  public boolean isAccessorReadable() {
+    return myIsAcessorReadable;
+  }
 
-	@Override
-	public boolean isAccessorWritable()
-	{
-		return myIsAcessorWritable;
-	}
+  @Override
+  public boolean isAccessorWritable() {
+    return myIsAcessorWritable;
+  }
 }

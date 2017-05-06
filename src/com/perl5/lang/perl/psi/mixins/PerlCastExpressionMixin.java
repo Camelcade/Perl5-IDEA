@@ -23,10 +23,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 /**
  * Created by evstigneev on 17.11.2015.
  */
-public class PerlCastExpressionMixin extends PsiPerlExprImpl implements PerlCastExpression
-{
-	public PerlCastExpressionMixin(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlCastExpressionMixin extends PsiPerlExprImpl implements PerlCastExpression {
+  public PerlCastExpressionMixin(ASTNode node) {
+    super(node);
+  }
 }

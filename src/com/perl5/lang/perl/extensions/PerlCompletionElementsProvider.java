@@ -23,12 +23,11 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
  * Implement this interface to declarations, which provides completion variants themselves
  * Useful for multi-declarations, like best practice Class::Accessor accessors/mutators
  */
-public interface PerlCompletionElementsProvider
-{
-	/**
-	 * Add variants to the result set
-	 *
-	 * @param resultSet result set to fill
-	 */
-	void fillCompletions(CompletionResultSet resultSet);
+public interface PerlCompletionElementsProvider {
+  /**
+   * Add variants to the result set
+   *
+   * @param resultSet result set to fill
+   */
+  void fillCompletions(CompletionResultSet resultSet);
 }

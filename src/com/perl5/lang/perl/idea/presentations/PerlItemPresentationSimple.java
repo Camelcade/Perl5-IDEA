@@ -22,20 +22,17 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlItemPresentationSimple extends PerlItemPresentationBase
-{
-	String myPresentableText;
+public class PerlItemPresentationSimple extends PerlItemPresentationBase {
+  String myPresentableText;
 
-	public PerlItemPresentationSimple(PsiElement element, String presentatbleText)
-	{
-		super(element);
-		myPresentableText = presentatbleText;
-	}
+  public PerlItemPresentationSimple(PsiElement element, String presentatbleText) {
+    super(element);
+    myPresentableText = presentatbleText;
+  }
 
-	@Nullable
-	@Override
-	public String getPresentableText()
-	{
-		return myPresentableText;
-	}
+  @Nullable
+  @Override
+  public String getPresentableText() {
+    return myPresentableText;
+  }
 }

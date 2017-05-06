@@ -32,85 +32,73 @@ import java.io.IOException;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration> implements PsiElementProvider
-{
-	public PerlSubDeclarationStubElementType(String name)
-	{
-		super(name, PerlLanguage.INSTANCE);
-	}
+public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration>
+  implements PsiElementProvider {
+  public PerlSubDeclarationStubElementType(String name) {
+    super(name, PerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public PerlSubDeclaration createPsi(@NotNull PerlSubDeclarationStub stub)
-	{
-		return new PsiPerlSubDeclarationImpl(stub, this);
-	}
+  @Override
+  public PerlSubDeclaration createPsi(@NotNull PerlSubDeclarationStub stub) {
+    return new PsiPerlSubDeclarationImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlSubDeclarationImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlSubDeclarationImpl(node);
+  }
 
-	@Override
-	public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub)
-	{
-		return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
-	}
+  @Override
+  public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub) {
+    return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
+  }
 
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull PerlSubDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getSubName());
-		PerlSubAnnotations subAnnotations = stub.getAnnotations();
-		if (subAnnotations == null)
-		{
-			dataStream.writeBoolean(false);
-		}
-		else
-		{
-			dataStream.writeBoolean(true);
-			subAnnotations.serialize(dataStream);
-		}
-	}
+  @Override
+  public void serialize(@NotNull PerlSubDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getSubName());
+    PerlSubAnnotations subAnnotations = stub.getAnnotations();
+    if (subAnnotations == null) {
+      dataStream.writeBoolean(false);
+    }
+    else {
+      dataStream.writeBoolean(true);
+      subAnnotations.serialize(dataStream);
+    }
+  }
 
-	@NotNull
-	@Override
-	public PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		String packageName = dataStream.readName().toString();
-		String subName = dataStream.readName().toString();
-		PerlSubAnnotations annotations = null;
-		if (dataStream.readBoolean())
-		{
-			annotations = PerlSubAnnotations.deserialize(dataStream);
-		}
-		return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations, this);
-	}
+  @NotNull
+  @Override
+  public PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    String packageName = dataStream.readName().toString();
+    String subName = dataStream.readName().toString();
+    PerlSubAnnotations annotations = null;
+    if (dataStream.readBoolean()) {
+      annotations = PerlSubAnnotations.deserialize(dataStream);
+    }
+    return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations, this);
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink)
-	{
-		sink.occurrence(PerlSubDeclarationStubIndex.KEY, stub.getCanonicalName());
-		sink.occurrence(PerlSubDeclarationStubIndex.KEY, "*" + stub.getPackageName());
-	}
+  @Override
+  public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink) {
+    sink.occurrence(PerlSubDeclarationStubIndex.KEY, stub.getCanonicalName());
+    sink.occurrence(PerlSubDeclarationStubIndex.KEY, "*" + stub.getPackageName());
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof PerlSubDeclaration &&
-				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getPackageName()) &&
-				StringUtil.isNotEmpty(((PerlSubDeclaration) psi).getName())
-				;
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof PerlSubDeclaration &&
+           StringUtil.isNotEmpty(((PerlSubDeclaration)psi).getPackageName()) &&
+           StringUtil.isNotEmpty(((PerlSubDeclaration)psi).getName())
+      ;
+  }
 }

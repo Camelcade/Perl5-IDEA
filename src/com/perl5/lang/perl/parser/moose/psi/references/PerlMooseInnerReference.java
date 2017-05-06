@@ -40,89 +40,76 @@ import java.util.Set;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseInnerReference extends PerlCachingReference<PsiElement>
-{
+public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
 
-	public PerlMooseInnerReference(PsiElement psiElement)
-	{
-		super(psiElement);
-	}
+  public PerlMooseInnerReference(PsiElement psiElement) {
+    super(psiElement);
+  }
 
-	private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace)
-	{
-		return CachedValuesManager.getCachedValue(childNamespace,
-				() -> CachedValueProvider.Result.create(PerlPsiUtil.collectNamespaceMembers(childNamespace, PerlMooseAugmentStatementStub.class, PerlMooseAugmentStatement.class), childNamespace));
-	}
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    return myElement;
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		return myElement;
-	}
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    List<ResolveResult> result = new ArrayList<ResolveResult>();
+    PsiElement element = getElement();
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-		PsiElement element = getElement();
+    String subName = null;
+    PerlSubDefinitionBase subDefinitionBase = PsiTreeUtil.getParentOfType(element, PerlSubDefinitionBase.class);
 
-		String subName = null;
-		PerlSubDefinitionBase subDefinitionBase = PsiTreeUtil.getParentOfType(element, PerlSubDefinitionBase.class);
+    if (subDefinitionBase != null) {
+      subName = subDefinitionBase.getSubName();
+    }
 
-		if (subDefinitionBase != null)
-		{
-			subName = subDefinitionBase.getSubName();
-		}
+    PerlMooseAugmentStatement augmentStatement = PsiTreeUtil.getParentOfType(element, PerlMooseAugmentStatement.class);
 
-		PerlMooseAugmentStatement augmentStatement = PsiTreeUtil.getParentOfType(element, PerlMooseAugmentStatement.class);
+    if (augmentStatement != null) {
+      subName = augmentStatement.getSubName();
+    }
 
-		if (augmentStatement != null)
-		{
-			subName = augmentStatement.getSubName();
-		}
+    if (subName != null) {
+      PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+      Set<PerlNamespaceDefinition> recursionSet = new THashSet<PerlNamespaceDefinition>();
 
-		if (subName != null)
-		{
-			PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
-			Set<PerlNamespaceDefinition> recursionSet = new THashSet<PerlNamespaceDefinition>();
+      if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null) {
+        collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);
+      }
+    }
 
-			if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null)
-			{
-				collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);
-			}
-		}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+  protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
+                                                      @NotNull String subName,
+                                                      Set<PerlNamespaceDefinition> recursionSet,
+                                                      List<ResolveResult> result) {
+    recursionSet.add(namespaceDefinition);
 
-	protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
-														@NotNull String subName,
-														Set<PerlNamespaceDefinition> recursionSet,
-														List<ResolveResult> result)
-	{
-		recursionSet.add(namespaceDefinition);
+    for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
+      if (!recursionSet.contains(childNamespace)) {
+        boolean noSubclasses = false;
 
-		for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions())
-		{
-			if (!recursionSet.contains(childNamespace))
-			{
-				boolean noSubclasses = false;
+        for (PsiElement augmentStatement : getAugmentStatements(childNamespace)) {
+          if (subName.equals(((PerlMooseAugmentStatement)augmentStatement).getSubName())) {
+            result.add(new PsiElementResolveResult(augmentStatement));
+            noSubclasses = true;
+          }
+        }
 
-				for (PsiElement augmentStatement : getAugmentStatements(childNamespace))
-				{
-					if (subName.equals(((PerlMooseAugmentStatement) augmentStatement).getSubName()))
-					{
-						result.add(new PsiElementResolveResult(augmentStatement));
-						noSubclasses = true;
-					}
-				}
+        if (!noSubclasses) {
+          collectNamespaceMethodsAugmentations(childNamespace, subName, recursionSet, result);
+        }
+      }
+    }
+  }
 
-				if (!noSubclasses)
-				{
-					collectNamespaceMethodsAugmentations(childNamespace, subName, recursionSet, result);
-				}
-			}
-		}
-	}
-
+  private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace) {
+    return CachedValuesManager.getCachedValue(childNamespace,
+                                              () -> CachedValueProvider.Result.create(PerlPsiUtil.collectNamespaceMembers(childNamespace,
+                                                                                                                          PerlMooseAugmentStatementStub.class,
+                                                                                                                          PerlMooseAugmentStatement.class),
+                                                                                      childNamespace));
+  }
 }

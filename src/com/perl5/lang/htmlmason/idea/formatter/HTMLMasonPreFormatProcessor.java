@@ -24,11 +24,9 @@ import com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor;
 /**
  * Created by hurricup on 07.03.2016.
  */
-public class HTMLMasonPreFormatProcessor extends PerlPreFormatProcessor
-{
-	@Override
-	protected boolean canProcess(PsiElement element, TextRange range)
-	{
-		return element.getLanguage().is(HTMLMasonLanguage.INSTANCE);
-	}
+public class HTMLMasonPreFormatProcessor extends PerlPreFormatProcessor {
+  @Override
+  protected boolean canProcess(PsiElement element, TextRange range) {
+    return element.getLanguage().is(HTMLMasonLanguage.INSTANCE);
+  }
 }

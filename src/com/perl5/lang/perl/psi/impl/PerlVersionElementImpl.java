@@ -23,24 +23,20 @@ import com.perl5.lang.perl.psi.PerlVersionElement;
 /**
  * Created by hurricup on 09.09.2015.
  */
-public class PerlVersionElementImpl extends PerlLeafPsiElement implements PerlVersionElement
-{
-	protected PerlVersion myPerlVersion;
+public class PerlVersionElementImpl extends PerlLeafPsiElement implements PerlVersionElement {
+  protected PerlVersion myPerlVersion;
 
-	public PerlVersionElementImpl(IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+  public PerlVersionElementImpl(IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public PerlVersion getPerlVersion()
-	{
-		if (myPerlVersion == null)
-		{
-			myPerlVersion = new PerlVersion(getText());
-		}
+  @Override
+  public PerlVersion getPerlVersion() {
+    if (myPerlVersion == null) {
+      myPerlVersion = new PerlVersion(getText());
+    }
 
-		return myPerlVersion;
-	}
+    return myPerlVersion;
+  }
 }
 

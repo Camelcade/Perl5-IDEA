@@ -23,13 +23,11 @@ import java.util.List;
 /**
  * Created by hurricup on 26.11.2015.
  */
-public interface PerlRuntimeParentsProvider
-{
-	/**
-	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
-	 *
-	 * @param currentList current parents list
-	 */
-	void changeParentsList(@NotNull List<String> currentList);
-
+public interface PerlRuntimeParentsProvider {
+  /**
+   * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
+   *
+   * @param currentList current parents list
+   */
+  void changeParentsList(@NotNull List<String> currentList);
 }

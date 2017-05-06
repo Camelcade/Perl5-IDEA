@@ -23,11 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousFileTypeFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
-	{
-		fileTypeConsumer.consume(MojoliciousFileType.INSTANCE, "ep");
-	}
+public class MojoliciousFileTypeFactory extends FileTypeFactory {
+  @Override
+  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+    fileTypeConsumer.consume(MojoliciousFileType.INSTANCE, "ep");
+  }
 }

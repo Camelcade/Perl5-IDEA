@@ -29,23 +29,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionStubElementType implements PsiElementProvider
-{
-	public MasonMethodDefinitionStubElementType(String name)
-	{
-		super(name, Mason2TemplatingLanguage.INSTANCE);
-	}
+public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionStubElementType implements PsiElementProvider {
+  public MasonMethodDefinitionStubElementType(String name) {
+    super(name, Mason2TemplatingLanguage.INSTANCE);
+  }
 
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new MasonMethodDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new MasonMethodDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonMethodDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonMethodDefinitionImpl(node);
+  }
 }

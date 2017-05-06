@@ -27,34 +27,29 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
  * Created by evstigneev on 16.11.2015.
  * Converts $var->{key} to $$var{key}
  */
-public class PerlFormattingScalarDerefCollapse implements PerlFormattingOperation
-{
-	protected final PsiPerlScalarVariable myScalarElement;
-	protected final PsiElement myIndexElement;
+public class PerlFormattingScalarDerefCollapse implements PerlFormattingOperation {
+  protected final PsiPerlScalarVariable myScalarElement;
+  protected final PsiElement myIndexElement;
 
-	public PerlFormattingScalarDerefCollapse(PsiPerlScalarVariable scalarElement, PsiElement indexElement)
-	{
-		myScalarElement = scalarElement;
-		myIndexElement = indexElement;
-	}
+  public PerlFormattingScalarDerefCollapse(PsiPerlScalarVariable scalarElement, PsiElement indexElement) {
+    myScalarElement = scalarElement;
+    myIndexElement = indexElement;
+  }
 
-	@Override
-	public int apply()
-	{
-		int delta = 0;
+  @Override
+  public int apply() {
+    int delta = 0;
 
-		if (myScalarElement.isValid() && myIndexElement.isValid())
-		{
-			String newCode = "$" + myScalarElement.getNode().getText() + myIndexElement.getNode().getText() + ";";
-			PerlFileImpl newFile = PerlElementFactory.createFile(myScalarElement.getProject(), newCode);
-			PsiPerlStatement statement = PsiTreeUtil.findChildOfType(newFile, PsiPerlStatement.class);
+    if (myScalarElement.isValid() && myIndexElement.isValid()) {
+      String newCode = "$" + myScalarElement.getNode().getText() + myIndexElement.getNode().getText() + ";";
+      PerlFileImpl newFile = PerlElementFactory.createFile(myScalarElement.getProject(), newCode);
+      PsiPerlStatement statement = PsiTreeUtil.findChildOfType(newFile, PsiPerlStatement.class);
 
-			if (statement != null)
-			{
-				delta = new PerlFormattingReplace(myScalarElement, myIndexElement, statement.getFirstChild(), statement.getFirstChild()).apply();
-			}
-		}
+      if (statement != null) {
+        delta = new PerlFormattingReplace(myScalarElement, myIndexElement, statement.getFirstChild(), statement.getFirstChild()).apply();
+      }
+    }
 
-		return delta;
-	}
+    return delta;
+  }
 }

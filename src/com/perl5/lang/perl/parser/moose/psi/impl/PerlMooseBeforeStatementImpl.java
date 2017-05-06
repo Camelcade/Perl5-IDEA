@@ -22,10 +22,8 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseBeforeStatement;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseBeforeStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseBeforeStatement
-{
-	public PerlMooseBeforeStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseBeforeStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseBeforeStatement {
+  public PerlMooseBeforeStatementImpl(ASTNode node) {
+    super(node);
+  }
 }

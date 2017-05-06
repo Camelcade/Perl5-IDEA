@@ -24,31 +24,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.05.2016.
  */
-public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEventBase implements PerlDebuggingEventBreakpoint
-{
-	private String path;
-	private int line;
+public abstract class PerlDebuggingEventBreakpointBase extends PerlDebuggingEventBase implements PerlDebuggingEventBreakpoint {
+  private String path;
+  private int line;
 
-	@Override
-	public void run()
-	{
-		XDebugSession session = getDebugSession();
-		XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
-		if (breakpoint != null)
-		{
-			processBreakPoint(breakpoint, session);
-		}
-	}
+  @Override
+  public void run() {
+    XDebugSession session = getDebugSession();
+    XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
+    if (breakpoint != null) {
+      processBreakPoint(breakpoint, session);
+    }
+  }
 
-	protected abstract void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session);
+  protected abstract void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session);
 
-	public String getPath()
-	{
-		return path;
-	}
+  public String getPath() {
+    return path;
+  }
 
-	public int getLine()
-	{
-		return line;
-	}
+  public int getLine() {
+    return line;
+  }
 }

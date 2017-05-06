@@ -26,20 +26,17 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.03.2016.
  */
-public class HTMLMasonFlagsStatementStubImpl extends StubBase<HTMLMasonFlagsStatement> implements HTMLMasonFlagsStatementStub
-{
-	final String myParentComponentPath;
+public class HTMLMasonFlagsStatementStubImpl extends StubBase<HTMLMasonFlagsStatement> implements HTMLMasonFlagsStatementStub {
+  final String myParentComponentPath;
 
-	public HTMLMasonFlagsStatementStubImpl(StubElement parent, IStubElementType elementType, @Nullable String parentComponentPath)
-	{
-		super(parent, elementType);
-		myParentComponentPath = parentComponentPath;
-	}
+  public HTMLMasonFlagsStatementStubImpl(StubElement parent, IStubElementType elementType, @Nullable String parentComponentPath) {
+    super(parent, elementType);
+    myParentComponentPath = parentComponentPath;
+  }
 
-	@Nullable
-	@Override
-	public String getParentComponentPath()
-	{
-		return myParentComponentPath;
-	}
+  @Nullable
+  @Override
+  public String getParentComponentPath() {
+    return myParentComponentPath;
+  }
 }

@@ -28,25 +28,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlSubMultipleDeclarationsInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o)
-			{
-				Project project = o.getProject();
-				String canonicalName = o.getCanonicalName();
+public class PerlSubMultipleDeclarationsInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
+        Project project = o.getProject();
+        String canonicalName = o.getCanonicalName();
 
-				if (PerlSubUtil.getSubDeclarations(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
-				{
-					registerProblem(holder, o.getNameIdentifier(), "Multiple subs declarations found");
-				}
-			}
-		};
-	}
+        if (PerlSubUtil.getSubDeclarations(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1) {
+          registerProblem(holder, o.getNameIdentifier(), "Multiple subs declarations found");
+        }
+      }
+    };
+  }
 }

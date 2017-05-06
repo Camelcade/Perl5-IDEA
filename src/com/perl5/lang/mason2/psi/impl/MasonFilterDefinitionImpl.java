@@ -30,33 +30,29 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl implements MasonFilterDefinition
-{
-	protected static final String YIELD_VARIABLE_NAME = "$yield";
+public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl implements MasonFilterDefinition {
+  protected static final String YIELD_VARIABLE_NAME = "$yield";
 
-	public MasonFilterDefinitionImpl(ASTNode node)
-	{
-		super(node);
-	}
+  public MasonFilterDefinitionImpl(ASTNode node) {
+    super(node);
+  }
 
-	public MasonFilterDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public MasonFilterDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@NotNull
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
-		newImplicitVariables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				YIELD_VARIABLE_NAME,
-				true,
-				false,
-				false,
-				this
-		));
-		return newImplicitVariables;
-	}
+  @NotNull
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
+    newImplicitVariables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      YIELD_VARIABLE_NAME,
+      true,
+      false,
+      false,
+      this
+    ));
+    return newImplicitVariables;
+  }
 }

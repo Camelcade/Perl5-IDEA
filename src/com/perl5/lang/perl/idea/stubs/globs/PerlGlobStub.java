@@ -22,11 +22,10 @@ import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable>
-{
-	public String getPackageName();
+public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable> {
+  public String getPackageName();
 
-	public String getName();
+  public String getName();
 
-	public boolean isLeftSideOfAssignment();
+  public boolean isLeftSideOfAssignment();
 }

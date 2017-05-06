@@ -22,12 +22,11 @@ import com.perl5.lang.pod.parser.psi.PodTitledSection;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionStub extends StubElement<PodTitledSection>
-{
-	/**
-	 * returns string from stub
-	 *
-	 * @return content
-	 */
-	String getTitleText();
+public interface PodSectionStub extends StubElement<PodTitledSection> {
+  /**
+   * returns string from stub
+   *
+   * @return content
+   */
+  String getTitleText();
 }

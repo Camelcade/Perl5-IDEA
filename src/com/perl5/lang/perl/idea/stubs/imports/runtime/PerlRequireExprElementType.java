@@ -25,23 +25,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public class PerlRequireExprElementType extends PerlDoExprElementType
-{
-	public PerlRequireExprElementType(@NotNull String debugName)
-	{
-		super(debugName);
-	}
+public class PerlRequireExprElementType extends PerlDoExprElementType {
+  public PerlRequireExprElementType(@NotNull String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlRequireExprImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlRequireExprImpl(node);
+  }
 
-	@Override
-	public PerlDoExpr createPsi(@NotNull PerlRuntimeImportStub stub)
-	{
-		return new PsiPerlRequireExprImpl(stub, this);
-	}
+  @Override
+  public PerlDoExpr createPsi(@NotNull PerlRuntimeImportStub stub) {
+    return new PsiPerlRequireExprImpl(stub, this);
+  }
 }

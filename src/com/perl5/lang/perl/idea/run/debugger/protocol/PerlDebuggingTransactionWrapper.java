@@ -19,19 +19,16 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 11.05.2016.
  */
-public class PerlDebuggingTransactionWrapper
-{
-	private final int id;
-	private final Object data;
+public class PerlDebuggingTransactionWrapper {
+  private final int id;
+  private final Object data;
 
-	public PerlDebuggingTransactionWrapper(int transactionId, Object data)
-	{
-		this.id = transactionId;
-		this.data = data;
-	}
+  public PerlDebuggingTransactionWrapper(int transactionId, Object data) {
+    this.id = transactionId;
+    this.data = data;
+  }
 
-	public int getTransactionId()
-	{
-		return id;
-	}
+  public int getTransactionId() {
+    return id;
+  }
 }

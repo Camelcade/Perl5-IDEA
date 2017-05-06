@@ -29,28 +29,23 @@ import java.util.List;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseHasStatementImpl extends PsiPerlStatementImpl implements PerlMooseHasStatement
-{
-	public PerlMooseHasStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseHasStatementImpl extends PsiPerlStatementImpl implements PerlMooseHasStatement {
+  public PerlMooseHasStatementImpl(ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		return Collections.emptyList();
-	}
+  @NotNull
+  @Override
+  public List<PerlAnnotation> getAnnotationList() {
+    return Collections.emptyList();
+  }
 
 
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		for (PerlMooseAttributeImpl mooseAttribute : PsiTreeUtil.findChildrenOfType(this, PerlMooseAttributeImpl.class))
-		{
-			mooseAttribute.subtreeChanged();
-		}
-	}
+  @Override
+  public void subtreeChanged() {
+    super.subtreeChanged();
+    for (PerlMooseAttributeImpl mooseAttribute : PsiTreeUtil.findChildrenOfType(this, PerlMooseAttributeImpl.class)) {
+      mooseAttribute.subtreeChanged();
+    }
+  }
 }

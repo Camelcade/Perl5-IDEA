@@ -20,6 +20,5 @@ package com.perl5.lang.perl.extensions.packageprocessor;
  * Created by hurricup on 25.08.2015.
  * Marks that this package modifies utf bits of $^H
  */
-public interface PerlUtfProvider extends PerlStrictProvider
-{
+public interface PerlUtfProvider extends PerlStrictProvider {
 }

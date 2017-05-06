@@ -25,14 +25,14 @@ import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public interface EmbeddedPerlElementTypes extends PerlElementTypes
-{
-	IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("EMBED_TEMPLATE_BLOCK_HTML");
-	IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE");
-	IElementType EMBED_HTML_TEMPLATE_DATA = new TemplateDataElementType("EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML, EMBED_OUTER_ELEMENT_TYPE);
-	IElementType EMBED_POD_TEMPLATE_DATA = new PodTemplatingElementType("EMBED_POD_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE);
+public interface EmbeddedPerlElementTypes extends PerlElementTypes {
+  IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTokenType("EMBED_TEMPLATE_BLOCK_HTML");
+  IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE");
+  IElementType EMBED_HTML_TEMPLATE_DATA =
+    new TemplateDataElementType("EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML,
+                                EMBED_OUTER_ELEMENT_TYPE);
+  IElementType EMBED_POD_TEMPLATE_DATA = new PodTemplatingElementType("EMBED_POD_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE);
 
-	IElementType EMBED_MARKER_OPEN = new EmbeddedPerlTokenType("EMBED_MARKER_OPEN");
-	IElementType EMBED_MARKER_CLOSE = new EmbeddedPerlTokenType("EMBED_MARKER_CLOSE");
-
+  IElementType EMBED_MARKER_OPEN = new EmbeddedPerlTokenType("EMBED_MARKER_OPEN");
+  IElementType EMBED_MARKER_CLOSE = new EmbeddedPerlTokenType("EMBED_MARKER_CLOSE");
 }

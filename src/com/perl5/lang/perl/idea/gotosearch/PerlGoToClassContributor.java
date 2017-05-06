@@ -33,39 +33,34 @@ import java.util.Collection;
 /**
  * GoToClassContributor looks up namespaces (packages names) - windows shortcut Ctrl+N
  */
-public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor
-{
-	@Nullable
-	@Override
-	public String getQualifiedName(NavigationItem navigationItem)
-	{
-		return navigationItem.getName();
-	}
+public class PerlGoToClassContributor implements ChooseByNameContributor, GotoClassContributor {
+  @Nullable
+  @Override
+  public String getQualifiedName(NavigationItem navigationItem) {
+    return navigationItem.getName();
+  }
 
-	@Nullable
-	@Override
-	public String getQualifiedNameSeparator()
-	{
-		return PerlPackageUtil.PACKAGE_SEPARATOR;
-	}
+  @Nullable
+  @Override
+  public String getQualifiedNameSeparator() {
+    return PerlPackageUtil.PACKAGE_SEPARATOR;
+  }
 
-	@NotNull
-	@Override
-	public String[] getNames(Project project, boolean b)
-	{
-		return ArrayUtil.toStringArray(PerlPackageUtil.getDefinedPackageNames(project));
-	}
+  @NotNull
+  @Override
+  public String[] getNames(Project project, boolean b) {
+    return ArrayUtil.toStringArray(PerlPackageUtil.getDefinedPackageNames(project));
+  }
 
-	@NotNull
-	@Override
-	public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems)
-	{
-		Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(
-				project,
-				packageName,
-				(includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
-		);
-		//noinspection SuspiciousToArrayCall
-		return result.toArray(new NavigationItem[result.size()]);
-	}
+  @NotNull
+  @Override
+  public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
+    Collection<PerlNamespaceDefinition> result = PerlPackageUtil.getNamespaceDefinitions(
+      project,
+      packageName,
+      (includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
+    );
+    //noinspection SuspiciousToArrayCall
+    return result.toArray(new NavigationItem[result.size()]);
+  }
 }

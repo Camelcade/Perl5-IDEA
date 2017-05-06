@@ -21,36 +21,35 @@ import com.intellij.execution.ExecutionException;
 /**
  * Created by hurricup on 18.05.2016.
  */
-public interface PerlDebugOptions
-{
-	String ROLE_SERVER = "server";
-	String ROLE_CLIENT = "client";
+public interface PerlDebugOptions {
+  String ROLE_SERVER = "server";
+  String ROLE_CLIENT = "client";
 
-	String getDebugHost();
+  String getDebugHost();
 
-	int getDebugPort() throws ExecutionException;
+  int getDebugPort() throws ExecutionException;
 
-	String getRemoteProjectRoot();
+  String getRemoteProjectRoot();
 
-	String getStartMode();
+  String getStartMode();
 
-	void setStartMode(String startMode);
+  void setStartMode(String startMode);
 
-	String getScriptCharset();
+  String getScriptCharset();
 
-	void setScriptCharset(String charset);
+  void setScriptCharset(String charset);
 
-	String getPerlRole();
+  String getPerlRole();
 
-	boolean isNonInteractiveModeEnabled();
+  boolean isNonInteractiveModeEnabled();
 
-	void setNonInteractiveModeEnabled(boolean isEnabled);
+  void setNonInteractiveModeEnabled(boolean isEnabled);
 
-	boolean isCompileTimeBreakpointsEnabled();
+  boolean isCompileTimeBreakpointsEnabled();
 
-	void setCompileTimeBreakpointsEnabled(boolean isEnabled);
+  void setCompileTimeBreakpointsEnabled(boolean isEnabled);
 
-	String getInitCode();
+  String getInitCode();
 
-	void setInitCode(String code);
+  void setInitCode(String code);
 }

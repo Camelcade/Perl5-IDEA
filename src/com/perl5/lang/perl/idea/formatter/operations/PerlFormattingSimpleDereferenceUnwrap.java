@@ -25,38 +25,32 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 /**
  * Created by evstigneev on 17.11.2015.
  */
-public class PerlFormattingSimpleDereferenceUnwrap implements PerlFormattingOperation
-{
-	protected final PerlCastExpression myCastElement;
-	protected final PsiPerlScalarVariable myVariableElement;
+public class PerlFormattingSimpleDereferenceUnwrap implements PerlFormattingOperation {
+  protected final PerlCastExpression myCastElement;
+  protected final PsiPerlScalarVariable myVariableElement;
 
-	public PerlFormattingSimpleDereferenceUnwrap(PerlCastExpression myCastElement, PsiPerlScalarVariable myVariableElement)
-	{
-		this.myCastElement = myCastElement;
-		this.myVariableElement = myVariableElement;
-	}
+  public PerlFormattingSimpleDereferenceUnwrap(PerlCastExpression myCastElement, PsiPerlScalarVariable myVariableElement) {
+    this.myCastElement = myCastElement;
+    this.myVariableElement = myVariableElement;
+  }
 
-	@Override
-	public int apply()
-	{
-		int delta = 0;
+  @Override
+  public int apply() {
+    int delta = 0;
 
-		if (myCastElement.isValid() && myVariableElement.isValid())
-		{
-			String newCode = getCode();
-			PerlFileImpl newFile = PerlElementFactory.createFile(myCastElement.getProject(), newCode);
-			PerlCastExpression newCastExpression = PsiTreeUtil.findChildOfType(newFile, PerlCastExpression.class);
-			if (newCastExpression != null)
-			{
-				delta = new PerlFormattingReplace(myCastElement, newCastExpression).apply();
-			}
-		}
+    if (myCastElement.isValid() && myVariableElement.isValid()) {
+      String newCode = getCode();
+      PerlFileImpl newFile = PerlElementFactory.createFile(myCastElement.getProject(), newCode);
+      PerlCastExpression newCastExpression = PsiTreeUtil.findChildOfType(newFile, PerlCastExpression.class);
+      if (newCastExpression != null) {
+        delta = new PerlFormattingReplace(myCastElement, newCastExpression).apply();
+      }
+    }
 
-		return delta;
-	}
+    return delta;
+  }
 
-	protected String getCode()
-	{
-		return myCastElement.getFirstChild().getNode().getText() + myVariableElement.getNode().getText();
-	}
+  protected String getCode() {
+    return myCastElement.getFirstChild().getNode().getText() + myVariableElement.getNode().getText();
+  }
 }

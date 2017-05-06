@@ -32,51 +32,44 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider
-{
-	public MojoliciousHelperElementType(String name)
-	{
-		super(name);
-	}
+public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider {
+  public MojoliciousHelperElementType(String name) {
+    super(name);
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new MojoliciousHelperDeclarationImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new MojoliciousHelperDeclarationImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MojoliciousHelperDeclarationImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MojoliciousHelperDeclarationImpl(node);
+  }
 
-	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
-	{
-		//noinspection unchecked
-		return new MojoliciousHelperDeclarationStubImpl(
-				parentStub,
-				psi.getPackageName(),
-				psi.getSubName(),
-				psi.getSubArgumentsList(),
-				psi.getAnnotations(),
-				this
-		);
-	}
+  @Override
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+    //noinspection unchecked
+    return new MojoliciousHelperDeclarationStubImpl(
+      parentStub,
+      psi.getPackageName(),
+      psi.getSubName(),
+      psi.getSubArgumentsList(),
+      psi.getAnnotations(),
+      this
+    );
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
-	{
-		super.indexStub(stub, sink);
-		sink.occurrence(MojoliciousHelpersStubIndex.KEY, stub.getSubName());
-	}
+  @Override
+  public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
+    super.indexStub(stub, sink);
+    sink.occurrence(MojoliciousHelpersStubIndex.KEY, stub.getSubName());
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof MojoliciousHelperDeclaration && StringUtil.isNotEmpty(((MojoliciousHelperDeclaration) psi).getName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof MojoliciousHelperDeclaration && StringUtil.isNotEmpty(((MojoliciousHelperDeclaration)psi).getName());
+  }
 }

@@ -21,7 +21,6 @@ import com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStub;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDeclaration extends PerlSubBase<PerlSubDeclarationStub>
-{
+public interface PerlSubDeclaration extends PerlSubBase<PerlSubDeclarationStub> {
 
 }

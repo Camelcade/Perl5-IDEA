@@ -29,90 +29,79 @@ import java.util.Map;
 /**
  * Created by hurricup on 27.02.2016.
  */
-public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin>
-{
-	private Map<Integer, Integer> offsetsMap;
+public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin> {
+  private Map<Integer, Integer> offsetsMap;
 
-	public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host)
-	{
-		super(host);
-	}
+  public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host) {
+    super(host);
+  }
 
-	@Override
-	public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars)
-	{
-		PsiElement openQuoteElement = myHost.getOpeningQuote();
-		char openQuote = openQuoteElement.getText().charAt(0);
-		char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
-		offsetsMap = new HashMap<Integer, Integer>();
-		CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
-		Integer sourceOffset = 0;
-		Integer targetOffset = 0;
-		Integer sourceLength = sourceText.length();
-		boolean isEscaped = false;
+  @Override
+  public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    PsiElement openQuoteElement = myHost.getOpeningQuote();
+    char openQuote = openQuoteElement.getText().charAt(0);
+    char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
+    offsetsMap = new HashMap<Integer, Integer>();
+    CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
+    Integer sourceOffset = 0;
+    Integer targetOffset = 0;
+    Integer sourceLength = sourceText.length();
+    boolean isEscaped = false;
 
-		while (sourceOffset < sourceLength)
-		{
-			char currentChar = sourceText.charAt(sourceOffset);
+    while (sourceOffset < sourceLength) {
+      char currentChar = sourceText.charAt(sourceOffset);
 
-			if (isEscaped)
-			{
-				if (currentChar != openQuote && currentChar != closeQuote)
-				{
-					assert sourceOffset > 0;
-					outChars.append('\\');
-					offsetsMap.put(targetOffset++, sourceOffset - 1);
-				}
-				outChars.append(currentChar);
-				offsetsMap.put(targetOffset++, sourceOffset);
-				isEscaped = false;
-			}
-			else if (currentChar == '\\')
-			{
-				isEscaped = true;
-			}
-			else
-			{
-				outChars.append(currentChar);
-				offsetsMap.put(targetOffset++, sourceOffset);
-			}
+      if (isEscaped) {
+        if (currentChar != openQuote && currentChar != closeQuote) {
+          assert sourceOffset > 0;
+          outChars.append('\\');
+          offsetsMap.put(targetOffset++, sourceOffset - 1);
+        }
+        outChars.append(currentChar);
+        offsetsMap.put(targetOffset++, sourceOffset);
+        isEscaped = false;
+      }
+      else if (currentChar == '\\') {
+        isEscaped = true;
+      }
+      else {
+        outChars.append(currentChar);
+        offsetsMap.put(targetOffset++, sourceOffset);
+      }
 
-			sourceOffset++;
-		}
-		if (isEscaped) // end with escape, not sure if possible
-		{
-			assert sourceOffset > 0;
-			outChars.append('\\');
-			offsetsMap.put(targetOffset++, sourceOffset - 1);
-		}
+      sourceOffset++;
+    }
+    if (isEscaped) // end with escape, not sure if possible
+    {
+      assert sourceOffset > 0;
+      outChars.append('\\');
+      offsetsMap.put(targetOffset++, sourceOffset - 1);
+    }
 
-		offsetsMap.put(targetOffset, sourceOffset);    // end marker
+    offsetsMap.put(targetOffset, sourceOffset);    // end marker
 
-		return true;
-	}
+    return true;
+  }
 
 
-	@Override
-	public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
-	{
-		Integer offsetInEncoded = offsetsMap.get(offsetInDecoded);
-		assert offsetInEncoded != null : "Missing offset: " + offsetInDecoded +
-				"; text: " + rangeInsideHost.subSequence(myHost.getText()) +
-				"; range in host " + rangeInsideHost;
+  @Override
+  public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost) {
+    Integer offsetInEncoded = offsetsMap.get(offsetInDecoded);
+    assert offsetInEncoded != null : "Missing offset: " + offsetInDecoded +
+                                     "; text: " + rangeInsideHost.subSequence(myHost.getText()) +
+                                     "; range in host " + rangeInsideHost;
 
-		return offsetInEncoded + rangeInsideHost.getStartOffset();
-	}
+    return offsetInEncoded + rangeInsideHost.getStartOffset();
+  }
 
-	@Override
-	public boolean isOneLine()
-	{
-		return false;
-	}
+  @Override
+  public boolean isOneLine() {
+    return false;
+  }
 
-	@NotNull
-	@Override
-	public TextRange getRelevantTextRange()
-	{
-		return myHost.getContentTextRangeInParent();
-	}
+  @NotNull
+  @Override
+  public TextRange getRelevantTextRange() {
+    return myHost.getContentTextRangeInParent();
+  }
 }

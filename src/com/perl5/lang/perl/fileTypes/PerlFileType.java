@@ -22,25 +22,20 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public abstract class PerlFileType extends PerlPluginBaseFileType
-{
-	public PerlFileType()
-	{
-		this(PerlLanguage.INSTANCE);
-	}
+public abstract class PerlFileType extends PerlPluginBaseFileType {
+  public PerlFileType() {
+    this(PerlLanguage.INSTANCE);
+  }
 
-	public PerlFileType(Language language)
-	{
-		super(language);
-	}
+  public PerlFileType(Language language) {
+    super(language);
+  }
 
-	public boolean checkStrictPragma()
-	{
-		return true;
-	}
+  public boolean checkStrictPragma() {
+    return true;
+  }
 
-	public boolean checkWarningsPragma()
-	{
-		return true;
-	}
+  public boolean checkWarningsPragma() {
+    return true;
+  }
 }

@@ -25,16 +25,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 23.01.2016.
  */
-public class ClassAccessorElementDescriptionProvider implements ElementDescriptionProvider
-{
-	@Nullable
-	@Override
-	public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location)
-	{
-		if (element instanceof PerlClassAccessorDeclaration)
-		{
-			return "Accessor";
-		}
-		return null;
-	}
+public class ClassAccessorElementDescriptionProvider implements ElementDescriptionProvider {
+  @Nullable
+  @Override
+  public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
+    if (element instanceof PerlClassAccessorDeclaration) {
+      return "Accessor";
+    }
+    return null;
+  }
 }

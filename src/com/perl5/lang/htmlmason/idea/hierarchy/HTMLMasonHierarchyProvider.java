@@ -29,35 +29,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonHierarchyProvider extends PerlPackageHierarchyProvider
-{
-	@Override
-	protected Language getLanguage()
-	{
-		return HTMLMasonLanguage.INSTANCE;
-	}
+public class HTMLMasonHierarchyProvider extends PerlPackageHierarchyProvider {
+  @Override
+  protected Language getLanguage() {
+    return HTMLMasonLanguage.INSTANCE;
+  }
 
-	@Override
-	protected PsiElement adjustTargetElement(PsiElement element)
-	{
-		if (element != null && !(element instanceof HTMLMasonFileImpl))
-		{
-			return element.getContainingFile();
-		}
+  @Override
+  protected PsiElement adjustTargetElement(PsiElement element) {
+    if (element != null && !(element instanceof HTMLMasonFileImpl)) {
+      return element.getContainingFile();
+    }
 
-		return element;
-	}
+    return element;
+  }
 
-	@NotNull
-	@Override
-	public HierarchyBrowser createHierarchyBrowser(PsiElement target)
-	{
-		return new HTMLMasonHierarchyBrowser(target);
-	}
+  @NotNull
+  @Override
+  public HierarchyBrowser createHierarchyBrowser(PsiElement target) {
+    return new HTMLMasonHierarchyBrowser(target);
+  }
 
-	@Override
-	public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser)
-	{
-		((PerlHierarchyBrowser) hierarchyBrowser).changeView(TypeHierarchyBrowserBase.TYPE_HIERARCHY_TYPE);
-	}
+  @Override
+  public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser) {
+    ((PerlHierarchyBrowser)hierarchyBrowser).changeView(TypeHierarchyBrowserBase.TYPE_HIERARCHY_TYPE);
+  }
 }

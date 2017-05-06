@@ -28,62 +28,52 @@ import javax.swing.*;
  * Created by hurricup on 11.04.2016.
  * https://github.com/consulo/consulo-csharp/blob/255e7ce81b7e5e9bee1a8a9c151f1854265e4259/csharp-impl/src/org/mustbe/consulo/csharp/ide/findUsage/groupingRule/CSharpBaseGroupingRule.java
  */
-public class PerlUsageGroupRule implements UsageGroup
-{
-	@Nullable
-	@Override
-	public Icon getIcon(boolean isOpen)
-	{
-		return null;
-	}
+public class PerlUsageGroupRule implements UsageGroup {
+  @Nullable
+  @Override
+  public Icon getIcon(boolean isOpen) {
+    return null;
+  }
 
-	@NotNull
-	@Override
-	public String getText(@Nullable UsageView view)
-	{
-		return null;
-	}
+  @NotNull
+  @Override
+  public String getText(@Nullable UsageView view) {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public FileStatus getFileStatus()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public FileStatus getFileStatus() {
+    return null;
+  }
 
-	@Override
-	public boolean isValid()
-	{
-		return false;
-	}
+  @Override
+  public boolean isValid() {
+    return false;
+  }
 
-	@Override
-	public void update()
-	{
+  @Override
+  public void update() {
 
-	}
+  }
 
-	@Override
-	public int compareTo(UsageGroup o)
-	{
-		return 0;
-	}
+  @Override
+  public int compareTo(UsageGroup o) {
+    return 0;
+  }
 
-	@Override
-	public void navigate(boolean requestFocus)
-	{
+  @Override
+  public void navigate(boolean requestFocus) {
 
-	}
+  }
 
-	@Override
-	public boolean canNavigate()
-	{
-		return false;
-	}
+  @Override
+  public boolean canNavigate() {
+    return false;
+  }
 
-	@Override
-	public boolean canNavigateToSource()
-	{
-		return false;
-	}
+  @Override
+  public boolean canNavigateToSource() {
+    return false;
+  }
 }

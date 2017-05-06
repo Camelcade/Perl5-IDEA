@@ -24,22 +24,18 @@ import com.perl5.lang.tt2.parser.TemplateToolkitParserUtil;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler implements TemplateToolkitElementTypes
-{
-	public TemplateToolkitQuoteHandler()
-	{
-		super(TemplateToolkitParserUtil.OPEN_QUOTES);
-	}
+public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler implements TemplateToolkitElementTypes {
+  public TemplateToolkitQuoteHandler() {
+    super(TemplateToolkitParserUtil.OPEN_QUOTES);
+  }
 
-	@Override
-	public boolean isClosingQuote(HighlighterIterator iterator, int offset)
-	{
-		return TemplateToolkitParserUtil.CLOSE_QUOTES.contains(iterator.getTokenType());
-	}
+  @Override
+  public boolean isClosingQuote(HighlighterIterator iterator, int offset) {
+    return TemplateToolkitParserUtil.CLOSE_QUOTES.contains(iterator.getTokenType());
+  }
 
-	@Override
-	public boolean isOpeningQuote(HighlighterIterator iterator, int offset)
-	{
-		return TemplateToolkitParserUtil.OPEN_QUOTES.contains(iterator.getTokenType());
-	}
+  @Override
+  public boolean isOpeningQuote(HighlighterIterator iterator, int offset) {
+    return TemplateToolkitParserUtil.OPEN_QUOTES.contains(iterator.getTokenType());
+  }
 }

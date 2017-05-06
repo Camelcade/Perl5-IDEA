@@ -35,32 +35,25 @@ import static com.perl5.lang.perl.parser.moose.MooseElementTypes.RESERVED_SUPER;
 /**
  * Created by hurricup on 07.11.2016.
  */
-public class PerlSubReferenceProvider extends PsiReferenceProvider
-{
-	@NotNull
-	@Override
-	public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-	{
-		if (element.getParent() instanceof PerlSubBase)
-		{
-			return PsiReference.EMPTY_ARRAY;
-		}
+public class PerlSubReferenceProvider extends PsiReferenceProvider {
+  @NotNull
+  @Override
+  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+    if (element.getParent() instanceof PerlSubBase) {
+      return PsiReference.EMPTY_ARRAY;
+    }
 
-		IElementType elementType = PsiUtilCore.getElementType(element);
-		if (elementType == SUB_NAME)
-		{
-			return new PsiReference[]{new PerlSubReference(element)};
-		}
-		else if (elementType == RESERVED_SUPER)
-		{
-			return new PsiReference[]{new PerlMooseSuperReference(element)};
-		}
-		else if (elementType == RESERVED_INNER)
-		{
-			return new PsiReference[]{new PerlMooseInnerReference(element)};
-		}
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == SUB_NAME) {
+      return new PsiReference[]{new PerlSubReference(element)};
+    }
+    else if (elementType == RESERVED_SUPER) {
+      return new PsiReference[]{new PerlMooseSuperReference(element)};
+    }
+    else if (elementType == RESERVED_INNER) {
+      return new PsiReference[]{new PerlMooseInnerReference(element)};
+    }
 
-		return PsiReference.EMPTY_ARRAY;
-	}
-
+    return PsiReference.EMPTY_ARRAY;
+  }
 }

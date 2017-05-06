@@ -23,10 +23,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class MasonCallStatementImpl extends PsiPerlStatementImpl implements MasonCallStatement
-{
-	public MasonCallStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class MasonCallStatementImpl extends PsiPerlStatementImpl implements MasonCallStatement {
+  public MasonCallStatementImpl(ASTNode node) {
+    super(node);
+  }
 }

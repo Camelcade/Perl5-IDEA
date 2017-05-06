@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.PsiPerlBlock;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public interface HTMLMasonBlock extends PsiPerlBlock, HTMLMasonArgsContainer
-{
+public interface HTMLMasonBlock extends PsiPerlBlock, HTMLMasonArgsContainer {
 }

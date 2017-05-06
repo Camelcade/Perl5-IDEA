@@ -42,129 +42,106 @@ import java.util.List;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
-{
-	public PodFormatterLMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL {
+  public PodFormatterLMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		String contentText = PodRenderUtil.renderPsiElementAsText(getContentBlock());
-		if (StringUtil.isNotEmpty(contentText))
-		{
-			PodLinkDescriptor descriptor = getLinkDescriptor();
+  @Override
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    String contentText = PodRenderUtil.renderPsiElementAsText(getContentBlock());
+    if (StringUtil.isNotEmpty(contentText)) {
+      PodLinkDescriptor descriptor = getLinkDescriptor();
 
-			if (descriptor != null)
-			{
-				if (descriptor.getFileId() == null)
-				{
-					PsiFile psiFile = getContainingFile();
-					if (psiFile instanceof PodLinkTarget)
-					{
-						descriptor.setEnforcedFileId(((PodLinkTarget) psiFile).getPodLink());
-					}
-				}
+      if (descriptor != null) {
+        if (descriptor.getFileId() == null) {
+          PsiFile psiFile = getContainingFile();
+          if (psiFile instanceof PodLinkTarget) {
+            descriptor.setEnforcedFileId(((PodLinkTarget)psiFile).getPodLink());
+          }
+        }
 
-				builder.append(PodRenderUtil.getHTMLLink(descriptor, !isResolvable()));
-			}
-			else    // fallback
-			{
-				builder.append(PodRenderUtil.getHTMLPsiLink(contentText));
-			}
-		}
-	}
+        builder.append(PodRenderUtil.getHTMLLink(descriptor, !isResolvable()));
+      }
+      else    // fallback
+      {
+        builder.append(PodRenderUtil.getHTMLPsiLink(contentText));
+      }
+    }
+  }
 
-	private boolean isResolvable()
-	{
-		for (PsiReference reference : getReferences())
-		{
-			if (reference.resolve() == null)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+  private boolean isResolvable() {
+    for (PsiReference reference : getReferences()) {
+      if (reference.resolve() == null) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-	@Override
-	public boolean hasReferences()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasReferences() {
+    return true;
+  }
 
-	@Override
-	public PsiReference[] computeReferences()
-	{
-		List<PsiReference> references = new ArrayList<PsiReference>();
-		final PodLinkDescriptor descriptor = getLinkDescriptor();
+  @Override
+  public PsiReference[] computeReferences() {
+    List<PsiReference> references = new ArrayList<PsiReference>();
+    final PodLinkDescriptor descriptor = getLinkDescriptor();
 
-		if (descriptor != null && !descriptor.isUrl())
-		{
-			PsiElement contentBlock = getContentBlock();
-			if (contentBlock != null)
-			{
-				int rangeOffset = contentBlock.getStartOffsetInParent();
+    if (descriptor != null && !descriptor.isUrl()) {
+      PsiElement contentBlock = getContentBlock();
+      if (contentBlock != null) {
+        int rangeOffset = contentBlock.getStartOffsetInParent();
 
-				// file reference
-				TextRange fileRange = descriptor.getFileIdTextRangeInLink();
-				if (fileRange != null && !fileRange.isEmpty())
-				{
-					references.add(new PodLinkToFileReference(this, fileRange.shiftRight(rangeOffset)));
-				}
+        // file reference
+        TextRange fileRange = descriptor.getFileIdTextRangeInLink();
+        if (fileRange != null && !fileRange.isEmpty()) {
+          references.add(new PodLinkToFileReference(this, fileRange.shiftRight(rangeOffset)));
+        }
 
-				// section reference
-				TextRange sectionRange = descriptor.getSectionTextRangeInLink();
-				if (sectionRange != null && !sectionRange.isEmpty())
-				{
-					references.add(new PodLinkToSectionReference(this, sectionRange.shiftRight(rangeOffset)));
-				}
-			}
-		}
+        // section reference
+        TextRange sectionRange = descriptor.getSectionTextRangeInLink();
+        if (sectionRange != null && !sectionRange.isEmpty()) {
+          references.add(new PodLinkToSectionReference(this, sectionRange.shiftRight(rangeOffset)));
+        }
+      }
+    }
 
 
-		references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(this)));
+    references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(this)));
 
-		return references.toArray(new PsiReference[references.size()]);
-	}
+    return references.toArray(new PsiReference[references.size()]);
+  }
 
-	@Nullable
-	@Override
-	public PodLinkDescriptor getLinkDescriptor()
-	{
-		return CachedValuesManager.getCachedValue(this, () ->
-		{
-			PsiElement contentBlock = getContentBlock();
-			PodLinkDescriptor result = null;
-			if (contentBlock != null)
-			{
-				String contentText = contentBlock.getText();
-				if (StringUtil.isNotEmpty(contentText))
-				{
-					result = PodLinkDescriptor.getDescriptor(contentText);
-				}
-			}
-			return CachedValueProvider.Result.create(result, PodFormatterLMixin.this);
-		});
+  @Nullable
+  @Override
+  public PodLinkDescriptor getLinkDescriptor() {
+    return CachedValuesManager.getCachedValue(this, () ->
+    {
+      PsiElement contentBlock = getContentBlock();
+      PodLinkDescriptor result = null;
+      if (contentBlock != null) {
+        String contentText = contentBlock.getText();
+        if (StringUtil.isNotEmpty(contentText)) {
+          result = PodLinkDescriptor.getDescriptor(contentText);
+        }
+      }
+      return CachedValueProvider.Result.create(result, PodFormatterLMixin.this);
+    });
+  }
 
-	}
+  @Nullable
+  @Override
+  public PsiFile getTargetFile() {
+    PsiReference[] references = getReferences();
 
-	@Nullable
-	@Override
-	public PsiFile getTargetFile()
-	{
-		PsiReference[] references = getReferences();
+    for (PsiReference reference : references) {
+      if (reference instanceof PodLinkToFileReference) {
+        return (PsiFile)reference.resolve();
+      }
+    }
 
-		for (PsiReference reference : references)
-		{
-			if (reference instanceof PodLinkToFileReference)
-			{
-				return (PsiFile) reference.resolve();
-			}
-		}
-
-		return getContainingFile();
-	}
+    return getContainingFile();
+  }
 }

@@ -23,11 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileTypeFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer)
-	{
-		consumer.consume(HTMLMasonFileType.INSTANCE, "mas");
-	}
+public class HTMLMasonFileTypeFactory extends FileTypeFactory {
+  @Override
+  public void createFileTypes(@NotNull FileTypeConsumer consumer) {
+    consumer.consume(HTMLMasonFileType.INSTANCE, "mas");
+  }
 }

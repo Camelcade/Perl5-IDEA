@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 13.05.2016.
  */
-public class PerlSourceResponseDescriptor
-{
-	String fileSource;
+public class PerlSourceResponseDescriptor {
+  String fileSource;
 }

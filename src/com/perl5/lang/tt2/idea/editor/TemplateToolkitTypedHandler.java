@@ -34,65 +34,53 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements TemplateToolkitElementTypes
-{
-	@Override
-	public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType)
-	{
-		Result result = processChar(c, project, editor, file, fileType);
-		return result == null ? super.beforeCharTyped(c, project, editor, file, fileType) : result;
-	}
+public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements TemplateToolkitElementTypes {
+  @Override
+  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+    Result result = processChar(c, project, editor, file, fileType);
+    return result == null ? super.beforeCharTyped(c, project, editor, file, fileType) : result;
+  }
 
-	protected Result processChar(char c, Project project, Editor editor, PsiFile file, FileType fileType)
-	{
-		FileViewProvider viewProvider = file.getViewProvider();
-		if (!(viewProvider instanceof TemplateToolkitFileViewProvider))
-		{
-			return null;
-		}
+  protected Result processChar(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+    FileViewProvider viewProvider = file.getViewProvider();
+    if (!(viewProvider instanceof TemplateToolkitFileViewProvider)) {
+      return null;
+    }
 
-		TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
-		String openTag = settings.START_TAG;
-		if (StringUtil.isEmpty(openTag) || c != openTag.charAt(openTag.length() - 1))
-		{
-			return null;
-		}
+    TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
+    String openTag = settings.START_TAG;
+    if (StringUtil.isEmpty(openTag) || c != openTag.charAt(openTag.length() - 1)) {
+      return null;
+    }
 
-		int offset = editor.getCaretModel().getOffset();
-		if (offset == 0)
-		{
-			return null;
-		}
+    int offset = editor.getCaretModel().getOffset();
+    if (offset == 0) {
+      return null;
+    }
 
-		PsiElement element = viewProvider.findElementAt(offset - 1, TemplateToolkitLanguage.INSTANCE);
-		if (element == null)
-		{
-			return null;
-		}
-		IElementType tokenType = element.getNode().getElementType();
-		if (tokenType != TT2_HTML)
-		{
-			return null;
-		}
+    PsiElement element = viewProvider.findElementAt(offset - 1, TemplateToolkitLanguage.INSTANCE);
+    if (element == null) {
+      return null;
+    }
+    IElementType tokenType = element.getNode().getElementType();
+    if (tokenType != TT2_HTML) {
+      return null;
+    }
 
-		String openTagPrefix = openTag.substring(0, openTag.length() - 1);
-		if (openTagPrefix.length() == 0)
-		{
-			return null;
-		}
+    String openTagPrefix = openTag.substring(0, openTag.length() - 1);
+    if (openTagPrefix.length() == 0) {
+      return null;
+    }
 
-		int startOffset = offset - openTagPrefix.length();
-		if (startOffset < 0)
-		{
-			return null;
-		}
+    int startOffset = offset - openTagPrefix.length();
+    if (startOffset < 0) {
+      return null;
+    }
 
-		if (StringUtil.equals(file.getText().subSequence(startOffset, offset), openTagPrefix))
-		{
-			EditorModificationUtil.insertStringAtCaret(editor, c + "  " + settings.END_TAG, false, true, 2);
-			return Result.STOP;
-		}
-		return null;
-	}
-
+    if (StringUtil.equals(file.getText().subSequence(startOffset, offset), openTagPrefix)) {
+      EditorModificationUtil.insertStringAtCaret(editor, c + "  " + settings.END_TAG, false, true, 2);
+      return Result.STOP;
+    }
+    return null;
+  }
 }

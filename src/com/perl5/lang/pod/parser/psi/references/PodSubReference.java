@@ -41,72 +41,58 @@ import java.util.List;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodSubReference extends PerlCachingReference<PodIdentifierImpl>
-{
-	public PodSubReference(PodIdentifierImpl element)
-	{
-		super(element, new TextRange(0, element.getTextLength()), true);
-	}
+public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
+  public PodSubReference(PodIdentifierImpl element) {
+    super(element, new TextRange(0, element.getTextLength()), true);
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		return (PsiElement) myElement.replaceWithText(newElementName);
-	}
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    return (PsiElement)myElement.replaceWithText(newElementName);
+  }
 
-	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-		return super.bindToElement(element);
-	}
+  @Override
+  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    return super.bindToElement(element);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PsiElement element = getElement();
-		if (element != null)
-		{
-			final Project project = element.getProject();
-			String subName = element.getText();
-			if (StringUtil.isNotEmpty(subName))
-			{
-				final PsiFile containingFile = element.getContainingFile();
-				String packageName = PodFileUtil.getPackageName(containingFile);
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PsiElement element = getElement();
+    if (element != null) {
+      final Project project = element.getProject();
+      String subName = element.getText();
+      if (StringUtil.isNotEmpty(subName)) {
+        final PsiFile containingFile = element.getContainingFile();
+        String packageName = PodFileUtil.getPackageName(containingFile);
 
-				List<ResolveResult> results = new ArrayList<ResolveResult>();
+        List<ResolveResult> results = new ArrayList<ResolveResult>();
 
-				if (StringUtil.isNotEmpty(packageName))
-				{
-					String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
-					for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName))
-					{
-						results.add(new PsiElementResolveResult(target));
-					}
-					for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName))
-					{
-						results.add(new PsiElementResolveResult(target));
-					}
-				}
+        if (StringUtil.isNotEmpty(packageName)) {
+          String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+          for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
+            results.add(new PsiElementResolveResult(target));
+          }
+          for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
+            results.add(new PsiElementResolveResult(target));
+          }
+        }
 
-				if (results.isEmpty())
-				{
-					final PsiFile perlFile = containingFile.getViewProvider().getStubBindingRoot();
+        if (results.isEmpty()) {
+          final PsiFile perlFile = containingFile.getViewProvider().getStubBindingRoot();
 
-					for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class))
-					{
-						String subBaseName = subBase.getName();
-						if (subBaseName != null && StringUtil.equals(subBaseName, subName))
-						{
-							results.add(new PsiElementResolveResult(subBase));
-						}
-					}
-				}
+          for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class)) {
+            String subBaseName = subBase.getName();
+            if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
+              results.add(new PsiElementResolveResult(subBase));
+            }
+          }
+        }
 
-				return results.toArray(new ResolveResult[results.size()]);
-			}
-		}
+        return results.toArray(new ResolveResult[results.size()]);
+      }
+    }
 
-		return ResolveResult.EMPTY_ARRAY;
-	}
-
+    return ResolveResult.EMPTY_ARRAY;
+  }
 }

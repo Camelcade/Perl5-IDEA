@@ -23,11 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class PodFileTypesFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
-	{
-		fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
-	}
+public class PodFileTypesFactory extends FileTypeFactory {
+  @Override
+  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+    fileTypeConsumer.consume(PodFileType.INSTANCE, "pod");
+  }
 }

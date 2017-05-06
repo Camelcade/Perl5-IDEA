@@ -26,14 +26,12 @@ import java.util.List;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonArgsBlockStub extends StubElement<HTMLMasonArgsBlock>
-{
-	/**
-	 * Returns list of accepted arguments
-	 *
-	 * @return list of accepted arguments
-	 */
-	@NotNull
-	List<PerlSubArgument> getArgumentsList();
-
+public interface HTMLMasonArgsBlockStub extends StubElement<HTMLMasonArgsBlock> {
+  /**
+   * Returns list of accepted arguments
+   *
+   * @return list of accepted arguments
+   */
+  @NotNull
+  List<PerlSubArgument> getArgumentsList();
 }

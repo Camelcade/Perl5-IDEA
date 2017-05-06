@@ -34,52 +34,43 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlPackageHierarchyProvider implements HierarchyProvider
-{
-	@Nullable
-	@Override
-	public PsiElement getTarget(@NotNull DataContext dataContext)
-	{
-		PsiElement element = CommonDataKeys.PSI_ELEMENT.getData(dataContext);
-		if (element == null)
-		{
-			final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
-			final PsiFile file = CommonDataKeys.PSI_FILE.getData(dataContext);
+public class PerlPackageHierarchyProvider implements HierarchyProvider {
+  @Nullable
+  @Override
+  public PsiElement getTarget(@NotNull DataContext dataContext) {
+    PsiElement element = CommonDataKeys.PSI_ELEMENT.getData(dataContext);
+    if (element == null) {
+      final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
+      final PsiFile file = CommonDataKeys.PSI_FILE.getData(dataContext);
 
-			if (editor != null && file != null)
-			{
-				element = file.getViewProvider().findElementAt(editor.getCaretModel().getOffset(), getLanguage());
-			}
-		}
+      if (editor != null && file != null) {
+        element = file.getViewProvider().findElementAt(editor.getCaretModel().getOffset(), getLanguage());
+      }
+    }
 
-		return adjustTargetElement(element);
-	}
+    return adjustTargetElement(element);
+  }
 
-	protected PsiElement adjustTargetElement(PsiElement element)
-	{
-		if (element != null && !(element instanceof PerlNamespaceDefinition))
-		{
-			return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
-		}
+  protected PsiElement adjustTargetElement(PsiElement element) {
+    if (element != null && !(element instanceof PerlNamespaceDefinition)) {
+      return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+    }
 
-		return element;
-	}
+    return element;
+  }
 
-	@NotNull
-	@Override
-	public HierarchyBrowser createHierarchyBrowser(PsiElement target)
-	{
-		return new PerlHierarchyBrowser(target);
-	}
+  @NotNull
+  @Override
+  public HierarchyBrowser createHierarchyBrowser(PsiElement target) {
+    return new PerlHierarchyBrowser(target);
+  }
 
-	@Override
-	public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser)
-	{
-		((PerlHierarchyBrowser) hierarchyBrowser).changeView(TypeHierarchyBrowserBase.SUPERTYPES_HIERARCHY_TYPE);
-	}
+  @Override
+  public void browserActivated(@NotNull HierarchyBrowser hierarchyBrowser) {
+    ((PerlHierarchyBrowser)hierarchyBrowser).changeView(TypeHierarchyBrowserBase.SUPERTYPES_HIERARCHY_TYPE);
+  }
 
-	protected Language getLanguage()
-	{
-		return PerlLanguage.INSTANCE;
-	}
+  protected Language getLanguage() {
+    return PerlLanguage.INSTANCE;
+  }
 }

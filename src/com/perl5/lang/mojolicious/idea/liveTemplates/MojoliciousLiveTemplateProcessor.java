@@ -31,60 +31,49 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.06.2016.
  */
-public class MojoliciousLiveTemplateProcessor extends AbstractOutlineLiveTemplateProcessor
-{
-	protected boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset)
-	{
-		int bufferEnd = buffer.length();
+public class MojoliciousLiveTemplateProcessor extends AbstractOutlineLiveTemplateProcessor {
+  protected boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset) {
+    int bufferEnd = buffer.length();
 
-		while (offset < bufferEnd)
-		{
-			char currentChar = buffer.charAt(offset++);
-			if (currentChar == '%')
-			{
-				return false;
-			}
-			else if (currentChar == '\n')
-			{
-				return false;
-			}
-			else if (!Character.isWhitespace(currentChar))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    while (offset < bufferEnd) {
+      char currentChar = buffer.charAt(offset++);
+      if (currentChar == '%') {
+        return false;
+      }
+      else if (currentChar == '\n') {
+        return false;
+      }
+      else if (!Character.isWhitespace(currentChar)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	@Override
-	protected boolean isMyFile(PsiFile file)
-	{
-		return file instanceof MojoliciousFileImpl;
-	}
+  @Override
+  protected boolean isMyFile(PsiFile file) {
+    return file instanceof MojoliciousFileImpl;
+  }
 
-	@Override
-	@NotNull
-	protected Language getMyLanguage()
-	{
-		return MojoliciousLanguage.INSTANCE;
-	}
+  @Override
+  @NotNull
+  protected Language getMyLanguage() {
+    return MojoliciousLanguage.INSTANCE;
+  }
 
-	@Override
-	@Nullable
-	protected PsiElement getOutlineElement(PsiElement firstElement)
-	{
-		while (firstElement instanceof PsiWhiteSpace)
-		{
-			firstElement = firstElement.getNextSibling();
-		}
+  @Override
+  @Nullable
+  protected PsiElement getOutlineElement(PsiElement firstElement) {
+    while (firstElement instanceof PsiWhiteSpace) {
+      firstElement = firstElement.getNextSibling();
+    }
 
-		return PsiUtilCore.getElementType(firstElement) == MojoliciousElementTypes.MOJO_LINE_OPENER ? firstElement : null;
-	}
+    return PsiUtilCore.getElementType(firstElement) == MojoliciousElementTypes.MOJO_LINE_OPENER ? firstElement : null;
+  }
 
-	@Override
-	@NotNull
-	protected String getOutlineMarker()
-	{
-		return "% ";
-	}
+  @Override
+  @NotNull
+  protected String getOutlineMarker() {
+    return "% ";
+  }
 }

@@ -22,10 +22,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PerlElementType extends PerlTokenType
-{
-	public PerlElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlElementType extends PerlTokenType {
+  public PerlElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

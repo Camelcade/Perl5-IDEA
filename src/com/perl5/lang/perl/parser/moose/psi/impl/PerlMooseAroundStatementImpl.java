@@ -22,10 +22,8 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseAroundStatement;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAroundStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAroundStatement
-{
-	public PerlMooseAroundStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseAroundStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAroundStatement {
+  public PerlMooseAroundStatementImpl(ASTNode node) {
+    super(node);
+  }
 }

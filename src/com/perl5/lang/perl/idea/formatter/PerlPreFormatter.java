@@ -40,432 +40,353 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 12.11.2015.
  */
-public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes
-{
-	public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
-	public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
+public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes {
+  public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
+  public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
 
-	protected final Project myProject;
-	protected final CodeStyleSettings mySettings;
-	protected final PerlCodeStyleSettings myPerlSettings;
+  protected final Project myProject;
+  protected final CodeStyleSettings mySettings;
+  protected final PerlCodeStyleSettings myPerlSettings;
 
-	private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<PerlFormattingOperation>();
-	protected TextRange myRange;
+  private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<PerlFormattingOperation>();
+  protected TextRange myRange;
 
-	public PerlPreFormatter(Project project)
-	{
-		myProject = project;
-		mySettings = CodeStyleSettingsManager.getSettings(project);
-		myPerlSettings = mySettings.getCustomSettings(PerlCodeStyleSettings.class);
-	}
+  public PerlPreFormatter(Project project) {
+    myProject = project;
+    mySettings = CodeStyleSettingsManager.getSettings(project);
+    myPerlSettings = mySettings.getCustomSettings(PerlCodeStyleSettings.class);
+  }
 
-	protected static boolean isStringSimple(PerlString o)
-	{
-		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
-				// we need this because lexer unable to properly parse utf
-				ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
-	}
+  public TextRange process(PsiElement element, TextRange range) {
+    myRange = range;
+    final PsiDocumentManager manager = PsiDocumentManager.getInstance(myProject);
+    final Document document = manager.getDocument(element.getContainingFile());
+    int myDelta = 0;
+    if (document != null) {
+      manager.doPostponedOperationsAndUnblockDocument(document);
 
-	protected static boolean isStringSimpleIdentifier(PerlString o)
-	{
-		return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
-				ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
-	}
+      try {
+        // scan document
+        element.accept(this);
 
-	protected static boolean isCommaArrowAhead(PsiElement o)
-	{
-		PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(o);
-		return nextElement != null && nextElement.getNode().getElementType() == FAT_COMMA;
-	}
+        for (int i = myFormattingOperations.size() - 1; i >= 0; i--) {
+          myDelta += myFormattingOperations.get(i).apply();
+        }
+      }
+      finally {
+        manager.commitDocument(document);
+      }
+    }
 
-	protected static boolean isInHeredocOpener(PerlString o)
-	{
-		return o.getParent() instanceof PerlHeredocOpener;
-	}
+    return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
+  }
 
-	protected static boolean isHashIndexKey(PsiElement o)
-	{
-		if (!(o.getParent() instanceof PsiPerlHashIndex))
-		{
-			return false;
-		}
-		PsiElement prevSibling = o.getPrevSibling();
-		PsiElement nextSibling = o.getNextSibling();
-		return prevSibling != null && prevSibling.getNode().getElementType() == LEFT_BRACE &&
-				nextSibling != null && nextSibling.getNode().getElementType() == RIGHT_BRACE;
-	}
+  protected void removeElement(PsiElement o) {
+    myFormattingOperations.add(new PerlFormattingRemove(o));
+  }
 
-	public TextRange process(PsiElement element, TextRange range)
-	{
-		myRange = range;
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(myProject);
-		final Document document = manager.getDocument(element.getContainingFile());
-		int myDelta = 0;
-		if (document != null)
-		{
-			manager.doPostponedOperationsAndUnblockDocument(document);
+  protected void replaceElement(PsiElement what, PsiElement with) {
+    myFormattingOperations.add(new PerlFormattingReplace(what, with));
+  }
 
-			try
-			{
-				// scan document
-				element.accept(this);
+  protected void insertElementAfter(PsiElement element, PsiElement anchor) {
+    myFormattingOperations.add(new PerlFormattingInsertAfter(element, anchor));
+  }
 
-				for (int i = myFormattingOperations.size() - 1; i >= 0; i--)
-				{
-					myDelta += myFormattingOperations.get(i).apply();
-				}
+  protected void insertElementBefore(PsiElement element, PsiElement anchor) {
+    myFormattingOperations.add(new PerlFormattingInsertBefore(element, anchor));
+  }
 
-			}
-			finally
-			{
-				manager.commitDocument(document);
-			}
-		}
+  protected boolean isStringQuotable(PsiPerlStringBare o) {
+    return myPerlSettings.OPTIONAL_QUOTES == FORCE && isCommaArrowAhead(o) ||
+           myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == FORCE && isHashIndexKey(o);
+  }
 
-		return TextRange.create(range.getStartOffset(), range.getEndOffset() + myDelta);
-	}
+  protected boolean isSimpleScalarCast(PerlCastExpression o) {
+    return o.getLastChild() instanceof PsiPerlScalarVariable || isNotSoSimpleScalarCast(o);
+  }
 
-	protected void removeElement(PsiElement o)
-	{
-		myFormattingOperations.add(new PerlFormattingRemove(o));
-	}
+  protected boolean isNotSoSimpleScalarCast(PerlCastExpression o) {
+    PsiPerlScalarVariable variable = PsiTreeUtil.findChildOfType(o, PsiPerlScalarVariable.class);
+    if (variable != null) {
+      PsiElement statement = variable.getParent();
+      if (statement instanceof PsiPerlStatement && statement.getChildren().length == 1 && o.equals(statement.getParent())) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	protected void replaceElement(PsiElement what, PsiElement with)
-	{
-		myFormattingOperations.add(new PerlFormattingReplace(what, with));
-	}
+  protected boolean isStringInHeredocQuotable(PsiPerlStringBare o) {
+    return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o) && !isBackrefString(o);
+  }
 
-	protected void insertElementAfter(PsiElement element, PsiElement anchor)
-	{
-		myFormattingOperations.add(new PerlFormattingInsertAfter(element, anchor));
-	}
+  protected boolean isBackrefString(PsiPerlStringBare o) {
+    PsiElement predecessor = o.getPrevSibling();
+    return predecessor != null && predecessor.getNode().getElementType() == OPERATOR_REFERENCE;
+  }
 
-	protected void insertElementBefore(PsiElement element, PsiElement anchor)
-	{
-		myFormattingOperations.add(new PerlFormattingInsertBefore(element, anchor));
-	}
+  protected boolean isStringUnqutable(PerlString o) {
+    return isStringSimple(o) && (
+      isHashIndexKey(o) && myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == SUPPRESS ||
+      isCommaArrowAhead(o) && myPerlSettings.OPTIONAL_QUOTES == SUPPRESS)
+      ;
+  }
 
-	protected boolean isStringQuotable(PsiPerlStringBare o)
-	{
-		return myPerlSettings.OPTIONAL_QUOTES == FORCE && isCommaArrowAhead(o) ||
-				myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == FORCE && isHashIndexKey(o);
-	}
+  protected boolean isStringInHeredocUnquotable(PerlString o) {
+    return isStringSimpleIdentifier(o) && isInHeredocOpener(o) && myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == SUPPRESS;
+  }
 
-	protected boolean isSimpleScalarCast(PerlCastExpression o)
-	{
-		return o.getLastChild() instanceof PsiPerlScalarVariable || isNotSoSimpleScalarCast(o);
-	}
+  @Override
+  public void visitStringDq(@NotNull PsiPerlStringDq o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    if (isStringUnqutable(o) || isStringInHeredocUnquotable(o)) {
+      unquoteString(o);
+    }
+    else {
+      super.visitStringDq(o);
+    }
+  }
 
-	protected boolean isNotSoSimpleScalarCast(PerlCastExpression o)
-	{
-		PsiPerlScalarVariable variable = PsiTreeUtil.findChildOfType(o, PsiPerlScalarVariable.class);
-		if (variable != null)
-		{
-			PsiElement statement = variable.getParent();
-			if (statement instanceof PsiPerlStatement && statement.getChildren().length == 1 && o.equals(statement.getParent()))
-			{
-				return true;
-			}
-		}
-		return false;
+  @Override
+  public void visitStringSq(@NotNull PsiPerlStringSq o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    if (isStringUnqutable(o)) {
+      unquoteString(o);
+    }
+    else {
+      super.visitStringSq(o);
+    }
+  }
 
-	}
+  @Override
+  public void visitStringBare(@NotNull PsiPerlStringBare o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    if (isStringQuotable(o)) {
+      replaceElement(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'"));
+    }
+    else if (isStringInHeredocQuotable(o)) {
+      replaceElement(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\""));
+    }
+    else {
+      super.visitStringBare(o);
+    }
+  }
 
-	protected boolean isStringInHeredocQuotable(PsiPerlStringBare o)
-	{
-		return myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == FORCE && isInHeredocOpener(o) && !isBackrefString(o);
-	}
+  @Override
+  public void visitHashIndex(@NotNull PsiPerlHashIndex o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
 
-	protected boolean isBackrefString(PsiPerlStringBare o)
-	{
-		PsiElement predecessor = o.getPrevSibling();
-		return predecessor != null && predecessor.getNode().getElementType() == OPERATOR_REFERENCE;
-	}
+    processDerefExpressionIndex(o);
+    super.visitHashIndex(o);
+  }
 
-	protected boolean isStringUnqutable(PerlString o)
-	{
-		return isStringSimple(o) && (
-				isHashIndexKey(o) && myPerlSettings.OPTIONAL_QUOTES_HASH_INDEX == SUPPRESS ||
-						isCommaArrowAhead(o) && myPerlSettings.OPTIONAL_QUOTES == SUPPRESS)
-				;
-	}
+  @Override
+  public void visitArrayIndex(@NotNull PsiPerlArrayIndex o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    processDerefExpressionIndex(o);
+    super.visitArrayIndex(o);
+  }
 
-	protected boolean isStringInHeredocUnquotable(PerlString o)
-	{
-		return isStringSimpleIdentifier(o) && isInHeredocOpener(o) && myPerlSettings.OPTIONAL_QUOTES_HEREDOC_OPENER == SUPPRESS;
-	}
+  @Override
+  public void visitPerlCastExpression(@NotNull PerlCastExpression o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
 
-	@Override
-	public void visitStringDq(@NotNull PsiPerlStringDq o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		if (isStringUnqutable(o) || isStringInHeredocUnquotable(o))
-		{
-			unquoteString(o);
-		}
-		else
-		{
-			super.visitStringDq(o);
-		}
-	}
+    PsiElement parent = o.getParent();
+    boolean isSimpleScalarCast = isSimpleScalarCast(o);
 
-	@Override
-	public void visitStringSq(@NotNull PsiPerlStringSq o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		if (isStringUnqutable(o))
-		{
-			unquoteString(o);
-		}
-		else
-		{
-			super.visitStringSq(o);
-		}
-	}
+    if (o instanceof PsiPerlScalarCastExpr) {
+      boolean isInsideHashOrArrayElement = parent instanceof PsiPerlArrayElement || parent instanceof PsiPerlHashElement;
 
-	@Override
-	public void visitStringBare(@NotNull PsiPerlStringBare o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		if (isStringQuotable(o))
-		{
-			replaceElement(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'"));
-		}
-		else if (isStringInHeredocQuotable(o))
-		{
-			replaceElement(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\""));
-		}
-		else
-		{
-			super.visitStringBare(o);
-		}
-	}
+      if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS &&
+          isInsideHashOrArrayElement &&
+          isSimpleScalarCast) // convert $$var{key} to $var->{key}
+      {
+        myFormattingOperations.add(new PerlFormattingScalarDerefExpand((PsiPerlScalarCastExpr)o));
+      }
+      else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${var} to $var
+      {
+        unwrapSimpleDereference(o);
+      }
+      else if (isSimpleScalarCast &&
+               !isInsideHashOrArrayElement &&
+               myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
+      {
+        wrapSimpleDereference(o);
+      }
+    }
+    else // hash and array
+    {
+      if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${$var} to $$var
+      {
+        unwrapSimpleDereference(o);
+      }
+      else if (isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
+      {
+        wrapSimpleDereference(o);
+      }
+    }
+    super.visitPerlCastExpression(o);
+  }
 
-	@Override
-	public void visitHashIndex(@NotNull PsiPerlHashIndex o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
+  /**
+   * Wrapping reference into braces
+   *
+   * @param o Cast expression
+   */
+  public void wrapSimpleDereference(PerlCastExpression o) {
+    PsiElement referenceVariable = o.getLastChild();
+    if (referenceVariable instanceof PsiPerlScalarVariable) {
+      myFormattingOperations.add(new PerlFormattingSimpleDereferenceWrap(o, (PsiPerlScalarVariable)referenceVariable));
+    }
+  }
 
-		processDerefExpressionIndex(o);
-		super.visitHashIndex(o);
-	}
+  public void unwrapSimpleDereference(PerlCastExpression o) {
+    PsiElement closeBraceElement = o.getLastChild();
 
-	@Override
-	public void visitArrayIndex(@NotNull PsiPerlArrayIndex o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		processDerefExpressionIndex(o);
-		super.visitArrayIndex(o);
-	}
+    if (closeBraceElement != null && closeBraceElement.getNode().getElementType() == RIGHT_BRACE) {
+      PsiElement statementElement = PerlPsiUtil.getPrevSignificantSibling(closeBraceElement);
+      if (statementElement instanceof PsiPerlStatement) {
+        PsiElement openBraceElement = PerlPsiUtil.getPrevSignificantSibling(statementElement);
+        if (openBraceElement != null && openBraceElement.getNode().getElementType() == LEFT_BRACE) {
+          PsiElement referenceVariable = statementElement.getFirstChild();
+          if (referenceVariable instanceof PsiPerlScalarVariable) {
+            PsiElement optionalSemi = PerlPsiUtil.getPrevSignificantSibling(referenceVariable);
+            if (optionalSemi == null || optionalSemi.getNode().getElementType() == SEMICOLON && optionalSemi.getNextSibling() == null) {
+              myFormattingOperations.add(new PerlFormattingSimpleDereferenceUnwrap(o, (PsiPerlScalarVariable)referenceVariable));
+            }
+          }
+        }
+      }
+    }
+  }
 
-	@Override
-	public void visitPerlCastExpression(@NotNull PerlCastExpression o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
+  @Override
+  public void visitDerefExpr(@NotNull PsiPerlDerefExpr o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == FORCE) {
+      PsiElement scalarVariableElement = o.getFirstChild();
+      if (scalarVariableElement instanceof PsiPerlScalarVariable) {
+        PsiElement derefElement = PerlPsiUtil.getNextSignificantSibling(scalarVariableElement);
+        if (derefElement != null && derefElement.getNode().getElementType() == OPERATOR_DEREFERENCE) {
+          PsiElement probableIndexElement = PerlPsiUtil.getNextSignificantSibling(derefElement);
 
-		PsiElement parent = o.getParent();
-		boolean isSimpleScalarCast = isSimpleScalarCast(o);
+          if (probableIndexElement instanceof PsiPerlHashIndex || probableIndexElement instanceof PsiPerlArrayIndex) {
+            myFormattingOperations
+              .add(new PerlFormattingScalarDerefCollapse((PsiPerlScalarVariable)scalarVariableElement, probableIndexElement));
+          }
+        }
+      }
+    }
+    super.visitDerefExpr(o);
+  }
 
-		if (o instanceof PsiPerlScalarCastExpr)
-		{
-			boolean isInsideHashOrArrayElement = parent instanceof PsiPerlArrayElement || parent instanceof PsiPerlHashElement;
+  protected void processDerefExpressionIndex(PsiElement o) {
+    PsiElement parent = o.getParent();
+    PsiElement anchor = o;
+    if (parent instanceof PsiPerlDerefExpr ||
+        (((anchor = parent) instanceof PsiPerlHashElement || anchor instanceof PsiPerlArrayElement) &&
+         anchor.getParent() instanceof PsiPerlDerefExpr
+        )) {
+      if (myPerlSettings.OPTIONAL_DEREFERENCE == FORCE) {
+        PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(anchor);
+        if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex) {
+          insertElementAfter(PerlElementFactory.createDereference(myProject), anchor);
+        }
+      }
+      else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS) {
+        PsiElement potentialDereference = PerlPsiUtil.getNextSignificantSibling(anchor);
+        if (potentialDereference != null && potentialDereference.getNode().getElementType() == OPERATOR_DEREFERENCE) {
+          PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);
+          if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex) {
+            removeElement(potentialDereference);
+          }
+        }
+      }
+    }
+  }
 
-			if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS && isInsideHashOrArrayElement && isSimpleScalarCast) // convert $$var{key} to $var->{key}
-			{
-				myFormattingOperations.add(new PerlFormattingScalarDerefExpand((PsiPerlScalarCastExpr) o));
-			}
-			else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${var} to $var
-			{
-				unwrapSimpleDereference(o);
-			}
-			else if (isSimpleScalarCast && !isInsideHashOrArrayElement && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
-			{
-				wrapSimpleDereference(o);
-			}
-		}
-		else // hash and array
-		{
-			if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${$var} to $$var
-			{
-				unwrapSimpleDereference(o);
-			}
-			else if (isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == FORCE)    // need to convert $$var to ${$var}
-			{
-				wrapSimpleDereference(o);
-			}
-		}
-		super.visitPerlCastExpression(o);
-	}
+  @Override
+  public void visitStatementModifier(@NotNull PsiPerlStatementModifier o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
+    PsiPerlExpr expression = PsiTreeUtil.getChildOfType(o, PsiPerlExpr.class);
+    if (expression != null) {
+      if (myPerlSettings.OPTIONAL_PARENTHESES == FORCE && !(expression instanceof PsiPerlParenthesisedExpr)) {
+        myFormattingOperations.add(new PerlFormattingStatementModifierWrap(o));
+      }
+      else if (myPerlSettings.OPTIONAL_PARENTHESES == SUPPRESS && expression instanceof PsiPerlParenthesisedExpr) {
+        myFormattingOperations.add(new PerlFormattingStatementModifierUnwrap(o));
+      }
+    }
+    super.visitStatementModifier(o);
+  }
 
-	/**
-	 * Wrapping reference into braces
-	 *
-	 * @param o Cast expression
-	 */
-	public void wrapSimpleDereference(PerlCastExpression o)
-	{
-		PsiElement referenceVariable = o.getLastChild();
-		if (referenceVariable instanceof PsiPerlScalarVariable)
-		{
-			myFormattingOperations.add(new PerlFormattingSimpleDereferenceWrap(o, (PsiPerlScalarVariable) referenceVariable));
-		}
-	}
+  @Override
+  public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
+    if (!myRange.contains(o.getTextRange())) {
+      return;
+    }
 
+    String elementContent = o.getNode().getText();
 
-	public void unwrapSimpleDereference(PerlCastExpression o)
-	{
-		PsiElement closeBraceElement = o.getLastChild();
+    if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_PACKAGE_FULL.equals(elementContent)) {
+      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.PACKAGE_SEPARATOR));
+    }
+    else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_PACKAGE_SHORT.equals(elementContent)) {
+      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.MAIN_PACKAGE_FULL));
+    }
+    else {
+      super.visitNamespaceElement(o);
+    }
+  }
 
-		if (closeBraceElement != null && closeBraceElement.getNode().getElementType() == RIGHT_BRACE)
-		{
-			PsiElement statementElement = PerlPsiUtil.getPrevSignificantSibling(closeBraceElement);
-			if (statementElement instanceof PsiPerlStatement)
-			{
-				PsiElement openBraceElement = PerlPsiUtil.getPrevSignificantSibling(statementElement);
-				if (openBraceElement != null && openBraceElement.getNode().getElementType() == LEFT_BRACE)
-				{
-					PsiElement referenceVariable = statementElement.getFirstChild();
-					if (referenceVariable instanceof PsiPerlScalarVariable)
-					{
-						PsiElement optionalSemi = PerlPsiUtil.getPrevSignificantSibling(referenceVariable);
-						if (optionalSemi == null || optionalSemi.getNode().getElementType() == SEMICOLON && optionalSemi.getNextSibling() == null)
-						{
-							myFormattingOperations.add(new PerlFormattingSimpleDereferenceUnwrap(o, (PsiPerlScalarVariable) referenceVariable));
-						}
-					}
-				}
-			}
-		}
-	}
+  protected void unquoteString(PerlString o) {
+    replaceElement(o, PerlElementFactory.createBareString(myProject, o.getStringContent()));
+  }
 
+  protected static boolean isStringSimple(PerlString o) {
+    return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
+           // we need this because lexer unable to properly parse utf
+           ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
+  }
 
-	@Override
-	public void visitDerefExpr(@NotNull PsiPerlDerefExpr o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == FORCE)
-		{
-			PsiElement scalarVariableElement = o.getFirstChild();
-			if (scalarVariableElement instanceof PsiPerlScalarVariable)
-			{
-				PsiElement derefElement = PerlPsiUtil.getNextSignificantSibling(scalarVariableElement);
-				if (derefElement != null && derefElement.getNode().getElementType() == OPERATOR_DEREFERENCE)
-				{
-					PsiElement probableIndexElement = PerlPsiUtil.getNextSignificantSibling(derefElement);
+  protected static boolean isStringSimpleIdentifier(PerlString o) {
+    return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
+           ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
+  }
 
-					if (probableIndexElement instanceof PsiPerlHashIndex || probableIndexElement instanceof PsiPerlArrayIndex)
-					{
-						myFormattingOperations.add(new PerlFormattingScalarDerefCollapse((PsiPerlScalarVariable) scalarVariableElement, probableIndexElement));
-					}
-				}
-			}
-		}
-		super.visitDerefExpr(o);
-	}
+  protected static boolean isCommaArrowAhead(PsiElement o) {
+    PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(o);
+    return nextElement != null && nextElement.getNode().getElementType() == FAT_COMMA;
+  }
 
-	protected void processDerefExpressionIndex(PsiElement o)
-	{
-		PsiElement parent = o.getParent();
-		PsiElement anchor = o;
-		if (parent instanceof PsiPerlDerefExpr ||
-				(((anchor = parent) instanceof PsiPerlHashElement || anchor instanceof PsiPerlArrayElement) &&
-						anchor.getParent() instanceof PsiPerlDerefExpr
-				))
-		{
-			if (myPerlSettings.OPTIONAL_DEREFERENCE == FORCE)
-			{
-				PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(anchor);
-				if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
-				{
-					insertElementAfter(PerlElementFactory.createDereference(myProject), anchor);
-				}
-			}
-			else if (myPerlSettings.OPTIONAL_DEREFERENCE == SUPPRESS)
-			{
-				PsiElement potentialDereference = PerlPsiUtil.getNextSignificantSibling(anchor);
-				if (potentialDereference != null && potentialDereference.getNode().getElementType() == OPERATOR_DEREFERENCE)
-				{
-					PsiElement nextIndexElement = PerlPsiUtil.getNextSignificantSibling(potentialDereference);
-					if (nextIndexElement instanceof PsiPerlHashIndex || nextIndexElement instanceof PsiPerlArrayIndex)
-					{
-						removeElement(potentialDereference);
-					}
-				}
-			}
-		}
-	}
+  protected static boolean isInHeredocOpener(PerlString o) {
+    return o.getParent() instanceof PerlHeredocOpener;
+  }
 
-	@Override
-	public void visitStatementModifier(@NotNull PsiPerlStatementModifier o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-		PsiPerlExpr expression = PsiTreeUtil.getChildOfType(o, PsiPerlExpr.class);
-		if (expression != null)
-		{
-			if (myPerlSettings.OPTIONAL_PARENTHESES == FORCE && !(expression instanceof PsiPerlParenthesisedExpr))
-			{
-				myFormattingOperations.add(new PerlFormattingStatementModifierWrap(o));
-			}
-			else if (myPerlSettings.OPTIONAL_PARENTHESES == SUPPRESS && expression instanceof PsiPerlParenthesisedExpr)
-			{
-				myFormattingOperations.add(new PerlFormattingStatementModifierUnwrap(o));
-			}
-		}
-		super.visitStatementModifier(o);
-	}
-
-
-	@Override
-	public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
-	{
-		if (!myRange.contains(o.getTextRange()))
-		{
-			return;
-		}
-
-		String elementContent = o.getNode().getText();
-
-		if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_PACKAGE_FULL.equals(elementContent))
-		{
-			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.PACKAGE_SEPARATOR));
-		}
-		else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_PACKAGE_SHORT.equals(elementContent))
-		{
-			myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.MAIN_PACKAGE_FULL));
-		}
-		else
-		{
-			super.visitNamespaceElement(o);
-		}
-	}
-
-	protected void unquoteString(PerlString o)
-	{
-		replaceElement(o, PerlElementFactory.createBareString(myProject, o.getStringContent()));
-	}
-
+  protected static boolean isHashIndexKey(PsiElement o) {
+    if (!(o.getParent() instanceof PsiPerlHashIndex)) {
+      return false;
+    }
+    PsiElement prevSibling = o.getPrevSibling();
+    PsiElement nextSibling = o.getNextSibling();
+    return prevSibling != null && prevSibling.getNode().getElementType() == LEFT_BRACE &&
+           nextSibling != null && nextSibling.getNode().getElementType() == RIGHT_BRACE;
+  }
 }

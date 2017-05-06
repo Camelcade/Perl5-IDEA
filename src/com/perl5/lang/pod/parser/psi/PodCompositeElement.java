@@ -24,58 +24,57 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation, PerlReferenceOwner
-{
-	/**
-	 * Returns if element contains direct child X<>
-	 *
-	 * @return true if is
-	 */
-	boolean isIndexed();
+public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation, PerlReferenceOwner {
+  /**
+   * Returns if element contains direct child X<>
+   *
+   * @return true if is
+   */
+  boolean isIndexed();
 
-	/**
-	 * Calculating list level for current element
-	 *
-	 * @return list level zero-based
-	 */
-	int getListLevel();
+  /**
+   * Calculating list level for current element
+   *
+   * @return list level zero-based
+   */
+  int getListLevel();
 
 
-	/**
-	 * Heading elements should return true
-	 *
-	 * @return
-	 */
-	boolean isHeading();
+  /**
+   * Heading elements should return true
+   *
+   * @return
+   */
+  boolean isHeading();
 
-	/**
-	 * returns heading level
-	 *
-	 * @return
-	 */
-	int getHeadingLevel();
+  /**
+   * returns heading level
+   *
+   * @return
+   */
+  int getHeadingLevel();
 
-	/**
-	 * Returns text for UsageViewTypeLocation.INSTANCE
-	 *
-	 * @return
-	 */
-	@Nullable
-	String getUsageViewTypeLocation();
+  /**
+   * Returns text for UsageViewTypeLocation.INSTANCE
+   *
+   * @return
+   */
+  @Nullable
+  String getUsageViewTypeLocation();
 
-	/**
-	 * Returns text for UsageViewLongNameLocation.INSTANCE
-	 *
-	 * @return
-	 */
-	@Nullable
-	String getUsageViewLongNameLocation();
+  /**
+   * Returns text for UsageViewLongNameLocation.INSTANCE
+   *
+   * @return
+   */
+  @Nullable
+  String getUsageViewLongNameLocation();
 
-	/**
-	 * Returns text for UsageViewShortNameLocation.INSTANCE
-	 *
-	 * @return
-	 */
-	@Nullable
-	String getUsageViewShortNameLocation();
+  /**
+   * Returns text for UsageViewShortNameLocation.INSTANCE
+   *
+   * @return
+   */
+  @Nullable
+  String getUsageViewShortNameLocation();
 }

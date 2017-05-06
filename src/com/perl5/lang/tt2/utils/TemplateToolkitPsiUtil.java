@@ -28,46 +28,38 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitPsiUtil
-{
-	@Nullable
-	public static PsiElement getPrevSignificantSibling(PsiElement element)
-	{
-		PsiElement result = element.getPrevSibling();
-		while (true)
-		{
-			if (result == null)
-			{
-				break;
-			}
+public class TemplateToolkitPsiUtil {
+  @Nullable
+  public static PsiElement getPrevSignificantSibling(PsiElement element) {
+    PsiElement result = element.getPrevSibling();
+    while (true) {
+      if (result == null) {
+        break;
+      }
 
-			IElementType tokenType = result.getNode().getElementType();
+      IElementType tokenType = result.getNode().getElementType();
 
-			if (!TemplateToolkitParserDefinition.WHITESPACES_AND_COMMENTS.contains(tokenType))
-			{
-				break;
-			}
-			result = result.getPrevSibling();
-		}
-		return result;
-	}
+      if (!TemplateToolkitParserDefinition.WHITESPACES_AND_COMMENTS.contains(tokenType)) {
+        break;
+      }
+      result = result.getPrevSibling();
+    }
+    return result;
+  }
 
-	@Nullable
-	public static IElementType getLastOpenMarker(Editor editor)
-	{
-		int offset = editor.getCaretModel().getOffset();
-		HighlighterIterator iterator = ((EditorEx) editor).getHighlighter().createIterator(offset);
+  @Nullable
+  public static IElementType getLastOpenMarker(Editor editor) {
+    int offset = editor.getCaretModel().getOffset();
+    HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(offset);
 
-		while (!iterator.atEnd())
-		{
-			IElementType tokenType = iterator.getTokenType();
-			if (TemplateToolkitSyntaxElements.OPEN_TAGS.contains(tokenType))
-			{
-				return tokenType;
-			}
-			iterator.retreat();
-		}
+    while (!iterator.atEnd()) {
+      IElementType tokenType = iterator.getTokenType();
+      if (TemplateToolkitSyntaxElements.OPEN_TAGS.contains(tokenType)) {
+        return tokenType;
+      }
+      iterator.retreat();
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

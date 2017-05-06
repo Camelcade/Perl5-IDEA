@@ -29,27 +29,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public abstract class HTMLMasonStubBasedElement<T extends StubElement> extends PerlStubBasedPsiElementBase<T> implements HTMLMasonCompositeElement
-{
-	public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public abstract class HTMLMasonStubBasedElement<T extends StubElement> extends PerlStubBasedPsiElementBase<T>
+  implements HTMLMasonCompositeElement {
+  public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public HTMLMasonStubBasedElement(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public HTMLMasonStubBasedElement(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
+  }
 
-	public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return super.processDeclarations(processor, state, lastParent, place);
-	}
-
+  public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor,
+                                            @NotNull ResolveState state,
+                                            PsiElement lastParent,
+                                            @NotNull PsiElement place) {
+    return super.processDeclarations(processor, state, lastParent, place);
+  }
 }

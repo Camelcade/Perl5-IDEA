@@ -26,30 +26,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlFileImpl extends PerlFileImpl
-{
-	public EmbeddedPerlFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
-	}
+public class EmbeddedPerlFileImpl extends PerlFileImpl {
+  public EmbeddedPerlFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, EmbeddedPerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "Embedded Perl file";
-	}
+  @Override
+  public String toString() {
+    return "Embedded Perl file";
+  }
 
 
-	@Override
-	protected FileType getDefaultFileType()
-	{
-		return EmbeddedPerlFileType.INSTANCE;
-	}
+  @Override
+  protected FileType getDefaultFileType() {
+    return EmbeddedPerlFileType.INSTANCE;
+  }
 
-	@Override
-	public byte[] getPerlContentInBytes()
-	{
-		return null;
-	}
-
+  @Override
+  public byte[] getPerlContentInBytes() {
+    return null;
+  }
 }

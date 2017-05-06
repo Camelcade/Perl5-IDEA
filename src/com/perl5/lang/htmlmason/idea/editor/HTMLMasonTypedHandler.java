@@ -37,87 +37,68 @@ import java.util.Map;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonTypedHandler extends TypedHandlerDelegate implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns
-{
-	@Override
-	public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file)
-	{
-		if (file.getViewProvider() instanceof HTMLMasonFileViewProvider)
-		{
-			if (c == '>')
-			{
-				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element))
-				{
-					assert element != null;
-					String elementText = element.getText();
-					String closeTag;
-					if (elementText.equals(KEYWORD_FLAGS))
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
-					}
-					else
-					{
-						if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null)
-						{
-							EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
-						}
-					}
-				}
-			}
-			else if (c == ' ')
-			{
-				PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-				if (element != null)
-				{
-					IElementType elementType = element.getNode().getElementType();
-					if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER))
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
-					}
-					else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER))
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
-					}
-					else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER))
-					{
-						EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
-					}
-					else if (elementType == HTML_MASON_METHOD_OPENER)
-					{
-						String closeTag = getCloseTag(project, element.getText());
-						if (closeTag != null)
-						{
-							EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
-						}
-					}
-					else if (elementType == HTML_MASON_DEF_OPENER)
-					{
-						String closeTag = getCloseTag(project, element.getText());
-						if (closeTag != null)
-						{
-							EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
-						}
-					}
-				}
-			}
+public class HTMLMasonTypedHandler extends TypedHandlerDelegate
+  implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns {
+  @Override
+  public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    if (file.getViewProvider() instanceof HTMLMasonFileViewProvider) {
+      if (c == '>') {
+        PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
+        if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element)) {
+          assert element != null;
+          String elementText = element.getText();
+          String closeTag;
+          if (elementText.equals(KEYWORD_FLAGS)) {
+            EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
+          }
+          else {
+            if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null) {
+              EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+            }
+          }
+        }
+      }
+      else if (c == ' ') {
+        PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
+        if (element != null) {
+          IElementType elementType = element.getNode().getElementType();
+          if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER)) {
+            EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
+          }
+          else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
+            EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
+          }
+          else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
+            EditorModificationUtil
+              .insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
+          }
+          else if (elementType == HTML_MASON_METHOD_OPENER) {
+            String closeTag = getCloseTag(project, element.getText());
+            if (closeTag != null) {
+              EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+            }
+          }
+          else if (elementType == HTML_MASON_DEF_OPENER) {
+            String closeTag = getCloseTag(project, element.getText());
+            if (closeTag != null) {
+              EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+            }
+          }
+        }
+      }
+    }
 
-		}
+    return super.charTyped(c, project, editor, file);
+  }
 
-		return super.charTyped(c, project, editor, file);
-	}
+  protected String getCloseTag(Project project, String openTag) {
+    HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+    Map<String, String> openCloseMap = settings.getOpenCloseMap();
+    return openCloseMap.get(openTag);
+  }
 
-	protected String getCloseTag(Project project, String openTag)
-	{
-		HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-		Map<String, String> openCloseMap = settings.getOpenCloseMap();
-		return openCloseMap.get(openTag);
-	}
-
-	protected boolean isNextElement(PsiElement element, IElementType typeToCheck)
-	{
-		PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(element);
-		return nextElement != null && nextElement.getNode().getElementType() == typeToCheck;
-	}
-
+  protected boolean isNextElement(PsiElement element, IElementType typeToCheck) {
+    PsiElement nextElement = PerlPsiUtil.getNextSignificantSibling(element);
+    return nextElement != null && nextElement.getNode().getElementType() == typeToCheck;
+  }
 }

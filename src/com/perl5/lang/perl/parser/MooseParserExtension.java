@@ -21,6 +21,5 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface MooseParserExtension extends MooseElementTypes
-{
+public interface MooseParserExtension extends MooseElementTypes {
 }

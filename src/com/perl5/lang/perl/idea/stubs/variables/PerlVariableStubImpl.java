@@ -28,78 +28,67 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrapper> implements PerlVariableStub
-{
-	private final String myPackageName;
-	private final String myVariableName;
-	private final String myDeclaredType;
-	private final PerlVariableType myVariableType;
-	private final PerlVariableAnnotations myPerlVariableAnnotations;
+public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrapper> implements PerlVariableStub {
+  private final String myPackageName;
+  private final String myVariableName;
+  private final String myDeclaredType;
+  private final PerlVariableType myVariableType;
+  private final PerlVariableAnnotations myPerlVariableAnnotations;
 
-	public PerlVariableStubImpl(
-			StubElement parent,
-			IStubElementType elementType,
-			String packageName,
-			String variableName,
-			String declaredType,
-			PerlVariableType variableType,
-			PerlVariableAnnotations variableAnnotations
-	)
-	{
-		super(parent, elementType);
-		myPackageName = packageName;
-		myVariableName = variableName;
-		myDeclaredType = declaredType;
-		myVariableType = variableType;
-		myPerlVariableAnnotations = variableAnnotations;
-	}
+  public PerlVariableStubImpl(
+    StubElement parent,
+    IStubElementType elementType,
+    String packageName,
+    String variableName,
+    String declaredType,
+    PerlVariableType variableType,
+    PerlVariableAnnotations variableAnnotations
+  ) {
+    super(parent, elementType);
+    myPackageName = packageName;
+    myVariableName = variableName;
+    myDeclaredType = declaredType;
+    myVariableType = variableType;
+    myPerlVariableAnnotations = variableAnnotations;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return myPackageName;
-	}
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
 
-	@Override
-	public String getVariableName()
-	{
-		return myVariableName;
-	}
+  @Override
+  public String getVariableName() {
+    return myVariableName;
+  }
 
-	@Override
-	public String getDeclaredType()
-	{
-		return myDeclaredType;
-	}
+  @Override
+  public String getDeclaredType() {
+    return myDeclaredType;
+  }
 
-	@Override
-	public PerlVariableType getActualType()
-	{
-		return myVariableType;
-	}
+  @Override
+  public PerlVariableType getActualType() {
+    return myVariableType;
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getVariableAnnotations()
-	{
-		return myPerlVariableAnnotations;
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getVariableAnnotations() {
+    return myPerlVariableAnnotations;
+  }
 
-	@Override
-	public StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey()
-	{
-		if (myVariableType == PerlVariableType.ARRAY)
-		{
-			return PerlVariablesStubIndex.KEY_ARRAY;
-		}
-		else if (myVariableType == PerlVariableType.SCALAR)
-		{
-			return PerlVariablesStubIndex.KEY_SCALAR;
-		}
-		else if (myVariableType == PerlVariableType.HASH)
-		{
-			return PerlVariablesStubIndex.KEY_HASH;
-		}
-		throw new RuntimeException("Don't have key for " + myVariableType);
-	}
+  @Override
+  public StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey() {
+    if (myVariableType == PerlVariableType.ARRAY) {
+      return PerlVariablesStubIndex.KEY_ARRAY;
+    }
+    else if (myVariableType == PerlVariableType.SCALAR) {
+      return PerlVariablesStubIndex.KEY_SCALAR;
+    }
+    else if (myVariableType == PerlVariableType.HASH) {
+      return PerlVariablesStubIndex.KEY_HASH;
+    }
+    throw new RuntimeException("Don't have key for " + myVariableType);
+  }
 }

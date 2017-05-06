@@ -26,43 +26,38 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonElementTypes
-{
-	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(HTML_MASON_BLOCK_OPENER, HTML_MASON_BLOCK_CLOSER, false),
-			new BracePair(HTML_MASON_CALL_OPENER, HTML_MASON_CALL_CLOSER, false),
-			new BracePair(HTML_MASON_CALL_FILTERING_OPENER, HTML_MASON_CALL_CLOSE_TAG_START, false),
-			new BracePair(HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER, false),
-			new BracePair(HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER, false),
-			new BracePair(HTML_MASON_FILTER_OPENER, HTML_MASON_FILTER_CLOSER, false),
-			new BracePair(HTML_MASON_DOC_OPENER, HTML_MASON_DOC_CLOSER, false),
-			new BracePair(HTML_MASON_ATTR_OPENER, HTML_MASON_ATTR_CLOSER, false),
-			new BracePair(HTML_MASON_ARGS_OPENER, HTML_MASON_ARGS_CLOSER, false),
-			new BracePair(HTML_MASON_TEXT_OPENER, HTML_MASON_TEXT_CLOSER, false),
-			new BracePair(HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER, false),
-			new BracePair(HTML_MASON_INIT_OPENER, HTML_MASON_INIT_CLOSER, false),
-			new BracePair(HTML_MASON_ONCE_OPENER, HTML_MASON_ONCE_CLOSER, false),
-			new BracePair(HTML_MASON_SHARED_OPENER, HTML_MASON_SHARED_CLOSER, false),
-			new BracePair(HTML_MASON_CLEANUP_OPENER, HTML_MASON_CLEANUP_CLOSER, false),
-			new BracePair(HTML_MASON_FLAGS_OPENER, HTML_MASON_FLAGS_CLOSER, false),
-	};
+public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonElementTypes {
+  private static final BracePair[] PAIRS = new BracePair[]{
+    new BracePair(HTML_MASON_BLOCK_OPENER, HTML_MASON_BLOCK_CLOSER, false),
+    new BracePair(HTML_MASON_CALL_OPENER, HTML_MASON_CALL_CLOSER, false),
+    new BracePair(HTML_MASON_CALL_FILTERING_OPENER, HTML_MASON_CALL_CLOSE_TAG_START, false),
+    new BracePair(HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER, false),
+    new BracePair(HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER, false),
+    new BracePair(HTML_MASON_FILTER_OPENER, HTML_MASON_FILTER_CLOSER, false),
+    new BracePair(HTML_MASON_DOC_OPENER, HTML_MASON_DOC_CLOSER, false),
+    new BracePair(HTML_MASON_ATTR_OPENER, HTML_MASON_ATTR_CLOSER, false),
+    new BracePair(HTML_MASON_ARGS_OPENER, HTML_MASON_ARGS_CLOSER, false),
+    new BracePair(HTML_MASON_TEXT_OPENER, HTML_MASON_TEXT_CLOSER, false),
+    new BracePair(HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER, false),
+    new BracePair(HTML_MASON_INIT_OPENER, HTML_MASON_INIT_CLOSER, false),
+    new BracePair(HTML_MASON_ONCE_OPENER, HTML_MASON_ONCE_CLOSER, false),
+    new BracePair(HTML_MASON_SHARED_OPENER, HTML_MASON_SHARED_CLOSER, false),
+    new BracePair(HTML_MASON_CLEANUP_OPENER, HTML_MASON_CLEANUP_CLOSER, false),
+    new BracePair(HTML_MASON_FLAGS_OPENER, HTML_MASON_FLAGS_CLOSER, false),
+  };
 
-	@Override
-	public BracePair[] getPairs()
-	{
-		return PAIRS;
-	}
+  @Override
+  public BracePair[] getPairs() {
+    return PAIRS;
+  }
 
-	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType)
-	{
-		return true;
-	}
+  @Override
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType) {
+    return true;
+  }
 
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
-		return openingBraceOffset;
-	}
-
+  @Override
+  public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
+    return openingBraceOffset;
+  }
 }

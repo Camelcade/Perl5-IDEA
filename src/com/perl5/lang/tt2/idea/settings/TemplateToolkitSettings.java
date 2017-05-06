@@ -46,209 +46,174 @@ import java.util.List;
  * Created by hurricup on 05.06.2016.
  */
 @State(
-		name = "TemplateToolkitSettings",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "TemplateToolkitSettings",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings>
-{
-	public static final String DEFAULT_START_TAG = "[%";
-	public static final String DEFAULT_END_TAG = "%]";
-	public static final String DEFAULT_OUTLINE_TAG = "%%";
+public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings> {
+  public static final String DEFAULT_START_TAG = "[%";
+  public static final String DEFAULT_END_TAG = "%]";
+  public static final String DEFAULT_OUTLINE_TAG = "%%";
 
-	public List<String> substitutedExtensions = new ArrayList<String>();
-	public List<String> TEMPLATE_DIRS = new ArrayList<String>();
-	public String START_TAG = DEFAULT_START_TAG;
-	public String END_TAG = DEFAULT_END_TAG;
-	public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
-	public boolean ENABLE_ANYCASE = false;
+  public List<String> substitutedExtensions = new ArrayList<String>();
+  public List<String> TEMPLATE_DIRS = new ArrayList<String>();
+  public String START_TAG = DEFAULT_START_TAG;
+  public String END_TAG = DEFAULT_END_TAG;
+  public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
+  public boolean ENABLE_ANYCASE = false;
 
-	@Transient
-	private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
-	@Transient
-	private transient AtomicNotNullLazyValue<List<VirtualFile>> myLazyVirtualFilesRoots;
-	@Transient
-	private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
-	@Transient
-	private transient Project myProject;
+  @Transient
+  private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
+  @Transient
+  private transient AtomicNotNullLazyValue<List<VirtualFile>> myLazyVirtualFilesRoots;
+  @Transient
+  private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
+  @Transient
+  private transient Project myProject;
 
-	public TemplateToolkitSettings()
-	{
-		createLazyObjects();
-	}
+  public TemplateToolkitSettings() {
+    createLazyObjects();
+  }
 
-	@NotNull
-	public static TemplateToolkitSettings getInstance(@NotNull Project project)
-	{
-		TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
+  public void settingsUpdated() {
+    createLazyObjects();
+    final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+    if (fileTypeManager instanceof FileTypeManagerImpl) {
+      ApplicationManager.getApplication().runWriteAction(
+        new Runnable() {
+          @Override
+          public void run() {
+            ((FileTypeManagerImpl)fileTypeManager).fireBeforeFileTypesChanged();
+            ((FileTypeManagerImpl)fileTypeManager).fireFileTypesChanged();
+          }
+        }
 
-		if (persisted == null)
-		{
-			persisted = new TemplateToolkitSettings();
-		}
-		persisted.setProject(project);
+      );
+    }
+    FileContentUtil.reparseOpenedFiles();
+  }
 
-		return persisted;
-	}
+  protected void setProject(Project project) {
+    myProject = project;
+  }
 
-	public void settingsUpdated()
-	{
-		createLazyObjects();
-		final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-		if (fileTypeManager instanceof FileTypeManagerImpl)
-		{
-			ApplicationManager.getApplication().runWriteAction(
-					new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							((FileTypeManagerImpl) fileTypeManager).fireBeforeFileTypesChanged();
-							((FileTypeManagerImpl) fileTypeManager).fireFileTypesChanged();
-						}
-					}
+  private void createLazyObjects() {
+    myLazyMatchers = new AtomicNotNullLazyValue<List<FileNameMatcher>>() {
+      @SuppressWarnings("Duplicates")
+      @NotNull
+      @Override
+      protected List<FileNameMatcher> compute() {
+        List<FileNameMatcher> result = new ArrayList<FileNameMatcher>();
+        FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+        for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+          if (fileType instanceof LanguageFileType) {
+            for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+              if (substitutedExtensions.contains(matcher.getPresentableString())) {
+                result.add(matcher);
+              }
+            }
+          }
+        }
+        return result;
+      }
+    };
 
-			);
-		}
-		FileContentUtil.reparseOpenedFiles();
-	}
+    myLazyVirtualFilesRoots = new AtomicNotNullLazyValue<List<VirtualFile>>() {
+      @NotNull
+      @Override
+      protected List<VirtualFile> compute() {
+        List<VirtualFile> result = new ArrayList<VirtualFile>();
 
-	protected void setProject(Project project)
-	{
-		myProject = project;
-	}
+        for (String relativeRoot : TEMPLATE_DIRS) {
+          VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
+          if (rootFile != null && rootFile.exists()) {
+            result.add(rootFile);
+          }
+        }
 
-	private void createLazyObjects()
-	{
-		myLazyMatchers = new AtomicNotNullLazyValue<List<FileNameMatcher>>()
-		{
-			@SuppressWarnings("Duplicates")
-			@NotNull
-			@Override
-			protected List<FileNameMatcher> compute()
-			{
-				List<FileNameMatcher> result = new ArrayList<FileNameMatcher>();
-				FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-				for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
-				{
-					if (fileType instanceof LanguageFileType)
-					{
-						for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
-						{
-							if (substitutedExtensions.contains(matcher.getPresentableString()))
-							{
-								result.add(matcher);
-							}
-						}
-					}
-				}
-				return result;
-			}
-		};
+        return result;
+      }
+    };
 
-		myLazyVirtualFilesRoots = new AtomicNotNullLazyValue<List<VirtualFile>>()
-		{
-			@NotNull
-			@Override
-			protected List<VirtualFile> compute()
-			{
-				List<VirtualFile> result = new ArrayList<VirtualFile>();
+    myLazyPsiDirsRoots = new AtomicNotNullLazyValue<Collection<PsiFileSystemItem>>() {
+      @NotNull
+      @Override
+      protected Collection<PsiFileSystemItem> compute() {
+        Collection<PsiFileSystemItem> result = new ArrayDeque<PsiFileSystemItem>();
 
-				for (String relativeRoot : TEMPLATE_DIRS)
-				{
-					VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
-					if (rootFile != null && rootFile.exists())
-					{
-						result.add(rootFile);
-					}
-				}
+        PsiManager psiManager = PsiManager.getInstance(myProject);
+        for (VirtualFile virtualFile : getTemplateRoots()) {
+          PsiDirectory directory = psiManager.findDirectory(virtualFile);
+          if (directory != null) {
+            result.add(directory);
+          }
+        }
+        return result;
+      }
+    };
+  }
 
-				return result;
-			}
-		};
+  @Nullable
+  @Override
+  public TemplateToolkitSettings getState() {
+    return this;
+  }
 
-		myLazyPsiDirsRoots = new AtomicNotNullLazyValue<Collection<PsiFileSystemItem>>()
-		{
-			@NotNull
-			@Override
-			protected Collection<PsiFileSystemItem> compute()
-			{
-				Collection<PsiFileSystemItem> result = new ArrayDeque<PsiFileSystemItem>();
+  @Override
+  public void loadState(TemplateToolkitSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-				PsiManager psiManager = PsiManager.getInstance(myProject);
-				for (VirtualFile virtualFile : getTemplateRoots())
-				{
-					PsiDirectory directory = psiManager.findDirectory(virtualFile);
-					if (directory != null)
-					{
-						result.add(directory);
-					}
-				}
-				return result;
-			}
-		};
-	}
+  @NotNull
+  public List<FileNameMatcher> getMatchers() {
+    return myLazyMatchers.getValue();
+  }
 
-	@Nullable
-	@Override
-	public TemplateToolkitSettings getState()
-	{
-		return this;
-	}
+  @NotNull
+  public List<VirtualFile> getTemplateRoots() {
+    return myLazyVirtualFilesRoots.getValue();
+  }
 
-	@Override
-	public void loadState(TemplateToolkitSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  @NotNull
+  public Collection<PsiFileSystemItem> getTemplatePsiRoots() {
+    return myLazyPsiDirsRoots.getValue();
+  }
 
-	@NotNull
-	public List<FileNameMatcher> getMatchers()
-	{
-		return myLazyMatchers.getValue();
-	}
+  /**
+   * Checks if virtualFile is under configured root
+   *
+   * @return true or false
+   */
+  public boolean isVirtualFileUnderRoot(@NotNull VirtualFile file) {
+    for (VirtualFile root : getTemplateRoots()) {
+      if (VfsUtil.isAncestor(root, file, true)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	@NotNull
-	public List<VirtualFile> getTemplateRoots()
-	{
-		return myLazyVirtualFilesRoots.getValue();
-	}
+  public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
+    for (FileNameMatcher matcher : getMatchers()) {
+      if (matcher.accept(file.getName())) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	@NotNull
-	public Collection<PsiFileSystemItem> getTemplatePsiRoots()
-	{
-		return myLazyPsiDirsRoots.getValue();
-	}
+  @NotNull
+  public static TemplateToolkitSettings getInstance(@NotNull Project project) {
+    TemplateToolkitSettings persisted = ServiceManager.getService(project, TemplateToolkitSettings.class);
 
-	/**
-	 * Checks if virtualFile is under configured root
-	 *
-	 * @return true or false
-	 */
-	public boolean isVirtualFileUnderRoot(@NotNull VirtualFile file)
-	{
-		for (VirtualFile root : getTemplateRoots())
-		{
-			if (VfsUtil.isAncestor(root, file, true))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    if (persisted == null) {
+      persisted = new TemplateToolkitSettings();
+    }
+    persisted.setProject(project);
 
-	public boolean isVirtualFileNameMatches(@NotNull VirtualFile file)
-	{
-		for (FileNameMatcher matcher : getMatchers())
-		{
-			if (matcher.accept(file.getName()))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    return persisted;
+  }
 }

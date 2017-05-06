@@ -25,31 +25,25 @@ import com.perl5.PerlBundle;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggingEventReady extends PerlDebuggingEventBase
-{
-	private static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
-	public String version;
+public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
+  private static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
+  public String version;
 
-	@Override
-	public void run()
-	{
-	}
+  @Override
+  public void run() {
+  }
 
-	public boolean isValid()
-	{
-		if (StringUtil.isNotEmpty(version) && StringUtil.startsWith(version, MODULE_VERSION_PREFIX))
-		{
-			return true;
-		}
+  public boolean isValid() {
+    if (StringUtil.isNotEmpty(version) && StringUtil.startsWith(version, MODULE_VERSION_PREFIX)) {
+      return true;
+    }
 
-		Notifications.Bus.notify(new Notification(
-				"PERL_DEBUGGER",
-				PerlBundle.message("perl.debugger.incorrect.version.title"),
-				PerlBundle.message("perl.debugger.incorrect.version.message", MODULE_VERSION_PREFIX, version),
-				NotificationType.ERROR
-		));
-		return false;
-	}
-
-
+    Notifications.Bus.notify(new Notification(
+      "PERL_DEBUGGER",
+      PerlBundle.message("perl.debugger.incorrect.version.title"),
+      PerlBundle.message("perl.debugger.incorrect.version.message", MODULE_VERSION_PREFIX, version),
+      NotificationType.ERROR
+    ));
+    return false;
+  }
 }

@@ -29,52 +29,45 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement>
-{
-	public PerlNamespaceFileReference(PerlNamespaceElement psiElement)
-	{
-		super(psiElement);
-	}
+public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement> {
+  public PerlNamespaceFileReference(PerlNamespaceElement psiElement) {
+    super(psiElement);
+  }
 
-	public String getPackageName()
-	{
-		return myElement.getCanonicalName();
-	}
+  public String getPackageName() {
+    return myElement.getCanonicalName();
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PerlNamespaceElement myElement = getElement();
-		PsiFile file = myElement.getContainingFile();
-		PsiFile targetFile = null;
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PerlNamespaceElement myElement = getElement();
+    PsiFile file = myElement.getContainingFile();
+    PsiFile targetFile = null;
 
-		targetFile = PerlPackageUtil.resolvePackageNameToPsi(file, getPackageName());
+    targetFile = PerlPackageUtil.resolvePackageNameToPsi(file, getPackageName());
 
-		return targetFile == null
-				? ResolveResult.EMPTY_ARRAY
-				: new ResolveResult[]{new PsiElementResolveResult(targetFile)};
-	}
+    return targetFile == null
+           ? ResolveResult.EMPTY_ARRAY
+           : new ResolveResult[]{new PsiElementResolveResult(targetFile)};
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		String currentName = myElement.getCanonicalName();
-		if (currentName != null && newElementName.endsWith(".pm"))
-		{
-			String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
-			nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
-			newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    String currentName = myElement.getCanonicalName();
+    if (currentName != null && newElementName.endsWith(".pm")) {
+      String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+      nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
+      newElementName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
 
-			return super.handleElementRename(newElementName);
-		}
+      return super.handleElementRename(newElementName);
+    }
 
-		throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
-	}
+    throw new IncorrectOperationException("Can't bind package use/require to a non-pm file: " + newElementName);
+  }
 
-	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-		// fixme this is a stub to avoid exception
-		return myElement;
-	}
+  @Override
+  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    // fixme this is a stub to avoid exception
+    return myElement;
+  }
 }

@@ -26,13 +26,12 @@ import java.util.List;
  * Created by hurricup on 08.01.2016.
  * This interfact must be implemented in psi elements, which providing implicit variables declarations
  */
-public interface PerlImplicitVariablesProvider extends PsiElement
-{
-	/**
-	 * Returns plain list of full-qualified variable names sigil and name
-	 *
-	 * @return variable names
-	 */
-	@NotNull
-	List<PerlVariableDeclarationWrapper> getImplicitVariables();
+public interface PerlImplicitVariablesProvider extends PsiElement {
+  /**
+   * Returns plain list of full-qualified variable names sigil and name
+   *
+   * @return variable names
+   */
+  @NotNull
+  List<PerlVariableDeclarationWrapper> getImplicitVariables();
 }

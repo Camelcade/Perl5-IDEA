@@ -31,41 +31,33 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.08.2015.
  */
-public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes
-{
-	EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
+  EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
-	public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated)
-	{
-		if (isDeprecated)
-		{
-			textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
-		}
-		return textAttributes;
-	}
+  public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated) {
+    if (isDeprecated) {
+      textAttributes = TextAttributes.merge(textAttributes, currentScheme.getAttributes(CodeInsightColors.DEPRECATED_ATTRIBUTES));
+    }
+    return textAttributes;
+  }
 
 
-	public void decorateElement(Annotation annotation, TextAttributesKey key, boolean deprecated)
-	{
-		annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-	}
+  public void decorateElement(Annotation annotation, TextAttributesKey key, boolean deprecated) {
+    annotation.setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
+  }
 
-	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key, boolean deprecated)
-	{
-		if (element == null)
-		{
-			return;
-		}
-		holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
-	}
+  public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key, boolean deprecated) {
+    if (element == null) {
+      return;
+    }
+    holder.createInfoAnnotation(element, null)
+      .setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(key), deprecated));
+  }
 
-	public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key)
-	{
-		if (element == null)
-		{
-			return;
-		}
-		holder.createInfoAnnotation(element, null).setTextAttributes(key);
-	}
-
+  public void decorateElement(PsiElement element, @NotNull AnnotationHolder holder, TextAttributesKey key) {
+    if (element == null) {
+      return;
+    }
+    holder.createInfoAnnotation(element, null).setTextAttributes(key);
+  }
 }

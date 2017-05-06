@@ -31,54 +31,44 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelDeclarationImplMixin extends PerlCompositeElementImpl implements PerlLabelDeclaration
-{
-	public PerlLabelDeclarationImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlLabelDeclarationImplMixin extends PerlCompositeElementImpl implements PerlLabelDeclaration {
+  public PerlLabelDeclarationImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
+  @Override
+  public String getPresentableName() {
+    return getName();
+  }
 
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			return nameIdentifier.getText();
-		}
-		return null;
-	}
+  @Override
+  public String getName() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      return nameIdentifier.getText();
+    }
+    return null;
+  }
 
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getFirstChild();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getFirstChild();
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			PerlPsiUtil.renameElement(nameIdentifier, name);
-		}
-		return null;
-	}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      PerlPsiUtil.renameElement(nameIdentifier, name);
+    }
+    return null;
+  }
 
-	@NotNull
-	@Override
-	public SearchScope getUseScope()
-	{
-		return new LocalSearchScope(getContainingFile());
-	}
-
+  @NotNull
+  @Override
+  public SearchScope getUseScope() {
+    return new LocalSearchScope(getContainingFile());
+  }
 }

@@ -23,11 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonNamesValidator extends PerlNamesValidator
-{
-	@Override
-	public boolean isIdentifier(@NotNull String name, Project project)
-	{
-		return true;
-	}
+public class HTMLMasonNamesValidator extends PerlNamesValidator {
+  @Override
+  public boolean isIdentifier(@NotNull String name, Project project) {
+    return true;
+  }
 }

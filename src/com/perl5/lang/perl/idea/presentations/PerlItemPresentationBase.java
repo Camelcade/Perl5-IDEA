@@ -28,30 +28,26 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlItemPresentationBase implements ColoredItemPresentation
-{
-	PsiElement myElement;
-	TextAttributesKey myAttributesKey;
+public abstract class PerlItemPresentationBase implements ColoredItemPresentation {
+  PsiElement myElement;
+  TextAttributesKey myAttributesKey;
 
-	public PerlItemPresentationBase(PsiElement element)
-	{
-		myElement = element;
-		myAttributesKey = myElement instanceof PerlDeprecatable && ((PerlDeprecatable) myElement).isDeprecated()
-				? CodeInsightColors.DEPRECATED_ATTRIBUTES
-				: null;
-	}
+  public PerlItemPresentationBase(PsiElement element) {
+    myElement = element;
+    myAttributesKey = myElement instanceof PerlDeprecatable && ((PerlDeprecatable)myElement).isDeprecated()
+                      ? CodeInsightColors.DEPRECATED_ATTRIBUTES
+                      : null;
+  }
 
-	@Nullable
-	@Override
-	public String getLocationString()
-	{
-		if (!myElement.isValid())
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  public String getLocationString() {
+    if (!myElement.isValid()) {
+      return null;
+    }
 
 /*		fixme seems this reparses file
-		String suffix = "";
+                String suffix = "";
 
 		PsiFile file = myElement.getContainingFile();
 		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
@@ -60,30 +56,26 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
 			suffix = ", line " + (document.getLineNumber(myElement.getTextOffset()) + 1);
 */
 
-		return getElement().getContainingFile().getName();// + suffix;
-	}
+    return getElement().getContainingFile().getName();// + suffix;
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(boolean unused)
-	{
-		return myElement.getIcon(0);
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(boolean unused) {
+    return myElement.getIcon(0);
+  }
 
-	public PsiElement getElement()
-	{
-		return myElement;
-	}
+  public PsiElement getElement() {
+    return myElement;
+  }
 
-	@Nullable
-	@Override
-	public TextAttributesKey getTextAttributesKey()
-	{
-		return myAttributesKey;
-	}
+  @Nullable
+  @Override
+  public TextAttributesKey getTextAttributesKey() {
+    return myAttributesKey;
+  }
 
-	public void setAttributesKey(TextAttributesKey myAttributesKey)
-	{
-		this.myAttributesKey = myAttributesKey;
-	}
+  public void setAttributesKey(TextAttributesKey myAttributesKey) {
+    this.myAttributesKey = myAttributesKey;
+  }
 }

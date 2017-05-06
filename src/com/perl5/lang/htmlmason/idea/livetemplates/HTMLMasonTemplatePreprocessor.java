@@ -22,10 +22,8 @@ import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonTemplatePreprocessor extends AbstractMasonTemplatePreprocessor
-{
-	protected boolean isMyFile(PsiFile file)
-	{
-		return file instanceof HTMLMasonFileImpl;
-	}
+public class HTMLMasonTemplatePreprocessor extends AbstractMasonTemplatePreprocessor {
+  protected boolean isMyFile(PsiFile file) {
+    return file instanceof HTMLMasonFileImpl;
+  }
 }

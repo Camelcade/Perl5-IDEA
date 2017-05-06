@@ -41,106 +41,87 @@ import java.util.Comparator;
 /**
  * Created by hurricup on 30.08.2015.
  */
-public class PerlMicroIdeSettingsLoader implements ProjectComponent
-{
-	private static final String PERL5_LIBRARY_NAME = "Perl5 library: ";
+public class PerlMicroIdeSettingsLoader implements ProjectComponent {
+  private static final String PERL5_LIBRARY_NAME = "Perl5 library: ";
 
-	protected Project myProject;
-	protected PerlSharedSettings perl5Settings;
+  protected Project myProject;
+  protected PerlSharedSettings perl5Settings;
 
-	public PerlMicroIdeSettingsLoader(Project project)
-	{
-		myProject = project;
-		perl5Settings = PerlSharedSettings.getInstance(project);
-	}
+  public PerlMicroIdeSettingsLoader(Project project) {
+    myProject = project;
+    perl5Settings = PerlSharedSettings.getInstance(project);
+  }
 
-	public static void applyClassPaths(ModifiableRootModel rootModel)
-	{
-		for (OrderEntry entry : rootModel.getOrderEntries())
-		{
-//			System.err.println("Checking " + entry + " of " + entry.getClass());
-			if (entry instanceof LibraryOrderEntry)
-			{
+  public void initComponent() {
+    // TODO: insert component initialization logic here
+  }
 
-				String libraryName = ((LibraryOrderEntry) entry).getLibraryName();
+  public void disposeComponent() {
+    // TODO: insert component disposal logic here
+  }
 
-				if (StringUtil.isNotEmpty(libraryName) && StringUtil.startsWith(libraryName, PERL5_LIBRARY_NAME))
-				{
-//				System.err.println("Removing " + entry);
-					rootModel.removeOrderEntry(entry);
-				}
-			}
-		}
+  @NotNull
+  public String getComponentName() {
+    return "PerlMicroIdeSettingsLoader";
+  }
 
-		LibraryTable table = rootModel.getModuleLibraryTable();
+  public void projectOpened() {
+  }
 
-		for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
-		{
-			Library tableLibrary = table.createLibrary(PERL5_LIBRARY_NAME + virtualFile.getCanonicalPath());
-			Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-			modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
-			modifiableModel.commit();
-		}
+  public void projectClosed() {
+    // called when project is being closed
+  }
 
-		OrderEntry[] entries = rootModel.getOrderEntries();
+  public static void applyClassPaths(ModifiableRootModel rootModel) {
+    for (OrderEntry entry : rootModel.getOrderEntries()) {
+      //			System.err.println("Checking " + entry + " of " + entry.getClass());
+      if (entry instanceof LibraryOrderEntry) {
 
-		ContainerUtil.sort(entries, new Comparator<OrderEntry>()
-		{
-			@Override
-			public int compare(OrderEntry orderEntry, OrderEntry t1)
-			{
-				int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
-				int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
-				return i2 - i1;
-			}
-		});
-		rootModel.rearrangeOrderEntries(entries);
+        String libraryName = ((LibraryOrderEntry)entry).getLibraryName();
 
-		if (!PlatformUtils.isIntelliJ())
-		{
-			// add perl @inc to the end of libs
-			PerlLocalSettings settings = PerlLocalSettings.getInstance(rootModel.getProject());
-			if (!settings.PERL_PATH.isEmpty())
-			{
-				for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.PERL_PATH))
-				{
-					VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
-					if (incFile != null)
-					{
-						Library tableLibrary = table.createLibrary();
-						Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
-						modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
-						modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
-						modifiableModel.commit();
-					}
-				}
-			}
-		}
-	}
+        if (StringUtil.isNotEmpty(libraryName) && StringUtil.startsWith(libraryName, PERL5_LIBRARY_NAME)) {
+          //				System.err.println("Removing " + entry);
+          rootModel.removeOrderEntry(entry);
+        }
+      }
+    }
 
-	public void initComponent()
-	{
-		// TODO: insert component initialization logic here
-	}
+    LibraryTable table = rootModel.getModuleLibraryTable();
 
-	public void disposeComponent()
-	{
-		// TODO: insert component disposal logic here
-	}
+    for (VirtualFile virtualFile : rootModel.getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE)) {
+      Library tableLibrary = table.createLibrary(PERL5_LIBRARY_NAME + virtualFile.getCanonicalPath());
+      Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
+      modifiableModel.addRoot(virtualFile, OrderRootType.CLASSES);
+      modifiableModel.commit();
+    }
 
-	@NotNull
-	public String getComponentName()
-	{
-		return "PerlMicroIdeSettingsLoader";
-	}
+    OrderEntry[] entries = rootModel.getOrderEntries();
 
-	public void projectOpened()
-	{
-	}
+    ContainerUtil.sort(entries, new Comparator<OrderEntry>() {
+      @Override
+      public int compare(OrderEntry orderEntry, OrderEntry t1) {
+        int i1 = orderEntry instanceof LibraryOrderEntry ? 1 : 0;
+        int i2 = t1 instanceof LibraryOrderEntry ? 1 : 0;
+        return i2 - i1;
+      }
+    });
+    rootModel.rearrangeOrderEntries(entries);
 
-	public void projectClosed()
-	{
-		// called when project is being closed
-	}
-
+    if (!PlatformUtils.isIntelliJ()) {
+      // add perl @inc to the end of libs
+      PerlLocalSettings settings = PerlLocalSettings.getInstance(rootModel.getProject());
+      if (!settings.PERL_PATH.isEmpty()) {
+        for (String incPath : PerlSdkType.getInstance().getINCPaths(settings.PERL_PATH)) {
+          VirtualFile incFile = LocalFileSystem.getInstance().findFileByIoFile(new File(incPath));
+          if (incFile != null) {
+            Library tableLibrary = table.createLibrary();
+            Library.ModifiableModel modifiableModel = tableLibrary.getModifiableModel();
+            modifiableModel.addRoot(incFile, OrderRootType.CLASSES);
+            modifiableModel.addRoot(incFile, OrderRootType.SOURCES);
+            modifiableModel.commit();
+          }
+        }
+      }
+    }
+  }
 }

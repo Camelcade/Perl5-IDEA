@@ -37,86 +37,76 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitParserDefinition implements ParserDefinition, TemplateToolkitElementTypes
-{
-	public static final TokenSet WHITE_SPACES = TokenSet.create(
-			TokenType.WHITE_SPACE,
-			TokenType.NEW_LINE_INDENT
-	);
-	public static final TokenSet COMMENTS = TokenSet.create(
-			TT2_HTML,
-			LINE_COMMENT,
-			BLOCK_COMMENT
-	);
+public class TemplateToolkitParserDefinition implements ParserDefinition, TemplateToolkitElementTypes {
+  public static final TokenSet WHITE_SPACES = TokenSet.create(
+    TokenType.WHITE_SPACE,
+    TokenType.NEW_LINE_INDENT
+  );
+  public static final TokenSet COMMENTS = TokenSet.create(
+    TT2_HTML,
+    LINE_COMMENT,
+    BLOCK_COMMENT
+  );
 
-	public static final TokenSet WHITESPACES_AND_COMMENTS = TokenSet.orSet(
-			WHITE_SPACES, COMMENTS
-	);
+  public static final TokenSet WHITESPACES_AND_COMMENTS = TokenSet.orSet(
+    WHITE_SPACES, COMMENTS
+  );
 
-	public static final TokenSet LITERALS = TokenSet.create(
-			TT2_STRING_CONTENT
-	);
+  public static final TokenSet LITERALS = TokenSet.create(
+    TT2_STRING_CONTENT
+  );
 
-	public static final TokenSet IDENTIFIERS = TokenSet.create(
-			TT2_IDENTIFIER
-	);
+  public static final TokenSet IDENTIFIERS = TokenSet.create(
+    TT2_IDENTIFIER
+  );
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new TemplateToolkitLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new TemplateToolkitLexerAdapter(project);
+  }
 
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new TemplateToolkitParser(project);
-	}
+  @Override
+  public PsiParser createParser(Project project) {
+    return new TemplateToolkitParser(project);
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return TT2_FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return TT2_FILE;
+  }
 
-	@NotNull
-	@Override
-	public TokenSet getWhitespaceTokens()
-	{
-		return WHITE_SPACES;
-	}
+  @NotNull
+  @Override
+  public TokenSet getWhitespaceTokens() {
+    return WHITE_SPACES;
+  }
 
-	@NotNull
-	@Override
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  @Override
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	@Override
-	public TokenSet getStringLiteralElements()
-	{
-		return LITERALS;
-	}
+  @NotNull
+  @Override
+  public TokenSet getStringLiteralElements() {
+    return LITERALS;
+  }
 
-	@NotNull
-	@Override
-	public PsiElement createElement(ASTNode node)
-	{
-		return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement createElement(ASTNode node) {
+    return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
+  }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new TemplateToolkitFileImpl(viewProvider);
-	}
+  @Override
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new TemplateToolkitFileImpl(viewProvider);
+  }
 
-	@Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
-		return null;
-	}
+  @Override
+  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+    return null;
+  }
 }

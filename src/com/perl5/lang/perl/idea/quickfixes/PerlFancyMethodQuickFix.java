@@ -31,49 +31,42 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.07.2015.
  */
-public class PerlFancyMethodQuickFix implements LocalQuickFix
-{
-	String myNewForm;
+public class PerlFancyMethodQuickFix implements LocalQuickFix {
+  String myNewForm;
 
-	public PerlFancyMethodQuickFix(String newForm)
-	{
-		super();
-		myNewForm = newForm;
-	}
+  public PerlFancyMethodQuickFix(String newForm) {
+    super();
+    myNewForm = newForm;
+  }
 
-	@Nls
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Re-format method invocation to " + myNewForm + "(...)";
-	}
+  @Nls
+  @NotNull
+  @Override
+  public String getName() {
+    return "Re-format method invocation to " + myNewForm + "(...)";
+  }
 
-	@NotNull
-	@Override
-	public String getFamilyName()
-	{
-		return "Re-format invocation";
-	}
+  @NotNull
+  @Override
+  public String getFamilyName() {
+    return "Re-format invocation";
+  }
 
-	@Override
-	public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor)
-	{
-		PsiElement method = descriptor.getPsiElement();
-		assert method instanceof PerlMethod;
+  @Override
+  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+    PsiElement method = descriptor.getPsiElement();
+    assert method instanceof PerlMethod;
 
-		PsiElement currentCallExpression = method.getParent();
-		assert currentCallExpression instanceof PsiPerlSubCallExpr;
+    PsiElement currentCallExpression = method.getParent();
+    assert currentCallExpression instanceof PsiPerlSubCallExpr;
 
-		// fixme ok, this is works, but we make syntax tree invalid, will be updated with next reparsing. Not sure it's a problem
-		PerlNamespaceElement namespaceElement = ((PerlMethod) method).getNamespaceElement();
-		assert namespaceElement != null;
+    // fixme ok, this is works, but we make syntax tree invalid, will be updated with next reparsing. Not sure it's a problem
+    PerlNamespaceElement namespaceElement = ((PerlMethod)method).getNamespaceElement();
+    assert namespaceElement != null;
 
-		PerlSubNameElement subNameElement = ((PerlMethod) method).getSubNameElement();
-		assert subNameElement != null;
+    PerlSubNameElement subNameElement = ((PerlMethod)method).getSubNameElement();
+    assert subNameElement != null;
 
-		method.replace(PerlElementFactory.createMethodCall(project, namespaceElement.getCanonicalName(), subNameElement.getName()));
-	}
-
-
+    method.replace(PerlElementFactory.createMethodCall(project, namespaceElement.getCanonicalName(), subNameElement.getName()));
+  }
 }

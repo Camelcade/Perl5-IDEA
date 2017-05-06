@@ -22,6 +22,5 @@ import com.intellij.psi.PsiNameIdentifierOwner;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public interface TemplateToolkitNamedBlock extends PsiElement, PsiNameIdentifierOwner, PsiNamedBlock
-{
+public interface TemplateToolkitNamedBlock extends PsiElement, PsiNameIdentifierOwner, PsiNamedBlock {
 }

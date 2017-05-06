@@ -29,31 +29,27 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 06.05.2016.
  */
-public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpointProperties>
-{
-	public PerlLineBreakpointType()
-	{
-		super("perl_line_breakpoint", "Perl Line Breakpoint");
-	}
+public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpointProperties> {
+  public PerlLineBreakpointType() {
+    super("perl_line_breakpoint", "Perl Line Breakpoint");
+  }
 
-	@Nullable
-	@Override
-	public PerlLineBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line)
-	{
-		return new PerlLineBreakpointProperties();
-	}
+  @Nullable
+  @Override
+  public PerlLineBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line) {
+    return new PerlLineBreakpointProperties();
+  }
 
-	@Override
-	public boolean canPutAt(@NotNull VirtualFile file, int line, @NotNull Project project)
-	{
-		// fixme add method to disable in templating
-		return file.getFileType() instanceof PerlFileType;
-	}
+  @Override
+  public boolean canPutAt(@NotNull VirtualFile file, int line, @NotNull Project project) {
+    // fixme add method to disable in templating
+    return file.getFileType() instanceof PerlFileType;
+  }
 
-	@Nullable
-	@Override
-	public XDebuggerEditorsProvider getEditorsProvider(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint, @NotNull Project project)
-	{
-		return PerlDebuggerEditorsProvider.INSTANCE;
-	}
+  @Nullable
+  @Override
+  public XDebuggerEditorsProvider getEditorsProvider(@NotNull XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
+                                                     @NotNull Project project) {
+    return PerlDebuggerEditorsProvider.INSTANCE;
+  }
 }

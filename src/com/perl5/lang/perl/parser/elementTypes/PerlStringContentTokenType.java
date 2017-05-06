@@ -25,17 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlStringContentTokenType extends PerlTokenType implements ILeafElementType
-{
-	public PerlStringContentTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlStringContentTokenType extends PerlTokenType implements ILeafElementType {
+  public PerlStringContentTokenType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public ASTNode createLeafNode(CharSequence leafText)
-	{
-		return new PerlStringContentElementImpl(this, leafText);
-	}
+  @NotNull
+  @Override
+  public ASTNode createLeafNode(CharSequence leafText) {
+    return new PerlStringContentElementImpl(this, leafText);
+  }
 }

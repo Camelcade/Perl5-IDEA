@@ -31,26 +31,22 @@ import java.util.List;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public class PodIdentifierImpl extends PerlLeafPsiElementWithReferences
-{
-	public PodIdentifierImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PodIdentifierImpl extends PerlLeafPsiElementWithReferences {
+  public PodIdentifierImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public PsiReference[] computeReferences()
-	{
-		final PodIdentifierImpl element = PodIdentifierImpl.this;
-		List<PsiReference> references = new ArrayList<PsiReference>();
+  @Override
+  public PsiReference[] computeReferences() {
+    final PodIdentifierImpl element = PodIdentifierImpl.this;
+    List<PsiReference> references = new ArrayList<PsiReference>();
 
-		if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null)
-		{
-			references.add(new PodSubReference(element));
-		}
+    if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null) {
+      references.add(new PodSubReference(element));
+    }
 
-		references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
+    references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
 
-		return references.toArray(new PsiReference[references.size()]);
-	}
+    return references.toArray(new PsiReference[references.size()]);
+  }
 }

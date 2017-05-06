@@ -34,144 +34,134 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitSettingsConfigurable implements Configurable
-{
-	private final TemplateToolkitSettings mySettings;
-	private final Project myProject;
-	@SuppressWarnings("Since15")
-	protected CollectionListModel<String> rootsModel;
-	protected JBList rootsList;
-	@SuppressWarnings("Since15")
-	protected CollectionListModel<String> substitutedExtensionsModel;
-	protected JBList substitutedExtensionsList;
-	protected JPanel substitutedExtensionsPanel;
-	private JTextField startTagField;
-	private JTextField endTagField;
-	private JTextField outlineTagField;
-	private JCheckBox enableAnycaseCheckBox;
+public class TemplateToolkitSettingsConfigurable implements Configurable {
+  private final TemplateToolkitSettings mySettings;
+  private final Project myProject;
+  @SuppressWarnings("Since15")
+  protected CollectionListModel<String> rootsModel;
+  protected JBList rootsList;
+  @SuppressWarnings("Since15")
+  protected CollectionListModel<String> substitutedExtensionsModel;
+  protected JBList substitutedExtensionsList;
+  protected JPanel substitutedExtensionsPanel;
+  private JTextField startTagField;
+  private JTextField endTagField;
+  private JTextField outlineTagField;
+  private JCheckBox enableAnycaseCheckBox;
 
 
-	public TemplateToolkitSettingsConfigurable(Project project)
-	{
-		mySettings = TemplateToolkitSettings.getInstance(project);
-		myProject = project;
-	}
+  public TemplateToolkitSettingsConfigurable(Project project) {
+    mySettings = TemplateToolkitSettings.getInstance(project);
+    myProject = project;
+  }
 
-	@Nls
-	@Override
-	public String getDisplayName()
-	{
-		return "Template Toolkit 2";
-	}
+  @Nls
+  @Override
+  public String getDisplayName() {
+    return "Template Toolkit 2";
+  }
 
-	@Nullable
-	@Override
-	public String getHelpTopic()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public String getHelpTopic() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public JComponent createComponent()
-	{
-		FormBuilder builder = FormBuilder.createFormBuilder();
-		builder.getPanel().setLayout(new VerticalFlowLayout());
+  @Nullable
+  @Override
+  public JComponent createComponent() {
+    FormBuilder builder = FormBuilder.createFormBuilder();
+    builder.getPanel().setLayout(new VerticalFlowLayout());
 
-		builder.addLabeledComponent(
-				PerlBundle.message("ttk2.label.opentag"),
-				startTagField = new JTextField()
-		);
+    builder.addLabeledComponent(
+      PerlBundle.message("ttk2.label.opentag"),
+      startTagField = new JTextField()
+    );
 
-		builder.addLabeledComponent(
-				PerlBundle.message("ttk2.label.closetag"),
-				endTagField = new JTextField()
-		);
+    builder.addLabeledComponent(
+      PerlBundle.message("ttk2.label.closetag"),
+      endTagField = new JTextField()
+    );
 
-		builder.addLabeledComponent(
-				PerlBundle.message("ttk2.label.outlinetag"),
-				outlineTagField = new JTextField()
-		);
+    builder.addLabeledComponent(
+      PerlBundle.message("ttk2.label.outlinetag"),
+      outlineTagField = new JTextField()
+    );
 
-		builder.addComponent(
-				enableAnycaseCheckBox = new JCheckBox(PerlBundle.message("ttk2.label.enableanycase"))
-		);
+    builder.addComponent(
+      enableAnycaseCheckBox = new JCheckBox(PerlBundle.message("ttk2.label.enableanycase"))
+    );
 
-		//noinspection Since15
-		rootsModel = new CollectionListModel<String>();
-		rootsList = new JBList(rootsModel);
-		builder.addLabeledComponent(
-				PerlBundle.message("ttk2.configuration.template.dirs.label"),
-				PerlConfigurationUtil.createProjectPathsSelection(
-						myProject,
-						rootsList,
-						rootsModel,
-						PerlBundle.message("ttk2.configuration.choose.template.dir.title")
-				));
+    //noinspection Since15
+    rootsModel = new CollectionListModel<String>();
+    rootsList = new JBList(rootsModel);
+    builder.addLabeledComponent(
+      PerlBundle.message("ttk2.configuration.template.dirs.label"),
+      PerlConfigurationUtil.createProjectPathsSelection(
+        myProject,
+        rootsList,
+        rootsModel,
+        PerlBundle.message("ttk2.configuration.choose.template.dir.title")
+      ));
 
 
-		//noinspection Since15
-		substitutedExtensionsModel = new CollectionListModel<String>();
-		substitutedExtensionsList = new JBList(substitutedExtensionsModel);
-		substitutedExtensionsPanel = PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
-		builder.addLabeledComponent(new JLabel(PerlBundle.message("ttk2.configuration.extension")), substitutedExtensionsPanel);
+    //noinspection Since15
+    substitutedExtensionsModel = new CollectionListModel<String>();
+    substitutedExtensionsList = new JBList(substitutedExtensionsModel);
+    substitutedExtensionsPanel =
+      PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
+    builder.addLabeledComponent(new JLabel(PerlBundle.message("ttk2.configuration.extension")), substitutedExtensionsPanel);
 
-		return builder.getPanel();
-	}
+    return builder.getPanel();
+  }
 
-	@Override
-	public boolean isModified()
-	{
-		return mySettings.ENABLE_ANYCASE != enableAnycaseCheckBox.isSelected() ||
-				!StringUtil.equals(mySettings.START_TAG, startTagField.getText()) ||
-				!StringUtil.equals(mySettings.END_TAG, endTagField.getText()) ||
-				!StringUtil.equals(mySettings.OUTLINE_TAG, outlineTagField.getText()) ||
-				!mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
-				!mySettings.TEMPLATE_DIRS.equals(rootsModel.getItems())
-				;
-	}
+  @Override
+  public boolean isModified() {
+    return mySettings.ENABLE_ANYCASE != enableAnycaseCheckBox.isSelected() ||
+           !StringUtil.equals(mySettings.START_TAG, startTagField.getText()) ||
+           !StringUtil.equals(mySettings.END_TAG, endTagField.getText()) ||
+           !StringUtil.equals(mySettings.OUTLINE_TAG, outlineTagField.getText()) ||
+           !mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
+           !mySettings.TEMPLATE_DIRS.equals(rootsModel.getItems())
+      ;
+  }
 
-	@Override
-	public void apply() throws ConfigurationException
-	{
-		if (StringUtil.isEmpty(startTagField.getText()))
-		{
-			throw new ConfigurationException(PerlBundle.message("ttk2.error.emptyopentag"));
-		}
-		if (StringUtil.isEmpty(endTagField.getText()))
-		{
-			throw new ConfigurationException(PerlBundle.message("ttk2.error.emptyclosetag"));
-		}
+  @Override
+  public void apply() throws ConfigurationException {
+    if (StringUtil.isEmpty(startTagField.getText())) {
+      throw new ConfigurationException(PerlBundle.message("ttk2.error.emptyopentag"));
+    }
+    if (StringUtil.isEmpty(endTagField.getText())) {
+      throw new ConfigurationException(PerlBundle.message("ttk2.error.emptyclosetag"));
+    }
 
-		mySettings.START_TAG = startTagField.getText();
-		mySettings.END_TAG = endTagField.getText();
-		mySettings.OUTLINE_TAG = outlineTagField.getText();
-		mySettings.ENABLE_ANYCASE = enableAnycaseCheckBox.isSelected();
+    mySettings.START_TAG = startTagField.getText();
+    mySettings.END_TAG = endTagField.getText();
+    mySettings.OUTLINE_TAG = outlineTagField.getText();
+    mySettings.ENABLE_ANYCASE = enableAnycaseCheckBox.isSelected();
 
-		mySettings.TEMPLATE_DIRS.clear();
-		mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
+    mySettings.TEMPLATE_DIRS.clear();
+    mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
 
-		mySettings.substitutedExtensions.clear();
-		mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
+    mySettings.substitutedExtensions.clear();
+    mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
 
-		mySettings.settingsUpdated();
-	}
+    mySettings.settingsUpdated();
+  }
 
-	@Override
-	public void reset()
-	{
-		startTagField.setText(mySettings.START_TAG);
-		endTagField.setText(mySettings.END_TAG);
-		outlineTagField.setText(mySettings.OUTLINE_TAG);
-		enableAnycaseCheckBox.setSelected(mySettings.ENABLE_ANYCASE);
-		rootsModel.removeAll();
-		rootsModel.add(mySettings.TEMPLATE_DIRS);
-		substitutedExtensionsModel.removeAll();
-		substitutedExtensionsModel.add(mySettings.substitutedExtensions);
-	}
+  @Override
+  public void reset() {
+    startTagField.setText(mySettings.START_TAG);
+    endTagField.setText(mySettings.END_TAG);
+    outlineTagField.setText(mySettings.OUTLINE_TAG);
+    enableAnycaseCheckBox.setSelected(mySettings.ENABLE_ANYCASE);
+    rootsModel.removeAll();
+    rootsModel.add(mySettings.TEMPLATE_DIRS);
+    substitutedExtensionsModel.removeAll();
+    substitutedExtensionsModel.add(mySettings.substitutedExtensions);
+  }
 
-	@Override
-	public void disposeUIResources()
-	{
-	}
+  @Override
+  public void disposeUIResources() {
+  }
 }

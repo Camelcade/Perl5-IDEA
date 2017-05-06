@@ -22,6 +22,5 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonSubcomponentDefinitionStub extends StubElement<HTMLMasonSubcomponentDefitnition>, HTMLMasonNamedElementStubBase
-{
+public interface HTMLMasonSubcomponentDefinitionStub extends StubElement<HTMLMasonSubcomponentDefitnition>, HTMLMasonNamedElementStubBase {
 }

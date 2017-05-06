@@ -34,67 +34,59 @@ import java.io.IOException;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlMooseAugmentStatementStub, PerlMooseAugmentStatement> implements PsiElementProvider
-{
-	public PerlMooseAugmentStatementElementType(@NotNull @NonNls String debugName)
-	{
-		this(debugName, PerlLanguage.INSTANCE);
-	}
+public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlMooseAugmentStatementStub, PerlMooseAugmentStatement>
+  implements PsiElementProvider {
+  public PerlMooseAugmentStatementElementType(@NotNull @NonNls String debugName) {
+    this(debugName, PerlLanguage.INSTANCE);
+  }
 
 
-	public PerlMooseAugmentStatementElementType(@NotNull @NonNls String debugName, @Nullable Language language)
-	{
-		super(debugName, language);
-	}
+  public PerlMooseAugmentStatementElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public PerlMooseAugmentStatement createPsi(@NotNull PerlMooseAugmentStatementStub stub)
-	{
-		return new PerlMooseAugmentStatementImpl(stub, this);
-	}
+  @Override
+  public PerlMooseAugmentStatement createPsi(@NotNull PerlMooseAugmentStatementStub stub) {
+    return new PerlMooseAugmentStatementImpl(stub, this);
+  }
 
-	@Override
-	public PerlMooseAugmentStatementStub createStub(@NotNull PerlMooseAugmentStatement psi, StubElement parentStub)
-	{
-		return new PerlMooseAugmentStatementStubImpl(parentStub, this, psi.getSubName());
-	}
+  @Override
+  public PerlMooseAugmentStatementStub createStub(@NotNull PerlMooseAugmentStatement psi, StubElement parentStub) {
+    return new PerlMooseAugmentStatementStubImpl(parentStub, this, psi.getSubName());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull PerlMooseAugmentStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getSubName());
-	}
+  @Override
+  public void serialize(@NotNull PerlMooseAugmentStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getSubName());
+  }
 
-	@NotNull
-	@Override
-	public PerlMooseAugmentStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new PerlMooseAugmentStatementStubImpl(parentStub, this, dataStream.readName().toString());
-	}
+  @NotNull
+  @Override
+  public PerlMooseAugmentStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PerlMooseAugmentStatementStubImpl(parentStub, this, dataStream.readName().toString());
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IndexSink sink)
-	{
-	}
+  @Override
+  public void indexStub(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IndexSink sink) {
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlMooseAugmentStatementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlMooseAugmentStatementImpl(node);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement element = node.getPsi();
-		return element instanceof PerlMooseAugmentStatement && element.isValid() && StringUtil.isNotEmpty(((PerlMooseAugmentStatement) element).getSubName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement element = node.getPsi();
+    return element instanceof PerlMooseAugmentStatement &&
+           element.isValid() &&
+           StringUtil.isNotEmpty(((PerlMooseAugmentStatement)element).getSubName());
+  }
 }

@@ -27,34 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlImportedFilter implements Filter
-{
-	public static final PerlImportedFilter INSTANCE = new PerlImportedFilter();
-	private static final String ID = "SHOW_IMPORTED";
+public class PerlImportedFilter implements Filter {
+  public static final PerlImportedFilter INSTANCE = new PerlImportedFilter();
+  private static final String ID = "SHOW_IMPORTED";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlStructureViewElement && ((PerlStructureViewElement) treeElement).isImported());
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlStructureViewElement && ((PerlStructureViewElement)treeElement).isImported());
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show imported", null, AllIcons.Welcome.ImportProject);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show imported", null, AllIcons.Welcome.ImportProject);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

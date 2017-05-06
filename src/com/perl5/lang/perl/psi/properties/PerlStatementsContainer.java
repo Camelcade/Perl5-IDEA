@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 24.02.2016.
  */
-public interface PerlStatementsContainer extends PsiElement
-{
+public interface PerlStatementsContainer extends PsiElement {
 }

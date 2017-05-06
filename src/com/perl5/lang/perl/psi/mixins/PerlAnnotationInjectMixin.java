@@ -26,18 +26,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.10.2016.
  */
-public abstract class PerlAnnotationInjectMixin extends PerlCompositeElementImpl implements PerlAnnotationInject
-{
-	public PerlAnnotationInjectMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlAnnotationInjectMixin extends PerlCompositeElementImpl implements PerlAnnotationInject {
+  public PerlAnnotationInjectMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	public String getLanguageMarker()
-	{
-		PsiPerlStringBare stringBare = getStringBare();
-		return stringBare == null ? null : stringBare.getText();
-	}
+  @Nullable
+  @Override
+  public String getLanguageMarker() {
+    PsiPerlStringBare stringBare = getStringBare();
+    return stringBare == null ? null : stringBare.getText();
+  }
 }

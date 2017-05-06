@@ -22,7 +22,7 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public interface HTMLMasonMethodDefinition extends StubBasedPsiElement<HTMLMasonMethodDefinitionStub>, HTMLMasonNamedElement, HTMLMasonParametrizedEntity
-{
+public interface HTMLMasonMethodDefinition
+  extends StubBasedPsiElement<HTMLMasonMethodDefinitionStub>, HTMLMasonNamedElement, HTMLMasonParametrizedEntity {
 
 }

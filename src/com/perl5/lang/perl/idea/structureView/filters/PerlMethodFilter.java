@@ -27,35 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlMethodFilter implements Filter
-{
-	public static final PerlMethodFilter INSTANCE = new PerlMethodFilter();
-	private static final String ID = "SHOW_METHODS";
+public class PerlMethodFilter implements Filter {
+  public static final PerlMethodFilter INSTANCE = new PerlMethodFilter();
+  private static final String ID = "SHOW_METHODS";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement) treeElement).isMethod());
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement)treeElement).isMethod());
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show methods", null, PerlIcons.METHOD_GUTTER_ICON);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show methods", null, PerlIcons.METHOD_GUTTER_ICON);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
-
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

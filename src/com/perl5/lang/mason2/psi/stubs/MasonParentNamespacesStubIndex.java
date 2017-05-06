@@ -24,21 +24,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 16.01.2016.
  */
-public class MasonParentNamespacesStubIndex extends PerlStubIndexBase<MasonNamespaceDefinition>
-{
-	public static final int VERSION = 1;
-	public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason2.namespace.parent");
+public class MasonParentNamespacesStubIndex extends PerlStubIndexBase<MasonNamespaceDefinition> {
+  public static final int VERSION = 1;
+  public static final StubIndexKey<String, MasonNamespaceDefinition> KEY = StubIndexKey.createIndexKey("perl.mason2.namespace.parent");
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, MasonNamespaceDefinition> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, MasonNamespaceDefinition> getKey() {
+    return KEY;
+  }
 }

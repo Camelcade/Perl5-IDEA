@@ -24,32 +24,27 @@ import com.intellij.openapi.editor.EditorModificationUtil;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public class PerlInsertHandlers
-{
-	public static final InsertHandler<LookupElement> ARRAY_ELEMENT_INSERT_HANDLER = new ArrayElementInsertHandler();
-	public static final InsertHandler<LookupElement> HASH_ELEMENT_INSERT_HANDLER = new HashElementInsertHandler();
+public class PerlInsertHandlers {
+  public static final InsertHandler<LookupElement> ARRAY_ELEMENT_INSERT_HANDLER = new ArrayElementInsertHandler();
+  public static final InsertHandler<LookupElement> HASH_ELEMENT_INSERT_HANDLER = new HashElementInsertHandler();
 
-	/**
-	 * Array element/slice insert handler
-	 */
-	static class ArrayElementInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			EditorModificationUtil.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
-		}
-	}
+  /**
+   * Array element/slice insert handler
+   */
+  static class ArrayElementInsertHandler implements InsertHandler<LookupElement> {
+    @Override
+    public void handleInsert(final InsertionContext context, LookupElement item) {
+      EditorModificationUtil.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
+    }
+  }
 
-	/**
-	 * Hash element/slice insert handler
-	 */
-	static class HashElementInsertHandler implements InsertHandler<LookupElement>
-	{
-		@Override
-		public void handleInsert(final InsertionContext context, LookupElement item)
-		{
-			EditorModificationUtil.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
-		}
-	}
+  /**
+   * Hash element/slice insert handler
+   */
+  static class HashElementInsertHandler implements InsertHandler<LookupElement> {
+    @Override
+    public void handleInsert(final InsertionContext context, LookupElement item) {
+      EditorModificationUtil.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
+    }
+  }
 }

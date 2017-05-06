@@ -30,59 +30,50 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 04.09.2015.
  */
-public class PerlIndentionSuppresor implements TemplateOptionalProcessor
-{
-	// pattern for getting marker
-	public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
-	public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
-	public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
-	public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
+public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
+  // pattern for getting marker
+  public static final Pattern HEREDOC_OPENER_PATTERN = Pattern.compile("<<(.+?)");
+  public static final Pattern HEREDOC_OPENER_PATTERN_DQ = Pattern.compile("<<(\\s*)(\")(.*?)\"");
+  public static final Pattern HEREDOC_OPENER_PATTERN_SQ = Pattern.compile("<<(\\s*)(\')(.*?)\'");
+  public static final Pattern HEREDOC_OPENER_PATTERN_XQ = Pattern.compile("<<(\\s*)(`)(.*?)`");
 
 
-	@Override
-	public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor)
-	{
-		if (isEnabled(template))
-		{
-			String templateText = template.getTemplateText();
+  @Override
+  public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor) {
+    if (isEnabled(template)) {
+      String templateText = template.getTemplateText();
 
-			if (HEREDOC_OPENER_PATTERN.matcher(templateText).find()
-					|| HEREDOC_OPENER_PATTERN_SQ.matcher(templateText).find()
-					|| HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
-					|| HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
-					)
-			{
-				template.setToIndent(false);
-			}
-		}
-	}
+      if (HEREDOC_OPENER_PATTERN.matcher(templateText).find()
+          || HEREDOC_OPENER_PATTERN_SQ.matcher(templateText).find()
+          || HEREDOC_OPENER_PATTERN_DQ.matcher(templateText).find()
+          || HEREDOC_OPENER_PATTERN_XQ.matcher(templateText).find()
+        ) {
+        template.setToIndent(false);
+      }
+    }
+  }
 
-	@Nls
-	@Override
-	public String getOptionName()
-	{
-		return null;
-	}
+  @Nls
+  @Override
+  public String getOptionName() {
+    return null;
+  }
 
-	@Override
-	public boolean isEnabled(Template template)
-	{
-		// fixme this is probably bad. Doesn't work if it's custom group
-		if (template instanceof TemplateImpl)
-		{
-			return ((TemplateImpl) template).getGroupName().startsWith("Perl5");
-		}
-		return false;
-	}
+  @Override
+  public boolean isEnabled(Template template) {
+    // fixme this is probably bad. Doesn't work if it's custom group
+    if (template instanceof TemplateImpl) {
+      return ((TemplateImpl)template).getGroupName().startsWith("Perl5");
+    }
+    return false;
+  }
 
-	@Override
-	public void setEnabled(Template template, boolean value)
-	{
-	}
+  @Override
+  public void setEnabled(Template template, boolean value) {
+  }
 
-	@Override
-	public boolean isVisible(Template template)
-	{
-		return false;
-	}
+  @Override
+  public boolean isVisible(Template template) {
+    return false;
+  }
 }

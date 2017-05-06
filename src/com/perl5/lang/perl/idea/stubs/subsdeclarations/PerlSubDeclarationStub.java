@@ -22,6 +22,5 @@ import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubDeclarationStub extends PerlSubBaseStub<PsiPerlSubDeclaration>
-{
+public interface PerlSubDeclarationStub extends PerlSubBaseStub<PsiPerlSubDeclaration> {
 }

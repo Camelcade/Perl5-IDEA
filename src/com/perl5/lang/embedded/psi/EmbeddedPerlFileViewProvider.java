@@ -27,41 +27,34 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider
-{
-	public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
-	{
-		super(manager, virtualFile, physical);
-	}
+public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider {
+  public EmbeddedPerlFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
+    super(manager, virtualFile, physical);
+  }
 
-	public EmbeddedPerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
-	{
-		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
-	}
+  public EmbeddedPerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage) {
+    super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+  }
 
-	@Override
-	@NotNull
-	public Language getBaseLanguage()
-	{
-		return EmbeddedPerlLanguage.INSTANCE;
-	}
+  @Override
+  @NotNull
+  public Language getBaseLanguage() {
+    return EmbeddedPerlLanguage.INSTANCE;
+  }
 
-	@NotNull
-	protected IElementType getTemplateContentElementType()
-	{
-		return EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA;
-	}
+  @NotNull
+  protected IElementType getTemplateContentElementType() {
+    return EmbeddedPerlElementTypes.EMBED_HTML_TEMPLATE_DATA;
+  }
 
-	@NotNull
-	@Override
-	protected IElementType getPODContentElementType()
-	{
-		return EmbeddedPerlElementTypes.EMBED_POD_TEMPLATE_DATA;
-	}
+  @NotNull
+  @Override
+  protected IElementType getPODContentElementType() {
+    return EmbeddedPerlElementTypes.EMBED_POD_TEMPLATE_DATA;
+  }
 
-	@Override
-	protected EmbeddedPerlFileViewProvider cloneInner(final VirtualFile copy)
-	{
-		return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
-	}
+  @Override
+  protected EmbeddedPerlFileViewProvider cloneInner(final VirtualFile copy) {
+    return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
+  }
 }

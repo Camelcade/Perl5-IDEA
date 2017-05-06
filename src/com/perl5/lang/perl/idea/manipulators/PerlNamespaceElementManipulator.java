@@ -26,40 +26,34 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlNamespaceElementManipulator extends AbstractElementManipulator<PerlNamespaceElement>
-{
-	@NotNull
-	public static TextRange getRangeInString(CharSequence elementText)
-	{
-		int endOffset = elementText.length();
-		while (endOffset > 0)
-		{
-			char currentChar = elementText.charAt(endOffset - 1);
-			if (currentChar != '\'' && currentChar != ':')
-			{
-				break;
-			}
-			endOffset--;
-		}
+public class PerlNamespaceElementManipulator extends AbstractElementManipulator<PerlNamespaceElement> {
+  @Override
+  public PerlNamespaceElement handleContentChange(@NotNull PerlNamespaceElement element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    if (newContent.isEmpty()) {
+      throw new IncorrectOperationException("You can't set empty package name");
+    }
 
-		return endOffset == 0 ? TextRange.EMPTY_RANGE : TextRange.create(0, endOffset);
-	}
+    return (PerlNamespaceElement)((PerlNamespaceElementImpl)element).replaceWithText(range.replace(element.getText(), newContent));
+  }
 
-	@Override
-	public PerlNamespaceElement handleContentChange(@NotNull PerlNamespaceElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		if (newContent.isEmpty())
-		{
-			throw new IncorrectOperationException("You can't set empty package name");
-		}
+  @NotNull
+  @Override
+  public TextRange getRangeInElement(@NotNull PerlNamespaceElement element) {
+    return getRangeInString(element.getText());
+  }
 
-		return (PerlNamespaceElement) ((PerlNamespaceElementImpl) element).replaceWithText(range.replace(element.getText(), newContent));
-	}
+  @NotNull
+  public static TextRange getRangeInString(CharSequence elementText) {
+    int endOffset = elementText.length();
+    while (endOffset > 0) {
+      char currentChar = elementText.charAt(endOffset - 1);
+      if (currentChar != '\'' && currentChar != ':') {
+        break;
+      }
+      endOffset--;
+    }
 
-	@NotNull
-	@Override
-	public TextRange getRangeInElement(@NotNull PerlNamespaceElement element)
-	{
-		return getRangeInString(element.getText());
-	}
+    return endOffset == 0 ? TextRange.EMPTY_RANGE : TextRange.create(0, endOffset);
+  }
 }

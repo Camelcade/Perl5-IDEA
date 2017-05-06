@@ -28,93 +28,78 @@ import org.jetbrains.annotations.NotNull;
 /**
  * fixme butify this
  */
-public class PerlDeprecatedInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitSubNameElement(@NotNull PerlSubNameElement o)
-			{
-				PsiElement container = o.getParent();
+public class PerlDeprecatedInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitSubNameElement(@NotNull PerlSubNameElement o) {
+        PsiElement container = o.getParent();
 
-				if (container instanceof PerlSubBase && ((PerlSubBase) container).isDeprecated())
-				{
-					markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
-				}
-				else
-				{
-					PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
-					{
-						if (targetPair.first instanceof PerlDeprecatable && ((PerlDeprecatable) targetPair.first).isDeprecated())
-						{
-							markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
-							return false;
-						}
-						return true;
-					}, o);
-				}
-			}
+        if (container instanceof PerlSubBase && ((PerlSubBase)container).isDeprecated()) {
+          markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
+        }
+        else {
+          PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
+                                                                 {
+                                                                   if (targetPair.first instanceof PerlDeprecatable &&
+                                                                       ((PerlDeprecatable)targetPair.first).isDeprecated()) {
+                                                                     markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
+                                                                     return false;
+                                                                   }
+                                                                   return true;
+                                                                 }, o);
+        }
+      }
 
-			@Override
-			public void visitVariableNameElement(@NotNull PerlVariableNameElement o)
-			{
-				PsiElement parent = o.getParent();
-				if (parent instanceof PerlVariable)
-				{
-					if (((PerlVariable) parent).isDeclaration())
-					{
-						if (((PerlVariable) parent).isDeprecated())
-						{
-							markDeprecated(holder, o, PerlBundle.message("perl.deprecated.variable"));
-						}
-					}
+      @Override
+      public void visitVariableNameElement(@NotNull PerlVariableNameElement o) {
+        PsiElement parent = o.getParent();
+        if (parent instanceof PerlVariable) {
+          if (((PerlVariable)parent).isDeclaration()) {
+            if (((PerlVariable)parent).isDeprecated()) {
+              markDeprecated(holder, o, PerlBundle.message("perl.deprecated.variable"));
+            }
+          }
 
-					PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
-					{
-						String message = null;
-						if (targetPair.first instanceof PerlNamespaceDefinition && ((PerlNamespaceDefinition) targetPair.first).isDeprecated())
-						{
-							message = PerlBundle.message("perl.deprecated.namespace");
-						}
-						else if (targetPair.first instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) targetPair.first).isDeprecated())
-						{
-							message = PerlBundle.message("perl.deprecated.variable");
-						}
-						if (message != null)
-						{
-							holder.registerProblem(targetPair.second, message, ProblemHighlightType.LIKE_DEPRECATED);
-						}
-						return true;
-					}, o);
-				}
-			}
+          PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
+                                                                 {
+                                                                   String message = null;
+                                                                   if (targetPair.first instanceof PerlNamespaceDefinition &&
+                                                                       ((PerlNamespaceDefinition)targetPair.first).isDeprecated()) {
+                                                                     message = PerlBundle.message("perl.deprecated.namespace");
+                                                                   }
+                                                                   else if (targetPair.first instanceof PerlVariableDeclarationWrapper &&
+                                                                            ((PerlVariableDeclarationWrapper)targetPair.first)
+                                                                              .isDeprecated()) {
+                                                                     message = PerlBundle.message("perl.deprecated.variable");
+                                                                   }
+                                                                   if (message != null) {
+                                                                     holder.registerProblem(targetPair.second, message,
+                                                                                            ProblemHighlightType.LIKE_DEPRECATED);
+                                                                   }
+                                                                   return true;
+                                                                 }, o);
+        }
+      }
 
-			@Override
-			public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
-			{
-				if (o.isDeprecated())
-				{
-					markDeprecated(holder, o, PerlBundle.message("perl.deprecated.namespace"));
-				}
-			}
+      @Override
+      public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
+        if (o.isDeprecated()) {
+          markDeprecated(holder, o, PerlBundle.message("perl.deprecated.namespace"));
+        }
+      }
 
-			@Override
-			public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o)
-			{
-				if (o.isDeprecated())
-				{
-					PsiElement nameIdentifier = o.getNameIdentifier();
-					if (nameIdentifier != null)
-					{
-						markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.sub"));
-					}
-				}
-			}
-		};
-	}
-
+      @Override
+      public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o) {
+        if (o.isDeprecated()) {
+          PsiElement nameIdentifier = o.getNameIdentifier();
+          if (nameIdentifier != null) {
+            markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.sub"));
+          }
+        }
+      }
+    };
+  }
 }

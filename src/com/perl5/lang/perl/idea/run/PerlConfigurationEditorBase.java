@@ -43,122 +43,109 @@ import java.awt.*;
 /**
  * Created by hurricup on 22.06.2016.
  */
-public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOptions> extends SettingsEditor<Settings>
-{
-	protected Project myProject;
+public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOptions> extends SettingsEditor<Settings> {
+  protected Project myProject;
 
-	private JTextField myScriptCharset;
-	private ComboBox myStartMode;
-	private JCheckBox myIsNonInteractiveModeEnabled;
-	private JCheckBox myIsCompileTimeBreakpointsEnabled;
-	private EditorTextField myInitCodeTextField;
+  private JTextField myScriptCharset;
+  private ComboBox myStartMode;
+  private JCheckBox myIsNonInteractiveModeEnabled;
+  private JCheckBox myIsCompileTimeBreakpointsEnabled;
+  private EditorTextField myInitCodeTextField;
 
-	public PerlConfigurationEditorBase(Project project)
-	{
-		myProject = project;
-	}
+  public PerlConfigurationEditorBase(Project project) {
+    myProject = project;
+  }
 
-	@Override
-	protected void resetEditorFrom(Settings perlConfiguration)
-	{
-		myScriptCharset.setText(perlConfiguration.getScriptCharset());
-		myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
-		myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
-		myInitCodeTextField.setText(perlConfiguration.getInitCode());
-		myStartMode.setSelectedItem(perlConfiguration.getStartMode());
-	}
+  @Override
+  protected void resetEditorFrom(Settings perlConfiguration) {
+    myScriptCharset.setText(perlConfiguration.getScriptCharset());
+    myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
+    myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
+    myInitCodeTextField.setText(perlConfiguration.getInitCode());
+    myStartMode.setSelectedItem(perlConfiguration.getStartMode());
+  }
 
-	@Override
-	protected void applyEditorTo(Settings perlConfiguration) throws ConfigurationException
-	{
-		perlConfiguration.setScriptCharset(myScriptCharset.getText());
-		perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
-		perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
-		perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
-		perlConfiguration.setInitCode(myInitCodeTextField.getText());
+  @Override
+  protected void applyEditorTo(Settings perlConfiguration) throws ConfigurationException {
+    perlConfiguration.setScriptCharset(myScriptCharset.getText());
+    perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
+    perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
+    perlConfiguration.setCompileTimeBreakpointsEnabled(myIsCompileTimeBreakpointsEnabled.isSelected());
+    perlConfiguration.setInitCode(myInitCodeTextField.getText());
+  }
 
-	}
+  @Nullable
+  protected JComponent getGeneralComponent() {
+    return null;
+  }
 
-	@Nullable
-	protected JComponent getGeneralComponent()
-	{
-		return null;
-	}
+  @Nullable
+  protected JComponent getDebuggingComponent() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
 
-	@Nullable
-	protected JComponent getDebuggingComponent()
-	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
+    myScriptCharset = new JTextField();
+    LabeledComponent<JTextField> scriptCharset =
+      LabeledComponent.create(myScriptCharset, PerlBundle.message("perl.run.option.script.encoding"));
+    scriptCharset.setLabelLocation(BorderLayout.WEST);
+    panel.add(scriptCharset);
 
-		myScriptCharset = new JTextField();
-		LabeledComponent<JTextField> scriptCharset = LabeledComponent.create(myScriptCharset, PerlBundle.message("perl.run.option.script.encoding"));
-		scriptCharset.setLabelLocation(BorderLayout.WEST);
-		panel.add(scriptCharset);
+    //noinspection Since15
+    myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS)) {
+      @Override
+      public void setRenderer(ListCellRenderer renderer) {
+        super.setRenderer(new ColoredListCellRenderer<String>() {
+          @Override
+          protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus) {
+            append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
+          }
+        });
+      }
+    };
 
-		//noinspection Since15
-		myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS))
-		{
-			@Override
-			public void setRenderer(ListCellRenderer renderer)
-			{
-				super.setRenderer(new ColoredListCellRenderer<String>()
-				{
-					@Override
-					protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus)
-					{
-						append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
-					}
-				});
-			}
-		};
+    LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, PerlBundle.message("perl.run.option.debugger.startup.mode"));
+    startMode.setLabelLocation(BorderLayout.WEST);
+    panel.add(startMode);
 
-		LabeledComponent<?> startMode = LabeledComponent.create(myStartMode, PerlBundle.message("perl.run.option.debugger.startup.mode"));
-		startMode.setLabelLocation(BorderLayout.WEST);
-		panel.add(startMode);
+    myIsNonInteractiveModeEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.noninteractive.mode"));
+    panel.add(myIsNonInteractiveModeEnabled);
 
-		myIsNonInteractiveModeEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.noninteractive.mode"));
-		panel.add(myIsNonInteractiveModeEnabled);
+    myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
+    panel.add(myIsCompileTimeBreakpointsEnabled);
 
-		myIsCompileTimeBreakpointsEnabled = new JCheckBox(PerlBundle.message("perl.run.option.debugger.compile.time.breakpoints"));
-		panel.add(myIsCompileTimeBreakpointsEnabled);
+    PsiFile fileFromText = PsiFileFactory.getInstance(myProject).createFileFromText("file.dummy", PerlFileTypeScript.INSTANCE, "", 0, true);
+    Document document = PsiDocumentManager.getInstance(myProject).getDocument(fileFromText);
+    myInitCodeTextField = new EditorTextField(document, myProject, PerlFileTypeScript.INSTANCE);
+    myInitCodeTextField.setOneLineMode(false);
+    myInitCodeTextField.setPreferredSize(new Dimension(0, 100));
+    LabeledComponent<EditorTextField> initCode =
+      LabeledComponent.create(myInitCodeTextField, PerlBundle.message("perl.run.option.debugger.init.code"));
+    initCode.setLabelLocation(BorderLayout.NORTH);
+    panel.add(initCode);
 
-		PsiFile fileFromText = PsiFileFactory.getInstance(myProject).createFileFromText("file.dummy", PerlFileTypeScript.INSTANCE, "", 0, true);
-		Document document = PsiDocumentManager.getInstance(myProject).getDocument(fileFromText);
-		myInitCodeTextField = new EditorTextField(document, myProject, PerlFileTypeScript.INSTANCE);
-		myInitCodeTextField.setOneLineMode(false);
-		myInitCodeTextField.setPreferredSize(new Dimension(0, 100));
-		LabeledComponent<EditorTextField> initCode = LabeledComponent.create(myInitCodeTextField, PerlBundle.message("perl.run.option.debugger.init.code"));
-		initCode.setLabelLocation(BorderLayout.NORTH);
-		panel.add(initCode);
-
-		return panel;
-	}
+    return panel;
+  }
 
 
-	@NotNull
-	@Override
-	protected JComponent createEditor()
-	{
-		JComponent generalComponent = getGeneralComponent();
-		JComponent debuggingComponent = getDebuggingComponent();
+  @NotNull
+  @Override
+  protected JComponent createEditor() {
+    JComponent generalComponent = getGeneralComponent();
+    JComponent debuggingComponent = getDebuggingComponent();
 
-		if (generalComponent != null && debuggingComponent != null)
-		{
-			JBTabbedPane tabbedPaneWrapper = new JBTabbedPane();
-			tabbedPaneWrapper.addTab(PerlBundle.message("perl.run.option.tab.general"), generalComponent);
-			tabbedPaneWrapper.addTab(PerlBundle.message("perl.run.option.tab.debugging"), debuggingComponent);
-			return tabbedPaneWrapper;
-		}
-		else if (generalComponent != null)
-		{
-			return generalComponent;
-		}
-		else if (debuggingComponent != null)
-		{
-			return debuggingComponent;
-		}
+    if (generalComponent != null && debuggingComponent != null) {
+      JBTabbedPane tabbedPaneWrapper = new JBTabbedPane();
+      tabbedPaneWrapper.addTab(PerlBundle.message("perl.run.option.tab.general"), generalComponent);
+      tabbedPaneWrapper.addTab(PerlBundle.message("perl.run.option.tab.debugging"), debuggingComponent);
+      return tabbedPaneWrapper;
+    }
+    else if (generalComponent != null) {
+      return generalComponent;
+    }
+    else if (debuggingComponent != null) {
+      return debuggingComponent;
+    }
 
-		throw new RuntimeException("No components created for settings editor");
-	}
+    throw new RuntimeException("No components created for settings editor");
+  }
 }

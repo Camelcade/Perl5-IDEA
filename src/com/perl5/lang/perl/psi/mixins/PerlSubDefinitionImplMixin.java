@@ -32,48 +32,39 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PsiPerlSubDefinition
-{
-	public PerlSubDefinitionImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PsiPerlSubDefinition {
+  public PerlSubDefinitionImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlSubDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlSubDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
 
-	@Override
-	protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments)
-	{
-		if (!super.processSignatureElement(signatureElement, arguments))
-		{
-			if (signatureElement instanceof PsiPerlSubSignatureElementIgnore)
-			{
-				PerlSubArgument newArgument = PerlSubArgument.getEmptyArgument();
-				newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
-				arguments.add(newArgument);
-			}
-			else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN && arguments.size() > 0)
-			{
-				// setting last element as optional
-				arguments.get(arguments.size() - 1).setOptional(true);
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+  @Override
+  protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
+    if (!super.processSignatureElement(signatureElement, arguments)) {
+      if (signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
+        PerlSubArgument newArgument = PerlSubArgument.getEmptyArgument();
+        newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
+        arguments.add(newArgument);
+      }
+      else if (signatureElement.getNode().getElementType() == PerlElementTypes.OPERATOR_ASSIGN && arguments.size() > 0) {
+        // setting last element as optional
+        arguments.get(arguments.size() - 1).setOptional(true);
+      }
+      else {
+        return false;
+      }
+    }
+    return true;
+  }
 
 
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return getSubSignature();
-	}
+  @Nullable
+  @Override
+  public PsiElement getSignatureContainer() {
+    return getSubSignature();
+  }
 }

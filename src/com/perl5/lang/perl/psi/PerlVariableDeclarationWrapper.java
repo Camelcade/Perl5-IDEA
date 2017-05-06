@@ -29,118 +29,114 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 /**
  * Created by hurricup on 29.09.2015.
  */
-public interface PerlVariableDeclarationWrapper extends StubBasedPsiElement<PerlVariableStub>, PerlNamedElement, PerlCompositeElement, PerlDeprecatable
-{
-	/**
-	 * Returns declared variable object
-	 *
-	 * @return variable object
-	 */
-	PerlVariable getVariable();
+public interface PerlVariableDeclarationWrapper
+  extends StubBasedPsiElement<PerlVariableStub>, PerlNamedElement, PerlCompositeElement, PerlDeprecatable {
+  /**
+   * Returns declared variable object
+   *
+   * @return variable object
+   */
+  PerlVariable getVariable();
 
-	/**
-	 * Returns declaration type in annotation or declaration
-	 *
-	 * @return type string or null
-	 */
-	@Nullable
-	String getDeclaredType();
+  /**
+   * Returns declaration type in annotation or declaration
+   *
+   * @return type string or null
+   */
+  @Nullable
+  String getDeclaredType();
 
-	/**
-	 * Returns declaration type if variable is in declaration
-	 *
-	 * @return type string or null
-	 */
-	@Nullable
-	String getLocallyDeclaredType();
+  /**
+   * Returns declaration type if variable is in declaration
+   *
+   * @return type string or null
+   */
+  @Nullable
+  String getLocallyDeclaredType();
 
-	/**
-	 * Trying to get the package name from explicit specification or by traversing
-	 *
-	 * @return package name for current element
-	 */
-	String getPackageName();
+  /**
+   * Trying to get the package name from explicit specification or by traversing
+   *
+   * @return package name for current element
+   */
+  String getPackageName();
 
-	/**
-	 * returns proper fqn
-	 *
-	 * @return fqn or null if name is missing
-	 */
-	@Nullable
-	default String getFullQualifiedName()
-	{
-		String name = getName();
-		if (StringUtil.isEmpty(name))
-		{
-			return null;
-		}
+  /**
+   * returns proper fqn
+   *
+   * @return fqn or null if name is missing
+   */
+  @Nullable
+  default String getFullQualifiedName() {
+    String name = getName();
+    if (StringUtil.isEmpty(name)) {
+      return null;
+    }
 
-		String packageName = getPackageName();
-		if (StringUtil.isEmpty(packageName))
-		{
-			return name;
-		}
-		return packageName + PACKAGE_SEPARATOR + name;
-	}
+    String packageName = getPackageName();
+    if (StringUtil.isEmpty(packageName)) {
+      return name;
+    }
+    return packageName + PACKAGE_SEPARATOR + name;
+  }
 
-	/**
-	 * Guessing actual variable type from context
-	 *
-	 * @return variable type
-	 */
-	PerlVariableType getActualType();
+  /**
+   * Guessing actual variable type from context
+   *
+   * @return variable type
+   */
+  PerlVariableType getActualType();
 
-	/**
-	 * Checks if this declaration is lexical. IMPORTANT: builds PSI
-	 *
-	 * @return checking result
-	 */
-	boolean isLexicalDeclaration();
+  /**
+   * Checks if this declaration is lexical. IMPORTANT: builds PSI
+   *
+   * @return checking result
+   */
+  boolean isLexicalDeclaration();
 
-	/**
-	 * Checks if this declaration is local. IMPORTANT: builds PSI
-	 *
-	 * @return checking result
-	 */
-	boolean isLocalDeclaration();
+  /**
+   * Checks if this declaration is local. IMPORTANT: builds PSI
+   *
+   * @return checking result
+   */
+  boolean isLocalDeclaration();
 
-	/**
-	 * Checks if this declaration is global. IMPORTANT: builds PSI
-	 *
-	 * @return checking result
-	 */
-	boolean isGlobalDeclaration();
+  /**
+   * Checks if this declaration is global. IMPORTANT: builds PSI
+   *
+   * @return checking result
+   */
+  boolean isGlobalDeclaration();
 
-	/**
-	 * Checks if this is method's invocant declaration. IMPORTANT: builds PSI
-	 *
-	 * @return checking result
-	 */
-	boolean isInvocantDeclaration();
+  /**
+   * Checks if this is method's invocant declaration. IMPORTANT: builds PSI
+   *
+   * @return checking result
+   */
+  boolean isInvocantDeclaration();
 
-	/**
-	 * Returns stubbed, local or external variable annotations
-	 *
-	 * @return annotations or null
-	 */
-	@Nullable
-	PerlVariableAnnotations getVariableAnnotations();
+  /**
+   * Returns stubbed, local or external variable annotations
+   *
+   * @return annotations or null
+   */
+  @Nullable
+  PerlVariableAnnotations getVariableAnnotations();
 
-	/**
-	 * Returns local variable annotations if any
-	 *
-	 * @return annotations object or null
-	 */
-	@Nullable
-	PerlVariableAnnotations getLocalVariableAnnotations();
+  /**
+   * Returns local variable annotations if any
+   *
+   * @return annotations object or null
+   */
+  @Nullable
+  PerlVariableAnnotations getLocalVariableAnnotations();
 
 
-	/**
-	 * Returns external variable annotations if any
-	 *
-	 * @return annotations object or null
-	 */
-	@Nullable
-	PerlVariableAnnotations getExternalVariableAnnotations();
-
+  /**
+   * Returns external variable annotations if any
+   *
+   * @return annotations object or null
+   */
+  @Nullable
+  PerlVariableAnnotations getExternalVariableAnnotations();
 }

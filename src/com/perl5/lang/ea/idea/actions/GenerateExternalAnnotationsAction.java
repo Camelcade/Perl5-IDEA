@@ -22,17 +22,14 @@ import com.perl5.lang.perl.idea.actions.PerlActionBase;
 /**
  * Created by hurricup on 13.08.2016.
  */
-public class GenerateExternalAnnotationsAction extends PerlActionBase
-{
-	@Override
-	protected boolean isEnabled(AnActionEvent event)
-	{
-		return false;
-	}
+public class GenerateExternalAnnotationsAction extends PerlActionBase {
+  @Override
+  protected boolean isEnabled(AnActionEvent event) {
+    return false;
+  }
 
-	@Override
-	public void actionPerformed(AnActionEvent e)
-	{
+  @Override
+  public void actionPerformed(AnActionEvent e) {
 
-	}
+  }
 }

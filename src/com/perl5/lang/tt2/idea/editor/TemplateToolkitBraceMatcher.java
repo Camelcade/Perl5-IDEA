@@ -27,30 +27,26 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, TemplateToolkitElementTypes
-{
-	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(TT2_OPEN_TAG, TT2_CLOSE_TAG, true),
-			new BracePair(TT2_LEFT_BRACE, TT2_RIGHT_BRACE, true),
-			new BracePair(TT2_LEFT_BRACKET, TT2_RIGHT_BRACKET, true),
-			new BracePair(TT2_LEFT_PAREN, TT2_RIGHT_PAREN, true),
-	};
+public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, TemplateToolkitElementTypes {
+  private static final BracePair[] PAIRS = new BracePair[]{
+    new BracePair(TT2_OPEN_TAG, TT2_CLOSE_TAG, true),
+    new BracePair(TT2_LEFT_BRACE, TT2_RIGHT_BRACE, true),
+    new BracePair(TT2_LEFT_BRACKET, TT2_RIGHT_BRACKET, true),
+    new BracePair(TT2_LEFT_PAREN, TT2_RIGHT_PAREN, true),
+  };
 
-	@Override
-	public BracePair[] getPairs()
-	{
-		return PAIRS;
-	}
+  @Override
+  public BracePair[] getPairs() {
+    return PAIRS;
+  }
 
-	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType)
-	{
-		return true;
-	}
+  @Override
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
+    return true;
+  }
 
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
-		return openingBraceOffset;
-	}
+  @Override
+  public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
+    return openingBraceOffset;
+  }
 }

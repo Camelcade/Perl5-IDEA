@@ -27,34 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlGlobFilter implements Filter
-{
-	public static final PerlGlobFilter INSTANCE = new PerlGlobFilter();
-	private static final String ID = "SHOW_GLOBS";
+public class PerlGlobFilter implements Filter {
+  public static final PerlGlobFilter INSTANCE = new PerlGlobFilter();
+  private static final String ID = "SHOW_GLOBS";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlGlobStructureViewElement);
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlGlobStructureViewElement);
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show typeglobs", null, PerlIcons.GLOB_GUTTER_ICON);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show typeglobs", null, PerlIcons.GLOB_GUTTER_ICON);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

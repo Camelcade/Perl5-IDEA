@@ -34,61 +34,51 @@ import javax.swing.*;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PsiPerlSubDeclaration
-{
-	public PerlSubDeclarationImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PsiPerlSubDeclaration {
+  public PerlSubDeclarationImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlSubDeclarationImplMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlSubDeclarationImplMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return isXSub()
-				? PerlIcons.XSUB_GUTTER_ICON
-				: PerlIcons.SUB_DECLARATION_GUTTER_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    return isXSub()
+           ? PerlIcons.XSUB_GUTTER_ICON
+           : PerlIcons.SUB_DECLARATION_GUTTER_ICON;
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new PerlItemPresentationSimple(this, getPresentableName());
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getPresentableName());
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return this.getName();
-	}
+  @Override
+  public String getPresentableName() {
+    return this.getName();
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		return true;
-	}
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
 
-	@Override
-	public boolean isStatic()
-	{
-		return true;
-	}
+  @Override
+  public boolean isStatic() {
+    return true;
+  }
 
-	@Override
-	public boolean isXSub()
-	{
-		return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
-	}
+  @Override
+  public boolean isXSub() {
+    return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
+  }
 
-	@Nullable
-	@Override
-	public PsiPerlExpr getExpr()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiPerlExpr getExpr() {
+    return null;
+  }
 }

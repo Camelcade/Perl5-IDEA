@@ -28,71 +28,59 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSectionItem
-{
-	public PodSectionItemMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSectionItem {
+  public PodSectionItemMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean isBulleted()
-	{
-		PsiElement titleBlock = getTitleBlock();
+  @Override
+  public boolean isBulleted() {
+    PsiElement titleBlock = getTitleBlock();
 
-		if (titleBlock != null)
-		{
-			PsiElement firstTitleToken = titleBlock.getFirstChild();
-			if (firstTitleToken != null)
-			{
-				IElementType elementType = firstTitleToken.getNode().getElementType();
+    if (titleBlock != null) {
+      PsiElement firstTitleToken = titleBlock.getFirstChild();
+      if (firstTitleToken != null) {
+        IElementType elementType = firstTitleToken.getNode().getElementType();
 
-				return elementType == POD_NEWLINE || elementType == POD_ASTERISK;
-			}
-		}
+        return elementType == POD_NEWLINE || elementType == POD_ASTERISK;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	public boolean isContainerBulleted()
-	{
-		PsiElement container = getParent();
-		return !(container instanceof PodOverSectionContent) || ((PodOverSectionContent) container).isBulleted();
-	}
+  public boolean isContainerBulleted() {
+    PsiElement container = getParent();
+    return !(container instanceof PodOverSectionContent) || ((PodOverSectionContent)container).isBulleted();
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		boolean isBulleted = isContainerBulleted();
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    boolean isBulleted = isContainerBulleted();
 
-		if (isBulleted)
-		{
-			builder.append("<li>");
-			super.renderElementAsHTML(builder, context);
-			builder.append("</li>");
-		}
-		else
-		{
-			builder.append("<dt style=\"padding-bottom:4px;font-weight:bold;\">");
-			super.renderElementTitleAsHTML(builder, context);
-			builder.append("</dt>");
+    if (isBulleted) {
+      builder.append("<li>");
+      super.renderElementAsHTML(builder, context);
+      builder.append("</li>");
+    }
+    else {
+      builder.append("<dt style=\"padding-bottom:4px;font-weight:bold;\">");
+      super.renderElementTitleAsHTML(builder, context);
+      builder.append("</dt>");
 
-			StringBuilder elementBuilder = new StringBuilder();
-			super.renderElementContentAsHTML(elementBuilder, context);
-			if (elementBuilder.length() > 0)
-			{
-				builder.append("<dd style=\"padding-top:6px;\">");
-				builder.append(elementBuilder);
-				builder.append("</dd>");
-			}
-		}
-	}
+      StringBuilder elementBuilder = new StringBuilder();
+      super.renderElementContentAsHTML(elementBuilder, context);
+      if (elementBuilder.length() > 0) {
+        builder.append("<dd style=\"padding-top:6px;\">");
+        builder.append(elementBuilder);
+        builder.append("</dd>");
+      }
+    }
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewTypeLocation()
-	{
-		return "List Item";
-	}
-
+  @Nullable
+  @Override
+  public String getUsageViewTypeLocation() {
+    return "List Item";
+  }
 }

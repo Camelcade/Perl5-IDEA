@@ -21,12 +21,9 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonRecursiveVisitor extends HTMLMasonVisitor
-{
-	@Override
-	public void visitElement(PsiElement element)
-	{
-		element.acceptChildren(this);
-	}
-
+public class HTMLMasonRecursiveVisitor extends HTMLMasonVisitor {
+  @Override
+  public void visitElement(PsiElement element) {
+    element.acceptChildren(this);
+  }
 }

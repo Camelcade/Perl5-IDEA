@@ -35,109 +35,90 @@ import java.util.Map;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase
-{
-	public PerlHierarchyBrowser(PsiElement element)
-	{
-		super(element.getProject(), element);
-	}
+public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
+  public PerlHierarchyBrowser(PsiElement element) {
+    super(element.getProject(), element);
+  }
 
-	@Override
-	protected boolean isInterface(PsiElement psiElement)
-	{
-		return false;
-	}
+  @Override
+  protected boolean isInterface(PsiElement psiElement) {
+    return false;
+  }
 
-	@Override
-	protected boolean canBeDeleted(PsiElement psiElement)
-	{
-		return false;
-	}
+  @Override
+  protected boolean canBeDeleted(PsiElement psiElement) {
+    return false;
+  }
 
-	@Override
-	protected String getQualifiedName(PsiElement psiElement)
-	{
-		if (psiElement instanceof PerlNamedElement)
-		{
-			return ((PerlNamedElement) psiElement).getPresentableName();
-		}
+  @Override
+  protected String getQualifiedName(PsiElement psiElement) {
+    if (psiElement instanceof PerlNamedElement) {
+      return ((PerlNamedElement)psiElement).getPresentableName();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Nullable
-	@Override
-	protected PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor)
-	{
-		if (!(descriptor instanceof PerlHierarchyNodeDescriptor))
-		{
-			return null;
-		}
-		return ((PerlHierarchyNodeDescriptor) descriptor).getPerlElement();
-	}
+  @Nullable
+  @Override
+  protected PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
+    if (!(descriptor instanceof PerlHierarchyNodeDescriptor)) {
+      return null;
+    }
+    return ((PerlHierarchyNodeDescriptor)descriptor).getPerlElement();
+  }
 
-	@Override
-	protected void createTrees(@NotNull Map<String, JTree> trees)
-	{
-		trees.put(SUPERTYPES_HIERARCHY_TYPE, createTree(true));
-		trees.put(SUBTYPES_HIERARCHY_TYPE, createTree(true));
-		trees.put(TYPE_HIERARCHY_TYPE, createTree(true));
-	}
+  @Override
+  protected void createTrees(@NotNull Map<String, JTree> trees) {
+    trees.put(SUPERTYPES_HIERARCHY_TYPE, createTree(true));
+    trees.put(SUBTYPES_HIERARCHY_TYPE, createTree(true));
+    trees.put(TYPE_HIERARCHY_TYPE, createTree(true));
+  }
 
-	@Nullable
-	@Override
-	protected JPanel createLegendPanel()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  protected JPanel createLegendPanel() {
+    return null;
+  }
 
-	@Override
-	protected boolean isApplicableElement(@NotNull PsiElement element)
-	{
-		return element instanceof PerlNamespaceDefinition;
-	}
+  @Override
+  protected boolean isApplicableElement(@NotNull PsiElement element) {
+    return element instanceof PerlNamespaceDefinition;
+  }
 
-	@Nullable
-	@Override
-	protected HierarchyTreeStructure createHierarchyTreeStructure(@NotNull String typeName, @NotNull PsiElement psiElement)
-	{
-		if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName))
-		{
-			return getSuperTypesHierarchyStructure(psiElement);
-		}
-		else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName))
-		{
-			return getSubTypesHierarchyStructure(psiElement);
-		}
-		else if (TYPE_HIERARCHY_TYPE.equals(typeName))
-		{
-			return getTypesHierarchyStructure(psiElement);
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  protected HierarchyTreeStructure createHierarchyTreeStructure(@NotNull String typeName, @NotNull PsiElement psiElement) {
+    if (SUPERTYPES_HIERARCHY_TYPE.equals(typeName)) {
+      return getSuperTypesHierarchyStructure(psiElement);
+    }
+    else if (SUBTYPES_HIERARCHY_TYPE.equals(typeName)) {
+      return getSubTypesHierarchyStructure(psiElement);
+    }
+    else if (TYPE_HIERARCHY_TYPE.equals(typeName)) {
+      return getTypesHierarchyStructure(psiElement);
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	protected Comparator<NodeDescriptor> getComparator()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  protected Comparator<NodeDescriptor> getComparator() {
+    return null;
+  }
 
-	@Nullable
-	protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return new PerlSuperTypesHierarchyTreeStructure(psiElement);
-	}
+  @Nullable
+  protected HierarchyTreeStructure getSuperTypesHierarchyStructure(PsiElement psiElement) {
+    return new PerlSuperTypesHierarchyTreeStructure(psiElement);
+  }
 
-	@Nullable
-	protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return new PerlSubTypesHierarchyTreeStructure(psiElement);
-	}
+  @Nullable
+  protected HierarchyTreeStructure getSubTypesHierarchyStructure(PsiElement psiElement) {
+    return new PerlSubTypesHierarchyTreeStructure(psiElement);
+  }
 
-	@Nullable
-	protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement)
-	{
-		return null;
-	}
+  @Nullable
+  protected HierarchyTreeStructure getTypesHierarchyStructure(PsiElement psiElement) {
+    return null;
+  }
 }

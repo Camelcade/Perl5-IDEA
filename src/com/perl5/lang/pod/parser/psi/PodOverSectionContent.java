@@ -23,21 +23,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodOverSectionContent extends PsiElement, PodElementTypes
-{
-	/**
-	 * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
-	 *
-	 * @return true if list should be bulleted
-	 */
-	boolean isBulleted();
+public interface PodOverSectionContent extends PsiElement, PodElementTypes {
+  /**
+   * Checks if first element is bulleted, according to http://perldoc.perl.org/perlpodspec.html#About-%3dover...%3dback-Regions
+   *
+   * @return true if list should be bulleted
+   */
+  boolean isBulleted();
 
-	/**
-	 * Returns first list item
-	 *
-	 * @return item or null if not any
-	 */
-	@Nullable
-	PodSectionItem getFirstItem();
-
+  /**
+   * Returns first list item
+   *
+   * @return item or null if not any
+   */
+  @Nullable
+  PodSectionItem getFirstItem();
 }

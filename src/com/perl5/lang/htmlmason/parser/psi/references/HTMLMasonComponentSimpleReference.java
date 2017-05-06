@@ -29,35 +29,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference
-{
-	public HTMLMasonComponentSimpleReference(@NotNull PerlString element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
+public class HTMLMasonComponentSimpleReference extends HTMLMasonStringReference {
+  public HTMLMasonComponentSimpleReference(@NotNull PerlString element, TextRange textRange) {
+    super(element, textRange);
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		return myElement;
-	}
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    return myElement;
+  }
 
-	@Override
-	public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-		return myElement;
-	}
+  @Override
+  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+    return myElement;
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PsiFile psiFile = getElement().getContainingFile();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PsiFile psiFile = getElement().getContainingFile();
 
-		if (psiFile instanceof HTMLMasonFileImpl)
-		{
-			return new ResolveResult[]{new PsiElementResolveResult(psiFile)};
-		}
+    if (psiFile instanceof HTMLMasonFileImpl) {
+      return new ResolveResult[]{new PsiElementResolveResult(psiFile)};
+    }
 
-		return ResolveResult.EMPTY_ARRAY;
-	}
+    return ResolveResult.EMPTY_ARRAY;
+  }
 }

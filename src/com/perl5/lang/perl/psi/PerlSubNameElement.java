@@ -22,36 +22,35 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubNameElement extends PsiElement
-{
-	/**
-	 * Trying to get the package name from explicit specification or by traversing
-	 *
-	 * @return package name for current element
-	 */
-	String getPackageName();
+public interface PerlSubNameElement extends PsiElement {
+  /**
+   * Trying to get the package name from explicit specification or by traversing
+   *
+   * @return package name for current element
+   */
+  String getPackageName();
 
-	/**
-	 * Returns fullname package::element
-	 *
-	 * @return name
-	 */
-	String getCanonicalName();
-
-
-	/**
-	 * Checks if this sub name is built in
-	 *
-	 * @return checking result
-	 */
-	boolean isBuiltIn();
+  /**
+   * Returns fullname package::element
+   *
+   * @return name
+   */
+  String getCanonicalName();
 
 
-	/**
-	 * Returns sub name
-	 *
-	 * @return sub name
-	 */
-	@NotNull
-	String getName();
+  /**
+   * Checks if this sub name is built in
+   *
+   * @return checking result
+   */
+  boolean isBuiltIn();
+
+
+  /**
+   * Returns sub name
+   *
+   * @return sub name
+   */
+  @NotNull
+  String getName();
 }

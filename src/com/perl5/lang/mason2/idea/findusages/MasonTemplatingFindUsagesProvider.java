@@ -23,13 +23,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTemplatingFindUsagesProvider extends PerlFindUsagesProvider
-{
+public class MasonTemplatingFindUsagesProvider extends PerlFindUsagesProvider {
 
-	@Nullable
-	@Override
-	public WordsScanner getWordsScanner()
-	{
-		return new MasonTemplatingWordScanner();
-	}
+  @Nullable
+  @Override
+  public WordsScanner getWordsScanner() {
+    return new MasonTemplatingWordScanner();
+  }
 }

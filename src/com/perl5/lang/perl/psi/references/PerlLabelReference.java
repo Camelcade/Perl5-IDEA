@@ -30,62 +30,53 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr>
-{
-	public PerlLabelReference(@NotNull PsiPerlLabelExpr element)
-	{
-		super(element, element.getTextRange().shiftRight(-element.getTextOffset()));
-	}
+public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr> {
+  public PerlLabelReference(@NotNull PsiPerlLabelExpr element) {
+    super(element, element.getTextRange().shiftRight(-element.getTextOffset()));
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PsiPerlLabelExpr labelExpr = getElement();
-		PsiElement parent = labelExpr == null ? null : labelExpr.getParent();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PsiPerlLabelExpr labelExpr = getElement();
+    PsiElement parent = labelExpr == null ? null : labelExpr.getParent();
 
-		if (labelExpr == null)
-		{
-			return ResolveResult.EMPTY_ARRAY;
-		}
+    if (labelExpr == null) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
 
-		LabelSeeker processor = new LabelSeeker(labelExpr.getText());
+    LabelSeeker processor = new LabelSeeker(labelExpr.getText());
 
-		if (parent instanceof PsiPerlGotoExpr) // goto
-		{
-			PerlPsiUtil.processGotoLabelDeclarations(labelExpr.getParent(), processor);
-		}
-		else // suppose it's last, next or redo
-		{
-			PerlPsiUtil.processNextRedoLastLabelDeclarations(labelExpr.getParent(), processor);
-		}
-		PerlLabelDeclaration result = processor.getResult();
-		return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(result);
-	}
+    if (parent instanceof PsiPerlGotoExpr) // goto
+    {
+      PerlPsiUtil.processGotoLabelDeclarations(labelExpr.getParent(), processor);
+    }
+    else // suppose it's last, next or redo
+    {
+      PerlPsiUtil.processNextRedoLastLabelDeclarations(labelExpr.getParent(), processor);
+    }
+    PerlLabelDeclaration result = processor.getResult();
+    return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(result);
+  }
 
-	protected static class LabelSeeker implements Processor<PerlLabelDeclaration>
-	{
-		protected final String myName;
-		protected PerlLabelDeclaration myResult = null;
+  protected static class LabelSeeker implements Processor<PerlLabelDeclaration> {
+    protected final String myName;
+    protected PerlLabelDeclaration myResult = null;
 
-		public LabelSeeker(@NotNull String myName)
-		{
-			this.myName = myName;
-		}
+    public LabelSeeker(@NotNull String myName) {
+      this.myName = myName;
+    }
 
-		@Override
-		public boolean process(PerlLabelDeclaration perlLabelDeclaration)
-		{
-			if (StringUtil.equals(perlLabelDeclaration.getName(), myName))
-			{
-				myResult = perlLabelDeclaration;
-				return false;
-			}
-			return true;
-		}
+    @Override
+    public boolean process(PerlLabelDeclaration perlLabelDeclaration) {
+      if (StringUtil.equals(perlLabelDeclaration.getName(), myName)) {
+        myResult = perlLabelDeclaration;
+        return false;
+      }
+      return true;
+    }
 
-		public PerlLabelDeclaration getResult()
-		{
-			return myResult;
-		}
-	}
+    public PerlLabelDeclaration getResult() {
+      return myResult;
+    }
+  }
 }

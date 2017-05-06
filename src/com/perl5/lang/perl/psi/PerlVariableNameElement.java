@@ -21,8 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlVariableNameElement extends PerlReferenceOwner
-{
-	@NotNull
-	String getName();
+public interface PerlVariableNameElement extends PerlReferenceOwner {
+  @NotNull
+  String getName();
 }

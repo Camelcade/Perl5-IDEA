@@ -25,16 +25,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvider
-{
-	@Nullable
-	@Override
-	public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement)
-	{
-		if (element instanceof HTMLMasonFileImpl)
-		{
-			return "HTML::Mason component:<br>" + ((HTMLMasonFileImpl) element).getAbsoluteComponentPath() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl) element);
-		}
-		return super.getQuickNavigateInfo(element, originalElement);
-	}
+public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvider {
+  @Nullable
+  @Override
+  public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+    if (element instanceof HTMLMasonFileImpl) {
+      return "HTML::Mason component:<br>" +
+             ((HTMLMasonFileImpl)element).getAbsoluteComponentPath() +
+             HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl)element);
+    }
+    return super.getQuickNavigateInfo(element, originalElement);
+  }
 }

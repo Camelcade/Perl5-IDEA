@@ -25,18 +25,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 11.04.2016.
  */
-public class PerlUsageTypeProvider implements UsageTypeProvider
-{
-	public static final UsageType DOCUMENT_USAGE = new UsageType("Documentation");
+public class PerlUsageTypeProvider implements UsageTypeProvider {
+  public static final UsageType DOCUMENT_USAGE = new UsageType("Documentation");
 
-	@Nullable
-	@Override
-	public UsageType getUsageType(PsiElement element)
-	{
-		if (element.getLanguage() == PodLanguage.INSTANCE)
-		{
-			return DOCUMENT_USAGE;
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public UsageType getUsageType(PsiElement element) {
+    if (element.getLanguage() == PodLanguage.INSTANCE) {
+      return DOCUMENT_USAGE;
+    }
+    return null;
+  }
 }

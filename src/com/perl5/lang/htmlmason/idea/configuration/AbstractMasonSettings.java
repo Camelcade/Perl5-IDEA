@@ -31,57 +31,46 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public abstract class AbstractMasonSettings
-{
-	public List<String> componentRoots = new ArrayList<String>();
-	public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
+public abstract class AbstractMasonSettings {
+  public List<String> componentRoots = new ArrayList<String>();
+  public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
 
-	@Transient
-	protected int changeCounter = 0;
+  @Transient
+  protected int changeCounter = 0;
 
-	@Transient
-	protected Project myProject;
-	@Transient
-	private List<VirtualFile> componentsRootsVirtualFiles = null;
+  @Transient
+  protected Project myProject;
+  @Transient
+  private List<VirtualFile> componentsRootsVirtualFiles = null;
 
-	protected AbstractMasonSettings setProject(Project project)
-	{
-		myProject = project;
-		return this;
-	}
+  protected AbstractMasonSettings setProject(Project project) {
+    myProject = project;
+    return this;
+  }
 
-	public void settingsUpdated()
-	{
-		componentsRootsVirtualFiles = null;
-		changeCounter++;
-		if (!ApplicationManager.getApplication().isUnitTestMode())
-		{
-			EditorNotifications.getInstance(myProject).updateAllNotifications();
-		}
-	}
+  public void settingsUpdated() {
+    componentsRootsVirtualFiles = null;
+    changeCounter++;
+    if (!ApplicationManager.getApplication().isUnitTestMode()) {
+      EditorNotifications.getInstance(myProject).updateAllNotifications();
+    }
+  }
 
-	@NotNull
-	public List<VirtualFile> getComponentsRootsVirtualFiles()
-	{
-		if (componentsRootsVirtualFiles == null)
-		{
-			componentsRootsVirtualFiles = new ArrayList<VirtualFile>();
-			for (String relativeRoot : componentRoots)
-			{
-				VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
-				if (rootFile != null && rootFile.exists())
-				{
-					componentsRootsVirtualFiles.add(rootFile);
-				}
-			}
-		}
-		return componentsRootsVirtualFiles;
-	}
+  @NotNull
+  public List<VirtualFile> getComponentsRootsVirtualFiles() {
+    if (componentsRootsVirtualFiles == null) {
+      componentsRootsVirtualFiles = new ArrayList<VirtualFile>();
+      for (String relativeRoot : componentRoots) {
+        VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
+        if (rootFile != null && rootFile.exists()) {
+          componentsRootsVirtualFiles.add(rootFile);
+        }
+      }
+    }
+    return componentsRootsVirtualFiles;
+  }
 
-	public int getChangeCounter()
-	{
-		return changeCounter;
-	}
-
-
+  public int getChangeCounter() {
+    return changeCounter;
+  }
 }

@@ -25,17 +25,13 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 /**
  * Created by hurricup on 23.01.2016.
  */
-public class ClassAccessorSetterStructureViewElement extends PerlSubStructureViewElement
-{
-	public ClassAccessorSetterStructureViewElement(PerlSubDefinitionBase element)
-	{
-		super(element);
-	}
+public class ClassAccessorSetterStructureViewElement extends PerlSubStructureViewElement {
+  public ClassAccessorSetterStructureViewElement(PerlSubDefinitionBase element) {
+    super(element);
+  }
 
-	@Override
-	protected ItemPresentation createPresentation()
-	{
-		return new PerlItemPresentationSimple(myElement, ((PerlClassAccessorDeclaration) myElement).getSetterName());
-	}
-
+  @Override
+  protected ItemPresentation createPresentation() {
+    return new PerlItemPresentationSimple(myElement, ((PerlClassAccessorDeclaration)myElement).getSetterName());
+  }
 }

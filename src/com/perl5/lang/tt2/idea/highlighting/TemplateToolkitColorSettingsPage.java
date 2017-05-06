@@ -34,77 +34,69 @@ import java.util.Map;
 /**
  * Created by hurricup on 05.07.2016.
  */
-public class TemplateToolkitColorSettingsPage implements ColorSettingsPage
-{
-	private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-			new AttributesDescriptor("Markers", TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
-			new AttributesDescriptor("Numbers", TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
-			new AttributesDescriptor("Comments", TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
-			new AttributesDescriptor("Identifiers", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
-			new AttributesDescriptor("Keywords", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
-			new AttributesDescriptor("Operators", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
-			new AttributesDescriptor("Strings, single quoted", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
-			new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
-	};
+public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
+  private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
+    new AttributesDescriptor("Markers", TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
+    new AttributesDescriptor("Numbers", TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
+    new AttributesDescriptor("Comments", TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
+    new AttributesDescriptor("Identifiers", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
+    new AttributesDescriptor("Keywords", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
+    new AttributesDescriptor("Operators", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
+    new AttributesDescriptor("Strings, single quoted", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
+    new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
+  };
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.TTK2_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.TTK2_ICON;
+  }
 
-	@NotNull
-	@Override
-	public SyntaxHighlighter getHighlighter()
-	{
-		return new TemplateToolkitSyntaxHighlighter(null);
-	}
+  @NotNull
+  @Override
+  public SyntaxHighlighter getHighlighter() {
+    return new TemplateToolkitSyntaxHighlighter(null);
+  }
 
-	@NotNull
-	@Override
-	public String getDemoText()
-	{
-		return "%% <kw>SET</kw> <id>somekey</id> <op>=</op> <sqs>'single quoted string'</sqs>\n" +
-				"[% <kw>SET</kw> <id>somekey</id> <op>=</op> <dqs>\"double quoted string\"</dqs> %]\n" +
-				"[% <kw>SET</kw> <id>somekey</id> <op>=</op> 42 %]\n" +
-				"[% <id>somekey</id> <op>and</op> <id>someotherkey</id> <op>or</op> <id>somethingelse</id> %]\n" +
-				"%%# line comment\n" +
-				"[%# block comment  %]\n";
-	}
+  @NotNull
+  @Override
+  public String getDemoText() {
+    return "%% <kw>SET</kw> <id>somekey</id> <op>=</op> <sqs>'single quoted string'</sqs>\n" +
+           "[% <kw>SET</kw> <id>somekey</id> <op>=</op> <dqs>\"double quoted string\"</dqs> %]\n" +
+           "[% <kw>SET</kw> <id>somekey</id> <op>=</op> 42 %]\n" +
+           "[% <id>somekey</id> <op>and</op> <id>someotherkey</id> <op>or</op> <id>somethingelse</id> %]\n" +
+           "%%# line comment\n" +
+           "[%# block comment  %]\n";
+  }
 
-	@Nullable
-	@Override
-	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
-	{
-		//noinspection unchecked
-		return ContainerUtil.newHashMap(
-				Pair.create("kw", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
-				Pair.create("id", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
-				Pair.create("op", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
-				Pair.create("sqs", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
-				Pair.create("dqs", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY)
-		);
-	}
+  @Nullable
+  @Override
+  public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+    //noinspection unchecked
+    return ContainerUtil.newHashMap(
+      Pair.create("kw", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
+      Pair.create("id", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
+      Pair.create("op", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
+      Pair.create("sqs", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
+      Pair.create("dqs", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY)
+    );
+  }
 
-	@NotNull
-	@Override
-	public AttributesDescriptor[] getAttributeDescriptors()
-	{
-		return DESCRIPTORS;
-	}
+  @NotNull
+  @Override
+  public AttributesDescriptor[] getAttributeDescriptors() {
+    return DESCRIPTORS;
+  }
 
-	@NotNull
-	@Override
-	public ColorDescriptor[] getColorDescriptors()
-	{
-		return ColorDescriptor.EMPTY_ARRAY;
-	}
+  @NotNull
+  @Override
+  public ColorDescriptor[] getColorDescriptors() {
+    return ColorDescriptor.EMPTY_ARRAY;
+  }
 
-	@NotNull
-	@Override
-	public String getDisplayName()
-	{
-		return TemplateToolkitLanguage.NAME;
-	}
+  @NotNull
+  @Override
+  public String getDisplayName() {
+    return TemplateToolkitLanguage.NAME;
+  }
 }

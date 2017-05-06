@@ -37,99 +37,80 @@ import java.util.Map;
 /**
  * Created by hurricup on 03.10.2015.
  */
-public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsiElementProcessor
-{
-	@Override
-	public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope)
-	{
-		final String currentBaseName = ((PsiNameIdentifierOwner) element).getName();
+public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsiElementProcessor {
+  @Override
+  public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope) {
+    final String currentBaseName = ((PsiNameIdentifierOwner)element).getName();
 
-		if (currentBaseName != null && StringUtil.isNotEmpty(newName))
-		{
-			boolean globScanned = element instanceof PerlGlobVariable;
+    if (currentBaseName != null && StringUtil.isNotEmpty(newName)) {
+      boolean globScanned = element instanceof PerlGlobVariable;
 
-			for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll())
-			{
-				if (reference instanceof PsiPolyVariantReference)
-				{
-					for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
-					{
-						PsiElement resolveResultElement = resolveResult.getElement();
-						if (!allRenames.containsKey(resolveResultElement))
-						{
-							allRenames.put(resolveResultElement, newName);
-							if (!globScanned && resolveResultElement instanceof PerlGlobVariable)
-							{
-								globScanned = true;
-								prepareRenaming(resolveResultElement, newName, allRenames, scope);
-							}
-						}
-					}
-				}
-				processDocReference(currentBaseName, newName, reference, allRenames);
-			}
+      for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll()) {
+        if (reference instanceof PsiPolyVariantReference) {
+          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+            PsiElement resolveResultElement = resolveResult.getElement();
+            if (!allRenames.containsKey(resolveResultElement)) {
+              allRenames.put(resolveResultElement, newName);
+              if (!globScanned && resolveResultElement instanceof PerlGlobVariable) {
+                globScanned = true;
+                prepareRenaming(resolveResultElement, newName, allRenames, scope);
+              }
+            }
+          }
+        }
+        processDocReference(currentBaseName, newName, reference, allRenames);
+      }
 
-			if (element instanceof PerlSubBase && ((PerlSubBase) element).isMethod())
-			{
-				for (PerlSubBase overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubBase) element))
-				{
-					allRenames.put(overridingSub, newName);
-				}
-			}
-		}
-	}
+      if (element instanceof PerlSubBase && ((PerlSubBase)element).isMethod()) {
+        for (PerlSubBase overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubBase)element)) {
+          allRenames.put(overridingSub, newName);
+        }
+      }
+    }
+  }
 
-	private void processDocReference(String currentBaseName, String newName, PsiReference reference, Map<PsiElement, String> allRenames)
-	{
-		PsiElement sourceElement = reference.getElement();
-		if (sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE))
-		{
-			PsiNameIdentifierOwner identifierOwner = PsiTreeUtil.getParentOfType(sourceElement, PsiNameIdentifierOwner.class);
-			if (identifierOwner != null)
-			{
-				PsiElement nameIdentifier = identifierOwner.getNameIdentifier();
-				if (nameIdentifier != null && nameIdentifier.getTextRange().contains(sourceElement.getTextRange()))
-				{
-					String currentName = identifierOwner.getName();
-					if (currentName != null)
-					{
-						String newSectionName = currentName.replace(currentBaseName, newName);
-						allRenames.put(identifierOwner, newSectionName);
-					}
-				}
-			}
-		}
-	}
+  private void processDocReference(String currentBaseName, String newName, PsiReference reference, Map<PsiElement, String> allRenames) {
+    PsiElement sourceElement = reference.getElement();
+    if (sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+      PsiNameIdentifierOwner identifierOwner = PsiTreeUtil.getParentOfType(sourceElement, PsiNameIdentifierOwner.class);
+      if (identifierOwner != null) {
+        PsiElement nameIdentifier = identifierOwner.getNameIdentifier();
+        if (nameIdentifier != null && nameIdentifier.getTextRange().contains(sourceElement.getTextRange())) {
+          String currentName = identifierOwner.getName();
+          if (currentName != null) {
+            String newSectionName = currentName.replace(currentBaseName, newName);
+            allRenames.put(identifierOwner, newSectionName);
+          }
+        }
+      }
+    }
+  }
 
-	@Nullable
-	@Override
-	public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor)
-	{
-		if (element instanceof PerlSubBase && ((PerlSubBase) element).isMethod())
-		{
-			return suggestSuperMethod((PerlSubBase) element);
-		}
-		return super.substituteElementToRename(element, editor);
-	}
+  @Nullable
+  @Override
+  public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor) {
+    if (element instanceof PerlSubBase && ((PerlSubBase)element).isMethod()) {
+      return suggestSuperMethod((PerlSubBase)element);
+    }
+    return super.substituteElementToRename(element, editor);
+  }
 
-	@NotNull
-	private PsiElement suggestSuperMethod(@NotNull PerlSubBase subBase)
-	{
-		PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
-		String canonicalName = topLevelSuperMethod.getCanonicalName();
+  @NotNull
+  private PsiElement suggestSuperMethod(@NotNull PerlSubBase subBase) {
+    PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
+    String canonicalName = topLevelSuperMethod.getCanonicalName();
 
-		if (topLevelSuperMethod == subBase || canonicalName == null)
-		{
-			return subBase;
-		}
+    if (topLevelSuperMethod == subBase || canonicalName == null) {
+      return subBase;
+    }
 
-		int dialogResult = Messages.showOkCancelDialog(
-				"This method overrides SUPER method: " + canonicalName + ".",
-				"Method Rename",
-				"Rename SUPER method",
-				"Rename this one",
-				PerlIcons.PERL_LANGUAGE_ICON);
+    int dialogResult = Messages.showOkCancelDialog(
+      "This method overrides SUPER method: " + canonicalName + ".",
+      "Method Rename",
+      "Rename SUPER method",
+      "Rename this one",
+      PerlIcons.PERL_LANGUAGE_ICON);
 
-		return dialogResult == Messages.OK ? topLevelSuperMethod : subBase;
-	}
+    return dialogResult == Messages.OK ? topLevelSuperMethod : subBase;
+  }
 }

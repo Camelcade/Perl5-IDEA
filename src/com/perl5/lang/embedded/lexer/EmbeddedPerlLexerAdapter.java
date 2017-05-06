@@ -25,15 +25,13 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter implements EmbeddedPerlElementTypes
-{
-	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
-			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
-			TokenSet.create(EMBED_TEMPLATE_BLOCK_HTML)
-	);
+public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter implements EmbeddedPerlElementTypes {
+  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+    PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+    TokenSet.create(EMBED_TEMPLATE_BLOCK_HTML)
+  );
 
-	public EmbeddedPerlLexerAdapter(Project project)
-	{
-		super(project, new EmbeddedPerlLexer(null).withProject(project), TOKENS_TO_MERGE);
-	}
+  public EmbeddedPerlLexerAdapter(Project project) {
+    super(project, new EmbeddedPerlLexer(null).withProject(project), TOKENS_TO_MERGE);
+  }
 }

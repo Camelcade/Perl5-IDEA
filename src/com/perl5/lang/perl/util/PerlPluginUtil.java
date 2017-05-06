@@ -32,71 +32,58 @@ import java.io.IOException;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PerlPluginUtil
-{
-	public static final String PLUGIN_ID = "com.perl5";
+public class PerlPluginUtil {
+  public static final String PLUGIN_ID = "com.perl5";
 
-	@Nullable
-	public static IdeaPluginDescriptor getPlugin()
-	{
-		return PluginManager.getPlugin(PluginId.getId(PLUGIN_ID));
-	}
+  @Nullable
+  public static IdeaPluginDescriptor getPlugin() {
+    return PluginManager.getPlugin(PluginId.getId(PLUGIN_ID));
+  }
 
-	@Nullable
-	public static String getPluginVersion()
-	{
-		IdeaPluginDescriptor plugin = getPlugin();
-		return plugin == null ? null : plugin.getVersion();
-	}
+  @Nullable
+  public static String getPluginVersion() {
+    IdeaPluginDescriptor plugin = getPlugin();
+    return plugin == null ? null : plugin.getVersion();
+  }
 
-	@Nullable
-	public static String getPluginRoot()
-	{
-		IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
-		if (plugin != null)
-		{
-			try
-			{
-				return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
-			}
-			catch (IOException e)
-			{
-				return null;
-			}
-		}
-		return null;
-	}
+  @Nullable
+  public static String getPluginRoot() {
+    IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
+    if (plugin != null) {
+      try {
+        return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
+      }
+      catch (IOException e) {
+        return null;
+      }
+    }
+    return null;
+  }
 
 
-	@Nullable
-	public static String getPluginPerlScriptsRoot()
-	{
-		String pluginRoot = getPluginRoot();
-		return pluginRoot == null ? null : pluginRoot + "/perl";
-	}
+  @Nullable
+  public static String getPluginPerlScriptsRoot() {
+    String pluginRoot = getPluginRoot();
+    return pluginRoot == null ? null : pluginRoot + "/perl";
+  }
 
-	@Nullable
-	public static VirtualFile getPluginScriptVirtualFile(String scriptName)
-	{
-		String scriptsRoot = getPluginPerlScriptsRoot();
+  @Nullable
+  public static VirtualFile getPluginScriptVirtualFile(String scriptName) {
+    String scriptsRoot = getPluginPerlScriptsRoot();
 
-		if (scriptsRoot != null)
-		{
-			String scriptPath = scriptsRoot + "/" + scriptName;
-			return VfsUtil.findFileByIoFile(new File(scriptPath), true);
-		}
-		return null;
-	}
+    if (scriptsRoot != null) {
+      String scriptPath = scriptsRoot + "/" + scriptName;
+      return VfsUtil.findFileByIoFile(new File(scriptPath), true);
+    }
+    return null;
+  }
 
-	@Nullable
-	public static GeneralCommandLine getPluginScriptCommandLine(Project project, String script, String... params)
-	{
-		VirtualFile scriptVirtualFile = getPluginScriptVirtualFile(script);
-		if (scriptVirtualFile != null)
-		{
-			return PerlRunUtil.getPerlCommandLine(project, scriptVirtualFile, params);
-		}
-		return null;
-	}
-
+  @Nullable
+  public static GeneralCommandLine getPluginScriptCommandLine(Project project, String script, String... params) {
+    VirtualFile scriptVirtualFile = getPluginScriptVirtualFile(script);
+    if (scriptVirtualFile != null) {
+      return PerlRunUtil.getPerlCommandLine(project, scriptVirtualFile, params);
+    }
+    return null;
+  }
 }

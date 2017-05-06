@@ -24,26 +24,20 @@ import com.perl5.lang.perl.psi.mixins.PerlSubBaseImpl;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlSubStructureViewElement extends PerlStructureViewElement
-{
-	public PerlSubStructureViewElement(PerlSubDefinitionBase element)
-	{
-		super(element);
-	}
+public class PerlSubStructureViewElement extends PerlStructureViewElement {
+  public PerlSubStructureViewElement(PerlSubDefinitionBase element) {
+    super(element);
+  }
 
-	public PerlSubStructureViewElement(PerlSubDeclaration element)
-	{
-		super(element);
-	}
+  public PerlSubStructureViewElement(PerlSubDeclaration element) {
+    super(element);
+  }
 
-	public boolean isDeclaration()
-	{
-		return myElement instanceof PerlSubDeclaration;
-	}
+  public boolean isDeclaration() {
+    return myElement instanceof PerlSubDeclaration;
+  }
 
-	public boolean isMethod()
-	{
-		return myElement instanceof PerlSubBase && ((PerlSubBaseImpl) myElement).isMethod();
-	}
-
+  public boolean isMethod() {
+    return myElement instanceof PerlSubBase && ((PerlSubBaseImpl)myElement).isMethod();
+  }
 }

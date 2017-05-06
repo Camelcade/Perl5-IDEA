@@ -23,12 +23,10 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 18.05.2015.
  */
-public class EmbeddedPerlLanguage extends Language implements TemplateLanguage
-{
-	public static final EmbeddedPerlLanguage INSTANCE = new EmbeddedPerlLanguage();
+public class EmbeddedPerlLanguage extends Language implements TemplateLanguage {
+  public static final EmbeddedPerlLanguage INSTANCE = new EmbeddedPerlLanguage();
 
-	private EmbeddedPerlLanguage()
-	{
-		super(PerlLanguage.INSTANCE, "Embedded Perl");
-	}
+  private EmbeddedPerlLanguage() {
+    super(PerlLanguage.INSTANCE, "Embedded Perl");
+  }
 }

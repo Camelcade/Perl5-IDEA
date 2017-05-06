@@ -27,18 +27,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MojoliciousTypedHandler extends TypedHandlerDelegate implements MojoliciousElementTypes
-{
-	@Override
-	public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
-	{
-		if (file.getViewProvider() instanceof MojoliciousFileViewProvider)
-		{
-			if (c == ' ')
-			{
-				MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
-			}
-		}
-		return super.charTyped(c, project, editor, file);
-	}
+public class MojoliciousTypedHandler extends TypedHandlerDelegate implements MojoliciousElementTypes {
+  @Override
+  public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+    if (file.getViewProvider() instanceof MojoliciousFileViewProvider) {
+      if (c == ' ') {
+        MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
+      }
+    }
+    return super.charTyped(c, project, editor, file);
+  }
 }

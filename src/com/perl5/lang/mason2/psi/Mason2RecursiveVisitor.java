@@ -21,11 +21,9 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 23.02.2016.
  */
-public class Mason2RecursiveVisitor extends Mason2Visitor
-{
-	@Override
-	public void visitElement(PsiElement element)
-	{
-		element.acceptChildren(this);
-	}
+public class Mason2RecursiveVisitor extends Mason2Visitor {
+  @Override
+  public void visitElement(PsiElement element) {
+    element.acceptChildren(this);
+  }
 }

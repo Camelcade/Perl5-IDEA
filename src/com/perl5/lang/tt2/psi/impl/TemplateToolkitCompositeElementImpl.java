@@ -25,24 +25,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement implements TemplateToolkitCompositeElement
-{
-	public TemplateToolkitCompositeElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement implements TemplateToolkitCompositeElement {
+  public TemplateToolkitCompositeElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public final PsiReference[] getReferences()
-	{
-		return getReferencesWithCache();
-	}
+  @NotNull
+  @Override
+  public final PsiReference[] getReferences() {
+    return getReferencesWithCache();
+  }
 
-	@Override
-	public final PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
+  @Override
+  public final PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
+  }
 }

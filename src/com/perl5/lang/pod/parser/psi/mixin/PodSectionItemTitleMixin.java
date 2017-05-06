@@ -27,35 +27,27 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionItemTitleMixin extends PodCompositeElementMixin implements PodSectionItemTitle
-{
-	public PodSectionItemTitleMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodSectionItemTitleMixin extends PodCompositeElementMixin implements PodSectionItemTitle {
+  public PodSectionItemTitleMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	protected boolean isItemBulleted()
-	{
-		PsiElement parent = getParent();
-		return !(parent instanceof PodSectionItem) || ((PodSectionItem) parent).isContainerBulleted();
-	}
+  protected boolean isItemBulleted() {
+    PsiElement parent = getParent();
+    return !(parent instanceof PodSectionItem) || ((PodSectionItem)parent).isContainerBulleted();
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		if (isItemBulleted())
-		{
-			PsiElement firstChild = getFirstChild();
-			if (firstChild != null && firstChild.getNode().getElementType() == POD_ASTERISK)
-			{
-				firstChild = firstChild.getNextSibling();
-			}
-			PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
-
-		}
-		else
-		{
-			super.renderElementAsHTML(builder, context);
-		}
-	}
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    if (isItemBulleted()) {
+      PsiElement firstChild = getFirstChild();
+      if (firstChild != null && firstChild.getNode().getElementType() == POD_ASTERISK) {
+        firstChild = firstChild.getNextSibling();
+      }
+      PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
+    }
+    else {
+      super.renderElementAsHTML(builder, context);
+    }
+  }
 }

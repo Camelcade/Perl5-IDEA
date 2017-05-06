@@ -25,44 +25,39 @@ import com.intellij.psi.util.CachedValuesManager;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public interface PerlReferenceOwner extends PsiElement
-{
-	/**
-	 * default getReferences[] method should call this one
-	 */
-	default PsiReference[] getReferencesWithCache()
-	{
-		return hasReferences() ?
-				CachedValuesManager.getCachedValue(
-						this,
-						() -> CachedValueProvider.Result.create(computeReferences(),
-								getReferencesCacheDependencies())) :
-				PsiReference.EMPTY_ARRAY;
-	}
+public interface PerlReferenceOwner extends PsiElement {
+  /**
+   * default getReferences[] method should call this one
+   */
+  default PsiReference[] getReferencesWithCache() {
+    return hasReferences() ?
+           CachedValuesManager.getCachedValue(
+             this,
+             () -> CachedValueProvider.Result.create(computeReferences(),
+                                                     getReferencesCacheDependencies())) :
+           PsiReference.EMPTY_ARRAY;
+  }
 
-	/**
-	 * Indicates that element must have a reference
-	 */
-	default boolean hasReferences()
-	{
-		return false;
-	}
+  /**
+   * Indicates that element must have a reference
+   */
+  default boolean hasReferences() {
+    return false;
+  }
 
-	/**
-	 * Computing references for psi element
-	 */
-	default PsiReference[] computeReferences()
-	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
-	}
+  /**
+   * Computing references for psi element
+   */
+  default PsiReference[] computeReferences() {
+    return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+  }
 
-	/**
-	 * Returns dependencies array for references caching
-	 *
-	 * @return ref array
-	 */
-	default Object[] getReferencesCacheDependencies()
-	{
-		return new Object[]{this};
-	}
+  /**
+   * Returns dependencies array for references caching
+   *
+   * @return ref array
+   */
+  default Object[] getReferencesCacheDependencies() {
+    return new Object[]{this};
+  }
 }

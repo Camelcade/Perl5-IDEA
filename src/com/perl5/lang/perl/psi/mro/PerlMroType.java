@@ -19,8 +19,7 @@ package com.perl5.lang.perl.psi.mro;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public enum PerlMroType
-{
-	DFS,
-	C3
+public enum PerlMroType {
+  DFS,
+  C3
 }

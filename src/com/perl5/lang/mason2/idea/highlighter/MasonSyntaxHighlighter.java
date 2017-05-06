@@ -28,48 +28,43 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements Mason2ElementTypes
-{
-	public static final TokenSet MARKER_TOKENS = TokenSet.create(
-			MASON_LINE_OPENER,
-			MASON_EXPR_FILTER_PIPE,
-			MASON_TAG_CLOSER,
-			MASON_SELF_POINTER,
+public class MasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements Mason2ElementTypes {
+  public static final TokenSet MARKER_TOKENS = TokenSet.create(
+    MASON_LINE_OPENER,
+    MASON_EXPR_FILTER_PIPE,
+    MASON_TAG_CLOSER,
+    MASON_SELF_POINTER,
 
-			MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER,
-			MASON_BLOCK_OPENER, MASON_BLOCK_CLOSER,
-			MASON_CALL_OPENER, MASON_CALL_CLOSER,
-			MASON_METHOD_OPENER, MASON_METHOD_CLOSER,
-			MASON_CLASS_OPENER, MASON_CLASS_CLOSER,
-			MASON_DOC_OPENER, MASON_DOC_CLOSER,
-			MASON_FLAGS_OPENER, MASON_FLAGS_CLOSER,
-			MASON_INIT_OPENER, MASON_INIT_CLOSER,
-			MASON_PERL_OPENER, MASON_PERL_CLOSER,
-			MASON_TEXT_OPENER, MASON_TEXT_CLOSER,
-			MASON_FILTER_OPENER, MASON_FILTER_CLOSER,
-			MASON_AFTER_OPENER, MASON_AFTER_CLOSER,
-			MASON_AUGMENT_OPENER, MASON_AUGMENT_CLOSER,
-			MASON_AROUND_OPENER, MASON_AROUND_CLOSER,
-			MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER,
-			MASON_OVERRIDE_OPENER, MASON_OVERRIDE_CLOSER
-	);
+    MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER,
+    MASON_BLOCK_OPENER, MASON_BLOCK_CLOSER,
+    MASON_CALL_OPENER, MASON_CALL_CLOSER,
+    MASON_METHOD_OPENER, MASON_METHOD_CLOSER,
+    MASON_CLASS_OPENER, MASON_CLASS_CLOSER,
+    MASON_DOC_OPENER, MASON_DOC_CLOSER,
+    MASON_FLAGS_OPENER, MASON_FLAGS_CLOSER,
+    MASON_INIT_OPENER, MASON_INIT_CLOSER,
+    MASON_PERL_OPENER, MASON_PERL_CLOSER,
+    MASON_TEXT_OPENER, MASON_TEXT_CLOSER,
+    MASON_FILTER_OPENER, MASON_FILTER_CLOSER,
+    MASON_AFTER_OPENER, MASON_AFTER_CLOSER,
+    MASON_AUGMENT_OPENER, MASON_AUGMENT_CLOSER,
+    MASON_AROUND_OPENER, MASON_AROUND_CLOSER,
+    MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER,
+    MASON_OVERRIDE_OPENER, MASON_OVERRIDE_CLOSER
+  );
 
-	public MasonSyntaxHighlighter(Project project)
-	{
-		super(project);
-	}
+  public MasonSyntaxHighlighter(Project project) {
+    super(project);
+  }
 
-	@Override
-	public TokenSet getMarkersTokenSet()
-	{
-		return MARKER_TOKENS;
-	}
+  @Override
+  public TokenSet getMarkersTokenSet() {
+    return MARKER_TOKENS;
+  }
 
-	@NotNull
-	@Override
-	public Lexer getHighlightingLexer()
-	{
-		return new PerlHighlightingLexerAdapter(myProject, new Mason2TemplatingLexerAdapter(myProject));
-	}
-
+  @NotNull
+  @Override
+  public Lexer getHighlightingLexer() {
+    return new PerlHighlightingLexerAdapter(myProject, new Mason2TemplatingLexerAdapter(myProject));
+  }
 }

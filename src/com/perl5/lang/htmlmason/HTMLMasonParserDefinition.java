@@ -34,48 +34,41 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonParserDefinition extends PerlParserDefinition implements HTMLMasonElementTypes
-{
-	public static final IFileElementType FILE = new HTMLMasonFileElementType("HTML::Mason component", HTMLMasonLanguage.INSTANCE);
+public class HTMLMasonParserDefinition extends PerlParserDefinition implements HTMLMasonElementTypes {
+  public static final IFileElementType FILE = new HTMLMasonFileElementType("HTML::Mason component", HTMLMasonLanguage.INSTANCE);
 
-	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
-			TokenSet.create(
-					HTML_MASON_LINE_OPENER,
-					HTML_MASON_PERL_OPENER,
-					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_TEMPLATE_BLOCK_HTML
-			));
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+                                                         TokenSet.create(
+                                                           HTML_MASON_LINE_OPENER,
+                                                           HTML_MASON_PERL_OPENER,
+                                                           HTML_MASON_PERL_CLOSER,
+                                                           HTML_MASON_TEMPLATE_BLOCK_HTML
+                                                         ));
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new HTMLMasonLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new HTMLMasonLexerAdapter(project);
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new HTMLMasonFileImpl(viewProvider);
-	}
+  @Override
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new HTMLMasonFileImpl(viewProvider);
+  }
 
-	@NotNull
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new HTMLMasonParserImpl();
-	}
-
+  @NotNull
+  @Override
+  public PsiParser createParser(Project project) {
+    return new HTMLMasonParserImpl();
+  }
 }

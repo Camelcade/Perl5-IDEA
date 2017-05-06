@@ -26,42 +26,36 @@ import javax.swing.*;
 /**
  * Created by hurricup on 13.08.2016.
  */
-public class PerlFileTypeScript extends PurePerlFileType
-{
-	public static final PerlFileType INSTANCE = new PerlFileTypeScript();
+public class PerlFileTypeScript extends PurePerlFileType {
+  public static final PerlFileType INSTANCE = new PerlFileTypeScript();
 
-	public static final String EXTENSION_PL = "pl";
-	public static final String EXTENSION_PH = "ph";
-	public static final String EXTENSION_AL = "al";
-	public static final String EXTENSION_CGI = "cgi";
+  public static final String EXTENSION_PL = "pl";
+  public static final String EXTENSION_PH = "ph";
+  public static final String EXTENSION_AL = "al";
+  public static final String EXTENSION_CGI = "cgi";
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return EXTENSION_PL;
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return EXTENSION_PL;
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Perl5 script";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Perl5 script";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return PerlBundle.message("perl.filetype.script.description");
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return PerlBundle.message("perl.filetype.script.description");
+  }
 
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.PERL_SCRIPT_FILE_ICON;
-	}
-
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.PERL_SCRIPT_FILE_ICON;
+  }
 }

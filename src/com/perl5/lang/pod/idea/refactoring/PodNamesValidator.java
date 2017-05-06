@@ -23,17 +23,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodNamesValidator implements NamesValidator
-{
-	@Override
-	public boolean isKeyword(@NotNull String name, Project project)
-	{
-		return false;
-	}
+public class PodNamesValidator implements NamesValidator {
+  @Override
+  public boolean isKeyword(@NotNull String name, Project project) {
+    return false;
+  }
 
-	@Override
-	public boolean isIdentifier(@NotNull String name, Project project)
-	{
-		return true;
-	}
+  @Override
+  public boolean isIdentifier(@NotNull String name, Project project) {
+    return true;
+  }
 }

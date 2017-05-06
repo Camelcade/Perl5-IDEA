@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlCaseConditionImpl extends PerlCompositeElementImpl implements PerlCaseCondition
-{
-	public PerlCaseConditionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlCaseConditionImpl extends PerlCompositeElementImpl implements PerlCaseCondition {
+  public PerlCaseConditionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

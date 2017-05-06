@@ -23,12 +23,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousFindUsagesProvider extends PerlFindUsagesProvider
-{
-	@Nullable
-	@Override
-	public WordsScanner getWordsScanner()
-	{
-		return new MojoliciousWordsScanner();
-	}
+public class MojoliciousFindUsagesProvider extends PerlFindUsagesProvider {
+  @Nullable
+  @Override
+  public WordsScanner getWordsScanner() {
+    return new MojoliciousWordsScanner();
+  }
 }

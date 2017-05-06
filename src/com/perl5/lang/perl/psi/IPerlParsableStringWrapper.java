@@ -19,6 +19,5 @@ package com.perl5.lang.perl.psi;
 /**
  * Created by hurricup on 26.08.2015.
  */
-public interface IPerlParsableStringWrapper
-{
+public interface IPerlParsableStringWrapper {
 }

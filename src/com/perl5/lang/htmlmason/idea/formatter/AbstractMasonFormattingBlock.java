@@ -35,40 +35,39 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock
-{
-	public AbstractMasonFormattingBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment, @NotNull CommonCodeStyleSettings codeStyleSettings, @NotNull PerlCodeStyleSettings perlCodeStyleSettings, @NotNull SpacingBuilder spacingBuilder, @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder)
-	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-	}
+public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock {
+  public AbstractMasonFormattingBlock(@NotNull ASTNode node,
+                                      @Nullable Wrap wrap,
+                                      @Nullable Alignment alignment,
+                                      @NotNull CommonCodeStyleSettings codeStyleSettings,
+                                      @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+                                      @NotNull SpacingBuilder spacingBuilder,
+                                      @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder) {
+    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+  }
 
-	protected abstract IElementType getLineOpenerToken();
+  protected abstract IElementType getLineOpenerToken();
 
-	@Override
-	protected boolean isNewLineForbidden(PerlFormattingBlock block)
-	{
-		if (super.isNewLineForbidden(block))
-		{
-			return true;
-		}
+  @Override
+  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
+    if (super.isNewLineForbidden(block)) {
+      return true;
+    }
 
-		PsiElement element = block.getNode().getPsi();
-		PsiFile file = element.getContainingFile();
-		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
-		if (document != null)
-		{
-			int offset = block.getTextRange().getStartOffset();
-			int lineNumber = document.getLineNumber(offset);
-			int lineStartOffset = document.getLineStartOffset(lineNumber);
-			PsiElement firstElement = file.findElementAt(lineStartOffset);
+    PsiElement element = block.getNode().getPsi();
+    PsiFile file = element.getContainingFile();
+    Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
+    if (document != null) {
+      int offset = block.getTextRange().getStartOffset();
+      int lineNumber = document.getLineNumber(offset);
+      int lineStartOffset = document.getLineStartOffset(lineNumber);
+      PsiElement firstElement = file.findElementAt(lineStartOffset);
 
-			if (firstElement != null && firstElement.getNode().getElementType() == getLineOpenerToken())
-			{
-				return true;
-			}
-		}
+      if (firstElement != null && firstElement.getNode().getElementType() == getLineOpenerToken()) {
+        return true;
+      }
+    }
 
-		return false;
-	}
-
+    return false;
+  }
 }

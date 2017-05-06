@@ -38,66 +38,56 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodParserDefinition implements ParserDefinition, PodElementTypes
-{
+public class PodParserDefinition implements ParserDefinition, PodElementTypes {
 
-	public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
-	public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT, POD_NEWLINE);
-	public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
-	public static final TokenSet IDENTIFIERS = TokenSet.create(POD_IDENTIFIER);
+  public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT);
+  public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, TokenType.NEW_LINE_INDENT, POD_NEWLINE);
+  public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
+  public static final TokenSet IDENTIFIERS = TokenSet.create(POD_IDENTIFIER);
 
-	public static final IFileElementType FILE = new PodFileElementType("Plain old document");
+  public static final IFileElementType FILE = new PodFileElementType("Plain old document");
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new PodDebuggingLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new PodDebuggingLexerAdapter(project);
+  }
 
-	@NotNull
-	public TokenSet getWhitespaceTokens()
-	{
-		return WHITE_SPACES;
-	}
+  @NotNull
+  public TokenSet getWhitespaceTokens() {
+    return WHITE_SPACES;
+  }
 
-	@NotNull
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	public TokenSet getStringLiteralElements()
-	{
-		return TokenSet.EMPTY;
-	}
+  @NotNull
+  public TokenSet getStringLiteralElements() {
+    return TokenSet.EMPTY;
+  }
 
-	@NotNull
-	public PsiParser createParser(final Project project)
-	{
-		return new PodParser();
-	}
+  @NotNull
+  public PsiParser createParser(final Project project) {
+    return new PodParser();
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new PodFileImpl(viewProvider);
-	}
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new PodFileImpl(viewProvider);
+  }
 
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
-		return SpaceRequirements.MAY;
-	}
+  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+    return SpaceRequirements.MAY;
+  }
 
-	@NotNull
-	public PsiElement createElement(ASTNode node)
-	{
-		return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
-	}
+  @NotNull
+  public PsiElement createElement(ASTNode node) {
+    return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
+  }
 }

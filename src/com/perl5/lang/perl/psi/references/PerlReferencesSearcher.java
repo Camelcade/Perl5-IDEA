@@ -27,25 +27,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 02.03.2016.
  */
-public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
-{
-	public PerlReferencesSearcher()
-	{
-		super(true);
-	}
+public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
+  public PerlReferencesSearcher() {
+    super(true);
+  }
 
-	@Override
-	public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
-	{
-		PsiElement element = queryParameters.getElementToSearch();
+  @Override
+  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
+    PsiElement element = queryParameters.getElementToSearch();
 
-		if (element instanceof PerlHeredocOpener)
-		{
-			String heredocName = ((PerlHeredocOpener) element).getName();
-			if ("".equals(heredocName))
-			{
-				queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
-			}
-		}
-	}
+    if (element instanceof PerlHeredocOpener) {
+      String heredocName = ((PerlHeredocOpener)element).getName();
+      if ("".equals(heredocName)) {
+        queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
+      }
+    }
+  }
 }

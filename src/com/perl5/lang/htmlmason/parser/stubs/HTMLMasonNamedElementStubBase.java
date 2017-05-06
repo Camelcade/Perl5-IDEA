@@ -19,7 +19,6 @@ package com.perl5.lang.htmlmason.parser.stubs;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonNamedElementStubBase
-{
-	String getName();
+public interface HTMLMasonNamedElementStubBase {
+  String getName();
 }

@@ -25,30 +25,25 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceOwner
-{
-	public PerlLeafPsiElement(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceOwner {
+  public PerlLeafPsiElement(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@NotNull
-	@Override
-	public final PsiReference[] getReferences()
-	{
-		return getReferencesWithCache();
-	}
+  @NotNull
+  @Override
+  public final PsiReference[] getReferences() {
+    return getReferencesWithCache();
+  }
 
-	@Override
-	public final PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
+  @Override
+  public final PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
+  }
 
-	@Override
-	public String toString()
-	{
-		return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
-	}
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
+  }
 }

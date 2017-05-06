@@ -19,18 +19,15 @@ package com.perl5.lang.perl.internals.warnings;
 /**
  * Created by hurricup on 23.08.2015.
  */
-public class PerlWarningTreeLeaf extends PerlAbstractWarningTreeElement
-{
-	protected final boolean defaultValue;
+public class PerlWarningTreeLeaf extends PerlAbstractWarningTreeElement {
+  protected final boolean defaultValue;
 
-	public PerlWarningTreeLeaf(double minVersion, String stringIdentifier, boolean defaultValue)
-	{
-		super(minVersion, stringIdentifier);
-		this.defaultValue = defaultValue;
-	}
+  public PerlWarningTreeLeaf(double minVersion, String stringIdentifier, boolean defaultValue) {
+    super(minVersion, stringIdentifier);
+    this.defaultValue = defaultValue;
+  }
 
-	public boolean getDefaultValue()
-	{
-		return defaultValue;
-	}
+  public boolean getDefaultValue() {
+    return defaultValue;
+  }
 }

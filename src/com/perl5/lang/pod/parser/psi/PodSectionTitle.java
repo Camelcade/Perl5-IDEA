@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionTitle extends PsiElement
-{
+public interface PodSectionTitle extends PsiElement {
 }

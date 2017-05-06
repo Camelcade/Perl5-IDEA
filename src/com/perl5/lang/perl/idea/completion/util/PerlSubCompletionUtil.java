@@ -34,141 +34,117 @@ import java.util.Set;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public class PerlSubCompletionUtil
-{
-	public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
+public class PerlSubCompletionUtil {
+  public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-	public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinitionBase subDefinition)
-	{
-		LookupElementBuilder newElement = LookupElementBuilder
-				.create(subName)
-				.withIcon(subDefinition.getIcon(0))
-				.withStrikeoutness(subDefinition.isDeprecated())
-				.withTypeText(subDefinition.getPackageName(), true);
+  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinitionBase subDefinition) {
+    LookupElementBuilder newElement = LookupElementBuilder
+      .create(subName)
+      .withIcon(subDefinition.getIcon(0))
+      .withStrikeoutness(subDefinition.isDeprecated())
+      .withTypeText(subDefinition.getPackageName(), true);
 
-		if (!argsString.isEmpty())
-		{
-			newElement = newElement
-					.withInsertHandler(SUB_SELECTION_HANDLER)
-					.withTailText(argsString);
-		}
+    if (!argsString.isEmpty()) {
+      newElement = newElement
+        .withInsertHandler(SUB_SELECTION_HANDLER)
+        .withTailText(argsString);
+    }
 
-		return newElement;
-	}
+    return newElement;
+  }
 
-	public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element)
-	{
-		if (element instanceof PerlSubDefinitionBase)
-		{
-			return getSubDefinitionLookupElement((PerlSubDefinitionBase) element);
-		}
-		else if (element instanceof PerlSubDeclaration)
-		{
-			return getSubDeclarationLookupElement((PerlSubBase) element);
-		}
-		else if (element instanceof PerlGlobVariable)
-		{
-			return getGlobLookupElement((PerlGlobVariable) element);
-		}
-		throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
-	}
+  public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element) {
+    if (element instanceof PerlSubDefinitionBase) {
+      return getSubDefinitionLookupElement((PerlSubDefinitionBase)element);
+    }
+    else if (element instanceof PerlSubDeclaration) {
+      return getSubDeclarationLookupElement((PerlSubBase)element);
+    }
+    else if (element instanceof PerlGlobVariable) {
+      return getGlobLookupElement((PerlGlobVariable)element);
+    }
+    throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
+  }
 
-	@NotNull
-	public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration)
-	{
-		return LookupElementBuilder
-				.create(subDeclaration.getSubName())
-				.withIcon(subDeclaration.getIcon(0))
-				.withStrikeoutness(subDeclaration.isDeprecated())
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTypeText(subDeclaration.getPackageName(), true)
-				;
+  @NotNull
+  public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration) {
+    return LookupElementBuilder
+      .create(subDeclaration.getSubName())
+      .withIcon(subDeclaration.getIcon(0))
+      .withStrikeoutness(subDeclaration.isDeprecated())
+      .withInsertHandler(SUB_SELECTION_HANDLER)
+      .withTypeText(subDeclaration.getPackageName(), true)
+      ;
+  }
 
-	}
+  @NotNull
+  public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable) {
+    return LookupElementBuilder
+      .create(globVariable.getName())
+      .withIcon(globVariable.getIcon(0))
+      .withInsertHandler(SUB_SELECTION_HANDLER)
+      .withTypeText(globVariable.getPackageName(), true)
+      ;
+  }
 
-	@NotNull
-	public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable)
-	{
-		return LookupElementBuilder
-				.create(globVariable.getName())
-				.withIcon(globVariable.getIcon(0))
-				.withInsertHandler(SUB_SELECTION_HANDLER)
-				.withTypeText(globVariable.getPackageName(), true)
-				;
+  @NotNull
+  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition) {
+    return getSubDefinitionLookupElement(
+      subDefinition.getSubName(),
+      subDefinition.getSubArgumentsListAsString(),
+      subDefinition);
+  }
 
-	}
+  public static void fillWithUnresolvedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet) {
+    final String packageName = subDefinition.getPackageName();
+    if (packageName == null) {
+      return;
+    }
 
-	@NotNull
-	public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition)
-	{
-		return getSubDefinitionLookupElement(
-				subDefinition.getSubName(),
-				subDefinition.getSubArgumentsListAsString(),
-				subDefinition);
-	}
+    final Set<String> namesSet = new THashSet<String>();
+    PsiFile containingFile = subDefinition.getContainingFile();
+    containingFile.accept(new PerlRecursiveVisitor() {
+      @Override
+      public void visitMethod(@NotNull PsiPerlMethod method) {
+        if (packageName.equals(method.getPackageName())) {
+          PerlSubNameElement subNameElement = method.getSubNameElement();
 
-	public static void fillWithUnresolvedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet)
-	{
-		final String packageName = subDefinition.getPackageName();
-		if (packageName == null)
-		{
-			return;
-		}
+          if (subNameElement != null && subNameElement.isValid()) {
 
-		final Set<String> namesSet = new THashSet<String>();
-		PsiFile containingFile = subDefinition.getContainingFile();
-		containingFile.accept(new PerlRecursiveVisitor()
-		{
-			@Override
-			public void visitMethod(@NotNull PsiPerlMethod method)
-			{
-				if (packageName.equals(method.getPackageName()))
-				{
-					PerlSubNameElement subNameElement = method.getSubNameElement();
+            String subName = subNameElement.getName();
 
-					if (subNameElement != null && subNameElement.isValid())
-					{
+            if (StringUtil.isNotEmpty(subName) && !namesSet.contains(subName)) {
+              PsiReference[] references = subNameElement.getReferences();
+              if (references.length == 0) {
+                super.visitMethod(method);
+                return;
+              }
 
-						String subName = subNameElement.getName();
+              for (PsiReference reference : references) {
+                if (reference.resolve() != null) {
+                  super.visitMethod(method);
+                  return;
+                }
+              }
+              // unresolved
+              namesSet.add(subName);
+              resultSet.addElement(LookupElementBuilder.create(subName));
+            }
+          }
+        }
+        super.visitMethod(method);
+      }
+    });
+  }
 
-						if (StringUtil.isNotEmpty(subName) && !namesSet.contains(subName))
-						{
-							PsiReference[] references = subNameElement.getReferences();
-							if (references.length == 0)
-							{
-								super.visitMethod(method);
-								return;
-							}
-
-							for (PsiReference reference : references)
-							{
-								if (reference.resolve() != null)
-								{
-									super.visitMethod(method);
-									return;
-								}
-							}
-							// unresolved
-							namesSet.add(subName);
-							resultSet.addElement(LookupElementBuilder.create(subName));
-						}
-					}
-				}
-				super.visitMethod(method);
-			}
-		});
-
-	}
-
-	public static void fillWithNotOverridedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet)
-	{
-		PerlPackageUtil.processNotOverridedMethods(
-				PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
-				subDefinitionBase ->
-				{
-					resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
-					return true;
-				}
-		);
-	}
+  public static void fillWithNotOverridedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet) {
+    PerlPackageUtil.processNotOverridedMethods(
+      PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
+      subDefinitionBase ->
+      {
+        resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
+        return true;
+      }
+    );
+  }
 }

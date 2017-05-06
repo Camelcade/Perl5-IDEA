@@ -23,10 +23,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodLexerAdapter extends FlexAdapter
-{
-	public PodLexerAdapter(@Nullable Project project)
-	{
-		super(new PodLexer(null));
-	}
+public class PodLexerAdapter extends FlexAdapter {
+  public PodLexerAdapter(@Nullable Project project) {
+    super(new PodLexer(null));
+  }
 }

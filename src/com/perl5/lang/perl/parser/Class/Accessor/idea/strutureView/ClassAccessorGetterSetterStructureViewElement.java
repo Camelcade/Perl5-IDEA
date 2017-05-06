@@ -25,25 +25,21 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 /**
  * Created by hurricup on 23.01.2016.
  */
-public class ClassAccessorGetterSetterStructureViewElement extends PerlSubStructureViewElement
-{
-	public ClassAccessorGetterSetterStructureViewElement(PerlSubDefinitionBase element)
-	{
-		super(element);
-	}
+public class ClassAccessorGetterSetterStructureViewElement extends PerlSubStructureViewElement {
+  public ClassAccessorGetterSetterStructureViewElement(PerlSubDefinitionBase element) {
+    super(element);
+  }
 
-	@Override
-	protected ItemPresentation createPresentation()
-	{
-		assert myElement instanceof PerlClassAccessorDeclaration;
-		String presentableText = ((PerlClassAccessorDeclaration) myElement).getSubName();
+  @Override
+  protected ItemPresentation createPresentation() {
+    assert myElement instanceof PerlClassAccessorDeclaration;
+    String presentableText = ((PerlClassAccessorDeclaration)myElement).getSubName();
 
-		if (((PerlClassAccessorDeclaration) myElement).isFollowsBestPractice())
-		{
-			presentableText = ((PerlClassAccessorDeclaration) myElement).getGetterName() + " / " + ((PerlClassAccessorDeclaration) myElement).getSetterName();
-		}
+    if (((PerlClassAccessorDeclaration)myElement).isFollowsBestPractice()) {
+      presentableText =
+        ((PerlClassAccessorDeclaration)myElement).getGetterName() + " / " + ((PerlClassAccessorDeclaration)myElement).getSetterName();
+    }
 
-		return new PerlItemPresentationSimple(myElement, presentableText);
-	}
-
+    return new PerlItemPresentationSimple(myElement, presentableText);
+  }
 }

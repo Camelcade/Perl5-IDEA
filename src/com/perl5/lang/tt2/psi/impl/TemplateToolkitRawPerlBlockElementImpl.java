@@ -28,37 +28,35 @@ import java.util.List;
 /**
  * Created by hurricup on 11.06.2016.
  */
-public class TemplateToolkitRawPerlBlockElementImpl extends TemplateToolkitPerlBlockElementImpl implements TemplateToolkitRawPerlBlockElement
-{
-	public TemplateToolkitRawPerlBlockElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class TemplateToolkitRawPerlBlockElementImpl extends TemplateToolkitPerlBlockElementImpl
+  implements TemplateToolkitRawPerlBlockElement {
+  public TemplateToolkitRawPerlBlockElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> variables = super.buildImplicitVariables();
-		variables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				"$output",
-				true,
-				false,
-				false,
-				this
-		));
-		variables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				"$error",
-				true,
-				false,
-				false,
-				this
-		));
-		return variables;
-	}
+  @NotNull
+  @Override
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> variables = super.buildImplicitVariables();
+    variables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      "$output",
+      true,
+      false,
+      false,
+      this
+    ));
+    variables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      "$error",
+      true,
+      false,
+      false,
+      this
+    ));
+    return variables;
+  }
 }
 

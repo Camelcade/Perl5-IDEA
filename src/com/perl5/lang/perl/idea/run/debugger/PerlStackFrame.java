@@ -41,157 +41,132 @@ import java.io.File;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlStackFrame extends XStackFrame
-{
-	private final PerlStackFrameDescriptor myFrameDescriptor;
-	private final PerlExecutionStack myPerlExecutionStack;
-	private final PerlDebugThread myDebugThread;
-	private AtomicNullableLazyValue<VirtualFile> myVirtualFile = new AtomicNullableLazyValue<VirtualFile>()
-	{
-		@Nullable
-		@Override
-		protected VirtualFile compute()
-		{
-			String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
-			String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
-			VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), true);
+public class PerlStackFrame extends XStackFrame {
+  private final PerlStackFrameDescriptor myFrameDescriptor;
+  private final PerlExecutionStack myPerlExecutionStack;
+  private final PerlDebugThread myDebugThread;
+  private AtomicNullableLazyValue<VirtualFile> myVirtualFile = new AtomicNullableLazyValue<VirtualFile>() {
+    @Nullable
+    @Override
+    protected VirtualFile compute() {
+      String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
+      String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
+      VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), true);
 
-			if (result == null)
-			{
-				String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
-				result = VirtualFileManager.getInstance().findFileByUrl(remoteFileUrl);
+      if (result == null) {
+        String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
+        result = VirtualFileManager.getInstance().findFileByUrl(remoteFileUrl);
 
-				if (result == null)    // suppose that we need to fetch file
-				{
-					result = myDebugThread.loadRemoteSource(remoteFilePath);
-				}
-			}
+        if (result == null)    // suppose that we need to fetch file
+        {
+          result = myDebugThread.loadRemoteSource(remoteFilePath);
+        }
+      }
 
-			return result;
-		}
-	};
+      return result;
+    }
+  };
 
-	public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack)
-	{
-		myFrameDescriptor = frameDescriptor;
-		myPerlExecutionStack = stack;
-		myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
-		PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
+  public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack) {
+    myFrameDescriptor = frameDescriptor;
+    myPerlExecutionStack = stack;
+    myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+    PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
 
-		if (fileDescriptor.isEval())
-		{
-			myDebugThread.getEvalsListPanel().add(fileDescriptor);
-		}
-		else
-		{
-			myDebugThread.getScriptListPanel().add(fileDescriptor);
-		}
-	}
+    if (fileDescriptor.isEval()) {
+      myDebugThread.getEvalsListPanel().add(fileDescriptor);
+    }
+    else {
+      myDebugThread.getScriptListPanel().add(fileDescriptor);
+    }
+  }
 
-	@Override
-	public void customizePresentation(@NotNull ColoredTextContainer component)
-	{
-		component.append(myFrameDescriptor.getFileDescriptor().getNameOrPath(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-		component.setIcon(AllIcons.Debugger.StackFrame);
-	}
+  @Override
+  public void customizePresentation(@NotNull ColoredTextContainer component) {
+    component.append(myFrameDescriptor.getFileDescriptor().getNameOrPath(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
+    component.setIcon(AllIcons.Debugger.StackFrame);
+  }
 
-	@Nullable
-	@Override
-	public XSourcePosition getSourcePosition()
-	{
-		VirtualFile virtualFile = myVirtualFile.getValue();
-		if (virtualFile != null)
-		{
-			return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getLine());
-		}
-		return super.getSourcePosition();
-	}
+  @Nullable
+  @Override
+  public XSourcePosition getSourcePosition() {
+    VirtualFile virtualFile = myVirtualFile.getValue();
+    if (virtualFile != null) {
+      return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getLine());
+    }
+    return super.getSourcePosition();
+  }
 
-	@Override
-	public void computeChildren(@NotNull XCompositeNode node)
-	{
-		PerlValueDescriptor[] lexicals = myFrameDescriptor.getLexicals();
-		PerlValueDescriptor[] globals = myFrameDescriptor.getGlobals();
-		PerlValueDescriptor[] args = myFrameDescriptor.getArgs();
-		int mainSize = myFrameDescriptor.getMainSize();
+  @Override
+  public void computeChildren(@NotNull XCompositeNode node) {
+    PerlValueDescriptor[] lexicals = myFrameDescriptor.getLexicals();
+    PerlValueDescriptor[] globals = myFrameDescriptor.getGlobals();
+    PerlValueDescriptor[] args = myFrameDescriptor.getArgs();
+    int mainSize = myFrameDescriptor.getMainSize();
 
-		boolean fallback = true;
+    boolean fallback = true;
 
-		XValueChildrenList list = new XValueChildrenList();
+    XValueChildrenList list = new XValueChildrenList();
 
-		if (globals != null && globals.length > 0)
-		{
-			list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.OUR_GUTTER_ICON, globals, this, false));
-			fallback = false;
-		}
-		if (mainSize > 0)
-		{
-			list.addTopGroup(new PerlXMainGroup(this, mainSize));
-			fallback = false;
-		}
-		if (args != null && args.length > 0)
-		{
-			list.addTopGroup(new PerlXValueGroup("Arguments", null, PerlIcons.ARGS_GUTTER_ICON, args, this, true));
-			fallback = false;
-		}
-		if (lexicals != null && lexicals.length > 0)
-		{
-			list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.MY_GUTTER_ICON, lexicals, this, true));
-			fallback = false;
-		}
+    if (globals != null && globals.length > 0) {
+      list.addTopGroup(new PerlXValueGroup("Global variables", "our", PerlIcons.OUR_GUTTER_ICON, globals, this, false));
+      fallback = false;
+    }
+    if (mainSize > 0) {
+      list.addTopGroup(new PerlXMainGroup(this, mainSize));
+      fallback = false;
+    }
+    if (args != null && args.length > 0) {
+      list.addTopGroup(new PerlXValueGroup("Arguments", null, PerlIcons.ARGS_GUTTER_ICON, args, this, true));
+      fallback = false;
+    }
+    if (lexicals != null && lexicals.length > 0) {
+      list.addTopGroup(new PerlXValueGroup("Lexical variables", "my/state", PerlIcons.MY_GUTTER_ICON, lexicals, this, true));
+      fallback = false;
+    }
 
 
-		if (fallback)
-		{
-			super.computeChildren(node);
-		}
-		else
-		{
-			node.addChildren(list, true);
-		}
+    if (fallback) {
+      super.computeChildren(node);
+    }
+    else {
+      node.addChildren(list, true);
+    }
+  }
 
-	}
+  public PerlExecutionStack getPerlExecutionStack() {
+    return myPerlExecutionStack;
+  }
 
-	public PerlExecutionStack getPerlExecutionStack()
-	{
-		return myPerlExecutionStack;
-	}
+  @Nullable
+  @Override
+  public XDebuggerEvaluator getEvaluator() {
+    return new XDebuggerEvaluator() {
+      @Override
+      public void evaluate(@NotNull String expression,
+                           @NotNull final XEvaluationCallback callback,
+                           @Nullable XSourcePosition expressionPosition) {
+        PerlDebugThread thread = myPerlExecutionStack.getSuspendContext().getDebugThread();
 
-	@Nullable
-	@Override
-	public XDebuggerEvaluator getEvaluator()
-	{
-		return new XDebuggerEvaluator()
-		{
-			@Override
-			public void evaluate(@NotNull String expression, @NotNull final XEvaluationCallback callback, @Nullable XSourcePosition expressionPosition)
-			{
-				PerlDebugThread thread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+        thread.sendCommandAndGetResponse("e", new PerlEvalRequestDescriptor(expression), new PerlDebuggingTransactionHandler() {
+          @Override
+          public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
+            PerlEvalResponseDescriptor descriptor = jsonDeserializationContext.deserialize(
+              jsonObject.getAsJsonObject("data"), PerlEvalResponseDescriptor.class
+            );
 
-				thread.sendCommandAndGetResponse("e", new PerlEvalRequestDescriptor(expression), new PerlDebuggingTransactionHandler()
-				{
-					@Override
-					public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext)
-					{
-						PerlEvalResponseDescriptor descriptor = jsonDeserializationContext.deserialize(
-								jsonObject.getAsJsonObject("data"), PerlEvalResponseDescriptor.class
-						);
-
-						if (descriptor == null)
-						{
-							callback.errorOccurred("Something bad happened on Perl side. Report to plugin devs.");
-						}
-						else if (descriptor.isError())
-						{
-							callback.errorOccurred(descriptor.getResult().getValue());
-						}
-						else
-						{
-							callback.evaluated(new PerlXNamedValue(descriptor.getResult(), PerlStackFrame.this));
-						}
-					}
-				});
-			}
-		};
-	}
+            if (descriptor == null) {
+              callback.errorOccurred("Something bad happened on Perl side. Report to plugin devs.");
+            }
+            else if (descriptor.isError()) {
+              callback.errorOccurred(descriptor.getResult().getValue());
+            }
+            else {
+              callback.evaluated(new PerlXNamedValue(descriptor.getResult(), PerlStackFrame.this));
+            }
+          }
+        });
+      }
+    };
+  }
 }

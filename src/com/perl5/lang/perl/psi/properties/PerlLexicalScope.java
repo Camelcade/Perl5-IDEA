@@ -24,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 27.05.2015.
  * This interface marks that PsiElement has it's own scope
  */
-public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement, PerlStatementsContainer
-{
-	void accept(@NotNull PsiElementVisitor visitor);
+public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement, PerlStatementsContainer {
+  void accept(@NotNull PsiElementVisitor visitor);
 }

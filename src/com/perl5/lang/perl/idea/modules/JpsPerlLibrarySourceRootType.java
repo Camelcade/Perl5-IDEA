@@ -23,14 +23,10 @@ import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class JpsPerlLibrarySourceRootType extends JpsElementTypeWithDummyProperties implements JpsModuleSourceRootType<JpsDummyElement>
-{
-	public static final JpsPerlLibrarySourceRootType INSTANCE = new JpsPerlLibrarySourceRootType();
+public class JpsPerlLibrarySourceRootType extends JpsElementTypeWithDummyProperties implements JpsModuleSourceRootType<JpsDummyElement> {
+  public static final JpsPerlLibrarySourceRootType INSTANCE = new JpsPerlLibrarySourceRootType();
 
-	private JpsPerlLibrarySourceRootType()
-	{
-	}
-
-
+  private JpsPerlLibrarySourceRootType() {
+  }
 }
 

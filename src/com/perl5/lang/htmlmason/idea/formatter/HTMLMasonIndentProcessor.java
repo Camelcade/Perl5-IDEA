@@ -24,86 +24,81 @@ import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 /**
  * Created by hurricup on 07.03.2016.
  */
-public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTMLMasonElementTypes
-{
-	public static final HTMLMasonIndentProcessor INSTANCE = new HTMLMasonIndentProcessor();
+public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTMLMasonElementTypes {
+  public static final HTMLMasonIndentProcessor INSTANCE = new HTMLMasonIndentProcessor();
 
-	public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
-			PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
-			TokenSet.create(
-					HTML_MASON_PERL_OPENER,
-					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_TEMPLATE_BLOCK_HTML,
-					HTML_MASON_FLAGS_STATEMENT,
-					HTML_MASON_LINE_OPENER
-			));
+  public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(
+    PerlIndentProcessor.ABSOLUTE_UNINDENTABLE_TOKENS,
+    TokenSet.create(
+      HTML_MASON_PERL_OPENER,
+      HTML_MASON_PERL_CLOSER,
+      HTML_MASON_TEMPLATE_BLOCK_HTML,
+      HTML_MASON_FLAGS_STATEMENT,
+      HTML_MASON_LINE_OPENER
+    ));
 
-	public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
-			PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
-			TokenSet.create(
-					HTML_MASON_METHOD_DEFINITION,
-					HTML_MASON_SUBCOMPONENT_DEFINITION,
-					HTMLMasonParserDefinition.FILE
-			));
+  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+    PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
+    TokenSet.create(
+      HTML_MASON_METHOD_DEFINITION,
+      HTML_MASON_SUBCOMPONENT_DEFINITION,
+      HTMLMasonParserDefinition.FILE
+    ));
 
-	public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
-			PerlIndentProcessor.UNINDENTABLE_TOKENS,
-			TokenSet.create(
-					HTML_MASON_FLAGS_OPENER,
-					HTML_MASON_FLAGS_CLOSER,
+  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
+    PerlIndentProcessor.UNINDENTABLE_TOKENS,
+    TokenSet.create(
+      HTML_MASON_FLAGS_OPENER,
+      HTML_MASON_FLAGS_CLOSER,
 
-					HTML_MASON_TEMPLATE_BLOCK_HTML,
+      HTML_MASON_TEMPLATE_BLOCK_HTML,
 
-					HTML_MASON_INIT_OPENER,
-					HTML_MASON_INIT_CLOSER,
+      HTML_MASON_INIT_OPENER,
+      HTML_MASON_INIT_CLOSER,
 
-					HTML_MASON_SHARED_OPENER,
-					HTML_MASON_SHARED_CLOSER,
+      HTML_MASON_SHARED_OPENER,
+      HTML_MASON_SHARED_CLOSER,
 
-					HTML_MASON_CLEANUP_OPENER,
-					HTML_MASON_CLEANUP_CLOSER,
+      HTML_MASON_CLEANUP_OPENER,
+      HTML_MASON_CLEANUP_CLOSER,
 
-					HTML_MASON_ARGS_OPENER,
-					HTML_MASON_ARGS_CLOSER,
+      HTML_MASON_ARGS_OPENER,
+      HTML_MASON_ARGS_CLOSER,
 
-					HTML_MASON_ATTR_OPENER,
-					HTML_MASON_ATTR_CLOSER,
+      HTML_MASON_ATTR_OPENER,
+      HTML_MASON_ATTR_CLOSER,
 
-					HTML_MASON_FILTER_OPENER,
-					HTML_MASON_FILTER_CLOSER,
+      HTML_MASON_FILTER_OPENER,
+      HTML_MASON_FILTER_CLOSER,
 
-					HTML_MASON_ONCE_OPENER,
-					HTML_MASON_ONCE_CLOSER
-			));
+      HTML_MASON_ONCE_OPENER,
+      HTML_MASON_ONCE_CLOSER
+    ));
 
-	public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
-			PerlIndentProcessor.BLOCK_LIKE_CONTAINERS,
-			TokenSet.create(
-					HTML_MASON_BLOCK
-			));
+  public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.orSet(
+    PerlIndentProcessor.BLOCK_LIKE_CONTAINERS,
+    TokenSet.create(
+      HTML_MASON_BLOCK
+    ));
 
 
-	@Override
-	public TokenSet getAbsoluteUnindentableTokens()
-	{
-		return ABSOLUTE_UNINDENTABLE_TOKENS;
-	}
+  @Override
+  public TokenSet getAbsoluteUnindentableTokens() {
+    return ABSOLUTE_UNINDENTABLE_TOKENS;
+  }
 
-	@Override
-	public TokenSet getUnindentableContainers()
-	{
-		return UNINDENTABLE_CONTAINERS;
-	}
+  @Override
+  public TokenSet getUnindentableContainers() {
+    return UNINDENTABLE_CONTAINERS;
+  }
 
-	@Override
-	public TokenSet getUnindentableTokens()
-	{
-		return UNINDENTABLE_TOKENS;
-	}
+  @Override
+  public TokenSet getUnindentableTokens() {
+    return UNINDENTABLE_TOKENS;
+  }
 
-	@Override
-	public TokenSet getBlockLikeContainers()
-	{
-		return BLOCK_LIKE_CONTAINERS;
-	}
+  @Override
+  public TokenSet getBlockLikeContainers() {
+    return BLOCK_LIKE_CONTAINERS;
+  }
 }

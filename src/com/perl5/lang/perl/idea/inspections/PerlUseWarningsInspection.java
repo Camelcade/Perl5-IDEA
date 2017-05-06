@@ -34,45 +34,40 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class PerlUseWarningsInspection extends PerlInspection
-{
+public class PerlUseWarningsInspection extends PerlInspection {
 
 
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitFile(PsiFile file)
-			{
-				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isWritable() || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
-				{
-					return;
-				}
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitFile(PsiFile file) {
+        if (file.getViewProvider() instanceof InjectedFileViewProvider ||
+            !file.isWritable() ||
+            !file.isPhysical() ||
+            file.getVirtualFile() instanceof LightVirtualFile) {
+          return;
+        }
 
-				FileType fileType = file.getFileType();
-				if (!(fileType instanceof PerlFileType) || !((PerlFileType) fileType).checkWarningsPragma())
-				{
-					return;
-				}
+        FileType fileType = file.getFileType();
+        if (!(fileType instanceof PerlFileType) || !((PerlFileType)fileType).checkWarningsPragma()) {
+          return;
+        }
 
-				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-				{
-					if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider)
-					{
-						return;
-					}
-				}
-				holder.registerProblem(
-						file,
-						"No warnings pragma found in the file",
-						ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-						new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
-						new PerlUsePackageQuickFix("warnings")
-				);
-			}
-		};
-	}
+        for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class)) {
+          if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider) {
+            return;
+          }
+        }
+        holder.registerProblem(
+          file,
+          "No warnings pragma found in the file",
+          ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+          new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
+          new PerlUsePackageQuickFix("warnings")
+        );
+      }
+    };
+  }
 }

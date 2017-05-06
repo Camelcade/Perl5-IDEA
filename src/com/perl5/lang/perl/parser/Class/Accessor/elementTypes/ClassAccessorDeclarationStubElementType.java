@@ -43,144 +43,129 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider
-{
-	public ClassAccessorDeclarationStubElementType(String name)
-	{
-		super(name);
-	}
+public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionStubElementType
+  implements PerlElementTypes, PsiElementProvider {
+  public ClassAccessorDeclarationStubElementType(String name) {
+    super(name);
+  }
 
 
-	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
-	{
-		assert psi instanceof PerlClassAccessorDeclaration;
-		//noinspection unchecked
-		return new PerlClassAccessorDeclarationStubImpl(
-				parentStub,
-				psi.getPackageName(),
-				psi.getSubName(),
-				psi.getSubArgumentsList(),
-				psi.getLocalAnnotations(),
-				((PerlClassAccessorDeclaration) psi).isFollowsBestPractice(),
-				((PerlClassAccessorDeclaration) psi).isAccessorReadable(),
-				((PerlClassAccessorDeclaration) psi).isAccessorWritable(),
-				this
-		);
-	}
+  @Override
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+    assert psi instanceof PerlClassAccessorDeclaration;
+    //noinspection unchecked
+    return new PerlClassAccessorDeclarationStubImpl(
+      parentStub,
+      psi.getPackageName(),
+      psi.getSubName(),
+      psi.getSubArgumentsList(),
+      psi.getLocalAnnotations(),
+      ((PerlClassAccessorDeclaration)psi).isFollowsBestPractice(),
+      ((PerlClassAccessorDeclaration)psi).isAccessorReadable(),
+      ((PerlClassAccessorDeclaration)psi).isAccessorWritable(),
+      this
+    );
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PerlClassAccessorDeclarationImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PerlClassAccessorDeclarationImpl(stub, this);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof PerlClassAccessorDeclaration &&
-				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getPackageName()) &&
-				StringUtil.isNotEmpty(((PerlClassAccessorDeclaration) psi).getName())
-				;
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof PerlClassAccessorDeclaration &&
+           StringUtil.isNotEmpty(((PerlClassAccessorDeclaration)psi).getPackageName()) &&
+           StringUtil.isNotEmpty(((PerlClassAccessorDeclaration)psi).getName())
+      ;
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
-	{
-		assert stub instanceof PerlClassAccessorDeclarationStub;
+  @Override
+  public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
+    assert stub instanceof PerlClassAccessorDeclarationStub;
 
 /*
-		System.err.println("Indexing stub for " + stub.getCanonicalName() +
+                System.err.println("Indexing stub for " + stub.getCanonicalName() +
 				" " + ((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice() +
 				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorReadable() +
 				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorWritable()
 		);
 */
 
-		if (((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice())
-		{
-			// fixme these should depend on declaration type
-			if (((PerlClassAccessorDeclarationStub) stub).isAccessorReadable())
-			{
-				sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub) stub).getGetterCanonicalName());
-			}
-			if (((PerlClassAccessorDeclarationStub) stub).isAccessorWritable())
-			{
-				sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub) stub).getSetterCanonicalName());
-			}
+    if (((PerlClassAccessorDeclarationStub)stub).isFollowsBestPractice()) {
+      // fixme these should depend on declaration type
+      if (((PerlClassAccessorDeclarationStub)stub).isAccessorReadable()) {
+        sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub)stub).getGetterCanonicalName());
+      }
+      if (((PerlClassAccessorDeclarationStub)stub).isAccessorWritable()) {
+        sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub)stub).getSetterCanonicalName());
+      }
 
-			sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
-		}
-		else
-		{
-			super.indexStub(stub, sink);
-		}
-	}
+      sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
+    }
+    else {
+      super.indexStub(stub, sink);
+    }
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlClassAccessorDeclarationImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlClassAccessorDeclarationImpl(node);
+  }
 
-	@Override
-	public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		assert stub instanceof PerlClassAccessorDeclarationStub;
-		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getSubName());
+  @Override
+  public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    assert stub instanceof PerlClassAccessorDeclarationStub;
+    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getSubName());
 
-		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
+    PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
-		PerlSubAnnotations subAnnotations = stub.getAnnotations();
-		if (subAnnotations == null)
-		{
-			dataStream.writeBoolean(false);
-		}
-		else
-		{
-			dataStream.writeBoolean(true);
-			subAnnotations.serialize(dataStream);
-		}
+    PerlSubAnnotations subAnnotations = stub.getAnnotations();
+    if (subAnnotations == null) {
+      dataStream.writeBoolean(false);
+    }
+    else {
+      dataStream.writeBoolean(true);
+      subAnnotations.serialize(dataStream);
+    }
 
-		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice());
-		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isAccessorReadable());
-		dataStream.writeBoolean(((PerlClassAccessorDeclarationStub) stub).isAccessorWritable());
-	}
+    dataStream.writeBoolean(((PerlClassAccessorDeclarationStub)stub).isFollowsBestPractice());
+    dataStream.writeBoolean(((PerlClassAccessorDeclarationStub)stub).isAccessorReadable());
+    dataStream.writeBoolean(((PerlClassAccessorDeclarationStub)stub).isAccessorWritable());
+  }
 
-	@NotNull
-	@Override
-	public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		//noinspection ConstantConditions
-		String packageName = dataStream.readName().toString();
-		//noinspection ConstantConditions
-		String functionName = dataStream.readName().toString();
+  @NotNull
+  @Override
+  public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    //noinspection ConstantConditions
+    String packageName = dataStream.readName().toString();
+    //noinspection ConstantConditions
+    String functionName = dataStream.readName().toString();
 
-		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
+    List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 
-		PerlSubAnnotations annotations = null;
-		if (dataStream.readBoolean())
-		{
-			annotations = PerlSubAnnotations.deserialize(dataStream);
-		}
+    PerlSubAnnotations annotations = null;
+    if (dataStream.readBoolean()) {
+      annotations = PerlSubAnnotations.deserialize(dataStream);
+    }
 
-		boolean followsBestPractice = dataStream.readBoolean();
-		boolean isReadable = dataStream.readBoolean();
-		boolean isWritable = dataStream.readBoolean();
+    boolean followsBestPractice = dataStream.readBoolean();
+    boolean isReadable = dataStream.readBoolean();
+    boolean isWritable = dataStream.readBoolean();
 
-		return new PerlClassAccessorDeclarationStubImpl(
-				parentStub,
-				packageName,
-				functionName,
-				arguments,
-				annotations,
-				followsBestPractice,
-				isReadable,
-				isWritable,
-				this
-		);
-	}
+    return new PerlClassAccessorDeclarationStubImpl(
+      parentStub,
+      packageName,
+      functionName,
+      arguments,
+      annotations,
+      followsBestPractice,
+      isReadable,
+      isWritable,
+      this
+    );
+  }
 }

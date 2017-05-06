@@ -30,78 +30,69 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub
-{
-	private final String myPackageName;
-	private final PerlMroType myMroType;
-	private final List<String> myParentNamespaces;
-	private final List<String> myEXPORT;
-	private final List<String> myEXPORT_OK;
-	private final Map<String, List<String>> myEXPORT_TAGS;
-	private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
+public class PerlNamespaceDefinitionStubImpl extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionStub {
+  private final String myPackageName;
+  private final PerlMroType myMroType;
+  private final List<String> myParentNamespaces;
+  private final List<String> myEXPORT;
+  private final List<String> myEXPORT_OK;
+  private final Map<String, List<String>> myEXPORT_TAGS;
+  private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
-	public PerlNamespaceDefinitionStubImpl(
-			StubElement parent,
-			IStubElementType elementType,
-			String packageName,
-			PerlMroType mroType,
-			List<String> parentNamespaces,
-			List<String> EXPORT,
-			List<String> EXPORT_OK,
-			Map<String, List<String>> EXPORT_TAGS,
-			PerlNamespaceAnnotations namespaceAnnotations
-	)
-	{
-		super(parent, elementType);
-		myPackageName = packageName;
-		myMroType = mroType;
-		myParentNamespaces = parentNamespaces;
-		myPerlNamespaceAnnotations = namespaceAnnotations;
-		myEXPORT = EXPORT;
-		myEXPORT_OK = EXPORT_OK;
-		myEXPORT_TAGS = EXPORT_TAGS;
-	}
+  public PerlNamespaceDefinitionStubImpl(
+    StubElement parent,
+    IStubElementType elementType,
+    String packageName,
+    PerlMroType mroType,
+    List<String> parentNamespaces,
+    List<String> EXPORT,
+    List<String> EXPORT_OK,
+    Map<String, List<String>> EXPORT_TAGS,
+    PerlNamespaceAnnotations namespaceAnnotations
+  ) {
+    super(parent, elementType);
+    myPackageName = packageName;
+    myMroType = mroType;
+    myParentNamespaces = parentNamespaces;
+    myPerlNamespaceAnnotations = namespaceAnnotations;
+    myEXPORT = EXPORT;
+    myEXPORT_OK = EXPORT_OK;
+    myEXPORT_TAGS = EXPORT_TAGS;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return myPackageName;
-	}
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
 
-	@Override
-	public PerlMroType getMroType()
-	{
-		return myMroType;
-	}
+  @Override
+  public PerlMroType getMroType() {
+    return myMroType;
+  }
 
-	@Override
-	public List<String> getParentNamespaces()
-	{
-		return myParentNamespaces;
-	}
+  @Override
+  public List<String> getParentNamespaces() {
+    return myParentNamespaces;
+  }
 
-	@Nullable
-	@Override
-	public PerlNamespaceAnnotations getAnnotations()
-	{
-		return myPerlNamespaceAnnotations;
-	}
+  @Nullable
+  @Override
+  public PerlNamespaceAnnotations getAnnotations() {
+    return myPerlNamespaceAnnotations;
+  }
 
-	@Override
-	public List<String> getEXPORT()
-	{
-		return myEXPORT;
-	}
+  @Override
+  public List<String> getEXPORT() {
+    return myEXPORT;
+  }
 
-	@Override
-	public List<String> getEXPORT_OK()
-	{
-		return myEXPORT_OK;
-	}
+  @Override
+  public List<String> getEXPORT_OK() {
+    return myEXPORT_OK;
+  }
 
-	@Override
-	public Map<String, List<String>> getEXPORT_TAGS()
-	{
-		return myEXPORT_TAGS;
-	}
+  @Override
+  public Map<String, List<String>> getEXPORT_TAGS() {
+    return myEXPORT_TAGS;
+  }
 }

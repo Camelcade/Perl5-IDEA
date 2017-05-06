@@ -26,23 +26,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.01.2016.
  */
-public class MasonTextBlockImpl extends PerlCompositeElementImpl implements MasonTextBlock
-{
-	public MasonTextBlockImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class MasonTextBlockImpl extends PerlCompositeElementImpl implements MasonTextBlock {
+  public MasonTextBlockImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof Mason2Visitor)
-		{
-			((Mason2Visitor) visitor).visitMasonTextBlock(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof Mason2Visitor) {
+      ((Mason2Visitor)visitor).visitMasonTextBlock(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 }

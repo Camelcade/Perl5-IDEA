@@ -25,29 +25,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlVariableNameElement
-{
-	public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlVariableNameElement {
+  public PerlVariableNameElementImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PerlVisitor)
-		{
-			((PerlVisitor) visitor).visitVariableNameElement(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitVariableNameElement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 
-	@Override
-	public String getName()
-	{
-		return getText();
-	}
+  @Override
+  public String getName() {
+    return getText();
+  }
 }

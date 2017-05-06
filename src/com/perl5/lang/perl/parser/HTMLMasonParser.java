@@ -21,6 +21,5 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public interface HTMLMasonParser extends HTMLMasonElementTypes
-{
+public interface HTMLMasonParser extends HTMLMasonElementTypes {
 }

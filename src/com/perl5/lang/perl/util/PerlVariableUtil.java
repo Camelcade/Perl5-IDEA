@@ -26,26 +26,21 @@ import java.util.List;
 /**
  * Created by hurricup on 08.08.2016.
  */
-public class PerlVariableUtil
-{
-	@Nullable
-	public static PerlVariableAnnotations aggregateAnnotationsList(List<PerlAnnotation> annotations)
-	{
-		if (annotations.isEmpty())
-		{
-			return null;
-		}
+public class PerlVariableUtil {
+  @Nullable
+  public static PerlVariableAnnotations aggregateAnnotationsList(List<PerlAnnotation> annotations) {
+    if (annotations.isEmpty()) {
+      return null;
+    }
 
-		PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
+    PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
 
-		for (PerlAnnotation annotation : annotations)
-		{
-			if (annotation instanceof PsiPerlAnnotationDeprecated)
-			{
-				myAnnotations.setIsDeprecated();
-			}
-		}
+    for (PerlAnnotation annotation : annotations) {
+      if (annotation instanceof PsiPerlAnnotationDeprecated) {
+        myAnnotations.setIsDeprecated();
+      }
+    }
 
-		return myAnnotations;
-	}
+    return myAnnotations;
+  }
 }

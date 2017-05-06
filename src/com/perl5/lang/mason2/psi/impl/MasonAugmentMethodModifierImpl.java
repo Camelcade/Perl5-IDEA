@@ -37,79 +37,68 @@ import java.util.List;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl implements MasonAugmentMethodModifier, Mason2ElementTypes
-{
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl
+  implements MasonAugmentMethodModifier, Mason2ElementTypes {
+  protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 
-	public MasonAugmentMethodModifierImpl(ASTNode node)
-	{
-		super(node);
-	}
+  public MasonAugmentMethodModifierImpl(ASTNode node) {
+    super(node);
+  }
 
-	public MasonAugmentMethodModifierImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public MasonAugmentMethodModifierImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public PsiReference[] getReferences(PsiElement element)
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiReference[] getReferences(PsiElement element) {
+    return null;
+  }
 
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
 
-		if (isValid())
-		{
-			newImplicitVariables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
-					true,
-					false,
-					true,
-					this
-			));
-		}
-		return newImplicitVariables;
-	}
+    if (isValid()) {
+      newImplicitVariables.add(new PerlVariableLightImpl(
+        getManager(),
+        PerlLanguage.INSTANCE,
+        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        true,
+        false,
+        true,
+        this
+      ));
+    }
+    return newImplicitVariables;
+  }
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (myImplicitVariables == null)
-		{
-			myImplicitVariables = buildImplicitVariables();
-		}
-		return myImplicitVariables;
-	}
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      myImplicitVariables = buildImplicitVariables();
+    }
+    return myImplicitVariables;
+  }
 
-	@Nullable
-	@Override
-	protected String getSubNameFromPsi()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			return nameIdentifier.getText();
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  protected String getSubNameFromPsi() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      return nameIdentifier.getText();
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		ASTNode node = getNode();
-		ASTNode modifierNode = node.findChildByType(MASON_METHOD_MODIFIER_NAME);
-		if (modifierNode != null)
-		{
-			return modifierNode.getPsi();
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    ASTNode node = getNode();
+    ASTNode modifierNode = node.findChildByType(MASON_METHOD_MODIFIER_NAME);
+    if (modifierNode != null) {
+      return modifierNode.getPsi();
+    }
+    return null;
+  }
 }

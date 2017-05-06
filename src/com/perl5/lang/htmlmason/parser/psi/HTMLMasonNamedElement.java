@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public interface HTMLMasonNamedElement extends HTMLMasonCompositeElement, PsiNameIdentifierOwner
-{
-	Pattern HTML_MASON_IDENTIFIER_PATTERN = Pattern.compile("[\\w._-]+");
+public interface HTMLMasonNamedElement extends HTMLMasonCompositeElement, PsiNameIdentifierOwner {
+  Pattern HTML_MASON_IDENTIFIER_PATTERN = Pattern.compile("[\\w._-]+");
 }

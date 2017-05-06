@@ -28,29 +28,23 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubElementType
-{
-	public PerlMethodDefinitionStubElementType(String name)
-	{
-		super(name);
-	}
+public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubElementType {
+  public PerlMethodDefinitionStubElementType(String name) {
+    super(name);
+  }
 
-	public PerlMethodDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
-	{
-		super(debugName, language);
-	}
+  public PerlMethodDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PsiPerlMethodDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PsiPerlMethodDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlMethodDefinitionImpl(node);
-	}
-
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlMethodDefinitionImpl(node);
+  }
 }

@@ -25,13 +25,11 @@ import java.util.Set;
 /**
  * Created by hurricup on 03.06.2016.
  */
-public class POSIXPackageProcessor extends PerlPackageProcessorBase
-{
-	@Override
-	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
-	{
-		export.addAll(POSIXExports.EXPORT);
-		exportOk.addAll(POSIXExports.EXPORT_OK);
-		exportOk.addAll(POSIXExports.EXPORT);
-	}
+public class POSIXPackageProcessor extends PerlPackageProcessorBase {
+  @Override
+  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+    export.addAll(POSIXExports.EXPORT);
+    exportOk.addAll(POSIXExports.EXPORT_OK);
+    exportOk.addAll(POSIXExports.EXPORT);
+  }
 }

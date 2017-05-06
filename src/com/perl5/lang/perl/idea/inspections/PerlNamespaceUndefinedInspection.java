@@ -26,40 +26,32 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 14.06.2015.
  * Check that namespace is defined
  */
-public class PerlNamespaceUndefinedInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
-			{
-				PsiElement parent = o.getParent();
+public class PerlNamespaceUndefinedInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
+        PsiElement parent = o.getParent();
 
-				if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement || parent instanceof PerlNamespaceDefinition)
-				{
-					return;
-				}
+        if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement || parent instanceof PerlNamespaceDefinition) {
+          return;
+        }
 
-				// fixme should depend on parent resolving
-				if (o.isSUPER())
-				{
-					return;
-				}
+        // fixme should depend on parent resolving
+        if (o.isSUPER()) {
+          return;
+        }
 
-				if (o.isBuiltin())
-				{
-					return;
-				}
+        if (o.isBuiltin()) {
+          return;
+        }
 
-				if (o.getNamespaceDefinitions().isEmpty())
-				{
-					registerProblem(holder, o, "Unable to find namespace definition");
-				}
-			}
-		};
-	}
+        if (o.getNamespaceDefinitions().isEmpty()) {
+          registerProblem(holder, o, "Unable to find namespace definition");
+        }
+      }
+    };
+  }
 }

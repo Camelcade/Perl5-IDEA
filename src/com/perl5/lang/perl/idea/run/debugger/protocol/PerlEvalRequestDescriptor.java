@@ -19,12 +19,10 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 10.05.2016.
  */
-public class PerlEvalRequestDescriptor
-{
-	private final String expression;
+public class PerlEvalRequestDescriptor {
+  private final String expression;
 
-	public PerlEvalRequestDescriptor(String expression)
-	{
-		this.expression = expression;
-	}
+  public PerlEvalRequestDescriptor(String expression) {
+    this.expression = expression;
+  }
 }

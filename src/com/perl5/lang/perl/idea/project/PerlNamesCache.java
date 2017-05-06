@@ -33,145 +33,119 @@ import java.util.Set;
 /**
  * Created by hurricup on 04.09.2015.
  */
-public class PerlNamesCache implements ProjectComponent
-{
-	final Application myApplication = ApplicationManager.getApplication();
-	final NamesCacheUpdater updaterRunner = new NamesCacheUpdater();
-	final Thread updaterThread = new Thread(updaterRunner);
-	private final Project myProject;
-	private Set<String> KNOWN_SUBS = new THashSet<>();
-	private Set<String> KNOWN_PACKAGES = new THashSet<>();
-	final Runnable cacheUpdaterWorker = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			if (isTestMode() || !DumbService.isDumb(myProject))
-			{
-				Set<String> newSet = new THashSet<>();
-				newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-				newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-				newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-				KNOWN_SUBS = newSet;
+public class PerlNamesCache implements ProjectComponent {
+  final Application myApplication = ApplicationManager.getApplication();
+  final NamesCacheUpdater updaterRunner = new NamesCacheUpdater();
+  final Thread updaterThread = new Thread(updaterRunner);
+  private final Project myProject;
+  private Set<String> KNOWN_SUBS = new THashSet<>();
+  private Set<String> KNOWN_PACKAGES = new THashSet<>();
+  final Runnable cacheUpdaterWorker = new Runnable() {
+    @Override
+    public void run() {
+      if (isTestMode() || !DumbService.isDumb(myProject)) {
+        Set<String> newSet = new THashSet<>();
+        newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+        newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+        newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
+        KNOWN_SUBS = newSet;
 
-				newSet = new THashSet<>();
-				newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
-				newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-				KNOWN_PACKAGES = newSet;
-			}
-		}
-	};
-	//	long notifyCounter = 0;
-	private boolean isNotified = false;
+        newSet = new THashSet<>();
+        newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
+        newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+        KNOWN_PACKAGES = newSet;
+      }
+    }
+  };
+  //	long notifyCounter = 0;
+  private boolean isNotified = false;
 
-	public PerlNamesCache(Project project)
-	{
-		this.myProject = project;
-	}
+  public PerlNamesCache(Project project) {
+    this.myProject = project;
+  }
 
-	@Override
-	public void projectOpened()
-	{
+  @Override
+  public void projectOpened() {
 
-	}
+  }
 
-	@Override
-	public void projectClosed()
-	{
+  @Override
+  public void projectClosed() {
 
-	}
+  }
 
-	public void forceCacheUpdate()
-	{
-		cacheUpdaterWorker.run();
-	}
+  public void forceCacheUpdate() {
+    cacheUpdaterWorker.run();
+  }
 
-	@Override
-	public void initComponent()
-	{
-		StartupManager.getInstance(myProject).runWhenProjectIsInitialized(updaterThread::start);
-	}
+  @Override
+  public void initComponent() {
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(updaterThread::start);
+  }
 
-	@Override
-	public void disposeComponent()
-	{
-		updaterRunner.stopUpdater();
-	}
+  @Override
+  public void disposeComponent() {
+    updaterRunner.stopUpdater();
+  }
 
-	@NotNull
-	@Override
-	public String getComponentName()
-	{
-		return "Perl5 names cache";
-	}
+  @NotNull
+  @Override
+  public String getComponentName() {
+    return "Perl5 names cache";
+  }
 
-	public Set<String> getSubsNamesSet()
-	{
-		updaterRunner.update();
-		return KNOWN_SUBS;
-	}
+  public Set<String> getSubsNamesSet() {
+    updaterRunner.update();
+    return KNOWN_SUBS;
+  }
 
-	public boolean isTestMode()
-	{
-		return myApplication != null && (myApplication.isUnitTestMode() || myApplication.isHeadlessEnvironment());
-	}
+  public boolean isTestMode() {
+    return myApplication != null && (myApplication.isUnitTestMode() || myApplication.isHeadlessEnvironment());
+  }
 
-	public Set<String> getPackagesNamesSet()
-	{
-		updaterRunner.update();
-		return KNOWN_PACKAGES;
-	}
+  public Set<String> getPackagesNamesSet() {
+    updaterRunner.update();
+    return KNOWN_PACKAGES;
+  }
 
-	protected class NamesCacheUpdater implements Runnable
-	{
-		private static final long TTL = 1000;
-		private boolean stopThis = false;
-		private long lastUpdate = 0;
+  protected class NamesCacheUpdater implements Runnable {
+    private static final long TTL = 1000;
+    private boolean stopThis = false;
+    private long lastUpdate = 0;
 
-		@Override
-		public void run()
-		{
+    @Override
+    public void run() {
 
-			while (!stopThis)
-			{
-				myApplication.runReadAction(cacheUpdaterWorker);
-				lastUpdate = System.currentTimeMillis();
-				isNotified = false;
+      while (!stopThis) {
+        myApplication.runReadAction(cacheUpdaterWorker);
+        lastUpdate = System.currentTimeMillis();
+        isNotified = false;
 
-				synchronized (this)
-				{
-					try
-					{
-						wait();
-					}
-					catch (Exception e)
-					{
-						break;
-					}
-				}
-			}
-		}
+        synchronized (this) {
+          try {
+            wait();
+          }
+          catch (Exception e) {
+            break;
+          }
+        }
+      }
+    }
 
-		public void update()
-		{
-			if (!isNotified && lastUpdate + TTL < System.currentTimeMillis())
-			{
-				synchronized (this)
-				{
-					isNotified = true;
-					notify();
-				}
-			}
-		}
+    public void update() {
+      if (!isNotified && lastUpdate + TTL < System.currentTimeMillis()) {
+        synchronized (this) {
+          isNotified = true;
+          notify();
+        }
+      }
+    }
 
-		public void stopUpdater()
-		{
-			stopThis = true;
-			synchronized (this)
-			{
-				notify();
-			}
-		}
-	}
-
+    public void stopUpdater() {
+      stopThis = true;
+      synchronized (this) {
+        notify();
+      }
+    }
+  }
 }

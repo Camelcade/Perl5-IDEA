@@ -47,264 +47,222 @@ import java.util.Map;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions
-{
-	public String SCRIPT_PATH;
-	public String PROGRAM_PARAMETERS;    // these are script parameters
+public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions {
+  public String SCRIPT_PATH;
+  public String PROGRAM_PARAMETERS;    // these are script parameters
 
-	public String PERL_PARAMETERS = "";
-	public String WORKING_DIRECTORY;
-	public Map<String, String> ENVS = new HashMap<String, String>();
-	public boolean PASS_PARENT_ENVS = true;
-	public String CHARSET;
-	public boolean USE_ALTERNATIVE_SDK;
-	public String ALTERNATIVE_SDK_PATH;
+  public String PERL_PARAMETERS = "";
+  public String WORKING_DIRECTORY;
+  public Map<String, String> ENVS = new HashMap<String, String>();
+  public boolean PASS_PARENT_ENVS = true;
+  public String CHARSET;
+  public boolean USE_ALTERNATIVE_SDK;
+  public String ALTERNATIVE_SDK_PATH;
 
-	// debugging-related options
-	public String scriptCharset = "utf8";
-	public String startMode = "RUN";
-	public boolean isNonInteractiveModeEnabled = false;
-	public boolean isCompileTimeBreakpointsEnabled = false;
-	public String initCode = "";
+  // debugging-related options
+  public String scriptCharset = "utf8";
+  public String startMode = "RUN";
+  public boolean isNonInteractiveModeEnabled = false;
+  public boolean isCompileTimeBreakpointsEnabled = false;
+  public String initCode = "";
 
-	private transient Integer debugPort;
+  private transient Integer debugPort;
 
-	public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name)
-	{
-		super(project, factory, name);
-	}
+  public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
+    super(project, factory, name);
+  }
 
-	@Override
-	public void readExternal(Element element) throws InvalidDataException
-	{
-		super.readExternal(element);
-		XmlSerializer.deserializeInto(this, element);
-	}
+  @Override
+  public void readExternal(Element element) throws InvalidDataException {
+    super.readExternal(element);
+    XmlSerializer.deserializeInto(this, element);
+  }
 
-	@Override
-	public void writeExternal(Element element) throws WriteExternalException
-	{
-		super.writeExternal(element);
-		XmlSerializer.serializeInto(this, element);
-	}
+  @Override
+  public void writeExternal(Element element) throws WriteExternalException {
+    super.writeExternal(element);
+    XmlSerializer.serializeInto(this, element);
+  }
 
-	@NotNull
-	@Override
-	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor()
-	{
-		return new PerlConfigurationEditor(getProject());
-	}
+  @NotNull
+  @Override
+  public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
+    return new PerlConfigurationEditor(getProject());
+  }
 
-	@Nullable
-	@Override
-	public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException
-	{
-		if (executor instanceof DefaultDebugExecutor)
-		{
-			return new PerlDebugProfileState(executionEnvironment);
-		}
-		return new PerlRunProfileState(executionEnvironment);
-	}
+  @Nullable
+  @Override
+  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+    throws ExecutionException {
+    if (executor instanceof DefaultDebugExecutor) {
+      return new PerlDebugProfileState(executionEnvironment);
+    }
+    return new PerlRunProfileState(executionEnvironment);
+  }
 
-	@Override
-	public String suggestedName()
-	{
-		VirtualFile scriptFile = getScriptFile();
-		return scriptFile == null ? null : scriptFile.getName();
-	}
+  @Override
+  public String suggestedName() {
+    VirtualFile scriptFile = getScriptFile();
+    return scriptFile == null ? null : scriptFile.getName();
+  }
 
-	@Nullable
-	public VirtualFile getScriptFile()
-	{
-		return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
-	}
+  @Nullable
+  public VirtualFile getScriptFile() {
+    return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
+  }
 
-	public String getConsoleCharset()
-	{
-		return CHARSET;
-	}
+  public String getConsoleCharset() {
+    return CHARSET;
+  }
 
-	public void setConsoleCharset(String charset)
-	{
-		CHARSET = charset;
-	}
+  public void setConsoleCharset(String charset) {
+    CHARSET = charset;
+  }
 
-	public String getScriptPath()
-	{
-		return SCRIPT_PATH;
-	}
+  public String getScriptPath() {
+    return SCRIPT_PATH;
+  }
 
-	public void setScriptPath(String scriptPath)
-	{
-		SCRIPT_PATH = scriptPath;
-	}
+  public void setScriptPath(String scriptPath) {
+    SCRIPT_PATH = scriptPath;
+  }
 
-	public String getAlternativeSdkPath()
-	{
-		return ALTERNATIVE_SDK_PATH;
-	}
+  public String getAlternativeSdkPath() {
+    return ALTERNATIVE_SDK_PATH;
+  }
 
-	public void setAlternativeSdkPath(String path)
-	{
-		this.ALTERNATIVE_SDK_PATH = path;
-	}
+  public void setAlternativeSdkPath(String path) {
+    this.ALTERNATIVE_SDK_PATH = path;
+  }
 
-	public boolean isUseAlternativeSdk()
-	{
-		return USE_ALTERNATIVE_SDK;
-	}
+  public boolean isUseAlternativeSdk() {
+    return USE_ALTERNATIVE_SDK;
+  }
 
-	public void setUseAlternativeSdk(boolean value)
-	{
-		this.USE_ALTERNATIVE_SDK = value;
-	}
+  public void setUseAlternativeSdk(boolean value) {
+    this.USE_ALTERNATIVE_SDK = value;
+  }
 
-	@Nullable
-	@Override
-	public String getProgramParameters()
-	{
-		return PROGRAM_PARAMETERS;
-	}
+  @Nullable
+  @Override
+  public String getProgramParameters() {
+    return PROGRAM_PARAMETERS;
+  }
 
-	@Override
-	public void setProgramParameters(@Nullable String s)
-	{
-		PROGRAM_PARAMETERS = s;
-	}
+  @Override
+  public void setProgramParameters(@Nullable String s) {
+    PROGRAM_PARAMETERS = s;
+  }
 
-	@Nullable
-	@Override
-	public String getWorkingDirectory()
-	{
-		return WORKING_DIRECTORY;
-	}
+  @Nullable
+  @Override
+  public String getWorkingDirectory() {
+    return WORKING_DIRECTORY;
+  }
 
-	@Override
-	public void setWorkingDirectory(@Nullable String s)
-	{
-		WORKING_DIRECTORY = s;
-	}
+  @Override
+  public void setWorkingDirectory(@Nullable String s) {
+    WORKING_DIRECTORY = s;
+  }
 
-	@NotNull
-	@Override
-	public Map<String, String> getEnvs()
-	{
-		return ENVS;
-	}
+  @NotNull
+  @Override
+  public Map<String, String> getEnvs() {
+    return ENVS;
+  }
 
-	@Override
-	public void setEnvs(@NotNull Map<String, String> map)
-	{
-		ENVS = map;
-	}
+  @Override
+  public void setEnvs(@NotNull Map<String, String> map) {
+    ENVS = map;
+  }
 
-	@Override
-	public boolean isPassParentEnvs()
-	{
-		return PASS_PARENT_ENVS;
-	}
+  @Override
+  public boolean isPassParentEnvs() {
+    return PASS_PARENT_ENVS;
+  }
 
-	@Override
-	public void setPassParentEnvs(boolean b)
-	{
-		PASS_PARENT_ENVS = b;
-	}
+  @Override
+  public void setPassParentEnvs(boolean b) {
+    PASS_PARENT_ENVS = b;
+  }
 
-	public String getPerlParameters()
-	{
-		return PERL_PARAMETERS;
-	}
+  public String getPerlParameters() {
+    return PERL_PARAMETERS;
+  }
 
-	public void setPerlParameters(String PERL_PARAMETERS)
-	{
-		this.PERL_PARAMETERS = PERL_PARAMETERS;
-	}
+  public void setPerlParameters(String PERL_PARAMETERS) {
+    this.PERL_PARAMETERS = PERL_PARAMETERS;
+  }
 
-	@Override
-	public String getStartMode()
-	{
-		return startMode;
-	}
+  @Override
+  public String getStartMode() {
+    return startMode;
+  }
 
-	public void setStartMode(String startMode)
-	{
-		this.startMode = startMode;
-	}
+  public void setStartMode(String startMode) {
+    this.startMode = startMode;
+  }
 
-	@Override
-	public String getPerlRole()
-	{
-		return PerlDebugOptions.ROLE_CLIENT;
-	}
+  @Override
+  public String getPerlRole() {
+    return PerlDebugOptions.ROLE_CLIENT;
+  }
 
-	@Override
-	public String getDebugHost()
-	{
-		return "localhost";
-	}
+  @Override
+  public String getDebugHost() {
+    return "localhost";
+  }
 
-	@Override
-	public int getDebugPort() throws ExecutionException
-	{
-		if (debugPort == null)
-		{
-			debugPort = NetUtils.tryToFindAvailableSocketPort();
-			if (debugPort == -1)
-			{
-				throw new ExecutionException("No free port to work on");
-			}
-		}
+  @Override
+  public int getDebugPort() throws ExecutionException {
+    if (debugPort == null) {
+      debugPort = NetUtils.tryToFindAvailableSocketPort();
+      if (debugPort == -1) {
+        throw new ExecutionException("No free port to work on");
+      }
+    }
 
-		return debugPort;
-	}
+    return debugPort;
+  }
 
-	@Override
-	public String getRemoteProjectRoot()
-	{
-		return getProject().getBasePath();
-	}
+  @Override
+  public String getRemoteProjectRoot() {
+    return getProject().getBasePath();
+  }
 
-	@Override
-	public String getScriptCharset()
-	{
-		return scriptCharset;
-	}
+  @Override
+  public String getScriptCharset() {
+    return scriptCharset;
+  }
 
-	public void setScriptCharset(String scriptCharset)
-	{
-		this.scriptCharset = scriptCharset;
-	}
+  public void setScriptCharset(String scriptCharset) {
+    this.scriptCharset = scriptCharset;
+  }
 
-	@Override
-	public boolean isNonInteractiveModeEnabled()
-	{
-		return isNonInteractiveModeEnabled;
-	}
+  @Override
+  public boolean isNonInteractiveModeEnabled() {
+    return isNonInteractiveModeEnabled;
+  }
 
-	public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled)
-	{
-		isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
-	}
+  public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled) {
+    isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
+  }
 
-	@Override
-	public boolean isCompileTimeBreakpointsEnabled()
-	{
-		return isCompileTimeBreakpointsEnabled;
-	}
+  @Override
+  public boolean isCompileTimeBreakpointsEnabled() {
+    return isCompileTimeBreakpointsEnabled;
+  }
 
-	public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled)
-	{
-		isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
-	}
+  public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled) {
+    isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+  }
 
-	@Override
-	public String getInitCode()
-	{
-		return initCode;
-	}
+  @Override
+  public String getInitCode() {
+    return initCode;
+  }
 
-	public void setInitCode(String initCode)
-	{
-		this.initCode = initCode;
-	}
+  public void setInitCode(String initCode) {
+    this.initCode = initCode;
+  }
 }

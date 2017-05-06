@@ -26,20 +26,19 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 17.04.2016.
  */
-public interface TryCatchElementPatterns extends PerlElementPatterns
-{
-	PsiElementPattern.Capture<PsiElement> ELEMENT_AFTER_TRY_CATCH =
-			psiElement().inside(
-					psiElement(PsiPerlStatement.class).afterSiblingSkipping(
-							WHITE_SPACE_AND_COMMENTS,
-							psiElement().andOr(
-									psiElement(TRY_EXPR),
-									psiElement(CATCH_EXPR))
+public interface TryCatchElementPatterns extends PerlElementPatterns {
+  PsiElementPattern.Capture<PsiElement> ELEMENT_AFTER_TRY_CATCH =
+    psiElement().inside(
+      psiElement(PsiPerlStatement.class).afterSiblingSkipping(
+        WHITE_SPACE_AND_COMMENTS,
+        psiElement().andOr(
+          psiElement(TRY_EXPR),
+          psiElement(CATCH_EXPR))
 
-					));
+      ));
 
-	PsiElementPattern.Capture<PsiElement> PACKAGE_IN_CATCH =
-			psiElement(IDENTIFIER).withParent(
-					psiElement(CATCH_CONDITION)
-			);
+  PsiElementPattern.Capture<PsiElement> PACKAGE_IN_CATCH =
+    psiElement(IDENTIFIER).withParent(
+      psiElement(CATCH_CONDITION)
+    );
 }

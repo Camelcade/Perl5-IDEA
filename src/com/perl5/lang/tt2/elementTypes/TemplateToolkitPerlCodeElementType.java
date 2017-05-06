@@ -35,33 +35,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 11.06.2016.
  */
-public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementType implements PsiElementProvider
-{
-	public TemplateToolkitPerlCodeElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, TemplateToolkitLanguage.INSTANCE);
-	}
+public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementType implements PsiElementProvider {
+  public TemplateToolkitPerlCodeElementType(@NotNull @NonNls String debugName) {
+    super(debugName, TemplateToolkitLanguage.INSTANCE);
+  }
 
-	@Override
-	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi)
-	{
-		Project project = psi.getProject();
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
-				project,
-				chameleon,
-				new PerlMergingLexerAdapter(project),
-				PerlLanguage.INSTANCE,
-				chameleon.getText()
-		);
-		PsiParser parser = PerlParserImpl.INSTANCE;
+  @Override
+  protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
+    Project project = psi.getProject();
+    PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+      project,
+      chameleon,
+      new PerlMergingLexerAdapter(project),
+      PerlLanguage.INSTANCE,
+      chameleon.getText()
+    );
+    PsiParser parser = PerlParserImpl.INSTANCE;
 
-		return parser.parse(this, builder).getFirstChildNode();
-	}
+    return parser.parse(this, builder).getFirstChildNode();
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new TemplateToolkitPerlBlockElementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new TemplateToolkitPerlBlockElementImpl(node);
+  }
 }

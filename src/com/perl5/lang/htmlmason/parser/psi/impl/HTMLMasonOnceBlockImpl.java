@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonOnceBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonOnceBlock
-{
-	public HTMLMasonOnceBlockImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class HTMLMasonOnceBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonOnceBlock {
+  public HTMLMasonOnceBlockImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

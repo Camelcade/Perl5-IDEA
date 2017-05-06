@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonFilteredBlockImpl extends MasonAbstractBlockImpl implements MasonFilteredBlock
-{
-	public MasonFilteredBlockImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class MasonFilteredBlockImpl extends MasonAbstractBlockImpl implements MasonFilteredBlock {
+  public MasonFilteredBlockImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

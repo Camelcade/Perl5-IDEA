@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi;
 /**
  * Created by hurricup on 25.07.2015.
  */
-public interface PerlMethodContainer
-{
-	PsiPerlMethod getMethod();
+public interface PerlMethodContainer {
+  PsiPerlMethod getMethod();
 }

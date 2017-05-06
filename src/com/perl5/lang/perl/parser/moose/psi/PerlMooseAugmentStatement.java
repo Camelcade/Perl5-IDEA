@@ -26,10 +26,9 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 25.11.2015.
  */
 public interface PerlMooseAugmentStatement extends
-		StubBasedPsiElement<PerlMooseAugmentStatementStub>,
-		PsiPerlStatement,
-		PsiNameIdentifierOwner
-{
-	@Nullable
-	String getSubName();
+                                           StubBasedPsiElement<PerlMooseAugmentStatementStub>,
+                                           PsiPerlStatement,
+                                           PsiNameIdentifierOwner {
+  @Nullable
+  String getSubName();
 }

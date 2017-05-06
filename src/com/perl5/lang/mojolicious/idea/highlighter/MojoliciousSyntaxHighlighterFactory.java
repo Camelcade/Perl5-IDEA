@@ -26,13 +26,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
-{
-	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new MojoliciousSyntaxHighlighter(project);
-	}
-
+public class MojoliciousSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory {
+  @Override
+  @NotNull
+  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+    return new MojoliciousSyntaxHighlighter(project);
+  }
 }

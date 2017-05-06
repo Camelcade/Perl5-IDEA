@@ -6,14 +6,12 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class MojoliciousBaseLexer extends PerlTemplatingLexer implements MojoliciousElementTypes, PerlElementTypes
-{
-	private static final CommentEndCalculator COMMENT_END_CALCULATOR = commentText -> StringUtil.indexOf(commentText, "%>");
+public abstract class MojoliciousBaseLexer extends PerlTemplatingLexer implements MojoliciousElementTypes, PerlElementTypes {
+  private static final CommentEndCalculator COMMENT_END_CALCULATOR = commentText -> StringUtil.indexOf(commentText, "%>");
 
-	@Nullable
-	@Override
-	protected CommentEndCalculator getCommentEndCalculator()
-	{
-		return COMMENT_END_CALCULATOR;
-	}
+  @Nullable
+  @Override
+  protected CommentEndCalculator getCommentEndCalculator() {
+    return COMMENT_END_CALCULATOR;
+  }
 }

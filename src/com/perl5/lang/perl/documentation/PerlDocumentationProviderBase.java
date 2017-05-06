@@ -36,66 +36,55 @@ import java.net.URLDecoder;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider
-{
-	@Override
-	public String generateDoc(PsiElement element, @Nullable PsiElement originalElement)
-	{
-		String result = null;
-		if (element instanceof PodFile)
-		{
-			result = PerlDocUtil.renderPodFile((PodFileImpl) element);
-			if (StringUtil.isEmpty(result))
-			{
-				result = "Empty documenation section...";
-			}
-		}
-		else if (element instanceof PodCompositeElement)
-		{
-			result = PerlDocUtil.renderElement((PodCompositeElement) element);
-		}
-		return StringUtil.isEmpty(result) ? super.generateDoc(element, originalElement) : result;
-	}
+public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider {
+  @Override
+  public String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
+    String result = null;
+    if (element instanceof PodFile) {
+      result = PerlDocUtil.renderPodFile((PodFileImpl)element);
+      if (StringUtil.isEmpty(result)) {
+        result = "Empty documenation section...";
+      }
+    }
+    else if (element instanceof PodCompositeElement) {
+      result = PerlDocUtil.renderElement((PodCompositeElement)element);
+    }
+    return StringUtil.isEmpty(result) ? super.generateDoc(element, originalElement) : result;
+  }
 
 
-	@Override
-	public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context)
-	{
-		if (context instanceof PodCompositeElement || context instanceof PerlFile)
-		{
-			try
-			{
-				return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
-			}
-			catch (Exception e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
-		return super.getDocumentationElementForLink(psiManager, link, context);
-	}
+  @Override
+  public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+    if (context instanceof PodCompositeElement || context instanceof PerlFile) {
+      try {
+        return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
+      }
+      catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return super.getDocumentationElementForLink(psiManager, link, context);
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
-	{
+  @Nullable
+  @Override
+  public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement) {
 
-		if (contextElement instanceof PsiFile)
-		{
-			PsiFile podFile = ((PsiFile) contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
+    if (contextElement instanceof PsiFile) {
+      PsiFile podFile = ((PsiFile)contextElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
 
-			if (podFile != null && podFile.getChildren().length == 1 && podFile.getFirstChild().getNode().getElementType() == PodElementTypes.POD_OUTER)
-			{
-				return null;
-			}
+      if (podFile != null &&
+          podFile.getChildren().length == 1 &&
+          podFile.getFirstChild().getNode().getElementType() == PodElementTypes.POD_OUTER) {
+        return null;
+      }
 
-			return podFile;
-		}
-		else if (contextElement != null)
-		{
-			return getCustomDocumentationElement(editor, file, contextElement.getParent());
-		}
+      return podFile;
+    }
+    else if (contextElement != null) {
+      return getCustomDocumentationElement(editor, file, contextElement.getParent());
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

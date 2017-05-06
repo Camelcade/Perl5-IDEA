@@ -33,27 +33,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplaceRenameHandler
-{
-	@Nullable
-	@Override
-	protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, Editor editor)
-	{
-		return new PerlVariableInplaceRenamer((PsiNamedElement) elementToRename, editor);
-	}
+public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplaceRenameHandler {
+  @Nullable
+  @Override
+  protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, Editor editor) {
+    return new PerlVariableInplaceRenamer((PsiNamedElement)elementToRename, editor);
+  }
 
-	@Override
-	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
-	{
+  @Override
+  protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
 
-		return
-				editor.getSettings().isVariableInplaceRenameEnabled()
-						&& element instanceof PsiNameIdentifierOwner
-						&& !(element instanceof PerlRenameUsagesSubstitutor)
-						&& element.getUseScope() instanceof LocalSearchScope
-						&& element.getLanguage() == PerlLanguage.INSTANCE
-						&& ((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement
-						&& element.getContainingFile().getViewProvider().getAllFiles().size() < 2
-				;
-	}
+    return
+      editor.getSettings().isVariableInplaceRenameEnabled()
+      && element instanceof PsiNameIdentifierOwner
+      && !(element instanceof PerlRenameUsagesSubstitutor)
+      && element.getUseScope() instanceof LocalSearchScope
+      && element.getLanguage() == PerlLanguage.INSTANCE
+      && ((PsiNameIdentifierOwner)element).getNameIdentifier() instanceof PerlStringContentElement
+      && element.getContainingFile().getViewProvider().getAllFiles().size() < 2
+      ;
+  }
 }

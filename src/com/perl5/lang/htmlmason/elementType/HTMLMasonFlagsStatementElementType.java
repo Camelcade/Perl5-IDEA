@@ -35,76 +35,65 @@ import java.io.IOException;
 /**
  * Created by hurricup on 10.03.2016.
  */
-public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement> implements PsiElementProvider
-{
-	public HTMLMasonFlagsStatementElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, HTMLMasonLanguage.INSTANCE);
-	}
+public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement>
+  implements PsiElementProvider {
+  public HTMLMasonFlagsStatementElementType(@NotNull @NonNls String debugName) {
+    super(debugName, HTMLMasonLanguage.INSTANCE);
+  }
 
-	@Override
-	public HTMLMasonFlagsStatement createPsi(@NotNull HTMLMasonFlagsStatementStub stub)
-	{
-		return new HTMLMasonFlagsStatementImpl(stub, this);
-	}
+  @Override
+  public HTMLMasonFlagsStatement createPsi(@NotNull HTMLMasonFlagsStatementStub stub) {
+    return new HTMLMasonFlagsStatementImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new HTMLMasonFlagsStatementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new HTMLMasonFlagsStatementImpl(node);
+  }
 
 
-	@Override
-	public HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub)
-	{
-		return new HTMLMasonFlagsStatementStubImpl(parentStub, this, psi.getParentComponentPath());
-	}
+  @Override
+  public HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub) {
+    return new HTMLMasonFlagsStatementStubImpl(parentStub, this, psi.getParentComponentPath());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "HTML::Mason::" + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "HTML::Mason::" + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		String parentComponentPath = stub.getParentComponentPath();
+  @Override
+  public void serialize(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    String parentComponentPath = stub.getParentComponentPath();
 
-		//noinspection StringEquality
-		if (parentComponentPath == HTMLMasonFlagsStatement.UNDEF_RESULT)
-		{
-			dataStream.writeBoolean(false);
-			return;
-		}
-		dataStream.writeBoolean(true);
-		dataStream.writeName(parentComponentPath);
-	}
+    //noinspection StringEquality
+    if (parentComponentPath == HTMLMasonFlagsStatement.UNDEF_RESULT) {
+      dataStream.writeBoolean(false);
+      return;
+    }
+    dataStream.writeBoolean(true);
+    dataStream.writeName(parentComponentPath);
+  }
 
-	@NotNull
-	@Override
-	public HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		if (!dataStream.readBoolean())
-		{
-			return new HTMLMasonFlagsStatementStubImpl(parentStub, this, HTMLMasonFlagsStatement.UNDEF_RESULT);
-		}
-		StringRef nameRef = dataStream.readName();
-		return new HTMLMasonFlagsStatementStubImpl(parentStub, this, nameRef == null ? null : nameRef.toString());
-	}
+  @NotNull
+  @Override
+  public HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    if (!dataStream.readBoolean()) {
+      return new HTMLMasonFlagsStatementStubImpl(parentStub, this, HTMLMasonFlagsStatement.UNDEF_RESULT);
+    }
+    StringRef nameRef = dataStream.readName();
+    return new HTMLMasonFlagsStatementStubImpl(parentStub, this, nameRef == null ? null : nameRef.toString());
+  }
 
-	@Override
-	public void indexStub(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IndexSink sink)
-	{
-		String parentComponentPath = stub.getParentComponentPath();
+  @Override
+  public void indexStub(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IndexSink sink) {
+    String parentComponentPath = stub.getParentComponentPath();
 
-		//noinspection StringEquality
-		if (parentComponentPath != null && parentComponentPath != HTMLMasonFlagsStatement.UNDEF_RESULT)
-		{
-			sink.occurrence(HTMLMasonFlagsStubIndex.KEY, parentComponentPath);
-		}
-	}
+    //noinspection StringEquality
+    if (parentComponentPath != null && parentComponentPath != HTMLMasonFlagsStatement.UNDEF_RESULT) {
+      sink.occurrence(HTMLMasonFlagsStubIndex.KEY, parentComponentPath);
+    }
+  }
 }

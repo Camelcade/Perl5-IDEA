@@ -22,6 +22,5 @@ import com.perl5.lang.perl.idea.manipulators.PerlTextContainerManipulator;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodElementManipulator extends PerlTextContainerManipulator<PsiElement>
-{
+public class PodElementManipulator extends PerlTextContainerManipulator<PsiElement> {
 }

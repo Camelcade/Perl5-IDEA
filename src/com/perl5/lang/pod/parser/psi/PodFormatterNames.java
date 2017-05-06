@@ -19,12 +19,11 @@ package com.perl5.lang.pod.parser.psi;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFormatterNames
-{
-	String FORMAT_ROFF = "roff";
-	String FORMAT_MAN = "man";
-	String FORMAT_LATEX = "latex";
-	String FORMAT_TEX = "tex";
-	String FORMAT_TEXT = "text";
-	String FORMAT_HTML = "html";
+public interface PodFormatterNames {
+  String FORMAT_ROFF = "roff";
+  String FORMAT_MAN = "man";
+  String FORMAT_LATEX = "latex";
+  String FORMAT_TEX = "tex";
+  String FORMAT_TEXT = "text";
+  String FORMAT_HTML = "html";
 }

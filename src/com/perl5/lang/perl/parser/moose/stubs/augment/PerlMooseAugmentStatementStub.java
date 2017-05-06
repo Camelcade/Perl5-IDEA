@@ -22,12 +22,11 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public interface PerlMooseAugmentStatementStub extends StubElement<PerlMooseAugmentStatement>
-{
-	/**
-	 * Returns augmented method name
-	 *
-	 * @return name
-	 */
-	String getSubName();
+public interface PerlMooseAugmentStatementStub extends StubElement<PerlMooseAugmentStatement> {
+  /**
+   * Returns augmented method name
+   *
+   * @return name
+   */
+  String getSubName();
 }

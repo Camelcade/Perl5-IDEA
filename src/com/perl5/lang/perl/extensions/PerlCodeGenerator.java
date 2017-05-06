@@ -23,41 +23,38 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.01.2016.
  */
-public interface PerlCodeGenerator
-{
-	/**
-	 * Returns code for overriding provided sub definition
-	 *
-	 * @param subBase sub to override
-	 * @return generated code
-	 */
-	@Nullable
-	String getOverrideCodeText(PsiElement subBase);
+public interface PerlCodeGenerator {
+  /**
+   * Returns code for overriding provided sub definition
+   *
+   * @param subBase sub to override
+   * @return generated code
+   */
+  @Nullable
+  String getOverrideCodeText(PsiElement subBase);
 
-	/**
-	 * Returns code for Moose method modifier
-	 *
-	 * @param subBase method to modify
-	 * @return generated code
-	 */
-	@Nullable
-	String getMethodModifierCodeText(PsiElement subBase, String modifierType);
-
-
-	/**
-	 * Generating and inserting overriden method
-	 *
-	 * @param anchor element to insert method after
-	 */
-	void generateOverrideMethod(PsiElement anchor, Editor editor);
-
-	void generateSetters(PsiElement anchor, Editor editor);
-
-	void generateGetters(PsiElement anchor, Editor editor);
-
-	void generateGettersAndSetters(PsiElement anchor, Editor editor);
-
-	void generateConstructor(PsiElement anchor, Editor editor);
+  /**
+   * Returns code for Moose method modifier
+   *
+   * @param subBase method to modify
+   * @return generated code
+   */
+  @Nullable
+  String getMethodModifierCodeText(PsiElement subBase, String modifierType);
 
 
+  /**
+   * Generating and inserting overriden method
+   *
+   * @param anchor element to insert method after
+   */
+  void generateOverrideMethod(PsiElement anchor, Editor editor);
+
+  void generateSetters(PsiElement anchor, Editor editor);
+
+  void generateGetters(PsiElement anchor, Editor editor);
+
+  void generateGettersAndSetters(PsiElement anchor, Editor editor);
+
+  void generateConstructor(PsiElement anchor, Editor editor);
 }

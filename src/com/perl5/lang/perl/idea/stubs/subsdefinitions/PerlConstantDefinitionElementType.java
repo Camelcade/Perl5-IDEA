@@ -26,25 +26,21 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class PerlConstantDefinitionElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider
-{
-	public PerlConstantDefinitionElementType(String name)
-	{
-		super(name);
-	}
+public class PerlConstantDefinitionElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider {
+  public PerlConstantDefinitionElementType(String name) {
+    super(name);
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PsiPerlConstantDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PsiPerlConstantDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlConstantDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlConstantDefinitionImpl(node);
+  }
 }
 
 

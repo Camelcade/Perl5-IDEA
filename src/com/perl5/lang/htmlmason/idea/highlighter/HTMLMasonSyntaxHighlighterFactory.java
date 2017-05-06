@@ -26,13 +26,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonSyntaxHighlighterFactory extends SyntaxHighlighterFactory
-{
-	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new HTMLMasonSyntaxHighlighter(project);
-	}
-
+public class HTMLMasonSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
+  @Override
+  @NotNull
+  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+    return new HTMLMasonSyntaxHighlighter(project);
+  }
 }

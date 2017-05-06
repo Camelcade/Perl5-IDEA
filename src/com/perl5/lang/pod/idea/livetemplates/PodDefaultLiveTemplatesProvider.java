@@ -22,23 +22,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.04.2016.
  */
-public class PodDefaultLiveTemplatesProvider implements DefaultLiveTemplatesProvider
-{
-	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/Perl5POD"
-	};
+public class PodDefaultLiveTemplatesProvider implements DefaultLiveTemplatesProvider {
+  public static final String[] TEMPLATES = new String[]{
+    "/liveTemplates/Perl5POD"
+  };
 
-	@Override
-	public String[] getDefaultLiveTemplateFiles()
-	{
-		return TEMPLATES;
-	}
+  @Override
+  public String[] getDefaultLiveTemplateFiles() {
+    return TEMPLATES;
+  }
 
-	@Nullable
-	@Override
-	public String[] getHiddenLiveTemplateFiles()
-	{
-		return null;
-	}
-
+  @Nullable
+  @Override
+  public String[] getHiddenLiveTemplateFiles() {
+    return null;
+  }
 }

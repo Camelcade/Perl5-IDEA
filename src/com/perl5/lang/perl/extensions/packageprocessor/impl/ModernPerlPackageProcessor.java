@@ -33,48 +33,42 @@ import java.util.List;
  * package processor for Modern::Perl module: http://search.cpan.org/~chromatic/Modern-Perl-1.20150127/lib/Modern/Perl.pm
  */
 public class ModernPerlPackageProcessor extends PerlPackageProcessorBase implements
-		PerlStrictProvider,
-		PerlWarningsProvider,
-		PerlMroProvider,
-		PerlPackageLoader,
-		PerlFeaturesProvider
-{
-	private static final List<String> LOADED_PACKAGES = new ArrayList<String>(Arrays.asList(
-			"IO::File",
-			"IO::Handle"
-	));
+                                                                         PerlStrictProvider,
+                                                                         PerlWarningsProvider,
+                                                                         PerlMroProvider,
+                                                                         PerlPackageLoader,
+                                                                         PerlFeaturesProvider {
+  private static final List<String> LOADED_PACKAGES = new ArrayList<String>(Arrays.asList(
+    "IO::File",
+    "IO::Handle"
+  ));
 
-	@Override
-	public PerlMroType getMroType(PerlUseStatement useStatement)
-	{
-		return PerlMroType.C3;
-	}
+  @Override
+  public PerlMroType getMroType(PerlUseStatement useStatement) {
+    return PerlMroType.C3;
+  }
 
-	@Override
-	@NotNull
-	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
-	{
-		return LOADED_PACKAGES;
-	}
+  @Override
+  @NotNull
+  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+    return LOADED_PACKAGES;
+  }
 
-	@Override
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
-	{
-		// fixme implement modification
-		return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
-	}
+  @Override
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+    // fixme implement modification
+    return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
+  }
 }

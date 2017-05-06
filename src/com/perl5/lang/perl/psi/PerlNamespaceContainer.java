@@ -29,73 +29,72 @@ import java.util.List;
  * Created by hurricup on 09.08.2015.
  * This interface shows that element wraps the namespace.
  */
-public interface PerlNamespaceContainer extends PsiElement
-{
-	/**
-	 * Returns package name
-	 *
-	 * @return canonical package name
-	 */
-	String getPackageName();
+public interface PerlNamespaceContainer extends PsiElement {
+  /**
+   * Returns package name
+   *
+   * @return canonical package name
+   */
+  String getPackageName();
 
-	/**
-	 * Returns parent namespaces definitions
-	 *
-	 * @return list of packages specified in parent
-	 */
-	List<PerlNamespaceDefinition> getParentNamespaceDefinitions();
+  /**
+   * Returns parent namespaces definitions
+   *
+   * @return list of packages specified in parent
+   */
+  List<PerlNamespaceDefinition> getParentNamespaceDefinitions();
 
-	/**
-	 * Returns child namespace definitions
-	 *
-	 * @return list of packages derived from current
-	 */
-	@NotNull
-	Collection<PerlNamespaceDefinition> getChildNamespaceDefinitions();
+  /**
+   * Returns child namespace definitions
+   *
+   * @return list of packages derived from current
+   */
+  @NotNull
+  Collection<PerlNamespaceDefinition> getChildNamespaceDefinitions();
 
-	/**
-	 * Get mro type for current package
-	 *
-	 * @return mro type
-	 */
-	PerlMroType getMroType();
+  /**
+   * Get mro type for current package
+   *
+   * @return mro type
+   */
+  PerlMroType getMroType();
 
-	/**
-	 * Returns MRO instance for current package
-	 *
-	 * @return mro class instance
-	 */
-	PerlMro getMro();
+  /**
+   * Returns MRO instance for current package
+   *
+   * @return mro class instance
+   */
+  PerlMro getMro();
 
-	/**
-	 * Returns map of imported subs as map package => qw(subs)
-	 *
-	 * @return map of imports
-	 */
-	@NotNull
-	List<PerlExportDescriptor> getImportedSubsDescriptors();
+  /**
+   * Returns map of imported subs as map package => qw(subs)
+   *
+   * @return map of imports
+   */
+  @NotNull
+  List<PerlExportDescriptor> getImportedSubsDescriptors();
 
-	/**
-	 * Returns map of imported scalars as map package => qw(scalars)
-	 *
-	 * @return map of imports
-	 */
-	@NotNull
-	List<PerlExportDescriptor> getImportedScalarDescriptors();
+  /**
+   * Returns map of imported scalars as map package => qw(scalars)
+   *
+   * @return map of imports
+   */
+  @NotNull
+  List<PerlExportDescriptor> getImportedScalarDescriptors();
 
-	/**
-	 * Returns map of imported arrays as map package => qw(arrays)
-	 *
-	 * @return map of imports
-	 */
-	@NotNull
-	List<PerlExportDescriptor> getImportedArrayDescriptors();
+  /**
+   * Returns map of imported arrays as map package => qw(arrays)
+   *
+   * @return map of imports
+   */
+  @NotNull
+  List<PerlExportDescriptor> getImportedArrayDescriptors();
 
-	/**
-	 * Returns map of imported hashes as map package => qw(hashes)
-	 *
-	 * @return map of imports
-	 */
-	@NotNull
-	List<PerlExportDescriptor> getImportedHashDescriptors();
+  /**
+   * Returns map of imported hashes as map package => qw(hashes)
+   *
+   * @return map of imports
+   */
+  @NotNull
+  List<PerlExportDescriptor> getImportedHashDescriptors();
 }

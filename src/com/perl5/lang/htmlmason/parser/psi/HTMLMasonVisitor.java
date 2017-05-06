@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonVisitor extends PerlVisitor
-{
+public class HTMLMasonVisitor extends PerlVisitor {
 }

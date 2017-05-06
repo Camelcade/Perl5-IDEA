@@ -28,28 +28,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements EmbeddedPerlElementTypes
-{
-	public static final TokenSet MARKER_TOKENS = TokenSet.create(
-			EMBED_MARKER_OPEN,
-			EMBED_MARKER_CLOSE
-	);
+public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements EmbeddedPerlElementTypes {
+  public static final TokenSet MARKER_TOKENS = TokenSet.create(
+    EMBED_MARKER_OPEN,
+    EMBED_MARKER_CLOSE
+  );
 
-	public EmbeddedPerlSyntaxHighlighter(Project project)
-	{
-		super(project);
-	}
+  public EmbeddedPerlSyntaxHighlighter(Project project) {
+    super(project);
+  }
 
-	@Override
-	public TokenSet getMarkersTokenSet()
-	{
-		return MARKER_TOKENS;
-	}
+  @Override
+  public TokenSet getMarkersTokenSet() {
+    return MARKER_TOKENS;
+  }
 
-	@NotNull
-	@Override
-	public Lexer getHighlightingLexer()
-	{
-		return new PerlHighlightingLexerAdapter(myProject, new EmbeddedPerlLexerAdapter(myProject));
-	}
+  @NotNull
+  @Override
+  public Lexer getHighlightingLexer() {
+    return new PerlHighlightingLexerAdapter(myProject, new EmbeddedPerlLexerAdapter(myProject));
+  }
 }

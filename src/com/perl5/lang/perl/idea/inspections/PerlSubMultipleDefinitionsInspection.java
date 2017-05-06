@@ -30,31 +30,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlSubMultipleDefinitionsInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
-			{
-				Project project = o.getProject();
-				String name = "Sub";
+public class PerlSubMultipleDefinitionsInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o) {
+        Project project = o.getProject();
+        String name = "Sub";
 
-				String canonicalName = o.getCanonicalName();
-				if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1)
-				{
-					if (!PerlPackageUtil.isMain(o.getPackageName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION)
-					{
-						registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
-					}
-				}
-				super.visitSubDefinitionBase(o);
-			}
-		};
-	}
-
+        String canonicalName = o.getCanonicalName();
+        if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1) {
+          if (!PerlPackageUtil.isMain(o.getPackageName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
+            registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
+          }
+        }
+        super.visitSubDefinitionBase(o);
+      }
+    };
+  }
 }

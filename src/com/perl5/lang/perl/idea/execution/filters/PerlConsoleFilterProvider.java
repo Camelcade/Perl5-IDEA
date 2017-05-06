@@ -26,19 +26,16 @@ import org.jetbrains.annotations.NotNull;
  * Created by ELI-HOME on 21-Sep-15.
  * this filter provider allows us to add our own perl filter
  */
-public class PerlConsoleFilterProvider implements ConsoleFilterProviderEx
-{
-	@NotNull
-	@Override
-	public Filter[] getDefaultFilters(@NotNull Project project)
-	{
-		Filter filter = new PerlConsoleFileLinkFilter(project);
-		return new Filter[]{filter};
-	}
+public class PerlConsoleFilterProvider implements ConsoleFilterProviderEx {
+  @NotNull
+  @Override
+  public Filter[] getDefaultFilters(@NotNull Project project) {
+    Filter filter = new PerlConsoleFileLinkFilter(project);
+    return new Filter[]{filter};
+  }
 
-	@Override
-	public Filter[] getDefaultFilters(@NotNull Project project, @NotNull GlobalSearchScope globalSearchScope)
-	{
-		return getDefaultFilters(project);
-	}
+  @Override
+  public Filter[] getDefaultFilters(@NotNull Project project, @NotNull GlobalSearchScope globalSearchScope) {
+    return getDefaultFilters(project);
+  }
 }

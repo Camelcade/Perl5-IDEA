@@ -23,20 +23,18 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementPatterns;
 /**
  * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitCompletionContributor extends CompletionContributor implements TemplateToolkitElementPatterns
-{
-	public TemplateToolkitCompletionContributor()
-	{
-		extend(
-				CompletionType.BASIC,
-				FILTER_NAME_PATTERN,
-				new TemplateToolkitFilterNamesCompletionProvider()
-		);
+public class TemplateToolkitCompletionContributor extends CompletionContributor implements TemplateToolkitElementPatterns {
+  public TemplateToolkitCompletionContributor() {
+    extend(
+      CompletionType.BASIC,
+      FILTER_NAME_PATTERN,
+      new TemplateToolkitFilterNamesCompletionProvider()
+    );
 
-		extend(
-				CompletionType.BASIC,
-				BLOCK_NAME_USAGE_PATTERN,
-				new TemplateToolkitBlocksCompletionProvider()
-		);
-	}
+    extend(
+      CompletionType.BASIC,
+      BLOCK_NAME_USAGE_PATTERN,
+      new TemplateToolkitBlocksCompletionProvider()
+    );
+  }
 }

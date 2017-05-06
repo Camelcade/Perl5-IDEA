@@ -28,40 +28,34 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 14.08.2015.
  */
-public class PerlVariableGlobalUnusedInspection extends PerlVariableDeclarationInspection
-{
-	public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
-			"@ISA",
-			"@EXPORT_OK",
-			"@EXPORT",
+public class PerlVariableGlobalUnusedInspection extends PerlVariableDeclarationInspection {
+  public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+    "@ISA",
+    "@EXPORT_OK",
+    "@EXPORT",
 
-			"%EXPORT_TAGS",
+    "%EXPORT_TAGS",
 
-			"$VERSION"
-	));
+    "$VERSION"
+  ));
 
-	@Override
-	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
-	{
-		if (variableDeclarationWrapper.isGlobalDeclaration())
-		{
-			if (EXCLUSIONS.contains(variableDeclarationWrapper.getText()))
-			{
-				return;
-			}
+  @Override
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+    if (variableDeclarationWrapper.isGlobalDeclaration()) {
+      if (EXCLUSIONS.contains(variableDeclarationWrapper.getText())) {
+        return;
+      }
 
-			if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null)
-			{
-				PerlVariable variable = variableDeclarationWrapper.getVariable();
-				if (variable != null)
-				{
-					holder.registerProblem(
-							variable,
-							"Unused global variable:" + variable.getText(),
-							ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-				}
-			}
-		}
-	}
+      if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null) {
+        PerlVariable variable = variableDeclarationWrapper.getVariable();
+        if (variable != null) {
+          holder.registerProblem(
+            variable,
+            "Unused global variable:" + variable.getText(),
+            ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+        }
+      }
+    }
+  }
 }
 

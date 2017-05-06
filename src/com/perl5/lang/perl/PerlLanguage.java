@@ -22,20 +22,17 @@ package com.perl5.lang.perl;
 
 import com.intellij.lang.Language;
 
-public class PerlLanguage extends Language
-{
-	public static final PerlLanguage INSTANCE = new PerlLanguage();
-	public static final String NAME = "Perl5";
+public class PerlLanguage extends Language {
+  public static final PerlLanguage INSTANCE = new PerlLanguage();
+  public static final String NAME = "Perl5";
 
-	public PerlLanguage()
-	{
-		super(NAME);
-	}
+  public PerlLanguage() {
+    super(NAME);
+  }
 
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
+  @Override
+  public boolean isCaseSensitive() {
+    return true;
+  }
 }
 

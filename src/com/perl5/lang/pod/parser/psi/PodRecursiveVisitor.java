@@ -21,11 +21,9 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodRecursiveVisitor extends PodVisitor
-{
-	@Override
-	public void visitElement(PsiElement element)
-	{
-		element.acceptChildren(this);
-	}
+public class PodRecursiveVisitor extends PodVisitor {
+  @Override
+  public void visitElement(PsiElement element) {
+    element.acceptChildren(this);
+  }
 }

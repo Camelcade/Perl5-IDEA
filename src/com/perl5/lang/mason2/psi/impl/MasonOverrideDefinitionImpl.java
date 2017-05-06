@@ -39,85 +39,71 @@ import java.util.List;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition
-{
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
+public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition {
+  protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
 
-	public MasonOverrideDefinitionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public MasonOverrideDefinitionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@NotNull
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
-		if (isValid())
-		{
-			newImplicitVariables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
-					true,
-					false,
-					true,
-					this
-			));
-		}
-		return newImplicitVariables;
-	}
+  @NotNull
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+    if (isValid()) {
+      newImplicitVariables.add(new PerlVariableLightImpl(
+        getManager(),
+        PerlLanguage.INSTANCE,
+        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        true,
+        false,
+        true,
+        this
+      ));
+    }
+    return newImplicitVariables;
+  }
 
-	@Override
-	@NotNull
-	public PsiPerlBlock getBlockSmart()
-	{
-		return findNotNullChildByClass(PsiPerlBlock.class);
-	}
+  @Override
+  @NotNull
+  public PsiPerlBlock getBlockSmart() {
+    return findNotNullChildByClass(PsiPerlBlock.class);
+  }
 
-	@Override
-	public PsiElement getSubNameElement()
-	{
-		return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
-	}
+  @Override
+  public PsiElement getSubNameElement() {
+    return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
+  }
 
-	@Override
-	protected String getSubNameHeavy()
-	{
-		PsiElement subNameElement = getSubNameElement();
-		return subNameElement == null ? null : subNameElement.getNode().getText();
-	}
+  @Override
+  protected String getSubNameHeavy() {
+    PsiElement subNameElement = getSubNameElement();
+    return subNameElement == null ? null : subNameElement.getNode().getText();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.isEmpty())
-		{
-			throw new IncorrectOperationException("You can't set an empty method name");
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    if (name.isEmpty()) {
+      throw new IncorrectOperationException("You can't set an empty method name");
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof LeafPsiElement)
-		{
-			((LeafPsiElement) nameIdentifier).replaceWithText(name);
-		}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof LeafPsiElement) {
+      ((LeafPsiElement)nameIdentifier).replaceWithText(name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (myImplicitVariables == null)
-		{
-			myImplicitVariables = buildImplicitVariables();
-		}
-		return myImplicitVariables;
-	}
-
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      myImplicitVariables = buildImplicitVariables();
+    }
+    return myImplicitVariables;
+  }
 }

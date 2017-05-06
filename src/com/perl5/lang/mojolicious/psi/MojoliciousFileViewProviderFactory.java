@@ -25,14 +25,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousFileViewProviderFactory implements FileViewProviderFactory
-{
-	@NotNull
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
-												   com.intellij.lang.Language language,
-												   @NotNull PsiManager manager,
-												   boolean eventSystemEnabled)
-	{
-		return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
-	}
+public class MojoliciousFileViewProviderFactory implements FileViewProviderFactory {
+  @NotNull
+  public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+                                                 com.intellij.lang.Language language,
+                                                 @NotNull PsiManager manager,
+                                                 boolean eventSystemEnabled) {
+    return new MojoliciousFileViewProvider(manager, file, eventSystemEnabled);
+  }
 }

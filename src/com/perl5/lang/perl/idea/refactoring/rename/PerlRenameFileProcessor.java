@@ -39,68 +39,55 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlRenameFileProcessor extends RenamePsiFileProcessor
-{
-	@Override
-	public boolean canProcessElement(@NotNull PsiElement element)
-	{
-		return element instanceof PerlFileImpl && ((PerlFileImpl) element).getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
-	}
+public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
+  @Override
+  public boolean canProcessElement(@NotNull PsiElement element) {
+    return element instanceof PerlFileImpl && ((PerlFileImpl)element).getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
+  }
 
-	@Nullable
-	@Override
-	public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener)
-	{
-		if (newName.endsWith(".pm"))
-		{
-			final Project project = element.getProject();
-			final String currentPackageName = ((PerlFileImpl) element).getFilePackageName();
+  @Nullable
+  @Override
+  public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener) {
+    if (newName.endsWith(".pm")) {
+      final Project project = element.getProject();
+      final String currentPackageName = ((PerlFileImpl)element).getFilePackageName();
 
-			if (currentPackageName != null)
-			{
-				String[] nameChunks = currentPackageName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
-				nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
-				final String newPackageName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
+      if (currentPackageName != null) {
+        String[] nameChunks = currentPackageName.split(PerlPackageUtil.PACKAGE_SEPARATOR);
+        nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
+        final String newPackageName = StringUtils.join(nameChunks, PerlPackageUtil.PACKAGE_SEPARATOR);
 
-				final String newFileName = ((PerlFileImpl) element).getVirtualFile().getParent().getPath() + '/' + newName;
+        final String newFileName = ((PerlFileImpl)element).getVirtualFile().getParent().getPath() + '/' + newName;
 
-				return () ->
-				{
-					VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
+        return () ->
+        {
+          VirtualFile newFile = LocalFileSystem.getInstance().findFileByPath(newFileName);
 
-					if (newFile != null)
-					{
-						PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
+          if (newFile != null) {
+            PsiFile psiFile = PsiManager.getInstance(project).findFile(newFile);
 
-						if (psiFile != null)
-						{
-							final RenameRefactoring[] refactoring = {null};
+            if (psiFile != null) {
+              final RenameRefactoring[] refactoring = {null};
 
-							for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class))
-							{
-								if (currentPackageName.equals(namespaceDefinition.getName()))
-								{
-									if (refactoring[0] == null)
-									{
-										refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
-									}
-									else
-									{
-										refactoring[0].addElement(namespaceDefinition, newPackageName);
-									}
-								}
-							}
+              for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class)) {
+                if (currentPackageName.equals(namespaceDefinition.getName())) {
+                  if (refactoring[0] == null) {
+                    refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
+                  }
+                  else {
+                    refactoring[0].addElement(namespaceDefinition, newPackageName);
+                  }
+                }
+              }
 
-							if (refactoring[0] != null)
-							{
-								ApplicationManager.getApplication().invokeLater(refactoring[0]::run);
-							}
-						}
-					}
-				};
-			}
-		}
-		return super.getPostRenameCallback(element, newName, elementListener);
-	}
-
+              if (refactoring[0] != null) {
+                ApplicationManager.getApplication().invokeLater(refactoring[0]::run);
+              }
+            }
+          }
+        };
+      }
+    }
+    return super.getPostRenameCallback(element, newName, elementListener);
+  }
 }

@@ -23,13 +23,12 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 31.05.2015.
  * Interface for objets, containing SubNameElement
  */
-public interface PerlSubNameElementContainer
-{
-	/**
-	 * Trying to find nested PerlSubName element
-	 *
-	 * @return psi element or null
-	 */
-	@Nullable
-	PerlSubNameElement getSubNameElement();
+public interface PerlSubNameElementContainer {
+  /**
+   * Trying to find nested PerlSubName element
+   *
+   * @return psi element or null
+   */
+  @Nullable
+  PerlSubNameElement getSubNameElement();
 }

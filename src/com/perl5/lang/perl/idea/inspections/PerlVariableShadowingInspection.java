@@ -26,21 +26,18 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection
-{
-	@Override
-	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
-	{
-		PerlVariable variable = variableDeclarationWrapper.getVariable();
-		PsiElement declarationContainer = variableDeclarationWrapper.getParent();
+public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection {
+  @Override
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+    PerlVariable variable = variableDeclarationWrapper.getVariable();
+    PsiElement declarationContainer = variableDeclarationWrapper.getParent();
 
-		if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
-		{
-			PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
-			if (lexicalDeclaration != null)
-			{
-				registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " + lexicalDeclaration.getVariable().getLineNumber());
-			}
-		}
-	}
+    if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
+      PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
+      if (lexicalDeclaration != null) {
+        registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " +
+                                          lexicalDeclaration.getVariable().getLineNumber());
+      }
+    }
+  }
 }

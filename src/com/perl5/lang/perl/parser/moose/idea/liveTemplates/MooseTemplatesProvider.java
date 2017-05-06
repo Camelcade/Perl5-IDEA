@@ -22,22 +22,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 12.01.2016.
  */
-public class MooseTemplatesProvider implements DefaultLiveTemplatesProvider
-{
-	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/Perl5Moose"
-	};
+public class MooseTemplatesProvider implements DefaultLiveTemplatesProvider {
+  public static final String[] TEMPLATES = new String[]{
+    "/liveTemplates/Perl5Moose"
+  };
 
-	@Override
-	public String[] getDefaultLiveTemplateFiles()
-	{
-		return TEMPLATES;
-	}
+  @Override
+  public String[] getDefaultLiveTemplateFiles() {
+    return TEMPLATES;
+  }
 
-	@Nullable
-	@Override
-	public String[] getHiddenLiveTemplateFiles()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public String[] getHiddenLiveTemplateFiles() {
+    return null;
+  }
 }

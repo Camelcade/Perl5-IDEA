@@ -32,57 +32,46 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodUnresolvableLinkInspection extends LocalInspectionTool
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PodVisitor()
-		{
-			@Override
-			public void visitPodFormatLink(@NotNull PsiPodFormatLink o)
-			{
-				for (PsiReference reference : o.getReferences())
-				{
-					if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference) reference).multiResolve(false).length == 0)
-					{
-						String error;
+public class PodUnresolvableLinkInspection extends LocalInspectionTool {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PodVisitor() {
+      @Override
+      public void visitPodFormatLink(@NotNull PsiPodFormatLink o) {
+        for (PsiReference reference : o.getReferences()) {
+          if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length == 0) {
+            String error;
 
-						if (reference instanceof PodLinkToFileReference)
-						{
-							String fileName = "UNKNONW";
-							PodLinkDescriptor descriptor = o.getLinkDescriptor();
+            if (reference instanceof PodLinkToFileReference) {
+              String fileName = "UNKNONW";
+              PodLinkDescriptor descriptor = o.getLinkDescriptor();
 
-							if (descriptor != null && descriptor.getFileId() != null)
-							{
-								fileName = descriptor.getFileId();
-							}
+              if (descriptor != null && descriptor.getFileId() != null) {
+                fileName = descriptor.getFileId();
+              }
 
-							error = "Can't find POD or PM file by: " + fileName;
-						}
-						else if (reference instanceof PodLinkToSectionReference)
-						{
-							String fileName = "UNKNONW";
-							PodLinkDescriptor descriptor = o.getLinkDescriptor();
+              error = "Can't find POD or PM file by: " + fileName;
+            }
+            else if (reference instanceof PodLinkToSectionReference) {
+              String fileName = "UNKNONW";
+              PodLinkDescriptor descriptor = o.getLinkDescriptor();
 
-							if (descriptor != null && descriptor.getSection() != null)
-							{
-								fileName = descriptor.getSection();
-							}
+              if (descriptor != null && descriptor.getSection() != null) {
+                fileName = descriptor.getSection();
+              }
 
-							error = "Can't find POD section: " + fileName;
-						}
-						else
-						{
-							error = "Can't find reference target";
-						}
+              error = "Can't find POD section: " + fileName;
+            }
+            else {
+              error = "Can't find reference target";
+            }
 
-						holder.registerProblem(reference, error, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
-					}
-				}
-				super.visitPodFormatLink(o);
-			}
-		};
-	}
+            holder.registerProblem(reference, error, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
+          }
+        }
+        super.visitPodFormatLink(o);
+      }
+    };
+  }
 }

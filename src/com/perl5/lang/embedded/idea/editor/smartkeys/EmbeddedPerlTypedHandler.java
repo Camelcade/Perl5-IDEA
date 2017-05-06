@@ -26,19 +26,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate
-{
-	@Override
-	public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file)
-	{
-		if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider)
-		{
-			if (c == ' ')
-			{
-				EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, " ?>");
-			}
-		}
-		return super.charTyped(c, project, editor, file);
-	}
-
+public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate {
+  @Override
+  public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+    if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider) {
+      if (c == ' ') {
+        EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, " ?>");
+      }
+    }
+    return super.charTyped(c, project, editor, file);
+  }
 }

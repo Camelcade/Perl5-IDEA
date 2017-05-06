@@ -27,34 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlVariableFilter implements Filter
-{
-	public static final PerlVariableFilter INSTANCE = new PerlVariableFilter();
-	private static final String ID = "SHOW_VARIABLES";
+public class PerlVariableFilter implements Filter {
+  public static final PerlVariableFilter INSTANCE = new PerlVariableFilter();
+  private static final String ID = "SHOW_VARIABLES";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlVariableDeclarationStructureViewElement);
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlVariableDeclarationStructureViewElement);
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show variables", null, PerlIcons.SCALAR_GUTTER_ICON);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show variables", null, PerlIcons.SCALAR_GUTTER_ICON);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

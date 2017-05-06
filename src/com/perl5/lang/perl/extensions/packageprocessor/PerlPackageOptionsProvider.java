@@ -24,22 +24,21 @@ import java.util.Map;
  * Created by hurricup on 18.08.2015.
  * Implement this interface if package should provide options for autocompletion
  */
-public interface PerlPackageOptionsProvider
-{
-	/**
-	 * Returns full list of available options with explanations
-	 *
-	 * @return HashMap of options
-	 */
-	@NotNull
-	public Map<String, String> getOptions();
+public interface PerlPackageOptionsProvider {
+  /**
+   * Returns full list of available options with explanations
+   *
+   * @return HashMap of options
+   */
+  @NotNull
+  public Map<String, String> getOptions();
 
-	/**
-	 * Returns full list of available bundled options, atm they are with other icon
-	 * fixme Probably we should return options with icons?
-	 *
-	 * @return HashMap of bundled options
-	 */
-	@NotNull
-	public Map<String, String> getOptionsBundles();
+  /**
+   * Returns full list of available bundled options, atm they are with other icon
+   * fixme Probably we should return options with icons?
+   *
+   * @return HashMap of bundled options
+   */
+  @NotNull
+  public Map<String, String> getOptionsBundles();
 }

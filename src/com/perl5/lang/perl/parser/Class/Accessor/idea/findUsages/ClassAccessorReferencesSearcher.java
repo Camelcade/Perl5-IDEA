@@ -27,27 +27,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.01.2016.
  */
-public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
-{
-	public ClassAccessorReferencesSearcher()
-	{
-		super(true);
-	}
+public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
+  public ClassAccessorReferencesSearcher() {
+    super(true);
+  }
 
-	@Override
-	public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
-	{
-		PsiElement element = queryParameters.getElementToSearch();
-		if (element instanceof PerlClassAccessorDeclaration && ((PerlClassAccessorDeclaration) element).isFollowsBestPractice())
-		{
-			if (((PerlClassAccessorDeclaration) element).isAccessorReadable())
-			{
-				queryParameters.getOptimizer().searchWord(((PerlClassAccessorDeclaration) element).getGetterName(), queryParameters.getEffectiveSearchScope(), true, element);
-			}
-			if (((PerlClassAccessorDeclaration) element).isAccessorWritable())
-			{
-				queryParameters.getOptimizer().searchWord(((PerlClassAccessorDeclaration) element).getSetterName(), queryParameters.getEffectiveSearchScope(), true, element);
-			}
-		}
-	}
+  @Override
+  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
+    PsiElement element = queryParameters.getElementToSearch();
+    if (element instanceof PerlClassAccessorDeclaration && ((PerlClassAccessorDeclaration)element).isFollowsBestPractice()) {
+      if (((PerlClassAccessorDeclaration)element).isAccessorReadable()) {
+        queryParameters.getOptimizer()
+          .searchWord(((PerlClassAccessorDeclaration)element).getGetterName(), queryParameters.getEffectiveSearchScope(), true, element);
+      }
+      if (((PerlClassAccessorDeclaration)element).isAccessorWritable()) {
+        queryParameters.getOptimizer()
+          .searchWord(((PerlClassAccessorDeclaration)element).getSetterName(), queryParameters.getEffectiveSearchScope(), true, element);
+      }
+    }
+  }
 }

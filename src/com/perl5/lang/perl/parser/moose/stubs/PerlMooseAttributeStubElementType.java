@@ -31,30 +31,25 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider
-{
-	public PerlMooseAttributeStubElementType(String name)
-	{
-		super(name);
-	}
+public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider {
+  public PerlMooseAttributeStubElementType(String name) {
+    super(name);
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PerlMooseAttributeImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PerlMooseAttributeImpl(stub, this);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof PerlMooseAttribute && StringUtil.isNotEmpty(((PerlMooseAttribute) psi).getSubName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof PerlMooseAttribute && StringUtil.isNotEmpty(((PerlMooseAttribute)psi).getSubName());
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlMooseAttributeImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlMooseAttributeImpl(node);
+  }
 }

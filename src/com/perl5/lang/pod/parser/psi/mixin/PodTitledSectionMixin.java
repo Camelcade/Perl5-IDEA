@@ -32,143 +32,121 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledSection
-{
-	public PodTitledSectionMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledSection {
+  public PodTitledSectionMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public PsiElement getTitleBlock()
-	{
-		return findChildByClass(PodSectionTitle.class);
-	}
+  @Override
+  public PsiElement getTitleBlock() {
+    return findChildByClass(PodSectionTitle.class);
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		renderElementTitleAsHTML(builder, new PodRenderingContext());
-		super.renderElementAsHTML(builder, context);
-	}
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    renderElementTitleAsHTML(builder, new PodRenderingContext());
+    super.renderElementAsHTML(builder, context);
+  }
 
-	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-	}
+  public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleBlock();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
 
-	@Override
-	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
-	{
+  @Override
+  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
 
-		renderElementTitleAsText(builder, new PodRenderingContext());
-		super.renderElementAsText(builder, context);
-	}
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    super.renderElementAsText(builder, context);
+  }
 
-	public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
-	}
+  public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleBlock();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
 
-	@Override
-	public boolean isIndexed()
-	{
-		PsiElement titleBlock = getTitleBlock();
-		if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement) titleBlock).isIndexed())
-		{
-			return true;
-		}
+  @Override
+  public boolean isIndexed() {
+    PsiElement titleBlock = getTitleBlock();
+    if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed()) {
+      return true;
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public String getTitleText()
-	{
-		PsiElement titleElement = getTitleBlock();
+  @Nullable
+  @Override
+  public String getTitleText() {
+    PsiElement titleElement = getTitleBlock();
 
-		if (titleElement == null)
-		{
-			return null;
-		}
+    if (titleElement == null) {
+      return null;
+    }
 
-		StringBuilder builder = new StringBuilder();
-		renderElementTitleAsText(builder, new PodRenderingContext());
-		return builder.toString().trim();
+    StringBuilder builder = new StringBuilder();
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    return builder.toString().trim();
+  }
 
-	}
-
-	@Nullable
-	@Override
-	public String getPresentableText()
-	{
-		return getTitleText();
-	}
+  @Nullable
+  @Override
+  public String getPresentableText() {
+    return getTitleText();
+  }
 
 
-	@Nullable
-	@Override
-	public String getPodLink()
-	{
-		return PodRenderUtil.getPodLinkForElement(this);
-	}
+  @Nullable
+  @Override
+  public String getPodLink() {
+    return PodRenderUtil.getPodLinkForElement(this);
+  }
 
-	@Nullable
-	@Override
-	public String getPodLinkText()
-	{
-		return getTitleText();
-	}
+  @Nullable
+  @Override
+  public String getPodLinkText() {
+    return getTitleText();
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getTitleBlock();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getTitleBlock();
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			ElementManipulators.getManipulator(nameIdentifier).handleContentChange(nameIdentifier, name);
-		}
-		return this;
-	}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      ElementManipulators.getManipulator(nameIdentifier).handleContentChange(nameIdentifier, name);
+    }
+    return this;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getText();
-	}
+  @Override
+  public String getName() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    return nameIdentifier == null ? null : nameIdentifier.getText();
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewLongNameLocation()
-	{
-		return getTitleText();
-	}
+  @Nullable
+  @Override
+  public String getUsageViewLongNameLocation() {
+    return getTitleText();
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewShortNameLocation()
-	{
-		return getName();
-	}
+  @Nullable
+  @Override
+  public String getUsageViewShortNameLocation() {
+    return getName();
+  }
 }

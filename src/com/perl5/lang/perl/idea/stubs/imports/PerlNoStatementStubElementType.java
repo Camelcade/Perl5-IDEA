@@ -24,23 +24,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public class PerlNoStatementStubElementType extends PerlUseStatementStubElementType
-{
-	public PerlNoStatementStubElementType(String debugName)
-	{
-		super(debugName);
-	}
+public class PerlNoStatementStubElementType extends PerlUseStatementStubElementType {
+  public PerlNoStatementStubElementType(String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlNoStatementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlNoStatementImpl(node);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		return false;
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    return false;
+  }
 }

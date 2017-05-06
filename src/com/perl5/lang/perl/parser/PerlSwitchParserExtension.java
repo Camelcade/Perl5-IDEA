@@ -22,6 +22,5 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 /**
  * Created by hurricup on 17.04.2016.
  */
-public interface PerlSwitchParserExtension extends PerlSwitchElementTypes, PerlElementTypes
-{
+public interface PerlSwitchParserExtension extends PerlSwitchElementTypes, PerlElementTypes {
 }

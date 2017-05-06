@@ -25,7 +25,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public interface HTMLMasonCompositeElement extends PerlCompositeElement
-{
-	boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place);
+public interface HTMLMasonCompositeElement extends PerlCompositeElement {
+  boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place);
 }

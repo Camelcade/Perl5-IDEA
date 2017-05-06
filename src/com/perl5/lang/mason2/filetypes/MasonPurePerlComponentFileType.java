@@ -28,57 +28,48 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonPurePerlComponentFileType extends PurePerlFileType
-{
-	public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
+public class MasonPurePerlComponentFileType extends PurePerlFileType {
+  public final static MasonPurePerlComponentFileType INSTANCE = new MasonPurePerlComponentFileType();
 
-	public MasonPurePerlComponentFileType()
-	{
-		this(Mason2Language.INSTANCE);
-	}
+  public MasonPurePerlComponentFileType() {
+    this(Mason2Language.INSTANCE);
+  }
 
-	public MasonPurePerlComponentFileType(Language language)
-	{
-		super(language);
-	}
+  public MasonPurePerlComponentFileType(Language language) {
+    super(language);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Mason2 pure Perl component";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Mason2 pure Perl component";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Mason2 pure Perl component";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Mason2 pure Perl component";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "mp";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "mp";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return Mason2Icons.MASON_PURE_PERL_COMPONENT_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return Mason2Icons.MASON_PURE_PERL_COMPONENT_ICON;
+  }
 
-	@Override
-	public boolean checkStrictPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkStrictPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean checkWarningsPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkWarningsPragma() {
+    return false;
+  }
 }

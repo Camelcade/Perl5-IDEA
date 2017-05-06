@@ -32,39 +32,31 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
+public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters> {
+  public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
 
-	static
-	{
-		for (String subName : PerlSubUtil.BUILT_IN)
-		{
-			addCompletion(subName);
-		}
-	}
+  static {
+    for (String subName : PerlSubUtil.BUILT_IN) {
+      addCompletion(subName);
+    }
+  }
 
-	public static void addCompletion(String subName)
-	{
-		BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-				.create(subName)
-				.withIcon(PerlIcons.SUB_GUTTER_ICON)
-				.withBoldness(true)
-		);
-	}
+  public void addCompletions(@NotNull CompletionParameters parameters,
+                             ProcessingContext context,
+                             @NotNull CompletionResultSet resultSet) {
+    PsiElement method = parameters.getPosition().getParent();
+    assert method instanceof PsiPerlMethod;
 
+    if (!((PsiPerlMethod)method).hasExplicitNamespace() && !((PsiPerlMethod)method).isObjectMethod()) {
+      resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
+    }
+  }
 
-	public void addCompletions(@NotNull CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
-	{
-		PsiElement method = parameters.getPosition().getParent();
-		assert method instanceof PsiPerlMethod;
-
-		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
-		{
-			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
-		}
-	}
-
+  public static void addCompletion(String subName) {
+    BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+                                       .create(subName)
+                                       .withIcon(PerlIcons.SUB_GUTTER_ICON)
+                                       .withBoldness(true)
+    );
+  }
 }

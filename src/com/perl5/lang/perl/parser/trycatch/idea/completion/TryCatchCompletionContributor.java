@@ -23,13 +23,11 @@ import com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns;
 /**
  * Created by hurricup on 17.04.2016.
  */
-public class TryCatchCompletionContributor extends CompletionContributor implements TryCatchElementPatterns
-{
-	public TryCatchCompletionContributor()
-	{
-		extend(CompletionType.BASIC,
-				PACKAGE_IN_CATCH,
-				new TryCatchPackageCompletionProvider()
-		);
-	}
+public class TryCatchCompletionContributor extends CompletionContributor implements TryCatchElementPatterns {
+  public TryCatchCompletionContributor() {
+    extend(CompletionType.BASIC,
+           PACKAGE_IN_CATCH,
+           new TryCatchPackageCompletionProvider()
+    );
+  }
 }

@@ -34,65 +34,57 @@ import java.util.List;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider implements HTMLMasonElementTypes
-{
-	@Override
-	protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
-	{
-		if (element instanceof HTMLMasonFileImpl)
-		{
-			HTMLMasonFileImpl parentComponent = ((HTMLMasonFileImpl) element).getParentComponent();
-			if (parentComponent != null)
-			{
-				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-						.create(AllIcons.Gutter.ImplementingMethod)
-						.setTargets(parentComponent)
-						.setTooltipText("Parent component");
+public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider implements HTMLMasonElementTypes {
+  @Override
+  protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
+    if (element instanceof HTMLMasonFileImpl) {
+      HTMLMasonFileImpl parentComponent = ((HTMLMasonFileImpl)element).getParentComponent();
+      if (parentComponent != null) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.ImplementingMethod)
+          .setTargets(parentComponent)
+          .setTooltipText("Parent component");
 
-				result.add(builder.createLineMarkerInfo(element));
-			}
+        result.add(builder.createLineMarkerInfo(element));
+      }
 
-			List<HTMLMasonFileImpl> childComponents = ((HTMLMasonFileImpl) element).getChildComponents();
-			if (!childComponents.isEmpty())
-			{
-				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-						.create(AllIcons.Gutter.ImplementedMethod)
-						.setTargets(childComponents)
-						.setTooltipText("Child components");
+      List<HTMLMasonFileImpl> childComponents = ((HTMLMasonFileImpl)element).getChildComponents();
+      if (!childComponents.isEmpty()) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.ImplementedMethod)
+          .setTargets(childComponents)
+          .setTooltipText("Child components");
 
-				result.add(builder.createLineMarkerInfo(element));
-			}
-		}
-		else if (element instanceof HTMLMasonMethodDefinition)
-		{
-			String methodName = ((HTMLMasonMethodDefinition) element).getName();
-			PsiFile component = element.getContainingFile();
-			if (StringUtil.isNotEmpty(methodName) && component instanceof HTMLMasonFileImpl)
-			{
-				// method in parent components
-				HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl) component).findMethodDefinitionByNameInParents(methodName);
-				if (methodDefinition != null)
-				{
-					NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-							.create(AllIcons.Gutter.OverridingMethod)
-							.setTargets(methodDefinition)
-							.setTooltipText("Overriding method");
+        result.add(builder.createLineMarkerInfo(element));
+      }
+    }
+    else if (element instanceof HTMLMasonMethodDefinition) {
+      String methodName = ((HTMLMasonMethodDefinition)element).getName();
+      PsiFile component = element.getContainingFile();
+      if (StringUtil.isNotEmpty(methodName) && component instanceof HTMLMasonFileImpl) {
+        // method in parent components
+        HTMLMasonMethodDefinition methodDefinition = ((HTMLMasonFileImpl)component).findMethodDefinitionByNameInParents(methodName);
+        if (methodDefinition != null) {
+          NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+            .create(AllIcons.Gutter.OverridingMethod)
+            .setTargets(methodDefinition)
+            .setTooltipText("Overriding method");
 
-					result.add(builder.createLineMarkerInfo(element));
-				}
+          result.add(builder.createLineMarkerInfo(element));
+        }
 
-				// method in subcomponents
-				List<HTMLMasonMethodDefinition> methodDefinitions = ((HTMLMasonFileImpl) component).findMethodDefinitionByNameInChildComponents(methodName);
-				if (!methodDefinitions.isEmpty())
-				{
-					NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-							.create(AllIcons.Gutter.OverridenMethod)
-							.setTargets(methodDefinitions)
-							.setTooltipText("Overriden methods");
+        // method in subcomponents
+        List<HTMLMasonMethodDefinition> methodDefinitions =
+          ((HTMLMasonFileImpl)component).findMethodDefinitionByNameInChildComponents(methodName);
+        if (!methodDefinitions.isEmpty()) {
+          NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+            .create(AllIcons.Gutter.OverridenMethod)
+            .setTargets(methodDefinitions)
+            .setTooltipText("Overriden methods");
 
-					result.add(builder.createLineMarkerInfo(element));
-				}
-			}
-		}
-	}
+          result.add(builder.createLineMarkerInfo(element));
+        }
+      }
+    }
+  }
 }

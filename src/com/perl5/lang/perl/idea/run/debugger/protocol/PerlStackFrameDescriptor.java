@@ -19,45 +19,37 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 05.05.2016.
  */
-public class PerlStackFrameDescriptor
-{
-	public transient static final String EVAL_PREFIX = "(eval ";
+public class PerlStackFrameDescriptor {
+  public transient static final String EVAL_PREFIX = "(eval ";
 
-	PerlLoadedFileDescriptor file;
-	private int line;
-	private int main_size;
-	private PerlValueDescriptor[] lexicals;
-	private PerlValueDescriptor[] globals;
-	private PerlValueDescriptor[] args;
+  PerlLoadedFileDescriptor file;
+  private int line;
+  private int main_size;
+  private PerlValueDescriptor[] lexicals;
+  private PerlValueDescriptor[] globals;
+  private PerlValueDescriptor[] args;
 
-	public PerlLoadedFileDescriptor getFileDescriptor()
-	{
-		return file;
-	}
+  public PerlLoadedFileDescriptor getFileDescriptor() {
+    return file;
+  }
 
-	public int getLine()
-	{
-		return line;
-	}
+  public int getLine() {
+    return line;
+  }
 
-	public PerlValueDescriptor[] getLexicals()
-	{
-		return lexicals;
-	}
+  public PerlValueDescriptor[] getLexicals() {
+    return lexicals;
+  }
 
-	public PerlValueDescriptor[] getGlobals()
-	{
-		return globals;
-	}
+  public PerlValueDescriptor[] getGlobals() {
+    return globals;
+  }
 
-	public int getMainSize()
-	{
-		return main_size;
-	}
+  public int getMainSize() {
+    return main_size;
+  }
 
-	public PerlValueDescriptor[] getArgs()
-	{
-		return args;
-	}
-
+  public PerlValueDescriptor[] getArgs() {
+    return args;
+  }
 }

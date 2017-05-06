@@ -22,14 +22,12 @@ import com.intellij.lang.PsiParser;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlLazyAnnotationsParser extends PerlParserImpl
-{
-	public static final PsiParser INSTANCE = new PerlLazyAnnotationsParser();
+public class PerlLazyAnnotationsParser extends PerlParserImpl {
+  public static final PsiParser INSTANCE = new PerlLazyAnnotationsParser();
 
-	@Override
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		annotation(b, l);
-		return true;
-	}
+  @Override
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    annotation(b, l);
+    return true;
+  }
 }

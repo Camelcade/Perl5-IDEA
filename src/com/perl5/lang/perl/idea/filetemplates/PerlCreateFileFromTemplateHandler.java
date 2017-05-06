@@ -26,20 +26,17 @@ import com.perl5.lang.perl.fileTypes.PerlFileType;
 /**
  * Created by hurricup on 03.06.2016.
  */
-public class PerlCreateFileFromTemplateHandler extends DefaultCreateFromTemplateHandler
-{
-	public static final PerlCreateFileFromTemplateHandler INSTANCE = new PerlCreateFileFromTemplateHandler();
+public class PerlCreateFileFromTemplateHandler extends DefaultCreateFromTemplateHandler {
+  public static final PerlCreateFileFromTemplateHandler INSTANCE = new PerlCreateFileFromTemplateHandler();
 
-	@Override
-	public boolean handlesTemplate(FileTemplate template)
-	{
-		FileType templateFileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension());
-		return templateFileType instanceof PerlFileType;
-	}
+  @Override
+  public boolean handlesTemplate(FileTemplate template) {
+    FileType templateFileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension());
+    return templateFileType instanceof PerlFileType;
+  }
 
-	@Override
-	public boolean canCreate(PsiDirectory[] dirs)
-	{
-		return false;
-	}
+  @Override
+  public boolean canCreate(PsiDirectory[] dirs) {
+    return false;
+  }
 }

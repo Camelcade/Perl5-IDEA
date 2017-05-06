@@ -27,43 +27,36 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements HTMLMasonElementTypes
-{
-	public HTMLMasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
-	{
-		super(manager, virtualFile, physical);
-	}
+public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements HTMLMasonElementTypes {
+  public HTMLMasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
+    super(manager, virtualFile, physical);
+  }
 
-	public HTMLMasonFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
-	{
-		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
-	}
+  public HTMLMasonFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage) {
+    super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+  }
 
 
-	@Override
-	@NotNull
-	public Language getBaseLanguage()
-	{
-		return HTMLMasonLanguage.INSTANCE;
-	}
+  @Override
+  @NotNull
+  public Language getBaseLanguage() {
+    return HTMLMasonLanguage.INSTANCE;
+  }
 
-	@NotNull
-	@Override
-	protected IElementType getTemplateContentElementType()
-	{
-		return HTML_MASON_HTML_TEMPLATE_DATA;
-	}
+  @NotNull
+  @Override
+  protected IElementType getTemplateContentElementType() {
+    return HTML_MASON_HTML_TEMPLATE_DATA;
+  }
 
-	@NotNull
-	@Override
-	protected IElementType getPODContentElementType()
-	{
-		return HTML_MASON_POD_TEMPLATE_DATA;
-	}
+  @NotNull
+  @Override
+  protected IElementType getPODContentElementType() {
+    return HTML_MASON_POD_TEMPLATE_DATA;
+  }
 
-	@Override
-	protected HTMLMasonFileViewProvider cloneInner(final VirtualFile copy)
-	{
-		return new HTMLMasonFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
-	}
+  @Override
+  protected HTMLMasonFileViewProvider cloneInner(final VirtualFile copy) {
+    return new HTMLMasonFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
+  }
 }

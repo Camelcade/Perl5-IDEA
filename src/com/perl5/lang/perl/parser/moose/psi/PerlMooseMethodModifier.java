@@ -22,6 +22,5 @@ import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 /**
  * Created by hurricup on 26.11.2015.
  */
-public interface PerlMooseMethodModifier extends PsiElement, PerlReferencesProvider
-{
+public interface PerlMooseMethodModifier extends PsiElement, PerlReferencesProvider {
 }

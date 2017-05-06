@@ -28,30 +28,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
-			{
-				Project project = o.getProject();
-				String packageName = o.getPackageName();
-				if (packageName != null &&
-						!PerlPackageUtil.MAIN_PACKAGE.equals(packageName) &&
-						PerlPackageUtil.getNamespaceDefinitions(project, o.getPackageName(), GlobalSearchScope.projectScope(project)).size() > 1 &&
-						o.getNameIdentifier() != null
-						)
-				{
-					registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
-				}
-
-			}
-		};
-	}
-
+public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+        Project project = o.getProject();
+        String packageName = o.getPackageName();
+        if (packageName != null &&
+            !PerlPackageUtil.MAIN_PACKAGE.equals(packageName) &&
+            PerlPackageUtil.getNamespaceDefinitions(project, o.getPackageName(), GlobalSearchScope.projectScope(project)).size() > 1 &&
+            o.getNameIdentifier() != null
+          ) {
+          registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
+        }
+      }
+    };
+  }
 }

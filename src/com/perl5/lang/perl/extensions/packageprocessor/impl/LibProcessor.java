@@ -27,24 +27,19 @@ import java.util.List;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public class LibProcessor extends PerlPragmaProcessorBase implements PerlLibProvider
-{
-	@Override
-	public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs)
-	{
-		int fileIndex = 0;
+public class LibProcessor extends PerlPragmaProcessorBase implements PerlLibProvider {
+  @Override
+  public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs) {
+    int fileIndex = 0;
 
-		List<String> importParameters = useStatement.getImportParameters();
-		if (importParameters != null)
-		{
-			for (String parameter : importParameters)
-			{
-				VirtualFile file = LocalFileSystem.getInstance().findFileByPath(parameter);
-				if (file != null && file.isDirectory())
-				{
-					libDirs.add(fileIndex++, file);
-				}
-			}
-		}
-	}
+    List<String> importParameters = useStatement.getImportParameters();
+    if (importParameters != null) {
+      for (String parameter : importParameters) {
+        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(parameter);
+        if (file != null && file.isDirectory()) {
+          libDirs.add(fileIndex++, file);
+        }
+      }
+    }
+  }
 }

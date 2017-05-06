@@ -24,35 +24,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.04.2016.
  */
-public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix implements TryCatchElementPatterns
-{
-	public TryCatchTemplateContextType()
-	{
-		super("PERL5_TRY_CATCH", "Try compound");
-	}
+public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix implements TryCatchElementPatterns {
+  public TryCatchTemplateContextType() {
+    super("PERL5_TRY_CATCH", "Try compound");
+  }
 
-	public TryCatchTemplateContextType(@NotNull String id, @NotNull String presentableName)
-	{
-		super(id, presentableName);
-	}
+  public TryCatchTemplateContextType(@NotNull String id, @NotNull String presentableName) {
+    super(id, presentableName);
+  }
 
-	@Override
-	public boolean isInContext(PsiElement element)
-	{
-		return super.isInContext(element);
-	}
+  @Override
+  public boolean isInContext(PsiElement element) {
+    return super.isInContext(element);
+  }
 
-	public static class Catch extends TryCatchTemplateContextType
-	{
-		public Catch()
-		{
-			super("PERL5_TRY_CATCH_CATCH", "Catch compound");
-		}
+  public static class Catch extends TryCatchTemplateContextType {
+    public Catch() {
+      super("PERL5_TRY_CATCH_CATCH", "Catch compound");
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			return super.isInContext(element) && ELEMENT_AFTER_TRY_CATCH.accepts(element);
-		}
-	}
+    @Override
+    public boolean isInContext(PsiElement element) {
+      return super.isInContext(element) && ELEMENT_AFTER_TRY_CATCH.accepts(element);
+    }
+  }
 }

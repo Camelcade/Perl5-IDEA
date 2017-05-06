@@ -24,19 +24,16 @@ import com.perl5.lang.perl.psi.PerlDoExpr;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public class PerlRuntimeImportStubImpl extends StubBase<PerlDoExpr> implements PerlRuntimeImportStub
-{
-	private final String myRelativePath;
+public class PerlRuntimeImportStubImpl extends StubBase<PerlDoExpr> implements PerlRuntimeImportStub {
+  private final String myRelativePath;
 
-	public PerlRuntimeImportStubImpl(StubElement parent, IStubElementType elementType, String myRelativePath)
-	{
-		super(parent, elementType);
-		this.myRelativePath = myRelativePath;
-	}
+  public PerlRuntimeImportStubImpl(StubElement parent, IStubElementType elementType, String myRelativePath) {
+    super(parent, elementType);
+    this.myRelativePath = myRelativePath;
+  }
 
-	@Override
-	public String getImportPath()
-	{
-		return myRelativePath;
-	}
+  @Override
+  public String getImportPath() {
+    return myRelativePath;
+  }
 }

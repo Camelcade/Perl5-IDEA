@@ -24,30 +24,26 @@ import javax.swing.*;
 /**
  * Created by hurricup on 28.09.2015.
  */
-public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFoldingSettings> implements CodeFoldingOptionsProvider
-{
-	public PerlCodeFoldingOptionsProvider(PerlFoldingSettings beanInstance)
-	{
-		super(beanInstance);
+public class PerlCodeFoldingOptionsProvider extends BeanConfigurable<PerlFoldingSettings> implements CodeFoldingOptionsProvider {
+  public PerlCodeFoldingOptionsProvider(PerlFoldingSettings beanInstance) {
+    super(beanInstance);
 
-		checkBox("COLLAPSE_COMMENTS", "Sequentional line comments");
-		checkBox("COLLAPSE_CONSTANT_BLOCKS", "Block of constants");
-		checkBox("COLLAPSE_ANON_ARRAYS", "Anonymous arrays");
-		checkBox("COLLAPSE_ANON_HASHES", "Anonymous hashes");
-		checkBox("COLLAPSE_PARENTHESISED", "Parenthesised expressions");
-		checkBox("COLLAPSE_HEREDOCS", "Here-docs");
-		checkBox("COLLAPSE_TEMPLATES", "Template parts (Mojolicious, Mason, etc.)");
-		checkBox("COLLAPSE_QW", "QW contents");
-	}
+    checkBox("COLLAPSE_COMMENTS", "Sequentional line comments");
+    checkBox("COLLAPSE_CONSTANT_BLOCKS", "Block of constants");
+    checkBox("COLLAPSE_ANON_ARRAYS", "Anonymous arrays");
+    checkBox("COLLAPSE_ANON_HASHES", "Anonymous hashes");
+    checkBox("COLLAPSE_PARENTHESISED", "Parenthesised expressions");
+    checkBox("COLLAPSE_HEREDOCS", "Here-docs");
+    checkBox("COLLAPSE_TEMPLATES", "Template parts (Mojolicious, Mason, etc.)");
+    checkBox("COLLAPSE_QW", "QW contents");
+  }
 
-	@Override
-	public JComponent createComponent()
-	{
-		JComponent result = super.createComponent();
-		if (result != null)
-		{
-			result.setBorder(BorderFactory.createTitledBorder("Perl5"));
-		}
-		return result;
-	}
+  @Override
+  public JComponent createComponent() {
+    JComponent result = super.createComponent();
+    if (result != null) {
+      result.setBorder(BorderFactory.createTitledBorder("Perl5"));
+    }
+    return result;
+  }
 }

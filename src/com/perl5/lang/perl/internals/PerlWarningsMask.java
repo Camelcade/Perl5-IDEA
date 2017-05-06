@@ -26,28 +26,22 @@ import java.util.Map;
  * Created by hurricup on 23.08.2015.
  * Represents ${^WARNING_BITS}
  */
-public class PerlWarningsMask implements Cloneable
-{
-	protected final HashMap<String, Boolean> currentMask;
+public class PerlWarningsMask implements Cloneable {
+  protected final HashMap<String, Boolean> currentMask;
 
-	public PerlWarningsMask()
-	{
-		currentMask = new HashMap<String, Boolean>();
-		for (Map.Entry<String, PerlWarningTreeLeaf> leaf : PerlWarningTree.LEAF_OPTIONS.entrySet())
-		{
-			currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
-		}
-	}
+  public PerlWarningsMask() {
+    currentMask = new HashMap<String, Boolean>();
+    for (Map.Entry<String, PerlWarningTreeLeaf> leaf : PerlWarningTree.LEAF_OPTIONS.entrySet()) {
+      currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
+    }
+  }
 
-	public PerlWarningsMask clone()
-	{
-		try
-		{
-			return (PerlWarningsMask) super.clone();
-		}
-		catch (CloneNotSupportedException e)
-		{
-			throw new RuntimeException(e.getMessage());
-		}
-	}
+  public PerlWarningsMask clone() {
+    try {
+      return (PerlWarningsMask)super.clone();
+    }
+    catch (CloneNotSupportedException e) {
+      throw new RuntimeException(e.getMessage());
+    }
+  }
 }

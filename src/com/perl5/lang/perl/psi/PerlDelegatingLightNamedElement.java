@@ -29,86 +29,72 @@ import org.jetbrains.annotations.Nullable;
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
 public class PerlDelegatingLightNamedElement<T extends PerlPolyNamedElement> extends PerlDelegatingLightElement<T>
-		implements PsiNameIdentifierOwner
-{
-	private final String myName;
+  implements PsiNameIdentifierOwner {
+  private final String myName;
 
-	public PerlDelegatingLightNamedElement(T delegate, String name)
-	{
-		super(delegate);
-		myName = name;
-	}
+  public PerlDelegatingLightNamedElement(T delegate, String name) {
+    super(delegate);
+    myName = name;
+  }
 
-	@Override
-	public String getName()
-	{
-		return myName;
-	}
+  @Override
+  public String getName() {
+    return myName;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return myName == null ? null : getDelegate().getNameIdentifierByName(myName);
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return myName == null ? null : getDelegate().getNameIdentifierByName(myName);
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : ElementManipulators.handleContentChange(nameIdentifier, name);
-	}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    PsiElement nameIdentifier = getNameIdentifier();
+    return nameIdentifier == null ? null : ElementManipulators.handleContentChange(nameIdentifier, name);
+  }
 
-	@Override
-	public void navigate(boolean requestFocus)
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof NavigatablePsiElement)
-		{
-			((NavigatablePsiElement) nameIdentifier).navigate(requestFocus);
-		}
-		else
-		{
-			super.navigate(requestFocus);
-		}
-	}
+  @Override
+  public void navigate(boolean requestFocus) {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof NavigatablePsiElement) {
+      ((NavigatablePsiElement)nameIdentifier).navigate(requestFocus);
+    }
+    else {
+      super.navigate(requestFocus);
+    }
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getNavigationElement()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? super.getNavigationElement() : nameIdentifier;
-	}
+  @NotNull
+  @Override
+  public PsiElement getNavigationElement() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    return nameIdentifier == null ? super.getNavigationElement() : nameIdentifier;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement identifier = getNameIdentifier();
-		return identifier == null ? super.getTextOffset() : identifier.getTextOffset();
-	}
+  @Override
+  public int getTextOffset() {
+    PsiElement identifier = getNameIdentifier();
+    return identifier == null ? super.getTextOffset() : identifier.getTextOffset();
+  }
 
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (o == null || getClass() != o.getClass())
-		{
-			return false;
-		}
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
-		PerlDelegatingLightNamedElement element = (PerlDelegatingLightNamedElement) o;
+    PerlDelegatingLightNamedElement element = (PerlDelegatingLightNamedElement)o;
 
-		return getDelegate().equals(element.getDelegate()) && myName.equals(element.myName);
-	}
+    return getDelegate().equals(element.getDelegate()) && myName.equals(element.myName);
+  }
 
-	@Override
-	public int hashCode()
-	{
-		return getDelegate().hashCode() * 31 + myName.hashCode();
-	}
+  @Override
+  public int hashCode() {
+    return getDelegate().hashCode() * 31 + myName.hashCode();
+  }
 }

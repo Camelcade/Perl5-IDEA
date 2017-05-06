@@ -24,31 +24,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.05.2016.
  */
-public class PerlXMainGroup extends PerlXValueGroup
-{
-	private final int mySize;
-	private int[] offset = new int[]{0};
+public class PerlXMainGroup extends PerlXValueGroup {
+  private final int mySize;
+  private int[] offset = new int[]{0};
 
-	public PerlXMainGroup(PerlStackFrame stackFrame, int size)
-	{
-		super("%main::", "Symbol Table", PerlIcons.MAIN_GUTTER_ICON, null, stackFrame, false);
-		mySize = size;
-	}
+  public PerlXMainGroup(PerlStackFrame stackFrame, int size) {
+    super("%main::", "Symbol Table", PerlIcons.MAIN_GUTTER_ICON, null, stackFrame, false);
+    mySize = size;
+  }
 
-	@Override
-	public void computeChildren(@NotNull XCompositeNode node)
-	{
-		PerlDebugUtil.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
-	}
+  @Override
+  public void computeChildren(@NotNull XCompositeNode node) {
+    PerlDebugUtil.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
+  }
 
-	public int getOffset()
-	{
-		return offset[0];
-	}
+  public int getOffset() {
+    return offset[0];
+  }
 
-	@Override
-	public int getSize()
-	{
-		return mySize;
-	}
+  @Override
+  public int getSize() {
+    return mySize;
+  }
 }

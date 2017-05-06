@@ -23,14 +23,12 @@ import com.perl5.lang.perl.PerlParserDefinition;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class MojoliciousWordsScanner extends DefaultWordsScanner
-{
-	public MojoliciousWordsScanner()
-	{
-		super(new MojoliciousLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
-				PerlParserDefinition.LITERALS);
-		setMayHaveFileRefsInLiterals(true);
-	}
+public class MojoliciousWordsScanner extends DefaultWordsScanner {
+  public MojoliciousWordsScanner() {
+    super(new MojoliciousLexerAdapter(null),
+          PerlParserDefinition.IDENTIFIERS,
+          PerlParserDefinition.COMMENTS,
+          PerlParserDefinition.LITERALS);
+    setMayHaveFileRefsInLiterals(true);
+  }
 }

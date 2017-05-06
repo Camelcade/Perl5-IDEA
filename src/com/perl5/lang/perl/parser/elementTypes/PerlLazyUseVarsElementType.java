@@ -26,24 +26,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.09.2015.
  */
-public class PerlLazyUseVarsElementType extends PerlLazyBlockElementType
-{
-	public PerlLazyUseVarsElementType(String name)
-	{
-		super(name);
-	}
+public class PerlLazyUseVarsElementType extends PerlLazyBlockElementType {
+  public PerlLazyUseVarsElementType(String name) {
+    super(name);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forUseVars(project);
-	}
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return PerlSubLexerAdapter.forUseVars(project);
+  }
 
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyUseVarsDeclarationsParser.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected PsiParser getParser() {
+    return PerlLazyUseVarsDeclarationsParser.INSTANCE;
+  }
 }

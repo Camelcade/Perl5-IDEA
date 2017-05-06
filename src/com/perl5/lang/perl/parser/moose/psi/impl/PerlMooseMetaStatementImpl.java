@@ -23,10 +23,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseMetaStatementImpl extends PsiPerlStatementImpl implements PerlMooseMetaStatement
-{
-	public PerlMooseMetaStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseMetaStatementImpl extends PsiPerlStatementImpl implements PerlMooseMetaStatement {
+  public PerlMooseMetaStatementImpl(ASTNode node) {
+    super(node);
+  }
 }

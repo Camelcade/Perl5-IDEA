@@ -22,12 +22,11 @@ import com.perl5.lang.perl.internals.PerlVersion;
 /**
  * Created by hurricup on 09.09.2015.
  */
-public interface PerlVersionElement extends PsiElement
-{
-	/**
-	 * Returns PerlVersion object with parsed version
-	 *
-	 * @return PerlVersion object
-	 */
-	PerlVersion getPerlVersion();
+public interface PerlVersionElement extends PsiElement {
+  /**
+   * Returns PerlVersion object with parsed version
+   *
+   * @return PerlVersion object
+   */
+  PerlVersion getPerlVersion();
 }

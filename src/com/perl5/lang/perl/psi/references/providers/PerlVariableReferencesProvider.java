@@ -32,42 +32,35 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public class PerlVariableReferencesProvider extends PsiReferenceProvider
-{
-	@NotNull
-	@Override
-	public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-	{
-		PsiElement parent = element.getParent();
+public class PerlVariableReferencesProvider extends PsiReferenceProvider {
+  @NotNull
+  @Override
+  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+    PsiElement parent = element.getParent();
 
-		if (parent instanceof PerlVariable && !((PerlVariable) parent).isDeclaration())
-		{
-			String elementText = element.getText();
-			if (PerlPackageUtil.isFullQualifiedName(elementText))
-			{
-				Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
-				// two refs
-				return new PsiReference[]{
-						new PerlNamespaceReference(element, qualifiedRanges.first),
-						new PerlVariableReference(element, qualifiedRanges.second)
-				};
-			}
-			else
-			{
-				return new PsiReference[]{new PerlVariableReference(element, TextRange.allOf(elementText))};
-			}
-		}
-		else if (parent instanceof PerlGlobVariable)
-		{
-			String elementText = element.getText();
-			if (PerlPackageUtil.isFullQualifiedName(elementText))
-			{
-				Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
-				// two refs
-				return new PsiReference[]{new PerlNamespaceReference(element, qualifiedRanges.first)};
-			}
-		}
+    if (parent instanceof PerlVariable && !((PerlVariable)parent).isDeclaration()) {
+      String elementText = element.getText();
+      if (PerlPackageUtil.isFullQualifiedName(elementText)) {
+        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
+        // two refs
+        return new PsiReference[]{
+          new PerlNamespaceReference(element, qualifiedRanges.first),
+          new PerlVariableReference(element, qualifiedRanges.second)
+        };
+      }
+      else {
+        return new PsiReference[]{new PerlVariableReference(element, TextRange.allOf(elementText))};
+      }
+    }
+    else if (parent instanceof PerlGlobVariable) {
+      String elementText = element.getText();
+      if (PerlPackageUtil.isFullQualifiedName(elementText)) {
+        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
+        // two refs
+        return new PsiReference[]{new PerlNamespaceReference(element, qualifiedRanges.first)};
+      }
+    }
 
-		return PsiReference.EMPTY_ARRAY;
-	}
+    return PsiReference.EMPTY_ARRAY;
+  }
 }

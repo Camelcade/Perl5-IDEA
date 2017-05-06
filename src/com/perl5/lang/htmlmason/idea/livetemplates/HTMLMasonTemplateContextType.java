@@ -27,21 +27,17 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns
-{
-	public HTMLMasonTemplateContextType()
-	{
-		super("PERL5_HTML_MASON", "&HTML::Mason template", PerlTemplateContextType.Generic.class);
-	}
+public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns {
+  public HTMLMasonTemplateContextType() {
+    super("PERL5_HTML_MASON", "&HTML::Mason template", PerlTemplateContextType.Generic.class);
+  }
 
-	@Override
-	public boolean isInContext(@NotNull PsiFile file, int offset)
-	{
-		if (file instanceof HTMLMasonFileImpl && offset > 0)
-		{
-			PsiElement element = file.findElementAt(offset - 1);
-			return HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element);
-		}
-		return false;
-	}
+  @Override
+  public boolean isInContext(@NotNull PsiFile file, int offset) {
+    if (file instanceof HTMLMasonFileImpl && offset > 0) {
+      PsiElement element = file.findElementAt(offset - 1);
+      return HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element);
+    }
+    return false;
+  }
 }

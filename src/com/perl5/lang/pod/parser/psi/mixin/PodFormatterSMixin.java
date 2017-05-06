@@ -24,18 +24,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFormatterSMixin extends PodSectionMixin implements PodFormatterS
-{
-	public PodFormatterSMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodFormatterSMixin extends PodSectionMixin implements PodFormatterS {
+  public PodFormatterSMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		builder.append("<span style=\"white-space: nowrap;\">");
-		super.renderElementContentAsHTML(builder, context);
-		builder.append("</span>");
-	}
+  @Override
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    builder.append("<span style=\"white-space: nowrap;\">");
+    super.renderElementContentAsHTML(builder, context);
+    builder.append("</span>");
+  }
 }

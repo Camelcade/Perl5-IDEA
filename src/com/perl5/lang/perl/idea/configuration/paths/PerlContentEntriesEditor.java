@@ -36,50 +36,42 @@ import java.util.List;
 /**
  * Created by hurricup on 07.06.2015.
  */
-public class PerlContentEntriesEditor extends CommonContentEntriesEditor
-{
-	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state)
-	{
-		super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
-	}
+public class PerlContentEntriesEditor extends CommonContentEntriesEditor {
+  public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state) {
+    super(moduleName, state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE, JpsPerlLibrarySourceRootType.INSTANCE);
+  }
 
-	public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes)
-	{
-		super(moduleName, state, rootTypes);
-	}
+  public PerlContentEntriesEditor(String moduleName, ModuleConfigurationState state, JpsModuleSourceRootType<?>... rootTypes) {
+    super(moduleName, state, rootTypes);
+  }
 
-	@Override
-	public void apply() throws ConfigurationException
-	{
-		PerlSharedSettings mySettings = PerlSharedSettings.getInstance(getModel().getProject());
+  @Override
+  public void apply() throws ConfigurationException {
+    PerlSharedSettings mySettings = PerlSharedSettings.getInstance(getModel().getProject());
 
-		List<String> libRoots = mySettings.getLibRootUrls();
-		libRoots.clear();
+    List<String> libRoots = mySettings.getLibRootUrls();
+    libRoots.clear();
 
-		for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE))
-		{
-			libRoots.add(entry.getUrl());
-		}
+    for (VirtualFile entry : getModel().getSourceRoots(JpsPerlLibrarySourceRootType.INSTANCE)) {
+      libRoots.add(entry.getUrl());
+    }
 
-		PerlMicroIdeSettingsLoader.applyClassPaths(getModel());
-	}
+    PerlMicroIdeSettingsLoader.applyClassPaths(getModel());
+  }
 
-	@Override
-	protected void addAdditionalSettingsToPanel(JPanel mainPanel)
-	{
-		if (PlatformUtils.isIntelliJ())
-		{
+  @Override
+  protected void addAdditionalSettingsToPanel(JPanel mainPanel) {
+    if (PlatformUtils.isIntelliJ()) {
 
-			PerlModuleSdkConfigurable perlModuleSdkConfigurable = new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel())
-			{
-				@Override
-				protected ModifiableRootModel getRootModel()
-				{
-					return getState().getRootModel();
-				}
-			};
-			registerDisposable(perlModuleSdkConfigurable);
-			mainPanel.add(perlModuleSdkConfigurable.createComponent(), BorderLayout.NORTH);
-		}
-	}
+      PerlModuleSdkConfigurable perlModuleSdkConfigurable =
+        new PerlModuleSdkConfigurable(ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel()) {
+          @Override
+          protected ModifiableRootModel getRootModel() {
+            return getState().getRootModel();
+          }
+        };
+      registerDisposable(perlModuleSdkConfigurable);
+      mainPanel.add(perlModuleSdkConfigurable.createComponent(), BorderLayout.NORTH);
+    }
+  }
 }

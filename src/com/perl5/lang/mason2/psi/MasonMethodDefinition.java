@@ -23,6 +23,5 @@ import com.perl5.lang.perl.psi.PerlMethodDefinition;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public interface MasonMethodDefinition extends PsiElement, PerlMethodDefinition, PerlImplicitVariablesProvider
-{
+public interface MasonMethodDefinition extends PsiElement, PerlMethodDefinition, PerlImplicitVariablesProvider {
 }

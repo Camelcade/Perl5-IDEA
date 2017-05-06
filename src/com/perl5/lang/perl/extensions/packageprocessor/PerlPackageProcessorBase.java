@@ -30,69 +30,58 @@ import java.util.Set;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public abstract class PerlPackageProcessorBase implements PerlPackageProcessor
-{
-	@Override
-	public boolean isPragma()
-	{
-		return false;
-	}
+public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
+  @Override
+  public boolean isPragma() {
+    return false;
+  }
 
-	public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk)
-	{
-		String packageName = useStatement.getPackageName();
+  public void addExports(@NotNull PerlUseStatement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+    String packageName = useStatement.getPackageName();
 
-		if (StringUtil.isEmpty(packageName))
-		{
-			return;
-		}
+    if (StringUtil.isEmpty(packageName)) {
+      return;
+    }
 
-		// fixme handle tags
-		for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName))
-		{
-			export.addAll(namespaceDefinition.getEXPORT());
-			exportOk.addAll(namespaceDefinition.getEXPORT_OK());
-		}
-		exportOk.addAll(export);
-	}
+    // fixme handle tags
+    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName)) {
+      export.addAll(namespaceDefinition.getEXPORT());
+      exportOk.addAll(namespaceDefinition.getEXPORT_OK());
+    }
+    exportOk.addAll(export);
+  }
 
 
-	@Override
-	@NotNull
-	public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement)
-	{
-		List<PerlExportDescriptor> result = new ArrayList<PerlExportDescriptor>();
-		String packageName = useStatement.getPackageName();
-		if (packageName != null)
-		{
-			List<String> parameters = useStatement.getImportParameters();
-//			System.err.println("Import parameters for " + packageName + " are " + parameters);
-			Set<String> exportNames = new HashSet<String>();
-			Set<String> exportOkNames = new HashSet<String>();
+  @Override
+  @NotNull
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+    List<PerlExportDescriptor> result = new ArrayList<PerlExportDescriptor>();
+    String packageName = useStatement.getPackageName();
+    if (packageName != null) {
+      List<String> parameters = useStatement.getImportParameters();
+      //			System.err.println("Import parameters for " + packageName + " are " + parameters);
+      Set<String> exportNames = new HashSet<String>();
+      Set<String> exportOkNames = new HashSet<String>();
 
-			addExports(useStatement, exportNames, exportOkNames);
+      addExports(useStatement, exportNames, exportOkNames);
 
-			if (parameters == null)    // default import
-			{
-				for (String item : exportNames)
-				{
-					result.add(new PerlExportDescriptor(item, packageName));
-				}
-			}
-			else
-			{
-				for (String parameter : parameters)
-				{
-					if (exportOkNames.contains(parameter))
-					{
-						result.add(new PerlExportDescriptor(parameter, packageName));
-					}
-				}
-			}
-		}
+      if (parameters == null)    // default import
+      {
+        for (String item : exportNames) {
+          result.add(new PerlExportDescriptor(item, packageName));
+        }
+      }
+      else {
+        for (String parameter : parameters) {
+          if (exportOkNames.contains(parameter)) {
+            result.add(new PerlExportDescriptor(parameter, packageName));
+          }
+        }
+      }
+    }
 
-//		System.err.println("Imported from " + packageName + ": " + result);
+    //		System.err.println("Imported from " + packageName + ": " + result);
 
-		return result;
-	}
+    return result;
+  }
 }

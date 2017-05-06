@@ -25,20 +25,19 @@ import java.util.List;
  * Created by hurricup on 18.08.2015.
  * Implement this interface if your package modifies @ISA and provides package information
  */
-public interface PerlPackageParentsProvider
-{
-	/**
-	 * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
-	 *
-	 * @param useStatement use statement to fetch parameters from
-	 * @param currentList  current parents list
-	 */
-	void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList);
+public interface PerlPackageParentsProvider {
+  /**
+   * Modify list of parents provided by this package. Informaion being collected from all processors sequentially
+   *
+   * @param useStatement use statement to fetch parameters from
+   * @param currentList  current parents list
+   */
+  void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList);
 
-	/**
-	 * Returns true if we should show available package files in autocompletion
-	 *
-	 * @return result
-	 */
-	boolean hasPackageFilesOptions();
+  /**
+   * Returns true if we should show available package files in autocompletion
+   *
+   * @return result
+   */
+  boolean hasPackageFilesOptions();
 }

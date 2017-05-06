@@ -21,190 +21,155 @@ import java.util.regex.Pattern;
 /**
  * Created by ELI-HOME on 04-Jun-15.
  */
-public class PerlSdkType extends SdkType
-{
-	public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
+public class PerlSdkType extends SdkType {
+  public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
 
-	public static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
+  public static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 
-	public PerlSdkType()
-	{
-		super(PERL_SDK_TYPE_ID);
-	}
+  public PerlSdkType() {
+    super(PERL_SDK_TYPE_ID);
+  }
 
-	@NotNull
-	public static PerlSdkType getInstance()
-	{
-		PerlSdkType instance = SdkType.findInstance(PerlSdkType.class);
-		assert instance != null : "Make sure PerlSdkType is registered in plugin.xml";
-		return instance;
-	}
+  @Override
+  public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element) {
 
-	@Override
-	public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element)
-	{
+  }
 
-	}
+  @Override
+  public void setupSdkPaths(@NotNull Sdk sdk) {
+    SdkModificator sdkModificator = sdk.getSdkModificator();
 
-	@Override
-	public void setupSdkPaths(@NotNull Sdk sdk)
-	{
-		SdkModificator sdkModificator = sdk.getSdkModificator();
+    for (String perlLibPath : getINCPaths(sdk.getHomePath())) {
+      File libDir = new File(perlLibPath);
 
-		for (String perlLibPath : getINCPaths(sdk.getHomePath()))
-		{
-			File libDir = new File(perlLibPath);
+      if (libDir.exists() && libDir.isDirectory()) {
+        VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
+        if (virtualDir != null) {
+          sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
+          sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
+        }
+      }
+    }
 
-			if (libDir.exists() && libDir.isDirectory())
-			{
-				VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
-				if (virtualDir != null)
-				{
-					sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
-					sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
-				}
-			}
-		}
+    sdkModificator.commitChanges();
+  }
 
-		sdkModificator.commitChanges();
-	}
+  public List<String> getINCPaths(String sdkHomePath) {
+    String executablePath = getExecutablePath(sdkHomePath);
+    List<String> perlLibPaths = new ArrayList<String>();
+    if (executablePath != null) {
+      for (String path : PerlRunUtil.getDataFromProgram(
+        executablePath,
+        "-le",
+        "print for @INC"
+      )) {
+        if (!".".equals(path)) {
+          perlLibPaths.add(path);
+        }
+      }
+    }
+    return perlLibPaths;
+  }
 
-	public List<String> getINCPaths(String sdkHomePath)
-	{
-		String executablePath = getExecutablePath(sdkHomePath);
-		List<String> perlLibPaths = new ArrayList<String>();
-		if (executablePath != null)
-		{
-			for (String path : PerlRunUtil.getDataFromProgram(
-					executablePath,
-					"-le",
-					"print for @INC"
-			))
-			{
-				if (!".".equals(path))
-				{
-					perlLibPaths.add(path);
-				}
-			}
-		}
-		return perlLibPaths;
-	}
+  @Nullable
+  @Override
+  public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator
+    sdkModificator) {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator
-			sdkModificator)
-	{
-		return null;
-	}
+  @Override
+  public String getPresentableName() {
+    return "Perl5 Interpreter";
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return "Perl5 Interpreter";
-	}
+  @Nullable
+  @Override
+  public String suggestHomePath() {
+    String perlPath = PerlRunUtil.getPathFromPerl();
 
-	@Nullable
-	@Override
-	public String suggestHomePath()
-	{
-		String perlPath = PerlRunUtil.getPathFromPerl();
+    if (perlPath != null) {
+      return perlPath;
+    }
 
-		if (perlPath != null)
-		{
-			return perlPath;
-		}
+    if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD) {
+      return "/usr/bin/";
+    }
 
-		if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD)
-		{
-			return "/usr/bin/";
-		}
+    return System.getenv("PERL_HOME");
+  }
 
-		return System.getenv("PERL_HOME");
-	}
+  @Override
+  public String suggestSdkName(String currentSdkName, String sdkHome) {
+    return "Perl " + getPerlVersionString(sdkHome);
+  }
 
-	@Override
-	public String suggestSdkName(String currentSdkName, String sdkHome)
-	{
-		return "Perl " + getPerlVersionString(sdkHome);
-	}
+  @Override
+  public boolean isValidSdkHome(String sdkHome) {
+    File f = new File(getExecutablePath(sdkHome));
+    return f.exists();
+  }
 
-	@Override
-	public boolean isValidSdkHome(String sdkHome)
-	{
-		File f = new File(getExecutablePath(sdkHome));
-		return f.exists();
-	}
+  @NotNull
+  public String getExecutablePath(@NotNull String sdkHome) {
+    if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\"))) {
+      sdkHome += File.separator;
+    }
 
-	@NotNull
-	public String getExecutablePath(@NotNull String sdkHome)
-	{
-		if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\")))
-		{
-			sdkHome += File.separator;
-		}
+    if (SystemInfo.isWindows) {
+      return sdkHome + "perl.exe";
+    }
+    else {
+      return sdkHome + "perl";
+    }
+  }
 
-		if (SystemInfo.isWindows)
-		{
-			return sdkHome + "perl.exe";
-		}
-		else
-		{
-			return sdkHome + "perl";
-		}
-	}
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.PERL_LANGUAGE_ICON;
+  }
 
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.PERL_LANGUAGE_ICON;
-	}
+  @Override
+  public Icon getIconForAddAction() {
+    return getIcon();
+  }
 
-	@Override
-	public Icon getIconForAddAction()
-	{
-		return getIcon();
-	}
+  @Nullable
+  @Override
+  public String getVersionString(@NotNull Sdk sdk) {
+    return getPerlVersionString(sdk);
+  }
 
-	@Nullable
-	@Override
-	public String getVersionString(@NotNull Sdk sdk)
-	{
-		return getPerlVersionString(sdk);
-	}
+  public String getPerlVersionString(@NotNull Sdk sdk) {
+    String sdkHomePath = sdk.getHomePath();
+    if (sdkHomePath != null) {
+      return getPerlVersionString(sdkHomePath);
+    }
+    else {
+      return null;
+    }
+  }
 
-	public String getPerlVersionString(@NotNull Sdk sdk)
-	{
-		String sdkHomePath = sdk.getHomePath();
-		if (sdkHomePath != null)
-		{
-			return getPerlVersionString(sdkHomePath);
-		}
-		else
-		{
-			return null;
-		}
-	}
+  public String getPerlVersionString(@NotNull String sdkHomePath) {
+    List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
 
+    if (!versionLines.isEmpty()) {
+      Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
 
-	public String getPerlVersionString(@NotNull String sdkHomePath)
-	{
-		List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
+      if (m.find()) {
+        return m.group(1) + " (" + m.group(2) + ")";
+      }
 
-		if (!versionLines.isEmpty())
-		{
-			Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
+      return "Unknown version, please report a bug";
+    }
 
-			if (m.find())
-			{
-				return m.group(1) + " (" + m.group(2) + ")";
-			}
+    return "missing executable";
+  }
 
-			return "Unknown version, please report a bug";
-		}
-
-		return "missing executable";
-	}
-
-
+  @NotNull
+  public static PerlSdkType getInstance() {
+    PerlSdkType instance = SdkType.findInstance(PerlSdkType.class);
+    assert instance != null : "Make sure PerlSdkType is registered in plugin.xml";
+    return instance;
+  }
 }

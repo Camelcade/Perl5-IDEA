@@ -29,37 +29,33 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 02.06.2016.
  */
 @State(
-		name = "Perl5LocalSettings",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "Perl5LocalSettings",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings>
-{
-	public String PERL_PATH = "";
-	public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_OS_DEPENDENT_NAME;
-	public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
-	public boolean DISABLE_NO_INTERPRETER_WARNING = false;
-	public boolean ENABLE_REGEX_INJECTIONS = false;
+public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
+  public String PERL_PATH = "";
+  public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_OS_DEPENDENT_NAME;
+  public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
+  public boolean DISABLE_NO_INTERPRETER_WARNING = false;
+  public boolean ENABLE_REGEX_INJECTIONS = false;
 
-	public static PerlLocalSettings getInstance(@NotNull Project project)
-	{
-		PerlLocalSettings persisted = ServiceManager.getService(project, PerlLocalSettings.class);
-		return persisted != null ? persisted : new PerlLocalSettings();
-	}
+  @Nullable
+  @Override
+  public PerlLocalSettings getState() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public PerlLocalSettings getState()
-	{
-		return this;
-	}
+  @Override
+  public void loadState(PerlLocalSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-	@Override
-	public void loadState(PerlLocalSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  public static PerlLocalSettings getInstance(@NotNull Project project) {
+    PerlLocalSettings persisted = ServiceManager.getService(project, PerlLocalSettings.class);
+    return persisted != null ? persisted : new PerlLocalSettings();
+  }
 }

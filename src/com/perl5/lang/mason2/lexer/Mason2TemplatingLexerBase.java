@@ -25,22 +25,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 28.10.2016.
  */
-public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer implements Mason2ElementTypes, PerlElementTypes
-{
-	private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
-	{
-		int realLexicalState = getRealLexicalState();
-		if (realLexicalState == Mason2TemplatingLexer.PERL_EXPR_BLOCK || realLexicalState == Mason2TemplatingLexer.PERL_EXPR_BLOCK_FILTER)
-		{
-			return StringUtil.indexOf(commentText, KEYWORD_BLOCK_CLOSER);
-		}
-		return -1;
-	};
+public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer implements Mason2ElementTypes, PerlElementTypes {
+  private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
+  {
+    int realLexicalState = getRealLexicalState();
+    if (realLexicalState == Mason2TemplatingLexer.PERL_EXPR_BLOCK || realLexicalState == Mason2TemplatingLexer.PERL_EXPR_BLOCK_FILTER) {
+      return StringUtil.indexOf(commentText, KEYWORD_BLOCK_CLOSER);
+    }
+    return -1;
+  };
 
-	@Nullable
-	@Override
-	protected CommentEndCalculator getCommentEndCalculator()
-	{
-		return COMMENT_END_CALCULATOR;
-	}
+  @Nullable
+  @Override
+  protected CommentEndCalculator getCommentEndCalculator() {
+    return COMMENT_END_CALCULATOR;
+  }
 }

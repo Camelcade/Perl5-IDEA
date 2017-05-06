@@ -38,120 +38,110 @@ import java.util.*;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlArrayUtil implements PerlElementTypes
-{
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
-			"+",
-			"-",
-			"_",
-			"F",
-			"ARG",
-			"LAST_MATCH_END",
-			"ARGV",
-			"INC",
-			"LAST_MATCH_START"
-	));
+public class PerlArrayUtil implements PerlElementTypes {
+  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+    "+",
+    "-",
+    "_",
+    "F",
+    "ARG",
+    "LAST_MATCH_END",
+    "ARGV",
+    "INC",
+    "LAST_MATCH_START"
+  ));
 
-	public static boolean isBuiltIn(String variable)
-	{
-		return BUILT_IN.contains(variable);
-	}
+  public static boolean isBuiltIn(String variable) {
+    return BUILT_IN.contains(variable);
+  }
 
 
-	/**
-	 * Searching project files for global array definitions by specific package and variable name
-	 *
-	 * @param project       project to search in
-	 * @param canonicalName canonical variable name package::name
-	 * @return Collection of found definitions
-	 */
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName)
-	{
-		return getGlobalArrayDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
-	}
+  /**
+   * Searching project files for global array definitions by specific package and variable name
+   *
+   * @param project       project to search in
+   * @param canonicalName canonical variable name package::name
+   * @return Collection of found definitions
+   */
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName) {
+    return getGlobalArrayDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+  }
 
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
-	{
-		if (canonicalName == null)
-		{
-			return Collections.emptyList();
-		}
-		return StubIndex.getElements(
-				PerlVariablesStubIndex.KEY_ARRAY,
-				canonicalName,
-				project,
-				scope,
-				PerlVariableDeclarationWrapper.class
-		);
-	}
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalArrayDefinitions(Project project,
+                                                                                     String canonicalName,
+                                                                                     GlobalSearchScope scope) {
+    if (canonicalName == null) {
+      return Collections.emptyList();
+    }
+    return StubIndex.getElements(
+      PerlVariablesStubIndex.KEY_ARRAY,
+      canonicalName,
+      project,
+      scope,
+      PerlVariableDeclarationWrapper.class
+    );
+  }
 
-	/**
-	 * Returns list of defined global arrays
-	 *
-	 * @param project project to search in
-	 * @return collection of variable canonical names
-	 */
-	public static Collection<String> getDefinedGlobalArrayNames(Project project)
-	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_ARRAY, project);
-	}
+  /**
+   * Returns list of defined global arrays
+   *
+   * @param project project to search in
+   * @return collection of variable canonical names
+   */
+  public static Collection<String> getDefinedGlobalArrayNames(Project project) {
+    return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_ARRAY, project);
+  }
 
-	/**
-	 * Processes all global arrays names with specific processor
-	 *
-	 * @param project   project to search in
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
-	 */
-	public static boolean processDefinedGlobalArrays(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
-	{
-		return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
-	}
+  /**
+   * Processes all global arrays names with specific processor
+   *
+   * @param project   project to search in
+   * @param processor string processor for suitable strings
+   * @return collection of constants names
+   */
+  public static boolean processDefinedGlobalArrays(@NotNull Project project,
+                                                   @NotNull GlobalSearchScope scope,
+                                                   @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+    return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
+  }
 
-	/**
-	 * Returns a map of imported arrays names
-	 *
-	 * @param rootElement element to start looking from
-	 * @return result map
-	 */
-	@NotNull
-	public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull PsiElement rootElement)
-	{
-		PerlImportsCollector collector = new PerlArrayImportsCollector();
-		PerlUtil.processImportedEntities(rootElement, collector);
-		return collector.getResult();
-	}
+  /**
+   * Returns a map of imported arrays names
+   *
+   * @param rootElement element to start looking from
+   * @return result map
+   */
+  @NotNull
+  public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull PsiElement rootElement) {
+    PerlImportsCollector collector = new PerlArrayImportsCollector();
+    PerlUtil.processImportedEntities(rootElement, collector);
+    return collector.getResult();
+  }
 
-	/**
-	 * Traversing PsiElement for composite elements, expanding lists and collecting all elements to the plain one: ($a, $b, ($c, $d)) -> $a, $b, $c, $d;
-	 *
-	 * @param rootElement top-level container
-	 * @param result      resulting array to fill
-	 * @return passed or new List of found PsiElements
-	 */
-	public static List<PsiElement> getElementsAsPlainList(PsiElement rootElement, @Nullable List<PsiElement> result)
-	{
-		if (result == null)
-		{
-			result = new ArrayList<PsiElement>();
-		}
+  /**
+   * Traversing PsiElement for composite elements, expanding lists and collecting all elements to the plain one: ($a, $b, ($c, $d)) -> $a, $b, $c, $d;
+   *
+   * @param rootElement top-level container
+   * @param result      resulting array to fill
+   * @return passed or new List of found PsiElements
+   */
+  public static List<PsiElement> getElementsAsPlainList(PsiElement rootElement, @Nullable List<PsiElement> result) {
+    if (result == null) {
+      result = new ArrayList<PsiElement>();
+    }
 
-		if (rootElement == null)
-		{
-			return result;
-		}
+    if (rootElement == null) {
+      return result;
+    }
 
-		if (rootElement instanceof PsiPerlParenthesisedExpr || rootElement instanceof PsiPerlCommaSequenceExpr)
-		{
-			for (PsiElement childElement : rootElement.getChildren())
-			{
-				getElementsAsPlainList(childElement, result);
-			}
-		}
-		else if (rootElement.getNode() instanceof CompositeElement)
-		{
-			result.add(rootElement);
-		}
-		return result;
-	}
+    if (rootElement instanceof PsiPerlParenthesisedExpr || rootElement instanceof PsiPerlCommaSequenceExpr) {
+      for (PsiElement childElement : rootElement.getChildren()) {
+        getElementsAsPlainList(childElement, result);
+      }
+    }
+    else if (rootElement.getNode() instanceof CompositeElement) {
+      result.add(rootElement);
+    }
+    return result;
+  }
 }

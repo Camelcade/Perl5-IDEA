@@ -30,22 +30,22 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase
-{
-	public static final PerlDebuggerEditorsProvider INSTANCE = new PerlDebuggerEditorsProvider();
+public class PerlDebuggerEditorsProvider extends XDebuggerEditorsProviderBase {
+  public static final PerlDebuggerEditorsProvider INSTANCE = new PerlDebuggerEditorsProvider();
 
-	@Override
-	protected PsiFile createExpressionCodeFragment(@NotNull Project project, @NotNull String text, @Nullable PsiElement context, boolean isPhysical)
-	{
-		PsiFile fileFromText = PsiFileFactory.getInstance(project).createFileFromText("file.dummy", getFileType(), text, 0, isPhysical);
-		((PerlFileImpl) fileFromText).setFileContext(context);
-		return fileFromText;
-	}
+  @Override
+  protected PsiFile createExpressionCodeFragment(@NotNull Project project,
+                                                 @NotNull String text,
+                                                 @Nullable PsiElement context,
+                                                 boolean isPhysical) {
+    PsiFile fileFromText = PsiFileFactory.getInstance(project).createFileFromText("file.dummy", getFileType(), text, 0, isPhysical);
+    ((PerlFileImpl)fileFromText).setFileContext(context);
+    return fileFromText;
+  }
 
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return PerlFileTypeScript.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public FileType getFileType() {
+    return PerlFileTypeScript.INSTANCE;
+  }
 }

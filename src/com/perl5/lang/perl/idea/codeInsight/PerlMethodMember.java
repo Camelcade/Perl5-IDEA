@@ -31,25 +31,21 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.01.2016.
  */
-public class PerlMethodMember extends PsiElementMemberChooserObject implements ClassMember
-{
-	public PerlMethodMember(@NotNull PsiElement psiElement)
-	{
-		super(psiElement, ((PerlNamedElement) psiElement).getPresentableName(), psiElement.getIcon(0));
-	}
+public class PerlMethodMember extends PsiElementMemberChooserObject implements ClassMember {
+  public PerlMethodMember(@NotNull PsiElement psiElement) {
+    super(psiElement, ((PerlNamedElement)psiElement).getPresentableName(), psiElement.getIcon(0));
+  }
 
-	public static String trimUnderscores(String s)
-	{
-		return StringUtil.trimStart(StringUtil.trimStart(s, "_"), "_");
-	}
+  @Override
+  public MemberChooserObject getParentNodeDelegate() {
+    final PerlSubDefinitionBase subDefinitionBase = (PerlSubDefinitionBase)getPsiElement();
+    final PerlNamespaceDefinition parent = (PerlNamespaceDefinition)PerlPsiUtil
+      .getParentElementOrStub(subDefinitionBase, PerlNamespaceDefinitionStub.class, PerlNamespaceDefinition.class);
+    assert (parent != null);
+    return new PerlMethodMember(parent);
+  }
 
-	@Override
-	public MemberChooserObject getParentNodeDelegate()
-	{
-		final PerlSubDefinitionBase subDefinitionBase = (PerlSubDefinitionBase) getPsiElement();
-		final PerlNamespaceDefinition parent = (PerlNamespaceDefinition) PerlPsiUtil.getParentElementOrStub(subDefinitionBase, PerlNamespaceDefinitionStub.class, PerlNamespaceDefinition.class);
-		assert (parent != null);
-		return new PerlMethodMember(parent);
-	}
-
+  public static String trimUnderscores(String s) {
+    return StringUtil.trimStart(StringUtil.trimStart(s, "_"), "_");
+  }
 }

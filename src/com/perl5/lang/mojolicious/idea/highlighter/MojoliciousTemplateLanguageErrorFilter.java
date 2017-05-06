@@ -25,20 +25,18 @@ import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 /**
  * Created by hurricup on 16.03.2016.
  */
-public class MojoliciousTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements MojoliciousElementTypes
-{
-	private static final TokenSet START_TOKENS = TokenSet.create(
-			MOJO_BLOCK_OPENER,
-			MOJO_BLOCK_EXPR_OPENER,
-			MOJO_BLOCK_EXPR_ESCAPED_OPENER,
-			MOJO_LINE_OPENER,
-			MOJO_LINE_EXPR_OPENER,
-			MOJO_LINE_EXPR_ESCAPED_OPENER,
-			TokenType.WHITE_SPACE
-	);
+public class MojoliciousTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements MojoliciousElementTypes {
+  private static final TokenSet START_TOKENS = TokenSet.create(
+    MOJO_BLOCK_OPENER,
+    MOJO_BLOCK_EXPR_OPENER,
+    MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+    MOJO_LINE_OPENER,
+    MOJO_LINE_EXPR_OPENER,
+    MOJO_LINE_EXPR_ESCAPED_OPENER,
+    TokenType.WHITE_SPACE
+  );
 
-	public MojoliciousTemplateLanguageErrorFilter()
-	{
-		super(START_TOKENS, MojoliciousFileViewProvider.class, "HTML");
-	}
+  public MojoliciousTemplateLanguageErrorFilter() {
+    super(START_TOKENS, MojoliciousFileViewProvider.class, "HTML");
+  }
 }

@@ -48,253 +48,208 @@ import java.lang.reflect.Method;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlXNamedValue extends XNamedValue
-{
-	private static Method mySourcePositionMethod;
-	private static Method myLegacyMethod;
+public class PerlXNamedValue extends XNamedValue {
+  private static Method mySourcePositionMethod;
+  private static Method myLegacyMethod;
 
-	static
-	{
-		mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
-		if (mySourcePositionMethod == null)
-		{
-			myLegacyMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
-		}
-	}
+  static {
+    mySourcePositionMethod = ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", XSourcePosition.class);
+    if (mySourcePositionMethod == null) {
+      myLegacyMethod =
+        ReflectionUtil.getMethod(XInlineDebuggerDataCallback.class, "computed", VirtualFile.class, Document.class, int.class);
+    }
+  }
 
-	private final PerlStackFrame myStackFrame;
-	private final PerlValueDescriptor myPerlValueDescriptor;
-	private int[] offset = new int[]{0};
+  private final PerlStackFrame myStackFrame;
+  private final PerlValueDescriptor myPerlValueDescriptor;
+  private int[] offset = new int[]{0};
 
-	public PerlXNamedValue(@NotNull PerlValueDescriptor descriptor, PerlStackFrame stackFrame)
-	{
-		super(descriptor.getName());
-		myPerlValueDescriptor = descriptor;
-		myStackFrame = stackFrame;
-	}
+  public PerlXNamedValue(@NotNull PerlValueDescriptor descriptor, PerlStackFrame stackFrame) {
+    super(descriptor.getName());
+    myPerlValueDescriptor = descriptor;
+    myStackFrame = stackFrame;
+  }
 
-	@Override
-	public void computeChildren(@NotNull XCompositeNode node)
-	{
-		if (!myPerlValueDescriptor.isExpandable() || StringUtil.isEmpty(myPerlValueDescriptor.getKey()))
-		{
-			super.computeChildren(node);
-		}
-		//
-		PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
-	}
+  @Override
+  public void computeChildren(@NotNull XCompositeNode node) {
+    if (!myPerlValueDescriptor.isExpandable() || StringUtil.isEmpty(myPerlValueDescriptor.getKey())) {
+      super.computeChildren(node);
+    }
+    //
+    PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+  }
 
 
-	@Override
-	public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place)
-	{
-		node.setPresentation(calculateIcon(), calculateType(), myPerlValueDescriptor.getValue(), myPerlValueDescriptor.isExpandable());
+  @Override
+  public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place) {
+    node.setPresentation(calculateIcon(), calculateType(), myPerlValueDescriptor.getValue(), myPerlValueDescriptor.isExpandable());
+  }
 
-	}
+  protected String calculateType() {
+    String value = myPerlValueDescriptor.getType();
 
-	protected String calculateType()
-	{
-		String value = myPerlValueDescriptor.getType();
-
-		int refDepth = myPerlValueDescriptor.getRefDepth();
-		if (refDepth == 1)
-		{
-			value = "REF to " + value;
-		}
-		else if (refDepth > 0)
-		{
-			value = "REF(" + refDepth + ") to " + value;
-		}
+    int refDepth = myPerlValueDescriptor.getRefDepth();
+    if (refDepth == 1) {
+      value = "REF to " + value;
+    }
+    else if (refDepth > 0) {
+      value = "REF(" + refDepth + ") to " + value;
+    }
 
 
-		return value;
-	}
+    return value;
+  }
 
-	@Nullable
-	protected Icon calculateIcon()
-	{
-		String type = myPerlValueDescriptor.getType();
-		if (StringUtil.isEmpty(type))
-		{
-			return null;
-		}
-		else if (StringUtil.startsWith(type, "SCALAR"))
-		{
-			return myPerlValueDescriptor.isUtf() ? PerlIcons.UTF_SCALAR_GUTTER_ICON : PerlIcons.SCALAR_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "ARRAY"))
-		{
-			return PerlIcons.ARRAY_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "HASH"))
-		{
-			return PerlIcons.HASH_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "CODE"))
-		{
-			return PerlIcons.SUB_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "GLOB"))
-		{
-			return PerlIcons.GLOB_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "FORMAT"))
-		{
-			return PerlIcons.FORMAT_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "IO::File"))
-		{
-			return PerlIcons.HANDLE_GUTTER_ICON;
-		}
-		else if (StringUtil.startsWith(type, "Regexp"))
-		{
-			return PerlIcons.REGEX_GUTTER_ICON;
-		}
-		else if (myPerlValueDescriptor.isBlessed())
-		{
-			return PerlIcons.PACKAGE_GUTTER_ICON;
-		}
-		return null;
-	}
+  @Nullable
+  protected Icon calculateIcon() {
+    String type = myPerlValueDescriptor.getType();
+    if (StringUtil.isEmpty(type)) {
+      return null;
+    }
+    else if (StringUtil.startsWith(type, "SCALAR")) {
+      return myPerlValueDescriptor.isUtf() ? PerlIcons.UTF_SCALAR_GUTTER_ICON : PerlIcons.SCALAR_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "ARRAY")) {
+      return PerlIcons.ARRAY_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "HASH")) {
+      return PerlIcons.HASH_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "CODE")) {
+      return PerlIcons.SUB_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "GLOB")) {
+      return PerlIcons.GLOB_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "FORMAT")) {
+      return PerlIcons.FORMAT_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "IO::File")) {
+      return PerlIcons.HANDLE_GUTTER_ICON;
+    }
+    else if (StringUtil.startsWith(type, "Regexp")) {
+      return PerlIcons.REGEX_GUTTER_ICON;
+    }
+    else if (myPerlValueDescriptor.isBlessed()) {
+      return PerlIcons.PACKAGE_GUTTER_ICON;
+    }
+    return null;
+  }
 
 
-	@Override
-	public void computeSourcePosition(@NotNull XNavigatable navigatable)
-	{
-		if (!computeMySourcePosition(navigatable, null))
-		{
-			super.computeSourcePosition(navigatable);
-		}
-	}
+  @Override
+  public void computeSourcePosition(@NotNull XNavigatable navigatable) {
+    if (!computeMySourcePosition(navigatable, null)) {
+      super.computeSourcePosition(navigatable);
+    }
+  }
 
-	protected boolean computeMySourcePosition(@Nullable XNavigatable navigatable, @Nullable final XInlineDebuggerDataCallback callback)
-	{
-		String name = myPerlValueDescriptor.getName();
+  protected boolean computeMySourcePosition(@Nullable XNavigatable navigatable, @Nullable final XInlineDebuggerDataCallback callback) {
+    String name = myPerlValueDescriptor.getName();
 
-		if (StringUtil.isEmpty(name) || name.length() < 2)
-		{
-			return false;
-		}
+    if (StringUtil.isEmpty(name) || name.length() < 2) {
+      return false;
+    }
 
-		final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
-		if (variableType == null || variableType == PerlVariableType.CODE)
-		{
-			return false;
-		}
+    final PerlVariableType variableType = PerlVariableType.bySigil(name.charAt(0));
+    if (variableType == null || variableType == PerlVariableType.CODE) {
+      return false;
+    }
 
-		final String variableName = name.substring(1);
+    final String variableName = name.substring(1);
 
-		final XSourcePosition sourcePosition = myStackFrame.getSourcePosition();
-		if (sourcePosition == null)
-		{
-			return false;
-		}
+    final XSourcePosition sourcePosition = myStackFrame.getSourcePosition();
+    if (sourcePosition == null) {
+      return false;
+    }
 
-		final Project project = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugSession().getProject();
-		final VirtualFile virtualFile = sourcePosition.getFile();
-		PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
+    final Project project = myStackFrame.getPerlExecutionStack().getSuspendContext().getDebugSession().getProject();
+    final VirtualFile virtualFile = sourcePosition.getFile();
+    PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
 
-		if (!(psiFile instanceof PerlFileImpl))
-		{
-			return false;
-		}
+    if (!(psiFile instanceof PerlFileImpl)) {
+      return false;
+    }
 
-		PsiElement element = psiFile.findElementAt(sourcePosition.getOffset());
+    PsiElement element = psiFile.findElementAt(sourcePosition.getOffset());
 
-		if (element == null)
-		{
-			return false;
-		}
+    if (element == null) {
+      return false;
+    }
 
-		if (navigatable != null)
-		{
-			PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
-			PerlResolveUtil.treeWalkUp(element, variableProcessor);
+    if (navigatable != null) {
+      PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
+      PerlResolveUtil.treeWalkUp(element, variableProcessor);
 
-			PerlVariableDeclarationWrapper result = variableProcessor.getResult();
-			if (result == null)
-			{
-				return false;
-			}
+      PerlVariableDeclarationWrapper result = variableProcessor.getResult();
+      if (result == null) {
+        return false;
+      }
 
-			navigatable.setSourcePosition(XSourcePositionImpl.createByElement(result));
-		}
-		else if (callback != null)
-		{
-			final Document document = psiFile.getViewProvider().getDocument();
-			if (document == null)
-			{
-				return false;
-			}
+      navigatable.setSourcePosition(XSourcePositionImpl.createByElement(result));
+    }
+    else if (callback != null) {
+      final Document document = psiFile.getViewProvider().getDocument();
+      if (document == null) {
+        return false;
+      }
 
-			final boolean[] found = new boolean[]{false};
+      final boolean[] found = new boolean[]{false};
 
-			PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element)
-			{
-				@Override
-				public boolean execute(@NotNull PsiElement possibleElement, @NotNull ResolveState state)
-				{
-					boolean result = super.execute(possibleElement, state);
+      PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element) {
+        @Override
+        public boolean execute(@NotNull PsiElement possibleElement, @NotNull ResolveState state) {
+          boolean result = super.execute(possibleElement, state);
 
-					if (!result)
-					{
-						registerElement(getResult());
-					}
-					else if (possibleElement instanceof PerlVariable && ((PerlVariable) possibleElement).getActualType() == variableType && StringUtil.equals(variableName, ((PerlVariable) possibleElement).getName()))
-					{
-						registerElement(possibleElement);
-					}
+          if (!result) {
+            registerElement(getResult());
+          }
+          else if (possibleElement instanceof PerlVariable &&
+                   ((PerlVariable)possibleElement).getActualType() == variableType &&
+                   StringUtil.equals(variableName, ((PerlVariable)possibleElement).getName())) {
+            registerElement(possibleElement);
+          }
 
-					return result;
-				}
+          return result;
+        }
 
-				private void registerElement(@Nullable PsiElement targetElement)
-				{
-					if (targetElement == null)
-					{
-						return;
-					}
+        private void registerElement(@Nullable PsiElement targetElement) {
+          if (targetElement == null) {
+            return;
+          }
 
-					found[0] = true;
+          found[0] = true;
 
-					try
-					{
-						if (mySourcePositionMethod != null)
-						{
-							mySourcePositionMethod.invoke(callback, XSourcePositionImpl.createByElement(targetElement));
-						}
-						else if (myLegacyMethod != null)
-						{
-							myLegacyMethod.invoke(callback, virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
-						}
-						else
-						{
-							found[0] = false;
-						}
-					}
-					catch (InvocationTargetException e)
-					{
-						e.printStackTrace();
-					}
-					catch (IllegalAccessException e)
-					{
-						e.printStackTrace();
-					}
-				}
-			};
+          try {
+            if (mySourcePositionMethod != null) {
+              mySourcePositionMethod.invoke(callback, XSourcePositionImpl.createByElement(targetElement));
+            }
+            else if (myLegacyMethod != null) {
+              myLegacyMethod.invoke(callback, virtualFile, document, document.getLineNumber(targetElement.getTextOffset()));
+            }
+            else {
+              found[0] = false;
+            }
+          }
+          catch (InvocationTargetException e) {
+            e.printStackTrace();
+          }
+          catch (IllegalAccessException e) {
+            e.printStackTrace();
+          }
+        }
+      };
 
-			PerlResolveUtil.treeWalkUp(element, variableProcessor);
-			return found[0];
-
-		}
-		return true;
-	}
+      PerlResolveUtil.treeWalkUp(element, variableProcessor);
+      return found[0];
+    }
+    return true;
+  }
 
 
-	@NotNull
-	@Override
-	public ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback)
-	{
-		return computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO;
-	}
+  @NotNull
+  @Override
+  public ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback) {
+    return computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO;
+  }
 }

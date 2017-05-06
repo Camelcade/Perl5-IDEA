@@ -23,8 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.11.2015.
  */
-public interface PerlReferencesProvider extends PsiElement
-{
-	@Nullable
-	PsiReference[] getReferences(PsiElement element);
+public interface PerlReferencesProvider extends PsiElement {
+  @Nullable
+  PsiReference[] getReferences(PsiElement element);
 }

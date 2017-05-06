@@ -26,14 +26,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonAnnotator extends PerlBaseAnnotator
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if (element instanceof MasonMethodModifierName)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-		}
-	}
+public class MasonAnnotator extends PerlBaseAnnotator {
+  @Override
+  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    if (element instanceof MasonMethodModifierName) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+    }
+  }
 }

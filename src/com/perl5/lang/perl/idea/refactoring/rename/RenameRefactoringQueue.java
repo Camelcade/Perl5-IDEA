@@ -26,41 +26,32 @@ import com.intellij.refactoring.RenameRefactoring;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class RenameRefactoringQueue implements Runnable
-{
-	private final RenameRefactoring[] myRefactoring = {null};
-	private Project myProject;
+public class RenameRefactoringQueue implements Runnable {
+  private final RenameRefactoring[] myRefactoring = {null};
+  private Project myProject;
 
-	public RenameRefactoringQueue(Project project)
-	{
-		myProject = project;
-	}
+  public RenameRefactoringQueue(Project project) {
+    myProject = project;
+  }
 
-	public void addElement(PsiElement element, String newName)
-	{
-		if (element instanceof PsiNamedElement)
-		{
-			if (myRefactoring[0] == null)
-			{
-				myRefactoring[0] = RefactoringFactory.getInstance(myProject).createRename(element, newName);
-			}
-			else
-			{
-				myRefactoring[0].addElement(element, newName);
-			}
-		}
-	}
+  public void addElement(PsiElement element, String newName) {
+    if (element instanceof PsiNamedElement) {
+      if (myRefactoring[0] == null) {
+        myRefactoring[0] = RefactoringFactory.getInstance(myProject).createRename(element, newName);
+      }
+      else {
+        myRefactoring[0].addElement(element, newName);
+      }
+    }
+  }
 
-	public void run()
-	{
-		if (myRefactoring[0] != null)
-		{
-			ApplicationManager.getApplication().invokeLater(myRefactoring[0]::run);
-		}
-	}
+  public void run() {
+    if (myRefactoring[0] != null) {
+      ApplicationManager.getApplication().invokeLater(myRefactoring[0]::run);
+    }
+  }
 
-	public Project getProject()
-	{
-		return myProject;
-	}
+  public Project getProject() {
+    return myProject;
+  }
 }

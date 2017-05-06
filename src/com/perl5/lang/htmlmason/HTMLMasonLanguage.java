@@ -23,13 +23,11 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonLanguage extends Language implements TemplateLanguage
-{
-	public static final HTMLMasonLanguage INSTANCE = new HTMLMasonLanguage();
-	public static final String NAME = "HTML::Mason Templating Language";
+public class HTMLMasonLanguage extends Language implements TemplateLanguage {
+  public static final HTMLMasonLanguage INSTANCE = new HTMLMasonLanguage();
+  public static final String NAME = "HTML::Mason Templating Language";
 
-	public HTMLMasonLanguage()
-	{
-		super(PerlLanguage.INSTANCE, NAME);
-	}
+  public HTMLMasonLanguage() {
+    super(PerlLanguage.INSTANCE, NAME);
+  }
 }

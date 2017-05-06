@@ -27,51 +27,42 @@ import java.util.Collection;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclaration
-{
-	public PerlVariableDeclarationMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclaration {
+  public PerlVariableDeclarationMixin(ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	public String getDeclarationType()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		if (namespaceElement != null)
-		{
-			return namespaceElement.getCanonicalName();
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public String getDeclarationType() {
+    PerlNamespaceElement namespaceElement = getNamespaceElement();
+    if (namespaceElement != null) {
+      return namespaceElement.getCanonicalName();
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
+  @Nullable
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    return findChildByClass(PerlNamespaceElement.class);
+  }
 
-	@Override
-	@NotNull
-	public Collection<PsiPerlArrayVariable> getArrayVariableList()
-	{
-		return PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class);
-	}
+  @Override
+  @NotNull
+  public Collection<PsiPerlArrayVariable> getArrayVariableList() {
+    return PsiTreeUtil.findChildrenOfType(this, PsiPerlArrayVariable.class);
+  }
 
-	@Override
-	@NotNull
-	public Collection<PsiPerlHashVariable> getHashVariableList()
-	{
-		return PsiTreeUtil.findChildrenOfType(this, PsiPerlHashVariable.class);
-	}
+  @Override
+  @NotNull
+  public Collection<PsiPerlHashVariable> getHashVariableList() {
+    return PsiTreeUtil.findChildrenOfType(this, PsiPerlHashVariable.class);
+  }
 
-	@Override
-	@NotNull
-	public Collection<PsiPerlScalarVariable> getScalarVariableList()
-	{
-		return PsiTreeUtil.findChildrenOfType(this, PsiPerlScalarVariable.class);
-	}
-
+  @Override
+  @NotNull
+  public Collection<PsiPerlScalarVariable> getScalarVariableList() {
+    return PsiTreeUtil.findChildrenOfType(this, PsiPerlScalarVariable.class);
+  }
 }

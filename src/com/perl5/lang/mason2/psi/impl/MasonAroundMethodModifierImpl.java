@@ -28,29 +28,26 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl implements MasonAroundMethodModifier
-{
-	protected static final String ORIG_VARIABLE_NAME = "$orig";
+public class MasonAroundMethodModifierImpl extends MasonMethodModifierImpl implements MasonAroundMethodModifier {
+  protected static final String ORIG_VARIABLE_NAME = "$orig";
 
-	public MasonAroundMethodModifierImpl(ASTNode node)
-	{
-		super(node);
-	}
+  public MasonAroundMethodModifierImpl(ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
-		newImplicitVariables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				ORIG_VARIABLE_NAME,
-				true,
-				false,
-				false,
-				this
-		));
-		return newImplicitVariables;
-	}
+  @NotNull
+  @Override
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = super.buildImplicitVariables();
+    newImplicitVariables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      ORIG_VARIABLE_NAME,
+      true,
+      false,
+      false,
+      this
+    ));
+    return newImplicitVariables;
+  }
 }

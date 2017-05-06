@@ -19,6 +19,5 @@ package com.perl5.lang.pod.parser.psi;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionH3
-{
+public interface PodSectionH3 {
 }

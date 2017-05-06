@@ -32,74 +32,61 @@ import java.util.Map;
  * Created by hurricup on 03.10.2015.
  * Directory renaming being done using custom way
  */
-public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor
-{
-	public static void recursiveDirectoryMove(Project project, final PsiDirectory sourceRoot, PsiDirectory dstRoot)
-	{
-		for (PsiDirectory subDir : sourceRoot.getSubdirectories())
-		{
-			recursiveDirectoryMove(project, subDir, getOrCreateSubDir(dstRoot, subDir.getName()));
-		}
+public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
+  @Override
+  public boolean canProcessElement(@NotNull PsiElement element) {
+    return element instanceof PsiDirectory && canProcessDir((PsiDirectory)element);
+  }
 
-		PsiFile[] files = sourceRoot.getFiles();
-		if (files.length > 0)
-		{
-			new MoveFilesOrDirectoriesProcessor(project, files, dstRoot, false, false, () ->
-			{
-				PsiDirectory currentDir = sourceRoot;
+  protected boolean canProcessDir(PsiDirectory dir) {
+    return PerlUtil.getFileClassRoot(dir.getProject(), dir.getVirtualFile()) != null;
+  }
 
-				while (currentDir != null && currentDir.getFiles().length == 0 && currentDir.getSubdirectories().length == 0)
-				{
-					PsiDirectory parentDir = currentDir.getParentDirectory();
-					currentDir.delete();
-					currentDir = parentDir;
-				}
-			}, null).run();
-		}
-		else
-		{
-			sourceRoot.delete();
-		}
-	}
+  @Override
+  public void prepareRenaming(final PsiElement element, final String newName, Map<PsiElement, String> allRenames) {
+    allRenames.clear();
+    ApplicationManager.getApplication().runWriteAction(() -> renamePsiElement(element, newName));
+  }
 
-	public static PsiDirectory getOrCreateSubDir(PsiDirectory root, String dirName)
-	{
-		PsiDirectory result = root.findSubdirectory(dirName);
+  protected void renamePsiElement(PsiElement element, String newName) {
+    assert element instanceof PsiDirectory;
 
-		if (result == null)
-		{
-			result = root.createSubdirectory(dirName);
-		}
+    PsiDirectory currentRoot = ((PsiDirectory)element).getParentDirectory();
 
-		return result;
-	}
+    recursiveDirectoryMove(element.getProject(), (PsiDirectory)element, getOrCreateSubDir(currentRoot, newName));
+    //		element.delete();
+  }
 
-	@Override
-	public boolean canProcessElement(@NotNull PsiElement element)
-	{
-		return element instanceof PsiDirectory && canProcessDir((PsiDirectory) element);
+  public static void recursiveDirectoryMove(Project project, final PsiDirectory sourceRoot, PsiDirectory dstRoot) {
+    for (PsiDirectory subDir : sourceRoot.getSubdirectories()) {
+      recursiveDirectoryMove(project, subDir, getOrCreateSubDir(dstRoot, subDir.getName()));
+    }
 
-	}
+    PsiFile[] files = sourceRoot.getFiles();
+    if (files.length > 0) {
+      new MoveFilesOrDirectoriesProcessor(project, files, dstRoot, false, false, () ->
+      {
+        PsiDirectory currentDir = sourceRoot;
 
-	protected boolean canProcessDir(PsiDirectory dir)
-	{
-		return PerlUtil.getFileClassRoot(dir.getProject(), dir.getVirtualFile()) != null;
-	}
+        while (currentDir != null && currentDir.getFiles().length == 0 && currentDir.getSubdirectories().length == 0) {
+          PsiDirectory parentDir = currentDir.getParentDirectory();
+          currentDir.delete();
+          currentDir = parentDir;
+        }
+      }, null).run();
+    }
+    else {
+      sourceRoot.delete();
+    }
+  }
 
-	@Override
-	public void prepareRenaming(final PsiElement element, final String newName, Map<PsiElement, String> allRenames)
-	{
-		allRenames.clear();
-		ApplicationManager.getApplication().runWriteAction(() -> renamePsiElement(element, newName));
-	}
+  public static PsiDirectory getOrCreateSubDir(PsiDirectory root, String dirName) {
+    PsiDirectory result = root.findSubdirectory(dirName);
 
-	protected void renamePsiElement(PsiElement element, String newName)
-	{
-		assert element instanceof PsiDirectory;
+    if (result == null) {
+      result = root.createSubdirectory(dirName);
+    }
 
-		PsiDirectory currentRoot = ((PsiDirectory) element).getParentDirectory();
-
-		recursiveDirectoryMove(element.getProject(), (PsiDirectory) element, getOrCreateSubDir(currentRoot, newName));
-//		element.delete();
-	}
+    return result;
+  }
 }

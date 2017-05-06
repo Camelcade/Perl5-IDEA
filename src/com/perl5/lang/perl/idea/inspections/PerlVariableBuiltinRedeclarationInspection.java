@@ -25,15 +25,12 @@ import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection
-{
-	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
-	{
-		PerlVariable variable = variableDeclarationWrapper.getVariable();
-		PsiElement declarationContainer = variableDeclarationWrapper.getParent();
-		if (variable != null && variable.isBuiltIn() && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal))
-		{
-			registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
-		}
-	}
+public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection {
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+    PerlVariable variable = variableDeclarationWrapper.getVariable();
+    PsiElement declarationContainer = variableDeclarationWrapper.getParent();
+    if (variable != null && variable.isBuiltIn() && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
+      registerProblem(holder, variable, "It's a very bad practice to declare built-in variable as our/my/state");
+    }
+  }
 }

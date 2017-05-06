@@ -22,6 +22,5 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 /**
  * Created by hurricup on 28.12.2015.
  */
-public interface MasonParser extends Mason2ElementTypes, MooseElementTypes
-{
+public interface MasonParser extends Mason2ElementTypes, MooseElementTypes {
 }

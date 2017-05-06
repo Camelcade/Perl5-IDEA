@@ -22,13 +22,11 @@ import com.intellij.lang.PsiParser;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyRegexParser extends PerlParserImpl
-{
-	public static final PsiParser INSTANCE = new PerlLazyRegexParser();
+public class PerlLazyRegexParser extends PerlParserImpl {
+  public static final PsiParser INSTANCE = new PerlLazyRegexParser();
 
-	@Override
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		return perl_regex(b, l);
-	}
+  @Override
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    return perl_regex(b, l);
+  }
 }

@@ -23,11 +23,9 @@ import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonTemplatingPackageHierarchyProvider extends PerlPackageHierarchyProvider
-{
-	@Override
-	protected Language getLanguage()
-	{
-		return Mason2TemplatingLanguage.INSTANCE;
-	}
+public class MasonTemplatingPackageHierarchyProvider extends PerlPackageHierarchyProvider {
+  @Override
+  protected Language getLanguage() {
+    return Mason2TemplatingLanguage.INSTANCE;
+  }
 }

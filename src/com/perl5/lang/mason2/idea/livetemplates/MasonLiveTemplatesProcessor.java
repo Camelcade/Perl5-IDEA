@@ -30,25 +30,21 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.07.2016.
  */
-public class MasonLiveTemplatesProcessor extends HTMLMasonLiveTemplateProcessor
-{
-	@Override
-	protected boolean isMyFile(PsiFile file)
-	{
-		return file instanceof MasonTemplatingFileImpl;
-	}
+public class MasonLiveTemplatesProcessor extends HTMLMasonLiveTemplateProcessor {
+  @Override
+  protected boolean isMyFile(PsiFile file) {
+    return file instanceof MasonTemplatingFileImpl;
+  }
 
-	@NotNull
-	@Override
-	protected Language getMyLanguage()
-	{
-		return Mason2TemplatingLanguage.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected Language getMyLanguage() {
+    return Mason2TemplatingLanguage.INSTANCE;
+  }
 
-	@Nullable
-	@Override
-	protected PsiElement getOutlineElement(PsiElement firstElement)
-	{
-		return PsiUtilCore.getElementType(firstElement) == Mason2ElementTypes.MASON_LINE_OPENER ? firstElement : null;
-	}
+  @Nullable
+  @Override
+  protected PsiElement getOutlineElement(PsiElement firstElement) {
+    return PsiUtilCore.getElementType(firstElement) == Mason2ElementTypes.MASON_LINE_OPENER ? firstElement : null;
+  }
 }

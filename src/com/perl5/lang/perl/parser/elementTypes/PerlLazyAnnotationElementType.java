@@ -30,31 +30,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType
-{
-	public PerlLazyAnnotationElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType {
+  public PerlLazyAnnotationElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forAnnotation(project);
-	}
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return PerlSubLexerAdapter.forAnnotation(project);
+  }
 
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyAnnotationsParser.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected PsiParser getParser() {
+    return PerlLazyAnnotationsParser.INSTANCE;
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlAnnotationContainerImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlAnnotationContainerImpl(node);
+  }
 }

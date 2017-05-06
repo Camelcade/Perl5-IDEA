@@ -26,51 +26,41 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
  * Created by evstigneev on 16.11.2015.
  * Converting $$var{key} to $var->{key}
  */
-public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation
-{
-	protected final PsiPerlScalarCastExpr myScalarDereference;
+public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation {
+  protected final PsiPerlScalarCastExpr myScalarDereference;
 
-	public PerlFormattingScalarDerefExpand(PsiPerlScalarCastExpr scalarDereference)
-	{
-		myScalarDereference = scalarDereference;
-	}
+  public PerlFormattingScalarDerefExpand(PsiPerlScalarCastExpr scalarDereference) {
+    myScalarDereference = scalarDereference;
+  }
 
-	@Override
-	public int apply()
-	{
-		int delta = 0;
+  @Override
+  public int apply() {
+    int delta = 0;
 
-		if (myScalarDereference.isValid())
-		{
-			PsiElement parent = myScalarDereference.getParent();
-			PsiPerlScalarVariable scalarVariable = PsiTreeUtil.findChildOfType(myScalarDereference, PsiPerlScalarVariable.class);
-			if (parent.isValid() &&
-					(parent instanceof PsiPerlHashElement || parent instanceof PsiPerlArrayElement) &&
-					scalarVariable != null &&
-					scalarVariable.isValid())
-			{
-				PsiElement indexElement = parent.getLastChild();
-				if (indexElement.isValid() && (indexElement instanceof PsiPerlHashIndex || indexElement instanceof PsiPerlArrayIndex))
-				{
-					String newCode = scalarVariable.getNode().getText() + "->" + indexElement.getText();
-					PerlFileImpl newFile = PerlElementFactory.createFile(myScalarDereference.getProject(), newCode);
-					PsiPerlDerefExpr derefExpr = PsiTreeUtil.findChildOfType(newFile, PsiPerlDerefExpr.class);
-					if (derefExpr != null)
-					{
-						if (parent.getParent() instanceof PsiPerlDerefExpr)
-						{
-							delta = new PerlFormattingReplace(parent, parent, derefExpr.getFirstChild(), derefExpr.getLastChild()).apply();
-						}
-						else
-						{
-							delta = new PerlFormattingReplace(parent, derefExpr).apply();
-						}
-					}
-				}
-			}
-		}
+    if (myScalarDereference.isValid()) {
+      PsiElement parent = myScalarDereference.getParent();
+      PsiPerlScalarVariable scalarVariable = PsiTreeUtil.findChildOfType(myScalarDereference, PsiPerlScalarVariable.class);
+      if (parent.isValid() &&
+          (parent instanceof PsiPerlHashElement || parent instanceof PsiPerlArrayElement) &&
+          scalarVariable != null &&
+          scalarVariable.isValid()) {
+        PsiElement indexElement = parent.getLastChild();
+        if (indexElement.isValid() && (indexElement instanceof PsiPerlHashIndex || indexElement instanceof PsiPerlArrayIndex)) {
+          String newCode = scalarVariable.getNode().getText() + "->" + indexElement.getText();
+          PerlFileImpl newFile = PerlElementFactory.createFile(myScalarDereference.getProject(), newCode);
+          PsiPerlDerefExpr derefExpr = PsiTreeUtil.findChildOfType(newFile, PsiPerlDerefExpr.class);
+          if (derefExpr != null) {
+            if (parent.getParent() instanceof PsiPerlDerefExpr) {
+              delta = new PerlFormattingReplace(parent, parent, derefExpr.getFirstChild(), derefExpr.getLastChild()).apply();
+            }
+            else {
+              delta = new PerlFormattingReplace(parent, derefExpr).apply();
+            }
+          }
+        }
+      }
+    }
 
-		return delta;
-	}
-
+    return delta;
+  }
 }

@@ -21,10 +21,8 @@ import com.perl5.lang.perl.psi.PerlConstantDefinition;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlConstantStructureViewElement extends PerlLeafStructureViewElement
-{
-	public PerlConstantStructureViewElement(PerlConstantDefinition element)
-	{
-		super(element);
-	}
+public class PerlConstantStructureViewElement extends PerlLeafStructureViewElement {
+  public PerlConstantStructureViewElement(PerlConstantDefinition element) {
+    super(element);
+  }
 }

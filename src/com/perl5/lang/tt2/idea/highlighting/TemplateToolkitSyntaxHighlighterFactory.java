@@ -26,12 +26,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitSyntaxHighlighterFactory extends SyntaxHighlighterFactory
-{
-	@NotNull
-	@Override
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new TemplateToolkitSyntaxHighlighter(project);
-	}
+public class TemplateToolkitSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
+  @NotNull
+  @Override
+  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+    return new TemplateToolkitSyntaxHighlighter(project);
+  }
 }

@@ -23,15 +23,13 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitTemplateLanguageErrorFilter extends SmartTemplateLanguageErrorFilter implements TemplateToolkitElementTypes
-{
-	private static final TokenSet START_TOKENS = TokenSet.create(
-			TT2_OPEN_TAG,
-			TT2_OUTLINE_TAG
-	);
+public class TemplateToolkitTemplateLanguageErrorFilter extends SmartTemplateLanguageErrorFilter implements TemplateToolkitElementTypes {
+  private static final TokenSet START_TOKENS = TokenSet.create(
+    TT2_OPEN_TAG,
+    TT2_OUTLINE_TAG
+  );
 
-	public TemplateToolkitTemplateLanguageErrorFilter()
-	{
-		super(START_TOKENS, TemplateToolkitFileViewProvider.class);
-	}
+  public TemplateToolkitTemplateLanguageErrorFilter() {
+    super(START_TOKENS, TemplateToolkitFileViewProvider.class);
+  }
 }

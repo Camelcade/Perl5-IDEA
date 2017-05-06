@@ -23,11 +23,8 @@ import com.intellij.refactoring.rename.inplace.VariableInplaceRenamer;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlVariableInplaceRenamer extends VariableInplaceRenamer
-{
-	public PerlVariableInplaceRenamer(PsiNamedElement elementToRename, Editor editor)
-	{
-		super(elementToRename, editor);
-	}
-
+public class PerlVariableInplaceRenamer extends VariableInplaceRenamer {
+  public PerlVariableInplaceRenamer(PsiNamedElement elementToRename, Editor editor) {
+    super(elementToRename, editor);
+  }
 }

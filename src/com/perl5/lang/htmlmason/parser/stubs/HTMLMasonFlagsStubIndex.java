@@ -25,21 +25,18 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 10.03.2016.
  * Index used to handle parent-to-child hierarchy resolution
  */
-public class HTMLMasonFlagsStubIndex extends PerlStubIndexBase<HTMLMasonFlagsStatement>
-{
-	public static final StubIndexKey<String, HTMLMasonFlagsStatement> KEY = StubIndexKey.createIndexKey("perl.html.mason.flags");
-	public static final int VERSION = 2;
+public class HTMLMasonFlagsStubIndex extends PerlStubIndexBase<HTMLMasonFlagsStatement> {
+  public static final StubIndexKey<String, HTMLMasonFlagsStatement> KEY = StubIndexKey.createIndexKey("perl.html.mason.flags");
+  public static final int VERSION = 2;
 
-	@Override
-	public int getVersion()
-	{
-		return VERSION + super.getVersion();
-	}
+  @Override
+  public int getVersion() {
+    return VERSION + super.getVersion();
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, HTMLMasonFlagsStatement> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, HTMLMasonFlagsStatement> getKey() {
+    return KEY;
+  }
 }

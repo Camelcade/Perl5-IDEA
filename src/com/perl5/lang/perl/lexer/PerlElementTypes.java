@@ -24,7 +24,6 @@ import com.perl5.lang.pod.lexer.PodElementTypes;
 /**
  * Created by hurricup on 30.03.2016.
  */
-public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementTypes
-{
-	IElementType POD_BLOCK = new PodTemplatingElementType("POD_BLOCK", PerlLanguage.INSTANCE);
+public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementTypes {
+  IElementType POD_BLOCK = new PodTemplatingElementType("POD_BLOCK", PerlLanguage.INSTANCE);
 }

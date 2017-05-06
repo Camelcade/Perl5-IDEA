@@ -24,15 +24,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousReferencesContributor extends PsiReferenceContributor implements MojoliciousElementPatterns
-{
-	@Override
-	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
-	{
-		registrar.registerReferenceProvider(
-				MOJO_HELPER_USAGE,
-				new MojoliciousHelperReferencesProvider()
-		);
-
-	}
+public class MojoliciousReferencesContributor extends PsiReferenceContributor implements MojoliciousElementPatterns {
+  @Override
+  public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
+    registrar.registerReferenceProvider(
+      MOJO_HELPER_USAGE,
+      new MojoliciousHelperReferencesProvider()
+    );
+  }
 }

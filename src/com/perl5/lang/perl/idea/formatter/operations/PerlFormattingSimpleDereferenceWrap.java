@@ -22,16 +22,13 @@ import com.perl5.lang.perl.psi.PsiPerlScalarVariable;
 /**
  * Created by evstigneev on 17.11.2015.
  */
-public class PerlFormattingSimpleDereferenceWrap extends PerlFormattingSimpleDereferenceUnwrap
-{
-	public PerlFormattingSimpleDereferenceWrap(PerlCastExpression myCastElement, PsiPerlScalarVariable myVariableElement)
-	{
-		super(myCastElement, myVariableElement);
-	}
+public class PerlFormattingSimpleDereferenceWrap extends PerlFormattingSimpleDereferenceUnwrap {
+  public PerlFormattingSimpleDereferenceWrap(PerlCastExpression myCastElement, PsiPerlScalarVariable myVariableElement) {
+    super(myCastElement, myVariableElement);
+  }
 
-	@Override
-	protected String getCode()
-	{
-		return myCastElement.getFirstChild().getNode().getText() + "{" + myVariableElement.getNode().getText() + "}";
-	}
+  @Override
+  protected String getCode() {
+    return myCastElement.getFirstChild().getNode().getText() + "{" + myVariableElement.getNode().getText() + "}";
+  }
 }

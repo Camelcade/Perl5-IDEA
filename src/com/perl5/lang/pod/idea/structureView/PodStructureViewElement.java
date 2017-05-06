@@ -39,145 +39,118 @@ import java.util.List;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodStructureViewElement implements StructureViewTreeElement
-{
-	private final PsiElement myElement;
+public class PodStructureViewElement implements StructureViewTreeElement {
+  private final PsiElement myElement;
 
-	public PodStructureViewElement(PsiElement element)
-	{
-		myElement = element;
-	}
+  public PodStructureViewElement(PsiElement element) {
+    myElement = element;
+  }
 
-	@Override
-	public Object getValue()
-	{
-		return myElement;
-	}
+  @Override
+  public Object getValue() {
+    return myElement;
+  }
 
-	@Override
-	public void navigate(boolean requestFocus)
-	{
-		if (myElement instanceof NavigationItem)
-		{
-			((NavigationItem) myElement).navigate(requestFocus);
-		}
-	}
+  @Override
+  public void navigate(boolean requestFocus) {
+    if (myElement instanceof NavigationItem) {
+      ((NavigationItem)myElement).navigate(requestFocus);
+    }
+  }
 
-	@Override
-	public boolean canNavigate()
-	{
-		return myElement instanceof NavigationItem &&
-				((NavigationItem) myElement).canNavigate();
-	}
+  @Override
+  public boolean canNavigate() {
+    return myElement instanceof NavigationItem &&
+           ((NavigationItem)myElement).canNavigate();
+  }
 
-	@Override
-	public boolean canNavigateToSource()
-	{
-		return myElement instanceof NavigationItem &&
-				((NavigationItem) myElement).canNavigateToSource();
-	}
+  @Override
+  public boolean canNavigateToSource() {
+    return myElement instanceof NavigationItem &&
+           ((NavigationItem)myElement).canNavigateToSource();
+  }
 
-	@NotNull
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new ItemPresentation()
-		{
-			@Nullable
-			@Override
-			public String getPresentableText()
-			{
-				if (myElement instanceof PodFile)
-				{
-					return PerlBundle.message("pod.structure.view.file.title");
-				}
-				else if (myElement instanceof PodTitledSection)
-				{
-					String title = null;
-					if (myElement instanceof PodSectionItem && ((PodSectionItem) myElement).isBulleted())
-					{
-						PsiElement itemContent = ((PodSectionItem) myElement).getContentBlock();
-						if (itemContent != null)
-						{
-							title = PodRenderUtil.renderPsiElementAsText(itemContent);
-							if (title.length() > 80)
-							{
-								title = title.substring(0, 80) + "...";
-							}
-						}
-					}
+  @NotNull
+  @Override
+  public ItemPresentation getPresentation() {
+    return new ItemPresentation() {
+      @Nullable
+      @Override
+      public String getPresentableText() {
+        if (myElement instanceof PodFile) {
+          return PerlBundle.message("pod.structure.view.file.title");
+        }
+        else if (myElement instanceof PodTitledSection) {
+          String title = null;
+          if (myElement instanceof PodSectionItem && ((PodSectionItem)myElement).isBulleted()) {
+            PsiElement itemContent = ((PodSectionItem)myElement).getContentBlock();
+            if (itemContent != null) {
+              title = PodRenderUtil.renderPsiElementAsText(itemContent);
+              if (title.length() > 80) {
+                title = title.substring(0, 80) + "...";
+              }
+            }
+          }
 
-					if (title == null)
-					{
-						title = ((PodTitledSection) myElement).getTitleText();
-					}
-					if (StringUtil.isNotEmpty(title))
-					{
-						return title;
-					}
-				}
+          if (title == null) {
+            title = ((PodTitledSection)myElement).getTitleText();
+          }
+          if (StringUtil.isNotEmpty(title)) {
+            return title;
+          }
+        }
 
-				PsiElement tag = myElement.getFirstChild();
-				if (tag != null)
-				{
-					return tag.getText();
-				}
+        PsiElement tag = myElement.getFirstChild();
+        if (tag != null) {
+          return tag.getText();
+        }
 
-				return null;
-			}
+        return null;
+      }
 
-			@Nullable
-			@Override
-			public String getLocationString()
-			{
-				return null;
-			}
+      @Nullable
+      @Override
+      public String getLocationString() {
+        return null;
+      }
 
-			@Nullable
-			@Override
-			public Icon getIcon(boolean unused)
-			{
-				return myElement instanceof PsiFile ? PerlIcons.POD_FILE : myElement.getIcon(0);
-			}
-		};
-	}
+      @Nullable
+      @Override
+      public Icon getIcon(boolean unused) {
+        return myElement instanceof PsiFile ? PerlIcons.POD_FILE : myElement.getIcon(0);
+      }
+    };
+  }
 
 
-	@NotNull
-	@Override
-	public TreeElement[] getChildren()
-	{
-		List<PodStructureViewElement> result = new ArrayList<PodStructureViewElement>();
+  @NotNull
+  @Override
+  public TreeElement[] getChildren() {
+    List<PodStructureViewElement> result = new ArrayList<PodStructureViewElement>();
 
-		PsiElement container = null;
-		if (myElement instanceof PodSection)
-		{
-			container = ((PodSection) myElement).getContentBlock();
-		}
+    PsiElement container = null;
+    if (myElement instanceof PodSection) {
+      container = ((PodSection)myElement).getContentBlock();
+    }
 
-		if (container == null)
-		{
-			container = myElement;
-		}
+    if (container == null) {
+      container = myElement;
+    }
 
 
-		for (PsiElement element : container.getChildren())
-		{
-			if (element instanceof PodStructureElement)
-			{
-				if (!(element instanceof PsiCutSection || element instanceof PsiPodSection))
-				{
-					result.add(new PodStructureViewElement(element));
-				}
-			}
-		}
+    for (PsiElement element : container.getChildren()) {
+      if (element instanceof PodStructureElement) {
+        if (!(element instanceof PsiCutSection || element instanceof PsiPodSection)) {
+          result.add(new PodStructureViewElement(element));
+        }
+      }
+    }
 
-		if (result.size() == 1 && result.get(0).getValue() instanceof PodSectionOver)
-		{
-			// expanding over
-			return result.get(0).getChildren();
-		}
+    if (result.size() == 1 && result.get(0).getValue() instanceof PodSectionOver) {
+      // expanding over
+      return result.get(0).getChildren();
+    }
 
-		return result.toArray(new TreeElement[result.size()]);
-	}
+    return result.toArray(new TreeElement[result.size()]);
+  }
 }

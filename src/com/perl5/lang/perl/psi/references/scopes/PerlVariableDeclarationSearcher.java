@@ -29,48 +29,40 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
-{
-	private final String myName;
-	private final PerlVariableType myVariableType;
-	private final PsiElement myVariable;
-	private PerlVariableDeclarationWrapper myResult;
-//	private PerlVariable myPossibleResult;
+public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor {
+  private final String myName;
+  private final PerlVariableType myVariableType;
+  private final PsiElement myVariable;
+  private PerlVariableDeclarationWrapper myResult;
+  //	private PerlVariable myPossibleResult;
 
-	public PerlVariableDeclarationSearcher(String name, PerlVariableType variableType, PsiElement anchorElement)
-	{
-		myName = name;
-		myVariableType = variableType;
-		myVariable = anchorElement;
-	}
+  public PerlVariableDeclarationSearcher(String name, PerlVariableType variableType, PsiElement anchorElement) {
+    myName = name;
+    myVariableType = variableType;
+    myVariable = anchorElement;
+  }
 
-	public PerlVariableDeclarationSearcher(@NotNull PerlVariable variable)
-	{
-		this(variable.getName(), variable.getActualType(), variable);
-	}
+  public PerlVariableDeclarationSearcher(@NotNull PerlVariable variable) {
+    this(variable.getName(), variable.getActualType(), variable);
+  }
 
-	@Override
-	public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state)
-	{
-		if (element instanceof PerlVariableDeclarationWrapper)
-		{
-			PerlVariable variable = ((PerlVariableDeclarationWrapper) element).getVariable();
-			if (variable != null)
-			{
-				if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName()))
-				{
-					PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+  @Override
+  public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
+    if (element instanceof PerlVariableDeclarationWrapper) {
+      PerlVariable variable = ((PerlVariableDeclarationWrapper)element).getVariable();
+      if (variable != null) {
+        if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
+          PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
-					if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false))
-					{
-						myResult = (PerlVariableDeclarationWrapper) element;
-						return false;
-					}
-				}
-			}
-		}
+          if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
+            myResult = (PerlVariableDeclarationWrapper)element;
+            return false;
+          }
+        }
+      }
+    }
 /*
-		else if( myPossibleResult == null &&
+                else if( myPossibleResult == null &&
 				element instanceof PerlVariable && ((PerlVariable) element).getNamespaceElement() == null &&
 				((PerlVariable) element).getActualType() == myVariableType &&
 				StringUtil.equals(((PerlVariable) element).getName(), myName)
@@ -79,19 +71,18 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor
 			myPossibleResult = (PerlVariable)element;
 		}
 */
-		return true;
-	}
+    return true;
+  }
 
-	public PerlVariableDeclarationWrapper getResult()
-	{
-		return myResult;
-	}
+  public PerlVariableDeclarationWrapper getResult() {
+    return myResult;
+  }
 
 /*
 	*/
-/**
- * If we've found possible result in this statement and not found a real declaration - use it
- *//*
+  /**
+   * If we've found possible result in this statement and not found a real declaration - use it
+   *//*
 
 	public boolean applyPossibleResult()
 	{

@@ -27,51 +27,43 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionFormattedMixin extends PodSectionMixin implements PodSectionFormatted
-{
+public class PodSectionFormattedMixin extends PodSectionMixin implements PodSectionFormatted {
 
-	public PodSectionFormattedMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PodSectionFormattedMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	protected PsiElement getFormatterElement()
-	{
-		return findChildByClass(PsiPodSectionFormat.class);
-	}
+  @Nullable
+  protected PsiElement getFormatterElement() {
+    return findChildByClass(PsiPodSectionFormat.class);
+  }
 
-	@Nullable
-	protected PsiElement getFormatterNameElement()
-	{
-		PsiElement formatterElement = getFormatterElement();
+  @Nullable
+  protected PsiElement getFormatterNameElement() {
+    PsiElement formatterElement = getFormatterElement();
 
-		if (formatterElement != null)
-		{
-			ASTNode formatterNode = formatterElement.getNode();
-			ASTNode formatterNameNode = formatterNode.findChildByType(POD_FORMAT_NAME);
-			return formatterNameNode == null ? null : formatterNameNode.getPsi();
-		}
-		return null;
-	}
+    if (formatterElement != null) {
+      ASTNode formatterNode = formatterElement.getNode();
+      ASTNode formatterNameNode = formatterNode.findChildByType(POD_FORMAT_NAME);
+      return formatterNameNode == null ? null : formatterNameNode.getPsi();
+    }
+    return null;
+  }
 
-	@Nullable
-	public String getFormatterName()
-	{
-		PsiElement formatterNameElement = getFormatterNameElement();
-		return formatterNameElement == null ? null : formatterNameElement.getText();
-	}
+  @Nullable
+  public String getFormatterName() {
+    PsiElement formatterNameElement = getFormatterNameElement();
+    return formatterNameElement == null ? null : formatterNameElement.getText();
+  }
 
-	@Override
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		String formatterName = getFormatterName();
-		if (FORMAT_HTML.equals(formatterName))
-		{
-			boolean isSafe = context.isSafe();
-			context.setSafe(true);
-			super.renderElementContentAsHTML(builder, context);
-			context.setSafe(isSafe);
-		}
-	}
+  @Override
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    String formatterName = getFormatterName();
+    if (FORMAT_HTML.equals(formatterName)) {
+      boolean isSafe = context.isSafe();
+      context.setSafe(true);
+      super.renderElementContentAsHTML(builder, context);
+      context.setSafe(isSafe);
+    }
+  }
 }

@@ -35,58 +35,48 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonComponentCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result)
-	{
-		PsiElement position = parameters.getPosition();
-		PsiElement parent = position.getParent();
-		PsiFile file = position.getContainingFile();
+public class HTMLMasonComponentCompletionProvider extends CompletionProvider<CompletionParameters> {
+  @Override
+  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+    PsiElement position = parameters.getPosition();
+    PsiElement parent = position.getParent();
+    PsiFile file = position.getContainingFile();
 
-		if (parent instanceof PerlString && file instanceof HTMLMasonFileImpl)
-		{
-			PsiReference[] references = parent.getReferences();
-			for (PsiReference reference : references)
-			{
-				TextRange refRange = reference.getRangeInElement();
-				if (refRange.contains(position.getStartOffsetInParent()))
-				{
-					Project project = position.getProject();
+    if (parent instanceof PerlString && file instanceof HTMLMasonFileImpl) {
+      PsiReference[] references = parent.getReferences();
+      for (PsiReference reference : references) {
+        TextRange refRange = reference.getRangeInElement();
+        if (refRange.contains(position.getStartOffsetInParent())) {
+          Project project = position.getProject();
 
-					String fullPrefix = refRange.substring(parent.getText())
-							.replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
-							.replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
+          String fullPrefix = refRange.substring(parent.getText())
+            .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
+            .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
 
-					final CompletionResultSet finalResultSet = result.withPrefixMatcher(fullPrefix);
-					;
+          final CompletionResultSet finalResultSet = result.withPrefixMatcher(fullPrefix);
+          ;
 
-					if (reference instanceof HTMLMasonMethodReference)
-					{
-						PsiElement firstReferenceTarget = references[0].resolve();
-						if (firstReferenceTarget instanceof HTMLMasonFileImpl)
-						{
-							HTMLMasonCompletionUtil.fillWithMethods(finalResultSet, (HTMLMasonFileImpl) firstReferenceTarget);
-						}
-					}
-					else
-					{
-						HTMLMasonCompletionUtil.fillWithComponentSlugs(finalResultSet);
-						HTMLMasonCompletionUtil.fillWithSubcomponents(finalResultSet, (HTMLMasonFileImpl) file);
-						if (!StringUtil.startsWith(fullPrefix, "/"))
-						{
-							HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(finalResultSet, project, (HTMLMasonFileImpl) file);
-						}
-						else
-						{
-							HTMLMasonCompletionUtil.fillWithAbsoluteSubcomponents(finalResultSet, project);
-						}
-					}
+          if (reference instanceof HTMLMasonMethodReference) {
+            PsiElement firstReferenceTarget = references[0].resolve();
+            if (firstReferenceTarget instanceof HTMLMasonFileImpl) {
+              HTMLMasonCompletionUtil.fillWithMethods(finalResultSet, (HTMLMasonFileImpl)firstReferenceTarget);
+            }
+          }
+          else {
+            HTMLMasonCompletionUtil.fillWithComponentSlugs(finalResultSet);
+            HTMLMasonCompletionUtil.fillWithSubcomponents(finalResultSet, (HTMLMasonFileImpl)file);
+            if (!StringUtil.startsWith(fullPrefix, "/")) {
+              HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(finalResultSet, project, (HTMLMasonFileImpl)file);
+            }
+            else {
+              HTMLMasonCompletionUtil.fillWithAbsoluteSubcomponents(finalResultSet, project);
+            }
+          }
 
-					result.stopHere();
-					break;
-				}
-			}
-		}
-	}
+          result.stopHere();
+          break;
+        }
+      }
+    }
+  }
 }

@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public interface PerlSwitchCompoundStatement extends PsiElement
-{
+public interface PerlSwitchCompoundStatement extends PsiElement {
 }

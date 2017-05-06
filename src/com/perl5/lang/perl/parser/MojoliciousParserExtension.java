@@ -21,6 +21,5 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousParserExtension extends MojoliciousElementTypes
-{
+public interface MojoliciousParserExtension extends MojoliciousElementTypes {
 }

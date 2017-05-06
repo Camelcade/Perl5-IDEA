@@ -24,35 +24,30 @@ import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub
-{
-	private final String packageName;
-	private final String variableName;
-	private final boolean isLeftSideOfAssignment;
+public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub {
+  private final String packageName;
+  private final String variableName;
+  private final boolean isLeftSideOfAssignment;
 
-	public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment)
-	{
-		super(parent, PerlStubElementTypes.PERL_GLOB);
-		this.packageName = packageName;
-		this.variableName = variableName;
-		this.isLeftSideOfAssignment = isLeftSideOfAssignment;
-	}
+  public PerlGlobStubImpl(final StubElement parent, final String packageName, final String variableName, boolean isLeftSideOfAssignment) {
+    super(parent, PerlStubElementTypes.PERL_GLOB);
+    this.packageName = packageName;
+    this.variableName = variableName;
+    this.isLeftSideOfAssignment = isLeftSideOfAssignment;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return packageName;
-	}
+  @Override
+  public String getPackageName() {
+    return packageName;
+  }
 
-	@Override
-	public String getName()
-	{
-		return variableName;
-	}
+  @Override
+  public String getName() {
+    return variableName;
+  }
 
-	@Override
-	public boolean isLeftSideOfAssignment()
-	{
-		return isLeftSideOfAssignment;
-	}
+  @Override
+  public boolean isLeftSideOfAssignment() {
+    return isLeftSideOfAssignment;
+  }
 }

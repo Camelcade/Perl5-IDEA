@@ -37,117 +37,107 @@ import java.util.List;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars
-{
-	/**
-	 * Checks if variable is built in
-	 *
-	 * @param variable variable name
-	 * @return checking result
-	 */
-	public static boolean isBuiltIn(String variable)
-	{
-		return BUILT_IN.contains(variable);
-	}
+public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
+  /**
+   * Checks if variable is built in
+   *
+   * @param variable variable name
+   * @return checking result
+   */
+  public static boolean isBuiltIn(String variable) {
+    return BUILT_IN.contains(variable);
+  }
 
-	/**
-	 * Searching project files for global scalar definitions by specific package and variable name
-	 *
-	 * @param project       project to search in
-	 * @param canonicalName canonical variable name package::name
-	 * @return Collection of found definitions
-	 */
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName)
-	{
-		return getGlobalScalarDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
-	}
+  /**
+   * Searching project files for global scalar definitions by specific package and variable name
+   *
+   * @param project       project to search in
+   * @param canonicalName canonical variable name package::name
+   * @return Collection of found definitions
+   */
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName) {
+    return getGlobalScalarDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+  }
 
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
-	{
-		if (canonicalName == null)
-		{
-			return Collections.emptyList();
-		}
-		return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
-				canonicalName,
-				project,
-				scope,
-				PerlVariableDeclarationWrapper.class
-		);
-	}
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project,
+                                                                                      String canonicalName,
+                                                                                      GlobalSearchScope scope) {
+    if (canonicalName == null) {
+      return Collections.emptyList();
+    }
+    return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
+                                 canonicalName,
+                                 project,
+                                 scope,
+                                 PerlVariableDeclarationWrapper.class
+    );
+  }
 
 
-	/**
-	 * Returns list of defined global scalars
-	 *
-	 * @param project project to search in
-	 * @return collection of variable canonical names
-	 */
-	public static Collection<String> getDefinedGlobalScalarNames(Project project)
-	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_SCALAR, project);
-	}
+  /**
+   * Returns list of defined global scalars
+   *
+   * @param project project to search in
+   * @return collection of variable canonical names
+   */
+  public static Collection<String> getDefinedGlobalScalarNames(Project project) {
+    return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_SCALAR, project);
+  }
 
-	/**
-	 * Processes all global scalars with specific processor
-	 *
-	 * @param project   project to search in
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
-	 */
-	public static boolean processDefinedGlobalScalars(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
-	{
-		return processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
-	}
+  /**
+   * Processes all global scalars with specific processor
+   *
+   * @param project   project to search in
+   * @param processor string processor for suitable strings
+   * @return collection of constants names
+   */
+  public static boolean processDefinedGlobalScalars(@NotNull Project project,
+                                                    @NotNull GlobalSearchScope scope,
+                                                    @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+    return processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
+  }
 
-	/**
-	 * Method for processing global indexed variables
-	 *
-	 * @param key       stub index key
-	 * @param project   project
-	 * @param scope     scope to search
-	 * @param processor process to process
-	 * @return false if we should stop processing
-	 */
-	public static boolean processDefinedGlobalVariables(
-			@NotNull StubIndexKey<String, PerlVariableDeclarationWrapper> key,
-			@NotNull Project project,
-			@NotNull GlobalSearchScope scope,
-			@NotNull Processor<PerlVariableDeclarationWrapper> processor)
-	{
-		StubIndex stubIndex = StubIndex.getInstance();
-		for (String variableName : stubIndex.getAllKeys(key, project))
-		{
-			if (variableName.length() == 0)
-			{
-				return true;
-			}
+  /**
+   * Method for processing global indexed variables
+   *
+   * @param key       stub index key
+   * @param project   project
+   * @param scope     scope to search
+   * @param processor process to process
+   * @return false if we should stop processing
+   */
+  public static boolean processDefinedGlobalVariables(
+    @NotNull StubIndexKey<String, PerlVariableDeclarationWrapper> key,
+    @NotNull Project project,
+    @NotNull GlobalSearchScope scope,
+    @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+    StubIndex stubIndex = StubIndex.getInstance();
+    for (String variableName : stubIndex.getAllKeys(key, project)) {
+      if (variableName.length() == 0) {
+        return true;
+      }
 
-			char firstChar = variableName.charAt(0);
-			if (firstChar == '_' || Character.isLetterOrDigit(firstChar))
-			{
-				if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationWrapper.class, processor))
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+      char firstChar = variableName.charAt(0);
+      if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
+        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationWrapper.class, processor)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
 
-	/**
-	 * Returns a map of imported scalars names
-	 *
-	 * @param rootElement element to start looking from
-	 * @return result map
-	 */
-	@NotNull
-	public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull PsiElement rootElement)
-	{
-		PerlImportsCollector collector = new PerlScalarImportsCollector();
-		PerlUtil.processImportedEntities(rootElement, collector);
-		return collector.getResult();
-	}
-
+  /**
+   * Returns a map of imported scalars names
+   *
+   * @param rootElement element to start looking from
+   * @return result map
+   */
+  @NotNull
+  public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull PsiElement rootElement) {
+    PerlImportsCollector collector = new PerlScalarImportsCollector();
+    PerlUtil.processImportedEntities(rootElement, collector);
+    return collector.getResult();
+  }
 }

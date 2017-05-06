@@ -24,19 +24,15 @@ import com.intellij.AbstractBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-public class PerlBundle extends AbstractBundle
-{
-	private static final PerlBundle INSTANCE = new PerlBundle();
-	private static final String PATH_TO_BUNDLE = "messages.PerlBundle";
+public class PerlBundle extends AbstractBundle {
+  private static final PerlBundle INSTANCE = new PerlBundle();
+  private static final String PATH_TO_BUNDLE = "messages.PerlBundle";
 
-	public PerlBundle()
-	{
-		super(PATH_TO_BUNDLE);
-	}
+  public PerlBundle() {
+    super(PATH_TO_BUNDLE);
+  }
 
-	public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params)
-	{
-		return INSTANCE.getMessage(key, params);
-	}
-
+  public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
+    return INSTANCE.getMessage(key, params);
+  }
 }

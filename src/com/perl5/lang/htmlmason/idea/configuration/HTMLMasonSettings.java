@@ -45,180 +45,153 @@ import java.util.Map;
  * Created by hurricup on 05.03.2016.
  */
 @State(
-		name = "HTMLMasonSettings",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "HTMLMasonSettings",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings>, HTMLMasonElementTypes
-{
+public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings>, HTMLMasonElementTypes {
 
-	public String autoHandlerName = "autohandler";
-	public String defaultHandlerName = "dhandler";
-	public List<String> substitutedExtensions = new ArrayList<String>();
-	public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
+  public String autoHandlerName = "autohandler";
+  public String defaultHandlerName = "dhandler";
+  public List<String> substitutedExtensions = new ArrayList<String>();
+  public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
 
-	private transient Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<>();
-	private transient Map<String, String> myOpenCloseMap;
-	private transient AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider;
+  private transient Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<>();
+  private transient Map<String, String> myOpenCloseMap;
+  private transient AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider;
 
-	public HTMLMasonSettings(@NotNull Project project)
-	{
-		this();
-		myProject = project;
-	}
+  public HTMLMasonSettings(@NotNull Project project) {
+    this();
+    myProject = project;
+  }
 
-	private HTMLMasonSettings()
-	{
-		globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
-		globalVariables.add(new VariableDescription("$r", "Apache::Request"));
-		changeCounter++;
-		initCustomTagsMapProvider();
-	}
+  private HTMLMasonSettings() {
+    globalVariables.add(new VariableDescription("$m", "HTML::Mason::Request"));
+    globalVariables.add(new VariableDescription("$r", "Apache::Request"));
+    changeCounter++;
+    initCustomTagsMapProvider();
+  }
 
-	@NotNull
-	public static HTMLMasonSettings getInstance(@NotNull Project project)
-	{
-		return ServiceManager.getService(project, HTMLMasonSettings.class);
-	}
+  private void initCustomTagsMapProvider() {
+    myCustomTagsMapProvider = new AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>>() {
+      @Nullable
+      @Override
+      protected Map<String, HTMLMasonCustomTag> compute() {
+        if (customTags.isEmpty()) {
+          return null;
+        }
 
-	private void initCustomTagsMapProvider()
-	{
-		myCustomTagsMapProvider = new AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>>()
-		{
-			@Nullable
-			@Override
-			protected Map<String, HTMLMasonCustomTag> compute()
-			{
-				if (customTags.isEmpty())
-				{
-					return null;
-				}
+        Map<String, HTMLMasonCustomTag> result = new THashMap<>();
 
-				Map<String, HTMLMasonCustomTag> result = new THashMap<>();
+        for (HTMLMasonCustomTag customTag : customTags) {
+          result.put(customTag.getText(), customTag);
+        }
 
-				for (HTMLMasonCustomTag customTag : customTags)
-				{
-					result.put(customTag.getText(), customTag);
-				}
+        return result;
+      }
+    };
+  }
 
-				return result;
-			}
-		};
-	}
+  @Nullable
+  @Override
+  public HTMLMasonSettings getState() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public HTMLMasonSettings getState()
-	{
-		return this;
-	}
+  @Override
+  public void loadState(HTMLMasonSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+    changeCounter++;
+  }
 
-	@Override
-	public void loadState(HTMLMasonSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-		changeCounter++;
-	}
+  public void removeSubstitutors() {
+    for (Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry : substitutorMap.entrySet()) {
+      LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
+    }
+    substitutorMap.clear();
+  }
 
-	public void removeSubstitutors()
-	{
-		for (Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry : substitutorMap.entrySet())
-		{
-			LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
-		}
-		substitutorMap.clear();
-	}
+  public void updateSubstitutors() {
+    // unregister
+    Iterator<Map.Entry<String, Pair<Language, LanguageSubstitutor>>> iterator = substitutorMap.entrySet().iterator();
+    while (iterator.hasNext()) {
+      Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry = iterator.next();
+      if (!substitutedExtensions.contains(entry.getKey())) {
+        //				System.err.println("Unregistering " + entry.getKey());
+        LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
+        iterator.remove();
+      }
+    }
 
-	public void updateSubstitutors()
-	{
-		// unregister
-		Iterator<Map.Entry<String, Pair<Language, LanguageSubstitutor>>> iterator = substitutorMap.entrySet().iterator();
-		while (iterator.hasNext())
-		{
-			Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry = iterator.next();
-			if (!substitutedExtensions.contains(entry.getKey()))
-			{
-//				System.err.println("Unregistering " + entry.getKey());
-				LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
-				iterator.remove();
-			}
+    // register
+    FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+    for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+      if (fileType instanceof LanguageFileType) {
+        Language language = ((LanguageFileType)fileType).getLanguage();
+        for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+          String presentableString = matcher.getPresentableString();
+          if (substitutedExtensions.contains(presentableString) && !substitutorMap.containsKey(presentableString)) {
+            //						System.err.println("Registering " + presentableString);
+            LanguageSubstitutor substitutor = new HTMLMasonLanguageSubstitutor(myProject, matcher);
 
-		}
+            LanguageSubstitutors.INSTANCE.addExplicitExtension(language, substitutor);
+            substitutorMap.put(presentableString, Pair.create(language, substitutor));
+          }
+        }
+      }
+    }
+  }
 
-		// register
-		FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-		for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
-		{
-			if (fileType instanceof LanguageFileType)
-			{
-				Language language = ((LanguageFileType) fileType).getLanguage();
-				for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
-				{
-					String presentableString = matcher.getPresentableString();
-					if (substitutedExtensions.contains(presentableString) && !substitutorMap.containsKey(presentableString))
-					{
-//						System.err.println("Registering " + presentableString);
-						LanguageSubstitutor substitutor = new HTMLMasonLanguageSubstitutor(myProject, matcher);
+  @Override
+  public void settingsUpdated() {
+    super.settingsUpdated();
+    myOpenCloseMap = null;
+    initCustomTagsMapProvider();
+  }
 
-						LanguageSubstitutors.INSTANCE.addExplicitExtension(language, substitutor);
-						substitutorMap.put(presentableString, Pair.create(language, substitutor));
-					}
-				}
-			}
-		}
-	}
+  public void prepareLexerConfiguration() {
+    myOpenCloseMap = new THashMap<>();
+    myOpenCloseMap.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
+    myOpenCloseMap.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
+    myOpenCloseMap.put(KEYWORD_CLEANUP_OPENER, KEYWORD_CLEANUP_CLOSER);
+    myOpenCloseMap.put(KEYWORD_ONCE_OPENER, KEYWORD_ONCE_CLOSER);
+    myOpenCloseMap.put(KEYWORD_SHARED_OPENER, KEYWORD_SHARED_CLOSER);
+    myOpenCloseMap.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
+    myOpenCloseMap.put(KEYWORD_ATTR_OPENER, KEYWORD_ATTR_CLOSER);
+    myOpenCloseMap.put(KEYWORD_ARGS_OPENER, KEYWORD_ARGS_CLOSER);
+    myOpenCloseMap.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
+    myOpenCloseMap.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
+    myOpenCloseMap.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
 
-	@Override
-	public void settingsUpdated()
-	{
-		super.settingsUpdated();
-		myOpenCloseMap = null;
-		initCustomTagsMapProvider();
-	}
+    // parametrized
+    myOpenCloseMap.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
+    myOpenCloseMap.put(KEYWORD_DEF_OPENER, KEYWORD_DEF_CLOSER);
 
-	public void prepareLexerConfiguration()
-	{
-		myOpenCloseMap = new THashMap<>();
-		myOpenCloseMap.put(KEYWORD_PERL_OPENER, KEYWORD_PERL_CLOSER);
-		myOpenCloseMap.put(KEYWORD_INIT_OPENER, KEYWORD_INIT_CLOSER);
-		myOpenCloseMap.put(KEYWORD_CLEANUP_OPENER, KEYWORD_CLEANUP_CLOSER);
-		myOpenCloseMap.put(KEYWORD_ONCE_OPENER, KEYWORD_ONCE_CLOSER);
-		myOpenCloseMap.put(KEYWORD_SHARED_OPENER, KEYWORD_SHARED_CLOSER);
-		myOpenCloseMap.put(KEYWORD_FLAGS_OPENER, KEYWORD_FLAGS_CLOSER);
-		myOpenCloseMap.put(KEYWORD_ATTR_OPENER, KEYWORD_ATTR_CLOSER);
-		myOpenCloseMap.put(KEYWORD_ARGS_OPENER, KEYWORD_ARGS_CLOSER);
-		myOpenCloseMap.put(KEYWORD_FILTER_OPENER, KEYWORD_FILTER_CLOSER);
-		myOpenCloseMap.put(KEYWORD_DOC_OPENER, KEYWORD_DOC_CLOSER);
-		myOpenCloseMap.put(KEYWORD_TEXT_OPENER, KEYWORD_TEXT_CLOSER);
+    // iterate custom tags
+    for (HTMLMasonCustomTag customTag : customTags) {
+      myOpenCloseMap.put(customTag.getOpenTagText(), customTag.getCloseTagText());
+    }
 
-		// parametrized
-		myOpenCloseMap.put(KEYWORD_METHOD_OPENER, KEYWORD_METHOD_CLOSER);
-		myOpenCloseMap.put(KEYWORD_DEF_OPENER, KEYWORD_DEF_CLOSER);
+    //		System.err.println("HTML::Mason lexer settings prepared");
+  }
 
-		// iterate custom tags
-		for (HTMLMasonCustomTag customTag : customTags)
-		{
-			myOpenCloseMap.put(customTag.getOpenTagText(), customTag.getCloseTagText());
-		}
+  public Map<String, String> getOpenCloseMap() {
+    if (myOpenCloseMap == null) {
+      prepareLexerConfiguration();
+    }
+    return myOpenCloseMap;
+  }
 
-//		System.err.println("HTML::Mason lexer settings prepared");
-	}
+  @Nullable
+  public Map<String, HTMLMasonCustomTag> getCustomTagsMap() {
+    return myCustomTagsMapProvider.getValue();
+  }
 
-	public Map<String, String> getOpenCloseMap()
-	{
-		if (myOpenCloseMap == null)
-		{
-			prepareLexerConfiguration();
-		}
-		return myOpenCloseMap;
-	}
-
-	@Nullable
-	public Map<String, HTMLMasonCustomTag> getCustomTagsMap()
-	{
-		return myCustomTagsMapProvider.getValue();
-	}
+  @NotNull
+  public static HTMLMasonSettings getInstance(@NotNull Project project) {
+    return ServiceManager.getService(project, HTMLMasonSettings.class);
+  }
 }

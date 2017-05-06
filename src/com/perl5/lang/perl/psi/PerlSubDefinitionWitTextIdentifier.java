@@ -21,6 +21,5 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public interface PerlSubDefinitionWitTextIdentifier extends PerlSubDefinitionBase<PerlSubDefinitionStub>
-{
+public interface PerlSubDefinitionWitTextIdentifier extends PerlSubDefinitionBase<PerlSubDefinitionStub> {
 }

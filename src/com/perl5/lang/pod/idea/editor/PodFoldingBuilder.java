@@ -37,153 +37,127 @@ import java.util.List;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware
-{
-	@NotNull
-	@Override
-	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
-	{
-		// @todo handle this
-		if (root instanceof OuterLanguageElementImpl)
-		{
-			return FoldingDescriptor.EMPTY;
-		}
+public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware {
+  @NotNull
+  @Override
+  public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+    // @todo handle this
+    if (root instanceof OuterLanguageElementImpl) {
+      return FoldingDescriptor.EMPTY;
+    }
 
-		FoldingRegionsCollector collector = new FoldingRegionsCollector(document);
-		root.accept(collector);
-		List<FoldingDescriptor> descriptors = collector.getDescriptors();
+    FoldingRegionsCollector collector = new FoldingRegionsCollector(document);
+    root.accept(collector);
+    List<FoldingDescriptor> descriptors = collector.getDescriptors();
 
-		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
-	}
+    return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+  }
 
-	@Override
-	public boolean isCollapsedByDefault(@NotNull ASTNode node)
-	{
-		return false;
-	}
+  @Override
+  public boolean isCollapsedByDefault(@NotNull ASTNode node) {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public String getPlaceholderText(@NotNull ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		if (psi instanceof PodTitledSection)
-		{
-			String titleText = ((PodTitledSection) psi).getTitleText();
-			if (StringUtil.isNotEmpty(titleText))
-			{
-				if (titleText.length() > 80)
-				{
-					titleText = titleText.substring(0, 80) + "...";
-				}
-				return " " + titleText;
-			}
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public String getPlaceholderText(@NotNull ASTNode node) {
+    PsiElement psi = node.getPsi();
+    if (psi instanceof PodTitledSection) {
+      String titleText = ((PodTitledSection)psi).getTitleText();
+      if (StringUtil.isNotEmpty(titleText)) {
+        if (titleText.length() > 80) {
+          titleText = titleText.substring(0, 80) + "...";
+        }
+        return " " + titleText;
+      }
+    }
+    return null;
+  }
 
 
-	public static class FoldingRegionsCollector extends PodRecursiveVisitor
-	{
-		protected final Document myDocument;
-		protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
+  public static class FoldingRegionsCollector extends PodRecursiveVisitor {
+    protected final Document myDocument;
+    protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
 
-		public FoldingRegionsCollector(Document document)
-		{
-			myDocument = document;
-		}
+    public FoldingRegionsCollector(Document document) {
+      myDocument = document;
+    }
 
-		public List<FoldingDescriptor> getDescriptors()
-		{
-			return myDescriptors;
-		}
+    public List<FoldingDescriptor> getDescriptors() {
+      return myDescriptors;
+    }
 
-		@Override
-		public void visitBeginSection(@NotNull PsiBeginSection o)
-		{
-			addDescriptorFor(o);
-			super.visitBeginSection(o);
-		}
+    @Override
+    public void visitBeginSection(@NotNull PsiBeginSection o) {
+      addDescriptorFor(o);
+      super.visitBeginSection(o);
+    }
 
-		@Override
-		public void visitForSection(@NotNull PsiForSection o)
-		{
-			addDescriptorFor(o);
-			super.visitForSection(o);
-		}
+    @Override
+    public void visitForSection(@NotNull PsiForSection o) {
+      addDescriptorFor(o);
+      super.visitForSection(o);
+    }
 
-		@Override
-		public void visitHead1Section(@NotNull PsiHead1Section o)
-		{
-			addDescriptorFor(o);
-			super.visitHead1Section(o);
-		}
+    @Override
+    public void visitHead1Section(@NotNull PsiHead1Section o) {
+      addDescriptorFor(o);
+      super.visitHead1Section(o);
+    }
 
-		@Override
-		public void visitHead2Section(@NotNull PsiHead2Section o)
-		{
-			addDescriptorFor(o);
-			super.visitHead2Section(o);
-		}
+    @Override
+    public void visitHead2Section(@NotNull PsiHead2Section o) {
+      addDescriptorFor(o);
+      super.visitHead2Section(o);
+    }
 
-		@Override
-		public void visitHead3Section(@NotNull PsiHead3Section o)
-		{
-			addDescriptorFor(o);
-			super.visitHead3Section(o);
-		}
+    @Override
+    public void visitHead3Section(@NotNull PsiHead3Section o) {
+      addDescriptorFor(o);
+      super.visitHead3Section(o);
+    }
 
-		@Override
-		public void visitHead4Section(@NotNull PsiHead4Section o)
-		{
-			addDescriptorFor(o);
-			super.visitHead4Section(o);
-		}
+    @Override
+    public void visitHead4Section(@NotNull PsiHead4Section o) {
+      addDescriptorFor(o);
+      super.visitHead4Section(o);
+    }
 
-		@Override
-		public void visitItemSection(@NotNull PsiItemSection o)
-		{
-			if (o.getItemSectionContent() != null)
-			{
-				addDescriptorFor(o);
-			}
-			super.visitItemSection(o);
-		}
+    @Override
+    public void visitItemSection(@NotNull PsiItemSection o) {
+      if (o.getItemSectionContent() != null) {
+        addDescriptorFor(o);
+      }
+      super.visitItemSection(o);
+    }
 
-		@Override
-		public void visitOverSection(@NotNull PsiOverSection o)
-		{
-			addDescriptorFor(o);
-			super.visitOverSection(o);
-		}
+    @Override
+    public void visitOverSection(@NotNull PsiOverSection o) {
+      addDescriptorFor(o);
+      super.visitOverSection(o);
+    }
 
-		@Override
-		public void visitUnknownSection(@NotNull PsiUnknownSection o)
-		{
-			addDescriptorFor(o);
-			super.visitUnknownSection(o);
-		}
+    @Override
+    public void visitUnknownSection(@NotNull PsiUnknownSection o) {
+      addDescriptorFor(o);
+      super.visitUnknownSection(o);
+    }
 
-		@Override
-		public void visitPodSection(@NotNull PsiPodSection o)
-		{
-			addDescriptorFor(o);
-			super.visitPodSection(o);
-		}
+    @Override
+    public void visitPodSection(@NotNull PsiPodSection o) {
+      addDescriptorFor(o);
+      super.visitPodSection(o);
+    }
 
-		protected void addDescriptorFor(PsiElement element)
-		{
-			PsiElement firstChild = element.getFirstChild();
-			if (firstChild != null)
-			{
-				addDescriptorFor(element, firstChild.getTextRange().getLength(), 1, 2);
-			}
-		}
+    protected void addDescriptorFor(PsiElement element) {
+      PsiElement firstChild = element.getFirstChild();
+      if (firstChild != null) {
+        addDescriptorFor(element, firstChild.getTextRange().getLength(), 1, 2);
+      }
+    }
 
-		protected void addDescriptorFor(PsiElement element, int startMargin, int endMargin, int minLines)
-		{
-			PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, startMargin, endMargin, minLines);
-		}
-	}
-
+    protected void addDescriptorFor(PsiElement element, int startMargin, int endMargin, int minLines) {
+      PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, startMargin, endMargin, minLines);
+    }
+  }
 }

@@ -27,29 +27,24 @@ import java.util.Map;
  * Created by hurricup on 06.12.2015.
  * Helper methods for perl lexers
  */
-public class PerlLexerUtil implements PerlElementTypes
-{
-	public static final TokenSet IMMUTABLE_TOKEN_SET = TokenSet.create(
-			TokenType.WHITE_SPACE,
-			TokenType.NEW_LINE_INDENT
-	);
+public class PerlLexerUtil implements PerlElementTypes {
+  public static final TokenSet IMMUTABLE_TOKEN_SET = TokenSet.create(
+    TokenType.WHITE_SPACE,
+    TokenType.NEW_LINE_INDENT
+  );
 
-	public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<IElementType, IElementType>();
+  public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<IElementType, IElementType>();
 
-	public static IElementType remapSQToken(IElementType tokenType)
-	{
-		if (tokenType == null || IMMUTABLE_TOKEN_SET.contains(tokenType))
-		{
-			return tokenType;
-		}
+  public static IElementType remapSQToken(IElementType tokenType) {
+    if (tokenType == null || IMMUTABLE_TOKEN_SET.contains(tokenType)) {
+      return tokenType;
+    }
 
-		IElementType newTokenType = null;
-		if ((newTokenType = TOKENS_MAP.get(tokenType)) != null)
-		{
-			return newTokenType;
-		}
+    IElementType newTokenType = null;
+    if ((newTokenType = TOKENS_MAP.get(tokenType)) != null) {
+      return newTokenType;
+    }
 
-		return STRING_CONTENT;
-
-	}
+    return STRING_CONTENT;
+  }
 }

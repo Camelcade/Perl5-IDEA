@@ -30,28 +30,23 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonAugmentMethodModifierElementType extends PerlMooseAugmentStatementElementType
-{
-	public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class MasonAugmentMethodModifierElementType extends PerlMooseAugmentStatementElementType {
+  public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName, @Nullable Language language)
-	{
-		super(debugName, language);
-	}
+  public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public PerlMooseAugmentStatement createPsi(@NotNull PerlMooseAugmentStatementStub stub)
-	{
-		return new MasonAugmentMethodModifierImpl(stub, this);
-	}
+  @Override
+  public PerlMooseAugmentStatement createPsi(@NotNull PerlMooseAugmentStatementStub stub) {
+    return new MasonAugmentMethodModifierImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonAugmentMethodModifierImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonAugmentMethodModifierImpl(node);
+  }
 }

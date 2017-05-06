@@ -24,46 +24,39 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 01.05.2016.
  */
-public class PerlXSubsProjectComponent implements ProjectComponent
-{
+public class PerlXSubsProjectComponent implements ProjectComponent {
 
-	private final Project myProject;
+  private final Project myProject;
 
-	public PerlXSubsProjectComponent(Project project)
-	{
-		myProject = project;
-	}
+  public PerlXSubsProjectComponent(Project project) {
+    myProject = project;
+  }
 
-	@Override
-	public void projectOpened()
-	{
-		StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() ->
-		{
-			PerlXSubsState.getInstance(myProject).rescanFiles();
-		});
-	}
+  @Override
+  public void projectOpened() {
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() ->
+                                                                      {
+                                                                        PerlXSubsState.getInstance(myProject).rescanFiles();
+                                                                      });
+  }
 
-	@Override
-	public void projectClosed()
-	{
-	}
+  @Override
+  public void projectClosed() {
+  }
 
-	@Override
-	public void initComponent()
-	{
+  @Override
+  public void initComponent() {
 
-	}
+  }
 
-	@Override
-	public void disposeComponent()
-	{
+  @Override
+  public void disposeComponent() {
 
-	}
+  }
 
-	@NotNull
-	@Override
-	public String getComponentName()
-	{
-		return "PerlXSubsProjectComponent";
-	}
+  @NotNull
+  @Override
+  public String getComponentName() {
+    return "PerlXSubsProjectComponent";
+  }
 }

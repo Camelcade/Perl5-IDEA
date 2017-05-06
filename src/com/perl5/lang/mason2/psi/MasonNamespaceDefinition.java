@@ -25,21 +25,20 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.01.2016.
  */
-public interface MasonNamespaceDefinition extends PsiElement, Mason2Constants, PerlNamespaceDefinition, PerlImplicitVariablesProvider
-{
-	/**
-	 * Returns file path relative to project root
-	 *
-	 * @return path, relative to root, null if it's LightVirtualFile without original
-	 */
-	@Nullable
-	String getAbsoluteComponentPath();
+public interface MasonNamespaceDefinition extends PsiElement, Mason2Constants, PerlNamespaceDefinition, PerlImplicitVariablesProvider {
+  /**
+   * Returns file path relative to project root
+   *
+   * @return path, relative to root, null if it's LightVirtualFile without original
+   */
+  @Nullable
+  String getAbsoluteComponentPath();
 
-	/**
-	 * Returns file path relative to one of the component roots or project root if not under component root
-	 *
-	 * @return path, relative to root, null if it's LightVirtualFile without original
-	 */
-	@Nullable
-	String getComponentPath();
+  /**
+   * Returns file path relative to one of the component roots or project root if not under component root
+   *
+   * @return path, relative to root, null if it's LightVirtualFile without original
+   */
+  @Nullable
+  String getComponentPath();
 }

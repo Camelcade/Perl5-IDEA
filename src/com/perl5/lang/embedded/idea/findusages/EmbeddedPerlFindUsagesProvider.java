@@ -20,13 +20,11 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider;
 import org.jetbrains.annotations.Nullable;
 
-public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider
-{
+public class EmbeddedPerlFindUsagesProvider extends PerlFindUsagesProvider {
 
-	@Nullable
-	@Override
-	public WordsScanner getWordsScanner()
-	{
-		return new EmbeddedPerlWordsScanner();
-	}
+  @Nullable
+  @Override
+  public WordsScanner getWordsScanner() {
+    return new EmbeddedPerlWordsScanner();
+  }
 }

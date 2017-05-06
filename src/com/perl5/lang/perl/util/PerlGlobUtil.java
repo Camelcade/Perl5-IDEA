@@ -34,75 +34,67 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlGlobUtil implements PerlElementTypes
-{
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
-			"ARGV",
-			"STDERR",
-			"STDOUT",
-			"ARGVOUT",
-			"STDIN"
-	));
+public class PerlGlobUtil implements PerlElementTypes {
+  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+    "ARGV",
+    "STDERR",
+    "STDOUT",
+    "ARGVOUT",
+    "STDIN"
+  ));
 
-	static
-	{
-		BUILT_IN.addAll(PerlBuiltInScalars.BUILT_IN);
-		BUILT_IN.addAll(PerlBuiltInSubs.BUILT_IN);
-		BUILT_IN.addAll(PerlArrayUtil.BUILT_IN);
-		BUILT_IN.addAll(PerlHashUtil.BUILT_IN);
-	}
+  static {
+    BUILT_IN.addAll(PerlBuiltInScalars.BUILT_IN);
+    BUILT_IN.addAll(PerlBuiltInSubs.BUILT_IN);
+    BUILT_IN.addAll(PerlArrayUtil.BUILT_IN);
+    BUILT_IN.addAll(PerlHashUtil.BUILT_IN);
+  }
 
-	/**
-	 * Searching project files for sub definitions by specific package and function name
-	 *
-	 * @param project       project to search in
-	 * @param canonicalName canonical function name package::name
-	 * @return collection of found definitions
-	 */
-	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName)
-	{
-		return getGlobsDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
-	}
+  /**
+   * Searching project files for sub definitions by specific package and function name
+   *
+   * @param project       project to search in
+   * @param canonicalName canonical function name package::name
+   * @return collection of found definitions
+   */
+  public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName) {
+    return getGlobsDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+  }
 
-	public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
-	{
-		if (canonicalName == null)
-		{
-			return Collections.emptyList();
-		}
-		return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
-	}
+  public static Collection<PsiPerlGlobVariable> getGlobsDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
+    if (canonicalName == null) {
+      return Collections.emptyList();
+    }
+    return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
+  }
 
-	/**
-	 * Returns list of known stubbed globs
-	 *
-	 * @param project project to search in
-	 * @return collection of globs names
-	 */
-	public static Collection<String> getDefinedGlobsNames(Project project)
-	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
-	}
+  /**
+   * Returns list of known stubbed globs
+   *
+   * @param project project to search in
+   * @return collection of globs names
+   */
+  public static Collection<String> getDefinedGlobsNames(Project project) {
+    return PerlUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
+  }
 
-	/**
-	 * Processes all globs names with specific processor
-	 *
-	 * @param project   project to search in
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
-	 */
-	public static boolean processDefinedGlobsNames(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlGlobVariable> processor)
-	{
-		StubIndex stubIndex = StubIndex.getInstance();
-		for (String globName : stubIndex.getAllKeys(PerlGlobsStubIndex.KEY, project))
-		{
-			if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, processor))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
+  /**
+   * Processes all globs names with specific processor
+   *
+   * @param project   project to search in
+   * @param processor string processor for suitable strings
+   * @return collection of constants names
+   */
+  public static boolean processDefinedGlobsNames(@NotNull Project project,
+                                                 @NotNull GlobalSearchScope scope,
+                                                 @NotNull Processor<PerlGlobVariable> processor) {
+    StubIndex stubIndex = StubIndex.getInstance();
+    for (String globName : stubIndex.getAllKeys(PerlGlobsStubIndex.KEY, project)) {
+      if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, globName, project, scope, PsiPerlGlobVariable.class, processor)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 

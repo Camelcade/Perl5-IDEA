@@ -27,46 +27,44 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 21.01.2016.
  */
 public interface PerlClassAccessorDeclaration extends
-		PerlSubDefinitionWitTextIdentifier,
-		ClassAccessorElementTypes,
-		PerlCompletionElementsProvider,
-		PerlHierarchyViewElementsProvider,
-		PerlRenameUsagesSubstitutor
-{
-	String ACCESSOR_PREFIX = "get_";
-	String MUTATOR_PREFIX = "set_";
+                                              PerlSubDefinitionWitTextIdentifier,
+                                              ClassAccessorElementTypes,
+                                              PerlCompletionElementsProvider,
+                                              PerlHierarchyViewElementsProvider,
+                                              PerlRenameUsagesSubstitutor {
+  String ACCESSOR_PREFIX = "get_";
+  String MUTATOR_PREFIX = "set_";
 
 
-	/**
-	 * Checks if current declaration should follow best practice, declare get_ and set_
-	 *
-	 * @return check result
-	 */
-	boolean isFollowsBestPractice();
+  /**
+   * Checks if current declaration should follow best practice, declare get_ and set_
+   *
+   * @return check result
+   */
+  boolean isFollowsBestPractice();
 
-	/**
-	 * Checks if current accessor readable
-	 *
-	 * @return check result
-	 */
-	boolean isAccessorReadable();
+  /**
+   * Checks if current accessor readable
+   *
+   * @return check result
+   */
+  boolean isAccessorReadable();
 
-	/**
-	 * Checks if current accessor writable
-	 *
-	 * @return check result
-	 */
-	boolean isAccessorWritable();
+  /**
+   * Checks if current accessor writable
+   *
+   * @return check result
+   */
+  boolean isAccessorWritable();
 
 
-	String getGetterName();
+  String getGetterName();
 
-	@Nullable
-	String getGetterCanonicalName();
+  @Nullable
+  String getGetterCanonicalName();
 
-	String getSetterName();
+  String getSetterName();
 
-	@Nullable
-	String getSetterCanonicalName();
-
+  @Nullable
+  String getSetterCanonicalName();
 }

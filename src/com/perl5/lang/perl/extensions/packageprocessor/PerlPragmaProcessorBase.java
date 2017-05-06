@@ -19,11 +19,9 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public abstract class PerlPragmaProcessorBase extends PerlPackageProcessorBase
-{
-	@Override
-	public boolean isPragma()
-	{
-		return true;
-	}
+public abstract class PerlPragmaProcessorBase extends PerlPackageProcessorBase {
+  @Override
+  public boolean isPragma() {
+    return true;
+  }
 }

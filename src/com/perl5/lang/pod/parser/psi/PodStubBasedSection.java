@@ -22,6 +22,5 @@ import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodStubBasedSection extends StubBasedPsiElement<PodSectionStub>, PodTitledSection
-{
+public interface PodStubBasedSection extends StubBasedPsiElement<PodSectionStub>, PodTitledSection {
 }

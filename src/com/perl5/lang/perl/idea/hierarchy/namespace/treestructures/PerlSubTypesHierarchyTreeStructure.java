@@ -32,44 +32,36 @@ import java.util.List;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure
-{
-	public PerlSubTypesHierarchyTreeStructure(@NotNull PsiElement element)
-	{
-		this(element.getProject(), new PerlHierarchyNodeDescriptor(null, element, true));
-	}
+public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
+  public PerlSubTypesHierarchyTreeStructure(@NotNull PsiElement element) {
+    this(element.getProject(), new PerlHierarchyNodeDescriptor(null, element, true));
+  }
 
-	public PerlSubTypesHierarchyTreeStructure(@NotNull Project project, HierarchyNodeDescriptor baseDescriptor)
-	{
-		super(project, baseDescriptor);
-	}
+  public PerlSubTypesHierarchyTreeStructure(@NotNull Project project, HierarchyNodeDescriptor baseDescriptor) {
+    super(project, baseDescriptor);
+  }
 
-	@NotNull
-	@Override
-	protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor)
-	{
-		List<PerlHierarchyNodeDescriptor> result = new ArrayList<PerlHierarchyNodeDescriptor>();
+  @NotNull
+  @Override
+  protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor) {
+    List<PerlHierarchyNodeDescriptor> result = new ArrayList<PerlHierarchyNodeDescriptor>();
 
-		if (descriptor instanceof PerlHierarchyNodeDescriptor)
-		{
-			PsiElement element = ((PerlHierarchyNodeDescriptor) descriptor).getPerlElement();
-			for (PsiElement childElement : getSubElements(element))
-			{
-				result.add(createDescriptor(descriptor, childElement, false));
-			}
-		}
+    if (descriptor instanceof PerlHierarchyNodeDescriptor) {
+      PsiElement element = ((PerlHierarchyNodeDescriptor)descriptor).getPerlElement();
+      for (PsiElement childElement : getSubElements(element)) {
+        result.add(createDescriptor(descriptor, childElement, false));
+      }
+    }
 
-		return result.toArray();
-	}
+    return result.toArray();
+  }
 
-	protected Collection<PsiElement> getSubElements(PsiElement element)
-	{
-		assert element instanceof PerlNamespaceDefinition;
-		return new ArrayList<PsiElement>(((PerlNamespaceDefinition) element).getChildNamespaceDefinitions());
-	}
+  protected Collection<PsiElement> getSubElements(PsiElement element) {
+    assert element instanceof PerlNamespaceDefinition;
+    return new ArrayList<PsiElement>(((PerlNamespaceDefinition)element).getChildNamespaceDefinitions());
+  }
 
-	protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
-	{
-		return new PerlHierarchyNodeDescriptor(parentDescriptor, element, isBase);
-	}
+  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase) {
+    return new PerlHierarchyNodeDescriptor(parentDescriptor, element, isBase);
+  }
 }

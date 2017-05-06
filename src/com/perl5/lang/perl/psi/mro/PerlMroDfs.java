@@ -28,32 +28,31 @@ import java.util.List;
  * Class represents default Perl's MRO.
  * In other words, it knows how to find sub definition and/or declaration
  */
-public class PerlMroDfs extends PerlMro
-{
-	public static final PerlMro INSTANCE = new PerlMroDfs();
+public class PerlMroDfs extends PerlMro {
+  public static final PerlMro INSTANCE = new PerlMroDfs();
 
-	/**
-	 * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
-	 *
-	 * @param project              project
-	 * @param namespaceDefinitions List of package names to add
-	 * @param recursionMap         recursion protection map
-	 * @param result               list to populate
-	 */
-	@Override
-	public void getLinearISA(Project project, List<PerlNamespaceDefinition> namespaceDefinitions, HashSet<String> recursionMap, ArrayList<String> result)
-	{
-//		System.err.println("Resolving DFS for " + packageNames);
+  /**
+   * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
+   *
+   * @param project              project
+   * @param namespaceDefinitions List of package names to add
+   * @param recursionMap         recursion protection map
+   * @param result               list to populate
+   */
+  @Override
+  public void getLinearISA(Project project,
+                           List<PerlNamespaceDefinition> namespaceDefinitions,
+                           HashSet<String> recursionMap,
+                           ArrayList<String> result) {
+    //		System.err.println("Resolving DFS for " + packageNames);
 
-		for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions)
-		{
-			String packageName = namespaceDefinition.getPackageName();
-			if (!recursionMap.contains(packageName))
-			{
-				recursionMap.add(packageName);
-				result.add(packageName);
-				namespaceDefinition.getLinearISA(recursionMap, result);
-			}
-		}
-	}
+    for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions) {
+      String packageName = namespaceDefinition.getPackageName();
+      if (!recursionMap.contains(packageName)) {
+        recursionMap.add(packageName);
+        result.add(packageName);
+        namespaceDefinition.getLinearISA(recursionMap, result);
+      }
+    }
+  }
 }

@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionOver extends PsiElement, PodStructureElement
-{
+public interface PodSectionOver extends PsiElement, PodStructureElement {
 }

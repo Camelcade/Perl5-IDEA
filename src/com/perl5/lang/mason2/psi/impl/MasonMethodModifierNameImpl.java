@@ -26,16 +26,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implements MasonMethodModifierName
-{
-	public MasonMethodModifierNameImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implements MasonMethodModifierName {
+  public MasonMethodModifierNameImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public PsiReference[] computeReferences()
-	{
-		return new PsiReference[]{new PerlSubReferenceSuper(this)};
-	}
+  @Override
+  public PsiReference[] computeReferences() {
+    return new PsiReference[]{new PerlSubReferenceSuper(this)};
+  }
 }

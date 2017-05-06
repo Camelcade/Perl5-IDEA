@@ -40,222 +40,187 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub>
-{
-	public PerlSubBaseImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub> {
+  public PerlSubBaseImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlSubBaseImpl(@NotNull Stub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlSubBaseImpl(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		Stub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getPackageName();
-		}
+  @Nullable
+  @Override
+  public String getPackageName() {
+    Stub stub = getStub();
+    if (stub != null) {
+      return stub.getPackageName();
+    }
 
-		String namespace = getExplicitPackageName();
-		if (namespace == null)
-		{
-			namespace = getContextPackageName();
-		}
+    String namespace = getExplicitPackageName();
+    if (namespace == null) {
+      namespace = getContextPackageName();
+    }
 
-		return namespace;
-	}
+    return namespace;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getSubNameElement();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getSubNameElement();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PsiElement subNameElement = getSubNameElement();
-		if (subNameElement != null)
-		{
-			PerlPsiUtil.renameElement(subNameElement, name);
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    PsiElement subNameElement = getSubNameElement();
+    if (subNameElement != null) {
+      PerlPsiUtil.renameElement(subNameElement, name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@Override
-	public String getName()
-	{
-		return getSubName();
-	}
+  @Override
+  public String getName() {
+    return getSubName();
+  }
 
-	@Nullable
-	@Override
-	public String getCanonicalName()
-	{
-		String packageName = getPackageName();
-		if (packageName == null)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  public String getCanonicalName() {
+    String packageName = getPackageName();
+    if (packageName == null) {
+      return null;
+    }
 
-		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
-	}
+    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
 
-	@Override
-	public String getSubName()
-	{
-		Stub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getSubName();
-		}
+  @Override
+  public String getSubName() {
+    Stub stub = getStub();
+    if (stub != null) {
+      return stub.getSubName();
+    }
 
-		return getSubNameHeavy();
-	}
+    return getSubNameHeavy();
+  }
 
-	protected String getSubNameHeavy()
-	{
-		PsiElement subNameElement = getSubNameElement();
-		return subNameElement == null ? null : subNameElement.getText();
-	}
+  protected String getSubNameHeavy() {
+    PsiElement subNameElement = getSubNameElement();
+    return subNameElement == null ? null : subNameElement.getText();
+  }
 
-	@Nullable
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
+  @Nullable
+  @Override
+  public String getContextPackageName() {
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 
-	@Nullable
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-	}
+  @Nullable
+  @Override
+  public String getExplicitPackageName() {
+    PerlNamespaceElement namespaceElement = getNamespaceElement();
+    return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
+  }
 
-	@Override
-	public PsiElement getSubNameElement()
-	{
-		return findChildByType(SUB_NAME);
-	}
+  @Override
+  public PsiElement getSubNameElement() {
+    return findChildByType(SUB_NAME);
+  }
 
-	@Nullable
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
+  @Nullable
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    return findChildByClass(PerlNamespaceElement.class);
+  }
 
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		return PerlPsiUtil.collectAnnotations(this);
-	}
+  @NotNull
+  @Override
+  public List<PerlAnnotation> getAnnotationList() {
+    return PerlPsiUtil.collectAnnotations(this);
+  }
 
-	@Nullable
-	@Override
-	public PerlSubAnnotations getAnnotations()
-	{
-		PerlSubAnnotations annotations;
+  @Nullable
+  @Override
+  public PerlSubAnnotations getAnnotations() {
+    PerlSubAnnotations annotations;
 
-		Stub stub = getStub();
-		if (stub != null)
-		{
-			annotations = stub.getAnnotations();
-		}
-		else
-		{
-			// re-parsing
-			annotations = getLocalAnnotations();
-		}
+    Stub stub = getStub();
+    if (stub != null) {
+      annotations = stub.getAnnotations();
+    }
+    else {
+      // re-parsing
+      annotations = getLocalAnnotations();
+    }
 
-		if (annotations != null)
-		{
-			return annotations;
-		}
+    if (annotations != null) {
+      return annotations;
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PerlSubAnnotations getLocalAnnotations()
-	{
-		return PerlSubAnnotations.createFromAnnotationsList(getAnnotationList());
-	}
+  @Nullable
+  @Override
+  public PerlSubAnnotations getLocalAnnotations() {
+    return PerlSubAnnotations.createFromAnnotationsList(getAnnotationList());
+  }
 
-	@Override
-	public boolean isDeprecated()
-	{
-		PerlSubAnnotations subAnnotations = getAnnotations();
-		return subAnnotations != null && subAnnotations.isDeprecated();
-	}
+  @Override
+  public boolean isDeprecated() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null && subAnnotations.isDeprecated();
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		PerlSubAnnotations subAnnotations = getAnnotations();
-		return subAnnotations != null && subAnnotations.isMethod();
-	}
+  @Override
+  public boolean isMethod() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null && subAnnotations.isMethod();
+  }
 
-	@Nullable
-	@Override
-	public String getReturns()
-	{
-		PerlSubAnnotations subAnnotations = getAnnotations();
-		return subAnnotations != null ? subAnnotations.getReturns() : null;
-	}
+  @Nullable
+  @Override
+  public String getReturns() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null ? subAnnotations.getReturns() : null;
+  }
 
-	@Override
-	public boolean isStatic()
-	{
-		return !isMethod();
-	}
+  @Override
+  public boolean isStatic() {
+    return !isMethod();
+  }
 
-	@Override
-	public boolean isXSub()
-	{
-		return false;
-	}
+  @Override
+  public boolean isXSub() {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		if (isMethod())
-		{
-			return PerlIcons.METHOD_GUTTER_ICON;
-		}
-		else
-		{
-			return PerlIcons.SUB_GUTTER_ICON;
-		}
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    if (isMethod()) {
+      return PerlIcons.METHOD_GUTTER_ICON;
+    }
+    else {
+      return PerlIcons.SUB_GUTTER_ICON;
+    }
+  }
 
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
-	@Override
-	public String toString()
-	{
-		return "sub " + getCanonicalName();
-	}
+  @Override
+  public String toString() {
+    return "sub " + getCanonicalName();
+  }
 }

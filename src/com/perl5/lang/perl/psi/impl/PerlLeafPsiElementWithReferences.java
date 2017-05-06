@@ -22,16 +22,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public class PerlLeafPsiElementWithReferences extends PerlLeafPsiElement
-{
-	public PerlLeafPsiElementWithReferences(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlLeafPsiElementWithReferences extends PerlLeafPsiElement {
+  public PerlLeafPsiElementWithReferences(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public boolean hasReferences()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasReferences() {
+    return true;
+  }
 }

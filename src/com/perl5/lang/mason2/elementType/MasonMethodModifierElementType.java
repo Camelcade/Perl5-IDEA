@@ -25,17 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class MasonMethodModifierElementType extends MasonTemplatingElementType
-{
-	public MasonMethodModifierElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class MasonMethodModifierElementType extends MasonTemplatingElementType {
+  public MasonMethodModifierElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonMethodModifierImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonMethodModifierImpl(node);
+  }
 }

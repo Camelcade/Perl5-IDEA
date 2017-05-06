@@ -57,339 +57,287 @@ import java.util.Set;
 /**
  * Created by hurricup on 30.01.2016.
  */
-public class PerlCodeGeneratorImpl implements PerlCodeGenerator
-{
-	public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
+public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
+  public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
 
-	public static String getGetterCode(String name)
-	{
-		return "sub get_" + name + "\n" +
-				"{\n" +
-				"	return $_[0]->{" + name + "};\n" +
-				"}\n";
-	}
+  @Nullable
+  @Override
+  public String getOverrideCodeText(PsiElement subBase) {
+    if (subBase instanceof PerlSubBase) {
+      PerlSubBase perlSubBase = (PerlSubBase)subBase;
+      StringBuilder code = new StringBuilder();
+      code.append("#@override\n");
 
-	public static String getSetterCode(String name)
-	{
-		return "sub set_" + name + "\n" +
-				"{\n" +
-				"	my ($self, $new_value) = @_;\n" +
-				"	$$self{" + name + "} = $new_value;\n" +
-				"	return $self;\n" +
-				"}\n";
-	}
+      PerlSubAnnotations annotations = perlSubBase.getAnnotations();
+      if (annotations != null) {
+        if (annotations.isDeprecated()) {
+          code.append("#@deprecated\n");
+        }
+        if (annotations.isAbstract()) {
+          code.append("#@abstract\n");
+        }
+        if (annotations.isMethod() || subBase instanceof PerlMethodDefinition) {
+          code.append("#@method\n");
+        }
+        if (StringUtil.isNotEmpty(annotations.getReturns())) {
+          code.append("#@returns ");
+          code.append(annotations.getReturns());
+          code.append("\n");
+        }
+      }
 
-	public static String getConstructorCode()
-	{
-		return "\n" +
-				"sub new\n" +
-				"{\n" +
-				"	my ($proto) = @_;\n" +
-				"	my $self = bless {}, $proto;\n" +
-				"	return $self;\n" +
-				"}\n\n";
-	}
+      code.append("sub ");
+      code.append(perlSubBase.getSubName());
+      code.append("{\n");
 
-	@Nullable
-	@Override
-	public String getOverrideCodeText(PsiElement subBase)
-	{
-		if (subBase instanceof PerlSubBase)
-		{
-			PerlSubBase perlSubBase = (PerlSubBase) subBase;
-			StringBuilder code = new StringBuilder();
-			code.append("#@override\n");
+      List<String> superArgs = new ArrayList<>();
+      List<PerlSubArgument> arguments = Collections.emptyList();
 
-			PerlSubAnnotations annotations = perlSubBase.getAnnotations();
-			if (annotations != null)
-			{
-				if (annotations.isDeprecated())
-				{
-					code.append("#@deprecated\n");
-				}
-				if (annotations.isAbstract())
-				{
-					code.append("#@abstract\n");
-				}
-				if (annotations.isMethod() || subBase instanceof PerlMethodDefinition)
-				{
-					code.append("#@method\n");
-				}
-				if (StringUtil.isNotEmpty(annotations.getReturns()))
-				{
-					code.append("#@returns ");
-					code.append(annotations.getReturns());
-					code.append("\n");
-				}
-			}
+      if (perlSubBase instanceof PerlSubDefinitionBase) {
+        //noinspection unchecked
+        arguments = ((PerlSubDefinitionBase)perlSubBase).getSubArgumentsList();
 
-			code.append("sub ");
-			code.append(perlSubBase.getSubName());
-			code.append("{\n");
+        if (!arguments.isEmpty()) {
+          boolean useShift = false;
 
-			List<String> superArgs = new ArrayList<>();
-			List<PerlSubArgument> arguments = Collections.emptyList();
+          for (PerlSubArgument argument : arguments) {
+            if (StringUtil.isNotEmpty(argument.getVariableClass())) {
+              useShift = true;
+              break;
+            }
+          }
 
-			if (perlSubBase instanceof PerlSubDefinitionBase)
-			{
-				//noinspection unchecked
-				arguments = ((PerlSubDefinitionBase) perlSubBase).getSubArgumentsList();
+          if (useShift) {
+            for (PerlSubArgument argument : arguments) {
+              if (!argument.isEmpty()) {
+                code.append("my ");
+                code.append(argument.getVariableClass());
+                code.append(" ");
+                String superArg = argument.toStringShort();
+                superArgs.add(superArg);
+                code.append(superArg);
+                code.append(" = ");
+              }
+              code.append("shift;\n");
+            }
+          }
+          else {
+            code.append("my ");
+            code.append('(');
+            boolean insertComma = false;
+            for (PerlSubArgument argument : arguments) {
+              if (insertComma) {
+                code.append(", ");
+              }
+              else {
+                insertComma = true;
+              }
 
-				if (!arguments.isEmpty())
-				{
-					boolean useShift = false;
+              String superArg = argument.toStringShort();
+              superArgs.add(superArg);
+              code.append(superArg);
+            }
+            code.append(") = @_;\n");
+          }
+        }
+        else {
+          code.append("my ($self) = @_;\n");
+        }
+      }
 
-					for (PerlSubArgument argument : arguments)
-					{
-						if (StringUtil.isNotEmpty(argument.getVariableClass()))
-						{
-							useShift = true;
-							break;
-						}
-					}
+      if (!superArgs.isEmpty()) {
+        superArgs.remove(0);
+      }
 
-					if (useShift)
-					{
-						for (PerlSubArgument argument : arguments)
-						{
-							if (!argument.isEmpty())
-							{
-								code.append("my ");
-								code.append(argument.getVariableClass());
-								code.append(" ");
-								String superArg = argument.toStringShort();
-								superArgs.add(superArg);
-								code.append(superArg);
-								code.append(" = ");
-							}
-							code.append("shift;\n");
-						}
-					}
-					else
-					{
-						code.append("my ");
-						code.append('(');
-						boolean insertComma = false;
-						for (PerlSubArgument argument : arguments)
-						{
-							if (insertComma)
-							{
-								code.append(", ");
-							}
-							else
-							{
-								insertComma = true;
-							}
+      if (!arguments.isEmpty() && !arguments.get(0).isEmpty()) {
+        //noinspection StringConcatenationInsideStringBufferAppend
+        code.append(
+          arguments.get(0).toStringShort() + "->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
+      }
+      code.append("}");
+      return code.toString();
+    }
+    return null;
+  }
 
-							String superArg = argument.toStringShort();
-							superArgs.add(superArg);
-							code.append(superArg);
-						}
-						code.append(") = @_;\n");
-					}
-				}
-				else
-				{
-					code.append("my ($self) = @_;\n");
-				}
-			}
+  @Nullable
+  @Override
+  public String getMethodModifierCodeText(PsiElement subBase, String modifierType) {
+    return null;
+  }
 
-			if (!superArgs.isEmpty())
-			{
-				superArgs.remove(0);
-			}
+  @Override
+  public void generateOverrideMethod(PsiElement anchor, Editor editor) {
+    if (anchor != null) {
+      final List<PerlMethodMember> subDefinitions = new ArrayList<>();
 
-			if (!arguments.isEmpty() && !arguments.get(0).isEmpty())
-			{
-				//noinspection StringConcatenationInsideStringBufferAppend
-				code.append(arguments.get(0).toStringShort() + "->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
-			}
-			code.append("}");
-			return code.toString();
-		}
-		return null;
-	}
+      PerlPackageUtil.processNotOverridedMethods(
+        PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
+        subDefinitionBase ->
+        {
+          subDefinitions.add(new PerlMethodMember(subDefinitionBase));
+          return true;
+        }
+      );
 
-	@Nullable
-	@Override
-	public String getMethodModifierCodeText(PsiElement subBase, String modifierType)
-	{
-		return null;
-	}
+      final MemberChooser<PerlMethodMember> chooser =
+        new MemberChooser<PerlMethodMember>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true,
+                                            anchor.getProject()) {
+          @Override
+          protected SpeedSearchComparator getSpeedSearchComparator() {
+            return new SpeedSearchComparator(false) {
+              @Nullable
+              @Override
+              public Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text) {
+                return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
+              }
+            };
+          }
 
-	@Override
-	public void generateOverrideMethod(PsiElement anchor, Editor editor)
-	{
-		if (anchor != null)
-		{
-			final List<PerlMethodMember> subDefinitions = new ArrayList<>();
+          @Override
+          protected ShowContainersAction getShowContainersAction() {
+            return new ShowContainersAction(IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
+          }
+        };
 
-			PerlPackageUtil.processNotOverridedMethods(
-					PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
-					subDefinitionBase ->
-					{
-						subDefinitions.add(new PerlMethodMember(subDefinitionBase));
-						return true;
-					}
-			);
+      chooser.setTitle("Override/Implement Method");
+      chooser.setCopyJavadocVisible(false);
+      chooser.show();
+      if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
+        return;
+      }
 
-			final MemberChooser<PerlMethodMember> chooser =
-					new MemberChooser<PerlMethodMember>(subDefinitions.toArray(new PerlMethodMember[subDefinitions.size()]), false, true, anchor.getProject())
-					{
-						@Override
-						protected SpeedSearchComparator getSpeedSearchComparator()
-						{
-							return new SpeedSearchComparator(false)
-							{
-								@Nullable
-								@Override
-								public Iterable<TextRange> matchingFragments(@NotNull String pattern, @NotNull String text)
-								{
-									return super.matchingFragments(PerlMethodMember.trimUnderscores(pattern), text);
-								}
-							};
-						}
+      StringBuilder generatedCode = new StringBuilder("");
 
-						@Override
-						protected ShowContainersAction getShowContainersAction()
-						{
-							return new ShowContainersAction(IdeBundle.message("action.show.classes"), PerlIcons.PACKAGE_GUTTER_ICON);
-						}
-					};
+      if (chooser.getSelectedElements() != null) {
+        for (PerlMethodMember methodMember : chooser.getSelectedElements()) {
+          String code = getOverrideCodeText(methodMember.getPsiElement());
+          if (StringUtil.isNotEmpty(code)) {
+            generatedCode.append(code);
+            generatedCode.append("\n\n");
+          }
+        }
 
-			chooser.setTitle("Override/Implement Method");
-			chooser.setCopyJavadocVisible(false);
-			chooser.show();
-			if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE)
-			{
-				return;
-			}
+        insertCodeAfterElement(anchor, generatedCode.toString(), editor);
+      }
+    }
+  }
 
-			StringBuilder generatedCode = new StringBuilder("");
+  @Override
+  public void generateSetters(PsiElement anchor, Editor editor) {
+    StringBuilder code = new StringBuilder();
 
-			if (chooser.getSelectedElements() != null)
-			{
-				for (PerlMethodMember methodMember : chooser.getSelectedElements())
-				{
-					String code = getOverrideCodeText(methodMember.getPsiElement());
-					if (StringUtil.isNotEmpty(code))
-					{
-						generatedCode.append(code);
-						generatedCode.append("\n\n");
-					}
-				}
+    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated setters names:", "Generating Setters")) {
+      code.append(getSetterCode(name));
+    }
 
-				insertCodeAfterElement(anchor, generatedCode.toString(), editor);
-			}
-		}
-	}
+    if (code.length() > 0) {
+      insertCodeAfterElement(anchor, code.toString(), editor);
+    }
+  }
 
-	@Override
-	public void generateSetters(PsiElement anchor, Editor editor)
-	{
-		StringBuilder code = new StringBuilder();
+  @Override
+  public void generateGetters(PsiElement anchor, Editor editor) {
+    StringBuilder code = new StringBuilder();
 
-		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated setters names:", "Generating Setters"))
-		{
-			code.append(getSetterCode(name));
-		}
+    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated getters names:", "Generating Getters")) {
+      code.append(getGetterCode(name));
+    }
 
-		if (code.length() > 0)
-		{
-			insertCodeAfterElement(anchor, code.toString(), editor);
-		}
-	}
+    if (code.length() > 0) {
+      insertCodeAfterElement(anchor, code.toString(), editor);
+    }
+  }
 
-	@Override
-	public void generateGetters(PsiElement anchor, Editor editor)
-	{
-		StringBuilder code = new StringBuilder();
+  @Override
+  public void generateGettersAndSetters(PsiElement anchor, Editor editor) {
+    StringBuilder code = new StringBuilder();
 
-		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated getters names:", "Generating Getters"))
-		{
-			code.append(getGetterCode(name));
-		}
+    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated accessors names:", "Generating Getters and Setters")) {
+      code.append(getGetterCode(name));
+      code.append(getSetterCode(name));
+    }
 
-		if (code.length() > 0)
-		{
-			insertCodeAfterElement(anchor, code.toString(), editor);
-		}
-	}
+    if (code.length() > 0) {
+      insertCodeAfterElement(anchor, code.toString(), editor);
+    }
+  }
 
-	@Override
-	public void generateGettersAndSetters(PsiElement anchor, Editor editor)
-	{
-		StringBuilder code = new StringBuilder();
+  @Override
+  public void generateConstructor(PsiElement anchor, Editor editor) {
+    insertCodeAfterElement(anchor, getConstructorCode(), editor);
+  }
 
-		for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated accessors names:", "Generating Getters and Setters"))
-		{
-			code.append(getGetterCode(name));
-			code.append(getSetterCode(name));
-		}
+  protected List<String> askFieldsNames(
+    Project project,
+    String promptText,
+    String promptTitle
+  ) {
+    Set<String> result = new THashSet<>();
+    String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
 
-		if (code.length() > 0)
-		{
-			insertCodeAfterElement(anchor, code.toString(), editor);
-		}
-	}
+    if (!StringUtil.isEmpty(name)) {
 
-	@Override
-	public void generateConstructor(PsiElement anchor, Editor editor)
-	{
-		insertCodeAfterElement(anchor, getConstructorCode(), editor);
+      for (String nameChunk : name.split("[ ,]+")) {
+        if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches()) {
+          result.add(nameChunk);
+        }
+      }
+    }
+    return new ArrayList<>(result);
+  }
 
-	}
+  protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor) {
+    ApplicationManager.getApplication().runWriteAction(() ->
+                                                       {
+                                                         FileType fileType = anchor.getContainingFile().getFileType();
+                                                         final PsiDocumentManager manager =
+                                                           PsiDocumentManager.getInstance(anchor.getProject());
+                                                         final Document document = manager.getDocument(anchor.getContainingFile());
 
-	protected List<String> askFieldsNames(
-			Project project,
-			String promptText,
-			String promptTitle
-	)
-	{
-		Set<String> result = new THashSet<>();
-		String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
+                                                         if (code.length() > 0 && document != null) {
+                                                           manager.doPostponedOperationsAndUnblockDocument(document);
 
-		if (!StringUtil.isEmpty(name))
-		{
+                                                           PsiFile newFile =
+                                                             PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
+                                                           PsiElement container = anchor.getParent();
+                                                           int newOffset = anchor.getTextOffset() + anchor.getTextLength();
 
-			for (String nameChunk : name.split("[ ,]+"))
-			{
-				if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches())
-				{
-					result.add(nameChunk);
-				}
-			}
-		}
-		return new ArrayList<>(result);
-	}
+                                                           if (newFile.getFirstChild() != null && newFile.getLastChild() != null) {
+                                                             container
+                                                               .addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
+                                                           }
 
-	protected void insertCodeAfterElement(PsiElement anchor, String code, Editor editor)
-	{
-		ApplicationManager.getApplication().runWriteAction(() ->
-		{
-			FileType fileType = anchor.getContainingFile().getFileType();
-			final PsiDocumentManager manager = PsiDocumentManager.getInstance(anchor.getProject());
-			final Document document = manager.getDocument(anchor.getContainingFile());
+                                                           manager.commitDocument(document);
+                                                           editor.getCaretModel().moveToOffset(newOffset);
+                                                           editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
+                                                         }
+                                                       });
+  }
 
-			if (code.length() > 0 && document != null)
-			{
-				manager.doPostponedOperationsAndUnblockDocument(document);
+  public static String getGetterCode(String name) {
+    return "sub get_" + name + "\n" +
+           "{\n" +
+           "	return $_[0]->{" + name + "};\n" +
+           "}\n";
+  }
 
-				PsiFile newFile = PerlElementFactory.createFile(anchor.getProject(), "\n" + code, fileType);
-				PsiElement container = anchor.getParent();
-				int newOffset = anchor.getTextOffset() + anchor.getTextLength();
+  public static String getSetterCode(String name) {
+    return "sub set_" + name + "\n" +
+           "{\n" +
+           "	my ($self, $new_value) = @_;\n" +
+           "	$$self{" + name + "} = $new_value;\n" +
+           "	return $self;\n" +
+           "}\n";
+  }
 
-				if (newFile.getFirstChild() != null && newFile.getLastChild() != null)
-				{
-					container.addRangeAfter(newFile.getFirstChild(), newFile.getLastChild(), anchor);
-				}
-
-				manager.commitDocument(document);
-				editor.getCaretModel().moveToOffset(newOffset);
-				editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
-			}
-		});
-
-	}
-
+  public static String getConstructorCode() {
+    return "\n" +
+           "sub new\n" +
+           "{\n" +
+           "	my ($proto) = @_;\n" +
+           "	my $self = bless {}, $proto;\n" +
+           "	return $self;\n" +
+           "}\n\n";
+  }
 }

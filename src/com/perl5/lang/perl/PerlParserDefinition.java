@@ -43,96 +43,84 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlParserDefinition implements ParserDefinition, PerlElementTypes
-{
-	public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<PerlParserExtension>();
+public class PerlParserDefinition implements ParserDefinition, PerlElementTypes {
+  public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<PerlParserExtension>();
 
-	public static final TokenSet WHITE_SPACES = TokenSet.create(
-			TokenType.WHITE_SPACE,
-			TokenType.NEW_LINE_INDENT
-	);
-	public static final TokenSet COMMENTS = TokenSet.create(
-			COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
-			HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
-	);
+  public static final TokenSet WHITE_SPACES = TokenSet.create(
+    TokenType.WHITE_SPACE,
+    TokenType.NEW_LINE_INDENT
+  );
+  public static final TokenSet COMMENTS = TokenSet.create(
+    COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
+    HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
+  );
 
-	public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
+  public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
 
-	public static final TokenSet LITERALS = TokenSet.create(
-			STRING_CONTENT,
-			STRING_CONTENT_XQ,
-			STRING_CONTENT_QQ
-	);
-	public static final TokenSet IDENTIFIERS = TokenSet.create(
-			SUB_NAME,
-			QUALIFYING_PACKAGE,
-			SCALAR_NAME,
-			ARRAY_NAME,
-			HASH_NAME,
-			GLOB_NAME,
-			PACKAGE,
-			IDENTIFIER
-	);
+  public static final TokenSet LITERALS = TokenSet.create(
+    STRING_CONTENT,
+    STRING_CONTENT_XQ,
+    STRING_CONTENT_QQ
+  );
+  public static final TokenSet IDENTIFIERS = TokenSet.create(
+    SUB_NAME,
+    QUALIFYING_PACKAGE,
+    SCALAR_NAME,
+    ARRAY_NAME,
+    HASH_NAME,
+    GLOB_NAME,
+    PACKAGE,
+    IDENTIFIER
+  );
 
-	public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
+  public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new PerlMergingLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new PerlMergingLexerAdapter(project);
+  }
 
-	@NotNull
-	public TokenSet getWhitespaceTokens()
-	{
-		return WHITE_SPACES;
-	}
+  @NotNull
+  public TokenSet getWhitespaceTokens() {
+    return WHITE_SPACES;
+  }
 
-	@NotNull
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	public TokenSet getStringLiteralElements()
-	{
-		return LITERALS;
-	}
+  @NotNull
+  public TokenSet getStringLiteralElements() {
+    return LITERALS;
+  }
 
-	@NotNull
-	public PsiParser createParser(final Project project)
-	{
-		return PerlParserImpl.INSTANCE;
-	}
+  @NotNull
+  public PsiParser createParser(final Project project) {
+    return PerlParserImpl.INSTANCE;
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new PerlFileImpl(viewProvider);
-	}
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new PerlFileImpl(viewProvider);
+  }
 
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
-		return SpaceRequirements.MAY;
-	}
+  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+    return SpaceRequirements.MAY;
+  }
 
-	@NotNull
-	public PsiElement createElement(ASTNode node)
-	{
-		try
-		{
-			return ((PsiElementProvider) node.getElementType()).getPsiElement(node);
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("Problem with node " + node, e);
-		}
-	}
+  @NotNull
+  public PsiElement createElement(ASTNode node) {
+    try {
+      return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
+    }
+    catch (Exception e) {
+      throw new RuntimeException("Problem with node " + node, e);
+    }
+  }
 }

@@ -34,44 +34,38 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class PerlUseStrictInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitFile(PsiFile file)
-			{
-				if (file.getViewProvider() instanceof InjectedFileViewProvider || !file.isWritable() || !file.isPhysical() || file.getVirtualFile() instanceof LightVirtualFile)
-				{
-					return;
-				}
+public class PerlUseStrictInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitFile(PsiFile file) {
+        if (file.getViewProvider() instanceof InjectedFileViewProvider ||
+            !file.isWritable() ||
+            !file.isPhysical() ||
+            file.getVirtualFile() instanceof LightVirtualFile) {
+          return;
+        }
 
-				FileType fileType = file.getFileType();
-				if (!(fileType instanceof PerlFileType) || !((PerlFileType) fileType).checkStrictPragma())
-				{
-					return;
-				}
+        FileType fileType = file.getFileType();
+        if (!(fileType instanceof PerlFileType) || !((PerlFileType)fileType).checkStrictPragma()) {
+          return;
+        }
 
-				for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class))
-				{
-					if (useStatement.getPackageProcessor() instanceof PerlStrictProvider)
-					{
-						return;
-					}
-				}
+        for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatement.class)) {
+          if (useStatement.getPackageProcessor() instanceof PerlStrictProvider) {
+            return;
+          }
+        }
 
-				holder.registerProblem(
-						file,
-						"No strict pragma found in the file",
-						ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-						new PerlUsePackageQuickFix("strict")
-				);
-			}
-
-		};
-	}
+        holder.registerProblem(
+          file,
+          "No strict pragma found in the file",
+          ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+          new PerlUsePackageQuickFix("strict")
+        );
+      }
+    };
+  }
 }

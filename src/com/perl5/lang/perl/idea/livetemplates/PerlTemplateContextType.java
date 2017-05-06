@@ -36,126 +36,105 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by ELI-HOME on 01-Jun-15.
  */
-public abstract class PerlTemplateContextType extends TemplateContextType
-{
-	protected PerlTemplateContextType(@NotNull String id, @NotNull String presentableName, Class<? extends TemplateContextType> baseContextType)
-	{
-		super(id, presentableName, baseContextType);
-	}
+public abstract class PerlTemplateContextType extends TemplateContextType {
+  protected PerlTemplateContextType(@NotNull String id,
+                                    @NotNull String presentableName,
+                                    Class<? extends TemplateContextType> baseContextType) {
+    super(id, presentableName, baseContextType);
+  }
 
-	@Override
-	public boolean isInContext(@NotNull PsiFile psiFile, int fileOffset)
-	{
-		if (PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE))
-		{
-			PsiElement element = psiFile.findElementAt(fileOffset);
+  @Override
+  public boolean isInContext(@NotNull PsiFile psiFile, int fileOffset) {
+    if (PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE)) {
+      PsiElement element = psiFile.findElementAt(fileOffset);
 
-			if (element == null)
-			{
-				element = psiFile.findElementAt(fileOffset - 1);
-			}
+      if (element == null) {
+        element = psiFile.findElementAt(fileOffset - 1);
+      }
 
-			if (element == null)
-			{
-				return false;
-			}
+      if (element == null) {
+        return false;
+      }
 
-			IElementType tokenType = element.getNode().getElementType();
+      IElementType tokenType = element.getNode().getElementType();
 
-			if (element instanceof PsiWhiteSpace ||
-					element instanceof PerlStringContentElementImpl ||
-					element instanceof PsiComment ||
-					tokenType == PerlElementTypes.REGEX_TOKEN)
-			{
-				return false;
-			}
-			return isInContext(element);
-		}
-		return false;
-	}
+      if (element instanceof PsiWhiteSpace ||
+          element instanceof PerlStringContentElementImpl ||
+          element instanceof PsiComment ||
+          tokenType == PerlElementTypes.REGEX_TOKEN) {
+        return false;
+      }
+      return isInContext(element);
+    }
+    return false;
+  }
 
-	protected abstract boolean isInContext(PsiElement element);
+  protected abstract boolean isInContext(PsiElement element);
 
-	public static class Generic extends PerlTemplateContextType
-	{
-		public Generic()
-		{
-			super("PERL5", PerlLanguage.NAME, EverywhereContextType.class);
-		}
+  public static class Generic extends PerlTemplateContextType {
+    public Generic() {
+      super("PERL5", PerlLanguage.NAME, EverywhereContextType.class);
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			return true;
-		}
-	}
+    @Override
+    public boolean isInContext(PsiElement element) {
+      return true;
+    }
+  }
 
-	public static class Postfix extends PerlTemplateContextType
-	{
-		public Postfix()
-		{
-			super("PERL5_POSTFIX", "Postfix", Generic.class);
-		}
+  public static class Postfix extends PerlTemplateContextType {
+    public Postfix() {
+      super("PERL5_POSTFIX", "Postfix", Generic.class);
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+    @Override
+    public boolean isInContext(PsiElement element) {
+      PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
-			return statement != null
-					&& statement.getTextOffset() < element.getTextOffset()
-					;
-		}
-	}
+      return statement != null
+             && statement.getTextOffset() < element.getTextOffset()
+        ;
+    }
+  }
 
-	public static class Prefix extends PerlTemplateContextType
-	{
-		public Prefix()
-		{
-			this("PERL5_PREFIX", "Prefix");
-		}
+  public static class Prefix extends PerlTemplateContextType {
+    public Prefix() {
+      this("PERL5_PREFIX", "Prefix");
+    }
 
-		public Prefix(@NotNull String id, @NotNull String presentableName)
-		{
-			super(id, presentableName, Generic.class);
-		}
+    public Prefix(@NotNull String id, @NotNull String presentableName) {
+      super(id, presentableName, Generic.class);
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+    @Override
+    public boolean isInContext(PsiElement element) {
+      PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
-			return statement != null
-					&& statement.getTextOffset() == element.getTextOffset();
-		}
-	}
+      return statement != null
+             && statement.getTextOffset() == element.getTextOffset();
+    }
+  }
 
-	public static class UnfinishedIf extends PerlTemplateContextType.Prefix
-	{
-		public UnfinishedIf()
-		{
-			super("PERL5_UNFINISHED_IF", "Unclosed if statement");
-		}
+  public static class UnfinishedIf extends PerlTemplateContextType.Prefix {
+    public UnfinishedIf() {
+      super("PERL5_UNFINISHED_IF", "Unclosed if statement");
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			return super.isInContext(element) && PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
-		}
-	}
+    @Override
+    public boolean isInContext(PsiElement element) {
+      return super.isInContext(element) && PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
+    }
+  }
 
-	public static class TestFile extends PerlTemplateContextType.Prefix
-	{
-		public TestFile()
-		{
-			super("PERL5_TEST_FILE", "Test file prefix");
-		}
+  public static class TestFile extends PerlTemplateContextType.Prefix {
+    public TestFile() {
+      super("PERL5_TEST_FILE", "Test file prefix");
+    }
 
-		@Override
-		public boolean isInContext(PsiElement element)
-		{
-			return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE && super.isInContext(element);
-		}
-	}
-
+    @Override
+    public boolean isInContext(PsiElement element) {
+      return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE &&
+             super.isInContext(element);
+    }
+  }
 }

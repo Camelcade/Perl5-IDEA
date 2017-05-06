@@ -22,6 +22,5 @@ import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlMapExpr extends PsiElement, PerlLabelScope
-{
+public interface PerlMapExpr extends PsiElement, PerlLabelScope {
 }

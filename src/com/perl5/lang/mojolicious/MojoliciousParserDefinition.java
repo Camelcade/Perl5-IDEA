@@ -33,57 +33,51 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes
-{
-	public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
-	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
-			TokenSet.create(
-					MOJO_TEMPLATE_BLOCK_HTML,
+public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes {
+  public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+                                                         TokenSet.create(
+                                                           MOJO_TEMPLATE_BLOCK_HTML,
 
-					MOJO_BLOCK_OPENER,
-					MOJO_BLOCK_CLOSER,
-					MOJO_BLOCK_NOSPACE_CLOSER,
+                                                           MOJO_BLOCK_OPENER,
+                                                           MOJO_BLOCK_CLOSER,
+                                                           MOJO_BLOCK_NOSPACE_CLOSER,
 
-					MOJO_LINE_OPENER,
-					MOJO_LINE_EXPR_OPENER,
-					MOJO_LINE_EXPR_ESCAPED_OPENER,
+                                                           MOJO_LINE_OPENER,
+                                                           MOJO_LINE_EXPR_OPENER,
+                                                           MOJO_LINE_EXPR_ESCAPED_OPENER,
 
-					MOJO_BLOCK_EXPR_OPENER,
-					MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+                                                           MOJO_BLOCK_EXPR_OPENER,
+                                                           MOJO_BLOCK_EXPR_ESCAPED_OPENER,
 
-					MOJO_BLOCK_OPENER_TAG,
-					MOJO_LINE_OPENER_TAG
-			));
+                                                           MOJO_BLOCK_OPENER_TAG,
+                                                           MOJO_LINE_OPENER_TAG
+                                                         ));
 
-	@NotNull
-	@Override
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  @Override
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new MojoliciousLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new MojoliciousLexerAdapter(project);
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new MojoliciousFileImpl(viewProvider);
-	}
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new MojoliciousFileImpl(viewProvider);
+  }
 
-	@NotNull
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new MojoliciousParser();
-	}
+  @NotNull
+  @Override
+  public PsiParser createParser(Project project) {
+    return new MojoliciousParser();
+  }
 }

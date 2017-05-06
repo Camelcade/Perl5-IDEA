@@ -22,13 +22,11 @@ import com.intellij.lang.PsiParser;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyQXStringContentParser extends PerlParserImpl
-{
-	public static final PsiParser INSTANCE = new PerlLazyQXStringContentParser();
+public class PerlLazyQXStringContentParser extends PerlParserImpl {
+  public static final PsiParser INSTANCE = new PerlLazyQXStringContentParser();
 
-	@Override
-	public boolean parseFileContents(PsiBuilder b, int l)
-	{
-		return PerlParserImpl.xq_string_content(b, l);
-	}
+  @Override
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    return PerlParserImpl.xq_string_content(b, l);
+  }
 }

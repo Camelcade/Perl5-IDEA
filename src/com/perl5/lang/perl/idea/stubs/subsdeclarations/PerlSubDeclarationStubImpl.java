@@ -26,41 +26,39 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> implements PerlSubDeclarationStub
-{
-	private final String packageName;
-	private final String subName;
-	private final PerlSubAnnotations myAnnotations;
+public class PerlSubDeclarationStubImpl extends StubBase<PsiPerlSubDeclaration> implements PerlSubDeclarationStub {
+  private final String packageName;
+  private final String subName;
+  private final PerlSubAnnotations myAnnotations;
 
-	public PerlSubDeclarationStubImpl(final StubElement parent, final String packageName, final String subName, PerlSubAnnotations annotations, IStubElementType elementType)
-	{
-		super(parent, elementType);
-		this.packageName = packageName;
-		this.subName = subName;
-		myAnnotations = annotations;
-	}
+  public PerlSubDeclarationStubImpl(final StubElement parent,
+                                    final String packageName,
+                                    final String subName,
+                                    PerlSubAnnotations annotations,
+                                    IStubElementType elementType) {
+    super(parent, elementType);
+    this.packageName = packageName;
+    this.subName = subName;
+    myAnnotations = annotations;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return packageName;
-	}
+  @Override
+  public String getPackageName() {
+    return packageName;
+  }
 
-	@Override
-	public String getSubName()
-	{
-		return subName;
-	}
+  @Override
+  public String getSubName() {
+    return subName;
+  }
 
-	@Override
-	public PerlSubAnnotations getAnnotations()
-	{
-		return myAnnotations;
-	}
+  @Override
+  public PerlSubAnnotations getAnnotations() {
+    return myAnnotations;
+  }
 
-	@Override
-	public String getCanonicalName()
-	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
-	}
+  @Override
+  public String getCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
 }

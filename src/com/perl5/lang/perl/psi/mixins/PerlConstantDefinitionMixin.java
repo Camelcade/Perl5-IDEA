@@ -40,85 +40,69 @@ import java.util.List;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithTextIdentifierImpl implements PsiPerlConstantDefinition
-{
-	public PerlConstantDefinitionMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithTextIdentifierImpl implements PsiPerlConstantDefinition {
+  public PerlConstantDefinitionMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlConstantDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlConstantDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public PsiElement getValueExpression()
-	{
-		PsiElement[] children = getChildren();
-		if (children.length > 1)
-		{
-			return children[children.length - 1];
-		}
-		return null;
-	}
+  @Override
+  public PsiElement getValueExpression() {
+    PsiElement[] children = getChildren();
+    if (children.length > 1) {
+      return children[children.length - 1];
+    }
+    return null;
+  }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PerlVisitor)
-		{
-			((PerlVisitor) visitor).visitConstantDefinition(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitConstantDefinition(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		List<PerlAnnotation> annotationList = super.getAnnotationList();
-		if (!annotationList.isEmpty())
-		{
-			return annotationList;
-		}
+  @NotNull
+  @Override
+  public List<PerlAnnotation> getAnnotationList() {
+    List<PerlAnnotation> annotationList = super.getAnnotationList();
+    if (!annotationList.isEmpty()) {
+      return annotationList;
+    }
 
-		return PerlPsiUtil.collectAnnotations(PsiTreeUtil.getParentOfType(this, PerlUseStatement.class));
-	}
+    return PerlPsiUtil.collectAnnotations(PsiTreeUtil.getParentOfType(this, PerlUseStatement.class));
+  }
 
-	@Override
-	public boolean isStatic()
-	{
-		return true;
-	}
+  @Override
+  public boolean isStatic() {
+    return true;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return PerlPsiUtil.getFirstContentTokenOfString(getFirstChild());
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return PerlPsiUtil.getFirstContentTokenOfString(getFirstChild());
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new PerlItemPresentationSimple(this, getName());
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getName());
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return PerlIcons.CONSTANT_GUTTER_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    return PerlIcons.CONSTANT_GUTTER_ICON;
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
-
+  @Override
+  public String getPresentableName() {
+    return getName();
+  }
 }

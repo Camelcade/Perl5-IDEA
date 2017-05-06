@@ -34,35 +34,31 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonFormattingBlock extends AbstractMasonFormattingBlock implements Mason2ElementTypes
-{
-	public MasonFormattingBlock(@NotNull ASTNode node,
-								@Nullable Wrap wrap,
-								@Nullable Alignment alignment,
-								@NotNull CommonCodeStyleSettings codeStyleSettings,
-								@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-								@NotNull SpacingBuilder spacingBuilder,
-								@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
-	)
-	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-	}
+public class MasonFormattingBlock extends AbstractMasonFormattingBlock implements Mason2ElementTypes {
+  public MasonFormattingBlock(@NotNull ASTNode node,
+                              @Nullable Wrap wrap,
+                              @Nullable Alignment alignment,
+                              @NotNull CommonCodeStyleSettings codeStyleSettings,
+                              @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+                              @NotNull SpacingBuilder spacingBuilder,
+                              @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+  ) {
+    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+  }
 
-	@Override
-	protected IElementType getLineOpenerToken()
-	{
-		return MASON_LINE_OPENER;
-	}
+  @Override
+  protected IElementType getLineOpenerToken() {
+    return MASON_LINE_OPENER;
+  }
 
-	@Override
-	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
-	{
-		return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
-	}
+  @Override
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
+    return new MasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
+                                    getInjectedLanguageBlockBuilder());
+  }
 
-	@Override
-	protected PerlIndentProcessor getIndentProcessor()
-	{
-		return MasonIndentProcessor.INSTANCE;
-	}
+  @Override
+  protected PerlIndentProcessor getIndentProcessor() {
+    return MasonIndentProcessor.INSTANCE;
+  }
 }

@@ -28,34 +28,31 @@ import java.util.List;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlSubReferenceSuper extends PerlSubReferenceSimple
-{
-	public PerlSubReferenceSuper(PsiElement psiElement)
-	{
-		super(psiElement);
-	}
+public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
+  public PerlSubReferenceSuper(PsiElement psiElement) {
+    super(psiElement);
+  }
 
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		// fixme not dry with simple resolver, need some generics fix
-		PsiElement myElement = getElement();
-		List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    // fixme not dry with simple resolver, need some generics fix
+    PsiElement myElement = getElement();
+    List<PsiElement> relatedItems = new ArrayList<PsiElement>();
 
-		String packageName = PerlPackageUtil.getContextPackageName(myElement);
-		String subName = myElement.getNode().getText();
-		Project project = myElement.getProject();
+    String packageName = PerlPackageUtil.getContextPackageName(myElement);
+    String subName = myElement.getNode().getText();
+    Project project = myElement.getProject();
 
-		relatedItems.addAll(PerlMroDfs.resolveSub(
-				project,
-				packageName,
-				subName,
-				true
-		));
+    relatedItems.addAll(PerlMroDfs.resolveSub(
+      project,
+      packageName,
+      subName,
+      true
+    ));
 
-		List<ResolveResult> result = getResolveResults(relatedItems);
+    List<ResolveResult> result = getResolveResults(relatedItems);
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 }

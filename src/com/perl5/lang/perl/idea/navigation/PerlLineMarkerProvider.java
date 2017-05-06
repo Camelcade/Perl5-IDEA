@@ -36,82 +36,69 @@ import java.util.List;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes
-{
-	@Override
-	protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result)
-	{
-		if (element instanceof PerlNamespaceDefinition)
-		{
-			PsiElement nameIdentifier = ((PerlNamespaceDefinition) element).getNameIdentifier();
-			if (nameIdentifier == null)
-			{
-				nameIdentifier = element;
-			}
+public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes {
+  @Override
+  protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
+    if (element instanceof PerlNamespaceDefinition) {
+      PsiElement nameIdentifier = ((PerlNamespaceDefinition)element).getNameIdentifier();
+      if (nameIdentifier == null) {
+        nameIdentifier = element;
+      }
 
-			List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition) element).getParentNamespaceDefinitions();
-			if (!parentNamespaces.isEmpty())
-			{
-				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-						.create(AllIcons.Gutter.ImplementingMethod)
-						.setTargets(parentNamespaces)
-						.setTooltipText("Parent classes");
+      List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition)element).getParentNamespaceDefinitions();
+      if (!parentNamespaces.isEmpty()) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.ImplementingMethod)
+          .setTargets(parentNamespaces)
+          .setTooltipText("Parent classes");
 
-				result.add(builder.createLineMarkerInfo(nameIdentifier));
-			}
+        result.add(builder.createLineMarkerInfo(nameIdentifier));
+      }
 
-			Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition) element).getChildNamespaceDefinitions();
-			if (!childNamespaces.isEmpty())
-			{
-				NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-						.create(AllIcons.Gutter.ImplementedMethod)
-						.setTargets(childNamespaces)
-						.setTooltipText("Subclasses");
+      Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition)element).getChildNamespaceDefinitions();
+      if (!childNamespaces.isEmpty()) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.ImplementedMethod)
+          .setTargets(childNamespaces)
+          .setTooltipText("Subclasses");
 
-				result.add(builder.createLineMarkerInfo(nameIdentifier));
-			}
+        result.add(builder.createLineMarkerInfo(nameIdentifier));
+      }
+    }
+    else if (element instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase)element).isMethod()) {
+      PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+      if (containingNamespace != null) {
+        final String packageName = ((PerlSubDefinitionBase)element).getPackageName();
+        final String subName = ((PerlSubDefinitionBase)element).getSubName();
+        PsiElement nameIdentifier = ((PerlSubDefinitionBase)element).getNameIdentifier();
+        if (nameIdentifier == null) {
+          nameIdentifier = element;
+        }
 
-		}
-		else if (element instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase) element).isMethod())
-		{
-			PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
-			if (containingNamespace != null)
-			{
-				final String packageName = ((PerlSubDefinitionBase) element).getPackageName();
-				final String subName = ((PerlSubDefinitionBase) element).getSubName();
-				PsiElement nameIdentifier = ((PerlSubDefinitionBase) element).getNameIdentifier();
-				if (nameIdentifier == null)
-				{
-					nameIdentifier = element;
-				}
+        if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName)) {
+          PerlSubBase parentSub = PerlSubUtil.getDirectSuperMethod((PerlSubBase)element);
 
-				if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName))
-				{
-					PerlSubBase parentSub = PerlSubUtil.getDirectSuperMethod((PerlSubBase) element);
+          if (parentSub != null) {
+            NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+              .create(AllIcons.Gutter.OverridingMethod)
+              .setTarget(parentSub)
+              .setTooltipText("Overriding method");
 
-					if (parentSub != null)
-					{
-						NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-								.create(AllIcons.Gutter.OverridingMethod)
-								.setTarget(parentSub)
-								.setTooltipText("Overriding method");
+            result.add(builder.createLineMarkerInfo(nameIdentifier));
+          }
 
-						result.add(builder.createLineMarkerInfo(nameIdentifier));
-					}
+          final List<PerlSubBase> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubBase)element, containingNamespace);
 
-					final List<PerlSubBase> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubBase) element, containingNamespace);
+          if (!overridingSubs.isEmpty()) {
+            NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+              .create(AllIcons.Gutter.OverridenMethod)
+              .setTargets(overridingSubs)
+              .setTooltipText("Overriden methods");
 
-					if (!overridingSubs.isEmpty())
-					{
-						NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-								.create(AllIcons.Gutter.OverridenMethod)
-								.setTargets(overridingSubs)
-								.setTooltipText("Overriden methods");
-
-						result.add(builder.createLineMarkerInfo(nameIdentifier));
-					}
-				}
-			}
-		}
-	}
+            result.add(builder.createLineMarkerInfo(nameIdentifier));
+          }
+        }
+      }
+    }
+  }
 }

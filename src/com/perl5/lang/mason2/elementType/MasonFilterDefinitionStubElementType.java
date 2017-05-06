@@ -26,24 +26,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonFilterDefinitionStubElementType extends MasonMethodDefinitionStubElementType
-{
-	public MasonFilterDefinitionStubElementType(String name)
-	{
-		super(name);
-	}
+public class MasonFilterDefinitionStubElementType extends MasonMethodDefinitionStubElementType {
+  public MasonFilterDefinitionStubElementType(String name) {
+    super(name);
+  }
 
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new MasonFilterDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new MasonFilterDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonFilterDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonFilterDefinitionImpl(node);
+  }
 }
 

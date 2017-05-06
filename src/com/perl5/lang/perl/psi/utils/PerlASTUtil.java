@@ -23,20 +23,16 @@ import com.intellij.psi.tree.TokenSet;
 /**
  * Created by hurricup on 02.09.2015.
  */
-public class PerlASTUtil
-{
-	public static IElementType getParentNodeOfType(ASTNode node, IElementType... tokenTypes)
-	{
-		TokenSet tokenSet = TokenSet.create(tokenTypes);
+public class PerlASTUtil {
+  public static IElementType getParentNodeOfType(ASTNode node, IElementType... tokenTypes) {
+    TokenSet tokenSet = TokenSet.create(tokenTypes);
 
-		while ((node = node.getTreeParent()) != null)
-		{
-			if (tokenSet.contains(node.getElementType()))
-			{
-				return node.getElementType();
-			}
-		}
+    while ((node = node.getTreeParent()) != null) {
+      if (tokenSet.contains(node.getElementType())) {
+        return node.getElementType();
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 }

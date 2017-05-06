@@ -21,11 +21,10 @@ import com.intellij.lexer.FlexLexer;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public interface PerlLexerWithCustomStates extends FlexLexer
-{
-	int getCustomState();
+public interface PerlLexerWithCustomStates extends FlexLexer {
+  int getCustomState();
 
-	void setCustomState(int newState);
+  void setCustomState(int newState);
 
-	int getInitialCustomState();
+  int getInitialCustomState();
 }

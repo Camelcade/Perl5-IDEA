@@ -27,68 +27,57 @@ import java.util.List;
 /**
  * Created by hurricup on 27.06.2016.
  */
-public class PerlParameterInfo
-{
-	private final PerlSubArgument myArgument;
-	private boolean myIsSelected;
+public class PerlParameterInfo {
+  private final PerlSubArgument myArgument;
+  private boolean myIsSelected;
 
-	public PerlParameterInfo(@NotNull PerlSubArgument argument)
-	{
-		this(argument, false);
-	}
+  public PerlParameterInfo(@NotNull PerlSubArgument argument) {
+    this(argument, false);
+  }
 
-	public PerlParameterInfo(@NotNull PerlSubArgument argument, boolean isSelected)
-	{
-		myArgument = argument;
-		myIsSelected = isSelected;
-	}
+  public PerlParameterInfo(@NotNull PerlSubArgument argument, boolean isSelected) {
+    myArgument = argument;
+    myIsSelected = isSelected;
+  }
 
-	public static PerlParameterInfo[] wrapArguments(List<PerlSubArgument> arguments)
-	{
-		List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, new Function<PerlSubArgument, PerlParameterInfo>()
-		{
-			@Override
-			public PerlParameterInfo fun(PerlSubArgument perlSubArgument)
-			{
-				return new PerlParameterInfo(perlSubArgument);
-			}
-		});
-		return parameterInfos.toArray(new PerlParameterInfo[parameterInfos.size()]);
-	}
+  @NotNull
+  public PerlSubArgument getArgument() {
+    return myArgument;
+  }
 
-	@NotNull
-	public PerlSubArgument getArgument()
-	{
-		return myArgument;
-	}
+  public boolean isSelected() {
+    return myIsSelected;
+  }
 
-	public boolean isSelected()
-	{
-		return myIsSelected;
-	}
+  public void setSelected(boolean selected) {
+    myIsSelected = selected;
+  }
 
-	public void setSelected(boolean selected)
-	{
-		myIsSelected = selected;
-	}
+  @Override
+  public String toString() {
+    return myArgument.toStringLong();
+  }
 
-	@Override
-	public String toString()
-	{
-		return myArgument.toStringLong();
-	}
+  public void setUpUIPresentation(@NotNull ParameterInfoUIContext context) {
+    String text = toString();
+    context.setupUIComponentPresentation(
+      text,
+      myIsSelected ? 0 : -1,
+      myIsSelected ? text.length() : 0,
+      false,
+      false,
+      false,
+      context.getDefaultParameterColor()
+    );
+  }
 
-	public void setUpUIPresentation(@NotNull ParameterInfoUIContext context)
-	{
-		String text = toString();
-		context.setupUIComponentPresentation(
-				text,
-				myIsSelected ? 0 : -1,
-				myIsSelected ? text.length() : 0,
-				false,
-				false,
-				false,
-				context.getDefaultParameterColor()
-		);
-	}
+  public static PerlParameterInfo[] wrapArguments(List<PerlSubArgument> arguments) {
+    List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, new Function<PerlSubArgument, PerlParameterInfo>() {
+      @Override
+      public PerlParameterInfo fun(PerlSubArgument perlSubArgument) {
+        return new PerlParameterInfo(perlSubArgument);
+      }
+    });
+    return parameterInfos.toArray(new PerlParameterInfo[parameterInfos.size()]);
+  }
 }

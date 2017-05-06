@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlLoop extends PsiElement
-{
+public interface PerlLoop extends PsiElement {
 }

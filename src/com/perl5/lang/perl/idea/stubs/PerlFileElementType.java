@@ -26,43 +26,36 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlFileElementType extends IStubFileElementType
-{
-	private static final int VERSION = 4;
+public class PerlFileElementType extends IStubFileElementType {
+  private static final int VERSION = 4;
 
-	public PerlFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
+  public PerlFileElementType(String debugName, Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public int getStubVersion()
-	{
-		return super.getStubVersion() + VERSION;
-	}
+  @Override
+  public int getStubVersion() {
+    return super.getStubVersion() + VERSION;
+  }
 
-	@Override
-	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi)
-	{
-		return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
-	}
+  @Override
+  protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
+    return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
+  }
 
-	@Nullable
-	protected Lexer getLexer(PsiElement psi)
-	{
-		return null;
-	}
+  @Nullable
+  protected Lexer getLexer(PsiElement psi) {
+    return null;
+  }
 
-	@NotNull
-	protected PsiParser getParser(PsiElement psi)
-	{
-		return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
-	}
+  @NotNull
+  protected PsiParser getParser(PsiElement psi) {
+    return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
+  }
 
-	@NotNull
-	protected PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon)
-	{
-		return PsiBuilderFactory.getInstance().createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
-	}
-
+  @NotNull
+  protected PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
+    return PsiBuilderFactory.getInstance()
+      .createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
+  }
 }

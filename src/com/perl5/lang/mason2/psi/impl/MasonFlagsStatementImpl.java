@@ -32,71 +32,60 @@ import java.util.List;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements MasonFlagsStatement
-{
-	public MasonFlagsStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements MasonFlagsStatement {
+  public MasonFlagsStatementImpl(ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void changeParentsList(@NotNull List<String> currentList)
-	{
-		String extendsFlagsValue = getExtendsFlagValue();
-		if (extendsFlagsValue != null)
-		{
-			currentList.add(extendsFlagsValue);
-		}
-	}
+  @Override
+  public void changeParentsList(@NotNull List<String> currentList) {
+    String extendsFlagsValue = getExtendsFlagValue();
+    if (extendsFlagsValue != null) {
+      currentList.add(extendsFlagsValue);
+    }
+  }
 
 
-	@Nullable
-	private String getExtendsFlagValue()
-	{
-		PsiElement expr = getExpr();
-		// fixme this can be a prototype for scanning a hash to map
-		if (expr instanceof PsiPerlCommaSequenceExpr)
-		{
-			PsiElement currentElement = expr.getFirstChild();
-			while (currentElement != null)
-			{
-				PsiElement keyElement = currentElement;
+  @Nullable
+  private String getExtendsFlagValue() {
+    PsiElement expr = getExpr();
+    // fixme this can be a prototype for scanning a hash to map
+    if (expr instanceof PsiPerlCommaSequenceExpr) {
+      PsiElement currentElement = expr.getFirstChild();
+      while (currentElement != null) {
+        PsiElement keyElement = currentElement;
 
-				// comma between key and val
-				if (isNullOrNotComma(currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement)))
-				{
-					break;
-				}
+        // comma between key and val
+        if (isNullOrNotComma(currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement))) {
+          break;
+        }
 
-				PsiElement valElement = PerlPsiUtil.getNextSignificantSibling(currentElement);
+        PsiElement valElement = PerlPsiUtil.getNextSignificantSibling(currentElement);
 
-				if (keyElement instanceof PerlString && valElement instanceof PerlString && ((PerlString) keyElement).getStringContent().equals("extends"))
-				{
-					return ((PerlString) valElement).getStringContent();
-				}
+        if (keyElement instanceof PerlString &&
+            valElement instanceof PerlString &&
+            ((PerlString)keyElement).getStringContent().equals("extends")) {
+          return ((PerlString)valElement).getStringContent();
+        }
 
-				// comma between pairs
-				if (isNullOrNotComma(currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement)))
-				{
-					break;
-				}
+        // comma between pairs
+        if (isNullOrNotComma(currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement))) {
+          break;
+        }
 
-				currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement);
-			}
+        currentElement = PerlPsiUtil.getNextSignificantSibling(currentElement);
+      }
+    }
 
-		}
+    return null;
+  }
 
-		return null;
-	}
+  private boolean isNullOrNotComma(@Nullable PsiElement element) {
+    if (element == null) {
+      return false;
+    }
 
-	private boolean isNullOrNotComma(@Nullable PsiElement element)
-	{
-		if (element == null)
-		{
-			return false;
-		}
-
-		IElementType elementType = element.getNode().getElementType();
-		return elementType != COMMA && elementType != FAT_COMMA;
-	}
+    IElementType elementType = element.getNode().getElementType();
+    return elementType != COMMA && elementType != FAT_COMMA;
+  }
 }

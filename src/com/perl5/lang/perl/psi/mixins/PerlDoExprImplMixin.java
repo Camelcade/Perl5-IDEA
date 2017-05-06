@@ -28,39 +28,33 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public abstract class PerlDoExprImplMixin extends PerlStubBasedPsiElementBase<PerlRuntimeImportStub> implements PerlDoExpr
-{
-	public PerlDoExprImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlDoExprImplMixin extends PerlStubBasedPsiElementBase<PerlRuntimeImportStub> implements PerlDoExpr {
+  public PerlDoExprImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlDoExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlDoExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public String getImportPath()
-	{
-		PerlRuntimeImportStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getImportPath();
-		}
+  @Nullable
+  @Override
+  public String getImportPath() {
+    PerlRuntimeImportStub stub = getStub();
+    if (stub != null) {
+      return stub.getImportPath();
+    }
 
-		return findImportPath();
-	}
+    return findImportPath();
+  }
 
-	@Nullable
-	protected String findImportPath()
-	{
-		PsiElement lastChild = getLastChild();
-		if (lastChild instanceof PerlString)    // seems we've got require "...";
-		{
-			return ((PerlString) lastChild).getStringContent();
-		}
-		return null;
-	}
+  @Nullable
+  protected String findImportPath() {
+    PsiElement lastChild = getLastChild();
+    if (lastChild instanceof PerlString)    // seems we've got require "...";
+    {
+      return ((PerlString)lastChild).getStringContent();
+    }
+    return null;
+  }
 }

@@ -27,16 +27,13 @@ import org.jetbrains.annotations.NonNls;
 /**
  * Created by hurricup on 31.03.2016.
  */
-public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes
-{
-	public PodTemplatingElementType(@NonNls String debugName, Language language)
-	{
-		super(debugName, language, POD, POD_OUTER);
-	}
+public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes {
+  public PodTemplatingElementType(@NonNls String debugName, Language language) {
+    super(debugName, language, POD, POD_OUTER);
+  }
 
-	@Override
-	protected Language getTemplateFileLanguage(TemplateLanguageFileViewProvider viewProvider)
-	{
-		return PodLanguage.INSTANCE;
-	}
+  @Override
+  protected Language getTemplateFileLanguage(TemplateLanguageFileViewProvider viewProvider) {
+    return PodLanguage.INSTANCE;
+  }
 }

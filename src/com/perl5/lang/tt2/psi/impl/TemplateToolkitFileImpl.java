@@ -28,23 +28,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileImpl extends PsiFileBase implements TemplateToolkitFile
-{
-	public TemplateToolkitFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, TemplateToolkitLanguage.INSTANCE);
-	}
+public class TemplateToolkitFileImpl extends PsiFileBase implements TemplateToolkitFile {
+  public TemplateToolkitFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, TemplateToolkitLanguage.INSTANCE);
+  }
 
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return TemplateToolkitFileType.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public FileType getFileType() {
+    return TemplateToolkitFileType.INSTANCE;
+  }
 
-	@Override
-	public PerlLexicalScope getLexicalScope()
-	{
-		return null;
-	}
+  @Override
+  public PerlLexicalScope getLexicalScope() {
+    return null;
+  }
 }

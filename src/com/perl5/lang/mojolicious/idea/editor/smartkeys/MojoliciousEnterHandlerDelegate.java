@@ -37,74 +37,62 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, MojoliciousElementTypes
-{
-	@Override
-	public Result preprocessEnter(
-			@NotNull PsiFile file,
-			@NotNull Editor editor,
-			@NotNull Ref<Integer> caretOffset,
-			@NotNull Ref<Integer> caretAdvance,
-			@NotNull DataContext dataContext,
-			@Nullable EditorActionHandler originalHandler)
-	{
-		FileViewProvider viewProvider = file.getViewProvider();
-		if (viewProvider instanceof MojoliciousFileViewProvider)
-		{
-			if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
-					MojoliciousSmartKeysUtil.addEndMarker(editor, file, "\n% end\n")))
-			{
-				addOutlineMarkerIfNeeded((MojoliciousFileViewProvider) viewProvider, caretOffset.get());
-			}
-		}
-		return Result.Continue;
-	}
+public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, MojoliciousElementTypes {
+  @Override
+  public Result preprocessEnter(
+    @NotNull PsiFile file,
+    @NotNull Editor editor,
+    @NotNull Ref<Integer> caretOffset,
+    @NotNull Ref<Integer> caretAdvance,
+    @NotNull DataContext dataContext,
+    @Nullable EditorActionHandler originalHandler) {
+    FileViewProvider viewProvider = file.getViewProvider();
+    if (viewProvider instanceof MojoliciousFileViewProvider) {
+      if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
+            MojoliciousSmartKeysUtil.addEndMarker(editor, file, "\n% end\n"))) {
+        addOutlineMarkerIfNeeded((MojoliciousFileViewProvider)viewProvider, caretOffset.get());
+      }
+    }
+    return Result.Continue;
+  }
 
-	protected void addOutlineMarkerIfNeeded(
-			@NotNull MojoliciousFileViewProvider viewProvider,
-			int offset
-	)
-	{
-		PsiElement element = viewProvider.findElementAt(offset, MojoliciousLanguage.INSTANCE);
-		while (element instanceof PsiWhiteSpace)
-		{
-			if (element.getText().charAt(0) == '\n')
-			{
-				return;
-			}
-			element = element.getNextSibling();
-		}
+  protected void addOutlineMarkerIfNeeded(
+    @NotNull MojoliciousFileViewProvider viewProvider,
+    int offset
+  ) {
+    PsiElement element = viewProvider.findElementAt(offset, MojoliciousLanguage.INSTANCE);
+    while (element instanceof PsiWhiteSpace) {
+      if (element.getText().charAt(0) == '\n') {
+        return;
+      }
+      element = element.getNextSibling();
+    }
 
-		if (element == null)
-		{
-			return;
-		}
+    if (element == null) {
+      return;
+    }
 
-		Document document = viewProvider.getDocument();
-		if (document == null)
-		{
-			return;
-		}
+    Document document = viewProvider.getDocument();
+    if (document == null) {
+      return;
+    }
 
-		int elementLine = document.getLineNumber(offset);
-		int lineStart = document.getLineStartOffset(elementLine);
-		element = viewProvider.findElementAt(lineStart, MojoliciousLanguage.INSTANCE);
+    int elementLine = document.getLineNumber(offset);
+    int lineStart = document.getLineStartOffset(elementLine);
+    element = viewProvider.findElementAt(lineStart, MojoliciousLanguage.INSTANCE);
 
-		while (element instanceof PsiWhiteSpace || PsiUtilCore.getElementType(element) == MOJO_OUTER_ELEMENT_TYPE)
-		{
-			element = element.getNextSibling();
-		}
+    while (element instanceof PsiWhiteSpace || PsiUtilCore.getElementType(element) == MOJO_OUTER_ELEMENT_TYPE) {
+      element = element.getNextSibling();
+    }
 
-		IElementType tokenType = PsiUtilCore.getElementType(element);
-		if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset)
-		{
-			document.insertString(offset, KEYWORD_MOJO_LINE_OPENER + " ");
-		}
-	}
+    IElementType tokenType = PsiUtilCore.getElementType(element);
+    if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset) {
+      document.insertString(offset, KEYWORD_MOJO_LINE_OPENER + " ");
+    }
+  }
 
-	@Override
-	public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext)
-	{
-		return Result.Continue;
-	}
+  @Override
+  public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
+    return Result.Continue;
+  }
 }

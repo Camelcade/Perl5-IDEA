@@ -24,29 +24,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpLiteralEscaper extends LiteralTextEscaper<Perl5RegexpMixin>
-{
-	public Perl5RegexpLiteralEscaper(@NotNull Perl5RegexpMixin host)
-	{
-		super(host);
-	}
+public class Perl5RegexpLiteralEscaper extends LiteralTextEscaper<Perl5RegexpMixin> {
+  public Perl5RegexpLiteralEscaper(@NotNull Perl5RegexpMixin host) {
+    super(host);
+  }
 
-	@Override
-	public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars)
-	{
-		outChars.append(rangeInsideHost.subSequence(myHost.getText()));
-		return true;
-	}
+  @Override
+  public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    outChars.append(rangeInsideHost.subSequence(myHost.getText()));
+    return true;
+  }
 
-	@Override
-	public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost)
-	{
-		return offsetInDecoded + rangeInsideHost.getStartOffset();
-	}
+  @Override
+  public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost) {
+    return offsetInDecoded + rangeInsideHost.getStartOffset();
+  }
 
-	@Override
-	public boolean isOneLine()
-	{
-		return false;
-	}
+  @Override
+  public boolean isOneLine() {
+    return false;
+  }
 }

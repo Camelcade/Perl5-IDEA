@@ -26,31 +26,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class StringToHeredocConverter extends StringToLastHeredocConverter
-{
+public class StringToHeredocConverter extends StringToLastHeredocConverter {
 
-	@Override
-	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
-	{
-		String markerText = Messages.showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(), HEREDOC_MARKER, null);
-		if (markerText != null)
-		{
-			if (markerText.isEmpty())
-			{
-				Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
-			}
-			else    // converting
-			{
-				HEREDOC_MARKER = markerText;
-				super.invoke(project, editor, element);
-			}
-		}
-	}
+  @Override
+  public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
+    String markerText = Messages
+      .showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(), HEREDOC_MARKER,
+                       null);
+    if (markerText != null) {
+      if (markerText.isEmpty()) {
+        Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
+      }
+      else    // converting
+      {
+        HEREDOC_MARKER = markerText;
+        super.invoke(project, editor, element);
+      }
+    }
+  }
 
-	@NotNull
-	@Override
-	public String getText()
-	{
-		return "Convert to heredoc...";
-	}
+  @NotNull
+  @Override
+  public String getText() {
+    return "Convert to heredoc...";
+  }
 }

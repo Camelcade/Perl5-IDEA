@@ -28,23 +28,20 @@ import java.util.Properties;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProvider
-{
-	@Override
-	public void fillProperties(PsiDirectory directory, Properties props)
-	{
-		VirtualFile directoryFile = directory.getVirtualFile();
-		VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(directory.getProject(), directoryFile);
+public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProvider {
+  @Override
+  public void fillProperties(PsiDirectory directory, Properties props) {
+    VirtualFile directoryFile = directory.getVirtualFile();
+    VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(directory.getProject(), directoryFile);
 
-		if (newInnermostRoot != null)
-		{
-			String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);
-			props.put("PERL_PACKAGE_PREFIX", newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtil.getPackageNameByPath(newRelativePath));
-		}
-		else
-		{
-			props.put("PERL_PACKAGE_PREFIX", "");
-		}
-	}
+    if (newInnermostRoot != null) {
+      String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);
+      props.put("PERL_PACKAGE_PREFIX",
+                newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtil.getPackageNameByPath(newRelativePath));
+    }
+    else {
+      props.put("PERL_PACKAGE_PREFIX", "");
+    }
+  }
 }
 

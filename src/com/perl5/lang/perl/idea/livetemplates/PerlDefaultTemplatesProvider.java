@@ -23,25 +23,21 @@ import org.jetbrains.annotations.Nullable;
  * Created by ELI-HOME on 01-Jun-15.
  * makes sure the file liveTemplates/perl.xml will be added to the live templates list
  */
-public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider
-{
-	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/Perl5"
-			, "/liveTemplates/Perl5Postfix"
-			, "/liveTemplates/Perl5Test"
-	};
+public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider {
+  public static final String[] TEMPLATES = new String[]{
+    "/liveTemplates/Perl5"
+    , "/liveTemplates/Perl5Postfix"
+    , "/liveTemplates/Perl5Test"
+  };
 
-	@Override
-	public String[] getDefaultLiveTemplateFiles()
-	{
-		return TEMPLATES;
-	}
+  @Override
+  public String[] getDefaultLiveTemplateFiles() {
+    return TEMPLATES;
+  }
 
-	@Nullable
-	@Override
-	public String[] getHiddenLiveTemplateFiles()
-	{
-		return null;
-	}
-
+  @Nullable
+  @Override
+  public String[] getHiddenLiveTemplateFiles() {
+    return null;
+  }
 }

@@ -29,38 +29,34 @@ import java.util.List;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx
-{
-	/**
-	 * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
-	 *
-	 * @param element     root element for searching
-	 * @param startMargin beginning margin for collapsable block
-	 * @param endMargin   end margin for collapsable block
-	 * @return list of folding descriptors
-	 */
-	protected static void addDescriptorFor(
-			@NotNull List<FoldingDescriptor> result,
-			@NotNull Document document,
-			@NotNull PsiElement element,
-			int startMargin,
-			int endMargin,
-			int minLines
-	)
-	{
-		if (!(element.getParent() instanceof PerlNamespaceDefinition))
-		{
+public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
+  /**
+   * Finding psi elements of specific types and add Folding descriptor for them if they are more than certain lines lenght
+   *
+   * @param element     root element for searching
+   * @param startMargin beginning margin for collapsable block
+   * @param endMargin   end margin for collapsable block
+   * @return list of folding descriptors
+   */
+  protected static void addDescriptorFor(
+    @NotNull List<FoldingDescriptor> result,
+    @NotNull Document document,
+    @NotNull PsiElement element,
+    int startMargin,
+    int endMargin,
+    int minLines
+  ) {
+    if (!(element.getParent() instanceof PerlNamespaceDefinition)) {
 
-			TextRange range = element.getTextRange();
-			int startOffset = range.getStartOffset() + startMargin;
-			int endOffset = range.getEndOffset() - endMargin;
-			int startLine = document.getLineNumber(startOffset);
-			int endLine = document.getLineNumber(endOffset);
+      TextRange range = element.getTextRange();
+      int startOffset = range.getStartOffset() + startMargin;
+      int endOffset = range.getEndOffset() - endMargin;
+      int startLine = document.getLineNumber(startOffset);
+      int endLine = document.getLineNumber(endOffset);
 
-			if (endLine - startLine > minLines)
-			{
-				result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
-			}
-		}
-	}
+      if (endLine - startLine > minLines) {
+        result.add(new FoldingDescriptor(element.getNode(), new TextRange(startOffset, endOffset)));
+      }
+    }
+  }
 }

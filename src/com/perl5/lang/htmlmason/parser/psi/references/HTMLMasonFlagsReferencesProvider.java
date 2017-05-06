@@ -26,20 +26,17 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonFlagsReferencesProvider extends PsiReferenceProvider
-{
-	@NotNull
-	@Override
-	public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-	{
-		if (element instanceof PerlString && element.getNextSibling() == null && element.getChildren().length == 0)
-		{
-			return new PsiReference[]{new HTMLMasonComponentReference(
-					(PerlString) element,
-					((PerlString) element).getContentTextRangeInParent()
-			)};
-		}
+public class HTMLMasonFlagsReferencesProvider extends PsiReferenceProvider {
+  @NotNull
+  @Override
+  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+    if (element instanceof PerlString && element.getNextSibling() == null && element.getChildren().length == 0) {
+      return new PsiReference[]{new HTMLMasonComponentReference(
+        (PerlString)element,
+        ((PerlString)element).getContentTextRangeInParent()
+      )};
+    }
 
-		return PsiReference.EMPTY_ARRAY;
-	}
+    return PsiReference.EMPTY_ARRAY;
+  }
 }

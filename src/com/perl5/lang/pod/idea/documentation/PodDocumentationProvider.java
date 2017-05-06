@@ -35,54 +35,42 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes
-{
+public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
 
-	@Nullable
-	@Override
-	public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement)
-	{
-		if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  public PsiElement getCustomDocumentationElement(@NotNull Editor editor, @NotNull PsiFile file, @Nullable PsiElement contextElement) {
+    if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE) {
+      return null;
+    }
 
-		IElementType elementType = contextElement.getNode().getElementType();
+    IElementType elementType = contextElement.getNode().getElementType();
 
-		if (contextElement instanceof PodFormatter)
-		{
-			PsiElement tagElement = contextElement.getFirstChild();
-			if (tagElement != null)
-			{
-				String tagText = tagElement.getText();
-				if (StringUtil.isNotEmpty(tagText))
-				{
-					return PerlDocUtil.resolveDocLink("perlpod/" + tagText + "<", contextElement);
-				}
-			}
-		}
-		else if (contextElement instanceof PodSectionParagraph)
-		{
-			return PerlDocUtil.resolveDocLink("perlpod/\"Ordinary Paragraph\"", contextElement);
-		}
-		else if (contextElement instanceof PodSectionVerbatimParagraph)
-		{
-			return PerlDocUtil.resolveDocLink("perlpod/\"Verbatim Paragraph\"", contextElement);
-		}
-		else if (contextElement instanceof PodSection)
-		{
-			PsiElement tagElement = contextElement.getFirstChild();
-			if (tagElement != null && tagElement.getNode().getElementType() != POD_UNKNOWN)
-			{
-				String tagText = tagElement.getText();
-				if (StringUtil.isNotEmpty(tagText))
-				{
-					return PerlDocUtil.resolveDocLink("perlpod/" + tagText, contextElement);
-				}
-			}
-		}
+    if (contextElement instanceof PodFormatter) {
+      PsiElement tagElement = contextElement.getFirstChild();
+      if (tagElement != null) {
+        String tagText = tagElement.getText();
+        if (StringUtil.isNotEmpty(tagText)) {
+          return PerlDocUtil.resolveDocLink("perlpod/" + tagText + "<", contextElement);
+        }
+      }
+    }
+    else if (contextElement instanceof PodSectionParagraph) {
+      return PerlDocUtil.resolveDocLink("perlpod/\"Ordinary Paragraph\"", contextElement);
+    }
+    else if (contextElement instanceof PodSectionVerbatimParagraph) {
+      return PerlDocUtil.resolveDocLink("perlpod/\"Verbatim Paragraph\"", contextElement);
+    }
+    else if (contextElement instanceof PodSection) {
+      PsiElement tagElement = contextElement.getFirstChild();
+      if (tagElement != null && tagElement.getNode().getElementType() != POD_UNKNOWN) {
+        String tagText = tagElement.getText();
+        if (StringUtil.isNotEmpty(tagText)) {
+          return PerlDocUtil.resolveDocLink("perlpod/" + tagText, contextElement);
+        }
+      }
+    }
 
-		return super.getCustomDocumentationElement(editor, file, contextElement);
-	}
-
+    return super.getCustomDocumentationElement(editor, file, contextElement);
+  }
 }

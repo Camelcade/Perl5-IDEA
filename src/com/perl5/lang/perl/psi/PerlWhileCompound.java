@@ -22,6 +22,5 @@ import com.perl5.lang.perl.psi.properties.PerlLoop;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlWhileCompound extends PerlLexicalScope, PerlLoop
-{
+public interface PerlWhileCompound extends PerlLexicalScope, PerlLoop {
 }

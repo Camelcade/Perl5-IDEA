@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public abstract class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType
-{
-	public PerlTokenTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
+  public PerlTokenTypeEx(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

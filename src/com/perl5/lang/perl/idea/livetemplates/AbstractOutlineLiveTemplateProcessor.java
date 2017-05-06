@@ -33,99 +33,87 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.07.2016.
  */
-public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOptionalProcessor
-{
-	/**
-	 * Checks if psi file should be handled by processor
-	 */
-	protected abstract boolean isMyFile(PsiFile file);
+public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOptionalProcessor {
+  /**
+   * Checks if psi file should be handled by processor
+   */
+  protected abstract boolean isMyFile(PsiFile file);
 
-	/**
-	 * Checks if marker is already there or this is empty line and no outline is necessary
-	 */
-	protected abstract boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset);
+  /**
+   * Checks if marker is already there or this is empty line and no outline is necessary
+   */
+  protected abstract boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset);
 
-	/**
-	 * Returns base language of the file, could take from psiFile though
-	 */
-	@NotNull
-	protected abstract Language getMyLanguage();
+  /**
+   * Returns base language of the file, could take from psiFile though
+   */
+  @NotNull
+  protected abstract Language getMyLanguage();
 
-	/**
-	 * Returns outline marker text to insert
-	 */
-	@NotNull
-	protected abstract String getOutlineMarker();
+  /**
+   * Returns outline marker text to insert
+   */
+  @NotNull
+  protected abstract String getOutlineMarker();
 
-	/**
-	 * Attempts to find an outline marker by the first psi element in the line.
-	 *
-	 * @param firstElement first element of the line
-	 * @return outline marker or null if not found
-	 */
-	@Nullable
-	protected abstract PsiElement getOutlineElement(PsiElement firstElement);
+  /**
+   * Attempts to find an outline marker by the first psi element in the line.
+   *
+   * @param firstElement first element of the line
+   * @return outline marker or null if not found
+   */
+  @Nullable
+  protected abstract PsiElement getOutlineElement(PsiElement firstElement);
 
-	@Nls
-	@Override
-	public String getOptionName()
-	{
-		return "Please report a bug";
-	}
+  @Nls
+  @Override
+  public String getOptionName() {
+    return "Please report a bug";
+  }
 
-	@Override
-	public boolean isEnabled(Template template)
-	{
-		return true;
-	}
+  @Override
+  public boolean isEnabled(Template template) {
+    return true;
+  }
 
-	@Override
-	public void setEnabled(Template template, boolean value)
-	{
-	}
+  @Override
+  public void setEnabled(Template template, boolean value) {
+  }
 
-	@Override
-	public boolean isVisible(Template template)
-	{
-		return false;
-	}
+  @Override
+  public boolean isVisible(Template template) {
+    return false;
+  }
 
-	@Override
-	public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor)
-	{
-		PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
-		if (!isMyFile(file))
-		{
-			return;
-		}
+  @Override
+  public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor) {
+    PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
+    if (!isMyFile(file)) {
+      return;
+    }
 
-		int startOffset = templateRange.getStartOffset();
-		int startLine = document.getLineNumber(startOffset);
-		int endLine = document.getLineNumber(templateRange.getEndOffset());
-		if (startLine == endLine)
-		{
-			return;
-		}
+    int startOffset = templateRange.getStartOffset();
+    int startLine = document.getLineNumber(startOffset);
+    int endLine = document.getLineNumber(templateRange.getEndOffset());
+    if (startLine == endLine) {
+      return;
+    }
 
-		int startLineBeginOffset = document.getLineStartOffset(startLine);
+    int startLineBeginOffset = document.getLineStartOffset(startLine);
 
-		assert file != null;
-		PsiElement firstElement = file.getViewProvider().findElementAt(startLineBeginOffset, getMyLanguage());
-		firstElement = getOutlineElement(firstElement);
-		if (firstElement == null)
-		{
-			return;
-		}
+    assert file != null;
+    PsiElement firstElement = file.getViewProvider().findElementAt(startLineBeginOffset, getMyLanguage());
+    firstElement = getOutlineElement(firstElement);
+    if (firstElement == null) {
+      return;
+    }
 
-		CharSequence charsSequence = document.getCharsSequence();
-		for (int currentLine = endLine; currentLine > startLine; currentLine--)
-		{
-			int lineStartOffset = document.getLineStartOffset(currentLine);
-			if (shouldAddMarkerAtLineStartingAtOffset(charsSequence, lineStartOffset))
-			{
-				document.insertString(lineStartOffset, getOutlineMarker());
-			}
-		}
-	}
-
+    CharSequence charsSequence = document.getCharsSequence();
+    for (int currentLine = endLine; currentLine > startLine; currentLine--) {
+      int lineStartOffset = document.getLineStartOffset(currentLine);
+      if (shouldAddMarkerAtLineStartingAtOffset(charsSequence, lineStartOffset)) {
+        document.insertString(lineStartOffset, getOutlineMarker());
+      }
+    }
+  }
 }

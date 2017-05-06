@@ -40,176 +40,148 @@ import javax.swing.*;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementBase<PerlGlobStub> implements PsiPerlGlobVariable, PerlElementTypes
-{
-	public PerlGlobVariableImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
+  implements PsiPerlGlobVariable, PerlElementTypes {
+  public PerlGlobVariableImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		PerlGlobStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getPackageName();
-		}
+  @Nullable
+  @Override
+  public String getPackageName() {
+    PerlGlobStub stub = getStub();
+    if (stub != null) {
+      return stub.getPackageName();
+    }
 
-		String namespace = getExplicitPackageName();
+    String namespace = getExplicitPackageName();
 
-		if (namespace == null)
-		{
-			namespace = getContextPackageName();
-		}
+    if (namespace == null) {
+      namespace = getContextPackageName();
+    }
 
-		return namespace;
-	}
+    return namespace;
+  }
 
-	@Override
-	public String getName()
-	{
-		PerlGlobStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getName();
-		}
+  @Override
+  public String getName() {
+    PerlGlobStub stub = getStub();
+    if (stub != null) {
+      return stub.getName();
+    }
 
-		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if (variableNameElement == null)
-		{
-			return null;
-		}
-		String variableNameText = variableNameElement.getText();
-		int delimiterIndex = variableNameText.lastIndexOf(':');
-		return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
-	}
+    PerlVariableNameElement variableNameElement = getVariableNameElement();
+    if (variableNameElement == null) {
+      return null;
+    }
+    String variableNameText = variableNameElement.getText();
+    int delimiterIndex = variableNameText.lastIndexOf(':');
+    return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
+  }
 
-	@Nullable
-	@Override
-	public String getContextPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
+  @Nullable
+  @Override
+  public String getContextPackageName() {
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 
-	@Nullable
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if (variableNameElement == null)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  public String getExplicitPackageName() {
+    PerlVariableNameElement variableNameElement = getVariableNameElement();
+    if (variableNameElement == null) {
+      return null;
+    }
 
-		String variableNameText = variableNameElement.getText();
-		int delimiterIndex = variableNameText.lastIndexOf(':');
-		return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
-	}
+    String variableNameText = variableNameElement.getText();
+    int delimiterIndex = variableNameText.lastIndexOf(':');
+    return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalPackageName(variableNameText.substring(0, delimiterIndex + 1));
+  }
 
-	@Override
-	public PerlVariableNameElement getVariableNameElement()
-	{
-		return findChildByClass(PerlVariableNameElement.class);
-	}
+  @Override
+  public PerlVariableNameElement getVariableNameElement() {
+    return findChildByClass(PerlVariableNameElement.class);
+  }
 
-	@Override
-	public boolean isBuiltIn()
-	{
-		if (getExplicitPackageName() != null)
-		{
-			return false;
-		}
+  @Override
+  public boolean isBuiltIn() {
+    if (getExplicitPackageName() != null) {
+      return false;
+    }
 
-		String globName = getName();
-		return globName != null && PerlGlobUtil.BUILT_IN.contains(globName);
-	}
+    String globName = getName();
+    return globName != null && PerlGlobUtil.BUILT_IN.contains(globName);
+  }
 
-	@Override
-	public boolean isDeprecated()
-	{
-		return false;
-	}
+  @Override
+  public boolean isDeprecated() {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getVariableNameElement();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getVariableNameElement();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PerlVariableNameElement variableNameElement = getVariableNameElement();
-		if (variableNameElement != null)
-		{
-			PerlPsiUtil.renameElement(variableNameElement, name);
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    PerlVariableNameElement variableNameElement = getVariableNameElement();
+    if (variableNameElement != null) {
+      PerlPsiUtil.renameElement(variableNameElement, name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public String getCanonicalName()
-	{
+  @Nullable
+  @Override
+  public String getCanonicalName() {
 
-		String packageName = getPackageName();
-		if (packageName == null)
-		{
-			return null;
-		}
-		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-	}
+    String packageName = getPackageName();
+    if (packageName == null) {
+      return null;
+    }
+    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+  }
 
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return PerlIcons.GLOB_GUTTER_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    return PerlIcons.GLOB_GUTTER_ICON;
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new PerlItemPresentationSimple(this, getName());
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getName());
+  }
 
-	@Override
-	public boolean isLeftSideOfAssignment()
-	{
-		PerlGlobStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.isLeftSideOfAssignment();
-		}
-		return getParent() instanceof PsiPerlAssignExpr && getNextSibling() != null;
-	}
+  @Override
+  public boolean isLeftSideOfAssignment() {
+    PerlGlobStub stub = getStub();
+    if (stub != null) {
+      return stub.isLeftSideOfAssignment();
+    }
+    return getParent() instanceof PsiPerlAssignExpr && getNextSibling() != null;
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
+  @Override
+  public String getPresentableName() {
+    return getName();
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier == null)
-		{
-			return super.getTextOffset();
-		}
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier == null) {
+      return super.getTextOffset();
+    }
 
-		return nameIdentifier.getTextOffset() + ElementManipulators.getOffsetInElement(nameIdentifier);
-	}
-
+    return nameIdentifier.getTextOffset() + ElementManipulators.getOffsetInElement(nameIdentifier);
+  }
 }

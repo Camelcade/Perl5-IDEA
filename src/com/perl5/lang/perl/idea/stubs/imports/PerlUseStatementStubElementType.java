@@ -32,68 +32,62 @@ import java.io.IOException;
 /**
  * Created by hurricup on 20.08.2015.
  */
-public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement> implements PsiElementProvider
-{
-	public PerlUseStatementStubElementType(String debugName)
-	{
-		super(debugName, PerlLanguage.INSTANCE);
-	}
+public class PerlUseStatementStubElementType extends IStubElementType<PerlUseStatementStub, PerlUseStatement>
+  implements PsiElementProvider {
+  public PerlUseStatementStubElementType(String debugName) {
+    super(debugName, PerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public PerlUseStatement createPsi(@NotNull PerlUseStatementStub stub)
-	{
-		return new PsiPerlUseStatementImpl(stub, this);
-	}
+  @Override
+  public PerlUseStatement createPsi(@NotNull PerlUseStatementStub stub) {
+    return new PsiPerlUseStatementImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlUseStatementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlUseStatementImpl(node);
+  }
 
-	@Override
-	public PerlUseStatementStub createStub(@NotNull PerlUseStatement psi, StubElement parentStub)
-	{
-		return new PerlUseStatementStubImpl(
-				parentStub,
-				psi.getOuterPackageName(),
-				psi.getPackageName(),
-				psi.getImportParameters()
-		);
-	}
+  @Override
+  public PerlUseStatementStub createStub(@NotNull PerlUseStatement psi, StubElement parentStub) {
+    return new PerlUseStatementStubImpl(
+      parentStub,
+      psi.getOuterPackageName(),
+      psi.getPackageName(),
+      psi.getImportParameters()
+    );
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull PerlUseStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getOuterPackageName());
-		dataStream.writeName(stub.getPackageName());
-		PerlStubSerializationUtil.writeStringsList(dataStream, stub.getImportParameters());
-	}
+  @Override
+  public void serialize(@NotNull PerlUseStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getOuterPackageName());
+    dataStream.writeName(stub.getPackageName());
+    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getImportParameters());
+  }
 
-	@NotNull
-	@Override
-	public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new PerlUseStatementStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString(), PerlStubSerializationUtil.readStringsList(dataStream));
-	}
+  @NotNull
+  @Override
+  public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PerlUseStatementStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString(),
+                                        PerlStubSerializationUtil.readStringsList(dataStream));
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink)
-	{
-	}
+  @Override
+  public void indexStub(@NotNull PerlUseStatementStub stub, @NotNull IndexSink sink) {
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement element = node.getPsi();
-		return element instanceof PsiPerlUseStatementImpl && element.isValid() && StringUtil.isNotEmpty(((PsiPerlUseStatementImpl) element).getPackageName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement element = node.getPsi();
+    return element instanceof PsiPerlUseStatementImpl &&
+           element.isValid() &&
+           StringUtil.isNotEmpty(((PsiPerlUseStatementImpl)element).getPackageName());
+  }
 }

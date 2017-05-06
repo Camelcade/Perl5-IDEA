@@ -24,15 +24,12 @@ import com.perl5.lang.perl.psi.PerlNoStatement;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public abstract class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement
-{
-	public PerlNoStatementImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement {
+  public PerlNoStatementImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlNoStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlNoStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 }

@@ -24,17 +24,14 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 /**
  * Created by hurricup on 02.08.2015.
  */
-public class MojoliciousCompletionContributor extends CompletionContributor implements PerlElementTypes, MojoliciousElementPatterns
-{
+public class MojoliciousCompletionContributor extends CompletionContributor implements PerlElementTypes, MojoliciousElementPatterns {
 
-	public MojoliciousCompletionContributor()
-	{
-		// refactored
-		extend(
-				CompletionType.BASIC,
-				MOJO_HELPER_USAGE,
-				new MojoliciousCompletionProvider()
-		);
-
-	}
+  public MojoliciousCompletionContributor() {
+    // refactored
+    extend(
+      CompletionType.BASIC,
+      MOJO_HELPER_USAGE,
+      new MojoliciousCompletionProvider()
+    );
+  }
 }

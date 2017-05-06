@@ -27,19 +27,16 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by evstigneev on 10.07.2015.
  */
-public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector
-{
-	@Override
-	public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText)
-	{
-		// todo add some detections for xs/pod/pm
-		return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileTypeScript.INSTANCE : null;
-	}
+public class PerlFileTypeDetector implements FileTypeRegistry.FileTypeDetector {
+  @Override
+  public FileType detect(@NotNull VirtualFile file, @NotNull ByteSequence firstBytes, @Nullable CharSequence firstCharsIfText) {
+    // todo add some detections for xs/pod/pm
+    return FileUtil.isHashBangLine(firstCharsIfText, "perl") ? PerlFileTypeScript.INSTANCE : null;
+  }
 
-	@Override
-	public int getVersion()
-	{
-		return 1;
-	}
+  @Override
+  public int getVersion() {
+    return 1;
+  }
 }
 

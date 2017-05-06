@@ -29,26 +29,22 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonLanguageSubstitutor extends LanguageSubstitutor
-{
-	protected final FileNameMatcher myFileNameMatcher;
-	protected final Project myProject;
+public class HTMLMasonLanguageSubstitutor extends LanguageSubstitutor {
+  protected final FileNameMatcher myFileNameMatcher;
+  protected final Project myProject;
 
-	public HTMLMasonLanguageSubstitutor(Project project, FileNameMatcher fileNameMatcher)
-	{
-		myFileNameMatcher = fileNameMatcher;
-		myProject = project;
-	}
+  public HTMLMasonLanguageSubstitutor(Project project, FileNameMatcher fileNameMatcher) {
+    myFileNameMatcher = fileNameMatcher;
+    myProject = project;
+  }
 
-	@Nullable
-	@Override
-	public Language getLanguage(@NotNull VirtualFile file, @NotNull Project project)
-	{
-		if (myFileNameMatcher.accept(file.getName()) && HTMLMasonUtil.getComponentRoot(myProject, file) != null)
-		{
-//			System.err.println(file.getName() +  " substituted as HTML::Mason");
-			return HTMLMasonLanguage.INSTANCE;
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public Language getLanguage(@NotNull VirtualFile file, @NotNull Project project) {
+    if (myFileNameMatcher.accept(file.getName()) && HTMLMasonUtil.getComponentRoot(myProject, file) != null) {
+      //			System.err.println(file.getName() +  " substituted as HTML::Mason");
+      return HTMLMasonLanguage.INSTANCE;
+    }
+    return null;
+  }
 }

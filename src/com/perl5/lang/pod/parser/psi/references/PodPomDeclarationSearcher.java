@@ -26,14 +26,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodPomDeclarationSearcher extends PomDeclarationSearcher
-{
-	@Override
-	public void findDeclarationsAt(@NotNull PsiElement element, int offsetInElement, Consumer<PomTarget> consumer)
-	{
-		if (element.getParent() instanceof PodSectionTitle)
-		{
-			consumer.consume((PomTarget) element.getParent().getParent());
-		}
-	}
+public class PodPomDeclarationSearcher extends PomDeclarationSearcher {
+  @Override
+  public void findDeclarationsAt(@NotNull PsiElement element, int offsetInElement, Consumer<PomTarget> consumer) {
+    if (element.getParent() instanceof PodSectionTitle) {
+      consumer.consume((PomTarget)element.getParent().getParent());
+    }
+  }
 }

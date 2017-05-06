@@ -40,77 +40,67 @@ import javax.swing.*;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifiableByVirtualFile
-{
-	public static final HTMLMasonFileType INSTANCE = new HTMLMasonFileType();
+public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifiableByVirtualFile {
+  public static final HTMLMasonFileType INSTANCE = new HTMLMasonFileType();
 
-	public HTMLMasonFileType()
-	{
-		super(HTMLMasonLanguage.INSTANCE);
-		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
-		{
-			@Override
-			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
-			{
-				return new HTMLMasonHighlighter(project, virtualFile, editorColorsScheme);
-			}
-		});
-	}
+  public HTMLMasonFileType() {
+    super(HTMLMasonLanguage.INSTANCE);
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
+      @Override
+      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                    @NotNull FileType fileType,
+                                                    @Nullable VirtualFile virtualFile,
+                                                    @NotNull EditorColorsScheme editorColorsScheme) {
+        return new HTMLMasonHighlighter(project, virtualFile, editorColorsScheme);
+      }
+    });
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "HTML::Mason component";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "HTML::Mason component";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "HTML::Mason component";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "HTML::Mason component";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "mas";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "mas";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return HTMLMasonIcons.HTML_MASON_COMPONENT_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return HTMLMasonIcons.HTML_MASON_COMPONENT_ICON;
+  }
 
-	@Override
-	public boolean checkStrictPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkStrictPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean checkWarningsPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkWarningsPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean isMyFileType(@NotNull VirtualFile file)
-	{
-		Project project = ProjectLocator.getInstance().guessProjectForFile(file);
-		if (project != null)
-		{
-			HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-			if (settings != null &&
-					(StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())) &&
-					HTMLMasonUtil.getComponentRoot(project, file) != null)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+  @Override
+  public boolean isMyFileType(@NotNull VirtualFile file) {
+    Project project = ProjectLocator.getInstance().guessProjectForFile(file);
+    if (project != null) {
+      HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
+      if (settings != null &&
+          (StringUtil.equals(settings.autoHandlerName, file.getName()) || StringUtil.equals(settings.defaultHandlerName, file.getName())) &&
+          HTMLMasonUtil.getComponentRoot(project, file) != null) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

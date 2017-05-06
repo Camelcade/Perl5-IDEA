@@ -26,37 +26,32 @@ import java.util.List;
 /**
  * Created by hurricup on 20.08.2015.
  */
-public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> implements PerlUseStatementStub
-{
-	private final String myPackageName;
-	private final String myOuterPackageName;
-	private final List<String> myImportOptions;
+public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> implements PerlUseStatementStub {
+  private final String myPackageName;
+  private final String myOuterPackageName;
+  private final List<String> myImportOptions;
 
-	public PerlUseStatementStubImpl(StubElement parent, String outerPackageName, String packageName, List<String> importOptions)
-	{
-		super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
-		assert packageName != null;
-		assert outerPackageName != null;
-		this.myPackageName = packageName;
-		this.myOuterPackageName = outerPackageName;
-		this.myImportOptions = importOptions;
-	}
+  public PerlUseStatementStubImpl(StubElement parent, String outerPackageName, String packageName, List<String> importOptions) {
+    super(parent, PerlStubElementTypes.PERL_USE_STATEMENT);
+    assert packageName != null;
+    assert outerPackageName != null;
+    this.myPackageName = packageName;
+    this.myOuterPackageName = outerPackageName;
+    this.myImportOptions = importOptions;
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		return myPackageName;
-	}
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
 
-	@Override
-	public String getOuterPackageName()
-	{
-		return myOuterPackageName;
-	}
+  @Override
+  public String getOuterPackageName() {
+    return myOuterPackageName;
+  }
 
-	@Override
-	public List<String> getImportParameters()
-	{
-		return myImportOptions;
-	}
+  @Override
+  public List<String> getImportParameters() {
+    return myImportOptions;
+  }
 }

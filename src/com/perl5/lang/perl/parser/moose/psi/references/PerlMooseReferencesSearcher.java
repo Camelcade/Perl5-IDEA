@@ -28,24 +28,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
-{
-	public PerlMooseReferencesSearcher()
-	{
-		super(true);
-	}
+public class PerlMooseReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
+  public PerlMooseReferencesSearcher() {
+    super(true);
+  }
 
-	@Override
-	public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer)
-	{
-		PsiElement element = queryParameters.getElementToSearch();
-		if (element instanceof PerlSubDefinitionBase) //
-		{
-			queryParameters.getOptimizer().searchWord("super", queryParameters.getEffectiveSearchScope(), true, element);
-		}
-		if (element instanceof PerlMooseAugmentStatement)
-		{
-			queryParameters.getOptimizer().searchWord("augment", queryParameters.getEffectiveSearchScope(), true, element);
-		}
-	}
+  @Override
+  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
+    PsiElement element = queryParameters.getElementToSearch();
+    if (element instanceof PerlSubDefinitionBase) //
+    {
+      queryParameters.getOptimizer().searchWord("super", queryParameters.getEffectiveSearchScope(), true, element);
+    }
+    if (element instanceof PerlMooseAugmentStatement) {
+      queryParameters.getOptimizer().searchWord("augment", queryParameters.getEffectiveSearchScope(), true, element);
+    }
+  }
 }

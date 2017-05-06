@@ -22,10 +22,8 @@ import com.perl5.lang.tt2.TemplateToolkitLanguage;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileElementType extends IFileElementType
-{
-	public TemplateToolkitFileElementType()
-	{
-		super("Template Toolkit File", TemplateToolkitLanguage.INSTANCE);
-	}
+public class TemplateToolkitFileElementType extends IFileElementType {
+  public TemplateToolkitFileElementType() {
+    super("Template Toolkit File", TemplateToolkitLanguage.INSTANCE);
+  }
 }

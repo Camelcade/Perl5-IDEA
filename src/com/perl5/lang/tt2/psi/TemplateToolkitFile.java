@@ -22,6 +22,5 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public interface TemplateToolkitFile extends PsiFile, PerlLexicalScope
-{
+public interface TemplateToolkitFile extends PsiFile, PerlLexicalScope {
 }

@@ -24,68 +24,67 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable
-{
-	/**
-	 * Checks if package is from Core list
-	 *
-	 * @return result
-	 */
-	boolean isBuiltin();
+public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
+  /**
+   * Checks if package is from Core list
+   *
+   * @return result
+   */
+  boolean isBuiltin();
 
-	/**
-	 * Checks if package is pragma
-	 *
-	 * @return result
-	 */
-	boolean isPragma();
+  /**
+   * Checks if package is pragma
+   *
+   * @return result
+   */
+  boolean isPragma();
 
-	/**
-	 * Returns list of definitions of current namespace
-	 *
-	 * @return list of PerlNameSpaceDefitions
-	 */
-	List<PerlNamespaceDefinition> getNamespaceDefinitions();
+  /**
+   * Returns list of definitions of current namespace
+   *
+   * @return list of PerlNameSpaceDefitions
+   */
+  List<PerlNamespaceDefinition> getNamespaceDefinitions();
 
-	/**
-	 * Returns list of files suitable for this namespace, works only if namespace is in use or require statement
-	 *
-	 * @return list of PerlNameSpaceDefitions
-	 */
-	List<PerlFileImpl> getNamespaceFiles();
+  /**
+   * Returns list of files suitable for this namespace, works only if namespace is in use or require statement
+   *
+   * @return list of PerlNameSpaceDefitions
+   */
+  List<PerlFileImpl> getNamespaceFiles();
 
-	/**
-	 * Returns canonical namespace name
-	 *
-	 * @return canonical name
-	 */
-	String getCanonicalName();
+  /**
+   * Returns canonical namespace name
+   *
+   * @return canonical name
+   */
+  String getCanonicalName();
 
-	/**
-	 * Checks if namespace is SUPER::
-	 *
-	 * @return check result
-	 */
-	boolean isSUPER();
+  /**
+   * Checks if namespace is SUPER::
+   *
+   * @return check result
+   */
+  boolean isSUPER();
 
-	/**
-	 * Checks if namespace is SUPER::
-	 *
-	 * @return check result
-	 */
-	boolean isMain();
+  /**
+   * Checks if namespace is SUPER::
+   *
+   * @return check result
+   */
+  boolean isMain();
 
-	/**
-	 * Checks if namespace is SUPER::
-	 *
-	 * @return check result
-	 */
-	boolean isCORE();
+  /**
+   * Checks if namespace is SUPER::
+   *
+   * @return check result
+   */
+  boolean isCORE();
 
-	/**
-	 * Checks if namespace is UNIVERSAL::
-	 *
-	 * @return check result
-	 */
-	boolean isUNIVERSAL();
+  /**
+   * Checks if namespace is UNIVERSAL::
+   *
+   * @return check result
+   */
+  boolean isUNIVERSAL();
 }

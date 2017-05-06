@@ -25,99 +25,81 @@ import com.perl5.lang.pod.lexer.PodElementTypes;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes
-{
-	public static boolean parseTermParam(PsiBuilder b, int l)
-	{
-		if (consumeToken(b, POD_ANGLE_LEFT))
-		{
-			PsiBuilder.Marker m = null;
-			while (true)
-			{
-				IElementType tokenType = b.getTokenType();
-				if (tokenType == POD_ANGLE_RIGHT)
-				{
-					if (m != null)
-					{
-						m.done(FORMATTING_SECTION_CONTENT);
-					}
-					b.advanceLexer();
-					break;
-				}
-				else if (tokenType == POD_NEWLINE || tokenType == null)
-				{
-					if (m == null)
-					{
-						m = b.mark();
-					}
-					m.error("Unclosed angles");
-					break;
-				}
+public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
+  public static boolean parseTermParam(PsiBuilder b, int l) {
+    if (consumeToken(b, POD_ANGLE_LEFT)) {
+      PsiBuilder.Marker m = null;
+      while (true) {
+        IElementType tokenType = b.getTokenType();
+        if (tokenType == POD_ANGLE_RIGHT) {
+          if (m != null) {
+            m.done(FORMATTING_SECTION_CONTENT);
+          }
+          b.advanceLexer();
+          break;
+        }
+        else if (tokenType == POD_NEWLINE || tokenType == null) {
+          if (m == null) {
+            m = b.mark();
+          }
+          m.error("Unclosed angles");
+          break;
+        }
 
-				if (m == null)
-				{
-					m = b.mark();
-				}
-				if (!PodParser.pod_term(b, l))
-				{
-					m.error("Can't parse");
-					break;
-				}
-			}
+        if (m == null) {
+          m = b.mark();
+        }
+        if (!PodParser.pod_term(b, l)) {
+          m.error("Can't parse");
+          break;
+        }
+      }
 
-			return true;
-		}
-		return false;
-	}
+      return true;
+    }
+    return false;
+  }
 
-	public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType)
-	{
-		if (b.getTokenType() == sourceType)
-		{
-			PsiBuilder.Marker m = b.mark();
-			b.advanceLexer();
-			m.collapse(POD_INDENT_LEVEL);
-			return true;
-		}
-		return false;
-	}
+  public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType) {
+    if (b.getTokenType() == sourceType) {
+      PsiBuilder.Marker m = b.mark();
+      b.advanceLexer();
+      m.collapse(POD_INDENT_LEVEL);
+      return true;
+    }
+    return false;
+  }
 
 
-	public static boolean collapseNonSpaceTo(PsiBuilder b, int l, IElementType targetElement)
-	{
-		IElementType tokenType = b.getTokenType();
+  public static boolean collapseNonSpaceTo(PsiBuilder b, int l, IElementType targetElement) {
+    IElementType tokenType = b.getTokenType();
 
-		if (tokenType == POD_IDENTIFIER)
-		{
-			PsiBuilder.Marker m = b.mark();
-			while (!b.eof() && !PodParserDefinition.ALL_WHITE_SPACES.contains(b.rawLookup(1)))
-			{
-				b.advanceLexer();
-			}
-			b.advanceLexer();
-			m.collapse(targetElement);
-			return true;
-		}
-		return false;
-	}
+    if (tokenType == POD_IDENTIFIER) {
+      PsiBuilder.Marker m = b.mark();
+      while (!b.eof() && !PodParserDefinition.ALL_WHITE_SPACES.contains(b.rawLookup(1))) {
+        b.advanceLexer();
+      }
+      b.advanceLexer();
+      m.collapse(targetElement);
+      return true;
+    }
+    return false;
+  }
 
-	public static boolean parsePodSectionContent(PsiBuilder b, int l, IElementType stopToken, IElementType targetToken, String errorMessage)
-	{
-		PsiBuilder.Marker m = b.mark();
-		while (!b.eof() && b.getTokenType() != stopToken)
-		{
-//			PsiBuilder.Marker runMarker = b.mark();
-			b.advanceLexer();
-//			runMarker.collapse(POD_IDENTIFIER);
-		}
+  public static boolean parsePodSectionContent(PsiBuilder b, int l, IElementType stopToken, IElementType targetToken, String errorMessage) {
+    PsiBuilder.Marker m = b.mark();
+    while (!b.eof() && b.getTokenType() != stopToken) {
+      //			PsiBuilder.Marker runMarker = b.mark();
+      b.advanceLexer();
+      //			runMarker.collapse(POD_IDENTIFIER);
+    }
 
-		m.done(targetToken);
+    m.done(targetToken);
 
-		if (b.eof())
-		{
-			b.mark().error(errorMessage);
-		}
+    if (b.eof()) {
+      b.mark().error(errorMessage);
+    }
 
-		return true;
-	}
+    return true;
+  }
 }

@@ -29,44 +29,36 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes
-{
-	public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker)
-	{
-		int offset = editor.getCaretModel().getOffset();
+public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes {
+  public static boolean addCloseMarker(@NotNull final Editor editor, @NotNull PsiFile file, @NotNull String marker) {
+    int offset = editor.getCaretModel().getOffset();
 
-		if (offset >= 2)
-		{
-			PsiElement element = file.findElementAt(offset - 2);
-			if (element != null && element.getNode().getElementType() == EMBED_MARKER_OPEN && !hasCloseMarkerAhead(file, offset))
-			{
-				EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
-			}
-		}
-		return false;
-	}
+    if (offset >= 2) {
+      PsiElement element = file.findElementAt(offset - 2);
+      if (element != null && element.getNode().getElementType() == EMBED_MARKER_OPEN && !hasCloseMarkerAhead(file, offset)) {
+        EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+      }
+    }
+    return false;
+  }
 
-	public static boolean hasCloseMarkerAhead(@NotNull PsiFile psiFile, int startOffset)
-	{
-		int docLength = psiFile.getTextLength();
-		while (startOffset < docLength)
-		{
-			PsiElement element = psiFile.findElementAt(startOffset);
-			if (element == null)
-			{
-				return false;
-			}
-			IElementType tokenType = element.getNode().getElementType();
-			if (tokenType == EMBED_MARKER_CLOSE)
-			{
-				return true;
-			}
-			else if (tokenType == EMBED_MARKER_OPEN || tokenType == QUESTION && EmbeddedPerlPatterns.BROKEN_OPEN_MARKER_PATTERN.accepts(element))
-			{
-				return false;
-			}
-			startOffset = element.getTextOffset() + element.getTextLength();
-		}
-		return false;
-	}
+  public static boolean hasCloseMarkerAhead(@NotNull PsiFile psiFile, int startOffset) {
+    int docLength = psiFile.getTextLength();
+    while (startOffset < docLength) {
+      PsiElement element = psiFile.findElementAt(startOffset);
+      if (element == null) {
+        return false;
+      }
+      IElementType tokenType = element.getNode().getElementType();
+      if (tokenType == EMBED_MARKER_CLOSE) {
+        return true;
+      }
+      else if (tokenType == EMBED_MARKER_OPEN ||
+               tokenType == QUESTION && EmbeddedPerlPatterns.BROKEN_OPEN_MARKER_PATTERN.accepts(element)) {
+        return false;
+      }
+      startOffset = element.getTextOffset() + element.getTextLength();
+    }
+    return false;
+  }
 }

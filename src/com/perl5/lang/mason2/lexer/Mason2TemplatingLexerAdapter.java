@@ -25,15 +25,13 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class Mason2TemplatingLexerAdapter extends PerlTemplatingMergingLexerAdapter implements Mason2ElementTypes
-{
-	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
-			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
-			TokenSet.create(MASON_TEMPLATE_BLOCK_HTML)
-	);
+public class Mason2TemplatingLexerAdapter extends PerlTemplatingMergingLexerAdapter implements Mason2ElementTypes {
+  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+    PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+    TokenSet.create(MASON_TEMPLATE_BLOCK_HTML)
+  );
 
-	public Mason2TemplatingLexerAdapter(Project project)
-	{
-		super(project, new Mason2TemplatingLexer(null).withProject(project), TOKENS_TO_MERGE);
-	}
+  public Mason2TemplatingLexerAdapter(Project project) {
+    super(project, new Mason2TemplatingLexer(null).withProject(project), TOKENS_TO_MERGE);
+  }
 }

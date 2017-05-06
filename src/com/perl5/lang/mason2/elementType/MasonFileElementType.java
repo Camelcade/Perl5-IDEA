@@ -22,10 +22,8 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class MasonFileElementType extends PerlFileElementType
-{
-	public MasonFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
+public class MasonFileElementType extends PerlFileElementType {
+  public MasonFileElementType(String debugName, Language language) {
+    super(debugName, language);
+  }
 }

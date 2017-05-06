@@ -30,59 +30,49 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.07.2016.
  */
-public class HTMLMasonLiveTemplateProcessor extends AbstractOutlineLiveTemplateProcessor
-{
-	@Override
-	protected boolean isMyFile(PsiFile file)
-	{
-		return file instanceof HTMLMasonFileImpl;
-	}
+public class HTMLMasonLiveTemplateProcessor extends AbstractOutlineLiveTemplateProcessor {
+  @Override
+  protected boolean isMyFile(PsiFile file) {
+    return file instanceof HTMLMasonFileImpl;
+  }
 
-	@Override
-	@NotNull
-	protected Language getMyLanguage()
-	{
-		return HTMLMasonLanguage.INSTANCE;
-	}
+  @Override
+  @NotNull
+  protected Language getMyLanguage() {
+    return HTMLMasonLanguage.INSTANCE;
+  }
 
-	@Override
-	@NotNull
-	protected String getOutlineMarker()
-	{
-		return "% ";
-	}
+  @Override
+  @NotNull
+  protected String getOutlineMarker() {
+    return "% ";
+  }
 
-	@Override
-	protected boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset)
-	{
-		int bufferEnd = buffer.length();
-		if (offset >= bufferEnd)
-		{
-			return false;
-		}
+  @Override
+  protected boolean shouldAddMarkerAtLineStartingAtOffset(CharSequence buffer, int offset) {
+    int bufferEnd = buffer.length();
+    if (offset >= bufferEnd) {
+      return false;
+    }
 
-		char currentChar = buffer.charAt(offset);
-		if (currentChar == '%')
-		{
-			return false;
-		}
+    char currentChar = buffer.charAt(offset);
+    if (currentChar == '%') {
+      return false;
+    }
 
-		while (Character.isWhitespace(currentChar))
-		{
-			if (currentChar == '\n' || ++offset >= bufferEnd)
-			{
-				return false;
-			}
-			currentChar = buffer.charAt(offset);
-		}
+    while (Character.isWhitespace(currentChar)) {
+      if (currentChar == '\n' || ++offset >= bufferEnd) {
+        return false;
+      }
+      currentChar = buffer.charAt(offset);
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	@Nullable
-	@Override
-	protected PsiElement getOutlineElement(PsiElement firstElement)
-	{
-		return PsiUtilCore.getElementType(firstElement) == HTMLMasonElementTypes.HTML_MASON_LINE_OPENER ? firstElement : null;
-	}
+  @Nullable
+  @Override
+  protected PsiElement getOutlineElement(PsiElement firstElement) {
+    return PsiUtilCore.getElementType(firstElement) == HTMLMasonElementTypes.HTML_MASON_LINE_OPENER ? firstElement : null;
+  }
 }

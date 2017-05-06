@@ -23,13 +23,12 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
  * Created by hurricup on 23.08.2015.
  * Marks package processor that it can modify ${^WARNING_BITS} (see use warnings)
  */
-public interface PerlWarningsProvider
-{
-	/**
-	 * Adjusts current mask with values, according to package import settings
-	 *
-	 * @param currentMask mask of the outer block, or null if there is no outer block
-	 * @return modified mask
-	 */
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask);
+public interface PerlWarningsProvider {
+  /**
+   * Adjusts current mask with values, according to package import settings
+   *
+   * @param currentMask mask of the outer block, or null if there is no outer block
+   * @return modified mask
+   */
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask);
 }

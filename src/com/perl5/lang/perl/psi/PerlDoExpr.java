@@ -25,13 +25,12 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.09.2015.
  */
-public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope
-{
-	/**
-	 * Returns imported file relative path or null if unrecognizable
-	 *
-	 * @return relative path
-	 */
-	@Nullable
-	String getImportPath();
+public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope {
+  /**
+   * Returns imported file relative path or null if unrecognizable
+   *
+   * @return relative path
+   */
+  @Nullable
+  String getImportPath();
 }

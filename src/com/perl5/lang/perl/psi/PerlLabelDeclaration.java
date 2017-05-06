@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlLabelDeclaration extends PerlCompositeElement, PerlNamedElement
-{
+public interface PerlLabelDeclaration extends PerlCompositeElement, PerlNamedElement {
 }

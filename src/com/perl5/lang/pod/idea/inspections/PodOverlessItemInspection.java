@@ -30,27 +30,21 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodOverlessItemInspection extends LocalInspectionTool
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PodVisitor()
-		{
-			@Override
-			public void visitItemSection(@NotNull PsiItemSection o)
-			{
-				if (PsiTreeUtil.getParentOfType(o, PodSectionOver.class) == null)
-				{
-					PsiElement openTag = o.getFirstChild();
-					if (openTag != null)
-					{
-						holder.registerProblem(openTag, "List item outside over block", ProblemHighlightType.GENERIC_ERROR);
-					}
-				}
-				super.visitItemSection(o);
-			}
-		};
-	}
+public class PodOverlessItemInspection extends LocalInspectionTool {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PodVisitor() {
+      @Override
+      public void visitItemSection(@NotNull PsiItemSection o) {
+        if (PsiTreeUtil.getParentOfType(o, PodSectionOver.class) == null) {
+          PsiElement openTag = o.getFirstChild();
+          if (openTag != null) {
+            holder.registerProblem(openTag, "List item outside over block", ProblemHighlightType.GENERIC_ERROR);
+          }
+        }
+        super.visitItemSection(o);
+      }
+    };
+  }
 }

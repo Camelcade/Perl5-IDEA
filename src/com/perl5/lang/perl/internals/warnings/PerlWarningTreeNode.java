@@ -22,56 +22,45 @@ import java.util.List;
 /**
  * Created by hurricup on 23.08.2015.
  */
-public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement
-{
-	protected final List<PerlAbstractWarningTreeElement> subElements;
+public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement {
+  protected final List<PerlAbstractWarningTreeElement> subElements;
 
-	public PerlWarningTreeNode(double minVersion, String stringIdentifier, List<PerlAbstractWarningTreeElement> subElements)
-	{
-		super(minVersion, stringIdentifier);
-		this.subElements = subElements;
-	}
+  public PerlWarningTreeNode(double minVersion, String stringIdentifier, List<PerlAbstractWarningTreeElement> subElements) {
+    super(minVersion, stringIdentifier);
+    this.subElements = subElements;
+  }
 
-	public List<PerlWarningTreeLeaf> collectChildLeafs()
-	{
-		List<PerlWarningTreeLeaf> result = new ArrayList<PerlWarningTreeLeaf>();
+  public List<PerlWarningTreeLeaf> collectChildLeafs() {
+    List<PerlWarningTreeLeaf> result = new ArrayList<PerlWarningTreeLeaf>();
 
-		for (PerlAbstractWarningTreeElement subElement : subElements)
-		{
-			if (subElement instanceof PerlWarningTreeNode)
-			{
-				result.addAll(((PerlWarningTreeNode) subElement).collectChildLeafs());
-			}
-			else if (subElement instanceof PerlWarningTreeLeaf)
-			{
-				result.add((PerlWarningTreeLeaf) subElement);
-			}
-			else
-			{
-				throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
-			}
-		}
+    for (PerlAbstractWarningTreeElement subElement : subElements) {
+      if (subElement instanceof PerlWarningTreeNode) {
+        result.addAll(((PerlWarningTreeNode)subElement).collectChildLeafs());
+      }
+      else if (subElement instanceof PerlWarningTreeLeaf) {
+        result.add((PerlWarningTreeLeaf)subElement);
+      }
+      else {
+        throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
+      }
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	public List<PerlWarningTreeNode> collectChildNodes()
-	{
-		List<PerlWarningTreeNode> result = new ArrayList<PerlWarningTreeNode>();
-		result.add(this);
+  public List<PerlWarningTreeNode> collectChildNodes() {
+    List<PerlWarningTreeNode> result = new ArrayList<PerlWarningTreeNode>();
+    result.add(this);
 
-		for (PerlAbstractWarningTreeElement subElement : subElements)
-		{
-			if (subElement instanceof PerlWarningTreeNode)
-			{
-				result.addAll(((PerlWarningTreeNode) subElement).collectChildNodes());
-			}
-			else if (!(subElement instanceof PerlWarningTreeLeaf))
-			{
-				throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
-			}
-		}
+    for (PerlAbstractWarningTreeElement subElement : subElements) {
+      if (subElement instanceof PerlWarningTreeNode) {
+        result.addAll(((PerlWarningTreeNode)subElement).collectChildNodes());
+      }
+      else if (!(subElement instanceof PerlWarningTreeLeaf)) {
+        throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
+      }
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

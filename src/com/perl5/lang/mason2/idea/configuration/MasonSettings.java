@@ -32,45 +32,39 @@ import java.util.List;
  * Created by hurricup on 03.01.2016.
  */
 @State(
-		name = "Perl5MasonSettings",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "Perl5MasonSettings",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>
-{
-	public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
+public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings> {
+  public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
 
-	public MasonSettings()
-	{
-		globalVariables.add(new VariableDescription("$m", "Mason::Request"));
-		changeCounter++;
-	}
+  public MasonSettings() {
+    globalVariables.add(new VariableDescription("$m", "Mason::Request"));
+    changeCounter++;
+  }
 
-	public static MasonSettings getInstance(@NotNull Project project)
-	{
-		MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
-		if (persisted == null)
-		{
-			persisted = new MasonSettings();
-		}
+  @Nullable
+  @Override
+  public MasonSettings getState() {
+    return this;
+  }
 
-		return (MasonSettings) persisted.setProject(project);
-	}
+  @Override
+  public void loadState(MasonSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+    changeCounter++;
+  }
 
-	@Nullable
-	@Override
-	public MasonSettings getState()
-	{
-		return this;
-	}
+  public static MasonSettings getInstance(@NotNull Project project) {
+    MasonSettings persisted = ServiceManager.getService(project, MasonSettings.class);
+    if (persisted == null) {
+      persisted = new MasonSettings();
+    }
 
-	@Override
-	public void loadState(MasonSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-		changeCounter++;
-	}
+    return (MasonSettings)persisted.setProject(project);
+  }
 }

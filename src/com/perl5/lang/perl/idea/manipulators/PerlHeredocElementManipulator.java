@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<PerlHeredocElementImpl>
-{
+public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<PerlHeredocElementImpl> {
 }

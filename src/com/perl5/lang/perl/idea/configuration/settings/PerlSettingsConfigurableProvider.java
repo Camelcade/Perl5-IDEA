@@ -26,25 +26,21 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.08.2015.
  */
-public class PerlSettingsConfigurableProvider extends ConfigurableProvider
-{
-	Project project;
+public class PerlSettingsConfigurableProvider extends ConfigurableProvider {
+  Project project;
 
-	public PerlSettingsConfigurableProvider(Project project)
-	{
-		this.project = project;
-	}
+  public PerlSettingsConfigurableProvider(Project project) {
+    this.project = project;
+  }
 
-	@Nullable
-	@Override
-	public Configurable createConfigurable()
-	{
-		return new PerlSettingsConfigurable(project);
-	}
+  @Nullable
+  @Override
+  public Configurable createConfigurable() {
+    return new PerlSettingsConfigurable(project);
+  }
 
-	@Override
-	public boolean canCreateConfigurable()
-	{
-		return PlatformUtils.isIntelliJ() || ModuleManager.getInstance(project).getModules().length > 0;
-	}
+  @Override
+  public boolean canCreateConfigurable() {
+    return PlatformUtils.isIntelliJ() || ModuleManager.getInstance(project).getModules().length > 0;
+  }
 }

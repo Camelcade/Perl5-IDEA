@@ -31,37 +31,32 @@ import javax.swing.*;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonSubcomponentDefinitionStub> implements HTMLMasonSubcomponentDefitnition
-{
-	public HTMLMasonSubcomponentDefitnitionImpl(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonSubcomponentDefinitionStub>
+  implements HTMLMasonSubcomponentDefitnition {
+  public HTMLMasonSubcomponentDefitnitionImpl(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public HTMLMasonSubcomponentDefitnitionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public HTMLMasonSubcomponentDefitnitionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	protected String getNameFromStub()
-	{
-		HTMLMasonSubcomponentDefinitionStub stub = getStub();
-		return stub == null ? null : stub.getName();
-	}
+  @Nullable
+  @Override
+  protected String getNameFromStub() {
+    HTMLMasonSubcomponentDefinitionStub stub = getStub();
+    return stub == null ? null : stub.getName();
+  }
 
-	@NotNull
-	@Override
-	public SearchScope getUseScope()
-	{
-		return new LocalSearchScope(getContainingFile());
-	}
+  @NotNull
+  @Override
+  public SearchScope getUseScope() {
+    return new LocalSearchScope(getContainingFile());
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return HTMLMasonIcons.HTML_MASON_SUBCOMPONENT_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    return HTMLMasonIcons.HTML_MASON_SUBCOMPONENT_ICON;
+  }
 }

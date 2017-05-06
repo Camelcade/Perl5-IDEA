@@ -25,37 +25,32 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PerlFileTypePackage extends PurePerlFileType
-{
-	public static final String EXTENSION = "pm";
+public class PerlFileTypePackage extends PurePerlFileType {
+  public static final String EXTENSION = "pm";
 
-	public static final PerlFileTypePackage INSTANCE = new PerlFileTypePackage();
+  public static final PerlFileTypePackage INSTANCE = new PerlFileTypePackage();
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Perl5 package";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Perl5 package";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Perl5 package";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Perl5 package";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return EXTENSION;
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return EXTENSION;
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.PM_FILE;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.PM_FILE;
+  }
 }

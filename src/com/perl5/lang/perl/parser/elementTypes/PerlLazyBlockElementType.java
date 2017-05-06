@@ -33,46 +33,40 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public abstract class PerlLazyBlockElementType extends ILazyParseableElementType implements PsiElementProvider
-{
-	public PerlLazyBlockElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PerlLanguage.INSTANCE);
-	}
+public abstract class PerlLazyBlockElementType extends ILazyParseableElementType implements PsiElementProvider {
+  public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
+    super(debugName, PerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public ASTNode parseContents(ASTNode chameleon)
-	{
-		PsiElement parentElement = chameleon.getTreeParent().getPsi();
-		Project project = parentElement.getProject();
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
-				project,
-				chameleon,
-				getLexer(parentElement.getProject()),
-				getLanguage(),
-				chameleon.getText());
+  @Override
+  public ASTNode parseContents(ASTNode chameleon) {
+    PsiElement parentElement = chameleon.getTreeParent().getPsi();
+    Project project = parentElement.getProject();
+    PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+      project,
+      chameleon,
+      getLexer(parentElement.getProject()),
+      getLanguage(),
+      chameleon.getText());
 
-		return getParser().parse(this, builder).getFirstChildNode();
-	}
+    return getParser().parse(this, builder).getFirstChildNode();
+  }
 
 
-	@NotNull
-	protected Lexer getLexer(@NotNull Project project)
-	{
-		return new PerlMergingLexerAdapter(getInnerLexer(project));
-	}
+  @NotNull
+  protected Lexer getLexer(@NotNull Project project) {
+    return new PerlMergingLexerAdapter(getInnerLexer(project));
+  }
 
-	@NotNull
-	protected abstract Lexer getInnerLexer(@NotNull Project project);
+  @NotNull
+  protected abstract Lexer getInnerLexer(@NotNull Project project);
 
-	@NotNull
-	protected abstract PsiParser getParser();
+  @NotNull
+  protected abstract PsiParser getParser();
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlCompositeElementImpl(node);
-	}
-
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlCompositeElementImpl(node);
+  }
 }

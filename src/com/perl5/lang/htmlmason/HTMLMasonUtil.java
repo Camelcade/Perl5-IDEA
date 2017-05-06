@@ -33,29 +33,23 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonUtil
-{
-	@Nullable
-	public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file)
-	{
-		return MasonCoreUtil.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
-	}
+public class HTMLMasonUtil {
+  @Nullable
+  public static VirtualFile getComponentRoot(@NotNull Project project, @Nullable VirtualFile file) {
+    return MasonCoreUtil.getComponentRoot(HTMLMasonSettings.getInstance(project), file);
+  }
 
-	public static List<PerlSubArgument> getArgumentsList(HTMLMasonParametrizedEntity entity)
-	{
-		List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
+  public static List<PerlSubArgument> getArgumentsList(HTMLMasonParametrizedEntity entity) {
+    List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
 
-		for (HTMLMasonCompositeElement argsBlock : entity.getArgsBlocks())
-		{
-			result.addAll(((HTMLMasonArgsBlock) argsBlock).getArgumentsList());
-		}
+    for (HTMLMasonCompositeElement argsBlock : entity.getArgsBlocks()) {
+      result.addAll(((HTMLMasonArgsBlock)argsBlock).getArgumentsList());
+    }
 
-		return result;
-	}
+    return result;
+  }
 
-	public static String getArgumentsListAsString(HTMLMasonParametrizedEntity entity)
-	{
-		return PerlSubUtil.getArgumentsListAsString(getArgumentsList(entity));
-	}
-
+  public static String getArgumentsListAsString(HTMLMasonParametrizedEntity entity) {
+    return PerlSubUtil.getArgumentsListAsString(getArgumentsList(entity));
+  }
 }

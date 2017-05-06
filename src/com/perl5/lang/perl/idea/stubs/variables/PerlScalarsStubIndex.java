@@ -23,12 +23,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlScalarsStubIndex extends PerlVariablesStubIndex
-{
-	@NotNull
-	@Override
-	public StubIndexKey<String, PerlVariableDeclarationWrapper> getKey()
-	{
-		return KEY_SCALAR;
-	}
+public class PerlScalarsStubIndex extends PerlVariablesStubIndex {
+  @NotNull
+  @Override
+  public StubIndexKey<String, PerlVariableDeclarationWrapper> getKey() {
+    return KEY_SCALAR;
+  }
 }

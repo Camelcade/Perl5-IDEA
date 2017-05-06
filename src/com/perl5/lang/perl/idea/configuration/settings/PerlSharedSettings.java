@@ -34,77 +34,66 @@ import java.util.Set;
  * Created by hurricup on 30.08.2015.
  */
 @State(
-		name = "Perl5Settings",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "Perl5Settings",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings>
-{
-	public List<String> libRootUrls = new ArrayList<String>();
-	public List<String> selfNames = new ArrayList<String>(Arrays.asList("self", "this", "class", "proto"));
-	public boolean SIMPLE_MAIN_RESOLUTION = true;
-	public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
-	public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
-	public boolean PERL_CRITIC_ENABLED = false;
-	public boolean PERL_ANNOTATOR_ENABLED = false;
-	public String PERL_DEPARSE_ARGUMENTS = "";
-	public String PERL_TIDY_ARGS = "";
-	public String PERL_CRITIC_ARGS = "";
+public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
+  public List<String> libRootUrls = new ArrayList<String>();
+  public List<String> selfNames = new ArrayList<String>(Arrays.asList("self", "this", "class", "proto"));
+  public boolean SIMPLE_MAIN_RESOLUTION = true;
+  public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
+  public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
+  public boolean PERL_CRITIC_ENABLED = false;
+  public boolean PERL_ANNOTATOR_ENABLED = false;
+  public String PERL_DEPARSE_ARGUMENTS = "";
+  public String PERL_TIDY_ARGS = "";
+  public String PERL_CRITIC_ARGS = "";
 
-	@Transient
-	private Set<String> SELF_NAMES_SET = null;
+  @Transient
+  private Set<String> SELF_NAMES_SET = null;
 
-	public static PerlSharedSettings getInstance(@NotNull Project project)
-	{
-		PerlSharedSettings persisted = ServiceManager.getService(project, PerlSharedSettings.class);
-		return persisted != null ? persisted : new PerlSharedSettings();
-	}
+  @Nullable
+  @Override
+  public PerlSharedSettings getState() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public PerlSharedSettings getState()
-	{
-		return this;
-	}
+  public synchronized List<String> getLibRootUrls() {
+    if (libRootUrls == null) {
+      libRootUrls = new ArrayList<String>();
+    }
+    return libRootUrls;
+  }
 
-	public synchronized List<String> getLibRootUrls()
-	{
-		if (libRootUrls == null)
-		{
-			libRootUrls = new ArrayList<String>();
-		}
-		return libRootUrls;
-	}
+  @Override
+  public void loadState(PerlSharedSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-	@Override
-	public void loadState(PerlSharedSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  public void settingsUpdated() {
+    SELF_NAMES_SET = null;
+  }
 
-	public void settingsUpdated()
-	{
-		SELF_NAMES_SET = null;
-	}
+  public boolean isSelfName(String name) {
+    if (SELF_NAMES_SET == null) {
+      SELF_NAMES_SET = new THashSet<String>(selfNames);
+    }
+    return SELF_NAMES_SET.contains(name);
+  }
 
-	public boolean isSelfName(String name)
-	{
-		if (SELF_NAMES_SET == null)
-		{
-			SELF_NAMES_SET = new THashSet<String>(selfNames);
-		}
-		return SELF_NAMES_SET.contains(name);
-	}
+  public void setDeparseOptions(String optionsString) {
+    while (optionsString.length() > 0 && optionsString.charAt(0) != '-') {
+      optionsString = optionsString.substring(1);
+    }
+    PERL_DEPARSE_ARGUMENTS = optionsString;
+  }
 
-	public void setDeparseOptions(String optionsString)
-	{
-		while (optionsString.length() > 0 && optionsString.charAt(0) != '-')
-		{
-			optionsString = optionsString.substring(1);
-		}
-		PERL_DEPARSE_ARGUMENTS = optionsString;
-	}
+  public static PerlSharedSettings getInstance(@NotNull Project project) {
+    PerlSharedSettings persisted = ServiceManager.getService(project, PerlSharedSettings.class);
+    return persisted != null ? persisted : new PerlSharedSettings();
+  }
 }

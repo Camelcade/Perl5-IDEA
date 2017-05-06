@@ -22,15 +22,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.02.2016.
  */
-public class Mason2Visitor extends PerlVisitor
-{
-	public void visitMasonAbstractBlock(@NotNull MasonAbstractBlock o)
-	{
-		visitPsiElement(o);
-	}
+public class Mason2Visitor extends PerlVisitor {
+  public void visitMasonAbstractBlock(@NotNull MasonAbstractBlock o) {
+    visitPsiElement(o);
+  }
 
-	public void visitMasonTextBlock(@NotNull MasonTextBlock o)
-	{
-		visitPsiElement(o);
-	}
+  public void visitMasonTextBlock(@NotNull MasonTextBlock o) {
+    visitPsiElement(o);
+  }
 }

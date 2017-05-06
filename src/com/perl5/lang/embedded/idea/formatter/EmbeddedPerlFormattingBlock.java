@@ -32,29 +32,25 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 11.01.2016.
  */
-public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock
-{
-	public EmbeddedPerlFormattingBlock(@NotNull ASTNode node,
-									   @Nullable Wrap wrap,
-									   @Nullable Alignment alignment,
-									   @NotNull CommonCodeStyleSettings codeStyleSettings,
-									   @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-									   @NotNull SpacingBuilder spacingBuilder,
-									   @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock {
+  public EmbeddedPerlFormattingBlock(@NotNull ASTNode node,
+                                     @Nullable Wrap wrap,
+                                     @Nullable Alignment alignment,
+                                     @NotNull CommonCodeStyleSettings codeStyleSettings,
+                                     @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+                                     @NotNull SpacingBuilder spacingBuilder,
+                                     @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
 
-	)
-	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-	}
+  ) {
+    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+  }
 
-	@Nullable
-	@Override
-	protected Indent getChildIndent()
-	{
-		if (getElementType() == EmbeddedPerlParserDefinition.FILE)
-		{
-			return Indent.getNoneIndent();
-		}
-		return super.getChildIndent();
-	}
+  @Nullable
+  @Override
+  protected Indent getChildIndent() {
+    if (getElementType() == EmbeddedPerlParserDefinition.FILE) {
+      return Indent.getNoneIndent();
+    }
+    return super.getChildIndent();
+  }
 }

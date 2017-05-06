@@ -25,17 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class ClassAccessorSubElementType extends PerlTokenTypeEx
-{
-	public ClassAccessorSubElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class ClassAccessorSubElementType extends PerlTokenTypeEx {
+  public ClassAccessorSubElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public ASTNode createLeafNode(CharSequence leafText)
-	{
-		return new PerlClassAccessorSubImpl(this, leafText);
-	}
+  @NotNull
+  @Override
+  public ASTNode createLeafNode(CharSequence leafText) {
+    return new PerlClassAccessorSubImpl(this, leafText);
+  }
 }

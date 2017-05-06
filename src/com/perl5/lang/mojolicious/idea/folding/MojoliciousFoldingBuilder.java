@@ -24,40 +24,38 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements MojoliciousElementTypes
-{
-	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
-			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
-			TokenSet.create(
-					MOJO_BLOCK_OPENER,
-					MOJO_BLOCK_CLOSER,
-					MOJO_BLOCK_NOSPACE_CLOSER,
+public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements MojoliciousElementTypes {
+  protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
+    PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
+    TokenSet.create(
+      MOJO_BLOCK_OPENER,
+      MOJO_BLOCK_CLOSER,
+      MOJO_BLOCK_NOSPACE_CLOSER,
 
-					MOJO_BLOCK_EXPR_OPENER,
-					MOJO_BLOCK_EXPR_CLOSER,
+      MOJO_BLOCK_EXPR_OPENER,
+      MOJO_BLOCK_EXPR_CLOSER,
 
-					MOJO_BLOCK_EXPR_ESCAPED_OPENER,
-					MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+      MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+      MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 
-					MOJO_LINE_EXPR_ESCAPED_OPENER,
-					MOJO_LINE_EXPR_OPENER,
-					MOJO_LINE_OPENER,
+      MOJO_LINE_EXPR_ESCAPED_OPENER,
+      MOJO_LINE_EXPR_OPENER,
+      MOJO_LINE_OPENER,
 
-					MOJO_BLOCK_OPENER_TAG,
-					MOJO_LINE_OPENER_TAG,
+      MOJO_BLOCK_OPENER_TAG,
+      MOJO_LINE_OPENER_TAG,
 
-					MOJO_TEMPLATE_BLOCK_HTML
-			));
+      MOJO_TEMPLATE_BLOCK_HTML
+    ));
 
-	@NotNull
-	@Override
-	protected TokenSet getCommentExcludedTokens()
-	{
-		return COMMENT_EXCLUDED_TOKENS;
-	}
+  @NotNull
+  @Override
+  protected TokenSet getCommentExcludedTokens() {
+    return COMMENT_EXCLUDED_TOKENS;
+  }
 
 /*
-	@Nullable
+        @Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()
 	{

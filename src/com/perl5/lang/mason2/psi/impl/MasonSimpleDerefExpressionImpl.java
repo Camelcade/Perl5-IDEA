@@ -25,23 +25,19 @@ import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonSimpleDerefExpressionImpl extends PsiPerlDerefExprImpl
-{
-	public MasonSimpleDerefExpressionImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class MasonSimpleDerefExpressionImpl extends PsiPerlDerefExprImpl {
+  public MasonSimpleDerefExpressionImpl(ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public String getCurrentElementType(PsiElement currentElement)
-	{
-		MasonNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(this, MasonNamespaceDefinition.class);
+  @Override
+  public String getCurrentElementType(PsiElement currentElement) {
+    MasonNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(this, MasonNamespaceDefinition.class);
 
-		if (namespaceDefinition != null)
-		{
-			return namespaceDefinition.getPackageName();
-		}
+    if (namespaceDefinition != null) {
+      return namespaceDefinition.getPackageName();
+    }
 
-		return super.getCurrentElementType(currentElement);
-	}
+    return super.getCurrentElementType(currentElement);
+  }
 }

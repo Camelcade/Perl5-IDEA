@@ -28,23 +28,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.01.2016.
  */
-public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBase implements LanguageCodeInsightActionHandler
-{
-	@Override
-	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
-	{
-		((PerlFile) file).getCodeGenerator().generateOverrideMethod(anchor, editor);
-	}
+public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBase implements LanguageCodeInsightActionHandler {
+  @Override
+  protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file) {
+    ((PerlFile)file).getCodeGenerator().generateOverrideMethod(anchor, editor);
+  }
 
-	@Override
-	public boolean isValidFor(Editor editor, PsiFile file)
-	{
-		return file instanceof PerlFileImpl;
-	}
+  @Override
+  public boolean isValidFor(Editor editor, PsiFile file) {
+    return file instanceof PerlFileImpl;
+  }
 
-	@Override
-	public void invoke(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile file)
-	{
-		PerlOverrideMethodHandler.super.invoke(project, editor, file);
-	}
+  @Override
+  public void invoke(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiFile file) {
+    PerlOverrideMethodHandler.super.invoke(project, editor, file);
+  }
 }

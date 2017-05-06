@@ -33,77 +33,76 @@ import java.util.List;
  * Created by hurricup on 05.06.2015.
  */
 public interface PerlSubBase<Stub extends StubElement> extends
-		StubBasedPsiElement<Stub>,
-		PerlPackageMember,
-		PerlNamedElement,
-		PerlNamespaceElementContainer,
-		PerlDeprecatable,
-		PerlLabelScope
-{
-	/**
-	 * Returns function name for current function definition
-	 *
-	 * @return function name or null
-	 */
-	String getSubName();
+                                                       StubBasedPsiElement<Stub>,
+                                                       PerlPackageMember,
+                                                       PerlNamedElement,
+                                                       PerlNamespaceElementContainer,
+                                                       PerlDeprecatable,
+                                                       PerlLabelScope {
+  /**
+   * Returns function name for current function definition
+   *
+   * @return function name or null
+   */
+  String getSubName();
 
-	/**
-	 * Returns PsiElement containing sub name
-	 *
-	 * @return name container
-	 */
-	PsiElement getSubNameElement();
+  /**
+   * Returns PsiElement containing sub name
+   *
+   * @return name container
+   */
+  PsiElement getSubNameElement();
 
-	/**
-	 * Checks if sub defined as method
-	 *
-	 * @return result
-	 */
-	boolean isMethod();
-
-
-	/**
-	 * Checks if sub defined as static, default implementation returns !isMethod(), but may be different for constants for example
-	 *
-	 * @return true if sub is static
-	 */
-	boolean isStatic();
-
-	/**
-	 * Checks if current declaration/definition is XSub
-	 *
-	 * @return true if sub located in deparsed file
-	 */
-	boolean isXSub();
-
-	/**
-	 * Returns stubbed, local or external sub annotations
-	 *
-	 * @return PerlSubAnnotation object
-	 */
-	@Nullable
-	PerlSubAnnotations getAnnotations();
-
-	/**
-	 * Returns local sub annotations if any
-	 *
-	 * @return annotations object or null
-	 */
-	@Nullable
-	PerlSubAnnotations getLocalAnnotations();
+  /**
+   * Checks if sub defined as method
+   *
+   * @return result
+   */
+  boolean isMethod();
 
 
-	/**
-	 * Returns list of sub annotations elements
-	 *
-	 * @return list
-	 */
-	@NotNull
-	List<PerlAnnotation> getAnnotationList();
+  /**
+   * Checks if sub defined as static, default implementation returns !isMethod(), but may be different for constants for example
+   *
+   * @return true if sub is static
+   */
+  boolean isStatic();
 
-	/**
-	 * Returns return value for this sub
-	 */
-	@Nullable
-	String getReturns();
+  /**
+   * Checks if current declaration/definition is XSub
+   *
+   * @return true if sub located in deparsed file
+   */
+  boolean isXSub();
+
+  /**
+   * Returns stubbed, local or external sub annotations
+   *
+   * @return PerlSubAnnotation object
+   */
+  @Nullable
+  PerlSubAnnotations getAnnotations();
+
+  /**
+   * Returns local sub annotations if any
+   *
+   * @return annotations object or null
+   */
+  @Nullable
+  PerlSubAnnotations getLocalAnnotations();
+
+
+  /**
+   * Returns list of sub annotations elements
+   *
+   * @return list
+   */
+  @NotNull
+  List<PerlAnnotation> getAnnotationList();
+
+  /**
+   * Returns return value for this sub
+   */
+  @Nullable
+  String getReturns();
 }

@@ -40,158 +40,138 @@ import java.util.Set;
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElementTypes
-{
-	private static final String AMBIGUOUS_Q_SUFFIXES = "wqxr"; // these chars are ignored after
+public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElementTypes {
+  private static final String AMBIGUOUS_Q_SUFFIXES = "wqxr"; // these chars are ignored after
 
-	private static final TokenSet SINGLE_QUOTE_OPENERS = TokenSet.create(
-			RESERVED_Q,
-			RESERVED_QW,
-			RESERVED_QQ,
-			RESERVED_QX,
+  private static final TokenSet SINGLE_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_Q,
+    RESERVED_QW,
+    RESERVED_QQ,
+    RESERVED_QX,
 
-			RESERVED_M,
-			RESERVED_QR
-	);
+    RESERVED_M,
+    RESERVED_QR
+  );
 
-	private static final TokenSet DOUBLE_QUOTE_OPENERS = TokenSet.create(
-			RESERVED_S,
-			RESERVED_TR,
-			RESERVED_Y
-	);
+  private static final TokenSet DOUBLE_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_S,
+    RESERVED_TR,
+    RESERVED_Y
+  );
 
-	private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
-			"q",
-			"qx",
-			"qq",
-			"qw",
-			"qr",
-			"m"
-	));
+  private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+    "q",
+    "qx",
+    "qq",
+    "qw",
+    "qr",
+    "m"
+  ));
 
-	private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
-			"s",
-			"tr",
-			"y"
-	));
+  private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+    "s",
+    "tr",
+    "y"
+  ));
 
-	@Override
-	public Result beforeCharTyped(char typedChar, Project project, Editor editor, PsiFile file, FileType fileType)
-	{
-		// regexp quotes
-		if (!Character.isWhitespace(typedChar))
-		{
-			int offset = editor.getCaretModel().getOffset() - 1;
-			PsiElement element = file.findElementAt(offset);
-			if (element != null)
-			{
-				boolean hasSpace = false;
+  @Override
+  public Result beforeCharTyped(char typedChar, Project project, Editor editor, PsiFile file, FileType fileType) {
+    // regexp quotes
+    if (!Character.isWhitespace(typedChar)) {
+      int offset = editor.getCaretModel().getOffset() - 1;
+      PsiElement element = file.findElementAt(offset);
+      if (element != null) {
+        boolean hasSpace = false;
 
-				while (offset > 0 && element != null && element instanceof PsiWhiteSpace)
-				{
-					hasSpace = true;
-					offset = element.getTextOffset() - 1;
-					element = file.findElementAt(offset);
-				}
+        while (offset > 0 && element != null && element instanceof PsiWhiteSpace) {
+          hasSpace = true;
+          offset = element.getTextOffset() - 1;
+          element = file.findElementAt(offset);
+        }
 
-				if (element != null)
-				{
-					Result result = null;
-					IElementType elementType = element.getNode().getElementType();
-					if (SINGLE_QUOTE_OPENERS.contains(elementType) ||
-							(typedChar == '/' && (elementType == OPERATOR_RE || elementType == OPERATOR_NOT_RE))
-							)
-					{
-						if (elementType == RESERVED_Q && StringUtil.containsChar(AMBIGUOUS_Q_SUFFIXES, typedChar))
-						{
-							return Result.CONTINUE;
-						}
-						result = handleSingleQuote(typedChar, hasSpace, editor);
-					}
-					else if (DOUBLE_QUOTE_OPENERS.contains(elementType))
-					{
-						result = handleDoubleQuote(typedChar, hasSpace, editor);
-					}
-					else if (elementType == STRING_CONTENT && isInHashIndex(element))
-					{
-						if (SINGLE_QUOTE_OPENERS_TEXT.contains(element.getText()))
-						{
-							result = handleSingleQuote(typedChar, hasSpace, editor);
-						}
-						else if (DOUBLE_QUOTE_OPENERS_TEXT.contains(element.getText()))
-						{
-							result = handleDoubleQuote(typedChar, hasSpace, editor);
-						}
-					}
+        if (element != null) {
+          Result result = null;
+          IElementType elementType = element.getNode().getElementType();
+          if (SINGLE_QUOTE_OPENERS.contains(elementType) ||
+              (typedChar == '/' && (elementType == OPERATOR_RE || elementType == OPERATOR_NOT_RE))
+            ) {
+            if (elementType == RESERVED_Q && StringUtil.containsChar(AMBIGUOUS_Q_SUFFIXES, typedChar)) {
+              return Result.CONTINUE;
+            }
+            result = handleSingleQuote(typedChar, hasSpace, editor);
+          }
+          else if (DOUBLE_QUOTE_OPENERS.contains(elementType)) {
+            result = handleDoubleQuote(typedChar, hasSpace, editor);
+          }
+          else if (elementType == STRING_CONTENT && isInHashIndex(element)) {
+            if (SINGLE_QUOTE_OPENERS_TEXT.contains(element.getText())) {
+              result = handleSingleQuote(typedChar, hasSpace, editor);
+            }
+            else if (DOUBLE_QUOTE_OPENERS_TEXT.contains(element.getText())) {
+              result = handleDoubleQuote(typedChar, hasSpace, editor);
+            }
+          }
 
-					if (result != null)
-					{
-						return result;
-					}
-				}
-			}
-		}
+          if (result != null) {
+            return result;
+          }
+        }
+      }
+    }
 
-		return super.beforeCharTyped(typedChar, project, editor, file, fileType);
-	}
+    return super.beforeCharTyped(typedChar, project, editor, file, fileType);
+  }
 
 
-	@Nullable
-	private Result handleSingleQuote(char typedChar, boolean hasSpace, Editor editor)
-	{
-		char closeChar = getRegexCloseChar(typedChar, hasSpace);
+  @Nullable
+  private Result handleSingleQuote(char typedChar, boolean hasSpace, Editor editor) {
+    char closeChar = getRegexCloseChar(typedChar, hasSpace);
 
-		if (closeChar > 0)
-		{
+    if (closeChar > 0) {
 
-			EditorModificationUtil.insertStringAtCaret(editor, typedChar + "" + closeChar, false, true, 1);
-			return Result.STOP;
-		}
-		return null;
-	}
+      EditorModificationUtil.insertStringAtCaret(editor, typedChar + "" + closeChar, false, true, 1);
+      return Result.STOP;
+    }
+    return null;
+  }
 
-	private boolean isInHashIndex(PsiElement element)
-	{
-		return element.getParent() instanceof PsiPerlStringBare && element.getParent().getParent() instanceof PsiPerlHashIndex;
-	}
+  private boolean isInHashIndex(PsiElement element) {
+    return element.getParent() instanceof PsiPerlStringBare && element.getParent().getParent() instanceof PsiPerlHashIndex;
+  }
 
-	@Nullable
-	private Result handleDoubleQuote(char typedChar, boolean hasSpace, Editor editor)
-	{
-		char closeChar = getRegexCloseChar(typedChar, hasSpace);
+  @Nullable
+  private Result handleDoubleQuote(char typedChar, boolean hasSpace, Editor editor) {
+    char closeChar = getRegexCloseChar(typedChar, hasSpace);
 
-		if (closeChar > 0)
-		{
-			String appendix = typedChar + "" + closeChar;
+    if (closeChar > 0) {
+      String appendix = typedChar + "" + closeChar;
 
-			if (closeChar == typedChar)
-			{
-				appendix += closeChar;
-			}
-			else
-			{
-				appendix += appendix;
-			}
+      if (closeChar == typedChar) {
+        appendix += closeChar;
+      }
+      else {
+        appendix += appendix;
+      }
 
-			EditorModificationUtil.insertStringAtCaret(editor, appendix, false, true, 1);
-			return Result.STOP;
-		}
-		return null;
-	}
+      EditorModificationUtil.insertStringAtCaret(editor, appendix, false, true, 1);
+      return Result.STOP;
+    }
+    return null;
+  }
 
-	private char getRegexCloseChar(char openingChar, boolean hasSpace)
-	{
-		if (hasSpace && openingChar == '#')    // sharp may be only without space
-		{
-			return 0;
-		}
-//		if (!hasSpace && (openingChar == '_' || Character.isLetterOrDigit(openingChar))) // identifier continuation may be only with space
-//			return 0;
-		if (openingChar == '_' || Character.isLetterOrDigit(openingChar)) // temporarily disabled auto-insertion of non-delimiter quotes because of race
-		{
-			return 0;
-		}
+  private char getRegexCloseChar(char openingChar, boolean hasSpace) {
+    if (hasSpace && openingChar == '#')    // sharp may be only without space
+    {
+      return 0;
+    }
+    //		if (!hasSpace && (openingChar == '_' || Character.isLetterOrDigit(openingChar))) // identifier continuation may be only with space
+    //			return 0;
+    if (openingChar == '_' ||
+        Character.isLetterOrDigit(openingChar)) // temporarily disabled auto-insertion of non-delimiter quotes because of race
+    {
+      return 0;
+    }
 
-		return PerlLexer.getQuoteCloseChar(openingChar);
-	}
+    return PerlLexer.getQuoteCloseChar(openingChar);
+  }
 }

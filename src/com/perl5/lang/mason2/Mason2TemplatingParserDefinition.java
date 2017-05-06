@@ -31,34 +31,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition
-{
-	public static final IFileElementType FILE = new MasonFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
+public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
+  public static final IFileElementType FILE = new MasonFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new Mason2TemplatingLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new Mason2TemplatingLexerAdapter(project);
+  }
 
-	@NotNull
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new Mason2TemplatingParserImpl();
-	}
+  @NotNull
+  @Override
+  public PsiParser createParser(Project project) {
+    return new Mason2TemplatingParserImpl();
+  }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new MasonTemplatingFileImpl(viewProvider);
-	}
-
+  @Override
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new MasonTemplatingFileImpl(viewProvider);
+  }
 }

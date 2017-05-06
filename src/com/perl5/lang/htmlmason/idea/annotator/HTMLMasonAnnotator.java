@@ -26,19 +26,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonAnnotator extends PerlBaseAnnotator
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if (element instanceof HTMLMasonNamedElement)
-		{
-			PsiElement nameIdentifier = ((HTMLMasonNamedElement) element).getNameIdentifier();
+public class HTMLMasonAnnotator extends PerlBaseAnnotator {
+  @Override
+  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    if (element instanceof HTMLMasonNamedElement) {
+      PsiElement nameIdentifier = ((HTMLMasonNamedElement)element).getNameIdentifier();
 
-			if (nameIdentifier != null)
-			{
-				holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-			}
-		}
-	}
+      if (nameIdentifier != null) {
+        holder.createInfoAnnotation(nameIdentifier, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+      }
+    }
+  }
 }

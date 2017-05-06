@@ -23,16 +23,13 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 /**
  * Created by hurricup on 15.01.2016.
  */
-public class PerlSwitchTemplateContextType extends PerlTemplateContextType.Prefix
-{
-	public PerlSwitchTemplateContextType()
-	{
-		super("PERL5_INSIDE_SWITCH", "Inside Switch");
-	}
+public class PerlSwitchTemplateContextType extends PerlTemplateContextType.Prefix {
+  public PerlSwitchTemplateContextType() {
+    super("PERL5_INSIDE_SWITCH", "Inside Switch");
+  }
 
-	@Override
-	public boolean isInContext(PsiElement element)
-	{
-		return super.isInContext(element) && PerlSwitchElementPatterns.SWITCH_PREFIX_PATTERN.accepts(element);
-	}
+  @Override
+  public boolean isInContext(PsiElement element) {
+    return super.isInContext(element) && PerlSwitchElementPatterns.SWITCH_PREFIX_PATTERN.accepts(element);
+  }
 }

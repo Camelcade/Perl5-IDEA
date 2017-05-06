@@ -21,34 +21,33 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub
-{
-	/**
-	 * Checks if current declaration should follow best practice, declare get_ and set_
-	 *
-	 * @return check result
-	 */
-	boolean isFollowsBestPractice();
+public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub {
+  /**
+   * Checks if current declaration should follow best practice, declare get_ and set_
+   *
+   * @return check result
+   */
+  boolean isFollowsBestPractice();
 
-	/**
-	 * Checks if current accessor readable
-	 *
-	 * @return check result
-	 */
-	boolean isAccessorReadable();
+  /**
+   * Checks if current accessor readable
+   *
+   * @return check result
+   */
+  boolean isAccessorReadable();
 
-	/**
-	 * Checks if current accessor writable
-	 *
-	 * @return check result
-	 */
-	boolean isAccessorWritable();
+  /**
+   * Checks if current accessor writable
+   *
+   * @return check result
+   */
+  boolean isAccessorWritable();
 
-	String getGetterName();
+  String getGetterName();
 
-	String getGetterCanonicalName();
+  String getGetterCanonicalName();
 
-	String getSetterName();
+  String getSetterName();
 
-	String getSetterCanonicalName();
+  String getSetterCanonicalName();
 }

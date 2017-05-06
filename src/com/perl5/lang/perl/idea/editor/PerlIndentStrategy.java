@@ -24,11 +24,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlIndentStrategy implements IndentStrategy
-{
-	@Override
-	public boolean canIndent(@NotNull PsiElement element)
-	{
-		return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
-	}
+public class PerlIndentStrategy implements IndentStrategy {
+  @Override
+  public boolean canIndent(@NotNull PsiElement element) {
+    return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(element.getNode().getElementType());
+  }
 }

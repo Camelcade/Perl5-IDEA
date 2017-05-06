@@ -31,25 +31,22 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitHighlighter extends LayeredLexerEditorHighlighter implements TemplateToolkitElementTypes
-{
-	public TemplateToolkitHighlighter(
-			@Nullable Project project,
-			@Nullable final VirtualFile virtualFile,
-			@NotNull EditorColorsScheme scheme
-	)
-	{
-		super(new TemplateToolkitSyntaxHighlighter(project), scheme);
-		if (project != null)
-		{
-			registerLayer(TT2_HTML, new LayerDescriptor(
-					SyntaxHighlighterFactory.getSyntaxHighlighter(
-							TemplateToolkitFileViewProvider.calcTemplateLanguage(PsiManager.getInstance(project), virtualFile),
-							project,
-							virtualFile
-					),
-					""
-			));
-		}
-	}
+public class TemplateToolkitHighlighter extends LayeredLexerEditorHighlighter implements TemplateToolkitElementTypes {
+  public TemplateToolkitHighlighter(
+    @Nullable Project project,
+    @Nullable final VirtualFile virtualFile,
+    @NotNull EditorColorsScheme scheme
+  ) {
+    super(new TemplateToolkitSyntaxHighlighter(project), scheme);
+    if (project != null) {
+      registerLayer(TT2_HTML, new LayerDescriptor(
+        SyntaxHighlighterFactory.getSyntaxHighlighter(
+          TemplateToolkitFileViewProvider.calcTemplateLanguage(PsiManager.getInstance(project), virtualFile),
+          project,
+          virtualFile
+        ),
+        ""
+      ));
+    }
+  }
 }

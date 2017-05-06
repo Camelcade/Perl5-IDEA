@@ -24,90 +24,73 @@ import java.util.EmptyStackException;
 /**
  * Created by hurricup on 18.10.2016.
  */
-public class PerlBracesStack
-{
-	private int[] data;
-	private Object[] additionalData;
-	private int size;
+public class PerlBracesStack {
+  private int[] data;
+  private Object[] additionalData;
+  private int size;
 
-	public PerlBracesStack(int initialCapacity)
-	{
-		data = new int[initialCapacity];
-		additionalData = new Object[initialCapacity];
-		size = 0;
-	}
+  public PerlBracesStack(int initialCapacity) {
+    data = new int[initialCapacity];
+    additionalData = new Object[initialCapacity];
+    size = 0;
+  }
 
-	public PerlBracesStack()
-	{
-		this(5);
-	}
+  public PerlBracesStack() {
+    this(5);
+  }
 
-	public void push(int t)
-	{
-		push(t, null);
-	}
+  public void push(int t) {
+    push(t, null);
+  }
 
-	public void push(int t, @Nullable Object od)
-	{
-		if (size >= data.length)
-		{
-			data = ArrayUtil.realloc(data, data.length * 3 / 2);
-			additionalData = ArrayUtil.realloc(additionalData, additionalData.length * 3 / 2, Object[]::new);
-		}
-		data[size] = t;
-		additionalData[size++] = od;
-	}
+  public void push(int t, @Nullable Object od) {
+    if (size >= data.length) {
+      data = ArrayUtil.realloc(data, data.length * 3 / 2);
+      additionalData = ArrayUtil.realloc(additionalData, additionalData.length * 3 / 2, Object[]::new);
+    }
+    data[size] = t;
+    additionalData[size++] = od;
+  }
 
-	public int peek()
-	{
-		if (size == 0)
-		{
-			throw new EmptyStackException();
-		}
-		return data[size - 1];
-	}
+  public int peek() {
+    if (size == 0) {
+      throw new EmptyStackException();
+    }
+    return data[size - 1];
+  }
 
-	@Nullable
-	public Object peekAdditional()
-	{
-		if (size == 0)
-		{
-			throw new EmptyStackException();
-		}
-		return additionalData[size - 1];
-	}
+  @Nullable
+  public Object peekAdditional() {
+    if (size == 0) {
+      throw new EmptyStackException();
+    }
+    return additionalData[size - 1];
+  }
 
-	public void pop()
-	{
-		if (size == 0)
-		{
-			throw new EmptyStackException();
-		}
-		--size;
-	}
+  public void pop() {
+    if (size == 0) {
+      throw new EmptyStackException();
+    }
+    --size;
+  }
 
-	public int size()
-	{
-		return size;
-	}
+  public int size() {
+    return size;
+  }
 
-	public boolean isEmpty()
-	{
-		return size == 0;
-	}
+  public boolean isEmpty() {
+    return size == 0;
+  }
 
-	public void clear()
-	{
-		size = 0;
-	}
+  public void clear() {
+    size = 0;
+  }
 
-	public int incLast()
-	{
-		return ++data[size - 1];
-	}
+  public int incLast() {
+    return ++data[size - 1];
+  }
 
-	public int decLast()
-	{
-		return --data[size - 1];
-	}
+  public int decLast() {
+    return --data[size - 1];
+  }
 }

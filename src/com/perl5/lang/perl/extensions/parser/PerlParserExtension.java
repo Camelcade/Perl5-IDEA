@@ -31,94 +31,86 @@ import java.util.Map;
 /**
  * Created by hurricup on 22.11.2015.
  */
-public abstract class PerlParserExtension
-{
-	public static final ExtensionPointName<PerlParserExtension> EP_NAME = ExtensionPointName.create("com.perl5.parserExtension");
+public abstract class PerlParserExtension {
+  public static final ExtensionPointName<PerlParserExtension> EP_NAME = ExtensionPointName.create("com.perl5.parserExtension");
 
-	/**
-	 * Returns a set of keywords and element types to lex.
-	 *
-	 * @return set of custom keywords
-	 */
-	@NotNull
-	public Map<String, IElementType> getCustomTokensMap()
-	{
-		return Collections.emptyMap();
-	}
+  /**
+   * Returns a set of keywords and element types to lex.
+   *
+   * @return set of custom keywords
+   */
+  @NotNull
+  public Map<String, IElementType> getCustomTokensMap() {
+    return Collections.emptyMap();
+  }
 
-	/**
-	 * Returns list of extendable tokensets. Loader will attempt to add them into builder
-	 * Should return list of pairs: token to extend - TokenSet of extended tokens
-	 * Reqired to avoid extra TERM expressions in PSI tree
-	 *
-	 * @return list of pairs to extend
-	 */
-	@Nullable
-	public List<Pair<IElementType, TokenSet>> getExtensionSets()
-	{
-		return null;
-	}
+  /**
+   * Returns list of extendable tokensets. Loader will attempt to add them into builder
+   * Should return list of pairs: token to extend - TokenSet of extended tokens
+   * Reqired to avoid extra TERM expressions in PSI tree
+   *
+   * @return list of pairs to extend
+   */
+  @Nullable
+  public List<Pair<IElementType, TokenSet>> getExtensionSets() {
+    return null;
+  }
 
-	/**
-	 * Returns tokenset, containing bare regex prefixesj like =~ or case
-	 *
-	 * @return list of pairs to extend
-	 */
-	@Nullable
-	public TokenSet getRegexPrefixTokenSet()
-	{
-		return null;
-	}
+  /**
+   * Returns tokenset, containing bare regex prefixesj like =~ or case
+   *
+   * @return list of pairs to extend
+   */
+  @Nullable
+  public TokenSet getRegexPrefixTokenSet() {
+    return null;
+  }
 
-	/**
-	 * Parse method. Attempt to parse beginning of statement
-	 * You may re-use PerlParser static methods to implement native perl expressions
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public boolean parseStatement(PerlBuilder b, int l)
-	{
-		return false;
-	}
+  /**
+   * Parse method. Attempt to parse beginning of statement
+   * You may re-use PerlParser static methods to implement native perl expressions
+   *
+   * @param b PerlBuilder
+   * @param l parsing level
+   * @return parsing result
+   */
+  public boolean parseStatement(PerlBuilder b, int l) {
+    return false;
+  }
 
 
-	/**
-	 * Parse method. Attempt to parse statement modifier
-	 * You may re-use PerlParser static methods to implement native perl expressions
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public boolean parseStatementModifier(PerlBuilder b, int l)
-	{
-		return false;
-	}
+  /**
+   * Parse method. Attempt to parse statement modifier
+   * You may re-use PerlParser static methods to implement native perl expressions
+   *
+   * @param b PerlBuilder
+   * @param l parsing level
+   * @return parsing result
+   */
+  public boolean parseStatementModifier(PerlBuilder b, int l) {
+    return false;
+  }
 
-	/**
-	 * Parse method. Attempt to parse term
-	 * You may re-use PerlParser static methods to implement native perl expressions
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return parsing result
-	 */
-	public boolean parseTerm(PerlBuilder b, int l)
-	{
-		return false;
-	}
+  /**
+   * Parse method. Attempt to parse term
+   * You may re-use PerlParser static methods to implement native perl expressions
+   *
+   * @param b PerlBuilder
+   * @param l parsing level
+   * @return parsing result
+   */
+  public boolean parseTerm(PerlBuilder b, int l) {
+    return false;
+  }
 
-	/**
-	 * Parses element in dereference sequence.
-	 *
-	 * @param b PerlBuilder
-	 * @param l parsing level
-	 * @return Parsing result
-	 */
-	public boolean parseNestedElement(PerlBuilder b, int l)
-	{
-		return false;
-	}
+  /**
+   * Parses element in dereference sequence.
+   *
+   * @param b PerlBuilder
+   * @param l parsing level
+   * @return Parsing result
+   */
+  public boolean parseNestedElement(PerlBuilder b, int l) {
+    return false;
+  }
 }

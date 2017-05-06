@@ -27,77 +27,76 @@ import java.util.List;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlPackageMember, PerlVariableNameElementContainer
-{
-	/**
-	 * Guesses variable type from definition or context (uses containing perl file to cache types)
-	 *
-	 * @return Package name if found
-	 */
-	@Nullable
-	String guessVariableType();
+public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlPackageMember, PerlVariableNameElementContainer {
+  /**
+   * Guesses variable type from definition or context (uses containing perl file to cache types)
+   *
+   * @return Package name if found
+   */
+  @Nullable
+  String guessVariableType();
 
-	/**
-	 * Guesses variable type from definition or context, using source
-	 *
-	 * @return Package name if found
-	 */
-	@Nullable
-	String getVariableTypeHeavy();
+  /**
+   * Guesses variable type from definition or context, using source
+   *
+   * @return Package name if found
+   */
+  @Nullable
+  String getVariableTypeHeavy();
 
-	/**
-	 * Guessing actual variable type from context
-	 *
-	 * @return variable type
-	 */
-	PerlVariableType getActualType();
+  /**
+   * Guessing actual variable type from context
+   *
+   * @return variable type
+   */
+  PerlVariableType getActualType();
 
-	/**
-	 * Looking for lexical declaration of variable
-	 *
-	 * @return declare variable or null
-	 */
-	PerlVariableDeclarationWrapper getLexicalDeclaration();
+  /**
+   * Looking for lexical declaration of variable
+   *
+   * @return declare variable or null
+   */
+  PerlVariableDeclarationWrapper getLexicalDeclaration();
 
-	/**
-	 * Looking for global variable declarations sutable for current variable
-	 *
-	 * @return list of global declarations
-	 */
-	List<PerlVariableDeclarationWrapper> getGlobalDeclarations();
+  /**
+   * Looking for global variable declarations sutable for current variable
+   *
+   * @return list of global declarations
+   */
+  List<PerlVariableDeclarationWrapper> getGlobalDeclarations();
 
-	/**
-	 * Looking for globs, sutable for current variable
-	 *
-	 * @return list of globs
-	 */
-	List<PerlGlobVariable> getRelatedGlobs();
+  /**
+   * Looking for globs, sutable for current variable
+   *
+   * @return list of globs
+   */
+  List<PerlGlobVariable> getRelatedGlobs();
 
-	/**
-	 * Returns line number of element in the document
-	 *
-	 * @return list of globs
-	 */
-	int getLineNumber();
+  /**
+   * Returns line number of element in the document
+   *
+   * @return list of globs
+   */
+  int getLineNumber();
 
-	/**
-	 * Returns variable name
-	 *
-	 * @return variable name or null
-	 */
-	String getName();
+  /**
+   * Returns variable name
+   *
+   * @return variable name or null
+   */
+  String getName();
 
-	/**
-	 * Checks if variable is configured $self
-	 *
-	 * @return true of false
-	 */
-	boolean isSelf();
+  /**
+   * Checks if variable is configured $self
+   *
+   * @return true of false
+   */
+  boolean isSelf();
 
-	/**
-	 * Checks if this occurance is declaration
-	 *
-	 * @return true if it's declaration
-	 */
-	boolean isDeclaration();
+  /**
+   * Checks if this occurance is declaration
+   *
+   * @return true if it's declaration
+   */
+  boolean isDeclaration();
 }

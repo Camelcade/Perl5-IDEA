@@ -31,59 +31,47 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.06.2015.
  */
-public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implements PsiPerlDerefExpr
-{
-	public PerlDerefExpressionMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implements PsiPerlDerefExpr {
+  public PerlDerefExpressionMixin(ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	public String getPreviousElementType(PsiElement methodElement)
-	{
-		// todo add some caching here
-		if (methodElement == getFirstChild())    // first element
-		{
-			return PerlPackageUtil.getContextPackageName(this);
-		}
+  @Nullable
+  @Override
+  public String getPreviousElementType(PsiElement methodElement) {
+    // todo add some caching here
+    if (methodElement == getFirstChild())    // first element
+    {
+      return PerlPackageUtil.getContextPackageName(this);
+    }
 
-		PsiElement currentElement = methodElement.getPrevSibling();
-		while (currentElement instanceof PsiWhiteSpace ||
-				currentElement instanceof PsiComment ||
-				PsiUtilCore.getElementType(currentElement) == PerlElementTypes.OPERATOR_DEREFERENCE)
-		{
-			currentElement = currentElement.getPrevSibling();
-		}
+    PsiElement currentElement = methodElement.getPrevSibling();
+    while (currentElement instanceof PsiWhiteSpace ||
+           currentElement instanceof PsiComment ||
+           PsiUtilCore.getElementType(currentElement) == PerlElementTypes.OPERATOR_DEREFERENCE) {
+      currentElement = currentElement.getPrevSibling();
+    }
 
-		return getCurrentElementType(currentElement);
-	}
+    return getCurrentElementType(currentElement);
+  }
 
-	@Nullable
-	public String getCurrentElementType(PsiElement currentElement)
-	{
-		while (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment)
-		{
-			currentElement = currentElement.getPrevSibling();
-		}
+  @Nullable
+  public String getCurrentElementType(PsiElement currentElement) {
+    while (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment) {
+      currentElement = currentElement.getPrevSibling();
+    }
 
-		if (currentElement != null)
-		{
-			return PerlPsiUtil.getPerlExpressionType(currentElement);
-		}
-		return null;
+    if (currentElement != null) {
+      return PerlPsiUtil.getPerlExpressionType(currentElement);
+    }
+    return null;
+  }
 
-	}
-
-	public String guessType()
-	{
-		PsiElement[] children = getChildren();
-		if (children.length > 0)
-		{
-			return getCurrentElementType(children[children.length - 1]);
-		}
-		return null;
-	}
-
-
+  public String guessType() {
+    PsiElement[] children = getChildren();
+    if (children.length > 0) {
+      return getCurrentElementType(children[children.length - 1]);
+    }
+    return null;
+  }
 }

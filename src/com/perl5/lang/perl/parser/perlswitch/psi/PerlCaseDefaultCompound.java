@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public interface PerlCaseDefaultCompound extends PsiElement
-{
+public interface PerlCaseDefaultCompound extends PsiElement {
 }

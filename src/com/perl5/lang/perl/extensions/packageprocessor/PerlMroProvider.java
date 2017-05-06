@@ -22,7 +22,6 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 /**
  * Created by evstigneev on 21.08.2015.
  */
-public interface PerlMroProvider
-{
-	public PerlMroType getMroType(PerlUseStatement useStatement);
+public interface PerlMroProvider {
+  public PerlMroType getMroType(PerlUseStatement useStatement);
 }

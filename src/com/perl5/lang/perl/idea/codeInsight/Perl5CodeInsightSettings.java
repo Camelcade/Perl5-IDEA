@@ -28,33 +28,29 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 22.11.2015.
  */
 @State(
-		name = "Perl5CodeInsightSettings",
-		storages = {
-				@Storage(
-						file = PerlPathMacros.APP_OTHER_SETTINGS_FILE
-				)
-		}
+  name = "Perl5CodeInsightSettings",
+  storages = {
+    @Storage(
+      file = PerlPathMacros.APP_OTHER_SETTINGS_FILE
+    )
+  }
 )
 
-public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings>
-{
-	public boolean HEREDOC_AUTO_INSERTION = true;
+public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings> {
+  public boolean HEREDOC_AUTO_INSERTION = true;
 
-	public static Perl5CodeInsightSettings getInstance()
-	{
-		return ServiceManager.getService(Perl5CodeInsightSettings.class);
-	}
+  @Nullable
+  @Override
+  public Perl5CodeInsightSettings getState() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public Perl5CodeInsightSettings getState()
-	{
-		return this;
-	}
+  @Override
+  public void loadState(Perl5CodeInsightSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-	@Override
-	public void loadState(Perl5CodeInsightSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  public static Perl5CodeInsightSettings getInstance() {
+    return ServiceManager.getService(Perl5CodeInsightSettings.class);
+  }
 }

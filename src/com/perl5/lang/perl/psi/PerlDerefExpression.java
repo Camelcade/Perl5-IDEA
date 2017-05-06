@@ -22,33 +22,30 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.06.2015.
  */
-public interface PerlDerefExpression extends PsiPerlExpr
-{
-	/**
-	 * Attempting to traverse dereference chain in order to detect package name before method element
-	 *
-	 * @param methodElement - method, for which we are traversing
-	 * @return package name or null
-	 */
-	@Nullable
-	String getPreviousElementType(PsiElement methodElement);
+public interface PerlDerefExpression extends PsiPerlExpr {
+  /**
+   * Attempting to traverse dereference chain in order to detect package name before method element
+   *
+   * @param methodElement - method, for which we are traversing
+   * @return package name or null
+   */
+  @Nullable
+  String getPreviousElementType(PsiElement methodElement);
 
-	/**
-	 * Attempting to traverse dereference chain in order to detect package name retuning by current element
-	 *
-	 * @param currentElement current element
-	 * @return type or null
-	 */
-	@Nullable
-	String getCurrentElementType(PsiElement currentElement);
+  /**
+   * Attempting to traverse dereference chain in order to detect package name retuning by current element
+   *
+   * @param currentElement current element
+   * @return type or null
+   */
+  @Nullable
+  String getCurrentElementType(PsiElement currentElement);
 
-	/**
-	 * Attempting to guess dereference chain result
-	 *
-	 * @return type or null
-	 */
-	@Nullable
-	String guessType();
-
-
+  /**
+   * Attempting to guess dereference chain result
+   *
+   * @return type or null
+   */
+  @Nullable
+  String guessType();
 }

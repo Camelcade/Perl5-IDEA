@@ -26,17 +26,14 @@ import java.util.Collection;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyTreeStructure
-{
-	public PerlSuperTypesHierarchyTreeStructure(@NotNull PsiElement element)
-	{
-		super(element);
-	}
+public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyTreeStructure {
+  public PerlSuperTypesHierarchyTreeStructure(@NotNull PsiElement element) {
+    super(element);
+  }
 
-	@Override
-	protected Collection<PsiElement> getSubElements(PsiElement element)
-	{
-		assert element instanceof PerlNamespaceDefinition;
-		return new ArrayList<PsiElement>(((PerlNamespaceDefinition) element).getParentNamespaceDefinitions());
-	}
+  @Override
+  protected Collection<PsiElement> getSubElements(PsiElement element) {
+    assert element instanceof PerlNamespaceDefinition;
+    return new ArrayList<PsiElement>(((PerlNamespaceDefinition)element).getParentNamespaceDefinitions());
+  }
 }

@@ -28,23 +28,19 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 27.05.2015.
  * Mixin for scope elements
  */
-public abstract class PerlLexicalScopeMemberMixin extends PerlCompositeElementImpl implements PerlLexicalScopeMember
-{
-	public PerlLexicalScopeMemberMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlLexicalScopeMemberMixin extends PerlCompositeElementImpl implements PerlLexicalScopeMember {
+  public PerlLexicalScopeMemberMixin(ASTNode node) {
+    super(node);
+  }
 
 
-	@Override
-	public PerlLexicalScope getLexicalScope()
-	{
-		return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
-	}
+  @Override
+  public PerlLexicalScope getLexicalScope() {
+    return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
+  }
 
-	@Nullable
-	public PsiPerlUnconditionalBlock getUnconditionalBlock()
-	{
-		return PsiTreeUtil.getChildOfType(this, PsiPerlUnconditionalBlock.class);
-	}
+  @Nullable
+  public PsiPerlUnconditionalBlock getUnconditionalBlock() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlUnconditionalBlock.class);
+  }
 }

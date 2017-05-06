@@ -25,19 +25,17 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonNamedElementStubBase;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public abstract class HTMLMasonNamedElementStubBaseImpl<T extends StubBasedPsiElement> extends StubBase<T> implements HTMLMasonNamedElementStubBase
-{
-	private final String myName;
+public abstract class HTMLMasonNamedElementStubBaseImpl<T extends StubBasedPsiElement> extends StubBase<T>
+  implements HTMLMasonNamedElementStubBase {
+  private final String myName;
 
-	public HTMLMasonNamedElementStubBaseImpl(StubElement parent, IStubElementType elementType, String myName)
-	{
-		super(parent, elementType);
-		this.myName = myName;
-	}
+  public HTMLMasonNamedElementStubBaseImpl(StubElement parent, IStubElementType elementType, String myName) {
+    super(parent, elementType);
+    this.myName = myName;
+  }
 
-	@Override
-	public String getName()
-	{
-		return myName;
-	}
+  @Override
+  public String getName() {
+    return myName;
+  }
 }

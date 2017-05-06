@@ -24,16 +24,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitTokenType extends IElementType
-{
-	public TemplateToolkitTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, TemplateToolkitLanguage.INSTANCE);
-	}
+public class TemplateToolkitTokenType extends IElementType {
+  public TemplateToolkitTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, TemplateToolkitLanguage.INSTANCE);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "TT2: " + super.toString();
-	}
+  @Override
+  public String toString() {
+    return "TT2: " + super.toString();
+  }
 }

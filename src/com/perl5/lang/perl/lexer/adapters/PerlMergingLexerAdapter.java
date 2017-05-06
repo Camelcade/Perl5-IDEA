@@ -28,24 +28,20 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 16.10.2016.
  * Third level of lexer adapter merges necessary tokens
  */
-public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes
-{
-	public final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
-			STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ
-	);
+public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes {
+  public final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
+    STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ
+  );
 
-	public PerlMergingLexerAdapter(@Nullable Project project)
-	{
-		this(project, true, false);
-	}
+  public PerlMergingLexerAdapter(@Nullable Project project) {
+    this(project, true, false);
+  }
 
-	public PerlMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing)
-	{
-		this(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing));
-	}
+  public PerlMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
+    this(new PerlSublexingLexerAdapter(project, allowToMergeCodeBlocks, forceSublexing));
+  }
 
-	public PerlMergingLexerAdapter(@NotNull Lexer original)
-	{
-		super(original, TOKENS_TO_MERGE);
-	}
+  public PerlMergingLexerAdapter(@NotNull Lexer original) {
+    super(original, TOKENS_TO_MERGE);
+  }
 }

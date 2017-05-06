@@ -28,43 +28,38 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements Mason2ElementTypes
-{
-	public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical)
-	{
-		super(manager, virtualFile, physical);
-	}
+public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements Mason2ElementTypes {
+  public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
+    super(manager, virtualFile, physical);
+  }
 
-	public Mason2TemplatingFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
-	{
-		super(manager, virtualFile, eventSystemEnabled, templateLanguage);
-	}
+  public Mason2TemplatingFileViewProvider(PsiManager manager,
+                                          VirtualFile virtualFile,
+                                          boolean eventSystemEnabled,
+                                          Language templateLanguage) {
+    super(manager, virtualFile, eventSystemEnabled, templateLanguage);
+  }
 
-	@Override
-	@NotNull
-	public Language getBaseLanguage()
-	{
-		return Mason2TemplatingLanguage.INSTANCE;
-	}
+  @Override
+  @NotNull
+  public Language getBaseLanguage() {
+    return Mason2TemplatingLanguage.INSTANCE;
+  }
 
-	@NotNull
-	@Override
-	protected IElementType getTemplateContentElementType()
-	{
-		return MASON_HTML_TEMPLATE_DATA;
-	}
+  @NotNull
+  @Override
+  protected IElementType getTemplateContentElementType() {
+    return MASON_HTML_TEMPLATE_DATA;
+  }
 
-	@NotNull
-	@Override
-	protected IElementType getPODContentElementType()
-	{
-		return MASON_POD_TEMPLATE_DATA;
-	}
+  @NotNull
+  @Override
+  protected IElementType getPODContentElementType() {
+    return MASON_POD_TEMPLATE_DATA;
+  }
 
-	@Override
-	protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy)
-	{
-		return new Mason2TemplatingFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
-	}
-
+  @Override
+  protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy) {
+    return new Mason2TemplatingFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
+  }
 }

@@ -32,131 +32,111 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PAC
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod
-{
-	public PerlMethodImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod {
+  public PerlMethodImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public String getExplicitPackageName()
-	{
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
+  @Override
+  public String getExplicitPackageName() {
+    PerlNamespaceElement namespaceElement = getNamespaceElement();
 
-		if (namespaceElement != null)
-		{
-			return namespaceElement.getCanonicalName();
-		}
-		return null;
-	}
+    if (namespaceElement != null) {
+      return namespaceElement.getCanonicalName();
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public String getContextPackageName()
-	{
-		return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>()
-		{
-			@Nullable
-			@Override
-			public Result<String> compute()
-			{
-				return Result.create(getContextPackageNameHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
-			}
-		});
-	}
+  @Nullable
+  @Override
+  public String getContextPackageName() {
+    return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>() {
+      @Nullable
+      @Override
+      public Result<String> compute() {
+        return Result.create(getContextPackageNameHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
+      }
+    });
+  }
 
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		String namespace = getExplicitPackageName();
+  @Nullable
+  @Override
+  public String getPackageName() {
+    String namespace = getExplicitPackageName();
 
-		if (namespace == null)
-		{
-			namespace = getContextPackageName();
-		}
+    if (namespace == null) {
+      namespace = getContextPackageName();
+    }
 
-		return namespace;
-	}
+    return namespace;
+  }
 
-	@Nullable
-	@Override
-	public String getCanonicalName()
-	{
-		String packageName = getPackageName();
-		if (packageName == null)
-		{
-			return null;
-		}
-		return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-	}
+  @Nullable
+  @Override
+  public String getCanonicalName() {
+    String packageName = getPackageName();
+    if (packageName == null) {
+      return null;
+    }
+    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+  }
 
 
-	@Override
-	public String getName()
-	{
-		PerlSubNameElement subNameElement = getSubNameElement();
-		return subNameElement == null ? null : subNameElement.getText();
-	}
+  @Override
+  public String getName() {
+    PerlSubNameElement subNameElement = getSubNameElement();
+    return subNameElement == null ? null : subNameElement.getText();
+  }
 
-	@Nullable
-	@Override
-	public String getContextPackageNameHeavy()
-	{
-//		System.err.println("Guessing type for method " + getText() + " at " + getTextOffset());
+  @Nullable
+  @Override
+  public String getContextPackageNameHeavy() {
+    //		System.err.println("Guessing type for method " + getText() + " at " + getTextOffset());
 
-		PsiElement parent = getParent();
-		PsiElement grandParent = parent == null ? null : parent.getParent();
+    PsiElement parent = getParent();
+    PsiElement grandParent = parent == null ? null : parent.getParent();
 
-		if (grandParent instanceof PsiPerlDerefExpr)
-		{
-			return ((PsiPerlDerefExpr) grandParent).getPreviousElementType(parent);
-		}
+    if (grandParent instanceof PsiPerlDerefExpr) {
+      return ((PsiPerlDerefExpr)grandParent).getPreviousElementType(parent);
+    }
 
-		return PerlPackageUtil.getContextPackageName(this);
-	}
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 
-	@Override
-	public boolean isObjectMethod()
-	{
-		boolean hasExplicitNamespace = hasExplicitNamespace();
-		boolean isNestedCall = getParent() instanceof PsiPerlNestedCall;
+  @Override
+  public boolean isObjectMethod() {
+    boolean hasExplicitNamespace = hasExplicitNamespace();
+    boolean isNestedCall = getParent() instanceof PsiPerlNestedCall;
 
-		return !hasExplicitNamespace && isNestedCall            // part of ..->method()
-				|| hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement    // method Foo::Bar
-				|| hasExplicitNamespace        // SUPER::method
-				&& isNestedCall
-				&& getFirstChild() instanceof PerlNamespaceElement
-				&& ((PerlNamespaceElement) getFirstChild()).isSUPER()
-				;
-	}
+    return !hasExplicitNamespace && isNestedCall            // part of ..->method()
+           || hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement    // method Foo::Bar
+           || hasExplicitNamespace        // SUPER::method
+              && isNestedCall
+              && getFirstChild() instanceof PerlNamespaceElement
+              && ((PerlNamespaceElement)getFirstChild()).isSUPER()
+      ;
+  }
 
-	@Nullable
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		PsiElement childByType = findChildByType(QUALIFYING_PACKAGE);
-		if (childByType == null)
-		{
-			return null;
-		}
-		assert childByType instanceof PerlNamespaceElement;
-		return (PerlNamespaceElement) childByType;
-	}
+  @Nullable
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    PsiElement childByType = findChildByType(QUALIFYING_PACKAGE);
+    if (childByType == null) {
+      return null;
+    }
+    assert childByType instanceof PerlNamespaceElement;
+    return (PerlNamespaceElement)childByType;
+  }
 
-	@Nullable
-	@Override
-	public PerlSubNameElement getSubNameElement()
-	{
-		return findChildByClass(PerlSubNameElement.class);
-	}
+  @Nullable
+  @Override
+  public PerlSubNameElement getSubNameElement() {
+    return findChildByClass(PerlSubNameElement.class);
+  }
 
-	@Override
-	public boolean hasExplicitNamespace()
-	{
-		return getNamespaceElement() != null;
-	}
-
+  @Override
+  public boolean hasExplicitNamespace() {
+    return getNamespaceElement() != null;
+  }
 }

@@ -34,56 +34,48 @@ import java.io.IOException;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArgsBlockStub, HTMLMasonArgsBlock> implements PsiElementProvider
-{
-	public HTMLMasonArgsBlockElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, HTMLMasonLanguage.INSTANCE);
-	}
+public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArgsBlockStub, HTMLMasonArgsBlock>
+  implements PsiElementProvider {
+  public HTMLMasonArgsBlockElementType(@NotNull @NonNls String debugName) {
+    super(debugName, HTMLMasonLanguage.INSTANCE);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new HTMLMasonArgsBlockImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new HTMLMasonArgsBlockImpl(node);
+  }
 
 
-	@Override
-	public HTMLMasonArgsBlock createPsi(@NotNull HTMLMasonArgsBlockStub stub)
-	{
-		return new HTMLMasonArgsBlockImpl(stub, this);
-	}
+  @Override
+  public HTMLMasonArgsBlock createPsi(@NotNull HTMLMasonArgsBlockStub stub) {
+    return new HTMLMasonArgsBlockImpl(stub, this);
+  }
 
-	@Override
-	public HTMLMasonArgsBlockStub createStub(@NotNull HTMLMasonArgsBlock psi, StubElement parentStub)
-	{
-		return new HTMLMasonArgsBlockStubImpl(parentStub, this, psi.getArgumentsList());
-	}
+  @Override
+  public HTMLMasonArgsBlockStub createStub(@NotNull HTMLMasonArgsBlock psi, StubElement parentStub) {
+    return new HTMLMasonArgsBlockStubImpl(parentStub, this, psi.getArgumentsList());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "HTML::Mason::" + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "HTML::Mason::" + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull HTMLMasonArgsBlockStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		PerlSubArgument.serializeList(dataStream, stub.getArgumentsList());
-	}
+  @Override
+  public void serialize(@NotNull HTMLMasonArgsBlockStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    PerlSubArgument.serializeList(dataStream, stub.getArgumentsList());
+  }
 
-	@NotNull
-	@Override
-	public HTMLMasonArgsBlockStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new HTMLMasonArgsBlockStubImpl(parentStub, this, PerlSubArgument.deserializeList(dataStream));
-	}
+  @NotNull
+  @Override
+  public HTMLMasonArgsBlockStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new HTMLMasonArgsBlockStubImpl(parentStub, this, PerlSubArgument.deserializeList(dataStream));
+  }
 
-	@Override
-	public void indexStub(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IndexSink sink)
-	{
+  @Override
+  public void indexStub(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IndexSink sink) {
 
-	}
+  }
 }

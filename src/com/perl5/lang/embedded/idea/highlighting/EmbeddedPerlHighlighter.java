@@ -31,19 +31,16 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes
-{
-	public EmbeddedPerlHighlighter(@Nullable final Project project,
-								   @Nullable final VirtualFile virtualFile,
-								   @NotNull final EditorColorsScheme colors)
-	{
-		super(new EmbeddedPerlSyntaxHighlighter(project), colors);
-		registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
-		registerLayer(POD, new LayerDescriptor(
-				SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
-				""
-		));
-
-	}
+public class EmbeddedPerlHighlighter extends LayeredLexerEditorHighlighter implements EmbeddedPerlElementTypes {
+  public EmbeddedPerlHighlighter(@Nullable final Project project,
+                                 @Nullable final VirtualFile virtualFile,
+                                 @NotNull final EditorColorsScheme colors) {
+    super(new EmbeddedPerlSyntaxHighlighter(project), colors);
+    registerLayer(EMBED_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
+    registerLayer(POD, new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      ""
+    ));
+  }
 }

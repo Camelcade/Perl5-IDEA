@@ -43,119 +43,100 @@ import java.util.List;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> extends HTMLMasonStubBasedElement<T> implements HTMLMasonNamedElement
-{
-	public HTMLMasonStubBasedNamedElementImpl(@NotNull T stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> extends HTMLMasonStubBasedElement<T>
+  implements HTMLMasonNamedElement {
+  public HTMLMasonStubBasedNamedElementImpl(@NotNull T stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public HTMLMasonStubBasedNamedElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public HTMLMasonStubBasedNamedElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		if (!HTML_MASON_IDENTIFIER_PATTERN.matcher(name).matches())
-		{
-			throw new IncorrectOperationException("Incorrect HTML::Mason identifier");
-		}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    if (!HTML_MASON_IDENTIFIER_PATTERN.matcher(name).matches()) {
+      throw new IncorrectOperationException("Incorrect HTML::Mason identifier");
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof LeafPsiElement)
-		{
-			((LeafPsiElement) nameIdentifier).replaceWithText(name);
-		}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof LeafPsiElement) {
+      ((LeafPsiElement)nameIdentifier).replaceWithText(name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@Nullable
-	protected abstract String getNameFromStub();
+  @Nullable
+  protected abstract String getNameFromStub();
 
 
-	@Override
-	public String getName()
-	{
-		String name = getNameFromStub();
-		if (name != null)
-		{
-			return name;
-		}
+  @Override
+  public String getName() {
+    String name = getNameFromStub();
+    if (name != null) {
+      return name;
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			return nameIdentifier.getText();
-		}
-		return super.getName();
-	}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      return nameIdentifier.getText();
+    }
+    return super.getName();
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		PsiElement firstChild = getFirstChild();
-		if (firstChild != null)
-		{
-			firstChild = PerlPsiUtil.getNextSignificantSibling(firstChild);
-			if (firstChild instanceof PerlSubNameElement)
-			{
-				return firstChild;
-			}
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    PsiElement firstChild = getFirstChild();
+    if (firstChild != null) {
+      firstChild = PerlPsiUtil.getNextSignificantSibling(firstChild);
+      if (firstChild instanceof PerlSubNameElement) {
+        return firstChild;
+      }
+    }
+    return null;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
 
-	@NotNull
-	public List<HTMLMasonCompositeElement> getArgsBlocks()
-	{
-		StubElement stub = getStub();
+  @NotNull
+  public List<HTMLMasonCompositeElement> getArgsBlocks() {
+    StubElement stub = getStub();
 
-		//noinspection Duplicates duplicates file implementation
-		if (stub != null)
-		{
-			final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+    //noinspection Duplicates duplicates file implementation
+    if (stub != null) {
+      final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
 
-			PerlPsiUtil.processElementsFromStubs(
-					stub,
-					new Processor<Stub>()
-					{
-						@Override
-						public boolean process(Stub stub)
-						{
-							if (stub instanceof HTMLMasonArgsBlockStub)
-							{
-								result.add(((HTMLMasonArgsBlockStub) stub).getPsi());
-							}
-							return true;
-						}
-					},
-					HTMLMasonNamedElementStubBaseImpl.class
-			);
-			return result;
-		}
+      PerlPsiUtil.processElementsFromStubs(
+        stub,
+        new Processor<Stub>() {
+          @Override
+          public boolean process(Stub stub) {
+            if (stub instanceof HTMLMasonArgsBlockStub) {
+              result.add(((HTMLMasonArgsBlockStub)stub).getPsi());
+            }
+            return true;
+          }
+        },
+        HTMLMasonNamedElementStubBaseImpl.class
+      );
+      return result;
+    }
 
-		HTMLMasonBlock block = PsiTreeUtil.getChildOfType(this, HTMLMasonBlock.class);
-		if (block != null)
-		{
-			return block.getArgsBlocks();
-		}
+    HTMLMasonBlock block = PsiTreeUtil.getChildOfType(this, HTMLMasonBlock.class);
+    if (block != null) {
+      return block.getArgsBlocks();
+    }
 
-		return Collections.emptyList();
-	}
-
+    return Collections.emptyList();
+  }
 }

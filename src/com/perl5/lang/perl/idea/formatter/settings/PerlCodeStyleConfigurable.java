@@ -25,25 +25,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlCodeStyleConfigurable extends CodeStyleAbstractConfigurable
-{
-	public PerlCodeStyleConfigurable(CodeStyleSettings settings, CodeStyleSettings cloneSettings)
-	{
-		super(settings, cloneSettings, PerlLanguage.INSTANCE.getDisplayName());
-	}
+public class PerlCodeStyleConfigurable extends CodeStyleAbstractConfigurable {
+  public PerlCodeStyleConfigurable(CodeStyleSettings settings, CodeStyleSettings cloneSettings) {
+    super(settings, cloneSettings, PerlLanguage.INSTANCE.getDisplayName());
+  }
 
-	@Override
-	protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings)
-	{
-		return new PerlCodeStyleMainPanel(getCurrentSettings(), settings);
-	}
+  @Override
+  protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings) {
+    return new PerlCodeStyleMainPanel(getCurrentSettings(), settings);
+  }
 
-	@Nullable
-	@Override
-	public String getHelpTopic()
-	{
-		return null;
-	}
-
-
+  @Nullable
+  @Override
+  public String getHelpTopic() {
+    return null;
+  }
 }

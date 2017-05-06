@@ -27,29 +27,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PsiPerlFuncDefinition
-{
-	public PerlFuncDefinitionImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlFuncDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub>
+  implements PsiPerlFuncDefinition {
+  public PerlFuncDefinitionImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlFuncDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlFuncDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		return false;
-	}
+  @Override
+  public boolean isMethod() {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return getFuncSignatureContent();
-	}
-
+  @Nullable
+  @Override
+  public PsiElement getSignatureContainer() {
+    return getFuncSignatureContent();
+  }
 }

@@ -22,21 +22,18 @@ import java.util.List;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class MooProcessor extends MooseProcessor
-{
-	public static final String MOO_OBJECT = "Moo::Object";
-	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
-	protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+public class MooProcessor extends MooseProcessor {
+  public static final String MOO_OBJECT = "Moo::Object";
+  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
+  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
 
-	@Override
-	public List<String> getLoadedClasses()
-	{
-		return LOADED_CLASSES;
-	}
+  @Override
+  public List<String> getLoadedClasses() {
+    return LOADED_CLASSES;
+  }
 
-	@Override
-	public List<String> getParentClasses()
-	{
-		return PARENT_CLASSES;
-	}
+  @Override
+  public List<String> getParentClasses() {
+    return PARENT_CLASSES;
+  }
 }

@@ -22,6 +22,5 @@ import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlRequireExpr extends PsiElement, PerlDoExpr, PerlNamespaceElementContainer
-{
+public interface PerlRequireExpr extends PsiElement, PerlDoExpr, PerlNamespaceElementContainer {
 }

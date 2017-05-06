@@ -34,92 +34,86 @@ import java.util.*;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlHashUtil implements PerlElementTypes
-{
-	public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
-			"!",
-			"+",
-			"-",
-			"^H",
-			"ENV",
-			"INC",
-			"OVERLOAD",
-			"SIG",
-			"LAST_PAREN_MATCH",
-			"LAST_MATCH_START",
-			"OS_ERROR",
-			"ERRNO"
-	));
+public class PerlHashUtil implements PerlElementTypes {
+  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+    "!",
+    "+",
+    "-",
+    "^H",
+    "ENV",
+    "INC",
+    "OVERLOAD",
+    "SIG",
+    "LAST_PAREN_MATCH",
+    "LAST_MATCH_START",
+    "OS_ERROR",
+    "ERRNO"
+  ));
 
-	public static boolean isBuiltIn(String variable)
-	{
-		return BUILT_IN.contains(variable);
-	}
+  public static boolean isBuiltIn(String variable) {
+    return BUILT_IN.contains(variable);
+  }
 
-	/**
-	 * Searching project files for global hash definitions by specific package and variable name
-	 *
-	 * @param project       project to search in
-	 * @param canonicalName canonical variable name package::name
-	 * @return Collection of found definitions
-	 */
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName)
-	{
-		return getGlobalHashDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
-	}
+  /**
+   * Searching project files for global hash definitions by specific package and variable name
+   *
+   * @param project       project to search in
+   * @param canonicalName canonical variable name package::name
+   * @return Collection of found definitions
+   */
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName) {
+    return getGlobalHashDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
+  }
 
-	public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName, GlobalSearchScope scope)
-	{
-		if (canonicalName == null)
-		{
-			return Collections.emptyList();
-		}
-		return StubIndex.getElements(
-				PerlVariablesStubIndex.KEY_HASH,
-				canonicalName,
-				project,
-				scope,
-				PerlVariableDeclarationWrapper.class
-		);
-	}
+  public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project,
+                                                                                    String canonicalName,
+                                                                                    GlobalSearchScope scope) {
+    if (canonicalName == null) {
+      return Collections.emptyList();
+    }
+    return StubIndex.getElements(
+      PerlVariablesStubIndex.KEY_HASH,
+      canonicalName,
+      project,
+      scope,
+      PerlVariableDeclarationWrapper.class
+    );
+  }
 
 
-	/**
-	 * Returns list of defined global hashes
-	 *
-	 * @param project project to search in
-	 * @return collection of variable canonical names
-	 */
-	public static Collection<String> getDefinedGlobalHashNames(Project project)
-	{
-		return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_HASH, project);
-	}
+  /**
+   * Returns list of defined global hashes
+   *
+   * @param project project to search in
+   * @return collection of variable canonical names
+   */
+  public static Collection<String> getDefinedGlobalHashNames(Project project) {
+    return PerlUtil.getIndexKeysWithoutInternals(PerlVariablesStubIndex.KEY_HASH, project);
+  }
 
-	/**
-	 * Processes all global hashes names with specific processor
-	 *
-	 * @param project   project to search in
-	 * @param processor string processor for suitable strings
-	 * @return collection of constants names
-	 */
-	public static boolean processDefinedGlobalHashes(@NotNull Project project, @NotNull GlobalSearchScope scope, @NotNull Processor<PerlVariableDeclarationWrapper> processor)
-	{
-		return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
-	}
+  /**
+   * Processes all global hashes names with specific processor
+   *
+   * @param project   project to search in
+   * @param processor string processor for suitable strings
+   * @return collection of constants names
+   */
+  public static boolean processDefinedGlobalHashes(@NotNull Project project,
+                                                   @NotNull GlobalSearchScope scope,
+                                                   @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+    return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
+  }
 
-	/**
-	 * Returns a map of imported hashes names
-	 *
-	 * @param rootElement element to start looking from
-	 * @return result map
-	 */
-	@NotNull
-	public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull PsiElement rootElement)
-	{
-		PerlImportsCollector collector = new PerlHashImportsCollector();
-		PerlUtil.processImportedEntities(rootElement, collector);
-		return collector.getResult();
-	}
-
-
+  /**
+   * Returns a map of imported hashes names
+   *
+   * @param rootElement element to start looking from
+   * @return result map
+   */
+  @NotNull
+  public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull PsiElement rootElement) {
+    PerlImportsCollector collector = new PerlHashImportsCollector();
+    PerlUtil.processImportedEntities(rootElement, collector);
+    return collector.getResult();
+  }
 }

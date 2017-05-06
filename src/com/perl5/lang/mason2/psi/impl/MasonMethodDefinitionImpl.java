@@ -29,26 +29,21 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition
-{
-	public MasonMethodDefinitionImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition {
+  public MasonMethodDefinitionImpl(ASTNode node) {
+    super(node);
+  }
 
-	public MasonMethodDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public MasonMethodDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (myImplicitVariables == null)
-		{
-			myImplicitVariables = buildImplicitVariables();
-		}
-		return myImplicitVariables;
-	}
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      myImplicitVariables = buildImplicitVariables();
+    }
+    return myImplicitVariables;
+  }
 }

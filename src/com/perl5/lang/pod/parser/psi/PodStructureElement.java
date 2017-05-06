@@ -19,6 +19,5 @@ package com.perl5.lang.pod.parser.psi;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public interface PodStructureElement
-{
+public interface PodStructureElement {
 }

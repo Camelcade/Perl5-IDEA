@@ -22,6 +22,6 @@ import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public interface HTMLMasonFile extends HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer, HTMLMasonParametrizedEntity
-{
+public interface HTMLMasonFile
+  extends HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer, HTMLMasonParametrizedEntity {
 }

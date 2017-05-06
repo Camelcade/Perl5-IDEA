@@ -27,34 +27,28 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodBraceMathcer implements PairedBraceMatcher, PodElementTypes
-{
-	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(POD_BEGIN, POD_END, true),
-			new BracePair(POD_OVER, POD_BACK, true),
-			new BracePair(POD_ANGLE_LEFT, POD_ANGLE_RIGHT, false),
-			new BracePair(POD_PAREN_LEFT, POD_PAREN_RIGHT, false),
-			new BracePair(POD_BRACE_LEFT, POD_BRACE_RIGHT, false),
-			new BracePair(POD_BRACKET_LEFT, POD_BRACKET_RIGHT, false),
-	};
+public class PodBraceMathcer implements PairedBraceMatcher, PodElementTypes {
+  private static final BracePair[] PAIRS = new BracePair[]{
+    new BracePair(POD_BEGIN, POD_END, true),
+    new BracePair(POD_OVER, POD_BACK, true),
+    new BracePair(POD_ANGLE_LEFT, POD_ANGLE_RIGHT, false),
+    new BracePair(POD_PAREN_LEFT, POD_PAREN_RIGHT, false),
+    new BracePair(POD_BRACE_LEFT, POD_BRACE_RIGHT, false),
+    new BracePair(POD_BRACKET_LEFT, POD_BRACKET_RIGHT, false),
+  };
 
-	@Override
-	public BracePair[] getPairs()
-	{
-		return PAIRS;
-	}
+  @Override
+  public BracePair[] getPairs() {
+    return PAIRS;
+  }
 
-	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType)
-	{
-		return true;
-	}
+  @Override
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
+    return true;
+  }
 
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
-		return openingBraceOffset;
-	}
-
-
+  @Override
+  public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
+    return openingBraceOffset;
+  }
 }

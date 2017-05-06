@@ -33,42 +33,37 @@ import java.util.List;
 /**
  * Created by hurricup on 07.11.2015.
  */
-public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock
-{
-	protected final Alignment arrowAlignment;
+public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock {
+  protected final Alignment arrowAlignment;
 
-	public PerlConstantDefinitionFormattingBlock(
-			@NotNull ASTNode node,
-			@Nullable Wrap wrap,
-			@Nullable Alignment alignment,
-			@NotNull CommonCodeStyleSettings codeStyleSettings,
-			@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-			@NotNull SpacingBuilder spacingBuilder,
-			@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
-	)
-	{
-		super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-		arrowAlignment = alignment;
-	}
+  public PerlConstantDefinitionFormattingBlock(
+    @NotNull ASTNode node,
+    @Nullable Wrap wrap,
+    @Nullable Alignment alignment,
+    @NotNull CommonCodeStyleSettings codeStyleSettings,
+    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+    @NotNull SpacingBuilder spacingBuilder,
+    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+  ) {
+    super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+    arrowAlignment = alignment;
+  }
 
-	@Override
-	protected List<Block> buildSubBlocks()
-	{
-		final List<Block> blocks = new ArrayList<Block>();
+  @Override
+  protected List<Block> buildSubBlocks() {
+    final List<Block> blocks = new ArrayList<Block>();
 
-		for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext())
-		{
-			if (!shouldCreateBlockFor(child))
-			{
-				continue;
-			}
-			blocks.add(createChildBlock(
-					child,
-					null,
-					child.getElementType() == FAT_COMMA ? arrowAlignment : null
-			));
-		}
+    for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+      if (!shouldCreateBlockFor(child)) {
+        continue;
+      }
+      blocks.add(createChildBlock(
+        child,
+        null,
+        child.getElementType() == FAT_COMMA ? arrowAlignment : null
+      ));
+    }
 
-		return blocks;
-	}
+    return blocks;
+  }
 }

@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public abstract class TemplateToolkitElementType extends TemplateToolkitTokenType implements PsiElementProvider
-{
-	public TemplateToolkitElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class TemplateToolkitElementType extends TemplateToolkitTokenType implements PsiElementProvider {
+  public TemplateToolkitElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

@@ -25,24 +25,21 @@ import java.io.IOException;
 /**
  * Created by hurricup on 03.06.2015.
  */
-public enum PerlReturnType
-{
-	VALUE,        // default
-	REF,        // Package::Name	NYI
-	ARRAY,        // @Package::Name	NYI
-	HASH,        // %Package::Name	NYI
-	ARRAY_REF,    // [Package::Name]
-	HASH_REF,    // {Package::Name}
-	CODE_REF;    // &				NYI
+public enum PerlReturnType {
+  VALUE,        // default
+  REF,        // Package::Name	NYI
+  ARRAY,        // @Package::Name	NYI
+  HASH,        // %Package::Name	NYI
+  ARRAY_REF,    // [Package::Name]
+  HASH_REF,    // {Package::Name}
+  CODE_REF;    // &				NYI
 
-	public static PerlReturnType deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		return PerlReturnType.valueOf(dataStream.readName().toString());
-	}
+  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(toString());
+  }
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(toString());
-	}
+  public static PerlReturnType deserialize(@NotNull StubInputStream dataStream) throws IOException {
+    return PerlReturnType.valueOf(dataStream.readName().toString());
+  }
 
 }

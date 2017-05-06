@@ -24,15 +24,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class MasonTemplatingTokenType extends IElementType
-{
-	public MasonTemplatingTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, Mason2TemplatingLanguage.INSTANCE);
-	}
+public class MasonTemplatingTokenType extends IElementType {
+  public MasonTemplatingTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, Mason2TemplatingLanguage.INSTANCE);
+  }
 
-	public String toString()
-	{
-		return "Mason2: " + super.toString();
-	}
+  public String toString() {
+    return "Mason2: " + super.toString();
+  }
 }

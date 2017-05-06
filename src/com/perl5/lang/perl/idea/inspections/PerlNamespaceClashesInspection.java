@@ -27,31 +27,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlNamespaceClashesInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
+public class PerlNamespaceClashesInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
 
-			@Override
-			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
-			{
-				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
-				{
-					return;
-				}
+      @Override
+      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
+        if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName())) {
+          return;
+        }
 
-				// fixme we should check that this is not in SDK
-				if (namespaceElement.isBuiltin())
-				{
-					registerProblem(holder, namespaceElement, "Namespace definition clashes with built-in namespace");
-				}
-
-			}
-		};
-	}
+        // fixme we should check that this is not in SDK
+        if (namespaceElement.isBuiltin()) {
+          registerProblem(holder, namespaceElement, "Namespace definition clashes with built-in namespace");
+        }
+      }
+    };
+  }
 }

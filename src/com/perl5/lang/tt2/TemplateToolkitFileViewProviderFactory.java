@@ -26,12 +26,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileViewProviderFactory implements FileViewProviderFactory
-{
-	@NotNull
-	@Override
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
-	{
-		return new TemplateToolkitFileViewProvider(manager, file, eventSystemEnabled);
-	}
+public class TemplateToolkitFileViewProviderFactory implements FileViewProviderFactory {
+  @NotNull
+  @Override
+  public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+                                                 Language language,
+                                                 @NotNull PsiManager manager,
+                                                 boolean eventSystemEnabled) {
+    return new TemplateToolkitFileViewProvider(manager, file, eventSystemEnabled);
+  }
 }

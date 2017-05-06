@@ -27,28 +27,22 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public abstract class HTMLMasonStringReference extends PerlCachingReference<PerlString>
-{
-	public HTMLMasonStringReference(@NotNull PerlString element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
+public abstract class HTMLMasonStringReference extends PerlCachingReference<PerlString> {
+  public HTMLMasonStringReference(@NotNull PerlString element, TextRange textRange) {
+    super(element, textRange);
+  }
 
-	protected PsiElement setStringContent(String newContent)
-	{
-		if (myElement instanceof PsiPerlStringBare)
-		{
-			PsiElement newString = HTMLMasonElementFactory.getBareCallString(myElement.getProject(), newContent);
-			if (newString != null)
-			{
-				return myElement.replace(newString);
-			}
-		}
-		else
-		{
-			myElement.setStringContent(newContent);
-		}
+  protected PsiElement setStringContent(String newContent) {
+    if (myElement instanceof PsiPerlStringBare) {
+      PsiElement newString = HTMLMasonElementFactory.getBareCallString(myElement.getProject(), newContent);
+      if (newString != null) {
+        return myElement.replace(newString);
+      }
+    }
+    else {
+      myElement.setStringContent(newContent);
+    }
 
-		return myElement;
-	}
+    return myElement;
+  }
 }

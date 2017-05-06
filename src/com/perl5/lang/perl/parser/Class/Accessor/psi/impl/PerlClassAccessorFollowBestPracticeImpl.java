@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class PerlClassAccessorFollowBestPracticeImpl extends PerlClassAccessorSubImpl implements PerlClassAccessorFollowBestPractice
-{
-	public PerlClassAccessorFollowBestPracticeImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlClassAccessorFollowBestPracticeImpl extends PerlClassAccessorSubImpl implements PerlClassAccessorFollowBestPractice {
+  public PerlClassAccessorFollowBestPracticeImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 }

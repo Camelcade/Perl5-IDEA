@@ -24,36 +24,29 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public abstract class PerlInspection extends LocalInspectionTool
-{
-//	long startTime;
+public abstract class PerlInspection extends LocalInspectionTool {
+  //	long startTime;
 
-	protected void registerProblem(ProblemsHolder holder, PsiElement element, String message)
-	{
-		if (!element.getNode().getTextRange().isEmpty())
-		{
-			holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
-		}
-	}
+  protected void registerProblem(ProblemsHolder holder, PsiElement element, String message) {
+    if (!element.getNode().getTextRange().isEmpty()) {
+      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
+    }
+  }
 
-	protected void registerError(ProblemsHolder holder, PsiElement element, String message)
-	{
-		if (!element.getNode().getTextRange().isEmpty())
-		{
-			holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
-		}
-	}
+  protected void registerError(ProblemsHolder holder, PsiElement element, String message) {
+    if (!element.getNode().getTextRange().isEmpty()) {
+      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
+    }
+  }
 
-	protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message)
-	{
-		if (!element.getNode().getTextRange().isEmpty())
-		{
-			holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);
-		}
-	}
+  protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message) {
+    if (!element.getNode().getTextRange().isEmpty()) {
+      holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);
+    }
+  }
 
 /*
-	@Override
+        @Override
 	public void inspectionStarted(LocalInspectionToolSession session, boolean isOnTheFly)
 	{
 		startTime = System.currentTimeMillis() / 1000;

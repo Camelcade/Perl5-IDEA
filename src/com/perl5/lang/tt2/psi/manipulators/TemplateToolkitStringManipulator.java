@@ -29,41 +29,37 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitStringManipulator extends AbstractElementManipulator<TemplateToolkitString>
-{
-	@SuppressWarnings("Duplicates")
-	@Override
-	public TemplateToolkitString handleContentChange(@NotNull TemplateToolkitString element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
-		final Document document = manager.getDocument(element.getContainingFile());
+public class TemplateToolkitStringManipulator extends AbstractElementManipulator<TemplateToolkitString> {
+  @SuppressWarnings("Duplicates")
+  @Override
+  public TemplateToolkitString handleContentChange(@NotNull TemplateToolkitString element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
+    final Document document = manager.getDocument(element.getContainingFile());
 
-		if (document != null)
-		{
-			TextRange elementRange = element.getTextRange();
-			manager.doPostponedOperationsAndUnblockDocument(document);
-			document.replaceString(elementRange.getStartOffset() + range.getStartOffset(), elementRange.getStartOffset() + range.getEndOffset(), newContent);
-			manager.commitDocument(document);
-		}
-		return element;
-	}
+    if (document != null) {
+      TextRange elementRange = element.getTextRange();
+      manager.doPostponedOperationsAndUnblockDocument(document);
+      document.replaceString(elementRange.getStartOffset() + range.getStartOffset(), elementRange.getStartOffset() + range.getEndOffset(),
+                             newContent);
+      manager.commitDocument(document);
+    }
+    return element;
+  }
 
-	@NotNull
-	@Override
-	public TextRange getRangeInElement(@NotNull TemplateToolkitString element)
-	{
-		int startOffset = 0;
-		int endOffset = element.getTextLength();
+  @NotNull
+  @Override
+  public TextRange getRangeInElement(@NotNull TemplateToolkitString element) {
+    int startOffset = 0;
+    int endOffset = element.getTextLength();
 
-		if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtilCore.getElementType(element.getFirstChild())))
-		{
-			startOffset++;
-		}
-		if (PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(element.getLastChild())))
-		{
-			endOffset--;
-		}
+    if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtilCore.getElementType(element.getFirstChild()))) {
+      startOffset++;
+    }
+    if (PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(element.getLastChild()))) {
+      endOffset--;
+    }
 
-		return new TextRange(startOffset, endOffset);
-	}
+    return new TextRange(startOffset, endOffset);
+  }
 }

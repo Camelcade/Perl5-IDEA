@@ -28,138 +28,110 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.07.2016.
  */
-public class PerlIdentifierInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			private boolean isUtf = false;
-			private boolean isUtfComputed = false;
+public class PerlIdentifierInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      private boolean isUtf = false;
+      private boolean isUtfComputed = false;
 
-			private synchronized boolean isUtf(PsiElement element)
-			{
-				if (isUtfComputed)
-				{
-					return isUtf;
-				}
+      private synchronized boolean isUtf(PsiElement element) {
+        if (isUtfComputed) {
+          return isUtf;
+        }
 
-				isUtfComputed = true;
-				return isUtf = element.getContainingFile().getVirtualFile().getCharset() == CharsetToolkit.UTF8_CHARSET;
-			}
+        isUtfComputed = true;
+        return isUtf = element.getContainingFile().getVirtualFile().getCharset() == CharsetToolkit.UTF8_CHARSET;
+      }
 
-			@Override
-			public void visitSubNameElement(@NotNull PerlSubNameElement o)
-			{
-				if (!(o.getParent() instanceof PerlSubDefinitionBase))
-				{
-					checkPerlIdentifier(o);
-				}
-				super.visitSubNameElement(o);
-			}
+      @Override
+      public void visitSubNameElement(@NotNull PerlSubNameElement o) {
+        if (!(o.getParent() instanceof PerlSubDefinitionBase)) {
+          checkPerlIdentifier(o);
+        }
+        super.visitSubNameElement(o);
+      }
 
-			@Override
-			public void visitNamespaceElement(@NotNull PerlNamespaceElement o)
-			{
-				if (!(o.getParent() instanceof PerlNamespaceDefinition))
-				{
-					checkPerlIdentifier(o);
-				}
-				super.visitNamespaceElement(o);
-			}
+      @Override
+      public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
+        if (!(o.getParent() instanceof PerlNamespaceDefinition)) {
+          checkPerlIdentifier(o);
+        }
+        super.visitNamespaceElement(o);
+      }
 
-			@Override
-			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
-			{
-				checkPerlNamedElementIdentifier(o);
-				super.visitNamespaceDefinition(o);
-			}
+      @Override
+      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+        checkPerlNamedElementIdentifier(o);
+        super.visitNamespaceDefinition(o);
+      }
 
-			@Override
-			public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o)
-			{
-				checkPerlNamedElementIdentifier(o);
-				super.visitSubDefinitionBase(o);
-			}
+      @Override
+      public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o) {
+        checkPerlNamedElementIdentifier(o);
+        super.visitSubDefinitionBase(o);
+      }
 
-			@Override
-			public void visitVariableNameElement(@NotNull PerlVariableNameElement o)
-			{
-				checkPerlIdentifier(o);
-				super.visitVariableNameElement(o);
-			}
+      @Override
+      public void visitVariableNameElement(@NotNull PerlVariableNameElement o) {
+        checkPerlIdentifier(o);
+        super.visitVariableNameElement(o);
+      }
 
-			protected void checkPerlNamedElementIdentifier(@NotNull PsiNameIdentifierOwner namedElement)
-			{
-				PsiElement nameIdentifier = namedElement.getNameIdentifier();
-				if (nameIdentifier != null)
-				{
-					checkPerlIdentifier(namedElement.getName(), nameIdentifier);
-				}
-
-			}
+      protected void checkPerlNamedElementIdentifier(@NotNull PsiNameIdentifierOwner namedElement) {
+        PsiElement nameIdentifier = namedElement.getNameIdentifier();
+        if (nameIdentifier != null) {
+          checkPerlIdentifier(namedElement.getName(), nameIdentifier);
+        }
+      }
 
 
-			protected void checkPerlIdentifier(@NotNull PsiElement element)
-			{
-				checkPerlIdentifier(element.getNode().getChars(), element);
-			}
+      protected void checkPerlIdentifier(@NotNull PsiElement element) {
+        checkPerlIdentifier(element.getNode().getChars(), element);
+      }
 
-			protected void checkPerlIdentifier(CharSequence text, @NotNull PsiElement element)
-			{
-				if (text == null)
-				{
-					return;
-				}
+      protected void checkPerlIdentifier(CharSequence text, @NotNull PsiElement element) {
+        if (text == null) {
+          return;
+        }
 
-				boolean hasError = false;
-				StringBuilder formattedIdentifier = new StringBuilder();
-				if (!isUtf(element))
-				{
-					int length = text.length();
-					if (length == 0)
-					{
-						return;
-					}
-					for (int i = 0; i < length; i++)
-					{
-						char currentChar = text.charAt(i);
-						String escapedChar;
-						if (currentChar == '<')
-						{
-							escapedChar = "&lt;";
-						}
-						else if (currentChar == '>')
-						{
-							escapedChar = "&gt;";
-						}
-						else
-						{
-							escapedChar = "" + currentChar;
-						}
+        boolean hasError = false;
+        StringBuilder formattedIdentifier = new StringBuilder();
+        if (!isUtf(element)) {
+          int length = text.length();
+          if (length == 0) {
+            return;
+          }
+          for (int i = 0; i < length; i++) {
+            char currentChar = text.charAt(i);
+            String escapedChar;
+            if (currentChar == '<') {
+              escapedChar = "&lt;";
+            }
+            else if (currentChar == '>') {
+              escapedChar = "&gt;";
+            }
+            else {
+              escapedChar = "" + currentChar;
+            }
 
-						if (currentChar > 127)
-						{
-							hasError = true;
-							formattedIdentifier.append("<b>");
-							formattedIdentifier.append(escapedChar);
-							formattedIdentifier.append("</b>");
-						}
-						else
-						{
-							formattedIdentifier.append(escapedChar);
-						}
-					}
+            if (currentChar > 127) {
+              hasError = true;
+              formattedIdentifier.append("<b>");
+              formattedIdentifier.append(escapedChar);
+              formattedIdentifier.append("</b>");
+            }
+            else {
+              formattedIdentifier.append(escapedChar);
+            }
+          }
 
-					if (hasError)
-					{
-						registerError(holder, element, PerlBundle.message("perl.incorrect.ascii.identifier", formattedIdentifier.toString()));
-					}
-				}
-			}
-
-		};
-	}
+          if (hasError) {
+            registerError(holder, element, PerlBundle.message("perl.incorrect.ascii.identifier", formattedIdentifier.toString()));
+          }
+        }
+      }
+    };
+  }
 }

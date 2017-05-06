@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public interface HTMLMasonParametrizedEntity
-{
-	List<HTMLMasonCompositeElement> getArgsBlocks();
+public interface HTMLMasonParametrizedEntity {
+  List<HTMLMasonCompositeElement> getArgsBlocks();
 }

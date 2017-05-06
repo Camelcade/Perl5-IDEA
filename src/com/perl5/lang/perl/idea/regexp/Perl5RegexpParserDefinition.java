@@ -32,36 +32,30 @@ import static org.intellij.lang.regexp.RegExpCapability.POSIX_BRACKET_EXPRESSION
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpParserDefinition extends RegExpParserDefinition
-{
-	private static final IFileElementType PERL5_REGEXP_FILE = new IFileElementType("PERL5_REGEXP_FILE", Perl5RegexpLanguage.INSTANCE);
-	private final EnumSet<RegExpCapability> CAPABILITIES = EnumSet.of(
-			POSIX_BRACKET_EXPRESSIONS
-	);
+public class Perl5RegexpParserDefinition extends RegExpParserDefinition {
+  private static final IFileElementType PERL5_REGEXP_FILE = new IFileElementType("PERL5_REGEXP_FILE", Perl5RegexpLanguage.INSTANCE);
+  private final EnumSet<RegExpCapability> CAPABILITIES = EnumSet.of(
+    POSIX_BRACKET_EXPRESSIONS
+  );
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new RegExpLexer(CAPABILITIES);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new RegExpLexer(CAPABILITIES);
+  }
 
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new RegExpParser(CAPABILITIES);
-	}
+  @Override
+  public PsiParser createParser(Project project) {
+    return new RegExpParser(CAPABILITIES);
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return PERL5_REGEXP_FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return PERL5_REGEXP_FILE;
+  }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new RegExpFile(viewProvider, Perl5RegexpLanguage.INSTANCE);
-	}
-
+  @Override
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new RegExpFile(viewProvider, Perl5RegexpLanguage.INSTANCE);
+  }
 }

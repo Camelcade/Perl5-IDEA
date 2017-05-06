@@ -30,44 +30,44 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public interface PerlSubDefinitionBase<Stub extends StubElement> extends PerlSubBase<Stub>, PerlLexicalScope, PerlElementPatterns, PerlElementTypes
-{
+public interface PerlSubDefinitionBase<Stub extends StubElement>
+  extends PerlSubBase<Stub>, PerlLexicalScope, PerlElementPatterns, PerlElementTypes {
 
-	/**
-	 * Returns sub block, even if it's in the lazy_parsable_block
-	 *
-	 * @return sub block element; optional in constant, different extensions
-	 */
-	PsiPerlBlock getBlockSmart();
+  /**
+   * Returns sub block, even if it's in the lazy_parsable_block
+   *
+   * @return sub block element; optional in constant, different extensions
+   */
+  PsiPerlBlock getBlockSmart();
 
-	/**
-	 * Returns list of accepted arguments
-	 *
-	 * @return list of accepted arguments
-	 */
-	@NotNull
-	List<PerlSubArgument> getSubArgumentsList();
+  /**
+   * Returns list of accepted arguments
+   *
+   * @return list of accepted arguments
+   */
+  @NotNull
+  List<PerlSubArgument> getSubArgumentsList();
 
-	/**
-	 * Returns compiled and parenthesised arguments list
-	 *
-	 * @return String with parenthesised arguments
-	 */
-	String getSubArgumentsListAsString();
+  /**
+   * Returns compiled and parenthesised arguments list
+   *
+   * @return String with parenthesised arguments
+   */
+  String getSubArgumentsListAsString();
 
-	/**
-	 * Returns list of arguments defined in signature
-	 *
-	 * @return list of arguments or null if there is no signature
-	 */
-	@Nullable
-	List<PerlSubArgument> getPerlSubArgumentsFromSignature();
+  /**
+   * Returns list of arguments defined in signature
+   *
+   * @return list of arguments or null if there is no signature
+   */
+  @Nullable
+  List<PerlSubArgument> getPerlSubArgumentsFromSignature();
 
-	/**
-	 * Returns signature container
-	 *
-	 * @return PsiElement or null
-	 */
-	@Nullable
-	PsiElement getSignatureContainer();
+  /**
+   * Returns signature container
+   *
+   * @return PsiElement or null
+   */
+  @Nullable
+  PsiElement getSignatureContainer();
 }

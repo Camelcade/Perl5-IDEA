@@ -30,25 +30,23 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
 /**
  * Created by hurricup on 10.01.2016.
  */
-public interface MasonElementPatterns extends PerlElementPatterns
-{
-	PsiElementPattern.Capture<PerlString> MASON_EXTENDS_VALUE_PATTERN =
-			psiElement(PerlString.class)
-					.inside(MasonFlagsStatement.class)
-					.withParent(PsiPerlCommaSequenceExpr.class)
-					.afterLeaf(psiElement(PsiElement.class));
+public interface MasonElementPatterns extends PerlElementPatterns {
+  PsiElementPattern.Capture<PerlString> MASON_EXTENDS_VALUE_PATTERN =
+    psiElement(PerlString.class)
+      .inside(MasonFlagsStatement.class)
+      .withParent(PsiPerlCommaSequenceExpr.class)
+      .afterLeaf(psiElement(PsiElement.class));
 
-	PsiElementPattern.Capture<PsiElement> MASON_EXTENDS_VALUE_TEXT_PATTERN =
-			psiElement(PsiElement.class)
-					.withParent(MASON_EXTENDS_VALUE_PATTERN);
+  PsiElementPattern.Capture<PsiElement> MASON_EXTENDS_VALUE_TEXT_PATTERN =
+    psiElement(PsiElement.class)
+      .withParent(MASON_EXTENDS_VALUE_PATTERN);
 
-	PsiElementPattern.Capture<PerlStringContentElement> MASON_CALL_TEMPLATE_PATTERN =
-			psiElement(PerlStringContentElement.class)
-					.withParent(psiElement(PerlString.class).andOr(
-							psiElement().withParent(MasonCallStatement.class),
-							psiElement().withParent(
-									psiElement(PsiPerlCommaSequenceExpr.class).withParent(MasonCallStatement.class))
-					).andNot(psiElement().afterSibling(psiElement())
-					));
-
+  PsiElementPattern.Capture<PerlStringContentElement> MASON_CALL_TEMPLATE_PATTERN =
+    psiElement(PerlStringContentElement.class)
+      .withParent(psiElement(PerlString.class).andOr(
+        psiElement().withParent(MasonCallStatement.class),
+        psiElement().withParent(
+          psiElement(PsiPerlCommaSequenceExpr.class).withParent(MasonCallStatement.class))
+      ).andNot(psiElement().afterSibling(psiElement())
+      ));
 }

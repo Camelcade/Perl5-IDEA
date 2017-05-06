@@ -34,66 +34,55 @@ import java.util.Map;
 /**
  * Created by hurricup on 22.11.2015.
  */
-public class PerlParserExtensions implements ApplicationComponent
-{
-	public PerlParserExtensions()
-	{
-	}
+public class PerlParserExtensions implements ApplicationComponent {
+  public PerlParserExtensions() {
+  }
 
-	@Override
-	public void initComponent()
-	{
-		PerlParserDefinition.PARSER_EXTENSIONS.clear();
-		PerlLexer.initReservedTokensMap();
-		for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions())
-		{
-			// register extension
-			PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
+  @Override
+  public void initComponent() {
+    PerlParserDefinition.PARSER_EXTENSIONS.clear();
+    PerlLexer.initReservedTokensMap();
+    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
+      // register extension
+      PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
 
-			// add tokens to lex
-			Map<String, IElementType> customTokensMap = extension.getCustomTokensMap();
-			PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokensMap);
+      // add tokens to lex
+      Map<String, IElementType> customTokensMap = extension.getCustomTokensMap();
+      PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokensMap);
 
-			// add regex prefix tokenset
-			if (extension.getRegexPrefixTokenSet() != null)
-			{
-				PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
-			}
+      // add regex prefix tokenset
+      if (extension.getRegexPrefixTokenSet() != null) {
+        PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
+      }
 
-			// add tokens to fallback set
-			Collection<IElementType> tokensList = customTokensMap.values();
-			PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
+      // add tokens to fallback set
+      Collection<IElementType> tokensList = customTokensMap.values();
+      PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
 
-			// add extensions tokens
-			List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
-			if (extensionSets != null)
-			{
-				for (Pair<IElementType, TokenSet> extensionSet : extensionSets)
-				{
-					for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++)
-					{
-						if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first))
-						{
-							PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
-							break;
-						}
-					}
-				}
-			}
-		}
-		PerlLexer.initReservedTokensSet();
-	}
+      // add extensions tokens
+      List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();
+      if (extensionSets != null) {
+        for (Pair<IElementType, TokenSet> extensionSet : extensionSets) {
+          for (int i = 0; i < PerlParserImpl.EXTENDS_SETS_.length; i++) {
+            if (PerlParserImpl.EXTENDS_SETS_[i].contains(extensionSet.first)) {
+              PerlParserImpl.EXTENDS_SETS_[i] = TokenSet.orSet(PerlParserImpl.EXTENDS_SETS_[i], extensionSet.getSecond());
+              break;
+            }
+          }
+        }
+      }
+    }
+    PerlLexer.initReservedTokensSet();
+  }
 
-	@Override
-	public void disposeComponent()
-	{
-		// TODO: insert component disposal logic here
-	}
+  @Override
+  public void disposeComponent() {
+    // TODO: insert component disposal logic here
+  }
 
-	@Override
-	@NotNull
-	public String getComponentName()
-	{
-		return "PerlParserExtensions";
-	}
+  @Override
+  @NotNull
+  public String getComponentName() {
+    return "PerlParserExtensions";
+  }
 }

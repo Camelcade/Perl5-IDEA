@@ -25,17 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider
-{
-	public PerlElementTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider {
+  public PerlElementTypeEx(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PerlCompositeElementImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlCompositeElementImpl(node);
+  }
 }

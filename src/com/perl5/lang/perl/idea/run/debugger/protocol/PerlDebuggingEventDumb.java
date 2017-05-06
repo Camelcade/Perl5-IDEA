@@ -20,11 +20,9 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
  * Created by hurricup on 11.05.2016.
  * Empty handler to return from transactions
  */
-public class PerlDebuggingEventDumb extends PerlDebuggingEventBase
-{
-	@Override
-	public void run()
-	{
+public class PerlDebuggingEventDumb extends PerlDebuggingEventBase {
+  @Override
+  public void run() {
 
-	}
+  }
 }

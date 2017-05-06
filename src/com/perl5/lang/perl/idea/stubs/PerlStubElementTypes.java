@@ -33,24 +33,22 @@ import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStubElementType;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlStubElementTypes
-{
-	IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
-	IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
-	IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
-	IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
-	IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
+public interface PerlStubElementTypes {
+  IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
+  IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
+  IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
+  IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
+  IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
 
-	IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
+  IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
 
-	IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
-	IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
+  IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
+  IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");
 
-	IStubElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
-	IStubElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");
+  IStubElementType PERL_DO_EXPR = new PerlDoExprElementType("PERL_DO_EXPR");
+  IStubElementType PERL_REQUIRE_EXPR = new PerlRequireExprElementType("PERL_REQUIRE_EXPR");
 
-	IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
+  IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 
-	IStubElementType PERL_VARIABLE_DECLARATION_WRAPPER = new PerlVariableStubElementType("VARIABLE_DECLARATION_WRAPPER");
-
+  IStubElementType PERL_VARIABLE_DECLARATION_WRAPPER = new PerlVariableStubElementType("VARIABLE_DECLARATION_WRAPPER");
 }

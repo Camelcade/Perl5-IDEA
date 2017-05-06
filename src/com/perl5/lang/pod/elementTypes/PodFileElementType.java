@@ -23,11 +23,8 @@ import org.jetbrains.annotations.NonNls;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFileElementType extends IFileElementType
-{
-	public PodFileElementType(@NonNls String debugName)
-	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
-
+public class PodFileElementType extends IFileElementType {
+  public PodFileElementType(@NonNls String debugName) {
+    super(debugName, PodLanguage.INSTANCE);
+  }
 }

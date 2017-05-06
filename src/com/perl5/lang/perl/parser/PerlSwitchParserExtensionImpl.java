@@ -29,174 +29,146 @@ import java.util.Map;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension
-{
-	protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
-	protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(
-			RESERVED_CASE
-	);
-	protected static TokenSet TOKENS_SET;
+public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension {
+  protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
+  protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(
+    RESERVED_CASE
+  );
+  protected static TokenSet TOKENS_SET;
 
-	static
-	{
-		// in regular case, these tokens should be created in extension class
-		TOKENS_MAP.put("case", RESERVED_CASE);
-		TOKENS_MAP.put("switch", RESERVED_SWITCH);
+  static {
+    // in regular case, these tokens should be created in extension class
+    TOKENS_MAP.put("case", RESERVED_CASE);
+    TOKENS_MAP.put("switch", RESERVED_SWITCH);
 
-		TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
-	}
+    TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+  }
 
-	public static TokenSet getTokenSet()
-	{
-		return TOKENS_SET;
-	}
+  @NotNull
+  @Override
+  public Map<String, IElementType> getCustomTokensMap() {
+    return TOKENS_MAP;
+  }
 
-	public static boolean parseSwitchStatement(PerlBuilder b, int l)
-	{
-		if (PerlParserUtil.consumeToken(b, RESERVED_SWITCH))
-		{
-			boolean r = parseSwitchCondition(b, l);
-			r = r && PerlParserImpl.normal_block(b, l);
-			return r;
-		}
-		return false;
-	}
+  @Override
+  public boolean parseStatement(PerlBuilder b, int l) {
+    IElementType tokenType = b.getTokenType();
 
-	public static boolean parseSwitchCondition(PerlBuilder b, int l)
-	{
-		PerlBuilder.Marker m = b.mark();
-		boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-		r = r && PerlParserImpl.scalar_expr(b, l);
-		r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
+    if (tokenType == RESERVED_SWITCH) {
+      PerlBuilder.Marker m = b.mark();
+      if (parseSwitchStatement(b, l)) {
+        m.done(SWITCH_COMPOUND);
+        return true;
+      }
+      m.rollbackTo();
+    }
+    else if (tokenType == RESERVED_CASE) {
+      return parseCaseSequence(b, l);
+    }
 
-		if (r)
-		{
-			m.done(SWITCH_CONDITION);
-		}
-		else
-		{
-			m.rollbackTo();
-		}
+    return false;
+  }
 
-		return r;
-	}
+  @Nullable
+  @Override
+  public TokenSet getRegexPrefixTokenSet() {
+    return BARE_REGEX_PREFIX_TOKEN_SET;
+  }
 
-	public static boolean parseCaseSequence(PerlBuilder b, int l)
-	{
-		int casesNumber = 0;
-		while (b.getTokenType() == RESERVED_CASE)
-		{
-			PerlBuilder.Marker m = b.mark();
-			if (parseCaseStatement(b, l))
-			{
-				m.done(CASE_COMPOUND);
-				casesNumber++;
-			}
-			else
-			{
-				m.rollbackTo();
-				break;
-			}
-		}
+  public static TokenSet getTokenSet() {
+    return TOKENS_SET;
+  }
 
-		if (casesNumber > 0)
-		{
-			PerlBuilder.Marker m = b.mark();
-			if (PerlParserImpl.if_compound_else(b, l))
-			{
-				m.done(CASE_DEFAULT);
-			}
-			else
-			{
-				m.rollbackTo();
-			}
-		}
-		return casesNumber > 0;
-	}
+  public static boolean parseSwitchStatement(PerlBuilder b, int l) {
+    if (PerlParserUtil.consumeToken(b, RESERVED_SWITCH)) {
+      boolean r = parseSwitchCondition(b, l);
+      r = r && PerlParserImpl.normal_block(b, l);
+      return r;
+    }
+    return false;
+  }
 
-	public static boolean parseCaseStatement(PerlBuilder b, int l)
-	{
-		if (PerlParserUtil.consumeToken(b, RESERVED_CASE))
-		{
-			boolean r = parseCaseCondition(b, l);
-			r = r && PerlParserImpl.normal_block(b, l);
-			return r;
-		}
-		return false;
-	}
+  public static boolean parseSwitchCondition(PerlBuilder b, int l) {
+    PerlBuilder.Marker m = b.mark();
+    boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
+    r = r && PerlParserImpl.scalar_expr(b, l);
+    r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
 
-	public static boolean parseCaseCondition(PerlBuilder b, int l)
-	{
-		PerlBuilder.Marker m = b.mark();
+    if (r) {
+      m.done(SWITCH_CONDITION);
+    }
+    else {
+      m.rollbackTo();
+    }
 
-		boolean r = parseCaseConditionParenthesised(b, l);
-		r = r || PerlParserImpl.normal_block(b, l);
-		r = r || parseCaseConditionSimple(b, l);
+    return r;
+  }
 
-		if (r)
-		{
-			m.done(CASE_CONDITION);
-		}
-		else
-		{
-			m.rollbackTo();
-		}
+  public static boolean parseCaseSequence(PerlBuilder b, int l) {
+    int casesNumber = 0;
+    while (b.getTokenType() == RESERVED_CASE) {
+      PerlBuilder.Marker m = b.mark();
+      if (parseCaseStatement(b, l)) {
+        m.done(CASE_COMPOUND);
+        casesNumber++;
+      }
+      else {
+        m.rollbackTo();
+        break;
+      }
+    }
 
-		return r;
-	}
+    if (casesNumber > 0) {
+      PerlBuilder.Marker m = b.mark();
+      if (PerlParserImpl.if_compound_else(b, l)) {
+        m.done(CASE_DEFAULT);
+      }
+      else {
+        m.rollbackTo();
+      }
+    }
+    return casesNumber > 0;
+  }
 
-	public static boolean parseCaseConditionParenthesised(PerlBuilder b, int l)
-	{
-		boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-		r = r && PerlParserImpl.scalar_expr(b, l);
-		r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
-		return r;
-	}
+  public static boolean parseCaseStatement(PerlBuilder b, int l) {
+    if (PerlParserUtil.consumeToken(b, RESERVED_CASE)) {
+      boolean r = parseCaseCondition(b, l);
+      r = r && PerlParserImpl.normal_block(b, l);
+      return r;
+    }
+    return false;
+  }
 
-	public static boolean parseCaseConditionSimple(PerlBuilder b, int l)
-	{
-		return PerlParserImpl.string(b, l) ||
-				PerlParserImpl.number_constant(b, l) ||
-				PerlParserImpl.anon_array(b, l) ||
-				PerlParserImpl.match_regex(b, l) ||
-				PerlParserImpl.compile_regex(b, l)
-				;
-	}
+  public static boolean parseCaseCondition(PerlBuilder b, int l) {
+    PerlBuilder.Marker m = b.mark();
 
-	@NotNull
-	@Override
-	public Map<String, IElementType> getCustomTokensMap()
-	{
-		return TOKENS_MAP;
-	}
+    boolean r = parseCaseConditionParenthesised(b, l);
+    r = r || PerlParserImpl.normal_block(b, l);
+    r = r || parseCaseConditionSimple(b, l);
 
-	@Override
-	public boolean parseStatement(PerlBuilder b, int l)
-	{
-		IElementType tokenType = b.getTokenType();
+    if (r) {
+      m.done(CASE_CONDITION);
+    }
+    else {
+      m.rollbackTo();
+    }
 
-		if (tokenType == RESERVED_SWITCH)
-		{
-			PerlBuilder.Marker m = b.mark();
-			if (parseSwitchStatement(b, l))
-			{
-				m.done(SWITCH_COMPOUND);
-				return true;
-			}
-			m.rollbackTo();
-		}
-		else if (tokenType == RESERVED_CASE)
-		{
-			return parseCaseSequence(b, l);
-		}
+    return r;
+  }
 
-		return false;
-	}
+  public static boolean parseCaseConditionParenthesised(PerlBuilder b, int l) {
+    boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
+    r = r && PerlParserImpl.scalar_expr(b, l);
+    r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
+    return r;
+  }
 
-	@Nullable
-	@Override
-	public TokenSet getRegexPrefixTokenSet()
-	{
-		return BARE_REGEX_PREFIX_TOKEN_SET;
-	}
+  public static boolean parseCaseConditionSimple(PerlBuilder b, int l) {
+    return PerlParserImpl.string(b, l) ||
+           PerlParserImpl.number_constant(b, l) ||
+           PerlParserImpl.anon_array(b, l) ||
+           PerlParserImpl.match_regex(b, l) ||
+           PerlParserImpl.compile_regex(b, l)
+      ;
+  }
 }

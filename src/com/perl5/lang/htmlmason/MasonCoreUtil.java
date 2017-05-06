@@ -37,78 +37,65 @@ import java.util.List;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class MasonCoreUtil
-{
-	@Nullable
-	public static VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file)
-	{
-		if (file != null)
-		{
-			if (file instanceof FakeVirtualFile)
-			{
-				file = file.getParent();
-			}
+public class MasonCoreUtil {
+  @Nullable
+  public static VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file) {
+    if (file != null) {
+      if (file instanceof FakeVirtualFile) {
+        file = file.getParent();
+      }
 
-			if (file != null)
-			{
-				//noinspection unchecked
-				for (VirtualFile componentRoot : (List<VirtualFile>) masonSettings.getComponentsRootsVirtualFiles())
-				{
-					if (VfsUtil.isAncestor(componentRoot, file, false))
-					{
-						return componentRoot;
-					}
-				}
-			}
-		}
-		return null;
-	}
+      if (file != null) {
+        //noinspection unchecked
+        for (VirtualFile componentRoot : (List<VirtualFile>)masonSettings.getComponentsRootsVirtualFiles()) {
+          if (VfsUtil.isAncestor(componentRoot, file, false)) {
+            return componentRoot;
+          }
+        }
+      }
+    }
+    return null;
+  }
 
-	/**
-	 * Returns real containing virtual file, not the Light one
-	 *
-	 * @return virtual file or null
-	 */
-	@Nullable
-	public static VirtualFile getContainingVirtualFile(PsiFile psiFile)
-	{
-		VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
+  /**
+   * Returns real containing virtual file, not the Light one
+   *
+   * @return virtual file or null
+   */
+  @Nullable
+  public static VirtualFile getContainingVirtualFile(PsiFile psiFile) {
+    VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
 
-		if (originalFile instanceof LightVirtualFile)
-		{
-			if (psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE) != null)
-			{
-				originalFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
-			}
-			else if (((LightVirtualFile) originalFile).getOriginalFile() != null)
-			{
-				originalFile = ((LightVirtualFile) originalFile).getOriginalFile();
-			}
-		}
-		return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
-	}
+    if (originalFile instanceof LightVirtualFile) {
+      if (psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE) != null) {
+        originalFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
+      }
+      else if (((LightVirtualFile)originalFile).getOriginalFile() != null) {
+        originalFile = ((LightVirtualFile)originalFile).getOriginalFile();
+      }
+    }
+    return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
+  }
 
-	public static void fillVariablesList(PsiElement parent, List<PerlVariableDeclarationWrapper> targetList, List<VariableDescription> sourceList)
-	{
-		for (VariableDescription variableDescription : sourceList)
-		{
-			String variableType = variableDescription.variableType;
-			if (StringUtil.isEmpty(variableType))
-			{
-				variableType = null;
-			}
-			targetList.add(
-					new PerlVariableLightImpl(
-							parent.getManager(),
-							PerlLanguage.INSTANCE,
-							variableDescription.variableName,
-							variableType,
-							false,
-							false,
-							false,
-							parent
-					));
-		}
-	}
-
+  public static void fillVariablesList(PsiElement parent,
+                                       List<PerlVariableDeclarationWrapper> targetList,
+                                       List<VariableDescription> sourceList) {
+    for (VariableDescription variableDescription : sourceList) {
+      String variableType = variableDescription.variableType;
+      if (StringUtil.isEmpty(variableType)) {
+        variableType = null;
+      }
+      targetList.add(
+        new PerlVariableLightImpl(
+          parent.getManager(),
+          PerlLanguage.INSTANCE,
+          variableDescription.variableName,
+          variableType,
+          false,
+          false,
+          false,
+          parent
+        ));
+    }
+  }
 }

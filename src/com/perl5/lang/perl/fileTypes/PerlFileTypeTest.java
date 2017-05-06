@@ -26,37 +26,31 @@ import javax.swing.*;
 /**
  * Created by hurricup on 26.05.2015.
  */
-public class PerlFileTypeTest extends PurePerlFileType
-{
-	public static final FileType INSTANCE = new PerlFileTypeTest();
-	public static final String EXTENSION = "t";
+public class PerlFileTypeTest extends PurePerlFileType {
+  public static final FileType INSTANCE = new PerlFileTypeTest();
+  public static final String EXTENSION = "t";
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Perl5 test";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Perl5 test";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Perl5 test";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Perl5 test";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return EXTENSION;
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return EXTENSION;
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.TEST_FILE;
-	}
-
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.TEST_FILE;
+  }
 }

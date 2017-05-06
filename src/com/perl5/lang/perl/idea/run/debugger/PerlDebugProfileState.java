@@ -31,68 +31,56 @@ import java.util.Map;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlDebugProfileState extends PerlRunProfileState
-{
-	private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
-	private Integer myDebugPort;
+public class PerlDebugProfileState extends PerlRunProfileState {
+  private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
+  private Integer myDebugPort;
 
-	public PerlDebugProfileState(ExecutionEnvironment environment)
-	{
-		super(environment);
-	}
+  public PerlDebugProfileState(ExecutionEnvironment environment) {
+    super(environment);
+  }
 
-	@NotNull
-	@Override
-	protected String[] getPerlArguments(PerlConfiguration runProfile)
-	{
-		List<String> result = new ArrayList<String>();
-		result.add(DEBUG_ARGUMENT);
+  @NotNull
+  @Override
+  protected String[] getPerlArguments(PerlConfiguration runProfile) {
+    List<String> result = new ArrayList<String>();
+    result.add(DEBUG_ARGUMENT);
 
-		for (String argument : super.getPerlArguments(runProfile))
-		{
-			if (StringUtil.isNotEmpty(argument))
-			{
-				result.add(argument);
-			}
-		}
+    for (String argument : super.getPerlArguments(runProfile)) {
+      if (StringUtil.isNotEmpty(argument)) {
+        result.add(argument);
+      }
+    }
 
-		return result.toArray(new String[result.size()]);
-	}
+    return result.toArray(new String[result.size()]);
+  }
 
-	@Override
-	protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException
-	{
-		Map<String, String> stringStringMap = new HashMap<String, String>(super.calcEnv(runProfile));
-		PerlDebugOptions debugOptions = getDebugOptions();
-		stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
-		stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());
-		stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));
-		return stringStringMap;
-	}
+  @Override
+  protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException {
+    Map<String, String> stringStringMap = new HashMap<String, String>(super.calcEnv(runProfile));
+    PerlDebugOptions debugOptions = getDebugOptions();
+    stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
+    stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());
+    stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));
+    return stringStringMap;
+  }
 
-	public PerlDebugOptions getDebugOptions()
-	{
-		return (PerlDebugOptions) getEnvironment().getRunProfile();
-	}
+  public PerlDebugOptions getDebugOptions() {
+    return (PerlDebugOptions)getEnvironment().getRunProfile();
+  }
 
-	public String mapPathToRemote(String localPath)
-	{
-		return localPath;
-	}
+  public String mapPathToRemote(String localPath) {
+    return localPath;
+  }
 
-	public String mapPathToLocal(String remotePath)
-	{
-		return remotePath;
-	}
+  public String mapPathToLocal(String remotePath) {
+    return remotePath;
+  }
 
 
-	public Integer getDebugPort() throws ExecutionException
-	{
-		if (myDebugPort == null)
-		{
-			myDebugPort = getDebugOptions().getDebugPort();
-		}
-		return myDebugPort;
-	}
-
+  public Integer getDebugPort() throws ExecutionException {
+    if (myDebugPort == null) {
+      myDebugPort = getDebugOptions().getDebugPort();
+    }
+    return myDebugPort;
+  }
 }

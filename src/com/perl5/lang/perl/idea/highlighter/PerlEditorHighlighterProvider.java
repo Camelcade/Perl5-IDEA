@@ -28,11 +28,12 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 02.04.2016.
  */
-public class PerlEditorHighlighterProvider implements EditorHighlighterProvider
-{
-	@Override
-	public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme colors)
-	{
-		return new PerlEditorHighlighter(project, virtualFile, colors);
-	}
+public class PerlEditorHighlighterProvider implements EditorHighlighterProvider {
+  @Override
+  public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                @NotNull FileType fileType,
+                                                @Nullable VirtualFile virtualFile,
+                                                @NotNull EditorColorsScheme colors) {
+    return new PerlEditorHighlighter(project, virtualFile, colors);
+  }
 }

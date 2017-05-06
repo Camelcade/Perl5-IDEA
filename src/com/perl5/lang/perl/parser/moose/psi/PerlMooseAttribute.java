@@ -21,12 +21,11 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionWitTextIdentifier
-{
-	/**
-	 * Indicates, that current attribute is extension of the parent's one
-	 *
-	 * @return result
-	 */
-	boolean isExtension();
+public interface PerlMooseAttribute extends PerlSubDefinitionWitTextIdentifier {
+  /**
+   * Indicates, that current attribute is extension of the parent's one
+   *
+   * @return result
+   */
+  boolean isExtension();
 }

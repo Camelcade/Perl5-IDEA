@@ -22,8 +22,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public interface PerlAnnotationContainer extends PsiElement
-{
-	@Nullable
-	PerlAnnotation getAnnotation();
+public interface PerlAnnotationContainer extends PsiElement {
+  @Nullable
+  PerlAnnotation getAnnotation();
 }

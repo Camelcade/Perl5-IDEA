@@ -26,24 +26,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyQStringElementType extends PerlLazyBlockElementType
-{
-	public PerlLazyQStringElementType(String name)
-	{
-		super(name);
-	}
+public class PerlLazyQStringElementType extends PerlLazyBlockElementType {
+  public PerlLazyQStringElementType(String name) {
+    super(name);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forStringSQ(project);
-	}
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return PerlSubLexerAdapter.forStringSQ(project);
+  }
 
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyQStringContentParser.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected PsiParser getParser() {
+    return PerlLazyQStringContentParser.INSTANCE;
+  }
 }

@@ -26,14 +26,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class MooseAnnotator extends PerlBaseAnnotator
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if (element instanceof PerlMooseAttributeImpl)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
-		}
-	}
+public class MooseAnnotator extends PerlBaseAnnotator {
+  @Override
+  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    if (element instanceof PerlMooseAttributeImpl) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
+    }
+  }
 }

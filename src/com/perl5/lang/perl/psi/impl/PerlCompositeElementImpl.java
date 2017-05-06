@@ -28,23 +28,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements PerlCompositeElement
-{
-	public PerlCompositeElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements PerlCompositeElement {
+  public PerlCompositeElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-//		System.err.println(this);
-		return PerlResolveUtil.processChildren(
-				this,
-				processor,
-				state,
-				lastParent,
-				place
-		);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    //		System.err.println(this);
+    return PerlResolveUtil.processChildren(
+      this,
+      processor,
+      state,
+      lastParent,
+      place
+    );
+  }
 }

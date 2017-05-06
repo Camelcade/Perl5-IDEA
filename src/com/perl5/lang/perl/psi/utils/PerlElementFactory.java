@@ -31,111 +31,97 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PerlElementFactory
-{
-	public static PsiElement createNewLine(Project project)
-	{
-		PerlFileImpl file = createFile(project, "\n");
-		return file.getFirstChild();
-	}
+public class PerlElementFactory {
+  public static PsiElement createNewLine(Project project) {
+    PerlFileImpl file = createFile(project, "\n");
+    return file.getFirstChild();
+  }
 
 
-	public static PsiPerlDerefExpr createMethodCall(Project project, String packageName, String subName)
-	{
-		assert packageName != null;
-		assert subName != null;
+  public static PsiPerlDerefExpr createMethodCall(Project project, String packageName, String subName) {
+    assert packageName != null;
+    assert subName != null;
 
-		PerlFileImpl file = createFile(project, String.format("%s->%s;", packageName, subName));
-		PsiPerlDerefExpr def = PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class);
-		assert def != null;
-		return def;
-	}
+    PerlFileImpl file = createFile(project, String.format("%s->%s;", packageName, subName));
+    PsiPerlDerefExpr def = PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class);
+    assert def != null;
+    return def;
+  }
 
-	public static PerlUseStatement createUseStatement(Project project, String packageName)
-	{
-		assert packageName != null;
+  public static PerlUseStatement createUseStatement(Project project, String packageName) {
+    assert packageName != null;
 
-		PerlFileImpl file = createFile(project, String.format("use %s;", packageName));
-		PerlUseStatement def = PsiTreeUtil.findChildOfType(file, PerlUseStatement.class);
-		assert def != null;
-		return def;
-	}
+    PerlFileImpl file = createFile(project, String.format("use %s;", packageName));
+    PerlUseStatement def = PsiTreeUtil.findChildOfType(file, PerlUseStatement.class);
+    assert def != null;
+    return def;
+  }
 
-	// fixme probably we don't need package name and sub. just identifier
-	public static PerlNamespaceElementImpl createPackageName(Project project, String name)
-	{
-		PerlFileImpl file = createFile(project, "package " + name + ";");
-		PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
-		assert def != null;
-		return (PerlNamespaceElementImpl) def.getNamespaceElement();
-	}
+  // fixme probably we don't need package name and sub. just identifier
+  public static PerlNamespaceElementImpl createPackageName(Project project, String name) {
+    PerlFileImpl file = createFile(project, "package " + name + ";");
+    PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
+    assert def != null;
+    return (PerlNamespaceElementImpl)def.getNamespaceElement();
+  }
 
-	public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText)
-	{
-		PerlFileImpl file = createFile(project,
-				String.format("<<%c%s%c\n%s\n%s\n;", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
-		);
+  public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText) {
+    PerlFileImpl file = createFile(project,
+                                   String.format("<<%c%s%c\n%s\n%s\n;", quoteSymbol, markerText, quoteSymbol, contentText, markerText)
+    );
 
-		PsiElement heredocOpener = PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class);
-		@SuppressWarnings("ConstantConditions") PsiElement headingNewLine = heredocOpener.getNextSibling();
-		PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
+    PsiElement heredocOpener = PsiTreeUtil.findChildOfType(file, PsiPerlHeredocOpener.class);
+    @SuppressWarnings("ConstantConditions") PsiElement headingNewLine = heredocOpener.getNextSibling();
+    PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
 
-		return new ArrayList<PsiElement>(Arrays.asList(
-				heredocOpener,
-				headingNewLine,
-				tailingNewLine
-		));
-	}
+    return new ArrayList<PsiElement>(Arrays.asList(
+      heredocOpener,
+      headingNewLine,
+      tailingNewLine
+    ));
+  }
 
-	public static PerlStringContentElementImpl createStringContent(Project project, String name)
-	{
-		PerlFileImpl file = createFile(project, "'" + name + "';");
-		PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
-		assert string != null;
-		return (PerlStringContentElementImpl) string.getFirstChild().getNextSibling();
-	}
+  public static PerlStringContentElementImpl createStringContent(Project project, String name) {
+    PerlFileImpl file = createFile(project, "'" + name + "';");
+    PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
+    assert string != null;
+    return (PerlStringContentElementImpl)string.getFirstChild().getNextSibling();
+  }
 
-	public static PerlString createBareString(Project project, String content)
-	{
-		PerlFileImpl file = createFile(project, content + " => 42;");
-		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
-		assert string != null : "While creating bare string from: " + content;
-		return string;
-	}
+  public static PerlString createBareString(Project project, String content) {
+    PerlFileImpl file = createFile(project, content + " => 42;");
+    PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
+    assert string != null : "While creating bare string from: " + content;
+    return string;
+  }
 
-	public static PerlString createString(Project project, String code)
-	{
-		PerlFileImpl file = createFile(project, code + ";");
-		PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
-		assert string != null : "While creating bare string from: " + code;
-		return string;
-	}
+  public static PerlString createString(Project project, String code) {
+    PerlFileImpl file = createFile(project, code + ";");
+    PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
+    assert string != null : "While creating bare string from: " + code;
+    return string;
+  }
 
-	public static PsiElement createDereference(Project project)
-	{
-		PerlFileImpl file = createFile(project, "$a->{bla};");
-		PerlVariable variable = PsiTreeUtil.findChildOfType(file, PerlVariable.class);
-		assert variable != null : "While creating dereference";
-		return variable.getNextSibling();
-	}
+  public static PsiElement createDereference(Project project) {
+    PerlFileImpl file = createFile(project, "$a->{bla};");
+    PerlVariable variable = PsiTreeUtil.findChildOfType(file, PerlVariable.class);
+    assert variable != null : "While creating dereference";
+    return variable.getNextSibling();
+  }
 
-	public static PsiPerlParenthesisedExpr createParenthesisedExpression(Project project)
-	{
-		PerlFileImpl file = createFile(project, "();");
-		PsiPerlParenthesisedExpr result = PsiTreeUtil.findChildOfType(file, PsiPerlParenthesisedExpr.class);
-		assert result != null : "While creating PsiPerlParenthesisedExpr";
-		return result;
-	}
+  public static PsiPerlParenthesisedExpr createParenthesisedExpression(Project project) {
+    PerlFileImpl file = createFile(project, "();");
+    PsiPerlParenthesisedExpr result = PsiTreeUtil.findChildOfType(file, PsiPerlParenthesisedExpr.class);
+    assert result != null : "While creating PsiPerlParenthesisedExpr";
+    return result;
+  }
 
-	public static PerlFileImpl createFile(Project project, String text)
-	{
-		return createFile(project, text, PerlFileTypePackage.INSTANCE);
-	}
+  public static PerlFileImpl createFile(Project project, String text) {
+    return createFile(project, text, PerlFileTypePackage.INSTANCE);
+  }
 
-	public static PerlFileImpl createFile(Project project, String text, FileType fileType)
-	{
-		return (PerlFileImpl) PsiFileFactory.getInstance(project).
-				createFileFromText("file.dummy", fileType, text);
-	}
-
+  public static PerlFileImpl createFile(Project project, String text, FileType fileType) {
+    return (PerlFileImpl)PsiFileFactory.getInstance(project).
+      createFileFromText("file.dummy", fileType, text);
+  }
 }

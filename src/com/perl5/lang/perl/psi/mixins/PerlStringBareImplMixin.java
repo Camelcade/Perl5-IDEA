@@ -30,62 +30,50 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements PerlString
-{
-	public PerlStringBareImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements PerlString {
+  public PerlStringBareImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public String getStringContent()
-	{
-		return getText();
-	}
+  @NotNull
+  @Override
+  public String getStringContent() {
+    return getText();
+  }
 
-	@Override
-	public void setStringContent(String newContent)
-	{
-		PsiElement firstChild = getFirstChild();
-		if (firstChild instanceof LeafPsiElement)
-		{
-			if (firstChild.equals(getLastChild()))
-			{
-				((LeafPsiElement) firstChild).replaceWithText(newContent);
-			}
-			else
-			{
-				throw new IncorrectOperationException("Complex bare strings replacement is not yet implemented");
-			}
-		}
-	}
+  @Override
+  public void setStringContent(String newContent) {
+    PsiElement firstChild = getFirstChild();
+    if (firstChild instanceof LeafPsiElement) {
+      if (firstChild.equals(getLastChild())) {
+        ((LeafPsiElement)firstChild).replaceWithText(newContent);
+      }
+      else {
+        throw new IncorrectOperationException("Complex bare strings replacement is not yet implemented");
+      }
+    }
+  }
 
-	@NotNull
-	@Override
-	public TextRange getContentTextRangeInParent()
-	{
-		return new TextRange(0, getTextLength());
-	}
+  @NotNull
+  @Override
+  public TextRange getContentTextRangeInParent() {
+    return new TextRange(0, getTextLength());
+  }
 
-	@Override
-	public int getContentLength()
-	{
-		return getContentTextRangeInParent().getLength();
-	}
+  @Override
+  public int getContentLength() {
+    return getContentTextRangeInParent().getLength();
+  }
 
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return ReferenceProvidersRegistry.getReferencesFromProviders(this);
-	}
+  @NotNull
+  @Override
+  public PsiReference[] getReferences() {
+    return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+  }
 
-	@Override
-	public PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
-
+  @Override
+  public PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
+  }
 }

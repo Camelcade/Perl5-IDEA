@@ -23,15 +23,13 @@ import com.perl5.lang.perl.PerlParserDefinition;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public class MasonTemplatingWordScanner extends DefaultWordsScanner
-{
-	public MasonTemplatingWordScanner()
-	{
-		super(new Mason2TemplatingLexerAdapter(null),
-				PerlParserDefinition.IDENTIFIERS,
-				PerlParserDefinition.COMMENTS,
-				PerlParserDefinition.LITERALS
-		);
-		setMayHaveFileRefsInLiterals(true);
-	}
+public class MasonTemplatingWordScanner extends DefaultWordsScanner {
+  public MasonTemplatingWordScanner() {
+    super(new Mason2TemplatingLexerAdapter(null),
+          PerlParserDefinition.IDENTIFIERS,
+          PerlParserDefinition.COMMENTS,
+          PerlParserDefinition.LITERALS
+    );
+    setMayHaveFileRefsInLiterals(true);
+  }
 }

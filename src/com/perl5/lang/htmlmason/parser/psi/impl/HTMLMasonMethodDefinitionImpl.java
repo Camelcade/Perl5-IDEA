@@ -29,31 +29,26 @@ import javax.swing.*;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonMethodDefinitionStub> implements HTMLMasonMethodDefinition
-{
-	public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonMethodDefinitionStub>
+  implements HTMLMasonMethodDefinition {
+  public HTMLMasonMethodDefinitionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public HTMLMasonMethodDefinitionImpl(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public HTMLMasonMethodDefinitionImpl(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	protected String getNameFromStub()
-	{
-		HTMLMasonMethodDefinitionStub stub = getStub();
-		return stub == null ? null : stub.getName();
-	}
+  @Nullable
+  @Override
+  protected String getNameFromStub() {
+    HTMLMasonMethodDefinitionStub stub = getStub();
+    return stub == null ? null : stub.getName();
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		return HTMLMasonIcons.HTML_MASON_METHOD_ICON;
-	}
-
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    return HTMLMasonIcons.HTML_MASON_METHOD_ICON;
+  }
 }

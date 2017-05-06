@@ -26,21 +26,17 @@ import com.perl5.lang.perl.util.PerlActionUtil;
  * Created by hurricup on 13.08.2016.
  * Actions applicable to files with pure perl syntax
  */
-public abstract class PurePerlActionBase extends PerlActionBase
-{
-	@Override
-	protected boolean isEnabled(AnActionEvent event)
-	{
-		return isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
-	}
+public abstract class PurePerlActionBase extends PerlActionBase {
+  @Override
+  protected boolean isEnabled(AnActionEvent event) {
+    return isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
+  }
 
-	protected boolean isMyFile(PsiFile file)
-	{
-		if (file == null || !file.isPhysical())
-		{
-			return false;
-		}
-		FileType fileType = file.getFileType();
-		return fileType instanceof PurePerlFileType;
-	}
+  protected boolean isMyFile(PsiFile file) {
+    if (file == null || !file.isPhysical()) {
+      return false;
+    }
+    FileType fileType = file.getFileType();
+    return fileType instanceof PurePerlFileType;
+  }
 }

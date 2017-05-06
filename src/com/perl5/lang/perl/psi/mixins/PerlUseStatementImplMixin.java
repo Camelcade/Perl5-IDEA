@@ -35,131 +35,109 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement
-{
-	public PerlUseStatementImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement {
+  public PerlUseStatementImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlUseStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlUseStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public boolean isPragma()
-	{
-		PerlPackageProcessor packageProcessor = getPackageProcessor();
-		return packageProcessor != null && packageProcessor.isPragma();
-	}
+  @Override
+  public boolean isPragma() {
+    PerlPackageProcessor packageProcessor = getPackageProcessor();
+    return packageProcessor != null && packageProcessor.isPragma();
+  }
 
-	@Override
-	public boolean isVersion()
-	{
-		return getNamespaceElement() == null && getVersionElement() != null;
-	}
+  @Override
+  public boolean isVersion() {
+    return getNamespaceElement() == null && getVersionElement() != null;
+  }
 
-	@Override
-	public boolean isPragmaOrVersion()
-	{
-		return isPragma() || isVersion();
-	}
+  @Override
+  public boolean isPragmaOrVersion() {
+    return isPragma() || isVersion();
+  }
 
-	@Override
-	public String getPackageName()
-	{
-		PerlUseStatementStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getPackageName();
-		}
+  @Override
+  public String getPackageName() {
+    PerlUseStatementStub stub = getStub();
+    if (stub != null) {
+      return stub.getPackageName();
+    }
 
-		PerlNamespaceElement ns = getNamespaceElement();
-		if (ns != null)
-		{
-			return ns.getCanonicalName();
-		}
-		return null;
-	}
+    PerlNamespaceElement ns = getNamespaceElement();
+    if (ns != null) {
+      return ns.getCanonicalName();
+    }
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
+  @Nullable
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    return findChildByClass(PerlNamespaceElement.class);
+  }
 
-	@Override
-	public PerlVersionElement getVersionElement()
-	{
-		return findChildByClass(PerlVersionElement.class);
-	}
+  @Override
+  public PerlVersionElement getVersionElement() {
+    return findChildByClass(PerlVersionElement.class);
+  }
 
-	@Override
-	@Nullable
-	public List<String> getImportParameters()
-	{
-		PerlUseStatementStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getImportParameters();
-		}
+  @Override
+  @Nullable
+  public List<String> getImportParameters() {
+    PerlUseStatementStub stub = getStub();
+    if (stub != null) {
+      return stub.getImportParameters();
+    }
 
-		if (getExpr() == null)
-		{
-			return null;
-		}
+    if (getExpr() == null) {
+      return null;
+    }
 
 
-		PerlNamespaceElement namespaceElement = getNamespaceElement();
-		if (namespaceElement != null)
-		{
-			return PerlPsiUtil.collectStringContents(namespaceElement.getNextSibling());
-		}
-		else
-		{
-			return Collections.emptyList();
-		}
-	}
+    PerlNamespaceElement namespaceElement = getNamespaceElement();
+    if (namespaceElement != null) {
+      return PerlPsiUtil.collectStringContents(namespaceElement.getNextSibling());
+    }
+    else {
+      return Collections.emptyList();
+    }
+  }
 
-	@NotNull
-	@Override
-	public PerlPackageProcessor getPackageProcessor()
-	{
-		PerlPackageProcessor packageProcessor = null;
+  @NotNull
+  @Override
+  public PerlPackageProcessor getPackageProcessor() {
+    PerlPackageProcessor packageProcessor = null;
 
-		// package name processor
-		String packageName = getPackageName();
-		if (packageName != null)
-		{
-			packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
-		}
-		else if (getVersionElement() != null)
-		{
-			packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementImplMixin.this);
-		}
+    // package name processor
+    String packageName = getPackageName();
+    if (packageName != null) {
+      packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
+    }
+    else if (getVersionElement() != null) {
+      packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementImplMixin.this);
+    }
 
-		return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
-	}
+    return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;
+  }
 
-	@Nullable
-	@Override
-	public String getOuterPackageName()
-	{
-		PerlUseStatementStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getOuterPackageName();
-		}
+  @Nullable
+  @Override
+  public String getOuterPackageName() {
+    PerlUseStatementStub stub = getStub();
+    if (stub != null) {
+      return stub.getOuterPackageName();
+    }
 
-		return PerlPackageUtil.getContextPackageName(this);
-	}
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 
-	@Override
-	@Nullable
-	public PsiPerlExpr getExpr()
-	{
-		return findChildByClass(PsiPerlExpr.class);
-	}
+  @Override
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return findChildByClass(PsiPerlExpr.class);
+  }
 }

@@ -31,75 +31,65 @@ import java.util.Collection;
 /**
  * Created by hurricup on 07.04.2016.
  */
-public class PerlMemberInplaceRenamer extends MemberInplaceRenamer
-{
-	public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename, PsiElement substituted, Editor editor)
-	{
-		super(elementToRename, substituted, editor);
-	}
+public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
+  public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename, PsiElement substituted, Editor editor) {
+    super(elementToRename, substituted, editor);
+  }
 
-	public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename, PsiElement substituted, Editor editor, String initialName, String oldName)
-	{
-		super(elementToRename, substituted, editor, initialName, oldName);
-	}
+  public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename,
+                                  PsiElement substituted,
+                                  Editor editor,
+                                  String initialName,
+                                  String oldName) {
+    super(elementToRename, substituted, editor, initialName, oldName);
+  }
 
-	@Override
-	protected boolean notSameFile(@Nullable VirtualFile file, @NotNull PsiFile containingFile)
-	{
-		final PsiFile currentFile = PsiDocumentManager.getInstance(myProject).getPsiFile(myEditor.getDocument());
-		if (currentFile == null)
-		{
-			return true;
-		}
-		InjectedLanguageManager manager = InjectedLanguageManager.getInstance(containingFile.getProject());
-		PsiFile topLevelFile = manager.getTopLevelFile(containingFile);
-		PsiFile topLevelFile1 = manager.getTopLevelFile(currentFile);
-		return topLevelFile == null || topLevelFile1 == null || topLevelFile.getViewProvider() != topLevelFile1.getViewProvider();
-	}
+  @Override
+  protected boolean notSameFile(@Nullable VirtualFile file, @NotNull PsiFile containingFile) {
+    final PsiFile currentFile = PsiDocumentManager.getInstance(myProject).getPsiFile(myEditor.getDocument());
+    if (currentFile == null) {
+      return true;
+    }
+    InjectedLanguageManager manager = InjectedLanguageManager.getInstance(containingFile.getProject());
+    PsiFile topLevelFile = manager.getTopLevelFile(containingFile);
+    PsiFile topLevelFile1 = manager.getTopLevelFile(currentFile);
+    return topLevelFile == null || topLevelFile1 == null || topLevelFile.getViewProvider() != topLevelFile1.getViewProvider();
+  }
 
-	@Override
-	protected boolean appendAdditionalElement(Collection<PsiReference> refs, Collection<Pair<PsiElement, TextRange>> stringUsages)
-	{
-		boolean b = super.appendAdditionalElement(refs, stringUsages);
+  @Override
+  protected boolean appendAdditionalElement(Collection<PsiReference> refs, Collection<Pair<PsiElement, TextRange>> stringUsages) {
+    boolean b = super.appendAdditionalElement(refs, stringUsages);
 
-		for (PsiReference ref : refs)
-		{
-			if (ref instanceof PsiPolyVariantReference)
-			{
-				for (ResolveResult resolveResult : ((PsiPolyVariantReference) ref).multiResolve(false))
-				{
-					appendAdditionalElement(resolveResult.getElement(), stringUsages);
-				}
-			}
-			else
-			{
-				appendAdditionalElement(ref.resolve(), stringUsages);
-			}
-		}
+    for (PsiReference ref : refs) {
+      if (ref instanceof PsiPolyVariantReference) {
+        for (ResolveResult resolveResult : ((PsiPolyVariantReference)ref).multiResolve(false)) {
+          appendAdditionalElement(resolveResult.getElement(), stringUsages);
+        }
+      }
+      else {
+        appendAdditionalElement(ref.resolve(), stringUsages);
+      }
+    }
 
-		return b;
-	}
+    return b;
+  }
 
-	private void appendAdditionalElement(@Nullable PsiElement psiElement, Collection<Pair<PsiElement, TextRange>> stringUsages)
-	{
-		if (psiElement == null || psiElement.equals(myElementToRename) || !(psiElement instanceof PsiNameIdentifierOwner))
-		{
-			return;
-		}
+  private void appendAdditionalElement(@Nullable PsiElement psiElement, Collection<Pair<PsiElement, TextRange>> stringUsages) {
+    if (psiElement == null || psiElement.equals(myElementToRename) || !(psiElement instanceof PsiNameIdentifierOwner)) {
+      return;
+    }
 
-		PsiElement nameIdentifier = ((PsiNameIdentifierOwner) psiElement).getNameIdentifier();
-		if (nameIdentifier == null)
-		{
-			return;
-		}
+    PsiElement nameIdentifier = ((PsiNameIdentifierOwner)psiElement).getNameIdentifier();
+    if (nameIdentifier == null) {
+      return;
+    }
 
-		stringUsages.add(Pair.create(nameIdentifier, ElementManipulators.getValueTextRange(nameIdentifier)));
-	}
+    stringUsages.add(Pair.create(nameIdentifier, ElementManipulators.getValueTextRange(nameIdentifier)));
+  }
 
-	@NotNull
-	@Override
-	protected TextRange getRangeToRename(@NotNull PsiElement element)
-	{
-		return ElementManipulators.getValueTextRange(element);
-	}
+  @NotNull
+  @Override
+  protected TextRange getRangeToRename(@NotNull PsiElement element) {
+    return ElementManipulators.getValueTextRange(element);
+  }
 }

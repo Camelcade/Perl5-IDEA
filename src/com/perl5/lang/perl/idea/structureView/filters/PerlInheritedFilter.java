@@ -27,34 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlInheritedFilter implements Filter
-{
-	public static final PerlInheritedFilter INSTANCE = new PerlInheritedFilter();
-	private static final String ID = "SHOW_INHERITED";
+public class PerlInheritedFilter implements Filter {
+  public static final PerlInheritedFilter INSTANCE = new PerlInheritedFilter();
+  private static final String ID = "SHOW_INHERITED";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlStructureViewElement && ((PerlStructureViewElement) treeElement).isInherited());
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlStructureViewElement && ((PerlStructureViewElement)treeElement).isInherited());
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show inherited", null, AllIcons.Hierarchy.Supertypes);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show inherited", null, AllIcons.Hierarchy.Supertypes);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

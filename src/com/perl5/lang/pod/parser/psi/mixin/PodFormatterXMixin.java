@@ -31,96 +31,81 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodFormatterX
-{
-	public PodFormatterXMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodFormatterX {
+  public PodFormatterXMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public PodFormatterXMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PodFormatterXMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
 
-	}
+  }
 
-	@Override
-	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
-	{
+  @Override
+  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
 
-	}
+  }
 
-	@Override
-	public PsiElement getTitleBlock()
-	{
-		return getContentBlock();
-	}
+  @Override
+  public PsiElement getTitleBlock() {
+    return getContentBlock();
+  }
 
-	@Nullable
-	@Override
-	public String getPodLink()
-	{
-		return PodRenderUtil.getPodLinkForElement(this);
-	}
+  @Nullable
+  @Override
+  public String getPodLink() {
+    return PodRenderUtil.getPodLinkForElement(this);
+  }
 
 
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			return nameIdentifier.getText();
-		}
-		return super.getName();
-	}
+  @Override
+  public String getName() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      return nameIdentifier.getText();
+    }
+    return super.getName();
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		return getTitleBlock();
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    return getTitleBlock();
+  }
 
-	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
-	{
-		return this;
-	}
+  @Override
+  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+    return this;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewTypeLocation()
-	{
-		return "NYI Type location string for " + this;
-	}
+  @Nullable
+  @Override
+  public String getUsageViewTypeLocation() {
+    return "NYI Type location string for " + this;
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewLongNameLocation()
-	{
-		return "NYI Long name location string for " + this;
-	}
+  @Nullable
+  @Override
+  public String getUsageViewLongNameLocation() {
+    return "NYI Long name location string for " + this;
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewShortNameLocation()
-	{
-		return "NYI Short name location string for " + this;
-	}
+  @Nullable
+  @Override
+  public String getUsageViewShortNameLocation() {
+    return "NYI Short name location string for " + this;
+  }
 }

@@ -30,42 +30,33 @@ import java.util.List;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlPackageFileMissingInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
+public class PerlPackageFileMissingInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
 
-			@Override
-			public void visitUseStatement(@NotNull PsiPerlUseStatement o)
-			{
-				if (o.getNamespaceElement() != null)
-				{
-					checkPackageFile(o.getNamespaceElement());
-				}
-			}
+      @Override
+      public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
+        if (o.getNamespaceElement() != null) {
+          checkPackageFile(o.getNamespaceElement());
+        }
+      }
 
-			@Override
-			public void visitRequireExpr(@NotNull PsiPerlRequireExpr o)
-			{
-				if (o.getNamespaceElement() != null)
-				{
-					checkPackageFile(o.getNamespaceElement());
-				}
-			}
+      @Override
+      public void visitRequireExpr(@NotNull PsiPerlRequireExpr o) {
+        if (o.getNamespaceElement() != null) {
+          checkPackageFile(o.getNamespaceElement());
+        }
+      }
 
-			public void checkPackageFile(PerlNamespaceElement o)
-			{
-				List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
+      public void checkPackageFile(PerlNamespaceElement o) {
+        List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
 
-				if (namespaceFiles.isEmpty())
-				{
-					registerProblem(holder, o, "Unable to find package file");
-				}
-			}
-		};
-	}
+        if (namespaceFiles.isEmpty()) {
+          registerProblem(holder, o, "Unable to find package file");
+        }
+      }
+    };
+  }
 }

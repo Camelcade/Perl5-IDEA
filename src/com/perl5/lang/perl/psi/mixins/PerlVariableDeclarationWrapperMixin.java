@@ -45,276 +45,235 @@ import java.util.List;
  * Created by hurricup on 29.09.2015.
  * Stubbed wrapper for variables declarations
  */
-public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElementBase<PerlVariableStub> implements PerlVariableDeclarationWrapper
-{
-	public PerlVariableDeclarationWrapperMixin(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElementBase<PerlVariableStub>
+  implements PerlVariableDeclarationWrapper {
+  public PerlVariableDeclarationWrapperMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlVariableDeclarationWrapperMixin(@NotNull PerlVariableStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlVariableDeclarationWrapperMixin(@NotNull PerlVariableStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public PerlVariable getVariable()
-	{
-		return findChildByClass(PerlVariable.class);
-	}
+  @Override
+  public PerlVariable getVariable() {
+    return findChildByClass(PerlVariable.class);
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		PerlVariable perlVariable = getVariable();
-		if (perlVariable != null)
-		{
-			return perlVariable.getVariableNameElement();
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    PerlVariable perlVariable = getVariable();
+    if (perlVariable != null) {
+      return perlVariable.getVariableNameElement();
+    }
+    return null;
+  }
 
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
+  @Override
+  public String getPresentableName() {
+    return getName();
+  }
 
 
-	@Override
-	public String getName()
-	{
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getVariableName();
-		}
-		return getVariable().getName();
-	}
+  @Override
+  public String getName() {
+    PerlVariableStub stub = getStub();
+    if (stub != null) {
+      return stub.getVariableName();
+    }
+    return getVariable().getName();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier != null)
-		{
-			PerlPsiUtil.renameElement(nameIdentifier, name);
-		}
-		return this;
-	}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier != null) {
+      PerlPsiUtil.renameElement(nameIdentifier, name);
+    }
+    return this;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
-	@Nullable
-	@Override
-	public String getDeclaredType()
-	{
-		PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
-		if (variableAnnotations != null)
-		{
-			String type = variableAnnotations.getType();
-			if (type != null)
-			{
-				return type;
-			}
-		}
+  @Nullable
+  @Override
+  public String getDeclaredType() {
+    PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
+    if (variableAnnotations != null) {
+      String type = variableAnnotations.getType();
+      if (type != null) {
+        return type;
+      }
+    }
 
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getDeclaredType();
-		}
-		else
-		{
-			return getLocallyDeclaredType();
-		}
-	}
+    PerlVariableStub stub = getStub();
+    if (stub != null) {
+      return stub.getDeclaredType();
+    }
+    else {
+      return getLocallyDeclaredType();
+    }
+  }
 
-	@Nullable
-	@Override
-	public String getLocallyDeclaredType()
-	{
-		PerlVariableDeclaration declaration = getPerlDeclaration();
-		return declaration == null ? null : declaration.getDeclarationType();
-	}
+  @Nullable
+  @Override
+  public String getLocallyDeclaredType() {
+    PerlVariableDeclaration declaration = getPerlDeclaration();
+    return declaration == null ? null : declaration.getDeclarationType();
+  }
 
-	@Nullable
-	private PerlVariableDeclaration getPerlDeclaration()
-	{
-		return PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
-	}
+  @Nullable
+  private PerlVariableDeclaration getPerlDeclaration() {
+    return PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+  }
 
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getPackageName();
-		}
-		return getVariable().getPackageName();
-	}
+  @Nullable
+  @Override
+  public String getPackageName() {
+    PerlVariableStub stub = getStub();
+    if (stub != null) {
+      return stub.getPackageName();
+    }
+    return getVariable().getPackageName();
+  }
 
-	@Override
-	public PerlVariableType getActualType()
-	{
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getActualType();
-		}
-		return getVariable().getActualType();
-	}
+  @Override
+  public PerlVariableType getActualType() {
+    PerlVariableStub stub = getStub();
+    if (stub != null) {
+      return stub.getActualType();
+    }
+    return getVariable().getActualType();
+  }
 
-	@Override
-	public boolean isDeprecated()
-	{
-		PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
-		return variableAnnotations != null && variableAnnotations.isDeprecated();
-	}
+  @Override
+  public boolean isDeprecated() {
+    PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
+    return variableAnnotations != null && variableAnnotations.isDeprecated();
+  }
 
 
-	@NotNull
-	@Override
-	public SearchScope getUseScope()
-	{
-		if (isLexicalDeclaration())
-		{
-			return new LocalSearchScope(getVariable().getLexicalScope());
-		}
+  @NotNull
+  @Override
+  public SearchScope getUseScope() {
+    if (isLexicalDeclaration()) {
+      return new LocalSearchScope(getVariable().getLexicalScope());
+    }
 
-		return super.getUseScope();
-	}
+    return super.getUseScope();
+  }
 
-	@Override
-	public boolean isLexicalDeclaration()
-	{
-		PsiElement parent = getParent();
-		return parent instanceof PsiPerlVariableDeclarationLexical ||
-				parent instanceof PsiPerlSubSignature ||
-				isInvocantDeclaration() ||
-				isLocalDeclaration() ||
-				isArgsDeclaration()
-				;
-	}
+  @Override
+  public boolean isLexicalDeclaration() {
+    PsiElement parent = getParent();
+    return parent instanceof PsiPerlVariableDeclarationLexical ||
+           parent instanceof PsiPerlSubSignature ||
+           isInvocantDeclaration() ||
+           isLocalDeclaration() ||
+           isArgsDeclaration()
+      ;
+  }
 
-	@Override
-	public boolean isInvocantDeclaration()
-	{
-		return getParent() instanceof PsiPerlMethodSignatureInvocant;
-	}
+  @Override
+  public boolean isInvocantDeclaration() {
+    return getParent() instanceof PsiPerlMethodSignatureInvocant;
+  }
 
-	// fixme temporary hack, see #899
-	public boolean isArgsDeclaration()
-	{
-		return getParent() instanceof HTMLMasonArgsBlock;
-	}
+  // fixme temporary hack, see #899
+  public boolean isArgsDeclaration() {
+    return getParent() instanceof HTMLMasonArgsBlock;
+  }
 
-	@Override
-	public boolean isLocalDeclaration()
-	{
-		return getParent() instanceof PsiPerlVariableDeclarationLocal;
-	}
+  @Override
+  public boolean isLocalDeclaration() {
+    return getParent() instanceof PsiPerlVariableDeclarationLocal;
+  }
 
-	@Override
-	public boolean isGlobalDeclaration()
-	{
-		return !isLexicalDeclaration();
-	}
+  @Override
+  public boolean isGlobalDeclaration() {
+    return !isLexicalDeclaration();
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return new PerlItemPresentationSimple(this, getName());
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getName());
+  }
 
 
-	@Nullable
-	@Override
-	public Icon getIcon(int flags)
-	{
-		PerlVariableType actualType = getActualType();
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    PerlVariableType actualType = getActualType();
 
-		if (actualType == PerlVariableType.ARRAY)
-		{
-			return PerlIcons.ARRAY_GUTTER_ICON;
-		}
-		if (actualType == PerlVariableType.HASH)
-		{
-			return PerlIcons.HASH_GUTTER_ICON;
-		}
-		if (actualType == PerlVariableType.SCALAR)
-		{
-			return PerlIcons.SCALAR_GUTTER_ICON;
-		}
+    if (actualType == PerlVariableType.ARRAY) {
+      return PerlIcons.ARRAY_GUTTER_ICON;
+    }
+    if (actualType == PerlVariableType.HASH) {
+      return PerlIcons.HASH_GUTTER_ICON;
+    }
+    if (actualType == PerlVariableType.SCALAR) {
+      return PerlIcons.SCALAR_GUTTER_ICON;
+    }
 
-		return super.getIcon(flags);
-	}
+    return super.getIcon(flags);
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		if (processor instanceof PerlVariableScopeProcessor && !equals(place.getParent()))
-		{
-			return processor.execute(this, state);
-		}
-		return super.processDeclarations(processor, state, lastParent, place);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    if (processor instanceof PerlVariableScopeProcessor && !equals(place.getParent())) {
+      return processor.execute(this, state);
+    }
+    return super.processDeclarations(processor, state, lastParent, place);
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getVariableAnnotations()
-	{
-		PerlVariableAnnotations variableAnnotations;
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getVariableAnnotations() {
+    PerlVariableAnnotations variableAnnotations;
 
-		PerlVariableStub stub = getStub();
-		if (stub != null)
-		{
-			variableAnnotations = stub.getVariableAnnotations();
-		}
-		else
-		{
-			// re-parsing
-			variableAnnotations = getLocalVariableAnnotations();
-		}
+    PerlVariableStub stub = getStub();
+    if (stub != null) {
+      variableAnnotations = stub.getVariableAnnotations();
+    }
+    else {
+      // re-parsing
+      variableAnnotations = getLocalVariableAnnotations();
+    }
 
-		if (variableAnnotations != null)
-		{
-			return variableAnnotations;
-		}
+    if (variableAnnotations != null) {
+      return variableAnnotations;
+    }
 
-		return getExternalVariableAnnotations();
-	}
+    return getExternalVariableAnnotations();
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getLocalVariableAnnotations()
-	{
-		List<PerlAnnotation> perlAnnotations = PerlPsiUtil.collectAnnotations(this);
-		if (perlAnnotations.isEmpty())
-		{
-			perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
-		}
-		return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations);
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getLocalVariableAnnotations() {
+    List<PerlAnnotation> perlAnnotations = PerlPsiUtil.collectAnnotations(this);
+    if (perlAnnotations.isEmpty()) {
+      perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
+    }
+    return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations);
+  }
 
-	@Nullable
-	@Override
-	public PerlVariableAnnotations getExternalVariableAnnotations()
-	{
-		// fixme NYI
-		return null;
-	}
+  @Nullable
+  @Override
+  public PerlVariableAnnotations getExternalVariableAnnotations() {
+    // fixme NYI
+    return null;
+  }
 }

@@ -27,31 +27,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMoosePsiUtil
-{
-	@Nullable
-	public static PsiReference[] getModifiersNameReference(PsiElement expr, PsiElement element)
-	{
-		if (expr instanceof PsiPerlParenthesisedExpr)
-		{
-			expr = expr.getFirstChild();
-			if (expr != null)
-			{
-				expr = expr.getNextSibling();
-			}
-		}
+public class PerlMoosePsiUtil {
+  @Nullable
+  public static PsiReference[] getModifiersNameReference(PsiElement expr, PsiElement element) {
+    if (expr instanceof PsiPerlParenthesisedExpr) {
+      expr = expr.getFirstChild();
+      if (expr != null) {
+        expr = expr.getNextSibling();
+      }
+    }
 
-		if (expr instanceof PsiPerlCommaSequenceExpr)
-		{
-			PsiElement lastElement = expr.getLastChild();
+    if (expr instanceof PsiPerlCommaSequenceExpr) {
+      PsiElement lastElement = expr.getLastChild();
 
-			if (PsiTreeUtil.isAncestor(expr, element, true) && !PsiTreeUtil.isAncestor(lastElement, element, true))
-			{
-				return new PsiReference[]{new PerlSubReferenceSuper(element)};
-			}
-		}
+      if (PsiTreeUtil.isAncestor(expr, element, true) && !PsiTreeUtil.isAncestor(lastElement, element, true)) {
+        return new PsiReference[]{new PerlSubReferenceSuper(element)};
+      }
+    }
 
-		return null;
-
-	}
+    return null;
+  }
 }

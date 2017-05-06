@@ -28,309 +28,257 @@ import java.io.Reader;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates
-{
-	private static final String CHOMP_MODIFIERS = "-+=~";
-	private final Project myProject;
-	private final TemplateToolkitSettings mySettings;
-	private int customState = 0;
-	private boolean isEscaped = false;
+public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates {
+  private static final String CHOMP_MODIFIERS = "-+=~";
+  private final Project myProject;
+  private final TemplateToolkitSettings mySettings;
+  private int customState = 0;
+  private boolean isEscaped = false;
 
-	public TemplateToolkitLexer(Project project)
-	{
-		super((Reader) null);
-		myProject = project;
-		mySettings = myProject == null ? null : TemplateToolkitSettings.getInstance(project);
-	}
+  public TemplateToolkitLexer(Project project) {
+    super((Reader)null);
+    myProject = project;
+    mySettings = myProject == null ? null : TemplateToolkitSettings.getInstance(project);
+  }
 
-	@Override
-	public IElementType perlAdvance() throws IOException
-	{
-		CharSequence buffer = getBuffer();
-		int tokenStart = getNextTokenStart();
-		int bufferEnd = getBufferEnd();
-		int currentCustomState = getCustomState();
-		int currentState = getRealLexicalState();
+  @Override
+  public IElementType perlAdvance() throws IOException {
+    CharSequence buffer = getBuffer();
+    int tokenStart = getNextTokenStart();
+    int bufferEnd = getBufferEnd();
+    int currentCustomState = getCustomState();
+    int currentState = getRealLexicalState();
 
-		if (bufferEnd == 0 || tokenStart >= bufferEnd)
-		{
-			return super.perlAdvance();
-		}
-		else if (currentCustomState == LEX_HTML)
-		{
-			int offset = tokenStart;
-			boolean blockStart = false;
-			for (; offset < bufferEnd; offset++)
-			{
-				char currentChar = buffer.charAt(offset);
-				if (isBufferAtString(buffer, offset, getStartTag()))
-				{
-					blockStart = true;
-					break;
-				}
-				else if (isOutlineOpener(buffer, offset))
-				{
-					break;
-				}
-			}
+    if (bufferEnd == 0 || tokenStart >= bufferEnd) {
+      return super.perlAdvance();
+    }
+    else if (currentCustomState == LEX_HTML) {
+      int offset = tokenStart;
+      boolean blockStart = false;
+      for (; offset < bufferEnd; offset++) {
+        char currentChar = buffer.charAt(offset);
+        if (isBufferAtString(buffer, offset, getStartTag())) {
+          blockStart = true;
+          break;
+        }
+        else if (isOutlineOpener(buffer, offset)) {
+          break;
+        }
+      }
 
-			if (offset > tokenStart)
-			{
-				pushPreparsedSpaceOrToken(tokenStart, offset, TT2_HTML);
-			}
+      if (offset > tokenStart) {
+        pushPreparsedSpaceOrToken(tokenStart, offset, TT2_HTML);
+      }
 
-			if (blockStart)
-			{
-				int openTagLength = getStartTag().length();
+      if (blockStart) {
+        int openTagLength = getStartTag().length();
 
-				if (offset + openTagLength < bufferEnd && StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset + openTagLength)))
-				{
-					openTagLength++;
-				}
+        if (offset + openTagLength < bufferEnd && StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset + openTagLength))) {
+          openTagLength++;
+        }
 
-				pushPreparsedToken(offset, offset + openTagLength, TT2_OPEN_TAG);
-				int nextCharOffset = offset + openTagLength;
+        pushPreparsedToken(offset, offset + openTagLength, TT2_OPEN_TAG);
+        int nextCharOffset = offset + openTagLength;
 
-				if (nextCharOffset < bufferEnd && buffer.charAt(nextCharOffset) == '#')
-				{
-					int blockCommentEnd = nextCharOffset + 1;
-					String endTag = getEndTag();
-					while (blockCommentEnd < bufferEnd && !isBufferAtString(buffer, blockCommentEnd, endTag))
-					{
-						blockCommentEnd++;
-					}
-					pushPreparsedToken(nextCharOffset, blockCommentEnd, LINE_COMMENT);
-				}
-				setCustomState(LEX_TEMPLATE_BLOCK);
-			}
-			else if (offset < bufferEnd)
-			{
-				pushPreparsedToken(offset, offset + getOutlineTag().length(), TT2_OUTLINE_TAG);
-				setCustomState(LEX_TEMPLATE_LINE);
-			}
+        if (nextCharOffset < bufferEnd && buffer.charAt(nextCharOffset) == '#') {
+          int blockCommentEnd = nextCharOffset + 1;
+          String endTag = getEndTag();
+          while (blockCommentEnd < bufferEnd && !isBufferAtString(buffer, blockCommentEnd, endTag)) {
+            blockCommentEnd++;
+          }
+          pushPreparsedToken(nextCharOffset, blockCommentEnd, LINE_COMMENT);
+        }
+        setCustomState(LEX_TEMPLATE_BLOCK);
+      }
+      else if (offset < bufferEnd) {
+        pushPreparsedToken(offset, offset + getOutlineTag().length(), TT2_OUTLINE_TAG);
+        setCustomState(LEX_TEMPLATE_LINE);
+      }
 
-			assert !preparsedTokensList.isEmpty();
-			return getPreParsedToken();
+      assert !preparsedTokensList.isEmpty();
+      return getPreParsedToken();
+    }
+    else if (currentCustomState == LEX_TEMPLATE_BLOCK) {
+      int closeTagLength = -1;
+      if (currentState != LEX_DQ_STRING &&
+          currentState != LEX_SQ_STRING &&
+          (closeTagLength = checkCloseTagAndGetLength(buffer, tokenStart, bufferEnd)) > 0) {
+        endTemplate(tokenStart, closeTagLength);
+        return TT2_CLOSE_TAG;
+      }
+      else if (isLineComment(buffer, tokenStart, bufferEnd)) {
+        return lexLineComment(buffer, tokenStart, bufferEnd);
+      }
+    }
+    else if (currentCustomState == LEX_TEMPLATE_LINE) {
+      if (tokenStart < bufferEnd && buffer.charAt(tokenStart) == '\n') {
+        endTemplate(tokenStart, 1);
+        return TT2_HARD_NEWLINE;
+      }
+      else if (isLineComment(buffer, tokenStart, bufferEnd)) {
+        return lexLineComment(buffer, tokenStart, bufferEnd);
+      }
+    }
 
-		}
-		else if (currentCustomState == LEX_TEMPLATE_BLOCK)
-		{
-			int closeTagLength = -1;
-			if (currentState != LEX_DQ_STRING && currentState != LEX_SQ_STRING && (closeTagLength = checkCloseTagAndGetLength(buffer, tokenStart, bufferEnd)) > 0)
-			{
-				endTemplate(tokenStart, closeTagLength);
-				return TT2_CLOSE_TAG;
-			}
-			else if (isLineComment(buffer, tokenStart, bufferEnd))
-			{
-				return lexLineComment(buffer, tokenStart, bufferEnd);
-			}
-		}
-		else if (currentCustomState == LEX_TEMPLATE_LINE)
-		{
-			if (tokenStart < bufferEnd && buffer.charAt(tokenStart) == '\n')
-			{
-				endTemplate(tokenStart, 1);
-				return TT2_HARD_NEWLINE;
-			}
-			else if (isLineComment(buffer, tokenStart, bufferEnd))
-			{
-				return lexLineComment(buffer, tokenStart, bufferEnd);
-			}
-		}
+    IElementType result = super.perlAdvance();
 
-		IElementType result = super.perlAdvance();
+    if (currentCustomState == LEX_TEMPLATE_BLOCK || currentCustomState == LEX_TEMPLATE_LINE) {
+      currentState = getRealLexicalState();
+      if (currentState == LEX_DQ_STRING) {
+        if (result == TT2_DQ && !isEscaped) {
+          popState();
+          result = TT2_DQ_CLOSE;
+        }
+        else {
+          isEscaped = !isEscaped && result == TT2_ESCAPE;
+          result = TT2_STRING_CONTENT;
+        }
+      }
+      else if (currentState == LEX_SQ_STRING) {
+        if (result == TT2_SQ && !isEscaped) {
+          popState();
+          result = TT2_SQ_CLOSE;
+        }
+        else {
+          isEscaped = !isEscaped && result == TT2_ESCAPE;
+          result = TT2_STRING_CONTENT;
+        }
+      }
+      else if (result == TT2_SQ) {
+        pushState();
+        yybegin(LEX_SQ_STRING);
+        isEscaped = false;
+        result = TT2_SQ_OPEN;
+      }
+      else if (result == TT2_DQ) {
+        pushState();
+        yybegin(LEX_DQ_STRING);
+        isEscaped = false;
+        result = TT2_DQ_OPEN;
+      }
+    }
 
-		if (currentCustomState == LEX_TEMPLATE_BLOCK || currentCustomState == LEX_TEMPLATE_LINE)
-		{
-			currentState = getRealLexicalState();
-			if (currentState == LEX_DQ_STRING)
-			{
-				if (result == TT2_DQ && !isEscaped)
-				{
-					popState();
-					result = TT2_DQ_CLOSE;
-				}
-				else
-				{
-					isEscaped = !isEscaped && result == TT2_ESCAPE;
-					result = TT2_STRING_CONTENT;
-				}
-			}
-			else if (currentState == LEX_SQ_STRING)
-			{
-				if (result == TT2_SQ && !isEscaped)
-				{
-					popState();
-					result = TT2_SQ_CLOSE;
-				}
-				else
-				{
-					isEscaped = !isEscaped && result == TT2_ESCAPE;
-					result = TT2_STRING_CONTENT;
-				}
-			}
-			else if (result == TT2_SQ)
-			{
-				pushState();
-				yybegin(LEX_SQ_STRING);
-				isEscaped = false;
-				result = TT2_SQ_OPEN;
-			}
-			else if (result == TT2_DQ)
-			{
-				pushState();
-				yybegin(LEX_DQ_STRING);
-				isEscaped = false;
-				result = TT2_DQ_OPEN;
-			}
-		}
+    return result;
+  }
 
-		return result;
-	}
+  /**
+   * Checks if lexer is at close tag with possible chomp modifier and returns close tag length
+   *
+   * @param buffer    chars buffer
+   * @param offset    current offset
+   * @param bufferEnd buffer end
+   * @return close tag length or -1 of we are not at it
+   */
+  protected int checkCloseTagAndGetLength(CharSequence buffer, int offset, int bufferEnd) {
+    if (offset >= bufferEnd) {
+      return -1;
+    }
 
-	/**
-	 * Checks if lexer is at close tag with possible chomp modifier and returns close tag length
-	 *
-	 * @param buffer    chars buffer
-	 * @param offset    current offset
-	 * @param bufferEnd buffer end
-	 * @return close tag length or -1 of we are not at it
-	 */
-	protected int checkCloseTagAndGetLength(CharSequence buffer, int offset, int bufferEnd)
-	{
-		if (offset >= bufferEnd)
-		{
-			return -1;
-		}
+    String endTag = getEndTag();
+    if (isBufferAtString(buffer, offset, endTag)) {
+      return endTag.length();
+    }
 
-		String endTag = getEndTag();
-		if (isBufferAtString(buffer, offset, endTag))
-		{
-			return endTag.length();
-		}
+    if (StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset)) && isBufferAtString(buffer, offset + 1, endTag)) {
+      return endTag.length() + 1;
+    }
+    return -1;
+  }
 
-		if (StringUtil.containsChar(CHOMP_MODIFIERS, buffer.charAt(offset)) && isBufferAtString(buffer, offset + 1, endTag))
-		{
-			return endTag.length() + 1;
-		}
-		return -1;
+  protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd) {
+    int currentState = getRealLexicalState();
+    return currentState != LEX_DQ_STRING &&
+           currentState != LEX_SQ_STRING &&
+           getTokenHistory().getLastTokenType() != TT2_OPEN_TAG &&
+           offset < bufferEnd &&
+           buffer.charAt(offset) == '#';
+  }
 
-	}
+  protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd) {
+    int endOffset = offset;
+    String endTag = getEndTag();
+    boolean isTemplateLine = getCustomState() == LEX_TEMPLATE_LINE;
 
-	protected boolean isLineComment(CharSequence buffer, int offset, int bufferEnd)
-	{
-		int currentState = getRealLexicalState();
-		return currentState != LEX_DQ_STRING &&
-				currentState != LEX_SQ_STRING &&
-				getTokenHistory().getLastTokenType() != TT2_OPEN_TAG &&
-				offset < bufferEnd &&
-				buffer.charAt(offset) == '#';
-	}
+    while (endOffset < bufferEnd) {
+      if (buffer.charAt(endOffset) == '\n' || !isTemplateLine && isBufferAtString(buffer, endOffset, endTag)) {
+        break;
+      }
+      endOffset++;
+    }
+    setTokenStart(offset);
+    setTokenEnd(endOffset);
 
-	protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd)
-	{
-		int endOffset = offset;
-		String endTag = getEndTag();
-		boolean isTemplateLine = getCustomState() == LEX_TEMPLATE_LINE;
+    return LINE_COMMENT;
+  }
 
-		while (endOffset < bufferEnd)
-		{
-			if (buffer.charAt(endOffset) == '\n' || !isTemplateLine && isBufferAtString(buffer, endOffset, endTag))
-			{
-				break;
-			}
-			endOffset++;
-		}
-		setTokenStart(offset);
-		setTokenEnd(endOffset);
+  protected void endTemplate(int tokenStart, int tokenLength) {
+    setTokenStart(tokenStart);
+    setTokenEnd(tokenStart + tokenLength);
+    setCustomState(LEX_HTML);
 
-		return LINE_COMMENT;
-	}
+    int currentState = getRealLexicalState();
+    if (currentState == LEX_SQ_STRING || currentState == LEX_DQ_STRING) {
+      popState();
+    }
+  }
 
-	protected void endTemplate(int tokenStart, int tokenLength)
-	{
-		setTokenStart(tokenStart);
-		setTokenEnd(tokenStart + tokenLength);
-		setCustomState(LEX_HTML);
+  public Project getProject() {
+    return myProject;
+  }
 
-		int currentState = getRealLexicalState();
-		if (currentState == LEX_SQ_STRING || currentState == LEX_DQ_STRING)
-		{
-			popState();
-		}
-	}
+  public int getCustomState() {
+    return customState;
+  }
 
-	public Project getProject()
-	{
-		return myProject;
-	}
+  public void setCustomState(int newState) {
+    customState = newState;
+  }
 
-	public int getCustomState()
-	{
-		return customState;
-	}
+  @Override
+  public int getInitialCustomState() {
+    return LEX_HTML;
+  }
 
-	public void setCustomState(int newState)
-	{
-		customState = newState;
-	}
+  protected String getStartTag() {
+    return mySettings == null ? TemplateToolkitSettings.DEFAULT_START_TAG : mySettings.START_TAG;
+  }
 
-	@Override
-	public int getInitialCustomState()
-	{
-		return LEX_HTML;
-	}
+  protected String getEndTag() {
+    return mySettings == null ? TemplateToolkitSettings.DEFAULT_END_TAG : mySettings.END_TAG;
+  }
 
-	protected String getStartTag()
-	{
-		return mySettings == null ? TemplateToolkitSettings.DEFAULT_START_TAG : mySettings.START_TAG;
-	}
+  protected String getOutlineTag() {
+    return mySettings == null ? TemplateToolkitSettings.DEFAULT_OUTLINE_TAG : mySettings.OUTLINE_TAG;
+  }
 
-	protected String getEndTag()
-	{
-		return mySettings == null ? TemplateToolkitSettings.DEFAULT_END_TAG : mySettings.END_TAG;
-	}
+  protected boolean isOutlineEnabled() {
+    return StringUtil.isNotEmpty(getOutlineTag());
+  }
 
-	protected String getOutlineTag()
-	{
-		return mySettings == null ? TemplateToolkitSettings.DEFAULT_OUTLINE_TAG : mySettings.OUTLINE_TAG;
-	}
+  protected boolean isOutlineOpener(CharSequence buffer, int offset) {
+    return isOutlineEnabled() && !(offset > 0 && buffer.charAt(offset - 1) != '\n') && isBufferAtString(buffer, offset, getOutlineTag());
+  }
 
-	protected boolean isOutlineEnabled()
-	{
-		return StringUtil.isNotEmpty(getOutlineTag());
-	}
+  protected boolean isAnycaseEnabled() {
+    return mySettings != null && mySettings.ENABLE_ANYCASE;
+  }
 
-	protected boolean isOutlineOpener(CharSequence buffer, int offset)
-	{
-		return isOutlineEnabled() && !(offset > 0 && buffer.charAt(offset - 1) != '\n') && isBufferAtString(buffer, offset, getOutlineTag());
-	}
+  @Override
+  public IElementType parseIdentifier() {
+    String identifier = yytext().toString();
 
-	protected boolean isAnycaseEnabled()
-	{
-		return mySettings != null && mySettings.ENABLE_ANYCASE;
-	}
+    // check for operator
+    IElementType tokenType = TemplateToolkitSyntaxElements.TEXT_OPERATORS.get(identifier);
 
-	@Override
-	public IElementType parseIdentifier()
-	{
-		String identifier = yytext().toString();
+    if (tokenType == null) {
+      // check for derictive
+      if (isAnycaseEnabled()) {
+        identifier = identifier.toUpperCase();
+      }
 
-		// check for operator
-		IElementType tokenType = TemplateToolkitSyntaxElements.TEXT_OPERATORS.get(identifier);
+      tokenType = TemplateToolkitSyntaxElements.KEYWORDS.get(identifier);
+    }
 
-		if (tokenType == null)
-		{
-			// check for derictive
-			if (isAnycaseEnabled())
-			{
-				identifier = identifier.toUpperCase();
-			}
-
-			tokenType = TemplateToolkitSyntaxElements.KEYWORDS.get(identifier);
-		}
-
-		return tokenType == null ? TT2_IDENTIFIER : tokenType;
-	}
+    return tokenType == null ? TT2_IDENTIFIER : tokenType;
+  }
 }

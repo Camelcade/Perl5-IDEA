@@ -26,69 +26,57 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodOverSectionContentMixin extends PodCompositeElementMixin implements PodOverSectionContent
-{
-	private Boolean myIsBulleted;
+public class PodOverSectionContentMixin extends PodCompositeElementMixin implements PodOverSectionContent {
+  private Boolean myIsBulleted;
 
-	public PodOverSectionContentMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PodOverSectionContentMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean isBulleted()
-	{
-		if (myIsBulleted == null)
-		{
-			PodSectionItem firstItem = getFirstItem();
-			myIsBulleted = firstItem != null && firstItem.isBulleted();
-		}
-		return myIsBulleted;
-	}
+  @Override
+  public boolean isBulleted() {
+    if (myIsBulleted == null) {
+      PodSectionItem firstItem = getFirstItem();
+      myIsBulleted = firstItem != null && firstItem.isBulleted();
+    }
+    return myIsBulleted;
+  }
 
-	@Nullable
-	@Override
-	public PodSectionItem getFirstItem()
-	{
-		return findChildByClass(PodSectionItem.class);
-	}
+  @Nullable
+  @Override
+  public PodSectionItem getFirstItem() {
+    return findChildByClass(PodSectionItem.class);
+  }
 
-	@Override
-	public void subtreeChanged()
-	{
-		super.subtreeChanged();
-		myIsBulleted = null;
-	}
+  @Override
+  public void subtreeChanged() {
+    super.subtreeChanged();
+    myIsBulleted = null;
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		boolean isBulleted = isBulleted();
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    boolean isBulleted = isBulleted();
 
-		if (isBulleted)
-		{
-			builder.append("<ul>");
-		}
-		else
-		{
-			builder.append("<dl>");
-		}
+    if (isBulleted) {
+      builder.append("<ul>");
+    }
+    else {
+      builder.append("<dl>");
+    }
 
-		super.renderElementAsHTML(builder, context);
+    super.renderElementAsHTML(builder, context);
 
-		if (isBulleted)
-		{
-			builder.append("</ul>");
-		}
-		else
-		{
-			builder.append("</dl>");
-		}
-	}
+    if (isBulleted) {
+      builder.append("</ul>");
+    }
+    else {
+      builder.append("</dl>");
+    }
+  }
 
-	@Override
-	public int getListLevel()
-	{
-		return super.getListLevel() + 1;
-	}
+  @Override
+  public int getListLevel() {
+    return super.getListLevel() + 1;
+  }
 }

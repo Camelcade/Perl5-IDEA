@@ -35,90 +35,87 @@ import java.util.Map;
  * Created by hurricup on 31.05.2015.
  */
 public interface PerlNamespaceDefinition extends
-		StubBasedPsiElement<PerlNamespaceDefinitionStub>,
-		PerlNamespaceElementContainer,
-		PerlNamedElement,
-		PerlNamespaceContainer,
-		PerlDeprecatable,
-		PerlElementPatterns,
-		PerlCompositeElement
-{
-	/**
-	 * Retuns block or namespace content with statements
-	 *
-	 * @return PsiElement
-	 */
-	@Nullable
-	PsiPerlBlock getBlock();
+                                         StubBasedPsiElement<PerlNamespaceDefinitionStub>,
+                                         PerlNamespaceElementContainer,
+                                         PerlNamedElement,
+                                         PerlNamespaceContainer,
+                                         PerlDeprecatable,
+                                         PerlElementPatterns,
+                                         PerlCompositeElement {
+  /**
+   * Retuns block or namespace content with statements
+   *
+   * @return PsiElement
+   */
+  @Nullable
+  PsiPerlBlock getBlock();
 
-	/**
-	 * Populates result with linear ISA according to the namespace MRO
-	 *
-	 * @param recursionMap recursion map
-	 * @param result       array to populate
-	 */
-	void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
+  /**
+   * Populates result with linear ISA according to the namespace MRO
+   *
+   * @param recursionMap recursion map
+   * @param result       array to populate
+   */
+  void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result);
 
-	/**
-	 * Retuns list of exports from this module
-	 *
-	 * @return list of @EXPORTs
-	 */
-	@NotNull
-	List<String> getEXPORT();
+  /**
+   * Retuns list of exports from this module
+   *
+   * @return list of @EXPORTs
+   */
+  @NotNull
+  List<String> getEXPORT();
 
-	/**
-	 * .
-	 * Returns list of optional exports from this module
-	 *
-	 * @return list of @EXPORT_OKs
-	 */
-	@NotNull
-	List<String> getEXPORT_OK();
+  /**
+   * .
+   * Returns list of optional exports from this module
+   *
+   * @return list of @EXPORT_OKs
+   */
+  @NotNull
+  List<String> getEXPORT_OK();
 
-	/**
-	 * Returns map of exported tags
-	 *
-	 * @return map of %EXPORT_TAGS
-	 */
-	@NotNull
-	Map<String, List<String>> getEXPORT_TAGS();
+  /**
+   * Returns map of exported tags
+   *
+   * @return map of %EXPORT_TAGS
+   */
+  @NotNull
+  Map<String, List<String>> getEXPORT_TAGS();
 
-	/**
-	 * Collects, cached and returns exporter arrays and hashes
-	 *
-	 * @return exporter info
-	 */
-	@NotNull
-	PerlNamespaceDefinitionImplMixin.ExporterInfo getExporterInfo();
-
-
-	/**
-	 * Returns list of parent namespace names from stub or psi
-	 *
-	 * @return list of names
-	 */
-	@NotNull
-	List<String> getParentNamepsacesNames();
-
-	@Nullable
-	String getName();
-
-	/**
-	 * Returns stubbed, local or external namespace annotations
-	 *
-	 * @return annotations or null
-	 */
-	@Nullable
-	PerlNamespaceAnnotations getAnnotations();
-
-	/**
-	 * Returns local namespace annotations if any
-	 *
-	 * @return annotations object or null
-	 */
-	@Nullable
-	PerlNamespaceAnnotations getLocalAnnotations();
+  /**
+   * Collects, cached and returns exporter arrays and hashes
+   *
+   * @return exporter info
+   */
+  @NotNull
+  PerlNamespaceDefinitionImplMixin.ExporterInfo getExporterInfo();
 
 
+  /**
+   * Returns list of parent namespace names from stub or psi
+   *
+   * @return list of names
+   */
+  @NotNull
+  List<String> getParentNamepsacesNames();
+
+  @Nullable
+  String getName();
+
+  /**
+   * Returns stubbed, local or external namespace annotations
+   *
+   * @return annotations or null
+   */
+  @Nullable
+  PerlNamespaceAnnotations getAnnotations();
+
+  /**
+   * Returns local namespace annotations if any
+   *
+   * @return annotations object or null
+   */
+  @Nullable
+  PerlNamespaceAnnotations getLocalAnnotations();
 }

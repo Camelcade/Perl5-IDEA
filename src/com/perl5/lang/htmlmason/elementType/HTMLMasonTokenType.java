@@ -24,16 +24,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonTokenType extends IElementType
-{
-	public HTMLMasonTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, HTMLMasonLanguage.INSTANCE);
-	}
+public class HTMLMasonTokenType extends IElementType {
+  public HTMLMasonTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, HTMLMasonLanguage.INSTANCE);
+  }
 
-	public String toString()
-	{
-		return "HTML::Mason: " + super.toString();
-	}
-
+  public String toString() {
+    return "HTML::Mason: " + super.toString();
+  }
 }

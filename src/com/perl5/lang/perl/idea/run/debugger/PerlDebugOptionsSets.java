@@ -23,18 +23,16 @@ import java.util.Map;
 /**
  * Created by hurricup on 18.05.2016.
  */
-public class PerlDebugOptionsSets
-{
-	public static final Map<String, String> STARTUP_OPTIONS = new THashMap<String, String>();
-	public static final Map<String, String> ROLE_OPTIONS = new THashMap<String, String>();
+public class PerlDebugOptionsSets {
+  public static final Map<String, String> STARTUP_OPTIONS = new THashMap<String, String>();
+  public static final Map<String, String> ROLE_OPTIONS = new THashMap<String, String>();
 
-	static
-	{
-		STARTUP_OPTIONS.put("COMPILE", "Stop as soon as possible");
-		STARTUP_OPTIONS.put("RUN", "Stop after compilation (use and BEGIN blocks are done)");
-		STARTUP_OPTIONS.put("BREAKPOINT", "Stop at first breakpoint");
+  static {
+    STARTUP_OPTIONS.put("COMPILE", "Stop as soon as possible");
+    STARTUP_OPTIONS.put("RUN", "Stop after compilation (use and BEGIN blocks are done)");
+    STARTUP_OPTIONS.put("BREAKPOINT", "Stop at first breakpoint");
 
-		ROLE_OPTIONS.put(PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process");
-		ROLE_OPTIONS.put(PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE");
-	}
+    ROLE_OPTIONS.put(PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process");
+    ROLE_OPTIONS.put(PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE");
+  }
 }

@@ -35,52 +35,45 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonFormattingBlock extends AbstractMasonFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns
-{
-	public HTMLMasonFormattingBlock(@NotNull ASTNode node,
-									@Nullable Wrap wrap,
-									@Nullable Alignment alignment,
-									@NotNull CommonCodeStyleSettings codeStyleSettings,
-									@NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-									@NotNull SpacingBuilder spacingBuilder,
-									@NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder)
-	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-	}
+public class HTMLMasonFormattingBlock extends AbstractMasonFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
+  public HTMLMasonFormattingBlock(@NotNull ASTNode node,
+                                  @Nullable Wrap wrap,
+                                  @Nullable Alignment alignment,
+                                  @NotNull CommonCodeStyleSettings codeStyleSettings,
+                                  @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+                                  @NotNull SpacingBuilder spacingBuilder,
+                                  @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder) {
+    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+  }
 
-	@Override
-	protected IElementType getLineOpenerToken()
-	{
-		return HTML_MASON_LINE_OPENER;
-	}
+  @Override
+  protected IElementType getLineOpenerToken() {
+    return HTML_MASON_LINE_OPENER;
+  }
 
-	@Override
-	protected boolean isNewLineForbidden(PerlFormattingBlock block)
-	{
-		return super.isNewLineForbidden(block) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(block.getNode().getPsi());
-	}
+  @Override
+  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
+    return super.isNewLineForbidden(block) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(block.getNode().getPsi());
+  }
 
-	@Override
-	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
-	{
-		return new HTMLMasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
-	}
+  @Override
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
+    return new HTMLMasonFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
+                                        getInjectedLanguageBlockBuilder());
+  }
 
-	@Override
-	protected PerlIndentProcessor getIndentProcessor()
-	{
-		return HTMLMasonIndentProcessor.INSTANCE;
-	}
+  @Override
+  protected PerlIndentProcessor getIndentProcessor() {
+    return HTMLMasonIndentProcessor.INSTANCE;
+  }
 
-	@Nullable
-	@Override
-	protected Indent getChildIndent()
-	{
-		IElementType elementType = getElementType();
-		if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK)
-		{
-			return Indent.getNormalIndent();
-		}
-		return super.getChildIndent();
-	}
+  @Nullable
+  @Override
+  protected Indent getChildIndent() {
+    IElementType elementType = getElementType();
+    if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK) {
+      return Indent.getNormalIndent();
+    }
+    return super.getChildIndent();
+  }
 }

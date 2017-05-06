@@ -26,15 +26,13 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes
-{
-	public PerlWordsScanner()
-	{
-		super(new PerlMergingLexerAdapter((Project) null),
-				PerlParserDefinition.IDENTIFIERS,
-				TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
-				PerlParserDefinition.LITERALS
-		);
-		setMayHaveFileRefsInLiterals(true);
-	}
+public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes {
+  public PerlWordsScanner() {
+    super(new PerlMergingLexerAdapter((Project)null),
+          PerlParserDefinition.IDENTIFIERS,
+          TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
+          PerlParserDefinition.LITERALS
+    );
+    setMayHaveFileRefsInLiterals(true);
+  }
 }

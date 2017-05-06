@@ -26,15 +26,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class PerlSwitchAnnotator extends PerlBaseAnnotator
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if (PerlSwitchParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType()))
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
-		}
-
-	}
+public class PerlSwitchAnnotator extends PerlBaseAnnotator {
+  @Override
+  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    if (PerlSwitchParserExtensionImpl.getTokenSet().contains(element.getNode().getElementType())) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_KEYWORD);
+    }
+  }
 }

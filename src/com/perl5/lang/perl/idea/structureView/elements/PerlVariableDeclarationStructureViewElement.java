@@ -21,11 +21,8 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 /**
  * Created by hurricup on 29.09.2015.
  */
-public class PerlVariableDeclarationStructureViewElement extends PerlLeafStructureViewElement
-{
-	public PerlVariableDeclarationStructureViewElement(PerlVariableDeclarationWrapper element)
-	{
-		super(element);
-	}
-
+public class PerlVariableDeclarationStructureViewElement extends PerlLeafStructureViewElement {
+  public PerlVariableDeclarationStructureViewElement(PerlVariableDeclarationWrapper element) {
+    super(element);
+  }
 }

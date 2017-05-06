@@ -26,37 +26,33 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.12.2015.
  */
-public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousElementTypes
-{
-	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),
-			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_NOSPACE_CLOSER, false),
-			new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER_SEMI, false),
+public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousElementTypes {
+  private static final BracePair[] PAIRS = new BracePair[]{
+    new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),
+    new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_NOSPACE_CLOSER, false),
+    new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER_SEMI, false),
 
-			new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_CLOSER, false),
-			new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_EXPR_CLOSER, false),
+    new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_CLOSER, false),
+    new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_EXPR_CLOSER, false),
 
-			new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
-			new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
+    new BracePair(MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
+    new BracePair(MOJO_BLOCK_EXPR_ESCAPED_OPENER, MOJO_BLOCK_EXPR_NOSPACE_CLOSER, false),
 
-			new BracePair(MOJO_BEGIN, MOJO_END, false),
-	};
+    new BracePair(MOJO_BEGIN, MOJO_END, false),
+  };
 
-	@Override
-	public BracePair[] getPairs()
-	{
-		return PAIRS;
-	}
+  @Override
+  public BracePair[] getPairs() {
+    return PAIRS;
+  }
 
-	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType)
-	{
-		return true;
-	}
+  @Override
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType) {
+    return true;
+  }
 
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
-		return openingBraceOffset;
-	}
+  @Override
+  public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
+    return openingBraceOffset;
+  }
 }

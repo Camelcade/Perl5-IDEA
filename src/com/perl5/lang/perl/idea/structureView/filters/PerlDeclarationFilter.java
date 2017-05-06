@@ -27,35 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlDeclarationFilter implements Filter
-{
-	public static final PerlDeclarationFilter INSTANCE = new PerlDeclarationFilter();
-	private static final String ID = "SHOW_DECLARATIONS";
+public class PerlDeclarationFilter implements Filter {
+  public static final PerlDeclarationFilter INSTANCE = new PerlDeclarationFilter();
+  private static final String ID = "SHOW_DECLARATIONS";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement) treeElement).isDeclaration());
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement)treeElement).isDeclaration());
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show declarations", null, PerlIcons.SUB_DECLARATION_GUTTER_ICON);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show declarations", null, PerlIcons.SUB_DECLARATION_GUTTER_ICON);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
-
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

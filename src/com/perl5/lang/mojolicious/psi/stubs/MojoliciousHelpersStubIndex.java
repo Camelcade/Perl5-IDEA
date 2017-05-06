@@ -24,21 +24,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelpersStubIndex extends PerlStubIndexBase<MojoliciousHelperDeclaration>
-{
-	public static final int VERSION = 3;
-	public static final StubIndexKey<String, MojoliciousHelperDeclaration> KEY = StubIndexKey.createIndexKey("perl.mojo.helper");
+public class MojoliciousHelpersStubIndex extends PerlStubIndexBase<MojoliciousHelperDeclaration> {
+  public static final int VERSION = 3;
+  public static final StubIndexKey<String, MojoliciousHelperDeclaration> KEY = StubIndexKey.createIndexKey("perl.mojo.helper");
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, MojoliciousHelperDeclaration> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, MojoliciousHelperDeclaration> getKey() {
+    return KEY;
+  }
 }

@@ -35,43 +35,36 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlMooseAttribute
-{
-	public PerlMooseAttributeImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlMooseAttribute {
+  public PerlMooseAttributeImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlMooseAttributeImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlMooseAttributeImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	protected PerlMooseHasStatement getHasStatement()
-	{
-		//noinspection unchecked
-		return PsiTreeUtil.getParentOfType(this, PerlMooseHasStatement.class, true, PsiPerlStatement.class);
-	}
+  @Nullable
+  protected PerlMooseHasStatement getHasStatement() {
+    //noinspection unchecked
+    return PsiTreeUtil.getParentOfType(this, PerlMooseHasStatement.class, true, PsiPerlStatement.class);
+  }
 
-	@Override
-	public boolean isExtension()
-	{
-		PsiElement prevElement = getPrevSibling();
-		// fixme adjust
-		return false; //prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
-	}
+  @Override
+  public boolean isExtension() {
+    PsiElement prevElement = getPrevSibling();
+    // fixme adjust
+    return false; //prevElement instanceof PerlStringContentElement && prevElement.getNode().getElementType() == PerlElementTypes.STRING_PLUS;
+  }
 
 
-	@NotNull
-	@Override
-	public List<PerlAnnotation> getAnnotationList()
-	{
-		PerlMooseHasStatement hasStatement = getHasStatement();
-		if (hasStatement != null)
-		{
-			return PerlPsiUtil.collectAnnotations(hasStatement);
-		}
-		return super.getAnnotationList();
-	}
+  @NotNull
+  @Override
+  public List<PerlAnnotation> getAnnotationList() {
+    PerlMooseHasStatement hasStatement = getHasStatement();
+    if (hasStatement != null) {
+      return PerlPsiUtil.collectAnnotations(hasStatement);
+    }
+    return super.getAnnotationList();
+  }
 }

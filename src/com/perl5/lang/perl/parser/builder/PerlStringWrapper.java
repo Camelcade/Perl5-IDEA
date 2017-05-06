@@ -25,55 +25,46 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 23.04.2016.
  */
 @Deprecated // should wrap all psi element
-public class PerlStringWrapper
-{
-	private final IElementType myTargetElementType;
+public class PerlStringWrapper {
+  private final IElementType myTargetElementType;
 
-	public PerlStringWrapper(@NotNull IElementType targetElementType)
-	{
-		myTargetElementType = targetElementType;
-	}
+  public PerlStringWrapper(@NotNull IElementType targetElementType) {
+    myTargetElementType = targetElementType;
+  }
 
-	public boolean canProcess()
-	{
-		return true;
-	}
+  public boolean canProcess() {
+    return true;
+  }
 
-	protected void processed()
-	{
+  protected void processed() {
 
-	}
+  }
 
-	@Nullable
-	public PsiBuilder.Marker wrapMarker(@NotNull PsiBuilder.Marker marker)
-	{
-		if (!canProcess())
-		{
-			return null;
-		}
+  @Nullable
+  public PsiBuilder.Marker wrapMarker(@NotNull PsiBuilder.Marker marker) {
+    if (!canProcess()) {
+      return null;
+    }
 
-		PsiBuilder.Marker m = marker.precede();
-		m.done(myTargetElementType);
+    PsiBuilder.Marker m = marker.precede();
+    m.done(myTargetElementType);
 
-		processed();
+    processed();
 
-		return m;
-	}
+    return m;
+  }
 
-	public PsiBuilder.Marker wrapNextToken(@NotNull PerlBuilder b)
-	{
-		if (!canProcess())
-		{
-			return null;
-		}
+  public PsiBuilder.Marker wrapNextToken(@NotNull PerlBuilder b) {
+    if (!canProcess()) {
+      return null;
+    }
 
-		PsiBuilder.Marker m = b.mark();
-		b.advanceLexer();
-		m.done(myTargetElementType);
+    PsiBuilder.Marker m = b.mark();
+    b.advanceLexer();
+    m.done(myTargetElementType);
 
-		processed();
+    processed();
 
-		return m;
-	}
-
+    return m;
+  }
 }

@@ -27,16 +27,13 @@ import java.util.List;
 /**
  * Created by hurricup on 07.11.2016.
  */
-public class PerlCallArgumentsMixin extends PerlCompositeElementImpl
-{
-	public PerlCallArgumentsMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlCallArgumentsMixin extends PerlCompositeElementImpl {
+  public PerlCallArgumentsMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	public List<PsiPerlExpr> getArgumentsList()
-	{
-		return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
-	}
+  @NotNull
+  public List<PsiPerlExpr> getArgumentsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
+  }
 }

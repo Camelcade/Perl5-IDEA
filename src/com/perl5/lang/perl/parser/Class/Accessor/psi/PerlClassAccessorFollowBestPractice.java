@@ -19,6 +19,5 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface PerlClassAccessorFollowBestPractice extends PerlClassAccessorSub
-{
+public interface PerlClassAccessorFollowBestPractice extends PerlClassAccessorSub {
 }

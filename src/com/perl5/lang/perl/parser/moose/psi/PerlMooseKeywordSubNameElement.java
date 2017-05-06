@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public interface PerlMooseKeywordSubNameElement extends PerlSubNameElement
-{
+public interface PerlMooseKeywordSubNameElement extends PerlSubNameElement {
 }

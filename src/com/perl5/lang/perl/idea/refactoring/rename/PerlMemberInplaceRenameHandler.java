@@ -34,38 +34,31 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.04.2016.
  */
-public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler
-{
-	@NotNull
-	@Override
-	protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element, PsiNameIdentifierOwner elementToRename, Editor editor)
-	{
-		return new PerlMemberInplaceRenamer(elementToRename, element, editor);
-	}
+public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
+  @NotNull
+  @Override
+  protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element, PsiNameIdentifierOwner elementToRename, Editor editor) {
+    return new PerlMemberInplaceRenamer(elementToRename, element, editor);
+  }
 
-	@Override
-	protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file)
-	{
-		return !(element instanceof PerlRenameUsagesSubstitutor) && isAvailableFromParent(element, editor, file);
-	}
+  @Override
+  protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
+    return !(element instanceof PerlRenameUsagesSubstitutor) && isAvailableFromParent(element, editor, file);
+  }
 
-	// this is a copy-paste from parent class, because it's uses RefactoringSupportProvider
-	protected boolean isAvailableFromParent(PsiElement element, Editor editor, PsiFile file)
-	{
-		PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());
-		if (nameSuggestionContext == null && editor.getCaretModel().getOffset() > 0)
-		{
-			nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset() - 1);
-		}
+  // this is a copy-paste from parent class, because it's uses RefactoringSupportProvider
+  protected boolean isAvailableFromParent(PsiElement element, Editor editor, PsiFile file) {
+    PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());
+    if (nameSuggestionContext == null && editor.getCaretModel().getOffset() > 0) {
+      nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset() - 1);
+    }
 
-		if (element == null && LookupManager.getActiveLookup(editor) != null)
-		{
-			element = PsiTreeUtil.getParentOfType(nameSuggestionContext, PsiNamedElement.class);
-		}
-		final RefactoringSupportProvider
-				supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
-		return editor.getSettings().isVariableInplaceRenameEnabled()
-				&& supportProvider instanceof PerlRefactoringSupportProvider;
-	}
-
+    if (element == null && LookupManager.getActiveLookup(editor) != null) {
+      element = PsiTreeUtil.getParentOfType(nameSuggestionContext, PsiNamedElement.class);
+    }
+    final RefactoringSupportProvider
+      supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
+    return editor.getSettings().isVariableInplaceRenameEnabled()
+           && supportProvider instanceof PerlRefactoringSupportProvider;
+  }
 }

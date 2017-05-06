@@ -23,15 +23,12 @@ import com.intellij.lang.Language;
  * This filetype represents file with pure perl syntax.
  * Such files can be deparsed and re-formatted with Perl::Tidy
  */
-public abstract class PurePerlFileType extends PerlFileType
-{
-	public PurePerlFileType()
-	{
-		super();
-	}
+public abstract class PurePerlFileType extends PerlFileType {
+  public PurePerlFileType() {
+    super();
+  }
 
-	public PurePerlFileType(Language language)
-	{
-		super(language);
-	}
+  public PurePerlFileType(Language language) {
+    super(language);
+  }
 }

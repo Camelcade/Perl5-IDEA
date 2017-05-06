@@ -31,43 +31,36 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLanguageInjectionHost
-{
-	public Perl5RegexpMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLanguageInjectionHost {
+  public Perl5RegexpMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean isValidHost()
-	{
-		return PerlLocalSettings.getInstance(getProject()).ENABLE_REGEX_INJECTIONS && isMatchRegexp();
-	}
+  @Override
+  public boolean isValidHost() {
+    return PerlLocalSettings.getInstance(getProject()).ENABLE_REGEX_INJECTIONS && isMatchRegexp();
+  }
 
-	@Override
-	public PsiLanguageInjectionHost updateText(@NotNull String text)
-	{
-		return ElementManipulators.handleContentChange(this, text);
-	}
+  @Override
+  public PsiLanguageInjectionHost updateText(@NotNull String text) {
+    return ElementManipulators.handleContentChange(this, text);
+  }
 
-	@NotNull
-	@Override
-	public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper()
-	{
-		return new Perl5RegexpLiteralEscaper(this);
-	}
+  @NotNull
+  @Override
+  public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
+    return new Perl5RegexpLiteralEscaper(this);
+  }
 
-	/**
-	 * @return true if it's a match part, false if replace one
-	 */
-	public boolean isMatchRegexp()
-	{
-		PsiElement parent = getParent();
-		if (!(parent instanceof PsiPerlReplacementRegex))
-		{
-			return true;
-		}
-		Perl5RegexpMixin[] regexps = PsiTreeUtil.getChildrenOfType(parent, Perl5RegexpMixin.class);
-		return regexps != null && regexps.length > 0 && regexps[0] == this;
-	}
+  /**
+   * @return true if it's a match part, false if replace one
+   */
+  public boolean isMatchRegexp() {
+    PsiElement parent = getParent();
+    if (!(parent instanceof PsiPerlReplacementRegex)) {
+      return true;
+    }
+    Perl5RegexpMixin[] regexps = PsiTreeUtil.getChildrenOfType(parent, Perl5RegexpMixin.class);
+    return regexps != null && regexps.length > 0 && regexps[0] == this;
+  }
 }

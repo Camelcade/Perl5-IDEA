@@ -23,8 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.03.2016.
  */
-public interface HTMLMasonFlagsStatementStub extends StubElement<HTMLMasonFlagsStatement>
-{
-	@Nullable
-	String getParentComponentPath();
+public interface HTMLMasonFlagsStatementStub extends StubElement<HTMLMasonFlagsStatement> {
+  @Nullable
+  String getParentComponentPath();
 }

@@ -30,37 +30,32 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns
-{
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, final @NotNull CompletionResultSet result)
-	{
-		final PsiElement element = parameters.getOriginalPosition();
-		if (LABEL_DECLARATION_PATTERN.accepts(element))
-		{
-			// unresolved labels should be here
-		}
-		else if (LABEL_IN_GOTO_PATTERN.accepts(element))
-		{
-			PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration ->
-			{
-				if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
-				{
-					result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
-				}
-				return true;
-			});
-		}
-		else if (LABEL_IN_NEXT_LAST_REDO_PATTERN.accepts(element))
-		{
-			PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration ->
-			{
-				if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName()))
-				{
-					result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
-				}
-				return true;
-			});
-		}
-	}
+public class PerlLabelCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
+  @Override
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                ProcessingContext context,
+                                final @NotNull CompletionResultSet result) {
+    final PsiElement element = parameters.getOriginalPosition();
+    if (LABEL_DECLARATION_PATTERN.accepts(element)) {
+      // unresolved labels should be here
+    }
+    else if (LABEL_IN_GOTO_PATTERN.accepts(element)) {
+      PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration ->
+      {
+        if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
+          result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
+        }
+        return true;
+      });
+    }
+    else if (LABEL_IN_NEXT_LAST_REDO_PATTERN.accepts(element)) {
+      PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration ->
+      {
+        if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
+          result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
+        }
+        return true;
+      });
+    }
+  }
 }

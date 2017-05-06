@@ -25,37 +25,31 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 /**
  * Created by hurricup on 15.11.2015.
  */
-public class PerlFormattingStatementModifierWrap implements PerlFormattingOperation
-{
-	private final PsiPerlStatementModifier myModifier;
+public class PerlFormattingStatementModifierWrap implements PerlFormattingOperation {
+  private final PsiPerlStatementModifier myModifier;
 
-	public PerlFormattingStatementModifierWrap(PsiPerlStatementModifier container)
-	{
-		myModifier = container;
-	}
+  public PerlFormattingStatementModifierWrap(PsiPerlStatementModifier container) {
+    myModifier = container;
+  }
 
-	@Override
-	public int apply()
-	{
-		int delta = 0;
+  @Override
+  public int apply() {
+    int delta = 0;
 
-		if (getMyModifier().isValid())
-		{
-			PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
+    if (getMyModifier().isValid()) {
+      PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
 
-			if (expression != null && !(expression instanceof PsiPerlParenthesisedExpr))
-			{
-				PsiPerlParenthesisedExpr parenthesisedExpression = PerlElementFactory.createParenthesisedExpression(getMyModifier().getProject());
-				parenthesisedExpression.addAfter(expression.copy(), parenthesisedExpression.getFirstChild());
-				delta = expression.getNode().getTextLength() - parenthesisedExpression.getNode().getTextLength();
-				expression.replace(parenthesisedExpression);
-			}
-		}
-		return delta;
-	}
+      if (expression != null && !(expression instanceof PsiPerlParenthesisedExpr)) {
+        PsiPerlParenthesisedExpr parenthesisedExpression = PerlElementFactory.createParenthesisedExpression(getMyModifier().getProject());
+        parenthesisedExpression.addAfter(expression.copy(), parenthesisedExpression.getFirstChild());
+        delta = expression.getNode().getTextLength() - parenthesisedExpression.getNode().getTextLength();
+        expression.replace(parenthesisedExpression);
+      }
+    }
+    return delta;
+  }
 
-	public PsiPerlStatementModifier getMyModifier()
-	{
-		return myModifier;
-	}
+  public PsiPerlStatementModifier getMyModifier() {
+    return myModifier;
+  }
 }

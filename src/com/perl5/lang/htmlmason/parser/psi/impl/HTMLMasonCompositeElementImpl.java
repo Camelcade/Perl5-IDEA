@@ -26,21 +26,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonCompositeElementImpl extends PerlCompositeElementImpl
-{
-	public HTMLMasonCompositeElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class HTMLMasonCompositeElementImpl extends PerlCompositeElementImpl {
+  public HTMLMasonCompositeElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
+  }
 
-	public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return super.processDeclarations(processor, state, lastParent, place);
-	}
+  public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor,
+                                            @NotNull ResolveState state,
+                                            PsiElement lastParent,
+                                            @NotNull PsiElement place) {
+    return super.processDeclarations(processor, state, lastParent, place);
+  }
 }

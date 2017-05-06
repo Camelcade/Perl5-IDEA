@@ -29,26 +29,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.08.2015.
  */
-public class PerlUnusedTypeGlobInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitGlobVariable(@NotNull PsiPerlGlobVariable o)
-			{
-				if (o.getExplicitPackageName() == null && PerlGlobUtil.BUILT_IN.contains(o.getName()))
-				{
-				}
-				else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null)
-				{
-					holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-				}
-
-			}
-		};
-	}
+public class PerlUnusedTypeGlobInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitGlobVariable(@NotNull PsiPerlGlobVariable o) {
+        if (o.getExplicitPackageName() == null && PerlGlobUtil.BUILT_IN.contains(o.getName())) {
+        }
+        else if (ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {
+          holder.registerProblem(o, "Unused typeglob alias", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+        }
+      }
+    };
+  }
 }

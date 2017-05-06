@@ -26,17 +26,14 @@ import java.util.List;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public abstract class AbstractMasonFoldingBuilder extends PerlFoldingBuilder
-{
-	public static void foldElement(PsiElement element, List<FoldingDescriptor> myDescriptors, Document myDocument)
-	{
-		PsiElement firstChild = element.getFirstChild();
-		int leftMargin = firstChild == null || firstChild.getNextSibling() == null ? 0 : firstChild.getNode().getTextLength();
+public abstract class AbstractMasonFoldingBuilder extends PerlFoldingBuilder {
+  public static void foldElement(PsiElement element, List<FoldingDescriptor> myDescriptors, Document myDocument) {
+    PsiElement firstChild = element.getFirstChild();
+    int leftMargin = firstChild == null || firstChild.getNextSibling() == null ? 0 : firstChild.getNode().getTextLength();
 
-		PsiElement lastChild = element.getLastChild();
-		int rightMargin = lastChild == null || lastChild == firstChild ? 0 : lastChild.getNode().getTextLength();
+    PsiElement lastChild = element.getLastChild();
+    int rightMargin = lastChild == null || lastChild == firstChild ? 0 : lastChild.getNode().getTextLength();
 
-		addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0);
-
-	}
+    addDescriptorFor(myDescriptors, myDocument, element, leftMargin, rightMargin, 0);
+  }
 }

@@ -31,115 +31,92 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlAnnotator extends PerlBaseAnnotator
-{
-	@Override
-	public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		IElementType elementType = PsiUtilCore.getElementType(element);
-		if (elementType == NYI_STATEMENT)
-		{
-			holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
-		}
+public class PerlAnnotator extends PerlBaseAnnotator {
+  @Override
+  public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == NYI_STATEMENT) {
+      holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
+    }
 /*
-		else if (elementType == REGEX_CHAR_CLASS && element.getTextLength() == 1 && ((LeafPsiElement) element).getChars().charAt(0) == '-')
+                else if (elementType == REGEX_CHAR_CLASS && element.getTextLength() == 1 && ((LeafPsiElement) element).getChars().charAt(0) == '-')
 		{
 			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS);
 		}
 */
-		else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR)
-		{
-			holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
-		}
-		else if (elementType == PACKAGE)
-		{
-			assert element instanceof PerlNamespaceElement;
-			PerlNamespaceElement namespaceElement = (PerlNamespaceElement) element;
+    else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR) {
+      holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
+    }
+    else if (elementType == PACKAGE) {
+      assert element instanceof PerlNamespaceElement;
+      PerlNamespaceElement namespaceElement = (PerlNamespaceElement)element;
 
-			PsiElement parent = namespaceElement.getParent();
+      PsiElement parent = namespaceElement.getParent();
 
-			if (parent instanceof PerlNamespaceDefinition)
-			{
-				decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, false);
-			}
-			else
-			{
-				if (namespaceElement.isPragma())
-				{
-					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, false);
-				}
-				else if (namespaceElement.isBuiltin())
-				{
-					decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, false);
-				}
-			}
-		}
-		else if (elementType == CONSTANT_DEFINITION)
-		{
-			assert element instanceof PerlConstantDefinition;
-			PsiElement nameIdentifier = ((PerlConstantDefinition) element).getNameIdentifier();
-			if (nameIdentifier != null)
-			{
-				decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, false);
-			}
-		}
-		else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement
-		{
-			PsiElement parent = element.getParent();
-			if (parent instanceof PsiPerlSubDeclaration)
-			{
-				holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
-			}
-			else if (parent instanceof PerlSubDefinitionBase)
-			{
-				if ("AUTOLOAD".equals(((PerlSubNameElement) element).getName()))
-				{
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
-				}
-				else
-				{
-					holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
-				}
-			}
-			else if (parent instanceof PerlMethod)
-			{
-				// fixme don't we need to take multiple references here?
-				PsiElement grandParent = parent.getParent();
-				PerlNamespaceElement methodNamespace = ((PerlMethod) parent).getNamespaceElement();
+      if (parent instanceof PerlNamespaceDefinition) {
+        decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, false);
+      }
+      else {
+        if (namespaceElement.isPragma()) {
+          decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA, false);
+        }
+        else if (namespaceElement.isBuiltin()) {
+          decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, false);
+        }
+      }
+    }
+    else if (elementType == CONSTANT_DEFINITION) {
+      assert element instanceof PerlConstantDefinition;
+      PsiElement nameIdentifier = ((PerlConstantDefinition)element).getNameIdentifier();
+      if (nameIdentifier != null) {
+        decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, false);
+      }
+    }
+    else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement
+    {
+      PsiElement parent = element.getParent();
+      if (parent instanceof PsiPerlSubDeclaration) {
+        holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
+      }
+      else if (parent instanceof PerlSubDefinitionBase) {
+        if ("AUTOLOAD".equals(((PerlSubNameElement)element).getName())) {
+          holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+        }
+        else {
+          holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
+        }
+      }
+      else if (parent instanceof PerlMethod) {
+        // fixme don't we need to take multiple references here?
+        PsiElement grandParent = parent.getParent();
+        PerlNamespaceElement methodNamespace = ((PerlMethod)parent).getNamespaceElement();
 
-				if (
-						!(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?
-								&& (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
-								&& ((PerlSubNameElement) element).isBuiltIn()
-						)
-				{
-					decorateElement(element, holder, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
-				}
-				else
-				{
+        if (
+          !(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?
+          && (methodNamespace == null || methodNamespace.isCORE())    // no explicit NS or it's core
+          && ((PerlSubNameElement)element).isBuiltIn()
+          ) {
+          decorateElement(element, holder, PerlSyntaxHighlighter.PERL_SUB_BUILTIN);
+        }
+        else {
 
-					PsiReference reference = element.getReference();
+          PsiReference reference = element.getReference();
 
-					if (reference instanceof PerlSubReference)
-					{
-						((PerlSubReference) reference).multiResolve(false);
+          if (reference instanceof PerlSubReference) {
+            ((PerlSubReference)reference).multiResolve(false);
 
-						if (((PerlSubReference) reference).isConstant())
-						{
-							holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
-						}
-						else if (((PerlSubReference) reference).isAutoloaded())
-						{
-							holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
-						}
-						else if (((PerlSubReference) reference).isXSub())
-						{
-							holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
-						}
-					}
-				}
-			}
-		}
-
-	}
+            if (((PerlSubReference)reference).isConstant()) {
+              holder.createInfoAnnotation(element, "Constant").setTextAttributes(PerlSyntaxHighlighter.PERL_CONSTANT);
+            }
+            else if (((PerlSubReference)reference).isAutoloaded()) {
+              holder.createInfoAnnotation(element, "Auto-loaded sub").setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
+            }
+            else if (((PerlSubReference)reference).isXSub()) {
+              holder.createInfoAnnotation(element, "XSub").setTextAttributes(PerlSyntaxHighlighter.PERL_XSUB);
+            }
+          }
+        }
+      }
+    }
+  }
 }

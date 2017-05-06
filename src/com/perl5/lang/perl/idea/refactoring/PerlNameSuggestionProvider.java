@@ -28,18 +28,15 @@ import java.util.Set;
 /**
  * Created by hurricup on 12.06.2015.
  */
-public class PerlNameSuggestionProvider implements NameSuggestionProvider
-{
-	@Nullable
-	@Override
-	public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result)
-	{
-		if (element instanceof PerlHeredocOpener)
-		{
-			result.addAll(PerlLanguageInjector.LANGUAGE_MAP.keySet());
-		}
+public class PerlNameSuggestionProvider implements NameSuggestionProvider {
+  @Nullable
+  @Override
+  public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result) {
+    if (element instanceof PerlHeredocOpener) {
+      result.addAll(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+    }
 
-		// todo play with this
-		return SuggestedNameInfo.NULL_INFO;
-	}
+    // todo play with this
+    return SuggestedNameInfo.NULL_INFO;
+  }
 }

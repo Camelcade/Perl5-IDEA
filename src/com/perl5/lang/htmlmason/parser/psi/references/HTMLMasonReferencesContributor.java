@@ -24,18 +24,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonReferencesContributor extends PsiReferenceContributor implements HTMLMasonElementPatterns
-{
-	@Override
-	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
-	{
-		registrar.registerReferenceProvider(
-				HTML_MASON_COMPONENT_CALEE,
-				new HTMLMasonComponentReferencesProvider()
-		);
-		registrar.registerReferenceProvider(
-				HTML_MASON_FLAGS_PARENT,
-				new HTMLMasonFlagsReferencesProvider()
-		);
-	}
+public class HTMLMasonReferencesContributor extends PsiReferenceContributor implements HTMLMasonElementPatterns {
+  @Override
+  public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
+    registrar.registerReferenceProvider(
+      HTML_MASON_COMPONENT_CALEE,
+      new HTMLMasonComponentReferencesProvider()
+    );
+    registrar.registerReferenceProvider(
+      HTML_MASON_FLAGS_PARENT,
+      new HTMLMasonFlagsReferencesProvider()
+    );
+  }
 }

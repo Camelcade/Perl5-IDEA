@@ -30,18 +30,15 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 04.09.2015.
  * This provider is a temporary solution, allows to comment html parts of the template, see #414
  */
-public class EmbeddedPerlCommenterProvider implements MultipleLangCommentProvider
-{
-	@Nullable
-	@Override
-	public Commenter getLineCommenter(PsiFile file, Editor editor, Language lineStartLanguage, Language lineEndLanguage)
-	{
-		return LanguageCommenters.INSTANCE.forLanguage(lineStartLanguage);
-	}
+public class EmbeddedPerlCommenterProvider implements MultipleLangCommentProvider {
+  @Nullable
+  @Override
+  public Commenter getLineCommenter(PsiFile file, Editor editor, Language lineStartLanguage, Language lineEndLanguage) {
+    return LanguageCommenters.INSTANCE.forLanguage(lineStartLanguage);
+  }
 
-	@Override
-	public boolean canProcess(PsiFile file, FileViewProvider viewProvider)
-	{
-		return viewProvider instanceof EmbeddedPerlFileViewProvider;
-	}
+  @Override
+  public boolean canProcess(PsiFile file, FileViewProvider viewProvider) {
+    return viewProvider instanceof EmbeddedPerlFileViewProvider;
+  }
 }

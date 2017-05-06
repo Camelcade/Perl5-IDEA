@@ -22,38 +22,36 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlPackageMember extends PsiElement
-{
-	/**
-	 * Method for checking explicit package name for current element
-	 *
-	 * @return package name or null if n/a
-	 */
-	@Nullable
-	String getExplicitPackageName();
+public interface PerlPackageMember extends PsiElement {
+  /**
+   * Method for checking explicit package name for current element
+   *
+   * @return package name or null if n/a
+   */
+  @Nullable
+  String getExplicitPackageName();
 
-	/**
-	 * Trying to detect package name by traversing parents
-	 *
-	 * @return package name or null if not found
-	 */
-	@Nullable
-	String getContextPackageName();
+  /**
+   * Trying to detect package name by traversing parents
+   *
+   * @return package name or null if not found
+   */
+  @Nullable
+  String getContextPackageName();
 
-	/**
-	 * Trying to get the package name from explicit specification or by traversing
-	 *
-	 * @return package name for current element
-	 */
-	@Nullable
-	String getPackageName();
+  /**
+   * Trying to get the package name from explicit specification or by traversing
+   *
+   * @return package name for current element
+   */
+  @Nullable
+  String getPackageName();
 
-	/**
-	 * Returns fullname package::element
-	 *
-	 * @return name
-	 */
-	@Nullable
-	String getCanonicalName();
-
+  /**
+   * Returns fullname package::element
+   *
+   * @return name
+   */
+  @Nullable
+  String getCanonicalName();
 }

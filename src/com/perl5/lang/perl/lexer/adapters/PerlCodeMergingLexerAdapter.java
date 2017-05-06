@@ -35,149 +35,127 @@ import java.io.IOException;
  * First level adapter, working above Flex lexer. Merges code blocks into LP_CODE_BLOCK tokens
  * fixme would be better to use lookahead adapter here; currently small code blocks may be lexed twice
  */
-public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes
-{
-	private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
-	private final FlexLexer myFlex;
-	private int myBufferStart;
-	private IElementType myTokenType;
-	private CharSequence myText;
+public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes {
+  private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
+  private final FlexLexer myFlex;
+  private int myBufferStart;
+  private IElementType myTokenType;
+  private CharSequence myText;
 
-	private int myTokenStart;
-	private int myTokenEnd;
+  private int myTokenStart;
+  private int myTokenEnd;
 
-	private int myBufferEnd;
-	private int myState;
+  private int myBufferEnd;
+  private int myState;
 
-	private boolean myAllowToMergeCodeBlocks;
+  private boolean myAllowToMergeCodeBlocks;
 
-	public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks)
-	{
-		myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
-		myFlex = new PerlLexer(null).withProject(project);
-	}
+  public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks) {
+    myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
+    myFlex = new PerlLexer(null).withProject(project);
+  }
 
-	public FlexLexer getFlex()
-	{
-		return myFlex;
-	}
+  public FlexLexer getFlex() {
+    return myFlex;
+  }
 
-	@Override
-	public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, final int initialState)
-	{
-		myText = buffer;
-		myTokenStart = myTokenEnd = myBufferStart = startOffset;
-		myBufferEnd = endOffset;
-		myFlex.reset(myText, startOffset, endOffset, initialState);
-		myTokenType = null;
-	}
+  @Override
+  public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, final int initialState) {
+    myText = buffer;
+    myTokenStart = myTokenEnd = myBufferStart = startOffset;
+    myBufferEnd = endOffset;
+    myFlex.reset(myText, startOffset, endOffset, initialState);
+    myTokenType = null;
+  }
 
-	@Override
-	public int getState()
-	{
-		locateToken();
-		return myState;
-	}
+  @Override
+  public int getState() {
+    locateToken();
+    return myState;
+  }
 
-	@Override
-	public IElementType getTokenType()
-	{
-		locateToken();
-		return myTokenType;
-	}
+  @Override
+  public IElementType getTokenType() {
+    locateToken();
+    return myTokenType;
+  }
 
-	@Override
-	public int getTokenStart()
-	{
-		locateToken();
-		return myTokenStart;
-	}
+  @Override
+  public int getTokenStart() {
+    locateToken();
+    return myTokenStart;
+  }
 
-	@Override
-	public int getTokenEnd()
-	{
-		locateToken();
-		return myTokenEnd;
-	}
+  @Override
+  public int getTokenEnd() {
+    locateToken();
+    return myTokenEnd;
+  }
 
-	@Override
-	public void advance()
-	{
-		locateToken();
-		myTokenType = null;
-	}
+  @Override
+  public void advance() {
+    locateToken();
+    myTokenType = null;
+  }
 
-	@NotNull
-	@Override
-	public CharSequence getBufferSequence()
-	{
-		return myText;
-	}
+  @NotNull
+  @Override
+  public CharSequence getBufferSequence() {
+    return myText;
+  }
 
-	@Override
-	public int getBufferEnd()
-	{
-		return myBufferEnd;
-	}
+  @Override
+  public int getBufferEnd() {
+    return myBufferEnd;
+  }
 
-	protected void locateToken()
-	{
-		if (myTokenType != null)
-		{
-			return;
-		}
+  protected void locateToken() {
+    if (myTokenType != null) {
+      return;
+    }
 
-		try
-		{
-			myTokenStart = myFlex.getTokenEnd();
-			myState = myFlex.yystate();
-			myTokenType = myFlex.advance();
-			myTokenEnd = myFlex.getTokenEnd();
-			mergeCode();
-		}
-		catch (Exception | Error e)
-		{
-			LOG.error(myFlex.getClass().getName(), e);
-			myTokenType = TokenType.WHITE_SPACE;
-			myTokenEnd = myBufferEnd;
-		}
-	}
+    try {
+      myTokenStart = myFlex.getTokenEnd();
+      myState = myFlex.yystate();
+      myTokenType = myFlex.advance();
+      myTokenEnd = myFlex.getTokenEnd();
+      mergeCode();
+    }
+    catch (Exception | Error e) {
+      LOG.error(myFlex.getClass().getName(), e);
+      myTokenType = TokenType.WHITE_SPACE;
+      myTokenEnd = myBufferEnd;
+    }
+  }
 
-	protected void mergeCode() throws IOException
-	{
-		if (myTokenType != LEFT_BRACE_CODE_START)
-		{
-			return;
-		}
-		if (myTokenStart == myBufferStart || !myAllowToMergeCodeBlocks)    // block reparsing
-		{
-			myTokenType = LEFT_BRACE;
-			return;
-		}
+  protected void mergeCode() throws IOException {
+    if (myTokenType != LEFT_BRACE_CODE_START) {
+      return;
+    }
+    if (myTokenStart == myBufferStart || !myAllowToMergeCodeBlocks)    // block reparsing
+    {
+      myTokenType = LEFT_BRACE;
+      return;
+    }
 
-		int bracesDepth = 0;
-		while (true)
-		{
-			IElementType nextTokenType = myFlex.advance();
-			if (nextTokenType == null)
-			{
-				break;
-			}
-			else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE_START)
-			{
-				bracesDepth++;
-			}
-			else if (nextTokenType == RIGHT_BRACE)
-			{
-				if (bracesDepth == 0)
-				{
-					break;
-				}
-				bracesDepth--;
-			}
-		}
-		myTokenEnd = myFlex.getTokenEnd();
-		myTokenType = LP_CODE_BLOCK;
-		myState = PerlLexer.YYINITIAL;
-	}
+    int bracesDepth = 0;
+    while (true) {
+      IElementType nextTokenType = myFlex.advance();
+      if (nextTokenType == null) {
+        break;
+      }
+      else if (nextTokenType == LEFT_BRACE || nextTokenType == LEFT_BRACE_CODE_START) {
+        bracesDepth++;
+      }
+      else if (nextTokenType == RIGHT_BRACE) {
+        if (bracesDepth == 0) {
+          break;
+        }
+        bracesDepth--;
+      }
+    }
+    myTokenEnd = myFlex.getTokenEnd();
+    myTokenType = LP_CODE_BLOCK;
+    myState = PerlLexer.YYINITIAL;
+  }
 }

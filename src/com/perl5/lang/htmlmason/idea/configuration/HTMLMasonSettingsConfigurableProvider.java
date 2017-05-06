@@ -24,26 +24,21 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonSettingsConfigurableProvider extends ConfigurableProvider
-{
-	Project project;
+public class HTMLMasonSettingsConfigurableProvider extends ConfigurableProvider {
+  Project project;
 
-	public HTMLMasonSettingsConfigurableProvider(Project project)
-	{
-		this.project = project;
-	}
+  public HTMLMasonSettingsConfigurableProvider(Project project) {
+    this.project = project;
+  }
 
-	@Nullable
-	@Override
-	public Configurable createConfigurable()
-	{
-		return new HTMLMasonSettingsConfigurable(project);
-	}
+  @Nullable
+  @Override
+  public Configurable createConfigurable() {
+    return new HTMLMasonSettingsConfigurable(project);
+  }
 
-	@Override
-	public boolean canCreateConfigurable()
-	{
-		return project != null;
-	}
-
+  @Override
+  public boolean canCreateConfigurable() {
+    return project != null;
+  }
 }

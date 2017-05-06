@@ -36,119 +36,104 @@ import java.util.List;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMethodDefinition
-{
-	// fixme see the #717
-	protected static final String DEFAULT_INVOCANT_NAME = "$self";
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
+public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub>
+  implements PerlMethodDefinition {
+  // fixme see the #717
+  protected static final String DEFAULT_INVOCANT_NAME = "$self";
+  protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
 
-	public PerlMethodDefinitionImplMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PerlMethodDefinitionImplMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlMethodDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlMethodDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@NotNull
-	public static String getDefaultInvocantName()
-	{
-		return DEFAULT_INVOCANT_NAME;
-	}
+  @NotNull
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+    if (isValid()) {
+      newImplicitVariables.add(new PerlVariableLightImpl(
+        getManager(),
+        PerlLanguage.INSTANCE,
+        getDefaultInvocantName(),
+        true,
+        false,
+        true,
+        this
+      ));
+    }
+    return newImplicitVariables;
+  }
 
-	@NotNull
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
-		if (isValid())
-		{
-			newImplicitVariables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					getDefaultInvocantName(),
-					true,
-					false,
-					true,
-					this
-			));
-		}
-		return newImplicitVariables;
-	}
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		return true;
-	}
+  @Nullable
+  @Override
+  public PsiElement getSignatureContainer() {
+    return getMethodSignatureContent();
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return getMethodSignatureContent();
-	}
+  @Override
+  protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
+    if (signatureElement instanceof PsiPerlMethodSignatureInvocant)    // explicit invocant
+    {
+      PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
+      if (variable != null) {
+        arguments.add(new PerlSubArgument(
+          variable.getActualType(),
+          variable.getName(),
+          "",
+          false
+        ));
+      }
+    }
+    else if (signatureElement instanceof PerlVariableDeclarationWrapper) {
+      if (arguments.isEmpty()) // implicit invocant
+      {
+        arguments.add(new PerlSubArgument(
+          PerlVariableType.SCALAR,
+          getDefaultInvocantName().substring(1),
+          "",    // here we could push context package, but now it's unnecessary
+          false
+        ));
+      }
 
-	@Override
-	protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments)
-	{
-		if (signatureElement instanceof PsiPerlMethodSignatureInvocant)    // explicit invocant
-		{
-			PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
-			if (variable != null)
-			{
-				arguments.add(new PerlSubArgument(
-						variable.getActualType(),
-						variable.getName(),
-						"",
-						false
-				));
-			}
-		}
-		else if (signatureElement instanceof PerlVariableDeclarationWrapper)
-		{
-			if (arguments.isEmpty()) // implicit invocant
-			{
-				arguments.add(new PerlSubArgument(
-						PerlVariableType.SCALAR,
-						getDefaultInvocantName().substring(1),
-						"",    // here we could push context package, but now it's unnecessary
-						false
-				));
-			}
+      return super.processSignatureElement(signatureElement, arguments);
+    }
+    return false;
+  }
 
-			return super.processSignatureElement(signatureElement, arguments);
-		}
-		return false;
-	}
+  /**
+   * Checks if method has an explicit invocant
+   *
+   * @return check result
+   */
+  private boolean hasExplicitInvocant() {
+    PsiPerlMethodSignatureContent methodSignatureContent = getMethodSignatureContent();
+    return methodSignatureContent != null && methodSignatureContent.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
+  }
 
-	/**
-	 * Checks if method has an explicit invocant
-	 *
-	 * @return check result
-	 */
-	private boolean hasExplicitInvocant()
-	{
-		PsiPerlMethodSignatureContent methodSignatureContent = getMethodSignatureContent();
-		return methodSignatureContent != null && methodSignatureContent.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
-	}
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (hasExplicitInvocant()) {
+      return Collections.emptyList();
+    }
+    else {
+      if (myImplicitVariables == null) {
+        myImplicitVariables = buildImplicitVariables();
+      }
+      return myImplicitVariables;
+    }
+  }
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (hasExplicitInvocant())
-		{
-			return Collections.emptyList();
-		}
-		else
-		{
-			if (myImplicitVariables == null)
-			{
-				myImplicitVariables = buildImplicitVariables();
-			}
-			return myImplicitVariables;
-		}
-	}
+  @NotNull
+  public static String getDefaultInvocantName() {
+    return DEFAULT_INVOCANT_NAME;
+  }
 }

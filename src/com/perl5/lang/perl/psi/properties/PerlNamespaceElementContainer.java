@@ -23,13 +23,12 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlNamespaceElementContainer extends PsiElement
-{
-	/**
-	 * Trying to search for netsted NamespaceElement
-	 *
-	 * @return psi element or null
-	 */
-	@Nullable
-	PerlNamespaceElement getNamespaceElement();
+public interface PerlNamespaceElementContainer extends PsiElement {
+  /**
+   * Trying to search for netsted NamespaceElement
+   *
+   * @return psi element or null
+   */
+  @Nullable
+  PerlNamespaceElement getNamespaceElement();
 }

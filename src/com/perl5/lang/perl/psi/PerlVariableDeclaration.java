@@ -28,22 +28,21 @@ import java.util.Collection;
  * Created by hurricup on 27.05.2015.
  * Declarations marker
  */
-public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember
-{
-	/**
-	 * Returns explicit declared type
-	 *
-	 * @return declaration type name or null
-	 */
-	@Nullable
-	String getDeclarationType();
+public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember {
+  /**
+   * Returns explicit declared type
+   *
+   * @return declaration type name or null
+   */
+  @Nullable
+  String getDeclarationType();
 
-	@NotNull
-	Collection<PsiPerlArrayVariable> getArrayVariableList();
+  @NotNull
+  Collection<PsiPerlArrayVariable> getArrayVariableList();
 
-	@NotNull
-	Collection<PsiPerlHashVariable> getHashVariableList();
+  @NotNull
+  Collection<PsiPerlHashVariable> getHashVariableList();
 
-	@NotNull
-	Collection<PsiPerlScalarVariable> getScalarVariableList();
+  @NotNull
+  Collection<PsiPerlScalarVariable> getScalarVariableList();
 }

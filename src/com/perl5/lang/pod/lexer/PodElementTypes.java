@@ -22,7 +22,6 @@ import com.perl5.lang.pod.elementTypes.PodTokenType;
 /**
  * Created by hurricup on 30.03.2016.
  */
-public interface PodElementTypes extends PodElementTypesGenerated
-{
-	IElementType POD_OUTER = new PodTokenType("POD_OUTER");
+public interface PodElementTypes extends PodElementTypesGenerated {
+  IElementType POD_OUTER = new PodTokenType("POD_OUTER");
 }

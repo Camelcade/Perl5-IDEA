@@ -28,40 +28,34 @@ import java.util.Collections;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlSuspendContext extends XSuspendContext
-{
-	private final XExecutionStack myXExecutionStack;
-	private final XDebugSession myDebugSession;
-	private final PerlDebugThread myDebugThread;
+public class PerlSuspendContext extends XSuspendContext {
+  private final XExecutionStack myXExecutionStack;
+  private final XDebugSession myDebugSession;
+  private final PerlDebugThread myDebugThread;
 
-	public PerlSuspendContext(PerlStackFrameDescriptor[] eventStackFrames, XDebugSession session, PerlDebugThread thread)
-	{
-		myDebugSession = session;
-		myDebugThread = thread;
-		myXExecutionStack = new PerlExecutionStack(eventStackFrames, this);
-	}
+  public PerlSuspendContext(PerlStackFrameDescriptor[] eventStackFrames, XDebugSession session, PerlDebugThread thread) {
+    myDebugSession = session;
+    myDebugThread = thread;
+    myXExecutionStack = new PerlExecutionStack(eventStackFrames, this);
+  }
 
-	@Nullable
-	@Override
-	public XExecutionStack getActiveExecutionStack()
-	{
-		return myXExecutionStack;
-	}
+  @Nullable
+  @Override
+  public XExecutionStack getActiveExecutionStack() {
+    return myXExecutionStack;
+  }
 
-	@Override
-	public void computeExecutionStacks(XExecutionStackContainer container)
-	{
-		container.addExecutionStack(Collections.singletonList(myXExecutionStack), true);
-	}
+  @Override
+  public void computeExecutionStacks(XExecutionStackContainer container) {
+    container.addExecutionStack(Collections.singletonList(myXExecutionStack), true);
+  }
 
-	public XDebugSession getDebugSession()
-	{
-		return myDebugSession;
-	}
+  public XDebugSession getDebugSession() {
+    return myDebugSession;
+  }
 
-	@NotNull
-	public PerlDebugThread getDebugThread()
-	{
-		return myDebugThread;
-	}
+  @NotNull
+  public PerlDebugThread getDebugThread() {
+    return myDebugThread;
+  }
 }

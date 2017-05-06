@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlCaseDefaultCompoundImpl extends PerlCompositeElementImpl implements PerlCaseDefaultCompound
-{
-	public PerlCaseDefaultCompoundImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlCaseDefaultCompoundImpl extends PerlCompositeElementImpl implements PerlCaseDefaultCompound {
+  public PerlCaseDefaultCompoundImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

@@ -28,26 +28,21 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlStructureViewFactory implements PsiStructureViewFactory
-{
-	@Nullable
-	@Override
-	public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile)
-	{
-		return new TreeBasedStructureViewBuilder()
-		{
-			@NotNull
-			@Override
-			public StructureViewModel createStructureViewModel(@Nullable Editor editor)
-			{
-				return new PerlStructureViewModel(psiFile, editor);
-			}
+public class PerlStructureViewFactory implements PsiStructureViewFactory {
+  @Nullable
+  @Override
+  public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile) {
+    return new TreeBasedStructureViewBuilder() {
+      @NotNull
+      @Override
+      public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
+        return new PerlStructureViewModel(psiFile, editor);
+      }
 
-			@Override
-			public boolean isRootNodeShown()
-			{
-				return false;
-			}
-		};
-	}
+      @Override
+      public boolean isRootNodeShown() {
+        return false;
+      }
+    };
+  }
 }

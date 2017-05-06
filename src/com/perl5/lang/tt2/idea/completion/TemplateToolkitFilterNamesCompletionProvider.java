@@ -28,11 +28,9 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitFilterNamesCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result)
-	{
-		result.addAllElements(Arrays.asList(TemplateToolkitFilterNameMacro.LOOKUP_ELEMENTS));
-	}
+public class TemplateToolkitFilterNamesCompletionProvider extends CompletionProvider<CompletionParameters> {
+  @Override
+  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+    result.addAllElements(Arrays.asList(TemplateToolkitFilterNameMacro.LOOKUP_ELEMENTS));
+  }
 }

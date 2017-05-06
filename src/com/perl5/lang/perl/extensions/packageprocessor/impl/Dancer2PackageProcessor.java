@@ -24,20 +24,16 @@ import java.util.List;
 /**
  * Created by hurricup on 02.06.2016.
  */
-public class Dancer2PackageProcessor extends DancerPackageProcessor
-{
-	private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
+public class Dancer2PackageProcessor extends DancerPackageProcessor {
+  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
 
-	static
-	{
-		for (String keyword : PerlDancer2DSL.DSL_KEYWORDS)
-		{
-			EXPORT_DESCRIPTORS.add(new PerlExportDescriptor("Dancer2", keyword, "Dancer2::Core::DSL"));
-		}
-	}
+  static {
+    for (String keyword : PerlDancer2DSL.DSL_KEYWORDS) {
+      EXPORT_DESCRIPTORS.add(new PerlExportDescriptor("Dancer2", keyword, "Dancer2::Core::DSL"));
+    }
+  }
 
-	public List<PerlExportDescriptor> getExportDescriptors()
-	{
-		return EXPORT_DESCRIPTORS;
-	}
+  public List<PerlExportDescriptor> getExportDescriptors() {
+    return EXPORT_DESCRIPTORS;
+  }
 }

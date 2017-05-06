@@ -23,6 +23,5 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlReferencesProvider
-{
+public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlReferencesProvider {
 }

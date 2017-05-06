@@ -26,14 +26,11 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodSyntaxHighlighterFactory extends SyntaxHighlighterFactory
-{
+public class PodSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
 
-	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new PodSyntaxHighlighter(project);
-
-	}
+  @Override
+  @NotNull
+  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+    return new PodSyntaxHighlighter(project);
+  }
 }

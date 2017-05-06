@@ -22,10 +22,8 @@ import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileElementType extends PerlFileElementType
-{
-	public HTMLMasonFileElementType(String debugName, Language language)
-	{
-		super(debugName, language);
-	}
+public class HTMLMasonFileElementType extends PerlFileElementType {
+  public HTMLMasonFileElementType(String debugName, Language language) {
+    super(debugName, language);
+  }
 }

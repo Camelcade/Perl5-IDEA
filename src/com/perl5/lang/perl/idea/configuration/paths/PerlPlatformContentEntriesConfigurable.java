@@ -42,118 +42,100 @@ import java.util.List;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlPlatformContentEntriesConfigurable implements Configurable
-{
-	private final Module myModule;
-	private final JpsModuleSourceRootType<?>[] myRootTypes;
-	private final JPanel myTopPanel = new JPanel(new BorderLayout());
-	private ModifiableRootModel myModifiableModel;
-	private CommonContentEntriesEditor myEditor;
+public class PerlPlatformContentEntriesConfigurable implements Configurable {
+  private final Module myModule;
+  private final JpsModuleSourceRootType<?>[] myRootTypes;
+  private final JPanel myTopPanel = new JPanel(new BorderLayout());
+  private ModifiableRootModel myModifiableModel;
+  private CommonContentEntriesEditor myEditor;
 
 
-	public PerlPlatformContentEntriesConfigurable(Project project)
-	{
-		this(ModuleManager.getInstance(project).getModules()[0], JpsPerlLibrarySourceRootType.INSTANCE);
-	}
+  public PerlPlatformContentEntriesConfigurable(Project project) {
+    this(ModuleManager.getInstance(project).getModules()[0], JpsPerlLibrarySourceRootType.INSTANCE);
+  }
 
-	private PerlPlatformContentEntriesConfigurable(final Module module, JpsModuleSourceRootType<?>... rootTypes)
-	{
-		myModule = module;
-		myRootTypes = rootTypes;
-	}
+  private PerlPlatformContentEntriesConfigurable(final Module module, JpsModuleSourceRootType<?>... rootTypes) {
+    myModule = module;
+    myRootTypes = rootTypes;
+  }
 
 
-	@Override
-	public String getDisplayName()
-	{
-		return "Project Structure";
-	}
+  @Override
+  public String getDisplayName() {
+    return "Project Structure";
+  }
 
-	@Override
-	public String getHelpTopic()
-	{
-		return null;
-	}
+  @Override
+  public String getHelpTopic() {
+    return null;
+  }
 
-	@Override
-	public JComponent createComponent()
-	{
-		createEditor();
-		return myTopPanel;
-	}
+  @Override
+  public JComponent createComponent() {
+    createEditor();
+    return myTopPanel;
+  }
 
-	private void createEditor()
-	{
-		myModifiableModel = ApplicationManager.getApplication().runReadAction((Computable<ModifiableRootModel>) () -> ModuleRootManager.getInstance(myModule).getModifiableModel());
+  private void createEditor() {
+    myModifiableModel = ApplicationManager.getApplication()
+      .runReadAction((Computable<ModifiableRootModel>)() -> ModuleRootManager.getInstance(myModule).getModifiableModel());
 
-		final ModuleConfigurationStateImpl moduleConfigurationState =
-				new ModuleConfigurationStateImpl(myModule.getProject(), new DefaultModulesProvider(myModule.getProject()))
-				{
-					@Override
-					public ModifiableRootModel getRootModel()
-					{
-						return myModifiableModel;
-					}
+    final ModuleConfigurationStateImpl moduleConfigurationState =
+      new ModuleConfigurationStateImpl(myModule.getProject(), new DefaultModulesProvider(myModule.getProject())) {
+        @Override
+        public ModifiableRootModel getRootModel() {
+          return myModifiableModel;
+        }
 
-					@Override
-					public FacetsProvider getFacetsProvider()
-					{
-						return DefaultFacetsProvider.INSTANCE;
-					}
-				};
-		myEditor = new PerlContentEntriesEditor(myModule.getName(), moduleConfigurationState, myRootTypes)
-		{
-			@Override
-			protected List<ContentEntry> addContentEntries(VirtualFile[] files)
-			{
-				List<ContentEntry> entries = super.addContentEntries(files);
-				addContentEntryPanels(entries.toArray(new ContentEntry[entries.size()]));
-				return entries;
-			}
-		};
-		JComponent component = ApplicationManager.getApplication().runReadAction((Computable<JComponent>) () -> myEditor.createComponent());
-		myTopPanel.add(component, BorderLayout.CENTER);
-	}
+        @Override
+        public FacetsProvider getFacetsProvider() {
+          return DefaultFacetsProvider.INSTANCE;
+        }
+      };
+    myEditor = new PerlContentEntriesEditor(myModule.getName(), moduleConfigurationState, myRootTypes) {
+      @Override
+      protected List<ContentEntry> addContentEntries(VirtualFile[] files) {
+        List<ContentEntry> entries = super.addContentEntries(files);
+        addContentEntryPanels(entries.toArray(new ContentEntry[entries.size()]));
+        return entries;
+      }
+    };
+    JComponent component = ApplicationManager.getApplication().runReadAction((Computable<JComponent>)() -> myEditor.createComponent());
+    myTopPanel.add(component, BorderLayout.CENTER);
+  }
 
-	@Override
-	public boolean isModified()
-	{
-		return myEditor != null && myEditor.isModified();
-	}
+  @Override
+  public boolean isModified() {
+    return myEditor != null && myEditor.isModified();
+  }
 
-	@Override
-	public void apply() throws ConfigurationException
-	{
-		myEditor.apply();
-		if (myModifiableModel.isChanged())
-		{
-			ApplicationManager.getApplication().runWriteAction(() -> myModifiableModel.commit());
-			myEditor.disposeUIResources();
-			myTopPanel.remove(myEditor.getComponent());
-			createEditor();
-		}
-	}
+  @Override
+  public void apply() throws ConfigurationException {
+    myEditor.apply();
+    if (myModifiableModel.isChanged()) {
+      ApplicationManager.getApplication().runWriteAction(() -> myModifiableModel.commit());
+      myEditor.disposeUIResources();
+      myTopPanel.remove(myEditor.getComponent());
+      createEditor();
+    }
+  }
 
-	@Override
-	public void reset()
-	{
-		myEditor.reset();
-		// TODO?
-	}
+  @Override
+  public void reset() {
+    myEditor.reset();
+    // TODO?
+  }
 
-	@Override
-	public void disposeUIResources()
-	{
-		if (myEditor != null)
-		{
-			myEditor.disposeUIResources();
-			myTopPanel.remove(myEditor.getComponent());
-			myEditor = null;
-		}
-		if (myModifiableModel != null)
-		{
-			myModifiableModel.dispose();
-			myModifiableModel = null;
-		}
-	}
+  @Override
+  public void disposeUIResources() {
+    if (myEditor != null) {
+      myEditor.disposeUIResources();
+      myTopPanel.remove(myEditor.getComponent());
+      myEditor = null;
+    }
+    if (myModifiableModel != null) {
+      myModifiableModel.dispose();
+      myModifiableModel = null;
+    }
+  }
 }

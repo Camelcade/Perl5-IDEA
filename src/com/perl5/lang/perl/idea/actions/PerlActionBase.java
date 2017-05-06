@@ -23,18 +23,15 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 /**
  * Created by hurricup on 26.04.2016.
  */
-public abstract class PerlActionBase extends AnAction
-{
-	protected abstract boolean isEnabled(AnActionEvent event);
+public abstract class PerlActionBase extends AnAction {
+  protected abstract boolean isEnabled(AnActionEvent event);
 
-	@Override
-	public void update(AnActionEvent event)
-	{
-		final boolean enabled = isEnabled(event);
-		event.getPresentation().setEnabled(enabled);
-		if (ActionPlaces.isPopupPlace(event.getPlace()))
-		{
-			event.getPresentation().setVisible(enabled);
-		}
-	}
+  @Override
+  public void update(AnActionEvent event) {
+    final boolean enabled = isEnabled(event);
+    event.getPresentation().setEnabled(enabled);
+    if (ActionPlaces.isPopupPlace(event.getPlace())) {
+      event.getPresentation().setVisible(enabled);
+    }
+  }
 }

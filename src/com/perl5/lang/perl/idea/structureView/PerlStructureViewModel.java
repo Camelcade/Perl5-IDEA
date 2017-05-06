@@ -31,48 +31,40 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider
-{
-	private static final Filter[] FILTERS = new Filter[]{
-			PerlVariableFilter.INSTANCE,
-			PerlGlobFilter.INSTANCE,
-			PerlConstantFilter.INSTANCE,
-			PerlMethodFilter.INSTANCE,
-			PerlDeclarationFilter.INSTANCE,
-			PerlInheritedFilter.INSTANCE,
-			PerlImportedFilter.INSTANCE
-	};
+public class PerlStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
+  private static final Filter[] FILTERS = new Filter[]{
+    PerlVariableFilter.INSTANCE,
+    PerlGlobFilter.INSTANCE,
+    PerlConstantFilter.INSTANCE,
+    PerlMethodFilter.INSTANCE,
+    PerlDeclarationFilter.INSTANCE,
+    PerlInheritedFilter.INSTANCE,
+    PerlImportedFilter.INSTANCE
+  };
 
-	public PerlStructureViewModel(PsiFile psiFile, Editor editor)
-	{
-		super(psiFile, editor, new PerlStructureViewElement(psiFile));
-	}
+  public PerlStructureViewModel(PsiFile psiFile, Editor editor) {
+    super(psiFile, editor, new PerlStructureViewElement(psiFile));
+  }
 
-	@NotNull
-	@Override
-	public Sorter[] getSorters()
-	{
-		return new Sorter[]{Sorter.ALPHA_SORTER};
-	}
+  @NotNull
+  @Override
+  public Sorter[] getSorters() {
+    return new Sorter[]{Sorter.ALPHA_SORTER};
+  }
 
-	@NotNull
-	@Override
-	public Filter[] getFilters()
-	{
-		return FILTERS;
-	}
+  @NotNull
+  @Override
+  public Filter[] getFilters() {
+    return FILTERS;
+  }
 
-	@Override
-	public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement)
-	{
-		return false;
-	}
+  @Override
+  public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement) {
+    return false;
+  }
 
-	@Override
-	public boolean isAlwaysLeaf(StructureViewTreeElement structureViewTreeElement)
-	{
-		return structureViewTreeElement instanceof PerlLeafStructureViewElement;
-	}
-
-
+  @Override
+  public boolean isAlwaysLeaf(StructureViewTreeElement structureViewTreeElement) {
+    return structureViewTreeElement instanceof PerlLeafStructureViewElement;
+  }
 }

@@ -52,366 +52,301 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlDebugThread extends Thread
-{
-	public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
-	private static Executor ourExecutor = Executors.newSingleThreadExecutor();
-	private final ExecutionResult myExecutionResult;
-	private final Gson myGson;
-	private final PerlDebugProfileState myDebugProfileState;
-	private final PerlScriptsPanel myScriptListPanel;
-	private final PerlScriptsPanel myEvalsListPanel;
-	private XDebugSession mySession;
-	private Socket mySocket;
-	private ServerSocket myServerSocket;
-	private OutputStream myOutputStream;
-	private InputStream myInputStream;
-	private boolean myStop = false;
-	private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
-	private boolean isReady = false;
-	private int transactionId = 0;
-	private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap = new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
-	private ReentrantLock lock = new ReentrantLock();
-	private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
-	private PerlDebugOptions myPerlDebugOptions;
+public class PerlDebugThread extends Thread {
+  public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
+  private static Executor ourExecutor = Executors.newSingleThreadExecutor();
+  private final ExecutionResult myExecutionResult;
+  private final Gson myGson;
+  private final PerlDebugProfileState myDebugProfileState;
+  private final PerlScriptsPanel myScriptListPanel;
+  private final PerlScriptsPanel myEvalsListPanel;
+  private XDebugSession mySession;
+  private Socket mySocket;
+  private ServerSocket myServerSocket;
+  private OutputStream myOutputStream;
+  private InputStream myInputStream;
+  private boolean myStop = false;
+  private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
+  private boolean isReady = false;
+  private int transactionId = 0;
+  private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap =
+    new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
+  private ReentrantLock lock = new ReentrantLock();
+  private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
+  private PerlDebugOptions myPerlDebugOptions;
 
-	public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
-	{
-		super("PerlDebugThread");
-		mySession = session;
-		myGson = createGson();
-		myDebugProfileState = state;
-		myExecutionResult = executionResult;
-		myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
-		myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
-		myPerlRemoteFileSystem.dropFiles();
-		myPerlDebugOptions = state.getDebugOptions();
-	}
+  public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult) {
+    super("PerlDebugThread");
+    mySession = session;
+    myGson = createGson();
+    myDebugProfileState = state;
+    myExecutionResult = executionResult;
+    myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
+    myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
+    myPerlRemoteFileSystem.dropFiles();
+    myPerlDebugOptions = state.getDebugOptions();
+  }
 
-	public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor)
-	{
-		if (descriptor != null)
-		{
-			// fixme potentially risk of race condition between clar and add
-			breakpointsDescriptorsQueue.add(descriptor);
-			if (isReady)
-			{
-				sendQueuedBreakpoints();
-			}
-		}
-	}
+  public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor) {
+    if (descriptor != null) {
+      // fixme potentially risk of race condition between clar and add
+      breakpointsDescriptorsQueue.add(descriptor);
+      if (isReady) {
+        sendQueuedBreakpoints();
+      }
+    }
+  }
 
-	protected void sendQueuedBreakpoints()
-	{
-		sendCommand("b", breakpointsDescriptorsQueue);
-		breakpointsDescriptorsQueue.clear();
-	}
+  protected void sendQueuedBreakpoints() {
+    sendCommand("b", breakpointsDescriptorsQueue);
+    breakpointsDescriptorsQueue.clear();
+  }
 
-	protected void setUpDebugger()
-	{
-		PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState.getDebugOptions());
-		sendString(myGson.toJson(perlSetUpDescriptor));
-		breakpointsDescriptorsQueue.clear();
-	}
+  protected void setUpDebugger() {
+    PerlSetUpDescriptor perlSetUpDescriptor = new PerlSetUpDescriptor(breakpointsDescriptorsQueue, myDebugProfileState.getDebugOptions());
+    sendString(myGson.toJson(perlSetUpDescriptor));
+    breakpointsDescriptorsQueue.clear();
+  }
 
-	@Override
-	public void run()
-	{
-		try
-		{
-			String debugHost = myPerlDebugOptions.getDebugHost();
-			int debugPort = myDebugProfileState.getDebugPort();
-			String debugName = debugHost + ":" + debugPort;
-			if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER))
-			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connecting to " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
-				mySocket = new Socket(debugHost, debugPort);
-			}
-			else
-			{
-				((ConsoleView) myExecutionResult.getExecutionConsole()).print("Listening on " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
-				myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
-				mySocket = myServerSocket.accept();
-			}
-			((ConsoleView) myExecutionResult.getExecutionConsole()).print("Connected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+  @Override
+  public void run() {
+    try {
+      String debugHost = myPerlDebugOptions.getDebugHost();
+      int debugPort = myDebugProfileState.getDebugPort();
+      String debugName = debugHost + ":" + debugPort;
+      if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
+        ((ConsoleView)myExecutionResult.getExecutionConsole())
+          .print("Connecting to " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+        mySocket = new Socket(debugHost, debugPort);
+      }
+      else {
+        ((ConsoleView)myExecutionResult.getExecutionConsole())
+          .print("Listening on " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+        myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
+        mySocket = myServerSocket.accept();
+      }
+      ((ConsoleView)myExecutionResult.getExecutionConsole()).print("Connected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 
-			myOutputStream = mySocket.getOutputStream();
-			myInputStream = mySocket.getInputStream();
+      myOutputStream = mySocket.getOutputStream();
+      myInputStream = mySocket.getInputStream();
 
-			ByteArrayList response = new ByteArrayList();
+      ByteArrayList response = new ByteArrayList();
 
-			while (!myStop)
-			{
-				response.clear();
+      while (!myStop) {
+        response.clear();
 
-				if (DEV_MODE)
-				{
-					System.err.println("\nReading data");
-				}
+        if (DEV_MODE) {
+          System.err.println("\nReading data");
+        }
 
-				// reading bytes
-				while (myInputStream != null)
-				{
-					int dataByte = myInputStream.read();
-					if (dataByte == '\n')
-					{
-						break;
-					}
-					else if (dataByte == -1)
-					{
-						return;
-					}
-					else
-					{
-						response.add((byte) dataByte);
-					}
-				}
+        // reading bytes
+        while (myInputStream != null) {
+          int dataByte = myInputStream.read();
+          if (dataByte == '\n') {
+            break;
+          }
+          else if (dataByte == -1) {
+            return;
+          }
+          else {
+            response.add((byte)dataByte);
+          }
+        }
 
-				if (DEV_MODE)
-				{
-					System.err.println("Got response " + response.size());
-					System.err.println(new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
-				}
+        if (DEV_MODE) {
+          System.err.println("Got response " + response.size());
+          System.err.println(new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
+        }
 
-				processResponse(response);
-			}
+        processResponse(response);
+      }
+    }
+    catch (IOException e) {
+      //			e.printStackTrace();
+    }
+    catch (ExecutionException e) {
+      //			e.printStackTrace();
+    }
+    catch (Exception e) {
+      //			e.printStackTrace();
+    }
+    finally {
+      setStop();
+    }
+  }
 
-		}
-		catch (IOException e)
-		{
-//			e.printStackTrace();
-		}
-		catch (ExecutionException e)
-		{
-//			e.printStackTrace();
-		}
-		catch (Exception e)
-		{
-//			e.printStackTrace();
-		}
-		finally
-		{
-			setStop();
-		}
-	}
+  private void processResponse(ByteArrayList responseBytes) {
+    final String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
+    final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
-	private void processResponse(ByteArrayList responseBytes)
-	{
-		final String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
-		final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
+    if (newEvent != null) {
+      if (newEvent instanceof PerlDebuggingEventReady) {
+        if (((PerlDebuggingEventReady)newEvent).isValid()) {
+          isReady = true;
+          setUpDebugger();
+        }
+        else {
+          setStop();
+        }
+      }
+      else {
+        newEvent.setDebugSession(mySession);
+        newEvent.setDebugThread(this);
+        ourExecutor.execute(newEvent);
+        //				ApplicationManager.getApplication().executeOnPooledThread()invokeLater( // executeOnPooledThread - fixme concurrency problems
+      }
+    }
+  }
 
-		if (newEvent != null)
-		{
-			if (newEvent instanceof PerlDebuggingEventReady)
-			{
-				if (((PerlDebuggingEventReady) newEvent).isValid())
-				{
-					isReady = true;
-					setUpDebugger();
-				}
-				else
-				{
-					setStop();
-				}
-			}
-			else
-			{
-				newEvent.setDebugSession(mySession);
-				newEvent.setDebugThread(this);
-				ourExecutor.execute(newEvent);
-//				ApplicationManager.getApplication().executeOnPooledThread()invokeLater( // executeOnPooledThread - fixme concurrency problems
-			}
-		}
-	}
+  public void sendString(String string) {
+    if (mySocket == null) {
+      return;
+    }
 
-	public void sendString(String string)
-	{
-		if (mySocket == null)
-		{
-			return;
-		}
+    string = string + "\n";
 
-		string = string + "\n";
+    try {
+      if (DEV_MODE) {
+        System.err.println("Going to send string " + string);
+      }
 
-		try
-		{
-			if (DEV_MODE)
-			{
-				System.err.println("Going to send string " + string);
-			}
+      lock.lock();
 
-			lock.lock();
-
-			if (DEV_MODE)
-			{
-				System.err.println("Sent string " + string);
-			}
+      if (DEV_MODE) {
+        System.err.println("Sent string " + string);
+      }
 
 
-			myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			lock.unlock();
-		}
-	}
+      myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    finally {
+      lock.unlock();
+    }
+  }
 
-	public void sendCommand(String command, Object data)
-	{
-		sendString(command + " " + myGson.toJson(data));
-	}
+  public void sendCommand(String command, Object data) {
+    sendString(command + " " + myGson.toJson(data));
+  }
 
-	public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler)
-	{
-		if (mySocket == null)
-		{
-			return;
-		}
+  public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler) {
+    if (mySocket == null) {
+      return;
+    }
 
-		try
-		{
-			lock.lock();
-			PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
-			transactionsMap.put(transaction.getTransactionId(), transactionHandler);
-			sendCommand(command, transaction);
-		}
-		finally
-		{
-			lock.unlock();
-		}
-	}
+    try {
+      lock.lock();
+      PerlDebuggingTransactionWrapper transaction = new PerlDebuggingTransactionWrapper(transactionId++, data);
+      transactionsMap.put(transaction.getTransactionId(), transactionHandler);
+      sendCommand(command, transaction);
+    }
+    finally {
+      lock.unlock();
+    }
+  }
 
-	public Socket getSocket()
-	{
-		return mySocket;
-	}
+  public Socket getSocket() {
+    return mySocket;
+  }
 
-	public void setStop()
-	{
-		if (myStop)
-		{
-			return;
-		}
+  public void setStop() {
+    if (myStop) {
+      return;
+    }
 
-		myStop = true;
-		try
-		{
-			if (myInputStream != null)
-			{
-				myInputStream.close();
-				myInputStream = null;
-			}
-		}
-		catch (IOException e)
-		{
-		}
-		try
-		{
-			if (myOutputStream != null)
-			{
-				myOutputStream.close();
-				myOutputStream = null;
-			}
-		}
-		catch (IOException e)
-		{
-		}
-		try
-		{
-			if (mySocket != null)
-			{
-				mySocket.close();
-				mySocket = null;
-			}
-		}
-		catch (IOException e)
-		{
-		}
-		try
-		{
-			if (myServerSocket != null)
-			{
-				myServerSocket.close();
-				myServerSocket.close();
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+    myStop = true;
+    try {
+      if (myInputStream != null) {
+        myInputStream.close();
+        myInputStream = null;
+      }
+    }
+    catch (IOException e) {
+    }
+    try {
+      if (myOutputStream != null) {
+        myOutputStream.close();
+        myOutputStream = null;
+      }
+    }
+    catch (IOException e) {
+    }
+    try {
+      if (mySocket != null) {
+        mySocket.close();
+        mySocket = null;
+      }
+    }
+    catch (IOException e) {
+    }
+    try {
+      if (myServerSocket != null) {
+        myServerSocket.close();
+        myServerSocket.close();
+      }
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
+    StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
 
-		((ConsoleView) myExecutionResult.getExecutionConsole()).print("Disconnected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
-	}
+    ((ConsoleView)myExecutionResult.getExecutionConsole()).print("Disconnected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+  }
 
-	protected Gson createGson()
-	{
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer(this));
-		return builder.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
-	}
+  protected Gson createGson() {
+    GsonBuilder builder = new GsonBuilder();
+    builder.registerTypeAdapter(PerlDebuggingEvent.class, new PerlDebuggingEventsDeserializer(this));
+    return builder.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
+  }
 
-	@Nullable
-	public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId)
-	{
-		return transactionsMap.remove(transactionId);
-	}
+  @Nullable
+  public PerlDebuggingTransactionHandler getTransactionHandler(int transactionId) {
+    return transactionsMap.remove(transactionId);
+  }
 
-	public PerlScriptsPanel getScriptListPanel()
-	{
-		return myScriptListPanel;
-	}
+  public PerlScriptsPanel getScriptListPanel() {
+    return myScriptListPanel;
+  }
 
-	public PerlScriptsPanel getEvalsListPanel()
-	{
-		return myEvalsListPanel;
-	}
+  public PerlScriptsPanel getEvalsListPanel() {
+    return myEvalsListPanel;
+  }
 
-	public PerlRemoteFileSystem getPerlRemoteFileSystem()
-	{
-		return myPerlRemoteFileSystem;
-	}
+  public PerlRemoteFileSystem getPerlRemoteFileSystem() {
+    return myPerlRemoteFileSystem;
+  }
 
-	@Nullable
-	public VirtualFile loadRemoteSource(String filePath)
-	{
-		if (DEV_MODE)
-		{
-			System.err.println("Loading file " + filePath);
-		}
-		final Semaphore responseSemaphore = new Semaphore();
-		responseSemaphore.down();
+  @Nullable
+  public VirtualFile loadRemoteSource(String filePath) {
+    if (DEV_MODE) {
+      System.err.println("Loading file " + filePath);
+    }
+    final Semaphore responseSemaphore = new Semaphore();
+    responseSemaphore.down();
 
-		final String[] response = new String[]{"# Source could not be loaded..."};
+    final String[] response = new String[]{"# Source could not be loaded..."};
 
-		PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler()
-		{
+    PerlDebuggingTransactionHandler perlDebuggingTransactionHandler = new PerlDebuggingTransactionHandler() {
 
-			@Override
-			public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext)
-			{
-				response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
-				responseSemaphore.up();
+      @Override
+      public void run(JsonObject eventObject, JsonDeserializationContext jsonDeserializationContext) {
+        response[0] = eventObject.getAsJsonPrimitive("data").getAsString();
+        responseSemaphore.up();
+      }
+    };
 
-			}
-		};
+    if (mySocket != null) {
+      sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
+      responseSemaphore.waitFor(2000);
+    }
 
-		if (mySocket != null)
-		{
-			sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
-			responseSemaphore.waitFor(2000);
-		}
+    return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
+  }
 
-		return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
-	}
-
-	public PerlDebugProfileState getDebugProfileState()
-	{
-		return myDebugProfileState;
-	}
+  public PerlDebugProfileState getDebugProfileState() {
+    return myDebugProfileState;
+  }
 }

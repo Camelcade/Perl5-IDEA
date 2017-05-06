@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 13.01.2016.
  */
-public interface MasonCallStatement extends PsiElement
-{
+public interface MasonCallStatement extends PsiElement {
 }

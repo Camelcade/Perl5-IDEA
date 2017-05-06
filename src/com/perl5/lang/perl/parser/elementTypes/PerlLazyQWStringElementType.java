@@ -24,17 +24,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyQWStringElementType extends PerlLazyQStringElementType
-{
-	public PerlLazyQWStringElementType(String name)
-	{
-		super(name);
-	}
+public class PerlLazyQWStringElementType extends PerlLazyQStringElementType {
+  public PerlLazyQWStringElementType(String name) {
+    super(name);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return PerlSubLexerAdapter.forStringQW(project);
-	}
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return PerlSubLexerAdapter.forStringQW(project);
+  }
 }

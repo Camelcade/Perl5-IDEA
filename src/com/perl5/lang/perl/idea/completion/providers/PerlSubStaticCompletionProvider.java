@@ -34,48 +34,39 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlSubStaticCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	public void addCompletions(@NotNull CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
-	{
-		PsiElement method = parameters.getPosition().getParent();
-		assert method instanceof PsiPerlMethod;
+public class PerlSubStaticCompletionProvider extends CompletionProvider<CompletionParameters> {
+  public void addCompletions(@NotNull CompletionParameters parameters,
+                             ProcessingContext context,
+                             @NotNull CompletionResultSet resultSet) {
+    PsiElement method = parameters.getPosition().getParent();
+    assert method instanceof PsiPerlMethod;
 
-		String packageName = ((PsiPerlMethod) method).getPackageName();
-		if (packageName == null)
-		{
-			return;
-		}
+    String packageName = ((PsiPerlMethod)method).getPackageName();
+    if (packageName == null) {
+      return;
+    }
 
-		Project project = parameters.getPosition().getProject();
+    Project project = parameters.getPosition().getProject();
 
-		// defined subs
-		for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName))
-		{
-			if (subDefinition.isStatic())
-			{
-				resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
-			}
-		}
+    // defined subs
+    for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+      if (subDefinition.isStatic()) {
+        resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
+      }
+    }
 
-		// declared subs
-		for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName))
-		{
-			if (subDeclaration.isStatic())
-			{
-				resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
-			}
-		}
+    // declared subs
+    for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName)) {
+      if (subDeclaration.isStatic()) {
+        resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
+      }
+    }
 
-		// Globs
-		for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName))
-		{
-			if (globVariable.getName() != null)
-			{
-				resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
-			}
-		}
-	}
+    // Globs
+    for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {
+      if (globVariable.getName() != null) {
+        resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
+      }
+    }
+  }
 }

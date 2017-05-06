@@ -27,24 +27,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 16.10.2016.
  */
-public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType
-{
-	public PerlLazyCodeBlockElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
+  public PerlLazyCodeBlockElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	protected Lexer getInnerLexer(@NotNull Project project)
-	{
-		return new PerlSublexingLexerAdapter(project, false, false);
-	}
+  @NotNull
+  @Override
+  protected Lexer getInnerLexer(@NotNull Project project) {
+    return new PerlSublexingLexerAdapter(project, false, false);
+  }
 
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyBlockParser.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected PsiParser getParser() {
+    return PerlLazyBlockParser.INSTANCE;
+  }
 }

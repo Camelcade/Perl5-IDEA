@@ -54,323 +54,260 @@ import static com.intellij.ui.ListScrollingUtil.ensureSelectionExists;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlInterpreterChooserPanel extends JPanel
-{
-	@Nullable
-	private final Project myProject;
-	private JList myList = null;
-	private DefaultListModel myListModel = null;
-	private Sdk myCurrentJdk;
-	private SdkType[] myAllowedJdkTypes = null;
+public class PerlInterpreterChooserPanel extends JPanel {
+  @Nullable
+  private final Project myProject;
+  private JList myList = null;
+  private DefaultListModel myListModel = null;
+  private Sdk myCurrentJdk;
+  private SdkType[] myAllowedJdkTypes = null;
 
-	public PerlInterpreterChooserPanel(@Nullable final Project project)
-	{
-		super(new BorderLayout());
-		myProject = project;
-		myListModel = new DefaultListModel();
-		myList = new JBList(myListModel);
-		myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		myList.setCellRenderer(new ProjectJdkListRenderer());
+  public PerlInterpreterChooserPanel(@Nullable final Project project) {
+    super(new BorderLayout());
+    myProject = project;
+    myListModel = new DefaultListModel();
+    myList = new JBList(myListModel);
+    myList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    myList.setCellRenderer(new ProjectJdkListRenderer());
 
-		myList.addListSelectionListener(new ListSelectionListener()
-		{
-			public void valueChanged(ListSelectionEvent e)
-			{
-				myCurrentJdk = (Sdk) myList.getSelectedValue();
-			}
-		});
-		new ClickListener()
-		{
-			@Override
-			public boolean onClick(@NotNull MouseEvent e, int clickCount)
-			{
-				if (myProject == null)
-				{
-					editJdkTable();
-				}
-				return true;
-			}
-		}.installOn(myList);
+    myList.addListSelectionListener(new ListSelectionListener() {
+      public void valueChanged(ListSelectionEvent e) {
+        myCurrentJdk = (Sdk)myList.getSelectedValue();
+      }
+    });
+    new ClickListener() {
+      @Override
+      public boolean onClick(@NotNull MouseEvent e, int clickCount) {
+        if (myProject == null) {
+          editJdkTable();
+        }
+        return true;
+      }
+    }.installOn(myList);
 
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(ScrollPaneFactory.createScrollPane(myList), BorderLayout.CENTER);
-		add(panel, BorderLayout.CENTER);
-		if (!myListModel.isEmpty())
-		{
-			myList.setSelectedIndex(0);
-		}
-	}
+    JPanel panel = new JPanel(new BorderLayout());
+    panel.add(ScrollPaneFactory.createScrollPane(myList), BorderLayout.CENTER);
+    add(panel, BorderLayout.CENTER);
+    if (!myListModel.isEmpty()) {
+      myList.setSelectedIndex(0);
+    }
+  }
 
-	private static Sdk showDialog(final Project project, String title, final Component parent, Sdk jdkToSelect)
-	{
-		final PerlInterpreterChooserPanel jdkChooserPanel = new PerlInterpreterChooserPanel(project);
-		jdkChooserPanel.fillList(null, null);
-		final MyDialog dialog = jdkChooserPanel.new MyDialog(parent);
-		if (title != null)
-		{
-			dialog.setTitle(title);
-		}
-		if (jdkToSelect != null)
-		{
-			jdkChooserPanel.selectJdk(jdkToSelect);
-		}
-		else
-		{
-			ensureSelectionExists(jdkChooserPanel.myList);
-		}
-		new DoubleClickListener()
-		{
-			@Override
-			protected boolean onDoubleClick(MouseEvent e)
-			{
-				dialog.clickDefaultButton();
-				return true;
-			}
-		}.installOn(jdkChooserPanel.myList);
-		return dialog.showAndGet() ? jdkChooserPanel.getChosenJdk() : null;
-	}
+  /**
+   * Sets the JDK types which may be shown in the panel.
+   *
+   * @param allowedJdkTypes the array of JDK types which may be shown, or null if all JDK types are allowed.
+   * @since 7.0.3
+   */
+  public void setAllowedJdkTypes(@Nullable final SdkType[] allowedJdkTypes) {
+    myAllowedJdkTypes = allowedJdkTypes;
+  }
 
-	public static Sdk chooseAndSetJDK(final Project project)
-	{
-		final Sdk projectJdk = ProjectRootManager.getInstance(project).getProjectSdk();
-		final Sdk jdk = showDialog(project, ProjectBundle.message("module.libraries.target.jdk.select.title"), WindowManagerEx.getInstanceEx().getFrame(project), projectJdk);
-		if (jdk == null)
-		{
-			return null;
-		}
-		ApplicationManager.getApplication().runWriteAction(new Runnable()
-		{
-			public void run()
-			{
-				ProjectRootManager.getInstance(project).setProjectSdk(jdk);
-			}
-		});
-		return jdk;
-	}
+  public Sdk getChosenJdk() {
+    return myCurrentJdk;
+  }
 
-	/**
-	 * Sets the JDK types which may be shown in the panel.
-	 *
-	 * @param allowedJdkTypes the array of JDK types which may be shown, or null if all JDK types are allowed.
-	 * @since 7.0.3
-	 */
-	public void setAllowedJdkTypes(@Nullable final SdkType[] allowedJdkTypes)
-	{
-		myAllowedJdkTypes = allowedJdkTypes;
-	}
+  public Object[] getAllJdks() {
+    return myListModel.toArray();
+  }
 
-	public Sdk getChosenJdk()
-	{
-		return myCurrentJdk;
-	}
+  public void editJdkTable() {
+    ProjectJdksEditor editor = new ProjectJdksEditor((Sdk)myList.getSelectedValue(),
+                                                     myProject != null ? myProject : ProjectManager.getInstance().getDefaultProject(),
+                                                     myList);
+    if (editor.showAndGet()) {
+      Sdk selectedJdk = editor.getSelectedJdk();
+      updateList(selectedJdk, null);
+    }
+  }
 
-	public Object[] getAllJdks()
-	{
-		return myListModel.toArray();
-	}
+  public void updateList(final Sdk selectedJdk, final @Nullable SdkType type) {
+    updateList(selectedJdk, type, null);
+  }
 
-	public void editJdkTable()
-	{
-		ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) myList.getSelectedValue(),
-				myProject != null ? myProject : ProjectManager.getInstance().getDefaultProject(),
-				myList);
-		if (editor.showAndGet())
-		{
-			Sdk selectedJdk = editor.getSelectedJdk();
-			updateList(selectedJdk, null);
-		}
-	}
+  public void updateList(final Sdk selectedJdk, final @Nullable SdkType type, final @Nullable Sdk[] globalSdks) {
+    final int[] selectedIndices = myList.getSelectedIndices();
+    fillList(type, globalSdks);
+    // restore selection
+    if (selectedJdk != null) {
+      TIntArrayList list = new TIntArrayList();
+      for (int i = 0; i < myListModel.size(); i++) {
+        final Sdk jdk = (Sdk)myListModel.getElementAt(i);
+        if (Comparing.strEqual(jdk.getName(), selectedJdk.getName())) {
+          list.add(i);
+        }
+      }
+      final int[] indicesToSelect = list.toNativeArray();
+      if (indicesToSelect.length > 0) {
+        myList.setSelectedIndices(indicesToSelect);
+      }
+      else if (myList.getModel().getSize() > 0) {
+        myList.setSelectedIndex(0);
+      }
+    }
+    else {
+      if (selectedIndices.length > 0) {
+        myList.setSelectedIndices(selectedIndices);
+      }
+      else {
+        myList.setSelectedIndex(0);
+      }
+    }
 
-	public void updateList(final Sdk selectedJdk, final @Nullable SdkType type)
-	{
-		updateList(selectedJdk, type, null);
-	}
+    myCurrentJdk = (Sdk)myList.getSelectedValue();
+  }
 
-	public void updateList(final Sdk selectedJdk, final @Nullable SdkType type, final @Nullable Sdk[] globalSdks)
-	{
-		final int[] selectedIndices = myList.getSelectedIndices();
-		fillList(type, globalSdks);
-		// restore selection
-		if (selectedJdk != null)
-		{
-			TIntArrayList list = new TIntArrayList();
-			for (int i = 0; i < myListModel.size(); i++)
-			{
-				final Sdk jdk = (Sdk) myListModel.getElementAt(i);
-				if (Comparing.strEqual(jdk.getName(), selectedJdk.getName()))
-				{
-					list.add(i);
-				}
-			}
-			final int[] indicesToSelect = list.toNativeArray();
-			if (indicesToSelect.length > 0)
-			{
-				myList.setSelectedIndices(indicesToSelect);
-			}
-			else if (myList.getModel().getSize() > 0)
-			{
-				myList.setSelectedIndex(0);
-			}
-		}
-		else
-		{
-			if (selectedIndices.length > 0)
-			{
-				myList.setSelectedIndices(selectedIndices);
-			}
-			else
-			{
-				myList.setSelectedIndex(0);
-			}
-		}
+  public JList getPreferredFocusedComponent() {
+    return myList;
+  }
 
-		myCurrentJdk = (Sdk) myList.getSelectedValue();
-	}
+  public void fillList(final @Nullable SdkType type, final @Nullable Sdk[] globalSdks) {
+    myListModel.clear();
+    final Sdk[] jdks;
+    if (myProject == null || myProject.isDefault()) {
+      final Sdk[] allJdks = globalSdks != null ? globalSdks : ProjectJdkTable.getInstance().getAllJdks();
+      jdks = getCompatibleJdks(type, Arrays.asList(allJdks));
+    }
+    else {
+      final ProjectSdksModel projectJdksModel = ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel();
+      if (!projectJdksModel.isInitialized()) { //should be initialized
+        projectJdksModel.reset(myProject);
+      }
+      final Collection<Sdk> collection = projectJdksModel.getProjectSdks().values();
+      jdks = getCompatibleJdks(type, collection);
+    }
+    Arrays.sort(jdks, new Comparator<Sdk>() {
+      public int compare(final Sdk o1, final Sdk o2) {
+        return o1.getName().compareToIgnoreCase(o2.getName());
+      }
+    });
+    for (Sdk jdk : jdks) {
+      myListModel.addElement(jdk);
+    }
+  }
 
-	public JList getPreferredFocusedComponent()
-	{
-		return myList;
-	}
+  private Sdk[] getCompatibleJdks(final @Nullable SdkType type, final Collection<Sdk> collection) {
+    final Set<Sdk> compatibleJdks = new HashSet<Sdk>();
+    for (Sdk projectJdk : collection) {
+      if (isCompatibleJdk(projectJdk, type)) {
+        compatibleJdks.add(projectJdk);
+      }
+    }
+    return compatibleJdks.toArray(new Sdk[compatibleJdks.size()]);
+  }
 
-	public void fillList(final @Nullable SdkType type, final @Nullable Sdk[] globalSdks)
-	{
-		myListModel.clear();
-		final Sdk[] jdks;
-		if (myProject == null || myProject.isDefault())
-		{
-			final Sdk[] allJdks = globalSdks != null ? globalSdks : ProjectJdkTable.getInstance().getAllJdks();
-			jdks = getCompatibleJdks(type, Arrays.asList(allJdks));
-		}
-		else
-		{
-			final ProjectSdksModel projectJdksModel = ProjectStructureConfigurable.getInstance(myProject).getProjectJdksModel();
-			if (!projectJdksModel.isInitialized())
-			{ //should be initialized
-				projectJdksModel.reset(myProject);
-			}
-			final Collection<Sdk> collection = projectJdksModel.getProjectSdks().values();
-			jdks = getCompatibleJdks(type, collection);
-		}
-		Arrays.sort(jdks, new Comparator<Sdk>()
-		{
-			public int compare(final Sdk o1, final Sdk o2)
-			{
-				return o1.getName().compareToIgnoreCase(o2.getName());
-			}
-		});
-		for (Sdk jdk : jdks)
-		{
-			myListModel.addElement(jdk);
-		}
-	}
+  private boolean isCompatibleJdk(final Sdk projectJdk, final @Nullable SdkType type) {
+    if (type != null) {
+      return projectJdk.getSdkType() == type;
+    }
+    if (myAllowedJdkTypes != null) {
+      return ArrayUtil.indexOf(myAllowedJdkTypes, projectJdk.getSdkType()) >= 0;
+    }
+    return true;
+  }
 
-	private Sdk[] getCompatibleJdks(final @Nullable SdkType type, final Collection<Sdk> collection)
-	{
-		final Set<Sdk> compatibleJdks = new HashSet<Sdk>();
-		for (Sdk projectJdk : collection)
-		{
-			if (isCompatibleJdk(projectJdk, type))
-			{
-				compatibleJdks.add(projectJdk);
-			}
-		}
-		return compatibleJdks.toArray(new Sdk[compatibleJdks.size()]);
-	}
+  public JComponent getDefaultFocusedComponent() {
+    return myList;
+  }
 
-	private boolean isCompatibleJdk(final Sdk projectJdk, final @Nullable SdkType type)
-	{
-		if (type != null)
-		{
-			return projectJdk.getSdkType() == type;
-		}
-		if (myAllowedJdkTypes != null)
-		{
-			return ArrayUtil.indexOf(myAllowedJdkTypes, projectJdk.getSdkType()) >= 0;
-		}
-		return true;
-	}
+  public void selectJdk(Sdk defaultJdk) {
+    final int index = myListModel.indexOf(defaultJdk);
+    if (index >= 0) {
+      myList.setSelectedIndex(index);
+    }
+  }
 
-	public JComponent getDefaultFocusedComponent()
-	{
-		return myList;
-	}
+  public void addSelectionListener(final ListSelectionListener listener) {
+    myList.addListSelectionListener(listener);
+  }
 
-	public void selectJdk(Sdk defaultJdk)
-	{
-		final int index = myListModel.indexOf(defaultJdk);
-		if (index >= 0)
-		{
-			myList.setSelectedIndex(index);
-		}
-	}
+  private static Sdk showDialog(final Project project, String title, final Component parent, Sdk jdkToSelect) {
+    final PerlInterpreterChooserPanel jdkChooserPanel = new PerlInterpreterChooserPanel(project);
+    jdkChooserPanel.fillList(null, null);
+    final MyDialog dialog = jdkChooserPanel.new MyDialog(parent);
+    if (title != null) {
+      dialog.setTitle(title);
+    }
+    if (jdkToSelect != null) {
+      jdkChooserPanel.selectJdk(jdkToSelect);
+    }
+    else {
+      ensureSelectionExists(jdkChooserPanel.myList);
+    }
+    new DoubleClickListener() {
+      @Override
+      protected boolean onDoubleClick(MouseEvent e) {
+        dialog.clickDefaultButton();
+        return true;
+      }
+    }.installOn(jdkChooserPanel.myList);
+    return dialog.showAndGet() ? jdkChooserPanel.getChosenJdk() : null;
+  }
 
-	public void addSelectionListener(final ListSelectionListener listener)
-	{
-		myList.addListSelectionListener(listener);
-	}
+  public static Sdk chooseAndSetJDK(final Project project) {
+    final Sdk projectJdk = ProjectRootManager.getInstance(project).getProjectSdk();
+    final Sdk jdk = showDialog(project, ProjectBundle.message("module.libraries.target.jdk.select.title"),
+                               WindowManagerEx.getInstanceEx().getFrame(project), projectJdk);
+    if (jdk == null) {
+      return null;
+    }
+    ApplicationManager.getApplication().runWriteAction(new Runnable() {
+      public void run() {
+        ProjectRootManager.getInstance(project).setProjectSdk(jdk);
+      }
+    });
+    return jdk;
+  }
 
-	public class MyDialog extends DialogWrapper implements ListSelectionListener
-	{
+  public class MyDialog extends DialogWrapper implements ListSelectionListener {
 
-		public MyDialog(Component parent)
-		{
-			super(parent, true);
-			setTitle(IdeBundle.message("title.select.jdk"));
-			init();
-			myList.addListSelectionListener(this);
-			updateOkButton();
-		}
+    public MyDialog(Component parent) {
+      super(parent, true);
+      setTitle(IdeBundle.message("title.select.jdk"));
+      init();
+      myList.addListSelectionListener(this);
+      updateOkButton();
+    }
 
-		protected String getDimensionServiceKey()
-		{
-			return "#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog";
-		}
+    protected String getDimensionServiceKey() {
+      return "#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog";
+    }
 
-		public void valueChanged(ListSelectionEvent e)
-		{
-			updateOkButton();
-		}
+    public void valueChanged(ListSelectionEvent e) {
+      updateOkButton();
+    }
 
-		private void updateOkButton()
-		{
-			setOKActionEnabled(myList.getSelectedValue() != null);
-		}
+    private void updateOkButton() {
+      setOKActionEnabled(myList.getSelectedValue() != null);
+    }
 
-		public void dispose()
-		{
-			myList.removeListSelectionListener(this);
-			super.dispose();
-		}
+    public void dispose() {
+      myList.removeListSelectionListener(this);
+      super.dispose();
+    }
 
-		protected JComponent createCenterPanel()
-		{
-			return PerlInterpreterChooserPanel.this;
-		}
+    protected JComponent createCenterPanel() {
+      return PerlInterpreterChooserPanel.this;
+    }
 
-		@NotNull
-		protected Action[] createActions()
-		{
-			return new Action[]{new ConfigureAction(), getOKAction(), getCancelAction()};
-		}
+    @NotNull
+    protected Action[] createActions() {
+      return new Action[]{new ConfigureAction(), getOKAction(), getCancelAction()};
+    }
 
-		public JComponent getPreferredFocusedComponent()
-		{
-			return myList;
-		}
+    public JComponent getPreferredFocusedComponent() {
+      return myList;
+    }
 
-		private final class ConfigureAction extends AbstractAction
-		{
-			public ConfigureAction()
-			{
-				super(IdeBundle.message("button.configure.e"));
-				putValue(Action.MNEMONIC_KEY, new Integer('E'));
-			}
+    private final class ConfigureAction extends AbstractAction {
+      public ConfigureAction() {
+        super(IdeBundle.message("button.configure.e"));
+        putValue(Action.MNEMONIC_KEY, new Integer('E'));
+      }
 
-			public void actionPerformed(ActionEvent e)
-			{
-				editJdkTable();
-			}
-		}
-	}
-
+      public void actionPerformed(ActionEvent e) {
+        editJdkTable();
+      }
+    }
+  }
 }

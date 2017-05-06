@@ -26,18 +26,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperReferencesProvider extends PsiReferenceProvider
-{
-	@NotNull
-	@Override
-	public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-	{
-		PsiElement method = element.getParent();
-		if (method instanceof PsiPerlMethod && !((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
-		{
-			return new PsiReference[]{new MojoliciousHelperReference(element)};
-		}
+public class MojoliciousHelperReferencesProvider extends PsiReferenceProvider {
+  @NotNull
+  @Override
+  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+    PsiElement method = element.getParent();
+    if (method instanceof PsiPerlMethod && !((PsiPerlMethod)method).hasExplicitNamespace() && !((PsiPerlMethod)method).isObjectMethod()) {
+      return new PsiReference[]{new MojoliciousHelperReference(element)};
+    }
 
-		return PsiReference.EMPTY_ARRAY;
-	}
+    return PsiReference.EMPTY_ARRAY;
+  }
 }

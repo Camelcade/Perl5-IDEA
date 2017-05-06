@@ -33,70 +33,59 @@ import java.io.IOException;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider
-{
+public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider {
 
-	public PerlGlobStubElementType(String name)
-	{
-		super(name, PerlLanguage.INSTANCE);
-	}
+  public PerlGlobStubElementType(String name) {
+    super(name, PerlLanguage.INSTANCE);
+  }
 
-	@Override
-	public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStub stub)
-	{
-		return new PsiPerlGlobVariableImpl(stub, this);
+  @Override
+  public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStub stub) {
+    return new PsiPerlGlobVariableImpl(stub, this);
+  }
 
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlGlobVariableImpl(node);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlGlobVariableImpl(node);
-	}
+  @Override
+  public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
+    return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment());
+  }
 
-	@Override
-	public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub)
-	{
-		return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment());
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @Override
+  public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
+    String name = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
+    sink.occurrence(PerlGlobsStubIndex.KEY, name);
+    sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getPackageName());
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink)
-	{
-		String name = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getName();
-		sink.occurrence(PerlGlobsStubIndex.KEY, name);
-		sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getPackageName());
-	}
+  @Override
+  public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getName());
+    dataStream.writeBoolean(stub.isLeftSideOfAssignment());
+  }
 
-	@Override
-	public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getName());
-		dataStream.writeBoolean(stub.isLeftSideOfAssignment());
-	}
+  @NotNull
+  @Override
+  public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean());
+  }
 
-	@NotNull
-	@Override
-	public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean());
-	}
-
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof PerlGlobVariable &&
-				psi.isValid() &&
-				StringUtil.isNotEmpty(((PerlGlobVariable) psi).getCanonicalName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof PerlGlobVariable &&
+           psi.isValid() &&
+           StringUtil.isNotEmpty(((PerlGlobVariable)psi).getCanonicalName());
+  }
 }

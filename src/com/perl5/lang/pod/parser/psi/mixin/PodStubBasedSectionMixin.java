@@ -32,153 +32,127 @@ import javax.swing.*;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<PodSectionStub> implements PodStubBasedSection
-{
-	public PodStubBasedSectionMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<PodSectionStub> implements PodStubBasedSection {
+  public PodStubBasedSectionMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	public PodStubBasedSectionMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public PodStubBasedSectionMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public PsiElement getTitleBlock()
-	{
-		return findChildByClass(PodSectionTitle.class);
-	}
+  @Override
+  public PsiElement getTitleBlock() {
+    return findChildByClass(PodSectionTitle.class);
+  }
 
-	@Override
-	public boolean hasContent()
-	{
-		return getContentBlock() != null;
-	}
+  @Override
+  public boolean hasContent() {
+    return getContentBlock() != null;
+  }
 
-	@Override
-	public PsiElement getContentBlock()
-	{
-		return findChildByClass(PodSectionContent.class);
-	}
+  @Override
+  public PsiElement getContentBlock() {
+    return findChildByClass(PodSectionContent.class);
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		renderElementTitleAsHTML(builder, new PodRenderingContext());
-		renderElementContentAsHTML(builder, context);
-	}
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    renderElementTitleAsHTML(builder, new PodRenderingContext());
+    renderElementContentAsHTML(builder, context);
+  }
 
-	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-	}
+  public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleBlock();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
 
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-	}
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
 
-	@Override
-	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		renderElementTitleAsText(builder, new PodRenderingContext());
-		renderElementContentAsText(builder, context);
-	}
+  @Override
+  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    renderElementContentAsText(builder, context);
+  }
 
-	public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getTitleBlock();
-		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
-	}
+  public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleBlock();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
 
-	public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
-	}
+  public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
 
-	@Override
-	@Nullable
-	public String getTitleText()
-	{
-		PodSectionStub stub = getStub();
-		if (stub != null)
-		{
-			return stub.getTitleText();
-		}
+  @Override
+  @Nullable
+  public String getTitleText() {
+    PodSectionStub stub = getStub();
+    if (stub != null) {
+      return stub.getTitleText();
+    }
 
-		StringBuilder builder = new StringBuilder();
-		renderElementTitleAsText(builder, new PodRenderingContext());
-		return builder.toString();
-	}
+    StringBuilder builder = new StringBuilder();
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    return builder.toString();
+  }
 
-	@Override
-	public String toString()
-	{
-		return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
-	}
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
+  }
 
-	@Override
-	public boolean isIndexed()
-	{
-		return findChildByClass(PodFormatterX.class) != null;
-	}
+  @Override
+  public boolean isIndexed() {
+    return findChildByClass(PodFormatterX.class) != null;
+  }
 
-	@Override
-	public boolean isHeading()
-	{
-		return false;
-	}
+  @Override
+  public boolean isHeading() {
+    return false;
+  }
 
-	@Override
-	public int getHeadingLevel()
-	{
-		return 0;
-	}
+  @Override
+  public int getHeadingLevel() {
+    return 0;
+  }
 
-	@Override
-	public int getListLevel()
-	{
-		PsiElement parent = getParent();
-		return parent instanceof PodCompositeElement ? ((PodCompositeElement) parent).getListLevel() : 0;
-	}
+  @Override
+  public int getListLevel() {
+    PsiElement parent = getParent();
+    return parent instanceof PodCompositeElement ? ((PodCompositeElement)parent).getListLevel() : 0;
+  }
 
-	@Override
-	public ItemPresentation getPresentation()
-	{
-		return this;
-	}
+  @Override
+  public ItemPresentation getPresentation() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public String getPresentableText()
-	{
-		return getTitleText();
-	}
+  @Nullable
+  @Override
+  public String getPresentableText() {
+    return getTitleText();
+  }
 
-	@Nullable
-	@Override
-	public String getLocationString()
-	{
-		return "Element location";
-	}
+  @Nullable
+  @Override
+  public String getLocationString() {
+    return "Element location";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon(boolean unused)
-	{
-		return getContainingFile().getIcon(0);
-	}
+  @Nullable
+  @Override
+  public Icon getIcon(boolean unused) {
+    return getContainingFile().getIcon(0);
+  }
 
-	@Nullable
-	@Override
-	public String getPodLinkText()
-	{
-		return getTitleText();
-	}
-
-
+  @Nullable
+  @Override
+  public String getPodLinkText() {
+    return getTitleText();
+  }
 }

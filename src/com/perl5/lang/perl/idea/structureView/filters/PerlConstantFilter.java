@@ -27,35 +27,29 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlConstantFilter implements Filter
-{
-	public static final PerlConstantFilter INSTANCE = new PerlConstantFilter();
-	private static final String ID = "SHOW_CONSTANTS";
+public class PerlConstantFilter implements Filter {
+  public static final PerlConstantFilter INSTANCE = new PerlConstantFilter();
+  private static final String ID = "SHOW_CONSTANTS";
 
-	@Override
-	public boolean isVisible(TreeElement treeElement)
-	{
-		return !(treeElement instanceof PerlConstantStructureViewElement);
-	}
+  @Override
+  public boolean isVisible(TreeElement treeElement) {
+    return !(treeElement instanceof PerlConstantStructureViewElement);
+  }
 
-	@Override
-	public boolean isReverted()
-	{
-		return true;
-	}
+  @Override
+  public boolean isReverted() {
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public ActionPresentation getPresentation()
-	{
-		return new ActionPresentationData("Show constants", null, PerlIcons.CONSTANT_GUTTER_ICON);
-	}
+  @NotNull
+  @Override
+  public ActionPresentation getPresentation() {
+    return new ActionPresentationData("Show constants", null, PerlIcons.CONSTANT_GUTTER_ICON);
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return ID;
-	}
-
+  @NotNull
+  @Override
+  public String getName() {
+    return ID;
+  }
 }

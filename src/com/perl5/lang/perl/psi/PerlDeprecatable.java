@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public interface PerlDeprecatable
-{
-	boolean isDeprecated();
+public interface PerlDeprecatable {
+  boolean isDeprecated();
 }

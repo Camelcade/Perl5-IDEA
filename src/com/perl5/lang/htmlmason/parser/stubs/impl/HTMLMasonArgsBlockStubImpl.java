@@ -29,20 +29,17 @@ import java.util.List;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonArgsBlockStubImpl extends StubBase<HTMLMasonArgsBlock> implements HTMLMasonArgsBlockStub
-{
-	private final List<PerlSubArgument> myArguments;
+public class HTMLMasonArgsBlockStubImpl extends StubBase<HTMLMasonArgsBlock> implements HTMLMasonArgsBlockStub {
+  private final List<PerlSubArgument> myArguments;
 
-	public HTMLMasonArgsBlockStubImpl(StubElement parent, IStubElementType elementType, List<PerlSubArgument> arguments)
-	{
-		super(parent, elementType);
-		myArguments = arguments;
-	}
+  public HTMLMasonArgsBlockStubImpl(StubElement parent, IStubElementType elementType, List<PerlSubArgument> arguments) {
+    super(parent, elementType);
+    myArguments = arguments;
+  }
 
-	@NotNull
-	@Override
-	public List<PerlSubArgument> getArgumentsList()
-	{
-		return myArguments;
-	}
+  @NotNull
+  @Override
+  public List<PerlSubArgument> getArgumentsList() {
+    return myArguments;
+  }
 }

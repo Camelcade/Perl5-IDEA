@@ -23,8 +23,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public interface PerlMethodDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlImplicitVariablesProvider
-{
-	@Nullable
-	PsiPerlMethodSignatureContent getMethodSignatureContent();
+public interface PerlMethodDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlImplicitVariablesProvider {
+  @Nullable
+  PsiPerlMethodSignatureContent getMethodSignatureContent();
 }

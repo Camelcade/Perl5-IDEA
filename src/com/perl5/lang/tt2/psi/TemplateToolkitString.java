@@ -22,6 +22,5 @@ import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public interface TemplateToolkitString extends PsiElement, TemplateToolkitElementTypes
-{
+public interface TemplateToolkitString extends PsiElement, TemplateToolkitElementTypes {
 }

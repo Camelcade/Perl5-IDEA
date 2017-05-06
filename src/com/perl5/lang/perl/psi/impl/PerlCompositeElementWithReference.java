@@ -24,30 +24,25 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.11.2016.
  */
-public abstract class PerlCompositeElementWithReference extends PerlCompositeElementImpl implements PerlReferenceOwner
-{
-	public PerlCompositeElementWithReference(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlCompositeElementWithReference extends PerlCompositeElementImpl implements PerlReferenceOwner {
+  public PerlCompositeElementWithReference(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public PsiReference[] getReferences()
-	{
-		return getReferencesWithCache();
-	}
+  @NotNull
+  @Override
+  public PsiReference[] getReferences() {
+    return getReferencesWithCache();
+  }
 
-	@Override
-	public PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
+  @Override
+  public PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
+  }
 
-	@Override
-	public boolean hasReferences()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasReferences() {
+    return true;
+  }
 }

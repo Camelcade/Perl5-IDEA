@@ -21,17 +21,14 @@ import com.intellij.openapi.project.Project;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitParser extends TemplateToolkitParserGenerated
-{
-	private final Project myProject;
+public class TemplateToolkitParser extends TemplateToolkitParserGenerated {
+  private final Project myProject;
 
-	public TemplateToolkitParser(Project project)
-	{
-		myProject = project;
-	}
+  public TemplateToolkitParser(Project project) {
+    myProject = project;
+  }
 
-	public Project getProject()
-	{
-		return myProject;
-	}
+  public Project getProject() {
+    return myProject;
+  }
 }

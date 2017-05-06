@@ -42,121 +42,101 @@ import java.util.Set;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements ConfigurableTemplateLanguageFileViewProvider
-{
-	private final Language myBaseLanguage = TemplateToolkitLanguage.INSTANCE;
-	private final Language myTemplateLanguage;
-	private final Set<Language> myRelevantLanguages = new HashSet<Language>();
+public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
+  implements ConfigurableTemplateLanguageFileViewProvider {
+  private final Language myBaseLanguage = TemplateToolkitLanguage.INSTANCE;
+  private final Language myTemplateLanguage;
+  private final Set<Language> myRelevantLanguages = new HashSet<Language>();
 
-	public TemplateToolkitFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
-	{
-		super(manager, virtualFile, eventSystemEnabled);
-		myRelevantLanguages.add(getBaseLanguage());
-		myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
-	}
+  public TemplateToolkitFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
+    super(manager, virtualFile, eventSystemEnabled);
+    myRelevantLanguages.add(getBaseLanguage());
+    myRelevantLanguages.add(myTemplateLanguage = calcTemplateLanguage(manager, virtualFile));
+  }
 
-	public static Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
-	{
-		while (file instanceof LightVirtualFile)
-		{
-			VirtualFile originalFile = ((LightVirtualFile) file).getOriginalFile();
-			if (originalFile == null || originalFile == file)
-			{
-				break;
-			}
-			file = originalFile;
-		}
+  @NotNull
+  @Override
+  public Set<Language> getLanguages() {
+    return myRelevantLanguages;
+  }
 
-		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
-		return result == null ? StdLanguages.HTML : result;
-	}
+  @NotNull
+  @Override
+  public Language getBaseLanguage() {
+    return myBaseLanguage;
+  }
 
-	@NotNull
-	@Override
-	public Set<Language> getLanguages()
-	{
-		return myRelevantLanguages;
-	}
+  @Override
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+    return new TemplateToolkitFileViewProvider(getManager(), fileCopy, false);
+  }
 
-	@NotNull
-	@Override
-	public Language getBaseLanguage()
-	{
-		return myBaseLanguage;
-	}
+  @NotNull
+  @Override
+  public Language getTemplateDataLanguage() {
+    return myTemplateLanguage;
+  }
 
-	@Override
-	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy)
-	{
-		return new TemplateToolkitFileViewProvider(getManager(), fileCopy, false);
-	}
+  @Nullable
+  @Override
+  protected PsiFile createFile(@NotNull Language lang) {
+    if (lang == getTemplateDataLanguage()) {
+      ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage());
 
-	@NotNull
-	@Override
-	public Language getTemplateDataLanguage()
-	{
-		return myTemplateLanguage;
-	}
+      if (parserDefinition == null) {
+        return null;
+      }
 
-	@Nullable
-	@Override
-	protected PsiFile createFile(@NotNull Language lang)
-	{
-		if (lang == getTemplateDataLanguage())
-		{
-			ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(getTemplateDataLanguage());
+      final PsiFileImpl file = (PsiFileImpl)parserDefinition.createFile(this);
+      file.setContentElementType(TemplateToolkitElementTypes.TT2_TEMPLATE_DATA);
+      return file;
+    }
 
-			if (parserDefinition == null)
-			{
-				return null;
-			}
+    if (lang == getBaseLanguage()) {
+      return LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
+    }
+    return null;
+  }
 
-			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
-			file.setContentElementType(TemplateToolkitElementTypes.TT2_TEMPLATE_DATA);
-			return file;
-		}
+  @Override
+  @Nullable
+  public PsiElement findElementAt(int offset, @NotNull Class<? extends Language> lang) {
+    final PsiFile mainRoot = getPsi(getBaseLanguage());
+    PsiElement ret = null;
+    for (final Language language : getLanguages()) {
+      if (!ReflectionUtil.isAssignable(lang, language.getClass())) {
+        continue;
+      }
+      if (lang.equals(Language.class) && !getLanguages().contains(language)) {
+        continue;
+      }
 
-		if (lang == getBaseLanguage())
-		{
-			return LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
-		}
-		return null;
-	}
+      final PsiFile psiRoot = getPsi(language);
+      final PsiElement psiElement = findElementAt(psiRoot, offset);
+      if (psiElement == null || psiElement instanceof OuterLanguageElement) {
+        continue;
+      }
+      if (ret == null || psiRoot != mainRoot) {
+        ret = psiElement;
+        // fixme this hack is to avoid detecting perl code on lexing phase, guess there are more bugs of this kind, so we better do
+        if (psiElement.getLanguage() == PerlLanguage.INSTANCE) {
+          break;
+        }
+      }
+    }
+    return ret;
+  }
 
-	@Override
-	@Nullable
-	public PsiElement findElementAt(int offset, @NotNull Class<? extends Language> lang)
-	{
-		final PsiFile mainRoot = getPsi(getBaseLanguage());
-		PsiElement ret = null;
-		for (final Language language : getLanguages())
-		{
-			if (!ReflectionUtil.isAssignable(lang, language.getClass()))
-			{
-				continue;
-			}
-			if (lang.equals(Language.class) && !getLanguages().contains(language))
-			{
-				continue;
-			}
+  public static Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
+    while (file instanceof LightVirtualFile) {
+      VirtualFile originalFile = ((LightVirtualFile)file).getOriginalFile();
+      if (originalFile == null || originalFile == file) {
+        break;
+      }
+      file = originalFile;
+    }
 
-			final PsiFile psiRoot = getPsi(language);
-			final PsiElement psiElement = findElementAt(psiRoot, offset);
-			if (psiElement == null || psiElement instanceof OuterLanguageElement)
-			{
-				continue;
-			}
-			if (ret == null || psiRoot != mainRoot)
-			{
-				ret = psiElement;
-				// fixme this hack is to avoid detecting perl code on lexing phase, guess there are more bugs of this kind, so we better do
-				if (psiElement.getLanguage() == PerlLanguage.INSTANCE)
-				{
-					break;
-				}
-			}
-		}
-		return ret;
-	}
-
+    Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
+    return result == null ? StdLanguages.HTML : result;
+  }
 }

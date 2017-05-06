@@ -33,49 +33,40 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_TOKEN;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpInjector implements MultiHostInjector
-{
-	private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT = Collections.singletonList(PsiPerlPerlRegexImpl.class);
+public class Perl5RegexpInjector implements MultiHostInjector {
+  private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT =
+    Collections.singletonList(PsiPerlPerlRegexImpl.class);
 
-	@Override
-	public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement context)
-	{
-		assert context instanceof PsiPerlPerlRegexImpl : "Got " + context;
-		if (!((PsiPerlPerlRegexImpl) context).isValidHost() || context.getTextLength() == 0)
-		{
-			return;
-		}
+  @Override
+  public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement context) {
+    assert context instanceof PsiPerlPerlRegexImpl : "Got " + context;
+    if (!((PsiPerlPerlRegexImpl)context).isValidHost() || context.getTextLength() == 0) {
+      return;
+    }
 
-		int[] sourceOffset = new int[]{0};
-		boolean[] hasStarted = new boolean[]{false};
-		context.acceptChildren(new PsiElementVisitor()
-		{
-			@Override
-			public void visitElement(PsiElement element)
-			{
-				if (PsiUtilCore.getElementType(element) == REGEX_TOKEN)
-				{
-					if (!hasStarted[0])
-					{
-						registrar.startInjecting(Perl5RegexpLanguage.INSTANCE);
-						hasStarted[0] = true;
-					}
-					registrar.addPlace(null, null, (PsiPerlPerlRegexImpl) context, TextRange.from(sourceOffset[0], element.getTextLength()));
-				}
-				sourceOffset[0] += element.getTextLength();
-			}
-		});
-		if (hasStarted[0])
-		{
-			registrar.doneInjecting();
-		}
-	}
+    int[] sourceOffset = new int[]{0};
+    boolean[] hasStarted = new boolean[]{false};
+    context.acceptChildren(new PsiElementVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        if (PsiUtilCore.getElementType(element) == REGEX_TOKEN) {
+          if (!hasStarted[0]) {
+            registrar.startInjecting(Perl5RegexpLanguage.INSTANCE);
+            hasStarted[0] = true;
+          }
+          registrar.addPlace(null, null, (PsiPerlPerlRegexImpl)context, TextRange.from(sourceOffset[0], element.getTextLength()));
+        }
+        sourceOffset[0] += element.getTextLength();
+      }
+    });
+    if (hasStarted[0]) {
+      registrar.doneInjecting();
+    }
+  }
 
-	@NotNull
-	@Override
-	public List<? extends Class<? extends PsiElement>> elementsToInjectIn()
-	{
-		return ELEMENTS_TO_INJECT;
-	}
-
+  @NotNull
+  @Override
+  public List<? extends Class<? extends PsiElement>> elementsToInjectIn() {
+    return ELEMENTS_TO_INJECT;
+  }
 }

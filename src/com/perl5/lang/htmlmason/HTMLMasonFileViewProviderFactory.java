@@ -26,12 +26,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileViewProviderFactory implements FileViewProviderFactory
-{
-	@NotNull
-	@Override
-	public FileViewProvider createFileViewProvider(@NotNull VirtualFile file, Language language, @NotNull PsiManager manager, boolean eventSystemEnabled)
-	{
-		return new HTMLMasonFileViewProvider(manager, file, eventSystemEnabled);
-	}
+public class HTMLMasonFileViewProviderFactory implements FileViewProviderFactory {
+  @NotNull
+  @Override
+  public FileViewProvider createFileViewProvider(@NotNull VirtualFile file,
+                                                 Language language,
+                                                 @NotNull PsiManager manager,
+                                                 boolean eventSystemEnabled) {
+    return new HTMLMasonFileViewProvider(manager, file, eventSystemEnabled);
+  }
 }

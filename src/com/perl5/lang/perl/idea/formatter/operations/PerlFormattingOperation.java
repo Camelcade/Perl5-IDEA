@@ -20,12 +20,11 @@ package com.perl5.lang.perl.idea.formatter.operations;
  * Created by hurricup on 15.11.2015.
  * Interface represents an operation with psi tree like add/remove/wrap/unwrap
  */
-public interface PerlFormattingOperation
-{
-	/**
-	 * Performs psi tree change
-	 *
-	 * @return integer delta between inserted and removed content length
-	 */
-	int apply();
+public interface PerlFormattingOperation {
+  /**
+   * Performs psi tree change
+   *
+   * @return integer delta between inserted and removed content length
+   */
+  int apply();
 }

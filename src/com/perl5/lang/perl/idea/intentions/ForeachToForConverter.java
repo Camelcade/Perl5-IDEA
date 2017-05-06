@@ -15,122 +15,109 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by bcardoso on 7/28/16.
  */
-public class ForeachToForConverter extends PsiElementBaseIntentionAction
-{
-	public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
-													  @NotNull PsiPerlExpr lexicalVariableDeclaration,
-													  @NotNull PsiPerlForListEpxr listExpr,
-													  @NotNull PsiPerlBlock forBlock)
-	{
-		// check if listExpr is a single array or a list expression
-		boolean isSingleArray = listExpr.getFirstChild() instanceof PsiPerlArrayVariable
-				&& (listExpr.getChildren().length == 1);
+public class ForeachToForConverter extends PsiElementBaseIntentionAction {
+  @Nls
+  @NotNull
+  @Override
+  public String getText() {
+    return "Convert foreach to indexed for (Alpha)";
+  }
 
-		String arrayName;
-		if (isSingleArray)
-		{
-			PsiPerlArrayVariable childArray = (PsiPerlArrayVariable) listExpr.getFirstChild();
-			arrayName = childArray.getName();
-		}
-		else
-		{
-			arrayName = "list";
-		}
+  @Nls
+  @NotNull
+  @Override
+  public String getFamilyName() {
+    return getText();
+  }
 
-		// Assign iterationVariable = iterationArray[$idx]
-		String assignStatementStr = String.format("%s = $%s[$idx];",
-				lexicalVariableDeclaration.getText(),
-				arrayName);
-		PsiPerlStatement assignStatement = createPsiOfTypeFromSyntax(project, assignStatementStr, PsiPerlStatement.class);
+  @Override
+  public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
+    if (!element.isWritable()) {
+      return false;
+    }
 
-		// Define where to insert the new statement
-		PsiPerlStatement[] statementList = PsiTreeUtil.getChildrenOfType(forBlock, PsiPerlStatement.class);
-		PsiElement anchorPoint = statementList == null ? forBlock.getLastChild() : statementList[0];
-		forBlock.addBefore(assignStatement, anchorPoint);
+    PsiElement parent = element.getParent();
+    if (!(parent instanceof PsiPerlForeachCompound)) {
+      return false;
+    }
 
-		String indexedForSyntax = String.format("for (my $idx = 0; $idx < scalar(@%s); $idx++) %s",
-				arrayName,
-				forBlock.getText());
+    PsiPerlForListStatement forListStatement = ((PsiPerlForeachCompound)parent).getForListStatement();
+    return forListStatement != null
+           && forListStatement.getExpr() instanceof PsiPerlVariableDeclarationLexical;
+  }
 
-		PsiPerlForCompound result = createPsiOfTypeFromSyntax(project, indexedForSyntax, PsiPerlForCompound.class);
+  @Override
+  public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
+    PsiPerlForeachCompound foreachElement = (PsiPerlForeachCompound)element.getParent();
 
-		if (!isSingleArray)
-		{
-			// declare and initialize the new array before the new for
-			String newListSyntax = String.format("my @%s = %s;\n", arrayName, listExpr.getText());
-			PsiPerlStatement newListStatement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiPerlStatement.class);
-			PsiWhiteSpace newLineElement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiWhiteSpace.class);
-			result.addBefore(newLineElement, result.getFirstChild());
-			result.addBefore(newListStatement, result.getFirstChild());
-		}
+    PsiPerlForListStatement forListStatement = foreachElement.getForListStatement();
+    assert forListStatement != null;
 
-		assert result != null : "While creating PsiPerlForCompound";
-		return result;
-	}
+    PsiPerlExpr forExpr = forListStatement.getExpr();
+    assert forExpr != null;
 
-	private static <T extends PsiElement> T createPsiOfTypeFromSyntax(Project project, String syntax, Class<T> type)
-	{
-		return PsiTreeUtil.findChildOfType(PerlElementFactory.createFile(project, syntax), type);
-	}
+    PsiPerlForListEpxr forListEpxr = forListStatement.getForListEpxr();
 
-	@Nls
-	@NotNull
-	@Override
-	public String getText()
-	{
-		return "Convert foreach to indexed for (Alpha)";
-	}
+    PsiPerlBlock block = foreachElement.getBlock();
+    assert block != null;
 
-	@Nls
-	@NotNull
-	@Override
-	public String getFamilyName()
-	{
-		return getText();
-	}
+    PsiPerlForCompound indexedFor = createIndexedFor(project, forExpr, forListEpxr, block);
+    foreachElement.replace(indexedFor);
+  }
 
-	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
-	{
-		if (!element.isWritable())
-		{
-			return false;
-		}
+  @Override
+  public boolean startInWriteAction() {
+    return true;
+  }
 
-		PsiElement parent = element.getParent();
-		if (!(parent instanceof PsiPerlForeachCompound))
-		{
-			return false;
-		}
+  public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
+                                                    @NotNull PsiPerlExpr lexicalVariableDeclaration,
+                                                    @NotNull PsiPerlForListEpxr listExpr,
+                                                    @NotNull PsiPerlBlock forBlock) {
+    // check if listExpr is a single array or a list expression
+    boolean isSingleArray = listExpr.getFirstChild() instanceof PsiPerlArrayVariable
+                            && (listExpr.getChildren().length == 1);
 
-		PsiPerlForListStatement forListStatement = ((PsiPerlForeachCompound) parent).getForListStatement();
-		return forListStatement != null
-				&& forListStatement.getExpr() instanceof PsiPerlVariableDeclarationLexical;
-	}
+    String arrayName;
+    if (isSingleArray) {
+      PsiPerlArrayVariable childArray = (PsiPerlArrayVariable)listExpr.getFirstChild();
+      arrayName = childArray.getName();
+    }
+    else {
+      arrayName = "list";
+    }
 
-	@Override
-	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
-	{
-		PsiPerlForeachCompound foreachElement = (PsiPerlForeachCompound) element.getParent();
+    // Assign iterationVariable = iterationArray[$idx]
+    String assignStatementStr = String.format("%s = $%s[$idx];",
+                                              lexicalVariableDeclaration.getText(),
+                                              arrayName);
+    PsiPerlStatement assignStatement = createPsiOfTypeFromSyntax(project, assignStatementStr, PsiPerlStatement.class);
 
-		PsiPerlForListStatement forListStatement = foreachElement.getForListStatement();
-		assert forListStatement != null;
+    // Define where to insert the new statement
+    PsiPerlStatement[] statementList = PsiTreeUtil.getChildrenOfType(forBlock, PsiPerlStatement.class);
+    PsiElement anchorPoint = statementList == null ? forBlock.getLastChild() : statementList[0];
+    forBlock.addBefore(assignStatement, anchorPoint);
 
-		PsiPerlExpr forExpr = forListStatement.getExpr();
-		assert forExpr != null;
+    String indexedForSyntax = String.format("for (my $idx = 0; $idx < scalar(@%s); $idx++) %s",
+                                            arrayName,
+                                            forBlock.getText());
 
-		PsiPerlForListEpxr forListEpxr = forListStatement.getForListEpxr();
+    PsiPerlForCompound result = createPsiOfTypeFromSyntax(project, indexedForSyntax, PsiPerlForCompound.class);
 
-		PsiPerlBlock block = foreachElement.getBlock();
-		assert block != null;
+    if (!isSingleArray) {
+      // declare and initialize the new array before the new for
+      String newListSyntax = String.format("my @%s = %s;\n", arrayName, listExpr.getText());
+      PsiPerlStatement newListStatement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiPerlStatement.class);
+      PsiWhiteSpace newLineElement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiWhiteSpace.class);
+      result.addBefore(newLineElement, result.getFirstChild());
+      result.addBefore(newListStatement, result.getFirstChild());
+    }
 
-		PsiPerlForCompound indexedFor = createIndexedFor(project, forExpr, forListEpxr, block);
-		foreachElement.replace(indexedFor);
-	}
+    assert result != null : "While creating PsiPerlForCompound";
+    return result;
+  }
 
-	@Override
-	public boolean startInWriteAction()
-	{
-		return true;
-	}
+  private static <T extends PsiElement> T createPsiOfTypeFromSyntax(Project project, String syntax, Class<T> type) {
+    return PsiTreeUtil.findChildOfType(PerlElementFactory.createFile(project, syntax), type);
+  }
 }

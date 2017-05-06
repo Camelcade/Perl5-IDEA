@@ -27,35 +27,27 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 06.06.2016.
  */
-public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolkitElementTypes
-{
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		IElementType tokenType = element.getNode().getElementType();
-		if (tokenType == TT2_IDENTIFIER || tokenType == TT2_SIGIL_SCALAR)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY);
-		}
-		else if (TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET.contains(tokenType))
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY);
-		}
-		else if (TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET.contains(tokenType))
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY);
-		}
-		else if (tokenType == SQ_STRING_EXPR)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY);
-		}
-		else if (tokenType == DQ_STRING_EXPR)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY);
-		}
-		else if (tokenType == BLOCK_COMMENT)
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY);
-		}
-	}
+public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolkitElementTypes {
+  @Override
+  public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+    IElementType tokenType = element.getNode().getElementType();
+    if (tokenType == TT2_IDENTIFIER || tokenType == TT2_SIGIL_SCALAR) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY);
+    }
+    else if (TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET.contains(tokenType)) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY);
+    }
+    else if (TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET.contains(tokenType)) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY);
+    }
+    else if (tokenType == SQ_STRING_EXPR) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY);
+    }
+    else if (tokenType == DQ_STRING_EXPR) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY);
+    }
+    else if (tokenType == BLOCK_COMMENT) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY);
+    }
+  }
 }

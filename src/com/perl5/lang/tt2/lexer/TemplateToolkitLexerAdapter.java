@@ -23,10 +23,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLexerAdapter extends PerlLexerWithCustomStatesAdapter
-{
-	public TemplateToolkitLexerAdapter(@Nullable Project project)
-	{
-		super(new TemplateToolkitLexer(project));
-	}
+public class TemplateToolkitLexerAdapter extends PerlLexerWithCustomStatesAdapter {
+  public TemplateToolkitLexerAdapter(@Nullable Project project) {
+    super(new TemplateToolkitLexer(project));
+  }
 }

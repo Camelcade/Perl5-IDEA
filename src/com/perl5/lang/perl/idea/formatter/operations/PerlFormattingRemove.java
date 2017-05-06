@@ -22,50 +22,44 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.11.2015.
  */
-public class PerlFormattingRemove implements PerlFormattingOperation
-{
-	private final PsiElement myFromElement;
-	private final PsiElement myToElement;
+public class PerlFormattingRemove implements PerlFormattingOperation {
+  private final PsiElement myFromElement;
+  private final PsiElement myToElement;
 
-	public PerlFormattingRemove(@NotNull PsiElement element)
-	{
-		this(element, element);
-	}
+  public PerlFormattingRemove(@NotNull PsiElement element) {
+    this(element, element);
+  }
 
-	public PerlFormattingRemove(@NotNull PsiElement myFromElement, @NotNull PsiElement myToElement)
-	{
-		assert myFromElement.getParent() == myToElement.getParent() : "Psi elements range must be under same parent";
-		assert myFromElement.getStartOffsetInParent() <= myToElement.getStartOffsetInParent() : "From element must came first";
-		this.myFromElement = myFromElement;
-		this.myToElement = myToElement;
-	}
+  public PerlFormattingRemove(@NotNull PsiElement myFromElement, @NotNull PsiElement myToElement) {
+    assert myFromElement.getParent() == myToElement.getParent() : "Psi elements range must be under same parent";
+    assert myFromElement.getStartOffsetInParent() <= myToElement.getStartOffsetInParent() : "From element must came first";
+    this.myFromElement = myFromElement;
+    this.myToElement = myToElement;
+  }
 
-	@Override
-	public int apply()
-	{
-		if (!myFromElement.isValid() || !myToElement.isValid())    // seems something happened on the upper level
-		{
-			return 0;
-		}
+  @Override
+  public int apply() {
+    if (!myFromElement.isValid() || !myToElement.isValid())    // seems something happened on the upper level
+    {
+      return 0;
+    }
 
-		int result = 0;
-		PsiElement currentElement = myFromElement;
+    int result = 0;
+    PsiElement currentElement = myFromElement;
 
-		while (true)
-		{
-			result -= currentElement.getNode().getTextLength();
-			PsiElement nextElement = currentElement.getNextSibling();
-			boolean isLast = currentElement == myToElement;
+    while (true) {
+      result -= currentElement.getNode().getTextLength();
+      PsiElement nextElement = currentElement.getNextSibling();
+      boolean isLast = currentElement == myToElement;
 
-			currentElement.delete();
-			if (isLast || nextElement == null)
-			{
-				break;
-			}
-			currentElement = nextElement;
-			assert currentElement.isValid() : "Element become invalid";
-		}
+      currentElement.delete();
+      if (isLast || nextElement == null) {
+        break;
+      }
+      currentElement = nextElement;
+      assert currentElement.isValid() : "Element become invalid";
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

@@ -28,20 +28,16 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.01.2016.
  */
-public class PerlSubNameElementCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	public void addCompletions(@NotNull CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
-	{
-		PsiElement element = parameters.getPosition();
+public class PerlSubNameElementCompletionProvider extends CompletionProvider<CompletionParameters> {
+  public void addCompletions(@NotNull CompletionParameters parameters,
+                             ProcessingContext context,
+                             @NotNull CompletionResultSet resultSet) {
+    PsiElement element = parameters.getPosition();
 
-		if (element.getParent() instanceof PerlSubBase)
-		{
-			PerlSubBase subDefinitionBase = (PerlSubBase) element.getParent();
-			PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
-			PerlSubCompletionUtil.fillWithNotOverridedSubs(subDefinitionBase, resultSet);
-		}
-
-	}
+    if (element.getParent() instanceof PerlSubBase) {
+      PerlSubBase subDefinitionBase = (PerlSubBase)element.getParent();
+      PerlSubCompletionUtil.fillWithUnresolvedSubs(subDefinitionBase, resultSet);
+      PerlSubCompletionUtil.fillWithNotOverridedSubs(subDefinitionBase, resultSet);
+    }
+  }
 }

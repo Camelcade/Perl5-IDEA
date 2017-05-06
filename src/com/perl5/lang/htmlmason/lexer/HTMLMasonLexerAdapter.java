@@ -25,16 +25,14 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter implements HTMLMasonElementTypes
-{
-	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
-			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
-			TokenSet.create(HTML_MASON_TEMPLATE_BLOCK_HTML)
-	);
+public class HTMLMasonLexerAdapter extends PerlTemplatingMergingLexerAdapter implements HTMLMasonElementTypes {
+  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+    PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+    TokenSet.create(HTML_MASON_TEMPLATE_BLOCK_HTML)
+  );
 
-	public HTMLMasonLexerAdapter(Project project)
-	{
-		super(project, new HTMLMasonLexer(null).withProject(project), TOKENS_TO_MERGE);
-	}
+  public HTMLMasonLexerAdapter(Project project) {
+    super(project, new HTMLMasonLexer(null).withProject(project), TOKENS_TO_MERGE);
+  }
 }
 

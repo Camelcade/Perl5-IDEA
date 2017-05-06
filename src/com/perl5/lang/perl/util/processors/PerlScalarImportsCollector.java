@@ -22,11 +22,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 02.06.2016.
  */
-public class PerlScalarImportsCollector extends PerlImportsCollector
-{
-	@Override
-	protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor)
-	{
-		return descriptor.isScalar();
-	}
+public class PerlScalarImportsCollector extends PerlImportsCollector {
+  @Override
+  protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor) {
+    return descriptor.isScalar();
+  }
 }

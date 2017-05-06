@@ -33,62 +33,59 @@ import java.util.List;
 /**
  * Created by hurricup on 11.06.2016.
  */
-public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitCompositeElementImpl implements TemplateToolkitPerlBlockElement
-{
-	private List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitCompositeElementImpl implements TemplateToolkitPerlBlockElement {
+  private List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 
-	public TemplateToolkitPerlBlockElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+  public TemplateToolkitPerlBlockElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>();
-		variables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				"$context",
-				"Template::Context",
-				true,
-				false,
-				false,
-				this
-		));
-		variables.add(new PerlVariableLightImpl(
-				getManager(),
-				PerlLanguage.INSTANCE,
-				"$stash",
-				"Template::Stash",
-				true,
-				false,
-				false,
-				this
-		));
-		return variables;
-	}
+  @NotNull
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>();
+    variables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      "$context",
+      "Template::Context",
+      true,
+      false,
+      false,
+      this
+    ));
+    variables.add(new PerlVariableLightImpl(
+      getManager(),
+      PerlLanguage.INSTANCE,
+      "$stash",
+      "Template::Stash",
+      true,
+      false,
+      false,
+      this
+    ));
+    return variables;
+  }
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (myImplicitVariables == null)
-		{
-			myImplicitVariables = buildImplicitVariables();
-		}
-		return myImplicitVariables;
-	}
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      myImplicitVariables = buildImplicitVariables();
+    }
+    return myImplicitVariables;
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return PerlResolveUtil.processChildren(
-				this,
-				processor,
-				state,
-				lastParent,
-				place
-		);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    return PerlResolveUtil.processChildren(
+      this,
+      processor,
+      state,
+      lastParent,
+      place
+    );
+  }
 }

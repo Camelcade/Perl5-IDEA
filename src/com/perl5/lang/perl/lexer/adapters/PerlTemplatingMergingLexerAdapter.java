@@ -8,15 +8,13 @@ import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlTemplatingMergingLexerAdapter extends MergingLexerAdapter
-{
-	public PerlTemplatingMergingLexerAdapter(@Nullable Project project, @NotNull FlexLexer flexLexer, TokenSet tokensToMerge)
-	{
-		super(
-				new PerlSublexingLexerAdapter(
-						project,
-						new FlexAdapter(flexLexer), false),
-				tokensToMerge
-		);
-	}
+public abstract class PerlTemplatingMergingLexerAdapter extends MergingLexerAdapter {
+  public PerlTemplatingMergingLexerAdapter(@Nullable Project project, @NotNull FlexLexer flexLexer, TokenSet tokensToMerge) {
+    super(
+      new PerlSublexingLexerAdapter(
+        project,
+        new FlexAdapter(flexLexer), false),
+      tokensToMerge
+    );
+  }
 }

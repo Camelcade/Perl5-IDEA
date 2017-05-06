@@ -45,98 +45,78 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.04.2016.
  */
-public class PerlInterpreterEditorNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware
-{
-	private static final Key<EditorNotificationPanel> KEY = Key.create("perl.interpreter.not.choosen");
-	private final Project myProject;
+public class PerlInterpreterEditorNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
+  private static final Key<EditorNotificationPanel> KEY = Key.create("perl.interpreter.not.choosen");
+  private final Project myProject;
 
-	public PerlInterpreterEditorNotification(Project myProject)
-	{
-		this.myProject = myProject;
-	}
+  public PerlInterpreterEditorNotification(Project myProject) {
+    this.myProject = myProject;
+  }
 
-	@NotNull
-	@Override
-	public Key<EditorNotificationPanel> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public Key<EditorNotificationPanel> getKey() {
+    return KEY;
+  }
 
-	@Nullable
-	@Override
-	public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile, @NotNull FileEditor fileEditor)
-	{
-		if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile))
-		{
-			final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
-			if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING)
-			{
-				return null;
-			}
+  @Nullable
+  @Override
+  public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile, @NotNull FileEditor fileEditor) {
+    if (virtualFile.getFileType() instanceof PerlFileType && !(virtualFile instanceof LightVirtualFile)) {
+      final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
+      if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING) {
+        return null;
+      }
 
-			EditorNotificationPanel panel = null;
+      EditorNotificationPanel panel = null;
 
-			if (PlatformUtils.isIntelliJ())
-			{
-				if (VfsUtil.isAncestor(myProject.getBaseDir(), virtualFile, true))
-				{
-					Module fileModule = ModuleUtilCore.findModuleForFile(virtualFile, myProject);
-					Sdk fileSdk;
-					if (fileModule == null)
-					{
-						fileSdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
-					}
-					else
-					{
-						fileSdk = ModuleRootManager.getInstance(fileModule).getSdk();
-					}
-					if (fileSdk == null || fileSdk.getSdkType() != PerlSdkType.getInstance())
-					{
-						panel = new EditorNotificationPanel();
-						panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
-						panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable()
-						{
-							@Override
-							public void run()
-							{
-								ProjectSettingsService.getInstance(myProject).openProjectSettings();
-							}
-						});
-					}
-				}
-			}
-			else
-			{
-				if (StringUtil.isEmpty(perlLocalSettings.PERL_PATH))
-				{
-					panel = new EditorNotificationPanel();
-					panel.setText(PerlBundle.message("perl.notification.interperter.not.configured"));
-					panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							ShowSettingsUtil.getInstance().editConfigurable(myProject, new PerlSettingsConfigurable(myProject));
-						}
-					});
-				}
-			}
+      if (PlatformUtils.isIntelliJ()) {
+        if (VfsUtil.isAncestor(myProject.getBaseDir(), virtualFile, true)) {
+          Module fileModule = ModuleUtilCore.findModuleForFile(virtualFile, myProject);
+          Sdk fileSdk;
+          if (fileModule == null) {
+            fileSdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
+          }
+          else {
+            fileSdk = ModuleRootManager.getInstance(fileModule).getSdk();
+          }
+          if (fileSdk == null || fileSdk.getSdkType() != PerlSdkType.getInstance()) {
+            panel = new EditorNotificationPanel();
+            panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
+            panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable() {
+              @Override
+              public void run() {
+                ProjectSettingsService.getInstance(myProject).openProjectSettings();
+              }
+            });
+          }
+        }
+      }
+      else {
+        if (StringUtil.isEmpty(perlLocalSettings.PERL_PATH)) {
+          panel = new EditorNotificationPanel();
+          panel.setText(PerlBundle.message("perl.notification.interperter.not.configured"));
+          panel.createActionLabel(PerlBundle.message("perl.notification.configure"), new Runnable() {
+            @Override
+            public void run() {
+              ShowSettingsUtil.getInstance().editConfigurable(myProject, new PerlSettingsConfigurable(myProject));
+            }
+          });
+        }
+      }
 
-			if (panel != null)
-			{
-				panel.createActionLabel(PerlBundle.message("perl.notification.disable.notification"), new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING = true;
-						EditorNotifications.getInstance(myProject).updateAllNotifications();
-					}
-				});
-			}
+      if (panel != null) {
+        panel.createActionLabel(PerlBundle.message("perl.notification.disable.notification"), new Runnable() {
+          @Override
+          public void run() {
+            perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING = true;
+            EditorNotifications.getInstance(myProject).updateAllNotifications();
+          }
+        });
+      }
 
-			return panel;
-		}
-		return null;
-	}
+      return panel;
+    }
+    return null;
+  }
 }

@@ -26,29 +26,23 @@ import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodElementFactory
-{
-	public static String getHeaderText(Project project, String text)
-	{
-		PodFileImpl file = createFile(project, "=head1 " + text + "\n\n");
-		PsiElement section = file.getFirstChild();
-		assert section instanceof PodSectionH1;
-		return ((PodSectionH1) section).getTitleText();
-	}
+public class PodElementFactory {
+  public static String getHeaderText(Project project, String text) {
+    PodFileImpl file = createFile(project, "=head1 " + text + "\n\n");
+    PsiElement section = file.getFirstChild();
+    assert section instanceof PodSectionH1;
+    return ((PodSectionH1)section).getTitleText();
+  }
 
-	public static PsiElement getSpace(Project project)
-	{
-		PodFileImpl file = createFile(project, " ");
-		PsiElement space = file.getFirstChild();
-		assert space instanceof PsiWhiteSpace;
-		return space;
+  public static PsiElement getSpace(Project project) {
+    PodFileImpl file = createFile(project, " ");
+    PsiElement space = file.getFirstChild();
+    assert space instanceof PsiWhiteSpace;
+    return space;
+  }
 
-	}
-
-	public static PodFileImpl createFile(Project project, String text)
-	{
-		return (PodFileImpl) PsiFileFactory.getInstance(project).
-				createFileFromText("file.dummy", PodFileType.INSTANCE, text);
-	}
-
+  public static PodFileImpl createFile(Project project, String text) {
+    return (PodFileImpl)PsiFileFactory.getInstance(project).
+      createFileFromText("file.dummy", PodFileType.INSTANCE, text);
+  }
 }

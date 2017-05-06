@@ -36,123 +36,111 @@ import java.util.Map;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlock
-{
-	public HTMLMasonBlockImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlock {
+  public HTMLMasonBlockImpl(ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
-	}
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    return lastParent == null || processDeclarationsForReal(processor, state, lastParent, place);
+  }
 
-	public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place)
-	{
-		boolean checkInit = false;
-		boolean checkCode = false;
+  public boolean processDeclarationsForReal(@NotNull PsiScopeProcessor processor,
+                                            @NotNull ResolveState state,
+                                            PsiElement lastParent,
+                                            @NotNull PsiElement place) {
+    boolean checkInit = false;
+    boolean checkCode = false;
 
-		PsiElement argsAnchor = null;
-		PsiElement initAnchor = null;
+    PsiElement argsAnchor = null;
+    PsiElement initAnchor = null;
 
-		if (lastParent instanceof HTMLMasonArgsBlockImpl)
-		{
-			argsAnchor = lastParent;
-		}
-		else if (lastParent instanceof HTMLMasonInitBlockImpl)
-		{
-			checkInit = true;
-			initAnchor = lastParent;
-		}
-		else if (!(lastParent instanceof HTMLMasonFilterBlockImpl))
-		{
-			checkInit = true;
-			checkCode = true;
-		}
+    if (lastParent instanceof HTMLMasonArgsBlockImpl) {
+      argsAnchor = lastParent;
+    }
+    else if (lastParent instanceof HTMLMasonInitBlockImpl) {
+      checkInit = true;
+      initAnchor = lastParent;
+    }
+    else if (!(lastParent instanceof HTMLMasonFilterBlockImpl)) {
+      checkInit = true;
+      checkCode = true;
+    }
 
-		if (checkCode)
-		{
-			if (!super.processDeclarations(processor, state, lastParent, place))
-			{
-				return false;
-			}
-		}
-		if (checkInit)
-		{
-			if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class, initAnchor))
-			{
-				return false;
-			}
-		}
+    if (checkCode) {
+      if (!super.processDeclarations(processor, state, lastParent, place)) {
+        return false;
+      }
+    }
+    if (checkInit) {
+      if (!checkSubblocks(processor, state, place, HTMLMasonInitBlock.class, initAnchor)) {
+        return false;
+      }
+    }
 
-		return checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class, argsAnchor);
-	}
+    return checkSubblocks(processor, state, place, HTMLMasonArgsBlock.class, argsAnchor);
+  }
 
 
-	@SuppressWarnings("Duplicates")
-	protected boolean checkSubblocks(
-			@NotNull PsiScopeProcessor processor,
-			@NotNull ResolveState state,
-			@NotNull PsiElement place,
-			@NotNull Class<? extends HTMLMasonCompositeElement> clazz,
-			@Nullable PsiElement anchor
-	)
-	{
-		List<HTMLMasonCompositeElement> elements = getBlocksMap().get(clazz);
+  @SuppressWarnings("Duplicates")
+  protected boolean checkSubblocks(
+    @NotNull PsiScopeProcessor processor,
+    @NotNull ResolveState state,
+    @NotNull PsiElement place,
+    @NotNull Class<? extends HTMLMasonCompositeElement> clazz,
+    @Nullable PsiElement anchor
+  ) {
+    List<HTMLMasonCompositeElement> elements = getBlocksMap().get(clazz);
 
-		for (int i = elements.size() - 1; i >= 0; i--)
-		{
-			HTMLMasonCompositeElement element = elements.get(i);
-			if (anchor == null && !element.processDeclarationsForReal(processor, state, null, place))
-			{
-				return false;
-			}
-			else if (anchor != null && anchor.equals(element))
-			{
-				anchor = null;
-			}
-		}
+    for (int i = elements.size() - 1; i >= 0; i--) {
+      HTMLMasonCompositeElement element = elements.get(i);
+      if (anchor == null && !element.processDeclarationsForReal(processor, state, null, place)) {
+        return false;
+      }
+      else if (anchor != null && anchor.equals(element)) {
+        anchor = null;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public List<HTMLMasonCompositeElement> getArgsBlocks()
-	{
-		return getBlocksMap().get(HTMLMasonArgsBlock.class);
-	}
+  @NotNull
+  @Override
+  public List<HTMLMasonCompositeElement> getArgsBlocks() {
+    return getBlocksMap().get(HTMLMasonArgsBlock.class);
+  }
 
-	private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap()
-	{
-		return CachedValuesManager.getCachedValue(this, () ->
-		{
-			Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
+  private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap() {
+    return CachedValuesManager.getCachedValue(this, () ->
+    {
+      Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
 
-			final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();
-			final List<HTMLMasonCompositeElement> argsResult = new ArrayList<>();
+      final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();
+      final List<HTMLMasonCompositeElement> argsResult = new ArrayList<>();
 
-			result.put(HTMLMasonInitBlock.class, initResult);
-			result.put(HTMLMasonArgsBlock.class, argsResult);
+      result.put(HTMLMasonInitBlock.class, initResult);
+      result.put(HTMLMasonArgsBlock.class, argsResult);
 
-			PsiTreeUtil.processElements(HTMLMasonBlockImpl.this, element ->
-			{
-				if (element instanceof HTMLMasonInitBlock && HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-				{
-					initResult.add((HTMLMasonCompositeElement) element);
-				}
-				else if (element instanceof HTMLMasonArgsBlock && HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)))
-				{
-					argsResult.add((HTMLMasonCompositeElement) element);
-				}
+      PsiTreeUtil.processElements(HTMLMasonBlockImpl.this, element ->
+      {
+        if (element instanceof HTMLMasonInitBlock &&
+            HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class))) {
+          initResult.add((HTMLMasonCompositeElement)element);
+        }
+        else if (element instanceof HTMLMasonArgsBlock &&
+                 HTMLMasonBlockImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class))) {
+          argsResult.add((HTMLMasonCompositeElement)element);
+        }
 
-				return true;
-			});
+        return true;
+      });
 
-			return CachedValueProvider.Result.create(result, HTMLMasonBlockImpl.this);
-		});
-	}
-
+      return CachedValueProvider.Result.create(result, HTMLMasonBlockImpl.this);
+    });
+  }
 }

@@ -21,17 +21,13 @@ import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlTokenType extends IElementType
-{
-	public PerlTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PerlLanguage.INSTANCE);
-	}
+public class PerlTokenType extends IElementType {
+  public PerlTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, PerlLanguage.INSTANCE);
+  }
 
-	public String toString()
-	{
-		return "Perl5: " + super.toString();
-	}
-
+  public String toString() {
+    return "Perl5: " + super.toString();
+  }
 }
 

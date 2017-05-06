@@ -26,26 +26,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.05.2016.
  */
-public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase
-{
-	public PerlRemoteDebuggingConfigurationType()
-	{
-		super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);
+public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase {
+  public PerlRemoteDebuggingConfigurationType() {
+    super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);
 
-		addFactory(new ConfigurationFactory(this)
-		{
-			@Override
-			public RunConfiguration createTemplateConfiguration(Project project)
-			{
-				return new PerlRemoteDebuggingConfiguration(project, this, "Unnamed");
-			}
-		});
-	}
+    addFactory(new ConfigurationFactory(this) {
+      @Override
+      public RunConfiguration createTemplateConfiguration(Project project) {
+        return new PerlRemoteDebuggingConfiguration(project, this, "Unnamed");
+      }
+    });
+  }
 
-	@NotNull
-	public static PerlRemoteDebuggingConfigurationType getInstance()
-	{
-		return CONFIGURATION_TYPE_EP.findExtension(PerlRemoteDebuggingConfigurationType.class);
-	}
-
+  @NotNull
+  public static PerlRemoteDebuggingConfigurationType getInstance() {
+    return CONFIGURATION_TYPE_EP.findExtension(PerlRemoteDebuggingConfigurationType.class);
+  }
 }

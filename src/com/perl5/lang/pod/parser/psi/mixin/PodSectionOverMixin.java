@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionOverMixin extends PodSectionMixin implements PodSectionOver
-{
-	public PodSectionOverMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodSectionOverMixin extends PodSectionMixin implements PodSectionOver {
+  public PodSectionOverMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 }

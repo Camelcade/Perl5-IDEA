@@ -26,50 +26,42 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonProjectComponent implements ProjectComponent
-{
-	private final Project myProject;
-	private final VirtualFileListener myFileListener;
+public class MasonProjectComponent implements ProjectComponent {
+  private final Project myProject;
+  private final VirtualFileListener myFileListener;
 
-	public MasonProjectComponent(Project project)
-	{
-		myProject = project;
-		myFileListener = new MasonVirtualFileListener(project);
-	}
+  public MasonProjectComponent(Project project) {
+    myProject = project;
+    myFileListener = new MasonVirtualFileListener(project);
+  }
 
-	@Override
-	public void initComponent()
-	{
-		VirtualFileManager.getInstance().addVirtualFileListener(myFileListener);
-	}
+  @Override
+  public void initComponent() {
+    VirtualFileManager.getInstance().addVirtualFileListener(myFileListener);
+  }
 
-	@Override
-	public void disposeComponent()
-	{
-		VirtualFileManager.getInstance().removeVirtualFileListener(myFileListener);
-	}
+  @Override
+  public void disposeComponent() {
+    VirtualFileManager.getInstance().removeVirtualFileListener(myFileListener);
+  }
 
-	@Override
-	@NotNull
-	public String getComponentName()
-	{
-		return "MasonProjectComponent";
-	}
+  @Override
+  @NotNull
+  public String getComponentName() {
+    return "MasonProjectComponent";
+  }
 
-	@Override
-	public void projectOpened()
-	{
-		// called when project is opened
-	}
+  @Override
+  public void projectOpened() {
+    // called when project is opened
+  }
 
-	@Override
-	public void projectClosed()
-	{
-		// called when project is being closed
-	}
+  @Override
+  public void projectClosed() {
+    // called when project is being closed
+  }
 
-	public Project getProject()
-	{
-		return myProject;
-	}
+  public Project getProject() {
+    return myProject;
+  }
 }

@@ -26,12 +26,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlSubNameManipulator extends AbstractElementManipulator<PerlSubNameElement>
-{
-	@Override
-	public PerlSubNameElement handleContentChange(@NotNull PerlSubNameElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		return (PerlSubNameElement) ((LeafPsiElement) element).replaceWithText(newContent);
-	}
-
+public class PerlSubNameManipulator extends AbstractElementManipulator<PerlSubNameElement> {
+  @Override
+  public PerlSubNameElement handleContentChange(@NotNull PerlSubNameElement element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    return (PerlSubNameElement)((LeafPsiElement)element).replaceWithText(newContent);
+  }
 }

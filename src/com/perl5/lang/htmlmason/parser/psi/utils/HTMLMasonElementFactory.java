@@ -28,25 +28,20 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonElementFactory
-{
-	@Nullable
-	public static PerlString getBareCallString(Project project, String content)
-	{
-		String fileContent = "<& " + content + "&>";
-		HTMLMasonFileImpl file = createFile(project, fileContent);
-		return PsiTreeUtil.findChildOfType(file, PerlString.class);
-	}
+public class HTMLMasonElementFactory {
+  @Nullable
+  public static PerlString getBareCallString(Project project, String content) {
+    String fileContent = "<& " + content + "&>";
+    HTMLMasonFileImpl file = createFile(project, fileContent);
+    return PsiTreeUtil.findChildOfType(file, PerlString.class);
+  }
 
-	public static HTMLMasonFileImpl createFile(Project project, String text)
-	{
-		return createFile(project, text, HTMLMasonFileType.INSTANCE);
-	}
+  public static HTMLMasonFileImpl createFile(Project project, String text) {
+    return createFile(project, text, HTMLMasonFileType.INSTANCE);
+  }
 
-	public static HTMLMasonFileImpl createFile(Project project, String text, FileType fileType)
-	{
-		return (HTMLMasonFileImpl) PsiFileFactory.getInstance(project).
-				createFileFromText("file.dummy", fileType, text);
-	}
-
+  public static HTMLMasonFileImpl createFile(Project project, String text, FileType fileType) {
+    return (HTMLMasonFileImpl)PsiFileFactory.getInstance(project).
+      createFileFromText("file.dummy", fileType, text);
+  }
 }

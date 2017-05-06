@@ -43,117 +43,97 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class PerlConfigurationUtil
-{
-	public static final int WIDGET_HEIGHT = 90;
+public class PerlConfigurationUtil {
+  public static final int WIDGET_HEIGHT = 90;
 
-	public static JPanel createProjectPathsSelection(
-			@NotNull final Project myProject,
-			@NotNull final JBList rootsList,
-			@SuppressWarnings("Since15") @NotNull final CollectionListModel<String> rootsModel,
-			@NotNull @Nls final String dialogTitle
-	)
-	{
-		return ToolbarDecorator
-				.createDecorator(rootsList)
-				.setAddAction(new AnActionButtonRunnable()
-				{
-					@Override
-					public void run(AnActionButton anActionButton)
-					{
-						//rootsModel.add("New element");
-						FileChooserFactory.getInstance().createPathChooser(
-								FileChooserDescriptorFactory.
-										createMultipleFoldersDescriptor().
-										withRoots(myProject.getBaseDir()).
-										withTreeRootVisible(true).
-										withTitle(dialogTitle),
-								myProject,
-								rootsList
-						).choose(null, new Consumer<List<VirtualFile>>()
-						{
-							@Override
-							public void consume(List<VirtualFile> virtualFiles)
-							{
-								String rootPath = myProject.getBasePath();
-								if (rootPath != null)
-								{
-									VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
+  public static JPanel createProjectPathsSelection(
+    @NotNull final Project myProject,
+    @NotNull final JBList rootsList,
+    @SuppressWarnings("Since15") @NotNull final CollectionListModel<String> rootsModel,
+    @NotNull @Nls final String dialogTitle
+  ) {
+    return ToolbarDecorator
+      .createDecorator(rootsList)
+      .setAddAction(new AnActionButtonRunnable() {
+        @Override
+        public void run(AnActionButton anActionButton) {
+          //rootsModel.add("New element");
+          FileChooserFactory.getInstance().createPathChooser(
+            FileChooserDescriptorFactory.
+              createMultipleFoldersDescriptor().
+              withRoots(myProject.getBaseDir()).
+              withTreeRootVisible(true).
+              withTitle(dialogTitle),
+            myProject,
+            rootsList
+          ).choose(null, new Consumer<List<VirtualFile>>() {
+            @Override
+            public void consume(List<VirtualFile> virtualFiles) {
+              String rootPath = myProject.getBasePath();
+              if (rootPath != null) {
+                VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
 
-									if (rootFile != null)
-									{
-										for (VirtualFile file : virtualFiles)
-										{
-											String relativePath = VfsUtil.getRelativePath(file, rootFile);
-											if (!rootsModel.getItems().contains(relativePath))
-											{
-												rootsModel.add(relativePath);
-											}
-										}
-									}
-								}
-							}
-						});
-					}
-				})
-				.setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
-				.createPanel();
-	}
+                if (rootFile != null) {
+                  for (VirtualFile file : virtualFiles) {
+                    String relativePath = VfsUtil.getRelativePath(file, rootFile);
+                    if (!rootsModel.getItems().contains(relativePath)) {
+                      rootsModel.add(relativePath);
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+      })
+      .setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
+      .createPanel();
+  }
 
-	public static JPanel createSubstituteExtensionPanel(
-			@SuppressWarnings("Since15") @NotNull final CollectionListModel<String> substitutedExtensionsModel,
-			@NotNull final JBList substitutedExtensionsList
+  public static JPanel createSubstituteExtensionPanel(
+    @SuppressWarnings("Since15") @NotNull final CollectionListModel<String> substitutedExtensionsModel,
+    @NotNull final JBList substitutedExtensionsList
 
-	)
-	{
-		return ToolbarDecorator
-				.createDecorator(substitutedExtensionsList)
-				.setAddAction(new AnActionButtonRunnable()
-				{
-					@Override
-					public void run(AnActionButton anActionButton)
-					{
-						FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-						final List<String> currentItems = substitutedExtensionsModel.getItems();
-						List<FileNameMatcher> possibleItems = new ArrayList<FileNameMatcher>();
-						List<Icon> itemsIcons = new ArrayList<Icon>();
+  ) {
+    return ToolbarDecorator
+      .createDecorator(substitutedExtensionsList)
+      .setAddAction(new AnActionButtonRunnable() {
+        @Override
+        public void run(AnActionButton anActionButton) {
+          FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+          final List<String> currentItems = substitutedExtensionsModel.getItems();
+          List<FileNameMatcher> possibleItems = new ArrayList<FileNameMatcher>();
+          List<Icon> itemsIcons = new ArrayList<Icon>();
 
-						for (FileType fileType : fileTypeManager.getRegisteredFileTypes())
-						{
-							if (fileType instanceof LanguageFileType)
-							{
-								for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType))
-								{
-									if (matcher instanceof ExtensionFileNameMatcher)
-									{
-										String presentableString = matcher.getPresentableString();
-										if (!currentItems.contains(presentableString))
-										{
-											possibleItems.add(matcher);
-											itemsIcons.add(fileType.getIcon());
-										}
-									}
-								}
-							}
-						}
+          for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+            if (fileType instanceof LanguageFileType) {
+              for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+                if (matcher instanceof ExtensionFileNameMatcher) {
+                  String presentableString = matcher.getPresentableString();
+                  if (!currentItems.contains(presentableString)) {
+                    possibleItems.add(matcher);
+                    itemsIcons.add(fileType.getIcon());
+                  }
+                }
+              }
+            }
+          }
 
-						BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
-								new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons)
-								{
-									@Override
-									public PopupStep onChosen(FileNameMatcher selectedValue, boolean finalChoice)
-									{
-										substitutedExtensionsModel.add(selectedValue.getPresentableString());
-										return super.onChosen(selectedValue, finalChoice);
-									}
-								};
+          BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
+            new BaseListPopupStep<FileNameMatcher>("Select Extension", possibleItems, itemsIcons) {
+              @Override
+              public PopupStep onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
+                substitutedExtensionsModel.add(selectedValue.getPresentableString());
+                return super.onChosen(selectedValue, finalChoice);
+              }
+            };
 
-						JBPopupFactory.getInstance().createListPopup(fileNameMatcherBaseListPopupStep).show(anActionButton.getPreferredPopupPoint());
-					}
-				})
-				.disableDownAction()
-				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
-				.createPanel();
-	}
+          JBPopupFactory.getInstance().createListPopup(fileNameMatcherBaseListPopupStep).show(anActionButton.getPreferredPopupPoint());
+        }
+      })
+      .disableDownAction()
+      .disableUpAction()
+      .setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
+      .createPanel();
+  }
 }

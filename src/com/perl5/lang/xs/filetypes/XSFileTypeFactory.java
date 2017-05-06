@@ -23,11 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class XSFileTypeFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
-	{
-		fileTypeConsumer.consume(XSFileType.INSTANCE, "xs");
-	}
+public class XSFileTypeFactory extends FileTypeFactory {
+  @Override
+  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+    fileTypeConsumer.consume(XSFileType.INSTANCE, "xs");
+  }
 }

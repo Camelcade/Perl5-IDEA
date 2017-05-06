@@ -26,13 +26,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.05.2015.
  */
-public class EmbeddedPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory
-{
-	@Override
-	@NotNull
-	public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
-		return new EmbeddedPerlSyntaxHighlighter(project);
-	}
-
+public class EmbeddedPerlSyntaxHighlighterFactory extends PerlSyntaxHighlighterFactory {
+  @Override
+  @NotNull
+  public SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+    return new EmbeddedPerlSyntaxHighlighter(project);
+  }
 }

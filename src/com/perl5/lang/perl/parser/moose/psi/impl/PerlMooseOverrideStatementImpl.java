@@ -32,106 +32,88 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseOverrideStatement
-{
-	public PerlMooseOverrideStatementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseOverrideStatement {
+  public PerlMooseOverrideStatementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	public PerlMooseOverrideStatementImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlMooseOverrideStatementImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Nullable
-	@Override
-	public PsiReference[] getReferences(PsiElement element)
-	{
-		return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
-	}
+  @Nullable
+  @Override
+  public PsiReference[] getReferences(PsiElement element) {
+    return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
+  }
 
 
-	@Override
-	public PsiPerlBlock getBlockSmart()
-	{
-		return null;
-	}
+  @Override
+  public PsiPerlBlock getBlockSmart() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getSignatureContainer()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getSignatureContainer() {
+    return null;
+  }
 
 
-	@Nullable
-	public PsiPerlExpr getExpr()
-	{
-		return findChildByClass(PsiPerlExpr.class);
-	}
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return findChildByClass(PsiPerlExpr.class);
+  }
 
-	@Override
-	public PsiElement getSubNameElement()
-	{
-		PsiElement expr = getExpr();
+  @Override
+  public PsiElement getSubNameElement() {
+    PsiElement expr = getExpr();
 
-		if (expr instanceof PsiPerlParenthesisedExpr)
-		{
-			expr = expr.getFirstChild();
-			if (expr != null)
-			{
-				expr = expr.getNextSibling();
-			}
-		}
+    if (expr instanceof PsiPerlParenthesisedExpr) {
+      expr = expr.getFirstChild();
+      if (expr != null) {
+        expr = expr.getNextSibling();
+      }
+    }
 
-		if (expr instanceof PsiPerlCommaSequenceExpr)
-		{
-			PsiElement nameContainer = expr.getFirstChild();
-			if (nameContainer instanceof PerlString)
-			{
-				return nameContainer;
-			}
-		}
+    if (expr instanceof PsiPerlCommaSequenceExpr) {
+      PsiElement nameContainer = expr.getFirstChild();
+      if (nameContainer instanceof PerlString) {
+        return nameContainer;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Override
-	protected String getSubNameHeavy()
-	{
-		PsiElement nameContainer = getSubNameElement();
+  @Override
+  protected String getSubNameHeavy() {
+    PsiElement nameContainer = getSubNameElement();
 
-		if (nameContainer instanceof PerlString)
-		{
-			return ((PerlString) nameContainer).getStringContent();
-		}
+    if (nameContainer instanceof PerlString) {
+      return ((PerlString)nameContainer).getStringContent();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Override
-	public boolean isMethod()
-	{
-		return true;
-	}
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.isEmpty())
-		{
-			throw new IncorrectOperationException("You can't set an empty method name");
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    if (name.isEmpty()) {
+      throw new IncorrectOperationException("You can't set an empty method name");
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof PerlString)
-		{
-			((PerlString) nameIdentifier).setStringContent(name);
-		}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof PerlString) {
+      ((PerlString)nameIdentifier).setStringContent(name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 }
 

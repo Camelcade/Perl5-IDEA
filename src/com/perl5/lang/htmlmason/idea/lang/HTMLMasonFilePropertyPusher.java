@@ -38,102 +38,85 @@ import java.io.IOException;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonFilePropertyPusher implements FilePropertyPusher<Boolean>
-{
-	public static final Key<Boolean> KEY = new Key<Boolean>("perl5.html.mason.handling");
-	public static final FilePropertyPusher<Boolean> INSTANCE = new HTMLMasonFilePropertyPusher();
-	private static final FileAttribute PERSISTENCE = new FileAttribute("html_mason_handling_persistence", 1, true);
+public class HTMLMasonFilePropertyPusher implements FilePropertyPusher<Boolean> {
+  public static final Key<Boolean> KEY = new Key<Boolean>("perl5.html.mason.handling");
+  public static final FilePropertyPusher<Boolean> INSTANCE = new HTMLMasonFilePropertyPusher();
+  private static final FileAttribute PERSISTENCE = new FileAttribute("html_mason_handling_persistence", 1, true);
 
-	@Override
-	public void initExtra(@NotNull Project project, @NotNull MessageBus bus, @NotNull Engine languageLevelUpdater)
-	{
+  @Override
+  public void initExtra(@NotNull Project project, @NotNull MessageBus bus, @NotNull Engine languageLevelUpdater) {
 
-	}
+  }
 
-	@NotNull
-	@Override
-	public Key<Boolean> getFileDataKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public Key<Boolean> getFileDataKey() {
+    return KEY;
+  }
 
-	@Override
-	public boolean pushDirectoriesOnly()
-	{
-		return false;
-	}
+  @Override
+  public boolean pushDirectoriesOnly() {
+    return false;
+  }
 
-	@NotNull
-	@Override
-	public Boolean getDefaultValue()
-	{
-		return false;
-	}
+  @NotNull
+  @Override
+  public Boolean getDefaultValue() {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public Boolean getImmediateValue(@NotNull Project project, @Nullable VirtualFile file)
-	{
-		if (file == null)
-		{
-			return false;
-		}
+  @Nullable
+  @Override
+  public Boolean getImmediateValue(@NotNull Project project, @Nullable VirtualFile file) {
+    if (file == null) {
+      return false;
+    }
 
-		FileType fileType = file.getFileType();
-		if (fileType instanceof LanguageFileType)
-		{
-			return LanguageSubstitutors.INSTANCE.substituteLanguage(((LanguageFileType) fileType).getLanguage(), file, project) == HTMLMasonLanguage.INSTANCE;
-		}
-		return false;
+    FileType fileType = file.getFileType();
+    if (fileType instanceof LanguageFileType) {
+      return LanguageSubstitutors.INSTANCE.substituteLanguage(((LanguageFileType)fileType).getLanguage(), file, project) ==
+             HTMLMasonLanguage.INSTANCE;
+    }
+    return false;
+  }
 
-	}
+  @Nullable
+  @Override
+  public Boolean getImmediateValue(@NotNull Module module) {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public Boolean getImmediateValue(@NotNull Module module)
-	{
-		return null;
-	}
+  @Override
+  public boolean acceptsFile(@NotNull VirtualFile file) {
+    return true;
+  }
 
-	@Override
-	public boolean acceptsFile(@NotNull VirtualFile file)
-	{
-		return true;
-	}
+  @Override
+  public boolean acceptsDirectory(@NotNull VirtualFile file, @NotNull Project project) {
+    return false;
+  }
 
-	@Override
-	public boolean acceptsDirectory(@NotNull VirtualFile file, @NotNull Project project)
-	{
-		return false;
-	}
+  @Override
+  public void persistAttribute(@NotNull Project project, @NotNull VirtualFile fileOrDir, @NotNull Boolean value) throws IOException {
+    final DataInputStream iStream = PERSISTENCE.readAttribute(fileOrDir);
+    if (iStream != null) {
+      try {
+        if ((DataInputOutputUtil.readINT(iStream) == 1) == value) {
+          return;
+        }
+      }
+      finally {
+        iStream.close();
+      }
+    }
 
-	@Override
-	public void persistAttribute(@NotNull Project project, @NotNull VirtualFile fileOrDir, @NotNull Boolean value) throws IOException
-	{
-		final DataInputStream iStream = PERSISTENCE.readAttribute(fileOrDir);
-		if (iStream != null)
-		{
-			try
-			{
-				if ((DataInputOutputUtil.readINT(iStream) == 1) == value)
-				{
-					return;
-				}
-			}
-			finally
-			{
-				iStream.close();
-			}
-		}
+    //		System.err.println("Setting "  + value + " to " + fileOrDir);
+    final DataOutputStream oStream = PERSISTENCE.writeAttribute(fileOrDir);
+    DataInputOutputUtil.writeINT(oStream, value ? 1 : 0);
+    oStream.close();
+  }
 
-//		System.err.println("Setting "  + value + " to " + fileOrDir);
-		final DataOutputStream oStream = PERSISTENCE.writeAttribute(fileOrDir);
-		DataInputOutputUtil.writeINT(oStream, value ? 1 : 0);
-		oStream.close();
-	}
-
-	@Override
-	public void afterRootsChanged(@NotNull Project project)
-	{
-	}
+  @Override
+  public void afterRootsChanged(@NotNull Project project) {
+  }
 }

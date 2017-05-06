@@ -30,56 +30,48 @@ import java.util.List;
 /**
  * Created by hurricup on 30.04.2016.
  */
-public class PerlAssignExpressionImplMixin extends PsiPerlExprImpl implements PerlAssignExpression
-{
-	public PerlAssignExpressionImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlAssignExpressionImplMixin extends PsiPerlExprImpl implements PerlAssignExpression {
+  public PerlAssignExpressionImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getLeftSide()
-	{
-		return getFirstChild();
-	}
+  @NotNull
+  @Override
+  public PsiElement getLeftSide() {
+    return getFirstChild();
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getRightSide()
-	{
-		PsiElement lastChild = getLastChild();
-		PsiElement firstChild = getFirstChild();
+  @Nullable
+  @Override
+  public PsiElement getRightSide() {
+    PsiElement lastChild = getLastChild();
+    PsiElement firstChild = getFirstChild();
 
-		if (lastChild == firstChild || lastChild == null || lastChild.getFirstChild() == null)
-		{
-			return null;
-		}
+    if (lastChild == firstChild || lastChild == null || lastChild.getFirstChild() == null) {
+      return null;
+    }
 
-		return lastChild;
-	}
+    return lastChild;
+  }
 
-	/**
-	 * Debugging method
-	 */
-	@Nullable
-	public List<String> getRightSideAsList()
-	{
-		PsiElement rightSide = getRightSide();
+  /**
+   * Debugging method
+   */
+  @Nullable
+  public List<String> getRightSideAsList() {
+    PsiElement rightSide = getRightSide();
 
-		if (rightSide == null)
-		{
-			return null;
-		}
+    if (rightSide == null) {
+      return null;
+    }
 
-		List<PsiElement> resultElements = PerlArrayUtil.getElementsAsPlainList(rightSide, null);
+    List<PsiElement> resultElements = PerlArrayUtil.getElementsAsPlainList(rightSide, null);
 
-		List<String> result = new ArrayList<String>();
-		for (PsiElement element : resultElements)
-		{
-			result.add(element.getNode().getText());
-		}
+    List<String> result = new ArrayList<String>();
+    for (PsiElement element : resultElements) {
+      result.add(element.getNode().getText());
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

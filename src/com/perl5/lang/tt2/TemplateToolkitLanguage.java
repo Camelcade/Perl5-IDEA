@@ -22,20 +22,16 @@ import com.intellij.psi.templateLanguages.TemplateLanguage;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitLanguage extends Language implements TemplateLanguage
-{
-	public static final Language INSTANCE = new TemplateToolkitLanguage();
-	public static final String NAME = "Template Toolkit 2";
+public class TemplateToolkitLanguage extends Language implements TemplateLanguage {
+  public static final Language INSTANCE = new TemplateToolkitLanguage();
+  public static final String NAME = "Template Toolkit 2";
 
-	private TemplateToolkitLanguage()
-	{
-		super(NAME);
-	}
+  private TemplateToolkitLanguage() {
+    super(NAME);
+  }
 
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
-
+  @Override
+  public boolean isCaseSensitive() {
+    return true;
+  }
 }

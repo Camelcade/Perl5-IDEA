@@ -23,12 +23,10 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousLanguage extends Language implements TemplateLanguage
-{
-	public static final MojoliciousLanguage INSTANCE = new MojoliciousLanguage();
+public class MojoliciousLanguage extends Language implements TemplateLanguage {
+  public static final MojoliciousLanguage INSTANCE = new MojoliciousLanguage();
 
-	private MojoliciousLanguage()
-	{
-		super(PerlLanguage.INSTANCE, "Mojolicious Perl");
-	}
+  private MojoliciousLanguage() {
+    super(PerlLanguage.INSTANCE, "Mojolicious Perl");
+  }
 }

@@ -24,16 +24,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProcessor>
-{
-	public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP = new KeyedExtensionCollector<PerlPackageProcessor, String>("com.perl5.packageProcessor")
-	{
-		@NotNull
-		@Override
-		protected String keyToString(@NotNull String key)
-		{
-			return key;
-		}
-
-	};
+public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProcessor> {
+  public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP =
+    new KeyedExtensionCollector<PerlPackageProcessor, String>("com.perl5.packageProcessor") {
+      @NotNull
+      @Override
+      protected String keyToString(@NotNull String key) {
+        return key;
+      }
+    };
 }

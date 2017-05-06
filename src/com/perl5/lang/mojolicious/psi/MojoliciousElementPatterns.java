@@ -24,10 +24,7 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousElementPatterns extends MojoliciousElementTypes, PerlElementPatterns
-{
-	PsiElementPattern.Capture<PerlSubNameElement> MOJO_HELPER_USAGE =
-			SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN).and(IN_MOJOLICIOUS_FILE);
-
-
+public interface MojoliciousElementPatterns extends MojoliciousElementTypes, PerlElementPatterns {
+  PsiElementPattern.Capture<PerlSubNameElement> MOJO_HELPER_USAGE =
+    SUB_NAME_PATTERN.and(IN_STATIC_METHOD_PATTERN).and(IN_MOJOLICIOUS_FILE);
 }

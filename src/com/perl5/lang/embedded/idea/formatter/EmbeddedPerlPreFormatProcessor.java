@@ -24,11 +24,9 @@ import com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class EmbeddedPerlPreFormatProcessor extends PerlPreFormatProcessor
-{
-	@Override
-	protected boolean canProcess(PsiElement element, TextRange range)
-	{
-		return element.getLanguage().is(EmbeddedPerlLanguage.INSTANCE);
-	}
+public class EmbeddedPerlPreFormatProcessor extends PerlPreFormatProcessor {
+  @Override
+  protected boolean canProcess(PsiElement element, TextRange range) {
+    return element.getLanguage().is(EmbeddedPerlLanguage.INSTANCE);
+  }
 }

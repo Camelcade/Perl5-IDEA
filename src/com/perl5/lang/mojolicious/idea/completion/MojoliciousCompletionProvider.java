@@ -40,72 +40,61 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 02.08.2015.
  */
-public class MojoliciousCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
+public class MojoliciousCompletionProvider extends CompletionProvider<CompletionParameters> {
+  public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
 
-	static
-	{
-		for (String subName : MojoliciousSubUtil.MOJO_DEFAULT_HELPERS)
-		{
-			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-					.create(subName)
-					.withIcon(PerlIcons.MOJO_FILE)
-					.withBoldness(true)
-			);
-		}
-		for (String subName : MojoliciousSubUtil.MOJO_TAG_HELPERS)
-		{
-			BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-					.create(subName)
-					.withIcon(PerlIcons.MOJO_FILE)
-					.withBoldness(true)
-			);
-		}
-	}
+  static {
+    for (String subName : MojoliciousSubUtil.MOJO_DEFAULT_HELPERS) {
+      BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+                                         .create(subName)
+                                         .withIcon(PerlIcons.MOJO_FILE)
+                                         .withBoldness(true)
+      );
+    }
+    for (String subName : MojoliciousSubUtil.MOJO_TAG_HELPERS) {
+      BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
+                                         .create(subName)
+                                         .withIcon(PerlIcons.MOJO_FILE)
+                                         .withBoldness(true)
+      );
+    }
+  }
 
-	public void addCompletions(@NotNull CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull CompletionResultSet resultSet)
-	{
-		PsiElement method = parameters.getPosition().getParent();
-		assert method instanceof PsiPerlMethod;
+  public void addCompletions(@NotNull CompletionParameters parameters,
+                             ProcessingContext context,
+                             @NotNull CompletionResultSet resultSet) {
+    PsiElement method = parameters.getPosition().getParent();
+    assert method instanceof PsiPerlMethod;
 
-		if (!((PsiPerlMethod) method).hasExplicitNamespace() && !((PsiPerlMethod) method).isObjectMethod())
-		{
-			resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
+    if (!((PsiPerlMethod)method).hasExplicitNamespace() && !((PsiPerlMethod)method).isObjectMethod()) {
+      resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
 
-			StubIndex stubIndex = StubIndex.getInstance();
-			final Project project = method.getProject();
-			final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
+      StubIndex stubIndex = StubIndex.getInstance();
+      final Project project = method.getProject();
+      final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
 
-			for (String helperName : stubIndex.getAllKeys(MojoliciousHelpersStubIndex.KEY, method.getProject()))
-			{
-				for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, helperName, project, scope, MojoliciousHelperDeclaration.class))
-				{
-					if (helper != null)
-					{
-						LookupElementBuilder newElement = LookupElementBuilder
-								.create(helperName)
-								.withIcon(PerlIcons.MOJO_FILE)
-								.withTailText(helper.getSubArgumentsListAsString()
-								);
+      for (String helperName : stubIndex.getAllKeys(MojoliciousHelpersStubIndex.KEY, method.getProject())) {
+        for (MojoliciousHelperDeclaration helper : StubIndex
+          .getElements(MojoliciousHelpersStubIndex.KEY, helperName, project, scope, MojoliciousHelperDeclaration.class)) {
+          if (helper != null) {
+            LookupElementBuilder newElement = LookupElementBuilder
+              .create(helperName)
+              .withIcon(PerlIcons.MOJO_FILE)
+              .withTailText(helper.getSubArgumentsListAsString()
+              );
 
-						PsiFile file = helper.getContainingFile();
-						if (file != null)
-						{
-							ItemPresentation presentation = file.getPresentation();
-							if (presentation != null)
-							{
-								newElement = newElement.withTypeText(file.getName(), presentation.getIcon(false), false);
-							}
-						}
+            PsiFile file = helper.getContainingFile();
+            if (file != null) {
+              ItemPresentation presentation = file.getPresentation();
+              if (presentation != null) {
+                newElement = newElement.withTypeText(file.getName(), presentation.getIcon(false), false);
+              }
+            }
 
-						resultSet.addElement(newElement);
-					}
-				}
-			}
-		}
-	}
-
+            resultSet.addElement(newElement);
+          }
+        }
+      }
+    }
+  }
 }

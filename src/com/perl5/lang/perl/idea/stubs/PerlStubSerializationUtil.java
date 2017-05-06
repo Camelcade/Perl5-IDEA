@@ -31,70 +31,55 @@ import java.util.Map;
 /**
  * Created by hurricup on 16.07.2015.
  */
-public class PerlStubSerializationUtil
-{
-	@Nullable
-	public static String readNullableString(@NotNull StubInputStream dataStream) throws IOException
-	{
-		StringRef stringRef = dataStream.readName();
-		return stringRef == null ? null : stringRef.getString();
-	}
+public class PerlStubSerializationUtil {
+  @Nullable
+  public static String readNullableString(@NotNull StubInputStream dataStream) throws IOException {
+    StringRef stringRef = dataStream.readName();
+    return stringRef == null ? null : stringRef.getString();
+  }
 
 
-	public static void writeStringsList(@NotNull StubOutputStream dataStream, List<String> stringList) throws IOException
-	{
-		if (stringList == null)
-		{
-			dataStream.writeInt(-1);
-		}
-		else
-		{
-			dataStream.writeInt(stringList.size());
-			for (String stringItem : stringList)
-			{
-				dataStream.writeName(stringItem);
-			}
-		}
-	}
+  public static void writeStringsList(@NotNull StubOutputStream dataStream, List<String> stringList) throws IOException {
+    if (stringList == null) {
+      dataStream.writeInt(-1);
+    }
+    else {
+      dataStream.writeInt(stringList.size());
+      for (String stringItem : stringList) {
+        dataStream.writeName(stringItem);
+      }
+    }
+  }
 
-	public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException
-	{
-		int listSize = dataStream.readInt();
+  public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException {
+    int listSize = dataStream.readInt();
 
-		if (listSize == -1)
-		{
-			return null;
-		}
+    if (listSize == -1) {
+      return null;
+    }
 
-		ArrayList<String> result = new ArrayList<String>(listSize);
-		for (int i = 0; i < listSize; i++)
-		{
-			result.add(dataStream.readName().toString());
-		}
-		return result;
-	}
+    ArrayList<String> result = new ArrayList<String>(listSize);
+    for (int i = 0; i < listSize; i++) {
+      result.add(dataStream.readName().toString());
+    }
+    return result;
+  }
 
-	public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, List<String>> stringListMap) throws IOException
-	{
-		dataStream.writeInt(stringListMap.size());
-		for (String key : stringListMap.keySet())
-		{
-			dataStream.writeName(key);
-			writeStringsList(dataStream, stringListMap.get(key));
-		}
-	}
+  public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, List<String>> stringListMap) throws IOException {
+    dataStream.writeInt(stringListMap.size());
+    for (String key : stringListMap.keySet()) {
+      dataStream.writeName(key);
+      writeStringsList(dataStream, stringListMap.get(key));
+    }
+  }
 
-	public static Map<String, List<String>> readStringListMap(@NotNull StubInputStream dataStream) throws IOException
-	{
-		int mapSize = dataStream.readInt();
-		Map<String, List<String>> stringListMap = new HashMap<String, List<String>>(mapSize);
-		for (int i = 0; i < mapSize; i++)
-		{
-			String key = dataStream.readName().toString();
-			stringListMap.put(key, readStringsList(dataStream));
-		}
-		return stringListMap;
-	}
-
-
+  public static Map<String, List<String>> readStringListMap(@NotNull StubInputStream dataStream) throws IOException {
+    int mapSize = dataStream.readInt();
+    Map<String, List<String>> stringListMap = new HashMap<String, List<String>>(mapSize);
+    for (int i = 0; i < mapSize; i++) {
+      String key = dataStream.readName().toString();
+      stringListMap.put(key, readStringsList(dataStream));
+    }
+    return stringListMap;
+  }
 }

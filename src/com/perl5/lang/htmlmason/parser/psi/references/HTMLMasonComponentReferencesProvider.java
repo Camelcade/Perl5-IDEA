@@ -34,67 +34,58 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements
-{
-	public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
+public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements {
+  public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
 
-	@NotNull
-	@Override
-	public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-	{
-		if (element.getChildren().length == 0)
-		{
-			assert element instanceof PerlString;
-			String content = ((PerlString) element).getStringContent();
+  @NotNull
+  @Override
+  public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+    if (element.getChildren().length == 0) {
+      assert element instanceof PerlString;
+      String content = ((PerlString)element).getStringContent();
 
-			if (StringUtil.isNotEmpty(content))
-			{
-				Matcher m;
-				TextRange range = ((PerlString) element).getContentTextRangeInParent();
-				List<PsiReference> result = new ArrayList<PsiReference>();
-				if ((m = METHOD_CALL_PATTERN.matcher(content)).matches()) // method call
-				{
-					String fileOrSlug = m.group(1);
-					String methodName = m.group(2);
+      if (StringUtil.isNotEmpty(content)) {
+        Matcher m;
+        TextRange range = ((PerlString)element).getContentTextRangeInParent();
+        List<PsiReference> result = new ArrayList<PsiReference>();
+        if ((m = METHOD_CALL_PATTERN.matcher(content)).matches()) // method call
+        {
+          String fileOrSlug = m.group(1);
+          String methodName = m.group(2);
 
-					if (methodName == null)
-					{
-						methodName = "";
-					}
+          if (methodName == null) {
+            methodName = "";
+          }
 
-					TextRange componentRange = new TextRange(range.getStartOffset(), range.getStartOffset() + fileOrSlug.length());
-					TextRange methodRange = new TextRange(range.getEndOffset() - methodName.length(), range.getEndOffset());
+          TextRange componentRange = new TextRange(range.getStartOffset(), range.getStartOffset() + fileOrSlug.length());
+          TextRange methodRange = new TextRange(range.getEndOffset() - methodName.length(), range.getEndOffset());
 
-					if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_SELF))
-					{
-						result.add(new HTMLMasonComponentSimpleReference((PerlString) element, componentRange));
-					}
-					else if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_PARENT))
-					{
-						result.add(new HTMLMasonComponentParentReference((PerlString) element, componentRange));
-					}
-					else if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_REQUEST))
-					{
-						result.add(new HTMLMasonComponentSimpleReference((PerlString) element, componentRange));
-					}
-					else // component or subcomponent
-					{
-						result.add(new HTMLMasonComponentReference((PerlString) element, componentRange));
-					}
+          if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_SELF)) {
+            result.add(new HTMLMasonComponentSimpleReference((PerlString)element, componentRange));
+          }
+          else if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_PARENT)) {
+            result.add(new HTMLMasonComponentParentReference((PerlString)element, componentRange));
+          }
+          else if (StringUtil.equals(fileOrSlug, COMPONENT_SLUG_REQUEST)) {
+            result.add(new HTMLMasonComponentSimpleReference((PerlString)element, componentRange));
+          }
+          else // component or subcomponent
+          {
+            result.add(new HTMLMasonComponentReference((PerlString)element, componentRange));
+          }
 
-					if (methodRange.getLength() > 0)
-					{
-						result.add(new HTMLMasonMethodReference((PerlString) element, methodRange));
-					}
-				}
-				else // it's subcomponent or other component
-				{
-					result.add(new HTMLMasonComponentReference((PerlString) element, range));
-				}
-				return result.toArray(new PsiReference[result.size()]);
-			}
-		}
+          if (methodRange.getLength() > 0) {
+            result.add(new HTMLMasonMethodReference((PerlString)element, methodRange));
+          }
+        }
+        else // it's subcomponent or other component
+        {
+          result.add(new HTMLMasonComponentReference((PerlString)element, range));
+        }
+        return result.toArray(new PsiReference[result.size()]);
+      }
+    }
 
-		return PsiReference.EMPTY_ARRAY;
-	}
+    return PsiReference.EMPTY_ARRAY;
+  }
 }

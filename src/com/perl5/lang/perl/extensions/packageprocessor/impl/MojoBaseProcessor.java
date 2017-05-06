@@ -29,105 +29,89 @@ import java.util.*;
  * Created by hurricup on 25.08.2015.
  */
 public class MojoBaseProcessor extends PerlPackageProcessorBase implements
-		PerlStrictProvider,
-		PerlUtfProvider,
-		PerlWarningsProvider,
-		PerlFeaturesProvider,
-		PerlPackageOptionsProvider,
-		PerlPackageParentsProvider,
-		PerlPackageLoader
-{
-	public static final String MOJO_BASE = "Mojo::Base";
-	public static final String IO_HANDLE = "IO::Handle";
+                                                                PerlStrictProvider,
+                                                                PerlUtfProvider,
+                                                                PerlWarningsProvider,
+                                                                PerlFeaturesProvider,
+                                                                PerlPackageOptionsProvider,
+                                                                PerlPackageParentsProvider,
+                                                                PerlPackageLoader {
+  public static final String MOJO_BASE = "Mojo::Base";
+  public static final String IO_HANDLE = "IO::Handle";
 
-	protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
+  protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
 
-	static
-	{
-		OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
-		OPTIONS.put("-base", "strict,warnings,utf8,v5.10,IO::Handle,acts as parent");
-	}
+  static {
+    OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
+    OPTIONS.put("-base", "strict,warnings,utf8,v5.10,IO::Handle,acts as parent");
+  }
 
-	@Override
-	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable)
-	{
-		return currentFeaturesTable.clone();
-	}
+  @Override
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable) {
+    return currentFeaturesTable.clone();
+  }
 
-	@NotNull
-	@Override
-	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
-	{
-		List<String> loadedPackages = new ArrayList<String>(Arrays.asList(IO_HANDLE));
-		List<String> allOptions = useStatement.getImportParameters();
+  @NotNull
+  @Override
+  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+    List<String> loadedPackages = new ArrayList<String>(Arrays.asList(IO_HANDLE));
+    List<String> allOptions = useStatement.getImportParameters();
 
-		if (allOptions != null)
-		{
-			allOptions.removeAll(getOptions().keySet());
+    if (allOptions != null) {
+      allOptions.removeAll(getOptions().keySet());
 
-			if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.get(0)))
-			{
-				loadedPackages.add(allOptions.get(0));
-			}
-		}
+      if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.get(0))) {
+        loadedPackages.add(allOptions.get(0));
+      }
+    }
 
-		return loadedPackages;
-	}
+    return loadedPackages;
+  }
 
-	@NotNull
-	@Override
-	public Map<String, String> getOptions()
-	{
-		return OPTIONS;
-	}
+  @NotNull
+  @Override
+  public Map<String, String> getOptions() {
+    return OPTIONS;
+  }
 
-	@NotNull
-	@Override
-	public Map<String, String> getOptionsBundles()
-	{
-		return Collections.emptyMap();
-	}
+  @NotNull
+  @Override
+  public Map<String, String> getOptionsBundles() {
+    return Collections.emptyMap();
+  }
 
-	@Override
-	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
-	{
-		List<String> allOptions = useStatement.getImportParameters();
+  @Override
+  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+    List<String> allOptions = useStatement.getImportParameters();
 
-		if (allOptions != null)
-		{
-			if (allOptions.contains("-base"))
-			{
-				currentList.add(MOJO_BASE);
-			}
-			else
-			{
-				allOptions.removeAll(getOptions().keySet());
-				if (!allOptions.isEmpty())
-				{
-					currentList.add(allOptions.get(0));
-				}
-			}
-		}
-	}
+    if (allOptions != null) {
+      if (allOptions.contains("-base")) {
+        currentList.add(MOJO_BASE);
+      }
+      else {
+        allOptions.removeAll(getOptions().keySet());
+        if (!allOptions.isEmpty()) {
+          currentList.add(allOptions.get(0));
+        }
+      }
+    }
+  }
 
 
-	@Override
-	public boolean hasPackageFilesOptions()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasPackageFilesOptions() {
+    return true;
+  }
 
-	@Override
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 }

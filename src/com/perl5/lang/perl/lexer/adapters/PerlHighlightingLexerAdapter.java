@@ -28,41 +28,38 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 15.10.2016.
  */
-public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes
-{
-	public PerlHighlightingLexerAdapter(@Nullable Project project)
-	{
-		this(project, new PerlMergingLexerAdapter(project, false, true));
-	}
+public class PerlHighlightingLexerAdapter extends LayeredLexer implements PerlElementTypes {
+  public PerlHighlightingLexerAdapter(@Nullable Project project) {
+    this(project, new PerlMergingLexerAdapter(project, false, true));
+  }
 
 
-	public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer)
-	{
-		super(lexer);
-		registerSelfStoppingLayer(
-				new PodLexerAdapter(project),
-				new IElementType[]{POD},
-				IElementType.EMPTY_ARRAY
-		);
-		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringSQ(project),
-				new IElementType[]{HEREDOC},
-				IElementType.EMPTY_ARRAY
-		);
-		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringDQ(project),
-				new IElementType[]{HEREDOC_QQ},
-				IElementType.EMPTY_ARRAY
-		);
-		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forStringQX(project),
-				new IElementType[]{HEREDOC_QX},
-				IElementType.EMPTY_ARRAY
-		);
-		registerSelfStoppingLayer(
-				PerlSubLexerAdapter.forAnnotation(project),
-				new IElementType[]{COMMENT_ANNOTATION},
-				IElementType.EMPTY_ARRAY
-		);
-	}
+  public PerlHighlightingLexerAdapter(@Nullable Project project, @NotNull Lexer lexer) {
+    super(lexer);
+    registerSelfStoppingLayer(
+      new PodLexerAdapter(project),
+      new IElementType[]{POD},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      PerlSubLexerAdapter.forStringSQ(project),
+      new IElementType[]{HEREDOC},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      PerlSubLexerAdapter.forStringDQ(project),
+      new IElementType[]{HEREDOC_QQ},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      PerlSubLexerAdapter.forStringQX(project),
+      new IElementType[]{HEREDOC_QX},
+      IElementType.EMPTY_ARRAY
+    );
+    registerSelfStoppingLayer(
+      PerlSubLexerAdapter.forAnnotation(project),
+      new IElementType[]{COMMENT_ANNOTATION},
+      IElementType.EMPTY_ARRAY
+    );
+  }
 }

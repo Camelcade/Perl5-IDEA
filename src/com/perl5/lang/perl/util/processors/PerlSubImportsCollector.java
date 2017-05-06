@@ -22,11 +22,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlSubImportsCollector extends PerlImportsCollector
-{
-	@Override
-	protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor)
-	{
-		return descriptor.isSub();
-	}
+public class PerlSubImportsCollector extends PerlImportsCollector {
+  @Override
+  protected boolean meetsCondition(@NotNull PerlExportDescriptor descriptor) {
+    return descriptor.isSub();
+  }
 }

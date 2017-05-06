@@ -25,13 +25,12 @@ import java.util.List;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseHasStatement extends PsiElement
-{
-	/**
-	 * Returns annotations list
-	 *
-	 * @return annotation list
-	 */
-	@NotNull
-	List<PerlAnnotation> getAnnotationList();
+public interface PerlMooseHasStatement extends PsiElement {
+  /**
+   * Returns annotations list
+   *
+   * @return annotation list
+   */
+  @NotNull
+  List<PerlAnnotation> getAnnotationList();
 }

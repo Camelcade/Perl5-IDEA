@@ -24,13 +24,11 @@ import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlNamedElement
-{
-	/**
-	 * Checks if this typeglob is left part of assignment
-	 *
-	 * @return result
-	 */
-	boolean isLeftSideOfAssignment();
-
+public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlNamedElement {
+  /**
+   * Checks if this typeglob is left part of assignment
+   *
+   * @return result
+   */
+  boolean isLeftSideOfAssignment();
 }

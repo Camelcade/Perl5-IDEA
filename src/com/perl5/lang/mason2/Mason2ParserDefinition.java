@@ -34,45 +34,39 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class Mason2ParserDefinition extends PerlParserDefinition implements Mason2ElementTypes
-{
-	public static final IFileElementType FILE = new MasonFileElementType("Mason PP component", Mason2Language.INSTANCE);
+public class Mason2ParserDefinition extends PerlParserDefinition implements Mason2ElementTypes {
+  public static final IFileElementType FILE = new MasonFileElementType("Mason PP component", Mason2Language.INSTANCE);
 
-	public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
-			TokenSet.create(
-					MASON_LINE_OPENER,
-					MASON_TEMPLATE_BLOCK_HTML
-			));
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+                                                         TokenSet.create(
+                                                           MASON_LINE_OPENER,
+                                                           MASON_TEMPLATE_BLOCK_HTML
+                                                         ));
 
-	@NotNull
-	@Override
-	public Lexer createLexer(Project project)
-	{
-		return new PerlMergingLexerAdapter(project);
-	}
+  @NotNull
+  @Override
+  public Lexer createLexer(Project project) {
+    return new PerlMergingLexerAdapter(project);
+  }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return FILE;
-	}
+  @Override
+  public IFileElementType getFileNodeType() {
+    return FILE;
+  }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new MasonFileImpl(viewProvider);
-	}
+  @Override
+  public PsiFile createFile(FileViewProvider viewProvider) {
+    return new MasonFileImpl(viewProvider);
+  }
 
-	@NotNull
-	public TokenSet getCommentTokens()
-	{
-		return COMMENTS;
-	}
+  @NotNull
+  public TokenSet getCommentTokens() {
+    return COMMENTS;
+  }
 
-	@NotNull
-	@Override
-	public PsiParser createParser(Project project)
-	{
-		return new Mason2ParserImpl();
-	}
+  @NotNull
+  @Override
+  public PsiParser createParser(Project project) {
+    return new Mason2ParserImpl();
+  }
 }

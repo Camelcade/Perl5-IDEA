@@ -25,11 +25,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlStringContentManipulator extends AbstractElementManipulator<PerlStringContentElementImpl>
-{
-	@Override
-	public PerlStringContentElementImpl handleContentChange(@NotNull PerlStringContentElementImpl element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		return (PerlStringContentElementImpl) element.replaceWithText(newContent);
-	}
+public class PerlStringContentManipulator extends AbstractElementManipulator<PerlStringContentElementImpl> {
+  @Override
+  public PerlStringContentElementImpl handleContentChange(@NotNull PerlStringContentElementImpl element,
+                                                          @NotNull TextRange range,
+                                                          String newContent) throws IncorrectOperationException {
+    return (PerlStringContentElementImpl)element.replaceWithText(newContent);
+  }
 }

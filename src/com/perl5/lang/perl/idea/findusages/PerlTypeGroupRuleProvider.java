@@ -27,20 +27,16 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 11.04.2016.
  */
-public class PerlTypeGroupRuleProvider implements FileStructureGroupRuleProvider
-{
-	@Nullable
-	@Override
-	public UsageGroupingRule getUsageGroupingRule(Project project)
-	{
-		return new UsageGroupingRule()
-		{
-			@Nullable
-			@Override
-			public UsageGroup groupUsage(@NotNull Usage usage)
-			{
-				return null;
-			}
-		};
-	}
+public class PerlTypeGroupRuleProvider implements FileStructureGroupRuleProvider {
+  @Nullable
+  @Override
+  public UsageGroupingRule getUsageGroupingRule(Project project) {
+    return new UsageGroupingRule() {
+      @Nullable
+      @Override
+      public UsageGroup groupUsage(@NotNull Usage usage) {
+        return null;
+      }
+    };
+  }
 }

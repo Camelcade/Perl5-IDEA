@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.properties.PerlNamedElement;
 /**
  * Created by hurricup on 07.08.2015.
  */
-public interface PerlHeredocOpener extends PerlNamedElement
-{
+public interface PerlHeredocOpener extends PerlNamedElement {
 }

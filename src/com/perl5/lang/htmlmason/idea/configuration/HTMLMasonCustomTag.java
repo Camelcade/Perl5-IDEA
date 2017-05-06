@@ -19,79 +19,64 @@ package com.perl5.lang.htmlmason.idea.configuration;
 /**
  * Created by hurricup on 10.03.2016.
  */
-public class HTMLMasonCustomTag
-{
-	private String myText;
-	private HTMLMasonCustomTagRole myRole;
+public class HTMLMasonCustomTag {
+  private String myText;
+  private HTMLMasonCustomTagRole myRole;
 
-	public HTMLMasonCustomTag()
-	{
-	}
+  public HTMLMasonCustomTag() {
+  }
 
-	public HTMLMasonCustomTag(String myText, HTMLMasonCustomTagRole myRole)
-	{
-		this.myText = myText;
-		this.myRole = myRole;
-	}
+  public HTMLMasonCustomTag(String myText, HTMLMasonCustomTagRole myRole) {
+    this.myText = myText;
+    this.myRole = myRole;
+  }
 
-	@SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
-	@Override
-	protected HTMLMasonCustomTag clone()
-	{
-		return new HTMLMasonCustomTag(myText, myRole);
-	}
+  @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
+  @Override
+  protected HTMLMasonCustomTag clone() {
+    return new HTMLMasonCustomTag(myText, myRole);
+  }
 
-	public String getText()
-	{
-		return myText;
-	}
+  public String getText() {
+    return myText;
+  }
 
-	public void setText(String myText)
-	{
-		this.myText = myText;
-	}
+  public void setText(String myText) {
+    this.myText = myText;
+  }
 
-	public HTMLMasonCustomTagRole getRole()
-	{
-		return myRole;
-	}
+  public HTMLMasonCustomTagRole getRole() {
+    return myRole;
+  }
 
-	public void setRole(HTMLMasonCustomTagRole myRole)
-	{
-		this.myRole = myRole;
-	}
+  public void setRole(HTMLMasonCustomTagRole myRole) {
+    this.myRole = myRole;
+  }
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof HTMLMasonCustomTag))
-		{
-			return false;
-		}
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof HTMLMasonCustomTag)) {
+      return false;
+    }
 
-		HTMLMasonCustomTag that = (HTMLMasonCustomTag) o;
+    HTMLMasonCustomTag that = (HTMLMasonCustomTag)o;
 
-		return myText.equals(that.myText);
+    return myText.equals(that.myText);
+  }
 
-	}
+  @Override
+  public int hashCode() {
+    return myText.hashCode();
+  }
 
-	@Override
-	public int hashCode()
-	{
-		return myText.hashCode();
-	}
+  public String getOpenTagText() {
+    return "<%" + getText() + (getRole().isSimple() ? ">" : "");
+  }
 
-	public String getOpenTagText()
-	{
-		return "<%" + getText() + (getRole().isSimple() ? ">" : "");
-	}
-
-	public String getCloseTagText()
-	{
-		return "</%" + getText() + ">";
-	}
+  public String getCloseTagText() {
+    return "</%" + getText() + ">";
+  }
 }

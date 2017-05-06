@@ -25,26 +25,21 @@ import java.util.List;
 /**
  * Created by hurricup on 22.02.2016.
  */
-public class PerlRuntimeParentsProviderFromArray implements PerlRuntimeParentsProvider
-{
-	private final PsiElement myStringListContainer;
+public class PerlRuntimeParentsProviderFromArray implements PerlRuntimeParentsProvider {
+  private final PsiElement myStringListContainer;
 
-	public PerlRuntimeParentsProviderFromArray(@NotNull PsiElement stringListContainer)
-	{
-		this.myStringListContainer = stringListContainer;
-	}
+  public PerlRuntimeParentsProviderFromArray(@NotNull PsiElement stringListContainer) {
+    this.myStringListContainer = stringListContainer;
+  }
 
-	@Override
-	public void changeParentsList(@NotNull List<String> currentList)
-	{
-		PsiElement firstChild = myStringListContainer.getFirstChild();
-		if (firstChild != null)
-		{
-			currentList.clear();
-			for (PsiElement psiElement : PerlPsiUtil.collectStringElements(firstChild))
-			{
-				currentList.add(psiElement.getText());
-			}
-		}
-	}
+  @Override
+  public void changeParentsList(@NotNull List<String> currentList) {
+    PsiElement firstChild = myStringListContainer.getFirstChild();
+    if (firstChild != null) {
+      currentList.clear();
+      for (PsiElement psiElement : PerlPsiUtil.collectStringElements(firstChild)) {
+        currentList.add(psiElement.getText());
+      }
+    }
+  }
 }

@@ -22,42 +22,34 @@ import com.intellij.util.Processor;
 /**
  * Created by hurricup on 17.08.2015.
  */
-public class PerlInternalIndexKeysProcessor implements Processor<String>
-{
-	private static final String MAIN_TEMPLATE = "main::";
-	private final boolean myForceShortMain;
+public class PerlInternalIndexKeysProcessor implements Processor<String> {
+  private static final String MAIN_TEMPLATE = "main::";
+  private final boolean myForceShortMain;
 
-	public PerlInternalIndexKeysProcessor(boolean forceShortMain)
-	{
-		myForceShortMain = forceShortMain;
-	}
+  public PerlInternalIndexKeysProcessor(boolean forceShortMain) {
+    myForceShortMain = forceShortMain;
+  }
 
 
-	public PerlInternalIndexKeysProcessor()
-	{
-		this(false);
-	}
+  public PerlInternalIndexKeysProcessor() {
+    this(false);
+  }
 
-	public static String adjustName(String originalName, boolean forceShortMain)
-	{
-		if (originalName == null || !forceShortMain || !originalName.startsWith(MAIN_TEMPLATE))
-		{
-			return originalName;
-		}
-		else
-		{
-			return originalName.substring(4);
-		}
-	}
+  @Override
+  public boolean process(String string) {
+    if (StringUtil.isEmpty(string)) {
+      return false;
+    }
+    char firstChar = string.charAt(0);
+    return firstChar == '_' || Character.isLetterOrDigit(firstChar);
+  }
 
-	@Override
-	public boolean process(String string)
-	{
-		if (StringUtil.isEmpty(string))
-		{
-			return false;
-		}
-		char firstChar = string.charAt(0);
-		return firstChar == '_' || Character.isLetterOrDigit(firstChar);
-	}
+  public static String adjustName(String originalName, boolean forceShortMain) {
+    if (originalName == null || !forceShortMain || !originalName.startsWith(MAIN_TEMPLATE)) {
+      return originalName;
+    }
+    else {
+      return originalName.substring(4);
+    }
+  }
 }

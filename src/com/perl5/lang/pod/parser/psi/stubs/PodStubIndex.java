@@ -24,22 +24,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodStubIndex extends PerlStubIndexBase<PodStubBasedSection>
-{
-	public static final StubIndexKey<String, PodStubBasedSection> KEY = StubIndexKey.createIndexKey("pod.index");
+public class PodStubIndex extends PerlStubIndexBase<PodStubBasedSection> {
+  public static final StubIndexKey<String, PodStubBasedSection> KEY = StubIndexKey.createIndexKey("pod.index");
 
-	public static final int VERSION = 3;
+  public static final int VERSION = 3;
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, PodStubBasedSection> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, PodStubBasedSection> getKey() {
+    return KEY;
+  }
 }

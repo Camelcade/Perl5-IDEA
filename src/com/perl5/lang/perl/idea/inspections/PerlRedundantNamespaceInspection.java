@@ -29,40 +29,32 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 02.04.2016.
  */
-public class PerlRedundantNamespaceInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitMethod(@NotNull PsiPerlMethod o)
-			{
-				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement != null)
-				{
-					String packageName = namespaceElement.getCanonicalName();
-					if (StringUtil.isNotEmpty(packageName))
-					{
-						String contextPackageName = PerlPackageUtil.getContextPackageName(o);
-						if (StringUtil.equals(packageName, contextPackageName))
-						{
-							if (!namespaceElement.getTextRange().isEmpty())
-							{
-								holder.registerProblem(
-										namespaceElement,
-										"Redundant explicit namespace",
-										ProblemHighlightType.LIKE_UNUSED_SYMBOL
-								);
-							}
-						}
-					}
-				}
+public class PerlRedundantNamespaceInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitMethod(@NotNull PsiPerlMethod o) {
+        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
+        if (namespaceElement != null) {
+          String packageName = namespaceElement.getCanonicalName();
+          if (StringUtil.isNotEmpty(packageName)) {
+            String contextPackageName = PerlPackageUtil.getContextPackageName(o);
+            if (StringUtil.equals(packageName, contextPackageName)) {
+              if (!namespaceElement.getTextRange().isEmpty()) {
+                holder.registerProblem(
+                  namespaceElement,
+                  "Redundant explicit namespace",
+                  ProblemHighlightType.LIKE_UNUSED_SYMBOL
+                );
+              }
+            }
+          }
+        }
 
-				super.visitMethod(o);
-			}
-		};
-	}
+        super.visitMethod(o);
+      }
+    };
+  }
 }

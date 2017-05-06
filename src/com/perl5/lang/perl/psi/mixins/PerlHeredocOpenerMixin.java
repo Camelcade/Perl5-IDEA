@@ -33,81 +33,68 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 07.08.2015.
  */
-public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl implements PerlHeredocOpener
-{
-	public PerlHeredocOpenerMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl implements PerlHeredocOpener {
+  public PerlHeredocOpenerMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	public PsiElement getNameIdentifier()
-	{
-		PerlString string = PsiTreeUtil.findChildOfType(this, PerlString.class);
-		if (string != null)
-		{
-			if (string instanceof PsiPerlStringBare)
-			{
-				return string.getFirstChild();
-			}
-			else
-			{
-				PsiElement quoteElement = string.getFirstChild();
-				if (quoteElement != null) // this is lame,  wrong on empty string
-				{
-					return quoteElement.getNextSibling();
-				}
-			}
-		}
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getNameIdentifier() {
+    PerlString string = PsiTreeUtil.findChildOfType(this, PerlString.class);
+    if (string != null) {
+      if (string instanceof PsiPerlStringBare) {
+        return string.getFirstChild();
+      }
+      else {
+        PsiElement quoteElement = string.getFirstChild();
+        if (quoteElement != null) // this is lame,  wrong on empty string
+        {
+          return quoteElement.getNextSibling();
+        }
+      }
+    }
+    return null;
+  }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
+  @Override
+  public int getTextOffset() {
+    PsiElement nameIdentifier = getNameIdentifier();
 
-		return nameIdentifier == null
-				? super.getTextOffset()
-				: nameIdentifier.getTextOffset();
-	}
+    return nameIdentifier == null
+           ? super.getTextOffset()
+           : nameIdentifier.getTextOffset();
+  }
 
-	@Nullable
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getText();
-	}
+  @Nullable
+  @Override
+  public String getName() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    return nameIdentifier == null ? null : nameIdentifier.getText();
+  }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		if (name.isEmpty())
-		{
-			throw new IncorrectOperationException("Empty here-doc markers are not supported");
-		}
+  @Override
+  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+    if (name.isEmpty()) {
+      throw new IncorrectOperationException("Empty here-doc markers are not supported");
+    }
 
-		PsiElement nameIdentifier = getNameIdentifier();
-		if (nameIdentifier instanceof LeafPsiElement)
-		{
-			((LeafPsiElement) nameIdentifier).replaceWithText(name);
-		}
+    PsiElement nameIdentifier = getNameIdentifier();
+    if (nameIdentifier instanceof LeafPsiElement) {
+      ((LeafPsiElement)nameIdentifier).replaceWithText(name);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	@NotNull
-	@Override
-	public SearchScope getUseScope()
-	{
-		return new LocalSearchScope(getContainingFile());
-	}
+  @NotNull
+  @Override
+  public SearchScope getUseScope() {
+    return new LocalSearchScope(getContainingFile());
+  }
 
-	@Override
-	public String getPresentableName()
-	{
-		return getName();
-	}
+  @Override
+  public String getPresentableName() {
+    return getName();
+  }
 }

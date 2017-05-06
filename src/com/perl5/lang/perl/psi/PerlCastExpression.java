@@ -20,6 +20,5 @@ package com.perl5.lang.perl.psi;
  * Created by evstigneev on 17.11.2015.
  * This is interface for deref expressions. named cast to make all names consistent. todo rename all related entities
  */
-public interface PerlCastExpression extends PsiPerlExpr
-{
+public interface PerlCastExpression extends PsiPerlExpr {
 }

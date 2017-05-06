@@ -24,12 +24,9 @@ import com.perl5.lang.perl.psi.PerlFile;
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlSetterActionHandler extends GeneratePerlClassMemberHandlerBase
-{
-	@Override
-	protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file)
-	{
-		((PerlFile) file).getCodeGenerator().generateSetters(anchor, editor);
-
-	}
+public class GeneratePerlSetterActionHandler extends GeneratePerlClassMemberHandlerBase {
+  @Override
+  protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file) {
+    ((PerlFile)file).getCodeGenerator().generateSetters(anchor, editor);
+  }
 }

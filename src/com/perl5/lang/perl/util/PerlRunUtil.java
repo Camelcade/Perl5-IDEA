@@ -51,174 +51,145 @@ import java.util.List;
 /**
  * Created by hurricup on 26.04.2016.
  */
-public class PerlRunUtil
-{
-	public static final String PERL_RUN_ERROR_GROUP = "PERL_RUN_ERROR_GROUP";
+public class PerlRunUtil {
+  public static final String PERL_RUN_ERROR_GROUP = "PERL_RUN_ERROR_GROUP";
 
-	@Nullable
-	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @Nullable VirtualFile scriptFile, String... perlParameters)
-	{
-		String perlPath = getPerlPath(project, scriptFile);
-		return perlPath == null ? null : getPerlCommandLine(project, perlPath, scriptFile, perlParameters);
-	}
+  @Nullable
+  public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
+                                                      @Nullable VirtualFile scriptFile,
+                                                      String... perlParameters) {
+    String perlPath = getPerlPath(project, scriptFile);
+    return perlPath == null ? null : getPerlCommandLine(project, perlPath, scriptFile, perlParameters);
+  }
 
-	@NotNull
-	public static GeneralCommandLine getPerlCommandLine(@NotNull Project project, @NotNull String perlDirectory, @Nullable VirtualFile scriptFile, String... perlParameters)
-	{
-		GeneralCommandLine commandLine = new GeneralCommandLine();
-		String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
-		commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
-		for (String libRoot : PerlSharedSettings.getInstance(project).getLibRootUrls())
-		{
-			String includePath = VfsUtil.urlToPath(libRoot);
-			commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
-		}
+  @NotNull
+  public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
+                                                      @NotNull String perlDirectory,
+                                                      @Nullable VirtualFile scriptFile,
+                                                      String... perlParameters) {
+    GeneralCommandLine commandLine = new GeneralCommandLine();
+    String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
+    commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
+    for (String libRoot : PerlSharedSettings.getInstance(project).getLibRootUrls()) {
+      String includePath = VfsUtil.urlToPath(libRoot);
+      commandLine.addParameter("-I" + FileUtil.toSystemDependentName(includePath));
+    }
 
-		commandLine.addParameters(perlParameters);
+    commandLine.addParameters(perlParameters);
 
-		if (scriptFile != null)
-		{
-			commandLine.addParameter(FileUtil.toSystemDependentName(scriptFile.getPath()));
-		}
-		return commandLine;
-	}
+    if (scriptFile != null) {
+      commandLine.addParameter(FileUtil.toSystemDependentName(scriptFile.getPath()));
+    }
+    return commandLine;
+  }
 
-	@Nullable
-	public static Sdk getModuleSdk(@Nullable Module module)
-	{
-		if (module == null)
-		{
-			return null;
-		}
+  @Nullable
+  public static Sdk getModuleSdk(@Nullable Module module) {
+    if (module == null) {
+      return null;
+    }
 
-		Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
-		if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance())
-		{
-			return sdk;
-		}
-		return null;
-	}
+    Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+    if (sdk != null && sdk.getSdkType() == PerlSdkType.getInstance()) {
+      return sdk;
+    }
+    return null;
+  }
 
-	@Nullable
-	public static String getPerlPath(@NotNull Project project, @Nullable VirtualFile scriptFile)
-	{
-		if (PlatformUtils.isIntelliJ())
-		{
-			Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
+  @Nullable
+  public static String getPerlPath(@NotNull Project project, @Nullable VirtualFile scriptFile) {
+    if (PlatformUtils.isIntelliJ()) {
+      Module moduleForFile = scriptFile == null ? null : ModuleUtilCore.findModuleForFile(scriptFile, project);
 
-			// found in file module
-			String perlPath = getModuleSdkPath(moduleForFile);
-			if (perlPath != null)
-			{
-				return perlPath;
-			}
+      // found in file module
+      String perlPath = getModuleSdkPath(moduleForFile);
+      if (perlPath != null) {
+        return perlPath;
+      }
 
-			// found in project
-			Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
-			if (projectSdk != null && projectSdk.getSdkType() == PerlSdkType.getInstance())
-			{
-				return projectSdk.getHomePath();
-			}
+      // found in project
+      Sdk projectSdk = ProjectRootManager.getInstance(project).getProjectSdk();
+      if (projectSdk != null && projectSdk.getSdkType() == PerlSdkType.getInstance()) {
+        return projectSdk.getHomePath();
+      }
 
-			// looking for any perl module in project
-			for (Module module : ModuleManager.getInstance(project).getModules())
-			{
-				perlPath = getModuleSdkPath(module);
-				if (perlPath != null)
-				{
-					return perlPath;
-				}
-			}
-			showSdkConfigurationError(PerlBundle.message("perl.error.idea.project.or.module.sdk"), project);
-		}
-		else
-		{
-			String perlPath = PerlLocalSettings.getInstance(project).PERL_PATH;
-			if (StringUtil.isNotEmpty(perlPath))
-			{
-				return perlPath;
-			}
-			else
-			{
-				showSdkConfigurationError(PerlBundle.message("perl.error.micro.project.or.module.sdk"), project);
-			}
-		}
-		return null;
-	}
+      // looking for any perl module in project
+      for (Module module : ModuleManager.getInstance(project).getModules()) {
+        perlPath = getModuleSdkPath(module);
+        if (perlPath != null) {
+          return perlPath;
+        }
+      }
+      showSdkConfigurationError(PerlBundle.message("perl.error.idea.project.or.module.sdk"), project);
+    }
+    else {
+      String perlPath = PerlLocalSettings.getInstance(project).PERL_PATH;
+      if (StringUtil.isNotEmpty(perlPath)) {
+        return perlPath;
+      }
+      else {
+        showSdkConfigurationError(PerlBundle.message("perl.error.micro.project.or.module.sdk"), project);
+      }
+    }
+    return null;
+  }
 
-	@Nullable
-	private static String getModuleSdkPath(@Nullable Module module)
-	{
-		Sdk sdk = getModuleSdk(module);
-		if (sdk != null)
-		{
-			return sdk.getHomePath();
-		}
-		return null;
-	}
+  @Nullable
+  private static String getModuleSdkPath(@Nullable Module module) {
+    Sdk sdk = getModuleSdk(module);
+    if (sdk != null) {
+      return sdk.getHomePath();
+    }
+    return null;
+  }
 
-	private static void showSdkConfigurationError(String message, final Project project)
-	{
-		Notifications.Bus.notify(new Notification(
-				PERL_RUN_ERROR_GROUP,
-				"SDK Configuration Error",
-				"<p>" + message + "</p>" +
-						"<br/>" +
-						"<p><a href=\"configure\">Configure...</a></p>" +
-						"<br/>"
-				,
-				NotificationType.ERROR,
-				new NotificationListener.UrlOpeningListener(false)
-				{
-					@Override
-					protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event)
-					{
-						if (PlatformUtils.isIntelliJ())
-						{
-							ProjectSettingsService.getInstance(project).openProjectSettings();
-						}
-						else
-						{
-							ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
-						}
-						notification.expire();
-					}
-				}
-		));
-	}
+  private static void showSdkConfigurationError(String message, final Project project) {
+    Notifications.Bus.notify(new Notification(
+      PERL_RUN_ERROR_GROUP,
+      "SDK Configuration Error",
+      "<p>" + message + "</p>" +
+      "<br/>" +
+      "<p><a href=\"configure\">Configure...</a></p>" +
+      "<br/>"
+      ,
+      NotificationType.ERROR,
+      new NotificationListener.UrlOpeningListener(false) {
+        @Override
+        protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
+          if (PlatformUtils.isIntelliJ()) {
+            ProjectSettingsService.getInstance(project).openProjectSettings();
+          }
+          else {
+            ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+          }
+          notification.expire();
+        }
+      }
+    ));
+  }
 
-	@Nullable
-	public static String getPathFromPerl()
-	{
-		List<String> perlPathLines = getDataFromProgram("perl", "-le", "print $^X");
+  @Nullable
+  public static String getPathFromPerl() {
+    List<String> perlPathLines = getDataFromProgram("perl", "-le", "print $^X");
 
-		if (perlPathLines.size() == 1)
-		{
-			int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
-			if (perlIndex > 0)
-			{
-				return perlPathLines.get(0).substring(0, perlIndex);
-			}
+    if (perlPathLines.size() == 1) {
+      int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
+      if (perlIndex > 0) {
+        return perlPathLines.get(0).substring(0, perlIndex);
+      }
+    }
+    return null;
+  }
 
-		}
-		return null;
-	}
-
-	@NotNull
-	public static List<String> getDataFromProgram(String... command)
-	{
-		try
-		{
-			GeneralCommandLine commandLine = new GeneralCommandLine(command);
-			return ExecUtil.execAndGetOutput(commandLine).getStdoutLines();
-
-		}
-		catch (Exception e)
-		{
-//			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
-			return Collections.emptyList();
-		}
-	}
-
-
+  @NotNull
+  public static List<String> getDataFromProgram(String... command) {
+    try {
+      GeneralCommandLine commandLine = new GeneralCommandLine(command);
+      return ExecUtil.execAndGetOutput(commandLine).getStdoutLines();
+    }
+    catch (Exception e) {
+      //			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
+      return Collections.emptyList();
+    }
+  }
 }

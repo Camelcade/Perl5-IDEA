@@ -24,11 +24,10 @@ import java.util.List;
 /**
  * Created by hurricup on 20.08.2015.
  */
-public interface PerlUseStatementStub extends StubElement<PerlUseStatement>
-{
-	String getPackageName();
+public interface PerlUseStatementStub extends StubElement<PerlUseStatement> {
+  String getPackageName();
 
-	String getOuterPackageName();
+  String getOuterPackageName();
 
-	List<String> getImportParameters();
+  List<String> getImportParameters();
 }

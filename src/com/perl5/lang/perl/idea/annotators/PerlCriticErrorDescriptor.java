@@ -24,56 +24,47 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PerlCriticErrorDescriptor
-{
-	public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*( .+)");
-	private final int myLine;
-	private final int myCol;
-	private StringBuilder myMessage;
+public class PerlCriticErrorDescriptor {
+  public static final Pattern PERL_CRITIC_MESSAGE_PATTERN = Pattern.compile("(.+?) at line (\\d+), column (\\d+)\\.\\s*( .+)");
+  private final int myLine;
+  private final int myCol;
+  private StringBuilder myMessage;
 
-	private PerlCriticErrorDescriptor(StringBuilder message, int line, int col)
-	{
-		myMessage = message;
-		myCol = col;
-		myLine = line;
-	}
+  private PerlCriticErrorDescriptor(StringBuilder message, int line, int col) {
+    myMessage = message;
+    myCol = col;
+    myLine = line;
+  }
 
-	@Nullable
-	public static PerlCriticErrorDescriptor getFromString(String message)
-	{
-		Matcher m = PERL_CRITIC_MESSAGE_PATTERN.matcher(message);
-		if (m.matches())
-		{
-			StringBuilder realMessage = new StringBuilder();
-			realMessage.append(m.group(1));
-			realMessage.append(m.group(4));
-			int line = Integer.parseInt(m.group(2));
-			int pos = Integer.parseInt(m.group(3));
-			return new PerlCriticErrorDescriptor(realMessage, line, pos);
-		}
-		return null;
-	}
+  public String getMessage() {
+    return myMessage.toString();
+  }
 
-	public String getMessage()
-	{
-		return myMessage.toString();
-	}
+  public void append(String text) {
+    if (text != null) {
+      myMessage.append(text);
+    }
+  }
 
-	public void append(String text)
-	{
-		if (text != null)
-		{
-			myMessage.append(text);
-		}
-	}
+  public int getLine() {
+    return myLine;
+  }
 
-	public int getLine()
-	{
-		return myLine;
-	}
+  public int getCol() {
+    return myCol;
+  }
 
-	public int getCol()
-	{
-		return myCol;
-	}
+  @Nullable
+  public static PerlCriticErrorDescriptor getFromString(String message) {
+    Matcher m = PERL_CRITIC_MESSAGE_PATTERN.matcher(message);
+    if (m.matches()) {
+      StringBuilder realMessage = new StringBuilder();
+      realMessage.append(m.group(1));
+      realMessage.append(m.group(4));
+      int line = Integer.parseInt(m.group(2));
+      int pos = Integer.parseInt(m.group(3));
+      return new PerlCriticErrorDescriptor(realMessage, line, pos);
+    }
+    return null;
+  }
 }

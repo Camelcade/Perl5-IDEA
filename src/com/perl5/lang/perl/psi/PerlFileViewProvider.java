@@ -41,95 +41,80 @@ import java.util.Set;
 /**
  * Created by hurricup on 30.03.2016.
  */
-public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, PerlElementTypes
-{
-	private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
-			PerlLanguage.INSTANCE,
-			PodLanguage.INSTANCE
-	));
-	private boolean myActAsSingleFile = false;
+public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
+  implements TemplateLanguageFileViewProvider, PerlElementTypes {
+  private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
+    PerlLanguage.INSTANCE,
+    PodLanguage.INSTANCE
+  ));
+  private boolean myActAsSingleFile = false;
 
-	public PerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
-	{
-		super(manager, virtualFile, eventSystemEnabled);
-	}
+  public PerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
+    super(manager, virtualFile, eventSystemEnabled);
+  }
 
-	@Nullable
-	@Override
-	protected PsiFile createFile(@NotNull Language lang)
-	{
-		if (lang != PerlLanguage.INSTANCE && lang != PodLanguage.INSTANCE)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  protected PsiFile createFile(@NotNull Language lang) {
+    if (lang != PerlLanguage.INSTANCE && lang != PodLanguage.INSTANCE) {
+      return null;
+    }
 
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
-		if (parserDefinition != null)
-		{
+    final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+    if (parserDefinition != null) {
 
-			final PsiFileImpl psiFile = (PsiFileImpl) parserDefinition.createFile(this);
+      final PsiFileImpl psiFile = (PsiFileImpl)parserDefinition.createFile(this);
 
-			if (lang == PodLanguage.INSTANCE)
-			{
-				psiFile.setContentElementType(POD_BLOCK);
-			}
+      if (lang == PodLanguage.INSTANCE) {
+        psiFile.setContentElementType(POD_BLOCK);
+      }
 
-			return psiFile;
-		}
+      return psiFile;
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@NotNull
-	@Override
-	public Set<Language> getLanguages()
-	{
-		if (myActAsSingleFile)
-		{
-			return Collections.singleton(getBaseLanguage());
-		}
-		else
-		{
-			return myLanguages;
-		}
-	}
+  @NotNull
+  @Override
+  public Set<Language> getLanguages() {
+    if (myActAsSingleFile) {
+      return Collections.singleton(getBaseLanguage());
+    }
+    else {
+      return myLanguages;
+    }
+  }
 
-	@NotNull
-	@Override
-	public Language getBaseLanguage()
-	{
-		return PerlLanguage.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public Language getBaseLanguage() {
+    return PerlLanguage.INSTANCE;
+  }
 
-	@Override
-	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy)
-	{
-		return new PerlFileViewProvider(getManager(), fileCopy, false);
-	}
+  @Override
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+    return new PerlFileViewProvider(getManager(), fileCopy, false);
+  }
 
-	@NotNull
-	@Override
-	public Language getTemplateDataLanguage()
-	{
-		return PodLanguage.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public Language getTemplateDataLanguage() {
+    return PodLanguage.INSTANCE;
+  }
 
-	public void setActAsSingleFile(boolean myActAsSingleFile)
-	{
-		this.myActAsSingleFile = myActAsSingleFile;
-	}
+  public void setActAsSingleFile(boolean myActAsSingleFile) {
+    this.myActAsSingleFile = myActAsSingleFile;
+  }
 
-	@NotNull
-	@Override
-	public List<PsiFile> getAllFiles()
-	{
-		if (myActAsSingleFile)
-		{
-			return ContainerUtil.createMaybeSingletonList(getPsi(getBaseLanguage()));
-		}
-		else
-		{
-			return super.getAllFiles();
-		}
-	}
+  @NotNull
+  @Override
+  public List<PsiFile> getAllFiles() {
+    if (myActAsSingleFile) {
+      return ContainerUtil.createMaybeSingletonList(getPsi(getBaseLanguage()));
+    }
+    else {
+      return super.getAllFiles();
+    }
+  }
 }

@@ -25,55 +25,45 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement
-{
-	public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement {
+  public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PerlVisitor)
-		{
-			((PerlVisitor) visitor).visitHeredocTeminator(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitHeredocTeminator(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 
-	@NotNull
-	@Override
-	public final PsiReference[] getReferences()
-	{
-		return getReferencesWithCache();
-	}
+  @NotNull
+  @Override
+  public final PsiReference[] getReferences() {
+    return getReferencesWithCache();
+  }
 
-	@Override
-	public final PsiReference getReference()
-	{
-		PsiReference[] references = getReferences();
-		return references.length == 0 ? null : references[0];
-	}
+  @Override
+  public final PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
+  }
 
-	@Override
-	public PsiReference[] computeReferences()
-	{
-		return new PsiReference[]{new PerlHeredocReference(this)};
-	}
+  @Override
+  public PsiReference[] computeReferences() {
+    return new PsiReference[]{new PerlHeredocReference(this)};
+  }
 
-	@Override
-	public boolean hasReferences()
-	{
-		return true;
-	}
+  @Override
+  public boolean hasReferences() {
+    return true;
+  }
 
-	@Override
-	public boolean isValidHost()
-	{
-		return false;
-	}
+  @Override
+  public boolean isValidHost() {
+    return false;
+  }
 }

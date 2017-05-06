@@ -27,47 +27,39 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public abstract class PodSectionMixin extends PodCompositeElementMixin implements PodSection
-{
-	public PodSectionMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PodSectionMixin extends PodCompositeElementMixin implements PodSection {
+  public PodSectionMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
 
-	@Override
-	public PsiElement getContentBlock()
-	{
-		return findChildByClass(PodSectionContent.class);
-	}
+  @Override
+  public PsiElement getContentBlock() {
+    return findChildByClass(PodSectionContent.class);
+  }
 
-	@Override
-	public boolean hasContent()
-	{
-		return getContentBlock() != null;
-	}
+  @Override
+  public boolean hasContent() {
+    return getContentBlock() != null;
+  }
 
-	@Override
-	public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		renderElementContentAsHTML(builder, new PodRenderingContext());
-	}
+  @Override
+  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    renderElementContentAsHTML(builder, new PodRenderingContext());
+  }
 
-	@Override
-	public void renderElementAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		renderElementContentAsText(builder, new PodRenderingContext());
-	}
+  @Override
+  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    renderElementContentAsText(builder, new PodRenderingContext());
+  }
 
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-	}
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
 
-	public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context)
-	{
-		PsiElement content = getContentBlock();
-		PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
-	}
+  public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
 }

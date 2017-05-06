@@ -26,15 +26,13 @@ import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
  * Created by hurricup on 21.07.2015.
  * Copy-pasted FlexAdapter because of private variables and no setters
  */
-public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter implements MojoliciousElementTypes
-{
-	private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
-			PerlMergingLexerAdapter.TOKENS_TO_MERGE,
-			TokenSet.create(MOJO_TEMPLATE_BLOCK_HTML)
-	);
+public class MojoliciousLexerAdapter extends PerlTemplatingMergingLexerAdapter implements MojoliciousElementTypes {
+  private final static TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
+    PerlMergingLexerAdapter.TOKENS_TO_MERGE,
+    TokenSet.create(MOJO_TEMPLATE_BLOCK_HTML)
+  );
 
-	public MojoliciousLexerAdapter(Project project)
-	{
-		super(project, new MojoliciousLexer(null).withProject(project), TOKENS_TO_MERGE);
-	}
+  public MojoliciousLexerAdapter(Project project) {
+    super(project, new MojoliciousLexer(null).withProject(project), TOKENS_TO_MERGE);
+  }
 }

@@ -30,25 +30,22 @@ import java.util.Collection;
 /**
  * Created by hurricup on 12.08.2015.
  */
-public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor
-{
-	@NotNull
-	@Override
-	public String[] getNames(Project project, boolean includeNonProjectItems)
-	{
-		return PerlSubUtil.getDefinedSubsNames(project).toArray(new String[]{});
-	}
+public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor {
+  @NotNull
+  @Override
+  public String[] getNames(Project project, boolean includeNonProjectItems) {
+    return PerlSubUtil.getDefinedSubsNames(project).toArray(new String[]{});
+  }
 
-	@NotNull
-	@Override
-	public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems)
-	{
-		Collection<PerlSubDefinitionBase> result = PerlSubUtil.getSubDefinitions(
-				project,
-				name,
-				(includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
-		);
-		//noinspection SuspiciousToArrayCall
-		return result.toArray(new NavigationItem[result.size()]);
-	}
+  @NotNull
+  @Override
+  public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
+    Collection<PerlSubDefinitionBase> result = PerlSubUtil.getSubDefinitions(
+      project,
+      name,
+      (includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
+    );
+    //noinspection SuspiciousToArrayCall
+    return result.toArray(new NavigationItem[result.size()]);
+  }
 }

@@ -21,6 +21,5 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousHelperDeclaration extends PerlSubDefinitionWitTextIdentifier
-{
+public interface MojoliciousHelperDeclaration extends PerlSubDefinitionWitTextIdentifier {
 }

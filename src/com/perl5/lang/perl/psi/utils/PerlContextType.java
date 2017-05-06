@@ -19,9 +19,8 @@ package com.perl5.lang.perl.psi.utils;
 /**
  * Created by hurricup on 27.06.2016.
  */
-public enum PerlContextType
-{
-	VOID,
-	SCALAR,
-	LIST
+public enum PerlContextType {
+  VOID,
+  SCALAR,
+  LIST
 }

@@ -37,114 +37,99 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase> implements PsiElementProvider
-{
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase>
+  implements PsiElementProvider {
 
-	public PerlSubDefinitionStubElementType(String name)
-	{
-		super(name, PerlLanguage.INSTANCE);
-	}
+  public PerlSubDefinitionStubElementType(String name) {
+    super(name, PerlLanguage.INSTANCE);
+  }
 
-	public PerlSubDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language)
-	{
-		super(debugName, language);
-	}
+  public PerlSubDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PsiPerlSubDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PsiPerlSubDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlSubDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlSubDefinitionImpl(node);
+  }
 
-	@Override
-	public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub)
-	{
-		//noinspection unchecked
-		return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
-	}
+  @Override
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+    //noinspection unchecked
+    return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
+  }
 
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "perl." + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl." + super.toString();
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink)
-	{
-		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, stub.getCanonicalName());
-		sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
-	}
+  @Override
+  public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
+    sink.occurrence(PerlSubDefinitionsStubIndex.KEY, stub.getCanonicalName());
+    sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
+  }
 
-	@Override
-	public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getPackageName());
-		dataStream.writeName(stub.getSubName());
+  @Override
+  public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getSubName());
 
-		PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
+    PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());
 
 
-		PerlSubAnnotations subAnnotations = stub.getAnnotations();
-		if (subAnnotations == null)
-		{
-			dataStream.writeBoolean(false);
-		}
-		else
-		{
-			dataStream.writeBoolean(true);
-			subAnnotations.serialize(dataStream);
-		}
-	}
+    PerlSubAnnotations subAnnotations = stub.getAnnotations();
+    if (subAnnotations == null) {
+      dataStream.writeBoolean(false);
+    }
+    else {
+      dataStream.writeBoolean(true);
+      subAnnotations.serialize(dataStream);
+    }
+  }
 
-	@NotNull
-	@Override
-	public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		//noinspection ConstantConditions
-		String packageName = dataStream.readName().getString();
-		//noinspection ConstantConditions
-		String functionName = dataStream.readName().getString();
+  @NotNull
+  @Override
+  public PerlSubDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    //noinspection ConstantConditions
+    String packageName = dataStream.readName().getString();
+    //noinspection ConstantConditions
+    String functionName = dataStream.readName().getString();
 
-		List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
+    List<PerlSubArgument> arguments = PerlSubArgument.deserializeList(dataStream);
 
-		PerlSubAnnotations annotations = null;
-		if (dataStream.readBoolean())
-		{
-			annotations = PerlSubAnnotations.deserialize(dataStream);
-		}
+    PerlSubAnnotations annotations = null;
+    if (dataStream.readBoolean()) {
+      annotations = PerlSubAnnotations.deserialize(dataStream);
+    }
 
-		return createStubElement(parentStub, packageName, functionName, arguments, annotations);
-	}
+    return createStubElement(parentStub, packageName, functionName, arguments, annotations);
+  }
 
-	@NotNull
-	protected PerlSubDefinitionStub createStubElement(
-			StubElement parentStub,
-			String packageName,
-			String functionName,
-			List<PerlSubArgument> arguments,
-			PerlSubAnnotations annotations
-	)
-	{
-		return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
-	}
+  @NotNull
+  protected PerlSubDefinitionStub createStubElement(
+    StubElement parentStub,
+    String packageName,
+    String functionName,
+    List<PerlSubArgument> arguments,
+    PerlSubAnnotations annotations
+  ) {
+    return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement element = node.getPsi();
-		return element instanceof PerlSubDefinitionBase &&
-				element.isValid() &&
-				StringUtil.isNotEmpty(((PerlSubDefinitionBase) element).getCanonicalName());
-	}
-
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement element = node.getPsi();
+    return element instanceof PerlSubDefinitionBase &&
+           element.isValid() &&
+           StringUtil.isNotEmpty(((PerlSubDefinitionBase)element).getCanonicalName());
+  }
 }

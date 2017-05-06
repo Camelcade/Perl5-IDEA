@@ -38,68 +38,59 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.01.2016.
  */
-public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElementType implements PsiElementProvider
-{
-	public MasonNamespaceElementType(String name)
-	{
-		super(name, Mason2Language.INSTANCE);
-	}
+public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElementType implements PsiElementProvider {
+  public MasonNamespaceElementType(String name) {
+    super(name, Mason2Language.INSTANCE);
+  }
 
-	@Override
-	public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub)
-	{
-		return new MasonNamespaceDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+    return new MasonNamespaceDefinitionImpl(stub, this);
+  }
 
-	@Override
-	public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub)
-	{
-		assert psi instanceof MasonNamespaceDefinitionImpl;
-		return new PerlNamespaceDefinitionStubImpl(
-				parentStub,
-				this,
-				((MasonNamespaceDefinitionImpl) psi).getAbsoluteComponentPath(),
-				psi.getMroType(),
-				((MasonNamespaceDefinitionImpl) psi).getParentNamespacesNamesFromPsi(),
-				psi.getEXPORT(),
-				psi.getEXPORT_OK(),
-				psi.getEXPORT_TAGS(),
-				psi.getLocalAnnotations()
-		);
-	}
+  @Override
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub) {
+    assert psi instanceof MasonNamespaceDefinitionImpl;
+    return new PerlNamespaceDefinitionStubImpl(
+      parentStub,
+      this,
+      ((MasonNamespaceDefinitionImpl)psi).getAbsoluteComponentPath(),
+      psi.getMroType(),
+      ((MasonNamespaceDefinitionImpl)psi).getParentNamespacesNamesFromPsi(),
+      psi.getEXPORT(),
+      psi.getEXPORT_OK(),
+      psi.getEXPORT_TAGS(),
+      psi.getLocalAnnotations()
+    );
+  }
 
-	@Override
-	public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink)
-	{
-		String name = stub.getPackageName();
-		assert name != null;
-		sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
+  @Override
+  public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
+    String name = stub.getPackageName();
+    assert name != null;
+    sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
 
-		// fixme this is kinda hack to make MRO work. But, it should be smarter
-		sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, Mason2Util.getClassnameFromPath(name));
+    // fixme this is kinda hack to make MRO work. But, it should be smarter
+    sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, Mason2Util.getClassnameFromPath(name));
 
-		for (String parent : stub.getParentNamespaces())
-		{
-			if (parent != null && !parent.isEmpty())
-			{
-				sink.occurrence(MasonParentNamespacesStubIndex.KEY, parent);
-			}
-		}
-	}
+    for (String parent : stub.getParentNamespaces()) {
+      if (parent != null && !parent.isEmpty()) {
+        sink.occurrence(MasonParentNamespacesStubIndex.KEY, parent);
+      }
+    }
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof MasonNamespaceDefinition &&
-				psi.isValid() &&
-				StringUtil.isNotEmpty(((MasonNamespaceDefinition) psi).getAbsoluteComponentPath());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof MasonNamespaceDefinition &&
+           psi.isValid() &&
+           StringUtil.isNotEmpty(((MasonNamespaceDefinition)psi).getAbsoluteComponentPath());
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonNamespaceDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonNamespaceDefinitionImpl(node);
+  }
 }

@@ -24,16 +24,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PodTokenType extends IElementType
-{
-	public PodTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
+public class PodTokenType extends IElementType {
+  public PodTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, PodLanguage.INSTANCE);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "Perl5 POD: " + super.toString();
-	}
+  @Override
+  public String toString() {
+    return "Perl5 POD: " + super.toString();
+  }
 }

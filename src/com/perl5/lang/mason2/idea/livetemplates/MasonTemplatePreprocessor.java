@@ -23,11 +23,8 @@ import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 /**
  * Created by hurricup on 10.01.2016.
  */
-public class MasonTemplatePreprocessor extends AbstractMasonTemplatePreprocessor
-{
-	protected boolean isMyFile(PsiFile file)
-	{
-		return file instanceof MasonTemplatingFileImpl;
-	}
-
+public class MasonTemplatePreprocessor extends AbstractMasonTemplatePreprocessor {
+  protected boolean isMyFile(PsiFile file) {
+    return file instanceof MasonTemplatingFileImpl;
+  }
 }

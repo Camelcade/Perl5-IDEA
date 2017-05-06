@@ -32,103 +32,86 @@ import java.util.List;
 /**
  * Created by hurricup on 08.08.2016.
  */
-public class PerlVariableAnnotations
-{
-	private static final byte IS_DEPRECATED = 0x01;
+public class PerlVariableAnnotations {
+  private static final byte IS_DEPRECATED = 0x01;
 
-	private byte myFlags = 0;
+  private byte myFlags = 0;
 
-	private PerlReturnType myRefType = PerlReturnType.VALUE;
-	private String myType = null;
+  private PerlReturnType myRefType = PerlReturnType.VALUE;
+  private String myType = null;
 
 
-	public PerlVariableAnnotations()
-	{
+  public PerlVariableAnnotations() {
 
-	}
+  }
 
-	public PerlVariableAnnotations(byte flags, @Nullable String type, PerlReturnType refType)
-	{
-		myFlags = flags;
-		myType = type;
-		myRefType = refType;
-	}
+  public PerlVariableAnnotations(byte flags, @Nullable String type, PerlReturnType refType) {
+    myFlags = flags;
+    myType = type;
+    myRefType = refType;
+  }
 
-	public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		return new PerlVariableAnnotations(
-				dataStream.readByte(),
-				PerlStubSerializationUtil.readNullableString(dataStream),
-				PerlReturnType.deserialize(dataStream)
-		);
+  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeByte(myFlags);
+    dataStream.writeName(myType);
+    myRefType.serialize(dataStream);
+  }
 
-	}
+  public boolean isDeprecated() {
+    return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
+  }
 
-	@Nullable
-	public static PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
-	{
-		if (annotations.isEmpty())
-		{
-			return null;
-		}
+  public void setIsDeprecated() {
+    myFlags |= IS_DEPRECATED;
+  }
 
-		PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
+  public PerlReturnType getRefType() {
+    return myRefType;
+  }
 
-		for (PerlAnnotation annotation : annotations)
-		{
-			if (annotation instanceof PsiPerlAnnotationDeprecated)
-			{
-				myAnnotations.setIsDeprecated();
-			}
-			else if (annotation instanceof PsiPerlAnnotationType) // type
-			{
-				PerlNamespaceElement ns = ((PsiPerlAnnotationType) annotation).getType();
-				if (ns != null)
-				{
-					myAnnotations.setType(ns.getCanonicalName());
-					myAnnotations.setRefType(PerlReturnType.REF);
-					// todo implement brackets and braces
-				}
-			}
-		}
+  public void setRefType(PerlReturnType refType) {
+    myRefType = refType;
+  }
 
-		return myAnnotations;
-	}
+  public String getType() {
+    return myType;
+  }
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeByte(myFlags);
-		dataStream.writeName(myType);
-		myRefType.serialize(dataStream);
-	}
+  public void setType(String type) {
+    myType = type;
+  }
 
-	public boolean isDeprecated()
-	{
-		return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
-	}
+  public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
+    return new PerlVariableAnnotations(
+      dataStream.readByte(),
+      PerlStubSerializationUtil.readNullableString(dataStream),
+      PerlReturnType.deserialize(dataStream)
+    );
+  }
 
-	public void setIsDeprecated()
-	{
-		myFlags |= IS_DEPRECATED;
-	}
+  @Nullable
+  public static PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+    if (annotations.isEmpty()) {
+      return null;
+    }
 
-	public PerlReturnType getRefType()
-	{
-		return myRefType;
-	}
+    PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
 
-	public void setRefType(PerlReturnType refType)
-	{
-		myRefType = refType;
-	}
+    for (PerlAnnotation annotation : annotations) {
+      if (annotation instanceof PsiPerlAnnotationDeprecated) {
+        myAnnotations.setIsDeprecated();
+      }
+      else if (annotation instanceof PsiPerlAnnotationType) // type
+      {
+        PerlNamespaceElement ns = ((PsiPerlAnnotationType)annotation).getType();
+        if (ns != null) {
+          myAnnotations.setType(ns.getCanonicalName());
+          myAnnotations.setRefType(PerlReturnType.REF);
+          // todo implement brackets and braces
+        }
+      }
+    }
 
-	public String getType()
-	{
-		return myType;
-	}
-
-	public void setType(String type)
-	{
-		myType = type;
-	}
+    return myAnnotations;
+  }
 }

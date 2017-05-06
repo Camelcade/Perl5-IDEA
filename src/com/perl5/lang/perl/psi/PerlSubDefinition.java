@@ -21,6 +21,5 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public interface PerlSubDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub>
-{
+public interface PerlSubDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub> {
 }

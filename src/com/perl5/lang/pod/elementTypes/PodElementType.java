@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public abstract class PodElementType extends PodTokenType implements PsiElementProvider
-{
-	public PodElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class PodElementType extends PodTokenType implements PsiElementProvider {
+  public PodElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

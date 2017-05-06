@@ -28,36 +28,30 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 12.11.2015.
  */
-public class PerlPreFormatProcessor implements PreFormatProcessor
-{
-	@NotNull
-	@Override
-	public TextRange process(@NotNull ASTNode element, @NotNull TextRange range)
-	{
-		PsiElement psiElement = element.getPsi();
-		if (psiElement == null)
-		{
-			return range;
-		}
+public class PerlPreFormatProcessor implements PreFormatProcessor {
+  @NotNull
+  @Override
+  public TextRange process(@NotNull ASTNode element, @NotNull TextRange range) {
+    PsiElement psiElement = element.getPsi();
+    if (psiElement == null) {
+      return range;
+    }
 
-		if (!canProcess(psiElement, range))
-		{
-			return range;
-		}
+    if (!canProcess(psiElement, range)) {
+      return range;
+    }
 
-		PsiFile file = psiElement.isValid() ? psiElement.getContainingFile() : null;
-		if (file == null)
-		{
-			return range;
-		}
+    PsiFile file = psiElement.isValid() ? psiElement.getContainingFile() : null;
+    if (file == null) {
+      return range;
+    }
 
-		Project project = psiElement.getProject();
+    Project project = psiElement.getProject();
 
-		return new PerlPreFormatter(project).process(psiElement, range);
-	}
+    return new PerlPreFormatter(project).process(psiElement, range);
+  }
 
-	protected boolean canProcess(PsiElement element, TextRange range)
-	{
-		return element.getLanguage().is(PerlLanguage.INSTANCE);
-	}
+  protected boolean canProcess(PsiElement element, TextRange range) {
+    return element.getLanguage().is(PerlLanguage.INSTANCE);
+  }
 }

@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public interface PerlLexicalScopeMember extends PsiElement
-{
-	PerlLexicalScope getLexicalScope();
+public interface PerlLexicalScopeMember extends PsiElement {
+  PerlLexicalScope getLexicalScope();
 }

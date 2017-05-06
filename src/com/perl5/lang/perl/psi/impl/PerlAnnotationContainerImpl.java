@@ -27,18 +27,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public class PerlAnnotationContainerImpl extends ASTWrapperPsiElement implements PerlAnnotationContainer
-{
-	public PerlAnnotationContainerImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlAnnotationContainerImpl extends ASTWrapperPsiElement implements PerlAnnotationContainer {
+  public PerlAnnotationContainerImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Nullable
-	@Override
-	public PerlAnnotation getAnnotation()
-	{
-		PsiElement annotation = getFirstChild();
-		return annotation instanceof PerlAnnotation ? (PerlAnnotation) annotation : null;
-	}
+  @Nullable
+  @Override
+  public PerlAnnotation getAnnotation() {
+    PsiElement annotation = getFirstChild();
+    return annotation instanceof PerlAnnotation ? (PerlAnnotation)annotation : null;
+  }
 }

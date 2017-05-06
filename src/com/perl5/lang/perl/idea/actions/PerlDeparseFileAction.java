@@ -39,90 +39,75 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 /**
  * Created by hurricup on 26.04.2016.
  */
-public class PerlDeparseFileAction extends PurePerlActionBase
-{
-	private static final String PERL_DEPARSE_GROUP = "PERL5_DEPARSE_FILE";
+public class PerlDeparseFileAction extends PurePerlActionBase {
+  private static final String PERL_DEPARSE_GROUP = "PERL5_DEPARSE_FILE";
 
-	@Override
-	public void actionPerformed(AnActionEvent event)
-	{
-		if (isEnabled(event))
-		{
-			PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
+  @Override
+  public void actionPerformed(AnActionEvent event) {
+    if (isEnabled(event)) {
+      PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
-			if (file == null)
-			{
-				return;
-			}
+      if (file == null) {
+        return;
+      }
 
-			final Document document = file.getViewProvider().getDocument();
-			if (document == null)
-			{
-				return;
-			}
+      final Document document = file.getViewProvider().getDocument();
+      if (document == null) {
+        return;
+      }
 
-			final Project project = file.getProject();
+      final Project project = file.getProject();
 
-			String deparseArgument = "-MO=Deparse";
-			PerlSharedSettings perl5Settings = PerlSharedSettings.getInstance(project);
-			if (StringUtil.isNotEmpty(perl5Settings.PERL_DEPARSE_ARGUMENTS))
-			{
-				deparseArgument += "," + perl5Settings.PERL_DEPARSE_ARGUMENTS;
-			}
+      String deparseArgument = "-MO=Deparse";
+      PerlSharedSettings perl5Settings = PerlSharedSettings.getInstance(project);
+      if (StringUtil.isNotEmpty(perl5Settings.PERL_DEPARSE_ARGUMENTS)) {
+        deparseArgument += "," + perl5Settings.PERL_DEPARSE_ARGUMENTS;
+      }
 
-			GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, file.getVirtualFile(), deparseArgument);
+      GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, file.getVirtualFile(), deparseArgument);
 
-			if (commandLine != null)
-			{
-				commandLine.withWorkDirectory(project.getBasePath());
-				FileDocumentManager.getInstance().saveDocument(document);
-				try
-				{
-					ProcessOutput processOutput = ExecUtil.execAndGetOutput(commandLine);
-					String deparsed = processOutput.getStdout();
-					String error = processOutput.getStderr();
+      if (commandLine != null) {
+        commandLine.withWorkDirectory(project.getBasePath());
+        FileDocumentManager.getInstance().saveDocument(document);
+        try {
+          ProcessOutput processOutput = ExecUtil.execAndGetOutput(commandLine);
+          String deparsed = processOutput.getStdout();
+          String error = processOutput.getStderr();
 
-					if (StringUtil.isNotEmpty(error) && !StringUtil.contains(error, "syntax OK"))
-					{
-						if (StringUtil.isEmpty(deparsed))
-						{
-							Notifications.Bus.notify(new Notification(
-									PERL_DEPARSE_GROUP,
-									"Deparsing error",
-									error.replaceAll("\\n", "<br/>"),
-									NotificationType.ERROR
-							));
-						}
-						else
-						{
-							Notifications.Bus.notify(new Notification(
-									PERL_DEPARSE_GROUP,
-									"Deparsing Completed",
-									"XSubs deparsing completed, but some errors occurred during the process:<br/>" +
-											error.replaceAll("\\n", "<br/>"),
-									NotificationType.INFORMATION
-							));
-						}
-					}
+          if (StringUtil.isNotEmpty(error) && !StringUtil.contains(error, "syntax OK")) {
+            if (StringUtil.isEmpty(deparsed)) {
+              Notifications.Bus.notify(new Notification(
+                PERL_DEPARSE_GROUP,
+                "Deparsing error",
+                error.replaceAll("\\n", "<br/>"),
+                NotificationType.ERROR
+              ));
+            }
+            else {
+              Notifications.Bus.notify(new Notification(
+                PERL_DEPARSE_GROUP,
+                "Deparsing Completed",
+                "XSubs deparsing completed, but some errors occurred during the process:<br/>" +
+                error.replaceAll("\\n", "<br/>"),
+                NotificationType.INFORMATION
+              ));
+            }
+          }
 
-					if (StringUtil.isNotEmpty(deparsed))
-					{
-						VirtualFile newFile = new LightVirtualFile("Deparsed " + file.getName(), file.getFileType(), deparsed);
-						OpenFileAction.openFile(newFile, project);
-					}
-				}
-				catch (ExecutionException e)
-				{
-					Notifications.Bus.notify(new Notification(
-							PERL_DEPARSE_GROUP,
-							"Error starting perl process",
-							e.getMessage(),
-							NotificationType.ERROR
-					));
-				}
-
-			}
-		}
-	}
-
+          if (StringUtil.isNotEmpty(deparsed)) {
+            VirtualFile newFile = new LightVirtualFile("Deparsed " + file.getName(), file.getFileType(), deparsed);
+            OpenFileAction.openFile(newFile, project);
+          }
+        }
+        catch (ExecutionException e) {
+          Notifications.Bus.notify(new Notification(
+            PERL_DEPARSE_GROUP,
+            "Error starting perl process",
+            e.getMessage(),
+            NotificationType.ERROR
+          ));
+        }
+      }
+    }
+  }
 }

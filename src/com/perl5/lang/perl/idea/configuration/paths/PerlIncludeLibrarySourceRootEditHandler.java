@@ -31,59 +31,50 @@ import java.awt.*;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlIncludeLibrarySourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement>
-{
-	public PerlIncludeLibrarySourceRootEditHandler()
-	{
-		super(JpsPerlLibrarySourceRootType.INSTANCE);
-	}
+public class PerlIncludeLibrarySourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
+  public PerlIncludeLibrarySourceRootEditHandler() {
+    super(JpsPerlLibrarySourceRootType.INSTANCE);
+  }
 
-	@NotNull
-	@Override
-	public String getRootTypeName()
-	{
-		return "Libraries";
-	}
+  @NotNull
+  @Override
+  public String getRootTypeName() {
+    return "Libraries";
+  }
 
-	@NotNull
-	@Override
-	public Icon getRootIcon()
-	{
-		return PerlIcons.LIB_ROOT;
-	}
+  @NotNull
+  @Override
+  public Icon getRootIcon() {
+    return PerlIcons.LIB_ROOT;
+  }
 
-	@Nullable
-	@Override
-	public Icon getFolderUnderRootIcon()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public Icon getFolderUnderRootIcon() {
+    return null;
+  }
 
-	@Nullable
-	@Override
-	public CustomShortcutSet getMarkRootShortcutSet()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public CustomShortcutSet getMarkRootShortcutSet() {
+    return null;
+  }
 
-	@NotNull
-	@Override
-	public String getRootsGroupTitle()
-	{
-		return "Library directories";
-	}
+  @NotNull
+  @Override
+  public String getRootsGroupTitle() {
+    return "Library directories";
+  }
 
-	@NotNull
-	@Override
-	public Color getRootsGroupColor()
-	{
-		return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
-	}
+  @NotNull
+  @Override
+  public Color getRootsGroupColor() {
+    return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
+  }
 
-	@NotNull
-	@Override
-	public String getUnmarkRootButtonText()
-	{
-		return "Unmark library directory";
-	}
+  @NotNull
+  @Override
+  public String getUnmarkRootButtonText() {
+    return "Unmark library directory";
+  }
 }

@@ -36,102 +36,89 @@ import java.util.List;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction implements IntentionAction
-{
-	protected static String HEREDOC_MARKER = "HEREDOC";
+public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction implements IntentionAction {
+  protected static String HEREDOC_MARKER = "HEREDOC";
 
-	@Override
-	public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException
-	{
-		PsiElement stringElement = element.getParent();
-		assert stringElement instanceof PerlString;
-		char quoteSymbol = '"';
-		if (stringElement instanceof PsiPerlStringSq)
-		{
-			quoteSymbol = '\'';
-		}
-		else if (stringElement instanceof PsiPerlStringXq)
-		{
-			quoteSymbol = '`';
-		}
+  @Override
+  public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
+    PsiElement stringElement = element.getParent();
+    assert stringElement instanceof PerlString;
+    char quoteSymbol = '"';
+    if (stringElement instanceof PsiPerlStringSq) {
+      quoteSymbol = '\'';
+    }
+    else if (stringElement instanceof PsiPerlStringXq) {
+      quoteSymbol = '`';
+    }
 
-		String contentText = ((PerlString) stringElement).getStringContent();
-		List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
-				project,
-				quoteSymbol,
-				HEREDOC_MARKER,
-				""
-		);
+    String contentText = ((PerlString)stringElement).getStringContent();
+    List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
+      project,
+      quoteSymbol,
+      HEREDOC_MARKER,
+      ""
+    );
 
-		PsiFile currentFile = stringElement.getContainingFile();
-		int newLineIndex = currentFile.getText().indexOf("\n", stringElement.getTextOffset() + stringElement.getTextLength());
-		PsiElement anchor = null;
+    PsiFile currentFile = stringElement.getContainingFile();
+    int newLineIndex = currentFile.getText().indexOf("\n", stringElement.getTextOffset() + stringElement.getTextLength());
+    PsiElement anchor = null;
 
-		if (newLineIndex > 1)
-		{
-			anchor = currentFile.findElementAt(newLineIndex);
-			// fixme we should check here if \n in unbreakable entity - regex, qw, string, something else...
-			if (anchor != null && (anchor.getParent() instanceof PerlString || anchor.getParent() instanceof PsiPerlStringList))
-			{
-				anchor = null;
-			}
-		}
+    if (newLineIndex > 1) {
+      anchor = currentFile.findElementAt(newLineIndex);
+      // fixme we should check here if \n in unbreakable entity - regex, qw, string, something else...
+      if (anchor != null && (anchor.getParent() instanceof PerlString || anchor.getParent() instanceof PsiPerlStringList)) {
+        anchor = null;
+      }
+    }
 
-		final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
-		final Document document = manager.getDocument(element.getContainingFile());
+    final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
+    final Document document = manager.getDocument(element.getContainingFile());
 
-		stringElement = stringElement.replace(heredocElements.get(0)); // replace string with heredoc opener
+    stringElement = stringElement.replace(heredocElements.get(0)); // replace string with heredoc opener
 
-		if (document != null)
-		{
-			String heredocString =
-					contentText +
-							"\n" +
-							HEREDOC_MARKER +
-							"\n";
+    if (document != null) {
+      String heredocString =
+        contentText +
+        "\n" +
+        HEREDOC_MARKER +
+        "\n";
 
-			ASTNode predecessor = anchor == null ? stringElement.getNode() : anchor.getNode();
-			int offset = predecessor.getTextRange().getEndOffset();
+      ASTNode predecessor = anchor == null ? stringElement.getNode() : anchor.getNode();
+      int offset = predecessor.getTextRange().getEndOffset();
 
-			manager.doPostponedOperationsAndUnblockDocument(document);
-			if (anchor == null)
-			{
-				document.insertString(offset, "\n" + heredocString);
-			}
-			else
-			{
+      manager.doPostponedOperationsAndUnblockDocument(document);
+      if (anchor == null) {
+        document.insertString(offset, "\n" + heredocString);
+      }
+      else {
 
-				document.insertString(offset, heredocString);
-			}
-			manager.commitDocument(document);
-		}
-	}
+        document.insertString(offset, heredocString);
+      }
+      manager.commitDocument(document);
+    }
+  }
 
-	@Override
-	public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element)
-	{
-		if (!element.isWritable())
-		{
-			return false;
-		}
-		PsiElement parent = element.getParent();
-		PsiElement grandParent = parent.getParent();
-		return !(grandParent instanceof PerlHeredocOpener) && (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
-	}
+  @Override
+  public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
+    if (!element.isWritable()) {
+      return false;
+    }
+    PsiElement parent = element.getParent();
+    PsiElement grandParent = parent.getParent();
+    return !(grandParent instanceof PerlHeredocOpener) &&
+           (parent instanceof PsiPerlStringDq || parent instanceof PsiPerlStringSq || parent instanceof PsiPerlStringXq);
+  }
 
-	@Nls
-	@NotNull
-	@Override
-	public String getFamilyName()
-	{
-		return getText();
-	}
+  @Nls
+  @NotNull
+  @Override
+  public String getFamilyName() {
+    return getText();
+  }
 
-	@NotNull
-	@Override
-	public String getText()
-	{
-		return "Convert to heredoc: " + HEREDOC_MARKER;
-	}
-
+  @NotNull
+  @Override
+  public String getText() {
+    return "Convert to heredoc: " + HEREDOC_MARKER;
+  }
 }

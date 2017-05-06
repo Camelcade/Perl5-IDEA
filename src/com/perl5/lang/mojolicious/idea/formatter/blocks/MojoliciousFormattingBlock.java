@@ -40,81 +40,69 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MojoliciousFormattingBlock extends PerlFormattingBlock implements MojoliciousElementTypes
-{
-	private static final TokenSet LINE_OPENERS = TokenSet.create(
-			MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
-	);
+public class MojoliciousFormattingBlock extends PerlFormattingBlock implements MojoliciousElementTypes {
+  private static final TokenSet LINE_OPENERS = TokenSet.create(
+    MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
+  );
 
-	public MojoliciousFormattingBlock(@NotNull ASTNode node,
-									  @Nullable Wrap wrap,
-									  @Nullable Alignment alignment,
-									  @NotNull CommonCodeStyleSettings codeStyleSettings,
-									  @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-									  @NotNull SpacingBuilder spacingBuilder,
-									  @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
-	)
-	{
-		super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
-	}
+  public MojoliciousFormattingBlock(@NotNull ASTNode node,
+                                    @Nullable Wrap wrap,
+                                    @Nullable Alignment alignment,
+                                    @NotNull CommonCodeStyleSettings codeStyleSettings,
+                                    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
+                                    @NotNull SpacingBuilder spacingBuilder,
+                                    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+  ) {
+    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+  }
 
-	@Override
-	protected boolean isNewLineForbidden(PerlFormattingBlock block)
-	{
-		if (super.isNewLineForbidden(block))
-		{
-			return true;
-		}
+  @Override
+  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
+    if (super.isNewLineForbidden(block)) {
+      return true;
+    }
 
-		PsiElement element = block.getNode().getPsi();
-		PsiFile file = element.getContainingFile();
-		Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
-		if (document != null)
-		{
-			int offset = block.getTextRange().getStartOffset();
-			int lineNumber = document.getLineNumber(offset);
-			int lineStartOffset = document.getLineStartOffset(lineNumber);
-			PsiElement firstElement = file.findElementAt(lineStartOffset);
+    PsiElement element = block.getNode().getPsi();
+    PsiFile file = element.getContainingFile();
+    Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
+    if (document != null) {
+      int offset = block.getTextRange().getStartOffset();
+      int lineNumber = document.getLineNumber(offset);
+      int lineStartOffset = document.getLineStartOffset(lineNumber);
+      PsiElement firstElement = file.findElementAt(lineStartOffset);
 
 
-			while (!element.equals(firstElement))
-			{
-				if (firstElement == null)
-				{
-					return false;
-				}
+      while (!element.equals(firstElement)) {
+        if (firstElement == null) {
+          return false;
+        }
 
-				if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement)))
-				{
-					return true;
-				}
-				if (!(firstElement instanceof PsiWhiteSpace))
-				{
-					return false;
-				}
+        if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement))) {
+          return true;
+        }
+        if (!(firstElement instanceof PsiWhiteSpace)) {
+          return false;
+        }
 
-				firstElement = firstElement.getNextSibling();
-			}
+        firstElement = firstElement.getNextSibling();
+      }
 
-			if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement)))
-			{
-				return true;
-			}
+      if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement))) {
+        return true;
+      }
+    }
 
-		}
+    return false;
+  }
 
-		return false;
-	}
+  @Override
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
+    return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
+                                          getInjectedLanguageBlockBuilder());
+  }
 
-	@Override
-	protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment)
-	{
-		return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(), getInjectedLanguageBlockBuilder());
-	}
-
-	@Override
-	protected PerlIndentProcessor getIndentProcessor()
-	{
-		return MojoliciousIndentProcessor.INSTANCE;
-	}
+  @Override
+  protected PerlIndentProcessor getIndentProcessor() {
+    return MojoliciousIndentProcessor.INSTANCE;
+  }
 }

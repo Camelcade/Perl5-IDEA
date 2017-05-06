@@ -22,24 +22,20 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitLiveTemplatesProvider implements DefaultLiveTemplatesProvider
-{
-	public static final String[] TEMPLATES = new String[]{
-			"/liveTemplates/TemplateToolkit2",
-			"/liveTemplates/TemplateToolkit2Postfix",
-	};
+public class TemplateToolkitLiveTemplatesProvider implements DefaultLiveTemplatesProvider {
+  public static final String[] TEMPLATES = new String[]{
+    "/liveTemplates/TemplateToolkit2",
+    "/liveTemplates/TemplateToolkit2Postfix",
+  };
 
-	@Override
-	public String[] getDefaultLiveTemplateFiles()
-	{
-		return TEMPLATES;
-	}
+  @Override
+  public String[] getDefaultLiveTemplateFiles() {
+    return TEMPLATES;
+  }
 
-	@Nullable
-	@Override
-	public String[] getHiddenLiveTemplateFiles()
-	{
-		return null;
-	}
-
+  @Nullable
+  @Override
+  public String[] getHiddenLiveTemplateFiles() {
+    return null;
+  }
 }

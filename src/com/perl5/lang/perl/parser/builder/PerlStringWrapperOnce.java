@@ -22,24 +22,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class PerlStringWrapperOnce extends PerlStringWrapper
-{
-	private boolean wrapped = false;
+public class PerlStringWrapperOnce extends PerlStringWrapper {
+  private boolean wrapped = false;
 
-	public PerlStringWrapperOnce(@NotNull IElementType targetElementType)
-	{
-		super(targetElementType);
-	}
+  public PerlStringWrapperOnce(@NotNull IElementType targetElementType) {
+    super(targetElementType);
+  }
 
-	@Override
-	public boolean canProcess()
-	{
-		return !wrapped;
-	}
+  @Override
+  public boolean canProcess() {
+    return !wrapped;
+  }
 
-	@Override
-	protected void processed()
-	{
-		wrapped = true;
-	}
+  @Override
+  protected void processed() {
+    wrapped = true;
+  }
 }

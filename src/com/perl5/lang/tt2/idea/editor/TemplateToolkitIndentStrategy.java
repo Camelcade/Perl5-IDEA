@@ -24,11 +24,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.06.2016.
  */
-public class TemplateToolkitIndentStrategy implements IndentStrategy, TemplateToolkitElementTypes
-{
-	@Override
-	public boolean canIndent(@NotNull PsiElement element)
-	{
-		return element.getNode().getElementType() != TT2_OUTLINE_TAG;
-	}
+public class TemplateToolkitIndentStrategy implements IndentStrategy, TemplateToolkitElementTypes {
+  @Override
+  public boolean canIndent(@NotNull PsiElement element) {
+    return element.getNode().getElementType() != TT2_OUTLINE_TAG;
+  }
 }

@@ -27,14 +27,12 @@ import java.util.List;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class JpsPerlModelSerializerExtension extends JpsModelSerializerExtension
-{
+public class JpsPerlModelSerializerExtension extends JpsModelSerializerExtension {
 
-	@NotNull
-	@Override
-	public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers()
-	{
-		return Collections.singletonList(new JpsModuleSourceRootDummyPropertiesSerializer(JpsPerlLibrarySourceRootType.INSTANCE, "perl-library"));
-	}
-
+  @NotNull
+  @Override
+  public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers() {
+    return Collections
+      .singletonList(new JpsModuleSourceRootDummyPropertiesSerializer(JpsPerlLibrarySourceRootType.INSTANCE, "perl-library"));
+  }
 }

@@ -25,30 +25,25 @@ import java.util.List;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<PerlExportDescriptor>
-{
-	final protected List<PerlExportDescriptor> myResult;
+public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<PerlExportDescriptor> {
+  final protected List<PerlExportDescriptor> myResult;
 
-	public PerlImportsCollector()
-	{
-		myResult = new ArrayList<PerlExportDescriptor>();
-	}
+  public PerlImportsCollector() {
+    myResult = new ArrayList<PerlExportDescriptor>();
+  }
 
-	protected abstract boolean meetsCondition(@NotNull PerlExportDescriptor descriptor);
+  protected abstract boolean meetsCondition(@NotNull PerlExportDescriptor descriptor);
 
-	@Override
-	public boolean process(String namespaceName, PerlExportDescriptor entity)
-	{
-		if (entity != null && meetsCondition(entity) && !myResult.contains(entity))
-		{
-			myResult.add(entity);
-		}
-		return true;
-	}
+  @Override
+  public boolean process(String namespaceName, PerlExportDescriptor entity) {
+    if (entity != null && meetsCondition(entity) && !myResult.contains(entity)) {
+      myResult.add(entity);
+    }
+    return true;
+  }
 
-	@NotNull
-	public List<PerlExportDescriptor> getResult()
-	{
-		return myResult;
-	}
+  @NotNull
+  public List<PerlExportDescriptor> getResult() {
+    return myResult;
+  }
 }

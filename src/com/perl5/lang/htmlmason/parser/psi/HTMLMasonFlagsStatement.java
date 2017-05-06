@@ -23,10 +23,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public interface HTMLMasonFlagsStatement extends StubBasedPsiElement<HTMLMasonFlagsStatementStub>
-{
-	String UNDEF_RESULT = "undef";
+public interface HTMLMasonFlagsStatement extends StubBasedPsiElement<HTMLMasonFlagsStatementStub> {
+  String UNDEF_RESULT = "undef";
 
-	@Nullable
-	String getParentComponentPath();
+  @Nullable
+  String getParentComponentPath();
 }

@@ -23,7 +23,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 /**
  * Created by hurricup on 06.01.2016.
  */
-public interface MasonFlagsStatement extends PsiElement, PerlElementTypes, PerlRuntimeParentsProvider
-{
+public interface MasonFlagsStatement extends PsiElement, PerlElementTypes, PerlRuntimeParentsProvider {
 
 }

@@ -34,62 +34,53 @@ import java.io.IOException;
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethodDefinitionStub, HTMLMasonMethodDefinition> implements PsiElementProvider
-{
-	public HTMLMasonMethodElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, HTMLMasonLanguage.INSTANCE);
-	}
+public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethodDefinitionStub, HTMLMasonMethodDefinition>
+  implements PsiElementProvider {
+  public HTMLMasonMethodElementType(@NotNull @NonNls String debugName) {
+    super(debugName, HTMLMasonLanguage.INSTANCE);
+  }
 
-	@Override
-	public HTMLMasonMethodDefinition createPsi(@NotNull HTMLMasonMethodDefinitionStub stub)
-	{
-		return new HTMLMasonMethodDefinitionImpl(stub, this);
-	}
+  @Override
+  public HTMLMasonMethodDefinition createPsi(@NotNull HTMLMasonMethodDefinitionStub stub) {
+    return new HTMLMasonMethodDefinitionImpl(stub, this);
+  }
 
-	@Override
-	public HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub)
-	{
-		return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, psi.getName());
-	}
+  @Override
+  public HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub) {
+    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, psi.getName());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "HTML::Mason::" + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "HTML::Mason::" + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getName());
-	}
+  @Override
+  public void serialize(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getName());
+  }
 
-	@NotNull
-	@Override
-	public HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, dataStream.readName().toString());
-	}
+  @NotNull
+  @Override
+  public HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, dataStream.readName().toString());
+  }
 
-	@Override
-	public void indexStub(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IndexSink sink)
-	{
+  @Override
+  public void indexStub(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IndexSink sink) {
 
-	}
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new HTMLMasonMethodDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new HTMLMasonMethodDefinitionImpl(node);
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		PsiElement psi = node.getPsi();
-		return psi instanceof HTMLMasonMethodDefinition && StringUtil.isNotEmpty(((HTMLMasonMethodDefinition) psi).getName());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    return psi instanceof HTMLMasonMethodDefinition && StringUtil.isNotEmpty(((HTMLMasonMethodDefinition)psi).getName());
+  }
 }

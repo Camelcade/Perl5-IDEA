@@ -26,42 +26,38 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class MasonBraceMatcher implements PairedBraceMatcher, Mason2ElementTypes
-{
-	private static final BracePair[] PAIRS = new BracePair[]{
-			new BracePair(MASON_BLOCK_OPENER, MASON_BLOCK_CLOSER, false),
-			new BracePair(MASON_CALL_OPENER, MASON_CALL_CLOSER, false),
-			new BracePair(MASON_METHOD_OPENER, MASON_METHOD_CLOSER, false),
-			new BracePair(MASON_OVERRIDE_OPENER, MASON_OVERRIDE_CLOSER, false),
-			new BracePair(MASON_FILTER_OPENER, MASON_FILTER_CLOSER, false),
-			new BracePair(MASON_AFTER_OPENER, MASON_AFTER_CLOSER, false),
-			new BracePair(MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER, false),
-			new BracePair(MASON_AUGMENT_OPENER, MASON_AUGMENT_CLOSER, false),
-			new BracePair(MASON_AROUND_OPENER, MASON_AROUND_CLOSER, false),
-			new BracePair(MASON_CLASS_OPENER, MASON_CLASS_CLOSER, false),
-			new BracePair(MASON_DOC_OPENER, MASON_DOC_CLOSER, false),
-			new BracePair(MASON_TEXT_OPENER, MASON_TEXT_CLOSER, false),
-			new BracePair(MASON_PERL_OPENER, MASON_PERL_CLOSER, false),
-			new BracePair(MASON_INIT_OPENER, MASON_INIT_CLOSER, false),
-			new BracePair(MASON_FLAGS_OPENER, MASON_FLAGS_CLOSER, false),
-			new BracePair(MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER, false),
-	};
+public class MasonBraceMatcher implements PairedBraceMatcher, Mason2ElementTypes {
+  private static final BracePair[] PAIRS = new BracePair[]{
+    new BracePair(MASON_BLOCK_OPENER, MASON_BLOCK_CLOSER, false),
+    new BracePair(MASON_CALL_OPENER, MASON_CALL_CLOSER, false),
+    new BracePair(MASON_METHOD_OPENER, MASON_METHOD_CLOSER, false),
+    new BracePair(MASON_OVERRIDE_OPENER, MASON_OVERRIDE_CLOSER, false),
+    new BracePair(MASON_FILTER_OPENER, MASON_FILTER_CLOSER, false),
+    new BracePair(MASON_AFTER_OPENER, MASON_AFTER_CLOSER, false),
+    new BracePair(MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER, false),
+    new BracePair(MASON_AUGMENT_OPENER, MASON_AUGMENT_CLOSER, false),
+    new BracePair(MASON_AROUND_OPENER, MASON_AROUND_CLOSER, false),
+    new BracePair(MASON_CLASS_OPENER, MASON_CLASS_CLOSER, false),
+    new BracePair(MASON_DOC_OPENER, MASON_DOC_CLOSER, false),
+    new BracePair(MASON_TEXT_OPENER, MASON_TEXT_CLOSER, false),
+    new BracePair(MASON_PERL_OPENER, MASON_PERL_CLOSER, false),
+    new BracePair(MASON_INIT_OPENER, MASON_INIT_CLOSER, false),
+    new BracePair(MASON_FLAGS_OPENER, MASON_FLAGS_CLOSER, false),
+    new BracePair(MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER, false),
+  };
 
-	@Override
-	public BracePair[] getPairs()
-	{
-		return PAIRS;
-	}
+  @Override
+  public BracePair[] getPairs() {
+    return PAIRS;
+  }
 
-	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType)
-	{
-		return true;
-	}
+  @Override
+  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, IElementType contextType) {
+    return true;
+  }
 
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
-		return openingBraceOffset;
-	}
+  @Override
+  public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
+    return openingBraceOffset;
+  }
 }

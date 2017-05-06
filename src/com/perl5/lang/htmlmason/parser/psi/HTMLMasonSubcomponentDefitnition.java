@@ -22,6 +22,6 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub
 /**
  * Created by hurricup on 09.03.2016.
  */
-public interface HTMLMasonSubcomponentDefitnition extends StubBasedPsiElement<HTMLMasonSubcomponentDefinitionStub>, HTMLMasonNamedElement, HTMLMasonParametrizedEntity
-{
+public interface HTMLMasonSubcomponentDefitnition
+  extends StubBasedPsiElement<HTMLMasonSubcomponentDefinitionStub>, HTMLMasonNamedElement, HTMLMasonParametrizedEntity {
 }

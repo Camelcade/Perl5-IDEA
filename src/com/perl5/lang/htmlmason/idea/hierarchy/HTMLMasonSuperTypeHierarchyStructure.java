@@ -28,24 +28,20 @@ import java.util.List;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierarchyStructure
-{
-	public HTMLMasonSuperTypeHierarchyStructure(@NotNull PsiElement element)
-	{
-		super(element);
-	}
+public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierarchyStructure {
+  public HTMLMasonSuperTypeHierarchyStructure(@NotNull PsiElement element) {
+    super(element);
+  }
 
-	@Override
-	protected Collection<PsiElement> getSubElements(PsiElement element)
-	{
-		assert element instanceof HTMLMasonFileImpl;
-		PsiElement parent = ((HTMLMasonFileImpl) element).getParentComponent();
-		if (parent != null)
-		{
-			List<PsiElement> result = new ArrayList<PsiElement>();
-			result.add(parent);
-			return result;
-		}
-		return Collections.emptyList();
-	}
+  @Override
+  protected Collection<PsiElement> getSubElements(PsiElement element) {
+    assert element instanceof HTMLMasonFileImpl;
+    PsiElement parent = ((HTMLMasonFileImpl)element).getParentComponent();
+    if (parent != null) {
+      List<PsiElement> result = new ArrayList<PsiElement>();
+      result.add(parent);
+      return result;
+    }
+    return Collections.emptyList();
+  }
 }

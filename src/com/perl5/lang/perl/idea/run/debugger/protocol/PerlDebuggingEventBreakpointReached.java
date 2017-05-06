@@ -23,38 +23,32 @@ import com.perl5.lang.perl.util.PerlDebugUtil;
 /**
  * Created by hurricup on 08.05.2016.
  */
-public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop implements PerlDebuggingEventBreakpoint
-{
-	boolean suspend;
-	String logmessage;
-	private String path;
-	private int line;
+public class PerlDebuggingEventBreakpointReached extends PerlDebuggingEventStop implements PerlDebuggingEventBreakpoint {
+  boolean suspend;
+  String logmessage;
+  private String path;
+  private int line;
 
-	@Override
-	public void run()
-	{
-		XDebugSession session = getDebugSession();
-		XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
-		if (breakpoint != null)
-		{
-			session.breakpointReached(breakpoint, logmessage, getSuspendContext());
-		}
+  @Override
+  public void run() {
+    XDebugSession session = getDebugSession();
+    XLineBreakpoint breakpoint = PerlDebugUtil.findBreakpoint(session.getProject(), this);
+    if (breakpoint != null) {
+      session.breakpointReached(breakpoint, logmessage, getSuspendContext());
+    }
 
-		if (suspend)
-		{
-			super.run();
-		}
-	}
+    if (suspend) {
+      super.run();
+    }
+  }
 
-	@Override
-	public String getPath()
-	{
-		return path;
-	}
+  @Override
+  public String getPath() {
+    return path;
+  }
 
-	@Override
-	public int getLine()
-	{
-		return line;
-	}
+  @Override
+  public int getLine() {
+    return line;
+  }
 }

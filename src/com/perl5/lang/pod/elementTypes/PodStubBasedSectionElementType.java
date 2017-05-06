@@ -31,57 +31,48 @@ import java.io.IOException;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSection> extends IStubElementType<PodSectionStub, T> implements PsiElementProvider
-{
-	public PodStubBasedSectionElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, PodLanguage.INSTANCE);
-	}
+public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSection> extends IStubElementType<PodSectionStub, T>
+  implements PsiElementProvider {
+  public PodStubBasedSectionElementType(@NotNull @NonNls String debugName) {
+    super(debugName, PodLanguage.INSTANCE);
+  }
 
-	@Override
-	public PodSectionStub createStub(@NotNull T psi, StubElement parentStub)
-	{
-		return new PodSectionStubImpl(parentStub, this, psi.getTitleText());
-	}
+  @Override
+  public PodSectionStub createStub(@NotNull T psi, StubElement parentStub) {
+    return new PodSectionStubImpl(parentStub, this, psi.getTitleText());
+  }
 
-	@NotNull
-	@Override
-	public String getExternalId()
-	{
-		return "PodSection " + super.toString();
-	}
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "PodSection " + super.toString();
+  }
 
-	@Override
-	public void serialize(@NotNull PodSectionStub stub, @NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(stub.getTitleText());
-	}
+  @Override
+  public void serialize(@NotNull PodSectionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(stub.getTitleText());
+  }
 
-	@NotNull
-	@Override
-	public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException
-	{
-		return new PodSectionStubImpl(parentStub, this, dataStream.readName().toString());
-	}
+  @NotNull
+  @Override
+  public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PodSectionStubImpl(parentStub, this, dataStream.readName().toString());
+  }
 
-	@Override
-	public void indexStub(@NotNull PodSectionStub stub, @NotNull IndexSink sink)
-	{
+  @Override
+  public void indexStub(@NotNull PodSectionStub stub, @NotNull IndexSink sink) {
 
-	}
+  }
 
-	@Override
-	public boolean shouldCreateStub(ASTNode node)
-	{
-		return false;
-//		PsiElement psi = node.getPsi();
-//		return (psi instanceof PodStubBasedSection) && StringUtil.isNotEmpty(((PodStubBasedSection) psi).getTitleText());
-	}
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    return false;
+    //		PsiElement psi = node.getPsi();
+    //		return (psi instanceof PodStubBasedSection) && StringUtil.isNotEmpty(((PodStubBasedSection) psi).getTitleText());
+  }
 
-	@Override
-	public String toString()
-	{
-		return "PodElementType." + super.toString();
-	}
-
+  @Override
+  public String toString() {
+    return "PodElementType." + super.toString();
+  }
 }

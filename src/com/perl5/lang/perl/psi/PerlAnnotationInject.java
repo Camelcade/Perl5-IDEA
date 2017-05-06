@@ -21,8 +21,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.04.2016.
  */
-public interface PerlAnnotationInject extends PerlAnnotation, PsiPerlAnnotationInject
-{
-	@Nullable
-	String getLanguageMarker();
+public interface PerlAnnotationInject extends PerlAnnotation, PsiPerlAnnotationInject {
+  @Nullable
+  String getLanguageMarker();
 }

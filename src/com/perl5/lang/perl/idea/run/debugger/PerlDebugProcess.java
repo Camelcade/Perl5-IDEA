@@ -50,172 +50,149 @@ import java.util.Collection;
 /**
  * Created by hurricup on 04.05.2016.
  */
-public class PerlDebugProcess extends XDebugProcess
-{
-	private final ExecutionResult myExecutionResult;
-	private final PerlDebugThread myDebugThread;
-	private final PerlRunProfileState myDebugProfileState;
+public class PerlDebugProcess extends XDebugProcess {
+  private final ExecutionResult myExecutionResult;
+  private final PerlDebugThread myDebugThread;
+  private final PerlRunProfileState myDebugProfileState;
 
-	public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult)
-	{
-		super(session);
-		this.myExecutionResult = executionResult;
-		myDebugThread = new PerlDebugThread(session, state, executionResult);
-		myDebugProfileState = state;
-		myDebugThread.start();
-	}
+  public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult) {
+    super(session);
+    this.myExecutionResult = executionResult;
+    myDebugThread = new PerlDebugThread(session, state, executionResult);
+    myDebugProfileState = state;
+    myDebugThread.start();
+  }
 
-	@NotNull
-	@Override
-	public XDebuggerEditorsProvider getEditorsProvider()
-	{
-		return PerlDebuggerEditorsProvider.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public XDebuggerEditorsProvider getEditorsProvider() {
+    return PerlDebuggerEditorsProvider.INSTANCE;
+  }
 
-	@Override
-	public boolean checkCanInitBreakpoints()
-	{
-		if (PerlDebugThread.DEV_MODE)
-		{
-			System.err.println("Check can init breakpoints");
-		}
-		return true;
-	}
+  @Override
+  public boolean checkCanInitBreakpoints() {
+    if (PerlDebugThread.DEV_MODE) {
+      System.err.println("Check can init breakpoints");
+    }
+    return true;
+  }
 
-	@NotNull
-	@Override
-	public XBreakpointHandler<?>[] getBreakpointHandlers()
-	{
-		return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myDebugThread)};
-	}
+  @NotNull
+  @Override
+  public XBreakpointHandler<?>[] getBreakpointHandlers() {
+    return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myDebugThread)};
+  }
 
-	@Override
-	public void sessionInitialized()
-	{
-		if (PerlDebugThread.DEV_MODE)
-		{
-			System.err.println("Session initialized");
-		}
-		super.sessionInitialized();
-	}
+  @Override
+  public void sessionInitialized() {
+    if (PerlDebugThread.DEV_MODE) {
+      System.err.println("Session initialized");
+    }
+    super.sessionInitialized();
+  }
 
-	@Override
-	public void registerAdditionalActions(@NotNull DefaultActionGroup leftToolbar, @NotNull DefaultActionGroup topToolbar, @NotNull DefaultActionGroup settings)
-	{
-		super.registerAdditionalActions(leftToolbar, topToolbar, settings);
-	}
+  @Override
+  public void registerAdditionalActions(@NotNull DefaultActionGroup leftToolbar,
+                                        @NotNull DefaultActionGroup topToolbar,
+                                        @NotNull DefaultActionGroup settings) {
+    super.registerAdditionalActions(leftToolbar, topToolbar, settings);
+  }
 
-	@Override
-	public boolean checkCanPerformCommands()
-	{
-		return super.checkCanPerformCommands();
-	}
+  @Override
+  public boolean checkCanPerformCommands() {
+    return super.checkCanPerformCommands();
+  }
 
-	@Override
-	public void startStepOver()
-	{
-		myDebugThread.sendString("o");
-	}
+  @Override
+  public void startStepOver() {
+    myDebugThread.sendString("o");
+  }
 
-	@Override
-	public void startStepInto()
-	{
-		myDebugThread.sendString("");
-	}
+  @Override
+  public void startStepInto() {
+    myDebugThread.sendString("");
+  }
 
-	@Override
-	public void startStepOut()
-	{
-		myDebugThread.sendString("u");
-	}
+  @Override
+  public void startStepOut() {
+    myDebugThread.sendString("u");
+  }
 
-	@Override
-	public void startPausing()
-	{
-		if (((PerlDebugOptions) myDebugProfileState.getEnvironment().getRunProfile()).isNonInteractiveModeEnabled())
-		{
-			myDebugThread.sendString("pause");
-		}
-		else
-		{
-			Notifications.Bus.notify(new Notification(
-					"PERL_DEBUGGER",
-					PerlBundle.message("perl.run.pause.unavailable.title"),
-					PerlBundle.message("perl.run.pause.unavailable.content"),
-					NotificationType.INFORMATION
-			));
-		}
-	}
+  @Override
+  public void startPausing() {
+    if (((PerlDebugOptions)myDebugProfileState.getEnvironment().getRunProfile()).isNonInteractiveModeEnabled()) {
+      myDebugThread.sendString("pause");
+    }
+    else {
+      Notifications.Bus.notify(new Notification(
+        "PERL_DEBUGGER",
+        PerlBundle.message("perl.run.pause.unavailable.title"),
+        PerlBundle.message("perl.run.pause.unavailable.content"),
+        NotificationType.INFORMATION
+      ));
+    }
+  }
 
-	@Override
-	public void resume()
-	{
-		myDebugThread.sendString("g");
-	}
+  @Override
+  public void resume() {
+    myDebugThread.sendString("g");
+  }
 
-	@Override
-	public void stop()
-	{
-		myDebugThread.setStop();
+  @Override
+  public void stop() {
+    myDebugThread.setStop();
 
-		ApplicationManager.getApplication().runReadAction(
-				new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						XBreakpointManager breakpointManager = XDebuggerManager.getInstance(getSession().getProject()).getBreakpointManager();
-						Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints = breakpointManager.getBreakpoints(PerlLineBreakpointType.class);
-						for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints)
-						{
-							breakpointManager.updateBreakpointPresentation(breakpoint, null, null);
-						}
-					}
-				}
-		);
-	}
+    ApplicationManager.getApplication().runReadAction(
+      new Runnable() {
+        @Override
+        public void run() {
+          XBreakpointManager breakpointManager = XDebuggerManager.getInstance(getSession().getProject()).getBreakpointManager();
+          Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints =
+            breakpointManager.getBreakpoints(PerlLineBreakpointType.class);
+          for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints) {
+            breakpointManager.updateBreakpointPresentation(breakpoint, null, null);
+          }
+        }
+      }
+    );
+  }
 
-	@Override
-	public void runToPosition(@NotNull XSourcePosition position)
-	{
-		PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromSourcePosition(position, myDebugThread);
-		if (descriptor != null)
-		{
-			myDebugThread.sendCommand("p", descriptor);
-		}
-	}
+  @Override
+  public void runToPosition(@NotNull XSourcePosition position) {
+    PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromSourcePosition(position, myDebugThread);
+    if (descriptor != null) {
+      myDebugThread.sendCommand("p", descriptor);
+    }
+  }
 
-	@Nullable
-	@Override
-	protected ProcessHandler doGetProcessHandler()
-	{
-		return myExecutionResult.getProcessHandler();
-	}
+  @Nullable
+  @Override
+  protected ProcessHandler doGetProcessHandler() {
+    return myExecutionResult.getProcessHandler();
+  }
 
-	@NotNull
-	@Override
-	public ExecutionConsole createConsole()
-	{
-		return myExecutionResult.getExecutionConsole();
-	}
+  @NotNull
+  @Override
+  public ExecutionConsole createConsole() {
+    return myExecutionResult.getExecutionConsole();
+  }
 
-	@NotNull
-	@Override
-	public XDebugTabLayouter createTabLayouter()
-	{
-		return new XDebugTabLayouter()
-		{
-			@Override
-			public void registerAdditionalContent(@NotNull RunnerLayoutUi ui)
-			{
-				Content content = ui.createContent("PerlSourceLIst", myDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_SCRIPT_FILE_ICON, null);
-				content.setCloseable(false);
-				ui.addContent(content);
+  @NotNull
+  @Override
+  public XDebugTabLayouter createTabLayouter() {
+    return new XDebugTabLayouter() {
+      @Override
+      public void registerAdditionalContent(@NotNull RunnerLayoutUi ui) {
+        Content content =
+          ui.createContent("PerlSourceLIst", myDebugThread.getScriptListPanel(), "Loaded Sources", PerlIcons.PERL_SCRIPT_FILE_ICON, null);
+        content.setCloseable(false);
+        ui.addContent(content);
 
-				content = ui.createContent("PerlEvalsList", myDebugThread.getEvalsListPanel(), "Compiled evals", PerlIcons.PERL_LANGUAGE_ICON, null);
-				content.setCloseable(false);
-				ui.addContent(content);
-			}
-		};
-	}
+        content =
+          ui.createContent("PerlEvalsList", myDebugThread.getEvalsListPanel(), "Compiled evals", PerlIcons.PERL_LANGUAGE_ICON, null);
+        content.setCloseable(false);
+        ui.addContent(content);
+      }
+    };
+  }
 }

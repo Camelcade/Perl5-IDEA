@@ -34,61 +34,53 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileType
-{
-	public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
+public class MasonTopLevelComponentFileType extends MasonPurePerlComponentFileType {
+  public static final MasonTopLevelComponentFileType INSTANCE = new MasonTopLevelComponentFileType();
 
-	public MasonTopLevelComponentFileType()
-	{
-		super(Mason2TemplatingLanguage.INSTANCE);
-		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
-		{
-			@Override
-			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
-			{
-				return new MasonHighlighter(project, virtualFile, editorColorsScheme);
-			}
-		});
-	}
+  public MasonTopLevelComponentFileType() {
+    super(Mason2TemplatingLanguage.INSTANCE);
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
+      @Override
+      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                    @NotNull FileType fileType,
+                                                    @Nullable VirtualFile virtualFile,
+                                                    @NotNull EditorColorsScheme editorColorsScheme) {
+        return new MasonHighlighter(project, virtualFile, editorColorsScheme);
+      }
+    });
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Mason2 top-level component";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Mason2 top-level component";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Mason2 top-level component";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Mason2 top-level component";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "mc";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "mc";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return Mason2Icons.MASON_TOP_LEVEL_COMPONENT_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return Mason2Icons.MASON_TOP_LEVEL_COMPONENT_ICON;
+  }
 
-	@Override
-	public boolean checkStrictPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkStrictPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean checkWarningsPragma()
-	{
-		return false;
-	}
-
+  @Override
+  public boolean checkWarningsPragma() {
+    return false;
+  }
 }

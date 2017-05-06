@@ -65,336 +65,279 @@ import java.util.Map;
 import java.util.Set;
 
 @State(
-		name = "Perl5XSubsState",
-		storages = {
-				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-				@Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-		}
+  name = "Perl5XSubsState",
+  storages = {
+    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
+  }
 )
 
-public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState>
-{
-	@Transient
-	public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
-	@Transient
-	public static final String PERL_XSUBS_NOTIFICATION_GROUP = "PERL5_XSUBS";
-	public boolean isActual = true;
-	public Map<String, Long> filesMap = new THashMap<>();
-	@Transient
-	private Task.Backgroundable parserTask = null;
-	@Transient
-	private Project myProject;
+public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> {
+  @Transient
+  public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
+  @Transient
+  public static final String PERL_XSUBS_NOTIFICATION_GROUP = "PERL5_XSUBS";
+  public boolean isActual = true;
+  public Map<String, Long> filesMap = new THashMap<>();
+  @Transient
+  private Task.Backgroundable parserTask = null;
+  @Transient
+  private Project myProject;
 
-	public static PerlXSubsState getInstance(@NotNull Project project)
-	{
-		PerlXSubsState persisted = ServiceManager.getService(project, PerlXSubsState.class);
-		if (persisted == null)
-		{
-			persisted = new PerlXSubsState();
-		}
+  public void setProject(Project myProject) {
+    this.myProject = myProject;
+  }
 
-		persisted.setProject(project);
-		return persisted;
-	}
+  @Nullable
+  @Override
+  public PerlXSubsState getState() {
+    return this;
+  }
 
-	private static boolean isXSFile(@NotNull VirtualFile file)
-	{
-		if (!file.isValid() || file.isDirectory() || file instanceof LightVirtualFile)
-		{
-			return false;
-		}
+  @Override
+  public void loadState(PerlXSubsState state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-		String name = file.getName();
+  private Set<VirtualFile> getAllXSFiles(@NotNull Project project) {
+    VirtualFile[] classesRoots = ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots();
+    if (classesRoots.length == 0) {
+      return Collections.emptySet();
+    }
 
+    GlobalSearchScope classRootsScope = GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots);
 
-		if (StringUtil.endsWith(name, getXSBinaryExtension()))
-		{
-			String path = file.getCanonicalPath();
-			return path != null && StringUtil.contains(path, "/auto/");
-		}
-		return false;
-	}
+    Set<VirtualFile> result = new THashSet<>();
+    for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope)) {
+      if (virtualFile.isValid() && !virtualFile.isDirectory() && !(virtualFile instanceof LightVirtualFile)) {
+        String path = virtualFile.getCanonicalPath();
+        if (path != null && StringUtil.contains(path, "/auto/")) {
+          result.add(virtualFile);
+        }
+      }
+    }
+    return result;
+  }
 
-	@NotNull
-	private static String getXSBinaryExtension()
-	{
-		return SystemInfo.isWindows ? "xs.dll" : "so";
-	}
+  public void rescanFiles() {
+    ProgressIndicatorUtils.scheduleWithWriteActionPriority(new ReadTask() {
+      @Override
+      public void computeInReadAction(@NotNull ProgressIndicator indicator) throws ProcessCanceledException {
+        if (myProject.isDisposed()) {
+          return;
+        }
+        int filesCounter = 0;
+        indicator.setText(PerlBundle.message("perl.scanning.xs.changes"));
+        if (isActual) {
+          Set<VirtualFile> allXSFiles = getAllXSFiles(myProject);
+          for (VirtualFile virtualFile : allXSFiles) {
+            if (indicator.isCanceled()) {
+              return;
+            }
 
-	public void setProject(Project myProject)
-	{
-		this.myProject = myProject;
-	}
+            if (!virtualFile.isValid()) {
+              continue;
+            }
 
-	@Nullable
-	@Override
-	public PerlXSubsState getState()
-	{
-		return this;
-	}
+            indicator.setFraction(filesCounter / allXSFiles.size());
 
-	@Override
-	public void loadState(PerlXSubsState state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+            if (!isFileUpToDate(virtualFile)) {
+              isActual = false;
+              break;
+            }
+            else {
+              filesCounter++;
+            }
+          }
+        }
 
-	private Set<VirtualFile> getAllXSFiles(@NotNull Project project)
-	{
-		VirtualFile[] classesRoots = ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots();
-		if (classesRoots.length == 0)
-		{
-			return Collections.emptySet();
-		}
+        isActual = isActual && (filesCounter == 0 || myProject.getBaseDir().findFileByRelativePath(DEPARSED_FILE_NAME) != null);
 
-		GlobalSearchScope classRootsScope = GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots);
+        if (!isActual) {
+          notifyUser();
+        }
+      }
 
-		Set<VirtualFile> result = new THashSet<>();
-		for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope))
-		{
-			if (virtualFile.isValid() && !virtualFile.isDirectory() && !(virtualFile instanceof LightVirtualFile))
-			{
-				String path = virtualFile.getCanonicalPath();
-				if (path != null && StringUtil.contains(path, "/auto/"))
-				{
-					result.add(virtualFile);
-				}
-			}
-		}
-		return result;
-	}
+      @Override
+      public void onCanceled(@NotNull ProgressIndicator indicator) {
+        rescanFiles();
+      }
+    });
+  }
 
-	public void rescanFiles()
-	{
-		ProgressIndicatorUtils.scheduleWithWriteActionPriority(new ReadTask()
-		{
-			@Override
-			public void computeInReadAction(@NotNull ProgressIndicator indicator) throws ProcessCanceledException
-			{
-				if (myProject.isDisposed())
-				{
-					return;
-				}
-				int filesCounter = 0;
-				indicator.setText(PerlBundle.message("perl.scanning.xs.changes"));
-				if (isActual)
-				{
-					Set<VirtualFile> allXSFiles = getAllXSFiles(myProject);
-					for (VirtualFile virtualFile : allXSFiles)
-					{
-						if (indicator.isCanceled())
-						{
-							return;
-						}
+  private boolean isFileUpToDate(VirtualFile virtualFile) {
+    String path = virtualFile.getCanonicalPath();
 
-						if (!virtualFile.isValid())
-						{
-							continue;
-						}
+    if (path != null) {
+      Long modificationStamp = filesMap.get(path);
+      return modificationStamp != null && modificationStamp == VfsUtilCore.virtualToIoFile(virtualFile).lastModified();
+    }
+    return false;
+  }
 
-						indicator.setFraction(filesCounter / allXSFiles.size());
+  public void notifyUser() {
+    Notification notification = new Notification(
+      PERL_XSUBS_NOTIFICATION_GROUP,
+      "XSubs change detected",
+      "<p>It seems that yor XSubs declarations file is absent or outdated.</p><br/>" +
+      "<p>We recommend you to <a href=\"http://regenerate\">regenerate</a> it.</p><br/>" +
+      "<p>You may do it any time in Perl5 settings.</p><br/>",
+      NotificationType.INFORMATION,
+      new NotificationListener.UrlOpeningListener(false) {
+        @Override
+        protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
+          reparseXSubs();
+          notification.expire();
+        }
+      }
+    );
+    Notifications.Bus.notify(notification);
+  }
 
-						if (!isFileUpToDate(virtualFile))
-						{
-							isActual = false;
-							break;
-						}
-						else
-						{
-							filesCounter++;
-						}
-					}
-				}
+  public void reparseXSubs() {
+    if (myProject.isDisposed()) {
+      return;
+    }
 
-				isActual = isActual && (filesCounter == 0 || myProject.getBaseDir().findFileByRelativePath(DEPARSED_FILE_NAME) != null);
+    if (parserTask != null) {
+      Messages.showErrorDialog(myProject, "Another process currently deparsing XSubs, please wait for further notifications",
+                               "XSubs Deparsing In Process");
+      return;
+    }
 
-				if (!isActual)
-				{
-					notifyUser();
-				}
-			}
+    GeneralCommandLine commandLine = PerlPluginUtil.getPluginScriptCommandLine(myProject, "xs_parser_simple.pl");
+    if (commandLine == null) {
+      return;
+    }
 
-			@Override
-			public void onCanceled(@NotNull ProgressIndicator indicator)
-			{
-				rescanFiles();
-			}
-		});
-	}
+    try {
+      final CapturingProcessHandler processHandler =
+        new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
 
-	private boolean isFileUpToDate(VirtualFile virtualFile)
-	{
-		String path = virtualFile.getCanonicalPath();
+      parserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false) {
+        @Override
+        public void run(@NotNull ProgressIndicator indicator) {
+          if (myProject.isDisposed()) {
+            return;
+          }
 
-		if (path != null)
-		{
-			Long modificationStamp = filesMap.get(path);
-			return modificationStamp != null && modificationStamp == VfsUtilCore.virtualToIoFile(virtualFile).lastModified();
-		}
-		return false;
-	}
+          final Map<String, Long> newFilesMap = new THashMap<String, Long>();
 
-	public void notifyUser()
-	{
-		Notification notification = new Notification(
-				PERL_XSUBS_NOTIFICATION_GROUP,
-				"XSubs change detected",
-				"<p>It seems that yor XSubs declarations file is absent or outdated.</p><br/>" +
-						"<p>We recommend you to <a href=\"http://regenerate\">regenerate</a> it.</p><br/>" +
-						"<p>You may do it any time in Perl5 settings.</p><br/>",
-				NotificationType.INFORMATION,
-				new NotificationListener.UrlOpeningListener(false)
-				{
-					@Override
-					protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event)
-					{
-						reparseXSubs();
-						notification.expire();
-					}
-				}
-		);
-		Notifications.Bus.notify(notification);
+          ApplicationManager.getApplication().runReadAction(() ->
+                                                            {
+                                                              for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
+                                                                if (virtualFile.isValid()) {
+                                                                  String filePath = virtualFile.getCanonicalPath();
+                                                                  if (filePath != null) {
+                                                                    newFilesMap.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile)
+                                                                      .lastModified());
+                                                                  }
+                                                                }
+                                                              }
+                                                            });
 
-	}
+          ProcessOutput processOutput = processHandler.runProcess();
+          final String stdout = processOutput.getStdout();
+          List<String> stderr = processOutput.getStderrLines(false);
 
-	public void reparseXSubs()
-	{
-		if (myProject.isDisposed())
-		{
-			return;
-		}
+          final StringBuilder messageBuilder = new StringBuilder();
+          if (!stderr.isEmpty()) {
+            for (String errorMessage : stderr) {
+              if (errorMessage.equals("\n")) {
+                messageBuilder.append("<br/>");
+              }
+              else {
+                messageBuilder.append("<p>");
+                messageBuilder.append(errorMessage);
+                messageBuilder.append("</p>");
+              }
+            }
+          }
 
-		if (parserTask != null)
-		{
-			Messages.showErrorDialog(myProject, "Another process currently deparsing XSubs, please wait for further notifications", "XSubs Deparsing In Process");
-			return;
-		}
+          if (!stdout.isEmpty() && !myProject.isDisposed()) {
+            new WriteAction<Object>() {
+              @Override
+              protected void run(@NotNull Result<Object> result) throws Throwable {
+                try {
+                  VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
+                  newFile.setWritable(true);
+                  OutputStream outputStream = newFile.getOutputStream(null);
+                  outputStream.write(stdout.getBytes());
+                  outputStream.close();
+                  newFile.setWritable(false);
+                  FileContentUtil.reparseFiles(newFile);
 
-		GeneralCommandLine commandLine = PerlPluginUtil.getPluginScriptCommandLine(myProject, "xs_parser_simple.pl");
-		if (commandLine == null)
-		{
-			return;
-		}
+                  isActual = true;
 
-		try
-		{
-			final CapturingProcessHandler processHandler = new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
+                  messageBuilder.append("<p>");
+                  messageBuilder.append("Deparsing completed successfully!");
+                  messageBuilder.append("</p><br/>");
 
-			parserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false)
-			{
-				@Override
-				public void run(@NotNull ProgressIndicator indicator)
-				{
-					if (myProject.isDisposed())
-					{
-						return;
-					}
+                  if (messageBuilder.length() > 0) {
+                    Notifications.Bus.notify(new Notification(
+                      "PERL5_DEPARSING_REPORT",
+                      "XSubs deparsing finished",
+                      messageBuilder.toString(),
+                      NotificationType.INFORMATION
+                    ));
+                  }
+                }
+                catch (IOException e) {
+                  Notifications.Bus.notify(new Notification(
+                    "PERL5_DEPARSING_ERROR",
+                    "Error creating XSubs deparsed file",
+                    e.getMessage(),
+                    NotificationType.ERROR
+                  ));
+                }
+                finally {
+                  PerlXSubsState.this.parserTask = null;
+                  filesMap = newFilesMap;
+                }
+              }
+            }.execute();
+          }
+        }
+      };
+      parserTask.queue();
+    }
+    catch (ExecutionException e) {
+      Notifications.Bus.notify(new Notification(
+        "PERL5_START_ERROR",
+        "XSubs deparser report",
+        e.getMessage(),
+        NotificationType.ERROR
+      ));
+    }
+  }
 
-					final Map<String, Long> newFilesMap = new THashMap<String, Long>();
+  public static PerlXSubsState getInstance(@NotNull Project project) {
+    PerlXSubsState persisted = ServiceManager.getService(project, PerlXSubsState.class);
+    if (persisted == null) {
+      persisted = new PerlXSubsState();
+    }
 
-					ApplicationManager.getApplication().runReadAction(() ->
-					{
-						for (VirtualFile virtualFile : getAllXSFiles(myProject))
-						{
-							if (virtualFile.isValid())
-							{
-								String filePath = virtualFile.getCanonicalPath();
-								if (filePath != null)
-								{
-									newFilesMap.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile).lastModified());
-								}
-							}
-						}
-					});
+    persisted.setProject(project);
+    return persisted;
+  }
 
-					ProcessOutput processOutput = processHandler.runProcess();
-					final String stdout = processOutput.getStdout();
-					List<String> stderr = processOutput.getStderrLines(false);
+  private static boolean isXSFile(@NotNull VirtualFile file) {
+    if (!file.isValid() || file.isDirectory() || file instanceof LightVirtualFile) {
+      return false;
+    }
 
-					final StringBuilder messageBuilder = new StringBuilder();
-					if (!stderr.isEmpty())
-					{
-						for (String errorMessage : stderr)
-						{
-							if (errorMessage.equals("\n"))
-							{
-								messageBuilder.append("<br/>");
-							}
-							else
-							{
-								messageBuilder.append("<p>");
-								messageBuilder.append(errorMessage);
-								messageBuilder.append("</p>");
-							}
-						}
-					}
-
-					if (!stdout.isEmpty() && !myProject.isDisposed())
-					{
-						new WriteAction<Object>()
-						{
-							@Override
-							protected void run(@NotNull Result<Object> result) throws Throwable
-							{
-								try
-								{
-									VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
-									newFile.setWritable(true);
-									OutputStream outputStream = newFile.getOutputStream(null);
-									outputStream.write(stdout.getBytes());
-									outputStream.close();
-									newFile.setWritable(false);
-									FileContentUtil.reparseFiles(newFile);
-
-									isActual = true;
-
-									messageBuilder.append("<p>");
-									messageBuilder.append("Deparsing completed successfully!");
-									messageBuilder.append("</p><br/>");
-
-									if (messageBuilder.length() > 0)
-									{
-										Notifications.Bus.notify(new Notification(
-												"PERL5_DEPARSING_REPORT",
-												"XSubs deparsing finished",
-												messageBuilder.toString(),
-												NotificationType.INFORMATION
-										));
-									}
-
-								}
-								catch (IOException e)
-								{
-									Notifications.Bus.notify(new Notification(
-											"PERL5_DEPARSING_ERROR",
-											"Error creating XSubs deparsed file",
-											e.getMessage(),
-											NotificationType.ERROR
-									));
-								}
-								finally
-								{
-									PerlXSubsState.this.parserTask = null;
-									filesMap = newFilesMap;
-								}
-							}
-						}.execute();
-					}
-				}
-			};
-			parserTask.queue();
+    String name = file.getName();
 
 
-		}
-		catch (ExecutionException e)
-		{
-			Notifications.Bus.notify(new Notification(
-					"PERL5_START_ERROR",
-					"XSubs deparser report",
-					e.getMessage(),
-					NotificationType.ERROR
-			));
-		}
-	}
+    if (StringUtil.endsWith(name, getXSBinaryExtension())) {
+      String path = file.getCanonicalPath();
+      return path != null && StringUtil.contains(path, "/auto/");
+    }
+    return false;
+  }
 
+  @NotNull
+  private static String getXSBinaryExtension() {
+    return SystemInfo.isWindows ? "xs.dll" : "so";
+  }
 }

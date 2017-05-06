@@ -27,24 +27,21 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 07.11.2016.
  */
-public class PerlLeafOrLeafOwnerManipulator extends AbstractElementManipulator<PsiElement>
-{
-	@Override
-	public PsiElement handleContentChange(@NotNull PsiElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		PsiElement modifyableLeaf;
-		if (element instanceof LeafPsiElement)
-		{
-			modifyableLeaf = element;
-		}
-		else
-		{
-			modifyableLeaf = element.getFirstChild();
-			assert modifyableLeaf instanceof LeafPsiElement;
-			assert element.getTextRange().equals(modifyableLeaf.getTextRange());
-		}
+public class PerlLeafOrLeafOwnerManipulator extends AbstractElementManipulator<PsiElement> {
+  @Override
+  public PsiElement handleContentChange(@NotNull PsiElement element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    PsiElement modifyableLeaf;
+    if (element instanceof LeafPsiElement) {
+      modifyableLeaf = element;
+    }
+    else {
+      modifyableLeaf = element.getFirstChild();
+      assert modifyableLeaf instanceof LeafPsiElement;
+      assert element.getTextRange().equals(modifyableLeaf.getTextRange());
+    }
 
-		LeafElement newElement = ((LeafPsiElement) modifyableLeaf).replaceWithText(range.replace(modifyableLeaf.getText(), newContent));
-		return element == modifyableLeaf ? newElement.getPsi() : newElement.getTreeParent().getPsi();
-	}
+    LeafElement newElement = ((LeafPsiElement)modifyableLeaf).replaceWithText(range.replace(modifyableLeaf.getText(), newContent));
+    return element == modifyableLeaf ? newElement.getPsi() : newElement.getTreeParent().getPsi();
+  }
 }

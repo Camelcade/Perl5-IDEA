@@ -25,17 +25,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodRefactoringSupportProvider extends RefactoringSupportProvider
-{
-	@Override
-	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
-	{
-		return element.getUseScope() instanceof LocalSearchScope;
-	}
+public class PodRefactoringSupportProvider extends RefactoringSupportProvider {
+  @Override
+  public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+    return element.getUseScope() instanceof LocalSearchScope;
+  }
 
-	@Override
-	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, @Nullable PsiElement context)
-	{
-		return false;
-	}
+  @Override
+  public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, @Nullable PsiElement context) {
+    return false;
+  }
 }

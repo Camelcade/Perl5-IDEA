@@ -35,113 +35,91 @@ import java.util.List;
 /**
  * Created by hurricup on 04.11.2016.
  */
-public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandlerFactory
-{
+public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandlerFactory {
 
-	@Nullable
-	@Override
-	public HighlightUsagesHandlerBase createHighlightUsagesHandler(Editor editor, PsiFile file)
-	{
-		int offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
-		PsiElement target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
-		return target == null ? null : new PerlHighlightUsagesHandler(editor, file, target, offset);
-	}
+  @Nullable
+  @Override
+  public HighlightUsagesHandlerBase createHighlightUsagesHandler(Editor editor, PsiFile file) {
+    int offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
+    PsiElement target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
+    return target == null ? null : new PerlHighlightUsagesHandler(editor, file, target, offset);
+  }
 
-	private static class PerlHighlightUsagesHandler extends HighlightUsagesHandlerBase<PsiElement>
-	{
-		private final PsiElement myElement;
-		private final int myAdjustedOffset;
+  private static class PerlHighlightUsagesHandler extends HighlightUsagesHandlerBase<PsiElement> {
+    private final PsiElement myElement;
+    private final int myAdjustedOffset;
 
-		public PerlHighlightUsagesHandler(Editor editor, PsiFile file, @NotNull PsiElement element, int adjustedOffset)
-		{
-			super(editor, file);
-			myElement = element;
-			myAdjustedOffset = adjustedOffset;
-		}
+    public PerlHighlightUsagesHandler(Editor editor, PsiFile file, @NotNull PsiElement element, int adjustedOffset) {
+      super(editor, file);
+      myElement = element;
+      myAdjustedOffset = adjustedOffset;
+    }
 
-		@Override
-		public List<PsiElement> getTargets()
-		{
-			PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(myElement, myAdjustedOffset - myElement.getNode().getStartOffset());
-			if (namedElement != null)
-			{
-				PsiReference reference = ReferencesSearch.search(namedElement, new LocalSearchScope(myFile)).findFirst();
-				if (reference instanceof PsiPolyVariantReference)
-				{
-					List<PsiElement> result = new ArrayList<>();
+    @Override
+    public List<PsiElement> getTargets() {
+      PsiElement namedElement =
+        TargetElementUtil.getInstance().getNamedElement(myElement, myAdjustedOffset - myElement.getNode().getStartOffset());
+      if (namedElement != null) {
+        PsiReference reference = ReferencesSearch.search(namedElement, new LocalSearchScope(myFile)).findFirst();
+        if (reference instanceof PsiPolyVariantReference) {
+          List<PsiElement> result = new ArrayList<>();
 
-					for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
-					{
-						PsiElement targetElement = resolveResult.getElement();
-						if (targetElement != null)
-						{
-							result.add(targetElement);
-						}
-					}
+          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+            PsiElement targetElement = resolveResult.getElement();
+            if (targetElement != null) {
+              result.add(targetElement);
+            }
+          }
 
 
-					return result;
-				}
-			}
-			else
-			{
-				PsiReference reference = TargetElementUtil.findReference(myEditor, myAdjustedOffset);
-				if (reference instanceof PsiPolyVariantReference)
-				{
-					List<PsiElement> result = new ArrayList<>();
+          return result;
+        }
+      }
+      else {
+        PsiReference reference = TargetElementUtil.findReference(myEditor, myAdjustedOffset);
+        if (reference instanceof PsiPolyVariantReference) {
+          List<PsiElement> result = new ArrayList<>();
 
-					for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
-					{
-						PsiElement element = resolveResult.getElement();
-						if (element != null)
-						{
-							result.add(element);
-						}
-					}
+          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+            PsiElement element = resolveResult.getElement();
+            if (element != null) {
+              result.add(element);
+            }
+          }
 
-					return result;
-				}
-				else if (reference != null)
-				{
-					PsiElement target = reference.resolve();
-					if (target != null)
-					{
-						return Collections.singletonList(target);
-					}
-				}
+          return result;
+        }
+        else if (reference != null) {
+          PsiElement target = reference.resolve();
+          if (target != null) {
+            return Collections.singletonList(target);
+          }
+        }
+      }
+      return null;
+    }
 
-			}
-			return null;
-		}
+    @Override
+    protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer) {
+    }
 
-		@Override
-		protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer)
-		{
-		}
+    @Override
+    public void computeUsages(List<PsiElement> targets) {
+      if (targets == null) {
+        return;
+      }
+      for (PsiElement target : targets) {
+        if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner) {
+          PsiElement nameIdentifier = ((PsiNameIdentifierOwner)target).getNameIdentifier();
+          if (nameIdentifier != null) {
+            myWriteUsages.add(ElementManipulators.getValueTextRange(nameIdentifier).shiftRight(nameIdentifier.getNode().getStartOffset()));
+          }
+        }
 
-		@Override
-		public void computeUsages(List<PsiElement> targets)
-		{
-			if (targets == null)
-			{
-				return;
-			}
-			for (PsiElement target : targets)
-			{
-				if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner)
-				{
-					PsiElement nameIdentifier = ((PsiNameIdentifierOwner) target).getNameIdentifier();
-					if (nameIdentifier != null)
-					{
-						myWriteUsages.add(ElementManipulators.getValueTextRange(nameIdentifier).shiftRight(nameIdentifier.getNode().getStartOffset()));
-					}
-				}
-
-				for (PsiReference reference : ReferencesSearch.search(target, new LocalSearchScope(myFile)).findAll())
-				{
-					myReadUsages.add(reference.getRangeInElement().shiftRight(reference.getElement().getNode().getStartOffset()));
-				}
-			}
-		}
-	}
+        for (PsiReference reference : ReferencesSearch.search(target, new LocalSearchScope(myFile)).findAll()) {
+          myReadUsages.add(reference.getRangeInElement().shiftRight(reference.getElement().getNode().getStartOffset()));
+        }
+      }
+    }
+  }
 }

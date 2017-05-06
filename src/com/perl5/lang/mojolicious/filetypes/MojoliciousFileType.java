@@ -35,60 +35,53 @@ import javax.swing.*;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousFileType extends PerlFileType
-{
-	public static final MojoliciousFileType INSTANCE = new MojoliciousFileType();
+public class MojoliciousFileType extends PerlFileType {
+  public static final MojoliciousFileType INSTANCE = new MojoliciousFileType();
 
-	public MojoliciousFileType()
-	{
-		super(MojoliciousLanguage.INSTANCE);
-		FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider()
-		{
-			@Override
-			public EditorHighlighter getEditorHighlighter(@Nullable Project project, @NotNull FileType fileType, @Nullable VirtualFile virtualFile, @NotNull EditorColorsScheme editorColorsScheme)
-			{
-				return new MojoliciousHighlighter(project, virtualFile, editorColorsScheme);
-			}
-		});
-	}
+  public MojoliciousFileType() {
+    super(MojoliciousLanguage.INSTANCE);
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
+      @Override
+      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
+                                                    @NotNull FileType fileType,
+                                                    @Nullable VirtualFile virtualFile,
+                                                    @NotNull EditorColorsScheme editorColorsScheme) {
+        return new MojoliciousHighlighter(project, virtualFile, editorColorsScheme);
+      }
+    });
+  }
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Mojolicious Perl5 Template";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Mojolicious Perl5 Template";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Mojolicious Perl5 Template";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Mojolicious Perl5 Template";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "ep";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "ep";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return PerlIcons.MOJO_FILE;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.MOJO_FILE;
+  }
 
-	@Override
-	public boolean checkStrictPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkStrictPragma() {
+    return false;
+  }
 
-	@Override
-	public boolean checkWarningsPragma()
-	{
-		return false;
-	}
+  @Override
+  public boolean checkWarningsPragma() {
+    return false;
+  }
 }

@@ -25,15 +25,13 @@ import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProvider;
 /**
  * Created by hurricup on 16.03.2016.
  */
-public class EmbeddedPerlTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements EmbeddedPerlElementTypes
-{
-	private static final TokenSet START_TOKENS = TokenSet.create(
-			EMBED_MARKER_OPEN,
-			TokenType.WHITE_SPACE
-	);
+public class EmbeddedPerlTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements EmbeddedPerlElementTypes {
+  private static final TokenSet START_TOKENS = TokenSet.create(
+    EMBED_MARKER_OPEN,
+    TokenType.WHITE_SPACE
+  );
 
-	public EmbeddedPerlTemplateLanguageErrorFilter()
-	{
-		super(START_TOKENS, EmbeddedPerlFileViewProvider.class, "HTML");
-	}
+  public EmbeddedPerlTemplateLanguageErrorFilter() {
+    super(START_TOKENS, EmbeddedPerlFileViewProvider.class, "HTML");
+  }
 }

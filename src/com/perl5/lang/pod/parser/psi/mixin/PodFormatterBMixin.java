@@ -24,19 +24,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodFormatterBMixin extends PodSectionMixin implements PodFormatterB
-{
-	public PodFormatterBMixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodFormatterBMixin extends PodSectionMixin implements PodFormatterB {
+  public PodFormatterBMixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		builder.append("<B>");
-		super.renderElementContentAsHTML(builder, context);
-		builder.append("</B>");
-	}
-
+  @Override
+  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    builder.append("<B>");
+    super.renderElementContentAsHTML(builder, context);
+    builder.append("</B>");
+  }
 }

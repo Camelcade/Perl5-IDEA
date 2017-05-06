@@ -24,10 +24,9 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub
 /**
  * Created by hurricup on 19.03.2016.
  */
-public class HTMLMasonSubcomponentDefinitionStubImpl extends HTMLMasonNamedElementStubBaseImpl<HTMLMasonSubcomponentDefitnition> implements HTMLMasonSubcomponentDefinitionStub
-{
-	public HTMLMasonSubcomponentDefinitionStubImpl(StubElement parent, IStubElementType elementType, String myName)
-	{
-		super(parent, elementType, myName);
-	}
+public class HTMLMasonSubcomponentDefinitionStubImpl extends HTMLMasonNamedElementStubBaseImpl<HTMLMasonSubcomponentDefitnition>
+  implements HTMLMasonSubcomponentDefinitionStub {
+  public HTMLMasonSubcomponentDefinitionStubImpl(StubElement parent, IStubElementType elementType, String myName) {
+    super(parent, elementType, myName);
+  }
 }

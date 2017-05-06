@@ -25,20 +25,18 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 /**
  * Created by hurricup on 16.03.2016.
  */
-public class HTMLMasonTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements HTMLMasonElementTypes
-{
-	private static final TokenSet START_TOKENS = TokenSet.create(
-			HTML_MASON_BLOCK_OPENER,
-			HTML_MASON_PERL_OPENER,
-			HTML_MASON_CALL_OPENER,
-			HTML_MASON_CALL_FILTERING_OPENER,
-			HTML_MASON_CALL_CLOSE_TAG_START,
-			HTML_MASON_LINE_OPENER,
-			TokenType.WHITE_SPACE
-	);
+public class HTMLMasonTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements HTMLMasonElementTypes {
+  private static final TokenSet START_TOKENS = TokenSet.create(
+    HTML_MASON_BLOCK_OPENER,
+    HTML_MASON_PERL_OPENER,
+    HTML_MASON_CALL_OPENER,
+    HTML_MASON_CALL_FILTERING_OPENER,
+    HTML_MASON_CALL_CLOSE_TAG_START,
+    HTML_MASON_LINE_OPENER,
+    TokenType.WHITE_SPACE
+  );
 
-	public HTMLMasonTemplateLanguageErrorFilter()
-	{
-		super(START_TOKENS, HTMLMasonFileViewProvider.class, "HTML");
-	}
+  public HTMLMasonTemplateLanguageErrorFilter() {
+    super(START_TOKENS, HTMLMasonFileViewProvider.class, "HTML");
+  }
 }

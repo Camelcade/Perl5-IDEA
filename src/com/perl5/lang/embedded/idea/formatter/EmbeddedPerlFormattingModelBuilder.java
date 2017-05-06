@@ -33,19 +33,17 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 11.01.2016.
  */
-public class EmbeddedPerlFormattingModelBuilder extends PerlFormattingModelBuilder
-{
-	@NotNull
-	@Override
-	public FormattingModel createModel(PsiElement element, CodeStyleSettings settings)
-	{
-		CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
-		PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
-		SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
-		InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+public class EmbeddedPerlFormattingModelBuilder extends PerlFormattingModelBuilder {
+  @NotNull
+  @Override
+  public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
+    CommonCodeStyleSettings commonSettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
+    PerlCodeStyleSettings perlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
+    SpacingBuilder spacingBuilder = createSpacingBuilder(commonSettings, perlSettings);
+    InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
 
-		PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
-		return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
-	}
-
+    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder,
+                                                                injectedLanguageBlockBuilder);
+    return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
+  }
 }

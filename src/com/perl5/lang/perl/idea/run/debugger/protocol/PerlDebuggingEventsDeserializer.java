@@ -28,85 +28,71 @@ import java.lang.reflect.Type;
 /**
  * Created by hurricup on 07.05.2016.
  */
-public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDebuggingEvent>
-{
-	private final PerlDebugThread myPerlDebugThread;
+public class PerlDebuggingEventsDeserializer implements JsonDeserializer<PerlDebuggingEvent> {
+  private final PerlDebugThread myPerlDebugThread;
 
-	public PerlDebuggingEventsDeserializer(PerlDebugThread perlDebugThread)
-	{
-		myPerlDebugThread = perlDebugThread;
-	}
+  public PerlDebuggingEventsDeserializer(PerlDebugThread perlDebugThread) {
+    myPerlDebugThread = perlDebugThread;
+  }
 
-	@Override
-	public PerlDebuggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException
-	{
-		String event = jsonElement.getAsJsonObject().getAsJsonPrimitive("event").getAsString();
+  @Override
+  public PerlDebuggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext)
+    throws JsonParseException {
+    String event = jsonElement.getAsJsonObject().getAsJsonPrimitive("event").getAsString();
 
-		PerlDebuggingEvent eventObject = null;
+    PerlDebuggingEvent eventObject = null;
 
-		if (StringUtil.isNotEmpty(event))
-		{
-			if (StringUtil.equals(event, "STOP"))
-			{
-				PerlDebuggingEventStop newEvent = new PerlDebuggingEventStop();
+    if (StringUtil.isNotEmpty(event)) {
+      if (StringUtil.equals(event, "STOP")) {
+        PerlDebuggingEventStop newEvent = new PerlDebuggingEventStop();
 
-				newEvent.setFrames(
-						(PerlStackFrameDescriptor[]) jsonDeserializationContext.deserialize(
-								jsonElement.getAsJsonObject().getAsJsonArray("data"), PerlStackFrameDescriptor[].class
-						));
+        newEvent.setFrames(
+          (PerlStackFrameDescriptor[])jsonDeserializationContext.deserialize(
+            jsonElement.getAsJsonObject().getAsJsonArray("data"), PerlStackFrameDescriptor[].class
+          ));
 
-				eventObject = newEvent;
-			}
-			else if (StringUtil.equals(event, "BREAKPOINT_REACHED"))
-			{
-				eventObject = jsonDeserializationContext.deserialize(
-						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointReached.class);
-			}
-			else if (StringUtil.equals(event, "BREAKPOINT_SET"))
-			{
-				eventObject = jsonDeserializationContext.deserialize(
-						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointSet.class);
-			}
-			else if (StringUtil.equals(event, "BREAKPOINT_DENIED"))
-			{
-				eventObject = jsonDeserializationContext.deserialize(
-						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointDenied.class);
-			}
-			else if (StringUtil.equals(event, "READY"))
-			{
-				eventObject = new PerlDebuggingEventReady();
-				((PerlDebuggingEventReady) eventObject).version = jsonElement.getAsJsonObject().getAsJsonPrimitive("version").getAsString();
-			}
-			else if (StringUtil.equals(event, "LOADED_FILES_DELTA"))
-			{
-				eventObject = jsonDeserializationContext.deserialize(
-						jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventLoadedFiles.class);
-			}
-			else if (StringUtil.equals(event, "RESPONSE"))
-			{
-				int transactionId = jsonElement.getAsJsonObject().getAsJsonPrimitive("transactionId").getAsInt();
-				PerlDebuggingTransactionHandler transactionHandler = myPerlDebugThread.getTransactionHandler(transactionId);
+        eventObject = newEvent;
+      }
+      else if (StringUtil.equals(event, "BREAKPOINT_REACHED")) {
+        eventObject = jsonDeserializationContext.deserialize(
+          jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointReached.class);
+      }
+      else if (StringUtil.equals(event, "BREAKPOINT_SET")) {
+        eventObject = jsonDeserializationContext.deserialize(
+          jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointSet.class);
+      }
+      else if (StringUtil.equals(event, "BREAKPOINT_DENIED")) {
+        eventObject = jsonDeserializationContext.deserialize(
+          jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventBreakpointDenied.class);
+      }
+      else if (StringUtil.equals(event, "READY")) {
+        eventObject = new PerlDebuggingEventReady();
+        ((PerlDebuggingEventReady)eventObject).version = jsonElement.getAsJsonObject().getAsJsonPrimitive("version").getAsString();
+      }
+      else if (StringUtil.equals(event, "LOADED_FILES_DELTA")) {
+        eventObject = jsonDeserializationContext.deserialize(
+          jsonElement.getAsJsonObject().getAsJsonObject("data"), PerlDebuggingEventLoadedFiles.class);
+      }
+      else if (StringUtil.equals(event, "RESPONSE")) {
+        int transactionId = jsonElement.getAsJsonObject().getAsJsonPrimitive("transactionId").getAsInt();
+        PerlDebuggingTransactionHandler transactionHandler = myPerlDebugThread.getTransactionHandler(transactionId);
 
-				if (transactionHandler == null)
-				{
-					throw new RuntimeException("Missing transaction handler for transaction " + transactionId);
-				}
+        if (transactionHandler == null) {
+          throw new RuntimeException("Missing transaction handler for transaction " + transactionId);
+        }
 
-				transactionHandler.run(jsonElement.getAsJsonObject(), jsonDeserializationContext);
+        transactionHandler.run(jsonElement.getAsJsonObject(), jsonDeserializationContext);
 
-				eventObject = new PerlDebuggingEventDumb();
-			}
-			else
-			{
-				System.err.println("Unhandled event in request: " + jsonElement.getAsString());
-			}
-		}
-		else
-		{
-			System.err.println("Empty event in request: " + jsonElement.getAsString());
-		}
+        eventObject = new PerlDebuggingEventDumb();
+      }
+      else {
+        System.err.println("Unhandled event in request: " + jsonElement.getAsString());
+      }
+    }
+    else {
+      System.err.println("Empty event in request: " + jsonElement.getAsString());
+    }
 
-		return eventObject;
-	}
-
+    return eventObject;
+  }
 }

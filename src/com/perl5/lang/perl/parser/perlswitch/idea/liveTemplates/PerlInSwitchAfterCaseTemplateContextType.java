@@ -23,17 +23,13 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 /**
  * Created by hurricup on 15.01.2016.
  */
-public class PerlInSwitchAfterCaseTemplateContextType extends PerlTemplateContextType.Prefix
-{
-	public PerlInSwitchAfterCaseTemplateContextType()
-	{
-		super("PERL5_INSIDE_SWITCH_AFTER_CASE", "Inside Switch after case");
-	}
+public class PerlInSwitchAfterCaseTemplateContextType extends PerlTemplateContextType.Prefix {
+  public PerlInSwitchAfterCaseTemplateContextType() {
+    super("PERL5_INSIDE_SWITCH_AFTER_CASE", "Inside Switch after case");
+  }
 
-	@Override
-	public boolean isInContext(PsiElement element)
-	{
-		return super.isInContext(element) && PerlSwitchElementPatterns.SWITCH_PREFIX_AFTER_CASE_PATTERN.accepts(element);
-	}
-
+  @Override
+  public boolean isInContext(PsiElement element) {
+    return super.isInContext(element) && PerlSwitchElementPatterns.SWITCH_PREFIX_AFTER_CASE_PATTERN.accepts(element);
+  }
 }

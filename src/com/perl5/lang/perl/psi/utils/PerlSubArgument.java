@@ -32,147 +32,123 @@ import java.util.List;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public class PerlSubArgument
-{
+public class PerlSubArgument {
 
-	PerlVariableType argumentType;
-	String argumentName;
-	String variableClass;
-	Boolean isOptional;
+  PerlVariableType argumentType;
+  String argumentName;
+  String variableClass;
+  Boolean isOptional;
 
-	public PerlSubArgument(PerlVariableType variableType, String variableName, String variableClass, boolean isOptional)
-	{
-		this.argumentType = variableType;
-		this.argumentName = variableName;
-		this.isOptional = isOptional;
-		this.variableClass = variableClass;
-	}
+  public PerlSubArgument(PerlVariableType variableType, String variableName, String variableClass, boolean isOptional) {
+    this.argumentType = variableType;
+    this.argumentName = variableName;
+    this.isOptional = isOptional;
+    this.variableClass = variableClass;
+  }
 
-	private static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
-		String argumentName = dataStream.readName().toString();
-		String variableClass = dataStream.readName().toString();
-		boolean isOptional = dataStream.readBoolean();
-		return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
-	}
+  public PerlVariableType getArgumentType() {
+    return argumentType;
+  }
 
-	@NotNull
-	public static List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException
-	{
-		int argumentsNumber = dataStream.readInt();
+  public String getArgumentName() {
+    return argumentName;
+  }
 
-		if (argumentsNumber > 0)
-		{
+  public Boolean isOptional() {
+    return isOptional;
+  }
 
-			List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
+  public void setOptional(Boolean optional) {
+    isOptional = optional;
+  }
 
-			for (int i = 0; i < argumentsNumber; i++)
-			{
-				arguments.add(deserialize(dataStream));
-			}
-			return arguments;
-		}
-		else
-		{
-			return Collections.emptyList();
-		}
-	}
+  public String getVariableClass() {
+    return variableClass;
+  }
 
-	public static PerlSubArgument getEmptyArgument()
-	{
-		return new PerlSubArgument(
-				PerlVariableType.SCALAR,
-				"",
-				"",
-				false
-		);
-	}
+  public String toStringShort() {
+    return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : PerlLexer.STRING_UNDEF;
+  }
 
-	public static PerlSubArgument getSelfArgument()
-	{
-		return new PerlSubArgument(
-				PerlVariableType.SCALAR,
-				"self",
-				"",
-				false
-		);
-	}
+  public String toStringLong() {
+    if (StringUtil.isEmpty(argumentName)) {
+      return PerlLexer.STRING_UNDEF;
+    }
 
-	public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException
-	{
-		dataStream.writeInt(arguments.size());
-		for (PerlSubArgument argument : arguments)
-		{
-			argument.serialize(dataStream);
-		}
-	}
+    String shortName = argumentType.getSigil() + argumentName;
+    return StringUtil.isNotEmpty(variableClass) ? variableClass + " " + shortName : shortName;
+  }
 
-	public PerlVariableType getArgumentType()
-	{
-		return argumentType;
-	}
+  private void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(argumentType.toString());
+    dataStream.writeName(argumentName);
+    dataStream.writeName(variableClass);
+    dataStream.writeBoolean(isOptional);
+  }
 
-	public String getArgumentName()
-	{
-		return argumentName;
-	}
+  public boolean isSelf(Project project) {
+    return getArgumentType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(project).isSelfName(getArgumentName());
+  }
 
-	public Boolean isOptional()
-	{
-		return isOptional;
-	}
+  public boolean isEmpty() {
+    return StringUtil.isEmpty(argumentName);
+  }
 
-	public void setOptional(Boolean optional)
-	{
-		isOptional = optional;
-	}
+  public PerlContextType getContextType() {
+    if (argumentType == PerlVariableType.SCALAR || argumentType == PerlVariableType.CODE || argumentType == PerlVariableType.GLOB) {
+      return PerlContextType.SCALAR;
+    }
+    return PerlContextType.LIST;
+  }
 
-	public String getVariableClass()
-	{
-		return variableClass;
-	}
+  private static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException {
+    PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
+    String argumentName = dataStream.readName().toString();
+    String variableClass = dataStream.readName().toString();
+    boolean isOptional = dataStream.readBoolean();
+    return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
+  }
 
-	public String toStringShort()
-	{
-		return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : PerlLexer.STRING_UNDEF;
-	}
+  @NotNull
+  public static List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException {
+    int argumentsNumber = dataStream.readInt();
 
-	public String toStringLong()
-	{
-		if (StringUtil.isEmpty(argumentName))
-		{
-			return PerlLexer.STRING_UNDEF;
-		}
+    if (argumentsNumber > 0) {
 
-		String shortName = argumentType.getSigil() + argumentName;
-		return StringUtil.isNotEmpty(variableClass) ? variableClass + " " + shortName : shortName;
-	}
+      List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
 
-	private void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeName(argumentType.toString());
-		dataStream.writeName(argumentName);
-		dataStream.writeName(variableClass);
-		dataStream.writeBoolean(isOptional);
-	}
+      for (int i = 0; i < argumentsNumber; i++) {
+        arguments.add(deserialize(dataStream));
+      }
+      return arguments;
+    }
+    else {
+      return Collections.emptyList();
+    }
+  }
 
-	public boolean isSelf(Project project)
-	{
-		return getArgumentType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(project).isSelfName(getArgumentName());
-	}
+  public static PerlSubArgument getEmptyArgument() {
+    return new PerlSubArgument(
+      PerlVariableType.SCALAR,
+      "",
+      "",
+      false
+    );
+  }
 
-	public boolean isEmpty()
-	{
-		return StringUtil.isEmpty(argumentName);
-	}
+  public static PerlSubArgument getSelfArgument() {
+    return new PerlSubArgument(
+      PerlVariableType.SCALAR,
+      "self",
+      "",
+      false
+    );
+  }
 
-	public PerlContextType getContextType()
-	{
-		if (argumentType == PerlVariableType.SCALAR || argumentType == PerlVariableType.CODE || argumentType == PerlVariableType.GLOB)
-		{
-			return PerlContextType.SCALAR;
-		}
-		return PerlContextType.LIST;
-	}
+  public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException {
+    dataStream.writeInt(arguments.size());
+    for (PerlSubArgument argument : arguments) {
+      argument.serialize(dataStream);
+    }
+  }
 }

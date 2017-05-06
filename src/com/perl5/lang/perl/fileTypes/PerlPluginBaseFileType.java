@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.11.2016.
  */
-public abstract class PerlPluginBaseFileType extends LanguageFileType
-{
-	public PerlPluginBaseFileType(@NotNull Language language)
-	{
-		super(language);
-	}
+public abstract class PerlPluginBaseFileType extends LanguageFileType {
+  public PerlPluginBaseFileType(@NotNull Language language) {
+    super(language);
+  }
 }

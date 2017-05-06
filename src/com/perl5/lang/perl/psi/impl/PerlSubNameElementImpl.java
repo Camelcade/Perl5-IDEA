@@ -34,88 +34,72 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlSubNameElement
-{
-	public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlSubNameElement {
+  public PerlSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PerlVisitor)
-		{
-			((PerlVisitor) visitor).visitSubNameElement(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitSubNameElement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		PsiElement parent = getParent();
+  @Nullable
+  @Override
+  public String getPackageName() {
+    PsiElement parent = getParent();
 
-		if (parent instanceof PerlPackageMember)
-		{
-			return ((PerlPackageMember) parent).getPackageName();
-		}
-		else
-		{
-			return PerlPackageUtil.getContextPackageName(this);
-		}
-	}
+    if (parent instanceof PerlPackageMember) {
+      return ((PerlPackageMember)parent).getPackageName();
+    }
+    else {
+      return PerlPackageUtil.getContextPackageName(this);
+    }
+  }
 
-	@Override
-	@NotNull
-	public String getCanonicalName()
-	{
-		return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-	}
+  @Override
+  @NotNull
+  public String getCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
+  }
 
-	@Override
-	@NotNull
-	public String getName()
-	{
-		return this.getText();
-	}
+  @Override
+  @NotNull
+  public String getName() {
+    return this.getText();
+  }
 
-	@Override
-	public boolean isBuiltIn()
-	{
-		// fixme i belive this should be implemented in file element
-		if (this.getContainingFile() instanceof MojoliciousFileImpl)
-		{
-			return isPerlBuiltIn() || MojoliciousSubUtil.isBuiltIn(getText());
-		}
-		else
-		{
-			return isPerlBuiltIn();
-		}
-	}
+  @Override
+  public boolean isBuiltIn() {
+    // fixme i belive this should be implemented in file element
+    if (this.getContainingFile() instanceof MojoliciousFileImpl) {
+      return isPerlBuiltIn() || MojoliciousSubUtil.isBuiltIn(getText());
+    }
+    else {
+      return isPerlBuiltIn();
+    }
+  }
 
-	// fixme move to file element
-	protected boolean isPerlBuiltIn()
-	{
-		PsiElement parent = getParent();
-		if (parent instanceof PerlMethod)
-		{
-			PsiElement grandParent = parent.getParent();
+  // fixme move to file element
+  protected boolean isPerlBuiltIn() {
+    PsiElement parent = getParent();
+    if (parent instanceof PerlMethod) {
+      PsiElement grandParent = parent.getParent();
 
-			if (
-					!(grandParent instanceof PsiPerlNestedCall)
-							&& (getPrevSibling() == null || PerlPackageUtil.CORE_PACKAGE_FULL.equals(getPrevSibling().getText()))
-					)
-			{
-				return PerlSubUtil.isBuiltIn(getText());
-			}
-		}
-		return false;
-	}
+      if (
+        !(grandParent instanceof PsiPerlNestedCall)
+        && (getPrevSibling() == null || PerlPackageUtil.CORE_PACKAGE_FULL.equals(getPrevSibling().getText()))
+        ) {
+        return PerlSubUtil.isBuiltIn(getText());
+      }
+    }
+    return false;
+  }
 }
 
 

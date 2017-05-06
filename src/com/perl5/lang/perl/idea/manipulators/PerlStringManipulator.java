@@ -26,20 +26,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.02.2016.
  */
-public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStringImplMixin>
-{
-	@Override
-	public PerlStringImplMixin handleContentChange(@NotNull PerlStringImplMixin element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		PsiElement openingQuote = element.getOpeningQuote();
-		char closeQuote = PerlLexer.getQuoteCloseChar(openingQuote.getText().charAt(0));
-		return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
-	}
+public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStringImplMixin> {
+  @Override
+  public PerlStringImplMixin handleContentChange(@NotNull PerlStringImplMixin element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    PsiElement openingQuote = element.getOpeningQuote();
+    char closeQuote = PerlLexer.getQuoteCloseChar(openingQuote.getText().charAt(0));
+    return super.handleContentChange(element, range, newContent.replaceAll("(?<!\\\\)" + closeQuote, "\\\\" + closeQuote));
+  }
 
-	@NotNull
-	@Override
-	public TextRange getRangeInElement(@NotNull PerlStringImplMixin element)
-	{
-		return element.getContentTextRangeInParent();
-	}
+  @NotNull
+  @Override
+  public TextRange getRangeInElement(@NotNull PerlStringImplMixin element) {
+    return element.getContentTextRangeInParent();
+  }
 }

@@ -26,32 +26,30 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.11.2016.
  */
-public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2
-{
-	@Nullable
-	@Override
-	public PsiElement adjustReferenceOrReferencedElement(PsiFile file, Editor editor, int offset, int flags, @Nullable PsiElement refElement)
-	{
-		if (refElement == null)
-		{
-			PsiReference ref = TargetElementUtil.findReference(editor, offset);
-			if (ref instanceof PerlCachingReference)
-			{
-				ResolveResult[] resolveResults = ((PsiPolyVariantReference) ref).multiResolve(false);
-				if (resolveResults.length > 0)
-				{
-					return resolveResults[0].getElement();
-				}
-			}
-		}
-		return refElement;
-	}
+public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
+  @Nullable
+  @Override
+  public PsiElement adjustReferenceOrReferencedElement(PsiFile file,
+                                                       Editor editor,
+                                                       int offset,
+                                                       int flags,
+                                                       @Nullable PsiElement refElement) {
+    if (refElement == null) {
+      PsiReference ref = TargetElementUtil.findReference(editor, offset);
+      if (ref instanceof PerlCachingReference) {
+        ResolveResult[] resolveResults = ((PsiPolyVariantReference)ref).multiResolve(false);
+        if (resolveResults.length > 0) {
+          return resolveResults[0].getElement();
+        }
+      }
+    }
+    return refElement;
+  }
 
 
-	@Nullable
-	@Override
-	public PsiElement getElementByReference(@NotNull PsiReference ref, int flags)
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiElement getElementByReference(@NotNull PsiReference ref, int flags) {
+    return null;
+  }
 }

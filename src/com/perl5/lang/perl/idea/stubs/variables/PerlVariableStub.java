@@ -26,25 +26,23 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public interface PerlVariableStub extends StubElement<PerlVariableDeclarationWrapper>
-{
-	String getPackageName();
+public interface PerlVariableStub extends StubElement<PerlVariableDeclarationWrapper> {
+  String getPackageName();
 
-	String getVariableName();
+  String getVariableName();
 
-	@Nullable
-	String getDeclaredType();
+  @Nullable
+  String getDeclaredType();
 
-	PerlVariableType getActualType();
+  PerlVariableType getActualType();
 
-	StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey();
+  StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey();
 
-	/**
-	 * Returns stubbed, local or external variable annotations
-	 *
-	 * @return annotations or null
-	 */
-	@Nullable
-	PerlVariableAnnotations getVariableAnnotations();
-
+  /**
+   * Returns stubbed, local or external variable annotations
+   *
+   * @return annotations or null
+   */
+  @Nullable
+  PerlVariableAnnotations getVariableAnnotations();
 }

@@ -28,28 +28,24 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 24.01.2016.
  */
-public class PerlReferencesContributor extends PsiReferenceContributor implements PerlElementPatterns
-{
-	@Override
-	public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar)
-	{
-		registrar.registerReferenceProvider(
-				EXPORT_ASSIGNED_STRING_CONTENT,
-				new PerlSimpleSubReferenceProvider()
-		);
+public class PerlReferencesContributor extends PsiReferenceContributor implements PerlElementPatterns {
+  @Override
+  public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
+    registrar.registerReferenceProvider(
+      EXPORT_ASSIGNED_STRING_CONTENT,
+      new PerlSimpleSubReferenceProvider()
+    );
 
-		registrar.registerReferenceProvider(VARIABLE_NAME_PATTERN, new PerlVariableReferencesProvider());
+    registrar.registerReferenceProvider(VARIABLE_NAME_PATTERN, new PerlVariableReferencesProvider());
 
-		registrar.registerReferenceProvider(LABEL_EXPR_PATTERN, new PsiReferenceProvider()
-		{
-			@NotNull
-			@Override
-			public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context)
-			{
-				return new PsiReference[]{new PerlLabelReference((PsiPerlLabelExpr) element)};
-			}
-		});
+    registrar.registerReferenceProvider(LABEL_EXPR_PATTERN, new PsiReferenceProvider() {
+      @NotNull
+      @Override
+      public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+        return new PsiReference[]{new PerlLabelReference((PsiPerlLabelExpr)element)};
+      }
+    });
 
-		registrar.registerReferenceProvider(SUB_NAME_PATTERN, new PerlSubReferenceProvider());
-	}
+    registrar.registerReferenceProvider(SUB_NAME_PATTERN, new PerlSubReferenceProvider());
+  }
 }

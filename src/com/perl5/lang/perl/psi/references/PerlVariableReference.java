@@ -37,105 +37,87 @@ import java.util.List;
 /**
  * Created by hurricup on 27.05.2015.
  */
-public class PerlVariableReference extends PerlCachingReference<PsiElement>
-{
-	private PerlVariable myVariable;
+public class PerlVariableReference extends PerlCachingReference<PsiElement> {
+  private PerlVariable myVariable;
 
-	public PerlVariableReference(@NotNull PsiElement element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
+  public PerlVariableReference(@NotNull PsiElement element, TextRange textRange) {
+    super(element, textRange);
+  }
 
-	public PerlVariable getVariable()
-	{
-		if (myVariable == null)
-		{
-			assert myElement.getParent() instanceof PerlVariable;
-			myVariable = (PerlVariable) myElement.getParent();
-		}
-		return myVariable;
-	}
+  public PerlVariable getVariable() {
+    if (myVariable == null) {
+      assert myElement.getParent() instanceof PerlVariable;
+      myVariable = (PerlVariable)myElement.getParent();
+    }
+    return myVariable;
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PerlVariable myVariable = getVariable();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PerlVariable myVariable = getVariable();
 
-		List<ResolveResult> result = new ArrayList<>();
+    List<ResolveResult> result = new ArrayList<>();
 
-		PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
+    PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
 
-		if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlVariableLight))
-		{
-			// not found explicit lexically visible declarations
+    if (lexicalDeclaration == null || lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlVariableLight)) {
+      // not found explicit lexically visible declarations
 
-			// imports
-			PerlVariableType actualType = myVariable.getActualType();
-			Project project = myVariable.getProject();
-			PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
+      // imports
+      PerlVariableType actualType = myVariable.getActualType();
+      Project project = myVariable.getProject();
+      PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
 
-			if (namespaceContainer != null) // not true if LPE in TemplateToolkit
-			{
-				String variableName = myVariable.getName();
+      if (namespaceContainer != null) // not true if LPE in TemplateToolkit
+      {
+        String variableName = myVariable.getName();
 
-				if (actualType == PerlVariableType.SCALAR)
-				{
-					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors())
-					{
-						if (importEntry.getExportedName().equals(variableName))
-						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil.getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
-						}
-					}
-				}
-				else if (actualType == PerlVariableType.ARRAY)
-				{
-					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors())
-					{
-						if (importEntry.getExportedName().equals(variableName))
-						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil.getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
-						}
-					}
-				}
-				else if (actualType == PerlVariableType.HASH)
-				{
-					for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors())
-					{
-						if (importEntry.getExportedName().equals(variableName))
-						{
-							for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil.getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName()))
-							{
-								result.add(new PsiElementResolveResult(targetVariable));
-							}
-						}
-					}
-				}
-			}
+        if (actualType == PerlVariableType.SCALAR) {
+          for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors()) {
+            if (importEntry.getExportedName().equals(variableName)) {
+              for (PerlVariableDeclarationWrapper targetVariable : PerlScalarUtil
+                .getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName())) {
+                result.add(new PsiElementResolveResult(targetVariable));
+              }
+            }
+          }
+        }
+        else if (actualType == PerlVariableType.ARRAY) {
+          for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors()) {
+            if (importEntry.getExportedName().equals(variableName)) {
+              for (PerlVariableDeclarationWrapper targetVariable : PerlArrayUtil
+                .getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName())) {
+                result.add(new PsiElementResolveResult(targetVariable));
+              }
+            }
+          }
+        }
+        else if (actualType == PerlVariableType.HASH) {
+          for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors()) {
+            if (importEntry.getExportedName().equals(variableName)) {
+              for (PerlVariableDeclarationWrapper targetVariable : PerlHashUtil
+                .getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName())) {
+                result.add(new PsiElementResolveResult(targetVariable));
+              }
+            }
+          }
+        }
+      }
 
-			// our variable declaration
-			for (PerlGlobVariable glob : myVariable.getRelatedGlobs())
-			{
-				result.add(new PsiElementResolveResult(glob));
-			}
+      // our variable declaration
+      for (PerlGlobVariable glob : myVariable.getRelatedGlobs()) {
+        result.add(new PsiElementResolveResult(glob));
+      }
 
-			// globs
-			for (PerlVariableDeclarationWrapper globalDeclaration : myVariable.getGlobalDeclarations())
-			{
-				result.add(new PsiElementResolveResult(globalDeclaration));
-			}
-		}
-		else
-		{
-			result.add(new PsiElementResolveResult(lexicalDeclaration));
-		}
+      // globs
+      for (PerlVariableDeclarationWrapper globalDeclaration : myVariable.getGlobalDeclarations()) {
+        result.add(new PsiElementResolveResult(globalDeclaration));
+      }
+    }
+    else {
+      result.add(new PsiElementResolveResult(lexicalDeclaration));
+    }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 }

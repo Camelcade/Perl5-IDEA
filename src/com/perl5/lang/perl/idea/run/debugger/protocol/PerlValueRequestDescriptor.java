@@ -19,16 +19,14 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 09.05.2016.
  */
-public class PerlValueRequestDescriptor
-{
-	private final int offset;
-	private final int limit;
-	private final String key;
+public class PerlValueRequestDescriptor {
+  private final int offset;
+  private final int limit;
+  private final String key;
 
-	public PerlValueRequestDescriptor(int offset, int limit, String key)
-	{
-		this.offset = offset;
-		this.limit = limit;
-		this.key = key;
-	}
+  public PerlValueRequestDescriptor(int offset, int limit, String key) {
+    this.offset = offset;
+    this.limit = limit;
+    this.key = key;
+  }
 }

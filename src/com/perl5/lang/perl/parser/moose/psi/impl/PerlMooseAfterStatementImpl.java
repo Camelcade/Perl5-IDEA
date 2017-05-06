@@ -22,10 +22,8 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseAfterStatement;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseAfterStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAfterStatement
-{
-	public PerlMooseAfterStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseAfterStatementImpl extends PerlMooseMethodModifierImpl implements PerlMooseAfterStatement {
+  public PerlMooseAfterStatementImpl(ASTNode node) {
+    super(node);
+  }
 }

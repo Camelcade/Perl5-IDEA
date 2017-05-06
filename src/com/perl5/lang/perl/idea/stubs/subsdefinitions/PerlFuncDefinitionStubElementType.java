@@ -25,23 +25,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElementType
-{
-	public PerlFuncDefinitionStubElementType(String name)
-	{
-		super(name);
-	}
+public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElementType {
+  public PerlFuncDefinitionStubElementType(String name) {
+    super(name);
+  }
 
-	@Override
-	public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new PsiPerlFuncDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new PsiPerlFuncDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new PsiPerlFuncDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PsiPerlFuncDefinitionImpl(node);
+  }
 }

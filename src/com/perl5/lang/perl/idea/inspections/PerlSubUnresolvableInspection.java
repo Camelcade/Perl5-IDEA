@@ -31,55 +31,46 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlSubUnresolvableInspection extends PerlInspection implements PerlElementPatterns
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitStringContentElement(@NotNull PerlStringContentElementImpl o)
-			{
-				if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o))
-				{
-					PsiReference reference = o.getReference();
-					if (reference == null || reference.resolve() == null)
-					{
-						registerProblem(holder, o, "Unable to find exported entity");
-					}
-				}
-				super.visitStringContentElement(o);
-			}
+public class PerlSubUnresolvableInspection extends PerlInspection implements PerlElementPatterns {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
+        if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o)) {
+          PsiReference reference = o.getReference();
+          if (reference == null || reference.resolve() == null) {
+            registerProblem(holder, o, "Unable to find exported entity");
+          }
+        }
+        super.visitStringContentElement(o);
+      }
 
-			@Override
-			public void visitPerlMethod(@NotNull PerlMethod o)
-			{
-				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				PerlSubNameElement subNameElement = o.getSubNameElement();
+      @Override
+      public void visitPerlMethod(@NotNull PerlMethod o) {
+        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
+        PerlSubNameElement subNameElement = o.getSubNameElement();
 
-				boolean hasExplicitNamespace = namespaceElement != null && !namespaceElement.isCORE();
+        boolean hasExplicitNamespace = namespaceElement != null && !namespaceElement.isCORE();
 
-				// fixme adjust built in checking to the file; Remove second condition after implementing annotations
-				if (subNameElement == null || (namespaceElement != null && namespaceElement.isBuiltin()) || (!hasExplicitNamespace && subNameElement.isBuiltIn()))
-				{
-					return;
-				}
+        // fixme adjust built in checking to the file; Remove second condition after implementing annotations
+        if (subNameElement == null ||
+            (namespaceElement != null && namespaceElement.isBuiltin()) ||
+            (!hasExplicitNamespace && subNameElement.isBuiltIn())) {
+          return;
+        }
 
-				for (PsiReference reference : subNameElement.getReferences())
-				{
-					if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference) reference).multiResolve(false).length > 0)
-					{
-						return;
-					}
-					else if (reference.resolve() != null)
-					{
-						return;
-					}
-				}
-				registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
-			}
-		};
-	}
+        for (PsiReference reference : subNameElement.getReferences()) {
+          if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length > 0) {
+            return;
+          }
+          else if (reference.resolve() != null) {
+            return;
+          }
+        }
+        registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
+      }
+    };
+  }
 }

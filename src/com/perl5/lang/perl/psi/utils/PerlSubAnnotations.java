@@ -30,145 +30,119 @@ import java.util.List;
 /**
  * Created by hurricup on 03.06.2015.
  */
-public class PerlSubAnnotations
-{
-	private static final byte IS_METHOD = 0x01;
-	private static final byte IS_DEPRECATED = 0x02;
-	private static final byte IS_ABSTRACT = 0x04;
-	private static final byte IS_OVERRIDE = 0x08;
+public class PerlSubAnnotations {
+  private static final byte IS_METHOD = 0x01;
+  private static final byte IS_DEPRECATED = 0x02;
+  private static final byte IS_ABSTRACT = 0x04;
+  private static final byte IS_OVERRIDE = 0x08;
 
-	private byte myFlags = 0;
-	private PerlReturnType myReturnType = PerlReturnType.VALUE;
-	private String myReturns = null;
+  private byte myFlags = 0;
+  private PerlReturnType myReturnType = PerlReturnType.VALUE;
+  private String myReturns = null;
 
-	public PerlSubAnnotations()
-	{
-	}
+  public PerlSubAnnotations() {
+  }
 
-	public PerlSubAnnotations(byte flags, String returns, PerlReturnType returnType)
-	{
-		myFlags = flags;
-		myReturnType = returnType;
-		myReturns = returns;
-	}
+  public PerlSubAnnotations(byte flags, String returns, PerlReturnType returnType) {
+    myFlags = flags;
+    myReturnType = returnType;
+    myReturns = returns;
+  }
 
-	public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		return new PerlSubAnnotations(
-				dataStream.readByte(),
-				PerlStubSerializationUtil.readNullableString(dataStream),
-				PerlReturnType.deserialize(dataStream)
-		);
-	}
+  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeByte(myFlags);
+    dataStream.writeName(myReturns);
+    myReturnType.serialize(dataStream);
+  }
 
-	@Nullable
-	public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
-	{
-		if (annotations.isEmpty())
-		{
-			return null;
-		}
+  public boolean isMethod() {
+    return (myFlags & IS_METHOD) == IS_METHOD;
+  }
 
-		PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+  public void setIsMethod() {
+    myFlags |= IS_METHOD;
+  }
 
-		for (PerlAnnotation annotation : annotations)
-		{
-			if (annotation instanceof PsiPerlAnnotationAbstract)
-			{
-				myAnnotations.setIsAbstract();
-			}
-			else if (annotation instanceof PsiPerlAnnotationDeprecated)
-			{
-				myAnnotations.setIsDeprecated();
-			}
-			else if (annotation instanceof PsiPerlAnnotationMethod)
-			{
-				myAnnotations.setIsMethod();
-			}
-			else if (annotation instanceof PsiPerlAnnotationOverride)
-			{
-				myAnnotations.setIsOverride();
-			}
-			else if (annotation instanceof PsiPerlAnnotationReturns) // returns
-			{
-				PsiElement possibleNamespace = annotation.getLastChild();
-				if (possibleNamespace instanceof PerlNamespaceElement)
-				{
-					myAnnotations.setReturns(((PerlNamespaceElement) possibleNamespace).getCanonicalName());
-					myAnnotations.setReturnType(PerlReturnType.REF);
-					// todo implement brackets and braces
-				}
-			}
-		}
+  public boolean isDeprecated() {
+    return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
+  }
 
-		return myAnnotations;
-	}
+  public void setIsDeprecated() {
+    myFlags |= IS_DEPRECATED;
+  }
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeByte(myFlags);
-		dataStream.writeName(myReturns);
-		myReturnType.serialize(dataStream);
-	}
+  public boolean isAbstract() {
+    return (myFlags & IS_ABSTRACT) == IS_ABSTRACT;
+  }
 
-	public boolean isMethod()
-	{
-		return (myFlags & IS_METHOD) == IS_METHOD;
-	}
+  public void setIsAbstract() {
+    myFlags |= IS_ABSTRACT;
+  }
 
-	public void setIsMethod()
-	{
-		myFlags |= IS_METHOD;
-	}
+  public boolean isOverride() {
+    return (myFlags & IS_OVERRIDE) == IS_OVERRIDE;
+  }
 
-	public boolean isDeprecated()
-	{
-		return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
-	}
+  public void setIsOverride() {
+    myFlags |= IS_OVERRIDE;
+  }
 
-	public void setIsDeprecated()
-	{
-		myFlags |= IS_DEPRECATED;
-	}
+  public String getReturns() {
+    return myReturns;
+  }
 
-	public boolean isAbstract()
-	{
-		return (myFlags & IS_ABSTRACT) == IS_ABSTRACT;
-	}
+  public void setReturns(String returns) {
+    this.myReturns = returns;
+  }
 
-	public void setIsAbstract()
-	{
-		myFlags |= IS_ABSTRACT;
-	}
+  public PerlReturnType getReturnType() {
+    return myReturnType;
+  }
 
-	public boolean isOverride()
-	{
-		return (myFlags & IS_OVERRIDE) == IS_OVERRIDE;
-	}
+  public void setReturnType(PerlReturnType returnType) {
+    this.myReturnType = returnType;
+  }
 
-	public void setIsOverride()
-	{
-		myFlags |= IS_OVERRIDE;
-	}
+  public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
+    return new PerlSubAnnotations(
+      dataStream.readByte(),
+      PerlStubSerializationUtil.readNullableString(dataStream),
+      PerlReturnType.deserialize(dataStream)
+    );
+  }
 
-	public String getReturns()
-	{
-		return myReturns;
-	}
+  @Nullable
+  public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+    if (annotations.isEmpty()) {
+      return null;
+    }
 
-	public void setReturns(String returns)
-	{
-		this.myReturns = returns;
-	}
+    PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
 
-	public PerlReturnType getReturnType()
-	{
-		return myReturnType;
-	}
+    for (PerlAnnotation annotation : annotations) {
+      if (annotation instanceof PsiPerlAnnotationAbstract) {
+        myAnnotations.setIsAbstract();
+      }
+      else if (annotation instanceof PsiPerlAnnotationDeprecated) {
+        myAnnotations.setIsDeprecated();
+      }
+      else if (annotation instanceof PsiPerlAnnotationMethod) {
+        myAnnotations.setIsMethod();
+      }
+      else if (annotation instanceof PsiPerlAnnotationOverride) {
+        myAnnotations.setIsOverride();
+      }
+      else if (annotation instanceof PsiPerlAnnotationReturns) // returns
+      {
+        PsiElement possibleNamespace = annotation.getLastChild();
+        if (possibleNamespace instanceof PerlNamespaceElement) {
+          myAnnotations.setReturns(((PerlNamespaceElement)possibleNamespace).getCanonicalName());
+          myAnnotations.setReturnType(PerlReturnType.REF);
+          // todo implement brackets and braces
+        }
+      }
+    }
 
-	public void setReturnType(PerlReturnType returnType)
-	{
-		this.myReturnType = returnType;
-	}
-
+    return myAnnotations;
+  }
 }

@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 20.04.2016.
  */
-public interface PerlAnnotation extends PsiElement
-{
+public interface PerlAnnotation extends PsiElement {
 }

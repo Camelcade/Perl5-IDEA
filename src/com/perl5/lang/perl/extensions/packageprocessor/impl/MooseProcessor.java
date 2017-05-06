@@ -29,56 +29,48 @@ import java.util.List;
  * Created by hurricup on 25.11.2015.
  */
 public class MooseProcessor extends PerlPackageProcessorBase implements
-		PerlStrictProvider,
-		PerlWarningsProvider,
-		PerlPackageParentsProvider,
-		PerlPackageLoader
-{
-	public static final String MOOSE_OBJECT = "Moose::Object";
-	protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);
-	protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+                                                             PerlStrictProvider,
+                                                             PerlWarningsProvider,
+                                                             PerlPackageParentsProvider,
+                                                             PerlPackageLoader {
+  public static final String MOOSE_OBJECT = "Moose::Object";
+  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);
+  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
 
-	@NotNull
-	@Override
-	public List<String> getLoadedPackageNames(PerlUseStatement useStatement)
-	{
-		return getLoadedClasses();
-	}
+  @NotNull
+  @Override
+  public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
+    return getLoadedClasses();
+  }
 
-	@Override
-	public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList)
-	{
-		currentList.clear();
-		currentList.addAll(getParentClasses());
-	}
+  @Override
+  public void changeParentsList(@NotNull PerlUseStatement useStatement, @NotNull List<String> currentList) {
+    currentList.clear();
+    currentList.addAll(getParentClasses());
+  }
 
-	@Override
-	public boolean hasPackageFilesOptions()
-	{
-		return false;
-	}
+  @Override
+  public boolean hasPackageFilesOptions() {
+    return false;
+  }
 
-	@Override
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	public List<String> getLoadedClasses()
-	{
-		return LOADED_CLASSES;
-	}
+  public List<String> getLoadedClasses() {
+    return LOADED_CLASSES;
+  }
 
-	public List<String> getParentClasses()
-	{
-		return PARENT_CLASSES;
-	}
+  public List<String> getParentClasses() {
+    return PARENT_CLASSES;
+  }
 }

@@ -22,11 +22,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class TemplateToolkitRecursiveVisitor extends TemplateToolkitVisitor
-{
-	@Override
-	public void visitElement(@NotNull PsiElement element)
-	{
-		element.acceptChildren(this);
-	}
+public class TemplateToolkitRecursiveVisitor extends TemplateToolkitVisitor {
+  @Override
+  public void visitElement(@NotNull PsiElement element) {
+    element.acceptChildren(this);
+  }
 }

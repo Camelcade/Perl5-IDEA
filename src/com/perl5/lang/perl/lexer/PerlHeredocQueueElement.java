@@ -21,24 +21,20 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by hurricup on 01.03.2016.
  */
-public class PerlHeredocQueueElement
-{
-	private final IElementType myTargetElement;
-	private final CharSequence myMarker;
+public class PerlHeredocQueueElement {
+  private final IElementType myTargetElement;
+  private final CharSequence myMarker;
 
-	public PerlHeredocQueueElement(IElementType targetElement, CharSequence marker)
-	{
-		myTargetElement = targetElement;
-		myMarker = marker;
-	}
+  public PerlHeredocQueueElement(IElementType targetElement, CharSequence marker) {
+    myTargetElement = targetElement;
+    myMarker = marker;
+  }
 
-	public IElementType getTargetElement()
-	{
-		return myTargetElement;
-	}
+  public IElementType getTargetElement() {
+    return myTargetElement;
+  }
 
-	public CharSequence getMarker()
-	{
-		return myMarker;
-	}
+  public CharSequence getMarker() {
+    return myMarker;
+  }
 }

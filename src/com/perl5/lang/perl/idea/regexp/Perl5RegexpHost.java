@@ -27,77 +27,65 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpHost implements RegExpLanguageHost
-{
-	private static final DefaultRegExpPropertiesProvider PROPERTIES_PROVIDER = DefaultRegExpPropertiesProvider.getInstance();
+public class Perl5RegexpHost implements RegExpLanguageHost {
+  private static final DefaultRegExpPropertiesProvider PROPERTIES_PROVIDER = DefaultRegExpPropertiesProvider.getInstance();
 
-	@Override
-	public boolean characterNeedsEscaping(char c)
-	{
-		return false;
-	}
+  @Override
+  public boolean characterNeedsEscaping(char c) {
+    return false;
+  }
 
-	@Override
-	public boolean supportsPerl5EmbeddedComments()
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsPerl5EmbeddedComments() {
+    return false;
+  }
 
-	@Override
-	public boolean supportsPossessiveQuantifiers()
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsPossessiveQuantifiers() {
+    return false;
+  }
 
-	@Override
-	public boolean supportsPythonConditionalRefs()
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsPythonConditionalRefs() {
+    return false;
+  }
 
-	@Override
-	public boolean supportsNamedGroupSyntax(RegExpGroup group)
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsNamedGroupSyntax(RegExpGroup group) {
+    return false;
+  }
 
-	@Override
-	public boolean supportsNamedGroupRefSyntax(RegExpNamedGroupRef ref)
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsNamedGroupRefSyntax(RegExpNamedGroupRef ref) {
+    return false;
+  }
 
-	@Override
-	public boolean supportsExtendedHexCharacter(RegExpChar regExpChar)
-	{
-		return false;
-	}
+  @Override
+  public boolean supportsExtendedHexCharacter(RegExpChar regExpChar) {
+    return false;
+  }
 
-	@Override
-	public boolean isValidCategory(@NotNull String category)
-	{
-		return PROPERTIES_PROVIDER.isValidCategory(category);
-	}
+  @Override
+  public boolean isValidCategory(@NotNull String category) {
+    return PROPERTIES_PROVIDER.isValidCategory(category);
+  }
 
-	@NotNull
-	@Override
-	public String[][] getAllKnownProperties()
-	{
-		// todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
-		return PROPERTIES_PROVIDER.getAllKnownProperties();
-	}
+  @NotNull
+  @Override
+  public String[][] getAllKnownProperties() {
+    // todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
+    return PROPERTIES_PROVIDER.getAllKnownProperties();
+  }
 
-	@Nullable
-	@Override
-	public String getPropertyDescription(@Nullable String name)
-	{
-		return PROPERTIES_PROVIDER.getPropertyDescription(name);
-	}
+  @Nullable
+  @Override
+  public String getPropertyDescription(@Nullable String name) {
+    return PROPERTIES_PROVIDER.getPropertyDescription(name);
+  }
 
-	@NotNull
-	@Override
-	public String[][] getKnownCharacterClasses()
-	{
-		return PROPERTIES_PROVIDER.getKnownCharacterClasses();
-	}
+  @NotNull
+  @Override
+  public String[][] getKnownCharacterClasses() {
+    return PROPERTIES_PROVIDER.getKnownCharacterClasses();
+  }
 }

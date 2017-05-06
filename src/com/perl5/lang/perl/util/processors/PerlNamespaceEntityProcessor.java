@@ -19,7 +19,6 @@ package com.perl5.lang.perl.util.processors;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public abstract class PerlNamespaceEntityProcessor<T>
-{
-	public abstract boolean process(String namespaceName, T entity);
+public abstract class PerlNamespaceEntityProcessor<T> {
+  public abstract boolean process(String namespaceName, T entity);
 }

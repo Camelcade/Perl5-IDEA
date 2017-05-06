@@ -31,31 +31,27 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 23.05.2015.
  * This class is responsible for controlling refactoring process
  */
-public class PerlRefactoringSupportProvider extends RefactoringSupportProvider
-{
-	// todo RenameInputValidator
-	@Override
-	public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
-	{
-		SearchScope useScope = element.getUseScope();
-		return useScope instanceof LocalSearchScope
-				&& element instanceof PsiNameIdentifierOwner
-				&& !(element instanceof PerlRenameUsagesSubstitutor)
-				&& !(((PsiNameIdentifierOwner) element).getNameIdentifier() instanceof PerlStringContentElement)
-				&& element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
-				&& !(((LocalSearchScope) useScope).getScope()[0] instanceof PsiFile)
-				;
-	}
+public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
+  // todo RenameInputValidator
+  @Override
+  public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+    SearchScope useScope = element.getUseScope();
+    return useScope instanceof LocalSearchScope
+           && element instanceof PsiNameIdentifierOwner
+           && !(element instanceof PerlRenameUsagesSubstitutor)
+           && !(((PsiNameIdentifierOwner)element).getNameIdentifier() instanceof PerlStringContentElement)
+           && element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
+           && !(((LocalSearchScope)useScope).getScope()[0] instanceof PsiFile)
+      ;
+  }
 
-	@Override
-	public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context)
-	{
-		return false;
-	}
+  @Override
+  public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+    return false;
+  }
 
-	@Override
-	public boolean isSafeDeleteAvailable(@NotNull PsiElement element)
-	{
-		return false;
-	}
+  @Override
+  public boolean isSafeDeleteAvailable(@NotNull PsiElement element) {
+    return false;
+  }
 }

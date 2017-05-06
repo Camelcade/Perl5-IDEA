@@ -33,68 +33,55 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 11.10.2015.
  */
-public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightActionHandler, PerlElementTypes
-{
-	@Override
-	public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file)
-	{
-		PsiElement currentElement = getCurrentElement(editor, file);
-		if (currentElement == null)
-		{
-			return;
-		}
+public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightActionHandler, PerlElementTypes {
+  @Override
+  public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    PsiElement currentElement = getCurrentElement(editor, file);
+    if (currentElement == null) {
+      return;
+    }
 
-		while (true)
-		{
-			if (currentElement instanceof PsiFile || currentElement == null || currentElement.getParent() instanceof PsiFile)
-			{
-				return;
-			}
+    while (true) {
+      if (currentElement instanceof PsiFile || currentElement == null || currentElement.getParent() instanceof PsiFile) {
+        return;
+      }
 
-			PsiElement parent = currentElement.getParent();
-			if (parent instanceof PsiPerlNamespaceContent || parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinition)
-			{
-				while (currentElement != null && (currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl))
-				{
-					currentElement = currentElement.getNextSibling();
-				}
+      PsiElement parent = currentElement.getParent();
+      if (parent instanceof PsiPerlNamespaceContent ||
+          parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinition) {
+        while (currentElement != null && (currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl)) {
+          currentElement = currentElement.getNextSibling();
+        }
 
-				if (currentElement != null)
-				{
-					generateAfterElement(currentElement, editor, file);
-				}
-				return;
-			}
-			else
-			{
-				currentElement = currentElement.getParent();
-			}
-		}
+        if (currentElement != null) {
+          generateAfterElement(currentElement, editor, file);
+        }
+        return;
+      }
+      else {
+        currentElement = currentElement.getParent();
+      }
+    }
+  }
 
-	}
+  protected abstract void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file);
 
-	protected abstract void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file);
+  protected PsiElement getCurrentElement(Editor editor, PsiFile file) {
+    Caret currentCaret = editor.getCaretModel().getCurrentCaret();
+    // look for current element
+    int currentOffset = currentCaret.getOffset();
+    PsiElement currentElement = file.findElementAt(currentOffset);
 
-	protected PsiElement getCurrentElement(Editor editor, PsiFile file)
-	{
-		Caret currentCaret = editor.getCaretModel().getCurrentCaret();
-		// look for current element
-		int currentOffset = currentCaret.getOffset();
-		PsiElement currentElement = file.findElementAt(currentOffset);
+    if (currentElement == null) {
+      currentOffset--;
+      currentElement = file.findElementAt(currentOffset);
+    }
 
-		if (currentElement == null)
-		{
-			currentOffset--;
-			currentElement = file.findElementAt(currentOffset);
-		}
+    return currentElement;
+  }
 
-		return currentElement;
-	}
-
-	@Override
-	public boolean startInWriteAction()
-	{
-		return false;
-	}
-
+  @Override
+  public boolean startInWriteAction() {
+    return false;
+  }
 }

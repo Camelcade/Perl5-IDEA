@@ -26,17 +26,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.12.2015.
  */
-public class MasonTemplatingElementType extends MasonTemplatingTokenType implements PsiElementProvider
-{
-	public MasonTemplatingElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public class MasonTemplatingElementType extends MasonTemplatingTokenType implements PsiElementProvider {
+  public MasonTemplatingElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new ASTWrapperPsiElement(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new ASTWrapperPsiElement(node);
+  }
 }

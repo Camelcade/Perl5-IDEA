@@ -45,117 +45,99 @@ import java.util.List;
  * @see com.intellij.execution.ui.AlternativeJREPanel
  * @since 17-Sep-15
  */
-public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor
-{
-	private final ComponentWithBrowseButton<TextFieldWithHistory> myPathField;
-	private final JBCheckBox myCbEnabled;
-	private final TextFieldWithHistory myFieldWithHistory;
-	private JComponent myAnchor;
+public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
+  private final ComponentWithBrowseButton<TextFieldWithHistory> myPathField;
+  private final JBCheckBox myCbEnabled;
+  private final TextFieldWithHistory myFieldWithHistory;
+  private JComponent myAnchor;
 
-	public PerlAlternativeSdkPanel()
-	{
-		myCbEnabled = new JBCheckBox("Use alternative Perl");
+  public PerlAlternativeSdkPanel() {
+    myCbEnabled = new JBCheckBox("Use alternative Perl");
 
-		myFieldWithHistory = new TextFieldWithHistory();
-		myFieldWithHistory.setHistorySize(-1);
-		final ArrayList<String> foundSdks = new ArrayList<String>();
-		final List<Sdk> perlSdks = ProjectJdkTable.getInstance().getSdksOfType(PerlSdkType.getInstance());
+    myFieldWithHistory = new TextFieldWithHistory();
+    myFieldWithHistory.setHistorySize(-1);
+    final ArrayList<String> foundSdks = new ArrayList<String>();
+    final List<Sdk> perlSdks = ProjectJdkTable.getInstance().getSdksOfType(PerlSdkType.getInstance());
 
-		for (Sdk sdk : perlSdks)
-		{
-			if (sdk.getSdkType() == PerlSdkType.getInstance())
-			{
-				foundSdks.add(sdk.getName());
-			}
-		}
+    for (Sdk sdk : perlSdks) {
+      if (sdk.getSdkType() == PerlSdkType.getInstance()) {
+        foundSdks.add(sdk.getName());
+      }
+    }
 
-		for (Sdk sdk : perlSdks)
-		{
-			String homePath = sdk.getHomePath();
+    for (Sdk sdk : perlSdks) {
+      String homePath = sdk.getHomePath();
 
-			if (!foundSdks.contains(homePath))
-			{
-				foundSdks.add(homePath);
-			}
-		}
-		myFieldWithHistory.setHistory(foundSdks);
-		myPathField = new ComponentWithBrowseButton<TextFieldWithHistory>(myFieldWithHistory, null);
-		myPathField.addBrowseFolderListener("Select Perl",
-				"Select Perl SDK",
-				null, new FileChooserDescriptor(false, true, false, false, false, false)
-				{
-					@Override
-					public boolean isFileSelectable(VirtualFile file)
-					{
-						return super.isFileSelectable(file) && PerlSdkType.getInstance().isValidSdkHome(file.getPath());
-					}
-				},
-				TextComponentAccessor.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);
+      if (!foundSdks.contains(homePath)) {
+        foundSdks.add(homePath);
+      }
+    }
+    myFieldWithHistory.setHistory(foundSdks);
+    myPathField = new ComponentWithBrowseButton<TextFieldWithHistory>(myFieldWithHistory, null);
+    myPathField.addBrowseFolderListener("Select Perl",
+                                        "Select Perl SDK",
+                                        null, new FileChooserDescriptor(false, true, false, false, false, false) {
+        @Override
+        public boolean isFileSelectable(VirtualFile file) {
+          return super.isFileSelectable(file) && PerlSdkType.getInstance().isValidSdkHome(file.getPath());
+        }
+      },
+                                        TextComponentAccessor.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);
 
-		setLayout(new MigLayout("ins 0, gap 10, fill, flowx"));
-		add(myCbEnabled, "shrinkx");
-		add(myPathField, "growx, pushx");
+    setLayout(new MigLayout("ins 0, gap 10, fill, flowx"));
+    add(myCbEnabled, "shrinkx");
+    add(myPathField, "growx, pushx");
 
-		InsertPathAction.addTo(myFieldWithHistory.getTextEditor());
+    InsertPathAction.addTo(myFieldWithHistory.getTextEditor());
 
-		myCbEnabled.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				enabledChanged();
-			}
-		});
-		enabledChanged();
+    myCbEnabled.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        enabledChanged();
+      }
+    });
+    enabledChanged();
 
-		setAnchor(myCbEnabled);
+    setAnchor(myCbEnabled);
 
-		updateUI();
-	}
+    updateUI();
+  }
 
-	private void enabledChanged()
-	{
-		final boolean pathEnabled = isPathEnabled();
-		GuiUtils.enableChildren(myPathField, pathEnabled);
-		myFieldWithHistory.invalidate(); //need to revalidate inner component
-	}
+  private void enabledChanged() {
+    final boolean pathEnabled = isPathEnabled();
+    GuiUtils.enableChildren(myPathField, pathEnabled);
+    myFieldWithHistory.invalidate(); //need to revalidate inner component
+  }
 
-	public String getPath()
-	{
-		return FileUtil.toSystemIndependentName(myPathField.getChildComponent().getText().trim());
-	}
+  public String getPath() {
+    return FileUtil.toSystemIndependentName(myPathField.getChildComponent().getText().trim());
+  }
 
-	private void setPath(@Nullable String path)
-	{
-		myPathField.getChildComponent().setText(StringUtil.notNullize(PathUtil.toSystemDependentName(path)));
-	}
+  private void setPath(@Nullable String path) {
+    myPathField.getChildComponent().setText(StringUtil.notNullize(PathUtil.toSystemDependentName(path)));
+  }
 
-	public boolean isPathEnabled()
-	{
-		return myCbEnabled.isSelected();
-	}
+  public boolean isPathEnabled() {
+    return myCbEnabled.isSelected();
+  }
 
-	private void setPathEnabled(boolean b)
-	{
-		myCbEnabled.setSelected(b);
-		enabledChanged();
-	}
+  private void setPathEnabled(boolean b) {
+    myCbEnabled.setSelected(b);
+    enabledChanged();
+  }
 
-	public void reset(@Nullable String path, boolean isEnabled)
-	{
-		setPathEnabled(isEnabled);
-		setPath(path);
-	}
+  public void reset(@Nullable String path, boolean isEnabled) {
+    setPathEnabled(isEnabled);
+    setPath(path);
+  }
 
-	@Override
-	public JComponent getAnchor()
-	{
-		return myAnchor;
-	}
+  @Override
+  public JComponent getAnchor() {
+    return myAnchor;
+  }
 
-	@Override
-	public void setAnchor(JComponent anchor)
-	{
-		myAnchor = anchor;
-		myCbEnabled.setAnchor(anchor);
-	}
+  @Override
+  public void setAnchor(JComponent anchor) {
+    myAnchor = anchor;
+    myCbEnabled.setAnchor(anchor);
+  }
 }

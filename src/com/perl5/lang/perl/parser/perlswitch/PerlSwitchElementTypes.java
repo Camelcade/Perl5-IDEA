@@ -27,54 +27,43 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public interface PerlSwitchElementTypes
-{
-	IElementType RESERVED_SWITCH = new PerlTokenType("switch");
-	IElementType RESERVED_CASE = new PerlTokenType("case");
+public interface PerlSwitchElementTypes {
+  IElementType RESERVED_SWITCH = new PerlTokenType("switch");
+  IElementType RESERVED_CASE = new PerlTokenType("case");
 
-	IElementType SWITCH_COMPOUND = new PerlElementTypeEx("SWITCH_COMPOUND")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlSwitchCompoundStatementImpl(node);
-		}
-	};
-	IElementType SWITCH_CONDITION = new PerlElementTypeEx("SWITCH_CONDITION")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlSwitchConditionImpl(node);
-		}
-	};
-	IElementType CASE_COMPOUND = new PerlElementTypeEx("CASE_COMPOUND")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlCaseCompoundStatementImpl(node);
-		}
-	};
-	IElementType CASE_DEFAULT = new PerlElementTypeEx("CASE_DEFAULT")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlCaseDefaultCompoundImpl(node);
-		}
-	};
-	IElementType CASE_CONDITION = new PerlElementTypeEx("CASE_CONDITION")
-	{
-		@NotNull
-		@Override
-		public PsiElement getPsiElement(@NotNull ASTNode node)
-		{
-			return new PerlCaseConditionImpl(node);
-		}
-	};
+  IElementType SWITCH_COMPOUND = new PerlElementTypeEx("SWITCH_COMPOUND") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlSwitchCompoundStatementImpl(node);
+    }
+  };
+  IElementType SWITCH_CONDITION = new PerlElementTypeEx("SWITCH_CONDITION") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlSwitchConditionImpl(node);
+    }
+  };
+  IElementType CASE_COMPOUND = new PerlElementTypeEx("CASE_COMPOUND") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlCaseCompoundStatementImpl(node);
+    }
+  };
+  IElementType CASE_DEFAULT = new PerlElementTypeEx("CASE_DEFAULT") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlCaseDefaultCompoundImpl(node);
+    }
+  };
+  IElementType CASE_CONDITION = new PerlElementTypeEx("CASE_CONDITION") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlCaseConditionImpl(node);
+    }
+  };
 }

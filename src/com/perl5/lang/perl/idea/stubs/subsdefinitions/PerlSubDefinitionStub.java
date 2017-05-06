@@ -25,12 +25,11 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlSubDefinitionStub extends PerlSubBaseStub<PerlSubDefinitionBase>
-{
-	/**
-	 * Returns list of accepted arguments
-	 *
-	 * @return list of accepted arguments
-	 */
-	public List<PerlSubArgument> getSubArgumentsList();
+public interface PerlSubDefinitionStub extends PerlSubBaseStub<PerlSubDefinitionBase> {
+  /**
+   * Returns list of accepted arguments
+   *
+   * @return list of accepted arguments
+   */
+  public List<PerlSubArgument> getSubArgumentsList();
 }

@@ -25,26 +25,21 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 /**
  * Created by hurricup on 18.07.2015.
  */
-public class PerlVariableLexicalUnusedInspection extends PerlVariableDeclarationInspection
-{
-	@Override
-	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
-	{
-		if (variableDeclarationWrapper.isLexicalDeclaration() &&
-				!variableDeclarationWrapper.isLocalDeclaration()
-				)
-		{
-			if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null)
-			{
-				PerlVariable variable = variableDeclarationWrapper.getVariable();
-				if (variable != null)
-				{
-					holder.registerProblem(
-							variable,
-							"Unused lexical variable:" + variable.getText(),
-							ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-				}
-			}
-		}
-	}
+public class PerlVariableLexicalUnusedInspection extends PerlVariableDeclarationInspection {
+  @Override
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+    if (variableDeclarationWrapper.isLexicalDeclaration() &&
+        !variableDeclarationWrapper.isLocalDeclaration()
+      ) {
+      if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null) {
+        PerlVariable variable = variableDeclarationWrapper.getVariable();
+        if (variable != null) {
+          holder.registerProblem(
+            variable,
+            "Unused lexical variable:" + variable.getText(),
+            ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+        }
+      }
+    }
+  }
 }

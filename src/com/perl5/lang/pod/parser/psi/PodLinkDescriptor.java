@@ -27,216 +27,178 @@ import java.util.regex.Pattern;
  * Created by hurricup on 27.03.2016.
  * Builds pod link from the string
  */
-public class PodLinkDescriptor
-{
-	private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
-	private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"(.*?)\"|(.*?)");
-	private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\s*\\|\\s*)?");
-	private static final Pattern URL_PATTERN = Pattern.compile(
-			EXPLICIT_TITLE_PATTERN +
-					"(\\w+:[^:\\s]\\S*)"
-	);
-	private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
-			EXPLICIT_TITLE_PATTERN +    // title
-					"(?:(?<!/)" + FILE_IDENTIFIER_PATTERN + "(?=$|/))?" +        // file
-					"(?:/?(?:" + IDENTIFIER_PATTERN + "))?"    // section
-	);
+public class PodLinkDescriptor {
+  private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
+  private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"(.*?)\"|(.*?)");
+  private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\s*\\|\\s*)?");
+  private static final Pattern URL_PATTERN = Pattern.compile(
+    EXPLICIT_TITLE_PATTERN +
+    "(\\w+:[^:\\s]\\S*)"
+  );
+  private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
+    EXPLICIT_TITLE_PATTERN +    // title
+    "(?:(?<!/)" + FILE_IDENTIFIER_PATTERN + "(?=$|/))?" +        // file
+    "(?:/?(?:" + IDENTIFIER_PATTERN + "))?"    // section
+  );
 
-	private final String myOriginal;
-	private String myFileId;
-	private String myEnforcedFileId;
-	private String mySection;
-	private String myTitle;
-	private int myTitleOffset;
-	private int myFileIdOffset;
-	private int mySectionOffset;
-	private boolean myIsUrl;
+  private final String myOriginal;
+  private String myFileId;
+  private String myEnforcedFileId;
+  private String mySection;
+  private String myTitle;
+  private int myTitleOffset;
+  private int myFileIdOffset;
+  private int mySectionOffset;
+  private boolean myIsUrl;
 
-	private PodLinkDescriptor(String link)
-	{
-		myOriginal = link;
-	}
+  private PodLinkDescriptor(String link) {
+    myOriginal = link;
+  }
 
-	@Nullable
-	public static PodLinkDescriptor getDescriptor(String link)
-	{
-		link = link.replace('\n', ' ');
-		PodLinkDescriptor descriptor = new PodLinkDescriptor(link);
-		Matcher m;
-		if ((m = URL_PATTERN.matcher(link)).matches())
-		{
-			descriptor.setTitle(m);
+  @Override
+  public String toString() {
+    return super.toString() + myOriginal;
+  }
 
-			descriptor.setFileId(m.group(3), m.start(3));
-			descriptor.setUrl(true);
+  public String getFileId() {
+    return myFileId;
+  }
 
-			return descriptor;
-		}
-		else if ((m = NAMED_ELEMENT_PATTERN.matcher(link)).matches())
-		{
-			descriptor.setTitle(m);
+  public void setFileId(String fileId, int startOffset) {
+    myFileId = StringUtil.isEmpty(fileId) ? null : fileId;
+    if (myFileId != null) {
+      myFileIdOffset = startOffset;
+    }
+  }
 
-			if (m.group(3) != null)
-			{
-				descriptor.setFileId(m.group(3), m.start(3));
-			}
+  public String getSection() {
+    return mySection;
+  }
 
-			if (m.group(4) != null)
-			{
-				descriptor.setSection(m.group(4), m.start(4));
-			}
-			else if (m.group(5) != null)
-			{
-				descriptor.setSection(m.group(5), m.start(5));
-			}
+  public void setSection(String mySection, int startOffset) {
+    this.mySection = StringUtil.isEmpty(mySection) ? null : mySection;
+    if (this.mySection != null) {
+      mySectionOffset = startOffset;
+    }
+  }
 
-			return descriptor;
-		}
-		System.err.println("Unable to parse: " + link);
-		return null;
-	}
+  public String getTitle() {
+    return myTitle == null ? getInferredTitle() : myTitle;
+  }
 
-	@Override
-	public String toString()
-	{
-		return super.toString() + myOriginal;
-	}
+  private void setTitle(Matcher m) {
+    if (m.group(1) != null) {
+      setTitle(m.group(1), m.start(1));
+    }
+    else if (m.group(2) != null) {
+      setTitle(m.group(2), m.start(2));
+    }
+  }
 
-	public String getFileId()
-	{
-		return myFileId;
-	}
+  public void setTitle(String myTitle, int startOffset) {
+    this.myTitle = StringUtil.isEmpty(myTitle) ? null : myTitle;
+    if (this.myTitle != null) {
+      myTitleOffset = startOffset;
+    }
+  }
 
-	public void setFileId(String fileId, int startOffset)
-	{
-		myFileId = StringUtil.isEmpty(fileId) ? null : fileId;
-		if (myFileId != null)
-		{
-			myFileIdOffset = startOffset;
-		}
-	}
+  protected String getInferredTitle() {
+    if (getFileId() != null) {
+      if (getSection() != null) {
+        return getSection() + " in " + getFileId();
+      }
+      else {
+        return getFileId();
+      }
+    }
+    else if (getSection() != null) {
+      return getSection();
+    }
+    return "INCORRECTLY PARSED LINK, REPORT TO DEVS";
+  }
 
-	public String getSection()
-	{
-		return mySection;
-	}
+  public boolean isUrl() {
+    return myIsUrl;
+  }
 
-	public void setSection(String mySection, int startOffset)
-	{
-		this.mySection = StringUtil.isEmpty(mySection) ? null : mySection;
-		if (this.mySection != null)
-		{
-			mySectionOffset = startOffset;
-		}
-	}
+  public void setUrl(boolean url) {
+    myIsUrl = url;
+  }
 
-	public String getTitle()
-	{
-		return myTitle == null ? getInferredTitle() : myTitle;
-	}
+  public String getCanonicalUrl() {
+    if (isUrl()) {
+      return getFileId();
+    }
 
-	private void setTitle(Matcher m)
-	{
-		if (m.group(1) != null)
-		{
-			setTitle(m.group(1), m.start(1));
-		}
-		else if (m.group(2) != null)
-		{
-			setTitle(m.group(2), m.start(2));
-		}
-	}
+    StringBuilder url = new StringBuilder("");
+    if (getFileId() != null) {
+      url.append(getFileId());
+    }
+    else if (getEnforcedFileId() != null) {
+      url.append(getEnforcedFileId());
+    }
 
-	public void setTitle(String myTitle, int startOffset)
-	{
-		this.myTitle = StringUtil.isEmpty(myTitle) ? null : myTitle;
-		if (this.myTitle != null)
-		{
-			myTitleOffset = startOffset;
-		}
-	}
+    if (getSection() != null) {
+      url.append("/");
+      url.append(getSection());
+    }
 
-	protected String getInferredTitle()
-	{
-		if (getFileId() != null)
-		{
-			if (getSection() != null)
-			{
-				return getSection() + " in " + getFileId();
-			}
-			else
-			{
-				return getFileId();
-			}
-		}
-		else if (getSection() != null)
-		{
-			return getSection();
-		}
-		return "INCORRECTLY PARSED LINK, REPORT TO DEVS";
-	}
+    return url.toString();
+  }
 
-	public boolean isUrl()
-	{
-		return myIsUrl;
-	}
+  public String getEnforcedFileId() {
+    return myEnforcedFileId;
+  }
 
-	public void setUrl(boolean url)
-	{
-		myIsUrl = url;
-	}
+  public void setEnforcedFileId(String myEnforcedFileId) {
+    this.myEnforcedFileId = myEnforcedFileId;
+  }
 
-	public String getCanonicalUrl()
-	{
-		if (isUrl())
-		{
-			return getFileId();
-		}
+  @Nullable
+  public TextRange getTitleTextRangeInLink() {
+    return myTitle == null ? null : new TextRange(myTitleOffset, myTitleOffset + myTitle.length());
+  }
 
-		StringBuilder url = new StringBuilder("");
-		if (getFileId() != null)
-		{
-			url.append(getFileId());
-		}
-		else if (getEnforcedFileId() != null)
-		{
-			url.append(getEnforcedFileId());
-		}
+  @Nullable
+  public TextRange getFileIdTextRangeInLink() {
+    return myFileId == null ? null : new TextRange(myFileIdOffset, myFileIdOffset + myFileId.length());
+  }
 
-		if (getSection() != null)
-		{
-			url.append("/");
-			url.append(getSection());
-		}
+  @Nullable
+  public TextRange getSectionTextRangeInLink() {
+    return mySection == null ? null : new TextRange(mySectionOffset, mySectionOffset + mySection.length());
+  }
 
-		return url.toString();
-	}
+  @Nullable
+  public static PodLinkDescriptor getDescriptor(String link) {
+    link = link.replace('\n', ' ');
+    PodLinkDescriptor descriptor = new PodLinkDescriptor(link);
+    Matcher m;
+    if ((m = URL_PATTERN.matcher(link)).matches()) {
+      descriptor.setTitle(m);
 
-	public String getEnforcedFileId()
-	{
-		return myEnforcedFileId;
-	}
+      descriptor.setFileId(m.group(3), m.start(3));
+      descriptor.setUrl(true);
 
-	public void setEnforcedFileId(String myEnforcedFileId)
-	{
-		this.myEnforcedFileId = myEnforcedFileId;
-	}
+      return descriptor;
+    }
+    else if ((m = NAMED_ELEMENT_PATTERN.matcher(link)).matches()) {
+      descriptor.setTitle(m);
 
-	@Nullable
-	public TextRange getTitleTextRangeInLink()
-	{
-		return myTitle == null ? null : new TextRange(myTitleOffset, myTitleOffset + myTitle.length());
-	}
+      if (m.group(3) != null) {
+        descriptor.setFileId(m.group(3), m.start(3));
+      }
 
-	@Nullable
-	public TextRange getFileIdTextRangeInLink()
-	{
-		return myFileId == null ? null : new TextRange(myFileIdOffset, myFileIdOffset + myFileId.length());
-	}
+      if (m.group(4) != null) {
+        descriptor.setSection(m.group(4), m.start(4));
+      }
+      else if (m.group(5) != null) {
+        descriptor.setSection(m.group(5), m.start(5));
+      }
 
-	@Nullable
-	public TextRange getSectionTextRangeInLink()
-	{
-		return mySection == null ? null : new TextRange(mySectionOffset, mySectionOffset + mySection.length());
-	}
+      return descriptor;
+    }
+    System.err.println("Unable to parse: " + link);
+    return null;
+  }
 }

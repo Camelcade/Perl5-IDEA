@@ -23,11 +23,10 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFormatterL extends PsiElement, PodFormatter, PodSection
-{
-	@Nullable
-	PodLinkDescriptor getLinkDescriptor();
+public interface PodFormatterL extends PsiElement, PodFormatter, PodSection {
+  @Nullable
+  PodLinkDescriptor getLinkDescriptor();
 
-	@Nullable
-	PsiFile getTargetFile();
+  @Nullable
+  PsiFile getTargetFile();
 }

@@ -26,40 +26,35 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler implements MultiCharQuoteHandler, PerlElementTypes
-{
-	public static final TokenSet OPENING_QUOTES = TokenSet.create(
-			QUOTE_SINGLE_OPEN,
-			QUOTE_DOUBLE_OPEN,
-			QUOTE_TICK_OPEN
-	);
-	public static final TokenSet CLOSING_QUOTES = TokenSet.create(
-			QUOTE_SINGLE_CLOSE,
-			QUOTE_DOUBLE_CLOSE,
-			QUOTE_TICK_CLOSE
-	);
+public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler implements MultiCharQuoteHandler, PerlElementTypes {
+  public static final TokenSet OPENING_QUOTES = TokenSet.create(
+    QUOTE_SINGLE_OPEN,
+    QUOTE_DOUBLE_OPEN,
+    QUOTE_TICK_OPEN
+  );
+  public static final TokenSet CLOSING_QUOTES = TokenSet.create(
+    QUOTE_SINGLE_CLOSE,
+    QUOTE_DOUBLE_CLOSE,
+    QUOTE_TICK_CLOSE
+  );
 
-	public PerlQuoteHandler()
-	{
-		super(OPENING_QUOTES);
-	}
+  public PerlQuoteHandler() {
+    super(OPENING_QUOTES);
+  }
 
-	@Override
-	public boolean isClosingQuote(HighlighterIterator iterator, int offset)
-	{
-		return CLOSING_QUOTES.contains(iterator.getTokenType());
-	}
+  @Override
+  public boolean isClosingQuote(HighlighterIterator iterator, int offset) {
+    return CLOSING_QUOTES.contains(iterator.getTokenType());
+  }
 
-	@Override
-	public boolean isOpeningQuote(HighlighterIterator iterator, int offset)
-	{
-		return OPENING_QUOTES.contains(iterator.getTokenType());
-	}
+  @Override
+  public boolean isOpeningQuote(HighlighterIterator iterator, int offset) {
+    return OPENING_QUOTES.contains(iterator.getTokenType());
+  }
 
-	@Nullable
-	@Override
-	public CharSequence getClosingQuote(HighlighterIterator iterator, int offset)
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public CharSequence getClosingQuote(HighlighterIterator iterator, int offset) {
+    return null;
+  }
 }

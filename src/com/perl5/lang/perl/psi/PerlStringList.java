@@ -24,13 +24,12 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2016.
  */
-public interface PerlStringList extends PsiElement
-{
-	/**
-	 * Collects string contents
-	 *
-	 * @return list of strings
-	 */
-	@NotNull
-	List<String> getStringContents();
+public interface PerlStringList extends PsiElement {
+  /**
+   * Collects string contents
+   *
+   * @return list of strings
+   */
+  @NotNull
+  List<String> getStringContents();
 }

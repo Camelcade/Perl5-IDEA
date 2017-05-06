@@ -29,31 +29,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodElementDescriptionProvider implements ElementDescriptionProvider
-{
-	@Nullable
-	@Override
-	public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location)
-	{
-		if (element.getLanguage().isKindOf(PodLanguage.INSTANCE))
-		{
-			if (element instanceof PodCompositeElement)
-			{
-				if (location == UsageViewShortNameLocation.INSTANCE)
-				{
-					return ((PodCompositeElement) element).getUsageViewShortNameLocation();
-				}
-				else if (location == UsageViewLongNameLocation.INSTANCE)
-				{
-					return ((PodCompositeElement) element).getUsageViewLongNameLocation();
-				}
-				else if (location == UsageViewTypeLocation.INSTANCE)
-				{
-					return ((PodCompositeElement) element).getUsageViewTypeLocation();
-				}
-			}
-			System.err.println("Unresolved " + element + " in " + location);
-		}
-		return null;
-	}
+public class PodElementDescriptionProvider implements ElementDescriptionProvider {
+  @Nullable
+  @Override
+  public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
+    if (element.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+      if (element instanceof PodCompositeElement) {
+        if (location == UsageViewShortNameLocation.INSTANCE) {
+          return ((PodCompositeElement)element).getUsageViewShortNameLocation();
+        }
+        else if (location == UsageViewLongNameLocation.INSTANCE) {
+          return ((PodCompositeElement)element).getUsageViewLongNameLocation();
+        }
+        else if (location == UsageViewTypeLocation.INSTANCE) {
+          return ((PodCompositeElement)element).getUsageViewTypeLocation();
+        }
+      }
+      System.err.println("Unresolved " + element + " in " + location);
+    }
+    return null;
+  }
 }

@@ -23,20 +23,18 @@ import com.perl5.lang.pod.parser.PodElementPatterns;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PodCompletionContributor extends CompletionContributor implements PodElementPatterns
-{
-	public PodCompletionContributor()
-	{
-		extend(
-				CompletionType.BASIC,
-				LINK_IDENTIFIER,
-				new PodLinkCompletionProvider()
-		);
+public class PodCompletionContributor extends CompletionContributor implements PodElementPatterns {
+  public PodCompletionContributor() {
+    extend(
+      CompletionType.BASIC,
+      LINK_IDENTIFIER,
+      new PodLinkCompletionProvider()
+    );
 
-		extend(
-				CompletionType.BASIC,
-				TITLE_IDENTIFIER,
-				new PodTitleCompletionProvider()
-		);
-	}
+    extend(
+      CompletionType.BASIC,
+      TITLE_IDENTIFIER,
+      new PodTitleCompletionProvider()
+    );
+  }
 }

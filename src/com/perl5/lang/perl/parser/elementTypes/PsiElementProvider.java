@@ -23,14 +23,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.01.2016.
  */
-public interface PsiElementProvider
-{
-	/**
-	 * Instantiates PsiElement for this element type
-	 *
-	 * @param node node to wrap
-	 * @return PsiElement
-	 */
-	@NotNull
-	PsiElement getPsiElement(@NotNull ASTNode node);
+public interface PsiElementProvider {
+  /**
+   * Instantiates PsiElement for this element type
+   *
+   * @param node node to wrap
+   * @return PsiElement
+   */
+  @NotNull
+  PsiElement getPsiElement(@NotNull ASTNode node);
 }

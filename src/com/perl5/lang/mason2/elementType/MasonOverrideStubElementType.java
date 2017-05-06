@@ -28,23 +28,19 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementType
-{
-	public MasonOverrideStubElementType(String name)
-	{
-		super(name, Mason2TemplatingLanguage.INSTANCE);
-	}
+public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementType {
+  public MasonOverrideStubElementType(String name) {
+    super(name, Mason2TemplatingLanguage.INSTANCE);
+  }
 
-	@Override
-	public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub)
-	{
-		return new MasonOverrideDefinitionImpl(stub, this);
-	}
+  @Override
+  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+    return new MasonOverrideDefinitionImpl(stub, this);
+  }
 
-	@NotNull
-	@Override
-	public PsiElement getPsiElement(@NotNull ASTNode node)
-	{
-		return new MasonOverrideDefinitionImpl(node);
-	}
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new MasonOverrideDefinitionImpl(node);
+  }
 }

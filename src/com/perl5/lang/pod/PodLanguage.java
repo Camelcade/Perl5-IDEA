@@ -21,20 +21,16 @@ import com.intellij.lang.Language;
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodLanguage extends Language
-{
-	public static final PodLanguage INSTANCE = new PodLanguage();
-	public static final String NAME = "Perl5 POD";
+public class PodLanguage extends Language {
+  public static final PodLanguage INSTANCE = new PodLanguage();
+  public static final String NAME = "Perl5 POD";
 
-	public PodLanguage()
-	{
-		super(NAME);
-	}
+  public PodLanguage() {
+    super(NAME);
+  }
 
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
-
+  @Override
+  public boolean isCaseSensitive() {
+    return true;
+  }
 }

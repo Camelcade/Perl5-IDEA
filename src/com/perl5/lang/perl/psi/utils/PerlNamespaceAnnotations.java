@@ -29,61 +29,50 @@ import java.util.List;
 /**
  * Created by hurricup on 08.08.2016.
  */
-public class PerlNamespaceAnnotations
-{
-	private static final byte IS_DEPRECATED = 0x01;
+public class PerlNamespaceAnnotations {
+  private static final byte IS_DEPRECATED = 0x01;
 
-	private byte myFlags = 0;
+  private byte myFlags = 0;
 
-	public PerlNamespaceAnnotations()
-	{
+  public PerlNamespaceAnnotations() {
 
-	}
+  }
 
-	public PerlNamespaceAnnotations(byte flags)
-	{
-		myFlags = flags;
-	}
+  public PerlNamespaceAnnotations(byte flags) {
+    myFlags = flags;
+  }
 
-	public static PerlNamespaceAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException
-	{
-		byte flags = dataStream.readByte();
-		return new PerlNamespaceAnnotations(flags);
-	}
+  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeByte(myFlags);
+  }
 
-	@Nullable
-	public static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations)
-	{
-		if (annotations.isEmpty())
-		{
-			return null;
-		}
+  public boolean isDeprecated() {
+    return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
+  }
 
-		PerlNamespaceAnnotations myAnnotations = new PerlNamespaceAnnotations();
+  public void setIsDeprecated() {
+    myFlags |= IS_DEPRECATED;
+  }
 
-		for (PerlAnnotation annotation : annotations)
-		{
-			if (annotation instanceof PsiPerlAnnotationDeprecated)
-			{
-				myAnnotations.setIsDeprecated();
-			}
-		}
+  public static PerlNamespaceAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
+    byte flags = dataStream.readByte();
+    return new PerlNamespaceAnnotations(flags);
+  }
 
-		return myAnnotations;
-	}
+  @Nullable
+  public static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+    if (annotations.isEmpty()) {
+      return null;
+    }
 
-	public void serialize(@NotNull StubOutputStream dataStream) throws IOException
-	{
-		dataStream.writeByte(myFlags);
-	}
+    PerlNamespaceAnnotations myAnnotations = new PerlNamespaceAnnotations();
 
-	public boolean isDeprecated()
-	{
-		return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
-	}
+    for (PerlAnnotation annotation : annotations) {
+      if (annotation instanceof PsiPerlAnnotationDeprecated) {
+        myAnnotations.setIsDeprecated();
+      }
+    }
 
-	public void setIsDeprecated()
-	{
-		myFlags |= IS_DEPRECATED;
-	}
+    return myAnnotations;
+  }
 }

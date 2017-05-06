@@ -23,14 +23,12 @@ import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonCompletionContributor extends CompletionContributor implements HTMLMasonElementPatterns
-{
-	public HTMLMasonCompletionContributor()
-	{
-		extend(
-				CompletionType.BASIC,
-				HTML_MASON_COMPONENT_COMPLETION,
-				new HTMLMasonComponentCompletionProvider()
-		);
-	}
+public class HTMLMasonCompletionContributor extends CompletionContributor implements HTMLMasonElementPatterns {
+  public HTMLMasonCompletionContributor() {
+    extend(
+      CompletionType.BASIC,
+      HTML_MASON_COMPONENT_COMPLETION,
+      new HTMLMasonComponentCompletionProvider()
+    );
+  }
 }

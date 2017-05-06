@@ -19,7 +19,6 @@ package com.perl5.lang.mason2;
 /**
  * Created by hurricup on 05.01.2016.
  */
-public interface Mason2Constants
-{
-	String MASON_DEFAULT_COMPONENT_PARENT = "Mason::Component";
+public interface Mason2Constants {
+  String MASON_DEFAULT_COMPONENT_PARENT = "Mason::Component";
 }

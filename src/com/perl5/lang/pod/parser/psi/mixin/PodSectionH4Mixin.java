@@ -25,38 +25,31 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodSectionH4Mixin extends PodTitledSectionMixin implements PodSectionH4
-{
-	public PodSectionH4Mixin(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PodSectionH4Mixin extends PodTitledSectionMixin implements PodSectionH4 {
+  public PodSectionH4Mixin(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context)
-	{
-		builder.append("<h4>");
-		super.renderElementTitleAsHTML(builder, context);
-		builder.append("</h4>");
-	}
+  @Override
+  public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
+    builder.append("<h4>");
+    super.renderElementTitleAsHTML(builder, context);
+    builder.append("</h4>");
+  }
 
-	@Override
-	public boolean isHeading()
-	{
-		return true;
-	}
+  @Override
+  public boolean isHeading() {
+    return true;
+  }
 
-	@Override
-	public int getHeadingLevel()
-	{
-		return 4;
-	}
+  @Override
+  public int getHeadingLevel() {
+    return 4;
+  }
 
-	@Nullable
-	@Override
-	public String getUsageViewTypeLocation()
-	{
-		return "4th Level Header";
-	}
-
+  @Nullable
+  @Override
+  public String getUsageViewTypeLocation() {
+    return "4th Level Header";
+  }
 }

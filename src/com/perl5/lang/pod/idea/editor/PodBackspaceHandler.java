@@ -28,61 +28,51 @@ import com.perl5.lang.pod.parser.psi.PodFile;
 /**
  * Created by hurricup on 16.04.2016.
  */
-public class PodBackspaceHandler extends BackspaceHandlerDelegate implements PodElementTypes
-{
-	@Override
-	public void beforeCharDeleted(char c, PsiFile file, Editor editor)
-	{
+public class PodBackspaceHandler extends BackspaceHandlerDelegate implements PodElementTypes {
+  @Override
+  public void beforeCharDeleted(char c, PsiFile file, Editor editor) {
 
-	}
+  }
 
-	@Override
-	public boolean charDeleted(char c, PsiFile file, Editor editor)
-	{
-		if (file instanceof PodFile)
-		{
-			CaretModel caretModel = editor.getCaretModel();
-			int offset = caretModel.getOffset();
-			PsiElement element = file.findElementAt(offset);
-			IElementType elementType = element == null ? null : element.getNode().getElementType();
+  @Override
+  public boolean charDeleted(char c, PsiFile file, Editor editor) {
+    if (file instanceof PodFile) {
+      CaretModel caretModel = editor.getCaretModel();
+      int offset = caretModel.getOffset();
+      PsiElement element = file.findElementAt(offset);
+      IElementType elementType = element == null ? null : element.getNode().getElementType();
 
-			if (elementType == POD_ANGLE_RIGHT)
-			{
-				@SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
-				if (formatterBlock != null)
-				{
+      if (elementType == POD_ANGLE_RIGHT) {
+        @SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
+        if (formatterBlock != null) {
 
-					PsiElement openAngles = formatterBlock.getFirstChild();
-					openAngles = openAngles == null ? null : openAngles.getNextSibling();
+          PsiElement openAngles = formatterBlock.getFirstChild();
+          openAngles = openAngles == null ? null : openAngles.getNextSibling();
 
-					if (openAngles != null)
-					{
-						int openAnglesOffset = openAngles.getTextRange().getStartOffset();
+          if (openAngles != null) {
+            int openAnglesOffset = openAngles.getTextRange().getStartOffset();
 
-						editor.getDocument().deleteString(openAnglesOffset, openAnglesOffset + 1);
-						return true;
-					}
-				}
-			}
-			else if (elementType == POD_ANGLE_LEFT)
-			{
-				@SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
-				if (formatterBlock != null)
-				{
+            editor.getDocument().deleteString(openAnglesOffset, openAnglesOffset + 1);
+            return true;
+          }
+        }
+      }
+      else if (elementType == POD_ANGLE_LEFT) {
+        @SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
+        if (formatterBlock != null) {
 
-					PsiElement closeAngles = formatterBlock.getLastChild();
+          PsiElement closeAngles = formatterBlock.getLastChild();
 
-					if (closeAngles != null)
-					{
-						int closeAnglesOffset = closeAngles.getTextRange().getStartOffset();
+          if (closeAngles != null) {
+            int closeAnglesOffset = closeAngles.getTextRange().getStartOffset();
 
-						editor.getDocument().deleteString(closeAnglesOffset - 1, closeAnglesOffset);
-						return true;
-					}
-				}
-				return true;
-			}
-		}
-		return false;
-	}
+            editor.getDocument().deleteString(closeAnglesOffset - 1, closeAnglesOffset);
+            return true;
+          }
+        }
+        return true;
+      }
+    }
+    return false;
+  }
 }

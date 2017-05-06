@@ -19,12 +19,10 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 13.05.2016.
  */
-public class PerlSourceRequestDescriptor
-{
-	private final String path;
+public class PerlSourceRequestDescriptor {
+  private final String path;
 
-	public PerlSourceRequestDescriptor(String path)
-	{
-		this.path = path;
-	}
+  public PerlSourceRequestDescriptor(String path) {
+    this.path = path;
+  }
 }

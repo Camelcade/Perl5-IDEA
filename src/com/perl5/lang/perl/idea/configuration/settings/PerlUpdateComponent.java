@@ -45,95 +45,84 @@ import static com.perl5.lang.perl.util.PerlPluginUtil.getPlugin;
 /**
  * Created by hurricup on 23.11.2016.
  */
-public class PerlUpdateComponent implements ApplicationComponent, Disposable
-{
-	private static final String KEY = "perl.last.update.timestamp";
+public class PerlUpdateComponent implements ApplicationComponent, Disposable {
+  private static final String KEY = "perl.last.update.timestamp";
 
-	private final EditorFactoryAdapter myListener = new EditorFactoryAdapter()
-	{
-		@Override
-		public void editorCreated(@NotNull EditorFactoryEvent event)
-		{
-			Document document = event.getEditor().getDocument();
+  private final EditorFactoryAdapter myListener = new EditorFactoryAdapter() {
+    @Override
+    public void editorCreated(@NotNull EditorFactoryEvent event) {
+      Document document = event.getEditor().getDocument();
 
-			VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-			if (file != null && file.getFileType() instanceof PerlPluginBaseFileType)
-			{
-				checkForUpdates();
-			}
-		}
-	};
+      VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+      if (file != null && file.getFileType() instanceof PerlPluginBaseFileType) {
+        checkForUpdates();
+      }
+    }
+  };
 
-	private static void checkForUpdates()
-	{
-		PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
-		long lastUpdate = propertiesComponent.getOrInitLong(KEY, 0);
-		if (lastUpdate == 0 || System.currentTimeMillis() - lastUpdate > TimeUnit.DAYS.toMillis(1))
-		{
-			ApplicationManager.getApplication().executeOnPooledThread(() ->
-			{
-				try
-				{
-					String buildNumber = ApplicationInfo.getInstance().getBuild().asString();
-					IdeaPluginDescriptor plugin = getPlugin();
-					String pluginVersion = plugin.getVersion();
-					String pluginId = plugin.getPluginId().getIdString();
-					String os = URLEncoder.encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION, CharsetToolkit.UTF8);
-					String uid = PermanentInstallationID.get();
-					String url =
-							"https://plugins.jetbrains.com/plugins/list" +
-									"?pluginId=" + pluginId +
-									"&build=" + buildNumber +
-									"&pluginVersion=" + pluginVersion +
-									"&os=" + os +
-									"&uuid=" + uid;
-					PropertiesComponent.getInstance().setValue(KEY, String.valueOf(System.currentTimeMillis()));
-					HttpRequests.request(url).connect(
-							request ->
-							{
-								try
-								{
-									JDOMUtil.load(request.getReader());
-								}
-								catch (JDOMException ignore)
-								{
-								}
-								return null;
-							}
-					);
-				}
-				catch (Exception ignored)
-				{
-				}
-			});
-		}
-	}
+  @Override
+  public void initComponent() {
+    if (!ApplicationManager.getApplication().isUnitTestMode()) {
+      EditorFactory.getInstance().addEditorFactoryListener(myListener, this);
+    }
+  }
 
-	@Override
-	public void initComponent()
-	{
-		if (!ApplicationManager.getApplication().isUnitTestMode())
-		{
-			EditorFactory.getInstance().addEditorFactoryListener(myListener, this);
-		}
-	}
+  @Override
+  public void disposeComponent() {
 
-	@Override
-	public void disposeComponent()
-	{
+  }
 
-	}
+  @NotNull
+  @Override
+  public String getComponentName() {
+    return getClass().getName();
+  }
 
-	@NotNull
-	@Override
-	public String getComponentName()
-	{
-		return getClass().getName();
-	}
+  @Override
+  public void dispose() {
+    disposeComponent();
+  }
 
-	@Override
-	public void dispose()
-	{
-		disposeComponent();
-	}
+  private static void checkForUpdates() {
+    PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
+    long lastUpdate = propertiesComponent.getOrInitLong(KEY, 0);
+    if (lastUpdate == 0 || System.currentTimeMillis() - lastUpdate > TimeUnit.DAYS.toMillis(1)) {
+      ApplicationManager.getApplication().executeOnPooledThread(() ->
+                                                                {
+                                                                  try {
+                                                                    String buildNumber =
+                                                                      ApplicationInfo.getInstance().getBuild().asString();
+                                                                    IdeaPluginDescriptor plugin = getPlugin();
+                                                                    String pluginVersion = plugin.getVersion();
+                                                                    String pluginId = plugin.getPluginId().getIdString();
+                                                                    String os = URLEncoder
+                                                                      .encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION,
+                                                                              CharsetToolkit.UTF8);
+                                                                    String uid = PermanentInstallationID.get();
+                                                                    String url =
+                                                                      "https://plugins.jetbrains.com/plugins/list" +
+                                                                      "?pluginId=" + pluginId +
+                                                                      "&build=" + buildNumber +
+                                                                      "&pluginVersion=" + pluginVersion +
+                                                                      "&os=" + os +
+                                                                      "&uuid=" + uid;
+                                                                    PropertiesComponent.getInstance()
+                                                                      .setValue(KEY, String.valueOf(System.currentTimeMillis()));
+                                                                    HttpRequests.request(url).connect(
+                                                                      request ->
+                                                                      {
+                                                                        try {
+                                                                          JDOMUtil.load(request.getReader());
+                                                                        }
+                                                                        catch (JDOMException ignore) {
+                                                                        }
+                                                                        return null;
+                                                                      }
+                                                                    );
+                                                                  }
+                                                                  catch (Exception ignored) {
+                                                                  }
+                                                                });
+    }
+  }
 }

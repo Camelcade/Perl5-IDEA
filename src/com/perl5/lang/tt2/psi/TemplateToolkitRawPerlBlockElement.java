@@ -19,6 +19,5 @@ package com.perl5.lang.tt2.psi;
 /**
  * Created by hurricup on 11.06.2016.
  */
-public interface TemplateToolkitRawPerlBlockElement
-{
+public interface TemplateToolkitRawPerlBlockElement {
 }

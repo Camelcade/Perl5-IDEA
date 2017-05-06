@@ -32,140 +32,118 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlResolveUtil
-{
-	public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor)
-	{
-		PsiElement lastParent = null;
-		PsiElement run = place;
-		ResolveState state = ResolveState.initial();
-		while (run != null)
-		{
-			if (place != run && !run.processDeclarations(processor, state, lastParent, place))
-			{
-				return false;
-			}
-			lastParent = run;
+public class PerlResolveUtil {
+  public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
+    PsiElement lastParent = null;
+    PsiElement run = place;
+    ResolveState state = ResolveState.initial();
+    while (run != null) {
+      if (place != run && !run.processDeclarations(processor, state, lastParent, place)) {
+        return false;
+      }
+      lastParent = run;
 
-			run = run.getContext();
-		}
-		return true;
-	}
+      run = run.getContext();
+    }
+    return true;
+  }
 
-	public static boolean processChildren(@NotNull PsiElement element,
-										  @NotNull PsiScopeProcessor processor,
-										  @NotNull ResolveState resolveState,
-										  @Nullable PsiElement lastParent,
-										  @NotNull PsiElement place)
-	{
-		PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
-		while (run != null)
-		{
-			if (run instanceof PerlCompositeElement &&
-					!(run instanceof PerlLexicalScope) &&
-					!run.processDeclarations(processor, resolveState, null, place)
-					)
-			{
-				return false;
-			}
-			run = run.getPrevSibling();
-		}
+  public static boolean processChildren(@NotNull PsiElement element,
+                                        @NotNull PsiScopeProcessor processor,
+                                        @NotNull ResolveState resolveState,
+                                        @Nullable PsiElement lastParent,
+                                        @NotNull PsiElement place) {
+    PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
+    while (run != null) {
+      if (run instanceof PerlCompositeElement &&
+          !(run instanceof PerlLexicalScope) &&
+          !run.processDeclarations(processor, resolveState, null, place)
+        ) {
+        return false;
+      }
+      run = run.getPrevSibling();
+    }
 
-		// checking implicit variables
-		if (element instanceof PerlImplicitVariablesProvider)
-		{
-			for (PerlVariableDeclarationWrapper wrapper : ((PerlImplicitVariablesProvider) element).getImplicitVariables())
-			{
-				if (!processor.execute(wrapper, resolveState))
-				{
-					return false;
-				}
-			}
-		}
+    // checking implicit variables
+    if (element instanceof PerlImplicitVariablesProvider) {
+      for (PerlVariableDeclarationWrapper wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
+        if (!processor.execute(wrapper, resolveState)) {
+          return false;
+        }
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 
-	/**
-	 * Searching for most recent lexically visible variable declaration
-	 *
-	 * @param variable variable to search declaration for
-	 * @return variable in declaration term or null if there is no such one
-	 */
-	@Nullable
-	public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable)
-	{
-		if (variable.getExplicitPackageName() != null)
-		{
-			return null;
-		}
-		PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
-		PerlResolveUtil.treeWalkUp(variable, variableProcessor);
-		return variableProcessor.getResult();
-	}
+  /**
+   * Searching for most recent lexically visible variable declaration
+   *
+   * @param variable variable to search declaration for
+   * @return variable in declaration term or null if there is no such one
+   */
+  @Nullable
+  public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable) {
+    if (variable.getExplicitPackageName() != null) {
+      return null;
+    }
+    PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
+    PerlResolveUtil.treeWalkUp(variable, variableProcessor);
+    return variableProcessor.getResult();
+  }
 
-	/**
-	 * Processing all targets of all references of all elements
-	 *
-	 * @param processor processor
-	 * @param elements  references sources
-	 * @return processor result
-	 */
-	public static boolean processElementReferencesResolveResults(@NotNull Processor<Pair<PsiElement, PsiReference>> processor, PsiElement... elements)
-	{
-		if (elements == null || elements.length == 0)
-		{
-			return true;
-		}
+  /**
+   * Processing all targets of all references of all elements
+   *
+   * @param processor processor
+   * @param elements  references sources
+   * @return processor result
+   */
+  public static boolean processElementReferencesResolveResults(@NotNull Processor<Pair<PsiElement, PsiReference>> processor,
+                                                               PsiElement... elements) {
+    if (elements == null || elements.length == 0) {
+      return true;
+    }
 
-		for (PsiElement element : elements)
-		{
-			if (!processResolveElements(processor, element.getReferences()))
-			{
-				return false;
-			}
-		}
+    for (PsiElement element : elements) {
+      if (!processResolveElements(processor, element.getReferences())) {
+        return false;
+      }
+    }
 
-		return true;
-	}
+    return true;
+  }
 
 
-	/**
-	 * Processing target elements of array of references
-	 *
-	 * @param processor  processor
-	 * @param references references to iterate
-	 * @return processor result
-	 */
-	public static boolean processResolveElements(@NotNull Processor<Pair<PsiElement, PsiReference>> processor, @Nullable PsiReference... references)
-	{
-		if (references == null || references.length == 0)
-		{
-			return true;
-		}
+  /**
+   * Processing target elements of array of references
+   *
+   * @param processor  processor
+   * @param references references to iterate
+   * @return processor result
+   */
+  public static boolean processResolveElements(@NotNull Processor<Pair<PsiElement, PsiReference>> processor,
+                                               @Nullable PsiReference... references) {
+    if (references == null || references.length == 0) {
+      return true;
+    }
 
-		for (PsiReference reference : references)
-		{
-			if (reference instanceof PsiPolyVariantReference)
-			{
-				for (ResolveResult resolveResult : ((PsiPolyVariantReference) reference).multiResolve(false))
-				{
-					PsiElement targetElement = resolveResult.getElement();
-					if (targetElement != null && !processor.process(Pair.create(targetElement, reference)))
-					{
-						return false;
-					}
-				}
-			}
-			else if (reference != null)
-			{
-				PsiElement targetElement = reference.resolve();
-				if (targetElement != null && !processor.process(Pair.create(targetElement, reference)))
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    for (PsiReference reference : references) {
+      if (reference instanceof PsiPolyVariantReference) {
+        for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+          PsiElement targetElement = resolveResult.getElement();
+          if (targetElement != null && !processor.process(Pair.create(targetElement, reference))) {
+            return false;
+          }
+        }
+      }
+      else if (reference != null) {
+        PsiElement targetElement = reference.resolve();
+        if (targetElement != null && !processor.process(Pair.create(targetElement, reference))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }

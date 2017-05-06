@@ -23,12 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.04.2016.
  */
-public abstract class PodTokenTypeEx extends PodTokenType implements ILeafElementType
-{
-	public PodTokenTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
-
-
+public abstract class PodTokenTypeEx extends PodTokenType implements ILeafElementType {
+  public PodTokenTypeEx(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

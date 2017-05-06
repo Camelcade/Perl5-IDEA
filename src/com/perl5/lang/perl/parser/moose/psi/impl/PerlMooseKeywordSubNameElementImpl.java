@@ -26,31 +26,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement
-{
-	public PerlMooseKeywordSubNameElementImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement {
+  public PerlMooseKeywordSubNameElementImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Override
-	public boolean isBuiltIn()
-	{
-		return false;
-	}
+  @Override
+  public boolean isBuiltIn() {
+    return false;
+  }
 
-	@Override
-	protected boolean isPerlBuiltIn()
-	{
-		return false;
-	}
+  @Override
+  protected boolean isPerlBuiltIn() {
+    return false;
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-
+  @Nullable
+  @Override
+  public String getPackageName() {
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 }

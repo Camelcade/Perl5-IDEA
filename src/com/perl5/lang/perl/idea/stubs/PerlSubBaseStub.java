@@ -24,34 +24,33 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<Stub>
-{
-	/**
-	 * Returns package name for current function
-	 *
-	 * @return canonical package name from declaration or context
-	 */
-	String getPackageName();
+public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<Stub> {
+  /**
+   * Returns package name for current function
+   *
+   * @return canonical package name from declaration or context
+   */
+  String getPackageName();
 
-	/**
-	 * Returns function name for current function definition
-	 *
-	 * @return function name or null
-	 */
-	String getSubName();
+  /**
+   * Returns function name for current function definition
+   *
+   * @return function name or null
+   */
+  String getSubName();
 
-	/**
-	 * Checks PSI tree before a sub definition for annotations and builds annotations object
-	 *
-	 * @return PerlSubAnnotation object
-	 */
-	@Nullable
-	PerlSubAnnotations getAnnotations();
+  /**
+   * Checks PSI tree before a sub definition for annotations and builds annotations object
+   *
+   * @return PerlSubAnnotation object
+   */
+  @Nullable
+  PerlSubAnnotations getAnnotations();
 
-	/**
-	 * Returns canonical name PackageName::SubName
-	 *
-	 * @return name
-	 */
-	String getCanonicalName();
+  /**
+   * Returns canonical name PackageName::SubName
+   *
+   * @return name
+   */
+  String getCanonicalName();
 }

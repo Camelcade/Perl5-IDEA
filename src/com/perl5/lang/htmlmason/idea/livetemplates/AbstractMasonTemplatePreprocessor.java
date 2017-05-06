@@ -24,25 +24,19 @@ import com.intellij.psi.PsiFile;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public abstract class AbstractMasonTemplatePreprocessor implements TemplatePreprocessor
-{
-	protected abstract boolean isMyFile(PsiFile file);
+public abstract class AbstractMasonTemplatePreprocessor implements TemplatePreprocessor {
+  protected abstract boolean isMyFile(PsiFile file);
 
-	@Override
-	public void preprocessTemplate(Editor editor, PsiFile file, int caretOffset, String textToInsert, String templateText)
-	{
-		if (isMyFile(file) && textToInsert.startsWith("<%") && caretOffset > 0)
-		{
-			Document document = editor.getDocument();
-			CharSequence text = document.getCharsSequence();
+  @Override
+  public void preprocessTemplate(Editor editor, PsiFile file, int caretOffset, String textToInsert, String templateText) {
+    if (isMyFile(file) && textToInsert.startsWith("<%") && caretOffset > 0) {
+      Document document = editor.getDocument();
+      CharSequence text = document.getCharsSequence();
 
-			if (text.charAt(caretOffset - 1) == '<')
-			{
-				document.deleteString(caretOffset - 1, caretOffset);
-				editor.getCaretModel().moveToOffset(caretOffset - 1);
-			}
-		}
-	}
-
-
+      if (text.charAt(caretOffset - 1) == '<') {
+        document.deleteString(caretOffset - 1, caretOffset);
+        editor.getCaretModel().moveToOffset(caretOffset - 1);
+      }
+    }
+  }
 }

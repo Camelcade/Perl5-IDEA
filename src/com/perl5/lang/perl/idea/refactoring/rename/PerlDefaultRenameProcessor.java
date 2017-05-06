@@ -26,15 +26,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.10.2015.
  */
-public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementProcessor
-{
-	@Override
-	public boolean canProcessElement(@NotNull PsiElement element)
-	{
-		return element instanceof PerlSubDefinitionBase
-				|| element instanceof PerlSubDeclaration
-				|| element instanceof PerlGlobVariable
-				|| element instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper) element).isGlobalDeclaration()
-				;
-	}
+public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementProcessor {
+  @Override
+  public boolean canProcessElement(@NotNull PsiElement element) {
+    return element instanceof PerlSubDefinitionBase
+           || element instanceof PerlSubDeclaration
+           || element instanceof PerlGlobVariable
+           || element instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper)element).isGlobalDeclaration()
+      ;
+  }
 }

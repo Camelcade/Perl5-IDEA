@@ -24,28 +24,25 @@ import com.perl5.lang.perl.psi.*;
 /**
  * Created by evstigneev on 14.12.2015.
  */
-public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInspection
-{
+public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInspection {
 
-	@Override
-	public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper)
-	{
-		if (variableDeclarationWrapper.isGlobalDeclaration() && PerlVariableGlobalUnusedInspection.EXCLUSIONS.contains(variableDeclarationWrapper.getText()))
-		{
-			return;
-		}
+  @Override
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+    if (variableDeclarationWrapper.isGlobalDeclaration() &&
+        PerlVariableGlobalUnusedInspection.EXCLUSIONS.contains(variableDeclarationWrapper.getText())) {
+      return;
+    }
 
-		if (PsiTreeUtil.getParentOfType(variableDeclarationWrapper, PerlSubDefinitionBase.class, PerlMethodDefinition.class, PerlFuncDefinition.class, PsiPerlSubExpr.class) == null)
-		{
-			PerlVariable variable = variableDeclarationWrapper.getVariable();
-			if (variable != null)
-			{
-				holder.registerProblem(
-						variable,
-						"File level variable:" + variable.getText(),
-						ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
-			}
-		}
-	}
-
+    if (PsiTreeUtil
+          .getParentOfType(variableDeclarationWrapper, PerlSubDefinitionBase.class, PerlMethodDefinition.class, PerlFuncDefinition.class,
+                           PsiPerlSubExpr.class) == null) {
+      PerlVariable variable = variableDeclarationWrapper.getVariable();
+      if (variable != null) {
+        holder.registerProblem(
+          variable,
+          "File level variable:" + variable.getText(),
+          ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
+      }
+    }
+  }
 }

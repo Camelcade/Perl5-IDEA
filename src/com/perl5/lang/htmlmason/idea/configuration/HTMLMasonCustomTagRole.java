@@ -22,43 +22,37 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 /**
  * Created by hurricup on 11.03.2016.
  */
-public enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes
-{
-	PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
-	METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),
-	DEF("as <%def>", false, HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER),
-	ARGS("as <%args>", true, HTML_MASON_ARGS_OPENER, HTML_MASON_ARGS_CLOSER);
+public enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes {
+  PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
+  METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),
+  DEF("as <%def>", false, HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER),
+  ARGS("as <%args>", true, HTML_MASON_ARGS_OPENER, HTML_MASON_ARGS_CLOSER);
 
-	private final String myTitle;
-	private final IElementType myOpenToken;
-	private final IElementType myCloseToken;
-	private final boolean myIsSimple;
+  private final String myTitle;
+  private final IElementType myOpenToken;
+  private final IElementType myCloseToken;
+  private final boolean myIsSimple;
 
-	HTMLMasonCustomTagRole(String title, boolean isSimple, IElementType openToken, IElementType closeToken)
-	{
-		myTitle = title;
-		myOpenToken = openToken;
-		myCloseToken = closeToken;
-		myIsSimple = isSimple;
-	}
+  HTMLMasonCustomTagRole(String title, boolean isSimple, IElementType openToken, IElementType closeToken) {
+    myTitle = title;
+    myOpenToken = openToken;
+    myCloseToken = closeToken;
+    myIsSimple = isSimple;
+  }
 
-	public String getTitle()
-	{
-		return myTitle;
-	}
+  public String getTitle() {
+    return myTitle;
+  }
 
-	public IElementType getOpenToken()
-	{
-		return myOpenToken;
-	}
+  public IElementType getOpenToken() {
+    return myOpenToken;
+  }
 
-	public IElementType getCloseToken()
-	{
-		return myCloseToken;
-	}
+  public IElementType getCloseToken() {
+    return myCloseToken;
+  }
 
-	public boolean isSimple()
-	{
-		return myIsSimple;
-	}
+  public boolean isSimple() {
+    return myIsSimple;
+  }
 }

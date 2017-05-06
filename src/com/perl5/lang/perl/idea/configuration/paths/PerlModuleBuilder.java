@@ -43,117 +43,97 @@ import java.util.List;
  * Created by hurricup on 28.05.2015.
  * Partially cloned from JavaModuleBuilder
  */
-public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder
-{
-	private final List<Pair<String, String>> myModuleLibraries = new ArrayList<Pair<String, String>>();
-	private List<Pair<String, String>> mySourcePaths;
+public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder {
+  private final List<Pair<String, String>> myModuleLibraries = new ArrayList<Pair<String, String>>();
+  private List<Pair<String, String>> mySourcePaths;
 
-	private static String getUrlByPath(final String path)
-	{
-		return VfsUtil.getUrlForLibraryRoot(new File(path));
-	}
+  @Override
+  public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
+    final CompilerModuleExtension compilerModuleExtension = rootModel.getModuleExtension(CompilerModuleExtension.class);
+    compilerModuleExtension.setExcludeOutput(true);
+    if (myJdk != null) {
+      rootModel.setSdk(myJdk);
+    }
+    else {
+      rootModel.inheritSdk();
+    }
 
-	@Override
-	public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException
-	{
-		final CompilerModuleExtension compilerModuleExtension = rootModel.getModuleExtension(CompilerModuleExtension.class);
-		compilerModuleExtension.setExcludeOutput(true);
-		if (myJdk != null)
-		{
-			rootModel.setSdk(myJdk);
-		}
-		else
-		{
-			rootModel.inheritSdk();
-		}
+    ContentEntry contentEntry = doAddContentEntry(rootModel);
+    if (contentEntry != null) {
+      final List<Pair<String, String>> sourcePaths = getSourcePaths();
 
-		ContentEntry contentEntry = doAddContentEntry(rootModel);
-		if (contentEntry != null)
-		{
-			final List<Pair<String, String>> sourcePaths = getSourcePaths();
+      if (sourcePaths != null) {
+        for (final Pair<String, String> sourcePath : sourcePaths) {
+          String first = sourcePath.first;
+          new File(first).mkdirs();
+          final VirtualFile sourceRoot = LocalFileSystem.getInstance()
+            .refreshAndFindFileByPath(FileUtil.toSystemIndependentName(first));
+          if (sourceRoot != null) {
+            contentEntry.addSourceFolder(sourceRoot, false, sourcePath.second);
+          }
+        }
+      }
+    }
 
-			if (sourcePaths != null)
-			{
-				for (final Pair<String, String> sourcePath : sourcePaths)
-				{
-					String first = sourcePath.first;
-					new File(first).mkdirs();
-					final VirtualFile sourceRoot = LocalFileSystem.getInstance()
-							.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(first));
-					if (sourceRoot != null)
-					{
-						contentEntry.addSourceFolder(sourceRoot, false, sourcePath.second);
-					}
-				}
-			}
-		}
+    LibraryTable libraryTable = rootModel.getModuleLibraryTable();
+    for (Pair<String, String> libInfo : myModuleLibraries) {
+      final String moduleLibraryPath = libInfo.first;
+      final String sourceLibraryPath = libInfo.second;
+      Library library = libraryTable.createLibrary();
+      Library.ModifiableModel modifiableModel = library.getModifiableModel();
+      modifiableModel.addRoot(getUrlByPath(moduleLibraryPath), OrderRootType.CLASSES);
+      if (sourceLibraryPath != null) {
+        modifiableModel.addRoot(getUrlByPath(sourceLibraryPath), OrderRootType.SOURCES);
+      }
+      modifiableModel.commit();
+    }
+  }
 
-		LibraryTable libraryTable = rootModel.getModuleLibraryTable();
-		for (Pair<String, String> libInfo : myModuleLibraries)
-		{
-			final String moduleLibraryPath = libInfo.first;
-			final String sourceLibraryPath = libInfo.second;
-			Library library = libraryTable.createLibrary();
-			Library.ModifiableModel modifiableModel = library.getModifiableModel();
-			modifiableModel.addRoot(getUrlByPath(moduleLibraryPath), OrderRootType.CLASSES);
-			if (sourceLibraryPath != null)
-			{
-				modifiableModel.addRoot(getUrlByPath(sourceLibraryPath), OrderRootType.SOURCES);
-			}
-			modifiableModel.commit();
-		}
-	}
+  @Override
+  public ModuleType getModuleType() {
+    return PerlModuleType.getInstance();
+  }
 
-	@Override
-	public ModuleType getModuleType()
-	{
-		return PerlModuleType.getInstance();
-	}
+  @Override
+  public boolean isSuitableSdkType(SdkTypeId sdkType) {
+    return sdkType == PerlSdkType.getInstance();
+  }
 
-	@Override
-	public boolean isSuitableSdkType(SdkTypeId sdkType)
-	{
-		return sdkType == PerlSdkType.getInstance();
-	}
+  @Override
+  public List<Pair<String, String>> getSourcePaths() {
+    if (mySourcePaths == null) {
+      final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
+      paths.add(Pair.create(getContentEntryPath(), ""));
+      return paths;
+    }
+    return mySourcePaths;
+  }
 
-	@Override
-	public List<Pair<String, String>> getSourcePaths()
-	{
-		if (mySourcePaths == null)
-		{
-			final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
-			paths.add(Pair.create(getContentEntryPath(), ""));
-			return paths;
-		}
-		return mySourcePaths;
-	}
+  @Override
+  public void setSourcePaths(List<Pair<String, String>> sourcePaths) {
+    mySourcePaths = sourcePaths != null ? new ArrayList<Pair<String, String>>(sourcePaths) : null;
+  }
 
-	@Override
-	public void setSourcePaths(List<Pair<String, String>> sourcePaths)
-	{
-		mySourcePaths = sourcePaths != null ? new ArrayList<Pair<String, String>>(sourcePaths) : null;
-	}
+  @Override
+  public void addSourcePath(Pair<String, String> sourcePathInfo) {
+    if (mySourcePaths == null) {
+      mySourcePaths = new ArrayList<Pair<String, String>>();
+    }
 
-	@Override
-	public void addSourcePath(Pair<String, String> sourcePathInfo)
-	{
-		if (mySourcePaths == null)
-		{
-			mySourcePaths = new ArrayList<Pair<String, String>>();
-		}
+    mySourcePaths.add(sourcePathInfo);
+  }
 
-		mySourcePaths.add(sourcePathInfo);
-	}
+  public void addModuleLibrary(String moduleLibraryPath, String sourcePath) {
+    myModuleLibraries.add(Pair.create(moduleLibraryPath, sourcePath));
+  }
 
-	public void addModuleLibrary(String moduleLibraryPath, String sourcePath)
-	{
-		myModuleLibraries.add(Pair.create(moduleLibraryPath, sourcePath));
-	}
+  private static String getUrlByPath(final String path) {
+    return VfsUtil.getUrlForLibraryRoot(new File(path));
+  }
 
-//	@Nullable
-//	@Override
-//	public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
-//		return PerlModuleType.getInstance().modifySettingsStep(settingsStep, this);
-//	}
-
+  //	@Nullable
+  //	@Override
+  //	public ModuleWizardStep modifySettingsStep(@NotNull SettingsStep settingsStep) {
+  //		return PerlModuleType.getInstance().modifySettingsStep(settingsStep, this);
+  //	}
 }

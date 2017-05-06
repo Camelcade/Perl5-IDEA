@@ -25,8 +25,7 @@ import java.util.List;
  * Created by hurricup on 13.03.2016.
  * May contain Args block
  */
-public interface HTMLMasonArgsContainer extends PsiElement
-{
-	@NotNull
-	List<HTMLMasonCompositeElement> getArgsBlocks();
+public interface HTMLMasonArgsContainer extends PsiElement {
+  @NotNull
+  List<HTMLMasonCompositeElement> getArgsBlocks();
 }

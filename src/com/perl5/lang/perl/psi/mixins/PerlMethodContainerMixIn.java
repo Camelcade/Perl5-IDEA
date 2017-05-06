@@ -25,18 +25,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.11.2015.
  */
-public abstract class PerlMethodContainerMixIn extends PerlCompositeElementImpl implements PerlMethodContainer
-{
-	public PerlMethodContainerMixIn(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlMethodContainerMixIn extends PerlCompositeElementImpl implements PerlMethodContainer {
+  public PerlMethodContainerMixIn(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	@NotNull
-	public PsiPerlMethod getMethod()
-	{
-		return findNotNullChildByClass(PsiPerlMethod.class);
-	}
-
+  @Override
+  @NotNull
+  public PsiPerlMethod getMethod() {
+    return findNotNullChildByClass(PsiPerlMethod.class);
+  }
 }

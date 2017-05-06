@@ -29,43 +29,36 @@ import java.util.List;
  * Created by hurricup on 29.03.2016.
  */
 public class DancerPackageProcessor extends PerlPackageProcessorBase implements
-		PerlStrictProvider,
-		PerlUtfProvider,
-		PerlWarningsProvider
-{
-	private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
+                                                                     PerlStrictProvider,
+                                                                     PerlUtfProvider,
+                                                                     PerlWarningsProvider {
+  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
 
-	static
-	{
-		for (String keyword : PerlDancerDSL.DSL_KEYWORDS)
-		{
-			EXPORT_DESCRIPTORS.add(new PerlExportDescriptor(keyword, "Dancer"));
-		}
-	}
+  static {
+    for (String keyword : PerlDancerDSL.DSL_KEYWORDS) {
+      EXPORT_DESCRIPTORS.add(new PerlExportDescriptor(keyword, "Dancer"));
+    }
+  }
 
-	@Override
-	public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@Override
-	public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask)
-	{
-		// fixme implement modification
-		return currentMask.clone();
-	}
+  @Override
+  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
+    // fixme implement modification
+    return currentMask.clone();
+  }
 
-	@NotNull
-	@Override
-	public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement)
-	{
-		return getExportDescriptors();
-	}
+  @NotNull
+  @Override
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+    return getExportDescriptors();
+  }
 
-	public List<PerlExportDescriptor> getExportDescriptors()
-	{
-		return EXPORT_DESCRIPTORS;
-	}
+  public List<PerlExportDescriptor> getExportDescriptors() {
+    return EXPORT_DESCRIPTORS;
+  }
 }

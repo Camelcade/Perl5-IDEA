@@ -28,27 +28,23 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlCodeStyleSettingsProvider extends CodeStyleSettingsProvider
-{
+public class PerlCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
-	@NotNull
-	@Override
-	public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings)
-	{
-		return new PerlCodeStyleConfigurable(settings, originalSettings);
-	}
+  @NotNull
+  @Override
+  public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings) {
+    return new PerlCodeStyleConfigurable(settings, originalSettings);
+  }
 
-	@Nullable
-	@Override
-	public CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings)
-	{
-		return new PerlCodeStyleSettings(settings);
-	}
+  @Nullable
+  @Override
+  public CustomCodeStyleSettings createCustomSettings(CodeStyleSettings settings) {
+    return new PerlCodeStyleSettings(settings);
+  }
 
-	@Nullable
-	@Override
-	public Language getLanguage()
-	{
-		return PerlLanguage.INSTANCE;
-	}
+  @Nullable
+  @Override
+  public Language getLanguage() {
+    return PerlLanguage.INSTANCE;
+  }
 }

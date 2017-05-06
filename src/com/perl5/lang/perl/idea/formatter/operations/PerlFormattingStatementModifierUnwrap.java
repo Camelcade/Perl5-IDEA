@@ -24,32 +24,26 @@ import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 /**
  * Created by hurricup on 15.11.2015.
  */
-public class PerlFormattingStatementModifierUnwrap extends PerlFormattingStatementModifierWrap
-{
-	public PerlFormattingStatementModifierUnwrap(PsiPerlStatementModifier container)
-	{
-		super(container);
-	}
+public class PerlFormattingStatementModifierUnwrap extends PerlFormattingStatementModifierWrap {
+  public PerlFormattingStatementModifierUnwrap(PsiPerlStatementModifier container) {
+    super(container);
+  }
 
-	@Override
-	public int apply()
-	{
-		int delta = 0;
+  @Override
+  public int apply() {
+    int delta = 0;
 
-		if (getMyModifier().isValid())
-		{
-			PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
+    if (getMyModifier().isValid()) {
+      PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
 
-			if (expression != null && expression instanceof PsiPerlParenthesisedExpr)
-			{
-				PsiPerlExpr nestedExpression = ((PsiPerlParenthesisedExpr) expression).getExpr();
-				if (nestedExpression != null)
-				{
-					delta = nestedExpression.getNode().getTextLength() - expression.getNode().getTextLength();
-					expression.replace(nestedExpression.copy());
-				}
-			}
-		}
-		return delta;
-	}
+      if (expression != null && expression instanceof PsiPerlParenthesisedExpr) {
+        PsiPerlExpr nestedExpression = ((PsiPerlParenthesisedExpr)expression).getExpr();
+        if (nestedExpression != null) {
+          delta = nestedExpression.getNode().getTextLength() - expression.getNode().getTextLength();
+          expression.replace(nestedExpression.copy());
+        }
+      }
+    }
+    return delta;
+  }
 }

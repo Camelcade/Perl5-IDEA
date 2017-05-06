@@ -23,14 +23,13 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
  * Created by hurricup on 23.08.2015.
  * Marks a package processor that it can modify %^H (see use feature)
  */
-public interface PerlFeaturesProvider
-{
-	/**
-	 * Modifies outer block's features table
-	 *
-	 * @param useStatement         use statement reference
-	 * @param currentFeaturesTable features table of outer block
-	 * @return new features table
-	 */
-	public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable);
+public interface PerlFeaturesProvider {
+  /**
+   * Modifies outer block's features table
+   *
+   * @param useStatement         use statement reference
+   * @param currentFeaturesTable features table of outer block
+   * @return new features table
+   */
+  public PerlFeaturesTable getFeaturesTable(PerlUseStatement useStatement, PerlFeaturesTable currentFeaturesTable);
 }

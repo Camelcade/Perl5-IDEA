@@ -27,27 +27,21 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelUndeclaredInspection extends PerlInspection
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitLabelExpr(@NotNull PsiPerlLabelExpr o)
-			{
-				PsiReference reference = o.getReference();
-				if (reference != null)
-				{
-					PsiElement declaration = reference.resolve();
-					if (declaration == null)
-					{
-						registerProblem(holder, o, "Unable to find label declaration (possible deprecated usage)");
-					}
-				}
-			}
-		};
-	}
+public class PerlLabelUndeclaredInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitLabelExpr(@NotNull PsiPerlLabelExpr o) {
+        PsiReference reference = o.getReference();
+        if (reference != null) {
+          PsiElement declaration = reference.resolve();
+          if (declaration == null) {
+            registerProblem(holder, o, "Unable to find label declaration (possible deprecated usage)");
+          }
+        }
+      }
+    };
+  }
 }

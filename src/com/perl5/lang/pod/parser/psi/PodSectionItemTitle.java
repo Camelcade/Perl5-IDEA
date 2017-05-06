@@ -21,6 +21,5 @@ import com.perl5.lang.pod.lexer.PodElementTypes;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSectionItemTitle extends PodElementTypes, PodSectionTitle
-{
+public interface PodSectionItemTitle extends PodElementTypes, PodSectionTitle {
 }

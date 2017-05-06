@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonFilterBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonFilterBlock
-{
-	public HTMLMasonFilterBlockImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class HTMLMasonFilterBlockImpl extends HTMLMasonCompositeElementImpl implements HTMLMasonFilterBlock {
+  public HTMLMasonFilterBlockImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

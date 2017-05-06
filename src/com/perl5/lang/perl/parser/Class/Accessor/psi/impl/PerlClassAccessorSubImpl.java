@@ -26,19 +26,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class PerlClassAccessorSubImpl extends PerlSubNameElementImpl implements PerlClassAccessorSub
-{
-	public PerlClassAccessorSubImpl(@NotNull IElementType type, CharSequence text)
-	{
-		super(type, text);
-	}
+public class PerlClassAccessorSubImpl extends PerlSubNameElementImpl implements PerlClassAccessorSub {
+  public PerlClassAccessorSubImpl(@NotNull IElementType type, CharSequence text) {
+    super(type, text);
+  }
 
-	@Nullable
-	@Override
-	public String getPackageName()
-	{
-		return PerlPackageUtil.getContextPackageName(this);
-	}
-
-
+  @Nullable
+  @Override
+  public String getPackageName() {
+    return PerlPackageUtil.getContextPackageName(this);
+  }
 }

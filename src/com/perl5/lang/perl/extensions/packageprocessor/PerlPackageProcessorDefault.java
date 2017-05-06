@@ -19,7 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 /**
  * Created by hurricup on 18.08.2015.
  */
-public class PerlPackageProcessorDefault extends PerlPackageProcessorBase
-{
-	public static final PerlPackageProcessor INSTANCE = new PerlPackageProcessorDefault();
+public class PerlPackageProcessorDefault extends PerlPackageProcessorBase {
+  public static final PerlPackageProcessor INSTANCE = new PerlPackageProcessorDefault();
 }

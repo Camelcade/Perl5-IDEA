@@ -27,33 +27,27 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlRequireExprImplMixin extends PerlDoExprImplMixin implements PerlRequireExpr
-{
-	public PerlRequireExprImplMixin(ASTNode node)
-	{
-		super(node);
-	}
+public abstract class PerlRequireExprImplMixin extends PerlDoExprImplMixin implements PerlRequireExpr {
+  public PerlRequireExprImplMixin(ASTNode node) {
+    super(node);
+  }
 
-	public PerlRequireExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType)
-	{
-		super(stub, nodeType);
-	}
+  public PerlRequireExprImplMixin(PerlRuntimeImportStub stub, IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
 
-	@Override
-	public PerlNamespaceElement getNamespaceElement()
-	{
-		return findChildByClass(PerlNamespaceElement.class);
-	}
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    return findChildByClass(PerlNamespaceElement.class);
+  }
 
-	@Nullable
-	@Override
-	protected String findImportPath()
-	{
-		if (getNamespaceElement() != null)
-		{
-			return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
-		}
+  @Nullable
+  @Override
+  protected String findImportPath() {
+    if (getNamespaceElement() != null) {
+      return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
+    }
 
-		return super.findImportPath();
-	}
+    return super.findImportPath();
+  }
 }

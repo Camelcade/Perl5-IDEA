@@ -32,54 +32,47 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase implements TemplateToolkitElementTypes
-{
-	public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
-	public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);
-	public static final TextAttributesKey TT2_COMMENT_KEY = createTextAttributesKey("TT2_COMMENT", PerlSyntaxHighlighter.PERL_COMMENT);
-	public static final TextAttributesKey TT2_IDENTIFIER_KEY = createTextAttributesKey("TT2_IDENTIFIER", PerlSyntaxHighlighter.PERL_SUB);
-	public static final TextAttributesKey TT2_KEYWORD_KEY = createTextAttributesKey("TT2_KEYWORD", PerlSyntaxHighlighter.PERL_KEYWORD);
-	public static final TextAttributesKey TT2_OPERATOR_KEY = createTextAttributesKey("TT2_OPERATOR", PerlSyntaxHighlighter.PERL_OPERATOR);
-	public static final TextAttributesKey TT2_SQ_STRING_KEY = createTextAttributesKey("TT2_SQ_STRING", PerlSyntaxHighlighter.PERL_SQ_STRING);
-	public static final TextAttributesKey TT2_DQ_STRING_KEY = createTextAttributesKey("TT2_DQ_STRING", PerlSyntaxHighlighter.PERL_DQ_STRING);
-	private static final TextAttributesKey[] TT2_NUMBER_KEYS = new TextAttributesKey[]{TT2_NUMBER_KEY};
-	private static final TextAttributesKey[] TT2_MARKER_KEYS = new TextAttributesKey[]{TT2_MARKER_KEY};
-	private static final TextAttributesKey[] TT2_COMMENT_KEYS = new TextAttributesKey[]{TT2_COMMENT_KEY};
-	private final Project myProject;
-	private final TokenSet myMarkers = TokenSet.create(
-			TT2_OPEN_TAG,
-			TT2_CLOSE_TAG,
-			TT2_OUTLINE_TAG
-	);
+public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase implements TemplateToolkitElementTypes {
+  public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
+  public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);
+  public static final TextAttributesKey TT2_COMMENT_KEY = createTextAttributesKey("TT2_COMMENT", PerlSyntaxHighlighter.PERL_COMMENT);
+  public static final TextAttributesKey TT2_IDENTIFIER_KEY = createTextAttributesKey("TT2_IDENTIFIER", PerlSyntaxHighlighter.PERL_SUB);
+  public static final TextAttributesKey TT2_KEYWORD_KEY = createTextAttributesKey("TT2_KEYWORD", PerlSyntaxHighlighter.PERL_KEYWORD);
+  public static final TextAttributesKey TT2_OPERATOR_KEY = createTextAttributesKey("TT2_OPERATOR", PerlSyntaxHighlighter.PERL_OPERATOR);
+  public static final TextAttributesKey TT2_SQ_STRING_KEY = createTextAttributesKey("TT2_SQ_STRING", PerlSyntaxHighlighter.PERL_SQ_STRING);
+  public static final TextAttributesKey TT2_DQ_STRING_KEY = createTextAttributesKey("TT2_DQ_STRING", PerlSyntaxHighlighter.PERL_DQ_STRING);
+  private static final TextAttributesKey[] TT2_NUMBER_KEYS = new TextAttributesKey[]{TT2_NUMBER_KEY};
+  private static final TextAttributesKey[] TT2_MARKER_KEYS = new TextAttributesKey[]{TT2_MARKER_KEY};
+  private static final TextAttributesKey[] TT2_COMMENT_KEYS = new TextAttributesKey[]{TT2_COMMENT_KEY};
+  private final Project myProject;
+  private final TokenSet myMarkers = TokenSet.create(
+    TT2_OPEN_TAG,
+    TT2_CLOSE_TAG,
+    TT2_OUTLINE_TAG
+  );
 
-	public TemplateToolkitSyntaxHighlighter(Project project)
-	{
-		myProject = project;
-	}
+  public TemplateToolkitSyntaxHighlighter(Project project) {
+    myProject = project;
+  }
 
-	@NotNull
-	@Override
-	public Lexer getHighlightingLexer()
-	{
-		return new TemplateToolkitLexerAdapter(myProject);
-	}
+  @NotNull
+  @Override
+  public Lexer getHighlightingLexer() {
+    return new TemplateToolkitLexerAdapter(myProject);
+  }
 
-	@NotNull
-	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
-	{
-		if (myMarkers.contains(tokenType))
-		{
-			return TT2_MARKER_KEYS;
-		}
-		else if (tokenType == TT2_NUMBER || tokenType == TT2_NUMBER_SIMPLE)
-		{
-			return TT2_NUMBER_KEYS;
-		}
-		else if (tokenType == LINE_COMMENT)
-		{
-			return TT2_COMMENT_KEYS;
-		}
-		return new TextAttributesKey[0];
-	}
+  @NotNull
+  @Override
+  public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+    if (myMarkers.contains(tokenType)) {
+      return TT2_MARKER_KEYS;
+    }
+    else if (tokenType == TT2_NUMBER || tokenType == TT2_NUMBER_SIMPLE) {
+      return TT2_NUMBER_KEYS;
+    }
+    else if (tokenType == LINE_COMMENT) {
+      return TT2_COMMENT_KEYS;
+    }
+    return new TextAttributesKey[0];
+  }
 }

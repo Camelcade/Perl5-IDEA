@@ -23,12 +23,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 11.10.2015.
  */
-public class GeneratePerlGetterAction extends PerlCodeInsightAction
-{
-	@NotNull
-	@Override
-	protected CodeInsightActionHandler getHandler()
-	{
-		return new GeneratePerlGetterActionHandler();
-	}
+public class GeneratePerlGetterAction extends PerlCodeInsightAction {
+  @NotNull
+  @Override
+  protected CodeInsightActionHandler getHandler() {
+    return new GeneratePerlGetterActionHandler();
+  }
 }

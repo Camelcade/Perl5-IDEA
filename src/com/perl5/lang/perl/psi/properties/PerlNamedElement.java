@@ -21,12 +21,11 @@ import com.intellij.psi.PsiNameIdentifierOwner;
 /**
  * Created by hurricup on 26.04.2015.
  */
-public interface PerlNamedElement extends PsiNameIdentifierOwner
-{
-	/**
-	 * Getting name for presentation
-	 *
-	 * @return ^^
-	 */
-	public String getPresentableName();
+public interface PerlNamedElement extends PsiNameIdentifierOwner {
+  /**
+   * Getting name for presentation
+   *
+   * @return ^^
+   */
+  public String getPresentableName();
 }

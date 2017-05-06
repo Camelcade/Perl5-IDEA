@@ -27,31 +27,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 27.09.2015.
  */
-public class PerlVariableNameManipulator extends AbstractElementManipulator<PerlVariableNameElement>
-{
-	@NotNull
-	@Override
-	public TextRange getRangeInElement(@NotNull PerlVariableNameElement element)
-	{
-		String elementText = element.getText();
-		if (StringUtil.endsWithChar(elementText, ':'))
-		{
-			return TextRange.EMPTY_RANGE;
-		}
+public class PerlVariableNameManipulator extends AbstractElementManipulator<PerlVariableNameElement> {
+  @NotNull
+  @Override
+  public TextRange getRangeInElement(@NotNull PerlVariableNameElement element) {
+    String elementText = element.getText();
+    if (StringUtil.endsWithChar(elementText, ':')) {
+      return TextRange.EMPTY_RANGE;
+    }
 
-		int lastDelimiterOffset = elementText.lastIndexOf(':');
-		if (lastDelimiterOffset > -1)
-		{
-			return TextRange.create(lastDelimiterOffset + 1, elementText.length());
-		}
+    int lastDelimiterOffset = elementText.lastIndexOf(':');
+    if (lastDelimiterOffset > -1) {
+      return TextRange.create(lastDelimiterOffset + 1, elementText.length());
+    }
 
-		return super.getRangeInElement(element);
-	}
+    return super.getRangeInElement(element);
+  }
 
-	@Override
-	public PerlVariableNameElement handleContentChange(@NotNull PerlVariableNameElement element, @NotNull TextRange range, String newContent) throws IncorrectOperationException
-	{
-		return (PerlVariableNameElement) ((LeafPsiElement) element).replaceWithText(range.replace(element.getText(), newContent));
-	}
-
+  @Override
+  public PerlVariableNameElement handleContentChange(@NotNull PerlVariableNameElement element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    return (PerlVariableNameElement)((LeafPsiElement)element).replaceWithText(range.replace(element.getText(), newContent));
+  }
 }

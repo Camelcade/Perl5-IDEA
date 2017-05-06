@@ -30,59 +30,47 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodLegacySectionLinkInspection extends LocalInspectionTool
-{
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PodVisitor()
-		{
-			@Override
-			public void visitPodFormatterL(@NotNull PodFormatterL o)
-			{
-				PodLinkDescriptor descriptor = o.getLinkDescriptor();
+public class PodLegacySectionLinkInspection extends LocalInspectionTool {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PodVisitor() {
+      @Override
+      public void visitPodFormatterL(@NotNull PodFormatterL o) {
+        PodLinkDescriptor descriptor = o.getLinkDescriptor();
 
-				if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null)
-				{
-					PsiElement contentBlock = o.getContentBlock();
-					TextRange sectionRange = descriptor.getSectionTextRangeInLink();
-					if (contentBlock != null && sectionRange != null)
-					{
-						if (isSectionLegacy(contentBlock.getText(), sectionRange))
-						{
-							holder.registerProblem(o, "Section \"" + descriptor.getSection() + "\" should have a slash before it", ProblemHighlightType.LIKE_DEPRECATED, sectionRange.shiftRight(contentBlock.getStartOffsetInParent()));
-						}
+        if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null) {
+          PsiElement contentBlock = o.getContentBlock();
+          TextRange sectionRange = descriptor.getSectionTextRangeInLink();
+          if (contentBlock != null && sectionRange != null) {
+            if (isSectionLegacy(contentBlock.getText(), sectionRange)) {
+              holder.registerProblem(o, "Section \"" + descriptor.getSection() + "\" should have a slash before it",
+                                     ProblemHighlightType.LIKE_DEPRECATED, sectionRange.shiftRight(contentBlock.getStartOffsetInParent()));
+            }
+          }
+        }
+        super.visitPodFormatterL(o);
+      }
 
-					}
-				}
-				super.visitPodFormatterL(o);
-			}
+      private boolean isSectionLegacy(String text, TextRange sectionRange) {
+        if (text == null) {
+          return false;
+        }
 
-			private boolean isSectionLegacy(String text, TextRange sectionRange)
-			{
-				if (text == null)
-				{
-					return false;
-				}
+        int sectionStartOffset = sectionRange.getStartOffset();
+        if (sectionStartOffset == 0) {
+          return true;
+        }
 
-				int sectionStartOffset = sectionRange.getStartOffset();
-				if (sectionStartOffset == 0)
-				{
-					return true;
-				}
+        char prevChar = text.charAt(sectionStartOffset - 1);
+        if (sectionStartOffset == 1) {
+          return prevChar != '/';
+        }
 
-				char prevChar = text.charAt(sectionStartOffset - 1);
-				if (sectionStartOffset == 1)
-				{
-					return prevChar != '/';
-				}
+        char prevPrevChar = text.charAt(sectionStartOffset - 2);
 
-				char prevPrevChar = text.charAt(sectionStartOffset - 2);
-
-				return !(prevChar == '/' || prevChar == '"' && prevPrevChar == '/');
-			}
-
-		};
-	}
+        return !(prevChar == '/' || prevChar == '"' && prevPrevChar == '/');
+      }
+    };
+  }
 }

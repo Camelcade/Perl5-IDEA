@@ -26,29 +26,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousFileImpl extends PerlFileImpl
-{
-	public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider)
-	{
-		super(viewProvider, MojoliciousLanguage.INSTANCE);
-	}
+public class MojoliciousFileImpl extends PerlFileImpl {
+  public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
+    super(viewProvider, MojoliciousLanguage.INSTANCE);
+  }
 
-	@Override
-	public String toString()
-	{
-		return "Mojolicious Perl5 Template";
-	}
+  @Override
+  public String toString() {
+    return "Mojolicious Perl5 Template";
+  }
 
-	@Override
-	protected FileType getDefaultFileType()
-	{
-		return MojoliciousFileType.INSTANCE;
-	}
+  @Override
+  protected FileType getDefaultFileType() {
+    return MojoliciousFileType.INSTANCE;
+  }
 
-	@Override
-	public byte[] getPerlContentInBytes()
-	{
-		return null;
-	}
-
+  @Override
+  public byte[] getPerlContentInBytes() {
+    return null;
+  }
 }

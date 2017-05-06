@@ -37,65 +37,53 @@ import java.util.List;
 /**
  * Created by hurricup on 24.08.2015.
  */
-public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	protected static void fillWithNamespaceImports(@NotNull PerlNamespaceContainer namespaceContainer, @NotNull final CompletionResultSet resultSet)
-	{
-		for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors())
-		{
-			List<PsiElement> psiElements = PerlSubUtil.collectRelatedItems(exportDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
+public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters> {
+  public void addCompletions(@NotNull final CompletionParameters parameters,
+                             ProcessingContext context,
+                             @NotNull final CompletionResultSet resultSet) {
+    PsiElement position = parameters.getPosition();
 
-			if (psiElements.isEmpty()) // no definition found
-			{
-				resultSet.addElement(exportDescriptor.getLookupElement());
-			}
-			else
-			{
-				for (PsiElement element : psiElements)
-				{
-					resultSet.addElement(PerlSubCompletionUtil.getSmartLookupElement(element));
-				}
-			}
-		}
-	}
+    PsiPerlMethod method = (PsiPerlMethod)position.getParent();
 
-	public void addCompletions(@NotNull final CompletionParameters parameters,
-							   ProcessingContext context,
-							   @NotNull final CompletionResultSet resultSet)
-	{
-		PsiElement position = parameters.getPosition();
+    if (method.isObjectMethod()) {
+      return;
+    }
 
-		PsiPerlMethod method = (PsiPerlMethod) position.getParent();
+    Project project = method.getProject();
+    if (!method.hasExplicitNamespace()) {
+      PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
+      if (namespaceContainer != null) {
+        fillWithNamespaceImports(namespaceContainer, resultSet);
+      }
+    }
+    else {    // not an object method, but has explicit namespace
+      PerlNamespaceElement namespaceElement = method.getNamespaceElement();
+      if (namespaceElement != null) {
+        String targetPackageName = namespaceElement.getCanonicalName();
+        if (targetPackageName != null) {
+          for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName)) {
+            fillWithNamespaceImports(namespaceDefinition, resultSet);
+          }
+        }
+      }
+    }
+  }
 
-		if (method.isObjectMethod())
-		{
-			return;
-		}
+  protected static void fillWithNamespaceImports(@NotNull PerlNamespaceContainer namespaceContainer,
+                                                 @NotNull final CompletionResultSet resultSet) {
+    for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
+      List<PsiElement> psiElements =
+        PerlSubUtil.collectRelatedItems(exportDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
 
-		Project project = method.getProject();
-		if (!method.hasExplicitNamespace())
-		{
-			PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
-			if (namespaceContainer != null)
-			{
-				fillWithNamespaceImports(namespaceContainer, resultSet);
-			}
-		}
-		else
-		{    // not an object method, but has explicit namespace
-			PerlNamespaceElement namespaceElement = method.getNamespaceElement();
-			if (namespaceElement != null)
-			{
-				String targetPackageName = namespaceElement.getCanonicalName();
-				if (targetPackageName != null)
-				{
-					for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName))
-					{
-						fillWithNamespaceImports(namespaceDefinition, resultSet);
-					}
-				}
-			}
-		}
-	}
-
+      if (psiElements.isEmpty()) // no definition found
+      {
+        resultSet.addElement(exportDescriptor.getLookupElement());
+      }
+      else {
+        for (PsiElement element : psiElements) {
+          resultSet.addElement(PerlSubCompletionUtil.getSmartLookupElement(element));
+        }
+      }
+    }
+  }
 }

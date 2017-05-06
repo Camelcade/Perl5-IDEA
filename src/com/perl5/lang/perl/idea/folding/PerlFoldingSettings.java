@@ -21,20 +21,17 @@ import com.intellij.openapi.components.ServiceManager;
 /**
  * Created by hurricup on 28.09.2015.
  */
-public class PerlFoldingSettings
-{
-	public boolean COLLAPSE_COMMENTS = true;
-	public boolean COLLAPSE_CONSTANT_BLOCKS = false;
-	public boolean COLLAPSE_ANON_ARRAYS = false;
-	public boolean COLLAPSE_ANON_HASHES = false;
-	public boolean COLLAPSE_PARENTHESISED = false;
-	public boolean COLLAPSE_HEREDOCS = false;
-	public boolean COLLAPSE_TEMPLATES = false;
-	public boolean COLLAPSE_QW = false;
+public class PerlFoldingSettings {
+  public boolean COLLAPSE_COMMENTS = true;
+  public boolean COLLAPSE_CONSTANT_BLOCKS = false;
+  public boolean COLLAPSE_ANON_ARRAYS = false;
+  public boolean COLLAPSE_ANON_HASHES = false;
+  public boolean COLLAPSE_PARENTHESISED = false;
+  public boolean COLLAPSE_HEREDOCS = false;
+  public boolean COLLAPSE_TEMPLATES = false;
+  public boolean COLLAPSE_QW = false;
 
-	public static PerlFoldingSettings getInstance()
-	{
-		return ServiceManager.getService(PerlFoldingSettings.class);
-	}
-
+  public static PerlFoldingSettings getInstance() {
+    return ServiceManager.getService(PerlFoldingSettings.class);
+  }
 }

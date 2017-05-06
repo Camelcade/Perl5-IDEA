@@ -24,21 +24,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlGlobsStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable>
-{
-	public static final int VERSION = 5;
-	public static final StubIndexKey<String, PsiPerlGlobVariable> KEY = StubIndexKey.createIndexKey("perl.glob");
+public class PerlGlobsStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
+  public static final int VERSION = 5;
+  public static final StubIndexKey<String, PsiPerlGlobVariable> KEY = StubIndexKey.createIndexKey("perl.glob");
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 
-	@NotNull
-	@Override
-	public StubIndexKey<String, PsiPerlGlobVariable> getKey()
-	{
-		return KEY;
-	}
+  @NotNull
+  @Override
+  public StubIndexKey<String, PsiPerlGlobVariable> getKey() {
+    return KEY;
+  }
 }

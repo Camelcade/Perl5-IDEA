@@ -25,18 +25,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.02.2016.
  */
-public abstract class PerlVariableScopeProcessor extends UserDataHolderBase implements PsiScopeProcessor
-{
-	@Nullable
-	@Override
-	public <T> T getHint(@NotNull Key<T> hintKey)
-	{
-		return null;
-	}
+public abstract class PerlVariableScopeProcessor extends UserDataHolderBase implements PsiScopeProcessor {
+  @Nullable
+  @Override
+  public <T> T getHint(@NotNull Key<T> hintKey) {
+    return null;
+  }
 
-	@Override
-	public void handleEvent(@NotNull Event event, @Nullable Object associated)
-	{
+  @Override
+  public void handleEvent(@NotNull Event event, @Nullable Object associated) {
 
-	}
+  }
 }

@@ -19,10 +19,8 @@ package com.perl5.lang.mojolicious.util;
 /**
  * Created by hurricup on 02.08.2015.
  */
-public class MojoliciousSubUtil implements MojoliciousSubsBuiltIn
-{
-	public static boolean isBuiltIn(String subName)
-	{
-		return MOJO_DEFAULT_HELPERS.contains(subName) || MOJO_TAG_HELPERS.contains(subName);
-	}
+public class MojoliciousSubUtil implements MojoliciousSubsBuiltIn {
+  public static boolean isBuiltIn(String subName) {
+    return MOJO_DEFAULT_HELPERS.contains(subName) || MOJO_TAG_HELPERS.contains(subName);
+  }
 }

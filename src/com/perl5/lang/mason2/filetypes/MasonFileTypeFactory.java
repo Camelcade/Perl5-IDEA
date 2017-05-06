@@ -23,13 +23,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileTypeFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer)
-	{
-		fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
-		fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
-		fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");
-	}
+public class MasonFileTypeFactory extends FileTypeFactory {
+  @Override
+  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+    fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
+    fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
+    fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");
+  }
 }

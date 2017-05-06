@@ -26,142 +26,119 @@ import java.io.IOException;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class PerlLexerWithCustomStatesAdapter extends LexerBase
-{
-	private PerlLexerWithCustomStates myFlex = null;
-	private IElementType myTokenType = null;
-	private CharSequence myText;
+public class PerlLexerWithCustomStatesAdapter extends LexerBase {
+  private PerlLexerWithCustomStates myFlex = null;
+  private IElementType myTokenType = null;
+  private CharSequence myText;
 
-	private int myEnd;
-	private int myState;
+  private int myEnd;
+  private int myState;
 
-	public PerlLexerWithCustomStatesAdapter(PerlLexerWithCustomStates lexer)
-	{
-		myFlex = lexer;
-	}
+  public PerlLexerWithCustomStatesAdapter(PerlLexerWithCustomStates lexer) {
+    myFlex = lexer;
+  }
 
-	public FlexLexer getFlex()
-	{
-		return myFlex;
-	}
+  public FlexLexer getFlex() {
+    return myFlex;
+  }
 
-	@Override
-	public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, int initialState)
-	{
-		myText = buffer;
-		myEnd = endOffset;
+  @Override
+  public void start(@NotNull final CharSequence buffer, int startOffset, int endOffset, int initialState) {
+    myText = buffer;
+    myEnd = endOffset;
 
-		if (startOffset == 0 && initialState == PerlLexer.YYINITIAL)    // beginning of doc
-		{
-			myFlex.setCustomState(myFlex.getInitialCustomState());
-		}
-		else if (initialState > 255)    // properly packed state
-		{
-			myFlex.setCustomState((int) (initialState / 255));
-			initialState = initialState % 255;
-		}
-		else
-		{
-			throw new RuntimeException("Shouldn't be here, inproperly packed state");
-		}
+    if (startOffset == 0 && initialState == PerlLexer.YYINITIAL)    // beginning of doc
+    {
+      myFlex.setCustomState(myFlex.getInitialCustomState());
+    }
+    else if (initialState > 255)    // properly packed state
+    {
+      myFlex.setCustomState((int)(initialState / 255));
+      initialState = initialState % 255;
+    }
+    else {
+      throw new RuntimeException("Shouldn't be here, inproperly packed state");
+    }
 
-		myFlex.reset(myText, startOffset, endOffset, initialState);
-		myTokenType = null;
-	}
+    myFlex.reset(myText, startOffset, endOffset, initialState);
+    myTokenType = null;
+  }
 
-	@Override
-	public int getState()
-	{
-		if (myTokenType == null)
-		{
-			locateToken();
-		}
-		return myState;
-	}
+  @Override
+  public int getState() {
+    if (myTokenType == null) {
+      locateToken();
+    }
+    return myState;
+  }
 
-	@Override
-	public IElementType getTokenType()
-	{
-		if (myTokenType == null)
-		{
-			locateToken();
-		}
-		return myTokenType;
-	}
+  @Override
+  public IElementType getTokenType() {
+    if (myTokenType == null) {
+      locateToken();
+    }
+    return myTokenType;
+  }
 
-	@Override
-	public int getTokenStart()
-	{
-		if (myTokenType == null)
-		{
-			locateToken();
-		}
-		return myFlex.getTokenStart();
-	}
+  @Override
+  public int getTokenStart() {
+    if (myTokenType == null) {
+      locateToken();
+    }
+    return myFlex.getTokenStart();
+  }
 
-	@Override
-	public int getTokenEnd()
-	{
-		if (myTokenType == null)
-		{
-			locateToken();
-		}
-		return myFlex.getTokenEnd();
-	}
+  @Override
+  public int getTokenEnd() {
+    if (myTokenType == null) {
+      locateToken();
+    }
+    return myFlex.getTokenEnd();
+  }
 
-	@Override
-	public void advance()
-	{
-		if (myTokenType == null)
-		{
-			locateToken();
-		}
-		myTokenType = null;
-	}
+  @Override
+  public void advance() {
+    if (myTokenType == null) {
+      locateToken();
+    }
+    myTokenType = null;
+  }
 
-	@NotNull
-	@Override
-	public CharSequence getBufferSequence()
-	{
-		return myText;
-	}
+  @NotNull
+  @Override
+  public CharSequence getBufferSequence() {
+    return myText;
+  }
 
-	@Override
-	public int getBufferEnd()
-	{
-		return myEnd;
-	}
+  @Override
+  public int getBufferEnd() {
+    return myEnd;
+  }
 
-	protected void compileState()
-	{
-		int customState = myFlex.getCustomState();
-		int lexerState = myFlex.yystate();
+  protected void compileState() {
+    int customState = myFlex.getCustomState();
+    int lexerState = myFlex.yystate();
 
-		assert customState < 255;
-		assert lexerState < 255;
+    assert customState < 255;
+    assert lexerState < 255;
 
-		myState = customState * 255 + lexerState;
-	}
+    myState = customState * 255 + lexerState;
+  }
 
-	protected void locateToken()
-	{
-		if (myTokenType != null)
-		{
-			return;
-		}
-		try
-		{
-			compileState();
-			myTokenType = myFlex.advance();
-		}
-		catch (IOException e)
-		{ /*Can't happen*/ }
-		catch (Error e)
-		{
-			// add lexer class name to the error
-			final Error error = new Error(myFlex.getClass().getName() + ": " + e.getMessage());
-			error.setStackTrace(e.getStackTrace());
-			throw error;
-		}
-	}
+  protected void locateToken() {
+    if (myTokenType != null) {
+      return;
+    }
+    try {
+      compileState();
+      myTokenType = myFlex.advance();
+    }
+    catch (IOException e) { /*Can't happen*/ }
+    catch (Error e) {
+      // add lexer class name to the error
+      final Error error = new Error(myFlex.getClass().getName() + ": " + e.getMessage());
+      error.setStackTrace(e.getStackTrace());
+      throw error;
+    }
+  }
 }

@@ -25,69 +25,56 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.10.2015.
  */
-public class PerlSubLexerAdapter extends FlexAdapter
-{
-	private final int myPerlLexerState;
+public class PerlSubLexerAdapter extends FlexAdapter {
+  private final int myPerlLexerState;
 
-	public PerlSubLexerAdapter(@Nullable Project project, int perlLexerState)
-	{
-		super(new PerlLexer(null).withProject(project));
-		myPerlLexerState = perlLexerState;
-	}
+  public PerlSubLexerAdapter(@Nullable Project project, int perlLexerState) {
+    super(new PerlLexer(null).withProject(project));
+    myPerlLexerState = perlLexerState;
+  }
 
-	public static PerlSubLexerAdapter forMatchRegex(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.MATCH_REGEX);
-	}
+  @Override
+  public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
+    super.start(buffer, startOffset, endOffset, myPerlLexerState);
+  }
 
-	public static PerlSubLexerAdapter forExtendedMatchRegex(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.EXTENDED_MATCH_REGEX);
-	}
+  public static PerlSubLexerAdapter forMatchRegex(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.MATCH_REGEX);
+  }
 
-	public static PerlSubLexerAdapter forReplacementRegex(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.REPLACEMENT_REGEX);
-	}
+  public static PerlSubLexerAdapter forExtendedMatchRegex(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.EXTENDED_MATCH_REGEX);
+  }
 
-	public static PerlSubLexerAdapter forCode(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.YYINITIAL);
-	}
+  public static PerlSubLexerAdapter forReplacementRegex(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.REPLACEMENT_REGEX);
+  }
 
-	public static PerlSubLexerAdapter forStringQW(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.STRING_LIST);
-	}
+  public static PerlSubLexerAdapter forCode(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.YYINITIAL);
+  }
 
-	public static PerlSubLexerAdapter forAnnotation(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.ANNOTATION);
-	}
+  public static PerlSubLexerAdapter forStringQW(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.STRING_LIST);
+  }
 
-	public static PerlSubLexerAdapter forUseVars(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING);
-	}
+  public static PerlSubLexerAdapter forAnnotation(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.ANNOTATION);
+  }
 
-	public static PerlSubLexerAdapter forStringSQ(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.STRING_Q);
-	}
+  public static PerlSubLexerAdapter forUseVars(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.USE_VARS_STRING);
+  }
 
-	public static PerlSubLexerAdapter forStringDQ(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QQ);
-	}
+  public static PerlSubLexerAdapter forStringSQ(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.STRING_Q);
+  }
 
-	public static PerlSubLexerAdapter forStringQX(@Nullable Project project)
-	{
-		return new PerlSubLexerAdapter(project, PerlLexer.STRING_QX);
-	}
+  public static PerlSubLexerAdapter forStringDQ(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.STRING_QQ);
+  }
 
-	@Override
-	public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState)
-	{
-		super.start(buffer, startOffset, endOffset, myPerlLexerState);
-	}
+  public static PerlSubLexerAdapter forStringQX(@Nullable Project project) {
+    return new PerlSubLexerAdapter(project, PerlLexer.STRING_QX);
+  }
 }

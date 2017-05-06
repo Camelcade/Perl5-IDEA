@@ -32,19 +32,16 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousElementTypes
-{
-	public MojoliciousHighlighter(@Nullable final Project project,
-								  @Nullable final VirtualFile virtualFile,
-								  @NotNull final EditorColorsScheme colors)
-	{
-		super(new MojoliciousSyntaxHighlighter(project), colors);
-		registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
-				SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
-		registerLayer(PerlElementTypes.POD, new LayerDescriptor(
-				SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
-				""
-		));
-
-	}
+public class MojoliciousHighlighter extends LayeredLexerEditorHighlighter implements MojoliciousElementTypes {
+  public MojoliciousHighlighter(@Nullable final Project project,
+                                @Nullable final VirtualFile virtualFile,
+                                @NotNull final EditorColorsScheme colors) {
+    super(new MojoliciousSyntaxHighlighter(project), colors);
+    registerLayer(MOJO_TEMPLATE_BLOCK_HTML, new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(StdFileTypes.HTML, project, virtualFile), ""));
+    registerLayer(PerlElementTypes.POD, new LayerDescriptor(
+      SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile),
+      ""
+    ));
+  }
 }

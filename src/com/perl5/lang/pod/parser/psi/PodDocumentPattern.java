@@ -27,149 +27,121 @@ import java.util.regex.Pattern;
  * Created by hurricup on 27.03.2016.
  * Pattern for searching through the pod documentation
  */
-public class PodDocumentPattern
-{
-	public static final int DEFAULT_MAX_LIST_LEVEL = 2;
-	private int myListLevel = DEFAULT_MAX_LIST_LEVEL;    // this is default value
-	private Pattern myItemPattern;    // pattern to search items
-	private Pattern myHeadingPattern; // pattern to search headers
-	private String myIndexKey;    // index key to search. If both defined - first wins
-	private boolean exactMatch = false;    // set to true if need exact match, instead of startsWith
+public class PodDocumentPattern {
+  public static final int DEFAULT_MAX_LIST_LEVEL = 2;
+  private int myListLevel = DEFAULT_MAX_LIST_LEVEL;    // this is default value
+  private Pattern myItemPattern;    // pattern to search items
+  private Pattern myHeadingPattern; // pattern to search headers
+  private String myIndexKey;    // index key to search. If both defined - first wins
+  private boolean exactMatch = false;    // set to true if need exact match, instead of startsWith
 
-	private PodDocumentPattern()
-	{
+  private PodDocumentPattern() {
 
-	}
+  }
 
-	public static PodDocumentPattern itemPattern(@NotNull String itemText)
-	{
-		PodDocumentPattern pattern = new PodDocumentPattern();
-		pattern.setItemPattern(itemText);
-		return pattern;
-	}
+  public boolean accepts(PsiElement element) {
+    return element != null && (acceptsItem(element) || acceptsIndex(element) || acceptsHeading(element));
+  }
 
-	public static PodDocumentPattern indexPattern(@NotNull String itemText)
-	{
-		PodDocumentPattern pattern = new PodDocumentPattern();
-		pattern.setIndexKey(itemText);
-		return pattern;
-	}
+  protected boolean acceptsItem(PsiElement element) {
+    if (getItemPattern() != null && element instanceof PodSectionItem) {
+      if (((PodSectionItem)element).getListLevel() < getListLevel()) {
+        String title = ((PodTitledSection)element).getTitleText();
+        if (StringUtil.isNotEmpty(title)) {
+          Matcher matcher = getItemPattern().matcher(title);
+          return exactMatch && matcher.matches() || matcher.lookingAt();
+        }
+      }
+    }
+    return false;
+  }
 
-	public static PodDocumentPattern headingAndItemPattern(@NotNull String itemText)
-	{
-		PodDocumentPattern pattern = new PodDocumentPattern();
-		pattern.setItemPattern(itemText);
-		pattern.setHeadingPattern(itemText);
-		return pattern;
-	}
+  protected boolean acceptsHeading(PsiElement element) {
+    if (getHeadingPattern() != null && element instanceof PodTitledSection && ((PodTitledSection)element).isHeading()) {
+      if (((PodTitledSection)element).getListLevel() < getListLevel()) {
+        String title = ((PodTitledSection)element).getTitleText();
+        if (StringUtil.isNotEmpty(title)) {
+          Matcher matcher = getHeadingPattern().matcher(title);
+          return exactMatch && matcher.matches() || matcher.lookingAt();
+        }
+      }
+    }
+    return false;
+  }
 
-	public boolean accepts(PsiElement element)
-	{
-		return element != null && (acceptsItem(element) || acceptsIndex(element) || acceptsHeading(element));
-	}
+  protected boolean acceptsIndex(PsiElement element) {
+    if (getIndexKey() != null && element instanceof PodFormatterX) {
+      if (((PodFormatterX)element).getListLevel() < getListLevel()) {
+        String elementText = ((PodFormatterX)element).getTitleText();
 
-	protected boolean acceptsItem(PsiElement element)
-	{
-		if (getItemPattern() != null && element instanceof PodSectionItem)
-		{
-			if (((PodSectionItem) element).getListLevel() < getListLevel())
-			{
-				String title = ((PodTitledSection) element).getTitleText();
-				if (StringUtil.isNotEmpty(title))
-				{
-					Matcher matcher = getItemPattern().matcher(title);
-					return exactMatch && matcher.matches() || matcher.lookingAt();
-				}
-			}
-		}
-		return false;
-	}
+        return StringUtil.isNotEmpty(elementText) && getIndexKey().equals(elementText);
+      }
+    }
+    return false;
+  }
 
-	protected boolean acceptsHeading(PsiElement element)
-	{
-		if (getHeadingPattern() != null && element instanceof PodTitledSection && ((PodTitledSection) element).isHeading())
-		{
-			if (((PodTitledSection) element).getListLevel() < getListLevel())
-			{
-				String title = ((PodTitledSection) element).getTitleText();
-				if (StringUtil.isNotEmpty(title))
-				{
-					Matcher matcher = getHeadingPattern().matcher(title);
-					return exactMatch && matcher.matches() || matcher.lookingAt();
-				}
-			}
-		}
-		return false;
-	}
+  public int getListLevel() {
+    return myListLevel;
+  }
 
-	protected boolean acceptsIndex(PsiElement element)
-	{
-		if (getIndexKey() != null && element instanceof PodFormatterX)
-		{
-			if (((PodFormatterX) element).getListLevel() < getListLevel())
-			{
-				String elementText = ((PodFormatterX) element).getTitleText();
+  public void setListLevel(int myListLevel) {
+    this.myListLevel = myListLevel;
+  }
 
-				return StringUtil.isNotEmpty(elementText) && getIndexKey().equals(elementText);
-			}
-		}
-		return false;
-	}
+  public Pattern getItemPattern() {
+    return myItemPattern;
+  }
 
-	public int getListLevel()
-	{
-		return myListLevel;
-	}
+  public void setItemPattern(Pattern myItemPattern) {
+    this.myItemPattern = myItemPattern;
+  }
 
-	public void setListLevel(int myListLevel)
-	{
-		this.myListLevel = myListLevel;
-	}
+  public void setItemPattern(String itemPattern) {
+    setItemPattern(StringUtil.isEmpty(itemPattern) ? null : Pattern.compile(Pattern.quote(itemPattern) + "(\\s|\\b|$)"));
+  }
 
-	public Pattern getItemPattern()
-	{
-		return myItemPattern;
-	}
+  public Pattern getHeadingPattern() {
+    return myHeadingPattern;
+  }
 
-	public void setItemPattern(Pattern myItemPattern)
-	{
-		this.myItemPattern = myItemPattern;
-	}
+  public void setHeadingPattern(String pattern) {
+    setHeadingPattern(StringUtil.isEmpty(pattern) ? null : Pattern.compile(Pattern.quote(pattern) + "(\\s|\\b|$)"));
+  }
 
-	public void setItemPattern(String itemPattern)
-	{
-		setItemPattern(StringUtil.isEmpty(itemPattern) ? null : Pattern.compile(Pattern.quote(itemPattern) + "(\\s|\\b|$)"));
-	}
+  public void setHeadingPattern(Pattern myHeadingPattern) {
+    this.myHeadingPattern = myHeadingPattern;
+  }
 
-	public Pattern getHeadingPattern()
-	{
-		return myHeadingPattern;
-	}
+  public String getIndexKey() {
+    return myIndexKey;
+  }
 
-	public void setHeadingPattern(String pattern)
-	{
-		setHeadingPattern(StringUtil.isEmpty(pattern) ? null : Pattern.compile(Pattern.quote(pattern) + "(\\s|\\b|$)"));
-	}
+  public void setIndexKey(String myIndexkey) {
+    this.myIndexKey = myIndexkey;
+  }
 
-	public void setHeadingPattern(Pattern myHeadingPattern)
-	{
-		this.myHeadingPattern = myHeadingPattern;
-	}
+  public PodDocumentPattern withExactMatch() {
+    exactMatch = true;
+    return this;
+  }
 
-	public String getIndexKey()
-	{
-		return myIndexKey;
-	}
+  public static PodDocumentPattern itemPattern(@NotNull String itemText) {
+    PodDocumentPattern pattern = new PodDocumentPattern();
+    pattern.setItemPattern(itemText);
+    return pattern;
+  }
 
-	public void setIndexKey(String myIndexkey)
-	{
-		this.myIndexKey = myIndexkey;
-	}
+  public static PodDocumentPattern indexPattern(@NotNull String itemText) {
+    PodDocumentPattern pattern = new PodDocumentPattern();
+    pattern.setIndexKey(itemText);
+    return pattern;
+  }
 
-	public PodDocumentPattern withExactMatch()
-	{
-		exactMatch = true;
-		return this;
-	}
+  public static PodDocumentPattern headingAndItemPattern(@NotNull String itemText) {
+    PodDocumentPattern pattern = new PodDocumentPattern();
+    pattern.setItemPattern(itemText);
+    pattern.setHeadingPattern(itemText);
+    return pattern;
+  }
 }
 

@@ -29,44 +29,35 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements PsiLanguageInjectionHost
-{
-	public PerlHeredocElementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements PsiLanguageInjectionHost {
+  public PerlHeredocElementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public boolean isValidHost()
-	{
-		return PerlSharedSettings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION || getChildren().length == 0;
-	}
+  @Override
+  public boolean isValidHost() {
+    return PerlSharedSettings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION || getChildren().length == 0;
+  }
 
-	@Override
-	public PsiLanguageInjectionHost updateText(@NotNull final String text)
-	{
-		return null;
-	}
+  @Override
+  public PsiLanguageInjectionHost updateText(@NotNull final String text) {
+    return null;
+  }
 
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if (visitor instanceof PsiPerlVisitor)
-		{
-			((PerlVisitor) visitor).visitHeredocElement(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PsiPerlVisitor) {
+      ((PerlVisitor)visitor).visitHeredocElement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
 
-	@NotNull
-	@Override
-	public LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper()
-	{
-		return new PerlHeredocLiteralEscaper(this);
-	}
-
+  @NotNull
+  @Override
+  public LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper() {
+    return new PerlHeredocLiteralEscaper(this);
+  }
 }

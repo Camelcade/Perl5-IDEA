@@ -34,51 +34,44 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl implements MasonMethodModifier
-{
-	protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl implements MasonMethodModifier {
+  protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
 
-	public MasonMethodModifierImpl(ASTNode node)
-	{
-		super(node);
-	}
+  public MasonMethodModifierImpl(ASTNode node) {
+    super(node);
+  }
 
 
-	@Nullable
-	@Override
-	public PsiReference[] getReferences(PsiElement element)
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public PsiReference[] getReferences(PsiElement element) {
+    return null;
+  }
 
-	@NotNull
-	protected List<PerlVariableDeclarationWrapper> buildImplicitVariables()
-	{
-		List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
-		if (isValid())
-		{
-			newImplicitVariables.add(new PerlVariableLightImpl(
-					getManager(),
-					PerlLanguage.INSTANCE,
-					PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
-					true,
-					false,
-					true,
-					this
-			));
-		}
-		return newImplicitVariables;
-	}
+  @NotNull
+  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
+    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+    if (isValid()) {
+      newImplicitVariables.add(new PerlVariableLightImpl(
+        getManager(),
+        PerlLanguage.INSTANCE,
+        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        true,
+        false,
+        true,
+        this
+      ));
+    }
+    return newImplicitVariables;
+  }
 
 
-	@NotNull
-	@Override
-	public List<PerlVariableDeclarationWrapper> getImplicitVariables()
-	{
-		if (myImplicitVariables == null)
-		{
-			myImplicitVariables = buildImplicitVariables();
-		}
-		return myImplicitVariables;
-	}
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      myImplicitVariables = buildImplicitVariables();
+    }
+    return myImplicitVariables;
+  }
 }

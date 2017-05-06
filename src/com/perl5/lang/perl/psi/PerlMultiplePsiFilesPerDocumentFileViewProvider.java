@@ -41,83 +41,74 @@ import java.util.Set;
  * POD aware 3 branches FileView provider for perl-based templating languages
  */
 public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
-		extends MultiplePsiFilesPerDocumentFileViewProvider
-		implements TemplateLanguageFileViewProvider, ConfigurableTemplateLanguageFileViewProvider
-{
-	private final Language myTemplateLanguage;
-	private final Set<Language> myRelevantLanguages = new HashSet<Language>();
+  extends MultiplePsiFilesPerDocumentFileViewProvider
+  implements TemplateLanguageFileViewProvider, ConfigurableTemplateLanguageFileViewProvider {
+  private final Language myTemplateLanguage;
+  private final Set<Language> myRelevantLanguages = new HashSet<Language>();
 
-	public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
-	{
-		this(manager, virtualFile, eventSystemEnabled, calcTemplateLanguage(manager, virtualFile));
-	}
+  public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
+    this(manager, virtualFile, eventSystemEnabled, calcTemplateLanguage(manager, virtualFile));
+  }
 
-	public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled, Language templateLanguage)
-	{
-		super(manager, virtualFile, eventSystemEnabled);
-		myRelevantLanguages.add(getBaseLanguage());
-		myRelevantLanguages.add(PodLanguage.INSTANCE);
-		myRelevantLanguages.add(myTemplateLanguage = templateLanguage);
-	}
+  public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager,
+                                                         VirtualFile virtualFile,
+                                                         boolean eventSystemEnabled,
+                                                         Language templateLanguage) {
+    super(manager, virtualFile, eventSystemEnabled);
+    myRelevantLanguages.add(getBaseLanguage());
+    myRelevantLanguages.add(PodLanguage.INSTANCE);
+    myRelevantLanguages.add(myTemplateLanguage = templateLanguage);
+  }
 
-	@NotNull
-	protected static Language calcTemplateLanguage(PsiManager manager, VirtualFile file)
-	{
-		Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
-		return result == null ? StdLanguages.HTML : result;
-	}
+  /**
+   * Returns TemplateDataElementType for the templating part
+   */
+  @NotNull
+  protected abstract IElementType getTemplateContentElementType();
 
-	/**
-	 * Returns TemplateDataElementType for the templating part
-	 */
-	@NotNull
-	protected abstract IElementType getTemplateContentElementType();
+  /**
+   * Returns TemplateDataElementType for the pod part
+   */
+  @NotNull
+  protected abstract IElementType getPODContentElementType();
 
-	/**
-	 * Returns TemplateDataElementType for the pod part
-	 */
-	@NotNull
-	protected abstract IElementType getPODContentElementType();
+  @Override
+  @NotNull
+  public Language getTemplateDataLanguage() {
+    return myTemplateLanguage;
+  }
 
-	@Override
-	@NotNull
-	public Language getTemplateDataLanguage()
-	{
-		return myTemplateLanguage;
-	}
+  @Override
+  @NotNull
+  public Set<Language> getLanguages() {
+    return myRelevantLanguages;
+  }
 
-	@Override
-	@NotNull
-	public Set<Language> getLanguages()
-	{
-		return myRelevantLanguages;
-	}
+  @Override
+  @Nullable
+  protected PsiFile createFile(@NotNull final Language lang) {
+    if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage()) {
+      return null;
+    }
 
-	@Override
-	@Nullable
-	protected PsiFile createFile(@NotNull final Language lang)
-	{
-		if (lang != PodLanguage.INSTANCE && lang != getBaseLanguage() && lang != getTemplateDataLanguage())
-		{
-			return null;
-		}
+    final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
 
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+    if (parserDefinition != null) {
+      final PsiFileImpl file = (PsiFileImpl)parserDefinition.createFile(this);
+      if (lang == getTemplateDataLanguage()) {
+        file.setContentElementType(getTemplateContentElementType());
+      }
+      else if (lang == PodLanguage.INSTANCE) {
+        file.setContentElementType(getPODContentElementType());
+      }
+      return file;
+    }
+    return null;
+  }
 
-		if (parserDefinition != null)
-		{
-			final PsiFileImpl file = (PsiFileImpl) parserDefinition.createFile(this);
-			if (lang == getTemplateDataLanguage())
-			{
-				file.setContentElementType(getTemplateContentElementType());
-			}
-			else if (lang == PodLanguage.INSTANCE)
-			{
-				file.setContentElementType(getPODContentElementType());
-			}
-			return file;
-		}
-		return null;
-	}
-
+  @NotNull
+  protected static Language calcTemplateLanguage(PsiManager manager, VirtualFile file) {
+    Language result = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
+    return result == null ? StdLanguages.HTML : result;
+  }
 }

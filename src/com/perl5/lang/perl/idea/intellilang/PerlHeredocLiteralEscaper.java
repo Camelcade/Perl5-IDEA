@@ -25,47 +25,37 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 02.08.2015.
  */
-public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocElementImpl>
-{
-	public PerlHeredocLiteralEscaper(PerlHeredocElementImpl host)
-	{
-		super(host);
-	}
+public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocElementImpl> {
+  public PerlHeredocLiteralEscaper(PerlHeredocElementImpl host) {
+    super(host);
+  }
 
-	@Override
-	public boolean isOneLine()
-	{
-		return false;
-	}
+  @Override
+  public boolean isOneLine() {
+    return false;
+  }
 
-	@Override
-	public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull StringBuilder outChars)
-	{
-		outChars.append(rangeInsideHost.subSequence(myHost.getText()));
-		return true;
-	}
+  @Override
+  public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    outChars.append(rangeInsideHost.subSequence(myHost.getText()));
+    return true;
+  }
 
-	@Override
-	public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost)
-	{
-		int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
-		if (offset < rangeInsideHost.getStartOffset())
-		{
-			offset = rangeInsideHost.getStartOffset();
-		}
-		if (offset > rangeInsideHost.getEndOffset())
-		{
-			offset = rangeInsideHost.getEndOffset();
-		}
-		return offset;
-	}
+  @Override
+  public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost) {
+    int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
+    if (offset < rangeInsideHost.getStartOffset()) {
+      offset = rangeInsideHost.getStartOffset();
+    }
+    if (offset > rangeInsideHost.getEndOffset()) {
+      offset = rangeInsideHost.getEndOffset();
+    }
+    return offset;
+  }
 
-	@NotNull
-	@Override
-	public TextRange getRelevantTextRange()
-	{
-		return ElementManipulators.getManipulator(myHost).getRangeInElement(myHost);
-	}
-
-
+  @NotNull
+  @Override
+  public TextRange getRelevantTextRange() {
+    return ElementManipulators.getManipulator(myHost).getRangeInElement(myHost);
+  }
 }

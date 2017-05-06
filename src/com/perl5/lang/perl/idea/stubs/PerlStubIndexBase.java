@@ -22,13 +22,11 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
 /**
  * Created by hurricup on 13.11.2016.
  */
-public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi>
-{
-	private final static int VERSION = 3;
+public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
+  private final static int VERSION = 3;
 
-	@Override
-	public int getVersion()
-	{
-		return super.getVersion() + VERSION;
-	}
+  @Override
+  public int getVersion() {
+    return super.getVersion() + VERSION;
+  }
 }

@@ -24,15 +24,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class EmbeddedPerlTokenType extends IElementType
-{
-	public EmbeddedPerlTokenType(@NotNull @NonNls String debugName)
-	{
-		super(debugName, EmbeddedPerlLanguage.INSTANCE);
-	}
+public class EmbeddedPerlTokenType extends IElementType {
+  public EmbeddedPerlTokenType(@NotNull @NonNls String debugName) {
+    super(debugName, EmbeddedPerlLanguage.INSTANCE);
+  }
 
-	public String toString()
-	{
-		return "Embedded Perl5: " + super.toString();
-	}
+  public String toString() {
+    return "Embedded Perl5: " + super.toString();
+  }
 }

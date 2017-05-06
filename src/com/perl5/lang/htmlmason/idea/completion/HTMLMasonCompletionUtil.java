@@ -39,113 +39,98 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.03.2016.
  */
-public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements
-{
-	public static void fillWithComponentSlugs(@NotNull CompletionResultSet resultSet)
-	{
-		resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_PARENT));
-		resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_SELF));
-		resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_REQUEST));
+public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
+  public static void fillWithComponentSlugs(@NotNull CompletionResultSet resultSet) {
+    resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_PARENT));
+    resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_SELF));
+    resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_REQUEST));
+  }
 
-	}
+  public static void fillWithSubcomponents(@NotNull CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
+    for (HTMLMasonCompositeElement element : component.getSubComponentsDefinitions()) {
+      assert element instanceof HTMLMasonSubcomponentDefitnition;
 
-	public static void fillWithSubcomponents(@NotNull CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component)
-	{
-		for (HTMLMasonCompositeElement element : component.getSubComponentsDefinitions())
-		{
-			assert element instanceof HTMLMasonSubcomponentDefitnition;
+      String name = ((HTMLMasonSubcomponentDefitnition)element).getName();
+      if (name != null) {
+        resultSet.addElement(LookupElementBuilder
+                               .create(name)
+                               .withIcon(element.getIcon(0))
+                               .withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element))
+        );
+      }
+    }
+  }
 
-			String name = ((HTMLMasonSubcomponentDefitnition) element).getName();
-			if (name != null)
-			{
-				resultSet.addElement(LookupElementBuilder
-						.create(name)
-						.withIcon(element.getIcon(0))
-						.withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) element))
-				);
-			}
-		}
-	}
+  public static void fillWithMethods(@NotNull final CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
+    component.processMethodDefinitionsInThisOrParents(new Processor<HTMLMasonMethodDefinition>() {
+      @Override
+      public boolean process(HTMLMasonMethodDefinition element) {
+        String name = element.getName();
+        if (name != null) {
+          resultSet.addElement(LookupElementBuilder
+                                 .create(name)
+                                 .withIcon(element.getIcon(0))
+                                 .withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
+          );
+        }
+        return true;
+      }
+    });
+  }
 
-	public static void fillWithMethods(@NotNull final CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component)
-	{
-		component.processMethodDefinitionsInThisOrParents(new Processor<HTMLMasonMethodDefinition>()
-		{
-			@Override
-			public boolean process(HTMLMasonMethodDefinition element)
-			{
-				String name = element.getName();
-				if (name != null)
-				{
-					resultSet.addElement(LookupElementBuilder
-							.create(name)
-							.withIcon(element.getIcon(0))
-							.withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
-					);
-				}
-				return true;
-			}
-		});
-	}
+  public static void fillWithRelativeSubcomponents(@NotNull CompletionResultSet resultSet,
+                                                   @NotNull Project project,
+                                                   @NotNull HTMLMasonFileImpl component) {
+    VirtualFile containingFile = component.getComponentVirtualFile();
+    VirtualFile root = null;
+    if (containingFile != null && (root = containingFile.getParent()) != null) {
+      VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
+    }
+  }
 
-	public static void fillWithRelativeSubcomponents(@NotNull CompletionResultSet resultSet, @NotNull Project project, @NotNull HTMLMasonFileImpl component)
-	{
-		VirtualFile containingFile = component.getComponentVirtualFile();
-		VirtualFile root = null;
-		if (containingFile != null && (root = containingFile.getParent()) != null)
-		{
-			VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
-		}
-	}
+  public static void fillWithAbsoluteSubcomponents(@NotNull final CompletionResultSet resultSet, @NotNull Project project) {
+    HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
 
-	public static void fillWithAbsoluteSubcomponents(@NotNull final CompletionResultSet resultSet, @NotNull Project project)
-	{
-		HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
+    for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles()) {
+      VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
+    }
+  }
 
-		for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles())
-		{
-			VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
-		}
-	}
+  protected static class ComponentsFilesCollector implements Processor<VirtualFile> {
+    private final String myPrefix;
+    private final CompletionResultSet myResultSet;
+    private final VirtualFile myRoot;
+    private final PsiManager myManager;
 
-	protected static class ComponentsFilesCollector implements Processor<VirtualFile>
-	{
-		private final String myPrefix;
-		private final CompletionResultSet myResultSet;
-		private final VirtualFile myRoot;
-		private final PsiManager myManager;
+    public ComponentsFilesCollector(@NotNull String myPrefix,
+                                    @NotNull VirtualFile root,
+                                    @NotNull CompletionResultSet resultSet,
+                                    Project project) {
+      this.myPrefix = myPrefix;
+      myResultSet = resultSet;
+      myRoot = root;
+      myManager = PsiManager.getInstance(project);
+    }
 
-		public ComponentsFilesCollector(@NotNull String myPrefix, @NotNull VirtualFile root, @NotNull CompletionResultSet resultSet, Project project)
-		{
-			this.myPrefix = myPrefix;
-			myResultSet = resultSet;
-			myRoot = root;
-			myManager = PsiManager.getInstance(project);
-		}
+    @Override
+    public boolean process(VirtualFile virtualFile) {
+      if (virtualFile.getFileType() == HTMLMasonFileType.INSTANCE) {
+        String relPath = VfsUtil.getRelativePath(virtualFile, myRoot);
+        if (StringUtil.isNotEmpty(relPath)) {
+          LookupElementBuilder newElement = LookupElementBuilder
+            .create(myPrefix + relPath)
+            .withIcon(HTMLMasonFileType.INSTANCE.getIcon());
 
-		@Override
-		public boolean process(VirtualFile virtualFile)
-		{
-			if (virtualFile.getFileType() == HTMLMasonFileType.INSTANCE)
-			{
-				String relPath = VfsUtil.getRelativePath(virtualFile, myRoot);
-				if (StringUtil.isNotEmpty(relPath))
-				{
-					LookupElementBuilder newElement = LookupElementBuilder
-							.create(myPrefix + relPath)
-							.withIcon(HTMLMasonFileType.INSTANCE.getIcon());
+          PsiFile file = myManager.findFile(virtualFile);
 
-					PsiFile file = myManager.findFile(virtualFile);
+          if (file instanceof HTMLMasonFileImpl) {
+            newElement = newElement.withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)file));
+          }
 
-					if (file instanceof HTMLMasonFileImpl)
-					{
-						newElement = newElement.withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity) file));
-					}
-
-					myResultSet.addElement(newElement);
-				}
-			}
-			return true;
-		}
-	}
+          myResultSet.addElement(newElement);
+        }
+      }
+      return true;
+    }
+  }
 }

@@ -21,10 +21,8 @@ import com.perl5.lang.perl.psi.PerlGlobVariable;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlGlobStructureViewElement extends PerlLeafStructureViewElement
-{
-	public PerlGlobStructureViewElement(PerlGlobVariable element)
-	{
-		super(element);
-	}
+public class PerlGlobStructureViewElement extends PerlLeafStructureViewElement {
+  public PerlGlobStructureViewElement(PerlGlobVariable element) {
+    super(element);
+  }
 }

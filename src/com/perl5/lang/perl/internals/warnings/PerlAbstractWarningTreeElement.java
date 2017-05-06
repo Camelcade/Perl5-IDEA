@@ -21,24 +21,20 @@ import com.perl5.lang.perl.internals.PerlVersion;
 /**
  * Created by hurricup on 23.08.2015.
  */
-public abstract class PerlAbstractWarningTreeElement
-{
-	protected final PerlVersion minVersion;
-	protected final String stringIdentifier;
+public abstract class PerlAbstractWarningTreeElement {
+  protected final PerlVersion minVersion;
+  protected final String stringIdentifier;
 
-	public PerlAbstractWarningTreeElement(double minVersion, String stringIdentifier)
-	{
-		this.minVersion = new PerlVersion(minVersion);
-		this.stringIdentifier = stringIdentifier;
-	}
+  public PerlAbstractWarningTreeElement(double minVersion, String stringIdentifier) {
+    this.minVersion = new PerlVersion(minVersion);
+    this.stringIdentifier = stringIdentifier;
+  }
 
-	public PerlVersion getMinVersion()
-	{
-		return minVersion;
-	}
+  public PerlVersion getMinVersion() {
+    return minVersion;
+  }
 
-	public String getStringIdentifier()
-	{
-		return stringIdentifier;
-	}
+  public String getStringIdentifier() {
+    return stringIdentifier;
+  }
 }

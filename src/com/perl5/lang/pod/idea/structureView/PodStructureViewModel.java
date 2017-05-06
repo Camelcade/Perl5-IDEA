@@ -28,29 +28,24 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 03.04.2016.
  */
-public class PodStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider
-{
-	public PodStructureViewModel(@NotNull PsiFile psiFile, @Nullable Editor editor)
-	{
-		super(psiFile, editor, new PodStructureViewElement(psiFile));
-	}
+public class PodStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
+  public PodStructureViewModel(@NotNull PsiFile psiFile, @Nullable Editor editor) {
+    super(psiFile, editor, new PodStructureViewElement(psiFile));
+  }
 
-	@Override
-	public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement)
-	{
-		return false;
-	}
+  @Override
+  public boolean isAlwaysShowsPlus(StructureViewTreeElement structureViewTreeElement) {
+    return false;
+  }
 
-	@Override
-	public boolean isAlwaysLeaf(StructureViewTreeElement structureViewTreeElement)
-	{
-		return false;
-	}
+  @Override
+  public boolean isAlwaysLeaf(StructureViewTreeElement structureViewTreeElement) {
+    return false;
+  }
 
-	@NotNull
-	@Override
-	public Sorter[] getSorters()
-	{
-		return new Sorter[]{Sorter.ALPHA_SORTER};
-	}
+  @NotNull
+  @Override
+  public Sorter[] getSorters() {
+    return new Sorter[]{Sorter.ALPHA_SORTER};
+  }
 }

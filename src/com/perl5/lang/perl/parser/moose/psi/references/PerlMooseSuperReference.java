@@ -33,47 +33,41 @@ import java.util.List;
 /**
  * Created by hurricup on 25.01.2016.
  */
-public class PerlMooseSuperReference extends PerlCachingReference<PsiElement>
-{
+public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
 
-	public PerlMooseSuperReference(PsiElement psiElement)
-	{
-		super(psiElement);
-	}
+  public PerlMooseSuperReference(PsiElement psiElement) {
+    super(psiElement);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		// fixme not really dry with simpleresolver and superresolver. Need some generics magic
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
-		PsiElement element = getElement();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    // fixme not really dry with simpleresolver and superresolver. Need some generics magic
+    List<ResolveResult> result = new ArrayList<ResolveResult>();
+    PsiElement element = getElement();
 
-		PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
+    PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
 
-		if (overrideStatement != null)
-		{
-			String packageName = PerlPackageUtil.getContextPackageName(element);
-			String subName = overrideStatement.getSubName();
-			Project project = element.getProject();
+    if (overrideStatement != null) {
+      String packageName = PerlPackageUtil.getContextPackageName(element);
+      String subName = overrideStatement.getSubName();
+      Project project = element.getProject();
 
 
-			for (PsiElement targetElement : PerlMro.resolveSub(
-					project,
-					packageName,
-					subName,
-					true
-			))
-			{
-				result.add(new PsiElementResolveResult(targetElement));
-			}
-		}
+      for (PsiElement targetElement : PerlMro.resolveSub(
+        project,
+        packageName,
+        subName,
+        true
+      )) {
+        result.add(new PsiElementResolveResult(targetElement));
+      }
+    }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		return myElement;
-	}
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    return myElement;
+  }
 }

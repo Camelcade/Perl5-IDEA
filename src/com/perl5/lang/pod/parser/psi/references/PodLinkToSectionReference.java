@@ -29,64 +29,51 @@ import java.util.List;
 /**
  * Created by hurricup on 10.04.2016.
  */
-public class PodLinkToSectionReference extends PerlCachingReference<PodFormatterL>
-{
-	public PodLinkToSectionReference(PodFormatterL element, TextRange range)
-	{
-		super(element, range);
-	}
+public class PodLinkToSectionReference extends PerlCachingReference<PodFormatterL> {
+  public PodLinkToSectionReference(PodFormatterL element, TextRange range) {
+    super(element, range);
+  }
 
 
-	@Override
-	public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException
-	{
-		return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
-	}
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PodFormatterL podLink = getElement();
-		PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PodFormatterL podLink = getElement();
+    PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
-		if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null)
-		{
-			List<PsiFile> targetFiles = new ArrayList<PsiFile>();
+    if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null) {
+      List<PsiFile> targetFiles = new ArrayList<PsiFile>();
 
-			if (descriptor.getFileId() != null)
-			{
-				for (PsiReference reference : podLink.getReferences())
-				{
-					if (reference instanceof PodLinkToFileReference)
-					{
-						for (ResolveResult resolveResult : ((PodLinkToFileReference) reference).multiResolve(false))
-						{
-							targetFiles.add((PsiFile) resolveResult.getElement());
-						}
-					}
-				}
-			}
-			else
-			{
-				targetFiles.add(podLink.getContainingFile());
-			}
+      if (descriptor.getFileId() != null) {
+        for (PsiReference reference : podLink.getReferences()) {
+          if (reference instanceof PodLinkToFileReference) {
+            for (ResolveResult resolveResult : ((PodLinkToFileReference)reference).multiResolve(false)) {
+              targetFiles.add((PsiFile)resolveResult.getElement());
+            }
+          }
+        }
+      }
+      else {
+        targetFiles.add(podLink.getContainingFile());
+      }
 
-			if (!targetFiles.isEmpty())
-			{
-				List<ResolveResult> results = new ArrayList<ResolveResult>();
-				PodDocumentPattern searchPattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection()).withExactMatch();
-				for (PsiFile file : targetFiles)
-				{
-					PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
-					if (podCompositeElement != null)
-					{
-						results.add(new PsiElementResolveResult(podCompositeElement));
-					}
-				}
-				return results.toArray(new ResolveResult[results.size()]);
-			}
-		}
+      if (!targetFiles.isEmpty()) {
+        List<ResolveResult> results = new ArrayList<ResolveResult>();
+        PodDocumentPattern searchPattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection()).withExactMatch();
+        for (PsiFile file : targetFiles) {
+          PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
+          if (podCompositeElement != null) {
+            results.add(new PsiElementResolveResult(podCompositeElement));
+          }
+        }
+        return results.toArray(new ResolveResult[results.size()]);
+      }
+    }
 
-		return ResolveResult.EMPTY_ARRAY;
-	}
+    return ResolveResult.EMPTY_ARRAY;
+  }
 }

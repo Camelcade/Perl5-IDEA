@@ -25,16 +25,13 @@ import java.util.List;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseWithStatementImpl extends PerlMooseExtendsStatementImpl implements PerlMooseWithStatement
-{
-	public PerlMooseWithStatementImpl(ASTNode node)
-	{
-		super(node);
-	}
+public class PerlMooseWithStatementImpl extends PerlMooseExtendsStatementImpl implements PerlMooseWithStatement {
+  public PerlMooseWithStatementImpl(ASTNode node) {
+    super(node);
+  }
 
-	@Override
-	public void changeParentsList(@NotNull List<String> currentList)
-	{
-		currentList.addAll(getParentsList());
-	}
+  @Override
+  public void changeParentsList(@NotNull List<String> currentList) {
+    currentList.addAll(getParentsList());
+  }
 }

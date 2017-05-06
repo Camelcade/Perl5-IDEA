@@ -31,220 +31,185 @@ import java.net.URLEncoder;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public class PodRenderUtil implements PodElementTypes
-{
-	public static String renderPsiElementAsHTML(@Nullable PsiElement firstElement)
-	{
-		return renderPsiRangeAsHTML(firstElement, firstElement);
-	}
+public class PodRenderUtil implements PodElementTypes {
+  public static String renderPsiElementAsHTML(@Nullable PsiElement firstElement) {
+    return renderPsiRangeAsHTML(firstElement, firstElement);
+  }
 
-	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
-	{
-		return renderPsiRangeAsHTML(firstElement, lastElement, new PodRenderingContext());
-	}
+  public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement) {
+    return renderPsiRangeAsHTML(firstElement, lastElement, new PodRenderingContext());
+  }
 
-	public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
-	{
-		if (firstElement == null)
-		{
-			return "";
-		}
+  public static String renderPsiRangeAsHTML(@Nullable PsiElement firstElement,
+                                            @Nullable PsiElement lastElement,
+                                            PodRenderingContext context) {
+    if (firstElement == null) {
+      return "";
+    }
 
-		StringBuilder result = new StringBuilder();
-		renderPsiRangeAsHTML(firstElement, lastElement, result, context);
-		return result.toString();
-	}
+    StringBuilder result = new StringBuilder();
+    renderPsiRangeAsHTML(firstElement, lastElement, result, context);
+    return result.toString();
+  }
 
-	public static void renderPsiRangeAsHTML(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
-	{
-		if (firstElement == null)
-		{
-			return;
-		}
+  public static void renderPsiRangeAsHTML(@Nullable PsiElement firstElement,
+                                          @Nullable PsiElement lastElement,
+                                          @NotNull StringBuilder builder,
+                                          @NotNull PodRenderingContext context) {
+    if (firstElement == null) {
+      return;
+    }
 
-		PsiElement run = firstElement;
-		while (run != null)
-		{
-			if (run instanceof PodRenderableElement)
-			{
-				((PodRenderableElement) run).renderElementAsHTML(builder, context);
-			}
-			else if (run.getNode().getElementType() != POD_OUTER)
-			{
-				if (context.isSafe())
-				{
-					builder.append(run.getText());
-				}
-				else
-				{
-					builder.append(XmlStringUtil.escapeString(run.getText()));
-				}
-			}
+    PsiElement run = firstElement;
+    while (run != null) {
+      if (run instanceof PodRenderableElement) {
+        ((PodRenderableElement)run).renderElementAsHTML(builder, context);
+      }
+      else if (run.getNode().getElementType() != POD_OUTER) {
+        if (context.isSafe()) {
+          builder.append(run.getText());
+        }
+        else {
+          builder.append(XmlStringUtil.escapeString(run.getText()));
+        }
+      }
 
-			if (lastElement != null && lastElement.equals(run))
-			{
-				break;
-			}
-			run = run.getNextSibling();
-		}
-		trimBuilderNewlines(builder);
-	}
+      if (lastElement != null && lastElement.equals(run)) {
+        break;
+      }
+      run = run.getNextSibling();
+    }
+    trimBuilderNewlines(builder);
+  }
 
-	public static void trimBuilderNewlines(StringBuilder builder)
-	{
-		while (builder.length() > 0 && builder.charAt(builder.length() - 1) == '\n')
-		{
-			builder.deleteCharAt(builder.length() - 1);
-		}
-	}
+  public static void trimBuilderNewlines(StringBuilder builder) {
+    while (builder.length() > 0 && builder.charAt(builder.length() - 1) == '\n') {
+      builder.deleteCharAt(builder.length() - 1);
+    }
+  }
 
-	public static String renderPsiElementAsText(@Nullable PsiElement element)
-	{
-		return renderPsiRangeAsText(element, element);
-	}
+  public static String renderPsiElementAsText(@Nullable PsiElement element) {
+    return renderPsiRangeAsText(element, element);
+  }
 
-	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement)
-	{
-		return renderPsiRangeAsText(firstElement, lastElement, new PodRenderingContext());
-	}
+  public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement) {
+    return renderPsiRangeAsText(firstElement, lastElement, new PodRenderingContext());
+  }
 
-	public static String renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, PodRenderingContext context)
-	{
-		if (firstElement == null)
-		{
-			return "";
-		}
+  public static String renderPsiRangeAsText(@Nullable PsiElement firstElement,
+                                            @Nullable PsiElement lastElement,
+                                            PodRenderingContext context) {
+    if (firstElement == null) {
+      return "";
+    }
 
-		StringBuilder result = new StringBuilder();
-		renderPsiRangeAsText(firstElement, lastElement, result, context);
-		return result.toString().trim();
-	}
+    StringBuilder result = new StringBuilder();
+    renderPsiRangeAsText(firstElement, lastElement, result, context);
+    return result.toString().trim();
+  }
 
-	public static void renderPsiRangeAsText(@Nullable PsiElement firstElement, @Nullable PsiElement lastElement, @NotNull StringBuilder builder, @NotNull PodRenderingContext context)
-	{
-		if (firstElement == null)
-		{
-			return;
-		}
+  public static void renderPsiRangeAsText(@Nullable PsiElement firstElement,
+                                          @Nullable PsiElement lastElement,
+                                          @NotNull StringBuilder builder,
+                                          @NotNull PodRenderingContext context) {
+    if (firstElement == null) {
+      return;
+    }
 
-		PsiElement run = firstElement;
-		while (run != null)
-		{
-			if (run instanceof PodRenderableElement)
-			{
-				((PodRenderableElement) run).renderElementAsText(builder, context);
-			}
-			else if (run.getNode().getElementType() != POD_OUTER)
-			{
-				String text = run.getText();
-				if (!StringUtil.equals(text, "\n"))
-				{
-					builder.append(run.getText());
-				}
-				else
-				{
-					builder.append(" ");
-				}
-			}
+    PsiElement run = firstElement;
+    while (run != null) {
+      if (run instanceof PodRenderableElement) {
+        ((PodRenderableElement)run).renderElementAsText(builder, context);
+      }
+      else if (run.getNode().getElementType() != POD_OUTER) {
+        String text = run.getText();
+        if (!StringUtil.equals(text, "\n")) {
+          builder.append(run.getText());
+        }
+        else {
+          builder.append(" ");
+        }
+      }
 
-			if (lastElement != null && lastElement.equals(run))
-			{
-				break;
-			}
-			run = run.getNextSibling();
-		}
-	}
+      if (lastElement != null && lastElement.equals(run)) {
+        break;
+      }
+      run = run.getNextSibling();
+    }
+  }
 
-	public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor, boolean isError)
-	{
-		return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle(), isError);
-	}
+  public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor, boolean isError) {
+    return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle(), isError);
+  }
 
-	public static String getHTMLPsiLink(@NotNull PodLinkTarget target)
-	{
-		if (StringUtil.isNotEmpty(target.getPodLink()))
-		{
-			return getHTMLPsiLink(target.getPodLink(), target.getPodLinkText());
-		}
-		return "";
-	}
+  public static String getHTMLPsiLink(@NotNull PodLinkTarget target) {
+    if (StringUtil.isNotEmpty(target.getPodLink())) {
+      return getHTMLPsiLink(target.getPodLink(), target.getPodLinkText());
+    }
+    return "";
+  }
 
-	public static String getHTMLPsiLink(@NotNull String link, @Nullable String text)
-	{
-		return getHTMLLink(link, true, text);
-	}
+  public static String getHTMLPsiLink(@NotNull String link, @Nullable String text) {
+    return getHTMLLink(link, true, text);
+  }
 
-	public static String getHTMLPsiLink(@NotNull String link)
-	{
-		return getHTMLLink(link, true, null);
-	}
+  public static String getHTMLPsiLink(@NotNull String link) {
+    return getHTMLLink(link, true, null);
+  }
 
-	public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text)
-	{
-		return getHTMLLink(link, isPsi, text, false);
-	}
+  public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text) {
+    return getHTMLLink(link, isPsi, text, false);
+  }
 
-	public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text, boolean isError)
-	{
-		StringBuilder builder = new StringBuilder();
+  public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text, boolean isError) {
+    StringBuilder builder = new StringBuilder();
 
-		builder.append("<a href=\"");
+    builder.append("<a href=\"");
 
-		if (isPsi)
-		{
-			builder.append(DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL);
-			builder.append(PodRenderUtil.encodeLink(link));
-		}
-		else
-		{
-			builder.append(link);
-		}
+    if (isPsi) {
+      builder.append(DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL);
+      builder.append(PodRenderUtil.encodeLink(link));
+    }
+    else {
+      builder.append(link);
+    }
 
-		builder.append("\"");
+    builder.append("\"");
 
-		if (isError)
-		{
-			builder.append(" style=\"color:red\"");
-		}
+    if (isError) {
+      builder.append(" style=\"color:red\"");
+    }
 
-		builder.append(">");
-		builder.append(text == null ? link : text);
-		builder.append("</a>");
+    builder.append(">");
+    builder.append(text == null ? link : text);
+    builder.append("</a>");
 
-		return builder.toString();
-	}
+    return builder.toString();
+  }
 
-	public static String encodeLink(String link)
-	{
-		try
-		{
-			return URLEncoder.encode(link, "UTF-8");
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
+  public static String encodeLink(String link) {
+    try {
+      return URLEncoder.encode(link, "UTF-8");
+    }
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-	public static String getPodLinkForElement(PodTitledSection element)
-	{
-		String elementLink = element.getTitleText();
-		if (StringUtil.isEmpty(elementLink))
-		{
-			return null;
-		}
+  public static String getPodLinkForElement(PodTitledSection element) {
+    String elementLink = element.getTitleText();
+    if (StringUtil.isEmpty(elementLink)) {
+      return null;
+    }
 
-		PsiFile psiFile = element.getContainingFile();
+    PsiFile psiFile = element.getContainingFile();
 
-		if (psiFile instanceof PodLinkTarget)
-		{
-			String fileLink = ((PodLinkTarget) psiFile).getPodLink();
-			if (StringUtil.isNotEmpty(fileLink))
-			{
-				return fileLink + "/" + elementLink;
-			}
-		}
-		return "/" + elementLink;
-	}
-
+    if (psiFile instanceof PodLinkTarget) {
+      String fileLink = ((PodLinkTarget)psiFile).getPodLink();
+      if (StringUtil.isNotEmpty(fileLink)) {
+        return fileLink + "/" + elementLink;
+      }
+    }
+    return "/" + elementLink;
+  }
 }

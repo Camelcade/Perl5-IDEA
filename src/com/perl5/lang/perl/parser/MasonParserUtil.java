@@ -22,55 +22,44 @@ import com.intellij.psi.tree.IElementType;
 /**
  * Created by hurricup on 09.03.2016.
  */
-public class MasonParserUtil
-{
+public class MasonParserUtil {
 
-	public static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken)
-	{
-		PsiBuilder.Marker abstractBlockMarker = b.mark();
-		b.advanceLexer();
+  public static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken) {
+    PsiBuilder.Marker abstractBlockMarker = b.mark();
+    b.advanceLexer();
 
-		while (!b.eof() && b.getTokenType() != closeToken)
-		{
-			if (!PerlParserImpl.file_item(b, l))
-			{
-				break;
-			}
-		}
-		boolean r = endOrRecover(b, closeToken);
-		abstractBlockMarker.done(blockToken);
-		return r;
-	}
+    while (!b.eof() && b.getTokenType() != closeToken) {
+      if (!PerlParserImpl.file_item(b, l)) {
+        break;
+      }
+    }
+    boolean r = endOrRecover(b, closeToken);
+    abstractBlockMarker.done(blockToken);
+    return r;
+  }
 
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement)
-	{
-		return endOrRecover(b, toElement, "Error");
-	}
+  protected static boolean endOrRecover(PsiBuilder b, IElementType toElement) {
+    return endOrRecover(b, toElement, "Error");
+  }
 
-	protected static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
-	}
+  protected static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage) {
+    return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
+  }
 
-	protected static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		boolean r = recoverTo(b, toElement, errorMessage);
-		r = r || PerlParserUtil.consumeToken(b, toElement);
-		return r;
-	}
+  protected static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage) {
+    boolean r = recoverTo(b, toElement, errorMessage);
+    r = r || PerlParserUtil.consumeToken(b, toElement);
+    return r;
+  }
 
-	protected static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage)
-	{
-		// recover bad code
-		PsiBuilder.Marker errorMarker = b.mark();
-		while (!b.eof() && b.getTokenType() != toElement)
-		{
-			b.advanceLexer();
-			;
-		}
-		errorMarker.error(errorMessage);
-		return b.eof();
-	}
-
-
+  protected static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage) {
+    // recover bad code
+    PsiBuilder.Marker errorMarker = b.mark();
+    while (!b.eof() && b.getTokenType() != toElement) {
+      b.advanceLexer();
+      ;
+    }
+    errorMarker.error(errorMessage);
+    return b.eof();
+  }
 }

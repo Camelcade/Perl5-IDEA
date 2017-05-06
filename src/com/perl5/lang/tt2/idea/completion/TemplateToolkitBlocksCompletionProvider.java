@@ -34,49 +34,42 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 16.06.2016.
  */
-public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<CompletionParameters>
-{
-	@Override
-	protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull final CompletionResultSet result)
-	{
-		PsiElement element = parameters.getOriginalPosition();
+public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<CompletionParameters> {
+  @Override
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                ProcessingContext context,
+                                @NotNull final CompletionResultSet result) {
+    PsiElement element = parameters.getOriginalPosition();
 
-		if (element == null)
-		{
-			return;
-		}
+    if (element == null) {
+      return;
+    }
 
-		PsiElement stringElement = element.getParent();
-		if (!(stringElement instanceof TemplateToolkitString))
-		{
-			return;
-		}
+    PsiElement stringElement = element.getParent();
+    if (!(stringElement instanceof TemplateToolkitString)) {
+      return;
+    }
 
-		PsiElement container = stringElement.getParent();
-		if (!TemplateToolkitStringMixin.BLOCK_NAME_TARGETED_CONTAINERS.contains(PsiUtilCore.getElementType(container)))
-		{
-			return;
-		}
+    PsiElement container = stringElement.getParent();
+    if (!TemplateToolkitStringMixin.BLOCK_NAME_TARGETED_CONTAINERS.contains(PsiUtilCore.getElementType(container))) {
+      return;
+    }
 
-		PsiTreeUtil.processElements(element.getContainingFile(), new PsiElementProcessor()
-		{
-			@Override
-			public boolean execute(@NotNull PsiElement element)
-			{
-				if (element instanceof TemplateToolkitNamedBlock)
-				{
-					String blockName = ((TemplateToolkitNamedBlock) element).getName();
-					if (StringUtil.isNotEmpty(blockName))
-					{
-						result.addElement(
-								LookupElementBuilder.create(blockName)
-										.withTypeText("BLOCK", true)
-										.withIcon(element.getIcon(0))
-						);
-					}
-				}
-				return true;
-			}
-		});
-	}
+    PsiTreeUtil.processElements(element.getContainingFile(), new PsiElementProcessor() {
+      @Override
+      public boolean execute(@NotNull PsiElement element) {
+        if (element instanceof TemplateToolkitNamedBlock) {
+          String blockName = ((TemplateToolkitNamedBlock)element).getName();
+          if (StringUtil.isNotEmpty(blockName)) {
+            result.addElement(
+              LookupElementBuilder.create(blockName)
+                .withTypeText("BLOCK", true)
+                .withIcon(element.getIcon(0))
+            );
+          }
+        }
+        return true;
+      }
+    });
+  }
 }

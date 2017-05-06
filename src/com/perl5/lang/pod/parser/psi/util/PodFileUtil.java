@@ -44,155 +44,130 @@ import java.util.Set;
 /**
  * Created by hurricup on 27.03.2016.
  */
-public class PodFileUtil
-{
-	public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
+public class PodFileUtil {
+  public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
 
-	private static final Set<String> myClassLikeExtensions = new THashSet<String>(Arrays.asList(
-			PodFileType.EXTENSION,
-			PerlFileTypePackage.EXTENSION
-	));
+  private static final Set<String> myClassLikeExtensions = new THashSet<String>(Arrays.asList(
+    PodFileType.EXTENSION,
+    PerlFileTypePackage.EXTENSION
+  ));
 
-	@Nullable
-	public static String getPackageName(PsiFile file)
-	{
-		VirtualFile virtualFile = file.getVirtualFile();
-		VirtualFile classRoot = PerlUtil.getFileClassRoot(file);
+  @Nullable
+  public static String getPackageName(PsiFile file) {
+    VirtualFile virtualFile = file.getVirtualFile();
+    VirtualFile classRoot = PerlUtil.getFileClassRoot(file);
 
-		if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension()))
-		{
-			if (classRoot == null)
-			{
-				return virtualFile.getName();
-			}
-			else
-			{
-				return getPackageNameFromVirtualFile(virtualFile, classRoot);
-			}
-		}
-		return null;
-	}
+    if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension())) {
+      if (classRoot == null) {
+        return virtualFile.getName();
+      }
+      else {
+        return getPackageNameFromVirtualFile(virtualFile, classRoot);
+      }
+    }
+    return null;
+  }
 
-	/**
-	 * Searching perl file related to specified pod file
-	 *
-	 * @param podFile pod psi file
-	 * @return perl psi file if found
-	 */
-	@Nullable
-	public static PsiFile getTargetPerlFile(PsiFile podFile)
-	{
-		if (podFile == null)
-		{
-			return null;
-		}
+  /**
+   * Searching perl file related to specified pod file
+   *
+   * @param podFile pod psi file
+   * @return perl psi file if found
+   */
+  @Nullable
+  public static PsiFile getTargetPerlFile(PsiFile podFile) {
+    if (podFile == null) {
+      return null;
+    }
 
-		final PsiFile baseFile = podFile.getViewProvider().getStubBindingRoot();
-		if (baseFile != podFile)
-		{
-			return baseFile;
-		}
+    final PsiFile baseFile = podFile.getViewProvider().getStubBindingRoot();
+    if (baseFile != podFile) {
+      return baseFile;
+    }
 
-		String packageName = getPackageName(baseFile);
-		if (StringUtil.isNotEmpty(packageName))
-		{
-			return PerlPackageUtil.getPackagePsiFileByPackageName(baseFile.getProject(), packageName);
-		}
-		return null;
-	}
+    String packageName = getPackageName(baseFile);
+    if (StringUtil.isNotEmpty(packageName)) {
+      return PerlPackageUtil.getPackagePsiFileByPackageName(baseFile.getProject(), packageName);
+    }
+    return null;
+  }
 
-	@Nullable
-	public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot)
-	{
-		String relativePath = VfsUtil.getRelativePath(file, classRoot);
-		if (relativePath != null)
-		{
-			return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
-		}
-		return null;
-	}
+  @Nullable
+  public static String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
+    String relativePath = VfsUtil.getRelativePath(file, classRoot);
+    if (relativePath != null) {
+      return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.PACKAGE_SEPARATOR);
+    }
+    return null;
+  }
 
-	public static String getFilenameFromPackage(@NotNull String packageName)
-	{
-		return StringUtil.join(PerlPackageUtil.getCanonicalPackageName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") + "." + PodFileType.EXTENSION;
-	}
+  public static String getFilenameFromPackage(@NotNull String packageName) {
+    return StringUtil.join(PerlPackageUtil.getCanonicalPackageName(packageName).split(PerlPackageUtil.PACKAGE_SEPARATOR), "/") +
+           "." +
+           PodFileType.EXTENSION;
+  }
 
-	@Nullable
-	public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor)
-	{
-		final List<PsiFile> result = new ArrayList<PsiFile>();
+  @Nullable
+  public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor) {
+    final List<PsiFile> result = new ArrayList<PsiFile>();
 
-		PodFileUtil.processPodFilesByDescriptor(project, descriptor, new Processor<PsiFile>()
-		{
-			@Override
-			public boolean process(PsiFile psiFile)
-			{
-				if (psiFile != null)
-				{
-					if (psiFile.getFileType() == PodFileType.INSTANCE)
-					{
-						result.clear();
-						result.add(psiFile);
-						return false;
-					}
-					else if ((psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null)
-					{
-						result.add(psiFile);
-					}
-				}
-				return true;
-			}
-		});
+    PodFileUtil.processPodFilesByDescriptor(project, descriptor, new Processor<PsiFile>() {
+      @Override
+      public boolean process(PsiFile psiFile) {
+        if (psiFile != null) {
+          if (psiFile.getFileType() == PodFileType.INSTANCE) {
+            result.clear();
+            result.add(psiFile);
+            return false;
+          }
+          else if ((psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null) {
+            result.add(psiFile);
+          }
+        }
+        return true;
+      }
+    });
 
-		return result.isEmpty() ? null : result.get(0);
-	}
+    return result.isEmpty() ? null : result.get(0);
+  }
 
-	public static void processPodFilesByDescriptor(Project project, PodLinkDescriptor descriptor, Processor<PsiFile> processor)
-	{
-		if (descriptor.getFileId() != null)
-		{
-			// seek file
-			String fileId = descriptor.getFileId();
+  public static void processPodFilesByDescriptor(Project project, PodLinkDescriptor descriptor, Processor<PsiFile> processor) {
+    if (descriptor.getFileId() != null) {
+      // seek file
+      String fileId = descriptor.getFileId();
 
-			if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
-			{
-				final PsiManager psiManager = PsiManager.getInstance(project);
-				String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
-				String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
+      if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
+      {
+        final PsiManager psiManager = PsiManager.getInstance(project);
+        String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
+        String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
 
-				for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots())
-				{
-					VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
-					if (targetVirtualFile != null)
-					{
-						if (!processor.process(psiManager.findFile(targetVirtualFile)))
-						{
-							return;
-						}
-					}
+        for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots()) {
+          VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
+          if (targetVirtualFile != null) {
+            if (!processor.process(psiManager.findFile(targetVirtualFile))) {
+              return;
+            }
+          }
 
-					targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
-					if (targetVirtualFile != null)
-					{
-						if (!processor.process(psiManager.findFile(targetVirtualFile)))
-						{
-							return;
-						}
-					}
-				}
-			}
-			else // top level file perl.*
-			{
-				fileId += "." + PodFileType.EXTENSION;
+          targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
+          if (targetVirtualFile != null) {
+            if (!processor.process(psiManager.findFile(targetVirtualFile))) {
+              return;
+            }
+          }
+        }
+      }
+      else // top level file perl.*
+      {
+        fileId += "." + PodFileType.EXTENSION;
 
-				for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, PerlScopes.getProjectAndLibrariesScope(project)))
-				{
-					if (!processor.process(podFile))
-					{
-						return;
-					}
-				}
-			}
-		}
-	}
+        for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, PerlScopes.getProjectAndLibrariesScope(project))) {
+          if (!processor.process(podFile)) {
+            return;
+          }
+        }
+      }
+    }
+  }
 }

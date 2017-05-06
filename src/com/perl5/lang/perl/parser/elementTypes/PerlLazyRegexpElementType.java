@@ -24,17 +24,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public abstract class PerlLazyRegexpElementType extends PerlLazyBlockElementType
-{
-	public PerlLazyRegexpElementType(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class PerlLazyRegexpElementType extends PerlLazyBlockElementType {
+  public PerlLazyRegexpElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 
-	@NotNull
-	@Override
-	protected PsiParser getParser()
-	{
-		return PerlLazyRegexParser.INSTANCE;
-	}
+  @NotNull
+  @Override
+  protected PsiParser getParser() {
+    return PerlLazyRegexParser.INSTANCE;
+  }
 }

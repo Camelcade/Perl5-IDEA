@@ -19,18 +19,15 @@ package com.perl5.lang.perl.idea.run.debugger.protocol;
 /**
  * Created by hurricup on 10.05.2016.
  */
-public class PerlEvalResponseDescriptor
-{
-	private boolean error;
-	private PerlValueDescriptor result;
+public class PerlEvalResponseDescriptor {
+  private boolean error;
+  private PerlValueDescriptor result;
 
-	public boolean isError()
-	{
-		return error;
-	}
+  public boolean isError() {
+    return error;
+  }
 
-	public PerlValueDescriptor getResult()
-	{
-		return result;
-	}
+  public PerlValueDescriptor getResult() {
+    return result;
+  }
 }

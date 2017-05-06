@@ -31,28 +31,23 @@ import java.util.Collection;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTreeStructure
-{
-	public HTMLMasonSubTypeHierarchyStructure(@NotNull PsiElement element)
-	{
-		this(element.getProject(), new HTMLMasonHierarchyNodeDescriptor(null, element, true));
-	}
+public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTreeStructure {
+  public HTMLMasonSubTypeHierarchyStructure(@NotNull PsiElement element) {
+    this(element.getProject(), new HTMLMasonHierarchyNodeDescriptor(null, element, true));
+  }
 
-	public HTMLMasonSubTypeHierarchyStructure(@NotNull Project project, HierarchyNodeDescriptor baseDescriptor)
-	{
-		super(project, baseDescriptor);
-	}
+  public HTMLMasonSubTypeHierarchyStructure(@NotNull Project project, HierarchyNodeDescriptor baseDescriptor) {
+    super(project, baseDescriptor);
+  }
 
-	@Override
-	protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase)
-	{
-		return new HTMLMasonHierarchyNodeDescriptor(parentDescriptor, element, isBase);
-	}
+  @Override
+  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase) {
+    return new HTMLMasonHierarchyNodeDescriptor(parentDescriptor, element, isBase);
+  }
 
-	@Override
-	protected Collection<PsiElement> getSubElements(PsiElement element)
-	{
-		assert element instanceof HTMLMasonFileImpl;
-		return new ArrayList<PsiElement>(((HTMLMasonFileImpl) element).getChildComponents());
-	}
+  @Override
+  protected Collection<PsiElement> getSubElements(PsiElement element) {
+    assert element instanceof HTMLMasonFileImpl;
+    return new ArrayList<PsiElement>(((HTMLMasonFileImpl)element).getChildComponents());
+  }
 }

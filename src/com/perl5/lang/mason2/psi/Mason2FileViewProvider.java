@@ -39,68 +39,59 @@ import java.util.Set;
 /**
  * Created by hurricup on 30.03.2016.
  */
-public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes
-{
-	private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
-			Mason2Language.INSTANCE,
-			PodLanguage.INSTANCE
-	));
+public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
+  implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes {
+  private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
+    Mason2Language.INSTANCE,
+    PodLanguage.INSTANCE
+  ));
 
-	public Mason2FileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled)
-	{
-		super(manager, virtualFile, eventSystemEnabled);
-	}
+  public Mason2FileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
+    super(manager, virtualFile, eventSystemEnabled);
+  }
 
-	@Nullable
-	@Override
-	protected PsiFile createFile(@NotNull Language lang)
-	{
-		if (lang != Mason2Language.INSTANCE && lang != PodLanguage.INSTANCE)
-		{
-			return null;
-		}
+  @Nullable
+  @Override
+  protected PsiFile createFile(@NotNull Language lang) {
+    if (lang != Mason2Language.INSTANCE && lang != PodLanguage.INSTANCE) {
+      return null;
+    }
 
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
-		if (parserDefinition != null)
-		{
+    final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(lang);
+    if (parserDefinition != null) {
 
-			final PsiFileImpl psiFile = (PsiFileImpl) parserDefinition.createFile(this);
+      final PsiFileImpl psiFile = (PsiFileImpl)parserDefinition.createFile(this);
 
-			if (lang == PodLanguage.INSTANCE)
-			{
-				psiFile.setContentElementType(POD_BLOCK);
-			}
+      if (lang == PodLanguage.INSTANCE) {
+        psiFile.setContentElementType(POD_BLOCK);
+      }
 
-			return psiFile;
-		}
+      return psiFile;
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@NotNull
-	@Override
-	public Set<Language> getLanguages()
-	{
-		return myLanguages;
-	}
+  @NotNull
+  @Override
+  public Set<Language> getLanguages() {
+    return myLanguages;
+  }
 
-	@NotNull
-	@Override
-	public Language getBaseLanguage()
-	{
-		return Mason2Language.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public Language getBaseLanguage() {
+    return Mason2Language.INSTANCE;
+  }
 
-	@Override
-	protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy)
-	{
-		return new Mason2FileViewProvider(getManager(), fileCopy, false);
-	}
+  @Override
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+    return new Mason2FileViewProvider(getManager(), fileCopy, false);
+  }
 
-	@NotNull
-	@Override
-	public Language getTemplateDataLanguage()
-	{
-		return PodLanguage.INSTANCE;
-	}
+  @NotNull
+  @Override
+  public Language getTemplateDataLanguage() {
+    return PodLanguage.INSTANCE;
+  }
 }

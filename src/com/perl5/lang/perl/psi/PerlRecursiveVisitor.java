@@ -22,11 +22,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 12.11.2015.
  */
-public class PerlRecursiveVisitor extends PerlVisitor
-{
-	@Override
-	public void visitElement(@NotNull PsiElement element)
-	{
-		element.acceptChildren(this);
-	}
+public class PerlRecursiveVisitor extends PerlVisitor {
+  @Override
+  public void visitElement(@NotNull PsiElement element) {
+    element.acceptChildren(this);
+  }
 }

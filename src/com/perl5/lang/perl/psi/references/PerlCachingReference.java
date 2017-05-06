@@ -26,39 +26,32 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T>
-{
-	private final static ResolveCache.PolyVariantResolver<PerlCachingReference> RESOLVER = PerlCachingReference::resolveInner;
+public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T> {
+  private final static ResolveCache.PolyVariantResolver<PerlCachingReference> RESOLVER = PerlCachingReference::resolveInner;
 
-	public PerlCachingReference(T psiElement)
-	{
-		super(psiElement);
-	}
+  public PerlCachingReference(T psiElement) {
+    super(psiElement);
+  }
 
-	public PerlCachingReference(@NotNull T element, TextRange textRange)
-	{
-		super(element, textRange);
-	}
+  public PerlCachingReference(@NotNull T element, TextRange textRange) {
+    super(element, textRange);
+  }
 
-	public PerlCachingReference(T element, TextRange range, boolean soft)
-	{
-		super(element, range, soft);
-	}
+  public PerlCachingReference(T element, TextRange range, boolean soft) {
+    super(element, range, soft);
+  }
 
-	@NotNull
-	@Override
-	public Object[] getVariants()
-	{
-		return EMPTY_ARRAY;
-	}
+  @NotNull
+  @Override
+  public Object[] getVariants() {
+    return EMPTY_ARRAY;
+  }
 
-	protected abstract ResolveResult[] resolveInner(boolean incompleteCode);
+  protected abstract ResolveResult[] resolveInner(boolean incompleteCode);
 
-	@NotNull
-	@Override
-	public final ResolveResult[] multiResolve(boolean incompleteCode)
-	{
-		return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
-	}
-
+  @NotNull
+  @Override
+  public final ResolveResult[] multiResolve(boolean incompleteCode) {
+    return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
+  }
 }

@@ -33,63 +33,48 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection
-{
-	public static boolean hasRecursiveInheritance(PerlNamespaceDefinition definition)
-	{
-		return hasRecursiveInheritance(definition.getProject(), definition.getPackageName(), new HashSet<String>());
-	}
+public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection {
+  @NotNull
+  @Override
+  public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    return new PerlVisitor() {
+      @Override
+      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
+        if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName())) {
+          return;
+        }
 
-	private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay)
-	{
-		Collection<PerlNamespaceDefinition> definitions = PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
-		if (!definitions.isEmpty())
-		{
-			HashSet<PerlNamespaceDefinition> parents = new HashSet<PerlNamespaceDefinition>();
-			for (PerlNamespaceDefinition definition : definitions)
-			{
-				parents.addAll(definition.getParentNamespaceDefinitions());
-			}
+        if (hasRecursiveInheritance(o)) {
+          registerError(holder, namespaceElement.getContainingFile(), "Namespace " + o.getName() + " has recursive inheritance");
+          registerError(holder, namespaceElement, "Namespace " + o.getName() + " has recursive inheritance");
+        }
+      }
+    };
+  }
 
-			if (!parents.isEmpty())
-			{
-				passedWay.add(packageName);
-				for (PerlNamespaceDefinition parent : parents)
-				{
-					if (passedWay.contains(parent.getPackageName()) || hasRecursiveInheritance(project, parent.getPackageName(), passedWay))
-					{
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+  public static boolean hasRecursiveInheritance(PerlNamespaceDefinition definition) {
+    return hasRecursiveInheritance(definition.getProject(), definition.getPackageName(), new HashSet<String>());
+  }
 
-	@NotNull
-	@Override
-	public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly)
-	{
-		return new PerlVisitor()
-		{
-			@Override
-			public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o)
-			{
-				PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-				if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName()))
-				{
-					return;
-				}
+  private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay) {
+    Collection<PerlNamespaceDefinition> definitions =
+      PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+    if (!definitions.isEmpty()) {
+      HashSet<PerlNamespaceDefinition> parents = new HashSet<PerlNamespaceDefinition>();
+      for (PerlNamespaceDefinition definition : definitions) {
+        parents.addAll(definition.getParentNamespaceDefinitions());
+      }
 
-				if (hasRecursiveInheritance(o))
-				{
-					registerError(holder, namespaceElement.getContainingFile(), "Namespace " + o.getName() + " has recursive inheritance");
-					registerError(holder, namespaceElement, "Namespace " + o.getName() + " has recursive inheritance");
-
-				}
-
-			}
-		};
-	}
-
+      if (!parents.isEmpty()) {
+        passedWay.add(packageName);
+        for (PerlNamespaceDefinition parent : parents) {
+          if (passedWay.contains(parent.getPackageName()) || hasRecursiveInheritance(project, parent.getPackageName(), passedWay)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 }

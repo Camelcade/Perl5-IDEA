@@ -29,101 +29,88 @@ import com.perl5.lang.perl.parser.PerlTokenData;
  * Created by hurricup on 04.05.2015.
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
  */
-public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes
-{
-	private final PerlParserImpl perlParser;
+public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes {
+  private final PerlParserImpl perlParser;
 
-	// flags that sq strings should be converted to the use_vars_lazy_parsable_strings
-	boolean isUseVarsContent = false;
-	// flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
-	boolean isInterpolated = false;
-	// flag allowes special variable names
-	boolean isSpecialVariableNamesAllowed = true;
-	/**
-	 * This element may be set to make an additional wrapping for strings, like constants and so on
-	 */
-	PerlStringWrapper stringWrapper = null;
+  // flags that sq strings should be converted to the use_vars_lazy_parsable_strings
+  boolean isUseVarsContent = false;
+  // flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
+  boolean isInterpolated = false;
+  // flag allowes special variable names
+  boolean isSpecialVariableNamesAllowed = true;
+  /**
+   * This element may be set to make an additional wrapping for strings, like constants and so on
+   */
+  PerlStringWrapper stringWrapper = null;
 
-	public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser)
-	{
-		super(builder, state, parser);
-		perlParser = (PerlParserImpl) parser;
-	}
+  public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
+    super(builder, state, parser);
+    perlParser = (PerlParserImpl)parser;
+  }
 
-	/**
-	 * Return token ahead of current, skips spaces and comments
-	 *
-	 * @param steps positive or negative steps number to get token
-	 * @return token data: type and text
-	 */
-	public PerlTokenData lookupToken(int steps)
-	{
-		assert steps != 0;
-		int rawStep = 0;
-		int step = steps / Math.abs(steps);
+  /**
+   * Return token ahead of current, skips spaces and comments
+   *
+   * @param steps positive or negative steps number to get token
+   * @return token data: type and text
+   */
+  public PerlTokenData lookupToken(int steps) {
+    assert steps != 0;
+    int rawStep = 0;
+    int step = steps / Math.abs(steps);
 
-		IElementType rawTokenType = null;
+    IElementType rawTokenType = null;
 
-		while (steps != 0)
-		{
-			rawStep += step;
-			rawTokenType = rawLookup(rawStep);
+    while (steps != 0) {
+      rawStep += step;
+      rawTokenType = rawLookup(rawStep);
 
-			// reached end
-			if (rawTokenType == null)
-			{
-				return null;
-			}
+      // reached end
+      if (rawTokenType == null) {
+        return null;
+      }
 
-			if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType))
-			{
-				steps -= step;
-			}
-		}
+      if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType)) {
+        steps -= step;
+      }
+    }
 
-		// fixme crushes on quick s typing
-		return new PerlTokenData(rawTokenType, getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
-	}
+    // fixme crushes on quick s typing
+    return new PerlTokenData(rawTokenType,
+                             getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
+  }
 
-	public boolean isUseVarsContent()
-	{
-		return isUseVarsContent;
-	}
+  public boolean isUseVarsContent() {
+    return isUseVarsContent;
+  }
 
-	public void setUseVarsContent(boolean newState)
-	{
-		isUseVarsContent = newState;
-	}
+  public void setUseVarsContent(boolean newState) {
+    isUseVarsContent = newState;
+  }
 
-	public boolean isInterpolated()
-	{
-		return isInterpolated;
-	}
+  public boolean isInterpolated() {
+    return isInterpolated;
+  }
 
-	public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed)
-	{
-		boolean oldValue = isSpecialVariableNamesAllowed;
-		isSpecialVariableNamesAllowed = specialVariableNamesAllowed;
-		return oldValue;
-	}
+  public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed) {
+    boolean oldValue = isSpecialVariableNamesAllowed;
+    isSpecialVariableNamesAllowed = specialVariableNamesAllowed;
+    return oldValue;
+  }
 
-	@Deprecated // to be removed
-	public PerlStringWrapper getStringWrapper()
-	{
-		return stringWrapper;
-	}
+  @Deprecated // to be removed
+  public PerlStringWrapper getStringWrapper() {
+    return stringWrapper;
+  }
 
-	@Deprecated // to be removed
-	public PerlStringWrapper setStringWrapper(PerlStringWrapper stringWrapper)
-	{
-		PerlStringWrapper currentValue = this.stringWrapper;
-		this.stringWrapper = stringWrapper;
-		return currentValue;
-	}
+  @Deprecated // to be removed
+  public PerlStringWrapper setStringWrapper(PerlStringWrapper stringWrapper) {
+    PerlStringWrapper currentValue = this.stringWrapper;
+    this.stringWrapper = stringWrapper;
+    return currentValue;
+  }
 
-	public PerlParserImpl getPerlParser()
-	{
-		return perlParser;
-	}
-
+  public PerlParserImpl getPerlParser() {
+    return perlParser;
+  }
 }

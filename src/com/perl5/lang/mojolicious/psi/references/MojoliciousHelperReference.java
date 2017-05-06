@@ -33,26 +33,24 @@ import java.util.List;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperReference extends PerlCachingReference<PsiElement>
-{
-	public MojoliciousHelperReference(@NotNull PsiElement element)
-	{
-		super(element, null);
-	}
+public class MojoliciousHelperReference extends PerlCachingReference<PsiElement> {
+  public MojoliciousHelperReference(@NotNull PsiElement element) {
+    super(element, null);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PsiElement element = getElement();
-		String elementText = element.getText();
-		final Project project = element.getProject();
-		List<ResolveResult> result = new ArrayList<ResolveResult>();
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PsiElement element = getElement();
+    String elementText = element.getText();
+    final Project project = element.getProject();
+    List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		for (MojoliciousHelperDeclaration helper : StubIndex.getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project), MojoliciousHelperDeclaration.class))
-		{
-			result.add(new PsiElementResolveResult(helper));
-		}
+    for (MojoliciousHelperDeclaration helper : StubIndex
+      .getElements(MojoliciousHelpersStubIndex.KEY, elementText, project, PerlScopes.getProjectAndLibrariesScope(project),
+                   MojoliciousHelperDeclaration.class)) {
+      result.add(new PsiElementResolveResult(helper));
+    }
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 }

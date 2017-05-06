@@ -42,206 +42,171 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public abstract class AbstractMasonSettingsConfigurable implements Configurable
-{
-	protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
-			"[$@%]" + PerlLexer.IDENTIFIER_PATTERN
-	);
+public abstract class AbstractMasonSettingsConfigurable implements Configurable {
+  protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
+    "[$@%]" + PerlLexer.IDENTIFIER_PATTERN
+  );
 
-	protected final Project myProject;
-	protected final String windowTitile;
+  protected final Project myProject;
+  protected final String windowTitile;
 
-	protected CollectionListModel<String> rootsModel;
-	protected JBList rootsList;
+  protected CollectionListModel<String> rootsModel;
+  protected JBList rootsList;
 
-	protected ListTableModel<VariableDescription> globalsModel;
-	protected JBTable globalsTable;
+  protected ListTableModel<VariableDescription> globalsModel;
+  protected JBTable globalsTable;
 
-	public AbstractMasonSettingsConfigurable(Project myProject, String windowTitile)
-	{
-		this.myProject = myProject;
-		this.windowTitile = windowTitile;
-	}
+  public AbstractMasonSettingsConfigurable(Project myProject, String windowTitile) {
+    this.myProject = myProject;
+    this.windowTitile = windowTitile;
+  }
 
-	@Nls
-	@Override
-	public String getDisplayName()
-	{
-		return windowTitile;
-	}
+  @Nls
+  @Override
+  public String getDisplayName() {
+    return windowTitile;
+  }
 
-	@Nullable
-	@Override
-	public String getHelpTopic()
-	{
-		return null;
-	}
+  @Nullable
+  @Override
+  public String getHelpTopic() {
+    return null;
+  }
 
-	public void createRootsListComponent(FormBuilder builder)
-	{
-		rootsModel = new CollectionListModel<String>();
-		rootsList = new JBList(rootsModel);
-		builder.addLabeledComponent(
-				new JLabel(
-						"Components roots (relative to project's root):"),
-				PerlConfigurationUtil.createProjectPathsSelection(
-						myProject,
-						rootsList,
-						rootsModel,
-						"Select Mason Component Roots"
-				));
-	}
+  public void createRootsListComponent(FormBuilder builder) {
+    rootsModel = new CollectionListModel<String>();
+    rootsList = new JBList(rootsModel);
+    builder.addLabeledComponent(
+      new JLabel(
+        "Components roots (relative to project's root):"),
+      PerlConfigurationUtil.createProjectPathsSelection(
+        myProject,
+        rootsList,
+        rootsModel,
+        "Select Mason Component Roots"
+      ));
+  }
 
-	public void createGlobalsComponent(FormBuilder builder)
-	{
-		globalsModel = new ListTableModel<VariableDescription>(
-				new myVariableNameColumnInfo(),
-				new myVariableTypeColumnInfo()
-		);
-		globalsTable = new JBTable(globalsModel);
+  public void createGlobalsComponent(FormBuilder builder) {
+    globalsModel = new ListTableModel<VariableDescription>(
+      new myVariableNameColumnInfo(),
+      new myVariableTypeColumnInfo()
+    );
+    globalsTable = new JBTable(globalsModel);
 
-		builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
-				.createDecorator(globalsTable)
-				.setAddAction(new AnActionButtonRunnable()
-				{
-					@Override
-					public void run(AnActionButton anActionButton)
-					{
-						final TableCellEditor cellEditor = globalsTable.getCellEditor();
-						if (cellEditor != null)
-						{
-							cellEditor.stopCellEditing();
-						}
-						final TableModel model = globalsTable.getModel();
+    builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
+      .createDecorator(globalsTable)
+      .setAddAction(new AnActionButtonRunnable() {
+        @Override
+        public void run(AnActionButton anActionButton) {
+          final TableCellEditor cellEditor = globalsTable.getCellEditor();
+          if (cellEditor != null) {
+            cellEditor.stopCellEditing();
+          }
+          final TableModel model = globalsTable.getModel();
 
-						int indexToEdit = -1;
+          int indexToEdit = -1;
 
-						for (VariableDescription variableDescription : globalsModel.getItems())
-						{
-							if (StringUtil.isEmpty(variableDescription.variableName))
-							{
-								indexToEdit = globalsModel.indexOf(variableDescription);
-								break;
-							}
-						}
+          for (VariableDescription variableDescription : globalsModel.getItems()) {
+            if (StringUtil.isEmpty(variableDescription.variableName)) {
+              indexToEdit = globalsModel.indexOf(variableDescription);
+              break;
+            }
+          }
 
-						if (indexToEdit == -1)
-						{
-							globalsModel.addRow(new VariableDescription());
-							indexToEdit = model.getRowCount() - 1;
-						}
+          if (indexToEdit == -1) {
+            globalsModel.addRow(new VariableDescription());
+            indexToEdit = model.getRowCount() - 1;
+          }
 
-						TableUtil.editCellAt(globalsTable, indexToEdit, 0);
-					}
-				})
-				.disableDownAction()
-				.disableUpAction()
-				.setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
-				.createPanel()
-		)
-		;
-	}
+          TableUtil.editCellAt(globalsTable, indexToEdit, 0);
+        }
+      })
+      .disableDownAction()
+      .disableUpAction()
+      .setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
+      .createPanel()
+    )
+    ;
+  }
 
-	@Override
-	public void disposeUIResources()
-	{
-	}
+  @Override
+  public void disposeUIResources() {
+  }
 
-	public static abstract class myStringColumnInfo extends ColumnInfo<VariableDescription, String>
-	{
-		public myStringColumnInfo(String name)
-		{
-			super(name);
-		}
+  public static abstract class myStringColumnInfo extends ColumnInfo<VariableDescription, String> {
+    public myStringColumnInfo(String name) {
+      super(name);
+    }
 
-		@Override
-		public boolean isCellEditable(VariableDescription variableDescription)
-		{
-			return true;
-		}
-	}
+    @Override
+    public boolean isCellEditable(VariableDescription variableDescription) {
+      return true;
+    }
+  }
 
-	public class myVariableNameColumnInfo extends myStringColumnInfo
-	{
-		public myVariableNameColumnInfo()
-		{
-			super("Variable name");
-		}
+  public class myVariableNameColumnInfo extends myStringColumnInfo {
+    public myVariableNameColumnInfo() {
+      super("Variable name");
+    }
 
-		@Nullable
-		@Override
-		public String valueOf(VariableDescription variableDescription)
-		{
-			return variableDescription.variableName;
-		}
+    @Nullable
+    @Override
+    public String valueOf(VariableDescription variableDescription) {
+      return variableDescription.variableName;
+    }
 
-		@Override
-		public void setValue(VariableDescription variableDescription, String value)
-		{
-			if (StringUtil.isNotEmpty(value) && !containsVariableName(value))
-			{
-				if (VARIABLE_CHECK_PATTERN.matcher(value).matches())
-				{
-					variableDescription.variableName = value;
-					if (value.charAt(0) != '$')
-					{
-						variableDescription.variableType = "";
-					}
-				}
-				else
-				{
-					Messages.showErrorDialog("Incorrect variable name: " + value, "Incorrect Variable Name");
-				}
-			}
-		}
+    @Override
+    public void setValue(VariableDescription variableDescription, String value) {
+      if (StringUtil.isNotEmpty(value) && !containsVariableName(value)) {
+        if (VARIABLE_CHECK_PATTERN.matcher(value).matches()) {
+          variableDescription.variableName = value;
+          if (value.charAt(0) != '$') {
+            variableDescription.variableType = "";
+          }
+        }
+        else {
+          Messages.showErrorDialog("Incorrect variable name: " + value, "Incorrect Variable Name");
+        }
+      }
+    }
 
-		protected boolean containsVariableName(String variableName)
-		{
-			for (VariableDescription variableDescription : globalsModel.getItems())
-			{
-				if (variableName.equals(variableDescription.variableName))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-	}
+    protected boolean containsVariableName(String variableName) {
+      for (VariableDescription variableDescription : globalsModel.getItems()) {
+        if (variableName.equals(variableDescription.variableName)) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
 
-	public class myVariableTypeColumnInfo extends myStringColumnInfo
-	{
-		public myVariableTypeColumnInfo()
-		{
-			super("Variable type");
-		}
+  public class myVariableTypeColumnInfo extends myStringColumnInfo {
+    public myVariableTypeColumnInfo() {
+      super("Variable type");
+    }
 
-		@Nullable
-		@Override
-		public String valueOf(VariableDescription variableDescription)
-		{
-			return variableDescription.variableType;
-		}
+    @Nullable
+    @Override
+    public String valueOf(VariableDescription variableDescription) {
+      return variableDescription.variableType;
+    }
 
-		@Override
-		public boolean isCellEditable(VariableDescription variableDescription)
-		{
-			return StringUtil.isNotEmpty(variableDescription.variableName) && variableDescription.variableName.charAt(0) == '$';
-		}
+    @Override
+    public boolean isCellEditable(VariableDescription variableDescription) {
+      return StringUtil.isNotEmpty(variableDescription.variableName) && variableDescription.variableName.charAt(0) == '$';
+    }
 
-		@Override
-		public void setValue(VariableDescription variableDescription, String value)
-		{
-			if (StringUtil.isNotEmpty(value))
-			{
-				if (PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches())
-				{
-					variableDescription.variableType = value;
-				}
-				else
-				{
-					Messages.showErrorDialog("Incorrect package name: " + value, "Incorrect Package Name");
-				}
-			}
-		}
-	}
+    @Override
+    public void setValue(VariableDescription variableDescription, String value) {
+      if (StringUtil.isNotEmpty(value)) {
+        if (PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches()) {
+          variableDescription.variableType = value;
+        }
+        else {
+          Messages.showErrorDialog("Incorrect package name: " + value, "Incorrect Package Name");
+        }
+      }
+    }
+  }
 }

@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchConditionImpl extends PerlCompositeElementImpl implements PerlSwitchCondition
-{
-	public PerlSwitchConditionImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlSwitchConditionImpl extends PerlCompositeElementImpl implements PerlSwitchCondition {
+  public PerlSwitchConditionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

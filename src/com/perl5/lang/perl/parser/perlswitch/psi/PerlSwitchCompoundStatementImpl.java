@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchCompoundStatementImpl extends PsiPerlStatementImpl implements PerlSwitchCompoundStatement
-{
-	public PerlSwitchCompoundStatementImpl(@NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class PerlSwitchCompoundStatementImpl extends PsiPerlStatementImpl implements PerlSwitchCompoundStatement {
+  public PerlSwitchCompoundStatementImpl(@NotNull ASTNode node) {
+    super(node);
+  }
 }

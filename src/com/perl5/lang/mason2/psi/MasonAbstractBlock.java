@@ -21,6 +21,5 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 07.01.2016.
  */
-public interface MasonAbstractBlock extends PsiElement
-{
+public interface MasonAbstractBlock extends PsiElement {
 }

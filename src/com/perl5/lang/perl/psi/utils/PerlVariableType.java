@@ -21,64 +21,51 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public enum PerlVariableType
-{
-	SCALAR,
-	ARRAY,
-	HASH,
-	GLOB,
-	CODE;
+public enum PerlVariableType {
+  SCALAR,
+  ARRAY,
+  HASH,
+  GLOB,
+  CODE;
 
-	@Nullable
-	public static PerlVariableType bySigil(char sigil)
-	{
-		if (sigil == '$')
-		{
-			return SCALAR;
-		}
-		else if (sigil == '@')
-		{
-			return ARRAY;
-		}
-		else if (sigil == '%')
-		{
-			return HASH;
-		}
-		else if (sigil == '*')
-		{
-			return GLOB;
-		}
-		else if (sigil == '&')
-		{
-			return CODE;
-		}
+  public char getSigil() {
+    if (this == SCALAR) {
+      return '$';
+    }
+    else if (this == ARRAY) {
+      return '@';
+    }
+    else if (this == HASH) {
+      return '%';
+    }
+    else if (this == GLOB) {
+      return '*';
+    }
+    else if (this == CODE) {
+      return '&';
+    }
+    return ' ';
+  }
 
-		return null;
-	}
+  @Nullable
+  public static PerlVariableType bySigil(char sigil) {
+    if (sigil == '$') {
+      return SCALAR;
+    }
+    else if (sigil == '@') {
+      return ARRAY;
+    }
+    else if (sigil == '%') {
+      return HASH;
+    }
+    else if (sigil == '*') {
+      return GLOB;
+    }
+    else if (sigil == '&') {
+      return CODE;
+    }
 
-	public char getSigil()
-	{
-		if (this == SCALAR)
-		{
-			return '$';
-		}
-		else if (this == ARRAY)
-		{
-			return '@';
-		}
-		else if (this == HASH)
-		{
-			return '%';
-		}
-		else if (this == GLOB)
-		{
-			return '*';
-		}
-		else if (this == CODE)
-		{
-			return '&';
-		}
-		return ' ';
-	}
+    return null;
+  }
 
 };

@@ -24,16 +24,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget
-{
-	/**
-	 * Returns section title
-	 *
-	 * @return text representation of section
-	 */
-	@Nullable
-	String getTitleText();
+public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget {
+  /**
+   * Returns section title
+   *
+   * @return text representation of section
+   */
+  @Nullable
+  String getTitleText();
 
-	PsiElement getTitleBlock();
-
+  PsiElement getTitleBlock();
 }

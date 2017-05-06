@@ -21,6 +21,5 @@ import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousHelperDeclarationStub extends PerlSubDefinitionStub
-{
+public interface MojoliciousHelperDeclarationStub extends PerlSubDefinitionStub {
 }

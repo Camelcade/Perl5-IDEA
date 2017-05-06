@@ -25,35 +25,30 @@ import javax.swing.*;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType
-{
-	public final static MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
+public class MasonInternalComponentFileType extends MasonTopLevelComponentFileType {
+  public final static MasonInternalComponentFileType INSTANCE = new MasonInternalComponentFileType();
 
-	@NotNull
-	@Override
-	public String getName()
-	{
-		return "Mason2 internal component";
-	}
+  @NotNull
+  @Override
+  public String getName() {
+    return "Mason2 internal component";
+  }
 
-	@NotNull
-	@Override
-	public String getDescription()
-	{
-		return "Mason2 internal component";
-	}
+  @NotNull
+  @Override
+  public String getDescription() {
+    return "Mason2 internal component";
+  }
 
-	@NotNull
-	@Override
-	public String getDefaultExtension()
-	{
-		return "mi";
-	}
+  @NotNull
+  @Override
+  public String getDefaultExtension() {
+    return "mi";
+  }
 
-	@Nullable
-	@Override
-	public Icon getIcon()
-	{
-		return Mason2Icons.MASON_INTERNAL_COMPONENT_ICON;
-	}
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return Mason2Icons.MASON_INTERNAL_COMPONENT_ICON;
+  }
 }

@@ -23,18 +23,15 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 14.08.2016.
  */
-public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation
-{
-	/**
-	 * Trying to search for netsted NamespaceElement
-	 * fixme this is raw, should be a type
-	 *
-	 * @return psi element or null
-	 */
-	@Nullable
-	default PerlNamespaceElement getType()
-	{
-		return PsiTreeUtil.findChildOfType(this, PerlNamespaceElement.class);
-	}
-
+public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
+  /**
+   * Trying to search for netsted NamespaceElement
+   * fixme this is raw, should be a type
+   *
+   * @return psi element or null
+   */
+  @Nullable
+  default PerlNamespaceElement getType() {
+    return PsiTreeUtil.findChildOfType(this, PerlNamespaceElement.class);
+  }
 }

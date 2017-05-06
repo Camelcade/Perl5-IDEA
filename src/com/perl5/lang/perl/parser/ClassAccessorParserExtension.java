@@ -21,6 +21,5 @@ import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public interface ClassAccessorParserExtension extends ClassAccessorElementTypes
-{
+public interface ClassAccessorParserExtension extends ClassAccessorElementTypes {
 }

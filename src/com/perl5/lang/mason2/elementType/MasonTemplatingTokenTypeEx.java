@@ -23,10 +23,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.01.2016.
  */
-public abstract class MasonTemplatingTokenTypeEx extends MasonTemplatingTokenType implements ILeafElementType
-{
-	public MasonTemplatingTokenTypeEx(@NotNull @NonNls String debugName)
-	{
-		super(debugName);
-	}
+public abstract class MasonTemplatingTokenTypeEx extends MasonTemplatingTokenType implements ILeafElementType {
+  public MasonTemplatingTokenTypeEx(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }

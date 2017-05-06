@@ -25,36 +25,30 @@ import java.util.Map;
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlCreatePackageFileFromTemplateHandler extends PerlCreateFileFromTemplateHandler
-{
-	@Override
-	public boolean handlesTemplate(FileTemplate template)
-	{
-		return template.isTemplateOfType(PerlFileTypePackage.INSTANCE);
-	}
+public class PerlCreatePackageFileFromTemplateHandler extends PerlCreateFileFromTemplateHandler {
+  @Override
+  public boolean handlesTemplate(FileTemplate template) {
+    return template.isTemplateOfType(PerlFileTypePackage.INSTANCE);
+  }
 
-	@Override
-	public void prepareProperties(Map<String, Object> props)
-	{
-		String fileName = (String) props.get("NAME");
-		if (fileName.endsWith(".pm"))
-		{
-			fileName = fileName.replace(".pm", "");
-		}
+  @Override
+  public void prepareProperties(Map<String, Object> props) {
+    String fileName = (String)props.get("NAME");
+    if (fileName.endsWith(".pm")) {
+      fileName = fileName.replace(".pm", "");
+    }
 
-		String packagePrefix = (String) props.get("PERL_PACKAGE_PREFIX");
+    String packagePrefix = (String)props.get("PERL_PACKAGE_PREFIX");
 
-		assert packagePrefix != null;
+    assert packagePrefix != null;
 
-		if (packagePrefix.isEmpty())
-		{
-			props.put("PERL_PACKAGE_NAME", fileName);
-		}
-		else
-		{
-			props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.PACKAGE_SEPARATOR + fileName);
-		}
+    if (packagePrefix.isEmpty()) {
+      props.put("PERL_PACKAGE_NAME", fileName);
+    }
+    else {
+      props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.PACKAGE_SEPARATOR + fileName);
+    }
 
-		super.prepareProperties(props);
-	}
+    super.prepareProperties(props);
+  }
 }

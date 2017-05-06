@@ -29,52 +29,45 @@ import java.util.Set;
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonTypeHierarchyTreeStructure extends HTMLMasonSubTypeHierarchyStructure
-{
-	public HTMLMasonTypeHierarchyTreeStructure(@NotNull PsiElement element)
-	{
-		super(element.getProject(), buildHierarchyTree(element));
-		setBaseElement(myBaseDescriptor);
-	}
+public class HTMLMasonTypeHierarchyTreeStructure extends HTMLMasonSubTypeHierarchyStructure {
+  public HTMLMasonTypeHierarchyTreeStructure(@NotNull PsiElement element) {
+    super(element.getProject(), buildHierarchyTree(element));
+    setBaseElement(myBaseDescriptor);
+  }
 
-	protected static HierarchyNodeDescriptor buildHierarchyTree(PsiElement element)
-	{
-		HierarchyNodeDescriptor lastParent = null;
+  protected static HierarchyNodeDescriptor buildHierarchyTree(PsiElement element) {
+    HierarchyNodeDescriptor lastParent = null;
 
-		List<PsiElement> linearParents = getLinearParents(element);
+    List<PsiElement> linearParents = getLinearParents(element);
 
-		for (int i = 0; i < linearParents.size(); i++)
-		{
-			HierarchyNodeDescriptor newDescriptor = new HTMLMasonHierarchyNodeDescriptor(lastParent, linearParents.get(i), i == linearParents.size() - 1);
-			if (lastParent != null)
-			{
-				lastParent.setCachedChildren(new HierarchyNodeDescriptor[]{newDescriptor});
-			}
-			lastParent = newDescriptor;
-		}
+    for (int i = 0; i < linearParents.size(); i++) {
+      HierarchyNodeDescriptor newDescriptor =
+        new HTMLMasonHierarchyNodeDescriptor(lastParent, linearParents.get(i), i == linearParents.size() - 1);
+      if (lastParent != null) {
+        lastParent.setCachedChildren(new HierarchyNodeDescriptor[]{newDescriptor});
+      }
+      lastParent = newDescriptor;
+    }
 
-		return lastParent;
-	}
+    return lastParent;
+  }
 
-	protected static List<PsiElement> getLinearParents(PsiElement element)
-	{
-		assert element instanceof HTMLMasonFileImpl;
-		List<PsiElement> result = new ArrayList<PsiElement>();
-		Set<PsiElement> recursionMap = new THashSet<PsiElement>();
-		HTMLMasonFileImpl run = (HTMLMasonFileImpl) element;
+  protected static List<PsiElement> getLinearParents(PsiElement element) {
+    assert element instanceof HTMLMasonFileImpl;
+    List<PsiElement> result = new ArrayList<PsiElement>();
+    Set<PsiElement> recursionMap = new THashSet<PsiElement>();
+    HTMLMasonFileImpl run = (HTMLMasonFileImpl)element;
 
-		while (run != null)
-		{
-			if (recursionMap.contains(run))
-			{
-				break;
-			}
-			result.add(0, run);
-			recursionMap.add(run);
+    while (run != null) {
+      if (recursionMap.contains(run)) {
+        break;
+      }
+      result.add(0, run);
+      recursionMap.add(run);
 
-			run = run.getParentComponent();
-		}
+      run = run.getParentComponent();
+    }
 
-		return result;
-	}
+    return result;
+  }
 }

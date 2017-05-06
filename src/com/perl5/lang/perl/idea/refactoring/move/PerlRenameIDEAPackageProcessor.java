@@ -24,35 +24,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 03.10.2015.
  */
-public class PerlRenameIDEAPackageProcessor extends PerlRenameDirectoryProcessor
-{
-	@Override
-	public boolean canProcessElement(@NotNull PsiElement element)
-	{
-		if (element instanceof PsiDirectoryContainer)    // package
-		{
-			for (PsiDirectory dir : ((PsiDirectoryContainer) element).getDirectories())
-			{
-				if (!canProcessDir(dir))
-				{
-					return false;
-				}
-			}
-			return true;
-		}
+public class PerlRenameIDEAPackageProcessor extends PerlRenameDirectoryProcessor {
+  @Override
+  public boolean canProcessElement(@NotNull PsiElement element) {
+    if (element instanceof PsiDirectoryContainer)    // package
+    {
+      for (PsiDirectory dir : ((PsiDirectoryContainer)element).getDirectories()) {
+        if (!canProcessDir(dir)) {
+          return false;
+        }
+      }
+      return true;
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	protected void renamePsiElement(PsiElement element, String newName)
-	{
-		if (element instanceof PsiDirectoryContainer)    // package
-		{
-			for (PsiDirectory dir : ((PsiDirectoryContainer) element).getDirectories())
-			{
-				super.renamePsiElement(dir, newName);
-			}
-		}
-	}
-
+  protected void renamePsiElement(PsiElement element, String newName) {
+    if (element instanceof PsiDirectoryContainer)    // package
+    {
+      for (PsiDirectory dir : ((PsiDirectoryContainer)element).getDirectories()) {
+        super.renamePsiElement(dir, newName);
+      }
+    }
+  }
 }

@@ -22,6 +22,5 @@ import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseExtendsStatement extends PerlRuntimeParentsProvider, PerlReferencesProvider
-{
+public interface PerlMooseExtendsStatement extends PerlRuntimeParentsProvider, PerlReferencesProvider {
 }

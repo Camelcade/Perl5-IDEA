@@ -36,97 +36,84 @@ import java.util.List;
 /**
  * Created by hurricup on 06.03.2016.
  */
-public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder implements HTMLMasonElementTypes
-{
-	protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
-			PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
-			TokenSet.create(
-					HTML_MASON_BLOCK_OPENER,
-					HTML_MASON_BLOCK_CLOSER,
-					HTML_MASON_PERL_OPENER,
-					HTML_MASON_PERL_CLOSER,
-					HTML_MASON_LINE_OPENER,
-					HTML_MASON_TEMPLATE_BLOCK_HTML
-			));
+public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder implements HTMLMasonElementTypes {
+  protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
+    PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
+    TokenSet.create(
+      HTML_MASON_BLOCK_OPENER,
+      HTML_MASON_BLOCK_CLOSER,
+      HTML_MASON_PERL_OPENER,
+      HTML_MASON_PERL_CLOSER,
+      HTML_MASON_LINE_OPENER,
+      HTML_MASON_TEMPLATE_BLOCK_HTML
+    ));
 
-	protected static final TokenSet FOLDABLE_TOKENS = TokenSet.create(
-			HTML_MASON_INIT_BLOCK,
-			HTML_MASON_SHARED_BLOCK,
-			HTML_MASON_ONCE_BLOCK,
-			HTML_MASON_CLEANUP_BLOCK,
-			HTML_MASON_ARGS_BLOCK,
-			HTML_MASON_ATTR_BLOCK,
-			HTML_MASON_TEXT_BLOCK,
-			HTML_MASON_FILTER_BLOCK,
-			HTML_MASON_FILTERED_BLOCK
-	);
+  protected static final TokenSet FOLDABLE_TOKENS = TokenSet.create(
+    HTML_MASON_INIT_BLOCK,
+    HTML_MASON_SHARED_BLOCK,
+    HTML_MASON_ONCE_BLOCK,
+    HTML_MASON_CLEANUP_BLOCK,
+    HTML_MASON_ARGS_BLOCK,
+    HTML_MASON_ATTR_BLOCK,
+    HTML_MASON_TEXT_BLOCK,
+    HTML_MASON_FILTER_BLOCK,
+    HTML_MASON_FILTERED_BLOCK
+  );
 
-	@NotNull
-	@Override
-	public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
-	{
-		List<FoldingDescriptor> masonDescriptors = new ArrayList<FoldingDescriptor>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
-		root.accept(new HTMLMasonFoldingRegionsCollector(document, masonDescriptors));
-		return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
-	}
+  @NotNull
+  @Override
+  public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+    List<FoldingDescriptor> masonDescriptors =
+      new ArrayList<FoldingDescriptor>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
+    root.accept(new HTMLMasonFoldingRegionsCollector(document, masonDescriptors));
+    return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
+  }
 
-	@Nullable
-	@Override
-	public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range)
-	{
-		IElementType tokenType = node.getElementType();
-		if (tokenType == HTML_MASON_ATTR_BLOCK)
-		{
-			return "/ attributes /";
-		}
-		else if (tokenType == HTML_MASON_BLOCK)
-		{
-			return PH_CODE_BLOCK;
-		}
-		else if (tokenType == HTML_MASON_ARGS_BLOCK)
-		{
-			return "/ arguments /";
-		}
-		else if (tokenType == HTML_MASON_TEXT_BLOCK)
-		{
-			return "/ text block /";
-		}
-		else if (tokenType == HTML_MASON_FILTERED_BLOCK)
-		{
-			return "/ filtered content /";
-		}
-		else if (tokenType == HTML_MASON_FILTER_BLOCK)
-		{
-			return "/ content filter /";
-		}
-		else if (tokenType == HTML_MASON_ONCE_BLOCK)
-		{
-			return "/ top level shared code /";
-		}
-		else if (tokenType == HTML_MASON_SHARED_BLOCK)
-		{
-			return "/ shared code /";
-		}
-		else if (tokenType == HTML_MASON_INIT_BLOCK)
-		{
-			return "/ init code /";
-		}
-		else if (tokenType == HTML_MASON_CLEANUP_BLOCK)
-		{
-			return "/ cleanup code /";
-		}
-		return super.getPlaceholderText(node, range);
-	}
+  @Nullable
+  @Override
+  public String getPlaceholderText(@NotNull ASTNode node, @NotNull TextRange range) {
+    IElementType tokenType = node.getElementType();
+    if (tokenType == HTML_MASON_ATTR_BLOCK) {
+      return "/ attributes /";
+    }
+    else if (tokenType == HTML_MASON_BLOCK) {
+      return PH_CODE_BLOCK;
+    }
+    else if (tokenType == HTML_MASON_ARGS_BLOCK) {
+      return "/ arguments /";
+    }
+    else if (tokenType == HTML_MASON_TEXT_BLOCK) {
+      return "/ text block /";
+    }
+    else if (tokenType == HTML_MASON_FILTERED_BLOCK) {
+      return "/ filtered content /";
+    }
+    else if (tokenType == HTML_MASON_FILTER_BLOCK) {
+      return "/ content filter /";
+    }
+    else if (tokenType == HTML_MASON_ONCE_BLOCK) {
+      return "/ top level shared code /";
+    }
+    else if (tokenType == HTML_MASON_SHARED_BLOCK) {
+      return "/ shared code /";
+    }
+    else if (tokenType == HTML_MASON_INIT_BLOCK) {
+      return "/ init code /";
+    }
+    else if (tokenType == HTML_MASON_CLEANUP_BLOCK) {
+      return "/ cleanup code /";
+    }
+    return super.getPlaceholderText(node, range);
+  }
 
-	@NotNull
-	@Override
-	protected TokenSet getCommentExcludedTokens()
-	{
-		return COMMENT_EXCLUDED_TOKENS;
-	}
+  @NotNull
+  @Override
+  protected TokenSet getCommentExcludedTokens() {
+    return COMMENT_EXCLUDED_TOKENS;
+  }
 
 /*
-	@Nullable
+        @Nullable
 	@Override
 	protected IElementType getTemplateBlockElementType()
 	{
@@ -134,33 +121,27 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 	}
 */
 
-	public static class HTMLMasonFoldingRegionsCollector extends HTMLMasonRecursiveVisitor
-	{
-		protected final Document myDocument;
-		protected List<FoldingDescriptor> myDescriptors;
+  public static class HTMLMasonFoldingRegionsCollector extends HTMLMasonRecursiveVisitor {
+    protected final Document myDocument;
+    protected List<FoldingDescriptor> myDescriptors;
 
-		public HTMLMasonFoldingRegionsCollector(@NotNull Document document, @NotNull List<FoldingDescriptor> result)
-		{
-			myDocument = document;
-			myDescriptors = result;
-		}
+    public HTMLMasonFoldingRegionsCollector(@NotNull Document document, @NotNull List<FoldingDescriptor> result) {
+      myDocument = document;
+      myDescriptors = result;
+    }
 
-		@Override
-		public void visitElement(PsiElement element)
-		{
-			IElementType elementType = element.getNode().getElementType();
+    @Override
+    public void visitElement(PsiElement element) {
+      IElementType elementType = element.getNode().getElementType();
 
-			if (elementType == HTML_MASON_FILTERED_BLOCK)
-			{
-				addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
-			}
-			else if (FOLDABLE_TOKENS.contains(elementType))
-			{
-				foldElement(element, myDescriptors, myDocument);
-			}
+      if (elementType == HTML_MASON_FILTERED_BLOCK) {
+        addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
+      }
+      else if (FOLDABLE_TOKENS.contains(elementType)) {
+        foldElement(element, myDescriptors, myDocument);
+      }
 
-			super.visitElement(element);
-		}
-	}
-
+      super.visitElement(element);
+    }
+  }
 }

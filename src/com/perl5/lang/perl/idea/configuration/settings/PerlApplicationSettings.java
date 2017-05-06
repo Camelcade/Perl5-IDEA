@@ -30,55 +30,46 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 16.04.2016.
  */
 @State(
-		name = "Perl5ApplicationSettings",
-		storages = @Storage(id = "other", file = PerlPathMacros.PERL5_APP_SETTINGS_FILE)
+  name = "Perl5ApplicationSettings",
+  storages = @Storage(id = "other", file = PerlPathMacros.PERL5_APP_SETTINGS_FILE)
 )
-public class PerlApplicationSettings implements PersistentStateComponent<PerlApplicationSettings>
-{
-	public String pluginVersion = "";
-	public boolean popupShown = false;
+public class PerlApplicationSettings implements PersistentStateComponent<PerlApplicationSettings> {
+  public String pluginVersion = "";
+  public boolean popupShown = false;
 
-	public static PerlApplicationSettings getInstance()
-	{
-		return ServiceManager.getService(PerlApplicationSettings.class);
-	}
+  @Nullable
+  @Override
+  public PerlApplicationSettings getState() {
+    return this;
+  }
 
-	@Nullable
-	@Override
-	public PerlApplicationSettings getState()
-	{
-		return this;
-	}
+  @Override
+  public void loadState(PerlApplicationSettings state) {
+    XmlSerializerUtil.copyBean(state, this);
+  }
 
-	@Override
-	public void loadState(PerlApplicationSettings state)
-	{
-		XmlSerializerUtil.copyBean(state, this);
-	}
+  private boolean isVersionChanged() {
+    return !StringUtil.equals(pluginVersion, PerlPluginUtil.getPluginVersion());
+  }
 
-	private boolean isVersionChanged()
-	{
-		return !StringUtil.equals(pluginVersion, PerlPluginUtil.getPluginVersion());
-	}
+  private void updateVersion() {
+    String newVersion = PerlPluginUtil.getPluginVersion();
+    if (newVersion != null) {
+      pluginVersion = newVersion;
+      popupShown = false;
+    }
+  }
 
-	private void updateVersion()
-	{
-		String newVersion = PerlPluginUtil.getPluginVersion();
-		if (newVersion != null)
-		{
-			pluginVersion = newVersion;
-			popupShown = false;
-		}
-	}
+  public void setAnnounceShown() {
+    updateVersion();
+    popupShown = true;
+  }
 
-	public void setAnnounceShown()
-	{
-		updateVersion();
-		popupShown = true;
-	}
+  public boolean shouldShowAnnounce() {
+    return isVersionChanged() || !popupShown;
+  }
 
-	public boolean shouldShowAnnounce()
-	{
-		return isVersionChanged() || !popupShown;
-	}
+  public static PerlApplicationSettings getInstance() {
+    return ServiceManager.getService(PerlApplicationSettings.class);
+  }
 }

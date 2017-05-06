@@ -32,46 +32,38 @@ import java.util.List;
 /**
  * Created by hurricup on 15.06.2016.
  */
-public class TemplateToolkitBlockReference extends PerlCachingReference<PsiElement>
-{
-	public TemplateToolkitBlockReference(PsiElement psiElement)
-	{
-		super(psiElement);
-	}
+public class TemplateToolkitBlockReference extends PerlCachingReference<PsiElement> {
+  public TemplateToolkitBlockReference(PsiElement psiElement) {
+    super(psiElement);
+  }
 
-	@Override
-	protected ResolveResult[] resolveInner(boolean incompleteCode)
-	{
-		PsiElement element = getElement();
-		if (element == null)
-		{
-			return ResolveResult.EMPTY_ARRAY;
-		}
+  @Override
+  protected ResolveResult[] resolveInner(boolean incompleteCode) {
+    PsiElement element = getElement();
+    if (element == null) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
 
-		TextRange range = ElementManipulators.getValueTextRange(element);
-		if (range == null)
-		{
-			return ResolveResult.EMPTY_ARRAY;
-		}
+    TextRange range = ElementManipulators.getValueTextRange(element);
+    if (range == null) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
 
-		final CharSequence targetName = range.subSequence(element.getText());
-		if (StringUtil.isEmpty(targetName))
-		{
-			return ResolveResult.EMPTY_ARRAY;
-		}
+    final CharSequence targetName = range.subSequence(element.getText());
+    if (StringUtil.isEmpty(targetName)) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
 
-		final List<ResolveResult> result = new ArrayList<ResolveResult>();
+    final List<ResolveResult> result = new ArrayList<ResolveResult>();
 
-		PsiTreeUtil.processElements(element.getContainingFile(), element1 ->
-		{
-			if (element1 instanceof TemplateToolkitNamedBlock && StringUtil.equals(((TemplateToolkitNamedBlock) element1).getName(), targetName))
-			{
-				result.add(new PsiElementResolveResult(element1));
-			}
-			return true;
-		});
+    PsiTreeUtil.processElements(element.getContainingFile(), element1 ->
+    {
+      if (element1 instanceof TemplateToolkitNamedBlock && StringUtil.equals(((TemplateToolkitNamedBlock)element1).getName(), targetName)) {
+        result.add(new PsiElementResolveResult(element1));
+      }
+      return true;
+    });
 
-		return result.toArray(new ResolveResult[result.size()]);
-	}
-
+    return result.toArray(new ResolveResult[result.size()]);
+  }
 }

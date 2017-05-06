@@ -22,6 +22,5 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifier;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public interface MasonMethodModifier extends PerlMooseMethodModifier, PerlImplicitVariablesProvider
-{
+public interface MasonMethodModifier extends PerlMooseMethodModifier, PerlImplicitVariablesProvider {
 }

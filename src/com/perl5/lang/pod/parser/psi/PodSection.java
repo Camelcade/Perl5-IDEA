@@ -22,10 +22,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodSection extends PodCompositeElement
-{
-	boolean hasContent();
+public interface PodSection extends PodCompositeElement {
+  boolean hasContent();
 
-	@Nullable
-	PsiElement getContentBlock();
+  @Nullable
+  PsiElement getContentBlock();
 }

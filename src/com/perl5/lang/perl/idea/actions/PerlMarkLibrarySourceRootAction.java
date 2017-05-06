@@ -37,86 +37,69 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction
-{
-	public PerlMarkLibrarySourceRootAction()
-	{
-		super(JpsPerlLibrarySourceRootType.INSTANCE);
-	}
+public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction {
+  public PerlMarkLibrarySourceRootAction() {
+    super(JpsPerlLibrarySourceRootType.INSTANCE);
+  }
 
-	// following methods copied from parent
-	@Nullable
-	private static Module getModule(@NotNull AnActionEvent e, @Nullable VirtualFile[] files)
-	{
-		if (files == null)
-		{
-			return null;
-		}
-		Module module = e.getData(LangDataKeys.MODULE);
-		if (module == null)
-		{
-			module = findParentModule(e.getProject(), files);
-		}
-		return module;
-	}
+  @Override
+  protected boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module) {
+    return super.isEnabled(selection, module) && ModuleType.get(module) == PerlModuleType.getInstance();
+  }
 
-	@Nullable
-	private static Module findParentModule(@Nullable Project project, @NotNull VirtualFile[] files)
-	{
-		if (project == null)
-		{
-			return null;
-		}
-		Module result = null;
-		DirectoryIndex index = DirectoryIndex.getInstance(project);
-		for (VirtualFile file : files)
-		{
-			Module module = index.getInfoForFile(file).getModule();
-			if (module == null)
-			{
-				return null;
-			}
-			if (result == null)
-			{
-				result = module;
-			}
-			else if (!result.equals(module))
-			{
-				return null;
-			}
-		}
-		return result;
-	}
+  @Override
+  public void actionPerformed(AnActionEvent e) {
+    super.actionPerformed(e);
 
-	@Override
-	protected boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module)
-	{
-		return super.isEnabled(selection, module) && ModuleType.get(module) == PerlModuleType.getInstance();
-	}
+    VirtualFile[] files = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
+    final Module module = getModule(e, files);
+    if (module == null) {
+      return;
+    }
 
-	@Override
-	public void actionPerformed(AnActionEvent e)
-	{
-		super.actionPerformed(e);
+    final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
+    PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
+    ApplicationManager.getApplication().runWriteAction(new Runnable() {
+      @Override
+      public void run() {
+        modifiableModel.commit();
+        module.getProject().save();
+      }
+    });
+  }
 
-		VirtualFile[] files = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
-		final Module module = getModule(e, files);
-		if (module == null)
-		{
-			return;
-		}
+  // following methods copied from parent
+  @Nullable
+  private static Module getModule(@NotNull AnActionEvent e, @Nullable VirtualFile[] files) {
+    if (files == null) {
+      return null;
+    }
+    Module module = e.getData(LangDataKeys.MODULE);
+    if (module == null) {
+      module = findParentModule(e.getProject(), files);
+    }
+    return module;
+  }
 
-		final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
-		PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
-		ApplicationManager.getApplication().runWriteAction(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				modifiableModel.commit();
-				module.getProject().save();
-			}
-		});
-	}
-
+  @Nullable
+  private static Module findParentModule(@Nullable Project project, @NotNull VirtualFile[] files) {
+    if (project == null) {
+      return null;
+    }
+    Module result = null;
+    DirectoryIndex index = DirectoryIndex.getInstance(project);
+    for (VirtualFile file : files) {
+      Module module = index.getInfoForFile(file).getModule();
+      if (module == null) {
+        return null;
+      }
+      if (result == null) {
+        result = module;
+      }
+      else if (!result.equals(module)) {
+        return null;
+      }
+    }
+    return result;
+  }
 }
