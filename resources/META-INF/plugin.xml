@@ -33,13 +33,16 @@
     ]]></description>
 
     <change-notes><![CDATA[
-     <p>Fixes:
-      <ul>
-      <li>Fixed bug when plugin messed with Go project dependencies</li>
-      <li>Fixed exception on code generation in 2017 EAP IDEs.</li>
-      <li>Temporary disable package names adjusting on moving/renaming package directories, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1419">#1419</a>.</li>
-      </ul>
+     <p>Updates:
+     <ul>
+     <li>Plugin now uses debugger module v2017.1x</li>
+     </ul>
      </p>
+     <!--<p>Fixes:-->
+      <!--<ul>-->
+      <!--<li>Fixed bug when plugin messed with Go project dependencies</li>-->
+      <!--</ul>-->
+     <!--</p>-->
     ]]>
     </change-notes>
 

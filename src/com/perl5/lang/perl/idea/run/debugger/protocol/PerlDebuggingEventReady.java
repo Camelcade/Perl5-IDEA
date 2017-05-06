@@ -20,13 +20,14 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.PerlBundle;
 
 /**
  * Created by hurricup on 08.05.2016.
  */
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 {
-	private static final String MODULE_VERSION_PREFIX = "1.6.1.";
+	private static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
 	public String version;
 
 	@Override
@@ -43,8 +44,8 @@ public class PerlDebuggingEventReady extends PerlDebuggingEventBase
 
 		Notifications.Bus.notify(new Notification(
 				"PERL_DEBUGGER",
-				"Incorrect Devel::Camelcadedb version",
-				"Current plugin version requires Devel::Camelcadedb version " + MODULE_VERSION_PREFIX + "x, but we've got " + version + ". Please install appropriate version from CPAN.",
+				PerlBundle.message("perl.debugger.incorrect.version.title"),
+				PerlBundle.message("perl.debugger.incorrect.version.message", MODULE_VERSION_PREFIX, version),
 				NotificationType.ERROR
 		));
 		return false;
