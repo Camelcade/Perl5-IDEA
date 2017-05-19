@@ -31,6 +31,8 @@ public class PerlParserTest extends PerlParserTestBase {
 
   public void testIssue1434() {doTest();}
 
+  public void testIssue1435() {doTest();}
+
   public void testLexicalSubs() {doTest();}
 
   public void testComplexModifiers() {doTest();}
