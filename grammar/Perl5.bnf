@@ -618,8 +618,8 @@ private normal_statement ::= expr [<<parseStatementModifier>>] {pin=1}
 //private normal_statement_body ::= expr {recoverWhile=recover_statement}
 
 // fixme adjust parsing of this thing to avoid duplicates
-sub_definition ::=  'sub' sub_names_token sub_definition_parameters parse_block
-sub_declaration ::=  'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
+sub_definition ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_definition_parameters parse_block
+sub_declaration ::=  ['my'|'our'|'state'] 'sub' sub_names_token sub_declaration_parameters <<statementSemi>>
 private sub_declaration_parameters ::= sub_definition_parameters {recoverWhile=recover_statement}
 
 private sub_names_token ::= [QUALIFYING_PACKAGE] SUB_NAME

@@ -29,6 +29,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testLexicalSubs() {doTest();}
+
   public void testComplexModifiers() {doTest();}
 
   public void testRegexSpacing() {doTest();}
