@@ -36,6 +36,7 @@
      <p>Updates:
      <ul>
      <li>Plugin now uses debugger module v2017.1x</li>
+     <li>Improved comments parsing in char classes and <code>\Q...\E</code> quotes in regexps</li>
      </ul>
      </p>
      <!--<p>Fixes:-->

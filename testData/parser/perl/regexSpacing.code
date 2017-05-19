@@ -1,0 +1,9 @@
+$blah =~ /some test [^ g r   o # u p] \Qquoted # comment  tab\E  \# not comment blah/;
+
+$blah =~ /
+        some test
+        [^ g r   o # u p]
+        \Qquoted # comment  tab\E
+        # some comment
+        \# not comment blah
+    /x;

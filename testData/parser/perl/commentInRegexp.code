@@ -1,6 +1,6 @@
 
 s/a
-    s
+    s   # this is a test
     d[          # this is a test
     f
     a](?#somecomment)asdf
@@ -17,7 +17,7 @@ s/a
     /x;
 
 s/a
-    s
+    s   # this is a test
     d[          # this is a test
     f
     a](?#somecomment)

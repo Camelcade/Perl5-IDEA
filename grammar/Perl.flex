@@ -146,6 +146,8 @@ REGEX_HASH_NEGATING = [\^\:\\\[\{]
 
 %xstate STRING_Q, STRING_QQ, STRING_QX, STRING_LIST
 %xstate MATCH_REGEX, MATCH_REGEX_X, REPLACEMENT_REGEX
+%xstate REGEX_CHARGROUP_START_X
+%xstate REGEX_QUOTE_START_X
 //%xstate LEX_REGEX_CHAR_CLASS, LEX_REGEX_CHAR_CLASS_START
 //%xstate REGEX_POSIX_CHAR_CLASS
 
@@ -399,11 +401,29 @@ REGEX_HASH_NEGATING = [\^\:\\\[\{]
 }
 */
 
+<REGEX_CHARGROUP_START_X>{
+  "]"       {popState();return REGEX_TOKEN;}
+  [^\\\]]+  {return REGEX_TOKEN;}
+}
+
+<REGEX_QUOTE_START_X>{
+  "\\E"     {popState();return REGEX_TOKEN;}
+  [^\\]+    {return REGEX_TOKEN;}
+}
+
+<REGEX_CHARGROUP_START_X,REGEX_QUOTE_START_X>{
+  "\\".     {return REGEX_TOKEN;}
+  [^]       {return REGEX_TOKEN;}
+  <<EOF>>   {popState();}
+}
+
 <MATCH_REGEX_X>
 {
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
-	{ANY_SPACE}+				{return TokenType.WHITE_SPACE;}
-	{LINE_COMMENT}				{return COMMENT_LINE;}
+	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
+	{LINE_COMMENT}			{return COMMENT_LINE;}
+        "["                             {pushStateAndBegin(REGEX_CHARGROUP_START_X);return REGEX_TOKEN;}
+        "\\Q"                           {pushStateAndBegin(REGEX_QUOTE_START_X);return REGEX_TOKEN;}
 
 	<MATCH_REGEX>
 	{
