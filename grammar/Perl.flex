@@ -330,36 +330,18 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 /////////////////////////////////// end of annotations /////////////////////////////////////////////////////////////////
 
 <QUOTED_HEREDOC_OPENER>{
-	{DQ_STRING}	{
-				yybegin(AFTER_VALUE);
-				pushState();
-				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QQ, yytext().subSequence(1,yylength()-1)));
-				yybegin(QUOTE_LIKE_OPENER_QQ);
-				return captureString();
-			}
-	{SQ_STRING} {
-				yybegin(AFTER_VALUE);
-				pushState();
-				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC, yytext().subSequence(1,yylength()-1)));
-				yybegin(QUOTE_LIKE_OPENER_Q);
-				return captureString();
-			}
-	{XQ_STRING} {
-				yybegin(AFTER_VALUE);
-				pushState();
-				heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QX, yytext().subSequence(1,yylength()-1)));
-				yybegin(QUOTE_LIKE_OPENER_QX);
-				return captureString();
-			}
+	{DQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ);}
+	{SQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q);}
+	{XQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX);}
 }
 
 <BACKREF_HEREDOC_OPENER>{
-	{UNQUOTED_HEREDOC_MARKER} {	yybegin(AFTER_VALUE);heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC, yytext()));return STRING_CONTENT;}
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC);}
 }
 
 <BARE_HEREDOC_OPENER>{
-	"\\" 					  {yybegin(BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;}
-	{UNQUOTED_HEREDOC_MARKER} {yybegin(AFTER_VALUE); heredocQueue.addLast(new PerlHeredocQueueElement(HEREDOC_QQ, yytext()));return STRING_CONTENT;}
+	"\\" 			  {yybegin(BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;}
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC_QQ);}
 }
 
 <INTERPOLATED_VARIABLE_SUFFIX>{
@@ -932,9 +914,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	".." 	{yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;}
 	"." 	{yybegin(YYINITIAL);return OPERATOR_CONCAT;}
 
-	"<<" / {QUOTED_HEREDOC_MARKER}   		{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
-	"<<" / "\\"{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
-	"<<" / {UNQUOTED_HEREDOC_MARKER}  		{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / {QUOTED_HEREDOC_MARKER}   	{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+	"<<" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 
 	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}

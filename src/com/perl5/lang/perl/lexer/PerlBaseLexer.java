@@ -980,6 +980,33 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     }
   }
 
+  /**
+   * Captures quoted here-doc opener after <<[~] operator. Pushes heredoc data into queue
+   *
+   * @param heredocElementType element type for heredoc body
+   * @param stringOpenerState  state for string capture
+   * @return next string token type
+   */
+  public IElementType captureQuotedHeredocMarker(IElementType heredocElementType, int stringOpenerState) {
+    yybegin(AFTER_VALUE);
+    pushState();
+    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext().subSequence(1, yylength() - 1)));
+    yybegin(stringOpenerState);
+    return captureString();
+  }
+
+  /**
+   * Captures bare here-doc opener after <<[~] operator. Pushes heredoc data into queue
+   *
+   * @param heredocElementType element type for heredoc body
+   * @return string token type
+   */
+  public IElementType captureBareHeredocMarker(IElementType heredocElementType) {
+    yybegin(AFTER_VALUE);
+    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext()));
+    return STRING_CONTENT;
+  }
+
   public static void initReservedTokensMap() {
     RESERVED_TOKEN_TYPES.clear();
     // reserved
@@ -1013,4 +1040,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       return charOpener;
     }
   }
+
+
+
 }
