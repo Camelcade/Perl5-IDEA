@@ -1,13 +1,13 @@
-$blah =~ /some test [^ g r   o # u p] \Qquoted # comment  tab\E  \# not comment blah/;
+/some $pattern \$pattern test [^ g r   o # u p $pattern \$pattern ] \Qquoted $pattern  \$pattern # comment  tab\E  \# not comment blah/;
 
-$blah =~ /
-    some test
-        [^ g r   o # u p]
-        [some [:alpha:] blah]
+/
+    some $pattern  test \$pattern
+        [^ g r   o # u p $pattern \$pattern ]
+        [some $pattern \$pattern [:alpha:] blah]
         [some [[:alpha:]] blah]
         [some [:^alpha:] blah]
         [some [[:^alpha:]] blah]
-        \Qquoted # comment  tab\E
+        \Qquoted $pattern \$pattern # comment  tab\E
         # some comment
         \# not comment blah
     /x;

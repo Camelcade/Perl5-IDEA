@@ -149,8 +149,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %xstate STRING_Q, STRING_QQ, STRING_QX, STRING_LIST
 %xstate MATCH_REGEX, MATCH_REGEX_X, REPLACEMENT_REGEX
-%xstate REGEX_CHARGROUP_START_X
-%xstate REGEX_QUOTE_START_X
+%xstate REGEX_CHARCLASS_X
+%xstate REGEX_QUOTED_X
 //%xstate LEX_REGEX_CHAR_CLASS, LEX_REGEX_CHAR_CLASS_START
 //%xstate REGEX_POSIX_CHAR_CLASS
 
@@ -404,18 +404,18 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 */
 
-<REGEX_CHARGROUP_START_X>{
+<REGEX_CHARCLASS_X>{
   "]"                   {popState();return REGEX_TOKEN;}
   {POSIX_CHARGROUP_ANY} {return REGEX_TOKEN;}
-  [^\\\]\[]+            {return REGEX_TOKEN;}
+  [^\\\]\[$@]+            {return REGEX_TOKEN;}
 }
 
-<REGEX_QUOTE_START_X>{
-  "\\E"     {popState();return REGEX_TOKEN;}
-  [^\\]+    {return REGEX_TOKEN;}
+<REGEX_QUOTED_X>{
+  "\\E"       {popState();return REGEX_TOKEN;}
+  [^\\$@]+    {return REGEX_TOKEN;}
 }
 
-<REGEX_CHARGROUP_START_X,REGEX_QUOTE_START_X>{
+<REGEX_CHARCLASS_X,REGEX_QUOTED_X>{
   "\\".     {return REGEX_TOKEN;}
   [^]       {return REGEX_TOKEN;}
   <<EOF>>   {popState();}
@@ -426,8 +426,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
 	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
 	{LINE_COMMENT}			{return COMMENT_LINE;}
-        "["                             {pushStateAndBegin(REGEX_CHARGROUP_START_X);return REGEX_TOKEN;}
-        "\\Q"                           {pushStateAndBegin(REGEX_QUOTE_START_X);return REGEX_TOKEN;}
+        "["                             {pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;}
+        "\\Q"                           {pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;}
 
 	<MATCH_REGEX>
 	{
@@ -456,7 +456,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 //////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
 
 // ,LEX_REGEX_CHAR_CLASS
-<STRING_QQ,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,REPLACEMENT_REGEX>
+<STRING_QQ,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,REGEX_QUOTED_X,REGEX_CHARCLASS_X,REPLACEMENT_REGEX>
 {
 	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
 	"$#" / {NON_SPACE_AHEAD} 	{return startUnbracedVariable(SIGIL_SCALAR_INDEX);}
