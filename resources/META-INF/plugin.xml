@@ -15,12 +15,12 @@
   -->
 
 <idea-plugin version="2" url="https://github.com/hurricup/Perl5-IDEA">
-    <id>com.perl5</id>
-    <name>Perl</name>
-    <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
-    <category>Custom Languages</category>
+  <id>com.perl5</id>
+  <name>Perl</name>
+  <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
+  <category>Custom Languages</category>
 
-     <description><![CDATA[
+  <description><![CDATA[
     <p>Camelcade plugin adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
     <p>
     <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
@@ -32,7 +32,7 @@
     <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"><image src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" alt="Donate to support Project"></a></p>
     ]]></description>
 
-    <change-notes><![CDATA[
+  <change-notes><![CDATA[
      <p>Updates:
      <ul>
      <li>Plugin now uses debugger module v2017.1x</li>
@@ -48,935 +48,939 @@
       </ul>
      </p>
     ]]>
-    </change-notes>
-
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
-    <idea-version since-build="171" until-build="172.*"/>
-
-    <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different products  -->
-
-    <depends>com.intellij.modules.lang</depends>
-    <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
-
-    <extensionPoints>
-        <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
-            <with attribute="implementationClass"
-                  implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
-        </extensionPoint>
-        <extensionPoint name="parserExtension"
-                        interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
-    </extensionPoints>
-
-    <extensions defaultExtensionNs="com.perl5">
-        <packageProcessor key="parent"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ParentProcessor"/>
-        <packageProcessor key="base"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseProcessor"/>
-        <packageProcessor key="strict"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
-        <packageProcessor key="warnings"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
-        <packageProcessor key="feature"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
-        <packageProcessor key="mro"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
-        <packageProcessor key="lib"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.LibProcessor"/>
-        <packageProcessor key="Mojo::Base"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
-        <packageProcessor key="Moose"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
-        <packageProcessor key="Moo"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
-        <packageProcessor key="Dancer"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
-        <packageProcessor key="Dancer2"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.Dancer2PackageProcessor"/>
-        <packageProcessor key="Modern::Perl"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ModernPerlPackageProcessor"/>
-        <packageProcessor key="POSIX"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXPackageProcessor"/>
-        <packageProcessor key="strictures"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
-        <packageProcessor key="vars"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor"/>
-        <packageProcessor key="constant"
-                          implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
-
-
-        <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtensionImpl"/>
-        <parserExtension implementation="com.perl5.lang.perl.parser.MojoliciousParserExtensionImpl"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <internalFileTemplate name="Perl5 package"/>
-        <internalFileTemplate name="Perl5 script"/>
-        <internalFileTemplate name="Perl5 embedded"/>
-        <internalFileTemplate name="Perl5 mojolicious"/>
-        <internalFileTemplate name="Perl5 test"/>
-        <internalFileTemplate name="Perl5 pod"/>
-
-        <jps.plugin/>
-
-        <lang.fileViewProviderFactory language="Perl5"
-                                      implementationClass="com.perl5.lang.perl.psi.PerlFileViewProviderFactory"/>
-        <annotator language="Perl5"
-                   implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <externalAnnotator language="Perl5"
-                           implementationClass="com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator"/>
-
-        <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
-        <referencesSearch
-                implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferencesSearcher"/>
-        <targetElementEvaluator language="Perl5"
-                                implementationClass="com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2"/>
-        <highlightUsagesHandlerFactory
-                implementation="com.perl5.lang.perl.idea.findusages.PerlHighlightUsagesHandlerFactory"/>
-        <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
-        <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
-
-        <codeInsight.parameterInfo language="Perl5"
-                                   implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlParameterInfoHandler"/>
-        <codeInsight.overrideMethod language="Perl5"
-                                    implementationClass="com.perl5.lang.perl.idea.generation.handlers.PerlOverrideMethodHandler"/>
-        <psi.referenceContributor language="Perl5"
-                                  implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
-
-        <editorNotificationProvider
-                implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
-
-        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
-        <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
-        <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
+  <idea-version since-build="171" until-build="172.*"/>
+
+  <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products  -->
+
+  <depends>com.intellij.modules.lang</depends>
+  <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
+
+  <extensionPoints>
+    <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
+      <with attribute="implementationClass"
+            implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
+    </extensionPoint>
+    <extensionPoint name="parserExtension"
+                    interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
+  </extensionPoints>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <packageProcessor key="parent"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ParentProcessor"/>
+    <packageProcessor key="base"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseProcessor"/>
+    <packageProcessor key="strict"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
+    <packageProcessor key="warnings"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
+    <packageProcessor key="feature"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FeatureProcessor"/>
+    <packageProcessor key="mro"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
+    <packageProcessor key="lib"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.LibProcessor"/>
+    <packageProcessor key="Mojo::Base"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
+    <packageProcessor key="Moose"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
+    <packageProcessor key="Moo"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
+    <packageProcessor key="Dancer"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DancerPackageProcessor"/>
+    <packageProcessor key="Dancer2"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.Dancer2PackageProcessor"/>
+    <packageProcessor key="Modern::Perl"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ModernPerlPackageProcessor"/>
+    <packageProcessor key="POSIX"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXPackageProcessor"/>
+    <packageProcessor key="strictures"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StricturesPackageProcessor"/>
+    <packageProcessor key="vars"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor"/>
+    <packageProcessor key="constant"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
+
+
+    <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
+    <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
+    <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtensionImpl"/>
+    <parserExtension implementation="com.perl5.lang.perl.parser.MojoliciousParserExtensionImpl"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <internalFileTemplate name="Perl5 package"/>
+    <internalFileTemplate name="Perl5 script"/>
+    <internalFileTemplate name="Perl5 embedded"/>
+    <internalFileTemplate name="Perl5 mojolicious"/>
+    <internalFileTemplate name="Perl5 test"/>
+    <internalFileTemplate name="Perl5 pod"/>
+
+    <jps.plugin/>
+
+    <lang.fileViewProviderFactory language="Perl5"
+                                  implementationClass="com.perl5.lang.perl.psi.PerlFileViewProviderFactory"/>
+    <annotator language="Perl5"
+               implementationClass="com.perl5.lang.perl.parser.Class.Accessor.idea.annotator.ClassAccessorAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <externalAnnotator language="Perl5"
+                       implementationClass="com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator"/>
+
+    <stubElementTypeHolder class="com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes"/>
+    <referencesSearch
+        implementation="com.perl5.lang.perl.parser.Class.Accessor.idea.findUsages.ClassAccessorReferencesSearcher"/>
+    <targetElementEvaluator language="Perl5"
+                            implementationClass="com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2"/>
+    <highlightUsagesHandlerFactory
+        implementation="com.perl5.lang.perl.idea.findusages.PerlHighlightUsagesHandlerFactory"/>
+    <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
+    <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
+
+    <codeInsight.parameterInfo language="Perl5"
+                               implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlParameterInfoHandler"/>
+    <codeInsight.overrideMethod language="Perl5"
+                                implementationClass="com.perl5.lang.perl.idea.generation.handlers.PerlOverrideMethodHandler"/>
+    <psi.referenceContributor language="Perl5"
+                              implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
+
+    <editorNotificationProvider
+        implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
+
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
 
-        <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
-                            serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
-        <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
-                            serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
-        <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"
-                            serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+    <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
+                        serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
+    <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
+                        serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"
+                        serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
 
-        <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
-        <lang.formatter language="Perl5"
-                        implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
-        <codeStyleSettingsProvider
-                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
-        <langCodeStyleSettingsProvider
-                implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
-        <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
+    <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
+    <lang.formatter language="Perl5"
+                    implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+    <codeStyleSettingsProvider
+        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
+    <langCodeStyleSettingsProvider
+        implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
+    <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
 
-        <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
+    <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
-        <projectConfigurable displayName="Perl5 libs" groupId="project"
-                             provider="com.perl5.lang.perl.idea.configuration.paths.PerlPathsConfigurableProvider"/>
-        <projectConfigurable groupId="language"
-                             provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"
-                             id="PERL5_MAIN_SETTINGS"/>
+    <projectConfigurable displayName="Perl5 libs" groupId="project"
+                         provider="com.perl5.lang.perl.idea.configuration.paths.PerlPathsConfigurableProvider"/>
+    <projectConfigurable groupId="language"
+                         provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"
+                         id="PERL5_MAIN_SETTINGS"/>
 
-        <projectStructure.sourceRootEditHandler
-                implementation="com.perl5.lang.perl.idea.configuration.paths.PerlIncludeLibrarySourceRootEditHandler"/>
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.perl.idea.configuration.paths.PerlIncludeLibrarySourceRootEditHandler"/>
 
 
-        <codeInsight.lineMarkerProvider language="Perl5"
-                                        implementationClass="com.perl5.lang.perl.idea.navigation.PerlLineMarkerProvider"/>
+    <codeInsight.lineMarkerProvider language="Perl5"
+                                    implementationClass="com.perl5.lang.perl.idea.navigation.PerlLineMarkerProvider"/>
 
-        <createFromTemplateHandler
-                implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFileFromTemplateHandler"
-                id="PERL_PACKAGE"/>
-        <createFromTemplateHandler
-                implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler"
-                id="PERL_DEFAULT" order="after PERL_PACKAGE"/>
+    <createFromTemplateHandler
+        implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreatePackageFileFromTemplateHandler"
+        id="PERL_PACKAGE"/>
+    <createFromTemplateHandler
+        implementation="com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler"
+        id="PERL_DEFAULT" order="after PERL_PACKAGE"/>
 
-        <defaultTemplatePropertiesProvider
-                implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
+    <defaultTemplatePropertiesProvider
+        implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
-        <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
+    <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
 
-        <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
-                      id="PerlTypedHandler" order="first"/>
+    <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
+                  id="PerlTypedHandler" order="first"/>
 
-        <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
-                              id="PerlEnterHandler" order="first"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
+                          id="PerlEnterHandler" order="first"/>
 
-        <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
-                               order="first"/>
-        <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
+    <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
+                           order="first"/>
+    <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
-        <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
-        <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
+    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
+    <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
 
-        <fileTypeFactory implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeFactory"/>
+    <fileTypeFactory implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeFactory"/>
 
-        <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
-        <configurationType implementation="com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfigurationType"/>
+    <configurationType implementation="com.perl5.lang.perl.idea.run.PerlConfigurationType"/>
+    <configurationType implementation="com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfigurationType"/>
 
-        <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
-        <xdebugger.breakpointType
-                implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
+    <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
+    <xdebugger.breakpointType
+        implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
 
-        <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
-        <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
+    <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
+    <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
 
-        <lang.syntaxHighlighterFactory language="Perl5" key="Perl5"
-                                       implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
-        <editorHighlighterProvider filetype="Perl5 script" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-        <editorHighlighterProvider filetype="Perl5 package" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-        <editorHighlighterProvider filetype="Perl5 test" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <lang.syntaxHighlighterFactory language="Perl5" key="Perl5"
+                                   implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
+    <editorHighlighterProvider filetype="Perl5 script"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Perl5 package"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Perl5 test"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
 
-        <lang.psiStructureViewFactory language="Perl5"
-                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+    <lang.psiStructureViewFactory language="Perl5"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
-        <typeHierarchyProvider language="Perl5"
-                               implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
+    <typeHierarchyProvider language="Perl5"
+                           implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
 
-        <consoleFilterProvider order="last"
-                               implementation="com.perl5.lang.perl.idea.execution.filters.PerlConsoleFilterProvider"/>
+    <consoleFilterProvider order="last"
+                           implementation="com.perl5.lang.perl.idea.execution.filters.PerlConsoleFilterProvider"/>
 
-        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotator"
-                   id="PERL_SUBS_ANNOTATOR" order="first"/>
+    <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotator"
+               id="PERL_SUBS_ANNOTATOR" order="first"/>
 
-        <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlCodeFoldingOptionsProvider"/>
+    <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlCodeFoldingOptionsProvider"/>
 
-        <completion.contributor language="Perl5"
-                                implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
-        <lang.foldingBuilder language="Perl5"
-                             implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
-        <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
-        <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
+    <lang.foldingBuilder language="Perl5"
+                         implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
+    <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
 
-        <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
-        <elementDescriptionProvider
-                implementation="com.perl5.lang.perl.parser.Class.Accessor.psi.ClassAccessorElementDescriptionProvider"/>
+    <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider"/>
+    <elementDescriptionProvider
+        implementation="com.perl5.lang.perl.parser.Class.Accessor.psi.ClassAccessorElementDescriptionProvider"/>
 
-        <lang.refactoringSupport language="Perl5"
-                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+    <lang.refactoringSupport language="Perl5"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
-        <gotoClassContributor
-                implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToClassContributor"/>
-        <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToSubDefinitionContributor"/>
-        <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGotoVariableContributor"/>
+    <gotoClassContributor
+        implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToClassContributor"/>
+    <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGoToSubDefinitionContributor"/>
+    <gotoSymbolContributor implementation="com.perl5.lang.perl.idea.gotosearch.PerlGotoVariableContributor"/>
 
 
-        <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.navigation.PerlGotoDeclarationHandler"/>
-        <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
+    <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.navigation.PerlGotoDeclarationHandler"/>
+    <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
-        <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+    <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
-        <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <quoteHandler fileType="Perl5 test" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <quoteHandler fileType="Perl5 package" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <quoteHandler fileType="Perl5 test" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <quoteHandler fileType="Perl5 package" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PsiPerlLabelExpr"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLeafOrLeafOwnerManipulator"/>
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocElementManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlNamespaceElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlVariableNameElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlVariableNameManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
-                                 implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
-
-
-        <renameHandler
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
-                order="first"/>
-        <renameHandler implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler"
-                       order="first"/>
-
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlDefaultRenameProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
-        <renamePsiElementProcessor
-                implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
-        <!-- following processors are alternative to VirtualFileWatcher -->
-        <!--<renamePsiElementProcessor-->
-        <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>-->
-        <!--<renamePsiElementProcessor-->
-        <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameIDEAPackageProcessor"/>-->
-
-        <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.move.PerlMoveFileHandler"/>
-
-        <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
-                                order="first"/>
-
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.parser.method.signatures.simple.idea.liveTemplates.MethodSignaturesSimpleTemplatesProvider"/>
-
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.parser.moose.idea.liveTemplates.MooseTemplatesProvider"/>
-        <stubElementTypeHolder class="com.perl5.lang.perl.parser.moose.MooseElementTypes"/>
-        <annotator language="Perl5" implementationClass="com.perl5.lang.perl.parser.moose.idea.annotator.MooseAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <referencesSearch
-                implementation="com.perl5.lang.perl.parser.moose.psi.references.PerlMooseReferencesSearcher"/>
-
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
-
-
-        <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
-        <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
-
-        <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
-
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlScalarsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlArraysStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
-
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
-
-        <lang.findUsagesProvider language="Perl5"
-                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-
-        <lang.parserDefinition language="Perl5Regexp"
-                               implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
-        <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
-                            implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
-        <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
-
-        <!-- Template Toolkit -->
-        <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
-        <lang.fileViewProviderFactory language="Template Toolkit 2"
-                                      implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
-        <lang.parserDefinition language="Template Toolkit 2"
-                               implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
-        <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
-        <projectConfigurable
-                instance="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurable"
-                parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
-        <lang.syntaxHighlighterFactory language="Template Toolkit 2" key="Template Toolkit 2"
-                                       implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
-        <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
-        <highlightErrorFilter
-                implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitTemplateLanguageErrorFilter"/>
-        <lang.braceMatcher language="Template Toolkit 2"
-                           implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
-        <annotator language="Template Toolkit 2"
-                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
-        <quoteHandler fileType="Template Toolkit"
-                      className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
-        <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
-                      order="first"/>
-
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionElsif"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCase"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCatch"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Postfix"/>
-        <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitFilterNameMacro"/>
-        <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
-        <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
-
-        <lang.indentStrategy language="Template Toolkit 2"
-                             implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
-
-        <completion.contributor language="Template Toolkit 2"
-                                implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
-        <editorNotificationProvider
-                implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
-                                 implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
-
-        <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
-        <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
-
-        <localInspection language="Template Toolkit 2"
-                         shortName="TT2OrphanReply" displayName="Orphan nested directives"
-                         groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
-                         implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
-
-        <lang.refactoringSupport language="Template Toolkit 2"
-                                 implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
-        <lang.formatter language="Template Toolkit 2"
-                        implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
-
-        <!-- End of template toolkit -->
-
-        <!--Embedded Perl-->
-        <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
-        <lang.parserDefinition language="Embedded Perl"
-                               implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
-        <lang.fileViewProviderFactory language="Embedded Perl"
-                                      implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory language="Embedded Perl" key="Embedded Perl"
-                                       implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
-        <lang.findUsagesProvider language="Embedded Perl"
-                                 implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
-        <lang.braceMatcher language="Embedded Perl"
-                           implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
-
-        <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
-                      order="first"/>
-        <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
-                              id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
-        <lang.formatter language="Embedded Perl"
-                        implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
-
-
-        <lang.namesValidator language="Embedded Perl"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
-
-        <lang.foldingBuilder language="Embedded Perl"
-                             implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
-
-        <!--<lang.formatter language="Embedded Perl"-->
-        <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
-
-        <lang.psiStructureViewFactory language="Embedded Perl"
-                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
-        <lang.refactoringSupport language="Embedded Perl"
-                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-
-        <!--Temporary solution, better than nothing-->
-        <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
-
-        <!-- Here should be an EmbeddedPerlCommenter -->
-        <lang.commenter language="Embedded Perl"
-                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
-        <highlightErrorFilter
-                implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
-        <!--End of Embedded Perl-->
-
-
-        <!-- Mojolicious -->
-        <stubIndex implementation="com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex"/>
-        <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
-
-        <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
-        <lang.parserDefinition language="Mojolicious Perl"
-                               implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
-        <lang.fileViewProviderFactory language="Mojolicious Perl"
-                                      implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
-        <lang.syntaxHighlighterFactory language="Mojolicious Perl" key="Mojolicious Perl"
-                                       implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
-        <lang.findUsagesProvider language="Mojolicious Perl"
-                                 implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
-        <lang.formatter language="Mojolicious Perl"
-                        implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
-        <completion.contributor language="Perl5"
-                                implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
-
-        <lang.namesValidator language="Mojolicious Perl"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
-        <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
-                      order="first"/>
-        <enterHandlerDelegate
-                implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
-                id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
-
-        <quoteHandler fileType="Mojolicious Perl5 Template"
-                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-
-        <lang.refactoringSupport language="Mojolicious Perl"
-                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-
-        <lang.psiStructureViewFactory language="Mojolicious Perl"
-                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-        <lang.braceMatcher language="Mojolicious Perl"
-                           implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
-        <lang.foldingBuilder language="Mojolicious Perl"
-                             implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
-        <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
-        <multiLangCommenter
-                implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
-
-        <lang.commenter language="Mojolicious Perl"
-                        implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
-        <highlightErrorFilter
-                implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
-        <annotator language="Perl5"
-                   implementationClass="com.perl5.lang.mojolicious.idea.annotator.MojoliciousAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <psi.referenceContributor language="Perl5"
-                                  implementation="com.perl5.lang.mojolicious.psi.references.MojoliciousReferencesContributor"/>
-        <liveTemplateOptionalProcessor
-                implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
-        <!-- End of Mojolicious -->
-
-
-        <!-- HTML::Mason settings -->
-        <lang.namesValidator language="HTML::Mason Templating Language"
-                             implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
-        <lang.findUsagesProvider language="HTML::Mason Templating Language"
-                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-        <quoteHandler fileType="HTML::Mason component"
-                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <lang.refactoringSupport language="HTML::Mason Templating Language"
-                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-        <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
-                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-        <!--<filePropertyPusher implementation="com.perl5.lang.htmlmason.idea.lang.HTMLMasonFilePropertyPusher"/>-->
-
-        <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
-        <projectConfigurable
-                provider="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableProvider"
-                parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
-
-        <lang.parserDefinition language="HTML::Mason Templating Language"
-                               implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
-        <fileTypeFactory implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeFactory"/>
-        <lang.fileViewProviderFactory language="HTML::Mason Templating Language"
-                                      implementationClass="com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory"/>
-        <editorNotificationProvider
-                implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
-        <lang.braceMatcher language="HTML::Mason Templating Language"
-                           implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
-        <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language" key="HTML::Mason Templating Language"
-                                       implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
-        <lang.foldingBuilder language="HTML::Mason Templating Language"
-                             implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
-        <lang.formatter language="HTML::Mason Templating Language"
-                        implementationClass="com.perl5.lang.htmlmason.idea.formatter.HTMLMasonFormattingModelBuilder"/>
-        <lang.indentStrategy language="HTML::Mason Templating Language"
-                             implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
-        <lang.findUsagesProvider language="HTML::Mason Templating Language"
-                                 implementationClass="com.perl5.lang.htmlmason.idea.findusages.HTMLMasonFindUsagesProvider"/>
-
-        <liveTemplateContext implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateContextType"/>
-        <liveTemplatePreprocessor
-                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplatePreprocessor"/>
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
-        <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
-
-        <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
-        <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
-        <codeInsight.lineMarkerProvider language="HTML::Mason Templating Language"
-                                        implementationClass="com.perl5.lang.htmlmason.idea.navigation.HTMLMasonLineMarkerProvider"/>
-        <typeHierarchyProvider language="HTML::Mason Templating Language"
-                               implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonHierarchyProvider"/>
-        <highlightErrorFilter
-                implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
-        <annotator language="HTML::Mason Templating Language"
-                   implementationClass="com.perl5.lang.htmlmason.idea.annotator.HTMLMasonAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <psi.referenceContributor language="Perl5"
-                                  implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesContributor"/>
-        <referencesSearch
-                implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesSearcher"/>
-        <completion.contributor language="Perl5"
-                                implementationClass="com.perl5.lang.htmlmason.idea.completion.HTMLMasonCompletionContributor" order="first"/>
-        <elementDescriptionProvider
-                implementation="com.perl5.lang.htmlmason.parser.psi.HTMLMasonElementDescriptionProvider" order="first"/>
-        <documentationProvider implementation="com.perl5.lang.htmlmason.documentation.HTMLMasonDocumentationProvider"/>
-        <liveTemplateOptionalProcessor
-                implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplateProcessor"/>
-        <!-- HTML::Mason settings end -->
-
-        <!--Mason2 settings -->
-        <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
-
-        <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
-        <lang.fileViewProviderFactory language="Mason2"
-                                      implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
-
-        <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
-        <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
-
-        <completion.contributor language="Perl5"
-                                implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
-
-        <liveTemplateContext implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
-        <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreprocessor"/>
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLivetemplatesProvider"/>
-
-        <projectConfigurable
-                provider="com.perl5.lang.mason2.idea.configuration.MasonSettingsConfigurableProvider"
-                parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
-        <editorNotificationProvider
-                implementation="com.perl5.lang.mason2.idea.editor.notification.MasonPathsNotification"/>
-
-
-        <lang.parserDefinition language="Mason2"
-                               implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
-        <typeHierarchyProvider language="Mason2 Templating Language"
-                               implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingPackageHierarchyProvider"/>
-        <typeHierarchyProvider language="Mason2"
-                               implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonPackageHierarchyProvider"/>
-        <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.MasonFileTypeFactory"/>
-        <lang.syntaxHighlighterFactory language="Mason2" key="Mason2"
-                                       implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
-        <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
-        <lang.findUsagesProvider language="Mason2"
-                                 implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-        <lang.foldingBuilder language="Mason2"
-                             implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
-        <lang.formatter language="Mason2"
-                        implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
-        <lang.indentStrategy language="Mason2"
-                             implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
-
-        <lang.namesValidator language="Mason2"
-                             implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-        <quoteHandler fileType="Mason2 top-level component"
-                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <editorHighlighterProvider filetype="Mason2 top-level component" implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-
-        <quoteHandler fileType="Mason2 internal component"
-                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <quoteHandler fileType="Mason2 pure Perl component"
-                      className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-        <lang.refactoringSupport language="Mason2"
-                                 implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-        <lang.psiStructureViewFactory language="Mason2"
-                                      implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
-        <lang.braceMatcher language="Mason2"
-                           implementationClass="com.perl5.lang.mason2.idea.editor.MasonBraceMatcher"/>
-        <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
-
-        <lang.findUsagesProvider language="Mason2 Templating Language"
-                                 implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
-        <lang.parserDefinition language="Mason2 Templating Language"
-                               implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
-        <lang.fileViewProviderFactory language="Mason2 Templating Language"
-                                      implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
-        <lang.findUsagesProvider language="Mason2 Templating Language"
-                                 implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
-        <highlightErrorFilter
-                implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
-        <liveTemplateOptionalProcessor
-                implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
-        <!--Mason2 settings end -->
-
-
-        <!--POD settings -->
-        <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
-        <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
-        <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-        <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
-                                       implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
-
-        <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
-        <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
-        <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
-        <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
-
-        <lang.foldingBuilder language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
-        <lang.psiStructureViewFactory language="Perl5 POD"
-                                      implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
-        <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
-
-        <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
-                               order="first"/>
-
-        <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
-
-        <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
-                                 implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
-
-        <localInspection language="Perl5 POD"
-                         shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
-        <localInspection language="Perl5 POD"
-                         shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
-                         enabledByDefault="true" level="ERROR"
-                         implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
-        <localInspection language="Perl5 POD"
-                         shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
-
-        <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
-        <lang.refactoringSupport language="Perl5 POD"
-                                 implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
-        <lang.namesValidator language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
-
-        <lang.findUsagesProvider language="Perl5 POD"
-                                 implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
-        <referencesSearch
-                implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
-        <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
-        <completion.contributor language="Perl5 POD"
-                                implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
-        <!--POD settings end -->
-
-        <!--TryCatch settings -->
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchLiveTemplatesProvider"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType$Catch"/>
-
-        <completion.contributor language="Perl5"
-                                implementationClass="com.perl5.lang.perl.parser.trycatch.idea.completion.TryCatchCompletionContributor"/>
-        <!--TryCatch settings end -->
-
-        <!-- Switch settings -->
-        <defaultLiveTemplatesProvider
-                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplateContextType"/>
-        <liveTemplateContext
-                implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlInSwitchAfterCaseTemplateContextType"/>
-
-        <annotator language="Perl5"
-                   implementationClass="com.perl5.lang.perl.parser.perlswitch.idea.annotator.PerlSwitchAnnotator"
-                   order="after PERL_SUBS_ANNOTATOR"/>
-        <!-- Switch settings end -->
-
-
-        <fileTypeFactory implementation="com.perl5.lang.xs.filetypes.XSFileTypeFactory"/>
-
-        <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
-        <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
-
-        <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-
-        <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
-        <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
-
-        <localInspection language="Perl5"
-                         shortName="PackageFileMissing" displayName="Missing package file" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileMissingInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="RedundantNamespace" displayName="Redundant namespace" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlRedundantNamespaceInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="FileLevelVariable" displayName="File level variables" groupName="Perl5"
-                         enabledByDefault="false" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableFileLevelInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="NamespaceUndefined" displayName="Unresovable namespace" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceUndefinedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="NamespaceClashes" displayName="Clashed namespace definition" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceClashesInspection"/>
-        <localInspection language="Perl5"
-                         shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions"
-                         groupName="Perl5" enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection"/>
-        <!--<localInspection language="Perl5"-->
-        <!--shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"-->
-        <!--enabledByDefault="true" level="ERROR"-->
-        <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>-->
-
-        <localInspection language="Perl5"
-                         shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="Deprecations" displayName="Deprecations" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubUnresolvable" displayName="Unresolved sub" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDeclarationsInspection"/>
-        <localInspection language="Perl5"
-                         shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
-                         enabledByDefault="false" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>
-
-
-        <localInspection language="Perl5"
-                         shortName="VariableUnresolvable" displayName="Unresolved variable" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableUnresolvableInspection"/>
-        <localInspection language="Perl5"
-                         shortName="VariableShadows" displayName="Variables shadowing" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableShadowingInspection"/>
-        <localInspection language="Perl5"
-                         shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations"
-                         groupName="Perl5" enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableGlobalUnusedInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnusedTypeGlob" displayName="Unused typeglob alias" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedTypeGlobInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="UseStrict" displayName="Pragma usage: strict" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UseWarnings" displayName="Pragma usage: warnings" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection"/>
-
-        <localInspection language="Perl5"
-                         shortName="UnusedLabels" displayName="Unused labels" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLabelInspection"/>
-        <localInspection language="Perl5"
-                         shortName="UnresolvedLabels" displayName="Unresolved labels" groupName="Perl5"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlLabelUndeclaredInspection"/>
-        <localInspection language="Perl5"
-                         shortName="IdentifierInspection" displayName="Correct identifiers" groupName="Perl5"
-                         enabledByDefault="true" level="ERROR"
-                         implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
-
-        <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
-            <category>String converter</category>
-            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
-        </intentionAction>
-
-        <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
-            <category>String converter</category>
-            <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
-        </intentionAction>
-
-        <intentionAction>
-            <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverter</className>
-            <category>Perl</category>
-        </intentionAction>
-    </extensions>
-
-    <application-components>
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.configuration.settings.PerlUpdateComponent
-            </implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.application.PerlParserExtensions</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
-        </component>
-
-    </application-components>
-
-    <project-components>
-        <!-- Add your project components here -->
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.mason2.idea.components.MasonProjectComponent</implementation-class>
-        </component>
-        <component>
-            <implementation-class>com.perl5.lang.htmlmason.idea.project.HTMLMasonProjectComponent</implementation-class>
-        </component>
-    </project-components>
-
-    <actions>
-        <group>
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
-            <add-to-group group-id="CodeMenu" anchor="first"/>
-            <add-to-group group-id="NavbarPopupMenu" anchor="first"/>
-            <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-
-            <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy"
-                    text="Re-format with Perl::Tidy"/>
-            <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
-                    text="Deparse file..."/>
-            <separator/>
-        </group>
-
-
-        <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
-            <add-to-group group-id="NewGroup" anchor="first"/>
-        </action>
-
-        <group>
-            <add-to-group group-id="GenerateGroup" anchor="first"/>
-
-            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
-                    text="Generate Constructor" description="Generate class constructor"/>
-            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
-                    text="Generate Getters" description="Generate class getters"/>
-            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
-                    text="Generate Setters" description="Generate class setters"/>
-            <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
-                    text="Generate Getters and Setters" description="Generate class getters and setters"/>
-        </group>
-
-    </actions>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PsiPerlLabelExpr"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLeafOrLeafOwnerManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocElementManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlNamespaceElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlVariableNameElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlVariableNameManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
+
+
+    <renameHandler
+        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
+        order="first"/>
+    <renameHandler implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler"
+                   order="first"/>
+
+    <renamePsiElementProcessor
+        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlDefaultRenameProcessor"/>
+    <renamePsiElementProcessor
+        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameNamespaceDefinitionProcessor"/>
+    <renamePsiElementProcessor
+        implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlRenameFileProcessor"/>
+    <!-- following processors are alternative to VirtualFileWatcher -->
+    <!--<renamePsiElementProcessor-->
+    <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameDirectoryProcessor"/>-->
+    <!--<renamePsiElementProcessor-->
+    <!--implementation="com.perl5.lang.perl.idea.refactoring.move.PerlRenameIDEAPackageProcessor"/>-->
+
+    <moveFileHandler implementation="com.perl5.lang.perl.idea.refactoring.move.PerlMoveFileHandler"/>
+
+    <nameSuggestionProvider implementation="com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider"
+                            order="first"/>
+
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.perl.idea.livetemplates.PerlDefaultTemplatesProvider"/>
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.perl.parser.method.signatures.simple.idea.liveTemplates.MethodSignaturesSimpleTemplatesProvider"/>
+
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.perl.parser.moose.idea.liveTemplates.MooseTemplatesProvider"/>
+    <stubElementTypeHolder class="com.perl5.lang.perl.parser.moose.MooseElementTypes"/>
+    <annotator language="Perl5" implementationClass="com.perl5.lang.perl.parser.moose.idea.annotator.MooseAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <referencesSearch
+        implementation="com.perl5.lang.perl.parser.moose.psi.references.PerlMooseReferencesSearcher"/>
+
+    <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Generic"/>
+    <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Postfix"/>
+    <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
+
+
+    <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>
+    <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
+
+    <stubElementTypeHolder class="com.perl5.lang.perl.idea.stubs.PerlStubElementTypes"/>
+
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlScalarsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlArraysStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.variables.PerlHashesStubIndex"/>
+
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.globs.PerlGlobsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
+
+    <lang.findUsagesProvider language="Perl5"
+                             implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
+
+    <lang.parserDefinition language="Perl5Regexp"
+                           implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
+    <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
+                        implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
+    <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
+
+    <!-- Template Toolkit -->
+    <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
+    <lang.fileViewProviderFactory language="Template Toolkit 2"
+                                  implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
+    <lang.parserDefinition language="Template Toolkit 2"
+                           implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
+    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <projectConfigurable
+        instance="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurable"
+        parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
+    <lang.syntaxHighlighterFactory language="Template Toolkit 2" key="Template Toolkit 2"
+                                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitTemplateLanguageErrorFilter"/>
+    <lang.braceMatcher language="Template Toolkit 2"
+                       implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
+    <annotator language="Template Toolkit 2"
+               implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
+    <quoteHandler fileType="Template Toolkit"
+                  className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
+    <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
+                  order="first"/>
+
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionElsif"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCase"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCatch"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Postfix"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitFilterNameMacro"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
+
+    <lang.indentStrategy language="Template Toolkit 2"
+                         implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
+
+    <completion.contributor language="Template Toolkit 2"
+                            implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
+    <editorNotificationProvider
+        implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
+                             implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
+
+    <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
+    <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
+
+    <localInspection language="Template Toolkit 2"
+                     shortName="TT2OrphanReply" displayName="Orphan nested directives"
+                     groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
+
+    <lang.refactoringSupport language="Template Toolkit 2"
+                             implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
+    <lang.formatter language="Template Toolkit 2"
+                    implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
+
+    <!-- End of template toolkit -->
+
+    <!--Embedded Perl-->
+    <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
+    <lang.parserDefinition language="Embedded Perl"
+                           implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+    <lang.fileViewProviderFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
+    <lang.syntaxHighlighterFactory language="Embedded Perl" key="Embedded Perl"
+                                   implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
+    <lang.findUsagesProvider language="Embedded Perl"
+                             implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
+    <lang.braceMatcher language="Embedded Perl"
+                       implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
+
+    <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
+                  order="first"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
+                          id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
+    <lang.formatter language="Embedded Perl"
+                    implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
+
+
+    <lang.namesValidator language="Embedded Perl"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+    <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
+
+    <lang.foldingBuilder language="Embedded Perl"
+                         implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
+
+    <!--<lang.formatter language="Embedded Perl"-->
+    <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
+
+    <lang.psiStructureViewFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+    <lang.refactoringSupport language="Embedded Perl"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+
+    <!--Temporary solution, better than nothing-->
+    <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
+
+    <!-- Here should be an EmbeddedPerlCommenter -->
+    <lang.commenter language="Embedded Perl"
+                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
+    <!--End of Embedded Perl-->
+
+
+    <!-- Mojolicious -->
+    <stubIndex implementation="com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex"/>
+    <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
+
+    <fileTypeFactory implementation="com.perl5.lang.mojolicious.filetypes.MojoliciousFileTypeFactory"/>
+    <lang.parserDefinition language="Mojolicious Perl"
+                           implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
+    <lang.fileViewProviderFactory language="Mojolicious Perl"
+                                  implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
+    <lang.syntaxHighlighterFactory language="Mojolicious Perl" key="Mojolicious Perl"
+                                   implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
+    <lang.findUsagesProvider language="Mojolicious Perl"
+                             implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
+    <lang.formatter language="Mojolicious Perl"
+                    implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.mojolicious.idea.completion.MojoliciousCompletionContributor"/>
+
+    <lang.namesValidator language="Mojolicious Perl"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+
+    <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
+                  order="first"/>
+    <enterHandlerDelegate
+        implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
+        id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
+
+    <quoteHandler fileType="Mojolicious Perl5 Template"
+                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+
+    <lang.refactoringSupport language="Mojolicious Perl"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+
+    <lang.psiStructureViewFactory language="Mojolicious Perl"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+    <lang.braceMatcher language="Mojolicious Perl"
+                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
+    <lang.foldingBuilder language="Mojolicious Perl"
+                         implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
+    <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
+    <multiLangCommenter
+        implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
+
+    <lang.commenter language="Mojolicious Perl"
+                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
+    <annotator language="Perl5"
+               implementationClass="com.perl5.lang.mojolicious.idea.annotator.MojoliciousAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <psi.referenceContributor language="Perl5"
+                              implementation="com.perl5.lang.mojolicious.psi.references.MojoliciousReferencesContributor"/>
+    <liveTemplateOptionalProcessor
+        implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
+    <!-- End of Mojolicious -->
+
+
+    <!-- HTML::Mason settings -->
+    <lang.namesValidator language="HTML::Mason Templating Language"
+                         implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
+    <lang.findUsagesProvider language="HTML::Mason Templating Language"
+                             implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
+    <quoteHandler fileType="HTML::Mason component"
+                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <lang.refactoringSupport language="HTML::Mason Templating Language"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+    <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+    <!--<filePropertyPusher implementation="com.perl5.lang.htmlmason.idea.lang.HTMLMasonFilePropertyPusher"/>-->
+
+    <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+    <projectConfigurable
+        provider="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableProvider"
+        parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
+
+    <lang.parserDefinition language="HTML::Mason Templating Language"
+                           implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
+    <fileTypeFactory implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeFactory"/>
+    <lang.fileViewProviderFactory language="HTML::Mason Templating Language"
+                                  implementationClass="com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory"/>
+    <editorNotificationProvider
+        implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
+    <lang.braceMatcher language="HTML::Mason Templating Language"
+                       implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
+    <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language" key="HTML::Mason Templating Language"
+                                   implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
+    <lang.foldingBuilder language="HTML::Mason Templating Language"
+                         implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
+    <lang.formatter language="HTML::Mason Templating Language"
+                    implementationClass="com.perl5.lang.htmlmason.idea.formatter.HTMLMasonFormattingModelBuilder"/>
+    <lang.indentStrategy language="HTML::Mason Templating Language"
+                         implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
+    <lang.findUsagesProvider language="HTML::Mason Templating Language"
+                             implementationClass="com.perl5.lang.htmlmason.idea.findusages.HTMLMasonFindUsagesProvider"/>
+
+    <liveTemplateContext implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplateContextType"/>
+    <liveTemplatePreprocessor
+        implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplatePreprocessor"/>
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplatesProvider"/>
+    <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
+
+    <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
+    <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
+    <codeInsight.lineMarkerProvider language="HTML::Mason Templating Language"
+                                    implementationClass="com.perl5.lang.htmlmason.idea.navigation.HTMLMasonLineMarkerProvider"/>
+    <typeHierarchyProvider language="HTML::Mason Templating Language"
+                           implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonHierarchyProvider"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
+    <annotator language="HTML::Mason Templating Language"
+               implementationClass="com.perl5.lang.htmlmason.idea.annotator.HTMLMasonAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <psi.referenceContributor language="Perl5"
+                              implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesContributor"/>
+    <referencesSearch
+        implementation="com.perl5.lang.htmlmason.parser.psi.references.HTMLMasonReferencesSearcher"/>
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.htmlmason.idea.completion.HTMLMasonCompletionContributor" order="first"/>
+    <elementDescriptionProvider
+        implementation="com.perl5.lang.htmlmason.parser.psi.HTMLMasonElementDescriptionProvider" order="first"/>
+    <documentationProvider implementation="com.perl5.lang.htmlmason.documentation.HTMLMasonDocumentationProvider"/>
+    <liveTemplateOptionalProcessor
+        implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonLiveTemplateProcessor"/>
+    <!-- HTML::Mason settings end -->
+
+    <!--Mason2 settings -->
+    <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
+
+    <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
+    <lang.fileViewProviderFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
+
+    <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
+
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
+
+    <liveTemplateContext implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
+    <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreprocessor"/>
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLivetemplatesProvider"/>
+
+    <projectConfigurable
+        provider="com.perl5.lang.mason2.idea.configuration.MasonSettingsConfigurableProvider"
+        parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
+    <editorNotificationProvider
+        implementation="com.perl5.lang.mason2.idea.editor.notification.MasonPathsNotification"/>
+
+
+    <lang.parserDefinition language="Mason2"
+                           implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
+    <typeHierarchyProvider language="Mason2 Templating Language"
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingPackageHierarchyProvider"/>
+    <typeHierarchyProvider language="Mason2"
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonPackageHierarchyProvider"/>
+    <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.MasonFileTypeFactory"/>
+    <lang.syntaxHighlighterFactory language="Mason2" key="Mason2"
+                                   implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
+    <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
+    <lang.findUsagesProvider language="Mason2"
+                             implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
+    <lang.foldingBuilder language="Mason2"
+                         implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
+    <lang.formatter language="Mason2"
+                    implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
+    <lang.indentStrategy language="Mason2"
+                         implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
+
+    <lang.namesValidator language="Mason2"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+    <quoteHandler fileType="Mason2 top-level component"
+                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <editorHighlighterProvider filetype="Mason2 top-level component"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+
+    <quoteHandler fileType="Mason2 internal component"
+                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <quoteHandler fileType="Mason2 pure Perl component"
+                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
+    <lang.refactoringSupport language="Mason2"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+    <lang.psiStructureViewFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+    <lang.braceMatcher language="Mason2"
+                       implementationClass="com.perl5.lang.mason2.idea.editor.MasonBraceMatcher"/>
+    <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
+
+    <lang.findUsagesProvider language="Mason2 Templating Language"
+                             implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+    <lang.parserDefinition language="Mason2 Templating Language"
+                           implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+    <lang.fileViewProviderFactory language="Mason2 Templating Language"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
+    <lang.findUsagesProvider language="Mason2 Templating Language"
+                             implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
+    <liveTemplateOptionalProcessor
+        implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
+    <!--Mason2 settings end -->
+
+
+    <!--POD settings -->
+    <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
+    <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
+    <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+    <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
+                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
+
+    <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
+    <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
+    <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
+    <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
+
+    <lang.foldingBuilder language="Perl5 POD"
+                         implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
+    <lang.psiStructureViewFactory language="Perl5 POD"
+                                  implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
+    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
+
+    <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
+                           order="first"/>
+
+    <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
+                             implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
+
+    <localInspection language="Perl5 POD"
+                     shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
+    <localInspection language="Perl5 POD"
+                     shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
+    <localInspection language="Perl5 POD"
+                     shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
+
+    <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
+    <lang.refactoringSupport language="Perl5 POD"
+                             implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
+    <lang.namesValidator language="Perl5 POD"
+                         implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
+
+    <lang.findUsagesProvider language="Perl5 POD"
+                             implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
+    <referencesSearch
+        implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
+    <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
+    <completion.contributor language="Perl5 POD"
+                            implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
+    <!--POD settings end -->
+
+    <!--TryCatch settings -->
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchLiveTemplatesProvider"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType$Catch"/>
+
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.perl.parser.trycatch.idea.completion.TryCatchCompletionContributor"/>
+    <!--TryCatch settings end -->
+
+    <!-- Switch settings -->
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplatesProvider"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlSwitchTemplateContextType"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates.PerlInSwitchAfterCaseTemplateContextType"/>
+
+    <annotator language="Perl5"
+               implementationClass="com.perl5.lang.perl.parser.perlswitch.idea.annotator.PerlSwitchAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <!-- Switch settings end -->
+
+
+    <fileTypeFactory implementation="com.perl5.lang.xs.filetypes.XSFileTypeFactory"/>
+
+    <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
+    <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
+
+    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
+
+    <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
+    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
+
+    <localInspection language="Perl5"
+                     shortName="PackageFileMissing" displayName="Missing package file" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileMissingInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="RedundantNamespace" displayName="Redundant namespace" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlRedundantNamespaceInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="FileLevelVariable" displayName="File level variables" groupName="Perl5"
+                     enabledByDefault="false" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableFileLevelInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="NamespaceUndefined" displayName="Unresovable namespace" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceUndefinedInspection"/>
+    <localInspection language="Perl5"
+                     shortName="NamespaceClashes" displayName="Clashed namespace definition" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceClashesInspection"/>
+    <localInspection language="Perl5"
+                     shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions"
+                     groupName="Perl5" enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection"/>
+    <!--<localInspection language="Perl5"-->
+    <!--shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"-->
+    <!--enabledByDefault="true" level="ERROR"-->
+    <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>-->
+
+    <localInspection language="Perl5"
+                     shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="Deprecations" displayName="Deprecations" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection"/>
+    <localInspection language="Perl5"
+                     shortName="SubUnresolvable" displayName="Unresolved sub" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection"/>
+    <localInspection language="Perl5"
+                     shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDeclarationsInspection"/>
+    <localInspection language="Perl5"
+                     shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
+                     enabledByDefault="false" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>
+
+
+    <localInspection language="Perl5"
+                     shortName="VariableUnresolvable" displayName="Unresolved variable" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableUnresolvableInspection"/>
+    <localInspection language="Perl5"
+                     shortName="VariableShadows" displayName="Variables shadowing" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableShadowingInspection"/>
+    <localInspection language="Perl5"
+                     shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations"
+                     groupName="Perl5" enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection"/>
+    <localInspection language="Perl5"
+                     shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>
+    <localInspection language="Perl5"
+                     shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableGlobalUnusedInspection"/>
+    <localInspection language="Perl5"
+                     shortName="UnusedTypeGlob" displayName="Unused typeglob alias" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedTypeGlobInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="UseStrict" displayName="Pragma usage: strict" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection"/>
+    <localInspection language="Perl5"
+                     shortName="UseWarnings" displayName="Pragma usage: warnings" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection"/>
+
+    <localInspection language="Perl5"
+                     shortName="UnusedLabels" displayName="Unused labels" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLabelInspection"/>
+    <localInspection language="Perl5"
+                     shortName="UnresolvedLabels" displayName="Unresolved labels" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlLabelUndeclaredInspection"/>
+    <localInspection language="Perl5"
+                     shortName="IdentifierInspection" displayName="Correct identifiers" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
+
+    <intentionAction>
+      <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
+      <category>String converter</category>
+      <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+    </intentionAction>
+
+    <intentionAction>
+      <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
+      <category>String converter</category>
+      <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
+    </intentionAction>
+
+    <intentionAction>
+      <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverter</className>
+      <category>Perl</category>
+    </intentionAction>
+  </extensions>
+
+  <application-components>
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.configuration.settings.PerlUpdateComponent
+      </implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.application.PerlParserExtensions</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
+    </component>
+
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.mason2.idea.components.MasonProjectComponent</implementation-class>
+    </component>
+    <component>
+      <implementation-class>com.perl5.lang.htmlmason.idea.project.HTMLMasonProjectComponent</implementation-class>
+    </component>
+  </project-components>
+
+  <actions>
+    <group>
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+      <add-to-group group-id="CodeMenu" anchor="first"/>
+      <add-to-group group-id="NavbarPopupMenu" anchor="first"/>
+      <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+
+      <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy"
+              text="Re-format with Perl::Tidy"/>
+      <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
+              text="Deparse file..."/>
+      <separator/>
+    </group>
+
+
+    <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
+      <add-to-group group-id="NewGroup" anchor="first"/>
+    </action>
+
+    <group>
+      <add-to-group group-id="GenerateGroup" anchor="first"/>
+
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
+              text="Generate Constructor" description="Generate class constructor"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
+              text="Generate Getters" description="Generate class getters"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
+              text="Generate Setters" description="Generate class setters"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
+              text="Generate Getters and Setters" description="Generate class getters and setters"/>
+    </group>
+
+  </actions>
 
 </idea-plugin>
