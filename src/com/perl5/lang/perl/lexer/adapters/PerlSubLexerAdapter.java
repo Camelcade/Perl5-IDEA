@@ -43,7 +43,7 @@ public class PerlSubLexerAdapter extends FlexAdapter {
   }
 
   public static PerlSubLexerAdapter forExtendedMatchRegex(@Nullable Project project) {
-    return new PerlSubLexerAdapter(project, PerlLexer.EXTENDED_MATCH_REGEX);
+    return new PerlSubLexerAdapter(project, PerlLexer.MATCH_REGEX_X);
   }
 
   public static PerlSubLexerAdapter forReplacementRegex(@Nullable Project project) {
