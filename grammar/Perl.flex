@@ -122,7 +122,10 @@ REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
 REGEX_HASH_NEGATING = [\^\:\\\[\{]
 //REGEX_CHAR_CLASS = "\\" [dswDSW]
-//REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
+REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
+POSIX_CHARGROUP = "[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]"
+POSIX_CHARGROUP_DOUBLE = "[[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]]"
+POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 //REGEX_POSIX_OPEN = "[:"
 //REGEX_POSIX_CLOSE = ":]"
 //REGEX_POSIX_END = "^"? {REGEX_POSIX_CHARGROUPS}? {REGEX_POSIX_CLOSE}
@@ -402,8 +405,9 @@ REGEX_HASH_NEGATING = [\^\:\\\[\{]
 */
 
 <REGEX_CHARGROUP_START_X>{
-  "]"       {popState();return REGEX_TOKEN;}
-  [^\\\]]+  {return REGEX_TOKEN;}
+  "]"                   {popState();return REGEX_TOKEN;}
+  {POSIX_CHARGROUP_ANY} {return REGEX_TOKEN;}
+  [^\\\]\[]+            {return REGEX_TOKEN;}
 }
 
 <REGEX_QUOTE_START_X>{
