@@ -19,77 +19,61 @@ package resolve.perl;
 /**
  * Created by hurricup on 09.11.2016.
  */
-public class PerlResolveTest extends PerlResolveTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/perl";
-	}
+public class PerlResolveTest extends PerlResolveTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/resolve/perl";
+  }
 
-	public void testExportedSubs()
-	{
-		doTestWithFileCheck();
-	}
+  public void testExportedSubs() {
+    doTestWithFileCheck();
+  }
 
-	public void testDerefWithComments()
-	{
-		doTestWithFileCheck();
-	}
+  public void testDerefWithComments() {
+    doTestWithFileCheck();
+  }
 
-	public void testStringToPackage()
-	{
-		doTestWithFileCheck();
-	}
+  public void testStringToPackage() {
+    doTestWithFileCheck();
+  }
 
-	public void testConstant()
-	{
-		doTestWithFileCheck();
-	}
+  public void testConstant() {
+    doTestWithFileCheck();
+  }
 
-	public void testMojoliciousHelper()
-	{
-		doTestWithFileCheck();
-	}
+  public void testMojoliciousHelper() {
+    doTestWithFileCheck();
+  }
 
-	public void testMojoHelperNamespace()
-	{
-		doTestWithFileCheck();
-	}
+  public void testMojoHelperNamespace() {
+    doTestWithFileCheck();
+  }
 
-	public void testVariableIsa()
-	{
-		doTestWithFileCheck();
-	}
+  public void testVariableIsa() {
+    doTestWithFileCheck();
+  }
 
-	public void testSequentionalHereDocs()
-	{
-		doTestWithFileCheck();
-	}
+  public void testSequentionalHereDocs() {
+    doTestWithFileCheck();
+  }
 
-	public void testVariablesAndElements()
-	{
-		doTestWithFileCheck();
-	}
+  public void testVariablesAndElements() {
+    doTestWithFileCheck();
+  }
 
-	public void testMainSubs()
-	{
-		doTestWithFileCheck();
-	}
+  public void testMainSubs() {
+    doTestWithFileCheck();
+  }
 
-	public void testInterpolatedElements()
-	{
-		doTestWithFileCheck();
-	}
+  public void testInterpolatedElements() {
+    doTestWithFileCheck();
+  }
 
-	public void testSingleWordPackages()
-	{
-		doTestWithFileCheck();
-	}
+  public void testSingleWordPackages() {
+    doTestWithFileCheck();
+  }
 
-	public void testPackageRanges()
-	{
-		doTestWithFileCheck();
-	}
-
+  public void testPackageRanges() {
+    doTestWithFileCheck();
+  }
 }

@@ -23,14 +23,12 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public abstract class PerlVariableResolveTestCase extends PerlResolveTestCase
-{
-	@Override
-	public void validateTarget(PsiElement sourceElement, PsiElement targetElement)
-	{
-		assertTrue(targetElement instanceof PerlVariableDeclarationWrapper);
-		PerlVariable targetVariable = ((PerlVariableDeclarationWrapper) targetElement).getVariable();
-		assertEquals(targetVariable.getName(), sourceElement.getText());
-		assertEquals(targetVariable.getActualType(), ((PerlVariable) sourceElement.getParent()).getActualType());
-	}
+public abstract class PerlVariableResolveTestCase extends PerlResolveTestCase {
+  @Override
+  public void validateTarget(PsiElement sourceElement, PsiElement targetElement) {
+    assertTrue(targetElement instanceof PerlVariableDeclarationWrapper);
+    PerlVariable targetVariable = ((PerlVariableDeclarationWrapper)targetElement).getVariable();
+    assertEquals(targetVariable.getName(), sourceElement.getText());
+    assertEquals(targetVariable.getActualType(), ((PerlVariable)sourceElement.getParent()).getActualType());
+  }
 }

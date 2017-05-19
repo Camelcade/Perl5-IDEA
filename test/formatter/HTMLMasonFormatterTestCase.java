@@ -21,24 +21,18 @@ import base.PerlLightCodeInsightFixtureTestCase;
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/formatter/htmlmason";
-	}
+public class HTMLMasonFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/formatter/htmlmason";
+  }
 
-	@Override
-	public String getFileExtension()
-	{
-		return "mas";
-	}
+  @Override
+  public String getFileExtension() {
+    return "mas";
+  }
 
-	public void testSpacelessTags() throws Exception
-	{
-		doFormatTest("spaceless", "");
-	}
-
-
+  public void testSpacelessTags() throws Exception {
+    doFormatTest("spaceless", "");
+  }
 }

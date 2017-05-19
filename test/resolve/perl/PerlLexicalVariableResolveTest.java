@@ -19,91 +19,74 @@ package resolve.perl;
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/perl/variables";
-	}
+public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/resolve/perl/variables";
+  }
 
-	public void testSimple()
-	{
-		doTest("variable_simple", true);
-	}
+  public void testSimple() {
+    doTest("variable_simple", true);
+  }
 
-	public void testIfCondition()
-	{
-		doTest("variable_if_condition", true);
-	}
+  public void testIfCondition() {
+    doTest("variable_if_condition", true);
+  }
 
-	public void testForIterator()
-	{
-		doTest("variable_for_iterator", true);
-	}
+  public void testForIterator() {
+    doTest("variable_for_iterator", true);
+  }
 
-	public void testForIteratorIterator()
-	{
-		doTest("for_iterator_iterator", true);
-	}
+  public void testForIteratorIterator() {
+    doTest("for_iterator_iterator", true);
+  }
 
-	public void testUseVars()
-	{
-		doTest("variable_use_vars", true);
-	}
+  public void testUseVars() {
+    doTest("variable_use_vars", true);
+  }
 
-	public void testIfElsifElse()
-	{
-		doTest("variable_if_elsif_else", true);
-	}
+  public void testIfElsifElse() {
+    doTest("variable_if_elsif_else", true);
+  }
 
-	public void testSubSignature()
-	{
-		doTest("variable_sub_signature", true);
-	}
+  public void testSubSignature() {
+    doTest("variable_sub_signature", true);
+  }
 
-	public void testMethodExplicitInvocant()
-	{
-		doTest("variable_method_explicit_invocant", true);
-	}
+  public void testMethodExplicitInvocant() {
+    doTest("variable_method_explicit_invocant", true);
+  }
 
-	public void testVariableInInvocation()
-	{
-		doTest("variable_in_call_expression", true);
-	}
+  public void testVariableInInvocation() {
+    doTest("variable_in_call_expression", true);
+  }
 
-	public void testMethodImplicitInvocant()
-	{
-		doTest("variable_method_implicit_invocant", true);
-	}
+  public void testMethodImplicitInvocant() {
+    doTest("variable_method_implicit_invocant", true);
+  }
 
-	public void testNegativeBlock()
-	{
-		doTest("negative_variable_block", false);
-	}
+  public void testNegativeBlock() {
+    doTest("negative_variable_block", false);
+  }
 
-	public void testNegativeIfElse()
-	{
-		doTest("negative_if_else", false);
-	}
+  public void testNegativeIfElse() {
+    doTest("negative_if_else", false);
+  }
 
-	public void testSameStatementSimple()
-	{
-		doTest("same_statement_simple", false);
-	}
+  public void testSameStatementSimple() {
+    doTest("same_statement_simple", false);
+  }
 
-	public void testSameStatementMap()
-	{
-		doTest("same_statement_map", false);
-	}
+  public void testSameStatementMap() {
+    doTest("same_statement_map", false);
+  }
 
-	public void testPackageLimitations()
-	{
-		doTestWithFileCheck();
-	}
+  public void testPackageLimitations() {
+    doTestWithFileCheck();
+  }
 
 /*
-	public void testPerlTidy()
+        public void testPerlTidy()
 	{
 		initWithPerlTidy();
 		doTestWithFileCheckWithoutInit(); // fails on travis

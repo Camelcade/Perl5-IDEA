@@ -25,27 +25,24 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 /**
  * Created by hurricup on 01.06.2016.
  */
-public class packageProcessorsTest extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/packageProcessors";
-	}
+public class packageProcessorsTest extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/packageProcessors";
+  }
 
-	public void testModernPerl()
-	{
-		initWithFileAsScript("ModernPerl");
-		PerlNamespaceDefinition namespaceDefinition = getElementAtCaret(PerlNamespaceDefinition.class);
-		assertNotNull(namespaceDefinition);
-		assertEquals(PerlMroType.C3, namespaceDefinition.getMroType());
-		PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);
-		assertNotNull(useStatement);
-		PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-		assertNotNull(packageProcessor);
-		assertInstanceOf(packageProcessor, PerlStrictProvider.class);
-		assertInstanceOf(packageProcessor, PerlMroProvider.class);
-		assertInstanceOf(packageProcessor, PerlWarningsProvider.class);
-		assertInstanceOf(packageProcessor, PerlPackageLoader.class);
-	}
+  public void testModernPerl() {
+    initWithFileAsScript("ModernPerl");
+    PerlNamespaceDefinition namespaceDefinition = getElementAtCaret(PerlNamespaceDefinition.class);
+    assertNotNull(namespaceDefinition);
+    assertEquals(PerlMroType.C3, namespaceDefinition.getMroType());
+    PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);
+    assertNotNull(useStatement);
+    PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+    assertNotNull(packageProcessor);
+    assertInstanceOf(packageProcessor, PerlStrictProvider.class);
+    assertInstanceOf(packageProcessor, PerlMroProvider.class);
+    assertInstanceOf(packageProcessor, PerlWarningsProvider.class);
+    assertInstanceOf(packageProcessor, PerlPackageLoader.class);
+  }
 }

@@ -25,74 +25,59 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlParserTestPPILexer extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/ppi/05_lexer";
+public class PerlParserTestPPILexer extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/ppi/05_lexer";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void test01_simpleassign()
-	{
-		doTest("01_simpleassign");
-	}
+  public void test01_simpleassign() {
+    doTest("01_simpleassign");
+  }
 
-	public void test02_END()
-	{
-		doTest("02_END");
-	}
+  public void test02_END() {
+    doTest("02_END");
+  }
 
-	public void test03_subroutine_attributes()
-	{
-		doTest("03_subroutine_attributes");
-	}
+  public void test03_subroutine_attributes() {
+    doTest("03_subroutine_attributes");
+  }
 
-	public void test04_anonymous_subroutines()
-	{
-		doTest("04_anonymous_subroutines");
-	}
+  public void test04_anonymous_subroutines() {
+    doTest("04_anonymous_subroutines");
+  }
 
-	public void test05_compound_loops()
-	{
-		doTest("05_compound_loops");
-	}
+  public void test05_compound_loops() {
+    doTest("05_compound_loops");
+  }
 
-	public void test06_subroutine_prototypes()
-	{
-		doTest("06_subroutine_prototypes");
-	}
+  public void test06_subroutine_prototypes() {
+    doTest("06_subroutine_prototypes");
+  }
 
-	public void test07_unmatched_braces()
-	{
-		doTest("07_unmatched_braces", false);
-	}
+  public void test07_unmatched_braces() {
+    doTest("07_unmatched_braces", false);
+  }
 
-	public void test08_subroutines()
-	{
-		doTest("08_subroutines");
-	}
+  public void test08_subroutines() {
+    doTest("08_subroutines");
+  }
 
-	public void test09_heredoc()
-	{
-		doTest("09_heredoc");
-	}
+  public void test09_heredoc() {
+    doTest("09_heredoc");
+  }
 
-	public void test10_readline()
-	{
-		doTest("10_readline");
-	}
+  public void test10_readline() {
+    doTest("10_readline");
+  }
 
-	public void test11_dor()
-	{
-		doTest("11_dor");
-	}
+  public void test11_dor() {
+    doTest("11_dor");
+  }
 
-	public void test12_switch()
-	{
-		doTest("12_switch");
-	}
-
+  public void test12_switch() {
+    doTest("12_switch");
+  }
 }

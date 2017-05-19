@@ -30,82 +30,74 @@ import java.util.List;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	protected static List<String> LIBRARY_PACKAGES = Arrays.asList(
-			"MyTest::Some::Package",
-			"MyTest::Something"
-	);
+public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase {
+  protected static List<String> LIBRARY_PACKAGES = Arrays.asList(
+    "MyTest::Some::Package",
+    "MyTest::Something"
+  );
 
-	protected static List<String> LIBRARY_GLOBAL_ARRAYS = Arrays.asList(
-			"MyTest::Some::Package::EXPORT",
-			"MyTest::Some::Package::EXPORT_OK"
-	);
+  protected static List<String> LIBRARY_GLOBAL_ARRAYS = Arrays.asList(
+    "MyTest::Some::Package::EXPORT",
+    "MyTest::Some::Package::EXPORT_OK"
+  );
 
-	protected static List<String> BUILT_IN_VERSIONS = Arrays.asList(
-			"v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
-			"v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
-	);
+  protected static List<String> BUILT_IN_VERSIONS = Arrays.asList(
+    "v5.10", "v5.12", "v5.14", "v5.16", "v5.18", "v5.20", "v5.22",
+    "v5.11", "v5.13", "v5.15", "v5.17", "v5.19", "v5.9.5"
+  );
 
-	protected static List<String> REF_TYPES = Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING");
+  protected static List<String> REF_TYPES =
+    Arrays.asList("ARRAY", "CODE", "FORMAT", "GLOB", "HASH", "IO", "LVALUE", "REF", "Regexp", "SCALAR", "VSTRING");
 
-	protected static List<String> BUILT_IN_SCALARS = new ArrayList<>(PerlScalarUtil.BUILT_IN);
-	protected static List<String> BUILT_IN_ARRAYS = new ArrayList<>(PerlArrayUtil.BUILT_IN);
-	protected static List<String> BUILT_IN_HASHES = new ArrayList<>(PerlHashUtil.BUILT_IN);
-	protected static List<String> BUILT_IN_GLOBS = new ArrayList<>(PerlGlobUtil.BUILT_IN);
+  protected static List<String> BUILT_IN_SCALARS = new ArrayList<>(PerlScalarUtil.BUILT_IN);
+  protected static List<String> BUILT_IN_ARRAYS = new ArrayList<>(PerlArrayUtil.BUILT_IN);
+  protected static List<String> BUILT_IN_HASHES = new ArrayList<>(PerlHashUtil.BUILT_IN);
+  protected static List<String> BUILT_IN_GLOBS = new ArrayList<>(PerlGlobUtil.BUILT_IN);
 
-	protected static List<String> SCALAR_LOOKUPS = mergeLists(BUILT_IN_SCALARS, BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
-	protected static List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
-	protected static List<String> HASH_LOOKUPS = mergeLists(BUILT_IN_HASHES);
+  protected static List<String> SCALAR_LOOKUPS = mergeLists(BUILT_IN_SCALARS, BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
+  protected static List<String> ARRAY_LOOKUPS = mergeLists(BUILT_IN_ARRAYS, BUILT_IN_HASHES, LIBRARY_GLOBAL_ARRAYS);
+  protected static List<String> HASH_LOOKUPS = mergeLists(BUILT_IN_HASHES);
 
-	protected static List<String> BUILT_IN_SUBS = new ArrayList<>(PerlBuiltInSubs.BUILT_IN);
+  protected static List<String> BUILT_IN_SUBS = new ArrayList<>(PerlBuiltInSubs.BUILT_IN);
 
-	protected static List<String> PACKAGES_LOOKUPS = new ArrayList<>();
+  protected static List<String> PACKAGES_LOOKUPS = new ArrayList<>();
 
-	static
-	{
-		for (String packageName : LIBRARY_PACKAGES)
-		{
-			PACKAGES_LOOKUPS.add(packageName + "::");
-			PACKAGES_LOOKUPS.add(packageName + "->");
-		}
-	}
+  static {
+    for (String packageName : LIBRARY_PACKAGES) {
+      PACKAGES_LOOKUPS.add(packageName + "::");
+      PACKAGES_LOOKUPS.add(packageName + "->");
+    }
+  }
 
-	@SafeVarargs
-	protected static List<String> mergeLists(List<String>... sources)
-	{
-		List<String> resultList = new ArrayList<>();
-		for (List<String> strings : sources)
-		{
-			resultList.addAll(strings);
-		}
-		return resultList;
-	}
+  protected List<String> getLanguageMarkers() {
+    ArrayList<String> languageMarkers = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+    assert !languageMarkers.isEmpty();
+    return languageMarkers;
+  }
 
-	protected List<String> getLanguageMarkers()
-	{
-		ArrayList<String> languageMarkers = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
-		assert !languageMarkers.isEmpty();
-		return languageMarkers;
-	}
+  @Override
+  public void initWithFileContent(String filename, String extension, String content) throws IOException {
+    super.initWithFileContent(filename, extension, content);
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    myFixture.complete(CompletionType.BASIC, 1);
+  }
 
-	@Override
-	public void initWithFileContent(String filename, String extension, String content) throws IOException
-	{
-		super.initWithFileContent(filename, extension, content);
-		CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-		myFixture.complete(CompletionType.BASIC, 1);
-	}
+  public void assertCompletionIs(String... pattern) {
+    assertCompletionIs(Arrays.asList(pattern));
+  }
 
-	public void assertCompletionIs(String... pattern)
-	{
-		assertCompletionIs(Arrays.asList(pattern));
-	}
+  @SafeVarargs
+  public final void assertCompletionIs(List<String>... expected) {
+    initWithFileSmart();
+    assertLookupIs(mergeLists(expected));
+  }
 
-	@SafeVarargs
-	public final void assertCompletionIs(List<String>... expected)
-	{
-		initWithFileSmart();
-		assertLookupIs(mergeLists(expected));
-	}
+  @SafeVarargs
+  protected static List<String> mergeLists(List<String>... sources) {
+    List<String> resultList = new ArrayList<>();
+    for (List<String> strings : sources) {
+      resultList.addAll(strings);
+    }
+    return resultList;
+  }
 }

@@ -22,40 +22,36 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 /**
  * Created by hurricup on 16.07.2016.
  */
-public class TemplateToolkitTestSettings
-{
-	private final Project myProject;
+public class TemplateToolkitTestSettings {
+  private final Project myProject;
 
-	private String myOpenTagBackup;
-	private String myCloseTagBackup;
-	private String myOutlineTagBackup;
-	private boolean myEnableAnyCase;
+  private String myOpenTagBackup;
+  private String myCloseTagBackup;
+  private String myOutlineTagBackup;
+  private boolean myEnableAnyCase;
 
-	public TemplateToolkitTestSettings(Project project)
-	{
-		myProject = project;
-	}
+  public TemplateToolkitTestSettings(Project project) {
+    myProject = project;
+  }
 
-	public void setUp()
-	{
-		TemplateToolkitSettings templateToolkitSettings = TemplateToolkitSettings.getInstance(myProject);
-		myOpenTagBackup = templateToolkitSettings.START_TAG;
-		myCloseTagBackup = templateToolkitSettings.END_TAG;
-		myOutlineTagBackup = templateToolkitSettings.OUTLINE_TAG;
-		myEnableAnyCase = templateToolkitSettings.ENABLE_ANYCASE;
+  public void setUp() {
+    TemplateToolkitSettings templateToolkitSettings = TemplateToolkitSettings.getInstance(myProject);
+    myOpenTagBackup = templateToolkitSettings.START_TAG;
+    myCloseTagBackup = templateToolkitSettings.END_TAG;
+    myOutlineTagBackup = templateToolkitSettings.OUTLINE_TAG;
+    myEnableAnyCase = templateToolkitSettings.ENABLE_ANYCASE;
 
-		templateToolkitSettings.START_TAG = TemplateToolkitSettings.DEFAULT_START_TAG;
-		templateToolkitSettings.END_TAG = TemplateToolkitSettings.DEFAULT_END_TAG;
-		templateToolkitSettings.OUTLINE_TAG = TemplateToolkitSettings.DEFAULT_OUTLINE_TAG;
-		templateToolkitSettings.ENABLE_ANYCASE = false;
-	}
+    templateToolkitSettings.START_TAG = TemplateToolkitSettings.DEFAULT_START_TAG;
+    templateToolkitSettings.END_TAG = TemplateToolkitSettings.DEFAULT_END_TAG;
+    templateToolkitSettings.OUTLINE_TAG = TemplateToolkitSettings.DEFAULT_OUTLINE_TAG;
+    templateToolkitSettings.ENABLE_ANYCASE = false;
+  }
 
-	public void tearDown()
-	{
-		TemplateToolkitSettings templateToolkitSettings = TemplateToolkitSettings.getInstance(myProject);
-		templateToolkitSettings.START_TAG = myOpenTagBackup;
-		templateToolkitSettings.END_TAG = myCloseTagBackup;
-		templateToolkitSettings.OUTLINE_TAG = myOutlineTagBackup;
-		templateToolkitSettings.ENABLE_ANYCASE = myEnableAnyCase;
-	}
+  public void tearDown() {
+    TemplateToolkitSettings templateToolkitSettings = TemplateToolkitSettings.getInstance(myProject);
+    templateToolkitSettings.START_TAG = myOpenTagBackup;
+    templateToolkitSettings.END_TAG = myCloseTagBackup;
+    templateToolkitSettings.OUTLINE_TAG = myOutlineTagBackup;
+    templateToolkitSettings.ENABLE_ANYCASE = myEnableAnyCase;
+  }
 }

@@ -21,63 +21,51 @@ import base.PerlLightCodeInsightFixtureTestCase;
 /**
  * Created by hurricup on 03.11.2016.
  */
-public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/rename/perl";
-	}
+public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/rename/perl";
+  }
 
-	public void testGlobRename()
-	{
-		doTest();
-	}
+  public void testGlobRename() {
+    doTest();
+  }
 
-	public void testLexicalVariable()
-	{
-		doTest();
-	}
+  public void testLexicalVariable() {
+    doTest();
+  }
 
-	public void testMultiVariable()
-	{
-		doTest();
-	}
+  public void testMultiVariable() {
+    doTest();
+  }
 
-	public void testLabelRename()
-	{
-		doTest();
-	}
+  public void testLabelRename() {
+    doTest();
+  }
 
-	public void testMojoHelper()
-	{
-		doTest("newName");
-	}
+  public void testMojoHelper() {
+    doTest("newName");
+  }
 
-	public void testPackageName()
-	{
-		doTest("Foo::Bar::Moo");
-	}
+  public void testPackageName() {
+    doTest("Foo::Bar::Moo");
+  }
 
-	public void testMultiPackage()
-	{
-		doTest("Foo::Bar::Boo");
-	}
+  public void testMultiPackage() {
+    doTest("Foo::Bar::Boo");
+  }
 
-	public void testPackageRanges()
-	{
-		doTest("Some::Other::Package");
-	}
+  public void testPackageRanges() {
+    doTest("Some::Other::Package");
+  }
 
-	protected void doTest()
-	{
-		doTest("NewName");
-	}
+  protected void doTest() {
+    doTest("NewName");
+  }
 
-	protected void doTest(String newName)
-	{
-		initWithFileSmart();
-		String checkFileName = getTestName(true) + "_after.code";
-		myFixture.testRename(checkFileName, newName);
-	}
+  protected void doTest(String newName) {
+    initWithFileSmart();
+    String checkFileName = getTestName(true) + "_after.code";
+    myFixture.testRename(checkFileName, newName);
+  }
 }

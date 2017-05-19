@@ -26,24 +26,20 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.02.2016.
  */
-public abstract class NamespaceTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	protected PerlNamespaceDefinitionImplMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName)
-	{
-		myFixture.configureByFile(fileName);
-		PsiFile file = myFixture.getFile();
+public abstract class NamespaceTestCase extends PerlLightCodeInsightFixtureTestCase {
+  protected PerlNamespaceDefinitionImplMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName) {
+    myFixture.configureByFile(fileName);
+    PsiFile file = myFixture.getFile();
 
-		PerlNamespaceDefinitionImplMixin namespaceDefinition = null;
-		for (PerlNamespaceDefinitionImplMixin element : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinitionImplMixin.class))
-		{
-			if (StringUtil.equals(element.getName(), namespaceName))
-			{
-				namespaceDefinition = element;
-				break;
-			}
-		}
-		assertNotNull(namespaceDefinition);
-		namespaceDefinition.subtreeChanged();
-		return namespaceDefinition;
-	}
+    PerlNamespaceDefinitionImplMixin namespaceDefinition = null;
+    for (PerlNamespaceDefinitionImplMixin element : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinitionImplMixin.class)) {
+      if (StringUtil.equals(element.getName(), namespaceName)) {
+        namespaceDefinition = element;
+        break;
+      }
+    }
+    assertNotNull(namespaceDefinition);
+    namespaceDefinition.subtreeChanged();
+    return namespaceDefinition;
+  }
 }

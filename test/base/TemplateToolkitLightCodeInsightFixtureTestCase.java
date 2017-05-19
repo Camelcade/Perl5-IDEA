@@ -21,30 +21,25 @@ import formatter.TemplateToolkitTestSettings;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public abstract class TemplateToolkitLightCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	private TemplateToolkitTestSettings myTemplateToolkitTestSettings;
+public abstract class TemplateToolkitLightCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase {
+  private TemplateToolkitTestSettings myTemplateToolkitTestSettings;
 
-	@Override
-	protected void setUp() throws Exception
-	{
-		super.setUp();
-		myTemplateToolkitTestSettings = new TemplateToolkitTestSettings(myFixture.getProject());
-	}
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    myTemplateToolkitTestSettings = new TemplateToolkitTestSettings(myFixture.getProject());
+  }
 
-	protected void saveSettings()
-	{
-		myTemplateToolkitTestSettings.setUp();
-	}
+  protected void saveSettings() {
+    myTemplateToolkitTestSettings.setUp();
+  }
 
-	protected void restoreSettings()
-	{
-		myTemplateToolkitTestSettings.tearDown();
-	}
+  protected void restoreSettings() {
+    myTemplateToolkitTestSettings.tearDown();
+  }
 
-	@Override
-	public String getFileExtension()
-	{
-		return "tt";
-	}
+  @Override
+  public String getFileExtension() {
+    return "tt";
+  }
 }

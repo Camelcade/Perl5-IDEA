@@ -21,66 +21,53 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class PerlMethodResolveTest extends PerlResolveTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/perl/methods";
-	}
+public class PerlMethodResolveTest extends PerlResolveTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/resolve/perl/methods";
+  }
 
-	public void testViaSelf()
-	{
-		doTest();
-	}
+  public void testViaSelf() {
+    doTest();
+  }
 
-	public void testViaShift()
-	{
-		doTest();
-	}
+  public void testViaShift() {
+    doTest();
+  }
 
-	public void testViaDefault()
-	{
-		doTest();
-	}
+  public void testViaDefault() {
+    doTest();
+  }
 
-	public void testViaShiftInParens()
-	{
-		doTest();
-	}
+  public void testViaShiftInParens() {
+    doTest();
+  }
 
-	public void testViaDefaultInParens()
-	{
-		doTest();
-	}
+  public void testViaDefaultInParens() {
+    doTest();
+  }
 
-	public void testViaPackageVar()
-	{
-		doTest();
-	}
+  public void testViaPackageVar() {
+    doTest();
+  }
 
-	public void testViaPackageVarInParens()
-	{
-		doTest();
-	}
+  public void testViaPackageVarInParens() {
+    doTest();
+  }
 
-	public void testViaArbitraryVar()
-	{
-		doTest(false);
-	}
+  public void testViaArbitraryVar() {
+    doTest(false);
+  }
 
-	public void testViaReturnResult()
-	{
-		doTest();
-	}
+  public void testViaReturnResult() {
+    doTest();
+  }
 
-	public void doTest()
-	{
-		doTest(true);
-	}
+  public void doTest() {
+    doTest(true);
+  }
 
-	public void doTest(boolean success)
-	{
-		super.doTest(getTestName(true), success, PerlSubNameElement.class);
-	}
+  public void doTest(boolean success) {
+    super.doTest(getTestName(true), success, PerlSubNameElement.class);
+  }
 }

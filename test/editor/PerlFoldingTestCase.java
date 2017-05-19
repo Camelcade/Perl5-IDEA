@@ -25,31 +25,25 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 /**
  * Created by hurricup on 23.02.2016.
  */
-public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/folding";
-	}
+public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/folding";
+  }
 
-	public void testPerlFolding()
-	{
-		testFoldingRegions("perl_folding_test", PerlFileTypeScript.INSTANCE);
-	}
+  public void testPerlFolding() {
+    testFoldingRegions("perl_folding_test", PerlFileTypeScript.INSTANCE);
+  }
 
-	public void testMason2Folding()
-	{
-		testFoldingRegions("mason2_folding_test", MasonTopLevelComponentFileType.INSTANCE);
-	}
+  public void testMason2Folding() {
+    testFoldingRegions("mason2_folding_test", MasonTopLevelComponentFileType.INSTANCE);
+  }
 
-	public void testHtmlMasonFolding()
-	{
-		testFoldingRegions("html_mason_folding_test", HTMLMasonFileType.INSTANCE);
-	}
+  public void testHtmlMasonFolding() {
+    testFoldingRegions("html_mason_folding_test", HTMLMasonFileType.INSTANCE);
+  }
 
-	public void testMojoliciousFolding()
-	{
-		testFoldingRegions("mojolicious_folding_test", MojoliciousFileType.INSTANCE);
-	}
+  public void testMojoliciousFolding() {
+    testFoldingRegions("mojolicious_folding_test", MojoliciousFileType.INSTANCE);
+  }
 }

@@ -24,35 +24,29 @@ import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class Mason2TemplatingParserTest extends PerlParserTestBase
-{
-	public Mason2TemplatingParserTest()
-	{
-		super("", "mc", new Mason2TemplatingParserDefinition());
-	}
+public class Mason2TemplatingParserTest extends PerlParserTestBase {
+  public Mason2TemplatingParserTest() {
+    super("", "mc", new Mason2TemplatingParserDefinition());
+  }
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/mason2/template";
-	}
+  @Override
+  protected String getTestDataPath() {
+    return "testData/parser/mason2/template";
+  }
 
 
-	public void testTestComponent()
-	{
-		doTest(true);
-	}
+  public void testTestComponent() {
+    doTest(true);
+  }
 
-	public void testIssue1077()
-	{
-		doTest(true);
-	}
+  public void testIssue1077() {
+    doTest(true);
+  }
 
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		LanguageFileViewProviders.INSTANCE.addExplicitExtension(Mason2TemplatingLanguage.INSTANCE, new Mason2TemplatingFileViewProviderFactory());
-	}
-
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    LanguageFileViewProviders.INSTANCE
+      .addExplicitExtension(Mason2TemplatingLanguage.INSTANCE, new Mason2TemplatingFileViewProviderFactory());
+  }
 }

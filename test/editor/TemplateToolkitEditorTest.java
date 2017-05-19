@@ -22,53 +22,43 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitEditorTest extends TemplateToolkitLightCodeInsightFixtureTestCase
-{
+public class TemplateToolkitEditorTest extends TemplateToolkitLightCodeInsightFixtureTestCase {
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/editor/tt2";
-	}
+  @Override
+  protected String getTestDataPath() {
+    return "testData/editor/tt2";
+  }
 
-	public void testAutocloseTag()
-	{
-		testSmartKey("[<caret>", '%', "[%  %]");
-	}
+  public void testAutocloseTag() {
+    testSmartKey("[<caret>", '%', "[%  %]");
+  }
 
-	public void testAutocloseTagCustom()
-	{
-		saveSettings();
-		TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(getProject());
-		settings.START_TAG = "%SOME%=";
-		settings.END_TAG = "/ENDTAG$";
-		testSmartKey("%SOME%<caret>", '=', "%SOME%=  /ENDTAG$");
-		restoreSettings();
-	}
+  public void testAutocloseTagCustom() {
+    saveSettings();
+    TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(getProject());
+    settings.START_TAG = "%SOME%=";
+    settings.END_TAG = "/ENDTAG$";
+    testSmartKey("%SOME%<caret>", '=', "%SOME%=  /ENDTAG$");
+    restoreSettings();
+  }
 
-	public void testBraces()
-	{
-		testSmartKey("[% <caret> %]", '{', "[% {} %]");
-	}
+  public void testBraces() {
+    testSmartKey("[% <caret> %]", '{', "[% {} %]");
+  }
 
-	public void testBrakets()
-	{
-		testSmartKey("[% <caret> %]", '[', "[% [] %]");
-	}
+  public void testBrakets() {
+    testSmartKey("[% <caret> %]", '[', "[% [] %]");
+  }
 
-	public void testParens()
-	{
-		testSmartKey("[% <caret> %]", '(', "[% () %]");
-	}
+  public void testParens() {
+    testSmartKey("[% <caret> %]", '(', "[% () %]");
+  }
 
-	public void testDQ()
-	{
-		testSmartKey("[% <caret> %]", '"', "[% \"\" %]");
-	}
+  public void testDQ() {
+    testSmartKey("[% <caret> %]", '"', "[% \"\" %]");
+  }
 
-	public void testSQ()
-	{
-		testSmartKey("[% <caret> %]", '\'', "[% '' %]");
-	}
-
+  public void testSQ() {
+    testSmartKey("[% <caret> %]", '\'', "[% '' %]");
+  }
 }

@@ -19,6 +19,5 @@ package categories;
 /**
  * Created by hurricup on 08.10.2016.
  */
-public interface Heavy
-{
+public interface Heavy {
 }

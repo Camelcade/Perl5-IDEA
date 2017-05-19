@@ -22,29 +22,24 @@ import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
 /**
  * Created by hurricup on 09.11.2016.
  */
-public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/annotator/perl";
-	}
+public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/annotator/perl";
+  }
 
-	public void testConstants()
-	{
-		doTest();
-	}
+  public void testConstants() {
+    doTest();
+  }
 
-	public void testDeprecations()
-	{
-		initWithFileSmart();
-		myFixture.enableInspections(PerlDeprecatedInspection.class);
-		myFixture.checkHighlighting(true, false, false);
-	}
+  public void testDeprecations() {
+    initWithFileSmart();
+    myFixture.enableInspections(PerlDeprecatedInspection.class);
+    myFixture.checkHighlighting(true, false, false);
+  }
 
-	private void doTest()
-	{
-		initWithFileSmart();
-		myFixture.checkHighlighting(true, true, true);
-	}
+  private void doTest() {
+    initWithFileSmart();
+    myFixture.checkHighlighting(true, true, true);
+  }
 }

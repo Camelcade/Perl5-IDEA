@@ -25,51 +25,43 @@ import org.junit.experimental.categories.Category;
  * Created by hurricup on 12.10.2016.
  */
 @Category(Performance.class)
-public class PerlLexerPerformanceTest extends PerlParserTestBase
-{
-	public void testPerlTidyLexing()
-	{
+public class PerlLexerPerformanceTest extends PerlParserTestBase {
+  public void testPerlTidyLexing() {
 
-		String testData = getPerlTidy();
+    String testData = getPerlTidy();
 
-		final int iterations = 100;
+    final int iterations = 100;
 
-		System.err.println("Warming up...");
-		for (int i = 0; i < iterations; i++)
-		{
-			testLexing(testData);
-		}
+    System.err.println("Warming up...");
+    for (int i = 0; i < iterations; i++) {
+      testLexing(testData);
+    }
 
-		final int time = 70;
+    final int time = 70;
 
-		PlatformTestUtil.startPerformanceTest("PerlTidy lexing", iterations * time, () ->
-		{
-			long length = 0;
-			for (int i = 0; i < iterations; i++)
-			{
-				length += testLexing(testData);
-			}
-			System.err.println("Lexing done in " + length / iterations + " ms per iteration of " + time);
-		}).cpuBound().useLegacyScaling().attempts(1).assertTiming();
+    PlatformTestUtil.startPerformanceTest("PerlTidy lexing", iterations * time, () ->
+    {
+      long length = 0;
+      for (int i = 0; i < iterations; i++) {
+        length += testLexing(testData);
+      }
+      System.err.println("Lexing done in " + length / iterations + " ms per iteration of " + time);
+    }).cpuBound().useLegacyScaling().attempts(1).assertTiming();
+  }
 
-	}
+  private long testLexing(String testData) {
+    PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(getProject(), false, true);
+    perlLexer.start(testData, 0, testData.length(), 0);
 
-	private long testLexing(String testData)
-	{
-		PerlMergingLexerAdapter perlLexer = new PerlMergingLexerAdapter(getProject(), false, true);
-		perlLexer.start(testData, 0, testData.length(), 0);
+    long start = System.currentTimeMillis();
 
-		long start = System.currentTimeMillis();
+    int tokens = 0;
+    while (perlLexer.getTokenType() != null) {
+      perlLexer.advance();
+      tokens++;
+    }
+    //			System.err.println("Total tokens: " + tokens);
 
-		int tokens = 0;
-		while (perlLexer.getTokenType() != null)
-		{
-			perlLexer.advance();
-			tokens++;
-		}
-//			System.err.println("Total tokens: " + tokens);
-
-		return System.currentTimeMillis() - start;
-	}
-
+    return System.currentTimeMillis() - start;
+  }
 }

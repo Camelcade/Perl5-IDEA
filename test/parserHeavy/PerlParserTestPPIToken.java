@@ -25,29 +25,23 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlParserTestPPIToken extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/ppi/07_token";
+public class PerlParserTestPPIToken extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/ppi/07_token";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testExp()
-	{
-		doTest("exp");
-	}
+  public void testExp() {
+    doTest("exp");
+  }
 
-	public void testrange_operator()
-	{
-		doTest("range_operator");
-	}
+  public void testrange_operator() {
+    doTest("range_operator");
+  }
 
-	public void testsmart_match()
-	{
-		doTest("smart_match");
-	}
-
+  public void testsmart_match() {
+    doTest("smart_match");
+  }
 }

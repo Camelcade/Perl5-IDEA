@@ -25,18 +25,15 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlSourcesParserTestBenchmark extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/perl5/benchmark";
+public class PerlSourcesParserTestBenchmark extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/perl5/benchmark";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testrt26188_speed_up_keys_on_empty_hash()
-	{
-		doTest("rt26188-speed-up-keys-on-empty-hash");
-	}
+  public void testrt26188_speed_up_keys_on_empty_hash() {
+    doTest("rt26188-speed-up-keys-on-empty-hash");
+  }
 }

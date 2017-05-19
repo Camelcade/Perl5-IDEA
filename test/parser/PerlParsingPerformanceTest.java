@@ -35,144 +35,132 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
  * Created by hurricup on 02.10.2016.
  */
 @Category(Performance.class)
-public class PerlParsingPerformanceTest extends PerlParserTestBase
-{
-	private static final TokenSet TERMINAL_TOKENS = TokenSet.create(
-			// variable
-			SCALAR_VARIABLE,
-			SCALAR_CAST_EXPR,
-			UNDEF_EXPR,
-			SCALAR_INDEX_CAST_EXPR,
-			ARRAY_INDEX_VARIABLE,
+public class PerlParsingPerformanceTest extends PerlParserTestBase {
+  private static final TokenSet TERMINAL_TOKENS = TokenSet.create(
+    // variable
+    SCALAR_VARIABLE,
+    SCALAR_CAST_EXPR,
+    UNDEF_EXPR,
+    SCALAR_INDEX_CAST_EXPR,
+    ARRAY_INDEX_VARIABLE,
 
-			ARRAY_VARIABLE,
-			ARRAY_CAST_EXPR,
-			STRING_LIST,
-			ARRAY_SLICE,
-			HASH_SLICE,
+    ARRAY_VARIABLE,
+    ARRAY_CAST_EXPR,
+    STRING_LIST,
+    ARRAY_SLICE,
+    HASH_SLICE,
 
-			HASH_VARIABLE,
-			HASH_CAST_EXPR,
+    HASH_VARIABLE,
+    HASH_CAST_EXPR,
 
-			GLOB_VARIABLE,
+    GLOB_VARIABLE,
 
-			// declarations
-			VARIABLE_DECLARATION_GLOBAL,
-			VARIABLE_DECLARATION_LEXICAL,
-			VARIABLE_DECLARATION_LOCAL,
+    // declarations
+    VARIABLE_DECLARATION_GLOBAL,
+    VARIABLE_DECLARATION_LEXICAL,
+    VARIABLE_DECLARATION_LOCAL,
 
-			// constants
-			NUMBER_CONSTANT,
-			TAG_SCALAR,
-			STRING_BARE,
-			STRING_SQ,
-			STRING_DQ,
-			STRING_XQ,
-			HEREDOC_OPENER,
+    // constants
+    NUMBER_CONSTANT,
+    TAG_SCALAR,
+    STRING_BARE,
+    STRING_SQ,
+    STRING_DQ,
+    STRING_XQ,
+    HEREDOC_OPENER,
 
-			// list or element
-			PARENTHESISED_EXPR,
+    // list or element
+    PARENTHESISED_EXPR,
 
-			//regexps
-			COMPILE_REGEX,
-			REPLACEMENT_REGEX,
-			TR_REGEX,
-			MATCH_REGEX,
+    //regexps
+    COMPILE_REGEX,
+    REPLACEMENT_REGEX,
+    TR_REGEX,
+    MATCH_REGEX,
 
-			// exprs
-			DO_EXPR,
-			EVAL_EXPR,
-			GREP_EXPR,
-			RETURN_EXPR,
-			MAP_EXPR,
-			SORT_EXPR,
+    // exprs
+    DO_EXPR,
+    EVAL_EXPR,
+    GREP_EXPR,
+    RETURN_EXPR,
+    MAP_EXPR,
+    SORT_EXPR,
 
-			FILE_READ_EXPR,
-			PRINT_EXPR,
-			UNDEF_EXPR,
-			PERL_HANDLE_EXPR,
-			ANON_ARRAY,
-			ANON_HASH,
-			SUB_EXPR,
+    FILE_READ_EXPR,
+    PRINT_EXPR,
+    UNDEF_EXPR,
+    PERL_HANDLE_EXPR,
+    ANON_ARRAY,
+    ANON_HASH,
+    SUB_EXPR,
 
-			//calls
-			SUB_CALL_EXPR
-	);
+    //calls
+    SUB_CALL_EXPR
+  );
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/performance";
-	}
+  @Override
+  protected String getTestDataPath() {
+    return "testData/parser/performance";
+  }
 
-	public void testPerlTidyParsing()
-	{
+  public void testPerlTidyParsing() {
 
-		final String testData = getPerlTidy();
+    final String testData = getPerlTidy();
 
-		final int iterations = 30;
+    final int iterations = 30;
 
-		PsiFile psiFile = null;
-		for (int i = 0; i < iterations; i++)
-		{
-			psiFile = createPsiFile("test", testData);
-			psiFile.getFirstChild();
-		}
+    PsiFile psiFile = null;
+    for (int i = 0; i < iterations; i++) {
+      psiFile = createPsiFile("test", testData);
+      psiFile.getFirstChild();
+    }
 
-		final int time = 400;
+    final int time = 400;
 
-		PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
-		{
-			long start = System.currentTimeMillis();
-			for (int i = 0; i < iterations; i++)
-			{
-				PsiFile psiFile1 = createPsiFile("mytest", testData);
-				psiFile1.getFirstChild();
-			}
-			long length = System.currentTimeMillis() - start;
-			System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
-		}).cpuBound().useLegacyScaling().assertTiming();
+    PlatformTestUtil.startPerformanceTest("PerlTidy parsing", iterations * time, () ->
+    {
+      long start = System.currentTimeMillis();
+      for (int i = 0; i < iterations; i++) {
+        PsiFile psiFile1 = createPsiFile("mytest", testData);
+        psiFile1.getFirstChild();
+      }
+      long length = System.currentTimeMillis() - start;
+      System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
+    }).cpuBound().useLegacyScaling().assertTiming();
 
-//		analyzeFile(psiFile);
-	}
+    //		analyzeFile(psiFile);
+  }
 
-	private void analyzeFile(PsiFile psiFile)
-	{
-		final Map<IElementType, Integer> tokensMap = new THashMap<IElementType, Integer>();
-		final int[] totalTokens = new int[]{0};
+  private void analyzeFile(PsiFile psiFile) {
+    final Map<IElementType, Integer> tokensMap = new THashMap<IElementType, Integer>();
+    final int[] totalTokens = new int[]{0};
 
-		psiFile.accept(new PsiElementVisitor()
-		{
-			@Override
-			public void visitElement(PsiElement element)
-			{
-				IElementType elementType = PsiUtilCore.getElementType(element);
-				if (TERMINAL_TOKENS.contains(elementType))
-				{
-					Integer count = tokensMap.get(elementType);
-					tokensMap.put(elementType, count == null ? 1 : count + 1);
-					totalTokens[0]++;
-				}
-				element.acceptChildren(this);
-				super.visitElement(element);
-			}
-		});
+    psiFile.accept(new PsiElementVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        IElementType elementType = PsiUtilCore.getElementType(element);
+        if (TERMINAL_TOKENS.contains(elementType)) {
+          Integer count = tokensMap.get(elementType);
+          tokensMap.put(elementType, count == null ? 1 : count + 1);
+          totalTokens[0]++;
+        }
+        element.acceptChildren(this);
+        super.visitElement(element);
+      }
+    });
 
-		List<Map.Entry<IElementType, Integer>> entries = new ArrayList<Map.Entry<IElementType, Integer>>(tokensMap.entrySet());
-		Collections.sort(entries, new Comparator<Map.Entry<IElementType, Integer>>()
-		{
-			@Override
-			public int compare(Map.Entry<IElementType, Integer> o1, Map.Entry<IElementType, Integer> o2)
-			{
-				return o2.getValue().compareTo(o1.getValue());
-			}
-		});
+    List<Map.Entry<IElementType, Integer>> entries = new ArrayList<Map.Entry<IElementType, Integer>>(tokensMap.entrySet());
+    Collections.sort(entries, new Comparator<Map.Entry<IElementType, Integer>>() {
+      @Override
+      public int compare(Map.Entry<IElementType, Integer> o1, Map.Entry<IElementType, Integer> o2) {
+        return o2.getValue().compareTo(o1.getValue());
+      }
+    });
 
-		for (Map.Entry<IElementType, Integer> entry : entries)
-		{
-			Integer elementCount = entry.getValue();
-			float percent = (float) elementCount / totalTokens[0];
-			System.err.println(entry.getKey() + ": " + elementCount + " " + percent * 100 + "%");
-		}
-	}
+    for (Map.Entry<IElementType, Integer> entry : entries) {
+      Integer elementCount = entry.getValue();
+      float percent = (float)elementCount / totalTokens[0];
+      System.err.println(entry.getKey() + ": " + elementCount + " " + percent * 100 + "%");
+    }
+  }
 }

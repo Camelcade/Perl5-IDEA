@@ -26,58 +26,47 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlSourcesParserTestBase extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/perl5/base";
+public class PerlSourcesParserTestBase extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/perl5/base";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testcond()
-	{
-		doTest("cond");
-	}
+  public void testcond() {
+    doTest("cond");
+  }
 
-	public void testif()
-	{
-		doTest("if");
-	}
+  public void testif() {
+    doTest("if");
+  }
 
-	public void testlex()
-	{
-		doTest("lex");
-	}
+  public void testlex() {
+    doTest("lex");
+  }
 
-	public void testnum()
-	{
-		doTest("num");
-	}
+  public void testnum() {
+    doTest("num");
+  }
 
-	public void testpat()
-	{
-		doTest("pat");
-	}
+  public void testpat() {
+    doTest("pat");
+  }
 
-	public void testrs()
-	{
-		doTest("rs");
-	}
+  public void testrs() {
+    doTest("rs");
+  }
 
-	public void testterm()
-	{
-		doTest("term");
-	}
+  public void testterm() {
+    doTest("term");
+  }
 
-	public void testtranslate()
-	{
-		doTest("translate");
-	}
+  public void testtranslate() {
+    doTest("translate");
+  }
 
-	public void testwhile()
-	{
-		doTest("while");
-	}
+  public void testwhile() {
+    doTest("while");
+  }
 }

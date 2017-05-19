@@ -24,38 +24,31 @@ import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory;
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class EmbeddedPerlParserTest extends PerlParserTestBase
-{
-	public EmbeddedPerlParserTest()
-	{
-		super("", "thtml", new EmbeddedPerlParserDefinition());
-	}
+public class EmbeddedPerlParserTest extends PerlParserTestBase {
+  public EmbeddedPerlParserTest() {
+    super("", "thtml", new EmbeddedPerlParserDefinition());
+  }
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/embedded";
-	}
+  @Override
+  protected String getTestDataPath() {
+    return "testData/parser/embedded";
+  }
 
-	public void testWithPod()
-	{
-		doTest();
-	}
+  public void testWithPod() {
+    doTest();
+  }
 
-	public void testParserTest()
-	{
-		doTest();
-	}
+  public void testParserTest() {
+    doTest();
+  }
 
-	public void testIncompletePerlBlock()
-	{
-		doTest();
-	}
+  public void testIncompletePerlBlock() {
+    doTest();
+  }
 
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		LanguageFileViewProviders.INSTANCE.addExplicitExtension(EmbeddedPerlLanguage.INSTANCE, new EmbeddedPerlFileViewProviderFactory());
-	}
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    LanguageFileViewProviders.INSTANCE.addExplicitExtension(EmbeddedPerlLanguage.INSTANCE, new EmbeddedPerlFileViewProviderFactory());
+  }
 }

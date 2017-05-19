@@ -24,67 +24,55 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
 /**
  * Created by hurricup on 30.04.2016.
  */
-public class PerlArgsExtractionTest extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/perl/sub_arguments";
-	}
+public class PerlArgsExtractionTest extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/resolve/perl/sub_arguments";
+  }
 
-	public void testUnpackFake()
-	{
-		doTest("unpack_fake", "");
-	}
+  public void testUnpackFake() {
+    doTest("unpack_fake", "");
+  }
 
-	public void testUnpackAll()
-	{
-		doTest("unpack_all", "($var, undef, $othervar)");
-	}
+  public void testUnpackAll() {
+    doTest("unpack_all", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackAllShit()
-	{
-		doTest("unpack_all_shift", "($var, undef, $othervar)");
-	}
+  public void testUnpackAllShit() {
+    doTest("unpack_all_shift", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackAtAndShift()
-	{
-		doTest("unpack_at_and_shifts", "($var, undef, $othervar)");
-	}
+  public void testUnpackAtAndShift() {
+    doTest("unpack_at_and_shifts", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackAtElements()
-	{
-		doTest("unpack_at_elements", "($var, undef)");
-	}
+  public void testUnpackAtElements() {
+    doTest("unpack_at_elements", "($var, undef)");
+  }
 
-	public void testUnpackMixed1()
-	{
-		doTest("unpack_mixed1", "($var, undef, $othervar)");
-	}
+  public void testUnpackMixed1() {
+    doTest("unpack_mixed1", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackMixed2()
-	{
-		doTest("unpack_mixed2", "($var, undef, $othervar)");
-	}
+  public void testUnpackMixed2() {
+    doTest("unpack_mixed2", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackMixed3()
-	{
-		doTest("unpack_mixed3", "($var, undef, $othervar)");
-	}
+  public void testUnpackMixed3() {
+    doTest("unpack_mixed3", "($var, undef, $othervar)");
+  }
 
-	public void testUnpackMultiShifts()
-	{
-		doTest("unpack_multi_shifts", "($var, undef, $othervar)");
-	}
+  public void testUnpackMultiShifts() {
+    doTest("unpack_multi_shifts", "($var, undef, $othervar)");
+  }
 
 
-	protected void doTest(String fileName, String argsString)
-	{
-		initWithFileAsScript(fileName);
-		PsiElement elementAtCaret = myFixture.getElementAtCaret();
-		assertNotNull(elementAtCaret);
-		PerlSubDefinitionBase subBase = PsiTreeUtil.getParentOfType(elementAtCaret, PerlSubDefinitionBase.class, false);
-		assertNotNull(subBase);
-		assertEquals(argsString, subBase.getSubArgumentsListAsString());
-	}
+  protected void doTest(String fileName, String argsString) {
+    initWithFileAsScript(fileName);
+    PsiElement elementAtCaret = myFixture.getElementAtCaret();
+    assertNotNull(elementAtCaret);
+    PerlSubDefinitionBase subBase = PsiTreeUtil.getParentOfType(elementAtCaret, PerlSubDefinitionBase.class, false);
+    assertNotNull(subBase);
+    assertEquals(argsString, subBase.getSubArgumentsListAsString());
+  }
 }

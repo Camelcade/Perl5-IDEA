@@ -24,47 +24,37 @@ import resolve.perl.PerlVariableResolveTestCase;
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTestCase
-{
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/htmlmason/concurrent_blocks";
-	}
+public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTestCase {
+  protected String getTestDataPath() {
+    return "testData/resolve/htmlmason/concurrent_blocks";
+  }
 
-	@Override
-	public String getFileExtension()
-	{
-		return "mas";
-	}
+  @Override
+  public String getFileExtension() {
+    return "mas";
+  }
 
-	public void testArgs() throws Exception
-	{
-		doTest("args");
-	}
+  public void testArgs() throws Exception {
+    doTest("args");
+  }
 
-	public void testInit() throws Exception
-	{
-		doTest("init");
-	}
+  public void testInit() throws Exception {
+    doTest("init");
+  }
 
-	public void testFromFilter() throws Exception
-	{
-		doTest("from_filter");
-	}
+  public void testFromFilter() throws Exception {
+    doTest("from_filter");
+  }
 
-	protected void doTest(String fileName)
-	{
-		initWithFileSmart(fileName);
-		PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationWrapper.class);
-		assertNotNull(fileLevelDeclaration);
-		PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationWrapper.class);
-		assertNotNull(defLevelDeclaration);
-		PsiElement defLevelUsage = getElementAtCaret(2, PerlVariableNameElement.class);
-		assertNotNull(defLevelUsage);
-		PsiElement fileLevelUsage = getElementAtCaret(3, PerlVariableNameElement.class);
-		assertNotNull(fileLevelUsage);
-
-	}
-
-
+  protected void doTest(String fileName) {
+    initWithFileSmart(fileName);
+    PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationWrapper.class);
+    assertNotNull(fileLevelDeclaration);
+    PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationWrapper.class);
+    assertNotNull(defLevelDeclaration);
+    PsiElement defLevelUsage = getElementAtCaret(2, PerlVariableNameElement.class);
+    assertNotNull(defLevelUsage);
+    PsiElement fileLevelUsage = getElementAtCaret(3, PerlVariableNameElement.class);
+    assertNotNull(fileLevelUsage);
+  }
 }

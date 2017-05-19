@@ -19,106 +19,88 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonOnceVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase
-{
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/htmlmason/once";
-	}
+public class HTMLMasonOnceVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
+  protected String getTestDataPath() {
+    return "testData/resolve/htmlmason/once";
+  }
 
-	@Override
-	protected boolean resolveFromOnce()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromOnce() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromShared()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromShared() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromFilter()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromFilter() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromInit()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromInit() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromCleanup()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromCleanup() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromLineAhead()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromLineAhead() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromLineBehind()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromLineBehind() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromPerlBehind()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromPerlBehind() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromPerlAhead()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromPerlAhead() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromFilteredBlockAhead()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromFilteredBlockAhead() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromFilteredBlockBehind()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromFilteredBlockBehind() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromDef()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromDef() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromMethod()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromMethod() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveSecondEntry()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveSecondEntry() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromFileArgs()
-	{
-		return true;
-	}
+  @Override
+  protected boolean resolveFromFileArgs() {
+    return true;
+  }
 
-	@Override
-	protected boolean resolveFromSecondEntryBackwards()
-	{
-		return false;
-	}
+  @Override
+  protected boolean resolveFromSecondEntryBackwards() {
+    return false;
+  }
 }

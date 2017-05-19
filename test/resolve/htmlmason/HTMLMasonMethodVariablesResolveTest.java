@@ -19,11 +19,8 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class HTMLMasonMethodVariablesResolveTest extends HTMLMasonDefVariablesResolveTest
-{
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/htmlmason/method";
-	}
-
+public class HTMLMasonMethodVariablesResolveTest extends HTMLMasonDefVariablesResolveTest {
+  protected String getTestDataPath() {
+    return "testData/resolve/htmlmason/method";
+  }
 }

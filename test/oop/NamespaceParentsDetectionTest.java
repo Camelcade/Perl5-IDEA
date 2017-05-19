@@ -26,126 +26,102 @@ import java.util.List;
 /**
  * Created by hurricup on 22.02.2016.
  */
-public class NamespaceParentsDetectionTest extends NamespaceTestCase
-{
-	public static final String DATA_PATH = "testData/oop/parents";
+public class NamespaceParentsDetectionTest extends NamespaceTestCase {
+  public static final String DATA_PATH = "testData/oop/parents";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testIsaAssign()
-	{
-		doTest("isa_assign.pl", "Foo", new String[]{"superfoo1", "superbar1"});
-	}
+  public void testIsaAssign() {
+    doTest("isa_assign.pl", "Foo", new String[]{"superfoo1", "superbar1"});
+  }
 
-	public void testIsaAssignFullQualified()
-	{
-		doTest("isa_assign_fullqualified.pl", "Foo", new String[]{"superfoo1", "superbar1"});
-	}
+  public void testIsaAssignFullQualified() {
+    doTest("isa_assign_fullqualified.pl", "Foo", new String[]{"superfoo1", "superbar1"});
+  }
 
-	public void testIsaAssignFullQualifiedOtherPackage()
-	{
-		doTest("isa_assing_fullqualified_other_package.pl", "Foo", new String[]{});
-	}
+  public void testIsaAssignFullQualifiedOtherPackage() {
+    doTest("isa_assing_fullqualified_other_package.pl", "Foo", new String[]{});
+  }
 
-	public void testIsaDeclare()
-	{
-		doTest("isa_declare.pl", "Foo", new String[]{"superfoo2", "superbar2"});
-	}
+  public void testIsaDeclare() {
+    doTest("isa_declare.pl", "Foo", new String[]{"superfoo2", "superbar2"});
+  }
 
-	public void testIsaDeclareParens()
-	{
-		doTest("isa_declare_parens.pl", "Foo", new String[]{"superfoo3", "superbar3"});
-	}
+  public void testIsaDeclareParens() {
+    doTest("isa_declare_parens.pl", "Foo", new String[]{"superfoo3", "superbar3"});
+  }
 
-	public void testBase()
-	{
-		doTest("base.pl", "Foo", new String[]{"superbase", "superbase2"});
-	}
+  public void testBase() {
+    doTest("base.pl", "Foo", new String[]{"superbase", "superbase2"});
+  }
 
-	public void testParent()
-	{
-		doTest("parent.pl", "Foo", new String[]{"superparent", "superparent2"});
-	}
+  public void testParent() {
+    doTest("parent.pl", "Foo", new String[]{"superparent", "superparent2"});
+  }
 
-	public void testParentQQ()
-	{
-		doTest("parent_qq.pl", "Foo", new String[]{"superparent::duperparent"});
-	}
+  public void testParentQQ() {
+    doTest("parent_qq.pl", "Foo", new String[]{"superparent::duperparent"});
+  }
 
-	public void testMojoBase()
-	{
-		doTest("mojo_base.pl", "Foo", new String[]{"Mojo::Base"});
-	}
+  public void testMojoBase() {
+    doTest("mojo_base.pl", "Foo", new String[]{"Mojo::Base"});
+  }
 
-	public void testMojoBaseNoBase()
-	{
-		doTest("mojo_base_no_base.pl", "Foo", new String[]{});
-	}
+  public void testMojoBaseNoBase() {
+    doTest("mojo_base_no_base.pl", "Foo", new String[]{});
+  }
 
-	public void testMojoBaseSpecific()
-	{
-		doTest("mojo_base_specific.pl", "Foo", new String[]{"somebase1"});
-	}
+  public void testMojoBaseSpecific() {
+    doTest("mojo_base_specific.pl", "Foo", new String[]{"somebase1"});
+  }
 
-	public void testMoo()
-	{
-		doTest("moo.pl", "Foo", new String[]{"Moo::Object"});
-	}
+  public void testMoo() {
+    doTest("moo.pl", "Foo", new String[]{"Moo::Object"});
+  }
 
-	public void testMoose()
-	{
-		doTest("moose.pl", "Foo", new String[]{"Moose::Object"});
-	}
+  public void testMoose() {
+    doTest("moose.pl", "Foo", new String[]{"Moose::Object"});
+  }
 
-	public void testRuntimeExtends()
-	{
-		doTest("runtime_extends.pl", "Foo", new String[]{"someparent"});
-	}
+  public void testRuntimeExtends() {
+    doTest("runtime_extends.pl", "Foo", new String[]{"someparent"});
+  }
 
-	public void testRuntimeWith()
-	{
-		doTest("runtime_with.pl", "Foo", new String[]{"someparent1", "someparent2"});
-	}
+  public void testRuntimeWith() {
+    doTest("runtime_with.pl", "Foo", new String[]{"someparent1", "someparent2"});
+  }
 
-	public void testRuntimeExtendsWith()
-	{
-		doTest("runtime_extends_with.pl", "Foo", new String[]{"someparent", "someotherparent2", "someotherparent3", "someotherparent4", "someotherparent5"});
-	}
+  public void testRuntimeExtendsWith() {
+    doTest("runtime_extends_with.pl", "Foo",
+           new String[]{"someparent", "someotherparent2", "someotherparent3", "someotherparent4", "someotherparent5"});
+  }
 
-	public void testRuntimeExtendsVsAll()
-	{
-		doTest("runtime_extends_vs_all.pl", "Foo", new String[]{"someparent"});
-	}
+  public void testRuntimeExtendsVsAll() {
+    doTest("runtime_extends_vs_all.pl", "Foo", new String[]{"someparent"});
+  }
 
-	public void testRuntimeISAVsAll()
-	{
-		doTest("runtime_isa_vs_all.pl", "Foo", new String[]{"someisa"});
-	}
+  public void testRuntimeISAVsAll() {
+    doTest("runtime_isa_vs_all.pl", "Foo", new String[]{"someisa"});
+  }
 
-	public void testCompileVsRuntime()
-	{
-		doTest("compile_vs_runtime.pl", "Foo", new String[]{"someisa", "someotherparent4", "someotherparent5"});
-	}
+  public void testCompileVsRuntime() {
+    doTest("compile_vs_runtime.pl", "Foo", new String[]{"someisa", "someotherparent4", "someotherparent5"});
+  }
 
-	public void testParentWith()
-	{
-		doTest("parent_with.pl", "Foo", new String[]{"someparents", "someotherparent4", "someotherparent5"});
-	}
+  public void testParentWith() {
+    doTest("parent_with.pl", "Foo", new String[]{"someparents", "someotherparent4", "someotherparent5"});
+  }
 
-	public void testTypingISA()
-	{
-		doTest("typing_isa.pl", "Foo", new String[]{});
-	}
+  public void testTypingISA() {
+    doTest("typing_isa.pl", "Foo", new String[]{});
+  }
 
-	public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList)
-	{
-		PerlNamespaceDefinitionImplMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
-		List<String> parents = namespaceDefinition.getParentNamespacesNamesFromPsi();
-		assertEquals(new ArrayList<String>(Arrays.asList(parentsList)), parents);
-	}
-
+  public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {
+    PerlNamespaceDefinitionImplMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
+    List<String> parents = namespaceDefinition.getParentNamespacesNamesFromPsi();
+    assertEquals(new ArrayList<String>(Arrays.asList(parentsList)), parents);
+  }
 }

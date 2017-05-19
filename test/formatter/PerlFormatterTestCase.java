@@ -23,24 +23,19 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/formatter/perl";
-	}
+public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/formatter/perl";
+  }
 
-	public void testStatementModifiersSpacing() throws Exception
-	{
-		CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = false;
-		doFormatTest("statement_modifier_spacing", "");
-	}
+  public void testStatementModifiersSpacing() throws Exception {
+    CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = false;
+    doFormatTest("statement_modifier_spacing", "");
+  }
 
-	public void testStatementModifiersSpacingWithSpace() throws Exception
-	{
-		CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = true;
-		doFormatTest("statement_modifier_spacing", "_with_space");
-	}
-
+  public void testStatementModifiersSpacingWithSpace() throws Exception {
+    CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = true;
+    doFormatTest("statement_modifier_spacing", "_with_space");
+  }
 }

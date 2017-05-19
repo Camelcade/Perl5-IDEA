@@ -24,29 +24,23 @@ import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class MojoliciousParserTest extends PerlParserTestBase
-{
-	public MojoliciousParserTest()
-	{
-		super("", "ep", new MojoliciousParserDefinition());
-	}
+public class MojoliciousParserTest extends PerlParserTestBase {
+  public MojoliciousParserTest() {
+    super("", "ep", new MojoliciousParserDefinition());
+  }
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/parser/mojolicious";
-	}
+  @Override
+  protected String getTestDataPath() {
+    return "testData/parser/mojolicious";
+  }
 
-	public void testMojoParserTest()
-	{
-		doTest();
-	}
+  public void testMojoParserTest() {
+    doTest();
+  }
 
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		LanguageFileViewProviders.INSTANCE.addExplicitExtension(MojoliciousLanguage.INSTANCE, new MojoliciousFileViewProviderFactory());
-	}
-
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    LanguageFileViewProviders.INSTANCE.addExplicitExtension(MojoliciousLanguage.INSTANCE, new MojoliciousFileViewProviderFactory());
+  }
 }

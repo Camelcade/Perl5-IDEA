@@ -21,176 +21,141 @@ import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelResolveTest extends PerlResolveTestCase
-{
-	@Override
-	protected String getTestDataPath()
-	{
-		return "testData/resolve/perl/labels";
-	}
+public class PerlLabelResolveTest extends PerlResolveTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/resolve/perl/labels";
+  }
 
-	public void testNextOutAnonSub()
-	{
-		doTest("next_label_out_anon_sub", false);
-	}
+  public void testNextOutAnonSub() {
+    doTest("next_label_out_anon_sub", false);
+  }
 
-	public void testNextOutDo()
-	{
-		doTest("next_label_out_do", false);
-	}
+  public void testNextOutDo() {
+    doTest("next_label_out_do", false);
+  }
 
-	public void testNextOutEval()
-	{
-		doTest("next_label_out_eval", false);
-	}
+  public void testNextOutEval() {
+    doTest("next_label_out_eval", false);
+  }
 
-	public void testNextOutGrep()
-	{
-		doTest("next_label_out_grep", false);
-	}
+  public void testNextOutGrep() {
+    doTest("next_label_out_grep", false);
+  }
 
-	public void testNextOutMap()
-	{
-		doTest("next_label_out_map", false);
-	}
+  public void testNextOutMap() {
+    doTest("next_label_out_map", false);
+  }
 
-	public void testNextOutSort()
-	{
-		doTest("next_label_out_sort", false);
-	}
+  public void testNextOutSort() {
+    doTest("next_label_out_sort", false);
+  }
 
-	public void testNextOutSub()
-	{
-		doTest("next_label_out_sub", false);
-	}
+  public void testNextOutSub() {
+    doTest("next_label_out_sub", false);
+  }
 
-	public void testNextInAnonSub()
-	{
-		doTest("next_label_in_anon_sub", true);
-	}
+  public void testNextInAnonSub() {
+    doTest("next_label_in_anon_sub", true);
+  }
 
-	public void testNextInGrep()
-	{
-		doTest("next_label_in_grep", true);
-	}
+  public void testNextInGrep() {
+    doTest("next_label_in_grep", true);
+  }
 
-	public void testNextInMap()
-	{
-		doTest("next_label_in_map", true);
-	}
+  public void testNextInMap() {
+    doTest("next_label_in_map", true);
+  }
 
-	public void testNextInSort()
-	{
-		doTest("next_label_in_sort", true);
-	}
+  public void testNextInSort() {
+    doTest("next_label_in_sort", true);
+  }
 
-	public void testNextInSub()
-	{
-		doTest("next_label_in_sub", true);
-	}
+  public void testNextInSub() {
+    doTest("next_label_in_sub", true);
+  }
 
-	public void testNextLabeledBlock()
-	{
-		doTest("next_labeled_block", true);
-	}
+  public void testNextLabeledBlock() {
+    doTest("next_labeled_block", true);
+  }
 
-	public void testRedoLabeledBlock()
-	{
-		doTest("redo_labeled_block", true);
-	}
+  public void testRedoLabeledBlock() {
+    doTest("redo_labeled_block", true);
+  }
 
-	public void testLastLabeledBlock()
-	{
-		doTest("last_labeled_block", true);
-	}
+  public void testLastLabeledBlock() {
+    doTest("last_labeled_block", true);
+  }
 
-	public void testNextLabelBeforePod()
-	{
-		doTest("next_label_before_pod", true);
-	}
+  public void testNextLabelBeforePod() {
+    doTest("next_label_before_pod", true);
+  }
 
-	public void testNextLabelBeforeComment()
-	{
-		doTest("next_label_before_comment", true);
-	}
+  public void testNextLabelBeforeComment() {
+    doTest("next_label_before_comment", true);
+  }
 
-	public void testNextLabelOtherStatement()
-	{
-		doTest("next_label_other_statement", false);
-	}
+  public void testNextLabelOtherStatement() {
+    doTest("next_label_other_statement", false);
+  }
 
-	public void testNextToFor()
-	{
-		doTest("next_labeled_for", true);
-	}
+  public void testNextToFor() {
+    doTest("next_labeled_for", true);
+  }
 
-	public void testNextToForeach()
-	{
-		doTest("next_labeled_foreach", true);
-	}
+  public void testNextToForeach() {
+    doTest("next_labeled_foreach", true);
+  }
 
-	public void testNextToWhile()
-	{
-		doTest("next_labeled_while", true);
-	}
+  public void testNextToWhile() {
+    doTest("next_labeled_while", true);
+  }
 
-	public void testNextToUntil()
-	{
-		doTest("next_labeled_until", true);
-	}
+  public void testNextToUntil() {
+    doTest("next_labeled_until", true);
+  }
 
-	public void testNextToGiven()
-	{
-		doTest("next_labeled_given", false);
-	}
+  public void testNextToGiven() {
+    doTest("next_labeled_given", false);
+  }
 
-	public void testNextToIf()
-	{
-		doTest("next_labeled_if", false);
-	}
+  public void testNextToIf() {
+    doTest("next_labeled_if", false);
+  }
 
-	public void testNextToUnless()
-	{
-		doTest("next_labeled_unless", false);
-	}
+  public void testNextToUnless() {
+    doTest("next_labeled_unless", false);
+  }
 
-	public void testGotoAfter()
-	{
-		doTest("goto_after", true);
-	}
+  public void testGotoAfter() {
+    doTest("goto_after", true);
+  }
 
-	public void testGotoBefore()
-	{
-		doTest("goto_before", true);
-	}
+  public void testGotoBefore() {
+    doTest("goto_before", true);
+  }
 
-	public void testGotoFromDeclaration()
-	{
-		doTest("goto_from_declaration", false);
-	}
+  public void testGotoFromDeclaration() {
+    doTest("goto_from_declaration", false);
+  }
 
-	public void testGotoInAfter()
-	{
-		doTest("goto_in_after", false);
-	}
+  public void testGotoInAfter() {
+    doTest("goto_in_after", false);
+  }
 
-	public void testGotoInBefore()
-	{
-		doTest("goto_in_before", false);
-	}
+  public void testGotoInBefore() {
+    doTest("goto_in_before", false);
+  }
 
-	public void testGotoOutAfter()
-	{
-		doTest("goto_out_after", true);
-	}
+  public void testGotoOutAfter() {
+    doTest("goto_out_after", true);
+  }
 
-	public void testGotoOutBefore()
-	{
-		doTest("goto_out_before", true);
-	}
+  public void testGotoOutBefore() {
+    doTest("goto_out_before", true);
+  }
 
-	public void doTest(String filename, boolean success)
-	{
-		doTest(filename, success, PsiPerlLabelExpr.class);
-	}
+  public void doTest(String filename, boolean success) {
+    doTest(filename, success, PsiPerlLabelExpr.class);
+  }
 }

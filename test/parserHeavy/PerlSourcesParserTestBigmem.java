@@ -25,43 +25,35 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlSourcesParserTestBigmem extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/perl5/bigmem";
+public class PerlSourcesParserTestBigmem extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/perl5/bigmem";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testindex()
-	{
-		doTest("index");
-	}
+  public void testindex() {
+    doTest("index");
+  }
 
-	public void testpos()
-	{
-		doTest("pos");
-	}
+  public void testpos() {
+    doTest("pos");
+  }
 
-	public void testread()
-	{
-		doTest("read");
-	}
+  public void testread() {
+    doTest("read");
+  }
 
-	public void testregexp()
-	{
-		doTest("regexp");
-	}
+  public void testregexp() {
+    doTest("regexp");
+  }
 
-	public void testsubst()
-	{
-		doTest("subst");
-	}
+  public void testsubst() {
+    doTest("subst");
+  }
 
-	public void testvec()
-	{
-		doTest("vec");
-	}
+  public void testvec() {
+    doTest("vec");
+  }
 }

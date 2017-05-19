@@ -43,89 +43,73 @@ import java.io.IOException;
 /**
  * Created by hurricup on 28.02.2016.
  */
-public abstract class PerlParserTestBase extends ParsingTestCase
-{
-	public PerlParserTestBase()
-	{
-		this("", PerlFileTypeScript.EXTENSION_PL, new PerlParserDefinition());
-	}
+public abstract class PerlParserTestBase extends ParsingTestCase {
+  public PerlParserTestBase() {
+    this("", PerlFileTypeScript.EXTENSION_PL, new PerlParserDefinition());
+  }
 
-	public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions)
-	{
-		super(dataPath, fileExt, true, definitions);
-	}
+  public PerlParserTestBase(@NonNls @NotNull String dataPath, @NotNull String fileExt, @NotNull ParserDefinition... definitions) {
+    super(dataPath, fileExt, true, definitions);
+  }
 
-	@Override
-	protected void doTest(boolean checkErrors)
-	{
-		super.doTest(true);
-		if (checkErrors)
-		{
-			assertFalse(
-					"PsiFile contains error elements",
-					toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-			);
-		}
-	}
+  @Override
+  protected void doTest(boolean checkErrors) {
+    super.doTest(true);
+    if (checkErrors) {
+      assertFalse(
+        "PsiFile contains error elements",
+        toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+      );
+    }
+  }
 
-	@Deprecated // this is legacy for heavy tests
-	public void doTest(String name)
-	{
-		doTest(true);
-	}
+  @Deprecated // this is legacy for heavy tests
+  public void doTest(String name) {
+    doTest(true);
+  }
 
-	@Deprecated // this is legacy for heavy tests
-	public void doTest(String name, boolean check)
-	{
-		doTest(check);
-	}
+  @Deprecated // this is legacy for heavy tests
+  public void doTest(String name, boolean check) {
+    doTest(check);
+  }
 
-	public void doTest()
-	{
-		doTest(true);
-	}
+  public void doTest() {
+    doTest(true);
+  }
 
-	@Override
-	protected boolean skipSpaces()
-	{
-		return true;
-	}
+  @Override
+  protected boolean skipSpaces() {
+    return true;
+  }
 
-	protected String getPerlTidy()
-	{
-		try
-		{
-			return FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
-		}
-		catch (IOException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
+  protected String getPerlTidy() {
+    try {
+      return FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
-	@Override
-	public void setUp() throws Exception
-	{
-		super.setUp();
-		CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
-		registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
-		registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
-		registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
-		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlParserDefinition());
-		LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
-		myProject.addComponent(PerlNamesCache.class, new PerlNamesCache(myProject));
-		new PerlParserExtensions().initComponent();
-	}
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
+    registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
+    registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
+    registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
+    LanguageParserDefinitions.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlParserDefinition());
+    LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
+    myProject.addComponent(PerlNamesCache.class, new PerlNamesCache(myProject));
+    new PerlParserExtensions().initComponent();
+  }
 
-	protected String loadFile(@NonNls @TestDataFile String name) throws IOException
-	{
-		return FileUtil.loadFile(new File(myFullDataPath, name.replace("." + myFileExt, ".code")), CharsetToolkit.UTF8, true).trim();
-	}
+  protected String loadFile(@NonNls @TestDataFile String name) throws IOException {
+    return FileUtil.loadFile(new File(myFullDataPath, name.replace("." + myFileExt, ".code")), CharsetToolkit.UTF8, true).trim();
+  }
 
-	@Override
-	protected boolean checkAllPsiRoots()
-	{
-		return false;
-	}
-
+  @Override
+  protected boolean checkAllPsiRoots() {
+    return false;
+  }
 }

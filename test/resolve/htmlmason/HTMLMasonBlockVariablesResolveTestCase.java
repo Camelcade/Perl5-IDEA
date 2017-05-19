@@ -19,21 +19,17 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVariableResolveTestCase
-{
+public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVariableResolveTestCase {
 
-	protected abstract boolean resolveSecondEntry();
+  protected abstract boolean resolveSecondEntry();
 
-	protected abstract boolean resolveFromSecondEntryBackwards();
+  protected abstract boolean resolveFromSecondEntryBackwards();
 
-	public void testSecondEntry() throws Exception
-	{
-		doTest("second_entry", resolveSecondEntry());
-	}
+  public void testSecondEntry() throws Exception {
+    doTest("second_entry", resolveSecondEntry());
+  }
 
-	public void testFromSecondEntryBackwards() throws Exception
-	{
-		doTest("from_second_entry_backwards", resolveFromSecondEntryBackwards());
-	}
-
+  public void testFromSecondEntryBackwards() throws Exception {
+    doTest("from_second_entry_backwards", resolveFromSecondEntryBackwards());
+  }
 }

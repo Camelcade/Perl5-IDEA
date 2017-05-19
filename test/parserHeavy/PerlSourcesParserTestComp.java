@@ -25,138 +25,111 @@ import org.junit.experimental.categories.Category;
 import parser.PerlParserTestBase;
 
 @Category(Heavy.class)
-public class PerlSourcesParserTestComp extends PerlParserTestBase
-{
-	public static final String DATA_PATH = "testDataHeavy/parser/perl5/comp";
+public class PerlSourcesParserTestComp extends PerlParserTestBase {
+  public static final String DATA_PATH = "testDataHeavy/parser/perl5/comp";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testbproto()
-	{
-		doTest("bproto");
-	}
+  public void testbproto() {
+    doTest("bproto");
+  }
 
-	public void testcmdopt()
-	{
-		doTest("cmdopt");
-	}
+  public void testcmdopt() {
+    doTest("cmdopt");
+  }
 
-	public void testcolon()
-	{
-		doTest("colon");
-	}
+  public void testcolon() {
+    doTest("colon");
+  }
 
-	public void testdecl()
-	{
-		doTest("decl");
-	}
+  public void testdecl() {
+    doTest("decl");
+  }
 
-	public void testfinal_line_num()
-	{
-		doTest("final_line_num");
-	}
+  public void testfinal_line_num() {
+    doTest("final_line_num");
+  }
 
-	public void testfold()
-	{
-		doTest("fold");
-	}
+  public void testfold() {
+    doTest("fold");
+  }
 
-	public void testform_scope()
-	{
-		doTest("form_scope");
-	}
+  public void testform_scope() {
+    doTest("form_scope");
+  }
 
-	public void testhints()
-	{
-		doTest("hints");
-	}
+  public void testhints() {
+    doTest("hints");
+  }
 
-	public void testhints_aux()
-	{
-		doTest("hints_aux");
-	}
+  public void testhints_aux() {
+    doTest("hints_aux");
+  }
 
-	public void testline_aux()
-	{
-		doTest("line_aux");
-	}
+  public void testline_aux() {
+    doTest("line_aux");
+  }
 
-	public void testline_debug()
-	{
-		doTest("line_debug");
-	}
+  public void testline_debug() {
+    doTest("line_debug");
+  }
 
-	public void testmultiline()
-	{
-		doTest("multiline");
-	}
+  public void testmultiline() {
+    doTest("multiline");
+  }
 
-	public void testopsubs()
-	{
-		doTest("opsubs");
-	}
+  public void testopsubs() {
+    doTest("opsubs");
+  }
 
-	public void testour()
-	{
-		doTest("our");
-	}
+  public void testour() {
+    doTest("our");
+  }
 
-	public void testpackage()
-	{
-		doTest("package");
-	}
+  public void testpackage() {
+    doTest("package");
+  }
 
-	public void testpackage_block()
-	{
-		doTest("package_block");
-	}
+  public void testpackage_block() {
+    doTest("package_block");
+  }
 
-	public void testparser()
-	{
-		doTest("parser");
-	}
+  public void testparser() {
+    doTest("parser");
+  }
 
-	public void testproto()
-	{
-		doTest("proto");
-	}
+  public void testproto() {
+    doTest("proto");
+  }
 
-	public void testredef()
-	{
-		doTest("redef");
-	}
+  public void testredef() {
+    doTest("redef");
+  }
 
-	public void testrequire()
-	{
-		doTest("require");
-	}
+  public void testrequire() {
+    doTest("require");
+  }
 
-	public void testretainedlines()
-	{
-		doTest("retainedlines");
-	}
+  public void testretainedlines() {
+    doTest("retainedlines");
+  }
 
-	public void testterm()
-	{
-		doTest("term");
-	}
+  public void testterm() {
+    doTest("term");
+  }
 
-	public void testuproto()
-	{
-		doTest("uproto");
-	}
+  public void testuproto() {
+    doTest("uproto");
+  }
 
-	public void testuse()
-	{
-		doTest("use");
-	}
+  public void testuse() {
+    doTest("use");
+  }
 
-	public void testutf()
-	{
-		doTest("utf");
-	}
+  public void testutf() {
+    doTest("utf");
+  }
 }

@@ -35,151 +35,128 @@ import java.util.List;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTestCase
-{
-	@Override
-	public String getFileExtension()
-	{
-		return PerlFileTypeScript.EXTENSION_PL;
-	}
+public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTestCase {
+  @Override
+  public String getFileExtension() {
+    return PerlFileTypeScript.EXTENSION_PL;
+  }
 
-	public void doTest(boolean success)
-	{
-		doTest(getTestName(true) + getFileExtension(), success);
-	}
+  public void doTest(boolean success) {
+    doTest(getTestName(true) + getFileExtension(), success);
+  }
 
-	public void doTest(String filename, boolean success)
-	{
-		doTest(filename, success, PerlVariableNameElement.class);
-	}
+  public void doTest(String filename, boolean success) {
+    doTest(filename, success, PerlVariableNameElement.class);
+  }
 
-	public void doTest(String filename, boolean success, Class clazz)
-	{
-		initWithFileSmart(filename);
-		PsiReference reference = getFile().findReferenceAt(myFixture.getEditor().getCaretModel().getOffset());
-		assertNotNull(reference);
-		if (success)
-		{
-			assertNotNull(reference.resolve());
-			validateTarget(reference.getElement(), reference.resolve());
-		}
-		else
-		{
-			assertNull(reference.resolve());
-		}
-	}
+  public void doTest(String filename, boolean success, Class clazz) {
+    initWithFileSmart(filename);
+    PsiReference reference = getFile().findReferenceAt(myFixture.getEditor().getCaretModel().getOffset());
+    assertNotNull(reference);
+    if (success) {
+      assertNotNull(reference.resolve());
+      validateTarget(reference.getElement(), reference.resolve());
+    }
+    else {
+      assertNull(reference.resolve());
+    }
+  }
 
-	public void validateTarget(PsiElement sourceElement, PsiElement targetElement)
-	{
-	}
+  public void validateTarget(PsiElement sourceElement, PsiElement targetElement) {
+  }
 
-	public void doTestWithFileCheck()
-	{
-		initWithFileSmart();
-		doTestWithFileCheckWithoutInit();
-	}
+  public void doTestWithFileCheck() {
+    initWithFileSmart();
+    doTestWithFileCheckWithoutInit();
+  }
 
-	public void doTestWithFileCheckWithoutInit()
-	{
-		CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-		StringBuilder sb = new StringBuilder();
+  public void doTestWithFileCheckWithoutInit() {
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    StringBuilder sb = new StringBuilder();
 
-		for (PsiReference psiReference : collectFileReferences())
-		{
-			sb.append(serializeReference(psiReference)).append("\n");
-		}
-		UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
-	}
+    for (PsiReference psiReference : collectFileReferences()) {
+      sb.append(serializeReference(psiReference)).append("\n");
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
 
-	private String serializeReference(PsiReference reference)
-	{
-		StringBuilder sb = new StringBuilder();
-		PsiElement sourceElement = reference.getElement();
+  private String serializeReference(PsiReference reference) {
+    StringBuilder sb = new StringBuilder();
+    PsiElement sourceElement = reference.getElement();
 
-		ResolveResult[] resolveResults;
-		if (reference instanceof PsiPolyVariantReference)
-		{
-			resolveResults = ((PsiPolyVariantReference) reference).multiResolve(false);
-		}
-		else
-		{
-			PsiElement target = reference.resolve();
-			resolveResults = target == null ? PsiElementResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(target);
-		}
+    ResolveResult[] resolveResults;
+    if (reference instanceof PsiPolyVariantReference) {
+      resolveResults = ((PsiPolyVariantReference)reference).multiResolve(false);
+    }
+    else {
+      PsiElement target = reference.resolve();
+      resolveResults = target == null ? PsiElementResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(target);
+    }
 
-		TextRange referenceRange = reference.getRangeInElement();
-		String sourceElementText = sourceElement.getText();
-		int sourceElementOffset = sourceElement.getNode().getStartOffset();
+    TextRange referenceRange = reference.getRangeInElement();
+    String sourceElementText = sourceElement.getText();
+    int sourceElementOffset = sourceElement.getNode().getStartOffset();
 
-		sb
-				.append(reference.getClass().getSimpleName())
-				.append(" at ")
-				.append(referenceRange.shiftRight(sourceElementOffset))
-				.append("; text in range: '")
-				.append(referenceRange.subSequence(sourceElementText))
-				.append("'")
-				.append(" => ")
-				.append(resolveResults.length)
-				.append(" results:")
-				.append('\n');
+    sb
+      .append(reference.getClass().getSimpleName())
+      .append(" at ")
+      .append(referenceRange.shiftRight(sourceElementOffset))
+      .append("; text in range: '")
+      .append(referenceRange.subSequence(sourceElementText))
+      .append("'")
+      .append(" => ")
+      .append(resolveResults.length)
+      .append(" results:")
+      .append('\n');
 
-		for (ResolveResult result : resolveResults)
-		{
-			if (!result.isValidResult())
-			{
-				throw new AssertionFailedError("Invalid resolve result");
-			}
+    for (ResolveResult result : resolveResults) {
+      if (!result.isValidResult()) {
+        throw new AssertionFailedError("Invalid resolve result");
+      }
 
-			PsiElement targetElement = result.getElement();
-			assertNotNull(targetElement);
+      PsiElement targetElement = result.getElement();
+      assertNotNull(targetElement);
 
-			sb.append('\t');
+      sb.append('\t');
 
-			ASTNode targetElementNode = targetElement.getNode();
+      ASTNode targetElementNode = targetElement.getNode();
 
-			if (targetElementNode == null)
-			{
-				sb.append("nodeless; ").append(targetElement.toString());
-			}
-			else
-			{
-				sb.append(PsiUtilCore.getElementType(targetElementNode))
-						.append(" at ")
-						.append(targetElementNode.getStartOffset())
-						.append(" in ")
-						.append(targetElement.getContainingFile().getName())
-						.append('\n');
-			}
-		}
-		return sb.toString();
-	}
+      if (targetElementNode == null) {
+        sb.append("nodeless; ").append(targetElement.toString());
+      }
+      else {
+        sb.append(PsiUtilCore.getElementType(targetElementNode))
+          .append(" at ")
+          .append(targetElementNode.getStartOffset())
+          .append(" in ")
+          .append(targetElement.getContainingFile().getName())
+          .append('\n');
+      }
+    }
+    return sb.toString();
+  }
 
-	private List<PsiReference> collectFileReferences()
-	{
-		final List<PsiReference> references = new ArrayList<PsiReference>();
+  private List<PsiReference> collectFileReferences() {
+    final List<PsiReference> references = new ArrayList<PsiReference>();
 
-		PsiFile file = getFile();
+    PsiFile file = getFile();
 
-		file.accept(new PsiElementVisitor()
-		{
-			@Override
-			public void visitElement(PsiElement element)
-			{
-				Collections.addAll(references, element.getReferences());
-				element.acceptChildren(this);
-			}
-		});
+    file.accept(new PsiElementVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        Collections.addAll(references, element.getReferences());
+        element.acceptChildren(this);
+      }
+    });
 
-		Collections.sort(references, new Comparator<PsiReference>()
-		{
-			@Override
-			public int compare(PsiReference o1, PsiReference o2)
-			{
-				return o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
-						o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset();
-			}
-		});
+    Collections.sort(references, new Comparator<PsiReference>() {
+      @Override
+      public int compare(PsiReference o1, PsiReference o2) {
+        return o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
+               o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset();
+      }
+    });
 
-		return references;
-	}
+    return references;
+  }
 }

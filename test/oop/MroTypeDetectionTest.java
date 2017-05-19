@@ -22,35 +22,28 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.02.2016.
  */
-public class MroTypeDetectionTest extends NamespaceTestCase
-{
-	public static final String DATA_PATH = "testData/oop/mroType";
+public class MroTypeDetectionTest extends NamespaceTestCase {
+  public static final String DATA_PATH = "testData/oop/mroType";
 
-	@Override
-	protected String getTestDataPath()
-	{
-		return DATA_PATH;
-	}
+  @Override
+  protected String getTestDataPath() {
+    return DATA_PATH;
+  }
 
-	public void testDefault()
-	{
-		doTest("mro_default.pl", "Foo", PerlMroType.DFS);
-	}
+  public void testDefault() {
+    doTest("mro_default.pl", "Foo", PerlMroType.DFS);
+  }
 
-	public void testDFS()
-	{
-		doTest("mro_dfs.pl", "Foo", PerlMroType.DFS);
-	}
+  public void testDFS() {
+    doTest("mro_dfs.pl", "Foo", PerlMroType.DFS);
+  }
 
-	public void testC3()
-	{
-		doTest("mro_c3.pl", "Foo", PerlMroType.C3);
-	}
+  public void testC3() {
+    doTest("mro_c3.pl", "Foo", PerlMroType.C3);
+  }
 
 
-	public void doTest(String fileName, @NotNull String namespaceName, PerlMroType mroType)
-	{
-		assertEquals(mroType, getNamespaceInFile(fileName, namespaceName).getMroType());
-	}
-
+  public void doTest(String fileName, @NotNull String namespaceName, PerlMroType mroType) {
+    assertEquals(mroType, getNamespaceInFile(fileName, namespaceName).getMroType());
+  }
 }
