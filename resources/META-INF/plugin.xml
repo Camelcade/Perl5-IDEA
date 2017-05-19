@@ -42,11 +42,11 @@
      <li>Implemented lexing and parsing for lexical subs. NB: for now there is no proper resolving for them. Works as usual subs. Please, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1439">#1439</a>.</li>
      </ul>
      </p>
-     <!--<p>Fixes:-->
-      <!--<ul>-->
-      <!--<li>Fixed bug when plugin messed with Go project dependencies</li>-->
-      <!--</ul>-->
-     <!--</p>-->
+     <p>Fixes:
+      <ul>
+      <li>Fixed bug with short bare here-doc openers lexing. By <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1434">tonegz</a></li>
+      </ul>
+     </p>
     ]]>
     </change-notes>
 
