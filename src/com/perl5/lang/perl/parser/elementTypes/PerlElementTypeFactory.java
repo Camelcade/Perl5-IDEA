@@ -150,6 +150,9 @@ public class PerlElementTypeFactory {
     if (name.equals("LP_REGEX_X")) {
       return new PerlLazyExtendedMatchRegexpElementType(name);
     }
+    if (name.equals("LP_REGEX_XX")) {
+      return new PerlLazySuperExtendedMatchRegexpElementType(name);
+    }
     if (name.equals("LP_REGEX_REPLACEMENT")) {
       return new PerlLazyReplacementRegexpElementType(name);
     }

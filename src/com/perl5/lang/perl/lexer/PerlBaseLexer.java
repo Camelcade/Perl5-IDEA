@@ -812,7 +812,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
   /**
    * Parses regexp from the current position (opening delimiter) and preserves tokens in preparsedTokensList
-   * REGEX_MODIFIERS = [msixpodualgcer]
+   * REGEX_MODIFIERS = [msixpodualgcerxx]
    *
    * @return opening delimiter type
    */
@@ -884,6 +884,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
     while (currentOffset < bufferEnd) {
       char currentChar = buffer.charAt(currentOffset);
+      int modifierEndOffset = currentOffset + 1;
       if (!StringUtil.containsChar(allowedModifiers, currentChar))    // unknown modifier
       {
         break;
@@ -891,11 +892,20 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       else if (currentChar == 'x')    // mark as extended
       {
         if (firstBlockToken != null) {
-          firstBlockToken.setTokenType(LP_REGEX_X);
+          if (modifierEndOffset < bufferEnd && buffer.charAt(modifierEndOffset) == 'x') {
+            firstBlockToken.setTokenType(LP_REGEX_XX);
+            modifierEndOffset++;
+          }
+          else {
+            firstBlockToken.setTokenType(LP_REGEX_X);
+          }
         }
       }
       else if (currentChar == 'e')    // mark as evaluated
       {
+        if (modifierEndOffset < bufferEnd && buffer.charAt(modifierEndOffset) == 'e') {
+          modifierEndOffset++;
+        }
         if (secondBlockOpeningToken != null) {
           IElementType secondBlockOpeningTokenType = secondBlockOpeningToken.getTokenType();
           if (secondBlockOpeningTokenType == REGEX_QUOTE_OPEN || secondBlockOpeningTokenType == REGEX_QUOTE_OPEN_E) {
@@ -913,7 +923,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
         }
       }
 
-      pushPreparsedToken(currentOffset++, currentOffset, REGEX_MODIFIER);
+      pushPreparsedToken(currentOffset, modifierEndOffset, REGEX_MODIFIER);
+      currentOffset = modifierEndOffset;
     }
 
     return getPreParsedToken();

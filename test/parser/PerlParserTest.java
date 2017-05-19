@@ -33,7 +33,7 @@ public class PerlParserTest extends PerlParserTestBase
 
   public void testRegexSpacing() {doTest();}
 
-  ;
+  public void testSuperExtendedRegexp() {doTest();}
 
 	public void testUseVars()
 	{

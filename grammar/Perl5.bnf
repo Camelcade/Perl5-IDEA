@@ -277,6 +277,7 @@ limitations under the License.
 
 	LP_REGEX="LP_REGEX"
 	LP_REGEX_X="LP_REGEX_X"
+	LP_REGEX_XX="LP_REGEX_XX"
 	LP_REGEX_REPLACEMENT="LP_REGEX_REPLACEMENT"
 
 	LP_CODE_BLOCK="LAZY_PARSABLE_BLOCK"
@@ -878,7 +879,7 @@ replacement_regex ::=
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::= 'r{' [LP_REGEX|LP_REGEX_X|perl_regex]
+private regex_match ::= 'r{' [LP_REGEX|LP_REGEX_X|LP_REGEX_XX|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [LP_REGEX_REPLACEMENT|perl_regex]
