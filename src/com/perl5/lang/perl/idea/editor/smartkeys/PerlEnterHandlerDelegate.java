@@ -120,7 +120,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                 if (run != null && (run = run.getPrevSibling()) instanceof PerlHeredocElementImpl) {
                   Pattern openerPattern = EMPTY_OPENER_PATTERN;
                   if (!emptyOpener) {
-                    openerPattern = Pattern.compile("<<(\\s*)(?:" +
+                    openerPattern = Pattern.compile("<<~?(\\s*)(?:" +
                                                     "\"" + openerName + "\"" + "|" +
                                                     "`" + openerName + "`" + "|" +
                                                     "'" + openerName + "'" + "|" +
