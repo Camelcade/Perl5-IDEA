@@ -38,6 +38,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+
 /**
  * Created by hurricup on 20.05.2015.
  */
@@ -259,7 +261,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     else if (elementType == PARENTHESISED_EXPR) {
       return "(list)";
     }
-    else if (elementType == HEREDOC || elementType == HEREDOC_QQ || elementType == HEREDOC_QX) {
+    else if (HEREDOC_BODIES_TOKENSET.contains(elementType)) {
       return "<< heredoc >>";
     }
     else if (elementType == POD) {
