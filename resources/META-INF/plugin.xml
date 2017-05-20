@@ -46,6 +46,7 @@
       <ul>
       <li>Lexing of short bare here-doc openers. By <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1434">tonegz</a></li>
       <li>Lexing of <code>$(</code> and <code>$)</code> inside the match part of regexp. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1435">#1435</a></li>
+      <li>Indentation of here-docs with selection and tab.</li>
       </ul>
      </p>
     ]]>
