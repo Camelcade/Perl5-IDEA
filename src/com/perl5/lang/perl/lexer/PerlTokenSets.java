@@ -211,4 +211,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STRING_CONTENT_XQ,
     STRING_CONTENT_QQ
   );
+
+  TokenSet HEREDOC_BODIES_TOKENSET = TokenSet.create(
+    HEREDOC,
+    HEREDOC_QQ,
+    HEREDOC_QX
+  );
 }

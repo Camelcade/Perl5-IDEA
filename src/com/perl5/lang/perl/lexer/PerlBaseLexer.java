@@ -930,12 +930,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     return getPreParsedToken();
   }
 
-  /**
-   * Checks if there are more here-docs in stack and immediately starts next one
-   */
-  protected void closeEmptyMarkerHeredoc() {
-  }
-
   protected void startHeredocCapture() {
     pushState();
     if (heredocQueue.peekFirst().getMarker().length() > 0) {
@@ -947,7 +941,25 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   }
 
   protected boolean isCloseMarker() {
-    return StringUtil.equals(yytext(), heredocQueue.peekFirst().getMarker());
+    PerlHeredocQueueElement currentHeredoc = heredocQueue.peekFirst();
+    CharSequence tokenText = yytext();
+    CharSequence markerText = currentHeredoc.getMarker();
+
+    if (currentHeredoc.isIndentable()) {
+      if (!StringUtil.endsWith(tokenText, markerText)) {
+        return false;
+      }
+
+      for (int i = 0; i < tokenText.length() - markerText.length(); i++) {
+        if (!Character.isWhitespace(tokenText.charAt(i))) {
+          return false;
+        }
+      }
+      return true;
+    }
+    else {
+      return StringUtil.equals(tokenText, markerText);
+    }
   }
 
   protected IElementType registerPackage(IElementType tokenType) {
@@ -987,10 +999,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
    * @param stringOpenerState  state for string capture
    * @return next string token type
    */
-  public IElementType captureQuotedHeredocMarker(IElementType heredocElementType, int stringOpenerState) {
+  public IElementType captureQuotedHeredocMarker(IElementType heredocElementType, int stringOpenerState, boolean isIndentable) {
     yybegin(AFTER_VALUE);
     pushState();
-    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext().subSequence(1, yylength() - 1)));
+    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext().subSequence(1, yylength() - 1), isIndentable));
     yybegin(stringOpenerState);
     return captureString();
   }
@@ -1001,9 +1013,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
    * @param heredocElementType element type for heredoc body
    * @return string token type
    */
-  public IElementType captureBareHeredocMarker(IElementType heredocElementType) {
+  public IElementType captureBareHeredocMarker(IElementType heredocElementType, boolean isIndentable) {
     yybegin(AFTER_VALUE);
-    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext()));
+    heredocQueue.addLast(new PerlHeredocQueueElement(heredocElementType, yytext(), isIndentable));
     return STRING_CONTENT;
   }
 
@@ -1040,7 +1052,4 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       return charOpener;
     }
   }
-
-
-
 }

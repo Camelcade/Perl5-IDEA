@@ -43,6 +43,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes {
   public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<PerlParserExtension>();
 
@@ -50,9 +52,12 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     TokenType.WHITE_SPACE,
     TokenType.NEW_LINE_INDENT
   );
-  public static final TokenSet COMMENTS = TokenSet.create(
-    COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
-    HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END
+  public static final TokenSet COMMENTS = TokenSet.orSet(
+    HEREDOC_BODIES_TOKENSET,
+    TokenSet.create(
+      COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
+      HEREDOC_END, HEREDOC_END_INDENTABLE
+    )
   );
 
   public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);

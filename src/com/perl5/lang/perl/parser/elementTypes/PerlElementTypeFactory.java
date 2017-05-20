@@ -69,7 +69,7 @@ public class PerlElementTypeFactory {
     if (name.equals("LAZY_PARSABLE_BLOCK")) {
       return new PerlLazyCodeBlockElementType(name);
     }
-    if (name.equals("HEREDOC_END")) {
+    if (name.equals("HEREDOC_END") || name.equals("HEREDOC_END_INDENTABLE")) {
       return new PerlTokenTypeEx(name) {
         @NotNull
         @Override

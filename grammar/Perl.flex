@@ -92,10 +92,17 @@ AMBIGUOUS_SIGIL_SUFFIX = {SPACES_OR_COMMENTS} ("{"|[\"\'\[\]\`\\\!\)\+\,\-\.\/\;
 // atm making the same, but seems unary are different
 PERL_OPERATORS_FILETEST = "-" [rwxoRWXOezsfdlpSbctugkTBMAC]
 
+// fixme this regexps allows to start from space, unsure if it's right
 HEREDOC_MARKER_DQ = [^\"\n\r]*
 HEREDOC_MARKER_SQ = [^\'\n\r]*
 HEREDOC_MARKER_XQ = [^\`\n\r]*
 QUOTED_HEREDOC_MARKER = {WHITE_SPACE}*(\'{HEREDOC_MARKER_SQ}\'| \"{HEREDOC_MARKER_DQ}\" | \`{HEREDOC_MARKER_XQ}\`)
+
+HEREDOC_MARKER_DQ_NON_EMPTY = [^\"\n\r\s][^\`\n\r]*
+HEREDOC_MARKER_SQ_NON_EMPTY = [^\'\n\r\s][^\`\n\r]*
+HEREDOC_MARKER_XQ_NON_EMPTY = [^\`\n\r\s][^\`\n\r]*
+QUOTED_HEREDOC_MARKER_NON_EMPTY = {WHITE_SPACE}*(\'{HEREDOC_MARKER_SQ_NON_EMPTY}\'| \"{HEREDOC_MARKER_DQ_NON_EMPTY}\" | \`{HEREDOC_MARKER_XQ_NON_EMPTY}\`)
+
 UNQUOTED_HEREDOC_MARKER = [a-zA-Z_] \d* {IDENTIFIER}?
 
 END_BLOCK = "__END__" [^]+
@@ -163,6 +170,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 // this is a hack for stupid tailing commas in calls
 %state QUOTED_HEREDOC_OPENER, BARE_HEREDOC_OPENER, BACKREF_HEREDOC_OPENER
+%state QUOTED_HEREDOC_OPENER_INDENTABLE, BARE_HEREDOC_OPENER_INDENTABLE, BACKREF_HEREDOC_OPENER_INDENTABLE
 %state BLOCK_AS_VALUE
 
 %state USE_VARS_STRING
@@ -175,6 +183,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %xstate CAPTURE_FORMAT,CAPTURE_FORMAT_NON_EMPTY
 %xstate CAPTURE_HEREDOC, CAPTURE_NON_EMPTY_HEREDOC
+%xstate CAPTURE_HEREDOC_INDENTABLE_TERMINATOR
 %xstate CAPTURE_HEREDOC_WITH_EMPTY_MARKER, CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER
 
 %state AFTER_IDENTIFIER_WITH_LABEL
@@ -240,9 +249,15 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <CAPTURE_HEREDOC>{
 	.+		{
 		if( isCloseMarker()){
-			popState();
-			heredocQueue.pullFirst();
-			return HEREDOC_END;
+			PerlHeredocQueueElement currentHeredoc = heredocQueue.pullFirst();
+			if( currentHeredoc.isIndentable() ){
+			        pullback(0);
+			        yybegin(CAPTURE_HEREDOC_INDENTABLE_TERMINATOR);
+			}
+			else{
+        			popState();
+                		return HEREDOC_END;
+			}
 		}
 		else
 		{
@@ -250,6 +265,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 		}
 	}
 	\R		{yybegin(CAPTURE_NON_EMPTY_HEREDOC);}
+}
+
+<CAPTURE_HEREDOC_INDENTABLE_TERMINATOR>{
+  {WHITE_SPACE}+    {return TokenType.WHITE_SPACE;}
+  {NON_SPACE}.*     {popState();return HEREDOC_END_INDENTABLE;}
 }
 
 ////////////////////////////////// end of heredoc capture //////////////////////////////////////////////////////////////
@@ -330,19 +350,35 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 /////////////////////////////////// end of annotations /////////////////////////////////////////////////////////////////
 
 <QUOTED_HEREDOC_OPENER>{
-	{DQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ);}
-	{SQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q);}
-	{XQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX);}
+	{DQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ, false);}
+	{SQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q, false);}
+	{XQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX, false);}
 }
 
 <BACKREF_HEREDOC_OPENER>{
-	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC);}
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC, false);}
 }
 
 <BARE_HEREDOC_OPENER>{
 	"\\" 			  {yybegin(BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;}
-	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC_QQ);}
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC_QQ, false);}
 }
+
+<QUOTED_HEREDOC_OPENER_INDENTABLE>{
+	{DQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ, true);}
+	{SQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q, true);}
+	{XQ_STRING}   { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX, true);}
+}
+
+<BACKREF_HEREDOC_OPENER_INDENTABLE>{
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC, true);}
+}
+
+<BARE_HEREDOC_OPENER_INDENTABLE>{
+	"\\" 			  {yybegin(BACKREF_HEREDOC_OPENER_INDENTABLE);return OPERATOR_REFERENCE;}
+	{UNQUOTED_HEREDOC_MARKER} {return captureBareHeredocMarker(HEREDOC_QQ, true);}
+}
+
 
 <INTERPOLATED_VARIABLE_SUFFIX>{
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"
@@ -922,6 +958,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	"<<" / {QUOTED_HEREDOC_MARKER}   	{yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
 	"<<" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	{yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;}
+
+	"<<~" / {QUOTED_HEREDOC_MARKER_NON_EMPTY} {yybegin(QUOTED_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
+	"<<~" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	  {yybegin(BARE_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 
 	{DQ_STRING}	{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 	{SQ_STRING} {yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_Q);return captureString();}

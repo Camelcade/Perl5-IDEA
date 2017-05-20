@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 01.03.2016.
@@ -24,10 +25,12 @@ import com.intellij.psi.tree.IElementType;
 public class PerlHeredocQueueElement {
   private final IElementType myTargetElement;
   private final CharSequence myMarker;
+  private final boolean myIsIndentable;
 
-  public PerlHeredocQueueElement(IElementType targetElement, CharSequence marker) {
+  public PerlHeredocQueueElement(@NotNull IElementType targetElement, @NotNull CharSequence marker, boolean isIndentable) {
     myTargetElement = targetElement;
     myMarker = marker;
+    myIsIndentable = isIndentable;
   }
 
   public IElementType getTargetElement() {
@@ -36,5 +39,9 @@ public class PerlHeredocQueueElement {
 
   public CharSequence getMarker() {
     return myMarker;
+  }
+
+  public boolean isIndentable() {
+    return myIsIndentable;
   }
 }
