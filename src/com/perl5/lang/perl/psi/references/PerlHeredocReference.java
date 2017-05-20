@@ -35,53 +35,53 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
 
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    PsiElement result = null;
-    PsiElement run = getElement();
-    if ((run = run.getPrevSibling()) != null) // new line or here-doc
+    PsiElement run = getElement().getPrevSibling();
+
+    // skip heading spaces of indented terminator and new-line for empty heredoc
+    while (run instanceof PsiWhiteSpace) {
+      run = run.getPrevSibling();
+    }
+
+    // got here-doc body before terminator
+    if (run instanceof PerlHeredocElementImpl) {
+      run = run.getPrevSibling();    // moving to newline before heredoc
+
+      if (run instanceof PsiWhiteSpace) {
+        run = run.getPrevSibling();
+      }
+    }
+
+    if (run instanceof PerlHeredocTerminatorElement)    // sequential here-docs
     {
-      if (run instanceof PerlHeredocElementImpl) {
-        run = run.getPrevSibling();    // moving to newline before heredoc
-        if (run == null) {
-          return ResolveResult.EMPTY_ARRAY;
-        }
-      }
-
-      PsiElement predecessor = run;
-      if (predecessor instanceof PsiWhiteSpace) // empty here-docs has no newline after them
-      {
-        predecessor = predecessor.getPrevSibling();
-      }
-
-      if (predecessor instanceof PerlHeredocTerminatorElement)    // sequential here-docs
-      {
-        PsiReference reference = predecessor.getReference();
-        if (reference != null) {
-          PsiElement prevOpener = reference.resolve();
-          if (prevOpener != null) {
-            HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset(), prevOpener);
-            PerlPsiUtil.iteratePsiElementsRight(prevOpener, seeker);
-            result = seeker.getResult();
-          }
-        }
-      }
-      else    // first here-doc in a row
-      {
-        final PsiDocumentManager manager = PsiDocumentManager.getInstance(run.getProject());
-        final PsiFile file = run.getContainingFile();
-        final Document document = manager.getDocument(file);
-
-        if (document != null) {
-          int lineNumber = document.getLineNumber(run.getNode().getStartOffset());
-          PsiElement firstLineElement = file.findElementAt(document.getLineStartOffset(lineNumber));
-          if (firstLineElement != null) {
-            HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset(), null);
-            PerlPsiUtil.iteratePsiElementsRight(firstLineElement, seeker);
-            result = seeker.getResult();
-          }
+      PsiReference reference = run.getReference();
+      if (reference != null) {
+        PsiElement prevOpener = reference.resolve();
+        if (prevOpener != null) {
+          HeredocSeeker seeker = new HeredocSeeker(run.getNode().getStartOffset(), prevOpener);
+          PerlPsiUtil.iteratePsiElementsRight(prevOpener, seeker);
+          return PsiElementResolveResult.createResults(seeker.getResult());
         }
       }
     }
-    return result == null ? ResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(result);
+    else if (run != null)    // first here-doc in a row
+    {
+      final PsiDocumentManager manager = PsiDocumentManager.getInstance(run.getProject());
+      final PsiFile file = run.getContainingFile();
+      final Document document = manager.getDocument(file);
+
+      if (document != null) {
+        int seekEndOffset = run.getNextSibling().getNode().getStartOffset() - 1;
+        int lineNumber = document.getLineNumber(seekEndOffset);
+        PsiElement firstLineElement = file.findElementAt(document.getLineStartOffset(lineNumber));
+        if (firstLineElement != null) {
+          HeredocSeeker seeker = new HeredocSeeker(seekEndOffset, null);
+          PerlPsiUtil.iteratePsiElementsRight(firstLineElement, seeker);
+          return PsiElementResolveResult.createResults(seeker.getResult());
+        }
+      }
+    }
+
+    return ResolveResult.EMPTY_ARRAY;
   }
 
   @Override
