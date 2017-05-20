@@ -37,26 +37,29 @@ import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
-  private static final TokenSet myForceAsOp = TokenSet.create(
-    RESERVED_Q,
-    RESERVED_QQ,
-    RESERVED_QX,
-    RESERVED_QW,
-    RESERVED_TR,
-    RESERVED_Y,
-    HEREDOC_OPENER,
-    HEREDOC_END,
-    HEREDOC,
-    HEREDOC_QQ,
-    HEREDOC_QX,
+  private static final TokenSet myForceAsOp = TokenSet.orSet(
+    HEREDOC_BODIES_TOKENSET,
+    TokenSet.create(
+      RESERVED_Q,
+      RESERVED_QQ,
+      RESERVED_QX,
+      RESERVED_QW,
+      RESERVED_TR,
+      RESERVED_Y,
+      HEREDOC_OPENER,
+      HEREDOC_END,
+      HEREDOC_END_INDENTABLE,
 
-    RESERVED_S,
-    RESERVED_M,
-    RESERVED_QR
+      RESERVED_S,
+      RESERVED_M,
+      RESERVED_QR
+    )
   );
   private static final TokenSet myForceAsFunc = TokenSet.create(
     BLOCK_NAME,
