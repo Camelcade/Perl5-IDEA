@@ -29,6 +29,7 @@ import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -41,23 +42,23 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+
 /**
  * Created by hurricup on 03.09.2015.
  */
 public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes {
   /**
-   * Composit elements that should be treated as leaf elements, no children
+   * Composite elements that should be treated as leaf elements, no children
    */
-  public final static TokenSet LEAF_ELEMENTS = TokenSet.create(
-    HEREDOC,
-    HEREDOC_QX,
-    HEREDOC_QQ,
-    STRING_SQ,
-    STRING_DQ,
-    STRING_XQ,
-    POD,
-    PerlParserUtil.DUMMY_BLOCK
-  );
+  public final static TokenSet LEAF_ELEMENTS =
+    TokenSet.create(
+      STRING_SQ,
+      STRING_DQ,
+      STRING_XQ,
+      POD,
+      PerlParserUtil.DUMMY_BLOCK
+    );
 
   /**
    * Elements that must have LF between them
@@ -193,6 +194,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     @Nullable Wrap wrap,
     @Nullable Alignment alignment
   ) {
+    if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
+      return new PerlHeredocFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
+                                            myInjectedLanguageBlockBuilder);
+    }
     return new PerlFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
                                    myInjectedLanguageBlockBuilder);
   }
