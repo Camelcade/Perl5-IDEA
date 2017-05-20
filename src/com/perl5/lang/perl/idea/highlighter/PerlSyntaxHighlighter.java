@@ -137,7 +137,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 
     safeMap(HANDLE, PERL_HANDLE);
 
-    safeMap(HEREDOC_END, PERL_SQ_STRING);
+    safeMap(PERL_SQ_STRING, HEREDOC_END, HEREDOC_END_INDENTABLE);
 
     safeMap(PERL_REGEX_QUOTE, REGEX_QUOTE_CLOSE, REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E, REGEX_QUOTE_E, REGEX_QUOTE);
     safeMap(REGEX_TOKEN, PERL_REGEX_TOKEN);
