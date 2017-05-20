@@ -18,13 +18,17 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.LiteralTextEscaper;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
 
 /**
  * Created by hurricup on 10.06.2015.
@@ -59,5 +63,10 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
   @Override
   public LiteralTextEscaper<PerlHeredocElementImpl> createLiteralTextEscaper() {
     return new PerlHeredocLiteralEscaper(this);
+  }
+
+  public boolean isIndentable() {
+    PsiElement possibleEnd = getNextSibling();
+    return possibleEnd != null && PsiUtilCore.getElementType(possibleEnd) != HEREDOC_END;
   }
 }

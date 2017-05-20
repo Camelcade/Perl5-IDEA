@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -28,7 +29,15 @@ import org.jetbrains.annotations.NotNull;
 public class PerlIndentStrategy implements IndentStrategy {
   @Override
   public boolean canIndent(@NotNull PsiElement element) {
-    return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(PsiUtilCore.getElementType(element.getParent())) &&
-           !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(PsiUtilCore.getElementType(element));
+    if (element instanceof PerlHeredocElementImpl) {
+      return ((PerlHeredocElementImpl)element).isIndentable();
+    }
+
+    PsiElement parentElement = element.getParent();
+    if (parentElement instanceof PerlHeredocElementImpl) {
+      return ((PerlHeredocElementImpl)parentElement).isIndentable();
+    }
+
+    return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(PsiUtilCore.getElementType(element));
   }
 }
