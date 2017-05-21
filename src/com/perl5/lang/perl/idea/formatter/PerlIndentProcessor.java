@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -26,7 +27,10 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -80,9 +84,6 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
    * Tokens that must be suppressed for indentation
    */
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
-    HEREDOC,
-    HEREDOC_QQ,
-    HEREDOC_QX,
     HEREDOC_END,
     POD,
     FORMAT,
@@ -130,8 +131,18 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
+    boolean forceFirstIndent = false;
+    if (HEREDOC_BODIES_TOKENSET.contains(nodeType)) {
+      PsiElement psi = node.getPsi();
+      assert psi instanceof PerlHeredocElementImpl;
+      if (!((PerlHeredocElementImpl)psi).isIndentable()) {
+        return Indent.getAbsoluteNoneIndent();
+      }
+      forceFirstIndent = true;
+    }
+
     // defined by node
-    if (getAbsoluteUnindentableTokens().contains(nodeType) || parent == null || grandParent == null) {
+    if (getAbsoluteUnindentableTokens().contains(nodeType) || parent == null || grandParent == null && nodeType != HEREDOC_END_INDENTABLE) {
       return Indent.getAbsoluteNoneIndent();
     }
 
@@ -165,7 +176,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNormalIndent();
     }
 
-    return Indent.getContinuationWithoutFirstIndent();
+    return forceFirstIndent ? Indent.getContinuationIndent() : Indent.getContinuationWithoutFirstIndent();
   }
 }
 
