@@ -35,11 +35,11 @@ import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
@@ -135,43 +135,37 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   }
 
   protected List<Block> buildSubBlocks() {
-    final List<Block> blocks = new ArrayList<Block>();
-
-    if (!isLeaf()) {
-      IElementType elementType = getElementType();
-
-      Alignment alignment = null; //Alignment.createAlignment();
-
-      if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK || elementType == TRENAR_EXPR) {
-        alignment = Alignment.createAlignment(true);
-      }
-
-      Wrap wrap = null;
-
-      if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this)) {
-        wrap = Wrap.createWrap(WrapType.NORMAL, true);
-      }
-
-      for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-        if (!shouldCreateBlockFor(child)) {
-          continue;
-        }
-        blocks.add(createChildBlock(child, wrap, alignment));
-      }
+    if (isLeaf()) {
+      return Collections.emptyList();
     }
-    else {
-      PsiElement element = getNode().getPsi();
-      if (element instanceof PerlHeredocElementImpl && ((PerlHeredocElementImpl)element).isValidHost()) {
-        getInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), null, null, getIndent());
+    final List<Block> blocks = new ArrayList<>();
+
+    IElementType elementType = getElementType();
+
+    Alignment alignment = null; //Alignment.createAlignment();
+
+    if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK || elementType == TRENAR_EXPR) {
+      alignment = Alignment.createAlignment(true);
+    }
+
+    Wrap wrap = null;
+
+    if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this)) {
+      wrap = Wrap.createWrap(WrapType.NORMAL, true);
+    }
+
+    for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+      if (!shouldCreateBlockFor(child)) {
+        continue;
       }
+      blocks.add(createChildBlock(child, wrap, alignment));
     }
     return blocks;
   }
 
-  protected PerlFormattingBlock createChildBlock(
-    ASTNode child,
-    Wrap wrap,
-    Alignment alignment
+  protected PerlFormattingBlock createChildBlock(ASTNode child,
+                                                 Wrap wrap,
+                                                 Alignment alignment
   ) {
     IElementType childElementType = child.getElementType();
     if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == FAT_COMMA)) {
@@ -187,10 +181,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
   }
 
-  protected PerlFormattingBlock createBlock(
-    @NotNull ASTNode node,
-    @Nullable Wrap wrap,
-    @Nullable Alignment alignment
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node,
+                                            @Nullable Wrap wrap,
+                                            @Nullable Alignment alignment
   ) {
     if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
       return new PerlHeredocFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
@@ -336,14 +329,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   public boolean isCodeBlock() {
     return getElementType() == BLOCK;
-  }
-
-  public boolean isBlockCloser() {
-    return BLOCK_CLOSERS.contains(getElementType());
-  }
-
-  public boolean isBlockOpener() {
-    return BLOCK_OPENERS.contains(getElementType());
   }
 
   /**

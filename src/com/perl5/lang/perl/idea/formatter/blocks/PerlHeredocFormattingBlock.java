@@ -9,9 +9,11 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,17 +29,24 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
                                     @NotNull SpacingBuilder spacingBuilder,
                                     @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder) {
     super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+    assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }
 
   @Override
   public boolean isLeaf() {
-    return true;
+    return !((PerlHeredocElementImpl)myNode.getPsi()).isValidHost();
   }
 
   @NotNull
   @Override
-  public List<Block> getSubBlocks() {
-    return Collections.emptyList();
+  protected List<Block> buildChildren() {
+    if (!isLeaf()) {
+      return Collections.emptyList();
+    }
+
+    List<Block> blocks = new ArrayList<>();
+    getInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), null, null, getIndent());
+    return blocks;
   }
 
   @NotNull
