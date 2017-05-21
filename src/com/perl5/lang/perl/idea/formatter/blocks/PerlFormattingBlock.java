@@ -93,7 +93,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerl5Settings;
   private final SpacingBuilder mySpacingBuilder;
-  private final Alignment myAlignment;
   private final boolean myIsFirst;
   private final boolean myIsLast;
   private final IElementType myElementType;
@@ -113,7 +112,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     mySettings = codeStyleSettings;
     myPerl5Settings = perlCodeStyleSettings;
     mySpacingBuilder = spacingBuilder;
-    myAlignment = alignment;
     myIndent = getIndentProcessor().getNodeIndent(node, perlCodeStyleSettings);
     myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
     myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
@@ -281,12 +279,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   @Override
   public Indent getIndent() {
     return myIndent;
-  }
-
-  @Nullable
-  @Override
-  public Alignment getAlignment() {
-    return super.getAlignment();
   }
 
   @Nullable
