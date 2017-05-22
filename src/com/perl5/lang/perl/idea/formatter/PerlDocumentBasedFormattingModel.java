@@ -66,6 +66,9 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
           if (line > 0) {
             createWhiteSpace(whiteSpaceLength + shift, buffer);
           }
+          else {
+            createWhiteSpace(whiteSpaceLength, buffer);
+          }
           buffer.append(afterWhiteSpace.toString());
           insideWhiteSpace = true;
           whiteSpaceLength = 0;

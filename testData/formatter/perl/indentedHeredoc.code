@@ -1,0 +1,169 @@
+<<~`EOM`;
+    one liner $force_leaf
+EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+EOM
+
+<<~`EOM`;
+        one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+EOM
+
+
+<<~`EOM`;
+    one liner $force_leaf
+        multi liner
+EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+EOM
+
+<<~`EOM`;
+        one liner $force_leaf
+            multi liner
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+    EOM
+
+    <<~`EOM`;
+one liner $force_leaf
+    multi liner
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+EOM
+
+
+{
+<<~`EOM`;
+    one liner $force_leaf
+EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+EOM
+
+<<~`EOM`;
+        one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+one liner $force_leaf
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+EOM
+
+
+<<~`EOM`;
+    one liner $force_leaf
+        multi liner
+EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+EOM
+
+<<~`EOM`;
+        one liner $force_leaf
+            multi liner
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+    EOM
+
+    <<~`EOM`;
+one liner $force_leaf
+    multi liner
+    EOM
+
+    <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+EOM
+}
+
+{
+        <<~`EOM`;
+            one liner $force_leaf
+        EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+        EOM
+
+        <<~`EOM`;
+                one liner $force_leaf
+            EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+            EOM
+
+            <<~`EOM`;
+        one liner $force_leaf
+            EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+        EOM
+
+
+        <<~`EOM`;
+            one liner $force_leaf
+                multi liner
+        EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+                    multi liner
+        EOM
+
+        <<~`EOM`;
+                one liner $force_leaf
+                    multi liner
+            EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+                    multi liner
+            EOM
+
+            <<~`EOM`;
+        one liner $force_leaf
+            multi liner
+            EOM
+
+            <<~`EOM`;
+                one liner $force_leaf
+                    multi liner
+        EOM
+}

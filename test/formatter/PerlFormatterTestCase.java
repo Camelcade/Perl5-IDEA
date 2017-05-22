@@ -38,4 +38,8 @@ public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
     CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = true;
     doFormatTest();
   }
+
+  public void testIndentedHeredoc() {
+    doFormatTest();
+  }
 }
