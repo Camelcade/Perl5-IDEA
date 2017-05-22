@@ -29,13 +29,13 @@ public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
     return "testData/formatter/perl";
   }
 
-  public void testStatementModifiersSpacing() throws Exception {
+  public void testStatementModifierSpacing() throws Exception {
     CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = false;
-    doFormatTest("statement_modifier_spacing", "");
+    doFormatTest();
   }
 
-  public void testStatementModifiersSpacingWithSpace() throws Exception {
+  public void testStatementModifierSpacingWithSpace() throws Exception {
     CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = true;
-    doFormatTest("statement_modifier_spacing", "_with_space");
+    doFormatTest();
   }
 }
