@@ -25,7 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.formatter.DocumentBasedFormattingModel;
 import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.perl.PerlLanguage;
@@ -133,9 +132,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder, PerlF
     InjectedLanguageBlockBuilder injectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
     PerlFormattingBlock rootBlock =
       new PerlFormattingBlock(element.getNode(), null, null, commonSettings, perlSettings, spacingBuilder, injectedLanguageBlockBuilder);
-    PsiFile containingFile = element.getContainingFile();
-    return new DocumentBasedFormattingModel(rootBlock, element.getProject(), settings, containingFile.getFileType(),
-                                            containingFile);
+    return new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
   }
 
   @Nullable
