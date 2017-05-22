@@ -269,11 +269,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     doFormatTest("");
   }
 
-  protected void doFormatTest(String answerSuffix) {
+  protected void doFormatTest(@NotNull String answerSuffix) {
     doFormatTest(getTestName(true), answerSuffix);
   }
 
-  protected void doFormatTest(String filename, String resultSuffix) {
+  protected void doFormatTest(@NotNull String filename, @NotNull String resultSuffix) {
     initWithFileSmart(filename);
     new WriteCommandAction.Simple(getProject()) {
       @Override
