@@ -165,6 +165,8 @@
     <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
     <lang.formatter language="Perl5"
                     implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+    <lang.whiteSpaceFormattingStrategy language="Perl5"
+                                       implementationClass="com.perl5.lang.perl.idea.formatter.PerlWhiteSpaceFormattingStrategy"/>
     <codeStyleSettingsProvider
         implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
     <langCodeStyleSettingsProvider
