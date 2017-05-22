@@ -18,10 +18,7 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.InjectedLanguagePlaces;
-import com.intellij.psi.LanguageInjector;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.*;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlAnnotationInject;
 import com.perl5.lang.perl.psi.PerlString;
@@ -104,6 +101,9 @@ public class PerlLanguageInjector implements LanguageInjector {
         host.isValidHost() &&
         PerlSharedSettings.getInstance(host.getProject()).AUTOMATIC_HEREDOC_INJECTIONS) {
       PsiElement terminator = host.getNextSibling();
+      while (terminator instanceof PsiWhiteSpace) {
+        terminator = terminator.getNextSibling();
+      }
       if (terminator instanceof PerlHeredocTerminatorElementImpl) {
         String terminatorText = terminator.getText();
         Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
