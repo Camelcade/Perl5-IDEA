@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.*;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
@@ -70,10 +72,28 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 
   @Nullable
   public PerlHeredocTerminatorElement getTerminatorElement() {
-    PsiElement terminator = getNextSibling();
-    while (terminator instanceof PsiWhiteSpace) {
-      terminator = terminator.getNextSibling();
+    return CachedValuesManager.getCachedValue(this, () -> {
+      PsiElement terminator = getNextSibling();
+      while (terminator instanceof PsiWhiteSpace) {
+        terminator = terminator.getNextSibling();
+      }
+      return CachedValueProvider.Result.create(
+        terminator instanceof PerlHeredocTerminatorElementImpl ? (PerlHeredocTerminatorElement)terminator : null,
+        this
+      );
+    });
+  }
+
+  public int getIndentSize() {
+    if (!isIndentable()) {
+      return 0;
     }
-    return terminator instanceof PerlHeredocTerminatorElementImpl ? (PerlHeredocTerminatorElement)terminator : null;
+
+    PerlHeredocTerminatorElement terminatorElement = getTerminatorElement();
+    if (terminatorElement == null) {
+      return 0;
+    }
+
+    return terminatorElement.getTextRange().getStartOffset() - getTextRange().getEndOffset();
   }
 }

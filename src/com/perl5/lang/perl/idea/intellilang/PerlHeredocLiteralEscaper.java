@@ -20,12 +20,17 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 /**
  * Created by hurricup on 02.08.2015.
  */
 public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocElementImpl> {
+  private Map<TextRange, TextRange> myRangesMap = new THashMap<>();
+
   public PerlHeredocLiteralEscaper(PerlHeredocElementImpl host) {
     super(host);
   }
@@ -36,21 +41,74 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
   }
 
   @Override
-  public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-    outChars.append(rangeInsideHost.subSequence(myHost.getText()));
+  public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    myRangesMap.clear();
+    return myHost.getIndentSize() > 0 ? decodeIndented(rangeInsideHost, outChars) : decodeNormal(rangeInsideHost, outChars);
+  }
+
+  private boolean decodeNormal(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    outChars.append(rangeInsideHost.subSequence(myHost.getNode().getChars()));
+    TextRange fullRange = TextRange.create(0, rangeInsideHost.getLength() + 1);
+    myRangesMap.put(fullRange, fullRange);
+    return true;
+  }
+
+  private boolean decodeIndented(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
+    int indentSize = myHost.getIndentSize();
+    CharSequence sourceText = rangeInsideHost.subSequence(myHost.getNode().getChars());
+
+    int currentLineIndent = 0;
+    int sourceOffset = 0;
+    int targetOffset = 0;
+
+    int sourceLength = sourceText.length();
+    while (sourceOffset < sourceLength) {
+      char currentChar = sourceText.charAt(sourceOffset);
+      if (currentChar == '\n') {
+        currentLineIndent = 0;
+      }
+      else if (Character.isWhitespace(currentChar) && currentLineIndent < indentSize) {
+        currentLineIndent++;
+      }
+      else {
+        // got non-space or indents ended, consume till the EOL or EOHost
+        int sourceEnd = sourceOffset;
+        while (sourceEnd < sourceLength) {
+          currentChar = sourceText.charAt(sourceEnd);
+          sourceEnd++;
+          if (currentChar == '\n') {
+            break;
+          }
+        }
+
+        outChars.append(sourceText.subSequence(sourceOffset, sourceEnd));
+
+        TextRange sourceRange = TextRange.create(sourceOffset, sourceEnd + 1);
+        int rangeSize = sourceEnd - sourceOffset;
+        TextRange targetRange = TextRange.from(targetOffset, rangeSize + 1);
+        targetOffset += rangeSize;
+        myRangesMap.put(targetRange, sourceRange);
+        sourceOffset = sourceEnd;
+        currentLineIndent = 0;
+        continue;
+      }
+      sourceOffset++;
+    }
     return true;
   }
 
   @Override
   public int getOffsetInHost(int offsetInDecoded, @NotNull final TextRange rangeInsideHost) {
-    int offset = offsetInDecoded + rangeInsideHost.getStartOffset();
-    if (offset < rangeInsideHost.getStartOffset()) {
-      offset = rangeInsideHost.getStartOffset();
+    for (TextRange decodedRange : myRangesMap.keySet()) {
+      if (decodedRange.contains(offsetInDecoded)) {
+        TextRange encodedRange = myRangesMap.get(decodedRange);
+        return rangeInsideHost.getStartOffset() + encodedRange.getStartOffset() + offsetInDecoded - decodedRange.getStartOffset();
+      }
     }
-    if (offset > rangeInsideHost.getEndOffset()) {
-      offset = rangeInsideHost.getEndOffset();
-    }
-    return offset;
+
+    throw new RuntimeException("Missing offset: " + offsetInDecoded +
+                               "; text: " + rangeInsideHost.subSequence(myHost.getText()) +
+                               "; range in host " + rangeInsideHost);
   }
 
   @NotNull
