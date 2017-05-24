@@ -17,18 +17,17 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiLanguageInjectionHost;
+import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlHeredocLiteralEscaper;
+import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 /**
  * Created by hurricup on 10.06.2015.
@@ -66,7 +65,15 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
   }
 
   public boolean isIndentable() {
-    PsiElement possibleEnd = getNextSibling();
-    return possibleEnd != null && PsiUtilCore.getElementType(possibleEnd) != HEREDOC_END;
+    return PsiUtilCore.getElementType(getTerminatorElement()) == HEREDOC_END_INDENTABLE;
+  }
+
+  @Nullable
+  public PerlHeredocTerminatorElement getTerminatorElement() {
+    PsiElement terminator = getNextSibling();
+    while (terminator instanceof PsiWhiteSpace) {
+      terminator = terminator.getNextSibling();
+    }
+    return terminator instanceof PerlHeredocTerminatorElementImpl ? (PerlHeredocTerminatorElement)terminator : null;
   }
 }

@@ -18,12 +18,14 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
+import com.intellij.psi.InjectedLanguagePlaces;
+import com.intellij.psi.LanguageInjector;
+import com.intellij.psi.PsiLanguageInjectionHost;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlAnnotationInject;
+import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,11 +102,9 @@ public class PerlLanguageInjector implements LanguageInjector {
     if (host instanceof PerlHeredocElementImpl &&
         host.isValidHost() &&
         PerlSharedSettings.getInstance(host.getProject()).AUTOMATIC_HEREDOC_INJECTIONS) {
-      PsiElement terminator = host.getNextSibling();
-      while (terminator instanceof PsiWhiteSpace) {
-        terminator = terminator.getNextSibling();
-      }
-      if (terminator instanceof PerlHeredocTerminatorElementImpl) {
+      PerlHeredocTerminatorElement terminator = ((PerlHeredocElementImpl)host).getTerminatorElement();
+
+      if (terminator != null) {
         String terminatorText = terminator.getText();
         Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
 
