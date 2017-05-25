@@ -1,6 +1,9 @@
 package com.perl5.lang.perl.idea.formatter.blocks;
 
-import com.intellij.formatting.*;
+import com.intellij.formatting.Alignment;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.SpacingBuilder;
+import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -51,7 +54,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     }
 
     List<Block> blocks = new ArrayList<>();
-    getInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), null, null, Indent.getAbsoluteNoneIndent());
+    //getInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), null, null, Indent.getAbsoluteNoneIndent());
     return blocks;
   }
 
