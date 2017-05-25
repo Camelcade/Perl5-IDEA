@@ -65,6 +65,8 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
     while (sourceOffset < sourceLength) {
       char currentChar = sourceText.charAt(sourceOffset);
       if (currentChar == '\n') {
+        outChars.append(currentChar);
+        myRangesMap.put(TextRange.from(targetOffset++, 1), TextRange.from(sourceOffset, 1));
         currentLineIndent = 0;
       }
       else if (Character.isWhitespace(currentChar) && currentLineIndent < indentSize) {
@@ -83,9 +85,9 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 
         outChars.append(sourceText.subSequence(sourceOffset, sourceEnd));
 
-        TextRange sourceRange = TextRange.create(sourceOffset, sourceEnd + 1);
+        TextRange sourceRange = TextRange.create(sourceOffset, sourceEnd);
         int rangeSize = sourceEnd - sourceOffset;
-        TextRange targetRange = TextRange.from(targetOffset, rangeSize + 1);
+        TextRange targetRange = TextRange.from(targetOffset, rangeSize);
         targetOffset += rangeSize;
         myRangesMap.put(targetRange, sourceRange);
         sourceOffset = sourceEnd;
@@ -94,6 +96,7 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
       }
       sourceOffset++;
     }
+    myRangesMap.put(TextRange.from(targetOffset, 1), TextRange.from(sourceOffset, 1)); // close marker
     return true;
   }
 
