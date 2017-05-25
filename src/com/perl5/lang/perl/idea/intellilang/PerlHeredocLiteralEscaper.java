@@ -43,7 +43,7 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
   @Override
   public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
     myRangesMap.clear();
-    return myHost.getIndentSize() > 0 ? decodeIndented(rangeInsideHost, outChars) : decodeNormal(rangeInsideHost, outChars);
+    return getRealIndentSize() > 0 ? decodeIndented(rangeInsideHost, outChars) : decodeNormal(rangeInsideHost, outChars);
   }
 
   private boolean decodeNormal(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
@@ -54,7 +54,7 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
   }
 
   private boolean decodeIndented(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-    int indentSize = myHost.getIndentSize();
+    int indentSize = getRealIndentSize();
     CharSequence sourceText = rangeInsideHost.subSequence(myHost.getNode().getChars());
 
     int currentLineIndent = 0;
@@ -98,6 +98,38 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
     }
     myRangesMap.put(TextRange.from(targetOffset, 1), TextRange.from(sourceOffset, 1)); // close marker
     return true;
+  }
+
+  private int getRealIndentSize() {
+    int result = myHost.getIndentSize();
+    CharSequence buffer = myHost.getNode().getChars();
+
+    int currentOffset = 0;
+    int bufferLength = buffer.length();
+    int lineIndentSize = 0;
+    while (currentOffset < bufferLength) {
+      char currentChar = buffer.charAt(currentOffset);
+      if (currentChar == '\n') {
+        lineIndentSize = 0;
+        currentOffset++;
+      }
+      else if (Character.isWhitespace(currentChar)) {
+        lineIndentSize++;
+        currentOffset++;
+      }
+      else {
+        if (lineIndentSize == 0) {
+          return 0;
+        }
+        result = Integer.min(lineIndentSize, result);
+        while (currentOffset < bufferLength && buffer.charAt(currentOffset) != '\n') {
+          currentOffset++;
+        }
+        lineIndentSize = 0;
+      }
+    }
+
+    return result;
   }
 
   @Override
