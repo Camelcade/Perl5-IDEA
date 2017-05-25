@@ -16,10 +16,23 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
 public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<PerlHeredocElementImpl> {
+
+  @Override
+  public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
+    throws IncorrectOperationException {
+    if (element.getTextLength() == range.getEndOffset() && !StringUtil.endsWith(newContent, "\n")) {
+      newContent = newContent + "\n";
+    }
+    return super.handleContentChange(element, range, newContent);
+  }
 }
