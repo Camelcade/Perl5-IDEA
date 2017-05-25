@@ -368,6 +368,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   }
 
   protected static boolean shouldCreateBlockFor(ASTNode node) {
-    return node.getElementType() != TokenType.WHITE_SPACE && node.getText().length() != 0;
+    IElementType elementType = PsiUtilCore.getElementType(node);
+    return elementType != TokenType.WHITE_SPACE && !node.getText().isEmpty() &&
+           !(HEREDOC_BODIES_TOKENSET.contains(elementType) && node.getTextLength() == 1);
   }
 }
