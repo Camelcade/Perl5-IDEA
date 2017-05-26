@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 27.02.2016.
  */
 public abstract class PerlTextContainerManipulator<T extends PsiElement> extends AbstractElementManipulator<T> {
+  @SuppressWarnings("Duplicates")
   @Override
   public T handleContentChange(@NotNull T element, @NotNull TextRange range, String newContent) throws IncorrectOperationException {
     final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
