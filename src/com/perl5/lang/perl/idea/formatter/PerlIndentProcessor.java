@@ -142,7 +142,9 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     }
 
     // defined by node
-    if (getAbsoluteUnindentableTokens().contains(nodeType) || parent == null || grandParent == null && nodeType != HEREDOC_END_INDENTABLE) {
+    if (getAbsoluteUnindentableTokens().contains(nodeType) ||
+        parent == null ||
+        grandParent == null && nodeType != HEREDOC_END_INDENTABLE && !HEREDOC_BODIES_TOKENSET.contains(nodeType)) {
       return Indent.getAbsoluteNoneIndent();
     }
 
