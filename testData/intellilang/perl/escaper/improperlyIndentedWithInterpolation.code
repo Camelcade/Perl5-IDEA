@@ -1,0 +1,6 @@
+{
+<<~ "EOM";
+    some <caret> $somevar multi
+          line
+       EOM
+}

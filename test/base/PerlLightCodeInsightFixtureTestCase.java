@@ -285,13 +285,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
         PsiFile file = myFixture.getFile();
         TextRange rangeToUse = file.getTextRange();
         CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
-        // 	CodeStyleManager.getInstance(getProject()).reformat(myFixture.getFile());
       }
     }.execute();
 
     String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
-    //		myFixture.checkResultByFile(resultFileName);
   }
 
   public static Application getApplication() {

@@ -1,0 +1,10 @@
+{
+<<~ "EOM";
+
+
+  some <caret> multi
+
+          line
+
+    EOM
+}

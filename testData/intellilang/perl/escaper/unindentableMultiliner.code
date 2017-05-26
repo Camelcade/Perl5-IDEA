@@ -1,0 +1,4 @@
+<<EOM;
+  one <caret> line
+    two lines
+EOM

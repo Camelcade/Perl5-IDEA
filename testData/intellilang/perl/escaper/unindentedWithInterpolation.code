@@ -1,0 +1,4 @@
+<<~ "EOM";
+  some <caret> $variable here
+    too
+EOM

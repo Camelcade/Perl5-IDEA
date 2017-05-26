@@ -1,0 +1,10 @@
+{
+    <<~EOM;
+    <html>
+    <div>
+        <div>
+        </div>
+    </div>
+    </html>
+    EOM
+}

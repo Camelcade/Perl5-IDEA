@@ -1,0 +1,5 @@
+{
+    <<EOM;
+some text
+EOM
+}

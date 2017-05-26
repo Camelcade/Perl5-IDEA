@@ -1,0 +1,3 @@
+<<"EOM";
+  one <caret> $var liner
+EOM
