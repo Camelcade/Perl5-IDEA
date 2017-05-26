@@ -9,6 +9,14 @@ public class PerlSmartkeyTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/smartkey/perl";
   }
 
+  public void testCommentMiddle() {
+    doTestEnter();
+  }
+
+  public void testCommentMiddleIndented() {
+    doTestEnter();
+  }
+
   public void testHeredocCloseBare() { doTestEnter(); }
 
   public void testHeredocClosed() { doTestEnter(); }
