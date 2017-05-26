@@ -160,7 +160,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                 {
                   PerlHeredocOpener lastOpener = lastOpenerPointer.getElement();
                   if (lastOpener == null) {
-                    //										System.err.println("Last opener invalidated on reparse");
                     return Result.Continue;
                   }
 
@@ -173,7 +172,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                     }
                   }
                   else {
-                    //										System.err.println("Unable to find last opener reference");
                     return Result.Continue;
                   }
                 }
@@ -184,7 +182,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                 currentOpener = currentOpenerPointer.getElement();
 
                 if (currentOpener == null) {
-                  //									System.err.println("Opener invalidated on reparse after insertion");
                   return Result.Continue;
                 }
 
@@ -194,7 +191,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                   lastOpenerPointer = currentOpenerPointer;
                 }
                 else {
-                  //									System.err.println("Unable to find marker");
                   return Result.Continue;
                 }
               }
@@ -202,27 +198,6 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
           }
         }
       }
-      //			else if (offset > 0 && !(currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment))
-      //			{
-      //				Document document = file.getViewProvider().getDocument();
-      //
-      //				if (document != null)
-      //				{
-      //					int currentLine = document.getLineNumber(offset);
-      //					if (currentLine > 0)
-      //					{
-      //						int prevLineOffset = document.getLineEndOffset(currentLine - 1);
-      //						currentElement = file.findElementAt(prevLineOffset);
-      //
-      //						if (currentElement instanceof PsiWhiteSpace && PsiUtilCore.getElementType(currentElement.getPrevSibling()) == COMMENT_LINE)
-      //						{
-      //							document.insertString(offset, "# ");
-      //						}
-      //					}
-      //				}
-      //
-      //			}
-
     }
     return Result.Continue;
   }
