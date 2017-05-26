@@ -45,11 +45,15 @@ public class PerlFormatterTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testIndentedHeredocShiftLeft() {doFormatTest();}
 
+  public void testIndentedHeredocShiftLeftEmpty() {doFormatTest();}
+
   public void testIndentedHeredocShiftLeftWithBadString() {doFormatTest();}
 
   public void testIndentedHeredocShiftLeftWithLeadingNewLine() {doFormatTest();}
 
   public void testIndentedHeredocShiftRight() {doFormatTest();}
+
+  public void testIndentedHeredocShiftRightEmpty() {doFormatTest();}
 
   public void testIndentedHeredocShiftRightWithBadString() {doFormatTest();}
 
