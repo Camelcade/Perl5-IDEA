@@ -1,0 +1,657 @@
+PerlVariableReference at (27,32); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (45,48); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 35 in indentableHeredocs.pl
+
+PerlVariableReference at (51,56); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (69,72); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 59 in indentableHeredocs.pl
+
+PerlVariableReference at (75,80); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (93,96); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 83 in indentableHeredocs.pl
+
+PerlVariableReference at (99,104); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (118,121); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 107 in indentableHeredocs.pl
+
+PerlVariableReference at (124,129); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (143,146); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 132 in indentableHeredocs.pl
+
+PerlVariableReference at (149,154); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (168,171); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 157 in indentableHeredocs.pl
+
+PerlVariableReference at (174,179); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (190,193); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 182 in indentableHeredocs.pl
+
+PerlVariableReference at (196,201); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (213,216); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 204 in indentableHeredocs.pl
+
+PerlVariableReference at (232,237); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (251,254); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 240 in indentableHeredocs.pl
+
+PerlVariableReference at (257,262); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (276,279); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 265 in indentableHeredocs.pl
+
+PerlVariableReference at (282,287); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (301,304); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 290 in indentableHeredocs.pl
+
+PerlVariableReference at (307,312); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (327,330); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 315 in indentableHeredocs.pl
+
+PerlVariableReference at (333,338); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (353,356); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 341 in indentableHeredocs.pl
+
+PerlVariableReference at (359,364); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (379,382); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 367 in indentableHeredocs.pl
+
+PerlVariableReference at (385,390); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (402,405); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 393 in indentableHeredocs.pl
+
+PerlVariableReference at (408,413); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (426,429); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 416 in indentableHeredocs.pl
+
+PerlVariableReference at (463,468); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (494,497); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 471 in indentableHeredocs.pl
+
+PerlVariableReference at (500,505); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (531,534); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 508 in indentableHeredocs.pl
+
+PerlVariableReference at (537,542); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (568,571); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 545 in indentableHeredocs.pl
+
+PerlVariableReference at (574,579); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (606,609); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 582 in indentableHeredocs.pl
+
+PerlVariableReference at (612,617); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (644,647); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 620 in indentableHeredocs.pl
+
+PerlVariableReference at (650,655); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (682,685); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 658 in indentableHeredocs.pl
+
+PerlVariableReference at (688,693); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (717,720); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 696 in indentableHeredocs.pl
+
+PerlVariableReference at (723,728); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (753,756); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 731 in indentableHeredocs.pl
+
+PerlVariableReference at (792,797); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (830,833); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 800 in indentableHeredocs.pl
+
+PerlVariableReference at (836,841); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (863,868); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (874,877); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 844 in indentableHeredocs.pl
+
+PerlVariableReference at (880,885); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (907,912); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (918,921); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 888 in indentableHeredocs.pl
+
+PerlVariableReference at (924,929); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (963,966); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 932 in indentableHeredocs.pl
+
+PerlVariableReference at (969,974); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (997,1002); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1008,1011); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 977 in indentableHeredocs.pl
+
+PerlVariableReference at (1014,1019); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (1042,1047); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1053,1056); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1022 in indentableHeredocs.pl
+
+PerlVariableReference at (1059,1064); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (1084,1089); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1095,1098); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1067 in indentableHeredocs.pl
+
+PerlVariableReference at (1101,1106); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1138,1141); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1109 in indentableHeredocs.pl
+
+PerlVariableReference at (1177,1182); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1228,1231); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1185 in indentableHeredocs.pl
+
+PerlVariableReference at (1234,1239); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1285,1288); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1242 in indentableHeredocs.pl
+
+PerlVariableReference at (1291,1296); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1342,1345); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1299 in indentableHeredocs.pl
+
+PerlVariableReference at (1348,1353); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1400,1403); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1356 in indentableHeredocs.pl
+
+PerlVariableReference at (1406,1411); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1458,1461); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1414 in indentableHeredocs.pl
+
+PerlVariableReference at (1464,1469); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1516,1519); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1472 in indentableHeredocs.pl
+
+PerlVariableReference at (1522,1527); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1571,1574); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1530 in indentableHeredocs.pl
+
+PerlVariableReference at (1577,1582); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1627,1630); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1585 in indentableHeredocs.pl
+
+PerlVariableReference at (1668,1673); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1726,1729); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1676 in indentableHeredocs.pl
+
+PerlVariableReference at (1732,1737); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (1759,1764); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1790,1793); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1740 in indentableHeredocs.pl
+
+PerlVariableReference at (1796,1801); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (1823,1828); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1854,1857); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1804 in indentableHeredocs.pl
+
+PerlVariableReference at (1860,1865); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1919,1922); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1868 in indentableHeredocs.pl
+
+PerlVariableReference at (1925,1930); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (1953,1958); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (1984,1987); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1933 in indentableHeredocs.pl
+
+PerlVariableReference at (1990,1995); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (2018,2023); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2049,2052); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 1998 in indentableHeredocs.pl
+
+PerlVariableReference at (2055,2060); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (2080,2085); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2111,2114); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2063 in indentableHeredocs.pl
+
+PerlVariableReference at (2117,2122); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2174,2177); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2125 in indentableHeredocs.pl
+
+PerlVariableReference at (2216,2221); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2238,2241); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2224 in indentableHeredocs.pl
+
+PerlVariableReference at (2248,2253); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2270,2273); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2256 in indentableHeredocs.pl
+
+PerlVariableReference at (2280,2285); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2302,2305); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2288 in indentableHeredocs.pl
+
+PerlVariableReference at (2312,2317); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2335,2338); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2320 in indentableHeredocs.pl
+
+PerlVariableReference at (2345,2350); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2368,2371); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2353 in indentableHeredocs.pl
+
+PerlVariableReference at (2378,2383); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2401,2404); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2386 in indentableHeredocs.pl
+
+PerlVariableReference at (2411,2416); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2431,2434); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2419 in indentableHeredocs.pl
+
+PerlVariableReference at (2441,2446); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2462,2465); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2449 in indentableHeredocs.pl
+
+PerlVariableReference at (2489,2494); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2512,2515); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2497 in indentableHeredocs.pl
+
+PerlVariableReference at (2522,2527); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2545,2548); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2530 in indentableHeredocs.pl
+
+PerlVariableReference at (2555,2560); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2578,2581); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2563 in indentableHeredocs.pl
+
+PerlVariableReference at (2588,2593); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2612,2615); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2596 in indentableHeredocs.pl
+
+PerlVariableReference at (2622,2627); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2646,2649); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2630 in indentableHeredocs.pl
+
+PerlVariableReference at (2656,2661); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2680,2683); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2664 in indentableHeredocs.pl
+
+PerlVariableReference at (2690,2695); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2711,2714); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2698 in indentableHeredocs.pl
+
+PerlVariableReference at (2721,2726); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2743,2746); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2729 in indentableHeredocs.pl
+
+PerlVariableReference at (2788,2793); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2827,2830); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2796 in indentableHeredocs.pl
+
+PerlVariableReference at (2837,2842); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2876,2879); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2845 in indentableHeredocs.pl
+
+PerlVariableReference at (2886,2891); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2925,2928); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2894 in indentableHeredocs.pl
+
+PerlVariableReference at (2935,2940); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (2975,2978); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2943 in indentableHeredocs.pl
+
+PerlVariableReference at (2985,2990); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3025,3028); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 2993 in indentableHeredocs.pl
+
+PerlVariableReference at (3035,3040); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3075,3078); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3043 in indentableHeredocs.pl
+
+PerlVariableReference at (3085,3090); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3122,3125); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3093 in indentableHeredocs.pl
+
+PerlVariableReference at (3132,3137); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3170,3173); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3140 in indentableHeredocs.pl
+
+PerlVariableReference at (3217,3222); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3263,3266); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3225 in indentableHeredocs.pl
+
+PerlVariableReference at (3273,3278); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (3304,3309); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3319,3322); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3281 in indentableHeredocs.pl
+
+PerlVariableReference at (3329,3334); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (3360,3365); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3375,3378); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3337 in indentableHeredocs.pl
+
+PerlVariableReference at (3385,3390); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3432,3435); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3393 in indentableHeredocs.pl
+
+PerlVariableReference at (3442,3447); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (3474,3479); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3489,3492); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3450 in indentableHeredocs.pl
+
+PerlVariableReference at (3499,3504); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (3531,3536); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3546,3549); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3507 in indentableHeredocs.pl
+
+PerlVariableReference at (3556,3561); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (3585,3590); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3600,3603); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3564 in indentableHeredocs.pl
+
+PerlVariableReference at (3610,3615); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3655,3658); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3618 in indentableHeredocs.pl
+
+PerlVariableReference at (3702,3707); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3761,3764); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3710 in indentableHeredocs.pl
+
+PerlVariableReference at (3771,3776); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3830,3833); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3779 in indentableHeredocs.pl
+
+PerlVariableReference at (3840,3845); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3899,3902); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3848 in indentableHeredocs.pl
+
+PerlVariableReference at (3909,3914); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (3969,3972); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3917 in indentableHeredocs.pl
+
+PerlVariableReference at (3979,3984); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4039,4042); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 3987 in indentableHeredocs.pl
+
+PerlVariableReference at (4049,4054); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4109,4112); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4057 in indentableHeredocs.pl
+
+PerlVariableReference at (4119,4124); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4176,4179); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4127 in indentableHeredocs.pl
+
+PerlVariableReference at (4186,4191); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4244,4247); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4194 in indentableHeredocs.pl
+
+PerlVariableReference at (4293,4298); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4359,4362); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4301 in indentableHeredocs.pl
+
+PerlVariableReference at (4369,4374); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (4400,4405); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4439,4442); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4377 in indentableHeredocs.pl
+
+PerlVariableReference at (4449,4454); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (4480,4485); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4519,4522); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4457 in indentableHeredocs.pl
+
+PerlVariableReference at (4529,4534); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4596,4599); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4537 in indentableHeredocs.pl
+
+PerlVariableReference at (4606,4611); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (4638,4643); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4677,4680); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4614 in indentableHeredocs.pl
+
+PerlVariableReference at (4687,4692); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (4719,4724); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4758,4761); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4695 in indentableHeredocs.pl
+
+PerlVariableReference at (4768,4773); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlVariableReference at (4797,4802); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4836,4839); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4776 in indentableHeredocs.pl
+
+PerlVariableReference at (4846,4851); text in range: 'query' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 3 in indentableHeredocs.pl
+
+PerlHeredocReference at (4911,4914); text in range: 'SQL' => 1 results:
+	Perl5: HEREDOC_OPENER at 4854 in indentableHeredocs.pl
+
+PerlHeredocReference at (4973,4988); text in range: 'END_OF_AUTOLOAD' => 1 results:
+	Perl5: HEREDOC_OPENER at 4950 in indentableHeredocs.pl
+
+PerlHeredocReference at (5038,5042); text in range: '=end' => 1 results:
+	Perl5: HEREDOC_OPENER at 5001 in indentableHeredocs.pl
+
+PerlHeredocReference at (5081,5086); text in range: '!END!' => 1 results:
+	Perl5: HEREDOC_OPENER at 5050 in indentableHeredocs.pl
+
+PerlHeredocReference at (5111,5115); text in range: 'TEST' => 1 results:
+	Perl5: HEREDOC_OPENER at 5094 in indentableHeredocs.pl
+
+PerlHeredocReference at (5155,5172); text in range: 'TEST WITH SPACE !' => 1 results:
+	Perl5: HEREDOC_OPENER at 5123 in indentableHeredocs.pl
+
+PerlHeredocReference at (5212,5229); text in range: 'TEST WITH SPACE !' => 1 results:
+	Perl5: HEREDOC_OPENER at 5180 in indentableHeredocs.pl
+
+PerlHeredocReference at (5269,5286); text in range: 'TEST WITH SPACE !' => 1 results:
+	Perl5: HEREDOC_OPENER at 5237 in indentableHeredocs.pl
+

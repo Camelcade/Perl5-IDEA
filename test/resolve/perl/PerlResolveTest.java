@@ -57,6 +57,14 @@ public class PerlResolveTest extends PerlResolveTestCase {
     doTestWithFileCheck();
   }
 
+  public void testIndentableHeredocs() {
+    doTestWithFileCheck();
+  }
+
+  public void testIndentableHeredocSequentional() {
+    doTestWithFileCheck();
+  }
+
   public void testVariablesAndElements() {
     doTestWithFileCheck();
   }
