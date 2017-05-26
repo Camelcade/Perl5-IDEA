@@ -5,9 +5,8 @@ import com.intellij.formatting.Block;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -43,7 +42,8 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
   @Override
   public boolean isLeaf() {
-    return !getPsi().isValidHost();
+    PerlHeredocElementImpl psi = getPsi();
+    return InjectedLanguageManager.getInstance(psi.getProject()).getInjectedPsiFiles(psi) == null;
   }
 
   @NotNull
@@ -73,28 +73,43 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
       return trimmedRange;
     }
 
-    PsiElement run = heredocElement.getNextSibling();
-    while (run instanceof PsiWhiteSpace) {
-      run = run.getNextSibling();
-    }
-
-    if (!(run instanceof PerlHeredocTerminatorElement)) {
+    PerlHeredocTerminatorElement terminatorElement = heredocElement.getTerminatorElement();
+    if (terminatorElement == null) {
       return trimmedRange;
     }
 
     // perlop: Tabs and spaces can be mixed, but are matched exactly. One tab will not be equal to 8 spaces!
-    int spacesBeforeTerminator = run.getTextRange().getStartOffset() - trimmedRange.getEndOffset() - 1;
+    int spacesBeforeTerminator = terminatorElement.getTextRange().getStartOffset() - trimmedRange.getEndOffset() - 1;
     if (spacesBeforeTerminator == 0) {
       return trimmedRange;
     }
 
+    CharSequence nodeChars = trimmedRange.shiftRight(-myNode.getStartOffset()).subSequence(myNode.getChars());
+    int effectiveCharsLength = nodeChars.length();
     int realSpaces;
-    for (realSpaces = 0; realSpaces < spacesBeforeTerminator; realSpaces++) {
-      if (!Character.isWhitespace(myNode.getChars().charAt(realSpaces))) {
-        break;
+    int offset = 0;
+
+    OUTER:
+    while (offset < effectiveCharsLength) {
+      for (realSpaces = 0; realSpaces <= spacesBeforeTerminator; realSpaces++) {
+
+        if (realSpaces == spacesBeforeTerminator) {
+          break OUTER;
+        }
+
+        char currentChar = nodeChars.charAt(offset);
+        if (currentChar == '\n') {
+          offset++;
+          break;
+        }
+        else if (!Character.isWhitespace(currentChar)) {
+          break OUTER;
+        }
+        else {
+          offset++;
+        }
       }
     }
-
-    return TextRange.create(trimmedRange.getStartOffset() + realSpaces, trimmedRange.getEndOffset());
+    return TextRange.create(trimmedRange.getStartOffset() + offset, trimmedRange.getEndOffset());
   }
 }
