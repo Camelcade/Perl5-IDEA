@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
@@ -115,7 +116,7 @@ public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implem
 
   @Override
   public PsiLanguageInjectionHost updateText(@NotNull String text) {
-    return null;
+    return ElementManipulators.handleContentChange(this, text);
   }
 
   @NotNull
