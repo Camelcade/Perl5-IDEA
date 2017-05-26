@@ -1,0 +1,10 @@
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+      PsiElement(Perl5: say)('say')
+      PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+        PsiElement(Perl5: heredoc<<)('<<~')
+        PsiPerlStringBareImpl(Perl5: STRING_BARE)
+          PerlStringContentElementImpl(Perl5: STRING_CONTENT)('EOM')
+  PerlHeredocElementImpl(HEREDOC_QQ)
+    PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\nthis is a text\n\nsome')

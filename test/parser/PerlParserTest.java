@@ -149,6 +149,18 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  public void testIndentableHeredocs() {
+    doTest();
+  }
+
+  public void testIndentableHeredocSequentional() {
+    doTest();
+  }
+
+  public void testIndentableHeredocUnclosed() {
+    doTest();
+  }
+
   public void testHeredocUnclosedWithEmptyMarker() {
     doTest();
   }
