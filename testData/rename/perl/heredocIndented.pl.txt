@@ -1,0 +1,8 @@
+{
+    <<~NewName;
+        something $var
+        blah
+    NewName
+
+    say 'bhah'
+}

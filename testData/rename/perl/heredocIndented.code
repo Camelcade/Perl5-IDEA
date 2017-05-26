@@ -1,0 +1,8 @@
+{
+    <<~EOM;
+        something $var
+        blah
+    E<caret>OM
+
+    say 'bhah'
+}

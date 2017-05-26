@@ -17,6 +17,7 @@
 package rename;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import com.intellij.testFramework.UsefulTestCase;
 
 /**
  * Created by hurricup on 03.11.2016.
@@ -26,6 +27,24 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
   protected String getTestDataPath() {
     return "testData/rename/perl";
   }
+
+  public void testHeredocBare() {doTest();}
+
+  public void testHeredocDQ() {doTest();}
+
+  public void testHeredocDQSpaced() {doTest();}
+
+  public void testHeredocEscaped() {doTest();}
+
+  public void testHeredocIndented() {doTest();}
+
+  public void testHeredocSQ() {doTest();}
+
+  public void testHeredocSQSpaced() {doTest();}
+
+  public void testHeredocXQ() {doTest();}
+
+  public void testHeredocXQSpaced() {doTest();}
 
   public void testGlobRename() {
     doTest();
@@ -65,7 +84,7 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
 
   protected void doTest(String newName) {
     initWithFileSmart();
-    String checkFileName = getTestName(true) + "_after.code";
-    myFixture.testRename(checkFileName, newName);
+    myFixture.renameElementAtCaret(newName);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 }

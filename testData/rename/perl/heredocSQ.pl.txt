@@ -1,0 +1,5 @@
+<<'NewName';
+  this
+  $var
+  text
+NewName
