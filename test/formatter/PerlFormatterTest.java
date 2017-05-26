@@ -23,7 +23,7 @@ import com.perl5.lang.perl.PerlLanguage;
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
+public class PerlFormatterTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl";
@@ -42,4 +42,16 @@ public class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
   public void testIndentedHeredoc() {
     doFormatTest();
   }
+
+  public void testIndentedHeredocShiftLeft() {doFormatTest();}
+
+  public void testIndentedHeredocShiftLeftWithBadString() {doFormatTest();}
+
+  public void testIndentedHeredocShiftLeftWithLeadingNewLine() {doFormatTest();}
+
+  public void testIndentedHeredocShiftRight() {doFormatTest();}
+
+  public void testIndentedHeredocShiftRightWithBadString() {doFormatTest();}
+
+  public void testIndentedHeredocShiftRightWithLeadingNewLine() {doFormatTest();}
 }

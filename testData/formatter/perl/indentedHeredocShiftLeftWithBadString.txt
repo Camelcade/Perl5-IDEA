@@ -1,0 +1,5 @@
+<<~EOM;
+    this is a test
+bad string
+    multiline
+EOM

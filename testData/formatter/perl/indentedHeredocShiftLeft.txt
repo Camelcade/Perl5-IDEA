@@ -1,0 +1,4 @@
+<<~EOM;
+    this is a test
+    multiline
+EOM
