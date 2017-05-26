@@ -65,6 +65,10 @@ intellij {
     updateSinceUntilBuild = false
 }
 
+runIdea{
+    systemProperty("idea.ProcessCanceledException", "disabled")
+}
+
 test {
     doFirst {
         systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
