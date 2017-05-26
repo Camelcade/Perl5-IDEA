@@ -1,0 +1,3 @@
+<<\EOM;<caret>
+
+say 'something';

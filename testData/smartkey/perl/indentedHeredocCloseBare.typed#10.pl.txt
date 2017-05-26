@@ -1,0 +1,9 @@
+{
+  <<~EOM;
+      
+EOM
+
+
+
+  say 'something';
+}

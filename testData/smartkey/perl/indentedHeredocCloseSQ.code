@@ -1,0 +1,6 @@
+{
+  <<~ 'EOM';<caret>
+
+
+  say 'something';
+}

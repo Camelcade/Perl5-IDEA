@@ -116,8 +116,12 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
               if (inboundReference != null) {
                 boolean falseAlarm = false;
 
-                PsiElement run = inboundReference.getElement();
-                if (run != null && (run = run.getPrevSibling()) instanceof PerlHeredocElementImpl) {
+                PsiElement run = inboundReference.getElement().getPrevSibling();
+                while (run instanceof PsiWhiteSpace) {
+                  run = run.getPrevSibling();
+                }
+
+                if (run instanceof PerlHeredocElementImpl) {
                   Pattern openerPattern = EMPTY_OPENER_PATTERN;
                   if (!emptyOpener) {
                     openerPattern = Pattern.compile("<<~?(\\s*)(?:" +
@@ -130,7 +134,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                     );
                   }
 
-                  falseAlarm = openerPattern.matcher(run.getText()).find();
+                  falseAlarm = openerPattern.matcher(run.getNode().getChars()).find();
                 }
 
                 if (falseAlarm) // looks like overlapping heredocs

@@ -1,0 +1,7 @@
+<<EOM;
+
+EOM
+
+
+
+say 'something';
