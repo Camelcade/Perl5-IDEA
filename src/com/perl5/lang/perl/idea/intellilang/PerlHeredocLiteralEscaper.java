@@ -100,6 +100,10 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
     return true;
   }
 
+  /**
+   * @return real indentaion of indentable heredoc. Handles cases of improperly formatted heredocs, where content is less indented
+   * than terminator
+   */
   private int getRealIndentSize() {
     int result = myHost.getIndentSize();
     CharSequence buffer = myHost.getNode().getChars();
