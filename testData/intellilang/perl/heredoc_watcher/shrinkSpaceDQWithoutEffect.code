@@ -1,0 +1,8 @@
+
+{
+  <<~"HTML";
+ this
+     is $var
+      a text
+  HTML
+}

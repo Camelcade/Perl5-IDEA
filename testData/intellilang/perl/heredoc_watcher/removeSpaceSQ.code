@@ -1,0 +1,8 @@
+
+{
+  <<~HTML;
+  this
+    is
+     a text
+ HTML
+}

@@ -21,6 +21,7 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VirtualFileListener;
+import com.intellij.psi.PsiManager;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
@@ -86,6 +87,7 @@ public class Perl5ProjectComponent implements ProjectComponent {
     }
 
     StartupManager.getInstance(myProject).runWhenProjectIsInitialized(FileContentUtil::reparseOpenedFiles);
+    PsiManager.getInstance(myProject).addPsiTreeChangeListener(new Perl5HeredocInjectionsWatcher(), myProject);
 
     // called when project is opened
     //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
