@@ -15,12 +15,14 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
+import org.junit.Ignore;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 28.05.2017.
  */
+@Ignore
 public class PerlHeredocInjectionWatcherTest extends PerlLightCodeInsightFixtureTestCase {
 
   private boolean myInterpolation;
