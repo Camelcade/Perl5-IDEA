@@ -98,4 +98,54 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 
     return terminatorElement.getTextRange().getStartOffset() - getTextRange().getEndOffset();
   }
+
+  /**
+   * @return real indentaion of heredoc. Handles cases of improperly formatted heredocs, where content is less indented
+   * than terminator; returns 0 for unindentable heredocs
+   */
+  public int getRealIndentSize() {
+    int explicitIndentSize = getIndentSize();
+    if (explicitIndentSize == 0) {
+      return 0;
+    }
+    return calcRealIndent(getNode().getChars(), explicitIndentSize);
+  }
+
+  /**
+   * Calculates indentation for a buffer
+   *
+   * @param buffer         buffer with heredoc text
+   * @param explicitIndent explicit indent, defined by terminator indentation
+   * @return min of explicit or implicit indents
+   */
+  public static int calcRealIndent(@NotNull CharSequence buffer, int explicitIndent) {
+    int result = explicitIndent;
+    int currentOffset = 0;
+    int bufferLength = buffer.length();
+    int lineIndentSize = 0;
+    while (currentOffset < bufferLength) {
+      char currentChar = buffer.charAt(currentOffset);
+      if (currentChar == '\n') {
+        lineIndentSize = 0;
+        currentOffset++;
+      }
+      else if (Character.isWhitespace(currentChar)) {
+        lineIndentSize++;
+        currentOffset++;
+      }
+      else {
+        if (lineIndentSize == 0) {
+          return 0;
+        }
+        result = Integer.min(lineIndentSize, result);
+        while (currentOffset < bufferLength && buffer.charAt(currentOffset) != '\n') {
+          currentOffset++;
+        }
+        lineIndentSize = 0;
+      }
+    }
+
+    return result;
+  }
+
 }

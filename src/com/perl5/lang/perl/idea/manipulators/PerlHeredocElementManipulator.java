@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
@@ -38,35 +39,50 @@ public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<
       sb.append("\n");
     }
 
-    int indentSize = element.getIndentSize();
-    if (indentSize > 0) {
-      CommonCodeStyleSettings.IndentOptions indentOptions =
-        CodeStyleSettingsManager.getInstance(element.getProject()).getCurrentSettings().
-          getCommonSettings(PerlLanguage.INSTANCE)
-          .getIndentOptions();
-
-      String indenter = StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
-      int currentSourceOffset = 0;
-      int currentLineStart = 0;
-      int targetOffset = 0;
-      sb.insert(targetOffset, indenter);
-      targetOffset += indentSize;
-      int sourceLength = newContent.length();
-      while (currentSourceOffset < sourceLength) {
-        if (newContent.charAt(currentSourceOffset++) == '\n' && currentSourceOffset < sourceLength) {
-          int lineSize = currentSourceOffset - currentLineStart;
-          if (lineSize > 1) {
-            sb.insert(targetOffset + lineSize, indenter);
-            targetOffset += lineSize + indentSize;
-          }
-          else {
-            targetOffset += lineSize;
-          }
-          currentLineStart = currentSourceOffset;
-        }
-      }
+    Project project = element.getProject();
+    if (range.getStartOffset() > 0) {
+      sb.insert(0, getIndenter(project, range.getStartOffset()));
+      range = TextRange.from(0, range.getEndOffset());
     }
 
+    int indentSize = element.getIndentSize();
+    int contentIndentSize = PerlHeredocElementImpl.calcRealIndent(sb, indentSize);
+    if (indentSize > contentIndentSize) {
+      indentContent(project, sb, indentSize - contentIndentSize);
+    }
     return super.handleContentChange(element, range, sb.toString());
+  }
+
+  @NotNull
+  private static String getIndenter(@NotNull Project project, int indentSize) {
+    CommonCodeStyleSettings.IndentOptions indentOptions =
+      CodeStyleSettingsManager.getInstance(project).getCurrentSettings().
+        getCommonSettings(PerlLanguage.INSTANCE)
+        .getIndentOptions();
+
+    return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
+  }
+
+  private static void indentContent(@NotNull Project project, @NotNull StringBuilder sb, int indentSize) {
+    String indenter = getIndenter(project, indentSize);
+    int offset = 0;
+    int currentLineStart = 0;
+    boolean hasNonSpaces = false;
+
+    while (offset < sb.length()) {
+      char currentChar = sb.charAt(offset++);
+      if (currentChar == '\n') {
+        int lineSize = offset - currentLineStart;
+        if (hasNonSpaces && lineSize > 0) {
+          sb.insert(currentLineStart, indenter);
+          offset += indentSize;
+        }
+        currentLineStart = offset;
+        hasNonSpaces = false;
+      }
+      else if (!hasNonSpaces && !Character.isWhitespace(currentChar)) {
+        hasNonSpaces = true;
+      }
+    }
   }
 }
