@@ -31,7 +31,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvide
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -43,6 +42,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import static com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector.LANGUAGE_MAP;
 
 /**
  * Created by hurricup on 24.01.2016.
@@ -223,7 +224,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // injectable markers
-    for (Map.Entry<String, Language> entry : PerlLanguageInjector.LANGUAGE_MAP.entrySet()) {
+    for (Map.Entry<String, Language> entry : LANGUAGE_MAP.entrySet()) {
       String abbreviation = entry.getKey();
       Language language = entry.getValue();
 
@@ -254,7 +255,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           String openerName = o.getName();
           if (StringUtil.isNotEmpty(openerName) &&
               !HEREDOC_OPENERS_CACHE.contains(openerName) &&
-              !PerlLanguageInjector.LANGUAGE_MAP.containsKey(openerName)) {
+              !LANGUAGE_MAP.containsKey(openerName)) {
             HEREDOC_OPENERS_CACHE.add(openerName);
             resultSet.addElement(LookupElementBuilder.create(openerName));
           }

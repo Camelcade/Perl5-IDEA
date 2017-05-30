@@ -17,17 +17,6 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.InjectedLanguagePlaces;
-import com.intellij.psi.LanguageInjector;
-import com.intellij.psi.PsiLanguageInjectionHost;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlAnnotationInject;
-import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +24,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 12.06.2015.
  */
-public class PerlLanguageInjector implements LanguageInjector {
+public abstract class AbstractPerlLanguageInjector {
   public static final Map<String, Language> LANGUAGE_MAP = new HashMap<String, Language>();
 
   protected static final Map<String, String> ACCEPTABLE_LANGUAGES = new HashMap<String, String>();
@@ -93,41 +82,6 @@ public class PerlLanguageInjector implements LanguageInjector {
 
       if (languageKey != null && LANGUAGE_MAP.get(languageKey) == null) {
         LANGUAGE_MAP.put(languageKey, language);
-      }
-    }
-  }
-
-  @Override
-  public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
-    if (host instanceof PerlHeredocElementImpl &&
-        host.isValidHost() &&
-        PerlSharedSettings.getInstance(host.getProject()).AUTOMATIC_HEREDOC_INJECTIONS) {
-      PerlHeredocTerminatorElement terminator = ((PerlHeredocElementImpl)host).getTerminatorElement();
-
-      if (terminator != null) {
-        String terminatorText = terminator.getText();
-        Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
-
-        if (mappedLanguage != null) {
-          injectionPlacesRegistrar.addPlace(mappedLanguage, new TextRange(0, host.getTextLength()), null, null);
-        }
-      }
-    }
-    else if (host instanceof PerlString && host.isValidHost()) {
-      // before element
-      PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnyAnnotationByClass(host, PerlAnnotationInject.class);
-
-      if (injectAnnotation != null) {
-        String languageMarker = injectAnnotation.getLanguageMarker();
-        if (languageMarker != null) {
-          Language targetLanguage = LANGUAGE_MAP.get(languageMarker);
-          if (targetLanguage != null) {
-            TextRange contentRange = ((PerlString)host).getContentTextRangeInParent();
-            if (!contentRange.isEmpty()) {
-              injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
-            }
-          }
-        }
       }
     }
   }

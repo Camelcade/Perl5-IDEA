@@ -19,7 +19,7 @@ package completion;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
-import com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector;
+import com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector;
 import com.perl5.lang.perl.util.*;
 
 import java.io.IOException;
@@ -70,7 +70,7 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
   }
 
   protected List<String> getLanguageMarkers() {
-    ArrayList<String> languageMarkers = new ArrayList<>(PerlLanguageInjector.LANGUAGE_MAP.keySet());
+    ArrayList<String> languageMarkers = new ArrayList<>(AbstractPerlLanguageInjector.LANGUAGE_MAP.keySet());
     assert !languageMarkers.isEmpty();
     return languageMarkers;
   }

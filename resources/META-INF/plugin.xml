@@ -198,7 +198,8 @@
     <defaultTemplatePropertiesProvider
         implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
-    <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlLanguageInjector"/>
+    <languageInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlStringLanguageInjector"/>
+    <multiHostInjector implementation="com.perl5.lang.perl.idea.intellilang.PerlHeredocLanguageInjector"/>
 
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
