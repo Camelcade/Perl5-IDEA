@@ -47,16 +47,12 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
       range = TextRange.from(0, range.getEndOffset());
     }
 
-    int indentSize = element.getIndentSize();
-    int contentIndentSize = PerlHeredocElementImpl.calcRealIndent(sb, indentSize);
-    if (indentSize > contentIndentSize) {
-      indentContent(project, sb, indentSize - contentIndentSize);
-    }
+    normalizeIndentation(project, sb, element.getRealIndentSize());
 
     String newElementText = range.replace(element.getText(), sb.toString());
     PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
 
-    return replacement == null ? element : (PerlHeredocElementImpl)element.replace(replacement);
+    return (PerlHeredocElementImpl)element.replace(replacement);
   }
 
   @NotNull
@@ -69,25 +65,31 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
     return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
   }
 
-  private static void indentContent(@NotNull Project project, @NotNull StringBuilder sb, int indentSize) {
-    String indenter = getIndenter(project, indentSize);
+  private static void normalizeIndentation(@NotNull Project project, @NotNull StringBuilder sb, int indentSize) {
     int offset = 0;
     int currentLineStart = 0;
+    int currentLineIndentSize = 0;
     boolean hasNonSpaces = false;
 
     while (offset < sb.length()) {
       char currentChar = sb.charAt(offset++);
       if (currentChar == '\n') {
-        int lineSize = offset - currentLineStart;
-        if (hasNonSpaces && lineSize > 0) {
-          sb.insert(currentLineStart, indenter);
-          offset += indentSize;
+        if (hasNonSpaces && currentLineIndentSize < indentSize) {
+          int indentAdjustment = indentSize - currentLineIndentSize;
+          sb.insert(currentLineStart, getIndenter(project, indentAdjustment));
+          offset += indentAdjustment;
         }
         currentLineStart = offset;
         hasNonSpaces = false;
+        currentLineIndentSize = 0;
       }
-      else if (!hasNonSpaces && !Character.isWhitespace(currentChar)) {
-        hasNonSpaces = true;
+      else if (!hasNonSpaces) {
+        if (Character.isWhitespace(currentChar)) {
+          currentLineIndentSize++;
+        }
+        else {
+          hasNonSpaces = true;
+        }
       }
     }
   }
