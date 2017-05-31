@@ -6,6 +6,7 @@ import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +25,7 @@ public class PerlHeredocLanguageInjector extends AbstractPerlLanguageInjector im
   public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement context) {
     assert context instanceof PerlHeredocElementImpl;
 
-    if (context.getTextLength() == 0) {
+    if (context.getTextLength() == 0 || !PerlSharedSettings.getInstance(context.getProject()).AUTOMATIC_HEREDOC_INJECTIONS) {
       return;
     }
 

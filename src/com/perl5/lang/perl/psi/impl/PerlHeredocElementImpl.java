@@ -41,9 +41,7 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
 
   @Override
   public boolean isValidHost() {
-    PerlSharedSettings perlSharedSettings = PerlSharedSettings.getInstance(getProject());
-    return perlSharedSettings.AUTOMATIC_HEREDOC_INJECTIONS &&
-           (perlSharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION || getChildren().length == 0);
+    return PerlSharedSettings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION || getChildren().length == 0;
   }
 
   @Override
