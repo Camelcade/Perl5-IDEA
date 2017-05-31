@@ -19,17 +19,19 @@ package com.perl5.lang.perl.idea.manipulators;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.AbstractElementManipulator;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
-public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<PerlHeredocElementImpl> {
+public class PerlHeredocElementManipulator extends AbstractElementManipulator<PerlHeredocElementImpl> {
 
   @Override
   public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
@@ -50,7 +52,11 @@ public class PerlHeredocElementManipulator extends PerlTextContainerManipulator<
     if (indentSize > contentIndentSize) {
       indentContent(project, sb, indentSize - contentIndentSize);
     }
-    return super.handleContentChange(element, range, sb.toString());
+
+    String newElementText = range.replace(element.getText(), sb.toString());
+    PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
+
+    return replacement == null ? element : (PerlHeredocElementImpl)element.replace(replacement);
   }
 
   @NotNull

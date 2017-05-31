@@ -20,16 +20,23 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_QQ;
 
 public class PerlElementFactory {
   public static PsiElement createNewLine(Project project) {
@@ -63,6 +70,57 @@ public class PerlElementFactory {
     PerlNamespaceDefinition def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinition.class);
     assert def != null;
     return (PerlNamespaceElementImpl)def.getNamespaceElement();
+  }
+
+  /**
+   * Create a replacement heredoc element with new text
+   *
+   * @param originalElement element to replace
+   * @param newText         new element text
+   * @return new generated element
+   */
+  @NotNull
+  public static PerlHeredocElementImpl createHeredocBodyReplacement(@NotNull PerlHeredocElementImpl originalElement,
+                                                                    @NotNull String newText) {
+    StringBuilder sb = new StringBuilder("<<");
+    String marker = getSafeHeredocMarker(newText);
+    IElementType originalElementType = PsiUtilCore.getElementType(originalElement);
+    char quote;
+    if (originalElementType == HEREDOC) {
+      quote = '\'';
+    }
+    else if (originalElementType == HEREDOC_QQ) {
+      quote = '"';
+    }
+    else {
+      quote = '`';
+    }
+    sb.append(quote).append(marker).append(quote).append(";\n").append(newText);
+    if (!newText.endsWith("\n")) {
+      sb.append("\n");
+    }
+
+    PerlFileImpl newFile = createFile(originalElement.getProject(), sb.append(marker).toString());
+    PerlHeredocElementImpl newElement = newFile.findChildByClass(originalElement.getClass());
+    assert newElement != null : "Can't find element " + originalElement.getClass() + " generated with: \n" + sb.toString();
+    return newElement;
+  }
+
+  /**
+   * @param heredocBody text of here-doc body
+   * @return safe marker to use with this body
+   */
+  private static String getSafeHeredocMarker(@NotNull String heredocBody) {
+    String marker = "EOM";
+    while (marker.equals(heredocBody) ||
+           heredocBody.startsWith(marker + "\n") ||
+           heredocBody.endsWith(marker + "\n") ||
+           heredocBody.contains("\n" + marker + "\n")
+      ) {
+      //noinspection StringConcatenationInLoop
+      marker = marker + "M";
+    }
+    return marker;
   }
 
   public static List<PsiElement> createHereDocElements(Project project, char quoteSymbol, String markerText, String contentText) {
