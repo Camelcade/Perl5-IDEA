@@ -53,6 +53,7 @@ sourceSets {
 apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
+    plugins = ['IntelliLang']
     downloadSources Boolean.valueOf(downloadIdeaSource)
     if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
