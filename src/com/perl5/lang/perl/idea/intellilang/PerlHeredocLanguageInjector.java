@@ -9,7 +9,10 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import org.intellij.plugins.intelliLang.inject.InjectedLanguage;
+import org.intellij.plugins.intelliLang.inject.TemporaryPlacesRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,22 +32,38 @@ public class PerlHeredocLanguageInjector extends AbstractPerlLanguageInjector im
       return;
     }
 
-    PerlHeredocTerminatorElement terminator = ((PerlHeredocElementImpl)context).getTerminatorElement();
+    Language mappedLanguage = getInjectedLanguage((PerlHeredocElementImpl)context);
+    if (mappedLanguage == null) {
+      return;
+    }
+    registrar.startInjecting(mappedLanguage);
+    addPlace((PerlHeredocElementImpl)context, registrar);
+    registrar.doneInjecting();
+  }
+
+  @Nullable
+  private Language getInjectedLanguage(@NotNull PerlHeredocElementImpl heredocElement) {
+    PerlHeredocTerminatorElement terminator = heredocElement.getTerminatorElement();
 
     if (terminator == null) {
-      return;
+      return null;
     }
 
     String terminatorText = terminator.getText();
     Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
 
-    if (mappedLanguage == null) {
-      return;
+    if (mappedLanguage != null) {
+      return mappedLanguage;
     }
 
-    registrar.startInjecting(mappedLanguage);
-    addPlace((PerlHeredocElementImpl)context, registrar);
-    registrar.doneInjecting();
+    InjectedLanguage injectedLanguage = TemporaryPlacesRegistry.getInstance(heredocElement.getProject())
+      .getLanguageFor(heredocElement, heredocElement.getContainingFile());
+
+    if (injectedLanguage == null) {
+      return null;
+    }
+
+    return injectedLanguage.getLanguage();
   }
 
   private void addPlace(@NotNull PerlHeredocElementImpl heredocElement, @NotNull MultiHostRegistrar registrar) {
