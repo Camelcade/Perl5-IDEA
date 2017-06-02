@@ -24,7 +24,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -108,7 +107,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     return UNINDENTABLE_TOKENS;
   }
 
-  public Indent getNodeIndent(@NotNull ASTNode node, PerlCodeStyleSettings codeStyleSettings) {
+  public Indent getNodeIndent(@NotNull ASTNode node) {
     IElementType nodeType = node.getElementType();
     ASTNode parent = node.getTreeParent();
     ASTNode grandParent = parent != null ? parent.getTreeParent() : null;

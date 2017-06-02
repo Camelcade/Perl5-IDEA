@@ -2,14 +2,12 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
-import com.intellij.formatting.SpacingBuilder;
+import com.intellij.formatting.Indent;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -24,14 +22,13 @@ import java.util.List;
  */
 public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
+
   public PerlHeredocFormattingBlock(@NotNull ASTNode node,
                                     @Nullable Wrap wrap,
                                     @Nullable Alignment alignment,
-                                    @NotNull CommonCodeStyleSettings codeStyleSettings,
-                                    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-                                    @NotNull SpacingBuilder spacingBuilder,
-                                    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder) {
-    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+                                    @NotNull PerlFormattingContext context
+  ) {
+    super(node, wrap, alignment, context);
     assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }
 
@@ -54,7 +51,8 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     }
 
     List<Block> blocks = new ArrayList<>();
-    //getInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), null, null, Indent.getAbsoluteNoneIndent());
+    myContext.getDefaultInjectedLanguageBlockBuilder()
+      .addInjectedBlocks(blocks, getNode(), null, null, Indent.getAbsoluteNoneIndent());
     return blocks;
   }
 

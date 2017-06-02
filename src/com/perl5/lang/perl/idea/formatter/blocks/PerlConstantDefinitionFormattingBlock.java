@@ -18,12 +18,9 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
-import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,16 +33,12 @@ import java.util.List;
 public class PerlConstantDefinitionFormattingBlock extends PerlFormattingBlock {
   protected final Alignment arrowAlignment;
 
-  public PerlConstantDefinitionFormattingBlock(
-    @NotNull ASTNode node,
-    @Nullable Wrap wrap,
-    @Nullable Alignment alignment,
-    @NotNull CommonCodeStyleSettings codeStyleSettings,
-    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-    @NotNull SpacingBuilder spacingBuilder,
-    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+  public PerlConstantDefinitionFormattingBlock(@NotNull ASTNode node,
+                                               @Nullable Wrap wrap,
+                                               @Nullable Alignment alignment,
+                                               @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, null, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+    super(node, wrap, null, context);
     arrowAlignment = alignment;
   }
 

@@ -22,16 +22,14 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
-import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -88,39 +86,25 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
     SEMICOLON
   );
-
+  protected final PerlFormattingContext myContext;
   private final Indent myIndent;
-  private final CommonCodeStyleSettings mySettings;
-  private final PerlCodeStyleSettings myPerl5Settings;
-  private final SpacingBuilder mySpacingBuilder;
   private final boolean myIsFirst;
   private final boolean myIsLast;
   private final IElementType myElementType;
-  private final InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
   private List<Block> mySubBlocks;
 
   public PerlFormattingBlock(
     @NotNull ASTNode node,
     @Nullable Wrap wrap,
     @Nullable Alignment alignment,
-    @NotNull CommonCodeStyleSettings codeStyleSettings,
-    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-    @NotNull SpacingBuilder spacingBuilder,
-    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+    @NotNull PerlFormattingContext context
   ) {
     super(node, wrap, alignment);
-    mySettings = codeStyleSettings;
-    myPerl5Settings = perlCodeStyleSettings;
-    mySpacingBuilder = spacingBuilder;
-    myIndent = getIndentProcessor().getNodeIndent(node, perlCodeStyleSettings);
+    myContext = context;
+    myIndent = context.getIndentProcessor().getNodeIndent(node);
     myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
     myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
     myElementType = node.getElementType();
-    myInjectedLanguageBlockBuilder = injectedLanguageBlockBuilder;
-  }
-
-  protected PerlIndentProcessor getIndentProcessor() {
-    return PerlIndentProcessor.INSTANCE;
   }
 
   @NotNull
@@ -173,8 +157,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
     else if (childElementType == CONSTANT_DEFINITION)    // fixme we should use delegate here, constant wraps regular block
     {
-      return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
-                                                       myInjectedLanguageBlockBuilder);
+      return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, myContext);
     }
     else {
       return createBlock(child, wrap, null);
@@ -186,23 +169,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
                                             @Nullable Alignment alignment
   ) {
     if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
-      return new PerlHeredocFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
-                                            myInjectedLanguageBlockBuilder);
+      return new PerlHeredocFormattingBlock(node, wrap, alignment, myContext);
     }
-    return new PerlFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
-                                   myInjectedLanguageBlockBuilder);
-  }
-
-  protected CommonCodeStyleSettings getSettings() {
-    return mySettings;
-  }
-
-  protected PerlCodeStyleSettings getPerl5Settings() {
-    return myPerl5Settings;
-  }
-
-  protected SpacingBuilder getSpacingBuilder() {
-    return mySpacingBuilder;
+    return new PerlFormattingBlock(node, wrap, alignment, myContext);
   }
 
   @Nullable
@@ -247,7 +216,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
         return Spacing.createSpacing(0, 0, 1, true, 1);
       }
     }
-    return mySpacingBuilder.getSpacing(this, child1, child2);
+    return myContext.getSpacingBuilder().getSpacing(this, child1, child2);
   }
 
   /**
@@ -279,11 +248,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   protected Indent getChildIndent() {
     IElementType elementType = getElementType();
 
-    if (getIndentProcessor().getUnindentableContainers().contains(elementType)) {
+    if (myContext.getIndentProcessor().getUnindentableContainers().contains(elementType)) {
       return Indent.getNoneIndent();
     }
 
-    if (getIndentProcessor().getBlockLikeContainers().contains(elementType)) {
+    if (myContext.getIndentProcessor().getBlockLikeContainers().contains(elementType)) {
       return Indent.getNormalIndent();
     }
 
@@ -361,10 +330,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       childNode = childNode.getTreeNext();
     }
     return true;
-  }
-
-  public InjectedLanguageBlockBuilder getInjectedLanguageBlockBuilder() {
-    return myInjectedLanguageBlockBuilder;
   }
 
   protected static boolean shouldCreateBlockFor(ASTNode node) {

@@ -17,7 +17,6 @@
 package com.perl5.lang.mojolicious.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
-import com.intellij.formatting.SpacingBuilder;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
@@ -25,15 +24,11 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.mojolicious.idea.formatter.MojoliciousIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,12 +43,9 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
   public MojoliciousFormattingBlock(@NotNull ASTNode node,
                                     @Nullable Wrap wrap,
                                     @Nullable Alignment alignment,
-                                    @NotNull CommonCodeStyleSettings codeStyleSettings,
-                                    @NotNull PerlCodeStyleSettings perlCodeStyleSettings,
-                                    @NotNull SpacingBuilder spacingBuilder,
-                                    @NotNull InjectedLanguageBlockBuilder injectedLanguageBlockBuilder
+                                    @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment, codeStyleSettings, perlCodeStyleSettings, spacingBuilder, injectedLanguageBlockBuilder);
+    super(node, wrap, alignment, context);
   }
 
   @Override
@@ -97,12 +89,6 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
 
   @Override
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
-    return new MojoliciousFormattingBlock(node, wrap, alignment, getSettings(), getPerl5Settings(), getSpacingBuilder(),
-                                          getInjectedLanguageBlockBuilder());
-  }
-
-  @Override
-  protected PerlIndentProcessor getIndentProcessor() {
-    return MojoliciousIndentProcessor.INSTANCE;
+    return new MojoliciousFormattingBlock(node, wrap, alignment, myContext);
   }
 }
