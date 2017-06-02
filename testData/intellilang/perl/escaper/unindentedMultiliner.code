@@ -1,4 +1,4 @@
-<<~ "EOM";
+<<~ "HTML";
   some <caret> thing
       here
-EOM
+HTML

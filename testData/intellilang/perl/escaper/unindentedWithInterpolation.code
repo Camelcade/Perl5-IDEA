@@ -1,4 +1,4 @@
-<<~ "EOM";
+<<~ "HTML";
   some <caret> $variable here
     too
-EOM
+HTML

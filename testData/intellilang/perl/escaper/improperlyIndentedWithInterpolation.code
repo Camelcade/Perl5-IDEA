@@ -1,6 +1,6 @@
 {
-<<~ "EOM";
+<<~ "HTML";
     some <caret> $somevar multi
           line
-       EOM
+       HTML
 }

@@ -1,4 +1,4 @@
-<<EOM;
+<<HTML;
   one <caret> line
     two lines
-EOM
+HTML

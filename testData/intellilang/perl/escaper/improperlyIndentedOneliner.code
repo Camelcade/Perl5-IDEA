@@ -1,5 +1,5 @@
 {
-<<~ "EOM";
+<<~ "HTML";
     some <caret> multi
-       EOM
+       HTML
 }
