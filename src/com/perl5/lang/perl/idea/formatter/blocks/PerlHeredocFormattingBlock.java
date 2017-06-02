@@ -51,10 +51,10 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     List<Block> blocks = new ArrayList<>();
     PerlHeredocElementImpl psi = getPsi();
     if (psi.getRealIndentSize() == 0) {
-      myContext.getDefaultInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
+      myContext.getDefaultInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), getTextRange());
     }
     else {
-      //myContext.getMultiRangeInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
+      myContext.getMultiRangeInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
     }
     return blocks;
   }

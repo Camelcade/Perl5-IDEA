@@ -23,12 +23,9 @@ public class PerlDefaultInjectedBlocksBuilder extends DefaultInjectedLanguageBlo
     super(settings);
   }
 
-  public void addInjectedBlocks(List<Block> result, ASTNode injectionHost) {
+  public void addInjectedBlocks(List<Block> result, ASTNode injectionHost, @NotNull TextRange parentBlockRange) {
     final PsiFile[] injectedFile = new PsiFile[1];
     final Ref<TextRange> injectedRangeInsideHost = new Ref<>();
-    final Ref<Integer> prefixLength = new Ref<>();
-    final Ref<Integer> suffixLength = new Ref<>();
-    final Ref<ASTNode> injectionHostToUse = new Ref<>(injectionHost);
 
     final PsiLanguageInjectionHost.InjectedPsiVisitor injectedPsiVisitor = (injectedPsi, places) -> {
       if (places.size() != 1) {
@@ -44,30 +41,10 @@ public class PerlDefaultInjectedBlocksBuilder extends DefaultInjectedLanguageBlo
       if (node == null) {
         return;
       }
-      if (node != injectionHost) {
-        int shift = 0;
-        boolean canProcess = false;
-        for (ASTNode n = injectionHost.getTreeParent(), prev = injectionHost; n != null; prev = n, n = n.getTreeParent()) {
-          shift += n.getStartOffset() - prev.getStartOffset();
-          if (n == node) {
-            textRange = textRange.shiftRight(shift);
-            canProcess = true;
-            break;
-          }
-        }
-        if (!canProcess) {
-          return;
-        }
-      }
 
-      String childText;
-      if ((injectionHost.getTextLength() == textRange.getEndOffset() && textRange.getStartOffset() == 0) ||
-          (canProcessFragment((childText = injectionHost.getText()).substring(0, textRange.getStartOffset()), injectionHost) &&
-           canProcessFragment(childText.substring(textRange.getEndOffset()), injectionHost))) {
+      if ((injectionHost.getTextLength() >= textRange.getEndOffset() && textRange.getStartOffset() >= 0)) {
         injectedFile[0] = injectedPsi;
         injectedRangeInsideHost.set(textRange);
-        prefixLength.set(shred.getPrefix().length());
-        suffixLength.set(shred.getSuffix().length());
       }
     };
     final PsiElement injectionHostPsi = injectionHost.getPsi();
@@ -78,13 +55,14 @@ public class PerlDefaultInjectedBlocksBuilder extends DefaultInjectedLanguageBlo
       final FormattingModelBuilder builder = LanguageFormatting.INSTANCE.forContext(childLanguage, injectionHostPsi);
 
       if (builder != null) {
-        final int startOffset = injectedRangeInsideHost.get().getStartOffset();
-        final int endOffset = injectedRangeInsideHost.get().getEndOffset();
-        TextRange range = injectionHostToUse.get().getTextRange();
+        TextRange range = injectionHost.getTextRange();
 
         int childOffset = range.getStartOffset();
-        addInjectedLanguageBlockWrapper(result, injectedFile[0].getNode(), Indent.getNoneIndent(), childOffset + startOffset,
-                                        new TextRange(prefixLength.get(), injectedFile[0].getTextLength() - suffixLength.get()));
+        TextRange nodeRange = new TextRange(0, injectedFile[0].getTextLength());
+        TextRange croppedNodeRange = parentBlockRange.shiftRight(-childOffset).intersection(nodeRange);
+
+        addInjectedLanguageBlockWrapper(result, injectedFile[0].getNode(), Indent.getNoneIndent(), childOffset,
+                                        croppedNodeRange);
       }
     }
   }
