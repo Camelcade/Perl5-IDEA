@@ -1,16 +1,7 @@
 package intellilang;
 
-import com.intellij.lang.Language;
-import com.intellij.lang.injection.MultiHostRegistrar;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.intellilang.PerlHeredocLanguageInjector;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
   private boolean myInjectWithInterpolation;
@@ -70,34 +61,6 @@ public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
   private void doTest() {
     initWithFileSmartWithoutErrors();
     assertInjected();
-    PerlHeredocElementImpl heredocUnderCursor = getHeredocUnderCursor();
-    assertNotNull(heredocUnderCursor);
-    StringBuilder sb = new StringBuilder();
-    LiteralTextEscaper<PerlHeredocElementImpl> escaper = heredocUnderCursor.createLiteralTextEscaper();
-    // host MUST be auto-injected with our own injector
-    new PerlHeredocLanguageInjector().getLanguagesToInject(new MultiHostRegistrar() {
-      @NotNull
-      @Override
-      public MultiHostRegistrar startInjecting(@NotNull Language language) {
-        return this;
-      }
-
-      @NotNull
-      @Override
-      public MultiHostRegistrar addPlace(@Nullable String prefix,
-                                         @Nullable String suffix,
-                                         @NotNull PsiLanguageInjectionHost host,
-                                         @NotNull TextRange rangeInsideHost) {
-        escaper.decode(rangeInsideHost, sb);
-        return this;
-      }
-
-      @Override
-      public void doneInjecting() {
-
-      }
-    }, heredocUnderCursor);
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getHeredocDecodedText(getHeredocUnderCursor()));
   }
 }
