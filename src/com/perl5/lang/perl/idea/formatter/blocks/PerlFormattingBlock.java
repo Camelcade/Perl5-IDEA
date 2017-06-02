@@ -115,7 +115,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
 
     // fixme what is re-creation for?
-    return new ArrayList<Block>(mySubBlocks);
+    return new ArrayList<>(mySubBlocks);
   }
 
   protected List<Block> buildSubBlocks() {
@@ -221,7 +221,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   /**
    * Checks if Heredoc is ahead of current block and it's not possible to insert newline
-   * fixme we should cache result here by line number
+   * fixme we should collect all forbidden ranges, cache them and use here
    *
    * @param block block in question
    * @return check result
