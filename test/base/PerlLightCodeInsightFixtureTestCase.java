@@ -16,6 +16,7 @@
 
 package base;
 
+import com.intellij.injected.editor.EditorWindow;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
@@ -23,6 +24,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
@@ -37,6 +39,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.impl.DebugUtil;
+import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
@@ -44,6 +48,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.picocontainer.MutablePicoContainer;
@@ -137,6 +142,54 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @NotNull
+  protected PsiFile getTopFile() {
+    PsiFile file = getFile();
+    if (file.getViewProvider() instanceof InjectedFileViewProvider) {
+      //noinspection ConstantConditions
+      file = file.getContext().getContainingFile();
+    }
+    return file;
+  }
+
+  @NotNull
+  protected Editor getTopEditor() {
+    Editor editor = getEditor();
+    while (editor instanceof EditorWindow) {
+      editor = ((EditorWindow)editor).getDelegate();
+    }
+    return editor;
+  }
+
+  protected void assertInjectable() {
+    assertTrue(
+      "InjectLanguageAction should be available at cursor",
+      new InjectLanguageAction().isAvailable(getProject(), getEditor(), getFile())
+    );
+  }
+
+  protected void assertNotInjectable() {
+    assertFalse(
+      "InjectLanguageAction should not be available at cursor",
+      new InjectLanguageAction().isAvailable(getProject(), getEditor(), getFile())
+    );
+  }
+
+  protected void assertInjected() {
+    assertInstanceOf(getEditor(), EditorWindow.class);
+    assertInstanceOf(getFile().getViewProvider(), InjectedFileViewProvider.class);
+  }
+
+  protected void assertNotInjected() {
+    assertFalse("Editor is EditorWindow, looks like injected to me", getEditor() instanceof EditorWindow);
+    assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
+  }
+
+  public void initWithFileSmartWithoutErrors() {
+    initWithFileSmart();
+    assertNoErrorElements();
   }
 
   public void initWithFileSmart() {
@@ -290,6 +343,13 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
     String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
+  }
+
+  protected void assertNoErrorElements() {
+    assertFalse(
+      "PsiFile contains error elements",
+      DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
+    );
   }
 
   public static Application getApplication() {

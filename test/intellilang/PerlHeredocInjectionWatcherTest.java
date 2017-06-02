@@ -8,7 +8,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.EditorTestUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -177,10 +176,7 @@ public class PerlHeredocInjectionWatcherTest extends PerlLightCodeInsightFixture
     getEditor().getCaretModel().moveToOffset(toTheEnd ? heredocRange.getEndOffset() : heredocRange.getStartOffset());
     mutator.run();
     PsiDocumentManager.getInstance(getProject()).commitAllDocuments();
-    assertFalse(
-      "PsiFile contains error elements",
-      DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
-    );
+    assertNoErrorElements();
     assertHeredocIsConsistent();
   }
 

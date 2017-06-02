@@ -1,0 +1,3 @@
+<<~"EOM";
+This <caret>is html $somevar blah
+EOM

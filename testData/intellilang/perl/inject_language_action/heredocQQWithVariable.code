@@ -1,0 +1,3 @@
+<<"EOM";
+this $variable is <caret>a test
+EOM

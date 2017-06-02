@@ -1,0 +1,5 @@
+{
+  <<~"EOM";
+    this is <caret>injectable text
+  EOM
+}
