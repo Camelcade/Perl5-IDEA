@@ -3,8 +3,6 @@ package com.perl5.lang.perl.idea.formatter;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.intellij.psi.formatter.common.DefaultInjectedLanguageBlockBuilder;
-import com.intellij.psi.formatter.common.InjectedLanguageBlockBuilder;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
@@ -13,13 +11,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
-  private final InjectedLanguageBlockBuilder myDefaultInjectedLanguageBlockBuilder;
+  private final PerlDefaultInjectedBlocksBuilder myDefaultInjectedLanguageBlockBuilder;
+  private final PerlHeredocInjectedBlocksBuilder myMultiRangeInjectedLanguageBlockBuilder;
 
   public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
     myPerlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
     mySpacingBuilder = createSpacingBuilder();
-    myDefaultInjectedLanguageBlockBuilder = new DefaultInjectedLanguageBlockBuilder(settings);
+    myDefaultInjectedLanguageBlockBuilder = new PerlDefaultInjectedBlocksBuilder(settings);
+    myMultiRangeInjectedLanguageBlockBuilder = new PerlHeredocInjectedBlocksBuilder(settings);
   }
 
   protected SpacingBuilder createSpacingBuilder() {
@@ -119,8 +119,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return mySpacingBuilder;
   }
 
-  public InjectedLanguageBlockBuilder getDefaultInjectedLanguageBlockBuilder() {
+  public PerlDefaultInjectedBlocksBuilder getDefaultInjectedLanguageBlockBuilder() {
     return myDefaultInjectedLanguageBlockBuilder;
+  }
+
+  public PerlHeredocInjectedBlocksBuilder getMultiRangeInjectedLanguageBlockBuilder() {
+    return myMultiRangeInjectedLanguageBlockBuilder;
   }
 
   public PerlIndentProcessor getIndentProcessor() {

@@ -2,7 +2,6 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
-import com.intellij.formatting.Indent;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
@@ -49,10 +48,14 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     if (isLeaf()) {
       return Collections.emptyList();
     }
-
     List<Block> blocks = new ArrayList<>();
-    myContext.getDefaultInjectedLanguageBlockBuilder()
-      .addInjectedBlocks(blocks, getNode(), null, null, Indent.getAbsoluteNoneIndent());
+    PerlHeredocElementImpl psi = getPsi();
+    if (psi.getRealIndentSize() == 0) {
+      myContext.getDefaultInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
+    }
+    else {
+      //myContext.getMultiRangeInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
+    }
     return blocks;
   }
 
