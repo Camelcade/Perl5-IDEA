@@ -18,24 +18,42 @@ package formatter;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 13.03.2016.
  */
 public class PerlFormatterTest extends PerlLightCodeInsightFixtureTestCase {
+  CommonCodeStyleSettings myPerlSettings;
+
+  boolean mySpaceBeforeIfParenthes;
+
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl";
   }
 
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    myPerlSettings = CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
+    mySpaceBeforeIfParenthes = myPerlSettings.SPACE_BEFORE_IF_PARENTHESES;
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = mySpaceBeforeIfParenthes;
+    super.tearDown();
+  }
+
   public void testStatementModifierSpacing() throws Exception {
-    CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = false;
+    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = false;
     doFormatTest();
   }
 
   public void testStatementModifierSpacingWithSpace() throws Exception {
-    CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).SPACE_BEFORE_IF_PARENTHESES = true;
+    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = true;
     doFormatTest();
   }
 
