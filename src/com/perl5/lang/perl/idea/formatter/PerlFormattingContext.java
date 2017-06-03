@@ -11,15 +11,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
-  private final PerlDefaultInjectedBlocksBuilder myDefaultInjectedLanguageBlockBuilder;
-  private final PerlHeredocInjectedBlocksBuilder myMultiRangeInjectedLanguageBlockBuilder;
 
   public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
     myPerlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
     mySpacingBuilder = createSpacingBuilder();
-    myDefaultInjectedLanguageBlockBuilder = new PerlDefaultInjectedBlocksBuilder(settings);
-    myMultiRangeInjectedLanguageBlockBuilder = new PerlHeredocInjectedBlocksBuilder(settings);
   }
 
   protected SpacingBuilder createSpacingBuilder() {
@@ -117,14 +113,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   public SpacingBuilder getSpacingBuilder() {
     return mySpacingBuilder;
-  }
-
-  public PerlDefaultInjectedBlocksBuilder getDefaultInjectedLanguageBlockBuilder() {
-    return myDefaultInjectedLanguageBlockBuilder;
-  }
-
-  public PerlHeredocInjectedBlocksBuilder getMultiRangeInjectedLanguageBlockBuilder() {
-    return myMultiRangeInjectedLanguageBlockBuilder;
   }
 
   public PerlIndentProcessor getIndentProcessor() {

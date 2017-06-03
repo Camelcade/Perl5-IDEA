@@ -7,12 +7,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
+import com.perl5.lang.perl.idea.formatter.PerlInjectedLanguageBlocksBuilder;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,15 +48,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     if (isLeaf()) {
       return Collections.emptyList();
     }
-    List<Block> blocks = new ArrayList<>();
-    PerlHeredocElementImpl psi = getPsi();
-    if (psi.getRealIndentSize() == 0) {
-      myContext.getDefaultInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode(), getTextRange());
-    }
-    else {
-      myContext.getMultiRangeInjectedLanguageBlockBuilder().addInjectedBlocks(blocks, getNode());
-    }
-    return blocks;
+    return PerlInjectedLanguageBlocksBuilder.compute(myContext.getSettings().getRootSettings(), getNode(), getTextRange());
   }
 
   @NotNull
