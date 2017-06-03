@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Alexandr Evstigneev
+ * Copyright 2015-2017 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,10 +50,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-/**
- * Created by hurricup on 17.04.2016.
- * For improvements, see UpdateCopyrightAction
- */
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   public static final String PERL_TIDY_LINUX_NAME = "perltidy";
   public static final String PERL_TIDY_WINDOWS_NAME = PERL_TIDY_LINUX_NAME + ".bat";
