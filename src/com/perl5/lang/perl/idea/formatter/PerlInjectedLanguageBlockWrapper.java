@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 public class PerlInjectedLanguageBlockWrapper implements Block {
   @Nullable
-  private final static Method IS_ACESSIBLE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
+  private final static Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
   protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
   private final AtomicNullableLazyValue<TextRange> myRangeProvider = new AtomicNullableLazyValue<TextRange>() {
@@ -89,12 +89,12 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   }
 
   private boolean isAbsoluteNoneIndent(@Nullable Indent indent) {
-    if (IS_ACESSIBLE == null || !(indent instanceof IndentImpl) || indent.getType() != Indent.Type.NONE) {
+    if (IS_ABSOLUTE == null || !(indent instanceof IndentImpl) || indent.getType() != Indent.Type.NONE) {
       return false;
     }
 
     try {
-      return (Boolean)IS_ACESSIBLE.invoke(indent);
+      return (Boolean)IS_ABSOLUTE.invoke(indent);
     }
     catch (Exception e) {
       return false;
