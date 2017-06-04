@@ -140,11 +140,12 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       forceFirstIndent = true;
     }
 
-    // defined by node
-    if (getAbsoluteUnindentableTokens().contains(nodeType) ||
-        parent == null ||
-        grandParent == null && nodeType != HEREDOC_END_INDENTABLE && !HEREDOC_BODIES_TOKENSET.contains(nodeType)) {
+    if (getAbsoluteUnindentableTokens().contains(nodeType)) {
       return Indent.getAbsoluteNoneIndent();
+    }
+
+    if (parent == null || grandParent == null && nodeType != HEREDOC_END_INDENTABLE && !HEREDOC_BODIES_TOKENSET.contains(nodeType)) {
+      return Indent.getNoneIndent();
     }
 
     if (getUnindentableTokens().contains(nodeType)) {
