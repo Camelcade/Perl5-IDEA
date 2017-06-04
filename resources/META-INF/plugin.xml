@@ -38,8 +38,9 @@
      <li>Plugin now uses debugger module v2017.1x</li>
      <li>Improved comments parsing in char classes and <code>\Q...\E</code> quotes in regexps</li>
      <li>Improved POSIX chars classes parsing</li>
-     <li>Implemented support for <code>/xx</code> regexp modifier from 5.26</li>
-     <li>Implemented lexing and parsing for lexical subs. NB: for now there is no proper resolving for them. Works as usual subs. Please, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1439">#1439</a>.</li>
+     <li>Added support for <code>/xx</code> regexp modifier from 5.26</li>
+     <li>Added lexing and parsing for lexical subs. NB: for now there is no proper resolving for them. Works as usual subs. Please, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1439">#1439</a>.</li>
+     <li>Added support for indentable here-docs from 5.26</li>
      </ul>
      </p>
      <p>Fixes:
