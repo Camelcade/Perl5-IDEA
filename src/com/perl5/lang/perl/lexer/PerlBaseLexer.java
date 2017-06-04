@@ -118,6 +118,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   protected boolean myFormatWaiting = false;
   // number of sections for the next regexp
   protected int sectionsNumber = 0;
+
+  private boolean myIsHeredocLike = false;
+
   /**
    * Regex processor qr{} m{} s{}{}
    **/
@@ -139,6 +142,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   public boolean isInitialState() {
     return super.isInitialState() &&
            !myFormatWaiting &&
+           !myIsHeredocLike &&
            heredocQueue.isEmpty() &&
            myBracesStack.isEmpty() &&
            myBracketsStack.isEmpty() &&
@@ -399,7 +403,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     else if (!heredocQueue.isEmpty()) {
       startHeredocCapture();
     }
-
+    setHeredocLike(false);
     return TokenType.NEW_LINE_INDENT;
   }
 
@@ -1051,5 +1055,13 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     else {
       return charOpener;
     }
+  }
+
+  public boolean isHeredocLike() {
+    return myIsHeredocLike;
+  }
+
+  public void setHeredocLike(boolean heredocLike) {
+    myIsHeredocLike = heredocLike;
   }
 }

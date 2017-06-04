@@ -939,8 +939,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"=~" 	{yybegin(YYINITIAL);return OPERATOR_RE;}
 	"!~" 	{yybegin(YYINITIAL);return OPERATOR_NOT_RE;}
 
-	"<<" 								{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
-	"<<" / {QUALIFIED_IDENTIFIER}"(" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT;}
+	"<<" 	{yybegin(YYINITIAL);setHeredocLike(true);return OPERATOR_SHIFT_LEFT;}
+	"<<" / {QUALIFIED_IDENTIFIER}"(" 	{yybegin(YYINITIAL);setHeredocLike(true);return OPERATOR_SHIFT_LEFT;}
 	">>" 	{yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;}
 
 	"?"  	{yybegin(YYINITIAL);return QUESTION;}
