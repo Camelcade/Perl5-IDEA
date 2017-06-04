@@ -46,6 +46,8 @@ public class PerlHashUtil implements PerlElementTypes {
     "SIG",
     "LAST_PAREN_MATCH",
     "LAST_MATCH_START",
+    "^CAPTURE",
+    "^CAPTURE_ALL",
     "OS_ERROR",
     "ERRNO"
   ));

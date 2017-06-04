@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase {
 
-  private List<String> SUPER_HERE_DOC_MARKER = Arrays.asList("MYSUPERMARKER");
+  private List<String> SUPER_HERE_DOC_MARKER = Collections.singletonList("MYSUPERMARKER");
 
   @Override
   protected void setUp() throws Exception {
@@ -45,6 +45,12 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   protected String getTestDataPath() {
     return "testData/completion/perl";
   }
+
+  public void testCaptureScalar() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}
+
+  public void testCaptureArray() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}
+
+  public void testCaptureHash() {doTestContains("^CAPTURE", "^CAPTURE_ALL");}
 
   public void testAnnotationReturnsPackage() {
     doTest(LIBRARY_PACKAGES);
@@ -323,7 +329,13 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
   @SafeVarargs
   private final void doTest(List<String>... result) {
+    initWithFileSmart();
     assertCompletionIs(result);
+  }
+
+  private void doTestContains(String... args) {
+    initWithFileSmart();
+    assertLookupContains(Arrays.asList(args));
   }
 
   private void doTest(String... result) {

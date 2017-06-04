@@ -48,6 +48,7 @@ public class PerlArrayUtil implements PerlElementTypes {
     "LAST_MATCH_END",
     "ARGV",
     "INC",
+    "^CAPTURE",
     "LAST_MATCH_START"
   ));
 
