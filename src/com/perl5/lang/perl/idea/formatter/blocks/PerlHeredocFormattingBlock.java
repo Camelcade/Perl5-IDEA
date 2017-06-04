@@ -100,7 +100,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
     OUTER:
     while (offset < effectiveCharsLength) {
-      for (realSpaces = 0; realSpaces <= spacesBeforeTerminator; realSpaces++) {
+      for (realSpaces = 0; realSpaces <= spacesBeforeTerminator && offset < effectiveCharsLength; realSpaces++) {
 
         if (realSpaces == spacesBeforeTerminator) {
           break OUTER;

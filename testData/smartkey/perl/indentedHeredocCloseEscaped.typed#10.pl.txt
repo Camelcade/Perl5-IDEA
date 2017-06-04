@@ -1,9 +1,9 @@
 {
   <<~\EOM;
-      
-EOM
+    
+    EOM
 
 
 
-  say 'something';
+    say 'something';
 }

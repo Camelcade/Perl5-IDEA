@@ -1,11 +1,11 @@
 {
   <<~EOM;
     
-EOM
+    EOM
 
 
 
-  say 'something';
+    say 'something';
 
   <<~ "EOM";
   EOM

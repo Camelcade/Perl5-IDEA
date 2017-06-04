@@ -26,6 +26,7 @@ import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
+import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
@@ -178,6 +179,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 
                 document.insertString(addOffset, closeMarker);
                 manager.commitDocument(document);
+                CodeStyleManager.getInstance(file.getProject()).reformatRange(file, addOffset, addOffset + closeMarker.length());
 
                 currentOpener = currentOpenerPointer.getElement();
 
