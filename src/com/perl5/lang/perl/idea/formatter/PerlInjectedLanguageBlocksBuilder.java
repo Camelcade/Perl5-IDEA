@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
+import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
 import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelBuilder;
@@ -50,6 +51,11 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
   private final ASTNode myHostNode;
   @NotNull
   private final TextRange myParentRange;
+
+  /**
+   * Used to align absolutely non-indented blocks in injected text
+   */
+  private final Alignment myAbsoluteIndentAlignment = Alignment.createAlignment();
 
   int injectedLength = 0;
   @Nullable
@@ -167,6 +173,10 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
       return;
     }
     myInjectedPsiFile = injectedPsi;
+  }
+
+  public Alignment getAbsoluteIndentAlignment() {
+    return myAbsoluteIndentAlignment;
   }
 
   public static List<Block> compute(@NotNull CodeStyleSettings settings,

@@ -20,15 +20,19 @@ import com.intellij.formatting.*;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PerlInjectedLanguageBlockWrapper implements Block {
+  @Nullable
+  private final static Method IS_ACESSIBLE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
+  protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
-  private final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final AtomicNullableLazyValue<TextRange> myRangeProvider = new AtomicNullableLazyValue<TextRange>() {
     @Nullable
     @Override
@@ -80,13 +84,28 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   @Nullable
   @Override
   public Indent getIndent() {
-    return myOriginal.getIndent();
+    Indent indent = myOriginal.getIndent();
+    return isAbsoluteNoneIndent(indent) ? Indent.getNoneIndent() : indent;
+  }
+
+  private boolean isAbsoluteNoneIndent(@Nullable Indent indent) {
+    if (IS_ACESSIBLE == null || !(indent instanceof IndentImpl) || indent.getType() != Indent.Type.NONE) {
+      return false;
+    }
+
+    try {
+      return (Boolean)IS_ACESSIBLE.invoke(indent);
+    }
+    catch (Exception e) {
+      return false;
+    }
   }
 
   @Nullable
   @Override
   public Alignment getAlignment() {
-    return myOriginal.getAlignment();
+    Indent indent = myOriginal.getIndent();
+    return isAbsoluteNoneIndent(indent) ? myBuilder.getAbsoluteIndentAlignment() : myOriginal.getAlignment();
   }
 
   @Nullable
@@ -111,5 +130,17 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   @Override
   public boolean isLeaf() {
     return myOriginal.isLeaf();
+  }
+
+  public static class RootBlockWrapper extends PerlInjectedLanguageBlockWrapper {
+    public RootBlockWrapper(@NotNull Block original, @NotNull PerlInjectedLanguageBlocksBuilder builder) {
+      super(original, builder);
+    }
+
+    @Nullable
+    @Override
+    public Alignment getAlignment() {
+      return myBuilder.getAbsoluteIndentAlignment();
+    }
   }
 }

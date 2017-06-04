@@ -1,0 +1,9 @@
+{
+<<~'PERL5';
+say $a;
+<<EOM;
+something here
+EOM
+say $b;
+PERL5
+}

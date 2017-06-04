@@ -31,4 +31,12 @@ public class PerlInjectedHeredocFormatterTest extends PerlFormatterTestCase {
   public void testIndentableUnindented() {doFormatTest();}
 
   public void testIndentedImproperly() {doFormatTest();}
+
+  public void testIndentedStatement() {doFormatTest();}
+
+  public void testIndentedNestedHeredoc() {doFormatTest();}
+
+  public void testIndentedNestedHeredocUnindentable() {doFormatTest();}
+
+  public void testIndentedNestedHeredocWithIndentation() {doFormatTest();}
 }
