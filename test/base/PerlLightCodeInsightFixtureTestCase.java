@@ -354,6 +354,10 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
       @Override
       protected void run() throws Throwable {
         PsiFile file = myFixture.getFile();
+        if (file.getViewProvider() instanceof InjectedFileViewProvider) {
+          //noinspection ConstantConditions
+          file = file.getContext().getContainingFile();
+        }
         TextRange rangeToUse = file.getTextRange();
         CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
       }
