@@ -17,6 +17,7 @@
 package base;
 
 import com.intellij.injected.editor.EditorWindow;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
@@ -253,6 +254,23 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     PsiElement focused = myFixture.getFile().findElementAt(offset);
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
+
+  protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@NotNull Class<T> clazz) {
+    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
+  }
+
+  @NotNull
+  protected PsiElement getElementAtCaretWithoutInjection() {
+    PsiElement result = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset());
+    assertNotNull(result);
+    PsiFile leafFile = result.getContainingFile();
+    if (InjectedLanguageManager.getInstance(getProject()).isInjectedFragment(leafFile)) {
+      result = leafFile.getContext();
+    }
+    assertNotNull(result);
+    return result;
+  }
+
 
   protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType) {
     testFoldingRegions(verificationFileName, false, fileType);
