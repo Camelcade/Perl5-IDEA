@@ -29,9 +29,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.CollectionListModel;
-import com.intellij.ui.RawCommandLineEditor;
-import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.PlatformUtils;
@@ -41,9 +39,11 @@ import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -56,29 +56,23 @@ public class PerlSettingsConfigurable implements Configurable {
   Project myProject;
   PerlSharedSettings mySharedSettings;
   PerlLocalSettings myLocalSettings;
-
   TextFieldWithBrowseButton perlCriticPathInputField;
   RawCommandLineEditor perlCriticArgsInputField;
-
   TextFieldWithBrowseButton perlTidyPathInputField;
   RawCommandLineEditor perlTidyArgsInputField;
-
   TextFieldWithBrowseButton perlPathInputField;
-
   JTextField deparseArgumentsTextField;
-
   JPanel regeneratePanel;
   JButton regenerateButton;
-
   JCheckBox simpleMainCheckbox;
   JCheckBox autoInjectionCheckbox;
   JCheckBox perlCriticCheckBox;
   JCheckBox perlAnnotatorCheckBox;
   JCheckBox allowInjectionWithInterpolation;
   JCheckBox allowRegexpInjections;
-
   CollectionListModel<String> selfNamesModel;
   JBList selfNamesList;
+  private ComboBox<PerlVersion> myVersionComboBox;
 
 
   public PerlSettingsConfigurable(Project myProject) {
@@ -108,6 +102,20 @@ public class PerlSettingsConfigurable implements Configurable {
     if (!PlatformUtils.isIntelliJ()) {
       createMicroIdeComponents(builder);
     }
+
+    ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
+    myVersionComboBox = new ComboBox<>(versionModel);
+    myVersionComboBox.setRenderer(new ColoredListCellRenderer<PerlVersion>() {
+      @Override
+      protected void customizeCellRenderer(@NotNull JList<? extends PerlVersion> list,
+                                           PerlVersion value,
+                                           int index,
+                                           boolean selected,
+                                           boolean hasFocus) {
+        append(value.getStrictDottedVersion()); // fixme add features
+      }
+    });
+    builder.addLabeledComponent(PerlBundle.message("perl.config.language.level"), myVersionComboBox);
 
     simpleMainCheckbox = new JCheckBox(PerlBundle.message("perl.config.simple.main"));
     builder.addComponent(simpleMainCheckbox);

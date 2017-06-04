@@ -30,7 +30,19 @@ import java.util.regex.Matcher;
  * Represents perl version
  */
 public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> {
+  public static final PerlVersion V5_8 = new PerlVersion(5.008);
+  public static final PerlVersion V5_10 = new PerlVersion(5.010);
   public static final PerlVersion V5_12 = new PerlVersion(5.012);
+  public static final PerlVersion V5_14 = new PerlVersion(5.014);
+  public static final PerlVersion V5_16 = new PerlVersion(5.016);
+  public static final PerlVersion V5_18 = new PerlVersion(5.018);
+  public static final PerlVersion V5_20 = new PerlVersion(5.020);
+  public static final PerlVersion V5_22 = new PerlVersion(5.022);
+  public static final PerlVersion V5_24 = new PerlVersion(5.024);
+  public static final PerlVersion V5_26 = new PerlVersion(5.026);
+  public static final List<PerlVersion> ALL_VERSIONS = Arrays.asList(
+    V5_8, V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26
+  );
 
   protected boolean isAlpha;
   protected boolean isStrict;
@@ -137,7 +149,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   }
 
   public String getStrictDottedVersion() {
-    List<String> result = new ArrayList<String>(Arrays.asList(Integer.toString(revision)));
+    List<String> result = new ArrayList<>(Arrays.asList(Integer.toString(revision)));
 
     if (major > 0 || minor > 0 || !extraChunks.isEmpty()) {
       result.add(Integer.toString(major));
