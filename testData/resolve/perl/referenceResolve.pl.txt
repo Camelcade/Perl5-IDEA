@@ -1,0 +1,9 @@
+PerlVariableReference at (50,60); text in range: 'scalar_ref' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 4 in referenceResolve.pl
+
+PerlVariableReference at (67,76); text in range: 'array_ref' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 18 in referenceResolve.pl
+
+PerlVariableReference at (86,94); text in range: 'hash_ref' => 1 results:
+	VARIABLE_DECLARATION_WRAPPER at 31 in referenceResolve.pl
+

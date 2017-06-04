@@ -46,6 +46,8 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
     return "testData/completion/perl";
   }
 
+  public void testReferenceCompletion() {doTestContains("declared_reference");}
+
   public void testCaptureScalar() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}
 
   public void testCaptureArray() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}

@@ -1,0 +1,3 @@
+my \$declared_reference;
+
+$<caret>

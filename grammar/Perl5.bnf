@@ -938,7 +938,7 @@ private strict_variable_declaration_argument ::= strict_variable_declaration_wra
 private variable_declaration_argument ::= variable_declaration_wrapper |  'undef'
 
 private strict_variable_declaration_wrapper ::= variable_declaration_wrapper !('{' | '[' | '->' )
-variable_declaration_wrapper ::= lexical_variable
+variable_declaration_wrapper ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' //{pin=1}

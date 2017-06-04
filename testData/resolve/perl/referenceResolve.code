@@ -1,0 +1,5 @@
+my (\$scalar_ref, \@array_ref, \%hash_ref);
+
+say $scalar_ref;
+say $array_ref[1];
+say $hash_ref{asdf};
