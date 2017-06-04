@@ -31,6 +31,8 @@ public class PerlParserTest extends PerlParserTestBase {
 
   public void testDeclareReference() {doTest();}
 
+  public void testBuiltInWithRefs() {doTest();}
+
   public void testIssue1434() {doTest();}
 
   public void testIssue1435() {doTest();}

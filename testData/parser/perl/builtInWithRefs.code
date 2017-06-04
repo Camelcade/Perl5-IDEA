@@ -1,0 +1,32 @@
+&CORE::keys(\%hash);
+my $k = \&CORE::keys;
+$k->(\%hash);
+
+&CORE::each(\%hash);
+my $k = \&CORE::each;
+$k->(\%hash);
+
+&CORE::values(\%hash);
+my $k = \&CORE::values;
+$k->(\%hash);
+
+&CORE::push(\%hash);
+my $k = \&CORE::push;
+$k->(\%hash);
+
+&CORE::pop(\%hash);
+my $k = \&CORE::pop;
+$k->(\%hash);
+
+&CORE::shift(\%hash);
+my $k = \&CORE::shift;
+$k->(\%hash);
+
+&CORE::unshift(\%hash);
+my $k = \&CORE::unshift;
+$k->(\%hash);
+
+&CORE::splice(\%hash);
+my $k = \&CORE::splice;
+$k->(\%hash);
+
