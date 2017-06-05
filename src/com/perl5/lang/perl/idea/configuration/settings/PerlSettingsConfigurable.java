@@ -112,7 +112,11 @@ public class PerlSettingsConfigurable implements Configurable {
                                            int index,
                                            boolean selected,
                                            boolean hasFocus) {
-        append(value.getStrictDottedVersion()); // fixme add features
+        append(value.getStrictDottedVersion());
+        String versionDescription = PerlVersion.PERL_VERSION_DESCRIPTIONS.get(value);
+        if (StringUtil.isNotEmpty(versionDescription)) {
+          append(" (" + versionDescription + ")");
+        }
       }
     });
     builder.addLabeledComponent(PerlBundle.message("perl.config.language.level"), myVersionComboBox);

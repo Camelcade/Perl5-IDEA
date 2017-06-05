@@ -16,13 +16,12 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.perl5.PerlBundle;
+import gnu.trove.THashMap;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 
 /**
@@ -30,7 +29,6 @@ import java.util.regex.Matcher;
  * Represents perl version
  */
 public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> {
-  public static final PerlVersion V5_8 = new PerlVersion(5.008);
   public static final PerlVersion V5_10 = new PerlVersion(5.010);
   public static final PerlVersion V5_12 = new PerlVersion(5.012);
   public static final PerlVersion V5_14 = new PerlVersion(5.014);
@@ -41,8 +39,22 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   public static final PerlVersion V5_24 = new PerlVersion(5.024);
   public static final PerlVersion V5_26 = new PerlVersion(5.026);
   public static final List<PerlVersion> ALL_VERSIONS = Arrays.asList(
-    V5_8, V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26
+    V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26
   );
+
+  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS = new THashMap<>();
+
+  static {
+    PERL_VERSION_DESCRIPTIONS.put(V5_10, PerlBundle.message("perl.version.description.5.10"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_12, PerlBundle.message("perl.version.description.5.12"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_14, PerlBundle.message("perl.version.description.5.14"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_16, PerlBundle.message("perl.version.description.5.16"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_18, PerlBundle.message("perl.version.description.5.18"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_20, PerlBundle.message("perl.version.description.5.20"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_22, PerlBundle.message("perl.version.description.5.22"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_24, PerlBundle.message("perl.version.description.5.24"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_26, PerlBundle.message("perl.version.description.5.26"));
+  }
 
   protected boolean isAlpha;
   protected boolean isStrict;
