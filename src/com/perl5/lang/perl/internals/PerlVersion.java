@@ -64,6 +64,8 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   protected int minor;
   protected List<Integer> extraChunks = Collections.emptyList();
 
+  private PerlVersion() {}
+
   public PerlVersion(double version) {
     try {
       parseDoubleVersion(version);

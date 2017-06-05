@@ -72,7 +72,7 @@ public class PerlSettingsConfigurable implements Configurable {
   JCheckBox allowRegexpInjections;
   CollectionListModel<String> selfNamesModel;
   JBList selfNamesList;
-  private ComboBox<PerlVersion> myVersionComboBox;
+  private ComboBox<PerlVersion> myTargetPerlVersionComboBox;
 
 
   public PerlSettingsConfigurable(Project myProject) {
@@ -104,8 +104,8 @@ public class PerlSettingsConfigurable implements Configurable {
     }
 
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
-    myVersionComboBox = new ComboBox<>(versionModel);
-    myVersionComboBox.setRenderer(new ColoredListCellRenderer<PerlVersion>() {
+    myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
+    myTargetPerlVersionComboBox.setRenderer(new ColoredListCellRenderer<PerlVersion>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends PerlVersion> list,
                                            PerlVersion value,
@@ -119,7 +119,7 @@ public class PerlSettingsConfigurable implements Configurable {
         }
       }
     });
-    builder.addLabeledComponent(PerlBundle.message("perl.config.language.level"), myVersionComboBox);
+    builder.addLabeledComponent(PerlBundle.message("perl.config.language.level"), myTargetPerlVersionComboBox);
 
     simpleMainCheckbox = new JCheckBox(PerlBundle.message("perl.config.simple.main"));
     builder.addComponent(simpleMainCheckbox);
@@ -296,6 +296,7 @@ public class PerlSettingsConfigurable implements Configurable {
            myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected() ||
            mySharedSettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
            mySharedSettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
+           !mySharedSettings.getTargetPerlVersion().equals(myTargetPerlVersionComboBox.getSelectedItem()) ||
            !StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
            !StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
@@ -318,6 +319,7 @@ public class PerlSettingsConfigurable implements Configurable {
     mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
     mySharedSettings.PERL_ANNOTATOR_ENABLED = perlAnnotatorCheckBox.isSelected();
     mySharedSettings.setDeparseOptions(deparseArgumentsTextField.getText());
+    mySharedSettings.setTargetPerlVersion((PerlVersion)myTargetPerlVersionComboBox.getSelectedItem());
 
     mySharedSettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
     myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
@@ -359,6 +361,7 @@ public class PerlSettingsConfigurable implements Configurable {
     selfNamesModel.removeAll();
     selfNamesModel.add(mySharedSettings.selfNames);
 
+    myTargetPerlVersionComboBox.setSelectedItem(mySharedSettings.getTargetPerlVersion());
     simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
     autoInjectionCheckbox.setSelected(mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS);
     allowInjectionWithInterpolation.setSelected(mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION);

@@ -40,11 +40,13 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.idea.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.idea.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -744,10 +746,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     result.addAll(Arrays.asList(ProjectRootManager.getInstance(psiFile.getProject()).orderEntries().getClassesRoots()));
 
     // current dir
-    if (psiFile instanceof PerlFileImpl) {
-      VirtualFile virtualFile = psiFile.getVirtualFile();
-      if (virtualFile != null) {
-        result.add(virtualFile.getParent());
+    if (PerlSharedSettings.getInstance(psiFile.getProject()).getTargetPerlVersion().lesserThan(PerlVersion.V5_26)) {
+      if (psiFile instanceof PerlFileImpl) {
+        VirtualFile virtualFile = psiFile.getVirtualFile();
+        if (virtualFile != null) {
+          result.add(virtualFile.getParent());
+        }
       }
     }
 

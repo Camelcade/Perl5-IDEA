@@ -43,8 +43,8 @@
        <li>Lexing and parsing for lexical subs. NB: for now there is no proper resolving for them. Works as usual subs. Please, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1439">#1439</a>.</li>
        <li>Support for indentable here-docs</li>
        <li>Support for references declarations</li>
+       <li>Perl settings now allows You to choose target Perl version. In case 5.26 is selected, resolve won't check current directory while resolving packages.</li>
      </ul></li>
-     <li></li>
      </ul>
      </p>
      <p>Fixes:
