@@ -26,10 +26,10 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import junit.framework.AssertionFailedError;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -67,17 +67,21 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 
   public void doTestWithFileCheck() {
     initWithFileSmart();
-    doTestWithFileCheckWithoutInit();
+    checkSerializedReferencesWithFile();
   }
 
-  public void doTestWithFileCheckWithoutInit() {
+  public void checkSerializedReferencesWithFile() {
+    checkSerializedReferencesWithFile("");
+  }
+
+  public void checkSerializedReferencesWithFile(@NotNull String appendix) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     StringBuilder sb = new StringBuilder();
 
     for (PsiReference psiReference : collectFileReferences()) {
       sb.append(serializeReference(psiReference)).append("\n");
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(appendix), sb.toString());
   }
 
   private String serializeReference(PsiReference reference) {
@@ -149,13 +153,8 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
       }
     });
 
-    Collections.sort(references, new Comparator<PsiReference>() {
-      @Override
-      public int compare(PsiReference o1, PsiReference o2) {
-        return o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
-               o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset();
-      }
-    });
+    Collections.sort(references, (o1, o2) -> o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
+                                             o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset());
 
     return references;
   }

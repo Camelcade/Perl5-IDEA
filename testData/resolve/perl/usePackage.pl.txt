@@ -1,0 +1,3 @@
+PerlNamespaceFileReference at (4,19); text in range: 'MyCustomPackage' => 1 results:
+	Perl5 at 0 in MyCustomPackage.pm
+

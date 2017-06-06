@@ -16,6 +16,8 @@
 
 package resolve.perl;
 
+import com.perl5.lang.perl.internals.PerlVersion;
+
 /**
  * Created by hurricup on 09.11.2016.
  */
@@ -85,5 +87,31 @@ public class PerlResolveTest extends PerlResolveTestCase {
 
   public void testPackageRanges() {
     doTestWithFileCheck();
+  }
+
+  public void testUsePackage() {
+    addCustomPackage();
+    setTargetPerlVersion(PerlVersion.V5_10);
+    doTestWithFileCheck();
+    setTargetPerlVersion(PerlVersion.V5_12);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_14);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_16);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_18);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_20);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_22);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_24);
+    checkSerializedReferencesWithFile();
+    setTargetPerlVersion(PerlVersion.V5_26);
+    checkSerializedReferencesWithFile("no_resolve");
+  }
+
+  private void addCustomPackage() {
+    myFixture.copyFileToProject("MyCustomPackage.pm");
   }
 }

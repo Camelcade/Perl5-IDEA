@@ -18,7 +18,6 @@ package base;
 
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.injection.InjectedLanguageManager;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
@@ -30,7 +29,6 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
-import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -48,10 +46,11 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.internals.PerlVersion;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
-import org.picocontainer.MutablePicoContainer;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,48 +84,40 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     return getTestDataPath() + "/" + getTestName(true) + appendix + "." + getFileExtension() + ".txt";
   }
 
-  protected void setUpLibrary() {
-    ApplicationManager.getApplication().runWriteAction(() ->
-                                                       {
-                                                         ModifiableRootModel modifiableModel =
-                                                           ModuleRootManager.getInstance(myModule).getModifiableModel();
-
-                                                         for (OrderEntry entry : modifiableModel.getOrderEntries()) {
-                                                           if (entry instanceof LibraryOrderEntry &&
-                                                               StringUtil
-                                                                 .equals(((LibraryOrderEntry)entry).getLibraryName(), PERL_LIBRARY_NAME)) {
-                                                             modifiableModel.removeOrderEntry(entry);
-                                                           }
-                                                         }
-
-                                                         //			TempDirTestFixture tempDirFixture = myFixture.getTempDirFixture();
-                                                         //			tempDirFixture.copyAll("testData/testlib", "testlib");
-
-                                                         LibraryTable moduleLibraryTable = modifiableModel.getModuleLibraryTable();
-                                                         Library library = moduleLibraryTable.createLibrary(PERL_LIBRARY_NAME);
-                                                         Library.ModifiableModel libraryModifyableModel = library.getModifiableModel();
-                                                         VirtualFile libdir =
-                                                           LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
-                                                         assert libdir != null;
-                                                         libraryModifyableModel.addRoot(libdir,
-                                                                                        OrderRootType.CLASSES); // myFixture.findFileInTempDir("testlib")
-                                                         libraryModifyableModel.commit();
-                                                         modifiableModel.commit();
-                                                         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-                                                       });
+  protected void setTargetPerlVersion(@NotNull PerlVersion perlVersion) {
+    PerlSharedSettings.getInstance(getProject()).setTargetPerlVersion(perlVersion).settingsUpdated();
   }
 
-  protected <T> void registerApplicationService(final Class<T> aClass, T object) {
-    final MutablePicoContainer container = ((MutablePicoContainer)getApplication().getPicoContainer());
-    container.registerComponentImplementation(object, aClass);
-    //		container.registerComponentInDisposer(serviceImplementation);
+  protected void setUpLibrary() {
+    ApplicationManager.getApplication().runWriteAction(
+      () ->
+      {
+        ModifiableRootModel modifiableModel =
+          ModuleRootManager.getInstance(myModule).getModifiableModel();
 
-    Disposer.register(getProject(), new Disposable() {
-      @Override
-      public void dispose() {
-        container.unregisterComponent(aClass.getName());
-      }
-    });
+        for (OrderEntry entry : modifiableModel.getOrderEntries()) {
+          if (entry instanceof LibraryOrderEntry &&
+              StringUtil
+                .equals(((LibraryOrderEntry)entry).getLibraryName(), PERL_LIBRARY_NAME)) {
+            modifiableModel.removeOrderEntry(entry);
+          }
+        }
+
+        //			TempDirTestFixture tempDirFixture = myFixture.getTempDirFixture();
+        //			tempDirFixture.copyAll("testData/testlib", "testlib");
+
+        LibraryTable moduleLibraryTable = modifiableModel.getModuleLibraryTable();
+        Library library = moduleLibraryTable.createLibrary(PERL_LIBRARY_NAME);
+        Library.ModifiableModel libraryModifyableModel = library.getModifiableModel();
+        VirtualFile libdir =
+          LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
+        assert libdir != null;
+        libraryModifyableModel.addRoot(libdir,
+                                       OrderRootType.CLASSES); // myFixture.findFileInTempDir("testlib")
+        libraryModifyableModel.commit();
+        modifiableModel.commit();
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+      });
   }
 
   public void initWithPerlTidy() {

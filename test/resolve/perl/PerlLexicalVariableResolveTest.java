@@ -89,7 +89,7 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase 
         public void testPerlTidy()
 	{
 		initWithPerlTidy();
-		doTestWithFileCheckWithoutInit(); // fails on travis
+		checkSerializedReferencesWithFile(); // fails on travis
 	}
 */
 }
