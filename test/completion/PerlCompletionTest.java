@@ -20,8 +20,9 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXExports;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancer2DSL;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancerDSL;
-import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
+import com.perl5.lang.perl.internals.PerlVersion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +45,28 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   @Override
   protected String getTestDataPath() {
     return "testData/completion/perl";
+  }
+
+  public void testUsePackageInCurrentDir() {
+    addCustomPackage();
+    setTargetPerlVersion(PerlVersion.V5_10);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_12);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_14);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_16);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_18);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_20);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_22);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_24);
+    doTestPackageAndVersions("MyCustomPackage");
+    setTargetPerlVersion(PerlVersion.V5_26);
+    doTestPackageAndVersions();
   }
 
   public void testReferenceCompletion() {doTestContains("declared_reference");}
@@ -290,11 +313,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
   @Override
   public String getFileExtension() {
-    return PerlFileTypePackage.EXTENSION;
-  }
-
-  public void testPackageDefinition() {
-    doTest("packageDefinition");
+    return PerlFileTypeScript.EXTENSION_PL;
   }
 
   public void testPackageUse() {
@@ -325,27 +344,9 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
     doTestAllPackages();
   }
 
-  private void doTest() {
-    doTest(Collections.emptyList());
-  }
 
-  @SafeVarargs
-  private final void doTest(List<String>... result) {
-    initWithFileSmart();
-    assertCompletionIs(result);
-  }
-
-  private void doTestContains(String... args) {
-    initWithFileSmart();
-    assertLookupContains(Arrays.asList(args));
-  }
-
-  private void doTest(String... result) {
-    doTest(Arrays.asList(result));
-  }
-
-  private void doTestPackageAndVersions() {
-    doTest(BUILT_IN_VERSIONS, LIBRARY_PACKAGES);
+  private void doTestPackageAndVersions(String... more) {
+    doTest(BUILT_IN_VERSIONS, LIBRARY_PACKAGES, Arrays.asList(more));
   }
 
   private void doTestAllPackages() {

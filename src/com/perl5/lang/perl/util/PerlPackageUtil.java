@@ -30,6 +30,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
@@ -455,7 +456,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
   }
 
-  public static void processPackageFilesForPsiElement(PsiElement element, final Processor<String> processor) {
+  public static void processPackageFilesForPsiElement(@NotNull PsiElement element, @NotNull Processor<String> processor) {
     processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
@@ -467,20 +468,18 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     ;
   }
 
-  public static void processIncFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType) {
-    if (element != null) {
-      VirtualFile[] classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
-
-      for (VirtualFile file : FileTypeIndex.getFiles(fileType, PerlScopes.getProjectAndLibrariesScope(element.getProject()))) {
-        for (VirtualFile classRoot : classRoots) {
-          if (VfsUtil.isAncestor(classRoot, file, true)) {
-            if (!processor.process(file, classRoot)) {
-              return;
-            }
-          }
-        }
+  public static boolean processIncFilesForPsiElement(@NotNull PsiElement element,
+                                                     @NotNull ClassRootVirtualFileProcessor processor,
+                                                     @NotNull FileType fileType) {
+    for (VirtualFile classRoot : getIncDirsForPsiElement(element)) {
+      if (!FileTypeIndex.processFiles(fileType,
+                                      virtualFile -> processor.process(virtualFile, classRoot),
+                                      GlobalSearchScopesCore.directoryScope(element.getProject(), classRoot, true))
+        ) {
+        return false;
       }
     }
+    return true;
   }
 
   public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubBase> processor) {
@@ -655,7 +654,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   @Nullable
   public static VirtualFile resolveRelativePathToVirtualFile(@NotNull PsiFile psiFile, String relativePath) {
     if (relativePath != null) {
-      for (VirtualFile classRoot : getLibPathsForPsiFile(psiFile)) {
+      for (VirtualFile classRoot : getIncDirsForPsiElement(psiFile)) {
         if (classRoot != null) {
           VirtualFile targetFile = classRoot.findFileByRelativePath(relativePath);
           if (targetFile != null) {
@@ -675,11 +674,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   /**
    * Returns List of lib directories including class roots, current directory and use lib ones
    *
-   * @param psiFile psiFile to resolve from
+   * @param psiElement to resolve for
    * @return list of lib dirs
    */
   @NotNull
-  public static List<VirtualFile> getLibPathsForPsiFile(@NotNull PsiFile psiFile) {
+  public static List<VirtualFile> getIncDirsForPsiElement(@NotNull PsiElement psiElement) {
+    PsiFile psiFile = psiElement.getContainingFile().getOriginalFile();
     List<VirtualFile> result = new ArrayList<>();
 
     // libdirs providers fixme we need to use stubs or psi here
@@ -695,11 +695,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     // current dir
     if (PerlSharedSettings.getInstance(psiFile.getProject()).getTargetPerlVersion().lesserThan(PerlVersion.V5_26)) {
-      if (psiFile instanceof PerlFileImpl) {
-        VirtualFile virtualFile = psiFile.getVirtualFile();
-        if (virtualFile != null) {
-          result.add(virtualFile.getParent());
-        }
+      VirtualFile virtualFile = psiFile.getVirtualFile();
+      if (virtualFile != null) {
+        result.add(virtualFile.getParent());
       }
     }
 

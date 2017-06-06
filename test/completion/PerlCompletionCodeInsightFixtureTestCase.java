@@ -25,6 +25,7 @@ import com.perl5.lang.perl.util.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -90,6 +91,25 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
   public final void assertCompletionIs(List<String>... expected) {
     initWithFileSmart();
     assertLookupIs(mergeLists(expected));
+  }
+
+  protected void doTest() {
+    doTest(Collections.emptyList());
+  }
+
+  @SafeVarargs
+  protected final void doTest(List<String>... result) {
+    initWithFileSmart();
+    assertCompletionIs(result);
+  }
+
+  protected void doTestContains(String... args) {
+    initWithFileSmart();
+    assertLookupContains(Arrays.asList(args));
+  }
+
+  protected void doTest(String... result) {
+    doTest(Arrays.asList(result));
   }
 
   @SafeVarargs

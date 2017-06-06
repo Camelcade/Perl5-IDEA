@@ -110,8 +110,4 @@ public class PerlResolveTest extends PerlResolveTestCase {
     setTargetPerlVersion(PerlVersion.V5_26);
     checkSerializedReferencesWithFile("no_resolve");
   }
-
-  private void addCustomPackage() {
-    myFixture.copyFileToProject("MyCustomPackage.pm");
-  }
 }

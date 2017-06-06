@@ -85,7 +85,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     }
   }
 
-  protected static void addFilesCompletions(PsiPodFormatLink link, @NotNull final CompletionResultSet result) {
+  protected static void addFilesCompletions(@NotNull PsiPodFormatLink link, @NotNull final CompletionResultSet result) {
     final Project project = link.getProject();
     final Set<String> foundPods = new THashSet<>();
 

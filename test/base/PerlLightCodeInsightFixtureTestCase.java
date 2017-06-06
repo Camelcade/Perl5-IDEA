@@ -369,6 +369,10 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     );
   }
 
+  protected void addCustomPackage() {
+    myFixture.copyFileToProject("MyCustomPackage.pm");
+  }
+
   public static Application getApplication() {
     return ApplicationManager.getApplication();
   }
