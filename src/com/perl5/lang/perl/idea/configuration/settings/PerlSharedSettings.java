@@ -92,8 +92,10 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
     return myTargetPerlVersion;
   }
 
-  public void setTargetPerlVersion(@NotNull PerlVersion targetPerlVersion) {
+  @NotNull
+  public PerlSharedSettings setTargetPerlVersion(@NotNull PerlVersion targetPerlVersion) {
     myTargetPerlVersion = targetPerlVersion;
+    return this;
   }
 
   public void settingsUpdated() {
