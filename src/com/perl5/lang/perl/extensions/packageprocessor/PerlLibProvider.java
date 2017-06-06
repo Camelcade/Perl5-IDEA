@@ -18,6 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -25,5 +26,5 @@ import java.util.List;
  * Created by hurricup on 19.09.2015.
  */
 public interface PerlLibProvider {
-  public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs);
+  void addLibDirs(@NotNull PerlUseStatement useStatement, @NotNull List<VirtualFile> libDirs);
 }

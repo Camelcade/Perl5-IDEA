@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
  */
 public class LibProcessor extends PerlPragmaProcessorBase implements PerlLibProvider {
   @Override
-  public void addLibDirs(PerlUseStatement useStatement, List<VirtualFile> libDirs) {
+  public void addLibDirs(@NotNull PerlUseStatement useStatement, @NotNull List<VirtualFile> libDirs) {
     int fileIndex = 0;
 
     List<String> importParameters = useStatement.getImportParameters();
