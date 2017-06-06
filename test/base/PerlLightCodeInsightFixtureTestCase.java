@@ -48,7 +48,6 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -75,7 +74,6 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    registerApplicationService(PerlSharedSettings.class, new PerlSharedSettings());
     setUpLibrary();
   }
 
