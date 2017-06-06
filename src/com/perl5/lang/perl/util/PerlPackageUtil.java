@@ -80,15 +80,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
 
   public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
-  public static final String UNIVERSAL_PACKAGE_FULL = UNIVERSAL_PACKAGE + PACKAGE_SEPARATOR;
 
   public static final String CORE_PACKAGE = "CORE";
   public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
 
   private static final Set<String> INTERNAL_PACKAGES = new THashSet<>();
 
-  private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<String, String>();
-  private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<String, String>();
+  private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
+  private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<>();
 
   static {
     BUILT_IN_ALL.addAll(BUILT_IN);
@@ -181,7 +180,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     name = PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
 
-    ArrayList<String> canonicalChunks = new ArrayList<>();
     String[] chunks = PACKAGE_SEPARATOR_RE.split(name, -1);
 
     if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
@@ -255,7 +253,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
   @NotNull
   public static List<PerlNamespaceDefinition> collectNamespaceDefinitions(@NotNull Project project, @NotNull List<String> packageNames) {
-    ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
+    ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<>();
     for (String packageName : packageNames) {
       Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
@@ -332,7 +330,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project,
                                                                              @NotNull String packageName,
                                                                              @NotNull GlobalSearchScope scope) {
-    return new ArrayList<PerlNamespaceDefinition>(
+    return new ArrayList<>(
       StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
   }
 
@@ -344,27 +342,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    */
   public static String getPackagePathByName(String packageName) {
     return StringUtils.join(packageName.split(":+"), '/') + ".pm";
-  }
-
-  /**
-   * Returns package name by virtual file and project
-   *
-   * @param virtualFile file in question
-   * @param project     project
-   * @return canonical package name
-   */
-  @Nullable
-  public static String getPackageNameByFile(VirtualFile virtualFile, @NotNull Project project) {
-    if (virtualFile == null) {
-      return null;
-    }
-
-    VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(project, virtualFile);
-    if (innermostSourceRoot != null) {
-      String relativePath = VfsUtil.getRelativePath(virtualFile, innermostSourceRoot);
-      return PerlPackageUtil.getPackageNameByPath(relativePath);
-    }
-    return null;
   }
 
   /**
@@ -478,45 +455,19 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
   }
 
-
-  /**
-   * Returns list of Package names available as pm files for specific psi element
-   * todo we could cache this with invalidating on file event
-   *
-   * @param element base PsiElement
-   * @return list of distinct strings
-   */
-  public static Collection<String> getPackageFilesForPsiElement(PsiElement element) {
-    final Set<String> result = new THashSet<String>();
-
-    processPackageFilesForPsiElement(element, new Processor<String>() {
-      @Override
-      public boolean process(String s) {
-        result.add(s);
-        return true;
-      }
-    });
-
-    return result;
-  }
-
-
   public static void processPackageFilesForPsiElement(PsiElement element, final Processor<String> processor) {
-    processFilesForPsiElement(
+    processIncFilesForPsiElement(
       element,
-      new ClassRootVirtualFileProcessor() {
-        @Override
-        public boolean process(VirtualFile file, VirtualFile classRoot) {
-          String relativePath = VfsUtil.getRelativePath(file, classRoot);
-          String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
-          return processor.process(packageName);
-        }
+      (file, classRoot) -> {
+        String relativePath = VfsUtil.getRelativePath(file, classRoot);
+        String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
+        return processor.process(packageName);
       },
       PerlFileTypePackage.INSTANCE)
     ;
   }
 
-  public static void processFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType) {
+  public static void processIncFilesForPsiElement(PsiElement element, ClassRootVirtualFileProcessor processor, FileType fileType) {
     if (element != null) {
       VirtualFile[] classRoots = ProjectRootManager.getInstance(element.getProject()).orderEntries().getClassesRoots();
 
@@ -540,7 +491,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
         return;
       }
 
-      Set<String> namesSet = new THashSet<String>();
+      Set<String> namesSet = new THashSet<>();
       // collecting overrided
       for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionBase.class)) {
         if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getPackageName())) {
@@ -551,7 +502,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
       processParentClassesSubs(
         namespaceDefinition,
         namesSet,
-        new THashSet<PerlNamespaceDefinition>(),
+        new THashSet<>(),
         processor
       );
     }
@@ -588,20 +539,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   }
 
   public static List<PsiElement> collectNamespaceSubs(@NotNull final PsiElement namespace) {
-    return CachedValuesManager.getCachedValue(namespace, new CachedValueProvider<List<PsiElement>>() {
-      @Nullable
-      @Override
-      public Result<List<PsiElement>> compute() {
-        return Result.create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubBaseStub.class, PerlSubBase.class), namespace);
-      }
-    });
+    return CachedValuesManager.getCachedValue(
+      namespace,
+      () -> CachedValueProvider.Result
+        .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubBaseStub.class, PerlSubBase.class), namespace));
   }
 
   public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
                                                 @Nullable Set<PerlNamespaceDefinition> recursionSet,
                                                 Processor<PerlSubBase> processor) {
     if (recursionSet == null) {
-      recursionSet = new THashSet<PerlNamespaceDefinition>();
+      recursionSet = new THashSet<>();
     }
 
     recursionSet.add(namespaceDefinition);
@@ -732,7 +680,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    */
   @NotNull
   public static List<VirtualFile> getLibPathsForPsiFile(@NotNull PsiFile psiFile) {
-    List<VirtualFile> result = new ArrayList<VirtualFile>();
+    List<VirtualFile> result = new ArrayList<>();
 
     // libdirs providers fixme we need to use stubs or psi here
     for (PerlUseStatement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatement.class)) {

@@ -23,14 +23,12 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -66,7 +64,6 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     }
 
     TextRange elementRange = element.getTextRange().shiftRight(-psiPodFormatLink.getTextOffset());
-    CharSequence linkText = psiPodFormatLink.getText();
     PsiReference[] references = psiPodFormatLink.getReferences();
     for (PsiReference reference : references) {
       TextRange referenceRange = reference.getRangeInElement();
@@ -90,38 +87,32 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 
   protected static void addFilesCompletions(PsiPodFormatLink link, @NotNull final CompletionResultSet result) {
     final Project project = link.getProject();
-    final Set<String> foundPods = new THashSet<String>();
+    final Set<String> foundPods = new THashSet<>();
 
-    PerlPackageUtil.processFilesForPsiElement(link, new PerlPackageUtil.ClassRootVirtualFileProcessor() {
-      @Override
-      public boolean process(VirtualFile file, VirtualFile classRoot) {
-        String className = PodFileUtil.getPackageNameFromVirtualFile(file, classRoot);
-        if (StringUtil.isNotEmpty(className)) {
-          boolean isBuiltIn = false;
-          if (StringUtil.startsWith(className, "pods::")) {
-            isBuiltIn = true;
-            className = className.substring(6);
-          }
-          if (!foundPods.contains(className)) {
-            result.addElement(LookupElementBuilder.create(className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn));
-            foundPods.add(className);
-          }
+    PerlPackageUtil.processIncFilesForPsiElement(link, (file, classRoot) -> {
+      String className = PodFileUtil.getPackageNameFromVirtualFile(file, classRoot);
+      if (StringUtil.isNotEmpty(className)) {
+        boolean isBuiltIn = false;
+        if (StringUtil.startsWith(className, "pods::")) {
+          isBuiltIn = true;
+          className = className.substring(6);
         }
-        return true;
+        if (!foundPods.contains(className)) {
+          result.addElement(LookupElementBuilder.create(className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn));
+          foundPods.add(className);
+        }
       }
+      return true;
     }, PodFileType.INSTANCE);
 
-    PerlPackageUtil.processPackageFilesForPsiElement(link, new Processor<String>() {
-      @Override
-      public boolean process(String s) {
-        if (StringUtil.isNotEmpty(s)) {
-          if (!foundPods.contains(s)) {
-            result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
-            foundPods.add(s);
-          }
+    PerlPackageUtil.processPackageFilesForPsiElement(link, s -> {
+      if (StringUtil.isNotEmpty(s)) {
+        if (!foundPods.contains(s)) {
+          result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+          foundPods.add(s);
         }
-        return true;
       }
+      return true;
     });
   }
 

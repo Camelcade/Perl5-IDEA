@@ -26,7 +26,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
@@ -140,12 +139,9 @@ public class PerlPackageCompletionUtil {
 
   public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     final Project project = element.getProject();
-    PerlPackageUtil.processPackageFilesForPsiElement(element, new Processor<String>() {
-      @Override
-      public boolean process(String s) {
-        result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
-        return true;
-      }
+    PerlPackageUtil.processPackageFilesForPsiElement(element, s -> {
+      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+      return true;
     });
   }
 
@@ -184,12 +180,9 @@ public class PerlPackageCompletionUtil {
     public void handleInsert(final InsertionContext context, final LookupElement item) {
       // fixme this is bad check for auto-inserting, i belive
       if (context.getCompletionChar() != '\u0000') {
-        context.setLaterRunnable(new Runnable() {
-          @Override
-          public void run() {
-            Editor editor = context.getEditor();
-            new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1);
-          }
+        context.setLaterRunnable(() -> {
+          Editor editor = context.getEditor();
+          new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1);
         });
       }
     }
