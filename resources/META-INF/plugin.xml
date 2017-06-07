@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2" url="https://github.com/hurricup/Perl5-IDEA">
+<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
   <id>com.perl5</id>
   <name>Perl</name>
   <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
@@ -66,7 +66,7 @@
        on how to target different products  -->
 
   <depends>com.intellij.modules.lang</depends>
-  <depends>org.intellij.intelliLang</depends>
+  <depends optional="true" config-file="intellilang-deps.xml">org.intellij.intelliLang</depends>
   <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
 
   <extensionPoints>
@@ -236,7 +236,7 @@
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
     <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
 
-    <lang.syntaxHighlighterFactory language="Perl5" key="Perl5"
+    <lang.syntaxHighlighterFactory language="Perl5"
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
     <editorHighlighterProvider filetype="Perl5 script"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
@@ -389,7 +389,7 @@
     <projectConfigurable
         instance="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurable"
         parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
-    <lang.syntaxHighlighterFactory language="Template Toolkit 2" key="Template Toolkit 2"
+    <lang.syntaxHighlighterFactory language="Template Toolkit 2"
                                    implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
     <highlightErrorFilter
@@ -453,7 +453,7 @@
                            implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <lang.fileViewProviderFactory language="Embedded Perl"
                                   implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
-    <lang.syntaxHighlighterFactory language="Embedded Perl" key="Embedded Perl"
+    <lang.syntaxHighlighterFactory language="Embedded Perl"
                                    implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
     <lang.findUsagesProvider language="Embedded Perl"
                              implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
@@ -505,7 +505,7 @@
                            implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
     <lang.fileViewProviderFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
-    <lang.syntaxHighlighterFactory language="Mojolicious Perl" key="Mojolicious Perl"
+    <lang.syntaxHighlighterFactory language="Mojolicious Perl"
                                    implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
     <lang.findUsagesProvider language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
@@ -580,7 +580,7 @@
         implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
     <lang.braceMatcher language="HTML::Mason Templating Language"
                        implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
-    <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language" key="HTML::Mason Templating Language"
+    <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language"
                                    implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
     <lang.foldingBuilder language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
@@ -656,7 +656,7 @@
     <typeHierarchyProvider language="Mason2"
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonPackageHierarchyProvider"/>
     <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.MasonFileTypeFactory"/>
-    <lang.syntaxHighlighterFactory language="Mason2" key="Mason2"
+    <lang.syntaxHighlighterFactory language="Mason2"
                                    implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
     <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
     <lang.findUsagesProvider language="Mason2"
@@ -707,7 +707,7 @@
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
     <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
     <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Perl5 POD" key="Perl5 POD"
+    <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
     <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>

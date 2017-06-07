@@ -25,8 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import org.intellij.plugins.intelliLang.inject.InjectedLanguage;
-import org.intellij.plugins.intelliLang.inject.TemporaryPlacesRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,14 +70,10 @@ public class PerlHeredocLanguageInjector extends AbstractPerlLanguageInjector im
       return mappedLanguage;
     }
 
-    InjectedLanguage injectedLanguage = TemporaryPlacesRegistry.getInstance(heredocElement.getProject())
-      .getLanguageFor(heredocElement, heredocElement.getContainingFile());
-
-    if (injectedLanguage == null) {
-      return null;
-    }
-
-    return injectedLanguage.getLanguage();
+    PerlTemporaryInjectedLanguageDetector temporaryInjectedLanguageDetector = PerlTemporaryInjectedLanguageDetector.getInstance();
+    return temporaryInjectedLanguageDetector == null
+           ? null
+           : temporaryInjectedLanguageDetector.getTemporaryInjectedLanguage(heredocElement);
   }
 
   private void addPlace(@NotNull PerlHeredocElementImpl heredocElement, @NotNull MultiHostRegistrar registrar) {
