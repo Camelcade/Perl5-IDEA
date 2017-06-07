@@ -36,13 +36,14 @@
      <p>Updates:
      <ul>
      <li>Plugin now uses debugger module v2017.1x</li>
-     <li>Improved comments parsing in char classes and <code>\Q...\E</code> quotes in regexps</li>
-     <li>Improved POSIX chars classes parsing</li>
-     <li>Perl 5.26 support:<ul>
+     <li>Better comments parsing in char classes and <code>\Q...\E</code> quotes in regexps</li>
+     <li>Better POSIX chars classes parsing</li>
+     <li>Perl 5.26 syntax support:<ul>
        <li><code>/xx</code> regexp modifier</li>
        <li>Lexing and parsing for lexical subs. NB: for now there is no proper resolving for them. Works as usual subs. Please, see <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1439">#1439</a>.</li>
-       <li>Support for indentable here-docs</li>
-       <li>Support for references declarations</li>
+       <li>Indentable here-docs</li>
+       <li>References declarations</li>
+       <li><code>^CAPTURE</code> and <code>^CAPTURE_ALL</code> variables</li>
        <li>Perl settings now allows You to choose target Perl version. In case 5.26 is selected, resolve won't check current directory while resolving packages.</li>
      </ul></li>
      </ul>
