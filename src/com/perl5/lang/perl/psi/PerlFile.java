@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 09.08.2015.
  */
-public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceContainer, PerlLabelScope, ItemPresentation, PodLinkTarget {
+public interface PerlFile extends PsiFile, PerlLexicalScope, PerlNamespaceDefinition, PerlLabelScope, ItemPresentation, PodLinkTarget {
   /**
    * Recursively collects virtual files included in current file
    *

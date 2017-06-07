@@ -46,7 +46,10 @@ import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlSubBaseStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -231,12 +234,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
   // fixme shouldn't we have recursion protection here?
   @Nullable
-  public static PerlNamespaceContainer getNamespaceContainerForElement(@Nullable PsiElement element) {
+  public static PerlNamespaceDefinition getNamespaceContainerForElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
 
-    PerlNamespaceContainer namespaceContainer = PsiTreeUtil.getParentOfType(element, PerlNamespaceContainer.class);
+    PerlNamespaceDefinition namespaceContainer = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
 
     if (namespaceContainer instanceof PerlFileImpl) {
       PsiElement contextParent = namespaceContainer.getContext();
@@ -320,7 +323,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @param project project to search in
    * @return collection of definitions
    */
-  public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @NotNull String packageName) {
+  @NotNull
+  public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @Nullable String packageName) {
+    if (StringUtil.isEmpty(packageName)) {
+      return Collections.emptyList();
+    }
     List<PerlNamespaceDefinition> list = getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
     if (list.isEmpty()) {
       list = getDerivedNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));

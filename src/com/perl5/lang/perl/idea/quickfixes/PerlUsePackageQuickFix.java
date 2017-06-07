@@ -27,9 +27,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
+import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
@@ -102,10 +102,10 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
     }
     else    // no uses found
     {
-      PsiElement baseNamespace = PsiTreeUtil.findChildOfType(newStatementContainer, PerlNamespaceDefinition.class);
-      if (baseNamespace != null && ((PerlNamespaceDefinition)baseNamespace).getBlock() != null)    // got a namespace definition
+      PsiPerlNamespaceDefinition baseNamespace = PsiTreeUtil.findChildOfType(newStatementContainer, PsiPerlNamespaceDefinition.class);
+      if (baseNamespace != null && baseNamespace.getBlock() != null)    // got a namespace definition
       {
-        newStatementContainer = ((PerlNamespaceDefinition)baseNamespace).getBlock();
+        newStatementContainer = baseNamespace.getBlock();
         if (newStatementContainer != null && !(newStatementContainer instanceof PsiPerlNamespaceContent)) {
           afterAnchor = newStatementContainer.getFirstChild();
         }

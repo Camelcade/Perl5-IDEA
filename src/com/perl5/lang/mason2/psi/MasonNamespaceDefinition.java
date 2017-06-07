@@ -17,15 +17,29 @@
 package com.perl5.lang.mason2.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.mason2.Mason2Constants;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
-public interface MasonNamespaceDefinition extends PsiElement, Mason2Constants, PerlNamespaceDefinition, PerlImplicitVariablesProvider {
+public interface MasonNamespaceDefinition extends PsiElement,
+                                                  Mason2Constants,
+                                                  PerlImplicitVariablesProvider,
+                                                  StubBasedPsiElement<PerlNamespaceDefinitionStub>,
+                                                  PerlNamespaceDefinition,
+                                                  PerlNamespaceElementContainer,
+                                                  PerlIdentifierOwner,
+                                                  PerlElementPatterns,
+                                                  PerlCompositeElement {
   /**
    * Returns file path relative to project root
    *

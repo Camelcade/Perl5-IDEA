@@ -445,7 +445,7 @@ limitations under the License.
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin"
-    implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinition"
+    implements("namespace_definition")="com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier"
 
     stubClass("method_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("method_definition")="com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin"

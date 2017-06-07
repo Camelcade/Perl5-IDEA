@@ -28,10 +28,9 @@ import com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,19 +43,19 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
   }
 
   @Override
-  public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionImplMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new MasonNamespaceDefinitionImpl(stub, this);
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub) {
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionImplMixin psi, StubElement parentStub) {
     assert psi instanceof MasonNamespaceDefinitionImpl;
-    return new PerlNamespaceDefinitionStubImpl(
+    return new PerlNamespaceDefinitionStub(
       parentStub,
       this,
       ((MasonNamespaceDefinitionImpl)psi).getAbsoluteComponentPath(),
       psi.getMroType(),
-      ((MasonNamespaceDefinitionImpl)psi).getParentNamespacesNamesFromPsi(),
+      psi.getParentNamespacesNamesFromPsi(),
       psi.getEXPORT(),
       psi.getEXPORT_OK(),
       psi.getEXPORT_TAGS(),
@@ -73,7 +72,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
     // fixme this is kinda hack to make MRO work. But, it should be smarter
     sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, Mason2Util.getClassnameFromPath(name));
 
-    for (String parent : stub.getParentNamespaces()) {
+    for (String parent : stub.getParentNamespacesNames()) {
       if (parent != null && !parent.isEmpty()) {
         sink.occurrence(MasonParentNamespacesStubIndex.KEY, parent);
       }

@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.hierarchy.namespace.treestructures.PerlSubTypesHierarchyTreeStructure;
 import com.perl5.lang.perl.idea.hierarchy.namespace.treestructures.PerlSuperTypesHierarchyTreeStructure;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,8 +52,8 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected String getQualifiedName(PsiElement psiElement) {
-    if (psiElement instanceof PerlNamedElement) {
-      return ((PerlNamedElement)psiElement).getPresentableName();
+    if (psiElement instanceof PerlIdentifierOwner) {
+      return ((PerlIdentifierOwner)psiElement).getPresentableName();
     }
 
     return null;

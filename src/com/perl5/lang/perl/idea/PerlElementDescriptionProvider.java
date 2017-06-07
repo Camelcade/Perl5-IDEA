@@ -24,7 +24,7 @@ import com.intellij.usageView.UsageViewTypeLocation;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -97,8 +97,8 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       }
       // file renaming
       else if (location == UsageViewShortNameLocation.INSTANCE) {
-        if (element instanceof PerlNamedElement) {
-          return ((PerlNamedElement)element).getPresentableName();
+        if (element instanceof PerlIdentifierOwner) {
+          return ((PerlIdentifierOwner)element).getPresentableName();
         }
         else if (element instanceof PerlPackageMember) {
           return ((PerlPackageMember)element).getCanonicalName();

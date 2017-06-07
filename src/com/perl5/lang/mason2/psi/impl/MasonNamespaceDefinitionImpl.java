@@ -93,7 +93,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     List<String> parentsPaths;
     PerlNamespaceDefinitionStub stub = getStub();
     if (stub != null) {
-      parentsPaths = stub.getParentNamespaces();
+      parentsPaths = stub.getParentNamespacesNames();
     }
     else {
       parentsPaths = getParentNamespacesNamesFromPsi();

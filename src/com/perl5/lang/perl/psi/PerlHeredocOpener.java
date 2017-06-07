@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 
 /**
  * Created by hurricup on 07.08.2015.
  */
-public interface PerlHeredocOpener extends PerlNamedElement {
+public interface PerlHeredocOpener extends PerlIdentifierOwner {
 }

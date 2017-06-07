@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.intellij.psi.PsiNameIdentifierOwner;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Created by hurricup on 26.04.2015.
  */
-public interface PerlGlobVariable extends PsiElement, PerlPackageMember, PerlVariableNameElementContainer, PerlIdentifierOwner {
+public interface PerlIdentifierOwner extends PsiNameIdentifierOwner {
   /**
-   * Checks if this typeglob is left part of assignment
+   * Getting name for presentation
    *
-   * @return result
+   * @return ^^
    */
-  boolean isLeftSideOfAssignment();
+  public String getPresentableName();
 }

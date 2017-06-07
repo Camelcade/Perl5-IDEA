@@ -33,7 +33,6 @@ import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessor
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
-import com.perl5.lang.perl.psi.PerlNamespaceContainer;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
@@ -75,7 +74,7 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
     }
 
     // fixme here should be some walking up visitor
-    PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(this);
+    PerlNamespaceDefinition namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(this);
 
     return namespaceContainer != null && getFBPElement(namespaceContainer.getFirstChild(), this) != null;
   }

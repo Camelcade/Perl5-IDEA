@@ -23,7 +23,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlMethodMember extends PsiElementMemberChooserObject implements ClassMember {
   public PerlMethodMember(@NotNull PsiElement psiElement) {
-    super(psiElement, ((PerlNamedElement)psiElement).getPresentableName(), psiElement.getIcon(0));
+    super(psiElement, ((PerlIdentifierOwner)psiElement).getPresentableName(), psiElement.getIcon(0));
   }
 
   @Override

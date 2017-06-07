@@ -25,7 +25,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -150,8 +150,8 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
 
     for (PsiElement element : relatedItems) {
       if (!isAutoloaded() &&
-          element instanceof PerlNamedElement &&
-          PerlSubUtil.SUB_AUTOLOAD.equals(((PerlNamedElement)element).getName())) {
+          element instanceof PerlIdentifierOwner &&
+          PerlSubUtil.SUB_AUTOLOAD.equals(((PerlIdentifierOwner)element).getName())) {
         setAutoloaded();
       }
 

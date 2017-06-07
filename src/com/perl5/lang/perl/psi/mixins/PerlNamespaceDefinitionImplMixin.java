@@ -18,41 +18,43 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProviderFromArray;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMro;
-import com.perl5.lang.perl.psi.mro.PerlMroC3;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
 public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiElementBase<PerlNamespaceDefinitionStub>
-  implements PerlNamespaceDefinition {
+  implements StubBasedPsiElement<PerlNamespaceDefinitionStub>,
+             PerlNamespaceDefinitionWithIdentifier,
+             PerlElementPatterns,
+             PerlCompositeElement {
   private PerlMroType mroTypeCache = null;
   private List<String> parentsNamesCache = null;
   private ExporterInfo exporterInfoCache = null;
@@ -113,33 +115,15 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
     return null;
   }
 
-  @Override
-  public List<PerlNamespaceDefinition> getParentNamespaceDefinitions() {
-    return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamepsacesNames());
-  }
-
   @NotNull
   @Override
-  public List<String> getParentNamepsacesNames() {
+  public List<String> getParentNamespacesNames() {
     PerlNamespaceDefinitionStub stub = getStub();
     if (stub != null) {
-      return stub.getParentNamespaces();
+      return stub.getParentNamespacesNames();
     }
 
     return getParentNamespacesNamesFromPsi();
-  }
-
-  @NotNull
-  @Override
-  public List<PerlNamespaceDefinition> getChildNamespaceDefinitions() {
-    String packageName = getPackageName();
-    if (StringUtil.isEmpty(packageName)) {
-      return Collections.emptyList();
-    }
-    else {
-      Project project = getProject();
-      return PerlPackageUtil.getDerivedNamespaceDefinitions(project, packageName);
-    }
   }
 
   @NotNull
@@ -190,31 +174,10 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
     return mroTypeCache;
   }
 
-  @Override
-  public PerlMro getMro() {
-    // fixme this should be another EP
-    if (getMroType() == PerlMroType.C3) {
-      return PerlMroC3.INSTANCE;
-    }
-    else {
-      return PerlMroDfs.INSTANCE;
-    }
-  }
-
-  @Override
-  public void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result) {
-    getMro().getLinearISA(getProject(), getParentNamespaceDefinitions(), recursionMap, result);
-  }
 
   @Override
   public String getPresentableName() {
     return getName();
-  }
-
-  @Override
-  public boolean isDeprecated() {
-    PerlNamespaceAnnotations namespaceAnnotations = getAnnotations();
-    return namespaceAnnotations != null && namespaceAnnotations.isDeprecated();
   }
 
   @NotNull
@@ -248,30 +211,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
     }
 
     return getExporterInfo().getEXPORT_TAGS();
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedSubsDescriptors() {
-    return PerlSubUtil.getImportedSubsDescriptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedScalarDescriptors() {
-    return PerlScalarUtil.getImportedScalarsDescritptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedArrayDescriptors() {
-    return PerlArrayUtil.getImportedArraysDescriptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedHashDescriptors() {
-    return PerlHashUtil.getImportedHashesDescriptors(this);
   }
 
   @Override
@@ -328,7 +267,6 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
   }
 
   @Nullable
-  @Override
   public PerlNamespaceAnnotations getLocalAnnotations() {
     return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
   }

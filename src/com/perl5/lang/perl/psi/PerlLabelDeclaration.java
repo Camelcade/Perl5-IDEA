@@ -16,10 +16,10 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlLabelDeclaration extends PerlCompositeElement, PerlNamedElement {
+public interface PerlLabelDeclaration extends PerlCompositeElement, PerlIdentifierOwner {
 }

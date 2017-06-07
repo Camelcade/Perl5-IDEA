@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.properties;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiNameIdentifierOwner;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 
-/**
- * Created by hurricup on 26.04.2015.
- */
-public interface PerlNamedElement extends PsiNameIdentifierOwner {
-  /**
-   * Getting name for presentation
-   *
-   * @return ^^
-   */
-  public String getPresentableName();
+public interface PerlNamespaceDefinitionWithIdentifier extends PerlNamespaceDefinition,
+                                                               PerlNamespaceElementContainer,
+                                                               PerlIdentifierOwner {
 }

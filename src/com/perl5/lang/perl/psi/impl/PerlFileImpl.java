@@ -35,23 +35,21 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
-import com.perl5.lang.perl.psi.mro.PerlMro;
-import com.perl5.lang.perl.psi.mro.PerlMroC3;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
-import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -131,53 +129,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   }
 
   @Override
-  public List<PerlNamespaceDefinition> getParentNamespaceDefinitions() {
-    return EMPTY_LIST;
-  }
-
-  @NotNull
-  @Override
-  public Collection<PerlNamespaceDefinition> getChildNamespaceDefinitions() {
-    return Collections.emptyList();
-  }
-
-  @Override
   public PerlMroType getMroType() {
     return PerlMroType.DFS;
-  }
-
-  @Override
-  public PerlMro getMro() {
-    if (getMroType() == PerlMroType.DFS) {
-      return PerlMroDfs.INSTANCE;
-    }
-    else {
-      return PerlMroC3.INSTANCE;
-    }
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedSubsDescriptors() {
-    return PerlSubUtil.getImportedSubsDescriptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedScalarDescriptors() {
-    return PerlScalarUtil.getImportedScalarsDescritptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedArrayDescriptors() {
-    return PerlArrayUtil.getImportedArraysDescriptors(this);
-  }
-
-  @NotNull
-  @Override
-  public List<PerlExportDescriptor> getImportedHashDescriptors() {
-    return PerlHashUtil.getImportedHashesDescriptors(this);
   }
 
   //	@Override
@@ -422,5 +375,35 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     PerlFileImpl clone = (PerlFileImpl)super.clone();
     clone.setFileContext(fileContext);
     return clone;
+  }
+
+  @NotNull
+  @Override
+  public List<String> getParentNamespacesNames() {
+    return Collections.emptyList();
+  }
+
+  @Nullable
+  @Override
+  public PerlNamespaceAnnotations getAnnotations() {
+    return null;
+  }
+
+  @NotNull
+  @Override
+  public List<String> getEXPORT() {
+    return Collections.emptyList();
+  }
+
+  @NotNull
+  @Override
+  public List<String> getEXPORT_OK() {
+    return Collections.emptyList();
+  }
+
+  @NotNull
+  @Override
+  public Map<String, List<String>> getEXPORT_TAGS() {
+    return Collections.emptyMap();
   }
 }

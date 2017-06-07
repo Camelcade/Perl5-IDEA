@@ -16,10 +16,14 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionApi;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -28,19 +32,73 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public interface PerlNamespaceDefinitionStub extends StubElement<PerlNamespaceDefinition> {
-  String getPackageName();
+public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinition> implements PerlNamespaceDefinitionApi {
+  private final String myPackageName;
+  private final PerlMroType myMroType;
+  private final List<String> myParentNamespaces;
+  private final List<String> myEXPORT;
+  private final List<String> myEXPORT_OK;
+  private final Map<String, List<String>> myEXPORT_TAGS;
+  private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
-  PerlMroType getMroType();
+  public PerlNamespaceDefinitionStub(
+    StubElement parent,
+    IStubElementType elementType,
+    String packageName,
+    PerlMroType mroType,
+    List<String> parentNamespaces,
+    List<String> EXPORT,
+    List<String> EXPORT_OK,
+    Map<String, List<String>> EXPORT_TAGS,
+    PerlNamespaceAnnotations namespaceAnnotations
+  ) {
+    super(parent, elementType);
+    myPackageName = packageName;
+    myMroType = mroType;
+    myParentNamespaces = parentNamespaces;
+    myPerlNamespaceAnnotations = namespaceAnnotations;
+    myEXPORT = EXPORT;
+    myEXPORT_OK = EXPORT_OK;
+    myEXPORT_TAGS = EXPORT_TAGS;
+  }
 
-  List<String> getParentNamespaces();
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
 
-  List<String> getEXPORT();
+  @Override
+  public PerlMroType getMroType() {
+    return myMroType;
+  }
 
-  List<String> getEXPORT_OK();
-
-  Map<String, List<String>> getEXPORT_TAGS();
+  @NotNull
+  @Override
+  public List<String> getParentNamespacesNames() {
+    return myParentNamespaces;
+  }
 
   @Nullable
-  PerlNamespaceAnnotations getAnnotations();
+  @Override
+  public PerlNamespaceAnnotations getAnnotations() {
+    return myPerlNamespaceAnnotations;
+  }
+
+  @NotNull
+  @Override
+  public List<String> getEXPORT() {
+    return myEXPORT;
+  }
+
+  @NotNull
+  @Override
+  public List<String> getEXPORT_OK() {
+    return myEXPORT_OK;
+  }
+
+  @NotNull
+  @Override
+  public Map<String, List<String>> getEXPORT_TAGS() {
+    return myEXPORT_TAGS;
+  }
 }

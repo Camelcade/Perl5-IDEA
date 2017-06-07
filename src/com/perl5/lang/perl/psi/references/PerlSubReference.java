@@ -112,7 +112,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
 
           if (expliclitPackageElement == null) {
             // check for imports to the current file
-            PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(subNameElement);
+            PerlNamespaceDefinitionApi namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(subNameElement);
 
             if (namespaceContainer != null) {
               for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {

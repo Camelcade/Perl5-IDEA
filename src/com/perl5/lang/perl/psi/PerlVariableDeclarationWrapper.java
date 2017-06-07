@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -30,7 +30,7 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
  * Created by hurricup on 29.09.2015.
  */
 public interface PerlVariableDeclarationWrapper
-  extends StubBasedPsiElement<PerlVariableStub>, PerlNamedElement, PerlCompositeElement, PerlDeprecatable {
+  extends StubBasedPsiElement<PerlVariableStub>, PerlIdentifierOwner, PerlCompositeElement, PerlDeprecatable {
   /**
    * Returns declared variable object
    *

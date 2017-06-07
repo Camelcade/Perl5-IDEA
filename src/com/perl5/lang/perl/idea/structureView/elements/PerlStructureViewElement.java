@@ -35,7 +35,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
-import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.*;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.idea.structureView.PodStructureViewElement;
@@ -166,7 +166,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
       // imported scalars
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceContainer)myElement).getImportedScalarDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionApi)myElement).getImportedScalarDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationWrapper> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
@@ -187,7 +187,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // imported arrays
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceContainer)myElement).getImportedArrayDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionApi)myElement).getImportedArrayDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationWrapper> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
@@ -208,7 +208,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // imported hashes
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceContainer)myElement).getImportedHashDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionApi)myElement).getImportedHashDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationWrapper> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
@@ -229,7 +229,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // Imported subs
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceContainer)myElement).getImportedSubsDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionApi)myElement).getImportedSubsDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         // declarations
@@ -307,14 +307,14 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
     if (myElement instanceof PerlNamespaceDefinition) {
       List<TreeElement> inheritedResult = new ArrayList<TreeElement>();
 
-      String packageName = ((PerlNamespaceDefinition)myElement).getName();
+      String packageName = ((PerlNamespaceDefinition)myElement).getPackageName();
 
       if (packageName != null) {
         for (PsiElement element : PerlMro.getVariants(myElement.getProject(), packageName, true)) {
           if (element instanceof PerlHierarchyViewElementsProvider) {
             ((PerlHierarchyViewElementsProvider)element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
           }
-          else if (element instanceof PerlNamedElement && !implementedMethods.contains(((PerlNamedElement)element).getName())) {
+          else if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
             if (element instanceof PerlConstantDefinition && ((PerlConstantDefinition)element).getName() != null) {
               inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinition)element).setInherited());
             }

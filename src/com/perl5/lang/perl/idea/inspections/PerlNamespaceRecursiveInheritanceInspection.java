@@ -46,8 +46,8 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
         }
 
         if (hasRecursiveInheritance(o)) {
-          registerError(holder, namespaceElement.getContainingFile(), "Namespace " + o.getName() + " has recursive inheritance");
-          registerError(holder, namespaceElement, "Namespace " + o.getName() + " has recursive inheritance");
+          registerError(holder, namespaceElement.getContainingFile(), "Namespace " + o.getPackageName() + " has recursive inheritance");
+          registerError(holder, namespaceElement, "Namespace " + o.getPackageName() + " has recursive inheritance");
         }
       }
     };

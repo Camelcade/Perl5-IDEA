@@ -27,6 +27,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,8 +40,8 @@ import java.util.List;
 public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes {
   @Override
   protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
-    if (element instanceof PerlNamespaceDefinition) {
-      PsiElement nameIdentifier = ((PerlNamespaceDefinition)element).getNameIdentifier();
+    if (element instanceof PerlNamespaceDefinitionImplMixin) {
+      PsiElement nameIdentifier = ((PerlNamespaceDefinitionImplMixin)element).getNameIdentifier();
       if (nameIdentifier == null) {
         nameIdentifier = element;
       }

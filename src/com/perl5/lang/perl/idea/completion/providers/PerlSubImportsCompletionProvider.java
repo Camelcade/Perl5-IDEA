@@ -24,8 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
-import com.perl5.lang.perl.psi.PerlNamespaceContainer;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionApi;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -51,7 +51,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 
     Project project = method.getProject();
     if (!method.hasExplicitNamespace()) {
-      PerlNamespaceContainer namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
+      PerlNamespaceDefinitionApi namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
       if (namespaceContainer != null) {
         fillWithNamespaceImports(namespaceContainer, resultSet);
       }
@@ -69,7 +69,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
     }
   }
 
-  protected static void fillWithNamespaceImports(@NotNull PerlNamespaceContainer namespaceContainer,
+  protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinitionApi namespaceContainer,
                                                  @NotNull final CompletionResultSet resultSet) {
     for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
       List<PsiElement> psiElements =

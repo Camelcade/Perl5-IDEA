@@ -46,7 +46,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
   }
 
   protected boolean isFileToBeRenamed(PerlNamespaceDefinition namespaceDefinition) {
-    String currentPackageName = namespaceDefinition.getName();
+    String currentPackageName = namespaceDefinition.getPackageName();
     assert currentPackageName != null;
 
     VirtualFile virtualFile = namespaceDefinition.getContainingFile().getVirtualFile();

@@ -25,6 +25,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -39,7 +40,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinition>
+public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionImplMixin>
   implements PsiElementProvider {
   public PerlNamespaceDefinitionStubElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
@@ -50,7 +51,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   }
 
   @Override
-  public PerlNamespaceDefinition createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionImplMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new PsiPerlNamespaceDefinitionImpl(stub, this);
   }
 
@@ -61,13 +62,13 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinition psi, StubElement parentStub) {
-    return new PerlNamespaceDefinitionStubImpl(
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionImplMixin psi, StubElement parentStub) {
+    return new PerlNamespaceDefinitionStub(
       parentStub,
       this,
       psi.getPackageName(),
       psi.getMroType(),
-      psi.getParentNamepsacesNames(),
+      psi.getParentNamespacesNames(),
       psi.getEXPORT(),
       psi.getEXPORT_OK(),
       psi.getEXPORT_TAGS(),
@@ -87,7 +88,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
     assert name != null;
     sink.occurrence(PerlNamespaceDefinitionStubIndex.KEY, name);
 
-    for (String parent : stub.getParentNamespaces()) {
+    for (String parent : stub.getParentNamespacesNames()) {
       if (parent != null && !parent.isEmpty()) {
         sink.occurrence(PerlParentNamespaceDefinitionStubIndex.KEY, parent);
       }
@@ -98,7 +99,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   public void serialize(@NotNull PerlNamespaceDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getPackageName());
     dataStream.writeName(stub.getMroType().toString());
-    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getParentNamespaces());
+    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getParentNamespacesNames());
     PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT());
     PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT_OK());
     PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getEXPORT_TAGS());
@@ -123,7 +124,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
     List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
     Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
 
-    return new PerlNamespaceDefinitionStubImpl(
+    return new PerlNamespaceDefinitionStub(
       parentStub,
       this,
       packageName,
