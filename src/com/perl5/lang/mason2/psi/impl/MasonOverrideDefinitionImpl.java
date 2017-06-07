@@ -24,13 +24,13 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.mason2.psi.MasonOverrideDefinition;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

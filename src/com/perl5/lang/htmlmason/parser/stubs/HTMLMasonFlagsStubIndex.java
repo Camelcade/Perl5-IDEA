@@ -18,7 +18,7 @@ package com.perl5.lang.htmlmason.parser.stubs;
 
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
-import com.perl5.lang.perl.idea.stubs.PerlStubIndexBase;
+import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**

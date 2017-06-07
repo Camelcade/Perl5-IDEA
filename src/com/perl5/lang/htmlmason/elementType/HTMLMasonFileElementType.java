@@ -17,7 +17,7 @@
 package com.perl5.lang.htmlmason.elementType;
 
 import com.intellij.lang.Language;
-import com.perl5.lang.perl.idea.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 
 /**
  * Created by hurricup on 05.03.2016.

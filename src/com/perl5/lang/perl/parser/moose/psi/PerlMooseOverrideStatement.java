@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
  * Created by hurricup on 25.11.2015.

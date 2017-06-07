@@ -19,8 +19,8 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.impl.*;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 

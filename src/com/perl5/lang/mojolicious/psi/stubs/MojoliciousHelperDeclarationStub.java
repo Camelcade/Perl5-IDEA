@@ -16,7 +16,7 @@
 
 package com.perl5.lang.mojolicious.psi.stubs;
 
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 
 /**
  * Created by hurricup on 23.04.2016.

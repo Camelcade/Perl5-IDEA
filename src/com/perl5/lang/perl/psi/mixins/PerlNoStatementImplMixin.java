@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.PerlNoStatement;
+import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 
 /**
  * Created by hurricup on 26.01.2016.

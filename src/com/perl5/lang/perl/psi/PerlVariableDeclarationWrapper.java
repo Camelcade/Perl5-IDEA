@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.idea.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.properties.PerlNamedElement;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;

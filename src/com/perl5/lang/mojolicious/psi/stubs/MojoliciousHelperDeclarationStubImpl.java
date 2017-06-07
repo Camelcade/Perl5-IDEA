@@ -18,7 +18,7 @@ package com.perl5.lang.mojolicious.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.idea.stubs.subsdefinitions.PerlSubDefinitionStubImpl;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
