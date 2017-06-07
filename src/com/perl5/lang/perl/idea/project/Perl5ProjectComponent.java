@@ -22,6 +22,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.util.FileContentUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
@@ -70,19 +71,17 @@ public class Perl5ProjectComponent implements ProjectComponent {
 
     PerlApplicationSettings settings = PerlApplicationSettings.getInstance();
     if (settings.shouldShowAnnounce()) {
-      settings.setAnnounceShown();
-      NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
-      Notification notification = group.createNotification(
-        "Perl5 plugin updated to version " + PerlPluginUtil.getPluginVersion(),
-        "<p>This is a beta version of perl plugin for 2017.1 EAP products.</p><br/>" +
-        "<p>Full list of changes and fixes may be found on the <a href=\"https://plugins.jetbrains.com/plugin/7796\">Plugin's page</a> in JetBrains repository.</p><br/>" +
-        "<p>Don't hesitate to report bugs and request new features to <a href=\"https://github.com/hurricup/Perl5-IDEA/issues\">our tracker</a>.</p><br/>" +
-        "<p>If you find this plugin helpful, you can support it using <a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E\">PayPal</a>.</p><br/>" +
-        "<p>Have a nice coding and debugging!</p><br/>",
-        NotificationType.INFORMATION,
-        new NotificationListener.UrlOpeningListener(false)
-      );
-      Notifications.Bus.notify(notification);
+      StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
+        settings.setAnnounceShown();
+        NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
+        Notification notification = group.createNotification(
+          PerlBundle.message("plugin.update.baloon.title", PerlPluginUtil.getPluginVersion()),
+          PerlBundle.message("plugin.update.baloon.text"),
+          NotificationType.INFORMATION,
+          new NotificationListener.UrlOpeningListener(false)
+        ).setImportant(true);
+        Notifications.Bus.notify(notification);
+      });
     }
 
     StartupManager.getInstance(myProject).runWhenProjectIsInitialized(FileContentUtil::reparseOpenedFiles);
