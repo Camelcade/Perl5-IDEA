@@ -18,8 +18,10 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.perl5.lang.perl.idea.stubs.PerlPolyNamedElementStub;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +33,7 @@ import java.util.Map;
 /**
  * Interface represents poly-named declaration, when one expression declares multiple entities with different names
  */
-public interface PerlPolyNamedElement extends PsiElement {
+public interface PerlPolyNamedElement extends StubBasedPsiElement<PerlPolyNamedElementStub> {
   /**
    * @return collecting map of names to identifiers
    */
@@ -76,7 +78,7 @@ public interface PerlPolyNamedElement extends PsiElement {
   }
 
   /**
-   * Returns cached map of light elements, bound to the names identifiers, one for each name identifier
+   * @return Map of light elements, bound to the names identifiers, one for each name identifier
    */
   @NotNull
   default Map<String, PerlDelegatingLightNamedElement> getLightElementsMap() {
@@ -108,7 +110,8 @@ public interface PerlPolyNamedElement extends PsiElement {
    */
   @NotNull
   default PerlDelegatingLightNamedElement createLightElement(@NotNull String name) {
-    return new PerlDelegatingLightNamedElement<>(this, name);
+    //noinspection unchecked
+    return (PerlDelegatingLightNamedElement)new com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement<PerlPolyNamedElement>(this, name);
   }
 
   /**
