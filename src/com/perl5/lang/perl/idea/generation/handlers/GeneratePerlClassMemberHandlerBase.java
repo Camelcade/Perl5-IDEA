@@ -24,7 +24,7 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -48,7 +48,7 @@ public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightA
 
       PsiElement parent = currentElement.getParent();
       if (parent instanceof PsiPerlNamespaceContent ||
-          parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinition) {
+          parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinitionWithIdentifier) {
         while (currentElement != null && (currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl)) {
           currentElement = currentElement.getNextSibling();
         }

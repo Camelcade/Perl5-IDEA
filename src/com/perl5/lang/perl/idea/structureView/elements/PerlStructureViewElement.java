@@ -154,7 +154,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
     }
 
-    if (myElement instanceof PerlFile || myElement instanceof PerlNamespaceDefinition) {
+    if (myElement instanceof PerlNamespaceDefinition) {
       // global variables
       for (PerlVariableDeclarationWrapper child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationWrapper.class)) {
         if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
@@ -304,7 +304,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
     }
 
     // inherited elements
-    if (myElement instanceof PerlNamespaceDefinition) {
+    if (myElement instanceof PerlNamespaceDefinitionWithIdentifier) {
       List<TreeElement> inheritedResult = new ArrayList<TreeElement>();
 
       String packageName = ((PerlNamespaceDefinition)myElement).getPackageName();

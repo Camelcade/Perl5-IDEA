@@ -53,7 +53,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
 
       PsiElement parent = namespaceElement.getParent();
 
-      if (parent instanceof PerlNamespaceDefinition) {
+      if (parent instanceof PerlNamespaceDefinitionWithIdentifier) {
         decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION, false);
       }
       else {

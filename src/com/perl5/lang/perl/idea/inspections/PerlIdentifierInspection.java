@@ -55,7 +55,7 @@ public class PerlIdentifierInspection extends PerlInspection {
 
       @Override
       public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
-        if (!(o.getParent() instanceof PerlNamespaceDefinition)) {
+        if (!(o.getParent() instanceof PerlNamespaceDefinitionWithIdentifier)) {
           checkPerlIdentifier(o);
         }
         super.visitNamespaceElement(o);

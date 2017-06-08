@@ -24,7 +24,7 @@ import com.intellij.openapi.vfs.VirtualFileAdapter;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +57,7 @@ public class PerlVirtualFileListener extends VirtualFileAdapter {
 
   @Override
   public void fileMoved(@NotNull VirtualFileMoveEvent event) {
-    if (!(event.getRequestor() instanceof PerlNamespaceDefinition)) {
+    if (!(event.getRequestor() instanceof PerlNamespaceDefinitionWithIdentifier)) {
       if (myProjectFileIndex.isInSource(event.getNewParent())) {
         VirtualFile movedFile = event.getFile();
         if (movedFile.isDirectory()) {

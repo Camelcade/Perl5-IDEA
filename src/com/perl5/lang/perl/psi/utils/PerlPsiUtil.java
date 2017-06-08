@@ -386,7 +386,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     PsiElement run = rootElement.getFirstChild();
     boolean result = true;
     while (run != null && result) {
-      if (!(run instanceof PerlNamespaceDefinition)) {
+      if (!(run instanceof PerlNamespaceDefinitionWithIdentifier)) {
         if (run instanceof PerlCompositeElement) {
           result = processor.process(run);
         }

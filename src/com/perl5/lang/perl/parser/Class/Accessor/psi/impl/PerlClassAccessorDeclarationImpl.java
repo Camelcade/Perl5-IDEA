@@ -34,6 +34,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaratio
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -95,7 +96,7 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
         return (PerlClassAccessorFollowBestPractice)currentElement;
       }
 
-      if (!(currentElement instanceof PerlNamespaceDefinition) && currentElement.getNode() instanceof CompositeElement) {
+      if (!(currentElement instanceof PerlNamespaceDefinitionWithIdentifier) && currentElement.getNode() instanceof CompositeElement) {
         PsiElement subResult = getFBPElement(currentElement.getFirstChild(), beforeElement);
         if (subResult != null) {
           return (PerlClassAccessorFollowBestPractice)subResult;

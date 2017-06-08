@@ -35,7 +35,9 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection {
       public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
         PsiElement parent = o.getParent();
 
-        if (parent instanceof PsiPerlRequireExpr || parent instanceof PsiPerlUseStatement || parent instanceof PerlNamespaceDefinition) {
+        if (parent instanceof PsiPerlRequireExpr ||
+            parent instanceof PsiPerlUseStatement ||
+            parent instanceof PerlNamespaceDefinitionWithIdentifier) {
           return;
         }
 

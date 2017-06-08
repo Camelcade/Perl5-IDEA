@@ -47,7 +47,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
       ) {
       return new PsiReference[]{new PerlNamespaceFileReference(this)};
     }
-    else if (nameSpaceContainer instanceof PerlNamespaceDefinition) {
+    else if (nameSpaceContainer instanceof PerlNamespaceDefinitionWithIdentifier) {
       return PsiReference.EMPTY_ARRAY;
     }
     else {
@@ -108,7 +108,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   @Override
   public boolean isDeprecated() {
     PsiElement parent = getParent();
-    if (parent instanceof PerlNamespaceDefinition) {
+    if (parent instanceof PerlNamespaceDefinitionWithIdentifier) {
       return ((PerlNamespaceDefinition)parent).isDeprecated();
     }
     return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
