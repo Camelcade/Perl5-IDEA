@@ -17,10 +17,12 @@
 package editor;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.02.2016.
@@ -31,19 +33,23 @@ public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase {
     return "testData/folding";
   }
 
-  public void testPerlFolding() {
-    testFoldingRegions("perl_folding_test", PerlFileTypeScript.INSTANCE);
+  public void testPerl() {
+    doTest(PerlFileTypeScript.INSTANCE);
   }
 
-  public void testMason2Folding() {
-    testFoldingRegions("mason2_folding_test", MasonTopLevelComponentFileType.INSTANCE);
+  public void testMason2() {
+    doTest(MasonTopLevelComponentFileType.INSTANCE);
   }
 
-  public void testHtmlMasonFolding() {
-    testFoldingRegions("html_mason_folding_test", HTMLMasonFileType.INSTANCE);
+  public void testHtmlMason() {
+    doTest(HTMLMasonFileType.INSTANCE);
   }
 
-  public void testMojoliciousFolding() {
-    testFoldingRegions("mojolicious_folding_test", MojoliciousFileType.INSTANCE);
+  public void testMojolicious() {
+    doTest(MojoliciousFileType.INSTANCE);
+  }
+
+  private void doTest(@NotNull LanguageFileType fileType) {
+    testFoldingRegions(getTestName(true), fileType);
   }
 }
