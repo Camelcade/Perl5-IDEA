@@ -745,6 +745,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 // ambiguous variable in ambiguous situation
 <AFTER_IDENTIFIER>
 {
+        "&" / {SPACES_OR_COMMENTS} "~"  {yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;}
 	"%" / {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);}
 	"*"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);}
 	"&"	/ {AMBIGUOUS_SIGIL_SUFFIX}	{return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);}
