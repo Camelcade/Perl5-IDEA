@@ -65,8 +65,9 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     return findChildByClass(PsiPerlExpr.class);
   }
 
+  @Nullable
   @Override
-  public PsiElement getSubNameElement() {
+  public PsiElement getNameIdentifier() {
     PsiElement expr = getExpr();
 
     if (expr instanceof PsiPerlParenthesisedExpr) {
@@ -88,7 +89,7 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
 
   @Override
   protected String getSubNameHeavy() {
-    PsiElement nameContainer = getSubNameElement();
+    PsiElement nameContainer = getNameIdentifier();
 
     if (nameContainer instanceof PerlString) {
       return ((PerlString)nameContainer).getStringContent();

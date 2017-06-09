@@ -58,11 +58,11 @@ public class PerlMooseAttribute extends PerlSubDefinitionWithTextIdentifier {
 
   @NotNull
   @Override
-  public List<PerlAnnotation> getAnnotationList() {
+  protected List<PerlAnnotation> collectAnnotationsList() {
     PerlMooseHasStatement hasStatement = getHasStatement();
     if (hasStatement != null) {
       return PerlPsiUtil.collectAnnotations(hasStatement);
     }
-    return super.getAnnotationList();
+    return super.collectAnnotationsList();
   }
 }

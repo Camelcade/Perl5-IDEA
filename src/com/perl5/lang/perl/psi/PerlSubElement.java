@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
@@ -24,10 +23,7 @@ import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -41,14 +37,7 @@ public interface PerlSubElement<Stub extends PerlSubStub> extends PerlSub,
                                                                   PerlLabelScope {
 
   /**
-   * Returns PsiElement containing sub name
-   *
-   * @return name container
-   */
-  PsiElement getSubNameElement();
-
-  /**
-   * Checks if sub defined as method
+   * Checks if sub defined as a method
    *
    * @return result
    */
@@ -76,19 +65,4 @@ public interface PerlSubElement<Stub extends PerlSubStub> extends PerlSub,
    */
   @Nullable
   PerlSubAnnotations getLocalAnnotations();
-
-
-  /**
-   * Returns list of sub annotations elements
-   *
-   * @return list
-   */
-  @NotNull
-  List<PerlAnnotation> getAnnotationList();
-
-  /**
-   * Returns return value for this sub
-   */
-  @Nullable
-  String getReturns();
 }

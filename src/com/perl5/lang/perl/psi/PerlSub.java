@@ -48,4 +48,12 @@ public interface PerlSub {
    * @return name
    */
   String getCanonicalName();
+
+  @Nullable
+  default String getReturns() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null ? subAnnotations.getReturns() : null;
+  }
+
 }
+

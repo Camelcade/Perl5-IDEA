@@ -50,7 +50,7 @@ public class PerlSubUnusedInpsection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
-        PsiElement subNameElement = o.getSubNameElement();
+        PsiElement subNameElement = o.getNameIdentifier();
         if (subNameElement != null &&
             !EXCLUSIONS.contains(o.getName()) &&
             ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {
@@ -60,7 +60,7 @@ public class PerlSubUnusedInpsection extends PerlInspection {
 
       @Override
       public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
-        PsiElement subNameElement = o.getSubNameElement();
+        PsiElement subNameElement = o.getNameIdentifier();
         if (subNameElement != null &&
             !EXCLUSIONS.contains(o.getName()) &&
             ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {

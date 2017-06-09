@@ -65,15 +65,10 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
     return namespace;
   }
 
-  @Nullable
-  @Override
-  public PsiElement getNameIdentifier() {
-    return getSubNameElement();
-  }
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    PsiElement subNameElement = getSubNameElement();
+    PsiElement subNameElement = getNameIdentifier();
     if (subNameElement != null) {
       PerlPsiUtil.renameElement(subNameElement, name);
     }
@@ -108,7 +103,8 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   }
 
   protected String getSubNameHeavy() {
-    PsiElement subNameElement = getSubNameElement();
+    PsiElement subNameElement = getNameIdentifier();
+    // fixme manipulator?
     return subNameElement == null ? null : subNameElement.getText();
   }
 
@@ -125,8 +121,9 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
     return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
   }
 
+  @Nullable
   @Override
-  public PsiElement getSubNameElement() {
+  public PsiElement getNameIdentifier() {
     return findChildByType(SUB_NAME);
   }
 
@@ -137,8 +134,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   }
 
   @NotNull
-  @Override
-  public List<PerlAnnotation> getAnnotationList() {
+  protected List<PerlAnnotation> collectAnnotationsList() {
     return PerlPsiUtil.collectAnnotations(this);
   }
 
@@ -166,7 +162,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   @Nullable
   @Override
   public PerlSubAnnotations getLocalAnnotations() {
-    return PerlSubAnnotations.createFromAnnotationsList(getAnnotationList());
+    return PerlSubAnnotations.createFromAnnotationsList(collectAnnotationsList());
   }
 
   @Override
@@ -179,13 +175,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   public boolean isMethod() {
     PerlSubAnnotations subAnnotations = getAnnotations();
     return subAnnotations != null && subAnnotations.isMethod();
-  }
-
-  @Nullable
-  @Override
-  public String getReturns() {
-    PerlSubAnnotations subAnnotations = getAnnotations();
-    return subAnnotations != null ? subAnnotations.getReturns() : null;
   }
 
   @Override

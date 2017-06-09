@@ -74,8 +74,8 @@ public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithT
 
   @NotNull
   @Override
-  public List<PerlAnnotation> getAnnotationList() {
-    List<PerlAnnotation> annotationList = super.getAnnotationList();
+  protected List<PerlAnnotation> collectAnnotationsList() {
+    List<PerlAnnotation> annotationList = super.collectAnnotationsList();
     if (!annotationList.isEmpty()) {
       return annotationList;
     }

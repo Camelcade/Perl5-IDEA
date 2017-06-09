@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,14 +75,16 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
     return findNotNullChildByClass(PsiPerlBlock.class);
   }
 
+  @Nullable
   @Override
-  public PsiElement getSubNameElement() {
+  public PsiElement getNameIdentifier() {
     return PsiTreeUtil.getChildOfType(this, PerlSubNameElement.class);
   }
 
   @Override
   protected String getSubNameHeavy() {
-    PsiElement subNameElement = getSubNameElement();
+    PsiElement subNameElement = getNameIdentifier();
+    // fixme manipulator?
     return subNameElement == null ? null : subNameElement.getNode().getText();
   }
 
