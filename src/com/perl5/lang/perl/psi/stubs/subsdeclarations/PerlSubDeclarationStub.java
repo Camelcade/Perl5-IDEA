@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
 import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
-import com.perl5.lang.perl.psi.stubs.PerlSubBaseStub;
+import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubDeclarationStub extends PerlSubBaseStub<PsiPerlSubDeclaration> {
+public interface PerlSubDeclarationStub extends PerlSubStub<PsiPerlSubDeclaration> {
 }

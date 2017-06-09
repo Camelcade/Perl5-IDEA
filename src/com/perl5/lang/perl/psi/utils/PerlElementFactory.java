@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class PerlElementFactory {
   // fixme probably we don't need package name and sub. just identifier
   public static PerlNamespaceElementImpl createPackageName(Project project, String name) {
     PerlFileImpl file = createFile(project, "package " + name + ";");
-    PerlNamespaceDefinitionImplMixin def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinitionImplMixin.class);
+    PerlNamespaceDefinitionMixin def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinitionMixin.class);
     assert def != null;
     return (PerlNamespaceElementImpl)def.getNamespaceElement();
   }

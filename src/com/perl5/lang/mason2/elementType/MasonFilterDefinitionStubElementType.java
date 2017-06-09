@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.elementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.psi.impl.MasonFilterDefinitionImpl;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public class MasonFilterDefinitionStubElementType extends MasonMethodDefinitionS
   }
 
   @Override
-  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new MasonFilterDefinitionImpl(stub, this);
   }
 

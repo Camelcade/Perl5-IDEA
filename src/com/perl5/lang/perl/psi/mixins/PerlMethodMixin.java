@@ -32,8 +32,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PAC
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlMethodImplMixin extends PerlCompositeElementImpl implements PerlMethod {
-  public PerlMethodImplMixin(@NotNull ASTNode node) {
+public abstract class PerlMethodMixin extends PerlCompositeElementImpl implements PerlMethod {
+  public PerlMethodMixin(@NotNull ASTNode node) {
     super(node);
   }
 

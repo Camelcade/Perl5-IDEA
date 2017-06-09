@@ -16,7 +16,7 @@
 
 package oop;
 
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public class ExporterTest extends NamespaceTestCase {
 
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] exportArray, String[] exportOkArray) {
-    PerlNamespaceDefinitionImplMixin.ExporterInfo exporterInfo = getNamespaceInFile(fileName, namespaceName).getExporterInfo();
+    PerlNamespaceDefinitionMixin.ExporterInfo exporterInfo = getNamespaceInFile(fileName, namespaceName).getExporterInfo();
     assertEquals(new ArrayList<String>(Arrays.asList(exportArray)), exporterInfo.getEXPORT());
     assertEquals(new ArrayList<String>(Arrays.asList(exportOkArray)), exporterInfo.getEXPORT_OK());
   }

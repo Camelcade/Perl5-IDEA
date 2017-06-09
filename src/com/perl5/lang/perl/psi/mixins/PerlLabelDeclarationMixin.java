@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelDeclarationImplMixin extends PerlCompositeElementImpl implements PerlLabelDeclaration {
-  public PerlLabelDeclarationImplMixin(@NotNull ASTNode node) {
+public class PerlLabelDeclarationMixin extends PerlCompositeElementImpl implements PerlLabelDeclaration {
+  public PerlLabelDeclarationMixin(@NotNull ASTNode node) {
     super(node);
   }
 

@@ -36,7 +36,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDecl
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PsiPerlNestedCall;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifier;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlClassAccessorDeclaration {
+public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextIdentifier implements PerlClassAccessorDeclaration {
   private static final TokenSet READABLE_DECLARATORS = TokenSet.create(
     RESERVED_MK_ACCESSORS,
     RESERVED_MK_RO_ACCESSORS

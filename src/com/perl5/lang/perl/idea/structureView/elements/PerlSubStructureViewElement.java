@@ -16,16 +16,16 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.mixins.PerlSubBaseImpl;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.mixins.PerlSubBase;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
 public class PerlSubStructureViewElement extends PerlStructureViewElement {
-  public PerlSubStructureViewElement(PerlSubDefinitionBase element) {
+  public PerlSubStructureViewElement(PerlSubDefinition element) {
     super(element);
   }
 
@@ -38,6 +38,6 @@ public class PerlSubStructureViewElement extends PerlStructureViewElement {
   }
 
   public boolean isMethod() {
-    return myElement instanceof PerlSubBase && ((PerlSubBaseImpl)myElement).isMethod();
+    return myElement instanceof PerlSubElement && ((PerlSubBase)myElement).isMethod();
   }
 }

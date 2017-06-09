@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionBase>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinition>
   implements PsiElementProvider {
 
   public PerlSubDefinitionStubElementType(String name) {
@@ -49,7 +49,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
   }
 
   @Override
-  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PsiPerlSubDefinitionImpl(stub, this);
   }
 
@@ -60,7 +60,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
   }
 
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
     //noinspection unchecked
     return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
   }
@@ -128,8 +128,8 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement element = node.getPsi();
-    return element instanceof PerlSubDefinitionBase &&
+    return element instanceof PerlSubDefinition &&
            element.isValid() &&
-           StringUtil.isNotEmpty(((PerlSubDefinitionBase)element).getCanonicalName());
+           StringUtil.isNotEmpty(((PerlSubDefinition)element).getCanonicalName());
   }
 }

@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlConstantDefinition;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifier;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithTextIdentifierImpl implements PsiPerlConstantDefinition {
+public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithTextIdentifier implements PsiPerlConstantDefinition {
   public PerlConstantDefinitionMixin(ASTNode node) {
     super(node);
   }

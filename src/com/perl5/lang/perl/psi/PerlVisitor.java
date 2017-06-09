@@ -59,7 +59,7 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitExpr(o);
   }
 
-  public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o) {
+  public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
     visitElement(o);
   }
 
@@ -105,27 +105,22 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPerlCastExpression(o);
   }
 
-  @Override
-  public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
-    visitSubDefinitionBase(o);
-  }
-
   public void visitPerlConstantDefinition(@NotNull PerlConstantDefinition o) {
-    visitSubDefinitionBase(o);
+    visitPerlSubDefinition(o);
   }
 
   @Override
   public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o) {
-    visitSubDefinitionBase(o);
+    visitPerlSubDefinition(o);
   }
 
   @Override
   public void visitPerlFuncDefinition(@NotNull PerlFuncDefinition o) {
-    visitSubDefinitionBase(o);
+    visitPerlSubDefinition(o);
   }
 
   @Override
   public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o) {
-    visitSubDefinitionBase(o);
+    visitPerlSubDefinition(o);
   }
 }

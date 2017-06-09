@@ -16,7 +16,7 @@
 
 package oop;
 
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -120,7 +120,7 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   }
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {
-    PerlNamespaceDefinitionImplMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
+    PerlNamespaceDefinitionMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
     List<String> parents = namespaceDefinition.getParentNamespacesNamesFromPsi();
     assertEquals(new ArrayList<String>(Arrays.asList(parentsList)), parents);
   }

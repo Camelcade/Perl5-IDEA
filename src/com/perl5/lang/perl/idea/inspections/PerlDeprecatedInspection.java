@@ -37,7 +37,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
         PsiElement container = o.getParent();
 
-        if (container instanceof PerlSubBase && ((PerlSubBase)container).isDeprecated()) {
+        if (container instanceof PerlSubElement && ((PerlSubElement)container).isDeprecated()) {
           markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
         }
         else {

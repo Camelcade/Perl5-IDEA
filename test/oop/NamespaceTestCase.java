@@ -20,19 +20,19 @@ import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 22.02.2016.
  */
 public abstract class NamespaceTestCase extends PerlLightCodeInsightFixtureTestCase {
-  protected PerlNamespaceDefinitionImplMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName) {
+  protected PerlNamespaceDefinitionMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName) {
     myFixture.configureByFile(fileName);
     PsiFile file = myFixture.getFile();
 
-    PerlNamespaceDefinitionImplMixin namespaceDefinition = null;
-    for (PerlNamespaceDefinitionImplMixin element : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinitionImplMixin.class)) {
+    PerlNamespaceDefinitionMixin namespaceDefinition = null;
+    for (PerlNamespaceDefinitionMixin element : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinitionMixin.class)) {
       if (StringUtil.equals(element.getName(), namespaceName)) {
         namespaceDefinition = element;
         break;

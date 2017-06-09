@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -116,7 +116,7 @@ public abstract class PerlMro {
 
     if (basePackageName != null) {
       for (String packageName : getLinearISA(project, basePackageName, isSuper)) {
-        for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+        for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
           if (!methods.containsKey(subDefinition.getSubName())) {
             methods.put(subDefinition.getSubName(), subDefinition);
           }

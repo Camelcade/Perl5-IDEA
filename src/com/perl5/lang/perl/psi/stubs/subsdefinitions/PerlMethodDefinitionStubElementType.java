@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ public class PerlMethodDefinitionStubElementType extends PerlSubDefinitionStubEl
   }
 
   @Override
-  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PsiPerlMethodDefinitionImpl(stub, this);
   }
 

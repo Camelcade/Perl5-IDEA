@@ -39,8 +39,8 @@ import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -63,8 +63,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   @Nullable
   @Override
   public String getOverrideCodeText(PsiElement subBase) {
-    if (subBase instanceof PerlSubBase) {
-      PerlSubBase perlSubBase = (PerlSubBase)subBase;
+    if (subBase instanceof PerlSubElement) {
+      PerlSubElement perlSubBase = (PerlSubElement)subBase;
       StringBuilder code = new StringBuilder();
       code.append("#@override\n");
 
@@ -93,9 +93,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       List<String> superArgs = new ArrayList<>();
       List<PerlSubArgument> arguments = Collections.emptyList();
 
-      if (perlSubBase instanceof PerlSubDefinitionBase) {
+      if (perlSubBase instanceof PerlSubDefinition) {
         //noinspection unchecked
-        arguments = ((PerlSubDefinitionBase)perlSubBase).getSubArgumentsList();
+        arguments = ((PerlSubDefinition)perlSubBase).getSubArgumentsList();
 
         if (!arguments.isEmpty()) {
           boolean useShift = false;

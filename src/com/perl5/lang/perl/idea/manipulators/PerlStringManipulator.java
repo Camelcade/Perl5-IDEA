@@ -20,15 +20,15 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 27.02.2016.
  */
-public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStringImplMixin> {
+public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStringMixin> {
   @Override
-  public PerlStringImplMixin handleContentChange(@NotNull PerlStringImplMixin element, @NotNull TextRange range, String newContent)
+  public PerlStringMixin handleContentChange(@NotNull PerlStringMixin element, @NotNull TextRange range, String newContent)
     throws IncorrectOperationException {
     PsiElement openingQuote = element.getOpeningQuote();
     char closeQuote = PerlLexer.getQuoteCloseChar(openingQuote.getText().charAt(0));
@@ -37,7 +37,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 
   @NotNull
   @Override
-  public TextRange getRangeInElement(@NotNull PerlStringImplMixin element) {
+  public TextRange getRangeInElement(@NotNull PerlStringMixin element) {
     return element.getContentTextRangeInParent();
   }
 }

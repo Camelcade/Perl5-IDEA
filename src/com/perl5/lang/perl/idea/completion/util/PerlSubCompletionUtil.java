@@ -37,7 +37,7 @@ import java.util.Set;
 public class PerlSubCompletionUtil {
   public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinitionBase subDefinition) {
+  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinition subDefinition) {
     LookupElementBuilder newElement = LookupElementBuilder
       .create(subName)
       .withIcon(subDefinition.getIcon(0))
@@ -54,11 +54,11 @@ public class PerlSubCompletionUtil {
   }
 
   public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element) {
-    if (element instanceof PerlSubDefinitionBase) {
-      return getSubDefinitionLookupElement((PerlSubDefinitionBase)element);
+    if (element instanceof PerlSubDefinition) {
+      return getSubDefinitionLookupElement((PerlSubDefinition)element);
     }
     else if (element instanceof PerlSubDeclaration) {
-      return getSubDeclarationLookupElement((PerlSubBase)element);
+      return getSubDeclarationLookupElement((PerlSubElement)element);
     }
     else if (element instanceof PerlGlobVariable) {
       return getGlobLookupElement((PerlGlobVariable)element);
@@ -67,7 +67,7 @@ public class PerlSubCompletionUtil {
   }
 
   @NotNull
-  public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubBase subDeclaration) {
+  public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubElement subDeclaration) {
     return LookupElementBuilder
       .create(subDeclaration.getSubName())
       .withIcon(subDeclaration.getIcon(0))
@@ -88,14 +88,14 @@ public class PerlSubCompletionUtil {
   }
 
   @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionBase subDefinition) {
+  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinition subDefinition) {
     return getSubDefinitionLookupElement(
       subDefinition.getSubName(),
       subDefinition.getSubArgumentsListAsString(),
       subDefinition);
   }
 
-  public static void fillWithUnresolvedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet) {
+  public static void fillWithUnresolvedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
     final String packageName = subDefinition.getPackageName();
     if (packageName == null) {
       return;
@@ -137,7 +137,7 @@ public class PerlSubCompletionUtil {
     });
   }
 
-  public static void fillWithNotOverridedSubs(final PerlSubBase subDefinition, final CompletionResultSet resultSet) {
+  public static void fillWithNotOverridedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
     PerlPackageUtil.processNotOverridedMethods(
       PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
       subDefinitionBase ->

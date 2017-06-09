@@ -279,7 +279,7 @@
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocElementManipulator"/>
 
-    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringImplMixin" order="first"
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringMixin" order="first"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringManipulator"/>
 
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"

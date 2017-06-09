@@ -24,7 +24,7 @@ import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifier;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifierImpl implements PerlMooseAttribute {
+public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifier implements PerlMooseAttribute {
   public PerlMooseAttributeImpl(@NotNull ASTNode node) {
     super(node);
   }

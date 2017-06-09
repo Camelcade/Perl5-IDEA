@@ -22,9 +22,8 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
+import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,13 +34,13 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public abstract class PerlSubDefinitionWithTextIdentifierImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub>
-  implements PerlSubDefinitionWitTextIdentifier {
-  public PerlSubDefinitionWithTextIdentifierImpl(@NotNull ASTNode node) {
+public abstract class PerlSubDefinitionWithTextIdentifier extends PerlSubDefinitionBase implements
+                                                                                        com.perl5.lang.perl.psi.PerlSubDefinitionWithTextIdentifier {
+  public PerlSubDefinitionWithTextIdentifier(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubDefinitionWithTextIdentifierImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDefinitionWithTextIdentifier(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

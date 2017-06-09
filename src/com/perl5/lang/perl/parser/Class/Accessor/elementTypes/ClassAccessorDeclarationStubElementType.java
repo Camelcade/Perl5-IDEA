@@ -29,7 +29,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDecla
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStubImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
@@ -51,7 +51,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 
 
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
     assert psi instanceof PerlClassAccessorDeclaration;
     //noinspection unchecked
     return new PerlClassAccessorDeclarationStubImpl(
@@ -68,7 +68,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
   }
 
   @Override
-  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PerlClassAccessorDeclarationImpl(stub, this);
   }
 

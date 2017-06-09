@@ -139,11 +139,11 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         }
 
         @Override
-        public void visitSubDefinitionBase(@NotNull PerlSubDefinitionBase o) {
+        public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
           if (contextPackageName.equals(o.getPackageName())) {
             result.addElement(LookupElementBuilder.create(o.getSubName()));
           }
-          super.visitSubDefinitionBase(o);
+          super.visitPerlSubDefinition(o);
         }
       }
     );

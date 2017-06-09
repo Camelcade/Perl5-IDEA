@@ -34,12 +34,12 @@ import javax.swing.*;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationImplMixin extends PerlSubBaseImpl<PerlSubDeclarationStub> implements PsiPerlSubDeclaration {
-  public PerlSubDeclarationImplMixin(@NotNull ASTNode node) {
+public abstract class PerlSubDeclarationMixin extends PerlSubBase<PerlSubDeclarationStub> implements PsiPerlSubDeclaration {
+  public PerlSubDeclarationMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubDeclarationImplMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDeclarationMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

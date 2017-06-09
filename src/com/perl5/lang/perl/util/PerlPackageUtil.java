@@ -47,11 +47,11 @@ import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.stubs.PerlSubBaseStub;
+import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -489,7 +489,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     return true;
   }
 
-  public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubBase> processor) {
+  public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubElement> processor) {
     if (namespaceDefinition != null) {
       PsiFile containingFile = namespaceDefinition.getContainingFile();
       String packageName = namespaceDefinition.getPackageName();
@@ -499,7 +499,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
       Set<String> namesSet = new THashSet<>();
       // collecting overrided
-      for (PerlSubDefinitionBase subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionBase.class)) {
+      for (PerlSubDefinition subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinition.class)) {
         if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getPackageName())) {
           namesSet.add(subDefinitionBase.getSubName());
         }
@@ -517,7 +517,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static void processParentClassesSubs(PerlNamespaceDefinition childClass,
                                               Set<String> processedSubsNames,
                                               Set<PerlNamespaceDefinition> recursionMap,
-                                              Processor<PerlSubBase> processor
+                                              Processor<PerlSubElement> processor
   ) {
     if (childClass == null || recursionMap.contains(childClass)) {
       return;
@@ -526,13 +526,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     for (PerlNamespaceDefinition parentNamespace : childClass.getParentNamespaceDefinitions()) {
       for (PsiElement subDefinitionBase : collectNamespaceSubs(parentNamespace)) {
-        String subName = ((PerlSubBase)subDefinitionBase).getSubName();
+        String subName = ((PerlSubElement)subDefinitionBase).getSubName();
         if (subDefinitionBase.isValid() &&
-            ((PerlSubBase)subDefinitionBase).isMethod() &&
+            ((PerlSubElement)subDefinitionBase).isMethod() &&
             !processedSubsNames.contains(subName)
           ) {
           processedSubsNames.add(subName);
-          processor.process(((PerlSubBase)subDefinitionBase));
+          processor.process(((PerlSubElement)subDefinitionBase));
         }
       }
       processParentClassesSubs(
@@ -548,12 +548,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     return CachedValuesManager.getCachedValue(
       namespace,
       () -> CachedValueProvider.Result
-        .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubBaseStub.class, PerlSubBase.class), namespace));
+        .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubStub.class, PerlSubElement.class), namespace));
   }
 
   public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
                                                 @Nullable Set<PerlNamespaceDefinition> recursionSet,
-                                                Processor<PerlSubBase> processor) {
+                                                Processor<PerlSubElement> processor) {
     if (recursionSet == null) {
       recursionSet = new THashSet<>();
     }
@@ -565,7 +565,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
         boolean processSubclasses = true;
 
         for (PsiElement subBase : collectNamespaceSubs(childNamespace)) {
-          processSubclasses = processor.process((PerlSubBase)subBase);
+          processSubclasses = processor.process((PerlSubElement)subBase);
         }
 
         if (processSubclasses) {

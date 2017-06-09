@@ -26,7 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
@@ -61,8 +61,8 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
         processDocReference(currentBaseName, newName, reference, allRenames);
       }
 
-      if (element instanceof PerlSubBase && ((PerlSubBase)element).isMethod()) {
-        for (PerlSubBase overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubBase)element)) {
+      if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
+        for (PerlSubElement overridingSub : PerlSubUtil.collectOverridingSubs((PerlSubElement)element)) {
           allRenames.put(overridingSub, newName);
         }
       }
@@ -89,15 +89,15 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
   @Nullable
   @Override
   public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor) {
-    if (element instanceof PerlSubBase && ((PerlSubBase)element).isMethod()) {
-      return suggestSuperMethod((PerlSubBase)element);
+    if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
+      return suggestSuperMethod((PerlSubElement)element);
     }
     return super.substituteElementToRename(element, editor);
   }
 
   @NotNull
-  private PsiElement suggestSuperMethod(@NotNull PerlSubBase subBase) {
-    PerlSubBase topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
+  private PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
+    PerlSubElement topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
     String canonicalName = topLevelSuperMethod.getCanonicalName();
 
     if (topLevelSuperMethod == subBase || canonicalName == null) {

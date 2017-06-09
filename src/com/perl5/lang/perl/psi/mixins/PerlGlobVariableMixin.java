@@ -41,13 +41,13 @@ import javax.swing.*;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlGlobVariableImplMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
+public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
   implements PsiPerlGlobVariable, PerlElementTypes {
-  public PerlGlobVariableImplMixin(@NotNull ASTNode node) {
+  public PerlGlobVariableMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlGlobVariableImplMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
+  public PerlGlobVariableMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

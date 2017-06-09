@@ -24,7 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseMethodModifierImpl;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,7 +55,7 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
       newImplicitVariables.add(new PerlVariableLightImpl(
         getManager(),
         PerlLanguage.INSTANCE,
-        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        PerlMethodDefinitionMixin.getDefaultInvocantName(),
         true,
         false,
         true,

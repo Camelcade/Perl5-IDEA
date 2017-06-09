@@ -17,13 +17,12 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public interface PerlMethodDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlImplicitVariablesProvider {
+public interface PerlMethodDefinition extends PerlSubDefinition, PerlImplicitVariablesProvider {
   @Nullable
   PsiPerlMethodSignatureContent getMethodSignatureContent();
 }

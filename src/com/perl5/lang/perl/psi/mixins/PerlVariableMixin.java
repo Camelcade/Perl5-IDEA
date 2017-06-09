@@ -47,8 +47,8 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2015.
  */
-public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable {
-  public PerlVariableImplMixin(ASTNode node) {
+public abstract class PerlVariableMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable {
+  public PerlVariableMixin(ASTNode node) {
     super(node);
   }
 
@@ -187,7 +187,7 @@ public abstract class PerlVariableImplMixin extends PerlCompositeElementImpl imp
               new PsiElementProcessor<PsiElement>() {
                 @Override
                 public boolean execute(@NotNull PsiElement element) {
-                  if (element != PerlVariableImplMixin.this &&
+                  if (element != PerlVariableMixin.this &&
                       element instanceof PsiPerlScalarVariable &&
                       element.getParent() instanceof PsiPerlAssignExpr
                     ) {

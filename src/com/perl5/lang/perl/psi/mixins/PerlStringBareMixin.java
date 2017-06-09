@@ -30,8 +30,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.09.2015.
  */
-public class PerlStringBareImplMixin extends PerlCompositeElementImpl implements PerlString {
-  public PerlStringBareImplMixin(ASTNode node) {
+public class PerlStringBareMixin extends PerlCompositeElementImpl implements PerlString {
+  public PerlStringBareMixin(ASTNode node) {
     super(node);
   }
 

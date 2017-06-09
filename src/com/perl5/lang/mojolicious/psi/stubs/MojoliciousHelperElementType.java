@@ -24,7 +24,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
   }
 
   @Override
-  public PerlSubDefinitionBase createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new MojoliciousHelperDeclarationImpl(stub, this);
   }
 
@@ -49,7 +49,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
   }
 
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionBase psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
     //noinspection unchecked
     return new MojoliciousHelperDeclarationStubImpl(
       parentStub,

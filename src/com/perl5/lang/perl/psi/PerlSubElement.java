@@ -18,11 +18,11 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,19 +32,13 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubBase<Stub extends StubElement> extends
-                                                       StubBasedPsiElement<Stub>,
-                                                       PerlPackageMember,
-                                                       PerlIdentifierOwner,
-                                                       PerlNamespaceElementContainer,
-                                                       PerlDeprecatable,
-                                                       PerlLabelScope {
-  /**
-   * Returns function name for current function definition
-   *
-   * @return function name or null
-   */
-  String getSubName();
+public interface PerlSubElement<Stub extends PerlSubStub> extends PerlSub,
+                                                                  StubBasedPsiElement<Stub>,
+                                                                  PerlPackageMember,
+                                                                  PerlIdentifierOwner,
+                                                                  PerlNamespaceElementContainer,
+                                                                  PerlDeprecatable,
+                                                                  PerlLabelScope {
 
   /**
    * Returns PsiElement containing sub name
@@ -74,14 +68,6 @@ public interface PerlSubBase<Stub extends StubElement> extends
    * @return true if sub located in deparsed file
    */
   boolean isXSub();
-
-  /**
-   * Returns stubbed, local or external sub annotations
-   *
-   * @return PerlSubAnnotation object
-   */
-  @Nullable
-  PerlSubAnnotations getAnnotations();
 
   /**
    * Returns local sub annotations if any

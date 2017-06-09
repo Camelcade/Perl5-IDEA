@@ -28,7 +28,7 @@ import com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -43,12 +43,12 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElemen
   }
 
   @Override
-  public PerlNamespaceDefinitionImplMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new MasonNamespaceDefinitionImpl(stub, this);
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionImplMixin psi, StubElement parentStub) {
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionMixin psi, StubElement parentStub) {
     assert psi instanceof MasonNamespaceDefinitionImpl;
     return new PerlNamespaceDefinitionStub(
       parentStub,

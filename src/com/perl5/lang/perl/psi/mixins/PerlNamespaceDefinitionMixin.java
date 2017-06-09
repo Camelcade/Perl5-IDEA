@@ -50,7 +50,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiElementBase<PerlNamespaceDefinitionStub>
+public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiElementBase<PerlNamespaceDefinitionStub>
   implements StubBasedPsiElement<PerlNamespaceDefinitionStub>,
              PerlNamespaceDefinitionWithIdentifier,
              PerlElementPatterns,
@@ -59,11 +59,11 @@ public abstract class PerlNamespaceDefinitionImplMixin extends PerlStubBasedPsiE
   private List<String> parentsNamesCache = null;
   private ExporterInfo exporterInfoCache = null;
 
-  public PerlNamespaceDefinitionImplMixin(@NotNull ASTNode node) {
+  public PerlNamespaceDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlNamespaceDefinitionImplMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlNamespaceDefinitionMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

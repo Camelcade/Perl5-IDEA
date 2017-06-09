@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.stubs;
 
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSub;
 
 /**
- * Created by hurricup on 22.01.2016.
+ * Created by hurricup on 05.06.2015.
  */
-public interface PerlSubDefinitionWitTextIdentifier extends PerlSubDefinitionBase<PerlSubDefinitionStub> {
+public interface PerlSubStub<Stub extends PsiElement> extends StubElement<Stub>, PerlSub {
 }

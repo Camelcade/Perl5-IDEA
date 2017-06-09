@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseInnerReference;
 import com.perl5.lang.perl.parser.moose.psi.references.PerlMooseSuperReference;
-import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class PerlSubReferenceProvider extends PsiReferenceProvider {
   @NotNull
   @Override
   public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
-    if (element.getParent() instanceof PerlSubBase) {
+    if (element.getParent() instanceof PerlSubElement) {
       return PsiReference.EMPTY_ARRAY;
     }
 

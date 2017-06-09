@@ -78,7 +78,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
       PsiElement blockContainer = codeBlock.getParent();
 
       if (blockContainer != null) {
-        if (blockContainer instanceof PerlSubDefinitionBase
+        if (blockContainer instanceof PerlSubDefinition
             || blockContainer instanceof PsiPerlForCompound
             || blockContainer instanceof PsiPerlForeachCompound
           ) {

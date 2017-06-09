@@ -24,7 +24,7 @@ import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlSubExpr;
-import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifierImpl;
+import com.perl5.lang.perl.psi.impl.PerlSubDefinitionWithTextIdentifier;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextIdentifierImpl implements MojoliciousHelperDeclaration {
+public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextIdentifier implements MojoliciousHelperDeclaration {
   public static final String HELPER_NAMESPACE_NAME = "Mojolicious::Controller";
 
   public MojoliciousHelperDeclarationImpl(@NotNull ASTNode node) {

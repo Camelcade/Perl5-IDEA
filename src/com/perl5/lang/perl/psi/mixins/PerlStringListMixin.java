@@ -29,8 +29,8 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2016.
  */
-public class PerlStringListImplMixin extends PerlCompositeElementImpl implements PerlStringList {
-  public PerlStringListImplMixin(@NotNull ASTNode node) {
+public class PerlStringListMixin extends PerlCompositeElementImpl implements PerlStringList {
+  public PerlStringListMixin(@NotNull ASTNode node) {
     super(node);
   }
 

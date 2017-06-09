@@ -32,12 +32,12 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public abstract class PerlSubDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PsiPerlSubDefinition {
-  public PerlSubDefinitionImplMixin(@NotNull ASTNode node) {
+public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase implements PsiPerlSubDefinition {
+  public PerlSubDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

@@ -17,16 +17,16 @@
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefinitionBase> {
+public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefinition> {
   public static final int VERSION = 4;
-  public static final StubIndexKey<String, PerlSubDefinitionBase> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
+  public static final StubIndexKey<String, PerlSubDefinition> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
   @Override
   public int getVersion() {
@@ -35,7 +35,7 @@ public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefini
 
   @NotNull
   @Override
-  public StubIndexKey<String, PerlSubDefinitionBase> getKey() {
+  public StubIndexKey<String, PerlSubDefinition> getKey() {
     return KEY;
   }
 }

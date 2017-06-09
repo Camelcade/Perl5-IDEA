@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinitionBase> implements PerlSubDefinitionStub {
+public class PerlSubDefinitionStubImpl extends StubBase<PerlSubDefinition> implements PerlSubDefinitionStub {
   private final String packageName;
   private final String subName;
   private final List<PerlSubArgument> myArguments;

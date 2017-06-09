@@ -35,12 +35,12 @@ import java.util.List;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement {
-  public PerlUseStatementImplMixin(ASTNode node) {
+public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<PerlUseStatementStub> implements PsiPerlUseStatement {
+  public PerlUseStatementMixin(ASTNode node) {
     super(node);
   }
 
-  public PerlUseStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
+  public PerlUseStatementMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -118,7 +118,7 @@ public abstract class PerlUseStatementImplMixin extends PerlStubBasedPsiElementB
       packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
     }
     else if (getVersionElement() != null) {
-      packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementImplMixin.this);
+      packageProcessor = PerlVersionProcessor.getProcessor(PerlUseStatementMixin.this);
     }
 
     return packageProcessor == null ? PerlPackageProcessorDefault.INSTANCE : packageProcessor;

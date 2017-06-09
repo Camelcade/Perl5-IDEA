@@ -28,7 +28,7 @@ import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -111,7 +111,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
         if (result == null) {
           PsiElement target = null;
 
-          if (contextElement.getParent() instanceof PerlSubBase) {
+          if (contextElement.getParent() instanceof PerlSubElement) {
             target = contextElement.getParent();
           }
           else {

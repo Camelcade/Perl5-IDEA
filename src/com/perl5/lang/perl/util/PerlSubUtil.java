@@ -91,15 +91,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @param canonicalName canonical function name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlSubDefinition> getSubDefinitions(Project project, String canonicalName) {
     return getSubDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
   }
 
-  public static Collection<PerlSubDefinitionBase> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
+  public static Collection<PerlSubDefinition> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionBase.class);
+    return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinition.class);
   }
 
   /**
@@ -190,8 +190,8 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     if (reference instanceof PerlSubReference) {
       for (ResolveResult resolveResult : ((PerlSubReference)reference).multiResolve(false)) {
         PsiElement targetElement = resolveResult.getElement();
-        if (targetElement instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase)targetElement).getReturns() != null) {
-          return ((PerlSubDefinitionBase)targetElement).getReturns();
+        if (targetElement instanceof PerlSubDefinition && ((PerlSubDefinition)targetElement).getReturns() != null) {
+          return ((PerlSubDefinition)targetElement).getReturns();
         }
         else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration)targetElement).getReturns() != null) {
           return ((PerlSubDeclaration)targetElement).getReturns();
@@ -266,7 +266,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   }
 
   @NotNull
-  public static PerlSubBase getTopLevelSuperMethod(@NotNull PerlSubBase subBase) {
+  public static PerlSubElement getTopLevelSuperMethod(@NotNull PerlSubElement subBase) {
     return getTopLevelSuperMethod(subBase, new THashSet<String>());
   }
 
@@ -278,7 +278,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return empty list if we've already been in this class, or list of topmost methods
    */
   @NotNull
-  private static PerlSubBase getTopLevelSuperMethod(@NotNull PerlSubBase subBase, Set<String> classRecursion) {
+  private static PerlSubElement getTopLevelSuperMethod(@NotNull PerlSubElement subBase, Set<String> classRecursion) {
     String packageName = subBase.getPackageName();
 
     if (packageName == null || classRecursion.contains(packageName)) {
@@ -287,12 +287,12 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
 
     classRecursion.add(packageName);
 
-    PerlSubBase directSuperMethod = getDirectSuperMethod(subBase);
+    PerlSubElement directSuperMethod = getDirectSuperMethod(subBase);
     return directSuperMethod == null ? subBase : getTopLevelSuperMethod(directSuperMethod, classRecursion);
   }
 
   @Nullable
-  public static PerlSubBase getDirectSuperMethod(PerlSubBase subBase) {
+  public static PerlSubElement getDirectSuperMethod(PerlSubElement subBase) {
     if (!subBase.isMethod()) {
       return null;
     }
@@ -305,22 +305,22 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     );
 
     for (PsiElement resolveTarget : resolveTargets) {
-      if (resolveTarget instanceof PerlSubBase) {
-        return (PerlSubBase)resolveTarget;
+      if (resolveTarget instanceof PerlSubElement) {
+        return (PerlSubElement)resolveTarget;
       }
     }
     return null;
   }
 
   @NotNull
-  public static List<PerlSubBase> collectOverridingSubs(PerlSubBase subBase) {
+  public static List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
     return collectOverridingSubs(subBase, new THashSet<String>());
   }
 
   @NotNull
-  public static List<PerlSubBase> collectOverridingSubs(@NotNull PerlSubBase subBase, @NotNull Set<String> recursionSet) {
-    List<PerlSubBase> result = new ArrayList<PerlSubBase>();
-    for (PerlSubBase directDescendant : getDirectOverridingSubs(subBase)) {
+  public static List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
+    List<PerlSubElement> result = new ArrayList<PerlSubElement>();
+    for (PerlSubElement directDescendant : getDirectOverridingSubs(subBase)) {
       String packageName = directDescendant.getPackageName();
       if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName)) {
         recursionSet.add(packageName);
@@ -333,21 +333,21 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   }
 
   @NotNull
-  public static List<PerlSubBase> getDirectOverridingSubs(@NotNull PerlSubBase subBase) {
+  public static List<PerlSubElement> getDirectOverridingSubs(@NotNull PerlSubElement subBase) {
     PerlNamespaceDefinition containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
 
-    return containingNamespace == null ? Collections.<PerlSubBase>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
+    return containingNamespace == null ? Collections.<PerlSubElement>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
   }
 
   @NotNull
-  public static List<PerlSubBase> getDirectOverridingSubs(@NotNull final PerlSubBase subBase,
-                                                          @NotNull PerlNamespaceDefinition containingNamespace) {
-    final List<PerlSubBase> overridingSubs = new ArrayList<PerlSubBase>();
+  public static List<PerlSubElement> getDirectOverridingSubs(@NotNull final PerlSubElement subBase,
+                                                             @NotNull PerlNamespaceDefinition containingNamespace) {
+    final List<PerlSubElement> overridingSubs = new ArrayList<PerlSubElement>();
     final String subName = subBase.getSubName();
 
-    PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubBase>() {
+    PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubElement>() {
       @Override
-      public boolean process(PerlSubBase overridingSub) {
+      public boolean process(PerlSubElement overridingSub) {
         String overridingSubName = overridingSub.getSubName();
         if (StringUtil.equals(overridingSubName, subName) && subBase == getDirectSuperMethod(overridingSub)) {
           overridingSubs.add(overridingSub);
@@ -384,7 +384,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
                                          @NotNull Project project,
                                          @NotNull GlobalSearchScope searchScope,
                                          @NotNull Processor<PsiElement> processor) {
-    for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
+    for (PerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {
         return;
       }

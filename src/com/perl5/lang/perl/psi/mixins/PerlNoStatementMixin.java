@@ -24,12 +24,12 @@ import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public abstract class PerlNoStatementImplMixin extends PerlUseStatementImplMixin implements PerlNoStatement {
-  public PerlNoStatementImplMixin(ASTNode node) {
+public abstract class PerlNoStatementMixin extends PerlUseStatementMixin implements PerlNoStatement {
+  public PerlNoStatementMixin(ASTNode node) {
     super(node);
   }
 
-  public PerlNoStatementImplMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
+  public PerlNoStatementMixin(PerlUseStatementStub stub, IStubElementType nodeType) {
     super(stub, nodeType);
   }
 }

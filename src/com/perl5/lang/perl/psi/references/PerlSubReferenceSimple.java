@@ -163,11 +163,11 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
         setDeclared();
       }
 
-      if (!isDefined() && element instanceof PerlSubDefinitionBase) {
+      if (!isDefined() && element instanceof PerlSubDefinition) {
         setDefined();
       }
 
-      if (!isXSub() && element instanceof PerlSubBase && ((PerlSubBase)element).isXSub()) {
+      if (!isXSub() && element instanceof PerlSubElement && ((PerlSubElement)element).isXSub()) {
         setXSub();
       }
 

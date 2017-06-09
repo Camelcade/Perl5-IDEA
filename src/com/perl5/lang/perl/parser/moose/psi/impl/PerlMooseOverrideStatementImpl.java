@@ -24,7 +24,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBaseImpl;
+import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub> implements PerlMooseOverrideStatement {
+public class PerlMooseOverrideStatementImpl extends PerlSubDefinitionBase implements PerlMooseOverrideStatement {
   public PerlMooseOverrideStatementImpl(@NotNull ASTNode node) {
     super(node);
   }

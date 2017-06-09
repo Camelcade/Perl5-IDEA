@@ -24,8 +24,8 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.stubs.PerlSubBaseStub;
+import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -40,12 +40,12 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBaseImpl<Stub extends PerlSubBaseStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubBase<Stub> {
-  public PerlSubBaseImpl(@NotNull ASTNode node) {
+public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubElement<Stub> {
+  public PerlSubBase(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubBaseImpl(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubBase(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

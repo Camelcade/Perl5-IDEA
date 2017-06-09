@@ -27,7 +27,7 @@ import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,7 +62,7 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
       newImplicitVariables.add(new PerlVariableLightImpl(
         getManager(),
         PerlLanguage.INSTANCE,
-        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        PerlMethodDefinitionMixin.getDefaultInvocantName(),
         true,
         false,
         true,

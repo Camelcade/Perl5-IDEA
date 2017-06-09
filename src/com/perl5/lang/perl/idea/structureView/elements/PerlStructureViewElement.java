@@ -243,12 +243,12 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         // definitions
-        Collection<PerlSubDefinitionBase> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
+        Collection<PerlSubDefinition> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
         if (subDefinitions.isEmpty()) {
           subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
         }
 
-        for (PerlSubDefinitionBase item : subDefinitions) {
+        for (PerlSubDefinition item : subDefinitions) {
           if (item instanceof PerlConstantDefinition) {
             result.add(new PerlConstantStructureViewElement((PerlConstantDefinition)item).setImported());
           }
@@ -284,7 +284,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // containing subs definitions, currently only supports PerlHierarchyViewElementsProvider
-      for (PerlSubDefinitionBase child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinitionBase.class)) {
+      for (PerlSubDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinition.class)) {
         if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
           if (child instanceof PerlHierarchyViewElementsProvider) {
             ((PerlHierarchyViewElementsProvider)child).fillHierarchyViewElements(result, implementedMethods, false, false);
@@ -318,8 +318,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
             if (element instanceof PerlConstantDefinition && ((PerlConstantDefinition)element).getName() != null) {
               inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinition)element).setInherited());
             }
-            else if (element instanceof PerlSubDefinitionBase) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionBase)element).setInherited());
+            else if (element instanceof PerlSubDefinition) {
+              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition)element).setInherited());
             }
             else if (element instanceof PerlSubDeclaration) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration)element).setInherited());

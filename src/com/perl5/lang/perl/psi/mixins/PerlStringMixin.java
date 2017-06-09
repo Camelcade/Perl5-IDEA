@@ -36,8 +36,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 08.08.2015.
  */
-public abstract class PerlStringImplMixin extends PerlStringBareImplMixin implements PsiLanguageInjectionHost {
-  public PerlStringImplMixin(@NotNull ASTNode node) {
+public abstract class PerlStringMixin extends PerlStringBareMixin implements PsiLanguageInjectionHost {
+  public PerlStringMixin(@NotNull ASTNode node) {
     super(node);
   }
 

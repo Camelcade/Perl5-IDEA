@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -57,7 +57,7 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
       newImplicitVariables.add(new PerlVariableLightImpl(
         getManager(),
         PerlLanguage.INSTANCE,
-        PerlMethodDefinitionImplMixin.getDefaultInvocantName(),
+        PerlMethodDefinitionMixin.getDefaultInvocantName(),
         true,
         false,
         true,

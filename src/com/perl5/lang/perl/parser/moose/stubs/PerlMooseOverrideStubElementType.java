@@ -24,7 +24,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NonNls;
@@ -44,7 +44,7 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
   }
 
   @Override
-  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PerlMooseOverrideStatementImpl(stub, this);
   }
 

@@ -30,8 +30,8 @@ import java.util.List;
 /**
  * Created by hurricup on 30.04.2016.
  */
-public class PerlAssignExpressionImplMixin extends PsiPerlExprImpl implements PerlAssignExpression {
-  public PerlAssignExpressionImplMixin(ASTNode node) {
+public class PerlAssignExpressionMixin extends PsiPerlExprImpl implements PerlAssignExpression {
+  public PerlAssignExpressionMixin(ASTNode node) {
     super(node);
   }
 

@@ -20,7 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.mixins.PerlStringImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -29,10 +29,10 @@ import java.util.Map;
 /**
  * Created by hurricup on 27.02.2016.
  */
-public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringImplMixin> {
+public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin> {
   private Map<Integer, Integer> offsetsMap;
 
-  public PerlStringLiteralEscaper(@NotNull PerlStringImplMixin host) {
+  public PerlStringLiteralEscaper(@NotNull PerlStringMixin host) {
     super(host);
   }
 

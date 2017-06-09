@@ -26,13 +26,13 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -193,13 +193,13 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
   @Nullable
   private static PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
-    if (target == null || !(target instanceof PerlSubDefinitionBase)) {
+    if (target == null || !(target instanceof PerlSubDefinition)) {
       return null;
     }
 
-    @SuppressWarnings("unchecked") List<PerlSubArgument> subArgumentsList = ((PerlSubDefinitionBase)target).getSubArgumentsList();
+    @SuppressWarnings("unchecked") List<PerlSubArgument> subArgumentsList = ((PerlSubDefinition)target).getSubArgumentsList();
 
-    if (((PerlSubDefinitionBase)target).isMethod() && subArgumentsList.size() > 0) {
+    if (((PerlSubDefinition)target).isMethod() && subArgumentsList.size() > 0) {
       subArgumentsList.remove(0);
     }
 
@@ -210,8 +210,8 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
   private static PerlParameterInfo[] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
     PsiElement run = arguments.getPrevSibling();
     while (run != null) {
-      if (run instanceof PerlMethodImplMixin) {
-        PerlSubNameElement subNameElement = ((PerlMethodImplMixin)run).getSubNameElement();
+      if (run instanceof PerlMethodMixin) {
+        PerlSubNameElement subNameElement = ((PerlMethodMixin)run).getSubNameElement();
         if (subNameElement == null) {
           break;
         }

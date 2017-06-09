@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs;
+package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 05.06.2015.
- */
-public interface PerlSubBaseStub<Stub extends PsiElement> extends StubElement<Stub> {
+public interface PerlSub {
   /**
    * Returns package name for current function
    *

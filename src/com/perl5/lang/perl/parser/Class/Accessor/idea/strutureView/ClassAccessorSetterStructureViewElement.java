@@ -20,13 +20,13 @@ import com.intellij.navigation.ItemPresentation;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
  * Created by hurricup on 23.01.2016.
  */
 public class ClassAccessorSetterStructureViewElement extends PerlSubStructureViewElement {
-  public ClassAccessorSetterStructureViewElement(PerlSubDefinitionBase element) {
+  public ClassAccessorSetterStructureViewElement(PerlSubDefinition element) {
     super(element);
   }
 

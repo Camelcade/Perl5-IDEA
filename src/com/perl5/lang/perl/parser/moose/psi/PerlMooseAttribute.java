@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.perl5.lang.perl.psi.PerlSubDefinitionWitTextIdentifier;
+import com.perl5.lang.perl.psi.PerlSubDefinitionWithTextIdentifier;
 
 /**
  * Created by hurricup on 29.11.2015.
  */
-public interface PerlMooseAttribute extends PerlSubDefinitionWitTextIdentifier {
+public interface PerlMooseAttribute extends PerlSubDefinitionWithTextIdentifier {
   /**
    * Indicates, that current attribute is extension of the parent's one
    *

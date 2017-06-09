@@ -25,7 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -49,7 +49,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
     Project project = parameters.getPosition().getProject();
 
     // defined subs
-    for (PerlSubDefinitionBase subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+    for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
       if (subDefinition.isStatic()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
       }

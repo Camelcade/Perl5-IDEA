@@ -16,10 +16,58 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
- * Created by hurricup on 31.05.2015.
+ * Created by hurricup on 11.11.2015.
  */
-public interface PerlSubDefinition extends PerlSubDefinitionBase<PerlSubDefinitionStub> {
+public interface PerlSubDefinition
+  extends PerlSubElement<PerlSubDefinitionStub>, PerlLexicalScope, PerlElementPatterns, PerlElementTypes {
+
+  /**
+   * Returns sub block, even if it's in the lazy_parsable_block
+   *
+   * @return sub block element; optional in constant, different extensions
+   */
+  PsiPerlBlock getBlockSmart();
+
+  /**
+   * Returns list of accepted arguments
+   *
+   * @return list of accepted arguments
+   */
+  @NotNull
+  List<PerlSubArgument> getSubArgumentsList();
+
+  /**
+   * Returns compiled and parenthesised arguments list
+   *
+   * @return String with parenthesised arguments
+   */
+  String getSubArgumentsListAsString();
+
+  /**
+   * Returns list of arguments defined in signature
+   *
+   * @return list of arguments or null if there is no signature
+   */
+  @Nullable
+  List<PerlSubArgument> getPerlSubArgumentsFromSignature();
+
+  /**
+   * Returns signature container
+   *
+   * @return PsiElement or null
+   */
+  @Nullable
+  PsiElement getSignatureContainer();
 }

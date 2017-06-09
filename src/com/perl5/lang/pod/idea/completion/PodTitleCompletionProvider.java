@@ -26,7 +26,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.psi.PerlSubBase;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.pod.parser.PodElementPatterns;
 import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
@@ -78,7 +78,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
       final PsiFile elementFile = element.getContainingFile();
       final PsiFile perlFile = PodFileUtil.getTargetPerlFile(elementFile);
       if (perlFile != null) {
-        final Collection<PerlSubBase> possibleTargets = PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class);
+        final Collection<PerlSubElement> possibleTargets = PsiTreeUtil.findChildrenOfType(perlFile, PerlSubElement.class);
         element.getContainingFile().accept(new PodRecursiveVisitor() {
           @Override
           public void visitTargetableSection(PodTitledSection o) {
@@ -91,7 +91,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
                     for (ResolveResult resolveResult : ((PodSubReference)reference).multiResolve(false)) {
                       PsiElement targetElement = resolveResult.getElement();
 
-                      if (targetElement instanceof PerlSubBase) {
+                      if (targetElement instanceof PerlSubElement) {
                         possibleTargets.remove(targetElement);
                       }
                     }
@@ -103,7 +103,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
           }
         });
 
-        for (PerlSubBase untargetedSub : possibleTargets) {
+        for (PerlSubElement untargetedSub : possibleTargets) {
           result.addElement(LookupElementBuilder
                               .create(untargetedSub.getPresentableName())
                               .withIcon(untargetedSub.getIcon(0))

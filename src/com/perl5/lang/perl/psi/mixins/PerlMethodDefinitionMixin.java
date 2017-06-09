@@ -36,17 +36,16 @@ import java.util.List;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlMethodDefinitionImplMixin extends PerlSubDefinitionBaseImpl<PerlSubDefinitionStub>
-  implements PerlMethodDefinition {
+public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase implements PerlMethodDefinition {
   // fixme see the #717
   protected static final String DEFAULT_INVOCANT_NAME = "$self";
   protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
 
-  public PerlMethodDefinitionImplMixin(@NotNull ASTNode node) {
+  public PerlMethodDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlMethodDefinitionImplMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlMethodDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

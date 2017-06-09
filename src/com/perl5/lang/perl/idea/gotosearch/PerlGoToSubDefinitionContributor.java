@@ -21,7 +21,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.PerlScopes;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor
   @NotNull
   @Override
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
-    Collection<PerlSubDefinitionBase> result = PerlSubUtil.getSubDefinitions(
+    Collection<PerlSubDefinition> result = PerlSubUtil.getSubDefinitions(
       project,
       name,
       (includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))

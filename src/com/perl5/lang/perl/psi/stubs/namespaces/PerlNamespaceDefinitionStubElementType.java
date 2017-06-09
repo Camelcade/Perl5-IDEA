@@ -25,7 +25,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -40,7 +40,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionImplMixin>
+public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionMixin>
   implements PsiElementProvider {
   public PerlNamespaceDefinitionStubElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
@@ -51,7 +51,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   }
 
   @Override
-  public PerlNamespaceDefinitionImplMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new PsiPerlNamespaceDefinitionImpl(stub, this);
   }
 
@@ -62,7 +62,7 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionImplMixin psi, StubElement parentStub) {
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionMixin psi, StubElement parentStub) {
     return new PerlNamespaceDefinitionStub(
       parentStub,
       this,

@@ -25,9 +25,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlSubBase;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionImplMixin;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,8 +40,8 @@ import java.util.List;
 public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes {
   @Override
   protected void collectNavigationMarkers(@NotNull PsiElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
-    if (element instanceof PerlNamespaceDefinitionImplMixin) {
-      PsiElement nameIdentifier = ((PerlNamespaceDefinitionImplMixin)element).getNameIdentifier();
+    if (element instanceof PerlNamespaceDefinitionMixin) {
+      PsiElement nameIdentifier = ((PerlNamespaceDefinitionMixin)element).getNameIdentifier();
       if (nameIdentifier == null) {
         nameIdentifier = element;
       }
@@ -66,18 +66,18 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         result.add(builder.createLineMarkerInfo(nameIdentifier));
       }
     }
-    else if (element instanceof PerlSubDefinitionBase && ((PerlSubDefinitionBase)element).isMethod()) {
+    else if (element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
       PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
       if (containingNamespace != null) {
-        final String packageName = ((PerlSubDefinitionBase)element).getPackageName();
-        final String subName = ((PerlSubDefinitionBase)element).getSubName();
-        PsiElement nameIdentifier = ((PerlSubDefinitionBase)element).getNameIdentifier();
+        final String packageName = ((PerlSubDefinition)element).getPackageName();
+        final String subName = ((PerlSubDefinition)element).getSubName();
+        PsiElement nameIdentifier = ((PerlSubDefinition)element).getNameIdentifier();
         if (nameIdentifier == null) {
           nameIdentifier = element;
         }
 
         if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName)) {
-          PerlSubBase parentSub = PerlSubUtil.getDirectSuperMethod((PerlSubBase)element);
+          PerlSubElement parentSub = PerlSubUtil.getDirectSuperMethod((PerlSubElement)element);
 
           if (parentSub != null) {
             NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
@@ -88,7 +88,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
             result.add(builder.createLineMarkerInfo(nameIdentifier));
           }
 
-          final List<PerlSubBase> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubBase)element, containingNamespace);
+          final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs((PerlSubElement)element, containingNamespace);
 
           if (!overridingSubs.isEmpty()) {
             NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder

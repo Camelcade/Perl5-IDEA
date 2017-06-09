@@ -25,9 +25,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlSubBase;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -70,7 +70,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
 
         if (StringUtil.isNotEmpty(packageName)) {
           String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
-          for (PerlSubDefinitionBase target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
+          for (PerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
             results.add(new PsiElementResolveResult(target));
           }
           for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
@@ -81,7 +81,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
         if (results.isEmpty()) {
           final PsiFile perlFile = containingFile.getViewProvider().getStubBindingRoot();
 
-          for (PerlSubBase subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubBase.class)) {
+          for (PerlSubElement subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubElement.class)) {
             String subBaseName = subBase.getName();
             if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
               results.add(new PsiElementResolveResult(subBase));

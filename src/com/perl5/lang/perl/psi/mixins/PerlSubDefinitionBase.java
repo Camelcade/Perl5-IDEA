@@ -44,13 +44,13 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionStub> extends PerlSubBaseImpl<Stub>
-  implements PerlSubDefinitionBase<Stub> {
-  public PerlSubDefinitionBaseImpl(@NotNull ASTNode node) {
+public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub>
+  implements PerlSubDefinition {
+  public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubDefinitionBaseImpl(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDefinitionBase(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -86,9 +86,9 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
   @NotNull
   @Override
   public List<PerlSubArgument> getSubArgumentsList() {
-    Stub stub = getStub();
+    PerlSubDefinitionStub stub = getStub();
     if (stub != null) {
-      return new ArrayList<PerlSubArgument>(stub.getSubArgumentsList());
+      return new ArrayList<>(stub.getSubArgumentsList());
     }
 
     List<PerlSubArgument> arguments = getPerlSubArgumentsFromSignature();
@@ -140,7 +140,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
     PsiElement signatureContainer = getSignatureContainer();
 
     if (signatureContainer != null) {
-      arguments = new ArrayList<PerlSubArgument>();
+      arguments = new ArrayList<>();
       //noinspection unchecked
 
       PsiElement signatureElement = signatureContainer.getFirstChild();
@@ -172,7 +172,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitSubDefinitionBase(this);
+      ((PerlVisitor)visitor).visitPerlSubDefinition(this);
     }
     else {
       super.accept(visitor);
@@ -212,7 +212,7 @@ public abstract class PerlSubDefinitionBaseImpl<Stub extends PerlSubDefinitionSt
   }
 
   protected static class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
-    private List<PerlSubArgument> myArguments = new ArrayList<PerlSubArgument>();
+    private List<PerlSubArgument> myArguments = new ArrayList<>();
 
     @Override
     public boolean process(PsiPerlStatement statement) {

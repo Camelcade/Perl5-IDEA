@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.MasonMethodDefinitionImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionSt
   }
 
   @Override
-  public PerlSubDefinitionBase<PerlSubDefinitionStub> createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new MasonMethodDefinitionImpl(stub, this);
   }
 

@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious.psi;
-
-import com.perl5.lang.perl.psi.PerlSubDefinitionWithTextIdentifier;
+package com.perl5.lang.perl.psi;
 
 /**
- * Created by hurricup on 23.04.2016.
+ * Created by hurricup on 22.01.2016.
  */
-public interface MojoliciousHelperDeclaration extends PerlSubDefinitionWithTextIdentifier {
+public interface PerlSubDefinitionWithTextIdentifier extends PerlSubDefinition {
 }

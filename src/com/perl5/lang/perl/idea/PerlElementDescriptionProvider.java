@@ -50,9 +50,6 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         else if (element instanceof PerlHeredocOpener) {
           return "Heredoc marker";
         }
-        else if (element instanceof PerlSubDefinition) {
-          return "Sub definition";
-        }
         else if (element instanceof PerlMethodDefinition) {
           return "Method definition";
         }
@@ -61,6 +58,9 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         }
         else if (element instanceof PerlConstantDefinition) {
           return "Constant definition";
+        }
+        else if (element instanceof PerlSubDefinition) {
+          return "Sub definition";
         }
         else if (element instanceof PerlNamespaceDefinitionWithIdentifier) {
           return "Namespace definition";

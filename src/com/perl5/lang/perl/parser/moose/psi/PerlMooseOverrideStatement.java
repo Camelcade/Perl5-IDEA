@@ -17,11 +17,10 @@
 package com.perl5.lang.perl.parser.moose.psi;
 
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionBase;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**
  * Created by hurricup on 25.11.2015.
  */
-public interface PerlMooseOverrideStatement extends PerlSubDefinitionBase<PerlSubDefinitionStub>, PerlReferencesProvider {
+public interface PerlMooseOverrideStatement extends PerlSubDefinition, PerlReferencesProvider {
 }

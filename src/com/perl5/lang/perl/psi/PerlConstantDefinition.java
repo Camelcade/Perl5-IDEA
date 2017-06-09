@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public interface PerlConstantDefinition extends PerlSubDefinitionWitTextIdentifier {
+public interface PerlConstantDefinition extends PerlSubDefinitionWithTextIdentifier {
   /**
    * Returns constant defenition value PsiElement
    *
