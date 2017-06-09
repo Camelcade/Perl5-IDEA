@@ -28,13 +28,12 @@ import java.util.List;
  * Created by hurricup on 23.04.2016.
  */
 public class MojoliciousHelperDeclarationStub extends PerlSubDefinitionStub {
-  public MojoliciousHelperDeclarationStub(
-    StubElement parent,
-    String packageName,
-    String subName,
-    List<PerlSubArgument> arguments,
-    PerlSubAnnotations annotations,
-    IStubElementType elementType) {
+  public MojoliciousHelperDeclarationStub(StubElement parent,
+                                          String packageName,
+                                          String subName,
+                                          List<PerlSubArgument> arguments,
+                                          PerlSubAnnotations annotations,
+                                          IStubElementType elementType) {
     super(parent, packageName, subName, arguments, annotations, elementType);
   }
 }

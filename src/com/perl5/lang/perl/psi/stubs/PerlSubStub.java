@@ -16,12 +16,47 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlSub;
+import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
-/**
- * Created by hurricup on 05.06.2015.
- */
-public interface PerlSubStub<Stub extends PsiElement> extends StubElement<Stub>, PerlSub {
+public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<Psi> implements StubElement<Psi>, PerlSub {
+  private final String myPackageName;
+  private final String mySubName;
+  private final PerlSubAnnotations myAnnotations;
+
+  public PerlSubStub(final StubElement parent,
+                     final String packageName,
+                     final String subName,
+                     PerlSubAnnotations annotations,
+                     IStubElementType elementType) {
+    super(parent, elementType);
+    myPackageName = packageName;
+    mySubName = subName;
+    myAnnotations = annotations;
+  }
+
+  @Override
+  public String getPackageName() {
+    return myPackageName;
+  }
+
+  @Override
+  public String getSubName() {
+    return mySubName;
+  }
+
+  @Override
+  public PerlSubAnnotations getAnnotations() {
+    return myAnnotations;
+  }
+
+  @Override
+  public String getCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
 }

@@ -17,59 +17,31 @@
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStub extends StubBase<PerlSubDefinition> implements PerlSubStub<PerlSubDefinition> {
-  private final String packageName;
-  private final String subName;
+public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinition> {
   private final List<PerlSubArgument> myArguments;
-  private final PerlSubAnnotations myAnnotations;
 
-  public PerlSubDefinitionStub(final StubElement parent,
-                               final String packageName,
-                               final String subName,
+  public PerlSubDefinitionStub(StubElement parent,
+                               String packageName,
+                               String subName,
                                List<PerlSubArgument> arguments,
                                PerlSubAnnotations annotations,
                                IStubElementType elementType) {
-    super(parent, elementType);
-    this.packageName = packageName;
-    this.subName = subName;
+    super(parent, packageName, subName, annotations, elementType);
     myArguments = arguments;
-    myAnnotations = annotations;
-  }
-
-  @Override
-  public String getPackageName() {
-    return packageName;
-  }
-
-  @Override
-  public String getSubName() {
-    return subName;
   }
 
   public List<PerlSubArgument> getSubArgumentsList() {
     return myArguments;
-  }
-
-  @Override
-  public PerlSubAnnotations getAnnotations() {
-    return myAnnotations;
-  }
-
-  @Override
-  public String getCanonicalName() {
-    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
   }
 }
