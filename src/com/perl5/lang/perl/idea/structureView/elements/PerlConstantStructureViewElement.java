@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.perl5.lang.perl.psi.PerlConstantDefinition;
+import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
 public class PerlConstantStructureViewElement extends PerlLeafStructureViewElement {
-  public PerlConstantStructureViewElement(PerlConstantDefinition element) {
+  public PerlConstantStructureViewElement(PerlConstantDefinitionMixin element) {
     super(element);
   }
 }

@@ -30,8 +30,10 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public interface PerlSubDefinition
-  extends PerlSubElement<PerlSubDefinitionStub>, PerlLexicalScope, PerlElementPatterns, PerlElementTypes {
+public interface PerlSubDefinition extends PerlSubElement<PerlSubDefinitionStub>,
+                                           PerlLexicalScope,
+                                           PerlElementPatterns,
+                                           PerlElementTypes {
 
   /**
    * Returns sub block, even if it's in the lazy_parsable_block

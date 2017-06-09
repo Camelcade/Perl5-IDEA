@@ -105,22 +105,13 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPerlCastExpression(o);
   }
 
-  public void visitPerlConstantDefinition(@NotNull PerlConstantDefinition o) {
-    visitPerlSubDefinition(o);
-  }
-
   @Override
   public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o) {
     visitPerlSubDefinition(o);
   }
 
   @Override
-  public void visitPerlFuncDefinition(@NotNull PerlFuncDefinition o) {
-    visitPerlSubDefinition(o);
-  }
-
-  @Override
   public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o) {
-    visitPerlSubDefinition(o);
+    super.visitConstantDefinition(o);
   }
 }

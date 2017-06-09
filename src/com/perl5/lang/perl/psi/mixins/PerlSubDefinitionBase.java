@@ -44,8 +44,7 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub>
-  implements PerlSubDefinition {
+public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinition {
   public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
   }

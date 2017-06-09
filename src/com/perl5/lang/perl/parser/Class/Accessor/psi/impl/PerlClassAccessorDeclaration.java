@@ -25,12 +25,15 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
+import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
+import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterSetterStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorSetterStructureViewElement;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -48,7 +51,13 @@ import java.util.Set;
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextIdentifier implements PerlClassAccessorDeclaration {
+public class PerlClassAccessorDeclaration extends PerlSubDefinitionWithTextIdentifier implements ClassAccessorElementTypes,
+                                                                                                 PerlCompletionElementsProvider,
+                                                                                                 PerlHierarchyViewElementsProvider,
+                                                                                                 PerlRenameUsagesSubstitutor {
+  public static final String ACCESSOR_PREFIX = "get_";
+  public static final String MUTATOR_PREFIX = "set_";
+
   private static final TokenSet READABLE_DECLARATORS = TokenSet.create(
     RESERVED_MK_ACCESSORS,
     RESERVED_MK_RO_ACCESSORS
@@ -59,15 +68,14 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
     RESERVED_MK_WO_ACCESSORS
   );
 
-  public PerlClassAccessorDeclarationImpl(@NotNull ASTNode node) {
+  public PerlClassAccessorDeclaration(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlClassAccessorDeclarationImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlClassAccessorDeclaration(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
-  @Override
   public boolean isFollowsBestPractice() {
     PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub)getStub();
     if (stub != null) {
@@ -109,7 +117,6 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
     return null;
   }
 
-  @Override
   public boolean isAccessorReadable() {
     PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub)getStub();
     if (stub != null) {
@@ -118,7 +125,6 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
     return READABLE_DECLARATORS.contains(getDeclaratorElementType());
   }
 
-  @Override
   public boolean isAccessorWritable() {
     PerlClassAccessorDeclarationStub stub = (PerlClassAccessorDeclarationStub)getStub();
     if (stub != null) {
@@ -162,18 +168,15 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
   }
 
   // fixme not dry with Stub
-  @Override
   public String getGetterName() {
     return ACCESSOR_PREFIX + getSubName();
   }
 
-  @Override
   public String getSetterName() {
     return MUTATOR_PREFIX + getSubName();
   }
 
   @Nullable
-  @Override
   public String getGetterCanonicalName() {
     String packageName = getPackageName();
     if (packageName == null) {
@@ -183,7 +186,6 @@ public class PerlClassAccessorDeclarationImpl extends PerlSubDefinitionWithTextI
   }
 
   @Nullable
-  @Override
   public String getSetterCanonicalName() {
     String packageName = getPackageName();
     if (packageName == null) {

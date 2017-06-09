@@ -21,8 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclarationImpl;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -39,13 +38,13 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
 
   @Override
   public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new MojoliciousHelperDeclarationImpl(stub, this);
+    return new MojoliciousHelperDeclaration(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MojoliciousHelperDeclarationImpl(node);
+    return new MojoliciousHelperDeclaration(node);
   }
 
   @Override

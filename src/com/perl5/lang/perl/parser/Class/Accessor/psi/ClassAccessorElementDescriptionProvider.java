@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi;
 import com.intellij.psi.ElementDescriptionLocation;
 import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

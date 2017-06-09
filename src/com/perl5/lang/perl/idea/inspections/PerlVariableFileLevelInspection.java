@@ -19,7 +19,10 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PsiPerlSubExpr;
 
 /**
  * Created by evstigneev on 14.12.2015.
@@ -33,9 +36,7 @@ public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInsp
       return;
     }
 
-    if (PsiTreeUtil
-          .getParentOfType(variableDeclarationWrapper, PerlSubDefinition.class, PerlMethodDefinition.class, PerlFuncDefinition.class,
-                           PsiPerlSubExpr.class) == null) {
+    if (PsiTreeUtil.getParentOfType(variableDeclarationWrapper, PerlSubDefinition.class, PsiPerlSubExpr.class) == null) {
       PerlVariable variable = variableDeclarationWrapper.getVariable();
       if (variable != null) {
         holder.registerProblem(

@@ -18,7 +18,7 @@ package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mason2.psi.MasonMethodDefinition;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -29,12 +29,12 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl implements MasonMethodDefinition {
-  public MasonMethodDefinitionImpl(ASTNode node) {
+public class MasonMethodDefinition extends PsiPerlMethodDefinitionImpl implements PerlImplicitVariablesProvider {
+  public MasonMethodDefinition(ASTNode node) {
     super(node);
   }
 
-  public MasonMethodDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType) {
+  public MasonMethodDefinition(PerlSubDefinitionStub stub, IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

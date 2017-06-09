@@ -20,7 +20,7 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.annotators.PerlBaseAnnotator;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttribute;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public class MooseAnnotator extends PerlBaseAnnotator {
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-    if (element instanceof PerlMooseAttributeImpl) {
+    if (element instanceof PerlMooseAttribute) {
       holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SQ_STRING);
     }
   }

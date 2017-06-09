@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseAttribute;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseHasStatement;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
@@ -35,12 +34,12 @@ import java.util.List;
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifier implements PerlMooseAttribute {
-  public PerlMooseAttributeImpl(@NotNull ASTNode node) {
+public class PerlMooseAttribute extends PerlSubDefinitionWithTextIdentifier {
+  public PerlMooseAttribute(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlMooseAttributeImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlMooseAttribute(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -50,7 +49,6 @@ public class PerlMooseAttributeImpl extends PerlSubDefinitionWithTextIdentifier 
     return PsiTreeUtil.getParentOfType(this, PerlMooseHasStatement.class, true, PsiPerlStatement.class);
   }
 
-  @Override
   public boolean isExtension() {
     PsiElement prevElement = getPrevSibling();
     // fixme adjust

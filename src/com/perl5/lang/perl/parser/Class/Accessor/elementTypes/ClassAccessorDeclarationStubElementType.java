@@ -24,8 +24,7 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclarationImpl;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
@@ -68,7 +67,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
 
   @Override
   public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlClassAccessorDeclarationImpl(stub, this);
+    return new PerlClassAccessorDeclaration(stub, this);
   }
 
   @Override
@@ -111,7 +110,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlClassAccessorDeclarationImpl(node);
+    return new PerlClassAccessorDeclaration(node);
   }
 
   @Override

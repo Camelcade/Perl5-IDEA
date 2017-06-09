@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlSubExpr;
@@ -33,14 +32,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperDeclarationImpl extends PerlSubDefinitionWithTextIdentifier implements MojoliciousHelperDeclaration {
+public class MojoliciousHelperDeclaration extends PerlSubDefinitionWithTextIdentifier {
   public static final String HELPER_NAMESPACE_NAME = "Mojolicious::Controller";
 
-  public MojoliciousHelperDeclarationImpl(@NotNull ASTNode node) {
+  public MojoliciousHelperDeclaration(@NotNull ASTNode node) {
     super(node);
   }
 
-  public MojoliciousHelperDeclarationImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public MojoliciousHelperDeclaration(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

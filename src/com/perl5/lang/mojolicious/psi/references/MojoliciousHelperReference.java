@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.stubs.StubIndex;
-import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;

@@ -19,7 +19,7 @@ package com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView;
 import com.intellij.navigation.ItemPresentation;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 
 /**

@@ -24,6 +24,8 @@ import com.intellij.usageView.UsageViewTypeLocation;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
+import com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionMixin;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -53,10 +55,10 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         else if (element instanceof PerlMethodDefinition) {
           return "Method definition";
         }
-        else if (element instanceof PerlFuncDefinition) {
+        else if (element instanceof PerlFuncDefinitionMixin) {
           return "Function definition";
         }
-        else if (element instanceof PerlConstantDefinition) {
+        else if (element instanceof PerlConstantDefinitionMixin) {
           return "Constant definition";
         }
         else if (element instanceof PerlSubDefinition) {

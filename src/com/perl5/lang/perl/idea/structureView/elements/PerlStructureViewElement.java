@@ -34,6 +34,7 @@ import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.*;
@@ -249,8 +250,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlSubDefinition item : subDefinitions) {
-          if (item instanceof PerlConstantDefinition) {
-            result.add(new PerlConstantStructureViewElement((PerlConstantDefinition)item).setImported());
+          if (item instanceof PerlConstantDefinitionMixin) {
+            result.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)item).setImported());
           }
           else {
             result.add(new PerlSubStructureViewElement(item).setImported());
@@ -292,8 +293,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
           else {
             implementedMethods.add(child.getName());
 
-            if (child instanceof PerlConstantDefinition) {
-              result.add(new PerlConstantStructureViewElement((PerlConstantDefinition)child));
+            if (child instanceof PerlConstantDefinitionMixin) {
+              result.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)child));
             }
             else {
               result.add(new PerlSubStructureViewElement(child));
@@ -315,8 +316,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
             ((PerlHierarchyViewElementsProvider)element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
           }
           else if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
-            if (element instanceof PerlConstantDefinition && ((PerlConstantDefinition)element).getName() != null) {
-              inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinition)element).setInherited());
+            if (element instanceof PerlConstantDefinitionMixin && ((PerlConstantDefinitionMixin)element).getName() != null) {
+              inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)element).setInherited());
             }
             else if (element instanceof PerlSubDefinition) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition)element).setInherited());

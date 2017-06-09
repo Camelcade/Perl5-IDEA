@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;

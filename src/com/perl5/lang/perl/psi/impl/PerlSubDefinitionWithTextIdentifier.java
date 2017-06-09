@@ -34,8 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public abstract class PerlSubDefinitionWithTextIdentifier extends PerlSubDefinitionBase implements
-                                                                                        com.perl5.lang.perl.psi.PerlSubDefinitionWithTextIdentifier {
+public abstract class PerlSubDefinitionWithTextIdentifier extends PerlSubDefinitionBase {
   public PerlSubDefinitionWithTextIdentifier(@NotNull ASTNode node) {
     super(node);
   }

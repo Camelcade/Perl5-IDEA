@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.elementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.MasonMethodDefinitionImpl;
+import com.perl5.lang.mason2.psi.impl.MasonMethodDefinition;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
@@ -36,12 +36,12 @@ public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionSt
 
   @Override
   public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new MasonMethodDefinitionImpl(stub, this);
+    return new MasonMethodDefinition(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonMethodDefinitionImpl(node);
+    return new MasonMethodDefinition(node);
   }
 }

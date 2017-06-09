@@ -394,7 +394,7 @@ limitations under the License.
     implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
     stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
-    implements("constant_definition")="com.perl5.lang.perl.psi.PerlConstantDefinition"
+    implements("constant_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
     stubClass("constant_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
 
@@ -453,7 +453,7 @@ limitations under the License.
 
     stubClass("func_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("func_definition")="com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionMixin"
-    implements("func_definition")="com.perl5.lang.perl.psi.PerlFuncDefinition"
+    implements("func_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
 
     stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionMixin"

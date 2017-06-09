@@ -18,7 +18,6 @@ package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.mason2.psi.MasonFilterDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
@@ -30,14 +29,14 @@ import java.util.List;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonFilterDefinitionImpl extends MasonMethodDefinitionImpl implements MasonFilterDefinition {
+public class MasonFilterDefinition extends MasonMethodDefinition {
   protected static final String YIELD_VARIABLE_NAME = "$yield";
 
-  public MasonFilterDefinitionImpl(ASTNode node) {
+  public MasonFilterDefinition(ASTNode node) {
     super(node);
   }
 
-  public MasonFilterDefinitionImpl(PerlSubDefinitionStub stub, IStubElementType nodeType) {
+  public MasonFilterDefinition(PerlSubDefinitionStub stub, IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

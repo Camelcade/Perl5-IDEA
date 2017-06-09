@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.elementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinitionImpl;
+import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinition;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -35,12 +35,12 @@ public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementTy
 
   @Override
   public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new MasonOverrideDefinitionImpl(stub, this);
+    return new MasonOverrideDefinition(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonOverrideDefinitionImpl(node);
+    return new MasonOverrideDefinition(node);
   }
 }

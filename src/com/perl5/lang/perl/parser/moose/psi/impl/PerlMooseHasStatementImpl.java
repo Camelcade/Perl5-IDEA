@@ -44,7 +44,7 @@ public class PerlMooseHasStatementImpl extends PsiPerlStatementImpl implements P
   @Override
   public void subtreeChanged() {
     super.subtreeChanged();
-    for (PerlMooseAttributeImpl mooseAttribute : PsiTreeUtil.findChildrenOfType(this, PerlMooseAttributeImpl.class)) {
+    for (PerlMooseAttribute mooseAttribute : PsiTreeUtil.findChildrenOfType(this, PerlMooseAttribute.class)) {
       mooseAttribute.subtreeChanged();
     }
   }

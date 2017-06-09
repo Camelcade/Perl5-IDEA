@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**

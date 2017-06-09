@@ -28,7 +28,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
-import com.perl5.lang.mojolicious.psi.MojoliciousHelperDeclaration;
+import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclaration;
 import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelpersStubIndex;
 import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
 import com.perl5.lang.perl.PerlScopes;

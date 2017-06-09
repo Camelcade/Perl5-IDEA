@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 10.11.2015.
  */
-public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase implements PsiPerlFuncDefinition {
+public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase {
   public PerlFuncDefinitionMixin(@NotNull ASTNode node) {
     super(node);
   }
@@ -44,6 +44,6 @@ public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase impl
   @Nullable
   @Override
   public PsiElement getSignatureContainer() {
-    return getFuncSignatureContent();
+    return ((PsiPerlFuncDefinition)this).getFuncSignatureContent();
   }
 }

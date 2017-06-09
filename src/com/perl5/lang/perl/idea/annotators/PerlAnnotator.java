@@ -28,6 +28,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,8 +67,8 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       }
     }
     else if (elementType == CONSTANT_DEFINITION) {
-      assert element instanceof PerlConstantDefinition;
-      PsiElement nameIdentifier = ((PerlConstantDefinition)element).getNameIdentifier();
+      assert element instanceof PerlConstantDefinitionMixin;
+      PsiElement nameIdentifier = ((PerlConstantDefinitionMixin)element).getNameIdentifier();
       if (nameIdentifier != null) {
         decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, false);
       }

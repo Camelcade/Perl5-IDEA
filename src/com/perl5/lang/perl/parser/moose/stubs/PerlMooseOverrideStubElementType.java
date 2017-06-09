@@ -22,8 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
@@ -45,7 +44,7 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
 
   @Override
   public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlMooseOverrideStatementImpl(stub, this);
+    return new PerlMooseOverrideStatement(stub, this);
   }
 
   @Override
@@ -60,6 +59,6 @@ public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubEleme
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlMooseOverrideStatementImpl(node);
+    return new PerlMooseOverrideStatement(node);
   }
 }

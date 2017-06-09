@@ -22,9 +22,10 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.mason2.psi.MasonOverrideDefinition;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
@@ -39,14 +40,14 @@ import java.util.List;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition {
+public class MasonOverrideDefinition extends PerlMooseOverrideStatement implements PerlSubDefinition, PerlImplicitVariablesProvider {
   protected List<PerlVariableDeclarationElement> myImplicitVariables;
 
-  public MasonOverrideDefinitionImpl(@NotNull ASTNode node) {
+  public MasonOverrideDefinition(@NotNull ASTNode node) {
     super(node);
   }
 
-  public MasonOverrideDefinitionImpl(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public MasonOverrideDefinition(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 

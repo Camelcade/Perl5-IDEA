@@ -49,7 +49,11 @@ public abstract class PerlConstantDefinitionMixin extends PerlSubDefinitionWithT
     super(stub, nodeType);
   }
 
-  @Override
+  /**
+   * Returns constant defenition value PsiElement
+   *
+   * @return PsiElement
+   */
   public PsiElement getValueExpression() {
     PsiElement[] children = getChildren();
     if (children.length > 1) {
