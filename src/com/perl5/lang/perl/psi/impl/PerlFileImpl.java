@@ -39,7 +39,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -61,7 +61,7 @@ import java.util.*;
  * Created by hurricup on 26.04.2015.
  */
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
-  private static final ArrayList<PerlNamespaceDefinition> EMPTY_LIST = new ArrayList<PerlNamespaceDefinition>();
+  private static final ArrayList<PerlNamespaceDefinitionElement> EMPTY_LIST = new ArrayList<PerlNamespaceDefinitionElement>();
   protected GlobalSearchScope myElementsResolveScope;
   protected PsiElement fileContext;
 

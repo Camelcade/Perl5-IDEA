@@ -30,7 +30,7 @@ import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
@@ -89,7 +89,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   }
 
   @Override
-  public List<PerlNamespaceDefinition> getParentNamespaceDefinitions() {
+  public List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
     List<String> parentsPaths;
     PerlNamespaceDefinitionStub stub = getStub();
     if (stub != null) {
@@ -100,7 +100,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     }
 
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
-    List<PerlNamespaceDefinition> parentsNamespaces;
+    List<PerlNamespaceDefinitionElement> parentsNamespaces;
 
     if (!parentsPaths.isEmpty() && containingFile != null) {
       parentsNamespaces = Mason2Util.collectComponentNamespacesByPaths(getProject(), parentsPaths, containingFile.getParent());
@@ -111,7 +111,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
         parentsNamespaces = Mason2Util.getMasonNamespacesByAbsolutePath(getProject(), autobaseParent);
       }
       else {
-        parentsNamespaces = new ArrayList<PerlNamespaceDefinition>();
+        parentsNamespaces = new ArrayList<PerlNamespaceDefinitionElement>();
       }
     }
 
@@ -200,9 +200,9 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
   @NotNull
   @Override
-  public List<PerlNamespaceDefinition> getChildNamespaceDefinitions() {
+  public List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
     MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    final List<PerlNamespaceDefinition> childNamespaces = new ArrayList<PerlNamespaceDefinition>();
+    final List<PerlNamespaceDefinitionElement> childNamespaces = new ArrayList<PerlNamespaceDefinitionElement>();
 
     // collect psi children
     final Project project = getProject();

@@ -38,7 +38,7 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -172,7 +172,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       final List<PerlMethodMember> subDefinitions = new ArrayList<>();
 
       PerlPackageUtil.processNotOverridedMethods(
-        PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinition.class),
+        PsiTreeUtil.getParentOfType(anchor, PerlNamespaceDefinitionElement.class),
         subDefinitionBase ->
         {
           subDefinitions.add(new PerlMethodMember(subDefinitionBase));

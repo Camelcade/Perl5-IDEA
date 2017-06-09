@@ -26,7 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -70,8 +70,8 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     }
 
     if (subName != null) {
-      PerlNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
-      Set<PerlNamespaceDefinition> recursionSet = new THashSet<PerlNamespaceDefinition>();
+      PerlNamespaceDefinitionElement namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
+      Set<PerlNamespaceDefinitionElement> recursionSet = new THashSet<PerlNamespaceDefinitionElement>();
 
       if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null) {
         collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);
@@ -81,13 +81,13 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     return result.toArray(new ResolveResult[result.size()]);
   }
 
-  protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinition namespaceDefinition,
+  protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,
                                                       @NotNull String subName,
-                                                      Set<PerlNamespaceDefinition> recursionSet,
+                                                      Set<PerlNamespaceDefinitionElement> recursionSet,
                                                       List<ResolveResult> result) {
     recursionSet.add(namespaceDefinition);
 
-    for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
       if (!recursionSet.contains(childNamespace)) {
         boolean noSubclasses = false;
 

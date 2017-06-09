@@ -24,7 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
@@ -46,7 +46,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         nameIdentifier = element;
       }
 
-      List<PerlNamespaceDefinition> parentNamespaces = ((PerlNamespaceDefinition)element).getParentNamespaceDefinitions();
+      List<PerlNamespaceDefinitionElement> parentNamespaces = ((PerlNamespaceDefinitionElement)element).getParentNamespaceDefinitions();
       if (!parentNamespaces.isEmpty()) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementingMethod)
@@ -56,7 +56,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         result.add(builder.createLineMarkerInfo(nameIdentifier));
       }
 
-      Collection<PerlNamespaceDefinition> childNamespaces = ((PerlNamespaceDefinition)element).getChildNamespaceDefinitions();
+      Collection<PerlNamespaceDefinitionElement> childNamespaces = ((PerlNamespaceDefinitionElement)element).getChildNamespaceDefinitions();
       if (!childNamespaces.isEmpty()) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementedMethod)
@@ -67,7 +67,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       }
     }
     else if (element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
-      PerlNamespaceDefinition containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+      PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
       if (containingNamespace != null) {
         final String packageName = ((PerlSubDefinition)element).getPackageName();
         final String subName = ((PerlSubDefinition)element).getSubName();

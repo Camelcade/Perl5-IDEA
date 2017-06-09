@@ -26,7 +26,7 @@ import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.SmartPsiElementPointer;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 
 /**
  * Created by hurricup on 16.08.2015.
@@ -77,7 +77,7 @@ public class PerlHierarchyNodeDescriptor extends HierarchyNodeDescriptor {
 
   protected void adjustAppearance(CompositeAppearance appearance, ItemPresentation presentation) {
     appearance.getEnding().addText(" "
-                                   + "(" + ((PerlNamespaceDefinition)getPerlElement()).getMroType().toString() + "), "
+                                   + "(" + ((PerlNamespaceDefinitionElement)getPerlElement()).getMroType().toString() + "), "
                                    + presentation.getLocationString(),
                                    HierarchyNodeDescriptor.getPackageNameAttributes());
   }

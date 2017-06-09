@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -145,8 +145,8 @@ public class PerlNamespaceDefinitionStubElementType extends IStubElementType<Per
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof PerlNamespaceDefinition &&
+    return psi instanceof PerlNamespaceDefinitionElement &&
            psi.isValid() &&
-           StringUtil.isNotEmpty(((PerlNamespaceDefinition)psi).getPackageName());
+           StringUtil.isNotEmpty(((PerlNamespaceDefinitionElement)psi).getPackageName());
   }
 }

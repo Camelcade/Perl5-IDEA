@@ -44,7 +44,7 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    *
    * @return list of PerlNameSpaceDefitions
    */
-  List<PerlNamespaceDefinition> getNamespaceDefinitions();
+  List<PerlNamespaceDefinitionElement> getNamespaceDefinitions();
 
   /**
    * Returns list of files suitable for this namespace, works only if namespace is in use or require statement

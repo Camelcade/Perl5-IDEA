@@ -21,7 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     Project project = myElement.getProject();
     List<ResolveResult> result = new ArrayList<>();
 
-    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil
+    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
       .getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(referenceText))) {
       result.add(new PsiElementResolveResult(namespaceDefinition));
     }

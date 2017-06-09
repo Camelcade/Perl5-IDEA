@@ -27,7 +27,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,7 +54,7 @@ public class PerlPackageHierarchyProvider implements HierarchyProvider {
 
   protected PsiElement adjustTargetElement(PsiElement element) {
     if (element != null && !(element instanceof PerlNamespaceDefinitionWithIdentifier)) {
-      return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+      return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
     }
 
     return element;

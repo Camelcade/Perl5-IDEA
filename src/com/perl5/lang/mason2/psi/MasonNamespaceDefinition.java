@@ -22,7 +22,7 @@ import com.perl5.lang.mason2.Mason2Constants;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -35,7 +35,7 @@ public interface MasonNamespaceDefinition extends PsiElement,
                                                   Mason2Constants,
                                                   PerlImplicitVariablesProvider,
                                                   StubBasedPsiElement<PerlNamespaceDefinitionStub>,
-                                                  PerlNamespaceDefinition,
+                                                  PerlNamespaceDefinitionElement,
                                                   PerlNamespaceElementContainer,
                                                   PerlIdentifierOwner,
                                                   PerlElementPatterns,

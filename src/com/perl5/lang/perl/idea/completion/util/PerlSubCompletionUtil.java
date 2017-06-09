@@ -139,7 +139,7 @@ public class PerlSubCompletionUtil {
 
   public static void fillWithNotOverridedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
     PerlPackageUtil.processNotOverridedMethods(
-      PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinition.class),
+      PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinitionElement.class),
       subDefinitionBase ->
       {
         resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));

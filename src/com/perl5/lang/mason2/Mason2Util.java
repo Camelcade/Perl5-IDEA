@@ -32,7 +32,7 @@ import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,8 +69,9 @@ public class Mason2Util {
     return MasonCoreUtil.getComponentRoot(MasonSettings.getInstance(project), file);
   }
 
-  public static List<PerlNamespaceDefinition> getMasonNamespacesByAbsolutePath(@NotNull Project project, @NotNull String absolutePath) {
-    return new ArrayList<PerlNamespaceDefinition>(
+  public static List<PerlNamespaceDefinitionElement> getMasonNamespacesByAbsolutePath(@NotNull Project project,
+                                                                                      @NotNull String absolutePath) {
+    return new ArrayList<PerlNamespaceDefinitionElement>(
       StubIndex.getElements(
         MasonNamespaceDefitnitionsStubIndex.KEY,
         absolutePath,
@@ -82,10 +83,10 @@ public class Mason2Util {
   }
 
   @NotNull
-  public static List<PerlNamespaceDefinition> collectComponentNamespacesByPaths(@NotNull Project project,
-                                                                                @NotNull List<String> componentPaths,
-                                                                                @NotNull VirtualFile anchorDir) {
-    List<PerlNamespaceDefinition> result = new ArrayList<PerlNamespaceDefinition>();
+  public static List<PerlNamespaceDefinitionElement> collectComponentNamespacesByPaths(@NotNull Project project,
+                                                                                       @NotNull List<String> componentPaths,
+                                                                                       @NotNull VirtualFile anchorDir) {
+    List<PerlNamespaceDefinitionElement> result = new ArrayList<PerlNamespaceDefinitionElement>();
     MasonSettings masonSettings = MasonSettings.getInstance(project);
 
     for (String componentPath : componentPaths) {

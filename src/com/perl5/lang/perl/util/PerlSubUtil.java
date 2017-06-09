@@ -334,14 +334,14 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
 
   @NotNull
   public static List<PerlSubElement> getDirectOverridingSubs(@NotNull PerlSubElement subBase) {
-    PerlNamespaceDefinition containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
+    PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
 
     return containingNamespace == null ? Collections.<PerlSubElement>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
   }
 
   @NotNull
   public static List<PerlSubElement> getDirectOverridingSubs(@NotNull final PerlSubElement subBase,
-                                                             @NotNull PerlNamespaceDefinition containingNamespace) {
+                                                             @NotNull PerlNamespaceDefinitionElement containingNamespace) {
     final List<PerlSubElement> overridingSubs = new ArrayList<PerlSubElement>();
     final String subName = subBase.getSubName();
 

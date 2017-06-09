@@ -75,7 +75,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlUseStatement> USE_STATEMENT_PATTERN = psiElement(PsiPerlUseStatement.class);
   PsiElementPattern.Capture<PsiPerlNoStatement> NO_STATEMENT_PATTERN = psiElement(PsiPerlNoStatement.class);
   PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_EXPR_PATTERN = psiElement(PsiPerlRequireExpr.class);
-  PsiElementPattern.Capture<PerlNamespaceDefinition> NAMESPACE_DEFINITION_PATTERN = psiElement(PerlNamespaceDefinition.class);
+  PsiElementPattern.Capture<PerlNamespaceDefinitionElement> NAMESPACE_DEFINITION_PATTERN = psiElement(PerlNamespaceDefinitionElement.class);
 
   PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_USE_PATTERN =
     NAMESPACE_NAME_PATTERN.andOr(

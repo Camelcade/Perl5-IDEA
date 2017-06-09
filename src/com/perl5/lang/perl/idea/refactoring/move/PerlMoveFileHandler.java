@@ -33,7 +33,7 @@ import com.intellij.refactoring.move.moveFilesOrDirectories.MoveFileHandler;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -86,7 +86,8 @@ public class PerlMoveFileHandler extends MoveFileHandler {
 
       final RenameRefactoring[] refactoring = {null};
 
-      for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(file, PerlNamespaceDefinition.class)) {
+      for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
+        .findChildrenOfType(file, PerlNamespaceDefinitionElement.class)) {
         if (originalPackageName.equals(namespaceDefinition.getPackageName())) {
           if (refactoring[0] == null) {
             refactoring[0] = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);

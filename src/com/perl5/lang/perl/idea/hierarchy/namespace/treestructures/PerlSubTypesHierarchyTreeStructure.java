@@ -22,7 +22,7 @@ import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -57,8 +57,8 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
   }
 
   protected Collection<PsiElement> getSubElements(PsiElement element) {
-    assert element instanceof PerlNamespaceDefinition;
-    return new ArrayList<PsiElement>(((PerlNamespaceDefinition)element).getChildNamespaceDefinitions());
+    assert element instanceof PerlNamespaceDefinitionElement;
+    return new ArrayList<PsiElement>(((PerlNamespaceDefinitionElement)element).getChildNamespaceDefinitions());
   }
 
   protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase) {

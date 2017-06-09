@@ -29,7 +29,7 @@ import com.intellij.refactoring.RenameRefactoring;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.rename.RenamePsiFileProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.apache.commons.lang.StringUtils;
@@ -69,7 +69,8 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
             if (psiFile != null) {
               final RenameRefactoring[] refactoring = {null};
 
-              for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class)) {
+              for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
+                .findChildrenOfType(psiFile, PerlNamespaceDefinitionElement.class)) {
                 if (currentPackageName.equals(namespaceDefinition.getPackageName())) {
                   if (refactoring[0] == null) {
                     refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);

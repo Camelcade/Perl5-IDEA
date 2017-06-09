@@ -25,7 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionApi;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -51,7 +51,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
 
     Project project = method.getProject();
     if (!method.hasExplicitNamespace()) {
-      PerlNamespaceDefinitionApi namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
+      PerlNamespaceDefinition namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(position);
       if (namespaceContainer != null) {
         fillWithNamespaceImports(namespaceContainer, resultSet);
       }
@@ -61,7 +61,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
       if (namespaceElement != null) {
         String targetPackageName = namespaceElement.getCanonicalName();
         if (targetPackageName != null) {
-          for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName)) {
+          for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName)) {
             fillWithNamespaceImports(namespaceDefinition, resultSet);
           }
         }
@@ -69,7 +69,7 @@ public class PerlSubImportsCompletionProvider extends CompletionProvider<Complet
     }
   }
 
-  protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinitionApi namespaceContainer,
+  protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinition namespaceContainer,
                                                  @NotNull final CompletionResultSet resultSet) {
     for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
       List<PsiElement> psiElements =

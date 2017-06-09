@@ -66,8 +66,8 @@ public class PerlDeprecatedInspection extends PerlInspection {
           PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
                                                                  {
                                                                    String message = null;
-                                                                   if (targetPair.first instanceof PerlNamespaceDefinition &&
-                                                                       ((PerlNamespaceDefinition)targetPair.first).isDeprecated()) {
+                                                                   if (targetPair.first instanceof PerlNamespaceDefinitionElement &&
+                                                                       ((PerlNamespaceDefinitionElement)targetPair.first).isDeprecated()) {
                                                                      message = PerlBundle.message("perl.deprecated.namespace");
                                                                    }
                                                                    else if (targetPair.first instanceof PerlVariableDeclarationWrapper &&

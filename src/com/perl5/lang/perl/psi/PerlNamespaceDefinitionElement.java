@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.intellij.psi.PsiElement;
 
-public interface PerlNamespaceDefinitionWithIdentifier extends PerlNamespaceDefinitionElement,
-                                                               PerlNamespaceElementContainer,
-                                                               PerlIdentifierOwner {
+public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiElement {
 }

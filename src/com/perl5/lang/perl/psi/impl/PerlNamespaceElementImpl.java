@@ -109,14 +109,14 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   public boolean isDeprecated() {
     PsiElement parent = getParent();
     if (parent instanceof PerlNamespaceDefinitionWithIdentifier) {
-      return ((PerlNamespaceDefinition)parent).isDeprecated();
+      return ((PerlNamespaceDefinitionElement)parent).isDeprecated();
     }
     return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
   }
 
   @Override
-  public List<PerlNamespaceDefinition> getNamespaceDefinitions() {
-    List<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<PerlNamespaceDefinition>();
+  public List<PerlNamespaceDefinitionElement> getNamespaceDefinitions() {
+    List<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<PerlNamespaceDefinitionElement>();
 
     PsiReference[] references = getReferences();
 
@@ -127,9 +127,9 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
         for (ResolveResult result : results) {
           PsiElement targetElement = result.getElement();
           assert targetElement != null;
-          assert targetElement instanceof PerlNamespaceDefinition;
+          assert targetElement instanceof PerlNamespaceDefinitionElement;
 
-          namespaceDefinitions.add((PerlNamespaceDefinition)targetElement);
+          namespaceDefinitions.add((PerlNamespaceDefinitionElement)targetElement);
         }
       }
     }

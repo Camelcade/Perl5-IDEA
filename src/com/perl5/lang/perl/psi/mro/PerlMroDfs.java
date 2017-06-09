@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,12 +41,12 @@ public class PerlMroDfs extends PerlMro {
    */
   @Override
   public void getLinearISA(Project project,
-                           List<PerlNamespaceDefinition> namespaceDefinitions,
+                           List<PerlNamespaceDefinitionElement> namespaceDefinitions,
                            HashSet<String> recursionMap,
                            ArrayList<String> result) {
     //		System.err.println("Resolving DFS for " + packageNames);
 
-    for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions) {
+    for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
       String packageName = namespaceDefinition.getPackageName();
       if (!recursionMap.contains(packageName)) {
         recursionMap.add(packageName);

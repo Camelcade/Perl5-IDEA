@@ -284,7 +284,7 @@ public class PerlPsiUtil implements PerlElementTypes {
           return true;
         }
       },
-      PerlNamespaceDefinition.class
+      PerlNamespaceDefinitionElement.class
     );
     return result;
   }

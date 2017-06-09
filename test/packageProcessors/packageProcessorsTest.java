@@ -18,7 +18,7 @@ package packageProcessors;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.extensions.packageprocessor.*;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 
@@ -33,7 +33,7 @@ public class packageProcessorsTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testModernPerl() {
     initWithFileAsScript("ModernPerl");
-    PerlNamespaceDefinition namespaceDefinition = getElementAtCaret(PerlNamespaceDefinition.class);
+    PerlNamespaceDefinitionElement namespaceDefinition = getElementAtCaret(PerlNamespaceDefinitionElement.class);
     assertNotNull(namespaceDefinition);
     assertEquals(PerlMroType.C3, namespaceDefinition.getMroType());
     PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);

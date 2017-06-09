@@ -46,7 +46,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -135,7 +135,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
       return false;
     }
 
-    for (PerlNamespaceDefinition definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+    for (PerlNamespaceDefinitionElement definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
       if (definition.isDeprecated()) {
         return true;
       }
@@ -206,7 +206,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    */
   @Nullable
   public static String getContextPackageName(PsiElement element) {
-    PerlNamespaceDefinition namespaceDefinition = getContainingNamespace(element);
+    PerlNamespaceDefinitionElement namespaceDefinition = getContainingNamespace(element);
 
     if (namespaceDefinition != null && namespaceDefinition.getPackageName() != null) // checking that definition is valid and got namespace
     {
@@ -234,12 +234,12 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
   // fixme shouldn't we have recursion protection here?
   @Nullable
-  public static PerlNamespaceDefinition getNamespaceContainerForElement(@Nullable PsiElement element) {
+  public static PerlNamespaceDefinitionElement getNamespaceContainerForElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
 
-    PerlNamespaceDefinition namespaceContainer = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinition.class);
+    PerlNamespaceDefinitionElement namespaceContainer = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
 
     if (namespaceContainer instanceof PerlFileImpl) {
       PsiElement contextParent = namespaceContainer.getContext();
@@ -251,15 +251,17 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   }
 
   // fixme take fileContext in account?
-  public static PerlNamespaceDefinition getContainingNamespace(PsiElement element) {
-    return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinition.class);
+  public static PerlNamespaceDefinitionElement getContainingNamespace(PsiElement element) {
+    return PsiTreeUtil.getStubOrPsiParentOfType(element, PerlNamespaceDefinitionElement.class);
   }
 
   @NotNull
-  public static List<PerlNamespaceDefinition> collectNamespaceDefinitions(@NotNull Project project, @NotNull List<String> packageNames) {
-    ArrayList<PerlNamespaceDefinition> namespaceDefinitions = new ArrayList<>();
+  public static List<PerlNamespaceDefinitionElement> collectNamespaceDefinitions(@NotNull Project project,
+                                                                                 @NotNull List<String> packageNames) {
+    ArrayList<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<>();
     for (String packageName : packageNames) {
-      Collection<PerlNamespaceDefinition> list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+      Collection<PerlNamespaceDefinitionElement> list =
+        getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
       if (list.isEmpty()) {
         list = getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
@@ -277,14 +279,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @param packageName canonical package name (without tailing ::)
    * @return collection of found definitions
    */
-  public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project, @NotNull String packageName) {
+  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project, @NotNull String packageName) {
     return getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
   }
 
-  public static Collection<PerlNamespaceDefinition> getNamespaceDefinitions(Project project,
-                                                                            @NotNull String packageName,
-                                                                            GlobalSearchScope scope) {
-    return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class);
+  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
+                                                                                   @NotNull String packageName,
+                                                                                   GlobalSearchScope scope) {
+    return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class);
   }
 
   /**
@@ -307,13 +309,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static boolean processPackages(@NotNull String name,
                                         @NotNull Project project,
                                         GlobalSearchScope scope,
-                                        Processor<PerlNamespaceDefinition> processor) {
+                                        Processor<PerlNamespaceDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(
       PerlNamespaceDefinitionStubIndex.KEY,
       name,
       project,
       scope,
-      PerlNamespaceDefinition.class,
+      PerlNamespaceDefinitionElement.class,
       processor);
   }
 
@@ -324,22 +326,24 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return collection of definitions
    */
   @NotNull
-  public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project, @Nullable String packageName) {
+  public static List<PerlNamespaceDefinitionElement> getDerivedNamespaceDefinitions(@NotNull Project project,
+                                                                                    @Nullable String packageName) {
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }
-    List<PerlNamespaceDefinition> list = getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+    List<PerlNamespaceDefinitionElement> list =
+      getDerivedNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
     if (list.isEmpty()) {
       list = getDerivedNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
     }
     return list;
   }
 
-  public static List<PerlNamespaceDefinition> getDerivedNamespaceDefinitions(@NotNull Project project,
-                                                                             @NotNull String packageName,
-                                                                             @NotNull GlobalSearchScope scope) {
+  public static List<PerlNamespaceDefinitionElement> getDerivedNamespaceDefinitions(@NotNull Project project,
+                                                                                    @NotNull String packageName,
+                                                                                    @NotNull GlobalSearchScope scope) {
     return new ArrayList<>(
-      StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinition.class));
+      StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class));
   }
 
   /**
@@ -393,7 +397,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
         if (!oldPackageName.equals(newPackageName)) {
           PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
           if (psiFile != null) {
-            for (PerlNamespaceDefinition namespaceDefinition : PsiTreeUtil.findChildrenOfType(psiFile, PerlNamespaceDefinition.class)) {
+            for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
+              .findChildrenOfType(psiFile, PerlNamespaceDefinitionElement.class)) {
               if (oldPackageName.equals(namespaceDefinition.getPackageName())) {
                 queue.addElement(namespaceDefinition, newPackageName);
               }
@@ -489,7 +494,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     return true;
   }
 
-  public static void processNotOverridedMethods(final PerlNamespaceDefinition namespaceDefinition, Processor<PerlSubElement> processor) {
+  public static void processNotOverridedMethods(final PerlNamespaceDefinitionElement namespaceDefinition,
+                                                Processor<PerlSubElement> processor) {
     if (namespaceDefinition != null) {
       PsiFile containingFile = namespaceDefinition.getContainingFile();
       String packageName = namespaceDefinition.getPackageName();
@@ -514,9 +520,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
   }
 
-  public static void processParentClassesSubs(PerlNamespaceDefinition childClass,
+  public static void processParentClassesSubs(PerlNamespaceDefinitionElement childClass,
                                               Set<String> processedSubsNames,
-                                              Set<PerlNamespaceDefinition> recursionMap,
+                                              Set<PerlNamespaceDefinitionElement> recursionMap,
                                               Processor<PerlSubElement> processor
   ) {
     if (childClass == null || recursionMap.contains(childClass)) {
@@ -524,7 +530,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
     recursionMap.add(childClass);
 
-    for (PerlNamespaceDefinition parentNamespace : childClass.getParentNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement parentNamespace : childClass.getParentNamespaceDefinitions()) {
       for (PsiElement subDefinitionBase : collectNamespaceSubs(parentNamespace)) {
         String subName = ((PerlSubElement)subDefinitionBase).getSubName();
         if (subDefinitionBase.isValid() &&
@@ -551,8 +557,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
         .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubStub.class, PerlSubElement.class), namespace));
   }
 
-  public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinition namespaceDefinition,
-                                                @Nullable Set<PerlNamespaceDefinition> recursionSet,
+  public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,
+                                                @Nullable Set<PerlNamespaceDefinitionElement> recursionSet,
                                                 Processor<PerlSubElement> processor) {
     if (recursionSet == null) {
       recursionSet = new THashSet<>();
@@ -560,7 +566,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     recursionSet.add(namespaceDefinition);
 
-    for (PerlNamespaceDefinition childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
       if (!recursionSet.contains(childNamespace)) {
         boolean processSubclasses = true;
 

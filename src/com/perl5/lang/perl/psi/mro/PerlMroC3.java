@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,12 +40,12 @@ public class PerlMroC3 extends PerlMro {
    */
   @Override
   public void getLinearISA(Project project,
-                           List<PerlNamespaceDefinition> namespaceDefinitions,
+                           List<PerlNamespaceDefinitionElement> namespaceDefinitions,
                            HashSet<String> recursionMap,
                            ArrayList<String> result) {
     //		System.err.println("Resolving C3 for " + packageNames);
-    Collection<PerlNamespaceDefinition> nextIterationDefinitions = new ArrayList<PerlNamespaceDefinition>();
-    for (PerlNamespaceDefinition namespaceDefinition : namespaceDefinitions) {
+    Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<PerlNamespaceDefinitionElement>();
+    for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
       String packageName = namespaceDefinition.getPackageName();
       if (!recursionMap.contains(packageName)) {
         recursionMap.add(packageName);
@@ -54,7 +54,7 @@ public class PerlMroC3 extends PerlMro {
       }
     }
 
-    for (PerlNamespaceDefinition namespaceDefinition : nextIterationDefinitions) {
+    for (PerlNamespaceDefinitionElement namespaceDefinition : nextIterationDefinitions) {
       namespaceDefinition.getLinearISA(recursionMap, result);
     }
   }

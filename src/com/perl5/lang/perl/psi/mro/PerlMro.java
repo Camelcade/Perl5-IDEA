@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mro;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -46,7 +46,7 @@ public abstract class PerlMro {
    * @param result       list of package names to populate
    */
   public abstract void getLinearISA(Project project,
-                                    List<PerlNamespaceDefinition> packageNames,
+                                    List<PerlNamespaceDefinitionElement> packageNames,
                                     HashSet<String> recursionMap,
                                     ArrayList<String> result);
 
@@ -169,7 +169,7 @@ public abstract class PerlMro {
                                        ArrayList<String> result) {
     // at the moment we are checking all definitions available
     // fixme we should check only those, which are used in currrent file
-    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
       namespaceDefinition.getLinearISA(recursionMap, result);
     }
   }

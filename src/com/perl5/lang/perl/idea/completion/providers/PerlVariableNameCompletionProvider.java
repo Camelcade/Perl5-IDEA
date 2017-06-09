@@ -169,7 +169,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
   }
 
   private void fillWithImportedVariables(@NotNull PsiElement variableNameElement, @NotNull CompletionResultSet resultSet) {
-    PerlNamespaceDefinition namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(variableNameElement);
+    PerlNamespaceDefinitionElement namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(variableNameElement);
 
     if (namespaceContainer == null) {
       return;

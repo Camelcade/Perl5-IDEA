@@ -112,7 +112,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
 
           if (expliclitPackageElement == null) {
             // check for imports to the current file
-            PerlNamespaceDefinitionApi namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(subNameElement);
+            PerlNamespaceDefinition namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(subNameElement);
 
             if (namespaceContainer != null) {
               for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
@@ -145,7 +145,8 @@ public class PerlSubReference extends PerlSubReferenceSimple {
             String targetPackageName = expliclitPackageElement.getCanonicalName();
             if (targetPackageName != null) {
               // fixme partially not DRY with previous block
-              for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, targetPackageName)) {
+              for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
+                .getNamespaceDefinitions(project, targetPackageName)) {
                 for (PerlExportDescriptor exportDescriptor : namespaceDefinition.getImportedSubsDescriptors()) {
                   if (exportDescriptor.getExportedName().equals(subName)) {
                     collectRelatedItems(

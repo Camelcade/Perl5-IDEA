@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,8 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     }
 
     // fixme handle tags
-    for (PerlNamespaceDefinition namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(useStatement.getProject(), packageName)) {
+    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
+      .getNamespaceDefinitions(useStatement.getProject(), packageName)) {
       export.addAll(namespaceDefinition.getEXPORT());
       exportOk.addAll(namespaceDefinition.getEXPORT_OK());
     }

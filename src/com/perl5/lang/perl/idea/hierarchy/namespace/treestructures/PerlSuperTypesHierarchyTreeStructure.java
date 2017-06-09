@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.hierarchy.namespace.treestructures;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyT
 
   @Override
   protected Collection<PsiElement> getSubElements(PsiElement element) {
-    assert element instanceof PerlNamespaceDefinition;
-    return new ArrayList<PsiElement>(((PerlNamespaceDefinition)element).getParentNamespaceDefinitions());
+    assert element instanceof PerlNamespaceDefinitionElement;
+    return new ArrayList<PsiElement>(((PerlNamespaceDefinitionElement)element).getParentNamespaceDefinitions());
   }
 }

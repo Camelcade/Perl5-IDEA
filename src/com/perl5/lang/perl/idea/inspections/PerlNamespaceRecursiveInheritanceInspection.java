@@ -20,7 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
@@ -53,22 +53,22 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
     };
   }
 
-  public static boolean hasRecursiveInheritance(PerlNamespaceDefinition definition) {
+  public static boolean hasRecursiveInheritance(PerlNamespaceDefinitionElement definition) {
     return hasRecursiveInheritance(definition.getProject(), definition.getPackageName(), new HashSet<String>());
   }
 
   private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay) {
-    Collection<PerlNamespaceDefinition> definitions =
+    Collection<PerlNamespaceDefinitionElement> definitions =
       PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
     if (!definitions.isEmpty()) {
-      HashSet<PerlNamespaceDefinition> parents = new HashSet<PerlNamespaceDefinition>();
-      for (PerlNamespaceDefinition definition : definitions) {
+      HashSet<PerlNamespaceDefinitionElement> parents = new HashSet<PerlNamespaceDefinitionElement>();
+      for (PerlNamespaceDefinitionElement definition : definitions) {
         parents.addAll(definition.getParentNamespaceDefinitions());
       }
 
       if (!parents.isEmpty()) {
         passedWay.add(packageName);
-        for (PerlNamespaceDefinition parent : parents) {
+        for (PerlNamespaceDefinitionElement parent : parents) {
           if (passedWay.contains(parent.getPackageName()) || hasRecursiveInheritance(project, parent.getPackageName(), passedWay)) {
             return true;
           }
