@@ -27,7 +27,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclarationImpl;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStubImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -54,7 +53,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
   public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
     assert psi instanceof PerlClassAccessorDeclaration;
     //noinspection unchecked
-    return new PerlClassAccessorDeclarationStubImpl(
+    return new PerlClassAccessorDeclarationStub(
       parentStub,
       psi.getPackageName(),
       psi.getSubName(),
@@ -156,7 +155,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
     boolean isReadable = dataStream.readBoolean();
     boolean isWritable = dataStream.readBoolean();
 
-    return new PerlClassAccessorDeclarationStubImpl(
+    return new PerlClassAccessorDeclarationStub(
       parentStub,
       packageName,
       functionName,

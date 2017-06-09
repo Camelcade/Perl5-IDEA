@@ -233,12 +233,12 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         // declarations
-        Collection<PsiPerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
+        Collection<PerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
         if (subDeclarations.isEmpty()) {
           subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
         }
 
-        for (PsiPerlSubDeclaration item : subDeclarations) {
+        for (PerlSubDeclaration item : subDeclarations) {
           result.add(new PerlSubStructureViewElement(item).setImported());
         }
 

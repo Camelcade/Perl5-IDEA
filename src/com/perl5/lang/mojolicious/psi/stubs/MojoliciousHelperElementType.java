@@ -51,7 +51,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
   @Override
   public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
     //noinspection unchecked
-    return new MojoliciousHelperDeclarationStubImpl(
+    return new MojoliciousHelperDeclarationStub(
       parentStub,
       psi.getPackageName(),
       psi.getSubName(),

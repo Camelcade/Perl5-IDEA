@@ -16,10 +16,25 @@
 
 package com.perl5.lang.mojolicious.psi.stubs;
 
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 23.04.2016.
  */
-public interface MojoliciousHelperDeclarationStub extends PerlSubDefinitionStub {
+public class MojoliciousHelperDeclarationStub extends PerlSubDefinitionStub {
+  public MojoliciousHelperDeclarationStub(
+    StubElement parent,
+    String packageName,
+    String subName,
+    List<PerlSubArgument> arguments,
+    PerlSubAnnotations annotations,
+    IStubElementType elementType) {
+    super(parent, packageName, subName, arguments, annotations, elementType);
+  }
 }

@@ -194,7 +194,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
         relatedItems.add(target);
       }
     }
-    for (PsiPerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
+    for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
       if (!target.isEquivalentTo(exclusion)) {
         relatedItems.add(target);
       }

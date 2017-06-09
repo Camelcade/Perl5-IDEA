@@ -122,7 +122,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
     List<PerlSubArgument> arguments,
     PerlSubAnnotations annotations
   ) {
-    return new PerlSubDefinitionStubImpl(parentStub, packageName, functionName, arguments, annotations, this);
+    return new PerlSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, this);
   }
 
   @Override

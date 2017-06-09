@@ -16,38 +16,64 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor.psi.stubs;
 
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+
+import java.util.List;
 
 /**
  * Created by hurricup on 22.01.2016.
  */
-public interface PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub {
-  /**
-   * Checks if current declaration should follow best practice, declare get_ and set_
-   *
-   * @return check result
-   */
-  boolean isFollowsBestPractice();
+public class PerlClassAccessorDeclarationStub extends PerlSubDefinitionStub {
+  private final boolean myFollowingBestPractice;
+  private final boolean myIsAcessorReadable;
+  private final boolean myIsAcessorWritable;
 
-  /**
-   * Checks if current accessor readable
-   *
-   * @return check result
-   */
-  boolean isAccessorReadable();
+  public PerlClassAccessorDeclarationStub(StubElement parent,
+                                          String packageName,
+                                          String subName,
+                                          List<PerlSubArgument> arguments,
+                                          PerlSubAnnotations annotations,
+                                          boolean followingBestPractice,
+                                          boolean isAcessorReadable,
+                                          boolean isAcessorWritable,
+                                          IStubElementType elementType) {
+    super(parent, packageName, subName, arguments, annotations, elementType);
+    myFollowingBestPractice = followingBestPractice;
+    myIsAcessorReadable = isAcessorReadable;
+    myIsAcessorWritable = isAcessorWritable;
+  }
 
-  /**
-   * Checks if current accessor writable
-   *
-   * @return check result
-   */
-  boolean isAccessorWritable();
+  public boolean isFollowsBestPractice() {
+    return myFollowingBestPractice;
+  }
 
-  String getGetterName();
+  public String getGetterName() {
+    return PerlClassAccessorDeclaration.ACCESSOR_PREFIX + getSubName();
+  }
 
-  String getGetterCanonicalName();
+  public String getSetterName() {
+    return PerlClassAccessorDeclaration.MUTATOR_PREFIX + getSubName();
+  }
 
-  String getSetterName();
+  public String getGetterCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getGetterName();
+  }
 
-  String getSetterCanonicalName();
+  public String getSetterCanonicalName() {
+    return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
+  }
+
+  public boolean isAccessorReadable() {
+    return myIsAcessorReadable;
+  }
+
+  public boolean isAccessorWritable() {
+    return myIsAcessorWritable;
+  }
 }

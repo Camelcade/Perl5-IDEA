@@ -51,7 +51,7 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 
   @Override
   public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub) {
-    return new PerlSubDeclarationStubImpl(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
+    return new PerlSubDeclarationStub(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
   }
 
 
@@ -84,7 +84,7 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
     if (dataStream.readBoolean()) {
       annotations = PerlSubAnnotations.deserialize(dataStream);
     }
-    return new PerlSubDeclarationStubImpl(parentStub, packageName, subName, annotations, this);
+    return new PerlSubDeclarationStub(parentStub, packageName, subName, annotations, this);
   }
 
   @Override
