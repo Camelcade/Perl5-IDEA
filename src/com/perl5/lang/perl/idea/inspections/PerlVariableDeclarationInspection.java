@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +38,5 @@ public abstract class PerlVariableDeclarationInspection extends PerlInspection {
     };
   }
 
-  public abstract void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper);
+  public abstract void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper);
 }

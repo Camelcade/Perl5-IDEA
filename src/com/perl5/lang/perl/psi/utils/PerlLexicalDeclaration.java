@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 
 /**
@@ -24,18 +24,18 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
  * Class represents lexical declaration in the PsiFile
  */
 public class PerlLexicalDeclaration {
-  PerlVariableDeclarationWrapper myDeclarationWrapper;
+  PerlVariableDeclarationElement myDeclarationWrapper;
   int textOffset;
   PerlLexicalScope myScope;
 
-  public PerlLexicalDeclaration(PerlVariableDeclarationWrapper declarationWrapper, PerlLexicalScope variableScope) {
+  public PerlLexicalDeclaration(PerlVariableDeclarationElement declarationWrapper, PerlLexicalScope variableScope) {
 
     myDeclarationWrapper = declarationWrapper;
     textOffset = declarationWrapper.getTextOffset();
     myScope = variableScope;
   }
 
-  public PerlVariableDeclarationWrapper getDeclarationWrapper() {
+  public PerlVariableDeclarationElement getDeclarationWrapper() {
     return myDeclarationWrapper;
   }
 

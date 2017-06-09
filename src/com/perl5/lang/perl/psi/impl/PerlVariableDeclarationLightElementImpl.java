@@ -29,7 +29,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Created by hurricup on 17.01.2016.
  */
-public class PerlVariableLightImpl extends LightElement implements PerlVariableLight {
+public class PerlVariableDeclarationLightElementImpl extends LightElement implements PerlVariableDeclarationLightElement {
   protected final PerlVariableType myVariableType;
   protected final String myVariableName;
   protected final String myVariableClass;
@@ -51,24 +51,24 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
-  public PerlVariableLightImpl(@NotNull PsiManager manager,
-                               @NotNull Language language,
-                               @NotNull String variableName,
-                               boolean isLexical,
-                               boolean isLocal,
-                               boolean isInvocant,
-                               @NotNull PsiElement parent) {
+  public PerlVariableDeclarationLightElementImpl(@NotNull PsiManager manager,
+                                                 @NotNull Language language,
+                                                 @NotNull String variableName,
+                                                 boolean isLexical,
+                                                 boolean isLocal,
+                                                 boolean isInvocant,
+                                                 @NotNull PsiElement parent) {
     this(manager, language, variableName, null, isLexical, isLocal, isInvocant, parent);
   }
 
-  public PerlVariableLightImpl(@NotNull PsiManager manager,
-                               @NotNull Language language,
-                               @NotNull String variableName,
-                               @Nullable String variableClass,
-                               boolean isLexical,
-                               boolean isLocal,
-                               boolean isInvocant,
-                               @NotNull PsiElement parent) {
+  public PerlVariableDeclarationLightElementImpl(@NotNull PsiManager manager,
+                                                 @NotNull Language language,
+                                                 @NotNull String variableName,
+                                                 @Nullable String variableClass,
+                                                 boolean isLexical,
+                                                 boolean isLocal,
+                                                 boolean isInvocant,
+                                                 @NotNull PsiElement parent) {
     super(manager, language);
 
     PerlVariableType type = null;
@@ -133,12 +133,12 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
   }
 
   @Override
-  public PerlVariableDeclarationWrapper getLexicalDeclaration() {
+  public PerlVariableDeclarationElement getLexicalDeclaration() {
     return null;
   }
 
   @Override
-  public List<PerlVariableDeclarationWrapper> getGlobalDeclarations() {
+  public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
     return null;
   }
 
@@ -296,7 +296,7 @@ public class PerlVariableLightImpl extends LightElement implements PerlVariableL
   }
 
   @Override
-  public PerlVariableStub getStub() {
+  public PerlVariableDeclarationStub getStub() {
     return null;
   }
 

@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason2.psi.MasonMethodDefinition;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class MasonMethodDefinitionImpl extends PsiPerlMethodDefinitionImpl imple
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

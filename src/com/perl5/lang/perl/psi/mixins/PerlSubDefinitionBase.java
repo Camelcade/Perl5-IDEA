@@ -155,8 +155,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
-    if (signatureElement instanceof PerlVariableDeclarationWrapper) {
-      PerlVariable variable = ((PerlVariableDeclarationWrapper)signatureElement).getVariable();
+    if (signatureElement instanceof PerlVariableDeclarationElement) {
+      PerlVariable variable = ((PerlVariableDeclarationElement)signatureElement).getVariable();
       if (variable != null) {
         arguments.add(new PerlSubArgument(
           variable.getActualType(),
@@ -257,8 +257,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
         while (run != null) {
           PerlSubArgument newArgument = null;
 
-          if (run instanceof PerlVariableDeclarationWrapper) {
-            PerlVariable variable = ((PerlVariableDeclarationWrapper)run).getVariable();
+          if (run instanceof PerlVariableDeclarationElement) {
+            PerlVariable variable = ((PerlVariableDeclarationElement)run).getVariable();
             if (variable != null) {
               newArgument = new PerlSubArgument(
                 variable.getActualType(),

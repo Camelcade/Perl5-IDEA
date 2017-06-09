@@ -27,8 +27,8 @@ import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,7 +78,7 @@ public class MasonCoreUtil {
   }
 
   public static void fillVariablesList(PsiElement parent,
-                                       List<PerlVariableDeclarationWrapper> targetList,
+                                       List<PerlVariableDeclarationElement> targetList,
                                        List<VariableDescription> sourceList) {
     for (VariableDescription variableDescription : sourceList) {
       String variableType = variableDescription.variableType;
@@ -86,7 +86,7 @@ public class MasonCoreUtil {
         variableType = null;
       }
       targetList.add(
-        new PerlVariableLightImpl(
+        new PerlVariableDeclarationLightElementImpl(
           parent.getManager(),
           PerlLanguage.INSTANCE,
           variableDescription.variableName,

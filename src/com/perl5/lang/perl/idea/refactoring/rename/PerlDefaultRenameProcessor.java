@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,7 +32,7 @@ public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementP
     return element instanceof PerlSubDefinition
            || element instanceof PerlSubDeclaration
            || element instanceof PerlGlobVariable
-           || element instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper)element).isGlobalDeclaration()
+           || element instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)element).isGlobalDeclaration()
       ;
   }
 }

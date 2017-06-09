@@ -433,9 +433,9 @@ limitations under the License.
 
     extends("array_slice|hash_slice|array_element|hash_element|glob_slot")=expr
 
-    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub"
-    mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationWrapperMixin"
-    implements("variable_declaration_wrapper")="com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper"
+    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub"
+    mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationElementMixin"
+    implements("variable_declaration_wrapper")="com.perl5.lang.perl.psi.PerlVariableDeclarationElement"
 
     extends("array_index_variable|scalar_variable|array_variable|hash_variable|glob_variable")=expr
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableMixin"

@@ -20,7 +20,8 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
@@ -28,14 +29,14 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrapper> implements PerlVariableStub {
+public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
   private final String myPackageName;
   private final String myVariableName;
   private final String myDeclaredType;
   private final PerlVariableType myVariableType;
   private final PerlVariableAnnotations myPerlVariableAnnotations;
 
-  public PerlVariableStubImpl(
+  public PerlVariableDeclarationStub(
     StubElement parent,
     IStubElementType elementType,
     String packageName,
@@ -78,8 +79,7 @@ public class PerlVariableStubImpl extends StubBase<PerlVariableDeclarationWrappe
     return myPerlVariableAnnotations;
   }
 
-  @Override
-  public StubIndexKey<String, PerlVariableDeclarationWrapper> getIndexKey() {
+  public StubIndexKey<String, PerlVariableDeclarationElement> getIndexKey() {
     if (myVariableType == PerlVariableType.ARRAY) {
       return PerlVariablesStubIndex.KEY_ARRAY;
     }

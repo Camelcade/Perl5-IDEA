@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 
@@ -28,12 +28,12 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
  */
 public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection {
   @Override
-  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     PerlVariable variable = variableDeclarationWrapper.getVariable();
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();
 
     if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
-      PerlVariableDeclarationWrapper lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
+      PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
       if (lexicalDeclaration != null) {
         registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " +
                                           lexicalDeclaration.getVariable().getLineNumber());

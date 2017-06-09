@@ -19,14 +19,14 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 
 /**
  * Created by hurricup on 14.06.2015.
  */
 public class PerlVariableBuiltinRedeclarationInspection extends PerlVariableDeclarationInspection {
-  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     PerlVariable variable = variableDeclarationWrapper.getVariable();
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();
     if (variable != null && variable.isBuiltIn() && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {

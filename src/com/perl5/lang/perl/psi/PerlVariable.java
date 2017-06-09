@@ -56,14 +56,14 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlP
    *
    * @return declare variable or null
    */
-  PerlVariableDeclarationWrapper getLexicalDeclaration();
+  PerlVariableDeclarationElement getLexicalDeclaration();
 
   /**
    * Looking for global variable declarations sutable for current variable
    *
    * @return list of global declarations
    */
-  List<PerlVariableDeclarationWrapper> getGlobalDeclarations();
+  List<PerlVariableDeclarationElement> getGlobalDeclarations();
 
   /**
    * Looking for globs, sutable for current variable

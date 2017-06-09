@@ -25,8 +25,8 @@ import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl
   implements MasonAugmentMethodModifier, Mason2ElementTypes {
-  protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+  protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
 
   public MasonAugmentMethodModifierImpl(ASTNode node) {
     super(node);
@@ -55,11 +55,11 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     return null;
   }
 
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
-    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
 
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableLightImpl(
+      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
         getManager(),
         PerlLanguage.INSTANCE,
         PerlMethodDefinitionMixin.getDefaultInvocantName(),
@@ -74,7 +74,7 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

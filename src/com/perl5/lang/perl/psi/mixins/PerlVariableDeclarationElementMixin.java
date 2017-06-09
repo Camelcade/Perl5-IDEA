@@ -31,7 +31,7 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -45,13 +45,13 @@ import java.util.List;
  * Created by hurricup on 29.09.2015.
  * Stubbed wrapper for variables declarations
  */
-public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElementBase<PerlVariableStub>
-  implements PerlVariableDeclarationWrapper {
-  public PerlVariableDeclarationWrapperMixin(ASTNode node) {
+public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElementBase<PerlVariableDeclarationStub>
+  implements PerlVariableDeclarationElement {
+  public PerlVariableDeclarationElementMixin(ASTNode node) {
     super(node);
   }
 
-  public PerlVariableDeclarationWrapperMixin(@NotNull PerlVariableStub stub, @NotNull IStubElementType nodeType) {
+  public PerlVariableDeclarationElementMixin(@NotNull PerlVariableDeclarationStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -76,10 +76,14 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
     return getName();
   }
 
+  @Override
+  public String getVariableName() {
+    return getName();
+  }
 
   @Override
   public String getName() {
-    PerlVariableStub stub = getStub();
+    PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
       return stub.getVariableName();
     }
@@ -115,7 +119,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
       }
     }
 
-    PerlVariableStub stub = getStub();
+    PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
       return stub.getDeclaredType();
     }
@@ -140,7 +144,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
   @Nullable
   @Override
   public String getPackageName() {
-    PerlVariableStub stub = getStub();
+    PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
       return stub.getPackageName();
     }
@@ -149,19 +153,12 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
 
   @Override
   public PerlVariableType getActualType() {
-    PerlVariableStub stub = getStub();
+    PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
       return stub.getActualType();
     }
     return getVariable().getActualType();
   }
-
-  @Override
-  public boolean isDeprecated() {
-    PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
-    return variableAnnotations != null && variableAnnotations.isDeprecated();
-  }
-
 
   @NotNull
   @Override
@@ -244,7 +241,7 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
   public PerlVariableAnnotations getVariableAnnotations() {
     PerlVariableAnnotations variableAnnotations;
 
-    PerlVariableStub stub = getStub();
+    PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
       variableAnnotations = stub.getVariableAnnotations();
     }

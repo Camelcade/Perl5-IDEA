@@ -16,13 +16,13 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 
 /**
  * Created by hurricup on 29.09.2015.
  */
 public class PerlVariableDeclarationStructureViewElement extends PerlLeafStructureViewElement {
-  public PerlVariableDeclarationStructureViewElement(PerlVariableDeclarationWrapper element) {
+  public PerlVariableDeclarationStructureViewElement(PerlVariableDeclarationElement element) {
     super(element);
   }
 }

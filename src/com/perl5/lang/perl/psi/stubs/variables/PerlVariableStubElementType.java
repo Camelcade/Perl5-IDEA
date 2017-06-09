@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationWrapperImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -36,15 +36,15 @@ import java.io.IOException;
 /**
  * Created by hurricup on 30.05.2015.
  */
-public class PerlVariableStubElementType extends IStubElementType<PerlVariableStub, PerlVariableDeclarationWrapper>
+public class PerlVariableStubElementType extends IStubElementType<PerlVariableDeclarationStub, PerlVariableDeclarationElement>
   implements PerlElementTypes, PsiElementProvider {
   public PerlVariableStubElementType(@NotNull String debugName) {
     super(debugName, PerlLanguage.INSTANCE);
   }
 
   @Override
-  public PerlVariableStub createStub(@NotNull PerlVariableDeclarationWrapper psi, StubElement parentStub) {
-    return new PerlVariableStubImpl(
+  public PerlVariableDeclarationStub createStub(@NotNull PerlVariableDeclarationElement psi, StubElement parentStub) {
+    return new PerlVariableDeclarationStub(
       parentStub,
       this,
       psi.getPackageName(),
@@ -55,7 +55,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
   }
 
   @Override
-  public PerlVariableDeclarationWrapper createPsi(@NotNull PerlVariableStub stub) {
+  public PerlVariableDeclarationElement createPsi(@NotNull PerlVariableDeclarationStub stub) {
     return new PsiPerlVariableDeclarationWrapperImpl(stub, this);
   }
 
@@ -68,10 +68,10 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof PerlVariableDeclarationWrapper &&
+    return psi instanceof PerlVariableDeclarationElement &&
            psi.isValid() &&
-           ((PerlVariableDeclarationWrapper)psi).isGlobalDeclaration() &&
-           StringUtil.isNotEmpty(((PerlVariableDeclarationWrapper)psi).getName());
+           ((PerlVariableDeclarationElement)psi).isGlobalDeclaration() &&
+           StringUtil.isNotEmpty(((PerlVariableDeclarationElement)psi).getName());
   }
 
   @NotNull
@@ -81,7 +81,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
   }
 
   @Override
-  public void serialize(@NotNull PerlVariableStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@NotNull PerlVariableDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     if (stub.getDeclaredType() == null) {
       dataStream.writeName("");
     }
@@ -104,13 +104,13 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
 
   @NotNull
   @Override
-  public PerlVariableStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     String variableType = dataStream.readName().toString();
     if (variableType.isEmpty()) {
       variableType = null;
     }
 
-    return new PerlVariableStubImpl(
+    return new PerlVariableDeclarationStub(
       parentStub,
       this,
       dataStream.readName().toString(),
@@ -127,7 +127,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableSt
   }
 
   @Override
-  public void indexStub(@NotNull PerlVariableStub stub, @NotNull IndexSink sink) {
+  public void indexStub(@NotNull PerlVariableDeclarationStub stub, @NotNull IndexSink sink) {
     String variableName = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
     sink.occurrence(stub.getIndexKey(), variableName);
     sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());

@@ -23,7 +23,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import org.jetbrains.annotations.NotNull;
@@ -66,7 +66,7 @@ public class PerlResolveUtil {
 
     // checking implicit variables
     if (element instanceof PerlImplicitVariablesProvider) {
-      for (PerlVariableDeclarationWrapper wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
+      for (PerlVariableDeclarationElement wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
         if (!processor.execute(wrapper, resolveState)) {
           return false;
         }
@@ -83,7 +83,7 @@ public class PerlResolveUtil {
    * @return variable in declaration term or null if there is no such one
    */
   @Nullable
-  public static PerlVariableDeclarationWrapper getLexicalDeclaration(PerlVariable variable) {
+  public static PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
     if (variable.getExplicitPackageName() != null) {
       return null;
     }

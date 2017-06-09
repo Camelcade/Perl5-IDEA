@@ -32,7 +32,7 @@ import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -181,7 +181,7 @@ public class PerlXNamedValue extends XNamedValue {
       PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
       PerlResolveUtil.treeWalkUp(element, variableProcessor);
 
-      PerlVariableDeclarationWrapper result = variableProcessor.getResult();
+      PerlVariableDeclarationElement result = variableProcessor.getResult();
       if (result == null) {
         return false;
       }

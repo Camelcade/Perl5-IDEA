@@ -77,9 +77,9 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         else if (element instanceof PerlGlobVariable) {
           return "Typeglob";
         }
-        else if (element instanceof PerlVariable || element instanceof PerlVariableDeclarationWrapper) {
-          if (element instanceof PerlVariableDeclarationWrapper) {
-            element = ((PerlVariableDeclarationWrapper)element).getVariable();
+        else if (element instanceof PerlVariable || element instanceof PerlVariableDeclarationElement) {
+          if (element instanceof PerlVariableDeclarationElement) {
+            element = ((PerlVariableDeclarationElement)element).getVariable();
           }
 
           PerlVariableType actualType = ((PerlVariable)element).getActualType();

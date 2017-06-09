@@ -24,7 +24,7 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
@@ -55,11 +55,11 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
    * @param canonicalName canonical variable name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlVariableDeclarationElement> getGlobalScalarDefinitions(Project project, String canonicalName) {
     return getGlobalScalarDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PerlVariableDeclarationWrapper> getGlobalScalarDefinitions(Project project,
+  public static Collection<PerlVariableDeclarationElement> getGlobalScalarDefinitions(Project project,
                                                                                       String canonicalName,
                                                                                       GlobalSearchScope scope) {
     if (canonicalName == null) {
@@ -69,7 +69,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
                                  canonicalName,
                                  project,
                                  scope,
-                                 PerlVariableDeclarationWrapper.class
+                                 PerlVariableDeclarationElement.class
     );
   }
 
@@ -93,7 +93,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
    */
   public static boolean processDefinedGlobalScalars(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
-                                                    @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
     return processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
   }
 
@@ -107,10 +107,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
    * @return false if we should stop processing
    */
   public static boolean processDefinedGlobalVariables(
-    @NotNull StubIndexKey<String, PerlVariableDeclarationWrapper> key,
+    @NotNull StubIndexKey<String, PerlVariableDeclarationElement> key,
     @NotNull Project project,
     @NotNull GlobalSearchScope scope,
-    @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+    @NotNull Processor<PerlVariableDeclarationElement> processor) {
     StubIndex stubIndex = StubIndex.getInstance();
     for (String variableName : stubIndex.getAllKeys(key, project)) {
       if (variableName.length() == 0) {
@@ -119,7 +119,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
 
       char firstChar = variableName.charAt(0);
       if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationWrapper.class, processor)) {
+        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, processor)) {
           return false;
         }
       }

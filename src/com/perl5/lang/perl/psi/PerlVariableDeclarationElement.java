@@ -16,21 +16,17 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStub;
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
-
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 /**
  * Created by hurricup on 29.09.2015.
  */
-public interface PerlVariableDeclarationWrapper
-  extends StubBasedPsiElement<PerlVariableStub>, PerlIdentifierOwner, PerlCompositeElement, PerlDeprecatable {
+public interface PerlVariableDeclarationElement
+  extends StubBasedPsiElement<PerlVariableDeclarationStub>, PerlIdentifierOwner, PerlCompositeElement, PerlVariableDeclaration {
   /**
    * Returns declared variable object
    *
@@ -38,13 +34,6 @@ public interface PerlVariableDeclarationWrapper
    */
   PerlVariable getVariable();
 
-  /**
-   * Returns declaration type in annotation or declaration
-   *
-   * @return type string or null
-   */
-  @Nullable
-  String getDeclaredType();
 
   /**
    * Returns declaration type if variable is in declaration
@@ -53,39 +42,6 @@ public interface PerlVariableDeclarationWrapper
    */
   @Nullable
   String getLocallyDeclaredType();
-
-  /**
-   * Trying to get the package name from explicit specification or by traversing
-   *
-   * @return package name for current element
-   */
-  String getPackageName();
-
-  /**
-   * returns proper fqn
-   *
-   * @return fqn or null if name is missing
-   */
-  @Nullable
-  default String getFullQualifiedName() {
-    String name = getName();
-    if (StringUtil.isEmpty(name)) {
-      return null;
-    }
-
-    String packageName = getPackageName();
-    if (StringUtil.isEmpty(packageName)) {
-      return name;
-    }
-    return packageName + PACKAGE_SEPARATOR + name;
-  }
-
-  /**
-   * Guessing actual variable type from context
-   *
-   * @return variable type
-   */
-  PerlVariableType getActualType();
 
   /**
    * Checks if this declaration is lexical. IMPORTANT: builds PSI
@@ -115,13 +71,6 @@ public interface PerlVariableDeclarationWrapper
    */
   boolean isInvocantDeclaration();
 
-  /**
-   * Returns stubbed, local or external variable annotations
-   *
-   * @return annotations or null
-   */
-  @Nullable
-  PerlVariableAnnotations getVariableAnnotations();
 
   /**
    * Returns local variable annotations if any

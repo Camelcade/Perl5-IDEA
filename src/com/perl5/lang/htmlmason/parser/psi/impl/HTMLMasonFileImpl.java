@@ -42,7 +42,7 @@ import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -57,7 +57,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
-  protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+  protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
   protected int myMasonChangeCounter;
 
   public HTMLMasonFileImpl(@NotNull FileViewProvider viewProvider) {
@@ -107,7 +107,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
 
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     if (myImplicitVariables == null || myMasonChangeCounter != settings.getChangeCounter()) {
@@ -117,8 +117,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return myImplicitVariables;
   }
 
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables(HTMLMasonSettings settings) {
-    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<>();
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables(HTMLMasonSettings settings) {
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
 
     if (isValid()) {
       MasonCoreUtil.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
@@ -382,7 +382,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     }
 
     // implicit variables
-    for (PerlVariableDeclarationWrapper wrapper : getImplicitVariables()) {
+    for (PerlVariableDeclarationElement wrapper : getImplicitVariables()) {
       if (!processor.execute(wrapper, state)) {
         return false;
       }

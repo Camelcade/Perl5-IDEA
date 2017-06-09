@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.extensions;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -33,5 +33,5 @@ public interface PerlImplicitVariablesProvider extends PsiElement {
    * @return variable names
    */
   @NotNull
-  List<PerlVariableDeclarationWrapper> getImplicitVariables();
+  List<PerlVariableDeclarationElement> getImplicitVariables();
 }

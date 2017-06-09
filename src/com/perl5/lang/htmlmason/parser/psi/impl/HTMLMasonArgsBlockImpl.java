@@ -22,7 +22,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -59,8 +59,8 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
     PsiElement run = getFirstChild();
 
     while (run != null) {
-      if (run instanceof PerlVariableDeclarationWrapper) {
-        PerlVariable variable = ((PerlVariableDeclarationWrapper)run).getVariable();
+      if (run instanceof PerlVariableDeclarationElement) {
+        PerlVariable variable = ((PerlVariableDeclarationElement)run).getVariable();
         if (variable != null) {
           PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(run);
           result.add(new PerlSubArgument(

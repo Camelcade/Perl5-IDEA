@@ -26,9 +26,9 @@ import com.perl5.lang.mason2.psi.MasonOverrideDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatementImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ import java.util.List;
  * Created by hurricup on 03.01.2016.
  */
 public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl implements MasonOverrideDefinition {
-  protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
+  protected List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MasonOverrideDefinitionImpl(@NotNull ASTNode node) {
     super(node);
@@ -51,10 +51,10 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
   }
 
   @NotNull
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
-    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableLightImpl(
+      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
         getManager(),
         PerlLanguage.INSTANCE,
         PerlMethodDefinitionMixin.getDefaultInvocantName(),
@@ -100,7 +100,7 @@ public class MasonOverrideDefinitionImpl extends PerlMooseOverrideStatementImpl 
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

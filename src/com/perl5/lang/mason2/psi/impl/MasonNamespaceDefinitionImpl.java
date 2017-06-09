@@ -32,7 +32,7 @@ import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -46,7 +46,7 @@ import java.util.List;
  * Created by hurricup on 05.01.2016.
  */
 public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl implements MasonNamespaceDefinition {
-  protected List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+  protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
   protected int mySettingsChangeCounter;
 
   public MasonNamespaceDefinitionImpl(ASTNode node) {
@@ -58,8 +58,8 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   }
 
   @NotNull
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables(MasonSettings masonSettings) {
-    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables(MasonSettings masonSettings) {
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
 
     if (isValid()) {
       MasonCoreUtil.fillVariablesList(this, newImplicitVariables, masonSettings.globalVariables);
@@ -320,7 +320,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     MasonSettings settings = MasonSettings.getInstance(getProject());
     if (myImplicitVariables == null || mySettingsChangeCounter != settings.getChangeCounter()) {
       myImplicitVariables = buildImplicitVariables(settings);

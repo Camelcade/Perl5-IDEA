@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class PerlVariableUnresolvableInspection extends PerlInspection {
       public void visitPerlVariable(@NotNull final PerlVariable variable) {
         PsiElement parent = variable.getParent();
 
-        if (parent instanceof PerlVariableDeclarationWrapper || variable.isBuiltIn()) {
+        if (parent instanceof PerlVariableDeclarationElement || variable.isBuiltIn()) {
           return;
         }
 

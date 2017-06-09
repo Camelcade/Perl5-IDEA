@@ -156,7 +156,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
     if (myElement instanceof PerlNamespaceDefinitionElement) {
       // global variables
-      for (PerlVariableDeclarationWrapper child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationWrapper.class)) {
+      for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationElement.class)) {
         if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
           result.add(new PerlVariableDeclarationStructureViewElement(child));
         }
@@ -169,9 +169,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedScalarDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
-        Collection<PerlVariableDeclarationWrapper> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
+        Collection<PerlVariableDeclarationElement> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
 
-        for (PerlVariableDeclarationWrapper variable : variables) {
+        for (PerlVariableDeclarationElement variable : variables) {
           result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
         }
 
@@ -190,9 +190,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedArrayDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
-        Collection<PerlVariableDeclarationWrapper> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
+        Collection<PerlVariableDeclarationElement> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
 
-        for (PerlVariableDeclarationWrapper variable : variables) {
+        for (PerlVariableDeclarationElement variable : variables) {
           result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
         }
 
@@ -211,9 +211,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedHashDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
-        Collection<PerlVariableDeclarationWrapper> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
+        Collection<PerlVariableDeclarationElement> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
 
-        for (PerlVariableDeclarationWrapper variable : variables) {
+        for (PerlVariableDeclarationElement variable : variables) {
           result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
         }
 

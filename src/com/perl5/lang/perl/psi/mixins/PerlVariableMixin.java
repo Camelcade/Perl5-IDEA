@@ -132,7 +132,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
         }
 
         // find lexicaly visible declaration and check type
-        final PerlVariableDeclarationWrapper declarationWrapper = getLexicalDeclaration();
+        final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
         if (declarationWrapper != null) {
           if (declarationWrapper.isInvocantDeclaration()) {
             return PerlPackageUtil.getContextPackageName(this);
@@ -234,7 +234,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
         }
 
         // checking global declarations with explicit types
-        for (PerlVariableDeclarationWrapper declaration : getGlobalDeclarations()) {
+        for (PerlVariableDeclarationElement declaration : getGlobalDeclarations()) {
           if (declaration.getDeclaredType() != null) {
             return declaration.getDeclaredType();
           }
@@ -308,8 +308,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   public boolean isDeprecated() {
     PsiElement parent = getParent();
 
-    if (parent instanceof PerlVariableDeclarationWrapper) {
-      return ((PerlVariableDeclarationWrapper)parent).isDeprecated();
+    if (parent instanceof PerlVariableDeclarationElement) {
+      return ((PerlVariableDeclarationElement)parent).isDeprecated();
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();
@@ -322,14 +322,14 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       if (reference instanceof PsiPolyVariantReference) {
         for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
           PsiElement targetElement = resolveResult.getElement();
-          if (targetElement instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper)targetElement).isDeprecated()) {
+          if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
             return true;
           }
         }
       }
       else {
         PsiElement targetElement = reference.resolve();
-        if (targetElement instanceof PerlVariableDeclarationWrapper && ((PerlVariableDeclarationWrapper)targetElement).isDeprecated()) {
+        if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
           return true;
         }
       }
@@ -363,7 +363,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   // fixme this need to be improved very much
   @Override
-  public PerlVariableDeclarationWrapper getLexicalDeclaration() {
+  public PerlVariableDeclarationElement getLexicalDeclaration() {
     if (getExplicitPackageName() != null) {
       return null;
     }
@@ -377,15 +377,15 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       if (psiReference instanceof PsiPolyVariantReference) {
         for (ResolveResult resolveResult : ((PsiPolyVariantReference)psiReference).multiResolve(false)) {
           PsiElement element = resolveResult.getElement();
-          if (element instanceof PerlVariableDeclarationWrapper) {
-            return (PerlVariableDeclarationWrapper)element;
+          if (element instanceof PerlVariableDeclarationElement) {
+            return (PerlVariableDeclarationElement)element;
           }
         }
       }
       else {
         PsiElement target = psiReference.resolve();
         if (target != null) {
-          return (PerlVariableDeclarationWrapper)target;
+          return (PerlVariableDeclarationElement)target;
         }
       }
     }
@@ -395,28 +395,28 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
-  public List<PerlVariableDeclarationWrapper> getGlobalDeclarations() {
-    List<PerlVariableDeclarationWrapper> result = new ArrayList<PerlVariableDeclarationWrapper>();
+  public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
+    List<PerlVariableDeclarationElement> result = new ArrayList<PerlVariableDeclarationElement>();
     PerlVariableType myType = getActualType();
 
     PsiElement parent = getParent(); // wrapper if any
 
     if (myType == PerlVariableType.SCALAR) {
-      for (PerlVariableDeclarationWrapper variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName())) {
+      for (PerlVariableDeclarationElement variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName())) {
         if (!variable.equals(parent)) {
           result.add(variable);
         }
       }
     }
     else if (myType == PerlVariableType.ARRAY) {
-      for (PerlVariableDeclarationWrapper variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName())) {
+      for (PerlVariableDeclarationElement variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName())) {
         if (!variable.equals(parent)) {
           result.add(variable);
         }
       }
     }
     else if (myType == PerlVariableType.HASH) {
-      for (PerlVariableDeclarationWrapper variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName())) {
+      for (PerlVariableDeclarationElement variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName())) {
         if (!variable.equals(parent)) {
           result.add(variable);
         }
@@ -461,6 +461,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public boolean isDeclaration() {
-    return getParent() instanceof PerlVariableDeclarationWrapper;
+    return getParent() instanceof PerlVariableDeclarationElement;
   }
 }

@@ -163,7 +163,7 @@ public class PerlVariableCompletionUtil {
         @Override
         public void visitPerlVariable(@NotNull PerlVariable perlVariable) {
           if (perlVariable.isValid() &&
-              !(perlVariable.getParent() instanceof PerlVariableDeclarationWrapper) &&
+              !(perlVariable.getParent() instanceof PerlVariableDeclarationElement) &&
               perlVariable.getTextOffset() > minOffset &&
               actualType == perlVariable.getActualType()
             ) {
@@ -214,8 +214,8 @@ public class PerlVariableCompletionUtil {
     PsiScopeProcessor processor = new PerlVariableScopeProcessor() {
       @Override
       public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-        if (element instanceof PerlVariableDeclarationWrapper) {
-          PerlVariableDeclarationWrapper variable = (PerlVariableDeclarationWrapper)element;
+        if (element instanceof PerlVariableDeclarationElement) {
+          PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
 
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PsiPerlStatement.class);
           if (declarationStatement != null && PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {

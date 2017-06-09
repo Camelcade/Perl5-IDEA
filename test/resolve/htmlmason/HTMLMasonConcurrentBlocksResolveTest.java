@@ -17,7 +17,7 @@
 package resolve.htmlmason;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import resolve.perl.PerlVariableResolveTestCase;
 
@@ -48,9 +48,9 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTes
 
   protected void doTest(String fileName) {
     initWithFileSmart(fileName);
-    PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationWrapper.class);
+    PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationElement.class);
     assertNotNull(fileLevelDeclaration);
-    PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationWrapper.class);
+    PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationElement.class);
     assertNotNull(defLevelDeclaration);
     PsiElement defLevelUsage = getElementAtCaret(2, PerlVariableNameElement.class);
     assertNotNull(defLevelUsage);

@@ -19,6 +19,6 @@ package com.perl5.lang.perl.psi;
 /**
  * Created by hurricup on 17.01.2016.
  */
-public interface PerlVariableLight extends PerlVariable, PerlVariableNameElement, PerlVariableDeclarationWrapper {
+public interface PerlVariableDeclarationLightElement extends PerlVariable, PerlVariableNameElement, PerlVariableDeclarationElement {
 
 }

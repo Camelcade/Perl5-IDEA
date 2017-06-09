@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.stubs.variables;
 
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlArraysStubIndex extends PerlVariablesStubIndex {
   @NotNull
   @Override
-  public StubIndexKey<String, PerlVariableDeclarationWrapper> getKey() {
+  public StubIndexKey<String, PerlVariableDeclarationElement> getKey() {
     return KEY_ARRAY;
   }
 }

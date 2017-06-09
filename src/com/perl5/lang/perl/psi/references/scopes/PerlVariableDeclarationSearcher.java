@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
   private final String myName;
   private final PerlVariableType myVariableType;
   private final PsiElement myVariable;
-  private PerlVariableDeclarationWrapper myResult;
+  private PerlVariableDeclarationElement myResult;
   //	private PerlVariable myPossibleResult;
 
   public PerlVariableDeclarationSearcher(String name, PerlVariableType variableType, PsiElement anchorElement) {
@@ -48,14 +48,14 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
 
   @Override
   public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-    if (element instanceof PerlVariableDeclarationWrapper) {
-      PerlVariable variable = ((PerlVariableDeclarationWrapper)element).getVariable();
+    if (element instanceof PerlVariableDeclarationElement) {
+      PerlVariable variable = ((PerlVariableDeclarationElement)element).getVariable();
       if (variable != null) {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
           if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
-            myResult = (PerlVariableDeclarationWrapper)element;
+            myResult = (PerlVariableDeclarationElement)element;
             return false;
           }
         }
@@ -74,7 +74,7 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
     return true;
   }
 
-  public PerlVariableDeclarationWrapper getResult() {
+  public PerlVariableDeclarationElement getResult() {
     return myResult;
   }
 

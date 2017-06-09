@@ -22,7 +22,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -39,7 +39,7 @@ import java.util.List;
 public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase implements PerlMethodDefinition {
   // fixme see the #717
   protected static final String DEFAULT_INVOCANT_NAME = "$self";
-  protected List<PerlVariableDeclarationWrapper> myImplicitVariables;
+  protected List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public PerlMethodDefinitionMixin(@NotNull ASTNode node) {
     super(node);
@@ -50,10 +50,10 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
   }
 
   @NotNull
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
-    List<PerlVariableDeclarationWrapper> newImplicitVariables = new ArrayList<PerlVariableDeclarationWrapper>();
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableLightImpl(
+      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
         getManager(),
         PerlLanguage.INSTANCE,
         getDefaultInvocantName(),
@@ -91,7 +91,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
         ));
       }
     }
-    else if (signatureElement instanceof PerlVariableDeclarationWrapper) {
+    else if (signatureElement instanceof PerlVariableDeclarationElement) {
       if (arguments.isEmpty()) // implicit invocant
       {
         arguments.add(new PerlSubArgument(
@@ -119,7 +119,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (hasExplicitInvocant()) {
       return Collections.emptyList();
     }

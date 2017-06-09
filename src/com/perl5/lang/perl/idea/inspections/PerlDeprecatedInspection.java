@@ -70,8 +70,8 @@ public class PerlDeprecatedInspection extends PerlInspection {
                                                                        ((PerlNamespaceDefinitionElement)targetPair.first).isDeprecated()) {
                                                                      message = PerlBundle.message("perl.deprecated.namespace");
                                                                    }
-                                                                   else if (targetPair.first instanceof PerlVariableDeclarationWrapper &&
-                                                                            ((PerlVariableDeclarationWrapper)targetPair.first)
+                                                                   else if (targetPair.first instanceof PerlVariableDeclarationElement &&
+                                                                            ((PerlVariableDeclarationElement)targetPair.first)
                                                                               .isDeprecated()) {
                                                                      message = PerlBundle.message("perl.deprecated.variable");
                                                                    }

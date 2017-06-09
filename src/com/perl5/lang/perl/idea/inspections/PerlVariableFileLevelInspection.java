@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.*;
 public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInspection {
 
   @Override
-  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     if (variableDeclarationWrapper.isGlobalDeclaration() &&
         PerlVariableGlobalUnusedInspection.EXCLUSIONS.contains(variableDeclarationWrapper.getText())) {
       return;

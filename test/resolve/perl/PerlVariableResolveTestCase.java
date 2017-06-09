@@ -18,7 +18,7 @@ package resolve.perl;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -26,8 +26,8 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
 public abstract class PerlVariableResolveTestCase extends PerlResolveTestCase {
   @Override
   public void validateTarget(PsiElement sourceElement, PsiElement targetElement) {
-    assertTrue(targetElement instanceof PerlVariableDeclarationWrapper);
-    PerlVariable targetVariable = ((PerlVariableDeclarationWrapper)targetElement).getVariable();
+    assertTrue(targetElement instanceof PerlVariableDeclarationElement);
+    PerlVariable targetVariable = ((PerlVariableDeclarationElement)targetElement).getVariable();
     assertEquals(targetVariable.getName(), sourceElement.getText());
     assertEquals(targetVariable.getActualType(), ((PerlVariable)sourceElement.getParent()).getActualType());
   }

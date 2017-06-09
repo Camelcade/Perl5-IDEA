@@ -113,7 +113,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
   PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN = VARIABLE_NAME_PATTERN.withParent(
-    VARIABLE_PATTERN.withParent(psiElement(PerlVariableDeclarationWrapper.class))
+    VARIABLE_PATTERN.withParent(psiElement(PerlVariableDeclarationElement.class))
   );
   PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN =
     VARIABLE_NAME_PATTERN.inside(true, psiElement(PsiPerlVariableDeclarationLocal.class));
@@ -144,7 +144,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class);
   PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> ISA_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
     .withChild(
-      psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(ISA_VARIABLE)
+      psiElement(PerlVariableDeclarationElement.class).withFirstChild(ISA_VARIABLE)
     );
 
   PsiElementPattern.Capture<PsiPerlStatement> ISA_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
@@ -163,7 +163,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT");
   PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
     .withChild(
-      psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(EXPORT_VARIABLE)
+      psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_VARIABLE)
     );
   PsiElementPattern.Capture<PsiPerlStatement> EXPORT_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
     psiElement(PsiPerlAssignExpr.class).andOr(
@@ -175,7 +175,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_OK_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT_OK");
   PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_OK_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
     .withChild(
-      psiElement(PerlVariableDeclarationWrapper.class).withFirstChild(EXPORT_OK_VARIABLE)
+      psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_OK_VARIABLE)
     );
 
   PsiElementPattern.Capture<PsiPerlStatement> EXPORT_OK_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
@@ -194,7 +194,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_ARRAY_VARIABLE_DECLARATION =
     psiElement(PsiPerlVariableDeclarationGlobal.class).withChild(
-      psiElement(PerlVariableDeclarationWrapper.class).withChild(EXPORT_ARRAY_VARIABLE_PATTERN)
+      psiElement(PerlVariableDeclarationElement.class).withChild(EXPORT_ARRAY_VARIABLE_PATTERN)
     );
 
 

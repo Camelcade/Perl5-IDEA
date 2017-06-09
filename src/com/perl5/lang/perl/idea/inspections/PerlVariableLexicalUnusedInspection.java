@@ -20,14 +20,14 @@ import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 
 /**
  * Created by hurricup on 18.07.2015.
  */
 public class PerlVariableLexicalUnusedInspection extends PerlVariableDeclarationInspection {
   @Override
-  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationWrapper variableDeclarationWrapper) {
+  public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     if (variableDeclarationWrapper.isLexicalDeclaration() &&
         !variableDeclarationWrapper.isLocalDeclaration()
       ) {

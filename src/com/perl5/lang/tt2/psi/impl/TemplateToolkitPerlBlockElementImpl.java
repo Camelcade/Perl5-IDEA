@@ -21,8 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
-import com.perl5.lang.perl.psi.impl.PerlVariableLightImpl;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.tt2.psi.TemplateToolkitPerlBlockElement;
 import org.jetbrains.annotations.NotNull;
@@ -34,16 +34,16 @@ import java.util.List;
  * Created by hurricup on 11.06.2016.
  */
 public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitCompositeElementImpl implements TemplateToolkitPerlBlockElement {
-  private List<PerlVariableDeclarationWrapper> myImplicitVariables = null;
+  private List<PerlVariableDeclarationElement> myImplicitVariables = null;
 
   public TemplateToolkitPerlBlockElementImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   @NotNull
-  protected List<PerlVariableDeclarationWrapper> buildImplicitVariables() {
-    List<PerlVariableDeclarationWrapper> variables = new ArrayList<PerlVariableDeclarationWrapper>();
-    variables.add(new PerlVariableLightImpl(
+  protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
+    List<PerlVariableDeclarationElement> variables = new ArrayList<PerlVariableDeclarationElement>();
+    variables.add(new PerlVariableDeclarationLightElementImpl(
       getManager(),
       PerlLanguage.INSTANCE,
       "$context",
@@ -53,7 +53,7 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
       false,
       this
     ));
-    variables.add(new PerlVariableLightImpl(
+    variables.add(new PerlVariableDeclarationLightElementImpl(
       getManager(),
       PerlLanguage.INSTANCE,
       "$stash",
@@ -68,7 +68,7 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
 
   @NotNull
   @Override
-  public List<PerlVariableDeclarationWrapper> getImplicitVariables() {
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
     if (myImplicitVariables == null) {
       myImplicitVariables = buildImplicitVariables();
     }

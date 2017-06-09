@@ -89,7 +89,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     final CompletionResultSet finalResultSet = resultSet;
 
-    Processor<PerlVariableDeclarationWrapper> scalarDefaultProcessor = wrapper ->
+    Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper ->
     {
       String fullQualifiedName = wrapper.getFullQualifiedName();
       if (fullQualifiedName != null) {
@@ -98,7 +98,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       return true;
     };
 
-    Processor<PerlVariableDeclarationWrapper> arrayDefaultProcessor = wrapper ->
+    Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper ->
     {
       String fullQualifiedName = wrapper.getFullQualifiedName();
       if (fullQualifiedName != null) {
@@ -107,7 +107,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       return true;
     };
 
-    Processor<PerlVariableDeclarationWrapper> hashDefaultProcessor = wrapper ->
+    Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper ->
     {
       String fullQualifiedName = wrapper.getFullQualifiedName();
       if (fullQualifiedName != null) {

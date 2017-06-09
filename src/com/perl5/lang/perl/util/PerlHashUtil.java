@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -63,11 +63,11 @@ public class PerlHashUtil implements PerlElementTypes {
    * @param canonicalName canonical variable name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlVariableDeclarationElement> getGlobalHashDefinitions(Project project, String canonicalName) {
     return getGlobalHashDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PerlVariableDeclarationWrapper> getGlobalHashDefinitions(Project project,
+  public static Collection<PerlVariableDeclarationElement> getGlobalHashDefinitions(Project project,
                                                                                     String canonicalName,
                                                                                     GlobalSearchScope scope) {
     if (canonicalName == null) {
@@ -78,7 +78,7 @@ public class PerlHashUtil implements PerlElementTypes {
       canonicalName,
       project,
       scope,
-      PerlVariableDeclarationWrapper.class
+      PerlVariableDeclarationElement.class
     );
   }
 
@@ -102,7 +102,7 @@ public class PerlHashUtil implements PerlElementTypes {
    */
   public static boolean processDefinedGlobalHashes(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
-                                                   @NotNull Processor<PerlVariableDeclarationWrapper> processor) {
+                                                   @NotNull Processor<PerlVariableDeclarationElement> processor) {
     return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
   }
 
