@@ -91,7 +91,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
     NAMESPACE_NAME_PATTERN.withParent(NAMESPACE_DEFINITION_PATTERN);
 
   PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN =
-    NAMESPACE_NAME_PATTERN.withParent(psiElement(PerlVariableDeclaration.class));
+    NAMESPACE_NAME_PATTERN.withParent(psiElement(PerlVariableDeclarationExpr.class));
 
   PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
 
@@ -253,7 +253,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlStatement> DECLARATION_ASSIGNING_PATTERN =
     psiElement(PsiPerlStatement.class).withFirstChild(
       psiElement(PerlAssignExpression.class).withFirstChild(
-        psiElement(PerlVariableDeclaration.class)
+        psiElement(PerlVariableDeclarationExpr.class)
       )/*.andOr(
                                                         psiElement().withLastChild(TAILING_SHIFT_PATTERN),
 							psiElement().withLastChild(ALL_ARGUMENTS_PATTERN)
@@ -263,7 +263,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture<PsiPerlStatement> ARGUMENTS_LAST_UNPACKING_PATTERN =
     psiElement(PsiPerlStatement.class).withFirstChild(
       psiElement(PsiPerlAssignExpr.class).withFirstChild(
-        psiElement(PerlVariableDeclaration.class)
+        psiElement(PerlVariableDeclarationExpr.class)
       ).withLastChild(ALL_ARGUMENTS_PATTERN)
     );
 }

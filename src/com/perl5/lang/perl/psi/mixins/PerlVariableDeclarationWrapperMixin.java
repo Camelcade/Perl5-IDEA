@@ -127,13 +127,13 @@ public class PerlVariableDeclarationWrapperMixin extends PerlStubBasedPsiElement
   @Nullable
   @Override
   public String getLocallyDeclaredType() {
-    PerlVariableDeclaration declaration = getPerlDeclaration();
+    PerlVariableDeclarationExpr declaration = getPerlDeclaration();
     return declaration == null ? null : declaration.getDeclarationType();
   }
 
   @Nullable
-  private PerlVariableDeclaration getPerlDeclaration() {
-    return PsiTreeUtil.getParentOfType(this, PerlVariableDeclaration.class);
+  private PerlVariableDeclarationExpr getPerlDeclaration() {
+    return PsiTreeUtil.getParentOfType(this, PerlVariableDeclarationExpr.class);
   }
 
 

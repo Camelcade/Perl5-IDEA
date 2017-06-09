@@ -238,7 +238,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
           return false;
         }
 
-        PerlVariableDeclaration variableDeclaration = PsiTreeUtil.findChildOfType(leftSide, PerlVariableDeclaration.class, false);
+        PerlVariableDeclarationExpr variableDeclaration = PsiTreeUtil.findChildOfType(leftSide, PerlVariableDeclarationExpr.class, false);
 
         if (variableDeclaration == null) {
           return false;

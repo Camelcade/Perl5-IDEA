@@ -28,7 +28,7 @@ import java.util.Collection;
  * Created by hurricup on 27.05.2015.
  * Declarations marker
  */
-public interface PerlVariableDeclaration extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember {
+public interface PerlVariableDeclarationExpr extends PsiElement, PerlNamespaceElementContainer, PerlLexicalScopeMember {
   /**
    * Returns explicit declared type
    *

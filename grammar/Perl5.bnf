@@ -426,8 +426,8 @@ limitations under the License.
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
 
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
-    implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclaration"
-    mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationMixin"
+    implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclarationExpr"
+    mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationExprMixin"
 
     extends("code_variable")=expr
 
@@ -752,15 +752,15 @@ term_expr ::=
     | hash_variable
     | hash_cast_expr
     | array_index_variable
-	| scalar_index_cast_expr
+    | scalar_index_cast_expr
     | anon_array
     | undef_expr
     | print_expr
-	| replacement_regex
+    | replacement_regex
     | sub_expr
     | eval_expr
     | do_expr
-	| anon_hash
+    | anon_hash
     | variable_declaration_local
     | sort_expr
     | grep_expr
@@ -770,11 +770,11 @@ term_expr ::=
     | tag_scalar
     | variable_declaration_global
     | compile_regex
-	| tr_regex
+    | tr_regex
     | file_read_expr
     | require_expr
     | perl_handle_expr
-	| <<parseParserExtensionTerm>>
+    | <<parseParserExtensionTerm>>
 
     | trycatch_expr
     | catch_expr	// fallback for keyword
@@ -782,7 +782,7 @@ term_expr ::=
 
     | sub_call_expr
     | code_primitive
-	| package_expr
+    | package_expr
 
 package_expr ::= PACKAGE
 

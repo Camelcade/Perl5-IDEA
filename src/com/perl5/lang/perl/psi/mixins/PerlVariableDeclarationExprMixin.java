@@ -27,8 +27,8 @@ import java.util.Collection;
 /**
  * Created by hurricup on 01.06.2015.
  */
-public abstract class PerlVariableDeclarationMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclaration {
-  public PerlVariableDeclarationMixin(ASTNode node) {
+public abstract class PerlVariableDeclarationExprMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclarationExpr {
+  public PerlVariableDeclarationExprMixin(ASTNode node) {
     super(node);
   }
 

@@ -146,7 +146,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
           }
 
           // check assignment around declaration
-          PerlVariableDeclaration declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclaration.class);
+          PerlVariableDeclarationExpr declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclarationExpr.class);
           if (declaration != null) {
             if (declaration.getParent() instanceof PsiPerlAssignExpr) {
               PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)declaration.getParent();
