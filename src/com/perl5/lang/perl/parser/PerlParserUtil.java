@@ -331,7 +331,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     boolean flagBackup = ((PerlBuilder)b).setSpecialVariableNamesAllowed(false);
 
     if (PerlParserImpl.scalar_variable(b, l)) {
-      m.done(VARIABLE_DECLARATION_WRAPPER);
+      m.done(VARIABLE_DECLARATION_ELEMENT);
       r = true;
     }
     else {

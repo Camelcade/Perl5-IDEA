@@ -124,7 +124,7 @@ HTML::Mason component
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
       PsiElement(Perl5: my)('my')
-      PsiPerlVariableDeclarationWrapperImpl(VARIABLE_DECLARATION_WRAPPER)
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
         PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('var')

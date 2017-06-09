@@ -50,5 +50,5 @@ public interface PerlStubElementTypes {
 
   IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 
-  IStubElementType PERL_VARIABLE_DECLARATION_WRAPPER = new PerlVariableStubElementType("VARIABLE_DECLARATION_WRAPPER");
+  IStubElementType PERL_VARIABLE_DECLARATION_ELEMENT = new PerlVariableStubElementType("VARIABLE_DECLARATION_ELEMENT");
 }

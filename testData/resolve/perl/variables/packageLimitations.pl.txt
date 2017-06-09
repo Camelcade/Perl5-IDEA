@@ -1,11 +1,11 @@
 PerlVariableReference at (71,74); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 31 in packageLimitations.pl
+	VARIABLE_DECLARATION_ELEMENT at 31 in packageLimitations.pl
 
 PerlVariableReference at (112,115); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 31 in packageLimitations.pl
+	VARIABLE_DECLARATION_ELEMENT at 31 in packageLimitations.pl
 
 PerlVariableReference at (144,147); text in range: 'var' => 0 results:
 
 PerlVariableReference at (185,188); text in range: 'baz' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 152 in packageLimitations.pl
+	VARIABLE_DECLARATION_ELEMENT at 152 in packageLimitations.pl
 

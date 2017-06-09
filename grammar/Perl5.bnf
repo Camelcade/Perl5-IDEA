@@ -433,9 +433,9 @@ limitations under the License.
 
     extends("array_slice|hash_slice|array_element|hash_element|glob_slot")=expr
 
-    stubClass("variable_declaration_wrapper")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub"
-    mixin("variable_declaration_wrapper")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationElementMixin"
-    implements("variable_declaration_wrapper")="com.perl5.lang.perl.psi.PerlVariableDeclarationElement"
+    stubClass("variable_declaration_element")="com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub"
+    mixin("variable_declaration_element")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationElementMixin"
+    implements("variable_declaration_element")="com.perl5.lang.perl.psi.PerlVariableDeclarationElement"
 
     extends("array_index_variable|scalar_variable|array_variable|hash_variable|glob_variable")=expr
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableMixin"
@@ -519,7 +519,7 @@ private statement_item ::=
 		| <<parseBadCharacters>> // Fallback for bad characters
 
 // invoked from PerlUseVarsDeclarationsParser
-private use_vars_declarations ::= {variable_declaration_wrapper|glob_variable|code_variable}*
+private use_vars_declarations ::= {variable_declaration_element|glob_variable|code_variable}*
 
 namespace_definition ::= namespace_definition_name (normal_block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement}
@@ -563,7 +563,7 @@ trycatch_expr ::= try_expr (catch_expr|finally_expr)* [expr]
 try_expr ::= 'try' (parse_block|expr) {pin=1}
 catch_expr ::= 'catch' [catch_condition] (parse_block|expr) {pin=1}
 catch_condition ::= '(' catch_condition_content ')' {pin=1}
-private catch_condition_content ::= [catch_condition_type] variable_declaration_wrapper [expr]
+private catch_condition_content ::= [catch_condition_type] variable_declaration_element [expr]
 private catch_condition_type ::=  [type_constraints]
 type_constraints ::= any_package ['[' expr ']']
 
@@ -634,7 +634,7 @@ private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 /************************************* Sub signatures *****************************************************************/
 sub_signature ::= sub_signature_element (',' sub_signature_element) *
 private sub_signature_element ::= signature_left_side ['=' [scalar_expr]]
-private signature_left_side ::= variable_declaration_wrapper | sub_signature_element_ignore
+private signature_left_side ::= variable_declaration_element | sub_signature_element_ignore
 sub_signature_element_ignore ::= '$$' | '$@' | '$%'
 
 /************************************* Sub signatures *****************************************************************/
@@ -935,10 +935,10 @@ private variable_parenthesised_declaration ::= '(' variable_parenthesised_declar
 private variable_parenthesised_declaration_contents ::= strict_variable_declaration_argument (comma + strict_variable_declaration_argument ) * comma*
 
 private strict_variable_declaration_argument ::= strict_variable_declaration_wrapper |  'undef'
-private variable_declaration_argument ::= variable_declaration_wrapper |  'undef'
+private variable_declaration_argument ::= variable_declaration_element |  'undef'
 
-private strict_variable_declaration_wrapper ::= variable_declaration_wrapper !('{' | '[' | '->' )
-variable_declaration_wrapper ::= '\\'? lexical_variable
+private strict_variable_declaration_wrapper ::= variable_declaration_element !('{' | '[' | '->' )
+variable_declaration_element ::= '\\'? lexical_variable
 
 /////////////////////////////////// REFERENCES /////////////////////////////////////////////////////////////////////////
 anon_array ::= '[' [expr] ']' //{pin=1}

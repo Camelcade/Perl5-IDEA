@@ -20,7 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationWrapper;
+import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,7 +32,7 @@ public abstract class PerlVariableDeclarationInspection extends PerlInspection {
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
-      public void visitVariableDeclarationWrapper(@NotNull PsiPerlVariableDeclarationWrapper o) {
+      public void visitVariableDeclarationElement(@NotNull PsiPerlVariableDeclarationElement o) {
         checkDeclaration(holder, o);
       }
     };

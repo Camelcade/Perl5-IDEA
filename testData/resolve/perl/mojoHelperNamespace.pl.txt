@@ -5,21 +5,21 @@ PerlNamespaceReference at (47,66); text in range: 'Mojolicious::Plugin' => 0 res
 PerlVariableReference at (110,111); text in range: '_' => 0 results:
 
 PerlVariableReference at (119,122); text in range: 'app' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 101 in mojoHelperNamespace.pl
+	VARIABLE_DECLARATION_ELEMENT at 101 in mojoHelperNamespace.pl
 
 PerlVariableReference at (207,211); text in range: 'self' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 179 in mojoHelperNamespace.pl
+	VARIABLE_DECLARATION_ELEMENT at 179 in mojoHelperNamespace.pl
 
 PerlSubReference at (213,225); text in range: 'other_helper' => 1 results:
 	MOJO_HELPER at 277 in mojoHelperNamespace.pl
 
 PerlVariableReference at (252,255); text in range: 'app' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 101 in mojoHelperNamespace.pl
+	VARIABLE_DECLARATION_ELEMENT at 101 in mojoHelperNamespace.pl
 
 PerlVariableReference at (325,326); text in range: '_' => 0 results:
 
 PerlVariableReference at (342,346); text in range: 'self' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 315 in mojoHelperNamespace.pl
+	VARIABLE_DECLARATION_ELEMENT at 315 in mojoHelperNamespace.pl
 
 PerlSubReference at (348,358); text in range: 'somehelper' => 1 results:
 	MOJO_HELPER at 144 in mojoHelperNamespace.pl

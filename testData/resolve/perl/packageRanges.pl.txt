@@ -26,23 +26,23 @@ PerlNamespaceReference at (191,208); text in range: 'Foo::Bar::Package' => 1 res
 	NAMESPACE at 0 in packageRanges.pl
 
 PerlVariableReference at (210,213); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 34 in packageRanges.pl
+	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
 
 PerlNamespaceReference at (216,233); text in range: 'Foo::Bar::Package' => 1 results:
 	NAMESPACE at 0 in packageRanges.pl
 
 PerlVariableReference at (234,237); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 34 in packageRanges.pl
+	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
 
 PerlNamespaceReference at (240,257); text in range: 'Foo::Bar::Package' => 1 results:
 	NAMESPACE at 0 in packageRanges.pl
 
 PerlVariableReference at (259,262); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 34 in packageRanges.pl
+	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
 
 PerlNamespaceReference at (265,282); text in range: 'Foo::Bar::Package' => 1 results:
 	NAMESPACE at 0 in packageRanges.pl
 
 PerlVariableReference at (283,286); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_WRAPPER at 34 in packageRanges.pl
+	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
 

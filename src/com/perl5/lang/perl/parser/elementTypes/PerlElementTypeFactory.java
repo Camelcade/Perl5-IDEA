@@ -197,8 +197,8 @@ public class PerlElementTypeFactory {
     else if (name.equals("NAMESPACE_DEFINITION")) {
       return PerlStubElementTypes.PERL_NAMESPACE;
     }
-    else if (name.equals("VARIABLE_DECLARATION_WRAPPER")) {
-      return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_WRAPPER;
+    else if (name.equals("VARIABLE_DECLARATION_ELEMENT")) {
+      return PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT;
     }
 
     else if (name.equals("USE_STATEMENT")) {
@@ -1545,7 +1545,7 @@ public class PerlElementTypeFactory {
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlVariableDeclarationWrapperImpl(node);
+          return new PsiPerlVariableDeclarationElementImpl(node);
         }
       };
     }
