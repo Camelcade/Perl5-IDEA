@@ -28,7 +28,7 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.5"
+    id "org.jetbrains.intellij" version "0.2.11"
 }
 
 version = "$version$buildNumber"
@@ -53,8 +53,8 @@ sourceSets {
 apply plugin: 'org.jetbrains.intellij'
 intellij {
     version ideaVersion
-    plugins = ['IntelliLang']
     downloadSources Boolean.valueOf(downloadIdeaSource)
+    intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93']
     if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
     } else {
@@ -71,9 +71,8 @@ runIdea{
 }
 
 test {
-    doFirst {
-        systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
-    }
+    systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
+
     useJUnit {
         if (project.hasProperty("runtest")) {
             include '**/' + project.property('runtest') + '.class'
