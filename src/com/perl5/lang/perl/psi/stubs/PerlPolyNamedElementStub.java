@@ -30,9 +30,9 @@ public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
 
   public PerlPolyNamedElementStub(StubElement parent,
                                   IStubElementType elementType,
-                                  @NotNull List<StubBase> lightNamedElements) {
+                                  @NotNull List<StubBase> lightNamedElementsStubs) {
     super(parent, elementType);
-    myLightNamedElementsStubs = lightNamedElements;
+    myLightNamedElementsStubs = lightNamedElementsStubs;
   }
 
   @NotNull

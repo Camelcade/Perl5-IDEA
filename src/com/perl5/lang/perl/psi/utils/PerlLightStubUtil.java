@@ -16,19 +16,35 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubBase;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
+import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlLightStubUtil {
   @NotNull
-  public static PerlDelegatingLightNamedElement createPsiElement(@NotNull StubBase stubBase, @NotNull PsiElement delegate) {
-    throw new IllegalArgumentException("Don't know how to create psi from " + stubBase);
+  public static PerlDelegatingLightNamedElement createPsiElement(@NotNull StubBase stub, @NotNull PerlPolyNamedElement delegate) {
+    if (stub instanceof PerlSubDefinitionStub) {
+      return new PerlDelegatingSubElement(
+        delegate,
+        ((PerlSubDefinitionStub)stub).getSubName(),
+        ((PerlSubDefinitionStub)stub).getPackageName(),
+        ((PerlSubDefinitionStub)stub).getSubArgumentsList(),
+        ((PerlSubDefinitionStub)stub).getAnnotations()
+      );
+    }
+    throw new IllegalArgumentException("Don't know how to create psi from " + stub);
   }
 
   @NotNull
   public static StubBase createStub(@NotNull PerlDelegatingLightNamedElement lightNamedElement) {
+    if (lightNamedElement instanceof PerlDelegatingSubElement) {
+      //noinspection unchecked
+      return (StubBase)PerlStubElementTypes.SUB_DEFINITION.createStub(lightNamedElement, null);
+    }
     throw new IllegalArgumentException("Don't know how to create stub from " + lightNamedElement);
   }
 }

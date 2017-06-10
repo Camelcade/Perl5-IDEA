@@ -17,4 +17,9 @@
 package com.perl5.lang.perl.psi;
 
 public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement {
+  @Override
+  default String getPresentableName() {
+    String args = getSubArgumentsListAsString();
+    return this.getName() + (args.isEmpty() ? "()" : args);
+  }
 }

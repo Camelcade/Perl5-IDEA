@@ -70,8 +70,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Nullable
-  @Override
-  public String getContextPackageName() {
+  protected String getContextPackageName() {
     return PerlPackageUtil.getContextPackageName(this);
   }
 
@@ -105,13 +104,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   @Nullable
   @Override
   public String guessVariableType() {
-    return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>() {
-      @Nullable
-      @Override
-      public Result<String> compute() {
-        return Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
-      }
-    });
+    return CachedValuesManager
+      .getCachedValue(this, () -> CachedValueProvider.Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT));
   }
 
   @Nullable

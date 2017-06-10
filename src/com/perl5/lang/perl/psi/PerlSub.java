@@ -16,16 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
-public interface PerlSub extends PerlDeprecatable {
-  /**
-   * Returns package name for current function
-   *
-   * @return canonical package name from declaration or context
-   */
-  String getPackageName();
+public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
 
   /**
    * Returns function name for current function definition
@@ -47,30 +43,42 @@ public interface PerlSub extends PerlDeprecatable {
    *
    * @return name
    */
-  String getCanonicalName();
+  default String getCanonicalName() {
+    String packageName = getPackageName();
+    if (packageName == null) {
+      return null;
+    }
+
+    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
 
   /**
    * Checks if sub defined as a method
    *
    * @return result
    */
-  boolean isMethod();
-
+  default boolean isMethod() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null && subAnnotations.isMethod();
+  }
 
   /**
    * Checks if sub defined as static, default implementation returns !isMethod(), but may be different for constants for example
    *
    * @return true if sub is static
    */
-  boolean isStatic();
+  default boolean isStatic() {
+    return !isMethod();
+  }
 
   /**
    * Checks if current declaration/definition is XSub
    *
    * @return true if sub located in deparsed file
    */
-  boolean isXSub();
-
+  default boolean isXSub() {
+    return false;
+  }
 
   @Nullable
   default String getReturns() {
@@ -82,6 +90,5 @@ public interface PerlSub extends PerlDeprecatable {
     PerlSubAnnotations subAnnotations = getAnnotations();
     return subAnnotations != null && subAnnotations.isDeprecated();
   }
-
 }
 

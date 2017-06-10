@@ -16,13 +16,12 @@
 
 package com.perl5.lang.perl.psi.properties;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public interface PerlPackageMember extends PsiElement {
+public interface PerlPackageMember {
   /**
    * Method for checking explicit package name for current element
    *
@@ -30,14 +29,6 @@ public interface PerlPackageMember extends PsiElement {
    */
   @Nullable
   String getExplicitPackageName();
-
-  /**
-   * Trying to detect package name by traversing parents
-   *
-   * @return package name or null if not found
-   */
-  @Nullable
-  String getContextPackageName();
 
   /**
    * Trying to get the package name from explicit specification or by traversing

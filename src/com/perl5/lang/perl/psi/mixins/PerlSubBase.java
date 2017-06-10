@@ -88,17 +88,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
     return getSubName();
   }
 
-  @Nullable
-  @Override
-  public String getCanonicalName() {
-    String packageName = getPackageName();
-    if (packageName == null) {
-      return null;
-    }
-
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
-  }
-
   @Override
   public String getSubName() {
     Stub stub = getStub();
@@ -116,8 +105,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   }
 
   @Nullable
-  @Override
-  public String getContextPackageName() {
+  protected String getContextPackageName() {
     return PerlPackageUtil.getContextPackageName(this);
   }
 
@@ -169,22 +157,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   @Nullable
   protected PerlSubAnnotations getLocalAnnotations() {
     return PerlSubAnnotations.createFromAnnotationsList(collectAnnotationsList());
-  }
-
-  @Override
-  public boolean isMethod() {
-    PerlSubAnnotations subAnnotations = getAnnotations();
-    return subAnnotations != null && subAnnotations.isMethod();
-  }
-
-  @Override
-  public boolean isStatic() {
-    return !isMethod();
-  }
-
-  @Override
-  public boolean isXSub() {
-    return false;
   }
 
   @Nullable

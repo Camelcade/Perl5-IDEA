@@ -170,8 +170,7 @@ public class PerlVariableDeclarationLightElementImpl extends LightElement implem
   }
 
   @Nullable
-  @Override
-  public String getContextPackageName() {
+  protected String getContextPackageName() {
     return PerlPackageUtil.getContextPackageName(getParent());
   }
 

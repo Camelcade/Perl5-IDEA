@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.stubs;
 import com.intellij.psi.stubs.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlLightStubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
+public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPolyNamedElementStub, PerlPolyNamedElement>
+  implements PsiElementProvider {
   public PerlPolyNamedElementType(@NotNull String debugName) {
     super(debugName, PerlLanguage.INSTANCE);
   }

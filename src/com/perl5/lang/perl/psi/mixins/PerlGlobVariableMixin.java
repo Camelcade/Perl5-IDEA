@@ -85,8 +85,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Nullable
-  @Override
-  public String getContextPackageName() {
+  protected String getContextPackageName() {
     return PerlPackageUtil.getContextPackageName(this);
   }
 

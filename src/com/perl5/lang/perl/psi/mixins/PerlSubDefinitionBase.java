@@ -121,11 +121,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return new PerlItemPresentationSimple(this, getPresentableName());
   }
 
-  @Override
-  public String getPresentableName() {
-    String args = getSubArgumentsListAsString();
-    return this.getName() + (args.isEmpty() ? "()" : args);
-  }
 
   /**
    * Returns list of arguments defined in signature

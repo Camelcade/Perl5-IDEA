@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -48,15 +47,8 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   }
 
   @Nullable
-  @Override
-  public String getContextPackageName() {
-    return CachedValuesManager.getCachedValue(this, new CachedValueProvider<String>() {
-      @Nullable
-      @Override
-      public Result<String> compute() {
-        return Result.create(getContextPackageNameHeavy(), PsiModificationTracker.MODIFICATION_COUNT);
-      }
-    });
+  protected String getContextPackageName() {
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(getContextPackageNameHeavy(), this));
   }
 
 

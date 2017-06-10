@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlConstantsWrapperMixin;
 import org.jetbrains.annotations.NotNull;
@@ -28,5 +30,11 @@ public class PerlConstantWrapperElementType extends PerlPolyNamedElementType {
   @Override
   public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
     return new PerlConstantsWrapperMixin(stub, this);
+  }
+
+  @NotNull
+  @Override
+  public PsiElement getPsiElement(@NotNull ASTNode node) {
+    return new PerlConstantsWrapperMixin(node);
   }
 }
