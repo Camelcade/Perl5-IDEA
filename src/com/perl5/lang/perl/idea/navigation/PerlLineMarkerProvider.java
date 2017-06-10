@@ -25,7 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -66,12 +66,12 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         result.add(builder.createLineMarkerInfo(nameIdentifier));
       }
     }
-    else if (element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
+    else if (element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).isMethod()) {
       PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
       if (containingNamespace != null) {
-        final String packageName = ((PerlSubDefinition)element).getPackageName();
-        final String subName = ((PerlSubDefinition)element).getSubName();
-        PsiElement nameIdentifier = ((PerlSubDefinition)element).getNameIdentifier();
+        final String packageName = ((PerlSubDefinitionElement)element).getPackageName();
+        final String subName = ((PerlSubDefinitionElement)element).getSubName();
+        PsiElement nameIdentifier = ((PerlSubDefinitionElement)element).getNameIdentifier();
         if (nameIdentifier == null) {
           nameIdentifier = element;
         }

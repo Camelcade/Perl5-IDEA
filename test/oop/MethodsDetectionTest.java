@@ -20,7 +20,7 @@ import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 
 /**
  * Created by hurricup on 14.06.2016.
@@ -108,7 +108,7 @@ public class MethodsDetectionTest extends PerlLightCodeInsightFixtureTestCase {
     initWithFileSmart(getTestName(false).toLowerCase());
     PsiFile file = myFixture.getFile();
     assertNotNull(file);
-    PerlSubDefinition subDefinition = PsiTreeUtil.findChildOfType(file, PerlSubDefinition.class);
+    PerlSubDefinitionElement subDefinition = PsiTreeUtil.findChildOfType(file, PerlSubDefinitionElement.class);
     assertNotNull(subDefinition);
     if (result) {
       assertTrue(subDefinition.isMethod());

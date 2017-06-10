@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.Nullable;
 
-public interface PerlSub {
+public interface PerlSub extends PerlDeprecatable {
   /**
    * Returns package name for current function
    *
@@ -49,10 +49,38 @@ public interface PerlSub {
    */
   String getCanonicalName();
 
+  /**
+   * Checks if sub defined as a method
+   *
+   * @return result
+   */
+  boolean isMethod();
+
+
+  /**
+   * Checks if sub defined as static, default implementation returns !isMethod(), but may be different for constants for example
+   *
+   * @return true if sub is static
+   */
+  boolean isStatic();
+
+  /**
+   * Checks if current declaration/definition is XSub
+   *
+   * @return true if sub located in deparsed file
+   */
+  boolean isXSub();
+
+
   @Nullable
   default String getReturns() {
     PerlSubAnnotations subAnnotations = getAnnotations();
     return subAnnotations != null ? subAnnotations.getReturns() : null;
+  }
+
+  default boolean isDeprecated() {
+    PerlSubAnnotations subAnnotations = getAnnotations();
+    return subAnnotations != null && subAnnotations.isDeprecated();
   }
 
 }

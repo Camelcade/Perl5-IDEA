@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlConstantDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public class PerlConstantDefinitionElementType extends PerlSubDefinitionStubElem
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PsiPerlConstantDefinitionImpl(stub, this);
   }
 

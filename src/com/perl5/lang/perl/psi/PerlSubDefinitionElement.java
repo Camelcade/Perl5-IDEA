@@ -16,11 +16,5 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
-
-/**
- * Created by hurricup on 31.05.2015.
- */
-public interface PerlSubDeclaration extends PerlSubElement<PerlSubDeclarationStub> {
-
+public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement {
 }

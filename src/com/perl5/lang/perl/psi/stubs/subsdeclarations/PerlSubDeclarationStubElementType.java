@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
@@ -32,14 +32,14 @@ import java.io.IOException;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclaration>
+public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclarationElement>
   implements PsiElementProvider {
   public PerlSubDeclarationStubElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
   }
 
   @Override
-  public PerlSubDeclaration createPsi(@NotNull PerlSubDeclarationStub stub) {
+  public PerlSubDeclarationElement createPsi(@NotNull PerlSubDeclarationStub stub) {
     return new PsiPerlSubDeclarationImpl(stub, this);
   }
 
@@ -50,8 +50,8 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
   }
 
   @Override
-  public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclaration psi, StubElement parentStub) {
-    return new PerlSubDeclarationStub(parentStub, psi.getPackageName(), psi.getSubName(), psi.getLocalAnnotations(), this);
+  public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclarationElement psi, StubElement parentStub) {
+    return new PerlSubDeclarationStub(parentStub, psi.getPackageName(), psi.getSubName(), psi.getAnnotations(), this);
   }
 
 
@@ -96,9 +96,9 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof PerlSubDeclaration &&
-           StringUtil.isNotEmpty(((PerlSubDeclaration)psi).getPackageName()) &&
-           StringUtil.isNotEmpty(((PerlSubDeclaration)psi).getName())
+    return psi instanceof PerlSubDeclarationElement &&
+           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getPackageName()) &&
+           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getSubName())
       ;
   }
 }

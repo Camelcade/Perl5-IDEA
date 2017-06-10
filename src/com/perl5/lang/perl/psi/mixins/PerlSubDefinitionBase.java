@@ -25,7 +25,9 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -34,7 +36,6 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +45,10 @@ import java.util.List;
 /**
  * Created by hurricup on 11.11.2015.
  */
-public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinition {
+public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinitionElement,
+                                                                                                  PerlLexicalScope,
+                                                                                                  PerlElementPatterns,
+                                                                                                  PerlElementTypes {
   public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
   }
@@ -52,6 +56,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   public PerlSubDefinitionBase(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
+
+  protected abstract PsiElement getSignatureContainer();
 
   @Override
   public boolean isMethod() {
@@ -68,17 +74,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     PerlLexicalScope scope = PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
     assert scope != null;
     return scope;
-  }
-
-  @Override
-  public String getSubArgumentsListAsString() {
-    List<PerlSubArgument> subArguments = getSubArgumentsList();
-
-    if (isMethod() && !subArguments.isEmpty()) {
-      subArguments.remove(0);
-    }
-
-    return PerlSubUtil.getArgumentsListAsString(subArguments);
   }
 
 
@@ -132,9 +127,13 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return this.getName() + (args.isEmpty() ? "()" : args);
   }
 
+  /**
+   * Returns list of arguments defined in signature
+   *
+   * @return list of arguments or null if there is no signature
+   */
   @Nullable
-  @Override
-  public List<PerlSubArgument> getPerlSubArgumentsFromSignature() {
+  private List<PerlSubArgument> getPerlSubArgumentsFromSignature() {
     List<PerlSubArgument> arguments = null;
     PsiElement signatureContainer = getSignatureContainer();
 
@@ -171,7 +170,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitPerlSubDefinition(this);
+      ((PerlVisitor)visitor).visitPerlSubDefinitionElement(this);
     }
     else {
       super.accept(visitor);
@@ -192,8 +191,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     );
   }
 
-  @Override
-  public PsiPerlBlock getBlockSmart() {
+  @Nullable
+  protected PsiPerlBlock getBlockSmart() {
     if (this instanceof PsiPerlSubDefinition) {
       PsiPerlBlock block = ((PsiPerlSubDefinition)this).getBlock();
       if (block != null) {

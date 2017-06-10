@@ -79,7 +79,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       if (parent instanceof PsiPerlSubDeclaration) {
         holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
       }
-      else if (parent instanceof PerlSubDefinition) {
+      else if (parent instanceof PerlSubDefinitionElement) {
         if ("AUTOLOAD".equals(((PerlSubNameElement)element).getName())) {
           holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
         }

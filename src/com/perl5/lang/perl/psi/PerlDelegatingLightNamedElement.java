@@ -46,7 +46,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @Nullable
   @Override
   public PsiElement getNameIdentifier() {
-    return myName == null ? null : getDelegate().getNameIdentifierByName(myName);
+    return null;
+    //return myName == null ? null : getDelegate().getNameIdentifierByName(myName);
   }
 
   @Override

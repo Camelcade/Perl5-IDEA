@@ -21,7 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -36,7 +36,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection {
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
       @Override
-      public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
+      public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
         Project project = o.getProject();
         String name = "Sub";
 
@@ -46,7 +46,7 @@ public class PerlSubMultipleDefinitionsInspection extends PerlInspection {
             registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
           }
         }
-        super.visitPerlSubDefinition(o);
+        super.visitPerlSubDefinitionElement(o);
       }
     };
   }

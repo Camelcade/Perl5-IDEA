@@ -22,8 +22,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
@@ -34,12 +34,12 @@ import javax.swing.*;
 /**
  * Created by hurricup on 31.05.2015.
  */
-public abstract class PerlSubDeclarationMixin extends PerlSubBase<PerlSubDeclarationStub> implements PsiPerlSubDeclaration {
-  public PerlSubDeclarationMixin(@NotNull ASTNode node) {
+public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarationStub> implements PerlSubDeclarationElement {
+  public PerlSubDeclarationBase(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlSubDeclarationMixin(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDeclarationBase(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -77,8 +77,5 @@ public abstract class PerlSubDeclarationMixin extends PerlSubBase<PerlSubDeclara
   }
 
   @Nullable
-  @Override
-  public PsiPerlExpr getExpr() {
-    return null;
-  }
+  public PsiPerlExpr getExpr() {return null;}
 }

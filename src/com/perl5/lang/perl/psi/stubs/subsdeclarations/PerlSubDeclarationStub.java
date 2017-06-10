@@ -18,14 +18,14 @@ package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStub extends PerlSubStub<PerlSubDeclaration> {
+public class PerlSubDeclarationStub extends PerlSubStub<PerlSubDeclarationElement> {
   public PerlSubDeclarationStub(StubElement parent,
                                 String packageName,
                                 String subName,

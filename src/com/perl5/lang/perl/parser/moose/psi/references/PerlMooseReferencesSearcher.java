@@ -22,7 +22,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -36,7 +36,7 @@ public class PerlMooseReferencesSearcher extends QueryExecutorBase<PsiReference,
   @Override
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
     PsiElement element = queryParameters.getElementToSearch();
-    if (element instanceof PerlSubDefinition) //
+    if (element instanceof PerlSubDefinitionElement) //
     {
       queryParameters.getOptimizer().searchWord("super", queryParameters.getEffectiveSearchScope(), true, element);
     }

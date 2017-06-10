@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 
 /**
  * Created by hurricup on 25.07.2015.
@@ -42,7 +42,8 @@ public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlEl
     EditorModificationUtil.insertStringAtCaret(editor, "()");
 
     // todo we need hint with prototype here, but prototypes handling NYI
-    if (!(subDefitnition instanceof PerlSubDefinition && ((PerlSubDefinition)subDefitnition).getSubArgumentsList().isEmpty())) {
+    if (!(subDefitnition instanceof PerlSubDefinitionElement &&
+          ((PerlSubDefinitionElement)subDefitnition).getSubArgumentsList().isEmpty())) {
       editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
     }
   }

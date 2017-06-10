@@ -14,35 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
-public class PerlPolyNamedElementImpl extends StubBasedPsiElementBase<PerlPolyNamedElementStub> implements PerlPolyNamedElement {
-  public PerlPolyNamedElementImpl(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
+public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
+
+  public PerlConstantsWrapperMixin(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
-  public PerlPolyNamedElementImpl(@NotNull ASTNode node) {
+  public PerlConstantsWrapperMixin(@NotNull ASTNode node) {
     super(node);
-  }
-
-  public PerlPolyNamedElementImpl(PerlPolyNamedElementStub stub, IElementType nodeType, ASTNode node) {
-    super(stub, nodeType, node);
   }
 
   @NotNull
   @Override
-  public Map<String, PsiElement> collectNameIdentifiersMap() {
-    return null;
+  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+    return Collections.emptyList();
   }
 }

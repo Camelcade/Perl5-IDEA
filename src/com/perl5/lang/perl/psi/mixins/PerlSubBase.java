@@ -18,13 +18,14 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
-import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -40,7 +41,13 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBasedPsiElementBase<Stub> implements PerlSubElement<Stub> {
+public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBasedPsiElementBase<Stub>
+  implements PerlSubElement,
+             StubBasedPsiElement<Stub>,
+             PerlPackageMember,
+             PerlNamespaceElementContainer,
+             PerlDeprecatable,
+             PerlLabelScope {
   public PerlSubBase(@NotNull ASTNode node) {
     super(node);
   }
@@ -160,15 +167,8 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   }
 
   @Nullable
-  @Override
-  public PerlSubAnnotations getLocalAnnotations() {
+  protected PerlSubAnnotations getLocalAnnotations() {
     return PerlSubAnnotations.createFromAnnotationsList(collectAnnotationsList());
-  }
-
-  @Override
-  public boolean isDeprecated() {
-    PerlSubAnnotations subAnnotations = getAnnotations();
-    return subAnnotations != null && subAnnotations.isDeprecated();
   }
 
   @Override

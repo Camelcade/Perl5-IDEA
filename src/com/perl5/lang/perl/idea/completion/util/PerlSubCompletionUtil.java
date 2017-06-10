@@ -37,7 +37,9 @@ import java.util.Set;
 public class PerlSubCompletionUtil {
   public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, String argsString, PerlSubDefinition subDefinition) {
+  public static LookupElementBuilder getSubDefinitionLookupElement(String subName,
+                                                                   String argsString,
+                                                                   PerlSubDefinitionElement subDefinition) {
     LookupElementBuilder newElement = LookupElementBuilder
       .create(subName)
       .withIcon(subDefinition.getIcon(0))
@@ -54,10 +56,10 @@ public class PerlSubCompletionUtil {
   }
 
   public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element) {
-    if (element instanceof PerlSubDefinition) {
-      return getSubDefinitionLookupElement((PerlSubDefinition)element);
+    if (element instanceof PerlSubDefinitionElement) {
+      return getSubDefinitionLookupElement((PerlSubDefinitionElement)element);
     }
-    else if (element instanceof PerlSubDeclaration) {
+    else if (element instanceof PerlSubDeclarationElement) {
       return getSubDeclarationLookupElement((PerlSubElement)element);
     }
     else if (element instanceof PerlGlobVariable) {
@@ -88,7 +90,7 @@ public class PerlSubCompletionUtil {
   }
 
   @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinition subDefinition) {
+  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionElement subDefinition) {
     return getSubDefinitionLookupElement(
       subDefinition.getSubName(),
       subDefinition.getSubArgumentsListAsString(),

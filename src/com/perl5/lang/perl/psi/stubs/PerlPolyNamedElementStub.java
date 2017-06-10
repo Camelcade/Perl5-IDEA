@@ -20,9 +20,23 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
-  public PerlPolyNamedElementStub(StubElement parent, IStubElementType elementType) {
+  @NotNull
+  private final List<StubBase> myLightNamedElementsStubs;
+
+  public PerlPolyNamedElementStub(StubElement parent,
+                                  IStubElementType elementType,
+                                  @NotNull List<StubBase> lightNamedElements) {
     super(parent, elementType);
+    myLightNamedElementsStubs = lightNamedElements;
+  }
+
+  @NotNull
+  public List<StubBase> getLightNamedElementsStubs() {
+    return myLightNamedElementsStubs;
   }
 }

@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.refactoring.rename;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,8 +29,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {
-    return element instanceof PerlSubDefinition
-           || element instanceof PerlSubDeclaration
+    return element instanceof PerlSubDefinitionElement
+           || element instanceof PerlSubDeclarationElement
            || element instanceof PerlGlobVariable
            || element instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)element).isGlobalDeclaration()
       ;

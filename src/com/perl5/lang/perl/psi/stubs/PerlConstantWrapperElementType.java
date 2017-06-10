@@ -14,32 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.stubs;
 
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.mixins.PerlConstantsWrapperMixin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-public interface PerlSubDefinition extends PerlSub {
-  /**
-   * Returns list of accepted arguments
-   *
-   * @return list of accepted arguments
-   */
-  @NotNull
-  List<PerlSubArgument> getSubArgumentsList();
-
-  default String getSubArgumentsListAsString() {
-    List<PerlSubArgument> subArguments = getSubArgumentsList();
-
-    if (isMethod() && !subArguments.isEmpty()) {
-      subArguments.remove(0);
-    }
-
-    return PerlSubUtil.getArgumentsListAsString(subArguments);
+public class PerlConstantWrapperElementType extends PerlPolyNamedElementType {
+  public PerlConstantWrapperElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
-
+  @Override
+  public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
+    return new PerlConstantsWrapperMixin(stub, this);
+  }
 }

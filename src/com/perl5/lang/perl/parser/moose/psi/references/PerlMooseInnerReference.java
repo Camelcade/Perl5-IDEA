@@ -27,7 +27,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
@@ -57,7 +57,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     PsiElement element = getElement();
 
     String subName = null;
-    PerlSubDefinition subDefinitionBase = PsiTreeUtil.getParentOfType(element, PerlSubDefinition.class);
+    PerlSubDefinitionElement subDefinitionBase = PsiTreeUtil.getParentOfType(element, PerlSubDefinitionElement.class);
 
     if (subDefinitionBase != null) {
       subName = subDefinitionBase.getSubName();

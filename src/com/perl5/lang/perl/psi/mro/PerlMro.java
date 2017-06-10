@@ -20,8 +20,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -116,12 +116,12 @@ public abstract class PerlMro {
 
     if (basePackageName != null) {
       for (String packageName : getLinearISA(project, basePackageName, isSuper)) {
-        for (PerlSubDefinition subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+        for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
           if (!methods.containsKey(subDefinition.getSubName())) {
             methods.put(subDefinition.getSubName(), subDefinition);
           }
         }
-        for (PerlSubDeclaration subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName)) {
+        for (PerlSubDeclarationElement subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName)) {
           if (!methods.containsKey(subDeclaration.getSubName())) {
             methods.put(subDeclaration.getSubName(), subDeclaration);
           }

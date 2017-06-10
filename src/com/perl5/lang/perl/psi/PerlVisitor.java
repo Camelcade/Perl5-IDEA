@@ -59,7 +59,7 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitExpr(o);
   }
 
-  public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
+  public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
     visitElement(o);
   }
 
@@ -107,7 +107,7 @@ public class PerlVisitor extends PsiPerlVisitor {
 
   @Override
   public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o) {
-    visitPerlSubDefinition(o);
+    visitPerlSubDefinitionElement(o);
   }
 
   @Override

@@ -27,7 +27,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
@@ -47,9 +47,9 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
     super(name);
   }
 
-
+  @NotNull
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     assert psi instanceof PerlClassAccessorDeclaration;
     //noinspection unchecked
     return new PerlClassAccessorDeclarationStub(
@@ -57,7 +57,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
       psi.getPackageName(),
       psi.getSubName(),
       psi.getSubArgumentsList(),
-      psi.getLocalAnnotations(),
+      psi.getAnnotations(),
       ((PerlClassAccessorDeclaration)psi).isFollowsBestPractice(),
       ((PerlClassAccessorDeclaration)psi).isAccessorReadable(),
       ((PerlClassAccessorDeclaration)psi).isAccessorWritable(),
@@ -66,7 +66,7 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PerlClassAccessorDeclaration(stub, this);
   }
 

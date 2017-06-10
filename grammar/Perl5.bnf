@@ -394,7 +394,7 @@ limitations under the License.
     implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
     stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
 
-    implements("constant_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
+    implements("constant_definition")="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
     mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
     stubClass("constant_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
 
@@ -453,15 +453,15 @@ limitations under the License.
 
     stubClass("func_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("func_definition")="com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionMixin"
-    implements("func_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
+    implements("func_definition")="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
 
     stubClass("sub_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
     mixin("sub_definition")="com.perl5.lang.perl.psi.mixins.PerlSubDefinitionMixin"
-    implements("sub_definition")="com.perl5.lang.perl.psi.PerlSubDefinition"
+    implements("sub_definition")="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
 
     stubClass("sub_declaration")="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub"
-    mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationMixin"
-    implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclaration"
+    mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationBase"
+    implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubElement"
     extends("sub_declaration")=statement
 
     stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"

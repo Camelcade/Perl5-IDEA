@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinition;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +34,7 @@ public class MasonOverrideStubElementType extends PerlMooseOverrideStubElementTy
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new MasonOverrideDefinition(stub, this);
   }
 

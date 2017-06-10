@@ -56,7 +56,7 @@ public class MojoliciousHelperDeclaration extends PerlSubDefinitionWithTextIdent
 
 
   @Override
-  public PsiPerlBlock getBlockSmart() {
+  protected PsiPerlBlock getBlockSmart() {
     PsiPerlCommaSequenceExpr argumentsSequence = getSequence();
     if (argumentsSequence != null) {
       PsiPerlSubExpr subArgument = PsiTreeUtil.getChildOfType(argumentsSequence, PsiPerlSubExpr.class);

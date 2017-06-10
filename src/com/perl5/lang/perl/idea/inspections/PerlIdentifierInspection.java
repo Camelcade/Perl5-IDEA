@@ -47,7 +47,7 @@ public class PerlIdentifierInspection extends PerlInspection {
 
       @Override
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
-        if (!(o.getParent() instanceof PerlSubDefinition)) {
+        if (!(o.getParent() instanceof PerlSubDefinitionElement)) {
           checkPerlIdentifier(o);
         }
         super.visitSubNameElement(o);
@@ -68,9 +68,9 @@ public class PerlIdentifierInspection extends PerlInspection {
       }
 
       @Override
-      public void visitPerlSubDefinition(@NotNull PerlSubDefinition o) {
+      public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
         checkPerlNamedElementIdentifier(o);
-        super.visitPerlSubDefinition(o);
+        super.visitPerlSubDefinitionElement(o);
       }
 
       @Override

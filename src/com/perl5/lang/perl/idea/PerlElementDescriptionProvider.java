@@ -46,7 +46,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         return getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
       }
       else if (location == UsageViewTypeLocation.INSTANCE) {
-        if (element instanceof PerlSubDeclaration) {
+        if (element instanceof PerlSubDeclarationElement) {
           return "Sub declaration";
         }
         else if (element instanceof PerlHeredocOpener) {
@@ -61,7 +61,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         else if (element instanceof PerlConstantDefinitionMixin) {
           return "Constant definition";
         }
-        else if (element instanceof PerlSubDefinition) {
+        else if (element instanceof PerlSubDefinitionElement) {
           return "Sub definition";
         }
         else if (element instanceof PerlNamespaceDefinitionWithIdentifier) {

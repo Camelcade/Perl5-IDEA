@@ -25,8 +25,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -70,10 +70,10 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
 
         if (StringUtil.isNotEmpty(packageName)) {
           String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
-          for (PerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
+          for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
             results.add(new PsiElementResolveResult(target));
           }
-          for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
+          for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
             results.add(new PsiElementResolveResult(target));
           }
         }

@@ -19,7 +19,7 @@ package resolve.perl;
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 
 /**
  * Created by hurricup on 30.04.2016.
@@ -71,7 +71,7 @@ public class PerlArgsExtractionTest extends PerlLightCodeInsightFixtureTestCase 
     initWithFileAsScript(fileName);
     PsiElement elementAtCaret = myFixture.getElementAtCaret();
     assertNotNull(elementAtCaret);
-    PerlSubDefinition subBase = PsiTreeUtil.getParentOfType(elementAtCaret, PerlSubDefinition.class, false);
+    PerlSubDefinitionElement subBase = PsiTreeUtil.getParentOfType(elementAtCaret, PerlSubDefinitionElement.class, false);
     assertNotNull(subBase);
     assertEquals(argsString, subBase.getSubArgumentsListAsString());
   }

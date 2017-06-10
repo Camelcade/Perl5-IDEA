@@ -45,7 +45,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     assert myElement instanceof PerlSubNameElement;
 
     PsiElement parent = myElement.getParent();
-    if (parent instanceof PerlSubDeclaration || parent instanceof PerlSubDefinition) {
+    if (parent instanceof PerlSubDeclarationElement || parent instanceof PerlSubDefinitionElement) {
       return ResolveResult.EMPTY_ARRAY;
     }
 
@@ -189,12 +189,12 @@ public class PerlSubReference extends PerlSubReferenceSimple {
                                          PsiElement exclusion,
                                          List<PsiElement> relatedItems,
                                          GlobalSearchScope searchScope) {
-    for (PerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
+    for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
       if (!target.isEquivalentTo(exclusion)) {
         relatedItems.add(target);
       }
     }
-    for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
+    for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
       if (!target.isEquivalentTo(exclusion)) {
         relatedItems.add(target);
       }

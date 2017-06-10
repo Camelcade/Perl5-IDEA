@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.stubs;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -58,5 +59,20 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
   @Override
   public String getCanonicalName() {
     return getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + getSubName();
+  }
+
+  @Override
+  public boolean isMethod() {
+    throw new IncorrectOperationException();
+  }
+
+  @Override
+  public boolean isStatic() {
+    throw new IncorrectOperationException();
+  }
+
+  @Override
+  public boolean isXSub() {
+    throw new IncorrectOperationException();
   }
 }

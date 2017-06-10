@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttribute;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElem
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PerlMooseAttribute(stub, this);
   }
 

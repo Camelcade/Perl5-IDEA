@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +37,7 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new MojoliciousHelperDeclaration(stub, this);
   }
 
@@ -47,8 +47,9 @@ public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementTy
     return new MojoliciousHelperDeclaration(node);
   }
 
+  @NotNull
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     //noinspection unchecked
     return new MojoliciousHelperDeclarationStub(
       parentStub,

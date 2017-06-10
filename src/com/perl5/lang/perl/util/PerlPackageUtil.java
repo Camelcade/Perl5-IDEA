@@ -47,7 +47,7 @@ import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -505,7 +505,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
       Set<String> namesSet = new THashSet<>();
       // collecting overrided
-      for (PerlSubDefinition subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinition.class)) {
+      for (PerlSubDefinitionElement subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionElement.class)) {
         if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getPackageName())) {
           namesSet.add(subDefinitionBase.getSubName());
         }

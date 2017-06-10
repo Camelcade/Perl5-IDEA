@@ -22,7 +22,7 @@ import com.intellij.codeInsight.generation.PsiElementMemberChooserObject;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.mixins.PerlSubBase;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -38,7 +38,7 @@ public class PerlMethodMember extends PsiElementMemberChooserObject implements C
 
   @Override
   public MemberChooserObject getParentNodeDelegate() {
-    final PerlSubDefinition subDefinitionBase = (PerlSubDefinition)getPsiElement();
+    final PerlSubBase subDefinitionBase = (PerlSubBase)getPsiElement();
     final PerlNamespaceDefinitionElement parent = (PerlNamespaceDefinitionElement)PerlPsiUtil
       .getParentElementOrStub(subDefinitionBase, PerlNamespaceDefinitionStub.class, PerlNamespaceDefinitionElement.class);
     assert (parent != null);

@@ -73,7 +73,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
 
   @Nullable
   @Override
-  public PsiElement getSignatureContainer() {
+  protected PsiElement getSignatureContainer() {
     return getMethodSignatureContent();
   }
 

@@ -39,6 +39,7 @@ public interface PerlStubElementTypes {
   IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
   IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
   IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
+  IStubElementType CONSTANT_WRAPPER = new PerlConstantWrapperElementType("CONSTANT_WRAPPER");
 
   IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
 

@@ -40,13 +40,13 @@ public abstract class PerlSubDefinitionWithTextIdentifier extends PerlSubDefinit
   }
 
   @Override
-  public PsiPerlBlock getBlockSmart() {
+  protected PsiPerlBlock getBlockSmart() {
     return null;
   }
 
   @Nullable
   @Override
-  public PsiElement getSignatureContainer() {
+  protected PsiElement getSignatureContainer() {
     return null;
   }
 

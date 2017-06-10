@@ -91,15 +91,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @param canonicalName canonical function name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlSubDefinition> getSubDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlSubDefinitionElement> getSubDefinitions(Project project, String canonicalName) {
     return getSubDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
   }
 
-  public static Collection<PerlSubDefinition> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
+  public static Collection<PerlSubDefinitionElement> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinition.class);
+    return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
   }
 
   /**
@@ -130,15 +130,15 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @param canonicalName canonical function name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlSubDeclaration> getSubDeclarations(Project project, String canonicalName) {
+  public static Collection<PerlSubDeclarationElement> getSubDeclarations(Project project, String canonicalName) {
     return getSubDeclarations(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
   }
 
-  public static Collection<PerlSubDeclaration> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope) {
+  public static Collection<PerlSubDeclarationElement> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PerlSubDeclaration.class);
+    return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
   }
 
   /**
@@ -190,11 +190,11 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     if (reference instanceof PerlSubReference) {
       for (ResolveResult resolveResult : ((PerlSubReference)reference).multiResolve(false)) {
         PsiElement targetElement = resolveResult.getElement();
-        if (targetElement instanceof PerlSubDefinition && ((PerlSubDefinition)targetElement).getReturns() != null) {
-          return ((PerlSubDefinition)targetElement).getReturns();
+        if (targetElement instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)targetElement).getReturns() != null) {
+          return ((PerlSubDefinitionElement)targetElement).getReturns();
         }
-        else if (targetElement instanceof PerlSubDeclaration && ((PerlSubDeclaration)targetElement).getReturns() != null) {
-          return ((PerlSubDeclaration)targetElement).getReturns();
+        else if (targetElement instanceof PerlSubDeclarationElement && ((PerlSubDeclarationElement)targetElement).getReturns() != null) {
+          return ((PerlSubDeclarationElement)targetElement).getReturns();
         }
       }
     }
@@ -384,12 +384,12 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
                                          @NotNull Project project,
                                          @NotNull GlobalSearchScope searchScope,
                                          @NotNull Processor<PsiElement> processor) {
-    for (PerlSubDefinition target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
+    for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {
         return;
       }
     }
-    for (PerlSubDeclaration target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
+    for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {
         return;
       }

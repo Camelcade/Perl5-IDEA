@@ -39,7 +39,7 @@ import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -93,9 +93,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       List<String> superArgs = new ArrayList<>();
       List<PerlSubArgument> arguments = Collections.emptyList();
 
-      if (perlSubBase instanceof PerlSubDefinition) {
+      if (perlSubBase instanceof PerlSubDefinitionElement) {
         //noinspection unchecked
-        arguments = ((PerlSubDefinition)perlSubBase).getSubArgumentsList();
+        arguments = ((PerlSubDefinitionElement)perlSubBase).getSubArgumentsList();
 
         if (!arguments.isEmpty()) {
           boolean useShift = false;

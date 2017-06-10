@@ -16,8 +16,5 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-
-public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner {
+public interface PerlSubDeclarationElement extends PerlSubElement {
 }

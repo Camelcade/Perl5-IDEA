@@ -83,9 +83,10 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
       PsiElement elementParent = sourceElement.getParent();
 
       // suppress declaration if there is a definition and declaration
-      if (result.size() == 2 && !(elementParent instanceof PerlSubDefinition || elementParent instanceof PerlSubDeclaration)) {
-        if (result.get(0).getOriginalElement() instanceof PerlSubDeclaration &&
-            result.get(1).getOriginalElement() instanceof PerlSubDefinition) {
+      if (result.size() == 2 &&
+          !(elementParent instanceof PerlSubDefinitionElement || elementParent instanceof PerlSubDeclarationElement)) {
+        if (result.get(0).getOriginalElement() instanceof PerlSubDeclarationElement &&
+            result.get(1).getOriginalElement() instanceof PerlSubDefinitionElement) {
           result.remove(0);
         }
       }

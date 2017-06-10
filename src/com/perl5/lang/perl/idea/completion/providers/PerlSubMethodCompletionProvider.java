@@ -53,16 +53,16 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
 
     // fixme
     for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper)) {
-      if (element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
+      if (element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).isMethod()) {
         if (element instanceof PerlCompletionElementsProvider) {
           ((PerlCompletionElementsProvider)element).fillCompletions(resultSet);
         }
         else {
-          resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinition)element));
+          resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
         }
       }
-      else if (element instanceof PerlSubDeclaration && ((PerlSubDeclaration)element).isMethod()) {
-        resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement((PerlSubDeclaration)element));
+      else if (element instanceof PerlSubDeclarationElement && ((PerlSubDeclarationElement)element).isMethod()) {
+        resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement((PerlSubDeclarationElement)element));
       }
       else if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).getName() != null) {
         resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement((PerlGlobVariable)element));

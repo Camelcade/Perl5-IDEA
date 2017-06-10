@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 25.11.2015.
  */
-public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements PerlSubDefinition, PerlReferencesProvider {
+public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements PerlReferencesProvider {
   public PerlMooseOverrideStatement(@NotNull ASTNode node) {
     super(node);
   }
@@ -49,13 +49,13 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
 
 
   @Override
-  public PsiPerlBlock getBlockSmart() {
+  protected PsiPerlBlock getBlockSmart() {
     return null;
   }
 
   @Nullable
   @Override
-  public PsiElement getSignatureContainer() {
+  protected PsiElement getSignatureContainer() {
     return null;
   }
 

@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.mixins.PerlSubBase;
 
@@ -25,16 +25,16 @@ import com.perl5.lang.perl.psi.mixins.PerlSubBase;
  * Created by hurricup on 15.08.2015.
  */
 public class PerlSubStructureViewElement extends PerlStructureViewElement {
-  public PerlSubStructureViewElement(PerlSubDefinition element) {
+  public PerlSubStructureViewElement(PerlSubDefinitionElement element) {
     super(element);
   }
 
-  public PerlSubStructureViewElement(PerlSubDeclaration element) {
+  public PerlSubStructureViewElement(PerlSubDeclarationElement element) {
     super(element);
   }
 
   public boolean isDeclaration() {
-    return myElement instanceof PerlSubDeclaration;
+    return myElement instanceof PerlSubDeclarationElement;
   }
 
   public boolean isMethod() {

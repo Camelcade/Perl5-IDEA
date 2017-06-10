@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinition>
+public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionElement>
   implements PsiElementProvider {
 
   public PerlSubDefinitionStubElementType(String name) {
@@ -49,7 +49,7 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
   }
 
   @Override
-  public PerlSubDefinition createPsi(@NotNull PerlSubDefinitionStub stub) {
+  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
     return new PsiPerlSubDefinitionImpl(stub, this);
   }
 
@@ -59,10 +59,11 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
     return new PsiPerlSubDefinitionImpl(node);
   }
 
+  @NotNull
   @Override
-  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinition psi, StubElement parentStub) {
+  public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     //noinspection unchecked
-    return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getLocalAnnotations());
+    return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getAnnotations());
   }
 
 
@@ -128,8 +129,8 @@ public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDe
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement element = node.getPsi();
-    return element instanceof PerlSubDefinition &&
+    return element instanceof PerlSubDefinitionElement &&
            element.isValid() &&
-           StringUtil.isNotEmpty(((PerlSubDefinition)element).getCanonicalName());
+           StringUtil.isNotEmpty(((PerlSubDefinitionElement)element).getCanonicalName());
   }
 }

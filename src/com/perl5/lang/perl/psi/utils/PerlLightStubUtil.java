@@ -14,32 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.utils;
 
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubBase;
+import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-public interface PerlSubDefinition extends PerlSub {
-  /**
-   * Returns list of accepted arguments
-   *
-   * @return list of accepted arguments
-   */
+public class PerlLightStubUtil {
   @NotNull
-  List<PerlSubArgument> getSubArgumentsList();
-
-  default String getSubArgumentsListAsString() {
-    List<PerlSubArgument> subArguments = getSubArgumentsList();
-
-    if (isMethod() && !subArguments.isEmpty()) {
-      subArguments.remove(0);
-    }
-
-    return PerlSubUtil.getArgumentsListAsString(subArguments);
+  public static PerlDelegatingLightNamedElement createPsiElement(@NotNull StubBase stubBase, @NotNull PsiElement delegate) {
+    throw new IllegalArgumentException("Don't know how to create psi from " + stubBase);
   }
 
-
+  @NotNull
+  public static StubBase createStub(@NotNull PerlDelegatingLightNamedElement lightNamedElement) {
+    throw new IllegalArgumentException("Don't know how to create stub from " + lightNamedElement);
+  }
 }

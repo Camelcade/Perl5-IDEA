@@ -25,7 +25,6 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
@@ -41,7 +40,7 @@ import java.util.List;
 /**
  * Created by hurricup on 03.01.2016.
  */
-public class MasonOverrideDefinition extends PerlMooseOverrideStatement implements PerlSubDefinition, PerlImplicitVariablesProvider {
+public class MasonOverrideDefinition extends PerlMooseOverrideStatement implements PerlImplicitVariablesProvider {
   protected List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MasonOverrideDefinition(@NotNull ASTNode node) {
@@ -71,7 +70,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
 
   @Override
   @NotNull
-  public PsiPerlBlock getBlockSmart() {
+  protected PsiPerlBlock getBlockSmart() {
     return findNotNullChildByClass(PsiPerlBlock.class);
   }
 

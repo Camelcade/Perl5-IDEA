@@ -479,6 +479,10 @@ public class PerlElementTypeFactory {
       return PerlStubElementTypes.CONSTANT_DEFINITION;
     }
 
+    if (name.equals("CONSTANT_WRAPPER")) {
+      return PerlStubElementTypes.CONSTANT_WRAPPER;
+    }
+
     if (name.equals("CONTINUE_BLOCK")) {
       return new PerlElementTypeEx(name) {
         @NotNull

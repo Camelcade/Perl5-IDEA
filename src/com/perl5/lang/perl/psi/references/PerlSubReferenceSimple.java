@@ -24,8 +24,8 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclaration;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -163,11 +163,11 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
         setConstant();
       }
 
-      if (!isDeclared() && element instanceof PerlSubDeclaration) {
+      if (!isDeclared() && element instanceof PerlSubDeclarationElement) {
         setDeclared();
       }
 
-      if (!isDefined() && element instanceof PerlSubDefinition) {
+      if (!isDefined() && element instanceof PerlSubDefinitionElement) {
         setDefined();
       }
 

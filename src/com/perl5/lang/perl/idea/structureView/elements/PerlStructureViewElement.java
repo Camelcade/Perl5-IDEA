@@ -234,22 +234,22 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         // declarations
-        Collection<PerlSubDeclaration> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
+        Collection<PerlSubDeclarationElement> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
         if (subDeclarations.isEmpty()) {
           subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
         }
 
-        for (PerlSubDeclaration item : subDeclarations) {
+        for (PerlSubDeclarationElement item : subDeclarations) {
           result.add(new PerlSubStructureViewElement(item).setImported());
         }
 
         // definitions
-        Collection<PerlSubDefinition> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
+        Collection<PerlSubDefinitionElement> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
         if (subDefinitions.isEmpty()) {
           subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
         }
 
-        for (PerlSubDefinition item : subDefinitions) {
+        for (PerlSubDefinitionElement item : subDefinitions) {
           if (item instanceof PerlConstantDefinitionMixin) {
             result.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)item).setImported());
           }
@@ -278,14 +278,14 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // containing subs declarations
-      for (PerlSubDeclaration child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclaration.class)) {
+      for (PerlSubDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclarationElement.class)) {
         if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
           result.add(new PerlSubStructureViewElement(child));
         }
       }
 
       // containing subs definitions, currently only supports PerlHierarchyViewElementsProvider
-      for (PerlSubDefinition child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinition.class)) {
+      for (PerlSubDefinitionElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinitionElement.class)) {
         if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
           if (child instanceof PerlHierarchyViewElementsProvider) {
             ((PerlHierarchyViewElementsProvider)child).fillHierarchyViewElements(result, implementedMethods, false, false);
@@ -319,11 +319,11 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
             if (element instanceof PerlConstantDefinitionMixin && ((PerlConstantDefinitionMixin)element).getName() != null) {
               inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)element).setInherited());
             }
-            else if (element instanceof PerlSubDefinition) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinition)element).setInherited());
+            else if (element instanceof PerlSubDefinitionElement) {
+              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
             }
-            else if (element instanceof PerlSubDeclaration) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclaration)element).setInherited());
+            else if (element instanceof PerlSubDeclarationElement) {
+              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclarationElement)element).setInherited());
             }
             else if (element instanceof PerlGlobVariable &&
                      ((PerlGlobVariable)element).isLeftSideOfAssignment() &&
