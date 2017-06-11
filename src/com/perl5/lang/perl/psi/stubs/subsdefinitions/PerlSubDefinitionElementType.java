@@ -37,14 +37,14 @@ import java.util.List;
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStubElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionElement>
+public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefinitionStub, PerlSubDefinitionElement>
   implements PsiElementProvider {
 
-  public PerlSubDefinitionStubElementType(String name) {
+  public PerlSubDefinitionElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
   }
 
-  public PerlSubDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+  public PerlSubDefinitionElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
     super(debugName, language);
   }
 

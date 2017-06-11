@@ -14,41 +14,33 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.moose.stubs;
+package com.perl5.lang.mason2.elementType;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttribute;
+import com.perl5.lang.mason2.Mason2TemplatingLanguage;
+import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinition;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 29.11.2015.
+ * Created by hurricup on 03.01.2016.
  */
-public class PerlMooseAttributeStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider {
-  public PerlMooseAttributeStubElementType(String name) {
-    super(name);
+public class MasonOverrideElementType extends PerlMooseOverrideElementType {
+  public MasonOverrideElementType(String name) {
+    super(name, Mason2TemplatingLanguage.INSTANCE);
   }
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlMooseAttribute(stub, this);
-  }
-
-  @Override
-  public boolean shouldCreateStub(ASTNode node) {
-    PsiElement psi = node.getPsi();
-    return psi instanceof PerlMooseAttribute && StringUtil.isNotEmpty(((PerlMooseAttribute)psi).getSubName());
+    return new MasonOverrideDefinition(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlMooseAttribute(node);
+    return new MasonOverrideDefinition(node);
   }
 }

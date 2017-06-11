@@ -24,14 +24,14 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousHelperDeclaration;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.04.2016.
  */
-public class MojoliciousHelperElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider {
+public class MojoliciousHelperElementType extends PerlSubDefinitionElementType implements PsiElementProvider {
   public MojoliciousHelperElementType(String name) {
     super(name);
   }

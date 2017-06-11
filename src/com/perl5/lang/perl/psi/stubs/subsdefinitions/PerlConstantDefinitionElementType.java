@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class PerlConstantDefinitionElementType extends PerlSubDefinitionStubElementType implements PsiElementProvider {
+public class PerlConstantDefinitionElementType extends PerlSubDefinitionElementType implements PsiElementProvider {
   public PerlConstantDefinitionElementType(String name) {
     super(name);
   }

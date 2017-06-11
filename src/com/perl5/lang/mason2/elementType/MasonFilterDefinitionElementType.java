@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 08.01.2016.
  */
-public class MasonFilterDefinitionStubElementType extends MasonMethodDefinitionStubElementType {
-  public MasonFilterDefinitionStubElementType(String name) {
+public class MasonFilterDefinitionElementType extends MasonMethodDefinitionElementType {
+  public MasonFilterDefinitionElementType(String name) {
     super(name);
   }
 

@@ -17,48 +17,38 @@
 package com.perl5.lang.perl.parser.moose.stubs;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttribute;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 29.11.2015.
  */
-public class PerlMooseOverrideStubElementType extends PerlSubDefinitionStubElementType implements PerlElementTypes, PsiElementProvider {
-  public PerlMooseOverrideStubElementType(String name) {
+public class PerlMooseAttributeElementType extends PerlSubDefinitionElementType implements PerlElementTypes, PsiElementProvider {
+  public PerlMooseAttributeElementType(String name) {
     super(name);
-  }
-
-  public PerlMooseOverrideStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
-    super(debugName, language);
   }
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlMooseOverrideStatement(stub, this);
+    return new PerlMooseAttribute(stub, this);
   }
 
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-
-    return psi instanceof PerlMooseOverrideStatement &&
-           psi.isValid() &&
-           StringUtil.isNotEmpty(((PerlMooseOverrideStatement)psi).getSubName());
+    return psi instanceof PerlMooseAttribute && StringUtil.isNotEmpty(((PerlMooseAttribute)psi).getSubName());
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlMooseOverrideStatement(node);
+    return new PerlMooseAttribute(node);
   }
 }

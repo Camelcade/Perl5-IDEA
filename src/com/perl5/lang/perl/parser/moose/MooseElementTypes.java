@@ -22,8 +22,8 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
 import com.perl5.lang.perl.parser.moose.psi.impl.*;
-import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeStubElementType;
-import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubElementType;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeElementType;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -109,8 +109,8 @@ public interface MooseElementTypes {
   };
 
   IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
-  IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideStubElementType("MOOSE_STATEMENT_OVERRIDE");
-  IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeStubElementType("MOOSE_ATTRIBUTE");
+  IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideElementType("MOOSE_STATEMENT_OVERRIDE");
+  IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeElementType("MOOSE_ATTRIBUTE");
 
   class PerlMooseTokenType extends PerlTokenTypeEx {
     public PerlMooseTokenType(@NotNull @NonNls String debugName) {

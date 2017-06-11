@@ -40,13 +40,13 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionStubElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionMixin>
+public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionMixin>
   implements PsiElementProvider {
-  public PerlNamespaceDefinitionStubElementType(String name) {
+  public PerlNamespaceDefinitionElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
   }
 
-  public PerlNamespaceDefinitionStubElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+  public PerlNamespaceDefinitionElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
     super(debugName, language);
   }
 

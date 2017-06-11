@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser.Class.Accessor;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorDeclarationStubElementType;
+import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorDeclarationElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorSubElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorFollowBestPracticeImpl;
 import org.jetbrains.annotations.NotNull;
@@ -38,5 +38,5 @@ public interface ClassAccessorElementTypes {
     }
   };
 
-  IElementType CLASS_ACCESSOR_DECLARATION = new ClassAccessorDeclarationStubElementType("CLASS_ACCESSOR_DECLARATION");
+  IElementType CLASS_ACCESSOR_DECLARATION = new ClassAccessorDeclarationElementType("CLASS_ACCESSOR_DECLARATION");
 }

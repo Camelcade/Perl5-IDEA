@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PerlLightSubDefinitionElementType extends PerlSubDefinitionStubElementType {
+public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementType {
   public PerlLightSubDefinitionElementType(String name) {
     super(name);
   }

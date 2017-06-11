@@ -28,8 +28,8 @@ import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDecla
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -40,9 +40,9 @@ import java.util.List;
 /**
  * Created by hurricup on 22.01.2016.
  */
-public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionStubElementType
+public class ClassAccessorDeclarationElementType extends PerlSubDefinitionElementType
   implements PerlElementTypes, PsiElementProvider {
-  public ClassAccessorDeclarationStubElementType(String name) {
+  public ClassAccessorDeclarationElementType(String name) {
     super(name);
   }
 

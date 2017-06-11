@@ -14,34 +14,30 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mason2.elementType;
+package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.MasonMethodDefinition;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 08.01.2016.
+ * Created by hurricup on 10.11.2015.
  */
-public class MasonMethodDefinitionStubElementType extends PerlMethodDefinitionStubElementType implements PsiElementProvider {
-  public MasonMethodDefinitionStubElementType(String name) {
-    super(name, Mason2TemplatingLanguage.INSTANCE);
+public class PerlFuncDefinitionElementType extends PerlSubDefinitionElementType {
+  public PerlFuncDefinitionElementType(String name) {
+    super(name);
   }
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new MasonMethodDefinition(stub, this);
+    return new PsiPerlFuncDefinitionImpl(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonMethodDefinition(node);
+    return new PsiPerlFuncDefinitionImpl(node);
   }
 }

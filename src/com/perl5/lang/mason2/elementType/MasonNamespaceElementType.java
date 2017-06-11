@@ -29,15 +29,15 @@ import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.01.2016.
  */
-public class MasonNamespaceElementType extends PerlNamespaceDefinitionStubElementType implements PsiElementProvider {
+public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementType implements PsiElementProvider {
   public MasonNamespaceElementType(String name) {
     super(name, Mason2Language.INSTANCE);
   }

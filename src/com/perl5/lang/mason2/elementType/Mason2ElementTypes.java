@@ -101,9 +101,9 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
   IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
 
   IElementType MASON_AUGMENT_MODIFIER = new MasonAugmentMethodModifierElementType("MASON_AUGMENT_MODIFIER");
-  IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideStubElementType("MASON_OVERRIDE_DEFINITION");
-  IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionStubElementType("MASON_METHOD_DEFINITION");
-  IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionStubElementType("MASON_FILTER_DEFINITION");
+  IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideElementType("MASON_OVERRIDE_DEFINITION");
+  IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionElementType("MASON_METHOD_DEFINITION");
+  IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionElementType("MASON_FILTER_DEFINITION");
 
   IElementType MASON_AFTER_MODIFIER = new MasonMethodModifierElementType("MASON_AFTER_MODIFIER");
   IElementType MASON_BEFORE_MODIFIER = new MasonMethodModifierElementType("MASON_BEFOE_MODIFIER");

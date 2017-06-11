@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.stubs.imports.PerlNoStatementStubElementType;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStubElementType;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlDoExprElementType;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRequireExprElementType;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubElementType;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.*;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubElementType;
@@ -32,14 +32,14 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubElementType;
  */
 public interface PerlStubElementTypes {
   IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
-  IStubElementType SUB_DEFINITION = new PerlSubDefinitionStubElementType("SUB_DEFINITION");
-  IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionStubElementType("FUNC_DEFINITION");
-  IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionStubElementType("METHOD_DEFINITION");
+  IStubElementType SUB_DEFINITION = new PerlSubDefinitionElementType("SUB_DEFINITION");
+  IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
+  IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");
   IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
   IStubElementType CONSTANT_WRAPPER = new PerlConstantsWrapperElementType("CONSTANT_WRAPPER");
   IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
 
-  IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionStubElementType("NAMESPACE");
+  IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionElementType("NAMESPACE");
 
   IStubElementType PERL_USE_STATEMENT = new PerlUseStatementStubElementType("USE_STATEMENT");
   IStubElementType PERL_NO_STATEMENT = new PerlNoStatementStubElementType("NO_STATEMENT");

@@ -17,27 +17,34 @@
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 10.11.2015.
  */
-public class PerlFuncDefinitionStubElementType extends PerlSubDefinitionStubElementType {
-  public PerlFuncDefinitionStubElementType(String name) {
+public class PerlMethodDefinitionElementType extends PerlSubDefinitionElementType {
+  public PerlMethodDefinitionElementType(String name) {
     super(name);
+  }
+
+  public PerlMethodDefinitionElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
+    super(debugName, language);
   }
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PsiPerlFuncDefinitionImpl(stub, this);
+    return new PsiPerlMethodDefinitionImpl(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlFuncDefinitionImpl(node);
+    return new PsiPerlMethodDefinitionImpl(node);
   }
 }
