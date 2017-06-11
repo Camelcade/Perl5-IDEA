@@ -19,22 +19,22 @@ package com.perl5.lang.perl.psi.stubs;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.mixins.PerlConstantsWrapperMixin;
+import com.perl5.lang.perl.psi.mixins.PerlConstantsWrapper;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlConstantWrapperElementType extends PerlPolyNamedElementType {
-  public PerlConstantWrapperElementType(@NotNull String debugName) {
+public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType {
+  public PerlConstantsWrapperElementType(@NotNull String debugName) {
     super(debugName);
   }
 
   @Override
   public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
-    return new PerlConstantsWrapperMixin(stub, this);
+    return new PerlConstantsWrapper(stub, this);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlConstantsWrapperMixin(node);
+    return new PerlConstantsWrapper(node);
   }
 }

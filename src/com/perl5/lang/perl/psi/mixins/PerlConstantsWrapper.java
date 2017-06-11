@@ -38,13 +38,13 @@ import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
 
-public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
+public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
 
-  public PerlConstantsWrapperMixin(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
+  public PerlConstantsWrapper(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
-  public PerlConstantsWrapperMixin(@NotNull ASTNode node) {
+  public PerlConstantsWrapper(@NotNull ASTNode node) {
     super(node);
   }
 
