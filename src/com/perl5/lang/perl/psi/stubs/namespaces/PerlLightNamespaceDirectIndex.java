@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -35,4 +39,13 @@ public class PerlLightNamespaceDirectIndex extends PerlStubIndexBase<PerlPolyNam
   public StubIndexKey<String, PerlPolyNamedElement> getKey() {
     return KEY;
   }
+
+  public static boolean processNamespaces(@NotNull Project project,
+                                          @NotNull String canonicalName,
+                                          @NotNull GlobalSearchScope scope,
+                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+
+    return PerlLightNamespaceReverseIndex.processNamespaces(KEY, project, canonicalName, scope, processor);
+  }
+
 }

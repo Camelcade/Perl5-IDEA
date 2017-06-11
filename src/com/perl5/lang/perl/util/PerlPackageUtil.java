@@ -52,6 +52,8 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDirectIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionDirectIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -286,7 +288,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
                                                                                    @NotNull String packageName,
                                                                                    GlobalSearchScope scope) {
-    return StubIndex.getElements(PerlNamespaceDefinitionDirectIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class);
+    Collection<PerlNamespaceDefinitionElement> elements =
+      StubIndex.getElements(PerlNamespaceDefinitionDirectIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class);
+    PerlLightNamespaceDirectIndex.processNamespaces(project, packageName, scope, namespace -> {
+      elements.add(namespace);
+      return true;
+    });
+    return elements;
   }
 
   /**
@@ -296,7 +304,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return collection of package names
    */
   public static Collection<String> getDefinedPackageNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionDirectIndex.KEY, project);
+    Collection<String> keys = StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionDirectIndex.KEY, project);
+    keys.addAll(StubIndex.getInstance().getAllKeys(PerlLightNamespaceDirectIndex.KEY, project));
+    return keys;
   }
 
   /**
@@ -310,13 +320,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
                                         @NotNull Project project,
                                         GlobalSearchScope scope,
                                         Processor<PerlNamespaceDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(
-      PerlNamespaceDefinitionDirectIndex.KEY,
-      name,
-      project,
-      scope,
-      PerlNamespaceDefinitionElement.class,
-      processor);
+    return StubIndex.getInstance().processElements(PerlNamespaceDefinitionDirectIndex.KEY,
+                                                   name,
+                                                   project,
+                                                   scope,
+                                                   PerlNamespaceDefinitionElement.class,
+                                                   processor) &&
+           PerlLightNamespaceDirectIndex.processNamespaces(project, name, scope, processor);
   }
 
   /**
@@ -342,8 +352,14 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static List<PerlNamespaceDefinitionElement> getDerivedNamespaceDefinitions(@NotNull Project project,
                                                                                     @NotNull String packageName,
                                                                                     @NotNull GlobalSearchScope scope) {
-    return new ArrayList<>(
-      StubIndex.getElements(PerlNamespaceDefinitionReverseIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class));
+    ArrayList<PerlNamespaceDefinitionElement> elements = new ArrayList<>(
+      StubIndex.getElements(PerlNamespaceDefinitionReverseIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class)
+    );
+    PerlLightNamespaceReverseIndex.processNamespaces(project, packageName, scope, namespace -> {
+      elements.add(namespace);
+      return true;
+    });
+    return elements;
   }
 
   /**

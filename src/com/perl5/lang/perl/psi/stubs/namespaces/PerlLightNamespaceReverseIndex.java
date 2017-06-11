@@ -16,7 +16,13 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -34,5 +40,31 @@ public class PerlLightNamespaceReverseIndex extends PerlStubIndexBase<PerlPolyNa
   @Override
   public StubIndexKey<String, PerlPolyNamedElement> getKey() {
     return KEY;
+  }
+
+  public static boolean processNamespaces(@NotNull Project project,
+                                          @NotNull String canonicalName,
+                                          @NotNull GlobalSearchScope scope,
+                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+
+    return processNamespaces(KEY, project, canonicalName, scope, processor);
+  }
+
+  static boolean processNamespaces(@NotNull StubIndexKey<String, PerlPolyNamedElement> key,
+                                   @NotNull Project project,
+                                   @NotNull String canonicalName,
+                                   @NotNull GlobalSearchScope scope,
+                                   @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+    return StubIndex.getInstance().processElements(key, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+        if (lightNamedElement instanceof PerlNamespaceDefinitionElement) {
+          if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
   }
 }
