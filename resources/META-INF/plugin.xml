@@ -358,8 +358,8 @@
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionDirectIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionReverseIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDirectIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex"/>
 

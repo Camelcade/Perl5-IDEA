@@ -22,11 +22,11 @@ import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 28.05.2015.
+ * Created by hurricup on 16.01.2016.
  */
-public class PerlNamespaceDefinitionStubIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
-  public static final int VERSION = 1;
-  public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+public class PerlNamespaceDefinitionReverseIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
+  public static final int VERSION = 3;
+  public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.parent");
 
   @Override
   public int getVersion() {

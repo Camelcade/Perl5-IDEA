@@ -52,8 +52,8 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionDirectIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -286,7 +286,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
                                                                                    @NotNull String packageName,
                                                                                    GlobalSearchScope scope) {
-    return StubIndex.getElements(PerlNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class);
+    return StubIndex.getElements(PerlNamespaceDefinitionDirectIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class);
   }
 
   /**
@@ -296,7 +296,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return collection of package names
    */
   public static Collection<String> getDefinedPackageNames(Project project) {
-    return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionStubIndex.KEY, project);
+    return StubIndex.getInstance().getAllKeys(PerlNamespaceDefinitionDirectIndex.KEY, project);
   }
 
   /**
@@ -311,7 +311,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
                                         GlobalSearchScope scope,
                                         Processor<PerlNamespaceDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(
-      PerlNamespaceDefinitionStubIndex.KEY,
+      PerlNamespaceDefinitionDirectIndex.KEY,
       name,
       project,
       scope,
@@ -343,7 +343,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
                                                                                     @NotNull String packageName,
                                                                                     @NotNull GlobalSearchScope scope) {
     return new ArrayList<>(
-      StubIndex.getElements(PerlParentNamespaceDefinitionStubIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class));
+      StubIndex.getElements(PerlNamespaceDefinitionReverseIndex.KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class));
   }
 
   /**
