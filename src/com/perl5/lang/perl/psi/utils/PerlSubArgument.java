@@ -101,6 +101,32 @@ public class PerlSubArgument {
     return PerlContextType.LIST;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof PerlSubArgument)) return false;
+
+    PerlSubArgument argument = (PerlSubArgument)o;
+
+    if (getArgumentType() != argument.getArgumentType()) return false;
+    if (getArgumentName() != null ? !getArgumentName().equals(argument.getArgumentName()) : argument.getArgumentName() != null) {
+      return false;
+    }
+    if (getVariableClass() != null ? !getVariableClass().equals(argument.getVariableClass()) : argument.getVariableClass() != null) {
+      return false;
+    }
+    return isOptional != null ? isOptional.equals(argument.isOptional) : argument.isOptional == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = getArgumentType() != null ? getArgumentType().hashCode() : 0;
+    result = 31 * result + (getArgumentName() != null ? getArgumentName().hashCode() : 0);
+    result = 31 * result + (getVariableClass() != null ? getVariableClass().hashCode() : 0);
+    result = 31 * result + (isOptional != null ? isOptional.hashCode() : 0);
+    return result;
+  }
+
   private static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException {
     PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
     String argumentName = dataStream.readName().toString();

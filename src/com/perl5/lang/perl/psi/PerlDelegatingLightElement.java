@@ -295,21 +295,17 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public int hashCode() {
-    return getDelegate().hashCode();
-  }
-
-  @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
+    if (this == o) return true;
+    if (!(o instanceof PerlDelegatingLightElement)) return false;
 
     PerlDelegatingLightElement<?> element = (PerlDelegatingLightElement<?>)o;
 
-    return getDelegate().equals(element.getDelegate());
+    return getDelegate() != null ? getDelegate().equals(element.getDelegate()) : element.getDelegate() == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return getDelegate() != null ? getDelegate().hashCode() : 0;
   }
 }

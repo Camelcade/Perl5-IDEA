@@ -103,6 +103,26 @@ public class PerlSubAnnotations {
     this.myReturnType = returnType;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof PerlSubAnnotations)) return false;
+
+    PerlSubAnnotations that = (PerlSubAnnotations)o;
+
+    if (myFlags != that.myFlags) return false;
+    if (getReturnType() != that.getReturnType()) return false;
+    return getReturns() != null ? getReturns().equals(that.getReturns()) : that.getReturns() == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = (int)myFlags;
+    result = 31 * result + (getReturnType() != null ? getReturnType().hashCode() : 0);
+    result = 31 * result + (getReturns() != null ? getReturns().hashCode() : 0);
+    return result;
+  }
+
   public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlSubAnnotations(
       dataStream.readByte(),

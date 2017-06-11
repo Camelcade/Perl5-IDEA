@@ -72,4 +72,26 @@ public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<Pe
   public String getExplicitPackageName() {
     return myPackageName;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof PerlDelegatingSubElement)) return false;
+    if (!super.equals(o)) return false;
+
+    PerlDelegatingSubElement element = (PerlDelegatingSubElement)o;
+
+    if (getPackageName() != null ? !getPackageName().equals(element.getPackageName()) : element.getPackageName() != null) return false;
+    if (!mySubArguments.equals(element.mySubArguments)) return false;
+    return getAnnotations() != null ? getAnnotations().equals(element.getAnnotations()) : element.getAnnotations() == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = super.hashCode();
+    result = 31 * result + (getPackageName() != null ? getPackageName().hashCode() : 0);
+    result = 31 * result + mySubArguments.hashCode();
+    result = 31 * result + (getAnnotations() != null ? getAnnotations().hashCode() : 0);
+    return result;
+  }
 }

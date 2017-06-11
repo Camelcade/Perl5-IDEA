@@ -80,28 +80,26 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return identifier == null ? super.getTextOffset() : identifier.getTextOffset();
   }
 
+  @Override
+  public boolean isValid() {
+    return getDelegate().isValid();
+  }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
+    if (this == o) return true;
+    if (!(o instanceof PerlDelegatingLightNamedElement)) return false;
+    if (!super.equals(o)) return false;
 
-    PerlDelegatingLightNamedElement element = (PerlDelegatingLightNamedElement)o;
+    PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
 
-    return getDelegate().equals(element.getDelegate()) && myName.equals(element.myName);
+    return getName() != null ? getName().equals(element.getName()) : element.getName() == null;
   }
 
   @Override
   public int hashCode() {
-    return getDelegate().hashCode() * 31 + myName.hashCode();
-  }
-
-  @Override
-  public boolean isValid() {
-    return getDelegate().isValid();
+    int result = super.hashCode();
+    result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+    return result;
   }
 }
