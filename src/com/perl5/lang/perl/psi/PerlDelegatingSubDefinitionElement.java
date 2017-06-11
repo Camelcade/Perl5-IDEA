@@ -18,12 +18,14 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 
 public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
@@ -106,5 +108,16 @@ public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamed
     result = 31 * result + mySubArguments.hashCode();
     result = 31 * result + (getAnnotations() != null ? getAnnotations().hashCode() : 0);
     return result;
+  }
+
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    if (isMethod()) {
+      return PerlIcons.METHOD_GUTTER_ICON;
+    }
+    else {
+      return PerlIcons.SUB_GUTTER_ICON;
+    }
   }
 }
