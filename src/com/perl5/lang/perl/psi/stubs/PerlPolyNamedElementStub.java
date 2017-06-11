@@ -26,17 +26,17 @@ import java.util.List;
 
 public class PerlPolyNamedElementStub extends StubBase<PerlPolyNamedElement> {
   @NotNull
-  private final List<StubBase> myLightNamedElementsStubs;
+  private final List<StubElement> myLightNamedElementsStubs;
 
   public PerlPolyNamedElementStub(StubElement parent,
                                   IStubElementType elementType,
-                                  @NotNull List<StubBase> lightNamedElementsStubs) {
+                                  @NotNull List<StubElement> lightNamedElementsStubs) {
     super(parent, elementType);
     myLightNamedElementsStubs = lightNamedElementsStubs;
   }
 
   @NotNull
-  public List<StubBase> getLightNamedElementsStubs() {
+  public List<StubElement> getLightNamedElementsStubs() {
     return myLightNamedElementsStubs;
   }
 }

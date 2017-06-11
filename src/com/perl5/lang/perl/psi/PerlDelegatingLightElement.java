@@ -16,15 +16,20 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.light.LightElement;
+import com.intellij.psi.impl.source.SubstrateRef;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.SearchScope;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,18 +39,50 @@ import javax.swing.*;
 /**
  * Created by hurricup on 26.11.2016.
  */
-public class PerlDelegatingLightElement<Delegate extends PsiElement> extends LightElement {
+public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub extends StubElement> extends LightElement {
+  private final IStubElementType myElementType;
   @NotNull
-  private final Delegate myDelegate;
+  private SubstrateRef myDelegateSubstrateRef;
 
-  public PerlDelegatingLightElement(@NotNull Delegate delegate) {
+  public PerlDelegatingLightElement(@NotNull DelegatePsi delegate, @NotNull IStubElementType elementType) {
     super(delegate.getManager(), delegate.getLanguage());
-    myDelegate = delegate;
+    myDelegateSubstrateRef = SubstrateRef.createAstStrongRef(delegate.getNode());
+    myElementType = elementType;
+  }
+
+  public PerlDelegatingLightElement(@NotNull MyStub stub) {
+    super(stub.getParentStub().getPsi().getManager(), stub.getStubType().getLanguage());
+    myDelegateSubstrateRef = new SubstrateRef.StubRef(stub);
+    myElementType = stub.getStubType();
+  }
+
+  public IStubElementType getElementType() {
+    return myElementType;
   }
 
   @NotNull
-  public Delegate getDelegate() {
-    return myDelegate;
+  public DelegatePsi getDelegate() {
+    if (myDelegateSubstrateRef instanceof SubstrateRef.StubRef) {
+      StubElement stub = (StubElement)myDelegateSubstrateRef.getStub(-1).getParentStub();
+      assert stub != null;
+      PsiElement psi = stub.getPsi();
+      assert psi instanceof StubBasedPsiElementBase;
+      if (((StubBasedPsiElementBase)psi).getStub() == null) {
+        // switched to ast
+        myDelegateSubstrateRef = SubstrateRef.createAstStrongRef(psi.getNode());
+      }
+      return (DelegatePsi)psi;
+    }
+
+    //noinspection unchecked
+    return (DelegatePsi)myDelegateSubstrateRef.getNode().getPsi();
+  }
+
+  @Nullable
+  public MyStub getDelegateStub() {
+    ProgressIndicatorProvider.checkCanceled(); // Hope, this is called often
+    //noinspection unchecked
+    return (MyStub)myDelegateSubstrateRef.getStub(-1); // fixme wtf is stubindex?
   }
 
   @Override
@@ -301,7 +338,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
     if (this == o) return true;
     if (!(o instanceof PerlDelegatingLightElement)) return false;
 
-    PerlDelegatingLightElement<?> element = (PerlDelegatingLightElement<?>)o;
+    PerlDelegatingLightElement<?, ?> element = (PerlDelegatingLightElement<?, ?>)o;
 
     return getDelegate().equals(element.getDelegate());
   }

@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +26,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement> implements PerlSubDefinitionElement {
+public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
+  implements PerlSubDefinitionElement {
   @Nullable
   private final String myPackageName;
 
@@ -34,28 +37,24 @@ public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<Pe
   @Nullable
   private final PerlSubAnnotations myAnnotations;
 
-  public PerlDelegatingSubElement(PerlPolyNamedElement delegate,
-                                  String subName,
+  public PerlDelegatingSubElement(@NotNull PerlPolyNamedElement delegate,
+                                  @NotNull String subName,
+                                  @NotNull IStubElementType elementType,
+                                  @NotNull PsiElement nameIdentifier,
                                   @Nullable String packageName,
                                   @NotNull List<PerlSubArgument> subArguments,
                                   @Nullable PerlSubAnnotations annotations) {
-    super(delegate, subName);
+    super(delegate, subName, elementType, nameIdentifier);
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;
   }
 
-  public PerlDelegatingSubElement(@NotNull PerlPolyNamedElement delegate,
-                                  @NotNull String subName,
-                                  @Nullable String packageName,
-                                  @NotNull List<PerlSubArgument> subArguments,
-                                  @Nullable PerlSubAnnotations annotations,
-                                  @NotNull PsiElement nameIdentifier
-  ) {
-    super(delegate, subName, nameIdentifier);
-    myPackageName = packageName;
-    mySubArguments = subArguments;
-    myAnnotations = annotations;
+  public PerlDelegatingSubElement(@NotNull PerlSubDefinitionStub stub) {
+    super(stub, stub.getSubName());
+    myPackageName = stub.getPackageName();
+    mySubArguments = stub.getSubArgumentsList();
+    myAnnotations = stub.getAnnotations();
   }
 
   @Nullable

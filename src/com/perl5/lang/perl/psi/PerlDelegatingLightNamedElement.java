@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.*;
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +27,8 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
-public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightElement<Delegate>
+public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedElement, MyStub extends StubElement>
+  extends PerlDelegatingLightElement<DelegatePsi, MyStub>
   implements PsiNameIdentifierOwner {
 
   @NotNull
@@ -34,13 +37,17 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @Nullable
   private PsiElement myNameIdentifier;
 
-  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate, @NotNull String name) {
-    super(delegate);
+  public PerlDelegatingLightNamedElement(@NotNull MyStub stub, @NotNull String name) {
+    super(stub);
     myName = name;
   }
 
-  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate, @NotNull String name, @NotNull PsiElement nameIdentifier) {
-    this(delegate, name);
+  public PerlDelegatingLightNamedElement(@NotNull DelegatePsi delegate,
+                                         @NotNull String name,
+                                         @NotNull IStubElementType elementType,
+                                         @NotNull PsiElement nameIdentifier) {
+    super(delegate, elementType);
+    myName = name;
     myNameIdentifier = nameIdentifier;
   }
 
@@ -104,7 +111,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     if (!(o instanceof PerlDelegatingLightNamedElement)) return false;
     if (!super.equals(o)) return false;
 
-    PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
+    PerlDelegatingLightNamedElement<?, ?> element = (PerlDelegatingLightNamedElement<?, ?>)o;
 
     return getName().equals(element.getName());
   }

@@ -21,8 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
@@ -40,108 +38,72 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   @NotNull
   @Override
   public PerlPolyNamedElementStub createStub(@NotNull PerlPolyNamedElement psi, StubElement parentStub) {
-    List<StubBase> lightStubs = new ArrayList<>();
-
-    PerlPolyNamedElementStub result = new PerlPolyNamedElementStub(parentStub, this, lightStubs);
+    List<StubElement> lightNamedElements = new ArrayList<>();
+    PerlPolyNamedElementStub result = new PerlPolyNamedElementStub(parentStub, this, lightNamedElements);
 
     //noinspection unchecked
-    psi.getLightElements().forEach(lightPsi -> lightStubs.add(
-      (StubBase)Serializer.getForPsiElement(lightPsi).getElementType().createStub(lightPsi, null)
-    ));
+    psi.getLightElements().forEach(lightPsi -> lightNamedElements.add(lightPsi.getElementType().createStub(lightPsi, result)));
 
     return result;
   }
 
   @NotNull
   @Override
-  public String getExternalId() {
+  public final String getExternalId() {
     return "perl.poly." + super.toString();
   }
 
   @Override
-  public void serialize(@NotNull PerlPolyNamedElementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    List<StubBase> stubs = stub.getLightNamedElementsStubs();
-    dataStream.writeInt(stubs.size());
-    for (StubBase lightStub : stubs) {
-      Serializer serializer = Serializer.getForStub(lightStub);
-      dataStream.writeInt(serializer.getId());
+  public final void serialize(@NotNull PerlPolyNamedElementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    List<StubElement> childrenStubs = stub.getLightNamedElementsStubs();
+    dataStream.writeInt(childrenStubs.size());
+    for (StubElement childStub : childrenStubs) {
+      dataStream.writeInt(getSerializationId(childStub)); // serialization id
       //noinspection unchecked
-      serializer.getElementType().serialize(lightStub, dataStream);
+      childStub.getStubType().serialize(childStub, dataStream);
     }
   }
 
   @NotNull
   @Override
-  public PerlPolyNamedElementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    List<StubBase> lightElementsStubs = new ArrayList<>();
-    PerlPolyNamedElementStub stub = new PerlPolyNamedElementStub(parentStub, this, lightElementsStubs);
-    int stubsNumber = dataStream.readInt();
-    for (int i = 0; i < stubsNumber; i++) {
-      Serializer serializer = Serializer.getById(dataStream.readInt());
+  public final PerlPolyNamedElementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    int size = dataStream.readInt();
+    List<StubElement> childStubs = new ArrayList<>(size);
+    PerlPolyNamedElementStub result = new PerlPolyNamedElementStub(parentStub, this, childStubs);
+
+    for (int i = 0; i < size; i++) {
       //noinspection unchecked
-      StubBase newLightStub = (StubBase)serializer.getElementType().deserialize(dataStream, null);
-      lightElementsStubs.add(newLightStub);
+      childStubs.add((StubElement)getElementTypeById(dataStream.readInt()).deserialize(dataStream, result));
     }
-    return stub;
+
+    return result;
   }
 
   @Override
-  public void indexStub(@NotNull PerlPolyNamedElementStub stub, @NotNull IndexSink sink) {
+  public final void indexStub(@NotNull PerlPolyNamedElementStub stub, @NotNull IndexSink sink) {
     //noinspection unchecked
-    stub.getLightNamedElementsStubs().forEach(lightStub -> Serializer.getForStub(lightStub).getElementType().indexStub(lightStub, sink));
+    stub.getLightNamedElementsStubs().forEach(childStub -> childStub.getStubType().indexStub(childStub, sink));
   }
 
   @Override
-  public boolean shouldCreateStub(ASTNode node) {
+  public final boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
     assert psi instanceof PerlPolyNamedElement;
     return ((PerlPolyNamedElement)psi).getLightElements().size() > 0;
   }
 
-  private enum Serializer {
-    SUB_DEFINITION(0, PerlStubElementTypes.SUB_DEFINITION),
-    NAMESPACE_DEFINITION(1, PerlStubElementTypes.PERL_NAMESPACE);
-
-    private final int myId;
-    @NotNull
-    private IStubElementType myElementType;
-
-    Serializer(int id, @NotNull IStubElementType elementType) {
-      myElementType = elementType;
-      myId = id;
+  private static int getSerializationId(@NotNull StubElement stubElement) {
+    if (stubElement instanceof PerlSubDefinitionStub) {
+      return 0;
     }
+    throw new IllegalArgumentException("Unregistered stub element class:" + stubElement);
+  }
 
-    @NotNull
-    public IStubElementType getElementType() {
-      return myElementType;
+  @NotNull
+  private static IStubElementType getElementTypeById(int id) {
+    if (id == 0) {
+      return PerlStubElementTypes.LIGHT_SUB_DEFINITION;
     }
-
-    public int getId() {
-      return myId;
-    }
-
-    public static Serializer getForStub(@NotNull StubBase stubElement) {
-      if (stubElement instanceof PerlSubDefinitionStub) {
-        return SUB_DEFINITION;
-      }
-      throw new IllegalArgumentException("Don't know which serializer to use for " + stubElement);
-    }
-
-    public static Serializer getForPsiElement(@NotNull PerlDelegatingLightNamedElement lightNamedElement) {
-      if (lightNamedElement instanceof PerlDelegatingSubElement) {
-        return SUB_DEFINITION;
-      }
-
-      throw new IllegalArgumentException("Don't know how to create stub from " + lightNamedElement);
-    }
-
-    public static Serializer getById(int id) {
-      for (Serializer serializer : values()) {
-        if (serializer.getId() == id) {
-          return serializer;
-        }
-      }
-      throw new IllegalArgumentException("Has no serializer with id " + id);
-    }
+    throw new IllegalArgumentException("Unregistered stub element id:" + id);
   }
 }

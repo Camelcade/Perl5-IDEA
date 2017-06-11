@@ -26,6 +26,7 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +34,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
 
 public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
 
@@ -42,6 +46,15 @@ public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
 
   public PerlConstantsWrapperMixin(@NotNull ASTNode node) {
     super(node);
+  }
+
+  @NotNull
+  @Override
+  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+    return stub.getChildrenStubs().stream()
+      .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
+      .map(childStub -> new PerlDelegatingSubElement((PerlSubDefinitionStub)childStub))
+      .collect(Collectors.toList());
   }
 
   @NotNull
@@ -59,10 +72,11 @@ public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
         result.add(new PerlDelegatingSubElement(
           this,
           ElementManipulators.getValueText(listElement),
+          LIGHT_SUB_DEFINITION,
+          listElement,
           PerlPackageUtil.getContextPackageName(this),
           Collections.emptyList(),
-          null,
-          listElement
+          null
         ));
       }
       isKey = !isKey;

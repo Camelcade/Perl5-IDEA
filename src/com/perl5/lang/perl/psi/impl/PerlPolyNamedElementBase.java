@@ -20,11 +20,9 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
-import com.perl5.lang.perl.psi.utils.PerlLightStubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -46,13 +44,16 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElements() {
     if (getGreenStub() != null) {
-      return ContainerUtil.map(getGreenStub().getLightNamedElementsStubs(), stub -> PerlLightStubUtil.createPsiElement(stub, this));
+      return calcLightElementsFromStubs(getGreenStub());
     }
     else if (getStub() != null) {
-      return ContainerUtil.map(getStub().getLightNamedElementsStubs(), stub -> PerlLightStubUtil.createPsiElement(stub, this));
+      return calcLightElementsFromStubs(getStub());
     }
     return calcLightElementsFromPsi();
   }
+
+  @NotNull
+  protected abstract List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
 
   @NotNull
   protected abstract List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi();

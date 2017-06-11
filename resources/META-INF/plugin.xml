@@ -354,6 +354,7 @@
 
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>

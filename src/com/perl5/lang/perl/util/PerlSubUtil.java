@@ -31,6 +31,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -99,7 +100,11 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
+    Collection<PerlSubDefinitionElement> elements =
+      StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
+
+    PerlLightSubDefinitionIndex.processSubDefinitions(project, canonicalName, scope, elements::add);
+    return elements;
   }
 
   /**
@@ -109,18 +114,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return collection of sub names
    */
   public static Collection<String> getDefinedSubsNames(Project project) {
-    return PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsStubIndex.KEY, project);
-  }
-
-  /**
-   * Processes all defined subs names with given processor
-   *
-   * @param project   project to search in
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
-   */
-  public static boolean processDefinedSubsNames(Project project, Processor<String> processor) {
-    return StubIndex.getInstance().processAllKeys(PerlSubDefinitionsStubIndex.KEY, project, processor);
+    Collection<String> result = PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsStubIndex.KEY, project);
+    result.addAll(PerlUtil.getIndexKeysWithoutInternals(PerlLightSubDefinitionIndex.KEY, project));
+    return result;
   }
 
   /**
