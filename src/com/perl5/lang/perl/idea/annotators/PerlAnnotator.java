@@ -22,6 +22,7 @@ package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
@@ -30,6 +31,7 @@ import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotator extends PerlBaseAnnotator {
@@ -64,6 +66,17 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         else if (namespaceElement.isBuiltin()) {
           decorateElement(namespaceElement, holder, PerlSyntaxHighlighter.PERL_PACKAGE_CORE, false);
         }
+      }
+    }
+    else if (element instanceof PerlPolyNamedElement) {
+      TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DECLARATION;
+      if (elementType == PerlStubElementTypes.CONSTANT_WRAPPER) {
+        subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
+      }
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+        TextAttributesKey currentKey =
+          lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
+        decorateElement(lightNamedElement.getNavigationElement(), holder, currentKey, false);
       }
     }
     else if (elementType == CONSTANT_DEFINITION) {
