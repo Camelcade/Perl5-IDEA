@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
+public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
   implements PerlSubDefinitionElement {
   @Nullable
   private final String myPackageName;
@@ -37,20 +37,20 @@ public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<Pe
   @Nullable
   private final PerlSubAnnotations myAnnotations;
 
-  public PerlDelegatingSubElement(@NotNull PerlPolyNamedElement delegate,
-                                  @NotNull String subName,
-                                  @NotNull IStubElementType elementType,
-                                  @NotNull PsiElement nameIdentifier,
-                                  @Nullable String packageName,
-                                  @NotNull List<PerlSubArgument> subArguments,
-                                  @Nullable PerlSubAnnotations annotations) {
+  public PerlDelegatingSubDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+                                            @NotNull String subName,
+                                            @NotNull IStubElementType elementType,
+                                            @NotNull PsiElement nameIdentifier,
+                                            @Nullable String packageName,
+                                            @NotNull List<PerlSubArgument> subArguments,
+                                            @Nullable PerlSubAnnotations annotations) {
     super(delegate, subName, elementType, nameIdentifier);
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;
   }
 
-  public PerlDelegatingSubElement(@NotNull PerlSubDefinitionStub stub) {
+  public PerlDelegatingSubDefinitionElement(@NotNull PerlSubDefinitionStub stub) {
     super(stub, stub.getSubName());
     myPackageName = stub.getPackageName();
     mySubArguments = stub.getSubArgumentsList();
@@ -89,10 +89,10 @@ public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<Pe
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PerlDelegatingSubElement)) return false;
+    if (!(o instanceof PerlDelegatingSubDefinitionElement)) return false;
     if (!super.equals(o)) return false;
 
-    PerlDelegatingSubElement element = (PerlDelegatingSubElement)o;
+    PerlDelegatingSubDefinitionElement element = (PerlDelegatingSubDefinitionElement)o;
 
     if (getPackageName() != null ? !getPackageName().equals(element.getPackageName()) : element.getPackageName() != null) return false;
     if (!mySubArguments.equals(element.mySubArguments)) return false;

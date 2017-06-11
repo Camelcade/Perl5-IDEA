@@ -21,7 +21,7 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
+import com.perl5.lang.perl.psi.PerlDelegatingSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -53,7 +53,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getChildrenStubs().stream()
       .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
-      .map(childStub -> new PerlDelegatingSubElement((PerlSubDefinitionStub)childStub))
+      .map(childStub -> new PerlDelegatingSubDefinitionElement((PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
@@ -69,7 +69,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
       if (listElement instanceof PerlString) {
-        result.add(new PerlDelegatingSubElement(
+        result.add(new PerlDelegatingSubDefinitionElement(
           this,
           ElementManipulators.getValueText(listElement),
           LIGHT_SUB_DEFINITION,

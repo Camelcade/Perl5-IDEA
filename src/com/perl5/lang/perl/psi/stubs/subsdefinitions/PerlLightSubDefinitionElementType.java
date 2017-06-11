@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
+import com.perl5.lang.perl.psi.PerlDelegatingSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -34,7 +34,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlDelegatingSubElement(stub);
+    return new PerlDelegatingSubDefinitionElement(stub);
   }
 
   @Override
