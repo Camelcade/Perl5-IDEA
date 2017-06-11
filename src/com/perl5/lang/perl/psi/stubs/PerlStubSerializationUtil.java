@@ -51,6 +51,7 @@ public class PerlStubSerializationUtil {
     }
   }
 
+  @Nullable
   public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException {
     int listSize = dataStream.readInt();
 

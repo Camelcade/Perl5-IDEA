@@ -22,6 +22,7 @@ import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -96,6 +97,9 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
     if (stubElement instanceof PerlSubDefinitionStub) {
       return 0;
     }
+    else if (stubElement instanceof PerlNamespaceDefinitionStub) {
+      return 1;
+    }
     throw new IllegalArgumentException("Unregistered stub element class:" + stubElement);
   }
 
@@ -103,6 +107,9 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   private static IStubElementType getElementTypeById(int id) {
     if (id == 0) {
       return PerlStubElementTypes.LIGHT_SUB_DEFINITION;
+    }
+    else if (id == 1) {
+      return PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
     }
     throw new IllegalArgumentException("Unregistered stub element id:" + id);
   }

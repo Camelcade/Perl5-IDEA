@@ -28,7 +28,7 @@ import com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
 import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex;
@@ -43,23 +43,23 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
   }
 
   @Override
-  public PerlNamespaceDefinitionMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionElement createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new MasonNamespaceDefinitionImpl(stub, this);
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionMixin psi, StubElement parentStub) {
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     assert psi instanceof MasonNamespaceDefinitionImpl;
     return new PerlNamespaceDefinitionStub(
       parentStub,
       this,
       ((MasonNamespaceDefinitionImpl)psi).getAbsoluteComponentPath(),
       psi.getMroType(),
-      psi.getParentNamespacesNamesFromPsi(),
+      psi.getParentNamespacesNames(),
       psi.getEXPORT(),
       psi.getEXPORT_OK(),
       psi.getEXPORT_TAGS(),
-      psi.getLocalAnnotations()
+      psi.getAnnotations()
     );
   }
 

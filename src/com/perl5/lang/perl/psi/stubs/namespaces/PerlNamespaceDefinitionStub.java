@@ -42,8 +42,8 @@ public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitio
   private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
   public PerlNamespaceDefinitionStub(
-    StubElement parent,
-    IStubElementType elementType,
+    @Nullable StubElement parent,
+    @NotNull IStubElementType elementType,
     String packageName,
     PerlMroType mroType,
     List<String> parentNamespaces,
