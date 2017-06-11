@@ -30,7 +30,6 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -94,13 +93,13 @@ public class ClassAccessorDeclarationStubElementType extends PerlSubDefinitionSt
     if (((PerlClassAccessorDeclarationStub)stub).isFollowsBestPractice()) {
       // fixme these should depend on declaration type
       if (((PerlClassAccessorDeclarationStub)stub).isAccessorReadable()) {
-        sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub)stub).getGetterCanonicalName());
+        sink.occurrence(getStubIndexKey(), ((PerlClassAccessorDeclarationStub)stub).getGetterCanonicalName());
       }
       if (((PerlClassAccessorDeclarationStub)stub).isAccessorWritable()) {
-        sink.occurrence(PerlSubDefinitionsStubIndex.KEY, ((PerlClassAccessorDeclarationStub)stub).getSetterCanonicalName());
+        sink.occurrence(getStubIndexKey(), ((PerlClassAccessorDeclarationStub)stub).getSetterCanonicalName());
       }
 
-      sink.occurrence(PerlSubDefinitionsStubIndex.KEY, "*" + stub.getPackageName());
+      sink.occurrence(getStubIndexKey(), "*" + stub.getPackageName());
     }
     else {
       super.indexStub(stub, sink);

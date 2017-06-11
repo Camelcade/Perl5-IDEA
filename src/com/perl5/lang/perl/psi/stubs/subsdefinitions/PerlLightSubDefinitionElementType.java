@@ -16,8 +16,9 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.psi.stubs.IndexSink;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -37,10 +38,8 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionStubElem
   }
 
   @Override
-  public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
-    // we should index parent stub
-    sink.occurrence(PerlLightSubDefinitionIndex.KEY, stub.getCanonicalName());
-    sink.occurrence(PerlLightSubDefinitionIndex.KEY, "*" + stub.getPackageName());
+  protected StubIndexKey<String, ? extends PsiElement> getStubIndexKey() {
+    return PerlLightSubDefinitionIndex.KEY;
   }
 
   @NotNull
