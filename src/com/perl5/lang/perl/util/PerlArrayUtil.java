@@ -126,9 +126,9 @@ public class PerlArrayUtil implements PerlElementTypes {
    * @param result      resulting array to fill
    * @return passed or new List of found PsiElements
    */
-  public static List<PsiElement> getElementsAsPlainList(PsiElement rootElement, @Nullable List<PsiElement> result) {
+  public static List<PsiElement> getElementsAsPlainList(@Nullable PsiElement rootElement, @Nullable List<PsiElement> result) {
     if (result == null) {
-      result = new ArrayList<PsiElement>();
+      result = new ArrayList<>();
     }
 
     if (rootElement == null) {

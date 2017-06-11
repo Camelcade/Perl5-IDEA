@@ -20,7 +20,6 @@ import com.intellij.psi.stubs.StubBase;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,14 +36,5 @@ public class PerlLightStubUtil {
       );
     }
     throw new IllegalArgumentException("Don't know how to create psi from " + stub);
-  }
-
-  @NotNull
-  public static StubBase createStub(@NotNull PerlDelegatingLightNamedElement lightNamedElement) {
-    if (lightNamedElement instanceof PerlDelegatingSubElement) {
-      //noinspection unchecked
-      return (StubBase)PerlStubElementTypes.SUB_DEFINITION.createStub(lightNamedElement, null);
-    }
-    throw new IllegalArgumentException("Don't know how to create stub from " + lightNamedElement);
   }
 }

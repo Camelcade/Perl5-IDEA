@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -34,11 +35,24 @@ public class PerlDelegatingSubElement extends PerlDelegatingLightNamedElement<Pe
   private final PerlSubAnnotations myAnnotations;
 
   public PerlDelegatingSubElement(PerlPolyNamedElement delegate,
-                                  String name,
+                                  String subName,
                                   @Nullable String packageName,
                                   @NotNull List<PerlSubArgument> subArguments,
                                   @Nullable PerlSubAnnotations annotations) {
-    super(delegate, name);
+    super(delegate, subName);
+    myPackageName = packageName;
+    mySubArguments = subArguments;
+    myAnnotations = annotations;
+  }
+
+  public PerlDelegatingSubElement(@NotNull PerlPolyNamedElement delegate,
+                                  @NotNull String subName,
+                                  @Nullable String packageName,
+                                  @NotNull List<PerlSubArgument> subArguments,
+                                  @Nullable PerlSubAnnotations annotations,
+                                  @NotNull PsiElement nameIdentifier
+  ) {
+    super(delegate, subName, nameIdentifier);
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;

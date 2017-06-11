@@ -16,12 +16,15 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.utils.PerlLightStubUtil;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -37,7 +40,16 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   @NotNull
   @Override
   public PerlPolyNamedElementStub createStub(@NotNull PerlPolyNamedElement psi, StubElement parentStub) {
-    return new PerlPolyNamedElementStub(parentStub, this, ContainerUtil.map(psi.getLightElements(), PerlLightStubUtil::createStub));
+    List<StubBase> lightStubs = new ArrayList<>();
+
+    PerlPolyNamedElementStub result = new PerlPolyNamedElementStub(parentStub, this, lightStubs);
+
+    //noinspection unchecked
+    psi.getLightElements().forEach(lightPsi -> lightStubs.add(
+      (StubBase)Serializer.getForPsiElement(lightPsi).getElementType().createStub(lightPsi, null)
+    ));
+
+    return result;
   }
 
   @NotNull
@@ -67,7 +79,8 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
     for (int i = 0; i < stubsNumber; i++) {
       Serializer serializer = Serializer.getById(dataStream.readInt());
       //noinspection unchecked
-      serializer.getElementType().deserialize(dataStream, stub);
+      StubBase newLightStub = (StubBase)serializer.getElementType().deserialize(dataStream, null);
+      lightElementsStubs.add(newLightStub);
     }
     return stub;
   }
@@ -76,6 +89,13 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   public void indexStub(@NotNull PerlPolyNamedElementStub stub, @NotNull IndexSink sink) {
     //noinspection unchecked
     stub.getLightNamedElementsStubs().forEach(lightStub -> Serializer.getForStub(lightStub).getElementType().indexStub(lightStub, sink));
+  }
+
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    PsiElement psi = node.getPsi();
+    assert psi instanceof PerlPolyNamedElement;
+    return ((PerlPolyNamedElement)psi).getLightElements().size() > 0;
   }
 
   private enum Serializer {
@@ -101,7 +121,18 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
     }
 
     public static Serializer getForStub(@NotNull StubBase stubElement) {
+      if (stubElement instanceof PerlSubDefinitionStub) {
+        return SUB_DEFINITION;
+      }
       throw new IllegalArgumentException("Don't know which serializer to use for " + stubElement);
+    }
+
+    public static Serializer getForPsiElement(@NotNull PerlDelegatingLightNamedElement lightNamedElement) {
+      if (lightNamedElement instanceof PerlDelegatingSubElement) {
+        return SUB_DEFINITION;
+      }
+
+      throw new IllegalArgumentException("Don't know how to create stub from " + lightNamedElement);
     }
 
     public static Serializer getById(int id) {

@@ -17,12 +17,20 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.PerlDelegatingSubElement;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +47,27 @@ public class PerlConstantsWrapperMixin extends PerlPolyNamedElementBase {
   @NotNull
   @Override
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
-    return Collections.emptyList();
+    PsiElement firstChild = getFirstChild();
+    if (firstChild instanceof PsiPerlAnonHash) {
+      firstChild = ((PsiPerlAnonHash)firstChild).getExpr();
+    }
+
+    boolean isKey = true;
+    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
+      if (listElement instanceof PerlString) {
+        result.add(new PerlDelegatingSubElement(
+          this,
+          ElementManipulators.getValueText(listElement),
+          PerlPackageUtil.getContextPackageName(this),
+          Collections.emptyList(),
+          null,
+          listElement
+        ));
+      }
+      isKey = !isKey;
+    }
+
+    return result;
   }
 }
