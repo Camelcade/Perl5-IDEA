@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
@@ -34,10 +33,6 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
 
   public PerlPolyNamedElementBase(@NotNull ASTNode node) {
     super(node);
-  }
-
-  public PerlPolyNamedElementBase(PerlPolyNamedElementStub stub, IElementType nodeType, ASTNode node) {
-    super(stub, nodeType, node);
   }
 
   @NotNull
