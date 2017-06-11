@@ -76,7 +76,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
           listElement,
           PerlPackageUtil.getContextPackageName(this),
           Collections.emptyList(),
-          null
+          null // fixme NYI
         ));
       }
       isKey = !isKey;
