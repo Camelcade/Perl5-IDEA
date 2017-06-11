@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +62,7 @@ public interface PerlPackageProcessor {
    * We are not advancing lexer through PACKAGE and [VERSION], because it may be used in parsing logic. If you
    * don't need them, just invoke {@link com.perl5.lang.perl.parser.PerlParserUtil#passPackageAndVersion(PerlBuilder, int)}
    */
-  default boolean parseUseParameters(@NotNull PerlBuilder b, int l, @NotNull Parser defaultParser) {
-    return defaultParser.parse(b, l);
+  default boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
+    return false;
   }
 }

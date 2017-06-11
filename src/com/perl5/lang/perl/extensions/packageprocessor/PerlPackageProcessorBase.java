@@ -16,7 +16,12 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -84,5 +89,16 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     //		System.err.println("Imported from " + packageName + ": " + result);
 
     return result;
+  }
+
+  protected static boolean wrapExpression(@NotNull IElementType elementType, @NotNull PerlBuilder b, int l) {
+    PerlParserUtil.passPackageAndVersion(b, l);
+    PsiBuilder.Marker m = b.mark();
+    if (PerlParserImpl.expr(b, l, -1)) {
+      m.done(elementType);
+      return true;
+    }
+    m.rollbackTo();
+    return false;
   }
 }
