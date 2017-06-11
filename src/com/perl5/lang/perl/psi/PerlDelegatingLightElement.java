@@ -35,13 +35,15 @@ import javax.swing.*;
  * Created by hurricup on 26.11.2016.
  */
 public class PerlDelegatingLightElement<Delegate extends PsiElement> extends LightElement {
+  @NotNull
   private final Delegate myDelegate;
 
-  public PerlDelegatingLightElement(Delegate delegate) {
+  public PerlDelegatingLightElement(@NotNull Delegate delegate) {
     super(delegate.getManager(), delegate.getLanguage());
     myDelegate = delegate;
   }
 
+  @NotNull
   public Delegate getDelegate() {
     return myDelegate;
   }
@@ -301,11 +303,11 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
     PerlDelegatingLightElement<?> element = (PerlDelegatingLightElement<?>)o;
 
-    return getDelegate() != null ? getDelegate().equals(element.getDelegate()) : element.getDelegate() == null;
+    return getDelegate().equals(element.getDelegate());
   }
 
   @Override
   public int hashCode() {
-    return getDelegate() != null ? getDelegate().hashCode() : 0;
+    return getDelegate().hashCode();
   }
 }

@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.NavigatablePsiElement;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -30,30 +27,48 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightElement<Delegate>
   implements PsiNameIdentifierOwner {
+
+  @NotNull
   private final String myName;
 
-  public PerlDelegatingLightNamedElement(Delegate delegate, String name) {
+  @Nullable
+  private PsiElement myNameIdentifier;
+
+  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate, @NotNull String name) {
     super(delegate);
     myName = name;
   }
 
-  // must not use stubs, because stubs accessors using it
+  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate, @NotNull String name, @NotNull PsiElement nameIdentifier) {
+    this(delegate, name);
+    myNameIdentifier = nameIdentifier;
+  }
+
+  @NotNull
   @Override
   public final String getName() {
     return myName;
   }
 
-  @Nullable
+  @NotNull
   @Override
   public PsiElement getNameIdentifier() {
-    return null;
-    //return myName == null ? null : getDelegate().getNameIdentifierByName(myName);
+    if (myNameIdentifier != null) {
+      return myNameIdentifier;
+    }
+
+    for (PerlDelegatingLightNamedElement element : getDelegate().calcLightElements()) {
+      if (element.equals(this)) {
+        myNameIdentifier = element.getNameIdentifier();
+      }
+    }
+
+    throw new PsiInvalidElementAccessException(this, "Attempt to access element without identifier");
   }
 
   @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-    PsiElement nameIdentifier = getNameIdentifier();
-    return nameIdentifier == null ? null : ElementManipulators.handleContentChange(nameIdentifier, name);
+    return ElementManipulators.handleContentChange(getNameIdentifier(), name);
   }
 
   @Override
@@ -70,19 +85,17 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @NotNull
   @Override
   public PsiElement getNavigationElement() {
-    PsiElement nameIdentifier = getNameIdentifier();
-    return nameIdentifier == null ? super.getNavigationElement() : nameIdentifier;
+    return getNameIdentifier();
   }
 
   @Override
   public int getTextOffset() {
-    PsiElement identifier = getNameIdentifier();
-    return identifier == null ? super.getTextOffset() : identifier.getTextOffset();
+    return getNameIdentifier().getTextOffset();
   }
 
   @Override
   public boolean isValid() {
-    return getDelegate().isValid();
+    return getDelegate().isValid() && (myNameIdentifier == null || myNameIdentifier.isValid());
   }
 
   @Override
@@ -93,13 +106,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
     PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
 
-    return getName() != null ? getName().equals(element.getName()) : element.getName() == null;
+    return getName().equals(element.getName());
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+    result = 31 * result + getName().hashCode();
     return result;
   }
 }
