@@ -25,7 +25,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -40,7 +39,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionMixin>
+public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionElement>
   implements PsiElementProvider {
   public PerlNamespaceDefinitionElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
@@ -51,7 +50,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   }
 
   @Override
-  public PerlNamespaceDefinitionMixin createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlNamespaceDefinitionElement createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
     return new PsiPerlNamespaceDefinitionImpl(stub, this);
   }
 
@@ -62,7 +61,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   }
 
   @Override
-  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionMixin psi, StubElement parentStub) {
+  public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     return new PerlNamespaceDefinitionStub(
       parentStub,
       this,
@@ -72,7 +71,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
       psi.getEXPORT(),
       psi.getEXPORT_OK(),
       psi.getEXPORT_TAGS(),
-      psi.getLocalAnnotations()
+      psi.getAnnotations()
     );
   }
 
