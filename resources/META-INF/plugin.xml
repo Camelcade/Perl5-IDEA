@@ -101,7 +101,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
     <packageProcessor key="constantnew"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantNewProcessor"/>
-
+    <packageProcessor key="Exception::Class"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtensionImpl"/>
@@ -347,6 +348,7 @@
     <liveTemplateOptionalProcessor implementation="com.perl5.lang.perl.idea.livetemplates.PerlIndentionSuppresor"/>
 
     <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
+    <stubElementTypeHolder class="com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlExceptionClassWrapperElementType"/>
 
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
@@ -358,6 +360,8 @@
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlParentNamespaceDefinitionStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDirectIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex"/>
 
     <lang.findUsagesProvider language="Perl5"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
