@@ -68,7 +68,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
     boolean isKey = true;
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
-      if (listElement instanceof PerlString) {
+      if (isKey && listElement instanceof PerlString) {
         result.add(new PerlDelegatingSubDefinitionElement(
           this,
           ElementManipulators.getValueText(listElement),
