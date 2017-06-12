@@ -33,7 +33,9 @@ import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Map;
 
@@ -50,10 +52,9 @@ public class PerlPackageCompletionUtil {
    * @return lookup element
    */
   @NotNull
-  public static LookupElementBuilder getPackageLookupElement(Project project, String packageName) {
+  public static LookupElementBuilder getPackageLookupElement(@NotNull String packageName, @Nullable Icon icon) {
     LookupElementBuilder result = LookupElementBuilder
-      .create(packageName)
-      .withIcon(PerlIcons.PACKAGE_GUTTER_ICON);
+      .create(packageName);
 
     if (PerlPackageUtil.isBuiltIn(packageName)) {
       result = result.withBoldness(true);
@@ -61,6 +62,9 @@ public class PerlPackageCompletionUtil {
 
     if (PerlPackageUtil.isPragma(packageName)) {
       result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
+    }
+    else {
+      result = result.withIcon(icon == null ? PerlIcons.PACKAGE_GUTTER_ICON : icon);
     }
 
     // fixme this should be adjusted in #954
@@ -76,8 +80,10 @@ public class PerlPackageCompletionUtil {
    * @param packageName package name
    * @return lookup element
    */
-  public static LookupElementBuilder getPackageLookupElementWithAutocomplete(Project project, String packageName) {
-    return getPackageLookupElement(project, packageName)
+  public static LookupElementBuilder getPackageLookupElementWithAutocomplete(@NotNull Project project,
+                                                                             @NotNull String packageName,
+                                                                             @Nullable Icon icon) {
+    return getPackageLookupElement(packageName, icon)
       .withInsertHandler(COMPLETION_REOPENER)
       .withTailText("...");
   }
@@ -93,7 +99,7 @@ public class PerlPackageCompletionUtil {
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-            result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, name));
+            result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(name, namespace.getIcon(0)));
           }
         }
         return true;
@@ -113,7 +119,7 @@ public class PerlPackageCompletionUtil {
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-            addExpandablePackageElement(project, result, packageName, prefix);
+            addExpandablePackageElement(project, result, packageName, prefix, namespace.getIcon(0));
           }
         }
         return true;
@@ -121,16 +127,20 @@ public class PerlPackageCompletionUtil {
     }
   }
 
-  protected static void addExpandablePackageElement(Project project, CompletionResultSet result, String packageName, String prefix) {
+  protected static void addExpandablePackageElement(Project project,
+                                                    CompletionResultSet result,
+                                                    String packageName,
+                                                    String prefix,
+                                                    @Nullable Icon icon) {
     String name = packageName + PerlPackageUtil.PACKAGE_SEPARATOR;
     if (!StringUtil.equals(prefix, name)) {
-      LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+      LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name, icon);
       newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
       result.addElement(newElement);
     }
     name = packageName + PerlPackageUtil.PACKAGE_DEREFERENCE;
     if (!StringUtil.equals(prefix, name)) {
-      LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name);
+      LookupElementBuilder newElement = PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, name, icon);
       newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
       result.addElement(newElement);
     }
@@ -140,7 +150,7 @@ public class PerlPackageCompletionUtil {
   public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     final Project project = element.getProject();
     PerlPackageUtil.processPackageFilesForPsiElement(element, s -> {
-      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
+      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
       return true;
     });
   }

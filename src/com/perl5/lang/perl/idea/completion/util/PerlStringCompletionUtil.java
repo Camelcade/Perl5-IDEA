@@ -25,7 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
@@ -184,12 +183,9 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
         if (packageProcessor instanceof PerlPackageParentsProvider &&
             ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
-          PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, new Processor<String>() {
-            @Override
-            public boolean process(String s) {
-              resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(project, s));
-              return true;
-            }
+          PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
+            resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
+            return true;
           });
         }
 
