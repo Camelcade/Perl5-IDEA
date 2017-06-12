@@ -19,46 +19,30 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 
 /**
  * Created by hurricup on 14.06.2015.
  */
 public abstract class PerlInspection extends LocalInspectionTool {
-  //	long startTime;
 
   protected void registerProblem(ProblemsHolder holder, PsiElement element, String message) {
     if (!element.getNode().getTextRange().isEmpty()) {
-      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
+      holder
+        .registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING, ElementManipulators.getValueTextRange(element));
     }
   }
 
   protected void registerError(ProblemsHolder holder, PsiElement element, String message) {
     if (!element.getNode().getTextRange().isEmpty()) {
-      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR);
+      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR, ElementManipulators.getValueTextRange(element));
     }
   }
 
   protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message) {
     if (!element.getNode().getTextRange().isEmpty()) {
-      holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED);
+      holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED, ElementManipulators.getValueTextRange(element));
     }
   }
-
-/*
-        @Override
-	public void inspectionStarted(LocalInspectionToolSession session, boolean isOnTheFly)
-	{
-		startTime = System.currentTimeMillis() / 1000;
-		super.inspectionStarted(session, isOnTheFly);
-	}
-
-	@Override
-	public void inspectionFinished(LocalInspectionToolSession session, ProblemsHolder problemsHolder)
-	{
-		super.inspectionFinished(session, problemsHolder);
-		long duration = System.currentTimeMillis() / 1000 - startTime;
-		System.err.println("Finished inspection: " + getClass() + " in " + duration);
-	}
-*/
 }

@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,19 +38,15 @@ public class PerlDeprecatedInspection extends PerlInspection {
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
         PsiElement container = o.getParent();
 
-        if (container instanceof PerlSubElement && ((PerlSubElement)container).isDeprecated()) {
-          markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
-        }
-        else {
-          PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
-                                                                 {
-                                                                   if (targetPair.first instanceof PerlDeprecatable &&
-                                                                       ((PerlDeprecatable)targetPair.first).isDeprecated()) {
-                                                                     markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
-                                                                     return false;
-                                                                   }
-                                                                   return true;
-                                                                 }, o);
+        if (!(container instanceof PerlSubElement)) {
+          PerlResolveUtil.processElementReferencesResolveResults(targetPair -> {
+            if (targetPair.first instanceof PerlDeprecatable &&
+                ((PerlDeprecatable)targetPair.first).isDeprecated()) {
+              markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
+              return false;
+            }
+            return true;
+          }, o);
         }
       }
 
@@ -63,30 +60,29 @@ public class PerlDeprecatedInspection extends PerlInspection {
             }
           }
 
-          PerlResolveUtil.processElementReferencesResolveResults(targetPair ->
-                                                                 {
-                                                                   String message = null;
-                                                                   if (targetPair.first instanceof PerlNamespaceDefinitionElement &&
-                                                                       ((PerlNamespaceDefinitionElement)targetPair.first).isDeprecated()) {
-                                                                     message = PerlBundle.message("perl.deprecated.namespace");
-                                                                   }
-                                                                   else if (targetPair.first instanceof PerlVariableDeclarationElement &&
-                                                                            ((PerlVariableDeclarationElement)targetPair.first)
-                                                                              .isDeprecated()) {
-                                                                     message = PerlBundle.message("perl.deprecated.variable");
-                                                                   }
-                                                                   if (message != null) {
-                                                                     holder.registerProblem(targetPair.second, message,
-                                                                                            ProblemHighlightType.LIKE_DEPRECATED);
-                                                                   }
-                                                                   return true;
-                                                                 }, o);
+          PerlResolveUtil.processElementReferencesResolveResults(targetPair -> {
+            String message = null;
+            if (targetPair.first instanceof PerlNamespaceDefinitionElement &&
+                ((PerlNamespaceDefinitionElement)targetPair.first).isDeprecated()) {
+              message = PerlBundle.message("perl.deprecated.namespace");
+            }
+            else if (targetPair.first instanceof PerlVariableDeclarationElement &&
+                     ((PerlVariableDeclarationElement)targetPair.first)
+                       .isDeprecated()) {
+              message = PerlBundle.message("perl.deprecated.variable");
+            }
+            if (message != null) {
+              holder.registerProblem(targetPair.second, message,
+                                     ProblemHighlightType.LIKE_DEPRECATED);
+            }
+            return true;
+          }, o);
         }
       }
 
       @Override
       public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
-        if (o.isDeprecated()) {
+        if (!(o.getParent() instanceof PerlNamespaceDefinition) && o.isDeprecated()) {
           markDeprecated(holder, o, PerlBundle.message("perl.deprecated.namespace"));
         }
       }
@@ -98,6 +94,29 @@ public class PerlDeprecatedInspection extends PerlInspection {
           PsiElement nameIdentifier = o.getNameIdentifier();
           if (nameIdentifier != null) {
             markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.sub"));
+          }
+        }
+      }
+
+
+      @Override
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+        if (o.isDeprecated()) {
+          PsiElement nameIdentifier = o.getNameIdentifier();
+          if (nameIdentifier != null) {
+            markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.namespace"));
+          }
+        }
+      }
+
+      @Override
+      public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {
+        for (PerlDelegatingLightNamedElement element : o.getLightElements()) {
+          if (element instanceof PerlSubDefinitionElement) {
+            visitPerlSubDefinitionElement((PerlSubDefinitionElement)element);
+          }
+          else if (element instanceof PerlNamespaceDefinitionWithIdentifier) {
+            visitPerlNamespaceDefinitionWithIdentifier((PerlNamespaceDefinitionWithIdentifier)element);
           }
         }
       }

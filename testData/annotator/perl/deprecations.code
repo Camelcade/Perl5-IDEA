@@ -1,5 +1,5 @@
 #@deprecated
-package <warning descr="This namespace is deprecated">Foo::Bar::Bla</warning>;
+package Foo::Bar::Bla;
 
 #@deprecated
 our $<warning descr="This variable is deprecated">var</warning>;
@@ -31,3 +31,22 @@ use constant {
 
 say <warning descr="This sub is deprecated">DEPRECATED1</warning>();
 say <warning descr="This sub is deprecated">DEPRECATED2</warning>();
+
+#@deprecated
+use constant <warning descr="This sub is deprecated">TEST0</warning> => 12;
+
+use constant {
+    TEST_a1     => 42,
+    'TEST_a2'   => 69,
+    "TEST_a3"   => 88,
+    #@deprecated
+    q'<warning descr="This sub is deprecated">TEST_a4</warning>'  => 69,
+    qq"TEST_a5" => 88,
+};
+
+<warning descr="This sub is deprecated">TEST0</warning>;
+TEST_a1;
+TEST_a2;
+TEST_a3;
+<warning descr="This sub is deprecated">TEST_a4</warning>;
+TEST_a5;

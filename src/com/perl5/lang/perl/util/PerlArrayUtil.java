@@ -21,7 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -131,7 +133,7 @@ public class PerlArrayUtil implements PerlElementTypes {
       result = new ArrayList<>();
     }
 
-    if (rootElement == null) {
+    if (rootElement == null || PerlParserDefinition.COMMENTS.contains(PsiUtilCore.getElementType(rootElement))) {
       return result;
     }
 
