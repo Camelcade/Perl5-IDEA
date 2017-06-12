@@ -39,6 +39,7 @@ public interface PerlStubElementTypes {
   IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
   IStubElementType CONSTANT_WRAPPER = new PerlConstantsWrapperElementType("constant wrapper");
   IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
+  IStubElementType LIGHT_CONSTANT_DEFINITION = new PerlLightConstantDefinitionElementType("LIGHT_CONSTANT_DEFINITION");
   IStubElementType LIGHT_NAMESPACE_DEFINITION = new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
 
 
