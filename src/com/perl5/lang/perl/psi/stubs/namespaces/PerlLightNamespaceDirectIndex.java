@@ -18,10 +18,12 @@ package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +47,18 @@ public class PerlLightNamespaceDirectIndex extends PerlStubIndexBase<PerlPolyNam
                                           @NotNull GlobalSearchScope scope,
                                           @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
 
-    return PerlLightNamespaceReverseIndex.processNamespaces(KEY, project, canonicalName, scope, processor);
+    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+        if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
+            canonicalName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getPackageName())) {
+          if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
   }
 
 }
