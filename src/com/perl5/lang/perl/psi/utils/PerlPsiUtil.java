@@ -109,7 +109,7 @@ public class PerlPsiUtil implements PerlElementTypes {
     //noinspection ConstantConditions
     while (run != null) {
       if (run instanceof PerlString) {
-        result.add(((PerlString)run).getStringContent());
+        result.add(ElementManipulators.getValueText(run));
       }
       else if (run instanceof PerlStringList) {
         result.addAll(((PerlStringList)run).getStringContents());
@@ -593,7 +593,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return ((PerlNamespaceElement)element.getFirstChild()).getCanonicalName();
     }
     else if (element instanceof PerlString) {
-      return ((PerlString)element).getStringContent();
+      return ElementManipulators.getValueText(element);
     }
     else if (element instanceof PerlVariable) {
       return ((PerlVariable)element).guessVariableType();

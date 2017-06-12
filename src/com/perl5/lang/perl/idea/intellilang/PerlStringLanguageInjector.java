@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.InjectedLanguagePlaces;
 import com.intellij.psi.LanguageInjector;
 import com.intellij.psi.PsiLanguageInjectionHost;
@@ -41,7 +42,7 @@ public class PerlStringLanguageInjector extends AbstractPerlLanguageInjector imp
         if (languageMarker != null) {
           Language targetLanguage = LANGUAGE_MAP.get(languageMarker);
           if (targetLanguage != null) {
-            TextRange contentRange = ((PerlString)host).getContentTextRangeInParent();
+            TextRange contentRange = ElementManipulators.getValueTextRange(host);
             if (!contentRange.isEmpty()) {
               injectionPlacesRegistrar.addPlace(targetLanguage, contentRange, null, null);
             }

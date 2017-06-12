@@ -18,6 +18,7 @@ package com.perl5.lang.htmlmason.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceProvider;
@@ -42,11 +43,11 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
   public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
     if (element.getChildren().length == 0) {
       assert element instanceof PerlString;
-      String content = ((PerlString)element).getStringContent();
+      String content = ElementManipulators.getValueText(element);
 
       if (StringUtil.isNotEmpty(content)) {
         Matcher m;
-        TextRange range = ((PerlString)element).getContentTextRangeInParent();
+        TextRange range = ElementManipulators.getValueTextRange(element);
         List<PsiReference> result = new ArrayList<PsiReference>();
         if ((m = METHOD_CALL_PATTERN.matcher(content)).matches()) // method call
         {

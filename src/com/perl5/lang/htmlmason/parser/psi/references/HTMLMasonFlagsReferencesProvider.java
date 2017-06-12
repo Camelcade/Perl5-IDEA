@@ -16,6 +16,7 @@
 
 package com.perl5.lang.htmlmason.parser.psi.references;
 
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceProvider;
@@ -33,7 +34,7 @@ public class HTMLMasonFlagsReferencesProvider extends PsiReferenceProvider {
     if (element instanceof PerlString && element.getNextSibling() == null && element.getChildren().length == 0) {
       return new PsiReference[]{new HTMLMasonComponentReference(
         (PerlString)element,
-        ((PerlString)element).getContentTextRangeInParent()
+        ElementManipulators.getValueTextRange(element)
       )};
     }
 

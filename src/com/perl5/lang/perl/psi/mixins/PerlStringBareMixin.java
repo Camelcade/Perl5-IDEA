@@ -17,12 +17,8 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -33,36 +29,6 @@ import org.jetbrains.annotations.NotNull;
 public class PerlStringBareMixin extends PerlCompositeElementImpl implements PerlString {
   public PerlStringBareMixin(ASTNode node) {
     super(node);
-  }
-
-  @NotNull
-  @Override
-  public String getStringContent() {
-    return getText();
-  }
-
-  @Override
-  public void setStringContent(String newContent) {
-    PsiElement firstChild = getFirstChild();
-    if (firstChild instanceof LeafPsiElement) {
-      if (firstChild.equals(getLastChild())) {
-        ((LeafPsiElement)firstChild).replaceWithText(newContent);
-      }
-      else {
-        throw new IncorrectOperationException("Complex bare strings replacement is not yet implemented");
-      }
-    }
-  }
-
-  @NotNull
-  @Override
-  public TextRange getContentTextRangeInParent() {
-    return new TextRange(0, getTextLength());
-  }
-
-  @Override
-  public int getContentLength() {
-    return getContentTextRangeInParent().getLength();
   }
 
   @NotNull

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
@@ -91,8 +92,8 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
   protected String getSubNameHeavy() {
     PsiElement nameContainer = getNameIdentifier();
 
-    if (nameContainer instanceof PerlString) {
-      return ((PerlString)nameContainer).getStringContent();
+    if (nameContainer != null) {
+      return ElementManipulators.getValueText(nameContainer);
     }
 
     return null;
@@ -110,8 +111,8 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     }
 
     PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier instanceof PerlString) {
-      ((PerlString)nameIdentifier).setStringContent(name);
+    if (nameIdentifier != null) {
+      ElementManipulators.handleContentChange(nameIdentifier, name);
     }
 
     return this;

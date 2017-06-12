@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
@@ -57,8 +58,8 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
   @Nullable
   protected String getSubNameFromPsi() {
     PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier instanceof PerlString) {
-      return ((PerlString)nameIdentifier).getStringContent();
+    if (nameIdentifier != null) {
+      return ElementManipulators.getValueText(nameIdentifier);
     }
 
     return null;

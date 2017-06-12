@@ -17,8 +17,11 @@
 package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulator;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +41,9 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
 
   @Override
   public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-    PsiElement openQuoteElement = myHost.getOpeningQuote();
+    ElementManipulator<PerlStringMixin> manipulator = ElementManipulators.getNotNullManipulator(myHost);
+    assert manipulator instanceof PerlStringManipulator;
+    PsiElement openQuoteElement = ((PerlStringManipulator)manipulator).getOpeningQuote(myHost);
     char openQuote = openQuoteElement.getText().charAt(0);
     char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
     offsetsMap = new HashMap<Integer, Integer>();
@@ -102,6 +107,6 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
   @NotNull
   @Override
   public TextRange getRelevantTextRange() {
-    return myHost.getContentTextRangeInParent();
+    return ElementManipulators.getValueTextRange(myHost);
   }
 }

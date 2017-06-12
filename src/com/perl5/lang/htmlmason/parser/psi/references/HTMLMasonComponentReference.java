@@ -45,7 +45,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
   @Override
   public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
     ResolveResult[] results = multiResolve(false);
-    String currentContent = myElement.getStringContent();
+    String currentContent = ElementManipulators.getValueText(myElement);
 
     if (results.length == 1 && results[0].getElement() instanceof HTMLMasonFileImpl) {
       return handleFilePathChange((HTMLMasonFileImpl)results[0].getElement(), currentContent, newElementName);
@@ -108,7 +108,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     if (element instanceof HTMLMasonFileImpl) {
       handleFilePathChange(
         (HTMLMasonFileImpl)element,
-        myElement.getStringContent(),
+        ElementManipulators.getValueText(myElement),
         ((HTMLMasonFileImpl)element).getName()
       );
     }

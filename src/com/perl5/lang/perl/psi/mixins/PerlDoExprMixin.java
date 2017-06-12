@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlDoExpr;
@@ -53,7 +54,7 @@ public abstract class PerlDoExprMixin extends PerlStubBasedPsiElementBase<PerlRu
     PsiElement lastChild = getLastChild();
     if (lastChild instanceof PerlString)    // seems we've got require "...";
     {
-      return ((PerlString)lastChild).getStringContent();
+      return ElementManipulators.getValueText(lastChild);
     }
     return null;
   }

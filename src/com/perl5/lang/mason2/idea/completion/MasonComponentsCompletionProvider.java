@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ProcessingContext;
@@ -47,8 +48,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
       Project project = position.getProject();
       MasonSettings masonSettings = MasonSettings.getInstance(project);
 
-      String fullPrefix = ((PerlString)parent)
-        .getStringContent()
+      String fullPrefix = ElementManipulators.getValueText(parent)
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
         .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
       result = result.withPrefixMatcher(new PlainPrefixMatcher(fullPrefix));

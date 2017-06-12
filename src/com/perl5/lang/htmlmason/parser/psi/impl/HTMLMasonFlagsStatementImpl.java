@@ -18,6 +18,7 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -57,9 +58,9 @@ public class HTMLMasonFlagsStatementImpl extends PerlStubBasedPsiElementBase<HTM
       PsiElement lastChild = expr.getLastChild();
 
       if (firstChild instanceof PerlString &&
-          StringUtil.equals("inherit", ((PerlString)firstChild).getStringContent()) &&
+          StringUtil.equals("inherit", ElementManipulators.getValueText(firstChild)) &&
           lastChild instanceof PerlString) {
-        return ((PerlString)lastChild).getStringContent();
+        return ElementManipulators.getValueText(lastChild);
       }
     }
 

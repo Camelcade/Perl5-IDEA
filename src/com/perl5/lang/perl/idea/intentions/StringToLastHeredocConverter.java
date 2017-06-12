@@ -22,6 +22,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -51,7 +52,7 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
       quoteSymbol = '`';
     }
 
-    String contentText = ((PerlString)stringElement).getStringContent();
+    String contentText = ElementManipulators.getValueText(stringElement);
     List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
       project,
       quoteSymbol,

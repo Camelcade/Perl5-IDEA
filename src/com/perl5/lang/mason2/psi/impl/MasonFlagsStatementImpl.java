@@ -17,10 +17,11 @@
 package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.psi.MasonFlagsStatement;
-import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -62,10 +63,8 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
 
         PsiElement valElement = PerlPsiUtil.getNextSignificantSibling(currentElement);
 
-        if (keyElement instanceof PerlString &&
-            valElement instanceof PerlString &&
-            ((PerlString)keyElement).getStringContent().equals("extends")) {
-          return ((PerlString)valElement).getStringContent();
+        if (valElement != null && StringUtil.equals("extends", ElementManipulators.getValueText(keyElement))) {
+          return ElementManipulators.getValueText(valElement);
         }
 
         // comma between pairs

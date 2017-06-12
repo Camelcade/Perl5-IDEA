@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseExtendsStatement;
@@ -53,7 +54,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
     PsiElement expr = getExpr();
     if (expr != null) {
       if (expr instanceof PerlString) {
-        String content = ((PerlString)expr).getStringContent();
+        String content = ElementManipulators.getValueText(expr);
         if (!content.isEmpty()) {
           result.add(content);
         }
@@ -62,7 +63,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
         PsiElement element = expr.getFirstChild();
         while (element != null) {
           if (element instanceof PerlString) {
-            String content = ((PerlString)element).getStringContent();
+            String content = ElementManipulators.getValueText(element);
             if (!content.isEmpty()) {
               result.add(content);
             }

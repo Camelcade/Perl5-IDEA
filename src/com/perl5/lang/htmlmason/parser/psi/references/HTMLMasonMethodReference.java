@@ -18,10 +18,7 @@ package com.perl5.lang.htmlmason.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementResolveResult;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
@@ -40,13 +37,8 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference {
 
   @Override
   public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-    String currentContent = myElement.getStringContent();
-    TextRange contentRange = myElement.getContentTextRangeInParent();
-
-    if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches()) {
-      TextRange range = getRangeInElement();
-      String newContent = currentContent.substring(0, range.getStartOffset() - contentRange.getStartOffset()) + newElementName;
-      return setStringContent(newContent);
+    if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches()) { // fixme should be in other place
+      return ElementManipulators.handleContentChange(myElement, newElementName);
     }
     return myElement;
   }

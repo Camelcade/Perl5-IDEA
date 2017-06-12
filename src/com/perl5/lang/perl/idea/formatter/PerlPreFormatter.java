@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.formatter;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
@@ -169,10 +170,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
       return;
     }
     if (isStringQuotable(o)) {
-      replaceElement(o, PerlElementFactory.createString(myProject, "'" + o.getStringContent() + "'"));
+      replaceElement(o, PerlElementFactory.createString(myProject, "'" + ElementManipulators.getValueText(o) + "'"));
     }
     else if (isStringInHeredocQuotable(o)) {
-      replaceElement(o, PerlElementFactory.createString(myProject, "\"" + o.getStringContent() + "\""));
+      replaceElement(o, PerlElementFactory.createString(myProject, "\"" + ElementManipulators.getValueText(o) + "\""));
     }
     else {
       super.visitStringBare(o);
@@ -357,18 +358,18 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
   }
 
   protected void unquoteString(PerlString o) {
-    replaceElement(o, PerlElementFactory.createBareString(myProject, o.getStringContent()));
+    replaceElement(o, PerlElementFactory.createBareString(myProject, ElementManipulators.getValueText(o)));
   }
 
   protected static boolean isStringSimple(PerlString o) {
     return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
            // we need this because lexer unable to properly parse utf
-           ASCII_BARE_STRING_PATTERN.matcher(o.getStringContent()).matches();
+           ASCII_BARE_STRING_PATTERN.matcher(ElementManipulators.getValueText(o)).matches();
   }
 
   protected static boolean isStringSimpleIdentifier(PerlString o) {
     return o.getFirstChild().getNextSibling() == o.getLastChild().getPrevSibling() &&
-           ASCII_IDENTIFIER_PATTERN.matcher(o.getStringContent()).matches();
+           ASCII_IDENTIFIER_PATTERN.matcher(ElementManipulators.getValueText(o)).matches();
   }
 
   protected static boolean isCommaArrowAhead(PsiElement o) {
