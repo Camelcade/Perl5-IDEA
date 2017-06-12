@@ -493,12 +493,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     final List<PerlAnnotation> result = new ArrayList<PerlAnnotation>();
-    processElementAnnotations(element, new Processor<PerlAnnotation>() {
-      @Override
-      public boolean process(PerlAnnotation perlAnnotation) {
-        result.add(perlAnnotation);
-        return true;
-      }
+    processElementAnnotations(element, perlAnnotation -> {
+      result.add(perlAnnotation);
+      return true;
     });
     return result;
   }

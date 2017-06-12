@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +78,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
           listElement,
           PerlPackageUtil.getContextPackageName(this),
           Collections.emptyList(),
-          null // fixme NYI
+          PerlSubAnnotations.tryToFindAnnotations(listElement, getParent())
         ));
       }
       isKey = !isKey;

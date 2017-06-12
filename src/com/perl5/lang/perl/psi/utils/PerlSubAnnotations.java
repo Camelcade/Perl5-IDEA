@@ -131,6 +131,24 @@ public class PerlSubAnnotations {
     );
   }
 
+  /**
+   * Attempts to build sub annotations from one of the base elements. Fist wins
+   *
+   * @param baseElements elements to process, e.g. identifier or use constant
+   * @return Sub annotations
+   */
+  @Nullable
+  public static PerlSubAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
+    for (PsiElement element : baseElements) {
+      List<PerlAnnotation> annotations = PerlPsiUtil.collectAnnotations(element);
+      if (!annotations.isEmpty()) {
+        return createFromAnnotationsList(annotations);
+      }
+    }
+
+    return null;
+  }
+
   @Nullable
   public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
