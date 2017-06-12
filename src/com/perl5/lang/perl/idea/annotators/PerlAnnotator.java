@@ -23,6 +23,7 @@ package com.perl5.lang.perl.idea.annotators;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
@@ -76,7 +77,10 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
         TextAttributesKey currentKey =
           lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
-        decorateElement(lightNamedElement.getNavigationElement(), holder, currentKey, false);
+        PsiElement navigationElement = lightNamedElement.getNavigationElement();
+        holder.createInfoAnnotation(ElementManipulators.getValueTextRange(navigationElement).shiftRight(lightNamedElement.getTextOffset()),
+                                    null)
+          .setEnforcedTextAttributes(adjustTextAttributes(currentScheme.getAttributes(currentKey), false));
       }
     }
     else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement

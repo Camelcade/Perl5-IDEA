@@ -9,6 +9,20 @@ use <info descr="null">constant</info> {
     "<info descr="null">MULTI_CONST3</info>" => 0,
 };
 
+use <info descr="null">constant</info> {
+    <info descr="null">TEST_a1</info>     => 42,
+    '<info descr="null">TEST_a2</info>'   => 69,
+    "<info descr="null">TEST_a3</info>"   => 88,
+    q'<info descr="null">TEST_a4</info>'  => 69,
+    qq"<info descr="null">TEST_a5</info>" => 88,
+};
+
+<info descr="Constant">TEST_a1</info>;
+<info descr="Constant">TEST_a2</info>;
+<info descr="Constant">TEST_a3</info>;
+<info descr="Constant">TEST_a4</info>;
+<info descr="Constant">TEST_a5</info>;
+
 package <info descr="null">main</info>;
 
 Foo::Bla::<info descr="Constant">ALONECONST1</info>;
