@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.Pair;
@@ -23,6 +24,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,18 +32,11 @@ import java.util.Collection;
 
 /**
  * Created by hurricup on 07.04.2016.
+ * fixme shouldn't we extend PerlVariableInplaceRenamer?
  */
 public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
   public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename, PsiElement substituted, Editor editor) {
     super(elementToRename, substituted, editor);
-  }
-
-  public PerlMemberInplaceRenamer(@NotNull PsiNamedElement elementToRename,
-                                  PsiElement substituted,
-                                  Editor editor,
-                                  String initialName,
-                                  String oldName) {
-    super(elementToRename, substituted, editor, initialName, oldName);
   }
 
   @Override
@@ -91,5 +86,35 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
   @Override
   protected TextRange getRangeToRename(@NotNull PsiElement element) {
     return ElementManipulators.getValueTextRange(element);
+  }
+
+  @Nullable
+  @Override
+  protected PsiNamedElement getVariable() {
+    PsiNamedElement variable = super.getVariable();
+    if (variable != null) {
+      return variable;
+    }
+
+    if (!(myElementToRename instanceof PerlDelegatingLightNamedElement)) {
+      return null;
+    }
+
+    PsiFile psiFile = PsiDocumentManager.getInstance(myProject).getPsiFile(myEditor.getDocument());
+    if (psiFile == null) {
+      return null;
+    }
+
+    PsiElement psiLeaf = psiFile.getViewProvider().findElementAt(myRenameOffset.getStartOffset(), myElementToRename.getLanguage());
+    if (psiLeaf == null) {
+      return null;
+    }
+
+    PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(psiLeaf, 0);
+    if (namedElement instanceof PerlDelegatingLightNamedElement) {
+      return (PsiNamedElement)namedElement;
+    }
+
+    return null;
   }
 }

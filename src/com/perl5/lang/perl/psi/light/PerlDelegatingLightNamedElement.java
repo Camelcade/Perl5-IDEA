@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.light;
 
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
@@ -99,6 +100,11 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
   @Override
   public int getTextOffset() {
     return getNameIdentifier().getTextOffset();
+  }
+
+  @Override
+  public TextRange getTextRange() {
+    return getNameIdentifier().getTextRange();
   }
 
   @Override
