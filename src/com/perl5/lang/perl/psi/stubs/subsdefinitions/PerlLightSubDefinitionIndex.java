@@ -49,7 +49,10 @@ public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamed
     StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            canonicalName.equals(((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
+            // hack for #1459
+            canonicalName.equals(canonicalName.startsWith("*") ?
+                                 "*" + ((PerlSubDefinitionElement)lightNamedElement).getPackageName() :
+                                 ((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
           if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {
             return false;
           }
