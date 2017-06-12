@@ -465,20 +465,6 @@ public class PerlElementTypeFactory {
       };
     }
 
-    if (name.equals("CONSTANTS_BLOCK")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlConstantsBlockImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("CONSTANT_DEFINITION")) {
-      return PerlStubElementTypes.CONSTANT_DEFINITION;
-    }
-
     if (name.equals("CONTINUE_BLOCK")) {
       return new PerlElementTypeEx(name) {
         @NotNull

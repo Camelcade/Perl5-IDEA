@@ -75,10 +75,6 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
     return PerlPackageUtil.getCanonicalPackageName(getName());
   }
 
-  @Override
-  public boolean isBuiltin() {
-    return PerlPackageUtil.isBuiltIn(getCanonicalName());
-  }
 
   @Override
   public boolean isPragma() {

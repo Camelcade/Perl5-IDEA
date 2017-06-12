@@ -62,9 +62,9 @@ public class PerlIdentifierInspection extends PerlInspection {
       }
 
       @Override
-      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
         checkPerlNamedElementIdentifier(o);
-        super.visitNamespaceDefinition(o);
+        super.visitPerlNamespaceDefinitionWithIdentifier(o);
       }
 
       @Override

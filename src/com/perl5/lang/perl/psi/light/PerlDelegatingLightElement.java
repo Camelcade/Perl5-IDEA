@@ -101,11 +101,6 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
   }
 
   @Override
-  public void acceptChildren(@NotNull PsiElementVisitor visitor) {
-    getDelegate().acceptChildren(visitor);
-  }
-
-  @Override
   public PsiReference getReference() {
     return getDelegate().getReference();
   }
@@ -213,7 +208,7 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
   @NotNull
   @Override
   public PsiElement[] getChildren() {
-    return getDelegate().getChildren();
+    return EMPTY_ARRAY;
   }
 
   @Override
@@ -305,11 +300,6 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
   @Override
   public String getText() {
     return getDelegate().getText();
-  }
-
-  @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    getDelegate().accept(visitor);
   }
 
   @Override

@@ -366,7 +366,6 @@ limitations under the License.
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
-    extends("number_constant")=expr
 
     extends("string_list")=expr
     mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListMixin"
@@ -393,10 +392,6 @@ limitations under the License.
     mixin("no_statement")="com.perl5.lang.perl.psi.mixins.PerlNoStatementMixin"
     implements("no_statement")="com.perl5.lang.perl.psi.PerlNoStatement"
     stubClass("no_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"
-
-    implements("constant_definition")="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
-    mixin("constant_definition")="com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin"
-    stubClass("constant_definition")="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub"
 
 	mixin("call_arguments")="com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin"
 	extends("parenthesised_call_arguments")=call_arguments
@@ -461,7 +456,7 @@ limitations under the License.
 
     stubClass("sub_declaration")="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub"
     mixin("sub_declaration")="com.perl5.lang.perl.psi.mixins.PerlSubDeclarationBase"
-    implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubElement"
+    implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclarationElement"
     extends("sub_declaration")=statement
 
     stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
@@ -677,24 +672,6 @@ no_statement ::=  'no' use_no_parameters <<statementSemi>> {pin=1}
 private use_no_parameters ::= use_module_parameters | use_version_parameters {recoverWhile=recover_statement}
 private use_module_parameters ::= any_package [perl_version [comma]] [expr];
 private use_version_parameters ::= perl_version;
-
-/************************************* use constant body **************************************************************/
-// used in com.perl5.lang.perl.parser.PerlParserUtil.parseUseConstantVariants
-private use_constant_variants ::=
-  constants_block
-  | single_constant_definition
-  | expr
-
-constants_block ::= '{' [constants_block_content] '}' {pin=1}
-private constants_block_content ::= constant_block_content_element (comma constant_block_content_element) * [comma+] {recoverWhile=recover_constants_block}
-private recover_constants_block ::= !('}')
-private constant_block_content_element ::= constant_definition | scalar_expr {recoverWhile=recover_single_constant_definition}
-private recover_single_constant_definition ::= !('}'|comma|';')
-
-private single_constant_definition ::= constant_definition {recoverWhile=recover_statement}
-
-constant_definition ::= string comma scalar_expr
-/********************************** end of use constant body **********************************************************/
 
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
 private undef_params ::= deref_expr | variable

@@ -20,7 +20,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -31,7 +31,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Map;
 
-public class PerlLightExceptionClassDefinition extends PerlDelegatingNamespaceDefinitionElement {
+public class PerlLightExceptionClassDefinition extends PerlLightNamespaceDefinitionElement {
   public PerlLightExceptionClassDefinition(@NotNull PerlNamespaceDefinitionStub stub) {
     super(stub);
   }

@@ -16,12 +16,15 @@
 
 package com.perl5.lang.perl.psi.light;
 
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,5 +131,26 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
     int result = super.hashCode();
     result = 31 * result + getName().hashCode();
     return result;
+  }
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitLightNamedElement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
+
+  @NotNull
+  @Override
+  public PsiElement[] getChildren() {
+    return super.getChildren();
+  }
+
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getName());
   }
 }

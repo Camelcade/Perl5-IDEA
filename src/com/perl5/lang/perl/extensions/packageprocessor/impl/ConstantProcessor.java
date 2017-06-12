@@ -17,15 +17,13 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import org.jetbrains.annotations.NotNull;
 
 public class ConstantProcessor extends PerlPragmaProcessorBase {
   @Override
   public boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
-    PerlParserUtil.passPackageAndVersion(b, l);
-    PerlParserUtil.parseUseConstantVariants(b, l);
-    return true;
+    return wrapExpression(PerlConstantsWrapperElementType.CONSTANT_WRAPPER, b, l);
   }
 }

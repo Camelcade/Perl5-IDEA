@@ -22,9 +22,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -59,7 +59,7 @@ public class PerlSubUnusedInpsection extends PerlInspection {
       }
 
       @Override
-      public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
+      public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
         PsiElement subNameElement = o.getNameIdentifier();
         if (subNameElement != null &&
             !EXCLUSIONS.contains(o.getName()) &&

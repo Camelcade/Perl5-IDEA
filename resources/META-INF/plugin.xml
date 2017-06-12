@@ -99,8 +99,6 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor"/>
     <packageProcessor key="constant"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
-    <packageProcessor key="constantnew"
-                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantNewProcessor"/>
     <packageProcessor key="Exception::Class"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor"/>
 

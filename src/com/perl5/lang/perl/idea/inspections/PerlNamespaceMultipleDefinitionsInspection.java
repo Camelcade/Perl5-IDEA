@@ -20,8 +20,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,8 +33,9 @@ public class PerlNamespaceMultipleDefinitionsInspection extends PerlInspection {
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
+
       @Override
-      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
         Project project = o.getProject();
         String packageName = o.getPackageName();
         if (packageName != null &&

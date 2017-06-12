@@ -17,10 +17,12 @@
 package com.perl5.lang.perl.psi.light;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -30,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
+public class PerlLightSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
   implements PerlSubDefinitionElement {
   @Nullable
   private final String myPackageName;
@@ -41,20 +43,20 @@ public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamed
   @Nullable
   private final PerlSubAnnotations myAnnotations;
 
-  public PerlDelegatingSubDefinitionElement(@NotNull PerlPolyNamedElement delegate,
-                                            @NotNull String subName,
-                                            @NotNull IStubElementType elementType,
-                                            @NotNull PsiElement nameIdentifier,
-                                            @Nullable String packageName,
-                                            @NotNull List<PerlSubArgument> subArguments,
-                                            @Nullable PerlSubAnnotations annotations) {
+  public PerlLightSubDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+                                       @NotNull String subName,
+                                       @NotNull IStubElementType elementType,
+                                       @NotNull PsiElement nameIdentifier,
+                                       @Nullable String packageName,
+                                       @NotNull List<PerlSubArgument> subArguments,
+                                       @Nullable PerlSubAnnotations annotations) {
     super(delegate, subName, elementType, nameIdentifier);
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;
   }
 
-  public PerlDelegatingSubDefinitionElement(@NotNull PerlSubDefinitionStub stub) {
+  public PerlLightSubDefinitionElement(@NotNull PerlSubDefinitionStub stub) {
     super(stub, stub.getSubName());
     myPackageName = stub.getPackageName();
     mySubArguments = stub.getSubArgumentsList();
@@ -93,10 +95,10 @@ public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamed
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PerlDelegatingSubDefinitionElement)) return false;
+    if (!(o instanceof PerlLightSubDefinitionElement)) return false;
     if (!super.equals(o)) return false;
 
-    PerlDelegatingSubDefinitionElement element = (PerlDelegatingSubDefinitionElement)o;
+    PerlLightSubDefinitionElement element = (PerlLightSubDefinitionElement)o;
 
     if (getPackageName() != null ? !getPackageName().equals(element.getPackageName()) : element.getPackageName() != null) return false;
     if (!mySubArguments.equals(element.mySubArguments)) return false;
@@ -120,6 +122,16 @@ public class PerlDelegatingSubDefinitionElement extends PerlDelegatingLightNamed
     }
     else {
       return PerlIcons.SUB_GUTTER_ICON;
+    }
+  }
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitPerlSubDefinitionElement(this);
+    }
+    else {
+      super.accept(visitor);
     }
   }
 }

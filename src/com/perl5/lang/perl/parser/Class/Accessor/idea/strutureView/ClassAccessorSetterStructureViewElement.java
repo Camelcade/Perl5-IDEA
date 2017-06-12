@@ -21,6 +21,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.01.2016.
@@ -30,6 +31,7 @@ public class ClassAccessorSetterStructureViewElement extends PerlSubStructureVie
     super(element);
   }
 
+  @NotNull
   @Override
   protected ItemPresentation createPresentation() {
     return new PerlItemPresentationSimple(myElement, ((PerlClassAccessorDeclaration)myElement).getSetterName());

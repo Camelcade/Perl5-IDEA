@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingSubDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-public class PerlLightConstantDefinitionElement extends PerlDelegatingSubDefinitionElement {
+public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement {
   public PerlLightConstantDefinitionElement(@NotNull PerlPolyNamedElement delegate,
                                             @NotNull String subName,
                                             @NotNull IStubElementType elementType,
@@ -49,5 +49,15 @@ public class PerlLightConstantDefinitionElement extends PerlDelegatingSubDefinit
   @Override
   public Icon getIcon(int flags) {
     return PerlIcons.CONSTANT_GUTTER_ICON;
+  }
+
+  @Override
+  public boolean isMethod() {
+    return true;
+  }
+
+  @Override
+  public boolean isStatic() {
+    return true;
   }
 }

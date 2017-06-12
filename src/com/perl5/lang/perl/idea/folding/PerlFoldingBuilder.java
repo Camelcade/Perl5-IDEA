@@ -29,6 +29,7 @@ import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType.CONSTANT_WRAPPER;
 
 /**
  * Created by hurricup on 20.05.2015.
@@ -79,7 +81,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
    * @return list of FoldingDescriptros
    */
   private List<FoldingDescriptor> getCommentsDescriptors(@NotNull List<PsiComment> comments, @NotNull Document document) {
-    List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+    List<FoldingDescriptor> descriptors = new ArrayList<>();
 
     TokenSet commentExcludedTokens = getCommentExcludedTokens();
 
@@ -193,7 +195,8 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
    * @return list of FoldingDescriptros
    */
   private List<FoldingDescriptor> getImportDescriptors(@NotNull List<PerlNamespaceElementContainer> imports) {
-    List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+    List<FoldingDescriptor> descriptors;
+    descriptors = new ArrayList<>();
 
     int currentOffset = 0;
 
@@ -246,7 +249,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     if (elementType == BLOCK) {
       return PH_CODE_BLOCK;
     }
-    if (elementType == CONSTANTS_BLOCK) {
+    if (elementType == CONSTANT_WRAPPER) {
       return "{constants definitions}";
     }
     if (elementType == STRING_LIST) {
@@ -302,7 +305,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK) {
       return PerlFoldingSettings.getInstance().COLLAPSE_COMMENTS;
     }
-    else if (elementType == CONSTANTS_BLOCK) {
+    else if (elementType == CONSTANT_WRAPPER) {
       return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
     }
     else if (elementType == ANON_ARRAY) {
@@ -345,9 +348,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
   public static class FoldingRegionsCollector extends PerlRecursiveVisitor {
     protected final Document myDocument;
-    protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
-    protected ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<PerlNamespaceElementContainer>();
-    protected ArrayList<PsiComment> myComments = new ArrayList<PsiComment>();
+    protected List<FoldingDescriptor> myDescriptors = new ArrayList<>();
+    protected ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<>();
+    protected ArrayList<PsiComment> myComments = new ArrayList<>();
 
     public FoldingRegionsCollector(Document document) {
       myDocument = document;
@@ -359,12 +362,6 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
         addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
       }
       super.visitElement(element);
-    }
-
-    @Override
-    public void visitConstantsBlock(@NotNull PsiPerlConstantsBlock o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
-      super.visitConstantsBlock(o);
     }
 
     @Override
@@ -399,7 +396,12 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
     @Override
     public void visitAnonHash(@NotNull PsiPerlAnonHash o) {
-      addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+      if (o.getParent() instanceof PerlConstantsWrapper) {
+        addDescriptorFor(myDescriptors, myDocument, o.getParent(), 0, 0, 2);
+      }
+      else {
+        addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2);
+      }
       super.visitAnonHash(o);
     }
 

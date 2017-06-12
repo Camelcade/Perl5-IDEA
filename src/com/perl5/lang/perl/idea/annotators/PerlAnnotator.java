@@ -31,7 +31,6 @@ import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
@@ -78,13 +77,6 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         TextAttributesKey currentKey =
           lightNamedElement instanceof PerlSubDefinition ? subAttribute : PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION;
         decorateElement(lightNamedElement.getNavigationElement(), holder, currentKey, false);
-      }
-    }
-    else if (elementType == CONSTANT_DEFINITION) {
-      assert element instanceof PerlConstantDefinitionMixin;
-      PsiElement nameIdentifier = ((PerlConstantDefinitionMixin)element).getNameIdentifier();
-      if (nameIdentifier != null) {
-        decorateElement(nameIdentifier, holder, PerlSyntaxHighlighter.PERL_CONSTANT, false);
       }
     }
     else if (elementType == SUB_NAME) //  instanceof PerlSubNameElement

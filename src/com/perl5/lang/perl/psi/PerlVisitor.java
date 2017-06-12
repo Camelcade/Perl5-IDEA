@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.parser.Exception.Class.psi.impl.PerlExceptionClassWrapper;
+import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -28,6 +31,20 @@ import org.jetbrains.annotations.NotNull;
 public class PerlVisitor extends PsiPerlVisitor {
   public void visitNamespaceElement(@NotNull PerlNamespaceElement o) {
     visitPsiElement(o);
+  }
+
+  public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
+    visitElement(o);
+  }
+
+  @Override
+  public final void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
+    visitNamespaceDefinitionElement(o);
+  }
+
+  @Override
+  public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+    visitNamespaceDefinitionElement(o);
   }
 
   public void visitVariableNameElement(@NotNull PerlVariableNameElement o) {
@@ -58,11 +75,6 @@ public class PerlVisitor extends PsiPerlVisitor {
   public void visitPerlCastExpression(@NotNull PerlCastExpression o) {
     visitExpr(o);
   }
-
-  public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
-    visitElement(o);
-  }
-
 
   public void visitArrayIndexVariable(@NotNull PsiPerlArrayIndexVariable o) {
     visitPerlVariable(o);
@@ -110,8 +122,33 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitPerlSubDefinitionElement(o);
   }
 
+  public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {
+    visitElement(o);
+  }
+
+  public void visitConstantWrapper(@NotNull PerlConstantsWrapper o) {
+    visitPolyNamedElement(o);
+  }
+
+  public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement o) {
+    visitElement(o);
+  }
+
+  public void visitExceptionClassWrapper(@NotNull PerlExceptionClassWrapper o) {
+    visitPolyNamedElement(o);
+  }
+
   @Override
-  public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o) {
-    super.visitConstantDefinition(o);
+  public final void visitSubDefinition(@NotNull PsiPerlSubDefinition o) {
+    visitPerlSubDefinitionElement(o);
+  }
+
+  public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
+    visitElement(o);
+  }
+
+  @Override
+  public final void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
+    visitSubDeclarationElement(o);
   }
 }

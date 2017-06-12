@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingSubDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
 
   @Override
   public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlDelegatingSubDefinitionElement(stub);
+    return new PerlLightSubDefinitionElement(stub);
   }
 
   @Override

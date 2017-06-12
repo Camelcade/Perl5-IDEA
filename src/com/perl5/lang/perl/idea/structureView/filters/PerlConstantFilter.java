@@ -21,7 +21,7 @@ import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlConstantStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,7 +33,7 @@ public class PerlConstantFilter implements Filter {
 
   @Override
   public boolean isVisible(TreeElement treeElement) {
-    return !(treeElement instanceof PerlConstantStructureViewElement);
+    return treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement)treeElement).isConstant();
   }
 
   @Override

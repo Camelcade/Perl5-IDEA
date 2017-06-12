@@ -128,7 +128,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
     Alignment alignment = null; //Alignment.createAlignment();
 
-    if (elementType == COMMA_SEQUENCE_EXPR || elementType == CONSTANTS_BLOCK || elementType == TRENAR_EXPR) {
+    if (elementType == COMMA_SEQUENCE_EXPR || elementType == TRENAR_EXPR) {
       alignment = Alignment.createAlignment(true);
     }
 
@@ -154,10 +154,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     IElementType childElementType = child.getElementType();
     if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == FAT_COMMA)) {
       return createBlock(child, wrap, alignment);
-    }
-    else if (childElementType == CONSTANT_DEFINITION)    // fixme we should use delegate here, constant wraps regular block
-    {
-      return new PerlConstantDefinitionFormattingBlock(child, wrap, alignment, myContext);
     }
     else {
       return createBlock(child, wrap, null);

@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,15 +34,21 @@ public class PerlNamespaceClashesInspection extends PerlInspection {
     return new PerlVisitor() {
 
       @Override
-      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
-        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-        if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName())) {
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+        PsiElement nameIdentifier = o.getNameIdentifier();
+        if (nameIdentifier == null) {
+          return;
+        }
+
+
+        String packageName = o.getPackageName();
+        if (PerlPackageUtil.MAIN_PACKAGE.equals(packageName)) {
           return;
         }
 
         // fixme we should check that this is not in SDK
-        if (namespaceElement.isBuiltin()) {
-          registerProblem(holder, namespaceElement, "Namespace definition clashes with built-in namespace");
+        if (PerlPackageUtil.isBuiltIn(packageName)) {
+          registerProblem(holder, nameIdentifier, "Namespace definition clashes with built-in namespace");
         }
       }
     };

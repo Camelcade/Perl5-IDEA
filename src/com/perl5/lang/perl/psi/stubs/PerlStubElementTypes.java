@@ -25,7 +25,10 @@ import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRequireExprElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.*;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlFuncDefinitionElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubElementType;
 
 /**
@@ -36,7 +39,6 @@ public interface PerlStubElementTypes {
   IStubElementType SUB_DEFINITION = new PerlSubDefinitionElementType("SUB_DEFINITION");
   IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
   IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");
-  IStubElementType CONSTANT_DEFINITION = new PerlConstantDefinitionElementType("CONSTANT_DEFINITION");
   IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
   IStubElementType LIGHT_NAMESPACE_DEFINITION = new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
 

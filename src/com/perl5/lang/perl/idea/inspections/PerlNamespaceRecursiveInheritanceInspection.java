@@ -18,12 +18,12 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,16 +38,23 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
+
       @Override
-      public void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
-        PerlNamespaceElement namespaceElement = o.getNamespaceElement();
-        if (namespaceElement == null || PerlPackageUtil.MAIN_PACKAGE.equals(namespaceElement.getCanonicalName())) {
+      public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+        PsiElement nameIdentifier = o.getNameIdentifier();
+        if (nameIdentifier == null) {
+          return;
+        }
+
+        String packageName = o.getPackageName();
+
+        if (PerlPackageUtil.MAIN_PACKAGE.equals(packageName)) {
           return;
         }
 
         if (hasRecursiveInheritance(o)) {
-          registerError(holder, namespaceElement.getContainingFile(), "Namespace " + o.getPackageName() + " has recursive inheritance");
-          registerError(holder, namespaceElement, "Namespace " + o.getPackageName() + " has recursive inheritance");
+          registerError(holder, o.getContainingFile(), "Namespace " + packageName + " has recursive inheritance");
+          registerError(holder, nameIdentifier, "Namespace " + packageName + " has recursive inheritance");
         }
       }
     };

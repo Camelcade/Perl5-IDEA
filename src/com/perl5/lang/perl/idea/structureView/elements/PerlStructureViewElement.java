@@ -33,8 +33,8 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.*;
@@ -126,13 +126,14 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
     return itemPresentation;
   }
 
+  @NotNull
   protected ItemPresentation createPresentation() {
+    ItemPresentation result = null;
     if (myElement instanceof NavigationItem) {
-      return ((NavigationItem)myElement).getPresentation();
+      result = ((NavigationItem)myElement).getPresentation();
     }
-    else {
-      return new PerlItemPresentationSimple(myElement, "FIXME");
-    }
+
+    return result == null ? new PerlItemPresentationSimple(myElement, "FIXME") : result;
   }
 
 
@@ -149,13 +150,15 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         result.add(new PodStructureViewElement(podFile));
       }
 
-      // namespaces
-      for (PerlNamespaceDefinitionElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlNamespaceDefinitionElement.class)) {
-        result.add(new PerlStructureViewElement(child));
-      }
+      myElement.accept(new PerlRecursiveVisitor() {
+        @Override
+        public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
+          result.add(new PerlStructureViewElement(o));
+          super.visitNamespaceDefinitionElement(o);
+        }
+      });
     }
-
-    if (myElement instanceof PerlNamespaceDefinitionElement) {
+    else if (myElement instanceof PerlNamespaceDefinitionElement) {
       // global variables
       for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationElement.class)) {
         if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
@@ -250,12 +253,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlSubDefinitionElement item : subDefinitions) {
-          if (item instanceof PerlConstantDefinitionMixin) {
-            result.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)item).setImported());
-          }
-          else {
-            result.add(new PerlSubStructureViewElement(item).setImported());
-          }
+          result.add(new PerlSubStructureViewElement(item).setImported());
         }
 
         // globs
@@ -269,39 +267,40 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
       }
 
-      // containing globs
-      for (PerlGlobVariable child : PsiTreeUtil.findChildrenOfType(myElement, PerlGlobVariable.class)) {
-        if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
-          implementedMethods.add(child.getName());
-          result.add(new PerlGlobStructureViewElement(child));
-        }
-      }
-
-      // containing subs declarations
-      for (PerlSubDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDeclarationElement.class)) {
-        if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
-          result.add(new PerlSubStructureViewElement(child));
-        }
-      }
-
-      // containing subs definitions, currently only supports PerlHierarchyViewElementsProvider
-      for (PerlSubDefinitionElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlSubDefinitionElement.class)) {
-        if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
-          if (child instanceof PerlHierarchyViewElementsProvider) {
-            ((PerlHierarchyViewElementsProvider)child).fillHierarchyViewElements(result, implementedMethods, false, false);
-          }
-          else {
-            implementedMethods.add(child.getName());
-
-            if (child instanceof PerlConstantDefinitionMixin) {
-              result.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)child));
+      myElement.accept(new PerlRecursiveVisitor() {
+        @Override
+        public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement child) {
+          if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+            if (child instanceof PerlHierarchyViewElementsProvider) {
+              ((PerlHierarchyViewElementsProvider)child).fillHierarchyViewElements(result, implementedMethods, false, false);
             }
             else {
+              implementedMethods.add(child.getName());
+
               result.add(new PerlSubStructureViewElement(child));
             }
           }
+          super.visitPerlSubDefinitionElement(child);
         }
-      }
+
+        @Override
+        public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement child) {
+          if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+            result.add(new PerlSubStructureViewElement(child));
+          }
+          super.visitSubDeclarationElement(child);
+        }
+
+        @Override
+        public void visitGlobVariable(@NotNull PsiPerlGlobVariable child) {
+          if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+            implementedMethods.add(child.getName());
+            result.add(new PerlGlobStructureViewElement(child));
+          }
+          super.visitGlobVariable(child);
+        }
+      });
+
     }
 
     // inherited elements
@@ -316,8 +315,8 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
             ((PerlHierarchyViewElementsProvider)element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
           }
           else if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
-            if (element instanceof PerlConstantDefinitionMixin && ((PerlConstantDefinitionMixin)element).getName() != null) {
-              inheritedResult.add(new PerlConstantStructureViewElement((PerlConstantDefinitionMixin)element).setInherited());
+            if (element instanceof PerlLightConstantDefinitionElement) {
+              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
             }
             else if (element instanceof PerlSubDefinitionElement) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());

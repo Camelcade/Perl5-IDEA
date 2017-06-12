@@ -17,9 +17,13 @@
 package com.perl5.lang.perl.psi.light;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -29,9 +33,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class PerlDelegatingNamespaceDefinitionElement
+public class PerlLightNamespaceDefinitionElement
   extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlNamespaceDefinitionStub>
-  implements PerlNamespaceDefinitionElement {
+  implements PerlNamespaceDefinitionWithIdentifier {
 
   @NotNull
   private final PerlMroType myMroType;
@@ -51,7 +55,7 @@ public class PerlDelegatingNamespaceDefinitionElement
   @NotNull
   private final Map<String, List<String>> myExportTags;
 
-  public PerlDelegatingNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionStub stub) {
+  public PerlLightNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionStub stub) {
     super(stub, stub.getPackageName());
     myMroType = stub.getMroType();
     myParentNamespacesNames = stub.getParentNamespacesNames();
@@ -61,16 +65,16 @@ public class PerlDelegatingNamespaceDefinitionElement
     myExportTags = stub.getEXPORT_TAGS();
   }
 
-  public PerlDelegatingNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate,
-                                                  @NotNull String name,
-                                                  @NotNull IStubElementType elementType,
-                                                  @NotNull PsiElement nameIdentifier,
-                                                  @NotNull PerlMroType mroType,
-                                                  @NotNull List<String> parentNamespacesNames,
-                                                  @Nullable PerlNamespaceAnnotations annotations,
-                                                  @NotNull List<String> export,
-                                                  @NotNull List<String> exportOk,
-                                                  @NotNull Map<String, List<String>> exportTags) {
+  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+                                             @NotNull String name,
+                                             @NotNull IStubElementType elementType,
+                                             @NotNull PsiElement nameIdentifier,
+                                             @NotNull PerlMroType mroType,
+                                             @NotNull List<String> parentNamespacesNames,
+                                             @Nullable PerlNamespaceAnnotations annotations,
+                                             @NotNull List<String> export,
+                                             @NotNull List<String> exportOk,
+                                             @NotNull Map<String, List<String>> exportTags) {
     super(delegate, name, elementType, nameIdentifier);
     myMroType = mroType;
     myParentNamespacesNames = parentNamespacesNames;
@@ -119,5 +123,26 @@ public class PerlDelegatingNamespaceDefinitionElement
   @Override
   public Map<String, List<String>> getEXPORT_TAGS() {
     return myExportTags;
+  }
+
+  @Override
+  public String getPresentableName() {
+    return getPackageName();
+  }
+
+  @Nullable
+  @Override
+  public PerlNamespaceElement getNamespaceElement() {
+    throw new IncorrectOperationException("should not");
+  }
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitPerlNamespaceDefinitionWithIdentifier(this);
+    }
+    else {
+      super.accept(visitor);
+    }
   }
 }

@@ -20,7 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefini
 
   @Override
   public PerlNamespaceDefinitionElement createPsi(@NotNull PerlNamespaceDefinitionStub stub) {
-    return new PerlDelegatingNamespaceDefinitionElement(stub);
+    return new PerlLightNamespaceDefinitionElement(stub);
   }
 
   @Override

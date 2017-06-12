@@ -18,8 +18,10 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
@@ -52,4 +54,22 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
 
   @NotNull
   protected abstract List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi();
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof PerlVisitor) {
+      ((PerlVisitor)visitor).visitPolyNamedElement(this);
+    }
+    else {
+      super.accept(visitor);
+    }
+  }
+
+  @Override
+  public void acceptChildren(@NotNull PsiElementVisitor visitor) {
+    super.acceptChildren(visitor);
+    for (PerlDelegatingLightNamedElement lightNamedElement : getLightElements()) {
+      lightNamedElement.accept(visitor);
+    }
+  }
 }

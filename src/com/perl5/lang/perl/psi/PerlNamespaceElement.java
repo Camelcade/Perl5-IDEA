@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.List;
 
@@ -30,7 +31,10 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    *
    * @return result
    */
-  boolean isBuiltin();
+  @Deprecated // use utility method instead
+  default boolean isBuiltin() {
+    return PerlPackageUtil.isBuiltIn(getCanonicalName());
+  }
 
   /**
    * Checks if package is pragma

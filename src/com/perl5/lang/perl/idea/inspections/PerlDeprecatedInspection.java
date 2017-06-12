@@ -91,8 +91,9 @@ public class PerlDeprecatedInspection extends PerlInspection {
         }
       }
 
+
       @Override
-      public void visitConstantDefinition(@NotNull PsiPerlConstantDefinition o) {
+      public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
         if (o.isDeprecated()) {
           PsiElement nameIdentifier = o.getNameIdentifier();
           if (nameIdentifier != null) {

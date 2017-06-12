@@ -129,12 +129,13 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
     element.getContainingFile().accept(
       new PerlRecursiveVisitor() {
+
         @Override
-        public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
+        public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
           if (contextPackageName.equals(o.getPackageName())) {
             result.addElement(LookupElementBuilder.create(o.getSubName()));
           }
-          super.visitSubDeclaration(o);
+          super.visitSubDeclarationElement(o);
         }
 
         @Override

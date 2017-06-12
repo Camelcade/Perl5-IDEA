@@ -20,8 +20,8 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlSubDeclaration;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,8 +33,9 @@ public class PerlSubMultipleDeclarationsInspection extends PerlInspection {
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
+
       @Override
-      public void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
+      public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
         Project project = o.getProject();
         String canonicalName = o.getCanonicalName();
 

@@ -86,7 +86,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return parsing result
    */
-  public static boolean parseArrowSmart(PsiBuilder b, int l) {
+  public static boolean parseArrowSmart(PsiBuilder b, @SuppressWarnings("unused") int l) {
     IElementType tokenType = b.getTokenType();
     if (b.getTokenType() == OPERATOR_DEREFERENCE) {
       return consumeToken(b, OPERATOR_DEREFERENCE);
@@ -125,7 +125,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   }
 
 
-  protected static boolean isOperatorToken(PsiBuilder b, int l) {
+  protected static boolean isOperatorToken(PsiBuilder b, @SuppressWarnings("unused") int l) {
     return PerlTokenSets.OPERATORS_TOKENSET.contains(b.getTokenType());
   }
 
@@ -137,7 +137,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return parsing result
    */
-  public static boolean recoverStatement(PsiBuilder b, int l) {
+  public static boolean recoverStatement(PsiBuilder b, @SuppressWarnings("unused") int l) {
     assert b instanceof PerlBuilder;
     IElementType currentTokenType = b.getTokenType();
 
@@ -154,6 +154,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return check result
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parseStatementModifier(PsiBuilder b, int l) {
     assert b instanceof PerlBuilder;
     if (((PerlBuilder)b).getPerlParser().parseStatementModifier(b, l)) {
@@ -189,7 +190,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return parsing result
    */
-  public static boolean parsePerlVersion(PsiBuilder b, int l) {
+  public static boolean parsePerlVersion(PsiBuilder b, @SuppressWarnings("unused") int l) {
     if (VERSION_TOKENS.contains(b.getTokenType())) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
@@ -256,7 +257,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   }
 
   // fixme replace with looking to upper frames ?
-  public static boolean isUseVars(PsiBuilder b, int l) {
+  public static boolean isUseVars(PsiBuilder b, @SuppressWarnings("unused") int l) {
     return ((PerlBuilder)b).isUseVarsContent();
   }
 
@@ -267,7 +268,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return true
    **/
-  public static boolean parseBadCharacters(PsiBuilder b, int l) {
+  public static boolean parseBadCharacters(PsiBuilder b, @SuppressWarnings("unused") int l) {
     IElementType tokenType = b.getTokenType();
 
     if (tokenType == null || ((PerlBuilder)b).getPerlParser().getBadCharacterForbiddenTokens().contains(tokenType)) {
@@ -349,7 +350,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
    * @param l parsing level
    * @return parsing result
    */
-  public static boolean parseAndWrapStringContent(PsiBuilder b, int l) {
+  public static boolean parseAndWrapStringContent(PsiBuilder b, @SuppressWarnings("unused") int l) {
     assert b instanceof PerlBuilder;
 
     IElementType tokenType = b.getTokenType();
@@ -401,7 +402,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     return ((PerlBuilder)b).getPerlParser().parseNestedElementVariation(b, l);
   }
 
-  public static boolean checkSemicolon(PsiBuilder b, int l) {
+  public static boolean checkSemicolon(PsiBuilder b, @SuppressWarnings("unused") int l) {
     return ((PerlBuilder)b).getPerlParser().getConsumableSemicolonTokens().contains(b.getTokenType());
   }
 
@@ -424,7 +425,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     return false;
   }
 
-  public static boolean parseLabelDeclaration(PsiBuilder b, int l) {
+  public static boolean parseLabelDeclaration(PsiBuilder b, @SuppressWarnings("unused") int l) {
     if (b.lookAhead(1) == COLON && b.getTokenType() != RESERVED_SUB) {
       String tokenText = b.getTokenText();
       if (tokenText != null && PerlBaseLexer.IDENTIFIER_PATTERN.matcher(tokenText).matches()) {
@@ -483,12 +484,5 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     assert PerlParserUtil.consumeTokenFast(b, PACKAGE);
     PerlParserImpl.perl_version(b, l);
     return true;
-  }
-
-  /**
-   * Proxy method because methods are package private
-   */
-  public static boolean parseUseConstantVariants(PerlBuilder b, int l) {
-    return PerlParserImpl.use_constant_variants(b, l);
   }
 }
