@@ -353,6 +353,7 @@ limitations under the License.
 
     extends(".+expr")=expr
     name(".+expr")="expression"
+    extends("number_constant")=expr
 
 	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
