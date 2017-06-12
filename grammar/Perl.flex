@@ -841,7 +841,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(LEX_PRINT_HANDLE); return RESERVED_PRINT;}
-	{CORE_PREFIX}"printf"	 	{yybegin(YYINITIAL); return RESERVED_PRINTF;}
+	{CORE_PREFIX}"printf"	 	{yybegin(LEX_PRINT_HANDLE); return RESERVED_PRINTF;}
 	{CORE_PREFIX}"say"	 		{yybegin(LEX_PRINT_HANDLE); return RESERVED_SAY;}
 
 	{CORE_PREFIX}"grep"	 { yybegin(YYINITIAL); return RESERVED_GREP;}
