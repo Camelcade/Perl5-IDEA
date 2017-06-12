@@ -349,6 +349,7 @@
 
     <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
     <stubElementTypeHolder class="com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlExceptionClassWrapperElementType"/>
+    <stubElementTypeHolder class="com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType"/>
 
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>

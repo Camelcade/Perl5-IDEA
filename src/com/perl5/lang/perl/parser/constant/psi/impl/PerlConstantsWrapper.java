@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.parser.constant.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlLightConstantDefinitionElementType;
+import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -35,8 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_CONSTANT_DEFINITION;
 
 public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
 
@@ -52,7 +51,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
   @Override
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getChildrenStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_CONSTANT_DEFINITION)
+      .filter(childStub -> childStub.getStubType() == PerlLightConstantDefinitionElementType.LIGHT_CONSTANT_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement((PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
@@ -72,7 +71,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
         result.add(new PerlLightConstantDefinitionElement(
           this,
           ElementManipulators.getValueText(listElement),
-          LIGHT_CONSTANT_DEFINITION,
+          PerlLightConstantDefinitionElementType.LIGHT_CONSTANT_DEFINITION,
           listElement,
           PerlPackageUtil.getContextPackageName(this),
           Collections.emptyList(),

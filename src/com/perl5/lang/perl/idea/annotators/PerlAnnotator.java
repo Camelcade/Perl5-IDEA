@@ -28,11 +28,11 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlConstantDefinitionMixin;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
-import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlAnnotator extends PerlBaseAnnotator {
@@ -71,7 +71,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     }
     else if (element instanceof PerlPolyNamedElement) {
       TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DECLARATION;
-      if (elementType == PerlStubElementTypes.CONSTANT_WRAPPER) {
+      if (elementType == PerlConstantsWrapperElementType.CONSTANT_WRAPPER) { // fixme some interface?
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
       for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {

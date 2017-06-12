@@ -18,12 +18,12 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType;
 import org.jetbrains.annotations.NotNull;
 
 public class ConstantNewProcessor extends PerlPragmaProcessorBase {
   @Override
   public boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
-    return wrapExpression(PerlStubElementTypes.CONSTANT_WRAPPER, b, l);
+    return wrapExpression(PerlConstantsWrapperElementType.CONSTANT_WRAPPER, b, l);
   }
 }

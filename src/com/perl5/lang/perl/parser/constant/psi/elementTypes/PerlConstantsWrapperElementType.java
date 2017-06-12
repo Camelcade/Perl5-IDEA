@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs;
+package com.perl5.lang.perl.parser.constant.psi.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.mixins.PerlConstantsWrapper;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType {
-  public PerlConstantsWrapperElementType(@NotNull String debugName) {
+  public static final IStubElementType CONSTANT_WRAPPER = new PerlConstantsWrapperElementType("CONSTANT_WRAPPER");
+
+  private PerlConstantsWrapperElementType(@NotNull String debugName) {
     super(debugName);
   }
 

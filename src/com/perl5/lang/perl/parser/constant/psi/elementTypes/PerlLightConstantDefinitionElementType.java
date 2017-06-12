@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
+package com.perl5.lang.perl.parser.constant.psi.elementTypes;
 
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlLightConstantDefinitionElement;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionElementType;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlLightConstantDefinitionElementType extends PerlLightSubDefinitionElementType {
-  public PerlLightConstantDefinitionElementType(String name) {
+  public static final IStubElementType LIGHT_CONSTANT_DEFINITION = new PerlLightConstantDefinitionElementType("LIGHT_CONSTANT_DEFINITION");
+
+
+  private PerlLightConstantDefinitionElementType(String name) {
     super(name);
   }
 
