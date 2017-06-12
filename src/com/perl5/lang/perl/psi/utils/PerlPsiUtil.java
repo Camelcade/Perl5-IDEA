@@ -36,9 +36,11 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -257,15 +259,12 @@ public class PerlPsiUtil implements PerlElementTypes {
       if (rootElementStub != null) {
         processElementsFromStubs(
           rootElementStub,
-          new Processor<Stub>() {
-            @Override
-            public boolean process(Stub stub) {
-              if (stubClass.isInstance(stub)) {
-                result.add(((StubBase)stub).getPsi());
-              }
-
-              return true;
+          stub -> {
+            if (stubClass.isInstance(stub)) {
+              result.add(((StubBase)stub).getPsi());
             }
+
+            return true;
           },
           PerlNamespaceDefinitionStub.class
         );
@@ -275,14 +274,11 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     processElementsFromPsi(
       rootElement,
-      new Processor<PsiElement>() {
-        @Override
-        public boolean process(PsiElement element) {
-          if (psiClass.isInstance(element)) {
-            result.add(element);
-          }
-          return true;
+      element -> {
+        if (psiClass.isInstance(element)) {
+          result.add(element);
         }
+        return true;
       },
       PerlNamespaceDefinitionElement.class
     );
@@ -310,6 +306,15 @@ public class PerlPsiUtil implements PerlElementTypes {
         }
       }
     }
+
+    if (stub instanceof PerlPolyNamedElementStub) {
+      for (StubElement child : ((PerlPolyNamedElementStub)stub).getLightNamedElementsStubs()) {
+        if (!processor.process(child)) {
+          return false;
+        }
+      }
+    }
+
     return true;
   }
 
@@ -335,6 +340,15 @@ public class PerlPsiUtil implements PerlElementTypes {
         }
       }
     }
+
+    if (element instanceof PerlPolyNamedElement) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+        if (!processor.process(lightNamedElement)) {
+          return false;
+        }
+      }
+    }
+
     return true;
   }
 

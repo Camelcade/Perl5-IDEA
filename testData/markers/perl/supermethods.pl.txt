@@ -20,15 +20,15 @@ Targets: 1
 
 216 - 231: 'CONSTANT_METHOD': Overriden methods
 Targets: 1
-    sub Some::Child::Package::CONSTANT_METHOD in supermethods.pl at 797
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 797
 
 258 - 280: 'OTHER_CONSTANT_METHOD1': Overriden methods
 Targets: 1
-    sub Some::Child::Package::OTHER_CONSTANT_METHOD1 in supermethods.pl at 839
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 839
 
 291 - 313: 'OTHER_CONSTANT_METHOD2': Overriden methods
 Targets: 1
-    sub Some::Child::Package::OTHER_CONSTANT_METHOD2 in supermethods.pl at 872
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 872
 
 328 - 353: 'somemethod_with_lpe_block': Overriden methods
 Targets: 1
@@ -56,15 +56,15 @@ Targets: 1
 
 797 - 812: 'CONSTANT_METHOD': Overriding method
 Targets: 1
-    sub Some::Parent::Package::CONSTANT_METHOD in supermethods.pl at 216
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 216
 
 839 - 861: 'OTHER_CONSTANT_METHOD1': Overriding method
 Targets: 1
-    sub Some::Parent::Package::OTHER_CONSTANT_METHOD1 in supermethods.pl at 258
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 258
 
 872 - 894: 'OTHER_CONSTANT_METHOD2': Overriding method
 Targets: 1
-    sub Some::Parent::Package::OTHER_CONSTANT_METHOD2 in supermethods.pl at 291
+    PerlConstantsWrapper(CONSTANT_WRAPPER) in supermethods.pl at 291
 
 909 - 934: 'somemethod_with_lpe_block': Overriding method
 Targets: 1
