@@ -28,6 +28,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.*;
@@ -358,7 +359,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
     @Override
     public void visitElement(PsiElement element) {
-      if (element.getNode().getElementType() == POD) {
+      if (PsiUtilCore.getElementType(element) == POD) {
         addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
       }
       super.visitElement(element);

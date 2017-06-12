@@ -87,7 +87,7 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
 
   @Override
   public String toString() {
-    return getDelegate().toString();
+    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
   }
 
   @Override
@@ -294,7 +294,7 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
 
   @Override
   public ASTNode getNode() {
-    return getDelegate().getNode();
+    return null;
   }
 
   @Override

@@ -126,16 +126,15 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
       ASTNode targetElementNode = targetElement.getNode();
 
       if (targetElementNode == null) {
-        sb.append("nodeless; ").append(targetElement.toString());
+        sb.append("nodeless; ").append(targetElement.toString()).append("\n\t");
+        targetElementNode = targetElement.getNavigationElement().getNode();
       }
-      else {
-        sb.append(PsiUtilCore.getElementType(targetElementNode))
-          .append(" at ")
-          .append(targetElementNode.getStartOffset())
-          .append(" in ")
-          .append(targetElement.getContainingFile().getName())
-          .append('\n');
-      }
+      sb.append(PsiUtilCore.getElementType(targetElementNode))
+        .append(" at ")
+        .append(targetElementNode.getStartOffset())
+        .append(" in ")
+        .append(targetElement.getContainingFile().getName())
+        .append('\n');
     }
     return sb.toString();
   }
