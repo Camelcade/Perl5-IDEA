@@ -72,4 +72,9 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
       lightNamedElement.accept(visitor);
     }
   }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
+  }
 }
