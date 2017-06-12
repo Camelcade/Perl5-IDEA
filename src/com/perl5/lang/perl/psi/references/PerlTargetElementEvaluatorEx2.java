@@ -20,6 +20,9 @@ import com.intellij.codeInsight.TargetElementEvaluatorEx2;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.*;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,6 +52,23 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
 
   @Nullable
   @Override
+  public PsiElement getNamedElement(@NotNull PsiElement element) {
+    PerlPolyNamedElement polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
+    if (polyNamedElement == null) {
+      return null;
+    }
+
+    for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+      PsiElement identifier = lightNamedElement.getNameIdentifier();
+      if (identifier.getTextRange().contains(element.getTextRange())) {
+        return lightNamedElement;
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  @Override // fixme WTF?
   public PsiElement getElementByReference(@NotNull PsiReference ref, int flags) {
     return null;
   }
