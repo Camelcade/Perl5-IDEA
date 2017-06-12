@@ -20,10 +20,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
@@ -35,7 +35,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
+import static com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlLightExceptionClassElementType.LIGHT_EXCEPTION_CLASS;
 
 public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
   public PerlExceptionClassWrapper(@NotNull PerlPolyNamedElementStub stub,
@@ -51,8 +51,8 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
   @Override
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getChildrenStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_NAMESPACE_DEFINITION)
-      .map(childStub -> new PerlDelegatingNamespaceDefinitionElement((PerlNamespaceDefinitionStub)childStub))
+      .filter(childStub -> childStub.getStubType() == LIGHT_EXCEPTION_CLASS)
+      .map(childStub -> new PerlLightExceptionClassDefinition((PerlNamespaceDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
@@ -63,10 +63,10 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
       if (listElement instanceof PerlString) {
-        result.add(new PerlDelegatingNamespaceDefinitionElement(
+        result.add(new PerlLightExceptionClassDefinition(
           this,
           ElementManipulators.getValueText(listElement),
-          LIGHT_NAMESPACE_DEFINITION,
+          LIGHT_EXCEPTION_CLASS,
           listElement,
           PerlMroType.DFS,
           Collections.singletonList("Class::Exception::Base"), // fixme NYI
