@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -64,15 +65,15 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
-      if (listElement instanceof PerlString) {
+    for (PsiElement listElement : PerlArrayUtil.collectListElements(firstChild, null)) {
+      if (listElement instanceof PerlString || listElement instanceof PerlStringContentElement) {
         result.add(new PerlLightExceptionClassDefinition(
           this,
           ElementManipulators.getValueText(listElement),
           LIGHT_EXCEPTION_CLASS,
           listElement,
           PerlMroType.DFS,
-          Collections.singletonList("Class::Exception::Base"), // fixme NYI
+          Collections.singletonList("Exception::Class::Base"), // fixme NYI
           PerlNamespaceAnnotations.tryToFindAnnotations(listElement, getParent()),
           Collections.emptyList(),
           Collections.emptyList(),

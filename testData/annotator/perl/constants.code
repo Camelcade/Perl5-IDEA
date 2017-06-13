@@ -31,3 +31,17 @@ Foo::Bla::<info descr="Constant">ALONECONST3</info>;
 Foo::Bla::<info descr="Constant">MULTI_CONST1</info>;
 Foo::Bla::<info descr="Constant">MULTI_CONST2</info>;
 Foo::Bla::<info descr="Constant">MULTI_CONST3</info>;
+
+
+use <info descr="null">constant</info> {
+    <info descr="null">CONST1</info>     => 42,
+    '<info descr="null">CONST2</info>'   => 42,
+    "<info descr="null">CONST3</info>"   => 42,
+    q'<info descr="null">CONST4</info>'  => 42,
+    qq"<info descr="null">CONST5</info>" => 42,
+    qw/
+        <info descr="null">CONST6</info> 42
+        <info descr="null">CONST7</info> 42
+        <info descr="null">CONST8</info> 42
+        /
+};

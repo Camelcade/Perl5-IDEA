@@ -26,9 +26,11 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
+import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -122,13 +124,14 @@ public class PerlArrayUtil implements PerlElementTypes {
   }
 
   /**
-   * Traversing PsiElement for composite elements, expanding lists and collecting all elements to the plain one: ($a, $b, ($c, $d)) -> $a, $b, $c, $d;
+   * Traversing comma sequence or list for meaningful elements, expanding lists and collecting all elements to the plain one:
+   *  ($a, $b, ($c, $d)), qw/bla bla/ -> $a, $b, $c, $d, bla, bla;
    *
    * @param rootElement top-level container
    * @param result      resulting array to fill
    * @return passed or new List of found PsiElements
    */
-  public static List<PsiElement> getElementsAsPlainList(@Nullable PsiElement rootElement, @Nullable List<PsiElement> result) {
+  public static List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @Nullable List<PsiElement> result) {
     if (result == null) {
       result = new ArrayList<>();
     }
@@ -139,7 +142,16 @@ public class PerlArrayUtil implements PerlElementTypes {
 
     if (rootElement instanceof PsiPerlParenthesisedExpr || rootElement instanceof PsiPerlCommaSequenceExpr) {
       for (PsiElement childElement : rootElement.getChildren()) {
-        getElementsAsPlainList(childElement, result);
+        collectListElements(childElement, result);
+      }
+    }
+    else if (rootElement instanceof PerlStringList) {
+      PsiElement element = rootElement.getFirstChild();
+      while (element != null) {
+        if (element instanceof PerlStringContentElementImpl) {
+          result.add(element);
+        }
+        element = element.getNextSibling();
       }
     }
     else if (rootElement.getNode() instanceof CompositeElement) {

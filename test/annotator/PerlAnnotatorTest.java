@@ -32,6 +32,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     doTest();
   }
 
+  public void testIncorrectConstants() { doTest();}
+
   public void testExceptionClass() {doTest();}
 
   public void testDeprecations() {

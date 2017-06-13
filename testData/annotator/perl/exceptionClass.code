@@ -1,15 +1,18 @@
 use Exception::Class
-        '<info descr="null">Exception1</info>',
+    '<info descr="null">Exception1</info>',
     "<info descr="null">Exception2</info>",
     q'<info descr="null">Exception3</info>',
     qq"<info descr="null">Exception4</info>",
-    <info descr="null">Exception5</info> => {}
+    <info descr="null">Exception5</info> => { },
+    qw/<info descr="null">Exception6</info> <info descr="null">Exception7</info> <info descr="null">Exception8</info>/
 ;
 
-Exception1->can("something");
-Exception2->can("something");
-Exception3->can("something");
-Exception4->can("something");
-Exception5->can("something");
-
+Exception1::->throw();
+Exception2::->throw();
+Exception3::->throw();
+Exception4::->throw();
+Exception5::->throw();
+Exception6::->throw();
+Exception7::->throw();
+Exception8::->throw();
 

@@ -47,6 +47,10 @@ public class PerlResolveTest extends PerlResolveTestCase {
     doTestWithFileCheck();
   }
 
+  public void testConstantEx() {
+    doTestWithFileCheck();
+  }
+
   public void testMojoliciousHelper() {
     doTestWithFileCheck();
   }

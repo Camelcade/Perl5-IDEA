@@ -1,0 +1,12 @@
+use Exception::Class
+        'Exception1',
+    "Exception2",
+    qw'Exception3 Exception4 Exception5'
+;
+
+Exception1::->can();
+Exception2::->can();
+Exception3::->can();
+Exception4::->can();
+Excep<caret>tion5::->can();
+

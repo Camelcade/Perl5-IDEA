@@ -1,0 +1,21 @@
+use constant {
+    CONST1     => 42,
+    'CONST2'   => 42,
+    "CONST3"   => 42,
+    q'CONST4'  => 42,
+    qq"CONST5" => 42,
+    qw/
+        CONST6 42
+        CONST7 42
+        NewName 42
+        /
+};
+
+CONST1;
+CONST2;
+CONST3;
+CONST4;
+CONST5;
+CONST6;
+CONST7;
+NewName;

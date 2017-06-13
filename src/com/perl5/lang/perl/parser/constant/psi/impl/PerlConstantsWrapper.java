@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlLightConstantDefinitionElementType;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -63,14 +64,16 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
   @Override
   protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
+    boolean multipleDefinition = false;
     if (firstChild instanceof PsiPerlAnonHash) {
+      multipleDefinition = true;
       firstChild = ((PsiPerlAnonHash)firstChild).getExpr();
     }
 
     boolean isKey = true;
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    for (PsiElement listElement : PerlArrayUtil.getElementsAsPlainList(firstChild, null)) {
-      if (isKey && listElement instanceof PerlString) {
+    for (PsiElement listElement : PerlArrayUtil.collectListElements(firstChild, null)) {
+      if (isKey && (listElement instanceof PerlString || listElement instanceof PerlStringContentElement)) {
         result.add(new PerlLightConstantDefinitionElement(
           this,
           ElementManipulators.getValueText(listElement),
@@ -80,6 +83,9 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(listElement, getParent())
         ));
+        if (!multipleDefinition) {
+          break;
+        }
       }
       isKey = !isKey;
     }

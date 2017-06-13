@@ -1,0 +1,12 @@
+use <info descr="null">constant</info>
+    <info descr="null">const1</info> => 42,
+    'const2' => 42,
+    "const3" => 42,
+    q'const4' => 42,
+    qq"const5" => 42,
+    qw/
+        const6 42
+        const7 42
+        const8 42
+        /
+;
