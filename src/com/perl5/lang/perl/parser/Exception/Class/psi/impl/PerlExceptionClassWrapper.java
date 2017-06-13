@@ -29,6 +29,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -72,7 +73,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
           listElement,
           PerlMroType.DFS,
           Collections.singletonList("Class::Exception::Base"), // fixme NYI
-          null,                                               // fixme NYI
+          PerlNamespaceAnnotations.tryToFindAnnotations(listElement, getParent()),
           Collections.emptyList(),
           Collections.emptyList(),
           Collections.emptyMap()

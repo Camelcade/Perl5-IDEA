@@ -268,7 +268,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Nullable
   public PerlNamespaceAnnotations getLocalAnnotations() {
-    return PerlNamespaceAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+    return PerlNamespaceAnnotations.tryToFindAnnotations(this);
   }
 
   public static class MroSearcher implements Processor<PsiElement> {

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.PerlAnnotation;
@@ -60,7 +61,7 @@ public class PerlNamespaceAnnotations {
   }
 
   @Nullable
-  public static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+  private static PerlNamespaceAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
       return null;
     }
@@ -75,4 +76,23 @@ public class PerlNamespaceAnnotations {
 
     return myAnnotations;
   }
+
+  /**
+   * Attempts to build namespace annotations from one of the base elements. Fist wins
+   *
+   * @param baseElements elements to process, e.g. identifier or use constant
+   * @return Sub annotations
+   */
+  @Nullable
+  public static PerlNamespaceAnnotations tryToFindAnnotations(@NotNull PsiElement... baseElements) {
+    for (PsiElement element : baseElements) {
+      List<PerlAnnotation> annotations = PerlPsiUtil.collectAnnotations(element);
+      if (!annotations.isEmpty()) {
+        return createFromAnnotationsList(annotations);
+      }
+    }
+
+    return null;
+  }
+
 }
