@@ -202,7 +202,7 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement, MyStub e
 
   @Override
   public PsiElement getParent() {
-    return getDelegate().getParent();
+    return getDelegate();
   }
 
   @NotNull
