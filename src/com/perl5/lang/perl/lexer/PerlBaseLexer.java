@@ -118,13 +118,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   protected boolean myFormatWaiting = false;
   // number of sections for the next regexp
   protected int sectionsNumber = 0;
-
-  private boolean myIsHeredocLike = false;
-
   /**
    * Regex processor qr{} m{} s{}{}
    **/
   protected IElementType regexCommand = null;
+  private boolean myIsHeredocLike = false;
   private IElementType myCurrentSigilToken;
 
   @Nullable
@@ -379,7 +377,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       @Override
       protected Set<String> compute() {
         assert myProject != null;
-        return myProject.getComponent(PerlNamesCache.class).getSubsNamesSet();
+        return PerlNamesCache.getInstance(myProject).getSubsNamesSet();
       }
     };
 
@@ -388,7 +386,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       @Override
       protected Set<String> compute() {
         assert myProject != null;
-        return myProject.getComponent(PerlNamesCache.class).getPackagesNamesSet();
+        return PerlNamesCache.getInstance(myProject).getPackagesNamesSet();
       }
     };
     myLocalPackages.clear();
@@ -1023,6 +1021,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     return STRING_CONTENT;
   }
 
+  public boolean isHeredocLike() {
+    return myIsHeredocLike;
+  }
+
+  public void setHeredocLike(boolean heredocLike) {
+    myIsHeredocLike = heredocLike;
+  }
+
   public static void initReservedTokensMap() {
     RESERVED_TOKEN_TYPES.clear();
     // reserved
@@ -1055,13 +1061,5 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     else {
       return charOpener;
     }
-  }
-
-  public boolean isHeredocLike() {
-    return myIsHeredocLike;
-  }
-
-  public void setHeredocLike(boolean heredocLike) {
-    myIsHeredocLike = heredocLike;
   }
 }

@@ -108,6 +108,11 @@ public class PerlNamesCache implements ProjectComponent {
     return KNOWN_PACKAGES;
   }
 
+  @NotNull
+  public static PerlNamesCache getInstance(@NotNull Project project) {
+    return project.getComponent(PerlNamesCache.class);
+  }
+
   protected class NamesCacheUpdater implements Runnable {
     private static final long TTL = 1000;
     private boolean stopThis = false;

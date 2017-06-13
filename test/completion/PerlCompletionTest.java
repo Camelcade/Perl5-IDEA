@@ -39,7 +39,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    getProject().getComponent(PerlNamesCache.class).forceCacheUpdate();
+    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
   }
 
   @Override

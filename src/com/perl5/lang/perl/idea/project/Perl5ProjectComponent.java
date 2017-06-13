@@ -84,7 +84,10 @@ public class Perl5ProjectComponent implements ProjectComponent {
       });
     }
 
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(FileContentUtil::reparseOpenedFiles);
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
+      PerlNamesCache.getInstance(myProject).forceCacheUpdate();
+      FileContentUtil.reparseOpenedFiles();
+    });
 
     // called when project is opened
     //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
