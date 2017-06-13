@@ -12,5 +12,6 @@ use Exception::Class
         '<warning descr="This namespace is deprecated">SecondException</warning>',
     '<warning descr="This namespace is deprecated">SuperException</warning>';
 
-<warning descr="This namespace is deprecated">SecondException</warning>->can("something");
-<warning descr="This namespace is deprecated">SuperException</warning>->can("something");
+# for test purposes, travis has no prepared indexes
+<warning descr="This namespace is deprecated">SecondException</warning>::->can("something");
+<warning descr="This namespace is deprecated">SuperException</warning>::->can("something");
