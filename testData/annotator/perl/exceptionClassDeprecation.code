@@ -4,7 +4,7 @@ use Exception::Class
     '<warning descr="This namespace is deprecated">BetterException</warning>';
 
 FirstException->can("something");
-<warning descr="This namespace is deprecated">BetterException</warning>->can("something");
+<warning descr="This namespace is deprecated">BetterException</warning>::->can("something");
 
 
 #@deprecated
