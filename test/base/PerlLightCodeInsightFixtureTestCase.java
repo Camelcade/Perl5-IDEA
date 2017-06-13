@@ -49,8 +49,10 @@ import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
+import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.internals.PerlVersion;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
@@ -80,6 +82,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     super.setUp();
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
+    ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
     setUpLibrary();
   }
 
