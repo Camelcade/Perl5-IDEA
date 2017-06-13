@@ -1,0 +1,14 @@
+use Exception::Class
+        'Exception1',
+    "Exception2",
+    q'Exception3',
+    qq"Exception4",
+    Exception5 => {}
+;
+
+Exception1::->can();
+Excep<caret>tion2::->can();
+Exception3::->can();
+Exception4::->can();
+Exception5::->can();
+

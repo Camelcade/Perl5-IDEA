@@ -99,7 +99,6 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
 
   @SafeVarargs
   protected final void doTest(List<String>... result) {
-    initWithFileSmart();
     assertCompletionIs(result);
   }
 

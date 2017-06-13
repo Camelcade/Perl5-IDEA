@@ -32,14 +32,24 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     doTest();
   }
 
+  public void testExceptionClass() {doTest();}
+
   public void testDeprecations() {
-    initWithFileSmart();
-    myFixture.enableInspections(PerlDeprecatedInspection.class);
-    myFixture.checkHighlighting(true, false, false);
+    doDeprecationTest();
+  }
+
+  public void testExceptionClassDeprecation() {
+    doDeprecationTest();
   }
 
   private void doTest() {
     initWithFileSmart();
     myFixture.checkHighlighting(true, true, true);
+  }
+
+  private void doDeprecationTest() {
+    initWithFileSmart();
+    myFixture.enableInspections(PerlDeprecatedInspection.class);
+    myFixture.checkHighlighting(true, false, false);
   }
 }

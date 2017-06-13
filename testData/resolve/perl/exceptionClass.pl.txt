@@ -1,0 +1,32 @@
+PerlNamespaceFileReference at (4,20); text in range: 'Exception::Class' => 0 results:
+
+PerlNamespaceReference at (124,134); text in range: 'Exception1' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	Perl5: STRING_SQ at 29 in exceptionClass.pl
+
+PerlSubReference at (136,139); text in range: 'can' => 0 results:
+
+PerlNamespaceReference at (154,164); text in range: 'Exception2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	Perl5: STRING_DQ at 47 in exceptionClass.pl
+
+PerlSubReference at (166,169); text in range: 'can' => 0 results:
+
+PerlNamespaceReference at (184,194); text in range: 'Exception3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	Perl5: STRING_SQ at 65 in exceptionClass.pl
+
+PerlSubReference at (196,199); text in range: 'can' => 0 results:
+
+PerlNamespaceReference at (214,224); text in range: 'Exception4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	Perl5: STRING_DQ at 84 in exceptionClass.pl
+
+PerlSubReference at (226,229); text in range: 'can' => 0 results:
+
+PerlNamespaceReference at (244,254); text in range: 'Exception5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	Perl5: STRING_BARE at 104 in exceptionClass.pl
+
+PerlSubReference at (256,259); text in range: 'can' => 0 results:
+

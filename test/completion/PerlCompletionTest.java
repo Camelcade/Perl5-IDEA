@@ -69,6 +69,13 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
     doTestPackageAndVersions();
   }
 
+  public void testExceptionClass() {
+    doTestContains(
+      "Exception1::", "Exception2::", "Exception3::", "Exception4::", "Exception5::",
+      "Exception1->", "Exception2->", "Exception3->", "Exception4->", "Exception5->"
+    );
+  }
+
   public void testReferenceCompletion() {doTestContains("declared_reference");}
 
   public void testCaptureScalar() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}

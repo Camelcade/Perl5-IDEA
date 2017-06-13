@@ -1,0 +1,16 @@
+use Exception::Class
+        'FirstException',
+    #@deprecated
+    '<warning descr="This namespace is deprecated">BetterException</warning>';
+
+FirstException->can("something");
+<warning descr="This namespace is deprecated">BetterException</warning>->can("something");
+
+
+#@deprecated
+use Exception::Class
+        '<warning descr="This namespace is deprecated">SecondException</warning>',
+    '<warning descr="This namespace is deprecated">SuperException</warning>';
+
+<warning descr="This namespace is deprecated">SecondException</warning>->can("something");
+<warning descr="This namespace is deprecated">SuperException</warning>->can("something");
