@@ -71,7 +71,7 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
 
     for (PerlDelegatingLightNamedElement element : getDelegate().calcLightElements()) {
       if (element.equals(this)) {
-        myNameIdentifier = element.getNameIdentifier();
+        return myNameIdentifier = element.getNameIdentifier();
       }
     }
 
