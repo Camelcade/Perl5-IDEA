@@ -36,6 +36,8 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
+  public void testExceptionClass() {doFormatTest();}
+
   public void testIndentedHeredoc() {
     doFormatTest();
   }
