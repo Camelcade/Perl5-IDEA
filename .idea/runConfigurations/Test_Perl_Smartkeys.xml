@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Heavy Test Plugin" type="GradleRunConfiguration" factoryName="Gradle" folderName="tests">
+  <configuration default="false" name="Test Perl Smartkeys" type="GradleRunConfiguration" factoryName="Gradle" folderName="tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pheavy=1" />
+      <option name="scriptParameters" value="-Pruntest=editor/PerlSmartkeyTest" />
       <option name="taskDescriptions">
         <list />
       </option>
