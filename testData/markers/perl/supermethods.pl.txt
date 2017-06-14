@@ -20,15 +20,15 @@ Targets: 1
 
 216 - 231: 'CONSTANT_METHOD': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 797
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 797
 
 258 - 280: 'OTHER_CONSTANT_METHOD1': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 839
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 839
 
 291 - 313: 'OTHER_CONSTANT_METHOD2': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 872
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 872
 
 328 - 353: 'somemethod_with_lpe_block': Overriden methods
 Targets: 1
@@ -56,15 +56,15 @@ Targets: 1
 
 797 - 812: 'CONSTANT_METHOD': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 216
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 216
 
 839 - 861: 'OTHER_CONSTANT_METHOD1': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 258
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 258
 
 872 - 894: 'OTHER_CONSTANT_METHOD2': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION) in supermethods.pl at 291
+    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 291
 
 909 - 934: 'somemethod_with_lpe_block': Overriding method
 Targets: 1

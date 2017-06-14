@@ -1,0 +1,8 @@
+
+MyTest::Exceptions->throw();
+
+Library::Exception->throw();
+LibraryException->throw();
+Library::Exception2->throw();
+LibraryException3->throw();
+

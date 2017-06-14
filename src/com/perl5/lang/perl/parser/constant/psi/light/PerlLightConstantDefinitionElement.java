@@ -41,8 +41,8 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
     super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
   }
 
-  public PerlLightConstantDefinitionElement(@NotNull PerlSubDefinitionStub stub) {
-    super(stub);
+  public PerlLightConstantDefinitionElement(@NotNull PerlPolyNamedElement delegate, @NotNull PerlSubDefinitionStub stub) {
+    super(delegate, stub);
   }
 
   @Nullable

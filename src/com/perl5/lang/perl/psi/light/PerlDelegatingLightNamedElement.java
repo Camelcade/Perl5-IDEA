@@ -20,7 +20,6 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
@@ -32,8 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
-public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedElement, MyStub extends StubElement>
-  extends PerlDelegatingLightElement<DelegatePsi, MyStub>
+public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedElement> extends PerlDelegatingLightElement<DelegatePsi>
   implements PsiNameIdentifierOwner {
 
   @NotNull
@@ -42,15 +40,16 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
   @Nullable
   private PsiElement myNameIdentifier;
 
-  public PerlDelegatingLightNamedElement(@NotNull MyStub stub, @NotNull String name) {
-    super(stub);
-    myName = name;
+  public PerlDelegatingLightNamedElement(@NotNull DelegatePsi delegate,
+                                         @NotNull String name,
+                                         @NotNull IStubElementType elementType) {
+    this(delegate, name, elementType, null);
   }
 
   public PerlDelegatingLightNamedElement(@NotNull DelegatePsi delegate,
                                          @NotNull String name,
                                          @NotNull IStubElementType elementType,
-                                         @NotNull PsiElement nameIdentifier) {
+                                         @Nullable PsiElement nameIdentifier) {
     super(delegate, elementType);
     myName = name;
     myNameIdentifier = nameIdentifier;
@@ -62,6 +61,11 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
     return myName;
   }
 
+  @Override
+  public IStubElementType getElementType() {
+    return (IStubElementType)super.getElementType();
+  }
+
   @NotNull
   @Override
   public PsiElement getNameIdentifier() {
@@ -69,7 +73,7 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
       return myNameIdentifier;
     }
 
-    for (PerlDelegatingLightNamedElement element : getDelegate().calcLightElements()) {
+    for (PerlDelegatingLightNamedElement element : getDelegate().calcLightElementsFromPsi()) {
       if (element.equals(this)) {
         return myNameIdentifier = element.getNameIdentifier();
       }
@@ -121,7 +125,7 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
     if (!(o instanceof PerlDelegatingLightNamedElement)) return false;
     if (!super.equals(o)) return false;
 
-    PerlDelegatingLightNamedElement<?, ?> element = (PerlDelegatingLightNamedElement<?, ?>)o;
+    PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
 
     return getName().equals(element.getName());
   }

@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlLightExceptionClassDefinition extends PerlLightNamespaceDefinitionElement {
-  public PerlLightExceptionClassDefinition(@NotNull PerlNamespaceDefinitionStub stub) {
-    super(stub);
+  public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement delegate, @NotNull PerlNamespaceDefinitionStub stub) {
+    super(delegate, stub);
   }
 
   public PerlLightExceptionClassDefinition(@NotNull PerlPolyNamedElement delegate,

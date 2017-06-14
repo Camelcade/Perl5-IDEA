@@ -1,0 +1,29 @@
+PerlNamespaceReference at (1,19); text in range: 'MyTest::Exceptions' => 1 results:
+	NAMESPACE at 0 in Exceptions.pm
+
+PerlSubReference at (21,26); text in range: 'throw' => 0 results:
+
+PerlNamespaceReference at (31,49); text in range: 'Library::Exception' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 54 in Exceptions.pm
+
+PerlSubReference at (51,56); text in range: 'throw' => 0 results:
+
+PerlNamespaceReference at (60,76); text in range: 'LibraryException' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_BARE at 80 in Exceptions.pm
+
+PerlSubReference at (78,83); text in range: 'throw' => 0 results:
+
+PerlNamespaceReference at (87,106); text in range: 'Library::Exception2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_CONTENT at 111 in Exceptions.pm
+
+PerlSubReference at (108,113); text in range: 'throw' => 0 results:
+
+PerlNamespaceReference at (117,134); text in range: 'LibraryException3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_CONTENT at 131 in Exceptions.pm
+
+PerlSubReference at (136,141); text in range: 'throw' => 0 results:
+

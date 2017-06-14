@@ -33,8 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class PerlLightNamespaceDefinitionElement
-  extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlNamespaceDefinitionStub>
+public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement>
   implements PerlNamespaceDefinitionWithIdentifier {
 
   @NotNull
@@ -55,8 +54,8 @@ public class PerlLightNamespaceDefinitionElement
   @NotNull
   private final Map<String, List<String>> myExportTags;
 
-  public PerlLightNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionStub stub) {
-    super(stub, stub.getPackageName());
+  public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate, @NotNull PerlNamespaceDefinitionStub stub) {
+    super(delegate, stub.getPackageName(), stub.getStubType());
     myMroType = stub.getMroType();
     myParentNamespacesNames = stub.getParentNamespacesNames();
     myAnnotations = stub.getAnnotations();
@@ -144,5 +143,33 @@ public class PerlLightNamespaceDefinitionElement
     else {
       super.accept(visitor);
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof PerlLightNamespaceDefinitionElement)) return false;
+    if (!super.equals(o)) return false;
+
+    PerlLightNamespaceDefinitionElement element = (PerlLightNamespaceDefinitionElement)o;
+
+    if (getMroType() != element.getMroType()) return false;
+    if (!getParentNamespacesNames().equals(element.getParentNamespacesNames())) return false;
+    if (getAnnotations() != null ? !getAnnotations().equals(element.getAnnotations()) : element.getAnnotations() != null) return false;
+    if (!myExport.equals(element.myExport)) return false;
+    if (!myExportOk.equals(element.myExportOk)) return false;
+    return myExportTags.equals(element.myExportTags);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = super.hashCode();
+    result = 31 * result + getMroType().hashCode();
+    result = 31 * result + getParentNamespacesNames().hashCode();
+    result = 31 * result + (getAnnotations() != null ? getAnnotations().hashCode() : 0);
+    result = 31 * result + myExport.hashCode();
+    result = 31 * result + myExportOk.hashCode();
+    result = 31 * result + myExportTags.hashCode();
+    return result;
   }
 }

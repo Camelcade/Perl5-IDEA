@@ -49,12 +49,6 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
     return calcLightElementsFromPsi();
   }
 
-  @NotNull
-  protected abstract List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
-
-  @NotNull
-  protected abstract List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi();
-
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {

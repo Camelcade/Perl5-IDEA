@@ -22,8 +22,8 @@ import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import gnu.trove.TIntObjectHashMap;
+import gnu.trove.TObjectIntHashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -32,6 +32,20 @@ import java.util.List;
 
 public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPolyNamedElementStub, PerlPolyNamedElement>
   implements PsiElementProvider {
+  private static final TObjectIntHashMap<IStubElementType> DIRECT_MAP = new TObjectIntHashMap<>();
+  private static final TIntObjectHashMap<IStubElementType> REVERSE_MAP = new TIntObjectHashMap<>();
+
+  static {
+    // 0 is reserved for n/a
+    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_SUB_DEFINITION, 1);
+    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION, 2);
+
+    DIRECT_MAP.forEachEntry((type, id) -> {
+      REVERSE_MAP.put(id, type);
+      return true;
+    });
+  }
+
   public PerlPolyNamedElementType(@NotNull String debugName) {
     super(debugName, PerlLanguage.INSTANCE);
   }
@@ -94,22 +108,19 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   }
 
   private static int getSerializationId(@NotNull StubElement stubElement) {
-    if (stubElement instanceof PerlSubDefinitionStub) {
-      return 0;
+    int id = DIRECT_MAP.get(stubElement.getStubType());
+    if (id > 0) {
+      return id;
     }
-    else if (stubElement instanceof PerlNamespaceDefinitionStub) {
-      return 1;
-    }
-    throw new IllegalArgumentException("Unregistered stub element class:" + stubElement);
+    throw new IllegalArgumentException("Unregistered stub element class:" + stubElement.getStubType());
   }
 
   @NotNull
   private static IStubElementType getElementTypeById(int id) {
-    if (id == 0) {
-      return PerlStubElementTypes.LIGHT_SUB_DEFINITION;
-    }
-    else if (id == 1) {
-      return PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
+    assert id > 0;
+    IStubElementType type = REVERSE_MAP.get(id);
+    if (type != null) {
+      return type;
     }
     throw new IllegalArgumentException("Unregistered stub element id:" + id);
   }

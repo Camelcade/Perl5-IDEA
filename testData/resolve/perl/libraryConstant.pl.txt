@@ -1,0 +1,56 @@
+PerlNamespaceReference at (1,18); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (20,34); text in range: 'LIBRARY_CONST1' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_BARE at 41 in Constants.pm
+
+PerlNamespaceReference at (36,53); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (55,69); text in range: 'LIBRARY_CONST2' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_SQ at 81 in Constants.pm
+
+PerlNamespaceReference at (71,88); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (90,104); text in range: 'LIBRARY_CONST3' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 111 in Constants.pm
+
+PerlNamespaceReference at (106,123); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (125,139); text in range: 'LIBRARY_CONST4' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 129 in Constants.pm
+
+PerlNamespaceReference at (141,158); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (160,174); text in range: 'LIBRARY_CONST1' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_BARE at 41 in Constants.pm
+
+PerlNamespaceReference at (176,193); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (195,209); text in range: 'LIBRARY_CONST2' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_SQ at 81 in Constants.pm
+
+PerlNamespaceReference at (211,228); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (230,244); text in range: 'LIBRARY_CONST3' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 111 in Constants.pm
+
+PerlNamespaceReference at (246,263); text in range: 'MyTest::Constants' => 1 results:
+	NAMESPACE at 0 in Constants.pm
+
+PerlSubReference at (265,279); text in range: 'LIBRARY_CONST4' => 1 results:
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 129 in Constants.pm
+

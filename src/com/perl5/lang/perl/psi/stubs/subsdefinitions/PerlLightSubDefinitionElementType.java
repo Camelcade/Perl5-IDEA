@@ -19,8 +19,8 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -33,8 +33,8 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
   }
 
   @Override
-  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlLightSubDefinitionElement(stub);
+  public final PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
+    throw new IncorrectOperationException("Light elements should be created by wrappers, not element types");
   }
 
   @Override

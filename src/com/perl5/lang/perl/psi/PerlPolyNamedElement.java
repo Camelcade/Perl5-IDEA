@@ -40,4 +40,16 @@ public interface PerlPolyNamedElement extends StubBasedPsiElement<PerlPolyNamedE
    */
   @NotNull
   List<PerlDelegatingLightNamedElement> calcLightElements();
+
+  /**
+   * Internal sub for calculating light elements from stubs
+   */
+  @NotNull
+  List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub);
+
+  /**
+   * Internal sub for calculating light elements from psi
+   */
+  @NotNull
+  List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi();
 }

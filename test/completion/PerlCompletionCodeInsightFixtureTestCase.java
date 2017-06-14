@@ -34,7 +34,21 @@ import java.util.List;
 public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase {
   protected static List<String> LIBRARY_PACKAGES = Arrays.asList(
     "MyTest::Some::Package",
-    "MyTest::Something"
+    "MyTest::Something",
+    "MyTest::Constants",
+    "MyTest::Exceptions",
+    // these has no files
+    "Library::Exception",
+    "LibraryException",
+    "Library::Exception2",
+    "LibraryException3"
+  );
+
+  protected static List<String> LIBRARY_PM_FILES = Arrays.asList(
+    "MyTest::Some::Package",
+    "MyTest::Something",
+    "MyTest::Constants",
+    "MyTest::Exceptions"
   );
 
   protected static List<String> LIBRARY_GLOBAL_ARRAYS = Arrays.asList(

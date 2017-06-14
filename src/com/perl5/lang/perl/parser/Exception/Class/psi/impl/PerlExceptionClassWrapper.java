@@ -39,9 +39,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlLightExceptionClassElementType.LIGHT_EXCEPTION_CLASS;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
 
 public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
+
   public PerlExceptionClassWrapper(@NotNull PerlPolyNamedElementStub stub,
                                    @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
@@ -53,16 +54,16 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
-    return stub.getChildrenStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_EXCEPTION_CLASS)
-      .map(childStub -> new PerlLightExceptionClassDefinition((PerlNamespaceDefinitionStub)childStub))
+  public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+    return stub.getLightNamedElementsStubs().stream()
+      .filter(childStub -> childStub.getStubType() == LIGHT_NAMESPACE_DEFINITION)
+      .map(childStub -> new PerlLightExceptionClassDefinition(this, (PerlNamespaceDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : PerlArrayUtil.collectListElements(firstChild, null)) {
@@ -70,7 +71,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
         result.add(new PerlLightExceptionClassDefinition(
           this,
           ElementManipulators.getValueText(listElement),
-          LIGHT_EXCEPTION_CLASS,
+          LIGHT_NAMESPACE_DEFINITION,
           listElement,
           PerlMroType.DFS,
           Collections.singletonList("Exception::Class::Base"), // fixme NYI

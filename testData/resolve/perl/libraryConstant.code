@@ -1,0 +1,9 @@
+
+MyTest::Constants::LIBRARY_CONST1;
+MyTest::Constants::LIBRARY_CONST2;
+MyTest::Constants::LIBRARY_CONST3;
+MyTest::Constants::LIBRARY_CONST4;
+MyTest::Constants->LIBRARY_CONST1;
+MyTest::Constants->LIBRARY_CONST2;
+MyTest::Constants->LIBRARY_CONST3;
+MyTest::Constants->LIBRARY_CONST4;

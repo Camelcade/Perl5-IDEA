@@ -1,49 +1,49 @@
 PerlNamespaceFileReference at (4,20); text in range: 'Exception::Class' => 0 results:
 
 PerlNamespaceReference at (163,173); text in range: 'Exception1' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_SQ at 25 in exceptionClass.pl
 
 PerlSubReference at (177,182); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (186,196); text in range: 'Exception2' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_DQ at 43 in exceptionClass.pl
 
 PerlSubReference at (200,205); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (209,219); text in range: 'Exception3' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_SQ at 61 in exceptionClass.pl
 
 PerlSubReference at (223,228); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (232,242); text in range: 'Exception4' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_DQ at 80 in exceptionClass.pl
 
 PerlSubReference at (246,251); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (255,265); text in range: 'Exception5' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_BARE at 100 in exceptionClass.pl
 
 PerlSubReference at (269,274); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (278,288); text in range: 'Exception6' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_CONTENT at 126 in exceptionClass.pl
 
 PerlSubReference at (292,297); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (301,311); text in range: 'Exception7' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_CONTENT at 137 in exceptionClass.pl
 
 PerlSubReference at (315,320); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (324,334); text in range: 'Exception8' => 1 results:
-	nodeless; PerlLightExceptionClassDefinition(LIGHT_EXCEPTION_CLASS)
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
 	Perl5: STRING_CONTENT at 148 in exceptionClass.pl
 
 PerlSubReference at (338,343); text in range: 'throw' => 0 results:

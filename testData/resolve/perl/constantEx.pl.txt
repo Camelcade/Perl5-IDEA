@@ -1,34 +1,34 @@
 PerlNamespaceFileReference at (4,12); text in range: 'constant' => 0 results:
 
 PerlSubReference at (201,207); text in range: 'CONST1' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_BARE at 19 in constantEx.pl
 
 PerlSubReference at (209,215); text in range: 'CONST2' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_SQ at 41 in constantEx.pl
 
 PerlSubReference at (217,223); text in range: 'CONST3' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_DQ at 63 in constantEx.pl
 
 PerlSubReference at (225,231); text in range: 'CONST4' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_SQ at 85 in constantEx.pl
 
 PerlSubReference at (233,239); text in range: 'CONST5' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_DQ at 107 in constantEx.pl
 
 PerlSubReference at (241,247); text in range: 'CONST6' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_CONTENT at 141 in constantEx.pl
 
 PerlSubReference at (249,255); text in range: 'CONST7' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_CONTENT at 159 in constantEx.pl
 
 PerlSubReference at (257,263); text in range: 'CONST8' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_CONSTANT_DEFINITION)
+	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
 	Perl5: STRING_CONTENT at 177 in constantEx.pl
 

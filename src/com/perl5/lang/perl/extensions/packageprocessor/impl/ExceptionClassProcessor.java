@@ -24,6 +24,6 @@ import org.jetbrains.annotations.NotNull;
 public class ExceptionClassProcessor extends PerlPackageProcessorBase {
   @Override
   public boolean parseUseParameters(@NotNull PerlBuilder b, int l) {
-    return wrapExpression(PerlExceptionClassWrapperElementType.INSTANCE, b, l);
+    return wrapExpression(PerlExceptionClassWrapperElementType.EXCEPTION_CLASS_WRAPPER, b, l);
   }
 }

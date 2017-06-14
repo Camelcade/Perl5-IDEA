@@ -47,26 +47,33 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
     return "testData/completion/perl";
   }
 
+  public void testLibraryConstants() {
+    doTestContains("LIBRARY_CONST1",
+                   "LIBRARY_CONST2",
+                   "LIBRARY_CONST3",
+                   "LIBRARY_CONST4");
+  }
+
   public void testUsePackageInCurrentDir() {
     addCustomPackage();
     setTargetPerlVersion(PerlVersion.V5_10);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_12);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_14);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_16);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_18);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_20);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_22);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_24);
-    doTestPackageAndVersions("MyCustomPackage");
+    doTestPackageFilesAndVersions("MyCustomPackage");
     setTargetPerlVersion(PerlVersion.V5_26);
-    doTestPackageAndVersions();
+    doTestPackageFilesAndVersions();
   }
 
   public void testExceptionClass() {
@@ -121,7 +128,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   public void testPackageToStringQPartial() {
-    doTest(LIBRARY_PACKAGES);
+    doTest(LIBRARY_PM_FILES);
   }
 
   public void testPackageToStringQQ() {
@@ -324,15 +331,15 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   public void testPackageUse() {
-    doTestPackageAndVersions();
+    doTestPackageFilesAndVersions();
   }
 
   public void testPackageNo() {
-    doTestPackageAndVersions();
+    doTestPackageFilesAndVersions();
   }
 
   public void testPackageRequire() {
-    doTestPackageAndVersions();
+    doTestPackageFilesAndVersions();
   }
 
   public void testPackageMy() {
@@ -354,6 +361,10 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
 
   private void doTestPackageAndVersions(String... more) {
     doTest(BUILT_IN_VERSIONS, LIBRARY_PACKAGES, Arrays.asList(more));
+  }
+
+  private void doTestPackageFilesAndVersions(String... more) {
+    doTest(BUILT_IN_VERSIONS, LIBRARY_PM_FILES, Arrays.asList(more));
   }
 
   private void doTestAllPackages() {

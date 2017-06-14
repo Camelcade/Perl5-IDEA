@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-public class PerlLightSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement, PerlSubDefinitionStub>
+public class PerlLightSubDefinitionElement extends PerlDelegatingLightNamedElement<PerlPolyNamedElement>
   implements PerlSubDefinitionElement {
   @Nullable
   private final String myPackageName;
@@ -56,8 +56,8 @@ public class PerlLightSubDefinitionElement extends PerlDelegatingLightNamedEleme
     myAnnotations = annotations;
   }
 
-  public PerlLightSubDefinitionElement(@NotNull PerlSubDefinitionStub stub) {
-    super(stub, stub.getSubName());
+  public PerlLightSubDefinitionElement(@NotNull PerlPolyNamedElement delegate, @NotNull PerlSubDefinitionStub stub) {
+    super(delegate, stub.getSubName(), stub.getStubType());
     myPackageName = stub.getPackageName();
     mySubArguments = stub.getSubArgumentsList();
     myAnnotations = stub.getAnnotations();

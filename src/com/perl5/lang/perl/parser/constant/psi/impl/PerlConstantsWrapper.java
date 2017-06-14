@@ -21,7 +21,6 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlLightConstantDefinitionElementType;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -41,6 +40,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
+
 public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
 
   public PerlConstantsWrapper(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
@@ -53,16 +54,16 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
-    return stub.getChildrenStubs().stream()
-      .filter(childStub -> childStub.getStubType() == PerlLightConstantDefinitionElementType.LIGHT_CONSTANT_DEFINITION)
-      .map(childStub -> new PerlLightConstantDefinitionElement((PerlSubDefinitionStub)childStub))
+  public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
+    return stub.getLightNamedElementsStubs().stream()
+      .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
+      .map(childStub -> new PerlLightConstantDefinitionElement(this, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
 
   @NotNull
   @Override
-  protected List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     boolean multipleDefinition = false;
     if (firstChild instanceof PsiPerlAnonHash) {
@@ -77,7 +78,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
         result.add(new PerlLightConstantDefinitionElement(
           this,
           ElementManipulators.getValueText(listElement),
-          PerlLightConstantDefinitionElementType.LIGHT_CONSTANT_DEFINITION,
+          LIGHT_SUB_DEFINITION,
           listElement,
           PerlPackageUtil.getContextPackageName(this),
           Collections.emptyList(),
