@@ -104,7 +104,7 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
   public final boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
     assert psi instanceof PerlPolyNamedElement;
-    return ((PerlPolyNamedElement)psi).getLightElements().size() > 0;
+    return !((PerlPolyNamedElement)psi).getLightElements().isEmpty();
   }
 
   private static int getSerializationId(@NotNull StubElement stubElement) {
