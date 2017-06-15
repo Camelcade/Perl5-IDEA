@@ -25,7 +25,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -42,10 +42,10 @@ import java.util.List;
 public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyReferencedElementProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {
-    return element instanceof PerlNamespaceDefinitionElement;
+    return element instanceof PerlNamespaceDefinitionWithIdentifier;
   }
 
-  protected boolean isFileToBeRenamed(PerlNamespaceDefinitionElement namespaceDefinition) {
+  protected boolean isFileToBeRenamed(PerlNamespaceDefinitionWithIdentifier namespaceDefinition) {
     String currentPackageName = namespaceDefinition.getPackageName();
     assert currentPackageName != null;
 
@@ -65,7 +65,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
   @Nullable
   @Override
   public Runnable getPostRenameCallback(PsiElement element, final String newName, RefactoringElementListener elementListener) {
-    if (element instanceof PerlNamespaceDefinitionElement && isFileToBeRenamed((PerlNamespaceDefinitionElement)element)) {
+    if (element instanceof PerlNamespaceDefinitionWithIdentifier && isFileToBeRenamed((PerlNamespaceDefinitionWithIdentifier)element)) {
       final PsiFile file = element.getContainingFile();
 
       return new Runnable() {
