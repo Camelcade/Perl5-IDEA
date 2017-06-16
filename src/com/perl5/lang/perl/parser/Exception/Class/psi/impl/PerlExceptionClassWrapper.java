@@ -32,11 +32,14 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
@@ -66,24 +69,45 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    for (PsiElement listElement : PerlArrayUtil.collectListElements(firstChild, null)) {
-      if (listElement instanceof PerlString || listElement instanceof PerlStringContentElement) {
-        result.add(new PerlLightExceptionClassDefinition(
-          this,
-          ElementManipulators.getValueText(listElement),
-          LIGHT_NAMESPACE_DEFINITION,
-          listElement,
-          PerlMroType.DFS,
-          Collections.singletonList("Exception::Class::Base"), // fixme NYI
-          PerlNamespaceAnnotations.tryToFindAnnotations(listElement, getParent()),
-          Collections.emptyList(),
-          Collections.emptyList(),
-          Collections.emptyMap()
-        ));
-      }
+    List<PsiElement> listElements = PerlArrayUtil.collectListElements(firstChild);
+
+    for (int i = 0; i < listElements.size(); i++) {
+      processExceptionElement(listElements, i, result);
     }
 
     return result;
+  }
+
+  private void processExceptionElement(@NotNull List<PsiElement> listElements,
+                                       int currentIndex,
+                                       @NotNull List<PerlDelegatingLightNamedElement> result) {
+    PsiElement listElement = listElements.get(currentIndex);
+    if (!(listElement instanceof PerlString || listElement instanceof PerlStringContentElement)) {
+      return;
+    }
+
+    Map<String, PsiElement> exceptionSettings =
+      listElements.size() > currentIndex + 1
+      ? PerlHashUtil.collectHashElements(listElements.get(currentIndex + 1))
+      : Collections.emptyMap();
+
+    String parentClass = PerlScalarUtil.getStringContent(exceptionSettings.get("isa"));
+    if (parentClass == null) {
+      parentClass = "Exception::Class::Base";
+    }
+
+    result.add(new PerlLightExceptionClassDefinition(
+      this,
+      ElementManipulators.getValueText(listElement),
+      LIGHT_NAMESPACE_DEFINITION,
+      listElement,
+      PerlMroType.DFS,
+      Collections.singletonList(parentClass),
+      PerlNamespaceAnnotations.tryToFindAnnotations(listElement, getParent()),
+      Collections.emptyList(),
+      Collections.emptyList(),
+      Collections.emptyMap()
+    ));
   }
 
   @Override

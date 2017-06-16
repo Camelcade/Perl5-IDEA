@@ -1,0 +1,40 @@
+25 - 35: ''Seption1'': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 41
+
+41 - 49: 'Seption2': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 93
+
+41 - 49: 'Seption2': Parent classes
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 25
+
+93 - 101: 'Seption3': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 187
+
+93 - 101: 'Seption3': Parent classes
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 41
+
+187 - 195: 'Seption4': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 272
+
+187 - 195: 'Seption4': Parent classes
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 93
+
+272 - 280: 'Seption5': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 396
+
+272 - 280: 'Seption5': Parent classes
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 187
+
+396 - 404: 'Seption6': Parent classes
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 272
+

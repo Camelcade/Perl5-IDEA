@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -24,11 +25,14 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -139,5 +143,16 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
     PerlImportsCollector collector = new PerlScalarImportsCollector();
     PerlUtil.processImportedEntities(rootElement, collector);
     return collector.getResult();
+  }
+
+  /**
+   * Extracts value from the string element
+   *
+   * @param string psi element that may be StringElement or stringcontentElement
+   * @return string content or null
+   */
+  @Nullable
+  public static String getStringContent(@Nullable PsiElement string) {
+    return string instanceof PerlString || string instanceof PerlStringContentElement ? ElementManipulators.getValueText(string) : null;
   }
 }

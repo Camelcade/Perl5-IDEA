@@ -37,6 +37,14 @@ public class PerlGutterMarkersTest extends PerlLightCodeInsightFixtureTestCase {
   }
 
   public void testSupermethods() {
+    doTest();
+  }
+
+  public void testExceptionClasses() {
+    doTest();
+  }
+
+  private void doTest() {
     initWithFileSmart();
     List<GutterMark> allMarkers = myFixture.findAllGutters();
     String text = myFixture.getDocument(myFixture.getFile()).getText();

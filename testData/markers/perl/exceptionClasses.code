@@ -1,9 +1,3 @@
-package Foo::Bar;
-use strict;
-use warnings;
-use Data::Dumper;
-use v5.10;
-
 use Exception::Class
     'Seption1',
     Seption2 => {
@@ -19,7 +13,7 @@ use Exception::Class
     },
     Seption5 => {
         alias  => 'aliasfor5',
-        ias    => 'Seption4',
+        isa    => 'Seption4',
         fields => [ qw/test1 test2/ ]
     },
     Seption6 => {
@@ -31,27 +25,3 @@ use Exception::Class
             /
     }
 ;
-
-sub mydump;
-
-mydump($_) for qw/Seption1 Seption2  Seption3 Seption4 Seption5 Seption6 Foo::Bar/;
-
-aliasfor5();
-#Seption4->Fields();
-
-sub mydump{
-    my $ns = shift;
-
-    say "Dumping $ns";
-
-    no strict 'refs';
-    for my $name (keys %{$ns."::"}) {
-        say "  $name:";
-        for my $slot (qw/ARRAY HASH CODE/) {
-            if (defined *{"${ns}::${name}"}{$slot}) {
-                say "    $slot";
-            }
-        }
-    }
-}
-
