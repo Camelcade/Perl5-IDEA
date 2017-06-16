@@ -125,7 +125,7 @@ public class PerlArrayUtil implements PerlElementTypes {
 
   /**
    * Traversing root element, expanding lists and collecting all elements to the plain one:
-   *  ($a, $b, ($c, $d)), qw/bla bla/ -> $a, $b, $c, $d, bla, bla;
+   * ($a, $b, ($c, $d)), qw/bla bla/ -> $a, $b, $c, $d, bla, bla;
    *
    * @param rootElement top-level container or a single element
    * @return passed or new List of found PsiElements
@@ -149,6 +149,12 @@ public class PerlArrayUtil implements PerlElementTypes {
     else if (rootElement instanceof PerlStringList) {
       PsiElement element = rootElement.getFirstChild();
       while (element != null) {
+        if (PsiUtilCore.getElementType(element) == LP_STRING_QW) {
+          element = element.getFirstChild();
+          if (element == null) {
+            break;
+          }
+        }
         if (element instanceof PerlStringContentElementImpl) {
           result.add(element);
         }

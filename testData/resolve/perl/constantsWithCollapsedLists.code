@@ -8,13 +8,21 @@ use constant {
     q'CONST4'  => 42,
     %$hash,
     qq"CONST5" => 42,
+    "ThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100Chars" => 42,
     qw/
         CONST6 42
         CONST7 42
         CONST8 42
+        CONST16 42
+        CONST17 42
+        CONST18 42
+        CONST26 42
+        CONST27 42
+        CONST28 42
         /
 };
 
+ThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100Chars;
 CONST1;
 CONST2;
 CONST3;
@@ -23,3 +31,9 @@ CONST5;
 CONST6;
 CONST7;
 CONST8;
+CONST16;
+CONST17;
+CONST18;
+CONST26;
+CONST27;
+CONST28;
