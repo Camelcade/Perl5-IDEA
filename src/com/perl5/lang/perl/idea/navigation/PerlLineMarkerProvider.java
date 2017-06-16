@@ -107,7 +107,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
           result.add(builder.createLineMarkerInfo(nameIdentifier));
         }
 
-        final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs(subElement, containingNamespace);
+        final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs(subElement);
 
         if (!overridingSubs.isEmpty()) {
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
