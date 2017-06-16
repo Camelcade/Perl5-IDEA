@@ -34,56 +34,67 @@ import java.util.List;
  */
 public class PerlSubArgument {
 
-  PerlVariableType argumentType;
-  String argumentName;
-  String variableClass;
-  Boolean isOptional;
+  @NotNull
+  private PerlVariableType myArgumentType;
+  @NotNull
+  private String myArgumentName;
 
-  public PerlSubArgument(PerlVariableType variableType, String variableName, String variableClass, boolean isOptional) {
-    this.argumentType = variableType;
-    this.argumentName = variableName;
-    this.isOptional = isOptional;
-    this.variableClass = variableClass;
+  @NotNull
+  private String myVariableClass;
+
+  private Boolean myIsOptional;
+
+  private PerlSubArgument(@NotNull PerlVariableType variableType,
+                          @NotNull String variableName,
+                          @NotNull String variableClass,
+                          boolean isOptional) {
+    myArgumentType = variableType;
+    myArgumentName = variableName;
+    myIsOptional = isOptional;
+    myVariableClass = variableClass;
   }
 
+  @NotNull
   public PerlVariableType getArgumentType() {
-    return argumentType;
+    return myArgumentType;
   }
 
+  @NotNull
   public String getArgumentName() {
-    return argumentName;
+    return myArgumentName;
   }
 
   public Boolean isOptional() {
-    return isOptional;
+    return myIsOptional;
   }
 
   public void setOptional(Boolean optional) {
-    isOptional = optional;
+    myIsOptional = optional;
   }
 
+  @NotNull
   public String getVariableClass() {
-    return variableClass;
+    return myVariableClass;
   }
 
   public String toStringShort() {
-    return StringUtil.isNotEmpty(argumentName) ? argumentType.getSigil() + argumentName : PerlLexer.STRING_UNDEF;
+    return StringUtil.isNotEmpty(myArgumentName) ? myArgumentType.getSigil() + myArgumentName : PerlLexer.STRING_UNDEF;
   }
 
   public String toStringLong() {
-    if (StringUtil.isEmpty(argumentName)) {
+    if (StringUtil.isEmpty(myArgumentName)) {
       return PerlLexer.STRING_UNDEF;
     }
 
-    String shortName = argumentType.getSigil() + argumentName;
-    return StringUtil.isNotEmpty(variableClass) ? variableClass + " " + shortName : shortName;
+    String shortName = myArgumentType.getSigil() + myArgumentName;
+    return StringUtil.isNotEmpty(myVariableClass) ? myVariableClass + " " + shortName : shortName;
   }
 
   private void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(argumentType.toString());
-    dataStream.writeName(argumentName);
-    dataStream.writeName(variableClass);
-    dataStream.writeBoolean(isOptional);
+    dataStream.writeName(myArgumentType.toString());
+    dataStream.writeName(myArgumentName);
+    dataStream.writeName(myVariableClass);
+    dataStream.writeBoolean(myIsOptional);
   }
 
   public boolean isSelf(Project project) {
@@ -91,11 +102,11 @@ public class PerlSubArgument {
   }
 
   public boolean isEmpty() {
-    return StringUtil.isEmpty(argumentName);
+    return StringUtil.isEmpty(myArgumentName);
   }
 
   public PerlContextType getContextType() {
-    if (argumentType == PerlVariableType.SCALAR || argumentType == PerlVariableType.CODE || argumentType == PerlVariableType.GLOB) {
+    if (myArgumentType == PerlVariableType.SCALAR || myArgumentType == PerlVariableType.CODE || myArgumentType == PerlVariableType.GLOB) {
       return PerlContextType.SCALAR;
     }
     return PerlContextType.LIST;
@@ -104,35 +115,61 @@ public class PerlSubArgument {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PerlSubArgument)) return false;
+    if (o == null || getClass() != o.getClass()) return false;
 
     PerlSubArgument argument = (PerlSubArgument)o;
 
-    if (getArgumentType() != argument.getArgumentType()) return false;
-    if (getArgumentName() != null ? !getArgumentName().equals(argument.getArgumentName()) : argument.getArgumentName() != null) {
-      return false;
-    }
-    if (getVariableClass() != null ? !getVariableClass().equals(argument.getVariableClass()) : argument.getVariableClass() != null) {
-      return false;
-    }
-    return isOptional != null ? isOptional.equals(argument.isOptional) : argument.isOptional == null;
+    return myArgumentType == argument.myArgumentType &&
+           myArgumentName.equals(argument.myArgumentName) &&
+           myVariableClass.equals(argument.myVariableClass) &&
+           (myIsOptional != null ? myIsOptional.equals(argument.myIsOptional) : argument.myIsOptional == null);
   }
 
   @Override
   public int hashCode() {
-    int result = getArgumentType() != null ? getArgumentType().hashCode() : 0;
-    result = 31 * result + (getArgumentName() != null ? getArgumentName().hashCode() : 0);
-    result = 31 * result + (getVariableClass() != null ? getVariableClass().hashCode() : 0);
-    result = 31 * result + (isOptional != null ? isOptional.hashCode() : 0);
+    int result = myArgumentType.hashCode();
+    result = 31 * result + myArgumentName.hashCode();
+    result = 31 * result + myVariableClass.hashCode();
+    result = 31 * result + (myIsOptional != null ? myIsOptional.hashCode() : 0);
     return result;
   }
 
+  public static PerlSubArgument optional(@NotNull PerlVariableType variableType, @NotNull String variableName) {
+    return create(variableType, variableName, true);
+  }
+
+  public static PerlSubArgument mandatoryScalar(@NotNull String variableName) {
+    return mandatory(PerlVariableType.SCALAR, variableName);
+  }
+
+  public static PerlSubArgument mandatory(@NotNull PerlVariableType variableType, @NotNull String variableName) {
+    return create(variableType, variableName, false);
+  }
+
+  public static PerlSubArgument mandatory(@NotNull PerlVariableType variableType,
+                                          @NotNull String variableName,
+                                          @NotNull String variableClass) {
+    return create(variableType, variableName, variableClass, false);
+  }
+
+  public static PerlSubArgument create(@NotNull PerlVariableType variableType, @NotNull String variableName, boolean isOptional) {
+    return create(variableType, variableName, "", isOptional);
+  }
+
+  public static PerlSubArgument create(@NotNull PerlVariableType variableType,
+                                       @NotNull String variableName,
+                                       @NotNull String variableClass,
+                                       boolean isOptional) {
+    return new PerlSubArgument(variableType, variableName, variableClass, isOptional);
+  }
+
+  @SuppressWarnings("ConstantConditions")
   private static PerlSubArgument deserialize(@NotNull StubInputStream dataStream) throws IOException {
     PerlVariableType argumentType = PerlVariableType.valueOf(dataStream.readName().toString());
     String argumentName = dataStream.readName().toString();
     String variableClass = dataStream.readName().toString();
     boolean isOptional = dataStream.readBoolean();
-    return new PerlSubArgument(argumentType, argumentName, variableClass, isOptional);
+    return PerlSubArgument.create(argumentType, argumentName, variableClass, isOptional);
   }
 
   @NotNull
@@ -141,7 +178,7 @@ public class PerlSubArgument {
 
     if (argumentsNumber > 0) {
 
-      List<PerlSubArgument> arguments = new ArrayList<PerlSubArgument>(argumentsNumber);
+      List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
 
       for (int i = 0; i < argumentsNumber; i++) {
         arguments.add(deserialize(dataStream));
@@ -153,22 +190,12 @@ public class PerlSubArgument {
     }
   }
 
-  public static PerlSubArgument getEmptyArgument() {
-    return new PerlSubArgument(
-      PerlVariableType.SCALAR,
-      "",
-      "",
-      false
-    );
+  public static PerlSubArgument empty() {
+    return mandatoryScalar("");
   }
 
-  public static PerlSubArgument getSelfArgument() {
-    return new PerlSubArgument(
-      PerlVariableType.SCALAR,
-      "self",
-      "",
-      false
-    );
+  public static PerlSubArgument self() {
+    return mandatoryScalar("self");
   }
 
   public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException {

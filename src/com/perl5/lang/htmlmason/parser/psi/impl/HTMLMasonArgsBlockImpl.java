@@ -63,10 +63,9 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
         PerlVariable variable = ((PerlVariableDeclarationElement)run).getVariable();
         if (variable != null) {
           PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(run);
-          result.add(new PerlSubArgument(
+          result.add(PerlSubArgument.create(
             variable.getActualType(),
             variable.getName(),
-            "",
             nextSibling != null && nextSibling.getNode().getElementType() == FAT_COMMA
           ));
         }

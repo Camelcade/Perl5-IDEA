@@ -25,7 +25,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,23 +82,13 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     {
       PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
       if (variable != null) {
-        arguments.add(new PerlSubArgument(
-          variable.getActualType(),
-          variable.getName(),
-          "",
-          false
-        ));
+        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
       }
     }
     else if (signatureElement instanceof PerlVariableDeclarationElement) {
       if (arguments.isEmpty()) // implicit invocant
       {
-        arguments.add(new PerlSubArgument(
-          PerlVariableType.SCALAR,
-          getDefaultInvocantName().substring(1),
-          "",    // here we could push context package, but now it's unnecessary
-          false
-        ));
+        arguments.add(PerlSubArgument.mandatoryScalar(getDefaultInvocantName().substring(1)));
       }
 
       return super.processSignatureElement(signatureElement, arguments);

@@ -151,12 +151,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     if (signatureElement instanceof PerlVariableDeclarationElement) {
       PerlVariable variable = ((PerlVariableDeclarationElement)signatureElement).getVariable();
       if (variable != null) {
-        arguments.add(new PerlSubArgument(
-          variable.getActualType(),
-          variable.getName(),
-          "",
-          false
-        ));
+        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
       }
       return true;
     }
@@ -210,11 +205,11 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     @Override
     public boolean process(PsiPerlStatement statement) {
       if (myArguments.isEmpty() && PerlPsiUtil.isSelfShortcutStatement(statement)) {
-        myArguments.add(PerlSubArgument.getSelfArgument());
+        myArguments.add(PerlSubArgument.self());
         return true;
       }
       else if (EMPTY_SHIFT_STATEMENT_PATTERN.accepts(statement)) {
-        myArguments.add(myArguments.isEmpty() ? PerlSubArgument.getSelfArgument() : PerlSubArgument.getEmptyArgument());
+        myArguments.add(myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty());
         return true;
       }
       else if (DECLARATION_ASSIGNING_PATTERN.accepts(statement)) {
@@ -253,19 +248,18 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
           if (run instanceof PerlVariableDeclarationElement) {
             PerlVariable variable = ((PerlVariableDeclarationElement)run).getVariable();
             if (variable != null) {
-              newArgument = new PerlSubArgument(
+              newArgument = PerlSubArgument.mandatory(
                 variable.getActualType(),
                 variable.getName(),
-                variableClass,
-                false
+                variableClass
               );
             }
             else {
-              newArgument = PerlSubArgument.getEmptyArgument();
+              newArgument = PerlSubArgument.empty();
             }
           }
           else if (run.getNode().getElementType() == RESERVED_UNDEF) {
-            newArgument = myArguments.isEmpty() ? PerlSubArgument.getSelfArgument() : PerlSubArgument.getEmptyArgument();
+            newArgument = myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty();
           }
 
           if (newArgument != null) {

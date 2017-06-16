@@ -46,7 +46,7 @@ public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase imple
   protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
     if (!super.processSignatureElement(signatureElement, arguments)) {
       if (signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
-        PerlSubArgument newArgument = PerlSubArgument.getEmptyArgument();
+        PerlSubArgument newArgument = PerlSubArgument.empty();
         newArgument.setOptional(signatureElement.getFirstChild() != signatureElement.getLastChild()); // has elements inside, means optional
         arguments.add(newArgument);
       }
