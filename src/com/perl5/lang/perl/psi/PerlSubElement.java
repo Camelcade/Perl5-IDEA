@@ -16,8 +16,55 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import gnu.trove.THashSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.Set;
 
 public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner {
+  @Nullable
+  default PerlSubElement getDirectSuperMethod() {
+    if (!isMethod()) {
+      return null;
+    }
+
+    Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
+      getProject(),
+      getPackageName(),
+      getSubName(),
+      true
+    );
+
+    for (PsiElement resolveTarget : resolveTargets) {
+      if (resolveTarget instanceof PerlSubElement) {
+        return (PerlSubElement)resolveTarget;
+      }
+    }
+    return null;
+  }
+
+  @NotNull
+  default PerlSubElement getTopmostSuperMethod() {
+    Set<String> classRecursion = new THashSet<>();
+
+    PerlSubElement run = this;
+    while (true) {
+      String packageName = run.getPackageName();
+      if (StringUtil.isEmpty(packageName) || classRecursion.contains(packageName)) {
+        return run;
+      }
+      classRecursion.add(packageName);
+      PerlSubElement newRun = run.getDirectSuperMethod();
+      if (newRun == null) {
+        return run;
+      }
+      run = newRun;
+    }
+  }
 }

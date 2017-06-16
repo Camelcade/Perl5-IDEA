@@ -21,6 +21,7 @@ import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
+
 public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
 
   /**

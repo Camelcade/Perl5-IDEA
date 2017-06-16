@@ -103,7 +103,7 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 
   @NotNull
   private PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
-    PerlSubElement topLevelSuperMethod = PerlSubUtil.getTopLevelSuperMethod(subBase);
+    PerlSubElement topLevelSuperMethod = subBase.getTopmostSuperMethod();
     String canonicalName = topLevelSuperMethod.getCanonicalName();
 
     if (topLevelSuperMethod == subBase || canonicalName == null) {

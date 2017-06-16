@@ -84,18 +84,19 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
     }
   }
 
-  private void addSubDefinitionsMarkers(@NotNull PerlSubDefinitionElement element, Collection<? super RelatedItemLineMarkerInfo> result) {
-    PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
+  private void addSubDefinitionsMarkers(@NotNull PerlSubDefinitionElement subElement,
+                                        Collection<? super RelatedItemLineMarkerInfo> result) {
+    PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(subElement, PerlNamespaceDefinitionElement.class);
     if (containingNamespace != null) {
-      final String packageName = element.getPackageName();
-      final String subName = element.getSubName();
-      PsiElement nameIdentifier = element.getNameIdentifier();
+      final String packageName = subElement.getPackageName();
+      final String subName = subElement.getSubName();
+      PsiElement nameIdentifier = subElement.getNameIdentifier();
       if (nameIdentifier == null) {
-        nameIdentifier = element;
+        nameIdentifier = subElement;
       }
 
       if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName)) {
-        PerlSubElement parentSub = PerlSubUtil.getDirectSuperMethod(element);
+        PerlSubElement parentSub = subElement.getDirectSuperMethod();
 
         if (parentSub != null) {
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
@@ -106,7 +107,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
           result.add(builder.createLineMarkerInfo(nameIdentifier));
         }
 
-        final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs(element, containingNamespace);
+        final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs(subElement, containingNamespace);
 
         if (!overridingSubs.isEmpty()) {
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder

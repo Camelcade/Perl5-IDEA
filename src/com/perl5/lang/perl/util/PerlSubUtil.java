@@ -28,7 +28,6 @@ import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex;
@@ -220,8 +219,8 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   public static String getArgumentsListAsString(List<PerlSubArgument> subArguments) {
     int argumentsNumber = subArguments.size();
 
-    List<String> argumentsList = new ArrayList<String>();
-    List<String> optionalAargumentsList = new ArrayList<String>();
+    List<String> argumentsList = new ArrayList<>();
+    List<String> optionalAargumentsList = new ArrayList<>();
 
     for (PerlSubArgument argument : subArguments) {
       if (!optionalAargumentsList.isEmpty() || argument.isOptional()) {
@@ -261,61 +260,16 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     }
   }
 
-  @NotNull
-  public static PerlSubElement getTopLevelSuperMethod(@NotNull PerlSubElement subBase) {
-    return getTopLevelSuperMethod(subBase, new THashSet<String>());
-  }
-
-  /**
-   * Recursively collecting superMethods
-   *
-   * @param subBase        base method to search
-   * @param classRecursion class recursion set
-   * @return empty list if we've already been in this class, or list of topmost methods
-   */
-  @NotNull
-  private static PerlSubElement getTopLevelSuperMethod(@NotNull PerlSubElement subBase, Set<String> classRecursion) {
-    String packageName = subBase.getPackageName();
-
-    if (packageName == null || classRecursion.contains(packageName)) {
-      return subBase;
-    }
-
-    classRecursion.add(packageName);
-
-    PerlSubElement directSuperMethod = getDirectSuperMethod(subBase);
-    return directSuperMethod == null ? subBase : getTopLevelSuperMethod(directSuperMethod, classRecursion);
-  }
-
-  @Nullable
-  public static PerlSubElement getDirectSuperMethod(PerlSubElement subBase) {
-    if (!subBase.isMethod()) {
-      return null;
-    }
-
-    Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
-      subBase.getProject(),
-      subBase.getPackageName(),
-      subBase.getSubName(),
-      true
-    );
-
-    for (PsiElement resolveTarget : resolveTargets) {
-      if (resolveTarget instanceof PerlSubElement) {
-        return (PerlSubElement)resolveTarget;
-      }
-    }
-    return null;
-  }
 
   @NotNull
   public static List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
-    return collectOverridingSubs(subBase, new THashSet<String>());
+    return collectOverridingSubs(subBase, new THashSet<>());
   }
 
   @NotNull
   public static List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
-    List<PerlSubElement> result = new ArrayList<PerlSubElement>();
+    List<PerlSubElement> result;
+    result = new ArrayList<>();
     for (PerlSubElement directDescendant : getDirectOverridingSubs(subBase)) {
       String packageName = directDescendant.getPackageName();
       if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName)) {
@@ -332,25 +286,22 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   public static List<PerlSubElement> getDirectOverridingSubs(@NotNull PerlSubElement subBase) {
     PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
 
-    return containingNamespace == null ? Collections.<PerlSubElement>emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
+    return containingNamespace == null ? Collections.emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
   }
 
   @NotNull
   public static List<PerlSubElement> getDirectOverridingSubs(@NotNull final PerlSubElement subBase,
                                                              @NotNull PerlNamespaceDefinitionElement containingNamespace) {
-    final List<PerlSubElement> overridingSubs = new ArrayList<PerlSubElement>();
+    final List<PerlSubElement> overridingSubs = new ArrayList<>();
     final String subName = subBase.getSubName();
 
-    PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, new Processor<PerlSubElement>() {
-      @Override
-      public boolean process(PerlSubElement overridingSub) {
-        String overridingSubName = overridingSub.getSubName();
-        if (StringUtil.equals(overridingSubName, subName) && subBase == getDirectSuperMethod(overridingSub)) {
-          overridingSubs.add(overridingSub);
-          return false;
-        }
-        return true;
+    PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, overridingSub -> {
+      String overridingSubName = overridingSub.getSubName();
+      if (StringUtil.equals(overridingSubName, subName) && subBase == overridingSub.getDirectSuperMethod()) {
+        overridingSubs.add(overridingSub);
+        return false;
       }
+      return true;
     });
 
     return overridingSubs;
@@ -358,13 +309,10 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
 
   @NotNull
   public static List<PsiElement> collectRelatedItems(@NotNull String canonicalName, @NotNull Project project) {
-    final List<PsiElement> result = new ArrayList<PsiElement>();
-    processRelatedItems(canonicalName, project, new Processor<PsiElement>() {
-      @Override
-      public boolean process(PsiElement element) {
-        result.add(element);
-        return true;
-      }
+    final List<PsiElement> result = new ArrayList<>();
+    processRelatedItems(canonicalName, project, element -> {
+      result.add(element);
+      return true;
     });
     return result;
   }
