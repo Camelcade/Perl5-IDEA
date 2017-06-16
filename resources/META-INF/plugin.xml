@@ -37,6 +37,7 @@
      <ul>
      <li>QW strings now may be aligned using formatter.</li>
      <li>Added Code Style settings for alignment of: QW contents, Fat arrows and Ternary expression ? and :</li>
+     <li>Implemented <code>Exception::Class</code> module support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/848">#848</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -352,6 +353,9 @@
     <stubElementTypeHolder class="com.perl5.lang.perl.psi.stubs.PerlStubElementTypes"/>
     <stubElementTypeHolder class="com.perl5.lang.perl.parser.Exception.Class.psi.elementTypes.PerlExceptionClassWrapperElementType"/>
     <stubElementTypeHolder class="com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType"/>
+
+    <vetoRenameCondition implementation="com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlExceptionClassFieldsVeto"/>
+
 
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>

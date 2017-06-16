@@ -23,6 +23,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
@@ -89,9 +90,14 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
   @Nullable
   @Override
   public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor) {
+    if (PsiElementRenameHandler.isVetoed(element)) {
+      return null;
+    }
+
     if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
       return suggestSuperMethod((PerlSubElement)element);
     }
+
     return super.substituteElementToRename(element, editor);
   }
 

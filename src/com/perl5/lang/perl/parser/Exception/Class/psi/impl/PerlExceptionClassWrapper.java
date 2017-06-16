@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.Exception.Class.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -25,6 +26,7 @@ import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionCl
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
@@ -35,22 +37,18 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashEntry;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
 public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
+  public static final String FIELDS_METHOD_NAME = "Fields";
 
   public PerlExceptionClassWrapper(@NotNull PerlPolyNamedElementStub stub,
                                    @NotNull IStubElementType nodeType) {
@@ -102,16 +100,62 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
     if (!(listElement instanceof PerlString || listElement instanceof PerlStringContentElement)) {
       return;
     }
+    String namespaceName = ElementManipulators.getValueText(listElement);
+    if (StringUtil.isEmpty(namespaceName)) {
+      return;
+    }
 
     Map<String, PerlHashEntry> exceptionSettings =
       listElements.size() > currentIndex + 1
       ? PerlHashUtil.collectHashElements(listElements.get(currentIndex + 1))
       : Collections.emptyMap();
 
+    // Building fields
+    Set<PerlSubArgument> throwArguments = Collections.emptySet();
+    PerlHashEntry fieldsEntry = exceptionSettings.get("fields");
+    if (fieldsEntry != null && fieldsEntry.isComplete()) {
+      PsiElement fieldsContainer = fieldsEntry.getNonNullValueElement();
+      if (fieldsContainer instanceof PsiPerlAnonArray) {
+        fieldsContainer = ((PsiPerlAnonArray)fieldsContainer).getExpr();
+      }
+      List<PsiElement> elements = PerlArrayUtil.collectListElements(fieldsContainer);
+      if (!elements.isEmpty()) {
+
+        // Fields method
+        result.add(new PerlLightMethodDefinitionElement(
+          this,
+          FIELDS_METHOD_NAME,
+          LIGHT_METHOD_DEFINITION,
+          fieldsEntry.keyElement,
+          namespaceName,
+          Collections.emptyList(),
+          null
+        ));
+
+        // fields themselves
+        throwArguments = new LinkedHashSet<>();
+        for (PsiElement fieldElement : elements) {
+          String fieldName = PerlScalarUtil.getStringContent(fieldElement);
+          if (StringUtil.isNotEmpty(fieldName)) {
+            throwArguments.add(PerlSubArgument.mandatoryScalar(fieldName));
+            result.add(new PerlLightMethodDefinitionElement(
+              this,
+              fieldName,
+              LIGHT_METHOD_DEFINITION,
+              fieldElement,
+              namespaceName,
+              Collections.emptyList(),
+              null
+            ));
+          }
+        }
+      }
+    }
+
     // making exception class
     PerlHashEntry isaEntry = exceptionSettings.get("isa");
     String parentClass = "Exception::Class::Base";
-    if (isaEntry != null) {
+    if (isaEntry != null && isaEntry.isComplete()) {
       String manualIsa = isaEntry.getValueString();
       if (manualIsa != null) {
         parentClass = manualIsa;
@@ -120,7 +164,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
 
     result.add(new PerlLightExceptionClassDefinition(
       this,
-      ElementManipulators.getValueText(listElement),
+      namespaceName,
       LIGHT_NAMESPACE_DEFINITION,
       listElement,
       PerlMroType.DFS,
@@ -142,7 +186,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
           LIGHT_SUB_DEFINITION,
           aliasEntry.getNonNullValueElement(),
           PerlPackageUtil.getContextPackageName(this),
-          Collections.emptyList(), // fixme depends on fields
+          new ArrayList<>(throwArguments),
           PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement)
         ));
       }

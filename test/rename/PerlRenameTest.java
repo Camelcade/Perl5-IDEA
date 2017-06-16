@@ -29,6 +29,12 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/rename/perl";
   }
 
+  public void testExceptionClassFieldMethod() {doTest();}
+
+  public void testExceptionClassFieldStatic() {doTest();}
+
+  public void testExceptionClassFieldField() {doTest();}
+
   public void testExceptionClassAliasLocal() {doTest();}
 
   public void testExceptionClassAliasStatic() {doTest();}

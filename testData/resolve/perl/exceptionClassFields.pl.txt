@@ -1,0 +1,214 @@
+PerlNamespaceFileReference at (39,55); text in range: 'Exception::Class' => 0 results:
+
+PerlNamespaceReference at (61,73); text in range: 'My::Seption1' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 60 in exceptionClassFields.pl
+
+PerlNamespaceReference at (81,93); text in range: 'My::Seption2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 80 in exceptionClassFields.pl
+
+PerlNamespaceReference at (116,128); text in range: 'My::Seption1' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 60 in exceptionClassFields.pl
+
+PerlNamespaceReference at (143,155); text in range: 'My::Seption3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 142 in exceptionClassFields.pl
+
+PerlNamespaceReference at (221,233); text in range: 'My::Seption2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 80 in exceptionClassFields.pl
+
+PerlNamespaceReference at (247,259); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlNamespaceReference at (347,359); text in range: 'My::Seption3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 142 in exceptionClassFields.pl
+
+PerlNamespaceReference at (373,385); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlNamespaceReference at (445,457); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlNamespaceReference at (510,522); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlNamespaceReference at (605,617); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlNamespaceReference at (717,729); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlSubReference at (731,740); text in range: 'testfield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_SQ at 315 in exceptionClassFields.pl
+
+PerlNamespaceReference at (742,754); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlSubReference at (756,765); text in range: 'testfield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_SQ at 315 in exceptionClassFields.pl
+
+PerlNamespaceReference at (767,779); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlSubReference at (781,787); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 305 in exceptionClassFields.pl
+
+PerlNamespaceReference at (789,801); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassFields.pl
+
+PerlSubReference at (803,809); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 305 in exceptionClassFields.pl
+
+PerlNamespaceReference at (812,824); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (826,831); text in range: 'test1' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 483 in exceptionClassFields.pl
+
+PerlNamespaceReference at (833,845); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (847,852); text in range: 'test2' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 489 in exceptionClassFields.pl
+
+PerlNamespaceReference at (854,866); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (868,877); text in range: 'testfield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_SQ at 315 in exceptionClassFields.pl
+
+PerlNamespaceReference at (879,891); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (893,899); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 468 in exceptionClassFields.pl
+
+PerlNamespaceReference at (902,914); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (916,921); text in range: 'test1' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 483 in exceptionClassFields.pl
+
+PerlNamespaceReference at (923,935); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (937,942); text in range: 'test2' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 489 in exceptionClassFields.pl
+
+PerlNamespaceReference at (944,956); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (958,967); text in range: 'testfield' => 0 results:
+
+PerlNamespaceReference at (969,981); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 372 in exceptionClassFields.pl
+
+PerlSubReference at (983,989); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 468 in exceptionClassFields.pl
+
+PerlNamespaceReference at (992,1004); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1006,1015); text in range: 'somefield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 642 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1017,1029); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1031,1036); text in range: 'test1' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 483 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1038,1050); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1052,1057); text in range: 'test2' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 489 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1059,1071); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1073,1082); text in range: 'testfield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_SQ at 315 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1084,1096); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1098,1104); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 630 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1107,1119); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1121,1130); text in range: 'somefield' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 642 in exceptionClassFields.pl
+
+PerlNamespaceReference at (1132,1144); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1146,1151); text in range: 'test1' => 0 results:
+
+PerlNamespaceReference at (1153,1165); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1167,1172); text in range: 'test2' => 0 results:
+
+PerlNamespaceReference at (1174,1186); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1188,1197); text in range: 'testfield' => 0 results:
+
+PerlNamespaceReference at (1199,1211); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 509 in exceptionClassFields.pl
+
+PerlSubReference at (1213,1219); text in range: 'Fields' => 1 results:
+	nodeless; PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_CONTENT at 630 in exceptionClassFields.pl
+

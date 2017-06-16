@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+package Foo::Bar;
+
+use Exception::Class
+    'My::Seption1',
+    'My::Seption2' => {
+        isa => 'My::Seption1',
+    },
+    'My::Seption3' => {
+        description => 'test one',
+        isa         => 'My::Seption2'
+    },
+    'My::Seption4' => {
+        alias  => 'aliasfor4',
+        fields => 'testfield',
+        isa    => 'My::Seption3'
+    },
+    'My::Seption5' => {
+        alias  => q'aliasfor545',
+        isa    => 'My::Seption4',
+        fields => [ qw/test1 test2/ ]
+    },
+    "My::Seption6" => {
+        qw/
+            alias       aliasfor6sdfsdf
+            isa         My::Seption5
+            fields      somefield
+            description some\description
+            /
+    }
+;
+
+
+My::Seption4->testfield;
+My::Seption4::testfield;
+My::Seption4->Fields;
+My::Seption4::Fie<caret>lds;
+
+My::Seption5->test1;
+My::Seption5->test2;
+My::Seption5->testfield;
+My::Seption5->Fields;
+
+My::Seption5::test1;
+My::Seption5::test2;
+My::Seption5::testfield;
+My::Seption5::Fields;
+
+My::Seption6->somefield;
+My::Seption6->test1;
+My::Seption6->test2;
+My::Seption6->testfield;
+My::Seption6->Fields;
+
+My::Seption6::somefield;
+My::Seption6::test1;
+My::Seption6::test2;
+My::Seption6::testfield;
+My::Seption6::Fields;

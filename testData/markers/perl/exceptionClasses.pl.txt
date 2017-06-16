@@ -34,7 +34,19 @@ Targets: 1
 Targets: 1
     PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 187
 
+355 - 361: 'fields': Overriding method
+Targets: 1
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 209
+
 396 - 404: 'Seption6': Parent classes
 Targets: 1
     PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 272
+
+501 - 507: 'fields': Overriding method
+Targets: 1
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 355
+
+524 - 529: 'test2': Overriding method
+Targets: 1
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 376
 

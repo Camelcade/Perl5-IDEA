@@ -20,7 +20,8 @@ use Exception::Class
         qw/
             alias   aliasfor6
                 isa     Seption5
-                fields  somefield
+                fields
+                test2
                 description some\description
             /
     }
