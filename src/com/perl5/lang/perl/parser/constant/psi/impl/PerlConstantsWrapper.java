@@ -22,8 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -31,7 +29,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,31 +63,22 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
     PsiElement firstChild = getFirstChild();
-    boolean multipleDefinition = false;
-    if (firstChild instanceof PsiPerlAnonHash) {
-      multipleDefinition = true;
-      firstChild = ((PsiPerlAnonHash)firstChild).getExpr();
-    }
+    boolean multipleDefinition = firstChild instanceof PsiPerlAnonHash;
 
-    boolean isKey = true;
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    for (PsiElement listElement : PerlArrayUtil.collectListElements(firstChild, null)) {
-      if (isKey && (listElement instanceof PerlString || listElement instanceof PerlStringContentElement)) {
-        result.add(new PerlLightConstantDefinitionElement(
-          this,
-          ElementManipulators.getValueText(listElement),
-          LIGHT_SUB_DEFINITION,
-          listElement,
-          PerlPackageUtil.getContextPackageName(this),
-          Collections.emptyList(),
-          PerlSubAnnotations.tryToFindAnnotations(listElement, getParent())
-        ));
-        if (!multipleDefinition) {
-          break;
-        }
-      }
-      isKey = !isKey;
-    }
+    PerlHashUtil.processHashElements(firstChild, (keyElement, valElement) -> {
+      result.add(new PerlLightConstantDefinitionElement(
+        this,
+        ElementManipulators.getValueText(keyElement),
+        LIGHT_SUB_DEFINITION,
+        keyElement,
+        PerlPackageUtil.getContextPackageName(this),
+        Collections.emptyList(),
+        PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent())
+      ));
+
+      return multipleDefinition;
+    });
 
     return result;
   }
