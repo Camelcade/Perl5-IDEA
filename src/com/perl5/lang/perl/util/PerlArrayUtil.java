@@ -26,10 +26,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlStringList;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
-import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
@@ -161,7 +158,7 @@ public class PerlArrayUtil implements PerlElementTypes {
         element = element.getNextSibling();
       }
     }
-    else if (rootElement.getNode() instanceof CompositeElement) {
+    else if (rootElement.getNode() instanceof CompositeElement || rootElement instanceof PerlStringContentElement) {
       result.add(rootElement);
     }
     return result;
