@@ -70,7 +70,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       }
     }
     else if (element instanceof PerlPolyNamedElement) {
-      TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DECLARATION;
+      TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
       if (elementType == PerlConstantsWrapperElementType.CONSTANT_WRAPPER) { // fixme some interface?
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
