@@ -1,0 +1,2 @@
+say $a == 42 ? 'true'
+    : 'false';

@@ -50,6 +50,10 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
 
   public boolean SPACES_WITHIN_CALL_ARGUMENTS = true;
 
+  public boolean ALIGN_FAT_COMMA = true;
+  public boolean ALIGN_QW_ELEMENTS = false;
+  public boolean ALIGN_TERNARY = true;
+
   public PerlCodeStyleSettings(CodeStyleSettings container) {
     super("Perl5CodeStyleSettings", container);
   }

@@ -38,7 +38,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel impleme
 
   @Override
   protected void addWrappingAndBracesTab(CodeStyleSettings settings) {
-    //		super.addWrappingAndBracesTab(settings);
+    super.addWrappingAndBracesTab(settings);
   }
 
   @Override

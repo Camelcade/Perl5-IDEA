@@ -68,6 +68,20 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                                    "    \"we\",\n" +
                                                    "    \"go\";\n" +
                                                    "}";
+
+  private static final String WRAPPING_CODES_SAMPLE = "my $hashref = {\n" +
+                                                      "\tkey => 42,\n" +
+                                                      "\totherkey => 42,\n" +
+                                                      "\tthird => 42\n" +
+                                                      "};\n" +
+                                                      "\n" +
+                                                      "my @list = qw/\n" +
+                                                      "\tthis is a list\n" +
+                                                      "\tof some cool strings\n" +
+                                                      "/;\n" +
+                                                      "\n" +
+                                                      "say $a == 42 ? 'true'\n" +
+                                                      " :'false';";
   private static final String BLANK_LINES_CODE_SAMPLE = "# Not yet implemented";
   private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = "my $hashref = {\n" +
                                                               "    key1 => 42,\n" +
@@ -152,6 +166,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET",
                                 SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
     }
+    else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", "Align fat commas", "Alignment");
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_QW_ELEMENTS", "Align qw elements", "Alignment");
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_TERNARY", "Align ? and : in ternary expression", "Alignment");
+    }
     else if (settingsType == SettingsType.LANGUAGE_SPECIFIC) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", QUOTATION_OPTION_BEFORE_ARROW, QUOTATION_GROUP,
                                 PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
@@ -208,6 +227,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     }
     else if (settingsType == SettingsType.INDENT_SETTINGS) {
       return INDENT_CODE_SAMPLE;
+    }
+    else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
+      return WRAPPING_CODES_SAMPLE;
     }
     else if (settingsType == SettingsType.LANGUAGE_SPECIFIC) {
       return LANGUAGE_SPECIFIC_CODE_SAMPLE;

@@ -28,8 +28,11 @@ import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.Function;
+import com.intellij.util.containers.FactoryMap;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -124,12 +127,45 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
     final List<Block> blocks = new ArrayList<>();
 
+    int[] relativeLineNumber = new int[]{0};
+
     IElementType elementType = getElementType();
+    Alignment alignment = Alignment.createAlignment(true);
+    Function<IElementType, Alignment> alignmentFunction;
+    PerlCodeStyleSettings perlCodeStyleSettings = myContext.getPerlSettings();
+    if (elementType == COMMA_SEQUENCE_EXPR && perlCodeStyleSettings.ALIGN_FAT_COMMA) {
+      alignmentFunction = childElementType -> childElementType == FAT_COMMA ? alignment : null;
+    }
+    else if (elementType == TRENAR_EXPR && perlCodeStyleSettings.ALIGN_TERNARY) {
+      alignmentFunction = childElementType -> childElementType == QUESTION || childElementType == COLON ? alignment : null;
+    }
+    else if ((elementType == STRING_LIST || elementType == LP_STRING_QW) && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
+      @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+      FactoryMap<Integer, Alignment> alignmentMap = new FactoryMap<Integer, Alignment>() {
+        @Nullable
+        @Override
+        protected Alignment create(Integer key) {
+          return Alignment.createAlignment(true);
+        }
+      };
+      int[] elementIndex = new int[]{0};
+      int[] lastRelativeLineNumber = new int[]{0};
 
-    Alignment alignment = null; //Alignment.createAlignment();
+      alignmentFunction = childElementType -> {
+        if (childElementType != STRING_CONTENT) {
+          return null;
+        }
 
-    if (elementType == COMMA_SEQUENCE_EXPR || elementType == TRENAR_EXPR) {
-      alignment = Alignment.createAlignment(true);
+        if (lastRelativeLineNumber[0] != relativeLineNumber[0]) {
+          lastRelativeLineNumber[0] = relativeLineNumber[0];
+          elementIndex[0] = 0;
+        }
+
+        return alignmentMap.get(elementIndex[0]++);
+      };
+    }
+    else {
+      alignmentFunction = childElementType -> null;
     }
 
     Wrap wrap = null;
@@ -140,30 +176,19 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
       if (!shouldCreateBlockFor(child)) {
+        if (StringUtil.containsLineBreak(child.getChars())) {
+          relativeLineNumber[0]++;
+        }
         continue;
       }
-      blocks.add(createChildBlock(child, wrap, alignment));
+      blocks.add(createBlock(child, wrap, alignmentFunction.fun(PsiUtilCore.getElementType(child))));
     }
     return blocks;
   }
 
-  protected PerlFormattingBlock createChildBlock(ASTNode child,
-                                                 Wrap wrap,
-                                                 Alignment alignment
-  ) {
-    IElementType childElementType = child.getElementType();
-    if (alignment != null && (childElementType == QUESTION || childElementType == COLON || childElementType == FAT_COMMA)) {
-      return createBlock(child, wrap, alignment);
-    }
-    else {
-      return createBlock(child, wrap, null);
-    }
-  }
-
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node,
                                             @Nullable Wrap wrap,
-                                            @Nullable Alignment alignment
-  ) {
+                                            @Nullable Alignment alignment) {
     if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
       return new PerlHeredocFormattingBlock(node, wrap, alignment, myContext);
     }

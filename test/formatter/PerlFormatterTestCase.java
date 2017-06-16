@@ -17,25 +17,15 @@
 package formatter;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.perl5.lang.perl.PerlLanguage;
 
 public abstract class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
-  CommonCodeStyleSettings myPerlSettings;
-
-  boolean mySpaceBeforeIfParenthes;
-
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myPerlSettings = CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
-    mySpaceBeforeIfParenthes = myPerlSettings.SPACE_BEFORE_IF_PARENTHESES;
   }
 
   @Override
   protected void tearDown() throws Exception {
-    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = mySpaceBeforeIfParenthes;
     super.tearDown();
   }
 }

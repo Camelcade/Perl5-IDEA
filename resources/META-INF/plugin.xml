@@ -35,6 +35,8 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
+     <li>QW strings now may be aligned using formatter.</li>
+     <li>Added Code Style settings for alignment of: QW contents, Fat arrows and Ternary expression ? and :</li>
      </ul>
      </p>
      <p>Fixes:

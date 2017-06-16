@@ -16,6 +16,11 @@
 
 package formatter;
 
+import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+
 /**
  * Created by hurricup on 13.03.2016.
  */
@@ -25,14 +30,51 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  private CommonCodeStyleSettings getSettings() {
+    return CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
+  }
+
+  private PerlCodeStyleSettings getCustomSettings() {
+    return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
+  }
 
   public void testStatementModifierSpacing() throws Exception {
-    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = false;
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
     doFormatTest();
   }
 
   public void testStatementModifierSpacingWithSpace() throws Exception {
-    myPerlSettings.SPACE_BEFORE_IF_PARENTHESES = true;
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
+    doFormatTest();
+  }
+
+  public void testAlignFatCommaTrue() {
+    getCustomSettings().ALIGN_FAT_COMMA = true;
+    doFormatTest();
+  }
+
+  public void testAlignFatCommaFalse() {
+    getCustomSettings().ALIGN_FAT_COMMA = false;
+    doFormatTest();
+  }
+
+  public void testAlignQwTrue() {
+    getCustomSettings().ALIGN_QW_ELEMENTS = true;
+    doFormatTest();
+  }
+
+  public void testAlignQwFalse() {
+    getCustomSettings().ALIGN_QW_ELEMENTS = false;
+    doFormatTest();
+  }
+
+  public void testAlignTernaryTrue() {
+    getCustomSettings().ALIGN_TERNARY = true;
+    doFormatTest();
+  }
+
+  public void testAlignTernaryFalse() {
+    getCustomSettings().ALIGN_TERNARY = false;
     doFormatTest();
   }
 

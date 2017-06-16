@@ -60,7 +60,16 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
     DO_EXPR,
     EVAL_EXPR,
-    PerlParserDefinition.FILE
+    PerlParserDefinition.FILE,
+
+    LP_REGEX,
+    LP_REGEX_REPLACEMENT,
+    LP_REGEX_X,
+    LP_REGEX_XX,
+    LP_STRING_Q,
+    LP_STRING_QQ,
+    LP_STRING_QW,
+    LP_STRING_XQ
   );
 
   public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
