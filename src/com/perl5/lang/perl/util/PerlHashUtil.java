@@ -17,12 +17,14 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -33,9 +35,7 @@ import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
-import com.perl5.util.BiProcessor;
 import gnu.trove.THashMap;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -44,7 +44,7 @@ import java.util.*;
  * Created by hurricup on 19.04.2015.
  */
 public class PerlHashUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
     "!",
     "+",
     "-",
@@ -156,7 +156,7 @@ public class PerlHashUtil implements PerlElementTypes {
 
     processHashElements(rootElement, (keyElement, valElement) -> {
       String keyText = ElementManipulators.getValueText(keyElement);
-      if (StringUtils.isNotEmpty(keyText)) {
+      if (StringUtil.isNotEmpty(keyText)) {
         result.put(keyText, PerlHashEntry.create(keyElement, valElement));
       }
       return true;
@@ -165,7 +165,7 @@ public class PerlHashUtil implements PerlElementTypes {
     return result;
   }
 
-  public static boolean processHashElements(@NotNull PsiElement rootElement, @NotNull BiProcessor<PsiElement, PsiElement> processor) {
+  public static boolean processHashElements(@NotNull PsiElement rootElement, @NotNull PairProcessor<PsiElement, PsiElement> processor) {
     if (PsiUtilCore.getElementType(rootElement) == ANON_HASH) {
       rootElement = ((PsiPerlAnonHash)rootElement).getExpr();
     }
