@@ -47,6 +47,18 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
     return "testData/completion/perl";
   }
 
+  public void testExceptionClassAliasLocal() {
+    doTestContains("aliasfor4", "aliasfor5", "aliasfor6");
+  }
+
+  public void testExceptionClassAliasStatic() {
+    doTestContains("aliasfor4", "aliasfor5", "aliasfor6");
+  }
+
+  public void testExceptionClassAliasMethod() {
+    doTestDoesntContains("aliasfor4", "aliasfor5", "aliasfor6");
+  }
+
   public void testLibraryConstants() {
     doTestContains("LIBRARY_CONST1",
                    "LIBRARY_CONST2",

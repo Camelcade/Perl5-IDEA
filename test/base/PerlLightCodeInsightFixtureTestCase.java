@@ -335,6 +335,12 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     UsefulTestCase.assertContainsElements(lookups, expected);
   }
 
+  public void assertLookupDoesntContains(List<String> expected) {
+    List<String> lookups = myFixture.getLookupElementStrings();
+    assertNotNull(lookups);
+    UsefulTestCase.assertDoesntContain(lookups, expected);
+  }
+
   public void assertNotContainsLookupElements(String... pattern) {
     assertNotContainsLookupElements(Arrays.asList(pattern));
   }

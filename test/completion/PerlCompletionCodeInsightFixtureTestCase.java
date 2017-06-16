@@ -121,6 +121,11 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
     assertLookupContains(Arrays.asList(args));
   }
 
+  protected void doTestDoesntContains(String... args) {
+    initWithFileSmart();
+    assertLookupDoesntContains(Arrays.asList(args));
+  }
+
   protected void doTest(String... result) {
     doTest(Arrays.asList(result));
   }

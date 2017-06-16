@@ -1,0 +1,86 @@
+PerlNamespaceFileReference at (39,55); text in range: 'Exception::Class' => 0 results:
+
+PerlNamespaceReference at (61,73); text in range: 'My::Seption1' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 60 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (81,93); text in range: 'My::Seption2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 80 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (116,128); text in range: 'My::Seption1' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 60 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (143,155); text in range: 'My::Seption3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 142 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (221,233); text in range: 'My::Seption2' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 80 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (247,259); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (316,328); text in range: 'My::Seption3' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 142 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (342,354); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 341 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (413,425); text in range: 'My::Seption4' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 246 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (478,490); text in range: 'My::Seption6' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_DQ at 477 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (569,581); text in range: 'My::Seption5' => 1 results:
+	nodeless; PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)
+	Perl5: STRING_SQ at 341 in exceptionClassAlias.pl
+
+PerlSubReference at (684,699); text in range: 'aliasfor6sdfsdf' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 529 in exceptionClassAlias.pl
+
+PerlSubReference at (702,713); text in range: 'aliasfor545' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_SQ at 379 in exceptionClassAlias.pl
+
+PerlSubReference at (731,746); text in range: 'aliasfor6sdfsdf' => 0 results:
+
+PerlSubReference at (749,760); text in range: 'aliasfor545' => 0 results:
+
+PerlNamespaceReference at (763,771); text in range: 'Foo::Bar' => 1 results:
+	NAMESPACE at 16 in exceptionClassAlias.pl
+
+PerlSubReference at (773,788); text in range: 'aliasfor6sdfsdf' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 529 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (791,799); text in range: 'Foo::Bar' => 1 results:
+	NAMESPACE at 16 in exceptionClassAlias.pl
+
+PerlSubReference at (801,812); text in range: 'aliasfor545' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_SQ at 379 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (815,823); text in range: 'Foo::Bar' => 1 results:
+	NAMESPACE at 16 in exceptionClassAlias.pl
+
+PerlSubReference at (825,840); text in range: 'aliasfor6sdfsdf' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_CONTENT at 529 in exceptionClassAlias.pl
+
+PerlNamespaceReference at (843,851); text in range: 'Foo::Bar' => 1 results:
+	NAMESPACE at 16 in exceptionClassAlias.pl
+
+PerlSubReference at (853,864); text in range: 'aliasfor545' => 1 results:
+	nodeless; PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)
+	Perl5: STRING_SQ at 379 in exceptionClassAlias.pl
+

@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+package Foo::Bar;
+
+use Exception::Class
+    'My::Seption1',
+    'My::Seption2' => {
+        isa => 'My::Seption1',
+    },
+    'My::Seption3' => {
+        description => 'test one',
+        isa         => 'My::Seption2'
+    },
+    'My::Seption4' => {
+        alias  =>
+        #@deprecated
+        '<warning descr="This sub is deprecated">aliasfor4</warning>',
+        fields => 'testfield',
+        isa    => 'My::Seption3'
+    },
+    'My::Seption5' => {
+        #@deprecated
+        alias  => '<warning descr="This sub is deprecated">aliasfor545</warning>',
+        isa    => 'My::Seption4',
+        fields => [ qw/test1 test2/ ]
+    },
+    "My::Seption6" => {
+        qw/
+            alias   aliasfor6sdfsdf
+                isa     My::Seption5
+                fields  somefield
+                description some\description
+            /
+    }
+;
+
+aliasfor6sdfsdf;
+
+<warning descr="This sub is deprecated">aliasfor545</warning>;
+
+package main;
+
+aliasfor6sdfsdf;
+
+aliasfor545;
+
+Foo::Bar::aliasfor6sdfsdf;
+
+Foo::Bar::<warning descr="This sub is deprecated">aliasfor545</warning>;
+
+Foo::Bar->aliasfor6sdfsdf;
+
+Foo::Bar-><warning descr="This sub is deprecated">aliasfor545</warning>;
+
+

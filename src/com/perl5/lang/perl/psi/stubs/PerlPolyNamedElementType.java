@@ -39,6 +39,7 @@ public abstract class PerlPolyNamedElementType extends IStubElementType<PerlPoly
     // 0 is reserved for n/a
     DIRECT_MAP.put(PerlStubElementTypes.LIGHT_SUB_DEFINITION, 1);
     DIRECT_MAP.put(PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION, 2);
+    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_METHOD_DEFINITION, 3);
 
     DIRECT_MAP.forEachEntry((type, id) -> {
       REVERSE_MAP.put(id, type);

@@ -40,6 +40,7 @@ public interface PerlStubElementTypes {
   IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
   IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");
   IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
+  IStubElementType LIGHT_METHOD_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_METHOD_DEFINITION");
   IStubElementType LIGHT_NAMESPACE_DEFINITION = new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
 
 

@@ -27,13 +27,19 @@ import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashEntry;
 import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -42,7 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
 public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
 
@@ -59,8 +65,19 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_NAMESPACE_DEFINITION)
-      .map(childStub -> new PerlLightExceptionClassDefinition(this, (PerlNamespaceDefinitionStub)childStub))
+      .map(childStub -> {
+        IStubElementType stubType = childStub.getStubType();
+        if (stubType == LIGHT_NAMESPACE_DEFINITION) {
+          return new PerlLightExceptionClassDefinition(this, (PerlNamespaceDefinitionStub)childStub);
+        }
+        else if (stubType == LIGHT_METHOD_DEFINITION) {
+          return new PerlLightMethodDefinitionElement(this, (PerlSubDefinitionStub)childStub);
+        }
+        else if (stubType == LIGHT_SUB_DEFINITION) {
+          return new PerlLightSubDefinitionElement(this, (PerlSubDefinitionStub)childStub);
+        }
+        throw new IllegalArgumentException("Unexpected stub type: " + stubType);
+      })
       .collect(Collectors.toList());
   }
 
@@ -86,14 +103,19 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
       return;
     }
 
-    Map<String, PsiElement> exceptionSettings =
+    Map<String, PerlHashEntry> exceptionSettings =
       listElements.size() > currentIndex + 1
       ? PerlHashUtil.collectHashElements(listElements.get(currentIndex + 1))
       : Collections.emptyMap();
 
-    String parentClass = PerlScalarUtil.getStringContent(exceptionSettings.get("isa"));
-    if (parentClass == null) {
-      parentClass = "Exception::Class::Base";
+    // making exception class
+    PerlHashEntry isaEntry = exceptionSettings.get("isa");
+    String parentClass = "Exception::Class::Base";
+    if (isaEntry != null) {
+      String manualIsa = isaEntry.getValueString();
+      if (manualIsa != null) {
+        parentClass = manualIsa;
+      }
     }
 
     result.add(new PerlLightExceptionClassDefinition(
@@ -108,6 +130,23 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
       Collections.emptyList(),
       Collections.emptyMap()
     ));
+
+    // making alias
+    PerlHashEntry aliasEntry = exceptionSettings.get("alias");
+    if (aliasEntry != null && aliasEntry.isComplete()) {
+      String aliasName = aliasEntry.getValueString();
+      if (StringUtils.isNotEmpty(aliasName)) {
+        result.add(new PerlLightSubDefinitionElement(
+          this,
+          aliasName,
+          LIGHT_SUB_DEFINITION,
+          aliasEntry.getNonNullValueElement(),
+          PerlPackageUtil.getContextPackageName(this),
+          Collections.emptyList(), // fixme depends on fields
+          PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement)
+        ));
+      }
+    }
   }
 
   @Override

@@ -147,17 +147,17 @@ public class PerlHashUtil implements PerlElementTypes {
    * Attempts to traverse psi element (anon hash for example) and aggregates it as a map with key => val
    *
    * @param rootElement elemtn to iterate
-   * @return map of keys and vals psi elements
+   * @return map of key_value => Pair(keyElement,valElement)
    */
   @NotNull
-  public static Map<String, PsiElement> collectHashElements(@NotNull PsiElement rootElement) {
+  public static Map<String, PerlHashEntry> collectHashElements(@NotNull PsiElement rootElement) {
 
-    Map<String, PsiElement> result = new THashMap<>();
+    Map<String, PerlHashEntry> result = new THashMap<>();
 
     processHashElements(rootElement, (keyElement, valElement) -> {
       String keyText = ElementManipulators.getValueText(keyElement);
       if (StringUtils.isNotEmpty(keyText)) {
-        result.put(keyText, valElement);
+        result.put(keyText, PerlHashEntry.create(keyElement, valElement));
       }
       return true;
     });

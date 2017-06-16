@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+package Foo::Bar;
+
+use Exception::Class
+    'My::Seption1',
+    'My::Seption2' => {
+        isa => 'My::Seption1',
+    },
+    'My::Seption3' => {
+        description => 'test one',
+        isa         => 'My::Seption2'
+    },
+    'My::Seption4' => {
+        alias  =>
+        #@deprecated
+        'aliasfor4',
+        fields => 'testfield',
+        isa    => 'My::Seption3'
+    },
+    'My::Seption5' => {
+        #@deprecated
+        alias  => 'aliasfor5',
+        isa    => 'My::Seption4',
+        fields => [ qw/test1 test2/ ]
+    },
+    "My::Seption6" => {
+        qw/
+            alias   aliasfor6
+                isa     My::Seption5
+                fields  somefield
+                description some\description
+            /
+    }
+;
+
+package main;
+
+Foo::Bar::<caret>
