@@ -124,18 +124,19 @@ public class PerlArrayUtil implements PerlElementTypes {
   }
 
   /**
-   * Traversing comma sequence or list for meaningful elements, expanding lists and collecting all elements to the plain one:
+   * Traversing root element, expanding lists and collecting all elements to the plain one:
    *  ($a, $b, ($c, $d)), qw/bla bla/ -> $a, $b, $c, $d, bla, bla;
    *
-   * @param rootElement top-level container
-   * @param result      resulting array to fill
+   * @param rootElement top-level container or a single element
    * @return passed or new List of found PsiElements
    */
-  public static List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @Nullable List<PsiElement> result) {
-    if (result == null) {
-      result = new ArrayList<>();
-    }
+  public static List<PsiElement> collectListElements(@Nullable PsiElement rootElement) {
+    return collectListElements(rootElement, new ArrayList<>());
+  }
 
+
+  @NotNull
+  private static List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @NotNull List<PsiElement> result) {
     if (rootElement == null || PerlParserDefinition.COMMENTS.contains(PsiUtilCore.getElementType(rootElement))) {
       return result;
     }

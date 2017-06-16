@@ -242,7 +242,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
           variableClass = "";
         }
 
-        List<PsiElement> rightSideElements = PerlArrayUtil.collectListElements(rightSide, null);
+        List<PsiElement> rightSideElements = PerlArrayUtil.collectListElements(rightSide);
         int sequenceIndex = 0;
 
         boolean processNextStatement = true;
