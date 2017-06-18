@@ -115,11 +115,11 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   }
 
   protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlNamespaceDefinitionDirectIndex.KEY;
+    return PerlNamespaceDirectIndex.KEY;
   }
 
   protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
-    return PerlNamespaceDefinitionReverseIndex.KEY;
+    return PerlNamespaceReverseIndex.KEY;
   }
 
   @Override

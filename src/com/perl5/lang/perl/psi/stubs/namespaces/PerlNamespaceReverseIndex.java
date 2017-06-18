@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 16.01.2016.
  */
-public class PerlNamespaceDefinitionReverseIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
+public class PerlNamespaceReverseIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 3;
   public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.parent");
 

@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDefinitionDirectIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
+public class PerlNamespaceDirectIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
