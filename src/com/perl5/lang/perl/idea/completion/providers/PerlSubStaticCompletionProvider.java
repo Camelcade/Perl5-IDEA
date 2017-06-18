@@ -21,11 +21,11 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -49,18 +49,20 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
     Project project = parameters.getPosition().getProject();
 
     // defined subs
-    for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+    GlobalSearchScope searchScope = PerlScopes.getProjectAndLibrariesScope(project);
+    PerlSubUtil.processSubDefinitionsInPackage(project, packageName, searchScope, subDefinition -> {
       if (subDefinition.isStatic()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));
       }
-    }
+      return true;
+    });
 
-    // declared subs
-    for (PerlSubDeclarationElement subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName)) {
+    PerlSubUtil.processSubDeclarationsInPackage(project, packageName, searchScope, subDeclaration -> {
       if (subDeclaration.isStatic()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement(subDeclaration));
       }
-    }
+      return true;
+    });
 
     // Globs
     for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {

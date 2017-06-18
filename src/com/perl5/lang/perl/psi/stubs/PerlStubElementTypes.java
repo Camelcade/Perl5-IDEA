@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlDoExprElementType;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRequireExprElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubElementType;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlFuncDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionElementType;
@@ -35,7 +35,7 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubElementType;
  * Created by hurricup on 25.05.2015.
  */
 public interface PerlStubElementTypes {
-  IStubElementType SUB_DECLARATION = new PerlSubDeclarationStubElementType("SUB_DECLARATION");
+  IStubElementType SUB_DECLARATION = new PerlSubDeclarationElementType("SUB_DECLARATION");
   IStubElementType SUB_DEFINITION = new PerlSubDefinitionElementType("SUB_DEFINITION");
   IStubElementType FUNC_DEFINITION = new PerlFuncDefinitionElementType("FUNC_DEFINITION");
   IStubElementType METHOD_DEFINITION = new PerlMethodDefinitionElementType("METHOD_DEFINITION");

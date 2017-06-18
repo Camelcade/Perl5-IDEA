@@ -82,24 +82,16 @@ public class ClassAccessorDeclarationElementType extends PerlSubDefinitionElemen
   public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
     assert stub instanceof PerlClassAccessorDeclarationStub;
 
-/*
-                System.err.println("Indexing stub for " + stub.getCanonicalName() +
-				" " + ((PerlClassAccessorDeclarationStub) stub).isFollowsBestPractice() +
-				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorReadable() +
-				" " + ((PerlClassAccessorDeclarationStub) stub).isAccessorWritable()
-		);
-*/
-
     if (((PerlClassAccessorDeclarationStub)stub).isFollowsBestPractice()) {
       // fixme these should depend on declaration type
       if (((PerlClassAccessorDeclarationStub)stub).isAccessorReadable()) {
-        sink.occurrence(getStubIndexKey(), ((PerlClassAccessorDeclarationStub)stub).getGetterCanonicalName());
+        sink.occurrence(getDirectKey(), ((PerlClassAccessorDeclarationStub)stub).getGetterCanonicalName());
       }
       if (((PerlClassAccessorDeclarationStub)stub).isAccessorWritable()) {
-        sink.occurrence(getStubIndexKey(), ((PerlClassAccessorDeclarationStub)stub).getSetterCanonicalName());
+        sink.occurrence(getDirectKey(), ((PerlClassAccessorDeclarationStub)stub).getSetterCanonicalName());
       }
 
-      sink.occurrence(getStubIndexKey(), "*" + stub.getPackageName());
+      sink.occurrence(getReverseKey(), stub.getPackageName());
     }
     else {
       super.indexStub(stub, sink);

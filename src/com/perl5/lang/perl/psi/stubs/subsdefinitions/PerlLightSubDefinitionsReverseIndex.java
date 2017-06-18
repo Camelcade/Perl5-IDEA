@@ -27,9 +27,9 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightSubDefinitionsReverseIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
   public static final int VERSION = 1;
-  public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.sub.polynamed");
+  public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.sub.polynamed.reverse");
 
   @Override
   public int getVersion() {
@@ -43,19 +43,18 @@ public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamed
   }
 
   public static boolean processSubDefinitions(@NotNull Project project,
-                                              @NotNull String canonicalName,
+                                              @NotNull String packageName,
                                               @NotNull GlobalSearchScope scope,
                                               @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            canonicalName.equals(((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
+            packageName.equals(((PerlSubDefinitionElement)lightNamedElement).getPackageName())) {
           if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {
             return false;
           }
         }
       }
-
       return true;
     });
   }

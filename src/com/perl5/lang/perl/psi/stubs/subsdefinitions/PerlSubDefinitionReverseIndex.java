@@ -16,17 +16,21 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 25.05.2015.
+ * Index of package to sub definition
  */
-public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefinitionElement> {
-  public static final int VERSION = 4;
-  public static final StubIndexKey<String, PerlSubDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
+public class PerlSubDefinitionReverseIndex extends PerlStubIndexBase<PerlSubDefinitionElement> {
+  public static final int VERSION = 1;
+  public static final StubIndexKey<String, PerlSubDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.sub.definition.reverse");
 
   @Override
   public int getVersion() {
@@ -37,5 +41,12 @@ public class PerlSubDefinitionsStubIndex extends PerlStubIndexBase<PerlSubDefini
   @Override
   public StubIndexKey<String, PerlSubDefinitionElement> getKey() {
     return KEY;
+  }
+
+  public static boolean processSubDefinitions(@NotNull Project project,
+                                              @NotNull String packageName,
+                                              @NotNull GlobalSearchScope scope,
+                                              @NotNull Processor<PerlSubDefinitionElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDefinitionElement.class, processor);
   }
 }

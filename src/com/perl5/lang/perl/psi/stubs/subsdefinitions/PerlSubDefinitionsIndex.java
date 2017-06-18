@@ -21,15 +21,16 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
-  public static final int VERSION = 1;
-  public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.sub.polynamed");
+/**
+ * Created by hurricup on 25.05.2015.
+ */
+public class PerlSubDefinitionsIndex extends PerlStubIndexBase<PerlSubDefinitionElement> {
+  public static final int VERSION = 4;
+  public static final StubIndexKey<String, PerlSubDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.sub.definition");
 
   @Override
   public int getVersion() {
@@ -38,7 +39,7 @@ public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamed
 
   @NotNull
   @Override
-  public StubIndexKey<String, PerlPolyNamedElement> getKey() {
+  public StubIndexKey<String, PerlSubDefinitionElement> getKey() {
     return KEY;
   }
 
@@ -46,17 +47,7 @@ public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamed
                                               @NotNull String canonicalName,
                                               @NotNull GlobalSearchScope scope,
                                               @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
-      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
-        if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            canonicalName.equals(((PerlSubDefinitionElement)lightNamedElement).getCanonicalName())) {
-          if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {
-            return false;
-          }
-        }
-      }
-
-      return true;
-    });
+    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlSubDefinitionElement.class, processor);
   }
+
 }

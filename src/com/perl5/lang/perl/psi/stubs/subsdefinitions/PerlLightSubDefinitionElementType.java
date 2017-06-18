@@ -38,8 +38,13 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
   }
 
   @Override
-  protected StubIndexKey<String, ? extends PsiElement> getStubIndexKey() {
+  protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
     return PerlLightSubDefinitionIndex.KEY;
+  }
+
+  @Override
+  protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
+    return PerlLightSubDefinitionsReverseIndex.KEY;
   }
 
   @NotNull

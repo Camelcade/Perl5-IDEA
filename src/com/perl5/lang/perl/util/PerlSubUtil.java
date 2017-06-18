@@ -29,9 +29,12 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
-import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubIndex;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsStubIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
@@ -100,11 +103,27 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
       return Collections.emptyList();
     }
     Collection<PerlSubDefinitionElement> elements =
-      StubIndex.getElements(PerlSubDefinitionsStubIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
+      StubIndex.getElements(PerlSubDefinitionsIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
 
     PerlLightSubDefinitionIndex.processSubDefinitions(project, canonicalName, scope, elements::add);
     return elements;
   }
+
+  public static boolean processSubDefinitionsInPackage(@NotNull Project project,
+                                                       @NotNull String packageName,
+                                                       @NotNull GlobalSearchScope scope,
+                                                       @NotNull Processor<PerlSubDefinitionElement> processor) {
+    return PerlSubDefinitionReverseIndex.processSubDefinitions(project, packageName, scope, processor) &&
+           PerlLightSubDefinitionsReverseIndex.processSubDefinitions(project, packageName, scope, processor);
+  }
+
+  public static boolean processSubDeclarationsInPackage(@NotNull Project project,
+                                                        @NotNull String packageName,
+                                                        @NotNull GlobalSearchScope scope,
+                                                        @NotNull Processor<PerlSubDeclarationElement> processor) {
+    return PerlSubDeclarationReverseIndex.processSubDeclarations(project, packageName, scope, processor);
+  }
+
 
   /**
    * Returns list of defined subs names
@@ -113,7 +132,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return collection of sub names
    */
   public static Collection<String> getDefinedSubsNames(Project project) {
-    Collection<String> result = PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsStubIndex.KEY, project);
+    Collection<String> result = PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsIndex.KEY, project);
     result.addAll(PerlUtil.getIndexKeysWithoutInternals(PerlLightSubDefinitionIndex.KEY, project));
     return result;
   }
@@ -133,7 +152,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlSubDeclarationStubIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
+    return StubIndex.getElements(PerlSubDeclarationIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
   }
 
   /**
@@ -143,7 +162,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return collection of sub names
    */
   public static Collection<String> getDeclaredSubsNames(Project project) {
-    return PerlUtil.getIndexKeysWithoutInternals(PerlSubDeclarationStubIndex.KEY, project);
+    return PerlUtil.getIndexKeysWithoutInternals(PerlSubDeclarationIndex.KEY, project);
   }
 
   /**
@@ -154,7 +173,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return collection of constants names
    */
   public static boolean processDeclaredSubsNames(Project project, Processor<String> processor) {
-    return StubIndex.getInstance().processAllKeys(PerlSubDeclarationStubIndex.KEY, project, processor);
+    return StubIndex.getInstance().processAllKeys(PerlSubDeclarationIndex.KEY, project, processor);
   }
 
   /**

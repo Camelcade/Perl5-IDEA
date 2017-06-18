@@ -32,9 +32,9 @@ import java.io.IOException;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclarationElement>
+public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDeclarationStub, PerlSubDeclarationElement>
   implements PsiElementProvider {
-  public PerlSubDeclarationStubElementType(String name) {
+  public PerlSubDeclarationElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
   }
 
@@ -89,8 +89,8 @@ public class PerlSubDeclarationStubElementType extends IStubElementType<PerlSubD
 
   @Override
   public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(PerlSubDeclarationStubIndex.KEY, stub.getCanonicalName());
-    sink.occurrence(PerlSubDeclarationStubIndex.KEY, "*" + stub.getPackageName());
+    sink.occurrence(PerlSubDeclarationIndex.KEY, stub.getCanonicalName());
+    sink.occurrence(PerlSubDeclarationReverseIndex.KEY, stub.getPackageName());
   }
 
   @Override

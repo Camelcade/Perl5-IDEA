@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 05.06.2015.
  */
-public class PerlSubDeclarationStubIndex extends PerlStubIndexBase<PerlSubDeclarationElement> {
+public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclarationElement> {
   public static final int VERSION = 6;
   public static final StubIndexKey<String, PerlSubDeclarationElement> KEY = StubIndexKey.createIndexKey("perl.sub.declaration");
 
@@ -38,4 +42,12 @@ public class PerlSubDeclarationStubIndex extends PerlStubIndexBase<PerlSubDeclar
   public StubIndexKey<String, PerlSubDeclarationElement> getKey() {
     return KEY;
   }
+
+  public static boolean processSubDeclarations(@NotNull Project project,
+                                               @NotNull String packageName,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlSubDeclarationElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDeclarationElement.class, processor);
+  }
+
 }

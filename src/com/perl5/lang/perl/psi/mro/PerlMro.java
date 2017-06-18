@@ -18,10 +18,10 @@ package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -115,17 +115,21 @@ public abstract class PerlMro {
     HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
 
     if (basePackageName != null) {
+      GlobalSearchScope searchScope = PerlScopes.getProjectAndLibrariesScope(project);
       for (String packageName : getLinearISA(project, basePackageName, isSuper)) {
-        for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitions(project, "*" + packageName)) {
+        PerlSubUtil.processSubDefinitionsInPackage(project, packageName, searchScope, subDefinition -> {
           if (!methods.containsKey(subDefinition.getSubName())) {
             methods.put(subDefinition.getSubName(), subDefinition);
           }
-        }
-        for (PerlSubDeclarationElement subDeclaration : PerlSubUtil.getSubDeclarations(project, "*" + packageName)) {
+          return true;
+        });
+        PerlSubUtil.processSubDeclarationsInPackage(project, packageName, searchScope, subDeclaration -> {
           if (!methods.containsKey(subDeclaration.getSubName())) {
             methods.put(subDeclaration.getSubName(), subDeclaration);
           }
-        }
+          return true;
+        });
+
         for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {
           if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName())) {
             methods.put(globVariable.getName(), globVariable);
