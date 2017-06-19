@@ -42,14 +42,14 @@ public class PerlLightNamespaceReverseIndex extends PerlStubIndexBase<PerlPolyNa
     return KEY;
   }
 
-  public static boolean processNamespaces(@NotNull Project project,
-                                          @NotNull String canonicalName,
-                                          @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+  public static boolean processChildNamespaces(@NotNull Project project,
+                                               @NotNull String parentPackageName,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, parentPackageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
-            ((PerlNamespaceDefinitionElement)lightNamedElement).getParentNamespacesNames().contains(canonicalName)) {
+            ((PerlNamespaceDefinitionElement)lightNamedElement).getParentNamespacesNames().contains(parentPackageName)) {
           if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
             return false;
           }

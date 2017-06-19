@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 28.05.2015.
  */
-public class PerlNamespaceDirectIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
+public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
@@ -37,5 +41,12 @@ public class PerlNamespaceDirectIndex extends PerlStubIndexBase<PerlNamespaceDef
   @Override
   public StubIndexKey<String, PerlNamespaceDefinitionElement> getKey() {
     return KEY;
+  }
+
+  public static boolean processNamespaces(@NotNull Project project,
+                                          @NotNull String packageName,
+                                          @NotNull GlobalSearchScope scope,
+                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class, processor);
   }
 }

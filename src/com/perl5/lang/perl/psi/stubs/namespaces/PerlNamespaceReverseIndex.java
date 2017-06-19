@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -37,5 +41,12 @@ public class PerlNamespaceReverseIndex extends PerlStubIndexBase<PerlNamespaceDe
   @Override
   public StubIndexKey<String, PerlNamespaceDefinitionElement> getKey() {
     return KEY;
+  }
+
+  public static boolean processChildNamespaces(@NotNull Project project,
+                                               @NotNull String parentPackageName,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+    return StubIndex.getInstance().processElements(KEY, parentPackageName, project, scope, PerlNamespaceDefinitionElement.class, processor);
   }
 }

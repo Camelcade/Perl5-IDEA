@@ -364,13 +364,13 @@
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDirectIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDirectIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex"/>
 
     <lang.findUsagesProvider language="Perl5"

@@ -130,7 +130,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
 
   @NotNull
   default List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
-    return PerlPackageUtil.getDerivedNamespaceDefinitions(getProject(), getPackageName());
+    return PerlPackageUtil.getChildNamespaces(getProject(), getPackageName());
   }
 
   default void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result) {

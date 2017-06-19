@@ -93,7 +93,7 @@ public class PerlPackageCompletionUtil {
     GlobalSearchScope resolveScope = element.getResolveScope();
 
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
-      PerlPackageUtil.processPackages(packageName, project, resolveScope, namespace ->
+      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
       {
         String name = namespace.getPackageName();
         if (StringUtil.isNotEmpty(name)) {
@@ -113,7 +113,7 @@ public class PerlPackageCompletionUtil {
     GlobalSearchScope resolveScope = element.getResolveScope();
 
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
-      PerlPackageUtil.processPackages(packageName, project, resolveScope, namespace ->
+      PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
       {
         String name = namespace.getPackageName();
         if (StringUtil.isNotEmpty(name)) {

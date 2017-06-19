@@ -8,18 +8,24 @@ use Exception::Class
         isa         => 'Seption2'
     },
     Seption4 => {
-        fields => 'testfield',
+        fields =>
+        'testfield',
         isa    => 'Seption3'
     },
     Seption5 => {
         alias  => 'aliasfor5',
         isa    => 'Seption4',
-        fields => [ qw/test1 test2/ ]
+        fields => [
+        qw/test1
+        test2/
+        ]
     },
     Seption6 => {
         qw/
-            alias   aliasfor6
-                isa     Seption5
+            alias
+            aliasfor6
+                isa
+                Seption5
                 fields
                 test2
                 description some\description

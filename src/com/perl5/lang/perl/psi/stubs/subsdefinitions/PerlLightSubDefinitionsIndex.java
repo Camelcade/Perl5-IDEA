@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLightSubDefinitionIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightSubDefinitionsIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.sub.polynamed");
 

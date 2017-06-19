@@ -43,10 +43,10 @@ public class PerlSubDefinitionReverseIndex extends PerlStubIndexBase<PerlSubDefi
     return KEY;
   }
 
-  public static boolean processSubDefinitions(@NotNull Project project,
-                                              @NotNull String packageName,
-                                              @NotNull GlobalSearchScope scope,
-                                              @NotNull Processor<PerlSubDefinitionElement> processor) {
+  public static boolean processSubDefinitionsInPackage(@NotNull Project project,
+                                                       @NotNull String packageName,
+                                                       @NotNull GlobalSearchScope scope,
+                                                       @NotNull Processor<PerlSubDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDefinitionElement.class, processor);
   }
 }

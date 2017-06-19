@@ -16,15 +16,24 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.Processor;
+import com.intellij.util.containers.Queue;
+import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner {
@@ -66,5 +75,42 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
       }
       run = newRun;
     }
+  }
+
+  default List<PerlSubDefinitionElement> getDirectOverridingSubs() {
+    List<PerlSubDefinitionElement> result = new ArrayList<>();
+    processDirectOverridingSubs(result::add);
+    return result;
+  }
+
+  default boolean processDirectOverridingSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
+    String packageName = getPackageName();
+    String subName = getSubName();
+    if (packageName == null || subName == null) {
+      return true;
+    }
+    Set<String> recursionSet = new THashSet<>();
+    Project project = getProject();
+    GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
+    Queue<String> packagesToProcess = new Queue<>(5);
+    packagesToProcess.addLast(packageName);
+
+    while (!packagesToProcess.isEmpty()) {
+      packageName = packagesToProcess.pullFirst();
+      NAMESPACE:
+      for (PerlNamespaceDefinitionElement childNamespace : PerlPackageUtil.getChildNamespaces(project, packageName)) {
+        String childNamespaceName = childNamespace.getPackageName();
+        if (recursionSet.add(childNamespaceName)) {
+          for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitionsInPackage(project, childNamespaceName)) {
+            if (subName.equals(subDefinition.getSubName()) && subDefinition.getDirectSuperMethod() == this) {
+              processor.process(subDefinition);
+              continue NAMESPACE;
+            }
+          }
+          packagesToProcess.addLast(childNamespaceName);
+        }
+      }
+    }
+    return true;
   }
 }

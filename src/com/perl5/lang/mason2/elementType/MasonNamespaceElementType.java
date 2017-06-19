@@ -31,7 +31,7 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionElementType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDirectIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -70,7 +70,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
     sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
 
     // fixme this is kinda hack to make MRO work. But, it should be smarter
-    sink.occurrence(PerlNamespaceDirectIndex.KEY, Mason2Util.getClassnameFromPath(name));
+    sink.occurrence(PerlNamespaceIndex.KEY, Mason2Util.getClassnameFromPath(name));
 
     for (String parent : stub.getParentNamespacesNames()) {
       if (parent != null && !parent.isEmpty()) {

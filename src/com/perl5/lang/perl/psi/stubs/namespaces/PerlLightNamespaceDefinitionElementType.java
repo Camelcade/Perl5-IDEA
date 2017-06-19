@@ -41,7 +41,7 @@ public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefini
 
   @Override
   protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlLightNamespaceDirectIndex.KEY;
+    return PerlLightNamespaceIndex.KEY;
   }
 
   @Override

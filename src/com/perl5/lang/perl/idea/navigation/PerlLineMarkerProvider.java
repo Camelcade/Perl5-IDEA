@@ -20,15 +20,14 @@ import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -88,35 +87,31 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
                                         Collection<? super RelatedItemLineMarkerInfo> result) {
     PerlNamespaceDefinitionElement containingNamespace = PsiTreeUtil.getParentOfType(subElement, PerlNamespaceDefinitionElement.class);
     if (containingNamespace != null) {
-      final String packageName = subElement.getPackageName();
-      final String subName = subElement.getSubName();
       PsiElement nameIdentifier = subElement.getNameIdentifier();
       if (nameIdentifier == null) {
         nameIdentifier = subElement;
       }
 
-      if (StringUtil.isNotEmpty(packageName) && StringUtil.isNotEmpty(subName)) {
-        PerlSubElement parentSub = subElement.getDirectSuperMethod();
+      PerlSubElement parentSub = subElement.getDirectSuperMethod();
 
-        if (parentSub != null) {
-          NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-            .create(AllIcons.Gutter.OverridingMethod)
-            .setTarget(parentSub)
-            .setTooltipText("Overriding method");
+      if (parentSub != null) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.OverridingMethod)
+          .setTarget(parentSub)
+          .setTooltipText("Overriding method");
 
-          result.add(builder.createLineMarkerInfo(nameIdentifier));
-        }
+        result.add(builder.createLineMarkerInfo(nameIdentifier));
+      }
 
-        final List<PerlSubElement> overridingSubs = PerlSubUtil.getDirectOverridingSubs(subElement);
+      List<PerlSubElement> overridingSubs = new ArrayList<>();
+      subElement.processDirectOverridingSubs(overridingSubs::add);
+      if (!overridingSubs.isEmpty()) {
+        NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
+          .create(AllIcons.Gutter.OverridenMethod)
+          .setTargets(overridingSubs)
+          .setTooltipText("Overriden methods");
 
-        if (!overridingSubs.isEmpty()) {
-          NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
-            .create(AllIcons.Gutter.OverridenMethod)
-            .setTargets(overridingSubs)
-            .setTooltipText("Overriden methods");
-
-          result.add(builder.createLineMarkerInfo(nameIdentifier));
-        }
+        result.add(builder.createLineMarkerInfo(nameIdentifier));
       }
     }
   }

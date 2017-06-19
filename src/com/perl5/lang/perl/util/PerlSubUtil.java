@@ -31,7 +31,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
@@ -94,34 +94,63 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @param canonicalName canonical function name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlSubDefinitionElement> getSubDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlSubDefinitionElement> getSubDefinitions(@NotNull Project project,
+                                                                       @Nullable String canonicalName) {
     return getSubDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
   }
 
-  public static Collection<PerlSubDefinitionElement> getSubDefinitions(Project project, String canonicalName, GlobalSearchScope scope) {
+  public static Collection<PerlSubDefinitionElement> getSubDefinitions(@NotNull Project project,
+                                                                       @Nullable String canonicalName,
+                                                                       @NotNull GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    Collection<PerlSubDefinitionElement> elements =
-      StubIndex.getElements(PerlSubDefinitionsIndex.KEY, canonicalName, project, scope, PerlSubDefinitionElement.class);
+    List<PerlSubDefinitionElement> result = new ArrayList<>();
+    processSubDefinitions(project, canonicalName, scope, result::add);
+    return result;
+  }
 
-    PerlLightSubDefinitionIndex.processSubDefinitions(project, canonicalName, scope, elements::add);
-    return elements;
+  public static Collection<PerlSubDefinitionElement> getSubDefinitionsInPackage(@NotNull Project project,
+                                                                                @NotNull String packageName) {
+    return getSubDefinitionsInPackage(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+  }
+
+  public static Collection<PerlSubDefinitionElement> getSubDefinitionsInPackage(@NotNull Project project,
+                                                                                @NotNull String packageName,
+                                                                                @NotNull GlobalSearchScope scope) {
+    List<PerlSubDefinitionElement> result = new ArrayList<>();
+    processSubDefinitionsInPackage(project, packageName, scope, result::add);
+    return result;
   }
 
   public static boolean processSubDefinitionsInPackage(@NotNull Project project,
                                                        @NotNull String packageName,
                                                        @NotNull GlobalSearchScope scope,
                                                        @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return PerlSubDefinitionReverseIndex.processSubDefinitions(project, packageName, scope, processor) &&
-           PerlLightSubDefinitionsReverseIndex.processSubDefinitions(project, packageName, scope, processor);
+    return PerlSubDefinitionReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor) &&
+           PerlLightSubDefinitionsReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor);
   }
 
   public static boolean processSubDeclarationsInPackage(@NotNull Project project,
                                                         @NotNull String packageName,
                                                         @NotNull GlobalSearchScope scope,
                                                         @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return PerlSubDeclarationReverseIndex.processSubDeclarations(project, packageName, scope, processor);
+    return PerlSubDeclarationReverseIndex.processSubDeclarationsInPackage(project, packageName, scope, processor);
+  }
+
+  public static boolean processSubDefinitions(@NotNull Project project,
+                                              @NotNull String canonicalName,
+                                              @NotNull GlobalSearchScope scope,
+                                              @NotNull Processor<PerlSubDefinitionElement> processor) {
+    return PerlSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor) &&
+           PerlLightSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor);
+  }
+
+  public static boolean processSubDeclarations(@NotNull Project project,
+                                               @NotNull String canonicalName,
+                                               @NotNull GlobalSearchScope scope,
+                                               @NotNull Processor<PerlSubDeclarationElement> processor) {
+    return PerlSubDeclarationIndex.processSubDeclarations(project, canonicalName, scope, processor);
   }
 
 
@@ -133,7 +162,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    */
   public static Collection<String> getDefinedSubsNames(Project project) {
     Collection<String> result = PerlUtil.getIndexKeysWithoutInternals(PerlSubDefinitionsIndex.KEY, project);
-    result.addAll(PerlUtil.getIndexKeysWithoutInternals(PerlLightSubDefinitionIndex.KEY, project));
+    result.addAll(PerlUtil.getIndexKeysWithoutInternals(PerlLightSubDefinitionsIndex.KEY, project));
     return result;
   }
 
@@ -289,7 +318,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   public static List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
     List<PerlSubElement> result;
     result = new ArrayList<>();
-    for (PerlSubElement directDescendant : getDirectOverridingSubs(subBase)) {
+    for (PerlSubElement directDescendant : subBase.getDirectOverridingSubs()) {
       String packageName = directDescendant.getPackageName();
       if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName)) {
         recursionSet.add(packageName);
@@ -299,31 +328,6 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     }
 
     return result;
-  }
-
-  @NotNull
-  public static List<PerlSubElement> getDirectOverridingSubs(@NotNull PerlSubElement subBase) {
-    PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(subBase);
-
-    return containingNamespace == null ? Collections.emptyList() : getDirectOverridingSubs(subBase, containingNamespace);
-  }
-
-  @NotNull
-  private static List<PerlSubElement> getDirectOverridingSubs(@NotNull final PerlSubElement subBase,
-                                                              @NotNull PerlNamespaceDefinitionElement containingNamespace) {
-    final List<PerlSubElement> overridingSubs = new ArrayList<>();
-    final String subName = subBase.getSubName();
-
-    PerlPackageUtil.processChildNamespacesSubs(containingNamespace, null, overridingSub -> {
-      String overridingSubName = overridingSub.getSubName();
-      if (StringUtil.equals(overridingSubName, subName) && subBase == overridingSub.getDirectSuperMethod()) {
-        overridingSubs.add(overridingSub);
-        return false;
-      }
-      return true;
-    });
-
-    return overridingSubs;
   }
 
   @NotNull

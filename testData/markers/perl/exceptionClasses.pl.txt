@@ -20,33 +20,45 @@ Targets: 1
 
 187 - 195: 'Seption4': Subclasses
 Targets: 1
-    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 272
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 280
 
 187 - 195: 'Seption4': Parent classes
 Targets: 1
     PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 93
 
-272 - 280: 'Seption5': Subclasses
+209 - 215: 'fields': Overriden methods
 Targets: 1
-    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 396
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 363
 
-272 - 280: 'Seption5': Parent classes
+280 - 288: 'Seption5': Subclasses
+Targets: 1
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 428
+
+280 - 288: 'Seption5': Parent classes
 Targets: 1
     PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 187
 
-355 - 361: 'fields': Overriding method
+363 - 369: 'fields': Overriden methods
+Targets: 1
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 555
+
+363 - 369: 'fields': Overriding method
 Targets: 1
     PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 209
 
-396 - 404: 'Seption6': Parent classes
+400 - 405: 'test2': Overriden methods
 Targets: 1
-    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 272
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 578
 
-501 - 507: 'fields': Overriding method
+428 - 436: 'Seption6': Parent classes
 Targets: 1
-    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 355
+    PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION) in exceptionClasses.pl at 280
 
-524 - 529: 'test2': Overriding method
+555 - 561: 'fields': Overriding method
 Targets: 1
-    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 376
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 363
+
+578 - 583: 'test2': Overriding method
+Targets: 1
+    PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION) in exceptionClasses.pl at 400
 

@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLightNamespaceDirectIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
+public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElement> {
   public static final int VERSION = 1;
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.package.light.direct");
 
@@ -43,14 +43,14 @@ public class PerlLightNamespaceDirectIndex extends PerlStubIndexBase<PerlPolyNam
   }
 
   public static boolean processNamespaces(@NotNull Project project,
-                                          @NotNull String canonicalName,
+                                          @NotNull String packageName,
                                           @NotNull GlobalSearchScope scope,
                                           @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
 
-    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
-            canonicalName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getPackageName())) {
+            packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getPackageName())) {
           if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
             return false;
           }

@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlScopes {
   private static final Key<GlobalSearchScope> PROJECT_AND_LIBS_SCOPE_KEY = new Key<GlobalSearchScope>("PROJECT_AND_LIBS_SCOPE_KEY");
 
+  @Deprecated // this need to be fixed
   @NotNull
   public static GlobalSearchScope getProjectAndLibrariesScope(@NotNull Project project) {
     GlobalSearchScope cached = project.getUserData(PROJECT_AND_LIBS_SCOPE_KEY);

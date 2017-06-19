@@ -39,7 +39,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
 
   @Override
   protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlLightSubDefinitionIndex.KEY;
+    return PerlLightSubDefinitionsIndex.KEY;
   }
 
   @Override
