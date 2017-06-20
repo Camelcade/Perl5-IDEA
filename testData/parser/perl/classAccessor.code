@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+package Class::Accessor::Test;
+use strict;
+use warnings FATAL => 'all';
+
+use base qw(Class::Accessor);
+Class::Accessor::Test->mk_accessors(qw(rw_1 rw_2 ));
+Class::Accessor::Test->mk_ro_accessors(qw(ro_1 ro_2 ));
+Class::Accessor::Test->mk_wo_accessors(qw(wo_1 wo_2));
+__PACKAGE__->mk_accessors(qw( rw_3));
+__PACKAGE__->mk_ro_accessors(qw( ro_3));
+__PACKAGE__->mk_wo_accessors(qw( wo_3));
+Class::Accessor::Test->follow_best_practice;
+Class::Accessor::Test->mk_accessors(qw(rw_bp1 rw_bp2 ));
+Class::Accessor::Test->mk_ro_accessors(qw(ro_bp1 ro_bp2 ));
+Class::Accessor::Test->mk_wo_accessors(qw(wo_bp1 wo_bp2 ));
+__PACKAGE__->mk_accessors(qw(rw_bp3));
+__PACKAGE__->mk_ro_accessors(qw(ro_bp3));
+__PACKAGE__->mk_wo_accessors(qw(wo_bp3));
+Class::Accessor::Test->follow_best_practice();
+Class::Accessor::Test->mk_ro_accessors();
+Class::Accessor::Test->mk_wo_accessors();
+Class::Accessor::Test->mk_accessors();
