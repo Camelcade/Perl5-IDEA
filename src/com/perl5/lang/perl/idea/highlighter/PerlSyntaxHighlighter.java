@@ -211,4 +211,10 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
       safeMap(type, value);
     }
   }
+
+  public static void safeMap(@NotNull TextAttributesKey value, @NotNull TokenSet tokenSet) {
+    for (IElementType type : tokenSet.getTypes()) {
+      safeMap(type, value);
+    }
+  }
 }
