@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
+import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,5 +28,10 @@ import org.jetbrains.annotations.NotNull;
 public class PerlClassAccessorFollowBestPracticeImpl extends PerlClassAccessorSubImpl implements PerlClassAccessorFollowBestPractice {
   public PerlClassAccessorFollowBestPracticeImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);
+  }
+
+  @Override
+  public PsiReference[] computeReferences() {
+    return new PsiReference[]{new PerlSubReference(this)};
   }
 }
