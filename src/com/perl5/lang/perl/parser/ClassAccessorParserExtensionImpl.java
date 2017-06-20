@@ -21,6 +21,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase.Parser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ import static com.perl5.lang.perl.parser.PerlParserGenerated.optional_expression
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class ClassAccessorParserExtensionImpl extends PerlParserExtension implements ClassAccessorParserExtension {
+public class ClassAccessorParserExtensionImpl extends PerlParserExtension implements ClassAccessorElementTypes {
   protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
   final static GeneratedParserUtilBase.Parser FBP_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_FOLLOW_BEST_PRACTICE);
   final static GeneratedParserUtilBase.Parser MK_ACCESSOR_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_MK_ACCESSORS);
