@@ -424,7 +424,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       return QUALIFYING_PACKAGE;
     }
     else {
-      return SUB_NAME;
+      IElementType tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
+      return tokenType == null ? SUB_NAME : tokenType;
     }
   }
 
