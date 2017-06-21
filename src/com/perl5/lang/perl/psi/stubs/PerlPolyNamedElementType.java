@@ -30,6 +30,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
+
 public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub, Psi extends PerlPolyNamedElement>
   extends IStubElementType<Stub, Psi> implements PsiElementProvider {
   private static final TObjectIntHashMap<IStubElementType> DIRECT_MAP = new TObjectIntHashMap<>();
@@ -37,9 +40,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   static {
     // 0 is reserved for n/a
-    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_SUB_DEFINITION, 1);
-    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION, 2);
-    DIRECT_MAP.put(PerlStubElementTypes.LIGHT_METHOD_DEFINITION, 3);
+    DIRECT_MAP.put(LIGHT_SUB_DEFINITION, 1);
+    DIRECT_MAP.put(LIGHT_NAMESPACE_DEFINITION, 2);
+    DIRECT_MAP.put(LIGHT_METHOD_DEFINITION, 3);
+    DIRECT_MAP.put(CLASS_ACCESSOR_METHOD, 4);
+    assert DIRECT_MAP.size() == 4;
 
     DIRECT_MAP.forEachEntry((type, id) -> {
       REVERSE_MAP.put(id, type);

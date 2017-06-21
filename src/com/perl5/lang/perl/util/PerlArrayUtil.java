@@ -127,6 +127,7 @@ public class PerlArrayUtil implements PerlElementTypes {
    * @param rootElement top-level container or a single element
    * @return passed or new List of found PsiElements
    */
+  @NotNull
   public static List<PsiElement> collectListElements(@Nullable PsiElement rootElement) {
     return collectListElements(rootElement, new ArrayList<>());
   }

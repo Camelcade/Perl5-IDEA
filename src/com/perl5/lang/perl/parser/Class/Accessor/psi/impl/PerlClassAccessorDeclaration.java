@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
@@ -26,14 +25,9 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
-import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
-import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
-import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterSetterStructureViewElement;
-import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorGetterStructureViewElement;
-import com.perl5.lang.perl.parser.Class.Accessor.idea.strutureView.ClassAccessorSetterStructureViewElement;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.PerlClassAccessorFollowBestPractice;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorDeclarationStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -45,15 +39,11 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * Created by hurricup on 21.01.2016.
  */
 public class PerlClassAccessorDeclaration extends PerlSubDefinitionWithTextIdentifier implements ClassAccessorElementTypes,
                                                                                                  PerlCompletionElementsProvider,
-                                                                                                 PerlHierarchyViewElementsProvider,
                                                                                                  PerlRenameUsagesSubstitutor {
   public static final String ACCESSOR_PREFIX = "get_";
   public static final String MUTATOR_PREFIX = "set_";
@@ -192,47 +182,6 @@ public class PerlClassAccessorDeclaration extends PerlSubDefinitionWithTextIdent
       return null;
     }
     return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getSetterName();
-  }
-
-  @Override
-  public void fillHierarchyViewElements(List<TreeElement> treeElements,
-                                        Set<String> duplicationMap,
-                                        boolean isInherited,
-                                        boolean isImported) {
-    String getterName = getGetterName();
-    String setterName = getSetterName();
-    String subName = getSubName();
-    PerlSubStructureViewElement newElement = null;
-
-    if (isFollowsBestPractice()) {
-      if (isAccessorReadable() && isAccessorWritable() && !duplicationMap.contains(getterName) && !duplicationMap.contains(setterName)) {
-        newElement = new ClassAccessorGetterSetterStructureViewElement(this);
-        duplicationMap.add(getterName);
-        duplicationMap.add(setterName);
-      }
-      if (isAccessorReadable() && !duplicationMap.contains(getterName)) {
-        newElement = new ClassAccessorGetterStructureViewElement(this);
-        duplicationMap.add(getterName);
-      }
-      else if (isAccessorWritable() && !duplicationMap.contains(setterName)) {
-        newElement = new ClassAccessorSetterStructureViewElement(this);
-        duplicationMap.add(setterName);
-      }
-    }
-    else if (!duplicationMap.contains(subName)) {
-      newElement = new ClassAccessorGetterSetterStructureViewElement(this);
-      duplicationMap.add(subName);
-    }
-
-    if (newElement != null) {
-      if (isInherited) {
-        newElement.setInherited();
-      }
-      if (isImported) {
-        newElement.setImported();
-      }
-      treeElements.add(newElement);
-    }
   }
 
   @NotNull

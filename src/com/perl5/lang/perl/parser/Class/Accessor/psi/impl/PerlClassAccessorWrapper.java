@@ -17,23 +17,33 @@
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrapperStub;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
+import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedCallArgumentsImpl;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_FBP;
+import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD;
 
 public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase<PerlClassAccessorWrapperStub> {
   public PerlClassAccessorWrapper(@NotNull PerlClassAccessorWrapperStub stub,
@@ -48,13 +58,49 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
-    return Collections.emptyList();
+    return stub.getLightNamedElementsStubs().stream()
+      .filter(childStub -> childStub.getStubType() == CLASS_ACCESSOR_METHOD)
+      .map(childStub -> new PerlClassAccessorMethod(this, (PerlSubDefinitionStub)childStub))
+      .collect(Collectors.toList());
   }
 
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
-    return Collections.emptyList();
+    PsiPerlParenthesisedCallArgumentsImpl arguments = findChildByClass(PsiPerlParenthesisedCallArgumentsImpl.class);
+    // following should be in arguments psi
+    if (arguments == null) {
+      return Collections.emptyList();
+    }
+    PsiPerlExpr expression = PsiTreeUtil.getChildOfType(arguments, PsiPerlExpr.class);
+    if (expression == null) {
+      return Collections.emptyList();
+    }
+
+    String packageName = getMethod().getPackageName();
+    if (StringUtil.isEmpty(packageName)) {
+      return Collections.emptyList();
+    }
+
+    List<PsiElement> listElements = PerlArrayUtil.collectListElements(expression);
+    if (listElements.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    for (PsiElement listElement : listElements) {
+      // fixme generation should depend on FBP
+      result.add(new PerlClassAccessorMethod(
+        this,
+        ElementManipulators.getValueText(listElement),
+        CLASS_ACCESSOR_METHOD,
+        listElement,
+        packageName,
+        Collections.emptyList(), // fixme change for setter
+        null                     // fixme NYI
+      ));
+    }
+    return result;
   }
 
   public boolean isFollowBestPractice() {

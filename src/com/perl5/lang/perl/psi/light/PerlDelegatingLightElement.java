@@ -35,12 +35,12 @@ import javax.swing.*;
 /**
  * Created by hurricup on 26.11.2016.
  */
-public class PerlDelegatingLightElement<DelegatePsi extends PsiElement> extends LightElement {
+public class PerlDelegatingLightElement<Delegate extends PsiElement> extends LightElement {
   private final IElementType myElementType;
   @NotNull
-  private final DelegatePsi myDelegate;
+  private final Delegate myDelegate;
 
-  public PerlDelegatingLightElement(@NotNull DelegatePsi delegate, @NotNull IElementType elementType) {
+  public PerlDelegatingLightElement(@NotNull Delegate delegate, @NotNull IElementType elementType) {
     super(delegate.getManager(), delegate.getLanguage());
     myDelegate = delegate;
     myElementType = elementType;
@@ -51,7 +51,7 @@ public class PerlDelegatingLightElement<DelegatePsi extends PsiElement> extends 
   }
 
   @NotNull
-  public DelegatePsi getDelegate() {
+  public Delegate getDelegate() {
     return myDelegate;
   }
 

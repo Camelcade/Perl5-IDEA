@@ -17,29 +17,25 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
+import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.*;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class ClassAccessorParserExtension extends PerlParserExtension implements ClassAccessorElementTypes {
+public class ClassAccessorParserExtension extends PerlParserExtension {
   protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<>();
-  private static final GeneratedParserUtilBase.Parser FBP_PARSER =
-    (builder_, level_) -> consumeToken(builder_, RESERVED_FOLLOW_BEST_PRACTICE);
 
   protected static TokenSet TOKENS_SET;
 
@@ -97,9 +93,5 @@ public class ClassAccessorParserExtension extends PerlParserExtension implements
       wrapperMarker.rollbackTo();
       return false;
     }
-  }
-
-  public static TokenSet getTokenSet() {
-    return TOKENS_SET;
   }
 }

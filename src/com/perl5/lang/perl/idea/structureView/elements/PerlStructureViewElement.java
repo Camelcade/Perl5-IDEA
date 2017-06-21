@@ -28,7 +28,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.extensions.PerlHierarchyViewElementsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
@@ -271,14 +270,9 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement child) {
           if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
-            if (child instanceof PerlHierarchyViewElementsProvider) {
-              ((PerlHierarchyViewElementsProvider)child).fillHierarchyViewElements(result, implementedMethods, false, false);
-            }
-            else {
-              implementedMethods.add(child.getName());
+            implementedMethods.add(child.getName());
 
-              result.add(new PerlSubStructureViewElement(child));
-            }
+            result.add(new PerlSubStructureViewElement(child));
           }
           super.visitPerlSubDefinitionElement(child);
         }
@@ -300,7 +294,6 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
           super.visitGlobVariable(child);
         }
       });
-
     }
 
     // inherited elements
@@ -311,10 +304,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
 
       if (packageName != null) {
         for (PsiElement element : PerlMro.getVariants(myElement.getProject(), packageName, true)) {
-          if (element instanceof PerlHierarchyViewElementsProvider) {
-            ((PerlHierarchyViewElementsProvider)element).fillHierarchyViewElements(inheritedResult, implementedMethods, true, false);
-          }
-          else if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
+          if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
             if (element instanceof PerlLightConstantDefinitionElement) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
             }

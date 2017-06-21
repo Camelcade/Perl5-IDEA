@@ -29,8 +29,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-public class PerlLightMethodDefinitionElement extends PerlLightSubDefinitionElement {
-  public PerlLightMethodDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlLightSubDefinitionElement<Delegate> {
+  public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
                                           @NotNull String subName,
                                           @NotNull IStubElementType elementType,
                                           @NotNull PsiElement nameIdentifier,
@@ -40,7 +40,7 @@ public class PerlLightMethodDefinitionElement extends PerlLightSubDefinitionElem
     super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
   }
 
-  public PerlLightMethodDefinitionElement(@NotNull PerlPolyNamedElement delegate,
+  public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
                                           @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub);
   }

@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents one of the declarations of {@link PerlPolyNamedElement}
  */
-public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedElement> extends PerlDelegatingLightElement<DelegatePsi>
+public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightElement<Delegate>
   implements PsiNameIdentifierOwner {
 
   @NotNull
@@ -40,13 +40,13 @@ public class PerlDelegatingLightNamedElement<DelegatePsi extends PerlPolyNamedEl
   @Nullable
   private PsiElement myNameIdentifier;
 
-  public PerlDelegatingLightNamedElement(@NotNull DelegatePsi delegate,
+  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
                                          @NotNull IStubElementType elementType) {
     this(delegate, name, elementType, null);
   }
 
-  public PerlDelegatingLightNamedElement(@NotNull DelegatePsi delegate,
+  public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
                                          @NotNull IStubElementType elementType,
                                          @Nullable PsiElement nameIdentifier) {
