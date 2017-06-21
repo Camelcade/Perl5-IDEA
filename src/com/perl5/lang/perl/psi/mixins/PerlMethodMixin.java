@@ -90,7 +90,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     PsiElement grandParent = parent == null ? null : parent.getParent();
 
     if (grandParent instanceof PsiPerlDerefExpr) {
-      return ((PsiPerlDerefExpr)grandParent).getPreviousElementType(parent);
+      return ((PsiPerlDerefExpr)grandParent).getPreviousElementNamespace(parent);
     }
 
     return PerlPackageUtil.getContextPackageName(this);
@@ -99,7 +99,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   @Override
   public boolean isObjectMethod() {
     boolean hasExplicitNamespace = hasExplicitNamespace();
-    boolean isNestedCall = getParent() instanceof PsiPerlNestedCall;
+    boolean isNestedCall = getParent() instanceof PerlNestedCall;
 
     return !hasExplicitNamespace && isNestedCall            // part of ..->method()
            || hasExplicitNamespace && getFirstChild() instanceof PerlSubNameElement    // method Foo::Bar

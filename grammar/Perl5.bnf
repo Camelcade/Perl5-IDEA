@@ -383,8 +383,9 @@ limitations under the License.
     mixin("string_bare")="com.perl5.lang.perl.psi.mixins.PerlStringBareMixin"
 
     extends("nested_call")=sub_call_expr
+    implements("nested_call")="com.perl5.lang.perl.psi.PerlNestedCall"
 
-    implements("nested_call|sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
+    implements("sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
 
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
@@ -1005,7 +1006,9 @@ private recover_bracketed_expression ::= !']'
 
 ///////////////////////////////////// CALLABLE /////////////////////////////////////////////////////////////////////////
 meta method ::= <<x1>>
-meta nested_call ::= <<method <<x1>>>> [<<parenthesised_call_arguments <<x2>>>>]	// reused by mk_accessor and so on
+// deprecated, remove after moving to poly-named elements
+meta nested_call ::= <<nested_call_inner <<x1>> <<x2>>>>	// reused by mk_accessor and so on
+private meta nested_call_inner ::= <<method <<x1>>>> [<<parenthesised_call_arguments <<x2>>>>]
 meta call_arguments ::= <<x1>>
 private default_parenthesised_call_arguments ::= <<parenthesised_call_arguments optional_expression>>
 meta parenthesised_call_arguments ::= <<parse_parenthesized_expression <<x1>>>> !'['

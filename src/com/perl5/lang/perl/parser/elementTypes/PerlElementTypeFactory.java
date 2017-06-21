@@ -926,13 +926,7 @@ public class PerlElementTypeFactory {
     }
 
     if (name.equals("NESTED_CALL")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlNestedCallImpl(node);
-        }
-      };
+      return new PerlNestedCallElementType(name);
     }
 
     if (name.equals("NEXT_EXPR")) {

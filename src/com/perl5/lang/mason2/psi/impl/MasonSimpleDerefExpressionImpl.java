@@ -31,13 +31,13 @@ public class MasonSimpleDerefExpressionImpl extends PsiPerlDerefExprImpl {
   }
 
   @Override
-  public String getCurrentElementType(PsiElement currentElement) {
+  public String getCurrentElementNamespace(PsiElement currentElement) {
     MasonNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(this, MasonNamespaceDefinition.class);
 
     if (namespaceDefinition != null) {
       return namespaceDefinition.getPackageName();
     }
 
-    return super.getCurrentElementType(currentElement);
+    return super.getCurrentElementNamespace(currentElement);
   }
 }

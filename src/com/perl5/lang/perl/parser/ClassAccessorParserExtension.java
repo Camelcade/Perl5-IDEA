@@ -32,8 +32,6 @@ import java.util.Map;
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
-import static com.perl5.lang.perl.parser.PerlParserGenerated.expr;
-import static com.perl5.lang.perl.parser.PerlParserGenerated.optional_expression_parser_;
 
 /**
  * Created by hurricup on 21.01.2016.
@@ -74,14 +72,15 @@ public class ClassAccessorParserExtension extends PerlParserExtension implements
       return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_WRAPPER_WO);
     }
     else if (elementType == RESERVED_FOLLOW_BEST_PRACTICE) {
-      return PerlParserImpl.nested_call(b, l, FBP_PARSER, optional_expression_parser_);
+      return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_FBP);
     }
 
     return super.parseNestedElement(b, l);
   }
 
   protected boolean parseAccessorDeclarations(@NotNull PerlBuilder builder, int level, @NotNull IElementType wrapperTokenType) {
-    return PerlParserImpl.nested_call(
+    PsiBuilder.Marker wrapperMarker = builder.mark();
+    if (PerlParserImpl.nested_call_inner(
       builder, level,
       (b, l) -> {
         PsiBuilder.Marker m = b.mark();
@@ -89,16 +88,15 @@ public class ClassAccessorParserExtension extends PerlParserExtension implements
         m.collapse(SUB_NAME);
         return true;
       },
-      (b, l) -> {
-        PsiBuilder.Marker m = b.mark();
-        if (expr(b, l, -1)) {
-          m.done(wrapperTokenType);
-        }
-        else {
-          m.drop();
-        }
-        return true;
-      });
+      PerlParserImpl.optional_expression_parser_
+    )) {
+      wrapperMarker.done(wrapperTokenType);
+      return true;
+    }
+    else {
+      wrapperMarker.rollbackTo();
+      return false;
+    }
   }
 
   public static TokenSet getTokenSet() {

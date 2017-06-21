@@ -20,17 +20,20 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorDeclarationElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorSubElementType;
+import com.perl5.lang.perl.parser.Class.Accessor.elementTypes.ClassAccessorWrapperElementType;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorFollowBestPracticeImpl;
-import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
+import com.perl5.lang.perl.parser.elementTypes.PerlNestedCallElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
 public interface ClassAccessorElementTypes {
-  IElementType CLASS_ACCESSOR_WRAPPER = new PerlElementTypeEx("CLASS_ACCESSOR_WRAPPER");
-  IElementType CLASS_ACCESSOR_WRAPPER_RO = new PerlElementTypeEx("CLASS_ACCESSOR_WRAPPER_RO");
-  IElementType CLASS_ACCESSOR_WRAPPER_WO = new PerlElementTypeEx("CLASS_ACCESSOR_WRAPPER_WO");
+  IElementType CLASS_ACCESSOR_FBP = new PerlNestedCallElementType("CLASS_ACCESSOR_FBP");
+  IElementType CLASS_ACCESSOR_WRAPPER = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER");
+  IElementType CLASS_ACCESSOR_WRAPPER_RO = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER_RO");
+  IElementType CLASS_ACCESSOR_WRAPPER_WO = new ClassAccessorWrapperElementType("CLASS_ACCESSOR_WRAPPER_WO");
+
   IElementType RESERVED_MK_RO_ACCESSORS = new ClassAccessorSubElementType("MK_RO_ACCESSORS");
   IElementType RESERVED_MK_WO_ACCESSORS = new ClassAccessorSubElementType("MK_WO_ACCESSORS");
   IElementType RESERVED_MK_ACCESSORS = new ClassAccessorSubElementType("MK_ACCESSORS");

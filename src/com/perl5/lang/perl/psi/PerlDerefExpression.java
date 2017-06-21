@@ -30,7 +30,7 @@ public interface PerlDerefExpression extends PsiPerlExpr {
    * @return package name or null
    */
   @Nullable
-  String getPreviousElementType(PsiElement methodElement);
+  String getPreviousElementNamespace(PsiElement methodElement);
 
   /**
    * Attempting to traverse dereference chain in order to detect package name retuning by current element
@@ -39,7 +39,7 @@ public interface PerlDerefExpression extends PsiPerlExpr {
    * @return type or null
    */
   @Nullable
-  String getCurrentElementType(PsiElement currentElement);
+  String getCurrentElementNamespace(PsiElement currentElement);
 
   /**
    * Attempting to guess dereference chain result

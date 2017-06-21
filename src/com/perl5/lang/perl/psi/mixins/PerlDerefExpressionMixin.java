@@ -38,7 +38,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
   @Nullable
   @Override
-  public String getPreviousElementType(PsiElement methodElement) {
+  public String getPreviousElementNamespace(PsiElement methodElement) {
     // todo add some caching here
     if (methodElement == getFirstChild())    // first element
     {
@@ -52,17 +52,17 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
       currentElement = currentElement.getPrevSibling();
     }
 
-    return getCurrentElementType(currentElement);
+    return getCurrentElementNamespace(currentElement);
   }
 
   @Nullable
-  public String getCurrentElementType(PsiElement currentElement) {
+  public String getCurrentElementNamespace(PsiElement currentElement) {
     while (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment) {
       currentElement = currentElement.getPrevSibling();
     }
 
     if (currentElement != null) {
-      return PerlPsiUtil.getPerlExpressionType(currentElement);
+      return PerlPsiUtil.getPerlExpressionNamespace(currentElement);
     }
     return null;
   }
@@ -70,7 +70,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
   public String guessType() {
     PsiElement[] children = getChildren();
     if (children.length > 0) {
-      return getCurrentElementType(children[children.length - 1]);
+      return getCurrentElementNamespace(children[children.length - 1]);
     }
     return null;
   }

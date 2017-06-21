@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.mixins;
+package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlMethodContainer;
+import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.psi.PerlNestedCall;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 05.11.2015.
+ * Base class for
  */
-public abstract class PerlMethodContainerMixIn extends PerlCompositeElementImpl implements PerlMethodContainer {
-  public PerlMethodContainerMixIn(@NotNull ASTNode node) {
+public abstract class PerlPolyNamedNestedCallElementBase extends PerlPolyNamedElementBase implements PerlNestedCall {
+  public PerlPolyNamedNestedCallElementBase(@NotNull PerlPolyNamedElementStub stub,
+                                            @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
+  }
+
+  public PerlPolyNamedNestedCallElementBase(@NotNull ASTNode node) {
     super(node);
   }
 

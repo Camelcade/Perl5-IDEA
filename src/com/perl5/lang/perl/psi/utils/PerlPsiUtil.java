@@ -595,7 +595,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   @Nullable
-  public static String getPerlExpressionType(PsiElement element) {
+  public static String getPerlExpressionNamespace(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -619,10 +619,10 @@ public class PerlPsiUtil implements PerlElementTypes {
       return PerlPackageUtil.getContextPackageName(element);
     }
     else if (element instanceof PsiPerlParenthesisedExprImpl) {
-      return getPerlExpressionType(((PsiPerlParenthesisedExprImpl)element).getExpr());
+      return getPerlExpressionNamespace(((PsiPerlParenthesisedExprImpl)element).getExpr());
     }
     else if (element instanceof PsiPerlDerefExprImpl) {
-      return getPerlExpressionType(element.getLastChild());
+      return getPerlExpressionNamespace(element.getLastChild());
     }
 
     return null;
