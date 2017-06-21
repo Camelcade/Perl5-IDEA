@@ -18,19 +18,24 @@ package com.perl5.lang.perl.parser.Class.Accessor.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorWrapper;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrapperStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType {
+import java.io.IOException;
+import java.util.List;
+
+public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType<PerlClassAccessorWrapperStub, PerlClassAccessorWrapper> {
   public ClassAccessorWrapperElementType(@NotNull String debugName) {
     super(debugName);
   }
 
   @Override
-  public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
+  public PerlClassAccessorWrapper createPsi(@NotNull PerlClassAccessorWrapperStub stub) {
     return new PerlClassAccessorWrapper(stub, this);
   }
 
@@ -38,5 +43,26 @@ public class ClassAccessorWrapperElementType extends PerlPolyNamedElementType {
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PerlClassAccessorWrapper(node);
+  }
+
+  @NotNull
+  @Override
+  protected PerlClassAccessorWrapperStub createStub(@NotNull PerlClassAccessorWrapper psi,
+                                                    StubElement parentStub,
+                                                    @NotNull List<StubElement> lightStubs) {
+    return new PerlClassAccessorWrapperStub(parentStub, this, lightStubs, psi.isFollowBestPractice());
+  }
+
+  @Override
+  protected void serializeStub(@NotNull PerlClassAccessorWrapperStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeBoolean(stub.isFollowBestPractice());
+  }
+
+  @NotNull
+  @Override
+  protected PerlClassAccessorWrapperStub deserialize(@NotNull StubInputStream dataStream,
+                                                     StubElement parentStub,
+                                                     @NotNull List<StubElement> childStubs) throws IOException {
+    return new PerlClassAccessorWrapperStub(parentStub, this, childStubs, dataStream.readBoolean());
   }
 }

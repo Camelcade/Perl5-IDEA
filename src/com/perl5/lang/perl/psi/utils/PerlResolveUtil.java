@@ -22,10 +22,8 @@ import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +56,7 @@ public class PerlResolveUtil {
     PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
     while (run != null) {
       if (run instanceof PerlCompositeElement &&
-          !(run instanceof PerlLexicalScope) &&
+          !(run instanceof PerlLexicalScope) && // fixme this should be in composite
           !run.processDeclarations(processor, resolveState, null, place)
         ) {
         return false;
@@ -66,19 +64,10 @@ public class PerlResolveUtil {
       run = run.getPrevSibling();
     }
 
-    // checking implicit variables
+    // checking implicit variables fixme: decide, move processchildren to here or move this one to processDeclarations?
     if (element instanceof PerlImplicitVariablesProvider) {
       for (PerlVariableDeclarationElement wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
         if (!processor.execute(wrapper, resolveState)) {
-          return false;
-        }
-      }
-    }
-
-    // checking light elements
-    if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement namedElement : ((PerlPolyNamedElement)element).getLightElements()) {
-        if (!processor.execute(namedElement, resolveState)) {
           return false;
         }
       }

@@ -16,11 +16,14 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
@@ -28,8 +31,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<PerlPolyNamedElementStub> implements PerlPolyNamedElement {
-  public PerlPolyNamedElementBase(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
+public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElementStub> extends PerlStubBasedPsiElementBase<Stub>
+  implements PerlPolyNamedElement {
+  public PerlPolyNamedElementBase(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -70,5 +74,19 @@ public abstract class PerlPolyNamedElementBase extends StubBasedPsiElementBase<P
   @Override
   public String toString() {
     return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
+  }
+
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
+                                     @NotNull ResolveState state,
+                                     PsiElement lastParent,
+                                     @NotNull PsiElement place) {
+    for (PerlDelegatingLightNamedElement namedElement : getLightElements()) {
+      if (!processor.execute(namedElement, state)) {
+        return false;
+      }
+    }
+
+    return super.processDeclarations(processor, state, lastParent, place);
   }
 }

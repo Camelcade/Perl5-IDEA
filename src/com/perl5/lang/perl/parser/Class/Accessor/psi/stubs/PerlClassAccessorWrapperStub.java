@@ -14,32 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.impl;
+package com.perl5.lang.perl.parser.Class.Accessor.psi.stubs;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PerlNestedCall;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
+import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Base class for
- */
-public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNamedElementStub> extends PerlPolyNamedElementBase<Stub>
-  implements PerlNestedCall {
-  public PerlPolyNamedNestedCallElementBase(@NotNull Stub stub,
-                                            @NotNull IStubElementType nodeType) {
-    super(stub, nodeType);
+import java.util.List;
+
+public class PerlClassAccessorWrapperStub extends PerlPolyNamedElementStub {
+  private final boolean myIsFollowBestPractice;
+
+  public PerlClassAccessorWrapperStub(StubElement parent,
+                                      IStubElementType elementType,
+                                      @NotNull List<StubElement> lightNamedElementsStubs,
+                                      boolean isFollowBestPractice) {
+    super(parent, elementType, lightNamedElementsStubs);
+    myIsFollowBestPractice = isFollowBestPractice;
   }
 
-  public PerlPolyNamedNestedCallElementBase(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  @Override
-  @NotNull
-  public PsiPerlMethod getMethod() {
-    return findNotNullChildByClass(PsiPerlMethod.class);
+  public boolean isFollowBestPractice() {
+    return myIsFollowBestPractice;
   }
 }

@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_SUB_DEFINITION;
 
-public class PerlConstantsWrapper extends PerlPolyNamedElementBase {
+public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
 
   public PerlConstantsWrapper(@NotNull PerlPolyNamedElementStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);

@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
-public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase {
+public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
   public static final String FIELDS_METHOD_NAME = "Fields";
 
   public PerlExceptionClassWrapper(@NotNull PerlPolyNamedElementStub stub,

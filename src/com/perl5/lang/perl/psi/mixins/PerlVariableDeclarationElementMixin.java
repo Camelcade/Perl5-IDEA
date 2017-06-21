@@ -19,8 +19,6 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
@@ -30,7 +28,6 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.references.scopes.PerlVariableScopeProcessor;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
@@ -223,17 +220,6 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     }
 
     return super.getIcon(flags);
-  }
-
-  @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor,
-                                     @NotNull ResolveState state,
-                                     PsiElement lastParent,
-                                     @NotNull PsiElement place) {
-    if (processor instanceof PerlVariableScopeProcessor && !equals(place.getParent())) {
-      return processor.execute(this, state);
-    }
-    return super.processDeclarations(processor, state, lastParent, place);
   }
 
   @Nullable

@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType {
+public class PerlConstantsWrapperElementType extends PerlPolyNamedElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
   public static final IStubElementType CONSTANT_WRAPPER = new PerlConstantsWrapperElementType("CONSTANT_WRAPPER");
 
   private PerlConstantsWrapperElementType(@NotNull String debugName) {

@@ -38,13 +38,7 @@ public class PerlCompositeElementImpl extends ASTWrapperPsiElement implements Pe
                                      @NotNull ResolveState state,
                                      PsiElement lastParent,
                                      @NotNull PsiElement place) {
-    //		System.err.println(this);
-    return PerlResolveUtil.processChildren(
-      this,
-      processor,
-      state,
-      lastParent,
-      place
-    );
+    return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) &&
+           processor.execute(this, state);
   }
 }

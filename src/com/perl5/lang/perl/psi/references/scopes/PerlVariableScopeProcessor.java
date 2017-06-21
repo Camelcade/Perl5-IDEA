@@ -25,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 19.02.2016.
  */
+@Deprecated // use BaseScopeProcessor instead
 public abstract class PerlVariableScopeProcessor extends UserDataHolderBase implements PsiScopeProcessor {
   @Nullable
   @Override

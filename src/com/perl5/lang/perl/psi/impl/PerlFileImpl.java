@@ -246,13 +246,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
                                      @NotNull ResolveState state,
                                      PsiElement lastParent,
                                      @NotNull PsiElement place) {
-    return PerlResolveUtil.processChildren(
-      this,
-      processor,
-      state,
-      lastParent,
-      place
-    );
+    return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) && processor.execute(this, state);
   }
 
   public boolean isNewLineForbiddenAt(PsiElement element) {

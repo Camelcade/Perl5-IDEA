@@ -48,13 +48,8 @@ public class PerlStubBasedPsiElementBase<T extends StubElement> extends StubBase
                                      @NotNull ResolveState state,
                                      PsiElement lastParent,
                                      @NotNull PsiElement place) {
-    //		System.err.println(this);
-    return PerlResolveUtil.processChildren(
-      this,
-      processor,
-      state,
-      lastParent,
-      place
-    );
+
+    return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) &&
+           processor.execute(this, state);
   }
 }

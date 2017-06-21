@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlExceptionClassWrapperElementType extends PerlPolyNamedElementType {
+public class PerlExceptionClassWrapperElementType extends PerlPolyNamedElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
   public static final IStubElementType EXCEPTION_CLASS_WRAPPER = new PerlExceptionClassWrapperElementType("Class::Exception wrapper");
 
   private PerlExceptionClassWrapperElementType(@NotNull String debugName) {
