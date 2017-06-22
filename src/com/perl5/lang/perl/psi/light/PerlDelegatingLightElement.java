@@ -127,7 +127,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
   @Override
   public PsiElement getOriginalElement() {
-    return getDelegate().getOriginalElement();
+    return this;
   }
 
   @NotNull
