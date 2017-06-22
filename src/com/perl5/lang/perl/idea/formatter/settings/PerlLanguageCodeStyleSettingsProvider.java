@@ -27,6 +27,11 @@ import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS;
+import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_WITHIN;
+import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+
 /**
  * Created by hurricup on 03.09.2015.
  */
@@ -108,7 +113,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
   @Override
   public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
-    if (settingsType == SettingsType.SPACING_SETTINGS) {
+    if (settingsType == SPACING_SETTINGS) {
       consumer.showStandardOptions(
         "SPACE_AROUND_ASSIGNMENT_OPERATORS",    // implemented
         "SPACE_AROUND_LOGICAL_OPERATORS",        // implemented
@@ -149,12 +154,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACES_WITHIN_CALL_ARGUMENTS", SPACE_OPTION_CALL_ARGUMENTS,
-                                CodeStyleSettingsCustomizable.SPACES_WITHIN);
+                                SPACES_WITHIN);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_CONCAT_OPERATOR", SPACE_OPTION_AROUND_CONCAT_OPERATOR,
-                                CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);
+                                SPACES_AROUND_OPERATORS);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_RANGE_OPERATORS", SPACE_OPTION_AROUND_RANGE_OPERATORS,
-                                CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS);
+                                SPACES_AROUND_OPERATORS);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD",
                                 SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
@@ -171,7 +176,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET",
                                 SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
     }
-    else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
+    else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", PerlBundle.message("perl.formatting.align.fat.comma"),
                                 GROUP_ALIGNMENT);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_QW_ELEMENTS", PerlBundle.message("perl.formatting.align.qw.elements"),
@@ -182,29 +187,29 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.align.dereference"),
                                 GROUP_ALIGNMENT);
     }
-    else if (settingsType == SettingsType.LANGUAGE_SPECIFIC) {
+    else if (settingsType == LANGUAGE_SPECIFIC) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", QUOTATION_OPTION_BEFORE_ARROW, QUOTATION_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+                                OPTIONS_DEFAULT);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HASH_INDEX", QUOTATION_OPTION_HASH_INDEX, QUOTATION_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+                                OPTIONS_DEFAULT);
       consumer
         .showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HEREDOC_OPENER", QUOTATION_OPTION_HEREDOC_OPENER, QUOTATION_GROUP,
-                          PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+                          OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", DEREFERENCE_OPTION_BETWEEN_INDEXES, DEREFERENCE_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+                                OPTIONS_DEFAULT);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT", DEREFERENCE_OPTION_HASHREF_ELEMENT,
-                                DEREFERENCE_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_HASHREF_ELEMENT);
+                                DEREFERENCE_GROUP, OPTIONS_HASHREF_ELEMENT);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_SIMPLE", DEREFERENCE_OPTION_SIMPLE, DEREFERENCE_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_SIMPLE_DEREF_STYLE);
+                                OPTIONS_SIMPLE_DEREF_STYLE);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PARENTHESES_OPTION_POSTFIX, PARENTHESES_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
+                                OPTIONS_DEFAULT);
 
       //			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "MAIN_FORMAT", PERL_OPTION_MISC_MAIN, MISC_ELEMENTS_GROUP,
-                                PerlCodeStyleSettings.OptionalConstructions.OPTIONS_MAIN_FORMAT);
+                                OPTIONS_MAIN_FORMAT);
     }
   }
 
@@ -233,16 +238,16 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
   @Override
   public String getCodeSample(@NotNull SettingsType settingsType) {
-    if (settingsType == SettingsType.SPACING_SETTINGS) {
+    if (settingsType == SPACING_SETTINGS) {
       return SPACING_CODE_SAMPLE;
     }
-    else if (settingsType == SettingsType.INDENT_SETTINGS) {
+    else if (settingsType == INDENT_SETTINGS) {
       return INDENT_CODE_SAMPLE;
     }
-    else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
+    else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       return WRAPPING_CODES_SAMPLE;
     }
-    else if (settingsType == SettingsType.LANGUAGE_SPECIFIC) {
+    else if (settingsType == LANGUAGE_SPECIFIC) {
       return LANGUAGE_SPECIFIC_CODE_SAMPLE;
     }
     return DEFAULT_CODE_SAMPLE;
