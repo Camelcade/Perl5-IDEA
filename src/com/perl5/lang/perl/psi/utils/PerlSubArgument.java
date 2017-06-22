@@ -138,6 +138,10 @@ public class PerlSubArgument {
     return create(variableType, variableName, true);
   }
 
+  public static PerlSubArgument optionalScalar(@NotNull String variableName) {
+    return create(PerlVariableType.SCALAR, variableName, true);
+  }
+
   public static PerlSubArgument mandatoryScalar(@NotNull String variableName) {
     return mandatory(PerlVariableType.SCALAR, variableName);
   }
