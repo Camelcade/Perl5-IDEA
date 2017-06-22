@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorDeclaration;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,14 +35,13 @@ public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiRefere
   @Override
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
     PsiElement element = queryParameters.getElementToSearch();
-    if (element instanceof PerlClassAccessorDeclaration && ((PerlClassAccessorDeclaration)element).isFollowsBestPractice()) {
-      if (((PerlClassAccessorDeclaration)element).isAccessorReadable()) {
-        queryParameters.getOptimizer()
-          .searchWord(((PerlClassAccessorDeclaration)element).getGetterName(), queryParameters.getEffectiveSearchScope(), true, element);
-      }
-      if (((PerlClassAccessorDeclaration)element).isAccessorWritable()) {
-        queryParameters.getOptimizer()
-          .searchWord(((PerlClassAccessorDeclaration)element).getSetterName(), queryParameters.getEffectiveSearchScope(), true, element);
+    if (element instanceof PerlClassAccessorMethod) {
+      queryParameters.getOptimizer()
+        .searchWord(((PerlClassAccessorMethod)element).getSubName(), queryParameters.getEffectiveSearchScope(), true, element);
+
+      PerlClassAccessorMethod pairedMethod = ((PerlClassAccessorMethod)element).getPairedMethod();
+      if (pairedMethod != null) {
+        queryParameters.getOptimizer().searchWord(pairedMethod.getSubName(), queryParameters.getEffectiveSearchScope(), true, pairedMethod);
       }
     }
   }
