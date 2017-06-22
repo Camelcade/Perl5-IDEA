@@ -27,8 +27,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS;
-import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_WITHIN;
+import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
@@ -66,7 +65,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                                     "}else {\n" +
                                                     "    say ($var1) unless $var2;\n" +
                                                     "    say $var1 for @ARGV;\n" +
-                                                    "}";
+                                                    "}\n" +
+                                                    "qw/ some string here  /;";
   private static final String INDENT_CODE_SAMPLE = "if( $cond )\n" +
                                                    "{\n" +
                                                    "    say sprintf\n" +
@@ -175,6 +175,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                           SPACE_GROUP_ANON_ARRAY);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET",
                                 SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
+
+      consumer
+        .showCustomOption(PerlCodeStyleSettings.class, "SPACE_WITHIN_QW_QUOTES", PerlBundle.message("perl.formatting.space.inside.qw"),
+                          SPACES_OTHER);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", PerlBundle.message("perl.formatting.align.fat.comma"),

@@ -37,6 +37,7 @@
      <ul>
      <li>Formatter:<ul>
      <li>Added option to align strings in QW lists</li>
+     <li>Added option to control spacing within QW lists</li>
      <li>Added option to align fat commas</li>
      <li>Added option to align ternary expressions operators</li>
      <li>Added option to align <code>-></code> in chained dereferences</li>

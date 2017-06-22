@@ -52,6 +52,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .betweenInside(STRING_CONTENT, STRING_CONTENT, LP_STRING_QW).spaces(1)
       .betweenInside(STRING_CONTENT, STRING_CONTENT, STRING_LIST).spaces(1)
 
+      .betweenInside(QUOTE_SINGLE_OPEN, QUOTE_SINGLE_CLOSE, STRING_LIST).spaces(0)
+      .betweenInside(QUOTE_SINGLE_OPEN, STRING_CONTENT, STRING_LIST).spaceIf(myPerlSettings.SPACE_WITHIN_QW_QUOTES)
+      .betweenInside(STRING_CONTENT, QUOTE_SINGLE_CLOSE, STRING_LIST).spaceIf(myPerlSettings.SPACE_WITHIN_QW_QUOTES)
+
       .afterInside(LEFT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACE_ANON_HASH_AFTER_LEFT_BRACE)
       .beforeInside(RIGHT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACE_ANON_HASH_BEFORE_RIGHT_BRACE)
       .afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET)
