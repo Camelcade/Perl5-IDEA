@@ -38,6 +38,7 @@
      <li>QW strings now may be aligned using formatter.</li>
      <li>Added Code Style settings for alignment of: QW contents, Fat arrows and Ternary expression ? and :</li>
      <li>Implemented <code>Exception::Class</code> module support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/848">#848</a></li>
+     <li>Restored and improved <code>Class::Accessor</code> support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1395">#1395</a></li>
      </ul>
      </p>
      <p>Fixes:
