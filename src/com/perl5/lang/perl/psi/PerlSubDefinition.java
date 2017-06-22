@@ -20,6 +20,7 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 public interface PerlSubDefinition extends PerlSub {
@@ -35,11 +36,9 @@ public interface PerlSubDefinition extends PerlSub {
     List<PerlSubArgument> subArguments = getSubArgumentsList();
 
     if (isMethod() && !subArguments.isEmpty()) {
-      subArguments = subArguments.subList(1, subArguments.size() - 1);
+      subArguments = subArguments.size() > 1 ? subArguments.subList(1, subArguments.size() - 1) : Collections.emptyList();
     }
 
     return PerlSubUtil.getArgumentsListAsString(subArguments);
   }
-
-
 }
