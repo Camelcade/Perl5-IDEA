@@ -25,7 +25,10 @@ import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.Function;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrapperStub;
+import com.perl5.lang.perl.psi.PerlDerefExpression;
+import com.perl5.lang.perl.psi.PerlSmartMethodContainer;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
@@ -36,16 +39,21 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_FBP;
-import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD;
+import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.*;
+import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.GETTER_COMPUTATION;
+import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.SETTER_COMPUTATION;
 
-public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase<PerlClassAccessorWrapperStub> {
+public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase<PerlClassAccessorWrapperStub>
+  implements PerlSmartMethodContainer {
+
   public PerlClassAccessorWrapper(@NotNull PerlClassAccessorWrapperStub stub,
                                   @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
@@ -89,18 +97,35 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : listElements) {
-      // fixme generation should depend on FBP
-      result.add(new PerlClassAccessorMethod(
-        this,
-        ElementManipulators.getValueText(listElement),
-        CLASS_ACCESSOR_METHOD,
-        listElement,
-        packageName,
-        Collections.emptyList(), // fixme change for setter
-        null                     // fixme NYI
-      ));
+      String baseName = ElementManipulators.getValueText(listElement);
+      for (Function<String, String> computation : getNamesComputations()) {
+        result.add(new PerlClassAccessorMethod(
+          this,
+          baseName,
+          computation,
+          CLASS_ACCESSOR_METHOD,
+          listElement,
+          packageName,
+          null                     // fixme NYI
+        ));
+      }
     }
     return result;
+  }
+
+  @NotNull
+  private List<Function<String, String>> getNamesComputations() {
+    if (!isFollowBestPractice()) {
+      return Collections.singletonList(PerlClassAccessorMethod.SIMPLE_COMPUTATION);
+    }
+    IStubElementType elementType = getElementType();
+    if (elementType == CLASS_ACCESSOR_WRAPPER_RO) {
+      return Collections.singletonList(GETTER_COMPUTATION);
+    }
+    else if (elementType == CLASS_ACCESSOR_WRAPPER_WO) {
+      return Collections.singletonList(SETTER_COMPUTATION);
+    }
+    return Arrays.asList(GETTER_COMPUTATION, SETTER_COMPUTATION);
   }
 
   public boolean isFollowBestPractice() {
@@ -134,4 +159,10 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     return result[0];
   }
 
+  @Nullable
+  @Override
+  public String getReturnPackageName() {
+    PsiElement parent = getParent();
+    return parent instanceof PerlDerefExpression ? ((PerlDerefExpression)parent).getPreviousElementNamespace(this) : null;
+  }
 }
