@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.psi.light;
 
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -36,12 +38,10 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   implements PerlSubDefinitionElement {
   @Nullable
   private final String myPackageName;
-
-  @NotNull
-  private final List<PerlSubArgument> mySubArguments;
-
   @Nullable
   private final PerlSubAnnotations myAnnotations;
+  @NotNull
+  private List<PerlSubArgument> mySubArguments;
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String subName,
@@ -63,6 +63,10 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myAnnotations = stub.getAnnotations();
   }
 
+  protected void setSubArguments(@NotNull List<PerlSubArgument> subArguments) {
+    mySubArguments = subArguments;
+  }
+
   @Nullable
   @Override
   public String getPackageName() {
@@ -77,7 +81,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Override
   public String getSubName() {
-    return getName();
+    return myName;
   }
 
   @Nullable
@@ -133,5 +137,10 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     else {
       super.accept(visitor);
     }
+  }
+
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getSubName());
   }
 }
