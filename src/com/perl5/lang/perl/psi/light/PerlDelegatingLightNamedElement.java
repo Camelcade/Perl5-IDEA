@@ -20,6 +20,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
@@ -35,10 +36,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   implements PsiNameIdentifierOwner {
 
   @NotNull
-  private final String myName;
+  protected String myName;
 
   @Nullable
   private PsiElement myNameIdentifier;
+
+  @NotNull
+  private Function<String, String> myNameComputation = name -> name;
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
@@ -57,7 +61,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   @NotNull
   @Override
-  public final String getName() {
+  public String getName() {
     return myName;
   }
 
@@ -66,10 +70,15 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return (IStubElementType)super.getElementType();
   }
 
+  public PerlDelegatingLightNamedElement withNameComputation(@NotNull Function<String, String> nameComputation) {
+    myNameComputation = nameComputation;
+    return this;
+  }
+
   @NotNull
   @Override
   public PsiElement getNameIdentifier() {
-    if (myNameIdentifier != null) {
+    if (myNameIdentifier != null && myNameIdentifier.isValid()) {
       return myNameIdentifier;
     }
 
@@ -79,12 +88,16 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
       }
     }
 
-    throw new PsiInvalidElementAccessException(this, "Attempt to access element without identifier");
+    throw new PsiInvalidElementAccessException(this, myNameIdentifier == null
+                                                     ? "Attempt to access element without identifier"
+                                                     : "Could not restore valid identifier");
   }
 
   @Override
-  public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-    return ElementManipulators.handleContentChange(getNameIdentifier(), name);
+  public PsiElement setName(@NonNls @NotNull String newBaseName) throws IncorrectOperationException {
+    myNameIdentifier = ElementManipulators.handleContentChange(getNameIdentifier(), newBaseName);
+    myName = myNameComputation.fun(newBaseName);
+    return this;
   }
 
   @Override
