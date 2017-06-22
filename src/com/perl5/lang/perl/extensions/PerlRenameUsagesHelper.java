@@ -23,7 +23,9 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 23.01.2016.
  * Implement this interface to declarations, when declaration should know, how to alter new name for an element
  */
-public interface PerlRenameUsagesSubstitutor {
+public interface PerlRenameUsagesHelper {
   @NotNull
   String getSubstitutedUsageName(@NotNull String newName, @NotNull PsiElement element);
+
+  boolean isInplaceRefactoringAllowed();
 }
