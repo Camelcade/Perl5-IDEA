@@ -43,7 +43,15 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       if (location == HighlightUsagesDescriptionLocation.INSTANCE    // ???
           || location == UsageViewNodeTextLocation.INSTANCE        // child element of find usages
         ) {
-        return getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
+        if (element instanceof PerlIdentifierOwner) {
+          return ((PerlIdentifierOwner)element).getPresentableName();
+        }
+        else if (element instanceof PerlPackageMember) {
+          return ((PerlPackageMember)element).getCanonicalName();
+        }
+        else if (element instanceof PsiNamedElement) {
+          return ((PsiNamedElement)element).getName();
+        }
       }
       else if (location == UsageViewTypeLocation.INSTANCE) {
         if (element instanceof PerlSubDeclarationElement) {
@@ -99,13 +107,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       }
       // file renaming
       else if (location == UsageViewShortNameLocation.INSTANCE) {
-        if (element instanceof PerlIdentifierOwner) {
-          return ((PerlIdentifierOwner)element).getPresentableName();
-        }
-        else if (element instanceof PerlPackageMember) {
-          return ((PerlPackageMember)element).getCanonicalName();
-        }
-        else if (element instanceof PsiNamedElement) {
+        if (element instanceof PsiNamedElement) {
           return ((PsiNamedElement)element).getName();
         }
       }
