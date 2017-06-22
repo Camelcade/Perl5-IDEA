@@ -213,6 +213,9 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    */
   @Nullable
   public static String getMethodReturnValue(PerlMethodContainer methodContainer) {
+    if (methodContainer instanceof PerlSmartMethodContainer) {
+      return ((PerlSmartMethodContainer)methodContainer).getReturnPackageName();
+    }
     PerlMethod methodElement = methodContainer.getMethod();
     if (methodElement == null) {
       return null;

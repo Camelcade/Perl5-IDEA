@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.Class.Accessor.psi;
+package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.PerlSubNameElement;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 21.01.2016.
+ * Implement this interface to method container that has some specific algorythm for calculating return type
  */
-public interface PerlClassAccessorSub extends PerlSubNameElement {
+public interface PerlSmartMethodContainer extends PerlMethodContainer {
+  @Nullable
+  String getReturnPackageName();
 }
