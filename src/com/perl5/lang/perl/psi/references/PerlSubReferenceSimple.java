@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
@@ -188,8 +188,8 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
   @Override
   public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
     PsiElement target = resolve();
-    if (target instanceof PerlRenameUsagesSubstitutor) {
-      newElementName = ((PerlRenameUsagesSubstitutor)target).getSubstitutedUsageName(newElementName, myElement);
+    if (target instanceof PerlRenameUsagesHelper) {
+      newElementName = ((PerlRenameUsagesHelper)target).getSubstitutedUsageName(newElementName, myElement);
     }
     return super.handleElementRename(newElementName);
   }

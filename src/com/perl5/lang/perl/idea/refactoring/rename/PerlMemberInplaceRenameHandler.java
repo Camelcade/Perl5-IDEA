@@ -27,7 +27,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
-import com.perl5.lang.perl.extensions.PerlRenameUsagesSubstitutor;
+import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +43,8 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
 
   @Override
   protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
-    return !(element instanceof PerlRenameUsagesSubstitutor) && isAvailableFromParent(element, editor, file);
+    return (!(element instanceof PerlRenameUsagesHelper) || ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed()) &&
+           isAvailableFromParent(element, editor, file);
   }
 
   // this is a copy-paste from parent class, because it's uses RefactoringSupportProvider
