@@ -30,11 +30,13 @@ import java.util.List;
 /**
  * Created by hurricup on 19.11.2016.
  */
-public class PerlGutterMarkersTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlLineMarkersTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/markers/perl";
+    return "testData/linemarkers/perl";
   }
+
+  public void testClassAccessor() {doTest();}
 
   public void testSupermethods() {
     doTest();
@@ -60,6 +62,10 @@ public class PerlGutterMarkersTest extends PerlLightCodeInsightFixtureTestCase {
           .append(lineMarkerInfo.getLineMarkerTooltip())
           .append("\n");
 
+        if (!(lineMarkerInfo instanceof RelatedItemLineMarkerInfo)) {
+          b.append("Uknown targets: ").append(lineMarkerInfo.getClass().getSimpleName()).append("\n");
+          continue;
+        }
 
         Collection<GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo)lineMarkerInfo).createGotoRelatedItems();
         b.append("Targets: ").append(gotoRelatedItems.size()).append("\n");

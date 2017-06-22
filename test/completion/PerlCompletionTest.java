@@ -17,6 +17,7 @@
 package completion;
 
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXExports;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancer2DSL;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancerDSL;
@@ -45,6 +46,32 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   @Override
   protected String getTestDataPath() {
     return "testData/completion/perl";
+  }
+
+  public void testClassAccessor() {
+    doTestContains(
+      "lib_simple_ro1",
+      "lib_simple_other_ro",
+      "lib_simple_third_ro",
+      "lib_simple_rw1",
+      "lib_simple_other_rw",
+      "lib_simple_third_rw",
+      "lib_simple_wo1",
+      "lib_simple_other_wo",
+      "lib_simple_third_wo",
+      "get_lib_fbp_ro1",
+      "get_lib_fbp_ro2",
+      "get_lib_fbp_ro3",
+      "get_lib_fbp_rw1",
+      "get_lib_fbp_rw2",
+      "get_lib_fbp_rw3",
+      "set_lib_fbp_wo1",
+      "set_lib_fbp_wo2",
+      "set_lib_fbp_wo3",
+      "set_lib_fbp_rw1",
+      "set_lib_fbp_rw2",
+      "set_lib_fbp_rw3"
+    );
   }
 
   public void testExceptionClassAliasLocal() {
@@ -140,7 +167,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   public void testPackageToStringQPartial() {
-    doTest(LIBRARY_PM_FILES);
+    doTest(ContainerUtil.filter(LIBRARY_PACKAGES, name -> name.startsWith("MyTest::")));
   }
 
   public void testPackageToStringQQ() {

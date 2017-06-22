@@ -1,0 +1,165 @@
+PerlNamespaceFileReference at (51,57); text in range: 'strict' => 0 results:
+
+PerlNamespaceFileReference at (63,71); text in range: 'warnings' => 0 results:
+
+PerlNamespaceFileReference at (93,97); text in range: 'base' => 0 results:
+
+PerlNamespaceReference at (101,116); text in range: 'Class::Accessor' => 0 results:
+
+PerlNamespaceReference at (119,140); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (142,154); text in range: 'mk_accessors' => 0 results:
+
+PerlNamespaceReference at (189,210); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (212,227); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlNamespaceReference at (262,283); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (285,300); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlSubReference at (347,359); text in range: 'mk_accessors' => 0 results:
+
+PerlSubReference at (396,411); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlSubReference at (448,463); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlNamespaceReference at (487,508); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (510,530); text in range: 'follow_best_practice' => 0 results:
+
+PerlNamespaceReference at (532,553); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (555,567); text in range: 'mk_accessors' => 0 results:
+
+PerlSubReference at (583,595); text in range: 'mk_accessors' => 0 results:
+
+PerlNamespaceReference at (611,632); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (634,649); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlSubReference at (665,680); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlNamespaceReference at (696,717); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (719,734); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlSubReference at (750,765); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlSubReference at (794,806); text in range: 'mk_accessors' => 0 results:
+
+PerlSubReference at (834,849); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlSubReference at (877,892); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlNamespaceReference at (907,928); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (930,950); text in range: 'follow_best_practice' => 0 results:
+
+PerlNamespaceReference at (954,975); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (977,992); text in range: 'mk_ro_accessors' => 0 results:
+
+PerlNamespaceReference at (996,1017); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (1019,1034); text in range: 'mk_wo_accessors' => 0 results:
+
+PerlNamespaceReference at (1038,1059); text in range: 'Class::Accessor::Test' => 1 results:
+	NAMESPACE at 16 in classAccessor.pl
+
+PerlSubReference at (1061,1073); text in range: 'mk_accessors' => 0 results:
+
+PerlSubReference at (1091,1101); text in range: 'simple_ro1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 231 in classAccessor.pl
+
+PerlSubReference at (1116,1131); text in range: 'simple_other_ro' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 242 in classAccessor.pl
+
+PerlSubReference at (1146,1161); text in range: 'simple_third_ro' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 416 in classAccessor.pl
+
+PerlSubReference at (1176,1186); text in range: 'simple_rw1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 158 in classAccessor.pl
+
+PerlSubReference at (1201,1216); text in range: 'simple_other_rw' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 169 in classAccessor.pl
+
+PerlSubReference at (1231,1246); text in range: 'simple_third_rw' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 364 in classAccessor.pl
+
+PerlSubReference at (1261,1271); text in range: 'simple_wo1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 304 in classAccessor.pl
+
+PerlSubReference at (1286,1301); text in range: 'simple_other_wo' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 315 in classAccessor.pl
+
+PerlSubReference at (1316,1331); text in range: 'simple_third_wo' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 468 in classAccessor.pl
+
+PerlSubReference at (1346,1357); text in range: 'get_fbp_ro1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 653 in classAccessor.pl
+
+PerlSubReference at (1372,1383); text in range: 'get_fbp_ro2' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 684 in classAccessor.pl
+
+PerlSubReference at (1398,1409); text in range: 'get_fbp_ro3' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 853 in classAccessor.pl
+
+PerlSubReference at (1424,1435); text in range: 'get_fbp_rw1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 571 in classAccessor.pl
+
+PerlSubReference at (1450,1461); text in range: 'get_fbp_rw2' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 599 in classAccessor.pl
+
+PerlSubReference at (1476,1487); text in range: 'get_fbp_rw3' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 810 in classAccessor.pl
+
+PerlSubReference at (1502,1513); text in range: 'set_fbp_wo1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 738 in classAccessor.pl
+
+PerlSubReference at (1528,1539); text in range: 'set_fbp_wo2' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 769 in classAccessor.pl
+
+PerlSubReference at (1554,1565); text in range: 'set_fbp_wo3' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 896 in classAccessor.pl
+
+PerlSubReference at (1580,1591); text in range: 'set_fbp_rw1' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 571 in classAccessor.pl
+
+PerlSubReference at (1606,1617); text in range: 'set_fbp_rw2' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 599 in classAccessor.pl
+
+PerlSubReference at (1632,1643); text in range: 'set_fbp_rw3' => 1 results:
+	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
+	Perl5: STRING_CONTENT at 810 in classAccessor.pl
+

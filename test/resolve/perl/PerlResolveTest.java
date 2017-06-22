@@ -27,6 +27,10 @@ public class PerlResolveTest extends PerlResolveTestCase {
     return "testData/resolve/perl";
   }
 
+  public void testClassAccessorLib() {doTestWithFileCheck();}
+
+  public void testClassAccessor() {doTestWithFileCheck();}
+
   public void testExceptionClassFields() {doTestWithFileCheck();}
 
   public void testExceptionClassAlias() {doTestWithFileCheck();}

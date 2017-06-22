@@ -16,24 +16,24 @@
 
 package rename;
 
-import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.testFramework.UsefulTestCase;
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Created by hurricup on 03.11.2016.
  */
-public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlRenameTest extends PerlRenameTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/rename/perl";
   }
 
+  public void testClassAccessorSimple() {doTest();}
+
+  public void testClassAccessorSimpleRo() {doTest();}
+
+  public void testClassAccessorSimpleWo() {doTest();}
+
   public void testExceptionClassFieldMethod() {doTest();}
 
   public void testExceptionClassFieldStatic() {doTest();}
-
-  public void testExceptionClassFieldField() {doTest();}
 
   public void testExceptionClassAliasLocal() {doTest();}
 
@@ -115,17 +115,4 @@ public class PerlRenameTest extends PerlLightCodeInsightFixtureTestCase {
     doTest("Some::Other::Package");
   }
 
-  protected void doTest() {
-    doTest("NewName");
-  }
-
-  protected void doTest(@NotNull String newName) {
-    initWithFileSmart();
-    doRenameAtCaret(newName);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
-  }
-
-  protected void doRenameAtCaret(@NotNull String newName) {
-    myFixture.renameElementAtCaret(newName);
-  }
 }

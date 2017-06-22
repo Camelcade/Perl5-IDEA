@@ -33,6 +33,7 @@ import java.util.List;
  */
 public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase {
   protected static List<String> LIBRARY_PACKAGES = Arrays.asList(
+    "ClassAccessor",
     "MyTest::Some::Package",
     "MyTest::Something",
     "MyTest::Constants",
@@ -45,6 +46,7 @@ public abstract class PerlCompletionCodeInsightFixtureTestCase extends PerlLight
   );
 
   protected static List<String> LIBRARY_PM_FILES = Arrays.asList(
+    "MyTest::ClassAccessor",
     "MyTest::Some::Package",
     "MyTest::Something",
     "MyTest::Constants",

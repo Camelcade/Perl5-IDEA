@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.Class.Accessor.psi;
+package rename;
 
-/**
- * Created by hurricup on 21.01.2016.
- */
-public interface PerlClassAccessorFollowBestPractice extends PerlClassAccessorSub {
+// following tests are not working in inline test
+public class PerlRenameDialogTest extends PerlRenameTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/rename/perl";
+  }
+
+  public void testClassAccessorFbp() {doTest();}
+
+  public void testExceptionClassFieldField() {doTest();}
+
+  public void testClassAccessorFbpRo() {doTest();}
+
+  public void testClassAccessorFbpWo() {doTest();}
 }

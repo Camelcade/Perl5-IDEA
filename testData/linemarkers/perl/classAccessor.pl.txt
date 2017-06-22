@@ -1,0 +1,140 @@
+24 - 42: 'LocalClassAccessor': Subclasses
+Targets: 1
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in classAccessor.pl at 983
+
+152 - 166: 'lib_simple_rw1': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1076
+
+171 - 190: 'lib_simple_other_rw': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1095
+
+234 - 248: 'lib_simple_ro1': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1151
+
+253 - 272: 'lib_simple_other_ro': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1170
+
+316 - 330: 'lib_simple_wo1': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1226
+
+335 - 354: 'lib_simple_other_wo': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1245
+
+388 - 407: 'lib_simple_third_rw': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1298
+
+444 - 463: 'lib_simple_third_ro': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1354
+
+500 - 519: 'lib_simple_third_wo': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1410
+
+601 - 612: 'lib_fbp_rw1': <html>Overriden methods</html>
+Uknown targets: MyLineMarkerInfo
+638 - 649: 'lib_fbp_rw2': <html>Overriden methods</html>
+Uknown targets: MyLineMarkerInfo
+693 - 704: 'lib_fbp_ro1': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1582
+
+733 - 744: 'lib_fbp_ro2': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1622
+
+788 - 799: 'lib_fbp_wo1': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1670
+
+828 - 839: 'lib_fbp_wo2': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1710
+
+873 - 884: 'lib_fbp_rw3': <html>Overriden methods</html>
+Uknown targets: MyLineMarkerInfo
+920 - 931: 'lib_fbp_ro3': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1802
+
+967 - 978: 'lib_fbp_wo3': Overriden methods
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 1849
+
+991 - 1009: 'OtherClassAccessor': Parent classes
+Targets: 1
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in classAccessor.pl at 16
+
+1076 - 1090: 'lib_simple_rw1': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 152
+
+1095 - 1114: 'lib_simple_other_rw': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 171
+
+1151 - 1165: 'lib_simple_ro1': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 234
+
+1170 - 1189: 'lib_simple_other_ro': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 253
+
+1226 - 1240: 'lib_simple_wo1': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 316
+
+1245 - 1264: 'lib_simple_other_wo': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 335
+
+1298 - 1317: 'lib_simple_third_rw': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 388
+
+1354 - 1373: 'lib_simple_third_ro': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 444
+
+1410 - 1429: 'lib_simple_third_wo': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 500
+
+1497 - 1508: 'lib_fbp_rw1': <html>Overriding method</html>
+Uknown targets: MyLineMarkerInfo
+1534 - 1545: 'lib_fbp_rw2': <html>Overriding method</html>
+Uknown targets: MyLineMarkerInfo
+1582 - 1593: 'lib_fbp_ro1': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 693
+
+1622 - 1633: 'lib_fbp_ro2': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 733
+
+1670 - 1681: 'lib_fbp_wo1': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 788
+
+1710 - 1721: 'lib_fbp_wo2': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 828
+
+1755 - 1766: 'lib_fbp_rw3': <html>Overriding method</html>
+Uknown targets: MyLineMarkerInfo
+1802 - 1813: 'lib_fbp_ro3': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 920
+
+1849 - 1860: 'lib_fbp_wo3': Overriding method
+Targets: 1
+    PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD) in classAccessor.pl at 967
+

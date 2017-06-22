@@ -16,13 +16,23 @@
 
 package rename;
 
-import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
-import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
+import base.PerlLightCodeInsightFixtureTestCase;
+import com.intellij.testFramework.UsefulTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlInlineRenameTest extends PerlRenameTest {
-  @Override
+public abstract class PerlRenameTestCase extends PerlLightCodeInsightFixtureTestCase {
+
+  protected void doTest() {
+    doTest("NewName");
+  }
+
+  protected void doTest(@NotNull String newName) {
+    initWithFileSmart();
+    doRenameAtCaret(newName);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+  }
+
   protected void doRenameAtCaret(@NotNull String newName) {
-    CodeInsightTestUtil.doInlineRename(new PerlMemberInplaceRenameHandler(), newName, myFixture);
+    myFixture.renameElementAtCaret(newName);
   }
 }

@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+package LocalClassAccessor;
+use strict;
+use warnings FATAL => 'all';
+
+use base qw(Class::Accessor);
+LocalClassAccessor->mk_accessors(qw(lib_simple_rw1    lib_simple_other_rw ));
+LocalClassAccessor->mk_ro_accessors(qw(lib_simple_ro1    lib_simple_other_ro ));
+LocalClassAccessor->mk_wo_accessors(qw(lib_simple_wo1     lib_simple_other_wo));
+__PACKAGE__->mk_accessors(qw( lib_simple_third_rw));
+__PACKAGE__->mk_ro_accessors(qw( lib_simple_third_ro));
+__PACKAGE__->mk_wo_accessors(qw( lib_simple_third_wo));
+LocalClassAccessor->follow_best_practice;
+LocalClassAccessor->mk_accessors(qw(lib_fbp_rw1 ))    ->mk_accessors(qw(lib_fbp_rw2 ));
+LocalClassAccessor->mk_ro_accessors(qw(lib_fbp_ro1 ))    ->mk_ro_accessors(qw(lib_fbp_ro2 ));
+LocalClassAccessor->mk_wo_accessors(qw(lib_fbp_wo1 ))    ->mk_wo_accessors(qw(lib_fbp_wo2 ));
+__PACKAGE__->mk_accessors(qw(lib_fbp_rw3));
+__PACKAGE__->mk_ro_accessors(qw(lib_fbp_ro3));
+__PACKAGE__->mk_wo_accessors(qw(lib_fbp_wo3));
+
+
+package Something;
+
+LocalClassAccessor->lib_simple_rw1();
+LocalClassAccessor->lib_simple_ro1();
+LocalClassAccessor->lib_simple_wo1();
+LocalClassAccessor->get_lib_fbp_rw1();
+LocalClassAccessor->set_lib_fbp_rw1();
+LocalClassAccessor->get_lib_fbp_ro1();
+LocalClassAccessor->set_lib_<caret>fbp_wo1();
