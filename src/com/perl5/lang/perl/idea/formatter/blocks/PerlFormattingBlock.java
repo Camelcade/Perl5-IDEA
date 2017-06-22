@@ -139,6 +139,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     else if (elementType == TRENAR_EXPR && perlCodeStyleSettings.ALIGN_TERNARY) {
       alignmentFunction = childElementType -> childElementType == QUESTION || childElementType == COLON ? alignment : null;
     }
+    else if (elementType == DEREF_EXPR && perlCodeStyleSettings.ALIGN_DEREFERENCE_IN_CHAIN) {
+      alignmentFunction = childElementType -> childElementType == OPERATOR_DEREFERENCE ? alignment : null;
+    }
     else if ((elementType == STRING_LIST || elementType == LP_STRING_QW) && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
       FactoryMap<Integer, Alignment> alignmentMap = new FactoryMap<Integer, Alignment>() {

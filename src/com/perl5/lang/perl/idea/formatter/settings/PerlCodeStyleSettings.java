@@ -53,6 +53,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean ALIGN_FAT_COMMA = true;
   public boolean ALIGN_QW_ELEMENTS = false;
   public boolean ALIGN_TERNARY = true;
+  public boolean ALIGN_DEREFERENCE_IN_CHAIN = false;
 
   public PerlCodeStyleSettings(CodeStyleSettings container) {
     super("Perl5CodeStyleSettings", container);

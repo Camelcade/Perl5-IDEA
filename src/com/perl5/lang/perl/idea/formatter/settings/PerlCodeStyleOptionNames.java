@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.formatter.settings;
 
+import com.perl5.PerlBundle;
+
 /**
  * Created by hurricup on 06.09.2015.
  */
@@ -40,6 +42,8 @@ public interface PerlCodeStyleOptionNames {
   String SPACE_GROUP_ANON_ARRAY = "Anonymous arrays";
   String SPACE_OPTION_ANON_ARRAY_AFTER_LEFT_BRACKET = "After left bracket";
   String SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET = "Before right bracket";
+
+  String GROUP_ALIGNMENT = PerlBundle.message("perl.formatting.group.alignment");
 
 
   String TAB_PERL_SETTINGS = "Perl5-specific";

@@ -35,10 +35,15 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-     <li>QW strings now may be aligned using formatter.</li>
-     <li>Added Code Style settings for alignment of: QW contents, Fat arrows and Ternary expression ? and :</li>
-     <li>Implemented <code>Exception::Class</code> module support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/848">#848</a></li>
-     <li>Restored and improved <code>Class::Accessor</code> support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1395">#1395</a></li>
+     <li>Formatter:<ul>
+     <li>Added option to align strings in QW lists</li>
+     <li>Added option to align fat commas</li>
+     <li>Added option to align ternary expressions operators</li>
+     <li>Added option to align <code>-></code> in chained dereferences</li>
+     </ul>
+     </li>
+     <li>Implemented <a href="http://search.cpan.org/~drolsky/Exception-Class/lib/Exception/Class.pm"><code>Exception::Class</code></a> module support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/848">#848</a></li>
+     <li>Restored and improved <a href="http://search.cpan.org/~kasei/Class-Accessor/lib/Class/Accessor.pm"><code>Class::Accessor</code></a> support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1395">#1395</a></li>
      </ul>
      </p>
      <p>Fixes:

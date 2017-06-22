@@ -38,12 +38,22 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
-  public void testStatementModifierSpacing() throws Exception {
+  public void testAlignDereferenceFalse() {
+    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = false;
+    doFormatTest();
+  }
+
+  public void testAlignDereferenceTrue() {
+    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = true;
+    doFormatTest();
+  }
+
+  public void testStatementModifierSpacing() {
     getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
     doFormatTest();
   }
 
-  public void testStatementModifierSpacingWithSpace() throws Exception {
+  public void testStatementModifierSpacingWithSpace() {
     getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
     doFormatTest();
   }

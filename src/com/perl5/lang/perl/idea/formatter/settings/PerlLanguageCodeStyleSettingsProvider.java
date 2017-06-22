@@ -22,6 +22,7 @@ import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -81,7 +82,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                                       "/;\n" +
                                                       "\n" +
                                                       "say $a == 42 ? 'true'\n" +
-                                                      " :'false';";
+                                                      " :'false';\n" +
+                                                      "\n" +
+                                                      "$someobject->somemethod()\n" +
+                                                      "    ->othermethod()\n" +
+                                                      "    ->andagain();\n";
   private static final String BLANK_LINES_CODE_SAMPLE = "# Not yet implemented";
   private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = "my $hashref = {\n" +
                                                               "    key1 => 42,\n" +
@@ -167,9 +172,15 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
     }
     else if (settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", "Align fat commas", "Alignment");
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_QW_ELEMENTS", "Align qw elements", "Alignment");
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_TERNARY", "Align ? and : in ternary expression", "Alignment");
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", PerlBundle.message("perl.formatting.align.fat.comma"),
+                                GROUP_ALIGNMENT);
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_QW_ELEMENTS", PerlBundle.message("perl.formatting.align.qw.elements"),
+                                GROUP_ALIGNMENT);
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_TERNARY", PerlBundle.message("perl.formatting.align.ternary"),
+                                GROUP_ALIGNMENT);
+      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_DEREFERENCE_IN_CHAIN",
+                                PerlBundle.message("perl.formatting.align.dereference"),
+                                GROUP_ALIGNMENT);
     }
     else if (settingsType == SettingsType.LANGUAGE_SPECIFIC) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", QUOTATION_OPTION_BEFORE_ARROW, QUOTATION_GROUP,
