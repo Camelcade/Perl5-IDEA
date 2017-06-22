@@ -17,7 +17,7 @@ print $output;
 if ($somethig)
 {
 use POSIX;
-POSIX  _exit();
+POSIX::_exit();
 localtime;
 }
 
@@ -40,7 +40,7 @@ print $output;
 if ($somethig)
 {
 use POSIX;
-POSIX  _exit();
+POSIX::_exit();
 localtime;
 }
 
