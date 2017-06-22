@@ -21,7 +21,6 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.extensions.PerlCompletionElementsProvider;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMro;
@@ -54,12 +53,7 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
     // fixme
     for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper)) {
       if (element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).isMethod()) {
-        if (element instanceof PerlCompletionElementsProvider) {
-          ((PerlCompletionElementsProvider)element).fillCompletions(resultSet);
-        }
-        else {
-          resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
-        }
+        resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
       }
       else if (element instanceof PerlSubDeclarationElement && ((PerlSubDeclarationElement)element).isMethod()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDeclarationLookupElement((PerlSubDeclarationElement)element));
