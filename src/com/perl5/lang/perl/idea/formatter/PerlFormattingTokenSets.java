@@ -25,6 +25,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
     CONDITION_STATEMENT,
+    CONDITION_STATEMENT_WHILE,
     FOR_ITERATOR,
     FOR_LIST_EPXR
   );

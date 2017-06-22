@@ -35,6 +35,7 @@ import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
+import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -206,6 +207,15 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       IElementType child1Type = child1Node.getElementType();
       ASTNode child2Node = ((PerlFormattingBlock)child2).getNode();
       IElementType child2Type = child2Node.getElementType();
+      IElementType elementType = getElementType();
+
+      if (elementType == PARENTHESISED_EXPR &&
+          (child1Type == LEFT_PAREN || child2Type == RIGHT_PAREN) &&
+          myNode.getPsi().getParent() instanceof PsiPerlStatementModifier) {
+        return myContext.getSettings().SPACE_WITHIN_IF_PARENTHESES ?
+               Spacing.createSpacing(1, 1, 0, true, 1) :
+               Spacing.createSpacing(0, 0, 0, true, 1);
+      }
 
       // fix for number/concat
       if (child2Type == OPERATOR_CONCAT) {
@@ -231,6 +241,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
           return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
         }
       }
+
+      // small inline blocks
       if (isCodeBlock() && !inGrepMapSort() && !blockHasLessChildrenThan(2) &&
           (BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst()
            || BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast()

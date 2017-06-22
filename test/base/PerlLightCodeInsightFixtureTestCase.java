@@ -188,7 +188,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   }
 
   public void initWithFileSmartWithoutErrors() {
-    initWithFileSmart();
+    initWithFileSmartWithoutErrors(getTestName(true));
+  }
+
+  public void initWithFileSmartWithoutErrors(@NotNull String filename) {
+    initWithFileSmart(filename);
     assertNoErrorElements();
   }
 
@@ -360,7 +364,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   }
 
   protected void doFormatTest(@NotNull String filename, @NotNull String resultSuffix) {
-    initWithFileSmart(filename);
+    initWithFileSmartWithoutErrors(filename);
     new WriteCommandAction.Simple(getProject()) {
       @Override
       protected void run() throws Throwable {

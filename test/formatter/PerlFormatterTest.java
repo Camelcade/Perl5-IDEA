@@ -38,6 +38,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacingInCompoundFalse() {
+    getSettings().SPACE_WITHIN_IF_PARENTHESES = false;
+    doFormatTest();
+  }
+
+  public void testSpacingInCompoundTrue() {
+    getSettings().SPACE_WITHIN_IF_PARENTHESES = true;
+    doFormatTest();
+  }
+
   public void testSpacingInQwFalse() {
     getCustomSettings().SPACE_WITHIN_QW_QUOTES = false;
     doFormatTest();

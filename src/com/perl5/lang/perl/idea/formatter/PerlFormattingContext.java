@@ -79,6 +79,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .beforeInside(QUESTION, TRENAR_EXPR).spaceIf(mySettings.SPACE_BEFORE_QUEST)
       .afterInside(QUESTION, TRENAR_EXPR).spaceIf(mySettings.SPACE_AFTER_QUEST)
 
+      .betweenInside(LEFT_PAREN, SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
+      .betweenInside(SEMICOLON, RIGHT_PAREN, FOR_ITERATOR).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
+
       .afterInside(SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_AFTER_SEMICOLON)
       .beforeInside(SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_BEFORE_SEMICOLON)
 
