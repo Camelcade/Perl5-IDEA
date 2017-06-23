@@ -36,7 +36,7 @@ public interface PerlSubDefinition extends PerlSub {
     List<PerlSubArgument> subArguments = getSubArgumentsList();
 
     if (isMethod() && !subArguments.isEmpty()) {
-      subArguments = subArguments.size() > 1 ? subArguments.subList(1, subArguments.size() - 1) : Collections.emptyList();
+      subArguments = subArguments.size() > 1 ? subArguments.subList(1, subArguments.size()) : Collections.emptyList();
     }
 
     return PerlSubUtil.getArgumentsListAsString(subArguments);
