@@ -27,16 +27,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrapperStub;
-import com.perl5.lang.perl.psi.PerlDerefExpression;
-import com.perl5.lang.perl.psi.PerlSmartMethodContainer;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedCallArgumentsImpl;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -98,6 +96,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : listElements) {
       String baseName = ElementManipulators.getValueText(listElement);
+      PerlSubAnnotations subAnnotations = computeSubAnnotations(this, listElement);
       for (Function<String, String> computation : getNamesComputations()) {
         result.add(new PerlClassAccessorMethod(
           this,
@@ -106,11 +105,33 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
           CLASS_ACCESSOR_METHOD,
           listElement,
           packageName,
-          null                     // fixme NYI
+          subAnnotations
         ));
       }
     }
     return result;
+  }
+
+  @Nullable
+  private PerlSubAnnotations computeSubAnnotations(@NotNull PsiElement nestedCallElement, @NotNull PsiElement nameIdentifier) {
+    List<PsiElement> baseElements = new ArrayList<>();
+    PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(nestedCallElement, PsiPerlStatement.class);
+    if (containingStatement != null) {
+      baseElements.add(containingStatement);
+    }
+    baseElements.add(nestedCallElement);
+
+    if (nameIdentifier instanceof PerlStringContentElement) {
+      PerlStringList perlStringList = PsiTreeUtil.getParentOfType(nameIdentifier, PerlStringList.class);
+      if (perlStringList != null) {
+        baseElements.add(perlStringList);
+      }
+    }
+    else {
+      baseElements.add(nameIdentifier);
+    }
+
+    return PerlSubAnnotations.tryToFindAnnotations(baseElements);
   }
 
   @NotNull

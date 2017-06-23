@@ -1,0 +1,61 @@
+#!/usr/bin/perl
+package Class::Accessor::Test;
+use strict;
+use warnings FATAL => 'all';
+
+use base qw(Class::Accessor);
+#@deprecated
+Class::Accessor::Test->mk_accessors(qw(<warning descr="This sub is deprecated">simple_rw1</warning> <warning descr="This sub is deprecated">simple_other_rw</warning>));
+#@deprecated
+Class::Accessor::Test->mk_ro_accessors(qw(<warning descr="This sub is deprecated">simple_ro1</warning> <warning descr="This sub is deprecated">simple_other_ro</warning>));
+#@deprecated
+Class::Accessor::Test->mk_wo_accessors(qw(<warning descr="This sub is deprecated">simple_wo1</warning> <warning descr="This sub is deprecated">simple_other_wo</warning>));
+__PACKAGE__->mk_accessors(qw(simple_third_rw),
+    #@deprecated
+    q/<warning descr="This sub is deprecated">deprecated_one1</warning>/);
+__PACKAGE__->mk_ro_accessors(qw(simple_third_ro),
+    #@deprecated
+    qq/<warning descr="This sub is deprecated">deprecated_one2</warning>/,
+    #@deprecated
+    qw/<warning descr="This sub is deprecated">depreacted_group1</warning> <warning descr="This sub is deprecated">deprecated_group2</warning>/);
+__PACKAGE__->mk_wo_accessors(qw(simple_third_wo),
+    #@deprecated
+    '<warning descr="This sub is deprecated">deprecated_one3</warning>');
+Class::Accessor::Test->follow_best_practice;
+Class::Accessor::Test->mk_accessors(qw(fbp_rw1))->mk_accessors(qw(fbp_rw2),
+    #@deprecated
+    q/<warning descr="This sub is deprecated"><warning descr="This sub is deprecated">deprecated_one4</warning></warning>/);
+Class::Accessor::Test->mk_ro_accessors(qw(fbp_ro1))->mk_ro_accessors(qw(fbp_ro2),
+    #@deprecated
+    qq/<warning descr="This sub is deprecated">deprecated_one5</warning>/);
+Class::Accessor::Test->mk_wo_accessors(qw(fbp_wo1))->mk_wo_accessors(qw(fbp_wo2),
+    #@deprecated
+    "<warning descr="This sub is deprecated">deprecated_one6</warning>");
+
+__PACKAGE__-><warning descr="This sub is deprecated">simple_ro1</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">simple_other_ro</warning>;
+__PACKAGE__->simple_third_ro;
+__PACKAGE__-><warning descr="This sub is deprecated">simple_rw1</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">simple_other_rw</warning>;
+__PACKAGE__->simple_third_rw;
+__PACKAGE__-><warning descr="This sub is deprecated">simple_wo1</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">simple_other_wo</warning>;
+__PACKAGE__->simple_third_wo;
+__PACKAGE__->get_fbp_ro1;
+__PACKAGE__->get_fbp_ro2;
+__PACKAGE__->get_fbp_rw1;
+__PACKAGE__->get_fbp_rw2;
+__PACKAGE__->set_fbp_wo1;
+__PACKAGE__->set_fbp_wo2;
+__PACKAGE__->set_fbp_rw1;
+__PACKAGE__->set_fbp_rw2;
+__PACKAGE__-><warning descr="This sub is deprecated">deprecated_one1</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">deprecated_one2</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">deprecated_one3</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">get_deprecated_one4</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">get_deprecated_one5</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">set_deprecated_one4</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">set_deprecated_one6</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">depreacted_group1</warning>;
+__PACKAGE__-><warning descr="This sub is deprecated">deprecated_group2</warning>;
+

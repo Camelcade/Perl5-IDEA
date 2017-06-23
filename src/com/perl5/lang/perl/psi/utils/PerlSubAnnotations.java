@@ -150,6 +150,11 @@ public class PerlSubAnnotations {
   }
 
   @Nullable
+  public static PerlSubAnnotations tryToFindAnnotations(@NotNull List<PsiElement> baseElements) {
+    return tryToFindAnnotations(baseElements.toArray(new PsiElement[baseElements.size()]));
+  }
+
+  @Nullable
   public static PerlSubAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
     if (annotations.isEmpty()) {
       return null;

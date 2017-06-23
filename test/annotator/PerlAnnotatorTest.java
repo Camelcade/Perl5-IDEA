@@ -44,6 +44,10 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     doDeprecationTest();
   }
 
+  public void testClassAccessorDeprecation() {
+    doDeprecationTest();
+  }
+
   public void testExceptionClassDeprecation() {
     doDeprecationTest();
   }
