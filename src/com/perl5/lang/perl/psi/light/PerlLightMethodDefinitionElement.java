@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -38,6 +39,17 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
                                           @NotNull List<PerlSubArgument> subArguments,
                                           @Nullable PerlSubAnnotations annotations) {
     super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
+  }
+
+  public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
+                                          @NotNull String subName,
+                                          @NotNull IStubElementType elementType,
+                                          @NotNull PsiElement nameIdentifier,
+                                          @Nullable String packageName,
+                                          @NotNull List<PerlSubArgument> subArguments,
+                                          @Nullable PerlSubAnnotations annotations,
+                                          @Nullable PsiPerlBlock subDefinitionBody) {
+    super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, subDefinitionBody);
   }
 
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,

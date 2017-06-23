@@ -45,7 +45,11 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
    */
   @NotNull
   default List<PerlSubArgument> getPerlSubArgumentsFromBody() {
-    PsiPerlBlock subBlock = getSubDefinitionBody();
+    return getPerlSubArgumentsFromBody(getSubDefinitionBody());
+  }
+
+  @NotNull
+  static List<PerlSubArgument> getPerlSubArgumentsFromBody(@Nullable PsiPerlBlock subBlock) {
     if (subBlock == null || !subBlock.isValid()) {
       return Collections.emptyList();
     }

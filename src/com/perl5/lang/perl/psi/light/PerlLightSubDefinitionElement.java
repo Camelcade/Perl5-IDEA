@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -43,6 +44,10 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   private List<PerlSubArgument> mySubArguments;
 
+  // fixme should we actualize this on fly, like identifier?
+  @Nullable
+  private PsiPerlBlock mySubDefinitionBody;
+
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String subName,
                                        @NotNull IStubElementType elementType,
@@ -54,6 +59,18 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;
+  }
+
+  public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
+                                       @NotNull String subName,
+                                       @NotNull IStubElementType elementType,
+                                       @NotNull PsiElement nameIdentifier,
+                                       @Nullable String packageName,
+                                       @NotNull List<PerlSubArgument> subArguments,
+                                       @Nullable PerlSubAnnotations annotations,
+                                       @Nullable PsiPerlBlock subDefinitionBody) {
+    this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
+    mySubDefinitionBody = subDefinitionBody;
   }
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {
@@ -142,5 +159,11 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @Override
   public ItemPresentation getPresentation() {
     return new PerlItemPresentationSimple(this, getSubName());
+  }
+
+  @Override
+  @Nullable
+  public PsiPerlBlock getSubDefinitionBody() {
+    return mySubDefinitionBody;
   }
 }
