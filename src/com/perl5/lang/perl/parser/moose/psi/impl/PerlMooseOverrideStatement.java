@@ -50,7 +50,7 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
 
 
   @Override
-  protected PsiPerlBlock getBlockSmart() {
+  public PsiPerlBlock getSubDefinitionBody() {
     return null;
   }
 

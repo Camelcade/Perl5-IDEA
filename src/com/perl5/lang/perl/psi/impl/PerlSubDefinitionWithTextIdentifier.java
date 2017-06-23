@@ -40,7 +40,7 @@ public abstract class PerlSubDefinitionWithTextIdentifier extends PerlSubDefinit
   }
 
   @Override
-  protected PsiPerlBlock getBlockSmart() {
+  public PsiPerlBlock getSubDefinitionBody() {
     return null;
   }
 

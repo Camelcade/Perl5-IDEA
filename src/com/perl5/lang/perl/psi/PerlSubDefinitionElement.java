@@ -16,10 +16,52 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.psi.utils.PerlSubArgumentsExtractor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
+
 public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement {
   @Override
   default String getPresentableName() {
     String args = getSubArgumentsListAsString();
     return this.getName() + (args.isEmpty() ? "()" : args);
+  }
+
+  /**
+   * @return code block of this sub definition
+   */
+  @Nullable
+  default PsiPerlBlock getSubDefinitionBody() {
+    return null;
+  }
+
+  /**
+   * @return sub arguments, extracted from PSI structure of code block
+   */
+  @NotNull
+  default List<PerlSubArgument> getPerlSubArgumentsFromBody() {
+    PsiPerlBlock subBlock = getSubDefinitionBody();
+    if (subBlock == null || !subBlock.isValid()) {
+      return Collections.emptyList();
+    }
+
+    PerlSubArgumentsExtractor extractor = new PerlSubArgumentsExtractor();
+    for (PsiElement statement : subBlock.getChildren()) {
+      if (statement instanceof PsiPerlStatement) {
+        if (!extractor.process((PsiPerlStatement)statement)) {
+          break;
+        }
+      }
+      else if (!(statement instanceof PerlAnnotation)) {
+        break;
+      }
+    }
+
+    return extractor.getArguments();
   }
 }

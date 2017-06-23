@@ -27,5 +27,5 @@ public interface PerlIdentifierOwner extends PsiNameIdentifierOwner {
    *
    * @return ^^
    */
-  public String getPresentableName();
+  String getPresentableName();
 }
