@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import gnu.trove.THashMap;
@@ -28,13 +26,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.*;
 
 /**
  * Created by hurricup on 21.01.2016.
  */
-public class ClassAccessorParserExtension extends PerlParserExtension {
+public class ClassAccessorParserExtension extends PerlParserExtensionBase {
   protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<>();
 
   protected static TokenSet TOKENS_SET;
@@ -59,39 +56,18 @@ public class ClassAccessorParserExtension extends PerlParserExtension {
   public boolean parseNestedElement(PerlBuilder b, int l) {
     IElementType elementType = b.getTokenType();
     if (elementType == RESERVED_MK_ACCESSORS) {
-      return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_WRAPPER);
+      return parseCustomNestedCall(b, l, CLASS_ACCESSOR_WRAPPER);
     }
     else if (elementType == RESERVED_MK_RO_ACCESSORS) {
-      return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_WRAPPER_RO);
+      return parseCustomNestedCall(b, l, CLASS_ACCESSOR_WRAPPER_RO);
     }
     else if (elementType == RESERVED_MK_WO_ACCESSORS) {
-      return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_WRAPPER_WO);
+      return parseCustomNestedCall(b, l, CLASS_ACCESSOR_WRAPPER_WO);
     }
     else if (elementType == RESERVED_FOLLOW_BEST_PRACTICE) {
-      return parseAccessorDeclarations(b, l, CLASS_ACCESSOR_FBP);
+      return parseCustomNestedCall(b, l, CLASS_ACCESSOR_FBP);
     }
 
     return super.parseNestedElement(b, l);
-  }
-
-  protected boolean parseAccessorDeclarations(@NotNull PerlBuilder builder, int level, @NotNull IElementType wrapperTokenType) {
-    PsiBuilder.Marker wrapperMarker = builder.mark();
-    if (PerlParserImpl.nested_call_inner(
-      builder, level,
-      (b, l) -> {
-        PsiBuilder.Marker m = b.mark();
-        b.advanceLexer();
-        m.collapse(SUB_NAME);
-        return true;
-      },
-      PerlParserImpl.optional_expression_parser_
-    )) {
-      wrapperMarker.done(wrapperTokenType);
-      return true;
-    }
-    else {
-      wrapperMarker.rollbackTo();
-      return false;
-    }
   }
 }
