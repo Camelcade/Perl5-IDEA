@@ -16,14 +16,16 @@
 
 package com.perl5.lang.mojolicious.util;
 
+import gnu.trove.THashSet;
+
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 02.08.2015.
  */
 public interface MojoliciousSubsBuiltIn {
-  public static final HashSet<String> MOJO_DEFAULT_HELPERS = new HashSet<String>(Arrays.asList(
+  Set<String> MOJO_DEFAULT_HELPERS = new THashSet<>(Arrays.asList(
     "accepts",
     "app",
     "b",
@@ -57,7 +59,7 @@ public interface MojoliciousSubsBuiltIn {
     "validation"
   ));
 
-  public static final HashSet<String> MOJO_TAG_HELPERS = new HashSet<String>(Arrays.asList(
+  Set<String> MOJO_TAG_HELPERS = new THashSet<>(Arrays.asList(
     "check_box",
     "color_field",
     "csrf_field",

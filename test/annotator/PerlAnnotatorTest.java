@@ -28,6 +28,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testMojoHelperDeprecation() {doDeprecationTest();}
+
   public void testConstants() {
     doTest();
   }

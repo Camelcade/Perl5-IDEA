@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+use strict;
+use warnings FATAL => 'all';
+
+$self->helper(
+    #@deprecated
+    <warning descr="This sub is deprecated">somehelper1</warning> => sub {
+      my ($self, $var, $othervar) = @_;
+      say 'hi';
+    }
+);
+
+$self->
+    #@deprecated
+    helper(<warning descr="This sub is deprecated">somehelper2</warning> => sub {
+          my ($self, $var, $othervar) = @_;
+          say 'hi';
+        }
+    );
+
+#@deprecated
+$self->helper(
+    <warning descr="This sub is deprecated">somehelper3</warning> => sub {
+      my ($self, $var, $othervar) = @_;
+      say 'hi';
+    }
+);
+
+Mojolicious::Controller::-><warning descr="This sub is deprecated">somehelper1</warning>();
+Mojolicious::Controller::-><warning descr="This sub is deprecated">somehelper2</warning>();
+Mojolicious::Controller::-><warning descr="This sub is deprecated">somehelper3</warning>();

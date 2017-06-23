@@ -19,7 +19,7 @@ package com.perl5.lang.mojolicious;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.psi.stubs.MojoliciousHelperElementType;
+import com.perl5.lang.mojolicious.elementTypes.MojoHelperWrapperElementType;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
@@ -61,5 +61,5 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
   IElementType MOJO_BEGIN = new MojoliciousTokenType(KEYWORD_MOJO_BEGIN);
   IElementType MOJO_END = new MojoliciousTokenType(KEYWORD_MOJO_END);
 
-  IElementType MOJO_HELPER_DECLARATION = new MojoliciousHelperElementType("MOJO_HELPER");
+  IElementType MOJO_HELPER_WRAPPER = new MojoHelperWrapperElementType("MOJO_HELPER_WRAPPER");
 }
