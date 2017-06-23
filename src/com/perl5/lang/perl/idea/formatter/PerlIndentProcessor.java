@@ -26,8 +26,9 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
@@ -158,7 +159,9 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
-    if (getUnindentableTokens().contains(nodeType) || node.getPsi() instanceof PerlPolyNamedElement) {
+
+    if (getUnindentableTokens().contains(nodeType) ||
+        (nodeType instanceof PerlPolyNamedElementType && !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase))) {
       return Indent.getNoneIndent();
     }
 
