@@ -1,0 +1,6 @@
+PerlNamespaceReference at (59,68); text in range: 'MyPackage' => 1 results:
+	NAMESPACE at 11 in issue1483.pl
+
+PerlSubReference at (94,99); text in range: 'mysub' => 1 results:
+	SUB_DEFINITION at 31 in issue1483.pl
+

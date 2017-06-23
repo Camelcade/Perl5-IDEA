@@ -17,16 +17,17 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -45,26 +46,18 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
       return PerlPackageUtil.getContextPackageName(this);
     }
 
-    PsiElement currentElement = methodElement.getPrevSibling();
-    while (currentElement instanceof PsiWhiteSpace ||
-           currentElement instanceof PsiComment ||
-           PsiUtilCore.getElementType(currentElement) == PerlElementTypes.OPERATOR_DEREFERENCE) {
-      currentElement = currentElement.getPrevSibling();
-    }
-
-    return getCurrentElementNamespace(currentElement);
+    return getCurrentElementNamespace(methodElement.getPrevSibling());
   }
 
   @Nullable
   public String getCurrentElementNamespace(PsiElement currentElement) {
-    while (currentElement instanceof PsiWhiteSpace || currentElement instanceof PsiComment) {
+    IElementType currentElementType;
+    while (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(currentElementType = PsiUtilCore.getElementType(currentElement))
+           || currentElementType == OPERATOR_DEREFERENCE) {
       currentElement = currentElement.getPrevSibling();
     }
 
-    if (currentElement != null) {
-      return PerlPsiUtil.getPerlExpressionNamespace(currentElement);
-    }
-    return null;
+    return PerlPsiUtil.getPerlExpressionNamespace(currentElement);
   }
 
   public String guessType() {
