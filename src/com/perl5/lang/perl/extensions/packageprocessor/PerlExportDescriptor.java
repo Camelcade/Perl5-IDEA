@@ -161,11 +161,11 @@ public class PerlExportDescriptor {
     return null;
   }
 
-  public static PerlExportDescriptor create(@NotNull String exportedName, @NotNull String exportedBy) {
+  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName) {
     return new PerlExportDescriptor(exportedBy, exportedName, exportedBy, exportedName);
   }
 
-  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetPackage) {
-    return new PerlExportDescriptor(exportedBy, exportedName, targetPackage, exportedName);
+  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetName) {
+    return new PerlExportDescriptor(exportedBy, exportedName, exportedBy, targetName);
   }
 }

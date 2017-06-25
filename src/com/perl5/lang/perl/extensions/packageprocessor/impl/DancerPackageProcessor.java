@@ -36,7 +36,7 @@ public class DancerPackageProcessor extends PerlPackageProcessorBase implements
 
   static {
     for (String keyword : PerlDancerDSL.DSL_KEYWORDS) {
-      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create(keyword, "Dancer"));
+      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer", keyword));
     }
   }
 

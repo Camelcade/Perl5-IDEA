@@ -29,7 +29,7 @@ public class Dancer2PackageProcessor extends DancerPackageProcessor {
 
   static {
     for (String keyword : PerlDancer2DSL.DSL_KEYWORDS) {
-      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer2", keyword, "Dancer2::Core::DSL"));
+      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer2::Core::DSL", keyword));
     }
   }
 
