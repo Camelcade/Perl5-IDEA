@@ -74,7 +74,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
       }
       else    // static resolution
       {
-        if (expliclitPackageElement == null && subNameElement.isBuiltIn()) {
+        if (subNameElement.isBuiltIn()) {
           return ResolveResult.EMPTY_ARRAY;
         }
 
