@@ -37,10 +37,7 @@ import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
@@ -49,6 +46,7 @@ import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -126,6 +124,20 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public String getPackageName() {
     return PerlPackageUtil.MAIN_PACKAGE;
+  }
+
+  public boolean isBuiltInSub(@NotNull PerlSubNameElementImpl subNameElement) {
+    PsiElement parent = subNameElement.getParent();
+    if (parent instanceof PerlMethod) {
+      PsiElement grandParent = parent.getParent();
+
+      if (!(grandParent instanceof PsiPerlNestedCall) &&
+          (subNameElement.getPrevSibling() == null ||
+           PerlPackageUtil.CORE_PACKAGE_FULL.equals(subNameElement.getPrevSibling().getText()))) {
+        return PerlSubUtil.isBuiltIn(getText());
+      }
+    }
+    return false;
   }
 
   @Override

@@ -18,16 +18,12 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
-import com.perl5.lang.mojolicious.util.MojoliciousSubUtil;
-import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlNestedCall;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,29 +72,8 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
 
   @Override
   public boolean isBuiltIn() {
-    // fixme i belive this should be implemented in file element
-    if (this.getContainingFile() instanceof MojoliciousFileImpl) {
-      return isPerlBuiltIn() || MojoliciousSubUtil.isBuiltIn(getText());
-    }
-    else {
-      return isPerlBuiltIn();
-    }
-  }
-
-  // fixme move to file element
-  protected boolean isPerlBuiltIn() {
-    PsiElement parent = getParent();
-    if (parent instanceof PerlMethod) {
-      PsiElement grandParent = parent.getParent();
-
-      if (
-        !(grandParent instanceof PsiPerlNestedCall)
-        && (getPrevSibling() == null || PerlPackageUtil.CORE_PACKAGE_FULL.equals(getPrevSibling().getText()))
-        ) {
-        return PerlSubUtil.isBuiltIn(getText());
-      }
-    }
-    return false;
+    PsiFile file = getContainingFile();
+    return file instanceof PerlFileImpl && ((PerlFileImpl)file).isBuiltInSub(this);
   }
 }
 

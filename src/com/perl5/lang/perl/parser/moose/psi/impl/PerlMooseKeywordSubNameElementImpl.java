@@ -36,11 +36,6 @@ public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl i
     return false;
   }
 
-  @Override
-  protected boolean isPerlBuiltIn() {
-    return false;
-  }
-
   @Nullable
   @Override
   public String getPackageName() {
