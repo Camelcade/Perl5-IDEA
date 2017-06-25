@@ -19,15 +19,18 @@ package com.perl5.lang.perl.idea.structureView.elements;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
@@ -144,20 +147,34 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
     Set<String> implementedMethods = new HashSet<String>();
 
     if (myElement instanceof PerlFile) {
-      PsiFile podFile = ((PerlFile)myElement).getViewProvider().getPsi(PodLanguage.INSTANCE);
-      if (podFile != null) {
+      FileViewProvider viewProvider = ((PerlFile)myElement).getViewProvider();
+      PsiFile podFile = viewProvider.getPsi(PodLanguage.INSTANCE);
+      if (podFile != null && podFile.getChildren().length > 1) {
         result.add(new PodStructureViewElement(podFile));
       }
 
-      myElement.accept(new PerlRecursiveVisitor() {
-        @Override
-        public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
-          result.add(new PerlStructureViewElement(o));
-          super.visitNamespaceDefinitionElement(o);
+      Language targetLanguage = null;
+      for (Language language : viewProvider.getLanguages()) {
+        if (language == PerlLanguage.INSTANCE) {
+          targetLanguage = language;
+          break;
         }
-      });
+        else if (targetLanguage == null && language.isKindOf(PerlLanguage.INSTANCE)) {
+          targetLanguage = language;
+        }
+      }
+
+      if (targetLanguage != null) {
+        viewProvider.getPsi(targetLanguage).accept(new PerlRecursiveVisitor() {
+          @Override
+          public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
+            result.add(new PerlStructureViewElement(o));
+            super.visitNamespaceDefinitionElement(o);
+          }
+        });
+      }
     }
-    else if (myElement instanceof PerlNamespaceDefinitionElement) {
+    if (myElement instanceof PerlNamespaceDefinitionElement) {
       // global variables
       for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationElement.class)) {
         if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
