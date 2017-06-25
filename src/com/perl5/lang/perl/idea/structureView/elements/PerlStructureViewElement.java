@@ -169,7 +169,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
       // imported scalars
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedScalarDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedScalarDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
@@ -190,7 +190,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // imported arrays
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedArrayDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedArrayDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
@@ -211,7 +211,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // imported hashes
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedHashDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedHashDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
@@ -232,7 +232,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
       }
 
       // Imported subs
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinition)myElement).getImportedSubsDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedSubsDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         // declarations

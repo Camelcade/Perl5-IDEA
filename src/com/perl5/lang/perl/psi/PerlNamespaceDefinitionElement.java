@@ -17,6 +17,34 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiElement {
+  @NotNull
+  default List<PerlExportDescriptor> getImportedSubsDescriptors() {
+    return PerlSubUtil.getImportedSubsDescriptors(this);
+  }
+
+  @NotNull
+  default List<PerlExportDescriptor> getImportedScalarDescriptors() {
+    return PerlScalarUtil.getImportedScalarsDescritptors(this);
+  }
+
+  @NotNull
+  default List<PerlExportDescriptor> getImportedArrayDescriptors() {
+    return PerlArrayUtil.getImportedArraysDescriptors(this);
+  }
+
+  @NotNull
+  default List<PerlExportDescriptor> getImportedHashDescriptors() {
+    return PerlHashUtil.getImportedHashesDescriptors(this);
+  }
+
 }

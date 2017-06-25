@@ -17,20 +17,21 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiInvalidElementAccessException;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
-import com.perl5.lang.perl.util.*;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Describes api for perl namespace definition; Should be used only for inheritance
@@ -104,25 +105,6 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
   @NotNull
   Map<String, List<String>> getEXPORT_TAGS();
 
-  @NotNull
-  default List<PerlExportDescriptor> getImportedSubsDescriptors() {
-    return this instanceof PsiElement ? PerlSubUtil.getImportedSubsDescriptors((PsiElement)this) : Collections.emptyList();
-  }
-
-  @NotNull
-  default List<PerlExportDescriptor> getImportedScalarDescriptors() {
-    return this instanceof PsiElement ? PerlScalarUtil.getImportedScalarsDescritptors((PsiElement)this) : Collections.emptyList();
-  }
-
-  @NotNull
-  default List<PerlExportDescriptor> getImportedArrayDescriptors() {
-    return this instanceof PsiElement ? PerlArrayUtil.getImportedArraysDescriptors((PsiElement)this) : Collections.emptyList();
-  }
-
-  @NotNull
-  default List<PerlExportDescriptor> getImportedHashDescriptors() {
-    return this instanceof PsiElement ? PerlHashUtil.getImportedHashesDescriptors((PsiElement)this) : Collections.emptyList();
-  }
 
   default List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
     return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesNames());

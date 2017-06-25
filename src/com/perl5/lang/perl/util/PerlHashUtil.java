@@ -28,10 +28,7 @@ import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlAnonHash;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -133,13 +130,13 @@ public class PerlHashUtil implements PerlElementTypes {
   /**
    * Returns a map of imported hashes names
    *
-   * @param rootElement element to start looking from
+   * @param namespaceDefinitionElement element to start looking from
    * @return result map
    */
   @NotNull
-  public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull PsiElement rootElement) {
+  public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
     PerlImportsCollector collector = new PerlHashImportsCollector();
-    PerlUtil.processImportedEntities(rootElement, collector);
+    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
     return collector.getResult();
   }
 

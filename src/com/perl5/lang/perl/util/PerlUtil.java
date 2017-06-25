@@ -28,6 +28,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -126,13 +127,13 @@ public class PerlUtil implements PerlElementTypes {
   /**
    * Processing use statements in the namespace or file and processing all imports found
    *
-   * @param rootElement Root element to start searching from
+   * @param namespace Root element to start searching from
    */
   public static void processImportedEntities(
-    @NotNull PsiElement rootElement,
+    @NotNull PerlNamespaceDefinitionElement namespace,
     @NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor
   ) {
-    for (PsiElement element : PerlPsiUtil.collectUseStatements(rootElement)) {
+    for (PsiElement element : PerlPsiUtil.collectUseStatements(namespace)) {
       PerlUseStatement useStatement = (PerlUseStatement)element;
       String packageName = useStatement.getPackageName();
 

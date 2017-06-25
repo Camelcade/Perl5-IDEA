@@ -67,7 +67,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
       // imports
       PerlVariableType actualType = myVariable.getActualType();
       Project project = myVariable.getProject();
-      PerlNamespaceDefinition namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
+      PerlNamespaceDefinitionElement namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
 
       if (namespaceContainer != null) // not true if LPE in TemplateToolkit
       {

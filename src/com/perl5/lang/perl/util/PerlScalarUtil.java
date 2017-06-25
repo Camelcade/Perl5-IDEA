@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -135,13 +136,13 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   /**
    * Returns a map of imported scalars names
    *
-   * @param rootElement element to start looking from
+   * @param namespaceDefinitionElement element to start looking from
    * @return result map
    */
   @NotNull
-  public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull PsiElement rootElement) {
+  public static List<PerlExportDescriptor> getImportedScalarsDescritptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
     PerlImportsCollector collector = new PerlScalarImportsCollector();
-    PerlUtil.processImportedEntities(rootElement, collector);
+    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
     return collector.getResult();
   }
 

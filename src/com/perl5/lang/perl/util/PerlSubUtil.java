@@ -253,13 +253,13 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   /**
    * Returns a list of imported descriptors
    *
-   * @param rootElement element to start looking from
+   * @param namespaceDefinitionElement element to start looking from
    * @return result map
    */
   @NotNull
-  public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull PsiElement rootElement) {
+  public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
     PerlImportsCollector collector = new PerlSubImportsCollector();
-    PerlUtil.processImportedEntities(rootElement, collector);
+    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
     return collector.getResult();
   }
 

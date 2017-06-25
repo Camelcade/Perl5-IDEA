@@ -237,14 +237,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  public static List<PsiElement> collectUseStatements(@NotNull final PsiElement rootElement) {
-    return CachedValuesManager.getCachedValue(rootElement, new CachedValueProvider<List<PsiElement>>() {
-      @Nullable
-      @Override
-      public Result<List<PsiElement>> compute() {
-        return Result.create(collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class), rootElement);
-      }
-    });
+  public static List<PsiElement> collectUseStatements(@NotNull PerlNamespaceDefinitionElement rootElement) {
+    return CachedValuesManager.getCachedValue(rootElement, () -> CachedValueProvider.Result
+      .create(collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class), rootElement));
   }
 
   @NotNull

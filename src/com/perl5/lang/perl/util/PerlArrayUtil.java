@@ -110,13 +110,13 @@ public class PerlArrayUtil implements PerlElementTypes {
   /**
    * Returns a map of imported arrays names
    *
-   * @param rootElement element to start looking from
+   * @param namespaceDefinitionElement element to start looking from
    * @return result map
    */
   @NotNull
-  public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull PsiElement rootElement) {
+  public static List<PerlExportDescriptor> getImportedArraysDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
     PerlImportsCollector collector = new PerlArrayImportsCollector();
-    PerlUtil.processImportedEntities(rootElement, collector);
+    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
     return collector.getResult();
   }
 
