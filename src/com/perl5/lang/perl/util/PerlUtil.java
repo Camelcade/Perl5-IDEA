@@ -104,8 +104,9 @@ public class PerlUtil implements PerlElementTypes {
     return result;
   }
 
+  @Deprecated // make reverse index and use it
   public static Collection<String> getIndexKeysWithoutInternals(StubIndexKey<String, ?> key, Project project) {
-    final Set<String> result = new THashSet<String>();
+    final Set<String> result = new THashSet<>();
 
     // safe for getElements
     StubIndex.getInstance().processAllKeys(key, project, new
