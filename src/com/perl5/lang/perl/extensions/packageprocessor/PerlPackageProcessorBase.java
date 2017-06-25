@@ -74,13 +74,13 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
       if (parameters == null)    // default import
       {
         for (String item : exportNames) {
-          result.add(new PerlExportDescriptor(item, packageName));
+          result.add(PerlExportDescriptor.create(item, packageName));
         }
       }
       else {
         for (String parameter : parameters) {
           if (exportOkNames.contains(parameter)) {
-            result.add(new PerlExportDescriptor(parameter, packageName));
+            result.add(PerlExportDescriptor.create(parameter, packageName));
           }
         }
       }

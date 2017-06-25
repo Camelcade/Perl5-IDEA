@@ -37,18 +37,10 @@ public class PerlExportDescriptor {
   private final String myTargetName;
   private final String myTargetPackage;
 
-  public PerlExportDescriptor(@NotNull String exportedName, @NotNull String exportedBy) {
-    this(exportedBy, exportedName, exportedBy, exportedName);
-  }
-
-  public PerlExportDescriptor(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetPackage) {
-    this(exportedBy, exportedName, targetPackage, exportedName);
-  }
-
-  public PerlExportDescriptor(@NotNull String exportedBy,
-                              @NotNull String exportedName,
-                              @NotNull String targetPackage,
-                              @NotNull String targetName) {
+  private PerlExportDescriptor(@NotNull String exportedBy,
+                               @NotNull String exportedName,
+                               @NotNull String targetPackage,
+                               @NotNull String targetName) {
     myExporter = exportedBy;
     myTargetPackage = targetPackage;
     if (targetName.length() > 0 && StringUtil.containsChar(ALL_SIGILS, targetName.charAt(0)))  // canonical export
@@ -167,5 +159,13 @@ public class PerlExportDescriptor {
       return PerlIcons.SUB_GUTTER_ICON;
     }
     return null;
+  }
+
+  public static PerlExportDescriptor create(@NotNull String exportedName, @NotNull String exportedBy) {
+    return new PerlExportDescriptor(exportedBy, exportedName, exportedBy, exportedName);
+  }
+
+  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetPackage) {
+    return new PerlExportDescriptor(exportedBy, exportedName, targetPackage, exportedName);
   }
 }

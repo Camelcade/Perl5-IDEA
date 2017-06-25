@@ -25,11 +25,11 @@ import java.util.List;
  * Created by hurricup on 02.06.2016.
  */
 public class Dancer2PackageProcessor extends DancerPackageProcessor {
-  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
+  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<>();
 
   static {
     for (String keyword : PerlDancer2DSL.DSL_KEYWORDS) {
-      EXPORT_DESCRIPTORS.add(new PerlExportDescriptor("Dancer2", keyword, "Dancer2::Core::DSL"));
+      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer2", keyword, "Dancer2::Core::DSL"));
     }
   }
 
