@@ -17,18 +17,45 @@
 package com.perl5.lang.mojolicious.psi.impl;
 
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import com.perl5.lang.perl.PerlScopes;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
-public class MojoliciousFileImpl extends PerlFileImpl {
+public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile {
+  private String myNamespace;
+
   public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, MojoliciousLanguage.INSTANCE);
+    VirtualFile virtualFile = getVirtualFile();
+    String canonicalPath = virtualFile == null ? null : virtualFile.getCanonicalPath();
+    if (canonicalPath != null) {
+      try {
+        myNamespace = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.PACKAGE_SEPARATOR +
+                      new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
+      }
+      catch (NoSuchAlgorithmException ignore) {
+      }
+    }
+    if (myNamespace == null) {
+      myNamespace = MOJO_SANDBOX_NS_PREFIX;
+    }
   }
 
   @Override
@@ -44,5 +71,31 @@ public class MojoliciousFileImpl extends PerlFileImpl {
   @Override
   public byte[] getPerlContentInBytes() {
     return null;
+  }
+
+  @Override
+  public String getPackageName() {
+    return myNamespace;
+  }
+
+  @NotNull
+  @Override
+  public List<PerlExportDescriptor> getImportedSubsDescriptors() {
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(calcImportDescriptors(), this));
+  }
+
+  private List<PerlExportDescriptor> calcImportDescriptors() {
+    List<PerlExportDescriptor> result = super.getImportedSubsDescriptors();
+    result.addAll(HARDCODED_DESCRIPTORS);
+    PerlLightSubDefinitionsReverseIndex
+      .processSubDefinitionsInPackage(getProject(), MOJO_CONTROLLER_NS, PerlScopes.getProjectAndLibrariesScope(getProject()), sub -> {
+        if (sub instanceof MojoHelperDefinition) {
+          String packageName = sub.getPackageName();
+          assert packageName != null;
+          result.add(PerlExportDescriptor.create(packageName, sub.getSubName()));
+        }
+        return true;
+      });
+    return result;
   }
 }

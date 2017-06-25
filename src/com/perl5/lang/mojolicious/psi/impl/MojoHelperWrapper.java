@@ -32,10 +32,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.perl5.lang.mojolicious.psi.impl.MojoliciousFile.MOJO_CONTROLLER_NS;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
 public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPolyNamedElementStub> implements PerlSelfHinter {
-  public static final String HELPER_NAMESPACE_NAME = "Mojolicious::Controller";
 
   public MojoHelperWrapper(@NotNull PerlPolyNamedElementStub stub,
                            @NotNull IStubElementType nodeType) {
@@ -87,7 +87,7 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
       subName,
       LIGHT_METHOD_DEFINITION,
       identifierElement,
-      HELPER_NAMESPACE_NAME,
+      MOJO_CONTROLLER_NS,
       PerlSubDefinitionElement.getPerlSubArgumentsFromBody(subDefinitionBody),
       computeSubAnnotations(this, identifierElement),
       subDefinitionBody
@@ -97,6 +97,6 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
   @NotNull
   @Override
   public String getSelfNamespace() {
-    return HELPER_NAMESPACE_NAME;
+    return MOJO_CONTROLLER_NS;
   }
 }
