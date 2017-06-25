@@ -35,6 +35,7 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,7 +73,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
-    String packageName = getMethod().getPackageName();
+    String packageName = PerlPackageUtil.getContextPackageName(this);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }
