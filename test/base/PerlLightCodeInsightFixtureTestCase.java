@@ -16,6 +16,9 @@
 
 package base;
 
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.actionSystem.IdeActions;
@@ -46,6 +49,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
@@ -57,12 +61,13 @@ import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -323,36 +328,67 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     myFixture.checkResultByFile(checkFileName);
   }
 
-  public void assertLookupIs(String... pattern) {
-    assertLookupIs(Arrays.asList(pattern));
+  public final void doTestCompletion() {
+    doTestCompletion("");
   }
 
-  public void assertLookupIs(List<String> expected) {
-    List<String> lookups = myFixture.getLookupElementStrings();
-    assertNotNull(lookups);
-    UsefulTestCase.assertSameElements(lookups, expected);
+  public final void doTestCompletion(@NotNull String answerSuffix) {
+    initWithFileSmart();
+    doTestCompletionCheck(answerSuffix);
   }
 
-  public void assertLookupContains(List<String> expected) {
-    List<String> lookups = myFixture.getLookupElementStrings();
-    assertNotNull(lookups);
-    UsefulTestCase.assertContainsElements(lookups, expected);
+  public final void doTestCompletionFromText(@NotNull String content) {
+    initWithTextSmart(content);
+    doTestCompletionCheck("");
   }
 
+  private void doTestCompletionCheck(@NotNull String answerSuffix) {
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    myFixture.complete(CompletionType.BASIC, 1);
+    List<String> result = new ArrayList<>();
+    LookupElement[] elements = myFixture.getLookupElements();
+    if (elements != null) {
+      for (LookupElement lookupElement : elements) {
+        StringBuilder sb = new StringBuilder();
+        LookupElementPresentation presentation = new LookupElementPresentation();
+        lookupElement.renderElement(presentation);
+
+        sb.append("Lookups: ")
+          .append(StringUtil.join(lookupElement.getAllLookupStrings(), ", "))
+          .append("; Text: ")
+          .append(presentation.getItemText())
+          .append("; Tail: ")
+          .append(presentation.getTailText())
+          .append("; Type: ")
+          .append(presentation.getTypeText())
+          .append("; Icon: ")
+          .append(getIconText(presentation.getIcon()))
+          .append("; Type Icon: ")
+          .append(getIconText(presentation.getTypeIcon()))
+        ;
+
+        result.add(sb.toString());
+      }
+    }
+
+    ContainerUtil.sort(result);
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(answerSuffix), StringUtil.join(result, "\n"));
+  }
+
+  private String getIconText(@Nullable Icon icon) {
+    if (icon == null) {
+      return "null";
+    }
+    String iconString = icon.toString();
+    return iconString.substring(iconString.lastIndexOf('/'));
+  }
+
+  @Deprecated
   public void assertLookupDoesntContains(List<String> expected) {
     List<String> lookups = myFixture.getLookupElementStrings();
     assertNotNull(lookups);
     UsefulTestCase.assertDoesntContain(lookups, expected);
-  }
-
-  public void assertNotContainsLookupElements(String... pattern) {
-    assertNotContainsLookupElements(Arrays.asList(pattern));
-  }
-
-  public void assertNotContainsLookupElements(List<String> pattern) {
-    List<String> strings = myFixture.getLookupElementStrings();
-    assertNotNull(strings);
-    assertDoesntContain(new HashSet<Object>(strings), pattern);
   }
 
   protected void doFormatTest() {

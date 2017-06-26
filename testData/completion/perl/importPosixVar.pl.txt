@@ -1,0 +1,15 @@
+Lookups: !; Text: !; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: +; Text: +; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: -; Text: -; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: ENV; Text: ENV; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: ERRNO; Text: ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: INC; Text: INC; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: OS_ERROR; Text: OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: OVERLOAD; Text: OVERLOAD; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: SIG; Text: SIG; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: SIGRT; Text: SIGRT; Tail: null; Type: POSIX; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: ^CAPTURE_ALL; Text: ^CAPTURE_ALL; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: ^H; Text: ^H; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null

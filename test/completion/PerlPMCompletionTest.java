@@ -16,10 +16,11 @@
 
 package completion;
 
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-public class PerlPMCompletionTest extends PerlCompletionCodeInsightFixtureTestCase {
+public class PerlPMCompletionTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
@@ -37,6 +38,6 @@ public class PerlPMCompletionTest extends PerlCompletionCodeInsightFixtureTestCa
   }
 
   public void testPackageDefinition() {
-    doTest("packageDefinition");
+    doTestCompletion();
   }
 }

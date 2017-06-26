@@ -1,0 +1,6 @@
+Lookups: ALONECONST1; Text: ALONECONST1; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: ALONECONST2; Text: ALONECONST2; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: ALONECONST3; Text: ALONECONST3; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: MULTI_CONST1; Text: MULTI_CONST1; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: MULTI_CONST2; Text: MULTI_CONST2; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: MULTI_CONST3; Text: MULTI_CONST3; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null

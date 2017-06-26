@@ -1,0 +1,5 @@
+Lookups: MULTICONST2; Text: MULTICONST2; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: multiconst; Text: multiconst; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: singleconst; Text: singleconst; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: something; Text: something; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: somethingelse; Text: somethingelse; Tail: null; Type: null; Icon: null; Type Icon: null

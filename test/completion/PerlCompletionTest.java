@@ -16,31 +16,26 @@
 
 package completion;
 
-import com.intellij.testFramework.UsefulTestCase;
-import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.POSIXExports;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancer2DSL;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.PerlDancerDSL;
+import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase {
-
-  private List<String> SUPER_HERE_DOC_MARKER = Collections.singletonList("MYSUPERMARKER");
+public class PerlCompletionTest extends PerlLightCodeInsightFixtureTestCase {
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
     PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+  }
+
+
+  @Override
+  public String getFileExtension() {
+    return PerlFileTypeScript.EXTENSION_PL;
   }
 
   @Override
@@ -49,101 +44,73 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   public void testClassAccessor() {
-    doTestContains(
-      "lib_simple_ro1",
-      "lib_simple_other_ro",
-      "lib_simple_third_ro",
-      "lib_simple_rw1",
-      "lib_simple_other_rw",
-      "lib_simple_third_rw",
-      "lib_simple_wo1",
-      "lib_simple_other_wo",
-      "lib_simple_third_wo",
-      "get_lib_fbp_ro1",
-      "get_lib_fbp_ro2",
-      "get_lib_fbp_ro3",
-      "get_lib_fbp_rw1",
-      "get_lib_fbp_rw2",
-      "get_lib_fbp_rw3",
-      "set_lib_fbp_wo1",
-      "set_lib_fbp_wo2",
-      "set_lib_fbp_wo3",
-      "set_lib_fbp_rw1",
-      "set_lib_fbp_rw2",
-      "set_lib_fbp_rw3"
-    );
+    doTestCompletion();
   }
 
   public void testExceptionClassAliasLocal() {
-    doTestContains("aliasfor4", "aliasfor5", "aliasfor6");
+    doTestCompletion();
   }
 
   public void testExceptionClassAliasStatic() {
-    doTestContains("aliasfor4", "aliasfor5", "aliasfor6");
+    doTestCompletion();
   }
 
   public void testExceptionClassAliasMethod() {
-    doTestDoesntContains("aliasfor4", "aliasfor5", "aliasfor6");
+    doTestCompletion();
   }
 
   public void testLibraryConstants() {
-    doTestContains("LIBRARY_CONST1",
-                   "LIBRARY_CONST2",
-                   "LIBRARY_CONST3",
-                   "LIBRARY_CONST4");
+    doTestCompletion();
   }
 
   public void testUsePackageInCurrentDir() {
     addCustomPackage();
     setTargetPerlVersion(PerlVersion.V5_10);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_12);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_14);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_16);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_18);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_20);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_22);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_24);
-    doTestPackageFilesAndVersions("MyCustomPackage");
+    doTestCompletion("5_10");
     setTargetPerlVersion(PerlVersion.V5_26);
-    doTestPackageFilesAndVersions();
+    doTestCompletion("5_26");
   }
 
   public void testExceptionClass() {
-    doTestContains(
-      "Exception1::", "Exception2::", "Exception3::", "Exception4::", "Exception5::",
-      "Exception1->", "Exception2->", "Exception3->", "Exception4->", "Exception5->"
-    );
+    doTestCompletion();
   }
 
-  public void testReferenceCompletion() {doTestContains("declared_reference");}
+  public void testReferenceCompletion() {doTestCompletion();}
 
-  public void testCaptureScalar() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}
+  public void testCaptureScalar() {doTestCompletion();}
 
-  public void testCaptureArray() {doTestContains("^CAPTURE", "^CAPTURE", "^CAPTURE_ALL");}
+  public void testCaptureArray() {doTestCompletion();}
 
-  public void testCaptureHash() {doTestContains("^CAPTURE", "^CAPTURE_ALL");}
+  public void testCaptureHash() {doTestCompletion();}
 
   public void testAnnotationReturnsPackage() {
-    doTest(LIBRARY_PACKAGES);
+    doTestCompletion();
   }
 
   public void testAnnotationTypePackage() {
-    doTest(LIBRARY_PACKAGES);
+    doTestCompletion();
   }
 
   public void testImportSubsParam() {
-    doTest("somesub1", "someconst1", "multiconst1", "somesub2", "SOMECONST2", "MULTICONST2");
+    doTestCompletion();
   }
 
   private void doTestExportArray() {
-    doTest("something", "somethingelse", "singleconst", "multiconst", "MULTICONST2");
+    doTestCompletion();
   }
 
   public void testExportArrayEmpty() {
@@ -167,7 +134,7 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   public void testPackageToStringQPartial() {
-    doTest(ContainerUtil.filter(LIBRARY_PACKAGES, name -> name.startsWith("MyTest::")));
+    doTestCompletion();
   }
 
   public void testPackageToStringQQ() {
@@ -183,128 +150,87 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   private void doTestStringCompletion() {
-    doTest(REF_TYPES, LIBRARY_PACKAGES, Collections.singletonList("Foo::Bar::Bla"));
+    doTestCompletion();
   }
 
   public void testMojoliciousHelper() {
-    doTest("myhelper", "SUPER::");
+    doTestCompletion();
   }
 
   public void testUnresolvedSubDeclaration() {
-    doTest("somesubcustom");
+    doTestCompletion();
   }
 
   public void testUnresolvedSubDefinition() {
-    doTest("somesubcustom");
+    doTestCompletion();
   }
 
   public void testConstants() {
-    doTestSubs("ALONECONST1", "ALONECONST2", "ALONECONST3", "MULTI_CONST1", "MULTI_CONST2", "MULTI_CONST3");
+    doTestCompletion();
   }
 
   public void testConstantsWithPackage() {
-    doTest("ALONECONST1", "ALONECONST2", "ALONECONST3", "MULTI_CONST1", "MULTI_CONST2", "MULTI_CONST3");
+    doTestCompletion();
   }
 
   public void testVariableInDeclaration() {
-    doTest();
+    doTestCompletion();
   }
 
   public void testImportSubs() {
-    doTestSubs("somecode", "someothercode", "Foo::Bar::", "Foo::Bar->", "Foo::Baz::", "Foo::Baz->");
+    doTestCompletion();
   }
 
   public void testImportHashes() {
-    doTestHashVariables("somehash", "Foo::Bar::somehash");
+    doTestCompletion();
   }
 
   public void testImportArrays() {
-    doTestArrayVariables("somearray", "somehash", "Foo::Bar::somearray", "Foo::Bar::somehash", "Foo::Bar::EXPORT");
+    doTestCompletion();
   }
 
   public void testImportScalars() {
-    doTestScalarVariables(
-      "somearray",
-      "somehash",
-      "somescalar",
-      "Foo::Bar::EXPORT",
-      "Foo::Bar::somearray",
-      "Foo::Bar::somehash",
-      "Foo::Bar::somescalar");
+    doTestCompletion();
   }
 
   public void testImportDancer() {
-    doTestSubs(PerlDancerDSL.DSL_KEYWORDS);
+    doTestCompletion();
   }
 
   public void testImportDancer2() {
-    ArrayList<String> dancerCopy = new ArrayList<>(PerlDancer2DSL.DSL_KEYWORDS);
-    dancerCopy.remove("import");
-    dancerCopy.remove("log"); // as far as we have no psi elements inside lookups, they are not duplicating
-    doTestSubs(dancerCopy);
+    doTestCompletion();
   }
 
   public void testImportPosixOk() {
-    doTestSubs("isgreaterequal");
+    doTestCompletion();
   }
 
   public void testImportPosix() {
-    ArrayList<String> posixCopy = new ArrayList<>(POSIXExports.EXPORT);
-    posixCopy.remove("%SIGRT");  // variable does not appear
-    doTestSubs(posixCopy);
+    doTestCompletion();
   }
 
   public void testImportPosixVar() {
-    doTestHashVariables("SIGRT");
-  }
-
-  private void doTestSubs(String... additional) {
-    doTestSubs(Arrays.asList(additional));
-  }
-
-  private void doTestSubs(List<String> additional) {
-    doTest(BUILT_IN_SUBS, PACKAGES_LOOKUPS, additional);
+    doTestCompletion();
   }
 
   public void testLexicalMy() {
-    doTestScalarVariables("scalarname", "arrayname", "hashname");
+    doTestCompletion();
   }
 
   public void testLexicalState() {
-    doTestScalarVariables("scalarname", "arrayname", "hashname");
+    doTestCompletion();
   }
 
   public void testLexicalOur() {
-    doTestScalarVariables("scalarname", "arrayname", "hashname", "main::scalarname", "main::arrayname", "main::hashname");
-  }
-
-  private void doTestScalarVariables(String... additionalVars) {
-    doTest(
-      Arrays.asList(additionalVars),
-      SCALAR_LOOKUPS
-    );
-  }
-
-  private void doTestArrayVariables(String... additionalVars) {
-    doTest(
-      Arrays.asList(additionalVars),
-      ARRAY_LOOKUPS
-    );
-  }
-
-  private void doTestHashVariables(String... additionalVars) {
-    doTest(
-      Arrays.asList(additionalVars),
-      HASH_LOOKUPS
-    );
+    doTestCompletion();
   }
 
   public void testSameStatementSimple() {
-    doTestScalarVariables("normvar");
+    doTestCompletion();
   }
 
   public void testSameStatementMap() {
-    doTestScalarVariables("normvar");
+    doTestCompletion();
   }
 
   public void testHeredocOpenerBare() {
@@ -328,85 +254,60 @@ public class PerlCompletionTest extends PerlCompletionCodeInsightFixtureTestCase
   }
 
   private void doTestHeredoc() {
-    doTest(SUPER_HERE_DOC_MARKER, getLanguageMarkers());
+    doTestCompletion();
   }
 
   public void testRefTypes() {
-    initWithTextSmart("my $var = '<caret>'");
-    List<String> strings = myFixture.getLookupElementStrings();
-    assertNotNull(strings);
-
-    UsefulTestCase.assertSameElements(strings, mergeLists(REF_TYPES, LIBRARY_PACKAGES));
+    doTestCompletionFromText("my $var = '<caret>'");
   }
 
   public void testHashIndexBare() {
-    initWithTextSmart("$$a{testindex}; $b->{<caret>}");
-    List<String> strings = myFixture.getLookupElementStrings();
-    assertNotNull(strings);
-    UsefulTestCase.assertSameElements(strings, Arrays.asList("testindex"));
+    doTestCompletionFromText("$$a{testindex}; $b->{<caret>}");
   }
 
 
   public void testAnnotation() {
-    doTest("returns", "inject", "method", "override", "abstract", "deprecated", "noinspection", "type");
+    doTestCompletion();
   }
 
   public void testInjectMarkers() {
-    doTest(getLanguageMarkers());
+    doTestCompletion();
   }
 
 
   public void testNextLabels() {
-    doTest("LABEL1", "LABEL2", "LABEL3");
+    doTestCompletion();
   }
 
   public void testGotoLabels() {
-    doTest("LABEL1", "LABEL2", "LABEL3", "LABEL4", "LABEL5", "LABEL6", "LABEL8");
-  }
-
-  @Override
-  public String getFileExtension() {
-    return PerlFileTypeScript.EXTENSION_PL;
+    doTestCompletion();
   }
 
   public void testPackageUse() {
-    doTestPackageFilesAndVersions();
+    doTestCompletion();
   }
 
   public void testPackageNo() {
-    doTestPackageFilesAndVersions();
+    doTestCompletion();
   }
 
   public void testPackageRequire() {
-    doTestPackageFilesAndVersions();
+    doTestCompletion();
   }
 
   public void testPackageMy() {
-    doTestAllPackages();
+    doTestCompletion();
   }
 
   public void testPackageOur() {
-    doTestAllPackages();
+    doTestCompletion();
   }
 
   public void testPackageState() {
-    doTestAllPackages();
+    doTestCompletion();
   }
 
   public void testTryCatch() {
-    doTestAllPackages();
-  }
-
-
-  private void doTestPackageAndVersions(String... more) {
-    doTest(BUILT_IN_VERSIONS, LIBRARY_PACKAGES, Arrays.asList(more));
-  }
-
-  private void doTestPackageFilesAndVersions(String... more) {
-    doTest(BUILT_IN_VERSIONS, LIBRARY_PM_FILES, Arrays.asList(more));
-  }
-
-  private void doTestAllPackages() {
-    doTest(LIBRARY_PACKAGES);
+    doTestCompletion();
   }
 }

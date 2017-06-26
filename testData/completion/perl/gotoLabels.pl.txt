@@ -1,0 +1,7 @@
+Lookups: LABEL1; Text: LABEL1; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL2; Text: LABEL2; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL3; Text: LABEL3; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL4; Text: LABEL4; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL5; Text: LABEL5; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL6; Text: LABEL6; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LABEL8; Text: LABEL8; Tail: null; Type: null; Icon: null; Type Icon: null

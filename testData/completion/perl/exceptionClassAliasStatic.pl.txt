@@ -1,0 +1,3 @@
+Lookups: aliasfor4; Text: aliasfor4; Tail: ($testfield); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: aliasfor5; Text: aliasfor5; Tail: ($test1, $test2); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: aliasfor6; Text: aliasfor6; Tail: ($somefield); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null

@@ -1,0 +1,5 @@
+Lookups: LIBRARY_CONST1; Text: LIBRARY_CONST1; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: LIBRARY_CONST2; Text: LIBRARY_CONST2; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: LIBRARY_CONST3; Text: LIBRARY_CONST3; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: LIBRARY_CONST4; Text: LIBRARY_CONST4; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

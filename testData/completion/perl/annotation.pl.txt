@@ -1,0 +1,8 @@
+Lookups: abstract; Text: abstract; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: deprecated; Text: deprecated; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: inject; Text: inject; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: method; Text: method; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: noinspection; Text: noinspection; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: override; Text: override; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: returns; Text: returns; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+Lookups: type; Text: type; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
