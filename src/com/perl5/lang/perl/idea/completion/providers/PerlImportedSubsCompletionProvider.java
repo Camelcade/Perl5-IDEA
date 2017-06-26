@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Created by hurricup on 24.08.2015.
  */
-public class PerlSubImportsCompletionProvider extends CompletionProvider<CompletionParameters> {
+public class PerlImportedSubsCompletionProvider extends CompletionProvider<CompletionParameters> {
   public void addCompletions(@NotNull final CompletionParameters parameters,
                              ProcessingContext context,
                              @NotNull final CompletionResultSet resultSet) {
