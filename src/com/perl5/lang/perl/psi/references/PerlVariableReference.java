@@ -75,7 +75,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
 
         if (actualType == PerlVariableType.SCALAR) {
           for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors()) {
-            if (importEntry.getExportedName().equals(variableName)) {
+            if (importEntry.getImportedName().equals(variableName)) {
               for (PerlVariableDeclarationElement targetVariable : PerlScalarUtil
                 .getGlobalScalarDefinitions(project, importEntry.getTargetCanonicalName())) {
                 result.add(new PsiElementResolveResult(targetVariable));
@@ -85,7 +85,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
         }
         else if (actualType == PerlVariableType.ARRAY) {
           for (PerlExportDescriptor importEntry : namespaceContainer.getImportedArrayDescriptors()) {
-            if (importEntry.getExportedName().equals(variableName)) {
+            if (importEntry.getImportedName().equals(variableName)) {
               for (PerlVariableDeclarationElement targetVariable : PerlArrayUtil
                 .getGlobalArrayDefinitions(project, importEntry.getTargetCanonicalName())) {
                 result.add(new PsiElementResolveResult(targetVariable));
@@ -95,7 +95,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
         }
         else if (actualType == PerlVariableType.HASH) {
           for (PerlExportDescriptor importEntry : namespaceContainer.getImportedHashDescriptors()) {
-            if (importEntry.getExportedName().equals(variableName)) {
+            if (importEntry.getImportedName().equals(variableName)) {
               for (PerlVariableDeclarationElement targetVariable : PerlHashUtil
                 .getGlobalHashDefinitions(project, importEntry.getTargetCanonicalName())) {
                 result.add(new PsiElementResolveResult(targetVariable));

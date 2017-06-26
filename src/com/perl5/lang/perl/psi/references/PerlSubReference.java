@@ -116,7 +116,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
 
             if (namespaceContainer != null) {
               for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
-                if (exportDescriptor.getExportedName().equals(subName)) {
+                if (exportDescriptor.getImportedName().equals(subName)) {
                   int currentSize = relatedItems.size();
                   collectRelatedItems(
                     exportDescriptor.getTargetCanonicalName(),
@@ -129,7 +129,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
                   if (relatedItems.size() == currentSize)    // imported, but not found, attempting autoload
                   {
                     collectRelatedItems(
-                      exportDescriptor.getTargetPackage() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
+                      exportDescriptor.getRealPackage() + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
                       project,
                       parent,
                       relatedItems,
@@ -148,7 +148,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
               for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
                 .getNamespaceDefinitions(project, targetPackageName)) {
                 for (PerlExportDescriptor exportDescriptor : namespaceDefinition.getImportedSubsDescriptors()) {
-                  if (exportDescriptor.getExportedName().equals(subName)) {
+                  if (exportDescriptor.getImportedName().equals(subName)) {
                     collectRelatedItems(
                       exportDescriptor.getTargetCanonicalName(),
                       project,

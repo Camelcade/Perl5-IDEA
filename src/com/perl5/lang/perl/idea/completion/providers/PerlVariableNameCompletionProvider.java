@@ -191,17 +191,17 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
         public boolean process(String namespaceName, PerlExportDescriptor entity) {
           LookupElementBuilder lookupElement = null;
           if (entity.isScalar()) {
-            lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getImportedName());
           }
           else if (entity.isArray()) {
-            lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getImportedName());
           }
           else if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getImportedName());
           }
 
           if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
           }
           return true;
         }
@@ -213,14 +213,14 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
         public boolean process(String namespaceName, PerlExportDescriptor entity) {
           LookupElementBuilder lookupElement = null;
           if (entity.isArray()) {
-            lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getImportedName());
           }
           else if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getImportedName());
           }
 
           if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
           }
           return true;
         }
@@ -232,11 +232,11 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
         public boolean process(String namespaceName, PerlExportDescriptor entity) {
           LookupElementBuilder lookupElement = null;
           if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getTargetName());
+            lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getImportedName());
           }
 
           if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getTargetPackage(), true));
+            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
           }
           return true;
         }

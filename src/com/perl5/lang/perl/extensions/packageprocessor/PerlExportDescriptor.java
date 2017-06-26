@@ -32,54 +32,46 @@ public class PerlExportDescriptor {
   public static final String ALL_SIGILS = "$@%*&";
 
   private final char mySigil;
-  private final String myExporter;
-  private final String myExportedName;
-  private final String myTargetName;
-  private final String myTargetPackage;
+  @NotNull
+  private final String myImportedName;
+  @NotNull
+  private final String myRealName;
+  @NotNull
+  private final String myRealPackage;
 
-  private PerlExportDescriptor(@NotNull String exportedBy,
-                               @NotNull String exportedName,
-                               @NotNull String targetPackage,
-                               @NotNull String targetName) {
-    myExporter = exportedBy;
-    myTargetPackage = targetPackage;
-    if (targetName.length() > 0 && StringUtil.containsChar(ALL_SIGILS, targetName.charAt(0)))  // canonical export
+  private PerlExportDescriptor(@NotNull String realPackage, @NotNull String realName, @NotNull String importedName) {
+    myRealPackage = realPackage;
+    if (realName.length() > 0 && StringUtil.containsChar(ALL_SIGILS, realName.charAt(0)))  // canonical export
     {
-      mySigil = targetName.charAt(0);
-      myTargetName = targetName.substring(1);
-      myExportedName = exportedName.substring(1); // fixme dangerous, but depends only on PackageProcessor author
+      mySigil = realName.charAt(0);
+      myRealName = realName.substring(1);
+      myImportedName = importedName.substring(1);
     }
     else // suppose it's sigilles code
     {
       mySigil = '&';
-      myExportedName = exportedName;
-      myTargetName = targetName;
+      myImportedName = importedName;
+      myRealName = realName;
     }
   }
-
   @NotNull
-  public String getExporterName() {
-    return myExporter;
-  }
-
-  @NotNull
-  public String getExportedName() {
-    return myExportedName;
+  public String getImportedName() {
+    return myImportedName;
   }
 
   @NotNull
   public String getTargetCanonicalName() {
-    return getTargetPackage() + PerlPackageUtil.PACKAGE_SEPARATOR + getTargetName();
+    return getRealPackage() + PerlPackageUtil.PACKAGE_SEPARATOR + getRealName();
   }
 
   @NotNull
-  public String getTargetName() {
-    return myTargetName;
+  public String getRealName() {
+    return myRealName;
   }
 
   @NotNull
-  public String getTargetPackage() {
-    return myTargetPackage;
+  public String getRealPackage() {
+    return myRealPackage;
   }
 
   public boolean isScalar() {
@@ -104,41 +96,31 @@ public class PerlExportDescriptor {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof PerlExportDescriptor)) {
-      return false;
-    }
+    if (this == o) return true;
+    if (!(o instanceof PerlExportDescriptor)) return false;
 
     PerlExportDescriptor that = (PerlExportDescriptor)o;
 
-    if (mySigil != that.mySigil) {
-      return false;
-    }
-    if (!getExportedName().equals(that.getExportedName())) {
-      return false;
-    }
-    if (!getTargetName().equals(that.getTargetName())) {
-      return false;
-    }
-    return getTargetPackage().equals(that.getTargetPackage());
+    if (mySigil != that.mySigil) return false;
+    if (!getImportedName().equals(that.getImportedName())) return false;
+    if (!getRealName().equals(that.getRealName())) return false;
+    return getRealPackage().equals(that.getRealPackage());
   }
 
   @Override
   public int hashCode() {
     int result = (int)mySigil;
-    result = 31 * result + getExportedName().hashCode();
-    result = 31 * result + getTargetName().hashCode();
-    result = 31 * result + getTargetPackage().hashCode();
+    result = 31 * result + getImportedName().hashCode();
+    result = 31 * result + getRealName().hashCode();
+    result = 31 * result + getRealPackage().hashCode();
     return result;
   }
 
   @NotNull
   public LookupElementBuilder getLookupElement() {
-    return LookupElementBuilder.create(getExportedName())
+    return LookupElementBuilder.create(getImportedName())
       .withIcon(getIcon())
-      .withTypeText(getTargetPackage(), true);
+      .withTypeText(getRealPackage(), true);
   }
 
   @Nullable
@@ -161,11 +143,13 @@ public class PerlExportDescriptor {
     return null;
   }
 
-  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName) {
-    return new PerlExportDescriptor(exportedBy, exportedName, exportedBy, exportedName);
+  public static PerlExportDescriptor create(@NotNull String sourcePackageName, @NotNull String sourceSubName) {
+    return new PerlExportDescriptor(sourcePackageName, sourceSubName, sourceSubName);
   }
 
-  public static PerlExportDescriptor create(@NotNull String exportedBy, @NotNull String exportedName, @NotNull String targetName) {
-    return new PerlExportDescriptor(exportedBy, exportedName, exportedBy, targetName);
+  public static PerlExportDescriptor create(@NotNull String sourcePackageName,
+                                            @NotNull String sourceSubName,
+                                            @NotNull String importedSubName) {
+    return new PerlExportDescriptor(sourcePackageName, importedSubName, sourceSubName);
   }
 }
