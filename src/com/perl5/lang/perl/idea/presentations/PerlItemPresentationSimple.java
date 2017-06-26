@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 05.06.2015.
  */
 public class PerlItemPresentationSimple extends PerlItemPresentationBase {
-  String myPresentableText;
+  private String myPresentableText;
 
   public PerlItemPresentationSimple(PsiElement element, String presentatbleText) {
     super(element);
@@ -34,5 +34,9 @@ public class PerlItemPresentationSimple extends PerlItemPresentationBase {
   @Override
   public String getPresentableText() {
     return myPresentableText;
+  }
+
+  public void setPresentableText(String presentableText) {
+    myPresentableText = presentableText;
   }
 }

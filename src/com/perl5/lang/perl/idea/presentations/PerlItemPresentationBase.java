@@ -45,17 +45,6 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
     if (!myElement.isValid()) {
       return null;
     }
-
-/*		fixme seems this reparses file
-                String suffix = "";
-
-		PsiFile file = myElement.getContainingFile();
-		Document document = PsiDocumentManager.getInstance(myElement.getProject()).getCachedDocument(file);
-
-		if (document != null)
-			suffix = ", line " + (document.getLineNumber(myElement.getTextOffset()) + 1);
-*/
-
     return getElement().getContainingFile().getName();// + suffix;
   }
 

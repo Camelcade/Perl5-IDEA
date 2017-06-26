@@ -43,6 +43,7 @@ import com.perl5.lang.perl.util.*;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.idea.structureView.PodStructureViewElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -51,29 +52,35 @@ import java.util.*;
  */
 public class PerlStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
   protected PsiElement myElement;
-  protected boolean isInherited;
-  protected boolean isImported;
+  protected boolean myIsInherited;
+  @Nullable
+  private PerlExportDescriptor myExportDescriptor;
 
   public PerlStructureViewElement(PsiElement element) {
     myElement = element;
   }
 
   public PerlStructureViewElement setInherited() {
-    this.isInherited = true;
-    return this;
-  }
-
-  public PerlStructureViewElement setImported() {
-    this.isImported = true;
+    this.myIsInherited = true;
     return this;
   }
 
   public boolean isInherited() {
-    return isInherited;
+    return myIsInherited;
   }
 
   public boolean isImported() {
-    return isImported;
+    return myExportDescriptor != null;
+  }
+
+  public PerlStructureViewElement setImported(@NotNull PerlExportDescriptor exportDescriptor) {
+    myExportDescriptor = exportDescriptor;
+    return this;
+  }
+
+  @Nullable
+  public PerlExportDescriptor getExportDescriptor() {
+    return myExportDescriptor;
   }
 
   @Override
@@ -104,6 +111,10 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
   @Override
   public String getAlphaSortKey() {
     assert myElement instanceof PsiNamedElement;
+    PerlExportDescriptor exportDescriptor = getExportDescriptor();
+    if (exportDescriptor != null) {
+      return exportDescriptor.getImportedName();
+    }
     String name = ((PsiNamedElement)myElement).getName();
     if (name == null) {
       name = "Empty named " + myElement;
@@ -125,6 +136,13 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         ((PerlItemPresentationBase)itemPresentation).setAttributesKey(CodeInsightColors.NOT_USED_ELEMENT_ATTRIBUTES);
       }
     }
+
+    if (isImported() && itemPresentation instanceof PerlItemPresentationSimple) {
+      PerlExportDescriptor exportDescriptor = getExportDescriptor();
+      assert exportDescriptor != null;
+      ((PerlItemPresentationSimple)itemPresentation).setPresentableText(exportDescriptor.getImportedName());
+    }
+
     return itemPresentation;
   }
 
@@ -192,7 +210,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         Collection<PerlVariableDeclarationElement> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
 
         for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
+          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
         }
 
         // globs
@@ -202,7 +220,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlGlobVariable item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported());
+          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
 
@@ -213,7 +231,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         Collection<PerlVariableDeclarationElement> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
 
         for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
+          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
         }
 
         // globs
@@ -223,7 +241,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlGlobVariable item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported());
+          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
 
@@ -234,7 +252,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         Collection<PerlVariableDeclarationElement> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
 
         for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported());
+          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
         }
 
         // globs
@@ -244,7 +262,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlGlobVariable item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported());
+          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
 
@@ -259,7 +277,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlSubDeclarationElement item : subDeclarations) {
-          result.add(new PerlSubStructureViewElement(item).setImported());
+          result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
         }
 
         // definitions
@@ -269,7 +287,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlSubDefinitionElement item : subDefinitions) {
-          result.add(new PerlSubStructureViewElement(item).setImported());
+          result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
         }
 
         // globs
@@ -279,7 +297,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         }
 
         for (PerlGlobVariable item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported());
+          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
 
