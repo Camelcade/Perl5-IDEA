@@ -23,11 +23,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -37,14 +39,28 @@ import java.util.Set;
 public class PerlSubCompletionUtil {
   public static final SubSelectionHandler SUB_SELECTION_HANDLER = new SubSelectionHandler();
 
-  public static LookupElementBuilder getSubDefinitionLookupElement(String subName,
-                                                                   String argsString,
-                                                                   PerlSubDefinitionElement subDefinition) {
+
+  @NotNull
+  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition) {
+    return getSubDefinitionLookupElement(subDefinition, null);
+  }
+
+  @NotNull
+  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull PerlSubDefinitionElement subDefinition,
+                                                                   @Nullable PerlExportDescriptor exportDescriptor) {
+    return getSubDefinitionLookupElement(
+      exportDescriptor == null ? subDefinition.getSubName() : exportDescriptor.getImportedName(),
+      subDefinition);
+  }
+
+  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, PerlSubDefinitionElement subDefinition) {
     LookupElementBuilder newElement = LookupElementBuilder
       .create(subName)
       .withIcon(subDefinition.getIcon(0))
       .withStrikeoutness(subDefinition.isDeprecated())
       .withTypeText(subDefinition.getPackageName(), true);
+
+    String argsString = subDefinition.getSubArgumentsListAsString();
 
     if (!argsString.isEmpty()) {
       newElement = newElement
@@ -55,21 +71,28 @@ public class PerlSubCompletionUtil {
     return newElement;
   }
 
-  public static LookupElementBuilder getSmartLookupElement(@NotNull PsiElement element) {
+  public static LookupElementBuilder getImportedEntityLookupElement(@NotNull PsiElement element,
+                                                                    @NotNull PerlExportDescriptor exportDescriptor) {
     if (element instanceof PerlSubDefinitionElement) {
-      return getSubDefinitionLookupElement((PerlSubDefinitionElement)element);
+      return getSubDefinitionLookupElement((PerlSubDefinitionElement)element, exportDescriptor);
     }
     else if (element instanceof PerlSubDeclarationElement) {
-      return getSubDeclarationLookupElement((PerlSubElement)element);
+      return getSubDeclarationLookupElement((PerlSubDeclarationElement)element, exportDescriptor);
     }
     else if (element instanceof PerlGlobVariable) {
-      return getGlobLookupElement((PerlGlobVariable)element);
+      return getGlobLookupElement((PerlGlobVariable)element, exportDescriptor);
     }
     throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
   }
 
   @NotNull
-  public static LookupElementBuilder getSubDeclarationLookupElement(PerlSubElement subDeclaration) {
+  public static LookupElementBuilder getSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration) {
+    return getSubDeclarationLookupElement(subDeclaration, null);
+  }
+
+  @NotNull
+  public static LookupElementBuilder getSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
+                                                                    @Nullable PerlExportDescriptor exportDescriptor) {
     return LookupElementBuilder
       .create(subDeclaration.getSubName())
       .withIcon(subDeclaration.getIcon(0))
@@ -80,21 +103,19 @@ public class PerlSubCompletionUtil {
   }
 
   @NotNull
-  public static LookupElementBuilder getGlobLookupElement(PerlGlobVariable globVariable) {
+  public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable) {
+    return getGlobLookupElement(globVariable, null);
+  }
+
+  @NotNull
+  public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,
+                                                          @Nullable PerlExportDescriptor exportDescriptor) {
     return LookupElementBuilder
-      .create(globVariable.getName())
+      .create(exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName())
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
       .withTypeText(globVariable.getPackageName(), true)
       ;
-  }
-
-  @NotNull
-  public static LookupElementBuilder getSubDefinitionLookupElement(PerlSubDefinitionElement subDefinition) {
-    return getSubDefinitionLookupElement(
-      subDefinition.getSubName(),
-      subDefinition.getSubArgumentsListAsString(),
-      subDefinition);
   }
 
   public static void fillWithUnresolvedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {

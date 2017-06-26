@@ -70,17 +70,17 @@ public class PerlImportedSubsCompletionProvider extends CompletionProvider<Compl
 
   protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinitionElement namespaceContainer,
                                                  @NotNull final CompletionResultSet resultSet) {
-    for (PerlExportDescriptor exportDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
+    for (PerlExportDescriptor importedDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
       List<PsiElement> psiElements =
-        PerlSubUtil.collectRelatedItems(exportDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
+        PerlSubUtil.collectRelatedItems(importedDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
 
       if (psiElements.isEmpty()) // no definition found
       {
-        resultSet.addElement(exportDescriptor.getLookupElement());
+        resultSet.addElement(importedDescriptor.getLookupElement());
       }
       else {
         for (PsiElement element : psiElements) {
-          resultSet.addElement(PerlSubCompletionUtil.getSmartLookupElement(element));
+          resultSet.addElement(PerlSubCompletionUtil.getImportedEntityLookupElement(element, importedDescriptor));
         }
       }
     }
