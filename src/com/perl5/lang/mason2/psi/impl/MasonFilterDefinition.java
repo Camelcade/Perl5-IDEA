@@ -18,9 +18,8 @@ package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,15 +42,7 @@ public class MasonFilterDefinition extends MasonMethodDefinition {
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = super.buildImplicitVariables();
-    newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
-      getManager(),
-      PerlLanguage.INSTANCE,
-      YIELD_VARIABLE_NAME,
-      true,
-      false,
-      false,
-      this
-    ));
+    newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME));
     return newImplicitVariables;
   }
 }

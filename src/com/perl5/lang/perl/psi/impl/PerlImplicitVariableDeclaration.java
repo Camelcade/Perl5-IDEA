@@ -26,8 +26,13 @@ import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
@@ -42,33 +47,28 @@ import java.util.List;
 /**
  * Created by hurricup on 17.01.2016.
  */
-public class PerlVariableDeclarationLightElementImpl extends LightElement implements PerlVariableDeclarationLightElement {
+public class PerlImplicitVariableDeclaration extends LightElement
+  implements PerlVariable, PerlVariableNameElement, PerlVariableDeclarationElement {
   protected final PerlVariableType myVariableType;
+  @NotNull
   protected final String myVariableName;
+  @Nullable
   protected final String myVariableClass;
+  @NotNull
   protected final PsiElement myParent;
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
-  public PerlVariableDeclarationLightElementImpl(@NotNull PsiManager manager,
-                                                 @NotNull Language language,
-                                                 @NotNull String variableName,
-                                                 boolean isLexical,
-                                                 boolean isLocal,
-                                                 boolean isInvocant,
-                                                 @NotNull PsiElement parent) {
-    this(manager, language, variableName, null, isLexical, isLocal, isInvocant, parent);
-  }
 
-  public PerlVariableDeclarationLightElementImpl(@NotNull PsiManager manager,
-                                                 @NotNull Language language,
-                                                 @NotNull String variableName,
-                                                 @Nullable String variableClass,
-                                                 boolean isLexical,
-                                                 boolean isLocal,
-                                                 boolean isInvocant,
-                                                 @NotNull PsiElement parent) {
+  private PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
+                                          @NotNull Language language,
+                                          @NotNull String variableName,
+                                          @Nullable String variableClass,
+                                          boolean isLexical,
+                                          boolean isLocal,
+                                          boolean isInvocant,
+                                          @NotNull PsiElement parent) {
     super(manager, language);
 
     PerlVariableType type = null;
@@ -101,7 +101,6 @@ public class PerlVariableDeclarationLightElementImpl extends LightElement implem
   public String toString() {
     return getVariableType().getSigil() + getVariableName() + '@' + getVariableClass();
   }
-
 
   @Nullable
   @Override
@@ -146,7 +145,6 @@ public class PerlVariableDeclarationLightElementImpl extends LightElement implem
   public List<PerlGlobVariable> getRelatedGlobs() {
     return null;
   }
-
 
   @Override
   public int getLineNumber() {
@@ -209,14 +207,17 @@ public class PerlVariableDeclarationLightElementImpl extends LightElement implem
     return myVariableType;
   }
 
+  @NotNull
   public String getVariableName() {
     return myVariableName;
   }
 
+  @Nullable
   public String getVariableClass() {
     return myVariableClass;
   }
 
+  @NotNull
   public PsiElement getParent() {
     return myParent;
   }
@@ -331,6 +332,61 @@ public class PerlVariableDeclarationLightElementImpl extends LightElement implem
   @Override
   public PerlVariableAnnotations getExternalVariableAnnotations() {
     return null;
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration createGlobal(@NotNull PsiElement parent,
+                                                             @NotNull String variableName,
+                                                             @Nullable String variableClass
+  ) {
+    return create(parent, variableName, variableClass, false, false, false);
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration createLexical(@NotNull PsiElement parent,
+                                                              @NotNull String variableName
+  ) {
+    return createLexical(parent, variableName, null);
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration createLexical(@NotNull PsiElement parent,
+                                                              @NotNull String variableName,
+                                                              @Nullable String variableClass
+  ) {
+    return create(parent, variableName, variableClass, true, false, false);
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration createDefaultInvocant(@NotNull PsiElement parent) {
+    return createInvocant(parent, PerlMethodDefinitionMixin.getDefaultInvocantName());
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration createInvocant(@NotNull PsiElement parent,
+                                                               @NotNull String variableName
+  ) {
+    return create(parent, variableName, null, true, false, true);
+  }
+
+  @NotNull
+  public static PerlImplicitVariableDeclaration create(@NotNull PsiElement parent,
+                                                       @NotNull String variableName,
+                                                       @Nullable String variableClass,
+                                                       boolean isLexical,
+                                                       boolean isLocal,
+                                                       boolean isInvocant
+  ) {
+    return new PerlImplicitVariableDeclaration(
+      parent.getManager(),
+      PerlLanguage.INSTANCE,
+      variableName,
+      variableClass,
+      isLexical,
+      isLocal,
+      isInvocant,
+      parent
+    );
   }
 }
 

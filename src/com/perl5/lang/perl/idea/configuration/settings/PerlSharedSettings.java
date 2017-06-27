@@ -33,6 +33,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+
 /**
  * Created by hurricup on 30.08.2015.
  */
@@ -46,7 +48,7 @@ import java.util.Set;
 
 public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> libRootUrls = new ArrayList<>();
-  public List<String> selfNames = new ArrayList<>(Arrays.asList("self", "this", "class", "proto"));
+  public List<String> selfNames = new ArrayList<>(Arrays.asList(DEFAULT_SELF_NAME, "this", "class", "proto"));
   public boolean SIMPLE_MAIN_RESOLUTION = true;
   public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
   public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;

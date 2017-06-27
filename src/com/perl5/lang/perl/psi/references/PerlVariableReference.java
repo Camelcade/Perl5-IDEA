@@ -22,7 +22,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -61,7 +65,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
     PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
 
     if (lexicalDeclaration == null ||
-        lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlVariableDeclarationLightElement)) {
+        lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlImplicitVariableDeclaration)) {
       // not found explicit lexically visible declarations
 
       // imports

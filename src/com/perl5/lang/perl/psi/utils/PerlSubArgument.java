@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+
 /**
  * Created by hurricup on 01.06.2015.
  */
@@ -199,7 +201,7 @@ public class PerlSubArgument {
   }
 
   public static PerlSubArgument self() {
-    return mandatoryScalar("self");
+    return mandatoryScalar(DEFAULT_SELF_NAME);
   }
 
   public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException {

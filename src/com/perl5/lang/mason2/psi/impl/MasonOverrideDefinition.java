@@ -22,14 +22,12 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,15 +53,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
-        getManager(),
-        PerlLanguage.INSTANCE,
-        PerlMethodDefinitionMixin.getDefaultInvocantName(),
-        true,
-        false,
-        true,
-        this
-      ));
+      newImplicitVariables.add(PerlImplicitVariableDeclaration.createDefaultInvocant(this));
     }
     return newImplicitVariables;
   }

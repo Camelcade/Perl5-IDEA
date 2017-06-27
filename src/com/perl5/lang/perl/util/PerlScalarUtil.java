@@ -43,6 +43,9 @@ import java.util.List;
  * Created by hurricup on 19.04.2015.
  */
 public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
+  public static final String DEFAULT_SELF_NAME = "self";
+  public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
+
   /**
    * Checks if variable is built in
    *

@@ -20,9 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -32,12 +31,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME;
+
 /**
  * Created by hurricup on 10.11.2015.
  */
 public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase implements PerlMethodDefinition {
-  // fixme see the #717
-  protected static final String DEFAULT_INVOCANT_NAME = "$self";
   protected List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public PerlMethodDefinitionMixin(@NotNull ASTNode node) {
@@ -52,15 +51,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
-        getManager(),
-        PerlLanguage.INSTANCE,
-        getDefaultInvocantName(),
-        true,
-        false,
-        true,
-        this
-      ));
+      newImplicitVariables.add(PerlImplicitVariableDeclaration.createDefaultInvocant(this));
     }
     return newImplicitVariables;
   }
@@ -122,6 +113,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
 
   @NotNull
   public static String getDefaultInvocantName() {
-    return DEFAULT_INVOCANT_NAME;
+    // fixme see #717
+    return DEFAULT_SELF_SCALAR_NAME;
   }
 }

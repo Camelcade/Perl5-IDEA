@@ -20,9 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.tt2.psi.TemplateToolkitPerlBlockElement;
 import org.jetbrains.annotations.NotNull;
@@ -43,26 +42,8 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> variables = new ArrayList<PerlVariableDeclarationElement>();
-    variables.add(new PerlVariableDeclarationLightElementImpl(
-      getManager(),
-      PerlLanguage.INSTANCE,
-      "$context",
-      "Template::Context",
-      true,
-      false,
-      false,
-      this
-    ));
-    variables.add(new PerlVariableDeclarationLightElementImpl(
-      getManager(),
-      PerlLanguage.INSTANCE,
-      "$stash",
-      "Template::Stash",
-      true,
-      false,
-      false,
-      this
-    ));
+    variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$context", "Template::Context"));
+    variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$stash", "Template::Stash"));
     return variables;
   }
 

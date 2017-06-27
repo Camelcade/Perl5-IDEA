@@ -17,9 +17,8 @@
 package com.perl5.lang.tt2.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.tt2.psi.TemplateToolkitRawPerlBlockElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,24 +37,8 @@ public class TemplateToolkitRawPerlBlockElementImpl extends TemplateToolkitPerlB
   @Override
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
     List<PerlVariableDeclarationElement> variables = super.buildImplicitVariables();
-    variables.add(new PerlVariableDeclarationLightElementImpl(
-      getManager(),
-      PerlLanguage.INSTANCE,
-      "$output",
-      true,
-      false,
-      false,
-      this
-    ));
-    variables.add(new PerlVariableDeclarationLightElementImpl(
-      getManager(),
-      PerlLanguage.INSTANCE,
-      "$error",
-      true,
-      false,
-      false,
-      this
-    ));
+    variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$output"));
+    variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$error"));
     return variables;
   }
 }

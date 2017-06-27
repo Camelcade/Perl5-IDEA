@@ -26,9 +26,8 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,15 +85,10 @@ public class MasonCoreUtil {
         variableType = null;
       }
       targetList.add(
-        new PerlVariableDeclarationLightElementImpl(
-          parent.getManager(),
-          PerlLanguage.INSTANCE,
+        PerlImplicitVariableDeclaration.createGlobal(
+          parent,
           variableDescription.variableName,
-          variableType,
-          false,
-          false,
-          false,
-          parent
+          variableType
         ));
     }
   }

@@ -22,12 +22,10 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlVariableDeclarationLightElementImpl;
-import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,15 +57,7 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
 
     if (isValid()) {
-      newImplicitVariables.add(new PerlVariableDeclarationLightElementImpl(
-        getManager(),
-        PerlLanguage.INSTANCE,
-        PerlMethodDefinitionMixin.getDefaultInvocantName(),
-        true,
-        false,
-        true,
-        this
-      ));
+      newImplicitVariables.add(PerlImplicitVariableDeclaration.createDefaultInvocant(this));
     }
     return newImplicitVariables;
   }
