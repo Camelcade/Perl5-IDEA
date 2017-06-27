@@ -1,0 +1,16 @@
+PerlVariableReference at (14,18); text in range: 'self' => 1 results:
+	nodeless; $self@Mojolicious::Controller
+	PerlImplicitVariableDeclaration at 0 in implicitVariables.ep
+
+PerlVariableReference at (27,28); text in range: 'c' => 1 results:
+	nodeless; $c@Mojolicious::Controller
+	PerlImplicitVariableDeclaration at 0 in implicitVariables.ep
+
+PerlVariableReference at (37,39); text in range: '_O' => 1 results:
+	nodeless; $_O@null
+	PerlImplicitVariableDeclaration at 0 in implicitVariables.ep
+
+PerlVariableReference at (48,50); text in range: 'cb' => 1 results:
+	nodeless; $cb@null
+	PerlImplicitVariableDeclaration at 0 in implicitVariables.ep
+

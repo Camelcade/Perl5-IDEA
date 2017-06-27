@@ -21,6 +21,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.stubs.IStubElementType;
@@ -326,6 +327,11 @@ public class PerlImplicitVariableDeclaration extends LightElement
   @Override
   public PerlVariableAnnotations getLocalVariableAnnotations() {
     return null;
+  }
+
+  @Override
+  public PsiFile getContainingFile() {
+    return getParent().getContainingFile();
   }
 
   @Nullable
