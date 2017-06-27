@@ -11,6 +11,9 @@ Lookups: Library::Exception2; Text: Library::Exception2; Tail: null; Type: null;
 Lookups: Library::Exception; Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
 Lookups: LibraryException3; Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
 Lookups: LibraryException; Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
+Lookups: Mojolicious::Controller; Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::DefaultHelpers; Text: Mojolicious::Plugin::DefaultHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::TagHelpers; Text: Mojolicious::Plugin::TagHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Constants; Text: MyTest::Constants; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Exceptions; Text: MyTest::Exceptions; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package; Text: MyTest::Some::Package; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

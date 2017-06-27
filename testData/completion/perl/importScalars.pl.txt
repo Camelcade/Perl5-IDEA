@@ -75,6 +75,7 @@ Lookups: LAST_SUBMATCH_RESULT; Text: LAST_SUBMATCH_RESULT; Tail: null; Type: nul
 Lookups: LIST_SEPARATOR; Text: LIST_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MATCH; Text: MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MULTILINE_MATCHING; Text: MULTILINE_MATCHING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Controller::AUTOLOAD; Text: Mojolicious::Controller::AUTOLOAD; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: NR; Text: NR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null

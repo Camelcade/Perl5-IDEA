@@ -269,6 +269,12 @@ Lookups: M_PI_2; Text: M_PI_2; Tail: null; Type: POSIX; Icon: /subroutine_gutter
 Lookups: M_PI_4; Text: M_PI_4; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: M_SQRT1_2; Text: M_SQRT1_2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: M_SQRT2; Text: M_SQRT2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Controller->; Text: Mojolicious::Controller->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Controller::; Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::DefaultHelpers->; Text: Mojolicious::Plugin::DefaultHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::DefaultHelpers::; Text: Mojolicious::Plugin::DefaultHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::TagHelpers->; Text: Mojolicious::Plugin::TagHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: Mojolicious::Plugin::TagHelpers::; Text: Mojolicious::Plugin::TagHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Constants->; Text: MyTest::Constants->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Constants::; Text: MyTest::Constants::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Exceptions->; Text: MyTest::Exceptions->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

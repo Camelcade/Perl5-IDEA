@@ -1,2 +1,49 @@
+Lookups: ${name}_field; Text: ${name}_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: accepts; Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: b; Text: b; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: button_to; Text: button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: c; Text: c; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: check_box; Text: check_box; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: config; Text: config; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: content; Text: content; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: content_for; Text: content_for; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: content_with; Text: content_with; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: continue; Text: continue; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: cookie; Text: cookie; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: csrf_button_to; Text: csrf_button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: datetime_field; Text: datetime_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: dumper; Text: dumper; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: every_param; Text: every_param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: every_signed_cookie; Text: every_signed_cookie; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: file_field; Text: file_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: finish; Text: finish; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: flash; Text: flash; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: helpers; Text: helpers; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: image; Text: image; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: include; Text: include; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: input_tag; Text: input_tag; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: match; Text: match; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: myhelper; Text: myhelper; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: on; Text: on; Tail: ($name, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: param; Text: param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: password_field; Text: password_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: radio_button; Text: radio_button; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: redirect_to; Text: redirect_to; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: render; Text: render; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: render_later; Text: render_later; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: render_maybe; Text: render_maybe; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: render_to_string; Text: render_to_string; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: rendered; Text: rendered; Tail: ($status); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: reply.exception; Text: reply.exception; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: reply.not_found; Text: reply.not_found; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: respond_to; Text: respond_to; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: send; Text: send; Tail: ($msg, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: session; Text: session; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: signed_cookie; Text: signed_cookie; Tail: ($name, $value, $options); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: ua; Text: ua; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+Lookups: url_for; Text: url_for; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: validation; Text: validation; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: write; Text: write; Tail: ($chunk, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: write_chunk; Text: write_chunk; Tail: ($chunk, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
