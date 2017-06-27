@@ -16,13 +16,15 @@
 
 package com.perl5.lang.mojolicious.psi.impl;
 
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.PerlSelfHinter;
 
 import java.util.Arrays;
 import java.util.List;
 
-public interface MojoliciousFile extends PerlFile {
+public interface MojoliciousFile extends PerlFile, PerlImplicitVariablesProvider, PerlSelfHinter {
   String MOJO_CONTROLLER_NS = "Mojolicious::Controller";
   String MOJO_SANDBOX_NS_PREFIX = "Mojo::Template::Sandbox";
   String MOJO_TAG_HELPERS_NS = "Mojolicious::Plugin::TagHelpers";

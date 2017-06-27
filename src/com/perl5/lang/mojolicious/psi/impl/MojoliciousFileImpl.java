@@ -25,14 +25,18 @@ import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +44,7 @@ import java.util.List;
  */
 public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile {
   private String myNamespace;
+  private List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, MojoliciousLanguage.INSTANCE);
@@ -97,5 +102,26 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
         return true;
       });
     return result;
+  }
+
+  @NotNull
+  @Override
+  public List<PerlVariableDeclarationElement> getImplicitVariables() {
+    if (myImplicitVariables == null) {
+      List<PerlVariableDeclarationElement> implicitVariables = new ArrayList<>();
+      implicitVariables
+        .add(PerlImplicitVariableDeclaration.createLexical(this, PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME, MOJO_CONTROLLER_NS));
+      implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$c", MOJO_CONTROLLER_NS));
+      implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$cb"));
+      implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$_O"));
+      myImplicitVariables = implicitVariables;
+    }
+    return myImplicitVariables;
+  }
+
+  @NotNull
+  @Override
+  public String getSelfNamespace() {
+    return MOJO_CONTROLLER_NS; // fixme this is a hack for #1497
   }
 }
