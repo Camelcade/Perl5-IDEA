@@ -1,0 +1,14 @@
+PerlSubReference at (10,24); text in range: 'csrf_button_to' => 1 results:
+	nodeless; MojoHelperDefinition(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 856 in TagHelpers.pm
+
+PerlSubReference at (28,38); text in range: 'csrf_field' => 1 results:
+	SUB_DEFINITION at 1543 in TagHelpers.pm
+
+PerlSubReference at (44,54); text in range: 'csrf_token' => 1 results:
+	SUB_DEFINITION at 2119 in DefaultHelpers.pm
+
+PerlSubReference at (60,71); text in range: 'content_for' => 1 results:
+	nodeless; MojoHelperDefinition(LIGHT_METHOD_DEFINITION)
+	Perl5: STRING_BARE at 960 in DefaultHelpers.pm
+

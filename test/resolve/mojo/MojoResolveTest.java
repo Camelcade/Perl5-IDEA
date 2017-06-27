@@ -31,4 +31,6 @@ public class MojoResolveTest extends PerlResolveTestCase {
   }
 
   public void testImplicitVariables() {doTestWithFileCheck();}
+
+  public void testHelpers() {doTestWithFileCheck();}
 }

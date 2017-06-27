@@ -1,0 +1,8 @@
+<html>
+
+% csrf_button_to;
+% csrf_field();
+% csrf_token();
+% content_for;
+
+</html>
