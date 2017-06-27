@@ -37,6 +37,7 @@ import javax.swing.*;
  */
 public class MojoliciousFileType extends PerlFileType {
   public static final MojoliciousFileType INSTANCE = new MojoliciousFileType();
+  public static final String MOJO_DEFAULT_EXTENSION = "ep";
 
   public MojoliciousFileType() {
     super(MojoliciousLanguage.INSTANCE);
@@ -66,7 +67,7 @@ public class MojoliciousFileType extends PerlFileType {
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "ep";
+    return MOJO_DEFAULT_EXTENSION;
   }
 
   @Nullable

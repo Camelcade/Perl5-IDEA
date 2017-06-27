@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package resolve.mojo;
+package completion;
 
-import resolve.perl.PerlResolveTestCase;
+import base.PerlLightCodeInsightFixtureTestCase;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-import static com.perl5.lang.mojolicious.filetypes.MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
-
-public class MojoResolveTest extends PerlResolveTestCase {
+public abstract class PerlCompletionTestCase extends PerlLightCodeInsightFixtureTestCase {
   @Override
-  public String getFileExtension() {
-    return MOJO_DEFAULT_EXTENSION;
+  protected void setUp() throws Exception {
+    super.setUp();
+    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
   }
-
-  protected String getTestDataPath() {
-    return "testData/resolve/mojo";
-  }
-
-  public void testImplicitVariables() {doTestWithFileCheck();}
 }

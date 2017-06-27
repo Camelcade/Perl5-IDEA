@@ -16,16 +16,9 @@
 
 package completion;
 
-import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-public class PerlPMCompletionTest extends PerlLightCodeInsightFixtureTestCase {
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
-  }
+public class PerlPMCompletionTest extends PerlCompletionTestCase {
 
   @Override
   protected String getTestDataPath() {

@@ -14,21 +14,27 @@
  * limitations under the License.
  */
 
-package resolve.mojo;
-
-import resolve.perl.PerlResolveTestCase;
+package completion;
 
 import static com.perl5.lang.mojolicious.filetypes.MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
 
-public class MojoResolveTest extends PerlResolveTestCase {
+public class MojoCompletionTest extends PerlCompletionTestCase {
+
   @Override
   public String getFileExtension() {
     return MOJO_DEFAULT_EXTENSION;
   }
 
+  @Override
   protected String getTestDataPath() {
-    return "testData/resolve/mojo";
+    return "testData/completion/mojo";
   }
 
-  public void testImplicitVariables() {doTestWithFileCheck();}
+  public void testTopLevel() {doTestCompletion();}
+
+  public void testC() {doTestCompletion();}
+
+  public void testSelf() {doTestCompletion();}
+
+  public void testScalars() {doTestCompletion();}
 }
