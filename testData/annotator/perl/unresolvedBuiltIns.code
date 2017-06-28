@@ -1,0 +1,2 @@
+my $var = shift;
+my $othervar = <warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">othershift</warning>;

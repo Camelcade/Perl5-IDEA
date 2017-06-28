@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
+import com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection;
 
 /**
  * Created by hurricup on 09.11.2016.
@@ -54,14 +55,22 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     doDeprecationTest();
   }
 
+  public void testUnresolvedBuiltIns() {
+    doTest(PerlSubUnresolvableInspection.class);
+  }
+
   private void doTest() {
     initWithFileSmart();
     myFixture.checkHighlighting(true, true, true);
   }
 
   private void doDeprecationTest() {
+    doTest(PerlDeprecatedInspection.class);
+  }
+
+  private void doTest(Class clazz) {
     initWithFileSmart();
-    myFixture.enableInspections(PerlDeprecatedInspection.class);
+    myFixture.enableInspections(clazz);
     myFixture.checkHighlighting(true, false, false);
   }
 }

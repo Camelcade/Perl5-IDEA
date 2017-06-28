@@ -134,7 +134,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
       if (!(grandParent instanceof PsiPerlNestedCall) &&
           (subNameElement.getPrevSibling() == null ||
            PerlPackageUtil.CORE_PACKAGE_FULL.equals(subNameElement.getPrevSibling().getText()))) {
-        return PerlSubUtil.isBuiltIn(getText());
+        return PerlSubUtil.isBuiltIn(subNameElement.getText());
       }
     }
     return false;
