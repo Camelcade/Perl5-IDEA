@@ -46,6 +46,7 @@
      <li>Implemented <a href="http://search.cpan.org/~drolsky/Exception-Class/lib/Exception/Class.pm"><code>Exception::Class</code></a> module support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/848">#848</a></li>
      <li>Restored and improved <a href="http://search.cpan.org/~kasei/Class-Accessor/lib/Class/Accessor.pm"><code>Class::Accessor</code></a> support, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1395">#1395</a></li>
      <li>Mojolicious helpers parsing been re-worked. Should work better now</li>
+     <li>You are now able to use a single <code>-bareword</code> argument in use statement, like <code>use Mojo::Base -strict;</code></li>
      </ul>
      </p>
      <p>Fixes:
