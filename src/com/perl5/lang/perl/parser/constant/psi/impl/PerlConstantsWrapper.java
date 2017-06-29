@@ -67,15 +67,17 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     PerlHashUtil.processHashElements(firstChild, (keyElement, valElement) -> {
-      result.add(new PerlLightConstantDefinitionElement(
-        this,
-        ElementManipulators.getValueText(keyElement),
-        LIGHT_SUB_DEFINITION,
-        keyElement,
-        PerlPackageUtil.getContextPackageName(this),
-        Collections.emptyList(),
-        PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent())
-      ));
+      if (isAcceptableIdentifierElement(keyElement)) {
+        result.add(new PerlLightConstantDefinitionElement(
+          this,
+          ElementManipulators.getValueText(keyElement),
+          LIGHT_SUB_DEFINITION,
+          keyElement,
+          PerlPackageUtil.getContextPackageName(this),
+          Collections.emptyList(),
+          PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent())
+        ));
+      }
 
       return multipleDefinition;
     });

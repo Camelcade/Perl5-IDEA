@@ -106,7 +106,9 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
       return false;
     }
     else if (elementType == STRING_DQ) {
-      return identifierElement.getChildren().length == 0;
+      PsiElement[] children = identifierElement.getChildren();
+      return children.length == 0 ||
+             children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QQ && children[0].getChildren().length == 0;
     }
     return false;
   }
