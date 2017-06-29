@@ -449,7 +449,7 @@ Perl5
             PsiComment(Perl5: COMMENT_LINE)('#                print "must be punctuation\n" case m/\W / ;  # if $_ ~= /\W/ # see #822')
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: })('}')
-  sub main::classify_digit
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::classify_digit()
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('classify_digit')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)

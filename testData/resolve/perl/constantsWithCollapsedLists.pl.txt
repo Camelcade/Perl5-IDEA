@@ -9,62 +9,47 @@ PerlVariableReference at (111,115); text in range: 'hash' => 0 results:
 PerlVariableReference at (145,149); text in range: 'hash' => 0 results:
 
 PerlSubReference at (1337,2297); text in range: 'ThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100Chars' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_DQ at 177 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::ThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100CharsThisConstantIsLongerThan100Chars; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 177 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2299,2305); text in range: 'CONST1' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_BARE at 19 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 19 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2307,2313); text in range: 'CONST2' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_SQ at 53 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 53 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2315,2321); text in range: 'CONST3' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_DQ at 88 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 88 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2323,2329); text in range: 'CONST4' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_SQ at 121 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 121 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2331,2337); text in range: 'CONST5' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_DQ at 155 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 155 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2339,2345); text in range: 'CONST6' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1163 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1163 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2347,2353); text in range: 'CONST7' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1181 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2355,2361); text in range: 'CONST8' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1199 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1199 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2363,2370); text in range: 'CONST16' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1217 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST16; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1217 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2372,2379); text in range: 'CONST17' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1236 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST17; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1236 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2381,2388); text in range: 'CONST18' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1255 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST18; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1255 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2390,2397); text in range: 'CONST26' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1274 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST26; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1274 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2399,2406); text in range: 'CONST27' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1293 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST27; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1293 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2408,2415); text in range: 'CONST28' => 1 results:
-	nodeless; PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)
-	Perl5: STRING_CONTENT at 1312 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST28; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1312 in constantsWithCollapsedLists.pl
 

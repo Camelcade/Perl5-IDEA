@@ -3,9 +3,8 @@ PerlVariableReference at (1,5); text in range: 'self' => 0 results:
 PerlSubReference at (7,13); text in range: 'helper' => 0 results:
 
 PerlNamespaceReference at (64,87); text in range: 'Mojolicious::Controller' => 1 results:
-	NAMESPACE at 0 in Controller.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 
 PerlSubReference at (91,99); text in range: 'myhelper' => 1 results:
-	nodeless; MojoHelperDefinition(LIGHT_METHOD_DEFINITION)
-	Perl5: STRING_BARE at 14 in mojoliciousHelper.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::myhelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 14 in mojoliciousHelper.pl
 

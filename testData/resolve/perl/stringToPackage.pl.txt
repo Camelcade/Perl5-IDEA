@@ -1,6 +1,6 @@
 PerlNamespaceReference at (30,43); text in range: 'Foo::Bar::Bla' => 1 results:
-	NAMESPACE at 0 in stringToPackage.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Bla at 0 in stringToPackage.pl
 
 PerlNamespaceReference at (65,78); text in range: 'Foo::Bar::Bla' => 1 results:
-	NAMESPACE at 0 in stringToPackage.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Bla at 0 in stringToPackage.pl
 

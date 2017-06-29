@@ -1,0 +1,29 @@
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 84 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 92 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 122 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 130 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 160 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 198 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 206 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 238 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 246 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 277 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 317 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 328 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 357 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 410 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 456 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 502 in mojoHelpers.pl
+
+Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 550 in mojoHelpers.pl
+

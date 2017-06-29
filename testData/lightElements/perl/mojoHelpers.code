@@ -1,0 +1,17 @@
+#!/usr/bin/perl
+package Something;
+use Mojo::Base 'Mojolicious::Controller';
+
+$app->helper( "somehelper" => sub{});
+$app->helper( 'somehelper' => sub{});
+$app->helper( `somehelper` => sub{});
+$app->helper( qq"somehelper" => sub{});
+$app->helper( q'somehelper' => sub{});
+$app->helper( qx`somehelper` => sub{});
+$app->helper( qw"somehelper" => sub{});
+$app->helper( qw"somehelper otherhelper" => sub{});
+
+$app->helper( "somehelper$somevar" => sub{});
+$app->helper( "somehelper@somevar" => sub{});
+$app->helper( "somehelper${\'some'}" => sub{});
+$app->helper( "somehelper@{['some']}" => sub{});

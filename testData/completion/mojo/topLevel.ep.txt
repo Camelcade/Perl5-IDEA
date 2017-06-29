@@ -343,4 +343,3 @@ Lookups: week_field; Text: week_field; Tail: ($c, $name); Type: Mojolicious::Plu
 Lookups: write; Text: write; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: x; Text: x; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: xor; Text: xor; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: {name}_field; Text: {name}_field; Tail: null; Type: Mojolicious::Controller; Icon: /scalar_gutter_icon.png; Type Icon: null

@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.injected.editor.EditorWindow;
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
@@ -427,6 +428,23 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
   protected void addCustomPackage() {
     myFixture.copyFileToProject("MyCustomPackage.pm");
+  }
+
+  protected String serializePsiElement(@NotNull PsiElement element) {
+    StringBuilder sb = new StringBuilder();
+    sb.append(element);
+    ASTNode node = element.getNode();
+    if (node != null) {
+      sb.append(" at ").append(node.getStartOffset()).append(" in ").append(element.getContainingFile().getName());
+    }
+    PsiElement navigationElement = element.getNavigationElement();
+    if (navigationElement == null) {
+      sb.append("; no navigation element;");
+    }
+    else if (navigationElement != element) {
+      sb.append("; navigated to: ").append(serializePsiElement(navigationElement));
+    }
+    return sb.toString();
   }
 
   public static Application getApplication() {

@@ -182,6 +182,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
   @Override
   public String toString() {
-    return "sub " + getCanonicalName();
+    return super.toString() + "@" + getCanonicalName();
   }
 }

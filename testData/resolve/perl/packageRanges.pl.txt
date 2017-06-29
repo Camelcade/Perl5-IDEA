@@ -1,48 +1,48 @@
 PerlNamespaceReference at (69,86); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlSubReference at (88,95); text in range: 'somesub' => 1 results:
-	SUB_DECLARATION at 40 in packageRanges.pl
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::Package::somesub at 40 in packageRanges.pl
 
 PerlNamespaceReference at (99,116); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlSubReference at (120,127); text in range: 'somesub' => 1 results:
-	SUB_DECLARATION at 40 in packageRanges.pl
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::Package::somesub at 40 in packageRanges.pl
 
 PerlNamespaceReference at (131,148); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlSubReference at (150,157); text in range: 'somesub' => 1 results:
-	SUB_DECLARATION at 40 in packageRanges.pl
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::Package::somesub at 40 in packageRanges.pl
 
 PerlNamespaceReference at (161,178); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlSubReference at (179,186); text in range: 'somesub' => 1 results:
-	SUB_DECLARATION at 40 in packageRanges.pl
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::Package::somesub at 40 in packageRanges.pl
 
 PerlNamespaceReference at (191,208); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlVariableReference at (210,213); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 34 in packageRanges.pl
 
 PerlNamespaceReference at (216,233); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlVariableReference at (234,237); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 34 in packageRanges.pl
 
 PerlNamespaceReference at (240,257); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlVariableReference at (259,262); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 34 in packageRanges.pl
 
 PerlNamespaceReference at (265,282); text in range: 'Foo::Bar::Package' => 1 results:
-	NAMESPACE at 0 in packageRanges.pl
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Package at 0 in packageRanges.pl
 
 PerlVariableReference at (283,286); text in range: 'var' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 34 in packageRanges.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 34 in packageRanges.pl
 

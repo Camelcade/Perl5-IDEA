@@ -22,6 +22,8 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -30,6 +32,8 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElementStub> extends PerlStubBasedPsiElementBase<Stub>
   implements PerlPolyNamedElement {
@@ -88,5 +92,22 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
     }
 
     return super.processDeclarations(processor, state, lastParent, place);
+  }
+
+  /**
+   * Checks if we can treat this element as text identifier. Atm: no interpolation, no XQ strings
+   */
+  protected boolean isAcceptableIdentifierElement(@NotNull PsiElement identifierElement) {
+    IElementType elementType = PsiUtilCore.getElementType(identifierElement);
+    if (elementType == STRING_BARE || elementType == STRING_SQ || elementType == STRING_CONTENT) {
+      return true;
+    }
+    else if (elementType == STRING_XQ) {
+      return false;
+    }
+    else if (elementType == STRING_DQ) {
+      return identifierElement.getChildren().length == 0;
+    }
+    return false;
   }
 }

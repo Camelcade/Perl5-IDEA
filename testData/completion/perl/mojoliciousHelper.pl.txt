@@ -1,4 +1,3 @@
-Lookups: ${name}_field; Text: ${name}_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: accepts; Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null

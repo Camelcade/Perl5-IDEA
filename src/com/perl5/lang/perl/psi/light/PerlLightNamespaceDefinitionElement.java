@@ -172,4 +172,9 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     result = 31 * result + myExportTags.hashCode();
     return result;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "@" + getPackageName();
+  }
 }

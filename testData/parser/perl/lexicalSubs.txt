@@ -1,48 +1,48 @@
 Perl5
-  sub main::mysub1
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::mysub1
     PsiElement(Perl5: my)('my')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mysub1')
     PsiElement(Perl5: ;)(';')
-  sub main::mysub2
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::mysub2
     PsiElement(Perl5: my)('my')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mysub2')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  sub main::statesub1
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::statesub1
     PsiElement(Perl5: state)('state')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('statesub1')
     PsiElement(Perl5: ;)(';')
-  sub main::statesub2
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::statesub2
     PsiElement(Perl5: state)('state')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('statesub2')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  sub main::oursub1
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::oursub1
     PsiElement(Perl5: our)('our')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('oursub1')
     PsiElement(Perl5: ;)(';')
-  sub main::oursub2
+  PsiPerlSubDeclarationImpl(SUB_DECLARATION)@main::oursub2
     PsiElement(Perl5: our)('our')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('oursub2')
     PsiElement(Perl5: ()('(')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  sub main::mysub1
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mysub1()
     PsiElement(Perl5: my)('my')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mysub1')
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  sub main::mysub2
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mysub2()
     PsiElement(Perl5: my)('my')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mysub2')
@@ -51,14 +51,14 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  sub main::statesub1
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::statesub1()
     PsiElement(Perl5: state)('state')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('statesub1')
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  sub main::statesub2
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::statesub2()
     PsiElement(Perl5: state)('state')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('statesub2')
@@ -67,14 +67,14 @@ Perl5
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  sub main::oursub1
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::oursub1()
     PsiElement(Perl5: our)('our')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('oursub1')
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
       PsiElement(Perl5: })('}')
-  sub main::oursub2
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::oursub2()
     PsiElement(Perl5: our)('our')
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('oursub2')

@@ -1,6 +1,6 @@
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
-  PsiPerlNamespaceDefinitionImpl(NAMESPACE)
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test
     PsiElement(Perl5: package)('package')
     PerlNamespaceElementImpl(Perl5: package::name)('Class::Accessor::Test')
     PsiElement(Perl5: ;)(';')

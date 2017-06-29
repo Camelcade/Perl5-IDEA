@@ -166,4 +166,9 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   public PsiPerlBlock getSubDefinitionBody() {
     return mySubDefinitionBody;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "@" + getCanonicalName() + getSubArgumentsListAsString();
+  }
 }

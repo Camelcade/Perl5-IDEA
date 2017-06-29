@@ -17,10 +17,8 @@
 package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
@@ -121,21 +119,7 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
       PsiElement targetElement = result.getElement();
       assertNotNull(targetElement);
 
-      sb.append('\t');
-
-      ASTNode targetElementNode = targetElement.getNode();
-
-      if (targetElementNode == null) {
-        sb.append("nodeless; ").append(targetElement.toString()).append("\n\t");
-        targetElementNode = targetElement.getNavigationElement().getNode();
-      }
-
-      sb.append(targetElementNode == null ? targetElement.getClass().getSimpleName() : PsiUtilCore.getElementType(targetElementNode))
-        .append(" at ")
-        .append(targetElementNode == null ? targetElement.getTextOffset() : targetElementNode.getStartOffset())
-        .append(" in ")
-        .append(targetElement.getContainingFile().getName())
-        .append('\n');
+      sb.append('\t').append(serializePsiElement(targetElement)).append("\n");
     }
     return sb.toString();
   }

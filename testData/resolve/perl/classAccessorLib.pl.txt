@@ -1,147 +1,126 @@
 PerlNamespaceReference at (0,13); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (17,31); text in range: 'lib_simple_ro1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 215 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_ro1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 215 in ClassAccessor.pm
 
 PerlNamespaceReference at (33,46); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (50,69); text in range: 'lib_simple_other_ro' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 230 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 230 in ClassAccessor.pm
 
 PerlNamespaceReference at (71,84); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (88,107); text in range: 'lib_simple_third_ro' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 412 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 412 in ClassAccessor.pm
 
 PerlNamespaceReference at (109,122); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (126,140); text in range: 'lib_simple_rw1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 142 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_rw1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 142 in ClassAccessor.pm
 
 PerlNamespaceReference at (142,155); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (159,178); text in range: 'lib_simple_other_rw' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 157 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 157 in ClassAccessor.pm
 
 PerlNamespaceReference at (180,193); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (197,216); text in range: 'lib_simple_third_rw' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 356 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 356 in ClassAccessor.pm
 
 PerlNamespaceReference at (218,231); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (235,249); text in range: 'lib_simple_wo1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 288 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_wo1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 288 in ClassAccessor.pm
 
 PerlNamespaceReference at (251,264); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (268,287); text in range: 'lib_simple_other_wo' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 303 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 303 in ClassAccessor.pm
 
 PerlNamespaceReference at (289,302); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (306,325); text in range: 'lib_simple_third_wo' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 468 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 468 in ClassAccessor.pm
 
 PerlNamespaceReference at (327,340); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (344,359); text in range: 'get_lib_fbp_ro1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 641 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 641 in ClassAccessor.pm
 
 PerlNamespaceReference at (361,374); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (378,393); text in range: 'get_lib_fbp_ro2' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 676 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 676 in ClassAccessor.pm
 
 PerlNamespaceReference at (395,408); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (412,427); text in range: 'get_lib_fbp_ro3' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 853 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 853 in ClassAccessor.pm
 
 PerlNamespaceReference at (429,442); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (446,461); text in range: 'get_lib_fbp_rw1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 559 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 559 in ClassAccessor.pm
 
 PerlNamespaceReference at (463,476); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (480,495); text in range: 'get_lib_fbp_rw2' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 591 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 591 in ClassAccessor.pm
 
 PerlNamespaceReference at (497,510); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (514,529); text in range: 'get_lib_fbp_rw3' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 806 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 806 in ClassAccessor.pm
 
 PerlNamespaceReference at (531,544); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (548,563); text in range: 'set_lib_fbp_wo1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 726 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 726 in ClassAccessor.pm
 
 PerlNamespaceReference at (565,578); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (582,597); text in range: 'set_lib_fbp_wo2' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 761 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 761 in ClassAccessor.pm
 
 PerlNamespaceReference at (599,612); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (616,631); text in range: 'set_lib_fbp_wo3' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 900 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 900 in ClassAccessor.pm
 
 PerlNamespaceReference at (633,646); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (650,665); text in range: 'set_lib_fbp_rw1' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 559 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 559 in ClassAccessor.pm
 
 PerlNamespaceReference at (667,680); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (684,699); text in range: 'set_lib_fbp_rw2' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 591 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 591 in ClassAccessor.pm
 
 PerlNamespaceReference at (701,714); text in range: 'ClassAccessor' => 1 results:
-	NAMESPACE at 16 in ClassAccessor.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 
 PerlSubReference at (718,733); text in range: 'set_lib_fbp_rw3' => 1 results:
-	nodeless; PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)
-	Perl5: STRING_CONTENT at 806 in ClassAccessor.pm
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 806 in ClassAccessor.pm
 

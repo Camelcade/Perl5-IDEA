@@ -271,6 +271,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return PerlNamespaceAnnotations.tryToFindAnnotations(this);
   }
 
+  @Override
+  public String toString() {
+    return super.toString() + "@" + getPackageName();
+  }
+
   public static class MroSearcher implements Processor<PsiElement> {
     public int counter = 0;
     private PerlMroType myResult = PerlMroType.DFS;

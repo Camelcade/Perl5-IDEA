@@ -46,5 +46,4 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   default List<PerlExportDescriptor> getImportedHashDescriptors() {
     return PerlHashUtil.getImportedHashesDescriptors(this);
   }
-
 }

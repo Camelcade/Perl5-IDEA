@@ -3,70 +3,70 @@ PerlVariableReference at (56,57); text in range: 'a' => 0 results:
 PerlVariableReference at (198,199); text in range: 'a' => 0 results:
 
 PerlHeredocReference at (223,227); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 23 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 23 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (228,232); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 34 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 34 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (335,339); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 45 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 45 in indentableHeredocSequentional.pl
 
 PerlVariableReference at (500,501); text in range: 'a' => 0 results:
 
 PerlHeredocReference at (535,539); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 80 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 80 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (594,598); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 91 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 91 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (687,691); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 102 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 102 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (705,709); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 113 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 113 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (768,772); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 125 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 125 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (865,869); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 137 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 137 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (883,887); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 149 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 149 in indentableHeredocSequentional.pl
 
 PerlVariableReference at (951,952); text in range: 'a' => 0 results:
 
 PerlVariableReference at (1109,1110); text in range: 'a' => 0 results:
 
 PerlHeredocReference at (1142,1146); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 918 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 918 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1155,1159); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 929 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 929 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1278,1282); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 940 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 940 in indentableHeredocSequentional.pl
 
 PerlVariableReference at (1475,1476); text in range: 'a' => 0 results:
 
 PerlHeredocReference at (1518,1522); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 975 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 975 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1593,1597); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 986 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 986 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1702,1706); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 997 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 997 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1736,1740); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 1008 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 1008 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1815,1819); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 1020 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 1020 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1928,1932); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 1032 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 1032 in indentableHeredocSequentional.pl
 
 PerlHeredocReference at (1958,1962); text in range: 'HTML' => 1 results:
-	Perl5: HEREDOC_OPENER at 1044 in indentableHeredocSequentional.pl
+	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 1044 in indentableHeredocSequentional.pl
 

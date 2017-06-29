@@ -1,5 +1,5 @@
 Perl5
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($left, $right)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -29,7 +29,7 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($first, undef, $third)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -65,7 +65,7 @@ Perl5
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($left, $right)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -98,7 +98,7 @@ Perl5
               PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('right')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($first_name, $surname, $nickname)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -144,7 +144,7 @@ Perl5
             PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($thing, undef)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -168,7 +168,7 @@ Perl5
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($filter, @inputs)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -206,7 +206,7 @@ Perl5
             PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('inputs')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($thing, undef)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -229,7 +229,7 @@ Perl5
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($filter, %inputs)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -283,7 +283,7 @@ Perl5
               PerlVariableNameElementImpl(Perl5: HASH_NAME)('inputs')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($thing, undef)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -306,7 +306,7 @@ Perl5
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('thing')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo()
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')
@@ -320,7 +320,7 @@ Perl5
             PsiElement(Perl5: NUMBER)('123')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  sub main::foo
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($left, $right)
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')

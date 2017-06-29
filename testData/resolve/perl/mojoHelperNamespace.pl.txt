@@ -5,28 +5,26 @@ PerlNamespaceReference at (47,66); text in range: 'Mojolicious::Plugin' => 0 res
 PerlVariableReference at (110,111); text in range: '_' => 0 results:
 
 PerlVariableReference at (119,122); text in range: 'app' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 101 in mojoHelperNamespace.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 101 in mojoHelperNamespace.pl
 
 PerlSubReference at (124,130); text in range: 'helper' => 0 results:
 
 PerlVariableReference at (207,211); text in range: 'self' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 179 in mojoHelperNamespace.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 179 in mojoHelperNamespace.pl
 
 PerlSubReference at (213,225); text in range: 'other_helper' => 1 results:
-	nodeless; MojoHelperDefinition(LIGHT_METHOD_DEFINITION)
-	Perl5: STRING_BARE at 277 in mojoHelperNamespace.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::other_helper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 277 in mojoHelperNamespace.pl
 
 PerlVariableReference at (252,255); text in range: 'app' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 101 in mojoHelperNamespace.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 101 in mojoHelperNamespace.pl
 
 PerlSubReference at (257,263); text in range: 'helper' => 0 results:
 
 PerlVariableReference at (325,326); text in range: '_' => 0 results:
 
 PerlVariableReference at (342,346); text in range: 'self' => 1 results:
-	VARIABLE_DECLARATION_ELEMENT at 315 in mojoHelperNamespace.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 315 in mojoHelperNamespace.pl
 
 PerlSubReference at (348,358); text in range: 'somehelper' => 1 results:
-	nodeless; MojoHelperDefinition(LIGHT_METHOD_DEFINITION)
-	Perl5: STRING_BARE at 144 in mojoHelperNamespace.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 144 in mojoHelperNamespace.pl
 

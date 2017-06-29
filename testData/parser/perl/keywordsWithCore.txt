@@ -143,7 +143,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('some')
     PsiElement(Perl5: =)('=')
     PsiElement(Perl5: FORMAT_TERMINATOR)('.')
-  sub main::subname
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::subname()
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('subname')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -156,7 +156,7 @@ Perl5
         PsiElement(Perl5: {)('{')
         PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
-  PsiPerlNamespaceDefinitionImpl(NAMESPACE)
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo
     PsiElement(Perl5: package)('package')
     PerlNamespaceElementImpl(Perl5: package::name)('Foo')
     PsiElement(Perl5: ;)(';')
@@ -489,7 +489,7 @@ Perl5
         PerlSubNameElementImpl(Perl5: subname)('some')
         PsiElement(Perl5: =)('=')
         PsiElement(Perl5: FORMAT_TERMINATOR)('.')
-      sub Foo::subname
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::subname()
         PsiElement(Perl5: sub)('CORE::sub')
         PerlSubNameElementImpl(Perl5: subname)('subname')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -502,7 +502,7 @@ Perl5
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: ;)(';')
-  PsiPerlNamespaceDefinitionImpl(NAMESPACE)
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo
     PsiElement(Perl5: package)('CORE::package')
     PerlNamespaceElementImpl(Perl5: package::name)('Foo')
     PsiElement(Perl5: ;)(';')

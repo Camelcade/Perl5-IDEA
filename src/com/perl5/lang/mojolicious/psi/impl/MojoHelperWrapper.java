@@ -21,7 +21,10 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlSelfHinter;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubExpr;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
@@ -64,9 +67,7 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
     }
 
     PsiElement identifierElement = listElements.get(0);
-
-    // fixme we could handle variable here
-    if (!(identifierElement instanceof PerlString || identifierElement instanceof PerlStringContentElement)) {
+    if (!isAcceptableIdentifierElement(identifierElement)) {
       return Collections.emptyList();
     }
 

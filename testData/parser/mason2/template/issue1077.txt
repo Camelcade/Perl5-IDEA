@@ -1,5 +1,5 @@
 Mason2 template file
-  MasonNamespaceDefinitionImpl(MASON_PACKAGE)
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
       PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('<b>')
       PsiPerlStatementImpl(Perl5: STATEMENT)

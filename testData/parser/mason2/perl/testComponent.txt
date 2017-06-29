@@ -1,5 +1,5 @@
 Mason2 pure perl file
-  MasonNamespaceDefinitionImpl(MASON_PACKAGE)
+  MasonNamespaceDefinitionImpl(MASON_PACKAGE)@null
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
       PsiPerlStatementImpl(Perl5: STATEMENT)
         PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
@@ -9,7 +9,7 @@ Mason2 pure perl file
             PerlStringContentElementImpl(Perl5: STRING_CONTENT)('Hi')
             PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
         PsiElement(Perl5: ;)(';')
-      sub main::blalba
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::blalba()
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('blalba')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -57,7 +57,7 @@ Mason2 pure perl file
             PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: POD)('=head3 test\nthis\n    is\n        test\n\n\n=cut')
-      sub main::hi
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::hi($self)
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('hi')
         PsiPerlBlockImpl(Perl5: BLOCK)

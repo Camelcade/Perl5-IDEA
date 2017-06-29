@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hurricup on 11.11.2015.
@@ -156,4 +157,11 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return null;
   }
 
+  @Override
+  public String toString() {
+    return super.toString() +
+           "(" +
+           getSubArgumentsList().stream().map(PerlSubArgument::toStringLong).collect(Collectors.joining(", ")) +
+           ")";
+  }
 }

@@ -73,14 +73,7 @@ public class PerlLineMarkersTest extends PerlLightCodeInsightFixtureTestCase {
         for (GotoRelatedItem gotoRelatedItem : gotoRelatedItems) {
           PsiElement element = gotoRelatedItem.getElement();
           if (element != null) {
-            b.append("    ")
-              .append(element)
-              .append(" in ")
-              .append(element.getContainingFile().getName())
-              .append(" at ")
-              .append(element.getNavigationElement().getNode().getStartOffset())
-              .append("\n")
-            ;
+            b.append("\t").append(serializePsiElement(element)).append("\n");
           }
         }
       }

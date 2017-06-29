@@ -1,72 +1,72 @@
 8 - 29: 'Some::Parent::Package': Subclasses
 Targets: 1
-    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in supermethods.pl at 542
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Some::Child::Package at 542 in supermethods.pl
 
 45 - 55: 'somemethod': Overriden methods
 Targets: 1
-    sub Some::Child::Package::somemethod in supermethods.pl at 621
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod() at 621 in supermethods.pl
 
 63 - 79: 'somemethod_shift': Overriden methods
 Targets: 1
-    sub Some::Child::Package::somemethod_shift in supermethods.pl at 639
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_shift($self) at 639 in supermethods.pl
 
 99 - 120: 'somemethod_shift_self': Overriden methods
 Targets: 1
-    sub Some::Child::Package::somemethod_shift_self in supermethods.pl at 675
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_shift_self($self) at 675 in supermethods.pl
 
 151 - 168: 'somemethod_unpack': Overriden methods
 Targets: 1
-    sub Some::Child::Package::somemethod_unpack in supermethods.pl at 728
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_unpack($self, %kwargs) at 728 in supermethods.pl
 
 216 - 231: 'CONSTANT_METHOD': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 797
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::CONSTANT_METHOD; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 797 in supermethods.pl
 
 258 - 280: 'OTHER_CONSTANT_METHOD1': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 839
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 839 in supermethods.pl
 
 291 - 313: 'OTHER_CONSTANT_METHOD2': Overriden methods
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 872
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 872 in supermethods.pl
 
 328 - 353: 'somemethod_with_lpe_block': Overriden methods
 Targets: 1
-    sub Some::Child::Package::somemethod_with_lpe_block in supermethods.pl at 905
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Child::Package::somemethod_with_lpe_block($self) at 905 in supermethods.pl
 
 550 - 570: 'Some::Child::Package': Parent classes
 Targets: 1
-    PsiPerlNamespaceDefinitionImpl(NAMESPACE) in supermethods.pl at 0
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Some::Parent::Package at 0 in supermethods.pl
 
 625 - 635: 'somemethod': Overriding method
 Targets: 1
-    sub Some::Parent::Package::somemethod in supermethods.pl at 41
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod() at 41 in supermethods.pl
 
 643 - 659: 'somemethod_shift': Overriding method
 Targets: 1
-    sub Some::Parent::Package::somemethod_shift in supermethods.pl at 59
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod_shift($self) at 59 in supermethods.pl
 
 679 - 700: 'somemethod_shift_self': Overriding method
 Targets: 1
-    sub Some::Parent::Package::somemethod_shift_self in supermethods.pl at 95
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod_shift_self($self) at 95 in supermethods.pl
 
 732 - 749: 'somemethod_unpack': Overriding method
 Targets: 1
-    sub Some::Parent::Package::somemethod_unpack in supermethods.pl at 147
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod_unpack($self, %kwargs) at 147 in supermethods.pl
 
 797 - 812: 'CONSTANT_METHOD': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 216
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::CONSTANT_METHOD; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 216 in supermethods.pl
 
 839 - 861: 'OTHER_CONSTANT_METHOD1': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 258
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::OTHER_CONSTANT_METHOD1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 258 in supermethods.pl
 
 872 - 894: 'OTHER_CONSTANT_METHOD2': Overriding method
 Targets: 1
-    PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION) in supermethods.pl at 291
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::OTHER_CONSTANT_METHOD2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 291 in supermethods.pl
 
 909 - 934: 'somemethod_with_lpe_block': Overriding method
 Targets: 1
-    sub Some::Parent::Package::somemethod_with_lpe_block in supermethods.pl at 324
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Some::Parent::Package::somemethod_with_lpe_block($self) at 324 in supermethods.pl
 
