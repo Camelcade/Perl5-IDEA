@@ -1,0 +1,6 @@
+Implicit variables provider: Mojolicious Perl5 Template at 0 in implicitVars.ep
+	$self@Mojolicious::Controller
+	$c@Mojolicious::Controller
+	$cb@null
+	$_O@null
+

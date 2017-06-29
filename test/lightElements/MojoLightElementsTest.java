@@ -17,14 +17,20 @@
 package lightElements;
 
 import base.PerlLightCodeInsightFixtureTestCase;
+import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 
-public class PerlLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
+public class MojoLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/lightElements/perl";
+    return "testData/lightElements/mojo";
   }
 
-  public void testMojoHelpers() {doTest();}
+  @Override
+  public String getFileExtension() {
+    return MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
+  }
+
+  public void testImplicitVars() {doTest();}
 
   private void doTest() {
     doTestLightElements();
