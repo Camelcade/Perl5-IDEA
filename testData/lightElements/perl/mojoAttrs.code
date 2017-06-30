@@ -4,7 +4,6 @@ has ['name1', "name2", `name3`];
 has [q'name1', qq"name2", qx`name3`];
 has ['name1', "name2$var", `name3$var`];
 has [q'name1', qq"name2$var", qx`name3$var`];
-has somename => is => 'rw';
 
 has name => 'foo';
 has name => sub {...};

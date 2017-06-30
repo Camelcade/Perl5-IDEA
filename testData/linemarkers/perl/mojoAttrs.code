@@ -11,7 +11,6 @@ has [q'name12',
     qq"name22", qx`name32`];
 has ['name13', "name23$var", `name33$var`];
 has [q'name14', qq"name24$var", qx`name34$var`];
-has somename => is => 'rw';
 
 has name51 => 'foo';
 has name6 => sub {...};
@@ -37,7 +36,6 @@ has [q'name12',
     qq"name22", qx`name32`];
 has ['name13', "name23$var", `name33$var`];
 has [q'name14', qq"name24$var", qx`name34$var`];
-has somename => is => 'rw';
 
 has name51 => 'foo';
 has name6 => sub {...};

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.parser.moose.psi.elementTypes.PerlMooseAttributeElementType;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.psi.stubs.imports.PerlNoStatementStubElementType;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStubElementType;
@@ -42,7 +43,7 @@ public interface PerlStubElementTypes {
   IStubElementType LIGHT_SUB_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_SUB_DEFINITION");
   IStubElementType LIGHT_METHOD_DEFINITION = new PerlLightSubDefinitionElementType("LIGHT_METHOD_DEFINITION");
   IStubElementType LIGHT_NAMESPACE_DEFINITION = new PerlLightNamespaceDefinitionElementType("LIGHT_NAMESPACE_DEFINITION");
-
+  IStubElementType LIGHT_ATTRIBUTE_DEFINITION = new PerlMooseAttributeElementType("LIGHT_ATTRIBUTE");
 
   IStubElementType PERL_NAMESPACE = new PerlNamespaceDefinitionElementType("NAMESPACE");
 

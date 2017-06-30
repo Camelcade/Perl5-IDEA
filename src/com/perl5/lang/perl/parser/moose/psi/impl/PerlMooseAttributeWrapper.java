@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
@@ -31,18 +32,25 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlHashEntry;
+import com.perl5.lang.perl.util.PerlHashUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
 public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
+  private static final String MUTATOR_KEY = "writer";
+  private static final String ACCESSOR_KEY = "accessor";
+  private static final String READER_KEY = "reader";
+  private static final List<String> MOOSE_SUB_NAMES_KEYS = Arrays.asList(
+    READER_KEY, MUTATOR_KEY, ACCESSOR_KEY, "predicate", "clearer"
+  );
+
   public PerlMooseAttributeWrapper(@NotNull PerlPolyNamedElementStub stub,
                                    @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
@@ -56,8 +64,16 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromStubs(@NotNull PerlPolyNamedElementStub stub) {
     return stub.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION) // fixme how to distinct mojo from non-mojo
-      .map(childStub -> setMojoReturnsComputation(new PerlLightMethodDefinitionElement<>(this, (PerlSubDefinitionStub)childStub)))
+      .map(childStub -> {
+        IStubElementType stubType = childStub.getStubType();
+        if (stubType == LIGHT_METHOD_DEFINITION) {
+          return setMojoReturnsComputation(new PerlLightMethodDefinitionElement<>(this, (PerlSubDefinitionStub)childStub));
+        }
+        else if (stubType == LIGHT_ATTRIBUTE_DEFINITION) {
+          return new PerlAttributeDefinition(this, (PerlSubDefinitionStub)childStub);
+        }
+        throw new IllegalArgumentException("Unexpected stub type: " + stubType);
+      })
       .collect(Collectors.toList());
   }
 
@@ -85,8 +101,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
   @NotNull
   private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull List<PsiElement> identifiers) {
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    String packageName = PerlPackageUtil.getContextPackageName(this);
     for (PsiElement identifier : identifiers) {
-      String packageName = PerlPackageUtil.getContextPackageName(this);
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
         ElementManipulators.getValueText(identifier),
@@ -117,6 +133,66 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
                                                                       @NotNull List<PsiElement> listElements) {
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    String packageName = PerlPackageUtil.getContextPackageName(this);
+
+    Map<String, PerlHashEntry> parameters = PerlHashUtil.packToHash(listElements.subList(1, listElements.size()));
+    PerlHashEntry isParameter = parameters.get("is");
+    boolean isWritable = isParameter != null && StringUtil.equals("rw", isParameter.getValueString());
+    PsiElement forcedIdentifier = null;
+
+    for (String key : MOOSE_SUB_NAMES_KEYS) {
+      PerlHashEntry entry = parameters.get(key);
+      if (entry == null || !isAcceptableIdentifierElement(entry.valueElement)) {
+        continue;
+      }
+
+      String methodName = entry.getValueString();
+      if (StringUtil.isEmpty(methodName)) {
+        continue;
+      }
+
+      if (!isWritable && key.equals(READER_KEY) || key.equals(ACCESSOR_KEY)) {
+        forcedIdentifier = entry.valueElement;
+        continue;
+      }
+
+      PsiElement identifier = entry.getNonNullValueElement();
+      result.add(
+        new PerlLightMethodDefinitionElement<>(
+          this,
+          ElementManipulators.getValueText(identifier),
+          LIGHT_METHOD_DEFINITION,
+          identifier,
+          packageName,
+          key.equals(MUTATOR_KEY)
+          ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value"))
+          : Collections.emptyList(),
+          PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
+        )
+      );
+    }
+
+    // handle isa
+    // handle does
+    // handle required
+    // handle handles ARRAY
+    // handle handles HASH
+
+    for (PsiElement identifier : identifiers) {
+      if (forcedIdentifier != null) {
+        identifier = forcedIdentifier;
+      }
+      result.add(new PerlAttributeDefinition(
+        this,
+        ElementManipulators.getValueText(identifier),
+        LIGHT_ATTRIBUTE_DEFINITION,
+        identifier,
+        packageName,
+        isWritable ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")) : Collections.emptyList(),
+        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
+      ));
+    }
+
     return result;
   }
 }

@@ -105,7 +105,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
 
     Map<String, PerlHashEntry> exceptionSettings =
       listElements.size() > currentIndex + 1
-      ? PerlHashUtil.collectHashElements(listElements.get(currentIndex + 1))
+      ? PerlHashUtil.collectHashMap(listElements.get(currentIndex + 1))
       : Collections.emptyMap();
 
     // Building fields

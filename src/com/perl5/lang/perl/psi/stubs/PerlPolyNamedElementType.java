@@ -44,7 +44,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     DIRECT_MAP.put(LIGHT_NAMESPACE_DEFINITION, 2);
     DIRECT_MAP.put(LIGHT_METHOD_DEFINITION, 3);
     DIRECT_MAP.put(CLASS_ACCESSOR_METHOD, 4);
-    assert DIRECT_MAP.size() == 4;
+    DIRECT_MAP.put(LIGHT_ATTRIBUTE_DEFINITION, 5);
+    assert DIRECT_MAP.size() == 5;
 
     DIRECT_MAP.forEachEntry((type, id) -> {
       REVERSE_MAP.put(id, type);

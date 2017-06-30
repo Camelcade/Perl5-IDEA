@@ -147,11 +147,14 @@ public class PerlHashUtil implements PerlElementTypes {
    * @return map of key_value => Pair(keyElement,valElement)
    */
   @NotNull
-  public static Map<String, PerlHashEntry> collectHashElements(@NotNull PsiElement rootElement) {
+  public static Map<String, PerlHashEntry> collectHashMap(@NotNull PsiElement rootElement) {
+    return packToHash(collectHashElements(rootElement));
+  }
 
+  public static Map<String, PerlHashEntry> packToHash(@NotNull List<PsiElement> elements) {
     Map<String, PerlHashEntry> result = new THashMap<>();
 
-    processHashElements(rootElement, (keyElement, valElement) -> {
+    processAsHash(elements, (keyElement, valElement) -> {
       String keyText = ElementManipulators.getValueText(keyElement);
       if (StringUtil.isNotEmpty(keyText)) {
         result.put(keyText, PerlHashEntry.create(keyElement, valElement));
@@ -163,19 +166,25 @@ public class PerlHashUtil implements PerlElementTypes {
   }
 
   public static boolean processHashElements(@NotNull PsiElement rootElement, @NotNull PairProcessor<PsiElement, PsiElement> processor) {
+    return processAsHash(collectHashElements(rootElement), processor);
+  }
+
+  /**
+   * @return hashmap as list of key, val
+   */
+  public static List<PsiElement> collectHashElements(@NotNull PsiElement rootElement) {
     if (PsiUtilCore.getElementType(rootElement) == ANON_HASH) {
       rootElement = ((PsiPerlAnonHash)rootElement).getExpr();
     }
 
     if (!HASH_ELEMENTS_CONTAINERS.contains(PsiUtilCore.getElementType(rootElement))) {
-      return true;
+      return Collections.emptyList();
     }
 
-    List<PsiElement> elements = PerlArrayUtil.collectListElements(rootElement);
-    if (elements.isEmpty()) {
-      return true;
-    }
+    return PerlArrayUtil.collectListElements(rootElement);
+  }
 
+  public static boolean processAsHash(@NotNull List<PsiElement> elements, @NotNull PairProcessor<PsiElement, PsiElement> processor) {
     boolean isKey = true;
     for (int i = 0; i < elements.size(); i++) {
       PsiElement listElement = elements.get(i);
