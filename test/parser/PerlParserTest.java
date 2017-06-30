@@ -29,6 +29,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testClassAccessorSubDeclaration() {doTest();}
+
   public void testUseBareword() {doTest();}
 
   public void testClassAccessor() {doTest();}

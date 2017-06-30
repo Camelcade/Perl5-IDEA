@@ -1,0 +1,42 @@
+Perl5
+  PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor
+    PsiElement(Perl5: package)('package')
+    PerlNamespaceElementImpl(Perl5: package::name)('Class::Accessor')
+    PsiElement(Perl5: ;)(';')
+    PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::new
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('new')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::mk_accessors
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('mk_accessors')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::follow_best_practice
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('follow_best_practice')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::mk_ro_accessors
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('mk_ro_accessors')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::mk_wo_accessors
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('mk_wo_accessors')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Class::Accessor::helper
+        PsiElement(Perl5: sub)('sub')
+        PerlSubNameElementImpl(Perl5: subname)('helper')
+        PsiPerlBlockImpl(Perl5: BLOCK)
+          PsiElement(Perl5: {)('{')
+          PsiElement(Perl5: })('}')

@@ -885,12 +885,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <AFTER_DEREFERENCE>{
-//	"follow_best_practice"		{yybegin(AFTER_VALUE);return RESERVED_FOLLOW_BEST_PRACTICE;}
-//	"mk_accessors"				{yybegin(AFTER_VALUE);return RESERVED_MK_ACCESSORS;}
-//	"mk_ro_accessors"			{yybegin(AFTER_VALUE);return RESERVED_MK_RO_ACCESSORS;}
-//	"mk_wo_accessors"			{yybegin(AFTER_VALUE);return RESERVED_MK_WO_ACCESSORS;}
-	"helper"					{yybegin(AFTER_VALUE);return MOJO_HELPER_METHOD;}
-	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndex();}
+	"helper"			{yybegin(AFTER_VALUE);return MOJO_HELPER_METHOD;}
+	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndexWithCustomTokens();}
 }
 
 // following is for require

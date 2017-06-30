@@ -1,0 +1,17 @@
+package Class::Accessor;
+
+sub new {}
+
+sub mk_accessors {
+}
+
+sub follow_best_practice {
+}
+
+sub mk_ro_accessors {
+}
+
+sub mk_wo_accessors {
+}
+
+sub helper{}

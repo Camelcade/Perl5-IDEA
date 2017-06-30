@@ -410,6 +410,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
    *
    * @return guessed token
    */
+  @NotNull
   protected IElementType getIdentifierTokenWithoutIndex() {
     CharSequence tokenText = yytext();
     int lastIndex;
@@ -423,10 +424,17 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       pushStateAndBegin(LEX_SUB_NAME);
       return QUALIFYING_PACKAGE;
     }
-    else {
-      IElementType tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
-      return tokenType == null ? SUB_NAME : tokenType;
+    return SUB_NAME;
+  }
+
+  @NotNull
+  protected IElementType getIdentifierTokenWithoutIndexWithCustomTokens() {
+    IElementType defaultToken = getIdentifierTokenWithoutIndex();
+    if (defaultToken != SUB_NAME) {
+      return defaultToken;
     }
+    IElementType tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
+    return tokenType == null ? defaultToken : tokenType;
   }
 
   /**
