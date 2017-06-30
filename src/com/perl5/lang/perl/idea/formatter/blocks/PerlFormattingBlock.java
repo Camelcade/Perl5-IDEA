@@ -27,6 +27,7 @@ import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
 import com.intellij.util.containers.FactoryMap;
@@ -250,6 +251,13 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
           && !isNewLineForbidden((PerlFormattingBlock)child1)
         ) {
         return Spacing.createSpacing(0, 0, 1, true, 1);
+      }
+
+      if (elementType == PARENTHESISED_CALL_ARGUMENTS &&
+          child2Type == RIGHT_PAREN &&
+          PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
+        ) {
+        return Spacing.createSpacing(0, 0, 0, true, 0);
       }
     }
     return myContext.getSpacingBuilder().getSpacing(this, child1, child2);

@@ -1,0 +1,14 @@
+print( somesub( 1, 2, 3 ));
+print( somesub());
+print( somesub( 1 ));
+
+print( OF somesub( 1, 2, 3 ));
+print( OF somesub());
+print( OF somesub( 1 ));
+
+somesub( somesub( 1, 2, 3 ));
+somesub( somesub());
+somesub( somesub( 1 ));
+$self->somesub( 1, 2, 3 );
+$self->somesub();
+$self->somesub( 1 );

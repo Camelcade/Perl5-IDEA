@@ -42,6 +42,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
+  public void testCallArgumentsTrue() {
+    getCustomSettings().SPACES_WITHIN_CALL_ARGUMENTS = true;
+    doFormatTest();
+  }
+
+  public void testCallArgumentsFalse() {
+    getCustomSettings().SPACES_WITHIN_CALL_ARGUMENTS = false;
+    doFormatTest();
+  }
+
   public void testSpacingInCompoundFalse() {
     getSettings().SPACE_WITHIN_IF_PARENTHESES = false;
     doFormatTest();
