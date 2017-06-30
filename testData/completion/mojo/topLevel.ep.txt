@@ -67,7 +67,7 @@ Lookups: accept; Text: accept; Tail: null; Type: null; Icon: /subroutine_gutter_
 Lookups: accepts; Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: alarm; Text: alarm; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: and; Text: and; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: app; Text: app; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: app; Text: app; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: atan2; Text: atan2; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: b; Text: b; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: bind; Text: bind; Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null

@@ -1,7 +1,7 @@
 Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: accepts; Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
-Lookups: app; Text: app; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: app; Text: app; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: b; Text: b; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: button_to; Text: button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: c; Text: c; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
@@ -24,7 +24,7 @@ Lookups: helpers; Text: helpers; Tail: null; Type: Mojolicious::Controller; Icon
 Lookups: image; Text: image; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: include; Text: include; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: input_tag; Text: input_tag; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
-Lookups: match; Text: match; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: match; Text: match; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: on; Text: on; Tail: ($name, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: param; Text: param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: password_field; Text: password_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
@@ -41,7 +41,7 @@ Lookups: respond_to; Text: respond_to; Tail: null; Type: Mojolicious::Controller
 Lookups: send; Text: send; Tail: ($msg, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: session; Text: session; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: signed_cookie; Text: signed_cookie; Tail: ($name, $value, $options); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
-Lookups: tx; Text: tx; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: tx; Text: tx; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: ua; Text: ua; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 Lookups: url_for; Text: url_for; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: validation; Text: validation; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
