@@ -28,6 +28,8 @@ public class PerlLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testConstants() {doTest();}
 
+  public void testExceptionClass() {doTest();}
+
   private void doTest() {
     doTestLightElements();
   }

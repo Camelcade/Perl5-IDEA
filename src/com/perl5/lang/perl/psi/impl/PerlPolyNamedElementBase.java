@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -97,7 +98,10 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
   /**
    * Checks if we can treat this element as text identifier. Atm: no interpolation, no XQ strings
    */
-  protected boolean isAcceptableIdentifierElement(@NotNull PsiElement identifierElement) {
+  protected boolean isAcceptableIdentifierElement(@Nullable PsiElement identifierElement) {
+    if (identifierElement == null) {
+      return false;
+    }
     IElementType elementType = PsiUtilCore.getElementType(identifierElement);
     if (elementType == STRING_BARE || elementType == STRING_SQ || elementType == STRING_CONTENT) {
       return true;
