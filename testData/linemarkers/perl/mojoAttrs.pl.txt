@@ -1,0 +1,168 @@
+8 - 16: 'Foo::Bar': Subclasses
+Targets: 1
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar::Child at 479 in mojoAttrs.pl
+
+22 - 28: ''name'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 529 in mojoAttrs.pl
+
+35 - 42: ''name1'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 542 in mojoAttrs.pl
+
+48 - 55: ''name2'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 555 in mojoAttrs.pl
+
+61 - 68: ''name3'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 568 in mojoAttrs.pl
+
+77 - 82: 'name4': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 584 in mojoAttrs.pl
+
+91 - 96: 'name5': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 598 in mojoAttrs.pl
+
+105 - 113: ''name11'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name11($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 612 in mojoAttrs.pl
+
+119 - 127: '"name21"': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name21($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 626 in mojoAttrs.pl
+
+145 - 154: 'q'name12'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name12($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 652 in mojoAttrs.pl
+
+160 - 170: 'qq"name22"': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name22($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 667 in mojoAttrs.pl
+
+190 - 198: ''name13'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name13($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 697 in mojoAttrs.pl
+
+234 - 243: 'q'name14'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name14($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 741 in mojoAttrs.pl
+
+311 - 317: 'name51': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name51($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 818 in mojoAttrs.pl
+
+332 - 337: 'name6': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name6($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 839 in mojoAttrs.pl
+
+357 - 365: ''name17'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name17($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 864 in mojoAttrs.pl
+
+375 - 383: ''name27'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name27($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 882 in mojoAttrs.pl
+
+393 - 401: ''name37'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name37($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 900 in mojoAttrs.pl
+
+418 - 426: ''name18'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name18($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 925 in mojoAttrs.pl
+
+436 - 444: ''name28'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name28($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 943 in mojoAttrs.pl
+
+454 - 462: ''name38'': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 961 in mojoAttrs.pl
+
+487 - 502: 'Foo::Bar::Child': Parent classes
+Targets: 1
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrs.pl
+
+529 - 535: ''name'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 22 in mojoAttrs.pl
+
+542 - 549: ''name1'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
+
+555 - 562: ''name2'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 48 in mojoAttrs.pl
+
+568 - 575: ''name3'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 61 in mojoAttrs.pl
+
+584 - 589: 'name4': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 77 in mojoAttrs.pl
+
+598 - 603: 'name5': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 91 in mojoAttrs.pl
+
+612 - 620: ''name11'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name11($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 105 in mojoAttrs.pl
+
+626 - 634: '"name21"': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name21($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 119 in mojoAttrs.pl
+
+652 - 661: 'q'name12'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name12($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 145 in mojoAttrs.pl
+
+667 - 677: 'qq"name22"': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name22($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 160 in mojoAttrs.pl
+
+697 - 705: ''name13'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name13($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 190 in mojoAttrs.pl
+
+741 - 750: 'q'name14'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name14($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 234 in mojoAttrs.pl
+
+818 - 824: 'name51': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name51($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 311 in mojoAttrs.pl
+
+839 - 844: 'name6': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name6($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 332 in mojoAttrs.pl
+
+864 - 872: ''name17'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name17($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 357 in mojoAttrs.pl
+
+882 - 890: ''name27'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name27($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 375 in mojoAttrs.pl
+
+900 - 908: ''name37'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name37($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 393 in mojoAttrs.pl
+
+925 - 933: ''name18'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name18($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 418 in mojoAttrs.pl
+
+943 - 951: ''name28'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name28($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 436 in mojoAttrs.pl
+
+961 - 969: ''name38'': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 454 in mojoAttrs.pl
+

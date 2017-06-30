@@ -17,14 +17,24 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.ElementManipulators;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,6 +63,51 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
-    return Collections.emptyList();
+    PsiElement firstChild = getFirstChild();
+    List<PsiElement> listElements = PerlArrayUtil.collectListElements(firstChild);
+    if (listElements.isEmpty()) {
+      return Collections.emptyList();
+    }
+    PsiElement namesContainer = listElements.get(0);
+    if (namesContainer instanceof PsiPerlAnonArray) {
+      namesContainer = ((PsiPerlAnonArray)namesContainer).getExpr();
+    }
+    List<PsiElement> identifiers = ContainerUtil.filter(PerlArrayUtil.collectListElements(namesContainer),
+                                                        this::isAcceptableIdentifierElement);
+    if (identifiers.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    return listElements.size() < 3 ? createMojoAttributes(identifiers) : createMooseAttributes(identifiers, listElements);
+  }
+
+  private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull List<PsiElement> identifiers) {
+    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    for (PsiElement identifier : identifiers) {
+      PerlSubAnnotations annotations = PerlSubAnnotations.tryToFindAnnotations(identifier, getParent());
+      if (annotations == null) {
+        annotations = new PerlSubAnnotations();
+      }
+      String packageName = PerlPackageUtil.getContextPackageName(this);
+      annotations.setReturns(packageName);
+      result.add(new PerlLightMethodDefinitionElement<>(
+        this,
+        ElementManipulators.getValueText(identifier),
+        LIGHT_METHOD_DEFINITION,
+        identifier,
+        packageName,
+        Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
+        annotations
+      ));
+    }
+
+    return result;
+  }
+
+  private List<PerlDelegatingLightNamedElement> createMooseAttributes(@NotNull List<PsiElement> identifiers,
+                                                                      @NotNull List<PsiElement> listElements) {
+
+    List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
+    return result;
   }
 }

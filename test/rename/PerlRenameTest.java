@@ -25,6 +25,8 @@ public class PerlRenameTest extends PerlRenameTestCase {
     return "testData/rename/perl";
   }
 
+  public void testMojoAttrs() {doTest();}
+
   public void testClassAccessorSimple() {doTest();}
 
   public void testClassAccessorSimpleRo() {doTest();}

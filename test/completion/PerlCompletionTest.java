@@ -35,6 +35,8 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     return "testData/completion/perl";
   }
 
+  public void testMojoAttrs() {doTestCompletion();}
+
   public void testClassAccessor() {
     doTestCompletion();
   }

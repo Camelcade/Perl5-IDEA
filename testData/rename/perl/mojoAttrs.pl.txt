@@ -1,0 +1,4 @@
+package Foo::Bar;
+has ['name1', 'name2', 'name3', qw/NewName name5/];
+
+__PACKAGE__->NewName;

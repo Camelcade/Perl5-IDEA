@@ -1,0 +1,4 @@
+package Foo::Bar;
+has ['name1', 'name2', 'name3', qw/name4 name5/];
+
+__PACKAGE__->na<caret>me4;

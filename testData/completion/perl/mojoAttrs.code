@@ -1,0 +1,15 @@
+package Foo::Bar;
+has 'name';
+has ['name1', 'name2', 'name3', qw/name4 name5/];
+has ['name11', "name21", `name31`];
+has [q'name12', qq"name22", qx`name32`];
+has ['name13', "name23$var", `name33$var`];
+has [q'name14', qq"name24$var", qx`name34$var`];
+has somename => is => 'rw';
+
+has name51 => 'foo';
+has name6 => sub {...};
+has ['name17', 'name27', 'name37'] => 'foo';
+has ['name18', 'name28', 'name38'] => sub {...};
+
+__PACKAGE__-><caret>

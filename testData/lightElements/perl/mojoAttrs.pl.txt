@@ -1,0 +1,42 @@
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 4 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 4 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 16 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 17 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 26 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 47 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 53 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 66 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 67 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 76 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 99 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 100 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 110 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 137 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 138 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 178 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 179 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 224 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 253 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 253 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 272 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 272 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 295 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 296 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 305 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 314 in mojoAttrs.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 337 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 338 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 347 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 356 in mojoAttrs.pl
+

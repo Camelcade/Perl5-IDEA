@@ -36,6 +36,8 @@ public class PerlLineMarkersTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/linemarkers/perl";
   }
 
+  public void testMojoAttrs() {doTest();}
+
   public void testClassAccessor() {doTest();}
 
   public void testSupermethods() {
