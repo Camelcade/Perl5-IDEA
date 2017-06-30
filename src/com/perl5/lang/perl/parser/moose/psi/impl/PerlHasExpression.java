@@ -14,28 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.parser.builder;
+package com.perl5.lang.perl.parser.moose.psi.impl;
 
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.ASTNode;
+import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 
-/**
- * Created by hurricup on 23.04.2016.
- */
-public class PerlStringWrapperOnce extends PerlStringWrapper {
-  private boolean wrapped = false;
-
-  public PerlStringWrapperOnce(@NotNull IElementType targetElementType) {
-    super(targetElementType);
-  }
-
-  @Override
-  public boolean canProcess() {
-    return !wrapped;
-  }
-
-  @Override
-  protected void processed() {
-    wrapped = true;
+public class PerlHasExpression extends PsiPerlExprImpl {
+  public PerlHasExpression(ASTNode node) {
+    super(node);
   }
 }

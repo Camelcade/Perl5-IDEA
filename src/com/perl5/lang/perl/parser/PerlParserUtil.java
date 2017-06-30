@@ -30,8 +30,6 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.builder.PerlStringWrapper;
-import com.perl5.lang.perl.parser.elementTypes.PerlStringContentTokenType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -340,32 +338,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     }
     ((PerlBuilder)b).setSpecialVariableNamesAllowed(flagBackup);
     return r;
-  }
-
-  /**
-   * Parses string and wraps it if necessary
-   * fixme we should control where string is located, and avoid in hash indexes, for example
-   *
-   * @param b PerlBuilder
-   * @param l parsing level
-   * @return parsing result
-   */
-  public static boolean parseAndWrapStringContent(PsiBuilder b, @SuppressWarnings("unused") int l) {
-    assert b instanceof PerlBuilder;
-
-    IElementType tokenType = b.getTokenType();
-
-    if (tokenType instanceof PerlStringContentTokenType) {
-      PerlStringWrapper stringWrapper = ((PerlBuilder)b).getStringWrapper();
-      if (stringWrapper == null || !stringWrapper.canProcess() || tokenType != STRING_CONTENT) {
-        b.advanceLexer();
-      }
-      else {
-        stringWrapper.wrapNextToken((PerlBuilder)b);
-      }
-      return true;
-    }
-    return false;
   }
 
   /**

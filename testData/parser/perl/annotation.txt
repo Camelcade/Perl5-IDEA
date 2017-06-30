@@ -52,5 +52,7 @@ Perl5
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiPerlAnnotationNoinspectionImpl(Perl5: ANNOTATION_NOINSPECTION)
       PsiElement(Perl5: #@noinspection)('#@noinspection')
+      PsiErrorElement:Perl5: STRING_CONTENT expected, unexpected end of file
+        <empty list>
   PerlAnnotationContainerImpl(PERL_ANNOTATION)
     PsiComment(Perl5: COMMENT_LINE)('#@')

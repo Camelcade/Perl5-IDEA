@@ -38,10 +38,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
   boolean isInterpolated = false;
   // flag allowes special variable names
   boolean isSpecialVariableNamesAllowed = true;
-  /**
-   * This element may be set to make an additional wrapping for strings, like constants and so on
-   */
-  PerlStringWrapper stringWrapper = null;
 
   public PerlBuilder(PsiBuilder builder, GeneratedParserUtilBase.ErrorState state, PsiParser parser) {
     super(builder, state, parser);
@@ -96,18 +92,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
     boolean oldValue = isSpecialVariableNamesAllowed;
     isSpecialVariableNamesAllowed = specialVariableNamesAllowed;
     return oldValue;
-  }
-
-  @Deprecated // to be removed
-  public PerlStringWrapper getStringWrapper() {
-    return stringWrapper;
-  }
-
-  @Deprecated // to be removed
-  public PerlStringWrapper setStringWrapper(PerlStringWrapper stringWrapper) {
-    PerlStringWrapper currentValue = this.stringWrapper;
-    this.stringWrapper = stringWrapper;
-    return currentValue;
   }
 
   public PerlParserImpl getPerlParser() {

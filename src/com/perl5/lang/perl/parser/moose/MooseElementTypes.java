@@ -21,8 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
+import com.perl5.lang.perl.parser.moose.psi.elementTypes.PerlMooseAttributeWrapperElementType;
 import com.perl5.lang.perl.parser.moose.psi.impl.*;
-import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeElementType;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
 import org.jetbrains.annotations.NonNls;
@@ -100,17 +100,17 @@ public interface MooseElementTypes {
       return new PerlMooseBeforeStatementImpl(node);
     }
   };
-  IElementType MOOSE_STATEMENT_HAS = new PerlElementTypeEx("MOOSE_STATEMENT_HAS") {
-    @NotNull
-    @Override
-    public PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new PerlMooseHasStatementImpl(node);
-    }
-  };
 
   IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
   IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideElementType("MOOSE_STATEMENT_OVERRIDE");
-  IElementType MOOSE_ATTRIBUTE = new PerlMooseAttributeElementType("MOOSE_ATTRIBUTE");
+  IElementType MOOSE_ATTRIBUTE_WRAPPER = new PerlMooseAttributeWrapperElementType("ATTRIBUTE_WRAPPER");
+  IElementType MOOSE_HAS_EXPR = new PerlElementTypeEx("MOOSE_HAS_EXPR") {
+    @NotNull
+    @Override
+    public PsiElement getPsiElement(@NotNull ASTNode node) {
+      return new PerlHasExpression(node);
+    }
+  };
 
   class PerlMooseTokenType extends PerlTokenTypeEx {
     public PerlMooseTokenType(@NotNull @NonNls String debugName) {
