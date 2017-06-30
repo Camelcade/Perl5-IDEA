@@ -1,0 +1,68 @@
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER) at 67 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 84 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 101 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor4($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 135 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor5($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 153 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor_test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 279 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 296 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 311 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 322 in classAccessor.pl
+
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER_RO) at 342 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 363 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 380 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor4($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 414 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor5($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 432 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor_test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 558 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 575 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 590 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 601 in classAccessor.pl
+
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER_WO) at 620 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 641 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 658 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor4($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 692 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor5($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 710 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor_test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 836 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 853 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 868 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 879 in classAccessor.pl
+
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER) at 925 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 943 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor1($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 943 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 960 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor2($self, $new_value); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 960 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 994 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor4($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 994 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1012 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor5($self, $new_value); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1012 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor_test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1138 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1138 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_some; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1155 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_some($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1155 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in classAccessor.pl
+
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER_RO) at 1201 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1222 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1239 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1273 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1291 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor_test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1417 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_some; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1434 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1449 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1460 in classAccessor.pl
+
+Poly-named provider: PerlClassAccessorWrapper(CLASS_ACCESSOR_WRAPPER_WO) at 1479 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor1($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1500 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor2($self, $new_value); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1517 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor4($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1551 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor5($self, $new_value); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1569 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1695 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_some($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1712 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1727 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1738 in classAccessor.pl
+

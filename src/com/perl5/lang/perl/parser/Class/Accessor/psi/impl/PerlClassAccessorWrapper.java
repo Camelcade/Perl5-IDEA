@@ -85,6 +85,9 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     for (PsiElement listElement : listElements) {
+      if (!isAcceptableIdentifierElement(listElement)) {
+        continue;
+      }
       String baseName = ElementManipulators.getValueText(listElement);
       PerlSubAnnotations subAnnotations = computeSubAnnotations(this, listElement);
       for (Function<String, String> computation : getNamesComputations()) {
