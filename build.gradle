@@ -67,7 +67,9 @@ intellij {
 }
 
 runIdea{
-    systemProperty("idea.ProcessCanceledException", "disabled")
+    if( project.hasProperty("nocancel")){
+        systemProperty("idea.ProcessCanceledException", "disabled")
+    }
 }
 
 test {
