@@ -837,7 +837,7 @@ lp_not_expr ::= 'not' expr { rightAssociative=true }
 lp_and_expr ::= expr ('and' expr)+
 lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 
-print_expr ::=  ('print'|'printf'|'say') ( '(' [print_arguments] ')' | [print_arguments] ) {pin=1}
+print_expr ::=  ('print'|'printf'|'say') ( <<parenthesised_call_arguments [print_arguments] >> | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
 sub_expr ::=  'sub' sub_definition_parameters parse_block  // fixme make sure that this one checked after definition and declaration
