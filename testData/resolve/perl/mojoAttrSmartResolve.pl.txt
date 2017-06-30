@@ -1,0 +1,21 @@
+PerlNamespaceReference at (66,74); text in range: 'Foo::Bar' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrSmartResolve.pl
+
+PerlNamespaceReference at (127,135); text in range: 'Foo::Baz' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 37 in mojoAttrSmartResolve.pl
+
+PerlSubReference at (137,147); text in range: 'otherthing' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Baz::otherthing($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 80 in mojoAttrSmartResolve.pl
+
+PerlSubReference at (151,160); text in range: 'something' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::something($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 23 in mojoAttrSmartResolve.pl
+
+PerlNamespaceReference at (164,172); text in range: 'Foo::Baz' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 37 in mojoAttrSmartResolve.pl
+
+PerlSubReference at (174,184); text in range: 'otherthing' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Baz::otherthing($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 80 in mojoAttrSmartResolve.pl
+
+PerlSubReference at (191,200); text in range: 'something' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Baz::something($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 98 in mojoAttrSmartResolve.pl
+

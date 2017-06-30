@@ -238,11 +238,12 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
     if (reference instanceof PerlSubReference) {
       for (ResolveResult resolveResult : ((PerlSubReference)reference).multiResolve(false)) {
         PsiElement targetElement = resolveResult.getElement();
-        if (targetElement instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)targetElement).getReturns() != null) {
-          return ((PerlSubDefinitionElement)targetElement).getReturns();
-        }
-        else if (targetElement instanceof PerlSubDeclarationElement && ((PerlSubDeclarationElement)targetElement).getReturns() != null) {
-          return ((PerlSubDeclarationElement)targetElement).getReturns();
+        if (targetElement instanceof PerlSub) {
+          String returnType = ((PerlSub)targetElement).getReturns(subNameElement.getPackageName(),
+                                                                  methodContainer.getCallArgumentsList());
+          if (returnType != null) {
+            return returnType;
+          }
         }
       }
     }

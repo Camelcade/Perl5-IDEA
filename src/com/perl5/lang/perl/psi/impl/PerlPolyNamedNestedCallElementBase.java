@@ -23,12 +23,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,21 +47,6 @@ public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNa
   @NotNull
   public PsiPerlMethod getMethod() {
     return findNotNullChildByClass(PsiPerlMethod.class);
-  }
-
-  @NotNull
-  protected List<PsiElement> getCallArgumentsList() {
-    PsiPerlParenthesisedCallArgumentsImpl arguments = findChildByClass(PsiPerlParenthesisedCallArgumentsImpl.class);
-    // following should be in arguments psi
-    if (arguments == null) {
-      return Collections.emptyList();
-    }
-    PsiPerlExpr expression = PsiTreeUtil.getChildOfType(arguments, PsiPerlExpr.class);
-    if (expression == null) {
-      return Collections.emptyList();
-    }
-
-    return PerlArrayUtil.collectListElements(expression);
   }
 
   @Nullable

@@ -1,0 +1,14 @@
+package Foo::Bar;
+
+has 'something';
+
+package Foo::Baz;
+
+#@returns Foo::Bar;
+has 'otherthing';
+has 'something';
+
+package main;
+
+Foo::Baz->otherthing()->something();
+Foo::Baz->otherthing(123)->something();

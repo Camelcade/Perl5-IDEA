@@ -16,10 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
@@ -81,8 +85,15 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     return false;
   }
 
+  /**
+   * Calculates type of return value. By default - checks annotations
+   *
+   * @param contextPackage package this sub been invoked from, useful to return $self
+   * @param arguments      invocation arguments
+   * @return type of return value if can be calculated, or null
+   */
   @Nullable
-  default String getReturns() {
+  default String getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
     PerlSubAnnotations subAnnotations = getAnnotations();
     return subAnnotations != null ? subAnnotations.getReturns() : null;
   }

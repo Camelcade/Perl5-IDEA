@@ -20,6 +20,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.PairFunction;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
@@ -43,6 +44,9 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   private final PerlSubAnnotations myAnnotations;
   @NotNull
   private List<PerlSubArgument> mySubArguments;
+  @NotNull // fixme should we make a static TrioFunction to save memory? or even inherit?
+  private PairFunction<String, List<PsiElement>, String> myReturnsComputation = (context, arguments) ->
+    PerlSubDefinitionElement.super.getReturns(context, arguments);
 
   // fixme should we actualize this on fly, like identifier?
   @Nullable
@@ -170,5 +174,20 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @Override
   public String toString() {
     return super.toString() + "@" + getCanonicalName();
+  }
+
+  @Nullable
+  @Override
+  public String getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
+    return myReturnsComputation.fun(contextPackage, arguments);
+  }
+
+  @NotNull
+  public PairFunction<String, List<PsiElement>, String> getReturnsComputation() {
+    return myReturnsComputation;
+  }
+
+  public void setReturnsComputation(@NotNull PairFunction<String, List<PsiElement>, String> returnsComputation) {
+    myReturnsComputation = returnsComputation;
   }
 }

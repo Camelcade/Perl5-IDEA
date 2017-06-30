@@ -16,9 +16,36 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by hurricup on 25.07.2015.
+ * fixme find a better name. This is a basically PerlCallExpression
  */
-public interface PerlMethodContainer {
+public interface PerlMethodContainer extends PsiElement {
+  @Nullable
   PsiPerlMethod getMethod();
+
+  @Nullable
+  default PsiPerlCallArguments getCallArguments() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlCallArguments.class);
+  }
+
+
+  @NotNull
+  default List<PsiElement> getCallArgumentsList() {
+    PsiPerlCallArguments callArguments = getCallArguments();
+    if (callArguments == null) {
+      return Collections.emptyList();
+    }
+    PsiPerlExpr expression = PsiTreeUtil.getChildOfType(callArguments, PsiPerlExpr.class);
+    return expression == null ? Collections.emptyList() : PerlArrayUtil.collectListElements(expression);
+  }
 }
