@@ -623,14 +623,14 @@ Mason2 template file
       MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
         PsiElement(Mason2: <%perl>)('<%perl>')
         PsiComment(Perl5: COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('render')
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: ;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('wrap')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -671,14 +671,14 @@ Mason2 template file
       MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
         PsiElement(Mason2: <%class>)('<%class>')
         PsiComment(Perl5: COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('render')
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: ;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('wrap')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -719,14 +719,14 @@ Mason2 template file
       MasonAbstractBlockImpl(Mason2: MASON_ABSTRACT_BLOCK)
         PsiElement(Mason2: <%init>)('<%init>')
         PsiComment(Perl5: COMMENT_LINE)('#sub navbar{};')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::render
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('render')
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
         PsiElement(Perl5: ;)(';')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::wrap
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('wrap')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -764,7 +764,7 @@ Mason2 template file
               PsiElement(Perl5: ))(')')
           PsiElement(Perl5: ;)(';')
         PsiElement(Mason2: </%init>)('</%init>')
-      MasonMethodDefinition(MASON_METHOD_DEFINITION)@main::greet1($self, $name, $color)
+      MasonMethodDefinition(MASON_METHOD_DEFINITION)@main::greet1
         PsiElement(Mason2: <%method)('<%method')
         PerlSubNameElementImpl(Perl5: subname)('greet1')
         PsiElement(Perl5: ()('(')
@@ -833,7 +833,7 @@ Mason2 template file
             PsiElement(Mason2: </%perl>)('</%perl>')
           PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('</div>')
         PsiElement(Mason2: </%method>)('</%method>')
-      MasonFilterDefinition(MASON_FILTER_DEFINITION)@main::Row1($self, $class)
+      MasonFilterDefinition(MASON_FILTER_DEFINITION)@main::Row1
         PsiElement(Mason2: <%filter)('<%filter')
         PerlSubNameElementImpl(Perl5: subname)('Row1')
         PsiElement(Perl5: ()('(')
@@ -908,7 +908,7 @@ Mason2 template file
       MasonFlagsStatementImpl(Mason2: FLAGS_STATEMENT)
         <empty list>
       PsiElement(Mason2: </%flags>)('</%flags>')
-      MasonOverrideDefinition(MASON_OVERRIDE_DEFINITION)@main::navbar1()
+      MasonOverrideDefinition(MASON_OVERRIDE_DEFINITION)@main::navbar1
         PsiElement(Mason2: <%override)('<%override')
         PerlSubNameElementImpl(Perl5: subname)('navbar1')
         PsiElement(Mason2: >)('>')

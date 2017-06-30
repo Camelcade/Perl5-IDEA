@@ -134,7 +134,7 @@ Perl5
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('\[$@%&*]')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mypush($aref)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mypush
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mypush')
     PsiElement(Perl5: ()('(')
@@ -204,7 +204,7 @@ Perl5
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$;')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::try($try, $catch)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::try
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('try')
     PsiElement(Perl5: ()('(')
@@ -278,7 +278,7 @@ Perl5
               PsiElement(Perl5: ;)(';')
             PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::catch()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::catch
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('catch')
     PsiElement(Perl5: ()('(')
@@ -297,7 +297,7 @@ Perl5
               PsiElement(Perl5: NUMBER)('0')
             PsiElement(Perl5: ])(']')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mygrep($code)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::mygrep
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('mygrep')
     PsiElement(Perl5: ()('(')
@@ -370,7 +370,7 @@ Perl5
           PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('result')
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::func($n)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::func
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('func')
     PsiElement(Perl5: ()('(')
@@ -411,7 +411,7 @@ Perl5
     PsiElement(Perl5: SUB_PROTOTYPE_TOKEN)('$$')
     PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiElement(Perl5: ()('(')

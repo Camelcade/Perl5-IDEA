@@ -6,7 +6,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -17,7 +17,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз'два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -28,7 +28,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз'два'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -39,7 +39,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::'два::::'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -50,7 +50,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('one::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -61,7 +61,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('one::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -72,7 +72,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::two::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -83,7 +83,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::three::stub()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::three::stub
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -94,7 +94,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -105,7 +105,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз'два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -116,7 +116,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз'два'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -127,7 +127,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::'два::::'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -138,7 +138,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('one::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -149,7 +149,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('one::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -160,7 +160,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('раз::two::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub1()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub1
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub1')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -176,7 +176,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -187,7 +187,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз'два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -198,7 +198,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз'два'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -209,7 +209,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::'два::::'три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -220,7 +220,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::one::два::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -231,7 +231,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::one::два::three')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -242,7 +242,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::two::три')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub2()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub2
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub2')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -258,7 +258,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -269,7 +269,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз'два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -280,7 +280,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз'два'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -291,7 +291,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::'два::::'три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::::два::::::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -302,7 +302,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::one::два::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -313,7 +313,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::one::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@one::два::three::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -324,7 +324,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::two::три::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::two::три::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -335,7 +335,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('::раз::два::three::')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::three::stub3()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@раз::два::three::stub3
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('stub3')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -2167,7 +2167,7 @@ Perl5
       PerlNamespaceElementImpl(Perl5: package::name)('ꑭʑ')
       PsiElement(Perl5: ;)(';')
       PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@ꑭʑ::ニュー()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@ꑭʑ::ニュー
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('ニュー')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -2409,7 +2409,7 @@ Perl5
       PerlNamespaceElementImpl(Perl5: package::name)('main')
       PsiElement(Perl5: ;)(';')
       PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::ㄘ()
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::ㄘ
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('ㄘ')
           PsiPerlBlockImpl(Perl5: BLOCK)
@@ -2424,7 +2424,7 @@ Perl5
                     PsiElement(Perl5: NUMBER)('0')
                   PsiElement(Perl5: ))(')')
             PsiElement(Perl5: })('}')
-        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::ƒஓ($s)
+        PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::ƒஓ
           PsiElement(Perl5: sub)('sub')
           PerlSubNameElementImpl(Perl5: subname)('ƒஓ')
           PsiPerlBlockImpl(Perl5: BLOCK)

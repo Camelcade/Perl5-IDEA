@@ -61,6 +61,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
@@ -75,6 +76,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -438,6 +440,21 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   protected String serializePsiElement(@NotNull PsiElement element) {
     StringBuilder sb = new StringBuilder();
     sb.append(element);
+    if (element instanceof PerlSubDefinitionElement) {
+      String argumentsList = ((PerlSubDefinitionElement)element).getSubArgumentsList().stream()
+        .map(argument -> {
+          if (argument.isOptional()) {
+            return "[" + argument.toStringLong() + "]";
+          }
+          else {
+            return argument.toStringLong();
+          }
+        })
+        .collect(Collectors.joining(", "));
+      if (StringUtil.isNotEmpty(argumentsList)) {
+        sb.append("(").append(argumentsList).append(")");
+      }
+    }
     ASTNode node = element.getNode();
     if (node != null) {
       sb.append(" at ").append(node.getStartOffset()).append(" in ").append(element.getContainingFile().getName());

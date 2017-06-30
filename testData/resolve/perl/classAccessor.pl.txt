@@ -80,31 +80,31 @@ PerlNamespaceReference at (1038,1059); text in range: 'Class::Accessor::Test' =>
 PerlSubReference at (1061,1073); text in range: 'mk_accessors' => 0 results:
 
 PerlSubReference at (1091,1101); text in range: 'simple_ro1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_ro1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 231 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_ro1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 231 in classAccessor.pl
 
 PerlSubReference at (1116,1131); text in range: 'simple_other_ro' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 242 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 242 in classAccessor.pl
 
 PerlSubReference at (1146,1161); text in range: 'simple_third_ro' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 416 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 416 in classAccessor.pl
 
 PerlSubReference at (1176,1186); text in range: 'simple_rw1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_rw1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 158 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_rw1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 158 in classAccessor.pl
 
 PerlSubReference at (1201,1216); text in range: 'simple_other_rw' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 169 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 169 in classAccessor.pl
 
 PerlSubReference at (1231,1246); text in range: 'simple_third_rw' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 364 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 364 in classAccessor.pl
 
 PerlSubReference at (1261,1271); text in range: 'simple_wo1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_wo1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 304 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_wo1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 304 in classAccessor.pl
 
 PerlSubReference at (1286,1301); text in range: 'simple_other_wo' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 315 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 315 in classAccessor.pl
 
 PerlSubReference at (1316,1331); text in range: 'simple_third_wo' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 468 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 468 in classAccessor.pl
 
 PerlSubReference at (1346,1357); text in range: 'get_fbp_ro1' => 1 results:
 	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 653 in classAccessor.pl
@@ -125,20 +125,20 @@ PerlSubReference at (1476,1487); text in range: 'get_fbp_rw3' => 1 results:
 	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 810 in classAccessor.pl
 
 PerlSubReference at (1502,1513); text in range: 'set_fbp_wo1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 738 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 738 in classAccessor.pl
 
 PerlSubReference at (1528,1539); text in range: 'set_fbp_wo2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 769 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 769 in classAccessor.pl
 
 PerlSubReference at (1554,1565); text in range: 'set_fbp_wo3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 896 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 896 in classAccessor.pl
 
 PerlSubReference at (1580,1591); text in range: 'set_fbp_rw1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 571 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 571 in classAccessor.pl
 
 PerlSubReference at (1606,1617); text in range: 'set_fbp_rw2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 599 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 599 in classAccessor.pl
 
 PerlSubReference at (1632,1643); text in range: 'set_fbp_rw3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 810 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 810 in classAccessor.pl
 

@@ -1,7 +1,7 @@
 Perl5
   PsiComment(Perl5: COMMENT_LINE)('#!/usr/bin/perl')
   PsiComment(Perl5: COMMENT_LINE)('# Этот исходник посвящается программистам 1с приходящим на собеседование')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::обождать_пять_менут()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::обождать_пять_менут
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('обождать_пять_менут')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -48,7 +48,7 @@ Perl5
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::обождать_менуту()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::обождать_менуту
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('обождать_менуту')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -125,25 +125,25 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('Foo')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::раздватри()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::раздватри
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('раздватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::_раздватри()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::_раздватри
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('_раздватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::oneразд123ватри()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::oneразд123ватри
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('oneразд123ватри')
         PsiPerlBlockImpl(Perl5: BLOCK)
           PsiElement(Perl5: {)('{')
           PsiElement(Perl5: })('}')
-      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::_разд123one_ватри()
+      PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::_разд123one_ватри
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('_разд123one_ватри')
         PsiPerlBlockImpl(Perl5: BLOCK)

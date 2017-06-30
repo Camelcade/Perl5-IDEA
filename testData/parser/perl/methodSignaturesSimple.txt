@@ -26,7 +26,7 @@ Perl5
         PsiElement(Perl5: use)('use')
         PerlNamespaceElementImpl(Perl5: package::name)('Method::Signatures::Simple')
         PsiElement(Perl5: ;)(';')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::new($class, $name, $email)
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::new
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('new')
         PsiElement(Perl5: ()('(')
@@ -104,7 +104,7 @@ Perl5
                     PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('class')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::new_id($seed)
+      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::new_id
         PsiElement(Perl5: func)('func')
         PerlSubNameElementImpl(Perl5: subname)('new_id')
         PsiElement(Perl5: ()('(')
@@ -137,7 +137,7 @@ Perl5
               PsiElement(Perl5: ++)('++')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::name()
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::name
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('name')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -155,7 +155,7 @@ Perl5
                 PsiElement(Perl5: })('}')
             PsiElement(Perl5: ;)(';')
           PsiElement(Perl5: })('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::email()
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::email
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('email')
         PsiPerlBlockImpl(Perl5: BLOCK)
@@ -179,7 +179,7 @@ Perl5
         PsiElement(Perl5: ;)(';')
       PsiComment(Perl5: COMMENT_LINE)('# -- other features -- #')
       PsiComment(Perl5: COMMENT_LINE)('# attributes')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo()
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('foo')
         PsiElement(Perl5: :)(':')
@@ -209,7 +209,7 @@ Perl5
                   PerlStringContentElementImpl(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo($class, $name, $email)
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
@@ -257,7 +257,7 @@ Perl5
                   PerlStringContentElementImpl(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::foo()
+      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::foo
         PsiElement(Perl5: func)('func')
         PerlSubNameElementImpl(Perl5: subname)('foo')
         PsiElement(Perl5: :)(':')
@@ -287,7 +287,7 @@ Perl5
                   PerlStringContentElementImpl(Perl5: STRING_CONTENT)('foo')
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
-      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::foo($name, $email)
+      PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@User::foo
         PsiElement(Perl5: func)('func')
         PerlSubNameElementImpl(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
@@ -330,7 +330,7 @@ Perl5
                 PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
       PsiComment(Perl5: COMMENT_LINE)('# change invocant name')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo($self, $bar)
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::foo
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('foo')
         PsiElement(Perl5: ()('(')
@@ -358,7 +358,7 @@ Perl5
                     PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('bar')
                   PsiElement(Perl5: ))(')')
           PsiElement(Perl5: })('}')
-      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::bar($class, $bar)
+      PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@User::bar
         PsiElement(Perl5: method)('method')
         PerlSubNameElementImpl(Perl5: subname)('bar')
         PsiElement(Perl5: ()('(')

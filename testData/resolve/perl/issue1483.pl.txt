@@ -2,5 +2,5 @@ PerlNamespaceReference at (59,68); text in range: 'MyPackage' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyPackage at 11 in issue1483.pl
 
 PerlSubReference at (94,99); text in range: 'mysub' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyPackage::mysub() at 31 in issue1483.pl
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyPackage::mysub at 31 in issue1483.pl
 

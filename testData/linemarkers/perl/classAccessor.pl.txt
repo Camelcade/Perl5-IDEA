@@ -4,39 +4,39 @@ Targets: 1
 
 152 - 166: 'lib_simple_rw1': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_rw1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1076 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_rw1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1076 in classAccessor.pl
 
 171 - 190: 'lib_simple_other_rw': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1095 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1095 in classAccessor.pl
 
 234 - 248: 'lib_simple_ro1': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_ro1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1151 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_ro1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1151 in classAccessor.pl
 
 253 - 272: 'lib_simple_other_ro': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
 
 316 - 330: 'lib_simple_wo1': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_wo1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1226 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_wo1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1226 in classAccessor.pl
 
 335 - 354: 'lib_simple_other_wo': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1245 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_other_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1245 in classAccessor.pl
 
 388 - 407: 'lib_simple_third_rw': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1298 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1298 in classAccessor.pl
 
 444 - 463: 'lib_simple_third_ro': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1354 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1354 in classAccessor.pl
 
 500 - 519: 'lib_simple_third_wo': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1410 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::lib_simple_third_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1410 in classAccessor.pl
 
 601 - 612: 'lib_fbp_rw1': <html>Overriden methods</html>
 Uknown targets: MyLineMarkerInfo
@@ -52,11 +52,11 @@ Targets: 1
 
 788 - 799: 'lib_fbp_wo1': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1670 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1670 in classAccessor.pl
 
 828 - 839: 'lib_fbp_wo2': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1710 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1710 in classAccessor.pl
 
 873 - 884: 'lib_fbp_rw3': <html>Overriden methods</html>
 Uknown targets: MyLineMarkerInfo
@@ -66,7 +66,7 @@ Targets: 1
 
 967 - 978: 'lib_fbp_wo3': Overriden methods
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1849 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@OtherClassAccessor::set_lib_fbp_wo3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1849 in classAccessor.pl
 
 991 - 1009: 'OtherClassAccessor': Parent classes
 Targets: 1
@@ -74,39 +74,39 @@ Targets: 1
 
 1076 - 1090: 'lib_simple_rw1': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_rw1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 152 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_rw1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 152 in classAccessor.pl
 
 1095 - 1114: 'lib_simple_other_rw': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 171 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 171 in classAccessor.pl
 
 1151 - 1165: 'lib_simple_ro1': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_ro1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 234 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_ro1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 234 in classAccessor.pl
 
 1170 - 1189: 'lib_simple_other_ro': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 253 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 253 in classAccessor.pl
 
 1226 - 1240: 'lib_simple_wo1': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_wo1([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 316 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_wo1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 316 in classAccessor.pl
 
 1245 - 1264: 'lib_simple_other_wo': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 335 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_other_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 335 in classAccessor.pl
 
 1298 - 1317: 'lib_simple_third_rw': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_rw([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 388 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 388 in classAccessor.pl
 
 1354 - 1373: 'lib_simple_third_ro': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_ro([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 444 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 444 in classAccessor.pl
 
 1410 - 1429: 'lib_simple_third_wo': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_wo([$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 500 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::lib_simple_third_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 500 in classAccessor.pl
 
 1497 - 1508: 'lib_fbp_rw1': <html>Overriding method</html>
 Uknown targets: MyLineMarkerInfo
@@ -122,11 +122,11 @@ Targets: 1
 
 1670 - 1681: 'lib_fbp_wo1': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo1($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 788 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 788 in classAccessor.pl
 
 1710 - 1721: 'lib_fbp_wo2': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo2($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 828 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 828 in classAccessor.pl
 
 1755 - 1766: 'lib_fbp_rw3': <html>Overriding method</html>
 Uknown targets: MyLineMarkerInfo
@@ -136,5 +136,5 @@ Targets: 1
 
 1849 - 1860: 'lib_fbp_wo3': Overriding method
 Targets: 1
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo3($new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 967 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@LocalClassAccessor::set_lib_fbp_wo3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 967 in classAccessor.pl
 

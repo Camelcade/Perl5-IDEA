@@ -169,6 +169,6 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Override
   public String toString() {
-    return super.toString() + "@" + getCanonicalName() + getSubArgumentsListAsString();
+    return super.toString() + "@" + getCanonicalName();
   }
 }

@@ -49,7 +49,7 @@ Perl5
         PsiElement(Perl5: ()('(')
         PsiElement(Perl5: ))(')')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('something')
     PsiPerlBlockImpl(Perl5: BLOCK)

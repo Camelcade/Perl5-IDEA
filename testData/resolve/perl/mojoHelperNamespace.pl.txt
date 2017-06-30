@@ -13,7 +13,7 @@ PerlVariableReference at (207,211); text in range: 'self' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 179 in mojoHelperNamespace.pl
 
 PerlSubReference at (213,225); text in range: 'other_helper' => 1 results:
-	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::other_helper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 277 in mojoHelperNamespace.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::other_helper($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 277 in mojoHelperNamespace.pl
 
 PerlVariableReference at (252,255); text in range: 'app' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 101 in mojoHelperNamespace.pl
@@ -26,5 +26,5 @@ PerlVariableReference at (342,346); text in range: 'self' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 315 in mojoHelperNamespace.pl
 
 PerlSubReference at (348,358); text in range: 'somehelper' => 1 results:
-	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 144 in mojoHelperNamespace.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 144 in mojoHelperNamespace.pl
 

@@ -336,7 +336,7 @@ Perl5
               PsiElement(Perl5: })('}')
           PsiElement(Perl5: })('}')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($self, @args)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -383,7 +383,7 @@ Perl5
                     PsiElement(Perl5: ))(')')
             PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::bar_in_place($self)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::bar_in_place
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('bar_in_place')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -450,7 +450,7 @@ Perl5
                     PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('args')
             PsiElement(Perl5: })('}')
       PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('parent_sub')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
@@ -487,7 +487,7 @@ Perl5
               PsiElement(Perl5: QUOTE_DOUBLE_CLOSE)('"')
           PsiElement(Perl5: ;)(';')
         PsiElement(Perl5: })('}')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('parent_sub')
     PsiPerlBlockImpl(Perl5: BLOCK)
@@ -535,7 +535,7 @@ Perl5
         PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: })('}')
   PsiComment(Perl5: COMMENT_LINE)('# OR')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub_with_catch()
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub_with_catch
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('parent_sub_with_catch')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
@@ -602,7 +602,7 @@ Perl5
     PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('TryCatch')
     PsiElement(Perl5: ;)(';')
-  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo($self)
+  PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
     PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
