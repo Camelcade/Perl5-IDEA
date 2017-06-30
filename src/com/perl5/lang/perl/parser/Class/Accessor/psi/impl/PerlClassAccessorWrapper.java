@@ -26,8 +26,6 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.stubs.PerlClassAccessorWrapperStub;
-import com.perl5.lang.perl.psi.PerlDerefExpression;
-import com.perl5.lang.perl.psi.PerlSmartMethodContainer;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -37,7 +35,6 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,8 +46,7 @@ import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementType
 import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.GETTER_COMPUTATION;
 import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.SETTER_COMPUTATION;
 
-public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase<PerlClassAccessorWrapperStub>
-  implements PerlSmartMethodContainer {
+public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase<PerlClassAccessorWrapperStub> {
 
   public PerlClassAccessorWrapper(@NotNull PerlClassAccessorWrapperStub stub,
                                   @NotNull IStubElementType nodeType) {
@@ -149,12 +145,5 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
       }
     });
     return result[0];
-  }
-
-  @Nullable
-  @Override
-  public String getReturnPackageName() {
-    PsiElement parent = getParent();
-    return parent instanceof PerlDerefExpression ? ((PerlDerefExpression)parent).getPreviousElementNamespace(this) : null;
   }
 }
