@@ -69,7 +69,7 @@ DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
 SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"?
 XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"?
 
-QUOTE_LIKE_SUFFIX= ("'" {QUALIFIED_IDENTIFIER} ? )?
+QUOTE_LIKE_SUFFIX= ("'" {IDENTIFIER_CONTINUE}? ("'" {IDENTIFIER_CONTINUE}? "'") ? )?
 CORE_PREFIX = "CORE::"?
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*

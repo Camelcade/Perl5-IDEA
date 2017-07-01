@@ -54,6 +54,7 @@
       <li>Formatter bugfixes. Please, don't hesitate to report improperly formatted code.</li>
       <li>Suppressed lexing of <code>&~</code> as non-existing internal variable. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1449">#1449</a></li>
       <li>Resolve of dereference chain if comment is inside it, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1483">#1483</a></li>
+      <li>Fixed parsing confusion with archaic package format,  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1506">#1506</a></li>
       </ul>
      </p>
     ]]>
