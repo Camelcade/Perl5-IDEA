@@ -24,6 +24,8 @@ public class PerlLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/lightElements/perl";
   }
 
+  public void testMooseAttrs() {doTest();}
+
   public void testMojoHelpers() {doTest();}
 
   public void testConstants() {doTest();}

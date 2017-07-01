@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
+import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
@@ -159,7 +160,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
     List<PerlLightMethodDefinitionElement> secondaryResult = new ArrayList<>();
     for (String key : MOOSE_SUB_NAMES_KEYS) {
       PerlHashEntry entry = parameters.get(key);
-      if (entry == null || !isAcceptableIdentifierElement(entry.valueElement)) {
+      if (entry == null) {
         continue;
       }
 
@@ -168,11 +169,20 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
         continue;
       }
 
+      if (!isWritable && key.equals(MUTATOR_KEY)) {
+        continue;
+      }
+
       if (!isWritable && key.equals(READER_KEY) || key.equals(ACCESSOR_KEY)) {
         forcedIdentifier = entry.valueElement;
         continue;
       }
 
+      if (!isAcceptableIdentifierElement(entry.valueElement)) {
+        continue;
+      }
+
+      // fixme we could optimize new_value with subclassing and hardcoding of signature
       PsiElement identifier = entry.getNonNullValueElement();
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> secondaryElement = new PerlLightMethodDefinitionElement<>(
         this,
@@ -195,15 +205,59 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
       );
     }
 
-    // handle isa
-    // handle does
-    // handle required
-    // handle handles ARRAY
-    // handle handles HASH
+    // handle handles
+    PerlHashEntry handlesEntry = parameters.get("handles");
+    if (handlesEntry != null) {
+      // to show proper signatures, we need an access to delegates, what requires indexes; we should do this in runtime, not indexing, but store delegation target
+      if (handlesEntry.valueElement instanceof PsiPerlAnonHash) {
+        // handle handles HASH
+        Map<String, PerlHashEntry> delegatesMap = PerlHashUtil.collectHashMap(handlesEntry.valueElement);
+        for (PerlHashEntry delegateEntry : delegatesMap.values()) {
+          if (!isAcceptableIdentifierElement(delegateEntry.keyElement)) {
+            continue;
+          }
+          secondaryResult.add(new PerlLightMethodDefinitionElement<>(
+            this,
+            ElementManipulators.getValueText(delegateEntry.keyElement),
+            LIGHT_METHOD_DEFINITION,
+            delegateEntry.keyElement,
+            packageName,
+            Collections.emptyList(),
+            PerlSubAnnotations.tryToFindAnnotations(delegateEntry.keyElement, handlesEntry.keyElement, getParent())
+          ));
+        }
+      }
+      else if (handlesEntry.valueElement instanceof PsiPerlAnonArray) {
+        // handle handles ARRAY
+        List<PsiElement> delegatesIdentifiers = PerlArrayUtil.collectListElements(((PsiPerlAnonArray)handlesEntry.valueElement).getExpr());
+        for (PsiElement identifier : delegatesIdentifiers) {
+          if (!isAcceptableIdentifierElement(identifier)) {
+            continue;
+          }
+          secondaryResult.add(new PerlLightMethodDefinitionElement<>(
+            this,
+            ElementManipulators.getValueText(identifier),
+            LIGHT_METHOD_DEFINITION,
+            identifier,
+            packageName,
+            Collections.emptyList(),
+            PerlSubAnnotations.tryToFindAnnotations(identifier, handlesEntry.keyElement, getParent())
+          ));
+        }
+      }
+    }
+
+    // handle required this should alter contstructor, no idea how for now
+    // handle HANDLES ROLE OR ROLETYPE requires index
+    // handle HANDLES DUCKTYPE requires index
+    // handle HANDLES REGEXP this requires regexp & resolve
 
     for (PsiElement identifier : identifiers) {
       if (forcedIdentifier != null) {
         identifier = forcedIdentifier;
+      }
+      if (!isAcceptableIdentifierElement(identifier)) {
+        continue;
       }
       PerlAttributeDefinition newElement = new PerlAttributeDefinition(
         this,
