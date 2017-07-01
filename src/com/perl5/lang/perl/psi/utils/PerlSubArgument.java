@@ -23,6 +23,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -142,6 +143,10 @@ public class PerlSubArgument {
 
   public static PerlSubArgument optionalScalar(@NotNull String variableName) {
     return create(PerlVariableType.SCALAR, variableName, true);
+  }
+
+  public static PerlSubArgument optionalScalar(@NotNull String variableName, @Nullable String variableClass) {
+    return create(PerlVariableType.SCALAR, variableName, variableClass == null ? "" : variableClass, true);
   }
 
   public static PerlSubArgument mandatoryScalar(@NotNull String variableName) {

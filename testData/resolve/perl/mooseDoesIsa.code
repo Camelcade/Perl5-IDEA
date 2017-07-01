@@ -1,0 +1,24 @@
+package MyReturnValue1;
+
+#@method
+sub something{}
+
+package MyReturnValue2;
+
+#@method
+sub something{}
+
+package MyMoose::Container;
+
+has mooseisa => (
+        is  => 'rw',
+        isa => 'MyReturnValue1'
+    );
+
+has moosedoes => (
+        is   => 'rw',
+        does => 'MyReturnValue2'
+    );
+
+__PACKAGE__->mooseisa()->something;
+__PACKAGE__->moosedoes()->something;

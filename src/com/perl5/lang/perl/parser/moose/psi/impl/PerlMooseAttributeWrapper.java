@@ -136,10 +136,27 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
     String packageName = PerlPackageUtil.getContextPackageName(this);
 
     Map<String, PerlHashEntry> parameters = PerlHashUtil.packToHash(listElements.subList(1, listElements.size()));
+    // handling is
     PerlHashEntry isParameter = parameters.get("is");
     boolean isWritable = isParameter != null && StringUtil.equals("rw", isParameter.getValueString());
     PsiElement forcedIdentifier = null;
 
+    // handling isa and does
+    PerlHashEntry isaEntry = parameters.get("isa");
+    String valueClass = null;
+    if (isaEntry == null) {
+      isaEntry = parameters.get("does");
+    }
+
+    if (isaEntry != null && isaEntry.valueElement != null && isAcceptableIdentifierElement(isaEntry.valueElement)) {
+      valueClass = isaEntry.getValueString();
+      if (StringUtil.isEmpty(valueClass)) {
+        valueClass = null;
+      }
+    }
+
+    // handling accessor, reader, etc.
+    List<PerlLightMethodDefinitionElement> secondaryResult = new ArrayList<>();
     for (String key : MOOSE_SUB_NAMES_KEYS) {
       PerlHashEntry entry = parameters.get(key);
       if (entry == null || !isAcceptableIdentifierElement(entry.valueElement)) {
@@ -157,18 +174,24 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
       }
 
       PsiElement identifier = entry.getNonNullValueElement();
-      result.add(
-        new PerlLightMethodDefinitionElement<>(
-          this,
-          ElementManipulators.getValueText(identifier),
-          LIGHT_METHOD_DEFINITION,
-          identifier,
-          packageName,
-          key.equals(MUTATOR_KEY)
-          ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value"))
-          : Collections.emptyList(),
-          PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
-        )
+      PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> secondaryElement = new PerlLightMethodDefinitionElement<>(
+        this,
+        ElementManipulators.getValueText(identifier),
+        LIGHT_METHOD_DEFINITION,
+        identifier,
+        packageName,
+        key.equals(MUTATOR_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value", valueClass))
+                                : Collections.emptyList(),
+        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
+      );
+
+      if (key.equals(READER_KEY) && valueClass != null) {
+        String finalClass = valueClass;
+        secondaryElement.setReturnsComputation((a, b) -> finalClass);
+      }
+
+      secondaryResult.add(
+        secondaryElement
       );
     }
 
@@ -182,15 +205,23 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
       if (forcedIdentifier != null) {
         identifier = forcedIdentifier;
       }
-      result.add(new PerlAttributeDefinition(
+      PerlAttributeDefinition newElement = new PerlAttributeDefinition(
         this,
         ElementManipulators.getValueText(identifier),
         LIGHT_ATTRIBUTE_DEFINITION,
         identifier,
         packageName,
-        isWritable ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")) : Collections.emptyList(),
+        isWritable
+        ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value", valueClass))
+        : Collections.emptyList(),
         PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
-      ));
+      );
+      if (valueClass != null) {
+        String finalClass = valueClass;
+        newElement.setReturnsComputation((a, b) -> finalClass);
+      }
+      result.add(newElement);
+      result.addAll(secondaryResult);
     }
 
     return result;
