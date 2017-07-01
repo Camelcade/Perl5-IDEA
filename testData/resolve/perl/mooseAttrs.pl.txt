@@ -1,0 +1,252 @@
+PerlNamespaceFileReference at (43,49); text in range: 'strict' => 0 results:
+
+PerlNamespaceFileReference at (55,63); text in range: 'warnings' => 0 results:
+
+PerlVariableReference at (172,173); text in range: 'a' => 0 results:
+
+PerlVariableReference at (185,186); text in range: 'a' => 0 results:
+
+PerlVariableReference at (271,272); text in range: 'a' => 0 results:
+
+PerlVariableReference at (286,287); text in range: 'a' => 0 results:
+
+PerlNamespaceReference at (358,370); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlNamespaceReference at (407,419); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlNamespaceReference at (457,469); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlNamespaceReference at (507,519); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlNamespaceReference at (571,583); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlNamespaceReference at (636,648); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlVariableReference at (1748,1749); text in range: 'a' => 0 results:
+
+PerlVariableReference at (1759,1760); text in range: 'a' => 0 results:
+
+PerlVariableReference at (1772,1773); text in range: 'a' => 0 results:
+
+PerlVariableReference at (1785,1786); text in range: 'a' => 0 results:
+
+PerlSubReference at (1888,1893); text in range: 'test1' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl
+
+PerlSubReference at (1907,1912); text in range: 'test2' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test2($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 109 in mooseAttrs.pl
+
+PerlSubReference at (1926,1931); text in range: 'test3' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 136 in mooseAttrs.pl
+
+PerlSubReference at (1945,1950); text in range: 'test4' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 145 in mooseAttrs.pl
+
+PerlSubReference at (1964,1969); text in range: 'test5' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test5; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 192 in mooseAttrs.pl
+
+PerlSubReference at (1983,1988); text in range: 'test6' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 198 in mooseAttrs.pl
+
+PerlSubReference at (2002,2007); text in range: 'test7' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test7($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 228 in mooseAttrs.pl
+
+PerlSubReference at (2021,2026); text in range: 'test8' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test8($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 238 in mooseAttrs.pl
+
+PerlSubReference at (2040,2045); text in range: 'test9' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test9($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 293 in mooseAttrs.pl
+
+PerlSubReference at (2060,2066); text in range: 'test10' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test10($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 299 in mooseAttrs.pl
+
+PerlSubReference at (2080,2086); text in range: 'test11' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 328 in mooseAttrs.pl
+
+PerlSubReference at (2100,2106); text in range: 'test12' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test12($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 377 in mooseAttrs.pl
+
+PerlSubReference at (2120,2126); text in range: 'test13' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test13; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 426 in mooseAttrs.pl
+
+PerlSubReference at (2140,2146); text in range: 'test14' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test14($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 476 in mooseAttrs.pl
+
+PerlSubReference at (2160,2166); text in range: 'test15' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test15; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 531 in mooseAttrs.pl
+
+PerlSubReference at (2180,2186); text in range: 'test16' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test16; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 538 in mooseAttrs.pl
+
+PerlSubReference at (2200,2206); text in range: 'test17' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test17($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 595 in mooseAttrs.pl
+
+PerlSubReference at (2220,2226); text in range: 'test18' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test18($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 602 in mooseAttrs.pl
+
+PerlSubReference at (2240,2246); text in range: 'test19' => 0 results:
+
+PerlSubReference at (2261,2267); text in range: 'test20' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test20($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 689 in mooseAttrs.pl
+
+PerlSubReference at (2281,2287); text in range: 'test21' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test21($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 703 in mooseAttrs.pl
+
+PerlSubReference at (2301,2307); text in range: 'test22' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test22; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 735 in mooseAttrs.pl
+
+PerlSubReference at (2321,2327); text in range: 'test23' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test23; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 749 in mooseAttrs.pl
+
+PerlSubReference at (2341,2347); text in range: 'test24' => 0 results:
+
+PerlSubReference at (2361,2367); text in range: 'test25' => 0 results:
+
+PerlSubReference at (2381,2387); text in range: 'test26' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test26; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 827 in mooseAttrs.pl
+
+PerlSubReference at (2401,2407); text in range: 'test27' => 0 results:
+
+PerlSubReference at (2421,2427); text in range: 'test28' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test28; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 873 in mooseAttrs.pl
+
+PerlSubReference at (2441,2447); text in range: 'test29' => 0 results:
+
+PerlSubReference at (2462,2468); text in range: 'test30' => 0 results:
+
+PerlSubReference at (2482,2488); text in range: 'test31' => 0 results:
+
+PerlSubReference at (2502,2508); text in range: 'test32' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test32; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 968 in mooseAttrs.pl
+
+PerlSubReference at (2522,2528); text in range: 'test33' => 0 results:
+
+PerlSubReference at (2542,2548); text in range: 'test34' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test34; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1007 in mooseAttrs.pl
+
+PerlSubReference at (2562,2568); text in range: 'test35' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test35($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1023 in mooseAttrs.pl
+
+PerlSubReference at (2582,2588); text in range: 'test36' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test36($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1037 in mooseAttrs.pl
+
+PerlSubReference at (2602,2608); text in range: 'test37' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test37; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1054 in mooseAttrs.pl
+
+PerlSubReference at (2622,2628); text in range: 'test38' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test38; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1069 in mooseAttrs.pl
+
+PerlSubReference at (2642,2648); text in range: 'test39' => 0 results:
+
+PerlSubReference at (2663,2669); text in range: 'test40' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test40; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1114 in mooseAttrs.pl
+
+PerlSubReference at (2683,2689); text in range: 'test41' => 0 results:
+
+PerlSubReference at (2703,2709); text in range: 'test42' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test42; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1161 in mooseAttrs.pl
+
+PerlSubReference at (2723,2729); text in range: 'test43' => 0 results:
+
+PerlSubReference at (2743,2749); text in range: 'test44' => 0 results:
+
+PerlSubReference at (2763,2769); text in range: 'test45' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1225 in mooseAttrs.pl
+
+PerlSubReference at (2783,2789); text in range: 'test46' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test46($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1253 in mooseAttrs.pl
+
+PerlSubReference at (2803,2809); text in range: 'test47' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test47($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1312 in mooseAttrs.pl
+
+PerlSubReference at (2823,2829); text in range: 'test48' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test48($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1339 in mooseAttrs.pl
+
+PerlSubReference at (2843,2849); text in range: 'test49' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test49; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1377 in mooseAttrs.pl
+
+PerlSubReference at (2864,2870); text in range: 'test50' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test50; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1384 in mooseAttrs.pl
+
+PerlSubReference at (2884,2890); text in range: 'test51' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test51; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1391 in mooseAttrs.pl
+
+PerlSubReference at (2904,2910); text in range: 'test52' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test52; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1398 in mooseAttrs.pl
+
+PerlSubReference at (2924,2930); text in range: 'test53' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test53($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1413 in mooseAttrs.pl
+
+PerlSubReference at (2944,2950); text in range: 'test54' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test54; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1451 in mooseAttrs.pl
+
+PerlSubReference at (2964,2970); text in range: 'test55' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test55; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1465 in mooseAttrs.pl
+
+PerlSubReference at (2984,2990); text in range: 'test56' => 0 results:
+
+PerlSubReference at (3004,3010); text in range: 'test57' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test57; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1513 in mooseAttrs.pl
+
+PerlSubReference at (3024,3030); text in range: 'test58' => 0 results:
+
+PerlSubReference at (3044,3050); text in range: 'test59' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test59; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1544 in mooseAttrs.pl
+
+PerlSubReference at (3065,3071); text in range: 'test60' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test60; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1559 in mooseAttrs.pl
+
+PerlSubReference at (3085,3091); text in range: 'test61' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test61; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1572 in mooseAttrs.pl
+
+PerlSubReference at (3105,3111); text in range: 'test62' => 0 results:
+
+PerlSubReference at (3125,3131); text in range: 'test63' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test63; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1615 in mooseAttrs.pl
+
+PerlSubReference at (3145,3151); text in range: 'test64' => 2 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test64; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1630 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test64($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1643 in mooseAttrs.pl
+
+PerlSubReference at (3165,3171); text in range: 'test65' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test65; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1681 in mooseAttrs.pl
+
+PerlSubReference at (3185,3191); text in range: 'test66' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test66; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1690 in mooseAttrs.pl
+
+PerlSubReference at (3205,3211); text in range: 'test67' => 0 results:
+
+PerlSubReference at (3225,3231); text in range: 'test68' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test68; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1708 in mooseAttrs.pl
+
+PerlSubReference at (3245,3251); text in range: 'test69' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test69; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1718 in mooseAttrs.pl
+
+PerlSubReference at (3266,3272); text in range: 'test70' => 0 results:
+
+PerlSubReference at (3286,3292); text in range: 'test71' => 0 results:
+
+PerlSubReference at (3306,3312); text in range: 'test72' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test72($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1798 in mooseAttrs.pl
+
+PerlSubReference at (3326,3332); text in range: 'test73' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1805 in mooseAttrs.pl
+
+PerlSubReference at (3346,3352); text in range: 'test74' => 2 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1833 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1833 in mooseAttrs.pl
+
+PerlSubReference at (3366,3372); text in range: 'test75' => 2 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1857 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1857 in mooseAttrs.pl
+
+PerlSubReference at (3386,3392); text in range: 'test76' => 2 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1864 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1864 in mooseAttrs.pl
+
+PerlSubReference at (3406,3412); text in range: 'test77' => 0 results:
+
+PerlSubReference at (3426,3432); text in range: 'test78' => 0 results:
+
+PerlSubReference at (3446,3452); text in range: 'test79' => 0 results:
+

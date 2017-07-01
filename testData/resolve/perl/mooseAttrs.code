@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+package MySomePackage;
+use strict;
+use warnings FATAL => 'all';
+has test1 => is => 'ro';
+has test2 => is => 'rw';
+has [ 'test3', "test4", `nothing`, "test4$a", `nothing$a`, qw/test5 test6/ ] => is => 'ro';
+has [ q'test7', qq"test8", qx`nothing`, qq"test8$a", qx`nothing$a`, qw/test9 test10/ ] => is => 'rw';
+has test11 => is => 'ro', isa => 'My::Foo::Bar';
+has test12 => is => 'rw', isa => 'My::Foo::Bar';
+has test13 => is => 'ro', does => 'My::Foo::Bar';
+has test14 => is => 'rw', does => 'My::Foo::Bar';
+has [ qw/test15 test16/ ] => is => 'ro', isa => 'My::Foo::Bar';
+has [ qw/test17 test18/ ] => is => 'rw', does => 'My::Foo::Bar';
+has test19 => is => 'rw', accessor => 'test20';
+has test21 => is => 'rw', reader => 'test22';
+has test23 => is => 'ro', writer => 'test24';
+has test25 => is => 'ro', reader => 'test26';
+has test27 => is => 'ro', reader => "test28";
+has test29 => is => 'ro', reader => `test30`;
+has test31 => is => 'ro', reader => qw/test32/;
+has test33 => qw/is rw reader test34 accessor test35 writer test36 predicate test37 clearer test38/;
+has test39 => is => 'ro', reader => q'test40';
+has test41 => is => 'ro', reader => qq"test42";
+has test43 => is => 'ro', reader => qx`test44`;
+has 'test45' => is => 'rw';
+has "test46" => is => 'rw';
+has `test47` => is => 'rw';
+has qw/test47/ => is => 'rw';
+has test48 => is => 'rw', handles => [ qw/test49 test50 test51 test52/ ];
+has test53 => is => 'rw', handles => { qw/test54 test50 test55 test52/ };
+has test56 => qw/is ro reader test57 writer test58 predicate test59 clearer test60/;
+has test61 => qw/is ro writer test62 predicate test63 clearer test64/;
+has test64 => is => 'rw',
+    handles => ['test65',"test66",`test67`,q'test68',qq"test69",qx`test67`,"test68$a",`test69$a`,qq"test70$a",qx`test71$a`];
+has [qw/test72 test73/] => qw/is rw reader test74/, handles => [qw/test75 test76/];
+
+__PACKAGE__->test1;__PACKAGE__->test2;__PACKAGE__->test3;__PACKAGE__->test4;__PACKAGE__->test5;__PACKAGE__->test6;__PACKAGE__->test7;__PACKAGE__->test8;__PACKAGE__->test9;
+__PACKAGE__->test10;__PACKAGE__->test11;__PACKAGE__->test12;__PACKAGE__->test13;__PACKAGE__->test14;__PACKAGE__->test15;__PACKAGE__->test16;__PACKAGE__->test17;__PACKAGE__->test18;__PACKAGE__->test19;
+__PACKAGE__->test20;__PACKAGE__->test21;__PACKAGE__->test22;__PACKAGE__->test23;__PACKAGE__->test24;__PACKAGE__->test25;__PACKAGE__->test26;__PACKAGE__->test27;__PACKAGE__->test28;__PACKAGE__->test29;
+__PACKAGE__->test30;__PACKAGE__->test31;__PACKAGE__->test32;__PACKAGE__->test33;__PACKAGE__->test34;__PACKAGE__->test35;__PACKAGE__->test36;__PACKAGE__->test37;__PACKAGE__->test38;__PACKAGE__->test39;
+__PACKAGE__->test40;__PACKAGE__->test41;__PACKAGE__->test42;__PACKAGE__->test43;__PACKAGE__->test44;__PACKAGE__->test45;__PACKAGE__->test46;__PACKAGE__->test47;__PACKAGE__->test48;__PACKAGE__->test49;
+__PACKAGE__->test50;__PACKAGE__->test51;__PACKAGE__->test52;__PACKAGE__->test53;__PACKAGE__->test54;__PACKAGE__->test55;__PACKAGE__->test56;__PACKAGE__->test57;__PACKAGE__->test58;__PACKAGE__->test59;
+__PACKAGE__->test60;__PACKAGE__->test61;__PACKAGE__->test62;__PACKAGE__->test63;__PACKAGE__->test64;__PACKAGE__->test65;__PACKAGE__->test66;__PACKAGE__->test67;__PACKAGE__->test68;__PACKAGE__->test69;
+__PACKAGE__->test70;__PACKAGE__->test71;__PACKAGE__->test72;__PACKAGE__->test73;__PACKAGE__->test74;__PACKAGE__->test75;__PACKAGE__->test76;__PACKAGE__->test77;__PACKAGE__->test78;__PACKAGE__->test79;
