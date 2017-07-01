@@ -424,6 +424,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
     String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
+    assertNoErrorElements();
   }
 
   protected void assertNoErrorElements() {
