@@ -1,0 +1,2 @@
+has '+mojo1' => is => 'rw';
+__PACKAGE__->mo<caret>jo1();

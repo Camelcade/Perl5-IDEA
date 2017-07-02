@@ -261,7 +261,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
       }
       PerlAttributeDefinition newElement = new PerlAttributeDefinition(
         this,
-        ElementManipulators.getValueText(identifier),
+        PerlAttributeDefinition.DEFAULT_NAME_COMPUTATION.fun(ElementManipulators.getValueText(identifier)),
         LIGHT_ATTRIBUTE_DEFINITION,
         identifier,
         packageName,

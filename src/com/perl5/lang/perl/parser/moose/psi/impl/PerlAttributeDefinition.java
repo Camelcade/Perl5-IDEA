@@ -16,8 +16,14 @@
 
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
+import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulator;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.Function;
+import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -28,7 +34,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> {
+public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper>
+  implements PerlIdentifierRangeProvider {
+  public static final Function<String, String> DEFAULT_NAME_COMPUTATION =
+    name -> StringUtil.startsWith(name, "+") ? name.substring(1) : name;
+
+
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
                                  @NotNull String subName,
                                  @NotNull IStubElementType elementType,
@@ -53,5 +64,22 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
                                  @NotNull PerlSubDefinitionStub stub) {
     super(wrapper, stub);
+  }
+
+  @NotNull
+  @Override
+  public Function<String, String> getNameComputation() {
+    return DEFAULT_NAME_COMPUTATION;
+  }
+
+  @NotNull
+  @Override
+  public TextRange getRangeInIdentifier() {
+    PsiElement nameIdentifier = getNameIdentifier();
+    ElementManipulator<PsiElement> manipulator = ElementManipulators.getNotNullManipulator(nameIdentifier);
+    TextRange defaultRange = manipulator.getRangeInElement(nameIdentifier);
+    return StringUtil.startsWith(defaultRange.subSequence(nameIdentifier.getNode().getChars()), "+")
+           ? TextRange.create(defaultRange.getStartOffset() + 1, defaultRange.getEndOffset())
+           : defaultRange;
   }
 }

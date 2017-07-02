@@ -24,6 +24,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
+import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,13 +80,19 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
       return;
     }
 
-    stringUsages.add(Pair.create(nameIdentifier, ElementManipulators.getValueTextRange(nameIdentifier)));
+    TextRange rangeToRename = psiElement instanceof PerlIdentifierRangeProvider
+                              ? ((PerlIdentifierRangeProvider)psiElement).getRangeInIdentifier()
+                              : ElementManipulators.getValueTextRange(nameIdentifier);
+    stringUsages.add(Pair.create(nameIdentifier, rangeToRename));
   }
 
   @NotNull
   @Override
   protected TextRange getRangeToRename(@NotNull PsiElement element) {
-    return ElementManipulators.getValueTextRange(element);
+    PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(element, 0);
+    return namedElement instanceof PerlIdentifierRangeProvider
+           ? ((PerlIdentifierRangeProvider)namedElement).getRangeInIdentifier()
+           : ElementManipulators.getValueTextRange(element);
   }
 
   @Nullable

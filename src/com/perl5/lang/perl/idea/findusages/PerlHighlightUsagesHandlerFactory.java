@@ -20,11 +20,13 @@ import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerBase;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerFactory;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Consumer;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -112,7 +114,10 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
         if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner) {
           PsiElement nameIdentifier = ((PsiNameIdentifierOwner)target).getNameIdentifier();
           if (nameIdentifier != null) {
-            myWriteUsages.add(ElementManipulators.getValueTextRange(nameIdentifier).shiftRight(nameIdentifier.getNode().getStartOffset()));
+            TextRange rangeInIdentifier = target instanceof PerlIdentifierRangeProvider
+                                          ? ((PerlIdentifierRangeProvider)target).getRangeInIdentifier()
+                                          : ElementManipulators.getValueTextRange(nameIdentifier);
+            myWriteUsages.add(rangeInIdentifier.shiftRight(nameIdentifier.getNode().getStartOffset()));
           }
         }
 

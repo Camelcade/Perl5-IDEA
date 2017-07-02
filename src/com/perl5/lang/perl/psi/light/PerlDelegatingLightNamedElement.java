@@ -23,6 +23,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NonNls;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightElement<Delegate>
   implements PsiNameIdentifierOwner {
+  public static final Function<String, String> DEFAULT_NAME_COMPUTATION = name -> name;
 
   @NotNull
   protected String myName;
@@ -42,7 +44,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   private PsiElement myNameIdentifier;
 
   @NotNull
-  private Function<String, String> myNameComputation = name -> name;
+  private Function<String, String> myNameComputation = DEFAULT_NAME_COMPUTATION;
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
@@ -95,7 +97,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   @Override
   public PsiElement setName(@NonNls @NotNull String newBaseName) throws IncorrectOperationException {
-    myNameIdentifier = ElementManipulators.handleContentChange(getNameIdentifier(), newBaseName);
+    // fixme should be in com.perl5.lang.perl.psi.utils.PerlPsiUtil.renameElement()
+    PsiElement nameIdentifier = getNameIdentifier();
+    ElementManipulator<PsiElement> manipulator = ElementManipulators.getManipulator(nameIdentifier);
+    TextRange identifierRange = this instanceof PerlIdentifierRangeProvider
+                                ? ((PerlIdentifierRangeProvider)this).getRangeInIdentifier()
+                                : ElementManipulators.getValueTextRange(nameIdentifier);
+    myNameIdentifier = manipulator.handleContentChange(nameIdentifier, identifierRange, newBaseName);
     myName = getNameComputation().fun(newBaseName);
     return this;
   }

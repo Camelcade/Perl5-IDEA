@@ -148,6 +148,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @param newName newName
    * @return manipulator return value
    */
+  @Deprecated // we need to pass named element
   public static PsiElement renameElement(PsiElement element, String newName) {
     //noinspection unchecked
     return PerlPsiUtil.getManipulator(element).handleContentChange(element, newName);
