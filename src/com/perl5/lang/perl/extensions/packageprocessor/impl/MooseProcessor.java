@@ -38,7 +38,7 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
     PACKAGE_MOOSE_OBJECT, PACKAGE_CARP, PACKAGE_SCALAR_UTIL
   );
   protected static final List<String> PARENT_CLASSES = Collections.singletonList(PACKAGE_MOOSE_OBJECT);
-  private static final List<PerlExportDescriptor> EXPORTS = Arrays.asList(
+  static final List<PerlExportDescriptor> EXPORTS = Arrays.asList(
     /* // following being handled using custom keywords
     PerlExportDescriptor.create(MOOSE, "extends"),
     PerlExportDescriptor.create(MOOSE, "with"),

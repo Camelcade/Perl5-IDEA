@@ -98,6 +98,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MojoBaseProcessor"/>
     <packageProcessor key="Moose"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
+    <packageProcessor key="Moose::Role"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseRoleProcessor"/>
     <packageProcessor key="Moo"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
     <packageProcessor key="Dancer"
