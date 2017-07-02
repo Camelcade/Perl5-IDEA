@@ -1,0 +1,2 @@
+(24,29) - 'mojo1': WRITE
+(59,64) - 'mojo1': READ

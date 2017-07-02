@@ -17,18 +17,24 @@
 package base;
 
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.actionSystem.IdeActions;
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.RangeMarker;
+import com.intellij.openapi.editor.colors.EditorColors;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.markup.RangeHighlighter;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
@@ -75,6 +81,8 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,6 +93,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   private static final String PERL_LIBRARY_NAME = "-perl-test-lib-";
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
+  private TextAttributes myReadAttributes;
+  private TextAttributes myWriteAttributes;
 
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
@@ -93,6 +103,9 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
+    myReadAttributes = scheme.getAttributes(EditorColors.SEARCH_RESULT_ATTRIBUTES);
+    myWriteAttributes = scheme.getAttributes(EditorColors.WRITE_SEARCH_RESULT_ATTRIBUTES);
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
@@ -499,7 +512,44 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  public static Application getApplication() {
-    return ApplicationManager.getApplication();
+  protected void doTestUsagesHighlighting() {
+    initWithFileSmartWithoutErrors();
+    StringBuilder result = new StringBuilder();
+    myFixture.testAction(new HighlightUsagesAction());
+    List<RangeHighlighter> highlighters = Arrays.asList(getEditor().getMarkupModel().getAllHighlighters());
+    ContainerUtil.sort(highlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
+
+    for (RangeHighlighter highlighter : highlighters) {
+      TextAttributes attributes = highlighter.getTextAttributes();
+
+      TextRange range = TextRange.create(highlighter.getStartOffset(), highlighter.getEndOffset());
+      CharSequence text = highlighter.getDocument().getCharsSequence();
+
+      String type;
+      if (attributes == myReadAttributes) {
+        type = "READ";
+      }
+      else if (attributes == myWriteAttributes) {
+        type = "WRITE";
+      }
+      else if (attributes == null) {
+        type = "n/a";
+      }
+      else {
+        type = attributes.toString();
+      }
+
+      result
+        .append(range)
+        .append(" - '")
+        .append(range.subSequence(text))
+        .append("': ")
+        .append(type)
+        .append("\n");
+    }
+
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
+
 }

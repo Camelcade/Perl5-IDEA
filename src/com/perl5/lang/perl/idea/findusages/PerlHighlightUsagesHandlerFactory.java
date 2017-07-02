@@ -103,6 +103,7 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
 
     @Override
     protected void selectTargets(List<PsiElement> targets, Consumer<List<PsiElement>> selectionConsumer) {
+      selectionConsumer.consume(targets);
     }
 
     @Override
