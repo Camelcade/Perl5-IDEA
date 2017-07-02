@@ -18,8 +18,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
@@ -101,17 +99,5 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   @Override
   public boolean hasPackageFilesOptions() {
     return true;
-  }
-
-  @Override
-  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
-  }
-
-  @Override
-  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
   }
 }

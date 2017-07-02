@@ -18,8 +18,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
@@ -52,18 +50,6 @@ public class ModernPerlPackageProcessor extends PerlPackageProcessorBase impleme
   @NotNull
   public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
     return LOADED_PACKAGES;
-  }
-
-  @Override
-  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
-  }
-
-  @Override
-  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
   }
 
   @Override

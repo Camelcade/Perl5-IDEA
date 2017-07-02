@@ -16,18 +16,9 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
-
 /**
  * Created by hurricup on 09.09.2015.
  */
 public class PerlVersionProcessor512 extends PerlVersionProcessor implements PerlStrictProvider {
   protected static final PerlVersionProcessor INSTANCE = new PerlVersionProcessor512();
-
-  @Override
-  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
-    // fixme implement modification
-    return currentMask == null ? new PerlStrictMask() : currentMask.clone();
-  }
 }

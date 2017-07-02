@@ -18,6 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 23.08.2015.
@@ -30,5 +31,8 @@ public interface PerlWarningsProvider {
    * @param currentMask mask of the outer block, or null if there is no outer block
    * @return modified mask
    */
-  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask);
+  default PerlWarningsMask getWarningMask(@NotNull PerlUseStatement useStatement, @NotNull PerlWarningsMask currentMask) {
+    // fixme NYI
+    return currentMask.clone();
+  }
 }

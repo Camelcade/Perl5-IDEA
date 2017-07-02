@@ -19,11 +19,9 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
-import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeNode;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,11 +71,5 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
   @Override
   public Map<String, String> getOptionsBundles() {
     return OPTIONS_BUNDLES;
-  }
-
-  @Override
-  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
-    // fixme implement modification
-    return currentMask == null ? new PerlWarningsMask() : currentMask.clone();
   }
 }

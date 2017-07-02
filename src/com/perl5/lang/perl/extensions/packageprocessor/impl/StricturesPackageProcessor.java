@@ -19,9 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.internals.PerlWarningsMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 
 /**
  * Created by hurricup on 23.06.2016.
@@ -29,15 +26,4 @@ import com.perl5.lang.perl.psi.PerlUseStatement;
 public class StricturesPackageProcessor extends PerlPackageProcessorBase implements
                                                                          PerlWarningsProvider,
                                                                          PerlStrictProvider {
-  @Override
-  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
-  }
-
-  @Override
-  public PerlWarningsMask getWarningMask(PerlUseStatement useStatement, PerlWarningsMask currentMask) {
-    // fixme implement modification
-    return currentMask.clone();
-  }
 }

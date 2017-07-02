@@ -19,8 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
-import com.perl5.lang.perl.internals.PerlStrictMask;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -49,11 +47,5 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPack
   @Override
   public Map<String, String> getOptionsBundles() {
     return Collections.emptyMap();
-  }
-
-  @Override
-  public PerlStrictMask getStrictMask(PerlUseStatement useStatement, PerlStrictMask currentMask) {
-    // fixme implement modification
-    return currentMask == null ? new PerlStrictMask() : currentMask.clone();
   }
 }
