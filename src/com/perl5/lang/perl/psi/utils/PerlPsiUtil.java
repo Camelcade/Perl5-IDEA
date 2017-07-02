@@ -29,7 +29,6 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -53,8 +52,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
-
 /**
  * Created by hurricup on 09.08.2015.
  */
@@ -66,13 +63,10 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return list of PerlStringContentElement
    */
   public static Collection<PerlStringContentElement> collectStringElements(@NotNull PsiElement startWith) {
-    final List<PerlStringContentElement> result = new ArrayList<PerlStringContentElement>();
-    processStringElements(startWith, new Processor<PerlStringContentElement>() {
-      @Override
-      public boolean process(PerlStringContentElement perlStringContentElement) {
-        result.add(perlStringContentElement);
-        return true;
-      }
+    final List<PerlStringContentElement> result = new ArrayList<>();
+    processStringElements(startWith, perlStringContentElement -> {
+      result.add(perlStringContentElement);
+      return true;
     });
     return result;
   }
@@ -102,7 +96,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
 
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     collectStringContentsRecursively(startWith, result);
     return result;
   }
@@ -248,7 +242,7 @@ public class PerlPsiUtil implements PerlElementTypes {
                                                          @Nullable final Class<? extends StubElement> stubClass,
                                                          @NotNull final Class<? extends PsiElement> psiClass
   ) {
-    final List<PsiElement> result = new ArrayList<PsiElement>();
+    final List<PsiElement> result = new ArrayList<>();
     if (stubClass != null && rootElement instanceof StubBasedPsiElement) {
       Stub rootElementStub = ((StubBasedPsiElement)rootElement).getStub();
 
@@ -502,7 +496,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
 
-    final List<PerlAnnotation> result = new ArrayList<PerlAnnotation>();
+    final List<PerlAnnotation> result = new ArrayList<>();
     processElementAnnotations(element, perlAnnotation -> {
       result.add(perlAnnotation);
       return true;
@@ -536,15 +530,12 @@ public class PerlPsiUtil implements PerlElementTypes {
   @Nullable
   public static <T extends PerlAnnotation> T getAnnotationByClass(@NotNull PsiElement element, final Class<T> annotationClass) {
     final PerlAnnotation[] result = new PerlAnnotation[]{null};
-    processElementAnnotations(element, new Processor<PerlAnnotation>() {
-      @Override
-      public boolean process(PerlAnnotation perlAnnotation) {
-        if (annotationClass.isInstance(perlAnnotation)) {
-          result[0] = perlAnnotation;
-          return false;
-        }
-        return true;
+    processElementAnnotations(element, perlAnnotation -> {
+      if (annotationClass.isInstance(perlAnnotation)) {
+        result[0] = perlAnnotation;
+        return false;
       }
+      return true;
     });
     //noinspection unchecked
     return (T)result[0];
@@ -681,24 +672,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     return isSelfShortcut(derefExpr.getFirstChild());
-  }
-
-  @Nullable
-  public static PsiElement getFirstContentTokenOfString(PsiElement name) {
-
-    if (name instanceof PsiPerlStringBare) {
-      return name.getFirstChild();
-    }
-    else if (name instanceof PerlString) {
-      PsiElement run = name.getFirstChild();
-      if (run != null) {
-        run = run.getNextSibling();
-        if (STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(run))) {
-          return run;
-        }
-      }
-    }
-    return null;
   }
 
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
