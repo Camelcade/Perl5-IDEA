@@ -38,11 +38,6 @@ public class PerlVisitor extends PsiPerlVisitor {
   }
 
   @Override
-  public final void visitNamespaceDefinition(@NotNull PsiPerlNamespaceDefinition o) {
-    visitNamespaceDefinitionElement(o);
-  }
-
-  @Override
   public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
     visitNamespaceDefinitionElement(o);
   }
