@@ -106,6 +106,9 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXTypesCheckedUtilExportsProcessor"/>
     <packageProcessor key="MooseX::ClassAttribute"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXClassAttributeProcessor"/>
+    <packageProcessor key="MooseX::Role::Parameterized"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXRoleParametrized"/>
+
 
     <packageProcessor key="Moo"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
