@@ -100,6 +100,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseProcessor"/>
     <packageProcessor key="Moose::Role"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseRoleProcessor"/>
+    <packageProcessor key="Moose::Util::TypeConstraints"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseUtilTypeConstraintsProcessor"/>
     <packageProcessor key="Moo"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
     <packageProcessor key="Dancer"

@@ -76,6 +76,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static final String PACKAGE_SEPARATOR = "::";
   public static final String PACKAGE_MOOSE_OBJECT = PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Object";
   public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Role";
+  public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS =
+    PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Util::TypeConstraints";
   public static final String PACKAGE_DEREFERENCE = "->";
   public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
   public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
