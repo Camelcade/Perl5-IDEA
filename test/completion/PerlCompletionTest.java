@@ -45,7 +45,7 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   public void testMooseXRoleParametrized() {doTestCompletion();}
 
-  public void testMooseXCLassAttribute() {doTestCompletion();}
+  public void testMooseXClassAttribute() {doTestCompletion();}
 
   public void testMooseXTypesCheckedUtilExports() {doTestCompletion();}
 
