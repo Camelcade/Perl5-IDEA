@@ -1,0 +1,33 @@
+package Foo::Bar;
+# some comments
+package Foo::Bar;
+=pod
+
+Some pod
+
+=cut
+package Foo::Bar;
+<<EOM;
+
+EOM
+package Foo::Bar;
+#@deprecated
+package Foo::Bar;
+#@deprecated
+#@deprecated
+package Foo::Bar;
+# some comments
+#@deprecated
+package Foo::Bar;
+=pod
+
+Some pod
+
+=cut
+#@deprecated
+package Foo::Bar;
+<<EOM;
+
+EOM
+#@deprecated
+package Foo::Bar;

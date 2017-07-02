@@ -248,22 +248,14 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   @Nullable
   @Override
   public PerlNamespaceAnnotations getAnnotations() {
-    PerlNamespaceAnnotations annotations;
     PerlNamespaceDefinitionStub stub = getStub();
-
     if (stub != null) {
-      annotations = stub.getAnnotations();
+      return stub.getAnnotations();
     }
     else {
       // re-parsing
-      annotations = getLocalAnnotations();
+      return getLocalAnnotations();
     }
-
-    if (annotations != null) {
-      return annotations;
-    }
-
-    return null;
   }
 
   @Nullable

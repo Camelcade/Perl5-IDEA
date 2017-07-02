@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
-import com.intellij.lang.WhitespacesBinders;
+import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
@@ -32,10 +32,16 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
+import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
+
 /**
  * Created by hurricup on 01.05.2015.
  */
 public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
+
+
   public static final TokenSet VERSION_TOKENS = TokenSet.create(
     NUMBER,
     NUMBER_SIMPLE,
@@ -51,10 +57,30 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     QUOTE_TICK_CLOSE,
     QUOTE_SINGLE_CLOSE
   );
-
   // tokens that can be converted between each other depending on context
   public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
   );
+  private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = new WhitespacesAndCommentsBinder() {
+    @Override
+    public int getEdgePosition(List<IElementType> tokens, boolean atStreamEdge, TokenTextGetter getter) {
+      int result = tokens.size();
+      if (atStreamEdge || tokens.isEmpty()) {
+        return result;
+      }
+
+      for (int i = tokens.size() - 1; i >= 0; i--) {
+        IElementType currentToken = tokens.get(i);
+        if (currentToken == COMMENT_ANNOTATION || currentToken == COMMENT_LINE) {
+          result = i;
+        }
+        else if (currentToken != TokenType.WHITE_SPACE && currentToken != TokenType.NEW_LINE_INDENT) {
+          break;
+        }
+      }
+
+      return result;
+    }
+  };
 
   public static void addConvertableTokens(IElementType... convertableTokens) {
     CONVERTABLE_TOKENS = TokenSet.orSet(CONVERTABLE_TOKENS, TokenSet.create(convertableTokens));
@@ -390,7 +416,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     PsiBuilder.Marker m = b.mark();
     if (PerlParserGenerated.real_namespace_content(b, l)) {
       m.done(NAMESPACE_CONTENT);
-      m.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
+      m.setCustomEdgeTokenBinders(GREEDY_LEFT_BINDER, NAMESPACE_RIGHT_BINDER);
       return true;
     }
     m.rollbackTo();

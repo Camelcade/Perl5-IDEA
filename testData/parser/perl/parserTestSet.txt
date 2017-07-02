@@ -2211,7 +2211,7 @@ Perl5
       PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: ;)(';')
       PsiElement(Perl5: ;)(';')
-      PsiComment(Perl5: COMMENT_LINE)('# guess a file :)')
+  PsiComment(Perl5: COMMENT_LINE)('# guess a file :)')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Encode::KR::2022_KR
     PsiElement(Perl5: package)('package')
     PerlNamespaceElementImpl(Perl5: package::name)('Encode::KR::2022_KR')

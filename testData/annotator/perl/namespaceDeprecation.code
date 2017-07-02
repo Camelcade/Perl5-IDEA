@@ -1,0 +1,12 @@
+#@deprecated
+package <warning descr="This namespace is deprecated">Foo::Bar</warning>;
+
+
+#@deprecated
+package <warning descr="This namespace is deprecated">Foo::Something</warning>;
+
+sub something;
+
+package main;
+
+<warning descr="This namespace is deprecated">Foo::Something</warning>->something();

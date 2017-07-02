@@ -1,5 +1,5 @@
 #@deprecated
-package Foo::Bar::Bla;
+package <warning descr="This namespace is deprecated">Foo::Bar::Bla</warning>;
 
 #@deprecated
 our $<warning descr="This variable is deprecated">var</warning>;
