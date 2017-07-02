@@ -96,8 +96,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @Override
   public PsiElement setName(@NonNls @NotNull String newBaseName) throws IncorrectOperationException {
     myNameIdentifier = ElementManipulators.handleContentChange(getNameIdentifier(), newBaseName);
-    myName = myNameComputation.fun(newBaseName);
+    myName = getNameComputation().fun(newBaseName);
     return this;
+  }
+
+  @NotNull
+  public Function<String, String> getNameComputation() {
+    return myNameComputation;
   }
 
   @Override
