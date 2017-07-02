@@ -1,0 +1,11 @@
+package Parent1;
+
+package Parent2;
+use parent 'Parent1';
+
+package Foo::Bar;
+use parent qw/Parent1 Parent2/;
+
+package Foo::Baz;
+use base qw/Foo::Bar/;
+

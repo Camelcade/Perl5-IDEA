@@ -1,0 +1,6 @@
+<error descr="Namespace Foo::Bar has recursive inheritance">
+#@deprecated
+package <error descr="Namespace Foo::Bar has recursive inheritance">Foo::Bar</error>;
+use base qw/Foo::Bar/;
+
+</error>

@@ -846,10 +846,10 @@
                      shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions"
                      groupName="Perl5" enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection"/>
-    <!--<localInspection language="Perl5"-->
-    <!--shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"-->
-    <!--enabledByDefault="true" level="ERROR"-->
-    <!--implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>-->
+    <localInspection language="Perl5"
+                     shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection"/>
 
     <localInspection language="Perl5"
                      shortName="FancyMethodCall" displayName="Fancy method calls" groupName="Perl5"

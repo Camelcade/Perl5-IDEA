@@ -1,0 +1,12 @@
+<error descr="Namespace Parent2 has recursive inheritance"><error descr="Namespace Parent3 has recursive inheritance"><error descr="Namespace Parent4 has recursive inheritance">package Parent1;
+
+package <error descr="Namespace Parent2 has recursive inheritance">Parent2</error>;
+use parent 'Parent4';
+
+package <error descr="Namespace Parent3 has recursive inheritance">Parent3</error>;
+use parent qw/Parent1 Parent2/;
+
+package <error descr="Namespace Parent4 has recursive inheritance">Parent4</error>;
+use base qw/Parent3/;
+
+</error></error></error>

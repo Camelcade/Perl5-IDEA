@@ -17,18 +17,16 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 16.08.2015.
@@ -52,7 +50,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
           return;
         }
 
-        if (hasRecursiveInheritance(o)) {
+        if (hasRecursiveInheritance(o, new THashSet<>())) {
           registerError(holder, o.getContainingFile(), "Namespace " + packageName + " has recursive inheritance");
           registerError(holder, nameIdentifier, "Namespace " + packageName + " has recursive inheritance");
         }
@@ -60,26 +58,15 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
     };
   }
 
-  public static boolean hasRecursiveInheritance(PerlNamespaceDefinitionElement definition) {
-    return hasRecursiveInheritance(definition.getProject(), definition.getPackageName(), new HashSet<String>());
-  }
-
-  private static boolean hasRecursiveInheritance(Project project, String packageName, HashSet<String> passedWay) {
-    Collection<PerlNamespaceDefinitionElement> definitions =
-      PerlPackageUtil.getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
-    if (!definitions.isEmpty()) {
-      HashSet<PerlNamespaceDefinitionElement> parents = new HashSet<PerlNamespaceDefinitionElement>();
-      for (PerlNamespaceDefinitionElement definition : definitions) {
-        parents.addAll(definition.getParentNamespaceDefinitions());
+  private static boolean hasRecursiveInheritance(@NotNull PerlNamespaceDefinitionElement definition,
+                                                 @NotNull Set<String> passedWay) {
+    passedWay.add(definition.getPackageName());
+    for (PerlNamespaceDefinitionElement element : definition.getParentNamespaceDefinitions()) {
+      if (passedWay.contains(element.getPackageName())) {
+        return true;
       }
-
-      if (!parents.isEmpty()) {
-        passedWay.add(packageName);
-        for (PerlNamespaceDefinitionElement parent : parents) {
-          if (passedWay.contains(parent.getPackageName()) || hasRecursiveInheritance(project, parent.getPackageName(), passedWay)) {
-            return true;
-          }
-        }
+      if (hasRecursiveInheritance(element, new THashSet<>(passedWay))) {
+        return true;
       }
     }
     return false;

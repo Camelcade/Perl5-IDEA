@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
+import com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection;
 import com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection;
 
 /**
@@ -28,6 +29,12 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   protected String getTestDataPath() {
     return "testData/annotator/perl";
   }
+
+  public void testNsRecursiveInheritance1() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
+
+  public void testNsRecursiveInheritance2() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
+
+  public void testNsRecursiveInheritance3() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
 
   public void testNamespaceDeprecation() {doDeprecationTest();}
 
