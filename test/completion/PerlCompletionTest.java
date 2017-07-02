@@ -37,6 +37,8 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   public void testMooseImports() {doTestCompletion();}
 
+  public void testMooseXTypesCheckedUtilExports() {doTestCompletion();}
+
   public void testMooseUtilTypeConstraints() {doTestCompletion();}
 
   public void testMooseRoleImports() {doTestCompletion();}
@@ -44,6 +46,7 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testMooseAttrs() {doTestCompletion();}
 
   public void testMojoAttrs() {doTestCompletion();}
+
 
   public void testClassAccessor() {
     doTestCompletion();

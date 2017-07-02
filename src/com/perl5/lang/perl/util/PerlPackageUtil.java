@@ -70,16 +70,27 @@ import java.util.regex.Pattern;
  * Created by hurricup on 24.04.2015.
  */
 public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces {
+  public static final String PACKAGE_SEPARATOR = "::";
+  public static final String PACKAGE_DEREFERENCE = "->";
+  public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
+
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
   public static final String PACKAGE_MOOSE = "Moose";
-  public static final String PACKAGE_SEPARATOR = "::";
-  public static final String PACKAGE_MOOSE_OBJECT = PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Object";
-  public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Role";
-  public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS =
-    PACKAGE_MOOSE + PerlPackageUtil.PACKAGE_SEPARATOR + "Util::TypeConstraints";
-  public static final String PACKAGE_DEREFERENCE = "->";
-  public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
+  public static final String PACKAGE_MOOSE_BASE = "Moose" + PACKAGE_SEPARATOR;
+  public static final String PACKAGE_MOOSE_X = PACKAGE_MOOSE + "X";
+  public static final String PACKAGE_MOOSE_X_BASE = PACKAGE_MOOSE_X + PACKAGE_SEPARATOR;
+  public static final String PACKAGE_MOOSE_OBJECT = PACKAGE_MOOSE_BASE + "Object";
+  public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE_BASE + "Role";
+  public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS = PACKAGE_MOOSE_BASE + "Util::TypeConstraints";
+  public static final String PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
+  public static final String PACKAGE_MOOSE_X_TYPES_CHEKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
+  public static final String PACKAGE_MOOSE_X_CLASSATTRIBUTE = PACKAGE_MOOSE_X_BASE + "ClassAttribute";
+  public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES_ROLE = PACKAGE_MOOSE_X_BASE + "MethodAttributes::Role";
+  public static final String PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED = PACKAGE_MOOSE_X_BASE + "Role::Parameterized";
+  public static final String PACKAGE_MOOSE_X_ROLE_WITHOVERLOADING = PACKAGE_MOOSE_X_BASE + "Role::WithOverloading";
+  public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES = PACKAGE_MOOSE_X_BASE + "MethodAttributes";
+
   public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
   public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
@@ -200,7 +211,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
       chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
     }
 
-    newName = StringUtils.join(chunks, "::");
+    newName = StringUtils.join(chunks, PACKAGE_SEPARATOR);
 
     CANONICAL_NAMES_CACHE.put(originalName, newName);
 

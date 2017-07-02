@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+use strict;
+use warnings FATAL => 'all';
+use MooseX::Types::CheckedUtilExports;
+
+<caret>
