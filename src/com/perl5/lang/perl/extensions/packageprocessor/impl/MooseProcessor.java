@@ -22,8 +22,11 @@ import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.*;
 
 /**
  * Created by hurricup on 25.11.2015.
@@ -33,9 +36,27 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
                                                              PerlWarningsProvider,
                                                              PerlPackageParentsProvider,
                                                              PerlPackageLoader {
-  public static final String MOOSE_OBJECT = "Moose::Object";
-  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOOSE_OBJECT);
-  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
+  protected static final List<String> LOADED_CLASSES = Arrays.asList(
+    PACKAGE_MOOSE_OBJECT, PACKAGE_CARP, PACKAGE_SCALAR_UTIL
+  );
+  protected static final List<String> PARENT_CLASSES = Collections.singletonList(PACKAGE_MOOSE_OBJECT);
+  private static final List<PerlExportDescriptor> EXPORTS = Arrays.asList(
+    /* // following being handled using custom keywords
+    PerlExportDescriptor.create(MOOSE, "extends"),
+    PerlExportDescriptor.create(MOOSE, "with"),
+    PerlExportDescriptor.create(MOOSE, "has"),
+    PerlExportDescriptor.create(MOOSE, "before"),
+    PerlExportDescriptor.create(MOOSE, "after"),
+    PerlExportDescriptor.create(MOOSE, "around"),
+    PerlExportDescriptor.create(MOOSE, "override"),
+    PerlExportDescriptor.create(MOOSE, "augment"),
+    PerlExportDescriptor.create(MOOSE, "super"),
+    PerlExportDescriptor.create(MOOSE, "inner"),
+    */
+
+    PerlExportDescriptor.create(PACKAGE_CARP, "confess"),
+    PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed")
+  );
 
   @NotNull
   @Override
@@ -72,5 +93,11 @@ public class MooseProcessor extends PerlPackageProcessorBase implements
 
   public List<String> getParentClasses() {
     return PARENT_CLASSES;
+  }
+
+  @NotNull
+  @Override
+  public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
+    return EXPORTS;
   }
 }
