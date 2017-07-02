@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+package MyOtherMoose;
+use strict;
+use warnings FATAL => 'all';
+use MooseX::ClassAttribute;
+
+<caret>

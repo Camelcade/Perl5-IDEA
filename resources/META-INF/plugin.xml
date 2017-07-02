@@ -104,6 +104,9 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseUtilTypeConstraintsProcessor"/>
     <packageProcessor key="MooseX::Types::CheckedUtilExports"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXTypesCheckedUtilExportsProcessor"/>
+    <packageProcessor key="MooseX::ClassAttribute"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooseXClassAttributeProcessor"/>
+
     <packageProcessor key="Moo"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MooProcessor"/>
     <packageProcessor key="Dancer"
