@@ -1,0 +1,9 @@
+
+package <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got Foo::Bаar.">Foo::Bаar</error>;
+sub <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеsub.">someеsub</error>{}
+sub <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеohtersub.">someеohtersub</error>;
+my ($<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>, @<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>, %<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got vaаr.">vaаr</error>);
+<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got soоmesub.">soоmesub</error>();
+<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got Foo::Bаar.">Foo::Bаar</error>-><error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got someеsub.">someеsub</error>();
+has <error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got sometаhing.">sometаhing</error> => is => 'rw';
+use Exception::Class '<error descr="For non-utf files perl identifier should match the regexp: '/ (?aa) (?!\d) \w+ /x', but got SomeExceеption.">SomeExceеption</error>';

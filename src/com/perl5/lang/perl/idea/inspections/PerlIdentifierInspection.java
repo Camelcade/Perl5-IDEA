@@ -32,18 +32,8 @@ public class PerlIdentifierInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+    boolean isUtf = holder.getFile().getVirtualFile().getCharset() == CharsetToolkit.UTF8_CHARSET;
     return new PerlVisitor() {
-      private boolean isUtf = false;
-      private boolean isUtfComputed = false;
-
-      private synchronized boolean isUtf(PsiElement element) {
-        if (isUtfComputed) {
-          return isUtf;
-        }
-
-        isUtfComputed = true;
-        return isUtf = element.getContainingFile().getVirtualFile().getCharset() == CharsetToolkit.UTF8_CHARSET;
-      }
 
       @Override
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
@@ -98,7 +88,7 @@ public class PerlIdentifierInspection extends PerlInspection {
 
         boolean hasError = false;
         StringBuilder formattedIdentifier = new StringBuilder();
-        if (!isUtf(element)) {
+        if (!isUtf) {
           int length = text.length();
           if (length == 0) {
             return;

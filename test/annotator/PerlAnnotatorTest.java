@@ -17,10 +17,8 @@
 package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
-import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
-import com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection;
-import com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection;
+import com.intellij.openapi.vfs.CharsetToolkit;
+import com.perl5.lang.perl.idea.inspections.*;
 
 /**
  * Created by hurricup on 09.11.2016.
@@ -29,6 +27,13 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/perl";
+  }
+
+  public void testIdentifierInspection() {
+    initWithFileSmart();
+    getFile().getVirtualFile().setCharset(CharsetToolkit.US_ASCII_CHARSET);
+    myFixture.enableInspections(PerlIdentifierInspection.class);
+    myFixture.checkHighlighting(true, false, false);
   }
 
   public void testFancyMethodCall() {doTest(PerlFancyMethodCallInspection.class);}

@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.parser.Exception.Class.psi.impl.PerlExceptionClassWrapper;
-import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -121,16 +119,8 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitElement(o);
   }
 
-  public void visitConstantWrapper(@NotNull PerlConstantsWrapper o) {
-    visitPolyNamedElement(o);
-  }
-
   public void visitLightNamedElement(@NotNull PerlDelegatingLightNamedElement o) {
     visitElement(o);
-  }
-
-  public void visitExceptionClassWrapper(@NotNull PerlExceptionClassWrapper o) {
-    visitPolyNamedElement(o);
   }
 
   @Override

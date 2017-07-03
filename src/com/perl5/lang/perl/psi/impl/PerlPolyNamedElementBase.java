@@ -59,18 +59,21 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
   }
 
   @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public final void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitPolyNamedElement(this);
+      visitWrapper((PerlVisitor)visitor);
+      acceptLightElements((PerlVisitor)visitor);
     }
     else {
       super.accept(visitor);
     }
   }
 
-  @Override
-  public void acceptChildren(@NotNull PsiElementVisitor visitor) {
-    super.acceptChildren(visitor);
+  protected void visitWrapper(@NotNull PerlVisitor visitor) {
+    visitor.visitPolyNamedElement(this);
+  }
+
+  protected final void acceptLightElements(@NotNull PerlVisitor visitor) {
     for (PerlDelegatingLightNamedElement lightNamedElement : getLightElements()) {
       lightNamedElement.accept(visitor);
     }

@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -105,18 +104,6 @@ public class PerlDeprecatedInspection extends PerlInspection {
           PsiElement nameIdentifier = o.getNameIdentifier();
           if (nameIdentifier != null) {
             markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.namespace"));
-          }
-        }
-      }
-
-      @Override
-      public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {
-        for (PerlDelegatingLightNamedElement element : o.getLightElements()) {
-          if (element instanceof PerlSubDefinitionElement) {
-            visitPerlSubDefinitionElement((PerlSubDefinitionElement)element);
-          }
-          else if (element instanceof PerlNamespaceDefinitionWithIdentifier) {
-            visitPerlNamespaceDefinitionWithIdentifier((PerlNamespaceDefinitionWithIdentifier)element);
           }
         }
       }

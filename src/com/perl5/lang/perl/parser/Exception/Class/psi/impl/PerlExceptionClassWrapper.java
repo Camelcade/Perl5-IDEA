@@ -20,10 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
-import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -192,16 +190,6 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
           ));
         }
       }
-    }
-  }
-
-  @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitExceptionClassWrapper(this);
-    }
-    else {
-      super.accept(visitor);
     }
   }
 }
