@@ -1,0 +1,9 @@
+package <warning descr="Namespace definition clashes with built-in namespace">UNIVERSAL</warning>;
+
+package UNIVERSAL1;
+
+package <warning descr="Namespace definition clashes with built-in namespace">lib</warning>;
+
+package lib1;
+
+use Exception::Class '<warning descr="Namespace definition clashes with built-in namespace">UNIVERSAL</warning>';

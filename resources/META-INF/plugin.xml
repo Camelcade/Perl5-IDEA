@@ -842,7 +842,7 @@
     <localInspection language="Perl5"
                      shortName="NamespaceClashes" displayName="Clashed namespace definition" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceClashesInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlClashedNamespacesInspection"/>
     <localInspection language="Perl5"
                      shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions"
                      groupName="Perl5" enabledByDefault="true" level="WARNING"

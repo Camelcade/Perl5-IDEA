@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlNamespaceClashesInspection extends PerlInspection {
+public class PerlClashedNamespacesInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {

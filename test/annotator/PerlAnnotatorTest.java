@@ -29,6 +29,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testClashedNamespacesInspection() {doTest(PerlClashedNamespacesInspection.class);}
+
   public void testUnresolvedLabelInspection() {doTest(PerlUnresolvedLabelInspection.class);}
 
   public void testIdentifierInspection() {
