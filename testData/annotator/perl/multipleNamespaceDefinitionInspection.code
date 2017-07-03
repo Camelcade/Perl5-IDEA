@@ -1,0 +1,7 @@
+package <warning descr="Multiple namespace definitions found">MyPackage</warning>;
+
+use Exception::Class '<warning descr="Multiple namespace definitions found">MyPackage</warning>';
+
+package MyPackage2;
+
+use Exception::Class 'MyPackage3';

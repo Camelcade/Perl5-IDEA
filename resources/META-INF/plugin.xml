@@ -846,7 +846,7 @@
     <localInspection language="Perl5"
                      shortName="NamespaceMultipleDefinitions" displayName="Multiple namespace definitions"
                      groupName="Perl5" enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceMultipleDefinitionsInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlMultipleNamespaceDefinitionsInspection"/>
     <localInspection language="Perl5"
                      shortName="NamespaceRecursiveInheritance" displayName="Recursive inheritance" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
