@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+package MySomePackage;
+use strict;
+use warnings FATAL => 'all';
+#@deprecated
+has <warning descr="This sub is deprecated">test1</warning> => is => 'ro';
+has test2 => is => 'rw';
+#@deprecated
+has [ '<warning descr="This sub is deprecated">test3</warning>', "<warning descr="This sub is deprecated">test4</warning>", `nothing`, "test4$a", `nothing$a`, qw/<warning descr="This sub is deprecated">test5</warning> <warning descr="This sub is deprecated">test6</warning>/ ] => is => 'ro';
+
+has [
+        #@deprecated
+        q'<warning descr="This sub is deprecated">test7</warning>', qq"test8", qx`nothing`, qq"test8$a", qx`nothing$a`, qw/test9 test10/ ] => is => 'rw';
+
+#@deprecated
+has test19 => is => 'rw', accessor => '<warning descr="This sub is deprecated">test20</warning>';
+has test21 => is => 'rw', reader =>
+    #@deprecated
+    '<warning descr="This sub is deprecated">test22</warning>';
+has test25 => is => 'rw',
+    #@deprecated
+    reader => '<warning descr="This sub is deprecated">test26</warning>';
+has test48 => is => 'rw',
+    #@deprecated
+    handles => [ qw/<warning descr="This sub is deprecated">test49</warning> <warning descr="This sub is deprecated">test50</warning> <warning descr="This sub is deprecated">test51</warning> <warning descr="This sub is deprecated">test52</warning>/ ];
+#@deprecated
+has <warning descr="This sub is deprecated">test53</warning> => is => 'rw', handles => { qw/<warning descr="This sub is deprecated">test54</warning> test50 <warning descr="This sub is deprecated">test55</warning> test52/ };
+has test64 => is => 'rw',
+    handles => [
+        #@deprecated
+        '<warning descr="This sub is deprecated">test65</warning>',"test66",`test67`,q'test68',qq"test69",qx`test67`,"test68$a",`test69$a`,qq"test70$a",qx`test71$a`];
+
+__PACKAGE__-><warning descr="This sub is deprecated">test1</warning>;__PACKAGE__->test2;__PACKAGE__-><warning descr="This sub is deprecated">test3</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test4</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test5</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test6</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test7</warning>;__PACKAGE__->test8;__PACKAGE__->test9;__PACKAGE__->test10;
+__PACKAGE__-><warning descr="This sub is deprecated">test20</warning>;__PACKAGE__->test21;__PACKAGE__-><warning descr="This sub is deprecated">test22</warning>;__PACKAGE__->test25;__PACKAGE__-><warning descr="This sub is deprecated">test26</warning>;
+__PACKAGE__->test48;__PACKAGE__-><warning descr="This sub is deprecated">test49</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test50</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test51</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test52</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test53</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test54</warning>;__PACKAGE__-><warning descr="This sub is deprecated">test55</warning>;
+__PACKAGE__->test64;__PACKAGE__-><warning descr="This sub is deprecated">test65</warning>;__PACKAGE__->test66;__PACKAGE__->test68;__PACKAGE__->test69;

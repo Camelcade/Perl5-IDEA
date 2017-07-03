@@ -192,7 +192,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
         packageName,
         key.equals(MUTATOR_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value", valueClass))
                                 : Collections.emptyList(),
-        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
+        PerlSubAnnotations.tryToFindAnnotations(identifier, entry.keyElement, getParent())
       );
 
       if (key.equals(READER_KEY) && valueClass != null) {
