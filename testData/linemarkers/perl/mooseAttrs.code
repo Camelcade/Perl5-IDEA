@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+package ParentPackage;
+has test1 =>
+    qw/
+        is rw
+        reader testreader
+        writer testwriter
+        clearer testclearer
+        predicate testpredicate
+        /,
+    handles => [qw/
+        handles1
+        handles2
+        /];
+
+package ChildPackage;
+extends 'ParentPackage';
+
+has test1 =>
+    qw/
+        is rw
+        reader testreader
+        writer testwriter
+        clearer testclearer
+        predicate testpredicate
+        /,
+    handles => [qw/
+        handles1
+        handles2
+        /];

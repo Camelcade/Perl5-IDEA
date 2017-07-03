@@ -1,0 +1,64 @@
+24 - 37: 'ParentPackage': Subclasses
+Targets: 1
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ChildPackage at 264 in mooseAttrs.pl
+
+43 - 48: 'test1': Overriden methods
+Targets: 1
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@ChildPackage::test1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 316 in mooseAttrs.pl
+
+89 - 99: 'testreader': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::testreader; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 362 in mooseAttrs.pl
+
+115 - 125: 'testwriter': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::testwriter($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 388 in mooseAttrs.pl
+
+142 - 153: 'testclearer': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::testclearer; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 415 in mooseAttrs.pl
+
+172 - 185: 'testpredicate': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::testpredicate; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 445 in mooseAttrs.pl
+
+225 - 233: 'handles1': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::handles1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 498 in mooseAttrs.pl
+
+242 - 250: 'handles2': Overriden methods
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ChildPackage::handles2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 515 in mooseAttrs.pl
+
+272 - 284: 'ChildPackage': Parent classes
+Targets: 1
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ParentPackage at 16 in mooseAttrs.pl
+
+316 - 321: 'test1': Overriding method
+Targets: 1
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@ParentPackage::test1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 43 in mooseAttrs.pl
+
+362 - 372: 'testreader': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::testreader; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 89 in mooseAttrs.pl
+
+388 - 398: 'testwriter': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::testwriter($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 115 in mooseAttrs.pl
+
+415 - 426: 'testclearer': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::testclearer; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 142 in mooseAttrs.pl
+
+445 - 458: 'testpredicate': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::testpredicate; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 172 in mooseAttrs.pl
+
+498 - 506: 'handles1': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::handles1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 225 in mooseAttrs.pl
+
+515 - 523: 'handles2': Overriding method
+Targets: 1
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@ParentPackage::handles2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 242 in mooseAttrs.pl
+
