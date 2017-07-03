@@ -19,8 +19,12 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+
+import static com.intellij.codeInspection.ProblemHighlightType.*;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -28,21 +32,24 @@ import com.intellij.psi.PsiElement;
 public abstract class PerlInspection extends LocalInspectionTool {
 
   protected void registerProblem(ProblemsHolder holder, PsiElement element, String message) {
-    if (!element.getNode().getTextRange().isEmpty()) {
-      holder
-        .registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR_OR_WARNING, ElementManipulators.getValueTextRange(element));
-    }
+    doRegisterProblem(holder, element, message, GENERIC_ERROR_OR_WARNING);
   }
 
   protected void registerError(ProblemsHolder holder, PsiElement element, String message) {
-    if (!element.getNode().getTextRange().isEmpty()) {
-      holder.registerProblem(element, message, ProblemHighlightType.GENERIC_ERROR, ElementManipulators.getValueTextRange(element));
-    }
+    doRegisterProblem(holder, element, message, GENERIC_ERROR);
   }
 
   protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message) {
-    if (!element.getNode().getTextRange().isEmpty()) {
-      holder.registerProblem(element, message, ProblemHighlightType.LIKE_DEPRECATED, ElementManipulators.getValueTextRange(element));
+    doRegisterProblem(holder, element, message, LIKE_DEPRECATED);
+  }
+
+  private void doRegisterProblem(@NotNull ProblemsHolder holder,
+                                 @NotNull PsiElement element,
+                                 @NotNull String message,
+                                 @NotNull ProblemHighlightType highlightType) {
+    TextRange range = ElementManipulators.getValueTextRange(element);
+    if (!range.isEmpty()) {
+      holder.registerProblem(element, message, highlightType, range);
     }
   }
 }
