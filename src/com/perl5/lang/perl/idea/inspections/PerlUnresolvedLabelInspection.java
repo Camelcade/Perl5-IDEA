@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PerlLabelUndeclaredInspection extends PerlInspection {
+public class PerlUnresolvedLabelInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {

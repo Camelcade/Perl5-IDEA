@@ -29,6 +29,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testUnresolvedLabelInspection() {doTest(PerlUnresolvedLabelInspection.class);}
+
   public void testIdentifierInspection() {
     initWithFileSmart();
     getFile().getVirtualFile().setCharset(CharsetToolkit.US_ASCII_CHARSET);

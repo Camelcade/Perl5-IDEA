@@ -1,0 +1,13 @@
+
+
+last <warning descr="Unable to find label declaration (possible deprecated usage)">LABEL</warning>;
+next <warning descr="Unable to find label declaration (possible deprecated usage)">LABEL</warning>;
+redo <warning descr="Unable to find label declaration (possible deprecated usage)">LABEL</warning>;
+goto <warning descr="Unable to find label declaration (possible deprecated usage)">LABEL</warning>;
+
+OTHERLABEL: {
+    last OTHERLABEL;
+    next OTHERLABEL;
+    redo OTHERLABEL;
+    goto OTHERLABEL;
+}

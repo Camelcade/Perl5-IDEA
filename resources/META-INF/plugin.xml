@@ -921,7 +921,7 @@
     <localInspection language="Perl5"
                      shortName="UnresolvedLabels" displayName="Unresolved labels" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlLabelUndeclaredInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedLabelInspection"/>
     <localInspection language="Perl5"
                      shortName="IdentifierInspection" displayName="Correct identifiers" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
