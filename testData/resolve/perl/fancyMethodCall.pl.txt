@@ -1,0 +1,12 @@
+PerlSubReference at (114,117); text in range: 'new' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@ParentPackage::new at 48 in fancyMethodCall.pl
+
+PerlNamespaceReference at (118,131); text in range: 'ParentPackage' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ParentPackage at 16 in fancyMethodCall.pl
+
+PerlVariableReference at (136,142); text in range: 'object' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 104 in fancyMethodCall.pl
+
+PerlSubReference at (144,154); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@ParentPackage::somemethod at 68 in fancyMethodCall.pl
+

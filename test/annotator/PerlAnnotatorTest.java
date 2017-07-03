@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection;
+import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
 import com.perl5.lang.perl.idea.inspections.PerlNamespaceRecursiveInheritanceInspection;
 import com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection;
 
@@ -29,6 +30,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   protected String getTestDataPath() {
     return "testData/annotator/perl";
   }
+
+  public void testFancyMethodCall() {doTest(PerlFancyMethodCallInspection.class);}
 
   public void testMooseAttributesDeprecation() {doDeprecationTest();}
 

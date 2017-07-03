@@ -18,6 +18,7 @@ package base;
 
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
+import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.injected.editor.EditorWindow;
@@ -551,5 +552,21 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
+
+  protected void doTestAnnotationQuickFix(@NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
+    initWithFileSmartWithoutErrors();
+    myFixture.enableInspections(inspectionClass);
+    //myFixture.checkHighlighting(true, false, false);
+    doTestIntention(quickFixNamePrefix);
+  }
+
+  protected void doTestIntention(@NotNull String intentionPrefix) {
+    IntentionAction intention = myFixture.findSingleIntention(intentionPrefix);
+    assertNotNull(intention);
+    myFixture.launchAction(intention);
+    assertNoErrorElements();
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+  }
+
 
 }

@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+package ParentPackage;
+#@method
+sub new{}
+
+#@method
+sub somemethod{}
+
+package main;
+
+my $object = new ParentPackage();
+$object->somemethod;
+

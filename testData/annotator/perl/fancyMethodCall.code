@@ -1,0 +1,1 @@
+my $object = <warning descr="Using of fancy calls is not recommended, use ParentPackage->new(...)">new ParentPackage::</warning>();
