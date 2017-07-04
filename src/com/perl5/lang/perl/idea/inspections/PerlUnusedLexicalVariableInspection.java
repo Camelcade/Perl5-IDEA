@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 /**
  * Created by hurricup on 18.07.2015.
  */
-public class PerlVariableLexicalUnusedInspection extends PerlVariableInspectionBase {
+public class PerlUnusedLexicalVariableInspection extends PerlVariableInspectionBase {
   @Override
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     if (variableDeclarationWrapper.isLexicalDeclaration() &&

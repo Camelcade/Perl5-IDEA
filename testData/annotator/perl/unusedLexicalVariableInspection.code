@@ -1,0 +1,12 @@
+my (<warning descr="Unused lexical variable:$scalar">$scalar</warning>, <warning descr="Unused lexical variable:@array">@array</warning>, <warning descr="Unused lexical variable:%hash">%hash</warning>);
+local ($scalar, @array, %hash);
+state (<warning descr="Unused lexical variable:$scalar">$scalar</warning>, <warning descr="Unused lexical variable:@array">@array</warning>, <warning descr="Unused lexical variable:%hash">%hash</warning>);
+
+my ($scalar1, @array2, %hash3);
+local ($scalar4, @array5, %hash6);
+state ($scalar7, @array8, %hash9);
+
+say $scalar1, @array2, %hash3;
+say $scalar4, @array5, %hash6;
+say $scalar7, @array8, %hash9;
+

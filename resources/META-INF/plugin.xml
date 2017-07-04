@@ -895,7 +895,7 @@
     <localInspection language="Perl5"
                      shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableLexicalUnusedInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedLexicalVariableInspection"/>
     <localInspection language="Perl5"
                      shortName="UnusedGlobalVariable" displayName="Unused global variables" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
