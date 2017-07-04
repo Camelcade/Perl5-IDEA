@@ -30,6 +30,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testUnresolvedSubInspection() {doTest(PerlUnresolvedSubInspection.class);}
+
   public void testSimpleMainResolutionTrue() {doTestSimpleMainResolution(true);}
 
   public void testSimpleMainResolutionFalse() {doTestSimpleMainResolution(false);}
@@ -103,7 +105,7 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   }
 
   public void testUnresolvedBuiltIns() {
-    doTest(PerlSubUnresolvableInspection.class);
+    doTest(PerlUnresolvedSubInspection.class);
   }
 
   private void doTest() {

@@ -1,0 +1,43 @@
+package FooBar24;
+
+sub declaredsub;
+sub definedsub{}
+use constant definedconst => 42;
+has 'mojoattr';
+has 'mooseattr' => is => 'rw';
+__PACKAGE__-><warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">mk_accessors</warning>('accessor');
+*globalias = &declaredsub;
+
+our @EXPORT = qw/
+    declaredsub
+    definedsub
+    definedconst
+    mojoattr
+    mooseattr
+    accessor
+    globalias
+    <warning descr="Unable to find exported entity">undeclaredsub</warning>
+    /;
+our @EXPORT_OK = qw/
+    declaredsub
+    <warning descr="Unable to find exported entity">undeclaredsub</warning>
+    /;
+
+<warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">somesub</warning>();
+UNIVERSAL-><warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">somemethod</warning>();
+$object-><warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">somemethod</warning>();
+<warning descr="Unable to find sub definition, declaration, constant definition or typeglob aliasing">somemethod</warning> Foo::Bar::;
+
+accessor();
+globalias();
+mooseattr();
+mojoattr();
+definedconst();
+definedsub();
+__PACKAGE__->accessor();
+__PACKAGE__->globalias();
+__PACKAGE__->mooseattr();
+__PACKAGE__->mojoattr();
+__PACKAGE__->definedconst();
+__PACKAGE__->definedsub();
+

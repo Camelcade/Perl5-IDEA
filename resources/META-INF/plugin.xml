@@ -864,7 +864,7 @@
     <localInspection language="Perl5"
                      shortName="SubUnresolvable" displayName="Unresolved sub" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnresolvableInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedSubInspection"/>
     <localInspection language="Perl5"
                      shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
