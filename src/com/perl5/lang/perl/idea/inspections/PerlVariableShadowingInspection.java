@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlVariableShadowingInspection extends PerlVariableDeclarationInspection {
+public class PerlVariableShadowingInspection extends PerlVariableInspectionBase {
   @Override
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     PerlVariable variable = variableDeclarationWrapper.getVariable();

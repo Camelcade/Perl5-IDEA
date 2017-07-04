@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlBuiltinVariableRedeclarationInspection extends PerlVariableDeclarationInspection {
+public class PerlBuiltinVariableRedeclarationInspection extends PerlVariableInspectionBase {
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     PerlVariable variable = variableDeclarationWrapper.getVariable();
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();

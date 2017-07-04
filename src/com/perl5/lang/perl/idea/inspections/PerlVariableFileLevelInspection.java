@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.PsiPerlSubExpr;
 /**
  * Created by evstigneev on 14.12.2015.
  */
-public class PerlVariableFileLevelInspection extends PerlVariableDeclarationInspection {
+public class PerlVariableFileLevelInspection extends PerlVariableInspectionBase {
 
   @Override
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {

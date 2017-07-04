@@ -28,7 +28,7 @@ import java.util.HashSet;
 /**
  * Created by hurricup on 14.08.2015.
  */
-public class PerlVariableGlobalUnusedInspection extends PerlVariableDeclarationInspection {
+public class PerlVariableGlobalUnusedInspection extends PerlVariableInspectionBase {
   public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
     "@ISA",
     "@EXPORT_OK",
