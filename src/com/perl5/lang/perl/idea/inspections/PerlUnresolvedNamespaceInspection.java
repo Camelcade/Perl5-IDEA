@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 14.06.2015.
  * Check that namespace is defined
  */
-public class PerlNamespaceUndefinedInspection extends PerlInspection {
+public class PerlUnresolvedNamespaceInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
@@ -36,7 +36,7 @@ public class PerlNamespaceUndefinedInspection extends PerlInspection {
         PsiElement parent = o.getParent();
 
         if (parent instanceof PsiPerlRequireExpr ||
-            parent instanceof PsiPerlUseStatement ||
+            parent instanceof PsiPerlUseStatement && !(parent instanceof PsiPerlNoStatement) ||
             parent instanceof PerlNamespaceDefinitionWithIdentifier) {
           return;
         }

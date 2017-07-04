@@ -1,0 +1,10 @@
+
+<warning descr="Unable to find namespace definition">Foo::Bar42</warning>::->method;
+
+Mojolicious::Controller->app();
+
+UNIVERSAL->can();
+
+use Foo::Bar24;
+no <warning descr="Unable to find namespace definition">Foo::Bar24</warning>;
+require Foo::Bar24;

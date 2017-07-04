@@ -838,7 +838,7 @@
     <localInspection language="Perl5"
                      shortName="NamespaceUndefined" displayName="Unresovable namespace" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlNamespaceUndefinedInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedNamespaceInspection"/>
     <localInspection language="Perl5"
                      shortName="NamespaceClashes" displayName="Clashed namespace definition" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
