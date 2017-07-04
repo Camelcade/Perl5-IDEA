@@ -1,0 +1,16 @@
+my $scalar;
+our @array;
+state %hash;
+
+say $<warning descr="Unable to find variable declaration.">something</warning>;
+say @<warning descr="Unable to find variable declaration.">something</warning>;
+say %<warning descr="Unable to find variable declaration.">something</warning>;
+say ${<warning descr="Unable to find variable declaration.">something</warning>};
+say @{<warning descr="Unable to find variable declaration.">something</warning>};
+say %{<warning descr="Unable to find variable declaration.">something</warning>};
+say $Foo::Bar::<warning descr="Unable to find variable declaration.">something</warning>;
+say @Foo::Bar::<warning descr="Unable to find variable declaration.">something</warning>;
+say %Foo::Bar::<warning descr="Unable to find variable declaration.">something</warning>;
+say $scalar;
+say @array;
+say %hash;

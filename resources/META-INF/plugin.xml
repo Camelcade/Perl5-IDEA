@@ -883,7 +883,7 @@
     <localInspection language="Perl5"
                      shortName="VariableUnresolvable" displayName="Unresolved variable" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableUnresolvableInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedVariableInspection"/>
     <localInspection language="Perl5"
                      shortName="VariableShadows" displayName="Variables shadowing" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"

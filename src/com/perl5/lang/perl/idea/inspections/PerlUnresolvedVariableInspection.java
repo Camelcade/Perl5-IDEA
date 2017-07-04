@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 13.06.2015.
  */
-public class PerlVariableUnresolvableInspection extends PerlInspection {
+public class PerlUnresolvedVariableInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
