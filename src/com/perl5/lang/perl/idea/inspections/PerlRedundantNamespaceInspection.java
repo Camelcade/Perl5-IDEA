@@ -45,7 +45,7 @@ public class PerlRedundantNamespaceInspection extends PerlInspection {
               if (!namespaceElement.getTextRange().isEmpty()) {
                 holder.registerProblem(
                   namespaceElement,
-                  "Redundant explicit namespace",
+                  "Redundant namespace qualifier",
                   ProblemHighlightType.LIKE_UNUSED_SYMBOL
                 );
               }

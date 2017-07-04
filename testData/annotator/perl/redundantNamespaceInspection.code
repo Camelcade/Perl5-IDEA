@@ -1,0 +1,5 @@
+package SuperFoo;
+
+sub method{};
+
+<warning descr="Redundant namespace qualifier">SuperFoo::</warning>method;
