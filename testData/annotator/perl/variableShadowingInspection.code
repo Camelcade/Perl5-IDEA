@@ -1,0 +1,12 @@
+our ($scalar, @array, %hash);
+our (<warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">$scalar</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">@array</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">%hash</warning>);
+my (<warning descr="Current variable declaration shadows previous declaration of the same variable at line 2">$scalar</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 2">@array</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 2">%hash</warning>);
+my (<warning descr="Current variable declaration shadows previous declaration of the same variable at line 3">$scalar</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 3">@array</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 3">%hash</warning>);
+local ($scalar, @array, %hash);
+local ($scalar, @array, %hash);
+state (<warning descr="Current variable declaration shadows previous declaration of the same variable at line 6">$scalar</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 6">@array</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 6">%hash</warning>);
+state (<warning descr="Current variable declaration shadows previous declaration of the same variable at line 7">$scalar</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 7">@array</warning>, <warning descr="Current variable declaration shadows previous declaration of the same variable at line 7">%hash</warning>);
+
+my ($scalar1, @array2, %hash3);
+local ($scalar4, @array5, %hash6);
+state ($scalar7, @array8, %hash9);
