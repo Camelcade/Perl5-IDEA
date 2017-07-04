@@ -1,0 +1,31 @@
+my <warning descr="File level variable:$scalar">$scalar</warning>;
+my <warning descr="File level variable:@array">@array</warning>;
+my <warning descr="File level variable:%hash">%hash</warning>;
+our <warning descr="File level variable:$scalar">$scalar</warning>;
+our <warning descr="File level variable:@array">@array</warning>;
+our <warning descr="File level variable:%hash">%hash</warning>;
+my (<warning descr="File level variable:$scalar">$scalar</warning>, <warning descr="File level variable:@array">@array</warning>, <warning descr="File level variable:%hash">%hash</warning>);
+our (<warning descr="File level variable:$scalar">$scalar</warning>, <warning descr="File level variable:@array">@array</warning>, <warning descr="File level variable:%hash">%hash</warning>);
+
+package FooBar;
+
+my <warning descr="File level variable:$scalar">$scalar</warning>;
+my <warning descr="File level variable:@array">@array</warning>;
+my <warning descr="File level variable:%hash">%hash</warning>;
+our <warning descr="File level variable:$scalar">$scalar</warning>;
+our <warning descr="File level variable:@array">@array</warning>;
+our <warning descr="File level variable:%hash">%hash</warning>;
+my (<warning descr="File level variable:$scalar">$scalar</warning>, <warning descr="File level variable:@array">@array</warning>, <warning descr="File level variable:%hash">%hash</warning>);
+our (<warning descr="File level variable:$scalar">$scalar</warning>, <warning descr="File level variable:@array">@array</warning>, <warning descr="File level variable:%hash">%hash</warning>);
+
+
+sub something{
+    my $scalar;
+    my @array;
+    my %hash;
+    our $scalar;
+    our @array;
+    our %hash;
+    my ($scalar, @array, %hash);
+    our ($scalar, @array, %hash);
+}
