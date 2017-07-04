@@ -1,0 +1,7 @@
+package SuperFoo;
+
+sub <warning descr="Multiple subs declarations found">declaration</warning>;
+
+sub <warning descr="Multiple subs declarations found">declaration</warning>;
+
+sub otherdeclaration;

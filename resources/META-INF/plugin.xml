@@ -868,7 +868,7 @@
     <localInspection language="Perl5"
                      shortName="SubMultipleDeclarations" displayName="Multiple sub declarations" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDeclarationsInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlMultipleSubDeclarationsInspection"/>
     <localInspection language="Perl5"
                      shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
