@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlPackageFileMissingInspection extends PerlInspection {
+public class PerlUnresolvedPackageFileInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {

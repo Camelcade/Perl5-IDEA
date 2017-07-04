@@ -823,7 +823,7 @@
     <localInspection language="Perl5"
                      shortName="PackageFileMissing" displayName="Missing package file" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlPackageFileMissingInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnresolvedPackageFileInspection"/>
 
     <localInspection language="Perl5"
                      shortName="RedundantNamespace" displayName="Redundant namespace" groupName="Perl5"
