@@ -877,7 +877,7 @@
     <localInspection language="Perl5"
                      shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
                      enabledByDefault="false" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubUnusedInpsection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnusedSubInspection"/>
 
 
     <localInspection language="Perl5"

@@ -25,16 +25,17 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by hurricup on 14.08.2015.
  */
-public class PerlSubUnusedInpsection extends PerlInspection {
-  public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+public class PerlUnusedSubInspection extends PerlInspection {
+  public static final Set<String> EXCLUSIONS = new THashSet<>(Arrays.asList(
     "BEGIN",
     "UNITCHECK",
     "CHECK",

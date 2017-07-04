@@ -1,0 +1,9 @@
+package FooBar24;
+
+sub <warning descr="Unused sub declaration">declaredsub</warning>;
+sub <warning descr="Unused sub definition">definedsub</warning>{}
+use constant <warning descr="Unused sub definition">definedconst</warning> => 42;
+has <warning descr="Unused sub definition">'mojoattr'</warning>;
+has <warning descr="Unused sub definition">'mooseattr'</warning> => is => 'rw';
+__PACKAGE__->mk_accessors(<warning descr="Unused sub definition">'accessor'</warning>);
+
