@@ -1,0 +1,27 @@
+package FooBar24;
+
+__PACKAGE__->mk_accessors( qw/<warning descr="Multiple subs definitions found">testsub</warning>/ );
+use Exception::Class 'SOmething' => {
+        alias => '<warning descr="Multiple subs definitions found">testsub</warning>'
+    };
+has '<warning descr="Multiple subs definitions found">testsub</warning>';
+has <warning descr="Multiple subs definitions found">testsub</warning> => is => 'rw';
+has something => qw/
+        is       rw
+        accessor <warning descr="Multiple subs definitions found">testsub</warning>
+        /;
+has other   => qw/
+        is        rw
+        reader    <warning descr="Multiple subs definitions found">testsub</warning>
+        writer    <warning descr="Multiple subs definitions found">testsub</warning>
+        clearer   <warning descr="Multiple subs definitions found">testsub</warning>
+        predicate <warning descr="Multiple subs definitions found">testsub</warning>
+        /,
+    handles => [ qw/<warning descr="Multiple subs definitions found">testsub</warning>/ ];
+
+has [qw/dupes blabla/] => is => 'rw', reader => '<warning descr="Multiple subs definitions found"><warning descr="Multiple subs definitions found">something</warning></warning>';
+
+use constant <warning descr="Multiple subs definitions found">testsub</warning> => 42;
+
+sub <warning descr="Multiple subs definitions found">testsub</warning> {}
+

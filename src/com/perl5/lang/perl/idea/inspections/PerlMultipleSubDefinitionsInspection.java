@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 14.06.2015.
  */
-public class PerlSubMultipleDefinitionsInspection extends PerlInspection {
+public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {

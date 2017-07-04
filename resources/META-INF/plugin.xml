@@ -872,7 +872,7 @@
     <localInspection language="Perl5"
                      shortName="SubMultipleDefinitions" displayName="Multiple sub definitions" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlSubMultipleDefinitionsInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlMultipleSubDefinitionsInspection"/>
 
     <localInspection language="Perl5"
                      shortName="SubUnused" displayName="Unsused sub or constant" groupName="Perl5"
