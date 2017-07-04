@@ -32,7 +32,7 @@ public class PerlFileLevelVariableInspection extends PerlVariableInspectionBase 
   @Override
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     if (variableDeclarationWrapper.isGlobalDeclaration() &&
-        PerlVariableGlobalUnusedInspection.EXCLUSIONS.contains(variableDeclarationWrapper.getText())) {
+        PerlUnusedGlobalVariableInspection.EXCLUSIONS.contains(variableDeclarationWrapper.getText())) {
       return;
     }
 
