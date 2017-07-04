@@ -1,0 +1,3 @@
+package FooBar24;
+
+<warning descr="Unused typeglob alias">*someglob</warning> = &sub;
