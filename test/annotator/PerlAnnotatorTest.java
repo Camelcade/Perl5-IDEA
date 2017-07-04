@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
 
 /**
@@ -27,6 +28,15 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/perl";
+  }
+
+  public void testSimpleMainResolutionTrue() {doTestSimpleMainResolution(true);}
+
+  public void testSimpleMainResolutionFalse() {doTestSimpleMainResolution(false);}
+
+  private void doTestSimpleMainResolution(boolean optionValue) {
+    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = optionValue;
+    doTest(PerlMultipleSubDefinitionsInspection.class);
   }
 
   public void testMultipleSubsDefinitionsInspection() {doTest(PerlMultipleSubDefinitionsInspection.class);}

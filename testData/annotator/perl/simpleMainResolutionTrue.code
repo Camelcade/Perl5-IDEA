@@ -1,0 +1,25 @@
+__PACKAGE__->mk_accessors( qw/testsub/ );
+use Exception::Class 'SOmething' => {
+        alias => 'testsub'
+    };
+has 'testsub';
+has testsub => is => 'rw';
+has something => qw/
+        is       rw
+        accessor testsub
+        /;
+has other   => qw/
+        is        rw
+        reader    testsub
+        writer    testsub
+        clearer   testsub
+        predicate testsub
+        /,
+    handles => [ qw/testsub/ ];
+
+has [qw/dupes blabla/] => is => 'rw', reader => 'something';
+
+use constant testsub => 42;
+
+sub testsub {}
+
