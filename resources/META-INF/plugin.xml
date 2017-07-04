@@ -891,7 +891,7 @@
     <localInspection language="Perl5"
                      shortName="VariableLexicalBuiltIn" displayName="Lexical built-in declarations"
                      groupName="Perl5" enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlVariableBuiltinRedeclarationInspection"/>
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlBuiltinVariableRedeclarationInspection"/>
     <localInspection language="Perl5"
                      shortName="UnusedLexicalVariable" displayName="Unused lexical variables" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"

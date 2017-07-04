@@ -1,0 +1,3 @@
+my <warning descr="It's a very bad practice to declare built-in variable as our/my/state">$a</warning>;
+our <warning descr="It's a very bad practice to declare built-in variable as our/my/state">$a</warning>;
+state <warning descr="It's a very bad practice to declare built-in variable as our/my/state">$a</warning>;

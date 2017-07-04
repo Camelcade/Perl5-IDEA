@@ -30,6 +30,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testBuiltInVariableRedeclarationInspection() {doTest(PerlBuiltinVariableRedeclarationInspection.class);}
+
   public void testUseStrictInspection() {doTest(PerlUseStrictInspection.class);}
 
   public void testUseWarningsInspection() {doTest(PerlUseWarningsInspection.class);}
