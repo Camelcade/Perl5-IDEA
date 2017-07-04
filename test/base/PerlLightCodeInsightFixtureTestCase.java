@@ -560,10 +560,29 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     doTestIntention(quickFixNamePrefix);
   }
 
+  @NotNull
+  protected IntentionAction getSingleIntention(@NotNull String prefixOrName) {
+    IntentionAction intention = null;
+    for (IntentionAction intentionAction : myFixture.getAvailableIntentions()) {
+      if (intentionAction.getText().equals(prefixOrName)) {
+        intention = intentionAction;
+        break;
+      }
+      else if (intentionAction.getText().startsWith(prefixOrName)) {
+        if (intention != null) {
+          assertNull("Clarify prefix, too many with: " + prefixOrName + " " + intention.getText() + " and " + intentionAction.getText(),
+                     intention);
+        }
+        intention = intentionAction;
+      }
+    }
+
+    assertNotNull("Couldn't find intention: " + prefixOrName, intention);
+    return intention;
+  }
+
   protected void doTestIntention(@NotNull String intentionPrefix) {
-    IntentionAction intention = myFixture.findSingleIntention(intentionPrefix);
-    assertNotNull(intention);
-    myFixture.launchAction(intention);
+    myFixture.launchAction(getSingleIntention(intentionPrefix));
     assertNoErrorElements();
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }

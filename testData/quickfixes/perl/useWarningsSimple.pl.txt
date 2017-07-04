@@ -1,0 +1,2 @@
+use warnings;
+package FooBar42;

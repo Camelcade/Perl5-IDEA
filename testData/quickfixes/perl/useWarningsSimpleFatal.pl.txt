@@ -1,0 +1,2 @@
+use warnings FATAL => 'all';
+package FooBar42;

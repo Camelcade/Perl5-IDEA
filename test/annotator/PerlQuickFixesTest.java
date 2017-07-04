@@ -18,6 +18,8 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
+import com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection;
+import com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection;
 
 public class PerlQuickFixesTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
@@ -27,5 +29,17 @@ public class PerlQuickFixesTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testFancyMethodCall() {
     doTestAnnotationQuickFix(PerlFancyMethodCallInspection.class, "Re-format method invocation");
+  }
+
+  public void testUseStrictSimple() {
+    doTestAnnotationQuickFix(PerlUseStrictInspection.class, "Add use strict");
+  }
+
+  public void testUseWarningsSimple() {
+    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, "Add use warnings;");
+  }
+
+  public void testUseWarningsSimpleFatal() {
+    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, "Add use warnings FATAL");
   }
 }
