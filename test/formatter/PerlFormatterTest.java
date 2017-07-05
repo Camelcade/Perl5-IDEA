@@ -40,6 +40,17 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testIndexesDereferenceAsIs() {doTestIndexesDereference(WHATEVER);}
+
+  public void testIndexesDereferenceForce() {doTestIndexesDereference(FORCE);}
+
+  public void testIndexesDereferenceSuppress() {doTestIndexesDereference(SUPPRESS);}
+
+  private void doTestIndexesDereference(int value) {
+    getCustomSettings().OPTIONAL_DEREFERENCE = value;
+    doFormatTest();
+  }
+
   public void testQuoteHeredocOpenerAsIs() {doTestQuoteHeredocOpener(WHATEVER);}
 
   public void testQuoteHeredocOpenerForce() {doTestQuoteHeredocOpener(FORCE);}
