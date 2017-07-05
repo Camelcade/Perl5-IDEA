@@ -21,6 +21,8 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+
 /**
  * Created by hurricup on 13.03.2016.
  */
@@ -36,6 +38,17 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
 
   private PerlCodeStyleSettings getCustomSettings() {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
+  }
+
+  public void testFatCommaAsIs() {doTestFatComma(WHATEVER);}
+
+  public void testFatCommaForce() {doTestFatComma(FORCE);}
+
+  public void testFatCommaSuppress() {doTestFatComma(SUPPRESS);}
+
+  private void doTestFatComma(int value) {
+    getCustomSettings().OPTIONAL_QUOTES = value;
+    doFormatTest();
   }
 
   public void testIssue1482() {
