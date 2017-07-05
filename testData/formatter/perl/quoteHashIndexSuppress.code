@@ -1,0 +1,25 @@
+$a
+->{test}
+->{'test'}
+->{"test"}
+->{`test`}
+->{q'test'}
+->{qq"test"}
+->{qx`test`}
+->{'te st'}
+->{"te st"}
+->{`te st`}
+->{q'te st'}
+->{qq"te st"}
+->{qx`te st`}
+->{te_st}
+->{'te_st'}
+->{"te_st"}
+->{`te_st`}
+->{q'te_st'}
+->{qq"te_st"}
+->{qx`te_st`}
+->{"test$a"}
+->{`test$a`}
+->{qq"test$a"}
+->{qx`test$a`};

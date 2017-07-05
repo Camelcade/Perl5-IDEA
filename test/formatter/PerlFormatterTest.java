@@ -40,6 +40,17 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testQuoteHashIndexAsIs() {doTestQuoteHashIndex(WHATEVER);}
+
+  public void testQuoteHashIndexForce() {doTestQuoteHashIndex(FORCE);}
+
+  public void testQuoteHashIndexSuppress() {doTestQuoteHashIndex(SUPPRESS);}
+
+  private void doTestQuoteHashIndex(int value) {
+    getCustomSettings().OPTIONAL_QUOTES_HASH_INDEX = value;
+    doFormatTest();
+  }
+
   public void testFatCommaAsIs() {doTestFatComma(WHATEVER);}
 
   public void testFatCommaForce() {doTestFatComma(FORCE);}
