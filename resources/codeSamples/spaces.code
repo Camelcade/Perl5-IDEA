@@ -1,0 +1,31 @@
+my ($var1, $var2);
+$var1 = 100;
+$var2 = 200;
+
+if ($var1 == $var2) {
+    my $arrayref = [ 1, 1, 2, 3, 5, { key => 'val' } ];
+    say $var1 && $var2;
+    say $var1 | $var2;
+    for (my $i = 1; $i < 2; $i++) {
+        $a = $var1 & $var2 if ($something > 1);
+        $a = $var1 + $var2 unless ($something > 1);
+        $a = $var1.$var2;
+        say $var1 if $var2;
+        say $var2 if ($var1);
+        print( join( ',', $var1, $var2 ));
+        $a = join '', $var1 .. $var2;
+    }
+    $a = $var1 * $var2;
+    $a = $var1 << 2;
+
+    until (!$var1) {
+        eval { say $var2 ? $var2 : $var1;};
+    }
+} elsif ($var2) {
+    say ( $var1 ) unless $var2;
+    say $var1 for @ARGV;
+} else {
+    say ( $var1 ) unless $var2;
+    say $var1 for @ARGV;
+}
+qw/some string here/;

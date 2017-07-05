@@ -22,10 +22,14 @@ import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
+import com.intellij.util.ResourceUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.net.URL;
 
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_WITHIN;
@@ -37,80 +41,10 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
  */
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider implements PerlCodeStyleOptionNames {
   private static final String DEFAULT_CODE_SAMPLE = "# Not yet implemented";
-  private static final String SPACING_CODE_SAMPLE = "my ($var1, $var2);\n" +
-                                                    "$var1 = 100;\n" +
-                                                    "$var2 = 200;\n" +
-                                                    "\n" +
-                                                    "if ($var1 == $var2) {\n" +
-                                                    "    my $arrayref = [1, 1, 2, 3, 5, { key => 'val'}];\n" +
-                                                    "    say $var1 && $var2;\n" +
-                                                    "    say $var1 | $var2;\n" +
-                                                    "    for (my $i = 1; $i < 2; $i++)    {\n" +
-                                                    "        $a = $var1 & $var2  if (  $something > 1 );\n" +
-                                                    "        $a = $var1 + $var2  unless (   $something > 1 );\n" +
-                                                    "        $a = $var1 . $var2;\n" +
-                                                    "        say $var1 if $var2;\n" +
-                                                    "        say $var2 if($var1);\n" +
-                                                    "		 print(join(',', $var1, $var2));" +
-                                                    "        $a = join '', $var1 .. $var2;\n" +
-                                                    "    }\n" +
-                                                    "    $a = $var1 * $var2;\n" +
-                                                    "    $a = $var1 << 2;\n" +
-                                                    "\n" +
-                                                    "    until (!$var1) {\n" +
-                                                    "        eval { say $var2 ? $var2 : $var1;};\n" +
-                                                    "    }\n" +
-                                                    "} elsif ($var2) {\n" +
-                                                    "    say ($var1) unless $var2;\n" +
-                                                    "    say $var1 for @ARGV;\n" +
-                                                    "}else {\n" +
-                                                    "    say ($var1) unless $var2;\n" +
-                                                    "    say $var1 for @ARGV;\n" +
-                                                    "}\n" +
-                                                    "qw/ some string here  /;";
-  private static final String INDENT_CODE_SAMPLE = "if( $cond )\n" +
-                                                   "{\n" +
-                                                   "    say sprintf\n" +
-                                                   "    \"here\",\n" +
-                                                   "    \"we\",\n" +
-                                                   "    \"go\";\n" +
-                                                   "}";
-
-  private static final String WRAPPING_CODES_SAMPLE = "my $hashref = {\n" +
-                                                      "\tkey => 42,\n" +
-                                                      "\totherkey => 42,\n" +
-                                                      "\tthird => 42\n" +
-                                                      "};\n" +
-                                                      "\n" +
-                                                      "my @list = qw/\n" +
-                                                      "\tthis is a list\n" +
-                                                      "\tof some cool strings\n" +
-                                                      "/;\n" +
-                                                      "\n" +
-                                                      "say $a == 42 ? 'true'\n" +
-                                                      " :'false';\n" +
-                                                      "\n" +
-                                                      "$someobject->somemethod()\n" +
-                                                      "    ->othermethod()\n" +
-                                                      "    ->andagain();\n";
-  private static final String BLANK_LINES_CODE_SAMPLE = "# Not yet implemented";
-  private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = "my $hashref = {\n" +
-                                                              "    key1 => 42,\n" +
-                                                              "    key2 => [69],\n" +
-                                                              "};\n" +
-                                                              "\n" +
-                                                              "$hashref->{key3} = <<EOM;\n" +
-                                                              "    This is a test\n" +
-                                                              "EOM\n" +
-                                                              "\n" +
-                                                              "\n" +
-                                                              "say $hashref->{'key1'} unless $1;\n" +
-                                                              "say $hashref->{key2}[0] if $b;\n" +
-                                                              "\n" +
-                                                              "my %hash = %$hashref;\n" +
-                                                              "\n" +
-                                                              "our $VERSION = 1;\n" +
-                                                              "say $main::VERSION;\n";
+  private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
+  private static final String INDENT_CODE_SAMPLE = readCodeSample("indents");
+  private static final String WRAPPING_CODES_SAMPLE = readCodeSample("wrapping");
+  private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = readCodeSample("perl5");
 
   @Override
   public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
@@ -256,5 +190,19 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       return LANGUAGE_SPECIFIC_CODE_SAMPLE;
     }
     return DEFAULT_CODE_SAMPLE;
+  }
+
+  @NotNull
+  private static String readCodeSample(@NotNull String name) {
+    URL url = PerlLanguageCodeStyleSettingsProvider.class.getClassLoader().getResource("codeSamples/" + name + ".code");
+    String result = null;
+    if (url != null) {
+      try {
+        result = ResourceUtil.loadText(url);
+      }
+      catch (IOException ignore) {
+      }
+    }
+    return result == null ? DEFAULT_CODE_SAMPLE : result.replaceAll("\\r", "");
   }
 }

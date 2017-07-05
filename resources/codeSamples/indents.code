@@ -1,0 +1,7 @@
+if ($cond)
+{
+    say sprintf
+        "here",
+        "we",
+        "go";
+}

@@ -1,0 +1,17 @@
+my $hashref = {
+    key      => 42,
+    otherkey => 42,
+    third    => 42
+};
+
+my @list = qw/
+    this is   a    list
+    of   some cool strings
+    /;
+
+say $a == 42 ? 'true'
+    : 'false';
+
+$someobject->somemethod()
+    ->othermethod()
+    ->andagain();

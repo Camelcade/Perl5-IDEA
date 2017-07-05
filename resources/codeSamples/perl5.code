@@ -1,0 +1,17 @@
+my $hashref = {
+    key1 => 42,
+    key2 => [ 69 ],
+};
+
+$hashref->{key3} = <<EOM;
+    This is a test
+EOM
+
+
+say $hashref->{'key1'} unless $1;
+say $hashref->{key2}[0] if $b;
+
+my %hash = %$hashref;
+
+our $VERSION = 1;
+say $main::VERSION;
