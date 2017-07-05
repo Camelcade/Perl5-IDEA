@@ -40,6 +40,18 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSimpleDereferenceAsIs() {doTestSimpleDereference(WHATEVER);}
+
+  public void testSimpleDereferenceBraced() {doTestSimpleDereference(FORCE);}
+
+  public void testSimpleDereferenceUnbraced() {doTestSimpleDereference(SUPPRESS);}
+
+  private void doTestSimpleDereference(int value) {
+    getCustomSettings().OPTIONAL_DEREFERENCE_SIMPLE = value;
+    doFormatTest();
+  }
+
+
   public void testHashRefElementAsIs() {doTestHashRefElementFormat(WHATEVER);}
 
   public void testHashRefElementDoubleBuck() {doTestHashRefElementFormat(FORCE);}

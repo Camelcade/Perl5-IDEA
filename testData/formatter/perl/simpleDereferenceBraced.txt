@@ -1,0 +1,13 @@
+${$scalarref};
+@{$arrayref};
+%{$hashref};
+${${scalarref}};
+@{${arrayref}};
+%{${hashref}};
+${$scalarref};
+@{$arrayref};
+%{$hashref};
+${${scalarref}};
+@{${arrayref}};
+%{${hashref}};
+
