@@ -1,0 +1,6 @@
+$$hashref{key};
+${$hashref}{key};
+$$hashref{key}->{key};
+${$hashref}{key}->[42];
+$${hashref}{key};
+$$hashref{key};
