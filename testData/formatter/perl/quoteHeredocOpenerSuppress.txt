@@ -1,0 +1,41 @@
+<<EOM;
+this is a test
+EOM
+
+<<'EOM';
+this is a test
+EOM
+
+<<EOM;
+this is a test
+EOM
+
+<<`EOM`;
+this is a test
+EOM
+
+<<\EOM;
+this is a test
+EOM
+
+{
+    <<~EOM;
+    this is a test
+    EOM
+
+    <<~'EOM';
+    this is a test
+    EOM
+
+    <<~EOM;
+    this is a test
+    EOM
+
+    <<~`EOM`;
+    this is a test
+    EOM
+
+    <<~\EOM;
+    this is a test
+    EOM
+}
