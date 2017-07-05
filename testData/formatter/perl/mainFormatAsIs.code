@@ -1,0 +1,11 @@
+say $::var;
+::method();
+say $main::var;
+main::method();
+say $::;
+say @::;
+say %::;
+say $main::;
+say @main::;
+say %main::;
+
