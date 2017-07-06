@@ -56,10 +56,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .betweenInside(QUOTE_SINGLE_OPEN, STRING_CONTENT, STRING_LIST).spaceIf(myPerlSettings.SPACE_WITHIN_QW_QUOTES)
       .betweenInside(STRING_CONTENT, QUOTE_SINGLE_CLOSE, STRING_LIST).spaceIf(myPerlSettings.SPACE_WITHIN_QW_QUOTES)
 
-      .afterInside(LEFT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACE_ANON_HASH_AFTER_LEFT_BRACE)
-      .beforeInside(RIGHT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACE_ANON_HASH_BEFORE_RIGHT_BRACE)
-      .afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET)
-      .beforeInside(RIGHT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET)
+      .betweenInside(LEFT_BRACE, RIGHT_BRACE, ANON_HASH).spaces(0)
+      .afterInside(LEFT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_HASH)
+      .beforeInside(RIGHT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_HASH)
+
+      .betweenInside(LEFT_BRACKET, RIGHT_BRACKET, ANON_ARRAY).spaces(0)
+      .afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_ARRAY)
+      .beforeInside(RIGHT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_ARRAY)
 
       .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaces(0)
       .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaces(0)

@@ -3,5 +3,5 @@ use Exception::Class
     "Exception2",
     q'Exception3',
     qq"Exception4",
-    Exception5 => { }
+    Exception5 => {}
 ;

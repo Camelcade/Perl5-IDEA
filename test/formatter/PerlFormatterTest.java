@@ -40,6 +40,26 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacesWithinArrayTrue() {
+    getCustomSettings().SPACES_WITHIN_ANON_ARRAY = true;
+    doFormatTest();
+  }
+
+  public void testSpacesWithinArrayFalse() {
+    getCustomSettings().SPACES_WITHIN_ANON_ARRAY = false;
+    doFormatTest();
+  }
+
+  public void testSpacesWithinHashTrue() {
+    getCustomSettings().SPACES_WITHIN_ANON_HASH = true;
+    doFormatTest();
+  }
+
+  public void testSpacesWithinHashFalse() {
+    getCustomSettings().SPACES_WITHIN_ANON_HASH = false;
+    doFormatTest();
+  }
+
   public void testSpaceAfterMyTrue() {
     getCustomSettings().SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
     doFormatTest();

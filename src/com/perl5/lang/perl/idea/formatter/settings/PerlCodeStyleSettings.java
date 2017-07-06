@@ -41,11 +41,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
 
   public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
 
-  public boolean SPACE_ANON_HASH_AFTER_LEFT_BRACE = true;
-  public boolean SPACE_ANON_HASH_BEFORE_RIGHT_BRACE = true;
-
-  public boolean SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET = true;
-  public boolean SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET = true;
+  public boolean SPACES_WITHIN_ANON_HASH = true;
+  public boolean SPACES_WITHIN_ANON_ARRAY = true;
 
   public boolean SPACE_AROUND_RANGE_OPERATORS = true;
   public boolean SPACE_AROUND_CONCAT_OPERATOR = false;

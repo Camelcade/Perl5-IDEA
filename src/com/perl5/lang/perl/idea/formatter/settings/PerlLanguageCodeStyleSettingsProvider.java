@@ -100,17 +100,15 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.after.my"),
                                 SPACES_OTHER);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_HASH_AFTER_LEFT_BRACE", SPACE_OPTION_ANON_HASH_AFTER_LEFT_BRACE,
-                                SPACE_GROUP_ANON_HASH);
-      consumer
-        .showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_HASH_BEFORE_RIGHT_BRACE", SPACE_OPTION_ANON_HASH_BEFORE_RIGHT_BRACE,
-                          SPACE_GROUP_ANON_HASH);
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACES_WITHIN_ANON_HASH",
+                                PerlBundle.message("perl.formatting.within.hash"),
+                                SPACES_WITHIN);
 
-      consumer
-        .showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_AFTER_LEFT_BRACKET", SPACE_OPTION_ANON_ARRAY_AFTER_LEFT_BRACKET,
-                          SPACE_GROUP_ANON_ARRAY);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_ARRAY_BEFORE_RIGHT_BRACKET",
-                                SPACE_OPTION_ANON_ARRAY_BEFORE_RIGHT_BRACKET, SPACE_GROUP_ANON_ARRAY);
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACES_WITHIN_ANON_ARRAY",
+                                PerlBundle.message("perl.formatting.within.array"),
+                                SPACES_WITHIN);
 
       consumer
         .showCustomOption(PerlCodeStyleSettings.class, "SPACE_WITHIN_QW_QUOTES", PerlBundle.message("perl.formatting.space.inside.qw"),
