@@ -22,9 +22,6 @@ import com.perl5.PerlBundle;
  * Created by hurricup on 06.09.2015.
  */
 public interface PerlCodeStyleOptionNames {
-  String SPACE_GROUP_AFTER_KEYWORD = "After keywords";
-  String SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD = "Variable declaration";
-
   String SPACE_OPTION_AROUND_RANGE_OPERATORS = "Range operators (..,...)";
   String SPACE_OPTION_AROUND_CONCAT_OPERATOR = "Concatenation (.)";
 

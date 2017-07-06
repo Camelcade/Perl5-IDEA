@@ -31,8 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.net.URL;
 
-import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_AROUND_OPERATORS;
-import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.SPACES_WITHIN;
+import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
@@ -96,8 +95,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_RANGE_OPERATORS", SPACE_OPTION_AROUND_RANGE_OPERATORS,
                                 SPACES_AROUND_OPERATORS);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD",
-                                SPACE_OPTION_VARIABLE_DECLARATION_KEYWORD, SPACE_GROUP_AFTER_KEYWORD);
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD",
+                                PerlBundle.message("perl.formatting.after.my"),
+                                SPACES_OTHER);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_ANON_HASH_AFTER_LEFT_BRACE", SPACE_OPTION_ANON_HASH_AFTER_LEFT_BRACE,
                                 SPACE_GROUP_ANON_HASH);

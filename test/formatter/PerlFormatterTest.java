@@ -40,6 +40,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpaceAfterMyTrue() {
+    getCustomSettings().SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
+    doFormatTest();
+  }
+
+  public void testSpaceAfterMyFalse() {
+    getCustomSettings().SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = false;
+    doFormatTest();
+  }
+
   public void testMainFormatAsIs() {doTestMainFormat(WHATEVER);}
 
   public void testMainFormatLong() {doTestMainFormat(FORCE);}
