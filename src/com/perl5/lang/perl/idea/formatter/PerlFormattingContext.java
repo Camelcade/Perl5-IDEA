@@ -47,6 +47,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_SHIFT).spaceIf(mySettings.SPACE_AROUND_SHIFT_OPERATORS)
       .around(OPERATORS_UNARY).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
       .aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_RANGE_OPERATORS)
+
+      .between(NUMBER_CONSTANT, OPERATOR_CONCAT).spaces(1)
       .aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_CONCAT_OPERATOR)
 
       .betweenInside(STRING_CONTENT, STRING_CONTENT, LP_STRING_QW).spaces(1)
