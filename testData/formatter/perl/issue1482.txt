@@ -1,6 +1,6 @@
 #@deprecated
-Class::Accessor::Test->mk_accessors( qw(simple_rw1 simple_other_rw) );
+Class::Accessor::Test->mk_accessors(qw(simple_rw1 simple_other_rw));
 #@deprecated
 Class::Accessor::Test->
     #@deprecated
-    mk_ro_accessors( qw(simple_ro1 simple_other_ro) );
+    mk_ro_accessors(qw(simple_ro1 simple_other_ro));

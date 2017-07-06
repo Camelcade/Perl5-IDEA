@@ -59,6 +59,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "SPACE_AROUND_SHIFT_OPERATORS",            // implemented
         "SPACE_AROUND_UNARY_OPERATOR",            // implemented
 
+        "SPACE_WITHIN_METHOD_CALL_PARENTHESES", // method()
+
         "SPACE_AFTER_COMMA",    // implemented
         "SPACE_BEFORE_COMMA",   // implemented
 
@@ -87,9 +89,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACES_WITHIN_CALL_ARGUMENTS", SPACE_OPTION_CALL_ARGUMENTS,
-                                SPACES_WITHIN);
-
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_CONCAT_OPERATOR", SPACE_OPTION_AROUND_CONCAT_OPERATOR,
                                 SPACES_AROUND_OPERATORS);
       consumer.showCustomOption(PerlCodeStyleSettings.class, "SPACE_AROUND_RANGE_OPERATORS", SPACE_OPTION_AROUND_RANGE_OPERATORS,
@@ -110,9 +109,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.within.array"),
                                 SPACES_WITHIN);
 
-      consumer
-        .showCustomOption(PerlCodeStyleSettings.class, "SPACE_WITHIN_QW_QUOTES", PerlBundle.message("perl.formatting.space.inside.qw"),
-                          SPACES_WITHIN);
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACE_WITHIN_QW_QUOTES",
+                                PerlBundle.message("perl.formatting.space.inside.qw"),
+                                SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", PerlBundle.message("perl.formatting.align.fat.comma"),

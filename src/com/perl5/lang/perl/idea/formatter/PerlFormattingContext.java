@@ -72,8 +72,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATOR_DEREFERENCE).spaces(0)
 
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaces(0)
-      .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(myPerlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
-      .beforeInside(RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(myPerlSettings.SPACES_WITHIN_CALL_ARGUMENTS)
+      .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(mySettings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
+      .beforeInside(RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(mySettings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
 
       .before(COMMA).spaceIf(mySettings.SPACE_BEFORE_COMMA)
       .after(COMMA).spaceIf(mySettings.SPACE_AFTER_COMMA)

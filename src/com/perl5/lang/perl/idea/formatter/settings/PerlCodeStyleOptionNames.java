@@ -27,7 +27,6 @@ public interface PerlCodeStyleOptionNames {
 
   String SPACE_OPTION_COMPOUND_EXPRESSION = "Compound condition or expression";
   String SPACE_OPTION_COMPOUND_BLOCK = "Compound block";
-  String SPACE_OPTION_CALL_ARGUMENTS = "Call arguments";
 
   String SPACE_OPTION_COMPOUND_SECONDARY = "Secondary compound (else/elsif/continue/default)";
   String SPACE_OPTION_TERM_BLOCKS = "Term blocks (sub/eval/do)";
