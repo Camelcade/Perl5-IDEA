@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.formatter.settings;
 
 import com.intellij.application.options.TabbedLanguageCodeStylePanel;
-import com.intellij.application.options.codeStyle.CodeStyleSpacesPanel;
 import com.intellij.application.options.codeStyle.WrappingAndBracesPanel;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
@@ -30,10 +29,6 @@ import com.perl5.lang.perl.PerlLanguage;
 public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel implements PerlCodeStyleOptionNames {
   public PerlCodeStyleMainPanel(CodeStyleSettings currentSettings, CodeStyleSettings settings) {
     super(PerlLanguage.INSTANCE, currentSettings, settings);
-  }
-
-  protected void addSpacesTab(CodeStyleSettings settings) {
-    addTab(new PerlCodeStyleSpacesPanel(settings));
   }
 
   @Override
@@ -65,30 +60,6 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel impleme
     @Override
     public LanguageCodeStyleSettingsProvider.SettingsType getSettingsType() {
       return LanguageCodeStyleSettingsProvider.SettingsType.LANGUAGE_SPECIFIC;
-    }
-  }
-
-  protected class PerlCodeStyleSpacesPanel extends CodeStyleSpacesPanel {
-    public PerlCodeStyleSpacesPanel(CodeStyleSettings settings) {
-      super(settings);
-    }
-
-    @Override
-    protected boolean shouldHideOptions() {
-      return true;
-    }
-
-    @Override
-    public Language getDefaultLanguage() {
-      return PerlCodeStyleMainPanel.this.getDefaultLanguage();
-    }
-
-    @Override
-    protected void initTables() {
-      initCustomOptions(SPACE_GROUP_AFTER_KEYWORD);
-      initCustomOptions(SPACE_GROUP_ANON_ARRAY);
-      initCustomOptions(SPACE_GROUP_ANON_HASH);
-      super.initTables();
     }
   }
 }
