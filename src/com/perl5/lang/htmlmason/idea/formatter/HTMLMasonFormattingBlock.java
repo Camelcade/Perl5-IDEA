@@ -46,8 +46,8 @@ public class HTMLMasonFormattingBlock extends AbstractMasonFormattingBlock imple
   }
 
   @Override
-  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
-    return super.isNewLineForbidden(block) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(block.getNode().getPsi());
+  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
+    return super.isNewLineForbidden(node) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(node.getPsi());
   }
 
   @Override

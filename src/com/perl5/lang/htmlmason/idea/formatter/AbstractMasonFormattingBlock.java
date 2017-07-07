@@ -44,16 +44,16 @@ public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock {
   protected abstract IElementType getLineOpenerToken();
 
   @Override
-  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
-    if (super.isNewLineForbidden(block)) {
+  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
+    if (super.isNewLineForbidden(node)) {
       return true;
     }
 
-    PsiElement element = block.getNode().getPsi();
+    PsiElement element = node.getPsi();
     PsiFile file = element.getContainingFile();
     Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
     if (document != null) {
-      int offset = block.getTextRange().getStartOffset();
+      int offset = node.getTextRange().getStartOffset();
       int lineNumber = document.getLineNumber(offset);
       int lineStartOffset = document.getLineStartOffset(lineNumber);
       PsiElement firstElement = file.findElementAt(lineStartOffset);

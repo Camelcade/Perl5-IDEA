@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -43,27 +42,25 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.util.PerlUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
-  private static final ArrayList<PerlNamespaceDefinitionElement> EMPTY_LIST = new ArrayList<PerlNamespaceDefinitionElement>();
   protected GlobalSearchScope myElementsResolveScope;
   protected PsiElement fileContext;
-
-  protected Map<Integer, Boolean> isNewLineFobiddenAtLine = new THashMap<Integer, Boolean>();
 
   public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language) {
     super(viewProvider, language);
@@ -118,7 +115,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   public void subtreeChanged() {
     super.subtreeChanged();
     myElementsResolveScope = null;
-    isNewLineFobiddenAtLine.clear();
   }
 
   @Override
@@ -259,26 +255,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
                                      PsiElement lastParent,
                                      @NotNull PsiElement place) {
     return PerlResolveUtil.processChildren(this, processor, state, lastParent, place) && processor.execute(this, state);
-  }
-
-  public boolean isNewLineForbiddenAt(PsiElement element) {
-    Document document = PsiDocumentManager.getInstance(getProject()).getDocument(this);
-    if (document != null) {
-      int lineNumber = document.getLineNumber(element.getTextRange().getEndOffset());
-
-      if (isNewLineFobiddenAtLine.containsKey(lineNumber)) {
-        return isNewLineFobiddenAtLine.get(lineNumber);
-      }
-
-      int lineEndOffset = document.getLineEndOffset(lineNumber);
-
-      boolean result = PerlPsiUtil.isHeredocAhead(element, lineEndOffset + 1);
-
-      isNewLineFobiddenAtLine.put(lineNumber, result);
-
-      return result;
-    }
-    return false;
   }
 
   @Override

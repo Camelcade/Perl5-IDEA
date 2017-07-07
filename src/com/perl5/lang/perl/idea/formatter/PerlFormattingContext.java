@@ -17,11 +17,24 @@
 package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.SpacingBuilder;
+import com.intellij.lang.ASTNode;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.FactoryMap;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 
@@ -29,6 +42,32 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
+  private final FactoryMap<PsiFile, List<TextRange>> myHeredocRangesMap = new FactoryMap<PsiFile, List<TextRange>>() {
+    @Override
+    protected List<TextRange> create(PsiFile file) {
+      if (!(file instanceof PerlFileImpl)) {
+        return Collections.emptyList();
+      }
+      final Document document = file.getViewProvider().getDocument();
+      if (document == null) {
+        return Collections.emptyList();
+      }
+      List<TextRange> result = new ArrayList<>();
+      file.accept(new PsiElementVisitor() {
+        @Override
+        public void visitElement(PsiElement element) {
+          if (PsiUtilCore.getElementType(element) == HEREDOC_OPENER) {
+            int startOffset = element.getNode().getStartOffset();
+            result.add(TextRange.create(startOffset + 1, document.getLineEndOffset(document.getLineNumber(startOffset))));
+          }
+          else {
+            element.acceptChildren(this);
+          }
+        }
+      });
+      return result;
+    }
+  };
 
   public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
@@ -195,5 +234,24 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   public PerlIndentProcessor getIndentProcessor() {
     return PerlIndentProcessor.INSTANCE;
+  }
+
+  /**
+   * Checks if Heredoc is ahead of current block and it's not possible to insert newline
+   *
+   * @param node in question
+   * @return check result
+   */
+  public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
+    List<TextRange> heredocRanges = myHeredocRangesMap.get(node.getPsi().getContainingFile());
+
+    int startOffset = node.getStartOffset();
+    for (TextRange range : heredocRanges) {
+      if (range.contains(startOffset)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

@@ -1,0 +1,137 @@
+$a = <<EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    <<EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', <<EOM;
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', 'some';
+
+$a = <<\EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    <<\EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', <<\EOM;
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', 'some';
+
+$a = <<"EOM", 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    <<"EOM", 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', <<"EOM";
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', 'some';
+
+$a = <<`EOM`, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    <<`EOM`, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', <<`EOM`;
+heredoc
+EOM
+
+$a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+    'some', 'some', 'some', 'some', 'some', 'some';
+
+{
+    $a = <<~EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        <<~EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', <<~EOM;
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', 'some';
+
+    $a = <<~\EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        <<~\EOM, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', <<~\EOM;
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', 'some';
+
+    $a = <<~"EOM", 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        <<~"EOM", 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', <<~"EOM";
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', 'some';
+
+    $a = <<~`EOM`, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        <<~`EOM`, 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some';
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', <<~`EOM`;
+    heredoc
+    EOM
+
+    $a = 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some', 'some',
+        'some', 'some', 'some', 'some', 'some', 'some';
+}
