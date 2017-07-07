@@ -18,7 +18,9 @@ package com.perl5.lang.perl.idea.formatter.settings;
 
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
+import com.perl5.PerlBundle;
 
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE_FULL;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
@@ -26,18 +28,17 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
  * Created by hurricup on 03.09.2015.
  */
 public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
-  public int OPTIONAL_QUOTES = OptionalConstructions.WHATEVER;
-  public int OPTIONAL_QUOTES_HASH_INDEX = OptionalConstructions.WHATEVER;
-  public int OPTIONAL_QUOTES_HEREDOC_OPENER = OptionalConstructions.WHATEVER;
+  public int OPTIONAL_QUOTES = WHATEVER;
+  public int OPTIONAL_QUOTES_HASH_INDEX = WHATEVER;
+  public int OPTIONAL_QUOTES_HEREDOC_OPENER = WHATEVER;
 
-  public int OPTIONAL_DEREFERENCE = OptionalConstructions.WHATEVER;
-  public int OPTIONAL_DEREFERENCE_HASHREF_ELEMENT = OptionalConstructions.WHATEVER;
-  public int OPTIONAL_DEREFERENCE_SIMPLE = OptionalConstructions.WHATEVER;
+  public int OPTIONAL_DEREFERENCE = WHATEVER;
+  public int OPTIONAL_DEREFERENCE_HASHREF_ELEMENT = WHATEVER;
+  public int OPTIONAL_DEREFERENCE_SIMPLE = WHATEVER;
 
-  public int OPTIONAL_PARENTHESES = OptionalConstructions.WHATEVER;
-  public int OPTIONAL_SEMI = OptionalConstructions.WHATEVER;
+  public int OPTIONAL_PARENTHESES = WHATEVER;
 
-  public int MAIN_FORMAT = OptionalConstructions.WHATEVER;
+  public int MAIN_FORMAT = WHATEVER;
 
   public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
 
@@ -63,16 +64,21 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
     int SUPPRESS = 0x02;
     int[] VALUES = {WHATEVER, FORCE, SUPPRESS};
 
-    String[] LABELS_DEFAULT = {"As is", "Force", "Suppress"};
+    String AS_IS = PerlBundle.message("perl.formatting.option.asis");
+
+    String[] LABELS_DEFAULT =
+      {AS_IS, PerlBundle.message("perl.formatting.option.force"), PerlBundle.message("perl.formatting.option.suppress")};
     Object[] OPTIONS_DEFAULT = {LABELS_DEFAULT, VALUES};
 
-    String[] LABELS_HASHREF_ELEMENT_STYLE = {"As is", "$$hashref{key}", "$hashref->{key}"};
+    String[] LABELS_HASHREF_ELEMENT_STYLE =
+      {AS_IS, PerlBundle.message("perl.formatting.option.hashref.short"), PerlBundle.message("perl.formatting.option.hashref.long")};
     Object[] OPTIONS_HASHREF_ELEMENT = {LABELS_HASHREF_ELEMENT_STYLE, VALUES};
 
-    String[] LABELS_SIMPLE_DEREF_STYLE = {"As is", "@{$reference}", "@$reference"};
+    String[] LABELS_SIMPLE_DEREF_STYLE =
+      {AS_IS, PerlBundle.message("perl.formatting.option.hashref.braced"), PerlBundle.message("perl.formatting.option.hashref.unbraced")};
     Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
 
-    String[] LABELS_MAIN_FORMAT = {"As is", MAIN_PACKAGE_FULL, PACKAGE_SEPARATOR};
+    String[] LABELS_MAIN_FORMAT = {AS_IS, MAIN_PACKAGE_FULL, PACKAGE_SEPARATOR};
     Object[] OPTIONS_MAIN_FORMAT = {LABELS_MAIN_FORMAT, VALUES};
   }
 }

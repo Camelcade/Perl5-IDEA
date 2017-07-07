@@ -21,12 +21,13 @@ import com.intellij.application.options.codeStyle.WrappingAndBracesPanel;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 
 /**
  * Created by hurricup on 06.09.2015.
  */
-public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel implements PerlCodeStyleOptionNames {
+public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel {
   public PerlCodeStyleMainPanel(CodeStyleSettings currentSettings, CodeStyleSettings settings) {
     super(PerlLanguage.INSTANCE, currentSettings, settings);
   }
@@ -49,7 +50,7 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel impleme
 
     @Override
     protected String getTabTitle() {
-      return TAB_PERL_SETTINGS;
+      return PerlBundle.message("perl.formatting.tab.perl5");
     }
 
     @Override

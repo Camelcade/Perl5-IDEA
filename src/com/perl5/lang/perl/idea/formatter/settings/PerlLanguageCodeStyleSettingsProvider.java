@@ -38,8 +38,13 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider implements PerlCodeStyleOptionNames {
-  private static final String DEFAULT_CODE_SAMPLE = "# Not yet implemented";
+public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
+  private static final String GROUP_ALIGNMENT = PerlBundle.message("perl.formatting.group.alignment");
+  private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
+  private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
+  private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
+
+  private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
   private static final String INDENT_CODE_SAMPLE = readCodeSample("indents");
   private static final String WRAPPING_CODES_SAMPLE = readCodeSample("wrapping");
@@ -83,16 +88,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
       );
-      consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
-      consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", SPACE_OPTION_COMPOUND_BLOCK);
-      consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", SPACE_OPTION_COMPOUND_SECONDARY);
-      consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", SPACE_OPTION_TERM_BLOCKS);
-      consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", SPACE_OPTION_COMPOUND_EXPRESSION);
+      consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", PerlBundle.message("perl.formatting.compound.condition"));
+      consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", PerlBundle.message("perl.formatting.compound.block"));
+      consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", PerlBundle.message("perl.formatting.compound.secondary"));
+      consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
+      consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.compound.condition"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_CONCAT_OPERATOR",
                                 PerlBundle.message("perl.formatting.concatenation"),
                                 SPACES_AROUND_OPERATORS);
+
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_RANGE_OPERATORS",
                                 PerlBundle.message("perl.formatting.range.operators"),
@@ -119,38 +125,77 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_FAT_COMMA", PerlBundle.message("perl.formatting.align.fat.comma"),
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_FAT_COMMA",
+                                PerlBundle.message("perl.formatting.align.fat.comma"),
                                 GROUP_ALIGNMENT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_QW_ELEMENTS", PerlBundle.message("perl.formatting.align.qw.elements"),
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_QW_ELEMENTS",
+                                PerlBundle.message("perl.formatting.align.qw.elements"),
                                 GROUP_ALIGNMENT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_TERNARY", PerlBundle.message("perl.formatting.align.ternary"),
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_TERNARY",
+                                PerlBundle.message("perl.formatting.align.ternary"),
                                 GROUP_ALIGNMENT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "ALIGN_DEREFERENCE_IN_CHAIN",
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_DEREFERENCE_IN_CHAIN",
                                 PerlBundle.message("perl.formatting.align.dereference"),
                                 GROUP_ALIGNMENT);
     }
     else if (settingsType == LANGUAGE_SPECIFIC) {
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES", QUOTATION_OPTION_BEFORE_ARROW, QUOTATION_GROUP,
-                                OPTIONS_DEFAULT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HASH_INDEX", QUOTATION_OPTION_HASH_INDEX, QUOTATION_GROUP,
-                                OPTIONS_DEFAULT);
-      consumer
-        .showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_QUOTES_HEREDOC_OPENER", QUOTATION_OPTION_HEREDOC_OPENER, QUOTATION_GROUP,
-                          OPTIONS_DEFAULT);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE", DEREFERENCE_OPTION_BETWEEN_INDEXES, DEREFERENCE_GROUP,
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_QUOTES",
+                                PerlBundle.message("perl.formatting.quotation.before.fatcomma"),
+                                GROUP_QUOTATION,
                                 OPTIONS_DEFAULT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT", DEREFERENCE_OPTION_HASHREF_ELEMENT,
-                                DEREFERENCE_GROUP, OPTIONS_HASHREF_ELEMENT);
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_DEREFERENCE_SIMPLE", DEREFERENCE_OPTION_SIMPLE, DEREFERENCE_GROUP,
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_QUOTES_HASH_INDEX",
+                                PerlBundle.message("perl.formatting.quotation.hash.index"),
+                                GROUP_QUOTATION,
+                                OPTIONS_DEFAULT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_QUOTES_HEREDOC_OPENER",
+                                PerlBundle.message("perl.formatting.quotation.heredoc.opener"),
+                                GROUP_QUOTATION,
+                                OPTIONS_DEFAULT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_DEREFERENCE",
+                                PerlBundle.message("perl.formatting.deref.indexes"),
+                                GROUP_DEREFERENCE,
+                                OPTIONS_DEFAULT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT",
+                                PerlBundle.message("perl.formatting.hashref.element"),
+                                GROUP_DEREFERENCE,
+                                OPTIONS_HASHREF_ELEMENT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_DEREFERENCE_SIMPLE",
+                                PerlBundle.message("perl.formatting.simple.dereference"),
+                                GROUP_DEREFERENCE,
                                 OPTIONS_SIMPLE_DEREF_STYLE);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_PARENTHESES", PARENTHESES_OPTION_POSTFIX, PARENTHESES_GROUP,
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "OPTIONAL_PARENTHESES",
+                                PerlBundle.message("perl.formatting.statement.modifiers"),
+                                GROUP_PARENTHESES,
                                 OPTIONS_DEFAULT);
 
       //			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class, "MAIN_FORMAT", PERL_OPTION_MISC_MAIN, MISC_ELEMENTS_GROUP,
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "MAIN_FORMAT",
+                                PerlBundle.message("perl.formatting.main.format"),
+                                SPACES_OTHER,
                                 OPTIONS_MAIN_FORMAT);
     }
   }
