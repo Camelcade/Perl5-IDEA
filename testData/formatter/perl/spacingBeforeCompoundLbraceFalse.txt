@@ -1,0 +1,40 @@
+if ($a){}
+elsif ($b){}
+else{}
+
+{} continue{}
+
+given ($foo){
+
+    when (/^xyz/){
+        $xyz = 1
+    } default{ $nothing = 1 }
+
+}
+
+unless ($a){ }
+else{}
+
+while ($a){}
+
+until ($a){}
+for $a (@INC){}
+foreach $a (@INC){}
+for (; ;){}
+foreach (; ;){}
+
+sub something{}
+sub something(){}
+sub something($$$){}
+sub something($var){}
+
+method something{}
+method something(){}
+method something($var){}
+
+func something{}
+func something(){}
+func something($var){}
+
+package FooBar{}
+package FooBar  v1.5{}

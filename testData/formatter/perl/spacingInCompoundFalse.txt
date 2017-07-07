@@ -4,7 +4,7 @@ if ($some_condition) {
 unless ($some_condition) {
     say 'hi' unless ($some_condition);
 }
-while ($some_condition){
+while ($some_condition) {
     say 'hi' while ($some_condition);
 }
 until ($some_condition) {

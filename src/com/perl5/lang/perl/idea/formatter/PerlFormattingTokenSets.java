@@ -36,6 +36,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     FOREACH_COMPOUND,
     UNCONDITIONAL_BLOCK,
     CONTINUE_BLOCK,
+    DEFAULT_COMPOUND,
+    CONDITIONAL_BLOCK_WHILE,
+    METHOD_DEFINITION,
+    FUNC_DEFINITION,
 
     // fixme probably we should move them somewhere
     SUB_DEFINITION,
