@@ -56,7 +56,6 @@
      <li>You are now able to use a single <code>-bareword</code> argument in use statement, like <code>use Mojo::Base -strict;</code></li>
      <li>Recursive inheritance inspection is now available (again)</li>
      <li><a href="https://github.com/Camelcade/Perl5-IDEA/wiki/Annotations">Annotations</a> works with all new implemented features (Moose, Mojo, Exception::Class, Constants)</li>
-     <li>
      </ul>
      </p>
      <p>Fixes:
