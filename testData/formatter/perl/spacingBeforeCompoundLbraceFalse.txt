@@ -20,8 +20,8 @@ while ($a){}
 until ($a){}
 for $a (@INC){}
 foreach $a (@INC){}
-for (; ;){}
-foreach (; ;){}
+for (;;){}
+foreach (;;){}
 
 sub something{}
 sub something(){}

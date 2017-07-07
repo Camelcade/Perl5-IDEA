@@ -1,0 +1,8 @@
+for (   $a    ;   $a    ;     $a    ) {}
+for (   ;   $a  ;   $a    ) {}
+for (   $a    ;    ;   $a   ) {}
+for (   $a    ;   $a ;  ) {}
+for (   ;    ;    $a  ) {}
+for (   $a  ;     ;       ) {}
+for (   ;   $a  ;   ) {}
+for (   ;     ;    ) {}

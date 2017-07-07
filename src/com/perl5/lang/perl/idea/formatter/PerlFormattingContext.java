@@ -94,6 +94,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .betweenInside(LEFT_PAREN, SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
       .betweenInside(SEMICOLON, RIGHT_PAREN, FOR_ITERATOR).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
 
+      .betweenInside(SEMICOLON, SEMICOLON, FOR_ITERATOR).spaces(0)
       .afterInside(SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_AFTER_SEMICOLON)
       .beforeInside(SEMICOLON, FOR_ITERATOR).spaceIf(mySettings.SPACE_BEFORE_SEMICOLON)
 

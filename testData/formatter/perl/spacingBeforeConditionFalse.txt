@@ -30,10 +30,10 @@ for my $var ($some_condition) {
 foreach my $var ($some_condition) {
     say 'hi' foreach($some_condition);
 }
-for(; ;) {
+for(;;) {
     say 'hi' for($some_condition);
 }
-foreach(; ;) {
+foreach(;;) {
     say 'hi' foreach($some_condition);
 }
 when($some_condition) {
