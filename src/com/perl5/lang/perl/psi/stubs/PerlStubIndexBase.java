@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
  * Created by hurricup on 13.11.2016.
  */
 public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
-  private final static int VERSION = 3;
+  private final static int VERSION = 4;
 
   @Override
   public int getVersion() {
