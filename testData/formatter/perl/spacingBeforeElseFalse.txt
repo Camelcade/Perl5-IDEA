@@ -1,0 +1,19 @@
+if ($a) {
+}elsif ($b) {
+}else {}
+
+{}continue {}
+
+given ($foo) {
+    when (undef) {
+        say '$foo is undefined';
+    }default {
+        die q(I don't know what to do with $foo);
+    }
+}
+
+for ($var) {
+    when (/^xyz/) {
+        $xyz = 1
+    }default       { $nothing = 1 }
+}

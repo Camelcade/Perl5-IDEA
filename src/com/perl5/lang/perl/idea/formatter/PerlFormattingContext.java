@@ -125,7 +125,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .before(CONTINUE_BLOCK).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
       .before(RESERVED_ELSE).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
       .before(RESERVED_ELSIF).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
-      .before(RESERVED_DEFAULT).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
+      .before(DEFAULT_COMPOUND).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
 
       // unconditional
       .beforeInside(SEMICOLON, STATEMENT).spaces(0)
