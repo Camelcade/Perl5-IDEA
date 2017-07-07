@@ -33,6 +33,7 @@ import java.net.URL;
 
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.BRACE_PLACEMENT_OPTIONS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
 /**
@@ -43,6 +44,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
   private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
   private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
+  private static final String GROUP_NEW_LINE_BEFORE = PerlBundle.message("perl.formatting.group.new.line.before");
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -127,6 +129,33 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ELSE_ON_NEW_LINE",
+                                PerlBundle.message("perl.formatting.compound.secondary"),
+                                GROUP_NEW_LINE_BEFORE
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_NAMESPACE",
+                                PerlBundle.message("perl.formatting.brace.style.namespace"),
+                                WRAPPING_BRACES,
+                                BRACE_PLACEMENT_OPTIONS
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_SUB",
+                                PerlBundle.message("perl.formatting.brace.style.sub"),
+                                WRAPPING_BRACES,
+                                BRACE_PLACEMENT_OPTIONS
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_COMPOUND",
+                                PerlBundle.message("perl.formatting.brace.style.compound"),
+                                WRAPPING_BRACES,
+                                BRACE_PLACEMENT_OPTIONS
+      );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_FAT_COMMA",

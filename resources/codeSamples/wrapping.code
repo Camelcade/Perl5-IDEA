@@ -1,8 +1,26 @@
+package Foo::Bar{
+
 my $hashref = {
     key      => 42,
     otherkey => 42,
     third    => 42
 };
+
+sub somesub{
+say 'hi';
+}
+
+sub{say 'hi'};
+map {defined} @INC;
+
+if($a){
+  say 'yes';
+}elsif($b){
+  say 'no';
+}else{
+  say 'dunno';
+}
+
 
 my @list = qw/
     this is   a    list
@@ -15,3 +33,5 @@ say $a == 42 ? 'true'
 $someobject->somemethod()
     ->othermethod()
     ->andagain();
+
+}

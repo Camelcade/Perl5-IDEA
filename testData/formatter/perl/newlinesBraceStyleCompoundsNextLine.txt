@@ -1,0 +1,85 @@
+package Foo::Bar {
+
+    sub somesub {
+        say 'hi';
+    }
+
+    method somemethod {
+        say 'hi';
+    }
+
+    func somefunc {
+        say 'hi';
+    }
+
+    given ($foo)
+    {
+
+        when (/^xyz/)
+        {
+            $xyz = 1
+        }
+        default
+        {$nothing = 1}
+
+    }
+
+    unless ($a)
+    {}
+    else
+    {}
+
+    while ($a)
+    {}
+
+    until ($a)
+    {}
+    for $a (@INC)
+    {}
+    foreach $a (@INC)
+    {}
+    for (;;)
+    {}
+    foreach (;;)
+    {}
+
+    sub {say 'hi'};
+    eval {say 'hi'};
+    do {say 'hi'};
+    map {defined} @INC;
+    sort {defined} @INC;
+    grep {defined} @INC;
+
+    if ($a)
+    {
+        say 'yes';
+    }
+    elsif ($b)
+    {
+        say 'no';
+    }
+    else
+    {
+        say 'dunno';
+    }
+
+
+
+    {
+        say 'do';
+    }
+    continue
+    {
+        say 'or not';
+    }
+
+    when ($a)
+    {
+        say 42;
+    }
+    default
+    {
+        say 42;
+    }
+
+}

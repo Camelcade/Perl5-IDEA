@@ -23,6 +23,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
+
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
@@ -125,16 +127,47 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .afterInside(RESERVED_FOREACH, FOREACH_STATEMENT_MODIFIER).spaces(1)
       .afterInside(RESERVED_WHEN, WHEN_STATEMENT_MODIFIER).spaces(1)
 
-      .beforeInside(BLOCK, BLOCK_CONTAINERS).spaceIf(mySettings.SPACE_BEFORE_IF_LBRACE)
-      .between(RESERVED_ELSE, UNCONDITIONAL_BLOCK).spaceIf(mySettings.SPACE_BEFORE_IF_LBRACE)
+      .beforeInside(BLOCK, SUB_DEFINITIONS_TOKENSET).spacing(
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        myPerlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+
+      .beforeInside(BLOCK, NAMESPACE_DEFINITION).spacing(
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        myPerlSettings.BRACE_STYLE_NAMESPACE == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+
+      .beforeInside(BLOCK, BLOCK_CONTAINERS_TOKENSET).spacing(
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        myPerlSettings.BRACE_STYLE_COMPOUND == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+      .between(RESERVED_ELSE, UNCONDITIONAL_BLOCK).spacing(
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        myPerlSettings.BRACE_STYLE_COMPOUND == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
 
       .afterInside(LEFT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
       .beforeInside(RIGHT_PAREN, CONDITION_LIKE_ELEMENTS).spaceIf(mySettings.SPACE_WITHIN_IF_PARENTHESES)
 
-      .before(CONTINUE_BLOCK).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
-      .before(RESERVED_ELSE).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
-      .before(RESERVED_ELSIF).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
-      .before(DEFAULT_COMPOUND).spaceIf(mySettings.SPACE_BEFORE_ELSE_KEYWORD)
+      .before(SECONDARY_COMPOUND_TOKENSET).spacing(
+        mySettings.SPACE_BEFORE_ELSE_KEYWORD ? 1 : 0,
+        mySettings.SPACE_BEFORE_ELSE_KEYWORD ? 1 : 0,
+        myPerlSettings.ELSE_ON_NEW_LINE ? 1 : 0,
+        false,
+        0
+      )
 
       // unconditional
       .beforeInside(SEMICOLON, STATEMENT).spaces(0)

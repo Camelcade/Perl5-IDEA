@@ -41,6 +41,50 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testNewlinesBraceStyleSubsSameLine() {
+    getCustomSettings().BRACE_STYLE_SUB = SAME_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesBraceStyleSubsNextLine() {
+    getCustomSettings().BRACE_STYLE_SUB = NEXT_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesBraceStyleCompoundsSameLine() {
+    getCustomSettings().BRACE_STYLE_COMPOUND = SAME_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesBraceStyleCompoundsNextLine() {
+    getCustomSettings().BRACE_STYLE_COMPOUND = NEXT_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesBraceStyleNamespaceSameLine() {
+    getCustomSettings().BRACE_STYLE_NAMESPACE = SAME_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesBraceStyleNamespaceNextLine() {
+    getCustomSettings().BRACE_STYLE_NAMESPACE = NEXT_LINE;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesElseOnNewLineTrue() {
+    getCustomSettings().ELSE_ON_NEW_LINE = true;
+    doTestNewlinesCompounds();
+  }
+
+  public void testNewlinesElseOnNewLineFalse() {
+    getCustomSettings().ELSE_ON_NEW_LINE = false;
+    doTestNewlinesCompounds();
+  }
+
+  private void doTestNewlinesCompounds() {
+    doTestSingleSource("newlinesCompounds");
+  }
+
   public void testSpacingInsideBlockTrue() {
     getSettings().SPACE_WITHIN_BRACES = true;
     doTestSingleSource("spacingInsideBlock");
@@ -243,21 +287,27 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
 
   public void testSpacingBeforeCompoundLbraceTrue() {
     getSettings().SPACE_BEFORE_IF_LBRACE = true;
-    doFormatTest();
+    doCompoundSpacingTest();
   }
 
   public void testSpacingBeforeCompoundLbraceFalse() {
     getSettings().SPACE_BEFORE_IF_LBRACE = false;
-    doFormatTest();
+    doCompoundSpacingTest();
   }
 
   public void testSpacingBeforeElseTrue() {
     getSettings().SPACE_BEFORE_ELSE_KEYWORD = true;
-    doFormatTest();
+    doCompoundSpacingTest();
   }
 
   public void testSpacingBeforeElseFalse() {
     getSettings().SPACE_BEFORE_ELSE_KEYWORD = false;
+    doCompoundSpacingTest();
+  }
+
+  private void doCompoundSpacingTest() {
+    getCustomSettings().BRACE_STYLE_COMPOUND = SAME_LINE;
+    getCustomSettings().ELSE_ON_NEW_LINE = false;
     doFormatTest();
   }
 

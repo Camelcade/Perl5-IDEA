@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.idea.formatter.settings;
 
+import com.intellij.openapi.application.ApplicationBundle;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import com.perl5.PerlBundle;
 
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE_FULL;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
@@ -54,6 +56,12 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean ALIGN_TERNARY = true;
   public boolean ALIGN_DEREFERENCE_IN_CHAIN = false;
 
+  public int BRACE_STYLE_NAMESPACE = SAME_LINE;
+  public int BRACE_STYLE_SUB = SAME_LINE;
+  public int BRACE_STYLE_COMPOUND = SAME_LINE;
+
+  public boolean ELSE_ON_NEW_LINE = true;
+
   public PerlCodeStyleSettings(CodeStyleSettings container) {
     super("Perl5CodeStyleSettings", container);
   }
@@ -77,6 +85,16 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
     String[] LABELS_SIMPLE_DEREF_STYLE =
       {AS_IS, PerlBundle.message("perl.formatting.option.hashref.braced"), PerlBundle.message("perl.formatting.option.hashref.unbraced")};
     Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
+
+
+    int SAME_LINE = 0;
+    int NEXT_LINE = 1;
+    int[] BRACE_PLACEMENT_VALUES = {SAME_LINE, NEXT_LINE};
+    String[] BRACE_PLACEMENT_LABELS = {
+      ApplicationBundle.message("wrapping.brace.placement.end.of.line"),
+      ApplicationBundle.message("wrapping.brace.placement.next.line")
+    };
+    Object[] BRACE_PLACEMENT_OPTIONS = {BRACE_PLACEMENT_LABELS, BRACE_PLACEMENT_VALUES};
 
     String[] LABELS_MAIN_FORMAT = {AS_IS, MAIN_PACKAGE_FULL, PACKAGE_SEPARATOR};
     Object[] OPTIONS_MAIN_FORMAT = {LABELS_MAIN_FORMAT, VALUES};

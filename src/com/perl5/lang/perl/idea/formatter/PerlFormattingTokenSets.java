@@ -30,20 +30,28 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     FOR_LIST_EPXR
   );
 
-  TokenSet BLOCK_CONTAINERS = TokenSet.create(
+  TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
+    METHOD_DEFINITION,
+    FUNC_DEFINITION,
+
+    SUB_DEFINITION
+  );
+
+  TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
+    CONTINUE_BLOCK,
+    RESERVED_ELSE,
+    RESERVED_ELSIF,
+    DEFAULT_COMPOUND
+  );
+
+  TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
     CONDITIONAL_BLOCK,
     FOR_COMPOUND,
     FOREACH_COMPOUND,
     UNCONDITIONAL_BLOCK,
     CONTINUE_BLOCK,
     DEFAULT_COMPOUND,
-    CONDITIONAL_BLOCK_WHILE,
-    METHOD_DEFINITION,
-    FUNC_DEFINITION,
-
-    // fixme probably we should move them somewhere
-    SUB_DEFINITION,
-    NAMESPACE_DEFINITION
+    CONDITIONAL_BLOCK_WHILE
   );
 
   TokenSet STATEMENT_MODIFIERS = TokenSet.create(

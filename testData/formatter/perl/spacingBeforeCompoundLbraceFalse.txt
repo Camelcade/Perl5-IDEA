@@ -1,6 +1,4 @@
-if ($a){}
-elsif ($b){}
-else{}
+if ($a){} elsif ($b){} else{}
 
 {} continue{}
 
@@ -12,8 +10,7 @@ given ($foo){
 
 }
 
-unless ($a){}
-else{}
+unless ($a){} else{}
 
 while ($a){}
 
