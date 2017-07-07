@@ -73,7 +73,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
     RESERVED_DO,
     RESERVED_EVAL,
-    RESERVED_SUB
+    RESERVED_SUB,
+    RESERVED_MAP,
+    RESERVED_GREP,
+    RESERVED_SORT
   );
 
 

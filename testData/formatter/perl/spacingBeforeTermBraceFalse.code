@@ -1,6 +1,18 @@
 do      {};
 eval  {};
 sub   {};
+map {} @INC;
+grep {} @INC;
+sort {} @INC;
+map {}, @INC;
+grep {}, @INC;
+sort {}, @INC;
 do      {say $a};
 eval  {say $a};
 sub   {say $a};
+map { say $a} @INC;
+grep { say $a} @INC;
+sort { say $a} @INC;
+map { say $a}, @INC;
+grep { say $a}, @INC;
+sort { say $a}, @INC;
