@@ -20,6 +20,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
@@ -40,8 +41,36 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacingBeforeCommaTrue() {
+    getSettings().SPACE_BEFORE_COMMA = true;
+    doTestComma();
+  }
+
+  public void testSpacingBeforeCommaFalse() {
+    getSettings().SPACE_BEFORE_COMMA = false;
+    doTestComma();
+  }
+
+  public void testSpacingAfterCommaTrue() {
+    getSettings().SPACE_AFTER_COMMA = true;
+    doTestComma();
+  }
+
+  public void testSpacingAfterCommaFalse() {
+    getSettings().SPACE_AFTER_COMMA = false;
+    doTestComma();
+  }
+
+  private void doTestSingleSource(@NotNull String sourceFile) {
+    doFormatTest(sourceFile, getTestName(true), "");
+  }
+
+  private void doTestComma() {
+    doTestSingleSource("spacingComma");
+  }
+
   private void doTestFormatOperators() {
-    doFormatTest("spacingAroundOperators", getTestName(true), "");
+    doTestSingleSource("spacingAroundOperators");
   }
 
   public void testSpacingAroundAdditiveTrue() {
