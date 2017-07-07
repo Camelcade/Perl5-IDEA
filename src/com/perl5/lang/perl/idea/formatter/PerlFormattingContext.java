@@ -37,6 +37,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   protected SpacingBuilder createSpacingBuilder() {
     return new SpacingBuilder(mySettings)
       // standard settings
+      .around(OPERATOR_X).spaces(1)
+      .before(OPERATOR_X_ASSIGN).spaces(1)
       .around(OPERATORS_ASSIGNMENT).spaceIf(mySettings.SPACE_AROUND_ASSIGNMENT_OPERATORS)
       .around(OPERATORS_EQUALITY).spaceIf(mySettings.SPACE_AROUND_EQUALITY_OPERATORS)
       .around(OPERATORS_RELATIONAL).spaceIf(mySettings.SPACE_AROUND_RELATIONAL_OPERATORS)

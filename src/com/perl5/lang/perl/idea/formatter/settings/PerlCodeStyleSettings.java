@@ -46,7 +46,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean SPACES_WITHIN_ANON_ARRAY = true;
 
   public boolean SPACE_AROUND_RANGE_OPERATORS = true;
-  public boolean SPACE_AROUND_CONCAT_OPERATOR = false;
+  public boolean SPACE_AROUND_CONCAT_OPERATOR = true;
   public boolean SPACE_WITHIN_QW_QUOTES = false;
 
   public boolean ALIGN_FAT_COMMA = true;

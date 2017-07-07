@@ -422,7 +422,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   }
 
   protected void doFormatTest(@NotNull String filename, @NotNull String resultSuffix) {
-    initWithFileSmartWithoutErrors(filename);
+    doFormatTest(filename, filename, resultSuffix);
+  }
+
+  protected void doFormatTest(@NotNull String sourceFileName, @NotNull String resultFileName, @NotNull String resultSuffix) {
+    initWithFileSmartWithoutErrors(sourceFileName);
     new WriteCommandAction.Simple(getProject()) {
       @Override
       protected void run() throws Throwable {
@@ -436,8 +440,8 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
       }
     }.execute();
 
-    String resultFileName = getTestDataPath() + "/" + filename + resultSuffix + ".txt";
-    UsefulTestCase.assertSameLinesWithFile(resultFileName, myFixture.getFile().getText());
+    String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
+    UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
     assertNoErrorElements();
   }
 

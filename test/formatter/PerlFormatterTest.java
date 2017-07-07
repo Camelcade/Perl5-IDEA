@@ -40,6 +40,100 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  private void doTestFormatOperators() {
+    doFormatTest("spacingAroundOperators", getTestName(true), "");
+  }
+
+  public void testSpacingAroundAdditiveTrue() {
+    getSettings().SPACE_AROUND_ADDITIVE_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundAdditiveFalse() {
+    getSettings().SPACE_AROUND_ADDITIVE_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundAssignmentTrue() {
+    getSettings().SPACE_AROUND_ASSIGNMENT_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundAssignmentFalse() {
+    getSettings().SPACE_AROUND_ASSIGNMENT_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundBitwiseTrue() {
+    getSettings().SPACE_AROUND_BITWISE_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundBitwiseFalse() {
+    getSettings().SPACE_AROUND_BITWISE_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundEqualityTrue() {
+    getSettings().SPACE_AROUND_EQUALITY_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundEqualityFalse() {
+    getSettings().SPACE_AROUND_EQUALITY_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundLogicalTrue() {
+    getSettings().SPACE_AROUND_LOGICAL_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundLogicalFalse() {
+    getSettings().SPACE_AROUND_LOGICAL_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundMultiplicativeTrue() {
+    getSettings().SPACE_AROUND_MULTIPLICATIVE_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundMultiplicativeFalse() {
+    getSettings().SPACE_AROUND_MULTIPLICATIVE_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundRelationalTrue() {
+    getSettings().SPACE_AROUND_RELATIONAL_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundRelationalFalse() {
+    getSettings().SPACE_AROUND_RELATIONAL_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundShiftTrue() {
+    getSettings().SPACE_AROUND_SHIFT_OPERATORS = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundShiftFalse() {
+    getSettings().SPACE_AROUND_SHIFT_OPERATORS = false;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundUnaryTrue() {
+    getSettings().SPACE_AROUND_UNARY_OPERATOR = true;
+    doTestFormatOperators();
+  }
+
+  public void testSpacingAroundUnaryFalse() {
+    getSettings().SPACE_AROUND_UNARY_OPERATOR = false;
+    doTestFormatOperators();
+  }
+
   public void testSpacingBeforeCompoundLbraceTrue() {
     getSettings().SPACE_BEFORE_IF_LBRACE = true;
     doFormatTest();

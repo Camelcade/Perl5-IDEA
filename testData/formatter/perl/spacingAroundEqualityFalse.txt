@@ -1,0 +1,99 @@
+# x
+$a x $b;
+1 x 4;
+$a x 4;
+4 x $a;
+
+# concat
+$a . $b;
+1 . $b;
+$a . 1;
+1 . 1;
+
+# relations
+$a < $b;
+$a > $b;
+$a <= $b;
+$a >= $b;
+$a==$b;
+$a!=$b;
+$a <=> $b;
+$a=~$b;
+$a!~$b;
+$a ~~ $b;
+
+# additive
+$a + $b;
+$a - $b;
+
+# multiplicative
+$a * $b;
+$a / $b;
+$a % $b;
+$a ** $b;
+
+# logical
+$a && $b;
+$a || $b;
+$a // $b;
+
+# bitwise
+$a & $b;
+$a | $b;
+$a ^ $b;
+
+# ternary
+$a ? $a : $b;
+
+# logical lp
+$a and $b;
+$a or $b;
+$a xor $b;
+
+# shift
+$a << $b;
+$a >> $b;
+
+# string relations
+$a lt $b;
+$a gt $b;
+$a le $b;
+$a ge $b;
+$a eq $b;
+$a ne $b;
+$a cmp $b;
+
+# range
+$a .. $b;
+$a ... $b;
+
+# suffix
+$a++;
+$a--;
+
+# prefix
+--$a;
+++$a;
+!$a;
+~$a;
+not $a;
+
+# assign
+$a = $b;
+$a **= $b;
+$a += $b;
+$a -= $b;
+$a *= $b;
+$a /= $b;
+$a %= $b;
+$a .= $b;
+$a x= $b;
+$a &= $b;
+$a |= $b;
+$a ^= $b;
+$a <<= $b;
+$a >>= $b;
+$a &&= $b;
+$a ||= $b;
+$a //= $b;
+
