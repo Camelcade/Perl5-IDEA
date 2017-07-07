@@ -40,6 +40,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacingBeforeTermBraceTrue() {
+    getSettings().SPACE_BEFORE_DO_LBRACE = true;
+    doFormatTest();
+  }
+
+  public void testSpacingBeforeTermBraceFalse() {
+    getSettings().SPACE_BEFORE_DO_LBRACE = false;
+    doFormatTest();
+  }
+
   public void testSpacesWithinParenthesesTrue() {
     getSettings().SPACE_WITHIN_PARENTHESES = true;
     doFormatTest();
@@ -49,8 +59,6 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     getSettings().SPACE_WITHIN_PARENTHESES = false;
     doFormatTest();
   }
-
-
 
   public void testSpacesAroundRangeTrue() {
     getCustomSettings().SPACE_AROUND_RANGE_OPERATORS = true;

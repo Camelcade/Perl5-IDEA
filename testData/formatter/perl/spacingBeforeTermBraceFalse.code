@@ -1,0 +1,6 @@
+do      {};
+eval  {};
+sub   {};
+do      {say $a};
+eval  {say $a};
+sub   {say $a};
