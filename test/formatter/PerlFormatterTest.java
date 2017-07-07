@@ -41,6 +41,50 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacingTernaryBeforeQuestTrue() {
+    getSettings().SPACE_BEFORE_QUEST = true;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryBeforeQuestFalse() {
+    getSettings().SPACE_BEFORE_QUEST = false;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryAfterQuestTrue() {
+    getSettings().SPACE_AFTER_QUEST = true;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryAfterQuestFalse() {
+    getSettings().SPACE_AFTER_QUEST = false;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryAfterColonTrue() {
+    getSettings().SPACE_AFTER_COLON = true;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryAfterColonFalse() {
+    getSettings().SPACE_AFTER_COLON = false;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryBeforeColonTrue() {
+    getSettings().SPACE_BEFORE_COLON = true;
+    doTestTernary();
+  }
+
+  public void testSpacingTernaryBeforeColonFalse() {
+    getSettings().SPACE_BEFORE_COLON = false;
+    doTestTernary();
+  }
+
+  private void doTestTernary() {
+    doTestSingleSource("spacingTernary");
+  }
+
   public void testSpacingBeforeCommaTrue() {
     getSettings().SPACE_BEFORE_COMMA = true;
     doTestComma();
