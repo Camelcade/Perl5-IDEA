@@ -75,6 +75,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "SPACE_BEFORE_IF_PARENTHESES",    // implemented, any conditional block, for and iterator
 
         "SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
+        "SPACE_WITHIN_PARENTHESES",       // @a = (something)
 
         "SPACE_BEFORE_IF_LBRACE",        // implemented, any or undonditional conditional block, for,
 
