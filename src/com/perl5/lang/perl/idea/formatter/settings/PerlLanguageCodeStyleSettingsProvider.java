@@ -79,6 +79,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "SPACE_BEFORE_IF_PARENTHESES",    // implemented, any conditional block, for and iterator
 
+        "SPACE_WITHIN_BRACES",            // for code blocks
         "SPACE_WITHIN_IF_PARENTHESES",    // condition, for iterator
         "SPACE_WITHIN_PARENTHESES",       // @a = (something)
 
@@ -93,6 +94,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", PerlBundle.message("perl.formatting.compound.secondary"));
       consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
+      consumer.renameStandardOption("SPACE_WITHIN_BRACES", PerlBundle.message("perl.formatting.within.code.block"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_CONCAT_OPERATOR",

@@ -15,5 +15,5 @@ given ($foo) {
 for ($var) {
     when (/^xyz/) {
         $xyz = 1
-    }default { $nothing = 1 }
+    }default {$nothing = 1}
 }

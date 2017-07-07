@@ -64,6 +64,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .afterInside(LEFT_PAREN, PARENTHESISED_EXPR).spaceIf(mySettings.SPACE_WITHIN_PARENTHESES)
       .beforeInside(RIGHT_PAREN, PARENTHESISED_EXPR).spaceIf(mySettings.SPACE_WITHIN_PARENTHESES)
 
+      .betweenInside(LEFT_BRACE, RIGHT_BRACE, BLOCK).spaces(0)
+      .afterInside(LEFT_BRACE, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
+      .beforeInside(RIGHT_BRACE, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
+
       .betweenInside(LEFT_BRACE, RIGHT_BRACE, ANON_HASH).spaces(0)
       .afterInside(LEFT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_HASH)
       .beforeInside(RIGHT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_HASH)

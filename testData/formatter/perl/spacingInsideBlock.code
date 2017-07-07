@@ -1,0 +1,20 @@
+sub something{}
+method something{}
+func something{}
+sub{};
+sub something{say $a}
+method something{say $a}
+func something{say $a}
+sub{say $a};
+sort{} @INC;
+map{} @INC;
+grep{} @INC;
+sort{say 'hi'} @INC;
+map{say 'hi'} @INC;
+grep{say 'hi'} @INC;
+if($a){}
+elsif($a){say 'hi'}
+else{}
+say ${a};
+say "${a}";
+say "${\'hi'}";

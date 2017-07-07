@@ -41,6 +41,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testSpacingInsideBlockTrue() {
+    getSettings().SPACE_WITHIN_BRACES = true;
+    doTestSingleSource("spacingInsideBlock");
+  }
+
+  public void testSpacingInsideBlockFalse() {
+    getSettings().SPACE_WITHIN_BRACES = false;
+    doTestSingleSource("spacingInsideBlock");
+  }
+
   public void testSpacingSemicolonAfterTrue() {
     getSettings().SPACE_AFTER_SEMICOLON = true;
     doTestSemicolon();
