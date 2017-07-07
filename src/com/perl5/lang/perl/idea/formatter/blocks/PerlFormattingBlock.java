@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
@@ -59,7 +60,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       POD,
       PerlParserUtil.DUMMY_BLOCK
     );
-
   /**
    * Elements that must have LF between them
    */
@@ -74,13 +74,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     IF_COMPOUND,
     USE_STATEMENT
   );
-
   public final static TokenSet BLOCK_OPENERS = TokenSet.create(
     LEFT_BRACE,
     LEFT_BRACKET,
     LEFT_PAREN
   );
-
   public final static TokenSet BLOCK_CLOSERS = TokenSet.create(
     RIGHT_BRACE,
     RIGHT_BRACKET,
@@ -93,6 +91,28 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private final boolean myIsFirst;
   private final boolean myIsLast;
   private final IElementType myElementType;
+  private final AtomicNotNullLazyValue<Boolean> myIsIncomple = new AtomicNotNullLazyValue<Boolean>() {
+    @NotNull
+    @Override
+    protected Boolean compute() {
+      if (myElementType == COMMA_SEQUENCE_EXPR) {
+        IElementType lastNodeType = PsiUtilCore.getElementType(myNode.getLastChildNode());
+        if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
+          return true;
+        }
+      }
+
+      List<Block> blocks = getSubBlocks();
+      if (!blocks.isEmpty()) {
+        Block lastBlock = blocks.get(blocks.size() - 1);
+        if (lastBlock.isIncomplete()) {
+          return true;
+        }
+      }
+
+      return PerlFormattingBlock.super.isIncomplete();
+    }
+  };
   private List<Block> mySubBlocks;
 
   public PerlFormattingBlock(
@@ -373,6 +393,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       childNode = childNode.getTreeNext();
     }
     return true;
+  }
+
+  @Override
+  public boolean isIncomplete() {
+    return myIsIncomple.getValue();
   }
 
   protected static boolean shouldCreateBlockFor(ASTNode node) {
