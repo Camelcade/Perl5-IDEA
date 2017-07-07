@@ -1,0 +1,38 @@
+if (   $some_condition   ){
+say 'hi' if (   $some_condition   );
+}
+unless (        $some_condition  ){
+say 'hi' unless (   $some_condition   );
+}
+while (        $some_condition  ){
+say 'hi' while (   $some_condition   );
+}
+until (       $some_condition  ){
+say 'hi' until (    $some_condition   );
+}
+for my $var (       $some_condition  ){
+say 'hi' for (   $some_condition   );
+}
+foreach my $var (     $some_condition  ){
+say 'hi' foreach (   $some_condition   );
+}
+for (         ;;   ){
+say 'hi' for (   $some_condition   );
+}
+foreach (      ;;   ){
+say 'hi' foreach (   $some_condition   );
+}
+when (        $some_condition   ){
+say 'hi' when (   $some_condition   );
+}
+
+given  (   $foo  ) {
+}
+
+say 'hi' if ($a);
+say 'hi' unless ($a);
+say 'hi' while ($a);
+say 'hi' until ($a);
+say 'hi' for ($a);
+say 'hi' foreach ($a);
+say 'hi' when ($a);

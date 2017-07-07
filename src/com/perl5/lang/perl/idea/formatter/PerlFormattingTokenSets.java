@@ -63,6 +63,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_WHILE,
     RESERVED_UNTIL,
     RESERVED_ELSIF,
+    RESERVED_WHEN,
 
     // these are redundant here, but used in statement modifiers
     RESERVED_FOR,

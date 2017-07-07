@@ -234,12 +234,12 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testSpacingInCompoundFalse() {
+  public void testSpacingInConditionFalse() {
     getSettings().SPACE_WITHIN_IF_PARENTHESES = false;
     doFormatTest();
   }
 
-  public void testSpacingInCompoundTrue() {
+  public void testSpacingInConditionTrue() {
     getSettings().SPACE_WITHIN_IF_PARENTHESES = true;
     doFormatTest();
   }
@@ -264,13 +264,13 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testStatementModifierSpacing() {
-    getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
+  public void testSpacingBeforeConditionTrue() {
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
     doFormatTest();
   }
 
-  public void testStatementModifierSpacingWithSpace() {
-    getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
+  public void testSpacingBeforeConditionFalse() {
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
     doFormatTest();
   }
 

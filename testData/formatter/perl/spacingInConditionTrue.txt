@@ -25,3 +25,13 @@ foreach ( ; ; ) {
 when ( $some_condition ) {
     say 'hi' when ( $some_condition );
 }
+say 'hi' if ( $a );
+say 'hi' unless ( $a );
+say 'hi' while ( $a );
+say 'hi' until ( $a );
+say 'hi' for ( $a );
+say 'hi' foreach ( $a );
+say 'hi' when ( $a );
+
+given ( $foo ) {
+}

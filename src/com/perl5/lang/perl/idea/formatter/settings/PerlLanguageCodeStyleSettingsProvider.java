@@ -88,11 +88,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "SPACE_BEFORE_DO_LBRACE"        // implemented, sub_{}, do_{}, eval_{}
       );
-      consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", PerlBundle.message("perl.formatting.compound.condition"));
+      consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
       consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", PerlBundle.message("perl.formatting.compound.block"));
       consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", PerlBundle.message("perl.formatting.compound.secondary"));
       consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
-      consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.compound.condition"));
+      consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_CONCAT_OPERATOR",
