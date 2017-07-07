@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
@@ -122,7 +123,12 @@ public class PerlNamesCache implements ProjectComponent {
     public void run() {
 
       while (!stopThis) {
-        myApplication.runReadAction(cacheUpdaterWorker);
+        try {
+          myApplication.runReadAction(cacheUpdaterWorker);
+        }
+        catch (ProcessCanceledException ignore) {
+        }
+
         lastUpdate = System.currentTimeMillis();
         isNotified = false;
 
