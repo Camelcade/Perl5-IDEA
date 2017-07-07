@@ -41,6 +41,14 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testCommaWrapping() {
+    doFormatTest();
+  }
+
+  public void testHeredocWrapping() {
+    doFormatTest();
+  }
+
   public void testNewlinesBraceStyleSubsSameLine() {
     getCustomSettings().BRACE_STYLE_SUB = SAME_LINE;
     doTestNewlinesCompounds();

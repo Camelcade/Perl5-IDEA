@@ -19,8 +19,6 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
@@ -37,7 +35,6 @@ import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -173,10 +170,20 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       alignmentFunction = childElementType -> null;
     }
 
-    Wrap wrap = null;
 
-    if (elementType == COMMA_SEQUENCE_EXPR && !isNewLineForbidden(this)) {
-      wrap = Wrap.createWrap(WrapType.NORMAL, true);
+    Function<ASTNode, Wrap> wrapFunction;
+
+    if (elementType == COMMA_SEQUENCE_EXPR) {
+      Wrap wrap = Wrap.createWrap(WrapType.NORMAL, true);
+      wrapFunction = childNode -> {
+        if (PsiUtilCore.getElementType(childNode) == COMMA || isNewLineForbidden(childNode)) {
+          return null;
+        }
+        return wrap;
+      };
+    }
+    else {
+      wrapFunction = childNode -> null;
     }
 
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
@@ -186,7 +193,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
         }
         continue;
       }
-      blocks.add(createBlock(child, wrap, alignmentFunction.fun(PsiUtilCore.getElementType(child))));
+      IElementType childElementType = PsiUtilCore.getElementType(child);
+      blocks.add(createBlock(child, wrapFunction.fun(child), alignmentFunction.fun(childElementType)));
     }
     return blocks;
   }
@@ -235,7 +243,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
       // LF after opening brace and before closing need to check if here-doc opener is in the line
       if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type)) {
-        if (!isNewLineForbidden((PerlFormattingBlock)child1)) {
+        if (!isNewLineForbidden(child1Node)) {
           return Spacing.createSpacing(0, 0, 1, true, 1);
         }
         else {
@@ -248,7 +256,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
           (BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst()
            || BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast()
           )
-          && !isNewLineForbidden((PerlFormattingBlock)child1)
+          && !isNewLineForbidden(child1Node)
         ) {
         return Spacing.createSpacing(0, 0, 1, true, 1);
       }
@@ -263,18 +271,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return myContext.getSpacingBuilder().getSpacing(this, child1, child2);
   }
 
-  /**
-   * Checks if Heredoc is ahead of current block and it's not possible to insert newline
-   * fixme we should collect all forbidden ranges, cache them and use here
-   *
-   * @param block block in question
-   * @return check result
-   */
-  protected boolean isNewLineForbidden(PerlFormattingBlock block) {
-    PsiElement element = block.getNode().getPsi();
-    PsiFile file = element.getContainingFile();
-    assert file instanceof PerlFileImpl;
-    return ((PerlFileImpl)file).isNewLineForbiddenAt(element);
+  // fixme should be moved to context
+  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
+    return myContext.isNewLineForbiddenAt(node);
   }
 
   @Override
