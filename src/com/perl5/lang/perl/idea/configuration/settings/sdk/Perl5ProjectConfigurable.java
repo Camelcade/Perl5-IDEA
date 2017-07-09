@@ -52,6 +52,6 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
   @Override
   protected Perl5SdkWrapper getDefaultSelectedItem() {
     Sdk projectSdk = ProjectRootManager.getInstance(myProject).getProjectSdk();
-    return projectSdk == null ? null : new Perl5RealSdkWrapper(projectSdk);
+    return projectSdk == null ? NOT_SELECTED_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }
 }
