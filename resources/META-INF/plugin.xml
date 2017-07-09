@@ -193,6 +193,8 @@
     <projectConfigurable groupId="language"
                          provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"
                          id="PERL5_MAIN_SETTINGS"/>
+    <projectConfigurable groupId="language" parentId="PERL5_MAIN_SETTINGS"
+                         provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5ProjectStructureConfigurableProvider"/>
 
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.perl.idea.configuration.paths.PerlIncludeLibrarySourceRootEditHandler"/>
