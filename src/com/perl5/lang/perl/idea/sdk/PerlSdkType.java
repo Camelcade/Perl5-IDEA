@@ -21,6 +21,7 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
@@ -72,16 +73,14 @@ public class PerlSdkType extends SdkType {
 
   public List<String> getINCPaths(String sdkHomePath) {
     String executablePath = getExecutablePath(sdkHomePath);
-    List<String> perlLibPaths = new ArrayList<String>();
-    if (executablePath != null) {
-      for (String path : PerlRunUtil.getDataFromProgram(
-        executablePath,
-        "-le",
-        "print for @INC"
-      )) {
-        if (!".".equals(path)) {
-          perlLibPaths.add(path);
-        }
+    List<String> perlLibPaths = new ArrayList<>();
+    for (String path : PerlRunUtil.getDataFromProgram(
+      executablePath,
+      "-le",
+      "print for @INC"
+    )) {
+      if (!".".equals(path)) {
+        perlLibPaths.add(path);
       }
     }
     return perlLibPaths;
@@ -89,14 +88,15 @@ public class PerlSdkType extends SdkType {
 
   @Nullable
   @Override
-  public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator
-    sdkModificator) {
+  public AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull SdkModel sdkModel,
+                                                                     @NotNull SdkModificator sdkModificator) {
     return null;
   }
 
+  @NotNull
   @Override
   public String getPresentableName() {
-    return "Perl5 Interpreter";
+    return PerlBundle.message("perl.config.interpreter.title");
   }
 
   @Nullable
@@ -145,6 +145,7 @@ public class PerlSdkType extends SdkType {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
+  @NotNull
   @Override
   public Icon getIconForAddAction() {
     return getIcon();
@@ -184,8 +185,6 @@ public class PerlSdkType extends SdkType {
 
   @NotNull
   public static PerlSdkType getInstance() {
-    PerlSdkType instance = SdkType.findInstance(PerlSdkType.class);
-    assert instance != null : "Make sure PerlSdkType is registered in plugin.xml";
-    return instance;
+    return SdkType.findInstance(PerlSdkType.class);
   }
 }
