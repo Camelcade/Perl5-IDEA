@@ -16,22 +16,40 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.ui.ComboBox;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 
 import javax.swing.*;
 
 public class Perl5StructurePanel {
-  private JComboBox<Perl5SdkWrapper> mySdkComboBox;
+  private ComboBox<Perl5SdkWrapper> mySdkComboBox;
   private JButton myAddButton;
   private JButton myEditButton;
   private JButton myDeleteButton;
   private JPanel myMainPanel;
 
-  public JComboBox<Perl5SdkWrapper> getSdkComboBox() {
+  public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
   }
 
   public JPanel getMainPanel() {
     return myMainPanel;
+  }
+
+  public JButton getAddButton() {
+    return myAddButton;
+  }
+
+  public JButton getEditButton() {
+    return myEditButton;
+  }
+
+  public JButton getDeleteButton() {
+    return myDeleteButton;
+  }
+
+  private void createUIComponents() {
+    // TODO: place custom component creation code here
+    mySdkComboBox = new ComboBox<>(350);
   }
 }
