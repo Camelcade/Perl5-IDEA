@@ -71,7 +71,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   public static final String PROJECT = "CAMELCADE";
   private static final Logger LOGGER = Logger.getInstance(YoutrackErrorHandler.class);
   @NonNls
-  private static final String SERVER_URL = "http://camelcade.myjetbrains.com/youtrack/";
+  private static final String SERVER_URL = "https://camelcade.myjetbrains.com/youtrack/";
   private static final String SERVER_REST_URL = SERVER_URL + "rest/";
   private static final String SERVER_ISSUE_URL = SERVER_REST_URL + "issue";
   private static final String LOGIN_URL = SERVER_REST_URL + "user/login";
