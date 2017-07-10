@@ -1,0 +1,4 @@
+package Something;
+use parent qw/MyTest::Constants/;
+
+sub <caret> {}

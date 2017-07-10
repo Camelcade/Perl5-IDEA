@@ -25,7 +25,6 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
-import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
@@ -108,7 +107,6 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
   private static List<PsiElement> getAugmentStatements(@NotNull final PsiElement childNamespace) {
     return CachedValuesManager.getCachedValue(childNamespace,
                                               () -> CachedValueProvider.Result.create(PerlPsiUtil.collectNamespaceMembers(childNamespace,
-                                                                                                                          PerlMooseAugmentStatementStub.class,
                                                                                                                           PerlMooseAugmentStatement.class),
                                                                                       childNamespace));
   }

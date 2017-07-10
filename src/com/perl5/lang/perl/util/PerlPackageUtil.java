@@ -51,7 +51,6 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
@@ -584,7 +583,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     return CachedValuesManager.getCachedValue(
       namespace,
       () -> CachedValueProvider.Result
-        .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubStub.class, PerlSubElement.class), namespace));
+        .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubElement.class), namespace));
   }
 
   public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,

@@ -20,16 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.Processor;
+import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonBlock;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
-import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NonNls;
@@ -110,24 +107,21 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
   @NotNull
   public List<HTMLMasonCompositeElement> getArgsBlocks() {
-    StubElement stub = getStub();
+    StubElement rootStub = getStub();
 
     //noinspection Duplicates duplicates file implementation
-    if (stub != null) {
+    if (rootStub != null) {
       final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
 
       PerlPsiUtil.processElementsFromStubs(
-        stub,
-        new Processor<Stub>() {
-          @Override
-          public boolean process(Stub stub) {
-            if (stub instanceof HTMLMasonArgsBlockStub) {
-              result.add(((HTMLMasonArgsBlockStub)stub).getPsi());
-            }
-            return true;
+        rootStub,
+        psi -> {
+          if (psi instanceof HTMLMasonArgsBlock) {
+            result.add(((HTMLMasonArgsBlock)psi));
           }
+          return true;
         },
-        HTMLMasonNamedElementStubBaseImpl.class
+        HTMLMasonNamedElement.class
       );
       return result;
     }

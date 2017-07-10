@@ -1,0 +1,4 @@
+Lookups: LIBRARY_CONST1; Text: LIBRARY_CONST1; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LIBRARY_CONST2; Text: LIBRARY_CONST2; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LIBRARY_CONST3; Text: LIBRARY_CONST3; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LIBRARY_CONST4; Text: LIBRARY_CONST4; Tail: null; Type: null; Icon: null; Type Icon: null

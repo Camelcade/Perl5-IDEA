@@ -23,7 +23,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
@@ -35,11 +34,7 @@ import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
-import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonNamedElementStubBaseImpl;
 import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -514,13 +509,13 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   public List<HTMLMasonCompositeElement> getMethodsDefinitions() {
-    StubElement stub = getStub();
-    if (stub != null) {
+    StubElement parentStub = getStub();
+    if (parentStub != null) {
       final List<HTMLMasonCompositeElement> result = new ArrayList<>();
-      PerlPsiUtil.processElementsFromStubs(stub, stub1 ->
+      PerlPsiUtil.processElementsFromStubs(parentStub, psi ->
       {
-        if (stub1 instanceof HTMLMasonMethodDefinitionStub) {
-          result.add(((HTMLMasonMethodDefinitionStub)stub1).getPsi());
+        if (psi instanceof HTMLMasonMethodDefinition) {
+          result.add(((HTMLMasonMethodDefinition)psi));
         }
         return true;
       }, null);
@@ -533,22 +528,22 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   @NotNull
   @Override
   public List<HTMLMasonCompositeElement> getArgsBlocks() {
-    StubElement stub = getStub();
+    StubElement rootStub = getStub();
 
     //noinspection Duplicates in HTMLMasonStubBasedNamedElementImpl
-    if (stub != null) {
+    if (rootStub != null) {
       final List<HTMLMasonCompositeElement> result = new ArrayList<>();
 
       PerlPsiUtil.processElementsFromStubs(
-        stub,
-        stub1 ->
+        rootStub,
+        psi ->
         {
-          if (stub1 instanceof HTMLMasonArgsBlockStub) {
-            result.add(((HTMLMasonArgsBlockStub)stub1).getPsi());
+          if (psi instanceof HTMLMasonArgsBlock) {
+            result.add(((HTMLMasonArgsBlock)psi));
           }
           return true;
         },
-        HTMLMasonNamedElementStubBaseImpl.class
+        HTMLMasonNamedElement.class
       );
       return result;
     }
@@ -643,11 +638,11 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     }
   }
 
-  protected static class FlagsStatementStubSeeker extends FlagsStatementSeeker<Stub> {
+  protected static class FlagsStatementStubSeeker extends FlagsStatementSeeker<PsiElement> {
     @Override
-    public boolean process(Stub stub) {
-      if (stub instanceof HTMLMasonFlagsStatementStub) {
-        myResult = ((HTMLMasonFlagsStatementStub)stub).getPsi();
+    public boolean process(PsiElement psi) {
+      if (psi instanceof HTMLMasonFlagsStatement) {
+        myResult = ((HTMLMasonFlagsStatement)psi);
         return false;
       }
       return true;

@@ -40,8 +40,6 @@ import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
-import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -234,29 +232,30 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static List<PsiElement> collectUseStatements(@NotNull PerlNamespaceDefinitionElement rootElement) {
     return CachedValuesManager.getCachedValue(rootElement, () -> CachedValueProvider.Result
-      .create(collectNamespaceMembers(rootElement, PerlUseStatementStub.class, PerlUseStatement.class), rootElement));
+      .create(collectNamespaceMembers(rootElement, PerlUseStatement.class), rootElement));
   }
 
   @NotNull
   public static List<PsiElement> collectNamespaceMembers(@NotNull final PsiElement rootElement,
-                                                         @Nullable final Class<? extends StubElement> stubClass,
                                                          @NotNull final Class<? extends PsiElement> psiClass
   ) {
     final List<PsiElement> result = new ArrayList<>();
-    if (stubClass != null && rootElement instanceof StubBasedPsiElement) {
+
+    Processor<PsiElement> processor = element -> {
+      if (psiClass.isInstance(element)) {
+        result.add(element);
+      }
+      return true;
+    };
+
+    if (rootElement instanceof StubBasedPsiElement) {
       Stub rootElementStub = ((StubBasedPsiElement)rootElement).getStub();
 
       if (rootElementStub != null) {
         processElementsFromStubs(
           rootElementStub,
-          stub -> {
-            if (stubClass.isInstance(stub)) {
-              result.add(((StubBase)stub).getPsi());
-            }
-
-            return true;
-          },
-          PerlNamespaceDefinitionStub.class
+          processor,
+          PerlNamespaceDefinitionWithIdentifier.class
         );
         return result;
       }
@@ -264,41 +263,37 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     processElementsFromPsi(
       rootElement,
-      element -> {
-        if (psiClass.isInstance(element)) {
-          result.add(element);
-        }
-        return true;
-      },
-      PerlNamespaceDefinitionElement.class
+      processor,
+      PerlNamespaceDefinitionWithIdentifier.class
     );
     return result;
   }
 
   public static boolean processElementsFromStubs(
     @Nullable Stub stub,
-    @Nullable Processor<Stub> processor,
-    @Nullable Class<? extends StubElement> avoidClass
+    @Nullable Processor<PsiElement> processor,
+    @Nullable Class<? extends PsiElement> avoidPsiClass
   ) {
     if (stub == null || processor == null) {
       return false;
     }
 
-    for (Stub child : stub.getChildrenStubs()) {
-      if (!processor.process(child)) {
+    for (Stub childStub : stub.getChildrenStubs()) {
+      PsiElement childPsi = ((StubElement)childStub).getPsi();
+      if (!processor.process(childPsi)) {
         return false;
       }
 
-      if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter sublcasses
+      if (avoidPsiClass == null || !avoidPsiClass.isInstance(childPsi)) // don't enter sublcasses
       {
-        if (!processElementsFromStubs(child, processor, avoidClass)) {
+        if (!processElementsFromStubs(childStub, processor, avoidPsiClass)) {
           return false;
         }
       }
     }
 
     if (stub instanceof PerlPolyNamedElementStub) {
-      for (StubElement child : ((PerlPolyNamedElementStub)stub).getLightNamedElementsStubs()) {
+      for (PsiElement child : ((PerlPolyNamedElementStub)stub).getPsi().getLightElements()) {
         if (!processor.process(child)) {
           return false;
         }
@@ -340,12 +335,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
 
     return true;
-  }
-
-  public static boolean isHeredocAhead(PsiElement startElement, final int lineEndOffset) {
-    HeredocChecker checker = new HeredocChecker(lineEndOffset);
-    iteratePsiElementsRight(startElement, checker);
-    return checker.getResult();
   }
 
   public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor) {
@@ -679,31 +668,6 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     public HeredocProcessor(int lineEndOffset) {
       this.lineEndOffset = lineEndOffset;
-    }
-  }
-
-  private static class HeredocChecker extends HeredocProcessor {
-    protected boolean myResult = false;
-
-    public HeredocChecker(int lineEndOffset) {
-      super(lineEndOffset);
-    }
-
-    @Override
-    public boolean process(PsiElement element) {
-      if (element instanceof PerlHeredocOpener) {
-        myResult = true;
-        return false;
-      }
-      if (element != null && element.getTextRange().getStartOffset() >= lineEndOffset) {
-        myResult = element instanceof PerlHeredocElementImpl;
-        return false;
-      }
-      return true;
-    }
-
-    public boolean getResult() {
-      return myResult;
     }
   }
 }
