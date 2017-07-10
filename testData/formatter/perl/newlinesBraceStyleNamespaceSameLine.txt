@@ -66,3 +66,65 @@ package Foo::Bar {
     }
 
 }
+
+sub something {
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+}
+
+method something {
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+}
+
+func something {
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+    say 'this is a long sub';
+}
+
+

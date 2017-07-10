@@ -174,6 +174,14 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         0
       )
 
+      .beforeInside(LP_CODE_BLOCK, SUB_DEFINITIONS_TOKENSET).spacing(
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        myPerlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+
       .beforeInside(BLOCK, NAMESPACE_DEFINITION).spacing(
         mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,

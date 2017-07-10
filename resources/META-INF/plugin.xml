@@ -60,8 +60,9 @@
      <!--</p>-->
      <p>Fixes:
       <ul>
-      <li>Fixed exception reporter, by <a href="https://github.com/VISTALL">VISTALL</a></li>
-      <li>Fixed exception on new class method name completion, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1527">#1527</a></li>
+      <li>Exception reporter, by <a href="https://github.com/VISTALL">VISTALL</a></li>
+      <li>Exception on new class method name completion, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1527">#1527</a></li>
+      <li>Opening brace formatting for subs with long body, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1526">#1526</a></li>
       </ul>
      </p>
     ]]>
