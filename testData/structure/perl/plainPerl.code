@@ -1,0 +1,22 @@
+package Foo::Bar;
+
+sub something;
+
+sub someotherthing{};
+
+#@deprecated
+sub somethingdeprecated;
+
+#@deprecated
+sub someotherthingdeprecated{};
+
+#@deprecated
+package Deprecated::Bar;
+
+our $scalar;
+our @array;
+our %hash;
+#@deprecated
+our ($scalar_deprecated,
+  @array_deprecated,
+%hash_deprecated);

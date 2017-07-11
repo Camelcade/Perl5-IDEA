@@ -1,0 +1,30 @@
+constants.pl in \src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+-> Perl5 at 0 in constants.pl
+
+  Bla::Bla in constants.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+  -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Bla::Bla at 0 in constants.pl
+
+    CONST1 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 38 in constants.pl
+
+    CONST2 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 60 in constants.pl
+
+    CONST3 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 82 in constants.pl
+
+    CONST4 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 104 in constants.pl
+
+    CONST5 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 126 in constants.pl
+
+    CONST6 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 160 in constants.pl
+
+    CONST7 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 178 in constants.pl
+
+    CONST8 in constants.pl; /constant_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 196 in constants.pl
+

@@ -1,0 +1,41 @@
+use Exception::Class
+    'Exception1',
+    "Exception2",
+    "Exception2$var",
+    `Exception3`,
+    `Exception3$var`,
+    q'Exception4',
+    qq"Exception5",
+    qq"Exception5$var",
+    qx`Exception6`,
+    qx`Exception6$var`,
+    qw`Exception6`,
+    Exception7 => {
+        isa    => "Something",
+        fields => [
+            'field1',
+            "field2",
+            "field2$var",
+            `field3`,
+            `field3$var`,
+            q'field1',
+            qq"field2",
+            qq"field2$var",
+            qx`field3`,
+            qx`field3$var`,
+            qw/bla bla/,
+            "ThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongName"
+            ,
+            "Thi${var}sIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongName"
+        ]
+    },
+    Exception8 => { alias => 'somealias' },
+    Exception9 => { alias => "somealias" },
+    Exception91 => { alias => "somealias$var" },
+    Exception10 => { alias => `somealias` },
+    Exception101 => { alias => `somealias$var` },
+    Exception11 => { alias => q'somealias' },
+    Exception12 => { alias => qq"somealias" },
+    Exception121 => { alias => qq"somealias$var" },
+    Exception13 => { alias => qw`somealias` },
+;

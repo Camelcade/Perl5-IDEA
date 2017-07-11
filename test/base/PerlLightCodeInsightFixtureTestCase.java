@@ -21,9 +21,17 @@ import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.ide.structureView.StructureView;
+import com.intellij.ide.structureView.StructureViewBuilder;
+import com.intellij.ide.structureView.StructureViewModel;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.injection.InjectedLanguageManager;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -36,6 +44,8 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.fileEditor.FileEditor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
@@ -65,6 +75,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -73,6 +84,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import gnu.trove.THashSet;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -81,10 +93,7 @@ import org.junit.Assert;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -591,5 +600,81 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 
+  protected void doTestStructureView() {
+    initWithFileSmartWithoutErrors();
+    PsiFile psiFile = getFile();
+    final VirtualFile virtualFile = psiFile.getVirtualFile();
+    final FileEditor fileEditor = FileEditorManager.getInstance(getProject()).getSelectedEditor(virtualFile);
+    final StructureViewBuilder builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(psiFile);
+    assertNotNull(builder);
 
+    StructureView structureView = builder.createStructureView(fileEditor, getProject());
+    assertNotNull(structureView);
+
+    StructureViewModel structureViewModel = structureView.getTreeModel();
+    Filter[] filters = structureViewModel.getFilters();
+    StructureViewTreeElement root = structureViewModel.getRoot();
+
+    Set<Object> recursionSet = new THashSet<>();
+    StringBuilder sb = new StringBuilder();
+    serializeTree(root, filters, sb, "", recursionSet);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  private void serializeTree(@NotNull StructureViewTreeElement currentElement,
+                             @NotNull Filter[] filters,
+                             @NotNull StringBuilder sb,
+                             @NotNull String prefix,
+                             @NotNull Set<Object> recursionSet
+  ) {
+    Object value = currentElement.getValue();
+    ItemPresentation presentation = currentElement.getPresentation();
+    assertNotNull(presentation);
+    sb.append(prefix)
+      .append(presentation.getPresentableText())
+      .append(" in ")
+      .append(presentation.getLocationString())
+      .append("; ")
+      .append(getIconText(presentation.getIcon(true)));
+
+    if (presentation instanceof PerlItemPresentationBase) {
+      sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
+    }
+
+    if (filters.length > 0) {
+      sb.append(" (");
+      for (Filter filter : filters) {
+        if (filter.isVisible(currentElement)) {
+          sb.append(filter.getName()).append("; ");
+        }
+      }
+      sb.append(")");
+    }
+
+    sb.append("\n");
+
+    if (value instanceof PsiElement) {
+      sb.append(prefix).append("-> ").append(serializePsiElement((PsiElement)value));
+    }
+
+    sb.append("\n");
+
+
+    if (recursionSet.add(value)) {
+      sb.append("\n");
+      for (TreeElement childElement : currentElement.getChildren()) {
+        assertInstanceOf(childElement, StructureViewTreeElement.class);
+        serializeTree(
+          (StructureViewTreeElement)childElement,
+          filters,
+          sb,
+          prefix + "  ",
+          new THashSet<>(recursionSet)
+        );
+      }
+    }
+    else {
+      sb.append("(recursion)").append("\n\n");
+    }
+  }
 }

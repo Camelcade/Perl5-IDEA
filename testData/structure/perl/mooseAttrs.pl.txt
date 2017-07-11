@@ -1,0 +1,198 @@
+mooseAttrs.pl in \src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+-> Perl5 at 0 in mooseAttrs.pl
+
+  MySomePackage in mooseAttrs.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+  -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MySomePackage at 16 in mooseAttrs.pl
+
+    test1 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl
+
+    test2 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test2($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 109 in mooseAttrs.pl
+
+    test3 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 136 in mooseAttrs.pl
+
+    test4 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 145 in mooseAttrs.pl
+
+    test5 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test5; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 192 in mooseAttrs.pl
+
+    test6 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 198 in mooseAttrs.pl
+
+    test7 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test7($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 228 in mooseAttrs.pl
+
+    test8 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test8($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 238 in mooseAttrs.pl
+
+    test9 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test9($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 293 in mooseAttrs.pl
+
+    test10 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test10($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 299 in mooseAttrs.pl
+
+    test11 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 328 in mooseAttrs.pl
+
+    test12 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test12($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 377 in mooseAttrs.pl
+
+    test13 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test13; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 426 in mooseAttrs.pl
+
+    test14 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test14($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 476 in mooseAttrs.pl
+
+    test15 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test15; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 531 in mooseAttrs.pl
+
+    test16 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test16; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 538 in mooseAttrs.pl
+
+    test17 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test17($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 595 in mooseAttrs.pl
+
+    test18 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test18($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 602 in mooseAttrs.pl
+
+    test20 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test20($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 689 in mooseAttrs.pl
+
+    test21 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test21($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 703 in mooseAttrs.pl
+
+    test22 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test22; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 735 in mooseAttrs.pl
+
+    test23 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test23; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 749 in mooseAttrs.pl
+
+    test26 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test26; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 827 in mooseAttrs.pl
+
+    test28 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test28; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 873 in mooseAttrs.pl
+
+    test32 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test32; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 968 in mooseAttrs.pl
+
+    test35 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test35($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1023 in mooseAttrs.pl
+
+    test34 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test34; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1007 in mooseAttrs.pl
+
+    test36 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test36($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1037 in mooseAttrs.pl
+
+    test37 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test37; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1054 in mooseAttrs.pl
+
+    test38 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test38; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1069 in mooseAttrs.pl
+
+    test40 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test40; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1114 in mooseAttrs.pl
+
+    test42 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test42; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1161 in mooseAttrs.pl
+
+    test45 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1225 in mooseAttrs.pl
+
+    test46 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test46($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1253 in mooseAttrs.pl
+
+    test47 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test47($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1312 in mooseAttrs.pl
+
+    test45 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1339 in mooseAttrs.pl
+
+    test46 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test46($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1367 in mooseAttrs.pl
+
+    test48 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test48($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1423 in mooseAttrs.pl
+
+    test49 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test49; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1461 in mooseAttrs.pl
+
+    test50 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test50; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1468 in mooseAttrs.pl
+
+    test51 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test51; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1475 in mooseAttrs.pl
+
+    test52 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test52; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1482 in mooseAttrs.pl
+
+    test53 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test53($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1497 in mooseAttrs.pl
+
+    test55 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test55; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1549 in mooseAttrs.pl
+
+    test54 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test54; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1535 in mooseAttrs.pl
+
+    test57 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test57; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1597 in mooseAttrs.pl
+
+    test59 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test59; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1628 in mooseAttrs.pl
+
+    test60 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test60; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1643 in mooseAttrs.pl
+
+    test61 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test61; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1656 in mooseAttrs.pl
+
+    test63 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test63; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1699 in mooseAttrs.pl
+
+    test64 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test64; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1714 in mooseAttrs.pl
+
+    test64 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test64($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1727 in mooseAttrs.pl
+
+    test65 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test65; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1765 in mooseAttrs.pl
+
+    test66 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test66; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1774 in mooseAttrs.pl
+
+    test68 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test68; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1792 in mooseAttrs.pl
+
+    test69 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test69; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1802 in mooseAttrs.pl
+
+    test72 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test72($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1882 in mooseAttrs.pl
+
+    test74 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1917 in mooseAttrs.pl
+
+    test75 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
+
+    test76 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
+
+    test73 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1889 in mooseAttrs.pl
+
+    test74 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1917 in mooseAttrs.pl
+
+    test75 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
+
+    test76 in mooseAttrs.pl; /method_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
+

@@ -1,0 +1,84 @@
+package Foo::Bar;
+use parent 'Class::Accessor';
+
+__PACKAGE__
+    ->mk_accessors(    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/ )
+    ->mk_ro_accessors(
+    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/)
+    ->mk_wo_accessors(
+    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/)
+    ->follow_best_practice
+    ->mk_accessors(
+    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/ )
+    ->mk_ro_accessors(
+    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/)
+    ->mk_wo_accessors(
+    'accessor1',
+    "accessor2",
+    `accessor3`,
+    q'accessor4',
+    qq"accessor5",
+    qx`accessor6`,
+    "accessor2$var",
+    `accessor3$var`,
+    qq"accessor5$var",
+    qx`accessor6$var`,
+    accessor_test => 'some',
+    qw/accessor11 accessor12/)
+;
+
