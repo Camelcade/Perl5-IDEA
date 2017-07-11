@@ -630,10 +630,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     Object value = currentElement.getValue();
     ItemPresentation presentation = currentElement.getPresentation();
     assertNotNull(presentation);
+    String locationString = presentation.getLocationString();
     sb.append(prefix)
       .append(presentation.getPresentableText())
       .append(" in ")
-      .append(presentation.getLocationString())
+      .append(locationString == null ? null : locationString.replaceAll("\\\\", "/"))
       .append("; ")
       .append(getIconText(presentation.getIcon(true)));
 

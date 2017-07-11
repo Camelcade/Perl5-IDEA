@@ -1,4 +1,4 @@
-plainPerl.pl in \src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+plainPerl.pl in /src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
 -> Perl5 at 0 in plainPerl.pl
 
   Foo::Bar in plainPerl.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )

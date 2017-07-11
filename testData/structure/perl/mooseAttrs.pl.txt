@@ -1,4 +1,4 @@
-mooseAttrs.pl in \src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+mooseAttrs.pl in /src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
 -> Perl5 at 0 in mooseAttrs.pl
 
   MySomePackage in mooseAttrs.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )

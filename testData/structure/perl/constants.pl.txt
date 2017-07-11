@@ -1,4 +1,4 @@
-constants.pl in \src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+constants.pl in /src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
 -> Perl5 at 0 in constants.pl
 
   Bla::Bla in constants.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
