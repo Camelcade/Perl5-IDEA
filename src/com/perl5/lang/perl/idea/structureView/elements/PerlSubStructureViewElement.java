@@ -20,7 +20,6 @@ import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinition
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.mixins.PerlSubBase;
 
 /**
  * Created by hurricup on 15.08.2015.
@@ -39,7 +38,7 @@ public class PerlSubStructureViewElement extends PerlStructureViewElement {
   }
 
   public boolean isMethod() {
-    return myElement instanceof PerlSubElement && ((PerlSubBase)myElement).isMethod();
+    return myElement instanceof PerlSubElement && ((PerlSubElement)myElement).isMethod();
   }
 
   public boolean isConstant() {return myElement instanceof PerlLightConstantDefinitionElement;}
