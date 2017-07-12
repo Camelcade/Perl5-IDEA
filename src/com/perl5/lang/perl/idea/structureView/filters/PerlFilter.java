@@ -16,33 +16,30 @@
 
 package com.perl5.lang.perl.idea.structureView.filters;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
-import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
+import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlNamespaceStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 15.08.2015.
- */
-public class PerlImportedFilter extends PerlFilter {
-  public static final PerlImportedFilter INSTANCE = new PerlImportedFilter();
-  private static final String ID = "SHOW_IMPORTED";
+public abstract class PerlFilter implements Filter {
 
+  /**
+   * Due to the nature of api, these filters works in reverted manner;
+   */
   @Override
-  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
-    return treeElement.isImported();
+  public final boolean isVisible(TreeElement treeNode) {
+    return treeNode instanceof PerlNamespaceStructureViewElement ||
+           treeNode instanceof PerlStructureViewElement && !isMyElement((PerlStructureViewElement)treeNode);
   }
 
-  @NotNull
-  @Override
-  public ActionPresentation getPresentation() {
-    return new ActionPresentationData("Show imported", null, AllIcons.Welcome.ImportProject);
-  }
+  protected abstract boolean isMyElement(@NotNull PerlStructureViewElement treeElement);
 
-  @NotNull
+  /**
+   * Works when turned off
+   */
   @Override
-  public String getName() {
-    return ID;
+  public final boolean isReverted() {
+    return true;
   }
 }

@@ -18,27 +18,21 @@ package com.perl5.lang.perl.idea.structureView.filters;
 
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.structureView.elements.PerlGlobStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlGlobFilter implements Filter {
+public class PerlGlobFilter extends PerlFilter {
   public static final PerlGlobFilter INSTANCE = new PerlGlobFilter();
   private static final String ID = "SHOW_GLOBS";
 
   @Override
-  public boolean isVisible(TreeElement treeElement) {
-    return !(treeElement instanceof PerlGlobStructureViewElement);
-  }
-
-  @Override
-  public boolean isReverted() {
-    return true;
+  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
+    return treeElement instanceof PerlGlobStructureViewElement;
   }
 
   @NotNull

@@ -43,7 +43,8 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
   };
 
   public PerlStructureViewModel(PsiFile psiFile, Editor editor) {
-    super(psiFile, editor, new PerlStructureViewElement(psiFile));
+    super(psiFile, editor, new PerlStructureViewElement(psiFile) {
+    });
   }
 
   @NotNull

@@ -50,7 +50,7 @@ import java.util.*;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
+public abstract class PerlStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
   protected PsiElement myElement;
   protected boolean myIsInherited;
   @Nullable
@@ -186,7 +186,7 @@ public class PerlStructureViewElement implements StructureViewTreeElement, Sorta
         viewProvider.getPsi(targetLanguage).accept(new PerlRecursiveVisitor() {
           @Override
           public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
-            result.add(new PerlStructureViewElement(o));
+            result.add(new PerlNamespaceStructureViewElement(o));
             super.visitNamespaceDefinitionElement(o);
           }
         });

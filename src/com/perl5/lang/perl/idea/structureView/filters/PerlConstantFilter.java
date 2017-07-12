@@ -18,27 +18,21 @@ package com.perl5.lang.perl.idea.structureView.filters;
 
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlConstantFilter implements Filter {
+public class PerlConstantFilter extends PerlFilter {
   public static final PerlConstantFilter INSTANCE = new PerlConstantFilter();
   private static final String ID = "SHOW_CONSTANTS";
 
   @Override
-  public boolean isVisible(TreeElement treeElement) {
+  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
     return treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement)treeElement).isConstant();
-  }
-
-  @Override
-  public boolean isReverted() {
-    return true;
   }
 
   @NotNull

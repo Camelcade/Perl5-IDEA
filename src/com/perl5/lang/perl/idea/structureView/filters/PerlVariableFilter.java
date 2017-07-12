@@ -18,27 +18,21 @@ package com.perl5.lang.perl.idea.structureView.filters;
 
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlVariableDeclarationStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 15.08.2015.
  */
-public class PerlVariableFilter implements Filter {
+public class PerlVariableFilter extends PerlFilter {
   public static final PerlVariableFilter INSTANCE = new PerlVariableFilter();
   private static final String ID = "SHOW_VARIABLES";
 
   @Override
-  public boolean isVisible(TreeElement treeElement) {
-    return !(treeElement instanceof PerlVariableDeclarationStructureViewElement);
-  }
-
-  @Override
-  public boolean isReverted() {
-    return true;
+  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
+    return treeElement instanceof PerlVariableDeclarationStructureViewElement;
   }
 
   @NotNull

@@ -1,39 +1,39 @@
-plainPerl.pl in /src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+plainPerl.pl in /src; /perl5classic.png (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
 -> Perl5 at 0 in plainPerl.pl
 
-  Foo::Bar in plainPerl.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+  Foo::Bar in plainPerl.pl; /package_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
   -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in plainPerl.pl
 
-    something in plainPerl.pl; /sub_declaration_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_INHERITED; SHOW_IMPORTED; )
+    something in plainPerl.pl; /sub_declaration_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::something at 19 in plainPerl.pl
 
-    someotherthing() in plainPerl.pl; /subroutine_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    someotherthing() in plainPerl.pl; /subroutine_gutter_icon.png; null (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::someotherthing at 35 in plainPerl.pl
 
-    somethingdeprecated in plainPerl.pl; /sub_declaration_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_INHERITED; SHOW_IMPORTED; )
+    somethingdeprecated in plainPerl.pl; /sub_declaration_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Bar::somethingdeprecated at 71 in plainPerl.pl
 
-    someotherthingdeprecated() in plainPerl.pl; /subroutine_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    someotherthingdeprecated() in plainPerl.pl; /subroutine_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::someotherthingdeprecated at 110 in plainPerl.pl
 
-  Deprecated::Bar in plainPerl.pl; /package_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+  Deprecated::Bar in plainPerl.pl; /package_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_VARIABLES; SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
   -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Deprecated::Bar at 156 in plainPerl.pl
 
-    scalar in plainPerl.pl; /scalar_gutter_icon.png; null (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    scalar in plainPerl.pl; /scalar_gutter_icon.png; null (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 186 in plainPerl.pl
 
-    array in plainPerl.pl; /array_gutter_icon.png; null (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    array in plainPerl.pl; /array_gutter_icon.png; null (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 199 in plainPerl.pl
 
-    hash in plainPerl.pl; /hash_gutter_icon.png; null (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    hash in plainPerl.pl; /hash_gutter_icon.png; null (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 211 in plainPerl.pl
 
-    scalar_deprecated in plainPerl.pl; /scalar_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    scalar_deprecated in plainPerl.pl; /scalar_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 236 in plainPerl.pl
 
-    array_deprecated in plainPerl.pl; /array_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    array_deprecated in plainPerl.pl; /array_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 258 in plainPerl.pl
 
-    hash_deprecated in plainPerl.pl; /hash_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
+    hash_deprecated in plainPerl.pl; /hash_gutter_icon.png; DEPRECATED_ATTRIBUTES (SHOW_GLOBS; SHOW_CONSTANTS; SHOW_METHODS; SHOW_DECLARATIONS; SHOW_INHERITED; SHOW_IMPORTED; )
     -> PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 277 in plainPerl.pl
 
