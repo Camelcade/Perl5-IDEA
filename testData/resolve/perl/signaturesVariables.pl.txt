@@ -1,0 +1,54 @@
+PerlVariableReference at (31,34); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in signaturesVariables.pl
+
+PerlVariableReference at (41,44); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 18 in signaturesVariables.pl
+
+PerlVariableReference at (51,55); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (62,66); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (73,77); text in range: 'var2' => 0 results:
+
+PerlVariableReference at (84,88); text in range: 'var2' => 0 results:
+
+PerlVariableReference at (179,182); text in range: 'var' => 0 results:
+
+PerlVariableReference at (189,192); text in range: 'var' => 0 results:
+
+PerlVariableReference at (199,203); text in range: 'var1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 158 in signaturesVariables.pl
+
+PerlVariableReference at (210,214); text in range: 'var1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 165 in signaturesVariables.pl
+
+PerlVariableReference at (221,225); text in range: 'var2' => 0 results:
+
+PerlVariableReference at (232,236); text in range: 'var2' => 0 results:
+
+PerlVariableReference at (325,328); text in range: 'var' => 0 results:
+
+PerlVariableReference at (335,338); text in range: 'var' => 0 results:
+
+PerlVariableReference at (345,349); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (356,360); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (367,371); text in range: 'var2' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 304 in signaturesVariables.pl
+
+PerlVariableReference at (378,382); text in range: 'var2' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 311 in signaturesVariables.pl
+
+PerlVariableReference at (437,440); text in range: 'var' => 0 results:
+
+PerlVariableReference at (443,446); text in range: 'var' => 0 results:
+
+PerlVariableReference at (449,453); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (456,460); text in range: 'var1' => 0 results:
+
+PerlVariableReference at (463,467); text in range: 'var2' => 0 results:
+
+PerlVariableReference at (470,474); text in range: 'var2' => 0 results:
+

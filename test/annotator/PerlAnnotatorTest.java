@@ -30,7 +30,9 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
-  public void testVariableShadowingInspection() {doTest(PerlVariableShadowingInspection.class);}
+  public void testSignaturesShadowing() {doShadowingTest();}
+
+  public void testVariableShadowingInspection() {doShadowingTest();}
 
   public void testUnusedLexicalVariableInspection() {doTest(PerlUnusedLexicalVariableInspection.class);}
 
@@ -135,6 +137,10 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
 
   private void doDeprecationTest() {
     doTest(PerlDeprecatedInspection.class);
+  }
+
+  private void doShadowingTest() {
+    doTest(PerlVariableShadowingInspection.class);
   }
 
   private void doTest(Class clazz) {

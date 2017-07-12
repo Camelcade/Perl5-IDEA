@@ -61,6 +61,7 @@
      <p>Fixes:
       <ul>
       <li>Class cast exception in structure view, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1529">#1529</a></li>
+      <li>False-positive in variables shadowing inspection, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1532">#1532</a></li>
       </ul>
      </p>
     ]]>

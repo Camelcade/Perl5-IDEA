@@ -50,7 +50,7 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
   public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
     if (element instanceof PerlVariableDeclarationElement) {
       PerlVariable variable = ((PerlVariableDeclarationElement)element).getVariable();
-      if (variable != null) {
+      if (variable != null && !variable.equals(myVariable)) {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
@@ -61,37 +61,10 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
         }
       }
     }
-/*
-                else if( myPossibleResult == null &&
-				element instanceof PerlVariable && ((PerlVariable) element).getNamespaceElement() == null &&
-				((PerlVariable) element).getActualType() == myVariableType &&
-				StringUtil.equals(((PerlVariable) element).getName(), myName)
-				)
-		{
-			myPossibleResult = (PerlVariable)element;
-		}
-*/
     return true;
   }
 
   public PerlVariableDeclarationElement getResult() {
     return myResult;
   }
-
-/*
-	*/
-  /**
-   * If we've found possible result in this statement and not found a real declaration - use it
-   *//*
-
-	public boolean applyPossibleResult()
-	{
-		if( myPossibleResult == null )
-		{
-			return true;
-		}
-		myResult = myPossibleResult.getLexicalDeclaration();
-		return false;
-	}
-*/
 }

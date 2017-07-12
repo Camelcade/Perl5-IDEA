@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -223,30 +222,32 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return myParent;
   }
 
+
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof PerlVariable)) {
-      return false;
-    }
+    if (this == o) return true;
+    if (!(o instanceof PerlImplicitVariableDeclaration)) return false;
 
-    PerlVariable that = (PerlVariable)o;
+    PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
 
-    if (myVariableType != that.getActualType()) {
-      return false;
-    }
-    if (!myVariableName.equals(that.getName())) {
-      return false;
-    }
-    return StringUtil.equals(getPackageName(), that.getPackageName());
+    if (myIsLexical != that.myIsLexical) return false;
+    if (myIsLocal != that.myIsLocal) return false;
+    if (myIsInvocant != that.myIsInvocant) return false;
+    if (getVariableType() != that.getVariableType()) return false;
+    if (!getVariableName().equals(that.getVariableName())) return false;
+    if (getVariableClass() != null ? !getVariableClass().equals(that.getVariableClass()) : that.getVariableClass() != null) return false;
+    return getParent().equals(that.getParent());
   }
 
   @Override
   public int hashCode() {
-    int result = myVariableType.hashCode();
-    result = 31 * result + myVariableName.hashCode();
+    int result = getVariableType() != null ? getVariableType().hashCode() : 0;
+    result = 31 * result + getVariableName().hashCode();
+    result = 31 * result + (getVariableClass() != null ? getVariableClass().hashCode() : 0);
+    result = 31 * result + getParent().hashCode();
+    result = 31 * result + (myIsLexical ? 1 : 0);
+    result = 31 * result + (myIsLocal ? 1 : 0);
+    result = 31 * result + (myIsInvocant ? 1 : 0);
     return result;
   }
 

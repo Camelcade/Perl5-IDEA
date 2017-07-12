@@ -1,0 +1,38 @@
+sub somesub($var, @var) {
+    $var;
+    @var;
+    $var1;
+    @var1;
+    $var2;
+    @var2;
+    my ($var, @var, $var1, @var1, $var2, @var2);
+}
+
+
+method somesub($var1, @var1) {
+    $var;
+    @var;
+    $var1;
+    @var1;
+    $var2;
+    @var2;
+    my ($var, @var, $var1, @var1, $var2, @var2);
+}
+
+
+func somesub($var2, @var2) {
+    $var;
+    @var;
+    $var1;
+    @var1;
+    $var2;
+    @var2;
+    my ($var, @var, $var1, @var1, $var2, @var2);
+}
+
+$var;
+@var;
+$var1;
+@var1;
+$var2;
+@var2;
