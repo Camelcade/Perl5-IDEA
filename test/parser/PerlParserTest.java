@@ -29,6 +29,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testRangeAfterNumber() {doTest();}
+
   public void testStandardTypes() {doTest();}
 
   public void testNamespaceBinding() {doTest();}

@@ -982,6 +982,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	{NUMBER_BIN}									 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_HEX}									 {yybegin(AFTER_VALUE);return NUMBER;}
+	{NUMBER_INT} / ".."                              {yybegin(AFTER_VALUE);return NUMBER;}
 	"." {NUMBER_INT} {NUMBER_EXP}?	 				 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}
 	{PERL_VERSION}  		{yybegin(AFTER_VALUE);return NUMBER_VERSION;}
