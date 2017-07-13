@@ -1,0 +1,63 @@
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 40 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 40 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 85 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 137 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 152 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 214 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 229 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 293 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 308 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 387 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 445 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 460 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 518 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 533 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 597 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 612 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 673 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 688 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 752 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 767 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 825 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 840 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 897 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 912 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 971 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 986 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1048 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1063 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1125 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1140 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1197 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1212 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1275 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1290 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1349 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1364 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1426 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1441 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1499 in mooseAttrsWithStandardTypes.pl
+
+Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1514 in mooseAttrsWithStandardTypes.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::attr3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1573 in mooseAttrsWithStandardTypes.pl
+

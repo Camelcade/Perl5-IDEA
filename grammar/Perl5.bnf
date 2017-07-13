@@ -328,6 +328,7 @@ limitations under the License.
 
     BUILTIN_LIST='list'
     BUILTIN_UNARY='unary'
+    CUSTOM_UNARY='unary_custom'
     BUILTIN_ARGUMENTLESS='argumentless'
 
 	ATTRIBUTE_IDENTIFIER='ATTRIBUTE_IDENTIFIER'
@@ -1027,7 +1028,7 @@ sub_call_expr ::=
 private argumentless_call ::= <<method 'argumentless'>>
 
 private named_unary_call ::= <<method named_unary_calee>> [<<call_arguments unary_expr>>]
-private named_unary_calee ::= 'unary' | '-t'
+private named_unary_calee ::= 'unary' | 'unary_custom' | '-t'
 
 private meta rightward_call ::= <<method <<x1>>>> [<<call_arguments parse_call_arguments>>]
 private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parenthesised_call_arguments
@@ -1040,7 +1041,7 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= 'list' | 'unary' | 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
+private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
 
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////

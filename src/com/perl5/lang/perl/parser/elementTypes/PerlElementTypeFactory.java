@@ -50,6 +50,7 @@ public class PerlElementTypeFactory {
     "subname",
     "list",
     "unary",
+    "unary_custom",
     "argumentless"
   ));
 

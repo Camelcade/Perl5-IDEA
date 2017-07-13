@@ -165,7 +165,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     safeMap(ANNOTATION_UNKNOWN_KEY, PERL_COMMENT);
 
     safeMap(PERL_SUB_BUILTIN, BUILTIN_ARGUMENTLESS, BUILTIN_UNARY, BUILTIN_LIST);
-    safeMap(SUB_NAME, PERL_SUB);
+    safeMap(PERL_SUB, SUB_NAME, CUSTOM_UNARY);
 
     safeMap(KEYWORDS_TOKENSET, PERL_KEYWORD);
     safeMap(ANNOTATIONS_KEYS, PERL_ANNOTATION);

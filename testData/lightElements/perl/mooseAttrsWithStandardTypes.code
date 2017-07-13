@@ -1,0 +1,26 @@
+use Moo;
+use Types::Standard -all;
+
+has 'attr1' => ( 'is' => 'ro', isa => Int );
+has '_attr2' => ( 'is' => 'ro', isa => Int, 'reader' => 'attr2' );
+has '_attr3' => ( 'is' => 'ro', isa => ArrayRef[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => ConsumerOf[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => CycleTuple[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Dict[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Enum[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => HasMethods[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => HashRef[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => InstanceOf[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Join[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Map[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Maybe[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Optional[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Overload[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Ref[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => ScalarRef[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Split[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => StrMatch[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Tied[Int], 'reader' => 'attr3' );
+has '_attr3' => ( 'is' => 'ro', isa => Tuple[Int], 'reader' => 'attr3' );
+
+

@@ -36,6 +36,8 @@ public class PerlLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testMojoAttrs() {doTest();}
 
+  public void testMooseAttrsWithStandardTypes() {doTest();}
+
   private void doTest() {
     doTestLightElements();
   }
