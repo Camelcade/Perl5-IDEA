@@ -1,0 +1,20 @@
+
+say <info descr="null">$a</info>;
+say $a1;
+say <info descr="null">@INC</info>;
+say @INC1;
+say <info descr="null">@INC</info>[1..2];
+say @INC1[1..2];
+say <info descr="null">$INC</info>[1];
+say $INC1[1];
+say <info descr="null">%INC</info>;
+say %INC1;
+say <info descr="null">$INC</info>{key};
+say $INC1{key};
+say <info descr="null">@INC</info>{key => 42};
+say @INC1{key => 42};
+say <info descr="null">*STDOUT</info>;
+say *STDOUT1;
+say <info descr="null">*STDOUT</info>{GLOB};
+say *STDOUT1{GLOB};
+

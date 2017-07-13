@@ -33,21 +33,36 @@ import com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapper
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
+import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.*;
+import static com.perl5.lang.perl.psi.utils.PerlVariableType.*;
+
 public class PerlAnnotator extends PerlBaseAnnotator {
+  private static final Map<PerlVariableType, TextAttributesKey> VARIABLE_KEYS_MAP = new THashMap<>();
+
+  static {
+    VARIABLE_KEYS_MAP.put(SCALAR, PERL_SCALAR_BUILTIN);
+    VARIABLE_KEYS_MAP.put(HASH, PERL_HASH_BUILTIN);
+    VARIABLE_KEYS_MAP.put(ARRAY, PERL_ARRAY_BUILTIN);
+  }
+
   @Override
   public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == NYI_STATEMENT) {
       holder.createInfoAnnotation(element, "Unimplemented statement").setTextAttributes(CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
     }
-/*
-                else if (elementType == REGEX_CHAR_CLASS && element.getTextLength() == 1 && ((LeafPsiElement) element).getChars().charAt(0) == '-')
-		{
-			holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS);
-		}
-*/
+    else if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isBuiltIn()) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(PERL_GLOB_BUILTIN);
+    }
+    else if (element instanceof PerlVariable && ((PerlVariable)element).isBuiltIn()) {
+      holder.createInfoAnnotation(element, null).setTextAttributes(VARIABLE_KEYS_MAP.get(((PerlVariable)element).getActualType()));
+    }
     else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR) {
       holder.createInfoAnnotation(element.getFirstChild(), null).setTextAttributes(PerlSyntaxHighlighter.PERL_LABEL);
     }

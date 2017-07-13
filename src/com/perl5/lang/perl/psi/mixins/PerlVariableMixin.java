@@ -287,6 +287,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     String variableName = getVariableNameElement().getName();
 
     if (variableType == PerlVariableType.SCALAR) {
+      // fixme no regexps
       return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
     }
     if (variableType == PerlVariableType.ARRAY) {

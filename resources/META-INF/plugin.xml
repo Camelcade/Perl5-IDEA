@@ -64,6 +64,7 @@
       <li>False-positive in variables shadowing inspection, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1532">#1532</a></li>
       <li>Lexing of types from <code>Type::Standard</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1533">#1533</a></li>
       <li>Lexing of range operators after numbers <code>1..2</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1418">#1418</a></li>
+      <li>Built-in variables looks bold again, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1443">#1443</a></li>
       </ul>
      </p>
     ]]>
