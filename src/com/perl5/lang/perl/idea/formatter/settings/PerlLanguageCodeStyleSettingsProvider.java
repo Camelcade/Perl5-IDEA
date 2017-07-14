@@ -16,20 +16,17 @@
 
 package com.perl5.lang.perl.idea.formatter.settings;
 
+import com.intellij.application.options.CodeStyleAbstractPanel;
 import com.intellij.application.options.IndentOptionsEditor;
 import com.intellij.application.options.SmartIndentOptionsEditor;
 import com.intellij.lang.Language;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
-import com.intellij.util.ResourceUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
-import java.net.URL;
 
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
@@ -273,15 +270,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
   @NotNull
   private static String readCodeSample(@NotNull String name) {
-    URL url = PerlLanguageCodeStyleSettingsProvider.class.getClassLoader().getResource("codeSamples/" + name + ".code");
-    String result = null;
-    if (url != null) {
-      try {
-        result = ResourceUtil.loadText(url);
-      }
-      catch (IOException ignore) {
-      }
-    }
-    return result == null ? DEFAULT_CODE_SAMPLE : result.replaceAll("\\r", "");
+    return CodeStyleAbstractPanel.readFromFile(PerlLanguageCodeStyleSettingsProvider.class, name + ".code");
   }
 }
