@@ -257,7 +257,7 @@
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
     <typeHierarchyProvider language="Perl5"
-                           implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider"/>
+                           implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlTypeHierarchyProvider"/>
 
     <consoleFilterProvider order="last"
                            implementation="com.perl5.lang.perl.idea.execution.filters.PerlConsoleFilterProvider"/>
@@ -612,7 +612,7 @@
     <codeInsight.lineMarkerProvider language="HTML::Mason Templating Language"
                                     implementationClass="com.perl5.lang.htmlmason.idea.navigation.HTMLMasonLineMarkerProvider"/>
     <typeHierarchyProvider language="HTML::Mason Templating Language"
-                           implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonHierarchyProvider"/>
+                           implementationClass="com.perl5.lang.htmlmason.idea.hierarchy.HTMLMasonTypeHierarchyProvider"/>
     <highlightErrorFilter
         implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
     <annotator language="HTML::Mason Templating Language"
@@ -661,9 +661,9 @@
     <lang.parserDefinition language="Mason2"
                            implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
     <typeHierarchyProvider language="Mason2 Templating Language"
-                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingPackageHierarchyProvider"/>
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingTypeHierarchyProvider"/>
     <typeHierarchyProvider language="Mason2"
-                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonPackageHierarchyProvider"/>
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTypeHierarchyProvider"/>
     <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.MasonFileTypeFactory"/>
     <lang.syntaxHighlighterFactory language="Mason2"
                                    implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>

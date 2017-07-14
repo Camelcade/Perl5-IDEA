@@ -17,6 +17,8 @@
 package com.perl5.lang.htmlmason.idea.hierarchy;
 
 import com.intellij.ide.hierarchy.HierarchyTreeStructure;
+import com.intellij.ide.hierarchy.ViewClassHierarchyAction;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyBrowser;
@@ -34,6 +36,12 @@ public class HTMLMasonHierarchyBrowser extends PerlHierarchyBrowser {
   @Override
   protected boolean isApplicableElement(@NotNull PsiElement element) {
     return element instanceof HTMLMasonFileImpl;
+  }
+
+  @Override
+  protected void prependActions(DefaultActionGroup actionGroup) {
+    actionGroup.add(new ViewClassHierarchyAction());
+    super.prependActions(actionGroup);
   }
 
   @Nullable

@@ -16,10 +16,9 @@
 
 package com.perl5.lang.perl.idea.hierarchy.namespace;
 
-import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
-import com.intellij.ide.hierarchy.HierarchyTreeStructure;
-import com.intellij.ide.hierarchy.TypeHierarchyBrowserBase;
+import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.util.treeView.NodeDescriptor;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.hierarchy.namespace.treestructures.PerlSubTypesHierarchyTreeStructure;
 import com.perl5.lang.perl.idea.hierarchy.namespace.treestructures.PerlSuperTypesHierarchyTreeStructure;
@@ -61,6 +60,12 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Nullable
   @Override
+  protected String getContentDisplayName(@NotNull String typeName, @NotNull PsiElement element) {
+    return super.getContentDisplayName(typeName, element);
+  }
+
+  @Nullable
+  @Override
   protected PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
     if (!(descriptor instanceof PerlHierarchyNodeDescriptor)) {
       return null;
@@ -74,6 +79,14 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
     trees.put(SUBTYPES_HIERARCHY_TYPE, createTree(true));
     trees.put(TYPE_HIERARCHY_TYPE, createTree(true));
   }
+
+  @Override
+  protected void prependActions(final DefaultActionGroup actionGroup) {
+    actionGroup.add(new ViewSupertypesHierarchyAction());
+    actionGroup.add(new ViewSubtypesHierarchyAction());
+    actionGroup.add(new AlphaSortAction());
+  }
+
 
   @Nullable
   @Override

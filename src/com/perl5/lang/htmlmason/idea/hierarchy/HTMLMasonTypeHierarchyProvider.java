@@ -23,13 +23,13 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyBrowser;
-import com.perl5.lang.perl.idea.hierarchy.namespace.PerlPackageHierarchyProvider;
+import com.perl5.lang.perl.idea.hierarchy.namespace.PerlTypeHierarchyProvider;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 12.03.2016.
  */
-public class HTMLMasonHierarchyProvider extends PerlPackageHierarchyProvider {
+public class HTMLMasonTypeHierarchyProvider extends PerlTypeHierarchyProvider {
   @Override
   protected Language getLanguage() {
     return HTMLMasonLanguage.INSTANCE;

@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 16.08.2015.
  */
-public class PerlPackageHierarchyProvider implements HierarchyProvider {
+public class PerlTypeHierarchyProvider implements HierarchyProvider {
   @Nullable
   @Override
   public PsiElement getTarget(@NotNull DataContext dataContext) {
