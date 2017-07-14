@@ -21,6 +21,8 @@ import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.ide.hierarchy.*;
+import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
 import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
@@ -32,6 +34,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -64,9 +67,11 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -93,6 +98,8 @@ import org.junit.Assert;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -466,7 +473,10 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     myFixture.copyFileToProject("MyCustomPackage.pm");
   }
 
-  protected String serializePsiElement(@NotNull PsiElement element) {
+  protected String serializePsiElement(@Nullable PsiElement element) {
+    if (element == null) {
+      return "null";
+    }
     StringBuilder sb = new StringBuilder();
     sb.append(element);
     if (element instanceof PerlSubDefinitionElement) {
@@ -677,6 +687,95 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     }
     else {
       sb.append("(recursion)").append("\n\n");
+    }
+  }
+
+  protected void doTestTypeHierarchy() {
+    initWithFileSmartWithoutErrors();
+    Editor editor = getEditor();
+    Object psiElement = FileEditorManager.getInstance(getProject())
+      .getData(CommonDataKeys.PSI_ELEMENT.getName(), editor, editor.getCaretModel().getCurrentCaret());
+    MapDataContext dataContext = new MapDataContext();
+    dataContext.put(CommonDataKeys.PROJECT, getProject());
+    dataContext.put(CommonDataKeys.EDITOR, getEditor());
+    dataContext.put(CommonDataKeys.PSI_ELEMENT, (PsiElement)psiElement);
+    dataContext.put(CommonDataKeys.PSI_FILE, getFile());
+
+    HierarchyProvider hierarchyProvider =
+      BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, (PsiElement)psiElement, getFile(), dataContext);
+    assertNotNull(hierarchyProvider);
+    StringBuilder sb = new StringBuilder();
+    sb.append("Provider: ").append(hierarchyProvider.getClass().getSimpleName()).append("\n");
+    PsiElement target = hierarchyProvider.getTarget(dataContext);
+    assertNotNull(target);
+    sb.append("Target: ").append(target).append("\n");
+    HierarchyBrowser browser = hierarchyProvider.createHierarchyBrowser(target);
+    sb.append("Browser: ").append(browser.getClass().getSimpleName()).append("\n");
+    assertInstanceOf(browser, TypeHierarchyBrowserBase.class);
+
+    try {
+      Field myType2TreeMap = HierarchyBrowserBaseEx.class.getDeclaredField("myType2TreeMap");
+      myType2TreeMap.setAccessible(true);
+      Method createHierarchyTreeStructure =
+        browser.getClass().getDeclaredMethod("createHierarchyTreeStructure", String.class, PsiElement.class);
+      createHierarchyTreeStructure.setAccessible(true);
+      Method getContentDisplayName = browser.getClass().getDeclaredMethod("getContentDisplayName", String.class, PsiElement.class);
+      getContentDisplayName.setAccessible(true);
+      Method getElementFromDescriptor = browser.getClass().getDeclaredMethod("getElementFromDescriptor", HierarchyNodeDescriptor.class);
+      getElementFromDescriptor.setAccessible(true);
+
+      Map<String, JTree> subTrees = (Map<String, JTree>)myType2TreeMap.get(browser);
+      List<String> treesNames = new ArrayList<>(subTrees.keySet());
+      ContainerUtil.sort(treesNames);
+      for (String treeName : treesNames) {
+        sb.append("----------------------------------------------------------------------------------\n")
+          .append("Tree: ").append(getContentDisplayName.invoke(browser, treeName, target)).append("\n");
+        HierarchyTreeStructure structure = (HierarchyTreeStructure)createHierarchyTreeStructure.invoke(browser, treeName, target);
+        if (structure == null) {
+          sb.append("none\n");
+          continue;
+        }
+        serializeTreeStructure(structure,
+                               (HierarchyNodeDescriptor)structure.getRootElement(),
+                               node -> {
+                                 try {
+                                   return (PsiElement)getElementFromDescriptor.invoke(browser, node);
+                                 }
+                                 catch (Exception e) {
+                                   throw new RuntimeException(e);
+                                 }
+                               },
+                               sb,
+                               "",
+                               new THashSet<>());
+      }
+    }
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  private void serializeTreeStructure(@NotNull HierarchyTreeStructure treeStructure,
+                                      @Nullable HierarchyNodeDescriptor currentElement,
+                                      @NotNull Function<HierarchyNodeDescriptor, PsiElement> elementProvider,
+                                      @NotNull StringBuilder sb,
+                                      @NotNull String prefix,
+                                      @NotNull Set<HierarchyNodeDescriptor> recursionSet
+  ) {
+    if (currentElement == null) {
+      return;
+    }
+    PsiElement psiElement = elementProvider.fun(currentElement);
+    if (!recursionSet.add(currentElement)) {
+      sb.append(prefix).append("Recursion to: ").append(serializePsiElement(psiElement)).append("\n");
+      return;
+    }
+    sb.append(prefix).append(serializePsiElement(psiElement)).append("\n");
+    for (Object object : treeStructure.getChildElements(currentElement)) {
+      assertInstanceOf(object, HierarchyNodeDescriptor.class);
+      serializeTreeStructure(treeStructure, (HierarchyNodeDescriptor)object, elementProvider, sb, prefix + "    ",
+                             new THashSet<>(recursionSet));
     }
   }
 }

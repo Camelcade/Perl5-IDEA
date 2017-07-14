@@ -1,0 +1,19 @@
+Provider: PerlTypeHierarchyProvider
+Target: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse
+Browser: PerlHierarchyBrowser
+----------------------------------------------------------------------------------
+Tree: Class Foo::SomethingElse
+none
+----------------------------------------------------------------------------------
+Tree: Subtypes of Foo::SomethingElse
+PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 123 in superClass.pl
+----------------------------------------------------------------------------------
+Tree: Supertypes of Foo::SomethingElse
+PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 123 in superClass.pl
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar at 56 in superClass.pl
+        PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 1 in superClass.pl
+            PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
+        PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 1 in superClass.pl
+        PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
+    PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
