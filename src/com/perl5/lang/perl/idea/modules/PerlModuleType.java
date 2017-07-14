@@ -61,11 +61,6 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   }
 
   @Override
-  public Icon getBigIcon() {
-    return PerlIcons.PM_FILE;
-  }
-
-  @Override
   public Icon getNodeIcon(@Deprecated boolean isOpened) {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }

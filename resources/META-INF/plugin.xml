@@ -33,26 +33,20 @@
     ]]></description>
 
   <change-notes><![CDATA[
-     <!--<p>Updates:-->
-     <!--<ul>-->
-     <!--</ul>-->
-     <!--</p>-->
-     <p>Fixes:
-      <ul>
-      <li>Class cast exception in structure view, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1529">#1529</a></li>
-      <li>False-positive in variables shadowing inspection, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1532">#1532</a></li>
-      <li>Lexing of types from <code>Type::Standard</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1533">#1533</a></li>
-      <li>Lexing of range operators after numbers <code>1..2</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1418">#1418</a></li>
-      <li>Built-in variables looks bold again, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1443">#1443</a></li>
-      <li>Parsing of <code>continue</code> expression, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1524">#1524</a></li>
-      <li>POD filtering in the file structure, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1535">#1535</a></li>
-      </ul>
+     <p>Updates:
+     <ul>
+     <li>This is a 2017.2 compatible release of 2017.1.5</li>
+     </ul>
      </p>
+     <!--<p>Fixes:-->
+      <!--<ul>-->
+      <!--</ul>-->
+     <!--</p>-->
     ]]>
   </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
-  <idea-version since-build="171" until-build="172.*"/>
+  <idea-version since-build="172" until-build="173.*"/>
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
