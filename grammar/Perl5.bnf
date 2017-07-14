@@ -583,7 +583,8 @@ default_compound ::=  'default' parse_block {pin=1}
 while_compound ::=  'while' conditional_block_while [ [POD] continue_block]  {pin=1}
 until_compound ::=  'until' conditional_block [[POD] continue_block]  {pin=1}
 
-continue_block ::= 'continue' parse_block {pin=1}
+continue_block ::= continue_block_opener parse_block {pin=1}
+private continue_block_opener ::= 'continue' &'{'
 
 private block_compound ::= parse_block [[POD] continue_block]
 
@@ -745,6 +746,7 @@ term_expr ::=
     | sort_expr
     | grep_expr
     | map_expr
+    | continue_expr
 
     | glob_or_element
     | tag_scalar
@@ -765,7 +767,7 @@ term_expr ::=
     | package_expr
 
 package_expr ::= PACKAGE
-
+continue_expr ::= 'continue' ['(' ')'] {pin=1}
 grep_expr ::=  'grep' grep_map_arguments {pin=1}
 map_expr ::=  'map' grep_map_arguments {pin=1}
 

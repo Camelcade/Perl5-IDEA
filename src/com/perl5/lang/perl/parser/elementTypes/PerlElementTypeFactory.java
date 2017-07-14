@@ -1321,6 +1321,16 @@ public class PerlElementTypeFactory {
       };
     }
 
+    if (name.equals("CONTINUE_EXPR")) {
+      return new PerlElementTypeEx(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiPerlContinueExprImpl(node);
+        }
+      };
+    }
+
     if (name.equals("SUB_SIGNATURE")) {
       return new PerlElementTypeEx(name) {
         @NotNull
