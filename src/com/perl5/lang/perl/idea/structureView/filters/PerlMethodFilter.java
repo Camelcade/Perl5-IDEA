@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.structureView.filters;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,11 +30,8 @@ public class PerlMethodFilter extends PerlFilter {
   private static final String ID = "SHOW_METHODS";
 
   @Override
-  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
-    return treeElement instanceof PerlSubStructureViewElement &&
-           !((PerlSubStructureViewElement)treeElement).isDeclaration() &&
-           !((PerlSubStructureViewElement)treeElement).isConstant() &&
-           ((PerlSubStructureViewElement)treeElement).isMethod();
+  protected boolean isMyElement(@NotNull PerlSubStructureViewElement treeElement) {
+    return !treeElement.isDeclaration() && !treeElement.isConstant() && treeElement.isMethod();
   }
 
   @NotNull

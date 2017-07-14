@@ -19,25 +19,22 @@ package com.perl5.lang.perl.idea.structureView.filters;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
+import com.perl5.lang.pod.idea.structureView.PodStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 15.08.2015.
- */
-public class PerlDeclarationFilter extends PerlFilter {
-  public static final PerlDeclarationFilter INSTANCE = new PerlDeclarationFilter();
-  private static final String ID = "SHOW_DECLARATIONS";
+public class PerlPodFilter extends PerlFilter {
+  public static final PerlPodFilter INSTANCE = new PerlPodFilter();
+  private static final String ID = "SHOW_POD";
 
   @Override
-  protected boolean isMyElement(@NotNull PerlSubStructureViewElement treeElement) {
-    return treeElement.isDeclaration();
+  protected boolean isMyElement(@NotNull PodStructureViewElement treeElement) {
+    return true;
   }
 
   @NotNull
   @Override
   public ActionPresentation getPresentation() {
-    return new ActionPresentationData("Show declarations", null, PerlIcons.SUB_DECLARATION_GUTTER_ICON);
+    return new ActionPresentationData("Show documentation", null, PerlIcons.POD_FILE);
   }
 
   @NotNull

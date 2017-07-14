@@ -1,22 +1,62 @@
 package Foo::Bar;
+use Carp;
 
-sub something;
+use constant CONST => 42;
 
-sub someotherthing{};
+sub declaration;
 
-#@deprecated
-sub somethingdeprecated;
-
-#@deprecated
-sub someotherthingdeprecated{};
+sub definition{};
 
 #@deprecated
-package Deprecated::Bar;
+sub declaration_deprecated;
+
+#@deprecated
+sub definition_deprecated{};
 
 our $scalar;
 our @array;
 our %hash;
+
+#@deprecated
+package Deprecated::Bar;
+
+use constant {
+    #@deprecated
+    MULTICONST => 42
+};
+
+our $scalar;
+our @array;
+our %hash;
+*something = \$otherthing;
+
 #@deprecated
 our ($scalar_deprecated,
-  @array_deprecated,
-%hash_deprecated);
+    @array_deprecated,
+    %hash_deprecated);
+
+
+#@method
+sub declaration_method;
+
+#@method
+sub definition_method{};
+
+#@deprecated
+#@method
+sub declaration_method_deprecated;
+
+#@deprecated
+#@method
+sub definition_method_deprecated{};
+
+=pod
+
+=head1 SYNOPSIS
+
+=head2 NAME
+
+=head3 SOMETHING
+
+=cut
+

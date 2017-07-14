@@ -45,6 +45,7 @@
       <li>Lexing of range operators after numbers <code>1..2</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1418">#1418</a></li>
       <li>Built-in variables looks bold again, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1443">#1443</a></li>
       <li>Parsing of <code>continue</code> expression, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1524">#1524</a></li>
+      <li>POD filtering in the file structure, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1535">#1535</a></li>
       </ul>
      </p>
     ]]>

@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlStructureViewModel extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
   private static final Filter[] FILTERS = new Filter[]{
+    PerlPodFilter.INSTANCE,
     PerlVariableFilter.INSTANCE,
     PerlGlobFilter.INSTANCE,
     PerlConstantFilter.INSTANCE,

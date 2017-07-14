@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.structureView.filters;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,8 +30,8 @@ public class PerlConstantFilter extends PerlFilter {
   private static final String ID = "SHOW_CONSTANTS";
 
   @Override
-  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
-    return treeElement instanceof PerlSubStructureViewElement && ((PerlSubStructureViewElement)treeElement).isConstant();
+  protected boolean isMyElement(@NotNull PerlSubStructureViewElement treeElement) {
+    return treeElement.isConstant();
   }
 
   @NotNull

@@ -20,6 +20,8 @@ import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlNamespaceStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
+import com.perl5.lang.perl.idea.structureView.elements.PerlSubStructureViewElement;
+import com.perl5.lang.pod.idea.structureView.PodStructureViewElement;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlFilter implements Filter {
@@ -29,15 +31,33 @@ public abstract class PerlFilter implements Filter {
    */
   @Override
   public final boolean isVisible(TreeElement treeNode) {
-    return treeNode instanceof PerlNamespaceStructureViewElement ||
-           treeNode instanceof PerlStructureViewElement && !isMyElement((PerlStructureViewElement)treeNode);
+    if (treeNode instanceof PerlNamespaceStructureViewElement) {
+      return true;
+    }
+    else if (treeNode instanceof PerlSubStructureViewElement) {
+      return !isMyElement((PerlSubStructureViewElement)treeNode);
+    }
+    else if (treeNode instanceof PerlStructureViewElement) {
+      return !isMyElement((PerlStructureViewElement)treeNode);
+    }
+    else if (treeNode instanceof PodStructureViewElement) {
+      return !isMyElement((PodStructureViewElement)treeNode);
+    }
+    return true;
   }
 
-  protected abstract boolean isMyElement(@NotNull PerlStructureViewElement treeElement);
+  protected boolean isMyElement(@NotNull PerlSubStructureViewElement treeElement) {
+    return isMyElement((PerlStructureViewElement)treeElement);
+  }
 
-  /**
-   * Works when turned off
-   */
+  protected boolean isMyElement(@NotNull PerlStructureViewElement treeElement) {
+    return false;
+  }
+
+  protected boolean isMyElement(@NotNull PodStructureViewElement treeElement) {
+    return false;
+  }
+
   @Override
   public final boolean isReverted() {
     return true;
