@@ -1,0 +1,3 @@
+package Something;
+use parent qw/MyTest::Constants/;
+

@@ -1,0 +1,13 @@
+package Import;
+use MyTest::Some::Package;
+
+
+package ImportOk;
+use MyTest::Some::Package qw/
+    somesub1
+    someconst1
+    multiconst1
+    somesub2
+    SOMECONST2
+    MULTICONST2
+    /;

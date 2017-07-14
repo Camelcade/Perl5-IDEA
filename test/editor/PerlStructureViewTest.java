@@ -24,6 +24,10 @@ public class PerlStructureViewTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/structure/perl";
   }
 
+  public void testPerlImports() {doTest();}
+
+  public void testPerlInheritance() {doTest();}
+
   public void testPlainPerl() {
     doTest();
   }

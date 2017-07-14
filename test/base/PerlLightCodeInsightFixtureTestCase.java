@@ -158,6 +158,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
         VirtualFile libdir =
           LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
         assert libdir != null;
+        //libdir.refresh(false, true); // this is necessary for manual update
         libraryModifyableModel.addRoot(libdir,
                                        OrderRootType.CLASSES); // myFixture.findFileInTempDir("testlib")
         libraryModifyableModel.commit();
