@@ -17,12 +17,14 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -37,6 +39,7 @@ import com.perl5.lang.perl.util.PerlHashEntry;
 import com.perl5.lang.perl.util.PerlHashUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,7 +47,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
-public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPolyNamedElementStub> {
+public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMooseAttributeWrapperStub> {
   private static final String MUTATOR_KEY = "writer";
   private static final String ACCESSOR_KEY = "accessor";
   private static final String READER_KEY = "reader";
@@ -52,13 +55,26 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
     READER_KEY, MUTATOR_KEY, ACCESSOR_KEY, "predicate", "clearer"
   );
 
-  public PerlMooseAttributeWrapper(@NotNull PerlPolyNamedElementStub stub,
+  public PerlMooseAttributeWrapper(@NotNull PerlMooseAttributeWrapperStub stub,
                                    @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
   public PerlMooseAttributeWrapper(@NotNull ASTNode node) {
     super(node);
+  }
+
+  @NotNull
+  public List<String> getAttributesNames() {
+    PerlMooseAttributeWrapperStub stub = getStub();
+    if (stub != null) {
+      return stub.getAttributesNames();
+    }
+    Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements();
+    if (lists == null || lists.first.isEmpty()) {
+      return Collections.emptyList();
+    }
+    return lists.first.stream().map(ElementManipulators::getValueText).filter(Objects::nonNull).collect(Collectors.toList());
   }
 
   @NotNull
@@ -78,13 +94,16 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
       .collect(Collectors.toList());
   }
 
-  @NotNull
-  @Override
-  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+  /**
+   * @return pair of lists: identifiers lists and list of has arguments
+   * null if something went wrong
+   */
+  @Nullable
+  private Pair<List<PsiElement>, List<PsiElement>> getIdentifiersAndListElements() {
     PsiElement firstChild = getFirstChild();
     List<PsiElement> listElements = PerlArrayUtil.collectListElements(firstChild);
     if (listElements.isEmpty()) {
-      return Collections.emptyList();
+      return null;
     }
     PsiElement namesContainer = listElements.get(0);
     if (namesContainer instanceof PsiPerlAnonArray) {
@@ -93,10 +112,20 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlPoly
     List<PsiElement> identifiers = ContainerUtil.filter(PerlArrayUtil.collectListElements(namesContainer),
                                                         this::isAcceptableIdentifierElement);
     if (identifiers.isEmpty()) {
+      return null;
+    }
+    return Pair.create(identifiers, listElements);
+  }
+
+
+  @NotNull
+  @Override
+  public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
+    Pair<List<PsiElement>, List<PsiElement>> lists = getIdentifiersAndListElements();
+    if (lists == null) {
       return Collections.emptyList();
     }
-
-    return listElements.size() < 3 ? createMojoAttributes(identifiers) : createMooseAttributes(identifiers, listElements);
+    return lists.second.size() < 3 ? createMojoAttributes(lists.first) : createMooseAttributes(lists.first, lists.second);
   }
 
   @NotNull

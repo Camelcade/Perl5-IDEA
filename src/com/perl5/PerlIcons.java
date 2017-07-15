@@ -46,6 +46,9 @@ public class PerlIcons {
   public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/icons/package_gutter_icon.png");
   public static final Icon PRAGMA_GUTTER_ICON = IconLoader.getIcon("/icons/pragmaicon.png");
 
+  public static final Icon ATTRIBUTE_GUTTER_ICON = IconLoader.getIcon("/icons/attributes_gutter_icon.png");
+  public static final Icon ATTRIBUTE_GROUP_ICON = IconLoader.getIcon("/icons/attributes_group_icon.png");
+
   public static final Icon XSUB_GUTTER_ICON = IconLoader.getIcon("/icons/xsub_gutter_icon.png");
   public static final Icon SUB_DECLARATION_GUTTER_ICON = IconLoader.getIcon("/icons/sub_declaration_gutter_icon.png");
   public static final Icon METHOD_GUTTER_ICON = IconLoader.getIcon("/icons/method_gutter_icon.png");

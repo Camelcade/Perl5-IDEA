@@ -20,12 +20,14 @@ import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewModelBase;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.Filter;
+import com.intellij.ide.util.treeView.smartTree.Grouper;
 import com.intellij.ide.util.treeView.smartTree.Sorter;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.idea.structureView.elements.PerlLeafStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.filters.*;
+import com.perl5.lang.perl.idea.structureView.groupers.PerlAttributeGrouper;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,6 +45,10 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
     PerlImportedFilter.INSTANCE
   };
 
+  private static final Grouper[] GROUPERS = new Grouper[]{
+    new PerlAttributeGrouper()
+  };
+
   public PerlStructureViewModel(PsiFile psiFile, Editor editor) {
     super(psiFile, editor, new PerlStructureViewElement(psiFile) {
     });
@@ -52,6 +58,12 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
   @Override
   public Sorter[] getSorters() {
     return new Sorter[]{Sorter.ALPHA_SORTER};
+  }
+
+  @NotNull
+  @Override
+  public Grouper[] getGroupers() {
+    return GROUPERS;
   }
 
   @NotNull
