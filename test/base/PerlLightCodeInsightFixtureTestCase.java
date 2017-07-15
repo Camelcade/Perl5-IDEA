@@ -623,17 +623,13 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     assertNotNull(structureView);
 
     StructureViewModel structureViewModel = structureView.getTreeModel();
-    Filter[] filters = structureViewModel.getFilters();
-    StructureViewTreeElement root = structureViewModel.getRoot();
-
-    Set<Object> recursionSet = new THashSet<>();
     StringBuilder sb = new StringBuilder();
-    serializeTree(root, filters, sb, "", recursionSet);
+    serializeTree(structureViewModel.getRoot(), structureViewModel, sb, "", new THashSet<>());
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private void serializeTree(@NotNull StructureViewTreeElement currentElement,
-                             @NotNull Filter[] filters,
+                             @NotNull StructureViewModel structureViewModel,
                              @NotNull StringBuilder sb,
                              @NotNull String prefix,
                              @NotNull Set<Object> recursionSet
@@ -653,9 +649,9 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
       sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
     }
 
-    if (filters.length > 0) {
+    if (structureViewModel.getFilters().length > 0) {
       sb.append(" (");
-      for (Filter filter : filters) {
+      for (Filter filter : structureViewModel.getFilters()) {
         if (filter.isVisible(currentElement)) {
           sb.append(filter.getName()).append("; ");
         }
@@ -678,7 +674,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
         assertInstanceOf(childElement, StructureViewTreeElement.class);
         serializeTree(
           (StructureViewTreeElement)childElement,
-          filters,
+          structureViewModel,
           sb,
           prefix + "  ",
           new THashSet<>(recursionSet)
