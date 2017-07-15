@@ -18,19 +18,26 @@ package com.perl5.lang.perl.parser.moose.psi.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlMooseAttributeWrapperElementType extends PerlPolyNamedElementType<PerlPolyNamedElementStub, PerlPolyNamedElement> {
+import java.io.IOException;
+import java.util.List;
+
+public class PerlMooseAttributeWrapperElementType
+  extends PerlPolyNamedElementType<PerlMooseAttributeWrapperStub, PerlMooseAttributeWrapper> {
   public PerlMooseAttributeWrapperElementType(@NotNull String debugName) {
     super(debugName);
   }
 
   @Override
-  public PerlPolyNamedElement createPsi(@NotNull PerlPolyNamedElementStub stub) {
+  public PerlMooseAttributeWrapper createPsi(@NotNull PerlMooseAttributeWrapperStub stub) {
     return new PerlMooseAttributeWrapper(stub, this);
   }
 
@@ -38,5 +45,28 @@ public class PerlMooseAttributeWrapperElementType extends PerlPolyNamedElementTy
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
     return new PerlMooseAttributeWrapper(node);
+  }
+
+  @NotNull
+  @Override
+  protected PerlMooseAttributeWrapperStub createStub(@NotNull PerlMooseAttributeWrapper perlMooseAttributeWrapper,
+                                                     StubElement parentStub,
+                                                     @NotNull List<StubElement> lightStubs) {
+    return new PerlMooseAttributeWrapperStub(parentStub, this, perlMooseAttributeWrapper.getAttributesNames(), lightStubs);
+  }
+
+  @Override
+  protected void serializeStub(@NotNull PerlMooseAttributeWrapperStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getAttributesNames());
+  }
+
+  @NotNull
+  @Override
+  protected PerlMooseAttributeWrapperStub deserialize(@NotNull StubInputStream dataStream,
+                                                      StubElement parentStub,
+                                                      @NotNull List<StubElement> childStubs) throws IOException {
+    List<String> attributesNames = PerlStubSerializationUtil.readStringsList(dataStream);
+    assert attributesNames != null;
+    return new PerlMooseAttributeWrapperStub(parentStub, this, attributesNames, childStubs);
   }
 }
