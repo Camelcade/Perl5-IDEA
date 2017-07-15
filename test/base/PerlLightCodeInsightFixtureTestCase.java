@@ -27,8 +27,7 @@ import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.smartTree.Filter;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageStructureViewBuilder;
@@ -53,6 +52,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -74,6 +74,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -624,13 +625,14 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
     StructureViewModel structureViewModel = structureView.getTreeModel();
     StringBuilder sb = new StringBuilder();
-    serializeTree(structureViewModel.getRoot(), structureViewModel, sb, "", new THashSet<>());
+    serializeTree(structureViewModel.getRoot(), structureViewModel, sb, null, "", new THashSet<>());
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private void serializeTree(@NotNull StructureViewTreeElement currentElement,
                              @NotNull StructureViewModel structureViewModel,
                              @NotNull StringBuilder sb,
+                             @Nullable Collection<Pair<Grouper, Group>> groups,
                              @NotNull String prefix,
                              @NotNull Set<Object> recursionSet
   ) {
@@ -649,33 +651,61 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
       sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
     }
 
+    if (value instanceof PsiElement) {
+      sb.append(" -> ").append(serializePsiElement((PsiElement)value));
+    }
+    sb.append("\n");
+
+    // filters
     if (structureViewModel.getFilters().length > 0) {
-      sb.append(" (");
+      List<String> passedFilters = new ArrayList<>();
       for (Filter filter : structureViewModel.getFilters()) {
         if (filter.isVisible(currentElement)) {
-          sb.append(filter.getName()).append("; ");
+          passedFilters.add(filter.getName());
         }
       }
-      sb.append(")");
+
+      if (!passedFilters.isEmpty()) {
+        sb.append(prefix).append("Passed by filters: ").append(StringUtil.join(passedFilters, ", ")).append("\n");
+      }
     }
 
-    sb.append("\n");
 
-    if (value instanceof PsiElement) {
-      sb.append(prefix).append("-> ").append(serializePsiElement((PsiElement)value));
+    // groups
+    if (groups != null) {
+      for (Pair<Grouper, Group> groupPair : groups) {
+        Grouper grouper = groupPair.first;
+        Group group = groupPair.second;
+        ItemPresentation groupPresentation = group.getPresentation();
+        sb.append(prefix)
+          .append("Grouped by: '").append(grouper.getPresentation().getText()).append("' (").append(grouper.getName()).append(") to ")
+          .append(groupPresentation.getPresentableText()).append(" in ").append(groupPresentation.getLocationString())
+          .append("\n");
+      }
     }
-
-    sb.append("\n");
 
 
     if (recursionSet.add(value)) {
       sb.append("\n");
-      for (TreeElement childElement : currentElement.getChildren()) {
+      TreeElement[] children = currentElement.getChildren();
+
+      MultiMap<TreeElement, Pair<Grouper, Group>> groupingResults = new MultiMap<>();
+      for (Grouper grouper : structureViewModel.getGroupers()) {
+        for (Group group : grouper
+          .group(new TreeElementWrapper(getProject(), currentElement, structureViewModel), Arrays.asList(children))) {
+          for (TreeElement element : group.getChildren()) {
+            groupingResults.putValue(element, Pair.create(grouper, group));
+          }
+        }
+      }
+
+      for (TreeElement childElement : children) {
         assertInstanceOf(childElement, StructureViewTreeElement.class);
         serializeTree(
           (StructureViewTreeElement)childElement,
           structureViewModel,
           sb,
+          groupingResults.get(childElement),
           prefix + "  ",
           new THashSet<>(recursionSet)
         );
