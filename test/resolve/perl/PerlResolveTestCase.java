@@ -17,18 +17,10 @@
 package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.*;
-import com.intellij.testFramework.UsefulTestCase;
-import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import junit.framework.AssertionFailedError;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -61,85 +53,5 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
   }
 
   public void validateTarget(PsiElement sourceElement, PsiElement targetElement) {
-  }
-
-  public void doTestWithFileCheck() {
-    initWithFileSmart();
-    checkSerializedReferencesWithFile();
-  }
-
-  public void checkSerializedReferencesWithFile() {
-    checkSerializedReferencesWithFile("");
-  }
-
-  public void checkSerializedReferencesWithFile(@NotNull String appendix) {
-    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    StringBuilder sb = new StringBuilder();
-
-    for (PsiReference psiReference : collectFileReferences()) {
-      sb.append(serializeReference(psiReference)).append("\n");
-    }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(appendix), sb.toString());
-  }
-
-  private String serializeReference(PsiReference reference) {
-    StringBuilder sb = new StringBuilder();
-    PsiElement sourceElement = reference.getElement();
-
-    ResolveResult[] resolveResults;
-    if (reference instanceof PsiPolyVariantReference) {
-      resolveResults = ((PsiPolyVariantReference)reference).multiResolve(false);
-    }
-    else {
-      PsiElement target = reference.resolve();
-      resolveResults = target == null ? PsiElementResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(target);
-    }
-
-    TextRange referenceRange = reference.getRangeInElement();
-    String sourceElementText = sourceElement.getText();
-    int sourceElementOffset = sourceElement.getNode().getStartOffset();
-
-    sb
-      .append(reference.getClass().getSimpleName())
-      .append(" at ")
-      .append(referenceRange.shiftRight(sourceElementOffset))
-      .append("; text in range: '")
-      .append(referenceRange.subSequence(sourceElementText))
-      .append("'")
-      .append(" => ")
-      .append(resolveResults.length)
-      .append(" results:")
-      .append('\n');
-
-    for (ResolveResult result : resolveResults) {
-      if (!result.isValidResult()) {
-        throw new AssertionFailedError("Invalid resolve result");
-      }
-
-      PsiElement targetElement = result.getElement();
-      assertNotNull(targetElement);
-
-      sb.append('\t').append(serializePsiElement(targetElement)).append("\n");
-    }
-    return sb.toString();
-  }
-
-  private List<PsiReference> collectFileReferences() {
-    final List<PsiReference> references = new ArrayList<PsiReference>();
-
-    PsiFile file = getFile();
-
-    file.accept(new PsiElementVisitor() {
-      @Override
-      public void visitElement(PsiElement element) {
-        Collections.addAll(references, element.getReferences());
-        element.acceptChildren(this);
-      }
-    });
-
-    Collections.sort(references, (o1, o2) -> o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
-                                             o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset());
-
-    return references;
   }
 }

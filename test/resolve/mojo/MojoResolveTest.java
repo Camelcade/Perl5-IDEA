@@ -30,7 +30,7 @@ public class MojoResolveTest extends PerlResolveTestCase {
     return "testData/resolve/mojo";
   }
 
-  public void testImplicitVariables() {doTestWithFileCheck();}
+  public void testImplicitVariables() {doTestResolve();}
 
-  public void testHelpers() {doTestWithFileCheck();}
+  public void testHelpers() {doTestResolve();}
 }

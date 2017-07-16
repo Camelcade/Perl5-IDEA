@@ -27,106 +27,106 @@ public class PerlResolveTest extends PerlResolveTestCase {
     return "testData/resolve/perl";
   }
 
-  public void testSignaturesVariables() {doTestWithFileCheck();}
+  public void testSignaturesVariables() {doTestResolve();}
 
-  public void testFancyMethodCall() {doTestWithFileCheck();}
+  public void testFancyMethodCall() {doTestResolve();}
 
-  public void testMooseAttrs() {doTestWithFileCheck();}
+  public void testMooseAttrs() {doTestResolve();}
 
-  public void testMooseDoesIsa() {doTestWithFileCheck();}
+  public void testMooseDoesIsa() {doTestResolve();}
 
-  public void testMojoAttrSmartResolve() {doTestWithFileCheck();}
+  public void testMojoAttrSmartResolve() {doTestResolve();}
 
-  public void testMojoAttrs() {doTestWithFileCheck();}
+  public void testMojoAttrs() {doTestResolve();}
 
-  public void testIssue1483() {doTestWithFileCheck();}
+  public void testIssue1483() {doTestResolve();}
 
-  public void testClassAccessorLib() {doTestWithFileCheck();}
+  public void testClassAccessorLib() {doTestResolve();}
 
-  public void testClassAccessor() {doTestWithFileCheck();}
+  public void testClassAccessor() {doTestResolve();}
 
-  public void testExceptionClassFields() {doTestWithFileCheck();}
+  public void testExceptionClassFields() {doTestResolve();}
 
-  public void testExceptionClassAlias() {doTestWithFileCheck();}
+  public void testExceptionClassAlias() {doTestResolve();}
 
-  public void testConstantsWithCollapsedLists() {doTestWithFileCheck();}
+  public void testConstantsWithCollapsedLists() {doTestResolve();}
 
-  public void testLibraryNamespace() {doTestWithFileCheck();}
+  public void testLibraryNamespace() {doTestResolve();}
 
-  public void testLibraryConstant() {doTestWithFileCheck();}
+  public void testLibraryConstant() {doTestResolve();}
 
-  public void testExceptionClass() {doTestWithFileCheck();}
+  public void testExceptionClass() {doTestResolve();}
 
-  public void testReferenceResolve() {doTestWithFileCheck();}
+  public void testReferenceResolve() {doTestResolve();}
 
   public void testExportedSubs() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testDerefWithComments() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testStringToPackage() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testConstant() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testConstantEx() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testMojoliciousHelper() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testMojoHelperNamespace() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testVariableIsa() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testSequentionalHereDocs() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testIndentableHeredocs() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testIndentableHeredocSequentional() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testVariablesAndElements() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testMainSubs() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testInterpolatedElements() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testSingleWordPackages() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testPackageRanges() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
   public void testUsePackage() {
     addCustomPackage();
     setTargetPerlVersion(PerlVersion.V5_10);
-    doTestWithFileCheck();
+    doTestResolve();
     setTargetPerlVersion(PerlVersion.V5_12);
     checkSerializedReferencesWithFile();
     setTargetPerlVersion(PerlVersion.V5_14);

@@ -60,10 +60,7 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiRecursiveElementVisitor;
+import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
@@ -94,6 +91,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import gnu.trove.THashSet;
+import junit.framework.AssertionFailedError;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -386,14 +384,21 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     doTestCompletionCheck("");
   }
 
+  private void addVirtualFileFilter() {
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getProject());
+  }
+
+  private void removeVirtualFileFilter() {
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getProject());
+  }
+
   private void doTestCompletionCheck(@NotNull String answerSuffix) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    PsiManagerEx psiManager = (PsiManagerEx)myFixture.getPsiManager();
-    psiManager.setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getProject());
+    addVirtualFileFilter();
     myFixture.complete(CompletionType.BASIC, 1);
     List<String> result = new ArrayList<>();
     LookupElement[] elements = myFixture.getLookupElements();
-    psiManager.setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getProject());
+    removeVirtualFileFilter();
     if (elements != null) {
       for (LookupElement lookupElement : elements) {
         StringBuilder sb = new StringBuilder();
@@ -547,6 +552,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
   protected void doTestUsagesHighlighting() {
     initWithFileSmartWithoutErrors();
+
     StringBuilder result = new StringBuilder();
     myFixture.testAction(new HighlightUsagesAction());
     List<RangeHighlighter> highlighters = Arrays.asList(getEditor().getMarkupModel().getAllHighlighters());
@@ -810,5 +816,92 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
       serializeTreeStructure(treeStructure, (HierarchyNodeDescriptor)object, elementProvider, sb, prefix + "    ",
                              new THashSet<>(recursionSet));
     }
+  }
+
+  public void doTestResolve() {
+    initWithFileSmart();
+    checkSerializedReferencesWithFile();
+  }
+
+  public void checkSerializedReferencesWithFile() {
+    checkSerializedReferencesWithFile("");
+  }
+
+  public void checkSerializedReferencesWithFile(@NotNull String appendix) {
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    addVirtualFileFilter();
+    StringBuilder sb = new StringBuilder();
+
+    List<PsiReference> references = collectFileReferences();
+    for (PsiReference psiReference : references) {
+      psiReference.resolve();
+    }
+    removeVirtualFileFilter();
+
+    for (PsiReference psiReference : references) {
+      sb.append(serializeReference(psiReference)).append("\n");
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(appendix), sb.toString());
+  }
+
+  private String serializeReference(PsiReference reference) {
+    StringBuilder sb = new StringBuilder();
+    PsiElement sourceElement = reference.getElement();
+
+    ResolveResult[] resolveResults;
+    if (reference instanceof PsiPolyVariantReference) {
+      resolveResults = ((PsiPolyVariantReference)reference).multiResolve(false);
+    }
+    else {
+      PsiElement target = reference.resolve();
+      resolveResults = target == null ? PsiElementResolveResult.EMPTY_ARRAY : PsiElementResolveResult.createResults(target);
+    }
+
+    TextRange referenceRange = reference.getRangeInElement();
+    String sourceElementText = sourceElement.getText();
+    int sourceElementOffset = sourceElement.getNode().getStartOffset();
+
+    sb
+      .append(reference.getClass().getSimpleName())
+      .append(" at ")
+      .append(referenceRange.shiftRight(sourceElementOffset))
+      .append("; text in range: '")
+      .append(referenceRange.subSequence(sourceElementText))
+      .append("'")
+      .append(" => ")
+      .append(resolveResults.length)
+      .append(" results:")
+      .append('\n');
+
+    for (ResolveResult result : resolveResults) {
+      if (!result.isValidResult()) {
+        throw new AssertionFailedError("Invalid resolve result");
+      }
+
+      PsiElement targetElement = result.getElement();
+      assertNotNull(targetElement);
+
+      sb.append('\t').append(serializePsiElement(targetElement)).append("\n");
+    }
+    return sb.toString();
+  }
+
+  private List<PsiReference> collectFileReferences() {
+    final List<PsiReference> references = new ArrayList<PsiReference>();
+
+    PsiFile file = getFile();
+
+    file.accept(new PsiElementVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        Collections.addAll(references, element.getReferences());
+        element.acceptChildren(this);
+      }
+    });
+
+    references.sort((o1, o2) -> o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
+                                o2.getElement().getTextRange().getStartOffset() + o2.getRangeInElement().getStartOffset());
+
+    return references;
   }
 }

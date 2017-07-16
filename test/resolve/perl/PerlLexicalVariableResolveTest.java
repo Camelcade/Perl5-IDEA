@@ -82,7 +82,7 @@ public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase 
   }
 
   public void testPackageLimitations() {
-    doTestWithFileCheck();
+    doTestResolve();
   }
 
 /*
