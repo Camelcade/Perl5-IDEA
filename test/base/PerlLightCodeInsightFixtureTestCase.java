@@ -59,12 +59,14 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileFilter;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
+import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.MapDataContext;
@@ -77,6 +79,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
@@ -111,6 +114,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   private static final String PERL_LIBRARY_NAME = "-perl-test-lib-";
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
+  private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
 
@@ -384,9 +388,12 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
   private void doTestCompletionCheck(@NotNull String answerSuffix) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    PsiManagerEx psiManager = (PsiManagerEx)myFixture.getPsiManager();
+    psiManager.setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getProject());
     myFixture.complete(CompletionType.BASIC, 1);
     List<String> result = new ArrayList<>();
     LookupElement[] elements = myFixture.getLookupElements();
+    psiManager.setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getProject());
     if (elements != null) {
       for (LookupElement lookupElement : elements) {
         StringBuilder sb = new StringBuilder();
