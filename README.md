@@ -10,7 +10,7 @@ You can always build and install current development version of the plugin:
 
 1. Clone this repo to your hard drive
 2. Go to the repo directory
-3. Run `gradle buildPlugin`
+3. Run `./gradlew buildPlugin`
 4. In the plugins dialog of your IDE, use `Install plugin from disk...` option
 5. Choose plugin file in the `build/distributions` directory of this repo 
 
