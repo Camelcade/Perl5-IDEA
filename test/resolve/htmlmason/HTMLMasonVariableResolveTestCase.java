@@ -16,13 +16,13 @@
 
 package resolve.htmlmason;
 
-import resolve.perl.PerlVariableResolveTestCase;
+import resolve.perl.PerlResolveTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
-public abstract class HTMLMasonVariableResolveTestCase extends PerlVariableResolveTestCase {
+public abstract class HTMLMasonVariableResolveTestCase extends PerlResolveTestCase {
   @Override
   public String getFileExtension() {
     return "mas";

@@ -1,0 +1,3 @@
+PerlVariableReference at (16,23); text in range: 'product' => 1 results:
+	$product@Foo::Bar
+

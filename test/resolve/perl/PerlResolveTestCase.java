@@ -17,10 +17,7 @@
 package resolve.perl;
 
 import base.PerlLightCodeInsightFixtureTestCase;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -33,23 +30,12 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 
   @Deprecated  // use doTestResolve();
   public void doTest(String filename, boolean success) {
-    doTest(filename, success, PerlVariableNameElement.class);
+    doTest(filename);
   }
 
   @Deprecated  // use doTestResolve();
-  public void doTest(String filename, boolean success, Class clazz) {
+  public void doTest(String filename) {
     initWithFileSmart(filename);
-    PsiReference reference = getFile().findReferenceAt(myFixture.getEditor().getCaretModel().getOffset());
-    assertNotNull(reference);
-    if (success) {
-      assertNotNull(reference.resolve());
-      validateTarget(reference.getElement(), reference.resolve());
-    }
-    else {
-      assertNull(reference.resolve());
-    }
-  }
-
-  public void validateTarget(PsiElement sourceElement, PsiElement targetElement) {
+    checkSerializedReferencesWithFile();
   }
 }

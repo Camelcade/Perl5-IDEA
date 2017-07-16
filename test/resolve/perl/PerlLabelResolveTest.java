@@ -16,8 +16,6 @@
 
 package resolve.perl;
 
-import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
-
 /**
  * Created by hurricup on 04.03.2016.
  */
@@ -153,9 +151,5 @@ public class PerlLabelResolveTest extends PerlResolveTestCase {
 
   public void testGotoOutBefore() {
     doTest("goto_out_before", true);
-  }
-
-  public void doTest(String filename, boolean success) {
-    doTest(filename, success, PsiPerlLabelExpr.class);
   }
 }

@@ -19,7 +19,7 @@ package resolve.perl;
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends PerlVariableResolveTestCase {
+public class PerlLexicalVariableResolveTest extends PerlResolveTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/variables";

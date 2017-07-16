@@ -1,0 +1,5 @@
+PerlSubReference at (6,11); text in range: 'mydef' => 0 results:
+
+PerlVariableReference at (20,27); text in range: 'product' => 1 results:
+	$product@Foo::Bar
+

@@ -1,0 +1,7 @@
+PerlSubReference at (0,6); text in range: 'LABEL8' => 0 results:
+
+PerlVariableReference at (17,21); text in range: 'ARGV' => 0 results:
+
+PerlLabelReference at (33,39); text in range: 'LABEL8' => 1 results:
+	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in next_labeled_foreach.pl
+

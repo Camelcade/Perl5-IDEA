@@ -1,0 +1,5 @@
+PerlSubReference at (9,14); text in range: 'mydef' => 0 results:
+
+PerlVariableReference at (23,26); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 48 in from_method.mas
+

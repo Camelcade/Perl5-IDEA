@@ -16,15 +16,12 @@
 
 package resolve.htmlmason;
 
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import resolve.perl.PerlVariableResolveTestCase;
+import resolve.perl.PerlResolveTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTestCase {
+public class HTMLMasonConcurrentBlocksResolveTest extends PerlResolveTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/htmlmason/concurrent_blocks";
   }
@@ -46,15 +43,4 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlVariableResolveTes
     doTest("from_filter");
   }
 
-  protected void doTest(String fileName) {
-    initWithFileSmart(fileName);
-    PsiElement fileLevelDeclaration = getElementAtCaret(0, PerlVariableDeclarationElement.class);
-    assertNotNull(fileLevelDeclaration);
-    PsiElement defLevelDeclaration = getElementAtCaret(1, PerlVariableDeclarationElement.class);
-    assertNotNull(defLevelDeclaration);
-    PsiElement defLevelUsage = getElementAtCaret(2, PerlVariableNameElement.class);
-    assertNotNull(defLevelUsage);
-    PsiElement fileLevelUsage = getElementAtCaret(3, PerlVariableNameElement.class);
-    assertNotNull(fileLevelUsage);
-  }
 }

@@ -1,0 +1,4 @@
+PerlVariableReference at (8,11); text in range: 'var' => 0 results:
+
+PerlSubReference at (23,32); text in range: 'mymethod1' => 0 results:
+

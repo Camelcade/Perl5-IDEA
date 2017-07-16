@@ -1,0 +1,5 @@
+PerlSubReference at (5,12); text in range: 'reftype' => 0 results:
+
+PerlVariableReference at (44,51); text in range: 'somevar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 16 in variable_in_call_expression.pl
+

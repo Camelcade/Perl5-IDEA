@@ -1,0 +1,4 @@
+HTMLMasonComponentReference at (5,14); text in range: 'something' => 0 results:
+
+PerlVariableReference at (25,28); text in range: 'var' => 0 results:
+

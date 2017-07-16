@@ -1,0 +1,5 @@
+PerlNamespaceFileReference at (4,8); text in range: 'vars' => 0 results:
+
+PerlVariableReference at (29,36); text in range: 'somevar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in variable_use_vars.pl
+

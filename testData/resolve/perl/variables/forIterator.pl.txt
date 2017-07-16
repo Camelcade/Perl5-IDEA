@@ -1,0 +1,9 @@
+PerlVariableReference at (31,34); text in range: 'abc' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in variable_for_iterator.pl
+
+PerlVariableReference at (43,46); text in range: 'abc' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in variable_for_iterator.pl
+
+PerlVariableReference at (61,64); text in range: 'abc' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in variable_for_iterator.pl
+

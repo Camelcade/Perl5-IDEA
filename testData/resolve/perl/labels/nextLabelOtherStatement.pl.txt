@@ -1,0 +1,6 @@
+PerlSubReference at (0,6); text in range: 'LABEL7' => 0 results:
+
+PerlLabelReference at (46,52); text in range: 'LABEL7' => 0 results:
+
+PerlLabelReference at (76,82); text in range: 'LABEL7' => 0 results:
+
