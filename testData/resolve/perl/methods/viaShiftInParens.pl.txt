@@ -1,0 +1,3 @@
+PerlSubReference at (72,81); text in range: 'something' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 28 in viaShiftInParens.pl
+

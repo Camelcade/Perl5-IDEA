@@ -1,0 +1,9 @@
+PerlNamespaceReference at (63,71); text in range: 'Foo::Bar' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in viaPackageVarInParens.pl
+
+PerlVariableReference at (84,87); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 72 in viaPackageVarInParens.pl
+
+PerlSubReference at (90,99); text in range: 'something' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 28 in viaPackageVarInParens.pl
+

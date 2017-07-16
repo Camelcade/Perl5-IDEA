@@ -1,0 +1,8 @@
+PerlVariableReference at (76,77); text in range: '_' => 0 results:
+
+PerlVariableReference at (84,88); text in range: 'self' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 66 in viaSelf.pl
+
+PerlSubReference at (90,99); text in range: 'something' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 28 in viaSelf.pl
+

@@ -16,8 +16,6 @@
 
 package resolve.perl;
 
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-
 /**
  * Created by hurricup on 14.06.2016.
  */
@@ -56,7 +54,7 @@ public class PerlMethodResolveTest extends PerlResolveTestCase {
   }
 
   public void testViaArbitraryVar() {
-    doTest(false);
+    doTestResolve();
   }
 
   public void testViaReturnResult() {
@@ -64,10 +62,6 @@ public class PerlMethodResolveTest extends PerlResolveTestCase {
   }
 
   public void doTest() {
-    doTest(true);
-  }
-
-  public void doTest(boolean success) {
-    super.doTest(getTestName(true), success, PerlSubNameElement.class);
+    doTestResolve();
   }
 }

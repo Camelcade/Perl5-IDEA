@@ -31,14 +31,12 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
     return PerlFileTypeScript.EXTENSION_PL;
   }
 
-  public void doTest(boolean success) {
-    doTest(getTestName(true) + getFileExtension(), success);
-  }
-
+  @Deprecated  // use doTestResolve();
   public void doTest(String filename, boolean success) {
     doTest(filename, success, PerlVariableNameElement.class);
   }
 
+  @Deprecated  // use doTestResolve();
   public void doTest(String filename, boolean success, Class clazz) {
     initWithFileSmart(filename);
     PsiReference reference = getFile().findReferenceAt(myFixture.getEditor().getCaretModel().getOffset());
