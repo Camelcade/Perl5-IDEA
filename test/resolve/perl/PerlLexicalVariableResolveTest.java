@@ -16,80 +16,74 @@
 
 package resolve.perl;
 
+import base.PerlLightCodeInsightFixtureTestCase;
+
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends PerlResolveTestCase {
+public class PerlLexicalVariableResolveTest extends PerlLightCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/variables";
   }
 
   public void testSimple() {
-    doTest("variable_simple", true);
+    doTestResolve();
   }
 
   public void testIfCondition() {
-    doTest("variable_if_condition", true);
+    doTestResolve();
   }
 
   public void testForIterator() {
-    doTest("variable_for_iterator", true);
+    doTestResolve();
   }
 
   public void testForIteratorIterator() {
-    doTest("for_iterator_iterator", true);
+    doTestResolve();
   }
 
   public void testUseVars() {
-    doTest("variable_use_vars", true);
+    doTestResolve();
   }
 
   public void testIfElsifElse() {
-    doTest("variable_if_elsif_else", true);
+    doTestResolve();
   }
 
   public void testSubSignature() {
-    doTest("variable_sub_signature", true);
+    doTestResolve();
   }
 
   public void testMethodExplicitInvocant() {
-    doTest("variable_method_explicit_invocant", true);
+    doTestResolve();
   }
 
   public void testVariableInInvocation() {
-    doTest("variable_in_call_expression", true);
+    doTestResolve();
   }
 
   public void testMethodImplicitInvocant() {
-    doTest("variable_method_implicit_invocant", true);
+    doTestResolve();
   }
 
   public void testNegativeBlock() {
-    doTest("negative_variable_block", false);
+    doTestResolve();
   }
 
   public void testNegativeIfElse() {
-    doTest("negative_if_else", false);
+    doTestResolve();
   }
 
   public void testSameStatementSimple() {
-    doTest("same_statement_simple", false);
+    doTestResolve();
   }
 
   public void testSameStatementMap() {
-    doTest("same_statement_map", false);
+    doTestResolve();
   }
 
   public void testPackageLimitations() {
     doTestResolve();
   }
-
-/*
-        public void testPerlTidy()
-	{
-		initWithPerlTidy();
-		checkSerializedReferencesWithFile(); // fails on travis
-	}
-*/
 }

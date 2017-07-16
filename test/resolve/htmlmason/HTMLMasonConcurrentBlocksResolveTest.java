@@ -16,12 +16,12 @@
 
 package resolve.htmlmason;
 
-import resolve.perl.PerlResolveTestCase;
+import base.PerlLightCodeInsightFixtureTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonConcurrentBlocksResolveTest extends PerlResolveTestCase {
+public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightCodeInsightFixtureTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/htmlmason/concurrent_blocks";
   }
@@ -32,15 +32,14 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlResolveTestCase {
   }
 
   public void testArgs() throws Exception {
-    doTest("args");
+    doTestResolve();
   }
 
   public void testInit() throws Exception {
-    doTest("init");
+    doTestResolve();
   }
 
   public void testFromFilter() throws Exception {
-    doTest("from_filter");
+    doTestResolve();
   }
-
 }

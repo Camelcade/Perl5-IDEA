@@ -28,90 +28,10 @@ public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariable
   }
 
   @Override
-  protected boolean resolveSecondEntry() {
-    return true;
-  }
-
-  @Override
-  protected boolean resolveFromSecondEntryBackwards() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromOnce() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromShared() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromFilter() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromInit() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromCleanup() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromLineAhead() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromLineBehind() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromPerlBehind() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromPerlAhead() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromFilteredBlockAhead() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromFilteredBlockBehind() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromDef() {
-    return true;
-  }
-
-  @Override
-  protected boolean resolveFromMethod() {
-    return false;
-  }
-
-  @Override
-  protected boolean resolveFromFileArgs() {
-    return false;
-  }
-
-  @Override
-  public void doTest(String filename, boolean success) {
+  public void doTestResolve() {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     settings.globalVariables.add(new VariableDescription("$product", "Foo::Bar"));
     settings.settingsUpdated();
-    super.doTest(filename, success);
+    super.doTestResolve();
   }
 }

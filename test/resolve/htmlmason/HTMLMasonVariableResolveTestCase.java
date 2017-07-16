@@ -16,99 +16,71 @@
 
 package resolve.htmlmason;
 
-import resolve.perl.PerlResolveTestCase;
+import base.PerlLightCodeInsightFixtureTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
-public abstract class HTMLMasonVariableResolveTestCase extends PerlResolveTestCase {
+public abstract class HTMLMasonVariableResolveTestCase extends PerlLightCodeInsightFixtureTestCase {
   @Override
   public String getFileExtension() {
     return "mas";
   }
 
-  protected abstract boolean resolveFromOnce();
-
-  protected abstract boolean resolveFromShared();
-
-  protected abstract boolean resolveFromFilter();
-
-  protected abstract boolean resolveFromInit();
-
-  protected abstract boolean resolveFromCleanup();
-
-  protected abstract boolean resolveFromLineAhead();
-
-  protected abstract boolean resolveFromLineBehind();
-
-  protected abstract boolean resolveFromPerlBehind();
-
-  protected abstract boolean resolveFromPerlAhead();
-
-  protected abstract boolean resolveFromFilteredBlockAhead();
-
-  protected abstract boolean resolveFromFilteredBlockBehind();
-
-  protected abstract boolean resolveFromDef();
-
-  protected abstract boolean resolveFromMethod();
-
-  protected abstract boolean resolveFromFileArgs();
-
   public void testFromCleanup() throws Exception {
-    doTest("from_cleanup", resolveFromCleanup());
+    doTestResolve();
   }
 
   public void testFromDef() throws Exception {
-    doTest("from_def", resolveFromDef());
+    doTestResolve();
   }
 
   public void testFromFilter() throws Exception {
-    doTest("from_filter", resolveFromFilter());
+    doTestResolve();
   }
 
   public void testFromFilteredBlockAhead() throws Exception {
-    doTest("from_filtered_block_ahead", resolveFromFilteredBlockAhead());
+    doTestResolve();
   }
 
   public void testFromFilteredBlockBehind() throws Exception {
-    doTest("from_filtered_block_behind", resolveFromFilteredBlockBehind());
+    doTestResolve();
   }
 
   public void testFromInit() throws Exception {
-    doTest("from_init", resolveFromInit());
+    doTestResolve();
   }
 
   public void testFromLineAhead() throws Exception {
-    doTest("from_line_ahead", resolveFromLineAhead());
+    doTestResolve();
   }
 
   public void testFromLineBehind() throws Exception {
-    doTest("from_line_behind", resolveFromLineBehind());
+    doTestResolve();
   }
 
   public void testFromMethod() throws Exception {
-    doTest("from_method", resolveFromMethod());
+    doTestResolve();
   }
 
   public void testFromOnce() throws Exception {
-    doTest("from_once", resolveFromOnce());
+    doTestResolve();
   }
 
   public void testFromPerlAhead() throws Exception {
-    doTest("from_perl_ahead", resolveFromPerlAhead());
+    doTestResolve();
   }
 
   public void testFromPerlBehind() throws Exception {
-    doTest("from_perl_behind", resolveFromPerlBehind());
+    doTestResolve();
   }
 
   public void testFromShared() throws Exception {
-    doTest("from_shared", resolveFromShared());
+    doTestResolve();
   }
 
   public void testFromFileArgs() throws Exception {
-    doTest("from_file_args", resolveFromFileArgs());
+    doTestResolve();
   }
 }
