@@ -3,7 +3,7 @@ PerlSubReference at (0,6); text in range: 'LABEL8' => 0 results:
 PerlSubReference at (36,42); text in range: 'LABEL8' => 0 results:
 
 PerlLabelReference at (58,64); text in range: 'LABEL8' => 1 results:
-	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 36 in next_label_in_grep.pl
+	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 36 in nextInGrep.pl
 
 PerlVariableReference at (68,72); text in range: 'ARGV' => 0 results:
 

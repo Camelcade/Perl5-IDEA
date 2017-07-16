@@ -1,5 +1,5 @@
 PerlLabelReference at (8,13); text in range: 'LABEL' => 1 results:
-	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 18 in goto_out_after.pl
+	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 18 in gotoOutAfter.pl
 
 PerlSubReference at (18,23); text in range: 'LABEL' => 0 results:
 

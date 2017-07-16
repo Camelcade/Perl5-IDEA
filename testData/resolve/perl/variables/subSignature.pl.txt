@@ -1,3 +1,3 @@
 PerlVariableReference at (33,40); text in range: 'somevar' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in variable_sub_signature.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 12 in subSignature.pl
 

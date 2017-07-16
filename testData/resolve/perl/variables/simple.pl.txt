@@ -1,3 +1,3 @@
 PerlVariableReference at (37,40); text in range: 'abc' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 20 in variable_simple.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 20 in simple.pl
 

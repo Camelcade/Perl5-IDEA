@@ -30,12 +30,11 @@ public abstract class PerlResolveTestCase extends PerlLightCodeInsightFixtureTes
 
   @Deprecated  // use doTestResolve();
   public void doTest(String filename, boolean success) {
-    doTest(filename);
+    doTestResolve();
   }
 
   @Deprecated  // use doTestResolve();
   public void doTest(String filename) {
-    initWithFileSmart(filename);
-    checkSerializedReferencesWithFile();
+    doTestResolve();
   }
 }

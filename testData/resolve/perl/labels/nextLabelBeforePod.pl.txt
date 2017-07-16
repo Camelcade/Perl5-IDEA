@@ -1,5 +1,5 @@
 PerlSubReference at (0,8); text in range: 'LABEL123' => 0 results:
 
 PerlLabelReference at (49,57); text in range: 'LABEL123' => 1 results:
-	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in next_label_before_pod.pl
+	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in nextLabelBeforePod.pl
 

@@ -3,5 +3,5 @@ PerlSubReference at (0,6); text in range: 'LABEL8' => 0 results:
 PerlSubReference at (35,41); text in range: 'LABEL8' => 0 results:
 
 PerlLabelReference at (57,63); text in range: 'LABEL8' => 1 results:
-	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 35 in next_label_in_anon_sub.pl
+	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 35 in nextInAnonSub.pl
 

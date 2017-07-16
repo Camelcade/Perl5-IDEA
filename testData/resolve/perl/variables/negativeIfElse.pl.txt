@@ -1,5 +1,5 @@
 PerlVariableReference at (52,56); text in range: 'abcd' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in negative_if_else.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in negativeIfElse.pl
 
 PerlVariableReference at (67,70); text in range: 'cde' => 0 results:
 

@@ -1,3 +1,3 @@
 PerlVariableReference at (8,11); text in range: 'var' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 57 in second_entry.mas
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 57 in secondEntry.mas
 

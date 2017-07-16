@@ -1,9 +1,9 @@
 PerlVariableReference at (48,51); text in range: 'abc' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 18 in variable_if_elsif_else.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 18 in ifElsifElse.pl
 
 PerlVariableReference at (95,98); text in range: 'cde' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 65 in variable_if_elsif_else.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 65 in ifElsifElse.pl
 
 PerlVariableReference at (118,121); text in range: 'cde' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 65 in variable_if_elsif_else.pl
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 65 in ifElsifElse.pl
 

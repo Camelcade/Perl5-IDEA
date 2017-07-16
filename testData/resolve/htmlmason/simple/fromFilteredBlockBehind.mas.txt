@@ -1,5 +1,5 @@
 HTMLMasonComponentReference at (18,27); text in range: 'something' => 0 results:
 
 PerlVariableReference at (38,41); text in range: 'var' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in from_filtered_block_behind.mas
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 7 in fromFilteredBlockBehind.mas
 
