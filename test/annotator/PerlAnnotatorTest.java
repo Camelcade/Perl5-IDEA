@@ -30,31 +30,31 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     return "testData/annotator/perl";
   }
 
-  public void testBuiltInVariables() {doTest();}
+  public void testBuiltInVariables() {doAnnotatorTest();}
 
   public void testSignaturesShadowing() {doShadowingTest();}
 
   public void testVariableShadowingInspection() {doShadowingTest();}
 
-  public void testUnusedLexicalVariableInspection() {doTest(PerlUnusedLexicalVariableInspection.class);}
+  public void testUnusedLexicalVariableInspection() {doInspectionTest(PerlUnusedLexicalVariableInspection.class);}
 
-  public void testUnresolvedVariableInspection() {doTest(PerlUnresolvedVariableInspection.class);}
+  public void testUnresolvedVariableInspection() {doInspectionTest(PerlUnresolvedVariableInspection.class);}
 
-  public void testUnusedGlobalVariableInspection() {doTest(PerlUnusedGlobalVariableInspection.class);}
+  public void testUnusedGlobalVariableInspection() {doInspectionTest(PerlUnusedGlobalVariableInspection.class);}
 
-  public void testFileLevelVariableInspection() {doTest(PerlFileLevelVariableInspection.class);}
+  public void testFileLevelVariableInspection() {doInspectionTest(PerlFileLevelVariableInspection.class);}
 
-  public void testBuiltInVariableRedeclarationInspection() {doTest(PerlBuiltinVariableRedeclarationInspection.class);}
+  public void testBuiltInVariableRedeclarationInspection() {doInspectionTest(PerlBuiltinVariableRedeclarationInspection.class);}
 
-  public void testUseStrictInspection() {doTest(PerlUseStrictInspection.class);}
+  public void testUseStrictInspection() {doInspectionTest(PerlUseStrictInspection.class);}
 
-  public void testUseWarningsInspection() {doTest(PerlUseWarningsInspection.class);}
+  public void testUseWarningsInspection() {doInspectionTest(PerlUseWarningsInspection.class);}
 
-  public void testUnusedTypeGlobInspection() {doTest(PerlUnusedTypeGlobInspection.class);}
+  public void testUnusedTypeGlobInspection() {doInspectionTest(PerlUnusedTypeGlobInspection.class);}
 
-  public void testUnusedSubInspection() {doTest(PerlUnusedSubInspection.class);}
+  public void testUnusedSubInspection() {doInspectionTest(PerlUnusedSubInspection.class);}
 
-  public void testUnresolvedSubInspection() {doTest(PerlUnresolvedSubInspection.class);}
+  public void testUnresolvedSubInspection() {doInspectionTest(PerlUnresolvedSubInspection.class);}
 
   public void testSimpleMainResolutionTrue() {doTestSimpleMainResolution(true);}
 
@@ -62,24 +62,24 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
 
   private void doTestSimpleMainResolution(boolean optionValue) {
     PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = optionValue;
-    doTest(PerlMultipleSubDefinitionsInspection.class);
+    doInspectionTest(PerlMultipleSubDefinitionsInspection.class);
   }
 
-  public void testMultipleSubsDefinitionsInspection() {doTest(PerlMultipleSubDefinitionsInspection.class);}
+  public void testMultipleSubsDefinitionsInspection() {doInspectionTest(PerlMultipleSubDefinitionsInspection.class);}
 
-  public void testMultipleSubsDeclarationsInspection() {doTest(PerlMultipleSubDeclarationsInspection.class);}
+  public void testMultipleSubsDeclarationsInspection() {doInspectionTest(PerlMultipleSubDeclarationsInspection.class);}
 
-  public void testRedundantNamespaceInspection() {doTest(PerlRedundantNamespaceInspection.class);}
+  public void testRedundantNamespaceInspection() {doInspectionTest(PerlRedundantNamespaceInspection.class);}
 
-  public void testUnresolvedPackageFileInspection() {doTest(PerlUnresolvedPackageFileInspection.class);}
+  public void testUnresolvedPackageFileInspection() {doInspectionTest(PerlUnresolvedPackageFileInspection.class);}
 
-  public void testUnresolvedNamespaceInspection() {doTest(PerlUnresolvedNamespaceInspection.class);}
+  public void testUnresolvedNamespaceInspection() {doInspectionTest(PerlUnresolvedNamespaceInspection.class);}
 
-  public void testMultipleNamespaceDefinitionInspection() {doTest(PerlMultipleNamespaceDefinitionsInspection.class);}
+  public void testMultipleNamespaceDefinitionInspection() {doInspectionTest(PerlMultipleNamespaceDefinitionsInspection.class);}
 
-  public void testClashedNamespacesInspection() {doTest(PerlClashedNamespacesInspection.class);}
+  public void testClashedNamespacesInspection() {doInspectionTest(PerlClashedNamespacesInspection.class);}
 
-  public void testUnresolvedLabelInspection() {doTest(PerlUnresolvedLabelInspection.class);}
+  public void testUnresolvedLabelInspection() {doInspectionTest(PerlUnresolvedLabelInspection.class);}
 
   public void testIdentifierInspection() {
     initWithFileSmart();
@@ -88,15 +88,15 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
     myFixture.checkHighlighting(true, false, false);
   }
 
-  public void testFancyMethodCall() {doTest(PerlFancyMethodCallInspection.class);}
+  public void testFancyMethodCall() {doInspectionTest(PerlFancyMethodCallInspection.class);}
 
   public void testMooseAttributesDeprecation() {doDeprecationTest();}
 
-  public void testNsRecursiveInheritance1() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
+  public void testNsRecursiveInheritance1() {doInspectionTest(PerlNamespaceRecursiveInheritanceInspection.class);}
 
-  public void testNsRecursiveInheritance2() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
+  public void testNsRecursiveInheritance2() {doInspectionTest(PerlNamespaceRecursiveInheritanceInspection.class);}
 
-  public void testNsRecursiveInheritance3() {doTest(PerlNamespaceRecursiveInheritanceInspection.class);}
+  public void testNsRecursiveInheritance3() {doInspectionTest(PerlNamespaceRecursiveInheritanceInspection.class);}
 
   public void testNamespaceDeprecation() {doDeprecationTest();}
 
@@ -105,12 +105,12 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   public void testMojoHelperDeprecation() {doDeprecationTest();}
 
   public void testConstants() {
-    doTest();
+    doAnnotatorTest();
   }
 
-  public void testIncorrectConstants() { doTest();}
+  public void testIncorrectConstants() { doAnnotatorTest();}
 
-  public void testExceptionClass() {doTest();}
+  public void testExceptionClass() {doAnnotatorTest();}
 
   public void testDeprecations() {
     doDeprecationTest();
@@ -129,25 +129,14 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   }
 
   public void testUnresolvedBuiltIns() {
-    doTest(PerlUnresolvedSubInspection.class);
-  }
-
-  private void doTest() {
-    initWithFileSmart();
-    myFixture.checkHighlighting(true, true, true);
+    doInspectionTest(PerlUnresolvedSubInspection.class);
   }
 
   private void doDeprecationTest() {
-    doTest(PerlDeprecatedInspection.class);
+    doInspectionTest(PerlDeprecatedInspection.class);
   }
 
   private void doShadowingTest() {
-    doTest(PerlVariableShadowingInspection.class);
-  }
-
-  private void doTest(Class clazz) {
-    initWithFileSmart();
-    myFixture.enableInspections(clazz);
-    myFixture.checkHighlighting(true, false, false);
+    doInspectionTest(PerlVariableShadowingInspection.class);
   }
 }

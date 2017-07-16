@@ -904,4 +904,20 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
     return references;
   }
+
+  protected void doAnnotatorTest() {
+    initWithFileSmart();
+    addVirtualFileFilter();
+    myFixture.checkHighlighting(true, true, true);
+    removeVirtualFileFilter();
+  }
+
+
+  protected void doInspectionTest(Class clazz) {
+    initWithFileSmart();
+    addVirtualFileFilter();
+    myFixture.enableInspections(clazz);
+    myFixture.checkHighlighting(true, false, false);
+    removeVirtualFileFilter();
+  }
 }
