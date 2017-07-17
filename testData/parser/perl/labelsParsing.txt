@@ -128,7 +128,7 @@ Perl5
       PsiElement(Perl5: ;)(';')
     PsiElement(Perl5: })('}')
   PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION)
-    PsiElement(Perl5: switch)('switch')
+    PerlSubNameElementImpl(Perl5: subname)('switch')
     PsiElement(Perl5: :)(':')
   PsiPerlBlockImpl(Perl5: BLOCK)
     PsiElement(Perl5: {)('{')

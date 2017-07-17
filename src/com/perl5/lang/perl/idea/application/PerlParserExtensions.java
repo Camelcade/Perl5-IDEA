@@ -24,10 +24,8 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserImpl;
-import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -54,10 +52,6 @@ public class PerlParserExtensions implements ApplicationComponent {
       if (extension.getRegexPrefixTokenSet() != null) {
         PerlLexer.BARE_REGEX_PREFIX_TOKENSET = TokenSet.orSet(PerlLexer.BARE_REGEX_PREFIX_TOKENSET, extension.getRegexPrefixTokenSet());
       }
-
-      // add tokens to fallback set
-      Collection<IElementType> tokensList = customTokensMap.values();
-      PerlParserUtil.addConvertableTokens(tokensList.toArray(new IElementType[tokensList.size()]));
 
       // add extensions tokens
       List<Pair<IElementType, TokenSet>> extensionSets = extension.getExtensionSets();

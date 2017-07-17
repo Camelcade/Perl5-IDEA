@@ -18,6 +18,7 @@ package parser;
 
 import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlFileViewProviderFactory;
 
 /**
@@ -308,7 +309,12 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  public void testSwitchAsSub() {
+    doTest();
+  }
+
   public void testPerlSwitch() {
+    PerlSharedSettings.getInstance(getProject()).PERL_SWITCH_ENABLED = true;
     doTest();
   }
 

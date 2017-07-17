@@ -57,9 +57,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     QUOTE_TICK_CLOSE,
     QUOTE_SINGLE_CLOSE
   );
-  // tokens that can be converted between each other depending on context
-  public static TokenSet CONVERTABLE_TOKENS = TokenSet.create(
-  );
   private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = new WhitespacesAndCommentsBinder() {
     @Override
     public int getEdgePosition(List<IElementType> tokens, boolean atStreamEdge, TokenTextGetter getter) {
@@ -81,10 +78,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       return result;
     }
   };
-
-  public static void addConvertableTokens(IElementType... convertableTokens) {
-    CONVERTABLE_TOKENS = TokenSet.orSet(CONVERTABLE_TOKENS, TokenSet.create(convertableTokens));
-  }
 
   /**
    * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder

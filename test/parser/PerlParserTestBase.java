@@ -30,6 +30,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodParserDefinition;
@@ -100,6 +101,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
     myProject.addComponent(PerlNamesCache.class, new PerlNamesCache(myProject));
     new PerlParserExtensions().initComponent();
+    getProject().registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
   }
 
   protected String loadFile(@NonNls @TestDataFile String name) throws IOException {

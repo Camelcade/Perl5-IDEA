@@ -70,6 +70,7 @@ public class PerlSettingsConfigurable implements Configurable {
   JCheckBox perlAnnotatorCheckBox;
   JCheckBox allowInjectionWithInterpolation;
   JCheckBox allowRegexpInjections;
+  JCheckBox enablePerlSwitchCheckbox;
   CollectionListModel<String> selfNamesModel;
   JBList selfNamesList;
   private ComboBox<PerlVersion> myTargetPerlVersionComboBox;
@@ -138,6 +139,9 @@ public class PerlSettingsConfigurable implements Configurable {
 
     perlCriticCheckBox = new JCheckBox(PerlBundle.message("perl.config.annotations.critic"));
     builder.addComponent(perlCriticCheckBox);
+
+    enablePerlSwitchCheckbox = new JCheckBox(PerlBundle.message("perl.config.enable.switch"));
+    builder.addComponent(enablePerlSwitchCheckbox);
 
     perlCriticPathInputField = new TextFieldWithBrowseButton();
     perlCriticPathInputField.setEditable(false);
@@ -296,6 +300,7 @@ public class PerlSettingsConfigurable implements Configurable {
            myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected() ||
            mySharedSettings.PERL_ANNOTATOR_ENABLED != perlAnnotatorCheckBox.isSelected() ||
            mySharedSettings.PERL_CRITIC_ENABLED != perlCriticCheckBox.isSelected() ||
+           mySharedSettings.PERL_SWITCH_ENABLED != enablePerlSwitchCheckbox.isSelected() ||
            !mySharedSettings.getTargetPerlVersion().equals(myTargetPerlVersionComboBox.getSelectedItem()) ||
            !StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
            !StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
@@ -314,6 +319,7 @@ public class PerlSettingsConfigurable implements Configurable {
 
   @Override
   public void apply() throws ConfigurationException {
+    boolean reparseOpenFiles = false;
     mySharedSettings.SIMPLE_MAIN_RESOLUTION = simpleMainCheckbox.isSelected();
     mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = autoInjectionCheckbox.isSelected();
     mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = allowInjectionWithInterpolation.isSelected();
@@ -325,9 +331,14 @@ public class PerlSettingsConfigurable implements Configurable {
     myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
     mySharedSettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
 
+    if (mySharedSettings.PERL_SWITCH_ENABLED != enablePerlSwitchCheckbox.isSelected()) {
+      mySharedSettings.PERL_SWITCH_ENABLED = enablePerlSwitchCheckbox.isSelected();
+      reparseOpenFiles |= true;
+    }
+
     if (myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected()) {
       myLocalSettings.ENABLE_REGEX_INJECTIONS = allowRegexpInjections.isSelected();
-      FileContentUtil.reparseOpenedFiles();
+      reparseOpenFiles |= true;
     }
 
     myLocalSettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
@@ -340,6 +351,9 @@ public class PerlSettingsConfigurable implements Configurable {
       applyMicroIdeSettings();
     }
     mySharedSettings.settingsUpdated();
+    if (reparseOpenFiles) {
+      FileContentUtil.reparseOpenedFiles();
+    }
   }
 
   public void applyMicroIdeSettings() {
@@ -368,6 +382,7 @@ public class PerlSettingsConfigurable implements Configurable {
     allowRegexpInjections.setSelected(myLocalSettings.ENABLE_REGEX_INJECTIONS);
     perlAnnotatorCheckBox.setSelected(mySharedSettings.PERL_ANNOTATOR_ENABLED);
     deparseArgumentsTextField.setText(mySharedSettings.PERL_DEPARSE_ARGUMENTS);
+    enablePerlSwitchCheckbox.setSelected(mySharedSettings.PERL_SWITCH_ENABLED);
 
     perlCriticCheckBox.setSelected(mySharedSettings.PERL_CRITIC_ENABLED);
     perlCriticPathInputField.setText(myLocalSettings.PERL_CRITIC_PATH);

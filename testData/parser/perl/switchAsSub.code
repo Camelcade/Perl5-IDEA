@@ -1,0 +1,28 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+package Foo;
+
+sub new {
+    my $class = shift;
+    return bless {}, $class;
+}
+
+sub switch {
+    my $self = shift;
+    return 'bar';
+}
+
+my $foo = Foo->new();
+
+my $test = {
+    bar => $foo->switch,
+};
+
+print $foo->switch();
+print $foo->switch;
+print $test->{bar};
+print switch();
+print switch;

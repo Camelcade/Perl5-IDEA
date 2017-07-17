@@ -25,13 +25,10 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import gnu.trove.THashMap;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
@@ -77,12 +74,6 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
 
     PARSER_TOKEN_SET =
       TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
-  }
-
-  @NotNull
-  @Override
-  public Map<String, IElementType> getCustomTokensMap() {
-    return Collections.emptyMap();
   }
 
   @Override

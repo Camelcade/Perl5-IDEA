@@ -131,6 +131,9 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
 REGEX_HASH_NEGATING = [\^\:\\\[\{]
+HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
+PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";")
+
 //REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
 POSIX_CHARGROUP = "[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]"
@@ -794,6 +797,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"/"   						{yybegin(AFTER_VALUE);return captureImplicitRegex();}
 }
 
+<YYINITIAL>{
+	"switch"					{return getPerlSwitchToken(RESERVED_SWITCH);}
+	"case"						{return getPerlSwitchToken(RESERVED_CASE);}
+}
+
 // known identifiers
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_VARIABLE,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT>{
 	"split"						{yybegin(YYINITIAL); return BUILTIN_LIST;}
@@ -832,9 +840,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"require"	 	{yybegin(REQUIRE_ARGUMENTS); return RESERVED_REQUIRE;}
 
 	{CORE_PREFIX}"undef"		{yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;}
-
-	"switch"					{yybegin(YYINITIAL); return RESERVED_SWITCH;}
-	"case"						{yybegin(YYINITIAL); return RESERVED_CASE;}
 
 	"method"					{yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"						{yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
@@ -985,24 +990,24 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{NUMBER_INT} / ".."                              {yybegin(AFTER_VALUE);return NUMBER;}
 	"." {NUMBER_INT} {NUMBER_EXP}?	 				 {yybegin(AFTER_VALUE);return NUMBER;}
 	{NUMBER_INT} ("." {NUMBER_INT}? )? {NUMBER_EXP}? {yybegin(AFTER_VALUE);return NUMBER;}
-	{PERL_VERSION}  		{yybegin(AFTER_VALUE);return NUMBER_VERSION;}
+	{PERL_VERSION}  		                {yybegin(AFTER_VALUE);return NUMBER_VERSION;}
 }
 
 <LEX_HANDLE>{
-	"("												{return getLeftParen(LEX_HANDLE_STRICT);}
+	"("						{return getLeftParen(LEX_HANDLE_STRICT);}
 	<LEX_HANDLE_STRICT>{
-		{IDENTIFIER} / {SPACES_OR_COMMENTS} ("("|"->"|":")	{yybegin(YYINITIAL);pushback();}
-		{IDENTIFIER}										{yybegin(AFTER_IDENTIFIER);return HANDLE;}
-		[^]													{pushback();yybegin(YYINITIAL);}
+		{IDENTIFIER} / {HANDLE_NEGATING}	{yybegin(YYINITIAL);pushback();}
+		{IDENTIFIER}				{yybegin(AFTER_IDENTIFIER);return HANDLE;}
+		[^]					{pushback();yybegin(YYINITIAL);}
 	}
 }
 
 <LEX_PRINT_HANDLE>{
-	"("												{return getLeftParen(LEX_PRINT_HANDLE_STRICT);}
+	"("						{return getLeftParen(LEX_PRINT_HANDLE_STRICT);}
 	<LEX_PRINT_HANDLE_STRICT>{
-		{IDENTIFIER} / {SPACES_OR_COMMENTS} ("("|"->"|":")	{yybegin(YYINITIAL);pushback();}
-		{IDENTIFIER}										{yybegin(YYINITIAL);return HANDLE;}
-		[^]													{pushback();yybegin(YYINITIAL);}
+		{IDENTIFIER} / {PRINT_HANDLE_NEGATING}	{yybegin(YYINITIAL);pushback();}
+		{IDENTIFIER}				{yybegin(YYINITIAL);return HANDLE;}
+		[^]					{pushback();yybegin(YYINITIAL);}
 	}
 }
 

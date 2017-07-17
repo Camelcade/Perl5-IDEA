@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Queue;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
@@ -124,6 +125,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   protected IElementType regexCommand = null;
   private boolean myIsHeredocLike = false;
   private IElementType myCurrentSigilToken;
+  private boolean myIsPerlSwitchEnabled = false;
 
   @Nullable
   private Project myProject;
@@ -133,7 +135,19 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
   public PerlBaseLexer withProject(@Nullable Project project) {
     myProject = project;
+    if (project != null) {
+      myIsPerlSwitchEnabled = PerlSharedSettings.getInstance(project).PERL_SWITCH_ENABLED;
+    }
     return this;
+  }
+
+  protected IElementType getPerlSwitchToken(IElementType token) {
+    if (myIsPerlSwitchEnabled) {
+      yybegin(YYINITIAL);
+      return token;
+    }
+    yybegin(AFTER_IDENTIFIER);
+    return SUB_NAME;
   }
 
   @Override

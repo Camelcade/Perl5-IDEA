@@ -19,35 +19,24 @@ package com.perl5.lang.perl.parser;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import gnu.trove.THashMap;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
 
 /**
  * Created by hurricup on 15.12.2015.
  */
-public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension {
-  protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
+public class PerlSwitchParserExtensionImpl extends PerlParserExtension implements PerlSwitchParserExtension, PerlElementTypes {
   protected static final TokenSet BARE_REGEX_PREFIX_TOKEN_SET = TokenSet.create(
     RESERVED_CASE
   );
-  protected static TokenSet TOKENS_SET;
+  protected static TokenSet TOKENS_SET = TokenSet.create(
+    RESERVED_CASE, RESERVED_SWITCH
+  );
 
   static {
-    // in regular case, these tokens should be created in extension class
-    TOKENS_MAP.put("case", RESERVED_CASE);
-    TOKENS_MAP.put("switch", RESERVED_SWITCH);
-
-    TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
-  }
-
-  @NotNull
-  @Override
-  public Map<String, IElementType> getCustomTokensMap() {
-    return TOKENS_MAP;
+    PerlSyntaxHighlighter.safeMap(PerlSyntaxHighlighter.PERL_KEYWORD, TOKENS_SET);
   }
 
   @Override

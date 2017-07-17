@@ -130,9 +130,12 @@ limitations under the License.
     RESERVED_QR='qr'
     RESERVED_M='m'
 
-	RESERVED_FINALLY = 'finally';
-	RESERVED_TRY = 'try';
-	RESERVED_CATCH = 'catch';
+    RESERVED_FINALLY = 'finally';
+    RESERVED_TRY = 'try';
+    RESERVED_CATCH = 'catch';
+
+    RESERVED_SWITCH='switch'
+    RESERVED_CASE='case'
 
     RESERVED_MY='my'
     RESERVED_OUR='our'
@@ -1043,7 +1046,11 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] | 'method' | 'func' | 'finally' | 'try' | 'catch'
+private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] |
+  'method' | 'func' |
+  'finally' | 'try' | 'catch' |
+  'switch' | 'case'
+
 
 
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////

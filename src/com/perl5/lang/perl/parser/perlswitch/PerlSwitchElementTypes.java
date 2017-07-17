@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.parser.perlswitch.psi.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +27,6 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 15.12.2015.
  */
 public interface PerlSwitchElementTypes {
-  IElementType RESERVED_SWITCH = new PerlTokenType("switch");
-  IElementType RESERVED_CASE = new PerlTokenType("case");
-
   IElementType SWITCH_COMPOUND = new PerlElementTypeEx("SWITCH_COMPOUND") {
     @NotNull
     @Override

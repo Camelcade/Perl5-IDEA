@@ -57,8 +57,8 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
   public String PERL_DEPARSE_ARGUMENTS = "";
   public String PERL_TIDY_ARGS = "";
   public String PERL_CRITIC_ARGS = "";
+  public boolean PERL_SWITCH_ENABLED = false;
   private PerlVersion myTargetPerlVersion = PerlVersion.V5_10;
-
   @Transient
   private Set<String> SELF_NAMES_SET = null;
 
@@ -67,7 +67,7 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   private PerlSharedSettings() {}
 
-  private PerlSharedSettings(Project project) {
+  public PerlSharedSettings(Project project) {
     myProject = project;
   }
 
