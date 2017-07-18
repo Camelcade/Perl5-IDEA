@@ -33,6 +33,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
@@ -52,6 +53,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.roots.*;
 import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
@@ -115,6 +117,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
+  private Disposable myDisposable;
 
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
@@ -123,6 +126,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    myDisposable = Disposer.newDisposable();
     EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
     myReadAttributes = scheme.getAttributes(EditorColors.SEARCH_RESULT_ATTRIBUTES);
     myWriteAttributes = scheme.getAttributes(EditorColors.WRITE_SEARCH_RESULT_ATTRIBUTES);
@@ -130,6 +134,12 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
     setUpLibrary();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+    myDisposable.dispose();
+    super.tearDown();
   }
 
   public String getTestResultsFilePath() {
@@ -385,11 +395,11 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   }
 
   private void addVirtualFileFilter() {
-    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getProject());
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, myDisposable);
   }
 
   private void removeVirtualFileFilter() {
-    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getProject());
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, myDisposable);
   }
 
   private void doTestCompletionCheck(@NotNull String answerSuffix) {
