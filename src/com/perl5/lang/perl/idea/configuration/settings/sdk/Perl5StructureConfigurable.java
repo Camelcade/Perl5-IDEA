@@ -55,6 +55,10 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     return myPanel.getMainPanel();
   }
 
+  public Perl5StructurePanel getPanel() {
+    return myPanel;
+  }
+
   @Nullable
   public Perl5SdkWrapper getSelectedItem() {
     return (Perl5SdkWrapper)myPanel.getSdkComboBox().getSelectedItem();

@@ -16,18 +16,14 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
-import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
@@ -42,36 +38,44 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   }
 
   @Override
+  protected void initPanel() {
+    super.initPanel();
+    getPanel().getSdkPanel().setVisible(false);
+  }
+
+  @Override
   public void apply() throws ConfigurationException {
-    WriteAction.run(() -> {
-      ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
-      Sdk selectedSdk = getSelectedSdk();
-      if (selectedSdk == null) {
-        modifiableModel.inheritSdk();
-      }
-      else {
-        modifiableModel.setSdk(selectedSdk);
-      }
-      modifiableModel.commit();
-    });
+    //WriteAction.run(() -> {
+    //  ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
+    //  Sdk selectedSdk = getSelectedSdk();
+    //  if (selectedSdk == null) {
+    //    modifiableModel.inheritSdk();
+    //  }
+    //  else {
+    //    modifiableModel.setSdk(selectedSdk);
+    //  }
+    //  modifiableModel.commit();
+    //});
   }
 
   @Override
   protected List<Perl5SdkWrapper> getSdkItems() {
-    List<Perl5SdkWrapper> defaultItems = super.getSdkItems();
-    defaultItems.add(0, myUseProjectSdkItem);
-    //defaultItems.add(0, DISABLE_PERL_ITEM);
-    return defaultItems;
+    return Collections.singletonList(myUseProjectSdkItem);
+    //List<Perl5SdkWrapper> defaultItems = super.getSdkItems();
+    //defaultItems.add(0, myUseProjectSdkItem);
+    ////defaultItems.add(0, DISABLE_PERL_ITEM);
+    //return defaultItems;
   }
 
   @Nullable
   @Override
   protected Perl5SdkWrapper getDefaultSelectedItem() {
-    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(myModule);
-    if (moduleRootManager.isSdkInherited()) {
-      return myUseProjectSdkItem;
-    }
-    Sdk moduleSdk = moduleRootManager.getSdk();
-    return moduleSdk == null ? null : new Perl5RealSdkWrapper(moduleSdk);
+    return myUseProjectSdkItem;
+    //ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(myModule);
+    //if (moduleRootManager.isSdkInherited()) {
+    //  return myUseProjectSdkItem;
+    //}
+    //Sdk moduleSdk = moduleRootManager.getSdk();
+    //return moduleSdk == null ? null : new Perl5RealSdkWrapper(moduleSdk);
   }
 }
