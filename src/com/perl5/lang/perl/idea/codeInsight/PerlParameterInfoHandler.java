@@ -34,12 +34,9 @@ import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 26.06.2016.
@@ -196,14 +193,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     if (target == null || !(target instanceof PerlSubDefinitionElement)) {
       return null;
     }
-
-    @SuppressWarnings("unchecked") List<PerlSubArgument> subArgumentsList = ((PerlSubDefinitionElement)target).getSubArgumentsList();
-
-    if (((PerlSubDefinitionElement)target).isMethod() && subArgumentsList.size() > 0) {
-      subArgumentsList.remove(0);
-    }
-
-    return PerlParameterInfo.wrapArguments(subArgumentsList);
+    return PerlParameterInfo.wrapArguments(((PerlSubDefinitionElement)target).getSubArgumentsListWithoutSelf());
   }
 
   @Nullable

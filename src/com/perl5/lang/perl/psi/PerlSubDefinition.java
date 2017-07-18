@@ -32,13 +32,16 @@ public interface PerlSubDefinition extends PerlSub {
   @NotNull
   List<PerlSubArgument> getSubArgumentsList();
 
-  default String getSubArgumentsListAsString() {
+  default List<PerlSubArgument> getSubArgumentsListWithoutSelf() {
     List<PerlSubArgument> subArguments = getSubArgumentsList();
 
     if (isMethod() && !subArguments.isEmpty()) {
-      subArguments = subArguments.size() > 1 ? subArguments.subList(1, subArguments.size()) : Collections.emptyList();
+      return subArguments.size() > 1 ? subArguments.subList(1, subArguments.size()) : Collections.emptyList();
     }
+    return subArguments;
+  }
 
-    return PerlSubUtil.getArgumentsListAsString(subArguments);
+  default String getSubArgumentsListAsString() {
+    return PerlSubUtil.getArgumentsListAsString(getSubArgumentsListWithoutSelf());
   }
 }
