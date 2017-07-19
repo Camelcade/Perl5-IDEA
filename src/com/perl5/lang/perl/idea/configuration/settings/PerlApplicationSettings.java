@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
   name = "Perl5ApplicationSettings",
-  storages = @Storage(id = "other", file = PerlPathMacros.PERL5_APP_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.PERL5_APP_SETTINGS_FILE)
 )
 public class PerlApplicationSettings implements PersistentStateComponent<PerlApplicationSettings> {
   public String pluginVersion = "";

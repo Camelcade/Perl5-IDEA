@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.ui.CollectionComboBoxModel;
@@ -86,12 +86,10 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     });
     sdkComboBox.setSelectedItem(getDefaultSelectedItem());
 
-    ApplicationManager.getApplication().getMessageBus().connect().subscribe(ProjectJdkTable.JDK_TABLE_TOPIC, this);
+    ApplicationManager.getApplication().getMessageBus().connect().subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
 
     // add sdk button
-    myPanel.getAddButton().addActionListener(e -> {
-      SdkConfigurationUtil.selectSdkHome(PerlSdkType.getInstance(), this::addSdk);
-    });
+    myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.getInstance(), this::addSdk));
   }
 
   private void updateSdkModel(@Nullable Perl5SdkWrapper selectedItem) {
@@ -111,20 +109,20 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     PerlSdkType sdkType = PerlSdkType.getInstance();
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(sdkType,
                                                                  home,
-                                                                 Arrays.asList(ProjectJdkTable.getInstance().getAllJdks()));
+                                                                 Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
     final ProjectJdkImpl newSdk = new ProjectJdkImpl(newSdkName, sdkType);
     newSdk.setHomePath(home);
     sdkType.setupSdkPaths(newSdk);
     // should we check for version string?
     myChange = true;
-    WriteAction.run(() -> ProjectJdkTable.getInstance().addJdk(newSdk));
+    PerlSdkTable.getInstance().addJdk(newSdk);
   }
 
   @Nullable
   protected abstract Perl5SdkWrapper getDefaultSelectedItem();
 
   protected List<Perl5SdkWrapper> getSdkItems() {
-    return ContainerUtil.map(ProjectJdkTable.getInstance().getAllJdks(), Perl5RealSdkWrapper::new);
+    return ContainerUtil.map(PerlSdkTable.getInstance().getAllJdks(), Perl5RealSdkWrapper::new);
   }
 
   @Override
