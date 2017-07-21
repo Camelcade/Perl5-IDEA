@@ -161,4 +161,9 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
   public void jdkNameChanged(Sdk jdk, String previousName) {
 
   }
+
+  @Override
+  public void disposeUIResources() {
+    myPanel = null;
+  }
 }

@@ -16,18 +16,25 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.util.ui.JBUI;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
 public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   private final Perl5SdkWrapper myUseProjectSdkItem;
+  private final Disposable myDisposable = Disposer.newDisposable(Perl5ModuleConfigurable.class.toString());
 
   @NotNull
   private final Module myModule;
@@ -40,7 +47,11 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   @Override
   protected void initPanel() {
     super.initPanel();
-    getPanel().getSdkPanel().setVisible(false);
+    Perl5StructurePanel perlPanel = getPanel();
+    JPanel mainPanel = perlPanel.getAdditionalPanel();
+    perlPanel.getSdkPanel().setVisible(false);
+    mainPanel.add(new PerlContentEntriesEditor(myModule, myDisposable).createComponent(),
+                  new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
   }
 
   @Override
@@ -77,5 +88,11 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
     //}
     //Sdk moduleSdk = moduleRootManager.getSdk();
     //return moduleSdk == null ? null : new Perl5RealSdkWrapper(moduleSdk);
+  }
+
+  @Override
+  public void disposeUIResources() {
+    super.disposeUIResources();
+    Disposer.dispose(myDisposable);
   }
 }

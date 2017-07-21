@@ -41,6 +41,7 @@ import java.util.Comparator;
 /**
  * Created by hurricup on 30.08.2015.
  */
+@Deprecated
 public class PerlMicroIdeSettingsLoader implements ProjectComponent {
   private static final String PERL5_LIBRARY_NAME = "Perl5 library: ";
 

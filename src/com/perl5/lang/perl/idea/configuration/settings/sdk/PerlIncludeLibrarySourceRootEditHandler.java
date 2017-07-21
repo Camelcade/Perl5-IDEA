@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.paths;
+package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.openapi.actionSystem.CustomShortcutSet;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
