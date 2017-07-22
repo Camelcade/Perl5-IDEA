@@ -26,23 +26,34 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.FactoryMap;
+import com.intellij.util.containers.Predicate;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
+import org.jetbrains.jps.model.serialization.JpsModelSerializerExtension;
+import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class PerlModuleExtension extends ModuleExtension implements PersistentStateComponentWithModificationTracker<Element> {
   private static final Logger LOG = Logger.getInstance(PerlModuleExtension.class);
+  private static String PERL_CONFIG = "perl5";
   private static String ELEMENT_PATH = "path";
   private static String ATTRIBUTE_VALUE = "value";
+  private static String ATTRIBUTE_TYPE = "type";
   private final boolean myIsWritable;
   private long myModificationTracker;
   private PerlModuleExtension myOriginal;
   private Module myModule;
-  private List<VirtualFile> myLibraries = new ArrayList<>();
+  private static FactoryMap<String, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_ID_MAP =
+    FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
+  private static FactoryMap<JpsModuleSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
+    FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
+  private Map<VirtualFile, JpsModuleSourceRootType> myRoots = new LinkedHashMap<>();
 
   public PerlModuleExtension(Module module) {
     myModule = module;
@@ -52,7 +63,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   private PerlModuleExtension(@NotNull PerlModuleExtension original, boolean writable) {
     myModule = original.myModule;
-    myLibraries.addAll(original.myLibraries);
+    myRoots.putAll(original.myRoots);
     myIsWritable = writable;
     myOriginal = original;
   }
@@ -64,38 +75,43 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   @Override
   public void commit() {
+    LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifyable model");
     if (isChanged()) {
       synchronized (myOriginal) {
-        myOriginal.myLibraries.clear();
-        myOriginal.myLibraries.addAll(myLibraries);
-        myModificationTracker++;
+        myOriginal.myRoots.clear();
+        myOriginal.myRoots.putAll(myRoots);
+        myOriginal.myModificationTracker++;
       }
     }
   }
 
   @Override
   public boolean isChanged() {
-    return !myLibraries.equals(myOriginal.myLibraries);
+    return !myRoots.equals(myOriginal.myRoots);
   }
 
-  public synchronized void addLibrary(@NotNull VirtualFile library) {
+  public synchronized void setRoot(@NotNull VirtualFile root, @NotNull JpsModuleSourceRootType type) {
     LOG.assertTrue(myIsWritable, "Obtain modifiableModel first");
-    myLibraries.add(library);
+    myRoots.put(root, type);
     myModificationTracker++;
   }
 
-  public synchronized void setLibraries(@NotNull List<VirtualFile> libraries) {
+  public synchronized void removeRoot(@NotNull VirtualFile root) {
     LOG.assertTrue(myIsWritable, "Obtain modifiableModel first");
-    myLibraries.clear();
-    myLibraries.addAll(libraries);
+    myRoots.remove(root);
     myModificationTracker++;
+  }
+
+  @Nullable
+  public JpsModuleSourceRootType getRootType(@NotNull VirtualFile virtualFile) {
+    return myRoots.get(virtualFile);
   }
 
   @Override
   public void dispose() {
     myOriginal = null;
     myModule = null;
-    myLibraries = null;
+    myRoots = null;
   }
 
   @Override
@@ -106,38 +122,65 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   @Nullable
   @Override
   public Element getState() {
-    Element state = new Element("libs");
+    Element state = new Element("root");
+    Element perlConfig = new Element(PERL_CONFIG);
+    state.addContent(perlConfig);
+
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
-    for (VirtualFile library : myLibraries) {
-      if (!library.isValid() || !library.isDirectory()) {
+
+    for (VirtualFile root : myRoots.keySet()) {
+      if (!root.isValid() || !root.isDirectory()) {
         continue;
       }
-      String collapsedPath = macroManager.collapsePath(library.getCanonicalPath());
+      JpsModuleSourceRootPropertiesSerializer serializer = SERIALIZER_BY_TYPE_MAP.get(myRoots.get(root));
+      if (serializer == null) {
+        continue;
+      }
+
+      String collapsedPath = macroManager.collapsePath(root.getCanonicalPath());
       if (StringUtil.isEmpty(collapsedPath)) {
         continue;
       }
 
       Element pathElement = new Element(ELEMENT_PATH);
       pathElement.setAttribute(ATTRIBUTE_VALUE, collapsedPath);
-      state.addContent(pathElement);
+      pathElement.setAttribute(ATTRIBUTE_TYPE, serializer.getTypeId());
+      perlConfig.addContent(pathElement);
     }
     return state;
   }
 
   @Override
   public void loadState(Element state) {
-    myLibraries.clear();
+    state = state.getChild(PERL_CONFIG);
+    myRoots.clear();
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
     for (Element pathElement : state.getChildren(ELEMENT_PATH)) {
+      JpsModuleSourceRootPropertiesSerializer serializer = SERIALIZER_BY_ID_MAP.get(pathElement.getAttributeValue(ATTRIBUTE_TYPE));
+      if (serializer == null) {
+        continue;
+      }
       String expandedPath = macroManager.expandPath(pathElement.getAttributeValue(ATTRIBUTE_VALUE));
       VirtualFile libRoot = VfsUtil.findFileByIoFile(new File(expandedPath), true);
-      if (libRoot != null) {
-        myLibraries.add(libRoot);
+      if (libRoot != null && libRoot.isValid() && libRoot.isDirectory()) {
+        myRoots.put(libRoot, (JpsModuleSourceRootType)serializer.getType());
       }
     }
   }
 
   public static PerlModuleExtension getInstance(@NotNull Module module) {
     return ModuleRootManager.getInstance(module).getModuleExtension(PerlModuleExtension.class);
+  }
+
+  @Nullable
+  private static JpsModuleSourceRootPropertiesSerializer getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer> predicate) {
+    for (JpsModelSerializerExtension extension : JpsModelSerializerExtension.getExtensions()) {
+      for (JpsModuleSourceRootPropertiesSerializer<?> serializer : extension.getModuleSourceRootPropertiesSerializers()) {
+        if (predicate.apply(serializer)) {
+          return serializer;
+        }
+      }
+    }
+    return null;
   }
 }
