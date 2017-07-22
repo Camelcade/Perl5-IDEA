@@ -23,6 +23,7 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.util.ui.JBUI;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,6 +40,9 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   @NotNull
   private final Module myModule;
 
+  @NotNull
+  private PerlContentEntriesEditor myPerlContentEntriesEditor;
+
   public Perl5ModuleConfigurable(@NotNull Module module, @NotNull Perl5ProjectConfigurable projectConfigurable) {
     myModule = module;
     myUseProjectSdkItem = new Perl5ParentSdkWrapper(projectConfigurable);
@@ -50,44 +54,35 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
     Perl5StructurePanel perlPanel = getPanel();
     JPanel mainPanel = perlPanel.getAdditionalPanel();
     perlPanel.getSdkPanel().setVisible(false);
-    mainPanel.add(new PerlContentEntriesEditor(myModule, myDisposable).createComponent(),
+    myPerlContentEntriesEditor = new PerlContentEntriesEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
+    mainPanel.add(myPerlContentEntriesEditor.createComponent(),
                   new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
   }
 
   @Override
+  public boolean isModified() {
+    return super.isModified() || myPerlContentEntriesEditor.isModified();
+  }
+
+  @Override
   public void apply() throws ConfigurationException {
-    //WriteAction.run(() -> {
-    //  ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(myModule).getModifiableModel();
-    //  Sdk selectedSdk = getSelectedSdk();
-    //  if (selectedSdk == null) {
-    //    modifiableModel.inheritSdk();
-    //  }
-    //  else {
-    //    modifiableModel.setSdk(selectedSdk);
-    //  }
-    //  modifiableModel.commit();
-    //});
+    myPerlContentEntriesEditor.apply();
+  }
+
+  @Override
+  public void reset() {
+    myPerlContentEntriesEditor.reset();
   }
 
   @Override
   protected List<Perl5SdkWrapper> getSdkItems() {
     return Collections.singletonList(myUseProjectSdkItem);
-    //List<Perl5SdkWrapper> defaultItems = super.getSdkItems();
-    //defaultItems.add(0, myUseProjectSdkItem);
-    ////defaultItems.add(0, DISABLE_PERL_ITEM);
-    //return defaultItems;
   }
 
   @Nullable
   @Override
   protected Perl5SdkWrapper getDefaultSelectedItem() {
     return myUseProjectSdkItem;
-    //ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(myModule);
-    //if (moduleRootManager.isSdkInherited()) {
-    //  return myUseProjectSdkItem;
-    //}
-    //Sdk moduleSdk = moduleRootManager.getSdk();
-    //return moduleSdk == null ? null : new Perl5RealSdkWrapper(moduleSdk);
   }
 
   @Override

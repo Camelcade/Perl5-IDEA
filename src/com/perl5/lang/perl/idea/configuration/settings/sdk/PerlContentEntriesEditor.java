@@ -23,87 +23,73 @@ import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.ide.util.treeView.NodeRenderer;
 import com.intellij.idea.ActionsBundle;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
+import com.intellij.openapi.fileChooser.FileElement;
 import com.intellij.openapi.fileChooser.actions.NewFolderAction;
+import com.intellij.openapi.fileChooser.ex.FileNodeDescriptor;
 import com.intellij.openapi.fileChooser.ex.FileSystemTreeImpl;
 import com.intellij.openapi.fileChooser.impl.FileTreeBuilder;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
-import com.intellij.openapi.project.ProjectBundle;
+import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.roots.ui.configuration.actions.IconWithTextAction;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.ui.treeStructure.Tree;
+import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.tree.TreeUtil;
-import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.jps.model.JpsDummyElement;
+import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Locale;
+import java.util.List;
 
 /**
  * Created by hurricup on 07.06.2015.
  */
 public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable {
-  private final FileChooserDescriptor myDescriptor;
   private JPanel myTreePanel;
   private Tree myTree = new Tree();
   private FileSystemTreeImpl myFileSystemTree;
   private Module myModule;
   private DefaultActionGroup myEditingActionsGroup = new DefaultActionGroup();
+  private PerlModuleExtension myModifiableModel;
 
-  public PerlContentEntriesEditor(@NotNull Module module, @NotNull Disposable parentDisposable) {
+  public PerlContentEntriesEditor(@NotNull Module module, @NotNull Disposable parentDisposable, JpsModuleSourceRootType<?>... types) {
     Disposer.register(parentDisposable, this);
 
-    for (ModuleSourceRootEditHandler<JpsDummyElement> handler : Collections
-      .singletonList(ModuleSourceRootEditHandler.getEditHandler(JpsPerlLibrarySourceRootType.INSTANCE))) {
-
-      ToggleAction toggleAction = new ToggleAction() {
-
-
-        @Override
-        public boolean isSelected(AnActionEvent e) {
-          return false;
-        }
-
-        @Override
-        public void setSelected(AnActionEvent e, boolean state) {
-
-        }
-
-        @Override
-        public boolean displayTextInToolbar() {
-          return true;
-        }
-      };
-
-      Presentation presentation = toggleAction.getTemplatePresentation();
-      presentation.setText(handler.getMarkRootButtonText());
-      presentation.setDescription(ProjectBundle.message("module.toggle.sources.action.description",
-                                                        handler.getFullRootTypeName().toLowerCase(Locale.getDefault())));
-      presentation.setIcon(handler.getRootIcon());
-
-      myEditingActionsGroup.add(toggleAction);
+    for (JpsModuleSourceRootType<?> type : types) {
+      ModuleSourceRootEditHandler handler = ModuleSourceRootEditHandler.getEditHandler(type);
+      if (handler == null) {
+        throw new IncorrectOperationException("Missing ModuleSourceRootEditHandler for: " + type);
+      }
+      myEditingActionsGroup.add(new PerlToggleSourceRootAction(this, handler));
     }
 
 
     myModule = module;
 
-    myTree.setRootVisible(true);
+    VirtualFile[] contentRoots = ModuleRootManager.getInstance(myModule).getContentRoots();
+    myTree.setRootVisible(contentRoots.length < 2);
     myTree.setShowsRootHandles(true);
     TreeUtil.installActions(myTree);
     new TreeSpeedSearch(myTree);
@@ -123,12 +109,12 @@ public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable
                                            JBUI.emptyInsets(), 0, 0));
 
     myTreePanel.setVisible(true);
-    myDescriptor = FileChooserDescriptorFactory.createMultipleFoldersDescriptor();
-    myDescriptor.setShowFileSystemRoots(false);
-    myDescriptor.setRoots(ModuleRootManager.getInstance(myModule).getContentRoots());
+    FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createMultipleFoldersDescriptor();
+    descriptor.setShowFileSystemRoots(false);
+    descriptor.setRoots(contentRoots);
 
     myFileSystemTree = new FileSystemTreeImpl(module.getProject(),
-                                              myDescriptor,
+                                              descriptor,
                                               myTree,
                                               new MyTreeCellRenderer(),
                                               () -> {
@@ -165,12 +151,22 @@ public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable
 
   @Override
   public boolean isModified() {
-    return false;
+    return myModifiableModel.isChanged();
   }
 
   @Override
   public void apply() throws ConfigurationException {
+    assert myModifiableModel != null;
+    myModifiableModel.commit();
+  }
 
+  @Override
+  public void reset() {
+    if (myModifiableModel != null) {
+      myModifiableModel.dispose();
+      myModifiableModel = null;
+    }
+    myModifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(myModule).getModifiableModel(true);
   }
 
   @Override
@@ -216,7 +212,74 @@ public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable
     }
   }
 
-  private class MyTreeCellRenderer extends NodeRenderer {
+  @NotNull
+  PerlModuleExtension getModifiableModel() {
+    return myModifiableModel;
+  }
 
+  @NotNull
+  VirtualFile[] getSelectedFiles() {
+    final TreePath[] selectionPaths = myTree.getSelectionPaths();
+    if (selectionPaths == null) {
+      return VirtualFile.EMPTY_ARRAY;
+    }
+    final List<VirtualFile> selected = new ArrayList<>();
+    for (TreePath treePath : selectionPaths) {
+      final DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePath.getLastPathComponent();
+      final Object nodeDescriptor = node.getUserObject();
+      if (!(nodeDescriptor instanceof FileNodeDescriptor)) {
+        return VirtualFile.EMPTY_ARRAY;
+      }
+      final FileElement fileElement = ((FileNodeDescriptor)nodeDescriptor).getElement();
+      final VirtualFile file = fileElement.getFile();
+      if (file != null) {
+        selected.add(file);
+      }
+    }
+    return selected.toArray(new VirtualFile[selected.size()]);
+  }
+
+  private class MyTreeCellRenderer extends NodeRenderer {
+    @Override
+    public void customizeCellRenderer(@NotNull JTree tree,
+                                      Object value,
+                                      boolean selected,
+                                      boolean expanded,
+                                      boolean leaf,
+                                      int row,
+                                      boolean hasFocus) {
+      super.customizeCellRenderer(tree, value, selected, expanded, leaf, row, hasFocus);
+      final Object userObject = ((DefaultMutableTreeNode)value).getUserObject();
+      if (!(userObject instanceof NodeDescriptor)) {
+        return;
+      }
+      final Object element = ((NodeDescriptor)userObject).getElement();
+      if (!(element instanceof FileElement)) {
+        return;
+      }
+      final VirtualFile file = ((FileElement)element).getFile();
+      if (file == null || !file.isDirectory()) {
+        return;
+      }
+      JpsModuleSourceRootType<?> rootType = myModifiableModel.getRootType(file);
+      if (rootType == null) {
+        return;
+      }
+      ModuleSourceRootEditHandler handler = ModuleSourceRootEditHandler.getEditHandler(rootType);
+      if (handler == null) {
+        return;
+      }
+      /*
+      final ContentEntry contentEntry = editor.getContentEntry();
+      if (contentEntry != null) {
+        final String prefix = getPresentablePrefix(contentEntry, file);
+        if (!prefix.isEmpty()) {
+          append(" (" + prefix + ")", new SimpleTextAttributes(SimpleTextAttributes.STYLE_PLAIN, JBColor.GRAY));
+        }
+        setIcon(updateIcon(contentEntry, file, getIcon()));
+      }
+      */
+      setIcon(handler.getRootIcon());
+    }
   }
 }
