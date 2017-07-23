@@ -31,8 +31,8 @@ import java.awt.*;
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlIncludeLibrarySourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
-  public PerlIncludeLibrarySourceRootEditHandler() {
+public class PerlLibrarySourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
+  public PerlLibrarySourceRootEditHandler() {
     super(JpsPerlLibrarySourceRootType.INSTANCE);
   }
 

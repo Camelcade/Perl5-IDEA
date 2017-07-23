@@ -197,7 +197,7 @@
                          provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5ProjectStructureConfigurableProvider"/>
 
     <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlIncludeLibrarySourceRootEditHandler"/>
+        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibrarySourceRootEditHandler"/>
 
 
     <codeInsight.lineMarkerProvider language="Perl5"
