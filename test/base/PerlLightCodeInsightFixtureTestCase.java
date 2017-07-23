@@ -138,7 +138,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
   @Override
   protected void tearDown() throws Exception {
-    myDisposable.dispose();
+    Disposer.dispose(myDisposable);
     super.tearDown();
   }
 
