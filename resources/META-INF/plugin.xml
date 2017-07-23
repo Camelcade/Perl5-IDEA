@@ -1000,9 +1000,11 @@
               text="Generate Getters and Setters" description="Generate class getters and setters"/>
     </group>
 
-    <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction">
+    <group>
       <add-to-group group-id="MarkRootGroup"/>
-    </action>
+      <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
+      <action id="Perl.UnPerlRoot" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>
+    </group>
 
   </actions>
 

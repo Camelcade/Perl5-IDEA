@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.actionSystem.CustomShortcutSet;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.ui.JBColor;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +40,7 @@ public class PerlLibrarySourceRootEditHandler extends ModuleSourceRootEditHandle
   @NotNull
   @Override
   public String getRootTypeName() {
-    return "Libraries";
+    return PerlBundle.message("perl.action.lib.root.type");
   }
 
   @NotNull
@@ -75,6 +76,6 @@ public class PerlLibrarySourceRootEditHandler extends ModuleSourceRootEditHandle
   @NotNull
   @Override
   public String getUnmarkRootButtonText() {
-    return "Unmark library directory";
+    return PerlBundle.message("perl.action.unmark.perl.lib");
   }
 }

@@ -16,49 +16,13 @@
 
 package com.perl5.lang.perl.idea.actions;
 
-import com.intellij.ide.projectView.actions.MarkSourceRootAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
-import com.intellij.openapi.roots.ContentFolder;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction {
+public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
   public PerlMarkLibrarySourceRootAction() {
     super(JpsPerlLibrarySourceRootType.INSTANCE);
-  }
-
-  @Override
-  protected final boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module) {
-    List<VirtualFile> rootsInQuestion = new ArrayList<>();
-    rootsInQuestion.addAll(selection.mySelectedDirectories);
-    rootsInQuestion.addAll(ContainerUtil.map(selection.mySelectedRoots, ContentFolder::getFile));
-
-    return isEnabled(rootsInQuestion, module);
-  }
-
-  protected boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module) {
-    if (files.isEmpty()) {
-      return false;
-    }
-    return !JpsPerlLibrarySourceRootType.INSTANCE.equals(PerlModuleExtension.getInstance(module).getRootType(files.get(0)));
-  }
-
-  @Override
-  protected void modifyRoots(@NotNull AnActionEvent e, @NotNull Module module, @NotNull VirtualFile[] files) {
-    PerlModuleExtension modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(module).getModifiableModel(true);
-    for (VirtualFile virtualFile : files) {
-      modifiableModel.setRoot(virtualFile, JpsPerlLibrarySourceRootType.INSTANCE);
-    }
-    modifiableModel.commit();
   }
 }
