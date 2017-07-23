@@ -16,31 +16,21 @@
 
 package com.perl5.lang.perl.idea.configuration.settings;
 
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.*;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.FileContentUtil;
-import com.intellij.util.PlatformUtils;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
-import com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +50,6 @@ public class PerlSettingsConfigurable implements Configurable {
   RawCommandLineEditor perlCriticArgsInputField;
   TextFieldWithBrowseButton perlTidyPathInputField;
   RawCommandLineEditor perlTidyArgsInputField;
-  TextFieldWithBrowseButton perlPathInputField;
   JTextField deparseArgumentsTextField;
   JPanel regeneratePanel;
   JButton regenerateButton;
@@ -99,10 +88,6 @@ public class PerlSettingsConfigurable implements Configurable {
   public JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
-
-    if (!PlatformUtils.isIntelliJ()) {
-      createMicroIdeComponents(builder);
-    }
 
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
     myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
@@ -205,7 +190,7 @@ public class PerlSettingsConfigurable implements Configurable {
 
     //noinspection Since15
     selfNamesModel = new CollectionListModel<>();
-    selfNamesList = new JBList(selfNamesModel);
+    selfNamesList = new JBList<>(selfNamesModel);
     builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.self.names.label")), ToolbarDecorator
       .createDecorator(selfNamesList)
       .setAddAction(anActionButton ->
@@ -232,69 +217,9 @@ public class PerlSettingsConfigurable implements Configurable {
     return builder.getPanel();
   }
 
-  protected void createMicroIdeComponents(FormBuilder builder) {
-    perlPathInputField = new TextFieldWithBrowseButton() {
-
-      @Override
-      public void addBrowseFolderListener(@Nullable String title,
-                                          @Nullable String description,
-                                          @Nullable Project project,
-                                          FileChooserDescriptor fileChooserDescriptor,
-                                          TextComponentAccessor<JTextField> accessor) {
-        addActionListener(new BrowseFolderActionListener<JTextField>(title, description, this, project, fileChooserDescriptor, accessor) {
-          @Nullable
-          @Override
-          protected VirtualFile getInitialFile() {
-            VirtualFile virtualFile = super.getInitialFile();
-            if (virtualFile == null) {
-              String directoryName = PerlRunUtil.getPathFromPerl();
-              if (StringUtil.isNotEmpty(directoryName)) {
-                directoryName = FileUtil.toSystemIndependentName(directoryName);
-                VirtualFile path = LocalFileSystem.getInstance().findFileByPath(expandPath(directoryName));
-                while (path == null && directoryName.length() > 0) {
-                  int pos = directoryName.lastIndexOf('/');
-                  if (pos <= 0) {
-                    break;
-                  }
-                  directoryName = directoryName.substring(0, pos);
-                  path = LocalFileSystem.getInstance().findFileByPath(directoryName);
-                }
-                return path;
-              }
-            }
-            return virtualFile;
-          }
-        });
-      }
-    };
-
-    perlPathInputField.getTextField().setEditable(false);
-
-    FileChooserDescriptor descriptor = new FileChooserDescriptor(false, true, false, false, false, false) {
-      @Override
-      public void validateSelectedFiles(VirtualFile[] files) throws Exception {
-        PerlSdkType sdkType = PerlSdkType.getInstance();
-        if (!sdkType.isValidSdkHome(files[0].getCanonicalPath())) {
-          throw new ConfigurationException(PerlBundle.message("perl.config.error.exe.not.found"));
-        }
-      }
-    };
-
-    perlPathInputField.addBrowseFolderListener(
-      PerlBundle.message("perl.config.interpreter.title"),
-      PerlBundle.message("perl.config.interpreter.text"),
-      null, // project
-      descriptor
-    );
-
-
-    builder.addLabeledComponent(PerlBundle.message("perl.config.interpreter.label"), perlPathInputField, 1);
-  }
-
   @Override
   public boolean isModified() {
-    return isMicroIdeModified() ||
-           mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
+    return mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
            mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
            mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
            myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected() ||
@@ -308,13 +233,6 @@ public class PerlSettingsConfigurable implements Configurable {
            !StringUtil.equals(myLocalSettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
            !mySharedSettings.selfNames.equals(selfNamesModel.getItems());
-  }
-
-  protected boolean isMicroIdeModified() {
-    return !PlatformUtils.isIntelliJ() &&
-           (
-             !myLocalSettings.PERL_PATH.equals(perlPathInputField.getText())
-           );
   }
 
   @Override
@@ -333,12 +251,12 @@ public class PerlSettingsConfigurable implements Configurable {
 
     if (mySharedSettings.PERL_SWITCH_ENABLED != enablePerlSwitchCheckbox.isSelected()) {
       mySharedSettings.PERL_SWITCH_ENABLED = enablePerlSwitchCheckbox.isSelected();
-      reparseOpenFiles |= true;
+      reparseOpenFiles = true;
     }
 
     if (myLocalSettings.ENABLE_REGEX_INJECTIONS != allowRegexpInjections.isSelected()) {
       myLocalSettings.ENABLE_REGEX_INJECTIONS = allowRegexpInjections.isSelected();
-      reparseOpenFiles |= true;
+      reparseOpenFiles = true;
     }
 
     myLocalSettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
@@ -347,27 +265,10 @@ public class PerlSettingsConfigurable implements Configurable {
     mySharedSettings.selfNames.clear();
     mySharedSettings.selfNames.addAll(selfNamesModel.getItems());
 
-    if (!PlatformUtils.isIntelliJ()) {
-      applyMicroIdeSettings();
-    }
     mySharedSettings.settingsUpdated();
     if (reparseOpenFiles) {
       FileContentUtil.reparseOpenedFiles();
     }
-  }
-
-  public void applyMicroIdeSettings() {
-    myLocalSettings.PERL_PATH = perlPathInputField.getText();
-
-    ApplicationManager.getApplication().runWriteAction(
-      () ->
-      {
-        ModifiableRootModel modifiableModel =
-          ModuleRootManager.getInstance(ModuleManager.getInstance(myProject).getModules()[0]).getModifiableModel();
-        PerlMicroIdeSettingsLoader.applyClassPaths(modifiableModel);
-        modifiableModel.commit();
-      }
-    );
   }
 
   @Override
@@ -390,14 +291,6 @@ public class PerlSettingsConfigurable implements Configurable {
 
     perlTidyPathInputField.setText(myLocalSettings.PERL_TIDY_PATH);
     perlTidyArgsInputField.setText(mySharedSettings.PERL_TIDY_ARGS);
-
-    if (!PlatformUtils.isIntelliJ()) {
-      resetMicroIdeSettings();
-    }
-  }
-
-  protected void resetMicroIdeSettings() {
-    perlPathInputField.setText(myLocalSettings.PERL_PATH);
   }
 
   @Override
