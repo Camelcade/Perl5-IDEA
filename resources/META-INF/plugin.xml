@@ -172,6 +172,7 @@
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
+    <additionalLibraryRootsProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibraryProvider"/>
     <applicationService serviceInterface="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
     <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"

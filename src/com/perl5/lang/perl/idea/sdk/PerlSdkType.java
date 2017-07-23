@@ -62,7 +62,6 @@ public class PerlSdkType extends SdkType {
       if (libDir.exists() && libDir.isDirectory()) {
         VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
         if (virtualDir != null) {
-          sdkModificator.addRoot(virtualDir, OrderRootType.SOURCES);
           sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
         }
       }
