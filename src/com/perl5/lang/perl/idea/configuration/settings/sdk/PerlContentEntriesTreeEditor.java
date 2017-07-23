@@ -66,7 +66,7 @@ import java.util.List;
 /**
  * Created by hurricup on 07.06.2015.
  */
-public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable {
+public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Disposable {
   private JPanel myTreePanel;
   private Tree myTree = new Tree();
   private FileSystemTreeImpl myFileSystemTree;
@@ -74,7 +74,7 @@ public class PerlContentEntriesEditor implements UnnamedConfigurable, Disposable
   private DefaultActionGroup myEditingActionsGroup = new DefaultActionGroup();
   private PerlModuleExtension myModifiableModel;
 
-  public PerlContentEntriesEditor(@NotNull Module module, @NotNull Disposable parentDisposable, JpsModuleSourceRootType<?>... types) {
+  public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable, JpsModuleSourceRootType<?>... types) {
     Disposer.register(parentDisposable, this);
 
     for (JpsModuleSourceRootType<?> type : types) {

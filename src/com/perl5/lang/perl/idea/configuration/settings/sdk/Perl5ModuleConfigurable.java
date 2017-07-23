@@ -40,12 +40,11 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   @NotNull
   private final Module myModule;
 
-  @NotNull
-  private PerlContentEntriesEditor myPerlContentEntriesEditor;
+  private PerlContentEntriesTreeEditor myPerlContentEntriesTreeEditor;
 
-  public Perl5ModuleConfigurable(@NotNull Module module, @NotNull Perl5ProjectConfigurable projectConfigurable) {
+  public Perl5ModuleConfigurable(@NotNull Module module, @Nullable Perl5ProjectConfigurable projectConfigurable) {
     myModule = module;
-    myUseProjectSdkItem = new Perl5ParentSdkWrapper(projectConfigurable);
+    myUseProjectSdkItem = projectConfigurable == null ? NOT_SELECTED_ITEM : new Perl5ParentSdkWrapper(projectConfigurable);
   }
 
   @Override
@@ -54,24 +53,24 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
     Perl5StructurePanel perlPanel = getPanel();
     JPanel mainPanel = perlPanel.getAdditionalPanel();
     perlPanel.getSdkPanel().setVisible(false);
-    myPerlContentEntriesEditor = new PerlContentEntriesEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
-    mainPanel.add(myPerlContentEntriesEditor.createComponent(),
+    myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
+    mainPanel.add(myPerlContentEntriesTreeEditor.createComponent(),
                   new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
   }
 
   @Override
   public boolean isModified() {
-    return super.isModified() || myPerlContentEntriesEditor.isModified();
+    return super.isModified() || myPerlContentEntriesTreeEditor.isModified();
   }
 
   @Override
   public void apply() throws ConfigurationException {
-    myPerlContentEntriesEditor.apply();
+    myPerlContentEntriesTreeEditor.apply();
   }
 
   @Override
   public void reset() {
-    myPerlContentEntriesEditor.reset();
+    myPerlContentEntriesTreeEditor.reset();
   }
 
   @Override

@@ -28,10 +28,10 @@ import java.util.Locale;
 
 public class PerlToggleSourceRootAction extends ToggleAction {
   @NotNull
-  private final PerlContentEntriesEditor myEditor;
+  private final PerlContentEntriesTreeEditor myEditor;
   private final ModuleSourceRootEditHandler myHandler;
 
-  public PerlToggleSourceRootAction(@NotNull PerlContentEntriesEditor editor,
+  public PerlToggleSourceRootAction(@NotNull PerlContentEntriesTreeEditor editor,
                                     @NotNull ModuleSourceRootEditHandler handler) {
     super(handler.getMarkRootButtonText(),
           ProjectBundle.message("module.toggle.sources.action.description",
