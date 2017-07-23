@@ -28,11 +28,5 @@
     <project-components>
     </project-components>
     <actions>
-        <!-- Should be in java depts ? -->
-        <action id="Perl.MarkAsLibraryDirectory"
-                class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction">
-            <add-to-group group-id="MarkRootGroup"/>
-        </action>
-
     </actions>
 </idea-plugin>

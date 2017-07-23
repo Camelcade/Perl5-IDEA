@@ -18,20 +18,16 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.projectView.actions.MarkSourceRootAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.impl.DirectoryIndex;
+import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
+import com.intellij.openapi.roots.ContentFolder;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import com.perl5.lang.perl.idea.modules.PerlModuleType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -42,62 +38,27 @@ public class PerlMarkLibrarySourceRootAction extends MarkSourceRootAction {
   }
 
   @Override
-  protected boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module) {
-    return super.isEnabled(selection, module) && ModuleType.get(module) == PerlModuleType.getInstance();
+  protected final boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module) {
+    List<VirtualFile> rootsInQuestion = new ArrayList<>();
+    rootsInQuestion.addAll(selection.mySelectedDirectories);
+    rootsInQuestion.addAll(ContainerUtil.map(selection.mySelectedRoots, ContentFolder::getFile));
+
+    return isEnabled(rootsInQuestion, module);
+  }
+
+  protected boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module) {
+    if (files.isEmpty()) {
+      return false;
+    }
+    return !JpsPerlLibrarySourceRootType.INSTANCE.equals(PerlModuleExtension.getInstance(module).getRootType(files.get(0)));
   }
 
   @Override
-  public void actionPerformed(AnActionEvent e) {
-    super.actionPerformed(e);
-
-    VirtualFile[] files = e.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
-    final Module module = getModule(e, files);
-    if (module == null) {
-      return;
+  protected void modifyRoots(@NotNull AnActionEvent e, @NotNull Module module, @NotNull VirtualFile[] files) {
+    PerlModuleExtension modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(module).getModifiableModel(true);
+    for (VirtualFile virtualFile : files) {
+      modifiableModel.setRoot(virtualFile, JpsPerlLibrarySourceRootType.INSTANCE);
     }
-
-    final ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
-    ApplicationManager.getApplication().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        modifiableModel.commit();
-        module.getProject().save();
-      }
-    });
-  }
-
-  // following methods copied from parent
-  @Nullable
-  private static Module getModule(@NotNull AnActionEvent e, @Nullable VirtualFile[] files) {
-    if (files == null) {
-      return null;
-    }
-    Module module = e.getData(LangDataKeys.MODULE);
-    if (module == null) {
-      module = findParentModule(e.getProject(), files);
-    }
-    return module;
-  }
-
-  @Nullable
-  private static Module findParentModule(@Nullable Project project, @NotNull VirtualFile[] files) {
-    if (project == null) {
-      return null;
-    }
-    Module result = null;
-    DirectoryIndex index = DirectoryIndex.getInstance(project);
-    for (VirtualFile file : files) {
-      Module module = index.getInfoForFile(file).getModule();
-      if (module == null) {
-        return null;
-      }
-      if (result == null) {
-        result = module;
-      }
-      else if (!result.equals(module)) {
-        return null;
-      }
-    }
-    return result;
+    modifiableModel.commit();
   }
 }
