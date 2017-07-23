@@ -16,9 +16,14 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleConfigurationEditor;
+import com.intellij.openapi.module.ModuleType;
+import com.intellij.openapi.roots.ui.configuration.CommonContentEntriesEditor;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
+import com.perl5.lang.perl.idea.modules.PerlModuleType;
+import org.jetbrains.jps.model.java.JavaSourceRootType;
 
 /**
  * Created by hurricup on 07.06.2015.
@@ -26,13 +31,13 @@ import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 public class PerlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider {
   @Override
   public ModuleConfigurationEditor[] createEditors(ModuleConfigurationState state) {
-    //Module module = state.getRootModel().getModule();
-    //if (ModuleType.get(module) instanceof PerlModuleType) {
-    //  return new ModuleConfigurationEditor[]{
-    //    new PerlContentEntriesEditor(module.getName(), state)
-    //    //, new ClasspathEditor(state)
-    //  };
-    //}
+    Module module = state.getRootModel().getModule();
+    if (ModuleType.get(module) instanceof PerlModuleType) {
+      return new ModuleConfigurationEditor[]{
+        new CommonContentEntriesEditor(module.getName(), state, JavaSourceRootType.SOURCE, JavaSourceRootType.TEST_SOURCE),
+        new PerlDumbModuleConfigurable()
+      };
+    }
     return ModuleConfigurationEditor.EMPTY;
   }
 }
