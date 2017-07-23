@@ -960,9 +960,6 @@
       <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
     </component>
     <component>
-      <implementation-class>com.perl5.lang.perl.idea.project.PerlMicroIdeSettingsLoader</implementation-class>
-    </component>
-    <component>
       <implementation-class>com.perl5.lang.mason2.idea.components.MasonProjectComponent</implementation-class>
     </component>
     <component>
