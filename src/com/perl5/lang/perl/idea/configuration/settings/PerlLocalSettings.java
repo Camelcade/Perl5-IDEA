@@ -42,6 +42,15 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
   public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
   public boolean ENABLE_REGEX_INJECTIONS = false;
+  private String myPerlInterpreter;
+
+  public String getPerlInterpreter() {
+    return myPerlInterpreter;
+  }
+
+  public void setPerlInterpreter(String perlInterpreter) {
+    myPerlInterpreter = perlInterpreter;
+  }
 
   @Nullable
   @Override

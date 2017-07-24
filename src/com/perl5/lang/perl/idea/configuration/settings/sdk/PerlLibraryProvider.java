@@ -22,7 +22,7 @@ import com.intellij.openapi.roots.AdditionalLibraryRootsProvider;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -38,13 +38,13 @@ public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
     if (sdkLibs.isEmpty()) {
       return Collections.emptyList();
     }
-    Sdk sdk = PerlSharedSettings.getInstance(project).getSdk();
+    Sdk sdk = PerlProjectManager.getInstance(project).getProjectSdk();
     assert sdk != null;
     return Collections.singletonList(new PerlSdkLibrary(sdk, sdkLibs));
   }
 
   private List<VirtualFile> getSdkLibs(@NotNull Project project) {
-    Sdk sdk = PerlSharedSettings.getInstance(project).getSdk();
+    Sdk sdk = PerlProjectManager.getInstance(project).getProjectSdk();
     if (sdk == null) {
       return Collections.emptyList();
     }

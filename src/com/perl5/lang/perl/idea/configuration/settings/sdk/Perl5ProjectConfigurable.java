@@ -19,9 +19,9 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +38,7 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
 
   @Override
   public void apply() throws ConfigurationException {
-    PerlSharedSettings.getInstance(myProject).setSdk(getSelectedSdk());
+    PerlProjectManager.getInstance(myProject).setProjectSdk(getSelectedSdk());
   }
 
   @Override
@@ -51,7 +51,7 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
   @Nullable
   @Override
   protected Perl5SdkWrapper getDefaultSelectedItem() {
-    Sdk projectSdk = PerlSharedSettings.getInstance(myProject).getSdk();
+    Sdk projectSdk = PerlProjectManager.getInstance(myProject).getProjectSdk();
     return projectSdk == null ? DISABLE_PERL_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }
 }

@@ -19,11 +19,6 @@ package com.perl5.lang.perl.idea.configuration.settings;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -52,7 +47,6 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 )
 
 public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
-  public String myPerlInterpreter;
   public List<String> selfNames = new ArrayList<>(Arrays.asList(DEFAULT_SELF_NAME, "this", "class", "proto"));
   public boolean SIMPLE_MAIN_RESOLUTION = true;
   public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
@@ -68,8 +62,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   @Transient
   private Set<String> SELF_NAMES_SET = null;
-  @Transient
-  private AtomicNullableLazyValue<Sdk> mySdkProvider;
 
   @Transient
   private Project myProject;
@@ -79,50 +71,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   public PerlSharedSettings(Project project) {
     myProject = project;
-    resetSdk();
-    myProject.getMessageBus().connect().subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
-      @Override
-      public void jdkAdded(@NotNull Sdk jdk) {
-
-      }
-
-      @Override
-      public void jdkRemoved(@NotNull Sdk jdk) {
-        if (StringUtil.equals(jdk.getName(), myPerlInterpreter)) {
-          myPerlInterpreter = null;
-        }
-        resetSdk();
-      }
-
-      @Override
-      public void jdkNameChanged(@NotNull Sdk jdk, @NotNull String previousName) {
-        if (StringUtil.equals(myPerlInterpreter, previousName)) {
-          myPerlInterpreter = jdk.getName();
-        }
-      }
-    });
-  }
-
-  private void resetSdk() {
-    mySdkProvider = new AtomicNullableLazyValue<Sdk>() {
-      @Nullable
-      @Override
-      protected Sdk compute() {
-        return PerlSdkTable.getInstance().findJdk(myPerlInterpreter);
-      }
-    };
-  }
-
-  @Nullable
-  @Transient
-  public Sdk getSdk() {
-    return mySdkProvider.getValue();
-  }
-
-  public void setSdk(@Nullable Sdk sdk) {
-    myPerlInterpreter = sdk == null ? null : sdk.getName();
-    resetSdk();
-    notifyPlatform();
   }
 
   @Nullable
@@ -138,7 +86,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
   @Override
   public void loadState(PerlSharedSettings state) {
     XmlSerializerUtil.copyBean(state, this);
-    resetSdk();
   }
 
   @NotNull
@@ -154,10 +101,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   public void settingsUpdated() {
     SELF_NAMES_SET = null;
-    notifyPlatform();
-  }
-
-  private void notifyPlatform() {
     PsiManager.getInstance(myProject).dropResolveCaches();
     DaemonCodeAnalyzer.getInstance(myProject).restart();
   }
