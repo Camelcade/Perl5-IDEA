@@ -28,6 +28,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.Predicate;
+import gnu.trove.THashMap;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +38,9 @@ import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertie
 
 import java.io.File;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PerlModuleExtension extends ModuleExtension implements PersistentStateComponentWithModificationTracker<Element> {
   private static final Logger LOG = Logger.getInstance(PerlModuleExtension.class);
@@ -78,8 +81,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifyable model");
     if (isChanged()) {
       synchronized (myOriginal) {
-        myOriginal.myRoots.clear();
-        myOriginal.myRoots.putAll(myRoots);
+        myOriginal.myRoots = new THashMap<>(myRoots);
         myOriginal.myModificationTracker++;
       }
     }
@@ -100,6 +102,13 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     LOG.assertTrue(myIsWritable, "Obtain modifiableModel first");
     myRoots.remove(root);
     myModificationTracker++;
+  }
+
+  public synchronized List<VirtualFile> getRootsByType(@NotNull JpsModuleSourceRootType type) {
+    return myRoots.entrySet().stream()
+      .filter(entry -> type.equals(entry.getValue()))
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toList());
   }
 
   @Nullable

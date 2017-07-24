@@ -19,13 +19,12 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.AdditionalLibraryRootsProvider;
-import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -34,26 +33,28 @@ public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
   @NotNull
   @Override
   public Collection<SyntheticLibrary> getAdditionalProjectLibraries(@NotNull Project project) {
-    List<VirtualFile> sdkLibs = getSdkLibs(project);
+    PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(project);
+    List<VirtualFile> sdkLibs = perlProjectManager.getProjectSdkLibraryRoots();
     if (sdkLibs.isEmpty()) {
       return Collections.emptyList();
     }
-    Sdk sdk = PerlProjectManager.getInstance(project).getProjectSdk();
+    Sdk sdk = perlProjectManager.getProjectSdk();
     assert sdk != null;
-    return Collections.singletonList(new PerlSdkLibrary(sdk, sdkLibs));
-  }
+    PerlSdkLibrary sdkLibrary = new PerlSdkLibrary(sdk, sdkLibs);
 
-  private List<VirtualFile> getSdkLibs(@NotNull Project project) {
-    Sdk sdk = PerlProjectManager.getInstance(project).getProjectSdk();
-    if (sdk == null) {
-      return Collections.emptyList();
+    List<VirtualFile> libraryRoots = perlProjectManager.getNonSdkLibraryRoots();
+    if (libraryRoots.isEmpty()) {
+      return Collections.singletonList(sdkLibrary);
     }
-    return Arrays.asList(sdk.getRootProvider().getFiles(OrderRootType.CLASSES));
+    List<SyntheticLibrary> result = new ArrayList<>();
+    result.add(SyntheticLibrary.newImmutableLibrary(libraryRoots));
+    result.add(sdkLibrary);
+    return result;
   }
 
   @NotNull
   @Override
   public Collection<VirtualFile> getRootsToWatch(@NotNull Project project) {
-    return getSdkLibs(project);
+    return PerlProjectManager.getInstance(project).getAllLibraryRoots();
   }
 }
