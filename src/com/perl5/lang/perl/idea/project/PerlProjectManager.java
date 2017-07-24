@@ -16,13 +16,18 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,16 +51,14 @@ public class PerlProjectManager {
       @Override
       public void jdkRemoved(@NotNull Sdk sdk) {
         if (StringUtil.equals(sdk.getName(), myPerlSettings.getPerlInterpreter())) {
-          myPerlSettings.setPerlInterpreter(null);
-          resetProjectSdk();
+          setProjectSdk(null);
         }
       }
 
       @Override
       public void jdkNameChanged(@NotNull Sdk jdk, @NotNull String previousName) {
         if (StringUtil.equals(myPerlSettings.getPerlInterpreter(), previousName)) {
-          myPerlSettings.setPerlInterpreter(jdk.getName());
-          resetProjectSdk();
+          setProjectSdk(jdk);
         }
       }
     });
@@ -77,6 +80,13 @@ public class PerlProjectManager {
 
   public void setProjectSdk(@Nullable Sdk sdk) {
     myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName());
+    resetProjectSdk();
+
+
+    ((ProjectRootManagerEx)ProjectRootManager.getInstance(myProject)).clearScopesCachesForModules();
+    PsiManager.getInstance(myProject).dropResolveCaches();
+    DaemonCodeAnalyzer.getInstance(myProject).restart();
+    ProjectView.getInstance(myProject).refresh();
   }
 
   public static PerlProjectManager getInstance(@NotNull Project project) {
