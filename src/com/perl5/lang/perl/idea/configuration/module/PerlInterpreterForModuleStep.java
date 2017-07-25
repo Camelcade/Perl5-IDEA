@@ -34,15 +34,12 @@ import com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectSdksModel;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.MultiLineLabelUI;
 import com.intellij.util.Consumer;
+import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -67,72 +64,59 @@ public class PerlInterpreterForModuleStep extends ModuleWizardStep {
     final JLabel label = new JLabel(IdeBundle.message("prompt.please.select.module.jdk", type.getPresentableName()));
     label.setUI(new MultiLineLabelUI());
     myPanel.add(label, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST,
-                                              GridBagConstraints.HORIZONTAL, new Insets(8, 10, 8, 10), 0, 0));
+                                              GridBagConstraints.HORIZONTAL, JBUI.insets(8, 10), 0, 0));
 
     final JLabel jdklabel = new JLabel(IdeBundle.message("label.project.jdk"));
     jdklabel.setFont(UIUtil.getLabelFont().deriveFont(Font.BOLD));
     myPanel.add(jdklabel, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST,
-                                                 GridBagConstraints.NONE, new Insets(8, 10, 0, 10), 0, 0));
+                                                 GridBagConstraints.NONE, JBUI.insets(8, 10, 0, 10), 0, 0));
 
     myPanel.add(myJdkChooser, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 1, 2, 1.0, 1.0, GridBagConstraints.NORTHWEST,
-                                                     GridBagConstraints.BOTH, new Insets(2, 10, 10, 5), 0, 0));
+                                                     GridBagConstraints.BOTH, JBUI.insets(2, 10, 10, 5), 0, 0));
     JButton configureButton = new JButton(IdeBundle.message("button.configure"));
     myPanel.add(configureButton, new GridBagConstraints(1, GridBagConstraints.RELATIVE, 1, 1, 0.0, 0.0, GridBagConstraints.NORTHWEST,
-                                                        GridBagConstraints.NONE, new Insets(2, 0, 5, 5), 0, 0));
+                                                        GridBagConstraints.NONE, JBUI.insets(2, 0, 5, 5), 0, 0));
     mySetAsDefaultButton = new JButton("Set Default");
     mySetAsDefaultButton.setMnemonic('D');
     myPanel.add(mySetAsDefaultButton, new GridBagConstraints(1, GridBagConstraints.RELATIVE, 1, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST,
-                                                             GridBagConstraints.NONE, new Insets(2, 0, 10, 5), 0, 0));
+                                                             GridBagConstraints.NONE, JBUI.insets(2, 0, 10, 5), 0, 0));
 
-    configureButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
+    configureButton.addActionListener(e -> {
 
-        final Project project = getProject(context, type);
-        final ProjectStructureConfigurable projectConfig = ProjectStructureConfigurable.getInstance(project);
-        final JdkListConfigurable jdkConfig = JdkListConfigurable.getInstance(project);
-        final ProjectSdksModel projectJdksModel = projectConfig.getProjectJdksModel();
-        final boolean[] successfullyAdded = new boolean[1];
-        projectJdksModel.reset(project);
-        projectJdksModel.doAdd(myPanel, type, new Consumer<Sdk>() {
-          public void consume(final Sdk jdk) {
-            successfullyAdded[0] = jdkConfig.addJdkNode(jdk, false);
-            myJdkChooser.updateList(jdk, type, projectJdksModel.getSdks());
+      final Project project = getProject(context, type);
+      final ProjectStructureConfigurable projectConfig = ProjectStructureConfigurable.getInstance(project);
+      final JdkListConfigurable jdkConfig = JdkListConfigurable.getInstance(project);
+      final ProjectSdksModel projectJdksModel = projectConfig.getProjectJdksModel();
+      final boolean[] successfullyAdded = new boolean[1];
+      projectJdksModel.reset(project);
+      projectJdksModel.doAdd(myPanel, type, new Consumer<Sdk>() {
+        public void consume(final Sdk jdk) {
+          successfullyAdded[0] = jdkConfig.addJdkNode(jdk, false);
+          myJdkChooser.updateList(jdk, type, projectJdksModel.getSdks());
 
-            if (!successfullyAdded[0]) {
-              try {
-                projectJdksModel.apply(jdkConfig);
-              }
-              catch (ConfigurationException e1) {
-                //name can't be wrong
-              }
+          if (!successfullyAdded[0]) {
+            try {
+              projectJdksModel.apply(jdkConfig);
+            }
+            catch (ConfigurationException e1) {
+              //name can't be wrong
             }
           }
-        });
-      }
+        }
+      });
     });
 
     final Project defaultProject = ProjectManagerEx.getInstanceEx().getDefaultProject();
-    mySetAsDefaultButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
+    mySetAsDefaultButton.addActionListener(e -> {
 
-        final Sdk jdk = getJdk();
-        final Runnable runnable = new Runnable() {
-          public void run() {
-            ProjectRootManagerEx.getInstanceEx(defaultProject).setProjectSdk(jdk);
-          }
-        };
-        ApplicationManager.getApplication().runWriteAction(runnable);
-        mySetAsDefaultButton.setEnabled(false);
-      }
+      final Sdk jdk = getJdk();
+      final Runnable runnable = () -> ProjectRootManagerEx.getInstanceEx(defaultProject).setProjectSdk(jdk);
+      ApplicationManager.getApplication().runWriteAction(runnable);
+      mySetAsDefaultButton.setEnabled(false);
     });
 
-    myJdkChooser.addSelectionListener(new ListSelectionListener() {
-      @Override
-      public void valueChanged(ListSelectionEvent e) {
-        mySetAsDefaultButton.setEnabled(getJdk() != ProjectRootManagerEx.getInstanceEx(defaultProject).getProjectSdk());
-      }
-    });
+    myJdkChooser.addSelectionListener(
+      e -> mySetAsDefaultButton.setEnabled(getJdk() != ProjectRootManagerEx.getInstanceEx(defaultProject).getProjectSdk()));
   }
 
   public JComponent getPreferredFocusedComponent() {
