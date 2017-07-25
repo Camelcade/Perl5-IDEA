@@ -16,6 +16,7 @@
 
 package com.intellij.openapi.projectRoots.impl;
 
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.PathMacroManager;
 import com.intellij.openapi.components.PersistentStateComponentWithModificationTracker;
 import com.intellij.openapi.components.impl.ModulePathMacroManager;
@@ -23,6 +24,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -81,8 +83,12 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifyable model");
     if (isChanged()) {
       synchronized (myOriginal) {
-        myOriginal.myRoots = new THashMap<>(myRoots);
-        myOriginal.myModificationTracker++;
+        WriteAction.run(
+          () -> ProjectRootManagerEx.getInstanceEx(myModule.getProject()).makeRootsChange(() -> {
+            myOriginal.myRoots = new THashMap<>(myRoots);
+            myOriginal.myModificationTracker++;
+          }, false, true)
+        );
       }
     }
   }

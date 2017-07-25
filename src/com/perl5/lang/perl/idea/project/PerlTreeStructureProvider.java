@@ -22,6 +22,9 @@ import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.containers.ContainerUtil;
@@ -32,14 +35,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
+import static com.intellij.ProjectTopics.PROJECT_ROOTS;
+
 public class PerlTreeStructureProvider implements TreeStructureProvider {
   private final PerlProjectManager myProjectManager;
-  private Set<VirtualFile> myRoots;
+  private AtomicNotNullLazyValue<Set<VirtualFile>> myRootsProvider;
 
   public PerlTreeStructureProvider(Project project) {
     myProjectManager = PerlProjectManager.getInstance(project);
-    myRoots = new THashSet<>(myProjectManager.getAllLibraryRoots());
-    myProjectManager.addListener(() -> myRoots = new THashSet<>(myProjectManager.getAllLibraryRoots()));
+    initProvider();
+    project.getMessageBus().connect().subscribe(PROJECT_ROOTS, new ModuleRootListener() {
+      @Override
+      public void rootsChanged(ModuleRootEvent event) {
+        initProvider();
+      }
+    });
+  }
+
+  private void initProvider() {
+    myRootsProvider = AtomicNotNullLazyValue.createValue(() -> new THashSet<>(myProjectManager.getAllLibraryRoots()));
   }
 
   @NotNull
@@ -47,6 +61,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
   public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
                                              @NotNull Collection<AbstractTreeNode> children,
                                              ViewSettings settings) {
+    Set<VirtualFile> roots = myRootsProvider.getValue();
     return ContainerUtil.map2List(children, node -> {
       if (!(node instanceof PsiDirectoryNode)) {
         return node;
@@ -59,7 +74,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
 
       // fixme support different roots here
       VirtualFile virtualFile = ((PsiDirectoryNode)node).getVirtualFile();
-      if (myRoots.contains(virtualFile)) {
+      if (roots.contains(virtualFile)) {
         node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
           @Override
           protected void updateImpl(PresentationData data) {

@@ -16,8 +16,7 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
-import com.intellij.ide.projectView.ProjectView;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -26,14 +25,15 @@ import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.roots.ModuleRootEvent;
+import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
+import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
@@ -44,12 +44,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.intellij.ProjectTopics.PROJECT_ROOTS;
+
 public class PerlProjectManager {
   @NotNull
   private final Project myProject;
   private final PerlLocalSettings myPerlSettings;
   private AtomicNullableLazyValue<Sdk> mySdkProvider;
-  private final List<PerlProjectListener> myListeners = new ArrayList<>();
   private AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
   private AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
 
@@ -57,7 +58,8 @@ public class PerlProjectManager {
     myProject = project;
     myPerlSettings = PerlLocalSettings.getInstance(project);
     resetProjectSdk();
-    myProject.getMessageBus().connect().subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
+    MessageBusConnection connection = myProject.getMessageBus().connect();
+    connection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
       @Override
       public void jdkAdded(@NotNull Sdk jdk) {
 
@@ -77,6 +79,12 @@ public class PerlProjectManager {
         }
       }
     });
+    connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
+      @Override
+      public void beforeRootsChange(ModuleRootEvent event) {
+        resetProjectSdk();
+      }
+    });
   }
 
   private void resetProjectSdk() {
@@ -93,15 +101,6 @@ public class PerlProjectManager {
       result.addAll(getProjectSdkLibraryRoots());
       return result;
     });
-    myListeners.forEach(PerlProjectListener::changed);
-  }
-
-  public void addListener(@NotNull PerlProjectListener listener) {
-    myListeners.add(listener);
-  }
-
-  public void removeListener(@NotNull PerlProjectListener listener) {
-    myListeners.remove(listener);
   }
 
   public List<VirtualFile> getNonSdkLibraryRoots() {
@@ -126,21 +125,14 @@ public class PerlProjectManager {
   }
 
   public void setProjectSdk(@Nullable Sdk sdk) {
-    myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName());
-    resetProjectSdk();
-
-
-    ((ProjectRootManagerEx)ProjectRootManager.getInstance(myProject)).clearScopesCachesForModules();
-    PsiManager.getInstance(myProject).dropResolveCaches();
-    DaemonCodeAnalyzer.getInstance(myProject).restart();
-    ProjectView.getInstance(myProject).refresh();
+    WriteAction.run(
+      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(() -> {
+        myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName());
+      }, false, true)
+    );
   }
 
   public static PerlProjectManager getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlProjectManager.class);
-  }
-
-  public interface PerlProjectListener {
-    void changed();
   }
 }
