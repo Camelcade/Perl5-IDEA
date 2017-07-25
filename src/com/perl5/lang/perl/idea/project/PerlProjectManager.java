@@ -20,6 +20,7 @@ import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -32,6 +33,7 @@ import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
@@ -39,9 +41,9 @@ import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
@@ -52,6 +54,7 @@ public class PerlProjectManager {
   private final PerlLocalSettings myPerlSettings;
   private AtomicNullableLazyValue<Sdk> mySdkProvider;
   private AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
+  private AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
   private AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
 
   public PerlProjectManager(@NotNull Project project) {
@@ -81,7 +84,7 @@ public class PerlProjectManager {
     });
     connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
       @Override
-      public void beforeRootsChange(ModuleRootEvent event) {
+      public void rootsChanged(ModuleRootEvent event) {
         resetProjectSdk();
       }
     });
@@ -89,6 +92,22 @@ public class PerlProjectManager {
 
   private void resetProjectSdk() {
     mySdkProvider = AtomicNullableLazyValue.createValue(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
+    mySdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
+      List<VirtualFile> result = new ArrayList<>();
+
+      for (String externalPath : myPerlSettings.getExternalLibrariesPaths()) {
+        VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(externalPath), true);
+        if (virtualFile != null && virtualFile.isValid() && virtualFile.isDirectory()) {
+          result.add(virtualFile);
+        }
+      }
+
+      Sdk projectSdk = getProjectSdk();
+      if (projectSdk != null) {
+        result.addAll(Arrays.asList(projectSdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
+      }
+      return result;
+    });
     myNonSdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       List<VirtualFile> result = new ArrayList<>();
       for (Module module : ModuleManager.getInstance(myProject).getModules()) {
@@ -112,11 +131,7 @@ public class PerlProjectManager {
   }
 
   public List<VirtualFile> getProjectSdkLibraryRoots() {
-    Sdk projectSdk = getProjectSdk();
-    if (projectSdk == null) {
-      return Collections.emptyList();
-    }
-    return Arrays.asList(projectSdk.getRootProvider().getFiles(OrderRootType.CLASSES));
+    return mySdkLibraryRootsProvider.getValue();
   }
 
   @Nullable
@@ -124,15 +139,67 @@ public class PerlProjectManager {
     return mySdkProvider.getValue();
   }
 
+  public void addExternalLibrary(@NotNull VirtualFile root) {
+    if (!root.isValid() || !root.isDirectory()) {
+      return;
+    }
+    WriteAction.run(() -> {
+      List<String> paths = myPerlSettings.getExternalLibrariesPaths();
+      String canonicalPath = root.getCanonicalPath();
+      if (!paths.contains(canonicalPath)) {
+        ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+          () -> {
+            paths.add(canonicalPath);
+            myPerlSettings.setExternalLibrariesPaths(paths);
+          }, false, true);
+      }
+    });
+  }
+
   public void setProjectSdk(@Nullable Sdk sdk) {
     WriteAction.run(
-      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(() -> {
-        myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName());
-      }, false, true)
+      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+        () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), false, true)
     );
   }
 
   public static PerlProjectManager getInstance(@NotNull Project project) {
     return ServiceManager.getService(project, PerlProjectManager.class);
+  }
+
+  @Nullable
+  public static Sdk getSdk(@Nullable Module module) {
+    if (module == null) {
+      return null;
+    }
+    return getInstance(module.getProject()).getProjectSdk();
+  }
+
+  @Nullable
+  public static Sdk getSdk(@Nullable Project project) {
+    if (project == null) {
+      return null;
+    }
+    return getInstance(project).getProjectSdk();
+  }
+
+  @Nullable
+  public static String getSdkPath(@Nullable Module module) {
+    Sdk sdk = getSdk(module);
+    return sdk == null ? null : sdk.getHomePath();
+  }
+
+  @Nullable
+  public static String getSdkPath(@Nullable Project project) {
+    Sdk sdk = getSdk(project);
+    return sdk == null ? null : sdk.getHomePath();
+  }
+
+  public static String getSdkPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+    if (virtualFile == null) {
+      return getSdkPath(project);
+    }
+    Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
+    return module == null ? getSdkPath(project) : getSdkPath(module);
   }
 }
