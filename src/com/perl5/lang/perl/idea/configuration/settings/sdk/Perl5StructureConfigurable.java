@@ -23,9 +23,11 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
@@ -35,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +48,11 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
   protected static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
   private Perl5StructurePanel myPanel;
   private boolean myChange = false;
+  private final MessageBusConnection myConnection;
+
+  public Perl5StructureConfigurable() {
+    myConnection = ApplicationManager.getApplication().getMessageBus().connect();
+  }
 
   @Nullable
   @Override
@@ -61,7 +69,8 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
 
   @Nullable
   public Perl5SdkWrapper getSelectedItem() {
-    return (Perl5SdkWrapper)myPanel.getSdkComboBox().getSelectedItem();
+    ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
+    return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
   }
 
 
@@ -86,10 +95,19 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     });
     sdkComboBox.setSelectedItem(getDefaultSelectedItem());
 
-    ApplicationManager.getApplication().getMessageBus().connect().subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
+    myConnection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
 
     // add sdk button
     myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.getInstance(), this::addSdk));
+    myPanel.getDeleteButton().addActionListener(this::removeSdk);
+  }
+
+  protected void removeSdk(ActionEvent e) {
+    Sdk selectedSdk = getSelectedSdk();
+    if (selectedSdk != null) {
+      PerlSdkTable.getInstance().removeJdk(selectedSdk);
+      myPanel.getSdkComboBox().setSelectedItem(getDefaultSelectedItem());
+    }
   }
 
   private void updateSdkModel(@Nullable Perl5SdkWrapper selectedItem) {
@@ -164,6 +182,8 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
 
   @Override
   public void disposeUIResources() {
+    myConnection.deliverImmediately();
+    myConnection.disconnect();
     myPanel = null;
   }
 }
