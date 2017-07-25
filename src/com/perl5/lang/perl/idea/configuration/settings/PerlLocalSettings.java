@@ -25,6 +25,9 @@ import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hurricup on 02.06.2016.
  */
@@ -43,6 +46,15 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
   public boolean ENABLE_REGEX_INJECTIONS = false;
   private String myPerlInterpreter;
+  private List<String> myExternalLibrariesPaths = new ArrayList<>();
+
+  public List<String> getExternalLibrariesPaths() {
+    return myExternalLibrariesPaths;
+  }
+
+  public void setExternalLibrariesPaths(List<String> externalLibrariesPaths) {
+    myExternalLibrariesPaths = externalLibrariesPaths;
+  }
 
   public String getPerlInterpreter() {
     return myPerlInterpreter;

@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -27,6 +26,7 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -74,7 +74,7 @@ public class PerlUtil implements PerlElementTypes {
   @Nullable
   public static VirtualFile getFileClassRoot(Project project, VirtualFile file) {
     VirtualFile result = null;
-    for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots()) {
+    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
       if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
         result = classRoot;
       }
@@ -95,7 +95,7 @@ public class PerlUtil implements PerlElementTypes {
     File file = new File(filePath);
     VirtualFile result = null;
 
-    for (VirtualFile classRoot : ProjectRootManager.getInstance(project).orderEntries().getClassesRoots()) {
+    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
       File sourceRootFile = new File(classRoot.getPath());
       if (VfsUtil.isAncestor(sourceRootFile, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
         result = classRoot;

@@ -44,7 +44,7 @@ import java.util.List;
  * Partially cloned from JavaModuleBuilder
  */
 public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder {
-  private final List<Pair<String, String>> myModuleLibraries = new ArrayList<Pair<String, String>>();
+  private final List<Pair<String, String>> myModuleLibraries = new ArrayList<>();
   private List<Pair<String, String>> mySourcePaths;
 
   @Override
@@ -102,7 +102,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
   @Override
   public List<Pair<String, String>> getSourcePaths() {
     if (mySourcePaths == null) {
-      final List<Pair<String, String>> paths = new ArrayList<Pair<String, String>>();
+      final List<Pair<String, String>> paths = new ArrayList<>();
       paths.add(Pair.create(getContentEntryPath(), ""));
       return paths;
     }
@@ -111,13 +111,13 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 
   @Override
   public void setSourcePaths(List<Pair<String, String>> sourcePaths) {
-    mySourcePaths = sourcePaths != null ? new ArrayList<Pair<String, String>>(sourcePaths) : null;
+    mySourcePaths = sourcePaths != null ? new ArrayList<>(sourcePaths) : null;
   }
 
   @Override
   public void addSourcePath(Pair<String, String> sourcePathInfo) {
     if (mySourcePaths == null) {
-      mySourcePaths = new ArrayList<Pair<String, String>>();
+      mySourcePaths = new ArrayList<>();
     }
 
     mySourcePaths.add(sourcePathInfo);

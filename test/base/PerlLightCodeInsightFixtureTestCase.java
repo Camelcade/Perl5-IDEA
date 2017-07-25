@@ -50,9 +50,7 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.roots.*;
-import com.intellij.openapi.roots.libraries.Library;
-import com.intellij.openapi.roots.libraries.LibraryTable;
+import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -84,6 +82,8 @@ import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
@@ -111,7 +111,6 @@ import java.util.stream.Collectors;
  * Created by hurricup on 04.03.2016.
  */
 public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsightFixtureTestCase {
-  private static final String PERL_LIBRARY_NAME = "-perl-test-lib-";
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
   private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
@@ -156,33 +155,14 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
 
   protected void setUpLibrary() {
     ApplicationManager.getApplication().runWriteAction(
-      () ->
-      {
-        ModifiableRootModel modifiableModel =
-          ModuleRootManager.getInstance(myModule).getModifiableModel();
-
-        for (OrderEntry entry : modifiableModel.getOrderEntries()) {
-          if (entry instanceof LibraryOrderEntry &&
-              StringUtil
-                .equals(((LibraryOrderEntry)entry).getLibraryName(), PERL_LIBRARY_NAME)) {
-            modifiableModel.removeOrderEntry(entry);
-          }
-        }
-
-        //			TempDirTestFixture tempDirFixture = myFixture.getTempDirFixture();
-        //			tempDirFixture.copyAll("testData/testlib", "testlib");
-
-        LibraryTable moduleLibraryTable = modifiableModel.getModuleLibraryTable();
-        Library library = moduleLibraryTable.createLibrary(PERL_LIBRARY_NAME);
-        Library.ModifiableModel libraryModifyableModel = library.getModifiableModel();
-        VirtualFile libdir =
-          LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
+      () -> {
+        VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath("testData/testlib");
         assert libdir != null;
-        //libdir.refresh(false, true); // this is necessary for manual update
-        libraryModifyableModel.addRoot(libdir,
-                                       OrderRootType.CLASSES); // myFixture.findFileInTempDir("testlib")
-        libraryModifyableModel.commit();
-        modifiableModel.commit();
+
+        PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
+        perlProjectManager.setProjectSdk(new ProjectJdkImpl("test", PerlSdkType.getInstance()));
+        perlProjectManager.addExternalLibrary(libdir);
+
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
       });
   }

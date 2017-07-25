@@ -34,7 +34,6 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
 import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -50,6 +49,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -100,12 +100,13 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   private Set<VirtualFile> getAllXSFiles(@NotNull Project project) {
-    VirtualFile[] classesRoots = ProjectRootManager.getInstance(myProject).orderEntries().getClassesRoots();
-    if (classesRoots.length == 0) {
+    List<VirtualFile> classesRoots = PerlProjectManager.getInstance(project).getAllLibraryRoots();
+    if (classesRoots.isEmpty()) {
       return Collections.emptySet();
     }
 
-    GlobalSearchScope classRootsScope = GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots);
+    GlobalSearchScope classRootsScope =
+      GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(new VirtualFile[classesRoots.size()]));
 
     Set<VirtualFile> result = new THashSet<>();
     for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope)) {

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -43,6 +42,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.rename.RenameRefactoringQueue;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -628,9 +628,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
 
     String packagePath = getPackagePathByName(packageName);
-    VirtualFile[] classRoots = ProjectRootManager.getInstance(project).orderEntries().getClassesRoots();
-
-    for (VirtualFile classRoot : classRoots) {
+    for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
       VirtualFile targetFile = classRoot.findFileByRelativePath(packagePath);
       if (targetFile != null) {
         return targetFile;
@@ -733,7 +731,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
 
     // classpath
-    result.addAll(Arrays.asList(ProjectRootManager.getInstance(psiFile.getProject()).orderEntries().getClassesRoots()));
+    result.addAll(PerlProjectManager.getInstance(psiElement.getProject()).getAllLibraryRoots());
 
     // current dir
     if (PerlSharedSettings.getInstance(psiFile.getProject()).getTargetPerlVersion().lesserThan(PerlVersion.V5_26)) {

@@ -22,9 +22,7 @@ import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleTypeManager;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.configuration.module.PerlInterpreterForModuleStep;
 import com.perl5.lang.perl.idea.configuration.module.PerlModuleBuilder;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -35,7 +33,7 @@ import javax.swing.*;
 public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   public static final String PERL_MODULE_TYPE_ID = "PERL5_MODULE";
   public static final String MODULE_NAME = "Perl5 module";
-  public static final String MODULE_DESCRIPTION = "Anyting written in Perl5";
+  public static final String MODULE_DESCRIPTION = "Anything written in Perl5";
   //	public static final String PERL5_GROUP = "Perl5";
 
   public PerlModuleType() {
@@ -70,27 +68,10 @@ public class PerlModuleType extends ModuleType<PerlModuleBuilder> {
   public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext,
                                               @NotNull final PerlModuleBuilder moduleBuilder,
                                               @NotNull ModulesProvider modulesProvider) {
-    return new ModuleWizardStep[]{new PerlInterpreterForModuleStep(wizardContext, PerlSdkType.findInstance(PerlSdkType.class)) {
-      public void updateDataModel() {
-        super.updateDataModel();
-        moduleBuilder.setModuleJdk(getJdk());
-      }
-    }};
+    return new ModuleWizardStep[]{};
   }
 
   public static PerlModuleType getInstance() {
     return (PerlModuleType)ModuleTypeManager.getInstance().findByID(PERL_MODULE_TYPE_ID);
   }
-
-  //	@Nullable
-  //	@Override
-  //	public ModuleWizardStep modifyProjectTypeStep(@NotNull SettingsStep settingsStep, @NotNull final ModuleBuilder moduleBuilder) {
-  //		// fixme refactor
-  //		return ProjectWizardStepFactory.getInstance().createJavaSettingsStep(settingsStep, moduleBuilder, new Condition<SdkTypeId>() {
-  //			@Override
-  //			public boolean value(SdkTypeId sdkType) {
-  //				return moduleBuilder.isSuitableSdkType(sdkType);
-  //			}
-  //		});
-  //	}
 }

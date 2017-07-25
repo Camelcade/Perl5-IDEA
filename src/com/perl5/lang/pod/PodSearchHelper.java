@@ -36,10 +36,10 @@ public class PodSearchHelper {
   public static final String PERL_OP_FILE_NAME = "perlop.pod";
   public static final String PERL_API_FILE_NAME = "perlapi.pod";
 
-  private static final Key<GlobalSearchScope> PERL_VAR_SCOPE = new Key<GlobalSearchScope>(PERL_VAR_FILE_NAME);
-  private static final Key<GlobalSearchScope> PERL_FUNC_SCOPE = new Key<GlobalSearchScope>(PERL_FUNC_FILE_NAME);
-  private static final Key<GlobalSearchScope> PERL_OP_SCOPE = new Key<GlobalSearchScope>(PERL_OP_FILE_NAME);
-  private static final Key<GlobalSearchScope> PERL_API_SCOPE = new Key<GlobalSearchScope>(PERL_API_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_VAR_SCOPE = new Key<>(PERL_VAR_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_FUNC_SCOPE = new Key<>(PERL_FUNC_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_OP_SCOPE = new Key<>(PERL_OP_FILE_NAME);
+  private static final Key<GlobalSearchScope> PERL_API_SCOPE = new Key<>(PERL_API_FILE_NAME);
 
   @NotNull
   public static GlobalSearchScope getPerlVarScope(@NotNull Project project) {

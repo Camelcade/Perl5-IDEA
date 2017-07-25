@@ -58,7 +58,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
   public String PERL_CRITIC_ARGS = "";
   public boolean PERL_SWITCH_ENABLED = false;
   private PerlVersion myTargetPerlVersion = PerlVersion.V5_10;
-  private List<String> libRootUrls = new ArrayList<>();
 
   @Transient
   private Set<String> SELF_NAMES_SET = null;
@@ -77,10 +76,6 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
   @Override
   public PerlSharedSettings getState() {
     return this;
-  }
-
-  public List<String> getLibRootUrls() {
-    return libRootUrls;
   }
 
   @Override

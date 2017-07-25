@@ -38,11 +38,18 @@ public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
     if (sdkLibs.isEmpty()) {
       return Collections.emptyList();
     }
+
+    SyntheticLibrary sdkLibrary;
     Sdk sdk = perlProjectManager.getProjectSdk();
-    assert sdk != null;
-    PerlSdkLibrary sdkLibrary = new PerlSdkLibrary(sdk, sdkLibs);
+    if (sdk != null) {
+      sdkLibrary = new PerlSdkLibrary(sdk, sdkLibs);
+    }
+    else {
+      sdkLibrary = SyntheticLibrary.newImmutableLibrary(sdkLibs);
+    }
 
     List<VirtualFile> libraryRoots = perlProjectManager.getNonSdkLibraryRoots();
+
     if (libraryRoots.isEmpty()) {
       return Collections.singletonList(sdkLibrary);
     }
