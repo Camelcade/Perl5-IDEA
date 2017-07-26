@@ -26,6 +26,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.PerlConfigurationEditorBase;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jdesktop.swingx.combobox.MapComboBoxModel;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -47,7 +48,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
   }
 
   @Override
-  protected void resetEditorFrom(PerlRemoteDebuggingConfiguration perlConfiguration) {
+  protected void resetEditorFrom(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) {
     myWorkingDirectoryComponent.setText(perlConfiguration.getRemoteProjectRoot());
     myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
     myDebuggingHost.setText(perlConfiguration.getDebugHost());
@@ -56,7 +57,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
   }
 
   @Override
-  protected void applyEditorTo(PerlRemoteDebuggingConfiguration perlConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) throws ConfigurationException {
     perlConfiguration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
     perlConfiguration.setPerlRole(myPerlRole.getSelectedItem().toString());
     perlConfiguration.setDebugHost(myDebuggingHost.getText());
@@ -83,7 +84,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
     debugPanel.add(workingDirectory);
 
     //noinspection Since15
-    myPerlRole = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.ROLE_OPTIONS)) {
+    myPerlRole = new ComboBox(new MapComboBoxModel<>(PerlDebugOptionsSets.ROLE_OPTIONS)) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<String>() {
@@ -94,7 +95,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
         });
       }
     };
-    ;
+
     LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, PerlBundle.message("perl.run.option.debugger.connection.mode"));
     perlRole.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(perlRole);

@@ -57,7 +57,7 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
   }
 
   @Override
-  protected void resetEditorFrom(Settings perlConfiguration) {
+  protected void resetEditorFrom(@NotNull Settings perlConfiguration) {
     myScriptCharset.setText(perlConfiguration.getScriptCharset());
     myIsCompileTimeBreakpointsEnabled.setSelected(perlConfiguration.isCompileTimeBreakpointsEnabled());
     myIsNonInteractiveModeEnabled.setSelected(perlConfiguration.isNonInteractiveModeEnabled());
@@ -66,7 +66,7 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
   }
 
   @Override
-  protected void applyEditorTo(Settings perlConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@NotNull Settings perlConfiguration) throws ConfigurationException {
     perlConfiguration.setScriptCharset(myScriptCharset.getText());
     perlConfiguration.setStartMode(myStartMode.getSelectedItem().toString());
     perlConfiguration.setNonInteractiveModeEnabled(myIsNonInteractiveModeEnabled.isSelected());
@@ -91,12 +91,12 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
     panel.add(scriptCharset);
 
     //noinspection Since15
-    myStartMode = new ComboBox(new MapComboBoxModel<String, String>(PerlDebugOptionsSets.STARTUP_OPTIONS)) {
+    myStartMode = new ComboBox(new MapComboBoxModel<>(PerlDebugOptionsSets.STARTUP_OPTIONS)) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<String>() {
           @Override
-          protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus) {
+          protected void customizeCellRenderer(@NotNull JList list, String value, int index, boolean selected, boolean hasFocus) {
             append(PerlDebugOptionsSets.STARTUP_OPTIONS.get(value));
           }
         });

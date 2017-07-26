@@ -24,8 +24,8 @@ import java.util.Map;
  * Created by hurricup on 18.05.2016.
  */
 public class PerlDebugOptionsSets {
-  public static final Map<String, String> STARTUP_OPTIONS = new THashMap<String, String>();
-  public static final Map<String, String> ROLE_OPTIONS = new THashMap<String, String>();
+  public static final Map<String, String> STARTUP_OPTIONS = new THashMap<>();
+  public static final Map<String, String> ROLE_OPTIONS = new THashMap<>();
 
   static {
     STARTUP_OPTIONS.put("COMPILE", "Stop as soon as possible");

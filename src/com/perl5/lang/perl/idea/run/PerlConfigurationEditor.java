@@ -21,7 +21,6 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.*;
-import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -29,6 +28,7 @@ import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.RawCommandLineEditor;
 import com.perl5.PerlBundle;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -53,7 +53,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlCon
   }
 
   @Override
-  protected void resetEditorFrom(PerlConfiguration perlConfiguration) {
+  protected void resetEditorFrom(@NotNull PerlConfiguration perlConfiguration) {
     myScriptField.setText(perlConfiguration.getScriptPath());
     myParametersPanel.reset(perlConfiguration);
     myConsoleCharset.setSelectedItem(perlConfiguration.getConsoleCharset());
@@ -63,7 +63,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlCon
   }
 
   @Override
-  protected void applyEditorTo(PerlConfiguration perlConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@NotNull PerlConfiguration perlConfiguration) throws ConfigurationException {
     perlConfiguration.setScriptPath(myScriptField.getText());
     myParametersPanel.applyTo(perlConfiguration);
     perlConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
@@ -81,14 +81,10 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlCon
       PerlBundle.message("perl.run.config.select.script.header"),
       PerlBundle.message("perl.run.config.select.script.prompt"),
       myProject,
-      FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(new Condition<VirtualFile>() {
-        @Override
-        public boolean value(VirtualFile virtualFile) {
-          return PerlConfigurationProducer.isExecutableFile(virtualFile);
-        }
-      }), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+      FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
+        PerlConfigurationProducer::isExecutableFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
-    myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<String>(Charset.availableCharsets().keySet())));
+    myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<>(Charset.availableCharsets().keySet())));
 
     myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
       @Override
