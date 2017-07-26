@@ -17,46 +17,20 @@
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.AdditionalLibraryRootsProvider;
 import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
+
   @NotNull
   @Override
   public Collection<SyntheticLibrary> getAdditionalProjectLibraries(@NotNull Project project) {
-    PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(project);
-    List<VirtualFile> sdkLibs = perlProjectManager.getProjectSdkLibraryRoots();
-    if (sdkLibs.isEmpty()) {
-      return Collections.emptyList();
-    }
-
-    SyntheticLibrary sdkLibrary;
-    Sdk sdk = perlProjectManager.getProjectSdk();
-    if (sdk != null) {
-      sdkLibrary = new PerlSdkLibrary(sdk, sdkLibs);
-    }
-    else {
-      sdkLibrary = SyntheticLibrary.newImmutableLibrary(sdkLibs);
-    }
-
-    List<VirtualFile> libraryRoots = perlProjectManager.getNonSdkLibraryRoots();
-
-    if (libraryRoots.isEmpty()) {
-      return Collections.singletonList(sdkLibrary);
-    }
-    List<SyntheticLibrary> result = new ArrayList<>();
-    result.add(SyntheticLibrary.newImmutableLibrary(libraryRoots));
-    result.add(sdkLibrary);
-    return result;
+    return PerlProjectManager.getInstance(project).getProjectLibraries();
   }
 
   @NotNull

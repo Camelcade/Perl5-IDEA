@@ -29,6 +29,7 @@ import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootEvent;
 import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
@@ -37,6 +38,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
@@ -56,6 +59,7 @@ public class PerlProjectManager {
   private AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
   private AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
   private AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
+  private AtomicNotNullLazyValue<List<SyntheticLibrary>> myLibrariesProvider;
 
   public PerlProjectManager(@NotNull Project project) {
     myProject = project;
@@ -120,6 +124,31 @@ public class PerlProjectManager {
       result.addAll(getProjectSdkLibraryRoots());
       return result;
     });
+    myLibrariesProvider = AtomicNotNullLazyValue.createValue(() -> {
+      List<VirtualFile> sdkLibs = getProjectSdkLibraryRoots();
+      if (sdkLibs.isEmpty()) {
+        return Collections.emptyList();
+      }
+
+      SyntheticLibrary sdkLibrary;
+      Sdk sdk = getProjectSdk();
+      if (sdk != null) {
+        sdkLibrary = new PerlSdkLibrary(sdk, sdkLibs);
+      }
+      else {
+        sdkLibrary = SyntheticLibrary.newImmutableLibrary(sdkLibs);
+      }
+
+      List<VirtualFile> libraryRoots = getNonSdkLibraryRoots();
+
+      if (libraryRoots.isEmpty()) {
+        return Collections.singletonList(sdkLibrary);
+      }
+      List<SyntheticLibrary> result = new ArrayList<>();
+      result.add(SyntheticLibrary.newImmutableLibrary(libraryRoots));
+      result.add(sdkLibrary);
+      return result;
+    });
   }
 
   public List<VirtualFile> getNonSdkLibraryRoots() {
@@ -133,6 +162,8 @@ public class PerlProjectManager {
   public List<VirtualFile> getProjectSdkLibraryRoots() {
     return mySdkLibraryRootsProvider.getValue();
   }
+
+  public List<SyntheticLibrary> getProjectLibraries() { return myLibrariesProvider.getValue();}
 
   @Nullable
   public Sdk getProjectSdk() {
