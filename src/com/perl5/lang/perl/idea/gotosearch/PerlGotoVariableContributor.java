@@ -20,7 +20,6 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -67,7 +66,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor {
     if (name.length() > 0) {
       Collection<PerlVariableDeclarationElement> result = null;
       GlobalSearchScope scope =
-        includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project);
+        includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
 
       char firstChar = name.charAt(0);
 

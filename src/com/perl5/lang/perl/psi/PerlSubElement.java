@@ -19,10 +19,8 @@ package com.perl5.lang.perl.psi;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.Queue;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -91,7 +89,6 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     }
     Set<String> recursionSet = new THashSet<>();
     Project project = getProject();
-    GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
     Queue<String> packagesToProcess = new Queue<>(5);
     packagesToProcess.addLast(packageName);
 

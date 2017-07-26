@@ -20,7 +20,6 @@ import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +42,7 @@ public class PerlGoToSubDefinitionContributor implements ChooseByNameContributor
     Collection<PerlSubDefinitionElement> result = PerlSubUtil.getSubDefinitions(
       project,
       name,
-      (includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
+      (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project))
     );
     //noinspection SuspiciousToArrayCall
     return result.toArray(new NavigationItem[result.size()]);

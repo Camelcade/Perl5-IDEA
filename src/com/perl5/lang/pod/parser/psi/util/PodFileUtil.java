@@ -23,8 +23,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -162,7 +162,7 @@ public class PodFileUtil {
       {
         fileId += "." + PodFileType.EXTENSION;
 
-        for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, PerlScopes.getProjectAndLibrariesScope(project))) {
+        for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, GlobalSearchScope.allScope(project))) {
           if (!processor.process(podFile)) {
             return;
           }

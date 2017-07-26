@@ -338,7 +338,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
       String packageName = ((PerlNamespaceDefinitionElement)myElement).getPackageName();
 
       if (packageName != null) {
-        for (PsiElement element : PerlMro.getVariants(myElement.getProject(), packageName, true)) {
+        for (PsiElement element : PerlMro.getVariants(myElement, packageName, true)) {
           if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
             if (element instanceof PerlLightConstantDefinitionElement) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());

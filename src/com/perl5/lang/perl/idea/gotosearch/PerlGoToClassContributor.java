@@ -22,7 +22,6 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ArrayUtil;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +57,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
     Collection<PerlNamespaceDefinitionElement> result = PerlPackageUtil.getNamespaceDefinitions(
       project,
       packageName,
-      (includeNonProjectItems ? PerlScopes.getProjectAndLibrariesScope(project) : GlobalSearchScope.projectScope(project))
+      (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project))
     );
     //noinspection SuspiciousToArrayCall
     return result.toArray(new NavigationItem[result.size()]);

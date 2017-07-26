@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.mro;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -61,7 +60,7 @@ public abstract class PerlMro {
    */
   @NotNull
   public static Collection<PsiElement> resolveSub(@NotNull Project project, String packageName, String subName, boolean isSuper) {
-    Collection<PsiElement> result = new ArrayList<PsiElement>();
+    Collection<PsiElement> result = new ArrayList<>();
     if (subName == null) {
       return result;
     }
@@ -106,16 +105,17 @@ public abstract class PerlMro {
   /**
    * Returns collection of Sub Definitions of class and it's superclasses according perl's default MRO
    *
-   * @param project         Current project
+   * @param psiElement      anchorElement
    * @param basePackageName base project
    * @param isSuper         flag for SUPER resolutions
    * @return collection of definitions
    */
-  public static Collection<PsiElement> getVariants(Project project, String basePackageName, boolean isSuper) {
-    HashMap<String, PsiElement> methods = new HashMap<String, PsiElement>();
+  public static Collection<PsiElement> getVariants(@NotNull PsiElement psiElement, String basePackageName, boolean isSuper) {
+    Project project = psiElement.getProject();
+    HashMap<String, PsiElement> methods = new HashMap<>();
 
     if (basePackageName != null) {
-      GlobalSearchScope searchScope = PerlScopes.getProjectAndLibrariesScope(project);
+      GlobalSearchScope searchScope = psiElement.getResolveScope();
       for (String packageName : getLinearISA(project, basePackageName, isSuper)) {
         PerlSubUtil.processSubDefinitionsInPackage(project, packageName, searchScope, subDefinition -> {
           if (!methods.containsKey(subDefinition.getSubName())) {
@@ -138,7 +138,7 @@ public abstract class PerlMro {
       }
     }
 
-    return new ArrayList<PsiElement>(methods.values());
+    return new ArrayList<>(methods.values());
   }
 
   /**
@@ -150,8 +150,8 @@ public abstract class PerlMro {
    * @return list of linear @ISA
    */
   public static ArrayList<String> getLinearISA(Project project, @NotNull String packageName, boolean isSuper) {
-    HashSet<String> recursionMap = new HashSet<String>();
-    ArrayList<String> result = new ArrayList<String>();
+    HashSet<String> recursionMap = new HashSet<>();
+    ArrayList<String> result = new ArrayList<>();
 
     if (!isSuper) {
       recursionMap.add(packageName);

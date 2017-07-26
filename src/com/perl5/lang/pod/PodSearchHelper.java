@@ -22,7 +22,6 @@ import com.intellij.openapi.util.UserDataHolderEx;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.PerlScopes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -74,7 +73,7 @@ public class PodSearchHelper {
   }
 
   protected static GlobalSearchScope createFileScope(@NotNull Project project, String fileName) {
-    Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, fileName, PerlScopes.getProjectAndLibrariesScope(project));
+    Collection<VirtualFile> files = FilenameIndex.getVirtualFilesByName(project, fileName, GlobalSearchScope.allScope(project));
 
     if (!files.isEmpty()) {
       return GlobalSearchScope.filesScope(project, files);

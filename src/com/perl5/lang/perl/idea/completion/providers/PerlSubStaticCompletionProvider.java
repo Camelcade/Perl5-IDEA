@@ -23,7 +23,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -49,7 +48,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
     Project project = parameters.getPosition().getProject();
 
     // defined subs
-    GlobalSearchScope searchScope = PerlScopes.getProjectAndLibrariesScope(project);
+    GlobalSearchScope searchScope = method.getResolveScope();
     PerlSubUtil.processSubDefinitionsInPackage(project, packageName, searchScope, subDefinition -> {
       if (subDefinition.isStatic()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement(subDefinition));

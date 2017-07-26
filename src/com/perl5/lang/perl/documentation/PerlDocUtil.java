@@ -21,9 +21,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
@@ -221,7 +221,7 @@ public class PerlDocUtil implements PerlElementTypes {
   }
 
   protected static PodCompositeElement searchPodElementInFile(Project project, String fileName, PodDocumentPattern pattern) {
-    PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, fileName, PerlScopes.getProjectAndLibrariesScope(project));
+    PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, fileName, GlobalSearchScope.allScope(project));
     if (psiFiles.length > 0) {
       return searchPodElement(psiFiles[0], pattern);
     }

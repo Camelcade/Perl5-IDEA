@@ -51,7 +51,7 @@ public class PerlSubMethodCompletionProvider extends CompletionProvider<Completi
     }
 
     // fixme
-    for (PsiElement element : PerlMro.getVariants(method.getProject(), packageName, isSuper)) {
+    for (PsiElement element : PerlMro.getVariants(method, packageName, isSuper)) {
       if (element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).isMethod()) {
         resultSet.addElement(PerlSubCompletionUtil.getSubDefinitionLookupElement((PerlSubDefinitionElement)element));
       }

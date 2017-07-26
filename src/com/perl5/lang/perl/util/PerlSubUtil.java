@@ -24,7 +24,6 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -96,7 +95,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    */
   public static Collection<PerlSubDefinitionElement> getSubDefinitions(@NotNull Project project,
                                                                        @Nullable String canonicalName) {
-    return getSubDefinitions(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
+    return getSubDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
   public static Collection<PerlSubDefinitionElement> getSubDefinitions(@NotNull Project project,
@@ -112,7 +111,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
 
   public static Collection<PerlSubDefinitionElement> getSubDefinitionsInPackage(@NotNull Project project,
                                                                                 @NotNull String packageName) {
-    return getSubDefinitionsInPackage(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+    return getSubDefinitionsInPackage(project, packageName, GlobalSearchScope.allScope(project));
   }
 
   public static Collection<PerlSubDefinitionElement> getSubDefinitionsInPackage(@NotNull Project project,
@@ -175,7 +174,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
    * @return Collection of found definitions
    */
   public static Collection<PerlSubDeclarationElement> getSubDeclarations(Project project, String canonicalName) {
-    return getSubDeclarations(project, canonicalName, PerlScopes.getProjectAndLibrariesScope(project));
+    return getSubDeclarations(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
   public static Collection<PerlSubDeclarationElement> getSubDeclarations(Project project, String canonicalName, GlobalSearchScope scope) {
@@ -349,7 +348,7 @@ public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
   public static void processRelatedItems(@NotNull String canonicalName,
                                          @NotNull Project project,
                                          @NotNull Processor<PsiElement> processor) {
-    processRelatedItems(canonicalName, project, PerlScopes.getProjectAndLibrariesScope(project), processor);
+    processRelatedItems(canonicalName, project, GlobalSearchScope.allScope(project), processor);
   }
 
   // fixme this should replace PerlSubReferenceResolver#collectRelatedItems

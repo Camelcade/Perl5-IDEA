@@ -36,7 +36,6 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
@@ -283,7 +282,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
         getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
 
       if (list.isEmpty()) {
-        list = getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+        list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
       }
 
       namespaceDefinitions.addAll(list);
@@ -299,7 +298,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return collection of found definitions
    */
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project, @NotNull String packageName) {
-    return getNamespaceDefinitions(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+    return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
   }
 
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
@@ -361,7 +360,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     }
     List<PerlNamespaceDefinitionElement> list = getChildNamespaces(project, packageName, GlobalSearchScope.projectScope(project));
     if (list.isEmpty()) {
-      list = getChildNamespaces(project, packageName, PerlScopes.getProjectAndLibrariesScope(project));
+      list = getChildNamespaces(project, packageName, GlobalSearchScope.allScope(project));
     }
     return list;
   }

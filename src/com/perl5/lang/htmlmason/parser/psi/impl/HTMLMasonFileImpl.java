@@ -35,7 +35,6 @@ import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
-import com.perl5.lang.perl.PerlScopes;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -191,7 +190,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       if (componentRoot != null) {
         final String relativePath = VfsUtil.VFS_SEPARATOR_CHAR + VfsUtil.getRelativePath(containingFile, componentRoot);
         final Project project = getProject();
-        final GlobalSearchScope scope = PerlScopes.getProjectAndLibrariesScope(project);
+        final GlobalSearchScope scope = GlobalSearchScope.allScope(project);
         final HTMLMasonFileImpl currentFile = this;
         HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
 
