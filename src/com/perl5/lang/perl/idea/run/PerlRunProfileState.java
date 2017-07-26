@@ -30,7 +30,6 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +37,6 @@ import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,8 +90,7 @@ public class PerlRunProfileState extends CommandLineState {
 
     assert homePath != null;
 
-    String[] parameter = ArrayUtil.mergeArrays(getPerlLibraryParameters(runProfile.getProject()), getPerlArguments(runProfile));
-    GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, parameter);
+    GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlSdkPath, scriptFile, getPerlParameters(runProfile));
 
     String programParameters = runProfile.getProgramParameters();
 
@@ -125,7 +122,7 @@ public class PerlRunProfileState extends CommandLineState {
   }
 
   @NotNull
-  protected String[] getPerlArguments(PerlConfiguration runProfile) {
+  protected String[] getPerlParameters(PerlConfiguration runProfile) {
 
     String perlParameters = runProfile.getPerlParameters();
     if (perlParameters == null) {
@@ -137,14 +134,5 @@ public class PerlRunProfileState extends CommandLineState {
 
   protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException {
     return runProfile.getEnvs();
-  }
-
-  @NotNull
-  public String[] getPerlLibraryParameters(@NotNull Project project) {
-    List<String> parameterList = new ArrayList<>();
-    for (VirtualFile virtualFile : PerlProjectManager.getInstance(project).getNonSdkLibraryRoots()) {
-      parameterList.add("-I" + virtualFile.getCanonicalPath());
-    }
-    return parameterList.toArray(new String[parameterList.size()]);
   }
 }

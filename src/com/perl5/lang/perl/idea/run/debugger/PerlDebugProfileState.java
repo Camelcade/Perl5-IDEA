@@ -41,11 +41,11 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected String[] getPerlArguments(PerlConfiguration runProfile) {
+  protected String[] getPerlParameters(PerlConfiguration runProfile) {
     List<String> result = new ArrayList<String>();
     result.add(DEBUG_ARGUMENT);
 
-    for (String argument : super.getPerlArguments(runProfile)) {
+    for (String argument : super.getPerlParameters(runProfile)) {
       if (StringUtil.isNotEmpty(argument)) {
         result.add(argument);
       }
