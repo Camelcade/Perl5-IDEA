@@ -169,6 +169,9 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   public void loadState(Element state) {
     state = state.getChild(PERL_CONFIG);
     myRoots.clear();
+    if (state == null) {
+      return;
+    }
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
     for (Element pathElement : state.getChildren(ELEMENT_PATH)) {
       JpsModuleSourceRootPropertiesSerializer serializer = SERIALIZER_BY_ID_MAP.get(pathElement.getAttributeValue(ATTRIBUTE_TYPE));
