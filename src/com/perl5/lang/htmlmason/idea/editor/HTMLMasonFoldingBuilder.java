@@ -23,6 +23,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonRecursiveVisitor;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
@@ -132,7 +133,7 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
 
     @Override
     public void visitElement(PsiElement element) {
-      IElementType elementType = element.getNode().getElementType();
+      IElementType elementType = PsiUtilCore.getElementType(element);
 
       if (elementType == HTML_MASON_FILTERED_BLOCK) {
         addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
