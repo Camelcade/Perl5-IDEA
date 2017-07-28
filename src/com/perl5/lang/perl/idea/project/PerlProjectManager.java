@@ -55,11 +55,11 @@ public class PerlProjectManager {
   @NotNull
   private final Project myProject;
   private final PerlLocalSettings myPerlSettings;
-  private AtomicNullableLazyValue<Sdk> mySdkProvider;
-  private AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
-  private AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
-  private AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
-  private AtomicNotNullLazyValue<List<SyntheticLibrary>> myLibrariesProvider;
+  private volatile AtomicNullableLazyValue<Sdk> mySdkProvider;
+  private volatile AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
+  private volatile AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
+  private volatile AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
+  private volatile AtomicNotNullLazyValue<List<SyntheticLibrary>> myLibrariesProvider;
 
   public PerlProjectManager(@NotNull Project project) {
     myProject = project;
