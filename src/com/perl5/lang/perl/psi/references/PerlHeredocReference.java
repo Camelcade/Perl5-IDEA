@@ -76,7 +76,9 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
         if (firstLineElement != null) {
           HeredocSeeker seeker = new HeredocSeeker(seekEndOffset, null);
           PerlPsiUtil.iteratePsiElementsRight(firstLineElement, seeker);
-          return PsiElementResolveResult.createResults(seeker.getResult());
+          if (seeker.getResult() != null) {
+            return PsiElementResolveResult.createResults(seeker.getResult());
+          }
         }
       }
     }
