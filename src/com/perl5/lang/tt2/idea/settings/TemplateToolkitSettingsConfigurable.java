@@ -39,10 +39,10 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
   private final Project myProject;
   @SuppressWarnings("Since15")
   protected CollectionListModel<String> rootsModel;
-  protected JBList rootsList;
+  protected JBList<String> rootsList;
   @SuppressWarnings("Since15")
   protected CollectionListModel<String> substitutedExtensionsModel;
-  protected JBList substitutedExtensionsList;
+  protected JBList<String> substitutedExtensionsList;
   protected JPanel substitutedExtensionsPanel;
   private JTextField startTagField;
   private JTextField endTagField;
@@ -93,8 +93,8 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     );
 
     //noinspection Since15
-    rootsModel = new CollectionListModel<String>();
-    rootsList = new JBList(rootsModel);
+    rootsModel = new CollectionListModel<>();
+    rootsList = new JBList<>(rootsModel);
     builder.addLabeledComponent(
       PerlBundle.message("ttk2.configuration.template.dirs.label"),
       PerlConfigurationUtil.createProjectPathsSelection(
@@ -106,8 +106,8 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
 
 
     //noinspection Since15
-    substitutedExtensionsModel = new CollectionListModel<String>();
-    substitutedExtensionsList = new JBList(substitutedExtensionsModel);
+    substitutedExtensionsModel = new CollectionListModel<>();
+    substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
     substitutedExtensionsPanel =
       PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
     builder.addLabeledComponent(new JLabel(PerlBundle.message("ttk2.configuration.extension")), substitutedExtensionsPanel);
