@@ -97,60 +97,48 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     myProject = project;
   }
 
+  @SuppressWarnings("Duplicates")
   private void createLazyObjects() {
-    myLazyMatchers = new AtomicNotNullLazyValue<List<FileNameMatcher>>() {
-      @SuppressWarnings("Duplicates")
-      @NotNull
-      @Override
-      protected List<FileNameMatcher> compute() {
-        List<FileNameMatcher> result = new ArrayList<>();
-        FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-        for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
-          if (fileType instanceof LanguageFileType) {
-            for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
-              if (substitutedExtensions.contains(matcher.getPresentableString())) {
-                result.add(matcher);
-              }
+    myLazyMatchers = AtomicNotNullLazyValue.createValue(() -> {
+      List<FileNameMatcher> result = new ArrayList<>();
+      FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+      for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+        if (fileType instanceof LanguageFileType) {
+          for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+            if (substitutedExtensions.contains(matcher.getPresentableString())) {
+              result.add(matcher);
             }
           }
         }
-        return result;
       }
-    };
+      return result;
+    });
 
-    myLazyVirtualFilesRoots = new AtomicNotNullLazyValue<List<VirtualFile>>() {
-      @NotNull
-      @Override
-      protected List<VirtualFile> compute() {
-        List<VirtualFile> result = new ArrayList<>();
+    myLazyVirtualFilesRoots = AtomicNotNullLazyValue.createValue(() -> {
+      List<VirtualFile> result = new ArrayList<>();
 
-        for (String relativeRoot : TEMPLATE_DIRS) {
-          VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
-          if (rootFile != null && rootFile.exists()) {
-            result.add(rootFile);
-          }
+      for (String relativeRoot : TEMPLATE_DIRS) {
+        VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
+        if (rootFile != null && rootFile.exists()) {
+          result.add(rootFile);
         }
-
-        return result;
       }
-    };
 
-    myLazyPsiDirsRoots = new AtomicNotNullLazyValue<Collection<PsiFileSystemItem>>() {
-      @NotNull
-      @Override
-      protected Collection<PsiFileSystemItem> compute() {
-        Collection<PsiFileSystemItem> result = new ArrayDeque<>();
+      return result;
+    });
 
-        PsiManager psiManager = PsiManager.getInstance(myProject);
-        for (VirtualFile virtualFile : getTemplateRoots()) {
-          PsiDirectory directory = psiManager.findDirectory(virtualFile);
-          if (directory != null) {
-            result.add(directory);
-          }
+    myLazyPsiDirsRoots = AtomicNotNullLazyValue.createValue(() -> {
+      Collection<PsiFileSystemItem> result = new ArrayDeque<>();
+
+      PsiManager psiManager = PsiManager.getInstance(myProject);
+      for (VirtualFile virtualFile : getTemplateRoots()) {
+        PsiDirectory directory = psiManager.findDirectory(virtualFile);
+        if (directory != null) {
+          result.add(directory);
         }
-        return result;
       }
-    };
+      return result;
+    });
   }
 
   @Nullable

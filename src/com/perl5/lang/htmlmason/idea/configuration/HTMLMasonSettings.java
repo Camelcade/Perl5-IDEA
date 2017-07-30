@@ -76,23 +76,19 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   }
 
   private void initCustomTagsMapProvider() {
-    myCustomTagsMapProvider = new AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>>() {
-      @Nullable
-      @Override
-      protected Map<String, HTMLMasonCustomTag> compute() {
-        if (customTags.isEmpty()) {
-          return null;
-        }
-
-        Map<String, HTMLMasonCustomTag> result = new THashMap<>();
-
-        for (HTMLMasonCustomTag customTag : customTags) {
-          result.put(customTag.getText(), customTag);
-        }
-
-        return result;
+    myCustomTagsMapProvider = AtomicNullableLazyValue.createValue(() -> {
+      if (customTags.isEmpty()) {
+        return null;
       }
-    };
+
+      Map<String, HTMLMasonCustomTag> result = new THashMap<>();
+
+      for (HTMLMasonCustomTag customTag : customTags) {
+        result.put(customTag.getText(), customTag);
+      }
+
+      return result;
+    });
   }
 
   @Nullable

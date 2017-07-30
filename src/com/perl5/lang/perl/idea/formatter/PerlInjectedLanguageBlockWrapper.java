@@ -33,27 +33,17 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   private final static Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
   protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
-  private final AtomicNullableLazyValue<TextRange> myRangeProvider = new AtomicNullableLazyValue<TextRange>() {
-    @Nullable
-    @Override
-    protected TextRange compute() {
-      return myBuilder.getRangeInHostDocument(myOriginal.getTextRange());
-    }
-  };
-  private final AtomicNotNullLazyValue<List<Block>> myChildBlocksProvider = new AtomicNotNullLazyValue<List<Block>>() {
-    @NotNull
-    @Override
-    protected List<Block> compute() {
-      return myOriginal.getSubBlocks().stream()
-        .map(block -> new PerlInjectedLanguageBlockWrapper(block, myBuilder))
-        .filter(wrapper -> wrapper.getTextRangeInner() != null)
-        .collect(Collectors.toList());
-    }
-  };
+  private final AtomicNullableLazyValue<TextRange> myRangeProvider;
+  private final AtomicNotNullLazyValue<List<Block>> myChildBlocksProvider;
 
   public PerlInjectedLanguageBlockWrapper(@NotNull Block original, @NotNull PerlInjectedLanguageBlocksBuilder builder) {
     myOriginal = original;
     myBuilder = builder;
+    myRangeProvider = AtomicNullableLazyValue.createValue(() -> myBuilder.getRangeInHostDocument(myOriginal.getTextRange()));
+    myChildBlocksProvider = AtomicNotNullLazyValue.createValue(() -> myOriginal.getSubBlocks().stream()
+      .map(block -> new PerlInjectedLanguageBlockWrapper(block, myBuilder))
+      .filter(wrapper -> wrapper.getTextRangeInner() != null)
+      .collect(Collectors.toList()));
   }
 
   @NotNull

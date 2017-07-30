@@ -45,10 +45,14 @@ public class PerlStackFrame extends XStackFrame {
   private final PerlStackFrameDescriptor myFrameDescriptor;
   private final PerlExecutionStack myPerlExecutionStack;
   private final PerlDebugThread myDebugThread;
-  private AtomicNullableLazyValue<VirtualFile> myVirtualFile = new AtomicNullableLazyValue<VirtualFile>() {
-    @Nullable
-    @Override
-    protected VirtualFile compute() {
+  private final AtomicNullableLazyValue<VirtualFile> myVirtualFile;
+
+  public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack) {
+    myFrameDescriptor = frameDescriptor;
+    myPerlExecutionStack = stack;
+    myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
+
+    myVirtualFile = AtomicNullableLazyValue.createValue(() -> {
       String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
       String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
       VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), true);
@@ -64,13 +68,8 @@ public class PerlStackFrame extends XStackFrame {
       }
 
       return result;
-    }
-  };
+    });
 
-  public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack) {
-    myFrameDescriptor = frameDescriptor;
-    myPerlExecutionStack = stack;
-    myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
     PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
 
     if (fileDescriptor.isEval()) {

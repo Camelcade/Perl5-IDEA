@@ -91,10 +91,22 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private final boolean myIsFirst;
   private final boolean myIsLast;
   private final IElementType myElementType;
-  private final AtomicNotNullLazyValue<Boolean> myIsIncomple = new AtomicNotNullLazyValue<Boolean>() {
-    @NotNull
-    @Override
-    protected Boolean compute() {
+  private final AtomicNotNullLazyValue<Boolean> myIsIncomple;
+  private List<Block> mySubBlocks;
+
+  public PerlFormattingBlock(
+    @NotNull ASTNode node,
+    @Nullable Wrap wrap,
+    @Nullable Alignment alignment,
+    @NotNull PerlFormattingContext context
+  ) {
+    super(node, wrap, alignment);
+    myContext = context;
+    myIndent = context.getIndentProcessor().getNodeIndent(node);
+    myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
+    myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
+    myElementType = node.getElementType();
+    myIsIncomple = AtomicNotNullLazyValue.createValue(() -> {
       if (myElementType == COMMA_SEQUENCE_EXPR) {
         IElementType lastNodeType = PsiUtilCore.getElementType(myNode.getLastChildNode());
         if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
@@ -111,22 +123,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       }
 
       return PerlFormattingBlock.super.isIncomplete();
-    }
-  };
-  private List<Block> mySubBlocks;
-
-  public PerlFormattingBlock(
-    @NotNull ASTNode node,
-    @Nullable Wrap wrap,
-    @Nullable Alignment alignment,
-    @NotNull PerlFormattingContext context
-  ) {
-    super(node, wrap, alignment);
-    myContext = context;
-    myIndent = context.getIndentProcessor().getNodeIndent(node);
-    myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
-    myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
-    myElementType = node.getElementType();
+    });
   }
 
   @NotNull

@@ -386,23 +386,15 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     myParensStack.clear();
     heredocQueue.clear();
 
-    mySubNamesProvider = new AtomicNotNullLazyValue<Set<String>>() {
-      @NotNull
-      @Override
-      protected Set<String> compute() {
-        assert myProject != null;
-        return PerlNamesCache.getInstance(myProject).getSubsNamesSet();
-      }
-    };
+    mySubNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
+      assert myProject != null;
+      return PerlNamesCache.getInstance(myProject).getSubsNamesSet();
+    });
 
-    myPackageNamesProvider = new AtomicNotNullLazyValue<Set<String>>() {
-      @NotNull
-      @Override
-      protected Set<String> compute() {
-        assert myProject != null;
-        return PerlNamesCache.getInstance(myProject).getPackagesNamesSet();
-      }
-    };
+    myPackageNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
+      assert myProject != null;
+      return PerlNamesCache.getInstance(myProject).getPackagesNamesSet();
+    });
     myLocalPackages.clear();
   }
 
