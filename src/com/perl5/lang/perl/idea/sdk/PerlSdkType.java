@@ -40,10 +40,11 @@ import java.util.regex.Pattern;
  */
 public class PerlSdkType extends SdkType {
   public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
+  public static final PerlSdkType INSTANCE = new PerlSdkType();
 
   public static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 
-  public PerlSdkType() {
+  private PerlSdkType() {
     super(PERL_SDK_TYPE_ID);
   }
 
@@ -182,8 +183,9 @@ public class PerlSdkType extends SdkType {
     return "missing executable";
   }
 
+  @Deprecated // use INSTANCE instead
   @NotNull
   public static PerlSdkType getInstance() {
-    return SdkType.findInstance(PerlSdkType.class);
+    return INSTANCE;
   }
 }
