@@ -54,37 +54,34 @@ public class PerlConfigurationUtil {
   ) {
     return ToolbarDecorator
       .createDecorator(rootsList)
-      .setAddAction(new AnActionButtonRunnable() {
-        @Override
-        public void run(AnActionButton anActionButton) {
-          //rootsModel.add("New element");
-          FileChooserFactory.getInstance().createPathChooser(
-            FileChooserDescriptorFactory.
-              createMultipleFoldersDescriptor().
-              withRoots(myProject.getBaseDir()).
-              withTreeRootVisible(true).
-              withTitle(dialogTitle),
-            myProject,
-            rootsList
-          ).choose(null, new Consumer<List<VirtualFile>>() {
-            @Override
-            public void consume(List<VirtualFile> virtualFiles) {
-              String rootPath = myProject.getBasePath();
-              if (rootPath != null) {
-                VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
+      .setAddAction(anActionButton -> {
+        //rootsModel.add("New element");
+        FileChooserFactory.getInstance().createPathChooser(
+          FileChooserDescriptorFactory.
+            createMultipleFoldersDescriptor().
+            withRoots(myProject.getBaseDir()).
+            withTreeRootVisible(true).
+            withTitle(dialogTitle),
+          myProject,
+          rootsList
+        ).choose(null, new Consumer<List<VirtualFile>>() {
+          @Override
+          public void consume(List<VirtualFile> virtualFiles) {
+            String rootPath = myProject.getBasePath();
+            if (rootPath != null) {
+              VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
 
-                if (rootFile != null) {
-                  for (VirtualFile file : virtualFiles) {
-                    String relativePath = VfsUtil.getRelativePath(file, rootFile);
-                    if (!rootsModel.getItems().contains(relativePath)) {
-                      rootsModel.add(relativePath);
-                    }
+              if (rootFile != null) {
+                for (VirtualFile file : virtualFiles) {
+                  String relativePath = VfsUtil.getRelativePath(file, rootFile);
+                  if (!rootsModel.getItems().contains(relativePath)) {
+                    rootsModel.add(relativePath);
                   }
                 }
               }
             }
-          });
-        }
+          }
+        });
       })
       .setPreferredSize(JBUI.size(0, WIDGET_HEIGHT))
       .createPanel();

@@ -53,7 +53,7 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
   }
 
   public void setExternalLibrariesPaths(List<String> externalLibrariesPaths) {
-    myExternalLibrariesPaths = externalLibrariesPaths;
+    myExternalLibrariesPaths = new ArrayList<>(externalLibrariesPaths);
   }
 
   public String getPerlInterpreter() {

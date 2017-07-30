@@ -56,6 +56,7 @@ public class PerlProjectManager {
   private final Project myProject;
   private final PerlLocalSettings myPerlSettings;
   private volatile AtomicNullableLazyValue<Sdk> mySdkProvider;
+  private volatile AtomicNotNullLazyValue<List<VirtualFile>> myExternalLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
@@ -96,7 +97,7 @@ public class PerlProjectManager {
 
   private void resetProjectSdk() {
     mySdkProvider = AtomicNullableLazyValue.createValue(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
-    mySdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
+    myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       List<VirtualFile> result = new ArrayList<>();
 
       for (String externalPath : myPerlSettings.getExternalLibrariesPaths()) {
@@ -105,7 +106,10 @@ public class PerlProjectManager {
           result.add(virtualFile);
         }
       }
-
+      return result;
+    });
+    mySdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
+      List<VirtualFile> result = new ArrayList<>(getExternalLibraryRoots());
       Sdk projectSdk = getProjectSdk();
       if (projectSdk != null) {
         result.addAll(Arrays.asList(projectSdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
@@ -151,6 +155,10 @@ public class PerlProjectManager {
     });
   }
 
+  public List<VirtualFile> getExternalLibraryRoots() {
+    return myExternalLibraryRootsProvider.getValue();
+  }
+
   public List<VirtualFile> getNonSdkLibraryRoots() {
     return myNonSdkLibraryRootsProvider.getValue();
   }
@@ -171,20 +179,42 @@ public class PerlProjectManager {
   }
 
   public void addExternalLibrary(@NotNull VirtualFile root) {
-    if (!root.isValid() || !root.isDirectory()) {
-      return;
-    }
+    addExternalLibraries(Collections.singletonList(root));
+  }
+
+  public void setExternalLibraries(@NotNull List<VirtualFile> roots) {
     WriteAction.run(() -> {
-      List<String> paths = myPerlSettings.getExternalLibrariesPaths();
-      String canonicalPath = root.getCanonicalPath();
-      if (!paths.contains(canonicalPath)) {
+      myPerlSettings.setExternalLibrariesPaths(Collections.emptyList());
+      addExternalLibraries(roots);
+    });
+  }
+
+  public void addExternalLibraries(@NotNull List<VirtualFile> roots) {
+    WriteAction.run(
+      () -> {
+        List<String> paths = new ArrayList<>(myPerlSettings.getExternalLibrariesPaths());
+        boolean doChange = false;
+        for (VirtualFile root : roots) {
+          if (!root.isValid() || !root.isDirectory()) {
+            return;
+          }
+
+          String canonicalPath = root.getCanonicalPath();
+          if (!paths.contains(canonicalPath)) {
+            doChange = true;
+            paths.add(canonicalPath);
+          }
+        }
+        if (!doChange) {
+          return;
+        }
+
         ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
           () -> {
-            paths.add(canonicalPath);
             myPerlSettings.setExternalLibrariesPaths(paths);
           }, false, true);
       }
-    });
+    );
   }
 
   public void setProjectSdk(@Nullable Sdk sdk) {
