@@ -33,7 +33,7 @@ import java.util.Set;
  * Created by hurricup on 09.01.2016.
  */
 public class MasonVirtualFileListener extends VirtualFileAdapter {
-  public static final Key<Boolean> FORCE_REINDEX = new Key<Boolean>("Force re-indexing");
+  public static final Key<Boolean> FORCE_REINDEX = new Key<>("Force re-indexing");
 
   private final Project myProject;
 
@@ -64,7 +64,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter {
     }
 
 
-    Set<VirtualFile> rootsSet = new THashSet<VirtualFile>(componentsRoots);
+    Set<VirtualFile> rootsSet = new THashSet<>(componentsRoots);
     if (changedFile.isDirectory()) {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
           VfsUtil.isUnder(changedFile, rootsSet) ||        // moved to component root
@@ -135,7 +135,7 @@ public class MasonVirtualFileListener extends VirtualFileAdapter {
 
     VirtualFile movedFile = event.getFile();
 
-    Set<VirtualFile> rootsSet = new THashSet<VirtualFile>(componentsRoots);
+    Set<VirtualFile> rootsSet = new THashSet<>(componentsRoots);
     if (movedFile.isDirectory()) {
       if (VfsUtil.isUnder(movedFile, rootsSet) ||    // moved from component root
           containsAtLeastOneFile(movedFile, componentsRoots) // contains component root

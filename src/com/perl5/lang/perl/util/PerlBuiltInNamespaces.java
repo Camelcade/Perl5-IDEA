@@ -448,7 +448,7 @@ public interface PerlBuiltInNamespaces {
     PerlPackageUtil.CORE_PACKAGE
   ));
 
-  public static final Set<String> BUILT_IN_PRAGMA = new THashSet<String>(Arrays.asList(
+  public static final Set<String> BUILT_IN_PRAGMA = new THashSet<>(Arrays.asList(
     "attributes",
     "autodie",
     "autouse",
@@ -490,7 +490,7 @@ public interface PerlBuiltInNamespaces {
     "warnings::register"
   ));
 
-  public static final Set<String> BUILT_IN_DEPRECATED = new THashSet<String>(Arrays.asList(
+  public static final Set<String> BUILT_IN_DEPRECATED = new THashSet<>(Arrays.asList(
     "Locale::Maketext::Guts",
     "Locale::Maketext::GutsLoader",
     "Module::Build::ModuleInfo",

@@ -77,7 +77,7 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
 
   public static class FoldingRegionsCollector extends PodRecursiveVisitor {
     protected final Document myDocument;
-    protected List<FoldingDescriptor> myDescriptors = new ArrayList<FoldingDescriptor>();
+    protected List<FoldingDescriptor> myDescriptors = new ArrayList<>();
 
     public FoldingRegionsCollector(Document document) {
       myDocument = document;

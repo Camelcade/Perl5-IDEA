@@ -32,10 +32,10 @@ public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase {
   public void run() {
     PerlScriptsPanel evalsListPanel = getDebugThread().getEvalsListPanel();
     PerlScriptsPanel scriptListPanel = getDebugThread().getScriptListPanel();
-    List<PerlLoadedFileDescriptor> evalRemove = new ArrayList<PerlLoadedFileDescriptor>();
-    List<PerlLoadedFileDescriptor> evalAdd = new ArrayList<PerlLoadedFileDescriptor>();
-    List<PerlLoadedFileDescriptor> scriptRemove = new ArrayList<PerlLoadedFileDescriptor>();
-    List<PerlLoadedFileDescriptor> scriptAdd = new ArrayList<PerlLoadedFileDescriptor>();
+    List<PerlLoadedFileDescriptor> evalRemove = new ArrayList<>();
+    List<PerlLoadedFileDescriptor> evalAdd = new ArrayList<>();
+    List<PerlLoadedFileDescriptor> scriptRemove = new ArrayList<>();
+    List<PerlLoadedFileDescriptor> scriptAdd = new ArrayList<>();
 
     for (PerlLoadedFileDescriptor fileDescriptor : add) {
       if (fileDescriptor != null) {

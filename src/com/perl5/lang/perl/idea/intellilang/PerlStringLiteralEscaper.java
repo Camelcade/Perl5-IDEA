@@ -46,7 +46,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
     PsiElement openQuoteElement = ((PerlStringManipulator)manipulator).getOpeningQuote(myHost);
     char openQuote = openQuoteElement.getText().charAt(0);
     char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
-    offsetsMap = new HashMap<Integer, Integer>();
+    offsetsMap = new HashMap<>();
     CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
     Integer sourceOffset = 0;
     Integer targetOffset = 0;

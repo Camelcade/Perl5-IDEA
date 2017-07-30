@@ -54,7 +54,7 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
 
   @Override
   public PsiReference[] computeReferences() {
-    List<PsiReference> references = new ArrayList<PsiReference>();
+    List<PsiReference> references = new ArrayList<>();
     IElementType parentElementType = PsiUtilCore.getElementType(getParent());
 
     if (FILES_TARGETED_CONTAINERS.contains(parentElementType)) {

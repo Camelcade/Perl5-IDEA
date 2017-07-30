@@ -85,7 +85,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
     mySettings.autobaseNames.addAll(autobaseModel.getItems());
 
     mySettings.globalVariables.clear();
-    for (VariableDescription variableDescription : new ArrayList<VariableDescription>(globalsModel.getItems())) {
+    for (VariableDescription variableDescription : new ArrayList<>(globalsModel.getItems())) {
       if (StringUtil.isNotEmpty(variableDescription.variableName)) {
         mySettings.globalVariables.add(variableDescription);
       }
@@ -105,7 +105,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
     autobaseModel.removeAll();
     autobaseModel.add(mySettings.autobaseNames);
 
-    globalsModel.setItems(new ArrayList<VariableDescription>());
+    globalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
       globalsModel.addRow(variableDescription.clone());
     }
@@ -116,7 +116,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   }
 
   protected void createAutobaseNamesComponent(FormBuilder builder) {
-    autobaseModel = new CollectionListModel<String>();
+    autobaseModel = new CollectionListModel<>();
     autobaseList = new JBList(autobaseModel);
     builder.addLabeledComponent(
       new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"),

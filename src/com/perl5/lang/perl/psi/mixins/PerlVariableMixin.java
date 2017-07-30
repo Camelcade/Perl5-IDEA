@@ -389,7 +389,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
   public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
-    List<PerlVariableDeclarationElement> result = new ArrayList<PerlVariableDeclarationElement>();
+    List<PerlVariableDeclarationElement> result = new ArrayList<>();
     PerlVariableType myType = getActualType();
 
     PsiElement parent = getParent(); // wrapper if any
@@ -421,7 +421,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public List<PerlGlobVariable> getRelatedGlobs() {
-    List<PerlGlobVariable> result = new ArrayList<PerlGlobVariable>();
+    List<PerlGlobVariable> result = new ArrayList<>();
 
     for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName())) {
       result.add(glob);

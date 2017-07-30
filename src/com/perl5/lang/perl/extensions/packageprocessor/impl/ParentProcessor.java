@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by hurricup on 18.08.2015.
  */
 public class ParentProcessor extends BaseProcessor implements PerlPackageOptionsProvider {
-  protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
+  protected static final Map<String, String> OPTIONS = new HashMap<>();
 
   static {
     OPTIONS.put("-norequire", "suppresses attempt to require a package file");

@@ -24,7 +24,7 @@ import java.util.List;
  * Created by hurricup on 03.06.2016.
  */
 public interface POSIXExports {
-  List<String> EXPORT = new ArrayList<String>(Arrays.asList(
+  List<String> EXPORT = new ArrayList<>(Arrays.asList(
     "%SIGRT",
     "ARG_MAX",
     "B0",
@@ -618,7 +618,7 @@ public interface POSIXExports {
     "wctomb"
   ));
 
-  List<String> EXPORT_OK = new ArrayList<String>(Arrays.asList(
+  List<String> EXPORT_OK = new ArrayList<>(Arrays.asList(
     "FE_DOWNWARD",
     "FE_TONEAREST",
     "FE_TOWARDZERO",

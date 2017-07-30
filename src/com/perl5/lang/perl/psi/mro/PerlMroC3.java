@@ -44,7 +44,7 @@ public class PerlMroC3 extends PerlMro {
                            HashSet<String> recursionMap,
                            ArrayList<String> result) {
     //		System.err.println("Resolving C3 for " + packageNames);
-    Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<PerlNamespaceDefinitionElement>();
+    Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<>();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
       String packageName = namespaceDefinition.getPackageName();
       if (!recursionMap.contains(packageName)) {

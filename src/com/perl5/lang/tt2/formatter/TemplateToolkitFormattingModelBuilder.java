@@ -49,7 +49,7 @@ import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TO
  * based on handlebars plugin formatter
  */
 public class TemplateToolkitFormattingModelBuilder extends TemplateLanguageFormattingModelBuilder implements TemplateToolkitElementTypes {
-  private final Map<ASTNode, Alignment> myAssignAlignmentMap = new THashMap<ASTNode, Alignment>();
+  private final Map<ASTNode, Alignment> myAssignAlignmentMap = new THashMap<>();
   private SpacingBuilder mySpacingBuilder;
   private InjectedLanguageBlockBuilder myInjectedLanguageBlockBuilder;
 

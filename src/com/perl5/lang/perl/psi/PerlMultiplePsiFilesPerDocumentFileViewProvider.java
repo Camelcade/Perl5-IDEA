@@ -44,7 +44,7 @@ public abstract class PerlMultiplePsiFilesPerDocumentFileViewProvider
   extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, ConfigurableTemplateLanguageFileViewProvider {
   private final Language myTemplateLanguage;
-  private final Set<Language> myRelevantLanguages = new HashSet<Language>();
+  private final Set<Language> myRelevantLanguages = new HashSet<>();
 
   public PerlMultiplePsiFilesPerDocumentFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
     this(manager, virtualFile, eventSystemEnabled, calcTemplateLanguage(manager, virtualFile));

@@ -39,7 +39,7 @@ import java.io.IOException;
  * Created by hurricup on 08.03.2016.
  */
 public class HTMLMasonFilePropertyPusher implements FilePropertyPusher<Boolean> {
-  public static final Key<Boolean> KEY = new Key<Boolean>("perl5.html.mason.handling");
+  public static final Key<Boolean> KEY = new Key<>("perl5.html.mason.handling");
   public static final FilePropertyPusher<Boolean> INSTANCE = new HTMLMasonFilePropertyPusher();
   private static final FileAttribute PERSISTENCE = new FileAttribute("html_mason_handling_persistence", 1, true);
 

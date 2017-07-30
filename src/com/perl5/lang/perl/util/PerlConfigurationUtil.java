@@ -99,8 +99,8 @@ public class PerlConfigurationUtil {
         public void run(AnActionButton anActionButton) {
           FileTypeManager fileTypeManager = FileTypeManager.getInstance();
           final List<String> currentItems = substitutedExtensionsModel.getItems();
-          List<FileNameMatcher> possibleItems = new ArrayList<FileNameMatcher>();
-          List<Icon> itemsIcons = new ArrayList<Icon>();
+          List<FileNameMatcher> possibleItems = new ArrayList<>();
+          List<Icon> itemsIcons = new ArrayList<>();
 
           for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
             if (fileType instanceof LanguageFileType) {

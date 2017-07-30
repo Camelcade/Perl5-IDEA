@@ -222,7 +222,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
             return;
           }
 
-          final Map<String, Long> newFilesMap = new THashMap<String, Long>();
+          final Map<String, Long> newFilesMap = new THashMap<>();
 
           ApplicationManager.getApplication().runReadAction(() ->
                                                             {

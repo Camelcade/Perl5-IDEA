@@ -67,7 +67,7 @@ public class PerlAssignExpressionMixin extends PsiPerlExprImpl implements PerlAs
 
     List<PsiElement> resultElements = PerlArrayUtil.collectListElements(rightSide);
 
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     for (PsiElement element : resultElements) {
       result.add(element.getNode().getText());
     }

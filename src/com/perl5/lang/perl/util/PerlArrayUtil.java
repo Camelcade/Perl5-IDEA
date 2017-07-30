@@ -40,7 +40,7 @@ import java.util.*;
  * Created by hurricup on 19.04.2015.
  */
 public class PerlArrayUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
     "+",
     "-",
     "_",

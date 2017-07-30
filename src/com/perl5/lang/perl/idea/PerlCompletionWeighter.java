@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 01.06.2015.
  */
 public class PerlCompletionWeighter extends CompletionWeigher {
-  public static final Key<Integer> WEIGHT = new Key<Integer>("WEIGHT");
+  public static final Key<Integer> WEIGHT = new Key<>("WEIGHT");
 
   @Override
   public Comparable weigh(@NotNull LookupElement element, @NotNull CompletionLocation location) {

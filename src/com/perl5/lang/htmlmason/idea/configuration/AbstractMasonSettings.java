@@ -32,8 +32,8 @@ import java.util.List;
  * Created by hurricup on 05.03.2016.
  */
 public abstract class AbstractMasonSettings {
-  public List<String> componentRoots = new ArrayList<String>();
-  public List<VariableDescription> globalVariables = new ArrayList<VariableDescription>();
+  public List<String> componentRoots = new ArrayList<>();
+  public List<VariableDescription> globalVariables = new ArrayList<>();
 
   @Transient
   protected int changeCounter = 0;
@@ -59,7 +59,7 @@ public abstract class AbstractMasonSettings {
   @NotNull
   public List<VirtualFile> getComponentsRootsVirtualFiles() {
     if (componentsRootsVirtualFiles == null) {
-      componentsRootsVirtualFiles = new ArrayList<VirtualFile>();
+      componentsRootsVirtualFiles = new ArrayList<>();
       for (String relativeRoot : componentRoots) {
         VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
         if (rootFile != null && rootFile.exists()) {

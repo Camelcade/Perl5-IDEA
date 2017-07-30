@@ -37,7 +37,7 @@ public class PerlStringListMixin extends PerlCompositeElementImpl implements Per
   @NotNull
   @Override
   public List<String> getStringContents() {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
 
     PsiElement run = getFirstChild();
     StringBuilder builder = null;

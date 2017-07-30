@@ -71,7 +71,7 @@ public class Mason2Util {
 
   public static List<PerlNamespaceDefinitionElement> getMasonNamespacesByAbsolutePath(@NotNull Project project,
                                                                                       @NotNull String absolutePath) {
-    return new ArrayList<PerlNamespaceDefinitionElement>(
+    return new ArrayList<>(
       StubIndex.getElements(
         MasonNamespaceDefitnitionsStubIndex.KEY,
         absolutePath,
@@ -86,7 +86,7 @@ public class Mason2Util {
   public static List<PerlNamespaceDefinitionElement> collectComponentNamespacesByPaths(@NotNull Project project,
                                                                                        @NotNull List<String> componentPaths,
                                                                                        @NotNull VirtualFile anchorDir) {
-    List<PerlNamespaceDefinitionElement> result = new ArrayList<PerlNamespaceDefinitionElement>();
+    List<PerlNamespaceDefinitionElement> result = new ArrayList<>();
     MasonSettings masonSettings = MasonSettings.getInstance(project);
 
     for (String componentPath : componentPaths) {

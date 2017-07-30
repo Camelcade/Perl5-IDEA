@@ -51,7 +51,7 @@ public class PerlConsoleFileLinkFilter implements Filter {
   @Override
   public Result applyFilter(String textLine, int endPoint) {
     int startPoint = endPoint - textLine.length();
-    List<ResultItem> results = new ArrayList<ResultItem>();
+    List<ResultItem> results = new ArrayList<>();
     match(results, textLine, startPoint);
 
     return new Result(results);

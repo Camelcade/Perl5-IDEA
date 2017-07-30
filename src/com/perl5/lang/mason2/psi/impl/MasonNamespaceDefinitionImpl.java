@@ -59,7 +59,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables(MasonSettings masonSettings) {
-    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
 
     if (isValid()) {
       MasonCoreUtil.fillVariablesList(this, newImplicitVariables, masonSettings.globalVariables);
@@ -111,7 +111,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
         parentsNamespaces = Mason2Util.getMasonNamespacesByAbsolutePath(getProject(), autobaseParent);
       }
       else {
-        parentsNamespaces = new ArrayList<PerlNamespaceDefinitionElement>();
+        parentsNamespaces = new ArrayList<>();
       }
     }
 
@@ -177,7 +177,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   @Nullable
   private VirtualFile getParentComponentFile(VirtualFile componentRoot, VirtualFile currentDirectory, VirtualFile childFile) {
     // check in current dir
-    List<String> autobaseNames = new ArrayList<String>(MasonSettings.getInstance(getProject()).autobaseNames);
+    List<String> autobaseNames = new ArrayList<>(MasonSettings.getInstance(getProject()).autobaseNames);
 
     if (childFile.getParent().equals(currentDirectory) && autobaseNames.contains(childFile.getName())) // avoid cyclic inheritance
     {
@@ -202,15 +202,15 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   @Override
   public List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
     MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    final List<PerlNamespaceDefinitionElement> childNamespaces = new ArrayList<PerlNamespaceDefinitionElement>();
+    final List<PerlNamespaceDefinitionElement> childNamespaces = new ArrayList<>();
 
     // collect psi children
     final Project project = getProject();
     final GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
     final String componentPath = getComponentPath();
     if (componentPath != null) {
-      final List<String> relativePaths = new ArrayList<String>();
-      final List<String> exactPaths = new ArrayList<String>();
+      final List<String> relativePaths = new ArrayList<>();
+      final List<String> exactPaths = new ArrayList<>();
 
       StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>() {
         @Override
@@ -262,7 +262,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
         final String basePath = VfsUtil.getRelativePath(containingFile.getParent(), getProject().getBaseDir());
 
         if (basePath != null) {
-          final List<String> componentPaths = new ArrayList<String>();
+          final List<String> componentPaths = new ArrayList<>();
           StubIndex.getInstance().processAllKeys(
             MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), new Processor<String>() {
               @Override

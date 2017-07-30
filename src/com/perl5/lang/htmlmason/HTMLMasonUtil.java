@@ -40,7 +40,7 @@ public class HTMLMasonUtil {
   }
 
   public static List<PerlSubArgument> getArgumentsList(HTMLMasonParametrizedEntity entity) {
-    List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
+    List<PerlSubArgument> result = new ArrayList<>();
 
     for (HTMLMasonCompositeElement argsBlock : entity.getArgsBlocks()) {
       result.addAll(((HTMLMasonArgsBlock)argsBlock).getArgumentsList());

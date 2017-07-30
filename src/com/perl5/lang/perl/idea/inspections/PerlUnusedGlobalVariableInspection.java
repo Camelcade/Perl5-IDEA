@@ -29,7 +29,7 @@ import java.util.HashSet;
  * Created by hurricup on 14.08.2015.
  */
 public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBase {
-  public static final HashSet<String> EXCLUSIONS = new HashSet<String>(Arrays.asList(
+  public static final HashSet<String> EXCLUSIONS = new HashSet<>(Arrays.asList(
     "@ISA",
     "@EXPORT_OK",
     "@EXPORT",

@@ -36,7 +36,7 @@ public class TemplateToolkitFilterNameMacro extends Macro implements TemplateToo
   public static final LookupElement[] LOOKUP_ELEMENTS;
 
   static {
-    List<LookupElement> list = new ArrayList<LookupElement>();
+    List<LookupElement> list = new ArrayList<>();
     for (String filterName : FILTER_NAMES) {
       list.add(LookupElementBuilder.create(filterName));
     }

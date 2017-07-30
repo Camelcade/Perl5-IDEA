@@ -40,7 +40,7 @@ import java.util.List;
 )
 
 public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings> {
-  public List<String> autobaseNames = new ArrayList<String>(Arrays.asList("Base.mp", "Base.mc"));
+  public List<String> autobaseNames = new ArrayList<>(Arrays.asList("Base.mp", "Base.mc"));
 
   public MasonSettings() {
     globalVariables.add(new VariableDescription("$m", "Mason::Request"));

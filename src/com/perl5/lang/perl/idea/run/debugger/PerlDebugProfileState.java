@@ -42,7 +42,7 @@ public class PerlDebugProfileState extends PerlRunProfileState {
   @NotNull
   @Override
   protected String[] getPerlParameters(PerlConfiguration runProfile) {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     result.add(DEBUG_ARGUMENT);
 
     for (String argument : super.getPerlParameters(runProfile)) {
@@ -56,7 +56,7 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   @Override
   protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException {
-    Map<String, String> stringStringMap = new HashMap<String, String>(super.calcEnv(runProfile));
+    Map<String, String> stringStringMap = new HashMap<>(super.calcEnv(runProfile));
     PerlDebugOptions debugOptions = getDebugOptions();
     stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
     stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());

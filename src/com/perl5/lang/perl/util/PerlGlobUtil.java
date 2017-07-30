@@ -35,7 +35,7 @@ import java.util.HashSet;
  * Created by hurricup on 19.04.2015.
  */
 public class PerlGlobUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
     "ARGV",
     "STDERR",
     "STDOUT",

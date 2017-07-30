@@ -56,7 +56,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 
   public String autoHandlerName = "autohandler";
   public String defaultHandlerName = "dhandler";
-  public List<String> substitutedExtensions = new ArrayList<String>();
+  public List<String> substitutedExtensions = new ArrayList<>();
   public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
 
   private transient Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<>();

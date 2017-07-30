@@ -58,7 +58,7 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
   @NotNull
   @Override
   public Collection<PsiFileSystemItem> getRoots(@NotNull Module module) {
-    Collection<PsiFileSystemItem> result = new ArrayList<PsiFileSystemItem>();
+    Collection<PsiFileSystemItem> result = new ArrayList<>();
     PsiManager psiManager = PsiManager.getInstance(module.getProject());
     for (VirtualFile root : ManagingFS.getInstance().getLocalRoots()) {
       PsiDirectory directory = psiManager.findDirectory(root);

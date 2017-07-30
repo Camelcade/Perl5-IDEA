@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class PerlExecutionStack extends XExecutionStack {
   private final PerlSuspendContext mySuspendContext;
-  List<PerlStackFrame> myPerlStackFrames = new ArrayList<PerlStackFrame>();
+  List<PerlStackFrame> myPerlStackFrames = new ArrayList<>();
 
   public PerlExecutionStack(PerlStackFrameDescriptor[] frames, PerlSuspendContext suspendContext) {
     super("");

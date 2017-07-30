@@ -30,7 +30,7 @@ public class PerlWarningsMask implements Cloneable {
   protected final HashMap<String, Boolean> currentMask;
 
   public PerlWarningsMask() {
-    currentMask = new HashMap<String, Boolean>();
+    currentMask = new HashMap<>();
     for (Map.Entry<String, PerlWarningTreeLeaf> leaf : PerlWarningTree.LEAF_OPTIONS.entrySet()) {
       currentMask.put(leaf.getKey(), leaf.getValue().getDefaultValue());
     }

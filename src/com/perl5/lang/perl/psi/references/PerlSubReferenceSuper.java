@@ -38,7 +38,7 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with simple resolver, need some generics fix
     PsiElement myElement = getElement();
-    List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+    List<PsiElement> relatedItems = new ArrayList<>();
 
     String packageName = PerlPackageUtil.getContextPackageName(myElement);
     String subName = myElement.getNode().getText();

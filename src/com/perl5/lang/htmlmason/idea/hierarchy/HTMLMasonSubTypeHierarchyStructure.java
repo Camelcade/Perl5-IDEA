@@ -48,6 +48,6 @@ public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTre
   @Override
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof HTMLMasonFileImpl;
-    return new ArrayList<PsiElement>(((HTMLMasonFileImpl)element).getChildComponents());
+    return new ArrayList<>(((HTMLMasonFileImpl)element).getChildComponents());
   }
 }

@@ -58,8 +58,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   public static final String DEFAULT_END_TAG = "%]";
   public static final String DEFAULT_OUTLINE_TAG = "%%";
 
-  public List<String> substitutedExtensions = new ArrayList<String>();
-  public List<String> TEMPLATE_DIRS = new ArrayList<String>();
+  public List<String> substitutedExtensions = new ArrayList<>();
+  public List<String> TEMPLATE_DIRS = new ArrayList<>();
   public String START_TAG = DEFAULT_START_TAG;
   public String END_TAG = DEFAULT_END_TAG;
   public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;
@@ -106,7 +106,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
       @NotNull
       @Override
       protected List<FileNameMatcher> compute() {
-        List<FileNameMatcher> result = new ArrayList<FileNameMatcher>();
+        List<FileNameMatcher> result = new ArrayList<>();
         FileTypeManager fileTypeManager = FileTypeManager.getInstance();
         for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
           if (fileType instanceof LanguageFileType) {
@@ -125,7 +125,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
       @NotNull
       @Override
       protected List<VirtualFile> compute() {
-        List<VirtualFile> result = new ArrayList<VirtualFile>();
+        List<VirtualFile> result = new ArrayList<>();
 
         for (String relativeRoot : TEMPLATE_DIRS) {
           VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
@@ -142,7 +142,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
       @NotNull
       @Override
       protected Collection<PsiFileSystemItem> compute() {
-        Collection<PsiFileSystemItem> result = new ArrayDeque<PsiFileSystemItem>();
+        Collection<PsiFileSystemItem> result = new ArrayDeque<>();
 
         PsiManager psiManager = PsiManager.getInstance(myProject);
         for (VirtualFile virtualFile : getTemplateRoots()) {

@@ -48,7 +48,7 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
       if (StringUtil.isNotEmpty(content)) {
         Matcher m;
         TextRange range = ElementManipulators.getValueTextRange(element);
-        List<PsiReference> result = new ArrayList<PsiReference>();
+        List<PsiReference> result = new ArrayList<>();
         if ((m = METHOD_CALL_PATTERN.matcher(content)).matches()) // method call
         {
           String fileOrSlug = m.group(1);

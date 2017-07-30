@@ -52,7 +52,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
 
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    List<ResolveResult> result = new ArrayList<ResolveResult>();
+    List<ResolveResult> result = new ArrayList<>();
     PsiElement element = getElement();
 
     String subName = null;
@@ -70,7 +70,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
 
     if (subName != null) {
       PerlNamespaceDefinitionElement namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
-      Set<PerlNamespaceDefinitionElement> recursionSet = new THashSet<PerlNamespaceDefinitionElement>();
+      Set<PerlNamespaceDefinitionElement> recursionSet = new THashSet<>();
 
       if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null) {
         collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);

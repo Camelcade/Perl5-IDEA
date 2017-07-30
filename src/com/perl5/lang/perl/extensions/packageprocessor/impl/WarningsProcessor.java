@@ -34,8 +34,8 @@ import java.util.Map;
  * Created by hurricup on 18.08.2015.
  */
 public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlWarningsProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
-  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
+  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
+  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<>();
 
   static {
     OPTIONS.put("FATAL", "FATALITY!");
@@ -47,7 +47,7 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
 
   static {
     for (Map.Entry<String, PerlWarningTreeNode> option : PerlWarningTree.NODE_OPTIONS.entrySet()) {
-      List<String> subElements = new ArrayList<String>();
+      List<String> subElements = new ArrayList<>();
       for (PerlWarningTreeLeaf leaf : option.getValue().collectChildLeafs()) {
         subElements.add(leaf.getStringIdentifier() + "(" + leaf.getMinVersion().getStrictDottedVersion() + ")");
       }

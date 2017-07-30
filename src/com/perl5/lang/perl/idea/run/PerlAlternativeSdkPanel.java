@@ -56,7 +56,7 @@ public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
 
     myFieldWithHistory = new TextFieldWithHistory();
     myFieldWithHistory.setHistorySize(-1);
-    final ArrayList<String> foundSdks = new ArrayList<String>();
+    final ArrayList<String> foundSdks = new ArrayList<>();
     final List<Sdk> perlSdks = ProjectJdkTable.getInstance().getSdksOfType(PerlSdkType.getInstance());
 
     for (Sdk sdk : perlSdks) {
@@ -73,7 +73,7 @@ public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
       }
     }
     myFieldWithHistory.setHistory(foundSdks);
-    myPathField = new ComponentWithBrowseButton<TextFieldWithHistory>(myFieldWithHistory, null);
+    myPathField = new ComponentWithBrowseButton<>(myFieldWithHistory, null);
     myPathField.addBrowseFolderListener("Select Perl",
                                         "Select Perl SDK",
                                         null, new FileChooserDescriptor(false, true, false, false, false, false) {

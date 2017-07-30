@@ -38,7 +38,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor {
   @NotNull
   @Override
   public String[] getNames(Project project, boolean includeNonProjectItems) {
-    Collection<String> result = new ArrayList<String>();
+    Collection<String> result = new ArrayList<>();
 
     for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project)) {
       result.add("$" + name);

@@ -126,7 +126,7 @@ public class PodStructureViewElement implements StructureViewTreeElement {
   @NotNull
   @Override
   public TreeElement[] getChildren() {
-    List<PodStructureViewElement> result = new ArrayList<PodStructureViewElement>();
+    List<PodStructureViewElement> result = new ArrayList<>();
 
     PsiElement container = null;
     if (myElement instanceof PodSection) {

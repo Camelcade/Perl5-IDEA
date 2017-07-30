@@ -205,7 +205,7 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
   }
 
   static private class HeredocCollector extends PerlPsiUtil.HeredocProcessor {
-    protected List<SmartPsiElementPointer<PerlHeredocOpener>> myResult = new ArrayList<SmartPsiElementPointer<PerlHeredocOpener>>();
+    protected List<SmartPsiElementPointer<PerlHeredocOpener>> myResult = new ArrayList<>();
 
     public HeredocCollector(int lineEndOffset) {
       super(lineEndOffset);

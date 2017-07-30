@@ -31,7 +31,7 @@ import java.util.Set;
  * Created by hurricup on 25.05.2015.
  */
 public class PerlElementTypeFactory {
-  protected final static Set<String> STRING_TOKENS = new THashSet<String>(Arrays.asList(
+  protected final static Set<String> STRING_TOKENS = new THashSet<>(Arrays.asList(
     "STRING_CONTENT",
     "STRING_CONTENT_QQ",
     "STRING_CONTENT_XQ"

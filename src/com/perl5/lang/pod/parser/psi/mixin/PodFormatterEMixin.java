@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * Created by hurricup on 26.03.2016.
  */
 public class PodFormatterEMixin extends PodSectionMixin implements PodFormatterE {
-  public static final Map<String, String> HTML_NAMES_MAP = new THashMap<String, String>();
+  public static final Map<String, String> HTML_NAMES_MAP = new THashMap<>();
   public static final Pattern OCTAL_NUMBER_PATTERN = Pattern.compile("^(0[0-7]*)$");
   public static final Pattern HEX_NUMBER_PATTERN = Pattern.compile("^0?x([0-9a-fA-F]+)$");
   public static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");

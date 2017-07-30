@@ -33,7 +33,7 @@ public class PerlLexerUtil implements PerlElementTypes {
     TokenType.NEW_LINE_INDENT
   );
 
-  public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<IElementType, IElementType>();
+  public static final Map<IElementType, IElementType> TOKENS_MAP = new HashMap<>();
 
   public static IElementType remapSQToken(IElementType tokenType) {
     if (tokenType == null || IMMUTABLE_TOKEN_SET.contains(tokenType)) {

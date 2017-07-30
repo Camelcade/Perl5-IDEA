@@ -59,7 +59,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     RESERVED_Y
   );
 
-  private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+  private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<>(Arrays.asList(
     "q",
     "qx",
     "qq",
@@ -68,7 +68,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     "m"
   ));
 
-  private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<String>(Arrays.asList(
+  private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<>(Arrays.asList(
     "s",
     "tr",
     "y"

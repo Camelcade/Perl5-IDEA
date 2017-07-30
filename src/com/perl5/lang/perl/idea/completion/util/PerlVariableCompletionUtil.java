@@ -47,11 +47,11 @@ import java.util.Set;
  * Created by hurricup on 25.07.2015.
  */
 public class PerlVariableCompletionUtil {
-  public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<LookupElementBuilder>();
-  public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<LookupElementBuilder>();
-  public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<LookupElementBuilder>();
-  public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<LookupElementBuilder>();
-  public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<LookupElementBuilder>();
+  public static final List<LookupElementBuilder> BUILT_IN_SCALARS = new ArrayList<>();
+  public static final List<LookupElementBuilder> BUILT_IN_ARRAYS = new ArrayList<>();
+  public static final List<LookupElementBuilder> BUILT_IN_ARRAYS_INDEXES = new ArrayList<>();
+  public static final List<LookupElementBuilder> BUILT_IN_HASHES = new ArrayList<>();
+  public static final List<LookupElementBuilder> BUILT_IN_GLOBS = new ArrayList<>();
 
   // fill scalars
   static {
@@ -153,7 +153,7 @@ public class PerlVariableCompletionUtil {
   public static void fillWithUnresolvedVars(final PerlVariableNameElement variableNameElement, final CompletionResultSet resultSet) {
     final PerlLexicalScope lexicalScope = PsiTreeUtil.getParentOfType(variableNameElement, PerlLexicalScope.class);
     PsiElement perlVariable = variableNameElement.getParent();
-    final Set<String> collectedNames = new THashSet<String>();
+    final Set<String> collectedNames = new THashSet<>();
 
     if (lexicalScope != null && perlVariable instanceof PerlVariable) {
       final int minOffset = variableNameElement.getTextOffset();

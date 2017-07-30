@@ -26,8 +26,8 @@ import java.util.List;
  * Represents internal %^H
  */
 public class PerlFeaturesTable implements Cloneable {
-  public static final HashMap<String, String> AVAILABLE_FEATURES = new HashMap<String, String>();
-  public static final HashMap<String, List<String>> AVAILABLE_FEATURES_BUNDLES = new HashMap<String, List<String>>();
+  public static final HashMap<String, String> AVAILABLE_FEATURES = new HashMap<>();
+  public static final HashMap<String, List<String>> AVAILABLE_FEATURES_BUNDLES = new HashMap<>();
 
   static {
     AVAILABLE_FEATURES.put("array_base", "v5.8, supports the legacy $[ variable. It is on by default but disabled under use v5.16");
@@ -63,7 +63,7 @@ public class PerlFeaturesTable implements Cloneable {
   }
 
   static {
-    AVAILABLE_FEATURES_BUNDLES.put("all", new ArrayList<String>(AVAILABLE_FEATURES.keySet()));
+    AVAILABLE_FEATURES_BUNDLES.put("all", new ArrayList<>(AVAILABLE_FEATURES.keySet()));
     AVAILABLE_FEATURES_BUNDLES.put("default", Arrays.asList("array_base"));
 
     List<String> features = Arrays.asList("array_base", "say", "state", "switch");
@@ -89,7 +89,7 @@ public class PerlFeaturesTable implements Cloneable {
   protected HashMap<String, Boolean> featuresMap;
 
   public PerlFeaturesTable() {
-    featuresMap = new HashMap<String, Boolean>();
+    featuresMap = new HashMap<>();
     for (String feature : AVAILABLE_FEATURES.keySet()) {
       featuresMap.put(feature, false);
     }

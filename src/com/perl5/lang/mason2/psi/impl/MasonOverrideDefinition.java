@@ -51,7 +51,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
 
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<PerlVariableDeclarationElement>();
+    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
     if (isValid()) {
       newImplicitVariables.add(PerlImplicitVariableDeclaration.createDefaultInvocant(this));
     }

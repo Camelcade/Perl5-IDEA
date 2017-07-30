@@ -32,7 +32,7 @@ import java.util.HashSet;
  * Created by hurricup on 03.06.2015.
  */
 public class PerlAnnotationCompletionProvider extends CompletionProvider<CompletionParameters> {
-  public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<LookupElementBuilder>();
+  public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<>();
 
   static {
     for (String annotation : PerlAnnotations.TOKENS_MAP.keySet()) {

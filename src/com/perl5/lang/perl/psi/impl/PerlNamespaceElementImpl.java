@@ -112,7 +112,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public List<PerlNamespaceDefinitionElement> getNamespaceDefinitions() {
-    List<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<PerlNamespaceDefinitionElement>();
+    List<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<>();
 
     PsiReference[] references = getReferences();
 
@@ -134,7 +134,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public List<PerlFileImpl> getNamespaceFiles() {
-    List<PerlFileImpl> namespaceFiles = new ArrayList<PerlFileImpl>();
+    List<PerlFileImpl> namespaceFiles = new ArrayList<>();
 
     PsiReference[] references = getReferences();
 

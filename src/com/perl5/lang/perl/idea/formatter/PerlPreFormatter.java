@@ -49,7 +49,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
   protected final CodeStyleSettings mySettings;
   protected final PerlCodeStyleSettings myPerlSettings;
 
-  private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<PerlFormattingOperation>();
+  private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<>();
   protected TextRange myRange;
 
   public PerlPreFormatter(Project project) {

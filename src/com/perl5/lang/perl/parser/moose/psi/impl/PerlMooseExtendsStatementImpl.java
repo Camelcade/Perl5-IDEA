@@ -49,7 +49,7 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
 
   @NotNull
   protected List<String> getParentsList() {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
 
     PsiElement expr = getExpr();
     if (expr != null) {

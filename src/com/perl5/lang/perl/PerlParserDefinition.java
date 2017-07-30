@@ -46,7 +46,7 @@ import java.util.List;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes {
-  public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<PerlParserExtension>();
+  public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<>();
 
   public static final TokenSet WHITE_SPACES = TokenSet.create(
     TokenType.WHITE_SPACE,

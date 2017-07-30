@@ -145,7 +145,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
   protected ParentNamespacesNamesCollector getCollector() {
-    return new ParentNamespacesNamesCollector(new ArrayList<String>(), getPackageName());
+    return new ParentNamespacesNamesCollector(new ArrayList<>(), getPackageName());
   }
 
   @Nullable
@@ -293,8 +293,8 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
   public static class ExporterInfo implements Processor<PsiElement> {
-    private List<String> EXPORT = new ArrayList<String>();
-    private List<String> EXPORT_OK = new ArrayList<String>();
+    private List<String> EXPORT = new ArrayList<>();
+    private List<String> EXPORT_OK = new ArrayList<>();
     private Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap(); //new THashMap<String, List<String>>(); fixme nyi
 
     @Override
@@ -320,7 +320,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     }
 
     protected List<String> getRightSideStrings(@NotNull PsiElement rigthSide) {
-      List<String> result = new ArrayList<String>();
+      List<String> result = new ArrayList<>();
       if (rigthSide.getFirstChild() != null) {
         int lastEnd = -1;
         for (PsiElement psiElement : PerlPsiUtil.collectStringElements(rigthSide.getFirstChild())) {
@@ -357,7 +357,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   public static class ParentNamespacesNamesCollector implements Processor<PsiElement> {
     private final List<String> parentNamespaces;
-    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<PerlRuntimeParentsProvider>();
+    private final List<PerlRuntimeParentsProvider> runtimeModifiers = new ArrayList<>();
     private final String myPackageName;
 
     public ParentNamespacesNamesCollector(List<String> parentNamespaces, String packageName) {

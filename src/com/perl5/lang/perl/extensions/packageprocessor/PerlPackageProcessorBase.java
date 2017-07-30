@@ -61,13 +61,13 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
   @Override
   @NotNull
   public List<PerlExportDescriptor> getImports(@NotNull PerlUseStatement useStatement) {
-    List<PerlExportDescriptor> result = new ArrayList<PerlExportDescriptor>();
+    List<PerlExportDescriptor> result = new ArrayList<>();
     String packageName = useStatement.getPackageName();
     if (packageName != null) {
       List<String> parameters = useStatement.getImportParameters();
       //			System.err.println("Import parameters for " + packageName + " are " + parameters);
-      Set<String> exportNames = new HashSet<String>();
-      Set<String> exportOkNames = new HashSet<String>();
+      Set<String> exportNames = new HashSet<>();
+      Set<String> exportOkNames = new HashSet<>();
 
       addExports(useStatement, exportNames, exportOkNames);
 

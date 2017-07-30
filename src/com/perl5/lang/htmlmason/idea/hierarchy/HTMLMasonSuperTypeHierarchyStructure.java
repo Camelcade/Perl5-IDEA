@@ -38,7 +38,7 @@ public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierar
     assert element instanceof HTMLMasonFileImpl;
     PsiElement parent = ((HTMLMasonFileImpl)element).getParentComponent();
     if (parent != null) {
-      List<PsiElement> result = new ArrayList<PsiElement>();
+      List<PsiElement> result = new ArrayList<>();
       result.add(parent);
       return result;
     }

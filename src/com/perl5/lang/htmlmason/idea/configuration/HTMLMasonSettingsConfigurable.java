@@ -139,7 +139,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     mySettings.defaultHandlerName = defaulthandlerName.getText();
 
     mySettings.globalVariables.clear();
-    for (VariableDescription variableDescription : new ArrayList<VariableDescription>(globalsModel.getItems())) {
+    for (VariableDescription variableDescription : new ArrayList<>(globalsModel.getItems())) {
       if (StringUtil.isNotEmpty(variableDescription.variableName)) {
         mySettings.globalVariables.add(variableDescription);
       }
@@ -172,7 +172,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     }
 
     // collecting matchers
-    final List<FileNameMatcher> matchers = new ArrayList<FileNameMatcher>();
+    final List<FileNameMatcher> matchers = new ArrayList<>();
     FileTypeManager fileTypeManager = FileTypeManager.getInstance();
     for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
       if (fileType instanceof LanguageFileType) {
@@ -228,10 +228,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   protected Set<String> getDiff(List<String> first, List<String> second) {
-    Set<String> diff = new THashSet<String>(first);
+    Set<String> diff = new THashSet<>(first);
     diff.removeAll(second);
 
-    Set<String> temp = new THashSet<String>(second);
+    Set<String> temp = new THashSet<>(second);
     temp.removeAll(first);
     diff.addAll(temp);
 
@@ -249,12 +249,12 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     autohandlerName.setText(mySettings.autoHandlerName);
     defaulthandlerName.setText(mySettings.defaultHandlerName);
 
-    customTagsModel.setItems(new ArrayList<HTMLMasonCustomTag>());
+    customTagsModel.setItems(new ArrayList<>());
     for (HTMLMasonCustomTag htmlMasonCustomTag : mySettings.customTags) {
       customTagsModel.addRow(htmlMasonCustomTag.clone());
     }
 
-    globalsModel.setItems(new ArrayList<VariableDescription>());
+    globalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
       globalsModel.addRow(variableDescription.clone());
     }
@@ -262,7 +262,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
   protected void createSubstitutedExtensionsComponent(FormBuilder builder) {
     //noinspection Since15
-    substitutedExtensionsModel = new CollectionListModel<String>();
+    substitutedExtensionsModel = new CollectionListModel<>();
     substitutedExtensionsList = new JBList(substitutedExtensionsModel);
     substitutedExtensionsPanel =
       PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
@@ -273,7 +273,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
   protected void createCustomTagsComponent(FormBuilder builder) {
     myTagNameColumnInfo myTagNameColumnInfo = new myTagNameColumnInfo();
-    customTagsModel = new ListTableModel<HTMLMasonCustomTag>(
+    customTagsModel = new ListTableModel<>(
       myTagNameColumnInfo,
       new myTagRoleColumInfo()
     );
@@ -340,7 +340,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   public static class myTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> implements HTMLMasonSyntaxElements {
-    protected static final Set<String> BUILTIN_TAGS = new THashSet<String>();
+    protected static final Set<String> BUILTIN_TAGS = new THashSet<>();
 
     static {
       BUILTIN_TAGS.addAll(BUILTIN_TAGS_SIMPLE);

@@ -30,7 +30,7 @@ public class DancerPackageProcessor extends PerlPackageProcessorBase implements
                                                                      PerlStrictProvider,
                                                                      PerlUtfProvider,
                                                                      PerlWarningsProvider {
-  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<PerlExportDescriptor>();
+  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<>();
 
   static {
     for (String keyword : PerlDancerDSL.DSL_KEYWORDS) {

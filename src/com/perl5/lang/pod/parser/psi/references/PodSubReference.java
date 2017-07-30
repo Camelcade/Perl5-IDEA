@@ -66,7 +66,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
         final PsiFile containingFile = element.getContainingFile();
         String packageName = PodFileUtil.getPackageName(containingFile);
 
-        List<ResolveResult> results = new ArrayList<ResolveResult>();
+        List<ResolveResult> results = new ArrayList<>();
 
         if (StringUtil.isNotEmpty(packageName)) {
           String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;

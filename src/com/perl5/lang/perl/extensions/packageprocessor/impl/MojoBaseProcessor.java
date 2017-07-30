@@ -37,7 +37,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   public static final String MOJO_BASE = "Mojo::Base";
   public static final String IO_HANDLE = "IO::Handle";
 
-  protected static final Map<String, String> OPTIONS = new HashMap<String, String>();
+  protected static final Map<String, String> OPTIONS = new HashMap<>();
 
   static {
     OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
@@ -52,7 +52,7 @@ public class MojoBaseProcessor extends PerlPackageProcessorBase implements
   @NotNull
   @Override
   public List<String> getLoadedPackageNames(PerlUseStatement useStatement) {
-    List<String> loadedPackages = new ArrayList<String>(Arrays.asList(IO_HANDLE));
+    List<String> loadedPackages = new ArrayList<>(Arrays.asList(IO_HANDLE));
     List<String> allOptions = useStatement.getImportParameters();
 
     if (allOptions != null) {

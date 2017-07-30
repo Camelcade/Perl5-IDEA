@@ -51,7 +51,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
 
     PerlSubNameElement subNameElement = (PerlSubNameElement)myElement;
 
-    List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+    List<PsiElement> relatedItems = new ArrayList<>();
 
     String packageName = subNameElement.getPackageName();
     String subName = subNameElement.getName();

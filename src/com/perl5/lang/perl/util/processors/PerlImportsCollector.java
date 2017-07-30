@@ -29,7 +29,7 @@ public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<
   final protected List<PerlExportDescriptor> myResult;
 
   public PerlImportsCollector() {
-    myResult = new ArrayList<PerlExportDescriptor>();
+    myResult = new ArrayList<>();
   }
 
   protected abstract boolean meetsCondition(@NotNull PerlExportDescriptor descriptor);

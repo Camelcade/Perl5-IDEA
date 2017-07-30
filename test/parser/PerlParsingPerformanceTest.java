@@ -132,7 +132,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
   }
 
   private void analyzeFile(PsiFile psiFile) {
-    final Map<IElementType, Integer> tokensMap = new THashMap<IElementType, Integer>();
+    final Map<IElementType, Integer> tokensMap = new THashMap<>();
     final int[] totalTokens = new int[]{0};
 
     psiFile.accept(new PsiElementVisitor() {
@@ -149,7 +149,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
       }
     });
 
-    List<Map.Entry<IElementType, Integer>> entries = new ArrayList<Map.Entry<IElementType, Integer>>(tokensMap.entrySet());
+    List<Map.Entry<IElementType, Integer>> entries = new ArrayList<>(tokensMap.entrySet());
     Collections.sort(entries, new Comparator<Map.Entry<IElementType, Integer>>() {
       @Override
       public int compare(Map.Entry<IElementType, Integer> o1, Map.Entry<IElementType, Integer> o2) {

@@ -46,7 +46,7 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
   implements ConfigurableTemplateLanguageFileViewProvider {
   private final Language myBaseLanguage = TemplateToolkitLanguage.INSTANCE;
   private final Language myTemplateLanguage;
-  private final Set<Language> myRelevantLanguages = new HashSet<Language>();
+  private final Set<Language> myRelevantLanguages = new HashSet<>();
 
   public TemplateToolkitFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
     super(manager, virtualFile, eventSystemEnabled);

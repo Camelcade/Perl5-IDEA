@@ -71,7 +71,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 
   @Override
   protected PsiFile createFileFromTemplate(String name, FileTemplate template, PsiDirectory dir) {
-    final List<String> pathChunks = new ArrayList<String>();
+    final List<String> pathChunks = new ArrayList<>();
 
     if (StringUtil.contains(name, PerlPackageUtil.PACKAGE_SEPARATOR)) {
       pathChunks.addAll(StringUtil.split(name, PerlPackageUtil.PACKAGE_SEPARATOR));

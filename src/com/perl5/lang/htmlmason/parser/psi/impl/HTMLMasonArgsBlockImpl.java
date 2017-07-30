@@ -55,7 +55,7 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
 
   @NotNull
   protected List<PerlSubArgument> getArgumentsListHeavy() {
-    List<PerlSubArgument> result = new ArrayList<PerlSubArgument>();
+    List<PerlSubArgument> result = new ArrayList<>();
     PsiElement run = getFirstChild();
 
     while (run != null) {

@@ -39,7 +39,7 @@ public class PodIdentifierImpl extends PerlLeafPsiElementWithReferences {
   @Override
   public PsiReference[] computeReferences() {
     final PodIdentifierImpl element = PodIdentifierImpl.this;
-    List<PsiReference> references = new ArrayList<PsiReference>();
+    List<PsiReference> references = new ArrayList<>();
 
     if (element.getParent() instanceof PodSectionTitle && element.getPrevSibling() == null) {
       references.add(new PodSubReference(element));

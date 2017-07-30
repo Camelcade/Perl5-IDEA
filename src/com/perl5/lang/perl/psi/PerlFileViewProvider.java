@@ -43,7 +43,7 @@ import java.util.Set;
  */
 public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, PerlElementTypes {
-  private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
+  private static final Set<Language> myLanguages = new THashSet<>(Arrays.asList(
     PerlLanguage.INSTANCE,
     PodLanguage.INSTANCE
   ));

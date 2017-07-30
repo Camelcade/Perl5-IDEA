@@ -29,7 +29,7 @@ import java.util.Map;
  * Created by hurricup on 18.08.2015.
  */
 public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlStrictProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
+  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
 
   static {
     OPTIONS.put("vars", "generates a compile-time error if you access a variable that was neither explicitly declared");

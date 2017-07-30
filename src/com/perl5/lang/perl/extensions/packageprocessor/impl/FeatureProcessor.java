@@ -32,8 +32,8 @@ import java.util.Map;
  * Created by evstigneev on 19.08.2015.
  */
 public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlFeaturesProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<String, String>();
-  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<String, String>();
+  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
+  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<>();
 
   static {
     OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);

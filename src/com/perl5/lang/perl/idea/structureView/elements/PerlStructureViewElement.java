@@ -160,9 +160,9 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
   @NotNull
   @Override
   public TreeElement[] getChildren() {
-    List<TreeElement> result = new ArrayList<TreeElement>();
+    List<TreeElement> result = new ArrayList<>();
 
-    Set<String> implementedMethods = new HashSet<String>();
+    Set<String> implementedMethods = new HashSet<>();
 
     if (myElement instanceof PerlFile) {
       FileViewProvider viewProvider = ((PerlFile)myElement).getViewProvider();
@@ -333,7 +333,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
 
     // inherited elements
     if (myElement instanceof PerlNamespaceDefinitionWithIdentifier) {
-      List<TreeElement> inheritedResult = new ArrayList<TreeElement>();
+      List<TreeElement> inheritedResult = new ArrayList<>();
 
       String packageName = ((PerlNamespaceDefinitionElement)myElement).getPackageName();
 

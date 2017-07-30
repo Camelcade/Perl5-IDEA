@@ -27,7 +27,7 @@ import java.util.Set;
  */
 public interface PerlBuiltInSubs {
 
-  Set<String> BUILT_IN = new HashSet<String>(Arrays.asList(
+  Set<String> BUILT_IN = new HashSet<>(Arrays.asList(
     // http://perldoc.perl.org/perlfunc.html
     //			Functions for SCALARs or strings
 

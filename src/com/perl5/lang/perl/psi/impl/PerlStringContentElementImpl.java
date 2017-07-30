@@ -57,7 +57,7 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
 
   @Override
   public PsiReference[] computeReferences() {
-    List<PsiReference> result = new ArrayList<PsiReference>();
+    List<PsiReference> result = new ArrayList<>();
     if (looksLikePackage()) {
       result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this));
     }

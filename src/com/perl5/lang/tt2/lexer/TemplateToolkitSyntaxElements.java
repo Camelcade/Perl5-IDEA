@@ -64,10 +64,10 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
     GET_DIRECTIVE
   );
 
-  public static final Map<String, IElementType> KEYWORDS = new HashMap<String, IElementType>();
+  public static final Map<String, IElementType> KEYWORDS = new HashMap<>();
   public static final TokenSet KEYWORDS_TOKENSET;
 
-  public static final Map<String, IElementType> TEXT_OPERATORS = new HashMap<String, IElementType>();
+  public static final Map<String, IElementType> TEXT_OPERATORS = new HashMap<>();
   public static final TokenSet TEXT_OPERATORS_TOKENSET;
 
   public static final TokenSet KEYWORDS_OR_TEXT_OPERATORS_TOKENSET;

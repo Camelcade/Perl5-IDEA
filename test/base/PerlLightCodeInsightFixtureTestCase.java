@@ -877,7 +877,7 @@ public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsig
   }
 
   private List<PsiReference> collectFileReferences() {
-    final List<PsiReference> references = new ArrayList<PsiReference>();
+    final List<PsiReference> references = new ArrayList<>();
 
     PsiFile file = getFile();
 

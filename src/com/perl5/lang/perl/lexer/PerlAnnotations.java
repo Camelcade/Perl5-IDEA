@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by hurricup on 03.06.2015.
  */
 public class PerlAnnotations implements PerlElementTypes {
-  public static final Map<String, IElementType> TOKENS_MAP = new THashMap<String, IElementType>();
+  public static final Map<String, IElementType> TOKENS_MAP = new THashMap<>();
 
   static {
     TOKENS_MAP.put("deprecated", ANNOTATION_DEPRECATED_KEY);

@@ -111,7 +111,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
     //noinspection Duplicates duplicates file implementation
     if (rootStub != null) {
-      final List<HTMLMasonCompositeElement> result = new ArrayList<HTMLMasonCompositeElement>();
+      final List<HTMLMasonCompositeElement> result = new ArrayList<>();
 
       PerlPsiUtil.processElementsFromStubs(
         rootStub,

@@ -26,8 +26,8 @@ import java.util.HashMap;
  */
 public class PerlWarningTree {
   public static final PerlWarningTreeNode TREE = new PerlWarningTreeNode(
-    5.008, "all", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
-    new PerlWarningTreeNode(5.008, "io", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
+    5.008, "all", new ArrayList<>(Arrays.asList(
+    new PerlWarningTreeNode(5.008, "io", new ArrayList<>(Arrays.asList(
       new PerlWarningTreeLeaf(5.008, "pipe", false),
       new PerlWarningTreeLeaf(5.008, "unopened", false),
       new PerlWarningTreeLeaf(5.008, "closed", false),
@@ -38,7 +38,7 @@ public class PerlWarningTree {
       new PerlWarningTreeLeaf(5.019, "syscalls", true)
     ))),
 
-    new PerlWarningTreeNode(5.008, "syntax", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
+    new PerlWarningTreeNode(5.008, "syntax", new ArrayList<>(Arrays.asList(
       new PerlWarningTreeLeaf(5.008, "ambiguous", false),
       new PerlWarningTreeLeaf(5.008, "semicolon", false),
       new PerlWarningTreeLeaf(5.008, "precedence", false),
@@ -53,7 +53,7 @@ public class PerlWarningTree {
       new PerlWarningTreeLeaf(5.011, "illegalproto", false)
     ))),
 
-    new PerlWarningTreeNode(5.008, "severe", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
+    new PerlWarningTreeNode(5.008, "severe", new ArrayList<>(Arrays.asList(
       new PerlWarningTreeLeaf(5.008, "inplace", true),
       new PerlWarningTreeLeaf(5.008, "internal", false),
       new PerlWarningTreeLeaf(5.008, "debugging", true),
@@ -78,7 +78,7 @@ public class PerlWarningTree {
     new PerlWarningTreeLeaf(5.008, "overflow", false),
     new PerlWarningTreeLeaf(5.008, "portable", false),
 
-    new PerlWarningTreeNode(5.008, "utf8", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
+    new PerlWarningTreeNode(5.008, "utf8", new ArrayList<>(Arrays.asList(
       new PerlWarningTreeLeaf(5.013, "surrogate", false),
       new PerlWarningTreeLeaf(5.013, "nonchar", false),
       new PerlWarningTreeLeaf(5.013, "non_unicode", false)
@@ -91,7 +91,7 @@ public class PerlWarningTree {
 
     new PerlWarningTreeLeaf(5.011, "imprecision", false),
 
-    new PerlWarningTreeNode(5.017, "experimental", new ArrayList<PerlAbstractWarningTreeElement>(Arrays.asList(
+    new PerlWarningTreeNode(5.017, "experimental", new ArrayList<>(Arrays.asList(
       new PerlWarningTreeLeaf(5.017, "experimental::lexical_subs", true),
       new PerlWarningTreeLeaf(5.017, "experimental::regex_sets", true),
       new PerlWarningTreeLeaf(5.017, "experimental::lexical_topic", true),
@@ -117,7 +117,7 @@ public class PerlWarningTree {
   public static final HashMap<String, PerlWarningTreeNode> NODE_OPTIONS;
 
   static {
-    LEAF_OPTIONS = new HashMap<String, PerlWarningTreeLeaf>();
+    LEAF_OPTIONS = new HashMap<>();
 
     for (PerlWarningTreeLeaf leaf : TREE.collectChildLeafs()) {
       if (LEAF_OPTIONS.containsKey(leaf.getStringIdentifier())) {
@@ -130,7 +130,7 @@ public class PerlWarningTree {
   }
 
   static {
-    NODE_OPTIONS = new HashMap<String, PerlWarningTreeNode>();
+    NODE_OPTIONS = new HashMap<>();
 
     for (PerlWarningTreeNode node : TREE.collectChildNodes()) {
       if (NODE_OPTIONS.containsKey(node.getStringIdentifier())) {

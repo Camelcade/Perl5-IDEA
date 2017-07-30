@@ -104,7 +104,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
       final CapturingProcessHandler processHandler = new CapturingProcessHandler(process);
 
-      List<PerlCriticErrorDescriptor> errors = new ArrayList<PerlCriticErrorDescriptor>();
+      List<PerlCriticErrorDescriptor> errors = new ArrayList<>();
       PerlCriticErrorDescriptor lastDescriptor = null;
       for (String output : processHandler.runProcess().getStdoutLines()) {
         PerlCriticErrorDescriptor fromString = PerlCriticErrorDescriptor.getFromString(output);

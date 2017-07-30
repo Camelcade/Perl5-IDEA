@@ -28,7 +28,7 @@ import java.util.List;
  * Created by hurricup on 11.10.2015.
  */
 public class PerlTokenHistory implements PerlElementTypes {
-  private final List<PerlTokenHistoryElement> myHistory = new ArrayList<PerlTokenHistoryElement>();
+  private final List<PerlTokenHistoryElement> myHistory = new ArrayList<>();
 
   private PerlTokenHistoryElement myLastToken;
   private PerlTokenHistoryElement myLastSignificantToken;

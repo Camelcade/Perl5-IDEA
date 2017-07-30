@@ -124,7 +124,7 @@ public class PerlSubCompletionUtil {
       return;
     }
 
-    final Set<String> namesSet = new THashSet<String>();
+    final Set<String> namesSet = new THashSet<>();
     PsiFile containingFile = subDefinition.getContainingFile();
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override

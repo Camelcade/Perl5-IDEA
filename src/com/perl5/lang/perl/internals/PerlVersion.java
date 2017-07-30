@@ -84,7 +84,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
         isAlpha = versionString.contains("_"); // fixme not sure about this at all
       }
       else if ((matcher = dottedVersion.matcher(versionString)).matches()) {
-        List<String> versionChunks = new ArrayList<String>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
+        List<String> versionChunks = new ArrayList<>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
         isAlpha = matcher.group(1) != null;
         revision = Integer.parseInt(versionChunks.remove(0));
 
@@ -103,7 +103,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
             minor = Integer.parseInt(versionChunks.remove(0));
 
             if (!versionChunks.isEmpty()) {
-              extraChunks = new ArrayList<Integer>();
+              extraChunks = new ArrayList<>();
               for (String chunk : versionChunks) {
                 if (chunk.length() > 3) {
                   throw new Exception();

@@ -48,8 +48,8 @@ import static com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector.
  * Created by hurricup on 24.01.2016.
  */
 public class PerlStringCompletionUtil implements PerlElementPatterns {
-  public static final Set<String> HASH_INDEXES_CACHE = new THashSet<String>();
-  public static final Set<String> HEREDOC_OPENERS_CACHE = new THashSet<String>();
+  public static final Set<String> HASH_INDEXES_CACHE = new THashSet<>();
+  public static final Set<String> HEREDOC_OPENERS_CACHE = new THashSet<>();
   public static final String[] REF_TYPES = new String[]{
     "SCALAR",
     "ARRAY",
@@ -190,8 +190,8 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           });
         }
 
-        Set<String> export = new HashSet<String>();
-        Set<String> exportOk = new HashSet<String>();
+        Set<String> export = new HashSet<>();
+        Set<String> exportOk = new HashSet<>();
         packageProcessor.addExports(useStatement, export, exportOk);
         exportOk.removeAll(export);
 

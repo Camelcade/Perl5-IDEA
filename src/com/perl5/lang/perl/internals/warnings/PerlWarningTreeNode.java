@@ -31,7 +31,7 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement {
   }
 
   public List<PerlWarningTreeLeaf> collectChildLeafs() {
-    List<PerlWarningTreeLeaf> result = new ArrayList<PerlWarningTreeLeaf>();
+    List<PerlWarningTreeLeaf> result = new ArrayList<>();
 
     for (PerlAbstractWarningTreeElement subElement : subElements) {
       if (subElement instanceof PerlWarningTreeNode) {
@@ -49,7 +49,7 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement {
   }
 
   public List<PerlWarningTreeNode> collectChildNodes() {
-    List<PerlWarningTreeNode> result = new ArrayList<PerlWarningTreeNode>();
+    List<PerlWarningTreeNode> result = new ArrayList<>();
     result.add(this);
 
     for (PerlAbstractWarningTreeElement subElement : subElements) {

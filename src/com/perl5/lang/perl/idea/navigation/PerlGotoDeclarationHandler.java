@@ -42,7 +42,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
 
     int offsetInElement = offset - sourceElement.getNode().getStartOffset();
 
-    ArrayList<PsiElement> result = new ArrayList<PsiElement>();
+    ArrayList<PsiElement> result = new ArrayList<>();
     for (PsiReference reference : sourceElement.getReferences()) {
       if (reference.getRangeInElement().contains(offsetInElement)) {
         if (reference instanceof PsiPolyVariantReference) {

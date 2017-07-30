@@ -28,7 +28,7 @@ import java.util.List;
  * Created by hurricup on 05.06.2016.
  */
 public class TemplateToolkitFileTypeFactory extends FileTypeFactory {
-  public static final List<String> DEFAULT_EXTENSIONS = new ArrayList<String>(Arrays.asList(
+  public static final List<String> DEFAULT_EXTENSIONS = new ArrayList<>(Arrays.asList(
     "tt",
     "tt2"
   ));

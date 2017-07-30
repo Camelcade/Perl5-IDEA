@@ -41,7 +41,7 @@ public class TemplateToolkitPerlBlockElementImpl extends TemplateToolkitComposit
 
   @NotNull
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    List<PerlVariableDeclarationElement> variables = new ArrayList<PerlVariableDeclarationElement>();
+    List<PerlVariableDeclarationElement> variables = new ArrayList<>();
     variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$context", "Template::Context"));
     variables.add(PerlImplicitVariableDeclaration.createLexical(this, "$stash", "Template::Stash"));
     return variables;

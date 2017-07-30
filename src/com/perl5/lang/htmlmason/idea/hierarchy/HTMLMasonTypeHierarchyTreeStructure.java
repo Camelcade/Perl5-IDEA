@@ -54,8 +54,8 @@ public class HTMLMasonTypeHierarchyTreeStructure extends HTMLMasonSubTypeHierarc
 
   protected static List<PsiElement> getLinearParents(PsiElement element) {
     assert element instanceof HTMLMasonFileImpl;
-    List<PsiElement> result = new ArrayList<PsiElement>();
-    Set<PsiElement> recursionMap = new THashSet<PsiElement>();
+    List<PsiElement> result = new ArrayList<>();
+    Set<PsiElement> recursionMap = new THashSet<>();
     HTMLMasonFileImpl run = (HTMLMasonFileImpl)element;
 
     while (run != null) {

@@ -64,7 +64,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with super resolver, need some generics fix
     PsiElement myElement = getElement();
-    List<PsiElement> relatedItems = new ArrayList<PsiElement>();
+    List<PsiElement> relatedItems = new ArrayList<>();
 
     String packageName = PerlPackageUtil.getContextPackageName(myElement);
     String subName = myElement.getNode().getText();
@@ -148,7 +148,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
 
   @NotNull
   public List<ResolveResult> getResolveResults(List<PsiElement> relatedItems) {
-    List<ResolveResult> result = new ArrayList<ResolveResult>();
+    List<ResolveResult> result = new ArrayList<>();
 
     resetFlags();
 

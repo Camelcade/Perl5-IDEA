@@ -44,7 +44,7 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
   @NotNull
   @Override
   protected Object[] buildChildren(@NotNull HierarchyNodeDescriptor descriptor) {
-    List<PerlHierarchyNodeDescriptor> result = new ArrayList<PerlHierarchyNodeDescriptor>();
+    List<PerlHierarchyNodeDescriptor> result = new ArrayList<>();
 
     if (descriptor instanceof PerlHierarchyNodeDescriptor) {
       PsiElement element = ((PerlHierarchyNodeDescriptor)descriptor).getPerlElement();
@@ -58,7 +58,7 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
 
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof PerlNamespaceDefinitionElement;
-    return new ArrayList<PsiElement>(((PerlNamespaceDefinitionElement)element).getChildNamespaceDefinitions());
+    return new ArrayList<>(((PerlNamespaceDefinitionElement)element).getChildNamespaceDefinitions());
   }
 
   protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor parentDescriptor, PsiElement element, boolean isBase) {

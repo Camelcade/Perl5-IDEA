@@ -74,7 +74,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   }
 
   public void createRootsListComponent(FormBuilder builder) {
-    rootsModel = new CollectionListModel<String>();
+    rootsModel = new CollectionListModel<>();
     rootsList = new JBList(rootsModel);
     builder.addLabeledComponent(
       new JLabel(
@@ -88,7 +88,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   }
 
   public void createGlobalsComponent(FormBuilder builder) {
-    globalsModel = new ListTableModel<VariableDescription>(
+    globalsModel = new ListTableModel<>(
       new myVariableNameColumnInfo(),
       new myVariableTypeColumnInfo()
     );

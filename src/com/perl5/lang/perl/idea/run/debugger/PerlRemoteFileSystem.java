@@ -37,7 +37,7 @@ import java.util.Map;
 public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
   public static final String PROTOCOL = "perl5_remote";
   public static final String PROTOCOL_PREFIX = "perl5_remote://";
-  private Map<String, VirtualFile> virtualFilesMap = new THashMap<String, VirtualFile>();
+  private Map<String, VirtualFile> virtualFilesMap = new THashMap<>();
 
   @Override
   @Nullable

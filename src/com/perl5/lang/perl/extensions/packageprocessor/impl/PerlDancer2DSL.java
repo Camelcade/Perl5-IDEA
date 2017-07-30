@@ -24,7 +24,7 @@ import java.util.List;
  * Created by hurricup on 02.06.2016.
  */
 public interface PerlDancer2DSL {
-  List<String> DSL_KEYWORDS = new ArrayList<String>(Arrays.asList(
+  List<String> DSL_KEYWORDS = new ArrayList<>(Arrays.asList(
     "any",
     "app",
     "body_parameters",

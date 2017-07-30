@@ -34,6 +34,6 @@ public class PerlSuperTypesHierarchyTreeStructure extends PerlSubTypesHierarchyT
   @Override
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof PerlNamespaceDefinitionElement;
-    return new ArrayList<PsiElement>(((PerlNamespaceDefinitionElement)element).getParentNamespaceDefinitions());
+    return new ArrayList<>(((PerlNamespaceDefinitionElement)element).getParentNamespaceDefinitions());
   }
 }

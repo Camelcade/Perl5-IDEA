@@ -66,11 +66,11 @@ public class PerlDebugThread extends Thread {
   private OutputStream myOutputStream;
   private InputStream myInputStream;
   private boolean myStop = false;
-  private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<PerlLineBreakPointDescriptor>();
+  private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
   private ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler> transactionsMap =
-    new ConcurrentHashMap<Integer, PerlDebuggingTransactionHandler>();
+    new ConcurrentHashMap<>();
   private ReentrantLock lock = new ReentrantLock();
   private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
   private PerlDebugOptions myPerlDebugOptions;

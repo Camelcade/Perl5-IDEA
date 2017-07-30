@@ -36,7 +36,7 @@ public class ModernPerlPackageProcessor extends PerlPackageProcessorBase impleme
                                                                          PerlMroProvider,
                                                                          PerlPackageLoader,
                                                                          PerlFeaturesProvider {
-  private static final List<String> LOADED_PACKAGES = new ArrayList<String>(Arrays.asList(
+  private static final List<String> LOADED_PACKAGES = new ArrayList<>(Arrays.asList(
     "IO::File",
     "IO::Handle"
   ));

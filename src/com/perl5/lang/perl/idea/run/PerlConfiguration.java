@@ -53,7 +53,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 
   public String PERL_PARAMETERS = "";
   public String WORKING_DIRECTORY;
-  public Map<String, String> ENVS = new HashMap<String, String>();
+  public Map<String, String> ENVS = new HashMap<>();
   public boolean PASS_PARENT_ENVS = true;
   public String CHARSET;
   public boolean USE_ALTERNATIVE_SDK;

@@ -109,7 +109,7 @@ public class ExporterTest extends NamespaceTestCase {
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] exportArray, String[] exportOkArray) {
     PerlNamespaceDefinitionMixin.ExporterInfo exporterInfo = getNamespaceInFile(fileName, namespaceName).getExporterInfo();
-    assertEquals(new ArrayList<String>(Arrays.asList(exportArray)), exporterInfo.getEXPORT());
-    assertEquals(new ArrayList<String>(Arrays.asList(exportOkArray)), exporterInfo.getEXPORT_OK());
+    assertEquals(new ArrayList<>(Arrays.asList(exportArray)), exporterInfo.getEXPORT());
+    assertEquals(new ArrayList<>(Arrays.asList(exportOkArray)), exporterInfo.getEXPORT_OK());
   }
 }

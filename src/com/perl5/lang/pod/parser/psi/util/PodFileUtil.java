@@ -47,7 +47,7 @@ import java.util.Set;
 public class PodFileUtil {
   public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
 
-  private static final Set<String> myClassLikeExtensions = new THashSet<String>(Arrays.asList(
+  private static final Set<String> myClassLikeExtensions = new THashSet<>(Arrays.asList(
     PodFileType.EXTENSION,
     PerlFileTypePackage.EXTENSION
   ));
@@ -109,7 +109,7 @@ public class PodFileUtil {
 
   @Nullable
   public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor) {
-    final List<PsiFile> result = new ArrayList<PsiFile>();
+    final List<PsiFile> result = new ArrayList<>();
 
     PodFileUtil.processPodFilesByDescriptor(project, descriptor, new Processor<PsiFile>() {
       @Override

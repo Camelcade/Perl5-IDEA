@@ -44,7 +44,7 @@ import java.util.List;
  * Created by hurricup on 24.04.2016.
  */
 public class PodTitleCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementPatterns {
-  public static final List<String> DEFAULT_POD_SECTIONS = new ArrayList<String>(
+  public static final List<String> DEFAULT_POD_SECTIONS = new ArrayList<>(
     Arrays.asList(
       "VERSION",
       "SYNOPSIS",

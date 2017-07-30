@@ -86,7 +86,7 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 
   @Override
   public PsiReference[] computeReferences() {
-    List<PsiReference> references = new ArrayList<PsiReference>();
+    List<PsiReference> references = new ArrayList<>();
     final PodLinkDescriptor descriptor = getLinkDescriptor();
 
     if (descriptor != null && !descriptor.isUrl()) {

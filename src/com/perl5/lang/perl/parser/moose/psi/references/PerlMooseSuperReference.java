@@ -42,7 +42,7 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not really dry with simpleresolver and superresolver. Need some generics magic
-    List<ResolveResult> result = new ArrayList<ResolveResult>();
+    List<ResolveResult> result = new ArrayList<>();
     PsiElement element = getElement();
 
     PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);

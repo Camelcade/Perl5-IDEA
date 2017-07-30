@@ -50,8 +50,8 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
 
   protected final static TokenSet SIMPLE_MASON_NAMED_BLOCKS;
 
-  protected final static THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<IElementType, IElementType>();
-  protected final static THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<IElementType, IElementType>();
+  protected final static THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<>();
+  protected final static THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
 
   static {
     RESERVED_TO_STATEMENT_MAP.put(MASON_AROUND_OPENER, MASON_AROUND_MODIFIER);

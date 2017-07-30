@@ -24,7 +24,7 @@ import java.util.List;
  * Created by hurricup on 13.06.2016.
  */
 public interface TemplateToolkitFilterNames {
-  List<String> FILTER_NAMES = new ArrayList<String>(Arrays.asList(
+  List<String> FILTER_NAMES = new ArrayList<>(Arrays.asList(
     "format(format)",
     "upper",
     "lower",

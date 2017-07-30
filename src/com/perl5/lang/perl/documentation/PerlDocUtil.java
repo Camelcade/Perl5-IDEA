@@ -48,9 +48,9 @@ import java.util.Map;
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocUtil implements PerlElementTypes {
-  private static final Map<String, String> myKeywordsRedirections = new THashMap<String, String>();
-  private static final Map<String, String> myOperatorsRedirections = new THashMap<String, String>();
-  private static final Map<String, String> myVariablesRedirections = new THashMap<String, String>();
+  private static final Map<String, String> myKeywordsRedirections = new THashMap<>();
+  private static final Map<String, String> myOperatorsRedirections = new THashMap<>();
+  private static final Map<String, String> myVariablesRedirections = new THashMap<>();
 
   static {
     myKeywordsRedirections.put("__DATA__", "perldata/\"Special Literals\"");
@@ -241,7 +241,7 @@ public class PerlDocUtil implements PerlElementTypes {
       }
     }
 
-    final List<PodCompositeElement> result = new ArrayList<PodCompositeElement>();
+    final List<PodCompositeElement> result = new ArrayList<>();
 
     PsiTreeUtil.processElements(psiFile, new PsiElementProcessor() {
       @Override
@@ -328,7 +328,7 @@ public class PerlDocUtil implements PerlElementTypes {
       StringBuilder builder = new StringBuilder();
 
       // appending breadcrumbs
-      List<String> breadCrumbs = new ArrayList<String>();
+      List<String> breadCrumbs = new ArrayList<>();
       run = podSection.getParent();
       while (true) {
         if (run instanceof PodLinkTarget) {

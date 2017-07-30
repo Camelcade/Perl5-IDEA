@@ -133,7 +133,7 @@ public class PerlElementFactory {
     @SuppressWarnings("ConstantConditions") PsiElement headingNewLine = heredocOpener.getNextSibling();
     PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
 
-    return new ArrayList<PsiElement>(Arrays.asList(
+    return new ArrayList<>(Arrays.asList(
       heredocOpener,
       headingNewLine,
       tailingNewLine

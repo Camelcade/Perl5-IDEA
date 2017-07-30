@@ -41,7 +41,7 @@ import java.util.Set;
  */
 public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes {
-  private static final Set<Language> myLanguages = new THashSet<Language>(Arrays.asList(
+  private static final Set<Language> myLanguages = new THashSet<>(Arrays.asList(
     Mason2Language.INSTANCE,
     PodLanguage.INSTANCE
   ));

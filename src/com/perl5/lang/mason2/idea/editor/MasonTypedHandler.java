@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 07.01.2016.
  */
 public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, XmlTokenType, PerlElementTypes {
-  private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<String, String>();
+  private static final THashMap<String, String> SIMPLE_COMPLETION_MAP = new THashMap<>();
 
   static {
     SIMPLE_COMPLETION_MAP.put(KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER);

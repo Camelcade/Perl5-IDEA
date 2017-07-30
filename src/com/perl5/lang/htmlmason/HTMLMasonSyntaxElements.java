@@ -103,7 +103,7 @@ public interface HTMLMasonSyntaxElements {
   String KEYWORD_DOC_OPENER = KEYWORD_DOC_OPENER_UNCLOSED + ">";
   String KEYWORD_DOC_CLOSER = "</%" + KEYWORD_DOC + ">";
 
-  Set<String> BUILTIN_TAGS_SIMPLE = new THashSet<String>(Arrays.asList(
+  Set<String> BUILTIN_TAGS_SIMPLE = new THashSet<>(Arrays.asList(
     KEYWORD_ARGS,
     KEYWORD_ATTR,
     KEYWORD_PERL,
@@ -117,7 +117,7 @@ public interface HTMLMasonSyntaxElements {
     KEYWORD_DOC
   ));
 
-  Set<String> BUILTIN_TAGS_COMPLEX = new THashSet<String>(Arrays.asList(
+  Set<String> BUILTIN_TAGS_COMPLEX = new THashSet<>(Arrays.asList(
     KEYWORD_METHOD,
     KEYWORD_DEF
   ));

@@ -122,6 +122,6 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   public void doTest(String fileName, @NotNull String namespaceName, String[] parentsList) {
     PerlNamespaceDefinitionMixin namespaceDefinition = getNamespaceInFile(fileName, namespaceName);
     List<String> parents = namespaceDefinition.getParentNamespacesNamesFromPsi();
-    assertEquals(new ArrayList<String>(Arrays.asList(parentsList)), parents);
+    assertEquals(new ArrayList<>(Arrays.asList(parentsList)), parents);
   }
 }

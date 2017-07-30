@@ -54,7 +54,7 @@ public class TemplateToolkitBlockReference extends PerlCachingReference<PsiEleme
       return ResolveResult.EMPTY_ARRAY;
     }
 
-    final List<ResolveResult> result = new ArrayList<ResolveResult>();
+    final List<ResolveResult> result = new ArrayList<>();
 
     PsiTreeUtil.processElements(element.getContainingFile(), element1 ->
     {

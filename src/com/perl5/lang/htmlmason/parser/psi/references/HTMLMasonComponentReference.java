@@ -128,7 +128,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
         assert subcomponentDefitnition instanceof HTMLMasonSubcomponentDefitnition;
         if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition)subcomponentDefitnition).getName(), nameOrPath)) {
           if (result == null) {
-            result = new ArrayList<ResolveResult>();
+            result = new ArrayList<>();
           }
           result.add(new PsiElementResolveResult(subcomponentDefitnition));
         }
@@ -164,7 +164,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
       if (componentVirtualFile != null) {
         PsiFile componentFile = PsiManager.getInstance(project).findFile(componentVirtualFile);
         if (componentFile instanceof HTMLMasonFileImpl) {
-          result = new ArrayList<ResolveResult>();
+          result = new ArrayList<>();
           result.add(new PsiElementResolveResult(componentFile));
         }
       }

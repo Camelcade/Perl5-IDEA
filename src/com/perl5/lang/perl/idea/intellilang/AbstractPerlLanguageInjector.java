@@ -25,9 +25,9 @@ import java.util.Map;
  * Created by hurricup on 12.06.2015.
  */
 public abstract class AbstractPerlLanguageInjector {
-  public static final Map<String, Language> LANGUAGE_MAP = new HashMap<String, Language>();
+  public static final Map<String, Language> LANGUAGE_MAP = new HashMap<>();
 
-  protected static final Map<String, String> ACCEPTABLE_LANGUAGES = new HashMap<String, String>();
+  protected static final Map<String, String> ACCEPTABLE_LANGUAGES = new HashMap<>();
 
   static {
     // idea database tools
