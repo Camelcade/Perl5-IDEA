@@ -163,13 +163,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
     else if ((elementType == STRING_LIST || elementType == LP_STRING_QW) && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-      FactoryMap<Integer, Alignment> alignmentMap = new FactoryMap<Integer, Alignment>() {
-        @Nullable
-        @Override
-        protected Alignment create(Integer key) {
-          return Alignment.createAlignment(true);
-        }
-      };
+      FactoryMap<Integer, Alignment> alignmentMap = FactoryMap.createMap(key -> Alignment.createAlignment(true));
       int[] elementIndex = new int[]{0};
       int[] lastRelativeLineNumber = new int[]{0};
 

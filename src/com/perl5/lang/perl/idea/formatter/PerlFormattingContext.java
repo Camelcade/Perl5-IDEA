@@ -42,32 +42,29 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
-  private final FactoryMap<PsiFile, List<TextRange>> myHeredocRangesMap = new FactoryMap<PsiFile, List<TextRange>>() {
-    @Override
-    protected List<TextRange> create(PsiFile file) {
-      if (!(file instanceof PerlFileImpl)) {
-        return Collections.emptyList();
-      }
-      final Document document = file.getViewProvider().getDocument();
-      if (document == null) {
-        return Collections.emptyList();
-      }
-      List<TextRange> result = new ArrayList<>();
-      file.accept(new PsiElementVisitor() {
-        @Override
-        public void visitElement(PsiElement element) {
-          if (PsiUtilCore.getElementType(element) == HEREDOC_OPENER) {
-            int startOffset = element.getNode().getStartOffset();
-            result.add(TextRange.create(startOffset + 1, document.getLineEndOffset(document.getLineNumber(startOffset))));
-          }
-          else {
-            element.acceptChildren(this);
-          }
-        }
-      });
-      return result;
+  private final FactoryMap<PsiFile, List<TextRange>> myHeredocRangesMap = FactoryMap.createMap(file -> {
+    if (!(file instanceof PerlFileImpl)) {
+      return Collections.emptyList();
     }
-  };
+    final Document document = file.getViewProvider().getDocument();
+    if (document == null) {
+      return Collections.emptyList();
+    }
+    List<TextRange> result = new ArrayList<>();
+    file.accept(new PsiElementVisitor() {
+      @Override
+      public void visitElement(PsiElement element) {
+        if (PsiUtilCore.getElementType(element) == HEREDOC_OPENER) {
+          int startOffset = element.getNode().getStartOffset();
+          result.add(TextRange.create(startOffset + 1, document.getLineEndOffset(document.getLineNumber(startOffset))));
+        }
+        else {
+          element.acceptChildren(this);
+        }
+      }
+    });
+    return result;
+  });
 
   public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);

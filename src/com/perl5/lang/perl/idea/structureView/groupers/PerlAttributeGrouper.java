@@ -47,13 +47,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
       return Collections.emptyList();
     }
 
-    FactoryMap<PerlMooseAttributeWrapper, AttributeGroup> groupMap = new FactoryMap<PerlMooseAttributeWrapper, AttributeGroup>() {
-      @NotNull
-      @Override
-      protected AttributeGroup create(PerlMooseAttributeWrapper key) {
-        return new AttributeGroup(key);
-      }
-    };
+    FactoryMap<PerlMooseAttributeWrapper, AttributeGroup> groupMap = FactoryMap.createMap(AttributeGroup::new);
 
     for (TreeElement childTreeElement : children) {
       if (!(childTreeElement instanceof PerlStructureViewElement)) {
