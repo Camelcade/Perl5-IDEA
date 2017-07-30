@@ -24,7 +24,6 @@ import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
-import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -46,7 +45,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -369,42 +367,36 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   }
 
   private static void popupResultInfo(final SubmittedReportInfo reportInfo, final Project project) {
-    ApplicationManager.getApplication().invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        StringBuilder text = new StringBuilder("<html>");
-        final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null
-                           ? null
-                           : reportInfo.getURL();
-        IdeErrorsDialog.appendSubmissionInformation(reportInfo, text);
-        text.append(".");
-        final SubmittedReportInfo.SubmissionStatus status = reportInfo.getStatus();
-        if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE) {
-          text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
-        }
-        else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
-          text.append("<br/>Possible duplicate report");
-        }
-        text.append("</html>");
-        NotificationType type;
-        if (status == SubmittedReportInfo.SubmissionStatus.FAILED) {
-          type = NotificationType.ERROR;
-        }
-        else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
-          type = NotificationType.WARNING;
-        }
-        else {
-          type = NotificationType.INFORMATION;
-        }
-        NotificationListener listener = url != null ? new NotificationListener() {
-          @Override
-          public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
-            BrowserUtil.launchBrowser(url);
-            notification.expire();
-          }
-        } : null;
-        ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
+    ApplicationManager.getApplication().invokeLater(() -> {
+      StringBuilder text = new StringBuilder("<html>");
+      final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null
+                         ? null
+                         : reportInfo.getURL();
+      IdeErrorsDialog.appendSubmissionInformation(reportInfo, text);
+      text.append(".");
+      final SubmittedReportInfo.SubmissionStatus status = reportInfo.getStatus();
+      if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE) {
+        text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
       }
+      else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
+        text.append("<br/>Possible duplicate report");
+      }
+      text.append("</html>");
+      NotificationType type;
+      if (status == SubmittedReportInfo.SubmissionStatus.FAILED) {
+        type = NotificationType.ERROR;
+      }
+      else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
+        type = NotificationType.WARNING;
+      }
+      else {
+        type = NotificationType.INFORMATION;
+      }
+      NotificationListener listener = url != null ? (notification, event) -> {
+        BrowserUtil.launchBrowser(url);
+        notification.expire();
+      } : null;
+      ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
     });
   }
 }

@@ -22,7 +22,6 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
@@ -55,21 +54,18 @@ public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<
       return;
     }
 
-    PsiTreeUtil.processElements(element.getContainingFile(), new PsiElementProcessor() {
-      @Override
-      public boolean execute(@NotNull PsiElement element) {
-        if (element instanceof TemplateToolkitNamedBlock) {
-          String blockName = ((TemplateToolkitNamedBlock)element).getName();
-          if (StringUtil.isNotEmpty(blockName)) {
-            result.addElement(
-              LookupElementBuilder.create(blockName)
-                .withTypeText("BLOCK", true)
-                .withIcon(element.getIcon(0))
-            );
-          }
+    PsiTreeUtil.processElements(element.getContainingFile(), element1 -> {
+      if (element1 instanceof TemplateToolkitNamedBlock) {
+        String blockName = ((TemplateToolkitNamedBlock)element1).getName();
+        if (StringUtil.isNotEmpty(blockName)) {
+          result.addElement(
+            LookupElementBuilder.create(blockName)
+              .withTypeText("BLOCK", true)
+              .withIcon(element1.getIcon(0))
+          );
         }
-        return true;
       }
+      return true;
     });
   }
 }

@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight;
 
 import com.intellij.lang.parameterInfo.ParameterInfoUIContext;
-import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -72,12 +71,7 @@ public class PerlParameterInfo {
   }
 
   public static PerlParameterInfo[] wrapArguments(List<PerlSubArgument> arguments) {
-    List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, new Function<PerlSubArgument, PerlParameterInfo>() {
-      @Override
-      public PerlParameterInfo fun(PerlSubArgument perlSubArgument) {
-        return new PerlParameterInfo(perlSubArgument);
-      }
-    });
+    List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, perlSubArgument -> new PerlParameterInfo(perlSubArgument));
     return parameterInfos.toArray(new PerlParameterInfo[parameterInfos.size()]);
   }
 }

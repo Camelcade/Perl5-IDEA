@@ -35,8 +35,6 @@ import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,11 +88,7 @@ public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
 
     InsertPathAction.addTo(myFieldWithHistory.getTextEditor());
 
-    myCbEnabled.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        enabledChanged();
-      }
-    });
+    myCbEnabled.addActionListener(e -> enabledChanged());
     enabledChanged();
 
     setAnchor(myCbEnabled);

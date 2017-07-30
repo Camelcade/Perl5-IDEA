@@ -243,24 +243,21 @@ public class PerlDocUtil implements PerlElementTypes {
 
     final List<PodCompositeElement> result = new ArrayList<>();
 
-    PsiTreeUtil.processElements(psiFile, new PsiElementProcessor() {
-      @Override
-      public boolean execute(@NotNull PsiElement element) {
-        if (pattern.accepts(element)) {
-          if (element instanceof PodFormatterX) {
-            PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
-            if (container != null) {
-              result.add((PodCompositeElement)container);
-              return false;
-            }
-          }
-          else {
-            result.add((PodCompositeElement)element);
+    PsiTreeUtil.processElements(psiFile, element -> {
+      if (pattern.accepts(element)) {
+        if (element instanceof PodFormatterX) {
+          PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
+          if (container != null) {
+            result.add((PodCompositeElement)container);
             return false;
           }
         }
-        return true;
+        else {
+          result.add((PodCompositeElement)element);
+          return false;
+        }
       }
+      return true;
     });
 
     return result.isEmpty() ? null : result.get(0);

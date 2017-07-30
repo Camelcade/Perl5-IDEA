@@ -20,7 +20,9 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.*;
+import com.intellij.ui.CollectionListModel;
+import com.intellij.ui.TableUtil;
+import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.ui.ColumnInfo;
@@ -96,31 +98,28 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
 
     builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
       .createDecorator(globalsTable)
-      .setAddAction(new AnActionButtonRunnable() {
-        @Override
-        public void run(AnActionButton anActionButton) {
-          final TableCellEditor cellEditor = globalsTable.getCellEditor();
-          if (cellEditor != null) {
-            cellEditor.stopCellEditing();
-          }
-          final TableModel model = globalsTable.getModel();
-
-          int indexToEdit = -1;
-
-          for (VariableDescription variableDescription : globalsModel.getItems()) {
-            if (StringUtil.isEmpty(variableDescription.variableName)) {
-              indexToEdit = globalsModel.indexOf(variableDescription);
-              break;
-            }
-          }
-
-          if (indexToEdit == -1) {
-            globalsModel.addRow(new VariableDescription());
-            indexToEdit = model.getRowCount() - 1;
-          }
-
-          TableUtil.editCellAt(globalsTable, indexToEdit, 0);
+      .setAddAction(anActionButton -> {
+        final TableCellEditor cellEditor = globalsTable.getCellEditor();
+        if (cellEditor != null) {
+          cellEditor.stopCellEditing();
         }
+        final TableModel model = globalsTable.getModel();
+
+        int indexToEdit = -1;
+
+        for (VariableDescription variableDescription : globalsModel.getItems()) {
+          if (StringUtil.isEmpty(variableDescription.variableName)) {
+            indexToEdit = globalsModel.indexOf(variableDescription);
+            break;
+          }
+        }
+
+        if (indexToEdit == -1) {
+          globalsModel.addRow(new VariableDescription());
+          indexToEdit = model.getRowCount() - 1;
+        }
+
+        TableUtil.editCellAt(globalsTable, indexToEdit, 0);
       })
       .disableDownAction()
       .disableUpAction()

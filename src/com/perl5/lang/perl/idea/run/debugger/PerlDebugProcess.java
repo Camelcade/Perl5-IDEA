@@ -143,15 +143,12 @@ public class PerlDebugProcess extends XDebugProcess {
     myDebugThread.setStop();
 
     ApplicationManager.getApplication().runReadAction(
-      new Runnable() {
-        @Override
-        public void run() {
-          XBreakpointManager breakpointManager = XDebuggerManager.getInstance(getSession().getProject()).getBreakpointManager();
-          Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints =
-            breakpointManager.getBreakpoints(PerlLineBreakpointType.class);
-          for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints) {
-            breakpointManager.updateBreakpointPresentation(breakpoint, null, null);
-          }
+      () -> {
+        XBreakpointManager breakpointManager = XDebuggerManager.getInstance(getSession().getProject()).getBreakpointManager();
+        Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints =
+          breakpointManager.getBreakpoints(PerlLineBreakpointType.class);
+        for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints) {
+          breakpointManager.updateBreakpointPresentation(breakpoint, null, null);
         }
       }
     );

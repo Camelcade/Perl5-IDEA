@@ -69,13 +69,8 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
       if (message != null) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(message);
-        panel.createActionLabel("Configure", new Runnable() {
-          @Override
-          public void run() {
-            ShowSettingsUtil.getInstance()
-              .editConfigurable(myProject, new HTMLMasonSettingsConfigurable(myProject, "HTML::Mason Settings"));
-          }
-        });
+        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
+          .editConfigurable(myProject, new HTMLMasonSettingsConfigurable(myProject, "HTML::Mason Settings")));
         return panel;
       }
     }

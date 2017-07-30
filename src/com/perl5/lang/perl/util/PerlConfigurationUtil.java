@@ -30,7 +30,6 @@ import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
-import com.intellij.util.Consumer;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -64,19 +63,16 @@ public class PerlConfigurationUtil {
             withTitle(dialogTitle),
           myProject,
           rootsList
-        ).choose(null, new Consumer<List<VirtualFile>>() {
-          @Override
-          public void consume(List<VirtualFile> virtualFiles) {
-            String rootPath = myProject.getBasePath();
-            if (rootPath != null) {
-              VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
+        ).choose(null, virtualFiles -> {
+          String rootPath = myProject.getBasePath();
+          if (rootPath != null) {
+            VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(rootPath), true);
 
-              if (rootFile != null) {
-                for (VirtualFile file : virtualFiles) {
-                  String relativePath = VfsUtil.getRelativePath(file, rootFile);
-                  if (!rootsModel.getItems().contains(relativePath)) {
-                    rootsModel.add(relativePath);
-                  }
+            if (rootFile != null) {
+              for (VirtualFile file : virtualFiles) {
+                String relativePath = VfsUtil.getRelativePath(file, rootFile);
+                if (!rootsModel.getItems().contains(relativePath)) {
+                  rootsModel.add(relativePath);
                 }
               }
             }

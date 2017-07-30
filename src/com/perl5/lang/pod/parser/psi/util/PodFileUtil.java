@@ -111,21 +111,18 @@ public class PodFileUtil {
   public static PsiFile getPodOrPackagePsiByDescriptor(Project project, PodLinkDescriptor descriptor) {
     final List<PsiFile> result = new ArrayList<>();
 
-    PodFileUtil.processPodFilesByDescriptor(project, descriptor, new Processor<PsiFile>() {
-      @Override
-      public boolean process(PsiFile psiFile) {
-        if (psiFile != null) {
-          if (psiFile.getFileType() == PodFileType.INSTANCE) {
-            result.clear();
-            result.add(psiFile);
-            return false;
-          }
-          else if ((psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null) {
-            result.add(psiFile);
-          }
+    PodFileUtil.processPodFilesByDescriptor(project, descriptor, psiFile -> {
+      if (psiFile != null) {
+        if (psiFile.getFileType() == PodFileType.INSTANCE) {
+          result.clear();
+          result.add(psiFile);
+          return false;
         }
-        return true;
+        else if ((psiFile = psiFile.getViewProvider().getPsi(PodLanguage.INSTANCE)) != null) {
+          result.add(psiFile);
+        }
       }
+      return true;
     });
 
     return result.isEmpty() ? null : result.get(0);

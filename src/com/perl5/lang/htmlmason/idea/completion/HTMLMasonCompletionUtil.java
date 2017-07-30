@@ -30,7 +30,6 @@ import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonParametrizedEntity;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -62,19 +61,16 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
   }
 
   public static void fillWithMethods(@NotNull final CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
-    component.processMethodDefinitionsInThisOrParents(new Processor<HTMLMasonMethodDefinition>() {
-      @Override
-      public boolean process(HTMLMasonMethodDefinition element) {
-        String name = element.getName();
-        if (name != null) {
-          resultSet.addElement(LookupElementBuilder
-                                 .create(name)
-                                 .withIcon(element.getIcon(0))
-                                 .withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
-          );
-        }
-        return true;
+    component.processMethodDefinitionsInThisOrParents(element -> {
+      String name = element.getName();
+      if (name != null) {
+        resultSet.addElement(LookupElementBuilder
+                               .create(name)
+                               .withIcon(element.getIcon(0))
+                               .withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
+        );
       }
+      return true;
     });
   }
 

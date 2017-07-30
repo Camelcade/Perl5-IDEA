@@ -21,8 +21,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.AnActionButton;
-import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
@@ -122,19 +120,16 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
       new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"),
       ToolbarDecorator
         .createDecorator(autobaseList)
-        .setAddAction(new AnActionButtonRunnable() {
-          @Override
-          public void run(AnActionButton anActionButton) {
-            String fileName = Messages.showInputDialog(
-              myProject,
-              "Type new Autobase filename:",
-              "New Autobase Filename",
-              Messages.getQuestionIcon(),
-              "",
-              null);
-            if (StringUtil.isNotEmpty(fileName) && !autobaseModel.getItems().contains(fileName)) {
-              autobaseModel.add(fileName);
-            }
+        .setAddAction(anActionButton -> {
+          String fileName = Messages.showInputDialog(
+            myProject,
+            "Type new Autobase filename:",
+            "New Autobase Filename",
+            Messages.getQuestionIcon(),
+            "",
+            null);
+          if (StringUtil.isNotEmpty(fileName) && !autobaseModel.getItems().contains(fileName)) {
+            autobaseModel.add(fileName);
           }
         })
         .setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))

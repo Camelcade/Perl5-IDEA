@@ -48,12 +48,8 @@ import java.util.Comparator;
  * Created by hurricup on 14.05.2016.
  */
 public class PerlScriptsPanel extends JPanel {
-  private static final Comparator<PerlLoadedFileDescriptor> compareEntries = new Comparator<PerlLoadedFileDescriptor>() {
-    @Override
-    public int compare(PerlLoadedFileDescriptor o1, PerlLoadedFileDescriptor o2) {
-      return StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);
-    }
-  };
+  private static final Comparator<PerlLoadedFileDescriptor> compareEntries =
+    (o1, o2) -> StringUtil.compare(o1.getPresentableName(), o2.getPresentableName(), false);
   @NotNull
   private final Project myProject;
   private final PerlDebugThread myDebugThread;
@@ -121,23 +117,13 @@ public class PerlScriptsPanel extends JPanel {
 
   public void add(final PerlLoadedFileDescriptor value) {
     if (myModel.indexOf(value) == -1) {
-      ApplicationManager.getApplication().invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          myModel.add(value);
-        }
-      });
+      ApplicationManager.getApplication().invokeLater(() -> myModel.add(value));
     }
   }
 
   public void remove(final PerlLoadedFileDescriptor value) {
     if (myModel.indexOf(value) != -1) {
-      ApplicationManager.getApplication().invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          myModel.remove(value);
-        }
-      });
+      ApplicationManager.getApplication().invokeLater(() -> myModel.remove(value));
     }
   }
 
@@ -153,12 +139,7 @@ public class PerlScriptsPanel extends JPanel {
       }
     }
     else {
-      ApplicationManager.getApplication().invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          bulkChangeNow(toAdd, toRemove);
-        }
-      });
+      ApplicationManager.getApplication().invokeLater(() -> bulkChangeNow(toAdd, toRemove));
     }
   }
 

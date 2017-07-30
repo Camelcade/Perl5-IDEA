@@ -23,7 +23,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
@@ -212,22 +211,19 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
       final List<String> relativePaths = new ArrayList<>();
       final List<String> exactPaths = new ArrayList<>();
 
-      StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, new Processor<String>() {
-        @Override
-        public boolean process(final String parentPath) {
-          if (parentPath.charAt(0) == VfsUtil.VFS_SEPARATOR_CHAR) // absolute path, should be equal
-          {
-            if (componentPath.equals(parentPath.substring(1))) {
-              exactPaths.add(parentPath);
-            }
+      StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, parentPath -> {
+        if (parentPath.charAt(0) == VfsUtil.VFS_SEPARATOR_CHAR) // absolute path, should be equal
+        {
+          if (componentPath.equals(parentPath.substring(1))) {
+            exactPaths.add(parentPath);
           }
-          else if (componentPath.endsWith(parentPath))    // relative path
-          {
-            relativePaths.add(parentPath);
-          }
-
-          return true;
         }
+        else if (componentPath.endsWith(parentPath))    // relative path
+        {
+          relativePaths.add(parentPath);
+        }
+
+        return true;
       });
 
       for (String parentPath : exactPaths) {
@@ -264,14 +260,11 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
         if (basePath != null) {
           final List<String> componentPaths = new ArrayList<>();
           StubIndex.getInstance().processAllKeys(
-            MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), new Processor<String>() {
-              @Override
-              public boolean process(final String componentPath) {
-                if (componentPath.startsWith(basePath)) {
-                  componentPaths.add(componentPath);
-                }
-                return true;
+            MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), componentPath1 -> {
+              if (componentPath1.startsWith(basePath)) {
+                componentPaths.add(componentPath1);
               }
+              return true;
             }
           );
 

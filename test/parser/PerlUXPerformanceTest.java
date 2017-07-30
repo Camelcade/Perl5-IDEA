@@ -31,7 +31,6 @@ import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
-import com.intellij.util.ThrowableRunnable;
 import org.junit.experimental.categories.Category;
 
 /**
@@ -48,16 +47,13 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase {
     }
 
     final int time = 1000;
-    PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * time, new ThrowableRunnable() {
-      @Override
-      public void run() throws Throwable {
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < iterations; i++) {
-          myFixture.type("\n");
-        }
-        long length = System.currentTimeMillis() - start;
-        System.err.println("Typing enter done in " + length / iterations + " ms per iteration  of " + time);
+    PlatformTestUtil.startPerformanceTest("PerlTidy enter typing", iterations * time, () -> {
+      long start = System.currentTimeMillis();
+      for (int i = 0; i < iterations; i++) {
+        myFixture.type("\n");
       }
+      long length = System.currentTimeMillis() - start;
+      System.err.println("Typing enter done in " + length / iterations + " ms per iteration  of " + time);
     }).cpuBound().useLegacyScaling().assertTiming();
   }
 
@@ -80,19 +76,16 @@ public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase {
     }
 
     final int time = 1100;
-    PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * time, new ThrowableRunnable() {
-      @Override
-      public void run() throws Throwable {
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < iterations; i++) {
-          codeAnalyzer.restart();
-          ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
-          codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
-          DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
-        }
-        long length = System.currentTimeMillis() - start;
-        System.err.println("Highlighting done in " + length / iterations + " ms per iteration of " + time);
+    PlatformTestUtil.startPerformanceTest("PerlTidy highlighting", iterations * time, () -> {
+      long start = System.currentTimeMillis();
+      for (int i = 0; i < iterations; i++) {
+        codeAnalyzer.restart();
+        ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
+        codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
+        DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
       }
+      long length = System.currentTimeMillis() - start;
+      System.err.println("Highlighting done in " + length / iterations + " ms per iteration of " + time);
     }).cpuBound().useLegacyScaling().assertTiming();
   }
 }

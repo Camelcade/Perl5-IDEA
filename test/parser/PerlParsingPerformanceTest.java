@@ -27,7 +27,10 @@ import com.intellij.testFramework.PlatformTestUtil;
 import gnu.trove.THashMap;
 import org.junit.experimental.categories.Category;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -150,12 +153,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
     });
 
     List<Map.Entry<IElementType, Integer>> entries = new ArrayList<>(tokensMap.entrySet());
-    Collections.sort(entries, new Comparator<Map.Entry<IElementType, Integer>>() {
-      @Override
-      public int compare(Map.Entry<IElementType, Integer> o1, Map.Entry<IElementType, Integer> o2) {
-        return o2.getValue().compareTo(o1.getValue());
-      }
-    });
+    Collections.sort(entries, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
     for (Map.Entry<IElementType, Integer> entry : entries) {
       Integer elementCount = entry.getValue();

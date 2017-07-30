@@ -51,30 +51,27 @@ public class PerlDebugUtil {
   public static XLineBreakpoint findBreakpoint(final Project project, final PerlDebuggingEventBreakpoint breakpointBase) {
     final XLineBreakpoint[] result = new XLineBreakpoint[]{null};
 
-    ApplicationManager.getApplication().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        String path = breakpointBase.getPath();
+    ApplicationManager.getApplication().runReadAction(() -> {
+      String path = breakpointBase.getPath();
 
-        VirtualFile virtualFile = null;
-        String virtualFileUrl = null;
+      VirtualFile virtualFile = null;
+      String virtualFileUrl = null;
 
-        virtualFile = VfsUtil.findFileByIoFile(new File(breakpointBase.getDebugThread().getDebugProfileState().mapPathToLocal(path)), true);
+      virtualFile = VfsUtil.findFileByIoFile(new File(breakpointBase.getDebugThread().getDebugProfileState().mapPathToLocal(path)), true);
 
-        if (virtualFile == null) {
-          virtualFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + path;
-        }
-        else {
-          virtualFileUrl = virtualFile.getUrl();
-        }
+      if (virtualFile == null) {
+        virtualFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + path;
+      }
+      else {
+        virtualFileUrl = virtualFile.getUrl();
+      }
 
-        Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints =
-          XDebuggerManager.getInstance(project).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
-        for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints) {
-          if (StringUtil.equals(breakpoint.getFileUrl(), virtualFileUrl) && breakpoint.getLine() == breakpointBase.getLine()) {
-            result[0] = breakpoint;
-            return;
-          }
+      Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> breakpoints =
+        XDebuggerManager.getInstance(project).getBreakpointManager().getBreakpoints(PerlLineBreakpointType.class);
+      for (XLineBreakpoint<PerlLineBreakpointProperties> breakpoint : breakpoints) {
+        if (StringUtil.equals(breakpoint.getFileUrl(), virtualFileUrl) && breakpoint.getLine() == breakpointBase.getLine()) {
+          result[0] = breakpoint;
+          return;
         }
       }
     });

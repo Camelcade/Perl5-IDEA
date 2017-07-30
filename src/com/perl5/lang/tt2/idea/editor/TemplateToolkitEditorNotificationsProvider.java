@@ -56,12 +56,8 @@ public class TemplateToolkitEditorNotificationsProvider extends EditorNotificati
       if (!settings.isVirtualFileUnderRoot(file)) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(PerlBundle.message("tt2.error.file.not.in.root"));
-        panel.createActionLabel("Configure", new Runnable() {
-          @Override
-          public void run() {
-            ShowSettingsUtil.getInstance().editConfigurable(myProject, new TemplateToolkitSettingsConfigurable(myProject));
-          }
-        });
+        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
+          .editConfigurable(myProject, new TemplateToolkitSettingsConfigurable(myProject)));
         return panel;
       }
     }

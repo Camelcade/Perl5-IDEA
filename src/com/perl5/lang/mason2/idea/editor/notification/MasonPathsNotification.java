@@ -69,12 +69,8 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
       if (message != null) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(message);
-        panel.createActionLabel("Configure", new Runnable() {
-          @Override
-          public void run() {
-            ShowSettingsUtil.getInstance().editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason2 Settings"));
-          }
-        });
+        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
+          .editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason2 Settings")));
         return panel;
       }
     }

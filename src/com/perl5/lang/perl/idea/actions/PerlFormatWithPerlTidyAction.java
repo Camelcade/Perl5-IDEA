@@ -111,22 +111,19 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             GeneralCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
             final Process process = perlTidyCommandLine.createProcess();
             final OutputStream outputStream = process.getOutputStream();
-            ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  final byte[] sourceBytes = virtualFile.contentsToByteArray();
-                  outputStream.write(sourceBytes);
-                  outputStream.close();
-                }
-                catch (IOException e) {
-                  Notifications.Bus.notify(new Notification(
-                    PERL_TIDY_GROUP,
-                    "Re-formatting error",
-                    e.getMessage(),
-                    NotificationType.ERROR
-                  ));
-                }
+            ApplicationManager.getApplication().executeOnPooledThread(() -> {
+              try {
+                final byte[] sourceBytes = virtualFile.contentsToByteArray();
+                outputStream.write(sourceBytes);
+                outputStream.close();
+              }
+              catch (IOException e) {
+                Notifications.Bus.notify(new Notification(
+                  PERL_TIDY_GROUP,
+                  "Re-formatting error",
+                  e.getMessage(),
+                  NotificationType.ERROR
+                ));
               }
             });
 
@@ -137,12 +134,9 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             List<String> stderrLines = processOutput.getStderrLines();
 
             if (stderrLines.isEmpty()) {
-              WriteCommandAction.runWriteCommandAction(project, new Runnable() {
-                @Override
-                public void run() {
-                  document.setText(StringUtil.join(stdoutLines, "\n"));
-                  PsiDocumentManager.getInstance(project).commitDocument(document);
-                }
+              WriteCommandAction.runWriteCommandAction(project, () -> {
+                document.setText(StringUtil.join(stdoutLines, "\n"));
+                PsiDocumentManager.getInstance(project).commitDocument(document);
               });
             }
             else {

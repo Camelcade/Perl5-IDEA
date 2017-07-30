@@ -23,7 +23,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
@@ -36,7 +35,6 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -176,46 +174,43 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
             PerlPsiUtil.processElementsInRange(
               perlLexicalScope,
               new TextRange(startOffset, endOffset),
-              new PsiElementProcessor<PsiElement>() {
-                @Override
-                public boolean execute(@NotNull PsiElement element) {
-                  if (element != PerlVariableMixin.this &&
-                      element instanceof PsiPerlScalarVariable &&
-                      element.getParent() instanceof PsiPerlAssignExpr
+              element -> {
+                if (element != PerlVariableMixin.this &&
+                    element instanceof PsiPerlScalarVariable &&
+                    element.getParent() instanceof PsiPerlAssignExpr
+                  ) {
+                  PsiElement variableNameElement1 = ((PsiPerlScalarVariable)element).getVariableNameElement();
+
+                  if (variableNameElement1 != null &&
+                      variableNameElement1.getReference() != null &&
+                      variableNameElement1.getReference().isReferenceTo(declarationWrapper)
                     ) {
-                    PsiElement variableNameElement = ((PsiPerlScalarVariable)element).getVariableNameElement();
+                    // found variable assignment
+                    PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)element.getParent();
+                    List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-                    if (variableNameElement != null &&
-                        variableNameElement.getReference() != null &&
-                        variableNameElement.getReference().isReferenceTo(declarationWrapper)
-                      ) {
-                      // found variable assignment
-                      PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)element.getParent();
-                      List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+                    if (!assignmentElements.isEmpty()) {
+                      PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
-                      if (!assignmentElements.isEmpty()) {
-                        PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-                        if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
-                          // source element is on the left side
-                          // fixme implement variables assignment support. Need to build kinda visitor with recursion control
-                          String returnValue = null;
-                          if (lastExpression instanceof PerlMethodContainer) {
-                            returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
-                          }
-                          if (lastExpression instanceof PerlDerefExpression) {
-                            returnValue = ((PerlDerefExpression)lastExpression).guessType();
-                          }
-                          if (StringUtil.isNotEmpty(returnValue)) {
-                            guessResult[0] = returnValue;
-                            return false;
-                          }
+                      if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
+                        // source element is on the left side
+                        // fixme implement variables assignment support. Need to build kinda visitor with recursion control
+                        String returnValue = null;
+                        if (lastExpression instanceof PerlMethodContainer) {
+                          returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
+                        }
+                        if (lastExpression instanceof PerlDerefExpression) {
+                          returnValue = ((PerlDerefExpression)lastExpression).guessType();
+                        }
+                        if (StringUtil.isNotEmpty(returnValue)) {
+                          guessResult[0] = returnValue;
+                          return false;
                         }
                       }
                     }
                   }
-                  return true;
                 }
+                return true;
               }
             );
           }

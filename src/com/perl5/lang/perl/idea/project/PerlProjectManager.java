@@ -209,10 +209,7 @@ public class PerlProjectManager {
           return;
         }
 
-        ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
-          () -> {
-            myPerlSettings.setExternalLibrariesPaths(paths);
-          }, false, true);
+        ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(() -> myPerlSettings.setExternalLibrariesPaths(paths), false, true);
       }
     );
   }

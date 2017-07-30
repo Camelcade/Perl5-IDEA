@@ -32,8 +32,6 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
 
 /**
@@ -57,26 +55,23 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     QUOTE_TICK_CLOSE,
     QUOTE_SINGLE_CLOSE
   );
-  private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = new WhitespacesAndCommentsBinder() {
-    @Override
-    public int getEdgePosition(List<IElementType> tokens, boolean atStreamEdge, TokenTextGetter getter) {
-      int result = tokens.size();
-      if (atStreamEdge || tokens.isEmpty()) {
-        return result;
-      }
-
-      for (int i = tokens.size() - 1; i >= 0; i--) {
-        IElementType currentToken = tokens.get(i);
-        if (currentToken == COMMENT_ANNOTATION || currentToken == COMMENT_LINE) {
-          result = i;
-        }
-        else if (currentToken != TokenType.WHITE_SPACE && currentToken != TokenType.NEW_LINE_INDENT) {
-          break;
-        }
-      }
-
+  private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
+    int result = tokens.size();
+    if (atStreamEdge || tokens.isEmpty()) {
       return result;
     }
+
+    for (int i = tokens.size() - 1; i >= 0; i--) {
+      IElementType currentToken = tokens.get(i);
+      if (currentToken == COMMENT_ANNOTATION || currentToken == COMMENT_LINE) {
+        result = i;
+      }
+      else if (currentToken != TokenType.WHITE_SPACE && currentToken != TokenType.NEW_LINE_INDENT) {
+        break;
+      }
+    }
+
+    return result;
   };
 
   /**

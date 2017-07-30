@@ -16,13 +16,7 @@
 
 package com.perl5.lang.mojolicious.filetypes;
 
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.idea.highlighter.MojoliciousHighlighter;
@@ -41,15 +35,9 @@ public class MojoliciousFileType extends PerlFileType {
 
   public MojoliciousFileType() {
     super(MojoliciousLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
-      @Override
-      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
-                                                    @NotNull FileType fileType,
-                                                    @Nullable VirtualFile virtualFile,
-                                                    @NotNull EditorColorsScheme editorColorsScheme) {
-        return new MojoliciousHighlighter(project, virtualFile, editorColorsScheme);
-      }
-    });
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
+                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new MojoliciousHighlighter(
+                                                                       project, virtualFile, editorColorsScheme));
   }
 
   @NotNull

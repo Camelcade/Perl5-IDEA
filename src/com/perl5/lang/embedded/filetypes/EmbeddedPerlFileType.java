@@ -16,13 +16,7 @@
 
 package com.perl5.lang.embedded.filetypes;
 
-import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.EditorHighlighterProvider;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlHighlighter;
@@ -41,15 +35,9 @@ public class EmbeddedPerlFileType extends PerlFileType {
   public EmbeddedPerlFileType() {
 
     super(EmbeddedPerlLanguage.INSTANCE);
-    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this, new EditorHighlighterProvider() {
-      @Override
-      public EditorHighlighter getEditorHighlighter(@Nullable Project project,
-                                                    @NotNull FileType fileType,
-                                                    @Nullable VirtualFile virtualFile,
-                                                    @NotNull EditorColorsScheme editorColorsScheme) {
-        return new EmbeddedPerlHighlighter(project, virtualFile, editorColorsScheme);
-      }
-    });
+    FileTypeEditorHighlighterProviders.INSTANCE.addExplicitExtension(this,
+                                                                     (project, fileType, virtualFile, editorColorsScheme) -> new EmbeddedPerlHighlighter(
+                                                                       project, virtualFile, editorColorsScheme));
   }
 
   @NotNull

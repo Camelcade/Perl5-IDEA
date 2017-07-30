@@ -41,12 +41,7 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
     if ("returns".equals(item.getLookupString())) {
       EditorModificationUtil.insertStringAtCaret(editor, " ");
 
-      context.setLaterRunnable(new Runnable() {
-        @Override
-        public void run() {
-          new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1);
-        }
-      });
+      context.setLaterRunnable(() -> new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1));
     }
   }
 }

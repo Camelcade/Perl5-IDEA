@@ -31,11 +31,12 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.*;
+import com.intellij.ui.CollectionListModel;
+import com.intellij.ui.TableUtil;
+import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.FileContentUtil;
-import com.intellij.util.Processor;
 import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
@@ -194,25 +195,22 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
       for (String root : rootsDiff) {
         VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
         if (componentRoot != null) {
-          VfsUtil.processFilesRecursively(componentRoot, new Processor<VirtualFile>() {
-            @Override
-            public boolean process(VirtualFile virtualFile) {
-              if (!virtualFile.isDirectory()) {
-                if (StringUtil.equals(autohandlerName, virtualFile.getName()) ||
-                    StringUtil.equals(defaulthandlerName, virtualFile.getName())) {
-                  pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
-                }
-                else {
-                  for (FileNameMatcher matcher : matchers) {
-                    if (matcher.accept(virtualFile.getName())) {
-                      pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
-                      break;
-                    }
+          VfsUtil.processFilesRecursively(componentRoot, virtualFile -> {
+            if (!virtualFile.isDirectory()) {
+              if (StringUtil.equals(autohandlerName, virtualFile.getName()) ||
+                  StringUtil.equals(defaulthandlerName, virtualFile.getName())) {
+                pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
+              }
+              else {
+                for (FileNameMatcher matcher : matchers) {
+                  if (matcher.accept(virtualFile.getName())) {
+                    pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
+                    break;
                   }
                 }
               }
-              return true;
             }
+            return true;
           });
         }
       }
@@ -306,31 +304,28 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
     builder.addLabeledComponent(new JLabel("Custom tags that mimics built-in HTML::Mason tags:"), ToolbarDecorator
       .createDecorator(customTagsTable)
-      .setAddAction(new AnActionButtonRunnable() {
-        @Override
-        public void run(AnActionButton anActionButton) {
-          final TableCellEditor cellEditor = customTagsTable.getCellEditor();
-          if (cellEditor != null) {
-            cellEditor.stopCellEditing();
-          }
-          final TableModel model = customTagsTable.getModel();
-
-          int indexToEdit = -1;
-
-          for (HTMLMasonCustomTag entry : customTagsModel.getItems()) {
-            if (StringUtil.isEmpty(entry.getText())) {
-              indexToEdit = customTagsModel.indexOf(entry);
-              break;
-            }
-          }
-
-          if (indexToEdit == -1) {
-            customTagsModel.addRow(new HTMLMasonCustomTag("customTag" + customTagsModel.getItems().size(), HTMLMasonCustomTagRole.PERL));
-            indexToEdit = model.getRowCount() - 1;
-          }
-
-          TableUtil.editCellAt(customTagsTable, indexToEdit, 0);
+      .setAddAction(anActionButton -> {
+        final TableCellEditor cellEditor = customTagsTable.getCellEditor();
+        if (cellEditor != null) {
+          cellEditor.stopCellEditing();
         }
+        final TableModel model = customTagsTable.getModel();
+
+        int indexToEdit = -1;
+
+        for (HTMLMasonCustomTag entry : customTagsModel.getItems()) {
+          if (StringUtil.isEmpty(entry.getText())) {
+            indexToEdit = customTagsModel.indexOf(entry);
+            break;
+          }
+        }
+
+        if (indexToEdit == -1) {
+          customTagsModel.addRow(new HTMLMasonCustomTag("customTag" + customTagsModel.getItems().size(), HTMLMasonCustomTagRole.PERL));
+          indexToEdit = model.getRowCount() - 1;
+        }
+
+        TableUtil.editCellAt(customTagsTable, indexToEdit, 0);
       })
       .disableDownAction()
       .disableUpAction()
