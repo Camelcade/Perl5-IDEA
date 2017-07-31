@@ -65,7 +65,7 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
           String path = getPathString();
           PsiFile containingFile = getContainingFile();
           if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.getParent() != null) {
-            return Collections.<PsiFileSystemItem>singletonList(containingFile.getParent());
+            return Collections.singletonList(containingFile.getParent());
           }
           return super.computeDefaultContexts();
         }

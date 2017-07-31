@@ -52,7 +52,7 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
   @Override
   public Collection<PsiFileSystemItem> getContexts(Project project, @NotNull VirtualFile file) {
     PsiFileSystemItem item = getPsiFileSystemItem(project, file);
-    return item == null ? Collections.<PsiFileSystemItem>emptyList() : Collections.singleton(item);
+    return item == null ? Collections.emptyList() : Collections.singleton(item);
   }
 
   @NotNull
