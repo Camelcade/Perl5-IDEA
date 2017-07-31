@@ -20,16 +20,13 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.Disposer;
-import com.intellij.util.ui.JBUI;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
-import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,14 +45,14 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
   }
 
   @Override
-  protected void initPanel() {
-    super.initPanel();
-    Perl5StructurePanel perlPanel = getPanel();
-    JPanel mainPanel = perlPanel.getAdditionalPanel();
-    perlPanel.getSdkPanel().setVisible(false);
+  protected JComponent getAdditionalPanel() {
     myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
-    mainPanel.add(myPerlContentEntriesTreeEditor.createComponent(),
-                  new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
+    return myPerlContentEntriesTreeEditor.createComponent();
+  }
+
+  @Override
+  protected boolean isSdkPanelVisible() {
+    return false;
   }
 
   @Override

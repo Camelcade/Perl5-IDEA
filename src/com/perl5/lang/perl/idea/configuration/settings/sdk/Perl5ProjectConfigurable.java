@@ -33,18 +33,15 @@ import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBUI;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +57,7 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
   }
 
   @Override
-  protected void initPanel() {
-    super.initPanel();
+  protected JComponent getAdditionalPanel() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
@@ -84,10 +80,7 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
         .setAddAction(this::doAddExternalLibrary)
         .createPanel()
     );
-
-    getPanel().getAdditionalPanel().add(
-      builder.getPanel(),
-      new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
+    return builder.getPanel();
   }
 
   private void doAddExternalLibrary(AnActionButton button) {

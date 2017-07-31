@@ -28,15 +28,18 @@ import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBusConnection;
+import com.intellij.util.ui.JBUI;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Arrays;
@@ -74,7 +77,7 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
   }
 
 
-  protected void initPanel() {
+  protected final void initPanel() {
     myPanel = new Perl5StructurePanel();
 
     // combo box
@@ -100,6 +103,17 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     // add sdk button
     myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.getInstance(), this::addSdk));
     myPanel.getDeleteButton().addActionListener(this::removeSdk);
+    myPanel.getSdkPanel().setVisible(isSdkPanelVisible());
+
+    myPanel.getMainPanel().add(
+      getAdditionalPanel(),
+      new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
+  }
+
+  protected abstract JComponent getAdditionalPanel();
+
+  protected boolean isSdkPanelVisible() {
+    return true;
   }
 
   protected void removeSdk(ActionEvent e) {

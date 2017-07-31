@@ -28,7 +28,6 @@ public class Perl5StructurePanel {
   private JButton myDeleteButton;
   private JPanel myMainPanel;
   private JPanel mySdkPanel;
-  private JPanel myAdditionalPanel;
 
   public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
@@ -36,10 +35,6 @@ public class Perl5StructurePanel {
 
   public JPanel getMainPanel() {
     return myMainPanel;
-  }
-
-  public JPanel getAdditionalPanel() {
-    return myAdditionalPanel;
   }
 
   public JPanel getSdkPanel() {

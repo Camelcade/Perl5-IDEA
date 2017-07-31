@@ -42,6 +42,7 @@ import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.roots.ui.configuration.actions.IconWithTextAction;
+import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ScrollPaneFactory;
@@ -146,7 +147,9 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   @NotNull
   @Override
   public JComponent createComponent() {
-    return myTreePanel;
+    JPanel panel = new JPanel(new VerticalFlowLayout());
+    panel.add(myTreePanel);
+    return panel;
   }
 
   @Override
