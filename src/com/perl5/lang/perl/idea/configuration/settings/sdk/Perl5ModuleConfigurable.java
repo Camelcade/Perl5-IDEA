@@ -19,7 +19,9 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
@@ -62,22 +64,29 @@ public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
 
   @Override
   public void apply() throws ConfigurationException {
+    super.apply();
     myPerlContentEntriesTreeEditor.apply();
   }
 
   @Override
+  protected void setSdk(@Nullable Sdk sdk) {
+    throw new IncorrectOperationException();
+  }
+
+  @Override
   public void reset() {
+    super.reset();
     myPerlContentEntriesTreeEditor.reset();
   }
 
   @Override
-  protected List<Perl5SdkWrapper> getSdkItems() {
+  protected List<Perl5SdkWrapper> getAllSdkWrappers() {
     return Collections.singletonList(myUseProjectSdkItem);
   }
 
-  @Nullable
+  @NotNull
   @Override
-  protected Perl5SdkWrapper getDefaultSelectedItem() {
+  protected Perl5SdkWrapper getCurrentSdkWrapper() {
     return myUseProjectSdkItem;
   }
 

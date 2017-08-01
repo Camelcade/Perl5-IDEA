@@ -137,22 +137,27 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
 
   @Override
   public void reset() {
-    // fixme sdk is not reset
+    super.reset();
     myLibsModel.removeAll();
     myLibsModel.add(PerlProjectManager.getInstance(myProject).getExternalLibraryRoots());
   }
 
   @Override
   public void apply() throws ConfigurationException {
-    PerlProjectManager.getInstance(myProject).setProjectSdk(getSelectedSdk()); // fixme this should be invoked from superclass
+    super.apply();
     if (isLibsModified()) {
       PerlProjectManager.getInstance(myProject).setExternalLibraries(myLibsModel.getItems());
     }
   }
 
   @Override
-  protected List<Perl5SdkWrapper> getSdkItems() {
-    List<Perl5SdkWrapper> defaultItems = new ArrayList<>(super.getSdkItems());
+  protected void setSdk(@Nullable Sdk sdk) {
+    PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
+  }
+
+  @Override
+  protected List<Perl5SdkWrapper> getAllSdkWrappers() {
+    List<Perl5SdkWrapper> defaultItems = new ArrayList<>(super.getAllSdkWrappers());
     defaultItems.add(0, DISABLE_PERL_ITEM);
     return defaultItems;
   }
@@ -163,9 +168,9 @@ public class Perl5ProjectConfigurable extends Perl5StructureConfigurable {
     super.disposeUIResources();
   }
 
-  @Nullable
+  @NotNull
   @Override
-  protected Perl5SdkWrapper getDefaultSelectedItem() {
+  protected Perl5SdkWrapper getCurrentSdkWrapper() {
     Sdk projectSdk = PerlProjectManager.getInstance(myProject).getProjectSdk();
     return projectSdk == null ? DISABLE_PERL_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }
