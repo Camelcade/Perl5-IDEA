@@ -118,6 +118,8 @@ public class PerlSettingsConfigurable implements Configurable {
 
     allowRegexpInjections = new JCheckBox(PerlBundle.message("perl.config.regex.injections"));
     builder.addComponent(allowRegexpInjections);
+    allowRegexpInjections.setEnabled(false);
+    allowRegexpInjections.setVisible(false);
 
     perlAnnotatorCheckBox = new JCheckBox(PerlBundle.message("perl.config.annotations.cw"));
     //		builder.addComponent(perlAnnotatorCheckBox);
