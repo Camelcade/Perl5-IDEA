@@ -21,16 +21,21 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.ui.InputValidator;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.JBUI;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper;
@@ -43,7 +48,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -95,14 +99,11 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
         }
       }
     });
-    sdkComboBox.addItemListener(new ItemListener() {
-      @Override
-      public void itemStateChanged(ItemEvent e) {
-        if (e.getStateChange() != ItemEvent.SELECTED) {
-          return;
-        }
-        updateSdkButtons();
+    sdkComboBox.addItemListener(e -> {
+      if (e.getStateChange() != ItemEvent.SELECTED) {
+        return;
       }
+      updateSdkButtons();
     });
 
     myConnection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
@@ -110,6 +111,7 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
     // add sdk button
     myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, this::addSdk));
     myPanel.getDeleteButton().addActionListener(this::removeSdk);
+    myPanel.getEditButton().addActionListener(this::renameSdk);
     myPanel.getSdkPanel().setVisible(isSdkPanelVisible());
 
     myPanel.getMainPanel().add(
@@ -127,6 +129,43 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
 
   protected boolean isSdkPanelVisible() {
     return true;
+  }
+
+  protected void renameSdk(ActionEvent e) {
+    Sdk selectedSdk = getSelectedSdk();
+    if (selectedSdk == null) {
+      return;
+    }
+    PerlSdkTable perlSdkTable = PerlSdkTable.getInstance();
+    Messages.showInputDialog(
+      myPanel.getSdkComboBox(),
+      PerlBundle.message("perl.rename.sdk.text"),
+      PerlBundle.message("perl.rename.sdk.title"),
+      PerlIcons.PERL_LANGUAGE_ICON,
+      selectedSdk.getName(),
+      new InputValidator() {
+        @Override
+        public boolean checkInput(String inputString) {
+          if (StringUtil.isEmpty(inputString)) {
+            return false;
+          }
+          Sdk perlSdk = perlSdkTable.findJdk(inputString);
+          return perlSdk == null || perlSdk.equals(selectedSdk);
+        }
+
+        @Override
+        public boolean canClose(String inputString) {
+          if (StringUtil.equals(selectedSdk.getName(), inputString)) {
+            return true;
+          }
+          SdkModificator modificator = selectedSdk.getSdkModificator();
+          modificator.setName(inputString);
+          modificator.commitChanges();
+          myPanel.getSdkComboBox().repaint();
+          return true;
+        }
+      }
+    );
   }
 
   protected void removeSdk(ActionEvent e) {
