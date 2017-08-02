@@ -20,6 +20,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
+import com.intellij.ui.SimpleTextAttributes;
 import org.jetbrains.annotations.NotNull;
 
 public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
@@ -34,7 +35,7 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   public void customizeRenderer(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer) {
     SdkType sdkType = (SdkType)mySdk.getSdkType();
     renderer.setIcon(sdkType.getIcon());
-    renderer.append(getSdkString(mySdk));
+    appendSdkString(renderer, mySdk);
   }
 
 
@@ -63,13 +64,11 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
     return "SDK: " + mySdk;
   }
 
-  @NotNull
-  public static String getSdkString(@NotNull Sdk sdk) {
-    String result = sdk.getName();
+  public static void appendSdkString(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer, @NotNull Sdk sdk) {
+    renderer.append(sdk.getName());
     String versionString = sdk.getVersionString();
     if (StringUtil.isNotEmpty(versionString)) {
-      return result + " (" + versionString + ")";
+      renderer.append(" (" + versionString + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
     }
-    return result;
   }
 }

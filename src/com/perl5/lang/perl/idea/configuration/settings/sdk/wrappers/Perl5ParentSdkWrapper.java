@@ -42,7 +42,9 @@ public class Perl5ParentSdkWrapper implements Perl5SdkWrapper {
     SdkType sdkType = (SdkType)selectedSdk.getSdkType();
 
     renderer.setIcon(sdkType.getIcon());
-    renderer.append(PerlBundle.message("perl.settings.use.project.sdk", Perl5RealSdkWrapper.getSdkString(selectedSdk)));
+    renderer.append(PerlBundle.message("perl.settings.use.project.sdk")).append("[");
+    Perl5RealSdkWrapper.appendSdkString(renderer, selectedSdk);
+    renderer.append("]");
   }
 
   @Override
