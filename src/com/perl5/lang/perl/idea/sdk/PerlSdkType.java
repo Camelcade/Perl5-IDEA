@@ -42,7 +42,6 @@ public class PerlSdkType extends SdkType {
   public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
   public static final PerlSdkType INSTANCE = new PerlSdkType();
 
-  public static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
 
   private PerlSdkType() {
     super(PERL_SDK_TYPE_ID);
@@ -117,7 +116,8 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public String suggestSdkName(String currentSdkName, String sdkHome) {
-    return "Perl " + getPerlVersionString(sdkHome);
+    VersionDescriptor descriptor = getPerlVersionDescriptor(sdkHome);
+    return "Perl" + (descriptor == null ? "" : " " + descriptor.version);
   }
 
   @Override
@@ -154,38 +154,51 @@ public class PerlSdkType extends SdkType {
   @Nullable
   @Override
   public String getVersionString(@NotNull Sdk sdk) {
-    return getPerlVersionString(sdk);
-  }
-
-  public String getPerlVersionString(@NotNull Sdk sdk) {
     String sdkHomePath = sdk.getHomePath();
-    if (sdkHomePath != null) {
-      return getPerlVersionString(sdkHomePath);
-    }
-    else {
+    if (sdkHomePath == null) {
       return null;
     }
+    VersionDescriptor descriptor = getPerlVersionDescriptor(sdkHomePath);
+    return descriptor == null ? null : PerlBundle.message("perl.version.string", descriptor.version, descriptor.platform);
   }
 
-  public String getPerlVersionString(@NotNull String sdkHomePath) {
+  @Nullable
+  private VersionDescriptor getPerlVersionDescriptor(@NotNull String sdkHomePath) {
     List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
 
-    if (!versionLines.isEmpty()) {
-      Matcher m = perlVersionStringPattern.matcher(versionLines.get(0));
-
-      if (m.find()) {
-        return m.group(1) + " (" + m.group(2) + ")";
-      }
-
-      return "Unknown version, please report a bug";
+    if (versionLines.isEmpty()) {
+      return null;
     }
-
-    return "missing executable";
+    return VersionDescriptor.create(versionLines.get(0));
   }
+
 
   @Deprecated // use INSTANCE instead
   @NotNull
   public static PerlSdkType getInstance() {
     return INSTANCE;
   }
+
+  private static class VersionDescriptor {
+    private static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
+
+    private String version;
+    private String platform;
+
+    @Nullable
+    private static VersionDescriptor create(@Nullable String versionString) {
+      if (versionString == null) {
+        return null;
+      }
+      Matcher m = perlVersionStringPattern.matcher(versionString);
+      if (!m.find()) {
+        return null;
+      }
+      VersionDescriptor result = new VersionDescriptor();
+      result.version = m.group(1);
+      result.platform = m.group(2);
+      return result;
+    }
+  }
 }
+
