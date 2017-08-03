@@ -52,6 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
+  private static final int ourRowsCount = 5;
+
   @NotNull
   private final Project myProject;
   private final PerlSharedSettings mySharedSettings;
@@ -109,6 +111,7 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
 
     myLibsModel = new CollectionListModel<>();
     myLibsList = new JBList<>(myLibsModel);
+    myLibsList.setVisibleRowCount(ourRowsCount);
     myLibsList.setCellRenderer(new ColoredListCellRenderer<VirtualFile>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends VirtualFile> list,
@@ -210,30 +213,30 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
     deparseArgumentsTextField = new JTextField();
     builder.addLabeledComponent(PerlBundle.message("perl.config.deparse.options.label"), deparseArgumentsTextField);
 
-    //noinspection Since15
     selfNamesModel = new CollectionListModel<>();
     JBList selfNamesList = new JBList<>(selfNamesModel);
+    selfNamesList.setVisibleRowCount(ourRowsCount);
     builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.self.names.label")), ToolbarDecorator
       .createDecorator(selfNamesList)
-      .setAddAction(anActionButton ->
-                    {
-                      String variableName = Messages.showInputDialog(
-                        myProject,
-                        PerlBundle.message("perl.config.self.add.text"),
-                        PerlBundle.message("perl.config.self.add.title"),
-                        Messages.getQuestionIcon(),
-                        "",
-                        null);
-                      if (StringUtil.isNotEmpty(variableName)) {
-                        while (variableName.startsWith("$")) {
-                          variableName = variableName.substring(1);
-                        }
+      .setAddAction(
+        anActionButton -> {
+          String variableName = Messages.showInputDialog(
+            myProject,
+            PerlBundle.message("perl.config.self.add.text"),
+            PerlBundle.message("perl.config.self.add.title"),
+            Messages.getQuestionIcon(),
+            "",
+            null);
+          if (StringUtil.isNotEmpty(variableName)) {
+            while (variableName.startsWith("$")) {
+              variableName = variableName.substring(1);
+            }
 
-                        if (StringUtil.isNotEmpty(variableName) && !selfNamesModel.getItems().contains(variableName)) {
-                          selfNamesModel.add(variableName);
-                        }
-                      }
-                    }).createPanel());
+            if (StringUtil.isNotEmpty(variableName) && !selfNamesModel.getItems().contains(variableName)) {
+              selfNamesModel.add(variableName);
+            }
+          }
+        }).createPanel());
 
 
     return builder.getPanel();

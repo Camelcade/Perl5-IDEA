@@ -55,6 +55,6 @@ public class Perl5StructurePanel {
 
   private void createUIComponents() {
     // TODO: place custom component creation code here
-    mySdkComboBox = new ComboBox<>(350);
+    mySdkComboBox = new ComboBox<>(375);
   }
 }
