@@ -52,7 +52,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class Perl5StructureConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
+public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
   protected static final Perl5SdkWrapper DISABLE_PERL_ITEM =
     new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
   protected static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
@@ -60,7 +60,7 @@ public abstract class Perl5StructureConfigurable implements UnnamedConfigurable,
   private boolean myChange = false;
   private final MessageBusConnection myConnection;
 
-  public Perl5StructureConfigurable() {
+  public Perl5BaseConfigurable() {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
   }
 

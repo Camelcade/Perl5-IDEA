@@ -199,10 +199,8 @@
     <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
     <projectConfigurable groupId="language"
-                         provider="com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurableProvider"
+                         provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableProvider"
                          id="PERL5_MAIN_SETTINGS"/>
-    <projectConfigurable groupId="language" parentId="PERL5_MAIN_SETTINGS"
-                         provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5ProjectStructureConfigurableProvider"/>
 
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibrarySourceRootEditHandler"/>

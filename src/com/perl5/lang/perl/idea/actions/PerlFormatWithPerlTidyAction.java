@@ -29,7 +29,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
@@ -40,8 +39,8 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -157,8 +156,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               new NotificationListener.Adapter() {
                 @Override
                 protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e) {
-                  Project project = file.getProject();
-                  ShowSettingsUtil.getInstance().editConfigurable(project, new PerlSettingsConfigurable(project));
+                  Perl5SettingsConfigurable.open(file);
                   notification.expire();
                 }
               }

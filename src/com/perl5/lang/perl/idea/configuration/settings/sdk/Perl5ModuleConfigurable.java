@@ -32,7 +32,7 @@ import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
 
-public class Perl5ModuleConfigurable extends Perl5StructureConfigurable {
+public class Perl5ModuleConfigurable extends Perl5BaseConfigurable {
   private final Perl5SdkWrapper myUseProjectSdkItem;
   private final Disposable myDisposable = Disposer.newDisposable(Perl5ModuleConfigurable.class.toString());
 

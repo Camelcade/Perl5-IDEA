@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.settings;
+package com.perl5.lang.perl.idea.configuration.settings.sdk;
+
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurableProvider;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 30.08.2015.
- */
-public class PerlSettingsConfigurableProvider extends ConfigurableProvider {
-  Project myProject;
+public class Perl5SettingsConfigurableProvider extends ConfigurableProvider {
+  @NotNull
+  private final Project myProject;
 
-  public PerlSettingsConfigurableProvider(Project project) {
+  public Perl5SettingsConfigurableProvider(@NotNull Project project) {
     myProject = project;
   }
 
   @Nullable
   @Override
   public Configurable createConfigurable() {
-    return new PerlSettingsConfigurable(myProject);
+    return new Perl5SettingsConfigurable(myProject);
   }
 
   @Override

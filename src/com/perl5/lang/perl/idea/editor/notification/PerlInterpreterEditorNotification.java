@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.editor.notification;
 
 import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
@@ -29,7 +28,7 @@ import com.intellij.ui.EditorNotifications;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5ProjectStructureConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -72,7 +71,7 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
       panel = new EditorNotificationPanel();
       panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
       panel.createActionLabel(PerlBundle.message("perl.notification.configure"),
-                              () -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, Perl5ProjectStructureConfigurable.class));
+                              () -> Perl5SettingsConfigurable.open(myProject));
       panel.createActionLabel(PerlBundle.message("perl.notification.disable.notification"), () -> {
         perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING = true;
         EditorNotifications.getInstance(myProject).updateAllNotifications();

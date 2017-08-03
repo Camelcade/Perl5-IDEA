@@ -19,19 +19,21 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.application.options.ModuleAwareProjectConfigurable;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class Perl5ProjectStructureConfigurable extends ModuleAwareProjectConfigurable<UnnamedConfigurable> {
+public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<UnnamedConfigurable> {
   private final Perl5ProjectConfigurable myProjectConfigurable;
 
-  public Perl5ProjectStructureConfigurable(@NotNull Project project) {
-    super(project, PerlBundle.message("perl.settings.project.structure"), null);
+  public Perl5SettingsConfigurable(@NotNull Project project) {
+    super(project, PerlBundle.message("perl.perl5"), null);
     myProjectConfigurable = new Perl5ProjectConfigurable(project);
   }
 
@@ -57,5 +59,13 @@ public class Perl5ProjectStructureConfigurable extends ModuleAwareProjectConfigu
   @Override
   protected Icon getProjectConfigurableItemIcon() {
     return AllIcons.General.ProjectSettings;
+  }
+
+  public static void open(@NotNull PsiElement element) {
+    open(element.getProject());
+  }
+
+  public static void open(@NotNull Project project) {
+    ShowSettingsUtil.getInstance().showSettingsDialog(project, Perl5SettingsConfigurable.class);
   }
 }
