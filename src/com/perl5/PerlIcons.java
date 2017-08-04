@@ -21,6 +21,7 @@ package com.perl5;
  */
 
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.ui.LayeredIcon;
 
 import javax.swing.*;
 
@@ -29,16 +30,23 @@ public class PerlIcons {
 
   public static final Icon PERL_OPTION = IconLoader.getIcon("/icons/option.png");
   public static final Icon PERL_OPTIONS = IconLoader.getIcon("/icons/options.png");
+  public static final Icon TEMPLATE_ROOT = IconLoader.getIcon("/icons/templateRoot.png");
 
   public static final Icon PM_FILE = IconLoader.getIcon("/icons/perl5.png");
   public static final Icon MOJO_FILE = IconLoader.getIcon("/icons/mojolicious.png");
+  public static final Icon MOJO_MODIFIER = IconLoader.getIcon("/icons/mojo-modifier.png");
+  public static final Icon MOJO_ROOT = new LayeredIcon(TEMPLATE_ROOT, MOJO_MODIFIER);
   public static final Icon POD_FILE = PERL_LANGUAGE_ICON;
   public static final Icon PERL_SCRIPT_FILE_ICON = IconLoader.getIcon("/icons/perl5classic.png");
   public static final Icon TEST_FILE = IconLoader.getIcon("/icons/file-test.png");
   public static final Icon XS_FILE = IconLoader.getIcon("/icons/xsicon.png");
   public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
+  public static final Icon EMBEDDED_MODIFIER = IconLoader.getIcon("/icons/embedded-modifier.png");
+  public static final Icon EMBEDDED_ROOT = new LayeredIcon(TEMPLATE_ROOT, EMBEDDED_MODIFIER);
 
   public static final Icon TTK2_ICON = IconLoader.getIcon("/icons/template_toolkit_gutter_icon.png");
+  public static final Icon TTK2_MODIFIER = IconLoader.getIcon("/icons/tt-modifier.png");
+  public static final Icon TTK2_ROOT = new LayeredIcon(TEMPLATE_ROOT, TTK2_MODIFIER);
   public static final Icon TTK2_BLOCK_ICON = IconLoader.getIcon("/icons/template_toolkit_block_gutter_icon.png");
 
   public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
