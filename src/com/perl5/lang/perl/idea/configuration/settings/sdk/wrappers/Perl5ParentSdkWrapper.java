@@ -20,19 +20,19 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5ProjectConfigurable;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
 import org.jetbrains.annotations.NotNull;
 
 public class Perl5ParentSdkWrapper implements Perl5SdkWrapper {
-  private final Perl5ProjectConfigurable myProjectConfigurable;
+  private final Perl5SdkConfigurable myParentSdkConfigurable;
 
-  public Perl5ParentSdkWrapper(Perl5ProjectConfigurable projectConfigurable) {
-    myProjectConfigurable = projectConfigurable;
+  public Perl5ParentSdkWrapper(@NotNull Perl5SdkConfigurable parentSdkConfigurable) {
+    myParentSdkConfigurable = parentSdkConfigurable;
   }
 
   @Override
   public void customizeRenderer(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer) {
-    Sdk selectedSdk = myProjectConfigurable.getSelectedSdk();
+    Sdk selectedSdk = myParentSdkConfigurable.getSelectedSdk();
     if (selectedSdk == null) {
       renderer
         .append(PerlBundle.message("perl.settings.use.project.sdk", PerlBundle.message("perl.settings.unknown.sdk")));

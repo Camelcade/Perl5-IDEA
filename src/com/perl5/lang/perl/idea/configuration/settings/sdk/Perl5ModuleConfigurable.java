@@ -19,80 +19,52 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.util.Disposer;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Collections;
-import java.util.List;
 
-public class Perl5ModuleConfigurable extends Perl5BaseConfigurable {
-  private final Perl5SdkWrapper myUseProjectSdkItem;
+public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   private final Disposable myDisposable = Disposer.newDisposable(Perl5ModuleConfigurable.class.toString());
-
   @NotNull
   private final Module myModule;
-
+  // will use this when build a modules sdk
+  private Perl5ProjectConfigurable myProjectConfigurable;
   private PerlContentEntriesTreeEditor myPerlContentEntriesTreeEditor;
 
   public Perl5ModuleConfigurable(@NotNull Module module, @Nullable Perl5ProjectConfigurable projectConfigurable) {
     myModule = module;
-    myUseProjectSdkItem = projectConfigurable == null ? NOT_SELECTED_ITEM : new Perl5ParentSdkWrapper(projectConfigurable);
+    myProjectConfigurable = projectConfigurable;
   }
 
+  @Nullable
   @Override
-  protected JComponent getAdditionalPanel() {
+  public JComponent createComponent() {
     myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
     return myPerlContentEntriesTreeEditor.createComponent();
   }
 
   @Override
-  protected boolean isSdkPanelVisible() {
-    return false;
-  }
-
-  @Override
   public boolean isModified() {
-    return super.isModified() || myPerlContentEntriesTreeEditor.isModified();
+    return myPerlContentEntriesTreeEditor.isModified();
   }
 
   @Override
   public void apply() throws ConfigurationException {
-    super.apply();
     myPerlContentEntriesTreeEditor.apply();
   }
 
   @Override
-  protected void setSdk(@Nullable Sdk sdk) {
-    throw new IncorrectOperationException();
-  }
-
-  @Override
   public void reset() {
-    super.reset();
     myPerlContentEntriesTreeEditor.reset();
   }
 
   @Override
-  protected List<Perl5SdkWrapper> getAllSdkWrappers() {
-    return Collections.singletonList(myUseProjectSdkItem);
-  }
-
-  @NotNull
-  @Override
-  protected Perl5SdkWrapper getCurrentSdkWrapper() {
-    return myUseProjectSdkItem;
-  }
-
-  @Override
   public void disposeUIResources() {
-    super.disposeUIResources();
     Disposer.dispose(myDisposable);
+    myProjectConfigurable = null;
   }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkPanel">
+  <grid id="27dc6" binding="myMainPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+    <constraints>
+      <xy x="20" y="20" width="545" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="4f99" class="javax.swing.JLabel">
+        <constraints/>
+        <properties>
+          <text resource-bundle="messages/PerlBundle" key="perl.config.interpreter.label"/>
+        </properties>
+      </component>
+      <component id="20dae" class="com.intellij.openapi.ui.ComboBox" binding="mySdkComboBox" custom-create="true">
+        <constraints/>
+        <properties/>
+      </component>
+      <component id="bf08c" class="javax.swing.JButton" binding="myAddButton">
+        <constraints/>
+        <properties>
+          <text resource-bundle="messages/PerlBundle" key="perl.settings.new"/>
+        </properties>
+      </component>
+      <component id="a6f7a" class="javax.swing.JButton" binding="myEditButton">
+        <constraints/>
+        <properties>
+          <text resource-bundle="messages/PerlBundle" key="perl.settings.rename"/>
+        </properties>
+      </component>
+      <component id="53e43" class="javax.swing.JButton" binding="myDeleteButton">
+        <constraints/>
+        <properties>
+          <text resource-bundle="messages/PerlBundle" key="perl.settings.delete"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

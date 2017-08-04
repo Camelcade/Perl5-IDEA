@@ -21,6 +21,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.*;
@@ -51,13 +52,18 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
+import static com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable.DISABLE_PERL_ITEM;
+
+public class Perl5ProjectConfigurable implements UnnamedConfigurable, Perl5SdkManipulator {
   private static final int ourRowsCount = 5;
 
   @NotNull
   private final Project myProject;
   private final PerlSharedSettings mySharedSettings;
   private final PerlLocalSettings myLocalSettings;
+
+  @NotNull
+  private Perl5SdkConfigurable myPerl5SdkConfigurable;
 
   protected JBList<VirtualFile> myLibsList;
   private CollectionListModel<VirtualFile> myLibsModel;
@@ -82,12 +88,16 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
     myProject = project;
     mySharedSettings = PerlSharedSettings.getInstance(myProject);
     myLocalSettings = PerlLocalSettings.getInstance(myProject);
+    myPerl5SdkConfigurable = new Perl5SdkConfigurable(this);
   }
 
+  @Nullable
   @Override
-  protected JComponent getAdditionalPanel() {
+  public JComponent createComponent() {
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
+
+    builder.addComponent(myPerl5SdkConfigurable.createComponent());
 
     FormBuilder versionBuilder = FormBuilder.createFormBuilder();
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
@@ -287,7 +297,7 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
 
   @Override
   public boolean isModified() {
-    return super.isModified() || isLibsModified() ||
+    return myPerl5SdkConfigurable.isModified() || isLibsModified() ||
            mySharedSettings.SIMPLE_MAIN_RESOLUTION != simpleMainCheckbox.isSelected() ||
            mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS != autoInjectionCheckbox.isSelected() ||
            mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION != allowInjectionWithInterpolation.isSelected() ||
@@ -310,7 +320,7 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
 
   @Override
   public void reset() {
-    super.reset();
+    myPerl5SdkConfigurable.reset();
     myLibsModel.removeAll();
     myLibsModel.add(PerlProjectManager.getInstance(myProject).getExternalLibraryRoots());
     selfNamesModel.removeAll();
@@ -335,7 +345,7 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
 
   @Override
   public void apply() throws ConfigurationException {
-    super.apply();
+    myPerl5SdkConfigurable.apply();
     if (isLibsModified()) {
       PerlProjectManager.getInstance(myProject).setExternalLibraries(myLibsModel.getItems());
     }
@@ -375,13 +385,13 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
   }
 
   @Override
-  protected void setSdk(@Nullable Sdk sdk) {
+  public void setSdk(@Nullable Sdk sdk) {
     PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
   }
 
   @Override
-  protected List<Perl5SdkWrapper> getAllSdkWrappers() {
-    List<Perl5SdkWrapper> defaultItems = new ArrayList<>(super.getAllSdkWrappers());
+  public List<Perl5SdkWrapper> getAllSdkWrappers() {
+    List<Perl5SdkWrapper> defaultItems = new ArrayList<>(Perl5SdkManipulator.super.getAllSdkWrappers());
     defaultItems.add(0, DISABLE_PERL_ITEM);
     return defaultItems;
   }
@@ -389,12 +399,12 @@ public class Perl5ProjectConfigurable extends Perl5BaseConfigurable {
   @Override
   public void disposeUIResources() {
     myLibsList = null;
-    super.disposeUIResources();
+    myPerl5SdkConfigurable.disposeUIResources();
   }
 
   @NotNull
   @Override
-  protected Perl5SdkWrapper getCurrentSdkWrapper() {
+  public Perl5SdkWrapper getCurrentSdkWrapper() {
     Sdk projectSdk = PerlProjectManager.getInstance(myProject).getProjectSdk();
     return projectSdk == null ? DISABLE_PERL_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }

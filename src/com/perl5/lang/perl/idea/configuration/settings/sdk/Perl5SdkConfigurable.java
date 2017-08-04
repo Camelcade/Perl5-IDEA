@@ -31,40 +31,41 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
-import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBusConnection;
-import com.intellij.util.ui.JBUI;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
-import org.apache.batik.ext.swing.GridBagConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
-  protected static final Perl5SdkWrapper DISABLE_PERL_ITEM =
-    new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
-  protected static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
-  private Perl5StructurePanel myPanel;
-  private boolean myChange = false;
-  private final MessageBusConnection myConnection;
+public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
+  public static final Perl5SdkWrapper DISABLE_PERL_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
+  public static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
 
-  public Perl5BaseConfigurable() {
+
+  private Perl5SdkPanel myPanel;
+  @NotNull
+  private MessageBusConnection myConnection;
+  @NotNull
+  private Perl5SdkManipulator mySdkManipulator;
+  private boolean myChange = false;
+
+  public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator) {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
+    mySdkManipulator = sdkManipulator;
   }
 
-  @Nullable
+  @NotNull
   @Override
   public JComponent createComponent() {
     if (myPanel == null) {
@@ -73,20 +74,13 @@ public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, Proj
     return myPanel.getMainPanel();
   }
 
-  @Nullable
-  public Perl5SdkWrapper getSelectedSdkWrapper() {
-    ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
-    return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
-  }
-
-
   private void initPanel() {
-    myPanel = new Perl5StructurePanel();
+    myPanel = new Perl5SdkPanel();
 
     // combo box
     JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
     //noinspection unchecked
-    sdkComboBox.setModel(new CollectionComboBoxModel<>(getAllSdkWrappers()));
+    sdkComboBox.setModel(new CollectionComboBoxModel<>(mySdkManipulator.getAllSdkWrappers()));
     sdkComboBox.setRenderer(new ColoredListCellRenderer<Perl5SdkWrapper>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends Perl5SdkWrapper> list,
@@ -112,11 +106,16 @@ public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, Proj
     myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, this::addSdk));
     myPanel.getDeleteButton().addActionListener(this::removeSdk);
     myPanel.getEditButton().addActionListener(this::renameSdk);
-    myPanel.getSdkPanel().setVisible(isSdkPanelVisible());
+  }
 
-    myPanel.getMainPanel().add(
-      getAdditionalPanel(),
-      new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.WEST, GridBagConstants.BOTH, JBUI.emptyInsets(), 0, 0));
+  private void updateSdkModel(@Nullable Perl5SdkWrapper itemToSelect) {
+    JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
+    List<Perl5SdkWrapper> allItems = mySdkManipulator.getAllSdkWrappers();
+    if (itemToSelect == null || !allItems.contains(itemToSelect)) {
+      itemToSelect = allItems.isEmpty() ? null : allItems.get(0);
+    }
+    sdkComboBox.setModel(new CollectionComboBoxModel<>(allItems, itemToSelect));
+    updateSdkButtons();
   }
 
   private void updateSdkButtons() {
@@ -125,13 +124,43 @@ public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, Proj
     myPanel.getEditButton().setEnabled(buttonsState);
   }
 
-  protected abstract JComponent getAdditionalPanel();
-
-  protected boolean isSdkPanelVisible() {
-    return true;
+  @Nullable
+  public Sdk getSelectedSdk() {
+    Perl5SdkWrapper selectedWrapper = getSelectedSdkWrapper();
+    return selectedWrapper instanceof Perl5RealSdkWrapper ? ((Perl5RealSdkWrapper)selectedWrapper).getSdk() : null;
   }
 
-  protected void renameSdk(ActionEvent e) {
+  @Nullable
+  public Perl5SdkWrapper getSelectedSdkWrapper() {
+    ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
+    return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
+  }
+
+  private void addSdk(@NotNull String home) {
+    File perlDir = new File(home);
+    if (perlDir.exists() && perlDir.isFile()) {
+      home = perlDir.getParent();
+    }
+    PerlSdkType sdkType = PerlSdkType.getInstance();
+    String newSdkName = SdkConfigurationUtil.createUniqueSdkName(sdkType,
+                                                                 home,
+                                                                 Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+    final ProjectJdkImpl newSdk = new ProjectJdkImpl(newSdkName, sdkType);
+    newSdk.setHomePath(home);
+    sdkType.setupSdkPaths(newSdk);
+    // should we check for version string?
+    myChange = true;
+    PerlSdkTable.getInstance().addJdk(newSdk);
+  }
+
+  private void removeSdk(ActionEvent e) {
+    Sdk selectedSdk = getSelectedSdk();
+    if (selectedSdk != null) {
+      PerlSdkTable.getInstance().removeJdk(selectedSdk);
+    }
+  }
+
+  private void renameSdk(ActionEvent e) {
     Sdk selectedSdk = getSelectedSdk();
     if (selectedSdk == null) {
       return;
@@ -168,60 +197,36 @@ public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, Proj
     );
   }
 
-  protected void removeSdk(ActionEvent e) {
-    Sdk selectedSdk = getSelectedSdk();
-    if (selectedSdk != null) {
-      PerlSdkTable.getInstance().removeJdk(selectedSdk);
-    }
+  private boolean isSdkModified() {
+    return !mySdkManipulator.getCurrentSdkWrapper().equals(getSelectedSdkWrapper());
   }
 
-  private void updateSdkModel(@Nullable Perl5SdkWrapper itemToSelect) {
-    JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
-    List<Perl5SdkWrapper> allItems = getAllSdkWrappers();
-    if (itemToSelect == null || !allItems.contains(itemToSelect)) {
-      itemToSelect = allItems.isEmpty() ? null : allItems.get(0);
-    }
-    sdkComboBox.setModel(new CollectionComboBoxModel<>(allItems, itemToSelect));
-    updateSdkButtons();
-  }
-
-  private void addSdk(@NotNull String home) {
-    File perlDir = new File(home);
-    if (perlDir.exists() && perlDir.isFile()) {
-      home = perlDir.getParent();
-    }
-    PerlSdkType sdkType = PerlSdkType.getInstance();
-    String newSdkName = SdkConfigurationUtil.createUniqueSdkName(sdkType,
-                                                                 home,
-                                                                 Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
-    final ProjectJdkImpl newSdk = new ProjectJdkImpl(newSdkName, sdkType);
-    newSdk.setHomePath(home);
-    sdkType.setupSdkPaths(newSdk);
-    // should we check for version string?
-    myChange = true;
-    PerlSdkTable.getInstance().addJdk(newSdk);
-  }
-
-  @NotNull
-  protected abstract Perl5SdkWrapper getCurrentSdkWrapper();
-
-  protected List<Perl5SdkWrapper> getAllSdkWrappers() {
-    return ContainerUtil.map(PerlSdkTable.getInstance().getAllJdks(), Perl5RealSdkWrapper::new);
-  }
 
   @Override
   public boolean isModified() {
     return isSdkModified();
   }
 
-  private boolean isSdkModified() {
-    return !getCurrentSdkWrapper().equals(getSelectedSdkWrapper());
+  @Override
+  public void apply() throws ConfigurationException {
+    if (isSdkModified()) {
+      mySdkManipulator.setSdk(getSelectedSdk());
+    }
   }
 
-  @Nullable
-  public Sdk getSelectedSdk() {
-    Perl5SdkWrapper selectedWrapper = getSelectedSdkWrapper();
-    return selectedWrapper instanceof Perl5RealSdkWrapper ? ((Perl5RealSdkWrapper)selectedWrapper).getSdk() : null;
+  @Override
+  public void reset() {
+    myPanel.getSdkComboBox().setSelectedItem(mySdkManipulator.getCurrentSdkWrapper());
+    updateSdkButtons();
+  }
+
+  @Override
+  public void disposeUIResources() {
+    myConnection.deliverImmediately();
+    myConnection.disconnect();
+    myConnection = null;
+    mySdkManipulator = null;
+    myPanel = null;
   }
 
   @Override
@@ -241,27 +246,5 @@ public abstract class Perl5BaseConfigurable implements UnnamedConfigurable, Proj
 
   @Override
   public void jdkNameChanged(@NotNull Sdk jdk, @NotNull String previousName) {
-  }
-
-  @Override
-  public void reset() {
-    myPanel.getSdkComboBox().setSelectedItem(getCurrentSdkWrapper());
-    updateSdkButtons();
-  }
-
-  @Override
-  public void apply() throws ConfigurationException {
-    if (isSdkModified()) {
-      setSdk(getSelectedSdk());
-    }
-  }
-
-  protected abstract void setSdk(@Nullable Sdk sdk);
-
-  @Override
-  public void disposeUIResources() {
-    myConnection.deliverImmediately();
-    myConnection.disconnect();
-    myPanel = null;
   }
 }

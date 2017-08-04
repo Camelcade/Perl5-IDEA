@@ -21,13 +21,12 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrap
 
 import javax.swing.*;
 
-public class Perl5StructurePanel {
+public class Perl5SdkPanel {
   private ComboBox<Perl5SdkWrapper> mySdkComboBox;
   private JButton myAddButton;
   private JButton myEditButton;
   private JButton myDeleteButton;
   private JPanel myMainPanel;
-  private JPanel mySdkPanel;
 
   public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
@@ -35,10 +34,6 @@ public class Perl5StructurePanel {
 
   public JPanel getMainPanel() {
     return myMainPanel;
-  }
-
-  public JPanel getSdkPanel() {
-    return mySdkPanel;
   }
 
   public JButton getAddButton() {
