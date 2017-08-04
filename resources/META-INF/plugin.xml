@@ -69,6 +69,8 @@
     </extensionPoint>
     <extensionPoint name="parserExtension"
                     interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
+    <extensionPoint name="settings.configurable.extension"
+                    interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
@@ -131,6 +133,10 @@
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.ClassAccessorParserExtension"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>
+
+    <settings.configurable.extension
+        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
+    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
@@ -454,6 +460,9 @@
 
     <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
     <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
+
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
 
     <localInspection language="Template Toolkit 2"
                      shortName="TT2OrphanReply" displayName="Orphan nested directives"
@@ -1007,6 +1016,7 @@
     <group>
       <add-to-group group-id="MarkRootGroup"/>
       <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
+      <action id="Perl.MarkAdTT2Root" class="com.perl5.lang.tt2.idea.settings.TemplateToolkitMarkTemplatesRootAction"/>
       <action id="Perl.UnPerlRoot" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>
     </group>
 

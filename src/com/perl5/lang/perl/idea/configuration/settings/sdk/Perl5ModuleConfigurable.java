@@ -21,7 +21,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.util.Disposer;
-import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +42,7 @@ public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   @Nullable
   @Override
   public JComponent createComponent() {
-    myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable, JpsPerlLibrarySourceRootType.INSTANCE);
+    myPerlContentEntriesTreeEditor = new PerlContentEntriesTreeEditor(myModule, myDisposable);
     return myPerlContentEntriesTreeEditor.createComponent();
   }
 

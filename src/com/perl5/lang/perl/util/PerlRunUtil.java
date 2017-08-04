@@ -49,7 +49,7 @@ public class PerlRunUtil {
     GeneralCommandLine commandLine = new GeneralCommandLine();
     String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
     commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
-    for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getNonSdkLibraryRoots()) {
+    for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
       commandLine.addParameter("-I" + libRoot.getCanonicalPath());
     }
 

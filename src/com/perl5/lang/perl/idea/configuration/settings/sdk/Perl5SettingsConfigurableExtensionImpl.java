@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
-  public PerlMarkLibrarySourceRootAction() {
-    super(PerlLibrarySourceRootType.INSTANCE);
+import java.util.Collections;
+import java.util.List;
+
+public class Perl5SettingsConfigurableExtensionImpl implements Perl5SettingsConfigurableExtension {
+  @NotNull
+  @Override
+  public List<PerlSourceRootType> getSourceRootTypes() {
+    return Collections.singletonList(PerlLibrarySourceRootType.INSTANCE);
   }
 }

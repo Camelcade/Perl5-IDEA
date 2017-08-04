@@ -34,6 +34,7 @@ import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,8 +68,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   @Transient
   private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
-  @Transient
-  private transient AtomicNotNullLazyValue<List<VirtualFile>> myLazyVirtualFilesRoots;
   @Transient
   private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
   @Transient
@@ -114,19 +113,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
       return result;
     });
 
-    myLazyVirtualFilesRoots = AtomicNotNullLazyValue.createValue(() -> {
-      List<VirtualFile> result = new ArrayList<>();
-
-      for (String relativeRoot : TEMPLATE_DIRS) {
-        VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
-        if (rootFile != null && rootFile.exists()) {
-          result.add(rootFile);
-        }
-      }
-
-      return result;
-    });
-
     myLazyPsiDirsRoots = AtomicNotNullLazyValue.createValue(() -> {
       Collection<PsiFileSystemItem> result = new ArrayDeque<>();
 
@@ -159,7 +145,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   @NotNull
   public List<VirtualFile> getTemplateRoots() {
-    return myLazyVirtualFilesRoots.getValue();
+    return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(TemplateToolkitSourceRootType.INSTANCE);
   }
 
   @NotNull

@@ -23,19 +23,19 @@ import com.intellij.openapi.project.ProjectBundle;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import java.util.List;
 import java.util.Locale;
 
 public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   @NotNull
-  private final JpsModuleSourceRootType<?> myType;
+  private final PerlSourceRootType myType;
 
-  public PerlMarkSourceRootAction(@NotNull JpsModuleSourceRootType<?> type) {
+  public PerlMarkSourceRootAction(@NotNull PerlSourceRootType type) {
     myType = type;
-    ModuleSourceRootEditHandler<?> editHandler = getEditHandler(type);
+    ModuleSourceRootEditHandler<?> editHandler = type.getEditHandler();
     Presentation presentation = getTemplatePresentation();
     presentation.setText(editHandler.getMarkRootButtonText());
     presentation.setDescription(ProjectBundle.message("module.toggle.sources.action.description",
@@ -44,7 +44,7 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   }
 
   @NotNull
-  public JpsModuleSourceRootType<?> getType() {
+  public PerlSourceRootType getType() {
     return myType;
   }
 

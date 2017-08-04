@@ -62,6 +62,7 @@ public class PerlToggleSourceRootAction extends ToggleAction {
         modifiableModel.removeRoot(virtualFile);
       }
     }
+    myEditor.repaint();
   }
 
   @Override

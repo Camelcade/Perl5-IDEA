@@ -14,19 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import org.jetbrains.jps.model.JpsDummyElement;
-import org.jetbrains.jps.model.ex.JpsElementTypeWithDummyProperties;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class JpsPerlLibrarySourceRootType extends JpsElementTypeWithDummyProperties implements JpsModuleSourceRootType<JpsDummyElement> {
-  public static final JpsPerlLibrarySourceRootType INSTANCE = new JpsPerlLibrarySourceRootType();
-
-  private JpsPerlLibrarySourceRootType() {
+public abstract class PerlSourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
+  public PerlSourceRootEditHandler(JpsModuleSourceRootType<JpsDummyElement> rootType) {
+    super(rootType);
   }
 }
-

@@ -40,7 +40,6 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.roots.ui.configuration.actions.IconWithTextAction;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.Disposer;
@@ -48,12 +47,12 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.TreeSpeedSearch;
 import com.intellij.ui.treeStructure.Tree;
-import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.tree.TreeUtil;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -75,15 +74,15 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   private DefaultActionGroup myEditingActionsGroup = new DefaultActionGroup();
   private PerlModuleExtension myModifiableModel;
 
-  public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable, JpsModuleSourceRootType<?>... types) {
+  public PerlContentEntriesTreeEditor(@NotNull Module module, @NotNull Disposable parentDisposable) {
     Disposer.register(parentDisposable, this);
 
-    for (JpsModuleSourceRootType<?> type : types) {
-      ModuleSourceRootEditHandler handler = ModuleSourceRootEditHandler.getEditHandler(type);
-      if (handler == null) {
-        throw new IncorrectOperationException("Missing ModuleSourceRootEditHandler for: " + type);
-      }
-      myEditingActionsGroup.add(new PerlToggleSourceRootAction(this, handler));
+
+    List<PerlSourceRootType> types = ContainerUtil.newArrayList();
+    Perl5SettingsConfigurableExtension.forEach(extension -> types.addAll(extension.getSourceRootTypes()));
+
+    for (PerlSourceRootType type : types) {
+      myEditingActionsGroup.add(new PerlToggleSourceRootAction(this, type.getEditHandler()));
     }
 
 
@@ -142,6 +141,10 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     mousePopupGroup.addSeparator();
     mousePopupGroup.add(newFolderAction);
     myFileSystemTree.registerMouseListener(mousePopupGroup);
+  }
+
+  public void repaint() {
+    myTree.repaint();
   }
 
   @NotNull
@@ -264,12 +267,8 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
       if (file == null || !file.isDirectory()) {
         return;
       }
-      JpsModuleSourceRootType<?> rootType = myModifiableModel.getRootType(file);
+      PerlSourceRootType rootType = myModifiableModel.getRootType(file);
       if (rootType == null) {
-        return;
-      }
-      ModuleSourceRootEditHandler handler = ModuleSourceRootEditHandler.getEditHandler(rootType);
-      if (handler == null) {
         return;
       }
       /*
@@ -282,7 +281,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
         setIcon(updateIcon(contentEntry, file, getIcon()));
       }
       */
-      setIcon(handler.getRootIcon());
+      setIcon(rootType.getEditHandler().getRootIcon());
     }
   }
 }

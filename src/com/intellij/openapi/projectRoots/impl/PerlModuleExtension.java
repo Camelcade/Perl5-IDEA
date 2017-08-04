@@ -30,6 +30,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.Predicate;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import gnu.trove.THashMap;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -56,9 +57,9 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private Module myModule;
   private static FactoryMap<String, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_ID_MAP =
     FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
-  private static FactoryMap<JpsModuleSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
+  private static FactoryMap<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
     FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
-  private Map<VirtualFile, JpsModuleSourceRootType> myRoots = new LinkedHashMap<>();
+  private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
 
   public PerlModuleExtension(Module module) {
     myModule = module;
@@ -100,7 +101,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
 
   public synchronized void setRoot(@NotNull VirtualFile root, @NotNull JpsModuleSourceRootType type) {
     LOG.assertTrue(myIsWritable, "Obtain modifiableModel first");
-    myRoots.put(root, type);
+    LOG.assertTrue(type instanceof PerlSourceRootType, type + " is not a PerlSourceRootType");
+    myRoots.put(root, (PerlSourceRootType)type);
     myModificationTracker++;
   }
 
@@ -110,7 +112,11 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     myModificationTracker++;
   }
 
-  public synchronized List<VirtualFile> getRootsByType(@NotNull JpsModuleSourceRootType type) {
+  public Map<VirtualFile, PerlSourceRootType> getRoots() {
+    return myRoots;
+  }
+
+  public synchronized List<VirtualFile> getRootsByType(@NotNull PerlSourceRootType type) {
     return myRoots.entrySet().stream()
       .filter(entry -> type.equals(entry.getValue()))
       .map(Map.Entry::getKey)
@@ -118,7 +124,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   }
 
   @Nullable
-  public JpsModuleSourceRootType getRootType(@NotNull VirtualFile virtualFile) {
+  public PerlSourceRootType getRootType(@NotNull VirtualFile virtualFile) {
     return myRoots.get(virtualFile);
   }
 
@@ -181,7 +187,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       String expandedPath = macroManager.expandPath(pathElement.getAttributeValue(ATTRIBUTE_VALUE));
       VirtualFile libRoot = VfsUtil.findFileByIoFile(new File(expandedPath), true);
       if (libRoot != null && libRoot.isValid() && libRoot.isDirectory()) {
-        myRoots.put(libRoot, (JpsModuleSourceRootType)serializer.getType());
+        myRoots.put(libRoot, (PerlSourceRootType)serializer.getType());
       }
     }
   }

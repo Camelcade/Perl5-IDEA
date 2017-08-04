@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-com.perl5.lang.perl.idea.modules.JpsPerlModelSerializerExtension
+com.perl5.lang.perl.idea.modules.PerlSourceTypesSerializationExtension

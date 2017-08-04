@@ -14,37 +14,34 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.configuration.settings.sdk;
+package com.perl5.lang.tt2.idea.settings;
 
 import com.intellij.openapi.actionSystem.CustomShortcutSet;
 import com.intellij.ui.JBColor;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSourceRootEditHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class PerlLibrarySourceRootEditHandler extends PerlSourceRootEditHandler {
-  public PerlLibrarySourceRootEditHandler() {
-    super(PerlLibrarySourceRootType.INSTANCE);
+public class TemplateToolkitSourceRootEditHandler extends PerlSourceRootEditHandler {
+  public TemplateToolkitSourceRootEditHandler() {
+    super(TemplateToolkitSourceRootType.INSTANCE);
   }
 
   @NotNull
   @Override
   public String getRootTypeName() {
-    return PerlBundle.message("perl.action.lib.root.type");
+    return PerlBundle.message("ttk2.root.type");
   }
 
   @NotNull
   @Override
   public Icon getRootIcon() {
-    return PerlIcons.LIB_ROOT;
+    return PerlIcons.TTK2_ROOT;
   }
 
   @Nullable
@@ -62,7 +59,7 @@ public class PerlLibrarySourceRootEditHandler extends PerlSourceRootEditHandler 
   @NotNull
   @Override
   public String getRootsGroupTitle() {
-    return PerlBundle.message("perl.root.group.lib");
+    return PerlBundle.message("perl.root.group.template");
   }
 
   @NotNull
@@ -74,6 +71,6 @@ public class PerlLibrarySourceRootEditHandler extends PerlSourceRootEditHandler 
   @NotNull
   @Override
   public String getUnmarkRootButtonText() {
-    return PerlBundle.message("perl.action.unmark.perl.lib");
+    return PerlBundle.message("ttk2.root.unmark");
   }
 }

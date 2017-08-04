@@ -38,9 +38,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
   private final TemplateToolkitSettings mySettings;
   private final Project myProject;
   @SuppressWarnings("Since15")
-  protected CollectionListModel<String> rootsModel;
-  protected JBList<String> rootsList;
-  @SuppressWarnings("Since15")
   protected CollectionListModel<String> substitutedExtensionsModel;
   protected JBList<String> substitutedExtensionsList;
   protected JPanel substitutedExtensionsPanel;
@@ -93,19 +90,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     );
 
     //noinspection Since15
-    rootsModel = new CollectionListModel<>();
-    rootsList = new JBList<>(rootsModel);
-    builder.addLabeledComponent(
-      PerlBundle.message("ttk2.configuration.template.dirs.label"),
-      PerlConfigurationUtil.createProjectPathsSelection(
-        myProject,
-        rootsList,
-        rootsModel,
-        PerlBundle.message("ttk2.configuration.choose.template.dir.title")
-      ));
-
-
-    //noinspection Since15
     substitutedExtensionsModel = new CollectionListModel<>();
     substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
     substitutedExtensionsPanel =
@@ -121,8 +105,7 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
            !StringUtil.equals(mySettings.START_TAG, startTagField.getText()) ||
            !StringUtil.equals(mySettings.END_TAG, endTagField.getText()) ||
            !StringUtil.equals(mySettings.OUTLINE_TAG, outlineTagField.getText()) ||
-           !mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
-           !mySettings.TEMPLATE_DIRS.equals(rootsModel.getItems())
+           !mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems())
       ;
   }
 
@@ -140,9 +123,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     mySettings.OUTLINE_TAG = outlineTagField.getText();
     mySettings.ENABLE_ANYCASE = enableAnycaseCheckBox.isSelected();
 
-    mySettings.TEMPLATE_DIRS.clear();
-    mySettings.TEMPLATE_DIRS.addAll(rootsModel.getItems());
-
     mySettings.substitutedExtensions.clear();
     mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
 
@@ -155,8 +135,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     endTagField.setText(mySettings.END_TAG);
     outlineTagField.setText(mySettings.OUTLINE_TAG);
     enableAnycaseCheckBox.setSelected(mySettings.ENABLE_ANYCASE);
-    rootsModel.removeAll();
-    rootsModel.add(mySettings.TEMPLATE_DIRS);
     substitutedExtensionsModel.removeAll();
     substitutedExtensionsModel.add(mySettings.substitutedExtensions);
   }

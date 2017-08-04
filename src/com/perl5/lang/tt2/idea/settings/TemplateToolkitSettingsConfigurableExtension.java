@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.modules;
+package com.perl5.lang.tt2.idea.settings;
 
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.model.serialization.JpsModelSerializerExtension;
-import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootDummyPropertiesSerializer;
-import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer;
 
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class JpsPerlModelSerializerExtension extends JpsModelSerializerExtension {
+public class TemplateToolkitSettingsConfigurableExtension implements Perl5SettingsConfigurableExtension {
 
   @NotNull
   @Override
-  public List<? extends JpsModuleSourceRootPropertiesSerializer<?>> getModuleSourceRootPropertiesSerializers() {
-    return Collections
-      .singletonList(new JpsModuleSourceRootDummyPropertiesSerializer(JpsPerlLibrarySourceRootType.INSTANCE, "perl-library"));
+  public List<PerlSourceRootType> getSourceRootTypes() {
+    return Collections.singletonList(TemplateToolkitSourceRootType.INSTANCE);
   }
 }

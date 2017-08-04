@@ -14,15 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.perl.idea.modules;
 
-import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 29.08.2015.
  */
-public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
-  public PerlMarkLibrarySourceRootAction() {
-    super(PerlLibrarySourceRootType.INSTANCE);
+public class PerlLibrarySourceRootType extends PerlSourceRootType {
+  public static final PerlLibrarySourceRootType INSTANCE = new PerlLibrarySourceRootType();
+
+  @Override
+  protected PerlSourceRootType getRootType() {
+    return INSTANCE;
+  }
+
+  @NotNull
+  @Override
+  public String getSerializationKey() {
+    return "perl-library";
   }
 }
+

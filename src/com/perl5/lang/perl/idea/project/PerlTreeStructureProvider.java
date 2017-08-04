@@ -22,38 +22,21 @@ import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootEvent;
-import com.intellij.openapi.roots.ModuleRootListener;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.PerlIcons;
-import gnu.trove.THashSet;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.Set;
-
-import static com.intellij.ProjectTopics.PROJECT_ROOTS;
+import java.util.Map;
 
 public class PerlTreeStructureProvider implements TreeStructureProvider {
   private final PerlProjectManager myProjectManager;
-  private AtomicNotNullLazyValue<Set<VirtualFile>> myRootsProvider;
 
   public PerlTreeStructureProvider(Project project) {
     myProjectManager = PerlProjectManager.getInstance(project);
-    initProvider();
-    project.getMessageBus().connect().subscribe(PROJECT_ROOTS, new ModuleRootListener() {
-      @Override
-      public void rootsChanged(ModuleRootEvent event) {
-        initProvider();
-      }
-    });
-  }
-
-  private void initProvider() {
-    myRootsProvider = AtomicNotNullLazyValue.createValue(() -> new THashSet<>(myProjectManager.getAllLibraryRoots()));
   }
 
   @NotNull
@@ -61,7 +44,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
   public Collection<AbstractTreeNode> modify(@NotNull AbstractTreeNode parent,
                                              @NotNull Collection<AbstractTreeNode> children,
                                              ViewSettings settings) {
-    Set<VirtualFile> roots = myRootsProvider.getValue();
+    Map<VirtualFile, PerlSourceRootType> roots = myProjectManager.getAllModulesRoots();
     return ContainerUtil.map2List(children, node -> {
       if (!(node instanceof PsiDirectoryNode)) {
         return node;
@@ -74,14 +57,16 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
 
       // fixme support different roots here
       VirtualFile virtualFile = ((PsiDirectoryNode)node).getVirtualFile();
-      if (roots.contains(virtualFile)) {
+      if (roots.containsKey(virtualFile)) {
+        PerlSourceRootType rootType = roots.get(virtualFile);
+        ModuleSourceRootEditHandler handler = rootType.getEditHandler();
         node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
           @Override
           protected void updateImpl(PresentationData data) {
             super.updateImpl(data);
-            data.setIcon(PerlIcons.LIB_ROOT);
+            data.setIcon(handler.getRootIcon());
             data.addText(virtualFile.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-            data.addText(" (perl5 libs)", SimpleTextAttributes.GRAY_ATTRIBUTES);
+            data.addText(" (" + handler.getRootTypeName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
           }
         };
       }

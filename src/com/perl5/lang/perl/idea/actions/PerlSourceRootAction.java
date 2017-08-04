@@ -21,12 +21,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ContentFolder;
-import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +52,4 @@ public abstract class PerlSourceRootAction extends MarkRootActionBase {
     throw new IncorrectOperationException();
   }
 
-  protected ModuleSourceRootEditHandler<?> getEditHandler(@NotNull JpsModuleSourceRootType<?> type) {
-    ModuleSourceRootEditHandler<?> editHandler = ModuleSourceRootEditHandler.getEditHandler(type);
-    LOG.assertTrue(editHandler != null, "No edit handler for type: " + type);
-    return editHandler;
-  }
 }

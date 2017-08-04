@@ -36,18 +36,19 @@ import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
+import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
-import com.perl5.lang.perl.idea.modules.JpsPerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
 
@@ -55,9 +56,10 @@ public class PerlProjectManager {
   @NotNull
   private final Project myProject;
   private final PerlLocalSettings myPerlSettings;
+  private final Map<PerlSourceRootType, List<VirtualFile>> myModulesRootsProvider;
   private volatile AtomicNullableLazyValue<Sdk> mySdkProvider;
+  private volatile AtomicNotNullLazyValue<Map<VirtualFile, PerlSourceRootType>> myAllModulesMapProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> myExternalLibraryRootsProvider;
-  private volatile AtomicNotNullLazyValue<List<VirtualFile>> myNonSdkLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> myLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<SyntheticLibrary>> myLibrariesProvider;
@@ -65,7 +67,8 @@ public class PerlProjectManager {
   public PerlProjectManager(@NotNull Project project) {
     myProject = project;
     myPerlSettings = PerlLocalSettings.getInstance(project);
-    resetProjectSdk();
+    myModulesRootsProvider = FactoryMap.createMap(type -> type.getRoots(myProject));
+    resetProjectCaches();
     MessageBusConnection connection = myProject.getMessageBus().connect();
     connection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
       @Override
@@ -90,12 +93,21 @@ public class PerlProjectManager {
     connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
       @Override
       public void rootsChanged(ModuleRootEvent event) {
-        resetProjectSdk();
+        resetProjectCaches();
       }
     });
   }
 
-  private void resetProjectSdk() {
+  private void resetProjectCaches() {
+    myModulesRootsProvider.clear();
+    myAllModulesMapProvider = AtomicNotNullLazyValue.createValue(() -> {
+      ImmutableMapBuilder<VirtualFile, PerlSourceRootType> builder = ContainerUtil.immutableMapBuilder();
+      for (Module module : ModuleManager.getInstance(myProject).getModules()) {
+        PerlModuleExtension.getInstance(module).getRoots().forEach((key, value) -> builder.put(key, value));
+      }
+
+      return builder.build();
+    });
     mySdkProvider = AtomicNullableLazyValue.createValue(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
     myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       List<VirtualFile> result = new ArrayList<>();
@@ -116,15 +128,8 @@ public class PerlProjectManager {
       }
       return result;
     });
-    myNonSdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
-      List<VirtualFile> result = new ArrayList<>();
-      for (Module module : ModuleManager.getInstance(myProject).getModules()) {
-        result.addAll(PerlModuleExtension.getInstance(module).getRootsByType(JpsPerlLibrarySourceRootType.INSTANCE));
-      }
-      return result;
-    });
     myLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
-      ArrayList<VirtualFile> result = new ArrayList<>(getNonSdkLibraryRoots());
+      ArrayList<VirtualFile> result = new ArrayList<>(getModulesLibraryRoots());
       result.addAll(getProjectSdkLibraryRoots());
       return result;
     });
@@ -143,7 +148,7 @@ public class PerlProjectManager {
         sdkLibrary = SyntheticLibrary.newImmutableLibrary(sdkLibs);
       }
 
-      List<VirtualFile> libraryRoots = getNonSdkLibraryRoots();
+      List<VirtualFile> libraryRoots = getModulesLibraryRoots();
 
       if (libraryRoots.isEmpty()) {
         return Collections.singletonList(sdkLibrary);
@@ -155,12 +160,20 @@ public class PerlProjectManager {
     });
   }
 
+  public Map<VirtualFile, PerlSourceRootType> getAllModulesRoots() {
+    return myAllModulesMapProvider.getValue();
+  }
+
   public List<VirtualFile> getExternalLibraryRoots() {
     return myExternalLibraryRootsProvider.getValue();
   }
 
-  public List<VirtualFile> getNonSdkLibraryRoots() {
-    return myNonSdkLibraryRootsProvider.getValue();
+  public List<VirtualFile> getModulesLibraryRoots() {
+    return getModulesRootsOfType(PerlLibrarySourceRootType.INSTANCE);
+  }
+
+  public List<VirtualFile> getModulesRootsOfType(@NotNull PerlSourceRootType type) {
+    return myModulesRootsProvider.get(type);
   }
 
   public List<VirtualFile> getAllLibraryRoots() {
@@ -176,6 +189,13 @@ public class PerlProjectManager {
   @Nullable
   public Sdk getProjectSdk() {
     return mySdkProvider.getValue();
+  }
+
+  public void setProjectSdk(@Nullable Sdk sdk) {
+    WriteAction.run(
+      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+        () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), false, true)
+    );
   }
 
   public void addExternalLibrary(@NotNull VirtualFile root) {
@@ -211,13 +231,6 @@ public class PerlProjectManager {
 
         ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(() -> myPerlSettings.setExternalLibrariesPaths(paths), false, true);
       }
-    );
-  }
-
-  public void setProjectSdk(@Nullable Sdk sdk) {
-    WriteAction.run(
-      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
-        () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), false, true)
     );
   }
 

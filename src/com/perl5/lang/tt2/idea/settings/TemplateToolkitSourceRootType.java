@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.tt2.idea.settings;
 
-import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
-  public PerlMarkLibrarySourceRootAction() {
-    super(PerlLibrarySourceRootType.INSTANCE);
+public class TemplateToolkitSourceRootType extends PerlSourceRootType {
+  public static final TemplateToolkitSourceRootType INSTANCE = new TemplateToolkitSourceRootType();
+
+  @Override
+  protected PerlSourceRootType getRootType() {
+    return INSTANCE;
+  }
+
+  @NotNull
+  @Override
+  public String getSerializationKey() {
+    return "ttk2-templates";
   }
 }

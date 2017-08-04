@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.tt2.idea.settings;
 
-import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
+import com.perl5.lang.perl.idea.actions.PerlMarkSourceRootAction;
 
-/**
- * Created by hurricup on 29.08.2015.
- */
-public class PerlMarkLibrarySourceRootAction extends PerlMarkSourceRootAction {
-  public PerlMarkLibrarySourceRootAction() {
-    super(PerlLibrarySourceRootType.INSTANCE);
+public class TemplateToolkitMarkTemplatesRootAction extends PerlMarkSourceRootAction {
+  public TemplateToolkitMarkTemplatesRootAction() {
+    super(TemplateToolkitSourceRootType.INSTANCE);
   }
 }
