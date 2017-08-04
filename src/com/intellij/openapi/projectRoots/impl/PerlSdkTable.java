@@ -26,6 +26,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.intellij.util.ReflectionUtil;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.intellij.util.messages.impl.MessageListenerList;
@@ -35,6 +36,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +126,16 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     final String previousName = originalJdk.getName();
     final String newName = modifiedJdk.getName();
 
-    ((ProjectJdkImpl)modifiedJdk).copyTo((ProjectJdkImpl)originalJdk);
+    Method method = ReflectionUtil.getDeclaredMethod(ProjectJdkImpl.class, "copyTo", ProjectJdkImpl.class);
+    if (method == null) {
+      throw new RuntimeException("Missing copyTo method");
+    }
+    try {
+      method.invoke(modifiedJdk, (ProjectJdkImpl)originalJdk);
+    }
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
 
     if (!previousName.equals(newName)) {
       // fire changes because after renaming JDK its name may match the associated jdk name of modules/project

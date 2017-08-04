@@ -189,7 +189,8 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
           }
           SdkModificator modificator = selectedSdk.getSdkModificator();
           modificator.setName(inputString);
-          modificator.commitChanges();
+          assert modificator instanceof Sdk;
+          perlSdkTable.updateJdk(selectedSdk, (Sdk)modificator);
           myPanel.getSdkComboBox().repaint();
           return true;
         }
