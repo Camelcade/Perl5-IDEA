@@ -30,23 +30,21 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<UnnamedConfigurable> {
-  private final Perl5ProjectConfigurable myProjectConfigurable;
 
   public Perl5SettingsConfigurable(@NotNull Project project) {
     super(project, PerlBundle.message("perl.perl5"), null);
-    myProjectConfigurable = new Perl5ProjectConfigurable(project);
   }
 
   @NotNull
   @Override
   protected UnnamedConfigurable createModuleConfigurable(Module module) {
-    return new Perl5ModuleConfigurable(module, myProjectConfigurable);
+    return new Perl5ModuleConfigurable(module);
   }
 
   @Nullable
   @Override
   protected UnnamedConfigurable createProjectConfigurable() {
-    return myProjectConfigurable;
+    return new Perl5ProjectConfigurableWrapper(getProject());
   }
 
   @NotNull

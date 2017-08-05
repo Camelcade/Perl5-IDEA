@@ -412,9 +412,6 @@
     <lang.parserDefinition language="Template Toolkit 2"
                            implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
     <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
-    <projectConfigurable
-        instance="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurable"
-        parentId="PERL5_MAIN_SETTINGS" groupId="language"/>
     <lang.syntaxHighlighterFactory language="Template Toolkit 2"
                                    implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>

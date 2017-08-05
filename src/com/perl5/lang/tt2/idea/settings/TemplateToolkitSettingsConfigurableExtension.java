@@ -16,9 +16,12 @@
 
 package com.perl5.lang.tt2.idea.settings;
 
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,5 +32,11 @@ public class TemplateToolkitSettingsConfigurableExtension implements Perl5Settin
   @Override
   public List<PerlSourceRootType> getSourceRootTypes() {
     return Collections.singletonList(TemplateToolkitSourceRootType.INSTANCE);
+  }
+
+  @Nullable
+  @Override
+  public Configurable createProjectConfigurable(@NotNull Project project) {
+    return new TemplateToolkitSettingsConfigurable(project);
   }
 }

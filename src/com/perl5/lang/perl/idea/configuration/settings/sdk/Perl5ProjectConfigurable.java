@@ -20,8 +20,8 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.*;
@@ -44,6 +44,7 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrap
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,7 +55,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable.DISABLE_PERL_ITEM;
 
-public class Perl5ProjectConfigurable implements UnnamedConfigurable, Perl5SdkManipulator {
+public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulator {
   private static final int ourRowsCount = 5;
 
   @NotNull
@@ -250,6 +251,12 @@ public class Perl5ProjectConfigurable implements UnnamedConfigurable, Perl5SdkMa
 
 
     return builder.getPanel();
+  }
+
+  @Nls
+  @Override
+  public String getDisplayName() {
+    return PerlBundle.message("perl.perl5");
   }
 
   private void doAddExternalLibrary(AnActionButton button) {

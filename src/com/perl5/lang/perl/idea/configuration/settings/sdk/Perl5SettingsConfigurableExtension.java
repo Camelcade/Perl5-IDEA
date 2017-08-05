@@ -17,12 +17,17 @@
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.openapi.extensions.ExtensionPointName;
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public interface Perl5SettingsConfigurableExtension {
   ExtensionPointName<Perl5SettingsConfigurableExtension> EP_NAME = ExtensionPointName.create("com.perl5.settings.configurable.extension");
@@ -30,6 +35,13 @@ public interface Perl5SettingsConfigurableExtension {
   @NotNull
   default List<PerlSourceRootType> getSourceRootTypes() {
     return Collections.emptyList();
+  }
+
+  @Nullable
+  default Configurable createProjectConfigurable(@NotNull Project project) {return null;}
+
+  static Stream<Perl5SettingsConfigurableExtension> stream() {
+    return Arrays.stream(EP_NAME.getExtensions());
   }
 
   static void forEach(Consumer<Perl5SettingsConfigurableExtension> consumer) {

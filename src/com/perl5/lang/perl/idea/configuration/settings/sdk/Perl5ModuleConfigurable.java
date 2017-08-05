@@ -30,13 +30,10 @@ public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   private final Disposable myDisposable = Disposer.newDisposable(Perl5ModuleConfigurable.class.toString());
   @NotNull
   private final Module myModule;
-  // will use this when build a modules sdk
-  private Perl5ProjectConfigurable myProjectConfigurable;
   private PerlContentEntriesTreeEditor myPerlContentEntriesTreeEditor;
 
-  public Perl5ModuleConfigurable(@NotNull Module module, @Nullable Perl5ProjectConfigurable projectConfigurable) {
+  public Perl5ModuleConfigurable(@NotNull Module module) {
     myModule = module;
-    myProjectConfigurable = projectConfigurable;
   }
 
   @Nullable
@@ -64,6 +61,5 @@ public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   @Override
   public void disposeUIResources() {
     Disposer.dispose(myDisposable);
-    myProjectConfigurable = null;
   }
 }

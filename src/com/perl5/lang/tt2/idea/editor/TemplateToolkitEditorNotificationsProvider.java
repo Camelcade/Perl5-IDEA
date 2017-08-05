@@ -17,7 +17,6 @@
 package com.perl5.lang.tt2.idea.editor;
 
 import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
@@ -25,9 +24,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.tt2.filetypes.TemplateToolkitFileType;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
-import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,8 +55,7 @@ public class TemplateToolkitEditorNotificationsProvider extends EditorNotificati
       if (!settings.isVirtualFileUnderRoot(file)) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(PerlBundle.message("tt2.error.file.not.in.root"));
-        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
-          .editConfigurable(myProject, new TemplateToolkitSettingsConfigurable(myProject)));
+        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
         return panel;
       }
     }
