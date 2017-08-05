@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason2;
 
+import com.intellij.ui.LayeredIcon;
 import com.perl5.PerlIcons;
 
 import javax.swing.*;
@@ -29,4 +30,5 @@ public class Mason2Icons {
   public static final Icon MASON_PURE_PERL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
   public static final Icon MASON_TOP_LEVEL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
   public static final Icon MASON_INTERNAL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
+  public static final Icon ROOT_ICON = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, PerlIcons.CAMEL_MODIFIER);
 }
