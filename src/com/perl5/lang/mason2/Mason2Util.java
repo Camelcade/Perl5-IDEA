@@ -94,7 +94,7 @@ public class Mason2Util {
       if (componentPath
         .startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path relative to mason roots, see the Mason::Interp::_determine_parent_compc
       {
-        for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles()) {
+        for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
           componentFile = componentRoot.findFileByRelativePath(componentPath.substring(1));
           if (componentFile != null) {
             break;

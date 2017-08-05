@@ -17,7 +17,6 @@
 package com.perl5.lang.htmlmason.idea.editor.notification;
 
 import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
@@ -28,8 +27,8 @@ import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
-import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurable;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +55,7 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
     if (file.getFileType() == HTMLMasonFileType.INSTANCE) {
       String message = null;
 
-      if (HTMLMasonSettings.getInstance(myProject).componentRoots.isEmpty()) {
+      if (HTMLMasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
         message = "HTML::Mason components roots are not configured";
       }
       else {
@@ -69,8 +68,7 @@ public class HTMLMasonPathsNotification extends EditorNotifications.Provider<Edi
       if (message != null) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(message);
-        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
-          .editConfigurable(myProject, new HTMLMasonSettingsConfigurable(myProject, "HTML::Mason Settings")));
+        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
         return panel;
       }
     }

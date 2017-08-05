@@ -16,16 +16,12 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
-import com.intellij.openapi.actionSystem.CustomShortcutSet;
-import com.intellij.ui.JBColor;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by hurricup on 29.08.2015.
@@ -47,28 +43,10 @@ public class PerlLibrarySourceRootEditHandler extends PerlSourceRootEditHandler 
     return PerlIcons.LIB_ROOT;
   }
 
-  @Nullable
-  @Override
-  public Icon getFolderUnderRootIcon() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public CustomShortcutSet getMarkRootShortcutSet() {
-    return null;
-  }
-
   @NotNull
   @Override
   public String getRootsGroupTitle() {
     return PerlBundle.message("perl.root.group.lib");
-  }
-
-  @NotNull
-  @Override
-  public Color getRootsGroupColor() {
-    return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
   }
 
   @NotNull

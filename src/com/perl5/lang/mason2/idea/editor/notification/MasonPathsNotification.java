@@ -17,7 +17,6 @@
 package com.perl5.lang.mason2.idea.editor.notification;
 
 import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
@@ -28,8 +27,8 @@ import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotifications;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
-import com.perl5.lang.mason2.idea.configuration.MasonSettingsConfigurable;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +55,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
     if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
       String message = null;
 
-      if (MasonSettings.getInstance(myProject).componentRoots.isEmpty()) {
+      if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
         message = "Mason2 components roots are not configured";
       }
       else {
@@ -69,8 +68,7 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
       if (message != null) {
         EditorNotificationPanel panel = new EditorNotificationPanel();
         panel.setText(message);
-        panel.createActionLabel("Configure", () -> ShowSettingsUtil.getInstance()
-          .editConfigurable(myProject, new MasonSettingsConfigurable(myProject, "Mason2 Settings")));
+        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
         return panel;
       }
     }

@@ -14,35 +14,35 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2.idea.settings;
+package com.perl5.lang.mason2.idea.configuration;
 
 import com.perl5.PerlBundle;
-import com.perl5.PerlIcons;
+import com.perl5.lang.mason2.Mason2Icons;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlTemplatesRootEditHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-public class TemplateToolkitSourceRootEditHandler extends PerlTemplatesRootEditHandler {
-  public TemplateToolkitSourceRootEditHandler() {
-    super(TemplateToolkitSourceRootType.INSTANCE);
+public class Mason2SourceRootTypeEditHandler extends PerlTemplatesRootEditHandler {
+  public Mason2SourceRootTypeEditHandler() {
+    super(Mason2SourceRootType.INSTANCE);
   }
 
   @NotNull
   @Override
   public String getRootTypeName() {
-    return PerlBundle.message("ttk2.root.type");
+    return PerlBundle.message("mason2.root.type");
   }
 
   @NotNull
   @Override
   public Icon getRootIcon() {
-    return PerlIcons.TTK2_ROOT;
+    return Mason2Icons.ROOT_ICON;
   }
 
   @NotNull
   @Override
   public String getUnmarkRootButtonText() {
-    return PerlBundle.message("ttk2.root.unmark");
+    return PerlBundle.message("mason2.root.unmark");
   }
 }

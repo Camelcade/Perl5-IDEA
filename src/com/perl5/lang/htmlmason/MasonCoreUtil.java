@@ -46,7 +46,7 @@ public class MasonCoreUtil {
 
       if (file != null) {
         //noinspection unchecked
-        for (VirtualFile componentRoot : (List<VirtualFile>)masonSettings.getComponentsRootsVirtualFiles()) {
+        for (VirtualFile componentRoot : (List<VirtualFile>)masonSettings.getComponentsRoots()) {
           if (VfsUtil.isAncestor(componentRoot, file, false)) {
             return componentRoot;
           }

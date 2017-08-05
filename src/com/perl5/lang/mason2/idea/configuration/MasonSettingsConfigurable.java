@@ -58,7 +58,6 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
-    createRootsListComponent(builder);
     createGlobalsComponent(builder);
     createAutobaseNamesComponent(builder);
 
@@ -68,7 +67,6 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   @Override
   public boolean isModified() {
     return
-      !mySettings.componentRoots.equals(rootsModel.getItems()) ||
       !mySettings.globalVariables.equals(globalsModel.getItems()) ||
       !mySettings.autobaseNames.equals(autobaseModel.getItems())
       ;
@@ -76,9 +74,6 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 
   @Override
   public void apply() throws ConfigurationException {
-    mySettings.componentRoots.clear();
-    mySettings.componentRoots.addAll(rootsModel.getItems());
-
     mySettings.autobaseNames.clear();
     mySettings.autobaseNames.addAll(autobaseModel.getItems());
 
@@ -97,9 +92,6 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 
   @Override
   public void reset() {
-    rootsModel.removeAll();
-    rootsModel.add(mySettings.componentRoots);
-
     autobaseModel.removeAll();
     autobaseModel.add(mySettings.autobaseNames);
 
@@ -115,7 +107,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 
   protected void createAutobaseNamesComponent(FormBuilder builder) {
     autobaseModel = new CollectionListModel<>();
-    autobaseList = new JBList(autobaseModel);
+    autobaseList = new JBList<>(autobaseModel);
     builder.addLabeledComponent(
       new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"),
       ToolbarDecorator

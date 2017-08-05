@@ -21,6 +21,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,6 +46,11 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
   public MasonSettings() {
     globalVariables.add(new VariableDescription("$m", "Mason::Request"));
     changeCounter++;
+  }
+
+  @Override
+  protected PerlSourceRootType getSourceRootType() {
+    return Mason2SourceRootType.INSTANCE;
   }
 
   @Nullable

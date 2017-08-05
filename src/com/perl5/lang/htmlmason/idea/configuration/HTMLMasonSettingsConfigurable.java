@@ -16,28 +16,17 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.openapi.fileTypes.FileNameMatcher;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.DumbModeTask;
-import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.impl.PushedFilePropertiesUpdater;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.TableUtil;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
-import com.intellij.util.FileContentUtil;
-import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
@@ -100,7 +89,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     builder.addLabeledComponent(new JLabel("Auto-handler name:"), autohandlerName);
 
     createGlobalsComponent(builder);
-    createRootsListComponent(builder);
     createSubstitutedExtensionsComponent(builder);
     createCustomTagsComponent(builder);
 
@@ -110,7 +98,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   @Override
   public boolean isModified() {
     return
-      !mySettings.componentRoots.equals(rootsModel.getItems()) ||
       !mySettings.globalVariables.equals(globalsModel.getItems()) ||
       !mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
       isStructureModified()
@@ -127,10 +114,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   @Override
   public void apply() throws ConfigurationException {
     boolean forceReparse = isStructureModified();
-
-    Set<String> rootsDiff = getDiff(mySettings.componentRoots, rootsModel.getItems());
-    mySettings.componentRoots.clear();
-    mySettings.componentRoots.addAll(rootsModel.getItems());
 
     Set<String> extDiff = getDiff(mySettings.substitutedExtensions, substitutedExtensionsModel.getItems());
     mySettings.substitutedExtensions.clear();
@@ -155,22 +138,20 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     mySettings.updateSubstitutors();
     mySettings.settingsUpdated();
 
-    if (!rootsDiff.isEmpty() || !extDiff.isEmpty() || forceReparse) {
-      reparseComponents(rootsDiff, extDiff, forceReparse);
+    if (!extDiff.isEmpty() || forceReparse) {
+      reparseComponents(extDiff, forceReparse);
     }
   }
 
-  protected void reparseComponents(final Set<String> rootsDiff, Set<String> extDiff, final boolean forceAll) {
-    boolean rootsChanged = !rootsDiff.isEmpty();
+  protected void reparseComponents(Set<String> extDiff, final boolean forceAll) {
+    /*
+
     boolean extChanged = !extDiff.isEmpty();
 
-    if (rootsChanged || forceAll) {
+    if (forceAll) {
       extDiff.addAll(mySettings.substitutedExtensions);
     }
 
-    if (extChanged || forceAll) {
-      rootsDiff.addAll(mySettings.componentRoots);
-    }
 
     // collecting matchers
     final List<FileNameMatcher> matchers = new ArrayList<>();
@@ -223,6 +204,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     if (dumbTask != null) {
       DumbService.getInstance(myProject).queueTask(dumbTask);
     }
+    */
   }
 
   protected Set<String> getDiff(List<String> first, List<String> second) {
@@ -238,9 +220,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
   @Override
   public void reset() {
-    rootsModel.removeAll();
-    rootsModel.add(mySettings.componentRoots);
-
     substitutedExtensionsModel.removeAll();
     substitutedExtensionsModel.add(mySettings.substitutedExtensions);
 
@@ -261,11 +240,11 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   protected void createSubstitutedExtensionsComponent(FormBuilder builder) {
     //noinspection Since15
     substitutedExtensionsModel = new CollectionListModel<>();
-    substitutedExtensionsList = new JBList(substitutedExtensionsModel);
+    substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
     substitutedExtensionsPanel =
       PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
     builder.addLabeledComponent(
-      new JLabel("Extensions that should be handled as HTML::Mason components except *.mas (only under roots configured above):"),
+      new JLabel("Extensions that should be handled as HTML::Mason components except *.mas (only in component roots):"),
       substitutedExtensionsPanel);
   }
 

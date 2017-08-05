@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.idea.configuration;
+package com.perl5.lang.mason2.idea.configuration;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
+public class Mason2SourceRootType extends PerlSourceRootType {
+  public static final Mason2SourceRootType INSTANCE = new Mason2SourceRootType();
 
-public class HTMLMasonSettingsConfigurableExtension implements Perl5SettingsConfigurableExtension {
-  @Nullable
   @Override
-  public Configurable createProjectConfigurable(@NotNull Project project) {
-    return new HTMLMasonSettingsConfigurable(project);
+  protected PerlSourceRootType getRootType() {
+    return INSTANCE;
   }
 
   @NotNull
   @Override
-  public List<PerlSourceRootType> getSourceRootTypes() {
-    return Collections.singletonList(HTMLMasonSourceRootType.INSTANCE);
+  public String getSerializationKey() {
+    return "mason2";
   }
 }

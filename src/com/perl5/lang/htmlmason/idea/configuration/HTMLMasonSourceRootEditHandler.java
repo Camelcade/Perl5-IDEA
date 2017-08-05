@@ -16,26 +16,33 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
-import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import com.perl5.PerlBundle;
+import com.perl5.lang.htmlmason.HTMLMasonIcons;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlTemplatesRootEditHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
+import javax.swing.*;
 
-public class HTMLMasonSettingsConfigurableExtension implements Perl5SettingsConfigurableExtension {
-  @Nullable
-  @Override
-  public Configurable createProjectConfigurable(@NotNull Project project) {
-    return new HTMLMasonSettingsConfigurable(project);
+public class HTMLMasonSourceRootEditHandler extends PerlTemplatesRootEditHandler {
+  public HTMLMasonSourceRootEditHandler() {
+    super(HTMLMasonSourceRootType.INSTANCE);
   }
 
   @NotNull
   @Override
-  public List<PerlSourceRootType> getSourceRootTypes() {
-    return Collections.singletonList(HTMLMasonSourceRootType.INSTANCE);
+  public String getRootTypeName() {
+    return PerlBundle.message("html.mason.root.type");
+  }
+
+  @NotNull
+  @Override
+  public Icon getRootIcon() {
+    return HTMLMasonIcons.ROOT_ICON;
+  }
+
+  @NotNull
+  @Override
+  public String getUnmarkRootButtonText() {
+    return PerlBundle.message("html.mason.root.unmark");
   }
 }

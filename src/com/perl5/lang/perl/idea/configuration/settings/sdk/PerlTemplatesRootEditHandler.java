@@ -16,39 +16,19 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
-import com.intellij.openapi.actionSystem.CustomShortcutSet;
-import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
-import com.intellij.ui.JBColor;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.JpsDummyElement;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
-import javax.swing.*;
-import java.awt.*;
-
-public abstract class PerlSourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
-  public PerlSourceRootEditHandler(JpsModuleSourceRootType<JpsDummyElement> rootType) {
+public abstract class PerlTemplatesRootEditHandler extends PerlSourceRootEditHandler {
+  public PerlTemplatesRootEditHandler(JpsModuleSourceRootType<JpsDummyElement> rootType) {
     super(rootType);
   }
 
-  @Nullable
-  @Override
-  public Icon getFolderUnderRootIcon() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public CustomShortcutSet getMarkRootShortcutSet() {
-    return null;
-  }
-
-
   @NotNull
   @Override
-  public Color getRootsGroupColor() {
-    return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
+  public String getRootsGroupTitle() {
+    return PerlBundle.message("perl.root.group.template");
   }
-
 }

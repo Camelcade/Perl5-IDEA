@@ -19,8 +19,12 @@ package com.perl5.lang.mason2.idea.configuration;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Mason2SettingsConfigurableExtension implements Perl5SettingsConfigurableExtension {
   @Nullable
@@ -28,4 +32,11 @@ public class Mason2SettingsConfigurableExtension implements Perl5SettingsConfigu
   public Configurable createProjectConfigurable(@NotNull Project project) {
     return new MasonSettingsConfigurable(project);
   }
+
+  @NotNull
+  @Override
+  public List<PerlSourceRootType> getSourceRootTypes() {
+    return Collections.singletonList(Mason2SourceRootType.INSTANCE);
+  }
+
 }

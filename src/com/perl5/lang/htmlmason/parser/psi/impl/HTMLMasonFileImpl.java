@@ -151,7 +151,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       if (StringUtil.startsWith(parentComponentPath, "/")) // absolute path
       {
         parentComponentPath = parentComponentPath.substring(1);
-        for (VirtualFile root : settings.getComponentsRootsVirtualFiles()) {
+        for (VirtualFile root : settings.getComponentsRoots()) {
           if ((parentFile = root.findFileByRelativePath(parentComponentPath)) != null) {
             break;
           }

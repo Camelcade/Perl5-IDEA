@@ -143,7 +143,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
       if (StringUtil.startsWith(nameOrPath, "/")) {
         HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
         if (settings != null) {
-          for (VirtualFile componentRoot : settings.getComponentsRootsVirtualFiles()) {
+          for (VirtualFile componentRoot : settings.getComponentsRoots()) {
             componentVirtualFile = componentRoot.findFileByRelativePath(nameOrPath);
 
             if (componentVirtualFile != null) {

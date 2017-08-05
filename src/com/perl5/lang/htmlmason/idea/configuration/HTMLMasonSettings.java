@@ -32,6 +32,7 @@ import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -139,6 +140,11 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
         }
       }
     }
+  }
+
+  @Override
+  protected PerlSourceRootType getSourceRootType() {
+    return HTMLMasonSourceRootType.INSTANCE;
   }
 
   @Override

@@ -66,7 +66,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
             super.updateImpl(data);
             data.setIcon(handler.getRootIcon());
             data.addText(virtualFile.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-            data.addText(" (" + handler.getRootTypeName() + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
+            data.addText(" " + handler.getRootTypeName(), SimpleTextAttributes.GRAY_ATTRIBUTES);
           }
         };
       }

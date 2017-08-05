@@ -20,10 +20,8 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.TableUtil;
 import com.intellij.ui.ToolbarDecorator;
-import com.intellij.ui.components.JBList;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
@@ -52,9 +50,6 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   protected final Project myProject;
   protected final String windowTitile;
 
-  protected CollectionListModel<String> rootsModel;
-  protected JBList rootsList;
-
   protected ListTableModel<VariableDescription> globalsModel;
   protected JBTable globalsTable;
 
@@ -73,20 +68,6 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   @Override
   public String getHelpTopic() {
     return null;
-  }
-
-  public void createRootsListComponent(FormBuilder builder) {
-    rootsModel = new CollectionListModel<>();
-    rootsList = new JBList(rootsModel);
-    builder.addLabeledComponent(
-      new JLabel(
-        "Components roots (relative to project's root):"),
-      PerlConfigurationUtil.createProjectPathsSelection(
-        myProject,
-        rootsList,
-        rootsModel,
-        "Select Mason Component Roots"
-      ));
   }
 
   public void createGlobalsComponent(FormBuilder builder) {

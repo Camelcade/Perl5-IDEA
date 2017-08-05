@@ -585,6 +585,8 @@
     <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
     <!--<filePropertyPusher implementation="com.perl5.lang.htmlmason.idea.lang.HTMLMasonFilePropertyPusher"/>-->
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
 
     <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
 
@@ -650,6 +652,9 @@
 
     <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
+
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.mason2.idea.configuration.Mason2SourceRootTypeEditHandler"/>
 
     <completion.contributor language="Perl5"
                             implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
@@ -1010,6 +1015,8 @@
       <add-to-group group-id="MarkRootGroup"/>
       <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
       <action id="Perl.MarkAdTT2Root" class="com.perl5.lang.tt2.idea.settings.TemplateToolkitMarkTemplatesRootAction"/>
+      <action id="Perl.MarkMason2Root" class="com.perl5.lang.mason2.idea.configuration.Mason2MarkSourceRootAction"/>
+      <action id="Perl.MarkHTMLMasonRoot" class="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonMarkSourceRootAction"/>
       <action id="Perl.UnPerlRoot" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>
     </group>
 

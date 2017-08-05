@@ -18,11 +18,12 @@ package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import java.util.List;
  * Created by hurricup on 05.03.2016.
  */
 public abstract class AbstractMasonSettings {
-  public List<String> componentRoots = new ArrayList<>();
   public List<VariableDescription> globalVariables = new ArrayList<>();
 
   @Transient
@@ -40,8 +40,6 @@ public abstract class AbstractMasonSettings {
 
   @Transient
   protected Project myProject;
-  @Transient
-  private List<VirtualFile> componentsRootsVirtualFiles = null;
 
   protected AbstractMasonSettings setProject(Project project) {
     myProject = project;
@@ -49,25 +47,17 @@ public abstract class AbstractMasonSettings {
   }
 
   public void settingsUpdated() {
-    componentsRootsVirtualFiles = null;
     changeCounter++;
     if (!ApplicationManager.getApplication().isUnitTestMode()) {
       EditorNotifications.getInstance(myProject).updateAllNotifications();
     }
   }
 
+  protected abstract PerlSourceRootType getSourceRootType();
+
   @NotNull
-  public List<VirtualFile> getComponentsRootsVirtualFiles() {
-    if (componentsRootsVirtualFiles == null) {
-      componentsRootsVirtualFiles = new ArrayList<>();
-      for (String relativeRoot : componentRoots) {
-        VirtualFile rootFile = VfsUtil.findRelativeFile(relativeRoot, myProject.getBaseDir());
-        if (rootFile != null && rootFile.exists()) {
-          componentsRootsVirtualFiles.add(rootFile);
-        }
-      }
-    }
-    return componentsRootsVirtualFiles;
+  public List<VirtualFile> getComponentsRoots() {
+    return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(getSourceRootType());
   }
 
   public int getChangeCounter() {

@@ -80,7 +80,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
       }
 
 
-      for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles()) {
+      for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
         VfsUtil.processFilesRecursively(componentRoot, new MasonRootsProcessor(componentRoot) {
           @Override
           public boolean process(VirtualFile virtualFile) {

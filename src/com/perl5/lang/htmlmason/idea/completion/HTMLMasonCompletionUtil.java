@@ -87,7 +87,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
   public static void fillWithAbsoluteSubcomponents(@NotNull final CompletionResultSet resultSet, @NotNull Project project) {
     HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
 
-    for (VirtualFile componentRoot : masonSettings.getComponentsRootsVirtualFiles()) {
+    for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
       VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
     }
   }
