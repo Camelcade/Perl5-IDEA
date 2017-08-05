@@ -21,10 +21,12 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBTabbedPane;
+import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -47,7 +49,14 @@ public class Perl5ProjectConfigurableWrapper implements UnnamedConfigurable {
       return myConfigurables.get(0).createComponent();
     }
 
-    JBTabbedPane tabbedPane = new JBTabbedPane();
+    JBTabbedPane tabbedPane = new JBTabbedPane() {
+      @NotNull
+      @Override
+      protected Insets getInsetsForTabComponent() {
+        return JBUI.emptyInsets();
+      }
+    };
+
     myConfigurables.forEach(configurable -> tabbedPane.add(configurable.getDisplayName(), configurable.createComponent()));
     return tabbedPane;
   }
