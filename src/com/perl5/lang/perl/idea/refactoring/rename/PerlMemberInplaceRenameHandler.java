@@ -29,6 +29,7 @@ import com.intellij.refactoring.rename.inplace.MemberInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider;
+import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,7 +44,8 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
 
   @Override
   protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
-    return (!(element instanceof PerlRenameUsagesHelper) || ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed()) &&
+    return !PerlRenamingVetoCondition.isVetoed(element) &&
+           (!(element instanceof PerlRenameUsagesHelper) || ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed()) &&
            isAvailableFromParent(element, editor, file);
   }
 

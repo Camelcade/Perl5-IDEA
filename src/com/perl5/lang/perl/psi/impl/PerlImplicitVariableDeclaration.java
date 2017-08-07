@@ -284,7 +284,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
   @Nullable
   @Override
   public PsiElement getNameIdentifier() {
-    return this;
+    return null;
   }
 
   @Override

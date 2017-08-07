@@ -24,6 +24,7 @@ import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
+import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +39,7 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
     SearchScope useScope = element.getUseScope();
     return useScope instanceof LocalSearchScope
            && element instanceof PsiNameIdentifierOwner
+           && !PerlRenamingVetoCondition.isVetoed(element)
            && !(element instanceof PerlRenameUsagesHelper)
            && !(((PsiNameIdentifierOwner)element).getNameIdentifier() instanceof PerlStringContentElement)
            && element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE

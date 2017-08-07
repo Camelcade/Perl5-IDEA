@@ -19,12 +19,21 @@ package com.perl5.lang.perl.parser.Exception.Class.ide.refactoring;
 import com.intellij.openapi.util.Condition;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.parser.Exception.Class.psi.impl.PerlExceptionClassWrapper;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 
-public class PerlExceptionClassFieldsVeto implements Condition<PsiElement> {
+public class PerlRenamingVetoCondition implements Condition<PsiElement> {
   @Override
   public boolean value(PsiElement element) {
+    return isVetoed(element);
+  }
+
+  public static boolean isVetoed(PsiElement element) {
+    if (element instanceof PerlImplicitVariableDeclaration) {
+      return true;
+    }
+
     return element instanceof PerlLightMethodDefinitionElement &&
            ((PerlDelegatingLightNamedElement)element).getDelegate() instanceof PerlExceptionClassWrapper &&
            PerlExceptionClassWrapper.FIELDS_METHOD_NAME.equals(((PerlLightMethodDefinitionElement)element).getName());
