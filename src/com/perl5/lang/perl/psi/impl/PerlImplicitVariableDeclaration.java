@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.Language;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -28,6 +29,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -42,6 +44,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -279,6 +282,18 @@ public class PerlImplicitVariableDeclaration extends LightElement
   @Override
   public String getPresentableName() {
     return getCanonicalName();
+  }
+
+  @Override
+  public ItemPresentation getPresentation() {
+    return new PerlItemPresentationSimple(this, getName());
+  }
+
+  @Nullable
+  @Override
+  public Icon getIcon(int flags) {
+    Icon iconByType = getIconByType(getActualType());
+    return iconByType == null ? super.getIcon(flags) : iconByType;
   }
 
   @Nullable

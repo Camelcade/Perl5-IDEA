@@ -17,10 +17,15 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -34,6 +39,20 @@ public interface PerlVariableDeclarationElement
    */
   PerlVariable getVariable();
 
+
+  @Nullable
+  default Icon getIconByType(@NotNull PerlVariableType type) {
+    if (type == PerlVariableType.ARRAY) {
+      return PerlIcons.ARRAY_GUTTER_ICON;
+    }
+    if (type == PerlVariableType.HASH) {
+      return PerlIcons.HASH_GUTTER_ICON;
+    }
+    if (type == PerlVariableType.SCALAR) {
+      return PerlIcons.SCALAR_GUTTER_ICON;
+    }
+    return null;
+  }
 
   /**
    * Returns declaration type if variable is in declaration

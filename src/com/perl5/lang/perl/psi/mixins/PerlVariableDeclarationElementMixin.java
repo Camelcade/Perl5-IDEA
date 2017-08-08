@@ -24,7 +24,6 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.PerlIcons;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
@@ -207,19 +206,8 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @Nullable
   @Override
   public Icon getIcon(int flags) {
-    PerlVariableType actualType = getActualType();
-
-    if (actualType == PerlVariableType.ARRAY) {
-      return PerlIcons.ARRAY_GUTTER_ICON;
-    }
-    if (actualType == PerlVariableType.HASH) {
-      return PerlIcons.HASH_GUTTER_ICON;
-    }
-    if (actualType == PerlVariableType.SCALAR) {
-      return PerlIcons.SCALAR_GUTTER_ICON;
-    }
-
-    return super.getIcon(flags);
+    Icon iconByType = getIconByType(getActualType());
+    return iconByType == null ? super.getIcon(flags) : iconByType;
   }
 
   @Nullable
