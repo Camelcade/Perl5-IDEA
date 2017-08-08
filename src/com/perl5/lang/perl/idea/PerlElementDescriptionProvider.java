@@ -123,13 +123,13 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
 
         PerlVariableType actualType = ((PerlVariable)element).getActualType();
         if (actualType == PerlVariableType.ARRAY) {
-          return "array variable";
+          return PerlBundle.message("perl.type.array");
         }
         else if (actualType == PerlVariableType.HASH) {
-          return "hash variable";
+          return PerlBundle.message("perl.type.hash");
         }
         else if (actualType == PerlVariableType.SCALAR) {
-          return "scalar variable";
+          return PerlBundle.message("perl.type.scalar");
         }
       }
       else if (element instanceof PerlVariableNameElement) {
