@@ -63,7 +63,7 @@ intellij {
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
-    updateSinceUntilBuild = false
+    updateSinceUntilBuild = true
 }
 
 runIdea{
