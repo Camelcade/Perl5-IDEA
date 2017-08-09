@@ -20,6 +20,7 @@ import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.intellij.ide.fileTemplates.FileTemplateManager;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
@@ -28,6 +29,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
 import java.util.ArrayList;
@@ -62,6 +64,11 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
                         fileTemplate.getName());
       }
     }
+  }
+
+  @Override
+  protected boolean isAvailable(DataContext dataContext) {
+    return PerlProjectManager.isPerlEnabled(dataContext) && super.isAvailable(dataContext);
   }
 
   @Override

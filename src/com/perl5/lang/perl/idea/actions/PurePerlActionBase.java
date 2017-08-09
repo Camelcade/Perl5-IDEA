@@ -29,7 +29,7 @@ import com.perl5.lang.perl.util.PerlActionUtil;
 public abstract class PurePerlActionBase extends PerlActionBase {
   @Override
   protected boolean isEnabled(AnActionEvent event) {
-    return isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
+    return super.isEnabled(event) && isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
   }
 
   protected boolean isMyFile(PsiFile file) {

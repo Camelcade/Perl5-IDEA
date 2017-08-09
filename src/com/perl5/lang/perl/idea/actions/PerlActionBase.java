@@ -19,12 +19,15 @@ package com.perl5.lang.perl.idea.actions;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 
 /**
  * Created by hurricup on 26.04.2016.
  */
 public abstract class PerlActionBase extends AnAction {
-  protected abstract boolean isEnabled(AnActionEvent event);
+  protected boolean isEnabled(AnActionEvent event) {
+    return PerlProjectManager.isPerlEnabled(event.getDataContext());
+  }
 
   @Override
   public void update(AnActionEvent event) {

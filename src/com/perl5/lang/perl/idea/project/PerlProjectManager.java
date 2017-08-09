@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
@@ -273,4 +275,10 @@ public class PerlProjectManager {
     Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
     return module == null ? getSdkPath(project) : getSdkPath(module);
   }
+
+  public static boolean isPerlEnabled(@NotNull DataContext dataContext) {
+    Project project = CommonDataKeys.PROJECT.getData(dataContext);
+    return project != null && getInstance(project).getProjectSdk() != null;
+  }
+
 }

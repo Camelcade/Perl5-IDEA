@@ -58,6 +58,9 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
 
   @Override
   protected boolean isEnabled(AnActionEvent event) {
+    if (!super.isEnabled(event)) {
+      return false;
+    }
     final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
     //noinspection ConstantConditions
     return super.isMyFile(file) && file.isWritable();
