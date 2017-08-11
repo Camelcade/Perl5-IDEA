@@ -57,7 +57,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
   protected final String myVariableName;
   @Nullable
   protected final String myVariableClass;
-  @NotNull
+  @Nullable
   protected final PsiElement myParent;
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
@@ -71,7 +71,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
                                           boolean isLexical,
                                           boolean isLocal,
                                           boolean isInvocant,
-                                          @NotNull PsiElement parent) {
+                                          @Nullable PsiElement parent) {
     super(manager, language);
 
     PerlVariableType type = null;
@@ -151,7 +151,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
 
   @Override
   public int getLineNumber() {
-    Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getParent().getContainingFile());
+    Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
     return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
   }
 
@@ -220,38 +220,9 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return myVariableClass;
   }
 
-  @NotNull
+  @Nullable
   public PsiElement getParent() {
     return myParent;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlImplicitVariableDeclaration)) return false;
-
-    PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
-
-    if (myIsLexical != that.myIsLexical) return false;
-    if (myIsLocal != that.myIsLocal) return false;
-    if (myIsInvocant != that.myIsInvocant) return false;
-    if (getVariableType() != that.getVariableType()) return false;
-    if (!getVariableName().equals(that.getVariableName())) return false;
-    if (getVariableClass() != null ? !getVariableClass().equals(that.getVariableClass()) : that.getVariableClass() != null) return false;
-    return getParent().equals(that.getParent());
-  }
-
-  @Override
-  public int hashCode() {
-    int result = getVariableType() != null ? getVariableType().hashCode() : 0;
-    result = 31 * result + getVariableName().hashCode();
-    result = 31 * result + (getVariableClass() != null ? getVariableClass().hashCode() : 0);
-    result = 31 * result + getParent().hashCode();
-    result = 31 * result + (myIsLexical ? 1 : 0);
-    result = 31 * result + (myIsLocal ? 1 : 0);
-    result = 31 * result + (myIsInvocant ? 1 : 0);
-    return result;
   }
 
   @Override
@@ -319,7 +290,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
 
   @Override
   public int getTextOffset() {
-    return getParent().getTextOffset();
+    return getParent() == null ? 0 : getParent().getTextOffset();
   }
 
   @NotNull
@@ -347,7 +318,8 @@ public class PerlImplicitVariableDeclaration extends LightElement
 
   @Override
   public PsiFile getContainingFile() {
-    return getParent().getContainingFile();
+    PsiElement parent = getParent();
+    return parent == null ? null : parent.getContainingFile();
   }
 
   @Nullable
@@ -409,6 +381,34 @@ public class PerlImplicitVariableDeclaration extends LightElement
       isInvocant,
       parent
     );
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
+
+    if (myIsLexical != that.myIsLexical) return false;
+    if (myIsLocal != that.myIsLocal) return false;
+    if (myIsInvocant != that.myIsInvocant) return false;
+    if (myVariableType != that.myVariableType) return false;
+    if (!myVariableName.equals(that.myVariableName)) return false;
+    if (myVariableClass != null ? !myVariableClass.equals(that.myVariableClass) : that.myVariableClass != null) return false;
+    return myParent != null ? myParent.equals(that.myParent) : that.myParent == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = myVariableType != null ? myVariableType.hashCode() : 0;
+    result = 31 * result + myVariableName.hashCode();
+    result = 31 * result + (myVariableClass != null ? myVariableClass.hashCode() : 0);
+    result = 31 * result + (myParent != null ? myParent.hashCode() : 0);
+    result = 31 * result + (myIsLexical ? 1 : 0);
+    result = 31 * result + (myIsLocal ? 1 : 0);
+    result = 31 * result + (myIsInvocant ? 1 : 0);
+    return result;
   }
 }
 
