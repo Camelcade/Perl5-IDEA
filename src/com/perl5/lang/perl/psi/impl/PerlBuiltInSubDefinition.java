@@ -14,33 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlBuiltInVariable extends PerlImplicitVariableDeclaration {
-  public PerlBuiltInVariable(@NotNull PsiManager manager,
-                             @NotNull String variableName) {
-    super(manager, variableName, null, false, false, false, null);
-  }
-
-  @Nullable
-  @Override
-  public String getPackageName() {
-    return PerlPackageUtil.MAIN_PACKAGE;
-  }
-
-  @Override
-  public String toString() {
-    return "Built-in: " + getVariableType().getSigil() + getVariableName();
-  }
-
-  @Override
-  public boolean isBuiltIn() {
-    return true;
+public class PerlBuiltInSubDefinition extends PerlImplicitSubDefinition {
+  public PerlBuiltInSubDefinition(@NotNull PsiManager manager,
+                                  @Nullable PsiElement parent) {
+    super(manager, parent);
   }
 }

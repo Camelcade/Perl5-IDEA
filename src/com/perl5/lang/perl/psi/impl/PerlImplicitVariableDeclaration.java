@@ -16,20 +16,15 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.lang.Language;
-import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -39,7 +34,6 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,29 +44,26 @@ import java.util.List;
 /**
  * Created by hurricup on 17.01.2016.
  */
-public class PerlImplicitVariableDeclaration extends LightElement
+public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   implements PerlVariable, PerlVariableNameElement, PerlVariableDeclarationElement {
   protected final PerlVariableType myVariableType;
   @NotNull
   protected final String myVariableName;
   @Nullable
   protected final String myVariableClass;
-  @Nullable
-  protected final PsiElement myParent;
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
 
   protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
-                                            @NotNull Language language,
                                             @NotNull String variableNameWithSigil,
                                             @Nullable String variableClass,
                                             boolean isLexical,
                                             boolean isLocal,
                                             boolean isInvocant,
                                             @Nullable PsiElement parent) {
-    super(manager, language);
+    super(manager, parent);
 
     PerlVariableType type = null;
 
@@ -93,7 +84,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
       myVariableType = type;
       myVariableName = variableNameWithSigil.substring(1);
       myVariableClass = variableClass;
-      myParent = parent;
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
@@ -173,32 +163,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
   }
 
   @Override
-  public String getExplicitPackageName() {
-    return null;
-  }
-
-  @Nullable
-  protected String getContextPackageName() {
-    return PerlPackageUtil.getContextPackageName(getParent());
-  }
-
-  @Nullable
-  @Override
-  public String getPackageName() {
-    return getContextPackageName();
-  }
-
-  @Nullable
-  @Override
-  public String getCanonicalName() {
-    String packageName = getPackageName();
-    if (packageName == null) {
-      return null;
-    }
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-  }
-
-  @Override
   public PerlVariableNameElement getVariableNameElement() {
     return this;
   }
@@ -227,10 +191,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return myVariableClass;
   }
 
-  @Nullable
-  public PsiElement getParent() {
-    return myParent;
-  }
 
   @Override
   public PerlVariable getVariable() {
@@ -262,11 +222,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return getCanonicalName();
   }
 
-  @Override
-  public ItemPresentation getPresentation() {
-    return new PerlItemPresentationSimple(this, getName());
-  }
-
   @Nullable
   @Override
   public Icon getIcon(int flags) {
@@ -295,11 +250,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return null;
   }
 
-  @Override
-  public int getTextOffset() {
-    return getParent() == null ? 0 : getParent().getTextOffset();
-  }
-
   @NotNull
   @Override
   public String getName() {
@@ -323,12 +273,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return null;
   }
 
-  @Override
-  public PsiFile getContainingFile() {
-    PsiElement parent = getParent();
-    return parent == null ? null : parent.getContainingFile();
-  }
-
   @Nullable
   @Override
   public PerlVariableAnnotations getExternalVariableAnnotations() {
@@ -339,6 +283,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
 
     PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
 
@@ -347,16 +292,15 @@ public class PerlImplicitVariableDeclaration extends LightElement
     if (myIsInvocant != that.myIsInvocant) return false;
     if (myVariableType != that.myVariableType) return false;
     if (!myVariableName.equals(that.myVariableName)) return false;
-    if (myVariableClass != null ? !myVariableClass.equals(that.myVariableClass) : that.myVariableClass != null) return false;
-    return myParent != null ? myParent.equals(that.myParent) : that.myParent == null;
+    return myVariableClass != null ? myVariableClass.equals(that.myVariableClass) : that.myVariableClass == null;
   }
 
   @Override
   public int hashCode() {
-    int result = myVariableType != null ? myVariableType.hashCode() : 0;
+    int result = super.hashCode();
+    result = 31 * result + (myVariableType != null ? myVariableType.hashCode() : 0);
     result = 31 * result + myVariableName.hashCode();
     result = 31 * result + (myVariableClass != null ? myVariableClass.hashCode() : 0);
-    result = 31 * result + (myParent != null ? myParent.hashCode() : 0);
     result = 31 * result + (myIsLexical ? 1 : 0);
     result = 31 * result + (myIsLocal ? 1 : 0);
     result = 31 * result + (myIsInvocant ? 1 : 0);
@@ -408,7 +352,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
   ) {
     return new PerlImplicitVariableDeclaration(
       parent.getManager(),
-      PerlLanguage.INSTANCE,
       variableName,
       variableClass,
       isLexical,
