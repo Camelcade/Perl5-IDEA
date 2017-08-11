@@ -53,10 +53,6 @@ public class PerlArrayUtil implements PerlElementTypes {
     "LAST_MATCH_START"
   ));
 
-  public static boolean isBuiltIn(String variable) {
-    return BUILT_IN.contains(variable);
-  }
-
 
   /**
    * Searching project files for global array definitions by specific package and variable name

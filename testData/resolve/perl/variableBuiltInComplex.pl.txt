@@ -1,0 +1,30 @@
+PerlVariableReference at (7,16); text in range: '^ENCODING' => 1 results:
+	Built-in: $^ENCODING
+
+PerlVariableReference at (52,61); text in range: '^ENCODING' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 28 in variableBuiltInComplex.pl
+
+PerlVariableReference at (73,82); text in range: '^ENCODING' => 1 results:
+	Built-in: $^ENCODING
+
+PerlVariableReference at (121,130); text in range: '^ENCODING' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 97 in variableBuiltInComplex.pl
+
+PerlVariableReference at (142,151); text in range: '^ENCODING' => 1 results:
+	Built-in: $^ENCODING
+
+PerlVariableReference at (188,197); text in range: '^ENCODING' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 164 in variableBuiltInComplex.pl
+
+PerlVariableReference at (209,218); text in range: '^ENCODING' => 1 results:
+	Built-in: $^ENCODING
+
+PerlVariableReference at (258,267); text in range: '^ENCODING' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 234 in variableBuiltInComplex.pl
+
+PerlVariableReference at (279,288); text in range: '^ENCODING' => 1 results:
+	Built-in: $^ENCODING
+
+PerlVariableReference at (318,327); text in range: '^ENCODING' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 298 in variableBuiltInComplex.pl
+

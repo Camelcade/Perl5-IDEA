@@ -1,0 +1,30 @@
+
+say ${^ENCODING};
+{
+    my <warning descr="Current variable declaration shadows built-in variable">${^ENCODING}</warning>;
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+{
+    state <warning descr="Current variable declaration shadows built-in variable">${^ENCODING}</warning>;
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+{
+    our <warning descr="Current variable declaration shadows built-in variable">${^ENCODING}</warning>;
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+
+{
+    local ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+
+local ${^ENCODING};
+say ${^ENCODING};

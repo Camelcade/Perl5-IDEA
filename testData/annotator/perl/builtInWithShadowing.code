@@ -1,0 +1,30 @@
+
+say <info descr="null">${^ENCODING}</info>;
+{
+    my ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say <info descr="null">${^ENCODING}</info>;
+{
+    state ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say <info descr="null">${^ENCODING}</info>;
+{
+    our ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say <info descr="null">${^ENCODING}</info>;
+
+{
+    local ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say <info descr="null">${^ENCODING}</info>;
+
+local ${^ENCODING};
+say ${^ENCODING};

@@ -88,7 +88,9 @@ public class PerlResolveUtil {
       return null;
     }
     PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
-    PerlResolveUtil.treeWalkUp(variable, variableProcessor);
+    if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
+      variableProcessor.processBuiltIns();
+    }
     return variableProcessor.getResult();
   }
 

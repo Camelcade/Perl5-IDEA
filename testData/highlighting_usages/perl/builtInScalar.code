@@ -1,0 +1,30 @@
+
+say ${^ENCODING};
+{
+    my ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+{
+    state ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+{
+    our ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${^ENCODING};
+
+{
+    local ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${^ENCO<caret>DING};
+
+local ${^ENCODING};
+say ${^ENCODING};

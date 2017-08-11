@@ -108,6 +108,8 @@ public class PerlResolveTest extends PerlLightCodeInsightFixtureTestCase {
     doTestResolve();
   }
 
+  public void testVariableBuiltInComplex() {doTestResolve();}
+
   public void testMainSubs() {
     doTestResolve();
   }

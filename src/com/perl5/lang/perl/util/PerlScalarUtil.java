@@ -47,16 +47,6 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
 
   /**
-   * Checks if variable is built in
-   *
-   * @param variable variable name
-   * @return checking result
-   */
-  public static boolean isBuiltIn(String variable) {
-    return BUILT_IN.contains(variable);
-  }
-
-  /**
    * Searching project files for global scalar definitions by specific package and variable name
    *
    * @param project       project to search in

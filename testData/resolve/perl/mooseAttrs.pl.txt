@@ -2,13 +2,17 @@ PerlNamespaceFileReference at (43,49); text in range: 'strict' => 0 results:
 
 PerlNamespaceFileReference at (55,63); text in range: 'warnings' => 0 results:
 
-PerlVariableReference at (172,173); text in range: 'a' => 0 results:
+PerlVariableReference at (172,173); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (185,186); text in range: 'a' => 0 results:
+PerlVariableReference at (185,186); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (271,272); text in range: 'a' => 0 results:
+PerlVariableReference at (271,272); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (286,287); text in range: 'a' => 0 results:
+PerlVariableReference at (286,287); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlNamespaceReference at (358,370); text in range: 'My::Foo::Bar' => 0 results:
 
@@ -22,13 +26,17 @@ PerlNamespaceReference at (571,583); text in range: 'My::Foo::Bar' => 0 results:
 
 PerlNamespaceReference at (636,648); text in range: 'My::Foo::Bar' => 0 results:
 
-PerlVariableReference at (1748,1749); text in range: 'a' => 0 results:
+PerlVariableReference at (1748,1749); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (1759,1760); text in range: 'a' => 0 results:
+PerlVariableReference at (1759,1760); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (1772,1773); text in range: 'a' => 0 results:
+PerlVariableReference at (1772,1773); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (1785,1786); text in range: 'a' => 0 results:
+PerlVariableReference at (1785,1786); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlSubReference at (1888,1893); text in range: 'test1' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl

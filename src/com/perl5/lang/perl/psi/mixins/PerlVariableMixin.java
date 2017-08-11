@@ -32,6 +32,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.references.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
@@ -268,28 +269,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public boolean isBuiltIn() {
-    if (getExplicitPackageName() != null) {
-      return false;
-    }
-
-    if (getVariableNameElement() == null) {
-      return false;
-    }
-
-    PerlVariableType variableType = getActualType();
-
-    // tood make getter for this
-    String variableName = getVariableNameElement().getName();
-
-    if (variableType == PerlVariableType.SCALAR) {
-      // fixme no regexps
-      return variableName.matches("^\\d+$") || PerlScalarUtil.BUILT_IN.contains(variableName);
-    }
-    if (variableType == PerlVariableType.ARRAY) {
-      return PerlArrayUtil.BUILT_IN.contains(variableName);
-    }
-
-    return variableType == PerlVariableType.HASH && PerlHashUtil.BUILT_IN.contains(variableName);
+    return getLexicalDeclaration() instanceof PerlBuiltInVariable;
   }
 
   @Override

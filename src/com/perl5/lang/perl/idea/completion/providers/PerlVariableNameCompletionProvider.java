@@ -64,7 +64,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     }
 
     // built ins
-    if (!isFullQualified && (!isDeclaration || VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement))) {
+    if (VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN.accepts(variableNameElement)) {
       PerlVariableCompletionUtil.fillWithBuiltInVariables(variableNameElement, resultSet);
     }
 

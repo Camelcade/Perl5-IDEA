@@ -1,0 +1,50 @@
+
+say <info descr="null">%INC</info>;
+say <info descr="null">@INC</info>{qw/test bla/};
+say <info descr="null">$INC</info>{bla};
+{
+    my %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say <info descr="null">%INC</info>;
+say <info descr="null">@INC</info>{qw/test bla/};
+say <info descr="null">$INC</info>{bla};
+{
+    state %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say <info descr="null">%INC</info>;
+say <info descr="null">@INC</info>{qw/test bla/};
+say <info descr="null">$INC</info>{bla};
+{
+    our %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say <info descr="null">%INC</info>;
+say <info descr="null">@INC</info>{qw/test bla/};
+say <info descr="null">$INC</info>{bla};
+
+{
+    local %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say <info descr="null">%INC</info>;
+say <info descr="null">@INC</info>{qw/test bla/};
+say <info descr="null">$INC</info>{bla};
+
+local %INC;
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};

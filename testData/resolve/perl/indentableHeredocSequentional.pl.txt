@@ -1,6 +1,8 @@
-PerlVariableReference at (56,57); text in range: 'a' => 0 results:
+PerlVariableReference at (56,57); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (198,199); text in range: 'a' => 0 results:
+PerlVariableReference at (198,199); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlHeredocReference at (223,227); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 23 in indentableHeredocSequentional.pl
@@ -11,7 +13,8 @@ PerlHeredocReference at (228,232); text in range: 'HTML' => 1 results:
 PerlHeredocReference at (335,339); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 45 in indentableHeredocSequentional.pl
 
-PerlVariableReference at (500,501); text in range: 'a' => 0 results:
+PerlVariableReference at (500,501); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlHeredocReference at (535,539); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 80 in indentableHeredocSequentional.pl
@@ -34,9 +37,11 @@ PerlHeredocReference at (865,869); text in range: 'HTML' => 1 results:
 PerlHeredocReference at (883,887); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 149 in indentableHeredocSequentional.pl
 
-PerlVariableReference at (951,952); text in range: 'a' => 0 results:
+PerlVariableReference at (951,952); text in range: 'a' => 1 results:
+	Built-in: $a
 
-PerlVariableReference at (1109,1110); text in range: 'a' => 0 results:
+PerlVariableReference at (1109,1110); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlHeredocReference at (1142,1146); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 918 in indentableHeredocSequentional.pl
@@ -47,7 +52,8 @@ PerlHeredocReference at (1155,1159); text in range: 'HTML' => 1 results:
 PerlHeredocReference at (1278,1282); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 940 in indentableHeredocSequentional.pl
 
-PerlVariableReference at (1475,1476); text in range: 'a' => 0 results:
+PerlVariableReference at (1475,1476); text in range: 'a' => 1 results:
+	Built-in: $a
 
 PerlHeredocReference at (1518,1522); text in range: 'HTML' => 1 results:
 	PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 975 in indentableHeredocSequentional.pl

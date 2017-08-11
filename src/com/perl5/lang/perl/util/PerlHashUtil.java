@@ -73,10 +73,6 @@ public class PerlHashUtil implements PerlElementTypes {
     ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR
   );
 
-  public static boolean isBuiltIn(String variable) {
-    return BUILT_IN.contains(variable);
-  }
-
   /**
    * Searching project files for global hash definitions by specific package and variable name
    *

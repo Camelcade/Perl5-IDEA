@@ -18,9 +18,12 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.references.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 
 /**
@@ -34,9 +37,17 @@ public class PerlVariableShadowingInspection extends PerlVariableInspectionBase 
 
     if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
       PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
-      if (lexicalDeclaration != null) {
-        registerProblem(holder, variable, "Current variable declaration shadows previous declaration of the same variable at line " +
-                                          lexicalDeclaration.getVariable().getLineNumber());
+      if (lexicalDeclaration instanceof PerlBuiltInVariable) {
+        registerProblem(holder, variable,
+                        PerlBundle.message("perl.inspection.shadows.builtin", lexicalDeclaration.getVariable().getLineNumber()));
+      }
+      else if (lexicalDeclaration instanceof PerlImplicitVariableDeclaration) {
+        registerProblem(holder, variable,
+                        PerlBundle.message("perl.inspection.shadows.implicit", lexicalDeclaration.getVariable().getLineNumber()));
+      }
+      else if (lexicalDeclaration != null) {
+        registerProblem(holder, variable,
+                        PerlBundle.message("perl.inspection.shadows.other", lexicalDeclaration.getVariable().getLineNumber()));
       }
     }
   }

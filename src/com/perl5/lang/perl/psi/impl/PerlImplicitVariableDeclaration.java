@@ -64,31 +64,34 @@ public class PerlImplicitVariableDeclaration extends LightElement
   protected final boolean myIsInvocant;
 
 
-  private PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
-                                          @NotNull Language language,
-                                          @NotNull String variableName,
-                                          @Nullable String variableClass,
-                                          boolean isLexical,
-                                          boolean isLocal,
-                                          boolean isInvocant,
-                                          @Nullable PsiElement parent) {
+  protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
+                                            @NotNull Language language,
+                                            @NotNull String variableNameWithSigil,
+                                            @Nullable String variableClass,
+                                            boolean isLexical,
+                                            boolean isLocal,
+                                            boolean isInvocant,
+                                            @Nullable PsiElement parent) {
     super(manager, language);
 
     PerlVariableType type = null;
 
-    if (variableName.startsWith("$")) {
+    if (variableNameWithSigil.startsWith("$")) {
       type = PerlVariableType.SCALAR;
     }
-    else if (variableName.startsWith("@")) {
+    else if (variableNameWithSigil.startsWith("@")) {
       type = PerlVariableType.ARRAY;
     }
-    else if (variableName.startsWith("%")) {
+    else if (variableNameWithSigil.startsWith("%")) {
       type = PerlVariableType.HASH;
+    }
+    else if (variableNameWithSigil.startsWith("*")) {
+      type = PerlVariableType.GLOB;
     }
 
     if (type != null) {
       myVariableType = type;
-      myVariableName = variableName.substring(1);
+      myVariableName = variableNameWithSigil.substring(1);
       myVariableClass = variableClass;
       myParent = parent;
       myIsLexical = isLexical;
@@ -96,7 +99,7 @@ public class PerlImplicitVariableDeclaration extends LightElement
       myIsInvocant = isInvocant;
     }
     else {
-      throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableName);
+      throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableNameWithSigil);
     }
   }
 
@@ -151,7 +154,11 @@ public class PerlImplicitVariableDeclaration extends LightElement
 
   @Override
   public int getLineNumber() {
-    Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
+    PsiFile file = getContainingFile();
+    if (file == null) {
+      return 0;
+    }
+    Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(file);
     return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
   }
 
@@ -328,6 +335,34 @@ public class PerlImplicitVariableDeclaration extends LightElement
     return null;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
+
+    if (myIsLexical != that.myIsLexical) return false;
+    if (myIsLocal != that.myIsLocal) return false;
+    if (myIsInvocant != that.myIsInvocant) return false;
+    if (myVariableType != that.myVariableType) return false;
+    if (!myVariableName.equals(that.myVariableName)) return false;
+    if (myVariableClass != null ? !myVariableClass.equals(that.myVariableClass) : that.myVariableClass != null) return false;
+    return myParent != null ? myParent.equals(that.myParent) : that.myParent == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = myVariableType != null ? myVariableType.hashCode() : 0;
+    result = 31 * result + myVariableName.hashCode();
+    result = 31 * result + (myVariableClass != null ? myVariableClass.hashCode() : 0);
+    result = 31 * result + (myParent != null ? myParent.hashCode() : 0);
+    result = 31 * result + (myIsLexical ? 1 : 0);
+    result = 31 * result + (myIsLocal ? 1 : 0);
+    result = 31 * result + (myIsInvocant ? 1 : 0);
+    return result;
+  }
+
   @NotNull
   public static PerlImplicitVariableDeclaration createGlobal(@NotNull PsiElement parent,
                                                              @NotNull String variableName,
@@ -381,34 +416,6 @@ public class PerlImplicitVariableDeclaration extends LightElement
       isInvocant,
       parent
     );
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
-
-    if (myIsLexical != that.myIsLexical) return false;
-    if (myIsLocal != that.myIsLocal) return false;
-    if (myIsInvocant != that.myIsInvocant) return false;
-    if (myVariableType != that.myVariableType) return false;
-    if (!myVariableName.equals(that.myVariableName)) return false;
-    if (myVariableClass != null ? !myVariableClass.equals(that.myVariableClass) : that.myVariableClass != null) return false;
-    return myParent != null ? myParent.equals(that.myParent) : that.myParent == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = myVariableType != null ? myVariableType.hashCode() : 0;
-    result = 31 * result + myVariableName.hashCode();
-    result = 31 * result + (myVariableClass != null ? myVariableClass.hashCode() : 0);
-    result = 31 * result + (myParent != null ? myParent.hashCode() : 0);
-    result = 31 * result + (myIsLexical ? 1 : 0);
-    result = 31 * result + (myIsLocal ? 1 : 0);
-    result = 31 * result + (myIsInvocant ? 1 : 0);
-    return result;
   }
 }
 

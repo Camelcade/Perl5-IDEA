@@ -35,18 +35,13 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-     <li>Perl project structure internals reworked:<ul>
-     <li>Perl now may be configured as a second language for any type of project with any SDK selected</li>
-     <li>Added support for external libraries</li>
-     <li>Perl-related project settings are now in <code>Settings->Languages &amp; Frameworks</code> section in all IDEs</li>
-     <li>It's no longer possible to add and/or select Perl as main project/module SDK in Intellij IDEA</li>
-     <li><b>IMPORTANT:</b> it was not possible to automatically migrate user's settings to the new structure, so you'll need to configure your project again</li>
-     </ul></li>
+       <li>Built-in variable usages are now highlighted and you may find usages for them</li>
      </ul>
      </p>
      <p>Fixes:
       <ul>
-      <li>Few auto-reported exceptions</li>
+        <li>Lookup elements for arrays now containing array slices</li>
+        <li>Built-in array/hash elements and slices are now properly colored</li>
       </ul>
      </p>
     ]]>
@@ -176,6 +171,7 @@
     <editorNotificationProvider
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
 
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>

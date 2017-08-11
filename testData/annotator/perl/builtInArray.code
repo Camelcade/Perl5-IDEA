@@ -1,0 +1,52 @@
+
+say <info descr="null">@ARGV</info>;
+say <info descr="null">@ARGV</info>[1,2,3];
+say <info descr="null">$ARGV</info>[1];
+
+{
+    my @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say <info descr="null">@ARGV</info>;
+say <info descr="null">@ARGV</info>[1,2,3];
+say <info descr="null">$ARGV</info>[1];
+
+{
+   state @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say <info descr="null">@ARGV</info>;
+say <info descr="null">@ARGV</info>[1,2,3];
+say <info descr="null">$ARGV</info>[1];
+{
+    our @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say <info descr="null">@ARGV</info>;
+say <info descr="null">@ARGV</info>[1,2,3];
+say <info descr="null">$ARGV</info>[1];
+
+{
+    local @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say <info descr="null">@ARGV</info>;
+say <info descr="null">@ARGV</info>[1,2,3];
+say <info descr="null">$ARGV</info>[1];
+
+local @ARGV;
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];

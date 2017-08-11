@@ -19,17 +19,19 @@ package com.perl5.lang.perl.psi.references.scopes;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
+import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
+import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor {
+public class PerlVariableDeclarationSearcher extends BaseScopeProcessor {
   private final String myName;
   private final PerlVariableType myVariableType;
   private final PsiElement myVariable;
@@ -66,5 +68,15 @@ public class PerlVariableDeclarationSearcher extends PerlVariableScopeProcessor 
 
   public PerlVariableDeclarationElement getResult() {
     return myResult;
+  }
+
+  public boolean processBuiltIns() {
+    PerlVariableDeclarationElement variableDeclaration =
+      PerlBuiltInVariablesService.getInstance(myVariable.getProject()).getVariableDeclaration(myVariableType, myName);
+    if (variableDeclaration == null) {
+      return true;
+    }
+    myResult = variableDeclaration;
+    return true;
   }
 }

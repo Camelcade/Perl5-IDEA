@@ -24,6 +24,11 @@ public class PerlUsagesHighlightingTest extends PerlLightCodeInsightFixtureTestC
     return "testData/highlighting_usages/perl";
   }
 
+  public void testBuiltInScalar() {doTestUsagesHighlighting();}
+
+  public void testBuiltInArray() {doTestUsagesHighlighting();}
+
+  public void testBuiltInHash() {doTestUsagesHighlighting();}
 
   public void testHasModification() {doTestUsagesHighlighting();}
 }

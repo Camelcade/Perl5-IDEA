@@ -1,0 +1,52 @@
+
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];
+
+{
+    my @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @ARGV;
+say @ARGV[1,2,3];
+say $A<caret>RGV[1];
+
+{
+   state @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];
+{
+    our @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];
+
+{
+    local @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];
+
+local @ARGV;
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];

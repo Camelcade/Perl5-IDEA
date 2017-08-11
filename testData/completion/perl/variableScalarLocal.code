@@ -1,0 +1,7 @@
+
+local ($groupedscalar, @groupedarray, %groupedhash);
+local @somearray;
+local %somehash;
+local $somescalar;
+
+$<caret>

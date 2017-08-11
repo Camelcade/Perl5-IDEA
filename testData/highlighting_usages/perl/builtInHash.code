@@ -1,0 +1,50 @@
+
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};
+{
+    my %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};
+{
+    state %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say %INC;
+say @I<caret>NC{qw/test bla/};
+say $INC{bla};
+{
+    our %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};
+
+{
+    local %INC;
+    say %INC;
+    say @INC{qw/test bla/};
+    say $INC{bla};
+}
+
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};
+
+local %INC;
+say %INC;
+say @INC{qw/test bla/};
+say $INC{bla};

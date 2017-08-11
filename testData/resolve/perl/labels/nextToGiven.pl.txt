@@ -1,6 +1,7 @@
 PerlSubReference at (0,6); text in range: 'LABEL8' => 0 results:
 
-PerlVariableReference at (15,19); text in range: 'ARGV' => 0 results:
+PerlVariableReference at (15,19); text in range: 'ARGV' => 1 results:
+	Built-in: @ARGV
 
 PerlLabelReference at (31,37); text in range: 'LABEL8' => 0 results:
 

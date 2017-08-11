@@ -32,9 +32,18 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
 
   public void testBuiltInVariables() {doAnnotatorTest();}
 
+  public void testBuiltInWithShadowing() {doAnnotatorTest();}
+
+  public void testBuiltInArray() {doAnnotatorTest();}
+
+  public void testBuiltInHash() {doAnnotatorTest();}
+
   public void testSignaturesShadowing() {doShadowingTest();}
 
   public void testVariableShadowingInspection() {doShadowingTest();}
+
+  public void testVariableShadowingBuiltIn() {doShadowingTest();}
+
 
   public void testUnusedLexicalVariableInspection() {doInspectionTest(PerlUnusedLexicalVariableInspection.class);}
 

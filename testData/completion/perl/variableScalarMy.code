@@ -1,0 +1,7 @@
+
+my @somearray;
+my %somehash;
+my $somescalar;
+my ($groupedscalar, @groupedarray, %groupedhash);
+
+$<caret>

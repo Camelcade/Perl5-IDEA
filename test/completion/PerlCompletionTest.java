@@ -35,6 +35,24 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     return "testData/completion/perl";
   }
 
+  public void testVariableArrayInArray() {doTestCompletion();}
+
+  public void testVariableArrayInScalar() {doTestCompletion();}
+
+  public void testVariableHashInArray() {doTestCompletion();}
+
+  public void testVariableHashInHash() {doTestCompletion();}
+
+  public void testVariableHashInScalar() {doTestCompletion();}
+
+  public void testVariableScalarLocal() {doTestCompletion();}
+
+  public void testVariableScalarMy() {doTestCompletion();}
+
+  public void testVariableScalarOur() {doTestCompletion();}
+
+  public void testVariableScalarState() {doTestCompletion();}
+
   public void testNotOverridenSubs() {doTestCompletion();}
 
   public void testMooseImports() {doTestCompletion();}

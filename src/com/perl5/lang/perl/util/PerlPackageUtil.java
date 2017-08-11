@@ -223,7 +223,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return canonical package name
    */
   @Nullable
-  public static String getContextPackageName(PsiElement element) {
+  public static String getContextPackageName(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
     PerlNamespaceDefinitionElement namespaceDefinition = getContainingNamespace(element);
 
     if (namespaceDefinition != null && namespaceDefinition.getPackageName() != null) // checking that definition is valid and got namespace
