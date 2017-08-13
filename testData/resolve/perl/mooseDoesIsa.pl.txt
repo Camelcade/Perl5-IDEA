@@ -1,3 +1,7 @@
+PerlSubReference at (131,134); text in range: 'has' => 0 results:
+
+PerlSubReference at (210,213); text in range: 'has' => 0 results:
+
 PerlSubReference at (305,313); text in range: 'mooseisa' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MyMoose::Container::mooseisa($self, [MyReturnValue1 $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 135 in mooseDoesIsa.pl
 

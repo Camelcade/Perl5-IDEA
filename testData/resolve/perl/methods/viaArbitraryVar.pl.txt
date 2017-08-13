@@ -1,3 +1,6 @@
+PerlSubReference at (70,75); text in range: 'shift' => 1 results:
+	Implicit sub: shift()
+
 PerlVariableReference at (82,85); text in range: 'var' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 63 in viaArbitraryVar.pl
 

@@ -1,6 +1,9 @@
 PerlNamespaceReference at (56,64); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in viaReturnResult.pl
 
+PerlSubReference at (99,104); text in range: 'shift' => 1 results:
+	Implicit sub: shift()
+
 PerlSubReference at (106,112); text in range: 'getter' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::getter at 65 in viaReturnResult.pl
 

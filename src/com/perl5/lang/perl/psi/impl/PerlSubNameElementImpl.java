@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -72,8 +72,12 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
 
   @Override
   public boolean isBuiltIn() {
-    PsiFile file = getContainingFile();
-    return file instanceof PerlFileImpl && ((PerlFileImpl)file).isBuiltInSub(this);
+    for (PsiReference reference : getReferences()) {
+      if (reference.resolve() instanceof PerlBuiltInSubDefinition) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

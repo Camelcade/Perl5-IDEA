@@ -47,19 +47,9 @@ import java.util.*;
 /**
  * Created by hurricup on 19.04.2015.
  */
-public class PerlSubUtil implements PerlElementTypes, PerlBuiltInSubs {
+public class PerlSubUtil implements PerlElementTypes {
   public static final String SUB_AUTOLOAD = "AUTOLOAD";
   public static final String SUB_AUTOLOAD_WITH_PREFIX = PerlPackageUtil.PACKAGE_SEPARATOR + SUB_AUTOLOAD;
-
-  /**
-   * Checks if provided function is built in
-   *
-   * @param function function name
-   * @return checking result
-   */
-  public static boolean isBuiltIn(String function) {
-    return BUILT_IN.contains(function);
-  }
 
 
   /**

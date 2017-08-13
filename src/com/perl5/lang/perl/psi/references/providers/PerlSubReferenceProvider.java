@@ -28,7 +28,6 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 import static com.perl5.lang.perl.parser.moose.MooseElementTypes.RESERVED_INNER;
 import static com.perl5.lang.perl.parser.moose.MooseElementTypes.RESERVED_SUPER;
 
@@ -44,16 +43,13 @@ public class PerlSubReferenceProvider extends PsiReferenceProvider {
     }
 
     IElementType elementType = PsiUtilCore.getElementType(element);
-    if (elementType == SUB_NAME) {
-      return new PsiReference[]{new PerlSubReference(element)};
-    }
-    else if (elementType == RESERVED_SUPER) {
+    if (elementType == RESERVED_SUPER) {
       return new PsiReference[]{new PerlMooseSuperReference(element)};
     }
     else if (elementType == RESERVED_INNER) {
       return new PsiReference[]{new PerlMooseInnerReference(element)};
     }
 
-    return PsiReference.EMPTY_ARRAY;
+    return new PsiReference[]{new PerlSubReference(element)};
   }
 }

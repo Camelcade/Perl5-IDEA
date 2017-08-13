@@ -1,10 +1,32 @@
+PerlSubReference at (18,21); text in range: 'has' => 0 results:
+
+PerlSubReference at (30,33); text in range: 'has' => 0 results:
+
+PerlSubReference at (80,83); text in range: 'has' => 0 results:
+
+PerlSubReference at (116,119); text in range: 'has' => 0 results:
+
+PerlSubReference at (157,160); text in range: 'has' => 0 results:
+
 PerlVariableReference at (180,183); text in range: 'var' => 0 results:
 
 PerlVariableReference at (194,197); text in range: 'var' => 0 results:
 
+PerlSubReference at (201,204); text in range: 'has' => 0 results:
+
 PerlVariableReference at (227,230); text in range: 'var' => 0 results:
 
 PerlVariableReference at (243,246); text in range: 'var' => 0 results:
+
+PerlSubReference at (250,253); text in range: 'has' => 0 results:
+
+PerlSubReference at (279,282); text in range: 'has' => 0 results:
+
+PerlSubReference at (300,303); text in range: 'has' => 0 results:
+
+PerlSubReference at (324,327); text in range: 'has' => 0 results:
+
+PerlSubReference at (369,372); text in range: 'has' => 0 results:
 
 PerlSubReference at (432,436); text in range: 'name' => 1 results:
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 22 in mojoAttrs.pl

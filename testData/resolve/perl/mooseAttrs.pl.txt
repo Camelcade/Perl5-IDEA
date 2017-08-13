@@ -2,11 +2,19 @@ PerlNamespaceFileReference at (43,49); text in range: 'strict' => 0 results:
 
 PerlNamespaceFileReference at (55,63); text in range: 'warnings' => 0 results:
 
+PerlSubReference at (80,83); text in range: 'has' => 0 results:
+
+PerlSubReference at (105,108); text in range: 'has' => 0 results:
+
+PerlSubReference at (130,133); text in range: 'has' => 0 results:
+
 PerlVariableReference at (172,173); text in range: 'a' => 1 results:
 	Built-in: $a
 
 PerlVariableReference at (185,186); text in range: 'a' => 1 results:
 	Built-in: $a
+
+PerlSubReference at (222,225); text in range: 'has' => 0 results:
 
 PerlVariableReference at (271,272); text in range: 'a' => 1 results:
 	Built-in: $a
@@ -14,17 +22,69 @@ PerlVariableReference at (271,272); text in range: 'a' => 1 results:
 PerlVariableReference at (286,287); text in range: 'a' => 1 results:
 	Built-in: $a
 
+PerlSubReference at (324,327); text in range: 'has' => 0 results:
+
 PerlNamespaceReference at (358,370); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlSubReference at (373,376); text in range: 'has' => 0 results:
 
 PerlNamespaceReference at (407,419); text in range: 'My::Foo::Bar' => 0 results:
 
+PerlSubReference at (422,425); text in range: 'has' => 0 results:
+
 PerlNamespaceReference at (457,469); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlSubReference at (472,475); text in range: 'has' => 0 results:
 
 PerlNamespaceReference at (507,519); text in range: 'My::Foo::Bar' => 0 results:
 
+PerlSubReference at (522,525); text in range: 'has' => 0 results:
+
 PerlNamespaceReference at (571,583); text in range: 'My::Foo::Bar' => 0 results:
 
+PerlSubReference at (586,589); text in range: 'has' => 0 results:
+
 PerlNamespaceReference at (636,648); text in range: 'My::Foo::Bar' => 0 results:
+
+PerlSubReference at (651,654); text in range: 'has' => 0 results:
+
+PerlSubReference at (699,702); text in range: 'has' => 0 results:
+
+PerlSubReference at (745,748); text in range: 'has' => 0 results:
+
+PerlSubReference at (791,794); text in range: 'has' => 0 results:
+
+PerlSubReference at (837,840); text in range: 'has' => 0 results:
+
+PerlSubReference at (883,886); text in range: 'has' => 0 results:
+
+PerlSubReference at (929,932); text in range: 'has' => 0 results:
+
+PerlSubReference at (977,980); text in range: 'has' => 0 results:
+
+PerlSubReference at (1078,1081); text in range: 'has' => 0 results:
+
+PerlSubReference at (1125,1128); text in range: 'has' => 0 results:
+
+PerlSubReference at (1173,1176); text in range: 'has' => 0 results:
+
+PerlSubReference at (1221,1224); text in range: 'has' => 0 results:
+
+PerlSubReference at (1249,1252); text in range: 'has' => 0 results:
+
+PerlSubReference at (1277,1280); text in range: 'has' => 0 results:
+
+PerlSubReference at (1305,1308); text in range: 'has' => 0 results:
+
+PerlSubReference at (1335,1338); text in range: 'has' => 0 results:
+
+PerlSubReference at (1409,1412); text in range: 'has' => 0 results:
+
+PerlSubReference at (1483,1486); text in range: 'has' => 0 results:
+
+PerlSubReference at (1568,1571); text in range: 'has' => 0 results:
+
+PerlSubReference at (1639,1642); text in range: 'has' => 0 results:
 
 PerlVariableReference at (1748,1749); text in range: 'a' => 1 results:
 	Built-in: $a
@@ -37,6 +97,8 @@ PerlVariableReference at (1772,1773); text in range: 'a' => 1 results:
 
 PerlVariableReference at (1785,1786); text in range: 'a' => 1 results:
 	Built-in: $a
+
+PerlSubReference at (1790,1793); text in range: 'has' => 0 results:
 
 PerlSubReference at (1888,1893); text in range: 'test1' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl

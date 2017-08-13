@@ -4,6 +4,9 @@ PerlVariableReference at (45,51); text in range: 'scalar' => 1 results:
 PerlVariableReference at (70,76); text in range: 'scalar' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in interpolatedElements.pl
 
+PerlSubReference at (92,96); text in range: 'keys' => 1 results:
+	Implicit sub: keys()
+
 PerlVariableReference at (98,102); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl
 
@@ -18,6 +21,9 @@ PerlVariableReference at (157,162); text in range: 'array' => 1 results:
 
 PerlVariableReference at (188,193); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
+
+PerlSubReference at (194,198); text in range: 'keys' => 1 results:
+	Implicit sub: keys()
 
 PerlVariableReference at (200,204); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl

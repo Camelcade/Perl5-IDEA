@@ -1,5 +1,11 @@
+PerlSubReference at (19,22); text in range: 'has' => 0 results:
+
 PerlNamespaceReference at (66,74); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrSmartResolve.pl
+
+PerlSubReference at (76,79); text in range: 'has' => 0 results:
+
+PerlSubReference at (94,97); text in range: 'has' => 0 results:
 
 PerlNamespaceReference at (127,135); text in range: 'Foo::Baz' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Baz at 37 in mojoAttrSmartResolve.pl

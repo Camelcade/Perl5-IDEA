@@ -45,7 +45,7 @@ public class PerlGlobUtil implements PerlElementTypes {
 
   static {
     BUILT_IN.addAll(PerlBuiltInScalars.BUILT_IN);
-    BUILT_IN.addAll(PerlBuiltInSubs.BUILT_IN);
+    //BUILT_IN.addAll(PerlBuiltInSubs.BUILT_IN);
     BUILT_IN.addAll(PerlArrayUtil.BUILT_IN);
     BUILT_IN.addAll(PerlHashUtil.BUILT_IN);
   }

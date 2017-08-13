@@ -19,28 +19,17 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.psi.references.PerlBuiltInSubsService;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashSet;
 
 /**
  * Created by hurricup on 01.06.2015.
  */
 public class PerlSubBuiltInCompletionProvider extends CompletionProvider<CompletionParameters> {
-  public static final HashSet<LookupElementBuilder> BUILT_IN_SUB_LOOKUP_ELEMENTS = new HashSet<>();
-
-  static {
-    for (String subName : PerlSubUtil.BUILT_IN) {
-      addCompletion(subName);
-    }
-  }
-
   public void addCompletions(@NotNull CompletionParameters parameters,
                              ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
@@ -48,15 +37,12 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
     assert method instanceof PsiPerlMethod;
 
     if (!((PsiPerlMethod)method).hasExplicitNamespace() && !((PsiPerlMethod)method).isObjectMethod()) {
-      resultSet.addAllElements(BUILT_IN_SUB_LOOKUP_ELEMENTS);
+      PerlBuiltInSubsService.getInstance(method.getProject()).processSubs(sub -> {
+        resultSet.addElement(
+          PerlSubCompletionUtil.getSubDefinitionLookupElement(sub).withBoldness(true)
+        );
+        return true;
+      });
     }
-  }
-
-  public static void addCompletion(String subName) {
-    BUILT_IN_SUB_LOOKUP_ELEMENTS.add(LookupElementBuilder
-                                       .create(subName)
-                                       .withIcon(PerlIcons.SUB_GUTTER_ICON)
-                                       .withBoldness(true)
-    );
   }
 }

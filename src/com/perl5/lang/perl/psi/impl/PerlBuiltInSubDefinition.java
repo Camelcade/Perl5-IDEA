@@ -18,12 +18,18 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class PerlBuiltInSubDefinition extends PerlImplicitSubDefinition {
   public PerlBuiltInSubDefinition(@NotNull PsiManager manager,
+                                  @NotNull String subName,
+                                  @NotNull String packageName,
+                                  @NotNull List<PerlSubArgument> argumentList,
                                   @Nullable PsiElement parent) {
-    super(manager, parent);
+    super(manager, subName, packageName, argumentList, parent);
   }
 }

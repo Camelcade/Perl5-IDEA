@@ -74,10 +74,6 @@ public class PerlSubReference extends PerlSubReferenceSimple {
       }
       else    // static resolution
       {
-        if (subNameElement.isBuiltIn()) {
-          return ResolveResult.EMPTY_ARRAY;
-        }
-
         if (PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION &&
             PerlPackageUtil.isMain(packageName))    // fixme this is a dirty hack until proper names resolution implemented
         {
@@ -159,6 +155,14 @@ public class PerlSubReference extends PerlSubReferenceSimple {
                   }
                 }
               }
+            }
+          }
+
+          // check for builtins
+          if (relatedItems.isEmpty()) {
+            PerlSubDefinitionElement builtInSub = PerlBuiltInSubsService.getInstance(project).findSub(subName);
+            if (builtInSub != null) {
+              relatedItems.add(builtInSub);
             }
           }
 
