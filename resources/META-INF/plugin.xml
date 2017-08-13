@@ -36,6 +36,7 @@
      <p>Updates:
      <ul>
        <li>Built-in variable usages are now highlighted and you may find usages for them</li>
+       <li>Built-in subs usages are now highlighted and you may find usages for them</li>
      </ul>
      </p>
      <p>Fixes:
