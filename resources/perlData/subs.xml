@@ -177,21 +177,36 @@
   <sub name="msgsnd"/>
   <sub name="my"/>
   <sub name="next"/>
-  <sub name="oct"/>
-  <sub name="oct"/>
+  <sub name="oct">
+    <arguments>
+      <optional>
+        <argument name="expr" type="$"/>
+      </optional>
+    </arguments>
+  </sub>
   <sub name="open">
     <arguments>
-      <argument name="fh" type="$"/>
+      <argument name="handle" type="$"/>
       <optional>
         <argument name="mode" type="$"/>
-        <argument name="filename_or_ref" type="$"/>
+        <argument name="name_or_ref" type="$"/>
         <argument name="args" type="@"/>
       </optional>
     </arguments>
   </sub>
-  <sub name="opendir"/>
-  <sub name="ord"/>
-  <sub name="our"/>
+  <sub name="opendir">
+    <arguments>
+      <argument name="handle" type="$"/>
+      <argument name="name" type="$"/>
+    </arguments>
+  </sub>
+  <sub name="ord">
+    <arguments>
+      <optional>
+        <argument name="expr" type="$"/>
+      </optional>
+    </arguments>
+  </sub>
   <sub name="pack"/>
   <sub name="pack"/>
   <sub name="package"/>
