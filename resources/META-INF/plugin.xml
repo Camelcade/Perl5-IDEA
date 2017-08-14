@@ -43,6 +43,7 @@
       <ul>
         <li>Lookup elements for arrays now containing array slices</li>
         <li>Built-in array/hash elements and slices are now properly colored</li>
+        <li>Plugin does not add empty <code><perl/></code> section to the iml file if perl roots were not configured.</li>
       </ul>
      </p>
     ]]>

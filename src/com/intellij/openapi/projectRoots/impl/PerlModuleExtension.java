@@ -143,9 +143,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   @Nullable
   @Override
   public Element getState() {
-    Element state = new Element("root");
     Element perlConfig = new Element(PERL_CONFIG);
-    state.addContent(perlConfig);
 
     PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
 
@@ -163,12 +161,19 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
         continue;
       }
 
+
       Element pathElement = new Element(ELEMENT_PATH);
       pathElement.setAttribute(ATTRIBUTE_VALUE, collapsedPath);
       pathElement.setAttribute(ATTRIBUTE_TYPE, serializer.getTypeId());
       perlConfig.addContent(pathElement);
     }
-    return state;
+
+    Element root = new Element("root");
+    if (!perlConfig.getChildren().isEmpty()) {
+      root.addContent(perlConfig);
+    }
+
+    return root;
   }
 
   @Override
