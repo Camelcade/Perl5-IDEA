@@ -276,9 +276,16 @@ public class PerlProjectManager {
     return module == null ? getSdkPath(project) : getSdkPath(module);
   }
 
-  public static boolean isPerlEnabled(@NotNull DataContext dataContext) {
-    Project project = CommonDataKeys.PROJECT.getData(dataContext);
+  public static boolean isPerlEnabled(@Nullable Project project) {
     return project != null && getInstance(project).getProjectSdk() != null;
+  }
+
+  public static boolean isPerlEnabled(@NotNull DataContext dataContext) {
+    return isPerlEnabled(CommonDataKeys.PROJECT.getData(dataContext));
+  }
+
+  public static boolean isPerlEnabled(@Nullable Module module) {
+    return module != null && isPerlEnabled(module.getProject());
   }
 
 }

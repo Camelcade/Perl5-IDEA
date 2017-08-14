@@ -24,6 +24,7 @@ import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
 
 
   protected boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module) {
-    if (files.isEmpty()) {
+    if (files.isEmpty() || !PerlProjectManager.isPerlEnabled(module)) {
       return false;
     }
     return !myType.equals(PerlModuleExtension.getInstance(module).getRootType(files.get(0)));
