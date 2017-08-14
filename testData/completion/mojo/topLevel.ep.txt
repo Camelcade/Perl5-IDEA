@@ -205,11 +205,10 @@ Lookups: msgsnd; Text: msgsnd; Tail: null; Type: CORE; Icon: /subroutine_gutter_
 Lookups: my; Text: my; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: next; Text: next; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: number_field; Text: number_field; Tail: ($c, $name); Type: Mojolicious::Plugin::TagHelpers; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: oct; Text: oct; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: open; Text: open; Tail: ($fh [, $mode, $filename_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: opendir; Text: opendir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ord; Text: ord; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: our; Text: our; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: oct; Text: oct; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: open; Text: open; Tail: ($handle [, $mode, $name_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: opendir; Text: opendir; Tail: ($handle, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: ord; Text: ord; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: pack; Text: pack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: package; Text: package; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: param; Text: param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
