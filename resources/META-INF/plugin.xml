@@ -35,15 +35,15 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-       <li>Built-in variable usages are now highlighted and you may find usages for them</li>
-       <li>Built-in subs usages are now highlighted and you may find usages for them</li>
+       <li>Built-in subs and variables usages are now highlighted and you may find usages for them</li>
+       <li>Spell-checking is now available for declarations, comments and string contents, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
      </ul>
      </p>
      <p>Fixes:
       <ul>
         <li>Lookup elements for arrays now containing array slices</li>
         <li>Built-in array/hash elements and slices are now properly colored</li>
-        <li>Plugin does not add empty <code><perl/></code> section to the iml file if perl roots were not configured.</li>
+        <li>Plugin does not add empty <code>&lt;perl/&gt;</code> section to the iml file if perl roots were not configured</li>
         <li>Mark Perl5 root action is unavailable if Perl5 support is not configured, unmark still available</li>
       </ul>
      </p>
@@ -204,6 +204,7 @@
         implementation="com.perl5.lang.perl.idea.formatter.settings.PerlLanguageCodeStyleSettingsProvider"/>
     <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
 
+    <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
     <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
     <projectConfigurable groupId="language"

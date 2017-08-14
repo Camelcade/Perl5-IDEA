@@ -53,6 +53,11 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
   @Nullable
   @Override
   public PsiElement getNamedElement(@NotNull PsiElement element) {
+    return getLightNameIdentifierOwner(element);
+  }
+
+  @Nullable
+  public static PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
     PerlPolyNamedElement polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
     if (polyNamedElement == null) {
       return null;
@@ -66,6 +71,7 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
     }
     return null;
   }
+
 
   @Nullable
   @Override // fixme WTF?
