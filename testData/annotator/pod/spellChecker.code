@@ -1,0 +1,12 @@
+=head1 NAME
+
+=head1 <TYPO descr="Typo: In word 'asdfasdfasdf'">asdfasdfasdf</TYPO>
+
+L</asdfasdfasdf>
+
+
+<TYPO descr="Typo: In word 'Somee'">Somee</TYPO> text is here
+
+<TYPO descr="Typo: In word 'soometh'">soometh</TYPO> a L<<TYPO descr="Typo: In word 'continuuous'">continuuous</TYPO>|/something>
+
+

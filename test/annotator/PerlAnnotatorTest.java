@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightCodeInsightFixtureTestCase;
 import com.intellij.openapi.vfs.CharsetToolkit;
+import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
 
@@ -31,6 +32,8 @@ public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
   }
 
   public void testBuiltInVariables() {doAnnotatorTest();}
+
+  public void testSpellChecker() {doInspectionTest(SpellCheckingInspection.class);}
 
   public void testBuiltInWithShadowing() {doAnnotatorTest();}
 

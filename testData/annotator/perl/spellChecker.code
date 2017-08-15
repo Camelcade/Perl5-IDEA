@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $super_<TYPO descr="Typo: In word 'variablee'">variablee</TYPO>;
+say $supervare;
+sub <TYPO descr="Typo: In word 'superbf'">superbf</TYPO>{
+}
+superbf;
+superother;
+
+package Foo::Bar::<TYPO descr="Typo: In word 'Baasdf'">Baasdf</TYPO>;
+
+has <TYPO descr="Typo: In word 'somersetteing'">somersetteing</TYPO> => qw/
+        is rw
+        writer set_<TYPO descr="Typo: In word 'blffabs'">blffabs</TYPO>
+        /;
+
+set_blffabs;
+
+Foo::Bar::Baasdf->somersetteing();
+
+"this is a <TYPO descr="Typo: In word 'badfsd'">badfsd</TYPO> <TYPO descr="Typo: In word 'sdfsdf'">sdfsdf</TYPO> <TYPO descr="Typo: In word 'asdfsdf'">asdfsdf</TYPO>";
+
+#@inject HTML
+"this is a <TYPO descr="Typo: In word 'badfsd'"><TYPO descr="Typo: In word 'badfsd'">badfsd</TYPO></TYPO> <TYPO descr="Typo: In word 'sdfsdf'"><TYPO descr="Typo: In word 'sdfsdf'">sdfsdf</TYPO></TYPO> <TYPO descr="Typo: In word 'asdfsdf'"><TYPO descr="Typo: In word 'asdfsdf'">asdfsdf</TYPO></TYPO>";
+
+

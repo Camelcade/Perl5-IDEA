@@ -36,7 +36,7 @@
      <p>Updates:
      <ul>
        <li>Built-in subs and variables usages are now highlighted and you may find usages for them</li>
-       <li>Spell-checking is now available for declarations, comments and string contents, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
+       <li>Spell checking is now available in Perl5 and POD files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -723,6 +723,7 @@
 
 
     <!--POD settings -->
+    <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
     <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
     <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
