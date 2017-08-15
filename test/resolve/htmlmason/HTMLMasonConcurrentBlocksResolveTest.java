@@ -16,12 +16,12 @@
 
 package resolve.htmlmason;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightCodeInsightFixtureTestCase {
+public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/htmlmason/concurrent_blocks";
   }

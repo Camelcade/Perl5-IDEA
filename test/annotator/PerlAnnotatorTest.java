@@ -16,7 +16,7 @@
 
 package annotator;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.idea.inspections.*;
 /**
  * Created by hurricup on 09.11.2016.
  */
-public class PerlAnnotatorTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlAnnotatorTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/annotator/perl";

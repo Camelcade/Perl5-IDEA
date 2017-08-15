@@ -16,7 +16,7 @@
 
 package oop;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 /**
  * Created by hurricup on 14.06.2016.
  */
-public class MethodsDetectionTest extends PerlLightCodeInsightFixtureTestCase {
+public class MethodsDetectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/oop/methods";

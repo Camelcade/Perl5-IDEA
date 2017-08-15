@@ -16,13 +16,13 @@
 
 package resolve.htmlmason;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
-public abstract class HTMLMasonVariableResolveTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class HTMLMasonVariableResolveTestCase extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return "mas";

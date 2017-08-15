@@ -16,9 +16,9 @@
 
 package lightElements;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public class PerlLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlLightElementsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/lightElements/perl";

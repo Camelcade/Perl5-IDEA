@@ -16,10 +16,10 @@
 
 package intellilang;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 
-public class PerlInjectLanguageActionTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlInjectLanguageActionTest extends PerlLightTestCase {
   private PerlSharedSettings mySharedSettings;
   private boolean myAutomaticInjections;
   private boolean myInjectionsWithInterpolation;

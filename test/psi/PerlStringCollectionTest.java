@@ -16,7 +16,7 @@
 
 package psi;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 /**
  * Created by hurricup on 24.05.2016.
  */
-public class PerlStringCollectionTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlStringCollectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/psi/stringCollection";

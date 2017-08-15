@@ -16,14 +16,14 @@
 
 package resolve.perl;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 
 /**
  * Created by hurricup on 02.04.2016.
  */
-public class PerlVariableTypesTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlVariableTypesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/variableTypes";

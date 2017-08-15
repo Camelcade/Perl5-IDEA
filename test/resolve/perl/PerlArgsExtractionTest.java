@@ -16,7 +16,7 @@
 
 package resolve.perl;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 /**
  * Created by hurricup on 30.04.2016.
  */
-public class PerlArgsExtractionTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlArgsExtractionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/sub_arguments";

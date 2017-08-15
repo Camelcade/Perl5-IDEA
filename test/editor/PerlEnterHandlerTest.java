@@ -16,9 +16,9 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public class PerlEnterHandlerTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlEnterHandlerTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/editor/perl";

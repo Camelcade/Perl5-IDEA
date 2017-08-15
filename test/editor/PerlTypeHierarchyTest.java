@@ -16,9 +16,9 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public class PerlTypeHierarchyTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlTypeHierarchyTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/typeHierarchy/perl";

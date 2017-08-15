@@ -16,12 +16,12 @@
 
 package formatter;
 
-import base.TemplateToolkitLightCodeInsightFixtureTestCase;
+import base.TemplateToolkitLightTestCase;
 
 /**
  * Created by hurricup on 11.07.2016.
  */
-public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightCodeInsightFixtureTestCase {
+public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightTestCase {
   TemplateToolkitTestSettings myTestSettings;
 
   @Override

@@ -16,11 +16,11 @@
 
 package rename;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.testFramework.UsefulTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class PerlRenameTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class PerlRenameTestCase extends PerlLightTestCase {
 
   protected void doTest() {
     doTest("NewName");

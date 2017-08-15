@@ -16,12 +16,12 @@
 
 package resolve.perl;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
 /**
  * Created by hurricup on 18.02.2016.
  */
-public class PerlLexicalVariableResolveTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlLexicalVariableResolveTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl/variables";

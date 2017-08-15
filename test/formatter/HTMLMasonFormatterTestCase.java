@@ -16,12 +16,12 @@
 
 package formatter;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
+public class HTMLMasonFormatterTestCase extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/htmlmason";

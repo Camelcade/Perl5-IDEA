@@ -110,7 +110,7 @@ import java.util.stream.Collectors;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public abstract class PerlLightCodeInsightFixtureTestCase extends LightCodeInsightFixtureTestCase {
+public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase {
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
   private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;

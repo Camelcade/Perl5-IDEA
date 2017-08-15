@@ -16,7 +16,7 @@
 
 package intellilang;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.lang.Language;
 import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.util.TextRange;
@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlHeredocInjectionTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class PerlHeredocInjectionTestCase extends PerlLightTestCase {
   @NotNull
   protected PerlHeredocElementImpl getHeredocUnderCursor() {
     return getElementAtCaretWithoutInjection(PerlHeredocElementImpl.class);

@@ -16,10 +16,10 @@
 
 package lightElements;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 
-public class MojoLightElementsTest extends PerlLightCodeInsightFixtureTestCase {
+public class MojoLightElementsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/lightElements/mojo";

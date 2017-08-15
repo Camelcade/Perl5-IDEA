@@ -16,7 +16,7 @@
 
 package markers;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.codeInsight.daemon.GutterMark;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Created by hurricup on 19.11.2016.
  */
-public class PerlLineMarkersTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlLineMarkersTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/linemarkers/perl";

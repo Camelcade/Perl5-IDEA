@@ -16,9 +16,9 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public class PerlUsagesHighlightingTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlUsagesHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/highlighting_usages/perl";

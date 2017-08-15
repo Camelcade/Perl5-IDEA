@@ -16,7 +16,7 @@
 
 package parser;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import categories.Performance;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
@@ -37,7 +37,7 @@ import org.junit.experimental.categories.Category;
  * Created by hurricup on 07.10.2016.
  */
 @Category(Performance.class)
-public class PerlUXPerformanceTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlUXPerformanceTest extends PerlLightTestCase {
   public void testEnterTyping() {
     initWithPerlTidy();
     myFixture.getEditor().getCaretModel().moveToLogicalPosition(new LogicalPosition(65, 0));

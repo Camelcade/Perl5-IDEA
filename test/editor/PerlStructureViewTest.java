@@ -16,9 +16,9 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public class PerlStructureViewTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlStructureViewTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/structure/perl";

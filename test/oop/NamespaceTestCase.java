@@ -16,7 +16,7 @@
 
 package oop;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.02.2016.
  */
-public abstract class NamespaceTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class NamespaceTestCase extends PerlLightTestCase {
   protected PerlNamespaceDefinitionMixin getNamespaceInFile(@NotNull String fileName, @NotNull String namespaceName) {
     myFixture.configureByFile(fileName);
     PsiFile file = myFixture.getFile();

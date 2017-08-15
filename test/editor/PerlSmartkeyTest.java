@@ -16,10 +16,10 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.testFramework.UsefulTestCase;
 
-public class PerlSmartkeyTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlSmartkeyTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/smartkey/perl";

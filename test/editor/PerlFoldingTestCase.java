@@ -16,7 +16,7 @@
 
 package editor;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.02.2016.
  */
-public class PerlFoldingTestCase extends PerlLightCodeInsightFixtureTestCase {
+public class PerlFoldingTestCase extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/folding";

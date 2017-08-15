@@ -16,9 +16,9 @@
 
 package formatter;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
-public abstract class PerlFormatterTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class PerlFormatterTestCase extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();

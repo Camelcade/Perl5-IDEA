@@ -16,13 +16,13 @@
 
 package editor;
 
-import base.TemplateToolkitLightCodeInsightFixtureTestCase;
+import base.TemplateToolkitLightTestCase;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 
 /**
  * Created by hurricup on 12.06.2016.
  */
-public class TemplateToolkitEditorTest extends TemplateToolkitLightCodeInsightFixtureTestCase {
+public class TemplateToolkitEditorTest extends TemplateToolkitLightTestCase {
 
   @Override
   protected String getTestDataPath() {

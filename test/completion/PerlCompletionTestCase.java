@@ -16,10 +16,10 @@
 
 package completion;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-public abstract class PerlCompletionTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class PerlCompletionTestCase extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();

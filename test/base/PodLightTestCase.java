@@ -18,7 +18,7 @@ package base;
 
 import com.perl5.lang.pod.filetypes.PodFileType;
 
-public abstract class PodLightTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class PodLightTestCase extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return PodFileType.EXTENSION;

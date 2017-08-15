@@ -16,12 +16,12 @@
 
 package annotator;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
 import com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection;
 import com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection;
 
-public class PerlQuickFixesTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlQuickFixesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/quickfixes/perl";

@@ -21,7 +21,7 @@ import formatter.TemplateToolkitTestSettings;
 /**
  * Created by hurricup on 12.06.2016.
  */
-public abstract class TemplateToolkitLightCodeInsightFixtureTestCase extends PerlLightCodeInsightFixtureTestCase {
+public abstract class TemplateToolkitLightTestCase extends PerlLightTestCase {
   private TemplateToolkitTestSettings myTemplateToolkitTestSettings;
 
   @Override

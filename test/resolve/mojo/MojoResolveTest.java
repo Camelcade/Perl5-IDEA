@@ -16,11 +16,11 @@
 
 package resolve.mojo;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 
 import static com.perl5.lang.mojolicious.filetypes.MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
 
-public class MojoResolveTest extends PerlLightCodeInsightFixtureTestCase {
+public class MojoResolveTest extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return MOJO_DEFAULT_EXTENSION;

@@ -16,7 +16,7 @@
 
 package packageProcessors;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 /**
  * Created by hurricup on 01.06.2016.
  */
-public class packageProcessorsTest extends PerlLightCodeInsightFixtureTestCase {
+public class packageProcessorsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/packageProcessors";

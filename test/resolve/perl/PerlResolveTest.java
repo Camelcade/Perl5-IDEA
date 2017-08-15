@@ -16,13 +16,13 @@
 
 package resolve.perl;
 
-import base.PerlLightCodeInsightFixtureTestCase;
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.internals.PerlVersion;
 
 /**
  * Created by hurricup on 09.11.2016.
  */
-public class PerlResolveTest extends PerlLightCodeInsightFixtureTestCase {
+public class PerlResolveTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/perl";
