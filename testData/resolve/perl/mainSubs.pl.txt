@@ -1,12 +1,14 @@
 PerlSubReference at (17,24); text in range: 'somesub' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 0 in mainSubs.pl
 
-PerlNamespaceReference at (43,43); text in range: '' => 0 results:
+PerlNamespaceReference at (43,43); text in range: '' => 1 results:
+	Implicit namespace: main
 
 PerlSubReference at (45,52); text in range: 'somesub' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 0 in mainSubs.pl
 
-PerlNamespaceReference at (56,60); text in range: 'main' => 0 results:
+PerlNamespaceReference at (56,60); text in range: 'main' => 1 results:
+	Implicit namespace: main
 
 PerlSubReference at (62,69); text in range: 'somesub' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 0 in mainSubs.pl

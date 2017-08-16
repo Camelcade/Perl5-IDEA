@@ -1,0 +1,23 @@
+
+
+CORE::bla 'blabla';
+$CORE::something;
+$CORE::var;
+@CORE::var;
+%CORE::var;
+*CORE::some;
+
+main::bla;
+$main::var;
+@main::var;
+%main::var;
+*main::some;
+
+opendir();
+
+UNIVERSAL::isa;
+$UNIVERSAL::var;
+@UNIVERSAL::var;
+%UNIVERSAL::var;
+*UNIVERSAL::some;
+

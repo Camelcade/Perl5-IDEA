@@ -35,7 +35,7 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-       <li>Built-in subs and variables usages are now highlighted and you may find usages for them</li>
+       <li>Built-in subs, namespaces and variables usages are now highlighted and you may find usages for them</li>
        <li>Spell checking is now available in Perl5 and POD files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
      </ul>
      </p>
@@ -176,6 +176,8 @@
 
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInSubsService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
+
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>

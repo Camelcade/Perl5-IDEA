@@ -1,4 +1,5 @@
-PerlNamespaceReference at (5,14); text in range: 'UNIVERSAL' => 0 results:
+PerlNamespaceReference at (5,14); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
 
 PerlVariableReference at (27,36); text in range: 'something' => 0 results:
 

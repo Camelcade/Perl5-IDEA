@@ -21,7 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,19 +42,22 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
 
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    String referenceText = getRangeInElement().substring(myElement.getText());
-    if (referenceText.isEmpty()) {
-      referenceText = PerlPackageUtil.MAIN_PACKAGE;
+    String packageName = getRangeInElement().substring(myElement.getText());
+    if (packageName.isEmpty()) {
+      packageName = PerlPackageUtil.MAIN_PACKAGE;
     }
 
     Project project = myElement.getProject();
-    List<ResolveResult> result = new ArrayList<>();
 
-    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
-      .getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(referenceText))) {
-      result.add(new PsiElementResolveResult(namespaceDefinition));
+    PerlBuiltInNamespaceDefinition builtInNamespaceDefinition =
+      PerlBuiltInNamespacesService.getInstance(project).getNamespaceDefinition(packageName);
+    if (builtInNamespaceDefinition != null) {
+      return PsiElementResolveResult.createResults(builtInNamespaceDefinition);
     }
 
-    return result.toArray(new ResolveResult[result.size()]);
+    List<PsiElement> result = new ArrayList<>();
+    result.addAll(PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(packageName)));
+
+    return PsiElementResolveResult.createResults(result);
   }
 }

@@ -28,6 +28,8 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+  public void testBuiltInNamespaces() {doTestResolve();}
+
   public void testSignaturesVariables() {doTestResolve();}
 
   public void testFancyMethodCall() {doTestResolve();}

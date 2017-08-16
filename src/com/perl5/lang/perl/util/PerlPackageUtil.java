@@ -106,8 +106,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static final String CORE_PACKAGE = "CORE";
   public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
 
-  private static final Set<String> INTERNAL_PACKAGES = new THashSet<>();
-
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
   private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<>();
 
@@ -115,11 +113,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
     BUILT_IN_ALL.addAll(BUILT_IN);
     BUILT_IN_ALL.addAll(BUILT_IN_PRAGMA);
     BUILT_IN_ALL.addAll(BUILT_IN_DEPRECATED);
-
-    INTERNAL_PACKAGES.add(SUPER_PACKAGE);
-    INTERNAL_PACKAGES.add(MAIN_PACKAGE);
-    INTERNAL_PACKAGES.add(UNIVERSAL_PACKAGE);
-    INTERNAL_PACKAGES.add(CORE_PACKAGE);
   }
 
   /**
@@ -149,10 +142,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return result
    */
   public static boolean isDeprecated(Project project, String packageName) {
-    if (INTERNAL_PACKAGES.contains(packageName)) {
-      return false;
-    }
-
     for (PerlNamespaceDefinitionElement definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
       if (definition.isDeprecated()) {
         return true;
@@ -191,6 +180,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
            canonicalName.substring(MAIN_PACKAGE_FULL.length()) : canonicalName;
   }
 
+  @NotNull
   public static String getCanonicalName(@NotNull String name) {
     String newName;
 

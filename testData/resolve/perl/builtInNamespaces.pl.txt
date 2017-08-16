@@ -1,0 +1,77 @@
+PerlNamespaceReference at (2,6); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlSubReference at (8,11); text in range: 'bla' => 0 results:
+
+PerlNamespaceReference at (23,27); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlVariableReference at (29,38); text in range: 'something' => 0 results:
+
+PerlNamespaceReference at (41,45); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlVariableReference at (47,50); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (53,57); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlVariableReference at (59,62); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (65,69); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlVariableReference at (71,74); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (77,81); text in range: 'CORE' => 1 results:
+	Implicit namespace: CORE
+
+PerlNamespaceReference at (90,94); text in range: 'main' => 1 results:
+	Implicit namespace: main
+
+PerlSubReference at (96,99); text in range: 'bla' => 0 results:
+
+PerlNamespaceReference at (102,106); text in range: 'main' => 1 results:
+	Implicit namespace: main
+
+PerlVariableReference at (108,111); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (114,118); text in range: 'main' => 1 results:
+	Implicit namespace: main
+
+PerlVariableReference at (120,123); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (126,130); text in range: 'main' => 1 results:
+	Implicit namespace: main
+
+PerlVariableReference at (132,135); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (138,142); text in range: 'main' => 1 results:
+	Implicit namespace: main
+
+PerlSubReference at (151,158); text in range: 'opendir' => 1 results:
+	Implicit sub: opendir($handle, $name)($handle, $name)
+
+PerlNamespaceReference at (163,172); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
+
+PerlSubReference at (174,177); text in range: 'isa' => 0 results:
+
+PerlNamespaceReference at (180,189); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
+
+PerlVariableReference at (191,194); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (197,206); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
+
+PerlVariableReference at (208,211); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (214,223); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
+
+PerlVariableReference at (225,228); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (231,240); text in range: 'UNIVERSAL' => 1 results:
+	Implicit namespace: UNIVERSAL
+
