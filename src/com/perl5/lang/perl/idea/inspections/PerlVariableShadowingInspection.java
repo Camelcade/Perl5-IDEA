@@ -22,8 +22,8 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.psi.references.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 
 /**

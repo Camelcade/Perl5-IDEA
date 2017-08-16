@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.psi.PsiManager;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
