@@ -67,7 +67,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 24.04.2015.
  */
-public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces {
+public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_SEPARATOR = "::";
   public static final String PACKAGE_DEREFERENCE = "->";
   public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
@@ -92,7 +92,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
   public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");
 
-  public static final Set<String> BUILT_IN_ALL = new THashSet<>();
+  public static final Set<String> CORE_PACKAGES_ALL = new THashSet<>();
 
   public static final String SUPER_PACKAGE = "SUPER";
   public static final String SUPER_PACKAGE_FULL = SUPER_PACKAGE + PACKAGE_SEPARATOR;
@@ -110,9 +110,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<>();
 
   static {
-    BUILT_IN_ALL.addAll(BUILT_IN);
-    BUILT_IN_ALL.addAll(BUILT_IN_PRAGMA);
-    BUILT_IN_ALL.addAll(BUILT_IN_DEPRECATED);
+    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES);
+    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES_PRAGMAS);
+    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES_DEPRECATED);
   }
 
   /**
@@ -122,7 +122,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return result
    */
   public static boolean isBuiltIn(String pacakgeName) {
-    return BUILT_IN_ALL.contains(getCanonicalPackageName(pacakgeName));
+    return CORE_PACKAGES_ALL.contains(getCanonicalPackageName(pacakgeName));
   }
 
   /**
@@ -132,7 +132,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return result
    */
   public static boolean isPragma(String pacakgeName) {
-    return BUILT_IN_PRAGMA.contains(getCanonicalPackageName(pacakgeName));
+    return CORE_PACKAGES_PRAGMAS.contains(getCanonicalPackageName(pacakgeName));
   }
 
   /**
@@ -142,29 +142,29 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
    * @return result
    */
   public static boolean isDeprecated(Project project, String packageName) {
-    for (PerlNamespaceDefinitionElement definition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+    for (PerlNamespaceDefinitionElement definition : getNamespaceDefinitions(project, packageName)) {
       if (definition.isDeprecated()) {
         return true;
       }
     }
 
-    return BUILT_IN_DEPRECATED.contains(getCanonicalPackageName(packageName));
+    return CORE_PACKAGES_DEPRECATED.contains(getCanonicalPackageName(packageName));
   }
 
   public static boolean isSUPER(String packageName) {
-    return PerlPackageUtil.SUPER_PACKAGE.equals(packageName);
+    return SUPER_PACKAGE.equals(packageName);
   }
 
   public static boolean isMain(String packageName) {
-    return PerlPackageUtil.MAIN_PACKAGE.equals(packageName);
+    return MAIN_PACKAGE.equals(packageName);
   }
 
   public static boolean isCORE(String packageName) {
-    return PerlPackageUtil.CORE_PACKAGE.equals(packageName);
+    return CORE_PACKAGE.equals(packageName);
   }
 
   public static boolean isUNIVERSAL(String packageName) {
-    return PerlPackageUtil.UNIVERSAL_PACKAGE.equals(packageName);
+    return UNIVERSAL_PACKAGE.equals(packageName);
   }
 
 
@@ -196,7 +196,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
     {
-      chunks[0] = PerlPackageUtil.MAIN_PACKAGE;
+      chunks[0] = MAIN_PACKAGE;
     }
 
     newName = StringUtils.join(chunks, PACKAGE_SEPARATOR);
@@ -239,7 +239,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
       return ((PerlFileImpl)file).getPackageName();
     }
     else {
-      return PerlPackageUtil.MAIN_PACKAGE;
+      return MAIN_PACKAGE;
     }
   }
 
@@ -407,13 +407,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
 
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtil.getRelativePath(file, newInnermostRoot);
-      String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+      String newPackageName = getPackageNameByPath(newRelativePath);
 
       VirtualFile oldInnermostRoot = PerlUtil.getFileClassRoot(project, oldPath);
 
       if (oldInnermostRoot != null) {
         String oldRelativePath = oldPath.substring(oldInnermostRoot.getPath().length());
-        String oldPackageName = PerlPackageUtil.getPackageNameByPath(oldRelativePath);
+        String oldPackageName = getPackageNameByPath(oldRelativePath);
 
         if (!oldPackageName.equals(newPackageName)) {
           PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
@@ -478,7 +478,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
               VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(project, newPackagePath);
               if (newInnermostRoot != null) {
                 String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
-                String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+                String newPackageName = getPackageNameByPath(newRelativePath);
 
                 PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
               }
@@ -494,7 +494,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
       element,
       (file, classRoot) -> {
         String relativePath = VfsUtil.getRelativePath(file, classRoot);
-        String packageName = PerlPackageUtil.getPackageNameByPath(relativePath);
+        String packageName = getPackageNameByPath(relativePath);
         return processor.process(packageName);
       },
       PerlFileTypePackage.INSTANCE)
@@ -639,7 +639,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   @Nullable
   public static PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
-    return resolveRelativePathToPsi(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+    return resolveRelativePathToPsi(psiFile, getPackagePathByName(canonicalPackageName));
   }
 
   /**
@@ -652,7 +652,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlBuiltInNamespaces 
   @Nullable
   public static VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
-    return resolveRelativePathToVirtualFile(psiFile, PerlPackageUtil.getPackagePathByName(canonicalPackageName));
+    return resolveRelativePathToVirtualFile(psiFile, getPackagePathByName(canonicalPackageName));
   }
 
   /**

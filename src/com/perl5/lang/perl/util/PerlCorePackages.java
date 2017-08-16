@@ -24,9 +24,9 @@ import java.util.Set;
 /**
  * Created by hurricup on 26.04.2015.
  */
-// @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprication control
-public interface PerlBuiltInNamespaces {
-  Set<String> BUILT_IN = new THashSet<>(Arrays.asList(
+// @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprecation control
+public interface PerlCorePackages {
+  Set<String> CORE_PACKAGES = new THashSet<>(Arrays.asList(
     "AnyDBM_File",
     "App::Prove",
     "App::Prove::State",
@@ -448,7 +448,7 @@ public interface PerlBuiltInNamespaces {
     PerlPackageUtil.CORE_PACKAGE
   ));
 
-  public static final Set<String> BUILT_IN_PRAGMA = new THashSet<>(Arrays.asList(
+  Set<String> CORE_PACKAGES_PRAGMAS = new THashSet<>(Arrays.asList(
     "attributes",
     "autodie",
     "autouse",
@@ -490,7 +490,7 @@ public interface PerlBuiltInNamespaces {
     "warnings::register"
   ));
 
-  public static final Set<String> BUILT_IN_DEPRECATED = new THashSet<>(Arrays.asList(
+  Set<String> CORE_PACKAGES_DEPRECATED = new THashSet<>(Arrays.asList(
     "Locale::Maketext::Guts",
     "Locale::Maketext::GutsLoader",
     "Module::Build::ModuleInfo",

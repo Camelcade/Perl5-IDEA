@@ -78,7 +78,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public boolean isPragma() {
-    return PerlPackageUtil.BUILT_IN_PRAGMA.contains(getCanonicalName());
+    return PerlPackageUtil.CORE_PACKAGES_PRAGMAS.contains(getCanonicalName());
   }
 
   @Override

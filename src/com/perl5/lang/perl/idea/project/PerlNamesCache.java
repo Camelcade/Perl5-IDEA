@@ -52,7 +52,7 @@ public class PerlNamesCache implements ProjectComponent {
         KNOWN_SUBS = newSet;
 
         newSet = new THashSet<>();
-        newSet.addAll(PerlPackageUtil.BUILT_IN_ALL);
+        newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
         newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
         KNOWN_PACKAGES = newSet;
       }
