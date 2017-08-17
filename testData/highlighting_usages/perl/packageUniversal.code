@@ -1,0 +1,6 @@
+UNIVERSAL::isa;
+$UNIVERSAL::var;
+@UNIVERSAL::var;
+%UNIVERSAL::var;
+*UNI<caret>VERSAL::some;
+

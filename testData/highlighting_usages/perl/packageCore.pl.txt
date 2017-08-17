@@ -1,0 +1,6 @@
+(11,15) - 'CORE': READ
+(32,36) - 'CORE': READ
+(50,54) - 'CORE': READ
+(62,66) - 'CORE': READ
+(74,78) - 'CORE': READ
+(86,90) - 'CORE': READ

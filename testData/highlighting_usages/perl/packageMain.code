@@ -1,0 +1,5 @@
+main::bla;
+$main::var;
+@main::var;
+%main::var;
+*m<caret>ain::some;

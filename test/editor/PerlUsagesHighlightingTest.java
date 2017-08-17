@@ -24,11 +24,21 @@ public class PerlUsagesHighlightingTest extends PerlLightTestCase {
     return "testData/highlighting_usages/perl";
   }
 
-  public void testBuiltInScalar() {doTestUsagesHighlighting();}
+  public void testBuiltInSubs() {doTest();}
 
-  public void testBuiltInArray() {doTestUsagesHighlighting();}
+  public void testPackageCore() {doTest();}
 
-  public void testBuiltInHash() {doTestUsagesHighlighting();}
+  public void testPackageUniversal() {doTest();}
 
-  public void testHasModification() {doTestUsagesHighlighting();}
+  public void testPackageMain() {doTest();}
+
+  public void testBuiltInScalar() {doTest();}
+
+  public void testBuiltInArray() {doTest();}
+
+  public void testBuiltInHash() {doTest();}
+
+  public void testHasModification() {doTest();}
+
+  private void doTest() {doTestUsagesHighlighting();}
 }

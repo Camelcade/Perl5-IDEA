@@ -1,0 +1,7 @@
+CORE::say;
+CORE::bla 'blabla';
+$CORE::something;
+$CORE::var;
+@CORE::var;
+%CORE::var;
+*C<caret>ORE::some;
