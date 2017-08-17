@@ -1,0 +1,15 @@
+PerlSubReference at (127,132); text in range: 'shift' => 1 results:
+	Implicit sub: shift()
+
+PerlVariableReference at (140,144); text in range: 'self' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 119 in properSelfType.pl
+
+PerlSubReference at (146,156); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Blo::somemethod at 73 in properSelfType.pl
+
+PerlVariableReference at (189,193); text in range: 'self' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 119 in properSelfType.pl
+
+PerlSubReference at (195,205); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@Foo::Blo::somemethod at 73 in properSelfType.pl
+

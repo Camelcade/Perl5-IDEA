@@ -27,7 +27,6 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -114,19 +113,15 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       PerlVariableNameElement variableNameElement = getVariableNameElement();
 
       if (variableNameElement != null) {
-        if (isSelf()) {
-          PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(this, PerlSelfHinter.class);
-          if (selfHinter != null) {
-            return selfHinter.getSelfNamespace();
-          }
-          return PerlPackageUtil.getContextPackageName(this);
-        }
-
         // find lexicaly visible declaration and check type
         final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
         if (declarationWrapper != null) {
-          if (declarationWrapper.isInvocantDeclaration()) {
-            return PerlPackageUtil.getContextPackageName(this);
+          if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
+            PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(declarationWrapper, PerlSelfHinter.class);
+            if (selfHinter != null) {
+              return selfHinter.getSelfNamespace();
+            }
+            return PerlPackageUtil.getContextPackageName(declarationWrapper);
           }
 
           // check explicit type in declaration
@@ -409,11 +404,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   public int getLineNumber() {
     Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(getContainingFile());
     return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-  }
-
-  @Override
-  public boolean isSelf() {
-    return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
   }
 
   @Override

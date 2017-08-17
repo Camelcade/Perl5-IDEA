@@ -28,6 +28,8 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+  public void testProperSelfType() {doTestResolve();}
+
   public void testCoreGlobal() {doTestResolve();}
 
   public void testBuiltInNamespaces() {doTestResolve();}

@@ -45,6 +45,7 @@
         <li>Built-in array/hash elements and slices are now properly colored</li>
         <li>Plugin does not add empty <code>&lt;perl/&gt;</code> section to the iml file if perl roots were not configured</li>
         <li>Mark Perl5 root action is unavailable if Perl5 support is not configured, unmark still available</li>
+        <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a>.
       </ul>
      </p>
     ]]>

@@ -1,0 +1,20 @@
+package Foo::Bla;
+
+#@method
+sub somemethod;
+
+package Foo::Blo;
+
+#@method
+sub somemethod;
+
+
+sub someothermethod{
+    my $self = shift;
+
+    $self->somemethod();
+
+    package Foo::Bla;
+
+    $self->somemethod();
+}

@@ -24,7 +24,6 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -150,11 +149,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     }
     Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(file);
     return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-  }
-
-  @Override
-  public boolean isSelf() {
-    return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
   }
 
   @Override

@@ -87,13 +87,6 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlP
   String getName();
 
   /**
-   * Checks if variable is configured $self
-   *
-   * @return true of false
-   */
-  boolean isSelf();
-
-  /**
    * Checks if this occurance is declaration
    *
    * @return true if it's declaration

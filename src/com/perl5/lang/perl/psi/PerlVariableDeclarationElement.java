@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
@@ -90,6 +91,14 @@ public interface PerlVariableDeclarationElement
    */
   boolean isInvocantDeclaration();
 
+  /**
+   * Checks if variable is configured $self
+   *
+   * @return true of false
+   */
+  default boolean isSelf() {
+    return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
+  }
 
   /**
    * Returns local variable annotations if any
