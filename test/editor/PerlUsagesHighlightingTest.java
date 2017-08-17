@@ -28,6 +28,8 @@ public class PerlUsagesHighlightingTest extends PerlLightTestCase {
 
   public void testPackageCore() {doTest();}
 
+  public void testPackageCoreGlobal() {doTest();}
+
   public void testPackageUniversal() {doTest();}
 
   public void testPackageMain() {doTest();}

@@ -105,6 +105,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   public static final String CORE_PACKAGE = "CORE";
   public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
+  public static final String CORE_GLOBAL_PACKAGE = CORE_PACKAGE_FULL + "GLOBAL";
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
   private static final Map<String, String> myFilePathsToPackageNameMap = new ConcurrentHashMap<>();

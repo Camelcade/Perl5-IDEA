@@ -1,0 +1,34 @@
+PerlNamespaceReference at (0,12); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlSubReference at (14,17); text in range: 'say' => 1 results:
+	Implicit sub: say()
+
+PerlNamespaceReference at (19,31); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlSubReference at (33,36); text in range: 'bla' => 0 results:
+
+PerlNamespaceReference at (48,60); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlVariableReference at (62,71); text in range: 'something' => 0 results:
+
+PerlNamespaceReference at (74,86); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlVariableReference at (88,91); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (94,106); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlVariableReference at (108,111); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (114,126); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+
+PerlVariableReference at (128,131); text in range: 'var' => 0 results:
+
+PerlNamespaceReference at (134,146); text in range: 'CORE::GLOBAL' => 1 results:
+	Implicit namespace: CORE::GLOBAL
+

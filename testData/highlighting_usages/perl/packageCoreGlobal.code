@@ -1,0 +1,7 @@
+CORE::GLOBAL::say;
+CORE::GLOBAL::bla 'blabla';
+$CORE::GLOBAL::something;
+$CORE::GLOBAL::var;
+@CORE::GLOBAL::var;
+%CORE::GLOBAL::var;
+*CORE::G<caret>LOBAL::some;

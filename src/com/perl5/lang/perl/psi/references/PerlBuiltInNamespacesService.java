@@ -36,6 +36,7 @@ public class PerlBuiltInNamespacesService {
     PsiManager psiManager = PsiManager.getInstance(project);
     myNamespacesMap.put(MAIN_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, MAIN_PACKAGE));
     myNamespacesMap.put(CORE_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_PACKAGE));
+    myNamespacesMap.put(CORE_GLOBAL_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_PACKAGE));
     myNamespacesMap.put(UNIVERSAL_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_PACKAGE));
   }
 
