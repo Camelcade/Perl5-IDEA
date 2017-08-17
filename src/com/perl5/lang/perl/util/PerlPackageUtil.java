@@ -72,6 +72,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_DEREFERENCE = "->";
   public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
 
+  public static final String PACKAGE_ANY = "*";
+
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
   public static final String PACKAGE_MOOSE = "Moose";

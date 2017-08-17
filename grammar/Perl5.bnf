@@ -488,7 +488,8 @@ limitations under the License.
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
-    implements("annotation_returns|annotation_type")="com.perl5.lang.perl.psi.PerlAnnotationWithType"
+    implements("annotation_returns")="com.perl5.lang.perl.psi.PerlAnnotationReturns"
+    implements("annotation_type")="com.perl5.lang.perl.psi.PerlAnnotationWithType"
     implements("annotation_.*")="com.perl5.lang.perl.psi.PerlAnnotation"
     mixin("annotation_inject")="com.perl5.lang.perl.psi.mixins.PerlAnnotationInjectMixin"
  }
@@ -1134,7 +1135,7 @@ annotation_abstract ::= '#@abstract' {pin=1}
 annotation_deprecated ::= '#@deprecated' {pin=1}
 annotation_method ::=  '#@method' {pin=1}
 annotation_override ::=  '#@override' {pin=1}
-annotation_returns ::=  '#@returns' any_package {pin=1}
+annotation_returns ::=  '#@returns' ('*' | any_package){pin=1}
 annotation_type ::=  '#@type' any_package {pin=1}
 annotation_inject ::=  '#@inject' string_bare {pin=1}
 annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -92,7 +93,7 @@ public class PerlSubAnnotations {
   }
 
   public void setReturns(String returns) {
-    this.myReturns = returns;
+    myReturns = returns;
   }
 
   public PerlReturnType getReturnType() {
@@ -175,11 +176,11 @@ public class PerlSubAnnotations {
       else if (annotation instanceof PsiPerlAnnotationOverride) {
         myAnnotations.setIsOverride();
       }
-      else if (annotation instanceof PsiPerlAnnotationReturns) // returns
+      else if (annotation instanceof PerlAnnotationReturns) // returns
       {
-        PsiElement possibleNamespace = annotation.getLastChild();
-        if (possibleNamespace instanceof PerlNamespaceElement) {
-          myAnnotations.setReturns(((PerlNamespaceElement)possibleNamespace).getCanonicalName());
+        String returnClass = ((PerlAnnotationReturns)annotation).getReturnClass();
+        if (StringUtil.isNotEmpty(returnClass)) {
+          myAnnotations.setReturns(returnClass);
           myAnnotations.setReturnType(PerlReturnType.REF);
           // todo implement brackets and braces
         }

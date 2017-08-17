@@ -35,6 +35,8 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     return "testData/completion/perl";
   }
 
+  public void testWildCardReturns() {doTestCompletion();}
+
   public void testVariableArrayInArray() {doTestCompletion();}
 
   public void testVariableArrayInScalar() {doTestCompletion();}

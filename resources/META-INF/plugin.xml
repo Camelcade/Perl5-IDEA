@@ -37,6 +37,7 @@
      <ul>
        <li>Built-in subs, namespaces and variables usages are now highlighted and you may find usages for them</li>
        <li>Spell checking is now available in Perl5 and POD files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
+       <li>You may now annotate methods with <code>#@returns *</code>, meaning that method returns <code>$self</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/247">#247</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -45,7 +46,7 @@
         <li>Built-in array/hash elements and slices are now properly colored</li>
         <li>Plugin does not add empty <code>&lt;perl/&gt;</code> section to the iml file if perl roots were not configured</li>
         <li>Mark Perl5 root action is unavailable if Perl5 support is not configured, unmark still available</li>
-        <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a>.
+        <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a></li>
       </ul>
      </p>
     ]]>

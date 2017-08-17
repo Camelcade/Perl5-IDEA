@@ -1,0 +1,23 @@
+use strict;
+use warnings FATAL => 'all';
+
+package Parent::Package;
+
+#@returns *
+#@method
+sub othermethod{}
+
+sub thirdmethod{}
+
+package Child::Package;
+use parent qw/Parent::Package/;
+
+sub thirdmethod{}
+#@method
+sub forthmethod{}
+
+
+package main;
+
+Child::Package->othermethod-><caret>
+

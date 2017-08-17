@@ -25,6 +25,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
+
 
 public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
 
@@ -95,7 +97,12 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
   @Nullable
   default String getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
     PerlSubAnnotations subAnnotations = getAnnotations();
-    return subAnnotations != null ? subAnnotations.getReturns() : null;
+    if (subAnnotations == null) {
+      return null;
+    }
+
+    String returns = subAnnotations.getReturns();
+    return PACKAGE_ANY.equals(returns) ? contextPackage : returns;
   }
 
   default boolean isDeprecated() {

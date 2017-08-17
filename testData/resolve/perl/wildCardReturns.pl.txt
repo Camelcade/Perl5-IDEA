@@ -1,0 +1,51 @@
+PerlNamespaceFileReference at (4,10); text in range: 'strict' => 0 results:
+
+PerlNamespaceFileReference at (16,24); text in range: 'warnings' => 0 results:
+
+PerlNamespaceReference at (87,102); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 42 in wildCardReturns.pl
+
+PerlNamespaceFileReference at (189,195); text in range: 'parent' => 0 results:
+
+PerlNamespaceReference at (199,214); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 42 in wildCardReturns.pl
+
+PerlNamespaceReference at (237,251); text in range: 'Child::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Child::Package at 161 in wildCardReturns.pl
+
+PerlNamespaceReference at (326,341); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 42 in wildCardReturns.pl
+
+PerlSubReference at (343,353); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::somemethod at 103 in wildCardReturns.pl
+
+PerlSubReference at (355,366); text in range: 'othermethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::othermethod at 142 in wildCardReturns.pl
+
+PerlNamespaceReference at (368,383); text in range: 'Parent::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Parent::Package at 42 in wildCardReturns.pl
+
+PerlSubReference at (385,396); text in range: 'othermethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::othermethod at 142 in wildCardReturns.pl
+
+PerlSubReference at (398,408); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Parent::Package::somemethod at 103 in wildCardReturns.pl
+
+PerlNamespaceReference at (410,424); text in range: 'Child::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Child::Package at 161 in wildCardReturns.pl
+
+PerlSubReference at (426,436); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::somemethod at 252 in wildCardReturns.pl
+
+PerlSubReference at (438,449); text in range: 'othermethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::othermethod at 292 in wildCardReturns.pl
+
+PerlNamespaceReference at (451,465); text in range: 'Child::Package' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Child::Package at 161 in wildCardReturns.pl
+
+PerlSubReference at (467,478); text in range: 'othermethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::othermethod at 292 in wildCardReturns.pl
+
+PerlSubReference at (480,490); text in range: 'somemethod' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Child::Package::somemethod at 252 in wildCardReturns.pl
+
