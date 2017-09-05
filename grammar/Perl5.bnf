@@ -299,6 +299,9 @@ limitations under the License.
     LEFT_ANGLE='LEFT_ANGLE'
     RIGHT_ANGLE='RIGHT_ANGLE'
 
+    TYPE_ARRAYREF="ArrayRef"
+    TYPE_HASHREF="HashRef"
+
     LEFT_BRACKET='['
     RIGHT_BRACKET=']'
 
@@ -1135,8 +1138,17 @@ annotation_abstract ::= '#@abstract' {pin=1}
 annotation_deprecated ::= '#@deprecated' {pin=1}
 annotation_method ::=  '#@method' {pin=1}
 annotation_override ::=  '#@override' {pin=1}
-annotation_returns ::=  '#@returns' ('*' | any_package){pin=1}
-annotation_type ::=  '#@type' any_package {pin=1}
+annotation_returns ::=  '#@returns' annotation_type_param {pin=1}
+private annotation_type_param ::=
+  '*' |
+  arrayref_type |
+  hashref_type |
+  any_package
+
+arrayref_type ::= 'ArrayRef' '[' annotation_type_param ']' {pin=1}
+hashref_type ::= 'HashRef' '[' annotation_type_param ']' {pin=1}
+
+annotation_type ::=  '#@type' annotation_type_param {pin=1}
 annotation_inject ::=  '#@inject' string_bare {pin=1}
 annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 

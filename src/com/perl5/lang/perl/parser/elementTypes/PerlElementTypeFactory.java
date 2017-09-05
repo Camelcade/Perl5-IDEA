@@ -1790,6 +1790,26 @@ public class PerlElementTypeFactory {
       };
     }
 
+    if (name.equals("ARRAYREF_TYPE")) {
+      return new PerlElementTypeEx(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiPerlArrayrefTypeImpl(node);
+        }
+      };
+    }
+
+    if (name.equals("HASHREF_TYPE")) {
+      return new PerlElementTypeEx(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiPerlHashrefTypeImpl(node);
+        }
+      };
+    }
+
 /*
                 if (name.equals("CUSTOM_CHAR_CLASS"))
 		{

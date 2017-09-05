@@ -1,4 +1,6 @@
+Lookups: ArrayRef; Text: ArrayRef; Tail: []; Type: null; Icon: null; Type Icon: null
 Lookups: ClassAccessor; Text: ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: HashRef; Text: HashRef; Tail: []; Type: null; Icon: null; Type Icon: null
 Lookups: Library::Exception2; Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
 Lookups: Library::Exception; Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
 Lookups: LibraryException3; Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null

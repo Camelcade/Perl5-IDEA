@@ -19,9 +19,11 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,8 +45,14 @@ public class PerlPackageCompletionProvider extends CompletionProvider<Completion
     {
       PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
     }
-    else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns
+    else if (NAMESPACE_IN_ANNOTATION_PATTERN.accepts(element)) // #@returns / #@type
     {
+      result.addElement(LookupElementBuilder.create("ArrayRef")
+                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+                          .withTailText("[]"));
+      result.addElement(LookupElementBuilder.create("HashRef")
+                          .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
+                          .withTailText("[]"));
       PerlPackageCompletionUtil.fillWithAllPackageNames(element, result);
     }
     else if (NAMESPACE_IN_USE_PATTERN.accepts(element)) // use/no/require
