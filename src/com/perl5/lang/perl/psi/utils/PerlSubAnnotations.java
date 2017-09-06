@@ -176,9 +176,9 @@ public class PerlSubAnnotations {
       else if (annotation instanceof PsiPerlAnnotationOverride) {
         myAnnotations.setIsOverride();
       }
-      else if (annotation instanceof PerlAnnotationReturns) // returns
+      else if (annotation instanceof PsiPerlAnnotationReturns) // returns
       {
-        String returnClass = ((PerlAnnotationReturns)annotation).getReturnClass();
+        String returnClass = ((PsiPerlAnnotationReturns)annotation).getReturnClass();
         if (StringUtil.isNotEmpty(returnClass)) {
           myAnnotations.setReturns(returnClass);
           myAnnotations.setReturnType(PerlReturnType.REF);

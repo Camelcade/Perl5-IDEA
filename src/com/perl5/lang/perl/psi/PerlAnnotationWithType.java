@@ -18,7 +18,11 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
 
 /**
  * Created by hurricup on 14.08.2016.
@@ -33,5 +37,23 @@ public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
   @Nullable
   default PerlNamespaceElement getType() {
     return PsiTreeUtil.findChildOfType(this, PerlNamespaceElement.class);
+  }
+
+  @Nullable
+  default String getReturnClass() {
+    PerlNamespaceElement namespaceElement = getType();
+    if (namespaceElement != null) {
+      return namespaceElement.getCanonicalName();
+    }
+
+    PsiElement run = getFirstChild();
+    while (run != null) {
+      if (PsiUtilCore.getElementType(run) == OPERATOR_MUL) {
+        return PACKAGE_ANY;
+      }
+      run = run.getNextSibling();
+    }
+
+    return null;
   }
 }

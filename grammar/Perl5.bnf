@@ -491,8 +491,7 @@ limitations under the License.
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
-    implements("annotation_returns")="com.perl5.lang.perl.psi.PerlAnnotationReturns"
-    implements("annotation_type")="com.perl5.lang.perl.psi.PerlAnnotationWithType"
+    implements("annotation_type|annotation_returns")="com.perl5.lang.perl.psi.PerlAnnotationWithType"
     implements("annotation_.*")="com.perl5.lang.perl.psi.PerlAnnotation"
     mixin("annotation_inject")="com.perl5.lang.perl.psi.mixins.PerlAnnotationInjectMixin"
  }
