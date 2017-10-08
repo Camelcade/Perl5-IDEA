@@ -67,8 +67,8 @@
       <with attribute="implementationClass"
             implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
     </extensionPoint>
-    <extensionPoint name="parserExtension"
-                    interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
+    <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
+    <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
   </extensionPoints>
@@ -187,6 +187,7 @@
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
+    <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
