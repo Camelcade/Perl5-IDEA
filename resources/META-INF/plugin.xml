@@ -139,6 +139,9 @@
     <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableExtension"/>
+
+    <fileTypeProvider implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeProvider"/>
+    <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

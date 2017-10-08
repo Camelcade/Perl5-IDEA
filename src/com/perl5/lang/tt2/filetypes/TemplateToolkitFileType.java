@@ -19,15 +19,12 @@ package com.perl5.lang.tt2.filetypes;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
 import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectLocator;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.newvfs.impl.StubVirtualFile;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitHighlighter;
-import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,21 +70,6 @@ public class TemplateToolkitFileType extends PerlPluginBaseFileType implements F
 
   @Override
   public boolean isMyFileType(@NotNull VirtualFile virtualFile) {
-    String extension = virtualFile.getExtension();
-    if (TemplateToolkitFileTypeFactory.DEFAULT_EXTENSIONS.contains(extension)) {
-      return true;
-    }
-
-    if (virtualFile instanceof StubVirtualFile) {
-      return false;
-    }
-
-    Project project = ProjectLocator.getInstance().guessProjectForFile(virtualFile);
-    if (project != null) {
-      TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
-      return settings.isVirtualFileNameMatches(virtualFile) && settings.isVirtualFileUnderRoot(virtualFile);
-    }
-
-    return false;
+    return PerlFileTypeService.getFileType(virtualFile) == INSTANCE;
   }
 }

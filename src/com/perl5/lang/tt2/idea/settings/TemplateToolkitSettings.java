@@ -33,6 +33,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
@@ -79,6 +80,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   public void settingsUpdated() {
     createLazyObjects();
+    PerlFileTypeService.clear();
     final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
     if (fileTypeManager instanceof FileTypeManagerImpl) {
       ApplicationManager.getApplication().runWriteAction(

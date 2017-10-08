@@ -24,6 +24,7 @@ import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,7 +102,10 @@ public class PerlFileTypeService {
 
     @Nullable
     private FileType compute(@Nullable VirtualFile virtualFile) {
-      return virtualFile == null || !VfsUtil.isAncestor(myRoot, virtualFile, false) ? null : myFunction.apply(virtualFile);
+      VirtualFile fileForAncestryCheck = virtualFile instanceof FakeVirtualFile ? virtualFile.getParent() : virtualFile;
+      return virtualFile == null || fileForAncestryCheck == null ||
+             !fileForAncestryCheck.isInLocalFileSystem() ||
+             !VfsUtil.isAncestor(myRoot, fileForAncestryCheck, false) ? null : myFunction.apply(virtualFile);
     }
 
     public boolean isValid() {
