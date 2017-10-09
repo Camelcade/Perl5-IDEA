@@ -16,13 +16,13 @@
 
 package com.perl5.lang.tt2.idea.settings;
 
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl;
+import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -30,10 +30,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.PsiManager;
-import com.intellij.util.FileContentUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
@@ -80,18 +78,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   public void settingsUpdated() {
     createLazyObjects();
-    PerlFileTypeService.clear();
-    final FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-    if (fileTypeManager instanceof FileTypeManagerImpl) {
-      ApplicationManager.getApplication().runWriteAction(
-        () -> {
-          ((FileTypeManagerImpl)fileTypeManager).fireBeforeFileTypesChanged();
-          ((FileTypeManagerImpl)fileTypeManager).fireFileTypesChanged();
-        }
-
-      );
-    }
-    FileContentUtil.reparseOpenedFiles();
+    WriteAction.run(() -> FileTypeManagerEx.getInstanceEx().fireFileTypesChanged());
   }
 
   protected void setProject(Project project) {

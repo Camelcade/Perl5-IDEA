@@ -16,23 +16,24 @@
 
 package com.perl5.lang.tt2.filetypes;
 
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeProvider;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeService.RootDescriptor;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class TemplateToolkitFileTypeProvider implements PerlFileTypeProvider {
   @Override
-  public void addDescriptors(@NotNull Project project, Consumer<RootDescriptor> descriptorConsumer) {
+  public void addRoots(@NotNull Project project, BiConsumer<VirtualFile, Function<VirtualFile, FileType>> rootConsumer) {
     TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
     for (VirtualFile root : settings.getTemplateRoots()) {
-      descriptorConsumer.accept(RootDescriptor.create(
+      rootConsumer.accept(
         root,
-        virtualFile -> settings.isVirtualFileNameMatches(virtualFile) ? TemplateToolkitFileType.INSTANCE : null)
+        virtualFile -> settings.isVirtualFileNameMatches(virtualFile) ? TemplateToolkitFileType.INSTANCE : null
       );
     }
   }

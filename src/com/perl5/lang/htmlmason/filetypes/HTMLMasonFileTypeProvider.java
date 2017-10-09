@@ -16,30 +16,31 @@
 
 package com.perl5.lang.htmlmason.filetypes;
 
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeProvider;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class HTMLMasonFileTypeProvider implements PerlFileTypeProvider {
 
   @Override
-  public void addDescriptors(@NotNull Project project, Consumer<PerlFileTypeService.RootDescriptor> descriptorConsumer) {
+  public void addRoots(@NotNull Project project, BiConsumer<VirtualFile, Function<VirtualFile, FileType>> rootConsumer) {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
     for (VirtualFile root : settings.getComponentsRoots()) {
-      descriptorConsumer.accept(PerlFileTypeService.RootDescriptor.create(root, virtualFile -> {
+      rootConsumer.accept(root, virtualFile -> {
         String virtualFileName = virtualFile.getName();
         if (StringUtil.equals(settings.autoHandlerName, virtualFileName) ||
             StringUtil.equals(settings.defaultHandlerName, virtualFileName)) {
           return HTMLMasonFileType.INSTANCE;
         }
         return null;
-      }));
+      });
     }
   }
 }

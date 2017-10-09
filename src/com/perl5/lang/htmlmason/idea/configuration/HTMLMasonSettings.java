@@ -31,7 +31,6 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import gnu.trove.THashMap;
@@ -151,7 +150,6 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   @Override
   public void settingsUpdated() {
     super.settingsUpdated();
-    PerlFileTypeService.clear();
     myOpenCloseMap = null;
     initCustomTagsMapProvider();
   }

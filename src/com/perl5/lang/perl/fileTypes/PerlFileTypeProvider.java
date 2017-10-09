@@ -17,17 +17,21 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.openapi.extensions.ExtensionPointName;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeService.RootDescriptor;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public interface PerlFileTypeProvider {
   ExtensionPointName<PerlFileTypeProvider> EP_NAME = ExtensionPointName.create("com.perl5.fileTypeProvider");
 
   /**
-   * Should pass descriptors created by {@link RootDescriptor#create} for each root with custom types
+   * Should pass root and type calculation function for each root with custom types
+   * @param project project for settings
+   * @param rootConsumer function should return a custom fileType or null
    */
-  void addDescriptors(@NotNull Project project, Consumer<RootDescriptor> descriptorConsumer);
+  void addRoots(@NotNull Project project, BiConsumer<VirtualFile, Function<VirtualFile, FileType>> rootConsumer);
 }

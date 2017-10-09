@@ -16,6 +16,8 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
+import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
@@ -139,73 +141,11 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     mySettings.settingsUpdated();
 
     if (!extDiff.isEmpty() || forceReparse) {
-      reparseComponents(extDiff, forceReparse);
+      // fixme move this logic to the settings
+      WriteAction.run(() -> FileTypeManagerEx.getInstanceEx().fireFileTypesChanged());
     }
   }
 
-  protected void reparseComponents(Set<String> extDiff, final boolean forceAll) {
-    /*
-
-    boolean extChanged = !extDiff.isEmpty();
-
-    if (forceAll) {
-      extDiff.addAll(mySettings.substitutedExtensions);
-    }
-
-
-    // collecting matchers
-    final List<FileNameMatcher> matchers = new ArrayList<>();
-    FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-    for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
-      if (fileType instanceof LanguageFileType) {
-        for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
-          if (extDiff.contains(matcher.getPresentableString())) {
-            matchers.add(matcher);
-          }
-        }
-      }
-    }
-
-    final String autohandlerName = mySettings.autoHandlerName;
-    final String defaulthandlerName = mySettings.defaultHandlerName;
-
-    // processing files
-    final PushedFilePropertiesUpdater pushedFilePropertiesUpdater = PushedFilePropertiesUpdater.getInstance(myProject);
-    VirtualFile projectRoot = myProject.getBaseDir();
-    if (projectRoot != null) {
-      for (String root : rootsDiff) {
-        VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
-        if (componentRoot != null) {
-          VfsUtil.processFilesRecursively(componentRoot, virtualFile -> {
-            if (!virtualFile.isDirectory()) {
-              if (StringUtil.equals(autohandlerName, virtualFile.getName()) ||
-                  StringUtil.equals(defaulthandlerName, virtualFile.getName())) {
-                pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
-              }
-              else {
-                for (FileNameMatcher matcher : matchers) {
-                  if (matcher.accept(virtualFile.getName())) {
-                    pushedFilePropertiesUpdater.filePropertiesChanged(virtualFile);
-                    break;
-                  }
-                }
-              }
-            }
-            return true;
-          });
-        }
-      }
-    }
-
-    FileContentUtil.reparseOpenedFiles();
-
-    // taken from 16 version of platform, dumbmode reindexing
-    DumbModeTask dumbTask = FileBasedIndexProjectHandler.createChangedFilesIndexingTask(myProject);
-    if (dumbTask != null) {
-      DumbService.getInstance(myProject).queueTask(dumbTask);
-    }
-    */
-  }
 
   protected Set<String> getDiff(List<String> first, List<String> second) {
     Set<String> diff = new THashSet<>(first);
