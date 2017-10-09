@@ -36,7 +36,9 @@ public class HTMLMasonFileTypeProvider implements PerlFileTypeProvider {
       rootConsumer.accept(root, virtualFile -> {
         String virtualFileName = virtualFile.getName();
         if (StringUtil.equals(settings.autoHandlerName, virtualFileName) ||
-            StringUtil.equals(settings.defaultHandlerName, virtualFileName)) {
+            StringUtil.equals(settings.defaultHandlerName, virtualFileName) ||
+            settings.isVirtualFileNameMatches(virtualFile)
+          ) {
           return HTMLMasonFileType.INSTANCE;
         }
         return null;

@@ -85,7 +85,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     myProject = project;
   }
 
-  @SuppressWarnings("Duplicates")
   private void createLazyObjects() {
     myLazyMatchers = AtomicNotNullLazyValue.createValue(() -> {
       List<FileNameMatcher> result = new ArrayList<>();
@@ -128,11 +127,6 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   @NotNull
-  public List<FileNameMatcher> getMatchers() {
-    return myLazyMatchers.getValue();
-  }
-
-  @NotNull
   public List<VirtualFile> getTemplateRoots() {
     return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(TemplateToolkitSourceRootType.INSTANCE);
   }
@@ -157,7 +151,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
-    for (FileNameMatcher matcher : getMatchers()) {
+    for (FileNameMatcher matcher : myLazyMatchers.getValue()) {
       if (matcher.accept(file.getName())) {
         return true;
       }

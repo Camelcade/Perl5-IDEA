@@ -16,20 +16,18 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.lang.Language;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
-import com.intellij.openapi.util.Pair;
-import com.intellij.psi.LanguageSubstitutor;
-import com.intellij.psi.LanguageSubstitutors;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.htmlmason.idea.lang.HTMLMasonLanguageSubstitutor;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
@@ -38,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -60,13 +57,16 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   public List<String> substitutedExtensions = new ArrayList<>();
   public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
 
-  private transient Map<String, Pair<Language, LanguageSubstitutor>> substitutorMap = new THashMap<>();
+  @Transient
+  private transient AtomicNotNullLazyValue<List<FileNameMatcher>> myLazyMatchers;
+
   private transient Map<String, String> myOpenCloseMap;
   private transient AtomicNullableLazyValue<Map<String, HTMLMasonCustomTag>> myCustomTagsMapProvider;
 
   public HTMLMasonSettings(@NotNull Project project) {
     this();
     myProject = project;
+    createLazyObjects();
   }
 
   private HTMLMasonSettings() {
@@ -74,6 +74,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     globalVariables.add(new VariableDescription("$r", "Apache::Request"));
     changeCounter++;
     initCustomTagsMapProvider();
+    createLazyObjects();
   }
 
   private void initCustomTagsMapProvider() {
@@ -104,42 +105,30 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
     changeCounter++;
   }
 
-  public void removeSubstitutors() {
-    for (Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry : substitutorMap.entrySet()) {
-      LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
-    }
-    substitutorMap.clear();
-  }
-
-  public void updateSubstitutors() {
-    // unregister
-    Iterator<Map.Entry<String, Pair<Language, LanguageSubstitutor>>> iterator = substitutorMap.entrySet().iterator();
-    while (iterator.hasNext()) {
-      Map.Entry<String, Pair<Language, LanguageSubstitutor>> entry = iterator.next();
-      if (!substitutedExtensions.contains(entry.getKey())) {
-        //				System.err.println("Unregistering " + entry.getKey());
-        LanguageSubstitutors.INSTANCE.removeExplicitExtension(entry.getValue().first, entry.getValue().second);
-        iterator.remove();
-      }
-    }
-
-    // register
-    FileTypeManager fileTypeManager = FileTypeManager.getInstance();
-    for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
-      if (fileType instanceof LanguageFileType) {
-        Language language = ((LanguageFileType)fileType).getLanguage();
-        for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
-          String presentableString = matcher.getPresentableString();
-          if (substitutedExtensions.contains(presentableString) && !substitutorMap.containsKey(presentableString)) {
-            //						System.err.println("Registering " + presentableString);
-            LanguageSubstitutor substitutor = new HTMLMasonLanguageSubstitutor(myProject, matcher);
-
-            LanguageSubstitutors.INSTANCE.addExplicitExtension(language, substitutor);
-            substitutorMap.put(presentableString, Pair.create(language, substitutor));
+  private void createLazyObjects() {
+    myLazyMatchers = AtomicNotNullLazyValue.createValue(() -> {
+      List<FileNameMatcher> result = new ArrayList<>();
+      FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+      for (FileType fileType : fileTypeManager.getRegisteredFileTypes()) {
+        if (fileType instanceof LanguageFileType) {
+          for (FileNameMatcher matcher : fileTypeManager.getAssociations(fileType)) {
+            if (substitutedExtensions.contains(matcher.getPresentableString())) {
+              result.add(matcher);
+            }
           }
         }
       }
+      return result;
+    });
+  }
+
+  public boolean isVirtualFileNameMatches(@NotNull VirtualFile file) {
+    for (FileNameMatcher matcher : myLazyMatchers.getValue()) {
+      if (matcher.accept(file.getName())) {
+        return true;
+      }
     }
+    return false;
   }
 
   @Override
@@ -150,6 +139,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   @Override
   public void settingsUpdated() {
     super.settingsUpdated();
+    createLazyObjects();
     myOpenCloseMap = null;
     initCustomTagsMapProvider();
   }

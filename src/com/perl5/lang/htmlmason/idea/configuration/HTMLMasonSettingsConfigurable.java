@@ -137,7 +137,6 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     mySettings.customTags.clear();
     mySettings.customTags.addAll(customTagsModel.getItems());
 
-    mySettings.updateSubstitutors();
     mySettings.settingsUpdated();
 
     if (!extDiff.isEmpty() || forceReparse) {

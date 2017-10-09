@@ -34,13 +34,11 @@ public class HTMLMasonProjectComponent implements ProjectComponent {
   @Override
   public void projectOpened() {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(myProject);
-    settings.updateSubstitutors();
     settings.prepareLexerConfiguration();
   }
 
   @Override
   public void projectClosed() {
-    HTMLMasonSettings.getInstance(myProject).removeSubstitutors();
   }
 
   @Override
