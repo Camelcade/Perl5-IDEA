@@ -18,8 +18,17 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import org.jetbrains.annotations.Nullable;
 
 public interface PerlNamespaceDefinitionWithIdentifier extends PerlNamespaceDefinitionElement,
                                                                PerlNamespaceElementContainer,
                                                                PerlIdentifierOwner {
+
+  @Nullable
+  default PsiPerlBlock getBlock() {
+    return null;
+  }
+
+  @Nullable
+  default PsiPerlNamespaceContent getNamespaceContent() {return null;}
 }

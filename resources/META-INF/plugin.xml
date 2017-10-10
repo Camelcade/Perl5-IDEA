@@ -38,6 +38,7 @@
        <li>Built-in subs, namespaces and variables usages are now highlighted and you may find usages for them</li>
        <li>Spell checking is now available in Perl5 and POD files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
        <li>You may now annotate methods with <code>#@returns *</code>, meaning that method returns <code>$self</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/247">#247</a></li>
+       <li>Context view with <code>Alt + Q</code> and navigation with <code>Alt + Up/Down</code> works now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1585">johndunlap</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -276,6 +277,10 @@
 
     <lang.psiStructureViewFactory language="Perl5"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+    <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
+                             implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
+    <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier"
+                             implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
 
     <typeHierarchyProvider language="Perl5"
                            implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlTypeHierarchyProvider"/>

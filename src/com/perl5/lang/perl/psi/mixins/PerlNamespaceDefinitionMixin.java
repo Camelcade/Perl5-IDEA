@@ -69,6 +69,12 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Nullable
   @Override
+  public PsiPerlNamespaceContent getNamespaceContent() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlNamespaceContent.class);
+  }
+
+  @Nullable
+  @Override
   public String getName() {
     return getPackageName();
   }
