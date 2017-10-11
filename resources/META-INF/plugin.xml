@@ -50,6 +50,7 @@
         <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a></li>
         <li>Stack overflow exception in Go IDE/plugin, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1584">#1584</a></li>
         <li>Exception on override method action <code>Ctrl+O</code></li>
+        <li>Exception in convert string to heredoc intention dialog</li>
       </ul>
      </p>
     ]]>
@@ -945,13 +946,13 @@
 
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
-      <category>String converter</category>
+      <category>Perl</category>
       <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
     </intentionAction>
 
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
-      <category>String converter</category>
+      <category>Perl</category>
       <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
     </intentionAction>
 

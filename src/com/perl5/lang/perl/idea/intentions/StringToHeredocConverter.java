@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.intentions;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -30,19 +32,22 @@ public class StringToHeredocConverter extends StringToLastHeredocConverter {
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-    String markerText = Messages
-      .showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(), HEREDOC_MARKER,
-                       null);
-    if (markerText != null) {
-      if (markerText.isEmpty()) {
-        Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
+    ApplicationManager.getApplication().invokeLater(() -> {
+      String markerText = Messages
+        .showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(),
+                         HEREDOC_MARKER,
+                         null);
+      if (markerText != null) {
+        if (markerText.isEmpty()) {
+          Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
+        }
+        else    // converting
+        {
+          HEREDOC_MARKER = markerText;
+          WriteCommandAction.runWriteCommandAction(project, () -> super.invoke(project, editor, element));
+        }
       }
-      else    // converting
-      {
-        HEREDOC_MARKER = markerText;
-        super.invoke(project, editor, element);
-      }
-    }
+    });
   }
 
   @NotNull
