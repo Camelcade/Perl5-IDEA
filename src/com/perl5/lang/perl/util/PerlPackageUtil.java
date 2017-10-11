@@ -731,7 +731,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     // current dir
     if (PerlSharedSettings.getInstance(psiFile.getProject()).getTargetPerlVersion().lesserThan(PerlVersion.V5_26)) {
       VirtualFile virtualFile = psiFile.getVirtualFile();
-      if (virtualFile != null) {
+      if (virtualFile != null && virtualFile.getParent() != null) {
         result.add(virtualFile.getParent());
       }
     }
