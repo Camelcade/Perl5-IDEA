@@ -49,6 +49,7 @@
         <li>Mark Perl5 root action is unavailable if Perl5 support is not configured, unmark still available</li>
         <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a></li>
         <li>Stack overflow exception in Go IDE/plugin, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1584">#1584</a></li>
+        <li>Exception on override method action <code>Ctrl+O</code></li>
       </ul>
      </p>
     ]]>

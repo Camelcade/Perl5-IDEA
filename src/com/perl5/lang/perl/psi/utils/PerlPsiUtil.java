@@ -197,11 +197,12 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   @Nullable
-  public static PsiElement getParentElementOrStub(StubBasedPsiElement currentElement,
+  public static PsiElement getParentElementOrStub(PsiElement currentElement,
                                                   @Nullable final Class<? extends StubElement> stubClass,
                                                   @NotNull final Class<? extends PsiElement> psiClass
   ) {
-    Stub stub = currentElement.getStub();
+
+    Stub stub = currentElement instanceof StubBasedPsiElement ? ((StubBasedPsiElement)currentElement).getStub() : null;
     if (stub != null && stubClass != null) {
       Stub parentStub = getParentStubOfType(stub, stubClass);
       return parentStub == null ? null : ((StubBase)parentStub).getPsi();
