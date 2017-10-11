@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,13 +34,20 @@ public class StringToHeredocConverter extends StringToLastHeredocConverter {
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
     ApplicationManager.getApplication().invokeLater(() -> {
-      String markerText = Messages
-        .showInputDialog(project, "What here-doc marker should we use?", "Input a Heredoc Marker", Messages.getQuestionIcon(),
-                         HEREDOC_MARKER,
-                         null);
+      String markerText = Messages.showInputDialog(
+        project,
+        PerlBundle.message("perl.intention.heredoc.dialog.prompt"),
+        PerlBundle.message("perl.intention.heredoc.dialog.title"),
+        Messages.getQuestionIcon(),
+        HEREDOC_MARKER,
+        null);
       if (markerText != null) {
         if (markerText.isEmpty()) {
-          Messages.showErrorDialog(project, "Empty heredoc markers are not supported", "Marker Error");
+          Messages.showErrorDialog(
+            project,
+            PerlBundle.message("perl.intention.heredoc.error.message"),
+            PerlBundle.message("perl.intention.heredoc.error.title")
+          );
         }
         else    // converting
         {
@@ -53,6 +61,6 @@ public class StringToHeredocConverter extends StringToLastHeredocConverter {
   @NotNull
   @Override
   public String getText() {
-    return "Convert to heredoc...";
+    return PerlBundle.message("perl.intention.heredoc.title");
   }
 }
