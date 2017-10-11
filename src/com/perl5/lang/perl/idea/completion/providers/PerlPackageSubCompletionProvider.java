@@ -40,7 +40,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     ProcessingContext context,
     @NotNull CompletionResultSet result) {
     PsiElement method = parameters.getPosition().getParent();
-    assert method instanceof PsiPerlMethod;
+    assert method instanceof PsiPerlMethod : "Expected PsiPerlMethod, got " + method.getClass();
 
     String explicitNamespace = ((PsiPerlMethod)method).getExplicitPackageName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
