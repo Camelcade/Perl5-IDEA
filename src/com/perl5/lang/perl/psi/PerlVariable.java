@@ -37,14 +37,6 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlP
   String guessVariableType();
 
   /**
-   * Guesses variable type from definition or context, using source
-   *
-   * @return Package name if found
-   */
-  @Nullable
-  String getVariableTypeHeavy();
-
-  /**
    * Guessing actual variable type from context
    *
    * @return variable type

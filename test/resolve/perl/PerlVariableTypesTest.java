@@ -29,6 +29,8 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
     return "testData/resolve/perl/variableTypes";
   }
 
+  public void testBuiltIn() {doTest(null);}
+
   public void testDeclarationSingle() {
     doTest("declaration_single", "Foo::Bar");
   }

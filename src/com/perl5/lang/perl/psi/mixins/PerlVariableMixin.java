@@ -31,6 +31,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -105,8 +106,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Nullable
-  @Override
-  public String getVariableTypeHeavy() {
+  private String getVariableTypeHeavy() {
     if (this instanceof PsiPerlScalarVariable) {
       //			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
 
@@ -116,6 +116,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
         // find lexicaly visible declaration and check type
         final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
         if (declarationWrapper != null) {
+          if (declarationWrapper instanceof PerlImplicitVariableDeclaration) {
+            return ((PerlImplicitVariableDeclaration)declarationWrapper).getVariableClass();
+          }
+
           if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
             PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(declarationWrapper, PerlSelfHinter.class);
             if (selfHinter != null) {
@@ -156,10 +160,12 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
           // fixme this is bad, because my $var1 && print $var1 will be valid, but it's not
           PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declarationWrapper, PerlLexicalScope.class);
-          assert perlLexicalScope != null : "Got error at " +
+          assert perlLexicalScope != null : "Unable to find lexical scope for:" +
+                                            declarationWrapper.getClass() +
+                                            " at " +
                                             declarationWrapper.getTextOffset() +
                                             " in " +
-                                            declarationWrapper.getContainingFile().getVirtualFile();
+                                            declarationWrapper.getContainingFile();
 
           final String[] guessResult = new String[]{null};
 

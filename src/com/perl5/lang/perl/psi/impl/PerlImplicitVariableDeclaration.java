@@ -111,12 +111,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Nullable
   @Override
-  public String getVariableTypeHeavy() {
-    return getVariableClass();
-  }
-
-  @Nullable
-  @Override
   public String getLocallyDeclaredType() {
     return getVariableClass();
   }
