@@ -36,7 +36,7 @@ public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
    */
   @Nullable
   default PerlNamespaceElement getType() {
-    return PsiTreeUtil.findChildOfType(this, PerlNamespaceElement.class);
+    return PsiTreeUtil.getChildOfType(this, PerlNamespaceElement.class);
   }
 
   @Nullable

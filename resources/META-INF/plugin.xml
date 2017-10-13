@@ -51,7 +51,8 @@
         <li>Stack overflow exception in Go IDE/plugin, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1584">#1584</a></li>
         <li>Exception on override method action <code>Ctrl+O</code></li>
         <li>Exception in convert string to heredoc intention dialog</li>
-        <li>Fixed NPE on built-in dereference</li>
+        <li>NPE on built-in dereference</li>
+        <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
       </ul>
      </p>
     ]]>

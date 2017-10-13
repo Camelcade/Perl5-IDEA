@@ -1,0 +1,4 @@
+#@type MyTest::Constants
+my $var;
+
+$var-><caret>
