@@ -293,8 +293,8 @@ limitations under the License.
     PARSABLE_STRING_USE_VARS = 'PARSABLE_STRING_USE_VARS'
 
     TAG='TAG'
-    TAG_END='TAG_END'
-    TAG_DATA='TAG_DATA'
+    TAG_END='__END__'
+    TAG_DATA='__DATA__'
 
     LEFT_ANGLE='LEFT_ANGLE'
     RIGHT_ANGLE='RIGHT_ANGLE'
@@ -518,8 +518,8 @@ private statement_item ::=
         | block_compound  // put it after statement to handle anon hashes before it.
         | annotation
 		| POD
-		| TAG_END
-		| TAG_DATA
+		| '__DATA__'
+		| '__END__'
 		| <<parseBadCharacters>> // Fallback for bad characters
 
 // invoked from PerlUseVarsDeclarationsParser
