@@ -22,7 +22,10 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
 
 /**
  * Created by hurricup on 02.03.2016.
@@ -41,6 +44,9 @@ public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, Refe
       if ("".equals(heredocName)) {
         queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
       }
+    }
+    else if (element instanceof PerlNamespaceDefinition) {
+      queryParameters.getOptimizer().searchWord(__PACKAGE__, queryParameters.getEffectiveSearchScope(), true, element);
     }
   }
 }
