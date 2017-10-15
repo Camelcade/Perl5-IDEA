@@ -1,0 +1,12 @@
+package My::Test;
+
+#@method
+sub method1{}
+
+#@method
+sub method2{}
+
+#@type __PACKAGE__
+my $var1;
+
+$var1-><caret>

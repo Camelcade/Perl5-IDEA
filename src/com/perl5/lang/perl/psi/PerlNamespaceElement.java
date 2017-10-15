@@ -91,4 +91,9 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    * @return check result
    */
   boolean isUNIVERSAL();
+
+  /**
+   * Checks if this is a __PACKAGE__
+   */
+  boolean isTag();
 }

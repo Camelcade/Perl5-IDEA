@@ -134,6 +134,10 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTestResolve();
   }
 
+  public void testReturnsPackageTag() {doTestResolve();}
+
+  public void testPackageTagVarType() {doTestResolve();}
+
   public void testUsePackage() {
     addCustomPackage();
     setTargetPerlVersion(PerlVersion.V5_10);

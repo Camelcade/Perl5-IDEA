@@ -16,6 +16,7 @@
 
 package base;
 
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
@@ -70,6 +71,7 @@ import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.usageView.UsageInfo;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -909,5 +911,30 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     myFixture.enableInspections(clazz);
     myFixture.checkHighlighting(true, false, false);
     removeVirtualFileFilter();
+  }
+
+  protected void doTestFindUsages() {
+    initWithFileSmart();
+    int flags = TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
+    PsiElement targetElement = TargetElementUtil.findTargetElement(getEditor(), flags);
+    assertNotNull("Cannot find referenced element", targetElement);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), checkAndSerializeFindUsages(targetElement));
+  }
+
+  private String checkAndSerializeFindUsages(@NotNull PsiElement targetElement) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Target: ").append(serializePsiElement(targetElement)).append("\n");
+    Collection<UsageInfo> usages = myFixture.findUsages(targetElement);
+    sb.append("Total usages: ").append(usages.size()).append("\n");
+    for (UsageInfo usage : usages) {
+      sb.append("\t").append(serializePsiElement(usage.getElement()));
+      PsiReference reference = usage.getReference();
+      if (reference != null) {
+        sb.append(", via: ").append(serializeReference(reference));
+      }
+      sb.append("\n");
+    }
+
+    return sb.toString();
   }
 }

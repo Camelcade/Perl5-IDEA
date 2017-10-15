@@ -2,11 +2,17 @@ PerlSubReference at (131,134); text in range: 'has' => 0 results:
 
 PerlSubReference at (210,213); text in range: 'has' => 0 results:
 
+PerlNamespaceReference at (292,303); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyMoose::Container at 102 in mooseDoesIsa.pl
+
 PerlSubReference at (305,313); text in range: 'mooseisa' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MyMoose::Container::mooseisa($self, [MyReturnValue1 $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 135 in mooseDoesIsa.pl
 
 PerlSubReference at (317,326); text in range: 'something' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyReturnValue1::something at 34 in mooseDoesIsa.pl
+
+PerlNamespaceReference at (328,339); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyMoose::Container at 102 in mooseDoesIsa.pl
 
 PerlSubReference at (341,350); text in range: 'moosedoes' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MyMoose::Container::moosedoes($self, [MyReturnValue2 $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 214 in mooseDoesIsa.pl

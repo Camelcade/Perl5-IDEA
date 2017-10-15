@@ -14,35 +14,21 @@
  * limitations under the License.
  */
 
-package editor;
+package resolve.perl;
 
 import base.PerlLightTestCase;
 
-public class PerlUsagesHighlightingTest extends PerlLightTestCase {
+public class PerlFindUsagesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/highlighting_usages/perl";
+    return "testData/findusages/perl";
   }
 
-  public void testNamespace() {doTest();}
+  public void testNamespace() {
+    doTest();
+  }
 
-  public void testBuiltInSubs() {doTest();}
-
-  public void testPackageCore() {doTest();}
-
-  public void testPackageCoreGlobal() {doTest();}
-
-  public void testPackageUniversal() {doTest();}
-
-  public void testPackageMain() {doTest();}
-
-  public void testBuiltInScalar() {doTest();}
-
-  public void testBuiltInArray() {doTest();}
-
-  public void testBuiltInHash() {doTest();}
-
-  public void testHasModification() {doTest();}
-
-  private void doTest() {doTestUsagesHighlighting();}
+  private void doTest() {
+    doTestFindUsages();
+  }
 }

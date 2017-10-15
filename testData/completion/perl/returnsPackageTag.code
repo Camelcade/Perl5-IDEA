@@ -1,0 +1,13 @@
+package My::Test;
+
+#@method
+#@returns __PACKAGE__
+sub method1{}
+
+#@method
+#@returns My::Test
+sub method2{}
+
+package main;
+
+My::Test->method1-><caret>

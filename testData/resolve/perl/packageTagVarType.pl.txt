@@ -1,0 +1,65 @@
+PerlNamespaceReference at (38,49); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (84,92); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (111,119); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (130,141); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (152,163); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (180,191); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlNamespaceReference at (213,224); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlSubReference at (226,233); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlVariableReference at (236,240); text in range: 'var1' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 120 in packageTagVarType.pl
+
+PerlSubReference at (242,249); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlVariableReference at (252,256); text in range: 'var2' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 142 in packageTagVarType.pl
+
+PerlSubReference at (258,265); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlVariableReference at (268,272); text in range: 'var3' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 165 in packageTagVarType.pl
+
+PerlSubReference at (274,281); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlVariableReference at (284,288); text in range: 'var4' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 195 in packageTagVarType.pl
+
+PerlSubReference at (290,297); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlVariableReference at (300,304); text in range: 'var5' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 205 in packageTagVarType.pl
+
+PerlSubReference at (306,313); text in range: 'method1' => 0 results:
+
+PerlNamespaceReference at (359,367); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlSubReference at (369,376); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in packageTagVarType.pl
+
+PerlNamespaceReference at (378,386); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in packageTagVarType.pl
+
+PerlSubReference at (388,395); text in range: 'method2' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method2 at 93 in packageTagVarType.pl
+

@@ -1,0 +1,3 @@
+Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: method1; Text: method1; Tail: null; Type: My::Test; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: method2; Text: method2; Tail: null; Type: My::Test; Icon: /method_gutter_icon.png; Type Icon: null

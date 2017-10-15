@@ -349,4 +349,10 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testTryCatch() {
     doTestCompletion();
   }
+
+  public void testReturnsPackageTag() {doTestCompletion();}
+
+  public void testPackageVarTypePerl() {doTestCompletion();}
+
+  public void testPackageVarTypeAnnotation() {doTestCompletion();}
 }

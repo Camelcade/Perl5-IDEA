@@ -1,0 +1,24 @@
+PerlNamespaceReference at (38,49); text in range: '__PACKAGE__' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in returnsPackageTag.pl
+
+PerlNamespaceReference at (84,92); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in returnsPackageTag.pl
+
+PerlNamespaceReference at (123,131); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in returnsPackageTag.pl
+
+PerlSubReference at (133,140); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in returnsPackageTag.pl
+
+PerlSubReference at (142,149); text in range: 'method2' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method2 at 93 in returnsPackageTag.pl
+
+PerlNamespaceReference at (151,159); text in range: 'My::Test' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@My::Test at 0 in returnsPackageTag.pl
+
+PerlSubReference at (161,168); text in range: 'method2' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method2 at 93 in returnsPackageTag.pl
+
+PerlSubReference at (170,177); text in range: 'method1' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 50 in returnsPackageTag.pl
+

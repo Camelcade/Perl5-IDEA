@@ -30,6 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_PACKAGE;
+
 /**
  * Created by hurricup on 25.05.2015.
  */
@@ -68,13 +70,14 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   @NotNull
   @Override
   public String getName() {
-    return this.getText();
+    return isTag() ? PerlPackageUtil.getContextPackageName(this) : this.getText();
   }
 
   public String getCanonicalName() {
     return PerlPackageUtil.getCanonicalPackageName(getName());
   }
 
+  public boolean isTag() {return getNode().getElementType() == TAG_PACKAGE;}
 
   @Override
   public boolean isPragma() {

@@ -21,6 +21,8 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.ResolveResult;
+import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -40,15 +42,22 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     super(element, textRange);
   }
 
+  @NotNull
+  private String getPackageName() {
+    if (myElement instanceof PerlNamespaceElement) {
+      return ((PerlNamespaceElement)myElement).getCanonicalName();
+    }
+    return getRangeInElement().substring(myElement.getText());
+  }
+
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    String packageName = getRangeInElement().substring(myElement.getText());
+    String packageName = getPackageName();
     if (packageName.isEmpty()) {
       packageName = PerlPackageUtil.MAIN_PACKAGE;
     }
 
     Project project = myElement.getProject();
-
     PerlBuiltInNamespaceDefinition builtInNamespaceDefinition =
       PerlBuiltInNamespacesService.getInstance(project).getNamespaceDefinition(packageName);
     if (builtInNamespaceDefinition != null) {
@@ -59,5 +68,13 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     result.addAll(PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalPackageName(packageName)));
 
     return PsiElementResolveResult.createResults(result);
+  }
+
+  @Override
+  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+    if (myElement instanceof PerlNamespaceElement && ((PerlNamespaceElement)myElement).isTag()) {
+      return myElement;
+    }
+    return super.handleElementRename(newElementName);
   }
 }

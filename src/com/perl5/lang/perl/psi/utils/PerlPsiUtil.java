@@ -592,9 +592,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (element instanceof PerlMethodContainer) {
       return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)element);
     }
-    else if (element instanceof PsiPerlTagScalar && "__PACKAGE__".equals(element.getText())) {
-      return PerlPackageUtil.getContextPackageName(element);
-    }
     else if (element instanceof PsiPerlParenthesisedExprImpl) {
       return getPerlExpressionNamespace(((PsiPerlParenthesisedExprImpl)element).getExpr());
     }

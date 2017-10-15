@@ -1,0 +1,21 @@
+package My::Test;
+
+our My::Test $somevar;
+our My::Test ($somevar1);
+our __PACKAGE__ ($somevar2);
+our __PACKAGE__ ($somevar3);
+
+$My::Test::othervar = 1;
+say $My::Test::somevar;
+#@returns __PACKAGE__
+sub somemethod{}
+
+__PACKAGE__->somemethod;
+
+package main;
+say $My::Test::somevar;
+sub My::Test::othermethod{}
+
+My::Test::somemethod;
+My::Te<caret>st->othermethod;
+__PACKAGE__->somemethod;

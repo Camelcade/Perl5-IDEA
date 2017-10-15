@@ -57,6 +57,7 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,6 +75,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   public static final String PACKAGE_ANY = "*";
 
+  public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
   public static final String PACKAGE_MOOSE = "Moose";
@@ -215,7 +217,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param element psi element to find definition for
    * @return canonical package name
    */
-  @Nullable
+  @Contract("null -> null")
   public static String getContextPackageName(@Nullable PsiElement element) {
     if (element == null) {
       return null;
