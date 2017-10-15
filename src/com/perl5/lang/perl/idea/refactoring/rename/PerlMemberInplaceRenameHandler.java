@@ -27,9 +27,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenameHandler;
 import com.intellij.refactoring.rename.inplace.MemberInplaceRenamer;
-import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider;
-import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -44,13 +42,6 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
 
   @Override
   protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
-    return !PerlRenamingVetoCondition.isVetoed(element) &&
-           (!(element instanceof PerlRenameUsagesHelper) || ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed()) &&
-           isAvailableFromParent(element, editor, file);
-  }
-
-  // this is a copy-paste from parent class, because it's uses RefactoringSupportProvider
-  protected boolean isAvailableFromParent(PsiElement element, Editor editor, PsiFile file) {
     PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());
     if (nameSuggestionContext == null && editor.getCaretModel().getOffset() > 0) {
       nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset() - 1);
@@ -62,6 +53,7 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
     final RefactoringSupportProvider
       supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
     return editor.getSettings().isVariableInplaceRenameEnabled()
-           && supportProvider instanceof PerlRefactoringSupportProvider;
+           && supportProvider instanceof PerlRefactoringSupportProvider &&
+           ((PerlRefactoringSupportProvider)supportProvider).isPerlInplaceRenameAvailable(element, nameSuggestionContext);
   }
 }

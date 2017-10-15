@@ -39,17 +39,39 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
   @Override
   public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
     SearchScope useScope = element.getUseScope();
-    if (element instanceof PerlNamespaceDefinition && context instanceof PerlNamespaceElement && ((PerlNamespaceElement)context).isTag()) {
-      return false;
-    }
     return useScope instanceof LocalSearchScope
            && element instanceof PsiNameIdentifierOwner
-           && !PerlRenamingVetoCondition.isVetoed(element)
            && !(element instanceof PerlRenameUsagesHelper)
+           && isInplaceAllowed(element, context)
            && !(((PsiNameIdentifierOwner)element).getNameIdentifier() instanceof PerlStringContentElement)
            && element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
            && !(((LocalSearchScope)useScope).getScope()[0] instanceof PsiFile)
       ;
+  }
+
+  public boolean isPerlInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+    if (!isInplaceAllowed(element, context)) {
+      return false;
+    }
+    else if (element instanceof PerlRenameUsagesHelper) {
+      return ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed();
+    }
+    return true;
+  }
+
+  /**
+   * Common logic for any inplace, platform or ours
+   */
+  private static boolean isInplaceAllowed(@NotNull PsiElement element, PsiElement context) {
+    if (PerlRenamingVetoCondition.isVetoed(element)) {
+      return false;
+    }
+    else if (element instanceof PerlNamespaceDefinition &&
+             context instanceof PerlNamespaceElement &&
+             ((PerlNamespaceElement)context).isTag()) {
+      return false;
+    }
+    return true;
   }
 
   @Override
