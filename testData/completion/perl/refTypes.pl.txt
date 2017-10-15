@@ -21,3 +21,4 @@ Lookups: REF; Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: Regexp; Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: SCALAR; Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: VSTRING; Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: __PACKAGE__; Text: __PACKAGE__; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

@@ -39,6 +39,9 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Map;
 
+import static com.perl5.PerlIcons.PACKAGE_GUTTER_ICON;
+import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
+
 /**
  * Created by hurricup on 25.07.2015.
  */
@@ -64,7 +67,7 @@ public class PerlPackageCompletionUtil {
       result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
     }
     else {
-      result = result.withIcon(icon == null ? PerlIcons.PACKAGE_GUTTER_ICON : icon);
+      result = result.withIcon(icon == null ? PACKAGE_GUTTER_ICON : icon);
     }
 
     // fixme this should be adjusted in #954
@@ -92,6 +95,7 @@ public class PerlPackageCompletionUtil {
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
+    result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(__PACKAGE__, PACKAGE_GUTTER_ICON));
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
       {
