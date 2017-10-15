@@ -35,23 +35,11 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-       <li>Built-in subs, namespaces and variables usages are now highlighted and you may find usages for them</li>
-       <li>Spell checking is now available in Perl5 and POD files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1571">akashr</a></li>
-       <li>You may now annotate methods with <code>#@returns *</code>, meaning that method returns <code>$self</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/247">#247</a></li>
-       <li>Context view with <code>Alt + Q</code> and navigation with <code>Alt + Up/Down</code> works now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1585">johndunlap</a></li>
+       <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
      </ul>
      </p>
      <p>Fixes:
       <ul>
-        <li>Lookup elements for arrays now containing array slices</li>
-        <li>Built-in array/hash elements and slices are now properly colored</li>
-        <li>Plugin does not add empty <code>&lt;perl/&gt;</code> section to the iml file if perl roots were not configured</li>
-        <li>Mark Perl5 root action is unavailable if Perl5 support is not configured, unmark still available</li>
-        <li>Improved <code>$self</code> type detection for tricky situations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/569">#569</a></li>
-        <li>Stack overflow exception in Go IDE/plugin, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1584">#1584</a></li>
-        <li>Exception on override method action <code>Ctrl+O</code></li>
-        <li>Exception in convert string to heredoc intention dialog</li>
-        <li>NPE on built-in dereference</li>
         <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
       </ul>
      </p>
