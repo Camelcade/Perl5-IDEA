@@ -25,6 +25,8 @@ import com.intellij.psi.search.SearchScope;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +39,9 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
   @Override
   public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
     SearchScope useScope = element.getUseScope();
+    if (element instanceof PerlNamespaceDefinition && context instanceof PerlNamespaceElement && ((PerlNamespaceElement)context).isTag()) {
+      return false;
+    }
     return useScope instanceof LocalSearchScope
            && element instanceof PsiNameIdentifierOwner
            && !PerlRenamingVetoCondition.isVetoed(element)
