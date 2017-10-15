@@ -212,7 +212,7 @@ Perl5
       PsiElement(Perl5: ;)(';')
     PsiElement(Perl5: })('}')
   PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION)
-    PsiElement(Perl5: TAG)('__PACKAGE__')
+    PerlNamespaceElementImpl(Perl5: __PACKAGE__)('__PACKAGE__')
     PsiElement(Perl5: :)(':')
   PsiPerlBlockImpl(Perl5: BLOCK)
     PsiElement(Perl5: {)('{')

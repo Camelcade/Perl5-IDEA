@@ -27,6 +27,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Set;
 
+import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
+
 /**
  * Created by hurricup on 25.05.2015.
  */
@@ -59,7 +61,8 @@ public class PerlElementTypeFactory {
     "package::name",
     "package::name::",
     "constant",
-    "vars"
+    "vars",
+    __PACKAGE__
   ));
 
 

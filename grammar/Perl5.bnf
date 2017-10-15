@@ -295,6 +295,7 @@ limitations under the License.
     TAG='TAG'
     TAG_END='__END__'
     TAG_DATA='__DATA__'
+    TAG_PACKAGE='__PACKAGE__'
 
     LEFT_ANGLE='LEFT_ANGLE'
     RIGHT_ANGLE='RIGHT_ANGLE'
@@ -688,7 +689,7 @@ private undef_params ::= deref_expr | variable
 
 require_expr ::=  'require' (any_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
 
-private any_package ::= 'package::name'
+private any_package ::= 'package::name' | '__PACKAGE__'
 
 private recover_statement ::= <<recoverStatement>>
 
@@ -772,7 +773,7 @@ term_expr ::=
     | code_primitive
     | package_expr
 
-package_expr ::= PACKAGE
+package_expr ::= any_package
 continue_expr ::= 'continue' ['(' ')'] {pin=1}
 grep_expr ::=  'grep' grep_map_arguments {pin=1}
 map_expr ::=  'map' grep_map_arguments {pin=1}

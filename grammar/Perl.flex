@@ -114,7 +114,7 @@ POD_START = "="[\w].* {NEW_LINE} ?
 POD_END = "=cut" ({WHITE_SPACE} .*)?
 
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"
-TAG_NAMES = "__FILE__"|"__LINE__"|"__PACKAGE__"|"__SUB__"
+TAG_NAMES = "__FILE__"|"__LINE__"|"__SUB__"
 
 // Types for Type::Standard
 TYPES_TINY = "ArrayRef"|"ConsumerOf"|"CycleTuple"|"Dict"|"Enum"|"HasMethods"|"HashRef"|"InstanceOf"|"Join"|"Map"|"Maybe"|"Optional"|"Overload"|"Ref"|"ScalarRef"|"Split"|"StrMatch"|"Tied"|"Tuple"
@@ -338,11 +338,13 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <ANNOTATION_TYPE_NESTED>{
         "["                     {return LEFT_BRACKET;}
         "]"                     {popState();return RIGHT_BRACKET;}
+	"__PACKAGE__"           {return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER}	{return PACKAGE;}
         "*"                     {return OPERATOR_MUL;}
 }
 
 <ANNOTATION_TYPE,ANNOTATION_TYPE_NESTED,ANNOTATION_PACKAGE_RETURNS>{
+	"__PACKAGE__"           {return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER}	{yybegin(ANNOTATION_FALLBACK);return PACKAGE;}
         "*"                     {yybegin(ANNOTATION_FALLBACK);return OPERATOR_MUL;}
 }
@@ -613,6 +615,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <VARIABLE_DECLARATION>
 {
 	{CORE_PREFIX}"sub" 		{yybegin(SUB_DECLARATION);return  RESERVED_SUB;}
+	"__PACKAGE__"                   {yybegin(VARIABLE_DECLARATION_STRICT);return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER}		{yybegin(VARIABLE_DECLARATION_STRICT);return PACKAGE;}
 	<VARIABLE_DECLARATION_STRICT>{
 		"$" 		{return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_SCALAR);}
@@ -1027,6 +1030,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_POSSIBLE_SIGIL>{
 	{CORE_LIST}				{return PACKAGE;}
+	"__PACKAGE__"           {return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER} 	{return getIdentifierToken();}
 }
 
