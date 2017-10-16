@@ -1,0 +1,28 @@
+package My::Test;
+
+#@method
+#@returns __PACKAGE__
+sub method1{}
+
+#@method
+#@returns My::Test
+sub method2{}
+
+my My::Test $var1;
+my __PACKAGE__ $var2;
+my __PACKAGE__ ($var3);
+#@type __PACKAGE__
+my $var4;
+my $var5;
+
+__PACKAGE__->method1;
+$var1->method1;
+$var2->method1;
+$var3->method1;
+$var4->method1;
+$var5->method1; # just for test, unresolved
+
+package main;
+
+My::T<caret>est->method1;
+My::Test->method2;
