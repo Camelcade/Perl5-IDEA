@@ -159,4 +159,6 @@ public class PerlResolveTest extends PerlLightTestCase {
     setTargetPerlVersion(PerlVersion.V5_26);
     checkSerializedReferencesWithFile("no_resolve");
   }
+
+  public void testLazyExportOkQw() {doTestResolve();}
 }

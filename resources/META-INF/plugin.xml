@@ -41,6 +41,7 @@
      <p>Fixes:
       <ul>
         <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
+        <li><code>@EXPORT</code> and <code>@EXPORT_OK</code> handling for large lists of exported variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1592">johndunlap</a></li>
       </ul>
      </p>
     ]]>

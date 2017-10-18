@@ -58,7 +58,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
     STRING_CONTENT_IN_DQ_STRING_BEGIN
   );
 
-
   PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN = STRING_CONTENT_PATTERN.withParent(
     psiElement(PerlString.class).withParent(psiElement(PerlHeredocOpener.class))
   );
@@ -215,8 +214,13 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNED_STRING_CONTENT = psiElement().andOr(
     STRING_CONTENT_IN_QW_STRING_LIST.andOr(
+      psiElement().withParent(psiElement(LP_STRING_QW)).andOr(
+        psiElement().withSuperParent(2, EXPORT_ASSIGNMENT),
+        psiElement().withSuperParent(3, EXPORT_ASSIGNMENT_PARENTHESISED)
+      ),
       psiElement().withParent(EXPORT_ASSIGNMENT),
       psiElement().withSuperParent(2, EXPORT_ASSIGNMENT_PARENTHESISED)
+
     ),
     STRING_CONTENT_PATTERN.withParent(
       psiElement(PerlString.class).andOr(
