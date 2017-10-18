@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.ElementManipulators;
 import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -38,28 +38,10 @@ public class PerlStringListMixin extends PerlCompositeElementImpl implements Per
   @Override
   public List<String> getStringContents() {
     List<String> result = new ArrayList<>();
-
-    PsiElement run = getFirstChild();
-    StringBuilder builder = null;
-
-    while (run != null) {
-      while (run instanceof PerlStringContentElementImpl) {
-        if (builder == null) {
-          builder = new StringBuilder();
-        }
-        builder.append(run.getNode().getText());
-        run = run.getNextSibling();
-      }
-
-      if (builder != null) {
-        result.add(builder.toString());
-        builder = null;
-      }
-      else {
-        run = run.getNextSibling();
-      }
-    }
-
+    PerlPsiUtil.processStringElements(getFirstChild(), stringContent -> {
+      result.add(ElementManipulators.getValueText(stringContent));
+      return true;
+    });
     return result;
   }
 }

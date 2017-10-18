@@ -1,6 +1,4 @@
 package TestExportOK::Util;
-use strict;
-use warnings FATAL => 'all';
 
 use vars qw(@EXPORT_OK);
 use Exporter qw(import);
@@ -185,5 +183,100 @@ sub is_filepath{}
 sub clean_currency_string{}
 sub shell{}
 sub to_file{}
+
+package TestExportOK::MyModule;
+
+use TestExportOK::Util qw(
+    is_integration_username
+    throw_exception\ optional_hashref
+    optional_uuid
+    optional_numeric
+    assert_numeric_in_range
+    assert_required
+    assert_hashref
+    assert_numeric
+    assert_isa
+    assert_in
+    assert_datetime
+    assert_uuid
+    assert_arrayref
+    assert_equals
+    assert_iso8601
+    assert_keys_in
+    extract_numeric
+    extract_required
+    extract_hashref
+    extract_uuid
+    extract_iso8601
+    unwrap
+    trim
+    is_number
+    is_uuid
+    is_hash
+    throw_exception
+    optional_hashref
+    optional_uuid
+    optional_numeric
+    assert_numeric_in_range
+    assert_required
+    assert_hashref
+    assert_numeric
+    assert_isa
+    assert_in
+    assert_datetime
+    assert_uuid
+    assert_arrayref
+    assert_equals
+    assert_iso8601
+    assert_keys_in
+    extract_numeric
+    extract_required
+    extract_hashref
+    extract_uuid
+    extract_iso8601
+    unwrap
+    trim
+    is_number
+    is_uuid
+    is_hash
+    throw_exception
+    optional_hashref
+    optional_uuid
+    optional_numeric
+    assert_numeric_in_range
+    assert_required
+    assert_hashref
+    assert_numeric
+    assert_isa
+    assert_in
+    assert_datetime
+    assert_uuid
+    assert_arrayref
+    assert_equals
+    assert_iso8601
+    assert_keys_in
+    extract_numeric
+    extract_required
+    extract_hashref
+    extract_uuid
+    array_search
+    extract_iso8601
+    unwrap
+    trim
+    is_number
+    is_uuid
+    is_hash
+    is_in
+    is_can
+    is_undef
+    is_isa
+    is_equals
+    coalesce
+    coalesce_undef
+    info
+    );
+
+assert_required();
+
 
 1;

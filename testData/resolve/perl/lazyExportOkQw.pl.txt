@@ -1,278 +1,279 @@
-PerlNamespaceFileReference at (32,38); text in range: 'strict' => 0 results:
+PerlNamespaceFileReference at (33,37); text in range: 'vars' => 0 results:
 
-PerlNamespaceFileReference at (44,52); text in range: 'warnings' => 0 results:
+PerlNamespaceFileReference at (58,66); text in range: 'Exporter' => 0 results:
 
-PerlNamespaceFileReference at (74,78); text in range: 'vars' => 0 results:
+PerlVariableReference at (80,89); text in range: 'EXPORT_OK' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 41 in lazyExportOkQw.pl
 
-PerlNamespaceFileReference at (99,107); text in range: 'Exporter' => 0 results:
+PerlSubReferenceSimple at (100,104); text in range: 'info' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::info at 1659 in lazyExportOkQw.pl
 
-PerlVariableReference at (121,130); text in range: 'EXPORT_OK' => 1 results:
-	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 82 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (109,114); text in range: 'debug' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::debug at 1670 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (141,145); text in range: 'info' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::info at 1700 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (119,123); text in range: 'trim' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::trim at 1682 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (150,155); text in range: 'debug' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::debug at 1711 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (128,133); text in range: 'ltrim' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ltrim at 1693 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (160,164); text in range: 'trim' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::trim at 1723 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (138,143); text in range: 'rtrim' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::rtrim at 1705 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (169,174); text in range: 'ltrim' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ltrim at 1734 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (148,155); text in range: 'ucwords' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ucwords at 1717 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (179,184); text in range: 'rtrim' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::rtrim at 1746 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (160,169); text in range: 'is_equals' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_equals at 1731 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (189,196); text in range: 'ucwords' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::ucwords at 1758 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (174,182); text in range: 'is_empty' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_empty at 1747 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (201,210); text in range: 'is_equals' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_equals at 1772 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (187,196); text in range: 'is_number' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_number at 1762 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (215,223); text in range: 'is_empty' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_empty at 1788 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (201,211); text in range: 'is_numeric' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_numeric at 1778 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (228,237); text in range: 'is_number' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_number at 1803 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (216,226); text in range: 'is_blessed' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_blessed at 1795 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (242,252); text in range: 'is_numeric' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_numeric at 1819 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (231,240); text in range: 'is_scalar' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_scalar at 1812 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (257,267); text in range: 'is_blessed' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_blessed at 1836 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (245,251); text in range: 'is_isa' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_isa at 1828 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (272,281); text in range: 'is_scalar' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_scalar at 1853 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (256,262); text in range: 'is_can' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_can at 1841 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (286,292); text in range: 'is_isa' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_isa at 1869 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (267,278); text in range: 'is_datetime' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_datetime at 1854 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (297,303); text in range: 'is_can' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_can at 1882 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (283,291); text in range: 'is_array' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_array at 1872 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (308,319); text in range: 'is_datetime' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_datetime at 1895 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (296,303); text in range: 'is_hash' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hash at 1887 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (324,332); text in range: 'is_array' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_array at 1913 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (308,318); text in range: 'is_hashref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hashref at 1901 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (337,344); text in range: 'is_hash' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hash at 1928 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (323,334); text in range: 'is_arrayref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_arrayref at 1918 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (349,359); text in range: 'is_hashref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_hashref at 1942 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (339,347); text in range: 'is_undef' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_undef at 1936 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (364,375); text in range: 'is_arrayref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_arrayref at 1959 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (352,357); text in range: 'is_in' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_in at 1951 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (380,388); text in range: 'is_undef' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_undef at 1977 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (362,369); text in range: 'is_uuid' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_uuid at 1963 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (393,398); text in range: 'is_in' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_in at 1992 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (374,384); text in range: 'is_iso8601' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_iso8601 at 1977 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (403,410); text in range: 'is_uuid' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_uuid at 2004 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (389,397); text in range: 'is_sql92' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92 at 1994 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (415,425); text in range: 'is_iso8601' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_iso8601 at 2018 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (402,415); text in range: 'is_sql92_date' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92_date at 2009 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (430,438); text in range: 'is_sql92' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92 at 2035 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (420,443); text in range: 'is_integration_username' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_integration_username at 2029 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (443,456); text in range: 'is_sql92_date' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_sql92_date at 2050 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (448,463); text in range: 'is_phone_number' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_phone_number at 2059 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (461,484); text in range: 'is_integration_username' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_integration_username at 2070 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (468,474); text in range: 'unwrap' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::unwrap at 2081 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (489,504); text in range: 'is_phone_number' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_phone_number at 2100 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (479,487); text in range: 'superref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::superref at 2094 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (509,515); text in range: 'unwrap' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::unwrap at 2122 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (492,507); text in range: 'assert_required' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2109 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (520,528); text in range: 'superref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::superref at 2135 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (512,526); text in range: 'assert_numeric' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric at 2131 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (533,548); text in range: 'assert_required' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2150 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (531,554); text in range: 'assert_numeric_in_range' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric_in_range at 2152 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (553,567); text in range: 'assert_numeric' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric at 2172 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (559,574); text in range: 'assert_datetime' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_datetime at 2182 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (572,595); text in range: 'assert_numeric_in_range' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_numeric_in_range at 2193 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (579,589); text in range: 'assert_isa' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_isa at 2204 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (600,615); text in range: 'assert_datetime' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_datetime at 2223 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (594,608); text in range: 'assert_hashref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_hashref at 2221 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (620,630); text in range: 'assert_isa' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_isa at 2245 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (613,628); text in range: 'assert_arrayref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_arrayref at 2242 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (635,649); text in range: 'assert_hashref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_hashref at 2262 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (633,654); text in range: 'assert_has_moose_role' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_has_moose_role at 2264 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (654,669); text in range: 'assert_arrayref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_arrayref at 2283 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (659,670); text in range: 'assert_i18n' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_i18n at 2292 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (674,695); text in range: 'assert_has_moose_role' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_has_moose_role at 2305 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (675,684); text in range: 'assert_in' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_in at 2310 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (700,711); text in range: 'assert_i18n' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_i18n at 2333 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (689,699); text in range: 'assert_can' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_can at 2326 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (716,725); text in range: 'assert_in' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_in at 2351 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (704,717); text in range: 'assert_equals' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_equals at 2343 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (730,740); text in range: 'assert_can' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_can at 2367 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (722,734); text in range: 'assert_undef' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_undef at 2363 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (745,758); text in range: 'assert_equals' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_equals at 2384 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (739,753); text in range: 'assert_defined' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_defined at 2382 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (763,775); text in range: 'assert_undef' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_undef at 2404 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (758,771); text in range: 'assert_length' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_length at 2403 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (780,794); text in range: 'assert_defined' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_defined at 2423 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (776,787); text in range: 'assert_uuid' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_uuid at 2423 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (799,812); text in range: 'assert_length' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_length at 2444 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (792,806); text in range: 'assert_keys_in' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_keys_in at 2441 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (817,828); text in range: 'assert_uuid' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_uuid at 2464 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (811,825); text in range: 'assert_iso8601' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_iso8601 at 2462 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (833,847); text in range: 'assert_keys_in' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_keys_in at 2482 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (830,842); text in range: 'assert_sql02' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_sql02 at 2483 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (852,866); text in range: 'assert_iso8601' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_iso8601 at 2503 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (847,859); text in range: 'assert_email' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_email at 2502 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (871,883); text in range: 'assert_sql02' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_sql02 at 2524 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (864,876); text in range: 'array_search' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::array_search at 2521 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (888,900); text in range: 'assert_email' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_email at 2543 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (881,893); text in range: 'assert_empty' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_empty at 2540 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (905,917); text in range: 'array_search' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::array_search at 2562 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (898,914); text in range: 'optional_numeric' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_numeric at 2559 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (922,934); text in range: 'assert_empty' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_empty at 2581 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (919,936); text in range: 'optional_datetime' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_datetime at 2582 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (939,955); text in range: 'optional_numeric' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_numeric at 2600 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (941,953); text in range: 'optional_isa' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_isa at 2606 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (960,977); text in range: 'optional_datetime' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_datetime at 2623 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (958,974); text in range: 'optional_hashref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_hashref at 2625 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (982,994); text in range: 'optional_isa' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_isa at 2647 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (979,990); text in range: 'optional_in' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_in at 2648 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (999,1015); text in range: 'optional_hashref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_hashref at 2666 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (995,1012); text in range: 'optional_arrayref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_arrayref at 2666 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1020,1031); text in range: 'optional_in' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_in at 2689 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1017,1030); text in range: 'optional_uuid' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_uuid at 2690 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1036,1053); text in range: 'optional_arrayref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_arrayref at 2707 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1035,1054); text in range: 'create_phone_search' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_phone_search at 2710 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1058,1071); text in range: 'optional_uuid' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::optional_uuid at 2731 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1059,1076); text in range: 'create_ssn_search' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ssn_search at 2736 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1076,1095); text in range: 'create_phone_search' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_phone_search at 2751 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1081,1098); text in range: 'create_ein_search' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ein_search at 2760 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1100,1117); text in range: 'create_ssn_search' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ssn_search at 2777 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1103,1111); text in range: 'coalesce' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce at 2784 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1122,1139); text in range: 'create_ein_search' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_ein_search at 2801 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1116,1130); text in range: 'coalesce_undef' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce_undef at 2799 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1144,1152); text in range: 'coalesce' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce at 2825 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1135,1146); text in range: 'replace_all' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::replace_all at 2820 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1157,1171); text in range: 'coalesce_undef' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::coalesce_undef at 2840 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1151,1173); text in range: 'parse_datetime_iso8601' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::parse_datetime_iso8601 at 2838 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1176,1187); text in range: 'replace_all' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::replace_all at 2861 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1178,1210); text in range: 'determine_transaction_entry_type' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::determine_transaction_entry_type at 2867 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1192,1214); text in range: 'parse_datetime_iso8601' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::parse_datetime_iso8601 at 2879 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1215,1230); text in range: 'extract_numeric' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_numeric at 2906 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1219,1251); text in range: 'determine_transaction_entry_type' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::determine_transaction_entry_type at 2908 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1235,1251); text in range: 'extract_required' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_required at 2928 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1256,1271); text in range: 'extract_numeric' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_numeric at 2947 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1256,1272); text in range: 'extract_datetime' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_datetime at 2951 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1276,1292); text in range: 'extract_required' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_required at 2969 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1277,1293); text in range: 'extract_arrayref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_arrayref at 2974 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1297,1313); text in range: 'extract_datetime' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_datetime at 2992 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1298,1313); text in range: 'extract_hashref' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_hashref at 2997 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1318,1334); text in range: 'extract_arrayref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_arrayref at 3015 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1318,1330); text in range: 'extract_uuid' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_uuid at 3019 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1339,1354); text in range: 'extract_hashref' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_hashref at 3038 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1335,1350); text in range: 'extract_iso8601' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_iso8601 at 3038 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1359,1371); text in range: 'extract_uuid' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_uuid at 3060 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1355,1368); text in range: 'extract_sql92' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_sql92 at 3060 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1376,1391); text in range: 'extract_iso8601' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_iso8601 at 3079 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1373,1392); text in range: 'capture_stack_trace' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::capture_stack_trace at 3080 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1396,1409); text in range: 'extract_sql92' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::extract_sql92 at 3101 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1397,1420); text in range: 'create_query_arg_string' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_query_arg_string at 3106 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1414,1433); text in range: 'capture_stack_trace' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::capture_stack_trace at 3121 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1425,1451); text in range: 'random_alphanumeric_string' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::random_alphanumeric_string at 3136 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1438,1461); text in range: 'create_query_arg_string' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::create_query_arg_string at 3147 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1456,1462); text in range: 'sizeof' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::sizeof at 3169 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1466,1492); text in range: 'random_alphanumeric_string' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::random_alphanumeric_string at 3177 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1467,1475); text in range: 'is_email' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_email at 3182 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1497,1503); text in range: 'sizeof' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::sizeof at 3210 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1480,1489); text in range: 'is_tax_id' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_tax_id at 3197 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1508,1516); text in range: 'is_email' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_email at 3223 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1494,1503); text in range: 'from_file' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file at 3213 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1521,1530); text in range: 'is_tax_id' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_tax_id at 3238 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1508,1524); text in range: 'from_file_binary' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file_binary at 3229 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1535,1544); text in range: 'from_file' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file at 3254 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1529,1544); text in range: 'throw_exception' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::throw_exception at 3252 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1549,1565); text in range: 'from_file_binary' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::from_file_binary at 3270 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1549,1562); text in range: 'get_exception' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::get_exception at 3274 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1570,1585); text in range: 'throw_exception' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::throw_exception at 3293 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1567,1586); text in range: 'load_module_by_name' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::load_module_by_name at 3294 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1590,1603); text in range: 'get_exception' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::get_exception at 3315 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1591,1602); text in range: 'is_filepath' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_filepath at 3320 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1608,1627); text in range: 'load_module_by_name' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::load_module_by_name at 3335 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1607,1628); text in range: 'clean_currency_string' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::clean_currency_string at 3338 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1632,1643); text in range: 'is_filepath' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::is_filepath at 3361 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1633,1638); text in range: 'shell' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::shell at 3366 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1648,1669); text in range: 'clean_currency_string' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::clean_currency_string at 3379 in lazyExportOkQw.pl
+PerlSubReferenceSimple at (1643,1650); text in range: 'to_file' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::to_file at 3378 in lazyExportOkQw.pl
 
-PerlSubReferenceSimple at (1674,1679); text in range: 'shell' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::shell at 3407 in lazyExportOkQw.pl
+PerlNamespaceFileReference at (3430,3448); text in range: 'TestExportOK::Util' => 0 results:
 
-PerlSubReferenceSimple at (1684,1691); text in range: 'to_file' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::to_file at 3419 in lazyExportOkQw.pl
+PerlSubReference at (4992,5007); text in range: 'assert_required' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestExportOK::Util::assert_required at 2109 in lazyExportOkQw.pl
 

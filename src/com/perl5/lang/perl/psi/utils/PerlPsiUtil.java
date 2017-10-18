@@ -74,7 +74,7 @@ public class PerlPsiUtil implements PerlElementTypes {
    *
    * @param startWith element to start with (inclusive)
    */
-  private static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor) {
+  public static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor) {
     while (startWith != null) {
       if (startWith instanceof PerlStringContentElement) {
         processor.process((PerlStringContentElement)startWith);
