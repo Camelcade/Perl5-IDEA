@@ -1,0 +1,3 @@
+my ($test, $other) = 1;
+my (@test, @other) = ($test, @other);
+my (%test, %other) = (@test, @other);

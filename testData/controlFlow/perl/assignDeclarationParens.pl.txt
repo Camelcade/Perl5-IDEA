@@ -1,0 +1,20 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlAssignExprImpl
+3(4) PsiPerlNumberConstantImpl
+4(5) PsiPerlVariableDeclarationLexicalImpl
+5(6) PsiPerlVariableDeclarationElementImpl
+6(7) WRITE to $test (PsiPerlScalarVariableImpl) from 1 (PsiPerlNumberConstantImpl)[0]
+7(8) PsiPerlStatementImpl
+8(9) PsiPerlAssignExprImpl
+9(10) READ from $test (PsiPerlScalarVariableImpl)
+10(11) PsiPerlVariableDeclarationLexicalImpl
+11(12) PsiPerlVariableDeclarationElementImpl
+12(13) WRITE to @test (PsiPerlArrayVariableImpl) from $test (PsiPerlScalarVariableImpl)[0]
+13(14) PsiPerlStatementImpl
+14(15) PsiPerlAssignExprImpl
+15(16) READ from @test (PsiPerlArrayVariableImpl)
+16(17) PsiPerlVariableDeclarationLexicalImpl
+17(18) PsiPerlVariableDeclarationElementImpl
+18(19) WRITE to %test (PsiPerlHashVariableImpl) from @test (PsiPerlArrayVariableImpl)[0]
+19() nothing

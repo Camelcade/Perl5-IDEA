@@ -1,0 +1,3 @@
+my ($test) = 1;
+my (@test) = $test;
+my (%test) = @test;

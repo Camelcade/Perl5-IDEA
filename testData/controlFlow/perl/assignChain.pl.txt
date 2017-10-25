@@ -1,0 +1,9 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlAssignExprImpl
+3(4) READ from $#e (PsiPerlArrayIndexVariableImpl)
+4(5) WRITE to *d (PsiPerlGlobVariableImpl) from $#e (PsiPerlArrayIndexVariableImpl)[0] & READ FROM
+5(6) WRITE to %c (PsiPerlHashVariableImpl) from *d (PsiPerlGlobVariableImpl)[0] & READ FROM
+6(7) WRITE to @b (PsiPerlArrayVariableImpl) from %c (PsiPerlHashVariableImpl)[0] & READ FROM
+7(8) WRITE to $a (PsiPerlScalarVariableImpl) from @b (PsiPerlArrayVariableImpl)[0]
+8() nothing

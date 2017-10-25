@@ -1,0 +1,35 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlPrintExprImpl
+3(4) READ from $a (PsiPerlScalarVariableImpl)
+4(5) PsiPerlStatementImpl
+5(6) PsiPerlPrintExprImpl
+6(7) READ from @a (PsiPerlArrayVariableImpl)
+7(8) PsiPerlStatementImpl
+8(9) PsiPerlPrintExprImpl
+9(10) PsiPerlArrayElementImpl
+10(11) READ from $a (PsiPerlScalarVariableImpl)
+11(12) PsiPerlArrayIndexImpl
+12(13) PsiPerlNumberConstantImpl
+13(14) PsiPerlStatementImpl
+14(15) PsiPerlPrintExprImpl
+15(16) READ from %a (PsiPerlHashVariableImpl)
+16(17) PsiPerlStatementImpl
+17(18) PsiPerlPrintExprImpl
+18(19) PsiPerlHashElementImpl
+19(20) READ from $a (PsiPerlScalarVariableImpl)
+20(21) PsiPerlHashIndexImpl
+21(22) PsiPerlStringBareImpl
+22(23) PsiPerlStatementImpl
+23(24) PsiPerlPrintExprImpl
+24(25) READ from $#a (PsiPerlArrayIndexVariableImpl)
+25(26) PsiPerlStatementImpl
+26(27) PsiPerlPrintExprImpl
+27(28) READ from *a (PsiPerlGlobVariableImpl)
+28(29) PsiPerlStatementImpl
+29(30) PsiPerlPrintExprImpl
+30(31) PsiPerlGlobSlotImpl
+31(32) READ from *a (PsiPerlGlobVariableImpl)
+32(33) PsiPerlHashIndexImpl
+33(34) PsiPerlStringBareImpl
+34() nothing

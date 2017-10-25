@@ -1,0 +1,22 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlAssignExprImpl
+3(4) READ from $b (PsiPerlScalarVariableImpl)
+4(5) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+5(6) PsiPerlStatementImpl
+6(7) PsiPerlAssignExprImpl
+7(8) READ from @b (PsiPerlArrayVariableImpl)
+8(9) WRITE to @a (PsiPerlArrayVariableImpl) from @b (PsiPerlArrayVariableImpl)[0]
+9(10) PsiPerlStatementImpl
+10(11) PsiPerlAssignExprImpl
+11(12) READ from %b (PsiPerlHashVariableImpl)
+12(13) WRITE to %a (PsiPerlHashVariableImpl) from %b (PsiPerlHashVariableImpl)[0]
+13(14) PsiPerlStatementImpl
+14(15) PsiPerlAssignExprImpl
+15(16) READ from *b (PsiPerlGlobVariableImpl)
+16(17) WRITE to *a (PsiPerlGlobVariableImpl) from *b (PsiPerlGlobVariableImpl)[0]
+17(18) PsiPerlStatementImpl
+18(19) PsiPerlAssignExprImpl
+19(20) READ from $#b (PsiPerlArrayIndexVariableImpl)
+20(21) WRITE to $#a (PsiPerlArrayIndexVariableImpl) from $#b (PsiPerlArrayIndexVariableImpl)[0]
+21() nothing

@@ -1,0 +1,8 @@
+say $a;
+say @a;
+say $a[1];
+say %a;
+say $a{test};
+say $#a;
+say *a;
+say *a{GLOB};

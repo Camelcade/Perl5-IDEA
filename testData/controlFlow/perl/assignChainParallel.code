@@ -1,0 +1,1 @@
+my ($a, $b, $c ) = ($c, $d, $e ) = ($f, @array) = %hash

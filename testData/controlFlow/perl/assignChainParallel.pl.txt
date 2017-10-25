@@ -1,0 +1,21 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlAssignExprImpl
+3(4) READ from %hash (PsiPerlHashVariableImpl)
+4(5) PsiPerlParenthesisedExprImpl
+5(6) PsiPerlCommaSequenceExprImpl
+6(7) WRITE to $f (PsiPerlScalarVariableImpl) from %hash (PsiPerlHashVariableImpl)[0] & READ FROM
+7(8) WRITE to @array (PsiPerlArrayVariableImpl) from %hash (PsiPerlHashVariableImpl)[1] & READ FROM
+8(9) PsiPerlParenthesisedExprImpl
+9(10) PsiPerlCommaSequenceExprImpl
+10(11) WRITE to $c (PsiPerlScalarVariableImpl) from ($f, @array) (PsiPerlParenthesisedExprImpl)[0] & READ FROM
+11(12) WRITE to $d (PsiPerlScalarVariableImpl) from ($f, @array) (PsiPerlParenthesisedExprImpl)[1] & READ FROM
+12(13) WRITE to $e (PsiPerlScalarVariableImpl) from ($f, @array) (PsiPerlParenthesisedExprImpl)[2] & READ FROM
+13(14) PsiPerlVariableDeclarationLexicalImpl
+14(15) PsiPerlVariableDeclarationElementImpl
+15(16) WRITE to $a (PsiPerlScalarVariableImpl) from ($c, $d, $e ) (PsiPerlParenthesisedExprImpl)[0]
+16(17) PsiPerlVariableDeclarationElementImpl
+17(18) WRITE to $b (PsiPerlScalarVariableImpl) from ($c, $d, $e ) (PsiPerlParenthesisedExprImpl)[1]
+18(19) PsiPerlVariableDeclarationElementImpl
+19(20) WRITE to $c (PsiPerlScalarVariableImpl) from ($c, $d, $e ) (PsiPerlParenthesisedExprImpl)[2]
+20() nothing
