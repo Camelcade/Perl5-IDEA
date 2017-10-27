@@ -1,0 +1,51 @@
+0(1) nothing
+1(2) PsiPerlStatementImpl
+2(3) PsiPerlIfStatementModifierImpl
+3(4) READ from $_ (PsiPerlScalarVariableImpl)
+4(5) PsiPerlPrintExprImpl
+5(6) PsiPerlAssignExprImpl
+6(7) READ from $b (PsiPerlScalarVariableImpl)
+7(8) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+8(9) PsiPerlStatementImpl
+9(10) PsiPerlUnlessStatementModifierImpl
+10(11) READ from $_ (PsiPerlScalarVariableImpl)
+11(12) PsiPerlPrintExprImpl
+12(13) PsiPerlAssignExprImpl
+13(14) READ from $b (PsiPerlScalarVariableImpl)
+14(15) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+15(16) PsiPerlStatementImpl
+16(17) PsiPerlWhenStatementModifierImpl
+17(18) READ from $_ (PsiPerlScalarVariableImpl)
+18(19) PsiPerlPrintExprImpl
+19(20) PsiPerlAssignExprImpl
+20(21) READ from $b (PsiPerlScalarVariableImpl)
+21(22) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+22(23) PsiPerlStatementImpl
+23(24) PsiPerlWhileStatementModifierImpl
+24(25) READ from $_ (PsiPerlScalarVariableImpl)
+25(26) PsiPerlPrintExprImpl
+26(27) PsiPerlAssignExprImpl
+27(28) READ from $b (PsiPerlScalarVariableImpl)
+28(29) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+29(30) PsiPerlStatementImpl
+30(31) PsiPerlUntilStatementModifierImpl
+31(32) READ from $_ (PsiPerlScalarVariableImpl)
+32(33) PsiPerlPrintExprImpl
+33(34) PsiPerlAssignExprImpl
+34(35) READ from $b (PsiPerlScalarVariableImpl)
+35(36) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+36(37) PsiPerlStatementImpl
+37(38) PsiPerlForStatementModifierImpl
+38(39) READ from @_ (PsiPerlArrayVariableImpl)
+39(40) PsiPerlPrintExprImpl
+40(41) PsiPerlAssignExprImpl
+41(42) READ from $b (PsiPerlScalarVariableImpl)
+42(43) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+43(44) PsiPerlStatementImpl
+44(45) PsiPerlForeachStatementModifierImpl
+45(46) READ from @_ (PsiPerlArrayVariableImpl)
+46(47) PsiPerlPrintExprImpl
+47(48) PsiPerlAssignExprImpl
+48(49) READ from $b (PsiPerlScalarVariableImpl)
+49(50) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
+50() nothing

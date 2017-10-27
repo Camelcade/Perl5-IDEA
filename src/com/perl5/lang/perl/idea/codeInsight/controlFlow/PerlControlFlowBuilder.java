@@ -28,6 +28,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlAssignExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlStatementModifierImpl;
 import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationExprMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -162,6 +163,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
     }
 
+    @Override
+    public void visitStatement(@NotNull PsiPerlStatement o) {
+      startNode(o);
+      PsiPerlStatementModifierImpl statementModifier = PsiTreeUtil.getChildOfType(o, PsiPerlStatementModifierImpl.class);
+      if (statementModifier != null) {
+        statementModifier.accept(this);
+      }
+      PsiElement statementBody = o.getFirstChild();
+      if (statementBody != null) {
+        statementBody.accept(this);
+      }
+    }
 
     @Override
     public void visitElement(@NotNull PsiElement element) {
