@@ -1,0 +1,3 @@
+
+qq/this is<caret> a $variable test/;
+

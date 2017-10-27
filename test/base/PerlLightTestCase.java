@@ -587,7 +587,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     initWithFileSmartWithoutErrors();
     myFixture.enableInspections(inspectionClass);
     //myFixture.checkHighlighting(true, false, false);
-    doTestIntention(quickFixNamePrefix);
+    doTestIntentionWithoutLoad(quickFixNamePrefix);
   }
 
   @NotNull
@@ -612,6 +612,11 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   protected void doTestIntention(@NotNull String intentionPrefix) {
+    initWithFileSmartWithoutErrors();
+    doTestIntentionWithoutLoad(intentionPrefix);
+  }
+
+  private void doTestIntentionWithoutLoad(@NotNull String intentionPrefix) {
     myFixture.launchAction(getSingleIntention(intentionPrefix));
     assertNoErrorElements();
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
