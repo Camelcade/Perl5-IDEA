@@ -1,0 +1,3 @@
+forea<caret>ch my $var (@ARGV){
+    say $var;
+}

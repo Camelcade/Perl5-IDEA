@@ -17,12 +17,15 @@
 package editor;
 
 import base.PerlLightTestCase;
+import com.perl5.PerlBundle;
 
 public class PerlIntentionsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/intentions/perl";
   }
+
+  public void testForeachToFor() {doTestIntention(PerlBundle.message("perl.intention.foreach.to.for"));}
 
   public void testStringToHeredocQQ() {doTestConvertToHeredoc();}
 
@@ -37,6 +40,6 @@ public class PerlIntentionsTest extends PerlLightTestCase {
   public void testStringToHeredocXQMnemonic() {doTestConvertToHeredoc();}
 
   private void doTestConvertToHeredoc() {
-    doTestIntention("Convert to heredoc:");
+    doTestIntention(PerlBundle.message("perl.intention.heredoc.last.prefix"));
   }
 }

@@ -1,0 +1,5 @@
+my @list = (@ARGV);
+for (my $idx = 0; $idx < scalar(@list); $idx++) {
+    my $var = $list[$idx];
+    say $var;
+}
