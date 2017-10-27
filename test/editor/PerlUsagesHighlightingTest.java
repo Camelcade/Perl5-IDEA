@@ -24,6 +24,8 @@ public class PerlUsagesHighlightingTest extends PerlLightTestCase {
     return "testData/highlighting_usages/perl";
   }
 
+  public void testCaptureGroupsScalars() {doTest();}
+
   public void testNamespace() {doTest();}
 
   public void testBuiltInSubs() {doTest();}

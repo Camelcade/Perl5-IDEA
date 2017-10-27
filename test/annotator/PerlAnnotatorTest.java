@@ -31,6 +31,10 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testCaptureGroupsScalarsUnresolved() {doTestUnresolvedVariableInspection();}
+
+  public void testCaptureGroupsScalars() {doAnnotatorTest();}
+
   public void testBuiltInVariables() {doAnnotatorTest();}
 
   public void testSpellChecker() {doInspectionTest(SpellCheckingInspection.class);}
@@ -47,10 +51,13 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testVariableShadowingBuiltIn() {doShadowingTest();}
 
-
   public void testUnusedLexicalVariableInspection() {doInspectionTest(PerlUnusedLexicalVariableInspection.class);}
 
-  public void testUnresolvedVariableInspection() {doInspectionTest(PerlUnresolvedVariableInspection.class);}
+  private void doTestUnresolvedVariableInspection() {
+    doInspectionTest(PerlUnresolvedVariableInspection.class);
+  }
+
+  public void testUnresolvedVariableInspection() {doTestUnresolvedVariableInspection();}
 
   public void testUnusedGlobalVariableInspection() {doInspectionTest(PerlUnusedGlobalVariableInspection.class);}
 

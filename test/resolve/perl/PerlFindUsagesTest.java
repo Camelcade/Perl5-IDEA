@@ -24,6 +24,8 @@ public class PerlFindUsagesTest extends PerlLightTestCase {
     return "testData/findusages/perl";
   }
 
+  public void testCaptureGroupsScalars() {doTest();}
+
   public void testNamespace() {
     doTest();
   }

@@ -1,0 +1,3 @@
+
+say <info descr="null">$1</info>;
+<info descr="null">$a</info> = <info descr="null">$1</info>;

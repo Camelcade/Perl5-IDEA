@@ -1,0 +1,8 @@
+Target: Built-in: $1
+Total usages: 2
+	PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 6 in captureGroupsScalars.pl, via: PerlVariableReference at (6,7); text in range: '1' => 1 results:
+	Built-in: $1
+
+	PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 15 in captureGroupsScalars.pl, via: PerlVariableReference at (15,16); text in range: '1' => 1 results:
+	Built-in: $1
+

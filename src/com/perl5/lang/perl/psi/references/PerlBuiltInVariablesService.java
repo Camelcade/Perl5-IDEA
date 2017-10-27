@@ -45,6 +45,10 @@ public class PerlBuiltInVariablesService {
   public PerlBuiltInVariablesService(Project project) {
     myPsiManager = PsiManager.getInstance(project);
 
+    for (int i = 1; i <= 20; i++) {
+      String variableName = Integer.toString(i);
+      myScalars.put(variableName, new PerlBuiltInVariable(myPsiManager, "$" + variableName));
+    }
     PerlBuiltInScalars.BUILT_IN.forEach(name -> myScalars.put(name, new PerlBuiltInVariable(myPsiManager, "$" + name)));
     PerlArrayUtil.BUILT_IN.forEach(name -> myArrays.put(name, new PerlBuiltInVariable(myPsiManager, "@" + name)));
     PerlHashUtil.BUILT_IN.forEach(name -> myHashes.put(name, new PerlBuiltInVariable(myPsiManager, "%" + name)));

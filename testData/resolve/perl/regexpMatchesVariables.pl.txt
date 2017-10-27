@@ -1,0 +1,60 @@
+PerlVariableReference at (5,6); text in range: '1' => 1 results:
+	Built-in: $1
+
+PerlVariableReference at (13,14); text in range: '2' => 1 results:
+	Built-in: $2
+
+PerlVariableReference at (21,22); text in range: '3' => 1 results:
+	Built-in: $3
+
+PerlVariableReference at (29,30); text in range: '4' => 1 results:
+	Built-in: $4
+
+PerlVariableReference at (37,38); text in range: '5' => 1 results:
+	Built-in: $5
+
+PerlVariableReference at (45,46); text in range: '6' => 1 results:
+	Built-in: $6
+
+PerlVariableReference at (53,54); text in range: '7' => 1 results:
+	Built-in: $7
+
+PerlVariableReference at (61,62); text in range: '8' => 1 results:
+	Built-in: $8
+
+PerlVariableReference at (69,70); text in range: '9' => 1 results:
+	Built-in: $9
+
+PerlVariableReference at (77,79); text in range: '10' => 1 results:
+	Built-in: $10
+
+PerlVariableReference at (86,88); text in range: '11' => 1 results:
+	Built-in: $11
+
+PerlVariableReference at (95,97); text in range: '12' => 1 results:
+	Built-in: $12
+
+PerlVariableReference at (104,106); text in range: '13' => 1 results:
+	Built-in: $13
+
+PerlVariableReference at (113,115); text in range: '14' => 1 results:
+	Built-in: $14
+
+PerlVariableReference at (122,124); text in range: '15' => 1 results:
+	Built-in: $15
+
+PerlVariableReference at (131,133); text in range: '16' => 1 results:
+	Built-in: $16
+
+PerlVariableReference at (140,142); text in range: '17' => 1 results:
+	Built-in: $17
+
+PerlVariableReference at (149,151); text in range: '18' => 1 results:
+	Built-in: $18
+
+PerlVariableReference at (158,160); text in range: '19' => 1 results:
+	Built-in: $19
+
+PerlVariableReference at (167,169); text in range: '20' => 1 results:
+	Built-in: $20
+
