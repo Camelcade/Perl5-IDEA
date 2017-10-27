@@ -27,6 +27,7 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
@@ -117,6 +118,6 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
   @NotNull
   @Override
   public String getText() {
-    return "Convert to heredoc: " + HEREDOC_MARKER;
+    return PerlBundle.message("perl.intention.heredoc.last.prefix") + HEREDOC_MARKER;
   }
 }

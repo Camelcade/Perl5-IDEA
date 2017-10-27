@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
@@ -36,7 +37,7 @@ public class ForeachToForConverter extends PsiElementBaseIntentionAction {
   @NotNull
   @Override
   public String getText() {
-    return "Convert foreach to indexed for (Alpha)";
+    return PerlBundle.message("perl.intention.foreach.to.for");
   }
 
   @Nls
