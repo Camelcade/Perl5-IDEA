@@ -48,10 +48,6 @@ public class ForeachToForConverter extends PsiElementBaseIntentionAction {
 
   @Override
   public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-    if (!element.isWritable()) {
-      return false;
-    }
-
     PsiElement parent = element.getParent();
     if (!(parent instanceof PsiPerlForeachCompound)) {
       return false;

@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.intentions;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -102,9 +101,6 @@ public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction 
 
   @Override
   public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-    if (!element.isWritable() && !ApplicationManager.getApplication().isUnitTestMode()) {
-      return false;
-    }
     PsiElement parent = element.getParent();
     PsiElement grandParent = parent.getParent();
     return !(grandParent instanceof PerlHeredocOpener) &&
