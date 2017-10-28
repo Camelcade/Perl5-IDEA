@@ -24,6 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
@@ -61,7 +62,7 @@ public class PerlUseStrictInspection extends PerlInspection {
 
         holder.registerProblem(
           file,
-          "No strict pragma found in the file",
+          PerlBundle.message("perl.inspection.use.strict"),
           ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
           new PerlUsePackageQuickFix("strict")
         );

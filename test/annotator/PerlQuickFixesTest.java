@@ -30,19 +30,19 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   }
 
   public void testFancyMethodCall() {
-    doTestAnnotationQuickFix(PerlFancyMethodCallInspection.class, "Re-format method invocation");
+    doTestAnnotationQuickFix(PerlFancyMethodCallInspection.class, PerlBundle.message("perl.quickfix.fancy.method.prefix"));
   }
 
   public void testUseStrictSimple() {
-    doTestAnnotationQuickFix(PerlUseStrictInspection.class, "Add use strict");
+    doTestAnnotationQuickFix(PerlUseStrictInspection.class, PerlBundle.message("perl.quickfix.add.use.name", "strict"));
   }
 
   public void testUseWarningsSimple() {
-    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, "Add use warnings;");
+    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, PerlBundle.message("perl.quickfix.add.use.name", "warnings"));
   }
 
   public void testUseWarningsSimpleFatal() {
-    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, "Add use warnings FATAL");
+    doTestAnnotationQuickFix(PerlUseWarningsInspection.class, PerlBundle.message("perl.quickfix.add.use.name", "warnings FATAL => 'all'"));
   }
 
   public void testUseVarsToEmpty() {doTestUseVarsQuickFix();}

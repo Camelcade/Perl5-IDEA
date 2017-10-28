@@ -20,6 +20,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -43,13 +44,13 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix {
   @NotNull
   @Override
   public String getName() {
-    return "Re-format method invocation to " + myNewForm + "(...)";
+    return PerlBundle.message("perl.quickfix.fancy.method.prefix") + myNewForm + "()";
   }
 
   @NotNull
   @Override
   public String getFamilyName() {
-    return "Re-format invocation";
+    return PerlBundle.message("perl.quickfix.fancy.method.family");
   }
 
   @Override

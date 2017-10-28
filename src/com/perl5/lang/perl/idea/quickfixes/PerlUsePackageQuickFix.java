@@ -26,6 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
@@ -49,13 +50,13 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
   @NotNull
   @Override
   public String getName() {
-    return String.format("Add use %s;", myPackageName);
+    return PerlBundle.message("perl.quickfix.add.use.name", myPackageName);
   }
 
   @NotNull
   @Override
   public String getFamilyName() {
-    return "Add use statement";
+    return PerlBundle.message("perl.quickfix.add.use.family");
   }
 
   @Override

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.quickfixes.PerlFancyMethodQuickFix;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -48,7 +49,7 @@ public class PerlFancyMethodCallInspection extends PerlInspection {
           String properForm = String.format("%s->%s", packageName, subNameElement.getName());
           holder.registerProblem(
             o,
-            String.format("Using of fancy calls is not recommended, use %s(...)", properForm),
+            PerlBundle.message("perl.inspection.fancy.call", properForm),
             ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
             new PerlFancyMethodQuickFix(properForm)
           );

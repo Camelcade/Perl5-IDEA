@@ -24,6 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
@@ -35,8 +36,6 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 19.07.2015.
  */
 public class PerlUseWarningsInspection extends PerlInspection {
-
-
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
@@ -62,7 +61,7 @@ public class PerlUseWarningsInspection extends PerlInspection {
         }
         holder.registerProblem(
           file,
-          "No warnings pragma found in the file",
+          PerlBundle.message("perl.inspection.use.warnings"),
           ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
           new PerlUsePackageQuickFix("warnings FATAL => 'all'"),
           new PerlUsePackageQuickFix("warnings")
