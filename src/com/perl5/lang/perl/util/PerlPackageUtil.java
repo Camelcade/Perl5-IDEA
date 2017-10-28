@@ -92,6 +92,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED = PACKAGE_MOOSE_X_BASE + "Role::Parameterized";
   public static final String PACKAGE_MOOSE_X_ROLE_WITHOVERLOADING = PACKAGE_MOOSE_X_BASE + "Role::WithOverloading";
   public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES = PACKAGE_MOOSE_X_BASE + "MethodAttributes";
+  public static final String PACKAGE_VARS = "vars";
 
   public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY);
   public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PACKAGE_SEPARATOR + "|" + PACKAGE_SEPARATOR_LEGACY + ")$");

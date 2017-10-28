@@ -17,8 +17,10 @@
 package annotator;
 
 import base.PerlLightTestCase;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
 import com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection;
+import com.perl5.lang.perl.idea.inspections.PerlUseVarsInspection;
 import com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection;
 
 public class PerlQuickFixesTest extends PerlLightTestCase {
@@ -41,5 +43,13 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
 
   public void testUseWarningsSimpleFatal() {
     doTestAnnotationQuickFix(PerlUseWarningsInspection.class, "Add use warnings FATAL");
+  }
+
+  public void testUseVarsToEmpty() {doTestUseVarsQuickFix();}
+
+  public void testUseVars() {doTestUseVarsQuickFix();}
+
+  private void doTestUseVarsQuickFix() {
+    doTestAnnotationQuickFix(PerlUseVarsInspection.class, PerlBundle.message("perl.quickfix.use.vars"));
   }
 }

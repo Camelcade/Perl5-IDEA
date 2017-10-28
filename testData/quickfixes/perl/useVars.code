@@ -1,0 +1,1 @@
+use <caret>vars qw/$scalar @array %hash *glob &somesub/;

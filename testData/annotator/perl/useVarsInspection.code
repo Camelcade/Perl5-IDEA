@@ -1,0 +1,1 @@
+<warning descr="Modern way to declare global variables is 'our', not 'use vars'">use vars qw/$scalar @array %hash *glob &somesub/;</warning>
