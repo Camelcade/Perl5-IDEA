@@ -31,6 +31,10 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testUseVarsShadowing() {doShadowingTest();}
+
+  public void testUseVarsShadowingReversal() {doShadowingTest();}
+
   public void testCaptureGroupsScalarsUnresolved() {doTestUnresolvedVariableInspection();}
 
   public void testCaptureGroupsScalars() {doAnnotatorTest();}

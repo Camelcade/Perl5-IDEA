@@ -1,0 +1,6 @@
+my($scalar, @array, %hash);
+use vars qw/
+<warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">$scalar</warning>
+<warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">@array</warning>
+<warning descr="Current variable declaration shadows previous declaration of the same variable at line 1">%hash</warning>
+/;
