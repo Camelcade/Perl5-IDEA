@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Created by hurricup on 26.01.2016.
  */
-public class StringToLastHeredocConverter extends PsiElementBaseIntentionAction implements IntentionAction {
+public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction implements IntentionAction {
   protected static String HEREDOC_MARKER = "HEREDOC";
 
   @Override

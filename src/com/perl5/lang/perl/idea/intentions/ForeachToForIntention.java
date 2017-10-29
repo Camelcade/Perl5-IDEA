@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by bcardoso on 7/28/16.
  */
-public class ForeachToForConverter extends PsiElementBaseIntentionAction {
+public class ForeachToForIntention extends PsiElementBaseIntentionAction {
   @Nls
   @NotNull
   @Override

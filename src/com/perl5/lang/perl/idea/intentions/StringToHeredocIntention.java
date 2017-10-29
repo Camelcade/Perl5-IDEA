@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 19.07.2015.
  */
-public class StringToHeredocConverter extends StringToLastHeredocConverter {
+public class StringToHeredocIntention extends StringToLastHeredocIntention {
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {

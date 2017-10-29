@@ -943,19 +943,19 @@
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
 
     <intentionAction>
-      <className>com.perl5.lang.perl.idea.intentions.StringToHeredocConverter</className>
+      <className>com.perl5.lang.perl.idea.intentions.StringToHeredocIntention</className>
       <category>Perl</category>
       <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
     </intentionAction>
 
     <intentionAction>
-      <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocConverter</className>
+      <className>com.perl5.lang.perl.idea.intentions.StringToLastHeredocIntention</className>
       <category>Perl</category>
       <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
     </intentionAction>
 
     <intentionAction>
-      <className>com.perl5.lang.perl.idea.intentions.ForeachToForConverter</className>
+      <className>com.perl5.lang.perl.idea.intentions.ForeachToForIntention</className>
       <category>Perl</category>
     </intentionAction>
   </extensions>
