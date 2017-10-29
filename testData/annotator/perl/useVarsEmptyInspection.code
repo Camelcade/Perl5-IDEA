@@ -1,0 +1,1 @@
+<warning descr="This code is redundant">use vars qw/*code &somesub/;</warning>

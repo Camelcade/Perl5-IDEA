@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.quickfixes;
 
 import com.intellij.codeInspection.LocalQuickFixOnPsiElement;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -35,20 +36,27 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
+  private final AtomicNotNullLazyValue<Collection<PerlVariableDeclarationElement>> myVariablesProvider =
+    AtomicNotNullLazyValue
+      .createValue(() -> PsiTreeUtil.findChildrenOfType(myStartElement.getElement(), PerlVariableDeclarationElement.class));
+
   public PerlUseVarsQuickFix(@NotNull PerlUseStatement element) {
     super(element);
   }
 
+  public boolean isRemoval() {return myVariablesProvider.getValue().isEmpty();}
+
   @NotNull
   @Override
   public String getText() {
-    return PerlBundle.message("perl.quickfix.use.vars");
+    return isRemoval() ?
+           PerlBundle.message("perl.remove.redundant.code") :
+           PerlBundle.message("perl.quickfix.use.vars");
   }
 
   @Override
   public void invoke(@NotNull Project project, @NotNull PsiFile file, @NotNull PsiElement startElement, @NotNull PsiElement endElement) {
-    Collection<PerlVariableDeclarationElement> declarations =
-      PsiTreeUtil.findChildrenOfType(startElement, PerlVariableDeclarationElement.class);
+    Collection<PerlVariableDeclarationElement> declarations = myVariablesProvider.getValue();
     if (declarations.isEmpty()) {
       startElement.delete();
       return;

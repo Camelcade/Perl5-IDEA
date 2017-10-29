@@ -45,11 +45,11 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
     doTestAnnotationQuickFix(PerlUseWarningsInspection.class, PerlBundle.message("perl.quickfix.add.use.name", "warnings FATAL => 'all'"));
   }
 
-  public void testUseVarsToEmpty() {doTestUseVarsQuickFix();}
+  public void testUseVarsToEmpty() {
+    doTestAnnotationQuickFix(PerlUseVarsInspection.class, PerlBundle.message("perl.remove.redundant.code"));
+  }
 
-  public void testUseVars() {doTestUseVarsQuickFix();}
-
-  private void doTestUseVarsQuickFix() {
+  public void testUseVars() {
     doTestAnnotationQuickFix(PerlUseVarsInspection.class, PerlBundle.message("perl.quickfix.use.vars"));
   }
 }

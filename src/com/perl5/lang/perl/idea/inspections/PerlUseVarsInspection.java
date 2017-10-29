@@ -35,11 +35,12 @@ public class PerlUseVarsInspection extends PerlInspection {
       @Override
       public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
         if (PACKAGE_VARS.equals(o.getPackageName())) {
+          PerlUseVarsQuickFix quickFix = new PerlUseVarsQuickFix(o);
           holder.registerProblem(
             o,
-            PerlBundle.message("perl.inspection.use.vars"),
-            ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
-            new PerlUseVarsQuickFix(o)
+            quickFix.isRemoval() ? PerlBundle.message("perl.redundant.code") : PerlBundle.message("perl.inspection.use.vars"),
+            quickFix.isRemoval() ? ProblemHighlightType.LIKE_UNUSED_SYMBOL : ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
+            quickFix
           );
         }
       }
