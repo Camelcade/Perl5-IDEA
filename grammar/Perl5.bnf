@@ -395,6 +395,8 @@ limitations under the License.
 
     implements("sub_call_expr|named_list_expr|unary_list_expr")="com.perl5.lang.perl.psi.PerlMethodContainer"
 
+    mixin("statement")="com.perl5.lang.perl.psi.mixins.PerlStatementMixin"
+
     mixin("use_statement")="com.perl5.lang.perl.psi.mixins.PerlUseStatementMixin"
     implements("use_statement")="com.perl5.lang.perl.psi.PerlUseStatement"
     stubClass("use_statement")="com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub"

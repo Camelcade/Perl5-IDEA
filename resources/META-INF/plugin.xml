@@ -943,6 +943,12 @@
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
 
     <intentionAction>
+      <className>com.perl5.lang.perl.idea.intentions.StatementToCompoundIntention</className>
+      <category>Perl</category>
+      <descriptionDirectoryName>StatementToCompoundConverter</descriptionDirectoryName>
+    </intentionAction>
+
+    <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StringToHeredocIntention</className>
       <category>Perl</category>
       <descriptionDirectoryName>StringToHeredocConverter</descriptionDirectoryName>
@@ -957,6 +963,7 @@
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.ForeachToForIntention</className>
       <category>Perl</category>
+      <descriptionDirectoryName>ForeachToForConverter</descriptionDirectoryName>
     </intentionAction>
   </extensions>
 

@@ -1,0 +1,1 @@
+say 'hi' <spot>if $name eq 'friendly'</spot>;

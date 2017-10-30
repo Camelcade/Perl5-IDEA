@@ -1,0 +1,3 @@
+if( $name eq 'friendly'){
+  say 'hi';
+}

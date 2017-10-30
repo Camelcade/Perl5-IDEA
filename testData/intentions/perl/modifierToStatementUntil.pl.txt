@@ -1,0 +1,3 @@
+until ($a > 0) {
+    say 'some';
+}

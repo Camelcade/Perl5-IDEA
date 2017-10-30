@@ -1,4 +1,4 @@
-<spot>foreach</spot> my $element (@list)
+foreach my $element (@list)
 {
     say $element;
 }

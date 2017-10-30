@@ -1,0 +1,1 @@
+say 'some' unless $a > 0;

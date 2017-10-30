@@ -590,8 +590,8 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     doTestIntentionWithoutLoad(quickFixNamePrefix);
   }
 
-  @NotNull
-  protected IntentionAction getSingleIntention(@NotNull String prefixOrName) {
+  @Nullable
+  protected IntentionAction getSingleIntentionSafe(@NotNull String prefixOrName) {
     IntentionAction intention = null;
     for (IntentionAction intentionAction : myFixture.getAvailableIntentions()) {
       if (intentionAction.getText().equals(prefixOrName)) {
@@ -606,19 +606,39 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
         intention = intentionAction;
       }
     }
+    return intention;
+  }
 
+  @NotNull
+  protected IntentionAction getSingleIntention(@NotNull String prefixOrName) {
+    IntentionAction intention = getSingleIntentionSafe(prefixOrName);
     assertNotNull("Couldn't find intention: " + prefixOrName, intention);
     return intention;
   }
 
   protected void doTestIntention(@NotNull String intentionPrefix) {
+    doTestIntention(intentionPrefix, true);
+  }
+
+  protected void doTestIntention(@NotNull String intentionPrefix, boolean checkErrors) {
     initWithFileSmartWithoutErrors();
-    doTestIntentionWithoutLoad(intentionPrefix);
+    doTestIntentionWithoutLoad(intentionPrefix, checkErrors);
+  }
+
+  protected void doTestNoIntention(@NotNull String intentionPrefix) {
+    initWithFileSmart();
+    assertNull(getSingleIntentionSafe(intentionPrefix));
   }
 
   private void doTestIntentionWithoutLoad(@NotNull String intentionPrefix) {
+    doTestIntentionWithoutLoad(intentionPrefix, true);
+  }
+
+  private void doTestIntentionWithoutLoad(@NotNull String intentionPrefix, boolean checkErrors) {
     myFixture.launchAction(getSingleIntention(intentionPrefix));
-    assertNoErrorElements();
+    if (checkErrors) {
+      assertNoErrorElements();
+    }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 

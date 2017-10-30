@@ -1,0 +1,3 @@
+do {
+    say 'some';
+} if $a > 0;
