@@ -1,0 +1,8 @@
+for (@ARGV) {}
+foreach (@ARGV) {}
+for my $var (@_) {}
+foreach my $var (@_) {}
+for (@ARGV) {}
+foreach (@ARGV) {}
+for my $var (@_) {}
+foreach my $var (@_) {}

@@ -278,6 +278,16 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
         ) {
         return Spacing.createSpacing(0, 0, 0, true, 0);
       }
+
+      // for [my $var] (iter)
+      if (child2Type == FOR_LIST_STATEMENT && (child1Type == RESERVED_FOR || child1Type == RESERVED_FOREACH)) {
+        if (PsiUtilCore.getElementType(child2Node.getFirstChildNode()) == FOR_LIST_EPXR &&
+            !myContext.getSettings().SPACE_BEFORE_IF_PARENTHESES
+          ) {
+          return Spacing.createSpacing(0, 0, 0, false, 0);
+        }
+        return Spacing.createSpacing(1, 1, 0, true, 1);
+      }
     }
     return myContext.getSpacingBuilder().getSpacing(this, child1, child2);
   }

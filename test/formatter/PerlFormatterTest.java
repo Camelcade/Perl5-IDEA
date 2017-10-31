@@ -41,6 +41,16 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testIssue1607enabled() {
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
+    doFormatTest();
+  }
+
+  public void testIssue1607disabled() {
+    getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
+    doFormatTest();
+  }
+
   public void testCommaWrapping() {
     doFormatTest();
   }

@@ -41,6 +41,7 @@
      </p>
      <p>Fixes:
       <ul>
+        <li>Spacing after <code>for/foreach</code> in compound statement without explicit variable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1607">1607</a></li>
         <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
         <li><code>@EXPORT</code> and <code>@EXPORT_OK</code> handling for large lists of exported variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1592">johndunlap</a></li>
         <li>Unresolved variable inspection false positive on <code>$1</code> and friends, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1605">#1605</a> (hardcoded variables 1-20)</li>
