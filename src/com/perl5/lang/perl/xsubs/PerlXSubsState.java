@@ -128,6 +128,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           return;
         }
         int filesCounter = 0;
+        indicator.setIndeterminate(false);
         indicator.setText(PerlBundle.message("perl.scanning.xs.changes"));
         if (isActual) {
           Set<VirtualFile> allXSFiles = getAllXSFiles(myProject);

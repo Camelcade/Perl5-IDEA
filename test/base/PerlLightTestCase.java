@@ -143,8 +143,14 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
 
   @Override
   protected void tearDown() throws Exception {
-    Disposer.dispose(myDisposable);
-    super.tearDown();
+    try {
+      ApplicationManager.getApplication()
+        .invokeAndWait(() -> PerlProjectManager.getInstance(getProject()).setExternalLibraries(Collections.emptyList()));
+      Disposer.dispose(myDisposable);
+    }
+    finally {
+      super.tearDown();
+    }
   }
 
   protected final void addTearDownListener(@NotNull Disposable disposable) {
@@ -180,7 +186,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
         assert libdir != null;
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
-        perlProjectManager.setProjectSdk(new ProjectJdkImpl("test", PerlSdkType.getInstance()));
+        perlProjectManager.setProjectSdk(new ProjectJdkImpl("test", PerlSdkType.INSTANCE));
         perlProjectManager.addExternalLibrary(libdir);
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());

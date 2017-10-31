@@ -16,6 +16,7 @@
 
 package formatter;
 
+import base.PerlLightTestCase;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
@@ -27,7 +28,7 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTest extends PerlFormatterTestCase {
+public class PerlFormatterTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl";

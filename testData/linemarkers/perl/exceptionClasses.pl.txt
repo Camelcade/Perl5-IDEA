@@ -1,4 +1,4 @@
-25 - 35: ''Seption1'': Subclasses
+25 - 26: ''': Subclasses
 Targets: 1
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in exceptionClasses.pl
 
@@ -61,4 +61,3 @@ Targets: 1
 578 - 583: 'test2': Overriding method
 Targets: 1
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 400 in exceptionClasses.pl
-

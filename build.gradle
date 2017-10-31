@@ -37,27 +37,9 @@ jacocoTestReport {
     reports {
         xml.enabled true
     }
-//    afterEvaluate {
-//        classDirectories = files(classDirectories.files.collect {
-//            fileTree(dir: it,
-//                     exclude: [
-//                       '**/psi/impl/Psi**',
-//                       '**/psi/Psi**',
-//                       '**/EmbeddedPerlLexer.class',
-//                       '**/HTMLMasonLexer.class',
-//                       '**/Mason2TemplatingLexer.class',
-//                       '**/MojoliciousLexer.class',
-//                       '**/*ElementTypesGenerated.class',
-//                       '**/PerlLexer.class',
-//                       '**/*ParserGenerated.class',
-//                       '**/*LexerGenerated.class',
-//                       '**/PodParser.class',
-//                     ])
-//        })
-//    }
 }
 
-version = "$version$buildNumber"
+version = "$pluginVersion$pluginBuild"
 
 apply plugin: 'java'
 sourceCompatibility = javaVersion
@@ -78,7 +60,7 @@ sourceSets {
 
 apply plugin: 'org.jetbrains.intellij'
 intellij {
-    version ideaVersion
+    version "$platformVersion$platformBuild"
     downloadSources Boolean.valueOf(downloadIdeaSource)
     intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93']
     if (project.hasProperty('idea_sandbox')) {
@@ -127,10 +109,6 @@ test {
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    testCompile 'junit:junit:4.+'
 }
 
 project.afterEvaluate {

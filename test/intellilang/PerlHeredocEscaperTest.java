@@ -36,8 +36,12 @@ public class PerlHeredocEscaperTest extends PerlHeredocInjectionTestCase {
 
   @Override
   protected void tearDown() throws Exception {
-    PerlSharedSettings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION = myInjectWithInterpolation;
-    super.tearDown();
+    try {
+      PerlSharedSettings.getInstance(getProject()).ALLOW_INJECTIONS_WITH_INTERPOLATION = myInjectWithInterpolation;
+    }
+    finally {
+      super.tearDown();
+    }
   }
 
   public void testUnindentableEmpty() { doTest();}

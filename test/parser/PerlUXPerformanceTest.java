@@ -33,6 +33,8 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ArrayUtil;
 import org.junit.experimental.categories.Category;
 
+import java.util.Collections;
+
 /**
  * Created by hurricup on 07.10.2016.
  */
@@ -71,7 +73,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
     for (int i = 0; i < iterations; i++) {
       codeAnalyzer.restart();
       ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
-      codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
+      codeAnalyzer.runPasses(file, editor.getDocument(), Collections.singletonList(textEditor), ArrayUtil.EMPTY_INT_ARRAY, false, null);
       codeAnalyzerEx.getFileLevelHighlights(project, file);
     }
 
@@ -81,7 +83,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
       for (int i = 0; i < iterations; i++) {
         codeAnalyzer.restart();
         ((PsiModificationTrackerImpl)getPsiManager().getModificationTracker()).incCounter();
-        codeAnalyzer.runPasses(file, editor.getDocument(), textEditor, ArrayUtil.EMPTY_INT_ARRAY, false, null);
+        codeAnalyzer.runPasses(file, editor.getDocument(), Collections.singletonList(textEditor), ArrayUtil.EMPTY_INT_ARRAY, false, null);
         DaemonCodeAnalyzerEx.getInstanceEx(project).getFileLevelHighlights(project, file);
       }
       long length = System.currentTimeMillis() - start;

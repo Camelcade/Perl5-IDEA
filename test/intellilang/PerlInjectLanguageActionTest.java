@@ -39,9 +39,13 @@ public class PerlInjectLanguageActionTest extends PerlLightTestCase {
 
   @Override
   protected void tearDown() throws Exception {
-    mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = myAutomaticInjections;
-    mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = myInjectionsWithInterpolation;
-    super.tearDown();
+    try {
+      mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = myAutomaticInjections;
+      mySharedSettings.ALLOW_INJECTIONS_WITH_INTERPOLATION = myInjectionsWithInterpolation;
+    }
+    finally {
+      super.tearDown();
+    }
   }
 
   public void testHeredocAutoInjectedQ() {

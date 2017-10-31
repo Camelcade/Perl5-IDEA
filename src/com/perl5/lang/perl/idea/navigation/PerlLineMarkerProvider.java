@@ -69,7 +69,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         .setTargets(parentNamespaces)
         .setTooltipText("Parent classes");
 
-      result.add(builder.createLineMarkerInfo(nameIdentifier));
+      result.add(getMarkerInfo(builder, nameIdentifier));
     }
 
     Collection<PerlNamespaceDefinitionElement> childNamespaces = element.getChildNamespaceDefinitions();
@@ -79,8 +79,15 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         .setTargets(childNamespaces)
         .setTooltipText("Subclasses");
 
-      result.add(builder.createLineMarkerInfo(nameIdentifier));
+      result.add(getMarkerInfo(builder, nameIdentifier));
     }
+  }
+
+  private RelatedItemLineMarkerInfo getMarkerInfo(@NotNull NavigationGutterIconBuilder builder, @NotNull PsiElement element) {
+    while (element.getFirstChild() != null) {
+      element = element.getFirstChild();
+    }
+    return builder.createLineMarkerInfo(element);
   }
 
   private void addSubDefinitionsMarkers(@NotNull PerlSubDefinitionElement subElement,
@@ -100,7 +107,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
           .setTarget(parentSub)
           .setTooltipText("Overriding method");
 
-        result.add(builder.createLineMarkerInfo(nameIdentifier));
+        result.add(getMarkerInfo(builder, nameIdentifier));
       }
 
       List<PerlSubElement> overridingSubs = new ArrayList<>();
@@ -111,7 +118,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
           .setTargets(overridingSubs)
           .setTooltipText("Overriden methods");
 
-        result.add(builder.createLineMarkerInfo(nameIdentifier));
+        result.add(getMarkerInfo(builder, nameIdentifier));
       }
     }
   }

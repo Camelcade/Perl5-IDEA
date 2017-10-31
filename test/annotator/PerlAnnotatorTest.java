@@ -17,7 +17,6 @@
 package annotator;
 
 import base.PerlLightTestCase;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
@@ -110,12 +109,14 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testUnresolvedLabelInspection() {doInspectionTest(PerlUnresolvedLabelInspection.class);}
 
+  /*
   public void testIdentifierInspection() {
     initWithFileSmart();
     getFile().getVirtualFile().setCharset(CharsetToolkit.US_ASCII_CHARSET);
     myFixture.enableInspections(PerlIdentifierInspection.class);
     myFixture.checkHighlighting(true, false, false);
   }
+  */
 
   public void testFancyMethodCall() {doInspectionTest(PerlFancyMethodCallInspection.class);}
 

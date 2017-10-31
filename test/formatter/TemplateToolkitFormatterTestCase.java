@@ -33,8 +33,12 @@ public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightTestCa
 
   @Override
   protected void tearDown() throws Exception {
-    myTestSettings.tearDown();
-    super.tearDown();
+    try {
+      myTestSettings.tearDown();
+    }
+    finally {
+      super.tearDown();
+    }
   }
 
   @Override

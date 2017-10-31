@@ -21,14 +21,20 @@
   <category>Custom Languages</category>
 
   <description><![CDATA[
-    <p>Camelcade plugin adds Perl5 support for IntelliJ IDEA and other JetBrains products.</p>
-    <p>
-    <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>
-    | <a href="https://github.com/hurricup/Perl5-IDEA/issues">Bug Tracker</a>
+    <p>Camelcade plugin provides support for the following languages and frameworks:<ul>
+    <li>Perl5 & Pod</li>
+    <li>Mojolicious</li>
+    <li>HTML::Mason</li>
+    <li>Mason2</li>
+    <li>Template Toolkit 2</li>
+    </ul>
+    More information may be found in our <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>.</p>
+    <br><br>
+    <a href="https://github.com/hurricup/Perl5-IDEA/issues">Bug Tracker</a>
     | <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
     | <a href="https://groups.google.com/forum/#!forum/camelcade">Google Group</a>
     | <a href="https://github.com/hurricup/Perl5-IDEA">Sources</a>
-    </p>
+    <br><br>
     <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"><image src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" alt="Donate to support Project"></a></p>
     ]]></description>
 
@@ -41,14 +47,14 @@
            <li>an opening quote</li>
            <li>an opening brace in a hash index</li>
            <li>an opening brace after a sigil</li>
-           <li>space inside of the <code>qw</code> list</li>
+           <li>a space inside of the <code>qw</code> list</li>
        </ul></li>
        <li>Double-click on variable name should now select variable with sigil</li>
        <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
        <li>Inspection for <code>use vars</code> legacy pragma usage with quick-fix for converting to <code>our</code> declaration, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/380">380</a></li>
        <li>Intention to convert statement with modifier to compound statement and vice versa, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1604">cjelli</a>
        <li>Re-worked live templates: abbreviations, defaults and so on (need a feedback)</li>
-       <li>Already typed import parameters are now excluded from completion</li>
+       <li>Already typed import parameters are now excluded from the completion</li>
        <li>Completion in braces after typeglobs now contains slots names</li>
      </ul>
      </p>
@@ -65,9 +71,6 @@
      </p>
     ]]>
   </change-notes>
-
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description  -->
-  <idea-version since-build="172" until-build="173.*"/>
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
