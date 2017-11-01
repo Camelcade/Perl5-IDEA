@@ -29,6 +29,8 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Created by bcardoso on 7/28/16.
  */
@@ -47,35 +49,40 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     return getText();
   }
 
-  @Override
-  public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-    PsiElement parent = element.getParent();
-    if (!(parent instanceof PsiPerlForeachCompound)) {
-      return false;
+  private PsiPerlForCompound getForStatement(@NotNull PsiElement element) {
+    PsiPerlForCompound forCompound = PsiTreeUtil.getParentOfType(element, PsiPerlForCompound.class);
+    if (forCompound == null || forCompound.getForIterator() != null) {
+      return null;
     }
 
-    PsiPerlForListStatement forListStatement = ((PsiPerlForeachCompound)parent).getForListStatement();
-    return forListStatement != null
-           && forListStatement.getExpr() instanceof PsiPerlVariableDeclarationLexical;
+    List<PsiPerlExpr> variableAndList = forCompound.getExprList();
+    // fixme we should work without variable and without declaration
+    return variableAndList.size() == 2 && variableAndList.get(0) instanceof PsiPerlVariableDeclarationLexical ? forCompound : null;
+  }
+
+  @Override
+  public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
+    return getForStatement(element) != null;
   }
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-    PsiPerlForeachCompound foreachElement = (PsiPerlForeachCompound)element.getParent();
+    PsiPerlForCompound forCompound = getForStatement(element);
+    assert forCompound != null;
+    List<PsiPerlExpr> exprList = forCompound.getExprList();
+    assert exprList.size() == 2;
 
-    PsiPerlForListStatement forListStatement = foreachElement.getForListStatement();
-    assert forListStatement != null;
+    PsiPerlExpr variableDeclaration = exprList.get(0);
+    assert variableDeclaration instanceof PsiPerlVariableDeclarationLexical;
 
-    PsiPerlExpr forExpr = forListStatement.getExpr();
-    assert forExpr != null;
+    PsiPerlExpr iterableList = exprList.get(1);
+    assert iterableList instanceof PsiPerlConditionExpr;
 
-    PsiPerlForListEpxr forListEpxr = forListStatement.getForListEpxr();
-
-    PsiPerlBlock block = foreachElement.getBlock();
+    PsiPerlBlock block = forCompound.getBlock();
     assert block != null;
 
-    PsiPerlForCompound indexedFor = createIndexedFor(project, forExpr, forListEpxr, block);
-    foreachElement.replace(indexedFor);
+    PsiPerlForCompound indexedFor = createIndexedFor(project, (PsiPerlVariableDeclarationLexical)variableDeclaration, iterableList, block);
+    forCompound.replace(indexedFor);
   }
 
   @Override
@@ -84,16 +91,17 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
   }
 
   public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
-                                                    @NotNull PsiPerlExpr lexicalVariableDeclaration,
-                                                    @NotNull PsiPerlForListEpxr listExpr,
+                                                    @NotNull PsiPerlVariableDeclarationLexical variableDeclaration,
+                                                    @NotNull PsiPerlExpr iterableExpr,
                                                     @NotNull PsiPerlBlock forBlock) {
     // check if listExpr is a single array or a list expression
-    boolean isSingleArray = listExpr.getFirstChild() instanceof PsiPerlArrayVariable
-                            && (listExpr.getChildren().length == 1);
+    // fixme how about cast?
+    PsiElement[] children = iterableExpr.getChildren();
+    boolean isSingleArray = children.length == 1 && children[0] instanceof PsiPerlArrayVariable;
 
     String arrayName;
     if (isSingleArray) {
-      PsiPerlArrayVariable childArray = (PsiPerlArrayVariable)listExpr.getFirstChild();
+      PsiPerlArrayVariable childArray = (PsiPerlArrayVariable)children[0];
       arrayName = childArray.getName();
     }
     else {
@@ -102,7 +110,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
 
     // Assign iterationVariable = iterationArray[$idx]
     String assignStatementStr = String.format("%s = $%s[$idx];",
-                                              lexicalVariableDeclaration.getText(),
+                                              variableDeclaration.getText(),
                                               arrayName);
     PsiPerlStatement assignStatement = createPsiOfTypeFromSyntax(project, assignStatementStr, PsiPerlStatement.class);
 
@@ -119,7 +127,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
 
     if (!isSingleArray) {
       // declare and initialize the new array before the new for
-      String newListSyntax = String.format("my @%s = %s;\n", arrayName, listExpr.getText());
+      String newListSyntax = String.format("my @%s = %s;\n", arrayName, iterableExpr.getText());
       PsiPerlStatement newListStatement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiPerlStatement.class);
       PsiWhiteSpace newLineElement = createPsiOfTypeFromSyntax(project, newListSyntax, PsiWhiteSpace.class);
       result.addBefore(newLineElement, result.getFirstChild());

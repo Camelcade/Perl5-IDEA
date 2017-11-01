@@ -540,26 +540,6 @@ public class PerlElementTypeFactory {
       };
     }
 
-    if (name.equals("FOREACH_COMPOUND")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlForeachCompoundImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("FOREACH_STATEMENT_MODIFIER")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlForeachStatementModifierImpl(node);
-        }
-      };
-    }
-
     if (name.equals("FORMAT_DEFINITION")) {
       return new PerlElementTypeEx(name) {
         @NotNull
@@ -596,26 +576,6 @@ public class PerlElementTypeFactory {
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPerlForIteratorStatementImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("FOR_LIST_EPXR")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlForListEpxrImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("FOR_LIST_STATEMENT")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlForListStatementImpl(node);
         }
       };
     }

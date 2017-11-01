@@ -24,7 +24,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.PsiPerlConditionalBlock;
+import com.perl5.lang.perl.psi.PsiPerlForCompound;
 import com.perl5.lang.perl.psi.impl.PsiPerlIfCompoundImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -81,7 +84,6 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
       if (blockContainer != null) {
         if (blockContainer instanceof PerlSubDefinitionElement
             || blockContainer instanceof PsiPerlForCompound
-            || blockContainer instanceof PsiPerlForeachCompound
           ) {
           return blockContainer.getTextOffset();
         }

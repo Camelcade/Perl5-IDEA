@@ -410,7 +410,7 @@ limitations under the License.
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
-    extends("for_list_statement|for_iterator_statement")=statement
+    extends("for_iterator_statement")=statement
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
@@ -419,12 +419,11 @@ limitations under the License.
 
 	implements("block")="com.perl5.lang.perl.psi.PerlBlock"
 	implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
-	implements("foreach_compound")="com.perl5.lang.perl.psi.PerlForeachCompound"
 	implements("while_compound")="com.perl5.lang.perl.psi.PerlWhileCompound"
 	implements("until_compound")="com.perl5.lang.perl.psi.PerlUntilCompound"
 
-    implements("conditional_block_while|.*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
-    mixin("conditional_block_while|block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
+    implements(".*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    mixin("block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"
@@ -551,7 +550,6 @@ private compound_statement ::=
     | while_compound
     | until_compound
     | for_compound
-    | foreach_compound
     | when_compound
     | default_compound
     | method_definition
@@ -594,20 +592,13 @@ private block_compound ::= parse_block [[POD] continue_block]
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
-for_compound ::=  'for' for_arguments {pin=1}
-foreach_compound ::=  'foreach' for_arguments  {pin=1}
+for_compound ::=  {'for'|'foreach'} for_arguments {pin=1}
 private for_arguments ::=
-    for_iterator parse_block
-    | for_list_statement block_compound
+    {for_iterator | [ variable_declaration | variable ] condition_expr}
+    block_compound
 
 for_iterator ::= '(' [for_iterator_statement]  ';' [for_iterator_statement] ';' [for_iterator_statement] ')' {pin=3}
 for_iterator_statement ::= expr {recoverWhile=recover_parenthesised}
-
-// @todo only single variable or variable definition may be here
-for_list_statement ::= [ variable_declaration | variable ] for_list_epxr
-for_list_epxr ::= '(' for_list_expr_content ')' {pin=1}
-private for_list_expr_content ::= list_expr {recoverWhile=recover_parenthesised}
-
 
 statement ::=
     use_statement
@@ -662,15 +653,13 @@ statement_modifier ::=
     | while_statement_modifier
     | until_statement_modifier
     | for_statement_modifier
-    | foreach_statement_modifier
     | when_statement_modifier
 
 if_statement_modifier ::=    'if' expr {pin=1 name="Postfix if"}
 unless_statement_modifier ::=    'unless' expr {pin=1 name="Postfix unless"}
 while_statement_modifier ::=    'while' expr {pin=1 name="Postfix while"}
 until_statement_modifier ::=    'until' expr {pin=1 name="Postfix until"}
-for_statement_modifier ::=    'for' expr  {pin=1 name="Postfix for"}
-foreach_statement_modifier ::=    'foreach' expr {pin=1 name="Postfix foreach"}
+for_statement_modifier ::=    {'for'|'foreach'} expr  {pin=1 name="Postfix for"}
 when_statement_modifier ::=    'when' expr {pin=1 name="Postfix when"}
 
 use_statement ::=  'use' <<parseUseParameters use_no_parameters>> <<statementSemi>> {pin=1}

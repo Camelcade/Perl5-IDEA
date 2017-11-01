@@ -23,10 +23,13 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  * Created by hurricup on 06.09.2015.
  */
 public interface PerlFormattingTokenSets extends PerlElementTypes {
+  TokenSet FOR_OR_FOREACH = TokenSet.create(
+    RESERVED_FOR, RESERVED_FOREACH
+  );
+
   TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
     CONDITION_EXPR,
-    FOR_ITERATOR,
-    FOR_LIST_EPXR
+    FOR_ITERATOR
   );
 
   TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
@@ -46,7 +49,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
     CONDITIONAL_BLOCK,
     FOR_COMPOUND,
-    FOREACH_COMPOUND,
     IF_COMPOUND,
     CONTINUE_BLOCK,
     DEFAULT_COMPOUND
@@ -58,7 +60,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     WHILE_STATEMENT_MODIFIER,
     UNTIL_STATEMENT_MODIFIER,
     FOR_STATEMENT_MODIFIER,
-    FOREACH_STATEMENT_MODIFIER,
     WHEN_STATEMENT_MODIFIER
   );
 

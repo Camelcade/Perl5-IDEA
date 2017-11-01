@@ -53,7 +53,11 @@ public class PerlIntentionsTest extends PerlLightTestCase {
 
   private void doTestConvertToCompound() {doTestConvertToCompound(true);}
 
-  public void testForeachToFor() {doTestIntention(PerlBundle.message("perl.intention.foreach.to.for"));}
+  public void testForeachToFor() {doTestForeachToForIntention();}
+
+  public void testForeachToForFor() {doTestForeachToForIntention();}
+
+  private void doTestForeachToForIntention() {doTestIntention(PerlBundle.message("perl.intention.foreach.to.for"));}
 
   public void testStringToHeredocQQ() {doTestConvertToHeredoc();}
 
