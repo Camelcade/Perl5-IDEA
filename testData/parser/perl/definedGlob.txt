@@ -2,7 +2,7 @@ Perl5
   PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
     PsiElement(Perl5: if)('if')
     PsiPerlConditionalBlockImpl(Perl5: CONDITIONAL_BLOCK)
-      PsiPerlConditionStatementImpl(Perl5: CONDITION_STATEMENT)
+      PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
         PsiElement(Perl5: ()('(')
         PsiPerlAndExprImpl(Perl5: AND_EXPR)
           PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)

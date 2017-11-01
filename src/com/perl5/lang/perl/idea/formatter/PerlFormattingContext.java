@@ -143,7 +143,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .between(RESERVED_TERMS_BLOCKS, BLOCK).spaceIf(mySettings.SPACE_BEFORE_DO_LBRACE)
 
       .between(RESERVED_COMPOUND_CONDITIONAL, CONDITIONAL_BLOCK).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
-      .between(RESERVED_WHILE, CONDITIONAL_BLOCK_WHILE).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
       .between(RESERVED_FOR, FOR_ITERATOR).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
       .between(RESERVED_FOREACH, FOR_ITERATOR).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
 
@@ -194,7 +193,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         false,
         0
       )
-      .between(RESERVED_ELSE, UNCONDITIONAL_BLOCK).spacing(
+      .between(RESERVED_ELSE, BLOCK).spacing(
         mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         myPerlSettings.BRACE_STYLE_COMPOUND == SAME_LINE ? 0 : 1,

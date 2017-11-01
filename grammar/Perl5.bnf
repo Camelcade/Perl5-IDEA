@@ -410,7 +410,7 @@ limitations under the License.
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
-    extends("condition_statement|condition_statement_while|for_list_statement|for_iterator_statement")=statement
+    extends("for_list_statement|for_iterator_statement")=statement
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
@@ -562,8 +562,7 @@ named_block ::= BLOCK_NAME parse_block
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
-private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
-unconditional_block ::= parse_block
+private if_compound_else ::= [POD]  'else' parse_block {pin=2}
 
 ///////////////////////////////////////// hybrid parsing for Try::Tiny and TryCatch ////////////////////////////////////
 trycatch_expr ::= try_expr (catch_expr|finally_expr)* [expr]
@@ -577,19 +576,14 @@ type_constraints ::= any_package ['[' expr ']']
 finally_expr ::= 'finally' (parse_block|expr) {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-conditional_block ::= condition_statement parse_block {pin=1 name="Conditional block"}
-condition_statement ::= '(' condition_statement_expr ')' {pin=1 name="Condition"}
-
-conditional_block_while ::= condition_statement_while parse_block {pin=1 name="Conditional block"}
-condition_statement_while ::= '(' [condition_statement_expr] ')' {pin=1 name="Condition"}
-private condition_statement_expr ::= expr {recoverWhile=recover_condition_statement_expr}
-private recover_condition_statement_expr ::= !('{'|')')
+conditional_block ::= condition_expr parse_block {pin=1}
+condition_expr ::= parse_parenthesised_expr
 
 given_compound ::=  'given' conditional_block  {pin=1}
 when_compound ::=  'when' conditional_block  {pin=1}
 default_compound ::=  'default' parse_block {pin=1}
 
-while_compound ::=  'while' conditional_block_while [ [POD] continue_block]  {pin=1}
+while_compound ::=  'while' conditional_block [ [POD] continue_block]  {pin=1}
 until_compound ::=  'until' conditional_block [[POD] continue_block]  {pin=1}
 
 continue_block ::= continue_block_opener parse_block {pin=1}
@@ -804,7 +798,8 @@ private sort_arguments_ ::=
 private sorter ::= scalar_variable | normal_method
 
 private list_or_list_element ::= parenthesised_expr [array_element]
-parenthesised_expr ::= <<parse_parenthesized_expression parenthesised_expr_content>>
+parenthesised_expr ::= parse_parenthesised_expr
+private parse_parenthesised_expr ::= <<parse_parenthesized_expression parenthesised_expr_content>>
 private meta parse_parenthesized_expression ::= '(' <<x1>> ')' {pin=1 name="Parenthesised expression"}
 private parenthesised_expr_content ::= [expr] {recoverWhile=recover_parenthesised}
 private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )

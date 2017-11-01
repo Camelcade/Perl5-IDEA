@@ -439,32 +439,13 @@ public class PerlElementTypeFactory {
       };
     }
 
-    if (name.equals("CONDITIONAL_BLOCK_WHILE")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlConditionalBlockWhileImpl(node);
-        }
-      };
-    }
 
-    if (name.equals("CONDITION_STATEMENT")) {
+    if (name.equals("CONDITION_EXPR")) {
       return new PerlElementTypeEx(name) {
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlConditionStatementImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("CONDITION_STATEMENT_WHILE")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlConditionStatementWhileImpl(node);
+          return new PsiPerlConditionExprImpl(node);
         }
       };
     }
@@ -1430,16 +1411,6 @@ public class PerlElementTypeFactory {
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
           return new PsiPerlTrSearchlistImpl(node);
-        }
-      };
-    }
-
-    if (name.equals("UNCONDITIONAL_BLOCK")) {
-      return new PerlElementTypeEx(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiPerlUnconditionalBlockImpl(node);
         }
       };
     }

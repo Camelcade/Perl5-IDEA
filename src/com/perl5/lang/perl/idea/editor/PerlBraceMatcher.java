@@ -25,6 +25,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlIfCompoundImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -85,7 +86,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
           return blockContainer.getTextOffset();
         }
         else if (blockContainer instanceof PsiPerlConditionalBlock
-                 || blockContainer instanceof PsiPerlUnconditionalBlock) {
+                 || blockContainer instanceof PsiPerlIfCompoundImpl) {
           PsiElement keyword = blockContainer.getPrevSibling();
 
           while (keyword != null && (keyword instanceof PsiWhiteSpace || keyword instanceof PsiComment)) {

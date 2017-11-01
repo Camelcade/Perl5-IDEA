@@ -21,6 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.tt2.psi.impl.PsiPerlBlockImpl;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
@@ -132,7 +133,7 @@ public interface PerlElementPatterns extends PerlElementTypes {
     psiElement(PsiPerlIfCompound.class)
       .andNot(
         psiElement()
-          .withLastChild(psiElement(PsiPerlUnconditionalBlock.class)));
+          .withLastChild(psiElement(PsiPerlBlockImpl.class)));
 
   PsiElementPattern.Capture<PsiElement> ELSE_ELSIF_PLACE =
     psiElement().inside(

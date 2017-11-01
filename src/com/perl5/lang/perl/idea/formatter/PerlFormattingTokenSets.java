@@ -24,8 +24,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
  */
 public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
-    CONDITION_STATEMENT,
-    CONDITION_STATEMENT_WHILE,
+    CONDITION_EXPR,
     FOR_ITERATOR,
     FOR_LIST_EPXR
   );
@@ -48,10 +47,9 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     CONDITIONAL_BLOCK,
     FOR_COMPOUND,
     FOREACH_COMPOUND,
-    UNCONDITIONAL_BLOCK,
+    IF_COMPOUND,
     CONTINUE_BLOCK,
-    DEFAULT_COMPOUND,
-    CONDITIONAL_BLOCK_WHILE
+    DEFAULT_COMPOUND
   );
 
   TokenSet STATEMENT_MODIFIERS = TokenSet.create(
@@ -72,6 +70,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_UNTIL,
     RESERVED_ELSIF,
     RESERVED_WHEN,
+    RESERVED_WHILE,
 
     // these are redundant here, but used in statement modifiers
     RESERVED_FOR,
