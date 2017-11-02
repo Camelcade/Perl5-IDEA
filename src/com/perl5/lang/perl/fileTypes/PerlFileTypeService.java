@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -34,8 +34,7 @@ public class PerlFileTypeService implements Disposable {
   private final LightDirectoryIndex<Function<VirtualFile, FileType>> myDirectoryIndex = new LightDirectoryIndex<>(
     this,
     virtualFile -> null,
-    directoryIndex -> {
-      ApplicationManager.getApplication().assertReadAccessAllowed();
+    directoryIndex -> ReadAction.run(() -> {
       for (Project project : ProjectManager.getInstance().getOpenProjects()) {
         if (!project.isDisposed()) {
           for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensions()) {
@@ -51,7 +50,7 @@ public class PerlFileTypeService implements Disposable {
           }
         }
       }
-    }
+    })
   );
 
   @Override
