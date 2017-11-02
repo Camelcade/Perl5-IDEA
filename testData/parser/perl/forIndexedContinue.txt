@@ -1,0 +1,20 @@
+Perl5
+  PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
+    PsiElement(Perl5: for)('for')
+    PsiPerlForIteratorImpl(Perl5: FOR_ITERATOR)
+      PsiElement(Perl5: ()('(')
+      PsiElement(Perl5: ;)(';')
+      PsiElement(Perl5: ;)(';')
+      PsiElement(Perl5: ))(')')
+    PsiPerlBlockImpl(Perl5: BLOCK)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlContinueExprImpl(Perl5: CONTINUE_EXPR)
+      PsiElement(Perl5: continue)('continue')
+    PsiErrorElement:Semicolon expected
+      <empty list>
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlAnonHashImpl(Perl5: ANON_HASH)
+      PsiElement(Perl5: {)('{')
+      PsiElement(Perl5: })('}')

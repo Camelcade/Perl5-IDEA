@@ -589,13 +589,12 @@ private continue_block_opener ::= 'continue' &'{'
 
 private block_compound ::= parse_block [[POD] continue_block]
 
-
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
 for_compound ::=  {'for'|'foreach'} for_arguments {pin=1}
 private for_arguments ::=
-    {for_iterator | [ variable_declaration | variable ] condition_expr}
-    block_compound
+    for_iterator parse_block |
+    [ variable_declaration | variable ] condition_expr block_compound
 
 for_iterator ::= '(' [for_iterator_statement]  ';' [for_iterator_statement] ';' [for_iterator_statement] ')' {pin=3}
 for_iterator_statement ::= expr {recoverWhile=recover_parenthesised}
