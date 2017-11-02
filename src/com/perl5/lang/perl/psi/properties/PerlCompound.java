@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * Compound statement with block
  */
-public interface PerlUntilCompound extends PerlLexicalScope, PerlLoop {
+public interface PerlCompound extends PerlLexicalScope {
+  /**
+   * @return code block, main one
+   */
+  @Nullable
+  PsiPerlBlock getBlock();
 }

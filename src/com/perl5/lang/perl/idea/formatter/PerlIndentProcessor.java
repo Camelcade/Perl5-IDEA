@@ -50,6 +50,8 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     UNLESS_COMPOUND,
     UNTIL_COMPOUND,
     WHILE_COMPOUND,
+    GIVEN_COMPOUND,
+    WHEN_COMPOUND,
     DEFAULT_COMPOUND,
     FOR_COMPOUND,
     CONDITIONAL_BLOCK,

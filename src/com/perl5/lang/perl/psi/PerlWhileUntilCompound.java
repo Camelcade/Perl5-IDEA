@@ -16,11 +16,24 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlConvertableCompound;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
+import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 04.03.2016.
- */
-public interface PerlWhileCompound extends PerlLexicalScope, PerlLoop {
+public interface PerlWhileUntilCompound extends PerlConvertableCompound, PerlLoop {
+
+  @Override
+  default boolean isConvertableToModifier() {
+    return PerlConvertableCompound.super.isConvertableToModifier() &&
+           getContinueBlock() == null;
+  }
+
+  @Nullable
+  PsiPerlBlock getBlock();
+
+  @Nullable
+  PsiPerlConditionExpr getConditionExpr();
+
+  @Nullable
+  PsiPerlContinueBlock getContinueBlock();
 }

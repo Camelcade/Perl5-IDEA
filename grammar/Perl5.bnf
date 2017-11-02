@@ -418,11 +418,12 @@ limitations under the License.
 	extends("label_declaration")="com.perl5.lang.perl.psi.mixins.PerlLabelDeclarationMixin"
 
 	implements("block")="com.perl5.lang.perl.psi.PerlBlock"
-	implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
-	implements("while_compound")="com.perl5.lang.perl.psi.PerlWhileCompound"
-	implements("until_compound")="com.perl5.lang.perl.psi.PerlUntilCompound"
 
-    implements(".*_compound")="com.perl5.lang.perl.psi.properties.PerlLexicalScope";
+    implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
+    implements("while_compound|until_compound")="com.perl5.lang.perl.psi.PerlWhileUntilCompound"
+    implements("if_compound|unless_compound")="com.perl5.lang.perl.psi.PerlIfUnlessCompound"
+    implements("when_compound")="com.perl5.lang.perl.psi.properties.PerlConvertableCompound"
+    implements("given_compound|default_compound")="com.perl5.lang.perl.psi.properties.PerlCompound";
     mixin("block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
@@ -560,7 +561,8 @@ named_block ::= BLOCK_NAME parse_block
 if_compound ::=  'if' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 unless_compound ::=  'unless' conditional_block if_compound_elsif * [if_compound_else]  {pin=1}
 private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
-private if_compound_else ::= [POD]  'else' parse_block {pin=2}
+private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
+unconditional_block ::= parse_block
 
 ///////////////////////////////////////// hybrid parsing for Try::Tiny and TryCatch ////////////////////////////////////
 trycatch_expr ::= try_expr (catch_expr|finally_expr)* [expr]
@@ -574,15 +576,16 @@ type_constraints ::= any_package ['[' expr ']']
 finally_expr ::= 'finally' (parse_block|expr) {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-conditional_block ::= condition_expr parse_block {pin=1}
+conditional_block ::= parse_conditional_block
+private parse_conditional_block ::= condition_expr parse_block {pin=1}
 condition_expr ::= parse_parenthesised_expr
 
-given_compound ::=  'given' conditional_block  {pin=1}
-when_compound ::=  'when' conditional_block  {pin=1}
+given_compound ::=  'given' parse_conditional_block  {pin=1}
+when_compound ::=  'when' parse_conditional_block  {pin=1}
 default_compound ::=  'default' parse_block {pin=1}
 
-while_compound ::=  'while' conditional_block [ [POD] continue_block]  {pin=1}
-until_compound ::=  'until' conditional_block [[POD] continue_block]  {pin=1}
+while_compound ::=  'while' parse_conditional_block [[POD] continue_block]  {pin=1}
+until_compound ::=  'until' parse_conditional_block [[POD] continue_block]  {pin=1}
 
 continue_block ::= continue_block_opener parse_block {pin=1}
 private continue_block_opener ::= 'continue' &'{'

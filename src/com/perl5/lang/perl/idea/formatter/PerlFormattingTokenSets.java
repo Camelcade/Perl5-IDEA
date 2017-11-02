@@ -48,8 +48,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
   TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
     CONDITIONAL_BLOCK,
+    UNCONDITIONAL_BLOCK,
     FOR_COMPOUND,
-    IF_COMPOUND,
+    WHILE_COMPOUND,
+    UNTIL_COMPOUND,
+    GIVEN_COMPOUND,
+    WHEN_COMPOUND,
     CONTINUE_BLOCK,
     DEFAULT_COMPOUND
   );
@@ -63,13 +67,16 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     WHEN_STATEMENT_MODIFIER
   );
 
-  TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
+  TokenSet RESERVED_CONDITIONAL_BRANCH_KEYWORDS = TokenSet.create(
     RESERVED_IF,
     RESERVED_UNLESS,
+    RESERVED_ELSIF
+  );
+
+  TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
     RESERVED_GIVEN,
     RESERVED_WHILE,
     RESERVED_UNTIL,
-    RESERVED_ELSIF,
     RESERVED_WHEN,
     RESERVED_WHILE,
 

@@ -439,6 +439,16 @@ public class PerlElementTypeFactory {
       };
     }
 
+    if (name.equals("UNCONDITIONAL_BLOCK")) {
+      return new PerlElementTypeEx(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiPerlUnconditionalBlockImpl(node);
+        }
+      };
+    }
+
 
     if (name.equals("CONDITION_EXPR")) {
       return new PerlElementTypeEx(name) {

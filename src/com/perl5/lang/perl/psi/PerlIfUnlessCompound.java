@@ -17,32 +17,30 @@
 package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlConvertableCompound;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-/**
- * Created by hurricup on 04.03.2016.
- */
-public interface PerlForCompound extends PerlConvertableCompound, PerlLoop {
+public interface PerlIfUnlessCompound extends PerlConvertableCompound {
 
   @Override
   default boolean isConvertableToModifier() {
     return PerlConvertableCompound.super.isConvertableToModifier() &&
-           getContinueBlock() == null && getForIterator() == null;
+           getUnconditionalBlock() == null && getConditionalBlockList().size() == 1;
   }
 
-  @Nullable
-  PsiPerlBlock getBlock();
 
   @Nullable
-  PsiPerlContinueBlock getContinueBlock();
+  @Override
+  default PsiPerlBlock getBlock() {
+    List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
+    return conditionalBlockList.isEmpty() ? null : conditionalBlockList.get(0).getBlock();
+  }
 
   @NotNull
-  List<PsiPerlExpr> getExprList();
+  List<PsiPerlConditionalBlock> getConditionalBlockList();
 
   @Nullable
-  PsiPerlForIterator getForIterator();
+  PsiPerlUnconditionalBlock getUnconditionalBlock();
 }
