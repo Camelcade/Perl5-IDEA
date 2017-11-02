@@ -42,7 +42,7 @@
 41(42) READ from $b (PsiPerlScalarVariableImpl)
 42(43) WRITE to $a (PsiPerlScalarVariableImpl) from $b (PsiPerlScalarVariableImpl)[0]
 43(44) PsiPerlStatementImpl
-44(45) PsiPerlForeachStatementModifierImpl
+44(45) PsiPerlForStatementModifierImpl
 45(46) READ from @_ (PsiPerlArrayVariableImpl)
 46(47) PsiPerlPrintExprImpl
 47(48) PsiPerlAssignExprImpl
