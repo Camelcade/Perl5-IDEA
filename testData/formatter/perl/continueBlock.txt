@@ -1,0 +1,35 @@
+while ($a) {
+
+}
+continue {
+
+}
+until ($a) {
+
+}
+continue {
+
+}
+
+for ($a) {
+
+}
+continue {
+
+}
+
+foreach ($a) {
+
+}
+continue {
+
+}
+
+{
+
+}
+continue {
+
+}
+        
+        
