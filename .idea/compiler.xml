@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />
       <entry name="!?*.form" />
@@ -11,11 +13,14 @@
       <entry name="!?*.kt" />
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="IDEA-Perl5_main" target="1.8" />
       <module name="IDEA-Perl5_test" target="1.8" />
-      <module name="Perl5-IDEA_main" target="1.8" />
-      <module name="Perl5-IDEA_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
