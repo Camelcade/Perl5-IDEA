@@ -16,17 +16,17 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlConvertableCompound;
+import com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface PerlIfUnlessCompound extends PerlConvertableCompound {
+public interface PerlIfUnlessCompound extends PerlConvertableCompoundSimple {
 
   @Override
   default boolean isConvertableToModifier() {
-    return PerlConvertableCompound.super.isConvertableToModifier() &&
+    return PerlConvertableCompoundSimple.super.isConvertableToModifier() &&
            getUnconditionalBlock() == null && getConditionalBlockList().size() == 1;
   }
 
@@ -36,6 +36,16 @@ public interface PerlIfUnlessCompound extends PerlConvertableCompound {
   default PsiPerlBlock getBlock() {
     List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
     return conditionalBlockList.isEmpty() ? null : conditionalBlockList.get(0).getBlock();
+  }
+
+  @Nullable
+  @Override
+  default PsiPerlConditionExpr getConditionExpr() {
+    List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
+    if (conditionalBlockList.size() != 1) {
+      return null;
+    }
+    return conditionalBlockList.get(0).getConditionExpr();
   }
 
   @NotNull

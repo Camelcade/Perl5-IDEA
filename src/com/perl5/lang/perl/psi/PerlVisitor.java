@@ -136,4 +136,21 @@ public class PerlVisitor extends PsiPerlVisitor {
   public final void visitSubDeclaration(@NotNull PsiPerlSubDeclaration o) {
     visitSubDeclarationElement(o);
   }
+
+  public void visitVariableDeclarationGlobal(@NotNull PsiPerlVariableDeclarationGlobal o) {
+    visitPerlVariableDeclarationExpr(o);
+  }
+
+  public void visitVariableDeclarationLexical(@NotNull PsiPerlVariableDeclarationLexical o) {
+    visitPerlVariableDeclarationExpr(o);
+  }
+
+  public void visitVariableDeclarationLocal(@NotNull PsiPerlVariableDeclarationLocal o) {
+    visitPerlVariableDeclarationExpr(o);
+  }
+
+  public void visitPerlVariableDeclarationExpr(@NotNull PerlVariableDeclarationExpr o) {
+    visitExpr(o);
+  }
+
 }

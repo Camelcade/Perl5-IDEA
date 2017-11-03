@@ -1,0 +1,2 @@
+my $line;
+say $line while ($line = <>);

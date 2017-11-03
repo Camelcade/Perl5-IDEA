@@ -1,0 +1,4 @@
+while (my ($key, $value) = each %hash) {
+    say "$key => $value";
+}
+

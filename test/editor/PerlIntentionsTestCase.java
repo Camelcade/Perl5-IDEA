@@ -14,26 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package editor;
 
-import com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
-import org.jetbrains.annotations.Nullable;
+import base.PerlLightTestCase;
 
-public interface PerlWhileUntilCompound extends PerlConvertableCompoundSimple, PerlLoop {
-
+public class PerlIntentionsTestCase extends PerlLightTestCase {
   @Override
-  default boolean isConvertableToModifier() {
-    return PerlConvertableCompoundSimple.super.isConvertableToModifier() &&
-           getContinueBlock() == null;
+  protected String getTestDataPath() {
+    return "testData/intentions/perl";
   }
-
-  @Nullable
-  PsiPerlBlock getBlock();
-
-  @Nullable
-  PsiPerlConditionExpr getConditionExpr();
-
-  @Nullable
-  PsiPerlContinueBlock getContinueBlock();
 }

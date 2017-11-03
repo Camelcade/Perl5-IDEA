@@ -1,0 +1,4 @@
+my $line;
+while($line = <>) {
+ <caret>   say $line;
+}

@@ -1,0 +1,6 @@
+# test
+
+my $line;
+say $line if ($line = shift);
+
+# test

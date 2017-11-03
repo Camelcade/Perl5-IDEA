@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
-import com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
+import com.perl5.lang.perl.psi.PsiPerlConditionExpr;
 import org.jetbrains.annotations.Nullable;
 
-public interface PerlWhileUntilCompound extends PerlConvertableCompoundSimple, PerlLoop {
+/**
+ * Marker interface for compound statements that may be converted to statement modifiers and has single
+ * control expression and branch:
+ * if/unless - convertable compound has only one branch
+ * while/until
+ * when
+ */
 
-  @Override
-  default boolean isConvertableToModifier() {
-    return PerlConvertableCompoundSimple.super.isConvertableToModifier() &&
-           getContinueBlock() == null;
-  }
-
-  @Nullable
-  PsiPerlBlock getBlock();
+public interface PerlConvertableCompoundSimple extends PerlConvertableCompound {
+  /**
+   * @return control expression: condition or iterable; null if not found
+   */
 
   @Nullable
   PsiPerlConditionExpr getConditionExpr();
-
-  @Nullable
-  PsiPerlContinueBlock getContinueBlock();
 }

@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.util.Comparing;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import org.jetbrains.annotations.Nullable;
@@ -42,5 +44,19 @@ public class PerlVariableUtil {
     }
 
     return myAnnotations;
+  }
+
+  /**
+   * Compares two variables by actual type, packageName and name. They can be from different declarations
+   * builds AST
+   */
+  public static boolean equal(@Nullable PerlVariable v1, @Nullable PerlVariable v2) {
+    if (Comparing.equal(v1, v2)) {
+      return true;
+    }
+    assert v1 != null && v2 != null;
+    return v1.getActualType().equals(v2.getActualType()) &&
+           Comparing.equal(v1.getPackageName(), v2.getPackageName()) &&
+           Comparing.equal(v1.getName(), v2.getName());
   }
 }

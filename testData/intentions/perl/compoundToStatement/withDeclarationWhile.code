@@ -1,0 +1,7 @@
+# test
+
+while(my $line = <>) {
+    say $li<caret>ne;
+}
+
+# test

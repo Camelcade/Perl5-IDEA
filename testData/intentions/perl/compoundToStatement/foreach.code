@@ -1,0 +1,3 @@
+foreach(@ARGV) {
+    say 'hi';
+}

@@ -16,14 +16,9 @@
 
 package editor;
 
-import base.PerlLightTestCase;
 import com.perl5.PerlBundle;
 
-public class PerlIntentionsTest extends PerlLightTestCase {
-  @Override
-  protected String getTestDataPath() {
-    return "testData/intentions/perl";
-  }
+public class PerlIntentionsTest extends PerlIntentionsTestCase {
 
   public void testModifierToStatementFor() {doTestConvertToCompound();}
 

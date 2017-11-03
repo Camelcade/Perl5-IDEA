@@ -1,0 +1,7 @@
+# test
+
+until(my $line = <>) {
+  <caret>  say $line;
+}
+
+# test

@@ -1,0 +1,3 @@
+for $var (@ARGV) {
+    say "$var $var[0] $var{key}";
+}

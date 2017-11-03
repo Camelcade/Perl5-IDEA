@@ -1,0 +1,3 @@
+for my $var (@ARGV){
+<caret>    say 'hi' . $var;
+}

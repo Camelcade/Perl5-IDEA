@@ -22,10 +22,8 @@ import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 
 /**
  * Marker interface for compound statements that may be converted to statement modifiers:
- * if
- * unless
- * while
- * until
+ * if/unless
+ * while/until
  * for/foreach
  * when
  */

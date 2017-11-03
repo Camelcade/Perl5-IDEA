@@ -1,0 +1,7 @@
+# test
+
+if(my $line = shift) {
+    say $line;<caret>
+}
+
+# test

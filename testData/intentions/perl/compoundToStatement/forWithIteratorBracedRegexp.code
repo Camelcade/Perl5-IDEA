@@ -1,0 +1,3 @@
+foreach $var (@ARGV) {
+    $var[0] =~ s/some${var}thing//;
+}
