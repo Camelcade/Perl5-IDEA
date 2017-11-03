@@ -16,15 +16,29 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.ILeafElementType;
+import com.perl5.lang.perl.util.PerlReflectionUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.BiFunction;
 
 /**
  * Created by hurricup on 19.01.2016.
  */
-public abstract class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
-  public PerlTokenTypeEx(@NotNull @NonNls String debugName) {
+public class PerlTokenTypeEx extends PerlTokenType implements ILeafElementType {
+  private final BiFunction<IElementType, CharSequence, ASTNode> myInstanceFactory;
+
+  public PerlTokenTypeEx(@NotNull @NonNls String debugName, Class<? extends ASTNode> clazz) {
     super(debugName);
+    myInstanceFactory = PerlReflectionUtil.createInstanceFactory(clazz, IElementType.class, CharSequence.class);
+  }
+
+  @NotNull
+  @Override
+  public ASTNode createLeafNode(@NotNull CharSequence leafText) {
+    return myInstanceFactory.apply(this, leafText);
   }
 }
