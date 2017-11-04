@@ -19,35 +19,6 @@ package editor;
 import com.perl5.PerlBundle;
 
 public class PerlIntentionsTest extends PerlIntentionsTestCase {
-
-  public void testModifierToStatementFor() {doTestConvertToCompound();}
-
-  public void testModifierToStatementForeach() {doTestConvertToCompound();}
-
-  public void testModifierToStatementIf() {doTestConvertToCompound();}
-
-  public void testModifierToStatementIfDo() {doTestConvertToCompound();}
-
-  public void testModifierToStatementIfEmpty() {doTestConvertToCompound(false);}
-
-  public void testModifierToStatementIfParenthesized() {doTestConvertToCompound();}
-
-  public void testModifierToStatementUnless() {doTestConvertToCompound();}
-
-  public void testModifierToStatementUntil() {doTestConvertToCompound();}
-
-  public void testModifierToStatementWhen() {doTestConvertToCompound();}
-
-  public void testModifierToStatementWhile() {doTestConvertToCompound();}
-
-  public void testModifierToStatementWithError() {doTestNoIntention(PerlBundle.message("perl.intention.convert.to.compound"));}
-
-  private void doTestConvertToCompound(boolean checkErrors) {
-    doTestIntention(PerlBundle.message("perl.intention.convert.to.compound"), checkErrors);
-  }
-
-  private void doTestConvertToCompound() {doTestConvertToCompound(true);}
-
   public void testForeachToFor() {doTestForeachToForIntention();}
 
   public void testForeachToForFor() {doTestForeachToForIntention();}

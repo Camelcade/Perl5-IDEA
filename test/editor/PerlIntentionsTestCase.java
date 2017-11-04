@@ -18,7 +18,7 @@ package editor;
 
 import base.PerlLightTestCase;
 
-public class PerlIntentionsTestCase extends PerlLightTestCase {
+public abstract class PerlIntentionsTestCase extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/intentions/perl";
