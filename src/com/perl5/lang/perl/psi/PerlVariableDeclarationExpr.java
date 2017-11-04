@@ -21,7 +21,6 @@ import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,15 +36,6 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
    */
   @Nullable
   String getDeclarationType();
-
-  @NotNull
-  Collection<PsiPerlArrayVariable> getArrayVariableList();
-
-  @NotNull
-  Collection<PsiPerlHashVariable> getHashVariableList();
-
-  @NotNull
-  Collection<PsiPerlScalarVariable> getScalarVariableList();
 
   @NotNull
   List<PsiPerlVariableDeclarationElement> getVariableDeclarationElementList();
