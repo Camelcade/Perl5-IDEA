@@ -168,6 +168,9 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public boolean isLexicalDeclaration() {
+    if (getStub() != null) {
+      return false;
+    }
     PsiElement parent = getParent();
     return parent instanceof PsiPerlVariableDeclarationLexical ||
            parent instanceof PsiPerlSubSignature ||

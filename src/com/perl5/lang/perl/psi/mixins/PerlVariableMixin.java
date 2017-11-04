@@ -41,6 +41,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE;
+
 /**
  * Created by hurricup on 24.05.2015.
  */
@@ -68,6 +70,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Nullable
   protected String getContextPackageName() {
+    PsiElement parent = getParent();
+    if (parent instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)parent).isLexicalDeclaration()) {
+      return MAIN_PACKAGE;
+    }
     return PerlPackageUtil.getContextPackageName(this);
   }
 
@@ -87,7 +93,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return null;
     }
     else if (qualifiedRanges.first == TextRange.EMPTY_RANGE) {
-      return PerlPackageUtil.MAIN_PACKAGE;
+      return MAIN_PACKAGE;
     }
     return PerlPackageUtil.getCanonicalPackageName(qualifiedRanges.first.subSequence(variableName).toString());
   }
