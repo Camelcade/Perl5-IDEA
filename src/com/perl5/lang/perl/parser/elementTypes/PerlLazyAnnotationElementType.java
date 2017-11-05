@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType {
   public PerlLazyAnnotationElementType(@NotNull @NonNls String debugName) {
-    super(debugName);
+    super(debugName, PerlAnnotationContainerImpl.class);
   }
 
   @NotNull
@@ -45,11 +45,5 @@ public class PerlLazyAnnotationElementType extends PerlLazyBlockElementType {
   @Override
   protected PsiParser getParser() {
     return PerlLazyAnnotationsParser.INSTANCE;
-  }
-
-  @NotNull
-  @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlAnnotationContainerImpl(node);
   }
 }

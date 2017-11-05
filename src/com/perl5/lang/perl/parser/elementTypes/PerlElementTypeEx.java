@@ -19,20 +19,30 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.util.PerlReflectionUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 /**
  * Created by hurricup on 19.01.2016.
  */
 public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider {
+  private final Function<ASTNode, PsiElement> myInstanceFactory;
+
   public PerlElementTypeEx(@NotNull @NonNls String debugName) {
+    this(debugName, PerlCompositeElementImpl.class);
+  }
+
+  public PerlElementTypeEx(@NotNull @NonNls String debugName, Class<? extends PsiElement> clazz) {
     super(debugName);
+    myInstanceFactory = PerlReflectionUtil.createInstanceFactory(clazz, ASTNode.class);
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlCompositeElementImpl(node);
+    return myInstanceFactory.apply(node);
   }
 }

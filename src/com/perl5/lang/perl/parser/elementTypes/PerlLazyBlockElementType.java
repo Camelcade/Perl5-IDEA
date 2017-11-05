@@ -27,15 +27,25 @@ import com.intellij.psi.tree.ILazyParseableElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.util.PerlReflectionUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 /**
  * Created by hurricup on 23.10.2016.
  */
 public abstract class PerlLazyBlockElementType extends ILazyParseableElementType implements PsiElementProvider {
+  private final Function<ASTNode, PsiElement> myInstanceFactory;
+
   public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
+    this(debugName, PerlCompositeElementImpl.class);
+  }
+
+  public PerlLazyBlockElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, PerlLanguage.INSTANCE);
+    myInstanceFactory = PerlReflectionUtil.createInstanceFactory(clazz, ASTNode.class);
   }
 
   @Override
@@ -66,7 +76,7 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
 
   @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlCompositeElementImpl(node);
+  public final PsiElement getPsiElement(@NotNull ASTNode node) {
+    return myInstanceFactory.apply(node);
   }
 }
