@@ -1,0 +1,5 @@
+for(@ARGV) {
+    say 'hi';
+<caret>    say 'hi';
+}
+

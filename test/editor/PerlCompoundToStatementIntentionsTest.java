@@ -25,6 +25,12 @@ public class PerlCompoundToStatementIntentionsTest extends PerlIntentionsTestCas
     return FileUtil.join(super.getTestDataPath(), "compoundToStatement");
   }
 
+  public void testForIterable() {doTestNegative();}
+
+  public void testForWithMultiStatements() {doTestNegative();}
+
+  public void testForWithoutStatement() {doTestNegative();}
+
   public void testWithDeclarationIf() {doTest();}
 
   public void testWithDeclarationUnless() {doTest();}
@@ -61,5 +67,9 @@ public class PerlCompoundToStatementIntentionsTest extends PerlIntentionsTestCas
 
   private void doTest() {
     doTestIntention(PerlBundle.message("perl.intention.convert.to.statement"));
+  }
+
+  private void doTestNegative() {
+    doTestNoIntention(PerlBundle.message("perl.intention.convert.to.statement"));
   }
 }
