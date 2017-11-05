@@ -1,0 +1,10 @@
+# test comment
+say 'some code';
+
+continue
+{
+    <caret>
+}
+
+# other text
+say 'hi';

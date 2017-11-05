@@ -1,0 +1,7 @@
+# test comment
+say 'some code';
+
+grep {} @list<caret>
+
+# other text
+say 'hi';

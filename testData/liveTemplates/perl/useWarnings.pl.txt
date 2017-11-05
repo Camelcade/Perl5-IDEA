@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+use warnings FATAL => 'all'<caret>;
+
+
+
+# other text
+say 'hi';

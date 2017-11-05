@@ -1,0 +1,10 @@
+# test comment
+say 'some code';
+
+if($a){
+
+}
+el<caret>
+
+# other text
+say 'hi';

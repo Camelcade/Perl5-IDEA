@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+while ($expr<caret>) {
+    
+}
+
+# other text
+say 'hi';

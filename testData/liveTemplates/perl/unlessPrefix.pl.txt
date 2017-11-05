@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+unless ($expr<caret>) {
+    
+}
+
+# other text
+say 'hi';

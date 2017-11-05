@@ -1,0 +1,8 @@
+# test comment
+say 'some code';
+
+use parent qw/Foo::Bar<caret>/;
+
+
+# other text
+say 'hi';

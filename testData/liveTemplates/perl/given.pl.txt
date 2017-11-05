@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+given ($expr<caret>) {
+    
+}
+
+# other text
+say 'hi';

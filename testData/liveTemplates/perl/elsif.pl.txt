@@ -1,0 +1,12 @@
+# test comment
+say 'some code';
+
+if($a){
+
+}
+elsif ($cond<caret>) {
+    
+}
+
+# other text
+say 'hi';

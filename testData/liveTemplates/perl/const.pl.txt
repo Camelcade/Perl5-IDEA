@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+use constant {
+    CONST<caret> => 42
+};
+
+# other text
+say 'hi';

@@ -1,0 +1,10 @@
+# test comment
+say 'some code';
+
+sub subname<caret> {
+    my ($self) = @_;
+    
+}
+
+# other text
+say 'hi';

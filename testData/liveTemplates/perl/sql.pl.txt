@@ -1,0 +1,10 @@
+# test comment
+say 'some code';
+
+my $query = <<'SQL';
+    <caret>
+SQL
+
+
+# other text
+say 'hi';

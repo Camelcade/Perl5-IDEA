@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+for (my $i = 0<caret>; $i < 0; $i++) {
+    
+}
+
+# other text
+say 'hi';

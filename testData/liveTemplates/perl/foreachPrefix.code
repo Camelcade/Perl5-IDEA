@@ -1,0 +1,7 @@
+# test comment
+say 'some code';
+
+fe<caret>
+
+# other text
+say 'hi';

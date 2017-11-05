@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+if ($cond<caret>) {
+    
+}
+
+# other text
+say 'hi';

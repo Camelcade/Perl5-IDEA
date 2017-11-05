@@ -1,0 +1,7 @@
+# test comment
+say 'some code';
+
+uwa<caret>
+
+# other text
+say 'hi';

@@ -1,0 +1,7 @@
+# test comment
+say 'some code';
+
+sql<caret>
+
+# other text
+say 'hi';

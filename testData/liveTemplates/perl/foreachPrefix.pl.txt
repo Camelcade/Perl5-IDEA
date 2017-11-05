@@ -1,0 +1,9 @@
+# test comment
+say 'some code';
+
+foreach my $element<caret> (@list) {
+    
+}
+
+# other text
+say 'hi';

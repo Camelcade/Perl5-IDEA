@@ -22,6 +22,7 @@ import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
 import com.intellij.ide.structureView.StructureView;
@@ -961,5 +962,29 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     }
 
     return sb.toString();
+  }
+
+  protected void doLiveTemplateTest(boolean checkErrors) {
+    initWithFileSmart();
+    myFixture.testAction(new ExpandLiveTemplateByTabAction());
+    if (checkErrors) {
+      assertNoErrorElements();
+    }
+    checkEditorWithFile();
+  }
+
+  private void checkEditorWithFile() {
+    Editor editor = getEditor();
+    StringBuilder sb = new StringBuilder(editor.getDocument().getText());
+
+    // fixme add selections?
+    // fixme add active templates?
+    List<Caret> carets = editor.getCaretModel().getAllCarets();
+    for (int i = carets.size() - 1; i > -1; i--) {
+      Caret caret = carets.get(i);
+      sb.insert(caret.getOffset(), "<caret>");
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 }

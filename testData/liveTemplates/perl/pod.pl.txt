@@ -1,0 +1,12 @@
+# test comment
+say 'some code';
+
+=head3 subname<caret>
+
+
+
+=cut
+
+
+# other text
+say 'hi';
