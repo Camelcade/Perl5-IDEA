@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor;
+package editor.intentions;
 
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.PerlBundle;
