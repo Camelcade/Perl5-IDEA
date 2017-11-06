@@ -89,7 +89,7 @@ Caret offset: 34
 {
     do
     {
-        <caret>
+    <caret>    
     }
 }
 
@@ -174,7 +174,7 @@ Caret offset: 47
 say 'hi'
 do
     {
-        <caret>
+    <caret>    
     };
 
 my $var = 1 + 2;
@@ -788,7 +788,7 @@ else{
 given($a){
     do
     {
-        <caret>
+      <caret>  
     }
 }
 
@@ -874,7 +874,7 @@ given($a){
   when($b){}
     do
     {
-        <caret>
+      <caret>  
     }
 }
 
@@ -960,7 +960,7 @@ given($a){
   when($b){}
     do
     {
-        <caret>
+      <caret>  
     }
     when($b){}
 }
@@ -1047,7 +1047,7 @@ given($a){
   when($b){}
     do
     {
-        <caret>
+      <caret>  
     }
     default{}
 }

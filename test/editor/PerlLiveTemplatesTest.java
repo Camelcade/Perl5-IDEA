@@ -25,6 +25,12 @@ public class PerlLiveTemplatesTest extends PerlLightTestCase {
     return "testData/liveTemplates/perl";
   }
 
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    enableLiveTemplatesTesting();
+  }
+
   public void testConst() {doTest("cons");}
 
   public void testContinue() {doTest("cont");}

@@ -25,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlDefaultTemplatesProvider implements DefaultLiveTemplatesProvider {
   public static final String[] TEMPLATES = new String[]{
-    "/liveTemplates/Perl5"
-    , "/liveTemplates/Perl5Postfix"
-    , "/liveTemplates/Perl5Test"
+    "/liveTemplates/Perl5",
+    "/liveTemplates/Perl5Postfix",
+    "/liveTemplates/Perl5Test"
   };
 
   @Override

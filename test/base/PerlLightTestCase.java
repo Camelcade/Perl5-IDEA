@@ -22,6 +22,8 @@ import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
+import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
@@ -139,6 +141,10 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   protected void tearDown() throws Exception {
     Disposer.dispose(myDisposable);
     super.tearDown();
+  }
+
+  protected void enableLiveTemplatesTesting() {
+    TemplateManagerImpl.setTemplateTesting(getProject(), getTestRootDisposable());
   }
 
   public String getTestResultsFilePath() {
@@ -989,6 +995,10 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
             .append("\n")
             .append(StringUtil.repeat("-", 80)).append("\n")
             .append(getEditorTextWithCarets());
+        }
+        TemplateState templateState = TemplateManagerImpl.getTemplateState(editor);
+        if (templateState != null) {
+          templateState.gotoEnd(true);
         }
         document.setText(originalText);
       });
