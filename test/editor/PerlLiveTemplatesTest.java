@@ -17,6 +17,7 @@
 package editor;
 
 import base.PerlLightTestCase;
+import org.jetbrains.annotations.NotNull;
 
 public class PerlLiveTemplatesTest extends PerlLightTestCase {
   @Override
@@ -24,57 +25,53 @@ public class PerlLiveTemplatesTest extends PerlLightTestCase {
     return "testData/liveTemplates/perl";
   }
 
-  public void testConst() {doTest();}
+  public void testConst() {doTest("cons");}
 
-  public void testContinue() {doTest();}
+  public void testContinue() {doTest("cont");}
 
-  public void testDo() {doTest();}
+  public void testDo() {doTest("do");}
 
-  public void testPod() {doTest();}
+  public void testPod() {doTest("pod");}
 
-  public void testElse() {doTest();}
+  public void testElse() {doTest("el");}
 
-  public void testElsif() {doTest();}
+  public void testElsif() {doTest("eli");}
 
-  public void testEval() {doTest();}
+  public void testEval() {doTest("ev");}
 
-  public void testForeachPrefix() {doTest();}
+  public void testForeachPrefix() {doTest("fe");}
 
-  public void testForPrefix() {doTest();}
+  public void testForPrefix() {doTest("fo");}
 
-  public void testGiven() {doTest();}
+  public void testGiven() {doTest("gi");}
 
-  public void testGrep() {doTest();}
+  public void testGrep() {doTest("gr");}
 
-  public void testIfPrefix() {doTest();}
+  public void testIfPrefix() {doTest("if");}
 
-  public void testMap() {doTest();}
+  public void testMap() {doTest("ma");}
 
-  public void testSort() {doTest();}
+  public void testSubAnon() {doTest("sa");}
 
-  public void testSql() {doTest();}
+  public void testSort() {doTest("sort");}
 
-  public void testSub() {doTest();}
+  public void testSql() {doTest("sql");}
 
-  public void testSubAnon() {doTest();}
+  public void testSub() {doTest("sub");}
 
-  public void testUnlessPrefix() {doTest();}
+  public void testUnlessPrefix() {doTest("unl");}
 
-  public void testUntilPrefix() {doTest();}
+  public void testUntilPrefix() {doTest("unt");}
 
-  public void testUseParent() {doTest();}
+  public void testUseParent() {doTest("upa");}
 
-  public void testUseStrict() {doTest();}
+  public void testUseStrict() {doTest("ust");}
 
-  public void testUseWarnings() {doTest();}
+  public void testUseWarnings() {doTest("uwa");}
 
-  public void testWhilePrefix() {doTest();}
+  public void testWhilePrefix() {doTest("wh");}
 
-  private void doTest() {
-    doTest(false);
-  }
-
-  private void doTest(boolean checkErrors) {
-    doLiveTemplateTest(checkErrors);
+  private void doTest(@NotNull String textToType) {
+    doLiveTemplateTest("liveTemplatesTest", textToType);
   }
 }

@@ -40,10 +40,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.editor.Caret;
-import com.intellij.openapi.editor.CaretModel;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.RangeMarker;
+import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
@@ -964,18 +961,48 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     return sb.toString();
   }
 
-  protected void doLiveTemplateTest(boolean checkErrors) {
-    initWithFileSmart();
-    myFixture.testAction(new ExpandLiveTemplateByTabAction());
-    if (checkErrors) {
-      assertNoErrorElements();
-    }
-    checkEditorWithFile();
+  protected void doLiveTemplateTest(@NotNull String textToType) {
+    doLiveTemplateTest(getTestName(true), textToType);
   }
 
-  private void checkEditorWithFile() {
+  protected void doLiveTemplateTest(@NotNull String fileName, @NotNull String textToType) {
+    initWithFileSmart(fileName);
     Editor editor = getEditor();
-    StringBuilder sb = new StringBuilder(editor.getDocument().getText());
+    Document document = editor.getDocument();
+    CaretModel caretModel = editor.getCaretModel();
+    List<Integer> caretsOffsets = ContainerUtil.map(caretModel.getAllCarets(), Caret::getOffset);
+    caretModel.removeSecondaryCarets();
+    String originalText = document.getText();
+
+    StringBuilder sb = new StringBuilder();
+
+    for (Integer offset : caretsOffsets) {
+      WriteCommandAction.runWriteCommandAction(getProject(), () -> {
+        caretModel.moveToOffset(offset);
+        EditorModificationUtil.insertStringAtCaret(editor, textToType);
+        String textBeforeAction = document.getText();
+        myFixture.testAction(new ExpandLiveTemplateByTabAction());
+        if (!StringUtil.equals(document.getText(), textBeforeAction)) {
+          sb.append(StringUtil.repeat("-", 80)).append("\n")
+            .append("Caret offset: ")
+            .append(offset)
+            .append("\n")
+            .append(StringUtil.repeat("-", 80)).append("\n")
+            .append(getEditorTextWithCarets());
+        }
+        document.setText(originalText);
+      });
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected String getEditorText() {
+    return getEditor().getDocument().getText();
+  }
+
+  private String getEditorTextWithCarets() {
+    Editor editor = getEditor();
+    StringBuilder sb = new StringBuilder(getEditorText());
 
     // fixme add selections?
     // fixme add active templates?
@@ -985,6 +1012,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       sb.insert(caret.getOffset(), "<caret>");
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    return sb.toString();
   }
 }

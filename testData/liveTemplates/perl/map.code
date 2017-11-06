@@ -1,7 +1,0 @@
-# test comment
-say 'some code';
-
-ma<caret>
-
-# other text
-say 'hi';

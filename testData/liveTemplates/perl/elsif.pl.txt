@@ -1,5 +1,17 @@
-# test comment
-say 'some code';
+--------------------------------------------------------------------------------
+Caret offset: 79
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
 
 if($a){
 
@@ -8,5 +20,382 @@ elsif ($cond<caret>) {
     
 }
 
-# other text
-say 'hi';
+unless($a){
+
+}
+
+
+if($a){
+
+}
+else{
+
+}
+
+
+if($a){
+
+}
+elsif($b){
+
+}
+
+
+if($a){
+
+}
+
+elsif($b){
+
+}
+
+if($a){
+
+}
+
+else{
+
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}
+
+--------------------------------------------------------------------------------
+Caret offset: 118
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){
+
+}
+
+
+unless($a){
+
+}
+
+
+if($a){
+
+}
+else{
+
+}
+elsif($cond<caret>)
+{
+    
+}
+
+if($a){
+
+}
+elsif($b){
+
+}
+
+
+if($a){
+
+}
+
+elsif($b){
+
+}
+
+if($a){
+
+}
+
+else{
+
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}
+
+--------------------------------------------------------------------------------
+Caret offset: 145
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){
+
+}
+
+
+unless($a){
+
+}
+
+
+if($a){
+
+}
+else{
+
+}
+
+
+if($a){
+
+}
+elsif($b){
+
+}
+elsif ($cond<caret>) {
+    
+}
+
+if($a){
+
+}
+
+elsif($b){
+
+}
+
+if($a){
+
+}
+
+else{
+
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}
+
+--------------------------------------------------------------------------------
+Caret offset: 158
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){
+
+}
+
+
+unless($a){
+
+}
+
+
+if($a){
+
+}
+else{
+
+}
+
+
+if($a){
+
+}
+elsif($b){
+
+}
+
+
+if($a){
+
+}
+elsif ($cond<caret>) {
+    
+}
+elsif($b){
+
+}
+
+if($a){
+
+}
+
+else{
+
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}
+
+--------------------------------------------------------------------------------
+Caret offset: 185
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){
+
+}
+
+
+unless($a){
+
+}
+
+
+if($a){
+
+}
+else{
+
+}
+
+
+if($a){
+
+}
+elsif($b){
+
+}
+
+
+if($a){
+
+}
+
+elsif($b){
+
+}
+
+if($a){
+
+}
+elsif ($cond<caret>) {
+    
+}
+else{
+
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}
+

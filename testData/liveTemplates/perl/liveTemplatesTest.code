@@ -1,0 +1,75 @@
+# Live templates test sample
+
+<caret>
+
+{
+<caret>
+}
+
+say 'hi' <caret>;
+
+my $var = 1 + <caret>2;
+
+if($a){
+
+}
+<caret>
+
+unless($a){
+
+}
+<caret>
+
+if($a){
+
+}
+else{
+
+}
+<caret>
+
+if($a){
+
+}
+elsif($b){
+
+}
+<caret>
+
+if($a){
+
+}
+<caret>
+elsif($b){
+
+}
+
+if($a){
+
+}
+<caret>
+else{
+
+}
+
+given($a){
+  <caret>
+}
+
+given($a){
+  when($b){}
+  <caret>
+}
+
+given($a){
+  when($b){}
+  <caret>
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  <caret>
+  default{}
+}
+
