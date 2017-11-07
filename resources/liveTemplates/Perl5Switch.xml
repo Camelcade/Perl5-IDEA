@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2016 Alexandr Evstigneev
+  ~ Copyright 2015-2017 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,25 +15,23 @@
   ~ limitations under the License.
   -->
 
-<templateSet group="Perl5 Switch">
-    <template name="switch" value="switch ($VAL$)&#10;{&#10;    $END$&#10;}" description="switch block"
+<templateSet group="Perl5: Switch">
+  <template name="sw" value="switch ($VAL$)&#10;{&#10;    $SELECTION$$END$&#10;}" description="switch block"
               toReformat="true" toShortenFQNames="true">
-        <variable name="VAL" expression="" defaultValue="" alwaysStopAt="true"/>
+    <variable name="VAL" expression="" defaultValue="&quot;$expr&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="case" value="case $COND$ { $CODE$ }&#10;$END$" description="case block"
-              toReformat="true" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="CODE" expression="" defaultValue="" alwaysStopAt="true"/>
+  <template name="ca" value="case $COND$ { $SELECTION$$END$ }&#10;" description="case block"
+            toReformat="true" toShortenFQNames="true">
+    <variable name="COND" expression="&quot;$expr&quot;" defaultValue="" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_INSIDE_SWITCH" value="true"/>
         </context>
     </template>
-    <template name="else" value="else { $CODE$ }&#10;$END$" description="else block" toReformat="true"
-              toShortenFQNames="true">
-        <variable name="CODE" expression="" defaultValue="" alwaysStopAt="true"/>
+  <template name="el" value="else { $SELECTION$$END$ }&#10;" description="else block" toReformat="true"
+            toShortenFQNames="true">
         <context>
             <option name="PERL5_INSIDE_SWITCH_AFTER_CASE" value="true"/>
         </context>

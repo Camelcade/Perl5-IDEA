@@ -143,6 +143,11 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     super.tearDown();
   }
 
+  protected final void addTearDownListener(@NotNull Disposable disposable) {
+    assert myDisposable != null;
+    Disposer.register(myDisposable, disposable);
+  }
+
   protected void enableLiveTemplatesTesting() {
     TemplateManagerImpl.setTemplateTesting(getProject(), getTestRootDisposable());
   }

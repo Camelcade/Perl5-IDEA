@@ -1,0 +1,30 @@
+# Switch.pm test
+
+<caret>
+
+say 'hi' $caret;
+
+switch($a){
+  <caret>
+}
+
+switch($a){
+  <caret>
+}
+
+switch($a){
+  case $b { say 'hi' }
+  <caret>
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  <caret>
+}
+
+switch($a){
+  case $b { say 'hi' }
+  <caret>
+  else { say 'hi' }
+}

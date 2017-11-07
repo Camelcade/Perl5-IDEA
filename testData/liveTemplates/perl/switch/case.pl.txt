@@ -1,0 +1,170 @@
+--------------------------------------------------------------------------------
+Caret offset: 52
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+    case $expr<caret>{  }
+
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+  else { say 'hi' }
+}
+--------------------------------------------------------------------------------
+Caret offset: 70
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+    case $expr<caret>{  }
+
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+  else { say 'hi' }
+}
+--------------------------------------------------------------------------------
+Caret offset: 111
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+    case $expr<caret>{  }
+
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+  else { say 'hi' }
+}
+--------------------------------------------------------------------------------
+Caret offset: 172
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+    case $expr<caret>{  }
+
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+  else { say 'hi' }
+}
+--------------------------------------------------------------------------------
+Caret offset: 213
+--------------------------------------------------------------------------------
+# Switch.pm test
+
+
+
+say 'hi' $caret;
+
+switch($a){
+  
+}
+
+switch($a){
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+  else { say 'hi' }
+  
+}
+
+switch($a){
+  case $b { say 'hi' }
+    case $expr<caret>{  }
+
+    else { say 'hi' }
+}
