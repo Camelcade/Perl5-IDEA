@@ -15,15 +15,15 @@
   ~ limitations under the License.
   -->
 <templateSet group="Perl5">
-  <template name="me" value="method $NAME$ ($SIGNATURE$)&#10;{&#10;    $END$&#10;}"
-              description="method definition" toReformat="true" toShortenFQNames="true">
+  <template name="me" value="method $NAME$ ($SIGNATURE$)&#10;{&#10;    $SELECTION$$END$&#10;}"
+            description="method definition" toReformat="true" toShortenFQNames="true">
     <variable name="NAME" expression="" defaultValue="&quot;methodname&quot;" alwaysStopAt="true"/>
     <variable name="SIGNATURE" expression="" defaultValue="&quot;$param&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-  <template name="fu" value="func $NAME$ ($SIGNATURE$)&#10;{&#10;    $END$&#10;}" description="function definition"
+  <template name="fu" value="func $NAME$ ($SIGNATURE$)&#10;{&#10;    $SELECTION$$END$&#10;}" description="function definition"
             toReformat="true" toShortenFQNames="true">
     <variable name="NAME" expression="" defaultValue="&quot;funcname&quot;" alwaysStopAt="true"/>
     <variable name="SIGNATURE" expression="" defaultValue="&quot;$arg&quot;" alwaysStopAt="true"/>
