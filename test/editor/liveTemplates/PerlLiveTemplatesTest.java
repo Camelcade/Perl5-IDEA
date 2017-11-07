@@ -16,24 +16,7 @@
 
 package editor.liveTemplates;
 
-import base.PerlLightTestCase;
-import org.jetbrains.annotations.NotNull;
-
-public class PerlLiveTemplatesTest extends PerlLightTestCase {
-  @Override
-  protected String getTestDataPath() {
-    return "testData/liveTemplates/perl";
-  }
-
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    enableLiveTemplatesTesting();
-  }
-
-  public void testMethod() {doTest("me");}
-
-  public void testFunc() {doTest("fu");}
+public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testConst() {doTest("cons");}
 
@@ -80,8 +63,4 @@ public class PerlLiveTemplatesTest extends PerlLightTestCase {
   public void testUseWarnings() {doTest("uwa");}
 
   public void testWhilePrefix() {doTest("wh");}
-
-  private void doTest(@NotNull String textToType) {
-    doLiveTemplateTest("liveTemplatesTest", textToType);
-  }
 }
