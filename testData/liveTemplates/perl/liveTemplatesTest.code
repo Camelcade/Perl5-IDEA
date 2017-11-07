@@ -1,7 +1,5 @@
 # Live templates test sample
-
 <caret>
-
 {
 <caret>
 }
@@ -10,47 +8,27 @@ say 'hi' <caret>;
 
 my $var = 1 + <caret>2;
 
-if($a){
-
-}
+if($a){}
 <caret>
 
-unless($a){
-
-}
+unless($a){}
 <caret>
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 <caret>
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 <caret>
 
-if($a){
-
-}
+if($a){}
 <caret>
-elsif($b){
+elsif($b){}
 
-}
-
-if($a){
-
-}
+if($a){}
 <caret>
-else{
-
-}
+else{}
 
 given($a){
   <caret>
@@ -72,4 +50,3 @@ given($a){
   <caret>
   default{}
 }
-

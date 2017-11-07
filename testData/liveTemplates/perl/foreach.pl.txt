@@ -1,12 +1,10 @@
 --------------------------------------------------------------------------------
-Caret offset: 30
+Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-if ($cond<caret>) {
+foreach my $element<caret> (@list) {
     
 }
-
 {
 
 }
@@ -15,47 +13,27 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -76,17 +54,13 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 34
+}--------------------------------------------------------------------------------
+Caret offset: 32
 --------------------------------------------------------------------------------
 # Live templates test sample
 
-
-
 {
-    if ($cond<caret>) {
+    foreach my $element<caret> (@list) {
         
     }
 }
@@ -95,47 +69,27 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -156,67 +110,43 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 47
+}--------------------------------------------------------------------------------
+Caret offset: 45
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
 }
 
 say 'hi'
-if ($cond<caret>) {
+foreach my $element<caret> (@list) {
     
 };
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -237,14 +167,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 64
+}--------------------------------------------------------------------------------
+Caret offset: 62
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -252,50 +178,31 @@ Caret offset: 64
 
 say 'hi' ;
 
-my $var = 1 + if (<caret>);
+my $var = 1 + foreach (@list<caret>);
+
 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -316,14 +223,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 79
+}--------------------------------------------------------------------------------
+Caret offset: 75
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -333,49 +236,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
-if ($cond<caret>) {
+if($a){}
+foreach my $element<caret> (@list) {
     
 }
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -396,14 +279,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 96
+}--------------------------------------------------------------------------------
+Caret offset: 90
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -413,49 +292,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
-if ($cond<caret>) {
+unless($a){}
+foreach my $element<caret> (@list) {
     
 }
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -476,14 +335,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 118
+}--------------------------------------------------------------------------------
+Caret offset: 108
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -493,49 +348,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
-if ($cond<caret>) {
+if($a){}
+else{}
+foreach my $element<caret> (@list) {
     
 }
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -556,14 +391,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 145
+}--------------------------------------------------------------------------------
+Caret offset: 131
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -573,49 +404,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
-if ($cond<caret>) {
+if($a){}
+elsif($b){}
+foreach my $element<caret> (@list) {
     
 }
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -636,14 +447,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 158
+}--------------------------------------------------------------------------------
+Caret offset: 142
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -653,49 +460,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
-
-}
-if ($cond<caret>) {
+if($a){}
+foreach my $element<caret> (@list) {
     
 }
-elsif($b){
+elsif($b){}
 
-}
+if($a){}
 
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -716,14 +503,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 185
+}--------------------------------------------------------------------------------
+Caret offset: 165
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -733,49 +516,29 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
-
-}
-
-if($a){
-
-}
-if ($cond<caret>) {
+if($a){}
+foreach my $element<caret> (@list) {
     
 }
-else{
-
-}
+else{}
 
 given($a){
   
@@ -796,14 +559,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 209
+}--------------------------------------------------------------------------------
+Caret offset: 187
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -813,50 +572,30 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
-    if ($cond<caret>) {
+    foreach my $element<caret> (@list) {
         
     }
 }
@@ -876,14 +615,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 239
+}--------------------------------------------------------------------------------
+Caret offset: 217
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -893,47 +628,27 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -941,7 +656,7 @@ given($a){
 
 given($a){
   when($b){}
-    if ($cond<caret>) {
+    foreach my $element<caret> (@list) {
         
     }
 }
@@ -956,14 +671,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 269
+}--------------------------------------------------------------------------------
+Caret offset: 247
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -973,47 +684,27 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -1026,7 +717,7 @@ given($a){
 
 given($a){
   when($b){}
-    if ($cond<caret>) {
+    foreach my $element<caret> (@list) {
         
     }
   when($b){}
@@ -1036,14 +727,10 @@ given($a){
   when($b){}
   
   default{}
-}
-
---------------------------------------------------------------------------------
-Caret offset: 312
+}--------------------------------------------------------------------------------
+Caret offset: 290
 --------------------------------------------------------------------------------
 # Live templates test sample
-
-
 
 {
 
@@ -1053,47 +740,27 @@ say 'hi' ;
 
 my $var = 1 + 2;
 
-if($a){
-
-}
+if($a){}
 
 
-unless($a){
-
-}
+unless($a){}
 
 
-if($a){
-
-}
-else{
-
-}
+if($a){}
+else{}
 
 
-if($a){
-
-}
-elsif($b){
-
-}
+if($a){}
+elsif($b){}
 
 
-if($a){
+if($a){}
 
-}
+elsif($b){}
 
-elsif($b){
+if($a){}
 
-}
-
-if($a){
-
-}
-
-else{
-
-}
+else{}
 
 given($a){
   
@@ -1112,9 +779,8 @@ given($a){
 
 given($a){
   when($b){}
-    if ($cond<caret>) {
+    foreach my $element<caret> (@list) {
         
     }
   default{}
 }
-

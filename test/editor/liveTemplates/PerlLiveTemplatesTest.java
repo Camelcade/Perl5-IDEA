@@ -32,15 +32,15 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testEval() {doTest("ev");}
 
-  public void testForeachPrefix() {doTest("fe");}
+  public void testForeach() {doTest("fe");}
 
-  public void testForPrefix() {doTest("fo");}
+  public void testFor() {doTest("fo");}
 
   public void testGiven() {doTest("gi");}
 
   public void testGrep() {doTest("gr");}
 
-  public void testIfPrefix() {doTest("if");}
+  public void testIf() {doTest("if");}
 
   public void testMap() {doTest("ma");}
 
@@ -52,9 +52,9 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testSub() {doTest("sub");}
 
-  public void testUnlessPrefix() {doTest("unl");}
+  public void testUnless() {doTest("unl");}
 
-  public void testUntilPrefix() {doTest("unt");}
+  public void testUntil() {doTest("unt");}
 
   public void testUseParent() {doTest("upa");}
 
@@ -62,5 +62,5 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testUseWarnings() {doTest("uwa");}
 
-  public void testWhilePrefix() {doTest("wh");}
+  public void testWhile() {doTest("wh");}
 }
