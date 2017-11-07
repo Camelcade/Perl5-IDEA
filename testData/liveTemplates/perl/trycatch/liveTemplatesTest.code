@@ -1,0 +1,23 @@
+# Live templates test sample
+<caret>
+{
+<caret>
+}
+
+say 'hi' <caret>;
+
+my $var = 1 + <caret>2;
+
+try{}
+<caret>
+
+try{}
+catch($a){}
+<caret>
+
+
+try{}
+catch{}
+<caret>
+
+

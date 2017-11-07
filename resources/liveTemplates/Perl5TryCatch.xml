@@ -14,22 +14,16 @@
   ~ limitations under the License.
   -->
 
-<templateSet group="Perl5 TryCatch">
-    <template name="try" value="try{&#10;    $END$&#10;}" description="Try block" toReformat="true"
+<templateSet group="Perl5">
+    <template name="tr" value="try{&#10;    $SELECTION$$END$&#10;}" description="Try block" toReformat="true"
               toShortenFQNames="true">
         <context>
             <option name="PERL5_TRY_CATCH" value="true"/>
         </context>
     </template>
-    <template name="catch" value="catch{&#10;    $END$&#10;}" description="Simple catch block" toReformat="true"
+    <template name="ca" value="catch $EXPR$ {&#10;    $SELECTION$$END$&#10;}" description="Catch block" toReformat="true"
               toShortenFQNames="true">
-        <context>
-            <option name="PERL5_TRY_CATCH_CATCH" value="true"/>
-        </context>
-    </template>
-    <template name="catch()" value="catch($VAR$){&#10;    $END$&#10;}" description="Catch block" toReformat="true"
-              toShortenFQNames="true">
-        <variable name="VAR" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="VAR" expression="" defaultValue="&quot;($expr)&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_TRY_CATCH_CATCH" value="true"/>
         </context>
