@@ -14,86 +14,62 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<templateSet group="Perl5 Moose">
-    <template name="extends" value="extends '$CLASSNAME$';&#10;$END$" description="extends statement" toReformat="false"
-              toShortenFQNames="true">
-        <variable name="CLASSNAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <context>
-            <option name="PERL5_PREFIX" value="true"/>
-        </context>
-    </template>
-    <template name="extends versioned" value="extends '$CLASSNAME$' =&gt; { -version =&gt; $VERSION$ };&#10;$END$"
+<templateSet group="Perl5: Moose">
+    <template name="ex" value="extends '$CLASSNAME$'$VERSION$;&#10;$END$"
               description="extends statement with version" toReformat="false" toShortenFQNames="true">
-        <variable name="CLASSNAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="VERSION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CLASSNAME" expression="" defaultValue="&quot;Foo::Bar&quot;" alwaysStopAt="true"/>
+        <variable name="VERSION" expression="" defaultValue="&quot; =&gt; { -version =&gt; 1.0 }&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="with" value="with '$CLASSNAME$';&#10;$END$" description="with statement" toReformat="false"
-              toShortenFQNames="true">
-        <variable name="CLASSNAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <context>
-            <option name="PERL5_PREFIX" value="true"/>
-        </context>
-    </template>
-    <template name="with versioned" value="with '$CLASSNAME$' =&gt; { -version =&gt; $VERSION$ };&#10;$END$"
+    <template name="wi" value="with '$CLASSNAME$'$VERSION$;&#10;$END$"
               description="with statement with version" toReformat="false" toShortenFQNames="true">
-        <variable name="CLASSNAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="VERSION" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="CLASSNAME" expression="" defaultValue="&quot;Foo::Bar&quot;" alwaysStopAt="true"/>
+        <variable name="VERSION" expression="" defaultValue="&quot; =&gt; { -version =&gt; 1.0 }&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="has" value="has $NAME$ =&gt; ( is =&gt; '$IS$'$MORE$ );&#10;$END$" description="has statement"
+    <template name="ha" value="has $NAME$ =&gt; ( is =&gt; '$IS$'$END$ );" description="has statement"
               toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="IS" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="MORE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;attr_name&quot;" alwaysStopAt="true"/>
+        <variable name="IS" expression="" defaultValue="&quot;rw&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="has+" value="has '+$NAME$' =&gt; ( is =&gt; '$IS$'$MORE$ );&#10;$END$" description="has statement +"
+    <template name="be" value="before $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};&#10;" description="before statement"
               toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="IS" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="MORE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;sub_name&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="before" value="before $NAME$ =&gt; sub{&#10;    $END$&#10;};&#10;" description="before statement"
+    <template name="af" value="after $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};&#10;" description="after statement"
               toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;sub_name&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="after" value="after $NAME$ =&gt; sub{&#10;    $END$&#10;};&#10;" description="after statement"
+    <template name="ar" value="around $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};&#10;" description="around statement"
               toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;sub_name&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="around" value="around $NAME$ =&gt; sub{&#10;    $END$&#10;};&#10;" description="around statement"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
-        <context>
-            <option name="PERL5_PREFIX" value="true"/>
-        </context>
-    </template>
-    <template name="override" value="override $NAME$ =&gt; sub{&#10;    $END$&#10;};&#10;"
+    <template name="ov" value="override $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};&#10;"
               description="override statement" toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;sub_name&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="augment" value="augment $NAME$ =&gt; sub{&#10;    $END$&#10;};&#10;"
+    <template name="au" value="augment $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};&#10;"
               description="augment statement" toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="NAME" expression="" defaultValue="&quot;sub_name&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5_PREFIX" value="true"/>
         </context>
