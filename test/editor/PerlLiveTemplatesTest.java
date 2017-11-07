@@ -31,6 +31,11 @@ public class PerlLiveTemplatesTest extends PerlLightTestCase {
     enableLiveTemplatesTesting();
   }
 
+  public void testMethod() {doTest("me");}
+
+  public void testFunc() {doTest("fu");}
+
+
   public void testConst() {doTest("cons");}
 
   public void testContinue() {doTest("cont");}
