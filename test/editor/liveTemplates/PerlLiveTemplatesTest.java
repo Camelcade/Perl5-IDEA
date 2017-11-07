@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor;
+package editor.liveTemplates;
 
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,6 @@ public class PerlLiveTemplatesTest extends PerlLightTestCase {
   public void testMethod() {doTest("me");}
 
   public void testFunc() {doTest("fu");}
-
 
   public void testConst() {doTest("cons");}
 
