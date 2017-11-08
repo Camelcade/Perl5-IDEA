@@ -1,0 +1,10 @@
+# Test::More templates test sample
+<caret>
+
+{
+<caret>
+}
+
+say 'hi' <caret>;
+
+my $var = 1 + <caret>2;

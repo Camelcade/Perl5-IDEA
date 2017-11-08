@@ -15,230 +15,230 @@
   ~ limitations under the License.
   -->
 
-<templateSet group="Perl5 test">
-    <template name="subtest" value="subtest $NAME$ =&gt; sub{&#10;    $END$&#10;};" description="Subtest"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="NAME" expression="" defaultValue="testname" alwaysStopAt="true"/>
+<templateSet group="Perl5: Test::More">
+    <template name="st" value="subtest $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};" description="subtest"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="NAME" expression="" defaultValue="&quot;testname&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="ok" value="ok( $COND$, '$NAME$' );&#10;$END$" description="ok assertion" toReformat="false"
+    <template name="ok" value="ok( $EXPR$, '$MESSAGE$' );&#10;$END$" description="ok" toReformat="true"
               toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="EXPR" expression="" defaultValue="&quot;$expr&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="is" value="is( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="is assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="is" value="is( $ACT$, $EXP$, '$MESSAGE$' );&#10;$END$" description="is"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="EXP" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="isnt" value="isnt( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="isnt assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="it" value="isnt( $ACT$, $EXP$, '$MESSAGE$' );&#10;$END$" description="isnt"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="EXP" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="like" value="like( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="like assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="li" value="like( $ACT$, $EXP$, '$MESSAGE$' );&#10;$END$" description="like"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="EXP" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="unlike" value="unlike( $COND$, $EXPECTED$, '$NAME$' );&#10;$END$" description="unlike assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="ul" value="unlike( $ACT$, $EXP$, '$MESSAGE$' );&#10;$END$" description="unlike"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="EXP" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="cmp_ok" value="cmp_ok( $COND$, '$OP$', $EXPECTED$, '$NAME$' );&#10;$END$"
-              description="cmp_ok assertion" toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="OP" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="cmo" value="cmp_ok( $ACT$, '$OP$', $EXPECTED$, '$MESSAGE$' );&#10;$END$"
+              description="cmp_ok" toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="OP" expression="" defaultValue="&quot;op&quot;" alwaysStopAt="true"/>
+        <variable name="EXPECTED" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="can_ok" value="can_ok( $COND$, qw/$SUBS$/ );&#10;$END$" description="can_ok assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="SUBS" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="cno" value="can_ok( $OBJ$, qw/$SUBS$/ );&#10;$END$" description="can_ok"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="OBJ" expression="" defaultValue="&quot;$obj&quot;" alwaysStopAt="true"/>
+        <variable name="SUBS" expression="" defaultValue="&quot;subname&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="isa_ok" value="isa_ok( $COND$, '$CLASS$', '$OBJECT_NAME$' );&#10;$END$"
-              description="isa_ok assertion" toReformat="false" toShortenFQNames="true">
-        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="iso" value="isa_ok( $OBJ$, '$CLASS$', '$MESSAGE$' );&#10;$END$"
+              description="isa_ok" toReformat="true" toShortenFQNames="true">
+        <variable name="OBJ" expression="" defaultValue="&quot;$obj&quot;" alwaysStopAt="true"/>
+        <variable name="CLASS" expression="" defaultValue="&quot;Foo::Bar&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="new_ok" value="new_ok( $CLASS$ =&gt; $ARGS$, '$OBJECT_NAME$' );&#10;$END$"
-              description="new_ok assertion" toReformat="false" toShortenFQNames="true">
-        <variable name="CLASS" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="ARGS" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="OBJECT_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="neo" value="new_ok( $CLASS$ =&gt; $ARGS$, '$MESSAGE$' );&#10;$END$"
+              description="new_ok" toReformat="true" toShortenFQNames="true">
+        <variable name="CLASS" expression="" defaultValue="&quot;$class&quot;" alwaysStopAt="true"/>
+        <variable name="ARGS" expression="" defaultValue="&quot;$args_ref&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="pass" value="pass( '$TEST_NAME$' );&#10;$END$" description="pass statement" toReformat="false"
+    <template name="pa" value="pass( '$TEST_NAME$' );&#10;$END$" description="pass" toReformat="true"
               toShortenFQNames="true">
-        <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="TEST_NAME" expression="" defaultValue="&quot;test_name&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="fail" value="fail( '$TEST_NAME$' );&#10;$END$" description="fail statement" toReformat="false"
+    <template name="fa" value="fail( '$TEST_NAME$' );&#10;$END$" description="fail" toReformat="true"
               toShortenFQNames="true">
-        <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="TEST_NAME" expression="" defaultValue="&quot;test_name&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="require_ok" value="require_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$"
-              description="require_ok assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="ro" value="require_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$"
+              description="require_ok"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="&quot;Foo::Bar&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="use_ok" value="use_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$" description="use_ok assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="uo" value="use_ok( '$MODULE_OR_PACKAGE$' );&#10;$END$" description="use_ok"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="MODULE_OR_PACKAGE" expression="" defaultValue="&quot;Foo::Bar&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="is_deeply" value="is_deeply( $GOT$, $EXPECTED$, '$NAME$' );&#10;$END$"
-              description="is_deepy assertion"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="GOT" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="EXPECTED" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="id" value="is_deeply( $ACT$, $EXP$, '$MESSAGE$' );&#10;$END$"
+              description="is_deepy"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="ACT" expression="" defaultValue="&quot;$actual&quot;" alwaysStopAt="true"/>
+        <variable name="EXP" expression="" defaultValue="&quot;$expected&quot;" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="diag" value="diag( '$TEST_NAME$' );&#10;$END$" description="diag statement" toReformat="false"
+    <template name="di" value="diag( '$MESSAGE$' );&#10;$END$" description="diag" toReformat="true"
               toShortenFQNames="true">
-        <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="note" value="note( '$TEST_NAME$' );&#10;$END$" description="note statement" toReformat="false"
+    <template name="nt" value="note( '$MESSAGE$' );&#10;$END$" description="note" toReformat="true"
               toShortenFQNames="true">
-        <variable name="TEST_NAME" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="MESSAGE" expression="" defaultValue="&quot;message&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="explain" value="explain( $REFERENCE$ );&#10;$END$" description="explain statement"
-              toReformat="false"
+    <template name="exp" value="explain( $REFERENCE$ );&#10;$END$" description="explain"
+              toReformat="true"
               toShortenFQNames="true">
-        <variable name="REFERENCE" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="REFERENCE" expression="" defaultValue="&quot;$reference&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="SKIP"
-              value="SKIP: {&#10;    skip '$REASON$', $HOW_MANY$ if $CONDITION$;&#10;    &#10;    $END$&#10;}"
-              description="skip block" toReformat="false" toShortenFQNames="true">
-        <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="HOW_MANY" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="sk"
+              value="SKIP: {&#10;    skip '$REASON$', $HOW_MANY$$CONDITION$;&#10;    &#10;    $SELECTION$$END$&#10;}"
+              description="skip block" toReformat="true" toShortenFQNames="true">
+        <variable name="REASON" expression="" defaultValue="&quot;reason&quot;" alwaysStopAt="true"/>
+        <variable name="HOW_MANY" expression="" defaultValue="&quot;$number&quot;" alwaysStopAt="true"/>
+        <variable name="CONDITION" expression="" defaultValue="&quot; if $condition&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="TODO" value="TODO: {&#10;    local $TODO = '$REASON$';&#10;    &#10;    $END$&#10;}"
-              description="todo block" toReformat="false" toShortenFQNames="true">
-        <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="td" value="TODO: {&#10;    local $TODO = '$REASON$'$CONDITION$;&#10;    &#10;    $SELECTION$$END$&#10;}"
+              description="todo block" toReformat="true" toShortenFQNames="true">
+        <variable name="REASON" expression="" defaultValue="&quot;reason&quot;" alwaysStopAt="true"/>
+        <variable name="CONDITION" expression="" defaultValue="&quot; if $condition&quot;" alwaysStopAt="true"/>
+        <context>
+            <option name="PERL5_TEST_FILE" value="true"/>
+        </context>
+    </template>
+    <template name="tds"
+              value="TODO: {&#10;    todo_skip '$REASON$', $HOW_MANY$$CONDITION$;&#10;    &#10;    $SELECTION$$END$&#10;}"
+              description="todo_skip block" toReformat="true" toShortenFQNames="true">
+        <variable name="REASON" expression="" defaultValue="&quot;reason&quot;" alwaysStopAt="true"/>
+        <variable name="HOW_MANY" expression="" defaultValue="&quot;$number&quot;" alwaysStopAt="true"/>
+        <variable name="CONDITION" expression="" defaultValue="&quot; if $condition&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="TODO skip"
-              value="TODO: {&#10;    todo_skip '$REASON$', $HOW_MANY$ if $CONDITION$;&#10;    &#10;    $END$&#10;}"
-              description="todo_skip block" toReformat="false" toShortenFQNames="true">
-        <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="HOW_MANY" expression="" defaultValue="" alwaysStopAt="true"/>
-        <variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true"/>
-        <context>
-
-            <option name="PERL5_TEST_FILE" value="true"/>
-        </context>
-    </template>
-    <template name="BAIL_OUT" value="BAIL_OUT( '$RESAON$' );&#10;$END$" description="bail_out statement"
-              toReformat="false"
+    <template name="bo" value="BAIL_OUT( '$RESAON$' );&#10;$END$" description="bail_out"
+              toReformat="true"
               toShortenFQNames="true">
-        <variable name="RESAON" expression="" defaultValue="" alwaysStopAt="true"/>
+        <variable name="RESAON" expression="" defaultValue="&quot;reason&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="plan tests" value="plan tests =&gt; $NUMBER_OF_TESTS$;&#10;$END$" description="plan tests statement"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="NUMBER_OF_TESTS" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="pl" value="plan tests =&gt; $NUMBER_OF_TESTS$;&#10;$END$" description="plan tests"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="NUMBER_OF_TESTS" expression="" defaultValue="&quot;$number&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="plan skip_all" value="plan skip_all =&gt; '$REASON$';&#10;$END$"
-              description="plan skip_all statement"
-              toReformat="false" toShortenFQNames="true">
-        <variable name="REASON" expression="" defaultValue="" alwaysStopAt="true"/>
+    <template name="psa" value="plan skip_all =&gt; '$REASON$';&#10;$END$"
+              description="plan skip_all"
+              toReformat="true" toShortenFQNames="true">
+        <variable name="REASON" expression="" defaultValue="&quot;reason&quot;" alwaysStopAt="true"/>
         <context>
 
             <option name="PERL5_TEST_FILE" value="true"/>
         </context>
     </template>
-    <template name="no_plan" value="plan 'no_plan';&#10;$END$" description="plan no_plan statement" toReformat="false"
+    <template name="pnp" value="plan 'no_plan';&#10;$END$" description="plan no_plan" toReformat="true"
               toShortenFQNames="true">
         <context>
 
