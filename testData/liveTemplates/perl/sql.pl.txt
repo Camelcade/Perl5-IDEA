@@ -61,9 +61,9 @@ Caret offset: 32
 # Live templates test sample
 
 {
-my $query = <<'SQL';
-    <caret>
-SQL
+    my $query = <<'SQL';
+    
+   <caret> SQL
 
 }
 
@@ -121,7 +121,8 @@ Caret offset: 45
 
 }
 
-say 'hi' my $query = <<'SQL';
+say 'hi'
+my $query = <<'SQL';
     <caret>
 SQL
 ;
@@ -547,9 +548,9 @@ if($a){}
 else{}
 
 given($a){
-  my $query = <<'SQL';
-    <caret>
-SQL
+    my $query = <<'SQL';
+    
+   <caret> SQL
 
 }
 
@@ -609,9 +610,9 @@ given($a){
 
 given($a){
   when($b){}
-  my $query = <<'SQL';
-    <caret>
-SQL
+    my $query = <<'SQL';
+    
+   <caret> SQL
 
 }
 
@@ -671,11 +672,11 @@ given($a){
 
 given($a){
   when($b){}
-  my $query = <<'SQL';
-    <caret>
-SQL
+    my $query = <<'SQL';
+    
+   <caret> SQL
 
-  when($b){}
+    when($b){}
 }
 
 given($a){
@@ -734,9 +735,8 @@ given($a){
 
 given($a){
   when($b){}
-  my $query = <<'SQL';
-    <caret>
-SQL
-
-  default{}
+    my $query = <<'SQL';
+    
+   <caret> SQL
+    default{}
 }

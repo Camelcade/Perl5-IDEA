@@ -59,8 +59,8 @@ Caret offset: 32
 # Live templates test sample
 
 {
-with 'Foo::Bar<caret>' => { -version => 1.0 };
-
+    with 'Foo::Bar<caret>' => { -version => 1.0 };
+    
 }
 
 say 'hi' ;
@@ -117,7 +117,8 @@ Caret offset: 45
 
 }
 
-say 'hi' with 'Foo::Bar<caret>' => { -version => 1.0 };
+say 'hi'
+with 'Foo::Bar<caret>' => { -version => 1.0 };
 ;
 
 my $var = 1 + 2;
@@ -529,8 +530,8 @@ if($a){}
 else{}
 
 given($a){
-  with 'Foo::Bar<caret>' => { -version => 1.0 };
-  
+    with 'Foo::Bar<caret>' => { -version => 1.0 };
+    
 }
 
 given($a){
@@ -589,8 +590,8 @@ given($a){
 
 given($a){
   when($b){}
-  with 'Foo::Bar<caret>' => { -version => 1.0 };
-  
+    with 'Foo::Bar<caret>' => { -version => 1.0 };
+    
 }
 
 given($a){
@@ -649,8 +650,8 @@ given($a){
 
 given($a){
   when($b){}
-  with 'Foo::Bar<caret>' => { -version => 1.0 };
-  
+    with 'Foo::Bar<caret>' => { -version => 1.0 };
+    
   when($b){}
 }
 
@@ -710,7 +711,7 @@ given($a){
 
 given($a){
   when($b){}
-  with 'Foo::Bar<caret>' => { -version => 1.0 };
-  
+    with 'Foo::Bar<caret>' => { -version => 1.0 };
+    
   default{}
 }

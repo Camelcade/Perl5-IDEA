@@ -16,7 +16,7 @@
   -->
 <templateSet group="Perl5">
     <template name="sql" value="my $query = &lt;&lt;'SQL';&#10;    $END$&#10;SQL&#10;" description="query"
-              toReformat="false" toShortenFQNames="true">
+              toReformat="true" toShortenFQNames="true">
         <context>
             <option name="SQL" value="false"/>
             <option name="PERL5_PREFIX" value="true"/>
@@ -163,7 +163,7 @@
             <option name="PERL5" value="true"/>
         </context>
     </template>
-    <template name="so" value="sort {$END$} $LIST$" description="sort expression" toReformat="false" toShortenFQNames="true">
+  <template name="so" value="sort {$END$} $LIST$" description="sort expression" toReformat="true" toShortenFQNames="true">
         <variable name="LIST" expression="" defaultValue="&quot;@list&quot;" alwaysStopAt="true"/>
         <context>
             <option name="PERL5" value="true"/>
