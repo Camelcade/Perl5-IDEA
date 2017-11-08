@@ -175,5 +175,26 @@
             <option name="PERL5" value="true"/>
         </context>
     </template>
+  <template name="serr" value="say STDERR &quot;$END$&quot;;&#10;" description="say STDERR..." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PERL5_PREFIX" value="true"/>
+    </context>
+  </template>
+  <template name="sout" value="say &quot;$END$&quot;;&#10;" description="say STDOUT ..." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PERL5_PREFIX" value="true"/>
+    </context>
+  </template>
+  <template name="perr" value="print STDERR &quot;$END$&quot;;&#10;" description="print STDERR..." toReformat="true"
+            toShortenFQNames="true">
+    <context>
+      <option name="PERL5_PREFIX" value="true"/>
+    </context>
+  </template>
+  <template name="pout" value="print &quot;$END$&quot;;&#10;" description="print STDOUT ..." toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="PERL5_PREFIX" value="true"/>
+    </context>
+  </template>
 
 </templateSet>

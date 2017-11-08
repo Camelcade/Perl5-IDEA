@@ -18,6 +18,14 @@ package editor.liveTemplates;
 
 public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
+  public void testSayStdout() {doTest("sout"); }
+
+  public void testSayStderr() {doTest("serr"); }
+
+  public void testPrintStdout() {doTest("pout"); }
+
+  public void testPrintStderr() {doTest("perr"); }
+
   public void testConst() {doTest("cons");}
 
   public void testContinue() {doTest("cont");}
