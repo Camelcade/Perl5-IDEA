@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests" singleton="true">
+  <configuration default="false" name="Test POD Parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
