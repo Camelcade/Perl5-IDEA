@@ -17,8 +17,11 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 23.11.2016.
@@ -26,5 +29,10 @@ import org.jetbrains.annotations.NotNull;
 public abstract class PerlPluginBaseFileType extends LanguageFileType {
   public PerlPluginBaseFileType(@NotNull Language language) {
     super(language);
+  }
+
+  protected static boolean isMyFile(@Nullable PsiElement element, @NotNull FileType fileType) {
+    return element != null &&
+           element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == fileType;
   }
 }

@@ -25,6 +25,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -45,28 +46,26 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   @Override
   public boolean isInContext(@NotNull PsiFile psiFile, int fileOffset) {
-    if (PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE)) {
-      PsiElement element = psiFile.findElementAt(fileOffset);
-
-      if (element == null) {
-        element = psiFile.findElementAt(fileOffset - 1);
-      }
-
-      if (element == null) {
-        return false;
-      }
-
-      IElementType tokenType = element.getNode().getElementType();
-
-      if (element instanceof PsiWhiteSpace ||
-          element instanceof PerlStringContentElementImpl ||
-          element instanceof PsiComment ||
-          tokenType == PerlElementTypes.REGEX_TOKEN) {
-        return false;
-      }
-      return isInContext(element);
+    if (!PsiUtilCore.getLanguageAtOffset(psiFile, fileOffset).isKindOf(PerlLanguage.INSTANCE)) {
+      return false;
     }
-    return false;
+    PsiElement element = psiFile.findElementAt(fileOffset);
+
+    if (element == null) {
+      element = psiFile.findElementAt(fileOffset - 1);
+    }
+
+    if (element == null) {
+      return false;
+    }
+
+    IElementType tokenType = PsiUtilCore.getElementType(element);
+
+    return !(element instanceof PsiWhiteSpace ||
+             element instanceof PerlStringContentElementImpl ||
+             element instanceof PsiComment ||
+             tokenType == PerlElementTypes.REGEX_TOKEN) &&
+           isInContext(element);
   }
 
   protected abstract boolean isInContext(PsiElement element);
@@ -84,22 +83,20 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class Postfix extends PerlTemplateContextType {
     public Postfix() {
-      super("PERL5_POSTFIX", "Postfix", Generic.class);
+      super("PERL5_POSTFIX", PerlBundle.message("perl.template.context.postfix"), Generic.class);
     }
 
     @Override
     public boolean isInContext(PsiElement element) {
       PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
-      return statement != null
-             && statement.getTextOffset() < element.getTextOffset()
-        ;
+      return statement != null && statement.getTextOffset() < element.getTextOffset();
     }
   }
 
   public static class Prefix extends PerlTemplateContextType {
     public Prefix() {
-      this("PERL5_PREFIX", "Prefix");
+      this("PERL5_PREFIX", PerlBundle.message("perl.template.context.prefix"));
     }
 
     public Prefix(@NotNull String id, @NotNull String presentableName) {
@@ -110,14 +107,13 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
     public boolean isInContext(PsiElement element) {
       PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
 
-      return statement != null
-             && statement.getTextOffset() == element.getTextOffset();
+      return statement != null && statement.getTextOffset() == element.getTextOffset();
     }
   }
 
   public static class UnfinishedIf extends PerlTemplateContextType.Prefix {
     public UnfinishedIf() {
-      super("PERL5_UNFINISHED_IF", "Unclosed if statement");
+      super("PERL5_UNFINISHED_IF", PerlBundle.message("perl.template.context.incomplete.if"));
     }
 
     @Override
@@ -128,13 +124,12 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class TestFile extends PerlTemplateContextType.Prefix {
     public TestFile() {
-      super("PERL5_TEST_FILE", "Test file prefix");
+      super("PERL5_TEST_FILE", PerlBundle.message("perl.template.context.test.file"));
     }
 
     @Override
     public boolean isInContext(PsiElement element) {
-      return element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == PerlFileTypeTest.INSTANCE &&
-             super.isInContext(element);
+      return PerlFileTypeTest.isMy(element) && super.isInContext(element);
     }
   }
 }

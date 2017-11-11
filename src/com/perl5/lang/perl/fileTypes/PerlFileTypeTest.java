@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.PsiElement;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,5 +53,9 @@ public class PerlFileTypeTest extends PurePerlFileType {
   @Override
   public Icon getIcon() {
     return PerlIcons.TEST_FILE;
+  }
+
+  public static boolean isMy(@Nullable PsiElement psiElement) {
+    return isMyFile(psiElement, INSTANCE);
   }
 }
