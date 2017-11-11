@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 
@@ -25,7 +26,7 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
  */
 public class PerlInSwitchAfterCaseTemplateContextType extends PerlTemplateContextType.Prefix {
   public PerlInSwitchAfterCaseTemplateContextType() {
-    super("PERL5_INSIDE_SWITCH_AFTER_CASE", "Inside Switch after case");
+    super("PERL5_INSIDE_SWITCH_AFTER_CASE", PerlBundle.message("perl.template.context.switch.after.case"));
   }
 
   @Override

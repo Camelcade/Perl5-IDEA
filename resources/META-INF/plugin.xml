@@ -803,8 +803,6 @@
         implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchLiveTemplatesProvider"/>
     <liveTemplateContext
         implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchTemplateContextType$Catch"/>
 
     <completion.contributor language="Perl5"
                             implementationClass="com.perl5.lang.perl.parser.trycatch.idea.completion.TryCatchCompletionContributor"/>

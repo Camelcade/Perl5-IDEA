@@ -18,7 +18,7 @@
     <template name="tr" value="try{&#10;    $SELECTION$$END$&#10;}" description="Try block" toReformat="true"
               toShortenFQNames="true">
         <context>
-            <option name="PERL5_TRY_CATCH" value="true"/>
+          <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="ca" value="catch $EXPR$ {&#10;    $SELECTION$$END$&#10;}" description="Catch block" toReformat="true"

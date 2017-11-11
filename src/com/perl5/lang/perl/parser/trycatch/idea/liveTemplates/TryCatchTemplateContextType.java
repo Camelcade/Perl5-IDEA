@@ -17,35 +17,20 @@
 package com.perl5.lang.perl.parser.trycatch.idea.liveTemplates;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 17.04.2016.
  */
 public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix implements TryCatchElementPatterns {
   public TryCatchTemplateContextType() {
-    super("PERL5_TRY_CATCH", "Try compound");
-  }
-
-  public TryCatchTemplateContextType(@NotNull String id, @NotNull String presentableName) {
-    super(id, presentableName);
-  }
-
-  @Override
-  public boolean isInContext(PsiElement element) {
-    return super.isInContext(element);
-  }
-
-  public static class Catch extends TryCatchTemplateContextType {
-    public Catch() {
-      super("PERL5_TRY_CATCH_CATCH", "Catch compound");
+    super("PERL5_TRY_CATCH_CATCH", PerlBundle.message("perl.template.context.catch"));
     }
 
     @Override
     public boolean isInContext(PsiElement element) {
       return super.isInContext(element) && ELEMENT_AFTER_TRY_CATCH.accepts(element);
     }
-  }
 }

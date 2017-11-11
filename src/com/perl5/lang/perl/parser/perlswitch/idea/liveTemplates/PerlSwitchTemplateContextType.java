@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.perlswitch.idea.liveTemplates;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 
@@ -25,7 +26,7 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
  */
 public class PerlSwitchTemplateContextType extends PerlTemplateContextType.Prefix {
   public PerlSwitchTemplateContextType() {
-    super("PERL5_INSIDE_SWITCH", "Inside Switch");
+    super("PERL5_INSIDE_SWITCH", PerlBundle.message("perl.template.context.switch"));
   }
 
   @Override
