@@ -28,10 +28,11 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlIfUnlessCompound;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -118,7 +119,16 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
     @Override
     public boolean isInContext(PsiElement element) {
-      return super.isInContext(element) && PerlElementPatterns.ELSE_ELSIF_PLACE.accepts(element);
+      if (!super.isInContext(element)) {
+        return false;
+      }
+      PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+      if (statement == null) {
+        return false;
+      }
+
+      PsiElement ifStatement = PerlPsiUtil.getPrevSignificantSibling(statement);
+      return ifStatement instanceof PerlIfUnlessCompound && ((PerlIfUnlessCompound)ifStatement).getUnconditionalBlock() == null;
     }
   }
 

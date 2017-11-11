@@ -55,7 +55,7 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 108
+Caret offset: 90
 --------------------------------------------------------------------------------
 # Live templates test sample
 
@@ -71,14 +71,13 @@ if($a){}
 
 
 unless($a){}
-
+elsif ($cond<caret>) {
+    
+}
 
 if($a){}
 else{}
-elsif($cond<caret>)
-{
-    
-}
+
 
 if($a){}
 elsif($b){}

@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.tt2.psi.impl.PsiPerlBlockImpl;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
@@ -103,11 +102,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
 
-  PsiElementPattern.Capture<PerlGlobVariable> GLOB_PATTERN = psiElement(PerlGlobVariable.class);
-
-  PsiElementPattern.Capture IN_VARIABLE_PATTERN = psiElement().inside(VARIABLE_PATTERN);
-  PsiElementPattern.Capture IN_GLOB_PATTERN = psiElement().inside(GLOB_PATTERN);
-
   // fixme move this to mojo patterns
   PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().inFile(psiFile(MojoliciousFileImpl.class));
 
@@ -120,25 +114,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(ANNOTATION_UNKNOWN_KEY);
 
-  PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_COMPLETION_PATTERN =
-    VARIABLE_NAME_PATTERN
-      .andOr(IN_VARIABLE_PATTERN, IN_GLOB_PATTERN)
-      .andOr(
-        VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN,
-        psiElement().andNot(VARIABLE_NAME_IN_DECLARATION_PATTERN)
-      );
-
-
-  PsiElementPattern.Capture<PsiPerlIfCompound> INCOMPLETED_IF_COMPOUND =
-    psiElement(PsiPerlIfCompound.class)
-      .andNot(
-        psiElement()
-          .withLastChild(psiElement(PsiPerlBlockImpl.class)));
-
-  PsiElementPattern.Capture<PsiElement> ELSE_ELSIF_PLACE =
-    psiElement().inside(
-      psiElement(PsiPerlStatement.class).afterSiblingSkipping(WHITE_SPACE_AND_COMMENTS, INCOMPLETED_IF_COMPOUND)
-    );
 
   // @ISA = ()
   PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class);
