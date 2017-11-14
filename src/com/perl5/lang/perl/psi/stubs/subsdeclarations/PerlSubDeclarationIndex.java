@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdeclarations;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -47,7 +48,10 @@ public class PerlSubDeclarationIndex extends PerlStubIndexBase<PerlSubDeclaratio
                                                @NotNull String packageName,
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlSubDeclarationElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDeclarationElement.class, processor);
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlSubDeclarationElement.class, element -> {
+      ProgressManager.checkCanceled();
+      return processor.process(element);
+    });
   }
 
 }

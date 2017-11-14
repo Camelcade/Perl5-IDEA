@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
@@ -38,6 +39,7 @@ public class PerlResolveUtil {
     PsiElement run = place;
     ResolveState state = ResolveState.initial();
     while (run != null) {
+      ProgressManager.checkCanceled();
       if (place != run && !run.processDeclarations(processor, state, lastParent, place)) {
         return false;
       }
@@ -55,6 +57,7 @@ public class PerlResolveUtil {
                                         @NotNull PsiElement place) {
     PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
     while (run != null) {
+      ProgressManager.checkCanceled();
       if (run instanceof PerlCompositeElement &&
           !(run instanceof PerlLexicalScope) && // fixme this should be in composite
           !run.processDeclarations(processor, resolveState, null, place)
@@ -67,6 +70,7 @@ public class PerlResolveUtil {
     // checking implicit variables fixme: decide, move processchildren to here or move this one to processDeclarations?
     if (element instanceof PerlImplicitVariablesProvider) {
       for (PerlVariableDeclarationElement wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
+        ProgressManager.checkCanceled();
         if (!processor.execute(wrapper, resolveState)) {
           return false;
         }

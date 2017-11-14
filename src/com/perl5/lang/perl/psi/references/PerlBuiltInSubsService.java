@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -131,6 +132,7 @@ public class PerlBuiltInSubsService {
 
   public boolean processSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
     for (PerlBuiltInSubDefinition subDefinition : mySubsMap.values()) {
+      ProgressManager.checkCanceled();
       if (!processor.process(subDefinition)) {
         return false;
       }

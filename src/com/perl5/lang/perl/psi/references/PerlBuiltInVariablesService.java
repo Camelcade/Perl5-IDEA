@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.references;
 
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiManager;
@@ -116,6 +117,7 @@ public class PerlBuiltInVariablesService {
 
   private static boolean processVariables(@NotNull Map<String, PerlBuiltInVariable> variableMap, @NotNull PsiScopeProcessor processor) {
     for (PerlBuiltInVariable variable : variableMap.values()) {
+      ProgressManager.checkCanceled();
       if (!processor.execute(variable, ResolveState.initial())) {
         return false;
       }

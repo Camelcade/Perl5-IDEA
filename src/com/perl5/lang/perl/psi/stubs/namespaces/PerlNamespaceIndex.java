@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -47,6 +48,9 @@ public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitio
                                           @NotNull String packageName,
                                           @NotNull GlobalSearchScope scope,
                                           @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
-    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class, processor);
+    return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class, element -> {
+      ProgressManager.checkCanceled();
+      return processor.process(element);
+    });
   }
 }

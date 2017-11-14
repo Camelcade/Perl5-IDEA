@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -48,6 +49,7 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
                                           @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
 
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+      ProgressManager.checkCanceled();
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
             packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getPackageName())) {

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
@@ -47,6 +48,7 @@ public class PerlLightNamespaceReverseIndex extends PerlStubIndexBase<PerlPolyNa
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(KEY, parentPackageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
+      ProgressManager.checkCanceled();
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
             ((PerlNamespaceDefinitionElement)lightNamedElement).getParentNamespacesNames().contains(parentPackageName)) {

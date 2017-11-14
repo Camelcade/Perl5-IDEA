@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
@@ -117,7 +118,10 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
 
       char firstChar = variableName.charAt(0);
       if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
-        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, processor)) {
+        if (!stubIndex.processElements(key, variableName, project, scope, PerlVariableDeclarationElement.class, element -> {
+          ProgressManager.checkCanceled();
+          return processor.process(element);
+        })) {
           return false;
         }
       }

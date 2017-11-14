@@ -19,7 +19,9 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
@@ -30,8 +32,6 @@ import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 24.08.2015.
@@ -71,17 +71,17 @@ public class PerlImportedSubsCompletionProvider extends CompletionProvider<Compl
   protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinitionElement namespaceContainer,
                                                  @NotNull final CompletionResultSet resultSet) {
     for (PerlExportDescriptor importedDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
-      List<PsiElement> psiElements =
-        PerlSubUtil.collectRelatedItems(importedDescriptor.getTargetCanonicalName(), namespaceContainer.getProject());
+      ProgressManager.checkCanceled();
 
-      if (psiElements.isEmpty()) // no definition found
-      {
+      Ref<Boolean> flag = Ref.create(false);
+      PerlSubUtil.processRelatedItems(importedDescriptor.getTargetCanonicalName(), namespaceContainer.getProject(), element -> {
+        resultSet.addElement(PerlSubCompletionUtil.getImportedEntityLookupElement(element, importedDescriptor));
+        flag.set(true);
+        return true;
+      });
+
+      if (!flag.get()) {
         resultSet.addElement(importedDescriptor.getLookupElement());
-      }
-      else {
-        for (PsiElement element : psiElements) {
-          resultSet.addElement(PerlSubCompletionUtil.getImportedEntityLookupElement(element, importedDescriptor));
-        }
       }
     }
   }

@@ -35,6 +35,7 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
+       <li>Editor responsiveness should be much better now</li>
        <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
        <li>Inspection for <code>use vars</code> legacy pragma usage with quick-fix for converting to <code>our</code> declaration, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/380">380</a></li>
        <li>Intention to convert statement with modifier to compound statement and vice versa, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1604">cjelli</a>

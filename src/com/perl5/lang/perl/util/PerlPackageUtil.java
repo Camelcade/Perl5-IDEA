@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -512,7 +513,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
                                                      @NotNull FileType fileType) {
     for (VirtualFile classRoot : getIncDirsForPsiElement(element)) {
       if (!FileTypeIndex.processFiles(fileType,
-                                      virtualFile -> processor.process(virtualFile, classRoot),
+                                      virtualFile -> {
+                                        ProgressManager.checkCanceled();
+                                        return processor.process(virtualFile, classRoot);
+                                      },
                                       GlobalSearchScopesCore.directoryScope(element.getProject(), classRoot, true))
         ) {
         return false;
@@ -559,6 +563,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
     for (PerlNamespaceDefinitionElement parentNamespace : childClass.getParentNamespaceDefinitions()) {
       for (PsiElement subDefinitionBase : collectNamespaceSubs(parentNamespace)) {
+        ProgressManager.checkCanceled();
         String subName = ((PerlSubElement)subDefinitionBase).getSubName();
         if (subDefinitionBase.isValid() &&
             ((PerlSubElement)subDefinitionBase).isMethod() &&

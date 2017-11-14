@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.completion.util;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.lang.Language;
-import com.intellij.openapi.project.Project;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -70,6 +70,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     for (String text : HASH_INDEXES_CACHE) {
+      ProgressManager.checkCanceled();
       addElement(text, result);
     }
 
@@ -79,12 +80,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
       new PerlRecursiveVisitor() {
         @Override
         public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
-          if (o == element) {
-            super.visitStringContentElement(o);
-          }
-          else if (SIMPLE_HASH_INDEX.accepts(o)) {
+          if (o != element && SIMPLE_HASH_INDEX.accepts(o)) {
             processStringElement(o);
           }
+          super.visitStringContentElement(o);
         }
 
         @Override
@@ -111,6 +110,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         }
 
         protected void processStringElement(PerlStringContentElement stringContentElement) {
+          ProgressManager.checkCanceled();
           String text = stringContentElement.getText();
           if (StringUtil.isNotEmpty(text) && !HASH_INDEXES_CACHE.contains(text) && PerlLexer.IDENTIFIER_PATTERN.matcher(text).matches()) {
             HASH_INDEXES_CACHE.add(text);
@@ -150,71 +150,73 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   }
 
   public static void fillWithUseParameters(final @NotNull PsiElement stringContentElement, @NotNull final CompletionResultSet resultSet) {
-    final Project project = stringContentElement.getProject();
-
     @SuppressWarnings("unchecked")
     PsiPerlUseStatement useStatement =
       PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
     if (useStatement != null) {
       PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-      if (packageProcessor != null) {
-        // fixme we should allow lookup elements customization by package processor
-        if (packageProcessor instanceof PerlPackageOptionsProvider) {
-          Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
+      // fixme we should allow lookup elements customization by package processor
+      if (packageProcessor instanceof PerlPackageOptionsProvider) {
+        Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
 
-          for (Map.Entry<String, String> option : options.entrySet()) {
-            resultSet.addElement(LookupElementBuilder
-                                   .create(option.getKey())
-                                   .withTypeText(option.getValue(), true)
-                                   .withIcon(PerlIcons.PERL_OPTION)
-            );
-          }
-
-          options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
-
-          for (Map.Entry<String, String> option : options.entrySet()) {
-            resultSet.addElement(LookupElementBuilder
-                                   .create(option.getKey())
-                                   .withTypeText(option.getValue(), true)
-                                   .withIcon(PerlIcons.PERL_OPTIONS)
-            );
-          }
-        }
-
-        if (packageProcessor instanceof PerlPackageParentsProvider &&
-            ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
-          PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
-            resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
-            return true;
-          });
-        }
-
-        Set<String> export = new HashSet<>();
-        Set<String> exportOk = new HashSet<>();
-        packageProcessor.addExports(useStatement, export, exportOk);
-        exportOk.removeAll(export);
-
-        for (String subName : export) {
+        for (Map.Entry<String, String> option : options.entrySet()) {
+          ProgressManager.checkCanceled();
           resultSet.addElement(LookupElementBuilder
-                                 .create(subName)
-                                 .withIcon(PerlIcons.SUB_GUTTER_ICON)
-                                 .withTypeText("default", true)
+                                 .create(option.getKey())
+                                 .withTypeText(option.getValue(), true)
+                                 .withIcon(PerlIcons.PERL_OPTION)
           );
         }
-        for (String subName : exportOk) {
+
+        options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
+
+        for (Map.Entry<String, String> option : options.entrySet()) {
+          ProgressManager.checkCanceled();
           resultSet.addElement(LookupElementBuilder
-                                 .create(subName)
-                                 .withIcon(PerlIcons.SUB_GUTTER_ICON)
-                                 .withTypeText("optional", true)
+                                 .create(option.getKey())
+                                 .withTypeText(option.getValue(), true)
+                                 .withIcon(PerlIcons.PERL_OPTIONS)
           );
         }
+      }
+
+      if (packageProcessor instanceof PerlPackageParentsProvider &&
+          ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
+        PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
+          ProgressManager.checkCanceled();
+          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
+          return true;
+        });
+      }
+
+      Set<String> export = new HashSet<>();
+      Set<String> exportOk = new HashSet<>();
+      packageProcessor.addExports(useStatement, export, exportOk);
+      exportOk.removeAll(export);
+
+      for (String subName : export) {
+        ProgressManager.checkCanceled();
+        resultSet.addElement(LookupElementBuilder
+                               .create(subName)
+                               .withIcon(PerlIcons.SUB_GUTTER_ICON)
+                               .withTypeText("default", true)
+        );
+      }
+      for (String subName : exportOk) {
+        ProgressManager.checkCanceled();
+        resultSet.addElement(LookupElementBuilder
+                               .create(subName)
+                               .withIcon(PerlIcons.SUB_GUTTER_ICON)
+                               .withTypeText("optional", true)
+        );
       }
     }
   }
 
   public static void fillWithRefTypes(@NotNull final CompletionResultSet resultSet) {
     for (String refType : REF_TYPES) {
+      ProgressManager.checkCanceled();
       resultSet.addElement(LookupElementBuilder.create(refType));
     }
   }
@@ -222,6 +224,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // injectable markers
     for (Map.Entry<String, Language> entry : LANGUAGE_MAP.entrySet()) {
+      ProgressManager.checkCanceled();
       String abbreviation = entry.getKey();
       Language language = entry.getValue();
 
@@ -240,6 +243,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // cached values
     for (String marker : HEREDOC_OPENERS_CACHE) {
+      ProgressManager.checkCanceled();
       resultSet.addElement(LookupElementBuilder.create(marker));
     }
 

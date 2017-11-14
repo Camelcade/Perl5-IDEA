@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
@@ -279,6 +280,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
+    ProgressManager.checkCanceled();
     for (Stub childStub : stub.getChildrenStubs()) {
       PsiElement childPsi = ((StubElement)childStub).getPsi();
       if (!processor.process(childPsi)) {
@@ -314,6 +316,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
+    ProgressManager.checkCanceled();
     for (PsiElement child : element.getChildren()) {
       if (!processor.process(child)) {
         return false;
@@ -408,6 +411,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return;
     }
 
+    ProgressManager.checkCanceled();
     if (element instanceof PerlLoop) {
       PsiElement prevElement = getPrevSignificantSibling(element);
       if (prevElement instanceof PerlLabelDeclaration) {
@@ -432,6 +436,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     PsiElement run = element.getFirstChild();
     while (run != null) {
+      ProgressManager.checkCanceled();
       if (run instanceof PerlLabelDeclaration) {
         if (!processor.process((PerlLabelDeclaration)run)) {
           return;

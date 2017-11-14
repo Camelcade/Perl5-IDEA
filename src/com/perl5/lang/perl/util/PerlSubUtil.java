@@ -346,15 +346,11 @@ public class PerlSubUtil implements PerlElementTypes {
                                          @NotNull Project project,
                                          @NotNull GlobalSearchScope searchScope,
                                          @NotNull Processor<PsiElement> processor) {
-    for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName, searchScope)) {
-      if (!processor.process(target)) {
-        return;
-      }
+    if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor::process)) {
+      return;
     }
-    for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName, searchScope)) {
-      if (!processor.process(target)) {
+    if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
         return;
-      }
     }
     for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {

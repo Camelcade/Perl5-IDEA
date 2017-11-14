@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -139,6 +140,7 @@ public class PerlUtil implements PerlElementTypes {
 
       if (packageName != null) {
         for (PerlExportDescriptor entry : useStatement.getPackageProcessor().getImports(useStatement)) {
+          ProgressManager.checkCanceled();
           processor.process(packageName, entry);
         }
       }
