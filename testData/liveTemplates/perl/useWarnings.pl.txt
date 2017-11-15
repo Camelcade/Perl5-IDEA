@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 {
@@ -60,7 +60,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    use warnings FATAL => 'all'<caret>;
+    use warnings<selection> FATAL => 'all'<caret></selection>;
     
 
 }
@@ -120,7 +120,7 @@ Caret offset: 45
 }
 
 say 'hi'
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 ;
 
@@ -181,7 +181,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 
@@ -240,7 +240,7 @@ if($a){}
 
 
 unless($a){}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 
@@ -300,7 +300,7 @@ unless($a){}
 
 if($a){}
 else{}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 
@@ -360,7 +360,7 @@ else{}
 
 if($a){}
 elsif($b){}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 
@@ -419,7 +419,7 @@ elsif($b){}
 
 
 if($a){}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 elsif($b){}
@@ -479,7 +479,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-use warnings FATAL => 'all'<caret>;
+use warnings<selection> FATAL => 'all'<caret></selection>;
 
 
 else{}
@@ -539,7 +539,7 @@ if($a){}
 else{}
 
 given($a){
-    use warnings FATAL => 'all'<caret>;
+    use warnings<selection> FATAL => 'all'<caret></selection>;
     
 
 }
@@ -600,7 +600,7 @@ given($a){
 
 given($a){
   when($b){}
-    use warnings FATAL => 'all'<caret>;
+    use warnings<selection> FATAL => 'all'<caret></selection>;
     
 
 }
@@ -661,7 +661,7 @@ given($a){
 
 given($a){
   when($b){}
-    use warnings FATAL => 'all'<caret>;
+    use warnings<selection> FATAL => 'all'<caret></selection>;
     
 
     when($b){}
@@ -723,7 +723,7 @@ given($a){
 
 given($a){
   when($b){}
-    use warnings FATAL => 'all'<caret>;
+    use warnings<selection> FATAL => 'all'<caret></selection>;
     
     default{}
 }

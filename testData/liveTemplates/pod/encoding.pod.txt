@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=encoding utf8<caret> 
+=encoding <selection>utf8<caret></selection> 
 
 
 =head1 
@@ -23,7 +23,7 @@ Caret offset: 20
 
 =over 
 
-=encoding utf8<caret> 
+=encoding <selection>utf8<caret></selection> 
 
 
 =back

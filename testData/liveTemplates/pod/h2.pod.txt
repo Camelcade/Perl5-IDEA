@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=head2 title<caret>
+=head2 <selection>title<caret></selection>
 
 
 
@@ -25,7 +25,7 @@ Caret offset: 20
 
 =over 
 
-=head2 title<caret>
+=head2 <selection>title<caret></selection>
 
 
 

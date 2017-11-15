@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 {
 
@@ -59,7 +59,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    use parent qw/Foo::Bar<caret>/;
+    use parent qw/<selection>Foo::Bar<caret></selection>/;
     
 }
 
@@ -118,7 +118,7 @@ Caret offset: 45
 }
 
 say 'hi'
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 ;
 
 my $var = 1 + 2;
@@ -178,7 +178,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 
 unless($a){}
@@ -236,7 +236,7 @@ if($a){}
 
 
 unless($a){}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 
 if($a){}
@@ -295,7 +295,7 @@ unless($a){}
 
 if($a){}
 else{}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 
 if($a){}
@@ -354,7 +354,7 @@ else{}
 
 if($a){}
 elsif($b){}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 
 if($a){}
@@ -412,7 +412,7 @@ elsif($b){}
 
 
 if($a){}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 elsif($b){}
 
@@ -471,7 +471,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-use parent qw/Foo::Bar<caret>/;
+use parent qw/<selection>Foo::Bar<caret></selection>/;
 
 else{}
 
@@ -530,7 +530,7 @@ if($a){}
 else{}
 
 given($a){
-    use parent qw/Foo::Bar<caret>/;
+    use parent qw/<selection>Foo::Bar<caret></selection>/;
     
 }
 
@@ -590,7 +590,7 @@ given($a){
 
 given($a){
   when($b){}
-    use parent qw/Foo::Bar<caret>/;
+    use parent qw/<selection>Foo::Bar<caret></selection>/;
     
 }
 
@@ -650,7 +650,7 @@ given($a){
 
 given($a){
   when($b){}
-    use parent qw/Foo::Bar<caret>/;
+    use parent qw/<selection>Foo::Bar<caret></selection>/;
     
   when($b){}
 }
@@ -711,7 +711,7 @@ given($a){
 
 given($a){
   when($b){}
-    use parent qw/Foo::Bar<caret>/;
+    use parent qw/<selection>Foo::Bar<caret></selection>/;
     
   default{}
 }

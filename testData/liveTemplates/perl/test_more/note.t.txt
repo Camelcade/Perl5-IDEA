@@ -2,7 +2,7 @@
 Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
-note('message<caret>');
+note('<selection>message<caret></selection>');
 
 
 {
@@ -19,7 +19,7 @@ Caret offset: 39
 
 
 {
-    note('message<caret>');
+    note('<selection>message<caret></selection>');
     
 }
 
@@ -37,7 +37,7 @@ Caret offset: 52
 }
 
 say 'hi'
-note('message<caret>');
+note('<selection>message<caret></selection>');
 ;
 
 my $var = 1 + 2;

@@ -1003,7 +1003,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
             .append(offset)
             .append("\n")
             .append(StringUtil.repeat("-", 80)).append("\n")
-            .append(getEditorTextWithCarets());
+            .append(getEditorTextWithCaretsAndSelections());
         }
         TemplateState templateState = TemplateManagerImpl.getTemplateState(editor);
         if (templateState != null) {
@@ -1019,16 +1019,25 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     return getEditor().getDocument().getText();
   }
 
-  private String getEditorTextWithCarets() {
+  private String getEditorTextWithCaretsAndSelections() {
     Editor editor = getEditor();
     StringBuilder sb = new StringBuilder(getEditorText());
 
-    // fixme add selections?
     // fixme add active templates?
-    List<Caret> carets = editor.getCaretModel().getAllCarets();
-    for (int i = carets.size() - 1; i > -1; i--) {
-      Caret caret = carets.get(i);
-      sb.insert(caret.getOffset(), "<caret>");
+    List<Pair<Integer, String>> macroses = new ArrayList<>();
+    editor.getCaretModel().getAllCarets().forEach(caret -> {
+      macroses.add(Pair.create(caret.getOffset(), "<caret>"));
+      if (caret.hasSelection()) {
+        macroses.add(Pair.create(caret.getSelectionStart(), "<selection>"));
+        macroses.add(Pair.create(caret.getSelectionEnd(), "</selection>"));
+      }
+    });
+
+    ContainerUtil.sort(macroses, Comparator.comparingInt(pair -> pair.first));
+
+    for (int i = macroses.size() - 1; i > -1; i--) {
+      Pair<Integer, String> macro = macroses.get(i);
+      sb.insert(macro.first, macro.second);
     }
 
     return sb.toString();

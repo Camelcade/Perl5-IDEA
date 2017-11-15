@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=begin html<caret> 
+=begin <selection>html<caret></selection> 
 
 
 
@@ -27,7 +27,7 @@ Caret offset: 20
 
 =over 
 
-=begin html<caret> 
+=begin <selection>html<caret></selection> 
 
 
 

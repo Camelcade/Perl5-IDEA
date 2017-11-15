@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -61,7 +61,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    augment sub_name<caret> => sub {
+    augment <selection>sub_name<caret></selection> => sub {
             
         };
 
@@ -122,7 +122,7 @@ Caret offset: 45
 }
 
 say 'hi'
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 ;
@@ -184,7 +184,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -244,7 +244,7 @@ if($a){}
 
 
 unless($a){}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -304,7 +304,7 @@ unless($a){}
 
 if($a){}
 else{}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -364,7 +364,7 @@ else{}
 
 if($a){}
 elsif($b){}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -423,7 +423,7 @@ elsif($b){}
 
 
 if($a){}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -484,7 +484,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-augment sub_name<caret> => sub {
+augment <selection>sub_name<caret></selection> => sub {
         
     };
 
@@ -545,7 +545,7 @@ if($a){}
 else{}
 
 given($a){
-    augment sub_name<caret> => sub {
+    augment <selection>sub_name<caret></selection> => sub {
             
         };
 
@@ -607,7 +607,7 @@ given($a){
 
 given($a){
   when($b){}
-    augment sub_name<caret> => sub {
+    augment <selection>sub_name<caret></selection> => sub {
             
         };
 
@@ -669,7 +669,7 @@ given($a){
 
 given($a){
   when($b){}
-    augment sub_name<caret> => sub {
+    augment <selection>sub_name<caret></selection> => sub {
             
         };
 
@@ -732,7 +732,7 @@ given($a){
 
 given($a){
   when($b){}
-    augment sub_name<caret> => sub {
+    augment <selection>sub_name<caret></selection> => sub {
             
         };
     default{}

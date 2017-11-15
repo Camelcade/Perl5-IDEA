@@ -3,7 +3,7 @@ Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
 TODO: {
-    todo_skip 'reason<caret>', $number if $condition;
+    todo_skip '<selection>reason<caret></selection>', $number if $condition;
 
     
 }
@@ -23,7 +23,7 @@ Caret offset: 39
 
 {
     TODO: {
-    todo_skip 'reason<caret>', $number if $condition;
+    todo_skip '<selection>reason<caret></selection>', $number if $condition;
 
     
 }
@@ -44,7 +44,7 @@ Caret offset: 52
 
 say 'hi'
 TODO: {
-    todo_skip 'reason<caret>', $number if $condition;
+    todo_skip '<selection>reason<caret></selection>', $number if $condition;
 
     
 };

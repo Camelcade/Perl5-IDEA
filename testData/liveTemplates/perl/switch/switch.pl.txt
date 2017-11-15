@@ -3,7 +3,7 @@ Caret offset: 18
 --------------------------------------------------------------------------------
 # Switch.pm test
 
-switch ($expr<caret>)
+switch (<selection>$expr<caret></selection>)
 {
     
 }
@@ -44,7 +44,7 @@ Caret offset: 52
 say 'hi' $caret;
 
 switch($a){
-    switch ($expr<caret>)
+    switch (<selection>$expr<caret></selection>)
     {
         
     }
@@ -84,7 +84,7 @@ switch($a){
 }
 
 switch($a){
-    switch ($expr<caret>)
+    switch (<selection>$expr<caret></selection>)
     {
         
     }
@@ -125,7 +125,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    switch ($expr<caret>)
+    switch (<selection>$expr<caret></selection>)
     {
         
     }
@@ -167,7 +167,7 @@ switch($a){
 switch($a){
   case $b { say 'hi' }
   else { say 'hi' }
-    switch ($expr<caret>)
+    switch (<selection>$expr<caret></selection>)
     {
         
     }
@@ -208,7 +208,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    switch ($expr<caret>)
+    switch (<selection>$expr<caret></selection>)
     {
         
     }

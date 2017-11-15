@@ -2,7 +2,7 @@
 Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
-require_ok('Foo::Bar<caret>');
+require_ok('<selection>Foo::Bar<caret></selection>');
 
 
 {
@@ -19,7 +19,7 @@ Caret offset: 39
 
 
 {
-    require_ok('Foo::Bar<caret>');
+    require_ok('<selection>Foo::Bar<caret></selection>');
     
 }
 
@@ -37,7 +37,7 @@ Caret offset: 52
 }
 
 say 'hi'
-require_ok('Foo::Bar<caret>');
+require_ok('<selection>Foo::Bar<caret></selection>');
 ;
 
 my $var = 1 + 2;

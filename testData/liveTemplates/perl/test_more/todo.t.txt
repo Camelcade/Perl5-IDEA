@@ -3,7 +3,7 @@ Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
 TODO: {
-    local $TODO = 'reason<caret>' if $condition;
+    local $TODO = '<selection>reason<caret></selection>' if $condition;
 
     
 }
@@ -23,7 +23,7 @@ Caret offset: 39
 
 {
     TODO: {
-    local $TODO = 'reason<caret>' if $condition;
+    local $TODO = '<selection>reason<caret></selection>' if $condition;
 
     
 }
@@ -44,7 +44,7 @@ Caret offset: 52
 
 say 'hi'
 TODO: {
-    local $TODO = 'reason<caret>' if $condition;
+    local $TODO = '<selection>reason<caret></selection>' if $condition;
 
     
 };

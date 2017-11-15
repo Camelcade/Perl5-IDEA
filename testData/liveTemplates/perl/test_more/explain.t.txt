@@ -2,7 +2,7 @@
 Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
-explain($reference<caret>);
+explain(<selection>$reference<caret></selection>);
 
 
 {
@@ -19,7 +19,7 @@ Caret offset: 39
 
 
 {
-    explain($reference<caret>);
+    explain(<selection>$reference<caret></selection>);
     
 }
 
@@ -37,7 +37,7 @@ Caret offset: 52
 }
 
 say 'hi'
-explain($reference<caret>);
+explain(<selection>$reference<caret></selection>);
 ;
 
 my $var = 1 + 2;

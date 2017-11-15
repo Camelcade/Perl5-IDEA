@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 {
@@ -60,7 +60,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    method methodname<caret> ($param) {
+    method <selection>methodname<caret></selection> ($param) {
         
     }
 }
@@ -120,7 +120,7 @@ Caret offset: 45
 }
 
 say 'hi'
-method methodname<caret> ($param)
+method <selection>methodname<caret></selection> ($param)
 {
     
 };
@@ -182,7 +182,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 
@@ -241,7 +241,7 @@ if($a){}
 
 
 unless($a){}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 
@@ -301,7 +301,7 @@ unless($a){}
 
 if($a){}
 else{}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 
@@ -361,7 +361,7 @@ else{}
 
 if($a){}
 elsif($b){}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 
@@ -420,7 +420,7 @@ elsif($b){}
 
 
 if($a){}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 elsif($b){}
@@ -480,7 +480,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-method methodname<caret> ($param) {
+method <selection>methodname<caret></selection> ($param) {
     
 }
 else{}
@@ -540,7 +540,7 @@ if($a){}
 else{}
 
 given($a){
-    method methodname<caret> ($param) {
+    method <selection>methodname<caret></selection> ($param) {
         
     }
 }
@@ -601,7 +601,7 @@ given($a){
 
 given($a){
   when($b){}
-    method methodname<caret> ($param) {
+    method <selection>methodname<caret></selection> ($param) {
         
     }
 }
@@ -662,7 +662,7 @@ given($a){
 
 given($a){
   when($b){}
-    method methodname<caret> ($param) {
+    method <selection>methodname<caret></selection> ($param) {
         
     }
   when($b){}
@@ -724,7 +724,7 @@ given($a){
 
 given($a){
   when($b){}
-    method methodname<caret> ($param) {
+    method <selection>methodname<caret></selection> ($param) {
         
     }
   default{}

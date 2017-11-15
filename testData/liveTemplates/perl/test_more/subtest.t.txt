@@ -2,7 +2,7 @@
 Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
-subtest testname<caret> => sub {
+subtest <selection>testname<caret></selection> => sub {
         
     };
 
@@ -20,7 +20,7 @@ Caret offset: 39
 
 
 {
-    subtest testname<caret> => sub {
+    subtest <selection>testname<caret></selection> => sub {
             
         };
 }
@@ -39,7 +39,7 @@ Caret offset: 52
 }
 
 say 'hi'
-subtest testname<caret> => sub {
+subtest <selection>testname<caret></selection> => sub {
         
     };;
 

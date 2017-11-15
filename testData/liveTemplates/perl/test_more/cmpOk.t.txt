@@ -2,7 +2,7 @@
 Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
-cmp_ok($actual<caret>, 'op', $expected, 'message');
+cmp_ok(<selection>$actual<caret></selection>, 'op', $expected, 'message');
 
 
 {
@@ -19,7 +19,7 @@ Caret offset: 39
 
 
 {
-    cmp_ok($actual<caret>, 'op', $expected, 'message');
+    cmp_ok(<selection>$actual<caret></selection>, 'op', $expected, 'message');
     
 }
 
@@ -37,7 +37,7 @@ Caret offset: 52
 }
 
 say 'hi'
-cmp_ok($actual<caret>, 'op', $expected, 'message');
+cmp_ok(<selection>$actual<caret></selection>, 'op', $expected, 'message');
 ;
 
 my $var = 1 + 2;

@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=over 1<caret>
+=over <selection>1<caret></selection>
 
 
 
@@ -27,7 +27,7 @@ Caret offset: 20
 
 =over 
 
-=over 1<caret>
+=over <selection>1<caret></selection>
 
 
 

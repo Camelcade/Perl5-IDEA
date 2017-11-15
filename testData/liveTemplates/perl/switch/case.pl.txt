@@ -8,7 +8,7 @@ Caret offset: 52
 say 'hi' $caret;
 
 switch($a){
-    case $expr<caret>{  }
+    case <selection>$expr<caret></selection>{  }
 
 }
 
@@ -46,7 +46,7 @@ switch($a){
 }
 
 switch($a){
-    case $expr<caret>{  }
+    case <selection>$expr<caret></selection>{  }
 
 }
 
@@ -85,7 +85,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    case $expr<caret>{  }
+    case <selection>$expr<caret></selection>{  }
 
 }
 
@@ -125,7 +125,7 @@ switch($a){
 switch($a){
   case $b { say 'hi' }
   else { say 'hi' }
-    case $expr<caret>{  }
+    case <selection>$expr<caret></selection>{  }
 
 }
 
@@ -164,7 +164,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    case $expr<caret>{  }
+    case <selection>$expr<caret></selection>{  }
 
     else { say 'hi' }
 }

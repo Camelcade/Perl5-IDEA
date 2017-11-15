@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 {
 
 }
@@ -58,7 +58,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    map {} @list<caret>
+    map {} <selection>@list<caret></selection>
 }
 
 say 'hi' ;
@@ -116,7 +116,7 @@ Caret offset: 45
 }
 
 say 'hi'
-map {} @list<caret>;
+map {} <selection>@list<caret></selection>;
 
 my $var = 1 + 2;
 
@@ -172,7 +172,7 @@ Caret offset: 62
 
 say 'hi' ;
 
-my $var = 1 + map {} @list<caret>2;
+my $var = 1 + map {} <selection>@list<caret></selection>2;
 
 if($a){}
 
@@ -229,7 +229,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 
 unless($a){}
 
@@ -286,7 +286,7 @@ if($a){}
 
 
 unless($a){}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 
 if($a){}
 else{}
@@ -344,7 +344,7 @@ unless($a){}
 
 if($a){}
 else{}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 
 if($a){}
 elsif($b){}
@@ -402,7 +402,7 @@ else{}
 
 if($a){}
 elsif($b){}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 
 if($a){}
 
@@ -459,7 +459,7 @@ elsif($b){}
 
 
 if($a){}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 elsif($b){}
 
 if($a){}
@@ -517,7 +517,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-map {} @list<caret>
+map {} <selection>@list<caret></selection>
 else{}
 
 given($a){
@@ -575,7 +575,7 @@ if($a){}
 else{}
 
 given($a){
-    map {} @list<caret>
+    map {} <selection>@list<caret></selection>
 }
 
 given($a){
@@ -634,7 +634,7 @@ given($a){
 
 given($a){
   when($b){}
-    map {} @list<caret>
+    map {} <selection>@list<caret></selection>
 }
 
 given($a){
@@ -693,7 +693,7 @@ given($a){
 
 given($a){
   when($b){}
-    map {} @list<caret>
+    map {} <selection>@list<caret></selection>
   when($b){}
 }
 
@@ -753,6 +753,6 @@ given($a){
 
 given($a){
   when($b){}
-    map {} @list<caret>
+    map {} <selection>@list<caret></selection>
   default{}
 }

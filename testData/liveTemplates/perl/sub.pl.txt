@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -61,7 +61,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    sub subname<caret> {
+    sub <selection>subname<caret></selection> {
         my ($self) = @_;
         
     }
@@ -122,7 +122,7 @@ Caret offset: 45
 }
 
 say 'hi'
-sub subname<caret>
+sub <selection>subname<caret></selection>
         {
             my ($self) = @_;
             
@@ -185,7 +185,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -245,7 +245,7 @@ if($a){}
 
 
 unless($a){}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -306,7 +306,7 @@ unless($a){}
 
 if($a){}
 else{}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -367,7 +367,7 @@ else{}
 
 if($a){}
 elsif($b){}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -427,7 +427,7 @@ elsif($b){}
 
 
 if($a){}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -488,7 +488,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-sub subname<caret> {
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 }
@@ -549,7 +549,7 @@ if($a){}
 else{}
 
 given($a){
-    sub subname<caret> {
+    sub <selection>subname<caret></selection> {
         my ($self) = @_;
         
     }
@@ -611,7 +611,7 @@ given($a){
 
 given($a){
   when($b){}
-    sub subname<caret> {
+    sub <selection>subname<caret></selection> {
         my ($self) = @_;
         
     }
@@ -673,7 +673,7 @@ given($a){
 
 given($a){
   when($b){}
-    sub subname<caret> {
+    sub <selection>subname<caret></selection> {
         my ($self) = @_;
         
     }
@@ -736,7 +736,7 @@ given($a){
 
 given($a){
   when($b){}
-    sub subname<caret> {
+    sub <selection>subname<caret></selection> {
         my ($self) = @_;
         
     }

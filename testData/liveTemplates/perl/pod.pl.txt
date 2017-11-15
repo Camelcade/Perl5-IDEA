@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -63,7 +63,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -125,7 +125,7 @@ Caret offset: 45
 
 }
 
-say 'hi' = head3 subname<caret>
+say 'hi' = head3 <selection>subname<caret></selection>
 
     
 
@@ -186,7 +186,7 @@ Caret offset: 62
 
 say 'hi' ;
 
-my $var = 1 + = head3 subname<caret>
+my $var = 1 + = head3 <selection>subname<caret></selection>
 
     
 
@@ -248,7 +248,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -310,7 +310,7 @@ if($a){}
 
 
 unless($a){}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -373,7 +373,7 @@ unless($a){}
 
 if($a){}
 else{}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -436,7 +436,7 @@ else{}
 
 if($a){}
 elsif($b){}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -498,7 +498,7 @@ elsif($b){}
 
 
 if($a){}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -560,7 +560,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-=head3 subname<caret>
+=head3 <selection>subname<caret></selection>
 
 
 
@@ -622,7 +622,7 @@ if($a){}
 else{}
 
 given($a){
-    =head3 subname<caret>
+    =head3 <selection>subname<caret></selection>
 
             
 
@@ -686,7 +686,7 @@ given($a){
 
 given($a){
   when($b){}
-    =head3 subname<caret>
+    =head3 <selection>subname<caret></selection>
 
             
 
@@ -750,7 +750,7 @@ given($a){
 
 given($a){
   when($b){}
-    =head3 subname<caret>
+    =head3 <selection>subname<caret></selection>
 
             
 
@@ -815,7 +815,7 @@ given($a){
 
 given($a){
   when($b){}
-    =head3 subname<caret>
+    =head3 <selection>subname<caret></selection>
 
             
 

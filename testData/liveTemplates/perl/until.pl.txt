@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 {
@@ -60,7 +60,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    until ($expr<caret>) {
+    until (<selection>$expr<caret></selection>) {
         
     }
 }
@@ -120,7 +120,7 @@ Caret offset: 45
 }
 
 say 'hi'
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 };
 
@@ -178,7 +178,7 @@ Caret offset: 62
 
 say 'hi' ;
 
-my $var = 1 + until ($expr<caret>);
+my $var = 1 + until (<selection>$expr<caret></selection>);
 2;
 
 if($a){}
@@ -236,7 +236,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 
@@ -295,7 +295,7 @@ if($a){}
 
 
 unless($a){}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 
@@ -355,7 +355,7 @@ unless($a){}
 
 if($a){}
 else{}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 
@@ -415,7 +415,7 @@ else{}
 
 if($a){}
 elsif($b){}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 
@@ -474,7 +474,7 @@ elsif($b){}
 
 
 if($a){}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 elsif($b){}
@@ -534,7 +534,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-until ($expr<caret>) {
+until (<selection>$expr<caret></selection>) {
     
 }
 else{}
@@ -594,7 +594,7 @@ if($a){}
 else{}
 
 given($a){
-    until ($expr<caret>) {
+    until (<selection>$expr<caret></selection>) {
         
     }
 }
@@ -655,7 +655,7 @@ given($a){
 
 given($a){
   when($b){}
-    until ($expr<caret>) {
+    until (<selection>$expr<caret></selection>) {
         
     }
 }
@@ -716,7 +716,7 @@ given($a){
 
 given($a){
   when($b){}
-    until ($expr<caret>) {
+    until (<selection>$expr<caret></selection>) {
         
     }
   when($b){}
@@ -778,7 +778,7 @@ given($a){
 
 given($a){
   when($b){}
-    until ($expr<caret>) {
+    until (<selection>$expr<caret></selection>) {
         
     }
   default{}

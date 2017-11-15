@@ -12,7 +12,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-elsif ($cond<caret>) {
+elsif (<selection>$cond<caret></selection>) {
     
 }
 
@@ -71,7 +71,7 @@ if($a){}
 
 
 unless($a){}
-elsif ($cond<caret>) {
+elsif (<selection>$cond<caret></selection>) {
     
 }
 
@@ -135,7 +135,7 @@ else{}
 
 if($a){}
 elsif($b){}
-elsif ($cond<caret>) {
+elsif (<selection>$cond<caret></selection>) {
     
 }
 
@@ -194,7 +194,7 @@ elsif($b){}
 
 
 if($a){}
-elsif ($cond<caret>) {
+elsif (<selection>$cond<caret></selection>) {
     
 }
 elsif($b){}
@@ -254,7 +254,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-elsif ($cond<caret>) {
+elsif (<selection>$cond<caret></selection>) {
     
 }
 else{}

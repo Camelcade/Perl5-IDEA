@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 {
@@ -60,7 +60,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    foreach my $element<caret> (@list) {
+    foreach my <selection>$element<caret></selection> (@list) {
         
     }
 }
@@ -120,7 +120,7 @@ Caret offset: 45
 }
 
 say 'hi'
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 };
 
@@ -178,7 +178,7 @@ Caret offset: 62
 
 say 'hi' ;
 
-my $var = 1 + foreach (@list<caret>);
+my $var = 1 + foreach (<selection>@list<caret></selection>);
 
 2;
 
@@ -237,7 +237,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 
@@ -296,7 +296,7 @@ if($a){}
 
 
 unless($a){}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 
@@ -356,7 +356,7 @@ unless($a){}
 
 if($a){}
 else{}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 
@@ -416,7 +416,7 @@ else{}
 
 if($a){}
 elsif($b){}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 
@@ -475,7 +475,7 @@ elsif($b){}
 
 
 if($a){}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 elsif($b){}
@@ -535,7 +535,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-foreach my $element<caret> (@list) {
+foreach my <selection>$element<caret></selection> (@list) {
     
 }
 else{}
@@ -595,7 +595,7 @@ if($a){}
 else{}
 
 given($a){
-    foreach my $element<caret> (@list) {
+    foreach my <selection>$element<caret></selection> (@list) {
         
     }
 }
@@ -656,7 +656,7 @@ given($a){
 
 given($a){
   when($b){}
-    foreach my $element<caret> (@list) {
+    foreach my <selection>$element<caret></selection> (@list) {
         
     }
 }
@@ -717,7 +717,7 @@ given($a){
 
 given($a){
   when($b){}
-    foreach my $element<caret> (@list) {
+    foreach my <selection>$element<caret></selection> (@list) {
         
     }
   when($b){}
@@ -779,7 +779,7 @@ given($a){
 
 given($a){
   when($b){}
-    foreach my $element<caret> (@list) {
+    foreach my <selection>$element<caret></selection> (@list) {
         
     }
   default{}
