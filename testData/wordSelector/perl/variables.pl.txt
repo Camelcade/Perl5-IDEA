@@ -1,0 +1,41 @@
+say <selection>$sc<caret>alar</selection>;
+say <selection>@ar<caret>ray</selection>;
+say <selection>%ha<caret>sh</selection>;
+say <selection>*gl<caret>ob</selection>;
+say <selection>${scal<caret>ar}</selection>;
+say <selection>@{arr<caret>ay}</selection>;
+say <selection>%{ha<caret>sh}</selection>;
+say <selection>*{gl<caret>ob}</selection>;
+say <selection>$sca<caret>lar</selection>[1];
+say <selection>$sc<caret>alar</selection>{test};
+say <selection>@ar<caret>ray</selection>[1,2];
+say <selection>@ar<caret>ray</selection>{qw/test test/};
+say <selection>*gl<caret>ob</selection>{SCALAR};
+say <selection>${scal<caret>ar}</selection>[1];
+say <selection>${sca<caret>lar}</selection>{test};
+say <selection>@{arr<caret>ay}</selection>[1,2];
+say <selection>@{arr<caret>ay}</selection>{qw/test test/};
+say <selection>*{gl<caret>ob}</selection>{SCALAR};
+
+=head3 subname
+
+say $<selection>sc<caret>alar</selection>;
+say @<selection>ar<caret>ray</selection>;
+say %<selection>ha<caret>sh</selection>;
+say *<selection>gl<caret>ob</selection>;
+say ${<selection>scal<caret>ar</selection>};
+say @{<selection>arr<caret>ay</selection>};
+say %{<selection>ha<caret>sh</selection>};
+say *{<selection>gl<caret>ob</selection>};
+say $<selection>sca<caret>lar</selection>[1];
+say $<selection>sc<caret>alar</selection>{test};
+say @<selection>ar<caret>ray</selection>[1,2];
+say @<selection>ar<caret>ray</selection>{qw/test test/};
+say *<selection>gl<caret>ob</selection>{SCALAR};
+say ${<selection>scal<caret>ar</selection>}[1];
+say ${<selection>sca<caret>lar</selection>}{test};
+say @{<selection>arr<caret>ay</selection>}[1,2];
+say @{<selection>arr<caret>ay</selection>}{qw/test test/};
+say *{<selection>gl<caret>ob</selection>}{SCALAR};
+
+=cut

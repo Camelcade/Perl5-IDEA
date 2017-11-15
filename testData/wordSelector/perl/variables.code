@@ -1,0 +1,43 @@
+say $sc<caret>alar;
+say @ar<caret>ray;
+say %ha<caret>sh;
+say *gl<caret>ob;
+say ${scal<caret>ar};
+say @{arr<caret>ay};
+say %{ha<caret>sh};
+say *{gl<caret>ob};
+say $sca<caret>lar[1];
+say $sc<caret>alar{test};
+say @ar<caret>ray[1,2];
+say @ar<caret>ray{qw/test test/};
+say *gl<caret>ob{SCALAR};
+say ${scal<caret>ar}[1];
+say ${sca<caret>lar}{test};
+say @{arr<caret>ay}[1,2];
+say @{arr<caret>ay}{qw/test test/};
+say *{gl<caret>ob}{SCALAR};
+
+=head3 subname
+
+say $sc<caret>alar;
+say @ar<caret>ray;
+say %ha<caret>sh;
+say *gl<caret>ob;
+say ${scal<caret>ar};
+say @{arr<caret>ay};
+say %{ha<caret>sh};
+say *{gl<caret>ob};
+say $sca<caret>lar[1];
+say $sc<caret>alar{test};
+say @ar<caret>ray[1,2];
+say @ar<caret>ray{qw/test test/};
+say *gl<caret>ob{SCALAR};
+say ${scal<caret>ar}[1];
+say ${sca<caret>lar}{test};
+say @{arr<caret>ay}[1,2];
+say @{arr<caret>ay}{qw/test test/};
+say *{gl<caret>ob}{SCALAR};
+
+=cut
+
+

@@ -18,6 +18,7 @@ package base;
 
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -25,6 +26,7 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
+import com.intellij.ide.DataManager;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
 import com.intellij.ide.structureView.StructureView;
@@ -39,6 +41,7 @@ import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -985,8 +988,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     Editor editor = getEditor();
     Document document = editor.getDocument();
     CaretModel caretModel = editor.getCaretModel();
-    List<Integer> caretsOffsets = ContainerUtil.map(caretModel.getAllCarets(), Caret::getOffset);
-    caretModel.removeSecondaryCarets();
+    List<Integer> caretsOffsets = getAndRemoveCarets();
     String originalText = document.getText();
 
     StringBuilder sb = new StringBuilder();
@@ -1015,25 +1017,64 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  protected String getEditorText() {
+  /**
+   * @return all carets offsets. Secondary carets removed
+   */
+  protected List<Integer> getAndRemoveCarets() {
+    CaretModel caretModel = getEditor().getCaretModel();
+    List<Integer> caretsOffsets = ContainerUtil.map(caretModel.getAllCarets(), Caret::getOffset);
+    caretModel.removeSecondaryCarets();
+    return caretsOffsets;
+  }
+
+  protected void doTestWorldSelector() {
+    initWithFileSmartWithoutErrors();
+    List<Integer> offsets = getAndRemoveCarets();
+    List<Pair<Integer, String>> macroses = new ArrayList<>();
+    Caret currentCaret = getEditor().getCaretModel().getCurrentCaret();
+    for (Integer offset : offsets) {
+      currentCaret.moveToOffset(offset);
+      new SelectWordHandler(null).execute(getEditor(), currentCaret, getEditorDataContext());
+      addCaretInfo(currentCaret, macroses);
+      currentCaret.removeSelection();
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macroses));
+  }
+
+  private DataContext getEditorDataContext() {
+    return DataManager.getInstance().getDataContext(myFixture.getEditor().getComponent());
+  }
+
+  private String getEditorText() {
     return getEditor().getDocument().getText();
+  }
+
+  /**
+   * Add markers with offsets for caret and selection
+   */
+  private void addCaretInfo(@NotNull Caret caret,
+                            @NotNull List<Pair<Integer, String>> macroses) {
+    macroses.add(Pair.create(caret.getOffset(), "<caret>"));
+    if (caret.hasSelection()) {
+      macroses.add(Pair.create(caret.getSelectionStart(), "<selection>"));
+      macroses.add(Pair.create(caret.getSelectionEnd(), "</selection>"));
+    }
   }
 
   private String getEditorTextWithCaretsAndSelections() {
     Editor editor = getEditor();
-    StringBuilder sb = new StringBuilder(getEditorText());
 
     // fixme add active templates?
     List<Pair<Integer, String>> macroses = new ArrayList<>();
-    editor.getCaretModel().getAllCarets().forEach(caret -> {
-      macroses.add(Pair.create(caret.getOffset(), "<caret>"));
-      if (caret.hasSelection()) {
-        macroses.add(Pair.create(caret.getSelectionStart(), "<selection>"));
-        macroses.add(Pair.create(caret.getSelectionEnd(), "</selection>"));
-      }
-    });
+    editor.getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
 
+    return getEditorTextWithMacroses(macroses);
+  }
+
+  @NotNull
+  private String getEditorTextWithMacroses(List<Pair<Integer, String>> macroses) {
     ContainerUtil.sort(macroses, Comparator.comparingInt(pair -> pair.first));
+    StringBuilder sb = new StringBuilder(getEditorText());
 
     for (int i = macroses.size() - 1; i > -1; i--) {
       Pair<Integer, String> macro = macroses.get(i);

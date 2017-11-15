@@ -36,6 +36,7 @@
      <p>Updates:
      <ul>
        <li>Editor responsiveness should be much better now</li>
+       <li>Double-click on variable name should now select variable with sigil</li>
        <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
        <li>Inspection for <code>use vars</code> legacy pragma usage with quick-fix for converting to <code>our</code> declaration, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/380">380</a></li>
        <li>Intention to convert statement with modifier to compound statement and vice versa, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1604">cjelli</a>
@@ -202,6 +203,9 @@
                         serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
     <applicationService serviceInterface="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+
+    <extendWordSelectionHandler implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler"/>
+    <basicWordSelectionFilter implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler$OuterElementsSuppressor"/>
 
     <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
     <lang.formatter language="Perl5"
