@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
@@ -71,8 +70,6 @@ public class PerlImportedSubsCompletionProvider extends CompletionProvider<Compl
   protected static void fillWithNamespaceImports(@NotNull PerlNamespaceDefinitionElement namespaceContainer,
                                                  @NotNull final CompletionResultSet resultSet) {
     for (PerlExportDescriptor importedDescriptor : namespaceContainer.getImportedSubsDescriptors()) {
-      ProgressManager.checkCanceled();
-
       Ref<Boolean> flag = Ref.create(false);
       PerlSubUtil.processRelatedItems(importedDescriptor.getTargetCanonicalName(), namespaceContainer.getProject(), element -> {
         resultSet.addElement(PerlSubCompletionUtil.getImportedEntityLookupElement(element, importedDescriptor));

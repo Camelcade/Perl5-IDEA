@@ -70,7 +70,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     for (String text : HASH_INDEXES_CACHE) {
-      ProgressManager.checkCanceled();
       addElement(text, result);
     }
 
@@ -93,6 +92,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
             boolean isKey = true;
 
             while (sequenceElement != null) {
+              ProgressManager.checkCanceled();
               IElementType elementType = sequenceElement.getNode().getElementType();
               if (isKey && sequenceElement instanceof PerlString) {
                 for (PerlStringContentElement stringElement : PerlPsiUtil.collectStringElements(sequenceElement)) {
@@ -110,7 +110,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         }
 
         protected void processStringElement(PerlStringContentElement stringContentElement) {
-          ProgressManager.checkCanceled();
           String text = stringContentElement.getText();
           if (StringUtil.isNotEmpty(text) && !HASH_INDEXES_CACHE.contains(text) && PerlLexer.IDENTIFIER_PATTERN.matcher(text).matches()) {
             HASH_INDEXES_CACHE.add(text);
@@ -161,7 +160,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
 
         for (Map.Entry<String, String> option : options.entrySet()) {
-          ProgressManager.checkCanceled();
           resultSet.addElement(LookupElementBuilder
                                  .create(option.getKey())
                                  .withTypeText(option.getValue(), true)
@@ -172,7 +170,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
 
         for (Map.Entry<String, String> option : options.entrySet()) {
-          ProgressManager.checkCanceled();
           resultSet.addElement(LookupElementBuilder
                                  .create(option.getKey())
                                  .withTypeText(option.getValue(), true)
@@ -184,7 +181,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
       if (packageProcessor instanceof PerlPackageParentsProvider &&
           ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
         PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
-          ProgressManager.checkCanceled();
           resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
           return true;
         });
@@ -196,7 +192,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
       exportOk.removeAll(export);
 
       for (String subName : export) {
-        ProgressManager.checkCanceled();
         resultSet.addElement(LookupElementBuilder
                                .create(subName)
                                .withIcon(PerlIcons.SUB_GUTTER_ICON)
@@ -204,7 +199,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         );
       }
       for (String subName : exportOk) {
-        ProgressManager.checkCanceled();
         resultSet.addElement(LookupElementBuilder
                                .create(subName)
                                .withIcon(PerlIcons.SUB_GUTTER_ICON)
@@ -216,7 +210,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithRefTypes(@NotNull final CompletionResultSet resultSet) {
     for (String refType : REF_TYPES) {
-      ProgressManager.checkCanceled();
       resultSet.addElement(LookupElementBuilder.create(refType));
     }
   }
@@ -224,7 +217,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // injectable markers
     for (Map.Entry<String, Language> entry : LANGUAGE_MAP.entrySet()) {
-      ProgressManager.checkCanceled();
       String abbreviation = entry.getKey();
       Language language = entry.getValue();
 
@@ -243,7 +235,6 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   public static void fillWithHeredocOpeners(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // cached values
     for (String marker : HEREDOC_OPENERS_CACHE) {
-      ProgressManager.checkCanceled();
       resultSet.addElement(LookupElementBuilder.create(marker));
     }
 

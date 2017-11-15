@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.mro;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 
@@ -44,6 +45,7 @@ public class PerlMroC3 extends PerlMro {
                            HashSet<String> recursionMap,
                            ArrayList<String> result) {
     //		System.err.println("Resolving C3 for " + packageNames);
+    ProgressManager.checkCanceled();
     Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<>();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
       String packageName = namespaceDefinition.getPackageName();

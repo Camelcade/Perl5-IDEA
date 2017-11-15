@@ -280,8 +280,8 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
-    ProgressManager.checkCanceled();
     for (Stub childStub : stub.getChildrenStubs()) {
+      ProgressManager.checkCanceled();
       PsiElement childPsi = ((StubElement)childStub).getPsi();
       if (!processor.process(childPsi)) {
         return false;
@@ -297,6 +297,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     if (stub instanceof PerlPolyNamedElementStub) {
       for (PsiElement child : ((PerlPolyNamedElementStub)stub).getPsi().getLightElements()) {
+        ProgressManager.checkCanceled();
         if (!processor.process(child)) {
           return false;
         }
@@ -316,8 +317,8 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
-    ProgressManager.checkCanceled();
     for (PsiElement child : element.getChildren()) {
+      ProgressManager.checkCanceled();
       if (!processor.process(child)) {
         return false;
       }
@@ -332,6 +333,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
     if (element instanceof PerlPolyNamedElement) {
       for (PerlDelegatingLightNamedElement lightNamedElement : ((PerlPolyNamedElement)element).getLightElements()) {
+        ProgressManager.checkCanceled();
         if (!processor.process(lightNamedElement)) {
           return false;
         }
