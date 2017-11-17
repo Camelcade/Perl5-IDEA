@@ -485,7 +485,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
 
   protected void assertNoErrorElements() {
     assertFalse(
-      "PsiFile contains error elements",
+      "PsiFile contains error elements:\n" + getFile().getText(),
       DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
     );
   }
