@@ -70,5 +70,7 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testUseWarnings() {doTest("uwa");}
 
+  public void testUseVersion() {doTest("uv");}
+
   public void testWhile() {doTest("wh");}
 }

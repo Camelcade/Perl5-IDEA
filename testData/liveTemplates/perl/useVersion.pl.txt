@@ -1,0 +1,729 @@
+--------------------------------------------------------------------------------
+Caret offset: 29
+--------------------------------------------------------------------------------
+# Live templates test sample
+use v5.<selection>10<caret></selection>;
+
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 32
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+    use v5.<selection>10<caret></selection>;
+    
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 45
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi'
+use v5.<selection>10<caret></selection>;
+
+;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 75
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+use v5.<selection>10<caret></selection>;
+
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 90
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+use v5.<selection>10<caret></selection>;
+
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 108
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+use v5.<selection>10<caret></selection>;
+
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 131
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+use v5.<selection>10<caret></selection>;
+
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 142
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+use v5.<selection>10<caret></selection>;
+
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 165
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+use v5.<selection>10<caret></selection>;
+
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 187
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+    use v5.<selection>10<caret></selection>;
+    
+
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 217
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+    use v5.<selection>10<caret></selection>;
+    
+
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 247
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+    use v5.<selection>10<caret></selection>;
+    
+
+    when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 290
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+    use v5.<selection>10<caret></selection>;
+    
+    default{}
+}
