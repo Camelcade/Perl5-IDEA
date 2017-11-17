@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.sdk;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
@@ -139,17 +140,14 @@ public class PerlSdkType extends SdkType {
 
   @NotNull
   public String getExecutablePath(@NotNull String sdkHome) {
-    if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\"))) {
-      sdkHome += File.separator;
-    }
-
-    if (SystemInfo.isWindows) {
-      return sdkHome + "perl.exe";
-    }
-    else {
-      return sdkHome + "perl";
-    }
+    return FileUtil.join(sdkHome, getPerlExecutableName());
   }
+
+  @NotNull
+  private String getPerlExecutableName() {
+    return SystemInfo.isWindows ? "perl.exe" : "perl";
+  }
+
 
   @Override
   public Icon getIcon() {
