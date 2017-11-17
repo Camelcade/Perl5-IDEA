@@ -32,6 +32,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlIfUnlessCompound;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -129,6 +130,29 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
       PsiElement ifStatement = PerlPsiUtil.getPrevSignificantSibling(statement);
       return ifStatement instanceof PerlIfUnlessCompound && ((PerlIfUnlessCompound)ifStatement).getUnconditionalBlock() == null;
+    }
+  }
+
+  public static class Continue extends PerlTemplateContextType.Prefix {
+    public Continue() {
+      super("PERL5_CONTINUE", PerlBundle.message("perl.template.context.continue"));
+    }
+
+    @Override
+    public boolean isInContext(PsiElement element) {
+      if (!super.isInContext(element)) {
+        return false;
+      }
+
+      PsiPerlStatement statement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+      if (statement == null) {
+        return false;
+      }
+
+      PsiElement perlLoop = PerlPsiUtil.getPrevSignificantSibling(statement);
+      return perlLoop instanceof PerlLoop &&
+             ((PerlLoop)perlLoop).canHaveContinueBlock() &&
+             ((PerlLoop)perlLoop).getContinueBlock() == null;
     }
   }
 

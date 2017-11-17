@@ -1,8 +1,16 @@
 # Live templates test sample
 <caret>
 {
-<caret>
+  say 'hi';
+  <caret>
 }
+<caret>
+
+{
+  say 'hi';
+  <caret>
+} continue {}
+<caret>
 
 say 'hi' <caret>;
 
@@ -29,6 +37,36 @@ elsif($b){}
 if($a){}
 <caret>
 else{}
+
+while($a){}
+<caret>
+
+until($a){}
+<caret>
+
+for($a){}
+<caret>
+
+foreach($a){}
+<caret>
+
+for($a =1;$a < 1; $++){}
+<caret>
+
+foreach($a =1;$a < 1; $++){}
+<caret>
+
+while($a){}continue{}
+<caret>
+
+until($a){}continue{}
+<caret>
+
+for($a){}continue{}
+<caret>
+
+foreach($a){}continue{}
+<caret>
 
 given($a){
   <caret>

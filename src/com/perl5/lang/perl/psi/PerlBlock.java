@@ -16,11 +16,20 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
 public interface PerlBlock extends PerlLoop, PerlLexicalScope {
+  @Nullable
+  @Override
+  default PsiPerlContinueBlock getContinueBlock() {
+    PsiElement potentialBlock = PerlPsiUtil.getNextSignificantSibling(this);
+    return potentialBlock instanceof PsiPerlContinueBlock ? (PsiPerlContinueBlock)potentialBlock : null;
+  }
 }

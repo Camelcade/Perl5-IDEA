@@ -17,9 +17,17 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PsiPerlContinueBlock;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
 public interface PerlLoop extends PsiElement {
+  @Nullable
+  PsiPerlContinueBlock getContinueBlock();
+
+  default boolean canHaveContinueBlock() {
+    return true;
+  }
 }

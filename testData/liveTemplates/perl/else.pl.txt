@@ -1,11 +1,19 @@
 --------------------------------------------------------------------------------
-Caret offset: 75
+Caret offset: 123
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -34,6 +42,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -55,13 +93,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 90
+Caret offset: 138
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -90,6 +136,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -111,13 +187,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 131
+Caret offset: 179
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -146,6 +230,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -167,13 +281,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 142
+Caret offset: 190
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -202,6 +324,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -223,13 +375,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 165
+Caret offset: 213
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -258,6 +418,36 @@ else {
     <caret>
 }
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   

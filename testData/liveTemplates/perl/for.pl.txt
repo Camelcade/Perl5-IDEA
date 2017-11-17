@@ -6,8 +6,16 @@ for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
     
 }
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -35,6 +43,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -55,16 +93,24 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 32
+Caret offset: 46
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
+  say 'hi';
     for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
         
     }
 }
 
+
+{
+  say 'hi';
+  
+} continue {}
+
+
 say 'hi' ;
 
 my $var = 1 + 2;
@@ -91,6 +137,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -111,13 +187,303 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 45
+Caret offset: 49
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 67
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+    for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+        
+    }
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 82
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 93
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' for (my <selection>$i = 0<caret></selection>;
 $i < 0;
@@ -150,6 +516,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -170,13 +566,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 62
+Caret offset: 110
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -205,6 +609,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -225,13 +659,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 75
+Caret offset: 123
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -261,6 +703,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -281,13 +753,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 90
+Caret offset: 138
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -317,6 +797,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -337,13 +847,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 108
+Caret offset: 156
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -373,6 +891,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -393,13 +941,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 131
+Caret offset: 179
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -429,6 +985,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -449,13 +1035,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 142
+Caret offset: 190
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -485,6 +1079,36 @@ if($a){}
 
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -505,13 +1129,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 165
+Caret offset: 213
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -541,6 +1173,36 @@ for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
 }
 else{}
 
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
 given($a){
   
 }
@@ -561,13 +1223,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 187
+Caret offset: 234
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -594,6 +1264,976 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 248
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 260
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 276
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 303
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 334
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 358
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 382
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 404
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+foreach($a){}continue{}
+
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 430
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
+    
+}
+
+given($a){
+  
+}
+
+given($a){
+  when($b){}
+  
+}
+
+given($a){
+  when($b){}
+  
+  when($b){}
+}
+
+given($a){
+  when($b){}
+  
+  default{}
+}--------------------------------------------------------------------------------
+Caret offset: 445
+--------------------------------------------------------------------------------
+# Live templates test sample
+
+{
+  say 'hi';
+  
+}
+
+
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
+unless($a){}
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
     for (my <selection>$i = 0<caret></selection>; $i < 0; $i++) {
@@ -617,13 +2257,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 217
+Caret offset: 475
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -650,6 +2298,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -673,13 +2351,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 247
+Caret offset: 505
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -706,6 +2392,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -729,13 +2445,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 290
+Caret offset: 548
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -762,6 +2486,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   

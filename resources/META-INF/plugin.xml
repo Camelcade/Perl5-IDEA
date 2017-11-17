@@ -390,6 +390,8 @@
     <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Prefix"/>
     <liveTemplateContext
         implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$UnfinishedIf"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$Continue"/>
 
 
     <liveTemplateContext implementation="com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType$TestFile"/>

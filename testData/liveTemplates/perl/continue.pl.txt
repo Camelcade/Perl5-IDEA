@@ -1,251 +1,29 @@
 --------------------------------------------------------------------------------
-Caret offset: 29
---------------------------------------------------------------------------------
-# Live templates test sample
-continue
-{
-    <caret>
-}
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 32
+Caret offset: 49
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-    continue
-    {
-    <caret>    
-    }
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
+  say 'hi';
   
 }
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 45
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi'
-continue
-    {
-    <caret>    
-    };
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 62
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + continue
-{
-    <caret>
-}2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 75
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-continue
-{
+continue {
     <caret>
 }
 
+{
+  say 'hi';
+  
+} continue {}
+
+
+say 'hi' ;
+
+my $var = 1 + 2;
+
+if($a){}
+
+
 unless($a){}
 
 
@@ -264,6 +42,36 @@ elsif($b){}
 if($a){}
 
 else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+
+
+for($a =1;$a < 1; $++){}
+
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -285,13 +93,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 90
+Caret offset: 234
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -301,26 +117,55 @@ if($a){}
 
 
 unless($a){}
-continue
-{
+
+
+if($a){}
+else{}
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+continue {
     <caret>
 }
 
-if($a){}
-else{}
+until($a){}
 
 
-if($a){}
-elsif($b){}
+for($a){}
 
 
-if($a){}
+foreach($a){}
 
-elsif($b){}
 
-if($a){}
+for($a =1;$a < 1; $++){}
 
-else{}
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -342,13 +187,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 108
+Caret offset: 248
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -362,22 +215,51 @@ unless($a){}
 
 if($a){}
 else{}
-continue
-{
+
+
+if($a){}
+elsif($b){}
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+continue {
     <caret>
 }
 
-if($a){}
-elsif($b){}
+for($a){}
 
 
-if($a){}
+foreach($a){}
 
-elsif($b){}
 
-if($a){}
+for($a =1;$a < 1; $++){}
 
-else{}
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -399,13 +281,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 131
+Caret offset: 260
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -423,18 +313,47 @@ else{}
 
 if($a){}
 elsif($b){}
-continue
-{
+
+
+if($a){}
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+continue {
     <caret>
 }
 
-if($a){}
+foreach($a){}
 
-elsif($b){}
 
-if($a){}
+for($a =1;$a < 1; $++){}
 
-else{}
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -456,13 +375,21 @@ given($a){
   
   default{}
 }--------------------------------------------------------------------------------
-Caret offset: 142
+Caret offset: 276
 --------------------------------------------------------------------------------
 # Live templates test sample
 
 {
-
+  say 'hi';
+  
 }
+
+
+{
+  say 'hi';
+  
+} continue {}
+
 
 say 'hi' ;
 
@@ -483,15 +410,44 @@ elsif($b){}
 
 
 if($a){}
-continue
-{
+
+elsif($b){}
+
+if($a){}
+
+else{}
+
+while($a){}
+
+
+until($a){}
+
+
+for($a){}
+
+
+foreach($a){}
+continue {
     <caret>
 }
-elsif($b){}
 
-if($a){}
+for($a =1;$a < 1; $++){}
 
-else{}
+
+foreach($a =1;$a < 1; $++){}
+
+
+while($a){}continue{}
+
+
+until($a){}continue{}
+
+
+for($a){}continue{}
+
+
+foreach($a){}continue{}
+
 
 given($a){
   
@@ -511,290 +467,5 @@ given($a){
 given($a){
   when($b){}
   
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 165
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-continue
-{
-    <caret>
-}
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 187
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-    continue
-    {
-      <caret>  
-    }
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 217
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-    continue
-    {
-      <caret>  
-    }
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 247
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-    continue
-    {
-      <caret>  
-    }
-  when($b){}
-}
-
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 290
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-
-}
-
-say 'hi' ;
-
-my $var = 1 + 2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
-  when($b){}
-}
-
-given($a){
-  when($b){}
-    continue
-    {
-      <caret>  
-    }
   default{}
 }

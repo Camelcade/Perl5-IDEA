@@ -34,11 +34,13 @@ public interface PerlForCompound extends PerlConvertableCompound, PerlLoop {
            getContinueBlock() == null && getForIterator() == null;
   }
 
-  @Nullable
-  PsiPerlBlock getBlock();
+  @Override
+  default boolean canHaveContinueBlock() {
+    return getForIterator() == null;
+  }
 
   @Nullable
-  PsiPerlContinueBlock getContinueBlock();
+  PsiPerlBlock getBlock();
 
   @NotNull
   List<PsiPerlExpr> getExprList();

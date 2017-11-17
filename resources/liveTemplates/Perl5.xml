@@ -134,7 +134,7 @@
     <template name="cont" value="continue&#10;{&#10;    $SELECTION$$END$&#10;}" description="continue block" toReformat="true"
               toShortenFQNames="true">
         <context>
-            <option name="PERL5" value="true"/>
+          <option name="PERL5_CONTINUE" value="true"/>
         </context>
     </template>
     <template name="ev" value="eval {$SELECTION$$END$}" description="eval block" toReformat="true" toShortenFQNames="true">
